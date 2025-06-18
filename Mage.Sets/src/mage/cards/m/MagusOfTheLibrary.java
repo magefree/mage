@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.CardsInHandCondition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
@@ -33,7 +33,7 @@ public final class MagusOfTheLibrary extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {tap}: Draw a card. Activate this ability only if you have exactly seven cards in hand.
-        this.addAbility(new ConditionalActivatedAbility(
+        this.addAbility(new ActivateIfConditionActivatedAbility(
                 new DrawCardSourceControllerEffect(1), new TapSourceCost(), condition
         ));
     }

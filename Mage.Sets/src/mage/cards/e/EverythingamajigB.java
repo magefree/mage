@@ -6,7 +6,7 @@ import mage.abilities.condition.common.HellbentCondition;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.PutCardFromHandOntoBattlefieldEffect;
@@ -41,7 +41,7 @@ public final class EverythingamajigB extends CardImpl {
 
         // Fool's Tome
         // 2, T: Draw a card. Activate this ability only if you have no cards in hand.
-        Ability ability1 = new ConditionalActivatedAbility(
+        Ability ability1 = new ActivateIfConditionActivatedAbility(
                 new DrawCardSourceControllerEffect(1), new GenericManaCost(2), HellbentCondition.instance
         );
         ability1.addCost(new TapSourceCost());

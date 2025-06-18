@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -37,7 +37,7 @@ public final class GeneralJarkeld extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {T}: Switch the blocking creatures of two target attacking creatures. Activate this ability only during the declare blockers step.
-        Ability ability = new ConditionalActivatedAbility(
+        Ability ability = new ActivateIfConditionActivatedAbility(
                 new GeneralJarkeldSwitchBlockersEffect(), new TapSourceCost(), condition
         );
         ability.addTarget(new TargetAttackingCreature(2));

@@ -5,7 +5,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.IntCompareCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -36,20 +36,20 @@ public final class BuzzingWhackADoodle extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BuzzingWhackADoodleEffect(), false));
 
         // *Whack - T: Target player loses 2 life.
-        Ability ability = new ConditionalActivatedAbility(
+        Ability ability = new ActivateIfConditionActivatedAbility(
                 new LoseLifeTargetEffect(2), new TapSourceCost(), new WhackCondition()
         );
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
 
         // *Doodle - T: You gain 3 life.
-        Ability ability2 = new ConditionalActivatedAbility(
+        Ability ability2 = new ActivateIfConditionActivatedAbility(
                 new GainLifeEffect(3), new TapSourceCost(), new DoodleCondition()
         );
         this.addAbility(ability2);
 
         // *Buzz - 2, T: Draw a card.
-        Ability ability3 = new ConditionalActivatedAbility(
+        Ability ability3 = new ActivateIfConditionActivatedAbility(
                 new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{2}"), new BuzzCondition()
         );
         ability3.addCost(new TapSourceCost());

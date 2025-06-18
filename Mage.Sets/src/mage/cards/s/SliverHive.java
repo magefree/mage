@@ -5,7 +5,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.abilities.mana.ConditionalAnyColorManaAbility;
@@ -47,7 +47,7 @@ public final class SliverHive extends CardImpl {
         ));
 
         // {5}, {T}: Create a 1/1 colorless Sliver creature token. Activate this ability only if you control a Sliver.
-        Ability ability = new ConditionalActivatedAbility(
+        Ability ability = new ActivateIfConditionActivatedAbility(
                 new CreateTokenEffect(new SliverToken()), new GenericManaCost(5), condition
         );
         ability.addCost(new TapSourceCost());

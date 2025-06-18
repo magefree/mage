@@ -6,7 +6,7 @@ import mage.abilities.condition.common.ThresholdCondition;
 import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -34,7 +34,7 @@ public final class CabalInquisitor extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Threshold - {1}{B}, {T}, Exile two cards from your graveyard: Target player discards a card. Activate this ability only any time you could cast a sorcery, and only if seven or more cards are in your graveyard.
-        Ability ability = new ConditionalActivatedAbility(
+        Ability ability = new ActivateIfConditionActivatedAbility(
                 new DiscardTargetEffect(1), new ManaCostsImpl<>("{1}{B}"), ThresholdCondition.instance
         ).setTiming(TimingRule.SORCERY);
         ability.addTarget(new TargetPlayer());

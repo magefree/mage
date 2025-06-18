@@ -4,7 +4,7 @@ import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.continuous.LoseAbilityTargetEffect;
 import mage.abilities.keyword.BandingAbility;
 import mage.abilities.keyword.BandsWithOtherAbility;
@@ -34,7 +34,7 @@ public final class Tolaria extends CardImpl {
         this.addAbility(new BlueManaAbility());
 
         // {T}: Target creature loses banding and all "bands with other" abilities until end of turn. Activate this ability only during any upkeep step.
-        ActivatedAbilityImpl ability = new ConditionalActivatedAbility(
+        ActivatedAbilityImpl ability = new ActivateIfConditionActivatedAbility(
                 new LoseAbilityTargetEffect(
                         BandingAbility.getInstance(), Duration.EndOfTurn
                 ).setText("target creature loses banding"),

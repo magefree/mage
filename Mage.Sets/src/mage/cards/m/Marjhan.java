@@ -8,7 +8,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepSourceEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
@@ -52,7 +52,7 @@ public final class Marjhan extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepSourceEffect()));
 
         // {U}{U}, Sacrifice a creature: Untap Marjhan. Activate this ability only during your upkeep.
-        Ability ability = new ConditionalActivatedAbility(
+        Ability ability = new ActivateIfConditionActivatedAbility(
                 new UntapSourceEffect(), new ManaCostsImpl<>("{U}{U}"), IsStepCondition.getMyUpkeep()
         );
         ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));

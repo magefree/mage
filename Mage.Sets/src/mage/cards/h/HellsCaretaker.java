@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -28,7 +28,7 @@ public final class HellsCaretaker extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}, Sacrifice a creature: Return target creature card from your graveyard to the battlefield. Activate this ability only during your upkeep.
-        Ability ability = new ConditionalActivatedAbility(
+        Ability ability = new ActivateIfConditionActivatedAbility(
                 new ReturnFromGraveyardToBattlefieldTargetEffect(),
                 new TapSourceCost(), IsStepCondition.getMyUpkeep()
         );

@@ -2,7 +2,7 @@ package mage.cards.h;
 
 import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
 import mage.cards.CardImpl;
@@ -26,7 +26,7 @@ public final class HammerOfBogardan extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
 
         // {2}{R}{R}{R}: Return Hammer of Bogardan from your graveyard to your hand. Activate this ability only during your upkeep.
-        this.addAbility(new ConditionalActivatedAbility(
+        this.addAbility(new ActivateIfConditionActivatedAbility(
                 Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(),
                 new ManaCostsImpl<>("{2}{R}{R}{R}"), IsStepCondition.getMyUpkeep()
         ));

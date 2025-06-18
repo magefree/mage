@@ -5,7 +5,7 @@ import mage.MageInt;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.IsPhaseCondition;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.continuous.LoseAbilitySourceEffect;
 import mage.abilities.keyword.SpaceflightAbility;
 import mage.cards.CardImpl;
@@ -34,7 +34,7 @@ public final class TIEBomber extends CardImpl {
         this.addAbility(SpaceflightAbility.getInstance());
 
         // {1}: TIE Bomber loses Spaceflight until end od turn. Activate this ability only during combat.
-        this.addAbility(new ConditionalActivatedAbility(
+        this.addAbility(new ActivateIfConditionActivatedAbility(
                 new LoseAbilitySourceEffect(SpaceflightAbility.getInstance(), Duration.EndOfTurn),
                 new GenericManaCost(1), condition
         ));

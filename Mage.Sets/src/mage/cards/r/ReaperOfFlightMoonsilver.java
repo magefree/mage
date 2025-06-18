@@ -3,7 +3,7 @@ package mage.cards.r;
 import mage.MageInt;
 import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -33,7 +33,7 @@ public final class ReaperOfFlightMoonsilver extends CardImpl {
 
         // <i>Delirium</i> &mdash; Sacrifice another creature: Reaper of Flight Moonsilver gets +2/+1 until end of turn.
         // Activate this ability only if there are four or more card types among cards in your graveyard.
-        this.addAbility(new ConditionalActivatedAbility(
+        this.addAbility(new ActivateIfConditionActivatedAbility(
                 new BoostSourceEffect(2, 1, Duration.EndOfTurn),
                 new SacrificeTargetCost(StaticFilters.FILTER_ANOTHER_CREATURE), DeliriumCondition.instance
         ).setAbilityWord(AbilityWord.DELIRIUM).addHint(CardTypesInGraveyardCount.YOU.getHint()));

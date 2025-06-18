@@ -7,7 +7,7 @@ import mage.abilities.Ability;
 import mage.abilities.condition.common.CorruptedCondition;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.abilities.mana.ConditionalAnyColorManaAbility;
@@ -48,7 +48,7 @@ public final class TheSeedcore extends CardImpl {
         this.addAbility(new ConditionalAnyColorManaAbility(new TapSourceCost(), 1, new TheSeedcoreManaBuilder(), true));
 
         // Corrupted -- {T}: Target 1/1 creature gets +2/+1 until end of turn. Activate only if an opponent has three or more poison counters.
-        Ability ability = new ConditionalActivatedAbility(
+        Ability ability = new ActivateIfConditionActivatedAbility(
                 new BoostTargetEffect(2, 1, Duration.EndOfTurn),
                 new TapSourceCost(), CorruptedCondition.instance
         ).setAbilityWord(AbilityWord.CORRUPTED).addHint(CorruptedCondition.getHint());

@@ -4,7 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -30,7 +30,7 @@ public final class Scourglass extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}{W}{W}");
 
         // {T}, Sacrifice Scourglass: Destroy all permanents except for artifacts and lands. Activate this ability only during your upkeep.
-        Ability ability = new ConditionalActivatedAbility(
+        Ability ability = new ActivateIfConditionActivatedAbility(
                 new DestroyAllEffect(filter), new TapSourceCost(), IsStepCondition.getMyUpkeep()
         );
         ability.addCost(new SacrificeSourceCost());

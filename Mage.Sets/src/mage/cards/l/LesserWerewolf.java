@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -44,7 +44,7 @@ public final class LesserWerewolf extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {B}: If Lesser Werewolf’s power is 1 or more, it gets -1/-0 until end of turn and put a -0/-1 counter on target creature blocking or blocked by Lesser Werewolf. Activate this ability only during the declare blockers step.
-        Ability ability = new ConditionalActivatedAbility(
+        Ability ability = new ActivateIfConditionActivatedAbility(
                 new LesserWerewolfEffect(), new ManaCostsImpl<>("{B}"), condition
         );
         ability.addTarget(new TargetPermanent(filter));

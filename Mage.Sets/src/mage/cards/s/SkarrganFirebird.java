@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
 import mage.abilities.keyword.BloodthirstAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -37,7 +37,7 @@ public final class SkarrganFirebird extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {R}{R}{R}: Return Skarrgan Firebird from your graveyard to your hand. Activate this ability only if an opponent was dealt damage this turn.
-        this.addAbility(new ConditionalActivatedAbility(
+        this.addAbility(new ActivateIfConditionActivatedAbility(
                 Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(),
                 new ManaCostsImpl<>("{R}{R}{R}"), OpponentWasDealtDamageCondition.instance
         ));

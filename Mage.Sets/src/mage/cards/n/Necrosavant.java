@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -30,7 +30,7 @@ public final class Necrosavant extends CardImpl {
         this.toughness = new MageInt(5);
 
         // {3}{B}{B}, Sacrifice a creature: Return Necrosavant from your graveyard to the battlefield. Activate this ability only during your upkeep.
-        Ability ability = new ConditionalActivatedAbility(
+        Ability ability = new ActivateIfConditionActivatedAbility(
                 Zone.GRAVEYARD,
                 new ReturnSourceFromGraveyardToBattlefieldEffect(false, false),
                 new ManaCostsImpl<>("{3}{B}{B}"), IsStepCondition.getMyUpkeep()

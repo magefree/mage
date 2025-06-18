@@ -11,7 +11,7 @@ import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.condition.common.SolvedSourceCondition;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.effects.keyword.InvestigateEffect;
@@ -50,7 +50,7 @@ public final class CaseOfTheFilchedFalcon extends CardImpl {
         Condition toSolveCondition = new PermanentsOnTheBattlefieldCondition(
                 filter, ComparisonType.MORE_THAN, 2, true);
         // Solved -- {2}{U}, Sacrifice this Case: Put four +1/+1 counters on target noncreature artifact. It becomes a 0/0 Bird creature with flying in addition to its other types.
-        Ability solvedAbility = new ConditionalActivatedAbility(
+        Ability solvedAbility = new ActivateIfConditionActivatedAbility(
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance(4)),
                 new ManaCostsImpl<>("{2}{U}"), SolvedSourceCondition.SOLVED);
         solvedAbility.addEffect(new BecomesCreatureTargetEffect(new CaseOfTheFilchedFalconToken(),

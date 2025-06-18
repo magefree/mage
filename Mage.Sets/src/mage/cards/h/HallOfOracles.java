@@ -5,7 +5,7 @@ import mage.abilities.ActivatedAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.abilities.mana.ColorlessManaAbility;
@@ -38,7 +38,7 @@ public final class HallOfOracles extends CardImpl {
         this.addAbility(ability);
 
         // {T}: Put a +1/+1 counter on target creature. Activate only as a sorcery and only if you've cast an instant or sorcery spell this turn.
-        ability = new ConditionalActivatedAbility(
+        ability = new ActivateIfConditionActivatedAbility(
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
                 new TapSourceCost(), HallOfOraclesCondition.instance
         ).setTiming(TimingRule.SORCERY);

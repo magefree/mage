@@ -6,7 +6,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.ExileSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -43,7 +43,7 @@ public final class MetallurgicSummonings extends CardImpl {
         ));
 
         // {3}{U}{U}, Exile Metallurgic Summons: Return all instant and sorcery cards from your graveyard to your hand. Activate this ability only if you control six or more artifacts.
-        Ability ability = new ConditionalActivatedAbility(
+        Ability ability = new ActivateIfConditionActivatedAbility(
                 new MetallurgicSummoningsReturnEffect(), new ManaCostsImpl<>("{3}{U}{U}"), condition
         );
         ability.addCost(new ExileSourceCost());

@@ -7,7 +7,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.ShuffleLibrarySourceEffect;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
@@ -44,7 +44,7 @@ public final class MadblindMountain extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
 
         // {R}, {tap}: Shuffle your library. Activate this ability only if you control two or more red permanents.
-        Ability ability = new ConditionalActivatedAbility(
+        Ability ability = new ActivateIfConditionActivatedAbility(
                 new ShuffleLibrarySourceEffect(), new ManaCostsImpl<>("{R}"), condition
         );
         ability.addCost(new TapSourceCost());

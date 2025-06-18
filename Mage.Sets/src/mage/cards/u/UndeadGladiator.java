@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
@@ -29,7 +29,7 @@ public final class UndeadGladiator extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}{B}, Discard a card: Return Undead Gladiator from your graveyard to your hand. Activate this ability only during your upkeep.
-        Ability ability = new ConditionalActivatedAbility(
+        Ability ability = new ActivateIfConditionActivatedAbility(
                 Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(),
                 new ManaCostsImpl<>("{1}{B}"), IsStepCondition.getMyUpkeep()
         );

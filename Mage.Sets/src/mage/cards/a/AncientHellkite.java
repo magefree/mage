@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.SourceAttackingCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -40,7 +40,7 @@ public final class AncientHellkite extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {R}: Ancient Hellkite deals 1 damage to target creature defending player controls. Activate this ability only if Ancient Hellkite is attacking.
-        Ability ability = new ConditionalActivatedAbility(
+        Ability ability = new ActivateIfConditionActivatedAbility(
                 new DamageTargetEffect(1), new ManaCostsImpl<>("{R}"), SourceAttackingCondition.instance
         );
         ability.addTarget(new TargetPermanent(filter));

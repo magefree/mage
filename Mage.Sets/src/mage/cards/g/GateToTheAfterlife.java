@@ -7,7 +7,7 @@ import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -48,7 +48,7 @@ public final class GateToTheAfterlife extends CardImpl {
         this.addAbility(ability);
 
         // {2}, {T}, Sacrifice Gate to the Afterlife: Search your graveyard, hand, and/or library for a card named God-Pharaoh's Gift and put it onto the battlefield. If you seearch your library this way, shuffle it. Activate this ability only if there are six or more creature cards in your graveyard.
-        ability = new ConditionalActivatedAbility(
+        ability = new ActivateIfConditionActivatedAbility(
                 new GateToTheAfterlifeEffect(), new GenericManaCost(2), condition
         );
         ability.addCost(new TapSourceCost());

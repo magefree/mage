@@ -5,7 +5,7 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.RemoveFromCombatTargetEffect;
@@ -41,7 +41,7 @@ public final class BalduvianWarlord extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {T}: Remove target blocking creature from combat. Creatures it was blocking that hadn't become blocked by another creature this combat become unblocked, then it blocks an attacking creature of your choice. Activate this ability only during the declare blockers step.
-        Ability ability = new ConditionalActivatedAbility(new BalduvianWarlordUnblockEffect(), new TapSourceCost(), new IsStepCondition(PhaseStep.DECLARE_BLOCKERS, false));
+        Ability ability = new ActivateIfConditionActivatedAbility(new BalduvianWarlordUnblockEffect(), new TapSourceCost(), new IsStepCondition(PhaseStep.DECLARE_BLOCKERS, false));
         ability.addTarget(new TargetPermanent(new FilterBlockingCreature()));
         this.addAbility(ability, new BlockedByOnlyOneCreatureThisCombatWatcher());
     }

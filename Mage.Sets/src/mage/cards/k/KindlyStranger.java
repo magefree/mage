@@ -3,7 +3,7 @@ package mage.cards.k;
 import mage.MageInt;
 import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
@@ -30,7 +30,7 @@ public final class KindlyStranger extends CardImpl {
 
         // <i>Delirium</i> &mdash; {2}{B}: Transform Kindly Stranger. Activate this ability only if there are four or more card types among cards in your graveyard.
         this.addAbility(new TransformAbility());
-        this.addAbility(new ConditionalActivatedAbility(
+        this.addAbility(new ActivateIfConditionActivatedAbility(
                 new TransformSourceEffect(), new ManaCostsImpl<>("{2}{B}"), DeliriumCondition.instance
         ).setAbilityWord(AbilityWord.DELIRIUM).addHint(CardTypesInGraveyardCount.YOU.getHint()));
     }

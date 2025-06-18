@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.condition.common.HellbentCondition;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -36,7 +36,7 @@ public final class Ragamuffyn extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Hellbent - {tap}, Sacrifice a creature or land: Draw a card. Activate this ability only if you have no cards in hand.
-        Ability ability = new ConditionalActivatedAbility(
+        Ability ability = new ActivateIfConditionActivatedAbility(
                 new DrawCardSourceControllerEffect(1), new TapSourceCost(), HellbentCondition.instance
         );
         ability.addCost(new SacrificeTargetCost(filter));

@@ -6,7 +6,7 @@ import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -30,7 +30,7 @@ public final class LifeMatrix extends CardImpl {
         // {4}, {T}: Put a matrix counter on target creature and that creature gains 
         // “Remove a matrix counter from this creature: Regenerate this creature.” 
         // Activate this ability only during your upkeep.
-        Ability ability = new ConditionalActivatedAbility(
+        Ability ability = new ActivateIfConditionActivatedAbility(
                 new AddCountersTargetEffect(CounterType.MATRIX.createInstance()),
                 new GenericManaCost(4), IsStepCondition.getMyUpkeep()
         );

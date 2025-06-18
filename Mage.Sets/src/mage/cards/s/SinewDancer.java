@@ -6,7 +6,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.CorruptedCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -37,7 +37,7 @@ public final class SinewDancer extends CardImpl {
         this.addAbility(ability);
 
         // Corrupted -- {W}, {T}: Tap target creature. Activate only if an opponent has three or more poison counters.
-        ability = new ConditionalActivatedAbility(
+        ability = new ActivateIfConditionActivatedAbility(
                 new TapTargetEffect(), new ManaCostsImpl<>("{W}"), CorruptedCondition.instance
         );
         ability.addCost(new TapSourceCost());

@@ -9,7 +9,7 @@ import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.OpponentsTurnCondition;
 import mage.abilities.condition.common.TargetAttackedThisTurnCondition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.combat.AttacksIfAbleAllEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -49,7 +49,7 @@ public final class MaddeningImp extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {T}: Non-Wall creatures the active player controls attack this turn if able. At the beginning of the next end step, destroy each of those creatures that didn't attack this turn. Activate this ability only during an opponent's turn and only before combat.
-        Ability ability = new ConditionalActivatedAbility(
+        Ability ability = new ActivateIfConditionActivatedAbility(
                 new AttacksIfAbleAllEffect(filter, Duration.EndOfTurn),
                 new TapSourceCost(), MaddeningImpTurnCondition.instance
         );

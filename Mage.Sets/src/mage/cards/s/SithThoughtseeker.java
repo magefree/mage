@@ -3,7 +3,7 @@ package mage.cards.s;
 import mage.MageInt;
 import mage.abilities.condition.common.HateCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -26,7 +26,7 @@ public final class SithThoughtseeker extends CardImpl {
         this.toughness = new MageInt(1);
 
         // <i>Hate</i> &mdash; {2}{U}: Draw a card. Activate this ability only if an opponent lost life from source other than combat damage this turn.
-        this.addAbility(new ConditionalActivatedAbility(
+        this.addAbility(new ActivateIfConditionActivatedAbility(
                 new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{2}{U}"), HateCondition.instance
         ).setAbilityWord(AbilityWord.HATE));
     }

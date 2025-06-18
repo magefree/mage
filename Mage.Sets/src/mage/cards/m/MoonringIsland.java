@@ -7,7 +7,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.LookLibraryTopCardTargetPlayerEffect;
 import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
@@ -45,7 +45,7 @@ public final class MoonringIsland extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
 
         // {U}, {tap}: Look at the top card of target player's library. Activate this ability only if you control two or more blue permanents.
-        Ability ability = new ConditionalActivatedAbility(
+        Ability ability = new ActivateIfConditionActivatedAbility(
                 new LookLibraryTopCardTargetPlayerEffect(), new ManaCostsImpl<>("{U}"), condition
         );
         ability.addCost(new TapSourceCost());

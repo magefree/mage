@@ -4,7 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
@@ -39,7 +39,7 @@ public final class Desert extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {tap}: Desert deals 1 damage to target attacking creature. Activate this ability only during the end of combat step.
-        Ability ability = new ConditionalActivatedAbility(new DamageTargetEffect(1), new TapSourceCost(), condition);
+        Ability ability = new ActivateIfConditionActivatedAbility(new DamageTargetEffect(1), new TapSourceCost(), condition);
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }

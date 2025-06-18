@@ -3,7 +3,7 @@ package mage.cards.c;
 import mage.MageInt;
 import mage.abilities.condition.common.SourceBlockedCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -26,7 +26,7 @@ public final class CinderCrawler extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {R}: Cinder Crawler gets +1/+0 until end of turn. Activate this ability only if Cinder Crawler is blocked.
-        this.addAbility(new ConditionalActivatedAbility(
+        this.addAbility(new ActivateIfConditionActivatedAbility(
                 new BoostSourceEffect(1, 0, Duration.EndOfTurn),
                 new ManaCostsImpl<>("{R}"), SourceBlockedCondition.instance
         ));

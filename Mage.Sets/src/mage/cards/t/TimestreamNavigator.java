@@ -6,7 +6,7 @@ import mage.abilities.condition.common.CitysBlessingCondition;
 import mage.abilities.costs.common.PutSourceOnBottomOwnerLibraryCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.turn.AddExtraTurnControllerEffect;
 import mage.abilities.hint.common.CitysBlessingHint;
 import mage.abilities.keyword.AscendAbility;
@@ -35,7 +35,7 @@ public final class TimestreamNavigator extends CardImpl {
         this.addAbility(new AscendAbility());
 
         // {2}{U}{U}, {T}, Put Timestream Navigator on the bottom of its owner's library: Take an extra turn after this one. Activate this ability only if you have the city's blessing.
-        Ability ability = new ConditionalActivatedAbility(
+        Ability ability = new ActivateIfConditionActivatedAbility(
                 new AddExtraTurnControllerEffect(), new ManaCostsImpl<>("{2}{U}{U}"), CitysBlessingCondition.instance
         );
         ability.addCost(new TapSourceCost());

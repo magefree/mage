@@ -5,7 +5,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -44,7 +44,7 @@ public final class ShardPhoenix extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(new DamageAllEffect(2, "it", filter), new SacrificeSourceCost()));
 
         // {R}{R}{R}: Return Shard Phoenix from your graveyard to your hand. Activate this ability only during your upkeep.
-        this.addAbility(new ConditionalActivatedAbility(
+        this.addAbility(new ActivateIfConditionActivatedAbility(
                 Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(),
                 new ManaCostsImpl<>("{R}{R}{R}"), IsStepCondition.getMyUpkeep()
         ));

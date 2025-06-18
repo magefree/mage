@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.common.TapTargetCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.hint.common.MorbidHint;
 import mage.cards.CardImpl;
@@ -40,7 +40,7 @@ public final class SkirsdagHighPriest extends CardImpl {
         this.toughness = new MageInt(2);
 
         // <i>Morbid</i> &mdash; {tap}, Tap two untapped creatures you control: Create a 5/5 black Demon creature token with flying. Activate this ability only if a creature died this turn.
-        Ability ability = new ConditionalActivatedAbility(
+        Ability ability = new ActivateIfConditionActivatedAbility(
                 new CreateTokenEffect(new DemonToken()), new TapSourceCost(), MorbidCondition.instance
         );
         ability.addCost(new TapTargetCost(new TargetControlledCreaturePermanent(2, 2, filter, false)));

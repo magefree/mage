@@ -4,7 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.Card;
@@ -32,7 +32,7 @@ public final class IsolatedWatchtower extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {2}, {T}: Scry 1, then you may reveal the top card of your library. If a basic land card is revealed this way, put it onto the battlefield tapped. Activate this ability only if an opponent controls at least two more lands than you.
-        Ability ability = new ConditionalActivatedAbility(
+        Ability ability = new ActivateIfConditionActivatedAbility(
                 new IsolatedWatchtowerEffect(), new GenericManaCost(2), IsolatedWatchtowerCondition.instance
         );
         ability.addCost(new TapSourceCost());

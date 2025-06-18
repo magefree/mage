@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepSourceEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
@@ -34,7 +34,7 @@ public final class ColossusOfSardia extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepSourceEffect()));
 
         // {9}: Untap Colossus of Sardia. Activate this ability only during your upkeep.
-        this.addAbility(new ConditionalActivatedAbility(
+        this.addAbility(new ActivateIfConditionActivatedAbility(
                 new UntapSourceEffect(), new GenericManaCost(9), IsStepCondition.getMyUpkeep()
         ));
     }

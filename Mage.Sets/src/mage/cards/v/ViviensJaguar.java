@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
@@ -37,7 +37,7 @@ public final class ViviensJaguar extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
 
         // {2}{G}: Return Vivien's Jaguar from your graveyard to your hand. Activate this ability only if you control a Vivien planeswalker.
-        this.addAbility(new ConditionalActivatedAbility(
+        this.addAbility(new ActivateIfConditionActivatedAbility(
                 Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(),
                 new ManaCostsImpl<>("{2}{G}"), condition
         ));

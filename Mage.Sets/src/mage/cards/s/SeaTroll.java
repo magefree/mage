@@ -5,7 +5,7 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -34,7 +34,7 @@ public final class SeaTroll extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {U}: Regenerate Sea Troll. Activate this ability only if Sea Troll blocked or was blocked by a blue creature this turn.
-        Ability ability = new ConditionalActivatedAbility(
+        Ability ability = new ActivateIfConditionActivatedAbility(
                 new RegenerateSourceEffect(), new ManaCostsImpl<>("{U}"), SeaTrollCondition.instance
         );
         ability.addWatcher(new SeaTrollWatcher());

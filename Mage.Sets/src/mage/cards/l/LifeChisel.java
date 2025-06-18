@@ -2,7 +2,7 @@ package mage.cards.l;
 
 import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.dynamicvalue.common.SacrificeCostCreaturesToughness;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
@@ -21,7 +21,7 @@ public final class LifeChisel extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // Sacrifice a creature: You gain life equal to the sacrificed creature's toughness. Activate this ability only during your upkeep.
-        this.addAbility(new ConditionalActivatedAbility(
+        this.addAbility(new ActivateIfConditionActivatedAbility(
                 new GainLifeEffect(SacrificeCostCreaturesToughness.instance)
                         .setText("you gain life equal to the sacrificed creature's toughness"),
                 new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE),

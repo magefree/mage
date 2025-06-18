@@ -4,7 +4,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
 import mage.cards.*;
@@ -34,7 +34,7 @@ public final class GrimReminder extends CardImpl {
         this.getSpellAbility().addWatcher(new GrimReminderWatcher());
 
         // {B}{B}: Return Grim Reminder from your graveyard to your hand. Activate this ability only during your upkeep.
-        this.addAbility(new ConditionalActivatedAbility(
+        this.addAbility(new ActivateIfConditionActivatedAbility(
                 Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(),
                 new ManaCostsImpl<>("{B}{B}"), IsStepCondition.getMyUpkeep()
         ));

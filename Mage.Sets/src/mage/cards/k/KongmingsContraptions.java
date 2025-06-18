@@ -7,7 +7,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.AttackedThisStepCondition;
 import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -38,7 +38,7 @@ public final class KongmingsContraptions extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {T}: Kongming's Contraptions deals 2 damage to target attacking creature. Activate this ability only during the declare attackers step and only if you've been attacked this step.
-        Ability ability = new ConditionalActivatedAbility(new DamageTargetEffect(2), new TapSourceCost(), condition);
+        Ability ability = new ActivateIfConditionActivatedAbility(new DamageTargetEffect(2), new TapSourceCost(), condition);
         ability.addTarget(new TargetAttackingCreature());
         this.addAbility(ability, new PlayerAttackedStepWatcher());
     }

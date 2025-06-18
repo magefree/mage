@@ -5,7 +5,7 @@ import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.condition.common.BeforeBlockersAreDeclaredCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -39,7 +39,7 @@ public final class AcidicDagger extends CardImpl {
         // {4}, {tap}: Whenever target creature deals combat damage to a non-Wall creature this turn,
         // destroy that non-Wall creature. When the targeted creature leaves the battlefield this turn,
         // sacrifice Acidic Dagger. Activate this ability only before blockers are declared.
-        Ability ability = new ConditionalActivatedAbility(
+        Ability ability = new ActivateIfConditionActivatedAbility(
                 new CreateDelayedTriggeredAbilityEffect(new AcidicDaggerDestroyNonWallAbility()),
                 new GenericManaCost(4),
                 BeforeBlockersAreDeclaredCondition.instance);

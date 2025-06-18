@@ -7,7 +7,7 @@ import mage.abilities.common.AttacksAllTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.IsPhaseCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.AdditionalCombatPhaseEffect;
 import mage.abilities.effects.common.CreateTokenTargetEffect;
@@ -50,7 +50,7 @@ public final class NajeelaTheBladeBlossom extends CardImpl {
         ));
 
         // {W}{U}{B}{R}{G}: Untap all attacking creatures. They gain trample, lifelink, and haste until end of turn. After this phase, there is an additional combat phase. Activate this ability only during combat.
-        Ability ability = new ConditionalActivatedAbility(
+        Ability ability = new ActivateIfConditionActivatedAbility(
                 new UntapAllEffect(StaticFilters.FILTER_ATTACKING_CREATURES),
                 new ManaCostsImpl<>("{W}{U}{B}{R}{G}"), condition
         );

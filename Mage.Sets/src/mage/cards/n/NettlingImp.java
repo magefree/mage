@@ -8,7 +8,7 @@ import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.OpponentsTurnCondition;
 import mage.abilities.condition.common.TargetAttackedThisTurnCondition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.combat.AttacksIfAbleTargetEffect;
@@ -45,7 +45,7 @@ public final class NettlingImp extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {T}: Choose target non-Wall creature the active player has controlled continuously since the beginning of the turn. That creature attacks this turn if able. If it doesn't, destroy it at the beginning of the next end step. Activate this ability only during an opponent's turn, before attackers are declared.
-        Ability ability = new ConditionalActivatedAbility(
+        Ability ability = new ActivateIfConditionActivatedAbility(
                 new AttacksIfAbleTargetEffect(Duration.EndOfTurn)
                         .setText("choose target non-Wall creature the active player has controlled " +
                                 "continuously since the beginning of the turn. That creature attacks this turn if able"),

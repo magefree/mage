@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -30,7 +30,7 @@ public final class DwarvenWeaponsmith extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}, Sacrifice an artifact: Put a +1/+1 counter on target creature. Activate this ability only during your upkeep.
-        Ability ability = new ConditionalActivatedAbility(
+        Ability ability = new ActivateIfConditionActivatedAbility(
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
                 new TapSourceCost(), IsStepCondition.getMyUpkeep()
         );

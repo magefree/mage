@@ -3,7 +3,7 @@ package mage.cards.a;
 import mage.MageInt;
 import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.ShadowAbility;
 import mage.cards.CardImpl;
@@ -29,7 +29,7 @@ public final class AugurIlVec extends CardImpl {
         this.addAbility(ShadowAbility.getInstance());
 
         // Sacrifice Augur il-Vec: You gain 4 life. Activate this ability only during your upkeep.
-        this.addAbility(new ConditionalActivatedAbility(
+        this.addAbility(new ActivateIfConditionActivatedAbility(
                 new GainLifeEffect(4), new SacrificeSourceCost(), IsStepCondition.getMyUpkeep()
         ));
     }

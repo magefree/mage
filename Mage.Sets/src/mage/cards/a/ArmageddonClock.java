@@ -3,7 +3,7 @@ package mage.cards.a;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -40,7 +40,7 @@ public final class ArmageddonClock extends CardImpl {
         ));
 
         // {4}: Remove a doom counter from Armageddon Clock. Any player may activate this ability but only during any upkeep step.
-        this.addAbility(new ConditionalActivatedAbility(
+        this.addAbility(new ActivateIfConditionActivatedAbility(
                 new RemoveCounterSourceEffect(CounterType.DOOM.createInstance()), new GenericManaCost(4), condition
         ).withConditionText("any player may activate this ability but only during any upkeep step").setMayActivate(TargetController.ANY));
     }

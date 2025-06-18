@@ -3,7 +3,7 @@ package mage.cards.e;
 import mage.MageInt;
 import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.PlainscyclingAbility;
@@ -32,7 +32,7 @@ public final class EternalDragon extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {3}{W}{W}: Return Eternal Dragon from your graveyard to your hand. Activate this ability only during your upkeep.        
-        this.addAbility(new ConditionalActivatedAbility(
+        this.addAbility(new ActivateIfConditionActivatedAbility(
                 Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(),
                 new ManaCostsImpl<>("{3}{W}{W}"), IsStepCondition.getMyUpkeep()
         ));

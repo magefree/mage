@@ -10,7 +10,7 @@ import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.DefendingPlayerControlsNoSourceCondition;
 import mage.abilities.condition.common.IsPhaseCondition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -52,7 +52,7 @@ public final class KjeldoranGuard extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {T}: Target creature gets +1/+1 until end of turn. When that creature leaves the battlefield this turn, sacrifice Kjeldoran Guard. Activate only during combat and only if defending player controls no snow lands.
-        Ability ability = new ConditionalActivatedAbility(
+        Ability ability = new ActivateIfConditionActivatedAbility(
                 new KjeldoranGuardEffect(), new TapSourceCost(), condition
         );
         ability.addTarget(new TargetCreaturePermanent());

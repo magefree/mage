@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
@@ -32,7 +32,7 @@ public final class LlanowarAugur extends CardImpl {
 
         // Sacrifice Llanowar Augur: Target creature gets +3/+3 and gains trample until end of turn.
         // Activate this ability only during your upkeep.
-        Ability ability = new ConditionalActivatedAbility(
+        Ability ability = new ActivateIfConditionActivatedAbility(
                 new BoostTargetEffect(3, 3).setText("Target creature gets +3/+3"),
                 new SacrificeSourceCost(), IsStepCondition.getMyUpkeep()
         );

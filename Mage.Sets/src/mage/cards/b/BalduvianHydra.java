@@ -6,7 +6,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.abilities.effects.common.PreventDamageToSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -41,7 +41,7 @@ public final class BalduvianHydra extends CardImpl {
         ));
 
         // {R}{R}{R}: Put a +1/+0 counter on Balduvian Hydra. Activate this ability only during your upkeep.
-        this.addAbility(new ConditionalActivatedAbility(
+        this.addAbility(new ActivateIfConditionActivatedAbility(
                 new AddCountersSourceEffect(CounterType.P1P0.createInstance(1)),
                 new ManaCostsImpl<>("{R}{R}{R}"), IsStepCondition.getMyUpkeep()
         ));

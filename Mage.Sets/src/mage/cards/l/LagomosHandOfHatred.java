@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
@@ -44,7 +44,7 @@ public final class LagomosHandOfHatred extends CardImpl {
         this.addAbility(new BeginningOfCombatTriggeredAbility(new LagomosHandOfHatredEffect()));
 
         // {T}: Search your library for a card, put it into your hand, then shuffle. Activate only if five or more creatures died this turn.
-        this.addAbility(new ConditionalActivatedAbility(
+        this.addAbility(new ActivateIfConditionActivatedAbility(
                 new SearchLibraryPutInHandEffect(new TargetCardInLibrary(), false),
                 new TapSourceCost(), LagomosHandOfHatredCondition.instance
         ));

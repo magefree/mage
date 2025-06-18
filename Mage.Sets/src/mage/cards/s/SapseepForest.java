@@ -7,7 +7,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
@@ -44,7 +44,7 @@ public final class SapseepForest extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
 
         // {G}, {tap}: You gain 1 life. Activate this ability only if you control two or more green permanents.
-        Ability ability = new ConditionalActivatedAbility(new GainLifeEffect(1), new ManaCostsImpl<>("{G}"), condition);
+        Ability ability = new ActivateIfConditionActivatedAbility(new GainLifeEffect(1), new ManaCostsImpl<>("{G}"), condition);
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

@@ -7,7 +7,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.abilities.hint.common.MetalcraftHint;
 import mage.abilities.keyword.FlyingAbility;
@@ -44,7 +44,7 @@ public final class KuldothaPhoenix extends CardImpl {
 
         // <i>Metalcraft</i> &mdash; {4}: Return Kuldotha Phoenix from your graveyard to the battlefield.
         // Activate this ability only during your upkeep and only if you control three or more artifacts.        
-        Ability ability = new ConditionalActivatedAbility(Zone.GRAVEYARD,
+        Ability ability = new ActivateIfConditionActivatedAbility(Zone.GRAVEYARD,
                 new ReturnSourceFromGraveyardToBattlefieldEffect(false, false),
                 new ManaCostsImpl<>("{4}"), condition
         );

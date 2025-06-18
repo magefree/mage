@@ -6,7 +6,7 @@ import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.IsPhaseCondition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -47,7 +47,7 @@ public final class HeartWolf extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // {tap}: Target Dwarf creature gets +2/+0 and gains first strike until end of turn. When that creature leaves the battlefield this turn, sacrifice Heart Wolf. Activate this ability only during combat.
-        Ability ability = new ConditionalActivatedAbility(
+        Ability ability = new ActivateIfConditionActivatedAbility(
                 new BoostTargetEffect(2, 0, Duration.EndOfTurn)
                         .setText("Target Dwarf creature gets +2/+0"),
                 new TapSourceCost(), condition

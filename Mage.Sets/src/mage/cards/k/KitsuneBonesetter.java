@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.MoreCardsInHandThanOpponentsCondition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -29,7 +29,7 @@ public final class KitsuneBonesetter extends CardImpl {
 
 
         // {tap}: Prevent the next 3 damage that would be dealt to target creature this turn. Activate this ability only if you have more cards in hand than each opponent.
-        Ability ability = new ConditionalActivatedAbility(
+        Ability ability = new ActivateIfConditionActivatedAbility(
                 new PreventDamageToTargetEffect(Duration.EndOfTurn, 3), new TapSourceCost(),
                 MoreCardsInHandThanOpponentsCondition.instance
         );

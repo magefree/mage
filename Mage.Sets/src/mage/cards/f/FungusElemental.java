@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.condition.common.SourceEnteredThisTurnCondition;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -32,7 +32,7 @@ public final class FungusElemental extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {G}, Sacrifice a Forest: Put a +2/+2 counter on Fungus Elemental. Activate this ability only if Fungus Elemental entered the battlefield this turn.
-        Ability ability = new ConditionalActivatedAbility(
+        Ability ability = new ActivateIfConditionActivatedAbility(
                 new AddCountersSourceEffect(CounterType.P2P2.createInstance()),
                 new ManaCostsImpl<>("{G}"), SourceEnteredThisTurnCondition.DID
         );

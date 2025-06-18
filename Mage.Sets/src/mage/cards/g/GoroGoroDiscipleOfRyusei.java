@@ -5,7 +5,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.hint.ConditionHint;
@@ -58,7 +58,7 @@ public final class GoroGoroDiscipleOfRyusei extends CardImpl {
         ), new ManaCostsImpl<>("{R}")));
 
         // {3}{R}{R}: Create a 5/5 red Dragon Spirit creature token with flying. Activate only if you control an attacking modified creature.
-        this.addAbility(new ConditionalActivatedAbility(
+        this.addAbility(new ActivateIfConditionActivatedAbility(
                 new CreateTokenEffect(new DragonSpiritToken()),
                 new ManaCostsImpl<>("{3}{R}{R}"), condition
         ).addHint(hint));

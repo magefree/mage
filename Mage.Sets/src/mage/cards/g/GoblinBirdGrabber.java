@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -40,7 +40,7 @@ public final class GoblinBirdGrabber extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {R}: Goblin Bird-Grabber gains flying until end of turn. Activate this ability only if you control a creature with flying.
-        this.addAbility(new ConditionalActivatedAbility(
+        this.addAbility(new ActivateIfConditionActivatedAbility(
                 new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn),
                 new ManaCostsImpl<>("{R}"), condition
         ));

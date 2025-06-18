@@ -10,7 +10,7 @@ import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.condition.common.SolvedSourceCondition;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.abilities.hint.common.CaseSolvedHint;
@@ -52,7 +52,7 @@ public final class CaseOfTheStashedSkeleton extends CardImpl {
         Condition toSolveCondition = new PermanentsOnTheBattlefieldCondition(
                 filter, ComparisonType.EQUAL_TO, 0, true);
         // Solved -- {1}{B}, Sacrifice this Case: Search your library for a card, put it into your hand, then shuffle. Activate only as a sorcery.
-        Ability solvedAbility = new ConditionalActivatedAbility(
+        Ability solvedAbility = new ActivateIfConditionActivatedAbility(
                 new SearchLibraryPutInHandEffect(new TargetCardInLibrary(), false)
                         .setText("Search your library for a card, put it into your hand, then shuffle. Activate only as a sorcery."),
                 new ManaCostsImpl<>("{1}{B}"),

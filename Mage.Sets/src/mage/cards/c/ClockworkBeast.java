@@ -9,7 +9,7 @@ import mage.abilities.condition.common.AttackedOrBlockedThisCombatSourceConditio
 import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
@@ -50,7 +50,7 @@ public final class ClockworkBeast extends CardImpl {
         ).withInterveningIf(AttackedOrBlockedThisCombatSourceCondition.instance), new AttackedOrBlockedThisCombatWatcher());
 
         // {X}, {tap}: Put up to X +1/+0 counters on Clockwork Beast. This ability can't cause the total number of +1/+0 counters on Clockwork Beast to be greater than seven. Activate this ability only during your upkeep.
-        Ability ability = new ConditionalActivatedAbility(
+        Ability ability = new ActivateIfConditionActivatedAbility(
                 new ClockworkBeastEffect(), new ManaCostsImpl<>("{X}"), IsStepCondition.getMyUpkeep()
         );
         ability.addCost(new TapSourceCost());

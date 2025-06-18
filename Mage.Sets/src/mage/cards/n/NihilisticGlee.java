@@ -7,7 +7,7 @@ import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
@@ -38,7 +38,7 @@ public final class NihilisticGlee extends CardImpl {
         this.addAbility(ability);
 
         // Hellbent - {1}, Pay 2 life: Draw a card. Activate this ability only if you have no cards in hand.
-        ability = new ConditionalActivatedAbility(
+        ability = new ActivateIfConditionActivatedAbility(
                 new DrawCardSourceControllerEffect(1),
                 new GenericManaCost(1), HellbentCondition.instance
         );

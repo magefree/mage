@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -36,7 +36,7 @@ public class KeeperOfTheMind extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {U}, {tap}: Choose target opponent who had at least two more cards in hand than you did as you activated this ability. Draw a card.
-        Ability ability = new ConditionalActivatedAbility(
+        Ability ability = new ActivateIfConditionActivatedAbility(
                 new DrawCardSourceControllerEffect(1)
                         .setText("choose target opponent who has at least two more cards " +
                                 "in hand than you do as you activate this ability. Draw a card"),

@@ -5,7 +5,7 @@ import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.effects.keyword.ScryEffect;
@@ -30,7 +30,7 @@ public final class ShadowsOfThePast extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new ScryEffect(1), false));
 
         // {4}{B}: Each opponent loses 2 life and you gain 2 life. Activate this ability only if there are four or more creature cards in your graveyard.
-        Ability ability = new ConditionalActivatedAbility(
+        Ability ability = new ActivateIfConditionActivatedAbility(
                 new LoseLifeOpponentsEffect(2), new ManaCostsImpl<>("{4}{B}"), condition
         );
         ability.addEffect(new GainLifeEffect(2).concatBy("and"));

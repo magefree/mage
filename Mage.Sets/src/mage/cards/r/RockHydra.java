@@ -7,7 +7,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.abilities.effects.common.PreventDamageToSourceEffect;
@@ -48,7 +48,7 @@ public final class RockHydra extends CardImpl {
         ));
 
         // {R}{R}{R}: Put a +1/+1 counter on Rock Hydra. Activate this ability only during your upkeep.
-        this.addAbility(new ConditionalActivatedAbility(
+        this.addAbility(new ActivateIfConditionActivatedAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)),
                 new ManaCostsImpl<>("{R}{R}{R}"), IsStepCondition.getMyUpkeep()
         ));

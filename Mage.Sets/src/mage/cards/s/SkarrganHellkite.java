@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.RiotAbility;
@@ -39,7 +39,7 @@ public final class SkarrganHellkite extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {3}{R}: Skarrgan Hellkite deals 2 damage divided as you choose among one or two targets. Activate this ability only if Skarrgan Hellkite has a +1/+1 counter on it.
-        Ability ability = new ConditionalActivatedAbility(
+        Ability ability = new ActivateIfConditionActivatedAbility(
                 new DamageMultiEffect(), new ManaCostsImpl<>("{3}{R}"), condition
         ).withConditionText("activate only if {this} has a +1/+1 counter on it");
         ability.addTarget(new TargetAnyTargetAmount(2));
