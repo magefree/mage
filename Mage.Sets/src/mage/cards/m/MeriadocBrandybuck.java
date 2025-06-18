@@ -30,7 +30,7 @@ public final class MeriadocBrandybuck extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever one or more Halflings you control attack a player, create a Food token.
-        this.addAbility(new AttacksPlayerWithCreaturesTriggeredAbility(new CreateTokenEffect(new FoodToken()), filter, true));
+        this.addAbility(new AttacksPlayerWithCreaturesTriggeredAbility(new CreateTokenEffect(new FoodToken()), filter, false));
     }
 
     private MeriadocBrandybuck(final MeriadocBrandybuck card) {

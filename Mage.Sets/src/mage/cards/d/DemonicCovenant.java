@@ -36,7 +36,7 @@ public final class DemonicCovenant extends CardImpl {
         this.subtype.add(SubType.DEMON);
 
         // Whenever one or more Demons you control attack a player, you draw a card and lose 1 life.
-        Ability abilityAttack = new AttacksPlayerWithCreaturesTriggeredAbility(new DrawCardSourceControllerEffect(1, true), filter, true);
+        Ability abilityAttack = new AttacksPlayerWithCreaturesTriggeredAbility(new DrawCardSourceControllerEffect(1, true), filter, false);
         abilityAttack.addEffect(new LoseLifeSourceControllerEffect(1).setText("and lose 1 life"));
         this.addAbility(abilityAttack);
 

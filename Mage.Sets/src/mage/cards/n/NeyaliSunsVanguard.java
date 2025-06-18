@@ -56,7 +56,7 @@ public final class NeyaliSunsVanguard extends CardImpl {
         )));
 
         // Whenever one or more tokens you control attack a player, exile the top card of your library. During any turn you attacked with a token, you may play that card.
-        Ability ability = new AttacksPlayerWithCreaturesTriggeredAbility(new NeyaliSunsVanguardEffect(), filter, true);
+        Ability ability = new AttacksPlayerWithCreaturesTriggeredAbility(new NeyaliSunsVanguardEffect(), filter, false);
         ability.addWatcher(new NeyaliSunsVanguardWatcher());
         this.addAbility(ability);
     }
@@ -75,6 +75,7 @@ class NeyaliSunsVanguardEffect extends OneShotEffect {
 
     NeyaliSunsVanguardEffect() {
         super(Outcome.Benefit);
+        this.setText("exile the top card of your library. During any turn you attacked with a token, you may play that card.");
     }
 
     private NeyaliSunsVanguardEffect(final NeyaliSunsVanguardEffect effect) {

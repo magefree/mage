@@ -49,7 +49,7 @@ public class AttacksPlayerWithCreaturesTriggeredAbility extends TriggeredAbility
             setTriggerPhrase("Whenever you attack a player, ");
         } else {
             setTriggerPhrase("Whenever " + CardUtil.numberToText(minAttackers) + " or more " + filter.getMessage() +
-                    "attack" + (onlyOpponents ? "an opponent" : "a player") + ", ");
+                    " attack " + (onlyOpponents ? "an opponent" : "a player") + ", ");
         }
     }
 
