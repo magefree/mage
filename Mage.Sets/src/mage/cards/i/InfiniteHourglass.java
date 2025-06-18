@@ -44,7 +44,7 @@ public final class InfiniteHourglass extends CardImpl {
         // {3}: Remove a time counter from Infinite Hourglass. Any player may activate this ability but only during any upkeep step.
         this.addAbility(new ActivateIfConditionActivatedAbility(
                 new RemoveCounterSourceEffect(CounterType.TIME.createInstance()), new GenericManaCost(3), condition
-        ).setMayActivate(TargetController.ANY));
+        ).withConditionText("any player may activate this ability but only during any upkeep step").setMayActivate(TargetController.ANY));
     }
 
     private InfiniteHourglass(final InfiniteHourglass card) {

@@ -2,10 +2,10 @@ package mage.cards.g;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -59,7 +59,9 @@ class GeneralJarkeldSwitchBlockersEffect extends OneShotEffect {
 
     GeneralJarkeldSwitchBlockersEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Switch the blocking creatures of two target attacking creatures";
+        this.staticText = "choose two target blocked attacking creatures. If each of those creatures could be " +
+                "blocked by all creatures that the other is blocked by, each creature that's blocking exactly one " +
+                "of those attacking creatures stops blocking it and is blocking the other attacking creature";
     }
 
     private GeneralJarkeldSwitchBlockersEffect(final GeneralJarkeldSwitchBlockersEffect effect) {

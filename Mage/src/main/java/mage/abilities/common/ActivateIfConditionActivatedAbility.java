@@ -10,6 +10,7 @@ import mage.constants.EffectType;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.util.CardUtil;
 
 /**
  * @author LevelX2
@@ -53,22 +54,28 @@ public class ActivateIfConditionActivatedAbility extends ActivatedAbilityImpl {
 
     @Override
     public String getRule() {
-        StringBuilder sb = new StringBuilder(super.getRule());
-        if (condition.toString().startsWith("You may also")) {
-            sb.append(' ').append(condition.toString()).append('.');
-            return sb.toString();
+        if (conditionText != null) {
+            if (conditionText.isEmpty()) {
+                return super.getRule();
+            }
+            return super.getRule() + ' ' + CardUtil.getTextWithFirstCharUpperCase(conditionText) + '.';
         }
+        String conditionText = condition.toString();
+        if (conditionText.startsWith("You may also")) {
+            return super.getRule() + ' ' + conditionText + '.';
+        }
+        StringBuilder sb = new StringBuilder(super.getRule());
         if (condition instanceof InvertCondition) {
             sb.append(" You can't activate this ability ");
         } else {
             sb.append(" Activate only ");
         }
-        if (!condition.toString().startsWith("during")
-                && !condition.toString().startsWith("before")
-                && !condition.toString().startsWith("if")) {
+        if (!conditionText.startsWith("during")
+                && !conditionText.startsWith("before")
+                && !conditionText.startsWith("if")) {
             sb.append("if ");
         }
-        sb.append(condition.toString());
+        sb.append(conditionText);
         if (timing == TimingRule.SORCERY) {
             sb.append(" and only as a sorcery");
         }

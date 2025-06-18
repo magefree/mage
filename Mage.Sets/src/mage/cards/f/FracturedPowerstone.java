@@ -46,7 +46,7 @@ class FracturedPowerstoneEffect extends OneShotEffect {
 
     FracturedPowerstoneEffect() {
         super(Outcome.Benefit);
-        staticText = "Roll the planar";
+        staticText = "Roll the planar die";
     }
 
     private FracturedPowerstoneEffect(final FracturedPowerstoneEffect effect) {
