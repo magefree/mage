@@ -5,13 +5,20 @@ import mage.abilities.condition.Condition;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.Effects;
+import mage.constants.EffectType;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
+import mage.game.Game;
 
 /**
  * @author LevelX2
  */
 public class ActivateIfConditionActivatedAbility extends ActivatedAbilityImpl {
+
+    private static final Effects emptyEffects = new Effects();
+
+    private String conditionText = null;
 
     public ActivateIfConditionActivatedAbility(Effect effect, Cost cost, Condition condition) {
         this(Zone.BATTLEFIELD, effect, cost, condition);
@@ -24,6 +31,24 @@ public class ActivateIfConditionActivatedAbility extends ActivatedAbilityImpl {
 
     protected ActivateIfConditionActivatedAbility(final ActivateIfConditionActivatedAbility ability) {
         super(ability);
+        this.conditionText = ability.conditionText;
+    }
+
+    @Override
+    public Effects getEffects(Game game, EffectType effectType) {
+        if (!condition.apply(game, this)) {
+            return emptyEffects;
+        }
+        return super.getEffects(game, effectType);
+    }
+
+    public ActivateIfConditionActivatedAbility hideCondition() {
+        return withConditionText("");
+    }
+
+    public ActivateIfConditionActivatedAbility withConditionText(String conditionText) {
+        this.conditionText = conditionText;
+        return this;
     }
 
     @Override
@@ -48,7 +73,6 @@ public class ActivateIfConditionActivatedAbility extends ActivatedAbilityImpl {
             sb.append(" and only as a sorcery");
         }
         sb.append('.');
-
         return sb.toString();
     }
 
@@ -56,5 +80,4 @@ public class ActivateIfConditionActivatedAbility extends ActivatedAbilityImpl {
     public ActivateIfConditionActivatedAbility copy() {
         return new ActivateIfConditionActivatedAbility(this);
     }
-
 }
