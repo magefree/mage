@@ -87,6 +87,7 @@ public class AttacksPlayerWithCreaturesTriggeredAbility extends TriggeredAbility
         if (setTargetPointer) {
             getEffects().setTargetPointer(new FixedTargets(new ArrayList<>(attackers), game));
         }
+        this.getEffects().setValue("playerAttacked", attackedEvent.getTargetId());
         return true;
     }
 }
