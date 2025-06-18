@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 
 import java.util.UUID;
@@ -33,8 +32,9 @@ public final class SteadfastUnicorn extends CardImpl {
 
         // {3}{W}: Creatures you control get +1/+1 and gain vigilance until end of turn. Activate only during your turn.
         Ability ability = new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.EndOfTurn)
-                .setText("creatures you control get +1/+1"), new ManaCostsImpl<>("{3}{W}"), MyTurnCondition.instance
+                new BoostControlledEffect(1, 1, Duration.EndOfTurn)
+                        .setText("creatures you control get +1/+1"),
+                new ManaCostsImpl<>("{3}{W}"), MyTurnCondition.instance
         );
         ability.addEffect(new GainAbilityControlledEffect(
                 VigilanceAbility.getInstance(), Duration.EndOfTurn,

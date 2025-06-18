@@ -7,12 +7,10 @@ import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.TargetPlayerGainControlSourceEffect;
-import mage.abilities.hint.common.MyTurnHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.target.common.TargetOpponent;
 
 import java.util.UUID;
@@ -30,13 +28,12 @@ public final class HumbleDefector extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {T}: Draw two cards. Target opponent gains control of Humble Defector. Activate this ability only during your turn.
-        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD,
-                new DrawCardSourceControllerEffect(2), new TapSourceCost(), MyTurnCondition.instance);
+        Ability ability = new ActivateIfConditionActivatedAbility(
+                new DrawCardSourceControllerEffect(2), new TapSourceCost(), MyTurnCondition.instance
+        );
         ability.addEffect(new TargetPlayerGainControlSourceEffect());
         ability.addTarget(new TargetOpponent());
-        ability.addHint(MyTurnHint.instance);
         this.addAbility(ability);
-
     }
 
     private HumbleDefector(final HumbleDefector card) {

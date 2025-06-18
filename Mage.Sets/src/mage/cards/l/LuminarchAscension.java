@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.token.AngelToken;
@@ -39,8 +38,7 @@ public final class LuminarchAscension extends CardImpl {
 
         // {1}{W}: Create a 4/4 white Angel creature token with flying. Activate this ability only if Luminarch Ascension has four or more quest counters on it.
         this.addAbility(new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD, new CreateTokenEffect(new AngelToken()),
-                new ManaCostsImpl<>("{1}{W}"), condition
+                new CreateTokenEffect(new AngelToken()), new ManaCostsImpl<>("{1}{W}"), condition
         ));
     }
 
