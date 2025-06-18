@@ -13,7 +13,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.target.common.TargetAnyTargetAmount;
 
@@ -41,9 +40,8 @@ public final class SkarrganHellkite extends CardImpl {
 
         // {3}{R}: Skarrgan Hellkite deals 2 damage divided as you choose among one or two targets. Activate this ability only if Skarrgan Hellkite has a +1/+1 counter on it.
         Ability ability = new ConditionalActivatedAbility(
-                Zone.BATTLEFIELD, new DamageMultiEffect(), new ManaCostsImpl<>("{3}{R}"),
-                condition, "activate only if {this} has a +1/+1 counter on it"
-        );
+                new DamageMultiEffect(), new ManaCostsImpl<>("{3}{R}"), condition
+        ).withConditionText("activate only if {this} has a +1/+1 counter on it");
         ability.addTarget(new TargetAnyTargetAmount(2));
         this.addAbility(ability);
     }

@@ -12,7 +12,10 @@ import mage.abilities.triggers.BeginningOfDrawTriggeredAbility;
 import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.PhaseStep;
+import mage.constants.TargetController;
 import mage.counters.CounterType;
 
 import java.util.UUID;
@@ -38,9 +41,8 @@ public final class ArmageddonClock extends CardImpl {
 
         // {4}: Remove a doom counter from Armageddon Clock. Any player may activate this ability but only during any upkeep step.
         this.addAbility(new ConditionalActivatedAbility(
-                Zone.BATTLEFIELD, new RemoveCounterSourceEffect(CounterType.DOOM.createInstance()), new GenericManaCost(4),
-                condition, "any player may activate this ability but only during any upkeep step"
-        ).setMayActivate(TargetController.ANY));
+                new RemoveCounterSourceEffect(CounterType.DOOM.createInstance()), new GenericManaCost(4), condition
+        ).withConditionText("any player may activate this ability but only during any upkeep step").setMayActivate(TargetController.ANY));
     }
 
     private ArmageddonClock(final ArmageddonClock card) {

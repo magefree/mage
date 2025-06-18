@@ -18,27 +18,20 @@ public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
 
     private static final Effects emptyEffects = new Effects();
 
-    private final String conditionText;
-    private boolean showCondition = true;
+    private String conditionText = null;
 
     public ConditionalActivatedAbility(Effect effect, Cost cost, Condition condition) {
         this(Zone.BATTLEFIELD, effect, cost, condition);
     }
 
     public ConditionalActivatedAbility(Zone zone, Effect effect, Cost cost, Condition condition) {
-        this(zone, effect, cost, condition, null);
-    }
-
-    public ConditionalActivatedAbility(Zone zone, Effect effect, Cost cost, Condition condition, String conditionText) {
         super(zone, effect, cost);
         this.condition = condition;
-        this.conditionText = conditionText;
     }
 
     protected ConditionalActivatedAbility(final ConditionalActivatedAbility ability) {
         super(ability);
         this.conditionText = ability.conditionText;
-        this.showCondition = ability.showCondition;
     }
 
     @Override
@@ -55,7 +48,11 @@ public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
     }
 
     public ConditionalActivatedAbility hideCondition() {
-        this.showCondition = false;
+        return withConditionText("");
+    }
+
+    public ConditionalActivatedAbility withConditionText(String conditionText) {
+        this.conditionText = conditionText;
         return this;
     }
 
@@ -68,18 +65,16 @@ public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
             return super.getRule() + ' ' + CardUtil.getTextWithFirstCharUpperCase(conditionText) + '.';
         }
         StringBuilder sb = new StringBuilder(super.getRule());
-        if (showCondition) {
-            sb.append(" Activate only ");
-            if (timing == TimingRule.SORCERY) {
-                sb.append("as a sorcery and only ");
-            }
-            String conditionText = condition.toString();
-            if (!conditionText.startsWith("during") && !conditionText.startsWith("before") && !conditionText.startsWith("if")) {
-                sb.append("if ");
-            }
-            sb.append(conditionText);
-            sb.append('.');
+        sb.append(" Activate only ");
+        if (timing == TimingRule.SORCERY) {
+            sb.append("as a sorcery and only ");
         }
+        String conditionText = condition.toString();
+        if (!conditionText.startsWith("during") && !conditionText.startsWith("before") && !conditionText.startsWith("if")) {
+            sb.append("if ");
+        }
+        sb.append(conditionText);
+        sb.append('.');
         return sb.toString();
     }
 }
