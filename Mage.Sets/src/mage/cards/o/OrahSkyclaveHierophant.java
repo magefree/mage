@@ -5,6 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.DiesThisOrAnotherTriggeredAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.keyword.LifelinkAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -62,11 +63,11 @@ public final class OrahSkyclaveHierophant extends CardImpl {
     }
 }
 
-enum OrahSkyclaveHierophantPredicate implements ObjectSourcePlayerPredicate<Permanent> {
+enum OrahSkyclaveHierophantPredicate implements ObjectSourcePlayerPredicate<Card> {
     instance;
 
     @Override
-    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
+    public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
         return CardUtil.getEffectValueFromAbility(
                         input.getSource(), "creatureDied", Permanent.class
                 )
