@@ -17,6 +17,7 @@ import mage.util.CardUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
@@ -76,21 +77,22 @@ public class AttacksPlayerWithCreaturesTriggeredAbility extends TriggeredAbility
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Player player = game.getPlayer(getControllerId());
-        if (player == null) {
+        UUID attackedId = event.getTargetId();
+        if (player == null || game.getPlayer(attackedId) == null) {
             return false;
         }
         DefenderAttackedEvent attackedEvent = (DefenderAttackedEvent) event;
         List<Permanent> attackers = attackedEvent.getAttackers(game).stream()
                 .filter(permanent -> filter.match(permanent, controllerId, this, game))
                 .collect(Collectors.toList());
-        if (attackers.size() < minAttackers || (onlyOpponents && !game.isOpponent(player, attackedEvent.getTargetId()))) {
+        if (attackers.size() < minAttackers || (onlyOpponents && !game.isOpponent(player, attackedId))) {
             return false;
         }
         switch (setTargetPointer){
             case NONE:
                 break;
             case PLAYER:
-                getEffects().setTargetPointer(new FixedTarget(attackedEvent.getTargetId()));
+                getEffects().setTargetPointer(new FixedTarget(attackedId));
                 break;
             case PERMANENT:
                 getEffects().setTargetPointer(new FixedTargets(new ArrayList<>(attackers), game));
@@ -99,7 +101,7 @@ public class AttacksPlayerWithCreaturesTriggeredAbility extends TriggeredAbility
                 throw new UnsupportedOperationException("Unexpected setTargetPointer in AttacksPlayerWithCreaturesTriggeredAbility: " + setTargetPointer);
 
         }
-        this.getEffects().setValue("playerAttacked", attackedEvent.getTargetId());
+        this.getEffects().setValue("playerAttacked",attackedId);
         return true;
     }
 }
