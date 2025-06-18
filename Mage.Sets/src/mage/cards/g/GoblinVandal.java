@@ -41,7 +41,6 @@ public final class GoblinVandal extends CardImpl {
         ability.addTarget(new TargetArtifactPermanent());
         ability.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster());
         this.addAbility(ability);
-
     }
 
     private GoblinVandal(final GoblinVandal card) {

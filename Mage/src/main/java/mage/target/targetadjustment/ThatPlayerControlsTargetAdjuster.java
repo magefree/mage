@@ -1,7 +1,6 @@
 package mage.target.targetadjustment;
 
 import mage.abilities.Ability;
-import mage.abilities.common.OneOrMoreDamagePlayerTriggeredAbility;
 import mage.filter.Filter;
 import mage.filter.predicate.card.OwnerIdPredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;

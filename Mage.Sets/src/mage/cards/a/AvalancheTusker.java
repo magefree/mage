@@ -8,6 +8,7 @@ import mage.abilities.effects.common.combat.MustBeBlockedByTargetSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
@@ -30,7 +31,8 @@ public final class AvalancheTusker extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever Avalanche Tusker attacks, target creature defending player controls blocks it this turn if able.
-        Ability ability = new AttacksTriggeredAbility(new MustBeBlockedByTargetSourceEffect(), false, null, SetTargetPointer.PLAYER);
+        Ability ability = new AttacksTriggeredAbility(new MustBeBlockedByTargetSourceEffect(Duration.EndOfCombat)
+                .setText("target creature defending player controls blocks it this combat if able"), false, null, SetTargetPointer.PLAYER);
         ability.addTarget(new TargetCreaturePermanent());
         ability.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster());
         this.addAbility(ability);
