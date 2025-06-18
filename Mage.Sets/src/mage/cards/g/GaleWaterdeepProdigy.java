@@ -84,6 +84,6 @@ enum GaleWaterdeepProdigyAdjuster implements TargetAdjuster {
         } else {
             filter = SORCERY_FILTER;
         }
-        ability.addTarget(new TargetCardInYourGraveyard(filter));
+        ability.addTarget(new TargetCardInYourGraveyard(0, 1, filter));
     }
 }
