@@ -24,6 +24,7 @@ import java.util.UUID;
  * @author LevelX2
  */
 public final class HarnessTheStorm extends CardImpl {
+    static FilterCard filter = new FilterCard("card with the same name as that spell from your graveyard");
 
     public HarnessTheStorm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
@@ -34,6 +35,7 @@ public final class HarnessTheStorm extends CardImpl {
                 Zone.BATTLEFIELD, new MayCastTargetCardEffect(false), StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY,
                 false, SetTargetPointer.SPELL, Zone.HAND
         );
+        ability.addTarget(new TargetCardInYourGraveyard(filter)); // Only used for text generation
         ability.setTargetAdjuster(HarnessTheStormAdjuster.instance);
         this.addAbility(ability);
     }
@@ -60,7 +62,7 @@ enum HarnessTheStormAdjuster implements TargetAdjuster {
         if (spell == null){
             return;
         }
-        FilterCard filter = new FilterCard("target card with the same name as that spell from your graveyard");
+        FilterCard filter =  new FilterCard("a card named " + spell.getName() + " in your graveyard");
         filter.add(new NamePredicate(spell.getName()));
         ability.addTarget(new TargetCardInYourGraveyard(filter));
     }

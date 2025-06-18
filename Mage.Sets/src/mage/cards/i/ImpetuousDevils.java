@@ -2,7 +2,7 @@
 package mage.cards.i;
 
 import mage.MageInt;
-import mage.abilities.Ability;
+import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
@@ -39,8 +39,9 @@ public final class ImpetuousDevils extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
         // When Impetuous Devils attacks, up to one target creature defending player controls blocks it this combat if able.
-        Ability ability = new AttacksTriggeredAbility(new MustBeBlockedByTargetSourceEffect(Duration.EndOfCombat)
+        TriggeredAbility ability = new AttacksTriggeredAbility(new MustBeBlockedByTargetSourceEffect(Duration.EndOfCombat)
                 .setText("up to one target creature defending player controls blocks it this combat if able"), false, null, SetTargetPointer.PLAYER);
+        ability.setTriggerPhrase("When {this} attacks, ");
         ability.addTarget(new TargetCreaturePermanent(0, 1));
         ability.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster());
         this.addAbility(ability);

@@ -2,7 +2,7 @@ package mage.cards.r;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.common.DealsDamageToOpponentTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
@@ -51,8 +51,8 @@ public final class RampagingRaptor extends CardImpl {
         ));
 
         // Whenever Rampaging Raptor deals combat damage to an opponent, it deals that much damage to target planeswalker that player controls or battle that player protects.
-        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new DamageTargetEffect(SavedDamageValue.MUCH)
-                .withTargetDescription("planeswalker that player controls or battle that player protects"), false, true);
+        Ability ability = new DealsDamageToOpponentTriggeredAbility(new DamageTargetEffect(SavedDamageValue.MUCH)
+                .withTargetDescription("target planeswalker that player controls or battle that player protects"), false, true, true);
         ability.setTargetAdjuster(RampagingRaptorTargetAdjuster.instance);
         this.addAbility(ability);
     }

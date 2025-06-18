@@ -76,13 +76,18 @@ enum RavenousGigantotheriumAmount implements DynamicValue {
     public String getMessage() {
         return "its power";
     }
+
+    @Override
+    public String toString() {
+        return "X";
+    }
 }
 
 class RavenousGigantotheriumEffect extends OneShotEffect {
 
     RavenousGigantotheriumEffect() {
         super(Outcome.Benefit);
-        this.setText("Each of those creatures deals damage equal to its power to Ravenous Gigantotherium.");
+        this.setText("Each of those creatures deals damage equal to its power to {this}.");
     }
 
     private RavenousGigantotheriumEffect(final RavenousGigantotheriumEffect effect) {

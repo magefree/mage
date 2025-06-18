@@ -37,7 +37,7 @@ public final class GaleWaterdeepProdigy extends CardImpl {
         // If a spell cast from your graveyard this way would be put into your graveyard, exile it instead.
         Ability ability = new SpellCastControllerTriggeredAbility(Zone.BATTLEFIELD,
                 new MayCastTargetCardEffect(true)
-                        .setText("you may cast up to one of the other type from your graveyard. If a spell cast from your graveyard this way would be put into your graveyard, exile it instead."),
+                        .setText("you may cast up to one target card of the other type from your graveyard. If a spell cast from your graveyard this way would be put into your graveyard, exile it instead."),
                 StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY,
                 false, SetTargetPointer.SPELL, Zone.HAND
         );

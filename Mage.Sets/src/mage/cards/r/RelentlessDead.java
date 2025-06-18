@@ -25,7 +25,7 @@ import java.util.UUID;
  * @author LevelX2
  */
 public final class RelentlessDead extends CardImpl {
-    static FilterCard filter = new FilterCreatureCard("another target Zombie creature card with converted mana cost X"); // This target defines X
+    static FilterCard filter = new FilterCreatureCard("another target Zombie creature card with mana value X from your graveyard"); // This target defines X
     static{
         filter.add(SubType.ZOMBIE.getPredicate());
         filter.add(AnotherPredicate.instance);
@@ -47,7 +47,7 @@ public final class RelentlessDead extends CardImpl {
         Ability ability = new DiesSourceTriggeredAbility(new DoIfCostPaid(
                 new ReturnFromGraveyardToBattlefieldTargetEffect(),
                 new DynamicValueGenericManaCost(TargetManaValue.instance, "{X}")));
-        ability.addTarget(new TargetCardInYourGraveyard());
+        ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
     }
 

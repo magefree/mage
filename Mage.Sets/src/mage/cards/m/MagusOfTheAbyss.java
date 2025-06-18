@@ -9,6 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
@@ -25,6 +26,7 @@ import java.util.UUID;
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
 public final class MagusOfTheAbyss extends CardImpl {
+    static FilterPermanent filter = new FilterPermanent("nonartifact creature that player controls of their choice");
 
     public MagusOfTheAbyss(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
@@ -34,7 +36,9 @@ public final class MagusOfTheAbyss extends CardImpl {
         this.toughness = new MageInt(3);
 
         // At the beginning of each player's upkeep, destroy target nonartifact creature that player controls of their choice. It can't be regenerated.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DestroyTargetEffect(true)).withTargetPointerSet(true);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER,
+                new DestroyTargetEffect(true), false).withTargetPointerSet(true);
+        ability.addTarget(new TargetPermanent(filter)); // Only used for text generation
         ability.setTargetAdjuster(MagusOfTheAbyssTargetAdjuster.instance);
         this.addAbility(ability);
     }

@@ -18,7 +18,7 @@ import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetCardInGraveyard;
+import mage.target.common.TargetCardInYourGraveyard;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -28,7 +28,7 @@ import java.util.UUID;
  */
 public final class OrahSkyclaveHierophant extends CardImpl {
     static FilterPermanent filterTrigger = new FilterControlledPermanent("Cleric you control");
-    static FilterCard filterTarget = new FilterCard("Cleric card with lesser converted mana cost");
+    static FilterCard filterTarget = new FilterCard("Cleric card with lesser mana value");
     static {
         filterTrigger.add(SubType.CLERIC.getPredicate());
         filterTarget.add(SubType.CLERIC.getPredicate());
@@ -49,7 +49,7 @@ public final class OrahSkyclaveHierophant extends CardImpl {
 
         // Whenever Orah, Skyclave Hierophant or another Cleric you control dies, return target Cleric card with lesser converted mana cost from your graveyard to the battlefield.
         Ability ability = new DiesThisOrAnotherTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(), false, filterTrigger);
-        ability.addTarget(new TargetCardInGraveyard(filterTarget));
+        ability.addTarget(new TargetCardInYourGraveyard(filterTarget));
         this.addAbility(ability);
     }
 
