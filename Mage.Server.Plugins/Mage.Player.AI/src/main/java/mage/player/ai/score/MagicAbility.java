@@ -1,4 +1,4 @@
-package mage.player.ai.ma;
+package mage.player.ai.score;
 
 import mage.abilities.Ability;
 import mage.abilities.keyword.*;
@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * TODO: outdated, replace by edh or commander brackets ability score
  * @author nantuko
  */
 public final class MagicAbility {

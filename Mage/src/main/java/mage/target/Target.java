@@ -28,6 +28,7 @@ public interface Target extends Copyable<Target>, Serializable {
      */
     boolean isChosen(Game game);
 
+    @Deprecated // TODO: replace usage in cards by full version from choose methods
     boolean isChoiceCompleted(Game game);
 
     boolean isChoiceCompleted(UUID abilityControllerId, Ability source, Game game);
@@ -84,7 +85,7 @@ public interface Target extends Copyable<Target>, Serializable {
 
     /**
      * @param id
-     * @param source WARNING, it can be null for AI or other calls from events (TODO: introduce normal source in AI ComputerPlayer)
+     * @param source WARNING, it can be null for AI or other calls from events
      * @param game
      * @return
      */

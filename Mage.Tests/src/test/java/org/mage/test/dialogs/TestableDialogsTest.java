@@ -3,6 +3,7 @@ package org.mage.test.dialogs;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.InfoEffect;
+import mage.abilities.effects.common.continuous.PlayAdditionalLandsAllEffect;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.utils.testers.TestableDialog;
@@ -33,8 +34,7 @@ public class TestableDialogsTest extends CardTestPlayerBaseWithAIHelps {
 
     @Test
     public void test_RunSingle_Manual() {
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
-        addCard(Zone.HAND, playerA, "Forest", 6);
+        prepareCards();
 
         runCode("run single", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
             TestableDialog dialog = findDialog(runner, "target.choose(you, target)", "any 0-3");
@@ -57,8 +57,7 @@ public class TestableDialogsTest extends CardTestPlayerBaseWithAIHelps {
 
     @Test
     public void test_RunSingle_AI() {
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
-        addCard(Zone.HAND, playerA, "Forest", 6);
+        prepareCards();
 
         aiPlayStep(1, PhaseStep.PRECOMBAT_MAIN, PhaseStep.END_TURN, playerA);
         aiPlayStep(1, PhaseStep.PRECOMBAT_MAIN, PhaseStep.END_TURN, playerB);
@@ -76,36 +75,12 @@ public class TestableDialogsTest extends CardTestPlayerBaseWithAIHelps {
     }
 
     @Test
-    @Ignore // debug only - run single dialog by reg number
-    public void test_RunSingle_Debugging() {
-        int needRegNumber = 7;
-
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
-        addCard(Zone.HAND, playerA, "Forest", 6);
-
-        aiPlayStep(1, PhaseStep.PRECOMBAT_MAIN, PhaseStep.END_TURN, playerA);
-        aiPlayStep(1, PhaseStep.PRECOMBAT_MAIN, PhaseStep.END_TURN, playerB);
-        runCode("run by number", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, (info, player, game) -> {
-            TestableDialog dialog = findDialog(runner, needRegNumber);
-            dialog.prepare();
-            dialog.showDialog(playerA, fakeAbility, game, playerB);
-        });
-
-        setStrictChooseMode(true);
-        setStopAt(1, PhaseStep.END_TURN);
-        execute();
-
-        assertAndPrintRunnerResults(false, true);
-    }
-
-    @Test
     @Ignore // TODO: enable and fix all failed dialogs
     public void test_RunAll_AI() {
         // it's impossible to setup 700+ dialogs, so all choices made by AI
         // current AI uses only simple choices in dialogs, not simulations
 
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
-        addCard(Zone.HAND, playerA, "Forest", 6);
+        prepareCards();
 
         aiPlayStep(1, PhaseStep.PRECOMBAT_MAIN, PhaseStep.END_TURN, playerA);
         aiPlayStep(1, PhaseStep.PRECOMBAT_MAIN, PhaseStep.END_TURN, playerB);
@@ -128,6 +103,43 @@ public class TestableDialogsTest extends CardTestPlayerBaseWithAIHelps {
         execute();
 
         assertAndPrintRunnerResults(true, true);
+    }
+
+    @Test
+    @Ignore // debug only - run single dialog by reg number
+    public void test_RunSingle_Debugging() {
+        int needRegNumber = 93;
+
+        prepareCards();
+
+        aiPlayStep(1, PhaseStep.PRECOMBAT_MAIN, PhaseStep.END_TURN, playerA);
+        aiPlayStep(1, PhaseStep.PRECOMBAT_MAIN, PhaseStep.END_TURN, playerB);
+        runCode("run by number", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, (info, player, game) -> {
+            TestableDialog dialog = findDialog(runner, needRegNumber);
+            dialog.prepare();
+            dialog.showDialog(playerA, fakeAbility, game, playerB);
+        });
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertAndPrintRunnerResults(false, true);
+    }
+
+    private void prepareCards() {
+        // runner calls dialogs for both A and B, so players must have same cards
+        removeAllCardsFromLibrary(playerA);
+        removeAllCardsFromLibrary(playerB);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
+        addCard(Zone.HAND, playerA, "Forest", 6);
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 6);
+        addCard(Zone.HAND, playerB, "Forest", 6);
+
+        runCode("restrict lands", 1, PhaseStep.UPKEEP, playerA, (info, player, game) -> {
+            // restrict any lands play, so AI will keep lands in hand
+            game.addEffect(new PlayAdditionalLandsAllEffect(-1), fakeAbility);
+        });
     }
 
     private TestableDialog findDialog(TestableDialogsRunner runner, String byGroup, String byName) {
@@ -194,6 +206,9 @@ public class TestableDialogsTest extends CardTestPlayerBaseWithAIHelps {
         int totalGood = 0;
         int totalBad = 0;
         int totalUnknown = 0;
+        TestableDialog firstBadDialog = null;
+        String firstBadAssert = "";
+        String firstBadDebugSource = "";
         boolean usedHorizontalBorder = true; // mark that last print used horizontal border (fix duplicates)
         Map<String, String> coloredTexts = new HashMap<>(); // must colorize after string format to keep pretty table
         for (TestableDialog dialog : runner.getDialogs()) {
@@ -244,8 +259,15 @@ public class TestableDialogsTest extends CardTestPlayerBaseWithAIHelps {
                 coloredTexts.clear();
                 coloredTexts.put(resAssert, asRed(resAssert));
                 coloredTexts.put(resDebugSource, asRed(resDebugSource));
-                System.out.print(getColoredRow(totalsRightFormat, coloredTexts, resAssert));
-                System.out.print(getColoredRow(totalsRightFormat, coloredTexts, resDebugSource));
+                String badAssert = getColoredRow(totalsRightFormat, coloredTexts, resAssert);
+                String badDebugSource = getColoredRow(totalsRightFormat, coloredTexts, resDebugSource);
+                if (firstBadDialog == null) {
+                    firstBadDialog = dialog;
+                    firstBadAssert = badAssert;
+                    firstBadDebugSource = badDebugSource;
+                }
+                System.out.print(badAssert);
+                System.out.print(badDebugSource);
                 System.out.println(horizontalBorder);
                 usedHorizontalBorder = true;
             }
@@ -267,6 +289,15 @@ public class TestableDialogsTest extends CardTestPlayerBaseWithAIHelps {
         coloredTexts.put(unknownStats, String.format("%s unknown", asYellow(String.valueOf(totalUnknown))));
         System.out.print(getColoredRow(totalsLeftFormat, coloredTexts, String.format("Total results: %s, %s, %s",
                 goodStats, badStats, unknownStats)));
+        // first error for fast access in big list
+        if (totalDialogs > 1 && firstBadDialog != null) {
+            System.out.println(horizontalBorder);
+            System.out.print(getColoredRow(totalsRightFormat, coloredTexts, "First bad dialog: " + firstBadDialog.getRegNumber()));
+            System.out.print(getColoredRow(totalsRightFormat, coloredTexts, firstBadDialog.getName() + " - " + firstBadDialog.getDescription()));
+            System.out.print(firstBadAssert);
+            System.out.print(firstBadDebugSource);
+        }
+
         // table end
         System.out.println(horizontalBorder);
         usedHorizontalBorder = true;

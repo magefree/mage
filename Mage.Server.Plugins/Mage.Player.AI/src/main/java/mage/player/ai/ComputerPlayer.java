@@ -1,9 +1,6 @@
 package mage.player.ai;
 
-import mage.ApprovingObject;
-import mage.ConditionalMana;
-import mage.MageObject;
-import mage.Mana;
+import mage.*;
 import mage.abilities.*;
 import mage.abilities.costs.mana.*;
 import mage.abilities.effects.Effect;
@@ -14,7 +11,6 @@ import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.mana.ManaOptions;
 import mage.cards.Card;
 import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.cards.RateCard;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckValidator;
@@ -25,10 +21,11 @@ import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.*;
+import mage.filter.common.FilterCreatureForCombatBlock;
+import mage.filter.common.FilterLandCard;
+import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
@@ -36,8 +33,6 @@ import mage.game.draft.Draft;
 import mage.game.events.GameEvent;
 import mage.game.match.Match;
 import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
 import mage.game.tournament.Tournament;
 import mage.player.ai.simulators.CombatGroupSimulator;
 import mage.player.ai.simulators.CombatSimulator;
@@ -47,8 +42,9 @@ import mage.players.Player;
 import mage.players.PlayerImpl;
 import mage.players.net.UserData;
 import mage.players.net.UserGroup;
-import mage.target.*;
-import mage.target.common.*;
+import mage.target.Target;
+import mage.target.TargetAmount;
+import mage.target.TargetCard;
 import mage.util.*;
 import org.apache.log4j.Logger;
 
@@ -59,19 +55,17 @@ import java.util.Map.Entry;
 /**
  * AI: basic server side bot with simple actions support (game, draft, construction/sideboarding)
  * <p>
- * TODO: combine choose and chooseTarget to single logic to use shared code
  *
  * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class ComputerPlayer extends PlayerImpl {
 
     private static final Logger log = Logger.getLogger(ComputerPlayer.class);
-    private long lastThinkTime = 0; // msecs for last AI actions calc
 
-    protected int PASSIVITY_PENALTY = 5; // Penalty value for doing nothing if some actions are available
+    protected static final int PASSIVITY_PENALTY = 5; // Penalty value for doing nothing if some actions are available
 
     // debug only: set TRUE to debug simulation's code/games (on false sim thread will be stopped after few secs by timeout)
-    protected boolean COMPUTER_DISABLE_TIMEOUT_IN_GAME_SIMULATIONS = true; // DebugUtil.AI_ENABLE_DEBUG_MODE;
+    protected static final boolean COMPUTER_DISABLE_TIMEOUT_IN_GAME_SIMULATIONS = true; // DebugUtil.AI_ENABLE_DEBUG_MODE;
 
     // AI agents uses game simulation thread for all calcs and it's high CPU consumption
     // More AI threads - more parallel AI games can be calculate
@@ -80,12 +74,13 @@ public class ComputerPlayer extends PlayerImpl {
     // How-to use:
     // * 1 for debug or stable
     // * 5 for good performance on average computer
-    // * use your's CPU cores for best performance
+    // * use yours CPU cores for best performance
     // TODO: add server config to control max AI threads (with CPU cores by default)
     // TODO: rework AI implementation to use multiple sims calculation instead one by one
     final static int COMPUTER_MAX_THREADS_FOR_SIMULATIONS = 1;//DebugUtil.AI_ENABLE_DEBUG_MODE ? 1 : 5;
 
 
+    // TODO: delete after target rework
     private final transient Map<Mana, Card> unplayable = new TreeMap<>();
     private final transient List<Card> playableNonInstant = new ArrayList<>();
     private final transient List<Card> playableInstant = new ArrayList<>();
@@ -100,6 +95,8 @@ public class ComputerPlayer extends PlayerImpl {
 
     // For stopping infinite loops when trying to pay Phyrexian mana when the player can't spend life and no other sources are available
     private transient boolean alreadyTryingToPayPhyrexian;
+
+    private transient long lastThinkTime = 0; // time in ms for last AI actions calc
 
     public ComputerPlayer(String name, RangeOfInfluence range) {
         super(name, range);
@@ -125,7 +122,6 @@ public class ComputerPlayer extends PlayerImpl {
 
     @Override
     public boolean chooseMulligan(Game game) {
-        log.debug("chooseMulligan");
         if (hand.size() < 6
                 || isTestsMode() // ignore mulligan in tests
                 || game.getClass().getName().contains("Momir") // ignore mulligan in Momir games
@@ -144,17 +140,23 @@ public class ComputerPlayer extends PlayerImpl {
 
     @Override
     public boolean choose(Outcome outcome, Target target, Ability source, Game game, Map<String, Serializable> options) {
-        if (log.isDebugEnabled()) {
-            log.debug("choose: " + outcome.toString() + ':' + target.toString());
-        }
+        return makeChoice(outcome, target, source, game, null);
+    }
 
+    /**
+     * Default choice logic for any choose dialogs due effect's outcome and possible target priority
+     */
+    private boolean makeChoice(Outcome outcome, Target target, Ability source, Game game, Cards fromCards) {
         // choose itself for starting player all the time
         if (target.getMessage(game).equals("Select a starting player")) {
             target.add(this.getId(), game);
             return true;
         }
 
-        boolean isAddedSomething = false; // must return true on any changes in targets, so game can ask next choose dialog until finish
+        // nothing to choose
+        if (fromCards != null && fromCards.isEmpty()) {
+            return false;
+        }
 
         // controller hints:
         // - target.getTargetController(), this.getId() -- player that must makes choices (must be same with this.getId)
@@ -166,1065 +168,82 @@ public class ComputerPlayer extends PlayerImpl {
                 && target.getAbilityController() != null) {
             abilityControllerId = target.getAbilityController();
         }
-        UUID sourceId = source != null ? source.getSourceId() : null;
 
-        boolean required = target.isRequired(sourceId, game);
-        Set<UUID> possibleTargets = target.possibleTargets(abilityControllerId, source, game);
-        if (possibleTargets.isEmpty() || target.getTargets().size() >= target.getMinNumberOfTargets()) {
-            required = false;
+        // nothing to choose, e.g. X=0
+        if (target.isChoiceCompleted(abilityControllerId, source, game)) {
+            return false;
         }
 
-        UUID randomOpponentId = getRandomOpponent(game);
-
-        if (target.getOriginalTarget() instanceof TargetPlayer) {
-            return selectPlayer(outcome, target, abilityControllerId, randomOpponentId, game, required);
-        }
-
-        if (target.getOriginalTarget() instanceof TargetDiscard) {
-            findPlayables(game);
-            // discard not playable first
-            if (!unplayable.isEmpty()) {
-                for (int i = unplayable.size() - 1; i >= 0; i--) {
-                    UUID targetId = unplayable.values().toArray(new Card[0])[i].getId();
-                    if (target.canTarget(abilityControllerId, targetId, source, game) && !target.contains(targetId)) {
-                        target.add(targetId, game);
-                        isAddedSomething = true;
-                        if (target.isChosen(game)) {
-                            return true;
-                        }
-                    }
-                }
-            }
-            if (!hand.isEmpty()) {
-                for (int i = 0; i < hand.size(); i++) {
-                    UUID targetId = hand.toArray(new UUID[0])[i];
-                    if (target.canTarget(abilityControllerId, targetId, source, game) && !target.contains(targetId)) {
-                        target.add(targetId, game);
-                        isAddedSomething = true;
-                        if (target.isChosen(game)) {
-                            return true;
-                        }
-                    }
-                }
-            }
-            return isAddedSomething;
-        }
-
-        if (target.getOriginalTarget() instanceof TargetControlledPermanent
-                || target.getOriginalTarget() instanceof TargetSacrifice) {
-            List<Permanent> targets;
-            TargetPermanent origTarget = (TargetPermanent) target.getOriginalTarget();
-            targets = threats(abilityControllerId, source, origTarget.getFilter(), game, target.getTargets());
-            if (!outcome.isGood()) {
-                Collections.reverse(targets);
-            }
-            for (Permanent permanent : targets) {
-                if (origTarget.canTarget(abilityControllerId, permanent.getId(), source, game, false) && !target.contains(permanent.getId())) {
-                    target.add(permanent.getId(), game);
-                    isAddedSomething = true;
-                    if (target.isChosen(game)) {
-                        return true;
-                    }
-                }
-            }
-            return isAddedSomething;
-        }
-
-        if (target.getOriginalTarget() instanceof TargetPermanent) {
-            FilterPermanent filter = null;
-            if (target.getOriginalTarget().getFilter() instanceof FilterPermanent) {
-                filter = (FilterPermanent) target.getOriginalTarget().getFilter();
-            }
-            if (filter == null) {
-                throw new IllegalStateException("Unsupported permanent filter in computer's choose method: "
-                        + target.getOriginalTarget().getClass().getCanonicalName());
-            }
-
-            List<Permanent> targets;
-            if (outcome.isCanTargetAll()) {
-                targets = threats(null, source, filter, game, target.getTargets());
-            } else {
-                if (outcome.isGood()) {
-                    targets = threats(abilityControllerId, source, filter, game, target.getTargets());
-                } else {
-                    targets = threats(randomOpponentId, source, filter, game, target.getTargets());
-                }
-                if (targets.isEmpty() && target.isRequired()) {
-                    if (!outcome.isGood()) {
-                        targets = threats(abilityControllerId, source, filter, game, target.getTargets());
-                    } else {
-                        targets = threats(randomOpponentId, source, filter, game, target.getTargets());
-                    }
-                }
-            }
-
-            for (Permanent permanent : targets) {
-                if (target.canTarget(abilityControllerId, permanent.getId(), source, game) && !target.contains(permanent.getId())) {
-                    // AI workaround to stop adding more targets in "up to" on bad outcome for itself
-                    if (target.isChosen(game) && target.getMinNumberOfTargets() == target.getTargets().size()) {
-                        if (outcome.isGood() && hasOpponent(permanent.getControllerId(), game)) {
-                            return isAddedSomething;
-                        }
-                        if (!outcome.isGood() && !hasOpponent(permanent.getControllerId(), game)) {
-                            return isAddedSomething;
-                        }
-                    }
-                    // add the target
-                    target.add(permanent.getId(), game);
-                    isAddedSomething = true;
-                    if (target.isChosen(game)) {
-                        return true;
-                    }
-                }
-            }
-            return isAddedSomething;
-        }
-
-        if (target.getOriginalTarget() instanceof TargetCardInHand
-                || (target.getZone() == Zone.HAND && (target.getOriginalTarget() instanceof TargetCard))) {
-            List<Card> cards = new ArrayList<>();
-            for (UUID cardId : target.possibleTargets(this.getId(), source, game)) {
-                Card card = game.getCard(cardId);
-                if (card != null) {
-                    cards.add(card);
-                }
-            }
-            while ((outcome.isGood() ? target.getTargets().size() < target.getMaxNumberOfTargets() : !target.isChosen(game))
-                    && !cards.isEmpty()) {
-                Card card = selectCard(abilityControllerId, cards, outcome, target, game);
-                if (card != null) {
-                    cards.remove(card); // selectCard don't remove cards (only on second+ tries)
-                    if (!target.contains(card.getId())) {
-                        target.add(card.getId(), game); // TODO: why it add as much as possible instead go to isChosen check like above?
-                        isAddedSomething = true;
-                        if (target.isChosen(game)) {
-                            //return true; // TODO: why it add as much as possible instead go to isChosen check like above?
-                        }
-                    }
-                } else {
-                    break;
-                }
-            }
-            return isAddedSomething;
-        }
-
-        if (target.getOriginalTarget() instanceof TargetAnyTarget) {
-            List<Permanent> targets;
-            TargetAnyTarget origTarget = (TargetAnyTarget) target.getOriginalTarget();
-            if (outcome.isGood()) {
-                targets = threats(abilityControllerId, source, ((FilterAnyTarget) origTarget.getFilter()).getPermanentFilter(), game, target.getTargets());
-            } else {
-                targets = threats(randomOpponentId, source, ((FilterAnyTarget) origTarget.getFilter()).getPermanentFilter(), game, target.getTargets());
-            }
-            for (Permanent permanent : targets) {
-                if (target.canTarget(abilityControllerId, permanent.getId(), source, game) && !target.contains(permanent.getId())) {
-                    target.add(permanent.getId(), game);
-                    isAddedSomething = true;
-                    if (target.isChosen(game)) {
-                        return true;
-                    }
-                }
-            }
-            if (outcome.isGood()) {
-                if (target.canTarget(abilityControllerId, getId(), source, game) && !target.contains(getId())) {
-                    target.add(getId(), game);
-                    isAddedSomething = true;
-                    if (target.isChosen(game)) {
-                        return true;
-                    }
-                }
-            } else if (target.canTarget(abilityControllerId, randomOpponentId, source, game) && !target.contains(randomOpponentId)) {
-                target.add(randomOpponentId, game);
-                isAddedSomething = true;
-                if (target.isChosen(game)) {
-                    return true;
-                }
-            }
-            if (!required) {
-                return isAddedSomething;
+        // default logic for any targets
+        boolean isAddedSomething = false;
+        PossibleTargetsSelector possibleTargetsSelector = new PossibleTargetsSelector(outcome, target, abilityControllerId, source, game);
+        possibleTargetsSelector.findNewTargets(fromCards);
+        // good targets -- choose as much as possible
+        for (MageItem item : possibleTargetsSelector.getGoodTargets()) {
+            target.add(item.getId(), game);
+            isAddedSomething = true;
+            if (target.isChoiceCompleted(abilityControllerId, source, game)) {
+                return true;
             }
         }
+        // bad targets -- choose as low as possible
+        for (MageItem item : possibleTargetsSelector.getBadTargets()) {
+            if (target.isChosen(game)) {
+                break;
+            }
+            target.add(item.getId(), game);
+            isAddedSomething = true;
+        }
+        return isAddedSomething;
+    }
 
-        if (target.getOriginalTarget() instanceof TargetPermanentOrPlayer) {
-            List<Permanent> targets;
-            TargetPermanentOrPlayer origTarget = (TargetPermanentOrPlayer) target.getOriginalTarget();
-            List<Permanent> ownedTargets = threats(abilityControllerId, source, ((FilterPermanentOrPlayer) origTarget.getFilter()).getPermanentFilter(), game, target.getTargets());
-            List<Permanent> opponentTargets = threats(randomOpponentId, source, ((FilterPermanentOrPlayer) origTarget.getFilter()).getPermanentFilter(), game, target.getTargets());
-            if (outcome.isGood()) {
-                targets = ownedTargets;
-            } else {
-                targets = opponentTargets;
-            }
-            for (Permanent permanent : targets) {
-                if (target.canTarget(abilityControllerId, permanent.getId(), source, game) && !target.contains(permanent.getId())) {
-                    isAddedSomething = true;
-                    target.add(permanent.getId(), game);
-                    return true;
-                }
-            }
-            if (outcome.isGood()) {
-                if (target.canTarget(abilityControllerId, getId(), source, game) && !target.contains(getId())) {
-                    target.add(getId(), game);
-                    isAddedSomething = true;
-                    if (target.isChosen(game)) {
-                        return true;
-                    }
-                }
-            } else if (target.canTarget(abilityControllerId, randomOpponentId, source, game) && !target.contains(randomOpponentId)) {
-                target.add(randomOpponentId, game);
-                isAddedSomething = true;
-                if (target.isChosen(game)) {
-                    return true;
-                }
-            }
-            if (!target.isRequired(sourceId, game) || target.getMinNumberOfTargets() == 0) {
-                return isAddedSomething; // TODO: need research why it here (between diff type of targets)
-            }
-            if (target.canTarget(abilityControllerId, randomOpponentId, source, game) && !target.contains(randomOpponentId)) {
-                target.add(randomOpponentId, game);
-                isAddedSomething = true;
-                if (target.isChosen(game)) {
-                    return true;
-                }
-            }
-            if (target.canTarget(abilityControllerId, getId(), source, game) && !target.contains(getId())) {
-                target.add(getId(), game);
-                isAddedSomething = true;
-                if (target.isChosen(game)) {
-                    return true;
-                }
-            }
-            if (outcome.isGood()) { // no other valid targets so use a permanent
-                targets = opponentTargets;
-            } else {
-                targets = ownedTargets;
-            }
-            for (Permanent permanent : targets) {
-                if (target.canTarget(abilityControllerId, permanent.getId(), source, game) && !target.contains(permanent.getId())) {
-                    target.add(permanent.getId(), game);
-                    isAddedSomething = true;
-                    if (target.isChosen(game)) {
-                        return true;
-                    }
-                }
-            }
-            return isAddedSomething;
+    /**
+     * Default choice logic for X or amount values
+     */
+    private int makeChoiceAmount(int min, int max, Game game, Ability source, boolean isManaPay) {
+        // fast calc on nothing to choose
+        if (min >= max) {
+            return min;
         }
 
-        if (target.getOriginalTarget() instanceof TargetCardInASingleGraveyard) {
-            List<Card> cards = new ArrayList<>();
-            for (Player player : game.getPlayers().values()) {
-                for (Card card : player.getGraveyard().getCards(game)) {
-                    if (target.canTarget(abilityControllerId, card.getId(), source, game)) {
-                        cards.add(card);
-                    }
-                }
-            }
+        // TODO: add good/bad effects support
+        // TODO: add simple game simulations like declare blocker (need to find only workable payment)?
+        // TODO: remove random logic or make it more stable (e.g. use same value in same game cycle)
 
-            // exile cost workaround: exile is bad, but exile from graveyard in most cases is good (more exiled -- more good things you get, e.g. delve's pay)
-            boolean isRealGood = outcome.isGood() || outcome == Outcome.Exile;
-            while ((isRealGood ? target.getTargets().size() < target.getMaxNumberOfTargets() : !target.isChosen(game))
-                    && !cards.isEmpty()) {
-                Card card = selectCard(abilityControllerId, cards, outcome, target, game);
-                if (card != null) {
-                    cards.remove(card); // selectCard don't remove cards (only on second+ tries)
-                    if (!target.contains(card.getId())) {
-                        target.add(card.getId(), game);
-                        isAddedSomething = true;
-                        if (target.isChosen(game)) {
-                            //return true; // TODO: why it add as much as possible instead go to isChosen check like above?
-                        }
-                    }
-                } else {
-                    break;
-                }
-            }
-            return isAddedSomething;
+        // protection from too big values
+        int realMin = min;
+        int realMax = max;
+        if (max == Integer.MAX_VALUE) {
+            realMax = Math.max(realMin, 10); // AI don't need huge values for X, cause can't use infinite combos
         }
 
-        if (target.getOriginalTarget() instanceof TargetCardInGraveyard
-                || (target.getZone() == Zone.GRAVEYARD && (target.getOriginalTarget() instanceof TargetCard))) {
-            List<Card> cards = new ArrayList<>();
-            for (Player player : game.getPlayers().values()) {
-                for (Card card : player.getGraveyard().getCards(game)) {
-                    if (target.canTarget(abilityControllerId, card.getId(), source, game)) {
-                        cards.add(card);
-                    }
-                }
-            }
-
-            // exile cost workaround: exile is bad, but exile from graveyard in most cases is good (more exiled -- more good things you get, e.g. delve's pay)
-            boolean isRealGood = outcome.isGood() || outcome == Outcome.Exile;
-            while ((isRealGood ? target.getTargets().size() < target.getMaxNumberOfTargets() : !target.isChosen(game))
-                    && !cards.isEmpty()) {
-                Card card = selectCard(abilityControllerId, cards, outcome, target, game);
-                if (card != null) {
-                    cards.remove(card); // selectCard don't remove cards (only on second+ tries)
-                    if (!target.contains(card.getId())) {
-                        target.add(card.getId(), game);
-                        isAddedSomething = true;
-                        if (target.isChosen(game)) {
-                            //return true; // TODO: why it add as much as possible instead go to isChosen check like above?
-                        }
-                    }
-                } else {
-                    break;
-                }
-            }
-
-            return isAddedSomething;
+        int xValue;
+        if (isManaPay) {
+            // as X mana payment - due available mana
+            xValue = Math.max(0, getAvailableManaProducers(game).size() - source.getManaCostsToPay().getUnpaid().manaValue());
+        } else {
+            // as X actions
+            xValue = RandomUtil.nextInt(realMax + 1);
         }
 
-        if (target.getOriginalTarget() instanceof TargetCardInYourGraveyard
-                || target.getOriginalTarget() instanceof TargetCardInASingleGraveyard) {
-            TargetCard originalTarget = (TargetCard) target.getOriginalTarget();
-            List<Card> cards = new ArrayList<>(game.getPlayer(abilityControllerId).getGraveyard().getCards(originalTarget.getFilter(), game));
-            while (!cards.isEmpty()) {
-                Card card = selectCard(abilityControllerId, cards, outcome, target, game);
-                if (card != null && !target.contains(card.getId())) {
-                    target.add(card.getId(), game);
-                    isAddedSomething = true;
-                    if (target.isChosen(game)) {
-                        return true;
-                    }
-                }
-            }
-            return isAddedSomething;
+        if (xValue > realMax) {
+            xValue = realMax;
+        }
+        if (xValue < realMin) {
+            xValue = realMin;
         }
 
-        if (target.getOriginalTarget() instanceof TargetCardInExile) {
-            FilterCard filter = null;
-            if (target.getOriginalTarget().getFilter() instanceof FilterCard) {
-                filter = (FilterCard) target.getOriginalTarget().getFilter();
-            }
-            if (filter == null) {
-                throw new IllegalStateException("Unsupported exile target filter in computer's choose method: "
-                        + target.getOriginalTarget().getClass().getCanonicalName());
-            }
-
-            List<Card> cards = game.getExile().getCards(filter, game);
-            while (!cards.isEmpty()) {
-                Card card = selectCard(abilityControllerId, cards, outcome, target, game);
-                if (card != null && !target.contains(card.getId())) {
-                    target.add(card.getId(), game);
-                    isAddedSomething = true;
-                    if (target.isChosen(game)) {
-                        return true;
-                    }
-                }
-            }
-            return isAddedSomething;
-        }
-
-        if (target.getOriginalTarget() instanceof TargetSource) {
-            Set<UUID> targets;
-            targets = target.possibleTargets(abilityControllerId, source, game);
-            for (UUID targetId : targets) {
-                MageObject targetObject = game.getObject(targetId);
-                if (targetObject != null) {
-                    if (target.canTarget(abilityControllerId, targetObject.getId(), source, game)) {
-                        if (!target.contains(targetObject.getId())) {
-                            target.add(targetObject.getId(), game);
-                            isAddedSomething = true;
-                            if (target.isChosen(game)) {
-                                return true;
-                            }
-                        }
-                    }
-                }
-            }
-            if (!required) {
-                return isAddedSomething;
-            }
-            throw new IllegalStateException("TargetSource wasn't handled in computer's choose method: " + target.getClass().getCanonicalName());
-        }
-
-        if (target.getOriginalTarget() instanceof TargetPermanentOrSuspendedCard) {
-            List<Card> cards = new ArrayList<>(new CardsImpl(possibleTargets).getCards(game));
-            while (!cards.isEmpty()) {
-                Card card = selectCard(abilityControllerId, cards, outcome, target, game);
-                if (card != null) {
-                    cards.remove(card); // selectCard don't remove cards (only on second+ tries)
-                    if (!target.contains(card.getId())) {
-                        target.add(card.getId(), game);
-                        isAddedSomething = true;
-                        if (target.isChosen(game)) {
-                            //return true; // TODO: why it add as much as possible instead go to isChosen check like above?
-                        }
-                    }
-                } else {
-                    break;
-                }
-            }
-            return isAddedSomething;
-        }
-
-        if (target.getOriginalTarget() instanceof TargetCard
-                && (target.getZone() == Zone.COMMAND)) { // Hellkite Courser
-            List<Card> cards = new ArrayList<>();
-            for (Player player : game.getPlayers().values()) {
-                for (Card card : game.getCommanderCardsFromCommandZone(player, CommanderCardType.COMMANDER_OR_OATHBREAKER)) {
-                    if (target.canTarget(abilityControllerId, card.getId(), source, game)) {
-                        cards.add(card);
-                    }
-                }
-            }
-            while (!cards.isEmpty()) {
-                Card card = selectCard(abilityControllerId, cards, outcome, target, game);
-                if (card != null) {
-                    cards.remove(card);
-                    if (!target.contains(card.getId())) {
-                        target.add(card.getId(), game);
-                        isAddedSomething = true;
-                        if (target.isChosen(game)) {
-                            //return true; // TODO: why it add as much as possible instead go to isChosen check like above?
-                        }
-                    }
-                } else {
-                    break;
-                }
-            }
-            return isAddedSomething;
-        }
-
-        throw new IllegalStateException("Target wasn't handled in computer's choose method: " + target.getClass().getCanonicalName());
-    } //end of choose method
+        return xValue;
+    }
 
     @Override
     public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
-        if (log.isDebugEnabled()) {
-            log.debug("chooseTarget: " + outcome.toString() + ':' + target.toString());
-        }
-
-        boolean isAddedSomething = false; // must return true on any changes in targets, so game can ask next choose dialog until finish
-
-        // target - real target, make all changes and add targets to it
-        // target.getOriginalTarget() - copy spell effect replaces original target with TargetWithAdditionalFilter
-        // use originalTarget to get filters and target class info
-        // source can be null (as example: legendary rule permanent selection)
-        UUID sourceId = source != null ? source.getSourceId() : null;
-
-        // sometimes a target selection can be made from a player that does not control the ability
-        UUID abilityControllerId = playerId;
-        if (target.getAbilityController() != null) {
-            abilityControllerId = target.getAbilityController();
-        }
-
-        boolean required = target.isRequired(sourceId, game);
-        Set<UUID> possibleTargets = target.possibleTargets(abilityControllerId, source, game);
-        if (possibleTargets.isEmpty() || target.getTargets().size() >= target.getMinNumberOfTargets()) {
-            required = false;
-        }
-
-        List<Permanent> goodList = new ArrayList<>();
-        List<Permanent> badList = new ArrayList<>();
-        List<Permanent> allList = new ArrayList<>();
-
-        UUID randomOpponentId = getRandomOpponent(game);
-
-        if (target.getOriginalTarget() instanceof TargetPlayer) {
-            return selectPlayerTarget(outcome, target, source, abilityControllerId, randomOpponentId, game, required);
-        }
-
-        // Angel of Serenity trigger
-        if (target.getOriginalTarget() instanceof TargetCardInGraveyardBattlefieldOrStack) {
-            List<Card> cards = new ArrayList<>(new CardsImpl(possibleTargets).getCards(game));
-            isAddedSomething = false;
-            for (Card card : cards) {
-                // check permanents first; they have more intrinsic worth
-                if (card instanceof Permanent) {
-                    Permanent p = ((Permanent) card);
-                    if (outcome.isGood()
-                            && p.isControlledBy(abilityControllerId)) {
-                        if (target.canTarget(abilityControllerId, p.getId(), source, game) && !target.contains(p.getId())) {
-                            if (target.getTargets().size() >= target.getMaxNumberOfTargets()) {
-                                break;
-                            }
-                            target.addTarget(p.getId(), source, game);
-                            isAddedSomething = true;
-                            if (target.isChoiceCompleted(game)) {
-                                return true;
-                            }
-                        }
-                    }
-                    if (!outcome.isGood()
-                            && !p.isControlledBy(abilityControllerId)) {
-                        if (target.canTarget(abilityControllerId, p.getId(), source, game) && !target.contains(p.getId())) {
-                            if (target.getTargets().size() >= target.getMaxNumberOfTargets()) {
-                                break;
-                            }
-                            target.addTarget(p.getId(), source, game);
-                            isAddedSomething = true;
-                            if (target.isChoiceCompleted(game)) {
-                                return true;
-                            }
-                        }
-                    }
-                }
-                // check the graveyards last
-                if (game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {
-                    if (outcome.isGood()
-                            && card.isOwnedBy(abilityControllerId)) {
-                        if (target.canTarget(abilityControllerId, card.getId(), source, game) && !target.contains(card.getId())) {
-                            if (target.getTargets().size() >= target.getMaxNumberOfTargets()) {
-                                break;
-                            }
-                            target.addTarget(card.getId(), source, game);
-                            isAddedSomething = true;
-                            if (target.isChoiceCompleted(game)) {
-                                return true;
-                            }
-                        }
-                    }
-                    if (!outcome.isGood()
-                            && !card.isOwnedBy(abilityControllerId)) {
-                        if (target.canTarget(abilityControllerId, card.getId(), source, game) && !target.contains(card.getId())) {
-                            if (target.getTargets().size() >= target.getMaxNumberOfTargets()) {
-                                break;
-                            }
-                            target.addTarget(card.getId(), source, game);
-                            isAddedSomething = true;
-                            if (target.isChoiceCompleted(game)) {
-                                return true;
-                            }
-                        }
-                    }
-                }
-            }
-            return isAddedSomething;
-        }
-
-        if (target.getOriginalTarget() instanceof TargetDiscard
-                || target.getOriginalTarget() instanceof TargetCardInHand) {
-            isAddedSomething = false;
-            if (outcome.isGood()) {
-                // good - choose max possible
-                Cards cards = new CardsImpl(possibleTargets);
-                List<Card> cardsInHand = new ArrayList<>(cards.getCards(game));
-                while (!target.isChosen(game)
-                        && !cardsInHand.isEmpty()
-                        && target.getMaxNumberOfTargets() > target.getTargets().size()) {
-                    Card card = selectBestCardTarget(cardsInHand, Collections.emptyList(), target, source, game);
-                    if (card != null) {
-                        if (target.canTarget(abilityControllerId, card.getId(), source, game) && !target.contains(card.getId())) {
-                            target.addTarget(card.getId(), source, game);
-                            isAddedSomething = true;
-                            if (target.isChoiceCompleted(game)) {
-                                return true;
-                            }
-                        }
-                        cardsInHand.remove(card);
-                    }
-                }
-            } else {
-                // bad - choose the lowest possible
-                findPlayables(game);
-                for (Card card : unplayable.values()) {
-                    if (target.isChosen(game)) {
-                        return isAddedSomething;
-                    }
-                    if (possibleTargets.contains(card.getId())
-                            && target.canTarget(abilityControllerId, card.getId(), source, game)
-                            && !target.contains(card.getId())) {
-                        target.addTarget(card.getId(), source, game);
-                        isAddedSomething = true;
-                        if (target.isChosen(game)) {
-                            return isAddedSomething;
-                        }
-                    }
-                }
-                if (!hand.isEmpty()) {
-                    for (Card card : hand.getCards(game)) {
-                        if (target.isChosen(game)) {
-                            return isAddedSomething;
-                        }
-                        if (possibleTargets.contains(card.getId())
-                                && target.canTarget(abilityControllerId, card.getId(), source, game)
-                                && !target.contains(card.getId())) {
-                            target.addTarget(card.getId(), source, game);
-                            isAddedSomething = true;
-                            if (target.isChosen(game)) {
-                                return isAddedSomething;
-                            }
-                        }
-                    }
-                }
-            }
-            return isAddedSomething;
-        }
-
-        if (target.getOriginalTarget() instanceof TargetControlledPermanent
-                || target.getOriginalTarget() instanceof TargetSacrifice) {
-            TargetPermanent origTarget = (TargetPermanent) target.getOriginalTarget();
-            List<Permanent> targets;
-            targets = threats(abilityControllerId, source, origTarget.getFilter(), game, target.getTargets());
-            if (!outcome.isGood()) {
-                Collections.reverse(targets);
-            }
-            isAddedSomething = false;
-            for (Permanent permanent : targets) {
-                if (target.canTarget(abilityControllerId, permanent.getId(), source, game) && !target.contains(permanent.getId())) {
-                    target.addTarget(permanent.getId(), source, game);
-                    isAddedSomething = true;
-                    if (target.getMinNumberOfTargets() <= target.getTargets().size() && (!outcome.isGood() || target.getMaxNumberOfTargets() <= target.getTargets().size())) {
-                        return true; // TODO: need research - is it good optimization for good/bad effects?
-                    }
-                }
-            }
-            return isAddedSomething;
-
-        }
-
-        // TODO: implemented findBestPlayerTargets
-        // TODO: add findBest*Targets for all target types
-        // TODO: Much of this code needs to be re-written to move code into Target.possibleTargets
-        //       A) Having it here makes this function ridiculously long
-        //       B) Each time a new target type is added, people must remember to add it here
-        if (target.getOriginalTarget() instanceof TargetPermanent) {
-            FilterPermanent filter = null;
-            if (target.getOriginalTarget().getFilter() instanceof FilterPermanent) {
-                filter = (FilterPermanent) target.getOriginalTarget().getFilter();
-            }
-            if (filter == null) {
-                throw new IllegalStateException("Unsupported permanent filter in computer's chooseTarget method: "
-                        + target.getOriginalTarget().getClass().getCanonicalName());
-            }
-
-            findBestPermanentTargets(outcome, abilityControllerId, sourceId, source, filter,
-                    game, target, goodList, badList, allList);
-
-            // use good list all the time and add maximum targets
-            isAddedSomething = false;
-            for (Permanent permanent : goodList) {
-                if (target.canTarget(abilityControllerId, permanent.getId(), source, game) && !target.contains(permanent.getId())) {
-                    if (target.getTargets().size() >= target.getMaxNumberOfTargets()) {
-                        break;
-                    }
-                    target.addTarget(permanent.getId(), source, game);
-                    isAddedSomething = true;
-                }
-            }
-
-            // use bad list only on required target and add minimum targets
-            if (required) {
-                for (Permanent permanent : badList) {
-                    if (target.canTarget(abilityControllerId, permanent.getId(), source, game) && !target.contains(permanent.getId())) {
-                        if (target.getTargets().size() >= target.getMinNumberOfTargets()) {
-                            break;
-                        }
-                        target.addTarget(permanent.getId(), source, game);
-                        isAddedSomething = true;
-                    }
-                }
-            }
-            return isAddedSomething;
-        }
-
-        if (target.getOriginalTarget() instanceof TargetAnyTarget) {
-            List<Permanent> targets;
-            TargetAnyTarget origTarget = ((TargetAnyTarget) target.getOriginalTarget());
-            if (outcome.isGood()) {
-                targets = threats(abilityControllerId, source, ((FilterAnyTarget) origTarget.getFilter()).getPermanentFilter(), game, target.getTargets());
-            } else {
-                targets = threats(randomOpponentId, source, ((FilterAnyTarget) origTarget.getFilter()).getPermanentFilter(), game, target.getTargets());
-            }
-
-            if (targets.isEmpty()) {
-                if (outcome.isGood()) {
-                    if (target.canTarget(abilityControllerId, getId(), source, game) && !target.contains(getId())) {
-                        return tryAddTarget(target, getId(), source, game);
-                    }
-                } else if (target.canTarget(abilityControllerId, randomOpponentId, source, game) && !target.contains(randomOpponentId)) {
-                    return tryAddTarget(target, randomOpponentId, source, game);
-                }
-            }
-
-            if (targets.isEmpty() && required) {
-                targets = game.getBattlefield().getActivePermanents(((FilterAnyTarget) origTarget.getFilter()).getPermanentFilter(), playerId, game);
-            }
-            for (Permanent permanent : targets) {
-                List<UUID> alreadyTargeted = target.getTargets();
-                if (target.canTarget(abilityControllerId, permanent.getId(), source, game) && !target.contains(permanent.getId())) {
-                    if (alreadyTargeted != null && !alreadyTargeted.contains(permanent.getId())) {
-                        tryAddTarget(target, permanent.getId(), source, game);
-                    }
-                }
-            }
-
-            if (outcome.isGood()) {
-                if (target.canTarget(abilityControllerId, getId(), source, game) && !target.contains(getId())) {
-                    return tryAddTarget(target, getId(), source, game);
-                }
-            } else if (target.canTarget(abilityControllerId, randomOpponentId, source, game) && !target.contains(randomOpponentId)) {
-                return tryAddTarget(target, randomOpponentId, source, game);
-            }
-
-            //if (!target.isRequired())
-            return false;
-        }
-
-        if (target.getOriginalTarget() instanceof TargetPermanentOrPlayer) {
-            List<Permanent> targets;
-            TargetPermanentOrPlayer origTarget = ((TargetPermanentOrPlayer) target.getOriginalTarget());
-
-            // TODO: in multiplayer game there many opponents - if random opponents don't have targets then AI must use next opponent, but it skips
-            //  (e.g. you randomOpponentId must be replaced by List<UUID> randomOpponents)
-            // normal cycle (good for you, bad for opponents)
-            // possible good/bad permanents
-            if (outcome.isGood()) {
-                targets = threats(abilityControllerId, source, ((FilterPermanentOrPlayer) target.getFilter()).getPermanentFilter(), game, target.getTargets());
-            } else {
-                targets = threats(randomOpponentId, source, ((FilterPermanentOrPlayer) target.getFilter()).getPermanentFilter(), game, target.getTargets());
-            }
-
-            // possible good/bad players
-            if (targets.isEmpty()) {
-                if (outcome.isGood()) {
-                    if (target.canTarget(abilityControllerId, getId(), source, game) && !target.contains(getId())) {
-                        return tryAddTarget(target, getId(), source, game);
-                    }
-                } else if (target.canTarget(abilityControllerId, randomOpponentId, source, game) && !target.contains(randomOpponentId)) {
-                    return tryAddTarget(target, randomOpponentId, source, game);
-                }
-            }
-
-            // can't find targets (e.g. effect is bad, but you need take targets from yourself)
-            if (targets.isEmpty() && required) {
-                targets = game.getBattlefield().getActivePermanents(origTarget.getFilterPermanent(), playerId, game);
-            }
-
-            // try target permanent
-            for (Permanent permanent : targets) {
-                if (target.canTarget(abilityControllerId, permanent.getId(), source, game) && !target.contains(permanent.getId())) {
-                    return tryAddTarget(target, permanent.getId(), source, game);
-                }
-            }
-
-            // try target player as normal
-            if (outcome.isGood()) {
-                if (target.canTarget(abilityControllerId, getId(), source, game) && !target.contains(getId())) {
-                    return tryAddTarget(target, getId(), source, game);
-                }
-            } else if (target.canTarget(abilityControllerId, randomOpponentId, source, game) && !target.contains(randomOpponentId)) {
-                return tryAddTarget(target, randomOpponentId, source, game);
-            }
-
-            // try target player as bad (bad on itself, good on opponent)
-            for (UUID opponentId : game.getOpponents(getId(), true)) {
-                if (target.canTarget(abilityControllerId, opponentId, source, game) && !target.contains(opponentId)) {
-                    return tryAddTarget(target, opponentId, source, game);
-                }
-            }
-            if (target.canTarget(abilityControllerId, getId(), source, game) && !target.contains(getId())) {
-                return tryAddTarget(target, getId(), source, game);
-            }
-
-            return false;
-        }
-
-        if (target.getOriginalTarget() instanceof TargetCardInGraveyard) {
-            List<Card> cards = new ArrayList<>();
-            for (Player player : game.getPlayers().values()) {
-                cards.addAll(player.getGraveyard().getCards(game));
-            }
-            Card card = selectCardTarget(abilityControllerId, cards, outcome, target, source, game);
-            if (card != null && !target.contains(card.getId())) {
-                return tryAddTarget(target, card.getId(), source, game);
-            }
-            //if (!target.isRequired())
-            return false;
-        }
-
-        if (target.getOriginalTarget() instanceof TargetCardInLibrary) {
-            List<Card> cards = new ArrayList<>(game.getPlayer(abilityControllerId).getLibrary().getCards(game));
-            Card card = selectCardTarget(abilityControllerId, cards, outcome, target, source, game);
-            if (card != null && !target.contains(card.getId())) {
-                return tryAddTarget(target, card.getId(), source, game);
-            }
-            return false;
-        }
-
-        if (target.getOriginalTarget() instanceof TargetCardInYourGraveyard) {
-            List<Card> cards = new ArrayList<>(game.getPlayer(abilityControllerId).getGraveyard().getCards((FilterCard) target.getFilter(), game));
-            isAddedSomething = false;
-            while (!target.isChosen(game) && !cards.isEmpty()) {
-                Card card = selectCardTarget(abilityControllerId, cards, outcome, target, source, game);
-                if (card != null) {
-                    cards.remove(card); // selectCard don't remove cards (only on second+ tries)
-                    if (!target.contains(card.getId())) {
-                        target.addTarget(card.getId(), source, game); // TODO: why it add as much as possible instead go to isChosen check like above in choose?
-                        isAddedSomething = true;
-                        if (target.isChoiceCompleted(game)) {
-                            return true;
-                        }
-                    }
-                } else {
-                    break;
-                }
-            }
-            return isAddedSomething;
-        }
-
-        if (target.getOriginalTarget() instanceof TargetSpell
-                || target.getOriginalTarget() instanceof TargetStackObject) {
-            if (!game.getStack().isEmpty()) {
-                for (StackObject o : game.getStack()) {
-                    if (o instanceof Spell
-                            && !source.getId().equals(o.getStackAbility().getId())
-                            && target.canTarget(abilityControllerId, o.getStackAbility().getId(), source, game)
-                            && !target.contains(o.getId())) {
-                        return tryAddTarget(target, o.getId(), source, game);
-                    }
-                }
-            }
-            return false;
-        }
-
-        if (target.getOriginalTarget() instanceof TargetSpellOrPermanent) {
-            // TODO: Also check if a spell should be selected
-            TargetSpellOrPermanent origTarget = (TargetSpellOrPermanent) target.getOriginalTarget();
-            List<Permanent> targets;
-            boolean outcomeTargets = true;
-            if (outcome.isGood()) {
-                targets = threats(abilityControllerId, source, origTarget.getPermanentFilter(), game, target.getTargets());
-            } else {
-                targets = threats(randomOpponentId, source, origTarget.getPermanentFilter(), game, target.getTargets());
-            }
-            if (targets.isEmpty() && required) {
-                targets = threats(null, source, origTarget.getPermanentFilter(), game, target.getTargets());
-                Collections.reverse(targets);
-                outcomeTargets = false;
-            }
-            for (Permanent permanent : targets) {
-                if (target.canTarget(abilityControllerId, permanent.getId(), source, game) && !target.contains(permanent.getId())) {
-                    target.addTarget(permanent.getId(), source, game);
-                    if (!outcomeTargets || target.getMaxNumberOfTargets() <= target.getTargets().size()) {
-                        return true; // TODO: need logic research (e.g. select as much as possible on good outcome?)
-                    }
-                }
-            }
-            if (!game.getStack().isEmpty()) {
-                for (StackObject stackObject : game.getStack()) {
-                    if (stackObject instanceof Spell && source != null && !source.getId().equals(stackObject.getStackAbility().getId())) {
-                        if (target.getFilter().match(stackObject, game) && !target.contains(stackObject.getId())) {
-                            return tryAddTarget(target, stackObject.getId(), source, game);
-                        }
-                    }
-                }
-            }
-            return false;
-        }
-
-        if (target.getOriginalTarget() instanceof TargetCardInOpponentsGraveyard) {
-            List<Card> cards = new ArrayList<>();
-            for (UUID uuid : game.getOpponents(getId(), true)) {
-                Player player = game.getPlayer(uuid);
-                if (player != null) {
-                    cards.addAll(player.getGraveyard().getCards(game));
-                }
-            }
-            isAddedSomething = false;
-            while (!cards.isEmpty()) {
-                Card card = selectCardTarget(abilityControllerId, cards, outcome, target, source, game);
-                if (card != null) {
-                    cards.remove(card); // selectCard don't remove cards (only on second+ tries)
-                    if (!target.contains(card.getId())) {
-                        isAddedSomething = true;
-                        target.addTarget(card.getId(), source, game);
-                        if (target.isChoiceCompleted(game)) {
-                            return true;
-                        }
-                    }
-                } else {
-                    break;
-                }
-            }
-            //if (!target.isRequired())
-            return isAddedSomething;
-        }
-
-        if (target.getOriginalTarget() instanceof TargetDefender) {
-            List<UUID> targets = new ArrayList<>(possibleTargets);
-            isAddedSomething = false;
-            while (!targets.isEmpty()) {
-                UUID randomDefender = RandomUtil.randomFromCollection(possibleTargets);
-                if (randomDefender != null) {
-                    targets.remove(randomDefender);
-                    if (!target.contains(randomDefender)) {
-                        isAddedSomething = true;
-                        target.addTarget(randomDefender, source, game);
-                        if (target.isChoiceCompleted(game)) {
-                            return true;
-                        }
-                    }
-                } else {
-                    break;
-                }
-            }
-            return isAddedSomething;
-        }
-
-        if (target.getOriginalTarget() instanceof TargetCardInASingleGraveyard) {
-            List<Card> cards = new ArrayList<>();
-            for (Player player : game.getPlayers().values()) {
-                cards.addAll(player.getGraveyard().getCards(game));
-            }
-            isAddedSomething = false;
-            while (!cards.isEmpty()) {
-                Card card = selectCardTarget(abilityControllerId, cards, outcome, target, source, game);
-                if (card != null) {
-                    cards.remove(card); // selectCard don't remove cards (only on second+ tries)
-                    if (!target.contains(card.getId())) {
-                        isAddedSomething = true;
-                        target.addTarget(card.getId(), source, game);
-                        if (target.isChoiceCompleted(game)) {
-                            return true;
-                        }
-                    }
-                } else {
-                    break;
-                }
-            }
-            return isAddedSomething;
-        }
-
-        if (target.getOriginalTarget() instanceof TargetCardInExile) {
-            FilterCard filter = null;
-            if (target.getOriginalTarget().getFilter() instanceof FilterCard) {
-                filter = (FilterCard) target.getOriginalTarget().getFilter();
-            }
-            if (filter == null) {
-                throw new IllegalStateException("Unsupported exile target filter in computer's chooseTarget method: "
-                        + target.getOriginalTarget().getClass().getCanonicalName());
-            }
-
-            List<Card> cards = new ArrayList<>();
-            for (UUID uuid : target.possibleTargets(source.getControllerId(), source, game)) {
-                Card card = game.getCard(uuid);
-                if (card != null && game.getState().getZone(card.getId()) == Zone.EXILED) {
-                    cards.add(card);
-                }
-            }
-            isAddedSomething = false;
-            while (!cards.isEmpty()) {
-                Card card = selectCardTarget(abilityControllerId, cards, outcome, target, source, game);
-                if (card != null) {
-                    cards.remove(card); // selectCard don't remove cards (only on second+ tries)
-                    if (!target.contains(card.getId())) {
-                        isAddedSomething = true;
-                        target.addTarget(card.getId(), source, game);
-                        if (target.isChoiceCompleted(game)) {
-                            return true;
-                        }
-                    }
-                } else {
-                    break;
-                }
-            }
-            return isAddedSomething;
-        }
-
-        if (target.getOriginalTarget() instanceof TargetActivatedAbility) {
-            List<StackObject> stackObjects = new ArrayList<>();
-            for (UUID uuid : target.possibleTargets(source.getControllerId(), source, game)) {
-                StackObject stackObject = game.getStack().getStackObject(uuid);
-                if (stackObject != null) {
-                    stackObjects.add(stackObject);
-                }
-            }
-            while (!stackObjects.isEmpty()) {
-                StackObject pick = stackObjects.get(0);
-                if (pick != null) {
-                    stackObjects.remove(0);
-                    if (!target.contains(pick.getId())) {
-                        isAddedSomething = true;
-                        target.addTarget(pick.getId(), source, game);
-                        if (target.isChoiceCompleted(game)) {
-                            return true;
-                        }
-                    }
-                } else {
-                    break;
-                }
-            }
-            return isAddedSomething;
-        }
-
-        if (target.getOriginalTarget() instanceof TargetActivatedOrTriggeredAbility) {
-            List<UUID> targets = new ArrayList<>(target.possibleTargets(source.getControllerId(), source, game));
-            isAddedSomething = false;
-            while (!targets.isEmpty()) {
-                UUID id = targets.get(0);
-                if (id != null) {
-                    targets.remove(0);
-                    if (!target.contains(id)) {
-                        isAddedSomething = true;
-                        target.addTarget(id, source, game);
-                        if (target.isChoiceCompleted(game)) {
-                            return true;
-                        }
-                    }
-                } else {
-                    break;
-                }
-            }
-            return isAddedSomething;
-        }
-
-        if (target.getOriginalTarget() instanceof TargetCardInGraveyardBattlefieldOrStack) {
-            List<Card> cards = new ArrayList<>();
-            for (Player player : game.getPlayers().values()) {
-                cards.addAll(player.getGraveyard().getCards(game));
-                cards.addAll(game.getBattlefield().getAllActivePermanents(new FilterPermanent(), player.getId(), game));
-            }
-            while (!cards.isEmpty()) {
-                Card card = selectCardTarget(abilityControllerId, cards, outcome, target, source, game);
-                if (card != null) {
-                    cards.remove(card); // selectCard don't remove cards (only on second+ tries)
-                    if (!target.contains(card.getId())) {
-                        isAddedSomething = true;
-                        target.addTarget(card.getId(), source, game);
-                        if (target.isChoiceCompleted(game)) {
-                            return true;
-                        }
-                    }
-                } else {
-                    break;
-                }
-            }
-        }
-
-        if (target.getOriginalTarget() instanceof TargetPermanentOrSuspendedCard) {
-            List<Card> cards = new ArrayList<>(new CardsImpl(possibleTargets).getCards(game));
-            isAddedSomething = false;
-            while (!cards.isEmpty()) {
-                Card card = selectCardTarget(abilityControllerId, cards, outcome, target, source, game);
-                if (card != null) {
-                    cards.remove(card); // selectCard don't remove cards (only on second+ tries)
-                    if (!target.contains(card.getId())) {
-                        isAddedSomething = true;
-                        target.addTarget(card.getId(), source, game);
-                        if (target.isChoiceCompleted(game)) {
-                            return true;
-                        }
-                    }
-                } else {
-                    break;
-                }
-            }
-            return isAddedSomething;
-        }
-
-        throw new IllegalStateException("Target wasn't handled in computer's chooseTarget method: " + target.getClass().getCanonicalName());
-    } //end of chooseTarget method
+        return makeChoice(outcome, target, source, game, null);
+    }
 
     @Deprecated // TODO: replace by source only version
     protected Card selectCard(UUID abilityControllerId, List<Card> cards, Outcome outcome, Target target, Game game) {
         return selectCardInner(abilityControllerId, cards, outcome, target, null, game);
-    }
-
-    protected Card selectCardTarget(UUID abilityControllerId, List<Card> cards, Outcome outcome, Target target, Ability targetingSource, Game game) {
-        return selectCardInner(abilityControllerId, cards, outcome, target, targetingSource, game);
     }
 
     /**
@@ -1255,9 +274,6 @@ public class ComputerPlayer extends PlayerImpl {
     @Override
     public boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Ability source, Game game) {
         // TODO: make same code for chooseTarget (without filter and target type dependence)
-        if (log.isDebugEnabled()) {
-            log.debug("chooseTarget: " + outcome.toString() + ':' + target.toString());
-        }
 
         if (target.getAmountRemaining() <= 0) {
             return false;
@@ -1360,7 +376,7 @@ public class ComputerPlayer extends PlayerImpl {
                 targets = threats(opponentId, source, StaticFilters.FILTER_PERMANENT, game, target.getTargets(), false);
             }
 
-            // creatures - non killable (TODO: add extra skill checks like undestructeable)
+            // creatures - non killable (TODO: add extra skill checks like indestructible)
             for (Permanent permanent : targets) {
                 if (permanent.isCreature(game) && target.canTarget(abilityControllerId, permanent.getId(), source, game)) {
                     int safeDamage = Math.min(permanent.getToughness().getValue() - 1, target.getAmountRemaining());
@@ -1409,6 +425,7 @@ public class ComputerPlayer extends PlayerImpl {
     }
 
     private boolean priorityPlay(Game game) {
+        // TODO: simplify and delete, never called in real game due ComputerPlayer7's simulations usage
         UUID opponentId = getRandomOpponent(game);
         if (game.isActivePlayer(playerId)) {
             if (game.isMainPhase() && game.getStack().isEmpty()) {
@@ -1499,7 +516,6 @@ public class ComputerPlayer extends PlayerImpl {
     } // end priorityPlay method
 
     protected void playLand(Game game) {
-        log.debug("playLand");
         Set<Card> lands = new LinkedHashSet<>();
         for (Card landCard : hand.getCards(new FilterLandCard(), game)) {
             // remove lands that can not be played
@@ -1525,7 +541,6 @@ public class ComputerPlayer extends PlayerImpl {
     }
 
     protected void playALand(Set<Card> lands, Game game) {
-        log.debug("playALand");
         //play a land that will allow us to play an unplayable
         for (Mana mana : unplayable.keySet()) {
             for (Card card : lands) {
@@ -1559,6 +574,7 @@ public class ComputerPlayer extends PlayerImpl {
         lands.remove(lands.iterator().next());
     }
 
+    @Deprecated // TODO: delete after target rework
     protected void findPlayables(Game game) {
         playableInstant.clear();
         playableNonInstant.clear();
@@ -1643,9 +659,6 @@ public class ComputerPlayer extends PlayerImpl {
                 }
             }
         }
-        if (log.isDebugEnabled()) {
-            log.debug("findPlayables: " + playableInstant.toString() + "---" + playableNonInstant.toString() + "---" + playableAbilities.toString());
-        }
     }
 
     @Override
@@ -1686,7 +699,7 @@ public class ComputerPlayer extends PlayerImpl {
                 for (Mana mana : manaAbility.getNetMana(game)) {
                     // if mana ability can produce non-useful mana then ignore whole ability here (example: {R} or {G})
                     // (AI can't choose a good mana option, so make sure any selection option will be compatible with cost)
-                    // AI support {Any} choice by lastUnpaidMana, so it can safly used in includesMana
+                    // AI support {Any} choice by lastUnpaidMana, so it can safety used in includesMana
                     if (!unpaid.getMana().includesMana(mana)) {
                         continue ManaAbility;
                     } else if (mana.getAny() > 0) {
@@ -1791,7 +804,7 @@ public class ComputerPlayer extends PlayerImpl {
                     }
                 }
             }
-            // then pay colorless hybrid - more restrictive than mono hybrid
+            // then pay colorless hybrid - more restrictive than monohybrid
             for (ActivatedManaAbilityImpl manaAbility : getManaAbilitiesSortedByManaCount(mageObject, game)) {
                 if (cost instanceof ColorlessHybridManaCost) {
                     for (Mana netMana : manaAbility.getNetMana(game)) {
@@ -1809,7 +822,7 @@ public class ComputerPlayer extends PlayerImpl {
                     }
                 }
             }
-            // then pay mono hybrid
+            // then pay monohybrid
             for (ActivatedManaAbilityImpl manaAbility : getManaAbilitiesSortedByManaCount(mageObject, game)) {
                 if (cost instanceof MonoHybridManaCost) {
                     for (Mana netMana : manaAbility.getNetMana(game)) {
@@ -1913,7 +926,7 @@ public class ComputerPlayer extends PlayerImpl {
             );
         }
 
-        // cost can contains multiple mana types, must check each type (is it possible to pay a cost)
+        // cost can contain multiple mana types, must check each type (is it possible to pay a cost)
         for (ManaType checkType : ManaUtil.getManaTypesInCost(checkCost)) {
             // affected asThoughMana effect must fit a checkType with pool mana
             ManaType possibleAsThoughPoolManaType = game.getContinuousEffects().asThoughMana(checkType, possiblePoolItem, abilityToPay.getSourceId(), abilityToPay, abilityToPay.getControllerId(), game);
@@ -1922,10 +935,10 @@ public class ComputerPlayer extends PlayerImpl {
             }
             boolean canPay;
             if (possibleAsThoughPoolManaType == ManaType.COLORLESS) {
-                // colorless can be payed by any color from the pool
+                // colorless can be paid by any color from the pool
                 canPay = possiblePoolItem.count() > 0;
             } else {
-                // colored must be payed by specific color from the pool (AsThough already changed it to fit with mana pool)
+                // colored must be paid by specific color from the pool (AsThough already changed it to fit with mana pool)
                 canPay = possiblePoolItem.get(possibleAsThoughPoolManaType) > 0;
             }
             if (canPay) {
@@ -1940,23 +953,20 @@ public class ComputerPlayer extends PlayerImpl {
         Abilities<ActivatedManaAbilityImpl> manaAbilities = mageObject.getAbilities().getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, playerId, game);
         if (manaAbilities.size() > 1) {
             // Sort mana abilities by number of produced manas, to use ability first that produces most mana (maybe also conditional if possible)
-            Collections.sort(manaAbilities, new Comparator<ActivatedManaAbilityImpl>() {
-                @Override
-                public int compare(ActivatedManaAbilityImpl a1, ActivatedManaAbilityImpl a2) {
-                    int a1Max = 0;
-                    for (Mana netMana : a1.getNetMana(game)) {
-                        if (netMana.count() > a1Max) {
-                            a1Max = netMana.count();
-                        }
+            Collections.sort(manaAbilities, (a1, a2) -> {
+                int a1Max = 0;
+                for (Mana netMana : a1.getNetMana(game)) {
+                    if (netMana.count() > a1Max) {
+                        a1Max = netMana.count();
                     }
-                    int a2Max = 0;
-                    for (Mana netMana : a2.getNetMana(game)) {
-                        if (netMana.count() > a2Max) {
-                            a2Max = netMana.count();
-                        }
-                    }
-                    return CardUtil.overflowDec(a2Max, a1Max);
                 }
+                int a2Max = 0;
+                for (Mana netMana : a2.getNetMana(game)) {
+                    if (netMana.count() > a2Max) {
+                        a2Max = netMana.count();
+                    }
+                }
+                return CardUtil.overflowDec(a2Max, a1Max);
             });
         }
         return manaAbilities;
@@ -1972,7 +982,6 @@ public class ComputerPlayer extends PlayerImpl {
      * costs that can't be paid by any other producers
      *
      * @param unpaid - the amount of unpaid mana costs
-     * @param game
      * @return List<Permanent>
      */
     private List<MageObject> getSortedProducers(ManaCosts<ManaCost> unpaid, Game game) {
@@ -2008,12 +1017,7 @@ public class ComputerPlayer extends PlayerImpl {
 
     private List<MageObject> sortByValue(Map<MageObject, Integer> map) {
         List<Entry<MageObject, Integer>> list = new LinkedList<>(map.entrySet());
-        Collections.sort(list, new Comparator<Entry<MageObject, Integer>>() {
-            @Override
-            public int compare(Entry<MageObject, Integer> o1, Entry<MageObject, Integer> o2) {
-                return (o1.getValue().compareTo(o2.getValue()));
-            }
-        });
+        Collections.sort(list, Comparator.comparing(Entry::getValue));
         List<MageObject> result = new ArrayList<>();
         for (Entry<MageObject, Integer> entry : list) {
             result.add(entry.getKey());
@@ -2023,39 +1027,7 @@ public class ComputerPlayer extends PlayerImpl {
 
     @Override
     public int announceX(int min, int max, String message, Game game, Ability source, boolean isManaPay) {
-        // fast calc on nothing to choose
-        if (min >= max) {
-            return min;
-        }
-
-        // TODO: add good/bad effects support
-        // TODO: add simple game simulations like declare blocker (need to find only workable payment)?
-        // TODO: remove random logic or make it more stable (e.g. use same value in same game cycle)
-
-        // protection from too big values
-        int realMin = min;
-        int realMax = max;
-        if (max == Integer.MAX_VALUE) {
-            realMax = Math.max(realMin, 10); // AI don't need huge values for X, cause can't use infinite combos
-        }
-
-        int xValue;
-        if (isManaPay) {
-            // as X mana payment - due available mana
-            xValue = Math.max(0, getAvailableManaProducers(game).size() - source.getManaCostsToPay().getUnpaid().manaValue());
-        } else {
-            // as X actions
-            xValue = RandomUtil.nextInt(realMax + 1);
-        }
-
-        if (xValue > realMax) {
-            xValue = realMax;
-        }
-        if (xValue < realMin) {
-            xValue = realMin;
-        }
-
-        return xValue;
+        return makeChoiceAmount(min, max, game, source, isManaPay);
     }
 
     @Override
@@ -2069,12 +1041,11 @@ public class ComputerPlayer extends PlayerImpl {
 
     @Override
     public boolean chooseUse(Outcome outcome, String message, Ability source, Game game) {
-        return this.chooseUse(outcome, message, null, null, null, source, game);
+        return chooseUse(outcome, message, null, null, null, source, game);
     }
 
     @Override
     public boolean chooseUse(Outcome outcome, String message, String secondMessage, String trueText, String falseText, Ability source, Game game) {
-        log.debug("chooseUse: " + outcome.isGood());
         // Be proactive! Always use abilities, the evaluation function will decide if it's good or not
         // Otherwise some abilities won't be used by AI like LoseTargetEffect that has "bad" outcome
         // but still is good when targets opponent
@@ -2083,7 +1054,6 @@ public class ComputerPlayer extends PlayerImpl {
 
     @Override
     public boolean choose(Outcome outcome, Choice choice, Game game) {
-        log.debug("choose 3");
         //TODO: improve this
 
         // choose creature type
@@ -2190,86 +1160,22 @@ public class ComputerPlayer extends PlayerImpl {
 
     @Override
     public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
-        if (cards == null || cards.isEmpty()) {
-            return false;
-        }
-
-        boolean isAddedSomething = false; // must return true on any changes in targets, so game can ask next choose dialog until finish
-
-        // sometimes a target selection can be made from a player that does not control the ability
-        UUID abilityControllerId = playerId;
-        if (target.getTargetController() != null
-                && target.getAbilityController() != null) {
-            abilityControllerId = target.getAbilityController();
-        }
-
-        // we still use playerId when getting cards even if they don't control the search
-        List<Card> cardChoices = new ArrayList<>(cards.getCards(target.getFilter(), playerId, source, game));
-        isAddedSomething = false;
-        while (!cardChoices.isEmpty()) {
-            Card card = selectCardTarget(abilityControllerId, cardChoices, outcome, target, source, game);
-            if (card != null) {
-                cardChoices.remove(card); // selectCard don't remove cards (only on second+ tries)
-                if (!target.contains(card.getId())) {
-                    target.addTarget(card.getId(), source, game);
-                    isAddedSomething = true;
-                    if (target.isChoiceCompleted(game)) {
-                        return true;
-                    }
-                }
-            } else {
-                break;
-            }
-
-            // try to fill as much as possible for good effect (see while end) or half for bad (see if)
-            if (target.isChosen(game) && !outcome.isGood() && target.getTargets().size() > target.getMinNumberOfTargets() + (target.getMaxNumberOfTargets() - target.getMinNumberOfTargets()) / 2) {
-                return true;
-            }
-        }
-        return isAddedSomething;
+        return makeChoice(outcome, target, source, game, cards);
     }
 
     @Override
     public boolean choose(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
-        log.debug("choose 2");
-        if (cards == null || cards.isEmpty()) {
-            return true;
-        }
-
-        // sometimes a target selection can be made from a player that does not control the ability
-        UUID abilityControllerId = playerId;
-        if (target.getTargetController() != null
-                && target.getAbilityController() != null) {
-            abilityControllerId = target.getAbilityController();
-        }
-
-        List<Card> cardChoices = new ArrayList<>(cards.getCards(target.getFilter(), abilityControllerId, source, game));
-        do {
-            Card card = selectCard(abilityControllerId, cardChoices, outcome, target, game);
-            if (card != null) {
-                target.add(card.getId(), game);
-                cardChoices.remove(card); // selectCard don't remove cards (only on second+ tries)
-            } else {
-                // We don't have any valid target to choose so stop choosing
-                return target.isChosen(game);
-            }
-            // try to fill as much as possible for good effect (see while end) or half for bad (see if)
-            if (outcome == Outcome.Neutral && target.getTargets().size() > target.getMinNumberOfTargets() + (target.getMaxNumberOfTargets() - target.getMinNumberOfTargets()) / 2) {
-                return target.isChosen(game);
-            }
-        } while (target.getTargets().size() < target.getMaxNumberOfTargets());
-        return true;
+        return makeChoice(outcome, target, source, game, cards);
     }
 
     @Override
     public boolean choosePile(Outcome outcome, String message, List<? extends Card> pile1, List<? extends Card> pile2, Game game) {
         //TODO: improve this
-        return true;
+        return true; // select left pile all the time
     }
 
     @Override
     public void selectAttackers(Game game, UUID attackingPlayerId) {
-        log.debug("selectAttackers");
         UUID opponentId = game.getCombat().getDefenders().iterator().next();
         Attackers attackers = getPotentialAttackers(game);
         List<Permanent> blockers = getOpponentBlockers(opponentId, game);
@@ -2293,8 +1199,6 @@ public class ComputerPlayer extends PlayerImpl {
 
     @Override
     public void selectBlockers(Ability source, Game game, UUID defendingPlayerId) {
-        log.debug("selectBlockers");
-
         List<Permanent> blockers = getAvailableBlockers(game);
 
         CombatSimulator sim = simulateBlock(CombatSimulator.load(game), blockers, game);
@@ -2309,14 +1213,12 @@ public class ComputerPlayer extends PlayerImpl {
 
     @Override
     public int chooseReplacementEffect(Map<String, String> effectsMap, Map<String, MageObject> objectsMap, Game game) {
-        log.debug("chooseReplacementEffect");
         //TODO: implement this
-        return 0;
+        return 0; // select first effect all the time
     }
 
     @Override
     public Mode chooseMode(Modes modes, Ability source, Game game) {
-        log.debug("chooseMode");
         if (modes.getMode() != null && modes.getMaxModes(game, source) == modes.getSelectedModes().size()) {
             // mode was already set by the AI
             return modes.getMode();
@@ -2325,52 +1227,30 @@ public class ComputerPlayer extends PlayerImpl {
         // spell modes simulated by AI, see addModeOptions
         // trigger modes chooses here
         // TODO: add AI support to select best modes, current code uses first valid mode
-        AvailableMode:
-        for (Mode mode : modes.getAvailableModes(source, game)) {
-            for (UUID selectedModeId : modes.getSelectedModes()) {
-                Mode selectedMode = modes.get(selectedModeId);
-                if (selectedMode.getId().equals(mode.getId())) {
-                    continue AvailableMode;
-                }
-            }
-            if (mode.getTargets().canChoose(source.getControllerId(), source, game)) { // and where targets are available
-                return mode;
-            }
-        }
-        return null;
+        return modes.getAvailableModes(source, game).stream()
+                .filter(mode -> !modes.getSelectedModes().contains(mode.getId()))
+                .filter(mode -> mode.getTargets().canChoose(source.getControllerId(), source, game))
+                .findFirst()
+                .orElse(null);
     }
 
     @Override
     public TriggeredAbility chooseTriggeredAbility(List<TriggeredAbility> abilities, Game game) {
-        log.debug("chooseTriggeredAbility: " + abilities.toString());
         //TODO: improve this
         if (!abilities.isEmpty()) {
-            return abilities.get(0);
+            return abilities.get(0); // select first trigger all the time
         }
         return null;
     }
 
     @Override
-    // TODO: add AI support with outcome and replace random with min/max
     public int getAmount(int min, int max, String message, Ability source, Game game) {
-        log.debug("getAmount");
-
-        // fast calc on nothing to choose
-        if (min >= max) {
-            return min;
-        }
-
-        if (min == 0) {
-            return RandomUtil.nextInt(CardUtil.overflowInc(max, 1));
-        }
-        return min;
+        return makeChoiceAmount(min, max, game, source, false);
     }
 
     @Override
     public List<Integer> getMultiAmountWithIndividualConstraints(Outcome outcome, List<MultiAmountMessage> messages,
                                                                  int totalMin, int totalMax, MultiAmountType type, Game game) {
-        log.debug("getMultiAmount");
-
         int needCount = messages.size();
         List<Integer> defaultList = MultiAmountType.prepareDefaultValues(messages, totalMin, totalMax);
         if (needCount == 0) {
@@ -2385,7 +1265,7 @@ public class ComputerPlayer extends PlayerImpl {
         }
 
         // GOOD effect
-        // values must be stable, so AI must able to simulate it and choose correct actions
+        // values must be stable, so AI must be able to simulate it and choose correct actions
         // fill max values as much as possible
         return MultiAmountType.prepareMaxValues(messages, totalMin, totalMax);
     }
@@ -2397,8 +1277,8 @@ public class ComputerPlayer extends PlayerImpl {
 
     @Override
     public void sideboard(Match match, Deck deck) {
-        //TODO: improve this
-        match.submitDeck(playerId, deck);
+        // TODO: improve this
+        match.submitDeck(playerId, deck); // do not change a deck
     }
 
     private static void addBasicLands(Deck deck, String landName, int number) {
@@ -2406,7 +1286,7 @@ public class ComputerPlayer extends PlayerImpl {
 
         CardCriteria criteria = new CardCriteria();
         if (!landSets.isEmpty()) {
-            criteria.setCodes(landSets.toArray(new String[landSets.size()]));
+            criteria.setCodes(landSets.toArray(new String[0]));
         }
         criteria.rarities(Rarity.LAND).name(landName);
         List<CardInfo> cards = CardRepository.instance.findCards(criteria);
@@ -2462,13 +1342,10 @@ public class ComputerPlayer extends PlayerImpl {
 
         // sort card pool by top score
         List<Card> sortedCards = new ArrayList<>(cardPool);
-        Collections.sort(sortedCards, new Comparator<Card>() {
-            @Override
-            public int compare(Card o1, Card o2) {
-                Integer score1 = RateCard.rateCard(o1, colors);
-                Integer score2 = RateCard.rateCard(o2, colors);
-                return score2.compareTo(score1);
-            }
+        Collections.sort(sortedCards, (o1, o2) -> {
+            Integer score1 = RateCard.rateCard(o1, colors);
+            Integer score2 = RateCard.rateCard(o2, colors);
+            return score2.compareTo(score1);
         });
 
         // get top cards
@@ -2565,10 +1442,6 @@ public class ComputerPlayer extends PlayerImpl {
         return selectBestCardInner(cards, chosenColors, null, null, null);
     }
 
-    public Card selectBestCardTarget(List<Card> cards, List<ColoredManaSymbol> chosenColors, Target target, Ability targetingSource, Game game) {
-        return selectBestCardInner(cards, chosenColors, target, targetingSource, game);
-    }
-
     /**
      * @param targetingSource null on non-target choice like choose and source on targeting choice like chooseTarget
      */
@@ -2662,7 +1535,7 @@ public class ComputerPlayer extends PlayerImpl {
                 // try to counter pick without any color restriction
                 Card counterPick = selectBestCard(cards, Collections.emptyList());
                 int counterPickScore = RateCard.getBaseCardScore(counterPick);
-                // card is really good
+                // card is perfect
                 // take it!
                 if (counterPickScore >= 80) {
                     bestCard = counterPick;
@@ -2695,9 +1568,6 @@ public class ComputerPlayer extends PlayerImpl {
 
     /**
      * Remember picked card with its score.
-     *
-     * @param card
-     * @param score
      */
     protected void rememberPick(Card card, int score) {
         pickedCards.add(new PickedCard(card, score));
@@ -2707,22 +1577,17 @@ public class ComputerPlayer extends PlayerImpl {
      * Choose 2 deck colors for draft: 1. there should be at least 3 cards in
      * card pool 2. at least 2 cards should have different colors 3. get card
      * colors as chosen starting from most rated card
-     *
-     * @return
      */
     protected List<ColoredManaSymbol> chooseDeckColorsIfPossible() {
         if (pickedCards.size() > 2) {
             // sort by score and color mana symbol count in descending order
-            pickedCards.sort(new Comparator<PickedCard>() {
-                @Override
-                public int compare(PickedCard o1, PickedCard o2) {
-                    if (o1.score.equals(o2.score)) {
-                        Integer i1 = RateCard.getColorManaCount(o1.card);
-                        Integer i2 = RateCard.getColorManaCount(o2.card);
-                        return i2.compareTo(i1);
-                    }
-                    return o2.score.compareTo(o1.score);
+            pickedCards.sort((o1, o2) -> {
+                if (o1.score.equals(o2.score)) {
+                    Integer i1 = RateCard.getColorManaCount(o1.card);
+                    Integer i2 = RateCard.getColorManaCount(o2.card);
+                    return i2.compareTo(i1);
                 }
+                return o2.score.compareTo(o1.score);
             });
             Set<String> chosenSymbols = new HashSet<>();
             for (PickedCard picked : pickedCards) {
@@ -2771,7 +1636,6 @@ public class ComputerPlayer extends PlayerImpl {
     }
 
     protected Attackers getPotentialAttackers(Game game) {
-        log.debug("getAvailableAttackers");
         Attackers attackers = new Attackers();
         List<Permanent> creatures = super.getAvailableAttackers(game);
         for (Permanent creature : creatures) {
@@ -2788,7 +1652,6 @@ public class ComputerPlayer extends PlayerImpl {
     }
 
     protected int combatPotential(Permanent creature, Game game) {
-        log.debug("combatPotential");
         if (!creature.canAttack(null, game)) {
             return 0;
         }
@@ -2807,7 +1670,6 @@ public class ComputerPlayer extends PlayerImpl {
     }
 
     protected CombatSimulator simulateAttack(Attackers attackers, List<Permanent> blockers, UUID opponentId, Game game) {
-        log.debug("simulateAttack");
         List<Permanent> attackersList = attackers.getAttackers();
         CombatSimulator best = new CombatSimulator();
         int bestResult = 0;
@@ -2839,8 +1701,6 @@ public class ComputerPlayer extends PlayerImpl {
     }
 
     protected CombatSimulator simulateBlock(CombatSimulator combat, List<Permanent> blockers, Game game) {
-        log.debug("simulateBlock");
-
         TreeNode<CombatSimulator> simulations;
 
         simulations = new TreeNode<>(combat);
@@ -2905,69 +1765,12 @@ public class ComputerPlayer extends PlayerImpl {
         return worst;
     }
 
-    protected void findBestPermanentTargets(Outcome outcome, UUID abilityControllerId, UUID sourceId, Ability source, FilterPermanent filter, Game game, Target target,
-                                            List<Permanent> goodList, List<Permanent> badList, List<Permanent> allList) {
-        // searching for most valuable/powerfull permanents
-        goodList.clear();
-        badList.clear();
-        allList.clear();
-        List<UUID> usedTargets = target.getTargets();
-
-        // search all
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, abilityControllerId, source, game)) {
-            if (usedTargets.contains(permanent.getId())) {
-                continue;
-            }
-
-            if (outcome.isGood()) {
-                // good effect
-                if (permanent.isControlledBy(abilityControllerId)) {
-                    goodList.add(permanent);
-                } else {
-                    badList.add(permanent);
-                }
-            } else {
-                // bad effect
-                if (permanent.isControlledBy(abilityControllerId)) {
-                    badList.add(permanent);
-                } else {
-                    goodList.add(permanent);
-                }
-            }
-        }
-
-        // sort from tiny to big (more valuable)
-        PermanentComparator comparator = new PermanentComparator(game);
-        goodList.sort(comparator);
-        badList.sort(comparator);
-
-        // most valueable goes first in good list
-        Collections.reverse(goodList);
-        // most weakest goes first in bad list (no need to reverse)
-        //Collections.reverse(badList);
-
-        allList.addAll(goodList);
-        allList.addAll(badList);
-
-        // "can target all mode" don't need your/opponent lists -- all targets goes with same value
-        if (outcome.isCanTargetAll()) {
-            allList.sort(comparator); // bad sort
-            if (outcome.isGood()) {
-                Collections.reverse(allList); // good sort
-            }
-            goodList.clear();
-            goodList.addAll(allList);
-            badList.clear();
-            badList.addAll(allList);
-        }
-    }
-
     protected List<Permanent> threats(UUID playerId, Ability source, FilterPermanent filter, Game game, List<UUID> targets) {
         return threats(playerId, source, filter, game, targets, true);
     }
 
-    protected List<Permanent> threats(UUID playerId, Ability source, FilterPermanent filter, Game game, List<UUID> targets, boolean mostValueableGoFirst) {
-        // most valuable/powerfull permanents goes at first
+    protected List<Permanent> threats(UUID playerId, Ability source, FilterPermanent filter, Game game, List<UUID> targets, boolean mostValuableGoFirst) {
+        // most valuable/powerfully permanents goes at first
         List<Permanent> threats;
         if (playerId == null) {
             threats = game.getBattlefield().getActivePermanents(filter, this.getId(), source, game); // all permanents within the range of the player
@@ -2984,7 +1787,7 @@ public class ComputerPlayer extends PlayerImpl {
             }
         }
         Collections.sort(threats, new PermanentComparator(game));
-        if (mostValueableGoFirst) {
+        if (mostValuableGoFirst) {
             Collections.reverse(threats);
         }
         return threats;
@@ -2997,15 +1800,6 @@ public class ComputerPlayer extends PlayerImpl {
             sb.append(object.getName()).append(',');
         }
         log.info(sb.toString());
-    }
-
-    protected void logAbilityList(String message, List<Ability> list) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(message).append(": ");
-        for (Ability ability : list) {
-            sb.append(ability.getRule()).append(',');
-        }
-        log.debug(sb.toString());
     }
 
     private void playRemoval(Set<UUID> creatures, Game game) {
@@ -3057,138 +1851,12 @@ public class ComputerPlayer extends PlayerImpl {
         return new ComputerPlayer(this);
     }
 
-    @Deprecated // TODO: replace by standard while cycle with cards.isempty and addTarget
-    private boolean tryAddTarget(Target target, UUID id, Ability source, Game game) {
-        // workaround to to check successfull targets add
-        int before = target.getTargets().size();
-        target.addTarget(id, source, game);
-        int after = target.getTargets().size();
-        return before != after;
-    }
-
     private boolean tryAddTarget(Target target, UUID id, int amount, Ability source, Game game) {
-        // workaround to to check successfull targets add
+        // workaround to check successfully targets add
         int before = target.getTargets().size();
         target.addTarget(id, amount, source, game);
         int after = target.getTargets().size();
         return before != after;
-    }
-
-    @Deprecated // TODO: replace by source only version
-    private boolean selectPlayer(Outcome outcome, Target target, UUID abilityControllerId, UUID randomOpponentId, Game game, boolean required) {
-        return selectPlayerInner(outcome, target, null, abilityControllerId, randomOpponentId, game, required);
-    }
-
-    private boolean selectPlayerTarget(Outcome outcome, Target target, Ability targetingSource, UUID abilityControllerId, UUID randomOpponentId, Game game, boolean required) {
-        return selectPlayerInner(outcome, target, targetingSource, abilityControllerId, randomOpponentId, game, required);
-    }
-
-    /**
-     * Sets a possible target player. Depends on bad/good outcome
-     * <p>
-     * Return false on no more valid targets, e.g. can stop choose dialog
-     *
-     * @param targetingSource null on non-target choice like choose and source on targeting choice like chooseTarget
-     */
-    private boolean selectPlayerInner(Outcome outcome, Target target, Ability targetingSource, UUID abilityControllerId, UUID randomOpponentId, Game game, boolean required) {
-        Outcome affectedOutcome;
-        if (abilityControllerId == this.playerId) {
-            // selects for itself
-            affectedOutcome = outcome;
-        } else {
-            // selects for another player
-            affectedOutcome = Outcome.inverse(outcome);
-        }
-
-        if (target.getOriginalTarget() instanceof TargetOpponent) {
-            if (targetingSource == null) {
-                if (target.canTarget(randomOpponentId, game)) {
-                    if (!target.contains(randomOpponentId)) {
-                        target.add(randomOpponentId, game);
-                        return true;
-                    }
-                }
-            } else if (target.canTarget(abilityControllerId, randomOpponentId, targetingSource, game)) {
-                if (!target.contains(randomOpponentId)) {
-                    target.addTarget(randomOpponentId, targetingSource, game);
-                    return true;
-                }
-            }
-            for (UUID possibleOpponentId : game.getOpponents(getId(), true)) {
-                if (targetingSource == null) {
-                    if (target.canTarget(possibleOpponentId, game)) {
-                        if (!target.contains(possibleOpponentId)) {
-                            target.add(possibleOpponentId, game);
-                            return true;
-                        }
-                    }
-                } else if (target.canTarget(abilityControllerId, possibleOpponentId, targetingSource, game)) {
-                    if (!target.contains(possibleOpponentId)) {
-                        target.addTarget(possibleOpponentId, targetingSource, game);
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-
-        UUID sourceId = targetingSource != null ? targetingSource.getSourceId() : null;
-        if (target.getOriginalTarget() instanceof TargetPlayer) {
-            if (affectedOutcome.isGood()) {
-                if (targetingSource == null) {
-                    // good
-                    if (target.canTarget(getId(), game) && !target.contains(getId())) {
-                        target.add(getId(), game);
-                        return true;
-                    }
-                    if (target.isRequired(sourceId, game)) {
-                        if (target.canTarget(randomOpponentId, game) && !target.contains(randomOpponentId)) {
-                            target.add(randomOpponentId, game);
-                            return true;
-                        }
-                    }
-                } else {
-                    // good
-                    if (target.canTarget(abilityControllerId, getId(), targetingSource, game) && !target.contains(getId())) {
-                        target.addTarget(getId(), targetingSource, game);
-                        return true;
-                    }
-                    if (target.isRequired(sourceId, game)) {
-                        if (target.canTarget(abilityControllerId, randomOpponentId, targetingSource, game) && !target.contains(randomOpponentId)) {
-                            target.addTarget(randomOpponentId, targetingSource, game);
-                            return true;
-                        }
-                    }
-                }
-            } else if (targetingSource == null) {
-                // bad
-                if (target.canTarget(randomOpponentId, game) && !target.contains(randomOpponentId)) {
-                    target.add(randomOpponentId, game);
-                    return true;
-                }
-                if (target.isRequired(sourceId, game)) {
-                    if (target.canTarget(getId(), game) && !target.contains(getId())) {
-                        target.add(getId(), game);
-                        return true;
-                    }
-                }
-            } else {
-                // bad
-                if (target.canTarget(abilityControllerId, randomOpponentId, targetingSource, game) && !target.contains(randomOpponentId)) {
-                    target.addTarget(randomOpponentId, targetingSource, game);
-                    return true;
-                }
-                if (required) {
-                    if (target.canTarget(abilityControllerId, getId(), targetingSource, game) && !target.contains(getId())) {
-                        target.addTarget(getId(), targetingSource, game);
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-
-        return false;
     }
 
     /**
@@ -3201,8 +1869,11 @@ public class ComputerPlayer extends PlayerImpl {
 
     @Override
     public SpellAbility chooseAbilityForCast(Card card, Game game, boolean noMana) {
-        Map<UUID, SpellAbility> useable = PlayerImpl.getCastableSpellAbilities(game, this.getId(), card, game.getState().getZone(card.getId()), noMana);
-        return useable.values().stream().findFirst().orElse(null);
+        Map<UUID, SpellAbility> usable = PlayerImpl.getCastableSpellAbilities(game, this.getId(), card, game.getState().getZone(card.getId()), noMana);
+        return usable.values().stream()
+                .filter(a -> a.getTargets().canChoose(getId(), a, game))
+                .findFirst()
+                .orElse(null);
     }
 
     @Override

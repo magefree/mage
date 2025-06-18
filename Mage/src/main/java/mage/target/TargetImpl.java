@@ -261,7 +261,6 @@ public abstract class TargetImpl implements Target {
     }
 
     @Override
-    @Deprecated // TODO: replace usage in cards by full version from choose methods
     public boolean isChoiceCompleted(Game game) {
         return isChoiceCompleted(null, null, game);
     }

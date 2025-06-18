@@ -1,8 +1,7 @@
-package mage.player.ai;
+package mage.player.ai.score;
 
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.player.ai.ma.ArtificialScoringSystem;
 import mage.players.Player;
 import org.apache.log4j.Logger;
 
