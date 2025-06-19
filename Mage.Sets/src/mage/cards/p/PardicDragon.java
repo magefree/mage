@@ -65,7 +65,7 @@ class PardicDragonEffect extends OneShotEffect {
 
     PardicDragonEffect() {
         super(Outcome.Benefit);
-        this.staticText = "that player may put a time counter on {this}";
+        this.staticText = "that player may put a time counter on this card";
     }
 
     private PardicDragonEffect(final PardicDragonEffect effect) {

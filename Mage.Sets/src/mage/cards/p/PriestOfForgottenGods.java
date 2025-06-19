@@ -51,7 +51,7 @@ public final class PriestOfForgottenGods extends CardImpl {
         );
         ability.addEffect(
                 new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, "")
-                        .setText("and sacrifice a creature")
+                        .setText("and sacrifice a creature of their choice")
         );
         ability.addCost(new SacrificeTargetCost(2, filter));
         ability.addEffect(new BasicManaEffect(Mana.BlackMana(2)).setText("You add {B}{B}"));

@@ -1,11 +1,10 @@
 package mage.cards.f;
 
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.hint.Hint;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -31,13 +30,10 @@ public final class FaeOffering extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
 
         // At the beginning of each end step, if you've cast both a creature spell and a noncreature spell this turn, create a Clue token, a Food token, and a Treasure token.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfEndStepTriggeredAbility(
-                        TargetController.ANY, new CreateTokenEffect(new ClueArtifactToken()).withAdditionalTokens(new FoodToken(), new TreasureToken()),
-                        false
-                ), FaeOfferingCondition.instance, "At the beginning of each end step, " +
-                "if you've cast both a creature spell and a noncreature spell this turn, " +
-                "create a Clue token, a Food token, and a Treasure token."
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(
+                TargetController.ANY, new CreateTokenEffect(new ClueArtifactToken())
+                .withAdditionalTokens(new FoodToken(), new TreasureToken()),
+                false, FaeOfferingCondition.instance
         ).addHint(FaeOfferingHint.instance));
     }
 
@@ -67,6 +63,11 @@ enum FaeOfferingCondition implements Condition {
                 .map(spell -> spell.isCreature(game))
                 .distinct()
                 .count() == 2;
+    }
+
+    @Override
+    public String toString() {
+        return "you've cast both a creature spell and a noncreature spell this turn";
     }
 }
 

@@ -1,31 +1,43 @@
 package mage.cards.r;
 
-import java.util.UUID;
-
+import mage.ObjectColor;
+import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.condition.common.AttachedToMatchesFilterCondition;
+import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepEnchantedEffect;
 import mage.abilities.effects.common.TapEnchantedEffect;
-import mage.constants.*;
-import mage.abilities.keyword.FlashAbility;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.target.common.TargetCreaturePermanent;
-import mage.abilities.Ability;
-import mage.abilities.effects.common.AttachEffect;
-import mage.target.TargetPermanent;
+import mage.abilities.effects.common.continuous.LoseAllAbilitiesAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AttachmentType;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author weirddan455
  */
 public final class RayOfFrost extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterPermanent("enchanted creature is red");
+
+    static {
+        filter.add(new ColorPredicate(ObjectColor.RED));
+    }
+
+    private static final Condition condition = new AttachedToMatchesFilterCondition(filter);
 
     public RayOfFrost(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
@@ -43,14 +55,15 @@ public final class RayOfFrost extends CardImpl {
         this.addAbility(ability);
 
         // When Ray of Frost enters the battlefield, if enchanted creature is red, tap it.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new TapEnchantedEffect()),
-                RayOfFrostCondition.instance,
-                "When {this} enters, if enchanted creature is red, tap it."
-        ));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new TapEnchantedEffect().setText("tap it")
+        ).withInterveningIf(condition));
 
         // As long as enchanted creature is red, it loses all abilities.
-        this.addAbility(new SimpleStaticAbility(new RayOfFrostLoseAbilitiesEffect()));
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
+                new LoseAllAbilitiesAttachedEffect(AttachmentType.AURA), condition,
+                "as long as enchanted creature is red, it loses all abilities"
+        )));
 
         // Enchanted creature doesn't untap during its controller's untap step.
         this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepEnchantedEffect()));
@@ -63,54 +76,5 @@ public final class RayOfFrost extends CardImpl {
     @Override
     public RayOfFrost copy() {
         return new RayOfFrost(this);
-    }
-}
-
-enum RayOfFrostCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent enchantment = source.getSourcePermanentIfItStillExists(game);
-        if (enchantment == null) {
-            return false;
-        }
-        Permanent creature = game.getPermanent(enchantment.getAttachedTo());
-        return creature != null && creature.getColor(game).isRed();
-    }
-
-    @Override
-    public String toString() {
-        return "if enchanted creature is red";
-    }
-}
-
-class RayOfFrostLoseAbilitiesEffect extends ContinuousEffectImpl {
-
-    RayOfFrostLoseAbilitiesEffect() {
-        super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.LoseAbility);
-        this.staticText = "As long as enchanted creature is red, it loses all abilities";
-    }
-
-    private RayOfFrostLoseAbilitiesEffect(final RayOfFrostLoseAbilitiesEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public RayOfFrostLoseAbilitiesEffect copy() {
-        return new RayOfFrostLoseAbilitiesEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent enchantment = source.getSourcePermanentIfItStillExists(game);
-        if (enchantment != null) {
-            Permanent creature = game.getPermanent(enchantment.getAttachedTo());
-            if (creature != null && creature.getColor(game).isRed()) {
-                creature.removeAllAbilities(source.getSourceId(), game);
-                return true;
-            }
-        }
-        return false;
     }
 }

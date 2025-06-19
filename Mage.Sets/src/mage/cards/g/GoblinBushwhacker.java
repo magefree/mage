@@ -1,11 +1,9 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.HasteAbility;
@@ -13,12 +11,13 @@ import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class GoblinBushwhacker extends CardImpl {
@@ -35,19 +34,14 @@ public final class GoblinBushwhacker extends CardImpl {
         this.addAbility(new KickerAbility("{R}"));
 
         // When this creature enters, if it was kicked, creatures you control get +1/+0 and gain haste until end of turn.
-        EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new BoostControlledEffect(1, 0, Duration.EndOfTurn), false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(
+                new BoostControlledEffect(1, 0, Duration.EndOfTurn)
+                        .setText("creatures you control get +1/+0")).withInterveningIf(KickedCondition.ONCE);
         ability.addEffect(new GainAbilityControlledEffect(
-                HasteAbility.getInstance(), 
-                Duration.EndOfTurn,
+                HasteAbility.getInstance(), Duration.EndOfTurn,
                 StaticFilters.FILTER_CONTROLLED_CREATURES
-        ));
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                ability,
-                KickedCondition.ONCE,
-                "When this creature enters, "
-                + "if it was kicked, "
-                + "creatures you control get +1/+0 and gain haste until end of turn."
-        ));
+        ).setText("and gain haste until end of turn"));
+        this.addAbility(ability);
     }
 
     private GoblinBushwhacker(final GoblinBushwhacker card) {

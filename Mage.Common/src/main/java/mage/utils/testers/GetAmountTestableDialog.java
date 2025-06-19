@@ -3,6 +3,7 @@ package mage.utils.testers;
 import mage.abilities.Ability;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.DebugUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,6 +11,8 @@ import java.util.List;
 
 /**
  * Part of testable game dialogs
+ * <p>
+ * Its simple dialog to get some amount (example: part of chooseTargetAmount)
  * <p>
  * Supported methods:
  * - player.getAmount()
@@ -24,21 +27,25 @@ class GetAmountTestableDialog extends BaseTestableDialog {
 
     public GetAmountTestableDialog(boolean isYou, int min, int max) {
         super(String.format("player.getAmount(%s)", isYou ? "you" : "AI"),
-                String.format("from %d to %d", min, max), "");
+                String.format("from %d to %d", min, max),
+                "",
+                new AmountTestableResult()
+        );
         this.isYou = isYou;
         this.min = min;
         this.max = max;
     }
 
     @Override
-    public List<String> showDialog(Player player, Ability source, Game game, Player opponent) {
+    public void showDialog(Player player, Ability source, Game game, Player opponent) {
         Player choosingPlayer = this.isYou ? player : opponent;
         String message = "<font color=green>message</font> with html";
-        int chooseRes;
-        chooseRes = choosingPlayer.getAmount(this.min, this.max, message, source, game);
-        List<String> result = new ArrayList<>();
-        result.add(getGroup() + " - " + this.getName() + " selected " + chooseRes);
-        return result;
+        String chooseDebugSource = DebugUtil.getMethodNameWithSource(0, "class");
+        int chooseRes = choosingPlayer.getAmount(this.min, this.max, message, source, game);
+        List<String> res = new ArrayList<>();
+        res.add(getGroup() + " - " + this.getName() + " selected " + chooseRes);
+
+        ((AmountTestableResult) this.getResult()).onFinish(chooseDebugSource, true, res, chooseRes);
     }
 
     static public void register(TestableDialogsRunner runner) {

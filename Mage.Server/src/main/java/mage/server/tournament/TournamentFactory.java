@@ -93,7 +93,7 @@ public enum TournamentFactory {
 
 
     public void addTournamentType(String name, TournamentType tournamentType, Class tournament) {
-        if (tournament != null) {
+        if (tournamentType != null && tournament != null) {
             this.tournaments.put(name, tournament);
             this.tournamentTypes.put(name, tournamentType);
             this.tournamentTypeViews.add(new TournamentTypeView(tournamentType));

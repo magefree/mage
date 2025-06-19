@@ -7,7 +7,6 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.CastFromEverywhereSourceCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldWithCounterEffect;
@@ -20,18 +19,18 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
 /**
- *
  * @author ciaconna007
  */
 public final class NineLivesFamiliar extends CardImpl {
 
     public NineLivesFamiliar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
-        
+
         this.subtype.add(SubType.CAT);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
@@ -44,15 +43,10 @@ public final class NineLivesFamiliar extends CardImpl {
         ));
 
         // When this creature dies, if it had a revival counter on it, return it to the battlefield with one fewer revival counter on it at the beginning of the next end step.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new DiesSourceTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(
-                        new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new NineLivesFamiliarEffect())
-                )),
-                NineLivesFamiliarCondition.instance,
-                "When this creature dies, if it had a revival counter on it, "
-                        + "return it to the battlefield with one fewer revival counter on it "
-                        + "at the beginning of the next end step."
-        ));
+        this.addAbility(new DiesSourceTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(
+                new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new NineLivesFamiliarEffect())
+        ).setText("return it to the battlefield with one fewer revival counter " +
+                "on it at the beginning of the next end step")).withInterveningIf(NineLivesFamiliarCondition.instance));
     }
 
     private NineLivesFamiliar(final NineLivesFamiliar card) {
@@ -70,8 +64,15 @@ enum NineLivesFamiliarCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = (Permanent) source.getEffects().get(0).getValue("permanentLeftBattlefield");
-        return permanent != null && permanent.getCounters(game).getCount(CounterType.REVIVAL) > 0;
+        return CardUtil
+                .getEffectValueFromAbility(source, "permanentLeftBattlefield", Permanent.class)
+                .filter(permanent -> permanent.getCounters(game).getCount(CounterType.REVIVAL) > 0)
+                .isPresent();
+    }
+
+    @Override
+    public String toString() {
+        return "it had a revival counter on it";
     }
 }
 

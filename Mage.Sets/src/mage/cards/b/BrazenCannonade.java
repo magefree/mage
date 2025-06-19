@@ -1,13 +1,11 @@
 package mage.cards.b;
 
-import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfPostcombatMainTriggeredAbility;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.condition.common.RaidCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.abilities.hint.common.RaidHint;
+import mage.abilities.triggers.BeginningOfPostcombatMainTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
@@ -42,16 +40,11 @@ public final class BrazenCannonade extends CardImpl {
         ));
 
         // Raid -- At the beginning of your postcombat main phase, if you attacked with a creature this turn, exile the top card of your library. Until end of combat on your next turn, you may play that card.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfPostcombatMainTriggeredAbility(
-                        new ExileTopXMayPlayUntilEffect(
-                                1, Duration.UntilEndCombatOfYourNextTurn
-                        ), false
-                ), RaidCondition.instance, "At the beginning of each of your postcombat main phases, " +
-                "if you attacked this turn, exile the top card of your library. " +
-                "Until end of combat on your next turn, you may play that card."
-        );
-        this.addAbility(ability.setAbilityWord(AbilityWord.RAID).addHint(RaidHint.instance), new PlayerAttackedWatcher());
+        this.addAbility(new BeginningOfPostcombatMainTriggeredAbility(
+                new ExileTopXMayPlayUntilEffect(1, Duration.UntilEndCombatOfYourNextTurn), false
+        ).withInterveningIf(RaidCondition.instance)
+                .setAbilityWord(AbilityWord.RAID)
+                .addHint(RaidHint.instance), new PlayerAttackedWatcher());
     }
 
     private BrazenCannonade(final BrazenCannonade card) {

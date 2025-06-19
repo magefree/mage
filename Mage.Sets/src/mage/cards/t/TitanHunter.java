@@ -2,25 +2,22 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.hint.common.MorbidHint;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.StaticFilters;
-import mage.game.Game;
 
 import java.util.UUID;
 
@@ -29,7 +26,7 @@ import java.util.UUID;
  */
 public final class TitanHunter extends CardImpl {
 
-    private static final Condition condition = new InvertCondition(MorbidCondition.instance);
+    private static final Condition condition = new InvertCondition(MorbidCondition.instance, "no creatures died this turn");
 
     public TitanHunter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}");
@@ -40,11 +37,10 @@ public final class TitanHunter extends CardImpl {
         this.toughness = new MageInt(5);
 
         // At the beginning of each player's end step, if no creatures died this turn, Titan Hunter deals 4 damage to that player.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfEndStepTriggeredAbility(
-                        TargetController.EACH_PLAYER, new TitanHunterEffect(), false
-                ), condition, "At the beginning of each player's end step, " +
-                "if no creatures died this turn, {this} deals 4 damage to that player."
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(
+                TargetController.EACH_PLAYER,
+                new DamageTargetEffect(4, true, "that player"),
+                false, condition
         ).addHint(MorbidHint.instance));
 
         // {1}{B}, Sacrifice a creature: You gain 4 life.
@@ -60,29 +56,5 @@ public final class TitanHunter extends CardImpl {
     @Override
     public TitanHunter copy() {
         return new TitanHunter(this);
-    }
-}
-
-class TitanHunterEffect extends OneShotEffect {
-
-    TitanHunterEffect() {
-        super(Outcome.Benefit);
-    }
-
-    private TitanHunterEffect(final TitanHunterEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public TitanHunterEffect copy() {
-        return new TitanHunterEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return game.damagePlayerOrPermanent(
-                game.getActivePlayerId(), 4, source.getSourceId(),
-                source, game, false, true
-        ) > 0;
     }
 }

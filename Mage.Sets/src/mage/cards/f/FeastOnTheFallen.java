@@ -1,12 +1,9 @@
-
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -16,23 +13,20 @@ import mage.game.Game;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.watchers.common.PlayerLostLifeWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author emerald000
  */
 public final class FeastOnTheFallen extends CardImpl {
 
     public FeastOnTheFallen(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
 
         // At the beginning of each upkeep, if an opponent lost life last turn, put a +1/+1 counter on target creature you control. 
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(
-                        TargetController.ANY, new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
-                        false),
-                FeastOnTheFallenCondition.instance,
-                "At the beginning of each upkeep, if an opponent lost life last turn, put a +1/+1 counter on target creature you control.");
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(
+                TargetController.ANY, new AddCountersTargetEffect(CounterType.P1P1.createInstance()), false
+        ).withInterveningIf(FeastOnTheFallenCondition.instance);
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }
@@ -54,13 +48,16 @@ enum FeastOnTheFallenCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         PlayerLostLifeWatcher watcher = game.getState().getWatcher(PlayerLostLifeWatcher.class);
-        if (watcher != null) {
-            for (UUID opponentId : game.getOpponents(source.getControllerId())) {
-                if (watcher.getLifeLostLastTurn(opponentId) > 0) {
-                    return true;
-                }
-            }
-        }
-        return false;
+        return watcher != null
+                && game
+                .getOpponents(source.getControllerId())
+                .stream()
+                .mapToInt(watcher::getLifeLostLastTurn)
+                .anyMatch(x -> x > 0);
+    }
+
+    @Override
+    public String toString() {
+        return "an opponent lost life last turn";
     }
 }

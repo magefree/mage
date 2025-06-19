@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.DesertControlledOrGraveyardCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -27,11 +26,8 @@ public final class SandStrangler extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Sand Strangler enters the battlefield, if you control a Desert or there is a Desert card in your graveyard, you may have Sand Strangler deal 3 damage to target creature.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(3), true),
-                DesertControlledOrGraveyardCondition.instance, "When {this} enters, " +
-                "if you control a Desert or there is a Desert card in your graveyard, " +
-                "you may have {this} deal 3 damage to target creature.");
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(3), true)
+                .withInterveningIf(DesertControlledOrGraveyardCondition.instance);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability.addHint(DesertControlledOrGraveyardCondition.getHint()));
     }

@@ -1,7 +1,6 @@
 
 package mage.cards.j;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
@@ -10,14 +9,21 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.common.FilterHistoricCard;
+import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.HistoricPredicate;
+
+import java.util.UUID;
 
 /**
  *
  * @author LevelX2
  */
 public final class JhoirasFamiliar extends CardImpl {
+
+    private static final FilterCard filter = new FilterCard("historic spells");
+    static {
+        filter.add(HistoricPredicate.instance);
+    }
 
     public JhoirasFamiliar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
@@ -31,7 +37,7 @@ public final class JhoirasFamiliar extends CardImpl {
 
         // Historic spells you cast cost {1} less to cast.
         this.addAbility(new SimpleStaticAbility(
-                new SpellsCostReductionControllerEffect(new FilterHistoricCard(), 1)
+                new SpellsCostReductionControllerEffect(filter, 1)
                         .setText("Historic spells you cast cost {1} less to cast. <i>(Artifacts, legendaries, and Sagas are historic.)</i>")));
     }
 

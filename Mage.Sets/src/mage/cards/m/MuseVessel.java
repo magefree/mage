@@ -154,9 +154,7 @@ class TargetCardInMuseVesselExile extends TargetCardInExile {
         if (sourceCard != null) {
             UUID exileId = CardUtil.getCardExileZoneId(game, source.getSourceId());
             ExileZone exile = game.getExile().getExileZone(exileId);
-            if (exile != null && !exile.isEmpty()) {
-                return true;
-            }
+            return exile != null && !exile.isEmpty();
         }
         return false;
     }
@@ -172,7 +170,7 @@ class TargetCardInMuseVesselExile extends TargetCardInExile {
                 exile = game.getExile().getExileZone(exileId);
             }
             if (exile != null && exile.contains(id)) {
-                return filter.match(card, source.getControllerId(), game);
+                return filter.match(card, source.getControllerId(), source, game);
             }
         }
         return false;

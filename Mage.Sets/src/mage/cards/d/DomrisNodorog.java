@@ -18,7 +18,7 @@ import java.util.UUID;
  */
 public final class DomrisNodorog extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("card named Domri, City Smasher");
+    private static final FilterCard filter = new FilterCard("a card named Domri, City Smasher");
 
     static {
         filter.add(new NamePredicate("Domri, City Smasher"));

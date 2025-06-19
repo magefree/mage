@@ -1,10 +1,7 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
-import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
@@ -19,6 +16,8 @@ import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.UUID;
+
 /**
  *
  * @author LevelX2
@@ -30,7 +29,7 @@ public final class Tallowisp extends CardImpl {
     static {
         filterAura.add(CardType.ENCHANTMENT.getPredicate());
         filterAura.add(SubType.AURA.getPredicate());
-        filterAura.add(new TallowispAbilityPredicate());
+        filterAura.add(TallowispAbilityPredicate.instance);
     }
 
     public Tallowisp(UUID ownerId, CardSetInfo setInfo) {
@@ -41,7 +40,7 @@ public final class Tallowisp extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever you cast a Spirit or Arcane spell, you may search your library for an Aura card with enchant creature, reveal it, and put it into your hand. If you do, shuffle your library.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filterAura), true), StaticFilters.FILTER_SPIRIT_OR_ARCANE_CARD, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filterAura), true), StaticFilters.FILTER_SPELL_SPIRIT_OR_ARCANE, true));
     }
 
     private Tallowisp(final Tallowisp card) {
@@ -54,20 +53,14 @@ public final class Tallowisp extends CardImpl {
     }
 }
 
-class TallowispAbilityPredicate implements Predicate<MageObject> {
-
-    public TallowispAbilityPredicate() {
-    }
+enum TallowispAbilityPredicate implements Predicate<MageObject> {
+    instance;
 
     @Override
     public boolean apply(MageObject input, Game game) {
-        Abilities<Ability> abilities = input.getAbilities();
-        for (int i = 0; i < abilities.size(); i++) {
-            if (abilities.get(i) instanceof EnchantAbility) {
-                String enchantText = abilities.get(i).getRule();
-                if (enchantText.contentEquals("Enchant creature")) {
-                    return true;
-                }
+        for (Ability ability : input.getAbilities()) {
+            if (ability instanceof EnchantAbility && ability.getRule().contentEquals("Enchant creature")) {
+                return true;
             }
         }
         return false;

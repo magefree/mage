@@ -12,7 +12,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.filter.common.FilterHistoricSpell;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -32,7 +32,7 @@ public final class CabalPaladin extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(
                 new DamagePlayersEffect(Outcome.Damage, StaticValue.get(2), TargetController.OPPONENT)
                         .setText("{this} deals 2 damage to each opponent. <i>(Artifacts, legendaries, and Sagas are historic.)</i>"),
-                new FilterHistoricSpell(), false
+                StaticFilters.FILTER_SPELL_HISTORIC, false
         ));
     }
 

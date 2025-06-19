@@ -249,8 +249,7 @@ public class AshiokWickedManipulatorTest extends CardTestPlayerBase {
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "+1:");
         addTarget(playerA, poet);
         // 2 tokens, so stacking trigger.
-        setChoice(playerA, "At the beginning of combat on your turn, if a card was put "
-                + "into exile this turn, put a +1/+1 counter on this creature.");
+        setChoice(playerA, "At the beginning of combat on your turn,");
 
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
@@ -260,8 +259,7 @@ public class AshiokWickedManipulatorTest extends CardTestPlayerBase {
         activateAbility(5, PhaseStep.PRECOMBAT_MAIN, playerA, "+1:");
         addTarget(playerA, lion);
         // 2 tokens, so stacking trigger.
-        setChoice(playerA, "At the beginning of combat on your turn, if a card was put "
-                + "into exile this turn, put a +1/+1 counter on this creature.");
+        setChoice(playerA, "At the beginning of combat on your turn,");
 
         setStopAt(5, PhaseStep.POSTCOMBAT_MAIN);
         execute();

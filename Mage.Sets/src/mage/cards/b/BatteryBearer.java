@@ -14,7 +14,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterArtifactSpell;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.permanent.token.PowerstoneToken;
 
@@ -26,9 +25,10 @@ import java.util.UUID;
 public final class BatteryBearer extends CardImpl {
 
     private static final FilterSpell filter
-            = new FilterArtifactSpell("an artifact spell with mana value 6 or greater");
+            = new FilterSpell("an artifact spell with mana value 6 or greater");
 
     static {
+        filter.add(CardType.ARTIFACT.getPredicate());
         filter.add(new ManaValuePredicate(ComparisonType.MORE_THAN, 5));
     }
 

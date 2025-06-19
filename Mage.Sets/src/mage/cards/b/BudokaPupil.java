@@ -3,35 +3,35 @@ package mage.cards.b;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.FlipSourceEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
-import mage.game.events.GameEvent;
 import mage.game.permanent.token.TokenImpl;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class BudokaPupil extends CardImpl {
 
+    private static final Condition condition = new SourceHasCounterCondition(CounterType.KI, 2);
+
     public BudokaPupil(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
         this.subtype.add(SubType.HUMAN, SubType.MONK);
 
         this.power = new MageInt(2);
@@ -40,13 +40,12 @@ public final class BudokaPupil extends CardImpl {
         this.flipCardName = "Ichiga, Who Topples Oaks";
 
         // Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Budoka Pupil.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.KI.createInstance()), StaticFilters.FILTER_SPIRIT_OR_ARCANE_CARD, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.KI.createInstance()), StaticFilters.FILTER_SPELL_SPIRIT_OR_ARCANE, true));
 
         // At the beginning of the end step, if there are two or more ki counters on Budoka Pupil, you may flip it.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new FlipSourceEffect(new IchigaWhoTopplesOaks()), true),
-                new SourceHasCounterCondition(CounterType.KI, 2, Integer.MAX_VALUE),
-                "At the beginning of the end step, if there are two or more ki counters on {this}, you may flip it."));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(
+                TargetController.NEXT, new FlipSourceEffect(new IchigaWhoTopplesOaks()).setText("flip it"), true, condition
+        ));
     }
 
     private BudokaPupil(final BudokaPupil card) {
@@ -80,6 +79,7 @@ class IchigaWhoTopplesOaks extends TokenImpl {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
+
     private IchigaWhoTopplesOaks(final IchigaWhoTopplesOaks token) {
         super(token);
     }

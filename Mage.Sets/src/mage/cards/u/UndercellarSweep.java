@@ -4,7 +4,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.TakeTheInitiativeEffect;
 import mage.abilities.hint.common.InitiativeHint;
@@ -25,15 +24,14 @@ public final class UndercellarSweep extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{W}");
 
         // When Undercellar Sweep enters the battlefield, you take the initiative.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new TakeTheInitiativeEffect()).addHint(InitiativeHint.instance));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new TakeTheInitiativeEffect())
+                .addHint(InitiativeHint.instance));
 
         // Whenever you attack, if you or a player you're attacking has the initiative, you create two 1/1 white Soldier creature token that are tapped and attacking.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new AttacksWithCreaturesTriggeredAbility(
-                        new CreateTokenEffect(new SoldierToken(), 2, true, true), 1
-                ), UndercellarSweepCondition.instance, "Whenever you attack, if you or a player you're attacking " +
-                "has the initiative, you create two 1/1 white Soldier creature tokens that are tapped and attacking."
-        ));
+        this.addAbility(new AttacksWithCreaturesTriggeredAbility(
+                new CreateTokenEffect(new SoldierToken(), 2, true, true)
+                        .setText("you create two 1/1 white Soldier creature tokens that are tapped and attacking"), 1
+        ).withInterveningIf(UndercellarSweepCondition.instance));
     }
 
     private UndercellarSweep(final UndercellarSweep card) {
@@ -62,5 +60,10 @@ enum UndercellarSweepCondition implements Condition {
                 .filter(uuid -> source.isControlledBy(game.getControllerId(uuid)))
                 .map(game.getCombat()::getDefenderId)
                 .anyMatch(game.getInitiativeId()::equals);
+    }
+
+    @Override
+    public String toString() {
+        return "you or a player you're attacking has the initiative";
     }
 }

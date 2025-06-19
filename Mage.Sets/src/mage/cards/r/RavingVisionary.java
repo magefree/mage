@@ -15,7 +15,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 
 import java.util.UUID;
 
@@ -41,8 +40,7 @@ public final class RavingVisionary extends CardImpl {
 
         // Delirium — {2}{U}, {T}: Draw a card. Activate only if there are four or more card types among cards in your graveyard.
         ability = new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1),
-                new ManaCostsImpl<>("{2}{U}"), DeliriumCondition.instance
+                new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{2}{U}"), DeliriumCondition.instance
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability.addHint(CardTypesInGraveyardCount.YOU.getHint()).setAbilityWord(AbilityWord.DELIRIUM));

@@ -1,15 +1,14 @@
 package mage.cards.h;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.condition.common.FerociousCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.hint.common.FerociousHint;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
@@ -31,15 +30,11 @@ public final class HeirOfTheWilds extends CardImpl {
 
         // Deathtouch
         this.addAbility(DeathtouchAbility.getInstance());
-        // <em>Ferocious</em> - Whenever Heir of the Wilds attacks, if you control a creature with power 4 or greater, Heir of the Wilds gets +1/+1 until end of turn.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new AttacksTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), false),
-                FerociousCondition.instance,
-                "<i>Ferocious</i> &mdash; Whenever {this} attacks, if you control a creature with power 4 or greater, {this} gets +1/+1 until end of turn."
-        );
-        ability.addHint(FerociousHint.instance);
-        this.addAbility(ability);
 
+        // <em>Ferocious</em> - Whenever Heir of the Wilds attacks, if you control a creature with power 4 or greater, Heir of the Wilds gets +1/+1 until end of turn.
+        this.addAbility(new AttacksTriggeredAbility(
+                new BoostSourceEffect(1, 1, Duration.EndOfTurn), false
+        ).withInterveningIf(FerociousCondition.instance).addHint(FerociousHint.instance).setAbilityWord(AbilityWord.FEROCIOUS));
     }
 
     private HeirOfTheWilds(final HeirOfTheWilds card) {

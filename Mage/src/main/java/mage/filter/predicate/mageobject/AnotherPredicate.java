@@ -16,8 +16,7 @@ public enum AnotherPredicate implements ObjectSourcePlayerPredicate<MageObject> 
         if (!input.getObject().getId().equals(input.getSourceId())) {
             return true;
         }
-        int zcc = input.getSource().getSourceObjectZoneChangeCounter();
-        return zcc != 0 && zcc != input.getObject().getZoneChangeCounter(game);
+        return false;
     }
 
     @Override

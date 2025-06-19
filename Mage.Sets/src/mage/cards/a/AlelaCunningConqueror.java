@@ -14,7 +14,7 @@ import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.FaerieRogueToken;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.DamagedPlayerControlsTargetAdjuster;
+import mage.target.targetadjustment.ThatPlayerControlsTargetAdjuster;
 
 import java.util.UUID;
 
@@ -48,7 +48,7 @@ public final class AlelaCunningConqueror extends CardImpl {
         Effect effect = new GoadTargetEffect().setText("goad target creature that player controls");
         Ability ability = new OneOrMoreCombatDamagePlayerTriggeredAbility(Zone.BATTLEFIELD, effect, faerieFilter, SetTargetPointer.PLAYER, false);
         ability.addTarget(new TargetPermanent(filter));
-        ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
+        ability.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster());
 
         this.addAbility(ability);
     }

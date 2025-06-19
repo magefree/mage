@@ -3,7 +3,6 @@ package mage.cards.r;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.MorbidCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.hint.common.MorbidHint;
 import mage.abilities.keyword.PlotAbility;
@@ -29,11 +28,8 @@ public final class RictusRobber extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Rictus Robber enters the battlefield, if a creature died this turn, create a 2/2 blue and black Zombie Rogue creature token.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ZombieRogueToken())),
-                MorbidCondition.instance,
-                "When {this} enters, if a creature died this turn, create a 2/2 blue and black Zombie Rogue creature token."
-        ).addHint(MorbidHint.instance));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ZombieRogueToken()))
+                .withInterveningIf(MorbidCondition.instance).addHint(MorbidHint.instance));
 
         // Plot {2}{B}
         this.addAbility(new PlotAbility("{2}{B}"));

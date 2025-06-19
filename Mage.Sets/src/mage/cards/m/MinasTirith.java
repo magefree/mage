@@ -16,7 +16,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.constants.WatcherScope;
-import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
@@ -54,7 +53,7 @@ public final class MinasTirith extends CardImpl {
 
         // {1}{W}, {T}: Draw a card. Activate only if you attacked with two or more creatures this turn.
         Ability ability = new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1),
+                new DrawCardSourceControllerEffect(1),
                 new ManaCostsImpl<>("{1}{W}"), MinasTirithCondition.instance
         );
         ability.addCost(new TapSourceCost());

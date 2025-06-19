@@ -24,6 +24,7 @@ import mage.constants.CardType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
+import mage.util.CardUtil;
 
 /**
  *
@@ -54,7 +55,7 @@ public final class WinterCursedRider extends CardImpl {
         WardAbility wardAbility = new WardAbility(new PayLifeCost(2));
         this.addAbility(new SimpleStaticAbility(
                 new GainAbilityAllEffect(wardAbility, Duration.WhileOnBattlefield, StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACTS)
-                        .setText("Artifacts you control have " + "\"" + wardAbility.getRuleWithoutHint() + "\"")
+                        .setText("Artifacts you control have " + "\"" + CardUtil.getTextWithFirstCharUpperCase(wardAbility.getRuleWithoutHint()) + "\"")
         ));
         // Exhaust -- {2}{U}{B}, {T}, Exile X artifact cards from your graveyard: Each other nonartifact creature gets -X/-X until end of turn.
         Ability ability = new ExhaustAbility(new BoostAllEffect(xValue, xValue, Duration.EndOfTurn, filter, true),

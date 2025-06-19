@@ -12,6 +12,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  * @author North
@@ -52,12 +53,13 @@ public class DiesCreatureTriggeredAbility extends TriggeredAbilityImpl {
     public DiesCreatureTriggeredAbility(Zone zone, Effect effect, boolean optional, FilterPermanent filter, boolean setTargetPointer) {
         this(zone, effect, optional, filter, (setTargetPointer ? SetTargetPointer.PERMANENT : SetTargetPointer.NONE));
     }
+
     public DiesCreatureTriggeredAbility(Zone zone, Effect effect, boolean optional, FilterPermanent filter, SetTargetPointer setTargetPointer) {
         super(zone, effect, optional);
         this.filter = filter;
         this.setTargetPointer = setTargetPointer;
         setLeavesTheBattlefieldTrigger(true);
-        setTriggerPhrase("Whenever " + filter.getMessage() + (filter.getMessage().startsWith("one or more") ? " die, " : " dies, "));
+        setTriggerPhrase("Whenever " + CardUtil.addArticle(filter.getMessage()) + (filter.getMessage().startsWith("one or more") ? " die, " : " dies, "));
     }
 
     protected DiesCreatureTriggeredAbility(final DiesCreatureTriggeredAbility ability) {

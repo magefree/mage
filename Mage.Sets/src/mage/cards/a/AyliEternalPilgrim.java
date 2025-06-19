@@ -7,7 +7,7 @@ import mage.abilities.condition.common.MoreThanStartingLifeTotalCondition;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.dynamicvalue.common.SacrificeCostCreaturesToughness;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ExileTargetEffect;
@@ -18,7 +18,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetNonlandPermanent;
 
@@ -47,11 +46,8 @@ public final class AyliEternalPilgrim extends CardImpl {
         this.addAbility(ability);
 
         // {1}{W}{B}, Sacrifice another creature: Exile target nonland permanent. Activate only if you have at least 10 life more than your starting life total.
-        ability = new ConditionalActivatedAbility(
-                Zone.BATTLEFIELD,
-                new ExileTargetEffect(),
-                new ManaCostsImpl<>("{1}{W}{B}"),
-                MoreThanStartingLifeTotalCondition.TEN
+        ability = new ActivateIfConditionActivatedAbility(
+                new ExileTargetEffect(), new ManaCostsImpl<>("{1}{W}{B}"), MoreThanStartingLifeTotalCondition.TEN
         );
         ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         ability.addTarget(new TargetNonlandPermanent().withChooseHint("to exile"));

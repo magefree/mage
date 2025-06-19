@@ -1,7 +1,5 @@
-
-
 package mage.abilities.costs.common;
-import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
@@ -12,18 +10,17 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
- *
- *
  * @author LevelX2
- *
  */
 
 public class RevealSourceFromYourHandCost extends CostImpl {
     public RevealSourceFromYourHandCost() {
-        this.text = "reveal {this} from your hand";
+        this.text = "reveal this card from your hand";
     }
+
     public RevealSourceFromYourHandCost(RevealSourceFromYourHandCost cost) {
         super(cost);
     }
@@ -32,14 +29,16 @@ public class RevealSourceFromYourHandCost extends CostImpl {
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         paid = false;
         Player player = game.getPlayer(controllerId);
-        if (player != null) {
-            Card card = player.getHand().get(ability.getSourceId(), game);
-            if (card != null) {
-                Cards cards = new CardsImpl(card);
-                paid = true;
-                player.revealCards("Reveal card cost", cards, game);
-            }
+        if (player == null) {
+            return paid;
         }
+        Card card = player.getHand().get(ability.getSourceId(), game);
+        if (card == null) {
+            return paid;
+        }
+        Cards cards = new CardsImpl(card);
+        paid = true;
+        player.revealCards("Reveal card cost", cards, game);
         return paid;
     }
 
@@ -52,5 +51,4 @@ public class RevealSourceFromYourHandCost extends CostImpl {
     public RevealSourceFromYourHandCost copy() {
         return new RevealSourceFromYourHandCost(this);
     }
-
 }

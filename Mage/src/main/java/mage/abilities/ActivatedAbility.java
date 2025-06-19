@@ -75,7 +75,7 @@ public interface ActivatedAbility extends Ability {
      *
      * @param mayActivate
      */
-    void setMayActivate(TargetController mayActivate);
+    ActivatedAbility setMayActivate(TargetController mayActivate);
 
     /**
      * Returns the minimal possible cost for what the ability can be activated

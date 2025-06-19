@@ -1,25 +1,20 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
+import mage.abilities.common.CycleTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.common.ZoneChangeTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.token.SharkToken;
 import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -42,7 +37,7 @@ public final class SharkTyphoon extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{X}{1}{U}")));
 
         // When you cycle Shark Typhoon, create an X/X blue Shark creature token with flying.
-        this.addAbility(new SharkTyphoonTriggeredAbility());
+        this.addAbility(new CycleTriggeredAbility(new SharkTyphoonCycleEffect()));
     }
 
     private SharkTyphoon(final SharkTyphoon card) {
@@ -82,42 +77,29 @@ class SharkTyphoonCastEffect extends OneShotEffect {
     }
 }
 
-class SharkTyphoonTriggeredAbility extends ZoneChangeTriggeredAbility {
+class SharkTyphoonCycleEffect extends OneShotEffect {
 
-    SharkTyphoonTriggeredAbility() {
-        super(Zone.ALL, null, "", false);
+    SharkTyphoonCycleEffect() {
+        super(Outcome.Benefit);
+        staticText = "create an X/X blue Shark creature token with flying";
     }
 
-    private SharkTyphoonTriggeredAbility(SharkTyphoonTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ACTIVATED_ABILITY;
+    private SharkTyphoonCycleEffect(final SharkTyphoonCycleEffect effect) {
+        super(effect);
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (!event.getSourceId().equals(this.getSourceId())) {
-            return false;
+    public SharkTyphoonCycleEffect copy() {
+        return new SharkTyphoonCycleEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Object xValueObject = getValue("cycleXValue");
+        int xValue = 0;
+        if (xValueObject instanceof Integer) {
+            xValue = (int) xValueObject;
         }
-        StackObject object = game.getStack().getStackObject(event.getSourceId());
-        if (object == null || !(object.getStackAbility() instanceof CyclingAbility)) {
-            return false;
-        }
-        this.getEffects().clear();
-        this.addEffect(new CreateTokenEffect(new SharkToken(CardUtil.getSourceCostsTag(game, object.getStackAbility(), "X", 0))));
-        return true;
-    }
-
-    @Override
-    public SharkTyphoonTriggeredAbility copy() {
-        return new SharkTyphoonTriggeredAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return "When you cycle {this}, create an X/X blue Shark creature token with flying.";
+        return new SharkToken(xValue).putOntoBattlefield(1, game, source, source.getControllerId());
     }
 }

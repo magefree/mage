@@ -6,7 +6,6 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.BargainedCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.mana.AddManaInAnyCombinationEffect;
 import mage.abilities.keyword.BargainAbility;
@@ -42,11 +41,8 @@ public final class RealmScorcherHellkite extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // When Realm-Scorcher Hellkite enters the battlefield, if it was bargained, add four mana in any combination of colors.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new AddManaInAnyCombinationEffect(4)),
-                BargainedCondition.instance,
-                "When {this} enters, if it was bargained, add four mana in any combination of colors."
-        ));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new AddManaInAnyCombinationEffect(4))
+                .withInterveningIf(BargainedCondition.instance));
 
         // {1}{R}: Realm-Scorcher Hellkite deals 1 damage to any target.
         Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new ManaCostsImpl<>("{1}{R}"));

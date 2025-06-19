@@ -13,7 +13,7 @@ public class PutIntoGraveFromLibrarySourceTriggeredAbility extends ZoneChangeTri
     }
 
     public PutIntoGraveFromLibrarySourceTriggeredAbility(Effect effect, boolean optional) {
-        super(Zone.LIBRARY, Zone.GRAVEYARD, effect, "When {this} is put into your graveyard from your library, ",  optional);
+        super(Zone.LIBRARY, Zone.GRAVEYARD, effect, "When this card is put into your graveyard from your library, ",  optional);
     }
 
     protected PutIntoGraveFromLibrarySourceTriggeredAbility(final PutIntoGraveFromLibrarySourceTriggeredAbility ability) {

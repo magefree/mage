@@ -3,7 +3,6 @@ package mage.cards.b;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.abilities.keyword.MenaceAbility;
@@ -32,13 +31,9 @@ public final class BogBadger extends CardImpl {
         this.addAbility(new KickerAbility("{B}"));
 
         // When Bog Badger enters the battlefield, if it was kicked, creatures you control gain menace until end of turn.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new GainAbilityControlledEffect(
-                        new MenaceAbility(false), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES
-                )), KickedCondition.ONCE, "When {this} enters, " +
-                "if it was kicked, creatures you control gain menace until end of turn. " +
-                "<i>(A creature with menace can't be blocked except by two or more creatures.)</i>"
-        ));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new GainAbilityControlledEffect(
+                new MenaceAbility(false), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES
+        )).withInterveningIf(KickedCondition.ONCE));
     }
 
     private BogBadger(final BogBadger card) {

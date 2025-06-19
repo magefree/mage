@@ -1,11 +1,11 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.common.FerociousCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.hint.common.FerociousHint;
 import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -31,13 +31,9 @@ public final class StampedeRider extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // At the beginning of each combat, if you control a creature with power 4 or greater, Stampede Rider gets +1/+1 until end of turn.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfCombatTriggeredAbility(
-                        TargetController.ANY, new BoostSourceEffect(1, 1, Duration.EndOfTurn),
-                        false
-                ), FerociousCondition.instance, "At the beginning of each combat, " +
-                "if you control a creature with power 4 or greater, {this} gets +1/+1 until end of turn."
-        ));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(
+                TargetController.ANY, new BoostSourceEffect(1, 1, Duration.EndOfTurn), false
+        ).withInterveningIf(FerociousCondition.instance).addHint(FerociousHint.instance));
     }
 
     private StampedeRider(final StampedeRider card) {

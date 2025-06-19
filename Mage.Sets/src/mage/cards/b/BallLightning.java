@@ -1,27 +1,25 @@
-
-
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.game.events.GameEvent.EventType;
+import mage.constants.TargetController;
+
+import java.util.UUID;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public final class BallLightning extends CardImpl {
 
     public BallLightning(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{R}{R}");
         this.subtype.add(SubType.ELEMENTAL);
 
         this.power = new MageInt(6);
@@ -29,7 +27,9 @@ public final class BallLightning extends CardImpl {
 
         this.addAbility(TrampleAbility.getInstance());
         this.addAbility(HasteAbility.getInstance());
-        this.addAbility(new OnEventTriggeredAbility(EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new SacrificeSourceEffect()));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(
+                TargetController.NEXT, new SacrificeSourceEffect(), false
+        ));
     }
 
     private BallLightning(final BallLightning card) {

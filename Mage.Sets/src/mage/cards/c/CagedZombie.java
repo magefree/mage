@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 
 import java.util.UUID;
 
@@ -30,8 +29,7 @@ public final class CagedZombie extends CardImpl {
 
         // {1}{B}, {T}: Each opponent loses 2 life. Activate this ability only if a creature died this turn.
         Ability ability = new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD, new LoseLifeOpponentsEffect(2),
-                new ManaCostsImpl<>("{1}{B}"), MorbidCondition.instance
+                new LoseLifeOpponentsEffect(2), new ManaCostsImpl<>("{1}{B}"), MorbidCondition.instance
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability.addHint(MorbidHint.instance));

@@ -295,10 +295,10 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Ensnared by the Mara", 689, Rarity.RARE, mage.cards.e.EnsnaredByTheMara.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ensnared by the Mara", 84, Rarity.RARE, mage.cards.e.EnsnaredByTheMara.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ensnared by the Mara", 975, Rarity.RARE, mage.cards.e.EnsnaredByTheMara.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Everybody Lives!", 18, Rarity.RARE, mage.cards.e.EverybodyLives.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Everybody Lives!", 338, Rarity.RARE, mage.cards.e.EverybodyLives.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Everybody Lives!", 623, Rarity.RARE, mage.cards.e.EverybodyLives.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Everybody Lives!", 929, Rarity.RARE, mage.cards.e.EverybodyLives.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Everybody Lives!", 18, Rarity.RARE, mage.cards.e.EverybodyLives.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Everybody Lives!", 338, Rarity.RARE, mage.cards.e.EverybodyLives.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Everybody Lives!", 623, Rarity.RARE, mage.cards.e.EverybodyLives.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Everybody Lives!", 929, Rarity.RARE, mage.cards.e.EverybodyLives.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Everything Comes to Dust", 19, Rarity.RARE, mage.cards.e.EverythingComesToDust.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Everything Comes to Dust", 339, Rarity.RARE, mage.cards.e.EverythingComesToDust.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Everything Comes to Dust", 624, Rarity.RARE, mage.cards.e.EverythingComesToDust.class, NON_FULL_USE_VARIOUS));
@@ -877,8 +877,8 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("The Caves of Androzani", 15, Rarity.RARE, mage.cards.t.TheCavesOfAndrozani.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Caves of Androzani", 620, Rarity.RARE, mage.cards.t.TheCavesOfAndrozani.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("The Cheetah Planet", 574, Rarity.COMMON, mage.cards.t.TheCheetahPlanet.class));
-        //cards.add(new SetCardInfo("The Curse of Fenric", 118, Rarity.RARE, mage.cards.t.TheCurseOfFenric.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Curse of Fenric", 723, Rarity.RARE, mage.cards.t.TheCurseOfFenric.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Curse of Fenric", 118, Rarity.RARE, mage.cards.t.TheCurseOfFenric.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Curse of Fenric", 723, Rarity.RARE, mage.cards.t.TheCurseOfFenric.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("The Cyber-Controller", 119, Rarity.RARE, mage.cards.t.TheCyberController.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("The Cyber-Controller", 405, Rarity.RARE, mage.cards.t.TheCyberController.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("The Cyber-Controller", 724, Rarity.RARE, mage.cards.t.TheCyberController.class, NON_FULL_USE_VARIOUS));

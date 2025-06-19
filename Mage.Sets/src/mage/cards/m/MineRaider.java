@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.hint.ConditionHint;
 import mage.abilities.hint.Hint;
@@ -26,7 +25,7 @@ import java.util.UUID;
  */
 public final class MineRaider extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledPermanent();
+    private static final FilterPermanent filter = new FilterControlledPermanent("you control another outlaw");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -34,7 +33,7 @@ public final class MineRaider extends CardImpl {
     }
 
     private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
-    private static final Hint hint = new ConditionHint(condition, "You control another outlaw");
+    private static final Hint hint = new ConditionHint(condition);
 
     public MineRaider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
@@ -48,10 +47,8 @@ public final class MineRaider extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // When Mine Raider enters the battlefield, if you control another outlaw, create a Treasure token.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new TreasureToken())), condition,
-                "When {this} enters, if you control another outlaw, create a Treasure token."
-        ).addHint(hint));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new TreasureToken()))
+                .withInterveningIf(condition).addHint(hint));
     }
 
     private MineRaider(final MineRaider card) {

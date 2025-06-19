@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.game.Game;
 
 import java.util.Collection;
@@ -24,10 +23,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class DreadlightMonstrosity extends CardImpl {
-
-    private static final Hint hint = new ConditionHint(
-            DreadlightMonstrosityCondition.instance, "You own a card in exile"
-    );
 
     public DreadlightMonstrosity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
@@ -42,9 +37,9 @@ public final class DreadlightMonstrosity extends CardImpl {
 
         // {3}{U}{U}: Dreadlight Monstrosity can't be blocked this turn. Activate only if you own a card in exile.
         this.addAbility(new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD, new CantBeBlockedSourceEffect(Duration.EndOfTurn),
+                new CantBeBlockedSourceEffect(Duration.EndOfTurn),
                 new ManaCostsImpl<>("{3}{U}{U}"), DreadlightMonstrosityCondition.instance
-        ).addHint(hint));
+        ).addHint(DreadlightMonstrosityCondition.getHint()));
     }
 
     private DreadlightMonstrosity(final DreadlightMonstrosity card) {
@@ -59,6 +54,11 @@ public final class DreadlightMonstrosity extends CardImpl {
 
 enum DreadlightMonstrosityCondition implements Condition {
     instance;
+    private static final Hint hint = new ConditionHint(instance);
+
+    public static Hint getHint() {
+        return hint;
+    }
 
     @Override
     public boolean apply(Game game, Ability source) {

@@ -16,7 +16,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.DamagedPlayerControlsTargetAdjuster;
+import mage.target.targetadjustment.ThatPlayerControlsTargetAdjuster;
 
 import java.util.UUID;
 
@@ -39,7 +39,7 @@ public final class RiptideEntrancer extends CardImpl {
         Effect effect = new DoIfCostPaid(new GainControlTargetEffect(Duration.WhileOnBattlefield), new SacrificeSourceCost());
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(effect, false, true);
         ability.addTarget(new TargetPermanent(filter));
-        ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
+        ability.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster());
         this.addAbility(ability);
 
         // Morph {U}{U}

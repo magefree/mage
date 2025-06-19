@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.DescendCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -29,11 +28,8 @@ public final class CoatiScavenger extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Descend 4 -- When Coati Scavenger enters the battlefield, if there are four or more permanent cards in your graveyard, return target permanent card from your graveyard to your hand.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect()),
-                DescendCondition.FOUR, "When {this} enters, if there are four or more " +
-                "permanent cards in your graveyard, return target permanent card from your graveyard to your hand."
-        );
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect())
+                .withInterveningIf(DescendCondition.FOUR);
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_PERMANENT));
         this.addAbility(ability.setAbilityWord(AbilityWord.DESCEND_4).addHint(DescendCondition.getHint()));
     }

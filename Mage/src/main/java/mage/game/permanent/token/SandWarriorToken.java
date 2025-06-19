@@ -10,7 +10,7 @@ import mage.constants.SubType;
 public final class SandWarriorToken extends TokenImpl {
 
     public SandWarriorToken() {
-        super("Sand Warrior Token", "1/1 red, green, and white Sand Warrior creature tokens");
+        super("Sand Warrior Token", "1/1 red, green, and white Sand Warrior creature token");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         color.setGreen(true);

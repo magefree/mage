@@ -28,8 +28,7 @@ public final class MeticulousExcavation extends CardImpl {
 
         // {2}{W}: Return target permanent you control to its owner's hand. If it has unearth, instead exile it, then return that card to its owner's hand. Activate only during your turn.
         Ability ability = new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD, new MeticulousExcavationEffect(),
-                new ManaCostsImpl<>("{2}{W}"), MyTurnCondition.instance
+                new MeticulousExcavationEffect(), new ManaCostsImpl<>("{2}{W}"), MyTurnCondition.instance
         );
         ability.addTarget(new TargetControlledPermanent());
         this.addAbility(ability);

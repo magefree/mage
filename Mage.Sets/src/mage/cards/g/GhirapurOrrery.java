@@ -1,40 +1,36 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.IntCompareCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.CardsInHandCondition;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.continuous.PlayAdditionalLandsAllEffect;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
+
+import java.util.UUID;
 
 /**
- *
  * @author emerald000
  */
 public final class GhirapurOrrery extends CardImpl {
 
+    private static final Condition condition = new CardsInHandCondition(ComparisonType.EQUAL_TO, 0, TargetController.ACTIVE);
+
     public GhirapurOrrery(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // Each player may play an additional land on each of their turns.
         this.addAbility(new SimpleStaticAbility(new PlayAdditionalLandsAllEffect()));
 
         // At the beginning of each player's upkeep, if that player has no cards in hand, that player draws three cards.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new DrawCardTargetEffect(3), false),
-                new GhirapurOrreryCondition(),
-                "At the beginning of each player's upkeep, if that player has no cards in hand, that player draws three cards."));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
+                TargetController.EACH_PLAYER, new DrawCardTargetEffect(3), false
+        ).withInterveningIf(condition));
     }
 
     private GhirapurOrrery(final GhirapurOrrery card) {
@@ -44,21 +40,5 @@ public final class GhirapurOrrery extends CardImpl {
     @Override
     public GhirapurOrrery copy() {
         return new GhirapurOrrery(this);
-    }
-}
-
-class GhirapurOrreryCondition extends IntCompareCondition {
-
-    GhirapurOrreryCondition() {
-        super(ComparisonType.EQUAL_TO, 0);
-    }
-
-    @Override
-    protected int getInputValue(Game game, Ability source) {
-        Player activePlayer = game.getPlayer(game.getActivePlayerId());
-        if (activePlayer != null) {
-            return activePlayer.getHand().size();
-        }
-        return 0;
     }
 }

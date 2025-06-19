@@ -1,8 +1,5 @@
 package mage.cards.e;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.condition.Condition;
@@ -12,13 +9,15 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class EndlessAtlas extends CardImpl {
@@ -28,10 +27,8 @@ public final class EndlessAtlas extends CardImpl {
 
         // {2}, {T}: Draw a card. Activate this ability only if you control three or more lands with the same name.
         Ability ability = new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD,
                 new DrawCardSourceControllerEffect(1),
-                new GenericManaCost(2),
-                new EndlessAtlasCondition()
+                new GenericManaCost(2), EndlessAtlasCondition.instance
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -47,7 +44,8 @@ public final class EndlessAtlas extends CardImpl {
     }
 }
 
-class EndlessAtlasCondition implements Condition {
+enum EndlessAtlasCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

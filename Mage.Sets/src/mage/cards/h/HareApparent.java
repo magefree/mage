@@ -47,6 +47,8 @@ public final class HareApparent extends CardImpl {
         // When this creature enters, create a number of 1/1 white Rabbit creature tokens equal to the number of other creatures you control named Hare Apparent.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
                 new CreateTokenEffect(new RabbitToken(), xValue)
+                        .setText("create a number of 1/1 white Rabbit creature tokens equal " +
+                                "to the number of other creatures you control named Hare Apparent")
         ).addHint(hint));
 
         // A deck can have any number of cards named Hare Apparent.

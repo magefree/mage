@@ -97,10 +97,11 @@ public class Vault13DwellersJourneyTest extends CardTestPlayerBase {
         addTarget(playerA, "Memnite");
         addTarget(playerA, "Ornithopter");
 
+        // turn 2
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Sacrifice");
         addTarget(playerB, vault);
 
-        //Turn 3
+        // turn 3
         addTarget(playerA, "Squire");
         addTarget(playerA, "Watchwolf");
 
@@ -113,10 +114,10 @@ public class Vault13DwellersJourneyTest extends CardTestPlayerBase {
         addTarget(playerA, "Mountain"); // for Scry 2
 
         // turn 7
-        checkExileCount("before III: Memnite exiled", 5, PhaseStep.UPKEEP, playerB, "Memnite", 1);
-        checkExileCount("before III: Ornithopter exiled", 5, PhaseStep.UPKEEP, playerB, "Ornithopter", 1);
-        checkExileCount("before III: Squire exiled", 5, PhaseStep.UPKEEP, playerB, "Squire", 1);
-        checkExileCount("before III: Watchwolf exiled", 5, PhaseStep.UPKEEP, playerB, "Watchwolf", 1);
+        checkExileCount("before III: Memnite exiled", 7, PhaseStep.UPKEEP, playerB, "Memnite", 1);
+        checkExileCount("before III: Ornithopter exiled", 7, PhaseStep.UPKEEP, playerB, "Ornithopter", 1);
+        checkExileCount("before III: Squire exiled", 7, PhaseStep.UPKEEP, playerB, "Squire", 1);
+        checkExileCount("before III: Watchwolf exiled", 7, PhaseStep.UPKEEP, playerB, "Watchwolf", 1);
         setChoice(playerA, "Memnite^Ornithopter");
 
         setStrictChooseMode(true);

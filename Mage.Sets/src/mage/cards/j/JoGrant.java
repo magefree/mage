@@ -15,7 +15,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterHistoricCard;
+import mage.filter.predicate.mageobject.HistoricPredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -59,7 +59,10 @@ public final class JoGrant extends CardImpl {
 
 class JoGrantEffect extends ContinuousEffectImpl {
 
-    private static final FilterCard filter = new FilterHistoricCard();
+    private static final FilterCard filter = new FilterCard("historic card");
+    static {
+        filter.add(HistoricPredicate.instance);
+    }
 
     JoGrantEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);

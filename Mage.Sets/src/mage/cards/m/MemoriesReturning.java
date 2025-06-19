@@ -74,6 +74,7 @@ class MemoriesReturningEffect extends OneShotEffect {
         }
         TargetPlayer target = new TargetOpponent();
         target.withNotTarget(true);
+        controller.choose(Outcome.Neutral, target, source, game);
         Player opponent = game.getPlayer(target.getFirstTarget());
         if (putCardOnBottom(controller, opponent, cards, source, game)) {
             return true;

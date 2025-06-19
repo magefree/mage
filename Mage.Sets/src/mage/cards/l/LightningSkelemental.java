@@ -2,16 +2,16 @@ package mage.cards.l;
 
 import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.game.events.GameEvent;
+import mage.constants.TargetController;
 
 import java.util.UUID;
 
@@ -40,9 +40,8 @@ public final class LightningSkelemental extends CardImpl {
         ));
 
         // At the beginning of the end step, sacrifice Lightning Skelemental.
-        this.addAbility(new OnEventTriggeredAbility(
-                GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step",
-                true, new SacrificeSourceEffect()
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(
+                TargetController.NEXT, new SacrificeSourceEffect(), false
         ));
     }
 

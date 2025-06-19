@@ -54,7 +54,7 @@ class HelmOfTheHostEffect extends OneShotEffect {
 
     HelmOfTheHostEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "create a token that's a copy of equipped creature, except the token isn't legendary if equipped creature is legendary. That token gains haste.";
+        this.staticText = "create a token that's a copy of equipped creature, except the token isn't legendary. That token gains haste.";
     }
 
     private HelmOfTheHostEffect(final HelmOfTheHostEffect effect) {

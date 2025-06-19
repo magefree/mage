@@ -2,19 +2,21 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.CompoundCondition;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.condition.common.MeldCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.MeldEffect;
 import mage.abilities.keyword.ReachAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -28,6 +30,8 @@ import java.util.UUID;
 public final class TitaniaVoiceOfGaea extends CardImpl {
 
     private static final Condition condition = new CompoundCondition(
+            "there are four or more land cards in your graveyard and you " +
+                    "both own and control {this} and a land named Argoth, Sanctum of Nature",
             new CardsInControllerGraveyardCondition(4, StaticFilters.FILTER_CARD_LAND),
             new MeldCondition("Argoth, Sanctum of Nature", CardType.LAND)
     );
@@ -50,13 +54,9 @@ public final class TitaniaVoiceOfGaea extends CardImpl {
         this.addAbility(new TitaniaVoiceOfGaeaTriggeredAbility());
 
         // At the beginning of your upkeep, if there are four or more land cards in your graveyard and you both own and control Titania, Voice of Gaea and a land named Argoth, Sanctum of Nature, exile them, then meld them into Titania, Gaea Incarnate.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new MeldEffect(
-                        "Argoth, Sanctum of Nature", "Titania, Gaea Incarnate"
-                )), condition, "At the beginning of your upkeep, " +
-                "if there are four or more land cards in your graveyard and you both own and control {this} " +
-                "and a land named Argoth, Sanctum of Nature, exile them, then meld them into Titania, Gaea Incarnate."
-        ));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new MeldEffect(
+                "Argoth, Sanctum of Nature", "Titania, Gaea Incarnate"
+        )).withInterveningIf(condition));
     }
 
     private TitaniaVoiceOfGaea(final TitaniaVoiceOfGaea card) {

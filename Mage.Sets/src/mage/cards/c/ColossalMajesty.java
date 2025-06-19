@@ -1,10 +1,9 @@
 package mage.cards.c;
 
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.FerociousCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.hint.common.FerociousHint;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -20,15 +19,8 @@ public final class ColossalMajesty extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
 
         // At the beginning of your upkeep, if you control a creature with power 4 or greater, draw a card.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(
-                        new DrawCardSourceControllerEffect(1), false
-                ),
-                FerociousCondition.instance,
-                "At the beginning of your upkeep, "
-                        + "if you control a creature with power 4 or greater, "
-                        + "draw a card."
-        ).addHint(FerociousHint.instance));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DrawCardSourceControllerEffect(1))
+                .withInterveningIf(FerociousCondition.instance).addHint(FerociousHint.instance));
     }
 
     private ColossalMajesty(final ColossalMajesty card) {

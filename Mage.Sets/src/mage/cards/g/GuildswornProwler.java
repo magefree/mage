@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
@@ -35,10 +34,8 @@ public final class GuildswornProwler extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
 
         // When Guildsworn Prowler dies, if it wasn't blocking, draw a card.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new DiesSourceTriggeredAbility(new DrawCardSourceControllerEffect(1)),
-                GuildswornProwlerCondition.instance, "When {this} dies, if it wasn't blocking, draw a card."
-        ));
+        this.addAbility(new DiesSourceTriggeredAbility(new DrawCardSourceControllerEffect(1))
+                .withInterveningIf(GuildswornProwlerCondition.instance));
     }
 
     private GuildswornProwler(final GuildswornProwler card) {
@@ -60,5 +57,10 @@ enum GuildswornProwlerCondition implements Condition {
                 .ofNullable(source.getSourcePermanentOrLKI(game))
                 .map(permanent -> !BlockingOrBlockedWatcher.check(permanent, game))
                 .orElse(false);
+    }
+
+    @Override
+    public String toString() {
+        return "it wasn't blocking";
     }
 }

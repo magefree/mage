@@ -9,7 +9,7 @@ import mage.constants.CardType;
 import mage.constants.SagaChapter;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterHistoricCard;
+import mage.filter.predicate.mageobject.HistoricPredicate;
 
 import java.util.UUID;
 
@@ -18,7 +18,10 @@ import java.util.UUID;
  */
 public final class BalladOfTheBlackFlag extends CardImpl {
 
-    private static final FilterCard filter = new FilterHistoricCard();
+    private static final FilterCard filter = new FilterCard("historic card");
+    static {
+        filter.add(HistoricPredicate.instance);
+    }
 
     public BalladOfTheBlackFlag(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}{U}");

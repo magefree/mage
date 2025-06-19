@@ -16,9 +16,7 @@ import mage.abilities.keyword.StartYourEnginesAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterArtifactSpell;
 
 import java.util.UUID;
 
@@ -27,7 +25,6 @@ import java.util.UUID;
  */
 public final class MendicantCoreGuidelight extends CardImpl {
 
-    private static final FilterSpell filter = new FilterArtifactSpell("an artifact spell");
     private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACTS);
 
     public MendicantCoreGuidelight(UUID ownerId, CardSetInfo setInfo) {
@@ -47,7 +44,7 @@ public final class MendicantCoreGuidelight extends CardImpl {
         Effect copyEffect = new CopyTargetStackObjectEffect(true)
                 .setText("copy it. <i>(The copy becomes a token.)</i>");
         Effect doIfEffect = new DoIfCostPaid(copyEffect, new ManaCostsImpl<>("{1}"));
-        Ability ability = new SpellCastControllerTriggeredAbility(doIfEffect, filter, false, SetTargetPointer.SPELL);
+        Ability ability = new SpellCastControllerTriggeredAbility(doIfEffect, StaticFilters.FILTER_SPELL_AN_ARTIFACT, false, SetTargetPointer.SPELL);
         this.addAbility(new MaxSpeedAbility(ability));
     }
 

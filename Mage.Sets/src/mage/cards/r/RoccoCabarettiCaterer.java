@@ -3,7 +3,6 @@ package mage.cards.r;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CastFromEverywhereSourceCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.Card;
@@ -42,16 +41,9 @@ public final class RoccoCabarettiCaterer extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Rocco, Cabaretti Caterer enters the battlefield, if you cast it, you may search your library for a creature card with mana value X or less, put it onto the battlefield, then shuffle.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(
-                        new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)),
-                        true
-                ),
-                CastFromEverywhereSourceCondition.instance,
-                "When {this} enters, " +
-                "if you cast it, you may search your library for a creature card with mana value X or less, " +
-                "put it onto the battlefield, then shuffle.")
-        );
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)), true
+        ).withInterveningIf(CastFromEverywhereSourceCondition.instance));
     }
 
     private RoccoCabarettiCaterer(final RoccoCabarettiCaterer card) {

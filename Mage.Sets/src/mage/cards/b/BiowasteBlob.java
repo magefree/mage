@@ -1,12 +1,11 @@
 package mage.cards.b;
 
 import mage.MageInt;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.ControlACommanderCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.CreateTokenCopySourceEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -36,12 +35,8 @@ public final class BiowasteBlob extends CardImpl {
         )));
 
         // At the beginning of your upkeep, if you control a commander, create a token that's a copy of Biowaste Blob.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(
-                        new CreateTokenCopySourceEffect(), false
-                ), ControlACommanderCondition.instance, "At the beginning of your upkeep, " +
-                "if you control a commander, create a token that's a copy of {this}."
-        ));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenCopySourceEffect())
+                .withInterveningIf(ControlACommanderCondition.instance));
     }
 
     private BiowasteBlob(final BiowasteBlob card) {

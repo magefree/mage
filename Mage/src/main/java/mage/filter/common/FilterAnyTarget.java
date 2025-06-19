@@ -4,6 +4,8 @@ import mage.constants.CardType;
 import mage.filter.predicate.Predicates;
 
 /**
+ * Warning, it's a filter for damage effects only (ignore lands, artifacts and other non-damageable objects)
+ *
  * @author TheElk801
  */
 public class FilterAnyTarget extends FilterPermanentOrPlayer {

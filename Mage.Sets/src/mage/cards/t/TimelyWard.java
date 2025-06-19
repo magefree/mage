@@ -11,7 +11,10 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.AttachmentType;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CommanderPredicate;
 import mage.target.TargetPermanent;
@@ -38,8 +41,8 @@ public final class TimelyWard extends CardImpl {
         this.subtype.add(SubType.AURA);
 
         // You may cast this spell as though it had flash if it targets a commander.
-        this.addAbility(new CastAsThoughItHadFlashIfConditionAbility(condition,
-                "You may cast {this} as though it had flash if it targets a commander."
+        this.addAbility(new CastAsThoughItHadFlashIfConditionAbility(
+                condition, "You may cast this spell as though it had flash if it targets a commander."
         ));
 
         // Enchant creature

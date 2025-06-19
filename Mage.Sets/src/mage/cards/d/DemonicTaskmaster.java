@@ -20,7 +20,7 @@ import mage.filter.predicate.mageobject.AnotherPredicate;
  */
 public final class DemonicTaskmaster extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a creature other than Demonic Taskmaster");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a creature other than {this}");
 
     static {
         filter.add(AnotherPredicate.instance);

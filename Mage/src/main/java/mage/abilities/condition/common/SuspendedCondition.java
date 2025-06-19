@@ -43,7 +43,6 @@ public enum SuspendedCondition implements Condition {
 
     @Override
     public String toString() {
-        return "{this} is suspended";
+        return "this card is suspended";
     }
-
 }

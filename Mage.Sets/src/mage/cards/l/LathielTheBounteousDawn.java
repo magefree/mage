@@ -2,21 +2,19 @@ package mage.cards.l;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.YouGainedLifeCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
+import mage.abilities.dynamicvalue.common.ControllerGainedLifeCount;
 import mage.abilities.effects.common.counter.DistributeCountersEffect;
-import mage.abilities.hint.Hint;
-import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.LifelinkAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.constants.TargetController;
 import mage.filter.StaticFilters;
-import mage.game.Game;
 import mage.target.common.TargetCreaturePermanentAmount;
 import mage.watchers.common.PlayerGainedLifeWatcher;
 
@@ -41,15 +39,17 @@ public final class LathielTheBounteousDawn extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // At the beginning of each end step, if you gained life this turn, distribute up to that many +1/+1 counters among any number of other target creatures.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfEndStepTriggeredAbility(TargetController.ANY, new DistributeCountersEffect(), false),
-                condition, "At the beginning of each end step, if you gained life this turn, " +
-                "distribute up to that many +1/+1 counters among any number of other target creatures."
-        );
+        Ability ability = new BeginningOfEndStepTriggeredAbility(
+                TargetController.ANY, new DistributeCountersEffect()
+                .setText("distribute up to that many +1/+1 counters " +
+                        "among any number of other target creatures"),
+                false
+        ).withInterveningIf(condition);
         ability.addTarget(new TargetCreaturePermanentAmount(
-                LathielTheBounteousDawnValue.instance,
-                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
-        this.addAbility(ability.addHint(LathielTheBounteousDawnValue.getHint()), new PlayerGainedLifeWatcher());
+                ControllerGainedLifeCount.instance,
+                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE
+        ));
+        this.addAbility(ability.addHint(ControllerGainedLifeCount.getHint()), new PlayerGainedLifeWatcher());
     }
 
     private LathielTheBounteousDawn(final LathielTheBounteousDawn card) {
@@ -59,30 +59,5 @@ public final class LathielTheBounteousDawn extends CardImpl {
     @Override
     public LathielTheBounteousDawn copy() {
         return new LathielTheBounteousDawn(this);
-    }
-}
-
-enum LathielTheBounteousDawnValue implements DynamicValue {
-    instance;
-    private static final Hint hint = new ValueHint("Life gained this turn", instance);
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        PlayerGainedLifeWatcher watcher = game.getState().getWatcher(PlayerGainedLifeWatcher.class);
-        return watcher == null ? 0 : watcher.getLifeGained(sourceAbility.getControllerId());
-    }
-
-    @Override
-    public LathielTheBounteousDawnValue copy() {
-        return instance;
-    }
-
-    @Override
-    public String getMessage() {
-        return "";
-    }
-
-    public static Hint getHint() {
-        return hint;
     }
 }

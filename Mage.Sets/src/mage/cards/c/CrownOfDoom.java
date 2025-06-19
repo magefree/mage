@@ -4,16 +4,18 @@ import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.AttacksAllTriggeredAbility;
 import mage.abilities.condition.common.MyTurnCondition;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.hint.common.MyTurnHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.SetTargetPointer;
 import mage.filter.FilterPlayer;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.ObjectSourcePlayer;
@@ -42,22 +44,18 @@ public final class CrownOfDoom extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // Whenever a creature attacks you or a planeswalker you control, it gets +2/+0 until end of turn.
-        Effect effect = new BoostTargetEffect(2, 0, Duration.EndOfTurn);
-        effect.setText("it gets +2/+0 until end of turn");
         this.addAbility(new AttacksAllTriggeredAbility(
-                effect,
-                false,
-                StaticFilters.FILTER_PERMANENT_CREATURE,
-                SetTargetPointer.PERMANENT,
-                true));
+                new BoostTargetEffect(2, 0, Duration.EndOfTurn)
+                        .setText("it gets +2/+0 until end of turn"),
+                false, StaticFilters.FILTER_PERMANENT_CREATURE,
+                SetTargetPointer.PERMANENT, true
+        ));
 
         // {2}: Target player other than Crown of Doom's owner gains control of it. Activate this ability only during your turn.
         Ability ability = new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD,
-                new CrownOfDoomEffect(),
-                new ManaCostsImpl<>("{2}"),
-                MyTurnCondition.instance);
-        ability.addTarget(new TargetPlayer(1, 1, false, filter));
+                new CrownOfDoomEffect(), new GenericManaCost(2), MyTurnCondition.instance
+        );
+        ability.addTarget(new TargetPlayer(filter));
         ability.addHint(MyTurnHint.instance);
         this.addAbility(ability);
     }

@@ -52,7 +52,7 @@ class NabanDeanOfIterationEffect extends ReplacementEffectImpl {
 
     NabanDeanOfIterationEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "If a Wizard entering under your control causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time";
+        staticText = "if a Wizard you control entering causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time";
     }
 
     private NabanDeanOfIterationEffect(final NabanDeanOfIterationEffect effect) {

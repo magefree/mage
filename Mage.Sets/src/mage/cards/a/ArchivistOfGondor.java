@@ -1,12 +1,13 @@
 package mage.cards.a;
 
 import mage.MageInt;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageToAPlayerAllTriggeredAbility;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.effects.common.BecomesMonarchSourceEffect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.hint.common.MonarchHint;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -15,6 +16,7 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CommanderPredicate;
+import mage.game.Game;
 
 import java.util.UUID;
 
@@ -39,13 +41,11 @@ public final class ArchivistOfGondor extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When your commander deals combat damage to a player, if there is no monarch, you become the monarch.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new DealsDamageToAPlayerAllTriggeredAbility(
-                        new BecomesMonarchSourceEffect(), filter, false,
-                        SetTargetPointer.NONE, true
-                ), (game, source) -> game.getMonarchId() == null, "When your commander " +
-                "deals combat damage to a player, if there is no monarch, you become the monarch."
-        ).addHint(MonarchHint.instance));
+        this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(
+                new BecomesMonarchSourceEffect(), filter, false,
+                SetTargetPointer.NONE, true
+        ).setTriggerPhrase("When your commander deals combat damage to a player, ")
+                .withInterveningIf(ArchivistOfGondorCondition.instance).addHint(MonarchHint.instance));
 
         // At the beginning of the monarch's end step, that player draws a card.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
@@ -60,5 +60,19 @@ public final class ArchivistOfGondor extends CardImpl {
     @Override
     public ArchivistOfGondor copy() {
         return new ArchivistOfGondor(this);
+    }
+}
+
+enum ArchivistOfGondorCondition implements Condition {
+    instance;
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return game.getMonarchId() == null;
+    }
+
+    @Override
+    public String toString() {
+        return "there is no monarch";
     }
 }

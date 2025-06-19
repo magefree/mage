@@ -37,7 +37,7 @@ public final class BlademaneBaku extends CardImpl {
         this.toughness = new MageInt(1);
         
         // Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Blademane Baku.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.KI.createInstance()), StaticFilters.FILTER_SPIRIT_OR_ARCANE_CARD, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.KI.createInstance()), StaticFilters.FILTER_SPELL_SPIRIT_OR_ARCANE, true));
 
         // {1}, Remove X ki counters from Blademane Baku: For each counter removed, Blademane Baku gets +2/+0 until end of turn.
         Effect effect = new BoostSourceEffect(xValue, StaticValue.get(0), Duration.EndOfTurn);

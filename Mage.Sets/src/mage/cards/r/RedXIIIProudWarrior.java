@@ -33,7 +33,7 @@ public final class RedXIIIProudWarrior extends CardImpl {
 
     static {
         filter.add(ModifiedPredicate.instance);
-        filter.add(Predicates.or(
+        filter2.add(Predicates.or(
                 SubType.AURA.getPredicate(),
                 SubType.EQUIPMENT.getPredicate()
         ));

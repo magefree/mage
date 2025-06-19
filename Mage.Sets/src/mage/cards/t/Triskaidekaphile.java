@@ -1,19 +1,21 @@
 package mage.cards.t;
 
 import mage.MageInt;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.CardsInHandCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.WinGameSourceControllerEffect;
 import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.ComparisonType;
+import mage.constants.Duration;
+import mage.constants.SubType;
 
 import java.util.UUID;
 
@@ -39,12 +41,7 @@ public final class Triskaidekaphile extends CardImpl {
         )));
 
         // At the beginning of your upkeep, if you have exactly thirteen cards in your hand, you win the game.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(
-                        new WinGameSourceControllerEffect(), false
-                ), condition, "At the beginning of your upkeep, " +
-                "if you have exactly thirteen cards in your hand, you win the game."
-        ));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect()).withInterveningIf(condition));
 
         // {3}{U}: Draw a card.
         this.addAbility(new SimpleActivatedAbility(

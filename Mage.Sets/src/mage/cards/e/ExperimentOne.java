@@ -1,6 +1,5 @@
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
@@ -10,11 +9,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 
+import java.util.UUID;
+
 /**
- *
  * @author Plopman
  */
 public final class ExperimentOne extends CardImpl {
@@ -32,7 +31,7 @@ public final class ExperimentOne extends CardImpl {
         this.addAbility(new EvolveAbility());
 
         //Remove two +1/+1 counters from Experiment One: Regenerate Experiment One.
-        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(), new RemoveCountersSourceCost(CounterType.P1P1.createInstance(2))));
+        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect("it"), new RemoveCountersSourceCost(CounterType.P1P1.createInstance(2))));
     }
 
     private ExperimentOne(final ExperimentOne card) {

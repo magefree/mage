@@ -10,9 +10,10 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreatureOrPlaneswalkerPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
+import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -67,11 +68,15 @@ class BlotOutEffect extends OneShotEffect {
         }
     }
 
-    private static final FilterPermanent filter = new FilterControlledCreatureOrPlaneswalkerPermanent(
+    private static final FilterPermanent filter = new FilterControlledPermanent(
             "creature or planeswalker you control with the greatest mana value"
     );
 
     static {
+        filter.add(Predicates.or(
+                CardType.CREATURE.getPredicate(),
+                CardType.PLANESWALKER.getPredicate()
+        ));
         filter.add(BlotOutPredicate.instance);
     }
 

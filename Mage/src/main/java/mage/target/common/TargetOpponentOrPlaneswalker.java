@@ -1,25 +1,28 @@
 package mage.target.common;
 
 import mage.filter.common.FilterOpponentOrPlaneswalker;
+import mage.filter.common.FilterPermanentOrPlayer;
 
 /**
  * @author LevelX2
  */
 public class TargetOpponentOrPlaneswalker extends TargetPermanentOrPlayer {
 
+    private static final FilterPermanentOrPlayer filter = new FilterOpponentOrPlaneswalker();
+
     public TargetOpponentOrPlaneswalker() {
         this(1);
     }
 
-    public TargetOpponentOrPlaneswalker(FilterOpponentOrPlaneswalker filter) {
-        this(1, 1, filter, false);
-    }
-
     public TargetOpponentOrPlaneswalker(int numTargets) {
-        this(numTargets, numTargets, new FilterOpponentOrPlaneswalker("opponent or planeswalker"), false);
+        this(numTargets, numTargets);
     }
 
-    public TargetOpponentOrPlaneswalker(int minNumTargets, int maxNumTargets, FilterOpponentOrPlaneswalker filter, boolean notTarget) {
+    public TargetOpponentOrPlaneswalker(int minNumTargets, int maxNumTargets) {
+        this(minNumTargets, maxNumTargets, false);
+    }
+
+    public TargetOpponentOrPlaneswalker(int minNumTargets, int maxNumTargets, boolean notTarget) {
         super(minNumTargets, maxNumTargets, filter, notTarget);
     }
 

@@ -12,7 +12,7 @@ import mage.constants.SubType;
 public final class BeastieToken extends TokenImpl {
 
     public BeastieToken() {
-        super("Beast Token", "4/4 white Beast creature token with \"This creature can't attack or block alone.\"");
+        super("Beast Token", "4/4 white Beast creature token with \"This token can't attack or block alone.\"");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add(SubType.BEAST);

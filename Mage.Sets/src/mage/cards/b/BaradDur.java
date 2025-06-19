@@ -9,13 +9,13 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.keyword.AmassEffect;
+import mage.abilities.hint.common.MorbidHint;
 import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
@@ -47,13 +47,11 @@ public final class BaradDur extends CardImpl {
 
         // {X}{X}{B}, {T}: Amass Orcs X. Activate only if a creature died this turn.
         Ability ability = new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD,
                 new AmassEffect(GetXValue.instance, SubType.ORC, false),
-                new ManaCostsImpl<>("{X}{X}{B}"),
-                MorbidCondition.instance
+                new ManaCostsImpl<>("{X}{X}{B}"), MorbidCondition.instance
         );
         ability.addCost(new TapSourceCost());
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(MorbidHint.instance));
     }
 
     private BaradDur(final BaradDur card) {

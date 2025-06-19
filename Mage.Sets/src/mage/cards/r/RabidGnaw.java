@@ -22,7 +22,7 @@ public final class RabidGnaw extends CardImpl {
         // Target creature you control gets +1/+0 until end of turn. Then it deals damage equal to its power to target creature you don't control.
         this.getSpellAbility().addEffect(new BoostTargetEffect(1, 0));
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        this.getSpellAbility().addEffect(new DamageWithPowerFromOneToAnotherTargetEffect("then it"));
+        this.getSpellAbility().addEffect(new DamageWithPowerFromOneToAnotherTargetEffect("Then it"));
         this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
     }
 

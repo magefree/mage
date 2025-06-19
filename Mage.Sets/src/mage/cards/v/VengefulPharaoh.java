@@ -56,7 +56,7 @@ class VengefulPharaohTriggeredAbility extends TriggeredAbilityImpl implements Ba
     VengefulPharaohTriggeredAbility() {
         super(Zone.GRAVEYARD, new DestroyTargetEffect(), false);
         this.addTarget(new TargetAttackingCreature());
-        this.addEffect(new PutOnLibrarySourceEffect(true).setText(", then put {this} on top of your library"));
+        this.addEffect(new PutOnLibrarySourceEffect(true).setText(", then put this card on top of your library"));
         this.withInterveningIf(SourceInGraveyardCondition.instance);
         setTriggerPhrase("Whenever combat damage is dealt to you or a planeswalker you control, ");
     }
@@ -95,5 +95,4 @@ class VengefulPharaohTriggeredAbility extends TriggeredAbilityImpl implements Ba
         }
         return false;
     }
-
 }

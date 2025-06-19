@@ -3,6 +3,8 @@ package mage.cards.r;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.abilities.keyword.DevourAbility;
@@ -12,10 +14,10 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanentAmount;
+import mage.util.CardUtil;
 
 import java.util.Collection;
 import java.util.List;
@@ -39,7 +41,11 @@ public final class RavenousGigantotherium extends CardImpl {
         this.addAbility(new DevourAbility(3));
 
         // When Ravenous Gigantotherium enters the battlefield, it deals X damage divided as you choose among up to X target creatures, where X is its power. Each of those creatures deals damage equal to its power to Ravenous Gigantotherium.
-        this.addAbility(new RavenousGigantotheriumAbility());
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageMultiEffect());
+        ability.addEffect(new RavenousGigantotheriumEffect());
+        ability.addTarget(new TargetCreaturePermanentAmount(RavenousGigantotheriumAmount.instance)
+                .withTargetName("up to X target creatures, where X is its power"));
+        this.addAbility(ability);
     }
 
     private RavenousGigantotherium(final RavenousGigantotherium card) {
@@ -52,47 +58,28 @@ public final class RavenousGigantotherium extends CardImpl {
     }
 }
 
-class RavenousGigantotheriumAbility extends EntersBattlefieldTriggeredAbility {
+enum RavenousGigantotheriumAmount implements DynamicValue {
+    instance;
 
-    RavenousGigantotheriumAbility() {
-        super(null, false);
-    }
-
-    private RavenousGigantotheriumAbility(final RavenousGigantotheriumAbility ability) {
-        super(ability);
+    @Override
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        return CardUtil.getEffectValueFromAbility(sourceAbility, "permanentEnteredBattlefield", Permanent.class)
+                .map(permanent -> permanent.getPower().getValue()).orElse(0);
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (!super.checkTrigger(event, game)) {
-            return false;
-        }
-        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
-        if (permanent == null) {
-            return false;
-        }
-        int power = Math.max(permanent.getPower().getValue(), 0);
-        this.getEffects().clear();
-        this.addEffect(new DamageMultiEffect());
-        this.addEffect(new RavenousGigantotheriumEffect());
-        this.getTargets().clear();
-        if (power < 1) {
-            return true;
-        }
-        this.addTarget(new TargetCreaturePermanentAmount(power, 0, power));
-        return true;
+    public DynamicValue copy() {
+        return instance;
     }
 
     @Override
-    public String getRule() {
-        return "When {this} enters, it deals X damage " +
-                "divided as you choose among up to X target creatures, where X is its power. " +
-                "Each of those creatures deals damage equal to its power to {this}.";
+    public String getMessage() {
+        return "its power";
     }
 
     @Override
-    public RavenousGigantotheriumAbility copy() {
-        return new RavenousGigantotheriumAbility(this);
+    public String toString() {
+        return "X";
     }
 }
 
@@ -100,6 +87,7 @@ class RavenousGigantotheriumEffect extends OneShotEffect {
 
     RavenousGigantotheriumEffect() {
         super(Outcome.Benefit);
+        this.setText("Each of those creatures deals damage equal to its power to {this}.");
     }
 
     private RavenousGigantotheriumEffect(final RavenousGigantotheriumEffect effect) {

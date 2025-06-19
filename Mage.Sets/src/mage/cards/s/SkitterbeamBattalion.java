@@ -3,7 +3,6 @@ package mage.cards.s;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CastFromEverywhereSourceCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.CreateTokenCopySourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.PrototypeAbility;
@@ -37,11 +36,8 @@ public final class SkitterbeamBattalion extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // When Skitterbeam Battalion enters the battlefield, if you cast it, create two tokens that are copies of it.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new CreateTokenCopySourceEffect(2)),
-                CastFromEverywhereSourceCondition.instance, "When {this} enters, " +
-                "if you cast it, create two tokens that are copies of it."
-        ));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenCopySourceEffect(2)
+                .setText("create two tokens that are copies of it")).withInterveningIf(CastFromEverywhereSourceCondition.instance));
     }
 
     private SkitterbeamBattalion(final SkitterbeamBattalion card) {

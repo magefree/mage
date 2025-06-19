@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.DescendCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -42,12 +41,7 @@ public final class CouncilOfEchoes extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Descend 4 -- When Council of Echoes enters the battlefield, if there are four or more permanent cards in your graveyard, return up to one target nonland permanent other than Council of Echoes to its owner's hand.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), false),
-                DescendCondition.FOUR, "When {this} enters, "
-                + "if there are four or more permanent cards in your graveyard, "
-                + "return up to one target nonland permanent other than {this} to its owner's hand"
-        );
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), false).withInterveningIf(DescendCondition.FOUR);
         ability.addTarget(new TargetPermanent(0, 1, filter));
         this.addAbility(ability.addHint(DescendCondition.getHint()).setAbilityWord(AbilityWord.DESCEND_4));
     }

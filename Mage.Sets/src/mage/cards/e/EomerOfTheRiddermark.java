@@ -3,7 +3,6 @@ package mage.cards.e;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.condition.common.ControlsCreatureGreatestPowerCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.hint.ConditionHint;
 import mage.abilities.hint.Hint;
@@ -40,12 +39,8 @@ public final class EomerOfTheRiddermark extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Whenever Eomer of the Riddermark attacks, if you control a creature with the greatest power among creatures on the battlefield, create a 1/1 white Human Soldier creature token.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new AttacksTriggeredAbility(new CreateTokenEffect(new HumanSoldierToken())),
-                ControlsCreatureGreatestPowerCondition.instance, "Whenever {this} attacks, " +
-                "if you control a creature with the greatest power among creatures on the battlefield, " +
-                "create a 1/1 white Human Soldier creature token."
-        ).addHint(hint));
+        this.addAbility(new AttacksTriggeredAbility(new CreateTokenEffect(new HumanSoldierToken()))
+                .withInterveningIf(ControlsCreatureGreatestPowerCondition.instance).addHint(hint));
     }
 
     private EomerOfTheRiddermark(final EomerOfTheRiddermark card) {

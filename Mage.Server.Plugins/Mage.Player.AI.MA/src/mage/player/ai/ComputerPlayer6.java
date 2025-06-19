@@ -23,6 +23,7 @@ import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 import mage.player.ai.ma.optimizers.TreeOptimizer;
 import mage.player.ai.ma.optimizers.impl.*;
+import mage.player.ai.score.GameStateEvaluator2;
 import mage.player.ai.util.CombatInfo;
 import mage.player.ai.util.CombatUtil;
 import mage.players.Player;

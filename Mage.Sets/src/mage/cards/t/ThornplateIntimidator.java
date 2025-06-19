@@ -42,7 +42,7 @@ public final class ThornplateIntimidator extends CardImpl {
                         new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_NON_LAND), new DiscardCardCost()
                 ),
                 "Sacrifice a nonland permanent or discard a card to prevent losing 3 life?"
-        ));
+        ).setText("target opponent loses 3 life unless they sacrifice a nonland permanent of their choice or discard a card"));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }

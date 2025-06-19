@@ -3,7 +3,6 @@ package mage.cards.s;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
@@ -44,11 +43,7 @@ public final class SowingMycospawn extends CardImpl {
         )));
 
         // When you cast this spell, if it was kicked, exile target land.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new CastSourceTriggeredAbility(new ExileTargetEffect()),
-                KickedCondition.ONCE, "When you cast this spell, " +
-                "if it was kicked, exile target land."
-        );
+        Ability ability = new CastSourceTriggeredAbility(new ExileTargetEffect()).withInterveningIf(KickedCondition.ONCE);
         ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);
     }

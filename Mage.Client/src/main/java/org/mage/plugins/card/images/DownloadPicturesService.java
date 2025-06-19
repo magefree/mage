@@ -853,7 +853,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                     connection.startConnection();
                     if (connection.isConnected()) {
 
-                        // custom headers (ues
+                        // custom headers
                         connection.setRequestHeaders(selectedSource.getHttpRequestHeaders(currentUrl));
 
                         try {

@@ -1,10 +1,9 @@
 package mage.game.command.emblems;
 
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfFirstMainTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.triggers.BeginningOfFirstMainTriggeredAbility;
 import mage.cards.Cards;
 import mage.cards.FrameStyle;
 import mage.cards.repository.TokenInfo;
@@ -31,12 +30,9 @@ public class RadiationEmblem extends Emblem {
         super("Radiation");
         this.frameStyle = FrameStyle.M15_NORMAL;
 
-        this.getAbilities().add(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfFirstMainTriggeredAbility(Zone.ALL, TargetController.YOU, new RadiationEffect(), false),
-                RadiationCondition.instance,
-                "At the beginning of your precombat main phase, if you have any rad counters, "
-                        + "mill that many cards. For each nonland card milled this way, you lose 1 life and a rad counter."
-        ));
+        this.getAbilities().add(new BeginningOfFirstMainTriggeredAbility(
+                Zone.ALL, TargetController.YOU, new RadiationEffect(), false
+        ).withInterveningIf(RadiationCondition.instance).setTriggerPhrase("At the beginning of each player's precombat main phase, "));
 
         TokenInfo foundInfo = TokenRepository.instance.findPreferredTokenInfoForXmage(TokenRepository.XMAGE_IMAGE_NAME_RADIATION, null);
         if (foundInfo != null) {
@@ -68,6 +64,11 @@ enum RadiationCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         return player != null && player.getCountersCount(CounterType.RAD) > 0;
+    }
+
+    @Override
+    public String toString() {
+        return "that player has one or more rad counters";
     }
 }
 

@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
 import mage.abilities.condition.common.CovenCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedByAllSourceEffect;
@@ -43,9 +43,8 @@ public final class SungoldSentinel extends CardImpl {
         this.addAbility(ability);
 
         // Coven — {1}{W}: Choose a color. Sungold Sentinel gains hexproof from that color until end of turn and can't be blocked by creatures of that color this turn. Activate only if you control three or more creatures with different powers.
-        this.addAbility(new ConditionalActivatedAbility(
-                Zone.BATTLEFIELD, new SungoldSentinelEffect(),
-                new ManaCostsImpl<>("{1}{W}"), CovenCondition.instance
+        this.addAbility(new ActivateIfConditionActivatedAbility(
+                new SungoldSentinelEffect(), new ManaCostsImpl<>("{1}{W}"), CovenCondition.instance
         ).addHint(CovenHint.instance).setAbilityWord(AbilityWord.COVEN));
     }
 

@@ -5,11 +5,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.dynamicvalue.AdditiveDynamicValue;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.AuraAttachedCount;
-import mage.abilities.dynamicvalue.common.EquipmentAttachedCount;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
@@ -18,7 +15,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.permanent.AttachedToSourcePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.JunkToken;
@@ -30,6 +29,18 @@ import java.util.UUID;
  * @author notgreat
  */
 public final class GunnerConscript extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterPermanent("Aura and Equipment attached to it");
+
+    static {
+        filter.add(Predicates.or(
+                SubType.AURA.getPredicate(),
+                SubType.EQUIPMENT.getPredicate()
+        ));
+        filter.add(AttachedToSourcePredicate.instance);
+    }
+
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
 
     public GunnerConscript(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
@@ -43,20 +54,15 @@ public final class GunnerConscript extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Gunner Conscript gets +1/+1 for each Aura and Equipment attached to it.
-        DynamicValue totalAmount = new AdditiveDynamicValue(new AuraAttachedCount(), new EquipmentAttachedCount());
-        this.addAbility(new SimpleStaticAbility(
-                new BoostSourceEffect(totalAmount, totalAmount, Duration.WhileOnBattlefield)
-                        .setText("{this} gets +1/+1 for each Aura and Equipment attached to it")));
+        this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(xValue, xValue, Duration.WhileOnBattlefield)));
 
         // When Gunner Conscript dies, if it was enchanted, create a Junk token.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new DiesSourceTriggeredAbility(new CreateTokenEffect(new JunkToken())), GunnerConscriptEnchantedCondition.instance,
-                "When Gunner Conscript dies, if it was enchanted, create a Junk token."));
+        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new JunkToken()))
+                .withInterveningIf(GunnerConscriptEnchantedCondition.instance));
 
         // When Gunner Conscript dies, if it was equipped, create a Junk token.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new DiesSourceTriggeredAbility(new CreateTokenEffect(new JunkToken())), GunnerConscriptEquippedCondition.instance,
-                "When Gunner Conscript dies, if it was equipped, create a Junk token."));
+        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new JunkToken()))
+                .withInterveningIf(GunnerConscriptEquippedCondition.instance));
     }
 
     private GunnerConscript(final GunnerConscript card) {
@@ -84,6 +90,11 @@ enum GunnerConscriptEnchantedCondition implements Condition {
                 .filter(Objects::nonNull)
                 .anyMatch(permanent -> permanent.isEnchantment(game));
     }
+
+    @Override
+    public String toString() {
+        return "it was enchanted";
+    }
 }
 
 enum GunnerConscriptEquippedCondition implements Condition {
@@ -97,5 +108,10 @@ enum GunnerConscriptEquippedCondition implements Condition {
                 .map(game::getPermanentOrLKIBattlefield)
                 .filter(Objects::nonNull)
                 .anyMatch(attachment -> attachment.hasSubtype(SubType.EQUIPMENT, game));
+    }
+
+    @Override
+    public String toString() {
+        return "it was equipped";
     }
 }

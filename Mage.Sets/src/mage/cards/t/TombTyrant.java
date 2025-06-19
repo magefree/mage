@@ -19,7 +19,10 @@ import mage.abilities.hint.ValueHint;
 import mage.abilities.hint.common.MyTurnHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
@@ -44,7 +47,7 @@ public final class TombTyrant extends CardImpl {
             MyTurnCondition.instance, new CardsInControllerGraveyardCondition(3, filter2)
     );
     private static final Hint hint = new ValueHint(
-            "Zombie creatures in your graveyard", new CardsInControllerGraveyardCount(filter2)
+            "Zombie creature cards in your graveyard", new CardsInControllerGraveyardCount(filter2)
     );
 
     public TombTyrant(UUID ownerId, CardSetInfo setInfo) {
@@ -62,7 +65,7 @@ public final class TombTyrant extends CardImpl {
 
         // {2}{B}, {T}, Sacrifice a creature: Return a Zombie creature card at random from your graveyard to the battlefield. Activate only during your turn and only if there are at least three Zombie creature cards in your graveyard.
         Ability ability = new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD, new ReturnFromGraveyardAtRandomEffect(filter2, Zone.BATTLEFIELD),
+                new ReturnFromGraveyardAtRandomEffect(filter2, Zone.BATTLEFIELD),
                 new ManaCostsImpl<>("{2}{B}"), condition
         );
         ability.addCost(new TapSourceCost());

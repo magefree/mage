@@ -7,7 +7,7 @@ import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
 import mage.abilities.hint.common.MetalcraftHint;
@@ -32,7 +32,7 @@ public final class BrotherhoodScribe extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Metalcraft -- {T}: You get {E}. Activate only if you control three or more artifacts.
-        this.addAbility(new ConditionalActivatedAbility(
+        this.addAbility(new ActivateIfConditionActivatedAbility(
                 new GetEnergyCountersControllerEffect(1),
                 new TapSourceCost(),
                 MetalcraftCondition.instance)

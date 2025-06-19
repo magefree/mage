@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldThisOrAnotherTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CastFromEverywhereSourceCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.abilities.keyword.DeathtouchAbility;
@@ -37,24 +36,18 @@ public final class CacophonyUnleashed extends CardImpl {
     public CacophonyUnleashed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{5}{B}{B}");
 
-
         // When Cacophony Unleashed enters the battlefield, if you cast it, destroy all nonenchantment creatures.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-            new EntersBattlefieldTriggeredAbility(new DestroyAllEffect(filter)),
-            CastFromEverywhereSourceCondition.instance,
-            "When {this} enters, if you cast it, destroy all nonenchantment creatures."
-        ));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DestroyAllEffect(filter))
+                .withInterveningIf(CastFromEverywhereSourceCondition.instance));
 
         // Whenever Cacophony Unleashed or another enchantment you control enters, until end of turn, Cacophony Unleashed becomes a legendary 6/6 Nightmare God creature with menace and deathtouch. It's still an enchantment.
-        this.addAbility(
-            new EntersBattlefieldThisOrAnotherTriggeredAbility(
+        this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new BecomesCreatureSourceEffect(new CacophonyUnleashedToken(), CardType.ENCHANTMENT, Duration.EndOfTurn)
-                    .setText("until end of turn, Cacophony Unleashed becomes a legendary 6/6 Nightmare God "
-                        + "creature with menace and deathtouch. It's still an enchantment."),
+                        .setText("until end of turn, {this} becomes a legendary 6/6 Nightmare God "
+                                + "creature with menace and deathtouch. It's still an enchantment."),
                 StaticFilters.FILTER_PERMANENT_ENCHANTMENT,
                 false, true
-            )
-        );
+        ));
     }
 
     private CacophonyUnleashed(final CacophonyUnleashed card) {

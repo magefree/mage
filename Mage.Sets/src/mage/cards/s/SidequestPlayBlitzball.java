@@ -48,7 +48,7 @@ public final class SidequestPlayBlitzball extends CardImpl {
         this.addAbility(new TransformAbility());
         ability = new EndOfCombatTriggeredAbility(
                 new TransformSourceEffect(), TargetController.YOU, false
-        ).withInterveningIf(SidequestPlayBlitzballCondition.instance);
+        ).withInterveningIf(SidequestPlayBlitzballCondition.instance).setTriggerPhrase("At the end of combat on your turn, ");
         ability.addEffect(new SidequestPlayBlitzballEffect());
         this.addAbility(ability, new SidequestPlayBlitzballWatcher());
     }

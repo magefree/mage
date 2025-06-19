@@ -47,23 +47,23 @@ public enum Outcome {
     private final boolean good;
 
     // no different between own or opponent targets (example: copy must choose from all permanents)
-    private boolean canTargetAll;
+    private boolean anyTargetHasSameValue;
 
     Outcome(boolean good) {
         this.good = good;
     }
 
-    Outcome(boolean good, boolean canTargetAll) {
+    Outcome(boolean good, boolean anyTargetHasSameValue) {
         this.good = good;
-        this.canTargetAll = canTargetAll;
+        this.anyTargetHasSameValue = anyTargetHasSameValue;
     }
 
     public boolean isGood() {
         return good;
     }
 
-    public boolean isCanTargetAll() {
-        return canTargetAll;
+    public boolean anyTargetHasSameValue() {
+        return anyTargetHasSameValue;
     }
 
     public static Outcome inverse(Outcome outcome) {

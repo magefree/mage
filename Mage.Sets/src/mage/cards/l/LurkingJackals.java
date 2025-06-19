@@ -1,7 +1,7 @@
 package mage.cards.l;
 
-import mage.MageInt;
 import mage.abilities.StateTriggeredAbility;
+import mage.abilities.condition.common.SourceIsEnchantmentCondition;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -11,7 +11,8 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
+import mage.players.Player;
 
 import java.util.UUID;
 
@@ -40,9 +41,12 @@ public final class LurkingJackals extends CardImpl {
 class LurkingJackalsStateTriggeredAbility extends StateTriggeredAbility {
 
     public LurkingJackalsStateTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new LurkingJackalsToken(), null, Duration.Custom));
-        setTriggerPhrase("When an opponent has 10 or less life, if {this} is an enchantment, ");
+        super(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new CreatureToken(
+                3, 2, "3/2 Jackal creature", SubType.JACKAL
+        ), null, Duration.Custom));
+        this.withInterveningIf(SourceIsEnchantmentCondition.instance);
         this.withRuleTextReplacement(true);
+        this.setTriggerPhrase("When an opponent has 10 or less life, ");
     }
 
     private LurkingJackalsStateTriggeredAbility(final LurkingJackalsStateTriggeredAbility ability) {
@@ -56,42 +60,11 @@ class LurkingJackalsStateTriggeredAbility extends StateTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (game.getOpponents(getControllerId()) != null) {
-            for (UUID opponentId : game.getOpponents(getControllerId())) {
-                if (game.getPlayer(opponentId).getLife() <= 10) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean checkInterveningIfClause(Game game) {
-        if (getSourcePermanentIfItStillExists(game) != null) {
-            return getSourcePermanentIfItStillExists(game).isEnchantment(game);
-        }
-        return false;
-    }
-
-}
-
-class LurkingJackalsToken extends TokenImpl {
-
-    public LurkingJackalsToken() {
-        super("Dog", "3/2 Jackal creature");
-        cardType.add(CardType.CREATURE);
-        subtype.add(SubType.JACKAL);
-        power = new MageInt(3);
-        toughness = new MageInt(2);
-    }
-
-    private LurkingJackalsToken(final LurkingJackalsToken token) {
-        super(token);
-    }
-
-    @Override
-    public LurkingJackalsToken copy() {
-        return new LurkingJackalsToken(this);
+        return game
+                .getOpponents(getControllerId())
+                .stream()
+                .map(game::getPlayer)
+                .mapToInt(Player::getLife)
+                .anyMatch(x -> x <= 10);
     }
 }

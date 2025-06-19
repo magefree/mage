@@ -1,12 +1,10 @@
 package mage.abilities.keyword;
 
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.EvokedCondition;
 import mage.abilities.costs.AlternativeSourceCostsImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 
 /**
@@ -24,11 +22,9 @@ public class EvokeAbility extends AlternativeSourceCostsImpl {
 
     public EvokeAbility(Cost cost) {
         super(EVOKE_KEYWORD, REMINDER_TEXT, cost);
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new SacrificeSourceEffect(true)),
-                EvokedCondition.instance, "When this permanent enters the battlefield, if its evoke cost was paid, its controller sacrifices it.");
-        ability.setRuleVisible(false);
-        addSubAbility(ability);
+        this.addSubAbility(new EntersBattlefieldTriggeredAbility(
+                new SacrificeSourceEffect(true).setText("its controller sacrifices it")
+        ).setTriggerPhrase("When this permanent enters, ").withInterveningIf(EvokedCondition.instance).setRuleVisible(false));
     }
 
     private EvokeAbility(final EvokeAbility ability) {
@@ -40,7 +36,7 @@ public class EvokeAbility extends AlternativeSourceCostsImpl {
         return new EvokeAbility(this);
     }
 
-    public static String getActivationKey(){
+    public static String getActivationKey() {
         return getActivationKey(EVOKE_KEYWORD);
     }
 }

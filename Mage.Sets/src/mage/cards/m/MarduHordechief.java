@@ -3,7 +3,6 @@ package mage.cards.m;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.RaidCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.hint.common.RaidHint;
 import mage.cards.CardImpl;
@@ -30,13 +29,8 @@ public final class MarduHordechief extends CardImpl {
         this.toughness = new MageInt(3);
 
         // <i>Raid</i> &mdash; When Mardu Hordechief enters the battlefield, if you attacked this turn, create a 1/1 white Warrior creature token
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldTriggeredAbility(
-                        new CreateTokenEffect(new WarriorToken())),
-                        RaidCondition.instance,
-                        "When {this} enters, if you attacked this turn, create a 1/1 white Warrior creature token.")
-                        .setAbilityWord(AbilityWord.RAID)
-                        .addHint(RaidHint.instance),
-                new PlayerAttackedWatcher());
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new WarriorToken()))
+                .withInterveningIf(RaidCondition.instance).setAbilityWord(AbilityWord.RAID).addHint(RaidHint.instance), new PlayerAttackedWatcher());
     }
 
     private MarduHordechief(final MarduHordechief card) {

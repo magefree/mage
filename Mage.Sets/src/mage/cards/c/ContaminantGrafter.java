@@ -5,7 +5,6 @@ import mage.abilities.Ability;
 import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.condition.common.CorruptedCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.PutCardFromHandOntoBattlefieldEffect;
 import mage.abilities.effects.common.counter.ProliferateEffect;
@@ -49,15 +48,10 @@ public final class ContaminantGrafter extends CardImpl {
 
         // Corrupted — At the beginning of your end step, if an opponent has three or more poison
         // counters, draw a card, then you may put a land card from your hand onto the battlefield.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfEndStepTriggeredAbility(new DrawCardSourceControllerEffect(1)),
-                CorruptedCondition.instance, "At the beginning of your end step, if an opponent has three or more poison " +
-                "counters, draw a card, then you may put a land card from your hand onto the battlefield"
-        );
-        ability.addEffect(new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_LAND_A).concatBy("then"));
-        ability.setAbilityWord(AbilityWord.CORRUPTED);
-        ability.addHint(CorruptedCondition.getHint());
-        this.addAbility(ability);
+        Ability ability = new BeginningOfEndStepTriggeredAbility(new DrawCardSourceControllerEffect(1))
+                .withInterveningIf(CorruptedCondition.instance);
+        ability.addEffect(new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_LAND_A).concatBy(", then"));
+        this.addAbility(ability.setAbilityWord(AbilityWord.CORRUPTED).addHint(CorruptedCondition.getHint()));
     }
 
     private ContaminantGrafter(final ContaminantGrafter card) {

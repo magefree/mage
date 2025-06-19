@@ -149,4 +149,35 @@ public class PheliaExuberantShepherdTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Memnite", 1);
     }
 
+    // bug: return trigger should not return cards exiled the turn before and not
+    //      returned due to a Stifle effect
+    @Test
+    public void test_Stifle() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerA, phelia, 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Memnite", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Ornithopter", 1);
+        addCard(Zone.HAND, playerB, "Stifle", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 1);
+
+        attack(1, playerA, phelia, playerB);
+        addTarget(playerA, "Memnite");
+
+        castSpell(1, PhaseStep.END_TURN, playerB, "Stifle", "stack ability (At the beginning");
+
+        checkExileCount("Memnite still exiled", 2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Memnite", 1);
+
+        attack(3, playerA, phelia, playerB);
+        addTarget(playerA, "Ornithopter");
+
+        // end of turn trigger: Ornithopter returns.
+
+        setStopAt(4, PhaseStep.UPKEEP);
+        execute();
+
+        assertPowerToughness(playerA, phelia, 2 + 1, 2 + 1);
+        assertExileCount(playerA, "Memnite", 1);
+        assertPermanentCount(playerA, "Ornithopter", 1);
+    }
 }

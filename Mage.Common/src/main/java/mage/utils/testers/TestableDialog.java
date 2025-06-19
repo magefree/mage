@@ -4,8 +4,6 @@ import mage.abilities.Ability;
 import mage.game.Game;
 import mage.players.Player;
 
-import java.util.List;
-
 /**
  * Part of testable game dialogs
  * <p>
@@ -17,7 +15,11 @@ import java.util.List;
  *
  * @author JayDi85
  */
-interface TestableDialog {
+public interface TestableDialog {
+
+    void setRegNumber(Integer regNumber);
+
+    Integer getRegNumber();
 
     String getGroup();
 
@@ -25,7 +27,20 @@ interface TestableDialog {
 
     String getDescription();
 
-    List<String> showDialog(Player player, Ability source, Game game, Player opponent);
+    TestableResult getResult();
 
-    void showResult(Player player, Game game, String result);
+    /**
+     * Prepare dialog before show, e.g. clear prev results
+     */
+    void prepare();
+
+    /**
+     * Show game dialog to the user and save result
+     */
+    void showDialog(Player player, Ability source, Game game, Player opponent);
+
+    /**
+     * Show result dialog to the user
+     */
+    void showResult(Player player, Game game);
 }

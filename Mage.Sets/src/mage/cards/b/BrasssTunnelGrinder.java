@@ -1,8 +1,8 @@
 package mage.cards.b;
 
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.DescendedThisTurnCondition;
 import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -12,6 +12,7 @@ import mage.abilities.effects.common.RemoveAllCountersSourceEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.TransformAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -30,6 +31,8 @@ import java.util.UUID;
  */
 public final class BrasssTunnelGrinder extends CardImpl {
 
+    private static final Condition condition = new SourceHasCounterCondition(CounterType.BORE, 3);
+
     public BrasssTunnelGrinder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}{R}");
         this.secondSideCardClazz = mage.cards.t.TecutlanTheSearingRift.class;
@@ -45,14 +48,10 @@ public final class BrasssTunnelGrinder extends CardImpl {
                 TargetController.YOU, new AddCountersSourceEffect(CounterType.BORE.createInstance()),
                 false, DescendedThisTurnCondition.instance
         );
-
-        ConditionalOneShotEffect secondCheck = new ConditionalOneShotEffect(
-                new RemoveAllCountersSourceEffect(CounterType.BORE),
-                new SourceHasCounterCondition(CounterType.BORE, 3, Integer.MAX_VALUE),
+        ability.addEffect(new ConditionalOneShotEffect(
+                new RemoveAllCountersSourceEffect(CounterType.BORE), condition,
                 "Then if there are three or more bore counters on it, remove those counters and transform it"
-        );
-        secondCheck.addEffect(new TransformSourceEffect());
-        ability.addEffect(secondCheck);
+        ).addEffect(new TransformSourceEffect()));
         ability.addHint(DescendedThisTurnCount.getHint());
         this.addAbility(ability, new DescendedWatcher());
     }

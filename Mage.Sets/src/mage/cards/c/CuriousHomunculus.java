@@ -1,30 +1,33 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
-
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.common.TransformSourceEffect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.TransformAbility;
 import mage.abilities.mana.ConditionalColorlessManaAbility;
 import mage.abilities.mana.builder.common.InstantOrSorcerySpellManaBuilder;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterInstantOrSorceryCard;
-import mage.game.Game;
-import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  * @author fireshoes
  */
 public final class CuriousHomunculus extends CardImpl {
+
+    private static final Condition condition = new CardsInControllerGraveyardCondition(3, new FilterInstantOrSorceryCard("instant and/or sorcery cards"));
+    private static final Hint hint = new ValueHint("Instant and sorcery cards in your graveyard", new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY));
 
     public CuriousHomunculus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
@@ -39,10 +42,7 @@ public final class CuriousHomunculus extends CardImpl {
 
         // At the beginning of your upkeep, if there are three or more instant and/or sorcery cards in your graveyard, transform Curious Homunculus.
         this.addAbility(new TransformAbility());
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect()),
-                new InstantOrSorceryCardsInControllerGraveyardCondition(3),
-                "At the beginning of your upkeep, if there are three or more instant and/or sorcery cards in your graveyard, transform {this}"));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect()).withInterveningIf(condition).addHint(hint));
     }
 
     private CuriousHomunculus(final CuriousHomunculus card) {
@@ -52,23 +52,5 @@ public final class CuriousHomunculus extends CardImpl {
     @Override
     public CuriousHomunculus copy() {
         return new CuriousHomunculus(this);
-    }
-}
-
-class InstantOrSorceryCardsInControllerGraveyardCondition implements Condition {
-
-    private int value;
-
-    public InstantOrSorceryCardsInControllerGraveyardCondition(int value) {
-        this.value = value;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player p = game.getPlayer(source.getControllerId());
-        if (p != null && p.getGraveyard().count(new FilterInstantOrSorceryCard(), game) >= value) {
-            return true;
-        }
-        return false;
     }
 }

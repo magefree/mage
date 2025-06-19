@@ -17,6 +17,6 @@ public enum HaveInitiativeCondition implements Condition {
 
     @Override
     public String toString() {
-        return "if you have the initiative";
+        return "you have the initiative";
     }
 }

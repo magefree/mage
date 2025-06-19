@@ -1,7 +1,4 @@
-
 package mage.cards.e;
-
-import java.util.UUID;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -9,7 +6,7 @@ import mage.abilities.condition.common.HellbentCondition;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.PutCardFromHandOntoBattlefieldEffect;
@@ -17,14 +14,14 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.card.ExpansionSetPredicate;
+import mage.filter.predicate.mageobject.NamePredicate;
+
+import java.util.UUID;
 
 /**
- *
  * @author Ketsuban
  */
 public final class EverythingamajigB extends CardImpl {
@@ -40,14 +37,16 @@ public final class EverythingamajigB extends CardImpl {
     }
 
     public EverythingamajigB(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
 
         // Fool's Tome
         // 2, T: Draw a card. Activate this ability only if you have no cards in hand.
-        Ability ability1 = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new GenericManaCost(2), HellbentCondition.instance);
+        Ability ability1 = new ActivateIfConditionActivatedAbility(
+                new DrawCardSourceControllerEffect(1), new GenericManaCost(2), HellbentCondition.instance
+        );
         ability1.addCost(new TapSourceCost());
         this.addAbility(ability1);
-        
+
         // Tower of Eons
         // 8, T: You gain 10 life.
         Ability ability2 = new SimpleActivatedAbility(new GainLifeEffect(10), new GenericManaCost(8));

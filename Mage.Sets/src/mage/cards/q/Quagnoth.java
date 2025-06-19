@@ -31,7 +31,7 @@ public final class Quagnoth extends CardImpl {
 
         // When a spell or ability an opponent controls causes you to discard Quagnoth, return it to your hand.
         this.addAbility(new DiscardedByOpponentTriggeredAbility(new ReturnToHandSourceEffect()
-                .setText("return it to your hand"), true));
+                .setText("return it to your hand")));
     }
 
     private Quagnoth(final Quagnoth card) {

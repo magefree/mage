@@ -10,7 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.FilterObject;
+import mage.filter.FilterSource;
 
 import java.util.UUID;
 
@@ -19,7 +19,7 @@ import java.util.UUID;
  */
 public final class RuneOfProtectionLands extends CardImpl {
 
-    private static final FilterObject filter = new FilterObject("land source");
+    private static final FilterSource filter = new FilterSource("land source");
 
     static {
         filter.add(CardType.LAND.getPredicate());

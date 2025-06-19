@@ -2,14 +2,13 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -37,14 +36,11 @@ public final class TinybonesTrinketThief extends CardImpl {
         this.toughness = new MageInt(2);
 
         // At the beginning of each end step, if an opponent discarded a card this turn, you draw a card and you lose 1 life.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfEndStepTriggeredAbility(
-                        TargetController.EACH_PLAYER, new DrawCardSourceControllerEffect(1),
-                        false
-                ), TinybonesTrinketThiefCondition.instance, "At the beginning of each end step, " +
-                "if an opponent discarded a card this turn, you draw a card and you lose 1 life."
+        Ability ability = new BeginningOfEndStepTriggeredAbility(
+                TargetController.ANY, new DrawCardSourceControllerEffect(1, true),
+                false, TinybonesTrinketThiefCondition.instance
         );
-        ability.addEffect(new LoseLifeSourceControllerEffect(1));
+        ability.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
         this.addAbility(ability, new TinybonesTrinketThiefWatcher());
 
         // {4}{B}{B}: Each opponent with no cards in hand loses 10 life.
@@ -68,6 +64,11 @@ enum TinybonesTrinketThiefCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         TinybonesTrinketThiefWatcher watcher = game.getState().getWatcher(TinybonesTrinketThiefWatcher.class);
         return watcher != null && watcher.checkPlayer(source.getControllerId());
+    }
+
+    @Override
+    public String toString() {
+        return "an opponent discarded a card this turn";
     }
 }
 

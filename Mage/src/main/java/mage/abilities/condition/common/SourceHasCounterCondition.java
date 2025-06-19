@@ -1,86 +1,87 @@
-
 package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
-import mage.cards.Card;
+import mage.abilities.condition.IntCompareCondition;
+import mage.constants.ComparisonType;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
+import java.util.Optional;
+
 /**
- * @author nantuko
+ * Don't use ComparisonType.OR_GREATER with value 0
+ *
+ * @author TheElk801
  */
-public class SourceHasCounterCondition implements Condition {
+public class SourceHasCounterCondition extends IntCompareCondition {
 
     private final CounterType counterType;
-    private int amount = 1;
-    private int from = -1;
-    private int to;
 
-    public SourceHasCounterCondition(CounterType type) {
-        this.counterType = type;
+    public SourceHasCounterCondition(CounterType counterType) {
+        this(counterType, 1);
     }
 
-    public SourceHasCounterCondition(CounterType type, int amount) {
-        this.counterType = type;
-        this.amount = amount;
+    public SourceHasCounterCondition(CounterType counterType, int amount) {
+        this(counterType, ComparisonType.OR_GREATER, amount);
     }
 
-    public SourceHasCounterCondition(CounterType type, int from, int to) {
-        this.counterType = type;
-        this.from = from;
-        this.to = to;
+    public SourceHasCounterCondition(CounterType counterType, ComparisonType type, int value) {
+        super(type, value);
+        this.counterType = counterType;
     }
 
     @Override
-    @SuppressWarnings("null")
-    public boolean apply(Game game, Ability source) {
-        Card card = null;
+    protected int getInputValue(Game game, Ability source) {
         Permanent permanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (permanent == null) {
-            card = game.getCard(source.getSourceId());
-            if (card == null) {
-                return false;
-            }
+        if (permanent != null) {
+            return permanent.getCounters(game).getCount(counterType);
         }
-        if (from != -1) { //range compare
-            int count;
-            if (card != null) {
-                count = card.getCounters(game).getCount(counterType);
-            } else {
-                count = permanent.getCounters(game).getCount(counterType);
-            }
-            if (to == Integer.MAX_VALUE) {
-                return count >= from;
-            }
-            return count >= from && count <= to;
-        } else // single compare (lte)
-        {
-            if (card != null) {
-                return card.getCounters(game).getCount(counterType) >= amount;
-            } else {
-                return permanent.getCounters(game).getCount(counterType) >= amount;
-            }
-        }
+        return Optional.ofNullable(source)
+                .map(Ability::getSourceId)
+                .map(game::getCard)
+                .map(card -> card.getCounters(game).getCount(counterType))
+                .orElse(0);
     }
 
     @Override
     public String toString() {
-        if (from != -1) {
-            if (from == 0) {
-                if (to == 0) {
-                    return "{this} has no " + this.counterType.toString() + " counters on it";
+        switch (type) {
+            case EQUAL_TO:
+                StringBuilder sb = new StringBuilder("there ");
+                switch (value) {
+                    case 0:
+                        sb.append("are no ");
+                        break;
+                    case 1:
+                        sb.append("is exactly one ");
+                        break;
+                    default:
+                        sb.append("are exactly ");
+                        sb.append(CardUtil.numberToText(value));
+                        sb.append(' ');
                 }
-                return "{this} has " + CardUtil.numberToText(to) + " or fewer " + this.counterType.toString() + " counters on it";
-            }
-            if (to == Integer.MAX_VALUE) {
-                return "{this} has " + CardUtil.numberToText(from) + " or more " + this.counterType.toString() + " counters on it";
-            }
-            return "{this} has between " + from + " and " + to + " " + this.counterType.toString() + " counters on it";
-        } else {
-            return "{this} has " + CardUtil.numberToText(amount) + " or more " + this.counterType.toString() + " counters on it";
+                sb.append(counterType.getName());
+                sb.append(" counter");
+                if (value != 1) {
+                    sb.append('s');
+                }
+                sb.append(" on {this}");
+                return sb.toString();
+            case OR_GREATER:
+                if (value == 0) {
+                    throw new IllegalArgumentException("0 or greater should not be used");
+                }
+                return "there are " + CardUtil.numberToText(value) + " or more " + counterType.getName() + " counters on {this}";
+            case OR_LESS:
+                return "{this} has " + CardUtil.numberToText(value) + " or fewer " + counterType.getName() + " counters on it";
+            case FEWER_THAN:
+                return "{this} has fewer than " + CardUtil.numberToText(value) + ' ' + counterType.getName() + " counters on it";
+            case MORE_THAN:
+                return "{this} has more than " + CardUtil.numberToText(value) + ' ' + counterType.getName() + " counters on it";
+            default:
+                throw new UnsupportedOperationException("There should be a comparison type");
         }
     }
 }

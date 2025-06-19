@@ -43,7 +43,7 @@ class PanharmoniconEffect extends ReplacementEffectImpl {
 
     PanharmoniconEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "If an artifact or creature entering the battlefield causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time";
+        staticText = "If an artifact or creature entering causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time";
     }
 
     private PanharmoniconEffect(final PanharmoniconEffect effect) {

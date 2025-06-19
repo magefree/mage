@@ -7,11 +7,9 @@ import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.hint.common.MyTurnHint;
 import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -28,10 +26,11 @@ public final class WandOfIth extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // {3}, {T}: Target player reveals a card at random from their hand. If it's a land card, that player discards it unless they pay 1 life. If it isn't a land card, the player discards it unless they pay life equal to its converted mana cost. Activate this ability only during your turn.
-        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new WandOfIthEffect(), new GenericManaCost(3), MyTurnCondition.instance);
+        Ability ability = new ActivateIfConditionActivatedAbility(
+                new WandOfIthEffect(), new GenericManaCost(3), MyTurnCondition.instance
+        );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());
-        ability.addHint(MyTurnHint.instance);
         this.addAbility(ability);
     }
 

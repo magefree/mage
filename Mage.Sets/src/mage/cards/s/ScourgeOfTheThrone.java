@@ -1,11 +1,9 @@
-
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.abilities.TriggeredAbility;
+import mage.abilities.Ability;
 import mage.abilities.common.AttacksFirstTimeTriggeredAbility;
 import mage.abilities.condition.common.SourceAttackingPlayerWithMostLifeCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.AdditionalCombatPhaseEffect;
 import mage.abilities.effects.common.UntapAllControllerEffect;
 import mage.abilities.keyword.DethroneAbility;
@@ -32,24 +30,19 @@ public final class ScourgeOfTheThrone extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+
         // Dethrone (Whenever this creature attacks the player with the most life or tied for most life, put a +1/+1 counter on it.)
         this.addAbility(new DethroneAbility());
+
         // Whenever Scourge of the Throne attacks for the first time each turn, if it's attacking the player with the most life or tied for most life, untap all attacking creatures. After this phase, there is an additional combat phase.
-        TriggeredAbility ability = new AttacksFirstTimeTriggeredAbility(
+        Ability ability = new AttacksFirstTimeTriggeredAbility(
                 new UntapAllControllerEffect(
                         StaticFilters.FILTER_ATTACKING_CREATURES,
                         "untap all attacking creatures"
                 ), false
-        );
+        ).withInterveningIf(SourceAttackingPlayerWithMostLifeCondition.instance);
         ability.addEffect(new AdditionalCombatPhaseEffect());
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                ability,
-                SourceAttackingPlayerWithMostLifeCondition.instance,
-                "Whenever {this} attacks for the first time each turn, "
-                        + "if it's attacking the player with the most life or tied for most life, "
-                        + "untap all attacking creatures. After this phase, "
-                        + "there is an additional combat phase."
-        ));
+        this.addAbility(ability);
     }
 
     private ScourgeOfTheThrone(final ScourgeOfTheThrone card) {

@@ -2,13 +2,12 @@ package mage.cards.n;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.FlashAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -53,12 +52,8 @@ public final class NightpackAmbusher extends CardImpl {
         )));
 
         // At the beginning of your end step, if you didn't cast a spell this turn, create a 2/2 green Wolf creature token.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfEndStepTriggeredAbility(
-                        new CreateTokenEffect(new WolfToken())
-                ), NightpackAmbusherCondition.instance, "At the beginning of your end step, " +
-                "if you didn't cast a spell this turn, create a 2/2 green Wolf creature token."
-        ));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new CreateTokenEffect(new WolfToken()))
+                .withInterveningIf(NightpackAmbusherCondition.instance));
     }
 
     private NightpackAmbusher(final NightpackAmbusher card) {
@@ -78,5 +73,10 @@ enum NightpackAmbusherCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         CastSpellLastTurnWatcher watcher = game.getState().getWatcher(CastSpellLastTurnWatcher.class);
         return watcher != null && watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(source.getControllerId()) == 0;
+    }
+
+    @Override
+    public String toString() {
+        return "you didn't cast a spell this turn";
     }
 }

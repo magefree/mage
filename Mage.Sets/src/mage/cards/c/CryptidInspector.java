@@ -1,7 +1,5 @@
 package mage.cards.c;
 
-import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.TurnedFaceUpAllTriggeredAbility;
@@ -18,12 +16,14 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.card.FaceDownPredicate;
 
+import java.util.UUID;
+
 /**
  * @author jackd149
  */
 public final class CryptidInspector extends CardImpl {
     private static final FilterPermanent filter1 = new FilterPermanent("a face-down permanent");
-    private static final FilterPermanent filter2 = new FilterControlledPermanent("Cryptid Inspector or another permanent you control");
+    private static final FilterPermanent filter2 = new FilterControlledPermanent();
 
     static {
         filter1.add(FaceDownPredicate.instance);
@@ -40,17 +40,17 @@ public final class CryptidInspector extends CardImpl {
         // Whenever a face-down permanent you control enters and whenever Cryptid Inspector or another permanent you control is turned face up,
         // put a +1/+1 counter on Cryptid Inspector.
         this.addAbility(new OrTriggeredAbility(
-            Zone.BATTLEFIELD,
-            new AddCountersSourceEffect(CounterType.P1P1.createInstance()), 
-            false,
-            "Whenever a face-down permanent you control enters and "
-                + "whenever Cryptid Inspector or another permanent you control is turned face up, ",
-             new EntersBattlefieldControlledTriggeredAbility(null, filter1),
-             new TurnedFaceUpAllTriggeredAbility(null, filter2)
+                Zone.BATTLEFIELD,
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
+                false,
+                "Whenever a face-down permanent you control enters and "
+                        + "whenever {this} or another permanent you control is turned face up, ",
+                new EntersBattlefieldControlledTriggeredAbility(null, filter1),
+                new TurnedFaceUpAllTriggeredAbility(null, filter2)
         ));
     }
 
-    private CryptidInspector(final CryptidInspector card){
+    private CryptidInspector(final CryptidInspector card) {
         super(card);
     }
 

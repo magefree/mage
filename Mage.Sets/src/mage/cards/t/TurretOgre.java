@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
@@ -15,8 +14,8 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.predicate.mageobject.PowerPredicate;
 
 import java.util.UUID;
 
@@ -25,7 +24,7 @@ import java.util.UUID;
  */
 public final class TurretOgre extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent();
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("you control another creature with power 4 or greater");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -46,13 +45,7 @@ public final class TurretOgre extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
 
         // When Turret Ogre enters the battlefield, if you control another creature with power 4 or greater, Turret Ogre deals 2 damage to each opponent.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(
-                        new DamagePlayersEffect(2, TargetController.OPPONENT)
-                ), condition, "When {this} enters, " +
-                "if you control another creature with power 4 or greater, " +
-                "{this} deals 2 damage to each opponent."
-        ));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DamagePlayersEffect(2, TargetController.OPPONENT)).withInterveningIf(condition));
     }
 
     private TurretOgre(final TurretOgre card) {

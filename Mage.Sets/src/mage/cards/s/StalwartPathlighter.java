@@ -1,16 +1,18 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.common.CovenCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.hint.common.CovenHint;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.VigilanceAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.AbilityWord;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
 
 import java.util.UUID;
@@ -32,14 +34,10 @@ public final class StalwartPathlighter extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Coven — At the beginning of combat on your turn, if you control three or more creatures with different powers, creatures you control gain indestructible until end of turn.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfCombatTriggeredAbility(new GainAbilityControlledEffect(
-                        IndestructibleAbility.getInstance(), Duration.EndOfTurn,
-                        StaticFilters.FILTER_CONTROLLED_CREATURE
-                )), CovenCondition.instance, "At the beginning " +
-                "of combat on your turn, if you control three or more creatures with different powers, " +
-                "creatures you control gain indestructible until end of turn."
-        ).addHint(CovenHint.instance).setAbilityWord(AbilityWord.COVEN));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(new GainAbilityControlledEffect(
+                IndestructibleAbility.getInstance(), Duration.EndOfTurn,
+                StaticFilters.FILTER_PERMANENT_CREATURES
+        )).withInterveningIf(CovenCondition.instance).addHint(CovenHint.instance).setAbilityWord(AbilityWord.COVEN));
     }
 
     private StalwartPathlighter(final StalwartPathlighter card) {

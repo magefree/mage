@@ -19,7 +19,7 @@ public class MustBeBlockedByAllTargetEffect extends RequirementEffect {
 
     public MustBeBlockedByAllTargetEffect(Duration duration) {
         super(duration);
-        staticText = "All creatures able to block target creature " +
+        staticText = "all creatures able to block target creature " +
                 (this.getDuration() == Duration.EndOfTurn ? "this turn " : "") +
                 "do so";
     }

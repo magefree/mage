@@ -8,7 +8,6 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.OpponentsLostLifeCondition;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.hint.common.OpponentsLostLifeHint;
@@ -32,11 +31,8 @@ public final class FamishedForagers extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Famished Foragers enters the battlefield, if an opponent lost life this turn, add {R}{R}{R}.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new BasicManaEffect(Mana.RedMana(3))),
-                OpponentsLostLifeCondition.instance, "When {this} enters, " +
-                "if an opponent lost life this turn, add {R}{R}{R}."
-        ).addHint(OpponentsLostLifeHint.instance));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new BasicManaEffect(Mana.RedMana(3)))
+                .withInterveningIf(OpponentsLostLifeCondition.instance).addHint(OpponentsLostLifeHint.instance));
 
         // {2}{R}, Discard a card: Draw a card.
         Ability ability = new SimpleActivatedAbility(

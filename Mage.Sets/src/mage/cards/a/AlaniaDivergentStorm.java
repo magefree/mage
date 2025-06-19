@@ -1,8 +1,5 @@
 package mage.cards.a;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -11,12 +8,11 @@ import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
-import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -25,15 +21,18 @@ import mage.players.Player;
 import mage.target.common.TargetOpponent;
 import mage.watchers.Watcher;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 /**
- *
  * @author jimga150
  */
 public final class AlaniaDivergentStorm extends CardImpl {
 
     public AlaniaDivergentStorm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{R}");
-        
+
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.OTTER);
         this.subtype.add(SubType.WIZARD);
@@ -43,18 +42,10 @@ public final class AlaniaDivergentStorm extends CardImpl {
         // Whenever you cast a spell, if it's the first instant spell, the first sorcery spell, or the first Otter
         // spell other than Alania you've cast this turn, you may have target opponent draw a card. If you do, copy
         // that spell. You may choose new targets for the copy.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new SpellCastControllerTriggeredAbility(new DoIfCostPaid(
-                        new CopyTargetStackObjectEffect(true),
-                        new AlaniaDivergentStormCost()
-                ), null, false, SetTargetPointer.SPELL)
-                .setTriggerPhrase("Whenever you cast a spell, if it's the first instant spell, the first sorcery " +
-                        "spell, or the first Otter spell other than Alania you've cast this turn, "),
-                AlaniaDivergentStormCondition.instance, ""
-        );
-        ability.addWatcher(new AlaniaDivergentStormWatcher());
-        this.addAbility(ability);
-
+        this.addAbility(new SpellCastControllerTriggeredAbility(
+                new DoIfCostPaid(new CopyTargetStackObjectEffect(true), new AlaniaDivergentStormCost()),
+                null, false, SetTargetPointer.SPELL
+        ).withInterveningIf(AlaniaDivergentStormCondition.instance), new AlaniaDivergentStormWatcher());
     }
 
     private AlaniaDivergentStorm(final AlaniaDivergentStorm card) {
@@ -85,7 +76,7 @@ class AlaniaDivergentStormCost extends CostImpl {
         if (player == null) {
             return false;
         }
-        for (UUID opponentID : game.getOpponents(controllerId)){
+        for (UUID opponentID : game.getOpponents(controllerId)) {
             Player opponent = game.getPlayer(opponentID);
             if (opponent == null) {
                 continue;
@@ -103,7 +94,7 @@ class AlaniaDivergentStormCost extends CostImpl {
         paid = false;
         if (this.getTargets().choose(Outcome.DrawCard, controllerId, source.getSourceId(), source, game)) {
             Player opponent = game.getPlayer(this.getTargets().getFirstTarget());
-            if (opponent == null || !opponent.canRespond()){
+            if (opponent == null || !opponent.canRespond()) {
                 return false;
             }
             paid = opponent.drawCards(1, source, game) > 0;
@@ -136,6 +127,11 @@ enum AlaniaDivergentStormCondition implements Condition {
         UUID spellControllerID = spell.getControllerId();
         MageObjectReference spellMOR = new MageObjectReference(spell, game);
         return watcher.spellIsFirstISOCast(spellControllerID, spellMOR, sourceSpellMOR);
+    }
+
+    @Override
+    public String toString() {
+        return "it's the first instant spell, the first sorcery spell, or the first Otter spell other than {this} you've cast this turn";
     }
 }
 

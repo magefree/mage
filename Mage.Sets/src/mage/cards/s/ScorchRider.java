@@ -3,7 +3,6 @@ package mage.cards.s;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.KickerAbility;
@@ -32,12 +31,9 @@ public final class ScorchRider extends CardImpl {
         this.addAbility(new KickerAbility("{1}{R}"));
 
         // When Scorch Rider enters the battlefield, if it was kicked, it gains haste until end of turn.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new GainAbilitySourceEffect(
-                        HasteAbility.getInstance(), Duration.EndOfTurn
-                )), KickedCondition.ONCE, "When {this} enters, " +
-                "if it was kicked, it gains haste until end of turn."
-        ));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new GainAbilitySourceEffect(
+                HasteAbility.getInstance(), Duration.EndOfTurn
+        ).setText("it gains haste until end of turn")).withInterveningIf(KickedCondition.ONCE));
     }
 
     private ScorchRider(final ScorchRider card) {

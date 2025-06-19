@@ -71,8 +71,8 @@ class StoryweaveReplacementEffect extends ReplacementEffectImpl {
 
     StoryweaveReplacementEffect() {
         super(Duration.EndOfTurn, Outcome.BoostCreature);
-        staticText = "The next time one or more enchantment creatures enter the battlefield " +
-                "under your control this turn, each enters with two additional +1/+1 counters on it";
+        staticText = "The next time one or more enchantment creatures you control enter this turn, " +
+                "each enters with two additional +1/+1 counters on it";
     }
 
     private StoryweaveReplacementEffect(final StoryweaveReplacementEffect effect) {

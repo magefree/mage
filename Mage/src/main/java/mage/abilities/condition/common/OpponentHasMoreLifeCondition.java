@@ -1,5 +1,3 @@
-
-
 package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
@@ -10,25 +8,23 @@ import mage.players.Player;
 import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 
 public enum OpponentHasMoreLifeCondition implements Condition {
 
     instance;
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            for (UUID uuid : game.getOpponents(controller.getId())) {
-                Player opponent = game.getPlayer(uuid);
-                if (opponent != null) {
-                    if (opponent.getLife() > controller.getLife()) {
-                         return true;
-                    }
-                }
+        if (controller == null) {
+            return false;
+        }
+        for (UUID uuid : game.getOpponents(controller.getId())) {
+            Player opponent = game.getPlayer(uuid);
+            if (opponent != null && opponent.getLife() > controller.getLife()) {
+                return true;
             }
         }
         return false;

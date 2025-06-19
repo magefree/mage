@@ -1,26 +1,22 @@
 package mage.cards.l;
 
-import java.util.Optional;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.hint.ConditionHint;
 import mage.abilities.hint.Hint;
+import mage.abilities.keyword.AfflictAbility;
 import mage.abilities.triggers.BeginningOfSecondMainTriggeredAbility;
 import mage.cards.Card;
-import mage.constants.*;
-import mage.abilities.keyword.AfflictAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterCreatureCard;
+import mage.constants.*;
+import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.DamagedEvent;
@@ -31,17 +27,20 @@ import mage.target.TargetCard;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.watchers.Watcher;
 
+import java.util.Optional;
+import java.util.UUID;
+
 /**
  * @author sobiech
  */
 public final class LostMonarchOfIfnir extends CardImpl {
-    private final static Hint hint = new ConditionHint(LostMonarchOfIfnirCondition.instance, "Player was dealt combat damage by a Zombie this turn");
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.ZOMBIE, "Zombies");
+    private final static FilterPermanent filter = new FilterCreaturePermanent(SubType.ZOMBIE, "Zombies");
+    private final static Hint hint = new ConditionHint(LostMonarchOfIfnirCondition.instance);
 
     public LostMonarchOfIfnir(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
-        
+
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.NOBLE);
         this.power = new MageInt(4);
@@ -52,28 +51,15 @@ public final class LostMonarchOfIfnir extends CardImpl {
 
         // Other Zombies you control have afflict 3.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
-                new AfflictAbility(3),
-                Duration.WhileOnBattlefield,
-                filter,
-                true
+                new AfflictAbility(3), Duration.WhileOnBattlefield, filter, true
         )));
 
-        final TriggeredAbility ability = new BeginningOfSecondMainTriggeredAbility(
-                Zone.BATTLEFIELD,
-                TargetController.YOU,
-                new LostMonarchOfIfnirEffect(),
-                false
-        );
-        ability.addHint(hint);
-
         // At the beginning of your second main phase, if a player was dealt combat damage by a Zombie this turn, mill three cards, then you may return a creature card from your graveyard to your hand.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                ability,
-                LostMonarchOfIfnirCondition.instance,
-                "at the beginning of your second main phase, " +
-                "if a player was dealt combat damage by a Zombie this turn, " +
-                "mill three cards, then you may return a creature card from your graveyard to your hand"
-        ), new LostMonarchOfIfnirWatcher());
+        Ability ability = new BeginningOfSecondMainTriggeredAbility(
+                new MillCardsControllerEffect(3), false
+        ).withInterveningIf(LostMonarchOfIfnirCondition.instance);
+        ability.addEffect(new LostMonarchOfIfnirEffect());
+        this.addAbility(ability.addHint(hint), new LostMonarchOfIfnirWatcher());
     }
 
     private LostMonarchOfIfnir(final LostMonarchOfIfnir card) {
@@ -87,38 +73,28 @@ public final class LostMonarchOfIfnir extends CardImpl {
 }
 
 class LostMonarchOfIfnirEffect extends OneShotEffect {
-    private static final FilterCard filter = new FilterCreatureCard();
 
     LostMonarchOfIfnirEffect() {
         super(Outcome.Benefit);
+        staticText = ", then you may return a creature card from your graveyard to your hand";
     }
-    private LostMonarchOfIfnirEffect(OneShotEffect effect){
+
+    private LostMonarchOfIfnirEffect(LostMonarchOfIfnirEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        new MillCardsControllerEffect(3).apply(game, source);
-
-        final TargetCard target = new TargetCardInYourGraveyard(0, 1, filter, true);
-        final Player player = game.getPlayer(source.getControllerId());
-
+        Player player = game.getPlayer(source.getControllerId());
         if (player == null) {
             return false;
         }
-
-        if (!player.choose(Outcome.ReturnToHand, target, source, game)) {
-            return true;
-        }
-
-        final Card card = game.getCard(target.getFirstTarget());
-        if (card == null) {
-            return true;
-        }
-
-        player.moveCards(card, Zone.HAND, source, game);
-
-        return true;
+        TargetCard target = new TargetCardInYourGraveyard(
+                0, 1, StaticFilters.FILTER_CARD_CREATURE, true
+        );
+        player.choose(Outcome.ReturnToHand, target, source, game);
+        Card card = game.getCard(target.getFirstTarget());
+        return card != null && player.moveCards(card, Zone.HAND, source, game);
     }
 
     @Override
@@ -132,39 +108,34 @@ enum LostMonarchOfIfnirCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        final LostMonarchOfIfnirWatcher watcher = game.getState().getWatcher(LostMonarchOfIfnirWatcher.class);
-        return watcher != null && watcher.wasDealtDamage();
+        return game
+                .getState()
+                .getWatcher(LostMonarchOfIfnirWatcher.class)
+                .conditionMet();
+    }
+
+    @Override
+    public String toString() {
+        return "a player was dealt combat damage by a Zombie this turn";
     }
 }
 
 class LostMonarchOfIfnirWatcher extends Watcher {
-    private boolean dealtDamage; //by a zombie this turn
 
-     LostMonarchOfIfnirWatcher() {
-         super(WatcherScope.GAME);
-         this.dealtDamage = false;
+    LostMonarchOfIfnirWatcher() {
+        super(WatcherScope.GAME);
     }
 
     @Override
     public void watch(GameEvent event, Game game) {
         Optional.of(event)
                 .filter(e -> e.getType() == GameEvent.EventType.DAMAGED_PLAYER)
-                .filter(e -> e instanceof DamagedPlayerEvent)
+                .filter(DamagedPlayerEvent.class::isInstance)
                 .map(DamagedPlayerEvent.class::cast)
                 .filter(DamagedEvent::isCombatDamage)
-                .map(damagedPlayerEvent -> game.getPermanentOrLKIBattlefield(event.getSourceId()))
+                .map(GameEvent::getSourceId)
+                .map(game::getPermanentOrLKIBattlefield)
                 .filter(permanent -> permanent.hasSubtype(SubType.ZOMBIE, game))
-                .ifPresent(ignored -> this.dealtDamage = true);
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-        this.dealtDamage = false;
-    }
-
-    boolean wasDealtDamage() {
-        return this.dealtDamage;
+                .ifPresent(ignored -> this.condition = true);
     }
 }
-

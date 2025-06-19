@@ -6,7 +6,6 @@ import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.ChooseABackgroundAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.HaveInitiativeCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.ruleModifying.CombatDamageByToughnessControlledEffect;
@@ -42,11 +41,8 @@ public final class RasaadYnBashir extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new CombatDamageByToughnessControlledEffect()));
 
         // Whenever Rasaad yn Bashir attacks, if you have the initiative, double the toughness of each creature you control until end of turn.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new AttacksTriggeredAbility(new RasaadYnBashirEffect()),
-                HaveInitiativeCondition.instance, "Whenever {this} attacks, if you have the initiative, " +
-                "double the toughness of each creature you control until end of turn."
-        ).addHint(InitiativeHint.instance));
+        this.addAbility(new AttacksTriggeredAbility(new RasaadYnBashirEffect())
+                .withInterveningIf(HaveInitiativeCondition.instance).addHint(InitiativeHint.instance));
 
         // Choose a Background
         this.addAbility(ChooseABackgroundAbility.getInstance());
@@ -66,6 +62,7 @@ class RasaadYnBashirEffect extends OneShotEffect {
 
     RasaadYnBashirEffect() {
         super(Outcome.Benefit);
+        staticText = "double the toughness of each creature you control until end of turn";
     }
 
     private RasaadYnBashirEffect(final RasaadYnBashirEffect effect) {

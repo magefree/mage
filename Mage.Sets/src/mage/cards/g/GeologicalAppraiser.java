@@ -3,7 +3,6 @@ package mage.cards.g;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CastFromEverywhereSourceCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.keyword.DiscoverEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -26,11 +25,7 @@ public final class GeologicalAppraiser extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Geological Appraiser enters the battlefield, if you cast it, discover 3.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new DiscoverEffect(3)),
-                CastFromEverywhereSourceCondition.instance,
-                "When {this} enters, if you cast it, discover 3."
-        ));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DiscoverEffect(3)).withInterveningIf(CastFromEverywhereSourceCondition.instance));
     }
 
     private GeologicalAppraiser(final GeologicalAppraiser card) {

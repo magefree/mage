@@ -1,9 +1,9 @@
-
 package mage.cards.c;
 
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.UntapTargetEffect;
@@ -12,22 +12,19 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.common.FilterPlaneswalkerPermanent;
+import mage.filter.common.FilterControlledPlaneswalkerPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 public final class CompanionOfTheTrials extends CardImpl {
 
-    private static final FilterPlaneswalkerPermanent filter = new FilterPlaneswalkerPermanent("you control a Gideon planeswalker");
-    static {
-        filter.add(SubType.GIDEON.getPredicate());
-    }
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(
+            new FilterControlledPlaneswalkerPermanent(SubType.GIDEON, "you control a Gideon planeswalker")
+    );
 
     public CompanionOfTheTrials(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
@@ -41,10 +38,9 @@ public final class CompanionOfTheTrials extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {1}{W}: Untap target creature. Activate this ability only if you control a Gideon planeswalker.
-        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD,
-                new UntapTargetEffect(),
-                new ManaCostsImpl<>("{1}{W}"),
-                new PermanentsOnTheBattlefieldCondition(filter));
+        Ability ability = new ActivateIfConditionActivatedAbility(
+                new UntapTargetEffect(), new ManaCostsImpl<>("{1}{W}"), condition
+        );
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

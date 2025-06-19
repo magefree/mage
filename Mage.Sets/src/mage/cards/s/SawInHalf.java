@@ -43,8 +43,8 @@ class SawInHalfEffect extends OneShotEffect {
     SawInHalfEffect() {
         super(Outcome.Benefit);
         staticText = "destroy target creature. If that creature dies this way, its controller creates " +
-                "two tokens that are copies of that creature, except their base power is half that creature's " +
-                "power and their base toughness is half that creature's toughness. Round up each time";
+                "two tokens that are copies of that creature, except their power is half that creature's " +
+                "power and their toughness is half that creature's toughness. Round up each time";
     }
 
     private SawInHalfEffect(final SawInHalfEffect effect) {

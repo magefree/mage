@@ -9,8 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.filter.FilterSpell;
-import mage.filter.common.FilterHistoricSpell;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -18,8 +17,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class SarahJaneSmith extends CardImpl {
-
-    private static final FilterSpell filter = new FilterHistoricSpell();
 
     public SarahJaneSmith(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
@@ -32,7 +29,7 @@ public final class SarahJaneSmith extends CardImpl {
 
         // Whenever you cast a historic spell, investigate. This ability triggers only once each turn.
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                new InvestigateEffect(), filter, false
+                new InvestigateEffect(), StaticFilters.FILTER_SPELL_HISTORIC, false
         ).setTriggersLimitEachTurn(1));
 
         // Doctor's companion

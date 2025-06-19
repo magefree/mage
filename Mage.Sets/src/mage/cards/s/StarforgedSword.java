@@ -4,7 +4,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAttachToTarget;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.GiftWasPromisedCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.effects.common.continuous.LoseAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
@@ -33,10 +32,7 @@ public final class StarforgedSword extends CardImpl {
         this.addAbility(new GiftAbility(this, GiftType.TAPPED_FISH));
 
         // When Starforged Sword enters, if the gift was promised, attach Starforged Sword to target creature you control.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldAttachToTarget(), GiftWasPromisedCondition.TRUE,
-                "When {this} enters, if the gift was promised, attach {this} to target creature you control."
-        ));
+        this.addAbility(new EntersBattlefieldAttachToTarget().withInterveningIf(GiftWasPromisedCondition.TRUE));
 
         // Equipped creature gets +3/+3 and loses flying.
         Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(3, 3));

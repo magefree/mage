@@ -1,11 +1,9 @@
-
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.KickerAbility;
@@ -14,24 +12,26 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author North
  */
 public final class OranRiefRecluse extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
+    private static final FilterPermanent filter = new FilterCreaturePermanent("creature with flying");
 
     static {
         filter.add(new AbilityPredicate(FlyingAbility.class));
     }
 
     public OranRiefRecluse(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.subtype.add(SubType.SPIDER);
 
         this.power = new MageInt(1);
@@ -44,9 +44,9 @@ public final class OranRiefRecluse extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
 
         // When Oran-Rief Recluse enters the battlefield, if it was kicked, destroy target creature with flying.
-        EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
-        ability.addTarget(new TargetCreaturePermanent(filter));
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, KickedCondition.ONCE, "When {this} enters, if it was kicked, destroy target creature with flying."));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect()).withInterveningIf(KickedCondition.ONCE);
+        ability.addTarget(new TargetPermanent(filter));
+        this.addAbility(ability);
     }
 
     private OranRiefRecluse(final OranRiefRecluse card) {

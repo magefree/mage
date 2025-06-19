@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.hint.ConditionHint;
 import mage.abilities.hint.Hint;
@@ -21,8 +20,10 @@ import java.util.UUID;
  */
 public final class SettlementBlacksmith extends CardImpl {
 
-    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(new FilterControlledPermanent(SubType.EQUIPMENT));
-    private static final Hint hint = new ConditionHint(condition, "You control an Equipment");
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(
+            new FilterControlledPermanent(SubType.EQUIPMENT, "you control an Equipment")
+    );
+    private static final Hint hint = new ConditionHint(condition);
 
     public SettlementBlacksmith(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
@@ -33,10 +34,8 @@ public final class SettlementBlacksmith extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Settlement Blacksmith enters the battlefield, if you control an Equipment, draw a card.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)),
-                condition, "When {this} enters, if you control an Equipment, draw a card."
-        ).addHint(hint));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1))
+                .withInterveningIf(condition).addHint(hint));
     }
 
     private SettlementBlacksmith(final SettlementBlacksmith card) {

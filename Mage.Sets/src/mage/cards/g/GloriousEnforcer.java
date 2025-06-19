@@ -1,26 +1,25 @@
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
-import mage.constants.Duration;
-import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class GloriousEnforcer extends CardImpl {
@@ -39,14 +38,12 @@ public final class GloriousEnforcer extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // At the beginning of each combat, if you have more life than an opponent, Glorious Enforcer gains double strike until end of turn.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfCombatTriggeredAbility(
-                        TargetController.ANY, new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn),
-                        false
-                ),
-                GloriousEnforcerCondition.instance,
-                "At the beginning of each combat, if you have more life than an opponent, {this} gains double strike until end of turn."
-        ));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(
+                TargetController.ANY,
+                new GainAbilitySourceEffect(
+                        DoubleStrikeAbility.getInstance(), Duration.EndOfTurn
+                ), false
+        ).withInterveningIf(GloriousEnforcerCondition.instance));
     }
 
     private GloriousEnforcer(final GloriousEnforcer card) {
@@ -66,14 +63,20 @@ enum GloriousEnforcerCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            for (UUID opponentId : game.getOpponents(source.getControllerId())) {
-                Player opponent = game.getPlayer(opponentId);
-                if (opponent != null && controller.getLife() > opponent.getLife()) {
-                    return true;
-                }
+        if (controller == null) {
+            return false;
+        }
+        for (UUID opponentId : game.getOpponents(source.getControllerId())) {
+            Player opponent = game.getPlayer(opponentId);
+            if (opponent != null && controller.getLife() > opponent.getLife()) {
+                return true;
             }
         }
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return "you have more life than an opponent";
     }
 }

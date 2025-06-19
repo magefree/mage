@@ -15,9 +15,9 @@ public class DebugUtilTest extends CardTestPlayerBase {
     }
 
     private void secondMethod() {
-        String resCurrent = DebugUtil.getMethodNameWithSource(0);
-        String resPrev = DebugUtil.getMethodNameWithSource(1);
-        String resPrevPrev = DebugUtil.getMethodNameWithSource(2);
+        String resCurrent = DebugUtil.getMethodNameWithSource(0, "method");
+        String resPrev = DebugUtil.getMethodNameWithSource(1, "method");
+        String resPrevPrev = DebugUtil.getMethodNameWithSource(2, "method");
         Assert.assertTrue("must find secondMethod, but get " + resCurrent, resCurrent.startsWith("secondMethod"));
         Assert.assertTrue("must find firstMethod, but get " + resPrev, resPrev.startsWith("firstMethod"));
         Assert.assertTrue("must find test_StackTraceWithSourceName, but get " + resPrevPrev, resPrevPrev.startsWith("test_StackTraceWithSourceName"));

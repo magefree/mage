@@ -58,7 +58,7 @@ class DeathmistRaptorEffect extends OneShotEffect {
 
     DeathmistRaptorEffect() {
         super(Outcome.Benefit);
-        this.staticText = "you may return {this} from your graveyard to the battlefield face up or face down";
+        this.staticText = "you may return this card from your graveyard to the battlefield face up or face down";
     }
 
     private DeathmistRaptorEffect(final DeathmistRaptorEffect effect) {

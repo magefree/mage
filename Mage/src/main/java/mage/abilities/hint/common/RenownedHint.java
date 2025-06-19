@@ -8,7 +8,7 @@ import mage.game.Game;
 
 public enum RenownedHint implements Hint {
     instance;
-    private static final ConditionHint hint = new ConditionHint(RenownedSourceCondition.instance,
+    private static final ConditionHint hint = new ConditionHint(RenownedSourceCondition.THIS,
         "{this} is renowned", null,
         "{this} isn't renowned", null, true);
 

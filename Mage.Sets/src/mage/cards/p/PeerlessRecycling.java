@@ -26,7 +26,7 @@ public final class PeerlessRecycling extends CardImpl {
 
         // Return target permanent from your graveyard to your hand. If the gift was promised, instead return two target permanent cards from your graveyard to your hand.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect()
-                .setText("return target permanent from your graveyard to your hand. If the gift was promised, " +
+                .setText("return target permanent card from your graveyard to your hand. If the gift was promised, " +
                         "instead return two target permanent cards from your graveyard to your hand"));
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_PERMANENT));
         this.getSpellAbility().setTargetAdjuster(new ConditionalTargetAdjuster(GiftWasPromisedCondition.TRUE,

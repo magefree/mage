@@ -9,6 +9,7 @@ import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
+import mage.util.CardUtil;
 
 /**
  * @author LevelX2
@@ -20,7 +21,7 @@ public class ExileCardYouChooseTargetOpponentEffect extends OneShotEffect {
     public ExileCardYouChooseTargetOpponentEffect(FilterCard filter) {
         super(Outcome.Discard);
         this.staticText = "target opponent reveals their hand. You choose "
-                + filter.getMessage() + (filter.getMessage().contains("from it") ? "" : " from it") + " and exile that card";
+                + CardUtil.addArticle(filter.getMessage()) + (filter.getMessage().contains("from it") ? "" : " from it") + " and exile that card";
         this.filter = filter;
     }
 

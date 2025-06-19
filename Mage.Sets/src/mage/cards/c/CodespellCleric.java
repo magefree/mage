@@ -5,7 +5,6 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
@@ -39,11 +38,8 @@ public final class CodespellCleric extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // When Codespell Cleric enters the battlefield, if it was the second spell you cast this turn, put a +1/+1 counter on target creature.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance())),
-                CodespellClericCondition.instance, "When {this} enters, " +
-                "if it was the second spell you cast this turn, put a +1/+1 counter on target creature."
-        );
+        Ability ability = new EntersBattlefieldTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()))
+                .withInterveningIf(CodespellClericCondition.instance);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability, new CodespellClericWatcher());
     }
@@ -65,6 +61,11 @@ enum CodespellClericCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         CodespellClericWatcher watcher = game.getState().getWatcher(CodespellClericWatcher.class);
         return watcher != null && watcher.checkSpell(source, game);
+    }
+
+    @Override
+    public String toString() {
+        return "it was the second spell you cast this turn";
     }
 }
 

@@ -14,6 +14,7 @@ import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -68,17 +69,13 @@ class SharpEyedRookieTriggeredAbility extends EntersBattlefieldAllTriggeredAbili
     @Override
     public boolean checkInterveningIfClause(Game game) {
         Permanent sourcePermanent = getSourcePermanentOrLKI(game);
-        Permanent permanentEntering = (Permanent) this
-                .getEffects()
-                .stream()
-                .map(effect -> effect.getValue("permanentEnteringBattlefield"))
-                .findFirst()
-                .orElse(null);
         return sourcePermanent != null
-                && permanentEntering != null
                 && sourcePermanent.isCreature(game)
-                && permanentEntering.isCreature(game)
-                && (permanentEntering.getPower().getValue() > sourcePermanent.getPower().getValue()
-                || permanentEntering.getToughness().getValue() > sourcePermanent.getToughness().getValue());
+                && CardUtil
+                .getEffectValueFromAbility(this, "permanentEnteringBattlefield", Permanent.class)
+                .filter(permanent -> permanent.isCreature(game))
+                .filter(permanent -> sourcePermanent.getPower().getValue() < permanent.getPower().getValue()
+                        || sourcePermanent.getToughness().getValue() < permanent.getToughness().getValue())
+                .isPresent();
     }
 }

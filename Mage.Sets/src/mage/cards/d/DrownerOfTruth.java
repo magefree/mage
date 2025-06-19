@@ -1,10 +1,8 @@
 package mage.cards.d;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.condition.common.ManaWasSpentCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.DevoidAbility;
@@ -38,12 +36,8 @@ public final class DrownerOfTruth extends ModalDoubleFacedCard {
         this.getLeftHalfCard().addAbility(new DevoidAbility(this.getLeftHalfCard().getColor()));
 
         // When you cast this spell, if {C} was spent to cast it, create two 0/1 colorless Eldrazi Spawn creature tokens with "Sacrifice this creature: Add {C}."
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new CastSourceTriggeredAbility(new CreateTokenEffect(new EldraziSpawnToken(), 2)),
-                ManaWasSpentCondition.COLORLESS,
-                "When you cast this spell, if {C} was spent to cast it, "
-                        + "create two 0/1 colorless Eldrazi Spawn creature tokens with \"Sacrifice this creature: Add {C}.\"");
-        this.getLeftHalfCard().addAbility(ability);
+        this.getLeftHalfCard().addAbility(new CastSourceTriggeredAbility(new CreateTokenEffect(new EldraziSpawnToken(), 2))
+                .withInterveningIf(ManaWasSpentCondition.COLORLESS));
 
         // 2.
         // Drowned Jungle

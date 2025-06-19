@@ -10,12 +10,12 @@ import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.AsThoughEffect;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -38,13 +38,16 @@ import java.util.UUID;
  */
 public final class IceCauldron extends CardImpl {
 
+    private static final Condition condition = new SourceHasCounterCondition(CounterType.CHARGE, ComparisonType.EQUAL_TO, 0);
+
     public IceCauldron(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // {X}, {T}: Put a charge counter on Ice Cauldron and exile a nonland card from your hand. You may cast that card for as long as it remains exiled. Note the type and amount of mana spent to pay this activation cost. Activate this ability only if there are no charge counters on Ice Cauldron.
-        ConditionalActivatedAbility ability = new ConditionalActivatedAbility(
-                Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance(), true), new ManaCostsImpl<>("{X}"), new SourceHasCounterCondition(CounterType.CHARGE, 0, 0));
-        ability.addEffect(new IceCauldronExileEffect());
+        Ability ability = new ActivateIfConditionActivatedAbility(
+                new IceCauldronExileEffect(), new ManaCostsImpl<>("{X}"), condition
+        );
+        ability.addEffect(new AddCountersSourceEffect(CounterType.CHARGE.createInstance(), true));
         ability.addEffect(new IceCauldronNoteManaEffect());
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -75,7 +78,7 @@ class IceCauldronExileEffect extends OneShotEffect {
 
     public IceCauldronExileEffect() {
         super(Outcome.Benefit);
-        this.staticText = "and exile a nonland card from your hand. You may cast that card for as long as it remains exiled";
+        this.staticText = "you may exile a nonland card from your hand. You may cast that card for as long as it remains exiled";
     }
 
     private IceCauldronExileEffect(final IceCauldronExileEffect effect) {
@@ -154,7 +157,7 @@ class IceCauldronNoteManaEffect extends OneShotEffect {
 
     public IceCauldronNoteManaEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Note the type and amount of mana spent to pay this activation cost";
+        this.staticText = "and note the type and amount of mana spent to pay this activation cost";
     }
 
     private IceCauldronNoteManaEffect(final IceCauldronNoteManaEffect effect) {

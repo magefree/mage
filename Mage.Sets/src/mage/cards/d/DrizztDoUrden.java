@@ -1,11 +1,11 @@
 package mage.cards.d;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
@@ -19,6 +19,7 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.GuenhwyvarToken;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -43,11 +44,7 @@ public final class DrizztDoUrden extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new GuenhwyvarToken())));
 
         // Whenever a creature dies, if it had power greater than Drizzt's power, put a number of +1/+1 counters on Drizzt equal to the difference.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new DiesCreatureTriggeredAbility(new DrizztDoUrdenEffect(), false),
-                DrizztDoUrdenCondition.instance, "Whenever a creature dies, if it had power greater " +
-                "than {this}'s power, put a number of +1/+1 counters on {this} equal to the difference."
-        ));
+        this.addAbility(new DiesCreatureTriggeredAbility(new DrizztDoUrdenEffect(), false).withInterveningIf(DrizztDoUrdenCondition.instance));
     }
 
     private DrizztDoUrden(final DrizztDoUrden card) {
@@ -66,15 +63,18 @@ enum DrizztDoUrdenCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent sourcePermanent = source.getSourcePermanentOrLKI(game);
-        Permanent creatureDied = (Permanent) source
-                .getEffects()
-                .stream()
-                .map(effect -> effect.getValue("creatureDied"))
-                .findFirst()
-                .orElse(null);
         return sourcePermanent != null
-                && creatureDied != null
-                && creatureDied.getPower().getValue() > sourcePermanent.getPower().getValue();
+                && CardUtil
+                .getEffectValueFromAbility(source, "creatureDied", Permanent.class)
+                .map(MageObject::getPower)
+                .map(MageInt::getValue)
+                .filter(x -> sourcePermanent.getPower().getValue() < x)
+                .isPresent();
+    }
+
+    @Override
+    public String toString() {
+        return "it had power greater than {this}'s power";
     }
 }
 
@@ -82,6 +82,7 @@ class DrizztDoUrdenEffect extends OneShotEffect {
 
     DrizztDoUrdenEffect() {
         super(Outcome.Benefit);
+        staticText = "put a number of +1/+1 counters on {this} equal to the difference";
     }
 
     private DrizztDoUrdenEffect(final DrizztDoUrdenEffect effect) {

@@ -36,6 +36,7 @@ import java.util.stream.Collectors;
 public final class PartingGust extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature");
+
     static {
         filter.add(TokenPredicate.FALSE);
     }
@@ -52,7 +53,7 @@ public final class PartingGust extends CardImpl {
                 new ExileTargetEffect(),
                 new PartingGustExileReturnEffect(),
                 GiftWasPromisedCondition.TRUE,
-                "Exile target nontoken creature. If the gift wasn't promised, return that creature to the " +
+                "Exile target nontoken creature. If the gift wasn't promised, return that card to the " +
                         "battlefield under its owner's control with a +1/+1 counter on it at the beginning of the next end step."
         ));
     }

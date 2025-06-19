@@ -2,12 +2,12 @@
 
 package mage.abilities.effects.common.continuous;
 
+import mage.abilities.Ability;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
-import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -34,7 +34,7 @@ public class GainAbilityControllerEffect extends ContinuousEffectImpl {
     public GainAbilityControllerEffect(Ability ability, Duration duration) {
         super(duration, Layer.PlayerEffects, SubLayer.NA, Outcome.AddAbility);
         this.ability = ability;
-        staticText = "You have " + ability.getRule();
+        staticText = "you " + (duration == Duration.WhileOnBattlefield ? "have" : "gain") + ' ' + ability.getRule();
         if (!duration.toString().isEmpty()) {
             staticText += ' ' + duration.toString();
         }

@@ -45,7 +45,7 @@ public final class RisonaAsariCommander extends CardImpl {
         // Whenever Risona, Asari Commander deals combat damage to a player, if it doesn't have an indestructible counter on it, put an indestructible counter on it.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new AddCountersSourceEffect(
                 CounterType.INDESTRUCTIBLE.createInstance()), false
-        ).withInterveningIf(RisonaAsariCommanderCondition.instance));
+        ).withInterveningIf(RisonaAsariCommanderCondition.instance).withRuleTextReplacement(true));
 
         // Whenever combat damage is dealt to you, remove an indestructible counter from Risona.
         this.addAbility(new RisonaAsariCommanderTriggeredAbility());

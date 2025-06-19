@@ -5,7 +5,6 @@ import mage.abilities.common.AttacksAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.FirstCombatPhaseCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.AdditionalCombatPhaseEffect;
 import mage.abilities.effects.common.UntapAllEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
@@ -16,7 +15,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 
 import java.util.UUID;
@@ -38,12 +36,8 @@ public final class HexplateWallbreaker extends CardImpl {
 
         // Whenever equipped creature attacks, if it's the first combat phase of the turn, untap
         // each attacking creature. After this phase, there is an additional combat phase.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new AttacksAttachedTriggeredAbility(new UntapAllEffect(StaticFilters.FILTER_ATTACKING_CREATURES)),
-                FirstCombatPhaseCondition.instance,
-                "Whenever equipped creature attacks, if it's the first combat phase of the turn, untap " +
-                        "each attacking creature. After this phase, there is an additional combat phase"
-        );
+        Ability ability = new AttacksAttachedTriggeredAbility(new UntapAllEffect(StaticFilters.FILTER_ATTACKING_CREATURE)
+                .setText("untap each attacking creature")).withInterveningIf(FirstCombatPhaseCondition.instance);
         ability.addEffect(new AdditionalCombatPhaseEffect());
         this.addAbility(ability);
 

@@ -16,8 +16,8 @@ import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.util.CardUtil;
 
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -59,18 +59,10 @@ enum RiveteersAscendancyPredicate implements ObjectSourcePlayerPredicate<Card> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
-        return input
-                .getObject()
-                .getManaValue()
-                < input
-                .getSource()
-                .getEffects()
-                .stream()
-                .map(effect -> effect.getValue("sacrificedPermanent"))
-                .filter(Objects::nonNull)
-                .map(Permanent.class::cast)
-                .mapToInt(MageObject::getManaValue)
-                .max()
-                .orElse(0);
+        return CardUtil
+                .getEffectValueFromAbility(input.getSource(), "sacrificedPermanent", Permanent.class)
+                .map(MageObject::getManaValue)
+                .filter(x -> input.getObject().getManaValue() < x)
+                .isPresent();
     }
 }

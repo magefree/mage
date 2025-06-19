@@ -78,7 +78,8 @@ class ChooseCardTypeEffect extends OneShotEffect {
             if (permanent == null) {
                 return false;
             }
-            ExileZone exileZone = (ExileZone) game.getExile().getExileZone(CardUtil.getExileZoneId(game, source, +1));
+            // chase the exile zone down...
+            ExileZone exileZone = game.getState().getExile().getExileZone(CardUtil.getExileZoneId(game, source, game.getState().getZoneChangeCounter(mageObject.getId()) - 1));
             if (exileZone == null) {
                 return false;
             }

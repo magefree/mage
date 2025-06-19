@@ -7,7 +7,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
@@ -39,7 +39,7 @@ public final class CultConscript extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
 
         // {1}{B}: Return Cult Conscript from your graveyard to the battlefield. Activate only if a non-Skeleton creature died under your control this turn.
-        this.addAbility(new ConditionalActivatedAbility(
+        this.addAbility(new ActivateIfConditionActivatedAbility(
                 Zone.GRAVEYARD,
                 new ReturnSourceFromGraveyardToBattlefieldEffect(false, false),
                 new ManaCostsImpl<>("{1}{B}"),

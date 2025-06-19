@@ -22,7 +22,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetControlledPermanent;
-import mage.target.targetadjustment.DamagedPlayerControlsTargetAdjuster;
+import mage.target.targetadjustment.ThatPlayerControlsTargetAdjuster;
 
 import java.util.UUID;
 
@@ -61,7 +61,7 @@ public final class ZarethSanTheTrickster extends CardImpl {
         // Whenever Zareth San deals combat damage to a player, you may put target permanent card from that player's graveyard onto the battlefield under your control.
         Ability ability2 = new DealsCombatDamageToAPlayerTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(), true, true);
         ability2.addTarget(new TargetCardInGraveyard(filterCardGraveyard));
-        ability2.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster(true));
+        ability2.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster(true));
         this.addAbility(ability2);
     }
 

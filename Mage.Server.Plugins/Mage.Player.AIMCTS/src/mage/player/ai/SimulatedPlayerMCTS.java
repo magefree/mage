@@ -288,6 +288,10 @@ public final class SimulatedPlayerMCTS extends MCTSPlayer {
 
     @Override
     public boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Ability source, Game game) {
+        if (target.getAmountRemaining() <= 0) {
+            return false;
+        }
+
         Set<UUID> possibleTargets = target.possibleTargets(playerId, source, game);
         if (possibleTargets.isEmpty()) {
             return !target.isRequired(source);

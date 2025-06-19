@@ -42,7 +42,7 @@ public final class MarshalsPathcruiser extends CardImpl {
                 new AddCardTypeSourceEffect(Duration.Custom, CardType.ARTIFACT, CardType.CREATURE),
                 new ManaCostsImpl<>("{W}{U}{B}{R}{G}")
         );
-        ability.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)));
+        ability.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)).setText("Put two +1/+1 counters on it"));
         this.addAbility(ability);
 
         // Crew 5

@@ -1,10 +1,9 @@
 package mage.cards.a;
 
 import mage.MageInt;
-import mage.abilities.TriggeredAbility;
+import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.BargainedCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.FightTargetSourceEffect;
 import mage.abilities.keyword.BargainAbility;
 import mage.abilities.keyword.TrampleAbility;
@@ -37,14 +36,11 @@ public final class AgathasChampion extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // When Agatha's Champion enters the battlefield, if it was bargained, it fights up to one target creature you don't control.
-        TriggeredAbility trigger = new EntersBattlefieldTriggeredAbility(new FightTargetSourceEffect());
-        trigger.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL, false));
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                trigger,
-                BargainedCondition.instance,
-                "When {this} enters, if it was bargained, it fights up to one target creature you don't control." +
-                        " <i>(Each deals damage equal to its power to the other.)</i>"
-        ));
+        Ability ability = new EntersBattlefieldTriggeredAbility(
+                new FightTargetSourceEffect().setText("it fights up to one target creature you don't control")
+        ).withInterveningIf(BargainedCondition.instance);
+        ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
+        this.addAbility(ability);
     }
 
     private AgathasChampion(final AgathasChampion card) {

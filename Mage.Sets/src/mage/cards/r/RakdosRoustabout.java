@@ -74,6 +74,6 @@ class RakdosRoustaboutAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever {this} becomes blocked, it deals 1 damage to the player or planeswalker it's attacking";
+        return "Whenever {this} becomes blocked, it deals 1 damage to the player or planeswalker it's attacking.";
     }
 }

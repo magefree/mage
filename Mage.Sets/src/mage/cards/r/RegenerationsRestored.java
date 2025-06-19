@@ -3,6 +3,7 @@ package mage.cards.r;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -14,6 +15,7 @@ import mage.abilities.keyword.VanishingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -49,15 +51,15 @@ public final class RegenerationsRestored extends CardImpl {
 
 class RegenerationsRestoredTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final Condition condition = new SourceHasCounterCondition(CounterType.TIME, ComparisonType.EQUAL_TO, 0);
+
     RegenerationsRestoredTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ScryEffect(1, false));
         this.addEffect(new GainLifeEffect(1).concatBy("and"));
-
         this.addEffect(new ConditionalOneShotEffect(
-                new RegenerationsRestoredEffect(),
-                new SourceHasCounterCondition(CounterType.TIME, 0, 0)
-        ).concatBy("Then"));
-
+                new RegenerationsRestoredEffect(), condition, "Then if {this} has no " +
+                "time counters on it, exile it. When you do, take an extra turn after this one"
+        ));
         this.setTriggerPhrase("Whenever one or more time counters are removed from {this}, ");
     }
 

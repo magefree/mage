@@ -9,7 +9,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.combat.AttacksIfAbleTargetEffect;
-import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.HasteAbility;
@@ -22,7 +22,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.filter.StaticFilters;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.token.GoblinToken;
@@ -36,7 +36,8 @@ import java.util.UUID;
  */
 public final class HowlsquadHeavy extends CardImpl {
 
-    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(new FilterControlledPermanent(SubType.GOBLIN));
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.GOBLIN);
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
     private static final Hint hint = new ValueHint("Goblins you control", xValue);
 
     public HowlsquadHeavy(UUID ownerId, CardSetInfo setInfo) {
@@ -51,10 +52,9 @@ public final class HowlsquadHeavy extends CardImpl {
         this.addAbility(new StartYourEnginesAbility());
 
         // Other Goblins you control have haste.
-        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
-                HasteAbility.getInstance(), Duration.WhileOnBattlefield,
-                StaticFilters.FILTER_PERMANENT_CREATURE_GOBLINS, true
-        )));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
+                HasteAbility.getInstance(), Duration.WhileOnBattlefield, filter, true
+        ).setText("other Goblins you control have haste")));
 
         // At the beginning of combat on your turn, create a 1/1 red Goblin creature token. That token attacks this combat if able.
         this.addAbility(new BeginningOfCombatTriggeredAbility(new HowlsquadHeavyEffect()));

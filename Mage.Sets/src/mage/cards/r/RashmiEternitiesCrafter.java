@@ -1,29 +1,26 @@
 package mage.cards.r;
 
-import java.util.UUID;
-import mage.ApprovingObject;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
+import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
+import mage.util.CardUtil;
 import mage.watchers.common.SpellsCastWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author emerald000
  */
 public final class RashmiEternitiesCrafter extends CardImpl {
@@ -56,6 +53,7 @@ class RashmiEternitiesCrafterTriggeredAbility extends SpellCastControllerTrigger
 
     RashmiEternitiesCrafterTriggeredAbility() {
         super(new RashmiEternitiesCrafterEffect(), false);
+        setTriggerPhrase("Whenever you cast your first spell each turn, ");
     }
 
     private RashmiEternitiesCrafterTriggeredAbility(final RashmiEternitiesCrafterTriggeredAbility ability) {
@@ -69,27 +67,11 @@ class RashmiEternitiesCrafterTriggeredAbility extends SpellCastControllerTrigger
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (super.checkTrigger(event, game)) {
-            SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
-            if (watcher != null && watcher.getCount(event.getPlayerId()) == 1) {
-                Spell spell = game.getStack().getSpell(event.getTargetId());
-                if (spell != null) {
-                    for (Effect effect : getEffects()) {
-                        effect.setValue("RashmiEternitiesCrafterCMC", spell.getManaValue());
-                    }
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you cast your first spell each turn, reveal the top card "
-                + "of your library. If it's a nonland card with mana value "
-                + "less than that spell's, you may cast it without paying "
-                + "its mana cost. If you don't cast the revealed card, put it into your hand.";
+        return super.checkTrigger(event, game)
+                && game
+                .getState()
+                .getWatcher(SpellsCastWatcher.class)
+                .getCount(event.getPlayerId()) == 1;
     }
 }
 
@@ -97,10 +79,8 @@ class RashmiEternitiesCrafterEffect extends OneShotEffect {
 
     RashmiEternitiesCrafterEffect() {
         super(Outcome.PlayForFree);
-        this.staticText = "reveal the top card of your library. If it's a nonland"
-                + " card with mana value less than that spell's, you may "
-                + "cast it without paying its mana cost. If you don't cast the "
-                + "revealed card, put it into your hand";
+        this.staticText = "reveal the top card of your library. You may cast it without paying its mana cost " +
+                "if it's a spell with lesser mana value. If you don't cast it, put it into your hand.";
     }
 
     private RashmiEternitiesCrafterEffect(final RashmiEternitiesCrafterEffect effect) {
@@ -114,32 +94,22 @@ class RashmiEternitiesCrafterEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        boolean cardWasCast = false;
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Card card = controller.getLibrary().getFromTop(game);
-            if (card != null) {
-                controller.revealCards("Rashmi, Eternities Crafter", new CardsImpl(card), game);
-                if (card.isLand(game)) {
-                    controller.moveCards(card, Zone.HAND, source, game);
-                    return true;
-                }
-                Object cmcObject = this.getValue("RashmiEternitiesCrafterCMC");
-                if (cmcObject != null
-                        && card.getManaValue() < (int) cmcObject
-                        && controller.chooseUse(Outcome.PlayForFree, "Cast " + card.getName()
-                                + " without paying its mana cost?", source, game)) {
-                    game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
-                    cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
-                            game, true, new ApprovingObject(source, game));
-                    game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
-                }
-                if (!cardWasCast) {
-                    controller.moveCards(card, Zone.HAND, source, game);
-                }
-                return true;
-            }
+        Player player = game.getPlayer(source.getControllerId());
+        Spell spell = (Spell) getValue("spellCast");
+        if (player == null || spell == null) {
+            return false;
         }
-        return false;
+        Card card = player.getLibrary().getFromTop(game);
+        if (card == null) {
+            return false;
+        }
+        player.revealCards("Rashmi, Eternities Crafter", new CardsImpl(card), game);
+        FilterCard filter = new FilterCard();
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, spell.getManaValue()));
+        CardUtil.castSpellWithAttributesForFree(player, source, game, card, filter);
+        if (Zone.LIBRARY.match(game.getState().getZone(card.getId()))) {
+            player.moveCards(card, Zone.HAND, source, game);
+        }
+        return true;
     }
 }

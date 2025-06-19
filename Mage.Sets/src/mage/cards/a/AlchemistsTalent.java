@@ -7,7 +7,6 @@ import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -52,18 +51,24 @@ public final class AlchemistsTalent extends CardImpl {
         // Treasures you control have "{T}, Sacrifice this artifact: Add two mana of any one color."
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(2), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost().setText("sacrifice this artifact"));
-        this.addAbility(new SimpleStaticAbility(new GainClassAbilitySourceEffect(new GainAbilityControlledEffect(ability, Duration.WhileOnBattlefield, new FilterPermanent(SubType.TREASURE, "Treasures")), 2)));
+        this.addAbility(new SimpleStaticAbility(new GainClassAbilitySourceEffect(
+                new GainAbilityControlledEffect(
+                        ability, Duration.WhileOnBattlefield,
+                        new FilterPermanent(SubType.TREASURE, "Treasures")
+                ), 2
+        )));
 
         // {4}{R}: Level 3
         this.addAbility(new ClassLevelAbility(3, "{4}{R}"));
 
         // Whenever you cast a spell, if mana from a Treasure was spent to cast it, this Class deals damage equal to that spell's mana value to each opponent.
-        this.addAbility(new SimpleStaticAbility(new GainClassAbilitySourceEffect(new ConditionalInterveningIfTriggeredAbility(
+        this.addAbility(new SimpleStaticAbility(new GainClassAbilitySourceEffect(
                 new SpellCastControllerTriggeredAbility(
-                        new DamagePlayersEffect(AlchemistsTalentValue.instance, TargetController.OPPONENT), StaticFilters.FILTER_SPELL, false, SetTargetPointer.SPELL
-                ), AlchemistsTalentCondition.instance, "Whenever you cast a spell, if mana from a Treasure " +
-                "was spent to cast it, this Class deals damage equal to that spell's mana value to each opponent"
-        ), 3)));
+                        new DamagePlayersEffect(AlchemistsTalentValue.instance, TargetController.OPPONENT)
+                                .setText("{this} deals damage equal to that spell's mana value to each opponent"),
+                        StaticFilters.FILTER_SPELL_A, false, SetTargetPointer.SPELL
+                ).withInterveningIf(AlchemistsTalentCondition.instance), 3
+        )));
     }
 
     private AlchemistsTalent(final AlchemistsTalent card) {
@@ -83,6 +88,11 @@ enum AlchemistsTalentCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         Spell spell = (Spell) source.getEffects().get(0).getValue("spellCast");
         return spell != null && ManaPaidSourceWatcher.getTreasurePaid(spell.getSourceId(), game) > 0;
+    }
+
+    @Override
+    public String toString() {
+        return "mana from a Treasure was spent to cast it";
     }
 }
 
@@ -111,6 +121,6 @@ enum AlchemistsTalentValue implements DynamicValue {
 
     @Override
     public String toString() {
-        return "";
+        return "1";
     }
 }

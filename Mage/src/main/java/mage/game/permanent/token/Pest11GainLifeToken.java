@@ -12,7 +12,7 @@ import mage.constants.SubType;
 public final class Pest11GainLifeToken extends TokenImpl {
 
     public Pest11GainLifeToken() {
-        super("Pest Token", "1/1 black and green Pest creature token with \"When this creature dies, you gain 1 life.\"");
+        super("Pest Token", "1/1 black and green Pest creature token with \"When this token dies, you gain 1 life.\"");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         color.setGreen(true);

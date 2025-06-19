@@ -83,6 +83,7 @@ class ShadowMysteriousAssassinEffect extends OneShotEffect {
             return false;
         }
         TargetSacrifice target = new TargetSacrifice(0, 1, filter);
+        player.choose(Outcome.Sacrifice, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         if (permanent == null || !permanent.sacrifice(source, game)) {
             return false;

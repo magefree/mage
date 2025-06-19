@@ -1,6 +1,5 @@
 package mage.cards.t;
 
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.PutCardIntoPlayWithHasteAndSacrificeEffect;
 import mage.abilities.keyword.SpliceAbility;
 import mage.cards.CardImpl;
@@ -27,7 +26,7 @@ public final class ThroughTheBreach extends CardImpl {
         ));
 
         // Splice onto Arcane {2}{R}{R}
-        this.addAbility(new SpliceAbility(SpliceAbility.ARCANE, new ManaCostsImpl<>("{2}{R}{R}")));
+        this.addAbility(new SpliceAbility(SpliceAbility.ARCANE, "{2}{R}{R}"));
     }
 
     private ThroughTheBreach(final ThroughTheBreach card) {

@@ -24,7 +24,7 @@ public final class BlindObedience extends CardImpl {
         // Artifacts and creatures your opponents control enter the battlefield tapped.
         this.addAbility(new SimpleStaticAbility(new PermanentsEnterBattlefieldTappedEffect(
                 StaticFilters.FILTER_OPPONENTS_PERMANENT_ARTIFACT_OR_CREATURE
-        ).setText("artifacts and creatures your opponents control enter the battlefield tapped")));
+        ).setText("artifacts and creatures your opponents control enter tapped")));
 
     }
 

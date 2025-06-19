@@ -5,7 +5,7 @@ import mage.abilities.condition.common.ThresholdCondition;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.mana.GreenManaAbility;
@@ -32,7 +32,7 @@ public final class CentaurGarden extends CardImpl {
         this.addAbility(manaAbility);
 
         // Threshold - {G}, {tap}, Sacrifice Centaur Garden: Target creature gets +3/+3 until end of turn. Activate this ability only if seven or more cards are in your graveyard.
-        Ability thresholdAbility = new ConditionalActivatedAbility(
+        Ability thresholdAbility = new ActivateIfConditionActivatedAbility(
                 new BoostTargetEffect(3, 3, Duration.EndOfTurn),
                 new ManaCostsImpl<>("{G}"), ThresholdCondition.instance
         );

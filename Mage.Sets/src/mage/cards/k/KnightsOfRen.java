@@ -1,15 +1,13 @@
 package mage.cards.k;
 
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
 import mage.abilities.condition.common.HateCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.SacrificeAllEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
@@ -35,18 +33,9 @@ public class KnightsOfRen extends CardImpl {
 
         //<i>Hate</i> &mdash; Whenever Knights of Ren enters the battlefield or attacks, if an opponent lost life from a source other
         //than combat damage this turn, you may have each player sacrifice a creature.
-        Ability abilityEnterBattlefield = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(
-                        new SacrificeAllEffect(StaticFilters.FILTER_PERMANENT_CREATURE), true),
-                HateCondition.instance,
-                "<i>Hate</i> &mdash; When {this} enters, if an opponent lost life from a source other than combat damage this turn, you may have each player sacrifice a creature");
-        Ability abilityAttacks = new ConditionalInterveningIfTriggeredAbility(
-                new AttacksTriggeredAbility(
-                        new SacrificeAllEffect(StaticFilters.FILTER_PERMANENT_CREATURE), true),
-                HateCondition.instance,
-                "<i>Hate</i> &mdash; When {this} attacks, if an opponent lost life from a source other than combat damage this turn, you may have each player sacrifice a creature");
-        this.addAbility(abilityEnterBattlefield, new LifeLossOtherFromCombatWatcher());
-        this.addAbility(abilityAttacks, new LifeLossOtherFromCombatWatcher());
+        this.addAbility(new EntersBattlefieldOrAttacksSourceTriggeredAbility(
+                new SacrificeAllEffect(StaticFilters.FILTER_PERMANENT_CREATURE).setText("have each player sacrifice a creature")
+        ).withInterveningIf(HateCondition.instance).setAbilityWord(AbilityWord.HATE), new LifeLossOtherFromCombatWatcher());
     }
 
     private KnightsOfRen(final KnightsOfRen card) {

@@ -388,7 +388,7 @@ public interface Player extends MageItem, Copyable<Player> {
      *
      * @param value
      */
-    void setGameUnderYourControl(boolean value);
+    void setGameUnderYourControl(Game game, boolean value);
 
     /**
      * Return player's turn control to prev player
@@ -396,7 +396,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param value
      * @param fullRestore return turn control to own
      */
-    void setGameUnderYourControl(boolean value, boolean fullRestore);
+    void setGameUnderYourControl(Game game, boolean value, boolean fullRestore);
 
     void setTestMode(boolean value);
 
@@ -784,12 +784,18 @@ public interface Player extends MageItem, Copyable<Player> {
      * @return List of integers with size equal to messages.size().  The sum of the integers is equal to max.
      */
     default List<Integer> getMultiAmount(Outcome outcome, List<String> messages, int optionMin, int totalMin, int totalMax, MultiAmountType type, Game game) {
+        // do not override it
+
+        // runtime check: make sure all default values are valid
+        // TODO: add default check inside getMultiAmountWithIndividualConstraints
         if (optionMin > totalMax || optionMin * messages.size() > totalMin) {
             throw new IllegalArgumentException(String.format("Wrong code usage: getMultiAmount found bad option min/max values: %d/%d", optionMin, totalMax));
         }
+
         List<MultiAmountMessage> constraints = messages.stream()
                 .map(s -> new MultiAmountMessage(s, optionMin, totalMax))
                 .collect(Collectors.toList());
+
         return getMultiAmountWithIndividualConstraints(outcome, constraints, totalMin, totalMax, type, game);
     }
 

@@ -19,7 +19,6 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetNonlandPermanent;
 import mage.util.CardUtil;
 
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -215,12 +214,9 @@ class SchemingFenceManaEffect extends AsThoughEffectImpl implements AsThoughMana
     @Override
     public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
         return source.isControlledBy(playerId)
-                && affectedAbility
-                .getEffects()
-                .stream()
-                .map(effect -> effect.getValue("schemingFence"))
-                .filter(Objects::nonNull)
-                .anyMatch(source.getSourceId()::equals);
+                && CardUtil.getEffectValueFromAbility(affectedAbility, "schemingFence", UUID.class)
+                .filter(source.getSourceId()::equals)
+                .isPresent();
     }
 
     @Override

@@ -6,7 +6,6 @@ import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceIsRingBearerCondition;
 import mage.abilities.condition.common.YouGainedLifeCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.dynamicvalue.common.ControllerGainedLifeCount;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -48,15 +47,10 @@ public final class FrodoAdventurousHobbit extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Whenever Frodo, Adventurous Hobbit attacks, if you gained 3 or more life this turn, the Ring tempts you. Then if Frodo is your Ring-bearer and the Ring has tempted you two or more times this game, draw a card.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new AttacksTriggeredAbility(new TheRingTemptsYouEffect()),
-                condition, "Whenever {this} attacks, if you gained 3 or more life this turn, " +
-                "the Ring tempts you. Then if {this} is your Ring-bearer and the Ring " +
-                "has tempted you two or more times this game, draw a card."
-        );
+        Ability ability = new AttacksTriggeredAbility(new TheRingTemptsYouEffect()).withInterveningIf(condition);
         ability.addEffect(new ConditionalOneShotEffect(
-                new DrawCardSourceControllerEffect(1),
-                FrodoAdventurousHobbitCondition.instance
+                new DrawCardSourceControllerEffect(1), FrodoAdventurousHobbitCondition.instance,
+                "Then if {this} is your Ring-bearer and the Ring has tempted you two or more times this game, draw a card."
         ));
         this.addAbility(ability.addHint(ControllerGainedLifeCount.getHint()), new PlayerGainedLifeWatcher());
     }

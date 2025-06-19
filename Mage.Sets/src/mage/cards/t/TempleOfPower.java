@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TimingRule;
 import mage.constants.WatcherScope;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.command.CommandObject;
 import mage.game.events.DamagedEvent;
@@ -43,16 +42,10 @@ public final class TempleOfPower extends CardImpl {
 
         // {2}{R}, {T}: Transform Temple of Power. Activate only if red sources you controlled dealt 4 or more noncombat damage this turn and only as a sorcery.
         Ability ability = new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD,
-                new TransformSourceEffect(),
-                new ManaCostsImpl<>("{2}{R}"),
-                TempleOfPowerCondition.instance,
-                TimingRule.SORCERY
-        );
-        ability.addWatcher(new TempleOfPowerWatcher());
+                new TransformSourceEffect(), new ManaCostsImpl<>("{2}{R}"), TempleOfPowerCondition.instance
+        ).setTiming(TimingRule.SORCERY);
         ability.addCost(new TapSourceCost());
-        ability.addHint(TempleOfPowerHint.instance);
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(TempleOfPowerHint.instance), new TempleOfPowerWatcher());
     }
 
     private TempleOfPower(final TempleOfPower card) {
@@ -77,7 +70,7 @@ enum TempleOfPowerCondition implements Condition {
 
     @Override
     public String toString() {
-        return "if red sources you controlled dealt 4 or more noncombat damage this turn";
+        return "red sources you controlled dealt 4 or more noncombat damage this turn";
     }
 }
 

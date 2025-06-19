@@ -206,9 +206,9 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Cloudkill", 121, Rarity.UNCOMMON, mage.cards.c.Cloudkill.class));
         cards.add(new SetCardInfo("Colossal Badger", 223, Rarity.COMMON, mage.cards.c.ColossalBadger.class));
         cards.add(new SetCardInfo("Command Tower", 351, Rarity.COMMON, mage.cards.c.CommandTower.class));
-        //cards.add(new SetCardInfo("Commander Liara Portyr", 270, Rarity.UNCOMMON, mage.cards.c.CommanderLiaraPortyr.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Commander Liara Portyr", 418, Rarity.UNCOMMON, mage.cards.c.CommanderLiaraPortyr.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Commander Liara Portyr", 529, Rarity.UNCOMMON, mage.cards.c.CommanderLiaraPortyr.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Commander Liara Portyr", 270, Rarity.UNCOMMON, mage.cards.c.CommanderLiaraPortyr.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Commander Liara Portyr", 418, Rarity.UNCOMMON, mage.cards.c.CommanderLiaraPortyr.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Commander Liara Portyr", 529, Rarity.UNCOMMON, mage.cards.c.CommanderLiaraPortyr.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Compulsive Research", 715, Rarity.COMMON, mage.cards.c.CompulsiveResearch.class));
         cards.add(new SetCardInfo("Cone of Cold", 61, Rarity.UNCOMMON, mage.cards.c.ConeOfCold.class));
         cards.add(new SetCardInfo("Consuming Aberration", 840, Rarity.RARE, mage.cards.c.ConsumingAberration.class));
@@ -571,8 +571,8 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Mindblade Render", 762, Rarity.RARE, mage.cards.m.MindbladeRender.class));
         cards.add(new SetCardInfo("Mindcrank", 866, Rarity.UNCOMMON, mage.cards.m.Mindcrank.class));
         cards.add(new SetCardInfo("Minimus Containment", 34, Rarity.COMMON, mage.cards.m.MinimusContainment.class));
-        //cards.add(new SetCardInfo("Minsc & Boo, Timeless Heroes", 285, Rarity.MYTHIC, mage.cards.m.MinscAndBooTimelessHeroes.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Minsc & Boo, Timeless Heroes", 363, Rarity.MYTHIC, mage.cards.m.MinscAndBooTimelessHeroes.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Minsc & Boo, Timeless Heroes", 285, Rarity.MYTHIC, mage.cards.m.MinscBooTimelessHeroes.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Minsc & Boo, Timeless Heroes", 363, Rarity.MYTHIC, mage.cards.m.MinscBooTimelessHeroes.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Minthara, Merciless Soul", 286, Rarity.UNCOMMON, mage.cards.m.MintharaMercilessSoul.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Minthara, Merciless Soul", 432, Rarity.UNCOMMON, mage.cards.m.MintharaMercilessSoul.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Minthara, Merciless Soul", 543, Rarity.UNCOMMON, mage.cards.m.MintharaMercilessSoul.class, NON_FULL_USE_VARIOUS));

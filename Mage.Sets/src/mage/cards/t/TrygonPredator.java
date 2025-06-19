@@ -12,7 +12,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.DamagedPlayerControlsTargetAdjuster;
+import mage.target.targetadjustment.ThatPlayerControlsTargetAdjuster;
 
 import java.util.UUID;
 
@@ -36,7 +36,7 @@ public final class TrygonPredator extends CardImpl {
         // Whenever Trygon Predator deals combat damage to a player, you may destroy target artifact or enchantment that player controls.
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new DestroyTargetEffect(), true, true);
         ability.addTarget(new TargetPermanent(filter));
-        ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
+        ability.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster());
         this.addAbility(ability);
     }
 

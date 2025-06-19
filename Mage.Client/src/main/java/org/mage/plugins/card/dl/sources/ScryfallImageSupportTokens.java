@@ -2201,6 +2201,7 @@ public class ScryfallImageSupportTokens {
             put("WHO/Human/2", "https://api.scryfall.com/cards/twho/5/en?format=image");
             put("WHO/Human Noble", "https://api.scryfall.com/cards/twho/7/en?format=image");
             put("WHO/Mark of the Rani", "https://api.scryfall.com/cards/twho/15?format=image");
+            put("WHO/Mutant", "https://api.scryfall.com/cards/twho/18?format=image");
             put("WHO/Soldier", "https://api.scryfall.com/cards/twho/8?format=image");
             put("WHO/Treasure/1", "https://api.scryfall.com/cards/twho/28?format=image");
             put("WHO/Treasure/2", "https://api.scryfall.com/cards/twho/29?format=image");

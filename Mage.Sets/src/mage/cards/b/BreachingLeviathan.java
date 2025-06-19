@@ -1,15 +1,10 @@
-
 package mage.cards.b;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CastFromHandSourcePermanentCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
@@ -26,25 +21,25 @@ import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTargets;
 import mage.watchers.common.CastFromHandWatcher;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class BreachingLeviathan extends CardImpl {
 
     public BreachingLeviathan(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{7}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{7}{U}{U}");
         this.subtype.add(SubType.LEVIATHAN);
 
         this.power = new MageInt(9);
         this.toughness = new MageInt(9);
 
         // When Breaching Leviathan enters the battlefield, if you cast it from your hand, tap all nonblue creatures. Those creatures don't untap during their controllers' next untap steps.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new BreachingLeviathanEffect(), false),
-                CastFromHandSourcePermanentCondition.instance,
-                "When {this} enters, if you cast it from your hand, tap all nonblue creatures. Those creatures don't untap during their controllers' next untap steps."),
-                new CastFromHandWatcher());
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new BreachingLeviathanEffect(), false)
+                .withInterveningIf(CastFromHandSourcePermanentCondition.instance), new CastFromHandWatcher());
     }
 
     private BreachingLeviathan(final BreachingLeviathan card) {

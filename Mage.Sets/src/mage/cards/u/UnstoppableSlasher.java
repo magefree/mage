@@ -5,7 +5,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.LoseHalfLifeTargetEffect;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldWithCounterEffect;
 import mage.abilities.keyword.DeathtouchAbility;
@@ -39,9 +38,12 @@ public final class UnstoppableSlasher extends CardImpl {
                 .setText("they lose half their life, rounded up"), false, true));
 
         // When Unstoppable Slasher dies, if it had no counters on it, return it to the battlefield tapped under its owner's control with two stun counters on it.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new DiesSourceTriggeredAbility(new ReturnSourceFromGraveyardToBattlefieldWithCounterEffect(
-                CounterType.STUN.createInstance(2), true, true, false, false
-        ), false), UnstoppableSlasherCondition.instance, "When {this} dies, if it had no counters on it, return it to the battlefield tapped under its owner's control with two stun counters on it"));
+        this.addAbility(new DiesSourceTriggeredAbility(
+                new ReturnSourceFromGraveyardToBattlefieldWithCounterEffect(
+                        CounterType.STUN.createInstance(2),
+                        true, true, false, false
+                ).setText("return it to the battlefield tapped under its owner's control with two stun counters on it")
+        ).withInterveningIf(UnstoppableSlasherCondition.instance));
     }
 
     private UnstoppableSlasher(final UnstoppableSlasher card) {
@@ -60,14 +62,17 @@ enum UnstoppableSlasherCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = source.getSourcePermanentOrLKI(game);
-        if (permanent == null) {
-            return false;
-        }
-        return permanent
+        return permanent != null
+                && permanent
                 .getCounters(game)
                 .values()
                 .stream()
                 .mapToInt(Counter::getCount)
                 .sum() == 0;
+    }
+
+    @Override
+    public String toString() {
+        return "it had no counters on it";
     }
 }

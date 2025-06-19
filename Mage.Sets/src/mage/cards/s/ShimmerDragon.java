@@ -7,10 +7,9 @@ import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.hint.ValueHint;
+import mage.abilities.hint.common.ArtifactYouControlHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
@@ -57,7 +56,7 @@ public final class ShimmerDragon extends CardImpl {
                 new GainAbilitySourceEffect(
                         HexproofAbility.getInstance(), Duration.WhileOnBattlefield
                 ), condition, "as long as you control four or more artifacts, {this} has hexproof"
-        )).addHint(new ValueHint("Artifacts you control", new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT))));
+        )).addHint(ArtifactYouControlHint.instance));
 
         // Tap two untapped artifacts you control: Draw a card.
         this.addAbility(new SimpleActivatedAbility(

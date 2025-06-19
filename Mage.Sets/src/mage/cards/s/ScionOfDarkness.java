@@ -14,7 +14,7 @@ import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInGraveyard;
-import mage.target.targetadjustment.DamagedPlayerControlsTargetAdjuster;
+import mage.target.targetadjustment.ThatPlayerControlsTargetAdjuster;
 
 import java.util.UUID;
 
@@ -39,7 +39,7 @@ public final class ScionOfDarkness extends CardImpl {
         // Whenever Scion of Darkness deals combat damage to a player, you may put target creature card from that player's graveyard onto the battlefield under your control.
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(), true, true);
         ability.addTarget(new TargetCardInGraveyard(filter));
-        ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster(true));
+        ability.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster(true));
         this.addAbility(ability);
 
         // Cycling {3}

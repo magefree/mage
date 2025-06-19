@@ -15,7 +15,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.DamagedPlayerControlsTargetAdjuster;
+import mage.target.targetadjustment.ThatPlayerControlsTargetAdjuster;
 
 import java.util.UUID;
 
@@ -46,7 +46,7 @@ public final class LightwielderPaladin extends CardImpl {
         // Whenever Lightwielder Paladin deals combat damage to a player, you may exile target black or red permanent that player controls.
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new ExileTargetEffect(), true, true);
         ability.addTarget(new TargetPermanent(filter));
-        ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
+        ability.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster());
         this.addAbility(ability);
     }
 

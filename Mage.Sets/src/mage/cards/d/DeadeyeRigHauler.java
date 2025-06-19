@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.RaidCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.hint.common.RaidHint;
 import mage.cards.CardImpl;
@@ -31,8 +30,7 @@ public final class DeadeyeRigHauler extends CardImpl {
         this.toughness = new MageInt(2);
 
         // <i>Raid</i>— When Deadeye Rig-Hauler enters the battlefield, if you attacked this turn, you may return target creature to its owner's hand.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), true), RaidCondition.instance,
-                "When {this} enters, if you attacked this turn, you may return target creature to its owner's hand.");
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), true).withInterveningIf(RaidCondition.instance);
         ability.addTarget(new TargetCreaturePermanent());
         ability.setAbilityWord(AbilityWord.RAID);
         ability.addHint(RaidHint.instance);

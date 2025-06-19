@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlSourceEffect;
 import mage.abilities.keyword.BlitzAbility;
 import mage.abilities.keyword.TrampleAbility;
@@ -34,12 +33,8 @@ public class WaveOfRats extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // When Wave of Rats dies, if it dealt combat damage to a player this turn, return it to the battlefield under its owner’s control.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new DiesSourceTriggeredAbility(new ReturnToBattlefieldUnderOwnerControlSourceEffect()),
-                WaveOfRatsDealtDamageToPlayerCondition.instance,
-                "When Wave of Rats dies, if it dealt combat damage to a player this turn, return it to the battlefield under its owner's control."),
-                new DamageDoneWatcher()
-        );
+        this.addAbility(new DiesSourceTriggeredAbility(new ReturnToBattlefieldUnderOwnerControlSourceEffect().setText("return it to the battlefield under its owner's control"))
+                .withInterveningIf(WaveOfRatsDealtDamageToPlayerCondition.instance), new DamageDoneWatcher());
 
         // Blitz {4}{B} (If you cast this spell for its blitz cost, it gains haste and “When this creature dies, draw a card.” Sacrifice it at the beginning of the next end step.)
         this.addAbility(new BlitzAbility(this, "{4}{B}"));
@@ -69,5 +64,10 @@ enum WaveOfRatsDealtDamageToPlayerCondition implements Condition {
             return false;
         }
         return watcher.damagedAPlayer(waveOfRats.getId(), waveOfRats.getZoneChangeCounter(game), game);
+    }
+
+    @Override
+    public String toString() {
+        return "it dealt combat damage to a player this turn";
     }
 }

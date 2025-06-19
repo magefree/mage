@@ -56,7 +56,7 @@ class KheruSpellsnatcherEffect extends OneShotEffect {
         super(Outcome.Benefit);
         this.staticText = "counter target spell. If that spell is countered this way, "
                 + "exile it instead of putting it into its owner's graveyard. "
-                + "You may cast that card without paying its mana cost as long as it remains exiled";
+                + "You may cast that card without paying its mana cost for as long as it remains exiled";
     }
 
     private KheruSpellsnatcherEffect(final KheruSpellsnatcherEffect effect) {

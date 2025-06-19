@@ -4,7 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.condition.common.CitysBlessingCondition;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.hint.common.CitysBlessingHint;
@@ -13,7 +13,6 @@ import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
 
 import java.util.UUID;
 
@@ -32,14 +31,12 @@ public final class OrazcaRelic extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {T}, Sacrifice Orazca Relic: You gain 3 life and draw a card. Activate this ability only if you have the city's blessing.
-        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
-                new GainLifeEffect(3),
-                new TapSourceCost(),
-                CitysBlessingCondition.instance);
+        Ability ability = new ActivateIfConditionActivatedAbility(
+                new GainLifeEffect(3), new TapSourceCost(), CitysBlessingCondition.instance
+        );
         ability.addCost(new SacrificeSourceCost());
         ability.addEffect(new DrawCardSourceControllerEffect(1).concatBy("and"));
-        ability.addHint(CitysBlessingHint.instance);
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(CitysBlessingHint.instance));
     }
 
     private OrazcaRelic(final OrazcaRelic card) {

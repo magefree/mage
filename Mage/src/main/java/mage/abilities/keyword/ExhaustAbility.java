@@ -12,15 +12,14 @@ import mage.game.Game;
  */
 public class ExhaustAbility extends ActivatedAbilityImpl {
 
-    private boolean withReminderText = true;
+    private final boolean withReminderText;
 
     public ExhaustAbility(Effect effect, Cost cost) {
-        super(Zone.BATTLEFIELD, effect, cost);
+        this(effect, cost, true);
     }
 
     public ExhaustAbility(Effect effect, Cost cost, boolean withReminderText) {
         super(Zone.BATTLEFIELD, effect, cost);
-        this.setRuleVisible(false);
         this.withReminderText = withReminderText;
     }
 
@@ -28,11 +27,6 @@ public class ExhaustAbility extends ActivatedAbilityImpl {
         super(ability);
         this.maxActivationsPerGame = 1;
         this.withReminderText = ability.withReminderText;
-    }
-
-    public ExhaustAbility withReminderText(boolean withReminderText) {
-        this.withReminderText = withReminderText;
-        return this;
     }
 
     @Override
@@ -45,8 +39,8 @@ public class ExhaustAbility extends ActivatedAbilityImpl {
         ActivationInfo info = getActivationInfo(game);
         if (info != null && info.totalActivations >= maxActivationsPerGame) {
             boolean canActivate = !game.getContinuousEffects()
-                .asThough(sourceId, AsThoughEffectType.ALLOW_EXHAUST_PER_TURN, this, controllerId, game)
-                .isEmpty();
+                    .asThough(sourceId, AsThoughEffectType.ALLOW_EXHAUST_PER_TURN, this, controllerId, game)
+                    .isEmpty();
             if (canActivate) {
                 return true;
             }

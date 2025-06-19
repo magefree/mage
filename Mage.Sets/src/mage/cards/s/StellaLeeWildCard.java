@@ -47,8 +47,7 @@ public final class StellaLeeWildCard extends CardImpl {
 
         // {T}: Copy target instant or sorcery spell you control. You may choose new targets for the copy. Activate only if you've cast three or more spells this turn.
         Ability ability = new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD, new CopyTargetStackObjectEffect(),
-                new TapSourceCost(), StellaLeeWildCardCondition.instance
+                new CopyTargetStackObjectEffect(), new TapSourceCost(), StellaLeeWildCardCondition.instance
         );
         ability.addTarget(new TargetSpell(filter));
         this.addAbility(ability.addHint(StormAbility.getHint()));

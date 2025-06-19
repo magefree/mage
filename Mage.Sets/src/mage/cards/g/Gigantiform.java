@@ -1,40 +1,43 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.StaticAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
-import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessAttachedEffect;
+import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.KickerAbility;
 import mage.abilities.keyword.TrampleAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.AttachmentType;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
-import mage.game.Game;
-import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class Gigantiform extends CardImpl {
 
+    private static final FilterCard filter = new FilterCard("card named Gigantiform");
+
+    static {
+        filter.add(new NamePredicate("Gigantiform"));
+    }
+
     public Gigantiform(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}{G}");
         this.subtype.add(SubType.AURA);
 
         // Kicker {4}
@@ -44,15 +47,21 @@ public final class Gigantiform extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget);
-        this.addAbility(ability);
+        this.addAbility(new EnchantAbility(auraTarget));
+
         // Enchanted creature has base power and toughness 8/8 and has trample.
-        this.addAbility(new GigantiformAbility());
+        Ability ability = new SimpleStaticAbility(
+                new SetBasePowerToughnessAttachedEffect(8, 8, AttachmentType.AURA)
+        );
+        ability.addEffect(new GainAbilityAttachedEffect(
+                TrampleAbility.getInstance(), AttachmentType.AURA
+        ).setText("and has trample"));
+        this.addAbility(ability);
+
         // When Gigantiform enters the battlefield, if it was kicked, you may search your library for a card named Gigantiform, put it onto the battlefield, then shuffle your library.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new GigantiformEffect(), true),
-                KickedCondition.ONCE,
-                "When {this} enters, if it was kicked, you may search your library for a card named Gigantiform, put it onto the battlefield, then shuffle."));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)), true
+        ).withInterveningIf(KickedCondition.ONCE));
     }
 
     private Gigantiform(final Gigantiform card) {
@@ -62,67 +71,5 @@ public final class Gigantiform extends CardImpl {
     @Override
     public Gigantiform copy() {
         return new Gigantiform(this);
-    }
-}
-
-class GigantiformAbility extends StaticAbility {
-
-    public GigantiformAbility() {
-        super(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA));
-        Ability ability = new SimpleStaticAbility(
-                new SetBasePowerToughnessSourceEffect(8, 8, Duration.WhileOnBattlefield)
-        );
-        this.addEffect(new GainAbilityAttachedEffect(ability, AttachmentType.AURA));
-    }
-
-    private GigantiformAbility(final GigantiformAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public GigantiformAbility copy() {
-        return new GigantiformAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return "Enchanted creature has base power and toughness 8/8 and has trample.";
-    }
-}
-
-class GigantiformEffect extends OneShotEffect {
-
-    private static final FilterCard filter = new FilterCard("card named Gigantiform");
-
-    static {
-        filter.add(new NamePredicate("Gigantiform"));
-    }
-
-    public GigantiformEffect() {
-        super(Outcome.PutCardInPlay);
-    }
-
-    private GigantiformEffect(final GigantiformEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public GigantiformEffect copy() {
-        return new GigantiformEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        TargetCardInLibrary target = new TargetCardInLibrary(filter);
-        if (controller != null && controller.searchLibrary(target, source, game)) {
-            Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
-            if (card != null) {
-                controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-            }
-            controller.shuffleLibrary(source, game);
-            return true;
-        }
-        return false;
     }
 }

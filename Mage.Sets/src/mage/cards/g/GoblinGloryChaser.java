@@ -1,31 +1,27 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.RenownedSourceCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.abilities.keyword.RenownAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 public final class GoblinGloryChaser extends CardImpl {
 
     public GoblinGloryChaser(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");
         this.subtype.add(SubType.GOBLIN);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(1);
@@ -35,13 +31,11 @@ public final class GoblinGloryChaser extends CardImpl {
         this.addAbility(new RenownAbility(1));
 
         // As long as Goblin Glory Chaser is renowned, it has menace.
-        Effect effect = new ConditionalContinuousEffect(
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(new MenaceAbility(), Duration.WhileOnBattlefield),
-                RenownedSourceCondition.instance,
-                "As long as {this} is renowned, it has menace. " +
-                        "<i>(It can't be blocked except by two or more creatures.)</i>");
-        Ability ability = new SimpleStaticAbility(effect);
-        this.addAbility(ability);
+                RenownedSourceCondition.THIS, "as long as {this} is renowned, " +
+                "it has menace. <i>(It can't be blocked except by two or more creatures.)</i>"
+        )));
     }
 
     private GoblinGloryChaser(final GoblinGloryChaser card) {

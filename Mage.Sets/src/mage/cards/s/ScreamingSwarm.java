@@ -86,7 +86,7 @@ class ScreamingSwarmEffect extends OneShotEffect {
 
     ScreamingSwarmEffect() {
         super(Outcome.Benefit);
-        staticText = "put {this} from your graveyard into your library second from the top";
+        staticText = "put this card from your graveyard into your library second from the top";
     }
 
     private ScreamingSwarmEffect(final ScreamingSwarmEffect effect) {

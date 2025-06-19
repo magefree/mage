@@ -1,7 +1,4 @@
-
 package mage.cards.n;
-
-import java.util.UUID;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
@@ -13,12 +10,14 @@ import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  * @author halljared
@@ -85,6 +84,6 @@ class NeglectedHeirloomTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "When equipped creature transforms, transform Neglected Heirloom.";
+        return "When equipped creature transforms, transform {this}.";
     }
 }

@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.RevealedOrControlledDragonCondition;
 import mage.abilities.costs.common.RevealDragonFromHandCost;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -36,11 +35,8 @@ public final class OratorOfOjutai extends CardImpl {
         this.getSpellAbility().addCost(new RevealDragonFromHandCost());
 
         // When Orator of Ojutai enters the battlefield, if you revealed a Dragon card or controlled a Dragon as you cast Orator of Ojutai, draw a card.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)),
-                RevealedOrControlledDragonCondition.instance, "When {this} enters, " +
-                "if you revealed a Dragon card or controlled a Dragon as you cast this spell, draw a card."
-        ), new DragonOnTheBattlefieldWhileSpellWasCastWatcher());
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1))
+                .withInterveningIf(RevealedOrControlledDragonCondition.instance), new DragonOnTheBattlefieldWhileSpellWasCastWatcher());
     }
 
     private OratorOfOjutai(final OratorOfOjutai card) {

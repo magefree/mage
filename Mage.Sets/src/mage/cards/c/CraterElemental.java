@@ -12,7 +12,10 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.SetBasePowerSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.AbilityWord;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -38,14 +41,10 @@ public final class CraterElemental extends CardImpl {
         this.addAbility(ability);
 
         // <i>Formidable</i> &mdash; {2}{R}: Crater Elemental has base power 8 until end of turn. Activate this ability only if creatures you control have total power 8 or greater.
-        ability = new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD,
+        this.addAbility(new ActivateIfConditionActivatedAbility(
                 new SetBasePowerSourceEffect(8, Duration.EndOfTurn),
-                new ManaCostsImpl<>("{2}{R}"),
-                FormidableCondition.instance
-        );
-        ability.setAbilityWord(AbilityWord.FORMIDABLE);
-        this.addAbility(ability);
+                new ManaCostsImpl<>("{2}{R}"), FormidableCondition.instance
+        ).setAbilityWord(AbilityWord.FORMIDABLE));
     }
 
     private CraterElemental(final CraterElemental card) {

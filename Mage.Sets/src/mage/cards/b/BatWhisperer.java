@@ -3,7 +3,6 @@ package mage.cards.b;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.OpponentsLostLifeCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.hint.common.OpponentsLostLifeHint;
 import mage.cards.CardImpl;
@@ -27,11 +26,8 @@ public final class BatWhisperer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Bat Whisperer enters the battlefield, if an opponent lost life this turn, create a 1/1 black Bat creature token with flying.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new BatToken())),
-                OpponentsLostLifeCondition.instance, "When {this} enters, " +
-                "if an opponent lost life this turn, create a 1/1 black Bat creature token with flying."
-        ).addHint(OpponentsLostLifeHint.instance));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new BatToken()))
+                .withInterveningIf(OpponentsLostLifeCondition.instance).addHint(OpponentsLostLifeHint.instance));
     }
 
     private BatWhisperer(final BatWhisperer card) {

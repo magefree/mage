@@ -1,14 +1,13 @@
 package mage.cards.b;
 
-import mage.abilities.TriggeredAbility;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.condition.common.CardsInHandCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.Ability;
+import mage.abilities.condition.common.HellbentCondition;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.discard.DiscardHandTargetEffect;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
 import mage.target.common.TargetOpponent;
 
 import java.util.UUID;
@@ -22,12 +21,10 @@ public final class BrinkOfMadness extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
 
         // At the beginning of your upkeep, if you have no cards in hand, sacrifice Brink of Madness and target opponent discards their hand.
-        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceEffect());
-        ability.addEffect(new DiscardHandTargetEffect());
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceEffect()).withInterveningIf(HellbentCondition.instance);
+        ability.addEffect(new DiscardHandTargetEffect().concatBy("and"));
         ability.addTarget(new TargetOpponent());
-        CardsInHandCondition condition = new CardsInHandCondition(ComparisonType.EQUAL_TO, 0);
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, condition, "At the beginning of your upkeep, if you have no cards in hand, sacrifice {this} and target opponent discards their hand."));
-
+        this.addAbility(ability);
     }
 
     private BrinkOfMadness(final BrinkOfMadness card) {

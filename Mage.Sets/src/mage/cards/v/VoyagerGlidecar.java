@@ -17,7 +17,10 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
@@ -26,6 +29,13 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class VoyagerGlidecar extends CardImpl {
+
+    private static final FilterControlledPermanent filter = new FilterControlledCreaturePermanent("other untapped creatures you control");
+
+    static {
+        filter.add(AnotherPredicate.instance);
+        filter.add(TappedPredicate.UNTAPPED);
+    }
 
     public VoyagerGlidecar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{W}");
@@ -42,9 +52,7 @@ public final class VoyagerGlidecar extends CardImpl {
                 new AddCardTypeSourceEffect(
                         Duration.EndOfTurn, CardType.ARTIFACT, CardType.CREATURE
                 ).setText("until end of turn, this Vehicle becomes an artifact creature"),
-                new TapTargetCost(new TargetControlledPermanent(
-                        3, StaticFilters.FILTER_CONTROLLED_UNTAPPED_CREATURES
-                ))
+                new TapTargetCost(new TargetControlledPermanent(3, filter))
         );
         ability.addEffect(new GainAbilitySourceEffect(
                 FlyingAbility.getInstance(), Duration.EndOfTurn

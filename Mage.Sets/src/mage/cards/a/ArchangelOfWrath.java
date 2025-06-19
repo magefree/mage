@@ -1,10 +1,9 @@
 package mage.cards.a;
 
 import mage.MageInt;
-import mage.abilities.TriggeredAbility;
+import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.KickerAbility;
@@ -40,19 +39,19 @@ public final class ArchangelOfWrath extends CardImpl {
         // Lifelink
         this.addAbility(LifelinkAbility.getInstance());
 
-        TriggeredAbility triggeredAbility = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(2));
-        triggeredAbility.addTarget(new TargetAnyTarget());
         // When Archangel of Wrath enters the battlefield, if it was kicked, it deals 2 damage to any target.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                triggeredAbility, KickedCondition.ONCE, "When {this} enters, " +
-                "if it was kicked, it deals 2 damage to any target."
-        ));
+        Ability ability = new EntersBattlefieldTriggeredAbility(
+                new DamageTargetEffect(2, "it")
+        ).withInterveningIf(KickedCondition.ONCE);
+        ability.addTarget(new TargetAnyTarget());
+        this.addAbility(ability);
 
         // When Archangel of Wrath enters the battlefield, if it was kicked twice, it deals 2 damage to any target.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                triggeredAbility.copy(), KickedCondition.TWICE, "When {this} enters, " +
-                "if it was kicked twice, it deals 2 damage to any target."
-        ));
+        ability = new EntersBattlefieldTriggeredAbility(
+                new DamageTargetEffect(2, "it")
+        ).withInterveningIf(KickedCondition.TWICE);
+        ability.addTarget(new TargetAnyTarget());
+        this.addAbility(ability);
     }
 
     private ArchangelOfWrath(final ArchangelOfWrath card) {

@@ -17,9 +17,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreatureCard;
-import mage.filter.common.FilterNoncreatureCard;
+import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.token.SpiritToken;
 import mage.players.Player;
@@ -32,7 +32,10 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public final class KirinTouchedOrochi extends CardImpl {
 
-    private static final FilterNoncreatureCard filter2 = new FilterNoncreatureCard("noncreature card from a graveyard");
+    private static final FilterCard filter = new FilterCard("noncreature card from a graveyard");
+    static {
+        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
+    }
 
     public KirinTouchedOrochi(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "");
@@ -51,7 +54,7 @@ public final class KirinTouchedOrochi extends CardImpl {
 
         // • Exile target noncreature card from a graveyard. When you do, put a +1/+1 counter on target creature you control.
         Mode mode = new Mode(new KirinTouchedOrochiCounterEffect());
-        mode.addTarget(new TargetCardInGraveyard(filter2));
+        mode.addTarget(new TargetCardInGraveyard(filter));
         ability.addMode(mode);
         this.addAbility(ability);
     }

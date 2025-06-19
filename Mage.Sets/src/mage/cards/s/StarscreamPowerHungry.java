@@ -1,11 +1,10 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.abilities.TriggeredAbility;
+import mage.abilities.Ability;
 import mage.abilities.common.CombatDamageDealtToYouTriggeredAbility;
 import mage.abilities.common.DrawCardControllerTriggeredAbility;
 import mage.abilities.condition.common.MonarchIsSourceControllerCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.hint.common.MonarchHint;
@@ -41,18 +40,14 @@ public final class StarscreamPowerHungry extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever you draw a card, if you're the monarch, target opponent loses 2 life.
-        TriggeredAbility trigger = new ConditionalInterveningIfTriggeredAbility(
-            new DrawCardControllerTriggeredAbility(new LoseLifeTargetEffect(2), false),
-            MonarchIsSourceControllerCondition.instance,
-            "Whenever you draw a card, if you're the monarch, target opponent loses 2 life."
-        );
-        trigger.addTarget(new TargetOpponent());
-        trigger.addHint(MonarchHint.instance);
-        this.addAbility(trigger);
+        Ability ability = new DrawCardControllerTriggeredAbility(new LoseLifeTargetEffect(2), false)
+                .withInterveningIf(MonarchIsSourceControllerCondition.instance);
+        ability.addTarget(new TargetOpponent());
+        this.addAbility(ability.addHint(MonarchHint.instance));
 
         // Whenever one or more creatures deal combat damage to you, convert Starscream.
         this.addAbility(new CombatDamageDealtToYouTriggeredAbility(
-            new TransformSourceEffect().setText("convert {this}")
+                new TransformSourceEffect().setText("convert {this}")
         ));
     }
 

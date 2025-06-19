@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.CreatureEnteredControllerWatcher;
@@ -32,8 +31,7 @@ public final class ZhalfirinDecoy extends CardImpl {
 
         // {T}: Tap target creature. Activate this ability only if you had a creature enter the battlefield under your control this turn.
         Ability ability = new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD, new TapTargetEffect(),
-                new TapSourceCost(), ZhalfirinDecoyCondition.instance
+                new TapTargetEffect(), new TapSourceCost(), ZhalfirinDecoyCondition.instance
         );
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability, new CreatureEnteredControllerWatcher());

@@ -1,32 +1,35 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
+import mage.abilities.hint.common.LandsYouControlHint;
 import mage.abilities.keyword.TransformAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandPermanent;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  * @author TheElk801
  */
 public final class ThaumaticCompass extends CardImpl {
+
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(
+            new FilterLandPermanent("you control seven or more lands"),
+            ComparisonType.MORE_THAN, 6, true
+    );
 
     public ThaumaticCompass(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
@@ -41,11 +44,8 @@ public final class ThaumaticCompass extends CardImpl {
 
         // At the beginning of your end step, if you control seven or more lands, transform Thaumatic Compass.
         this.addAbility(new TransformAbility());
-        TriggeredAbility ability2 = new BeginningOfEndStepTriggeredAbility(new TransformSourceEffect());
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                ability2,
-                new PermanentsOnTheBattlefieldCondition(new FilterLandPermanent(), ComparisonType.MORE_THAN, 6, true),
-                "At the beginning of your end step, if you control seven or more lands, transform {this}."));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new TransformSourceEffect())
+                .withInterveningIf(condition).addHint(LandsYouControlHint.instance));
     }
 
     private ThaumaticCompass(final ThaumaticCompass card) {

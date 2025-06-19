@@ -2,15 +2,14 @@ package mage.cards.c;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.DeathtouchAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -27,7 +26,7 @@ import java.util.UUID;
 public final class ChevillBaneOfMonsters extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterPermanent();
+            = new FilterPermanent("your opponents control no permanents with bounty counters on them");
     private static final FilterPermanent filter2
             = new FilterCreatureOrPlaneswalkerPermanent("creature or planeswalker an opponent controls");
     private static final FilterPermanent filter3
@@ -59,13 +58,9 @@ public final class ChevillBaneOfMonsters extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
 
         // At the beginning of your upkeep, if your opponents control no permanents with bounty counters on them, put a bounty counter on target creature or planeswalker an opponent controls.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(
-                        new AddCountersTargetEffect(CounterType.BOUNTY.createInstance()), false
-                ), condition, "At the beginning of your upkeep, " +
-                "if your opponents control no permanents with bounty counters on them, " +
-                "put a bounty counter on target creature or planeswalker an opponent controls."
-        );
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(
+                new AddCountersTargetEffect(CounterType.BOUNTY.createInstance())
+        ).withInterveningIf(condition);
         ability.addTarget(new TargetPermanent(filter2));
         this.addAbility(ability);
 

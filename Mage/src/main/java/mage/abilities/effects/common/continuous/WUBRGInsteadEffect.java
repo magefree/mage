@@ -25,7 +25,7 @@ public class WUBRGInsteadEffect extends ContinuousEffectImpl {
 
     public WUBRGInsteadEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "You may pay {W}{U}{B}{R}{G} rather than pay the mana cost for spells that you cast";
+        staticText = "You may pay {W}{U}{B}{R}{G} rather than pay the mana cost for spells you cast";
     }
 
     protected WUBRGInsteadEffect(final WUBRGInsteadEffect effect) {

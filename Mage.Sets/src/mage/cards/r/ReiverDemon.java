@@ -1,12 +1,9 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CastFromHandSourcePermanentCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -18,8 +15,9 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.watchers.common.CastFromHandWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author daagar
  */
 public final class ReiverDemon extends CardImpl {
@@ -32,7 +30,7 @@ public final class ReiverDemon extends CardImpl {
     }
 
     public ReiverDemon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}{B}{B}");
         this.subtype.add(SubType.DEMON);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
@@ -41,11 +39,8 @@ public final class ReiverDemon extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Reiver Demon enters the battlefield, if you cast it from your hand, destroy all nonartifact, nonblack creatures. They can't be regenerated.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new DestroyAllEffect(filter, true), false),
-                CastFromHandSourcePermanentCondition.instance,
-                "When {this} enters, if you cast it from your hand, destroy all nonartifact, nonblack creatures. They can't be regenerated."),
-                new CastFromHandWatcher());
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DestroyAllEffect(filter, true))
+                .withInterveningIf(CastFromHandSourcePermanentCondition.instance), new CastFromHandWatcher());
     }
 
     private ReiverDemon(final ReiverDemon card) {

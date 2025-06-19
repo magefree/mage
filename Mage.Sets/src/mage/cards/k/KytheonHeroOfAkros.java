@@ -1,17 +1,11 @@
-
 package mage.cards.k;
 
-import java.util.UUID;
-
 import mage.MageInt;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.constants.Pronoun;
 import mage.abilities.common.EndOfCombatTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.ExileAndReturnSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
@@ -20,8 +14,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.watchers.common.AttackedOrBlockedThisCombatWatcher;
+
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -41,12 +36,14 @@ public final class KytheonHeroOfAkros extends CardImpl {
         // At end of combat, if Kytheon, Hero of Akros and at least two other creatures attacked this combat, exile Kytheon,
         // then return him to the battlefield transformed under his owner's control.
         this.addAbility(new TransformAbility());
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new EndOfCombatTriggeredAbility(new ExileAndReturnSourceEffect(PutCards.BATTLEFIELD_TRANSFORMED,Pronoun.HE), false),
-                new KytheonHeroOfAkrosCondition(), "At end of combat, if {this} and at least two other creatures attacked this combat, exile {this}, "
-                + "then return him to the battlefield transformed under his owner's control."), new AttackedOrBlockedThisCombatWatcher());
+        this.addAbility(new EndOfCombatTriggeredAbility(
+                new ExileAndReturnSourceEffect(PutCards.BATTLEFIELD_TRANSFORMED, Pronoun.HE), false
+        ).withInterveningIf(KytheonHeroOfAkrosCondition.instance), new AttackedOrBlockedThisCombatWatcher());
 
         // {2}{W}: Kytheon gains indestructible until end of turn.
-        this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{2}{W}")));
+        this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(
+                IndestructibleAbility.getInstance(), Duration.EndOfTurn
+        ), new ManaCostsImpl<>("{2}{W}")));
 
     }
 
@@ -60,27 +57,20 @@ public final class KytheonHeroOfAkros extends CardImpl {
     }
 }
 
-class KytheonHeroOfAkrosCondition implements Condition {
+enum KytheonHeroOfAkrosCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent sourceObject = game.getPermanent(source.getSourceId());
-        if (sourceObject != null) {
-            AttackedOrBlockedThisCombatWatcher watcher = game.getState().getWatcher(AttackedOrBlockedThisCombatWatcher.class);
-            if (watcher != null) {
-                boolean sourceFound = false;
-                int number = 0;
-                for (MageObjectReference mor : watcher.getAttackedThisTurnCreatures()) {
-                    if (mor.refersTo(sourceObject, game)) {
-                        sourceFound = true;
-                    } else {
-                        number++;
-                    }
-                }
-                return sourceFound && number >= 2;
-            }
-        }
-        return false;
+        AttackedOrBlockedThisCombatWatcher watcher = game.getState().getWatcher(AttackedOrBlockedThisCombatWatcher.class);
+        return watcher != null
+                && watcher
+                .getAttackedThisTurnCreatures()
+                .stream()
+                .anyMatch(mor -> mor.refersTo(source, game))
+                && watcher
+                .getAttackedThisTurnCreatures()
+                .size() >= 3;
     }
 
     @Override

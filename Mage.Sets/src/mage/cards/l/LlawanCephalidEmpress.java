@@ -103,9 +103,7 @@ class LlawanCephalidRuleModifyingEffect extends ContinuousRuleModifyingEffectImp
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && game.isOpponent(controller, event.getPlayerId())) {
             Card card = game.getCard(event.getSourceId());
-            if (card != null && filter.match(card, source.getControllerId(), game)) {
-                return true;
-            }
+            return card != null && filter.match(card, source.getControllerId(), source, game);
         }
         return false;
     }

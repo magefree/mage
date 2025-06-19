@@ -51,7 +51,7 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Angelic Edict", 164, Rarity.COMMON, mage.cards.a.AngelicEdict.class));
         cards.add(new SetCardInfo("Angelic Gift", 165, Rarity.COMMON, mage.cards.a.AngelicGift.class));
         cards.add(new SetCardInfo("Anje's Ravager", 517, Rarity.RARE, mage.cards.a.AnjesRavager.class));
-        //cards.add(new SetCardInfo("Aphelia, Viper Whisperer", 40, Rarity.MYTHIC, mage.cards.a.ApheliaViperWhisperer.class));
+        cards.add(new SetCardInfo("Aphelia, Viper Whisperer", 40, Rarity.MYTHIC, mage.cards.a.ApheliaViperWhisperer.class));
         cards.add(new SetCardInfo("Arbor Armament", 628, Rarity.COMMON, mage.cards.a.ArborArmament.class));
         cards.add(new SetCardInfo("Archaeomancer", 285, Rarity.COMMON, mage.cards.a.Archaeomancer.class));
         cards.add(new SetCardInfo("Archfiend's Vessel", 398, Rarity.UNCOMMON, mage.cards.a.ArchfiendsVessel.class));
@@ -538,7 +538,7 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Primeval Herald", 702, Rarity.UNCOMMON, mage.cards.p.PrimevalHerald.class));
         cards.add(new SetCardInfo("Prophetic Prism", 758, Rarity.COMMON, mage.cards.p.PropheticPrism.class));
         cards.add(new SetCardInfo("Prosperous Thief", 346, Rarity.UNCOMMON, mage.cards.p.ProsperousThief.class));
-        //cards.add(new SetCardInfo("Psemilla, Meletian Poet", 31, Rarity.UNCOMMON, mage.cards.p.PsemillaMeletianPoet.class));
+        cards.add(new SetCardInfo("Psemilla, Meletian Poet", 31, Rarity.UNCOMMON, mage.cards.p.PsemillaMeletianPoet.class));
         cards.add(new SetCardInfo("Purple-Crystal Crab", 347, Rarity.COMMON, mage.cards.p.PurpleCrystalCrab.class));
         cards.add(new SetCardInfo("Pyrophobia", 587, Rarity.COMMON, mage.cards.p.Pyrophobia.class));
         cards.add(new SetCardInfo("Qala, Ajani's Pridemate", 32, Rarity.UNCOMMON, mage.cards.q.QalaAjanisPridemate.class));

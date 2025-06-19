@@ -1,40 +1,52 @@
 package mage.cards.m;
 
 import mage.Mana;
-import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
-import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.CountersSourceCount;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.PhaseStep;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.common.CountersSourceCount;
 
 /**
  * @author L_J
  */
 public final class ManaCache extends CardImpl {
 
+    private static final FilterPermanent filter = new FilterLandPermanent("untapped land that player controls");
+
+    static {
+        filter.add(TappedPredicate.UNTAPPED);
+        filter.add(TargetController.ACTIVE.getControllerPredicate());
+    }
+
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
+
     public ManaCache(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{R}");
 
         // At the beginning of each player's end step, put a charge counter on Mana Cache for each untapped land that player controls.
-        TriggeredAbility ability = new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of each player's end step", true, new ManaCacheEffect());
-        this.addAbility(ability);
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(
+                TargetController.EACH_PLAYER,
+                new AddCountersSourceEffect(CounterType.CHARGE.createInstance(), xValue),
+                false
+        ));
 
         // Remove a charge counter from Mana Cache: Add {C}. Any player may activate this ability but only during their turn before the end step.
         this.addAbility(new ManaCacheManaAbility());
@@ -47,41 +59,6 @@ public final class ManaCache extends CardImpl {
     @Override
     public ManaCache copy() {
         return new ManaCache(this);
-    }
-}
-
-class ManaCacheEffect extends OneShotEffect {
-
-    private static final FilterPermanent filter = new FilterControlledLandPermanent();
-
-    static {
-        filter.add(TappedPredicate.UNTAPPED);
-    }
-
-    public ManaCacheEffect() {
-        super(Outcome.Damage);
-        this.staticText = "put a charge counter on {this} for each untapped land that player controls";
-    }
-
-    private ManaCacheEffect(final ManaCacheEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ManaCacheEffect copy() {
-        return new ManaCacheEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(game.getActivePlayerId());
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if (player != null && sourcePermanent != null) {
-            int controlledUntappedLands = game.getBattlefield().countAll(filter, game.getActivePlayerId(), game);
-            sourcePermanent.addCounters(CounterType.CHARGE.createInstance(controlledUntappedLands), source.getControllerId(), source, game);
-            return true;
-        }
-        return false;
     }
 }
 

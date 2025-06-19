@@ -10,8 +10,8 @@ import mage.game.Game;
  * @author stravant
  */
 public class EffectKeyValue implements DynamicValue {
-    private String key;
-    private String description;
+    private final String key;
+    private final String description;
 
     public EffectKeyValue(String key) {
         this.key = key;
@@ -19,7 +19,7 @@ public class EffectKeyValue implements DynamicValue {
     }
 
     public EffectKeyValue(String key, String description) {
-        this(key);
+        this.key = key;
         this.description = description;
     }
 
@@ -35,11 +35,11 @@ public class EffectKeyValue implements DynamicValue {
 
     @Override
     public String toString() {
-        return "equal to";
+        return description;
     }
 
     @Override
     public String getMessage() {
-        return description;
+        return "";
     }
 }

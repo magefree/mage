@@ -1,7 +1,6 @@
 package mage.cards.b;
 
 import mage.abilities.condition.common.DescendCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.effects.common.CopySourceSpellEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
@@ -27,11 +26,11 @@ public final class BygoneMarvels extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{G}{G}");
 
         // Descend 8 -- When you cast this spell, if there are eight or more permanent cards in your graveyard, copy this spell twice. You may choose new targets for the copies.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new CastSourceTriggeredAbility(new CopySourceSpellEffect(2)),
-                DescendCondition.EIGHT, "When you cast this spell, if there are eight or more " +
-                "permanent cards in your graveyard, copy this spell twice. You may choose new targets for the copies."
-        ).setAbilityWord(AbilityWord.DESCEND_8).addHint(DescendCondition.getHint()));
+        this.addAbility(new CastSourceTriggeredAbility(new CopySourceSpellEffect(2)
+                .setText("copy this spell twice. You may choose new targets for the copies"))
+                .withInterveningIf(DescendCondition.EIGHT)
+                .setAbilityWord(AbilityWord.DESCEND_8)
+                .addHint(DescendCondition.getHint()));
 
         // Return target permanent card from your graveyard to your hand. Exile Bygone Marvels.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());

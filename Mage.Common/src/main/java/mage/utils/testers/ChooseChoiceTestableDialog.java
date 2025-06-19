@@ -5,6 +5,7 @@ import mage.choices.*;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.DebugUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,28 +25,36 @@ class ChooseChoiceTestableDialog extends BaseTestableDialog {
     Choice choice;
 
     public ChooseChoiceTestableDialog(boolean isYou, String name, Choice choice) {
-        super(String.format("player.choose(%s, choice)", isYou ? "you" : "AI"), name, choice.getClass().getSimpleName());
+        super(String.format("player.choose(%s, choice)", isYou ? "you" : "AI"),
+                name,
+                choice.getClass().getSimpleName(),
+                new ChoiceTestableResult()
+        );
         this.isYou = isYou;
         this.choice = choice;
     }
 
     @Override
-    public List<String> showDialog(Player player, Ability source, Game game, Player opponent) {
+    public void showDialog(Player player, Ability source, Game game, Player opponent) {
         Player choosingPlayer = this.isYou ? player : opponent;
         Choice dialog = this.choice.copy();
+        String chooseDebugSource = DebugUtil.getMethodNameWithSource(0, "class");
         boolean chooseRes = choosingPlayer.choose(Outcome.Benefit, dialog, game);
 
-        List<String> result = new ArrayList<>();
-        result.add(getGroup() + " - " + this.getName() + " - " + (chooseRes ? "TRUE" : "FALSE"));
-        result.add("");
+        List<String> res = new ArrayList<>();
+        res.add(getGroup() + " - " + this.getName() + " - " + (chooseRes ? "TRUE" : "FALSE"));
+        res.add("");
+        String choice;
         if (dialog.isKeyChoice()) {
             String key = dialog.getChoiceKey();
-            result.add(String.format("* selected key: %s (%s)", key, dialog.getKeyChoices().getOrDefault(key, null)));
+            choice = dialog.getKeyChoices().getOrDefault(key, null);
+            res.add(String.format("* selected key: %s (%s)", key, choice));
         } else {
-            result.add(String.format("* selected value: %s", dialog.getChoice()));
+            choice = dialog.getChoice();
+            res.add(String.format("* selected value: %s", choice));
         }
 
-        return result;
+        ((ChoiceTestableResult) this.getResult()).onFinish(chooseDebugSource, chooseRes, res, choice);
     }
 
     static public void register(TestableDialogsRunner runner) {

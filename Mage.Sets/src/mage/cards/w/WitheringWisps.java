@@ -1,40 +1,37 @@
-
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.abilities.ActivatedAbilityImpl;
-import mage.abilities.TriggeredAbility;
-import mage.abilities.common.OnEventTriggeredAbility;
-import mage.abilities.condition.common.CreatureCountCondition;
+import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.constants.SuperType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.game.Game;
+
+import java.util.UUID;
 
 /**
- *
  * @author L_J
  */
 public final class WitheringWisps extends CardImpl {
 
-    private static final String ruleText = "At the beginning of the end step, if no creatures are on the battlefield, sacrifice {this}.";
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(
+            new FilterCreaturePermanent("no creatures are on the battlefield"),
+            ComparisonType.EQUAL_TO, 0, false
+    );
 
     public WitheringWisps(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");
 
         // At the beginning of the end step, if no creatures are on the battlefield, sacrifice Withering Wisps.
-        TriggeredAbility triggered = new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new SacrificeSourceEffect());
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(triggered, new CreatureCountCondition(0, TargetController.ANY), ruleText));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.NEXT, new SacrificeSourceEffect(), false, condition));
 
         // {B}: Withering Wisps deals 1 damage to each creature and each player. Activate this ability no more times each turn than the number of snow Swamps you control.
         this.addAbility(new WitheringWispsActivatedAbility());
@@ -52,17 +49,15 @@ public final class WitheringWisps extends CardImpl {
 
 class WitheringWispsActivatedAbility extends ActivatedAbilityImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("snow Swamps you control");
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.SWAMP, "snow Swamps you control");
 
     static {
         filter.add(SuperType.SNOW.getPredicate());
-        filter.add(SubType.SWAMP.getPredicate());
-        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     @Override
     public int getMaxActivationsPerTurn(Game game) {
-        return game.getBattlefield().getAllActivePermanents(filter, game).size();
+        return game.getBattlefield().getActivePermanents(filter, getControllerId(), this, game).size();
     }
 
     public WitheringWispsActivatedAbility() {
@@ -76,7 +71,7 @@ class WitheringWispsActivatedAbility extends ActivatedAbilityImpl {
 
     @Override
     public String getRule() {
-        return super.getRule() + " Activate this ability no more times each turn than the number of snow Swamps you control.";
+        return super.getRule() + " Activate no more times each turn than the number of snow Swamps you control.";
     }
 
     @Override

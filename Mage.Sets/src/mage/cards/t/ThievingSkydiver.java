@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -44,12 +43,8 @@ public final class ThievingSkydiver extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Thieving Skydiver enters the battlefield, if it was kicked, gain control of target artifact with converted mana cost X or less. If that artifact is an Equipment, attach it to Thieving Skydiver.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new GainControlTargetEffect(Duration.Custom), false),
-                KickedCondition.ONCE, "When {this} enters, if it was kicked, " +
-                "gain control of target artifact with mana value X or less. " +
-                "If that artifact is an Equipment, attach it to {this}."
-        );
+        Ability ability = new EntersBattlefieldTriggeredAbility(new GainControlTargetEffect(Duration.Custom)
+                .setText("gain control of target artifact with mana value X or less")).withInterveningIf(KickedCondition.ONCE);
         ability.addEffect(new ThievingSkydiverEffect());
         ability.addTarget(new TargetArtifactPermanent());
         ability.setTargetAdjuster(new XManaValueTargetAdjuster(ComparisonType.OR_LESS));
@@ -70,6 +65,7 @@ class ThievingSkydiverEffect extends OneShotEffect {
 
     ThievingSkydiverEffect() {
         super(Outcome.Benefit);
+        staticText = "If that artifact is an Equipment, attach it to {this}";
     }
 
     private ThievingSkydiverEffect(final ThievingSkydiverEffect effect) {
@@ -84,11 +80,8 @@ class ThievingSkydiverEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-        Permanent artifact = game.getPermanent(source.getFirstTarget());
-        if (permanent == null
-                || artifact == null
-                || !artifact.isArtifact(game)
-                || !artifact.hasSubtype(SubType.EQUIPMENT, game)) {
+        Permanent artifact = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (permanent == null || artifact == null || !artifact.hasSubtype(SubType.EQUIPMENT, game)) {
             return false;
         }
         game.processAction();

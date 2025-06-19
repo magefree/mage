@@ -4,7 +4,8 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldThisOrAnotherTriggeredAbility;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.SourceMatchesFilterCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -19,10 +20,9 @@ import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
+import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentToken;
-import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -32,10 +32,14 @@ import java.util.UUID;
 public final class VaultbornTyrant extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent("creature you control with power 4 or greater");
+    private static final FilterPermanent filter2 = new FilterPermanent("it's not a token");
 
     static {
         filter.add(new PowerPredicate(ComparisonType.OR_GREATER, 4));
+        filter2.add(TokenPredicate.FALSE);
     }
+
+    private static final Condition condition = new SourceMatchesFilterCondition(filter2);
 
     public VaultbornTyrant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
@@ -55,15 +59,7 @@ public final class VaultbornTyrant extends CardImpl {
         this.addAbility(ability);
 
         // When Vaultborn Tyrant dies, if it's not a token, create a token that's a copy of it, except it's an artifact in addition to its other types.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new DiesSourceTriggeredAbility(
-                        new VaultbornTyrantCreateCopyEffect(),
-                        false
-                ),
-                VaultbornTyrant::checkSource,
-                "When {this} dies, if it's not a token, create a token that's a copy of it, "
-                        + "except it's an artifact in addition to its other types."
-        ));
+        this.addAbility(new DiesSourceTriggeredAbility(new VaultbornTyrantCreateCopyEffect()).withInterveningIf(condition));
     }
 
     private VaultbornTyrant(final VaultbornTyrant card) {
@@ -74,16 +70,13 @@ public final class VaultbornTyrant extends CardImpl {
     public VaultbornTyrant copy() {
         return new VaultbornTyrant(this);
     }
-
-    static boolean checkSource(Game game, Ability source) {
-        return !(source.getSourcePermanentOrLKI(game) instanceof PermanentToken);
-    }
 }
 
 class VaultbornTyrantCreateCopyEffect extends OneShotEffect {
 
     VaultbornTyrantCreateCopyEffect() {
         super(Outcome.PutCreatureInPlay);
+        staticText = "create a token that's a copy of it, except it's an artifact in addition to its other types";
     }
 
     private VaultbornTyrantCreateCopyEffect(final VaultbornTyrantCreateCopyEffect effect) {
@@ -97,14 +90,9 @@ class VaultbornTyrantCreateCopyEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (permanent == null) {
-            return false;
-        }
-        CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(
+        Permanent permanent = source.getSourcePermanentOrLKI(game);
+        return permanent != null && new CreateTokenCopyTargetEffect(
                 source.getControllerId(), CardType.ARTIFACT, false
-        );
-        effect.setTargetPointer(new FixedTarget(source.getSourceId(), game));
-        return effect.apply(game, source);
+        ).setSavedPermanent(permanent).apply(game, source);
     }
 }

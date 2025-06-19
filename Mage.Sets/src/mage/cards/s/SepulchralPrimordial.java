@@ -62,7 +62,7 @@ public final class SepulchralPrimordial extends CardImpl {
 class SepulchralPrimordialEffect extends OneShotEffect {
 
     SepulchralPrimordialEffect() {
-        super(Outcome.PutCreatureInPlay);
+        super(Outcome.GainControl);
         this.staticText = "for each opponent, you may put up to one target creature card from that player's graveyard onto the battlefield under your control";
     }
 

@@ -16,7 +16,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.DamagedPlayerControlsTargetAdjuster;
+import mage.target.targetadjustment.ThatPlayerControlsTargetAdjuster;
 
 import java.util.UUID;
 
@@ -38,7 +38,7 @@ public final class HammerOfRuin extends CardImpl {
         // Whenever equipped creature deals combat damage to a player, you may destroy target Equipment that player controls.
         Ability ability = new DealsDamageToAPlayerAttachedTriggeredAbility(new DestroyTargetEffect(), "equipped creature", true, true);
         ability.addTarget(new TargetPermanent(filter));
-        ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
+        ability.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster());
         this.addAbility(ability);
 
         // Equip {2}

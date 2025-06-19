@@ -5,14 +5,13 @@ import mage.abilities.common.EntersBattlefieldTappedUnlessAbility;
 import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.condition.common.YouControlPermanentCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacedCard;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
@@ -47,7 +46,7 @@ public final class ShiftingWoodland extends CardImpl {
         this.addAbility(new GreenManaAbility());
 
         // Delirium -- {2}{G}{G}: Shifting Woodland becomes a copy of target permanent card in your graveyard until end of turn. Activate only if there are four or more card types among cards in your graveyard.
-        Ability ability = new ConditionalActivatedAbility(
+        Ability ability = new ActivateIfConditionActivatedAbility(
                 new ShiftingWoodlandCopyEffect(),
                 new ManaCostsImpl<>("{2}{G}{G}"),
                 DeliriumCondition.instance

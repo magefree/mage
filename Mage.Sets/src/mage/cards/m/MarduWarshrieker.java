@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.Mana;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.RaidCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.mana.AddManaToManaPoolSourceControllerEffect;
 import mage.abilities.hint.common.RaidHint;
 import mage.cards.CardImpl;
@@ -30,13 +29,9 @@ public final class MarduWarshrieker extends CardImpl {
         this.toughness = new MageInt(3);
 
         // <em>Raid</em> - When Mardu Warshrieker enters the battlefield, if you attacked this turn, add {R}{W}{B}.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldTriggeredAbility(
-                        new AddManaToManaPoolSourceControllerEffect(new Mana(1, 0, 1, 1, 0, 0, 0, 0))),
-                        RaidCondition.instance,
-                        "When {this} enters, if you attacked this turn, add {R}{W}{B}.")
-                        .setAbilityWord(AbilityWord.RAID)
-                        .addHint(RaidHint.instance),
-                new PlayerAttackedWatcher());
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new AddManaToManaPoolSourceControllerEffect(
+                new Mana(1, 0, 1, 1, 0, 0, 0, 0)
+        ).setText("add {R}{W}{B}")).withInterveningIf(RaidCondition.instance).setAbilityWord(AbilityWord.RAID).addHint(RaidHint.instance), new PlayerAttackedWatcher());
     }
 
     private MarduWarshrieker(final MarduWarshrieker card) {

@@ -1,12 +1,11 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
@@ -19,8 +18,9 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class AshenGhoul extends CardImpl {
@@ -36,7 +36,7 @@ public final class AshenGhoul extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // {B}: Return Ashen Ghoul from your graveyard to the battlefield. Activate this ability only during your upkeep and only if three or more creature cards are above Ashen Ghoul.
-        this.addAbility(new ConditionalActivatedAbility(
+        this.addAbility(new ActivateIfConditionActivatedAbility(
                 Zone.GRAVEYARD,
                 new ReturnSourceFromGraveyardToBattlefieldEffect(),
                 new ManaCostsImpl<>("{B}"),
@@ -85,6 +85,6 @@ enum AshenGhoulCondition implements Condition {
 
     @Override
     public String toString() {
-        return "only during your upkeep and only if three or more creature cards are above {this}";
+        return "during your upkeep and only if three or more creature cards are above this card";
     }
 }

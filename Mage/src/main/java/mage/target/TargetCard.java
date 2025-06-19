@@ -180,7 +180,7 @@ public class TargetCard extends TargetObject {
         int possibleTargets = 0;
         for (Card card : game.getExile().getPermanentExile().getCards(game)) {
             if (sourceId == null || isNotTarget || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
-                if (filter.match(card, player.getId(), game)) {
+                if (filter.match(card, player.getId(), source, game)) {
                     possibleTargets++;
                     if (possibleTargets >= countUpTo) {
                         return possibleTargets; // early return for faster computation.
@@ -216,7 +216,7 @@ public class TargetCard extends TargetObject {
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
-        return possibleTargets(sourceControllerId, (Ability) null, game);
+        return possibleTargets(sourceControllerId, null, game);
     }
 
     public Set<UUID> possibleTargets(UUID sourceControllerId, Cards cards, Ability source, Game game) {

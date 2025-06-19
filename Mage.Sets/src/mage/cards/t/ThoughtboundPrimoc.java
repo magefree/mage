@@ -1,26 +1,28 @@
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author awjackson
  */
 public final class ThoughtboundPrimoc extends CardImpl {
@@ -37,12 +39,8 @@ public final class ThoughtboundPrimoc extends CardImpl {
 
         // At the beginning of your upkeep, if a player controls more Wizards than each other player,
         // the player who controls the most Wizards gains control of Thoughtbound Primoc.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new ThoughtboundPrimocEffect()),
-                OnePlayerHasTheMostWizards.instance,
-                "At the beginning of your upkeep, if a player controls more Wizards than each other player, the player who controls the most Wizards gains control of {this}"
-        ));
-
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ThoughtboundPrimocEffect())
+                .withInterveningIf(OnePlayerHasTheMostWizards.instance));
     }
 
     private ThoughtboundPrimoc(final ThoughtboundPrimoc card) {

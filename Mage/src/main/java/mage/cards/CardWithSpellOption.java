@@ -26,6 +26,7 @@ public abstract class CardWithSpellOption extends CardImpl {
 
     public CardWithSpellOption(CardWithSpellOption card) {
         super(card);
+        // make sure all parts created and parent ref added
         this.spellCard = card.getSpellCard().copy();
         this.spellCard.setParentCard(this);
     }

@@ -59,7 +59,7 @@ public final class MossPitSkeleton extends CardImpl {
 class MossPitSkeletonTriggeredAbility extends TriggeredAbilityImpl {
 
     MossPitSkeletonTriggeredAbility() {
-        super(Zone.GRAVEYARD, new PutOnLibrarySourceEffect(true).setText("put {this} on top of your library"), true);
+        super(Zone.GRAVEYARD, new PutOnLibrarySourceEffect(true).setText("put this card on top of your library"), true);
         this.withInterveningIf(SourceInGraveyardCondition.instance);
         setTriggerPhrase("Whenever one or more +1/+1 counters are put on a creature you control, ");
     }

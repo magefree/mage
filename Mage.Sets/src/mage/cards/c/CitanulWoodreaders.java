@@ -1,11 +1,8 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
@@ -13,8 +10,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class CitanulWoodreaders extends CardImpl {
@@ -31,11 +29,8 @@ public final class CitanulWoodreaders extends CardImpl {
         this.addAbility(new KickerAbility("{2}{G}"));
 
         // When Citanul Woodreaders enters the battlefield, if it was kicked, draw two cards.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(2)),
-                KickedCondition.ONCE,
-                "When {this} enters, if it was kicked, draw two cards."
-        ));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(2))
+                .withInterveningIf(KickedCondition.ONCE));
     }
 
     private CitanulWoodreaders(final CitanulWoodreaders card) {

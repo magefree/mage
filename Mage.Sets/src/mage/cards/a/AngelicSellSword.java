@@ -6,7 +6,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldThisOrAnotherTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -48,11 +47,8 @@ public final class AngelicSellSword extends CardImpl {
         ));
 
         // Whenever Angelic Sell-Sword attacks, if its power is 6 or greater, draw a card.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new AttacksTriggeredAbility(new DrawCardSourceControllerEffect(1)),
-                AngelicSellSwordCondition.instance, "Whenever {this} attacks, " +
-                "if its power is 6 or greater, draw a card."
-        ));
+        this.addAbility(new AttacksTriggeredAbility(new DrawCardSourceControllerEffect(1))
+                .withInterveningIf(AngelicSellSwordCondition.instance));
     }
 
     private AngelicSellSword(final AngelicSellSword card) {
@@ -75,5 +71,10 @@ enum AngelicSellSwordCondition implements Condition {
                 .map(MageObject::getPower)
                 .map(MageInt::getValue)
                 .orElse(0) >= 6;
+    }
+
+    @Override
+    public String toString() {
+        return "its power is 6 or greater";
     }
 }

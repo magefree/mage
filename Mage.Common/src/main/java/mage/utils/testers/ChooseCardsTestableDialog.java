@@ -13,6 +13,7 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.Targets;
 import mage.target.common.TargetCardInHand;
+import mage.util.DebugUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,16 +37,17 @@ class ChooseCardsTestableDialog extends BaseTestableDialog {
 
     public ChooseCardsTestableDialog(boolean isTargetChoice, boolean notTarget, boolean isYou, String name, TargetCard target) {
         super(String.format("%s(%s, %s, cards)",
-                isTargetChoice ? "player.chooseTarget" : "player.choose",
-                isYou ? "you" : "AI",
-                notTarget ? "not target" : "target"), name, target.toString());
+                        isTargetChoice ? "player.chooseTarget" : "player.choose",
+                        isYou ? "you" : "AI",
+                        notTarget ? "not target" : "target"), name, target.toString(),
+                new TargetTestableResult());
         this.isTargetChoice = isTargetChoice;
         this.target = target.withNotTarget(notTarget);
         this.isYou = isYou;
     }
 
     @Override
-    public List<String> showDialog(Player player, Ability source, Game game, Player opponent) {
+    public void showDialog(Player player, Ability source, Game game, Player opponent) {
         TargetCard choosingTarget = this.target.copy();
         Player choosingPlayer = this.isYou ? player : opponent;
 
@@ -56,19 +58,23 @@ class ChooseCardsTestableDialog extends BaseTestableDialog {
         Cards choosingCards = new CardsImpl(all.stream().limit(100).collect(Collectors.toList()));
 
         boolean chooseRes;
+        String chooseDebugSource;
         if (this.isTargetChoice) {
+            chooseDebugSource = DebugUtil.getMethodNameWithSource(0, "class");
             chooseRes = choosingPlayer.chooseTarget(Outcome.Benefit, choosingCards, choosingTarget, source, game);
         } else {
+            chooseDebugSource = DebugUtil.getMethodNameWithSource(0, "class");
             chooseRes = choosingPlayer.choose(Outcome.Benefit, choosingCards, choosingTarget, source, game);
         }
 
-        List<String> result = new ArrayList<>();
+        List<String> res = new ArrayList<>();
         if (chooseRes) {
-            Targets.printDebugTargets(getGroup() + " - " + this.getName() + " - " + "TRUE", new Targets(choosingTarget), source, game, result);
+            Targets.printDebugTargets(getGroup() + " - " + this.getName() + " - " + "TRUE", new Targets(choosingTarget), source, game, res);
         } else {
-            Targets.printDebugTargets(getGroup() + " - " + this.getName() + " - " + "FALSE", new Targets(choosingTarget), source, game, result);
+            Targets.printDebugTargets(getGroup() + " - " + this.getName() + " - " + "FALSE", new Targets(choosingTarget), source, game, res);
         }
-        return result;
+
+        ((TargetTestableResult) this.getResult()).onFinish(chooseDebugSource, chooseRes, res, choosingTarget);
     }
 
     static public void register(TestableDialogsRunner runner) {

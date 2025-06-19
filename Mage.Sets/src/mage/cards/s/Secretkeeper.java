@@ -34,7 +34,7 @@ public final class Secretkeeper extends CardImpl {
         Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(2,2, Duration.WhileOnBattlefield),
                 MoreCardsInHandThanOpponentsCondition.instance,
-                "As long as you have more cards in hand than each opponent, Secretkeeper gets +2/+2"));
+                "As long as you have more cards in hand than each opponent, {this} gets +2/+2"));
         ability.addEffect(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield),
                 MoreCardsInHandThanOpponentsCondition.instance,

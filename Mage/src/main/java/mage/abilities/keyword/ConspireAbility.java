@@ -21,7 +21,6 @@ import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 import mage.util.CardUtil;
 
-import java.util.Objects;
 import java.util.UUID;
 
 /*
@@ -188,13 +187,9 @@ class ConspireTriggeredAbility extends CastSourceTriggeredAbility {
             return false;
         }
         Spell spell = game.getStack().getSpell(event.getSourceId());
-        return spell != null
-                && spell
-                .getSpellAbility()
-                .getAllEffects()
-                .stream()
-                .map(effect -> effect.getValue("ConspireActivation" + conspireId + addedById))
-                .anyMatch(Objects::nonNull);
+        return spell != null && CardUtil.getEffectValueFromAbility(
+                spell.getSpellAbility(), "ConspireActivation" + conspireId + addedById, Boolean.class
+        ).orElse(false);
     }
 
     @Override

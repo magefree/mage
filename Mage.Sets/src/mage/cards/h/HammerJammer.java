@@ -1,10 +1,9 @@
-
 package mage.cards.h;
 
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.cards.CardImpl;
@@ -38,7 +37,7 @@ public final class HammerJammer extends CardImpl {
         this.toughness = new MageInt(0);
 
         // As Hammer Jammer enters the battlefield, roll a six-sided die. Hammer Jammer enters the battlefield with a number of +1/+1 counters on it equal to the result.
-        this.addAbility(new EntersBattlefieldAbility(new HammerJammerEntersEffect(CounterType.P1P1.createInstance())));
+        this.addAbility(new AsEntersBattlefieldAbility(new HammerJammerEntersEffect(CounterType.P1P1.createInstance())));
 
         // Whenever you roll a die, remove all +1/+1 counters from Hammer Jammer, then put a number of +1/+1 counters on it equal to the result.
         this.addAbility(new HammerJammerTriggeredAbility());
@@ -59,9 +58,10 @@ class HammerJammerEntersEffect extends EntersBattlefieldWithXCountersEffect {
 
     HammerJammerEntersEffect(Counter counter) {
         super(counter);
+        staticText = "roll a six-sided die. {this} enters with a number of +1/+1 counters on it equal to the result";
     }
 
-    public HammerJammerEntersEffect(EntersBattlefieldWithXCountersEffect effect) {
+    private HammerJammerEntersEffect(EntersBattlefieldWithXCountersEffect effect) {
         super(effect);
     }
 
@@ -86,7 +86,7 @@ class HammerJammerEntersEffect extends EntersBattlefieldWithXCountersEffect {
 
 class HammerJammerTriggeredAbility extends TriggeredAbilityImpl {
 
-    public HammerJammerTriggeredAbility() {
+    HammerJammerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new HammerJammerEffect(), false);
         setTriggerPhrase("Whenever you roll a die, ");
     }

@@ -291,16 +291,25 @@ public class XmageURLConnection {
         }
     }
 
+    public static String downloadText(String resourceUrl) {
+        return downloadText(resourceUrl, null);
+    }
+
     /**
      * Fast download of text data
      *
+     * @param additionalHeaders set extra headers like application/json
+     *
      * @return downloaded text on OK 200 response or empty on any other errors
      */
-    public static String downloadText(String resourceUrl) {
+    public static String downloadText(String resourceUrl, Map<String, String> additionalHeaders) {
         XmageURLConnection con = new XmageURLConnection(resourceUrl);
         con.startConnection();
         if (con.isConnected()) {
             try {
+                if (additionalHeaders != null) {
+                    con.setRequestHeaders(additionalHeaders);
+                }
                 con.connect();
                 if (con.getResponseCode() == 200) {
                     return con.getGoodResponseAsString();

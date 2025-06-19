@@ -3,7 +3,6 @@ package mage.game.command.emblems;
 import mage.abilities.Ability;
 import mage.abilities.common.OneOrMoreCombatDamagePlayerTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
@@ -25,13 +24,9 @@ public final class LolthSpiderQueenEmblem extends Emblem {
     // −8: You get an emblem with "Whenever an opponent is dealt combat damage by one or more creatures you control, if that player lost less than 8 life this turn, they lose life equal to the difference."
     public LolthSpiderQueenEmblem() {
         super("Emblem Lolth");
-        this.getAbilities().add(new ConditionalInterveningIfTriggeredAbility(
-                new OneOrMoreCombatDamagePlayerTriggeredAbility(
-                        Zone.COMMAND, new LolthSpiderQueenEmblemEffect(), StaticFilters.FILTER_PERMANENT_CREATURES, SetTargetPointer.PLAYER, false
-                ), LolthSpiderQueenEmblemCondition.instance, "Whenever an opponent " +
-                "is dealt combat damage by one or more creatures you control, " +
-                "if that player lost less than 8 life this turn, they lose life equal to the difference."
-        ));
+        this.getAbilities().add(new OneOrMoreCombatDamagePlayerTriggeredAbility(
+                Zone.COMMAND, new LolthSpiderQueenEmblemEffect(), StaticFilters.FILTER_PERMANENT_CREATURES, SetTargetPointer.PLAYER, false
+        ).withInterveningIf(LolthSpiderQueenEmblemCondition.instance).setTriggerPhrase("Whenever an opponent is dealt combat damage by one or more creatures you control, "));
     }
 
     private LolthSpiderQueenEmblem(final LolthSpiderQueenEmblem card) {
@@ -61,12 +56,18 @@ enum LolthSpiderQueenEmblemCondition implements Condition {
         PlayerLostLifeWatcher watcher = game.getState().getWatcher(PlayerLostLifeWatcher.class);
         return player != null && watcher != null && watcher.getLifeLost(player.getId()) < 8;
     }
+
+    @Override
+    public String toString() {
+        return "that player lost less than 8 life this turn";
+    }
 }
 
 class LolthSpiderQueenEmblemEffect extends OneShotEffect {
 
     LolthSpiderQueenEmblemEffect() {
         super(Outcome.Benefit);
+        staticText = "they lose life equal to the difference";
     }
 
     private LolthSpiderQueenEmblemEffect(final LolthSpiderQueenEmblemEffect effect) {

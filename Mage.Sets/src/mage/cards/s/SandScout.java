@@ -5,7 +5,6 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.PutCardIntoGraveFromAnywhereAllTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.OpponentControlsMoreCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
@@ -31,7 +30,7 @@ public final class SandScout extends CardImpl {
         filter.add(SubType.DESERT.getPredicate());
     }
 
-    private static final Condition condition = new OpponentControlsMoreCondition(StaticFilters.FILTER_LAND);
+    private static final Condition condition = new OpponentControlsMoreCondition(StaticFilters.FILTER_LANDS);
 
     public SandScout(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
@@ -42,11 +41,7 @@ public final class SandScout extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Sand Scout enters the battlefield, if an opponent controls more lands than you, search your library for a Desert card, put it onto the battlefield tapped, then shuffle.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldTriggeredAbility(
-                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), true)),
-                condition, "When {this} enters, if an opponent controls more lands than you, " +
-                "search your library for a Desert card, put it onto the battlefield tapped, then shuffle."
-        ));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), true)).withInterveningIf(condition));
 
         // Whenever one or more land cards are put into your graveyard from anywhere, create a 1/1 red, green, and white Sand Warrior creature token. This ability triggers only once each turn.
         this.addAbility(new PutCardIntoGraveFromAnywhereAllTriggeredAbility(

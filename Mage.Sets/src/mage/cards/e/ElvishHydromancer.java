@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
@@ -32,11 +31,7 @@ public final class ElvishHydromancer extends CardImpl {
         this.addAbility(new KickerAbility("{3}{U}"));
 
         // When Elvish Hydromancer enters the battlefield, if it was kicked, create a token that's a copy of target creature you control.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new CreateTokenCopyTargetEffect()),
-                KickedCondition.ONCE, "When {this} enters, " +
-                "if it was kicked, create a token that's a copy of target creature you control."
-        );
+        Ability ability = new EntersBattlefieldTriggeredAbility(new CreateTokenCopyTargetEffect()).withInterveningIf(KickedCondition.ONCE);
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }

@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.condition.common.CardsInHandCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ExileAndReturnSourceEffect;
 import mage.abilities.keyword.TransformAbility;
@@ -48,7 +48,7 @@ public class JinGitaxias extends CardImpl {
         //{3}{U}: Exile Jin-Gitaxias, then return it to the battlefield transformed under its owner’s control. Activate
         //only as a sorcery and only if you have seven or more cards in hand.
         this.addAbility(new TransformAbility());
-        this.addAbility(new ConditionalActivatedAbility(
+        this.addAbility(new ActivateIfConditionActivatedAbility(
                 new ExileAndReturnSourceEffect(PutCards.BATTLEFIELD_TRANSFORMED),
                 new ManaCostsImpl<>("{3}{U}"),
                 new CardsInHandCondition(ComparisonType.MORE_THAN, 6)

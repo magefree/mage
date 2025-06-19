@@ -37,7 +37,7 @@ public final class CharitableLevy extends CardImpl {
         filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
     }
 
-    private static final Condition condition = new SourceHasCounterCondition(CounterType.COLLECTION, 3, Integer.MAX_VALUE);
+    private static final Condition condition = new SourceHasCounterCondition(CounterType.COLLECTION, 3);
 
     private static final FilterCard filterPlains = new FilterBySubtypeCard(SubType.PLAINS);
 

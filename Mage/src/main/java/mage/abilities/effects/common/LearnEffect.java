@@ -20,12 +20,11 @@ public class LearnEffect extends OneShotEffect {
         filter.add(SubType.LESSON.getPredicate());
     }
 
-    private static final String defaultText = "learn. <i>(You may reveal a Lesson card you own from outside the game " +
-            "and put it into your hand, or discard a card to draw a card.)</i>";
 
     public LearnEffect() {
         super(Outcome.Neutral);
-        staticText = defaultText;
+        staticText = "learn. <i>(You may reveal a Lesson card you own " +
+                "from outside the game and put it into your hand, or discard a card to draw a card.)</i>";
     }
 
     private LearnEffect(final LearnEffect effect) {
@@ -49,9 +48,5 @@ public class LearnEffect extends OneShotEffect {
     @Override
     public LearnEffect copy() {
         return new LearnEffect(this);
-    }
-
-    public static String getDefaultText() {
-        return defaultText;
     }
 }

@@ -36,8 +36,8 @@ public final class VisionOfTheUnspeakable extends CardImpl {
 
         // Vision of the Unspeakable gets +1/+1 for each card in your hand.
         this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(
-                CardsInControllerHandCount.ANY,
-                CardsInControllerHandCount.ANY,
+                CardsInControllerHandCount.ANY_SINGULAR,
+                CardsInControllerHandCount.ANY_SINGULAR,
                 Duration.WhileOnBattlefield
         )));
     }

@@ -1,7 +1,5 @@
 package mage.cards.t;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -13,8 +11,9 @@ import mage.game.permanent.token.RabbitToken;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author Grath
  */
 public final class TemptWithBunnies extends CardImpl {
@@ -26,6 +25,7 @@ public final class TemptWithBunnies extends CardImpl {
         // card and create a 1/1 white Rabbit creature token. For each opponent who does, you draw a card and you
         // create a 1/1 white Rabbit creature token.
         this.getSpellAbility().addEffect(new TemptWithBunniesEffect());
+        this.getSpellAbility().withFlavorWord("Tempting Offer");
     }
 
     private TemptWithBunnies(final TemptWithBunnies card) {
@@ -42,7 +42,7 @@ class TemptWithBunniesEffect extends OneShotEffect {
 
     TemptWithBunniesEffect() {
         super(Outcome.PutLandInPlay);
-        this.staticText = "<i>Tempting offer</i> &mdash; Draw a card and create a 1/1 white Rabbit creature token. Then each opponent may draw a card and create a 1/1 white Rabbit creature token. For each opponent who does, you draw a card and you create a 1/1 white Rabbit creature token.";
+        this.staticText = "draw a card and create a 1/1 white Rabbit creature token. Then each opponent may draw a card and create a 1/1 white Rabbit creature token. For each opponent who does, you draw a card and you create a 1/1 white Rabbit creature token.";
     }
 
     private TemptWithBunniesEffect(final TemptWithBunniesEffect effect) {

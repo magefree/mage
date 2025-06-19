@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.PlotAbility;
 import mage.abilities.keyword.StormAbility;
@@ -31,11 +30,8 @@ public final class LoanShark extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When Loan Shark enters the battlefield, if you've cast two or more spells this turn, draw a card.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)),
-                LoanSharkCondition.instance, "When {this} enters, " +
-                "if you've cast two or more spells this turn, draw a card."
-        ).addHint(StormAbility.getHint()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1))
+                .withInterveningIf(LoanSharkCondition.instance).addHint(StormAbility.getHint()));
 
         // Plot {3}{U}
         this.addAbility(new PlotAbility("{3}{U}"));
@@ -60,5 +56,10 @@ enum LoanSharkCondition implements Condition {
                 .getState()
                 .getWatcher(SpellsCastWatcher.class)
                 .getCount(source.getControllerId()) >= 2;
+    }
+
+    @Override
+    public String toString() {
+        return "you've cast two or more spells this turn";
     }
 }

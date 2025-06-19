@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.RaidCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.abilities.hint.common.RaidHint;
 import mage.cards.CardImpl;
@@ -12,7 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetOpponent;
 import mage.watchers.common.PlayerAttackedWatcher;
 
@@ -32,14 +31,11 @@ public final class StormFleetArsonist extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Raid - When Storm Fleet Arsonist enters the battlefield, if you attacked this turn, target opponent sacrifices a permanent.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new SacrificeEffect(new FilterPermanent(), 1, "Target opponent")),
-                RaidCondition.instance,
-                "When {this} enters, if you attacked this turn, target opponent sacrifices a permanent.");
+        Ability ability = new EntersBattlefieldTriggeredAbility(
+                new SacrificeEffect(StaticFilters.FILTER_PERMANENT_A, 1, "target opponent")
+        ).withInterveningIf(RaidCondition.instance);
         ability.addTarget(new TargetOpponent());
-        ability.setAbilityWord(AbilityWord.RAID);
-        ability.addHint(RaidHint.instance);
-        this.addAbility(ability, new PlayerAttackedWatcher());
+        this.addAbility(ability.setAbilityWord(AbilityWord.RAID).addHint(RaidHint.instance), new PlayerAttackedWatcher());
     }
 
     private StormFleetArsonist(final StormFleetArsonist card) {

@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CastFromEverywhereSourceCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControllerEffect;
@@ -43,12 +42,8 @@ public final class EonFrolicker extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Eon Frolicker enters the battlefield, if you cast it, target opponent takes an extra turn after this one. Until your next turn, you and planeswalkers you control gain protection from that player.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new EonFrolickerEffect()),
-                CastFromEverywhereSourceCondition.instance, "When {this} enters, " +
-                "if you cast it, target opponent takes an extra turn after this one. Until your next turn, " +
-                "you and planeswalkers you control gain protection from that player."
-        );
+        Ability ability = new EntersBattlefieldTriggeredAbility(new EonFrolickerEffect())
+                .withInterveningIf(CastFromEverywhereSourceCondition.instance);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }
@@ -67,6 +62,8 @@ class EonFrolickerEffect extends OneShotEffect {
 
     EonFrolickerEffect() {
         super(Outcome.Benefit);
+        staticText = "target opponent takes an extra turn after this one. Until your next turn, " +
+                "you and planeswalkers you control gain protection from that player";
     }
 
     private EonFrolickerEffect(final EonFrolickerEffect effect) {

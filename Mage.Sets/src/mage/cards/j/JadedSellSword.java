@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.TreasureSpentToCastCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.HasteAbility;
@@ -13,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.watchers.common.ManaPaidSourceWatcher;
 
 import java.util.UUID;
 
@@ -31,15 +29,12 @@ public final class JadedSellSword extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Jaded Sell-Sword enters the battlefield, if mana from a Treasure was spent to cast it, it gains first strike and haste until end of turn.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new GainAbilitySourceEffect(
-                        FirstStrikeAbility.getInstance(), Duration.EndOfTurn
-                )), TreasureSpentToCastCondition.instance, "When {this} enters, " +
-                "if mana from a Treasure was spent to cast it, it gains first strike and haste until end of turn."
-        );
+        Ability ability = new EntersBattlefieldTriggeredAbility(new GainAbilitySourceEffect(
+                FirstStrikeAbility.getInstance(), Duration.EndOfTurn
+        ).setText("it gains first strike")).withInterveningIf(TreasureSpentToCastCondition.instance);
         ability.addEffect(new GainAbilitySourceEffect(
                 HasteAbility.getInstance(), Duration.EndOfTurn
-        ));
+        ).setText("and haste until end of turn"));
         this.addAbility(ability);
     }
 

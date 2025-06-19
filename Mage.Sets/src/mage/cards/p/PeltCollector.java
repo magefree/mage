@@ -111,7 +111,7 @@ class PeltCollectorTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever another creature you control enters the battlefield "
+        return "Whenever another creature you control enters "
                 + "or dies, if that creature's power is greater than {this}'s, "
                 + "put a +1/+1 counter on {this}.";
     }

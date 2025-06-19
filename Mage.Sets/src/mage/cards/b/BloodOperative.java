@@ -1,6 +1,5 @@
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -18,8 +17,9 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetCardInGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class BloodOperative extends CardImpl {
@@ -42,7 +42,7 @@ public final class BloodOperative extends CardImpl {
 
         // Whenever you surveil, if Blood Operative is in your graveyard, you may pay 3 life. If you do, return Blood Operative to your hand.
         this.addAbility(new SurveilTriggeredAbility(Zone.GRAVEYARD, new DoIfCostPaid(
-                new ReturnSourceFromGraveyardToHandEffect().setText("return {this} to your hand"), new PayLifeCost(3)
+                new ReturnSourceFromGraveyardToHandEffect().setText("return this card to your hand"), new PayLifeCost(3)
         )).withInterveningIf(SourceInGraveyardCondition.instance));
     }
 

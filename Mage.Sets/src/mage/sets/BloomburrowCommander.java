@@ -93,6 +93,7 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Devilish Valet", 195, Rarity.RARE, mage.cards.d.DevilishValet.class));
         cards.add(new SetCardInfo("Domri, Anarch of Bolas", 98, Rarity.RARE, mage.cards.d.DomriAnarchOfBolas.class));
         cards.add(new SetCardInfo("Dusk // Dawn", 138, Rarity.RARE, mage.cards.d.DuskDawn.class));
+        cards.add(new SetCardInfo("Echoing Assault", 24, Rarity.RARE, mage.cards.e.EchoingAssault.class));
         cards.add(new SetCardInfo("Elspeth, Sun's Champion", 97, Rarity.MYTHIC, mage.cards.e.ElspethSunsChampion.class));
         cards.add(new SetCardInfo("End-Raze Forerunners", 214, Rarity.RARE, mage.cards.e.EndRazeForerunners.class));
         cards.add(new SetCardInfo("Esika's Chariot", 215, Rarity.RARE, mage.cards.e.EsikasChariot.class));

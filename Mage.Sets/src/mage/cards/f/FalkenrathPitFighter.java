@@ -13,9 +13,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -36,7 +34,7 @@ public final class FalkenrathPitFighter extends CardImpl {
 
         // {1}{R}, Discard a card, Sacrifice a Vampire: Draw two cards. Activate only if an opponent lost life this turn.
         Ability ability = new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(2),
+                new DrawCardSourceControllerEffect(2),
                 new ManaCostsImpl<>("{1}{R}"), OpponentsLostLifeCondition.instance
         );
         ability.addCost(new DiscardCardCost());

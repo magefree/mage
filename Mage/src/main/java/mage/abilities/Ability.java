@@ -504,7 +504,22 @@ public interface Ability extends Controllable, Serializable {
     MageObject getSourceObject(Game game);
 
     void setSourceObjectZoneChangeCounter(int zoneChangeCounter);
+    /**
+     * Initializes the internally stored Source Object ZCC value
+     * to be equal to the source object's current ZCC.
+     * <p>
+     * If the source is an entering permanent, then
+     * the ZCC is set as if the permanent had already entered the battlefield.
+     *
+     * @param game
+     * @param force Update only occurs if stored ZCC is zero or if force is true.
+     */
+    void initSourceObjectZoneChangeCounter(Game game, boolean force);
 
+    // TODO: it's activating time of ability, not current object's zcc, see #13737,
+    //   in most use cases you must use game.getState().getZoneChangeCounter or input.getObject().getZoneChangeCounter(game)
+    //   only ability related logic can use it (example: delayed triggers)
+    @Deprecated
     int getSourceObjectZoneChangeCounter();
 
     /**

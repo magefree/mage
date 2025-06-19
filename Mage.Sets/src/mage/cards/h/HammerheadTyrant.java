@@ -70,19 +70,10 @@ enum HammerheadTyrantPredicate implements ObjectSourcePlayerPredicate<Permanent>
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
-        return input
-                .getObject()
-                .getManaValue()
-                <= CardUtil
-                .castStream(
-                        input.getSource()
-                                .getEffects()
-                                .stream()
-                                .map(effect -> effect.getValue("spellCast")),
-                        Spell.class
-                )
-                .findFirst()
+        return CardUtil
+                .getEffectValueFromAbility(input.getSource(), "spellCast", Spell.class)
                 .map(Spell::getManaValue)
-                .orElse(-1);
+                .filter(x -> x >= input.getObject().getManaValue())
+                .isPresent();
     }
 }

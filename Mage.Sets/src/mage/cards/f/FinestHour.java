@@ -1,19 +1,18 @@
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksAloneControlledTriggeredAbility;
 import mage.abilities.condition.common.FirstCombatPhaseCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.AdditionalCombatPhaseEffect;
+import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.keyword.ExaltedAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 
+import java.util.UUID;
+
 /**
- *
  * @author awjackson
  */
 public final class FinestHour extends CardImpl {
@@ -26,12 +25,9 @@ public final class FinestHour extends CardImpl {
 
         // Whenever a creature you control attacks alone, if it's the first combat phase of the turn, untap that
         // creature. After this phase, there is an additional combat phase.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new AttacksAloneControlledTriggeredAbility(new UntapTargetEffect("untap that creature"), true, false),
-                FirstCombatPhaseCondition.instance,
-                "Whenever a creature you control attacks alone, if it's the first combat phase of the turn, " +
-                "untap that creature. After this phase, there is an additional combat phase."
-        );
+        Ability ability = new AttacksAloneControlledTriggeredAbility(
+                new UntapTargetEffect("untap that creature"), true, false
+        ).withInterveningIf(FirstCombatPhaseCondition.instance);
         ability.addEffect(new AdditionalCombatPhaseEffect());
         this.addAbility(ability);
     }

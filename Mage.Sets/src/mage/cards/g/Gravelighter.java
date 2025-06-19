@@ -36,7 +36,7 @@ public final class Gravelighter extends CardImpl {
                 new DrawCardSourceControllerEffect(1),
                 new SacrificeAllEffect(StaticFilters.FILTER_PERMANENT_CREATURE),
                 MorbidCondition.instance, "draw a card if a creature died this turn. " +
-                "Otherwise, each player sacrifices a creature"
+                "Otherwise, each player sacrifices a creature of their choice"
         )).addHint(MorbidHint.instance));
     }
 

@@ -1,15 +1,14 @@
 package mage.cards.m;
 
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldThisOrAnotherTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.hint.ConditionHint;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -28,14 +27,17 @@ public final class MaritLagesSlumber extends CardImpl {
 
     private static final FilterPermanent filter
             = new FilterControlledPermanent("snow permanent");
+    private static final FilterPermanent filter2
+            = new FilterControlledPermanent("you control ten or more snow permanents");
 
     static {
         filter.add(SuperType.SNOW.getPredicate());
+        filter2.add(SuperType.SNOW.getPredicate());
     }
 
     private static final Condition condition
-            = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 9);
-    private static final ConditionHint hint = new ConditionHint(condition, "You control ten or more snow permanents");
+            = new PermanentsOnTheBattlefieldCondition(filter2, ComparisonType.MORE_THAN, 9);
+    private static final ConditionHint hint = new ConditionHint(condition);
 
     public MaritLagesSlumber(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
@@ -49,14 +51,10 @@ public final class MaritLagesSlumber extends CardImpl {
         ));
 
         // At the beginning of your upkeep, if you control ten or more snow permanents, sacrifice Marit Lage's Slumber. If you do, create Marit Lage, a legendary 20/20 black Avatar creature token with flying and indestructible.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new DoIfCostPaid(
-                        new CreateTokenEffect(new MaritLageToken()),
-                        new SacrificeSourceCost(), "", false
-                )), condition, "At the beginning of your upkeep, " +
-                "if you control ten or more snow permanents, sacrifice {this}. If you do, create Marit Lage, " +
-                "a legendary 20/20 black Avatar creature token with flying and indestructible."
-        ).addHint(hint));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DoIfCostPaid(
+                new CreateTokenEffect(new MaritLageToken()),
+                new SacrificeSourceCost(), "", false
+        )).withInterveningIf(condition).addHint(hint));
     }
 
     private MaritLagesSlumber(final MaritLagesSlumber card) {

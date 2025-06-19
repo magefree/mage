@@ -233,7 +233,7 @@ public class Turn implements Serializable {
                 if (player != controllingPlayer && controllingPlayer != null) {
                     game.informPlayers(controllingPlayer.getLogName() + " lost control over " + player.getLogName());
                 }
-                player.setGameUnderYourControl(true);
+                player.setGameUnderYourControl(game, true);
             }
         });
 

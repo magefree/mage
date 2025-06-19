@@ -218,6 +218,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     @Override
     public TriggeredAbility withInterveningIf(Condition interveningIfCondition) {
         this.interveningIfCondition = interveningIfCondition;
+        this.replaceRuleText = false;
         return this;
     }
 
@@ -301,6 +302,9 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
             if (!conditionText.isEmpty()) { // e.g. CaseSolveAbility
                 if (replaceRuleText && triggerPhrase != null && triggerPhrase.contains("{this}")) {
                     conditionText = conditionText.replace("{this}", "it");
+                    if (conditionText.startsWith("it is ")) {
+                        conditionText = conditionText.replace("it is ", "it's ");
+                    }
                 }
                 if (!conditionText.startsWith("if ")) {
                     sb.append("if ");

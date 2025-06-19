@@ -51,7 +51,7 @@ public class LoseAllAbilitiesTargetEffect extends ContinuousEffectImpl {
             return staticText;
         }
         return getTargetPointer().describeTargets(mode.getTargets(), "it")
-                + " loses all abilities " + (duration.toString().isEmpty() ? "" : ' ' + duration.toString());
+                + " loses all abilities" + (duration.toString().isEmpty() ? "" : ' ' + duration.toString());
     }
 
 }

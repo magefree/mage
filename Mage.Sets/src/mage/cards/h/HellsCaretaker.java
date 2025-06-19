@@ -1,25 +1,22 @@
-
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.PhaseStep;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class HellsCaretaker extends CardImpl {
@@ -31,10 +28,10 @@ public final class HellsCaretaker extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}, Sacrifice a creature: Return target creature card from your graveyard to the battlefield. Activate this ability only during your upkeep.
-        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new ActivateIfConditionActivatedAbility(
                 new ReturnFromGraveyardToBattlefieldTargetEffect(),
-                new TapSourceCost(),
-                new IsStepCondition(PhaseStep.UPKEEP));
+                new TapSourceCost(), IsStepCondition.getMyUpkeep()
+        );
         ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.addAbility(ability);

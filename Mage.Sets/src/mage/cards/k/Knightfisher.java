@@ -1,7 +1,7 @@
 package mage.cards.k;
 
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -9,6 +9,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.FishNoAbilityToken;
 
@@ -19,9 +21,10 @@ import java.util.UUID;
  */
 public final class Knightfisher extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent(SubType.BIRD, "nontoken Bird");
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.BIRD, "another nontoken Bird you control");
 
     static {
+        filter.add(AnotherPredicate.instance);
         filter.add(TokenPredicate.FALSE);
     }
 
@@ -37,9 +40,7 @@ public final class Knightfisher extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever another nontoken Bird you control enters, create a 1/1 blue Fish creature token.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
-                new CreateTokenEffect(new FishNoAbilityToken()), filter
-        ));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(new CreateTokenEffect(new FishNoAbilityToken()), filter));
     }
 
     private Knightfisher(final Knightfisher card) {

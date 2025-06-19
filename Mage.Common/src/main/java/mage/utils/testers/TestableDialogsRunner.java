@@ -8,8 +8,10 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 
-import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -31,7 +33,7 @@ import java.util.stream.Collectors;
  * [x] choosePile
  * [x] announceX
  * [x] getAmount
- * [ ] getMultiAmountWithIndividualConstraints // TODO: implement
+ * [x] getMultiAmountWithIndividualConstraints
  * <p>
  * Support of priority dialogs (can be called by game engine, some can be implemented in theory):
  * --- priority
@@ -55,7 +57,7 @@ import java.util.stream.Collectors;
  */
 public class TestableDialogsRunner {
 
-    private final List<TestableDialog> dialogs = new ArrayList<>();
+    private final Map<Integer, TestableDialog> dialogs = new LinkedHashMap<>();
 
     static final int LAST_SELECTED_GROUP_ID = 997;
     static final int LAST_SELECTED_DIALOG_ID = 998;
@@ -75,15 +77,18 @@ public class TestableDialogsRunner {
         ChooseAmountTestableDialog.register(this);
         AnnounceXTestableDialog.register(this);
         GetAmountTestableDialog.register(this);
+        GetMultiAmountTestableDialog.register(this);
     }
 
     void registerDialog(TestableDialog dialog) {
-        this.dialogs.add(dialog);
+        Integer regNumber = this.dialogs.size() + 1;
+        dialog.setRegNumber(regNumber);
+        this.dialogs.put(regNumber, dialog);
     }
 
     public void selectAndShowTestableDialog(Player player, Ability source, Game game, Player opponent) {
         // select group or fast links
-        List<String> groups = this.dialogs.stream()
+        List<String> groups = this.dialogs.values().stream()
                 .map(TestableDialog::getGroup)
                 .distinct()
                 .sorted()
@@ -128,8 +133,9 @@ public class TestableDialogsRunner {
         // all fine, can show it and finish
         lastSelectedGroup = needGroup;
         lastSelectedDialog = needDialog;
-        List<String> resInfo = needDialog.showDialog(player, source, game, opponent);
-        needDialog.showResult(player, game, String.join("<br>", resInfo));
+        needDialog.prepare();
+        needDialog.showDialog(player, source, game, opponent);
+        needDialog.showResult(player, game);
     }
 
     private Choice prepareSelectGroupChoice(List<String> groups) {
@@ -197,6 +203,10 @@ public class TestableDialogsRunner {
             );
         }
         return choice;
+    }
+
+    public Collection<TestableDialog> getDialogs() {
+        return this.dialogs.values();
     }
 }
 

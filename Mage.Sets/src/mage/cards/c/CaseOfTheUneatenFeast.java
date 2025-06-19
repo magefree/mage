@@ -9,7 +9,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SolvedSourceCondition;
 import mage.abilities.condition.common.YouGainedLifeCondition;
 import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.hint.common.CaseSolvedHint;
@@ -47,7 +47,7 @@ public final class CaseOfTheUneatenFeast extends CardImpl {
                 new GainLifeEffect(1), StaticFilters.FILTER_PERMANENT_CREATURE);
         // To solve -- You've gained 5 or more life this turn.
         // Solved -- Sacrifice this Case: Creature cards in your graveyard gain "You may cast this card from your graveyard" until end of turn.
-        Ability solvedAbility = new ConditionalActivatedAbility(
+        Ability solvedAbility = new ActivateIfConditionActivatedAbility(
                 new CaseOfTheUneatenFeastEffect(),
                 new SacrificeSourceCost().setText("sacrifice this Case"),
                 SolvedSourceCondition.SOLVED);

@@ -7,7 +7,6 @@ import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
@@ -15,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.target.common.TargetNonlandPermanent;
 
 import java.util.UUID;
@@ -41,10 +39,11 @@ public final class VonaButcherOfMagan extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // {T}, Pay 7 life: Destroy target nonland permanent. Activate this ability only during your turn.
-        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapSourceCost(), MyTurnCondition.instance);
+        Ability ability = new ActivateIfConditionActivatedAbility(
+                new DestroyTargetEffect(), new TapSourceCost(), MyTurnCondition.instance
+        );
         ability.addCost(new PayLifeCost(7));
         ability.addTarget(new TargetNonlandPermanent());
-        ability.addHint(MyTurnHint.instance);
         this.addAbility(ability);
     }
 

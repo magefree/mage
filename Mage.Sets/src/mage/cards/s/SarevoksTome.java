@@ -40,7 +40,6 @@ public final class SarevoksTome extends CardImpl {
 
         // {T}: Add {C}. If you have the initiative, add {C}{C} instead.
         this.addAbility(new SimpleManaAbility(
-                Zone.BATTLEFIELD,
                 new ConditionalManaEffect(
                         new BasicManaEffect(Mana.ColorlessMana(2)),
                         new BasicManaEffect(Mana.ColorlessMana(1)),
@@ -51,8 +50,7 @@ public final class SarevoksTome extends CardImpl {
 
         // {3}, {T}: Exile cards from the top of your library until you exile a nonland card. You may cast that card without paying its mana cost. Activate only if you've completed a dungeon.
         Ability ability = new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD, new SarevoksTomeEffect(),
-                new GenericManaCost(3), CompletedDungeonCondition.instance
+                new SarevoksTomeEffect(), new GenericManaCost(3), CompletedDungeonCondition.instance
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability.addHint(CompletedDungeonCondition.getHint()), new CompletedDungeonWatcher());

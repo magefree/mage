@@ -26,7 +26,8 @@ public final class LagonnaBandTrailblazer extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Heroic — Whenever you cast a spell that targets Lagonna-Band Trailblazer, put a +1/+1 counter on Lagonna-Band Trailblzer.
-        this.addAbility(new HeroicAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())));
+        this.addAbility(new HeroicAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()))
+                .withRuleTextReplacement(true));
     }
 
     private LagonnaBandTrailblazer(final LagonnaBandTrailblazer card) {

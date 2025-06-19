@@ -41,7 +41,7 @@ public final class MarketbackWalker extends CardImpl {
         ));
 
         // When this creature dies, draw a card for each +1/+1 counter on it.
-        this.addAbility(new DiesSourceTriggeredAbility(new DrawCardSourceControllerEffect(xValue)));
+        this.addAbility(new DiesSourceTriggeredAbility(new DrawCardSourceControllerEffect(xValue).setText("draw a card for each +1/+1 counter on it")));
     }
 
     private MarketbackWalker(final MarketbackWalker card) {

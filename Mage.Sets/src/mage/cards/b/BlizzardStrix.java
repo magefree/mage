@@ -5,7 +5,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.ExileReturnBattlefieldNextEndStepTargetEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -26,7 +25,7 @@ import java.util.UUID;
 public final class BlizzardStrix extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("another target permanent");
-    private static final FilterPermanent filter2 = new FilterPermanent();
+    private static final FilterPermanent filter2 = new FilterPermanent("you control another snow permanent");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -51,12 +50,9 @@ public final class BlizzardStrix extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Blizzard Strix enters the battlefield, if you control another snow permanent, exile target permanent other than Blizzard Strix. Return that card to the battlefield under its owner's control at the beginning of the next end step.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new ExileReturnBattlefieldNextEndStepTargetEffect()), condition,
-                "When {this} enters, if you control another snow permanent, " +
-                        "exile target permanent other than {this}. Return that card to the battlefield " +
-                        "under its owner's control at the beginning of the next end step."
-        );
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileReturnBattlefieldNextEndStepTargetEffect()
+                .setText("exile target permanent other than {this}. Return that card to the " +
+                        "battlefield under its owner's control at the beginning of the next end step")).withInterveningIf(condition);
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

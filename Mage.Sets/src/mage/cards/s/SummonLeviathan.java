@@ -14,7 +14,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SagaChapter;
 import mage.constants.SubType;
-import mage.filter.FilterPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -27,10 +27,11 @@ import java.util.UUID;
  */
 public final class SummonLeviathan extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent();
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
         filter.add(Predicates.not(SubType.KRAKEN.getPredicate()));
+        filter.add(Predicates.not(SubType.LEVIATHAN.getPredicate()));
         filter.add(Predicates.not(SubType.MERFOLK.getPredicate()));
         filter.add(Predicates.not(SubType.OCTOPUS.getPredicate()));
         filter.add(Predicates.not(SubType.SERPENT.getPredicate()));
@@ -102,6 +103,7 @@ class SummonLeviathanTriggeredAbility extends DelayedTriggeredAbility {
                 && (permanent.hasSubtype(SubType.KRAKEN, game)
                 || permanent.hasSubtype(SubType.LEVIATHAN, game)
                 || permanent.hasSubtype(SubType.MERFOLK, game)
-                || permanent.hasSubtype(SubType.OCTOPUS, game));
+                || permanent.hasSubtype(SubType.OCTOPUS, game)
+                || permanent.hasSubtype(SubType.SERPENT, game));
     }
 }

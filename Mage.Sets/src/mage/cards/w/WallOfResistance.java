@@ -2,12 +2,11 @@ package mage.cards.w;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -38,13 +37,10 @@ public final class WallOfResistance extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // At the beginning of each end step, if Wall of Resistance was dealt damage this turn, put a +0/+1 counter on it.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfEndStepTriggeredAbility(
-                        TargetController.ANY, new AddCountersSourceEffect(CounterType.P0P1.createInstance()),
-                        false
-                ), WallOfResistanceCondition.instance, "At the beginning of each end step, " +
-                "if {this} was dealt damage this turn, put a +0/+1 counter on it."
-        ));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(
+                TargetController.ANY, new AddCountersSourceEffect(CounterType.P0P1.createInstance()),
+                false, WallOfResistanceCondition.instance
+        ).withRuleTextReplacement(true));
     }
 
     private WallOfResistance(final WallOfResistance card) {
@@ -64,5 +60,10 @@ enum WallOfResistanceCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = source.getSourcePermanentOrLKI(game);
         return permanent != null && !permanent.getDealtDamageByThisTurn().isEmpty();
+    }
+
+    @Override
+    public String toString() {
+        return "{this} was dealt damage this turn";
     }
 }

@@ -1,12 +1,10 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbility;
+import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.KickedCostCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.KickerAbility;
@@ -14,17 +12,21 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.target.common.TargetArtifactPermanent;
 import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetArtifactPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author FenrisulfrX
  */
 public final class ThornscapeBattlemage extends CardImpl {
 
+    private static final Condition condition = new KickedCostCondition("{R}");
+    private static final Condition condition2 = new KickedCostCondition("{W}");
+
     public ThornscapeBattlemage(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(2);
@@ -36,16 +38,16 @@ public final class ThornscapeBattlemage extends CardImpl {
         this.addAbility(kickerAbility);
 
         // When {this} enters, if it was kicked with its {R} kicker, it deals 2 damage to any target.
-        TriggeredAbility ability1 = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(2, "it"));
-        ability1.addTarget(new TargetAnyTarget());
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability1, new KickedCostCondition("{R}"),
-                "When {this} enters, if it was kicked with its {R} kicker, it deals 2 damage to any target."));
+        Ability ability = new EntersBattlefieldTriggeredAbility(
+                new DamageTargetEffect(2, "it")
+        ).withInterveningIf(condition);
+        ability.addTarget(new TargetAnyTarget());
+        this.addAbility(ability);
 
         // When {this} enters, if it was kicked with its {W} kicker, destroy target artifact.
-        TriggeredAbility ability2 = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect());
-        ability2.addTarget(new TargetArtifactPermanent());
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability2, new KickedCostCondition("{W}"),
-                "When {this} enters, if it was kicked with its {W} kicker, destroy target artifact."));
+        ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect()).withInterveningIf(condition2);
+        ability.addTarget(new TargetArtifactPermanent());
+        this.addAbility(ability);
     }
 
     private ThornscapeBattlemage(final ThornscapeBattlemage card) {

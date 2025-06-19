@@ -2,7 +2,7 @@ package mage.cards.g;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.BattleCryAbility;
 import mage.cards.CardImpl;
@@ -34,10 +34,7 @@ public final class GarbageElementalC extends CardImpl {
         this.addAbility(new BattleCryAbility());
 
         // When Garbage Elemental enters the battlefield, roll two six-sided dice. Create a number of 1/1 red Goblin creature tokens equal to the difference between those results.
-        this.addAbility(new EntersBattlefieldAbility(new GarbageElementalCEffect(),
-                null,
-                "When {this} enters, roll two six-sided dice. Create a number of 1/1 red Goblin creature tokens equal to the difference between those results",
-                null));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new GarbageElementalCEffect()));
 
     }
 

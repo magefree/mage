@@ -1,27 +1,25 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.condition.CompoundCondition;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.CastFromHandSourcePermanentCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.SubType;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
-import mage.game.Game;
 import mage.watchers.common.CastFromHandWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class DeathbringerRegent extends CardImpl {
@@ -31,6 +29,12 @@ public final class DeathbringerRegent extends CardImpl {
     static {
         filter.add(AnotherPredicate.instance);
     }
+
+    private static final Condition condition = new CompoundCondition(
+            "you cast it from your hand and there are five or more other creatures on the battlefield",
+            CastFromHandSourcePermanentCondition.instance,
+            new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 4)
+    );
 
     public DeathbringerRegent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");
@@ -42,11 +46,8 @@ public final class DeathbringerRegent extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Deathbringer Regent enters the battlefield, if you cast it from your hand and there are five or more other creatures on the battlefield, destroy all other creatures.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new DestroyAllEffect(filter), false),
-                new DeathbringerRegentCondition(),
-                "When {this} enters, if you cast it from your hand and there are five or more other creatures on the battlefield, destroy all other creatures."),
-                new CastFromHandWatcher());
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DestroyAllEffect(filter))
+                .withInterveningIf(condition), new CastFromHandWatcher());
     }
 
     private DeathbringerRegent(final DeathbringerRegent card) {
@@ -56,14 +57,5 @@ public final class DeathbringerRegent extends CardImpl {
     @Override
     public DeathbringerRegent copy() {
         return new DeathbringerRegent(this);
-    }
-}
-
-class DeathbringerRegentCondition implements Condition {
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return CastFromHandSourcePermanentCondition.instance.apply(game, source)
-                && game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game).size() >= 6;
     }
 }

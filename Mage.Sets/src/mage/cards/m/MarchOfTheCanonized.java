@@ -1,21 +1,20 @@
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.IntCompareCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ComparisonType;
 import mage.game.Game;
 import mage.game.permanent.token.IxalanVampireToken;
 import mage.game.permanent.token.VampireDemonToken;
+
+import java.util.UUID;
 
 /**
  * @author arcox
@@ -29,13 +28,8 @@ public final class MarchOfTheCanonized extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new IxalanVampireToken(), GetXValue.instance)));
 
         // At the beginning of your upkeep, if your devotion to white and black is seven or greater, create a 4/3 white and black Vampire Demon creature token with flying.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new VampireDemonToken())),
-                new MarchOfTheCanonizedCondition(),
-                "At the beginning of your upkeep, "
-                        + "if your devotion to white and black is seven or greater, "
-                        + "create a 4/3 white and black Vampire Demon creature token with flying."
-        ).addHint(DevotionCount.WB.getHint()));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new VampireDemonToken()))
+                .withInterveningIf(MarchOfTheCanonizedCondition.instance).addHint(DevotionCount.WB.getHint()));
     }
 
     private MarchOfTheCanonized(final MarchOfTheCanonized card) {
@@ -48,14 +42,16 @@ public final class MarchOfTheCanonized extends CardImpl {
     }
 }
 
-class MarchOfTheCanonizedCondition extends IntCompareCondition {
+enum MarchOfTheCanonizedCondition implements Condition {
+    instance;
 
-    MarchOfTheCanonizedCondition() {
-        super(ComparisonType.OR_GREATER, 7);
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return DevotionCount.WB.calculate(game, source, null) >= 7;
     }
 
     @Override
-    protected int getInputValue(Game game, Ability source) {
-        return DevotionCount.WB.calculate(game, source, null);
+    public String toString() {
+        return "your devotion to white and black is seven or greater";
     }
 }

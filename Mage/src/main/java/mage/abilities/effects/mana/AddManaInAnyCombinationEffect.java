@@ -150,7 +150,7 @@ public class AddManaInAnyCombinationEffect extends ManaEffect {
     }
 
     private String setText() {
-        StringBuilder sb = new StringBuilder("Add ");
+        StringBuilder sb = new StringBuilder("add ");
         String amountString = CardUtil.numberToText(amount.toString());
         sb.append(amountString);
         sb.append(" mana in any combination of ");

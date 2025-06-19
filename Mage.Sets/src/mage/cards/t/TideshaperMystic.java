@@ -6,13 +6,11 @@ import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.continuous.BecomesBasicLandTargetEffect;
-import mage.abilities.hint.common.MyTurnHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.target.common.TargetLandPermanent;
 
 import java.util.UUID;
@@ -30,10 +28,10 @@ public final class TideshaperMystic extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {T}: Target land becomes the basic land type of your choice until end of turn. Activate this ability only during your turn.
-        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD,
-                new BecomesBasicLandTargetEffect(Duration.EndOfTurn), new TapSourceCost(), MyTurnCondition.instance);
+        Ability ability = new ActivateIfConditionActivatedAbility(
+                new BecomesBasicLandTargetEffect(Duration.EndOfTurn), new TapSourceCost(), MyTurnCondition.instance
+        );
         ability.addTarget(new TargetLandPermanent());
-        ability.addHint(MyTurnHint.instance);
         this.addAbility(ability);
     }
 

@@ -2,15 +2,14 @@ package mage.cards.l;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.CantBlockAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -44,15 +43,11 @@ public final class LightningPhoenix extends CardImpl {
         this.addAbility(new CantBlockAbility());
 
         // At the beginning of your end step, if an opponent was dealt 3 or more damage this turn, you may pay {R}. If you do, return Lightning Phoenix from your graveyard to the battlefield.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfEndStepTriggeredAbility(
-                        Zone.GRAVEYARD,
-                        TargetController.YOU, new DoIfCostPaid(
-                                new ReturnSourceFromGraveyardToBattlefieldEffect(), new ManaCostsImpl<>("{R}")
-                        ), false, null
-                ), LightningPhoenixCondition.instance, "At the beginning of your end step, " +
-                "if an opponent was dealt 3 or more damage this turn, you may pay {R}. " +
-                "If you do, return {this} from your graveyard to the battlefield."
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(
+                Zone.GRAVEYARD, TargetController.YOU,
+                new DoIfCostPaid(
+                        new ReturnSourceFromGraveyardToBattlefieldEffect(), new ManaCostsImpl<>("{R}")
+                ), false, LightningPhoenixCondition.instance
         ), new LightningPhoenixWatcher());
     }
 
@@ -73,6 +68,11 @@ enum LightningPhoenixCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         LightningPhoenixWatcher watcher = game.getState().getWatcher(LightningPhoenixWatcher.class);
         return watcher != null && watcher.checkDamage(source.getControllerId());
+    }
+
+    @Override
+    public String toString() {
+        return "an opponent was dealt 3 or more damage this turn";
     }
 }
 

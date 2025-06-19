@@ -42,7 +42,7 @@ public final class RevTitheExtractor extends CardImpl {
         );
         ability.addEffect(new ExileFaceDownTopNLibraryYouMayPlayAsLongAsExiledTargetEffect(true, CastManaAdjustment.NONE)
                         .setText(", then look at the top card of that player's library and exile it face down. "
-                                + "You may play that card for as long as it remains exiled"));
+                                + "You may cast that card for as long as it remains exiled"));
         this.addAbility(ability);
     }
 

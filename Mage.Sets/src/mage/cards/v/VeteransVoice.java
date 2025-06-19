@@ -10,7 +10,10 @@ import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -49,7 +52,6 @@ public final class VeteransVoice extends CardImpl {
 
         // Tap enchanted creature: Target creature other than the creature tapped this way gets +2/+1 until end of turn. Activate this ability only if enchanted creature is untapped.
         this.addAbility(new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD,
                 new BoostTargetEffect(2, 1, Duration.EndOfTurn)
                         .setText("target creature other than the creature tapped this way gets +2/+1 until end of turn"),
                 new TapAttachedCost(), condition

@@ -3,7 +3,6 @@ package mage.cards.n;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
 import mage.abilities.condition.common.ControlArtifactAndEnchantmentCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.hint.common.ControlArtifactAndEnchantmentHint;
 import mage.cards.CardImpl;
@@ -30,11 +29,8 @@ public final class NaomiPillarOfOrder extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever Naomi, Pillar of Order enters the battlefield or attacks, if you control an artifact and an enchantment, create a 2/2 white Samurai creature token with vigilance.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldOrAttacksSourceTriggeredAbility(new CreateTokenEffect(new SamuraiToken())),
-                ControlArtifactAndEnchantmentCondition.instance, "Whenever {this} enters or " +
-                "attacks, if you control an artifact and an enchantment, create a 2/2 white Samurai creature token with vigilance."
-        ).addHint(ControlArtifactAndEnchantmentHint.instance));
+        this.addAbility(new EntersBattlefieldOrAttacksSourceTriggeredAbility(new CreateTokenEffect(new SamuraiToken()))
+                .withInterveningIf(ControlArtifactAndEnchantmentCondition.instance).addHint(ControlArtifactAndEnchantmentHint.instance));
     }
 
     private NaomiPillarOfOrder(final NaomiPillarOfOrder card) {

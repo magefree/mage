@@ -20,7 +20,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.filter.predicate.Predicates;
 import mage.target.common.TargetCardInGraveyard;
-import mage.target.targetadjustment.DamagedPlayerControlsTargetAdjuster;
+import mage.target.targetadjustment.ThatPlayerControlsTargetAdjuster;
 
 import java.util.UUID;
 
@@ -54,7 +54,7 @@ public final class DeluxeDragster extends CardImpl {
                 + ThatSpellGraveyardExileReplacementEffect.RULE_A);
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(effect, false, true);
         ability.addTarget(new TargetCardInGraveyard(filterCard));
-        ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster(true));
+        ability.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster(true));
         this.addAbility(ability);
 
         // Crew 2

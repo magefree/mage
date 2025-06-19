@@ -1,12 +1,10 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
 import mage.abilities.keyword.BloodthirstAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -18,14 +16,15 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.watchers.common.BloodthirstWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class SkarrganFirebird extends CardImpl {
 
     public SkarrganFirebird(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
         this.subtype.add(SubType.PHOENIX);
 
         this.power = new MageInt(3);
@@ -33,15 +32,15 @@ public final class SkarrganFirebird extends CardImpl {
 
         // Bloodthirst 3
         this.addAbility(new BloodthirstAbility(3));
+
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+
         // {R}{R}{R}: Return Skarrgan Firebird from your graveyard to your hand. Activate this ability only if an opponent was dealt damage this turn.
-        this.addAbility(new ConditionalActivatedAbility(
-                Zone.GRAVEYARD,
-                new ReturnSourceFromGraveyardToHandEffect(),
-                new ManaCostsImpl<>("{R}{R}{R}"),
-                new OpponentWasDealtDamageCondition(),
-                null));
+        this.addAbility(new ActivateIfConditionActivatedAbility(
+                Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(),
+                new ManaCostsImpl<>("{R}{R}{R}"), OpponentWasDealtDamageCondition.instance
+        ));
     }
 
     private SkarrganFirebird(final SkarrganFirebird card) {
@@ -54,10 +53,8 @@ public final class SkarrganFirebird extends CardImpl {
     }
 }
 
-class OpponentWasDealtDamageCondition implements Condition {
-
-    public OpponentWasDealtDamageCondition() {
-    }
+enum OpponentWasDealtDamageCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
@@ -67,6 +64,6 @@ class OpponentWasDealtDamageCondition implements Condition {
 
     @Override
     public String toString() {
-	return "if an opponent was dealt damage this turn";
+        return "an opponent was dealt damage this turn";
     }
 }

@@ -1,13 +1,10 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -16,22 +13,23 @@ import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class RhoxMeditant extends CardImpl {
-    
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("green permanent");
-    
+
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("you control a green permanent");
+
     static {
         filter.add(new ColorPredicate(ObjectColor.GREEN));
     }
-    
-    private static final String rule = "When {this} enters, if you control a green permanent, draw a card.";
+
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
 
     public RhoxMeditant(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.subtype.add(SubType.RHINO);
         this.subtype.add(SubType.MONK);
 
@@ -39,9 +37,7 @@ public final class RhoxMeditant extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When Rhox Meditant enters the battlefield, if you control a green permanent, draw a card.
-        TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1), false);
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new PermanentsOnTheBattlefieldCondition(filter), rule));
-        
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)).withInterveningIf(condition));
     }
 
     private RhoxMeditant(final RhoxMeditant card) {

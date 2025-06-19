@@ -4,14 +4,12 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.TreasureSpentToCastCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.watchers.common.ManaPaidSourceWatcher;
 
 import java.util.UUID;
 
@@ -29,12 +27,9 @@ public final class HiredHexblade extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Hired Hexblade enters the battlefield, if mana from a Treasure was spent to cast it, you draw a card and you lose 1 life.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)),
-                TreasureSpentToCastCondition.instance, "When {this} enters, " +
-                "if mana from a Treasure was spent to cast it, you draw a card and you lose 1 life."
-        );
-        ability.addEffect(new LoseLifeSourceControllerEffect(1));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1, true))
+                .withInterveningIf(TreasureSpentToCastCondition.instance);
+        ability.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
         this.addAbility(ability);
     }
 

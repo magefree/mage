@@ -1,7 +1,7 @@
 package mage.cards.h;
 
-import mage.MageInt;
 import mage.abilities.StateTriggeredAbility;
+import mage.abilities.condition.common.SourceIsEnchantmentCondition;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -10,7 +10,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 
 import java.util.UUID;
 
@@ -46,9 +46,10 @@ class HiddenPredatorsStateTriggeredAbility extends StateTriggeredAbility {
     }
 
     public HiddenPredatorsStateTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new HiddenPredatorsToken(), null, Duration.Custom));
-        this.withRuleTextReplacement(false);
-        setTriggerPhrase("When an opponent controls a creature with power 4 or greater, if {this} is an enchantment, ");
+        super(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new CreatureToken(4, 4, "4/4 Beast creature", SubType.BEAST), null, Duration.Custom));
+        this.withInterveningIf(SourceIsEnchantmentCondition.instance);
+        this.withRuleTextReplacement(true);
+        this.setTriggerPhrase("When an opponent controls a creature with power 4 or greater, ");
     }
 
     private HiddenPredatorsStateTriggeredAbility(final HiddenPredatorsStateTriggeredAbility ability) {
@@ -63,33 +64,5 @@ class HiddenPredatorsStateTriggeredAbility extends StateTriggeredAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return !game.getBattlefield().getActivePermanents(filter, game.getControllerId(getSourceId()), game).isEmpty();
-    }
-
-    @Override
-    public boolean checkInterveningIfClause(Game game) {
-        if (getSourcePermanentIfItStillExists(game) != null) {
-            return getSourcePermanentIfItStillExists(game).isEnchantment(game);
-        }
-        return false;
-    }
-
-}
-
-class HiddenPredatorsToken extends TokenImpl {
-
-    public HiddenPredatorsToken() {
-        super("Beast", "4/4 Beast creature");
-        cardType.add(CardType.CREATURE);
-        subtype.add(SubType.BEAST);
-        power = new MageInt(4);
-        toughness = new MageInt(4);
-    }
-
-    private HiddenPredatorsToken(final HiddenPredatorsToken token) {
-        super(token);
-    }
-
-    public HiddenPredatorsToken copy() {
-        return new HiddenPredatorsToken(this);
     }
 }

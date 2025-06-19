@@ -1,7 +1,5 @@
-
 package mage.cards.j;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -18,8 +16,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class JoragaInvocation extends CardImpl {
@@ -28,9 +27,9 @@ public final class JoragaInvocation extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{G}{G}");
 
         // Each creature you control gets +3/+3 until end of turn and must be blocked this turn if able.
-        this.getSpellAbility().addEffect(new BoostControlledEffect(3, 3, Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostControlledEffect(3, 3, Duration.EndOfTurn)
+                .setText("each creature you control gets +3/+3 until end of turn"));
         this.getSpellAbility().addEffect(new JoragaInvocationEffect());
-
     }
 
     private JoragaInvocation(final JoragaInvocation card) {

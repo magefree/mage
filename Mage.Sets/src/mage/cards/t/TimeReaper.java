@@ -15,7 +15,7 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.card.FaceDownPredicate;
 import mage.target.common.TargetCardInExile;
-import mage.target.targetadjustment.DamagedPlayerControlsTargetAdjuster;
+import mage.target.targetadjustment.ThatPlayerControlsTargetAdjuster;
 
 import java.util.UUID;
 
@@ -49,7 +49,7 @@ public final class TimeReaper extends CardImpl {
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new PutOnLibraryTargetEffect(false), false, true);
         ability.addEffect(new GainLifeEffect(3).concatBy("If you do,")); //I don't think the move can fail? If there's no target then the trigger won't happen
         ability.addTarget(new TargetCardInExile(filter));
-        ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster(true));
+        ability.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster(true));
         ability.withFlavorWord("Consume Anomaly");
         this.addAbility(ability);
     }

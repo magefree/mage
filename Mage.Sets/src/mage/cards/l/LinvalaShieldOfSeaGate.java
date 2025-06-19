@@ -2,11 +2,9 @@ package mage.cards.l;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.FullPartyCondition;
 import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
@@ -14,6 +12,7 @@ import mage.abilities.hint.common.PartyCountHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HexproofAbility;
 import mage.abilities.keyword.IndestructibleAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -52,13 +51,8 @@ public final class LinvalaShieldOfSeaGate extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // At the beginning of combat on your turn, if you have a full party, choose target nonland permanent an opponent controls. Until your next turn, it can't attack or block, and its activated abilities can't be activated.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfCombatTriggeredAbility(
-                        new LinvalaShieldOfSeaGateRestrictionEffect()
-                ), FullPartyCondition.instance, "At the beginning of combat on your turn, " +
-                "if you have a full party, choose target nonland permanent an opponent controls. " +
-                "Until your next turn, it can't attack or block, and its activated abilities can't be activated."
-        );
+        Ability ability = new BeginningOfCombatTriggeredAbility(new LinvalaShieldOfSeaGateRestrictionEffect())
+                .withInterveningIf(FullPartyCondition.instance);
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability.addHint(PartyCountHint.instance));
 
@@ -80,6 +74,8 @@ class LinvalaShieldOfSeaGateRestrictionEffect extends RestrictionEffect {
 
     LinvalaShieldOfSeaGateRestrictionEffect() {
         super(Duration.UntilYourNextTurn, Outcome.UnboostCreature);
+        staticText = "choose target nonland permanent an opponent controls. Until your next turn, " +
+                "it can't attack or block, and its activated abilities can't be activated";
     }
 
     private LinvalaShieldOfSeaGateRestrictionEffect(final LinvalaShieldOfSeaGateRestrictionEffect effect) {

@@ -5,7 +5,6 @@ import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceMatchesFilterCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -23,7 +22,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class YoungHeroRoleToken extends TokenImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent();
+    private static final FilterPermanent filter = new FilterCreaturePermanent("its toughness is 3 or less");
 
     static {
         filter.add(new ToughnessPredicate(ComparisonType.FEWER_THAN, 4));
@@ -45,10 +44,10 @@ public final class YoungHeroRoleToken extends TokenImpl {
 
         // Enchanted creature has "Whenever this creature attacks, if its toughness is 3 or less, put a +1/+1 counter on it."
         this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(
-                new ConditionalInterveningIfTriggeredAbility(
-                        new AttacksTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())),
-                        condition, "Whenever this creature attacks, if its toughness is 3 or less, put a +1/+1 counter on it."
-                ), AttachmentType.AURA
+                new AttacksTriggeredAbility(
+                        new AddCountersSourceEffect(CounterType.P1P1.createInstance())
+                                .setText("put a +1/+1 counter on it")
+                ).withInterveningIf(condition), AttachmentType.AURA
         )));
     }
 

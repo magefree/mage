@@ -1,38 +1,35 @@
-
 package mage.cards.o;
 
-import mage.MageInt;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
-import mage.abilities.condition.common.SourceMatchesFilterCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.condition.common.SourceIsEnchantmentCondition;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreatureSpell;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 
 import java.util.UUID;
 
 /**
- *
  * @author LoneFox
- *
  */
 public final class OpalCaryatid extends CardImpl {
 
     public OpalCaryatid(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}");
 
         // When an opponent casts a creature spell, if Opal Caryatid is an enchantment, Opal Caryatid becomes a 2/2 Soldier creature.
-        TriggeredAbility ability = new SpellCastOpponentTriggeredAbility(new BecomesCreatureSourceEffect(new OpalCaryatidSoldierToken(), null, Duration.WhileOnBattlefield),
-                new FilterCreatureSpell(), false);
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new SourceMatchesFilterCondition(StaticFilters.FILTER_PERMANENT_ENCHANTMENT),
-                "When an opponent casts a creature spell, if {this} is an enchantment, {this} becomes a 2/2 Soldier creature."));
+        this.addAbility(new SpellCastOpponentTriggeredAbility(new BecomesCreatureSourceEffect(
+                new CreatureToken(
+                        2, 2, "2/2 Soldier creature", SubType.SOLDIER
+                ), null, Duration.WhileOnBattlefield
+        ), StaticFilters.FILTER_SPELL_A_CREATURE, false)
+                .withInterveningIf(SourceIsEnchantmentCondition.instance)
+                .withRuleTextReplacement(true)
+                .setTriggerPhrase("When an opponent casts a creature spell, "));
     }
 
     private OpalCaryatid(final OpalCaryatid card) {
@@ -42,24 +39,5 @@ public final class OpalCaryatid extends CardImpl {
     @Override
     public OpalCaryatid copy() {
         return new OpalCaryatid(this);
-    }
-}
-
-class OpalCaryatidSoldierToken extends TokenImpl {
-
-    public OpalCaryatidSoldierToken() {
-        super("Soldier", "2/2 Soldier creature");
-        cardType.add(CardType.CREATURE);
-        subtype.add(SubType.SOLDIER);
-        power = new MageInt(2);
-        toughness = new MageInt(2);
-    }
-
-    private OpalCaryatidSoldierToken(final OpalCaryatidSoldierToken token) {
-        super(token);
-    }
-
-    public OpalCaryatidSoldierToken copy() {
-        return new OpalCaryatidSoldierToken(this);
     }
 }

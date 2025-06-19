@@ -1,4 +1,3 @@
-
 package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
@@ -10,22 +9,21 @@ import mage.watchers.common.CastSpellLastTurnWatcher;
  * @author nantuko
  */
 public enum TwoOrMoreSpellsWereCastLastTurnCondition implements Condition {
-
-   instance;
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
-        CastSpellLastTurnWatcher watcher = game.getState().getWatcher(CastSpellLastTurnWatcher.class);
-        if(watcher == null){
-            return false;
-        }
-        // if any player cast more than two spells, return true
-        for (Integer count : watcher.getAmountOfSpellsCastOnPrevTurn().values()) {
-            if (count >= 2) {
-                return true;
-            }
-        }
-        // no one cast two or more spells last turn
-        return false;
+        return game
+                .getState()
+                .getWatcher(CastSpellLastTurnWatcher.class)
+                .getAmountOfSpellsCastOnPrevTurn()
+                .values()
+                .stream()
+                .anyMatch(x -> x >= 2);
+    }
+
+    @Override
+    public String toString() {
+        return "a player cast two or more spells last turn";
     }
 }

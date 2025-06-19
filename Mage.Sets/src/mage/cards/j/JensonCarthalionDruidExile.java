@@ -2,6 +2,7 @@ package mage.cards.j;
 
 import mage.MageInt;
 import mage.Mana;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.condition.Condition;
@@ -23,7 +24,6 @@ import mage.game.permanent.token.AngelVigilanceToken;
 import mage.game.stack.Spell;
 import mage.util.CardUtil;
 
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -72,15 +72,12 @@ enum JensonCarthalionDruidExileCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return CardUtil.castStream(
-                source.getEffects()
-                        .stream()
-                        .map(effect -> effect.getValue("spellCast")),
-                Spell.class
-        ).findAny()
-                .filter(Objects::nonNull)
-                .map(spell -> spell.getColor(game).getColorCount())
-                .orElse(0) >= 5;
+        return CardUtil
+                .getEffectValueFromAbility(source, "spellCast", Spell.class)
+                .map(spell -> spell.getColor(game))
+                .map(ObjectColor::getColorCount)
+                .filter(x -> x >= 5)
+                .isPresent();
     }
 
     @Override

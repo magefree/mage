@@ -14,7 +14,7 @@ import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.DamagedPlayerControlsTargetAdjuster;
+import mage.target.targetadjustment.ThatPlayerControlsTargetAdjuster;
 
 import java.util.UUID;
 
@@ -40,7 +40,7 @@ public final class SigilOfSleep extends CardImpl {
         Effect effect = new ReturnToHandTargetEffect();
         ability = new DealsDamageToAPlayerAttachedTriggeredAbility(effect, "enchanted", false, true, false);
         ability.addTarget(new TargetCreaturePermanent(filter));
-        ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
+        ability.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster());
         this.addAbility(ability);
     }
 

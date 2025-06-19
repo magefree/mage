@@ -5,14 +5,11 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.filter.FilterPermanent;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 
@@ -23,13 +20,9 @@ import java.util.UUID;
  */
 public final class MoonlitScavengers extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterArtifactOrEnchantmentPermanent();
-
-    static {
-        filter.add(TargetController.YOU.getControllerPredicate());
-    }
-
-    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(
+            new FilterArtifactOrEnchantmentPermanent("you control an artifact or enchantment"), true
+    );
 
     public MoonlitScavengers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}");
@@ -40,11 +33,7 @@ public final class MoonlitScavengers extends CardImpl {
         this.toughness = new MageInt(5);
 
         // When Moonlit Scavengers enters the battlefield, if you control an artifact or enchantment, return target creature an opponent controls to its owner's hand.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect()), condition,
-                "When {this} enters, if you control an artifact or enchantment, " +
-                        "return target creature an opponent controls to its owner's hand."
-        );
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect()).withInterveningIf(condition);
         ability.addTarget(new TargetOpponentsCreaturePermanent());
         this.addAbility(ability);
     }

@@ -25,7 +25,7 @@ public final class Spellgyre extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
 
         // * Surveil 2, then draw two cards.
-        this.getSpellAbility().addMode(new Mode(new SurveilEffect(2))
+        this.getSpellAbility().addMode(new Mode(new SurveilEffect(2, false))
                 .addEffect(new DrawCardSourceControllerEffect(2).concatBy(", then")));
     }
 

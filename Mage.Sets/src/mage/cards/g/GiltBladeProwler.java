@@ -13,7 +13,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.watchers.common.DiscardedCardWatcher;
 
 import java.util.UUID;
@@ -33,8 +32,8 @@ public final class GiltBladeProwler extends CardImpl {
 
         // {1}, {T}, Pay 1 life: Draw a card. Activate only if you've discarded a card this turn.
         Ability ability = new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1),
-                new GenericManaCost(1), ControllerDiscardedThisTurnCondition.instance
+                new DrawCardSourceControllerEffect(1), new GenericManaCost(1),
+                ControllerDiscardedThisTurnCondition.instance
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new PayLifeCost(1));

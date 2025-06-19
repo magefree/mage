@@ -12,7 +12,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.target.common.TargetCardInGraveyard;
-import mage.target.targetadjustment.DamagedPlayerControlsTargetAdjuster;
+import mage.target.targetadjustment.ThatPlayerControlsTargetAdjuster;
 
 import java.util.UUID;
 
@@ -34,7 +34,7 @@ public final class ZombieCannibal extends CardImpl {
         Effect effect = new ExileTargetEffect(null, "", Zone.GRAVEYARD);
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(effect, true, true);
         ability.addTarget(new TargetCardInGraveyard(filterGraveyardCard));
-        ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster(true));
+        ability.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster(true));
         this.addAbility(ability);
     }
 

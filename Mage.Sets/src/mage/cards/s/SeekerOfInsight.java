@@ -1,8 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
@@ -13,13 +10,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.stack.Spell;
 import mage.watchers.common.SpellsCastWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author anonymous
  */
 public final class SeekerOfInsight extends CardImpl {
@@ -33,12 +29,9 @@ public final class SeekerOfInsight extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {T}: Draw a card, then discard a card. Activate this ability only if you've cast a noncreature spell this turn.
-        this.addAbility(
-                new ActivateIfConditionActivatedAbility(
-                        Zone.BATTLEFIELD,
-                        new DrawDiscardControllerEffect(),
-                        new TapSourceCost(),
-                        new CastNonCreatureSpellCondition()));
+        this.addAbility(new ActivateIfConditionActivatedAbility(
+                new DrawDiscardControllerEffect(), new TapSourceCost(), SeekerOfInsightCondition.instance
+        ));
     }
 
     private SeekerOfInsight(final SeekerOfInsight card) {
@@ -51,22 +44,17 @@ public final class SeekerOfInsight extends CardImpl {
     }
 }
 
-class CastNonCreatureSpellCondition implements Condition {
+enum SeekerOfInsightCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
-        SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
-        if (watcher != null) {
-            List<Spell> spellsCast = watcher.getSpellsCastThisTurn(source.getControllerId());
-            if (spellsCast != null) {
-                for (Spell spell : spellsCast) {
-                    if (!spell.isCreature(game)) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
+        return game
+                .getState()
+                .getWatcher(SpellsCastWatcher.class)
+                .getSpellsCastThisTurn(source.getControllerId())
+                .stream()
+                .anyMatch(spell -> !spell.isCreature(game));
     }
 
     @Override

@@ -16,9 +16,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.targetpointer.FirstTargetPointer;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
@@ -53,7 +51,7 @@ class FabledPassageSearchForLandEffect extends OneShotEffect {
 
     FabledPassageSearchForLandEffect() {
         super(Outcome.PutCardInPlay);
-        staticText = "Search your library for a basic land card, put it onto the battlefield tapped, then shuffle ";
+        staticText = "Search your library for a basic land card, put it onto the battlefield tapped, then shuffle";
     }
 
     private FabledPassageSearchForLandEffect(final FabledPassageSearchForLandEffect effect) {

@@ -1,19 +1,7 @@
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.common.FilterHistoricCard;
-import mage.game.Game;
-import mage.game.events.DamagedBatchForOnePlayerEvent;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.target.common.TargetCardInYourGraveyard;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.OneOrMoreDamagePlayerTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
@@ -21,13 +9,26 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.filter.FilterCard;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.HistoricPredicate;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  * @author balazskristof
  */
 public final class LaylaHassan extends CardImpl {
 
-    private static final FilterHistoricCard filter = new FilterHistoricCard("historic card from your graveyard");
+    private static final FilterCard filter = new FilterCard("historic card from your graveyard");
+    static {
+        filter.add(HistoricPredicate.instance);
+    }
 
     public LaylaHassan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");

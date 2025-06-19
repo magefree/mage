@@ -3,7 +3,6 @@ package mage.cards.t;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.RevealCardsFromLibraryUntilEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
@@ -30,13 +29,11 @@ public final class ThicketElemental extends CardImpl {
         this.addAbility(new KickerAbility("{1}{G}"));
 
         // When Thicket Elemental enters the battlefield, if it was kicked, you may reveal cards from the top of your library until you reveal a creature card. If you do, put that card onto the battlefield and shuffle all other cards revealed this way into your library.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new RevealCardsFromLibraryUntilEffect(
-                        StaticFilters.FILTER_CARD_CREATURE, PutCards.BATTLEFIELD, PutCards.SHUFFLE
-                )), KickedCondition.ONCE, "When {this} enters, if it was kicked, " +
-                "you may reveal cards from the top of your library until you reveal a creature card. If you do, " +
-                "put that card onto the battlefield and shuffle all other cards revealed this way into your library."
-        ));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new RevealCardsFromLibraryUntilEffect(
+                StaticFilters.FILTER_CARD_CREATURE, PutCards.BATTLEFIELD, PutCards.SHUFFLE
+        ).setText("reveal cards from the top of your library until you reveal a creature card. If you do, " +
+                "put that card onto the battlefield and shuffle all other cards revealed this way into your library"), true
+        ).withInterveningIf(KickedCondition.ONCE));
     }
 
     private ThicketElemental(final ThicketElemental card) {

@@ -2,7 +2,6 @@ package mage.client.components;
 
 import mage.cards.decks.Deck;
 import mage.client.util.GUISizeHelper;
-import mage.client.util.gui.GuiDisplayUtil;
 import mage.deck.Commander;
 
 import java.util.ArrayList;
@@ -22,7 +21,7 @@ public class EdhPowerLevelLegalityLabel extends LegalityLabel {
 
     public EdhPowerLevelLegalityLabel() {
         super("EDH Power Level: ?", null);
-        setPreferredSize(DIM_PREFERRED_X3);
+        setPreferredSize(DIM_PREFERRED_3_OF_3);
     }
 
     @Override

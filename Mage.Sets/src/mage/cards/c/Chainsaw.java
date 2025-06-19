@@ -43,7 +43,8 @@ public final class Chainsaw extends CardImpl {
                 StaticFilters.FILTER_PERMANENT_CREATURES, false));
 
         // Equipped creature gets +X/+0, where X is the number of rev counters on Chainsaw.
-        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(xValue, StaticValue.get(0))));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(xValue, StaticValue.get(0))
+                .setText("equipped creature gets +X/+0, where X is the number of rev counters on {this}")));
 
         // Equip {3}
         this.addAbility(new EquipAbility(3, false));

@@ -1,29 +1,32 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.Ability;
 import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.constants.TargetController;
+import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
+import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetpointer.FirstTargetPointer;
+
+import java.util.UUID;
 
 /**
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
 public final class MagusOfTheAbyss extends CardImpl {
+    static FilterPermanent filter = new FilterPermanent("nonartifact creature that player controls of their choice");
 
     public MagusOfTheAbyss(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
@@ -33,7 +36,11 @@ public final class MagusOfTheAbyss extends CardImpl {
         this.toughness = new MageInt(3);
 
         // At the beginning of each player's upkeep, destroy target nonartifact creature that player controls of their choice. It can't be regenerated.
-        this.addAbility(new MagusOfTheAbyssTriggeredAbility());
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER,
+                new DestroyTargetEffect(true), false).withTargetPointerSet(true);
+        ability.addTarget(new TargetPermanent(filter)); // Only used for text generation
+        ability.setTargetAdjuster(MagusOfTheAbyssTargetAdjuster.instance);
+        this.addAbility(ability);
     }
 
     private MagusOfTheAbyss(final MagusOfTheAbyss card) {
@@ -46,45 +53,24 @@ public final class MagusOfTheAbyss extends CardImpl {
     }
 }
 
-class MagusOfTheAbyssTriggeredAbility extends TriggeredAbilityImpl {
-
-    MagusOfTheAbyssTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DestroyTargetEffect(true), false);
+enum MagusOfTheAbyssTargetAdjuster implements TargetAdjuster {
+    instance;
+    private static final FilterPermanent filter
+            = new FilterPermanent("nonartifact creature that player controls of their choice");
+    static {
+        filter.add(Predicates.not(CardType.ARTIFACT.getPredicate()));
+        filter.add(CardType.CREATURE.getPredicate());
     }
-
-    private MagusOfTheAbyssTriggeredAbility(final MagusOfTheAbyssTriggeredAbility ability) {
-        super(ability);
-    }
-
     @Override
-    public MagusOfTheAbyssTriggeredAbility copy() {
-        return new MagusOfTheAbyssTriggeredAbility(this);
-    }
+    public void adjustTargets(Ability ability, Game game) {
+        UUID opponentId = ability.getEffects().get(0).getTargetPointer().getFirst(game, ability);
+        ability.getTargets().clear();
+        ability.getAllEffects().setTargetPointer(new FirstTargetPointer());
 
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Player player = game.getPlayer(event.getPlayerId());
-        if (player != null) {
-            FilterCreaturePermanent filter = new FilterCreaturePermanent("nonartifact creature you control");
-            filter.add(Predicates.not(CardType.ARTIFACT.getPredicate()));
-            filter.add(new ControllerIdPredicate(player.getId()));
-            Target target = new TargetCreaturePermanent(filter);
-            target.setAbilityController(getControllerId());
-            target.setTargetController(player.getId());
-            this.getTargets().clear();
-            this.getTargets().add(target);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "At the beginning of each player's upkeep, destroy target nonartifact creature that player controls of their choice. It can't be regenerated.";
+        FilterPermanent adjustedFilter = filter.copy();
+        adjustedFilter.add(new ControllerIdPredicate(opponentId));
+        Target newTarget = new TargetPermanent(adjustedFilter);
+        newTarget.setTargetController(opponentId);
+        ability.addTarget(newTarget);
     }
 }
