@@ -4,7 +4,6 @@ import java.util.UUID;
 
 import mage.abilities.common.DealsDamageToAPlayerAllTriggeredAbility;
 import mage.abilities.common.RoomAbility;
-import mage.abilities.common.UnlockDoorTriggeredAbility;
 import mage.abilities.common.UnlockThisDoorTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;

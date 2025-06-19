@@ -1,10 +1,9 @@
 package mage.abilities.common;
 
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
-import mage.abilities.condition.common.RoomLeftHalfUnlockedCondition;
-import mage.abilities.condition.common.RoomRightHalfUnlockedCondition;
 import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.effects.common.RoomManaValueEffect;
+import mage.abilities.effects.common.RoomRulesTextEffect;
 import mage.cards.Card;
 import mage.cards.SplitCard;
 import mage.constants.Zone;
@@ -15,8 +14,7 @@ import mage.constants.Zone;
  * based (very loosely) on Saga
  */
 public class RoomAbility extends SimpleStaticAbility {
-
-    public RoomAbility(Card card, Ability leftTriggerAbility, Ability rightTriggerAbility) {
+    public RoomAbility(Card card, Ability leftAbility, Ability rightAbility) {
         super(Zone.ALL, null);
         this.setRuleVisible(true);
         this.setRuleAtTheTop(true);
@@ -25,41 +23,34 @@ public class RoomAbility extends SimpleStaticAbility {
         if (!(card instanceof SplitCard)) {
             throw new IllegalArgumentException("Non split card with room ability " + card.getCardType());
         }
+
         SplitCard roomCard = (SplitCard) card;
+        RoomRulesTextEffect rulesTextEffect = new RoomRulesTextEffect();
 
-        // Room abilities for triggered effects
-        if (leftTriggerAbility != null && leftTriggerAbility instanceof TriggeredAbility) {
-            TriggeredAbility conditionalLeft = (TriggeredAbility) leftTriggerAbility.copy();
-            conditionalLeft.withInterveningIf(RoomLeftHalfUnlockedCondition.instance);
-            card.addAbility(conditionalLeft);
-        }
-
-        if (rightTriggerAbility != null && rightTriggerAbility instanceof TriggeredAbility) {
-            TriggeredAbility conditionalRight = (TriggeredAbility) rightTriggerAbility.copy();
-            conditionalRight.withInterveningIf(RoomRightHalfUnlockedCondition.instance);
-            card.addAbility(conditionalRight);
-        }
-
-        // Add Activated Abilities to unlock halves
-        ManaCosts leftHalfManaCost = null;
-        if (roomCard.getLeftHalfCard() != null && roomCard.getLeftHalfCard().getSpellAbility() != null) {
-            leftHalfManaCost = roomCard.getLeftHalfCard().getSpellAbility().getManaCosts();
-        }
-
-        ManaCosts rightHalfManaCost = null;
-        if (roomCard.getRightHalfCard() != null && roomCard.getRightHalfCard().getSpellAbility() != null) {
-            rightHalfManaCost = roomCard.getRightHalfCard().getSpellAbility().getManaCosts();
-        }
-
-        if (leftHalfManaCost != null) {
+        if (leftAbility != null) {
+            card.addAbility(leftAbility);
+            rulesTextEffect.registerLeftHalfAbility(leftAbility.getId());
+            ManaCosts leftHalfManaCost = null;
+            if (roomCard.getLeftHalfCard() != null && roomCard.getLeftHalfCard().getSpellAbility() != null) {
+                leftHalfManaCost = roomCard.getLeftHalfCard().getSpellAbility().getManaCosts();
+            }
             RoomUnlockAbility leftUnlockAbility = new RoomUnlockAbility(leftHalfManaCost, true);
-            card.addAbility(leftUnlockAbility);
+            card.addAbility(leftUnlockAbility.setRuleAtTheTop(true));
         }
 
-        if (rightHalfManaCost != null) {
+        if (rightAbility != null) {
+            card.addAbility(rightAbility);
+            rulesTextEffect.registerRightHalfAbility(rightAbility.getId());
+            ManaCosts rightHalfManaCost = null;
+            if (roomCard.getRightHalfCard() != null && roomCard.getRightHalfCard().getSpellAbility() != null) {
+                rightHalfManaCost = roomCard.getRightHalfCard().getSpellAbility().getManaCosts();
+            }
             RoomUnlockAbility rightUnlockAbility = new RoomUnlockAbility(rightHalfManaCost, false);
-            card.addAbility(rightUnlockAbility);
+            card.addAbility(rightUnlockAbility.setRuleAtTheTop(true));
         }
+
+        this.addEffect(rulesTextEffect);
+        this.addEffect(new RoomManaValueEffect());
     }
 
     protected RoomAbility(final RoomAbility ability) {
