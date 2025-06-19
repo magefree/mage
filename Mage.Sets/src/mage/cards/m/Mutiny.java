@@ -15,6 +15,7 @@ import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -31,7 +32,6 @@ public final class Mutiny extends CardImpl {
         this.getSpellAbility().addEffect(new MutinyEffect());
         this.getSpellAbility().addTarget(new MutinyFirstTarget(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("another target creature that player controls")));
-
     }
 
     private Mutiny(final Mutiny card) {
@@ -75,7 +75,7 @@ class MutinyEffect extends OneShotEffect {
 
 }
 
-class MutinyFirstTarget extends TargetCreaturePermanent {
+class MutinyFirstTarget extends TargetPermanent {
 
     public MutinyFirstTarget(FilterCreaturePermanent filter) {
         super(1, 1, filter, false);

@@ -1,19 +1,20 @@
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.FightTargetsEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.filter.StaticFilters;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetCreaturePermanentWithDifferentTypes;
+import mage.target.TargetPermanent;
+
+import java.util.Objects;
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class RivalsDuel extends CardImpl {
@@ -22,9 +23,9 @@ public final class RivalsDuel extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}");
 
         // Choose two target creatures that share no creature types. Those creatures fight each other.
-        this.getSpellAbility().addEffect(new RivalsDuelFightTargetsEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanentWithDifferentTypes(2, 2, StaticFilters.FILTER_PERMANENT_CREATURE, false));
-
+        this.getSpellAbility().addEffect(new FightTargetsEffect()
+                .setText("Choose two target creatures that share no creature types. Those creatures fight each other."));
+        this.getSpellAbility().addTarget(new RivalsDuelTarget());
     }
 
     private RivalsDuel(final RivalsDuel card) {
@@ -37,42 +38,35 @@ public final class RivalsDuel extends CardImpl {
     }
 }
 
-class RivalsDuelFightTargetsEffect extends OneShotEffect {
+class RivalsDuelTarget extends TargetPermanent {
 
-    RivalsDuelFightTargetsEffect() {
-        super(Outcome.Damage);
-        staticText = "Choose two target creatures that share no creature types. " +
-                "Those creatures fight each other. <i>(Each deals damage equal to its power to the other.)</i>";
+    private static final FilterPermanent filter = new FilterCreaturePermanent("creatures that share no creature types");
+
+    RivalsDuelTarget() {
+        super(2, 2, filter, false);
     }
 
-    private RivalsDuelFightTargetsEffect(final RivalsDuelFightTargetsEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent creature1 = null;
-        Permanent creature2 = null;
-        for (UUID targetId : getTargetPointer().getTargets(game, source)) {
-            if (creature1 == null) {
-                creature1 = game.getPermanent(targetId);
-            } else {
-                creature2 = game.getPermanent(targetId);
-            }
-        }
-
-        // 20110930 - 701.10
-        if (creature1 != null
-                && creature2 != null) {
-            creature1.damage(creature2.getPower().getValue(), creature2.getId(), source, game, false, true);
-            creature2.damage(creature1.getPower().getValue(), creature1.getId(), source, game, false, true);
-            return true;
-        }
-        return false;
+    private RivalsDuelTarget(final RivalsDuelTarget target) {
+        super(target);
     }
 
     @Override
-    public RivalsDuelFightTargetsEffect copy() {
-        return new RivalsDuelFightTargetsEffect(this);
+    public RivalsDuelTarget copy() {
+        return new RivalsDuelTarget(this);
+    }
+
+    @Override
+    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
+        if (!super.canTarget(controllerId, id, source, game)) {
+            return false;
+        }
+        Permanent creature = game.getPermanent(id);
+        return creature != null
+                && this
+                .getTargets()
+                .stream()
+                .map(game::getPermanent)
+                .filter(Objects::nonNull)
+                .noneMatch(permanent -> permanent.shareCreatureTypes(game, creature));
     }
 }

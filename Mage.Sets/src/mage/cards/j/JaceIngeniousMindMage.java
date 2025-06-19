@@ -1,7 +1,5 @@
-
 package mage.cards.j;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -10,14 +8,15 @@ import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class JaceIngeniousMindMage extends CardImpl {
@@ -38,7 +37,7 @@ public final class JaceIngeniousMindMage extends CardImpl {
 
         // -9: Gain control of up to three target creatures.
         Ability ability = new LoyaltyAbility(new GainControlTargetEffect(Duration.Custom), -9);
-        ability.addTarget(new TargetCreaturePermanent(0, 3, StaticFilters.FILTER_PERMANENT_CREATURES, false));
+        ability.addTarget(new TargetCreaturePermanent(0, 3));
         this.addAbility(ability);
     }
 

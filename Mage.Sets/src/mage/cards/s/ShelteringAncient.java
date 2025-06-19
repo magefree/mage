@@ -11,14 +11,13 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetOpponentsCreaturePermanent;
 
 import java.util.UUID;
 
@@ -52,12 +51,6 @@ public final class ShelteringAncient extends CardImpl {
 
 class ShelteringAncientCost extends CostImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
-
     ShelteringAncientCost() {
         this.text = "Put a +1/+1 counter on a creature an opponent controls";
     }
@@ -70,7 +63,8 @@ class ShelteringAncientCost extends CostImpl {
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
-            Target target = new TargetCreaturePermanent(1, 1, filter, true);
+            Target target = new TargetOpponentsCreaturePermanent();
+            target.withNotTarget(true);
             if (target.choose(Outcome.BoostCreature, controllerId, source.getSourceId(), source, game)) {
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null) {
@@ -85,7 +79,7 @@ class ShelteringAncientCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return game.getBattlefield().contains(filter, source, game, 1);
+        return game.getBattlefield().contains(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE, source, game, 1);
     }
 
     @Override

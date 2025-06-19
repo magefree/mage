@@ -8,8 +8,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
@@ -28,8 +28,8 @@ public final class StruggleForSkemfar extends CardImpl {
                         "<i>(Each deals damage equal to its power to the other.)</i>"
         ));
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(
-                0, 1, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL, false
+        this.getSpellAbility().addTarget(new TargetPermanent(
+                0, 1, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL
         ));
 
         // Foretell {G}

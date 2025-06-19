@@ -1,4 +1,3 @@
-
 package mage.target.common;
 
 import mage.filter.StaticFilters;
@@ -15,7 +14,7 @@ public class TargetCreaturePermanent extends TargetPermanent {
     }
 
     public TargetCreaturePermanent(FilterCreaturePermanent filter) {
-        this(1, 1, filter, false);
+        super(1, 1, filter, false);
     }
 
     public TargetCreaturePermanent(int numTargets) {
@@ -23,11 +22,7 @@ public class TargetCreaturePermanent extends TargetPermanent {
     }
 
     public TargetCreaturePermanent(int minNumTargets, int maxNumTargets) {
-        this(minNumTargets, maxNumTargets, maxNumTargets > 1 ? StaticFilters.FILTER_PERMANENT_CREATURES : StaticFilters.FILTER_PERMANENT_CREATURE, false);
-    }
-
-    public TargetCreaturePermanent(int minNumTargets, int maxNumTargets, FilterCreaturePermanent filter, boolean notTarget) {
-        super(minNumTargets, maxNumTargets, filter, notTarget);
+        super(minNumTargets, maxNumTargets, maxNumTargets > 1 ? StaticFilters.FILTER_PERMANENT_CREATURES : StaticFilters.FILTER_PERMANENT_CREATURE, false);
     }
 
     protected TargetCreaturePermanent(final TargetCreaturePermanent target) {

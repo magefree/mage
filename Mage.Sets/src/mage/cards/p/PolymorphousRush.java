@@ -8,12 +8,12 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
+import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.functions.EmptyCopyApplier;
 
@@ -31,9 +31,8 @@ public final class PolymorphousRush extends CardImpl {
         this.addAbility(new StriveAbility("{1}{U}"));
 
         // Choose a creature on the battlefield. Any number of target creatures you control each become a copy of that creature until end of turn.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, Integer.MAX_VALUE, StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED, false));
         this.getSpellAbility().addEffect(new PolymorphousRushCopyEffect());
-
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE));
     }
 
     private PolymorphousRush(final PolymorphousRush card) {

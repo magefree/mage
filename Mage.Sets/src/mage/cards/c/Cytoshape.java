@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import mage.abilities.Ability;
@@ -14,26 +13,22 @@ import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.util.functions.EmptyCopyApplier;
 
 import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
  */
 public final class Cytoshape extends CardImpl {
-
 
     public Cytoshape(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}{U}");
 
         // Choose a nonlegendary creature on the battlefield. Target creature becomes a copy of that creature until end of turn.
         this.getSpellAbility().addEffect(new CytoshapeEffect());
-
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("target creature that will become a copy");
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent().withChooseHint("to become a copy"));
     }
 
     private Cytoshape(final Cytoshape card) {
@@ -53,9 +48,11 @@ class CytoshapeEffect extends OneShotEffect {
     static {
         filter.add(Predicates.not(SuperType.LEGENDARY.getPredicate()));
     }
+
     CytoshapeEffect() {
         super(Outcome.Copy);
-        this.staticText = "Choose a nonlegendary creature on the battlefield. Target creature becomes a copy of that creature until end of turn.";
+        this.staticText = "Choose a nonlegendary creature on the battlefield. " +
+                "Target creature becomes a copy of that creature until end of turn.";
     }
 
     private CytoshapeEffect(final CytoshapeEffect effect) {
@@ -69,7 +66,7 @@ class CytoshapeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability ability) {
-        Target target = new TargetCreaturePermanent(1, 1, filter, true);
+        Target target = new TargetPermanent(1, 1, filter, true);
         target.choose(Outcome.Copy, ability.getControllerId(), ability, game);
         Permanent copyFrom = game.getPermanent(target.getFirstTarget());
         if (copyFrom != null) {

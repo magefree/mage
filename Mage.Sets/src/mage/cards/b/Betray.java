@@ -10,7 +10,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -18,13 +18,13 @@ import java.util.UUID;
  * @author Merlingilb
  */
 public class Betray extends CardImpl {
+
     public Betray(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}");
 
         //Target creature an opponent controls deals damage to its controller equal to that creature's power.
         this.getSpellAbility().addEffect(new BetrayEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(1, 1,
-                StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE, false));
+        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
     }
 
     private Betray(final Betray card) {
