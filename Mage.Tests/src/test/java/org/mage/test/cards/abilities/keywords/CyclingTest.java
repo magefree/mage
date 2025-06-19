@@ -62,6 +62,24 @@ public class CyclingTest extends CardTestPlayerBase {
     }
 
     /**
+     * Tests that X value is correctly read by the resulting triggered ability
+     */
+    @Test
+    public void cycleSharkTyphoon() {
+        addCard(Zone.HAND, playerA, "Shark Typhoon", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 8);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cycling");
+        setChoice(playerA, "X=6");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+        assertGraveyardCount(playerA, "Shark Typhoon", 1);
+        assertPowerToughness(playerA, "Shark Token", 6, 6);
+        assertTappedCount("Island", true, 8);
+    }
+
+    /**
      * Cycle from graveyard or battlefield should not work.
      */
     @Test
