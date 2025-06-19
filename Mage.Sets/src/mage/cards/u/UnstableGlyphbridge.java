@@ -19,7 +19,7 @@ import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -82,7 +82,7 @@ class UnstableGlyphbridgeEffect extends OneShotEffect {
             FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 2 or less");
             filter.add(new PowerPredicate(ComparisonType.OR_LESS, 2));
             filter.add(new ControllerIdPredicate(playerId));
-            TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
+            TargetPermanent target = new TargetPermanent(filter);
             target.withNotTarget(true);
             target.withChooseHint(player.getName() + " controls");
 

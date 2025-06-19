@@ -20,6 +20,7 @@ import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -52,7 +53,7 @@ public final class LowlandOaf extends CardImpl {
         effect.setText("and gains flying until end of turn.");
         ability.addEffect(effect);
         ability.addEffect(new LowlandOafEffect());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

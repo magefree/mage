@@ -21,6 +21,8 @@ import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
+import static mage.filter.StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL;
+
 /**
  * @author TheElk801
  */
@@ -47,7 +49,7 @@ public final class HuatliDinosaurKnight extends CardImpl {
         // -3: Target Dinosaur you control deals damage equal to its power to target creature you don't control.
         ability = new LoyaltyAbility(new DamageWithPowerFromOneToAnotherTargetEffect(), -3);
         ability.addTarget(new TargetPermanent(filter));
-        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
+        ability.addTarget(new TargetPermanent(FILTER_CREATURE_YOU_DONT_CONTROL));
         this.addAbility(ability);
 
         // -7: Dinosaurs you control get +4/+4 until end of turn.

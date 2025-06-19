@@ -16,6 +16,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.DefendingPlayerControlsSourceAttackingPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -47,7 +48,7 @@ public final class HammerheadCorvette extends CardImpl {
         Ability ability = new AttacksTriggeredAbility(effect1, true,
                 "Whenever {this} attacks, you may uptap target Starship creature defending player controls and have that creature block {this} this turn if able");
         ability.addEffect(effect2);
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

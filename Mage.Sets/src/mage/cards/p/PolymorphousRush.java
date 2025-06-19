@@ -13,6 +13,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.functions.EmptyCopyApplier;
@@ -65,7 +66,7 @@ class PolymorphousRushCopyEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Target target = new TargetCreaturePermanent(new FilterCreaturePermanent(""));
+            Target target = new TargetPermanent(new FilterCreaturePermanent(""));
             target.withNotTarget(true);
             target.withTargetName("a creature on the battlefield (creature to copy)");
             if (target.canChoose(controller.getId(), source, game) && controller.chooseTarget(outcome, target, source, game)) {

@@ -16,6 +16,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.ManaUtil;
@@ -32,13 +33,13 @@ public final class Withdraw extends CardImpl {
 
         // Return target creature to its owner's hand. Then return another target creature to its owner's hand unless its controller pays {1}.
         this.getSpellAbility().addEffect(new WithdrawEffect());
-        Target target = new TargetCreaturePermanent(new FilterCreaturePermanent("creature to return unconditionally"));
+        Target target = new TargetPermanent(new FilterCreaturePermanent("creature to return unconditionally"));
         target.setTargetTag(1);
         this.getSpellAbility().addTarget(target);
 
         FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature to return unless {1} is paid");
         filter.add(new AnotherTargetPredicate(2));
-        target = new TargetCreaturePermanent(filter);
+        target = new TargetPermanent(filter);
         target.setTargetTag(2);
         this.getSpellAbility().addTarget(target);
     }

@@ -20,10 +20,13 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_ANOTHER_TARGET_CREATURE;
 
 /**
  * @author LevelX2
@@ -68,7 +71,7 @@ class CherishedHatchlingTriggeredAbility extends DelayedTriggeredAbility {
 
     private static Effect getEffectToAdd() {
         Ability abilityToAdd = new EntersBattlefieldTriggeredAbility(new FightTargetSourceEffect().setText("you may have it fight another target creature"), true);
-        abilityToAdd.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE));
+        abilityToAdd.addTarget(new TargetPermanent(FILTER_ANOTHER_TARGET_CREATURE));
         return new GainAbilityTargetEffect(abilityToAdd, Duration.EndOfTurn,
                 "it gains \"When this creature enters, you may have it fight another target creature.\"", true);
     }

@@ -51,7 +51,7 @@ public final class Earthlore extends CardImpl {
                 new BoostTargetEffect(1, 2),
                 new TapAttachedCost().setText("Tap enchanted land"), condition
         );
-        ability.addTarget(new TargetCreaturePermanent(new FilterBlockingCreature("blocking creature")));
+        ability.addTarget(new TargetPermanent(new FilterBlockingCreature("blocking creature")));
         this.addAbility(ability);
     }
 

@@ -63,7 +63,7 @@ enum TimeToReflectAdjuster implements TargetAdjuster {
         }
         filter.add(Predicates.or(creaturesThatBlockedOrWereBlockedByAZombie));
         ability.getTargets().clear();
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
     }
 }
 

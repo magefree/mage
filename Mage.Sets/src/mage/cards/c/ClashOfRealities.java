@@ -16,6 +16,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -38,12 +39,12 @@ public final class ClashOfRealities extends CardImpl {
 
         // All Spirits have "When this permanent enters the battlefield, you may have it deal 3 damage to target non-Spirit creature."
         Ability ability1 = new ClashOfRealitiesTriggeredAbility(new DamageTargetEffect(3), "When this permanent enters, ");
-        ability1.addTarget(new TargetCreaturePermanent(filterNotSpirit));
+        ability1.addTarget(new TargetPermanent(filterNotSpirit));
         this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(ability1, Duration.WhileOnBattlefield, filterSpirit, "All Spirits have \"When this permanent enters the battlefield, you may have it deal 3 damage to target non-Spirit creature.\"")));
 
         // Non-Spirit creatures have "When this creature enters the battlefield, you may have it deal 3 damage to target Spirit creature."
         Ability ability2 = new ClashOfRealitiesTriggeredAbility(new DamageTargetEffect(3), "When this creature enters, ");
-        ability2.addTarget(new TargetCreaturePermanent(filterSpirit));
+        ability2.addTarget(new TargetPermanent(filterSpirit));
         this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(ability2, Duration.WhileOnBattlefield, filterNotSpirit, "Non-Spirit creatures have \"When this creature enters the battlefield, you may have it deal 3 damage to target Spirit creature.\"")));
     }
 

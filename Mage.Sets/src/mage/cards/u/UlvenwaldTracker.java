@@ -12,10 +12,13 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.target.Target;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_ANOTHER_CREATURE_TARGET_2;
 
 /**
  * @author North
@@ -36,7 +39,7 @@ public final class UlvenwaldTracker extends CardImpl {
         Target controlledTarget = new TargetControlledCreaturePermanent();
         controlledTarget.setTargetTag(1);
         ability.addTarget(controlledTarget);
-        Target secondTarget = new TargetCreaturePermanent(StaticFilters.FILTER_ANOTHER_CREATURE_TARGET_2);
+        Target secondTarget = new TargetPermanent(FILTER_ANOTHER_CREATURE_TARGET_2);
         secondTarget.setTargetTag(2);
         ability.addTarget(secondTarget);
         this.addAbility(ability);

@@ -31,7 +31,7 @@ public final class Mutiny extends CardImpl {
         // Target creature an opponent controls deals damage equal to its power to another target creature that player controls.
         this.getSpellAbility().addEffect(new MutinyEffect());
         this.getSpellAbility().addTarget(new MutinyFirstTarget(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("another target creature that player controls")));
+        this.getSpellAbility().addTarget(new TargetPermanent(new FilterCreaturePermanent("another target creature that player controls")));
     }
 
     private Mutiny(final Mutiny card) {

@@ -16,6 +16,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.Target;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -69,7 +70,7 @@ class TheAbyssTriggeredAbility extends TriggeredAbilityImpl {
             FilterCreaturePermanent filter = new FilterCreaturePermanent("nonartifact creature you control");
             filter.add(Predicates.not(CardType.ARTIFACT.getPredicate()));
             filter.add(new ControllerIdPredicate(player.getId()));
-            Target target = new TargetCreaturePermanent(filter);
+            Target target = new TargetPermanent(filter);
             target.setAbilityController(getControllerId());
             target.setTargetController(player.getId());
             this.getTargets().clear();

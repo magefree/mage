@@ -19,6 +19,7 @@ import mage.filter.predicate.card.FaceDownPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -47,7 +48,7 @@ public final class AvenSoulgazer extends CardImpl {
         
         // {2}{W}: Look at target face-down creature.
         Ability ability = new SimpleActivatedAbility(new AvenSoulgazerLookFaceDownEffect(), new ManaCostsImpl<>("{2}{W}"));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

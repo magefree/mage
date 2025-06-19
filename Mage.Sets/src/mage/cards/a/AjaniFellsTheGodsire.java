@@ -23,6 +23,8 @@ import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
+import static mage.constants.SagaChapter.CHAPTER_I;
+
 /**
  * @author Susucr
  */
@@ -45,8 +47,8 @@ public final class AjaniFellsTheGodsire extends CardImpl {
 
         // I -- Exile target creature an opponent controls with power 3 or greater.
         sagaAbility.addChapterEffect(
-                this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_I,
-                new ExileTargetEffect(), new TargetCreaturePermanent(filter)
+                this, CHAPTER_I, CHAPTER_I,
+                new ExileTargetEffect(), new TargetPermanent(filter)
         );
 
         // II -- Create a 2/1 white Cat Warrior creature token, then put a vigilance counter on a creature you control.

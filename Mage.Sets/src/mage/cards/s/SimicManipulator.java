@@ -13,6 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.PowerTargetAdjuster;
 
@@ -47,7 +48,7 @@ public final class SimicManipulator extends CardImpl {
 
         // {T}, Remove one or more +1/+1 counters from Simic Manipulator: Gain control of target creature with power less than or equal to the number of +1/+1 counters removed this way.
         Ability ability = new SimpleActivatedAbility(new GainControlTargetEffect(Duration.Custom, true), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         ability.addCost(new RemoveVariableCountersSourceCost(CounterType.P1P1, 1, "Remove one or more +1/+1 counters from {this}"));
         ability.setTargetAdjuster(new PowerTargetAdjuster(GetXValue.instance, ComparisonType.OR_LESS));
         this.addAbility(ability);

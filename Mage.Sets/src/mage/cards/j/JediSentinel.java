@@ -17,6 +17,8 @@ import mage.target.targetpointer.EachTargetPointer;
 
 import java.util.UUID;
 
+import static mage.filter.StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL;
+
 /**
  * @author Styxo
  */
@@ -36,7 +38,7 @@ public final class JediSentinel extends CardImpl {
         Effect effect = new ReturnToHandTargetEffect().setTargetPointer(new EachTargetPointer());
         Ability ability = new EntersBattlefieldTriggeredAbility(effect);
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
-        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
+        ability.addTarget(new TargetPermanent(FILTER_CREATURE_YOU_DONT_CONTROL));
         this.addAbility(ability);
     }
 

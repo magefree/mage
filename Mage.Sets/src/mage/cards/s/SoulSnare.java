@@ -12,6 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureAttackingYou;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -28,7 +29,7 @@ public final class SoulSnare extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new ExileTargetEffect(), new ManaCostsImpl<>("{W}"));
         ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(new FilterCreatureAttackingYou(true)));
+        ability.addTarget(new TargetPermanent(new FilterCreatureAttackingYou(true)));
         this.addAbility(ability);
     }
 

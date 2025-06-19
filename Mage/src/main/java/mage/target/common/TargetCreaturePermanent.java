@@ -1,7 +1,6 @@
 package mage.target.common;
 
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPermanent;
 
 /**
@@ -11,10 +10,6 @@ public class TargetCreaturePermanent extends TargetPermanent {
 
     public TargetCreaturePermanent() {
         this(1);
-    }
-
-    public TargetCreaturePermanent(FilterCreaturePermanent filter) {
-        super(1, 1, filter, false);
     }
 
     public TargetCreaturePermanent(int numTargets) {

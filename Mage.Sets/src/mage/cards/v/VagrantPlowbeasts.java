@@ -14,6 +14,7 @@ import mage.constants.ComparisonType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -38,7 +39,7 @@ public final class VagrantPlowbeasts extends CardImpl {
         SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new RegenerateTargetEffect(),
                 new ManaCostsImpl<>("{1}"));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

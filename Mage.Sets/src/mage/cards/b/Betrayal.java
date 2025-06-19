@@ -16,6 +16,8 @@ import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
+import static mage.filter.StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE;
+
 /**
  * @author LoneFox
  */
@@ -26,7 +28,7 @@ public final class Betrayal extends CardImpl {
         this.subtype.add(SubType.AURA);
 
         // Enchant creature an opponent controls
-        TargetPermanent auraTarget = new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE);
+        TargetPermanent auraTarget = new TargetPermanent(FILTER_OPPONENTS_PERMANENT_CREATURE);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget);

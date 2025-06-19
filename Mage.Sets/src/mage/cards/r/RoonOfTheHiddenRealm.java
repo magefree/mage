@@ -15,9 +15,12 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_ANOTHER_TARGET_CREATURE;
 
 /**
  * @author LevelX2
@@ -39,7 +42,7 @@ public final class RoonOfTheHiddenRealm extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
         // {2}, {tap}: Exile another target creature. Return that card to the battlefield under its owner's control at the beginning of the next end step.
         Ability ability = new SimpleActivatedAbility(new ExileReturnBattlefieldNextEndStepTargetEffect(), new GenericManaCost(2));
-        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE));
+        ability.addTarget(new TargetPermanent(FILTER_ANOTHER_TARGET_CREATURE));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 

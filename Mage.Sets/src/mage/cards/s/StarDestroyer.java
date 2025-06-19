@@ -16,6 +16,7 @@ import mage.filter.common.FilterCreatureOrPlayer;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.permanent.token.TIEFighterToken;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetPermanentOrPlayer;
 
@@ -45,7 +46,7 @@ public final class StarDestroyer extends CardImpl {
 
         // {2}{U}: Tap target artifact creature.
         Ability ability = new SimpleActivatedAbility(new TapTargetEffect(), new ManaCostsImpl<>("{2}{U}"));
-        ability.addTarget(new TargetCreaturePermanent(filter1));
+        ability.addTarget(new TargetPermanent(filter1));
         this.addAbility(ability);
 
         // {2}{B}: Create a 1/1 black Starship artifact creature token with spaceflight named TIE Fighter.

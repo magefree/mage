@@ -2,7 +2,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
@@ -10,24 +9,25 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.ComparisonType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class SkymarkRoc extends CardImpl {
 
     public SkymarkRoc(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{U}");
         this.subtype.add(SubType.BIRD);
 
         this.power = new MageInt(3);
@@ -74,8 +74,7 @@ class SkymarkRocAbility extends TriggeredAbilityImpl {
             filter.add(new ToughnessPredicate(ComparisonType.FEWER_THAN, 3));
 
             this.getTargets().clear();
-            TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
-            this.addTarget(target);
+            this.addTarget(new TargetPermanent(filter));
             return true;
         }
         return false;

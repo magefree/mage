@@ -17,6 +17,7 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CommanderPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -47,7 +48,7 @@ public class ShieldBroker extends CardImpl {
         gainControlEffect.setText("You gain control of that creature for as long as it has a shield counter on it. " +
                 "<i>(If it would be dealt damage or destroyed, remove a shield counter from it instead.)</i>");
         etbAbility.addEffect(gainControlEffect);
-        etbAbility.addTarget(new TargetCreaturePermanent(filter));
+        etbAbility.addTarget(new TargetPermanent(filter));
         this.addAbility(etbAbility);
     }
 
