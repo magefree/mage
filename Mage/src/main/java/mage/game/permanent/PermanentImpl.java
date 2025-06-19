@@ -191,6 +191,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.legendRuleApplies = permanent.legendRuleApplies;
         this.transformCount = permanent.transformCount;
         this.protectorId = permanent.protectorId;
+        this.leftHalfUnlocked = permanent.leftHalfUnlocked;
+        this.rightHalfUnlocked = permanent.rightHalfUnlocked;
+        this.wasUnlockedOnCast = permanent.wasUnlockedOnCast;
 
         this.morphed = permanent.morphed;
         this.disguised = permanent.disguised;
@@ -2142,6 +2145,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
         // Fire specific left door event
         System.out.println("left door unlock");
+        System.out.println(this.getId());
         game.fireEvent(new GameEvent(GameEvent.EventType.UNLOCK_LEFT_DOOR, getId(), source, source.getControllerId()));
 
         // Fire generic door unlock event

@@ -6,24 +6,20 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- * Checks if a Permanents right half is unlocked
- *
- * @author oscscull
+ * Checks if a Permanent's right half is LOCKED (i.e., NOT unlocked).
  */
-public enum RoomRightHalfUnlockedCondition implements Condition {
+public enum RoomRightHalfLockedCondition implements Condition {
     instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
-        // This is needed on etb trigger
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-
         if (permanent == null) {
-            // This is needed on etb resolution
             permanent = game.getPermanent(source.getSourceId());
         }
 
-        return permanent != null && permanent.isRightHalfUnlocked();
+        // Return true if the permanent exists and its right half is NOT unlocked
+        return permanent != null && !permanent.isRightHalfUnlocked();
     }
 
     @Override

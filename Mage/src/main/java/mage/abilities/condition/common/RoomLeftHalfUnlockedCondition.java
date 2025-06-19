@@ -25,4 +25,11 @@ public enum RoomLeftHalfUnlockedCondition implements Condition {
 
         return permanent != null && permanent.isLeftHalfUnlocked();
     }
+
+    @Override
+    public String toString() {
+        // Return an empty string so that the "if (!conditionText.isEmpty())"
+        // check in TriggeredAbilityImpl.getRule() evaluates to false.
+        return "";
+    }
 }
