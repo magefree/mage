@@ -82,8 +82,8 @@ public class VerifyCardDataTest {
 
     private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
-    private static final String FULL_ABILITIES_CHECK_SET_CODES = ""; // check ability text due mtgjson, can use multiple sets like MAT;CMD or * for all
-    private static final boolean CHECK_ONLY_ABILITIES_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
+    private static String FULL_ABILITIES_CHECK_SET_CODES = ""; // check ability text due mtgjson, can use multiple sets like MAT;CMD or * for all
+    private static boolean CHECK_ONLY_ABILITIES_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
     private static final boolean CHECK_COPYABLE_FIELDS = true; // disable for better verify test performance
 
     // for automated local testing support
@@ -2080,7 +2080,7 @@ public class VerifyCardDataTest {
         }
     }
 
-    Pattern targetRegexPattern = Pattern.compile("\\b((?<!(new|the|that|choosing|the copy|each copy|with one or more|could|it) )targets?|^enchant|^(.*— )?equip|backup|modular|partner with|^bestow|soulshift|provoke)\\b(?! (cost|abilit))", Pattern.MULTILINE);
+    Pattern targetRegexPattern = Pattern.compile("\\b((?<!(new|the|that|choosing|the copy|each copy|with one or more|could|it|each|spell) )targets?|^enchant|^(.*— )?equip|backup|modular|partner with|^bestow|soulshift|provoke)\\b(?! (cost|abilit))", Pattern.MULTILINE);
     Pattern recursiveTargetRegexPattern = Pattern.compile("\\b((?<!^|— )when(ever)?|gain|have|has|\\. At the beginning|with|until)\\b(.|—\\n)*targets?\\b", Pattern.MULTILINE);
 
     boolean recursiveTargetObjectCheck(Object obj, int depth) {

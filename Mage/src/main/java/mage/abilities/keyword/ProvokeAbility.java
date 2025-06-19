@@ -10,7 +10,7 @@ import mage.constants.SetTargetPointer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.DamagedPlayerControlsTargetAdjuster;
+import mage.target.targetadjustment.ThatPlayerControlsTargetAdjuster;
 
 import java.util.UUID;
 
@@ -33,7 +33,7 @@ public class ProvokeAbility extends AttacksTriggeredAbility {
         super(new UntapTargetEffect(), true, text, SetTargetPointer.PLAYER);
         this.addEffect(new ProvokeRequirementEffect());
         this.addTarget(new TargetCreaturePermanent());
-        this.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
+        this.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster());
     }
 
     protected ProvokeAbility(final ProvokeAbility ability) {
