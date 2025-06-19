@@ -14,7 +14,9 @@ import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.filter.StaticFilters;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.permanent.TokenPredicate;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -23,6 +25,12 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class TeamPennant extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("creature token");
+
+    static {
+        filter.add(TokenPredicate.TRUE);
+    }
 
     public TeamPennant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
@@ -42,7 +50,7 @@ public final class TeamPennant extends CardImpl {
         // Equip creature token {1}
         this.addAbility(new EquipAbility(
                 Outcome.BoostCreature, new GenericManaCost(1),
-                new TargetPermanent(StaticFilters.FILTER_CREATURE_TOKEN), false
+                new TargetPermanent(filter), false
         ));
 
         // Equip {3}
