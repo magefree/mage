@@ -111,7 +111,7 @@ public abstract class TargetImpl implements Target {
         if (min > 0 && max == Integer.MAX_VALUE) {
             sb.append(CardUtil.numberToText(min));
             sb.append(" or more ");
-        } else if (!targetName.startsWith("X ") && (min != 1 || max != 1)) {
+        } else if (!targetName.startsWith("X ") && !targetName.startsWith("up to ") && (min != 1 || max != 1)) {
             targetName = targetName.replace("another", "other"); //If non-singular, use "other" instead of "another"
 
             if (getUseAnyNumber()) {

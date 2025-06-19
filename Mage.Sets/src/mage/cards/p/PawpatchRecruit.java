@@ -22,6 +22,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 import mage.target.TargetPermanent;
+import mage.target.targetadjustment.DefineByTriggerTargetAdjuster;
 
 import java.util.UUID;
 
@@ -65,6 +66,7 @@ class PawpatchRecruitTriggeredAbility extends TriggeredAbilityImpl {
 
     public PawpatchRecruitTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()), false);
+        this.setTargetAdjuster(DefineByTriggerTargetAdjuster.instance);
     }
 
     private PawpatchRecruitTriggeredAbility(final PawpatchRecruitTriggeredAbility ability) {
