@@ -23,7 +23,7 @@ import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTargets;
 
 import java.util.List;
@@ -61,7 +61,7 @@ public final class SatyaAetherfluxGenius extends CardImpl {
 
         // Whenever Satya, Aetherflux Genius attacks, create a tapped and attacking token that's a copy of up to one other target nontoken creature you control. You get {E}{E}. At the beginning of the next end step, sacrifice that token unless you pay an amount of {E} equal to its mana value.
         Ability ability = new AttacksTriggeredAbility(new SatyaAetherfluxGeniusEffect());
-        ability.addTarget(new TargetControlledCreaturePermanent(0, 1, filter, false));
+        ability.addTarget(new TargetPermanent(0, 1, filter));
         this.addAbility(ability);
     }
 

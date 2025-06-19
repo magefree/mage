@@ -15,7 +15,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.DefendingPlayerControlsAttachedAttackingPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -34,7 +34,7 @@ public final class LothlorienBlade extends CardImpl {
 
     public LothlorienBlade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
-        
+
         this.subtype.add(SubType.EQUIPMENT);
 
         // Whenever equipped creature attacks, it deals damage equal to its power to target creature defending player controls.
@@ -43,7 +43,7 @@ public final class LothlorienBlade extends CardImpl {
         this.addAbility(ability);
 
         // Equip Elf {2}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), new TargetControlledCreaturePermanent(filterElf), false));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), new TargetPermanent(filterElf), false));
 
         // Equip {5}
         this.addAbility(new EquipAbility(5, false));

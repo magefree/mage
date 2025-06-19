@@ -11,7 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.EachTargetPointer;
 
@@ -35,7 +35,7 @@ public final class JediSentinel extends CardImpl {
         // When Jedi Sentinel enters the battlefield, return another target creature you control and target creature you don't control to their owners' hands.
         Effect effect = new ReturnToHandTargetEffect().setTargetPointer(new EachTargetPointer());
         Ability ability = new EntersBattlefieldTriggeredAbility(effect);
-        ability.addTarget(new TargetControlledCreaturePermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
         ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
         this.addAbility(ability);
     }

@@ -1,6 +1,5 @@
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -8,27 +7,28 @@ import mage.abilities.dynamicvalue.common.ControllerGainedLifeCount;
 import mage.abilities.dynamicvalue.common.ControllerLostLifeCount;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInGraveyard;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.SecondTargetPointer;
 import mage.watchers.common.PlayerGainedLifeWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author Grath
  */
 public final class BetorAncestorsVoice extends CardImpl {
@@ -43,7 +43,7 @@ public final class BetorAncestorsVoice extends CardImpl {
 
     public BetorAncestorsVoice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{B}{G}");
-        
+
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
         this.subtype.add(SubType.DRAGON);
@@ -64,7 +64,7 @@ public final class BetorAncestorsVoice extends CardImpl {
                         .setText("put a number of +1/+1 counters on up to one other target creature you " +
                                 "control equal to the amount of life you gained this turn.")
         );
-        ability.addTarget(new TargetControlledCreaturePermanent(0, 1, StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL, false));
+        ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
         ability.addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect().setTargetPointer(new SecondTargetPointer())
                 .setText("Return up to one target creature card with mana value less than or equal to the amount of " +
                         "life you lost this turn from your graveyard to the battlefield."));
