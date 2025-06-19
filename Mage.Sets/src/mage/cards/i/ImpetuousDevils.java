@@ -3,7 +3,6 @@ package mage.cards.i;
 
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.combat.MustBeBlockedByTargetSourceEffect;
@@ -13,10 +12,6 @@ import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.ThatPlayerControlsTargetAdjuster;
 
@@ -57,46 +52,5 @@ public final class ImpetuousDevils extends CardImpl {
     @Override
     public ImpetuousDevils copy() {
         return new ImpetuousDevils(this);
-    }
-}
-
-class ImpetuousDevilsAbility extends TriggeredAbilityImpl {
-
-    public ImpetuousDevilsAbility() {
-        super(Zone.BATTLEFIELD, new MustBeBlockedByTargetSourceEffect(Duration.EndOfCombat), false);
-    }
-
-    private ImpetuousDevilsAbility(final ImpetuousDevilsAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ATTACKER_DECLARED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getSourceId().equals(this.getSourceId())) {
-            FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
-            UUID defenderId = game.getCombat().getDefendingPlayerId(sourceId, game);
-            filter.add(new ControllerIdPredicate(defenderId));
-
-            this.getTargets().clear();
-            TargetCreaturePermanent target = new TargetCreaturePermanent(0, 1, filter, false);
-            this.addTarget(target);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "When {this} attacks, up to one target creature defending player controls blocks it this combat if able.";
-    }
-
-    @Override
-    public ImpetuousDevilsAbility copy() {
-        return new ImpetuousDevilsAbility(this);
     }
 }
