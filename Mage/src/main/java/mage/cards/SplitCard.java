@@ -144,7 +144,7 @@ public abstract class SplitCard extends CardImpl implements CardWithHalves {
             if (ability instanceof SpellAbility
                     && (((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.SPLIT
                             || ((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.SPLIT_AFTERMATH
-                            || ((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.SPLIT_ROOM)) {
+                        )) {
                 continue;
             }
             allAbilites.add(ability);
