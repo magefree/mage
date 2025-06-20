@@ -2404,8 +2404,7 @@ public class VerifyCardDataTest {
             if (rule.contains("&mdash ")) {
                 fail(card, "rules", "card's rules contains restricted test [&mdash ] instead [&mdash;]");
             }
-            if (rule.contains(card.getName()) && !rule.contains("named " + card.getName())
-                    && !rule.contains(card.getName()+" {")) {
+            if (Pattern.compile("(?<!named )"+Pattern.quote(card.getName())+"(?! \\{)").matcher(rule).find()) {
                 fail(card, "rules", "card's pre-formatted rules contains its name unexpectedly");
             }
             if (rule.contains("named {this}")) {
