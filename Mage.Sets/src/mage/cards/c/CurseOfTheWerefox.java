@@ -60,7 +60,7 @@ class CurseOfTheWerefoxEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent target = game.getPermanent(source.getFirstTarget());
-        if (target == null || !RoleType.MONSTER.createToken(target, game, source).getLastAddedTokenIds().isEmpty()) {
+        if (target == null || RoleType.MONSTER.createToken(target, game, source).getLastAddedTokenIds().isEmpty()) {
             return false;
         }
 
