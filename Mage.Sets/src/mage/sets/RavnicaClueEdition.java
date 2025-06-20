@@ -195,7 +195,7 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 255, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 256, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 257, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Portal Manipulator", 40, Rarity.UNCOMMON, mage.cards.p.PortalManipulator.class));
+        cards.add(new SetCardInfo("Portal Manipulator", 40, Rarity.UNCOMMON, mage.cards.p.PortalManipulator.class));
         cards.add(new SetCardInfo("Predatory Impetus", 172, Rarity.COMMON, mage.cards.p.PredatoryImpetus.class));
         cards.add(new SetCardInfo("Psychic Impetus", 92, Rarity.COMMON, mage.cards.p.PsychicImpetus.class));
         cards.add(new SetCardInfo("Pyrewild Shaman", 144, Rarity.UNCOMMON, mage.cards.p.PyrewildShaman.class));
