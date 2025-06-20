@@ -4,8 +4,8 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardAllEffect;
+import mage.abilities.effects.common.GainLifeAllEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
@@ -15,7 +15,6 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 
 import java.util.UUID;
@@ -40,7 +39,7 @@ public final class MathasFiendSeeker extends CardImpl {
         Ability ability = new BeginningOfEndStepTriggeredAbility(
                 new AddCountersTargetEffect(CounterType.BOUNTY.createInstance())
         );
-        ability.addEffect(new MathasFiendSeekerGainAbilityEffect());
+        ability.addEffect(new MathasFiendSeekerEffect());
         ability.addTarget(new TargetOpponentsCreaturePermanent());
         this.addAbility(ability);
     }
@@ -55,26 +54,26 @@ public final class MathasFiendSeeker extends CardImpl {
     }
 }
 
-class MathasFiendSeekerGainAbilityEffect extends ContinuousEffectImpl {
+class MathasFiendSeekerEffect extends ContinuousEffectImpl {
 
     private final Ability ability;
 
-    MathasFiendSeekerGainAbilityEffect() {
+    MathasFiendSeekerEffect() {
         super(Duration.Custom, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         staticText = "For as long as that creature has a bounty counter on it, " +
                 "it has \"When this creature dies, each opponent draws a card and gains 2 life.\"";
         this.ability = new DiesSourceTriggeredAbility(new DrawCardAllEffect(1, TargetController.OPPONENT));
-        this.ability.addEffect(new MathasFiendSeekerGainLifeEffect());
+        this.ability.addEffect(new GainLifeAllEffect(2, TargetController.OPPONENT).setText("and gains 2 life"));
     }
 
-    private MathasFiendSeekerGainAbilityEffect(final MathasFiendSeekerGainAbilityEffect effect) {
+    private MathasFiendSeekerEffect(final MathasFiendSeekerEffect effect) {
         super(effect);
         this.ability = effect.ability.copy();
     }
 
     @Override
-    public MathasFiendSeekerGainAbilityEffect copy() {
-        return new MathasFiendSeekerGainAbilityEffect(this);
+    public MathasFiendSeekerEffect copy() {
+        return new MathasFiendSeekerEffect(this);
     }
 
     @Override
@@ -85,34 +84,6 @@ class MathasFiendSeekerGainAbilityEffect extends ContinuousEffectImpl {
             return false;
         }
         creature.addAbility(ability, source.getSourceId(), game);
-        return true;
-    }
-}
-
-class MathasFiendSeekerGainLifeEffect extends OneShotEffect {
-
-    MathasFiendSeekerGainLifeEffect() {
-        super(Outcome.GainLife);
-        staticText = "and gains 2 life.";
-    }
-
-    private MathasFiendSeekerGainLifeEffect(final MathasFiendSeekerGainLifeEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public MathasFiendSeekerGainLifeEffect copy() {
-        return new MathasFiendSeekerGainLifeEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (UUID playerId : game.getOpponents(source.getControllerId())) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                player.gainLife(2, game, source);
-            }
-        }
         return true;
     }
 }
