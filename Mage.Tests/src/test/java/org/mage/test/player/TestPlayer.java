@@ -543,7 +543,7 @@ public class TestPlayer implements Player {
                         if (currentTarget.getOriginalTarget() instanceof TargetCreaturePermanentAmount) {
                             // supports only to set the complete amount to one target
                             TargetCreaturePermanentAmount targetAmount = (TargetCreaturePermanentAmount) currentTarget.getOriginalTarget();
-                            targetAmount.setAmount(ability, game);
+                            targetAmount.prepareAmount(ability, game);
                             int amount = targetAmount.getAmountRemaining();
                             targetAmount.addTarget(id, amount, ability, game);
                             targetsSet++;
@@ -2101,10 +2101,7 @@ public class TestPlayer implements Player {
         if (target == null) {
             return "Target: null";
         }
-        UUID abilityControllerId = getId();
-        if (target.getTargetController() != null && target.getAbilityController() != null) {
-            abilityControllerId = target.getAbilityController();
-        }
+        UUID abilityControllerId = target.getAffectedAbilityControllerId(this.getId());
         Set<UUID> possibleTargets = target.possibleTargets(abilityControllerId, source, game);
 
         return "Target: selected " + target.getSize() + ", possible " + possibleTargets.size()
@@ -2274,10 +2271,7 @@ public class TestPlayer implements Player {
             return true;
         }
 
-        UUID abilityControllerId = this.getId();
-        if (target.getTargetController() != null && target.getAbilityController() != null) {
-            abilityControllerId = target.getAbilityController();
-        }
+        UUID abilityControllerId = target.getAffectedAbilityControllerId(this.getId());
 
         // TODO: warning, some cards call player.choose methods instead target.choose, see #8254
         //  most use cases - discard and other cost with choice like that method
@@ -2509,11 +2503,7 @@ public class TestPlayer implements Player {
 
     @Override
     public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
-        UUID abilityControllerId = this.getId();
-        if (target.getTargetController() != null && target.getAbilityController() != null) {
-            abilityControllerId = target.getAbilityController();
-        }
-        UUID sourceId = source != null ? source.getSourceId() : null;
+        UUID abilityControllerId = target.getAffectedAbilityControllerId(this.getId());
 
         assertAliasSupportInTargets(true);
         if (!targets.isEmpty()) {
@@ -2817,10 +2807,7 @@ public class TestPlayer implements Player {
 
     @Override
     public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
-        UUID abilityControllerId = this.getId();
-        if (target.getTargetController() != null && target.getAbilityController() != null) {
-            abilityControllerId = target.getAbilityController();
-        }
+        UUID abilityControllerId = target.getAffectedAbilityControllerId(this.getId());
 
         assertAliasSupportInTargets(false);
         if (!targets.isEmpty()) {
@@ -4329,12 +4316,20 @@ public class TestPlayer implements Player {
         // chooseTargetAmount calls for EACH target cycle (e.g. one target per click, see TargetAmount)
         // if use want to stop choosing then chooseTargetAmount must return false (example: up to xxx)
 
+        // nothing to choose
+        target.prepareAmount(source, game);
         if (target.getAmountRemaining() <= 0) {
             return false;
         }
+        if (target.getMaxNumberOfTargets() == 0 && target.getMinNumberOfTargets() == 0) {
+            return false;
+        }
+
+        UUID abilityControllerId = target.getAffectedAbilityControllerId(this.getId());
 
         assertAliasSupportInTargets(true);
-        if (!targets.isEmpty()) {
+
+        while (!targets.isEmpty()) {
 
             // skip targets
             if (targets.get(0).equals(TARGET_SKIP)) {
@@ -4386,7 +4381,11 @@ public class TestPlayer implements Player {
                             // can select
                             target.addTarget(possibleTarget, targetAmount, source, game);
                             targets.remove(0);
-                            return true; // one target per choose call
+                            // allow test player to choose as much as possible until skip command
+                            if (target.getAmountRemaining() <= 0) {
+                                return true;
+                            }
+                            break; // try next target
                         }
                     }
                 }

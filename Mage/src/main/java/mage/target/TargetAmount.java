@@ -16,13 +16,15 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
+ * Distribute value between targets list (damage, counters, etc)
+ *
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class TargetAmount extends TargetImpl {
 
     boolean amountWasSet = false;
     DynamicValue amount;
-    int remainingAmount;
+    int remainingAmount; // before any change to it - make sure you call prepareAmount
 
     protected TargetAmount(DynamicValue amount, int minNumberOfTargets, int maxNumberOfTargets) {
         this.amount = amount;
@@ -46,15 +48,42 @@ public abstract class TargetAmount extends TargetImpl {
 
     @Override
     public boolean isChosen(Game game) {
-        return isChoiceCompleted(game);
+        if (!super.isChosen(game)) {
+            return false;
+        }
+
+        // selection not started
+        if (!amountWasSet) {
+            return false;
+        }
+
+        // distribution
+        if (getMinNumberOfTargets() == 0 && this.targets.isEmpty()) {
+            // allow 0 distribution, e.g. for "up to" targets like Vivien, Arkbow Ranger
+            return true;
+        } else {
+            // need full distribution
+            return remainingAmount == 0;
+        }
     }
 
     @Override
-    public boolean isChoiceCompleted(Game game) {
-        return amountWasSet
-                && (remainingAmount == 0
-                || (getMinNumberOfTargets() < getMaxNumberOfTargets()
-                && getTargets().size() >= getMinNumberOfTargets()));
+    public boolean isChoiceCompleted(UUID abilityControllerId, Ability source, Game game) {
+        // make sure target request called one time minimum (for "up to" targets)
+        // choice is selected after any addTarget call (by test, AI or human players)
+        if (!isChoiceSelected()) {
+            return false;
+        }
+
+        // make sure selected targets are valid
+        if (!isChosen(game)) {
+            return false;
+        }
+
+        // TODO: need auto-choose here? See super
+
+        // all other use cases are fine
+        return true;
     }
 
     @Override
@@ -68,9 +97,14 @@ public abstract class TargetAmount extends TargetImpl {
         this.amount = amount;
     }
 
-    public void setAmount(Ability source, Game game) {
-        remainingAmount = amount.calculate(game, source, null);
-        amountWasSet = true;
+    /**
+     * Prepare new targets for choosing
+     */
+    public void prepareAmount(Ability source, Game game) {
+        if (!amountWasSet) {
+            remainingAmount = amount.calculate(game, source, null);
+            amountWasSet = true;
+        }
     }
 
     public DynamicValue getAmount() {
@@ -83,12 +117,11 @@ public abstract class TargetAmount extends TargetImpl {
 
     @Override
     public void addTarget(UUID id, int amount, Ability source, Game game, boolean skipEvent) {
-        if (!amountWasSet) {
-            setAmount(source, game);
-        }
+        prepareAmount(source, game);
+
         if (amount <= remainingAmount) {
-            super.addTarget(id, amount, source, game, skipEvent);
             remainingAmount -= amount;
+            super.addTarget(id, amount, source, game, skipEvent);
         }
     }
 
@@ -100,37 +133,70 @@ public abstract class TargetAmount extends TargetImpl {
     }
 
     @Override
+    public boolean choose(Outcome outcome, UUID playerId, UUID sourceId, Ability source, Game game) {
+        throw new IllegalArgumentException("Wrong code usage. TargetAmount must be called by player.chooseTarget, not player.choose");
+    }
+
+    @Override
+    @Deprecated // TODO: replace by player.chooseTargetAmount call
     public boolean chooseTarget(Outcome outcome, UUID playerId, Ability source, Game game) {
-        Player player = game.getPlayer(playerId);
-        if (player == null) {
+        Player targetController = getTargetController(game, playerId);
+        if (targetController == null) {
             return false;
         }
 
-        if (!amountWasSet) {
-            setAmount(source, game);
-        }
+        prepareAmount(source, game);
 
-        while (remainingAmount > 0) {
-            chosen = false;
-            if (!player.canRespond()) {
-                chosen = isChosen(game);
+        chosen = false;
+        do {
+            int prevTargetsCount = this.getTargets().size();
+
+            // stop by disconnect
+            if (!targetController.canRespond()) {
                 break;
             }
-            if (!getTargetController(game, playerId).chooseTargetAmount(outcome, this, source, game)) {
-                chosen = isChosen(game);
-                break;
+
+            // MAKE A CHOICE
+            if (isRandom()) {
+                // random choice
+                throw new IllegalArgumentException("Wrong code usage. TargetAmount do not support random choices");
+            } else {
+                // player's choice
+
+                // TargetAmount do not support auto-choice
+
+                // manual
+
+                // stop by cancel/done
+                if (!targetController.chooseTargetAmount(outcome, this, source, game)) {
+                    break;
+                }
+
+                // continue to next target
             }
+
             chosen = isChosen(game);
-        }
 
-        return isChosen(game);
+            // stop by full complete
+            if (isChoiceCompleted(targetController.getId(), source, game)) {
+                break;
+            }
+
+            // stop by nothing to choose (actual for human and done button?)
+            if (prevTargetsCount == this.getTargets().size()) {
+                break;
+            }
+
+            // can select next target
+        } while (true);
+
+        chosen = isChosen(game);
+        return chosen && !this.getTargets().isEmpty();
     }
 
     @Override
     final public List<? extends TargetAmount> getTargetOptions(Ability source, Game game) {
-        if (!amountWasSet) {
-            setAmount(source, game);
-        }
+        prepareAmount(source, game);
 
         List<TargetAmount> options = new ArrayList<>();
         Set<UUID> possibleTargets = possibleTargets(source.getControllerId(), source, game);
@@ -370,9 +436,8 @@ public abstract class TargetAmount extends TargetImpl {
     }
 
     public void setTargetAmount(UUID targetId, int amount, Ability source, Game game) {
-        if (!amountWasSet) {
-            setAmount(source, game);
-        }
+        prepareAmount(source, game);
+
         remainingAmount -= (amount - this.getTargetAmount(targetId));
         this.setTargetAmount(targetId, amount, game);
     }
@@ -395,5 +460,14 @@ public abstract class TargetAmount extends TargetImpl {
         // (such as damage or counters) among one or more targets, the player announces the division.
         // Each of these targets must receive at least one of whatever is being divided.
         return amount instanceof StaticValue && max == ((StaticValue) amount).getValue();
+    }
+
+    @Override
+    public String toString() {
+        if (amountWasSet) {
+            return super.toString() + String.format(" (remain amount %d of %s)", this.remainingAmount, this.amount.toString());
+        } else {
+            return super.toString() + String.format(" (remain not prepared, %s)", this.amount.toString());
+        }
     }
 }

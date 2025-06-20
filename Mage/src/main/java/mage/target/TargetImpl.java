@@ -261,11 +261,6 @@ public abstract class TargetImpl implements Target {
     }
 
     @Override
-    public boolean isChoiceCompleted(Game game) {
-        return isChoiceCompleted(null, null, game);
-    }
-
-    @Override
     public boolean isChoiceCompleted(UUID abilityControllerId, Ability source, Game game) {
         // make sure target request called one time minimum (for "up to" targets)
         // choice is selected after any addTarget call (by test, AI or human players)
@@ -406,10 +401,7 @@ public abstract class TargetImpl implements Target {
             return false;
         }
 
-        UUID abilityControllerId = playerId;
-        if (this.getTargetController() != null && this.getAbilityController() != null) {
-            abilityControllerId = this.getAbilityController();
-        }
+        UUID abilityControllerId = this.getAffectedAbilityControllerId(playerId);
 
         chosen = false;
         do {
@@ -444,7 +436,7 @@ public abstract class TargetImpl implements Target {
         } while (true);
 
         chosen = isChosen(game);
-        return this.getTargets().size() > 0;
+        return chosen && !this.getTargets().isEmpty();
     }
 
     @Override
@@ -454,10 +446,7 @@ public abstract class TargetImpl implements Target {
             return false;
         }
 
-        UUID abilityControllerId = playerId;
-        if (this.getTargetController() != null && this.getAbilityController() != null) {
-            abilityControllerId = this.getAbilityController();
-        }
+        UUID abilityControllerId = this.getAffectedAbilityControllerId(playerId);
 
         List<UUID> randomPossibleTargets = new ArrayList<>(possibleTargets(playerId, source, game));
 
@@ -527,7 +516,7 @@ public abstract class TargetImpl implements Target {
         } while (true);
 
         chosen = isChosen(game);
-        return this.getTargets().size() > 0;
+        return chosen && !this.getTargets().isEmpty();
     }
 
     @Override
@@ -724,6 +713,20 @@ public abstract class TargetImpl implements Target {
     @Override
     public UUID getAbilityController() {
         return abilityController;
+    }
+
+    @Override
+    public UUID getAffectedAbilityControllerId(UUID choosingPlayerId) {
+        // controller hints:
+        // - target.getTargetController(), this.getId(), choosingPlayerId -- player that must makes choices (must be same with this.getId)
+        // - target.getAbilityController(), abilityControllerId -- affected player/controller for all actions/filters
+        // - affected controller can be different from target controller (another player makes choices for controller)
+        // sometimes a target selection can be made from a player that does not control the ability
+        UUID abilityControllerId = choosingPlayerId;
+        if (this.getAbilityController() != null) {
+            abilityControllerId = this.getAbilityController();
+        }
+        return abilityControllerId;
     }
 
     @Override

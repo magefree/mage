@@ -85,13 +85,13 @@ public class PossibleTargetsSelector {
     private void sortByMostValuableTargets() {
         if (isGoodEffect()) {
             // for good effect must choose the biggest objects
-            this.me.sort(comparators.MY_MOST_VALUABLE_FIRST);
-            this.opponents.sort(comparators.MY_MOST_VALUABLE_LAST);
+            this.me.sort(comparators.ANY_MOST_VALUABLE_FIRST);
+            this.opponents.sort(comparators.ANY_MOST_VALUABLE_LAST);
             this.any.sort(comparators.ANY_MOST_VALUABLE_FIRST);
         } else {
             // for bad effect must choose the smallest objects
-            this.me.sort(comparators.MY_MOST_VALUABLE_LAST);
-            this.opponents.sort(comparators.MY_MOST_VALUABLE_FIRST);
+            this.me.sort(comparators.ANY_MOST_VALUABLE_LAST);
+            this.opponents.sort(comparators.ANY_MOST_VALUABLE_FIRST);
             this.any.sort(comparators.ANY_MOST_VALUABLE_LAST);
         }
     }
@@ -180,5 +180,9 @@ public class PossibleTargetsSelector {
             }
         }
         return false;
+    }
+
+    boolean hasAnyTargets() {
+        return !this.any.isEmpty();
     }
 }

@@ -400,7 +400,7 @@ public class ComputerPlayer6 extends ComputerPlayer {
             if (effect != null
                     && stackObject.getControllerId().equals(playerId)) {
                 Target target = effect.getTarget();
-                if (!target.isChoiceCompleted(game)) {
+                if (!target.isChoiceCompleted(getId(), (StackAbility) stackObject, game)) {
                     for (UUID targetId : target.possibleTargets(stackObject.getControllerId(), stackObject.getStackAbility(), game)) {
                         Game sim = game.createSimulationForAI();
                         StackAbility newAbility = (StackAbility) stackObject.copy();
@@ -849,10 +849,12 @@ public class ComputerPlayer6 extends ComputerPlayer {
         if (targets.isEmpty()) {
             return super.chooseTarget(outcome, cards, target, source, game);
         }
-        if (!target.isChoiceCompleted(game)) {
+
+        UUID abilityControllerId = target.getAffectedAbilityControllerId(getId());
+        if (!target.isChoiceCompleted(abilityControllerId, source, game)) {
             for (UUID targetId : targets) {
                 target.addTarget(targetId, source, game);
-                if (target.isChoiceCompleted(game)) {
+                if (target.isChoiceCompleted(abilityControllerId, source, game)) {
                     targets.clear();
                     return true;
                 }
@@ -867,10 +869,12 @@ public class ComputerPlayer6 extends ComputerPlayer {
         if (targets.isEmpty()) {
             return super.choose(outcome, cards, target, source, game);
         }
-        if (!target.isChoiceCompleted(game)) {
+
+        UUID abilityControllerId = target.getAffectedAbilityControllerId(getId());
+        if (!target.isChoiceCompleted(abilityControllerId, source, game)) {
             for (UUID targetId : targets) {
                 target.add(targetId, game);
-                if (target.isChoiceCompleted(game)) {
+                if (target.isChoiceCompleted(abilityControllerId, source, game)) {
                     targets.clear();
                     return true;
                 }

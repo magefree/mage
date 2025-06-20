@@ -41,6 +41,15 @@ class ChooseAmountTestableDialog extends BaseTestableDialog {
         this.targetsMax = targetsMax;
     }
 
+    private ChooseAmountTestableDialog aiMustChoose(boolean resStatus, int targetsCount) {
+        // TODO: AI use default distribution, imrove someday
+        TargetTestableResult res = ((TargetTestableResult) this.getResult());
+        res.aiAssertEnabled = true;
+        res.aiAssertResStatus = resStatus;
+        res.aiAssertTargetsCount = targetsCount;
+        return this;
+    }
+
     @Override
     public void showDialog(Player player, Ability source, Game game, Player opponent) {
         TargetAmount choosingTarget = new TargetAnyTargetAmount(this.distributeAmount, this.targetsMin, this.targetsMax);
@@ -65,53 +74,55 @@ class ChooseAmountTestableDialog extends BaseTestableDialog {
 
         List<Boolean> isYous = Arrays.asList(false, true);
 
+        // current AI will choose 1 target and assign all values to it (except with outcome.Damage)
+        // TODO: add use cases for damage effects?
         for (boolean isYou : isYous) {
             // up to
-            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "up to", 0, 0, 0));
-            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "up to", 0, 0, 1));
-            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "up to", 0, 0, 3));
-            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "up to", 0, 0, 5));
+            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "up to", 0, 0, 0).aiMustChoose(false, 0));
+            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "up to", 0, 0, 1).aiMustChoose(false, 0));
+            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "up to", 0, 0, 3).aiMustChoose(false, 0));
+            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "up to", 0, 0, 5).aiMustChoose(false, 0));
             //
-            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "up to, invalid", 1, 0, 0));
-            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "up to", 1, 0, 1));
-            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "up to", 1, 0, 3));
-            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "up to", 1, 0, 5));
+            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "up to, invalid", 1, 0, 0).aiMustChoose(false, 0));
+            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "up to", 1, 0, 1).aiMustChoose(true, 1));
+            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "up to", 1, 0, 3).aiMustChoose(true, 1));
+            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "up to", 1, 0, 5).aiMustChoose(true, 1));
             //
-            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "up to, invalid", 2, 0, 0));
-            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "up to", 2, 0, 1));
-            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "up to", 2, 0, 3));
-            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "up to", 2, 0, 5));
+            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "up to, invalid", 2, 0, 0).aiMustChoose(false, 0));
+            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "up to", 2, 0, 1).aiMustChoose(true, 1));
+            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "up to", 2, 0, 3).aiMustChoose(true, 1));
+            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "up to", 2, 0, 5).aiMustChoose(true, 1));
             //
-            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "up to, invalid", 3, 0, 0));
-            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "up to", 3, 0, 1));
-            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "up to", 3, 0, 3));
-            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "up to", 3, 0, 5));
+            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "up to, invalid", 3, 0, 0).aiMustChoose(false, 0));
+            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "up to", 3, 0, 1).aiMustChoose(true, 1));
+            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "up to", 3, 0, 3).aiMustChoose(true, 1));
+            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "up to", 3, 0, 5).aiMustChoose(true, 1));
             //
-            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "up to, invalid", 5, 0, 0));
-            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "up to", 5, 0, 1));
-            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "up to", 5, 0, 3));
-            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "up to", 5, 0, 5));
+            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "up to, invalid", 5, 0, 0).aiMustChoose(false, 0));
+            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "up to", 5, 0, 1).aiMustChoose(true, 1));
+            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "up to", 5, 0, 3).aiMustChoose(true, 1));
+            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "up to", 5, 0, 5).aiMustChoose(true, 1));
 
             // need target
-            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "need", 0, 1, 1));
-            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "need", 0, 1, 3));
-            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "need", 0, 1, 5));
+            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "need", 0, 1, 1).aiMustChoose(false, 0));
+            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "need", 0, 1, 3).aiMustChoose(false, 0));
+            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "need", 0, 1, 5).aiMustChoose(false, 0));
             //
-            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "need", 1, 1, 1));
-            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "need", 1, 1, 3));
-            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "need", 1, 1, 5));
+            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "need", 1, 1, 1).aiMustChoose(true, 1));
+            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "need", 1, 1, 3).aiMustChoose(true, 1));
+            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "need", 1, 1, 5).aiMustChoose(true, 1));
             //
-            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "need", 2, 1, 1));
-            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "need", 2, 1, 3));
-            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "need", 2, 1, 5));
+            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "need", 2, 1, 1).aiMustChoose(true, 1));
+            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "need", 2, 1, 3).aiMustChoose(true, 1));
+            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "need", 2, 1, 5).aiMustChoose(true, 1));
             //
-            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "need", 3, 1, 1));
-            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "need", 3, 1, 3));
-            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "need", 3, 1, 5));
+            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "need", 3, 1, 1).aiMustChoose(true, 1));
+            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "need", 3, 1, 3).aiMustChoose(true, 1));
+            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "need", 3, 1, 5).aiMustChoose(true, 1));
             //
-            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "need", 5, 1, 1));
-            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "need", 5, 1, 3));
-            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "need", 5, 1, 5));
+            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "need", 5, 1, 1).aiMustChoose(true, 1));
+            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "need", 5, 1, 3).aiMustChoose(true, 1));
+            runner.registerDialog(new ChooseAmountTestableDialog(isYou, "need", 5, 1, 5).aiMustChoose(true, 1));
         }
     }
 }

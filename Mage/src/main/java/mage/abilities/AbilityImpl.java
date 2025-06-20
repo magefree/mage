@@ -1226,10 +1226,7 @@ public abstract class AbilityImpl implements Ability {
         for (Mode mode : modes.values()) {
             boolean validTargets = true;
             for (Target target : mode.getTargets()) {
-                UUID abilityControllerId = controllerId;
-                if (target.getTargetController() != null) {
-                    abilityControllerId = target.getTargetController();
-                }
+                UUID abilityControllerId = target.getAffectedAbilityControllerId(controllerId);
                 if (!target.canChoose(abilityControllerId, ability, game)) {
                     validTargets = false;
                     break;

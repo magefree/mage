@@ -20,9 +20,7 @@ import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.constants.*;
-import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureForCombatBlock;
 import mage.filter.common.FilterLandCard;
 import mage.filter.common.FilterNonlandCard;
@@ -158,16 +156,7 @@ public class ComputerPlayer extends PlayerImpl {
             return false;
         }
 
-        // controller hints:
-        // - target.getTargetController(), this.getId() -- player that must makes choices (must be same with this.getId)
-        // - target.getAbilityController(), abilityControllerId -- affected player/controller for all actions/filters
-        // - affected controller can be different from target controller (another player makes choices for controller)
-        // sometimes a target selection can be made from a player that does not control the ability
-        UUID abilityControllerId = playerId;
-        if (target.getTargetController() != null
-                && target.getAbilityController() != null) {
-            abilityControllerId = target.getAbilityController();
-        }
+        UUID abilityControllerId = target.getAffectedAbilityControllerId(getId());
 
         // nothing to choose, e.g. X=0
         if (target.isChoiceCompleted(abilityControllerId, source, game)) {
@@ -175,13 +164,11 @@ public class ComputerPlayer extends PlayerImpl {
         }
 
         // default logic for any targets
-        boolean isAddedSomething = false;
         PossibleTargetsSelector possibleTargetsSelector = new PossibleTargetsSelector(outcome, target, abilityControllerId, source, game);
         possibleTargetsSelector.findNewTargets(fromCards);
         // good targets -- choose as much as possible
         for (MageItem item : possibleTargetsSelector.getGoodTargets()) {
             target.add(item.getId(), game);
-            isAddedSomething = true;
             if (target.isChoiceCompleted(abilityControllerId, source, game)) {
                 return true;
             }
@@ -192,9 +179,9 @@ public class ComputerPlayer extends PlayerImpl {
                 break;
             }
             target.add(item.getId(), game);
-            isAddedSomething = true;
         }
-        return isAddedSomething;
+
+        return target.isChosen(game) && !target.getTargets().isEmpty();
     }
 
     /**
@@ -273,147 +260,154 @@ public class ComputerPlayer extends PlayerImpl {
 
     @Override
     public boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Ability source, Game game) {
-        // TODO: make same code for chooseTarget (without filter and target type dependence)
 
+        // nothing to choose, e.g. X=0
+        target.prepareAmount(source, game);
         if (target.getAmountRemaining() <= 0) {
             return false;
         }
-
-        UUID sourceId = source != null ? source.getSourceId() : null;
-
-        // sometimes a target selection can be made from a player that does not control the ability
-        UUID abilityControllerId = playerId;
-        if (target.getTargetController() != null
-                && target.getAbilityController() != null) {
-            abilityControllerId = target.getAbilityController();
-        }
-
-        // process multiple opponents by random
-        List<UUID> opponents = new ArrayList<>(game.getOpponents(getId(), true));
-        Collections.shuffle(opponents);
-
-        List<Permanent> targets;
-
-        // ONE KILL PRIORITY: player -> planeswalker -> creature
-        if (outcome == Outcome.Damage) {
-            // player kill
-            for (UUID opponentId : opponents) {
-                Player opponent = game.getPlayer(opponentId);
-                if (opponent != null
-                        && target.canTarget(abilityControllerId, opponentId, source, game)
-                        && opponent.getLife() <= target.getAmountRemaining()) {
-                    return tryAddTarget(target, opponentId, opponent.getLife(), source, game);
-                }
-            }
-
-            // permanents kill
-            for (UUID opponentId : opponents) {
-                targets = threats(opponentId, source, StaticFilters.FILTER_PERMANENT_CREATURE_OR_PLANESWALKER_A, game, target.getTargets());
-
-                // planeswalker kill
-                for (Permanent permanent : targets) {
-                    if (permanent.isPlaneswalker(game) && target.canTarget(abilityControllerId, permanent.getId(), source, game)) {
-                        int loy = permanent.getCounters(game).getCount(CounterType.LOYALTY);
-                        if (loy <= target.getAmountRemaining()) {
-                            return tryAddTarget(target, permanent.getId(), loy, source, game);
-                        }
-                    }
-                }
-
-                // creature kill
-                for (Permanent permanent : targets) {
-                    if (permanent.isCreature(game) && target.canTarget(abilityControllerId, permanent.getId(), source, game)) {
-                        if (permanent.getToughness().getValue() <= target.getAmountRemaining()) {
-                            return tryAddTarget(target, permanent.getId(), permanent.getToughness().getValue(), source, game);
-                        }
-                    }
-                }
-            }
-        }
-
-        // NORMAL PRIORITY: planeswalker -> player -> creature
-        // own permanents will be checked multiple times... that's ok
-        for (UUID opponentId : opponents) {
-            if (outcome.isGood()) {
-                targets = threats(getId(), source, StaticFilters.FILTER_PERMANENT, game, target.getTargets());
-            } else {
-                targets = threats(opponentId, source, StaticFilters.FILTER_PERMANENT, game, target.getTargets());
-            }
-
-            // planeswalkers
-            for (Permanent permanent : targets) {
-                if (permanent.isPlaneswalker(game) && target.canTarget(abilityControllerId, permanent.getId(), source, game)) {
-                    return tryAddTarget(target, permanent.getId(), target.getAmountRemaining(), source, game);
-                }
-            }
-
-            // players
-            if (outcome.isGood() && target.canTarget(abilityControllerId, getId(), source, game)) {
-                return tryAddTarget(target, getId(), target.getAmountRemaining(), source, game);
-            }
-            if (!outcome.isGood() && target.canTarget(abilityControllerId, opponentId, source, game)) {
-                return tryAddTarget(target, opponentId, target.getAmountRemaining(), source, game);
-            }
-
-            // creature
-            for (Permanent permanent : targets) {
-                if (permanent.isCreature(game) && target.canTarget(abilityControllerId, permanent.getId(), source, game)) {
-                    return tryAddTarget(target, permanent.getId(), target.getAmountRemaining(), source, game);
-                }
-            }
-        }
-
-        // BAD PRIORITY, e.g. need bad target on yourself or good target on opponent
-        // priority: creature (non killable, killable) -> planeswalker -> player
-        if (!target.isRequired(sourceId, game)) {
+        if (target.getMaxNumberOfTargets() == 0 && target.getMinNumberOfTargets() == 0) {
             return false;
         }
-        for (UUID opponentId : opponents) {
-            if (!outcome.isGood()) {
-                // bad on yourself, uses the weakest targets
-                targets = threats(getId(), source, StaticFilters.FILTER_PERMANENT, game, target.getTargets(), false);
-            } else {
-                targets = threats(opponentId, source, StaticFilters.FILTER_PERMANENT, game, target.getTargets(), false);
-            }
 
-            // creatures - non killable (TODO: add extra skill checks like indestructible)
-            for (Permanent permanent : targets) {
-                if (permanent.isCreature(game) && target.canTarget(abilityControllerId, permanent.getId(), source, game)) {
-                    int safeDamage = Math.min(permanent.getToughness().getValue() - 1, target.getAmountRemaining());
-                    if (safeDamage > 0) {
-                        return tryAddTarget(target, permanent.getId(), safeDamage, source, game);
+        UUID abilityControllerId = target.getAffectedAbilityControllerId(getId());
+
+        // nothing to choose, e.g. X=0
+        if (target.isChoiceCompleted(abilityControllerId, source, game)) {
+            return false;
+        }
+
+        PossibleTargetsSelector possibleTargetsSelector = new PossibleTargetsSelector(outcome, target, abilityControllerId, source, game);
+        possibleTargetsSelector.findNewTargets(null);
+
+        // nothing to choose, e.g. no valid targets
+        if (!possibleTargetsSelector.hasAnyTargets()) {
+            return false;
+        }
+
+        // KILL PRIORITY
+        if (outcome == Outcome.Damage) {
+            // opponent first
+            for (MageItem item : possibleTargetsSelector.getGoodTargets()) {
+                if (target.getAmountRemaining() <= 0) {
+                    break;
+                }
+                if (target.contains(item.getId()) || !(item instanceof Player)) {
+                    continue;
+                }
+                int leftLife = PossibleTargetsComparator.getLifeForDamage(item, game);
+                if (leftLife > 0 && leftLife <= target.getAmountRemaining()) {
+                    target.addTarget(item.getId(), leftLife, source, game);
+                    if (target.isChoiceCompleted(abilityControllerId, source, game)) {
+                        return true;
                     }
                 }
             }
 
-            // creatures - all
-            for (Permanent permanent : targets) {
-                if (permanent.isCreature(game) && target.canTarget(abilityControllerId, permanent.getId(), source, game)) {
-                    return tryAddTarget(target, permanent.getId(), target.getAmountRemaining(), source, game);
+            // opponent's creatures second
+            for (MageItem item : possibleTargetsSelector.getGoodTargets()) {
+                if (target.getAmountRemaining() <= 0) {
+                    break;
+                }
+                if (target.contains(item.getId()) || (item instanceof Player)) {
+                    continue;
+                }
+                int leftLife = PossibleTargetsComparator.getLifeForDamage(item, game);
+                if (leftLife > 0 && leftLife <= target.getAmountRemaining()) {
+                    target.addTarget(item.getId(), leftLife, source, game);
+                    if (target.isChoiceCompleted(abilityControllerId, source, game)) {
+                        return true;
+                    }
                 }
             }
 
-            // planeswalkers
-            for (Permanent permanent : targets) {
-                if (permanent.isPlaneswalker(game) && target.canTarget(abilityControllerId, permanent.getId(), source, game)) {
-                    return tryAddTarget(target, permanent.getId(), target.getAmountRemaining(), source, game);
+            // opponent's any
+            for (MageItem item : possibleTargetsSelector.getGoodTargets()) {
+                if (target.getAmountRemaining() <= 0) {
+                    break;
+                }
+                if (target.contains(item.getId())) {
+                    continue;
+                }
+                target.addTarget(item.getId(), target.getAmountRemaining(), source, game);
+                if (target.isChoiceCompleted(abilityControllerId, source, game)) {
+                    return true;
                 }
             }
+
+            // own - non-killable
+            for (MageItem item : possibleTargetsSelector.getBadTargets()) {
+                if (target.getAmountRemaining() <= 0) {
+                    break;
+                }
+                if (target.contains(item.getId())) {
+                    continue;
+                }
+                // stop as fast as possible on bad outcome
+                if (target.isChosen(game)) {
+                    return !target.getTargets().isEmpty();
+                }
+                int leftLife = PossibleTargetsComparator.getLifeForDamage(item, game);
+                if (leftLife > 1) {
+                    target.addTarget(item.getId(), Math.min(leftLife - 1, target.getAmountRemaining()), source, game);
+                    if (target.isChoiceCompleted(abilityControllerId, source, game)) {
+                        return true;
+                    }
+                }
+            }
+
+            // own - any
+            for (MageItem item : possibleTargetsSelector.getBadTargets()) {
+                if (target.getAmountRemaining() <= 0) {
+                    break;
+                }
+                if (target.contains(item.getId())) {
+                    continue;
+                }
+                // stop as fast as possible on bad outcome
+                if (target.isChosen(game)) {
+                    return !target.getTargets().isEmpty();
+                }
+                target.addTarget(item.getId(), target.getAmountRemaining(), source, game);
+                if (target.isChoiceCompleted(abilityControllerId, source, game)) {
+                    return true;
+                }
+            }
+
+            return target.isChosen(game);
         }
-        // players
-        for (UUID opponentId : opponents) {
-            if (target.canTarget(abilityControllerId, getId(), source, game)) {
-                // on itself
-                return tryAddTarget(target, getId(), target.getAmountRemaining(), source, game);
-            } else if (target.canTarget(abilityControllerId, opponentId, source, game)) {
-                // on opponent
-                return tryAddTarget(target, opponentId, target.getAmountRemaining(), source, game);
+
+        // non-damage effect like counters - give all to first valid item
+        for (MageItem item : possibleTargetsSelector.getGoodTargets()) {
+            if (target.getAmountRemaining() <= 0) {
+                break;
+            }
+            if (target.contains(item.getId())) {
+                continue;
+            }
+            target.addTarget(item.getId(), target.getAmountRemaining(), source, game);
+            if (target.isChoiceCompleted(abilityControllerId, source, game)) {
+                return true;
+            }
+        }
+        for (MageItem item : possibleTargetsSelector.getBadTargets()) {
+            if (target.getAmountRemaining() <= 0) {
+                break;
+            }
+            if (target.contains(item.getId())) {
+                continue;
+            }
+            // stop as fast as possible on bad outcome
+            if (target.isChosen(game)) {
+                return !target.getTargets().isEmpty();
+            }
+            target.addTarget(item.getId(), target.getAmountRemaining(), source, game);
+            if (target.isChoiceCompleted(abilityControllerId, source, game)) {
+                return true;
             }
         }
 
-        // it's ok on no targets available
-        log.warn("No proper AI target handling or can't find permanents/cards to target: " + target.getClass().getName());
-        return false;
+        return target.isChosen(game) && !target.getTargets().isEmpty();
     }
 
     @Override
@@ -1451,9 +1445,9 @@ public class ComputerPlayer extends PlayerImpl {
         }
 
         // sometimes a target selection can be made from a player that does not control the ability
-        UUID abilityControllerId = playerId;
-        if (target != null && target.getAbilityController() != null) {
-            abilityControllerId = target.getAbilityController();
+        UUID abilityControllerId = this.getId();
+        if (target != null) {
+            abilityControllerId = target.getAffectedAbilityControllerId(this.getId());
         }
 
         Card bestCard = null;
@@ -1490,9 +1484,9 @@ public class ComputerPlayer extends PlayerImpl {
         }
 
         // sometimes a target selection can be made from a player that does not control the ability
-        UUID abilityControllerId = playerId;
-        if (target != null && target.getAbilityController() != null) {
-            abilityControllerId = target.getAbilityController();
+        UUID abilityControllerId = this.getId();
+        if (target != null) {
+            abilityControllerId = target.getAffectedAbilityControllerId(this.getId());
         }
 
         Card worstCard = null;

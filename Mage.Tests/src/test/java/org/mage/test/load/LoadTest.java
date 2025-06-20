@@ -918,12 +918,17 @@ public class LoadTest {
         public int getTotalEffectsCount() {
             return finalGameView == null ? 0 : this.finalGameView.getTotalEffectsCount();
         }
+
+        public int getGameCycle() {
+            return finalGameView == null ? 0 : this.finalGameView.getGameCycle();
+        }
     }
 
     private static class LoadTestGameResultsList extends HashMap<Integer, LoadTestGameResult> {
 
-        private static final String tableFormatHeader = "|%-10s|%-15s|%-20s|%-10s|%-10s|%-10s|%-10s|%-10s|%-15s|%-15s|%-10s|%n";
-        private static final String tableFormatData = "|%-10s|%15s|%20s|%10s|%10s|%10s|%10s|%10s|%15s|%15s|%10s|%n";
+        // index, name, random sid, game cycle, errors, effects, turn, life p1, life p2, creatures p1, creatures p2, =time, sec, ~time, sec
+        private static final String tableFormatHeader = "|%-10s|%-15s|%-20s|%-10s|%-10s|%-10s|%-10s|%-10s|%-10s|%-15s|%-15s|%-15s|%-15s|%n";
+        private static final String tableFormatData = "|%-10s|%15s|%20s|%10s|%10s|%10s|%10s|%10s|%10s|%15s|%15s|%15s|%15s|%n";
 
         public LoadTestGameResult createGame(int index, String name, long randomSeed) {
             if (this.containsKey(index)) {
@@ -939,6 +944,7 @@ public class LoadTest {
                     "index",
                     "name",
                     "random sid",
+                    "game cycles",
                     "errors",
                     "effects",
                     "turn",
@@ -946,8 +952,8 @@ public class LoadTest {
                     "life p2",
                     "creatures p1",
                     "creatures p2",
-                    "time, sec",
-                    "time per turn, sec"
+                    "=time, sec",
+                    "~time, sec"
             );
             System.out.printf(tableFormatHeader, data.toArray());
         }
@@ -961,6 +967,7 @@ public class LoadTest {
                     String.valueOf(gameResult.index), //"index",
                     gameResult.name, //"name",
                     String.valueOf(gameResult.randomSeed), // "random sid",
+                    String.valueOf(gameResult.getGameCycle()), // "game cycles",
                     String.valueOf(gameResult.getTotalErrorsCount()), // "errors",
                     String.valueOf(gameResult.getTotalEffectsCount()), // "effects",
                     gameResult.getTurnInfo(), //"turn",
@@ -979,21 +986,26 @@ public class LoadTest {
                     "TOTAL/AVG", //"index",
                     String.valueOf(this.size()), //"name",
                     "total, secs: " + String.format("%.3f", (float) this.getTotalDurationMs() / 1000), // "random sid",
-                    String.valueOf(this.getTotalErrorsCount()), // errors
-                    String.valueOf(this.getAvgEffectsCount()), // effects
-                    String.valueOf(this.getAvgTurn()), // turn
-                    String.valueOf(this.getAvgLife1()), // life p1
-                    String.valueOf(this.getAvgLife2()), // life p2
-                    String.valueOf(this.getAvgCreaturesCount1()), // creatures p1
-                    String.valueOf(this.getAvgCreaturesCount2()), // creatures p2
-                    String.valueOf(String.format("%.3f", (float) this.getAvgDurationMs() / 1000)), // time, sec
-                    String.valueOf(String.format("%.3f", (float) this.getAvgDurationPerTurnMs() / 1000)) // time per turn, sec
+                    "~" + this.getAvgGameCycle(), // game cycles
+                    "=" + this.getTotalErrorsCount(), // errors
+                    "~" + this.getAvgEffectsCount(), // effects
+                    "~" + this.getAvgTurn(), // turn
+                    "~" + this.getAvgLife1(), // life p1
+                    "~" + this.getAvgLife2(), // life p2
+                    "~" + this.getAvgCreaturesCount1(), // creatures p1
+                    "~" + this.getAvgCreaturesCount2(), // creatures p2
+                    "~" + String.format("%.3f", (float) this.getAvgDurationMs() / 1000), // time, sec
+                    "~" + String.format("%.3f", (float) this.getAvgDurationPerTurnMs() / 1000) // time per turn, sec
             );
             System.out.printf(tableFormatData, data.toArray());
         }
 
         private int getTotalErrorsCount() {
             return this.values().stream().mapToInt(LoadTestGameResult::getTotalErrorsCount).sum();
+        }
+
+        private int getAvgGameCycle() {
+            return this.size() == 0 ? 0 : this.values().stream().mapToInt(LoadTestGameResult::getGameCycle).sum() / this.size();
         }
 
         private int getAvgEffectsCount() {

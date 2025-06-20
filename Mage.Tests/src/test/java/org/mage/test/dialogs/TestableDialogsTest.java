@@ -75,7 +75,6 @@ public class TestableDialogsTest extends CardTestPlayerBaseWithAIHelps {
     }
 
     @Test
-    @Ignore // TODO: enable and fix all failed dialogs
     public void test_RunAll_AI() {
         // it's impossible to setup 700+ dialogs, so all choices made by AI
         // current AI uses only simple choices in dialogs, not simulations
@@ -108,7 +107,7 @@ public class TestableDialogsTest extends CardTestPlayerBaseWithAIHelps {
     @Test
     @Ignore // debug only - run single dialog by reg number
     public void test_RunSingle_Debugging() {
-        int needRegNumber = 93;
+        int needRegNumber = 557;
 
         prepareCards();
 
