@@ -18,5 +18,7 @@ public final class EdgeOfEternities extends ExpansionSet {
     private EdgeOfEternities() {
         super("Edge of Eternities", "EOE", ExpansionSet.buildDate(2025, 8, 1), SetType.EXPANSION);
         this.blockName = "Edge of Eternities"; // for sorting in GUI
+
+        cards.add(new SetCardInfo("Tezzeret, Cruel Captain", 2, Rarity.MYTHIC, mage.cards.t.TezzeretCruelCaptain.class));
     }
 }
