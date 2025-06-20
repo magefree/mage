@@ -24,7 +24,7 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class VenerableWarsinger extends CardImpl {
-    FilterCard filter = new FilterCreatureCard("creature card with mana value X or less");
+    FilterCard filter = new FilterCreatureCard("creature card with mana value X or less from your graveyard");
 
     public VenerableWarsinger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{W}");
@@ -43,8 +43,8 @@ public final class VenerableWarsinger extends CardImpl {
         // Whenever Venerable Warsinger deals combat damage to a player, you may return target creature card with mana value X or less from your graveyard to the battlefield, where X is the amount of damage that Venerable Warsinger dealt to that player.
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(), true);
         ability.addTarget(new TargetCardInYourGraveyard(filter));
-        ability.setTargetAdjuster(new ManaValueTargetAdjuster(new EffectKeyValue("damage", "X"), ComparisonType.OR_LESS));
-        ability.addEffect(new InfoEffect("where X is the amount of damage that Venerable Warsinger dealt to that player").concatBy(","));
+        ability.setTargetAdjuster(new ManaValueTargetAdjuster(new EffectKeyValue("damage"), ComparisonType.OR_LESS));
+        ability.addEffect(new InfoEffect("where X is the amount of damage {this} dealt to that player").concatBy(","));
         this.addAbility(ability);
     }
 
