@@ -2386,7 +2386,7 @@ public class VerifyCardDataTest {
         }
     }
 
-    private static final String[] wrongSymbols = {"’", "“", "”"};
+    private static final String[] wrongSymbols = {"’", "“", "”", "\n"};
 
     private void checkWrongSymbolsInRules(Card card) {
         for (String s : wrongSymbols) {
