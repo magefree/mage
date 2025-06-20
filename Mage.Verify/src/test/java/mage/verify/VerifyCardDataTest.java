@@ -2396,6 +2396,7 @@ public class VerifyCardDataTest {
         }
 
         Pattern ruleNameCheck = Pattern.compile("(?<!named )"+Pattern.quote(card.getName())+"(?! \\{)");
+        Set<String> overlapNames = Arrays.stream(SubType.class.getEnumConstants()).map(SubType::toString).collect(Collectors.toSet()); // Assembly-Worker, Coward
         for (String rule : card.getRules()) {
             for (String s : wrongSymbols) {
                 if (rule.contains(s)) {
@@ -2405,8 +2406,8 @@ public class VerifyCardDataTest {
             if (rule.contains("&mdash ")) {
                 fail(card, "rules", "card's rules contains restricted test [&mdash ] instead [&mdash;]");
             }
-            if (ruleNameCheck.matcher(rule).find()) {
-                fail(card, "rules", "card's pre-formatted rules contains its name unexpectedly");
+            if (ruleNameCheck.matcher(rule).find() && !overlapNames.contains(card.getName())) {
+                fail(card, "rules", "card's pre-formatted rules incorrectly contains its name directly, use {this} instead: "+rule);
             }
             if (rule.contains("named {this}")) {
                 fail(card, "rules", "card's rules contains \"named {this}\", should use card's name");
