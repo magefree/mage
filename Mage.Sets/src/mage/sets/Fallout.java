@@ -571,10 +571,10 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Mutational Advantage", 950, Rarity.RARE, mage.cards.m.MutationalAdvantage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Myriad Landscape", 274, Rarity.UNCOMMON, mage.cards.m.MyriadLandscape.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Myriad Landscape", 802, Rarity.UNCOMMON, mage.cards.m.MyriadLandscape.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Mysterious Stranger", 334, Rarity.RARE, mage.cards.m.MysteriousStranger.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Mysterious Stranger", 591, Rarity.RARE, mage.cards.m.MysteriousStranger.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Mysterious Stranger", 63, Rarity.RARE, mage.cards.m.MysteriousStranger.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Mysterious Stranger", 862, Rarity.RARE, mage.cards.m.MysteriousStranger.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mysterious Stranger", 334, Rarity.RARE, mage.cards.m.MysteriousStranger.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mysterious Stranger", 591, Rarity.RARE, mage.cards.m.MysteriousStranger.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mysterious Stranger", 63, Rarity.RARE, mage.cards.m.MysteriousStranger.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mysterious Stranger", 862, Rarity.RARE, mage.cards.m.MysteriousStranger.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mystic Forge", 1012, Rarity.RARE, mage.cards.m.MysticForge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mystic Forge", 236, Rarity.RARE, mage.cards.m.MysticForge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mystic Forge", 484, Rarity.RARE, mage.cards.m.MysticForge.class, NON_FULL_USE_VARIOUS));
