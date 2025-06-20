@@ -430,10 +430,10 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Intelligence Bobblehead", 1061, Rarity.UNCOMMON, mage.cards.i.IntelligenceBobblehead.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Intelligence Bobblehead", 134, Rarity.UNCOMMON, mage.cards.i.IntelligenceBobblehead.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Intelligence Bobblehead", 662, Rarity.UNCOMMON, mage.cards.i.IntelligenceBobblehead.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Inventory Management", 105, Rarity.RARE, mage.cards.i.InventoryManagement.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Inventory Management", 342, Rarity.RARE, mage.cards.i.InventoryManagement.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Inventory Management", 633, Rarity.RARE, mage.cards.i.InventoryManagement.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Inventory Management", 870, Rarity.RARE, mage.cards.i.InventoryManagement.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Inventory Management", 105, Rarity.RARE, mage.cards.i.InventoryManagement.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Inventory Management", 342, Rarity.RARE, mage.cards.i.InventoryManagement.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Inventory Management", 633, Rarity.RARE, mage.cards.i.InventoryManagement.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Inventory Management", 870, Rarity.RARE, mage.cards.i.InventoryManagement.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Irrigated Farmland", 1027, Rarity.RARE, mage.cards.i.IrrigatedFarmland.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Irrigated Farmland", 268, Rarity.RARE, mage.cards.i.IrrigatedFarmland.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Irrigated Farmland", 499, Rarity.RARE, mage.cards.i.IrrigatedFarmland.class, NON_FULL_USE_VARIOUS));
