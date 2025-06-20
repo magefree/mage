@@ -603,10 +603,10 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Nuka-Cola Vending Machine", 358, Rarity.UNCOMMON, mage.cards.n.NukaColaVendingMachine.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nuka-Cola Vending Machine", 665, Rarity.UNCOMMON, mage.cards.n.NukaColaVendingMachine.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nuka-Cola Vending Machine", 886, Rarity.UNCOMMON, mage.cards.n.NukaColaVendingMachine.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Nuka-Nuke Launcher", 138, Rarity.RARE, mage.cards.n.NukaNukeLauncher.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Nuka-Nuke Launcher", 434, Rarity.RARE, mage.cards.n.NukaNukeLauncher.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Nuka-Nuke Launcher", 666, Rarity.RARE, mage.cards.n.NukaNukeLauncher.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Nuka-Nuke Launcher", 962, Rarity.RARE, mage.cards.n.NukaNukeLauncher.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Nuka-Nuke Launcher", 138, Rarity.RARE, mage.cards.n.NukaNukeLauncher.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Nuka-Nuke Launcher", 434, Rarity.RARE, mage.cards.n.NukaNukeLauncher.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Nuka-Nuke Launcher", 666, Rarity.RARE, mage.cards.n.NukaNukeLauncher.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Nuka-Nuke Launcher", 962, Rarity.RARE, mage.cards.n.NukaNukeLauncher.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("One with the Machine", 179, Rarity.RARE, mage.cards.o.OneWithTheMachine.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("One with the Machine", 462, Rarity.RARE, mage.cards.o.OneWithTheMachine.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("One with the Machine", 707, Rarity.RARE, mage.cards.o.OneWithTheMachine.class, NON_FULL_USE_VARIOUS));
