@@ -6,7 +6,6 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -15,7 +14,6 @@ import mage.constants.*;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -82,52 +80,8 @@ class KaylasMusicBoxExileEffect extends OneShotEffect {
         card.setFaceDown(true, game);
         controller.lookAtCards(null, card, game);
 
-        if (controller.moveCardsToExile(card, source, game, true, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source))) {
-            card.setFaceDown(true, game);
-            // No other player may look at the face-down cards you own exiled with Kayla’s Music Box, even if another player takes control of it. 
-            // (2022-10-14)
-            ContinuousEffect effect = new KaylasMusicBoxLookEffect(controller.getId());
-            effect.setTargetPointer(new FixedTarget(card.getId(), game));
-            game.addEffect(effect, source);
-        }
+        CardUtil.moveCardsToExileFaceDown(game, source, controller, card, true);
         return true;
-    }
-
-}
-
-class KaylasMusicBoxLookEffect extends AsThoughEffectImpl {
-
-    private final UUID authorizedPlayerId;
-
-    public KaylasMusicBoxLookEffect(UUID authorizedPlayerId) {
-        super(AsThoughEffectType.LOOK_AT_FACE_DOWN, Duration.EndOfGame, Outcome.Benefit);
-        this.authorizedPlayerId = authorizedPlayerId;
-        staticText = "You may look at the cards exiled with {this}";
-    }
-
-    private KaylasMusicBoxLookEffect(final KaylasMusicBoxLookEffect effect) {
-        super(effect);
-        this.authorizedPlayerId = effect.authorizedPlayerId;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public KaylasMusicBoxLookEffect copy() {
-        return new KaylasMusicBoxLookEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        UUID cardId = getTargetPointer().getFirst(game, source);
-        if (cardId == null) {
-            this.discard(); // card is no longer in the origin zone, effect can be discarded
-        }
-        return affectedControllerId.equals(authorizedPlayerId)
-                && objectId.equals(cardId);
     }
 
 }
@@ -159,7 +113,11 @@ class KaylasMusicBoxPlayFromExileEffect extends AsThoughEffectImpl {
         if (exileZone == null || !exileZone.contains(sourceId)) {
             return false;
         }
-        CardUtil.makeCardPlayable(game, source, exileZone.get(sourceId, game), false, Duration.EndOfTurn, false);
+        Card card = exileZone.get(sourceId, game);
+        if (card != null && !card.getOwnerId().equals(affectedControllerId)) {
+            return false;
+        }
+        CardUtil.makeCardPlayable(game, source, card, false, Duration.EndOfTurn, false);
         return true;
     }
 }
