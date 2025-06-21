@@ -29,7 +29,8 @@ import java.util.*;
  * @author TheElk801
  */
 public final class OKagachiVengefulKami extends CardImpl {
-    static FilterPermanent filter = new FilterNonlandPermanent("nonland permanent that player controls");
+
+    private static final FilterPermanent filter = new FilterNonlandPermanent("nonland permanent that player controls");
 
     public OKagachiVengefulKami(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}{B}{R}{G}");

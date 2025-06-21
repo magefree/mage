@@ -1,4 +1,3 @@
-
 package mage.cards.m;
 
 import mage.MageInt;
@@ -17,20 +16,20 @@ import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.ThatPlayerControlsTargetAdjuster;
 
 import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 public final class MageRingResponder extends CardImpl {
+
     private static final FilterCreaturePermanent filter
             = new FilterCreaturePermanent("creature defending player controls");
+
     public MageRingResponder(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{7}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");
         this.subtype.add(SubType.GOLEM);
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);

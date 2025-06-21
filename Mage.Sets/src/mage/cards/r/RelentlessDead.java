@@ -25,8 +25,10 @@ import java.util.UUID;
  * @author LevelX2
  */
 public final class RelentlessDead extends CardImpl {
-    static FilterCard filter = new FilterCreatureCard("another target Zombie creature card with mana value X from your graveyard"); // This target defines X
-    static{
+
+    private static final FilterCard filter = new FilterCreatureCard("another target Zombie creature card with mana value X from your graveyard"); // This target defines X
+
+    static {
         filter.add(SubType.ZOMBIE.getPredicate());
         filter.add(AnotherPredicate.instance);
     }

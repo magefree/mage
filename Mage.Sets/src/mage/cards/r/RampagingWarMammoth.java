@@ -23,7 +23,8 @@ import java.util.UUID;
  * @author Susucr
  */
 public final class RampagingWarMammoth extends CardImpl {
-    static FilterPermanent filter = new FilterArtifactPermanent("up to X target artifacts");
+
+    private static final FilterPermanent filter = new FilterArtifactPermanent("up to X target artifacts");
 
     public RampagingWarMammoth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}{R}");

@@ -23,8 +23,9 @@ import java.util.UUID;
  * @author spjspj
  */
 public final class ScalelordReckoner extends CardImpl {
-    static FilterPermanent filterDragon = new FilterControlledPermanent(SubType.DRAGON, "a Dragon you control");
-    static FilterPermanent filterTarget = new FilterNonlandPermanent("nonland permanent that player controls");
+
+    private static final FilterPermanent filterDragon = new FilterControlledPermanent(SubType.DRAGON, "a Dragon you control");
+    private static final FilterPermanent filterTarget = new FilterNonlandPermanent("nonland permanent that player controls");
 
     public ScalelordReckoner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");

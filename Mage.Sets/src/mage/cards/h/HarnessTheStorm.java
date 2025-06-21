@@ -20,11 +20,11 @@ import mage.target.targetpointer.FirstTargetPointer;
 import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class HarnessTheStorm extends CardImpl {
-    static FilterCard filter = new FilterCard("card with the same name as that spell from your graveyard");
+
+    private static final FilterCard filter = new FilterCard("card with the same name as that spell from your graveyard");
 
     public HarnessTheStorm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
@@ -50,8 +50,10 @@ public final class HarnessTheStorm extends CardImpl {
     }
 
 }
+
 enum HarnessTheStormAdjuster implements TargetAdjuster {
     instance;
+
     @Override
     public void adjustTargets(Ability ability, Game game) {
         UUID spellId = ability.getEffects().get(0).getTargetPointer().getFirst(game, ability);
@@ -59,10 +61,10 @@ enum HarnessTheStormAdjuster implements TargetAdjuster {
         ability.getAllEffects().setTargetPointer(new FirstTargetPointer());
 
         Spell spell = game.getSpellOrLKIStack(spellId);
-        if (spell == null){
+        if (spell == null) {
             return;
         }
-        FilterCard filter =  new FilterCard("a card named " + spell.getName() + " in your graveyard");
+        FilterCard filter = new FilterCard("a card named " + spell.getName() + " in your graveyard");
         filter.add(new NamePredicate(spell.getName()));
         ability.addTarget(new TargetCardInYourGraveyard(filter));
     }

@@ -32,6 +32,7 @@ import java.util.UUID;
  * @author Grath
  */
 public final class TheLordOfPain extends CardImpl {
+
     private static final FilterSpell filter = new FilterSpell("their first spell each turn");
 
     static {

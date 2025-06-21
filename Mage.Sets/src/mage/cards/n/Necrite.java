@@ -1,4 +1,3 @@
-
 package mage.cards.n;
 
 import mage.MageInt;
@@ -20,14 +19,14 @@ import mage.target.targetadjustment.ThatPlayerControlsTargetAdjuster;
 import java.util.UUID;
 
 /**
- *
  * @author MarcoMarin
  */
 public final class Necrite extends CardImpl {
-    static FilterPermanent filter = new FilterCreaturePermanent("creature defending player controls");
+
+    private static final FilterPermanent filter = new FilterCreaturePermanent("creature defending player controls");
 
     public Necrite(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
         this.subtype.add(SubType.THRULL);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

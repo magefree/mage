@@ -24,7 +24,8 @@ import java.util.UUID;
  * @author Xanderhall
  */
 public final class NeyamShaiMurad extends CardImpl {
-    FilterCard filter = new FilterPermanentCard("permanent card from their graveyard");
+
+    private static final FilterCard filter = new FilterPermanentCard("permanent card from their graveyard");
 
     public NeyamShaiMurad(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{B}");

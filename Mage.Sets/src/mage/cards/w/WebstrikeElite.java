@@ -24,7 +24,8 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class WebstrikeElite extends CardImpl {
-    FilterPermanent filter = new FilterArtifactOrEnchantmentPermanent("artifact or enchantment with mana value X");
+
+    private static final FilterPermanent filter = new FilterArtifactOrEnchantmentPermanent("artifact or enchantment with mana value X");
 
     public WebstrikeElite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{G}");

@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import mage.abilities.Ability;
@@ -22,14 +21,14 @@ import mage.target.targetpointer.FirstTargetPointer;
 import java.util.UUID;
 
 /**
- *
  * @author emerald000
  */
 public final class TheAbyss extends CardImpl {
-    static FilterPermanent filter = new FilterPermanent("nonartifact creature that player controls of their choice");
+
+    private static final FilterPermanent filter = new FilterPermanent("nonartifact creature that player controls of their choice");
 
     public TheAbyss(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");
         this.supertype.add(SuperType.WORLD);
 
         // At the beginning of each player's upkeep, destroy target nonartifact creature that player controls of their choice. It can't be regenerated.
@@ -52,11 +51,13 @@ public final class TheAbyss extends CardImpl {
 
 enum TheAbyssTargetAdjuster implements TargetAdjuster {
     instance;
+
     private static final FilterPermanent filter
             = new FilterCreaturePermanent("nonartifact creature that player controls of their choice");
     static {
         filter.add(Predicates.not(CardType.ARTIFACT.getPredicate()));
     }
+
     @Override
     public void adjustTargets(Ability ability, Game game) {
         UUID playerId = ability.getEffects().get(0).getTargetPointer().getFirst(game, ability);

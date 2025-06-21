@@ -1,4 +1,3 @@
-
 package mage.cards.m;
 
 import mage.MageInt;
@@ -22,14 +21,14 @@ import mage.target.targetpointer.FirstTargetPointer;
 import java.util.UUID;
 
 /**
- *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
 public final class MagusOfTheAbyss extends CardImpl {
-    static FilterPermanent filter = new FilterPermanent("nonartifact creature that player controls of their choice");
+
+    private static final FilterPermanent filter = new FilterPermanent("nonartifact creature that player controls of their choice");
 
     public MagusOfTheAbyss(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(4);
@@ -55,12 +54,15 @@ public final class MagusOfTheAbyss extends CardImpl {
 
 enum MagusOfTheAbyssTargetAdjuster implements TargetAdjuster {
     instance;
+
     private static final FilterPermanent filter
             = new FilterPermanent("nonartifact creature that player controls of their choice");
+
     static {
         filter.add(Predicates.not(CardType.ARTIFACT.getPredicate()));
         filter.add(CardType.CREATURE.getPredicate());
     }
+
     @Override
     public void adjustTargets(Ability ability, Game game) {
         UUID opponentId = ability.getEffects().get(0).getTargetPointer().getFirst(game, ability);

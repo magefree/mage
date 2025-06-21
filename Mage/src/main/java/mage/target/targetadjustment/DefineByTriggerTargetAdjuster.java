@@ -9,10 +9,11 @@ import mage.game.Game;
  *
  * @author notgreat
  */
-public enum DefineByTriggerTargetAdjuster implements TargetAdjuster{
+public enum DefineByTriggerTargetAdjuster implements TargetAdjuster {
     instance;
+
     @Override
-    public void adjustTargets(Ability ability, Game game){
+    public void adjustTargets(Ability ability, Game game) {
         //Do nothing
     }
 }

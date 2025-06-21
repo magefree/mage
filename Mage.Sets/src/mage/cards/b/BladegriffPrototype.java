@@ -25,8 +25,10 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class BladegriffPrototype extends CardImpl {
-    static FilterNonlandPermanent filter = new FilterNonlandPermanent("nonland permanent of that player's choice that one of your opponents controls");
-    static{
+
+    private static final FilterNonlandPermanent filter = new FilterNonlandPermanent("nonland permanent of that player's choice that one of your opponents controls");
+
+    static {
         filter.add(BladegriffSourceOpponentControlsPredicate.instance);
     }
 
@@ -56,8 +58,10 @@ public final class BladegriffPrototype extends CardImpl {
         return new BladegriffPrototype(this);
     }
 }
+
 enum BladegriffSourceOpponentControlsPredicate implements ObjectSourcePlayerPredicate<Controllable> {
     instance;
+
     @Override
     public boolean apply(ObjectSourcePlayer<Controllable> input, Game game) {
         Controllable object = input.getObject();

@@ -26,7 +26,7 @@ import java.util.UUID;
  */
 public final class SkymarkRoc extends CardImpl {
 
-    static FilterPermanent filter = new FilterCreaturePermanent("creature defending player controls with toughness 2 or less");
+    private static final FilterPermanent filter = new FilterCreaturePermanent("creature defending player controls with toughness 2 or less");
 
     static {
         filter.add(new ToughnessPredicate(ComparisonType.OR_LESS, 2));

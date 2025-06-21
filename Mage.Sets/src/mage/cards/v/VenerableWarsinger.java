@@ -24,7 +24,8 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class VenerableWarsinger extends CardImpl {
-    FilterCard filter = new FilterCreatureCard("creature card with mana value X or less from your graveyard");
+
+    private static final FilterCard filter = new FilterCreatureCard("creature card with mana value X or less from your graveyard");
 
     public VenerableWarsinger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{W}");
