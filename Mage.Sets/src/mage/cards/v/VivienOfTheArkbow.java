@@ -15,10 +15,13 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL;
 
 /**
  * @author TheElk801
@@ -40,7 +43,7 @@ public final class VivienOfTheArkbow extends CardImpl {
         // −3: Target creature you control deals damage equal to its power to target creature you don't control.
         ability = new LoyaltyAbility(new DamageWithPowerFromOneToAnotherTargetEffect(), -3);
         ability.addTarget(new TargetControlledCreaturePermanent());
-        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
+        ability.addTarget(new TargetPermanent(FILTER_CREATURE_YOU_DONT_CONTROL));
         this.addAbility(ability);
 
         // −9: Creatures you control get +4/+4 and gain trample until end of turn.

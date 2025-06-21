@@ -18,6 +18,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.ElementalShamanToken;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -48,7 +49,7 @@ public final class HearthcageGiant extends CardImpl {
 
         //Sacrifice an Elemental: Target Giant creature gets +3/+1 until end of turn.
         Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(3, 1, Duration.EndOfTurn), new SacrificeTargetCost(filterElemental));
-        ability.addTarget(new TargetCreaturePermanent(filterGiant));
+        ability.addTarget(new TargetPermanent(filterGiant));
         this.addAbility(ability);
     }
 

@@ -18,7 +18,7 @@ import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -108,7 +108,7 @@ class MossbridgeTrollCost extends CostImpl {
     }
 
     public MossbridgeTrollCost() {
-        this.addTarget(new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, filter, true));
+        this.addTarget(new TargetControlledPermanent(0, Integer.MAX_VALUE, filter, true));
         this.text = "tap any number of untapped creatures you control other than {this} with total power 10 or greater";
     }
 

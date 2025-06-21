@@ -2,14 +2,17 @@ package mage.cards.k;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.ComparisonType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.target.TargetPermanent;
 
@@ -21,7 +24,7 @@ import java.util.UUID;
 public final class KioraBehemothBeckoner extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterCreaturePermanent("a creature with power 4 or greater");
+            = new FilterControlledCreaturePermanent("a creature you control with power 4 or greater");
 
     static {
         filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 3));
@@ -35,9 +38,7 @@ public final class KioraBehemothBeckoner extends CardImpl {
         this.setStartingLoyalty(7);
 
         // Whenever a creature with power 4 or greater you control enters, draw a card.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
-                Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), filter, false
-        ));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(new DrawCardSourceControllerEffect(1), filter));
 
         // -1: Untap target permanent.
         Ability ability = new LoyaltyAbility(new UntapTargetEffect(), -1);

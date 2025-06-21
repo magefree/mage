@@ -41,7 +41,7 @@ public final class WurmweaverCoil extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{G}{G}");
         this.subtype.add(SubType.AURA);
 
-        TargetPermanent auraTarget = new TargetCreaturePermanent(filter);
+        TargetPermanent auraTarget = new TargetPermanent(filter);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
         Ability ability = new EnchantAbility(auraTarget);

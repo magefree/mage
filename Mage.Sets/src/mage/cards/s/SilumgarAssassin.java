@@ -19,6 +19,7 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -49,7 +50,7 @@ public final class SilumgarAssassin extends CardImpl {
 
         // When Silumgar Assassin is turned face up, destroy target creature with power 3 or less an opponent controls.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new DestroyTargetEffect(), false);
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
     }

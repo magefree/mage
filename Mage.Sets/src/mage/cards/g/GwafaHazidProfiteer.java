@@ -16,9 +16,12 @@ import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL;
 
 /**
  * @author jeffwadsworth
@@ -37,7 +40,7 @@ public final class GwafaHazidProfiteer extends CardImpl {
         // {W}{U}, {tap}: Put a bribery counter on target creature you don't control. Its controller draws a card.
         Ability ability = new SimpleActivatedAbility(new AddCountersTargetEffect(CounterType.BRIBERY.createInstance()), new ManaCostsImpl<>("{W}{U}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
+        ability.addTarget(new TargetPermanent(FILTER_CREATURE_YOU_DONT_CONTROL));
         ability.addEffect(new DrawCardTargetControllerEffect(1));
         this.addAbility(ability);
 

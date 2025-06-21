@@ -18,6 +18,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TokenImpl;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -46,7 +47,7 @@ public final class GideonBattleForged extends CardImpl {
 
         // +2: Up to one target creature an opponent controls attacks Gideon, Battle-Forged during its controller's next turn if able.
         LoyaltyAbility loyaltyAbility = new LoyaltyAbility(new GideonBattleForgedAttacksIfAbleTargetEffect(Duration.Custom), 2);
-        loyaltyAbility.addTarget(new TargetCreaturePermanent(0, 1, filter, false));
+        loyaltyAbility.addTarget(new TargetPermanent(0, 1, filter));
         this.addAbility(loyaltyAbility);
 
         // +1: Until your next turn, target creature gains indestructible. Untap that creature.

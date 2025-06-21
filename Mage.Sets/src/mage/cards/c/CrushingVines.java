@@ -10,6 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetArtifactPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -30,7 +31,7 @@ public final class CrushingVines extends CardImpl {
 
 
         // Choose one - Destroy target creature with flying; or destroy target artifact.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         Mode mode = new Mode(new DestroyTargetEffect());
         mode.addTarget(new TargetArtifactPermanent());

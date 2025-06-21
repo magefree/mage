@@ -10,12 +10,11 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.other.AnotherTargetPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
 import mage.util.functions.EmptyCopyApplier;
 
 import java.util.UUID;
@@ -25,18 +24,14 @@ import java.util.UUID;
  */
 public final class FleetingReflection extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other target creature");
-
-    static {
-        filter.add(new AnotherTargetPredicate(2));
-    }
-
     public FleetingReflection(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
         // Target creature you control gains hexproof until end of turn. Untap that creature. Until end of turn, it becomes a copy of up to one other target creature.
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent().setTargetTag(1));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1, filter, false).setTargetTag(2));
+        this.getSpellAbility().addTarget(new TargetPermanent(
+                0, 1, StaticFilters.FILTER_ANOTHER_CREATURE_TARGET_2
+        ).setTargetTag(2));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HexproofAbility.getInstance(), Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new UntapTargetEffect().setText("Untap that creature"));
         this.getSpellAbility().addEffect(new FleetingReflectionEffect());

@@ -24,11 +24,14 @@ import mage.game.events.GameEvent;
 import mage.game.events.NumberOfTriggersEvent;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
 
 import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_ANOTHER_CREATURE_TARGET_2;
 
 
 /**
@@ -60,7 +63,7 @@ public final class WaytaTrainerProdigy extends CardImpl {
         ability.addTarget(controlledTarget);
 
         Target secondTarget =
-                new TargetCreaturePermanent(StaticFilters.FILTER_ANOTHER_CREATURE_TARGET_2).setTargetTag(2);
+                new TargetPermanent(FILTER_ANOTHER_CREATURE_TARGET_2).setTargetTag(2);
         ability.addTarget(secondTarget);
 
         this.addAbility(ability);

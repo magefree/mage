@@ -7,6 +7,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterBlockingCreature;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -21,7 +22,7 @@ public final class Vanquish extends CardImpl {
 
         // Destroy target blocking creature.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterBlockingCreature()));
+        this.getSpellAbility().addTarget(new TargetPermanent(new FilterBlockingCreature()));
     }
 
     private Vanquish(final Vanquish card) {

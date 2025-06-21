@@ -8,12 +8,14 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.TappedPredicate;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -34,10 +36,7 @@ public final class SiegeStriker extends CardImpl {
         this.addAbility(DoubleStrikeAbility.getInstance());
 
         // Whenever Siege Striker attacks, you may tap any number of untapped creatures you control. Siege Striker gets +1/+1 until end of turn for each creature tapped this way.
-        this.addAbility(new AttacksTriggeredAbility(
-                new SiegeStrikerEffect(), true
-        ));
-
+        this.addAbility(new AttacksTriggeredAbility(new SiegeStrikerEffect(), true));
     }
 
     private SiegeStriker(final SiegeStriker card) {
@@ -52,13 +51,6 @@ public final class SiegeStriker extends CardImpl {
 
 class SiegeStrikerEffect extends OneShotEffect {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("untapped creatures you control");
-
-    static {
-        filter.add(TargetController.YOU.getControllerPredicate());
-        filter.add(TappedPredicate.UNTAPPED);
-    }
-
     public SiegeStrikerEffect() {
         super(Outcome.GainLife);
         staticText = "you may tap any number of untapped creatures you control. "
@@ -72,15 +64,13 @@ class SiegeStrikerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int tappedAmount = 0;
-        TargetCreaturePermanent target = new TargetCreaturePermanent(0, Integer.MAX_VALUE, filter, true);
-        if (target.canChoose(source.getControllerId(), source, game)
-                && target.choose(Outcome.Tap, source.getControllerId(), source.getSourceId(), source, game)) {
-            for (UUID creatureId : target.getTargets()) {
-                Permanent creature = game.getPermanent(creatureId);
-                if (creature != null) {
-                    creature.tap(source, game);
-                    tappedAmount++;
-                }
+        TargetPermanent target = new TargetPermanent(0, Integer.MAX_VALUE, StaticFilters.FILTER_CONTROLLED_UNTAPPED_CREATURES, true);
+        target.choose(Outcome.Tap, source.getControllerId(), source.getSourceId(), source, game);
+        for (UUID creatureId : target.getTargets()) {
+            Permanent creature = game.getPermanent(creatureId);
+            if (creature != null) {
+                creature.tap(source, game);
+                tappedAmount++;
             }
         }
         if (tappedAmount > 0) {

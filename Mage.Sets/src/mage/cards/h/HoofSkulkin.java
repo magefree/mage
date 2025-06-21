@@ -16,6 +16,7 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -36,7 +37,7 @@ public final class HoofSkulkin extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(1, 1, Duration.EndOfTurn), new GenericManaCost(3));
-        ability.addTarget(new TargetCreaturePermanent(filterGreenCreature));
+        ability.addTarget(new TargetPermanent(filterGreenCreature));
         this.addAbility(ability);
     }
 

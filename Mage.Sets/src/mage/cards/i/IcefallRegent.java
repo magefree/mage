@@ -16,9 +16,12 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE;
 
 /**
  * @author fireshoes
@@ -38,7 +41,7 @@ public final class IcefallRegent extends CardImpl {
         // That creature doesn't untap during its controller's untap step for as long as you control Icefall Regent.
         Ability ability = new EntersBattlefieldTriggeredAbility(new TapTargetEffect(), false);
         ability.addEffect(new DontUntapInControllersUntapStepTargetEffect(Duration.WhileControlled));
-        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
+        ability.addTarget(new TargetPermanent(FILTER_OPPONENTS_PERMANENT_CREATURE));
         this.addAbility(ability);
 
         // Spells your opponents cast that target Icefall Regent cost {2} more to cast.

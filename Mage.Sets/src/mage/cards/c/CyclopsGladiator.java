@@ -2,7 +2,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -10,23 +9,24 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public final class CyclopsGladiator extends CardImpl {
 
     public CyclopsGladiator(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{R}{R}");
         this.subtype.add(SubType.CYCLOPS);
         this.subtype.add(SubType.WARRIOR);
 
@@ -67,7 +67,7 @@ class CyclopsGladiatorEffect extends OneShotEffect {
         if (defenderId != null) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
             filter.add(new ControllerIdPredicate(defenderId));
-            TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
+            TargetPermanent target = new TargetPermanent(filter);
             Player player = game.getPlayer(source.getControllerId());
             if (target.canChoose(source.getControllerId(), source, game)) {
                 if (player != null && player.chooseTarget(Outcome.Detriment, target, source, game)) {

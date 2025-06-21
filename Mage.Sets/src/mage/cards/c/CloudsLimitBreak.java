@@ -16,7 +16,6 @@ import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -67,9 +66,9 @@ public final class CloudsLimitBreak extends CardImpl {
     }
 }
 
-class CloudsLimitBreakTarget extends TargetCreaturePermanent {
+class CloudsLimitBreakTarget extends TargetPermanent {
 
-    private static final FilterCreaturePermanent filter
+    private static final FilterPermanent filter
             = new FilterCreaturePermanent("tapped creatures with different controllers");
 
     CloudsLimitBreakTarget() {

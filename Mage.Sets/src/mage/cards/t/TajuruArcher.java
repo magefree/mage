@@ -15,6 +15,7 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -41,7 +42,7 @@ public final class TajuruArcher extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
         Ability ability = new AllyEntersBattlefieldTriggeredAbility(new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter)), true);
-        ability.addTarget(new TargetCreaturePermanent(filterTarget));
+        ability.addTarget(new TargetPermanent(filterTarget));
         this.addAbility(ability.setAbilityWord(null));
     }
 

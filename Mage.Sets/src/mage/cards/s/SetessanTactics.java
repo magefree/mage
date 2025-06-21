@@ -15,6 +15,7 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -42,7 +43,7 @@ public final class SetessanTactics extends CardImpl {
         effect.setText("Until end of turn, any number of target creatures each get +1/+1");
         this.getSpellAbility().addEffect(effect);
         Ability gainedAbility = new SimpleActivatedAbility(new FightTargetSourceEffect(), new TapSourceCost());
-        gainedAbility.addTarget(new TargetCreaturePermanent(filter));
+        gainedAbility.addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(gainedAbility, Duration.EndOfTurn,
                 "and gain \"{T}: This creature fights another target creature.\""));
     }

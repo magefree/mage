@@ -13,6 +13,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -36,7 +37,7 @@ public final class JhoirasToolbox extends CardImpl {
 
         // {2}: Regenerate target artifact creature.
         Ability ability = new SimpleActivatedAbility(new RegenerateTargetEffect(), new ManaCostsImpl<>("{2}"));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

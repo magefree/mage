@@ -15,6 +15,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -38,7 +39,7 @@ public final class HorrorOfHorrors extends CardImpl {
         // Sacrifice a Swamp: Regenerate target black creature.
         Ability ability = new SimpleActivatedAbility(new RegenerateTargetEffect(),
             new SacrificeTargetCost(filter1));
-        ability.addTarget(new TargetCreaturePermanent(filter2));
+        ability.addTarget(new TargetPermanent(filter2));
         this.addAbility(ability);
     }
 

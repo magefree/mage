@@ -24,7 +24,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.CounterAnyPredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -102,7 +102,7 @@ class QuilledGreatwurmEffect extends AsThoughEffectImpl {
             return false;
         }
         Costs<Cost> costs = new CostsImpl<>();
-        costs.add(new RemoveCounterCost(new TargetControlledCreaturePermanent(1, 6, filter, true), null, 6));
+        costs.add(new RemoveCounterCost(new TargetControlledPermanent(1, 6, filter, true), null, 6));
         controller.setCastSourceIdWithAlternateMana(
                 objectId, new ManaCostsImpl<>("{4}{G}{G}"), costs,
                 MageIdentifier.QuilledGreatwurmAlternateCast

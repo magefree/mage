@@ -22,6 +22,9 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
+import static mage.constants.Duration.EndOfGame;
+import static mage.constants.SagaChapter.CHAPTER_I;
+
 /**
  * @author TheElk801
  */
@@ -37,9 +40,9 @@ public final class TheTricksterGodsHeist extends CardImpl {
 
         // I — You may exchange control of two target creatures.
         sagaAbility.addChapterEffect(
-                this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_I,
+                this, CHAPTER_I, CHAPTER_I,
                 new ExchangeControlTargetEffect(
-                        Duration.EndOfGame, "exchange control of two target creatures"
+                        EndOfGame, "exchange control of two target creatures"
                 ), new TargetCreaturePermanent(2), true
         );
 

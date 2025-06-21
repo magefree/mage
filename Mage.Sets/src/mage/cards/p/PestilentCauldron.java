@@ -6,20 +6,16 @@ import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.common.ControllerGainedLifeCount;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.*;
 import mage.cards.CardSetInfo;
 import mage.cards.ModalDoubleFacedCard;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
-import mage.game.Game;
 import mage.game.permanent.token.Pest11GainLifeToken;
-import mage.players.Player;
 import mage.target.common.TargetCardInASingleGraveyard;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.watchers.common.PlayerGainedLifeWatcher;
@@ -82,7 +78,7 @@ public final class PestilentCauldron extends ModalDoubleFacedCard {
         // Sorcery
         // Return up to two target creature, land, and/or planeswalker cards from your graveyard to your hand. Each player gains 4 life. Exile Restorative Burst.
         this.getRightHalfCard().getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
-        this.getRightHalfCard().getSpellAbility().addEffect(new RestorativeBurstEffect());
+        this.getRightHalfCard().getSpellAbility().addEffect(new GainLifeAllEffect(4));
         this.getRightHalfCard().getSpellAbility().addEffect(new ExileSpellEffect());
         this.getRightHalfCard().getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 2, filter));
     }
@@ -94,33 +90,5 @@ public final class PestilentCauldron extends ModalDoubleFacedCard {
     @Override
     public PestilentCauldron copy() {
         return new PestilentCauldron(this);
-    }
-}
-
-class RestorativeBurstEffect extends OneShotEffect {
-
-    RestorativeBurstEffect() {
-        super(Outcome.GainLife);
-        staticText = "Each player gains 4 life.";
-    }
-
-    private RestorativeBurstEffect(final RestorativeBurstEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public RestorativeBurstEffect copy() {
-        return new RestorativeBurstEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                player.gainLife(4, game, source);
-            }
-        }
-        return true;
     }
 }

@@ -5,7 +5,6 @@ import mage.abilities.effects.common.ExileThenReturnTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
@@ -20,8 +19,7 @@ public final class IllusionistsStratagem extends CardImpl {
 
         // Exile up to two target creatures you control, then return those cards to the battlefield under their owner's control.
         this.getSpellAbility().addEffect(new ExileThenReturnTargetEffect(false, true));
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(0, 2,
-                StaticFilters.FILTER_CONTROLLED_CREATURES, false));
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(0, 2));
 
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));

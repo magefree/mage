@@ -21,6 +21,8 @@ import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
+import static mage.filter.StaticFilters.FILTER_ANOTHER_TARGET_CREATURE;
+
 /**
  * @author PurpleCrowbar
  */
@@ -45,7 +47,7 @@ public final class Hexavus extends CardImpl {
                 new AddCountersTargetEffect(CounterType.FLYING.createInstance()), new GenericManaCost(1)
         );
         ability.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance()));
-        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE));
+        ability.addTarget(new TargetPermanent(FILTER_ANOTHER_TARGET_CREATURE));
         this.addAbility(ability);
 
         // {1}, Remove a counter from another creature you control: Put a +1/+1 counter on Hexavus.

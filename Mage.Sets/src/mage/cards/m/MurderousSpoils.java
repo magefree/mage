@@ -16,8 +16,11 @@ import mage.constants.Outcome;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
+
+import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK;
 
 /**
  *
@@ -29,7 +32,7 @@ public final class MurderousSpoils extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{5}{B}");
 
         // Destroy target nonblack creature. It can't be regenerated. You gain control of all Equipment that was attached to it.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK));
+        this.getSpellAbility().addTarget(new TargetPermanent(FILTER_PERMANENT_CREATURE_NON_BLACK));
         this.getSpellAbility().addEffect(new MurderousSpoilsEffect());
 
     }

@@ -13,6 +13,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -39,7 +40,7 @@ public final class FeverCharm extends CardImpl {
         this.getSpellAbility().addMode(mode);
         // or Fever Charm deals 3 damage to target Wizard creature.
         mode = new Mode(new DamageTargetEffect(3));
-        mode.addTarget(new TargetCreaturePermanent(filter));
+        mode.addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addMode(mode);
     }
 

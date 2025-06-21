@@ -16,6 +16,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.CounterAnyPredicate;
 import mage.target.Target;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -41,7 +42,7 @@ public final class RazorfinAbolisher extends CardImpl {
         // {1}{U}, {tap}: Return target creature with a counter on it to its owner's hand.
         Ability ability = new SimpleActivatedAbility(new ReturnToHandTargetEffect(), new ManaCostsImpl<>("{1}{U}"));
         ability.addCost(new TapSourceCost());
-        Target target = new TargetCreaturePermanent(filter);
+        Target target = new TargetPermanent(filter);
         ability.addTarget(target);
         this.addAbility(ability);
         

@@ -11,10 +11,13 @@ import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL;
 
 /**
  * @author xenohedron
@@ -26,7 +29,7 @@ public final class DuelForDominance extends CardImpl {
 
         // Coven — Choose target creature you control and target creature you don't control.
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
+        this.getSpellAbility().addTarget(new TargetPermanent(FILTER_CREATURE_YOU_DONT_CONTROL));
         // If you control three or more creatures with different powers, put a +1/+1 counter on the chosen creature you control.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance()),

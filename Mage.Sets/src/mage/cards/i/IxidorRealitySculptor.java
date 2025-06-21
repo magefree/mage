@@ -14,6 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.card.FaceDownPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -44,7 +45,7 @@ public final class IxidorRealitySculptor extends CardImpl {
 
         // {2}{U}: Turn target face-down creature face up.
         Ability ability = new SimpleActivatedAbility(new TurnFaceUpTargetEffect(), new ManaCostsImpl<>("{2}{U}"));
-        ability.addTarget(new TargetCreaturePermanent(filterTarget));
+        ability.addTarget(new TargetPermanent(filterTarget));
         this.addAbility(ability);
     }
 

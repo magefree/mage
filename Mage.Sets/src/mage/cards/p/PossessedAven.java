@@ -22,6 +22,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -59,7 +60,7 @@ public final class PossessedAven extends CardImpl {
         ));
         Ability gainedAbility = new SimpleActivatedAbility(new DestroyTargetEffect(), new ManaCostsImpl<>("{2}{B}"));
         gainedAbility.addCost(new TapSourceCost());
-        gainedAbility.addTarget(new TargetCreaturePermanent(filter));
+        gainedAbility.addTarget(new TargetPermanent(filter));
         ability.addEffect(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(gainedAbility), ThresholdCondition.instance,
                 ", and has \"{2}{B}, {T}: Destroy target blue creature.\""

@@ -15,6 +15,7 @@ import mage.constants.ModeChoice;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -46,7 +47,7 @@ public final class CitadelSiege extends CardImpl {
         ability = new BeginningOfCombatTriggeredAbility(
                 TargetController.OPPONENT, new TapTargetEffect("tap target creature that player controls"), false
         );
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(new SimpleStaticAbility(new GainAnchorWordAbilitySourceEffect(ability, ModeChoice.DRAGONS)));
     }
 

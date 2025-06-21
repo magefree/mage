@@ -12,6 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -38,13 +39,13 @@ public final class BorrowedHostility extends CardImpl {
         Effect effect = new BoostTargetEffect(3, 0, Duration.EndOfTurn);
         effect.setText("Target creature gets +3/+0 until end of turn");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filterBoost).withChooseHint("gets +3/+0 until end of turn"));
+        this.getSpellAbility().addTarget(new TargetPermanent(filterBoost).withChooseHint("gets +3/+0 until end of turn"));
 
         // Target creature gains first strike until end of turn.
         effect = new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("Target creature gains first strike until end of turn");
         Mode mode = new Mode(effect);
-        mode.addTarget(new TargetCreaturePermanent(filterFirstStrike).withChooseHint("gains first strike until end of turn"));
+        mode.addTarget(new TargetPermanent(filterFirstStrike).withChooseHint("gains first strike until end of turn"));
         this.getSpellAbility().addMode(mode);
     }
 

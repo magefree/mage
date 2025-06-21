@@ -12,6 +12,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -39,7 +40,7 @@ public final class SlayerOfTheWicked extends CardImpl {
 
         // When Slayer of the Wicked enters the battlefield, you may destroy target Vampire, Werewolf, or Zombie.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), true);
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

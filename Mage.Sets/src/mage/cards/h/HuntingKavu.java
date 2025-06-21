@@ -18,6 +18,7 @@ import mage.constants.Zone;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.filter.common.FilterCreatureAttackingYou;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -43,7 +44,7 @@ public final class HuntingKavu extends CardImpl {
         Ability ability = new SimpleActivatedAbility(new ExileSourceEffect(), new ManaCostsImpl<>("{1}{R}{G}"));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new ExileTargetEffect().setText("and target creature without flying that's attacking you"));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

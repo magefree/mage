@@ -18,6 +18,8 @@ import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
+import static mage.filter.StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE;
+
 /**
  * @author fireshoes
  */
@@ -38,7 +40,7 @@ public final class ToothCollector extends CardImpl {
 
         // When Tooth Collector enters the battlefield, target creature an opponent controls gets -1/-1 until end of turn.
         Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(-1, -1, Duration.EndOfTurn));
-        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
+        ability.addTarget(new TargetPermanent(FILTER_OPPONENTS_PERMANENT_CREATURE));
         this.addAbility(ability);
 
         // {<i>Delirium</i> &mdash; At the beginning of each opponent's upkeep, if there are four or more card types among cards in your graveyard,

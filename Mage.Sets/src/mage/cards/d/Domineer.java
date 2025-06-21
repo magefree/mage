@@ -34,7 +34,7 @@ public final class Domineer extends CardImpl {
         this.subtype.add(SubType.AURA);
 
         // Enchant artifact creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent(filter);
+        TargetPermanent auraTarget = new TargetPermanent(filter);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.GainControl));
         Ability ability = new EnchantAbility(auraTarget);

@@ -19,6 +19,7 @@ import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -52,7 +53,7 @@ public final class OliviaVoldaren extends CardImpl {
                         .setText("{this} deals 1 damage to another target creature"),
                 new ManaCostsImpl<>("{1}{R}")
         );
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         Effect effect = new AddCardSubTypeTargetEffect(SubType.VAMPIRE, Duration.WhileOnBattlefield);
         effect.setText("That creature becomes a Vampire in addition to its other types");
         ability.addEffect(effect);
@@ -63,7 +64,7 @@ public final class OliviaVoldaren extends CardImpl {
         Ability ability2 = new SimpleActivatedAbility(
                 new GainControlTargetEffect(Duration.WhileControlled), new ManaCostsImpl<>("{3}{B}{B}")
         );
-        ability2.addTarget(new TargetCreaturePermanent(vampireFilter));
+        ability2.addTarget(new TargetPermanent(vampireFilter));
         this.addAbility(ability2);
     }
 

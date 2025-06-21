@@ -42,7 +42,7 @@ public final class TamiyoFieldResearcher extends CardImpl {
 
         // +1: Choose up to two target creatures. Until your next turn, whenever either of those creatures deals combat damage, you draw a card.
         Ability ability = new LoyaltyAbility(new TamiyoFieldResearcherEffect1(), 1);
-        ability.addTarget(new TargetCreaturePermanent(0, 2, StaticFilters.FILTER_PERMANENT_CREATURES, false));
+        ability.addTarget(new TargetCreaturePermanent(0, 2));
         this.addAbility(ability);
 
         // -2: Tap up to two target nonland permanents. They don't untap during their controller's next untap step.

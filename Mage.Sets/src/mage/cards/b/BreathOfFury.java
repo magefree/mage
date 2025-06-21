@@ -1,7 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -22,6 +21,8 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  * @author duncant
@@ -119,7 +120,7 @@ class BreathOfFuryEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature you control that could be enchanted by " + enchantment.getName());
         filter.add(new CanBeEnchantedByPredicate(enchantment));
-        Target target = new TargetControlledCreaturePermanent(filter);
+        Target target = new TargetPermanent(filter);
         target.withNotTarget(true);
         // It's important to check that the creature was successfully sacrificed here. Effects that prevent sacrifice will also prevent Breath of Fury's effect from working.
         // Commanders going to the command zone and Rest in Peace style replacement effects don't make Permanent.sacrifice return false.

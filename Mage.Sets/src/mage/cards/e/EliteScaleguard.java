@@ -1,6 +1,5 @@
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksCreatureYouControlTriggeredAbility;
@@ -16,9 +15,11 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.targetadjustment.TargetAdjuster;
 import mage.target.targetpointer.FirstTargetPointer;
+
+import java.util.UUID;
 
 /**
  * @author emerald000
@@ -41,7 +42,7 @@ public final class EliteScaleguard extends CardImpl {
                 false,
                 StaticFilters.FILTER_CONTROLLED_CREATURE_P1P1,
                 true);
-        ability.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature defending player controls")));
+        ability.addTarget(new TargetPermanent(new FilterCreaturePermanent("creature defending player controls")));
         ability.setTargetAdjuster(EliteScaleguardTargetAdjuster.instance);
         this.addAbility(ability);
     }
@@ -70,7 +71,6 @@ enum EliteScaleguardTargetAdjuster implements TargetAdjuster {
             }
         }
         ability.getTargets().clear();
-        TargetCreaturePermanent target = new TargetCreaturePermanent(filterDefender);
-        ability.addTarget(target);
+        ability.addTarget(new TargetPermanent(filterDefender));
     }
 }

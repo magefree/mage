@@ -1,9 +1,5 @@
 package mage.cards.s;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -17,11 +13,14 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetCreaturePermanent;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
- *
  * @author weirddan455
  */
 public final class SplitTheParty extends CardImpl {
@@ -72,7 +71,7 @@ class SplitThePartyEffect extends OneShotEffect {
             int halfCreatures = (numCreatures / 2) + (numCreatures % 2);
             FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures controlled by " + targetPlayer.getName());
             filter.add(new ControllerIdPredicate(targetPlayer.getId()));
-            TargetCreaturePermanent target = new TargetCreaturePermanent(halfCreatures, halfCreatures, filter, true);
+            TargetPermanent target = new TargetPermanent(halfCreatures, halfCreatures, filter, true);
             if (controller.chooseTarget(outcome, target, source, game)) {
                 Set<Card> cardsToHand = new HashSet<>();
                 for (UUID creatureId : target.getTargets()) {

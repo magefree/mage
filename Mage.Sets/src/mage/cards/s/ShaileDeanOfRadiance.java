@@ -24,6 +24,7 @@ import mage.filter.predicate.Predicate;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.EnteredThisTurnPredicate;
 import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -72,7 +73,7 @@ public final class ShaileDeanOfRadiance extends ModalDoubleFacedCard {
         // {T}: Put a +1/+1 counter on another target creature, then Embrose, Dean of Shadow deals 2 damage to that creature.
         Ability ability = new SimpleActivatedAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new TapSourceCost());
         ability.addEffect(new DamageTargetEffect(2).concatBy(", then").setText("{this} deals 2 damage to that creature"));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.getRightHalfCard().addAbility(ability);
 
         // Whenever a creature you control with a +1/+1 counter on it dies, draw a card.

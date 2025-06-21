@@ -14,19 +14,17 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
 
 /**
- *
  * @author ciaccona007
  */
 public final class AshrootAnimist extends CardImpl {
 
     public AshrootAnimist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{G}");
-        
+
         this.subtype.add(SubType.LIZARD);
         this.subtype.add(SubType.DRUID);
         this.power = new MageInt(4);
@@ -40,9 +38,9 @@ public final class AshrootAnimist extends CardImpl {
                 new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn).setText("another target creature you control gains trample"),
                 false
         );
-        ability.addEffect( new BoostTargetEffect(SourcePermanentPowerValue.NOT_NEGATIVE, SourcePermanentPowerValue.NOT_NEGATIVE, Duration.EndOfTurn)
+        ability.addEffect(new BoostTargetEffect(SourcePermanentPowerValue.NOT_NEGATIVE, SourcePermanentPowerValue.NOT_NEGATIVE, Duration.EndOfTurn)
                 .setText("and gets +X/+X until end of turn, where X is this creature's power"));
-        ability.addTarget(new TargetControlledCreaturePermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
         this.addAbility(ability);
     }
 

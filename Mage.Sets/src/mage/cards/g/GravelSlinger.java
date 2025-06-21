@@ -15,6 +15,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterAttackingOrBlockingCreature;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -32,7 +33,7 @@ public final class GravelSlinger extends CardImpl {
 
         // {tap}: Gravel Slinger deals 1 damage to target attacking or blocking creature.
         Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(new FilterAttackingOrBlockingCreature()));
+        ability.addTarget(new TargetPermanent(new FilterAttackingOrBlockingCreature()));
         this.addAbility(ability);
         // Morph {1}{W}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{1}{W}")));

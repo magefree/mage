@@ -18,7 +18,10 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import static mage.constants.SubType.BIRD;
 
 /**
  *
@@ -39,7 +42,7 @@ public final class SorayaTheFalconer extends CardImpl {
 
         // {1}{W}: Target Bird creature gains banding until end of turn.
         Ability ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(BandingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{1}{W}"));
-        ability.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent(SubType.BIRD, "Bird creature")));
+        ability.addTarget(new TargetPermanent(new FilterCreaturePermanent(BIRD, "Bird creature")));
         this.addAbility(ability);
 
     }

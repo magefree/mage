@@ -6,7 +6,6 @@ import mage.abilities.common.AttacksEachCombatStaticAbility;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
@@ -23,7 +22,7 @@ import mage.filter.predicate.permanent.DefendingPlayerControlsSourceAttackingPre
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -58,11 +57,9 @@ public final class KyloRen extends CardImpl {
 
         // Whenever Kylo Ren attacks, it gets +1/+0 for each creature in your graveyard and you may tap target creature defending player controls.
         CardsInControllerGraveyardCount value = new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_CREATURE);
-        Effect effect = new BoostSourceEffect(value, StaticValue.get(0), Duration.WhileOnBattlefield);
-        effect.setText("it gets +1/+0 for each creature in your graveyard");
-        Ability ability = new AttacksTriggeredAbility(effect, false);
+        Ability ability = new AttacksTriggeredAbility(new BoostSourceEffect(value, StaticValue.get(0), Duration.WhileOnBattlefield).setText("it gets +1/+0 for each creature in your graveyard"));
         ability.addEffect(new KyloRenTapTargetEffect());
-        ability.addTarget(new TargetCreaturePermanent(0, 1, filter, false));
+        ability.addTarget(new TargetPermanent(0, 1, filter));
         this.addAbility(ability);
     }
 

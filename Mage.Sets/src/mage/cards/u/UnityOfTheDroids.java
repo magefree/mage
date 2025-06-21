@@ -12,6 +12,7 @@ import mage.constants.Duration;
 import mage.constants.PutCards;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -34,7 +35,7 @@ public final class UnityOfTheDroids extends CardImpl {
 
         // Choose one - Prevent all damage that would be dealt to target artifact creature this turn.
         this.getSpellAbility().addEffect(new PreventDamageToTargetEffect(Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(artifactCreatureFilter));
+        this.getSpellAbility().addTarget(new TargetPermanent(artifactCreatureFilter));
 
         //   Look at the top four cards of your library. Put one of them into your hand and the rest into your graveyard.
         Mode mode = new Mode(new LookLibraryAndPickControllerEffect(4, 1, PutCards.HAND, PutCards.GRAVEYARD));
@@ -42,7 +43,7 @@ public final class UnityOfTheDroids extends CardImpl {
 
         //   Destroy target nonartifact creature.
         mode = new Mode(new DestroyTargetEffect());
-        mode.addTarget(new TargetCreaturePermanent(nonArtifactCreatureFilter));
+        mode.addTarget(new TargetPermanent(nonArtifactCreatureFilter));
         this.getSpellAbility().addMode(mode);
     }
 

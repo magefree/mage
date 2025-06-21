@@ -17,7 +17,7 @@ import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetPermanentOrPlayer;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
@@ -45,7 +45,7 @@ public final class ScreamingNemesis extends CardImpl {
 
         // Whenever Screaming Nemesis is dealt damage, it deals that much damage to any other target. If a player is dealt damage this way, they can't gain life for the rest of the game.
         Ability ability = new DealtDamageToSourceTriggeredAbility(new ScreamingNemesisEffect(), false);
-        ability.addTarget(new TargetAnyTarget(filter));
+        ability.addTarget(new TargetPermanentOrPlayer(filter));
         this.addAbility(ability);
     }
 

@@ -23,6 +23,7 @@ import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -91,7 +92,7 @@ class SomnophoreTriggeredAbility extends TriggeredAbilityImpl {
                 filter.add(new ControllerIdPredicate(opponent.getId()));
 
                 this.getTargets().clear();
-                this.addTarget(new TargetCreaturePermanent(filter));
+                this.addTarget(new TargetPermanent(filter));
                 return true;
             }
         }

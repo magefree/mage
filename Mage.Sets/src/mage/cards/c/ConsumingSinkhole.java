@@ -11,6 +11,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 
@@ -36,7 +37,7 @@ public final class ConsumingSinkhole extends CardImpl {
         Effect effect = new ExileTargetEffect();
         effect.setText("Exile target land creature");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
 
         // Consuming Sinkhole deals 4 damage to target player.
         Mode mode = new Mode(new DamageTargetEffect(4));

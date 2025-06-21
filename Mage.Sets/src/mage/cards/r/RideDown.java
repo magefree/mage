@@ -17,6 +17,7 @@ import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -37,7 +38,7 @@ public final class RideDown extends CardImpl {
 
         // Destroy target blocking creature. Creatures that were blocked by that creature this combat gain trample until end of turn.
         this.getSpellAbility().addEffect(new RideDownEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
 
     }
 

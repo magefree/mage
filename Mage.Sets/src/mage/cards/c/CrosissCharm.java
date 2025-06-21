@@ -13,6 +13,8 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetArtifactPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK;
+
 /**
  *
  * @author LevelX2
@@ -27,7 +29,7 @@ public final class CrosissCharm extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent());
         // or destroy target nonblack creature, and it can't be regenerated;
         Mode mode = new Mode(new DestroyTargetEffect(true));
-        mode.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK));
+        mode.addTarget(new TargetPermanent(FILTER_PERMANENT_CREATURE_NON_BLACK));
         this.getSpellAbility().addMode(mode);
         // or destroy target artifact.
         mode = new Mode(new DestroyTargetEffect());

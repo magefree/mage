@@ -1,8 +1,7 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
@@ -12,20 +11,22 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class SwordOfTheMeek extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a 1/1 creature");
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("a 1/1 creature you control");
 
     static {
         filter.add(new PowerPredicate(ComparisonType.EQUAL_TO, 1));
@@ -33,16 +34,19 @@ public final class SwordOfTheMeek extends CardImpl {
     }
 
     public SwordOfTheMeek(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +1/+2.
-        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(1, 2, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(1, 2)));
+
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), false));
+
         // Whenever a 1/1 creature you control enters, you may return Sword of the Meek from your graveyard to the battlefield, then attach it to that creature.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.GRAVEYARD, new SwordOfTheMeekEffect(), filter, true, SetTargetPointer.PERMANENT)
-                .setTriggerPhrase("Whenever a 1/1 creature enters under your control, "));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(
+                Zone.GRAVEYARD, new SwordOfTheMeekEffect(), filter, true, SetTargetPointer.PERMANENT
+        ));
     }
 
     private SwordOfTheMeek(final SwordOfTheMeek card) {
@@ -59,7 +63,7 @@ class SwordOfTheMeekEffect extends OneShotEffect {
 
     SwordOfTheMeekEffect() {
         super(Outcome.Benefit);
-        this.staticText = "you may return {this} from your graveyard to the battlefield, then attach it to that creature";
+        this.staticText = "you may return this card from your graveyard to the battlefield, then attach it to that creature";
     }
 
     private SwordOfTheMeekEffect(final SwordOfTheMeekEffect effect) {

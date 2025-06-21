@@ -26,6 +26,8 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import static mage.filter.StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE;
+
 /**
  *
  * @author jimga150
@@ -62,7 +64,7 @@ public final class SwoopingPteranodon extends CardImpl {
         ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn).setText("and haste until end of turn."));
         ability.addEffect(new SwoopingPteranodonCreateDelayedTriggerEffect());
 
-        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
+        ability.addTarget(new TargetPermanent(FILTER_OPPONENTS_PERMANENT_CREATURE));
 
         this.addAbility(ability);
 

@@ -17,8 +17,8 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -36,7 +36,7 @@ public final class FeralEncounter extends CardImpl {
 
         DelayedTriggeredAbility delayed = new FeralEncounterDelayedTriggeredAbility();
         delayed.addTarget(new TargetControlledCreaturePermanent());
-        delayed.addTarget(new TargetCreaturePermanent(0, 1, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL, false));
+        delayed.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(delayed));
     }
 

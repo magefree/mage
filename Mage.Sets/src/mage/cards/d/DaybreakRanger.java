@@ -15,6 +15,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -44,7 +45,7 @@ public final class DaybreakRanger extends CardImpl {
 
         // {tap}: Daybreak Ranger deals 2 damage to target creature with flying.
         Ability activatedAbility = new SimpleActivatedAbility(new DamageTargetEffect(2), new TapSourceCost());
-        activatedAbility.addTarget(new TargetCreaturePermanent(filter));
+        activatedAbility.addTarget(new TargetPermanent(filter));
         this.addAbility(activatedAbility);
         // At the beginning of each upkeep, if no spells were cast last turn, transform Daybreak Ranger.
         this.addAbility(new TransformAbility());

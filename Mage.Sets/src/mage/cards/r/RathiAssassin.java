@@ -23,6 +23,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -55,7 +56,7 @@ public final class RathiAssassin extends CardImpl {
         // {1}{B}{B}, {T}: Destroy target tapped nonblack creature.
         Ability destroyAbility = new SimpleActivatedAbility(new DestroyTargetEffect(), new ManaCostsImpl<>("{1}{B}{B}"));
         destroyAbility.addCost(new TapSourceCost());
-        destroyAbility.addTarget(new TargetCreaturePermanent(destroyFilter));
+        destroyAbility.addTarget(new TargetPermanent(destroyFilter));
         this.addAbility(destroyAbility);
         
         // {3}, {T}: Search your library for a Mercenary permanent card with converted mana cost 3 or less and put it onto the battlefield. Then shuffle your library.

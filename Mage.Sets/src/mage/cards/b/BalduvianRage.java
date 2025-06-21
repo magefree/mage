@@ -13,6 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.common.FilterAttackingCreature;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 
@@ -26,7 +27,7 @@ public final class BalduvianRage extends CardImpl {
 
         // Target attacking creature gets +X/+0 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(GetXValue.instance, StaticValue.get(0), Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterAttackingCreature()));
+        this.getSpellAbility().addTarget(new TargetPermanent(new FilterAttackingCreature()));
 
         // Draw a card at the beginning of the next turn's upkeep.
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(

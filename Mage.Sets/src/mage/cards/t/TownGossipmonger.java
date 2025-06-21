@@ -1,7 +1,4 @@
-
 package mage.cards.t;
-
-import java.util.UUID;
 
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -14,21 +11,14 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.permanent.TappedPredicate;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
 public final class TownGossipmonger extends CardImpl {
-
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creature you control");
-
-    static {
-        filter.add(TappedPredicate.UNTAPPED);
-    }
 
     public TownGossipmonger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");
@@ -41,7 +31,7 @@ public final class TownGossipmonger extends CardImpl {
         // {T}, Tap an untapped creature you control: Transform Town Gossipmonger.
         this.addAbility(new TransformAbility());
         Ability ability = new SimpleActivatedAbility(new TransformSourceEffect(), new TapSourceCost());
-        ability.addCost(new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true)));
+        ability.addCost(new TapTargetCost(StaticFilters.FILTER_CONTROLLED_UNTAPPED_CREATURE));
         this.addAbility(ability);
     }
 

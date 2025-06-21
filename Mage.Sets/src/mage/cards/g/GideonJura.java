@@ -17,6 +17,7 @@ import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TokenImpl;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetOpponent;
 
@@ -47,7 +48,7 @@ public final class GideonJura extends CardImpl {
 
         // −2: Destroy target tapped creature.
         LoyaltyAbility ability2 = new LoyaltyAbility(new DestroyTargetEffect(), -2);
-        ability2.addTarget(new TargetCreaturePermanent(filter));
+        ability2.addTarget(new TargetPermanent(filter));
         this.addAbility(ability2);
 
         // 0: Until end of turn, Gideon Jura becomes a 6/6 Human Soldier creature that's still a planeswalker. Prevent all damage that would be dealt to him this turn.

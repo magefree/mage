@@ -9,17 +9,18 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author TheElk801
  */
 public final class SteelclawLance extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter
+    private static final FilterPermanent filter
             = new FilterControlledCreaturePermanent(SubType.KNIGHT, "Knight");
 
     public SteelclawLance(UUID ownerId, CardSetInfo setInfo) {
@@ -31,10 +32,10 @@ public final class SteelclawLance extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(2, 2)));
 
         // Equip Knight {1}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1), new TargetControlledCreaturePermanent(filter), false));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1), new TargetPermanent(filter), false));
 
         // Equip {3}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3), new TargetControlledCreaturePermanent(), false));
+        this.addAbility(new EquipAbility(3, false));
 
     }
 

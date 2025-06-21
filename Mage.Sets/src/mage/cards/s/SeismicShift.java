@@ -1,20 +1,18 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.combat.CantBlockTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetLandPermanent;
 import mage.target.targetpointer.SecondTargetPointer;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class SeismicShift extends CardImpl {
@@ -28,7 +26,7 @@ public final class SeismicShift extends CardImpl {
         this.getSpellAbility().addEffect(new CantBlockTargetEffect(Duration.EndOfTurn)
                 .setText("Up to two target creatures can't block this turn")
                 .setTargetPointer(new SecondTargetPointer()));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2, StaticFilters.FILTER_PERMANENT_CREATURES, false));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
     }
 
     private SeismicShift(final SeismicShift card) {

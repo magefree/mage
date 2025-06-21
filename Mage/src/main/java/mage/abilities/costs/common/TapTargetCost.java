@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.constants.Outcome;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledPermanent;
@@ -19,6 +20,18 @@ import java.util.UUID;
 public class TapTargetCost extends CostImpl {
 
     TargetControlledPermanent target;
+
+    public TapTargetCost(FilterControlledPermanent filter) {
+        this(1, filter);
+    }
+
+    public TapTargetCost(int amount, FilterControlledPermanent filter) {
+        this(amount, amount, filter);
+    }
+
+    public TapTargetCost(int minAmount, int maxAmount, FilterControlledPermanent filter) {
+        this(new TargetControlledPermanent(minAmount, maxAmount, filter, true));
+    }
 
     public TapTargetCost(TargetControlledPermanent target) {
         this.target = target;

@@ -1,9 +1,7 @@
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -13,10 +11,11 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author TheElk801
  */
 public final class ImperialAerosaur extends CardImpl {
@@ -32,13 +31,13 @@ public final class ImperialAerosaur extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Imperial Aerosaur enters the battlefield, another target creature you control gets +1/+1 and gains flying until end of turn.
-        Effect effect = new BoostTargetEffect(1, 1, Duration.EndOfTurn);
-        effect.setText("another target creature you control gets +1/+1");
-        EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(effect);
-        effect = new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("and gains flying until end of turn");
-        ability.addEffect(effect);
-        ability.addTarget(new TargetControlledCreaturePermanent(StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL));
+        EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(
+                new BoostTargetEffect(1, 1).setText("another target creature you control gets +1/+1")
+        );
+        ability.addEffect(new GainAbilityTargetEffect(
+                FlyingAbility.getInstance(), Duration.EndOfTurn
+        ).setText("and gains flying until end of turn"));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL));
         this.addAbility(ability);
     }
 

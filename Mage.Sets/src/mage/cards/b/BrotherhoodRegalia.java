@@ -12,7 +12,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -23,6 +23,7 @@ public final class BrotherhoodRegalia extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter
             = new FilterControlledCreaturePermanent("legendary creature");
+
     static {
         filter.add(SuperType.LEGENDARY.getPredicate());
     }
@@ -44,7 +45,7 @@ public final class BrotherhoodRegalia extends CardImpl {
         this.addAbility(ability);
 
         // Equip legendary creature {1}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1), new TargetControlledCreaturePermanent(filter), false));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1), new TargetPermanent(filter), false));
 
         // Equip {3}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3), true));

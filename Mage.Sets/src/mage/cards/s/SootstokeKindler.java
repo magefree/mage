@@ -17,6 +17,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -46,7 +47,7 @@ public final class SootstokeKindler extends CardImpl {
         SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn),
                 new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

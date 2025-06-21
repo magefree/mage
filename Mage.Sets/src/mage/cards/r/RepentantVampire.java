@@ -23,6 +23,7 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -59,7 +60,7 @@ public final class RepentantVampire extends CardImpl {
                 ThresholdCondition.instance, "As long as seven or more cards are in your graveyard, {this} is white"
         ));
         Ability gainedAbility = new SimpleActivatedAbility(new DestroyTargetEffect(), new TapSourceCost());
-        gainedAbility.addTarget(new TargetCreaturePermanent(filter));
+        gainedAbility.addTarget(new TargetPermanent(filter));
         ability.addEffect(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(gainedAbility, Duration.WhileOnBattlefield),
                 ThresholdCondition.instance, "and has \"{T}: Destroy target black creature.\""

@@ -16,6 +16,7 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.Target;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -45,7 +46,7 @@ public final class KrosanWarchief extends CardImpl {
         SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new RegenerateTargetEffect(),
                 new ManaCostsImpl<>("{1}{G}"));
-        Target target = new TargetCreaturePermanent(filterTarget);
+        Target target = new TargetPermanent(filterTarget);
         ability.addTarget(target);
         this.addAbility(ability);
     }

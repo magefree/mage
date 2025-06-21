@@ -19,6 +19,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.target.Target;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -38,7 +39,7 @@ public final class Backslide extends CardImpl {
 
         // Turn target creature with a morph ability face down.
         this.getSpellAbility().addEffect(new BackslideEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
 
         // Cycling {U}
         this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{U}")));

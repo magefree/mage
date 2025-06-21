@@ -10,7 +10,7 @@ import mage.game.Game;
  */
 public abstract class DelayedTriggeredAbility extends TriggeredAbilityImpl {
 
-    private final Duration duration;
+    private Duration duration;
     protected boolean triggerOnlyOnce;
 
     protected DelayedTriggeredAbility(Effect effect) {
@@ -42,6 +42,10 @@ public abstract class DelayedTriggeredAbility extends TriggeredAbilityImpl {
 
     public Duration getDuration() {
         return duration;
+    }
+
+    public void setDuration(Duration duration) {
+        this.duration = duration;
     }
 
     public boolean getTriggerOnlyOnce() {

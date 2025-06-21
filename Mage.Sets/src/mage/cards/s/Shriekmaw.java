@@ -17,6 +17,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.Target;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -44,7 +45,7 @@ public final class Shriekmaw extends CardImpl {
 
         // When Shriekmaw enters the battlefield, destroy target nonartifact, nonblack creature.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(),false);
-        Target target = new TargetCreaturePermanent(filter);
+        Target target = new TargetPermanent(filter);
         ability.addTarget(target);
         this.addAbility(ability);
         

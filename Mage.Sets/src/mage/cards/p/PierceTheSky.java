@@ -9,6 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -28,7 +29,7 @@ public final class PierceTheSky extends CardImpl {
 
         // Pierce the Sky deals 7 damage to target creature with flying.
         this.getSpellAbility().addEffect(new DamageTargetEffect(7));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
     private PierceTheSky(final PierceTheSky card) {

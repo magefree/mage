@@ -17,6 +17,7 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -36,7 +37,7 @@ public final class FangSkulkin extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         Ability ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(WitherAbility.getInstance(), Duration.EndOfTurn), new GenericManaCost(2));
-        ability.addTarget(new TargetCreaturePermanent(filterBlackCreature));
+        ability.addTarget(new TargetPermanent(filterBlackCreature));
         this.addAbility(ability);
     }
 

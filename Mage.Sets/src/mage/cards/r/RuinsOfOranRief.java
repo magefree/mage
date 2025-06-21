@@ -16,6 +16,7 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
 import mage.filter.predicate.permanent.EnteredThisTurnPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -40,7 +41,7 @@ public final class RuinsOfOranRief extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
         // {T}: Put a +1/+1 counter on target colorless creature that entered the battlefield this turn.
         Ability ability = new SimpleActivatedAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
 
         this.addAbility(ability);
     }

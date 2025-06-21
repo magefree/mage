@@ -20,6 +20,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.Watcher;
 
@@ -48,7 +49,7 @@ public final class JabarisInfluence extends CardImpl {
         // Gain control of target nonartifact, nonblack creature that attacked you this turn and put a -1/-0 counter on it.
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.Custom));
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.M1M0.createInstance()).setText("and put a -1/-0 counter on it"));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addWatcher(new JabarisInfluenceWatcher());
     }
 

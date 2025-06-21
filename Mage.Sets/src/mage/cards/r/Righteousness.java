@@ -9,6 +9,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.common.FilterBlockingCreature;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -24,7 +25,7 @@ public final class Righteousness extends CardImpl {
 
 
         this.getSpellAbility().addEffect(new BoostTargetEffect(7, 7, Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
     private Righteousness(final Righteousness card) {

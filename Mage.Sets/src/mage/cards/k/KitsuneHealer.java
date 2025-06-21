@@ -16,6 +16,7 @@ import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -44,7 +45,7 @@ public final class KitsuneHealer extends CardImpl {
         this.addAbility(firstAbility);
         // {T}: Prevent all damage that would be dealt to target legendary creature this turn.
         Ability secondAbility = new SimpleActivatedAbility(new PreventDamageToTargetEffect(Duration.EndOfTurn, Integer.MAX_VALUE), new TapSourceCost());
-        secondAbility.addTarget(new TargetCreaturePermanent(filter));
+        secondAbility.addTarget(new TargetPermanent(filter));
         this.addAbility(secondAbility);
     }
 

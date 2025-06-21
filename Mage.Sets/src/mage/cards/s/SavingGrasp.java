@@ -8,6 +8,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -27,7 +28,7 @@ public final class SavingGrasp extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
 
         // Return target creature you own to your hand.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect().setText("return target creature you own to your hand"));
         // Flashback {W}
         this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{W}")));

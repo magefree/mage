@@ -21,6 +21,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.AlienSalamanderToken;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.GameLog;
@@ -106,7 +107,7 @@ class TheSeaDevilsTrigger extends DelayedTriggeredAbility {
         this.getTargets().clear();
         FilterCreaturePermanent filterTarget = new FilterCreaturePermanent("creature " + player.getName() + " controls");
         filterTarget.add(new ControllerIdPredicate(player.getId()));
-        this.addTarget(new TargetCreaturePermanent(filterTarget));
+        this.addTarget(new TargetPermanent(filterTarget));
 
         int amount = event.getAmount();
 

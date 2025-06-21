@@ -11,9 +11,12 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.target.Target;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE;
 
 /**
  * @author LevelX2
@@ -31,7 +34,7 @@ public final class ScabClanGiant extends CardImpl {
         // When Scab-Clan Giant enters the battlefield, it fights target creature an opponent controls chosen at random.
         Ability ability = new EntersBattlefieldTriggeredAbility(new FightTargetSourceEffect()
                 .setText("it fights target creature an opponent controls chosen at random"));
-        Target target = new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE);
+        Target target = new TargetPermanent(FILTER_OPPONENTS_PERMANENT_CREATURE);
         target.setRandom(true);
         ability.addTarget(target);
         this.addAbility(ability);

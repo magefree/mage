@@ -1,11 +1,8 @@
-
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
-import mage.constants.SubType;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureAllEffect;
@@ -14,6 +11,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
@@ -22,10 +20,11 @@ import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.target.Target;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author TheElk801
  */
 public final class WeaverOfLies extends CardImpl {
@@ -49,7 +48,7 @@ public final class WeaverOfLies extends CardImpl {
 
         // When Weaver of Lies is turned face up, turn any number of target creatures with a morph ability other than Weaver of Lies face down.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new WeaverOfLiesEffect(), false, false);
-        ability.addTarget(new TargetCreaturePermanent(0, Integer.MAX_VALUE, filter, false));
+        ability.addTarget(new TargetPermanent(0, Integer.MAX_VALUE, filter));
         this.addAbility(ability);
     }
 

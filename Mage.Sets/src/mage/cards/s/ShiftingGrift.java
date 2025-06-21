@@ -22,7 +22,6 @@ public final class ShiftingGrift extends CardImpl {
     public ShiftingGrift(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{U}{U}");
 
-
         // Spree
         this.addAbility(new SpreeAbility(this));
 

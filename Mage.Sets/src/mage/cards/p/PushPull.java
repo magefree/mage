@@ -22,6 +22,7 @@ import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInASingleGraveyard;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTargets;
@@ -49,7 +50,7 @@ public final class PushPull extends SplitCard {
         // Push
         // Destroy target tapped creature.
         getLeftHalfCard().getSpellAbility().addEffect(new DestroyTargetEffect());
-        getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        getLeftHalfCard().getSpellAbility().addTarget(new TargetPermanent(filter));
 
         // Pull
         // Put up to two target creature cards from a single graveyard onto the battlefield under your control. They gain haste until end of turn. Sacrifice them at the beginning of the next end step.

@@ -1,8 +1,5 @@
 package mage.cards.f;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -14,7 +11,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -22,8 +18,11 @@ import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class Fumble extends CardImpl {
@@ -80,11 +79,12 @@ class FumbleEffect extends OneShotEffect {
                 }
             }
         }
-        
+
         new ReturnToHandTargetEffect().apply(game, source);
 
         if (!attachments.isEmpty()) {
-            Target target = new TargetCreaturePermanent(1, 1, StaticFilters.FILTER_PERMANENT_CREATURE, true);
+            Target target = new TargetCreaturePermanent();
+            target.withNotTarget(true);
             Permanent newCreature = null;
             if (player.choose(Outcome.BoostCreature, target, source, game)) {
                 newCreature = game.getPermanent(target.getFirstTarget());

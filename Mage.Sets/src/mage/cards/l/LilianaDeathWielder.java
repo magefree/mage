@@ -12,6 +12,7 @@ import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -42,7 +43,7 @@ public final class LilianaDeathWielder extends CardImpl {
 
         // -3: Destroy target creature with a -1/-1 counter on it.
         ability = new LoyaltyAbility(new DestroyTargetEffect(), -3);
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
         // -10: Return all creature cards from your graveyard to the battlefield.

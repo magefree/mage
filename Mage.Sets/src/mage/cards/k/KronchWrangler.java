@@ -1,7 +1,7 @@
 package mage.cards.k;
 
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -22,7 +22,7 @@ import java.util.UUID;
 public final class KronchWrangler extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterControlledCreaturePermanent("a creature with power 4 or greater");
+            = new FilterControlledCreaturePermanent("a creature you control with power 4 or greater");
 
     static {
         filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 3));
@@ -40,7 +40,7 @@ public final class KronchWrangler extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Whenever a creature with power 4 or greater you control enters, put a +1/+1 counter on Kronch Wrangler.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter
         ));
     }

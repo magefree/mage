@@ -10,6 +10,7 @@ import mage.constants.CardType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 
@@ -36,10 +37,10 @@ public final class ClanDefiance extends CardImpl {
         this.getSpellAbility().getModes().setMaxModes(3);
         // Clan Defiance deals X damage to target creature with flying;
         this.getSpellAbility().addEffect(new DamageTargetEffect(GetXValue.instance));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filterFlying).withChooseHint("deals X damage, with flying"));
+        this.getSpellAbility().addTarget(new TargetPermanent(filterFlying).withChooseHint("deals X damage, with flying"));
         // Clan Defiance deals X damage to target creature without flying;
         Mode mode1 = new Mode(new DamageTargetEffect(GetXValue.instance));
-        mode1.addTarget(new TargetCreaturePermanent(filterWithoutFlying).withChooseHint("deals X damage, without flying"));
+        mode1.addTarget(new TargetPermanent(filterWithoutFlying).withChooseHint("deals X damage, without flying"));
         this.getSpellAbility().addMode(mode1);
         // and/or Clan Defiance deals X damage to target player.
         Mode mode2 = new Mode(new DamageTargetEffect(GetXValue.instance));

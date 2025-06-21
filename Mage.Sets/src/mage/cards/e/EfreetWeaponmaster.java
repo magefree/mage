@@ -13,7 +13,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -37,7 +37,7 @@ public final class EfreetWeaponmaster extends CardImpl {
         Ability ability = new EntersBattlefieldOrTurnedFaceUpTriggeredAbility(
                 new BoostTargetEffect(3, 0, Duration.EndOfTurn)
         );
-        ability.addTarget(new TargetControlledCreaturePermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
         this.addAbility(ability);
 
         // Morph {2}{U}{R}{W}

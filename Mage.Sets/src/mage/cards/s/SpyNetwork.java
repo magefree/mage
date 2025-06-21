@@ -16,8 +16,8 @@ import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
@@ -103,7 +103,7 @@ class SpyNetworkFaceDownEffect extends OneShotEffect {
             FilterCreaturePermanent filter = new FilterCreaturePermanent("face down creature controlled by " + player.getLogName());
             filter.add(FaceDownPredicate.instance);
             filter.add(new ControllerIdPredicate(player.getId()));
-            TargetCreaturePermanent target = new TargetCreaturePermanent(1, 1, filter, true);
+            TargetPermanent target = new TargetPermanent(1, 1, filter, true);
             if (target.canChoose(controller.getId(), source, game)) {
                 while (controller.chooseUse(outcome, "Look at a face down creature controlled by " + player.getLogName() + "?", source, game)) {
                     target.clearChosen();

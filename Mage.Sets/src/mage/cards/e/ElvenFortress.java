@@ -12,6 +12,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterBlockingCreature;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -25,7 +26,7 @@ public final class ElvenFortress extends CardImpl {
 
         // {1}{G}: Target blocking creature gets +0/+1 until end of turn.
         Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(0, 1, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{G}"));
-        ability.addTarget(new TargetCreaturePermanent(new FilterBlockingCreature()));
+        ability.addTarget(new TargetPermanent(new FilterBlockingCreature()));
         this.addAbility(ability);
     }
 

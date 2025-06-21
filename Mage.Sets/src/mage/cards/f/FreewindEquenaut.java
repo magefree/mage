@@ -18,6 +18,7 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterAttackingOrBlockingCreature;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -38,7 +39,7 @@ public final class FreewindEquenaut extends CardImpl {
         SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new DamageTargetEffect(2),
                 new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(new FilterAttackingOrBlockingCreature()));
+        ability.addTarget(new TargetPermanent(new FilterAttackingOrBlockingCreature()));
         this.addAbility(new SimpleStaticAbility(
                 new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(ability, Duration.WhileOnBattlefield),

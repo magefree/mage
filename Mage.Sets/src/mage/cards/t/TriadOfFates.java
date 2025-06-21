@@ -16,9 +16,12 @@ import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.Target;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_ANOTHER_TARGET_CREATURE;
 
 /**
  * @author LevelX2
@@ -43,21 +46,21 @@ public final class TriadOfFates extends CardImpl {
         // {1}, {T}: Put a fate counter on another target creature.
         Ability ability = new SimpleActivatedAbility(new AddCountersTargetEffect(CounterType.FATE.createInstance()), new ManaCostsImpl<>("{1}"));
         ability.addCost(new TapSourceCost());
-        Target target = new TargetCreaturePermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE);
+        Target target = new TargetPermanent(FILTER_ANOTHER_TARGET_CREATURE);
         ability.addTarget(target);
         this.addAbility(ability);
 
         // {W}, {T}: Exile target creature that has a fate counter on it, then return it to the battlefield under its owner's control.
         ability = new SimpleActivatedAbility(new ExileThenReturnTargetEffect(false, false), new ManaCostsImpl<>("{W}"));
         ability.addCost(new TapSourceCost());
-        target = new TargetCreaturePermanent(filterCounter);
+        target = new TargetPermanent(filterCounter);
         ability.addTarget(target);
         this.addAbility(ability);
 
         // {B}, {T}: Exile target creature that has a fate counter on it. Its controller draws two cards.
         ability = new SimpleActivatedAbility(new ExileTargetEffect(), new ManaCostsImpl<>("{B}"));
         ability.addCost(new TapSourceCost());
-        target = new TargetCreaturePermanent(filterCounter);
+        target = new TargetPermanent(filterCounter);
         ability.addTarget(target);
         ability.addEffect(new DrawCardTargetControllerEffect(2));
         this.addAbility(ability);

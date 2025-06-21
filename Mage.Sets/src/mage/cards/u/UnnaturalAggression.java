@@ -10,9 +10,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.SecondTargetPointer;
+
+import static mage.filter.StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE;
 
 /**
  *
@@ -29,7 +32,7 @@ public final class UnnaturalAggression extends CardImpl {
         // Target creature you control fights target creature an opponent controls.
         this.getSpellAbility().addEffect(new FightTargetsEffect(false));
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
+        this.getSpellAbility().addTarget(new TargetPermanent(FILTER_OPPONENTS_PERMANENT_CREATURE));
         // If the creature an opponent controls would die this turn, exile it instead.
         Effect effect = new ExileTargetIfDiesEffect();
         effect.setText("If the creature an opponent controls would die this turn, exile it instead");

@@ -15,6 +15,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -40,7 +41,7 @@ public final class WellgabberApothecary extends CardImpl {
 
         // {1}{W} : Prevent all damage that would be dealt to target tapped Merfolk or Kithkin creatuer this turn
         SimpleActivatedAbility ability = new SimpleActivatedAbility(new PreventDamageToTargetEffect(Duration.EndOfTurn, Integer.MAX_VALUE), new ManaCostsImpl<>("{1}{W}"));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
     }

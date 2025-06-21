@@ -16,9 +16,12 @@ import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.CounterAnyPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL;
 
 /**
  * @author Styxo
@@ -40,13 +43,13 @@ public final class HunterOfEyeblights extends CardImpl {
 
         // When Hunter of Eyeblights enters the battlefield, put a +1/+1 counter on target creature you don't control
         Ability ability = new EntersBattlefieldTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
-        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
+        ability.addTarget(new TargetPermanent(FILTER_CREATURE_YOU_DONT_CONTROL));
         this.addAbility(ability);
 
         //{B}{2},{T}: Destroy target creature with a counter on it.
         Ability ability2 = new SimpleActivatedAbility(new DestroyTargetEffect(), new ManaCostsImpl<>("{2}{B}"));
         ability2.addCost(new TapSourceCost());
-        ability2.addTarget(new TargetCreaturePermanent(filter));
+        ability2.addTarget(new TargetPermanent(filter));
         this.addAbility(ability2);
     }
 

@@ -16,6 +16,7 @@ import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -30,8 +31,8 @@ public final class BreakingOfTheFellowship extends CardImpl {
 
         // Target creature an opponent controls deals damage equal to its power to another target creature that player controls.
         this.getSpellAbility().addEffect(new BreakingOfTheFellowshipEffect());
-        this.getSpellAbility().addTarget(new BreakingOfTheFellowshipFirstTarget(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("another target creature that player controls")));
+        this.getSpellAbility().addTarget(new BreakingOfTheFellowshipFirstTarget());
+        this.getSpellAbility().addTarget(new TargetPermanent(new FilterCreaturePermanent("another target creature that player controls")));
 
         // The Ring tempts you.
         this.getSpellAbility().addEffect(new TheRingTemptsYouEffect());
@@ -78,10 +79,10 @@ class BreakingOfTheFellowshipEffect extends OneShotEffect {
 
 }
 
-class BreakingOfTheFellowshipFirstTarget extends TargetCreaturePermanent {
+class BreakingOfTheFellowshipFirstTarget extends TargetPermanent {
 
-    public BreakingOfTheFellowshipFirstTarget(FilterCreaturePermanent filter) {
-        super(1, 1, filter, false);
+    public BreakingOfTheFellowshipFirstTarget() {
+        super(1, 1, StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE, false);
     }
 
     private BreakingOfTheFellowshipFirstTarget(final BreakingOfTheFellowshipFirstTarget target) {

@@ -14,6 +14,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterAttackingCreature;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -33,7 +34,7 @@ public final class DuelistsHeritage extends CardImpl {
         effect.setOutcome(Outcome.Benefit);
         Ability ability = new DuelistsHeritageTriggeredAbility(
                 Zone.BATTLEFIELD, effect);
-        ability.addTarget(new TargetCreaturePermanent(new FilterAttackingCreature()));
+        ability.addTarget(new TargetPermanent(new FilterAttackingCreature()));
         this.addAbility(ability);
     }
 

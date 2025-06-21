@@ -19,6 +19,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -34,8 +35,8 @@ public final class CankerousThirst extends CardImpl {
 
         // If {B} was spent to cast Cankerous Thirst, you may have target creature get -3/-3 until end of turn. If {G} was spent to cast Cankerous Thirst, you may have target creature get +3/+3 until end of turn.
         this.getSpellAbility().addEffect(new CankerousThirstEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature (1th effect -3/-3)")));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature (2nd effect +3/+3)")));
+        this.getSpellAbility().addTarget(new TargetPermanent(new FilterCreaturePermanent("creature (1th effect -3/-3)")));
+        this.getSpellAbility().addTarget(new TargetPermanent(new FilterCreaturePermanent("creature (2nd effect +3/+3)")));
         this.getSpellAbility().addEffect(new InfoEffect("<i>(Do both if {B}{G} was spent.)</i>"));
     }
 

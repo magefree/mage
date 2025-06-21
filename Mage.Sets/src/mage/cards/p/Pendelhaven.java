@@ -17,6 +17,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -38,7 +39,7 @@ public final class Pendelhaven extends CardImpl {
         this.addAbility(new GreenManaAbility());
         // {tap}: Target 1/1 creature gets +1/+2 until end of turn.
         Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(1, 2, Duration.EndOfTurn), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

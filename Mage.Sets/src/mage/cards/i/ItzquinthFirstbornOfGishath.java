@@ -16,6 +16,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.other.AnotherTargetPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -47,7 +48,7 @@ public final class ItzquinthFirstbornOfGishath extends CardImpl {
         // When Itzquinth enters the battlefield, you may pay {2}. When you do, target Dinosaur you control deals damage equal to its power to another target creature.
         ReflexiveTriggeredAbility reflexive = new ReflexiveTriggeredAbility(new DamageWithPowerFromOneToAnotherTargetEffect(), false);
         reflexive.addTarget(new TargetControlledPermanent(filter1).setTargetTag(1)); // may not be a creature. Don't ask me why.
-        reflexive.addTarget(new TargetCreaturePermanent(filter2).setTargetTag(2));
+        reflexive.addTarget(new TargetPermanent(filter2).setTargetTag(2));
         this.addAbility(new EntersBattlefieldTriggeredAbility(
                 new DoWhenCostPaid(reflexive, new GenericManaCost(2), "Pay {2}?")
         ));

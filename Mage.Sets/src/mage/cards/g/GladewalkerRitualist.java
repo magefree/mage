@@ -1,7 +1,7 @@
 package mage.cards.g;
 
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.ChangelingAbility;
 import mage.cards.CardImpl;
@@ -9,9 +9,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.NamePredicate;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.predicate.mageobject.NamePredicate;
 
 import java.util.UUID;
 
@@ -21,7 +21,7 @@ import java.util.UUID;
 public final class GladewalkerRitualist extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterCreaturePermanent("another creature named Gladewalker Ritualist");
+            = new FilterControlledCreaturePermanent("another creature you control named Gladewalker Ritualist");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -39,9 +39,7 @@ public final class GladewalkerRitualist extends CardImpl {
         this.addAbility(new ChangelingAbility());
 
         // Whenever another creature named Gladewalker Ritualist you control enters, draw a card.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
-                new DrawCardSourceControllerEffect(1), filter
-        ));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(new DrawCardSourceControllerEffect(1), filter));
     }
 
     private GladewalkerRitualist(final GladewalkerRitualist card) {

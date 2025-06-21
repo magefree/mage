@@ -18,7 +18,7 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.game.permanent.token.RatCantBlockToken;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -55,7 +55,7 @@ public final class TotentanzSwarmPiper extends CardImpl {
                 new GainAbilityTargetEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn),
                 new ManaCostsImpl<>("{1}{B}")
         );
-        ability.addTarget(new TargetControlledCreaturePermanent(filterRat));
+        ability.addTarget(new TargetPermanent(filterRat));
         this.addAbility(ability);
     }
 

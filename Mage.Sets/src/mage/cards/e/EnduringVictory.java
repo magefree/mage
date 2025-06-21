@@ -8,6 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterAttackingOrBlockingCreature;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -20,7 +21,7 @@ public final class EnduringVictory extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{W}");
 
         // Destroy target attacking or blocking creature. Bolster 1.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterAttackingOrBlockingCreature()));
+        this.getSpellAbility().addTarget(new TargetPermanent(new FilterAttackingOrBlockingCreature()));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addEffect(new BolsterEffect(1));
     }

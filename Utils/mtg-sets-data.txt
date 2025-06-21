@@ -100,6 +100,7 @@ Darksteel|DST|
 Dragons of Tarkir|DTK|
 Archenemy: Nicol Bolas|E01|
 Explorers of Ixalan|E02|
+Edge of Eternities|EOE|
 Eternal Masters|EMA|
 Eldritch Moon|EMN|
 European Land Program|EURO|

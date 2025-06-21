@@ -13,6 +13,7 @@ import mage.constants.SubType;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -40,7 +41,7 @@ public final class LysAlanaBowmaster extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
         Ability ability = new SpellCastControllerTriggeredAbility(new DamageTargetEffect(2)
                 .setText("{this} deal 2 damage to target creature with flying"), filterElf, true);
-        ability.addTarget(new TargetCreaturePermanent(filterFlying));
+        ability.addTarget(new TargetPermanent(filterFlying));
         this.addAbility(ability);
     }
 

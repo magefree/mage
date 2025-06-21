@@ -19,7 +19,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.token.TreasureToken;
 import mage.players.Player;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -51,7 +51,7 @@ public final class DihadaBinderOfWills extends CardImpl {
         ability.addEffect(new GainAbilityTargetEffect(
                 IndestructibleAbility.getInstance(), Duration.UntilYourNextTurn
         ).setText(", and indestructible until your next turn."));
-        ability.addTarget(new TargetCreaturePermanent(0, 1, filter, false));
+        ability.addTarget(new TargetPermanent(0, 1, filter));
         this.addAbility(ability);
 
         // -3: Reveal the top four cards of your library.

@@ -9,12 +9,15 @@ import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author Rystan
@@ -39,7 +42,7 @@ public final class BlackbladeReforged extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(count, count)).addHint(new ValueHint("Lands you control", count)));
 
         // Equip legendary creature (3)
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3), new TargetControlledCreaturePermanent(filter), false));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3), new TargetPermanent(filter), false));
 
         // Equip {7}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(7), false));

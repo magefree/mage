@@ -20,6 +20,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.BlockedAttackerWatcher;
 
@@ -53,8 +54,8 @@ public final class RimehornAurochs extends CardImpl {
 
         // {2}{S}: Target creature blocks target creature this turn if able.
         Ability ability = new SimpleActivatedAbility(new RimehornAurochsEffect(), new ManaCostsImpl<>("{2}{S}"));
-        ability.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature that must block")));
-        ability.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature that is to be blocked")));
+        ability.addTarget(new TargetPermanent(new FilterCreaturePermanent("creature that must block")));
+        ability.addTarget(new TargetPermanent(new FilterCreaturePermanent("creature that is to be blocked")));
         this.addAbility(ability);
     }
 

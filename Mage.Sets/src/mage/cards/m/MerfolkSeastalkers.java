@@ -16,6 +16,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -40,7 +41,7 @@ public final class MerfolkSeastalkers extends CardImpl {
 
         this.addAbility(new IslandwalkAbility());
         SimpleActivatedAbility ability = new SimpleActivatedAbility(new TapTargetEffect(), new ManaCostsImpl<>("{2}{U}"));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

@@ -1,7 +1,7 @@
 package mage.cards.w;
 
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureCard;
@@ -26,8 +25,8 @@ import java.util.UUID;
 
 public final class WatcherOfTheSpheres extends CardImpl {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("Creature spells with flying");
-    private static final FilterPermanent filter1 = new FilterControlledCreaturePermanent("another creature with flying");
+    private static final FilterCreatureCard filter = new FilterCreatureCard("creature spells with flying");
+    private static final FilterPermanent filter1 = new FilterControlledCreaturePermanent("another creature you control with flying");
 
     static {
         filter.add(new AbilityPredicate(FlyingAbility.class));
@@ -50,7 +49,9 @@ public final class WatcherOfTheSpheres extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)));
 
         // Whenever another creature with flying you control enters, Watcher of the Spheres gets +1/+1 until end of turn.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), filter1, false));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(
+                new BoostSourceEffect(1, 1, Duration.EndOfTurn), filter1
+        ));
     }
 
     private WatcherOfTheSpheres(final WatcherOfTheSpheres card) {

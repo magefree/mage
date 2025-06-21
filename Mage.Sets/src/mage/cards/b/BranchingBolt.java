@@ -14,6 +14,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -39,10 +40,10 @@ public final class BranchingBolt extends CardImpl {
         this.getSpellAbility().getModes().setMaxModes(2);
         // Branching Bolt deals 3 damage to target creature with flying;
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filterFlying).withChooseHint("deals 3 damage, without flying"));
+        this.getSpellAbility().addTarget(new TargetPermanent(filterFlying).withChooseHint("deals 3 damage, without flying"));
         // or Branching Bolt deals 3 damage to target creature without flying.
         Mode mode = new Mode(new DamageTargetEffect(3));
-        mode.addTarget(new TargetCreaturePermanent(filterNotFlying).withChooseHint("deals 3 damage, without flying"));
+        mode.addTarget(new TargetPermanent(filterNotFlying).withChooseHint("deals 3 damage, without flying"));
         this.getSpellAbility().addMode(mode);
     }
 

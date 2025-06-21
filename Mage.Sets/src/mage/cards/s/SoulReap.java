@@ -18,6 +18,7 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.Watcher;
 
@@ -39,7 +40,7 @@ public final class SoulReap extends CardImpl {
 
         // Destroy target nongreen creature. Its controller loses 3 life if you've cast another black spell this turn.
         this.getSpellAbility().addEffect(new SoulReapEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addWatcher(new SoulReapWatcher());
     }
 

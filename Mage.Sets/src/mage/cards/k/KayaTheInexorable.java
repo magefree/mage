@@ -1,6 +1,5 @@
 package mage.cards.k;
 
-import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
@@ -22,21 +21,20 @@ import mage.game.Game;
 import mage.game.command.emblems.KayaTheInexorableEmblem;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SpiritWhiteToken;
 import mage.players.Player;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetNonlandPermanent;
 
 import java.util.UUID;
 
 /**
- *
  * @author weirddan455
  */
 public final class KayaTheInexorable extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature");
+
     static {
         filter.add(TokenPredicate.FALSE);
     }
@@ -52,7 +50,7 @@ public final class KayaTheInexorable extends CardImpl {
         LoyaltyAbility ability = new LoyaltyAbility(new AddCountersTargetEffect(CounterType.GHOSTFORM.createInstance()), 1);
         ability.addEffect(new GainAbilityTargetEffect(new KayaTheInexorableTriggeredAbility(), Duration.WhileOnBattlefield,
                 "It gains \"When this creature dies or is put into exile, return it to its owner's hand and create a 1/1 white Spirit creature token with flying.\""));
-        ability.addTarget(new TargetCreaturePermanent(0, 1, filter, false));
+        ability.addTarget(new TargetPermanent(0, 1, filter));
         this.addAbility(ability);
 
         // −3: Exile target nonland permanent.

@@ -15,6 +15,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -35,7 +36,7 @@ public final class EatenBySpiders extends CardImpl {
 
         // Destroy target creature with flying and all Equipment attached to that creature.
         this.getSpellAbility().addEffect(new EatenBySpidersEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
     private EatenBySpiders(final EatenBySpiders card) {

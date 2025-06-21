@@ -20,6 +20,7 @@ import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -49,7 +50,7 @@ public final class BowOfNylea extends CardImpl {
         ability.addCost(new TapSourceCost());
         // or Bow of Nylea deals 2 damage to target creature with flying;
         Mode mode = new Mode(new DamageTargetEffect(2));
-        mode.addTarget(new TargetCreaturePermanent(filterFlying));
+        mode.addTarget(new TargetPermanent(filterFlying));
         ability.addMode(mode);
         // or you gain 3 life;
         mode = new Mode(new GainLifeEffect(3));

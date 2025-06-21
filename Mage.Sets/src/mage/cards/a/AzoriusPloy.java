@@ -11,6 +11,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.Target;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.SecondTargetPointer;
 
@@ -28,7 +29,7 @@ public final class AzoriusPloy extends CardImpl {
         Effect effect = new PreventDamageByTargetEffect( Duration.EndOfTurn, true);
         effect.setText("Prevent all combat damage target creature would deal this turn.");
         this.getSpellAbility().addEffect(effect);
-        Target target = new TargetCreaturePermanent(new FilterCreaturePermanent("first creature"));
+        Target target = new TargetPermanent(new FilterCreaturePermanent("first creature"));
         this.getSpellAbility().addTarget(target);
 
         // Prevent all combat damage that would be dealt to target creature this turn.
@@ -36,7 +37,7 @@ public final class AzoriusPloy extends CardImpl {
         effect2.setText("<br><br>Prevent all combat damage that would be dealt to target creature this turn.");
         effect2.setTargetPointer(new SecondTargetPointer());
         this.getSpellAbility().addEffect(effect2);
-        target = new TargetCreaturePermanent(new FilterCreaturePermanent("second creature (can be the same as the first)"));
+        target = new TargetPermanent(new FilterCreaturePermanent("second creature (can be the same as the first)"));
         this.getSpellAbility().addTarget(target);
 
     }

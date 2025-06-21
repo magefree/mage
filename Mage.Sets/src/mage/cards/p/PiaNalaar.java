@@ -22,8 +22,11 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.game.permanent.token.ThopterColorlessToken;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import static mage.filter.StaticFilters.FILTER_PERMANENT_ARTIFACT_CREATURE;
 
 /**
  *
@@ -44,7 +47,7 @@ public final class PiaNalaar extends CardImpl {
 
         // {1}{R}: Target artifact creature gets +1/+0 until end of turn.
         Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{R}"));
-        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_CREATURE));
+        ability.addTarget(new TargetPermanent(FILTER_PERMANENT_ARTIFACT_CREATURE));
         this.addAbility(ability);
 
         // {1}, Sacrifice an artifact: Target creature can't block this turn.

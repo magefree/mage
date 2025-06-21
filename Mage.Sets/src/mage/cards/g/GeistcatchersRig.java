@@ -13,6 +13,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -35,7 +36,7 @@ public final class GeistcatchersRig extends CardImpl {
         this.toughness = new MageInt(5);
         // When Geistcatcher's Rig enters the battlefield, you may have it deal 4 damage to target creature with flying.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(4), true);
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

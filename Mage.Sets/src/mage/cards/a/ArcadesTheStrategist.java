@@ -2,7 +2,7 @@ package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.combat.CanAttackAsThoughItDidntHaveDefenderAllEffect;
@@ -12,7 +12,11 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -24,7 +28,7 @@ import java.util.UUID;
  */
 public final class ArcadesTheStrategist extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent defenderSingle = new FilterControlledCreaturePermanent("a creature with defender");
+    private static final FilterPermanent defenderSingle = new FilterControlledCreaturePermanent("a creature you control with defender");
     private static final FilterCreaturePermanent defenderPlural = new FilterCreaturePermanent("creature you control with defender");
 
     static {
@@ -48,7 +52,7 @@ public final class ArcadesTheStrategist extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Whenever a creature with defender you control enters, draw a card.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(
                 new DrawCardSourceControllerEffect(1), defenderSingle
         ));
 

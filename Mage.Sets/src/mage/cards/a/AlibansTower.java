@@ -8,6 +8,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.common.FilterBlockingCreature;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -21,7 +22,7 @@ public final class AlibansTower extends CardImpl {
 
         // Target blocking creature gets +3/+1 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(3, 1, Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterBlockingCreature()));
+        this.getSpellAbility().addTarget(new TargetPermanent(new FilterBlockingCreature()));
     }
 
     private AlibansTower(final AlibansTower card) {

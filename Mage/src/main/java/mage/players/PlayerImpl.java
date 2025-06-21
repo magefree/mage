@@ -5450,7 +5450,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public SurveilResult doSurveil(int value, Ability source, Game game) {
         GameEvent event = new GameEvent(GameEvent.EventType.SURVEIL, getId(), source, getId(), value, true);
-        if (game.replaceEvent(event)) {
+        if (game.replaceEvent(event) || event.getAmount() < 1) {
             return SurveilResult.noSurveil();
         }
         game.informPlayers(getLogName() + " surveils " + event.getAmount() + CardUtil.getSourceLogName(game, source));

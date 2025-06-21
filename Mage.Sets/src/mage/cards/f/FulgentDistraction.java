@@ -1,28 +1,30 @@
 package mage.cards.f;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
 /**
- *
  * @author maurer.it_at_gmail.com
  */
 public final class FulgentDistraction extends CardImpl {
 
-    public FulgentDistraction (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");
-
+    public FulgentDistraction(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{W}");
 
         this.getSpellAbility().addEffect(new FulgentDistractionEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(2));
@@ -51,27 +53,30 @@ class FulgentDistractionEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for ( UUID target : getTargetPointer().getTargets(game, source) ) {
-            Permanent creature = game.getPermanent(target);
-
-            List<UUID> copiedAttachments = new ArrayList<>(creature.getAttachments());
-            for ( UUID equipmentId : copiedAttachments ) {
-                Permanent equipment = game.getPermanent(equipmentId);
-                boolean isEquipment = false;
-
-                for (Ability ability : equipment.getAbilities()) {
-                    if (ability instanceof EquipAbility) {
-                        isEquipment = true;
-                        break;
-                    }
-                }
-
-                if (isEquipment) {
-                    creature.removeAttachment(equipmentId, source, game);
-                }
+        List<Permanent> permanents = this
+                .getTargetPointer()
+                .getTargets(game, source)
+                .stream()
+                .map(game::getPermanent)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+        if (permanents.isEmpty()) {
+            return false;
+        }
+        for (Permanent permanent : permanents) {
+            permanent.tap(source, game);
+        }
+        for (Permanent permanent : permanents) {
+            Set<UUID> attachments = permanent
+                    .getAttachments()
+                    .stream()
+                    .map(game::getPermanent)
+                    .filter(attachment -> attachment.hasSubtype(SubType.EQUIPMENT, game))
+                    .map(MageItem::getId)
+                    .collect(Collectors.toSet());
+            for (UUID attachmentId : attachments) {
+                permanent.removeAttachment(attachmentId, source, game);
             }
-
-            creature.tap(source, game);
         }
         return true;
     }

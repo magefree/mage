@@ -25,7 +25,7 @@ import mage.game.Game;
 import mage.game.command.Plane;
 import mage.game.stack.Spell;
 import mage.target.Target;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.util.CardUtil;
 import mage.watchers.common.PlanarRollWatcher;
 
@@ -48,7 +48,7 @@ public class FeedingGroundsPlane extends Plane {
 
         // Active player can roll the planar die: Whenever you roll {CHAOS}, target red or green creature gets X +1/+1 counters
         Effect chaosEffect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(), TargetManaValue.instance);
-        Target chaosTarget = new TargetCreaturePermanent(1, 1, StaticFilters.FILTER_PERMANENT_A_CREATURE, false);
+        Target chaosTarget = new TargetPermanent(StaticFilters.FILTER_PERMANENT_A_CREATURE);
 
         List<Effect> chaosEffects = new ArrayList<>();
         chaosEffects.add(chaosEffect);

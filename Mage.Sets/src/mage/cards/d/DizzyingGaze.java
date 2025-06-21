@@ -50,7 +50,7 @@ public final class DizzyingGaze extends CardImpl {
 
         // {R}: Enchanted creature deals 1 damage to target creature with flying.
         Ability ability2 = new SimpleActivatedAbility(new DamageTargetEffect(1), new ManaCostsImpl<>("{R}"));
-        ability2.addTarget(new TargetCreaturePermanent(filter));
+        ability2.addTarget(new TargetPermanent(filter));
         this.addAbility(new SimpleStaticAbility(
                 new GainAbilityAttachedEffect(
                         ability2,

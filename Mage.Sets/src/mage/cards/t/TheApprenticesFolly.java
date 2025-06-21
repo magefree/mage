@@ -17,7 +17,7 @@ import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -53,7 +53,7 @@ public final class TheApprenticesFolly extends CardImpl {
                         .setText("choose target nontoken creature you control that doesn't have the same name as a "
                                 + "token you control. Create a token that's a copy of it, except it isn't legendary, "
                                 + "is a Reflection in addition to its other types, and has haste"),
-                new TargetControlledCreaturePermanent(filter)
+                new TargetPermanent(filter)
         );
 
         // III -- Sacrifice all Reflections you control.

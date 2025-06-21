@@ -11,6 +11,7 @@ import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.BlockedAttackerWatcher;
 
@@ -31,8 +32,8 @@ public final class HuntDown extends CardImpl {
 
         // Target creature blocks target creature this turn if able.
         this.getSpellAbility().addEffect(new HuntDownEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filterMustBlock));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filterToBeBlocked));
+        this.getSpellAbility().addTarget(new TargetPermanent(filterMustBlock));
+        this.getSpellAbility().addTarget(new TargetPermanent(filterToBeBlocked));
         
     }
 

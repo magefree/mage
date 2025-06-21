@@ -14,6 +14,7 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterBlockingCreature;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -30,7 +31,7 @@ public final class RabidRats extends CardImpl {
 
         // {tap}: Target blocking creature gets -1/-1 until end of turn.
         Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(-1, -1, Duration.EndOfTurn), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(new FilterBlockingCreature()));
+        ability.addTarget(new TargetPermanent(new FilterBlockingCreature()));
         this.addAbility(ability);
     }
 

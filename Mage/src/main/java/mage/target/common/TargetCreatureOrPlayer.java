@@ -1,22 +1,17 @@
 package mage.target.common;
 
 import mage.filter.common.FilterCreatureOrPlayer;
+import mage.filter.common.FilterPermanentOrPlayer;
 
 /**
  * @author BetaSteward_at_googlemail.com
  */
 public class TargetCreatureOrPlayer extends TargetPermanentOrPlayer {
 
+    private static final FilterPermanentOrPlayer filter = new FilterCreatureOrPlayer();
+
     public TargetCreatureOrPlayer() {
-        this(1, 1, new FilterCreatureOrPlayer());
-    }
-
-    public TargetCreatureOrPlayer(FilterCreatureOrPlayer filter) {
-        this(1, 1, filter);
-    }
-
-    public TargetCreatureOrPlayer(int minNumTargets, int maxNumTargets, FilterCreatureOrPlayer filter) {
-        super(minNumTargets, maxNumTargets, filter, false);
+        super(1, 1, filter, false);
     }
 
     protected TargetCreatureOrPlayer(final TargetCreatureOrPlayer target) {
@@ -27,5 +22,4 @@ public class TargetCreatureOrPlayer extends TargetPermanentOrPlayer {
     public TargetCreatureOrPlayer copy() {
         return new TargetCreatureOrPlayer(this);
     }
-
 }

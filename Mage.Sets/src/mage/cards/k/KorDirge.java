@@ -1,7 +1,5 @@
-
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.RedirectionEffect;
 import mage.cards.CardImpl;
@@ -9,16 +7,16 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.other.AnotherTargetPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.target.TargetPermanent;
 import mage.target.TargetSource;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author emerald000
  */
 public final class KorDirge extends CardImpl {
@@ -28,15 +26,8 @@ public final class KorDirge extends CardImpl {
 
         // All damage that would be dealt this turn to target creature you control by a source of your choice is dealt to another target creature instead.
         this.getSpellAbility().addEffect(new KorDirgeEffect());
-        TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent();
-        target.setTargetTag(1);
-        this.getSpellAbility().addTarget(target);
-
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
-        filter.add(new AnotherTargetPredicate(2));
-        TargetCreaturePermanent target2 = new TargetCreaturePermanent(filter);
-        target2.setTargetTag(2);
-        this.getSpellAbility().addTarget(target2);
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent().setTargetTag(1));
+        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_CREATURE_TARGET_2).setTargetTag(2));
     }
 
     private KorDirge(final KorDirge card) {

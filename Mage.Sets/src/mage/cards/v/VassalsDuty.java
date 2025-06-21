@@ -1,7 +1,5 @@
-
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -10,32 +8,25 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.SuperType;
-import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class VassalsDuty extends CardImpl {
-
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("legendary creature you control");
-
-    static {
-        filter.add(SuperType.LEGENDARY.getPredicate());
-    }
 
     public VassalsDuty(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
 
         // {1}: The next 1 damage that would be dealt to target legendary creature you control this turn is dealt to you instead.
-        Ability ability = new SimpleActivatedAbility(new VassalsDutyPreventDamageTargetEffect(Duration.EndOfTurn, 1), new GenericManaCost(1));
-        ability.addTarget(new TargetControlledCreaturePermanent(1, 1, filter, false));
+        Ability ability = new SimpleActivatedAbility(new VassalsDutyPreventDamageTargetEffect(), new GenericManaCost(1));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_CREATURE_LEGENDARY));
         this.addAbility(ability);
     }
 
@@ -51,9 +42,9 @@ public final class VassalsDuty extends CardImpl {
 
 class VassalsDutyPreventDamageTargetEffect extends RedirectionEffect {
 
-    VassalsDutyPreventDamageTargetEffect(Duration duration, int amount) {
-        super(duration, amount, UsageType.ONE_USAGE_ABSOLUTE);
-        staticText = "The next " + amount + " damage that would be dealt to target legendary creature you control this turn is dealt to you instead";
+    VassalsDutyPreventDamageTargetEffect() {
+        super(Duration.EndOfTurn, 1, UsageType.ONE_USAGE_ABSOLUTE);
+        staticText = "The next 1 damage that would be dealt to target legendary creature you control this turn is dealt to you instead";
     }
 
     private VassalsDutyPreventDamageTargetEffect(final VassalsDutyPreventDamageTargetEffect effect) {
@@ -67,13 +58,13 @@ class VassalsDutyPreventDamageTargetEffect extends RedirectionEffect {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getTargetId().equals(getTargetPointer().getFirst(game, source))) {
-            TargetPlayer target = new TargetPlayer();
-            target.add(source.getControllerId(), game);
-            redirectTarget = target;
-            return true;
+        if (!event.getTargetId().equals(getTargetPointer().getFirst(game, source))) {
+            return false;
         }
-        return false;
+        TargetPlayer target = new TargetPlayer();
+        target.add(source.getControllerId(), game);
+        redirectTarget = target;
+        return true;
     }
 
 }

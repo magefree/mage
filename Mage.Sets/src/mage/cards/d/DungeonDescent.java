@@ -1,7 +1,5 @@
 package mage.cards.d;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
@@ -17,10 +15,10 @@ import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
-import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author weirddan455
  */
 public final class DungeonDescent extends CardImpl {
@@ -45,7 +43,7 @@ public final class DungeonDescent extends CardImpl {
         // {4}, {T}, Tap an untapped legendary creature you control: Venture into the dungeon. Activate only as a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(new VentureIntoTheDungeonEffect(), new GenericManaCost(4));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new TapTargetCost(new TargetControlledCreaturePermanent(filter)));
+        ability.addCost(new TapTargetCost(filter));
         ability.addHint(CurrentDungeonHint.instance);
         this.addAbility(ability);
     }

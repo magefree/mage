@@ -13,9 +13,12 @@ import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL;
 
 /**
  * @author LevelX2
@@ -27,7 +30,7 @@ public final class MoonlightHunt extends CardImpl {
 
         // Choose target creature you don't control. Each creature you control that's a Wolf or Werewolf deals damage equal to its power to that creature.
         this.getSpellAbility().addEffect(new MoonlightHuntEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
+        this.getSpellAbility().addTarget(new TargetPermanent(FILTER_CREATURE_YOU_DONT_CONTROL));
     }
 
     private MoonlightHunt(final MoonlightHunt card) {

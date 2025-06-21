@@ -14,6 +14,7 @@ import mage.constants.CardType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -44,7 +45,7 @@ public final class TwinmawStormbrood extends OmenCard {
         // Charring Bite
         // deals 5 damage to target creature without flying.
         this.getSpellCard().getSpellAbility().addEffect(new DamageTargetEffect(5));
-        this.getSpellCard().getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellCard().getSpellAbility().addTarget(new TargetPermanent(filter));
         this.finalizeOmen();
     }
 

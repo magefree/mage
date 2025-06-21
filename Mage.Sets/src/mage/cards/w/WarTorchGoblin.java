@@ -15,6 +15,7 @@ import mage.constants.SubType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Zone;
 import mage.filter.common.FilterBlockingCreature;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -34,7 +35,7 @@ public final class WarTorchGoblin extends CardImpl {
         // {R}, Sacrifice War-Torch Goblin: War-Torch Goblin deals 2 damage to target blocking creature.
         Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(2, "it"), new ColoredManaCost(ColoredManaSymbol.R));
         ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(new FilterBlockingCreature()));
+        ability.addTarget(new TargetPermanent(new FilterBlockingCreature()));
         this.addAbility(ability);
     }
 

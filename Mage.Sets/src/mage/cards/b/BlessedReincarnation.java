@@ -14,7 +14,10 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Library;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import static mage.filter.StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE;
 
 /**
  *
@@ -29,7 +32,7 @@ public final class BlessedReincarnation extends CardImpl {
         // That player reveals cards from the top of their library until a creature card is revealed.
         // The player puts that card onto the battlefield, then shuffles the rest into their library.
         this.getSpellAbility().addEffect(new BlessedReincarnationEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
+        this.getSpellAbility().addTarget(new TargetPermanent(FILTER_OPPONENTS_PERMANENT_CREATURE));
 
         // Rebound
         this.addAbility(new ReboundAbility());

@@ -18,6 +18,7 @@ import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -65,7 +66,7 @@ public final class ZaskSkitteringSwarmlord extends CardImpl {
         );
         ability2.addEffect(new GainAbilityTargetEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn)
                 .setText(" and gains deathtouch until end of turn"));
-        ability2.addTarget(new TargetCreaturePermanent(filter3));
+        ability2.addTarget(new TargetPermanent(filter3));
         this.addAbility(ability2);
     }
 

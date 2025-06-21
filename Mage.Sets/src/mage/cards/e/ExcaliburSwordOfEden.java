@@ -1,7 +1,5 @@
 package mage.cards.e;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -11,18 +9,17 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.VigilanceAbility;
-import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
+import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.HistoricPredicate;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author grimreap124
  */
 public final class ExcaliburSwordOfEden extends CardImpl {
@@ -35,12 +32,12 @@ public final class ExcaliburSwordOfEden extends CardImpl {
         filterLegendary.add(SuperType.LEGENDARY.getPredicate());
         historicFilter.add(HistoricPredicate.instance);
     }
-    
+
     private static final TotalPermanentsManaValue xValue = new TotalPermanentsManaValue(historicFilter);
 
     public ExcaliburSwordOfEden(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{12}");
-        
+
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.EQUIPMENT);
 
@@ -57,7 +54,7 @@ public final class ExcaliburSwordOfEden extends CardImpl {
         this.addAbility(ability);
 
         // Equip legendary creature {2}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), new TargetControlledCreaturePermanent(filterLegendary), false));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), new TargetPermanent(filterLegendary), false));
 
     }
 

@@ -29,7 +29,7 @@ import mage.game.stack.Spell;
 import mage.players.ManaPool;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.util.CardUtil;
 
 import java.util.*;
@@ -131,7 +131,7 @@ public class ConvokeAbility extends SimpleStaticAbility implements AlternateMana
                     }
                     filter.add(Predicates.or(colorPredicates));
                 }
-                Target target = new TargetControlledCreaturePermanent(1, 1, filter, true);
+                Target target = new TargetPermanent(1, 1, filter, true);
                 target.withTargetName("creature to tap for convoke");
                 specialAction.addTarget(target);
                 if (specialAction.canActivate(source.getControllerId(), game).canActivate()) {

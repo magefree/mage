@@ -1,4 +1,3 @@
-
 package mage.cards.h;
 
 import mage.MageInt;
@@ -10,25 +9,27 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.RedirectionEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.util.CardUtil;
 
 import java.util.UUID;
 
 /**
- *
  * @author TheElk801 & L_J
  */
 public final class HazduhrTheAbbot extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("white creature you control");
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("white creature you control");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.WHITE));
@@ -45,7 +46,7 @@ public final class HazduhrTheAbbot extends CardImpl {
         // {X}, {T}: The next X damage that would be dealt this turn to target white creature you control is dealt to Hazduhr the Abbot instead.
         Ability ability = new SimpleActivatedAbility(new HazduhrTheAbbotRedirectDamageEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{X}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetControlledCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 
@@ -60,8 +61,6 @@ public final class HazduhrTheAbbot extends CardImpl {
 }
 
 class HazduhrTheAbbotRedirectDamageEffect extends RedirectionEffect {
-
-    private static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 
     public HazduhrTheAbbotRedirectDamageEffect(Duration duration) {
         super(duration, 0, UsageType.ACCORDING_DURATION);
@@ -85,19 +84,15 @@ class HazduhrTheAbbotRedirectDamageEffect extends RedirectionEffect {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            if (filter.match(permanent, permanent.getControllerId(), source, game)) {
-                if (event.getTargetId().equals(getTargetPointer().getFirst(game, source))) {
-                    if (event.getTargetId() != null) {
-                        TargetPermanent target = new TargetPermanent();
-                        target.add(source.getSourceId(), game);
-                        redirectTarget = target;
-                        return true;
-                    }
-                }
-            }
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        if (permanent == null
+                || !event.getTargetId().equals(getTargetPointer().getFirst(game, source))
+                || event.getTargetId() == null) {
+            return false;
         }
-        return false;
+        TargetPermanent target = new TargetPermanent();
+        target.add(source.getSourceId(), game);
+        redirectTarget = target;
+        return true;
     }
 }

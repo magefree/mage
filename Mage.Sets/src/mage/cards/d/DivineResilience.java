@@ -7,21 +7,18 @@ import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetadjustment.ConditionalTargetAdjuster;
 
 import java.util.UUID;
 
 /**
- *
  * @author ciaccona007
  */
 public final class DivineResilience extends CardImpl {
 
     public DivineResilience(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}");
-        
 
         // Kicker {2}{W}
         this.addAbility(new KickerAbility("{2}{W}"));
@@ -34,7 +31,7 @@ public final class DivineResilience extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(new ConditionalTargetAdjuster(
                 KickedCondition.ONCE,
                 new TargetControlledCreaturePermanent(),
-                new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, StaticFilters.FILTER_CONTROLLED_CREATURES, false)
+                new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE)
         ));
     }
 

@@ -1,6 +1,5 @@
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -13,11 +12,12 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetOpponentsCreaturePermanent;
 import mage.target.targetpointer.SecondTargetPointer;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class NissasJudgment extends CardImpl {
@@ -32,7 +32,7 @@ public final class NissasJudgment extends CardImpl {
         // Choose up to one target creature an opponent controls. Each creature you control with a +1/+1 counter on it deals damage equal to its power to that creature.
         effect = new NissasJudgmentEffect();
         effect.setTargetPointer(new SecondTargetPointer()); // First target is used by Support
-        getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1, StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE, false));
+        getSpellAbility().addTarget(new TargetOpponentsCreaturePermanent(0, 1));
         getSpellAbility().addEffect(effect);
     }
 

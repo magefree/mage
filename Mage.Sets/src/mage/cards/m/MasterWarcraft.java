@@ -21,7 +21,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.ControlCombatRedundancyWatcher;
 
@@ -107,7 +107,7 @@ class MasterWarcraftChooseAttackersEffect extends ContinuousRuleModifyingEffectI
         if (controller == null || attackingPlayer == null || attackingPlayer.getAvailableAttackers(game).isEmpty()) {
             return false; // the attack declaration resumes for the active player as normal
         }
-        Target target = new TargetCreaturePermanent(0, Integer.MAX_VALUE, filter, true);
+        Target target = new TargetPermanent(0, Integer.MAX_VALUE, filter, true);
         if (!controller.chooseTarget(Outcome.Benefit, target, source, game)) {
             return false; // the attack declaration resumes for the active player as normal
         }

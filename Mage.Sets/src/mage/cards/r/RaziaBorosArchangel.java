@@ -24,6 +24,7 @@ import mage.filter.predicate.other.AnotherTargetPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.Target;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -59,7 +60,7 @@ public final class RaziaBorosArchangel extends CardImpl {
 
         FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature (damage is redirected to)");
         filter.add(new AnotherTargetPredicate(2));
-        target = new TargetCreaturePermanent(filter);
+        target = new TargetPermanent(filter);
         target.setTargetTag(2);
         ability.addTarget(target);
         this.addAbility(ability);

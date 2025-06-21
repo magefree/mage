@@ -12,6 +12,7 @@ import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -25,10 +26,11 @@ public final class DeathsPresence extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{5}{G}");
 
         // Whenever a creature you control dies, put X +1/+1 counters on target creature you control, where X is the power of the creature that died.
-        this.addAbility(new DiesCreatureTriggeredAbility(
-                new AddCountersTargetEffect(CounterType.P1P1.createInstance(), DeathsPresenceDiedPermanentPowerCount.instance)
-                        .setText("put X +1/+1 counters on target creature you control, where X is the power of the creature that died"),
-                false, StaticFilters.FILTER_CONTROLLED_CREATURE));
+        Ability ability = new DiesCreatureTriggeredAbility(
+                new AddCountersTargetEffect(CounterType.P1P1.createInstance(), DeathsPresenceDiedPermanentPowerCount.instance),
+                false, StaticFilters.FILTER_CONTROLLED_CREATURE);
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED));
+        this.addAbility(ability);
     }
 
     private DeathsPresence(final DeathsPresence card) {
@@ -50,7 +52,6 @@ enum DeathsPresenceDiedPermanentPowerCount implements DynamicValue {
         if (targetPermanent != null) {
             return targetPermanent.getPower().getValue();
         }
-
         return 0;
     }
 
@@ -66,6 +67,6 @@ enum DeathsPresenceDiedPermanentPowerCount implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "its power";
+        return "the power of the creature that died";
     }
 }

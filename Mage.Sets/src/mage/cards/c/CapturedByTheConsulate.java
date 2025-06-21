@@ -26,6 +26,8 @@ import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
+import static mage.filter.StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL;
+
 /**
  * @author LevelX2
  */
@@ -36,7 +38,7 @@ public final class CapturedByTheConsulate extends CardImpl {
         this.subtype.add(SubType.AURA);
 
         // Enchant creature you don't control
-        TargetPermanent auraTarget = new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL);
+        TargetPermanent auraTarget = new TargetPermanent(FILTER_CREATURE_YOU_DONT_CONTROL);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.UnboostCreature));
         Ability ability = new EnchantAbility(auraTarget);

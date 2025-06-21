@@ -13,7 +13,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import static mage.filter.StaticFilters.FILTER_ANOTHER_TARGET_CREATURE;
 
 /**
  *
@@ -37,7 +40,7 @@ public final class AtzocanArcher extends CardImpl {
         effect.setText("you may have it fight another target creature. " +
                 "<i>(Each deals damage equal to its power to the other.)</i>");
         Ability ability = new EntersBattlefieldTriggeredAbility(effect, true);
-        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE));
+        ability.addTarget(new TargetPermanent(FILTER_ANOTHER_TARGET_CREATURE));
         this.addAbility(ability);
     }
 

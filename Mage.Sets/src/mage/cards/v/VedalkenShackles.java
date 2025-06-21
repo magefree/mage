@@ -22,6 +22,7 @@ import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -48,7 +49,7 @@ public final class VedalkenShackles extends CardImpl {
                 "Gain control of target creature with power less than or equal to the number of Islands you control for as long as {this} remains tapped");
         Ability ability = new SimpleActivatedAbility(effect, new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(controllableCreatures));
+        ability.addTarget(new TargetPermanent(controllableCreatures));
         this.addAbility(ability);
     }
 

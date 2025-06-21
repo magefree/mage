@@ -1,7 +1,7 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.keyword.SurveilEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
@@ -10,7 +10,7 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.mageobject.PowerPredicate;
 
@@ -22,7 +22,7 @@ import java.util.UUID;
 public final class SnarlingGorehound extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterCreaturePermanent("another creature with power 2 or less");
+            = new FilterControlledCreaturePermanent("another creature you control with power 2 or less");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -40,7 +40,7 @@ public final class SnarlingGorehound extends CardImpl {
         this.addAbility(new MenaceAbility(false));
 
         // Whenever another creature with power 2 or less you control enters, surveil 1.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new SurveilEffect(1), filter));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(new SurveilEffect(1), filter));
     }
 
     private SnarlingGorehound(final SnarlingGorehound card) {

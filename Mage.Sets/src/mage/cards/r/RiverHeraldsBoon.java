@@ -1,23 +1,24 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.SecondTargetPointer;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class RiverHeraldsBoon extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterPermanent(SubType.MERFOLK, "Merfolk");
 
     public RiverHeraldsBoon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");
@@ -25,12 +26,9 @@ public final class RiverHeraldsBoon extends CardImpl {
         // Put a +1/+1 counter on target creature and a +1/+1 counter on up to one target Merfolk.
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
-        effect.setTargetPointer(new SecondTargetPointer());
-        effect.setText("and a +1/+1 counter on up to one target Merfolk");
-        this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1, new FilterCreaturePermanent(SubType.MERFOLK, "Merfolk"), false));
-
+        this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance())
+                .setTargetPointer(new SecondTargetPointer()).setText("and a +1/+1 counter on up to one target Merfolk"));
+        this.getSpellAbility().addTarget(new TargetPermanent(0, 1, filter));
     }
 
     private RiverHeraldsBoon(final RiverHeraldsBoon card) {

@@ -22,6 +22,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.ControlledFromStartOfControllerTurnPredicate;
 import mage.game.Game;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -55,7 +56,7 @@ public final class Norritt extends CardImpl {
 
         // {T}: Untap target blue creature.
         Ability ability1 = new SimpleActivatedAbility(new UntapTargetEffect(), new TapSourceCost());
-        ability1.addTarget(new TargetCreaturePermanent(filterBlue));
+        ability1.addTarget(new TargetPermanent(filterBlue));
         this.addAbility(ability1);
 
         // {T}: Choose target non-Wall creature the active player has controlled continuously since the beginning of the turn. That creature attacks this turn if able. If it doesn't, destroy it at the beginning of the next end step. Activate this ability only before attackers are declared.
@@ -66,7 +67,7 @@ public final class Norritt extends CardImpl {
                 new TapSourceCost(), BeforeAttackersAreDeclaredCondition.instance
         );
         ability2.addEffect(new NorrittDelayedDestroyEffect());
-        ability2.addTarget(new TargetCreaturePermanent(filterCreature));
+        ability2.addTarget(new TargetPermanent(filterCreature));
         this.addAbility(ability2);
 
     }

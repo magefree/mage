@@ -1,8 +1,7 @@
-
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.DraftFromSpellbookEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -10,6 +9,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 
 import java.util.Arrays;
@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 public final class SlimefootThallidTransplant extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("a Swamp or Forest");
+    private static final FilterPermanent filter = new FilterControlledPermanent("a Swamp or Forest you control");
 
     static {
         filter.add(Predicates.or(
@@ -49,7 +49,7 @@ public final class SlimefootThallidTransplant extends CardImpl {
             "Yavimaya Sapherd"
     ));
 
-    public SlimefootThallidTransplant (UUID ownerId, CardSetInfo setInfo) {
+    public SlimefootThallidTransplant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{G}");
 
         this.supertype.add(SuperType.LEGENDARY);
@@ -58,9 +58,7 @@ public final class SlimefootThallidTransplant extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever a Swamp or Forest you control enters, draft a card from Slimefoot, Thallid Transplant’s spellbook.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
-                new DraftFromSpellbookEffect(spellbook), filter
-        ));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(new DraftFromSpellbookEffect(spellbook), filter));
     }
 
     private SlimefootThallidTransplant(final SlimefootThallidTransplant card) {

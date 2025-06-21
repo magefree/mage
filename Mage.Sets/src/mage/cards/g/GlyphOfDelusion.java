@@ -43,7 +43,7 @@ public final class GlyphOfDelusion extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
 
         // Put X glyph counters on target creature that target Wall blocked this turn, where X is the power of that blocked creature. The creature gains “This creature doesn’t untap during your untap step if it has a glyph counter on it” and “At the beginning of your upkeep, remove a glyph counter from this creature.”
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addTarget(new GlyphOfDelusionSecondTarget());
         this.getSpellAbility().addEffect(new GlyphOfDelusionEffect());
     }

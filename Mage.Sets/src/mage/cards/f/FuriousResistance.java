@@ -16,6 +16,7 @@ import mage.filter.common.FilterBlockingCreature;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -32,7 +33,7 @@ public final class FuriousResistance extends CardImpl {
 
         // Target blocking creature gets +3/+0 and gains first strike until end of turn.
         this.getSpellAbility().addEffect(new FuriousResistanceEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
     private FuriousResistance(final FuriousResistance card) {

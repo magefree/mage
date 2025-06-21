@@ -1,7 +1,7 @@
 package mage.cards.o;
 
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.mana.AddManaOfAnyColorEffect;
@@ -24,7 +24,7 @@ import java.util.UUID;
 public final class OutcasterTrailblazer extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterControlledCreaturePermanent("another creature with power 4 or greater");
+            = new FilterControlledCreaturePermanent("another creature you control with power 4 or greater");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -43,7 +43,7 @@ public final class OutcasterTrailblazer extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new AddManaOfAnyColorEffect()));
 
         // Whenever another creature with power 4 or greater you control enters, draw a card.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new DrawCardSourceControllerEffect(1), filter));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(new DrawCardSourceControllerEffect(1), filter));
 
         // Plot {2}{G}
         this.addAbility(new PlotAbility("{2}{G}"));

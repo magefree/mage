@@ -33,7 +33,7 @@ public final class SultaiCharm extends CardImpl {
 
         // Choose one -
         // <strong>*</strong> Destroy target monocolored creature.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         
         // <strong>*</strong> Destroy target artifact or enchantment.

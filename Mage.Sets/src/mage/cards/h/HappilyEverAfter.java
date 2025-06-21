@@ -4,7 +4,8 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DrawCardAllEffect;
+import mage.abilities.effects.common.GainLifeAllEffect;
 import mage.abilities.effects.common.WinGameSourceControllerEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.HintUtils;
@@ -12,7 +13,6 @@ import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -27,7 +27,9 @@ public final class HappilyEverAfter extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
 
         // When Happily Ever After enters the battlefield, each player gains 5 life and draws a card.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new HappilyEverAfterEffect()));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new GainLifeAllEffect(5));
+        ability.addEffect(new DrawCardAllEffect(1).setText("and draws a card"));
+        this.addAbility(ability);
 
         // At the beginning of your upkeep, if there are five colors among permanents you control, there are six or more card types among permanents you control and/or cards in your graveyard, and your life total is greater than or equal to your starting life total, you win the game.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect())
@@ -44,37 +46,6 @@ public final class HappilyEverAfter extends CardImpl {
     @Override
     public HappilyEverAfter copy() {
         return new HappilyEverAfter(this);
-    }
-}
-
-class HappilyEverAfterEffect extends OneShotEffect {
-
-    HappilyEverAfterEffect() {
-        super(Outcome.GainLife);
-        staticText = "each player gains 5 life and draws a card";
-    }
-
-    private HappilyEverAfterEffect(final HappilyEverAfterEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public HappilyEverAfterEffect copy() {
-        return new HappilyEverAfterEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        game.getState()
-                .getPlayersInRange(source.getControllerId(), game)
-                .stream()
-                .map(game::getPlayer)
-                .filter(Objects::nonNull)
-                .forEachOrdered(player -> {
-                    player.gainLife(5, game, source);
-                    player.drawCards(1, source, game);
-                });
-        return true;
     }
 }
 

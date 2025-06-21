@@ -15,7 +15,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -45,10 +45,11 @@ public final class GargosViciousWatcher extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 4)));
 
         // Whenever a creature you control becomes the target of a spell, Gargos, Vicious Watcher fights up to one target creature you don't control.
-        TriggeredAbility ability = new BecomesTargetAnyTriggeredAbility(new FightTargetSourceEffect(),
-                StaticFilters.FILTER_CONTROLLED_A_CREATURE, StaticFilters.FILTER_SPELL_A,
-                SetTargetPointer.NONE, false);
-        ability.addTarget(new TargetCreaturePermanent(0, 1, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL, false));
+        TriggeredAbility ability = new BecomesTargetAnyTriggeredAbility(
+                new FightTargetSourceEffect(), StaticFilters.FILTER_CONTROLLED_A_CREATURE,
+                StaticFilters.FILTER_SPELL_A, SetTargetPointer.NONE, false
+        );
+        ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
         this.addAbility(ability);
     }
 

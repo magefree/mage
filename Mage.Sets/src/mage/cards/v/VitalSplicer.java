@@ -15,6 +15,7 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.PhyrexianGolemToken;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -46,7 +47,7 @@ public final class VitalSplicer extends CardImpl {
 
         // {1}: Regenerate target Golem you control.
         Ability ability = new SimpleActivatedAbility(new RegenerateTargetEffect(), new ManaCostsImpl<>("{1}"));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

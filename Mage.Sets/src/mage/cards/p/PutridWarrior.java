@@ -4,15 +4,12 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.DealsDamageSourceTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.GainLifeAllEffect;
 import mage.abilities.effects.common.LoseLifeAllPlayersEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.game.Game;
-import mage.players.Player;
 
 import java.util.UUID;
 
@@ -31,7 +28,7 @@ public final class PutridWarrior extends CardImpl {
 
         // Whenever Putrid Warrior deals damage, choose one - Each player loses 1 life; or each player gains 1 life.
         Ability ability = new DealsDamageSourceTriggeredAbility(new LoseLifeAllPlayersEffect(1));
-        ability.addMode(new Mode(new PutridWarriorGainLifeEffect()));
+        ability.addMode(new Mode(new GainLifeAllEffect(1)));
         this.addAbility(ability);
     }
 
@@ -43,33 +40,4 @@ public final class PutridWarrior extends CardImpl {
     public PutridWarrior copy() {
         return new PutridWarrior(this);
     }
-}
-
-class PutridWarriorGainLifeEffect extends OneShotEffect {
-
-    PutridWarriorGainLifeEffect() {
-        super(Outcome.GainLife);
-        staticText = "each player gains 1 life";
-    }
-
-    private PutridWarriorGainLifeEffect(final PutridWarriorGainLifeEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public PutridWarriorGainLifeEffect copy() {
-        return new PutridWarriorGainLifeEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                player.gainLife(1, game, source);
-            }
-        }
-        return true;
-    }
-
 }

@@ -17,6 +17,7 @@ import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -41,7 +42,7 @@ public final class MaskOfTheMimic extends CardImpl {
 
         // Search your library for a card with the same name as target nontoken creature and put that card onto the battlefield. Then shuffle your library.
         this.getSpellAbility().addEffect(new MaskOfTheMimicEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
     private MaskOfTheMimic(final MaskOfTheMimic card) {

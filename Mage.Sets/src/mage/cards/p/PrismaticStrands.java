@@ -1,7 +1,5 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -15,22 +13,22 @@ import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TimingRule;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
 public final class PrismaticStrands extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped white creature you control");
+    private static final FilterControlledPermanent filter = new FilterControlledCreaturePermanent("untapped white creature you control");
 
     static {
         filter.add(TappedPredicate.UNTAPPED);
@@ -44,7 +42,7 @@ public final class PrismaticStrands extends CardImpl {
         this.getSpellAbility().addEffect(new PrismaticStrandsEffect());
 
         // Flashback-Tap an untapped white creature you control.
-        this.addAbility(new FlashbackAbility(this, new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false))));
+        this.addAbility(new FlashbackAbility(this, new TapTargetCost(filter)));
     }
 
     private PrismaticStrands(final PrismaticStrands card) {
@@ -77,18 +75,17 @@ class PrismaticStrandsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source);
-        if (controller != null && sourceObject != null) {
-            ChoiceColor choice = new ChoiceColor();
-            controller.choose(Outcome.PreventDamage, choice, game);
-            if (choice.isChosen()) {
-                if (!game.isSimulation()) {
-                    game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " has chosen sources of the color " + choice.getChoice());
-                }
-                game.addEffect(new PrismaticStrandsPreventionEffect(choice.getColor()), source);
-                return true;
-            }
+        if (controller == null || sourceObject == null) {
+            return false;
         }
-        return false;
+        ChoiceColor choice = new ChoiceColor();
+        controller.choose(Outcome.PreventDamage, choice, game);
+        if (!choice.isChosen()) {
+            return false;
+        }
+        game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " has chosen sources of the color " + choice.getChoice());
+        game.addEffect(new PrismaticStrandsPreventionEffect(choice.getColor()), source);
+        return true;
     }
 }
 
@@ -108,16 +105,13 @@ class PrismaticStrandsPreventionEffect extends PreventionEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (super.applies(event, source, game)) {
-            if (event.getType() == GameEvent.EventType.DAMAGE_PLAYER
-                    || event.getType() == GameEvent.EventType.DAMAGE_PERMANENT) {
-                MageObject sourceObject = game.getObject(event.getSourceId());
-                if (sourceObject != null && sourceObject.getColor(game).shares(this.color)) {
-                    return true;
-                }
-            }
+        if (!super.applies(event, source, game)
+                || event.getType() != GameEvent.EventType.DAMAGE_PLAYER
+                && event.getType() != GameEvent.EventType.DAMAGE_PERMANENT) {
+            return false;
         }
-        return false;
+        MageObject sourceObject = game.getObject(event.getSourceId());
+        return sourceObject != null && sourceObject.getColor(game).shares(this.color);
     }
 
     @Override

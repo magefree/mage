@@ -15,6 +15,7 @@ import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -40,7 +41,7 @@ public final class HuntingDrake extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // When Hunting Drake enters the battlefield, put target red or green creature on top of its owner's library.
         Ability ability = new EntersBattlefieldTriggeredAbility(new PutOnLibraryTargetEffect(true));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

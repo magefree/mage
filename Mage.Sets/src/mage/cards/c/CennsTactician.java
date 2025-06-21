@@ -16,6 +16,7 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -39,7 +40,7 @@ public final class CennsTactician extends CardImpl {
         // {W}, {tap}: Put a +1/+1 counter on target Soldier creature.
         Ability ability = new SimpleActivatedAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new ColoredManaCost(ColoredManaSymbol.W));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filterSoldier));
+        ability.addTarget(new TargetPermanent(filterSoldier));
         this.addAbility(ability);
         
         // Each creature you control with a +1/+1 counter on it can block an additional creature each combat.

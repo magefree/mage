@@ -16,6 +16,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.target.Target;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -39,7 +40,7 @@ public final class EpharasWarden extends CardImpl {
 
         // {T}: Tap target creature with power 3 or less.
         Ability ability = new SimpleActivatedAbility(new TapTargetEffect(), new TapSourceCost());
-        Target target = new TargetCreaturePermanent(filter);
+        Target target = new TargetPermanent(filter);
         ability.addTarget(target);
         this.addAbility(ability);
     }

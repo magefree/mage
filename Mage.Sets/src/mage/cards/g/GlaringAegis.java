@@ -16,6 +16,8 @@ import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import static mage.filter.StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE;
+
 /**
  *
  * @author fireshoes
@@ -35,7 +37,7 @@ public final class GlaringAegis extends CardImpl {
         
         // When Glaring Aegis enters the battlefield, tap target creature an opponent controls.
         Ability ability2 = new EntersBattlefieldTriggeredAbility(new TapTargetEffect());
-        ability2.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
+        ability2.addTarget(new TargetPermanent(FILTER_OPPONENTS_PERMANENT_CREATURE));
         this.addAbility(ability2);
         
         // Enchanted creature gets +1/+3.

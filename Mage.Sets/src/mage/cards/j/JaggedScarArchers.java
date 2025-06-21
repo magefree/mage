@@ -18,6 +18,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -47,7 +48,7 @@ public final class JaggedScarArchers extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(controlledElvesFilter))));
         // {tap}: Jagged-Scar Archers deals damage equal to its power to target creature with flying.
         Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(SourcePermanentPowerValue.NOT_NEGATIVE).setText("{this} deals damage equal to its power to target creature with flying"), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(flyingCreatureFilter));
+        ability.addTarget(new TargetPermanent(flyingCreatureFilter));
         this.addAbility(ability);
     }
 

@@ -15,6 +15,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -44,7 +45,7 @@ public final class BrassTalonChimera extends CardImpl {
         Ability ability = new SimpleActivatedAbility(new AddCountersTargetEffect(CounterType.P2P2.createInstance()), new SacrificeSourceCost());
         ability.addEffect(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield)
                 .setText("It gains first strike. <i>(This effect lasts indefinitely.)</i>"));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         addAbility(ability);
     }
 

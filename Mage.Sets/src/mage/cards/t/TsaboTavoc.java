@@ -17,6 +17,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -49,7 +50,7 @@ public final class TsaboTavoc extends CardImpl {
         // {B}{B}, {tap}: Destroy target legendary creature. It can't be regenerated.
         Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(true), new ManaCostsImpl<>("{B}{B}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filterDestroy));
+        ability.addTarget(new TargetPermanent(filterDestroy));
         this.addAbility(ability);        
     }
 

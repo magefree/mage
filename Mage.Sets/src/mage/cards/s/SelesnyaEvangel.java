@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -13,26 +11,18 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.permanent.TappedPredicate;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.SaprolingToken;
-import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author Loki
  */
 public final class SelesnyaEvangel extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creature you control");
-
-    static {
-        filter.add(TappedPredicate.UNTAPPED);
-    }
-
     public SelesnyaEvangel(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{W}");
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.SHAMAN);
 
@@ -42,7 +32,7 @@ public final class SelesnyaEvangel extends CardImpl {
         // {1}, {tap}, Tap an untapped creature you control: Create a 1/1 green Saproling creature token.
         Ability ability = new SimpleActivatedAbility(new CreateTokenEffect(new SaprolingToken()), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true)));
+        ability.addCost(new TapTargetCost(StaticFilters.FILTER_CONTROLLED_UNTAPPED_CREATURE));
         this.addAbility(ability);
     }
 

@@ -15,6 +15,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterBlockingCreature;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -36,7 +37,7 @@ public final class DauthiJackal extends CardImpl {
         // {B}{B}, Sacrifice Dauthi Jackal: Destroy target blocking creature.
         Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new ManaCostsImpl<>("{B}{B}"));
         ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(new FilterBlockingCreature()));
+        ability.addTarget(new TargetPermanent(new FilterBlockingCreature()));
         this.addAbility(ability);
     }
 

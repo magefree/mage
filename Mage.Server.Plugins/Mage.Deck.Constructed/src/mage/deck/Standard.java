@@ -18,11 +18,6 @@ public class Standard extends Constructed {
         super("Constructed - Standard");
 
         setCodes.addAll(makeLegalSets());
-
-        banned.add("The Meathook Massacre");
-        banned.add("Fable of the Mirror-Breaker");
-        banned.add("Reckoner Bankbuster");
-        banned.add("Invoke Despair");
     }
 
     static List<String> makeLegalSets() {

@@ -10,6 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 
@@ -32,7 +33,7 @@ public final class Thunderbolt extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
         this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
         Mode mode = new Mode(new DamageTargetEffect(4));
-        mode.addTarget(new TargetCreaturePermanent(filter));
+        mode.addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addMode(mode);
     }
 

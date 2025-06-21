@@ -15,9 +15,14 @@ import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
+
+import static mage.constants.SagaChapter.CHAPTER_I;
+import static mage.constants.SagaChapter.CHAPTER_II;
+import static mage.filter.StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE;
 
 /**
  * @author TheElk801
@@ -43,8 +48,8 @@ public final class TimeOfIce extends CardImpl {
         effects.add(new TapTargetEffect());
         effects.add(new DontUntapInControllersUntapStepTargetEffect(Duration.WhileControlled, "It"));
         sagaAbility.addChapterEffect(
-                this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_II, effects,
-                new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE)
+                this, CHAPTER_I, CHAPTER_II, effects,
+                new TargetPermanent(FILTER_OPPONENTS_PERMANENT_CREATURE)
         );
 
         // III — Return all tapped creatures to their owners' hands.

@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.ExileTargetCost;
@@ -16,7 +15,9 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
  * @author MarcoMarin
@@ -27,12 +28,11 @@ public final class SoulExchange extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}{B}");
 
         // As an additional cost to cast Soul Exchange, exile a creature you control.
-        Cost cost = new ExileTargetCost(new TargetControlledCreaturePermanent(StaticFilters.FILTER_CONTROLLED_A_CREATURE));
-        this.getSpellAbility().addCost(cost);
+        this.getSpellAbility().addCost(new ExileTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_A_CREATURE)));
+
         // Return target creature card from your graveyard to the battlefield. Put a +2/+2 counter on that creature if the exiled creature was a Thrull.
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.getSpellAbility().addEffect(new SoulExchangeEffect());
-
     }
 
     private SoulExchange(final SoulExchange card) {

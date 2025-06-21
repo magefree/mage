@@ -18,8 +18,11 @@ import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
+
+import static mage.filter.StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE;
 
 /**
  *
@@ -32,7 +35,7 @@ public final class MarkForDeath extends CardImpl {
 
         // Target creature an opponent controls blocks this turn if able. Untap that creature. Other creatures that player controls can't block this turn.
         this.getSpellAbility().addEffect(new MarkForDeathEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
+        this.getSpellAbility().addTarget(new TargetPermanent(FILTER_OPPONENTS_PERMANENT_CREATURE));
     }
 
     private MarkForDeath(final MarkForDeath card) {

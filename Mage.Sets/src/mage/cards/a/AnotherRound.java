@@ -9,9 +9,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.FixedTargets;
 
@@ -61,12 +61,8 @@ class AnotherRoundEffect extends OneShotEffect {
         }
 
         int xValue = GetXValue.instance.calculate(game, source, this);
-        TargetControlledCreaturePermanent target =
-                new TargetControlledCreaturePermanent(
-                        0, Integer.MAX_VALUE,
-                        StaticFilters.FILTER_CONTROLLED_CREATURE, true
-                );
-
+        TargetPermanent target = new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE);
+        target.withNotTarget(true);
         for (int i = 0; i <= xValue; ++i) {
             target.clearChosen();
             controller.chooseTarget(Outcome.Benefit, target, source, game);

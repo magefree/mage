@@ -15,6 +15,7 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterAttackingOrBlockingCreature;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -34,7 +35,7 @@ public final class SerraAdvocate extends CardImpl {
         
         // {tap}: Target attacking or blocking creature gets +2/+2 until end of turn.
         Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(2, 2, Duration.EndOfTurn), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(new FilterAttackingOrBlockingCreature()));
+        ability.addTarget(new TargetPermanent(new FilterAttackingOrBlockingCreature()));
         this.addAbility(ability);
     }
 

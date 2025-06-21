@@ -13,6 +13,7 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.UnblockedPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -32,7 +33,7 @@ public final class GossamerChains extends CardImpl {
 
         // Return Gossamer Chains to its owner's hand: Prevent all combat damage that would be dealt by target unblocked creature this turn.
         Ability ability = new SimpleActivatedAbility(new PreventDamageByTargetEffect(Duration.EndOfTurn, true), new ReturnToHandFromBattlefieldSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

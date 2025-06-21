@@ -12,6 +12,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
 
@@ -47,7 +48,7 @@ public class BecomesAuraAttachToManifestSourceEffect extends OneShotEffect {
                 if (enchantedCreature != null) {
                     enchantedCreature.addAttachment(enchantment.getId(), source, game);
                     FilterCreaturePermanent filter = new FilterCreaturePermanent();
-                    Target target = new TargetCreaturePermanent(filter);
+                    Target target = new TargetPermanent(filter);
                     target.addTarget(enchantedCreature.getId(), source, game);
                     game.addEffect(new BecomesAuraSourceEffect(target), source);
                 }

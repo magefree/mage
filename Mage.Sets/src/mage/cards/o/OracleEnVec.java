@@ -83,25 +83,27 @@ class OracleEnVecEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player opponent = game.getPlayer(this.getTargetPointer().getFirst(game, source));
-        if (opponent != null) {
-            Target target = new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, new FilterControlledCreaturePermanent(), true);
-            if (target.choose(Outcome.Neutral, opponent.getId(), source.getSourceId(), source, game)) {
-                for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), opponent.getId(), source, game)) {
-                    if (target.getTargets().contains(permanent.getId())) {
-                        RequirementEffect effect = new OracleEnVecMustAttackRequirementEffect();
-                        effect.setTargetPointer(new FixedTarget(permanent, game));
-                        game.addEffect(effect, source);
-                    } else {
-                        RestrictionEffect effect = new OracleEnVecCantAttackRestrictionEffect();
-                        effect.setTargetPointer(new FixedTarget(permanent, game));
-                        game.addEffect(effect, source);
-                    }
-                }
-                game.addDelayedTriggeredAbility(new OracleEnVecDelayedTriggeredAbility(game.getTurnNum(), target.getTargets()), source);
-                return true;
+        if (opponent == null) {
+            return false;
+        }
+        Target target = new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE);
+        target.withNotTarget(true);
+        if (!target.choose(Outcome.Neutral, opponent.getId(), source.getSourceId(), source, game)) {
+            return false;
+        }
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), opponent.getId(), source, game)) {
+            if (target.getTargets().contains(permanent.getId())) {
+                RequirementEffect effect = new OracleEnVecMustAttackRequirementEffect();
+                effect.setTargetPointer(new FixedTarget(permanent, game));
+                game.addEffect(effect, source);
+            } else {
+                RestrictionEffect effect = new OracleEnVecCantAttackRestrictionEffect();
+                effect.setTargetPointer(new FixedTarget(permanent, game));
+                game.addEffect(effect, source);
             }
         }
-        return false;
+        game.addDelayedTriggeredAbility(new OracleEnVecDelayedTriggeredAbility(game.getTurnNum(), target.getTargets()), source);
+        return true;
     }
 }
 

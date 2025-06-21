@@ -1,30 +1,34 @@
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterTeamCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class ComboAttack extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterTeamCreaturePermanent("creatures your team controls");
 
     public ComboAttack(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");
 
         // Two target creatures your team controls each deal damage equal to their power to target creature.
         this.getSpellAbility().addEffect(new ComboAttackEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(2, 2, new FilterTeamCreaturePermanent(), false));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(1));
+        this.getSpellAbility().addTarget(new TargetPermanent(2, filter));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     private ComboAttack(final ComboAttack card) {

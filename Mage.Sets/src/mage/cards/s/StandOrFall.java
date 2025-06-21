@@ -1,9 +1,9 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.combat.CantBlockAllEffect;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -17,7 +17,7 @@ import mage.filter.predicate.permanent.PermanentReferenceInCollectionPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,7 +77,7 @@ class StandOrFallEffect extends OneShotEffect {
             }
             FilterCreaturePermanent opponentFilter = new FilterCreaturePermanent();
             opponentFilter.add(new ControllerIdPredicate(oppId));
-            TargetCreaturePermanent creatures = new TargetCreaturePermanent(0, Integer.MAX_VALUE, opponentFilter, true);
+            TargetPermanent creatures = new TargetPermanent(0, Integer.MAX_VALUE, opponentFilter, true);
             List<Permanent> pile1 = new ArrayList<>();
             if (player.choose(Outcome.Neutral, creatures, source, game)) {
                 List<UUID> targets = creatures.getTargets();

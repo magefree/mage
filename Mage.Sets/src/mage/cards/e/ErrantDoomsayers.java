@@ -16,6 +16,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
 import mage.target.Target;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -38,7 +39,7 @@ public final class ErrantDoomsayers extends CardImpl {
 
         // {tap}: Tap target creature with toughness 2 or less.
         Ability ability = new SimpleActivatedAbility(new TapTargetEffect(), new TapSourceCost());
-        Target target = new TargetCreaturePermanent(filter);
+        Target target = new TargetPermanent(filter);
         ability.addTarget(target);
         this.addAbility(ability);
     }

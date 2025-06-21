@@ -17,7 +17,7 @@ import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -40,7 +40,7 @@ public final class UnrulyKrasis extends CardImpl {
 
         // Whenever Unruly Krasis attacks, you may have the base power and toughness of another target creature you control become X/X until end of turn, where X is Unruly Krasis's power.
         Ability ability = new AttacksTriggeredAbility(new UnrulyKrasisEffect(), true);
-        ability.addTarget(new TargetControlledCreaturePermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
         this.addAbility(ability);
 
         // {3}{G}{U}: Adapt 3.

@@ -17,6 +17,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -46,7 +47,7 @@ public final class DeathmarkPrelate extends CardImpl {
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(true), new ManaCostsImpl<>("{2}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(filter1));
-        ability.addTarget(new TargetCreaturePermanent(filter2));
+        ability.addTarget(new TargetPermanent(filter2));
         this.addAbility(ability);
     }
 

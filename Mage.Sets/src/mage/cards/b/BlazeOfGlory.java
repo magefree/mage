@@ -14,6 +14,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.DefendingPlayerControlsNoSourcePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -36,7 +37,7 @@ public final class BlazeOfGlory extends CardImpl {
         this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(TurnPhase.COMBAT, BeforeBlockersAreDeclaredCondition.instance));
 
         // Target creature defending player controls can block any number of creatures this turn. It blocks each attacking creature this turn if able.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new CanBlockAdditionalCreatureTargetEffect(Duration.EndOfTurn, 0)
                 .setText("target creature defending player controls can block any number of creatures this turn"));
         this.getSpellAbility().addEffect(new BlazeOfGloryRequirementEffect());
