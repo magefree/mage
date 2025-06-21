@@ -110,20 +110,10 @@ class MindlinkMechWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         Permanent vehicle;
-        switch (event.getType()) {
-            case VEHICLE_CREWED:
-                vehicle = game.getPermanent(event.getTargetId());
-                break;
-            case CREWED_VEHICLE:
-                vehicle = game.getPermanent(event.getSourceId());
-                break;
-            default:
-                return;
+        if (event.getType() == GameEvent.EventType.VEHICLE_CREWED) {
+            vehicle = game.getPermanent(event.getTargetId());
+            crewCount.compute(new MageObjectReference(vehicle, game), (m, i) -> i == null ? 1 : Integer.sum(i, 1));
         }
-        if (vehicle == null) {
-            return;
-        }
-        crewCount.compute(new MageObjectReference(vehicle, game), (m, i) -> i == null ? 1 : Integer.sum(i, 1));
     }
 
     @Override
