@@ -20,6 +20,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.target.targetadjustment.DefineByTriggerTargetAdjuster;
 
 import java.util.UUID;
 
@@ -63,6 +64,7 @@ class JackdawSaviorDiesThisOrAnotherTriggeredAbility extends DiesThisOrAnotherTr
         super(new ReturnFromGraveyardToBattlefieldTargetEffect().setText(
                         "return another target creature card with lesser mana value from your graveyard to the battlefield"),
                 false, flyingFilter);
+        this.setTargetAdjuster(DefineByTriggerTargetAdjuster.instance);
     }
 
     protected JackdawSaviorDiesThisOrAnotherTriggeredAbility(final JackdawSaviorDiesThisOrAnotherTriggeredAbility ability) {
