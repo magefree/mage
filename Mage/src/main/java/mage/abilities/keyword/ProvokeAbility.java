@@ -7,9 +7,10 @@ import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.constants.Duration;
 import mage.constants.SetTargetPointer;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.targetadjustment.ThatPlayerControlsTargetAdjuster;
 
 import java.util.UUID;
@@ -32,7 +33,7 @@ public class ProvokeAbility extends AttacksTriggeredAbility {
     public ProvokeAbility(String text) {
         super(new UntapTargetEffect(), true, text, SetTargetPointer.PLAYER);
         this.addEffect(new ProvokeRequirementEffect());
-        this.addTarget(new TargetCreaturePermanent());
+        this.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_CREATURE));
         this.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster());
     }
 
