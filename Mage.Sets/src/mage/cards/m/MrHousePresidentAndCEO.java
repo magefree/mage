@@ -14,7 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.events.DieRolledEvent;
 import mage.game.events.GameEvent;
-import mage.game.permanent.token.RobotToken;
+import mage.game.permanent.token.Robot33Token;
 import mage.game.permanent.token.Token;
 import mage.game.permanent.token.TreasureToken;
 import mage.players.Player;
@@ -116,7 +116,7 @@ class MrHousePresidentAndCEOTokenEffect extends OneShotEffect {
         int amount = (Integer) getValue("rolled");
 
         if (amount >= 4) {
-            Token robotToken = new RobotToken();
+            Token robotToken = new Robot33Token();
             robotToken.putOntoBattlefield(1, game, source);
         }
         if (amount >= 6) {

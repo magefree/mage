@@ -42,10 +42,13 @@ public final class AlaniaDivergentStorm extends CardImpl {
         // Whenever you cast a spell, if it's the first instant spell, the first sorcery spell, or the first Otter
         // spell other than Alania you've cast this turn, you may have target opponent draw a card. If you do, copy
         // that spell. You may choose new targets for the copy.
-        this.addAbility(new SpellCastControllerTriggeredAbility(
-                new DoIfCostPaid(new CopyTargetStackObjectEffect(true), new AlaniaDivergentStormCost()),
+        Ability ability = new SpellCastControllerTriggeredAbility(
+                new DoIfCostPaid(new CopyTargetStackObjectEffect(true).setText("copy that spell. You may choose new targets for the copy")
+                        , new AlaniaDivergentStormCost()),
                 null, false, SetTargetPointer.SPELL
-        ).withInterveningIf(AlaniaDivergentStormCondition.instance), new AlaniaDivergentStormWatcher());
+        ).withInterveningIf(AlaniaDivergentStormCondition.instance);
+        ability.addTarget(new TargetOpponent());
+        this.addAbility(ability, new AlaniaDivergentStormWatcher());
     }
 
     private AlaniaDivergentStorm(final AlaniaDivergentStorm card) {
@@ -58,12 +61,10 @@ public final class AlaniaDivergentStorm extends CardImpl {
     }
 }
 
-// Based on MarathWillOfTheWildRemoveCountersCost
 class AlaniaDivergentStormCost extends CostImpl {
 
     AlaniaDivergentStormCost() {
         this.text = "have target opponent draw a card";
-        this.addTarget(new TargetOpponent());
     }
 
     private AlaniaDivergentStormCost(AlaniaDivergentStormCost cost) {
@@ -73,32 +74,18 @@ class AlaniaDivergentStormCost extends CostImpl {
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         Player player = game.getPlayer(controllerId);
-        if (player == null) {
-            return false;
-        }
-        for (UUID opponentID : game.getOpponents(controllerId)) {
-            Player opponent = game.getPlayer(opponentID);
-            if (opponent == null) {
-                continue;
-            }
-            if (opponent.canBeTargetedBy(source.getSourceObject(game), controllerId, source, game)) {
-                return true;
-            }
-        }
-        return false;
+        Player opponent = game.getPlayer(source.getFirstTarget());
+        return player != null && opponent != null;
     }
 
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
-        this.getTargets().clearChosen();
         paid = false;
-        if (this.getTargets().choose(Outcome.DrawCard, controllerId, source.getSourceId(), source, game)) {
-            Player opponent = game.getPlayer(this.getTargets().getFirstTarget());
-            if (opponent == null || !opponent.canRespond()) {
-                return false;
-            }
-            paid = opponent.drawCards(1, source, game) > 0;
+        Player opponent = game.getPlayer(source.getFirstTarget());
+        if (opponent == null || !opponent.canRespond()) {
+            return false;
         }
+        paid = opponent.drawCards(1, source, game) > 0;
         return paid;
     }
 

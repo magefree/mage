@@ -16,6 +16,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetOpponent;
+import mage.util.CardUtil;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -86,6 +87,7 @@ class ShinryuTranscendentRivalEffect extends ReplacementEffectImpl {
         }
         game.informPlayers(permanent.getName() + ": " + controller.getLogName() + " has chosen " + opponent.getLogName());
         game.getState().setValue(permanent.getId() + "_" + permanent.getZoneChangeCounter(game) + "_opponent", opponent.getId());
+        permanent.addInfo("chosen opponent", CardUtil.addToolTipMarkTags("Chosen Opponent " + opponent.getLogName()), game);
         return false;
     }
 
