@@ -2116,8 +2116,8 @@ public class VerifyCardDataTest {
     boolean recursiveTargetAbilityCheck(Ability ability, int depth) {
         Collection<Mode> modes = ability.getModes().values();
         return modes.stream().flatMap(mode -> mode.getTargets().stream()).anyMatch(target -> !target.isNotTarget())
-                | ability.getTargetAdjuster() != null
-                | modes.stream().flatMap(mode -> mode.getEffects().stream()).anyMatch(effect -> recursiveTargetEffectCheck(effect, depth+1));
+                || ability.getTargetAdjuster() != null
+                || modes.stream().flatMap(mode -> mode.getEffects().stream()).anyMatch(effect -> recursiveTargetEffectCheck(effect, depth+1));
     }
 
     private void checkMissingAbilities(Card card, MtgJsonCard ref) {
@@ -2325,7 +2325,7 @@ public class VerifyCardDataTest {
                 fail(card, "abilities", "notTarget should not be used as ability target, should be inside ability effect");
             }
             boolean foundTargetedAbility = targets.stream().anyMatch(target -> !target.isNotTarget())
-                    | abilities.stream().anyMatch(x -> x.getTargetAdjuster() != null);
+                    || abilities.stream().anyMatch(x -> x.getTargetAdjuster() != null);
             boolean recursiveAbilityCard = abilities.stream().anyMatch(ability -> recursiveTargetAbilityCheck(ability, 0));
 
             if (needTargetedAbility && !(foundTargetedAbility || recursiveAbilityRefText || recursiveAbilityCard)) {
