@@ -35,6 +35,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetPermanentOrPlayer;
+import mage.target.targetadjustment.DefineByTriggerTargetAdjuster;
 
 import java.util.UUID;
 
@@ -98,6 +99,7 @@ class ToralfGodOfFuryTriggeredAbility extends TriggeredAbilityImpl implements Ba
 
     ToralfGodOfFuryTriggeredAbility() {
         super(Zone.BATTLEFIELD, null);
+        this.setTargetAdjuster(DefineByTriggerTargetAdjuster.instance);
     }
 
     private ToralfGodOfFuryTriggeredAbility(final ToralfGodOfFuryTriggeredAbility ability) {
