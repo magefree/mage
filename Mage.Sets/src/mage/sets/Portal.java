@@ -3,6 +3,13 @@ package mage.sets;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+import mage.collation.BoosterCollator;
+import mage.collation.BoosterStructure;
+import mage.collation.CardRun;
+import mage.collation.RarityConfiguration;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Plopman
@@ -282,5 +289,73 @@ public final class Portal extends ExpansionSet {
         cards.add(new SetCardInfo("Withering Gaze", 78, Rarity.UNCOMMON, mage.cards.w.WitheringGaze.class, RETRO_ART));
         cards.add(new SetCardInfo("Wood Elves", 195, Rarity.RARE, mage.cards.w.WoodElves.class, RETRO_ART));
         cards.add(new SetCardInfo("Wrath of God", 39, Rarity.RARE, mage.cards.w.WrathOfGod.class, RETRO_ART));
+    }
+
+    @Override
+    public BoosterCollator createCollator() {
+        return new PortalCollator();
+    }
+}
+
+// Booster collation info from https://www.lethe.xyz/mtg/collation/por.html
+// Packs receive 7 seeded cards for an ally colour pair (2 basics, 4 commons, 1 uncommon),
+// and then 1 rare, 2 uncommons, 5 basics (one of each colour) from the rest of the pool.
+class PortalCollator implements BoosterCollator {
+    private final CardRun common = new CardRun(true, "81", "10", "131", "68", "186", "85", "14", "135", "69", "164", "105", "15", "140", "74", "183", "102", "13", "132", "44", "163", "82", "31", "144", "63", "164", "81", "6", "145", "76", "184", "97", "19", "132", "56", "172", "93", "25", "133", "75", "169", "107", "24", "120", "60", "180", "101", "28", "139", "49", "166", "110", "9", "148", "46", "193", "115", "9", "131", "68", "186", "85", "14", "135", "69", "166", "105", "10", "140", "74", "183", "102", "13", "137", "49", "163", "82", "31", "144", "63", "180", "115", "6", "145", "76", "184", "97", "19", "137", "56", "172", "93", "25", "133", "75", "169", "107", "24", "120", "60", "168", "101", "28", "139", "44", "168", "110", "15", "148", "46", "193");
+    private final CardRun uncommon = new CardRun(true, "126", "55", "158", "36", "95", "138", "48", "174", "29", "116", "141", "64", "158", "34", "106", "129", "51", "179", "23", "83", "149", "58", "176", "29", "79", "138", "64", "162", "12", "95", "126", "42", "160", "36", "103", "141", "55", "191", "4", "103", "129", "78", "162", "4", "106", "155", "48", "174", "34", "83", "119", "58", "174", "34", "90", "126", "42", "160", "23", "90", "138", "55", "160", "23", "83", "149", "78", "191", "12", "83", "149", "58", "191", "12", "79", "119", "58", "179", "29", "79", "129", "51", "162", "36", "95", "119", "42", "160", "36", "116", "155", "48", "176", "35", "116", "138", "51", "176", "35", "106", "141", "64", "191", "35", "103", "155", "78", "179", "4", "90");
+    private final CardRun seedGW = new CardRun(true, "196", "213", "173", "165", "20", "2", "11", "197", "214", "173", "165", "38", "2", "26", "198", "215", "173", "171", "20", "2", "159", "199", "212", "173", "171", "20", "2", "181", "197", "213", "171", "165", "38", "2", "26", "198", "214", "171", "165", "20", "38", "159", "199", "215", "171", "165", "20", "38", "181");
+    private final CardRun seedWU = new CardRun(true, "196", "203", "21", "16", "77", "57", "37", "197", "200", "22", "16", "77", "62", "30", "197", "201", "21", "22", "77", "62", "47", "198", "201", "22", "16", "57", "62", "61", "198", "202", "21", "16", "57", "62", "30", "199", "202", "21", "22", "77", "57", "61");
+    private final CardRun seedRG = new CardRun(true, "208", "213", "154", "127", "185", "178", "192", "210", "214", "154", "127", "167", "185", "194", "209", "215", "151", "127", "178", "167", "134", "211", "212", "151", "127", "167", "185", "147", "210", "213", "151", "154", "178", "167", "192", "209", "214", "154", "185", "167", "151", "194", "211", "215", "151", "154", "185", "178", "134");
+    private final CardRun seedUB = new CardRun(true, "204", "203", "109", "100", "67", "53", "104", "205", "200", "100", "113", "70", "67", "80", "206", "201", "113", "109", "53", "70", "72", "207", "201", "109", "100", "53", "70", "59", "205", "202", "113", "109", "70", "67", "80", "206", "202", "100", "113", "67", "53", "59");
+    private final CardRun seedBR = new CardRun(true, "208", "205", "112", "96", "150", "146", "84", "210", "204", "96", "111", "146", "121", "114", "209", "205", "96", "111", "121", "150", "122", "211", "206", "111", "112", "121", "150", "118", "210", "207", "96", "112", "146", "150", "84", "209", "206", "111", "96", "146", "150", "114", "211", "207", "112", "96", "146", "121", "122", "204", "209", "112", "96", "146", "121", "118", "205", "211", "111", "112", "121", "150");
+    private final CardRun rare = new CardRun(false, "1", "157", "40", "3", "5", "41", "7", "8", "43", "161", "45", "86", "50", "87", "123", "52", "88", "89", "124", "91", "92", "54", "94", "125", "128", "130", "17", "18", "170", "98", "136", "99", "175", "177", "65", "142", "182", "66", "143", "108", "27", "32", "187", "188", "71", "33", "73", "189", "152", "190", "153", "117", "156", "195", "39");
+
+    private final BoosterStructure C5 = new BoosterStructure(
+            common, common, common, common, common
+    );
+    private final BoosterStructure U2 = new BoosterStructure(
+            uncommon, uncommon
+    );
+    private final BoosterStructure R1 = new BoosterStructure(rare);
+
+    private final BoosterStructure Sgw = new BoosterStructure(
+            seedGW, seedGW, seedGW, seedGW, seedGW,  seedGW, seedGW
+    );
+    private final BoosterStructure Swu = new BoosterStructure(
+            seedWU, seedWU, seedWU, seedWU, seedWU,  seedWU, seedWU
+    );
+    private final BoosterStructure Srg = new BoosterStructure(
+            seedRG, seedRG, seedRG, seedRG, seedRG,  seedRG, seedRG
+    );
+    private final BoosterStructure Sub = new BoosterStructure(
+            seedUB, seedUB, seedUB, seedUB, seedUB,  seedUB, seedUB
+    );
+    private final BoosterStructure Sbr = new BoosterStructure(
+            seedBR, seedBR, seedBR, seedBR, seedBR,  seedBR, seedBR
+    );
+
+    private final RarityConfiguration commonRuns = new RarityConfiguration(C5);
+
+    private final RarityConfiguration uncommonRuns = new RarityConfiguration(U2);
+
+    private final RarityConfiguration rareRuns = new RarityConfiguration(R1);
+
+// ratios based on one copy of the BR sheet for every two copies of the other sheets with two colour pairs on them
+    private final RarityConfiguration seededRuns = new RarityConfiguration(
+            Sgw, Sgw, Sgw, Sgw, Sgw,  Sgw, Sgw, Sgw, Sgw, Sgw,  Sgw, Sgw, Sgw, Sgw,
+            Swu, Swu, Swu, Swu, Swu,  Swu, Swu, Swu, Swu, Swu,  Swu, Swu,
+            Srg, Srg, Srg, Srg, Srg,  Srg, Srg, Srg, Srg, Srg,  Srg, Srg, Srg, Srg,
+            Sub, Sub, Sub, Sub, Sub,  Sub, Sub, Sub, Sub, Sub,  Sub, Sub,
+            Sbr, Sbr, Sbr, Sbr, Sbr,  Sbr, Sbr, Sbr, Sbr, Sbr,  Sbr, Sbr, Sbr
+    );
+
+    @Override
+    public List<String> makeBooster() {
+        List<String> booster = new ArrayList<>();
+        booster.addAll(seededRuns.getNext().makeRun());
+        booster.addAll(rareRuns.getNext().makeRun());
+        booster.addAll(uncommonRuns.getNext().makeRun());
+        booster.addAll(commonRuns.getNext().makeRun());
+        return booster;
     }
 }
