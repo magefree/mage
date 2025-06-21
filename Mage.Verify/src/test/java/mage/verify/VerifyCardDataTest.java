@@ -2080,8 +2080,17 @@ public class VerifyCardDataTest {
         }
     }
 
-    Pattern targetRegexPattern = Pattern.compile("\\b((?<!(new|the|that|choosing|the copy|each copy|with one or more|could|it|each|that spell|this spell|can) )targets?|^enchant|^(.*— )?equip|backup|modular|partner with|^bestow|soulshift|provoke)\\b(?! (cost|abilit))", Pattern.MULTILINE);
-    Pattern recursiveTargetRegexPattern = Pattern.compile("\\b((?<!^|— )when(ever)?|gain|have|has|\\. At the beginning|with|until)\\b(.|—\\n)*targets?\\b", Pattern.MULTILINE);
+    Pattern singularTargetRegexPattern = Pattern.compile("\\b(?<!(can|the|that|could|each|single|its) )target\\b");
+    Pattern pluralTargetsRegexPattern = Pattern.compile("\\b(?<!(new|the|that|copy|choosing|it|more|spell|or|changing|legal) )targets\\b");
+    Pattern targetKeywordRegexPattern = Pattern.compile("^(enchant|(.*— )?equip(?! cost| abilit)|bestow|partner with|modular|backup)\\b", Pattern.MULTILINE);
+    // Note that the check includes reminder text, so any keyword ability with reminder text always included in the card text doesn't need to be added above
+    // FIN added equip abilities with flavor words, allow for those. There are also cards that affect equip costs or equip abilities, exclude those
+    Pattern indirectTriggerTargetRegexPattern = Pattern.compile("([.,] when)(.|—\\n)+target", Pattern.MULTILINE);
+    // Some custom reflexive triggers have a modal decision before the word target, need to check across multiple lines of text for those (and . doesn't match newlines)
+    // Delayed triggers get caught by the recursiveTargetAbilityCheck, but if we want to improve that check to be an "and" instead of the current "or", we'll need to add them here.
+    Pattern quotedTargetRegexPattern = Pattern.compile(" \"[^\"]*target|has scavenge");
+    // Check if the word "target" is inside a quoted ability (or is granting the scavenge ability)
+    // A quoted ability always has a space before the opening quote and never before the closing one, so we can use that to ensure we're only checking inside
 
     boolean recursiveTargetObjectCheck(Object obj, int depth) {
         if (obj instanceof Effect) {
@@ -2099,7 +2108,7 @@ public class VerifyCardDataTest {
         return false;
     }
     boolean recursiveTargetEffectCheck(Effect effect, int depth) {
-        if (depth > 5){
+        if (depth > 3){
             return false;
         }
         return Arrays.stream(effect.getClass().getDeclaredFields())
@@ -2114,6 +2123,9 @@ public class VerifyCardDataTest {
     }
 
     boolean recursiveTargetAbilityCheck(Ability ability, int depth) {
+        if (depth > 3){
+            return false;
+        }
         Collection<Mode> modes = ability.getModes().values();
         return modes.stream().flatMap(mode -> mode.getTargets().stream()).anyMatch(target -> !target.isNotTarget())
                 || ability.getTargetAdjuster() != null
@@ -2310,16 +2322,16 @@ public class VerifyCardDataTest {
             }
         }
 
-        String[] excludedCards = {"Lodestone Bauble"}; // This card needs to choose a player before targets are selected
+        String[] excludedCards = {"Lodestone Bauble"}; // Needs to choose a player before targets are selected
         if (!Arrays.stream(excludedCards).anyMatch(x -> x.equals(ref.name))) {
-            boolean needTargetedAbility = targetRegexPattern.matcher(refLowerText).find();
-            boolean recursiveAbilityRefText = recursiveTargetRegexPattern.matcher(refLowerText).find();
+            boolean needTargetedAbility = singularTargetRegexPattern.matcher(refLowerText).find() || pluralTargetsRegexPattern.matcher(refLowerText).find() || targetKeywordRegexPattern.matcher(refLowerText).find();
+            boolean recursiveAbilityRefText = indirectTriggerTargetRegexPattern.matcher(refLowerText).find() || quotedTargetRegexPattern.matcher(refLowerText).find();
             List<Ability> abilities = card.getAbilities().copy();
             if (card.getSecondCardFace() != null) {
                 abilities.addAll(card.getSecondCardFace().getAbilities());
             }
-            List<Target> targets = abilities.stream().flatMap(ability -> ability.getModes().values().stream()
-                    .flatMap(mode -> mode.getTargets().stream())).collect(Collectors.toList());
+            List<Target> targets = abilities.stream().flatMap(ability -> ability.getModes().values().stream())
+                    .flatMap(mode -> mode.getTargets().stream()).collect(Collectors.toList());
             boolean foundNotTarget = targets.stream().anyMatch(Target::isNotTarget);
             if (foundNotTarget) {
                 fail(card, "abilities", "notTarget should not be used as ability target, should be inside ability effect");
