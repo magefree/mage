@@ -18,6 +18,7 @@ Arena League|ArenaLeague|
 Asia Pacific Land Program|AsiaPacificLandProgram|
 Assassin's Creed|AssassinsCreed|
 Avacyn Restored|AvacynRestored|
+Avatar: The Last Airbender|AvatarTheLastAirbender|
 Battlebond|Battlebond|
 Battle for Zendikar|BattleForZendikar|
 Betrayers of Kamigawa|BetrayersOfKamigawa|
