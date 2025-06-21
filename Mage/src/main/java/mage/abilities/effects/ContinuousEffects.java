@@ -966,6 +966,7 @@ public class ContinuousEffects implements Serializable {
     //20091005 - 613
     public synchronized void apply(Game game) {
         removeInactiveEffects(game);
+
         List<ContinuousEffect> activeLayerEffects = getLayeredEffects(game); // main call
 
         List<ContinuousEffect> layer = filterLayeredEffects(activeLayerEffects, Layer.CopyEffects_1);
