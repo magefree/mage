@@ -21,7 +21,7 @@ import java.util.UUID;
  */
 public final class WelcomingVampire extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("one or more other creatures with power 2 or less");
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("one or more other creatures you control with power 2 or less");
 
     static {
         filter.add(AnotherPredicate.instance);

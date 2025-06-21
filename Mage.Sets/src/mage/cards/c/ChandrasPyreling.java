@@ -28,8 +28,8 @@ public final class ChandrasPyreling extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever a source you control deals noncombat damage to an opponent, Chandra's Pyreling gets +1/+0 and gains double strike until end of turn.
-        Ability ability = new SourceDealsNoncombatDamageToOpponentTriggeredAbility(new BoostSourceEffect(1, 0, Duration.EndOfTurn).setText(" this creature gets +1/+0"));
-        ability.addEffect(new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn).setText("gains double strike until end of turn").concatBy("and"));
+        Ability ability = new SourceDealsNoncombatDamageToOpponentTriggeredAbility(new BoostSourceEffect(1, 0, Duration.EndOfTurn).setText("this creature gets +1/+0"));
+        ability.addEffect(new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn).setText("and gains double strike until end of turn"));
         this.addAbility(ability);
     }
 
