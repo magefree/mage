@@ -2270,7 +2270,7 @@
 |Generate|TOK:PIP|Human Knight|||ThePrydwenSteelFlagshipHumanKnightToken|
 |Generate|TOK:PIP|Human Soldier|||HumanSoldierToken|
 |Generate|TOK:PIP|Junk|||JunkToken|
-|Generate|TOK:PIP|Robot|||RobotToken|
+|Generate|TOK:PIP|Robot|||Robot33Token|
 |Generate|TOK:PIP|Settlement|||SettlementToken|
 |Generate|TOK:PIP|Soldier|1||SoldierTokenWithHaste|
 |Generate|TOK:PIP|Soldier|2||SoldierToken|
