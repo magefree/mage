@@ -589,6 +589,7 @@ public class ScryfallImageSupportCards {
             add("FIC"); // Final Fantasy Commander
             add("FCA"); // Final Fantasy: Through the Ages
             add("EOE"); // Edge of Eternities
+            add("EOC"); // Edge of Eternities Commander
             add("SPE"); // Marvel's Spider-Man Eternal
 
             // Custom sets using Scryfall images - must provide a direct link for each card in directDownloadLinks
