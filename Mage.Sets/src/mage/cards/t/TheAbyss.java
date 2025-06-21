@@ -10,6 +10,7 @@ import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
@@ -52,21 +53,20 @@ public final class TheAbyss extends CardImpl {
 enum TheAbyssTargetAdjuster implements TargetAdjuster {
     instance;
     private static final FilterPermanent filter
-            = new FilterPermanent("nonartifact creature that player controls of their choice");
+            = new FilterCreaturePermanent("nonartifact creature that player controls of their choice");
     static {
         filter.add(Predicates.not(CardType.ARTIFACT.getPredicate()));
-        filter.add(CardType.CREATURE.getPredicate());
     }
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        UUID opponentId = ability.getEffects().get(0).getTargetPointer().getFirst(game, ability);
+        UUID playerId = ability.getEffects().get(0).getTargetPointer().getFirst(game, ability);
         ability.getTargets().clear();
         ability.getAllEffects().setTargetPointer(new FirstTargetPointer());
 
         FilterPermanent adjustedFilter = filter.copy();
-        adjustedFilter.add(new ControllerIdPredicate(opponentId));
+        adjustedFilter.add(new ControllerIdPredicate(playerId));
         Target newTarget = new TargetPermanent(adjustedFilter);
-        newTarget.setTargetController(opponentId);
+        newTarget.setTargetController(playerId);
         ability.addTarget(newTarget);
     }
 }
