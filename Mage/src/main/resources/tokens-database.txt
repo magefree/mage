@@ -2736,7 +2736,8 @@
 |Generate|TOK:TDC|Gold|||GoldToken|
 |Generate|TOK:TDC|Human|||HumanToken|
 |Generate|TOK:TDC|Inkling|||InklingToken|
-|Generate|TOK:TDC|Insect|||InsectToken|
+|Generate|TOK:TDC|Insect|1||InsectToken|
+|Generate|TOK:TDC|Insect|2||InsectDeathToken|
 |Generate|TOK:TDC|Karox Bladewing|||KaroxBladewingToken|
 |Generate|TOK:TDC|Myr|||MyrToken|
 |Generate|TOK:TDC|Plant|||PlantToken|
@@ -2748,6 +2749,7 @@
 |Generate|TOK:TDC|Spider|||SpiderToken|
 |Generate|TOK:TDC|Spirit|||SpiritWhiteToken|
 |Generate|TOK:TDC|Thopter|||ThopterColorlessToken|
+|Generate|TOK:TDC|Wall|||Wall13Token|
 
 # ACR
 |Generate|TOK:ACR|Assassin|||AssassinMenaceToken|
@@ -2764,6 +2766,7 @@
 |Generate|TOK:DSK|Everywhere|||EverywhereToken|
 |Generate|TOK:DSK|Glimmer|||GlimmerToken|
 |Generate|TOK:DSK|Gremlin|||Gremlin11Token|
+|Generate|TOK:DSK|Horror|||HorrorEnchantmentCreatureToken|
 |Generate|TOK:DSK|Insect|1||InsectBlackGreenFlyingToken|
 |Generate|TOK:DSK|Insect|2||InsectWhiteToken|
 |Generate|TOK:DSK|Primo, the Indivisible|||PrimoTheIndivisibleToken|
