@@ -2080,7 +2080,7 @@ public class VerifyCardDataTest {
         }
     }
 
-    Pattern targetRegexPattern = Pattern.compile("\\b((?<!(new|the|that|choosing|the copy|each copy|with one or more|could|it|each|spell) )targets?|^enchant|^(.*— )?equip|backup|modular|partner with|^bestow|soulshift|provoke)\\b(?! (cost|abilit))", Pattern.MULTILINE);
+    Pattern targetRegexPattern = Pattern.compile("\\b((?<!(new|the|that|choosing|the copy|each copy|with one or more|could|it|each|that spell|this spell|can) )targets?|^enchant|^(.*— )?equip|backup|modular|partner with|^bestow|soulshift|provoke)\\b(?! (cost|abilit))", Pattern.MULTILINE);
     Pattern recursiveTargetRegexPattern = Pattern.compile("\\b((?<!^|— )when(ever)?|gain|have|has|\\. At the beginning|with|until)\\b(.|—\\n)*targets?\\b", Pattern.MULTILINE);
 
     boolean recursiveTargetObjectCheck(Object obj, int depth) {
@@ -2284,14 +2284,10 @@ public class VerifyCardDataTest {
         }
 
         // special check: wrong targeted ability
-        // possible fixes:
-        //  * on "must set withNotTarget(true)":
-        //    - check card's ability constructors and fix missing withNotTarget(true) param/field
-        //    - it's can be a keyword action (only mtg rules contains a target word), so add it to the targetedKeywords
-        // * on "must be targeted":
-        //    - TODO: enable and research checkMissTargeted - too much errors with it (is it possible to use that checks?)
-        boolean checkMissNonTargeted = true; // must set withNotTarget(true) temporarily set to ignore omen cards
-        boolean checkMissTargeted = true; // must be targeted
+        // Checks that any ability targets don't use withNotTarget (use OneShotNonTargetEffect if it's a choose effect)
+        // Checks that, if the text contains the word target, the ability does have a target.
+        // - In cases involving a target in a reflexive trigger or token or other complex situation, it assumes that it's fine
+        // - There are two versions of this complexity check, either can trigger: one on card text, one that uses Java reflection to inspect the ability's effects.
         // card can contain rules text from both sides, so must search ref card for all sides too
         String additionalName;
         if (card instanceof CardWithSpellOption) {
@@ -2314,10 +2310,10 @@ public class VerifyCardDataTest {
             }
         }
 
-        String[] excludedCards = {"Lodestone Bauble"};
+        String[] excludedCards = {"Lodestone Bauble"}; // This card needs to choose a player before targets are selected
         if (!Arrays.stream(excludedCards).anyMatch(x -> x.equals(ref.name))) {
             boolean needTargetedAbility = targetRegexPattern.matcher(refLowerText).find();
-            boolean recursiveAbilityRef = recursiveTargetRegexPattern.matcher(refLowerText).find();
+            boolean recursiveAbilityRefText = recursiveTargetRegexPattern.matcher(refLowerText).find();
             List<Ability> abilities = card.getAbilities().copy();
             if (card.getSecondCardFace() != null) {
                 abilities.addAll(card.getSecondCardFace().getAbilities());
@@ -2332,10 +2328,10 @@ public class VerifyCardDataTest {
                     | abilities.stream().anyMatch(x -> x.getTargetAdjuster() != null);
             boolean recursiveAbilityCard = abilities.stream().anyMatch(ability -> recursiveTargetAbilityCheck(ability, 0));
 
-            if (checkMissTargeted && needTargetedAbility && !(foundTargetedAbility || recursiveAbilityRef || recursiveAbilityCard)) {
+            if (needTargetedAbility && !(foundTargetedAbility || recursiveAbilityRefText || recursiveAbilityCard)) {
                 fail(card, "abilities", "wrong target settings (must be targeted, but is not)");
             }
-            if (checkMissNonTargeted && !needTargetedAbility && foundTargetedAbility) {
+            if (!needTargetedAbility && foundTargetedAbility) {
                 fail(card, "abilities", "wrong target settings (targeted ability found but no target in text)");
             }
         }
