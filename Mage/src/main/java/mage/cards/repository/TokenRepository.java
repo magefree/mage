@@ -264,10 +264,19 @@ public enum TokenRepository {
         res.add(createXmageToken(XMAGE_IMAGE_NAME_COPY, 4, "https://api.scryfall.com/cards/tznr/12/en?format=image"));
         res.add(createXmageToken(XMAGE_IMAGE_NAME_COPY, 5, "https://api.scryfall.com/cards/twho/1/en?format=image"));
         res.add(createXmageToken(XMAGE_IMAGE_NAME_COPY, 6, "https://api.scryfall.com/cards/tlci/1/en?format=image"));
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_COPY, 7, "https://api.scryfall.com/cards/tfin/1/en?format=image"));
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_COPY, 8, "https://api.scryfall.com/cards/ttdm/1/en?format=image"));
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_COPY, 9, "https://api.scryfall.com/cards/totj/1/en?format=image"));
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_COPY, 10, "https://api.scryfall.com/cards/tdsk/1/en?format=image"));
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_COPY, 11, "https://api.scryfall.com/cards/tacr/1/en?format=image"));
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_COPY, 12, "https://api.scryfall.com/cards/tpip/1/en?format=image"));
 
         // City's Blessing
         // https://scryfall.com/search?q=type%3Atoken+include%3Aextras+unique%3Aprints+City%27s+Blessing+&unique=cards&as=grid&order=name
+        // https://scryfall.com/search?as=grid&order=released&q=oracleid%3A73d60ab9-1c38-4592-a5b5-ab84788bcc84+include%3Aextras&unique=prints
         res.add(createXmageToken(XMAGE_IMAGE_NAME_CITY_BLESSING, 1, "https://api.scryfall.com/cards/f18/2/en?format=image"));
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_CITY_BLESSING, 2, "https://api.scryfall.com/cards/tlcc/17/en?format=image"));
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_CITY_BLESSING, 3, "https://api.scryfall.com/cards/tmkc/28/en?format=image"));
 
         // Day // Night
         // https://scryfall.com/search?q=include%3Aextras+unique%3Aprints+%22Day+%2F%2F+Night%22&unique=cards&as=grid&order=name
@@ -280,6 +289,7 @@ public enum TokenRepository {
         res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_MANIFEST, 2, "https://api.scryfall.com/cards/tc18/1/en?format=image"));
         res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_MANIFEST, 3, "https://api.scryfall.com/cards/tfrf/4/en?format=image"));
         res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_MANIFEST, 4, "https://api.scryfall.com/cards/tncc/3/en?format=image"));
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_MANIFEST, 5, "https://api.scryfall.com/cards/tdsk/18/en?format=image"));
 
         // Morph and Megamorph
         // https://scryfall.com/search?q=Morph+unique%3Aprints+otag%3Aassistant-cards&unique=cards&as=grid&order=name
@@ -298,12 +308,14 @@ public enum TokenRepository {
         // Foretell
         // https://scryfall.com/search?q=Foretell+unique%3Aprints+otag%3Aassistant-cards&unique=cards&as=grid&order=name
         res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_FORETELL, 1, "https://api.scryfall.com/cards/tkhm/23/en?format=image"));
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_FORETELL, 2, "https://api.scryfall.com/cards/tfic/10/en?format=image"));
 
         // The Monarch
         // https://scryfall.com/search?q=Monarch+unique%3Aprints+otag%3Aassistant-cards&unique=cards&as=grid&order=name
         res.add(createXmageToken(XMAGE_IMAGE_NAME_THE_MONARCH, 1, "https://api.scryfall.com/cards/tonc/22/en?format=image"));
         res.add(createXmageToken(XMAGE_IMAGE_NAME_THE_MONARCH, 2, "https://api.scryfall.com/cards/tcn2/1/en?format=image"));
         res.add(createXmageToken(XMAGE_IMAGE_NAME_THE_MONARCH, 3, "https://api.scryfall.com/cards/tltc/15/en?format=image"));
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_THE_MONARCH, 4, "https://api.scryfall.com/cards/tfic/11/en?format=image"));
 
         // Radiation (for trigger)
         res.add(createXmageToken(XMAGE_IMAGE_NAME_RADIATION, 1, "https://api.scryfall.com/cards/tpip/22/en?format=image"));

@@ -17,6 +17,7 @@ import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.target.Target;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -44,7 +45,7 @@ public final class ArborColossus extends CardImpl {
         this.addAbility(new MonstrosityAbility("{3}{G}{G}{G}", 3));
         // When Arbor Colossus becomes monstrous, destroy target creature with flying an opponent controls.
         Ability ability = new BecomesMonstrousSourceTriggeredAbility(new DestroyTargetEffect());
-        Target target = new TargetCreaturePermanent(filter);
+        Target target = new TargetPermanent(filter);
         ability.addTarget(target);
         this.addAbility(ability);
     }

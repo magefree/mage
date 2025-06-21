@@ -19,6 +19,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.PlayerLostLifeWatcher;
@@ -45,7 +46,7 @@ public final class RixMaadiGuildmage extends CardImpl {
 
         // {B}{R}: Target blocking creature gets -1/-1 until end of turn.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(new BoostTargetEffect(-1, -1, Duration.EndOfTurn),new ManaCostsImpl<>("{B}{R}"));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
         // {B}{R}: Target player who lost life this turn loses 1 life.

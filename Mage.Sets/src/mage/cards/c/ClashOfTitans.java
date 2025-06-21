@@ -6,9 +6,12 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
 import mage.target.Target;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_ANOTHER_CREATURE_TARGET_2;
 
 /**
  * @author TheElk801
@@ -24,7 +27,7 @@ public final class ClashOfTitans extends CardImpl {
         target.setTargetTag(1);
         this.getSpellAbility().addTarget(target);
 
-        target = new TargetCreaturePermanent(StaticFilters.FILTER_ANOTHER_CREATURE_TARGET_2);
+        target = new TargetPermanent(FILTER_ANOTHER_CREATURE_TARGET_2);
         target.setTargetTag(2);
         this.getSpellAbility().addTarget(target);
     }

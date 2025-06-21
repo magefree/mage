@@ -23,6 +23,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.XManaValueTargetAdjuster;
 import mage.watchers.Watcher;
@@ -30,6 +31,8 @@ import mage.watchers.Watcher;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURE;
 
 /**
  * @author NinthWorld
@@ -59,7 +62,7 @@ public final class SupremeLeaderSnoke extends CardImpl {
         ability3.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield).setText("It gains haste"));
         ability3.addEffect(new GainAbilityTargetEffect(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new SacrificeSourceEffect()), Duration.WhileOnBattlefield)
                 .setText("Sacrifice that creature at the beginning of the next end step"));
-        ability3.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_CREATURE));
+        ability3.addTarget(new TargetPermanent(FILTER_PERMANENT_CREATURE));
         ability3.setTargetAdjuster(new XManaValueTargetAdjuster());
         this.addAbility(ability3);
     }

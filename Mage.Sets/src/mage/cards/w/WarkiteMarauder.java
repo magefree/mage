@@ -16,6 +16,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.DefendingPlayerControlsSourceAttackingPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -45,7 +46,7 @@ public final class WarkiteMarauder extends CardImpl {
                 .setText("target creature defending player controls loses all abilities"), false);
         ability.addEffect(new SetBasePowerToughnessTargetEffect(0, 1, Duration.EndOfTurn)
                 .setText("and has base power and toughness 0/1 until end of turn"));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
     }

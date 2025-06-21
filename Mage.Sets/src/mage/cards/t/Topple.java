@@ -1,18 +1,18 @@
 package mage.cards.t;
 
-import mage.MageObject;
-import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.common.GreatestAmongPermanentsValue;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -20,12 +20,19 @@ import java.util.UUID;
  */
 public final class Topple extends CardImpl {
 
+    private static final FilterPermanent filter
+            = new FilterCreaturePermanent("creature with the greatest power among creatures on the battlefield");
+
+    static {
+        filter.add(TopplePredicate.instance);
+    }
+
     public Topple(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{W}");
 
         // Exile target creature with the greatest power among creatures on the battlefield.
         this.getSpellAbility().addEffect(new ExileTargetEffect());
-        this.getSpellAbility().addTarget(new ToppleTargetCreature());
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
     private Topple(final Topple card) {
@@ -38,65 +45,12 @@ public final class Topple extends CardImpl {
     }
 }
 
-class ToppleTargetCreature extends TargetCreaturePermanent {
-
-    public ToppleTargetCreature() {
-        super();
-        withTargetName("creature with the greatest power among creatures on the battlefield");
-    }
-
-    private ToppleTargetCreature(final ToppleTargetCreature target) {
-        super(target);
-    }
+enum TopplePredicate implements ObjectSourcePlayerPredicate<Permanent> {
+    instance;
 
     @Override
-    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
-        if (super.canTarget(controllerId, id, source, game)) {
-            int maxPower = 0;
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
-                if (permanent.getPower().getValue() > maxPower) {
-                    maxPower = permanent.getPower().getValue();
-                }
-            }
-            Permanent targetPermanent = game.getPermanent(id);
-            if (targetPermanent != null) {
-                return targetPermanent.getPower().getValue() == maxPower;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
-        int maxPower = 0;
-        List<Permanent> activePermanents = game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game);
-        Set<UUID> possibleTargets = new HashSet<>();
-        MageObject targetSource = game.getObject(source);
-        if (targetSource == null) {
-            return possibleTargets;
-        }
-        for (Permanent permanent : activePermanents) {
-            if (permanent.getPower().getValue() > maxPower) {
-                maxPower = permanent.getPower().getValue();
-            }
-        }
-        for (Permanent permanent : activePermanents) {
-            if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, source, game)) {
-                if (permanent.getPower().getValue() == maxPower) {
-                    possibleTargets.add(permanent.getId());
-                }
-            }
-        }
-        return possibleTargets;
-    }
-
-    @Override
-    public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
-        return !possibleTargets(sourceControllerId, source, game).isEmpty();
-    }
-
-    @Override
-    public ToppleTargetCreature copy() {
-        return new ToppleTargetCreature(this);
+    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
+        return input.getObject().getPower().getValue()
+                >= GreatestAmongPermanentsValue.POWER_ALL_CREATURES.calculate(game, input.getSource(), null);
     }
 }

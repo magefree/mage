@@ -39,7 +39,7 @@ public final class LothlorienBlade extends CardImpl {
 
         // Whenever equipped creature attacks, it deals damage equal to its power to target creature defending player controls.
         Ability ability = new AttacksAttachedTriggeredAbility(new LothlorienBladeEffect());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
         // Equip Elf {2}

@@ -18,6 +18,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.BlockingOrBlockedBySourcePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -44,7 +45,7 @@ public final class SereneMaster extends CardImpl {
 
         // Whenever Serene Master blocks, exchange its power and the power of target creature it's blocking until end of combat.
         Ability ability = new BlocksSourceTriggeredAbility(new SereneMasterEffect());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

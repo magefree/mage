@@ -15,6 +15,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -37,7 +38,7 @@ public final class SpinalVillain extends CardImpl {
 
         // {tap}: Destroy target blue creature.
         Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

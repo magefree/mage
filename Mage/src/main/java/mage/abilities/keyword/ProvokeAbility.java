@@ -1,8 +1,6 @@
 
 package mage.abilities.keyword;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.RequirementEffect;
@@ -13,7 +11,9 @@ import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  * 702.38. Provoke 702.38a Provoke is a triggered ability. “Provoke” means
@@ -46,8 +46,7 @@ public class ProvokeAbility extends AttacksTriggeredAbility {
             UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(sourceId, game);
             filter.add(new ControllerIdPredicate(defendingPlayerId));
             this.getTargets().clear();
-            TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
-            this.addTarget(target);
+            this.addTarget(new TargetPermanent(filter));
             return true;
         }
         return false;

@@ -13,6 +13,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -36,7 +37,7 @@ public final class DwarvenDemolitionTeam extends CardImpl {
 
         // {tap}: Destroy target Wall.
         Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

@@ -22,6 +22,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -54,7 +55,7 @@ public final class ParagonOfNewDawns extends CardImpl {
         // {W}, {T}: Another target white creature you control gains vigilance until end of turn.
         Ability ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{W}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter2));
+        ability.addTarget(new TargetPermanent(filter2));
         this.addAbility(ability);
     }
 

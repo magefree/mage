@@ -19,6 +19,7 @@ import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -84,7 +85,7 @@ class SoulSeizerTriggeredAbility extends TriggeredAbilityImpl {
                 filter.add(new ControllerIdPredicate(opponent.getId()));
 
                 this.getTargets().clear();
-                this.addTarget(new TargetCreaturePermanent(filter));
+                this.addTarget(new TargetPermanent(filter));
                 return true;
             }
         }

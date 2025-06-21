@@ -12,8 +12,11 @@ import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import static mage.filter.StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE;
 
 /**
  *
@@ -33,7 +36,7 @@ public final class WildInstincts extends CardImpl {
                 "<i>(Each deals damage equal to its power to the other.)</i>");
         getSpellAbility().addEffect(fightTargetsEffect);
 
-        getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
+        getSpellAbility().addTarget(new TargetPermanent(FILTER_OPPONENTS_PERMANENT_CREATURE));
     }
 
     private WildInstincts(final WildInstincts card) {

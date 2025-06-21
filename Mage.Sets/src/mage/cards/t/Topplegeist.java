@@ -22,6 +22,8 @@ import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
+import static mage.filter.StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE;
+
 /**
  * @author fireshoes
  */
@@ -44,7 +46,7 @@ public final class Topplegeist extends CardImpl {
 
         // When Topplegeist enters the battlefield, tap target creature an opponent controls.
         Ability ability = new EntersBattlefieldTriggeredAbility(new TapTargetEffect());
-        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
+        ability.addTarget(new TargetPermanent(FILTER_OPPONENTS_PERMANENT_CREATURE));
         this.addAbility(ability);
 
         // <i>Delirium</i> &mdash; At the beginning of each opponent's upkeep, if there are four or more card types among cards in your graveyard,

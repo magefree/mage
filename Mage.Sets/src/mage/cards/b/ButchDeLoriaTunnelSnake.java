@@ -25,9 +25,12 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_ANOTHER_TARGET_CREATURE;
 
 /**
  * @author Susucr
@@ -67,7 +70,7 @@ public final class ButchDeLoriaTunnelSnake extends CardImpl {
                 new AddCountersTargetEffect(CounterType.MENACE.createInstance()),
                 new ManaCostsImpl<>("{1}{B}")
         );
-        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE));
+        ability.addTarget(new TargetPermanent(FILTER_ANOTHER_TARGET_CREATURE));
         ability.addEffect(new BecomesCreatureTypeTargetEffect(Duration.EndOfGame, SubType.ROGUE, false)
                 .setText("It becomes a Rogue in addition to its other types"));
         this.addAbility(ability);

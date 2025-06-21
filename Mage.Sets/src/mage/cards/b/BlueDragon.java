@@ -1,24 +1,24 @@
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.constants.*;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.other.AnotherTargetPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class BlueDragon extends CardImpl {
@@ -43,19 +43,9 @@ public final class BlueDragon extends CardImpl {
 
         // Lightning Breath — When Blue Dragon enters the battlefield, until your next turn, target creature an opponent controls gets -3/-0, up to one other target creature gets -2/-0, and up to one other target creature gets -1/-0.
         Ability ability = new EntersBattlefieldTriggeredAbility(new BlueDragonEffect());
-
-        Target target = new TargetOpponentsCreaturePermanent();
-        target.setTargetTag(1);
-        ability.addTarget(target.withChooseHint("-3/-0"));
-
-        target = new TargetCreaturePermanent(0, 1, filter2, false);
-        target.setTargetTag(2);
-        ability.addTarget(target.withChooseHint("-2/-0"));
-
-        target = new TargetCreaturePermanent(0, 1, filter3, false);
-        target.setTargetTag(3);
-        ability.addTarget(target.withChooseHint("-1/-0"));
-
+        ability.addTarget(new TargetOpponentsCreaturePermanent().setTargetTag(1).withChooseHint("-3/-0"));
+        ability.addTarget(new TargetPermanent(0, 1, filter2).setTargetTag(2).withChooseHint("-2/-0"));
+        ability.addTarget(new TargetPermanent(0, 1, filter3).setTargetTag(3).withChooseHint("-1/-0"));
         this.addAbility(ability.withFlavorWord("Lightning Breath"));
     }
 

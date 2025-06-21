@@ -13,6 +13,7 @@ import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -29,7 +30,7 @@ public class MentorAbility extends AttacksTriggeredAbility {
 
     public MentorAbility() {
         super(new MentorEffect(), false);
-        this.addTarget(new TargetCreaturePermanent(filter));
+        this.addTarget(new TargetPermanent(filter));
     }
 
     protected MentorAbility(final MentorAbility ability) {

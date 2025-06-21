@@ -17,7 +17,10 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.CounterAnyPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import static mage.filter.StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL;
 
 /**
  *
@@ -39,7 +42,7 @@ public final class CelestialRegulator extends CardImpl {
         // When Celestial Regulator enters the battlefield, choose target creature you don't control and tap it.
         // If you control a creature with a counter on it, the chosen creature doesn't untap during its controller's next untap step.
         Ability ability = new EntersBattlefieldTriggeredAbility(new CelestialRegulatorEffect());
-        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
+        ability.addTarget(new TargetPermanent(FILTER_CREATURE_YOU_DONT_CONTROL));
         this.addAbility(ability);
     }
 

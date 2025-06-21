@@ -15,6 +15,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.filter.predicate.permanent.BlockingPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -35,7 +36,7 @@ public final class UnlikelyAlliance extends CardImpl {
 
         // {1}{W}: Target nonattacking, nonblocking creature gets +0/+2 until end of turn.
         Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(0, 2, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{W}"));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

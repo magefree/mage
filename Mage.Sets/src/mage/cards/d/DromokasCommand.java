@@ -15,12 +15,15 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.common.FilterInstantOrSorcerySpell;
+import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.target.TargetSpell;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL;
 
 /**
  * @author jeffwadsworth
@@ -53,7 +56,7 @@ public final class DromokasCommand extends CardImpl {
         effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
         effect.setText("Put a +1/+1 counter on target creature");
         mode = new Mode(effect);
-        mode.addTarget(new TargetCreaturePermanent(filterCreature));
+        mode.addTarget(new TargetPermanent(filterCreature));
         this.getSpellAbility().getModes().addMode(mode);
 
         // or Target creature you control fights target creature you don't control.
@@ -61,7 +64,7 @@ public final class DromokasCommand extends CardImpl {
         effect.setText("Target creature you control fights target creature you don't control");
         mode = new Mode(effect);
         mode.addTarget(new TargetControlledCreaturePermanent());
-        mode.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
+        mode.addTarget(new TargetPermanent(FILTER_CREATURE_YOU_DONT_CONTROL));
         this.getSpellAbility().getModes().addMode(mode);
 
     }

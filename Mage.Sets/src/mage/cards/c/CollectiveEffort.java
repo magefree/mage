@@ -20,6 +20,7 @@ import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetEnchantmentPermanent;
@@ -50,7 +51,7 @@ public final class CollectiveEffort extends CardImpl {
 
         // Destroy target creature with power 4 or greater.;
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filterDestroyCreature).withChooseHint("destroy"));
+        this.getSpellAbility().addTarget(new TargetPermanent(filterDestroyCreature).withChooseHint("destroy"));
 
         // Destroy target enchantment.;
         Effect effect = new DestroyTargetEffect();

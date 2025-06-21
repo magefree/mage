@@ -20,6 +20,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
 import mage.game.Game;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -52,7 +53,7 @@ public final class TheSeedcore extends CardImpl {
                 new BoostTargetEffect(2, 1, Duration.EndOfTurn),
                 new TapSourceCost(), CorruptedCondition.instance
         ).setAbilityWord(AbilityWord.CORRUPTED).addHint(CorruptedCondition.getHint());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

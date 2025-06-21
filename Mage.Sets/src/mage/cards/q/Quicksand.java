@@ -16,6 +16,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -37,7 +38,7 @@ public final class Quicksand extends CardImpl {
         SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new BoostTargetEffect(-1, -2, Duration.EndOfTurn),
                 new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

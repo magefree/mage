@@ -20,6 +20,7 @@ import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -49,7 +50,7 @@ public final class SoratamiMirrorGuard extends CardImpl {
         // {2}, Return a land you control to its owner's hand: Target creature with power 2 or less can't be blocked this turn.
         Ability ability = new SimpleActivatedAbility(new CantBeBlockedTargetEffect(), new GenericManaCost(2));
         ability.addCost(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(filter)));
-        ability.addTarget(new TargetCreaturePermanent(filterCreature));
+        ability.addTarget(new TargetPermanent(filterCreature));
         this.addAbility(ability);
     }
 

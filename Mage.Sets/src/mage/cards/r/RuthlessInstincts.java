@@ -18,6 +18,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.target.Target;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -48,7 +49,7 @@ public final class RuthlessInstincts extends CardImpl {
         effect = new UntapTargetEffect();
         effect.setText("Untap it");
         this.getSpellAbility().addEffect(effect);
-        Target target = new TargetCreaturePermanent(filter);
+        Target target = new TargetPermanent(filter);
         this.getSpellAbility().addTarget(target);
         // * Target attacking creature gets +2/+2 and gains trample until end of turn.
         effect = new BoostTargetEffect(2,2,Duration.EndOfTurn);
@@ -57,7 +58,7 @@ public final class RuthlessInstincts extends CardImpl {
         effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gains trample until end of turn");
         mode.addEffect(effect);
-        mode.addTarget(new TargetCreaturePermanent(filterAttacking));
+        mode.addTarget(new TargetPermanent(filterAttacking));
         this.getSpellAbility().addMode(mode);
     }
 
