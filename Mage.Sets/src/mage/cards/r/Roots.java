@@ -38,7 +38,7 @@ public final class Roots extends CardImpl {
         this.subtype.add(SubType.AURA);
 
         // Enchant creature without flying
-        TargetPermanent auraTarget = new TargetCreaturePermanent(filter);
+        TargetPermanent auraTarget = new TargetPermanent(filter);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         this.addAbility(new EnchantAbility(auraTarget));

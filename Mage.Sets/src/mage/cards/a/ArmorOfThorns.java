@@ -15,6 +15,8 @@ import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK;
+
 /**
  *
  * @author LoneFox
@@ -29,7 +31,7 @@ public final class ArmorOfThorns extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new CastAsThoughItHadFlashSourceEffect(Duration.EndOfGame)));
         this.addAbility(new SacrificeIfCastAtInstantTimeTriggeredAbility());
         // Enchant nonblack creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK);
+        TargetPermanent auraTarget = new TargetPermanent(FILTER_PERMANENT_CREATURE_NON_BLACK);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget);

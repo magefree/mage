@@ -10,6 +10,7 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -29,7 +30,7 @@ public final class SkywhalersShot extends CardImpl {
 
         // Destroy target creature with power 3 or greater. Scry 1.
         getSpellAbility().addEffect(new DestroyTargetEffect());
-        getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        getSpellAbility().addTarget(new TargetPermanent(filter));
         getSpellAbility().addEffect(new ScryEffect(1));
     }
 

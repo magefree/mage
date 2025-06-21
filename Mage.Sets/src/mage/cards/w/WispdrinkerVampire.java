@@ -2,7 +2,7 @@ package mage.cards.w;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -19,7 +19,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.mageobject.PowerPredicate;
 
@@ -31,7 +30,7 @@ import java.util.UUID;
 public final class WispdrinkerVampire extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterCreaturePermanent("another creature with power 2 or less");
+            = new FilterControlledCreaturePermanent("another creature you control with power 2 or less");
     private static final FilterPermanent filter2 = new FilterControlledCreaturePermanent();
 
     static {
@@ -52,7 +51,7 @@ public final class WispdrinkerVampire extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever another creature with power 2 or less you control enters, each opponent loses 1 life and you gain 1 life.
-        Ability ability = new EntersBattlefieldControlledTriggeredAbility(new LoseLifeOpponentsEffect(1), filter);
+        Ability ability = new EntersBattlefieldAllTriggeredAbility(new LoseLifeOpponentsEffect(1), filter);
         ability.addEffect(new GainLifeEffect(1).concatBy("and"));
         this.addAbility(ability);
 

@@ -3,26 +3,26 @@ package mage.cards.i;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CopyEffect;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.common.CopyEffect;
-import mage.util.CardUtil;
 
 /**
  * @author spjspj
@@ -32,6 +32,7 @@ public final class IdentityThief extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("target nontoken creature");
 
     static {
+        filter.add(AnotherPredicate.instance);
         filter.add(TokenPredicate.FALSE);
     }
 
@@ -44,8 +45,8 @@ public final class IdentityThief extends CardImpl {
         // Whenever Identity Thief attacks, you may exile another target nontoken creature.
         //   If you do, Identity Thief becomes a copy of that creature until end of turn.
         //   Return the exiled card to the battlefield under its owner's control at the beginning of the next end step.
-        Ability ability = new IdentityThiefAbility();
-        ability.addTarget(new TargetCreaturePermanent(0, 1, filter, false));
+        Ability ability = new AttacksTriggeredAbility(new IdentityThiefEffect(), true);
+        ability.addTarget(new TargetPermanent(0, 1, filter));
         this.addAbility(ability);
     }
 
@@ -101,26 +102,28 @@ class IdentityThiefEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent targetPermanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (controller != null
-                && targetPermanent != null
-                && sourcePermanent != null) {
-            ContinuousEffect copyEffect = new CopyEffect(Duration.EndOfTurn, targetPermanent, source.getSourceId());
-            copyEffect.setTargetPointer(new FixedTarget(sourcePermanent.getId(), game));
-            game.addEffect(copyEffect, source);
-
-            UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
-            if (controller.moveCardsToExile(targetPermanent, source, game, true, exileZoneId, sourcePermanent.getName())) {
-                Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, true);
-                effect.setText("Return the exiled card to the battlefield under its owner's control at the beginning of the next end step");
-                effect.setTargetPointer(new FixedTarget(source.getFirstTarget(), game));
-                game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect), source);
-            }
-            return true;
+        Permanent targetPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (controller == null || targetPermanent == null) {
+            return false;
         }
-        return false;
+        controller.moveCardsToExile(
+                targetPermanent, source, game, true,
+                CardUtil.getExileZoneId(game, source),
+                CardUtil.getSourceName(game, source)
+        );
+        game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
+                new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, true)
+                        .setText("Return the exiled card to the battlefield under its owner's control at the beginning of the next end step")
+                        .setTargetPointer(new FixedTarget(source.getFirstTarget(), game))
+        ), source);
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
+        if (sourcePermanent != null) {
+            game.addEffect(new CopyEffect(
+                    Duration.EndOfTurn, targetPermanent, source.getSourceId()
+            ).setTargetPointer(new FixedTarget(sourcePermanent.getId(), game)), source);
+        }
+        return true;
     }
 
     @Override

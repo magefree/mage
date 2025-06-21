@@ -12,12 +12,11 @@ import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
 /**
- *
  * @author Susucr
  */
 public final class SplashySpellcaster extends CardImpl {
@@ -31,7 +30,7 @@ public final class SplashySpellcaster extends CardImpl {
 
     public SplashySpellcaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        
+
         this.subtype.add(SubType.ELEMENTAL);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(2);
@@ -42,8 +41,7 @@ public final class SplashySpellcaster extends CardImpl {
                 new CreateRoleAttachedTargetEffect(RoleType.SORCERER),
                 StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, false
         );
-        ability.addTarget(new TargetControlledCreaturePermanent(0, 1, filter, false));
-
+        ability.addTarget(new TargetPermanent(0, 1, filter));
         this.addAbility(ability);
     }
 

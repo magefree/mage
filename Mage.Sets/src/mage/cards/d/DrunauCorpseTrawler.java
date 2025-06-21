@@ -18,7 +18,10 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.ZombieToken;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import static mage.constants.SubType.ZOMBIE;
 
 /**
  *
@@ -37,7 +40,7 @@ public final class DrunauCorpseTrawler extends CardImpl {
 
         // {2}{B}: Target Zombie gains deathtouch until end of turn.
         Ability ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{2}{B}"));
-        ability.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent(SubType.ZOMBIE, "Zombie")));
+        ability.addTarget(new TargetPermanent(new FilterCreaturePermanent(ZOMBIE, "Zombie")));
         this.addAbility(ability);
 
     }

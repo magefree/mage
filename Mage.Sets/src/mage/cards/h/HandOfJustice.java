@@ -1,7 +1,5 @@
-
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -13,20 +11,20 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class HandOfJustice extends CardImpl {
-    
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped white creatures you control");
+
+    private static final FilterControlledPermanent filter = new FilterControlledCreaturePermanent("untapped white creatures you control");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.WHITE));
@@ -34,14 +32,14 @@ public final class HandOfJustice extends CardImpl {
     }
 
     public HandOfJustice(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}");
         this.subtype.add(SubType.AVATAR);
         this.power = new MageInt(2);
         this.toughness = new MageInt(6);
 
         // {tap}, Tap three untapped white creatures you control: Destroy target creature.
         Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new TapSourceCost());
-        ability.addCost(new TapTargetCost(new TargetControlledCreaturePermanent(3, 3, filter, true)));
+        ability.addCost(new TapTargetCost(3, filter));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

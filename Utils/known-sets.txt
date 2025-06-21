@@ -86,6 +86,7 @@ Duel Decks: Zendikar vs. Eldrazi|DuelDecksZendikarVsEldrazi|
 Duels of the Planeswalkers|DuelsOfThePlaneswalkers|
 Duskmourn: House of Horror|DuskmournHouseOfHorror|
 Duskmourn: House of Horror Commander|DuskmournHouseOfHorrorCommander|
+Edge of Eternities|EdgeOfEternities|
 Eighth Edition|EighthEdition|
 Eldritch Moon|EldritchMoon|
 Eternal Masters|EternalMasters|

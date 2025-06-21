@@ -6,7 +6,6 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.Card;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
 
@@ -23,7 +22,7 @@ public class SupportEffect extends AddCountersTargetEffect {
         this.amountSupportTargets = StaticValue.get(amount);
         this.otherPermanent = otherPermanent;
         if (card.isInstantOrSorcery()) {
-            card.getSpellAbility().addTarget(new TargetCreaturePermanent(0, amount, new FilterCreaturePermanent("target creatures"), false));
+            card.getSpellAbility().addTarget(new TargetCreaturePermanent(0, amount));
         }
         staticText = setText();
     }

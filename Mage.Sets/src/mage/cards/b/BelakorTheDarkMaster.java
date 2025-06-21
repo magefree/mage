@@ -56,7 +56,7 @@ public final class BelakorTheDarkMaster extends CardImpl {
 
         // Prince of Chaos -- When Be'lakor, the Dark Master enters the battlefield, you draw X cards and you lose X life, where X is the number of Demons you control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(xValue).setText("you draw X cards"));
-        ability.addEffect(new LoseLifeSourceControllerEffect(xValue).concatBy("and"));
+        ability.addEffect(new LoseLifeSourceControllerEffect(xValue).setText("and you lose X life, where X is the number of Demons you control"));
         this.addAbility(ability.withFlavorWord("Prince of Chaos").addHint(hint));
 
         // Lord of Torment -- Whenever another Demon you control enters, it deals damage equal to its power to any target.

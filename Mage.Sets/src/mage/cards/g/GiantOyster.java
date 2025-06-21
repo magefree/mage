@@ -24,6 +24,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -55,7 +56,7 @@ public final class GiantOyster extends CardImpl {
                 .setText("For as long as {this} remains tapped, target tapped creature doesn't untap during its controller's untap step"),
                 new TapSourceCost());
         ability.addEffect(new GiantOysterCreateDelayedTriggerEffects());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

@@ -24,6 +24,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -65,7 +66,7 @@ public final class SamutVoiceOfDissent extends CardImpl {
 
         //W, Tap: Untap another target creature.
         Ability ability = new SimpleActivatedAbility(new UntapTargetEffect(), new ManaCostsImpl<>("{W}"));
-        ability.addTarget(new TargetCreaturePermanent(filter2));
+        ability.addTarget(new TargetPermanent(filter2));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 

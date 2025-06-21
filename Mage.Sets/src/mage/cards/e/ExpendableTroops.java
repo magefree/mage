@@ -14,6 +14,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterAttackingOrBlockingCreature;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -33,7 +34,7 @@ public final class ExpendableTroops extends CardImpl {
         // {tap}, Sacrifice Expendable Troops: Expendable Troops deals 2 damage to target attacking or blocking creature.
         Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(2, "it"), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(new FilterAttackingOrBlockingCreature()));
+        ability.addTarget(new TargetPermanent(new FilterAttackingOrBlockingCreature()));
         this.addAbility(ability);
     }
 

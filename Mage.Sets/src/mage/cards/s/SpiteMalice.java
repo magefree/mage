@@ -8,8 +8,11 @@ import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.SpellAbilityType;
 import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
 import mage.target.TargetSpell;
 import mage.target.common.TargetCreaturePermanent;
+
+import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK;
 
 /**
  *
@@ -28,7 +31,7 @@ public final class SpiteMalice extends SplitCard {
         // Malice
         // Destroy target nonblack creature. It can't be regenerated.
         this.getRightHalfCard().getSpellAbility().addEffect(new DestroyTargetEffect(true));
-        this.getRightHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK));
+        this.getRightHalfCard().getSpellAbility().addTarget(new TargetPermanent(FILTER_PERMANENT_CREATURE_NON_BLACK));
     }
 
     private SpiteMalice(final SpiteMalice card) {

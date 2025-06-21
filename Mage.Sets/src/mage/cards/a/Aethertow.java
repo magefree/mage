@@ -13,6 +13,7 @@ import mage.filter.common.FilterAttackingOrBlockingCreature;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -28,7 +29,7 @@ public final class Aethertow extends CardImpl {
 
         // Put target attacking or blocking creature on top of its owner's library.
         this.getSpellAbility().addEffect(new AethertowEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
 
         // Conspire
         this.addAbility(new ConspireAbility(ConspireAbility.ConspireTargets.ONE));

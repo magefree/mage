@@ -27,6 +27,7 @@ import mage.filter.common.FilterAttackingCreature;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -64,7 +65,7 @@ public final class Marjhan extends CardImpl {
         // {U}{U}: Marjhan gets -1/-0 until end of turn and deals 1 damage to target attacking creature without flying.
         ability = new SimpleActivatedAbility(new BoostSourceEffect(-1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{U}{U}"));
         ability.addEffect(new DamageTargetEffect(1, "and"));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
         // When you control no Islands, sacrifice Marjhan.

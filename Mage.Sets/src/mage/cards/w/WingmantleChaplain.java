@@ -2,7 +2,7 @@ package mage.cards.w;
 
 import mage.MageInt;
 import mage.MageObject;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.filter.predicate.mageobject.AnotherPredicate;
@@ -30,7 +29,7 @@ public final class WingmantleChaplain extends CardImpl {
     private static final FilterPermanent filter
             = new FilterControlledCreaturePermanent("creature with defender you control");
     private static final FilterPermanent filter2
-            = new FilterCreaturePermanent("another creature with defender");
+            = new FilterControlledCreaturePermanent("another creature you control with defender");
     private static final Predicate<MageObject> predicate
             = new AbilityPredicate(DefenderAbility.class);
 
@@ -57,7 +56,7 @@ public final class WingmantleChaplain extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new BirdToken(), xValue)));
 
         // Whenever another creature with defender you control enters, create a 1/1 white Bird creature token with flying.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new CreateTokenEffect(new BirdToken()), filter2));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(new CreateTokenEffect(new BirdToken()), filter2));
     }
 
     private WingmantleChaplain(final WingmantleChaplain card) {

@@ -14,8 +14,8 @@ import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
@@ -79,10 +79,10 @@ class CulturalExchangeEffect extends OneShotEffect {
         if (creaturesToSwitch == 0) {
             return true;
         }
-        TargetCreaturePermanent target1 = new TargetCreaturePermanent(0, creaturesToSwitch, filter1, true);
+        TargetPermanent target1 = new TargetPermanent(0, creaturesToSwitch, filter1, true);
         if (target1.choose(Outcome.Benefit, controller.getId(), source.getSourceId(), source, game)) {
             int otherToSwitch = target1.getTargets().size();
-            TargetCreaturePermanent target2 = new TargetCreaturePermanent(otherToSwitch, otherToSwitch, filter2, true);
+            TargetPermanent target2 = new TargetPermanent(otherToSwitch, otherToSwitch, filter2, true);
             if (target2.choose(Outcome.Benefit, controller.getId(), source.getSourceId(), source, game)) {
                 for (UUID creatureId : target1.getTargets()) {
                     Permanent creature = game.getPermanent(creatureId);

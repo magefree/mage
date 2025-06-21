@@ -23,6 +23,7 @@ import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.AngelWarriorVigilanceToken;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -53,7 +54,7 @@ public final class FirjasRetribution extends CardImpl {
 
         // II — Until end of turn, Angels you control gain "{T}: Destroy target creature with less power than this creature."
         Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_II, new GainAbilityAllEffect(
                 ability, Duration.EndOfTurn, filter2
         ).setText("until end of turn, Angels you control gain \"{T}: Destroy target creature with power less than this creature's power.\""));

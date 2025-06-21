@@ -14,6 +14,7 @@ import mage.constants.PhaseStep;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AttackingPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -40,7 +41,7 @@ public final class Desert extends CardImpl {
 
         // {tap}: Desert deals 1 damage to target attacking creature. Activate this ability only during the end of combat step.
         Ability ability = new ActivateIfConditionActivatedAbility(new DamageTargetEffect(1), new TapSourceCost(), condition);
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

@@ -15,7 +15,10 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import static mage.constants.SubType.KAVU;
 
 /**
  *
@@ -35,7 +38,7 @@ public final class CoastalDrake extends CardImpl {
 
         // {1}{U}, {T} : Return target Kavu to its owner's hand.
         Ability ability = new SimpleActivatedAbility(new ReturnToHandTargetEffect(), new ManaCostsImpl<>("{1}{U}"));
-        ability.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent(SubType.KAVU, "Kavu")));
+        ability.addTarget(new TargetPermanent(new FilterCreaturePermanent(KAVU, "Kavu")));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

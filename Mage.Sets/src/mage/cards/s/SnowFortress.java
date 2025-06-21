@@ -19,6 +19,7 @@ import mage.constants.Zone;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.filter.common.FilterCreatureAttackingYou;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -51,7 +52,7 @@ public final class SnowFortress extends CardImpl {
 
         // {3}: Snow Fortress deals 1 damage to target creature without flying that's attacking you.
         Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new GenericManaCost(3));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

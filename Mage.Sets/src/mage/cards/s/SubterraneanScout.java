@@ -13,6 +13,7 @@ import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -36,7 +37,7 @@ public final class SubterraneanScout extends CardImpl {
 
         // When Subterranean Scout enters the battlefield, target creature with power 2 or less can't be blocked this turn.
         Ability ability = new EntersBattlefieldTriggeredAbility(new CantBeBlockedTargetEffect(), false);
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
         
     }

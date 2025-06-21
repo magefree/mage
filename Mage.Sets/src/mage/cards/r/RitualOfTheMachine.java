@@ -13,6 +13,7 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -36,7 +37,7 @@ public final class RitualOfTheMachine extends CardImpl {
         this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         // Gain control of target nonartifact, nonblack creature.
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfGame));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
     private RitualOfTheMachine(final RitualOfTheMachine card) {

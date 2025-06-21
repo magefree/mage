@@ -12,9 +12,12 @@ import mage.constants.CardType;
 import mage.constants.PutCards;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_ANOTHER_TARGET_CREATURE;
 
 /**
  * @author LevelX2
@@ -32,7 +35,7 @@ public final class EldraziDisplacer extends CardImpl {
 
         // {2}{C}: Exile another target creature, then return it to the battlefield tapped under its owner's control.
         Ability ability = new SimpleActivatedAbility(new ExileThenReturnTargetEffect(false, false, PutCards.BATTLEFIELD_TAPPED), new ManaCostsImpl<>("{2}{C}"));
-        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE));
+        ability.addTarget(new TargetPermanent(FILTER_ANOTHER_TARGET_CREATURE));
         this.addAbility(ability);
     }
 

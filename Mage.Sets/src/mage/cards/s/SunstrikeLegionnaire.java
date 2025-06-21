@@ -20,6 +20,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -49,7 +50,7 @@ public final class SunstrikeLegionnaire extends CardImpl {
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), untapFilter, false));
         // {tap}: Tap target creature with converted mana cost 3 or less.
         Ability ability = new SimpleActivatedAbility(new TapTargetEffect(), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(tapFilter));
+        ability.addTarget(new TargetPermanent(tapFilter));
         this.addAbility(ability);
     }
 

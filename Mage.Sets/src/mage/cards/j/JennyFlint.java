@@ -1,7 +1,7 @@
 package mage.cards.j;
 
 import mage.MageInt;
-import mage.abilities.TriggeredAbility;
+import mage.abilities.Ability;
 import mage.abilities.common.SacrificePermanentTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
@@ -16,7 +16,7 @@ import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -53,12 +53,11 @@ public final class JennyFlint extends CardImpl {
         this.addAbility(new TrainingAbility());
 
         // Whenever you sacrifice a Clue or Food, put a +1/+1 counter on another target creature you control.
-        TriggeredAbility trigger = new SacrificePermanentTriggeredAbility(
-                new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
-                filter
+        Ability ability = new SacrificePermanentTriggeredAbility(
+                new AddCountersTargetEffect(CounterType.P1P1.createInstance()), filter
         );
-        trigger.addTarget(new TargetControlledCreaturePermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
-        this.addAbility(trigger);
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
+        this.addAbility(ability);
     }
 
     private JennyFlint(final JennyFlint card) {

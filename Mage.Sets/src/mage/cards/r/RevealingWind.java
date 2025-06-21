@@ -17,6 +17,7 @@ import mage.filter.predicate.card.FaceDownPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -77,7 +78,7 @@ class RevealingWindEffect extends OneShotEffect {
                 if (!controller.canRespond()) {
                     return false;
                 }
-                Target target = new TargetCreaturePermanent(filter);
+                Target target = new TargetPermanent(filter);
                 if (controller.chooseTarget(outcome, target, source, game)) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
