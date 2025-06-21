@@ -1843,6 +1843,12 @@ public class ScryfallImageSupportTokens {
             put("40K/Tyranid Gargoyle", "https://api.scryfall.com/cards/t40k/9/en?format=image");
             put("40K/Tyranid Warrior", "https://api.scryfall.com/cards/t40k/19/en?format=image");
 
+            // UNF
+            put("UNF/Clown Robot/1", "https://api.scryfall.com/cards/tunf/2?format=image");
+            put("UNF/Clown Robot/2", "https://api.scryfall.com/cards/tunf/3?format=image");
+            put("UNF/Storm Crow", "https://api.scryfall.com/cards/tunf/5?format=image");
+            put("UNF/Squirrel", "https://api.scryfall.com/cards/tunf/8?format=image");
+
             // BRO
             put("BRO/Bear", "https://api.scryfall.com/cards/tbro/2/en?format=image");
             put("BRO/Construct/1", "https://api.scryfall.com/cards/tbro/5/en?format=image");
@@ -2536,6 +2542,7 @@ public class ScryfallImageSupportTokens {
             put("DSK/Everywhere", "https://api.scryfall.com/cards/tdsk/16?format=image");
             put("DSK/Glimmer", "https://api.scryfall.com/cards/tdsk/4?format=image");
             put("DSK/Gremlin", "https://api.scryfall.com/cards/tdsk/11?format=image");
+            put("DSK/Horror", "https://api.scryfall.com/cards/tdsk/10?format=image");
             put("DSK/Insect/1", "https://api.scryfall.com/cards/tdsk/13?format=image");
             put("DSK/Insect/2", "https://api.scryfall.com/cards/tdsk/5?format=image");
             put("DSK/Primo, the Indivisible", "https://api.scryfall.com/cards/tdsk/14?format=image");
@@ -2698,7 +2705,8 @@ public class ScryfallImageSupportTokens {
             put("TDC/Gold", "https://api.scryfall.com/cards/ttdc/29/en?format=image");
             put("TDC/Human", "https://api.scryfall.com/cards/ttdc/5/en?format=image");
             put("TDC/Inkling", "https://api.scryfall.com/cards/ttdc/28?format=image");
-            put("TDC/Insect", "https://api.scryfall.com/cards/ttdc/22/en?format=image");
+            put("TDC/Insect/1", "https://api.scryfall.com/cards/ttdc/22/en?format=image");
+            put("TDC/Insect/2", "https://api.scryfall.com/cards/ttdc/23/en?format=image");
             put("TDC/Karox Bladewing", "https://api.scryfall.com/cards/ttdc/19?format=image");
             put("TDC/Myr", "https://api.scryfall.com/cards/ttdc/30/en?format=image");
             put("TDC/Plant", "https://api.scryfall.com/cards/ttdc/24/en?format=image");
@@ -2710,6 +2718,7 @@ public class ScryfallImageSupportTokens {
             put("TDC/Spider", "https://api.scryfall.com/cards/ttdc/25?format=image");
             put("TDC/Spirit", "https://api.scryfall.com/cards/ttdc/6/en?format=image");
             put("TDC/Thopter", "https://api.scryfall.com/cards/ttdc/33/en?format=image");
+            put("TDC/Wall", "https://api.scryfall.com/cards/ttdc/7/en?format=image");
 
             // ACR
             put("ACR/Assassin", "https://api.scryfall.com/cards/tacr/4?format=image");
