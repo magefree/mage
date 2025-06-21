@@ -71,7 +71,7 @@ public class CastSpellPaidBySourceTriggeredAbility extends TriggeredAbilityImpl 
         if (setTargetPointer) {
             this.getAllEffects().setTargetPointer(new FixedTarget(spell.getId(), game));
         }
-        this.getEffects().setValue("SpellCastId", spell.getId());
+        this.getEffects().setValue("spellCast", spell);
 
         return true;
     }

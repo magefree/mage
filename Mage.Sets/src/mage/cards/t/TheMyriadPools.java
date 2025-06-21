@@ -80,19 +80,16 @@ class TheMyriadPoolsCopyEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent targetPermanentToCopyTo = game.getPermanent(getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
-        Object spellId = getValue("SpellCastId");
-        if (controller == null || targetPermanentToCopyTo == null || !(spellId instanceof UUID)) {
+        Object spell = getValue("spellCast");
+        if (controller == null || targetPermanentToCopyTo == null || !(spell instanceof Spell)) {
             return false;
         }
-        Spell spell = game.getSpell((UUID) spellId);
-        if (spell != null) {
-            Permanent newBluePrint = new PermanentCard(spell.getCard(), source.getControllerId(), game);
-            newBluePrint.assignNewId();
-            CopyEffect copyEffect = new CopyEffect(Duration.EndOfTurn, newBluePrint, targetPermanentToCopyTo.getId());
-            Ability newAbility = source.copy();
-            copyEffect.init(newAbility, game);
-            game.addEffect(copyEffect, newAbility);
-        }
+        Permanent newBluePrint = new PermanentCard(((Spell)spell).getCard(), source.getControllerId(), game);
+        newBluePrint.assignNewId();
+        CopyEffect copyEffect = new CopyEffect(Duration.EndOfTurn, newBluePrint, targetPermanentToCopyTo.getId());
+        Ability newAbility = source.copy();
+        copyEffect.init(newAbility, game);
+        game.addEffect(copyEffect, newAbility);
         return true;
     }
 }
