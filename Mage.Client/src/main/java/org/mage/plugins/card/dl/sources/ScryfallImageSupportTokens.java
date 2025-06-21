@@ -1843,6 +1843,12 @@ public class ScryfallImageSupportTokens {
             put("40K/Tyranid Gargoyle", "https://api.scryfall.com/cards/t40k/9/en?format=image");
             put("40K/Tyranid Warrior", "https://api.scryfall.com/cards/t40k/19/en?format=image");
 
+            // UNF
+            put("UNF/Clown Robot/1", "https://api.scryfall.com/cards/tunf/2?format=image");
+            put("UNF/Clown Robot/2", "https://api.scryfall.com/cards/tunf/3?format=image");
+            put("UNF/Storm Crow", "https://api.scryfall.com/cards/tunf/5?format=image");
+            put("UNF/Squirrel", "https://api.scryfall.com/cards/tunf/8?format=image");
+
             // BRO
             put("BRO/Bear", "https://api.scryfall.com/cards/tbro/2/en?format=image");
             put("BRO/Construct/1", "https://api.scryfall.com/cards/tbro/5/en?format=image");
