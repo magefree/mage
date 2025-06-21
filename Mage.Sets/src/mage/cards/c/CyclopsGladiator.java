@@ -26,7 +26,7 @@ import java.util.UUID;
 public final class CyclopsGladiator extends CardImpl {
 
     public CyclopsGladiator(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{R}{R}");
         this.subtype.add(SubType.CYCLOPS);
         this.subtype.add(SubType.WARRIOR);
 
