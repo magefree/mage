@@ -20,5 +20,6 @@ public final class EdgeOfEternitiesCommander extends ExpansionSet {
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Kilo, Apogee Mind", 3, Rarity.MYTHIC, mage.cards.k.KiloApogeeMind.class));
+        cards.add(new SetCardInfo("Szarel, Genesis Shepherd", 4, Rarity.MYTHIC, mage.cards.s.SzarelGenesisShepherd.class));
     }
 }
