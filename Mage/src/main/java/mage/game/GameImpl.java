@@ -1415,21 +1415,21 @@ public abstract class GameImpl implements Game {
 
     public void initGameDefaultWatchers() {
         List<Watcher> newWatchers = new ArrayList<>();
-        newWatchers.add(new CastSpellLastTurnWatcher());
-        newWatchers.add(new PlayerLostLifeWatcher());
+        newWatchers.add(new CastSpellLastTurnWatcher()); // SPELL_CAST
+        newWatchers.add(new PlayerLostLifeWatcher()); // LOST_LIFE
         newWatchers.add(new FirstStrikeWatcher()); // required for combat code
-        newWatchers.add(new BlockedAttackerWatcher());
+        newWatchers.add(new BlockedAttackerWatcher()); // BLOCKER_DECLARED
         newWatchers.add(new PlanarRollWatcher()); // needed for RollDiceTest (planechase code needs improves)
-        newWatchers.add(new AttackedThisTurnWatcher());
-        newWatchers.add(new CardsDrawnThisTurnWatcher());
-        newWatchers.add(new ManaSpentToCastWatcher());
-        newWatchers.add(new ManaPaidSourceWatcher());
-        newWatchers.add(new BlockingOrBlockedWatcher());
-        newWatchers.add(new EndStepCountWatcher());
+        newWatchers.add(new AttackedThisTurnWatcher()); // ATTACKER_DECLARED
+        newWatchers.add(new CardsDrawnThisTurnWatcher()); // DREW_CARD
+        newWatchers.add(new ManaSpentToCastWatcher()); // SPELL_CAST
+        newWatchers.add(new ManaPaidSourceWatcher()); // MANA_PAID
+        newWatchers.add(new BlockingOrBlockedWatcher()); // BLOCKER_DECLARED, END_COMBAT_STEP_POST, REMOVED_FROM_COMBAT
+        newWatchers.add(new EndStepCountWatcher()); // for continuous effects
         newWatchers.add(new CommanderPlaysCountWatcher()); // commander plays count uses in non commander games by some cards
-        newWatchers.add(new CreaturesDiedWatcher());
-        newWatchers.add(new TemptedByTheRingWatcher());
-        newWatchers.add(new SpellsCastWatcher());
+        newWatchers.add(new CreaturesDiedWatcher()); // ZONE_CHANGE
+        newWatchers.add(new TemptedByTheRingWatcher()); // TEMPTED_BY_RING
+        newWatchers.add(new SpellsCastWatcher()); // SPELL_CAST
         newWatchers.add(new AttackedOrBlockedThisCombatWatcher()); // required for tests
 
         // runtime check - allows only GAME scope (one watcher per game)
