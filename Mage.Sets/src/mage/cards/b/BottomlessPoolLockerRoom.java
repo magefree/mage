@@ -3,7 +3,6 @@ package mage.cards.b;
 import java.util.UUID;
 
 import mage.abilities.common.DealsDamageToAPlayerAllTriggeredAbility;
-import mage.abilities.common.RoomAbility;
 import mage.abilities.common.UnlockThisDoorTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
@@ -28,18 +27,19 @@ public final class BottomlessPoolLockerRoom extends RoomCard {
                 "{U}", "{4}{U}", SpellAbilityType.SPLIT);
         this.subtype.add(SubType.ROOM);
 
-        // Left half ability - triggers when specifically the left door is unlocked
-        UnlockThisDoorTriggeredAbility leftAbility = new UnlockThisDoorTriggeredAbility(
+        // Left half ability - "When you unlock this door" trigger (delayed triggered
+        // ability)
+        UnlockThisDoorTriggeredAbility left = new UnlockThisDoorTriggeredAbility(
                 new ReturnToHandTargetEffect(), false, true);
-        leftAbility.addTarget(new TargetCreaturePermanent(0, 1));
+        left.addTarget(new TargetCreaturePermanent(0, 1));
 
-        // Right half ability - combat damage trigger
-        DealsDamageToAPlayerAllTriggeredAbility rightAbility = new DealsDamageToAPlayerAllTriggeredAbility(
+        // Right half ability - "Whenever creatures you control deal combat damage"
+        DealsDamageToAPlayerAllTriggeredAbility right = new DealsDamageToAPlayerAllTriggeredAbility(
                 new DrawCardSourceControllerEffect(1),
                 StaticFilters.FILTER_CONTROLLED_A_CREATURE,
                 false, SetTargetPointer.PLAYER, true, true, TargetController.OPPONENT);
 
-        this.addAbility(new RoomAbility(this, leftAbility, rightAbility));
+        this.AddRoomAbilities(left, right);
     }
 
     private BottomlessPoolLockerRoom(final BottomlessPoolLockerRoom card) {

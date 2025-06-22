@@ -2142,14 +2142,12 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         }
 
         this.leftHalfUnlocked = true;
-
-        // Fire specific left door event
-        System.out.println("left door unlock");
-        System.out.println(this.getId());
-        game.fireEvent(new GameEvent(GameEvent.EventType.UNLOCK_LEFT_DOOR, getId(), source, source.getControllerId()));
-
+        
         // Fire generic door unlock event
         game.fireEvent(new GameEvent(GameEvent.EventType.UNLOCK_DOOR, getId(), source, source.getControllerId()));
+
+        // Fire specific left door event
+        game.fireEvent(new GameEvent(GameEvent.EventType.UNLOCK_LEFT_DOOR, getId(), source, source.getControllerId()));
 
         // Check for fully unlocked trigger
         if (this.rightHalfUnlocked) {
@@ -2179,12 +2177,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
         this.rightHalfUnlocked = true;
 
-        // Fire specific right door event
-        System.out.println("right door unlock");
-        game.fireEvent(new GameEvent(GameEvent.EventType.UNLOCK_RIGHT_DOOR, getId(), source, source.getControllerId()));
-
         // Fire generic door unlock event
         game.fireEvent(new GameEvent(GameEvent.EventType.UNLOCK_DOOR, getId(), source, source.getControllerId()));
+
+        // Fire specific right door event
+        game.fireEvent(new GameEvent(GameEvent.EventType.UNLOCK_RIGHT_DOOR, getId(), source, source.getControllerId()));
 
         if (this.leftHalfUnlocked) {
             game.fireEvent(new GameEvent(EventType.FULLY_UNLOCK_ROOM, getId(), source, source.getControllerId()));

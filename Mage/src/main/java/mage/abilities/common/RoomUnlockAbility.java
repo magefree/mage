@@ -1,41 +1,45 @@
-// src/main/java/mage/abilities/common/RoomUnlockAbility.java
 package mage.abilities.common;
 
+import mage.abilities.Ability;
 import mage.abilities.SpecialAction; // Changed import
 import mage.abilities.condition.common.RoomLeftHalfLockedCondition;
 import mage.abilities.condition.common.RoomRightHalfLockedCondition;
 import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.constants.Outcome;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
-import mage.cards.Card;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 
 /**
  * Special action for Room cards to unlock a locked half by paying its mana
  * cost.
- * This ability is only active if the corresponding half is currently locked.
+ * This ability is only present if the corresponding half is currently locked.
  */
 public class RoomUnlockAbility extends SpecialAction {
 
     private final boolean isLeftHalf;
 
-    public RoomUnlockAbility(ManaCosts costs, boolean isLeftHalf) {
-        // Call the SpecialAction constructor with the zone and mana costs
-        // SpecialAction's constructor already sets usesStack = false
-        super(Zone.BATTLEFIELD, null); // No AlternateManaPaymentAbility needed here, costs are handled by super(effect, costs)
-        this.addCost(costs); // Add the mana costs to this ability
+    public RoomUnlockAbility(ManaCosts costs, boolean isLeftHalf, GainAbilitySourceEffect doorAbility) {
+        super(Zone.BATTLEFIELD, null);
+        this.addCost(costs);
 
         this.isLeftHalf = isLeftHalf;
-        this.timing = TimingRule.SORCERY; // Unlock only as a sorcery, ensures main phase and empty stack
+        this.timing = TimingRule.SORCERY;
 
-        // only if the half is *locked*
+        // only works if the relevant half is *locked*
         if (isLeftHalf) {
             this.setCondition(RoomLeftHalfLockedCondition.instance);
         } else {
             this.setCondition(RoomRightHalfLockedCondition.instance);
         }
 
-        // Add the effect to unlock the half
+        // Adds the ability the specific door has
+        this.addEffect(doorAbility);
+        // Adds the effect to pay + unlock the half
         this.addEffect(new RoomUnlockHalfEffect(isLeftHalf));
     }
 
@@ -51,14 +55,61 @@ public class RoomUnlockAbility extends SpecialAction {
 
     @Override
     public String getRule() {
-        // Construct the rule text for display in the game
         StringBuilder sb = new StringBuilder();
-        // Since it's a special action, the cost text is usually just stated
-        sb.append(getManaCostsToPay().getText()).append(": "); // Changed getManaCostsToPay() to getCosts() if addCost is used
+        sb.append(getManaCostsToPay().getText()).append(": ");
         sb.append("Unlock the ");
         sb.append(isLeftHalf ? "left" : "right").append(" half.");
         sb.append(" <i>(Activate only as a sorcery, and only if the ");
         sb.append(isLeftHalf ? "left" : "right").append(" half is locked.)</i>");
         return sb.toString();
+    }
+}
+
+/**
+ * Allows you to pay to unlock the door
+ */
+class RoomUnlockHalfEffect extends OneShotEffect {
+
+    private final boolean isLeftHalf;
+
+    public RoomUnlockHalfEffect(boolean isLeftHalf) {
+        super(Outcome.Neutral);
+        this.isLeftHalf = isLeftHalf;
+        staticText = "unlock the " + (isLeftHalf ? "left" : "right") + " half";
+    }
+
+    private RoomUnlockHalfEffect(final RoomUnlockHalfEffect effect) {
+        super(effect);
+        this.isLeftHalf = effect.isLeftHalf;
+    }
+
+    @Override
+    public RoomUnlockHalfEffect copy() {
+        return new RoomUnlockHalfEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        if (permanent == null) {
+            permanent = game.getPermanent(source.getSourceId());
+        }
+
+        if (permanent == null) {
+            return false;
+        }
+
+        if (isLeftHalf && permanent.isLeftHalfUnlocked()) {
+            return false;
+        }
+        if (!isLeftHalf && permanent.isRightHalfUnlocked()) {
+            return false;
+        }
+
+        if (isLeftHalf) {
+            return permanent.unlockLeftHalf(game, source);
+        } else {
+            return permanent.unlockRightHalf(game, source);
+        }
     }
 }

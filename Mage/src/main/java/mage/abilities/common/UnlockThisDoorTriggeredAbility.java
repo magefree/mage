@@ -7,6 +7,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 
 /**
+ * Delayed triggered ability for "when you unlock this door" effects
+ * 
  * @author oscscull
  */
 public class UnlockThisDoorTriggeredAbility extends TriggeredAbilityImpl {
@@ -14,7 +16,7 @@ public class UnlockThisDoorTriggeredAbility extends TriggeredAbilityImpl {
     private final boolean isLeftHalf;
 
     public UnlockThisDoorTriggeredAbility(Effect effect, boolean optional, boolean isLeftHalf) {
-        super(Zone.BATTLEFIELD, effect, optional);
+        super(Zone.BATTLEFIELD, effect, isLeftHalf);
         this.isLeftHalf = isLeftHalf;
         this.setTriggerPhrase("When you unlock this door, ");
     }
@@ -33,6 +35,11 @@ public class UnlockThisDoorTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         // Trigger when this door's specific half is unlocked
+        // This currently isn't working for this reason. 
+        // The code that removes the ability is based on lock status.
+        // The code that triggers the ability is based on lock status.
+        // So this card doesn't have the ability at the moment it should check the trigger, so it doesn't trigger!
+        // Work it out!
         return event.getTargetId().equals(getSourceId());
     }
 
