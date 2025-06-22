@@ -352,6 +352,9 @@ public class ScryfallImageSupportTokens {
             put("ELD/Rat", "https://api.scryfall.com/cards/teld/6/en?format=image");
             put("ELD/Wolf", "https://api.scryfall.com/cards/teld/14/en?format=image");
 
+            // UND
+            put("UND/Goblin", "https://api.scryfall.com/cards/tund/2?format=image");
+
             // THB
             put("THB/Elemental", "https://api.scryfall.com/cards/tthb/8/en?format=image");
             put("THB/Goat", "https://api.scryfall.com/cards/tthb/1/en?format=image");

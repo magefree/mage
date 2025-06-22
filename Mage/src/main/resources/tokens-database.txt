@@ -1137,6 +1137,9 @@
 |Generate|TOK:ELD|Rat|||RatToken|
 |Generate|TOK:ELD|Wolf|||GarrukCursedHuntsmanToken|
 
+# UND
+|Generate|TOK:UND|Goblin|||GoblinToken|
+
 # THB
 |Generate|TOK:THB|Elemental|||PurphorossInterventionToken|
 |Generate|TOK:THB|Goat|||GoatToken|
