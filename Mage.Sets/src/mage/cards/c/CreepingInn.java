@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -64,7 +63,7 @@ class CreepingInnEffect extends OneShotEffect {
         super(Outcome.Exile);
         this.staticText = "you may exile a creature card from your graveyard. " +
                 "If you do, each opponent loses X life and you gain X life, " +
-                "where X is the number of creature cards exiled with Creeping Inn.";
+                "where X is the number of creature cards exiled with {this}.";
     }
 
     private CreepingInnEffect(final CreepingInnEffect effect) {
