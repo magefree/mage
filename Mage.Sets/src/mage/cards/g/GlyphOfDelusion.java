@@ -20,7 +20,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.BlockedAttackerWatcher;
 
@@ -82,7 +81,7 @@ class GlyphOfDelusionSecondTarget extends TargetPermanent {
                 if (targetSource != null) {
                     for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, sourceControllerId, source, game)) {
                         if (!targets.containsKey(creature.getId()) && creature.canBeTargetedBy(targetSource, sourceControllerId, source, game)) {
-                            if (watcher.creatureHasBlockedAttacker(new MageObjectReference(creature, game), new MageObjectReference(firstTarget, game), game)) {
+                            if (watcher.creatureHasBlockedAttacker(new MageObjectReference(creature, game), new MageObjectReference(firstTarget, game))) {
                                 possibleTargets.add(creature.getId());
                             }
                         }
