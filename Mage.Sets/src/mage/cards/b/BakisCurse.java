@@ -1,8 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -13,6 +11,9 @@ import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -40,8 +41,8 @@ public final class BakisCurse extends CardImpl {
 class BakisCurseEffect extends OneShotEffect {
     
     public BakisCurseEffect() {
-            super(Outcome.Detriment);
-            staticText = "Baki's Curse deals 2 damage to each creature for each Aura attached to that creature.";
+        super(Outcome.Detriment);
+        staticText = "{this} deals 2 damage to each creature for each Aura attached to that creature.";
     }
 
     private BakisCurseEffect(final BakisCurseEffect effect) {
