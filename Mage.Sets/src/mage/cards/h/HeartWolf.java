@@ -19,6 +19,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -54,7 +55,7 @@ public final class HeartWolf extends CardImpl {
         );
         ability.addEffect(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(),
                 Duration.EndOfTurn).setText("and gains first strike until end of turn"));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new HeartWolfDelayedTriggeredAbility(), true));
         this.addAbility(ability);
     }

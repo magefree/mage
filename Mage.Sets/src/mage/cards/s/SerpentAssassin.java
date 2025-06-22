@@ -10,7 +10,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK;
 
 /**
  *
@@ -27,7 +30,7 @@ public final class SerpentAssassin extends CardImpl {
 
         // When Serpent Assassin enters the battlefield, you may destroy target nonblack creature.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), true);
-        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK));
+        ability.addTarget(new TargetPermanent(FILTER_PERMANENT_CREATURE_NON_BLACK));
         this.addAbility(ability);
     }
 

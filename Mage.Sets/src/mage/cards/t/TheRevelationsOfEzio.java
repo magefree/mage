@@ -21,6 +21,7 @@ import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
@@ -52,7 +53,7 @@ public final class TheRevelationsOfEzio extends CardImpl {
                 this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_I,
                 ability -> {
                     ability.addEffect(new DestroyTargetEffect());
-                    ability.addTarget(new TargetCreaturePermanent(filter));
+                    ability.addTarget(new TargetPermanent(filter));
                 }
         );
         // II -- Whenever an Assassin you control attacks this turn, put a +1/+1 counter on it.

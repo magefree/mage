@@ -15,6 +15,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -39,7 +40,7 @@ public final class CentaurArcher extends CardImpl {
 
         // {tap}: Centaur Archer deals 1 damage to target creature with flying.
         Ability activatedAbility = new SimpleActivatedAbility(new DamageTargetEffect(1), new TapSourceCost());
-        activatedAbility.addTarget(new TargetCreaturePermanent(filter));
+        activatedAbility.addTarget(new TargetPermanent(filter));
         this.addAbility(activatedAbility);
     }
 

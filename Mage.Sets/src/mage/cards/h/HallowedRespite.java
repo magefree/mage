@@ -17,6 +17,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -37,7 +38,7 @@ public final class HallowedRespite extends CardImpl {
         // Exile target nonlegendary creature, then return it to the battlefield under its owner's control. If it entered under your control, put a +1/+1 counter on it. Otherwise, tap it.
         this.getSpellAbility().addEffect(new ExileThenReturnTargetEffect(false, false));
         this.getSpellAbility().addEffect(new HallowedRespiteEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
 
         // Flashback {1}{W}{U}
         this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{1}{W}{U}")));

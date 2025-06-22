@@ -46,7 +46,7 @@ public final class ExposeTheCulprit extends CardImpl {
 
         // * Turn target face-down creature face up.
         this.getSpellAbility().addEffect(new TurnFaceUpTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
 
         // * Exile any number of face-up creatures you control with disguise in a face-down pile, shuffle that pile, then cloak them.
         Mode mode = new Mode(new ExposeTheCulpritEffect());

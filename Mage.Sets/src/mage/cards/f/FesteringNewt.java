@@ -18,7 +18,10 @@ import mage.constants.Duration;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import static mage.filter.StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE;
 
 /**
  *
@@ -46,7 +49,7 @@ public final class FesteringNewt extends CardImpl {
                 new LockedInCondition(new PermanentsOnTheBattlefieldCondition(filterBogbrewWitch)),
                 "target creature an opponent controls gets -1/-1 until end of turn. That creature gets -4/-4 instead if you control a creature named Bogbrew Witch");
         Ability ability = new DiesSourceTriggeredAbility(effect);
-        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
+        ability.addTarget(new TargetPermanent(FILTER_OPPONENTS_PERMANENT_CREATURE));
         this.addAbility(ability);
     }
 

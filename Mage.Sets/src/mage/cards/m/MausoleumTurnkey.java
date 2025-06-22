@@ -1,4 +1,3 @@
-
 package mage.cards.m;
 
 import mage.MageInt;
@@ -21,11 +20,11 @@ import mage.target.targetadjustment.TargetAdjuster;
 import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class MausoleumTurnkey extends CardImpl {
-    static FilterCreatureCard filter = new FilterCreatureCard("creature card of an opponent's choice");
+
+    private static final FilterCreatureCard filter = new FilterCreatureCard("creature card of an opponent's choice");
 
     public MausoleumTurnkey(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");

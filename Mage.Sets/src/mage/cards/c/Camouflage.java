@@ -1,12 +1,5 @@
 package mage.cards.c;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
 import mage.abilities.condition.common.MyTurnCondition;
@@ -17,9 +10,9 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
-import mage.filter.predicate.Predicates;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.PermanentReferenceInCollectionPredicate;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
@@ -28,11 +21,12 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.util.RandomUtil;
 
+import java.util.*;
+
 /**
- *
  * @author L_J
  */
 public final class Camouflage extends CardImpl {
@@ -121,7 +115,7 @@ class CamouflageEffect extends ContinuousRuleModifyingEffectImpl {
                                 filter.add(Predicates.not(new PermanentReferenceInCollectionPredicate(spentBlockers, game)));
                             }
                             if (defender.chooseUse(Outcome.Neutral, "Make a new blocker pile? If not, all remaining piles stay empty. (remaining piles: " + (attackerCount - masterList.size()) + ')', source, game)) {
-                                Target target = new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, filter, true);
+                                Target target = new TargetPermanent(0, Integer.MAX_VALUE, filter, true);
                                 if (target.canChoose(defenderId, source, game)) {
                                     if (defender.chooseTarget(Outcome.Neutral, target, source, game)) {
                                         for (UUID creatureId : target.getTargets()) {
@@ -171,7 +165,7 @@ class CamouflageEffect extends ContinuousRuleModifyingEffectImpl {
                             }
                         }
                     }
-                    
+
                     List<List<Permanent>> allPiles = masterMap.get(playerId);
                     Set<UUID> blockerIds = new HashSet<>();
                     for (List<Permanent> pile : allPiles) {

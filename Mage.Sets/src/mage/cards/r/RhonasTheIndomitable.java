@@ -22,9 +22,12 @@ import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_ANOTHER_TARGET_CREATURE;
 
 /**
  * @author fireshoes
@@ -55,7 +58,7 @@ public final class RhonasTheIndomitable extends CardImpl {
         effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gains trample until end of turn");
         ability.addEffect(effect);
-        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE));
+        ability.addTarget(new TargetPermanent(FILTER_ANOTHER_TARGET_CREATURE));
         this.addAbility(ability);
     }
 

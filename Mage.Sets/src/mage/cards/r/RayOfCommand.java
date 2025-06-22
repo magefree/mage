@@ -16,7 +16,10 @@ import mage.constants.Duration;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import static mage.filter.StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE;
 
 /**
  *
@@ -32,7 +35,7 @@ public final class RayOfCommand extends CardImpl {
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn).setText("and gain control of it until end of turn"));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn).setText("that creature gains haste until end of turn"));
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new RayOfCommandDelayedTriggeredAbility(), true));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
+        this.getSpellAbility().addTarget(new TargetPermanent(FILTER_OPPONENTS_PERMANENT_CREATURE));
     }
 
     private RayOfCommand(final RayOfCommand card) {

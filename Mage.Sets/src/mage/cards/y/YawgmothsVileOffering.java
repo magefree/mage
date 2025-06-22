@@ -11,7 +11,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
@@ -47,7 +46,7 @@ public final class YawgmothsVileOffering extends CardImpl {
         // Destroy up to one target creature or planeswalker. Exile Yawgmoth's Vile Offering.
         this.getSpellAbility().addEffect(new YawgmothsVileOfferingEffect());
         this.getSpellAbility().addTarget(new TargetCardInGraveyard(0, 1, cardFilter));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker(0, 1, new FilterCreatureOrPlaneswalkerPermanent(), false));
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker(0, 1));
         this.getSpellAbility().addEffect(new ExileSpellEffect());
     }
 

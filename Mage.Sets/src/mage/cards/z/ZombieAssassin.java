@@ -15,8 +15,11 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.target.Target;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetCreaturePermanent;
+
+import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK;
 
 /**
  *
@@ -33,7 +36,7 @@ public final class ZombieAssassin extends CardImpl {
 
         // {tap}, Exile two cards from your graveyard and Zombie Assassin: Destroy target nonblack creature. It can't be regenerated.
         Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(true), new TapSourceCost());
-        Target target = new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK);
+        Target target = new TargetPermanent(FILTER_PERMANENT_CREATURE_NON_BLACK);
         ability.addTarget(target);
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(2,2,StaticFilters.FILTER_CARDS_FROM_YOUR_GRAVEYARD)));
         ability.addCost(new ExileSourceCost());

@@ -1,37 +1,34 @@
-
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
-import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author jonubuu
  */
 public final class KikiJikiMirrorBreaker extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("nonlegendary creature you control");
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("nonlegendary creature you control");
 
     static {
         filter.add(Predicates.not(SuperType.LEGENDARY.getPredicate()));
@@ -48,11 +45,11 @@ public final class KikiJikiMirrorBreaker extends CardImpl {
 
         // Haste
         this.addAbility(HasteAbility.getInstance());
+
         // {T}: Create a token that's a copy of target nonlegendary creature you control, except it has haste. Sacrifice it at the beginning of the next end step.
         Ability ability = new SimpleActivatedAbility(new KikiJikiMirrorBreakerEffect(), new TapSourceCost());
-        ability.addTarget(new TargetControlledCreaturePermanent(1, 1, filter, false));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
-
     }
 
     private KikiJikiMirrorBreaker(final KikiJikiMirrorBreaker card) {

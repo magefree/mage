@@ -10,7 +10,6 @@ import mage.constants.Outcome;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.watchers.Watcher;
@@ -48,7 +47,7 @@ class CerebralVortexEffect extends OneShotEffect {
 
     CerebralVortexEffect() {
         super(Outcome.Damage);
-        this.staticText = ", then Cerebral Vortex deals damage to that player equal to the number of cards they've drawn this turn";
+        this.staticText = ", then {this} deals damage to that player equal to the number of cards they've drawn this turn";
     }
 
     private CerebralVortexEffect(final CerebralVortexEffect effect) {

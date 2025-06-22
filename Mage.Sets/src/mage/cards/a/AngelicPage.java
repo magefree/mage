@@ -15,6 +15,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterAttackingOrBlockingCreature;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -35,7 +36,7 @@ public final class AngelicPage extends CardImpl {
 
         //{T}: Target attacking or blocking creature gets +1/+1 until end of turn.
         Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(1, 1, Duration.EndOfTurn), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(new FilterAttackingOrBlockingCreature()));
+        ability.addTarget(new TargetPermanent(new FilterAttackingOrBlockingCreature()));
         this.addAbility(ability);
     }
 

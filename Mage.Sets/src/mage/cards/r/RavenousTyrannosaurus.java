@@ -12,12 +12,11 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
 /**
- *
  * @author notgreat
  */
 public final class RavenousTyrannosaurus extends CardImpl {
@@ -27,6 +26,7 @@ public final class RavenousTyrannosaurus extends CardImpl {
     static {
         filter.add(AnotherPredicate.instance);
     }
+
     public RavenousTyrannosaurus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{G}");
         this.subtype.add(SubType.DINOSAUR);
@@ -39,7 +39,7 @@ public final class RavenousTyrannosaurus extends CardImpl {
         // Whenever Ravenous Tyrannosaurus attacks, it deals damage equal to its power to up to one other target creature. Excess damage is dealt to that creature's controller instead.
         Ability ability = new AttacksTriggeredAbility(new DamageWithExcessEffect(SourcePermanentPowerValue.NOT_NEGATIVE)
                 .setText("it deals damage equal to its power to up to one other target creature. Excess damage is dealt to that creature's controller instead."));
-        ability.addTarget(new TargetCreaturePermanent(0, 1, filter, false));
+        ability.addTarget(new TargetPermanent(0, 1, filter));
         this.addAbility(ability);
     }
 

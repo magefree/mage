@@ -15,6 +15,7 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -38,7 +39,7 @@ public final class AssaultFormation extends CardImpl {
 
         // {G}: Target creature with defender can attack this turn as though it didn't have defender.
         Ability ability = new SimpleActivatedAbility(new CanAttackAsThoughItDidntHaveDefenderTargetEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{G}"));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
         // {2}{G}: Creatures you control get +0/+1 until end of turn.

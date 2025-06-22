@@ -27,8 +27,9 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class OrahSkyclaveHierophant extends CardImpl {
-    static FilterPermanent filterTrigger = new FilterControlledPermanent("Cleric you control");
-    static FilterCard filterTarget = new FilterCard("Cleric card with lesser mana value");
+
+    private static final FilterPermanent filterTrigger = new FilterControlledPermanent("Cleric you control");
+    private static final FilterCard filterTarget = new FilterCard("Cleric card with lesser mana value");
     static {
         filterTrigger.add(SubType.CLERIC.getPredicate());
         filterTarget.add(SubType.CLERIC.getPredicate());

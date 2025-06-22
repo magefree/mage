@@ -12,6 +12,7 @@ import mage.constants.CardType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -30,7 +31,7 @@ public final class StingingShot extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}");
 
         // Put three -1/-1 counters on target creature with flying.
-        getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        getSpellAbility().addTarget(new TargetPermanent(filter));
         getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.M1M1.createInstance(3)));
 
         // Cycling {2}

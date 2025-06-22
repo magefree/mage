@@ -15,6 +15,7 @@ import mage.constants.ComparisonType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -39,7 +40,7 @@ public final class IntrepidHero extends CardImpl {
 
         // {tap}: Destroy target creature with power 4 or greater.
         Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

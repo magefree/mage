@@ -30,7 +30,8 @@ import java.util.UUID;
  * @author jeffwadsworth
  */
 public final class DiseasedVermin extends CardImpl {
-    static final FilterOpponent filter = new FilterOpponent("player previously dealt damage by {this}");
+
+    private static final FilterOpponent filter = new FilterOpponent("player previously dealt damage by {this}");
 
     static {
         filter.add(new DiseasedVerminPredicate());

@@ -23,7 +23,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.command.Plane;
 import mage.target.Target;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.watchers.common.PlanarRollWatcher;
 
 import java.util.ArrayList;
@@ -50,7 +50,7 @@ public class NayaPlane extends Plane {
         // Active player can roll the planar die: Whenever you roll {CHAOS}, target red, green or white creature you control gets +1/+1 until end of turn for each land you control
         DynamicValue dynamicValue = new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_PERMANENT_LANDS);
         Effect chaosEffect = new BoostTargetEffect(dynamicValue, dynamicValue, Duration.EndOfTurn);
-        Target chaosTarget = new TargetControlledCreaturePermanent(1, 1, filter, false);
+        Target chaosTarget = new TargetPermanent(filter);
 
         List<Effect> chaosEffects = new ArrayList<>();
         chaosEffects.add(chaosEffect);

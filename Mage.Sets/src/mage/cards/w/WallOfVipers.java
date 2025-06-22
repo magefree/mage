@@ -20,6 +20,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -41,7 +42,7 @@ public final class WallOfVipers extends CardImpl {
         // {3}: Destroy Wall of Vipers and target creature it's blocking. Any player may activate this ability.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(new DestroySourceEffect(), new ManaCostsImpl<>("{3}"));
         ability.addEffect(new DestroyTargetEffect(" and target creature it's blocking"));
-        ability.addTarget(new TargetCreaturePermanent(new WallOfVipersFilter()));
+        ability.addTarget(new TargetPermanent(new WallOfVipersFilter()));
         ability.setMayActivate(TargetController.ANY);
         ability.addEffect(new InfoEffect("Any player may activate this ability"));
         this.addAbility(ability);

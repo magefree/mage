@@ -20,7 +20,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.TargetPermanent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,10 +47,14 @@ public final class ShadowgrangeArchfiend extends CardImpl {
         this.addAbility(madnessAbility);
     }
 
-    private ShadowgrangeArchfiend(final ShadowgrangeArchfiend card) { super(card); }
+    private ShadowgrangeArchfiend(final ShadowgrangeArchfiend card) {
+        super(card);
+    }
 
     @Override
-    public ShadowgrangeArchfiend copy() { return new ShadowgrangeArchfiend(this); }
+    public ShadowgrangeArchfiend copy() {
+        return new ShadowgrangeArchfiend(this);
+    }
 }
 
 class ShadowgrangeArchfiendEffect extends OneShotEffect {
@@ -61,10 +65,14 @@ class ShadowgrangeArchfiendEffect extends OneShotEffect {
                 "You gain life equal to the greatest power among creatures sacrificed this way";
     }
 
-    private ShadowgrangeArchfiendEffect(final ShadowgrangeArchfiendEffect effect) { super(effect); }
+    private ShadowgrangeArchfiendEffect(final ShadowgrangeArchfiendEffect effect) {
+        super(effect);
+    }
 
     @Override
-    public ShadowgrangeArchfiendEffect copy() { return new ShadowgrangeArchfiendEffect(this); }
+    public ShadowgrangeArchfiendEffect copy() {
+        return new ShadowgrangeArchfiendEffect(this);
+    }
 
     @Override
     public boolean apply(Game game, Ability source) {
@@ -77,10 +85,14 @@ class ShadowgrangeArchfiendEffect extends OneShotEffect {
 
         // Iterate through each opponent
         for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-            if (!controller.hasOpponent(playerId, game)) { continue; }
+            if (!controller.hasOpponent(playerId, game)) {
+                continue;
+            }
 
             Player opponent = game.getPlayer(playerId);
-            if (opponent == null) { continue; }
+            if (opponent == null) {
+                continue;
+            }
 
             int greatestPower = Integer.MIN_VALUE;
             int numberOfCreatures = 0;
@@ -102,7 +114,7 @@ class ShadowgrangeArchfiendEffect extends OneShotEffect {
                 FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent(
                         "creature to sacrifice with power equal to " + greatestPower);
                 filter.add(new PowerPredicate(ComparisonType.EQUAL_TO, greatestPower));
-                Target target = new TargetControlledCreaturePermanent(filter);
+                Target target = new TargetPermanent(filter);
                 if (opponent.choose(outcome, target, source, game)) {
                     creatureToSacrifice = game.getPermanent(target.getFirstTarget());
                 }

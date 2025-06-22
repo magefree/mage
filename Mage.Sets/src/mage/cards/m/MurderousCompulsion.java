@@ -10,6 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -29,7 +30,7 @@ public final class MurderousCompulsion extends CardImpl {
 
         // Destroy target tapped creature.
         getSpellAbility().addEffect(new DestroyTargetEffect());
-        getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        getSpellAbility().addTarget(new TargetPermanent(filter));
 
         // Madness {1}{B} <i>(If you discard card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)<i>
         this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{1}{B}")));

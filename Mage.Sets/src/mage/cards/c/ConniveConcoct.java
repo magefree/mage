@@ -20,6 +20,7 @@ import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
@@ -46,7 +47,7 @@ public final class ConniveConcoct extends SplitCard {
                 new GainControlTargetEffect(Duration.Custom)
         );
         this.getLeftHalfCard().getSpellAbility().addTarget(
-                new TargetCreaturePermanent(filter)
+                new TargetPermanent(filter)
         );
 
         // Concoct

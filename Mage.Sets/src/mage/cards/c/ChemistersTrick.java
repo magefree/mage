@@ -15,10 +15,13 @@ import mage.constants.Outcome;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL;
 
 
 /**
@@ -30,7 +33,7 @@ public final class ChemistersTrick extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}{R}");
 
         // Target creature you don't control gets -2/-0 until end of turn and attacks this turn if able.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
+        this.getSpellAbility().addTarget(new TargetPermanent(FILTER_CREATURE_YOU_DONT_CONTROL));
         this.getSpellAbility().addEffect(new BoostTargetEffect(-2, 0, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new AttacksIfAbleTargetEffect(Duration.EndOfTurn).setText("and attacks this turn if able"));
 

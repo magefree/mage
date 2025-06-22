@@ -1,27 +1,28 @@
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.PhaseOutTargetEffect;
-import mage.constants.SubType;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author weirddan455
  */
 public final class GuardianOfFaith extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other target creatures you control");
+
     static {
         filter.add(AnotherPredicate.instance);
     }
@@ -42,7 +43,7 @@ public final class GuardianOfFaith extends CardImpl {
 
         // When Guardian of Faith enters the battlefield, any number of other target creatures you control phase out.
         Ability ability = new EntersBattlefieldTriggeredAbility(new PhaseOutTargetEffect());
-        ability.addTarget(new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, filter, false));
+        ability.addTarget(new TargetPermanent(0, Integer.MAX_VALUE, filter));
         this.addAbility(ability);
     }
 

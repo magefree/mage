@@ -145,6 +145,7 @@
 |Generate|EMBLEM:INR|Emblem Tamiyo|||TamiyoFieldResearcherEmblem|
 |Generate|EMBLEM:INR|Emblem Wrenn|||WrennAndSevenEmblem|
 |Generate|EMBLEM:DFT|Emblem Chandra|||ChandraSparkHunterEmblem|
+|Generate|EMBLEM:FIN|Emblem Sephiroth|||SephirothOneWingedAngelEmblem|
 
 
 # ALL PLANES
@@ -1920,6 +1921,12 @@
 |Generate|TOK:40K|Tyranid Gargoyle|||TyranidGargoyleToken|
 |Generate|TOK:40K|Tyranid Warrior|||TyranidWarriorToken|
 
+# UNF
+|Generate|TOK:UNF|Clown Robot|1||ClownRobotToken|
+|Generate|TOK:UNF|Clown Robot|2||ClownRobotToken|
+|Generate|TOK:UNF|Storm Crow|||StormCrowToken|
+|Generate|TOK:UNF|Squirrel|||SquirrelToken|
+
 # BRO
 |Generate|TOK:BRO|Bear|||BearToken|
 |Generate|TOK:BRO|Construct|1||KarnConstructToken|
@@ -2270,7 +2277,7 @@
 |Generate|TOK:PIP|Human Knight|||ThePrydwenSteelFlagshipHumanKnightToken|
 |Generate|TOK:PIP|Human Soldier|||HumanSoldierToken|
 |Generate|TOK:PIP|Junk|||JunkToken|
-|Generate|TOK:PIP|Robot|||RobotToken|
+|Generate|TOK:PIP|Robot|||Robot33Token|
 |Generate|TOK:PIP|Settlement|||SettlementToken|
 |Generate|TOK:PIP|Soldier|1||SoldierTokenWithHaste|
 |Generate|TOK:PIP|Soldier|2||SoldierToken|
@@ -2736,7 +2743,8 @@
 |Generate|TOK:TDC|Gold|||GoldToken|
 |Generate|TOK:TDC|Human|||HumanToken|
 |Generate|TOK:TDC|Inkling|||InklingToken|
-|Generate|TOK:TDC|Insect|||InsectToken|
+|Generate|TOK:TDC|Insect|1||InsectToken|
+|Generate|TOK:TDC|Insect|2||InsectDeathToken|
 |Generate|TOK:TDC|Karox Bladewing|||KaroxBladewingToken|
 |Generate|TOK:TDC|Myr|||MyrToken|
 |Generate|TOK:TDC|Plant|||PlantToken|
@@ -2748,6 +2756,7 @@
 |Generate|TOK:TDC|Spider|||SpiderToken|
 |Generate|TOK:TDC|Spirit|||SpiritWhiteToken|
 |Generate|TOK:TDC|Thopter|||ThopterColorlessToken|
+|Generate|TOK:TDC|Wall|||Wall13Token|
 
 # ACR
 |Generate|TOK:ACR|Assassin|||AssassinMenaceToken|
@@ -2764,6 +2773,7 @@
 |Generate|TOK:DSK|Everywhere|||EverywhereToken|
 |Generate|TOK:DSK|Glimmer|||GlimmerToken|
 |Generate|TOK:DSK|Gremlin|||Gremlin11Token|
+|Generate|TOK:DSK|Horror|||HorrorEnchantmentCreatureToken|
 |Generate|TOK:DSK|Insect|1||InsectBlackGreenFlyingToken|
 |Generate|TOK:DSK|Insect|2||InsectWhiteToken|
 |Generate|TOK:DSK|Primo, the Indivisible|||PrimoTheIndivisibleToken|
@@ -2774,7 +2784,49 @@
 
 # FIN
 |Generate|TOK:FIN|Food|||FoodToken|
-|Generate|TOK:FIN|Hero|||HeroToken|
+|Generate|TOK:FIN|Hero|1||HeroToken|
+|Generate|TOK:FIN|Hero|2||HeroToken|
+|Generate|TOK:FIN|Hero|3||HeroToken|
+|Generate|TOK:FIN|Hero|4||HeroToken|
+|Generate|TOK:FIN|Hero|5||HeroToken|
+|Generate|TOK:FIN|Hero|6||HeroToken|
+|Generate|TOK:FIN|Hero|7||HeroToken|
+|Generate|TOK:FIN|Hero|8||HeroToken|
+|Generate|TOK:FIN|Hero|9||HeroToken|
+|Generate|TOK:FIN|Hero|10||HeroToken|
+|Generate|TOK:FIN|Hero|11||HeroToken|
+|Generate|TOK:FIN|Hero|12||HeroToken|
+|Generate|TOK:FIN|Hero|13||HeroToken|
+|Generate|TOK:FIN|Hero|14||HeroToken|
+|Generate|TOK:FIN|Hero|15||HeroToken|
+|Generate|TOK:FIN|Hero|16||HeroToken|
+|Generate|TOK:FIN|Knight|||WaylayToken|
+|Generate|TOK:FIN|Moogle|1||MoogleToken|
+|Generate|TOK:FIN|Moogle|2||MoogleToken|
+|Generate|TOK:FIN|Robot Warrior|||RobotBlueToken|
+|Generate|TOK:FIN|Horror|||Horror3Token|
+|Generate|TOK:FIN|Wizard|1||BlackWizardToken|
+|Generate|TOK:FIN|Wizard|2||BlackWizardToken|
+|Generate|TOK:FIN|Wizard|3||BlackWizardToken|
+|Generate|TOK:FIN|Bird|1||ChocoboToken|
+|Generate|TOK:FIN|Bird|2||ChocoboToken|
+|Generate|TOK:FIN|Frog|||FrogGreenToken|
+|Generate|TOK:FIN|Angelo|||AngeloToken|
+|Generate|TOK:FIN|Darkstar|||DarkstarToken|
+|Generate|TOK:FIN|Elemental|||ElementalAllColorsToken|
+|Generate|TOK:FIN|Treasure|1||TreasureToken|
+|Generate|TOK:FIN|Treasure|2||TreasureToken|
+
+# FIN
+|Generate|TOK:FIC|Human Soldier|||HumanSoldierToken|
+|Generate|TOK:FIC|Soldier|||SoldierToken|
+|Generate|TOK:FIC|Spirit|||SpiritWhiteToken|
+|Generate|TOK:FIC|Bird|||BirdVigilanceToken|
+|Generate|TOK:FIC|Squid|||SquidToken|
+|Generate|TOK:FIC|Zombie|||ZombieToken|
+|Generate|TOK:FIC|Rebel|||RebelRedToken|
+|Generate|TOK:FIC|The Blackjack|||TheBlackjackToken|
+|Generate|TOK:FIC|Clue|||ClueArtifactToken|
 
 # JVC
 |Generate|TOK:JVC|Elemental Shaman|||ElementalShamanToken|

@@ -12,6 +12,7 @@ import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.AttackingPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -34,7 +35,7 @@ public final class Alarum extends CardImpl {
         Effect effect = new BoostTargetEffect(1, 3, Duration.EndOfTurn);
         effect.setText("It gets +1/+3 until end of turn");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
     private Alarum(final Alarum card) {

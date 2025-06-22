@@ -2,7 +2,7 @@ package mage.cards.b;
 
 import mage.MageInt;
 import mage.abilities.common.AsEntersBattlefieldAbility;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.ChangelingAbility;
@@ -13,9 +13,9 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.ChosenSubtypePredicate;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.predicate.mageobject.ChosenSubtypePredicate;
 
 import java.util.UUID;
 
@@ -25,7 +25,7 @@ import java.util.UUID;
 public final class BloodlinePretender extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterCreaturePermanent("another creature of the chosen type");
+            = new FilterControlledCreaturePermanent("another creature you control of the chosen type");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -46,7 +46,7 @@ public final class BloodlinePretender extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.BoostCreature)));
 
         // Whenever another creature of the chosen type you control enters, put a +1/+1 counter on Bloodline Pretender.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter
         ));
     }

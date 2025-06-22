@@ -17,6 +17,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -64,7 +65,7 @@ class DefiantGreatmawTriggeredAbility extends TriggeredAbilityImpl {
 
     DefiantGreatmawTriggeredAbility() {
         super(Zone.BATTLEFIELD, new RemoveCounterTargetEffect(CounterType.M1M1.createInstance(1)), false);
-        this.addTarget(new TargetCreaturePermanent(filter));
+        this.addTarget(new TargetPermanent(filter));
     }
 
     private DefiantGreatmawTriggeredAbility(final DefiantGreatmawTriggeredAbility ability) {

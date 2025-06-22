@@ -48,7 +48,7 @@ class ApproachOfTheSecondSunEffect extends OneShotEffect {
     ApproachOfTheSecondSunEffect() {
         super(Outcome.Win);
         this.staticText
-                = "If this spell was cast from your hand and you've cast another spell named {this} this game, you win the game. "
+                = "If this spell was cast from your hand and you've cast another spell named Approach of the Second Sun this game, you win the game. "
                 + "Otherwise, put {this} into its owner's library seventh from the top and you gain 7 life.";
     }
 

@@ -20,6 +20,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -51,7 +52,7 @@ public final class TetsuoUmezawa extends CardImpl {
         // {U}{B}{B}{R}, {tap}: Destroy target tapped or blocking creature.
         Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new ManaCostsImpl<>("{U}{B}{B}{R}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(creatureFilter));
+        ability.addTarget(new TargetPermanent(creatureFilter));
         this.addAbility(ability);
     }
 

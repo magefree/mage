@@ -18,6 +18,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -47,7 +48,7 @@ public final class FirewakeSliver extends CardImpl {
         // All Slivers have "{1}, Sacrifice this permanent: Target Sliver creature gets +2/+2 until end of turn."
         Ability gainedAbility = new SimpleActivatedAbility(new BoostTargetEffect(2, 2, Duration.EndOfTurn), new GenericManaCost(1));
         gainedAbility.addCost(new SacrificeSourceCost());
-        gainedAbility.addTarget(new TargetCreaturePermanent(targetSliverFilter));
+        gainedAbility.addTarget(new TargetPermanent(targetSliverFilter));
         this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
                 gainedAbility, Duration.WhileOnBattlefield,
                 filter, "All Slivers have \"{1}, Sacrifice this permanent: Target Sliver creature gets +2/+2 until end of turn.\"")));
