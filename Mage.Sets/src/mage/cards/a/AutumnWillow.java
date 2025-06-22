@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -14,6 +13,8 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -51,7 +52,7 @@ class AutumnWillowEffect extends AsThoughEffectImpl {
 
     AutumnWillowEffect() {
         super(AsThoughEffectType.SHROUD, Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "Until end of turn, Autumn Willow can be the target of spells and abilities controlled by target player as though it didn't have shroud";
+        staticText = "Until end of turn, {this} can be the target of spells and abilities controlled by target player as though it didn't have shroud";
     }
 
     private AutumnWillowEffect(final AutumnWillowEffect effect) {
