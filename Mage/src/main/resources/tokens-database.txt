@@ -2841,6 +2841,7 @@
 # UGL
 |Generate|TOK:UGL|Goblin|||GoblinToken|
 |Generate|TOK:UGL|Pegasus|||PegasusToken|
+|Generate|TOK:UGL|Sheep|||RabidSheepToken|
 |Generate|TOK:UGL|Soldier|||SoldierToken|
 |Generate|TOK:UGL|Squirrel|||SquirrelToken|
 |Generate|TOK:UGL|Zombie|||ZombieToken|

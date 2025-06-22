@@ -2812,6 +2812,7 @@ public class ScryfallImageSupportTokens {
             // UGL
             put("UGL/Goblin", "https://api.scryfall.com/cards/tugl/4?format=image");
             put("UGL/Pegasus", "https://api.scryfall.com/cards/tugl/1?format=image");
+            put("UGL/Sheep", "https://api.scryfall.com/cards/tugl/5?format=image");
             put("UGL/Soldier", "https://api.scryfall.com/cards/tugl/2?format=image");
             put("UGL/Squirrel", "https://api.scryfall.com/cards/tugl/6?format=image");
             put("UGL/Zombie", "https://api.scryfall.com/cards/tugl/3?format=image");
