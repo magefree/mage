@@ -352,6 +352,9 @@ public class ScryfallImageSupportTokens {
             put("ELD/Rat", "https://api.scryfall.com/cards/teld/6/en?format=image");
             put("ELD/Wolf", "https://api.scryfall.com/cards/teld/14/en?format=image");
 
+            // UND
+            put("UND/Goblin", "https://api.scryfall.com/cards/tund/2?format=image");
+
             // THB
             put("THB/Elemental", "https://api.scryfall.com/cards/tthb/8/en?format=image");
             put("THB/Goat", "https://api.scryfall.com/cards/tthb/1/en?format=image");
@@ -2188,6 +2191,7 @@ public class ScryfallImageSupportTokens {
 
             // WHO
             put("WHO/Alien", "https://api.scryfall.com/cards/twho/2?format=image");
+            put("WHO/Alien Angel", "https://api.scryfall.com/cards/twho/11?format=image");
             put("WHO/Alien Insect", "https://api.scryfall.com/cards/twho/19/en?format=image");
             put("WHO/Alien Rhino", "https://api.scryfall.com/cards/twho/3/en?format=image");
             put("WHO/Alien Salamander", "https://api.scryfall.com/cards/twho/16?format=image");
@@ -2809,6 +2813,7 @@ public class ScryfallImageSupportTokens {
             // UGL
             put("UGL/Goblin", "https://api.scryfall.com/cards/tugl/4?format=image");
             put("UGL/Pegasus", "https://api.scryfall.com/cards/tugl/1?format=image");
+            put("UGL/Sheep", "https://api.scryfall.com/cards/tugl/5?format=image");
             put("UGL/Soldier", "https://api.scryfall.com/cards/tugl/2?format=image");
             put("UGL/Squirrel", "https://api.scryfall.com/cards/tugl/6?format=image");
             put("UGL/Zombie", "https://api.scryfall.com/cards/tugl/3?format=image");

@@ -1137,6 +1137,9 @@
 |Generate|TOK:ELD|Rat|||RatToken|
 |Generate|TOK:ELD|Wolf|||GarrukCursedHuntsmanToken|
 
+# UND
+|Generate|TOK:UND|Goblin|||GoblinToken|
+
 # THB
 |Generate|TOK:THB|Elemental|||PurphorossInterventionToken|
 |Generate|TOK:THB|Goat|||GoatToken|
@@ -2241,6 +2244,7 @@
 
 # WHO
 |Generate|TOK:WHO|Alien|||AlienToken|
+|Generate|TOK:WHO|Alien Angel|||AlienAngelToken|
 |Generate|TOK:WHO|Alien Insect|||AlienInsectToken|
 |Generate|TOK:WHO|Alien Rhino|||AlienRhinoToken|
 |Generate|TOK:WHO|Alien Salamander|||AlienSalamanderToken|
@@ -2838,6 +2842,7 @@
 # UGL
 |Generate|TOK:UGL|Goblin|||GoblinToken|
 |Generate|TOK:UGL|Pegasus|||PegasusToken|
+|Generate|TOK:UGL|Sheep|||RabidSheepToken|
 |Generate|TOK:UGL|Soldier|||SoldierToken|
 |Generate|TOK:UGL|Squirrel|||SquirrelToken|
 |Generate|TOK:UGL|Zombie|||ZombieToken|
