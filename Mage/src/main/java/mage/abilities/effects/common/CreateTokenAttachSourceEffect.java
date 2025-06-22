@@ -1,10 +1,8 @@
 package mage.abilities.effects.common;
 
-import mage.MageItem;
 import mage.abilities.Ability;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -76,13 +74,7 @@ public class CreateTokenAttachSourceEffect extends CreateTokenEffect {
                 break;
             default:
                 FilterPermanent filter = new FilterPermanent("token");
-                filter.add(Predicates.or(
-                        permanents
-                                .stream()
-                                .map(MageItem::getId)
-                                .map(PermanentIdPredicate::new)
-                                .collect(Collectors.toSet())
-                ));
+                filter.add(PermanentIdPredicate.makeCompoundPredicate(permanents));
                 TargetPermanent target = new TargetPermanent(filter);
                 target.withNotTarget(true);
                 target.withChooseHint("to attach to");

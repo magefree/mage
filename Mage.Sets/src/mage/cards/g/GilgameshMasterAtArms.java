@@ -1,7 +1,6 @@
 package mage.cards.g;
 
 import mage.MageInt;
-import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
@@ -14,7 +13,6 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -165,13 +163,7 @@ class GilgameshMasterAtArmsAttachEffect extends OneShotEffect {
                 break;
         }
         FilterPermanent filterPermanent = new FilterPermanent("Equipment");
-        Predicates.or(
-                permanents
-                        .stream()
-                        .map(MageItem::getId)
-                        .map(PermanentIdPredicate::new)
-                        .collect(Collectors.toSet())
-        );
+        filter.add(PermanentIdPredicate.makeCompoundPredicate(permanents));
         return Optional
                 .of(new TargetPermanent(0, 1, filterPermanent, true))
                 .map(t -> {

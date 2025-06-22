@@ -1,6 +1,5 @@
 package mage.cards.e;
 
-import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -10,7 +9,6 @@ import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -102,11 +100,7 @@ class ExoticPetsEffect extends OneShotEffect {
             return true;
         }
         FilterPermanent filter = new FilterPermanent("creature");
-        filter.add(Predicates.or(permanents
-                .stream()
-                .map(MageItem::getId)
-                .map(PermanentIdPredicate::new)
-                .collect(Collectors.toSet())));
+        filter.add(PermanentIdPredicate.makeCompoundPredicate(permanents));
         TargetPermanent target = new TargetPermanent(filter);
         target.withNotTarget(true);
         for (CounterType counterType : counterTypes) {

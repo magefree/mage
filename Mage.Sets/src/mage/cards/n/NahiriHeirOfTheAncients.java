@@ -1,6 +1,5 @@
 package mage.cards.n;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -119,12 +118,7 @@ class NahiriHeirOfTheAncientsEffect extends OneShotEffect {
         Permanent tokenCreature = tokens.get(0);
         if (tokens.size() > 1) {
             FilterPermanent tokenFilter = new FilterPermanent("token");
-            tokenFilter.add(Predicates.or(
-                    tokens.stream()
-                            .map(MageObject::getId)
-                            .map(PermanentIdPredicate::new)
-                            .collect(Collectors.toSet())
-            ));
+            tokenFilter.add(PermanentIdPredicate.makeCompoundPredicate(tokens));
             TargetPermanent target = new TargetPermanent(tokenFilter);
             target.withNotTarget(true);
             player.choose(outcome, target, source, game);

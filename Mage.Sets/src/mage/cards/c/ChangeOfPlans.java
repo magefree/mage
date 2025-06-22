@@ -1,6 +1,5 @@
 package mage.cards.c;
 
-import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.keyword.ConniveSourceEffect;
@@ -9,7 +8,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -83,13 +81,7 @@ class ChangeOfPlansEffect extends OneShotEffect {
             return true;
         }
         FilterPermanent filter = new FilterPermanent("creatures");
-        filter.add(Predicates.or(
-                permanents
-                        .stream()
-                        .map(MageItem::getId)
-                        .map(PermanentIdPredicate::new)
-                        .collect(Collectors.toSet())
-        ));
+        filter.add(PermanentIdPredicate.makeCompoundPredicate(permanents));
         TargetPermanent target = new TargetPermanent(0, Integer.MAX_VALUE, filter, true);
         player.choose(outcome, target.withChooseHint("to phase out"), source, game);
         for (UUID targetId : target.getTargets()) {

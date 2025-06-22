@@ -1,6 +1,5 @@
 package mage.cards.h;
 
-import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -16,7 +15,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Controllable;
@@ -120,12 +118,7 @@ class HelmOfKaldraEffect extends OneShotEffect {
                 break;
             default:
                 FilterPermanent filter = new FilterPermanent();
-                filter.add(Predicates.or(
-                        permanents.stream()
-                                .map(MageItem::getId)
-                                .map(PermanentIdPredicate::new)
-                                .collect(Collectors.toSet())
-                ));
+                filter.add(PermanentIdPredicate.makeCompoundPredicate(permanents));
                 TargetPermanent target = new TargetPermanent(filter);
                 target.withNotTarget(true);
                 target.withChooseHint("to equip");
