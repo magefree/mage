@@ -2301,8 +2301,7 @@
 |Generate|TOK:LCI|Dinosaur Egg|||DinosaurEggToken|
 |Generate|TOK:LCI|Fungus|||FungusCantBlockToken|
 |Generate|TOK:LCI|Fungus Dinosaur|||FungusDinosaurToken|
-|Generate|TOK:LCI|Gnome|1||GolemWhiteBlueToken|
-|Generate|TOK:LCI|Gnome|2||GnomeToken|
+|Generate|TOK:LCI|Gnome|||GnomeToken|
 |Generate|TOK:LCI|Gnome Soldier|||GnomeSoldierStarStarToken|
 |Generate|TOK:LCI|Golem|||GolemWhiteBlueToken|
 |Generate|TOK:LCI|Map|||MapToken|

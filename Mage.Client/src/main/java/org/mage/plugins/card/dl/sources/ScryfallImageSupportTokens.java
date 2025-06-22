@@ -2230,8 +2230,7 @@ public class ScryfallImageSupportTokens {
             put("LCI/Dinosaur Egg", "https://api.scryfall.com/cards/tlci/11/en?format=image");
             put("LCI/Fungus", "https://api.scryfall.com/cards/tlci/7/en?format=image");
             put("LCI/Fungus Dinosaur", "https://api.scryfall.com/cards/tlci/12/en?format=image");
-            put("LCI/Gnome/1", "https://api.scryfall.com/cards/tlci/13?format=image");
-            put("LCI/Gnome/2", "https://api.scryfall.com/cards/tlci/16/en?format=image");
+            put("LCI/Gnome", "https://api.scryfall.com/cards/tlci/16/en?format=image");
             put("LCI/Gnome Soldier", "https://api.scryfall.com/cards/tlci/3/en?format=image");
             put("LCI/Golem", "https://api.scryfall.com/cards/tlci/13/en?format=image");
             put("LCI/Map", "https://api.scryfall.com/cards/tlci/17/en?format=image");
