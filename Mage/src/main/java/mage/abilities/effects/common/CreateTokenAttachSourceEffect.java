@@ -1,12 +1,20 @@
 package mage.abilities.effects.common;
 
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.constants.Outcome;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
+import mage.players.Player;
+import mage.target.TargetPermanent;
 
-import java.util.Optional;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * @author weirddan455
@@ -42,22 +50,48 @@ public class CreateTokenAttachSourceEffect extends CreateTokenEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         super.apply(game, source);
-        Permanent token = this
-                .getLastAddedTokenIds()
-                .stream()
-                .findFirst()
-                .map(game::getPermanent)
-                .orElse(null);
-        if (token == null || optional
-                && !Optional
-                .ofNullable(game.getPlayer(source.getControllerId()))
-                .map(player -> player.chooseUse(
-                        Outcome.BoostCreature, "Attach the equipment to the token?", source, game
-                ))
-                .orElse(false)) {
+        Player player = game.getPlayer(source.getControllerId());
+        Permanent equipment = source.getSourcePermanentIfItStillExists(game);
+        if (player == null
+                || equipment == null
+                || optional
+                && !player.chooseUse(
+                Outcome.BoostCreature, "Attach " +
+                        equipment.getLogName() + " to the token?", source, game
+        )) {
             return false;
         }
-        token.addAttachment(source.getSourceId(), source, game);
+        List<Permanent> permanents = this
+                .getLastAddedTokenIds()
+                .stream()
+                .map(game::getPermanent)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+        Permanent token;
+        switch (permanents.size()) {
+            case 0:
+                return false;
+            case 1:
+                token = permanents.get(0);
+                break;
+            default:
+                FilterPermanent filter = new FilterPermanent("token");
+                filter.add(Predicates.or(
+                        permanents
+                                .stream()
+                                .map(MageItem::getId)
+                                .map(PermanentIdPredicate::new)
+                                .collect(Collectors.toSet())
+                ));
+                TargetPermanent target = new TargetPermanent(filter);
+                target.withNotTarget(true);
+                target.withChooseHint("to attach to");
+                player.choose(outcome, target, source, game);
+                token = game.getPermanent(target.getFirstTarget());
+        }
+        if (token != null) {
+            token.addAttachment(source.getSourceId(), source, game);
+        }
         return true;
     }
 }
