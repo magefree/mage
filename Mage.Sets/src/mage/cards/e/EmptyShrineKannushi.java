@@ -114,7 +114,7 @@ class EmptyShrineKannushiProtectionAbility extends ProtectionAbility {
 
     @Override
     public String getRule() {
-        return "Empty-Shrine Kannushi has protection from the colors of permanents you control.";
+        return "{this} has protection from the colors of permanents you control.";
     }
 }
 

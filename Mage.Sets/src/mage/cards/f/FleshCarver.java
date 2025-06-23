@@ -1,7 +1,6 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
@@ -16,8 +15,8 @@ import mage.abilities.keyword.IntimidateAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
@@ -26,7 +25,8 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.HorrorXXBlackToken;
 import mage.players.Player;
-import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -67,7 +67,6 @@ class FleshCarverAbility extends DiesSourceTriggeredAbility {
 
     public FleshCarverAbility() {
         super(new FleshCarverEffect(), false);
-        setTriggerPhrase("When Flesh Carver dies, ");
     }
 
     private FleshCarverAbility(final FleshCarverAbility ability) {

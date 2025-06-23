@@ -58,7 +58,7 @@ class ErrantMinionEffect extends OneShotEffect {
 
     ErrantMinionEffect() {
         super(Outcome.Damage);
-        this.staticText = "that player may pay any amount of mana. Errant Minion deals 2 damage to that player. Prevent X of that damage, where X is the amount of mana that player paid this way";
+        this.staticText = "that player may pay any amount of mana. {this} deals 2 damage to that player. Prevent X of that damage, where X is the amount of mana that player paid this way";
     }
 
     private ErrantMinionEffect(final ErrantMinionEffect effect) {

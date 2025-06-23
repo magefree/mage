@@ -1,7 +1,6 @@
 
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.Effect;
@@ -14,12 +13,14 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -60,7 +61,7 @@ class EarthbindEffect extends OneShotEffect {
 
     EarthbindEffect() {
         super(Outcome.Damage);
-        staticText = "if enchanted creature has flying, {this} deals 2 damage to that creature and Earthbind gains \"Enchanted creature loses flying.\"";
+        staticText = "if enchanted creature has flying, {this} deals 2 damage to that creature and {this} gains \"Enchanted creature loses flying.\"";
     }
 
     private EarthbindEffect(final EarthbindEffect effect) {
