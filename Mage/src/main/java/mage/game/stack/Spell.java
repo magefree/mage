@@ -564,6 +564,19 @@ public class Spell extends StackObjectImpl implements Card {
     }
 
     @Override
+    public boolean hasName(String name) {
+        if (this.faceDown) {
+            return false;
+        }
+        if (this.getSpellAbility().getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED
+                && (((SplitCard) this.card).getLeftHalfCard().hasName(name)
+                || ((SplitCard) this.card).getRightHalfCard().hasName(name))) {
+            return true;
+        }
+        return this.card.hasName(name);
+    }
+
+    @Override
     public Rarity getRarity() {
         return card.getRarity();
     }

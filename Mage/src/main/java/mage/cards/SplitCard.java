@@ -235,4 +235,9 @@ public abstract class SplitCard extends CardImpl implements CardWithHalves {
         // split card and it's halfes contains own mana costs, so no need to rewrite logic
         return super.getManaValue();
     }
+
+    @Override
+    public boolean hasName(String name) {
+        return super.hasName(name) || this.getLeftHalfCard().hasName(name) || this.getRightHalfCard().hasName(name);
+    }
 }

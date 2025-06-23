@@ -199,6 +199,11 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
+    public boolean hasName(String name) {
+        return Objects.equals(name, this.name);
+    }
+
+    @Override
     public List<CardType> getCardType(Game game) {
         return emptyCardType;
     }
@@ -677,6 +682,7 @@ public class StackAbility extends StackObjectImpl implements Ability {
     public void initSourceObjectZoneChangeCounter(Game game, boolean force) {
         ability.initSourceObjectZoneChangeCounter(game, force);
     }
+
     @Override
     public int getSourceObjectZoneChangeCounter() {
         return ability.getSourceObjectZoneChangeCounter();
