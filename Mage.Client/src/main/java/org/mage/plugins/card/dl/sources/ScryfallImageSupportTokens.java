@@ -2035,6 +2035,7 @@ public class ScryfallImageSupportTokens {
 
             // DIS
             put("DIS/Emblem Momir", "https://api.scryfall.com/cards/pmoa/61/en?format=image");
+            put("DIS/Elemental", "https://api.scryfall.com/cards/togw/9?format=image");
 
             // MUL
             put("MUL/Elemental", "https://api.scryfall.com/cards/tmul/2/en?format=image");
