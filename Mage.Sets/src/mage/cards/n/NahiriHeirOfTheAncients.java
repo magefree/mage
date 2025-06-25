@@ -14,7 +14,7 @@ import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.PermanentIdPredicate;
+import mage.filter.predicate.permanent.PermanentReferenceInCollectionPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.KorWarriorToken;
@@ -118,7 +118,7 @@ class NahiriHeirOfTheAncientsEffect extends OneShotEffect {
         Permanent tokenCreature = tokens.get(0);
         if (tokens.size() > 1) {
             FilterPermanent tokenFilter = new FilterPermanent("token");
-            tokenFilter.add(PermanentIdPredicate.makeCompoundPredicate(tokens));
+            tokenFilter.add(new PermanentReferenceInCollectionPredicate(tokens, game));
             TargetPermanent target = new TargetPermanent(tokenFilter);
             target.withNotTarget(true);
             player.choose(outcome, target, source, game);

@@ -14,7 +14,7 @@ import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.MageObjectReferencePredicate;
 import mage.filter.predicate.other.HasOnlySingleTargetPermanentPredicate;
-import mage.filter.predicate.permanent.PermanentIdPredicate;
+import mage.filter.predicate.permanent.PermanentReferenceInCollectionPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.AkroanSoldierToken;
@@ -123,7 +123,7 @@ class FrontlineHeroismEffect extends OneShotEffect {
                 break;
             default:
                 FilterPermanent filter = new FilterPermanent("token to target with the copied spell");
-                filter.add(PermanentIdPredicate.makeCompoundPredicate(permanents));
+                filter.add(new PermanentReferenceInCollectionPredicate(permanents, game));
                 TargetPermanent target = new TargetPermanent(filter);
                 target.withNotTarget(true);
                 player.choose(outcome, target, source, game);

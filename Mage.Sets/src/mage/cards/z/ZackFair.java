@@ -20,7 +20,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.PermanentIdPredicate;
+import mage.filter.predicate.permanent.PermanentReferenceInCollectionPredicate;
 import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -116,7 +116,7 @@ class ZackFairEffect extends OneShotEffect {
                 FilterPermanent filter = new FilterPermanent(
                         SubType.EQUIPMENT, "Equipment to attach to " + creature.getIdName()
                 );
-                filter.add(PermanentIdPredicate.makeCompoundPredicate(permanents));
+                filter.add(new PermanentReferenceInCollectionPredicate(permanents, game));
                 TargetPermanent target = new TargetPermanent(filter);
                 target.withNotTarget(true);
                 Optional.ofNullable(source)

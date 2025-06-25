@@ -16,7 +16,7 @@ import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
-import mage.filter.predicate.permanent.PermanentIdPredicate;
+import mage.filter.predicate.permanent.PermanentReferenceInCollectionPredicate;
 import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -118,7 +118,7 @@ class HelmOfKaldraEffect extends OneShotEffect {
                 break;
             default:
                 FilterPermanent filter = new FilterPermanent();
-                filter.add(PermanentIdPredicate.makeCompoundPredicate(permanents));
+                filter.add(new PermanentReferenceInCollectionPredicate(permanents, game));
                 TargetPermanent target = new TargetPermanent(filter);
                 target.withNotTarget(true);
                 target.withChooseHint("to equip");

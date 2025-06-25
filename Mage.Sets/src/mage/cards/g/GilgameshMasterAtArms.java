@@ -13,7 +13,7 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.permanent.PermanentIdPredicate;
+import mage.filter.predicate.permanent.PermanentReferenceInCollectionPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -163,7 +163,7 @@ class GilgameshMasterAtArmsAttachEffect extends OneShotEffect {
                 break;
         }
         FilterPermanent filterPermanent = new FilterPermanent("Equipment");
-        filter.add(PermanentIdPredicate.makeCompoundPredicate(permanents));
+        filter.add(new PermanentReferenceInCollectionPredicate(permanents, game));
         return Optional
                 .of(new TargetPermanent(0, 1, filterPermanent, true))
                 .map(t -> {

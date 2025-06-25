@@ -8,7 +8,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.PermanentIdPredicate;
+import mage.filter.predicate.permanent.PermanentReferenceInCollectionPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -81,7 +81,7 @@ class ChangeOfPlansEffect extends OneShotEffect {
             return true;
         }
         FilterPermanent filter = new FilterPermanent("creatures");
-        filter.add(PermanentIdPredicate.makeCompoundPredicate(permanents));
+        filter.add(new PermanentReferenceInCollectionPredicate(permanents, game));
         TargetPermanent target = new TargetPermanent(0, Integer.MAX_VALUE, filter, true);
         player.choose(outcome, target.withChooseHint("to phase out"), source, game);
         for (UUID targetId : target.getTargets()) {

@@ -16,7 +16,7 @@ import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
-import mage.filter.predicate.permanent.PermanentIdPredicate;
+import mage.filter.predicate.permanent.PermanentReferenceInCollectionPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -111,7 +111,7 @@ class BenthicAnomalyEffect extends OneShotEffect {
                 break;
             default:
                 FilterPermanent filter = new FilterPermanent("a creature to create a copy of");
-                filter.add(PermanentIdPredicate.makeCompoundPredicate(permanents));
+                filter.add(new PermanentReferenceInCollectionPredicate(permanents, game));
                 TargetPermanent target = new TargetPermanent(filter);
                 target.withNotTarget(true);
                 player.choose(outcome, target, source, game);
