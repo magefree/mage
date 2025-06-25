@@ -531,6 +531,9 @@
 # DGM
 |Generate|TOK:DGM|Elemental|||VoiceOfResurgenceToken|
 
+# DIS
+|Generate|TOK:DIS|Elemental|||ResearchDevelopmentToken|
+
 # DKA
 |Generate|TOK:DKA|Human|||HumanToken|
 |Generate|TOK:DKA|Vampire|||SorinLordOfInnistradVampireToken|
