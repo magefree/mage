@@ -1,4 +1,3 @@
-// Save this as: mage.cards.RoomCardHalfImpl.java
 package mage.cards;
 
 import mage.abilities.SpellAbility;

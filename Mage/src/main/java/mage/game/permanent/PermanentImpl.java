@@ -2114,10 +2114,8 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public boolean unlockOnCast(Game game) {
         if (this.wasUnlockedOnCast) {
-                    System.out.println("unlockedguard");
             return false;
         }
-        System.out.println("unlocked");
         this.wasUnlockedOnCast = true;
         return true;
     }

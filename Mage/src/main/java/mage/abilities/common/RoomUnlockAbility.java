@@ -1,12 +1,11 @@
 package mage.abilities.common;
 
 import mage.abilities.Ability;
-import mage.abilities.SpecialAction; // Changed import
+import mage.abilities.SpecialAction;
 import mage.abilities.condition.common.RoomLeftHalfLockedCondition;
 import mage.abilities.condition.common.RoomRightHalfLockedCondition;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.constants.Outcome;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
@@ -23,7 +22,7 @@ public class RoomUnlockAbility extends SpecialAction {
 
     private final boolean isLeftHalf;
 
-    public RoomUnlockAbility(ManaCosts costs, boolean isLeftHalf, GainAbilitySourceEffect doorAbility) {
+    public RoomUnlockAbility(ManaCosts costs, boolean isLeftHalf) {
         super(Zone.BATTLEFIELD, null);
         this.addCost(costs);
 
@@ -37,8 +36,6 @@ public class RoomUnlockAbility extends SpecialAction {
             this.setCondition(RoomRightHalfLockedCondition.instance);
         }
 
-        // Adds the ability the specific door has
-        this.addEffect(doorAbility);
         // Adds the effect to pay + unlock the half
         this.addEffect(new RoomUnlockHalfEffect(isLeftHalf));
     }
