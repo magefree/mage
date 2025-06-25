@@ -21,6 +21,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         this.rotationSet = true;
         this.hasBasicLands = false; // temporary
 
+        cards.add(new SetCardInfo("Alpharael, Dreaming Acolyte", 212, Rarity.UNCOMMON, mage.cards.a.AlpharaelDreamingAcolyte.class));
         cards.add(new SetCardInfo("Breeding Pool", 251, Rarity.RARE, mage.cards.b.BreedingPool.class));
         cards.add(new SetCardInfo("Forest", 266, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", 371, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
