@@ -12,7 +12,6 @@ import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.util.CardUtil;
 
-import java.lang.reflect.Constructor;
 import java.util.List;
 import java.util.UUID;
 
@@ -129,7 +128,7 @@ public abstract class SplitCard extends CardImpl implements CardWithHalves {
         getLeftHalfCard().updateZoneChangeCounter(game, event);
         getRightHalfCard().updateZoneChangeCounter(game, event);
     }
-
+    
     @Override
     public boolean cast(Game game, Zone fromZone, SpellAbility ability, UUID controllerId) {
         switch (ability.getSpellAbilityType()) {
@@ -149,6 +148,7 @@ public abstract class SplitCard extends CardImpl implements CardWithHalves {
         Abilities<Ability> allAbilites = new AbilitiesImpl<>();
         for (Ability ability : super.getAbilities()) {
             // ignore split abilities
+            // TODO: why it here, for GUI's cleanup in card texts? Maybe it can be removed, see mdf cards
             if (ability instanceof SpellAbility
                     && (((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.SPLIT
                             || ((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.SPLIT_AFTERMATH
@@ -182,6 +182,7 @@ public abstract class SplitCard extends CardImpl implements CardWithHalves {
         Abilities<Ability> allAbilites = new AbilitiesImpl<>();
         for (Ability ability : super.getAbilities(game)) {
             // ignore split abilities
+            // TODO: why it here, for GUI's cleanup in card texts? Maybe it can be removed, see mdf cards
             if (ability instanceof SpellAbility
                     && (((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.SPLIT
                     || ((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.SPLIT_AFTERMATH)) {

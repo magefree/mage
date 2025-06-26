@@ -8,6 +8,9 @@ import mage.game.Game;
 
 import java.util.UUID;
 
+/**
+ * @author oscscull
+ */
 public class RoomCardHalfImpl extends SplitCardHalfImpl implements RoomCardHalf {
 
     public RoomCardHalfImpl(UUID ownerId, CardSetInfo setInfo, CardType[] cardTypes, String costs,

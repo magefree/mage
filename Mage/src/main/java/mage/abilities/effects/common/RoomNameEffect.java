@@ -14,6 +14,7 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 
 /**
+ * @author oscscull
  * Continuous effect that sets the name of a Room permanent based on its
  * unlocked halves.
  * Functions as a characteristic-defining ability.

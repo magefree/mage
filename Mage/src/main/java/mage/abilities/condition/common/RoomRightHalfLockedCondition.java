@@ -6,6 +6,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
+ * @author oscscull
  * Checks if a Permanent's right half is LOCKED (i.e., NOT unlocked).
  */
 public enum RoomRightHalfLockedCondition implements Condition {

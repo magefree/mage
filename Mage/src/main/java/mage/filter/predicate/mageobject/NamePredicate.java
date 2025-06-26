@@ -1,7 +1,6 @@
 package mage.filter.predicate.mageobject;
 
 import mage.MageObject;
-import mage.cards.CardWithHalves;
 import mage.cards.SplitCard;
 import mage.constants.SpellAbilityType;
 import mage.filter.predicate.Predicate;
@@ -43,18 +42,13 @@ public class NamePredicate implements Predicate<MageObject> {
             return false;
         }
 
-        // If a player names a card, the player may name either half of a split card,
-        // but not both.
-        // A split card has the chosen name if one of its two names matches the chosen
-        // name.
-        // This is NOT the same for double faced cards, where only the front side
-        // matches
+        // If a player names a card, the player may name either half of a split card, but not both. 
+        // A split card has the chosen name if one of its two names matches the chosen name.
+        // This is NOT the same for double faced cards, where only the front side matches
 
         // Test of Talents ruling:
-        // If the back face of a modal double-faced card is countered, you will not be
-        // able to exile any cards,
-        // including the one that you countered, because those cards have only their
-        // front-face characteristics
+        // If the back face of a modal double-faced card is countered, you will not be able to exile any cards,
+        // including the one that you countered, because those cards have only their front-face characteristics
         // (including name) in the graveyard, hand, and library. (2021-04-16)
 
         String[] searchNames = extractNames(name);
@@ -77,8 +71,7 @@ public class NamePredicate implements Predicate<MageObject> {
                     card.getName()
             });
         } else if (input instanceof Spell && ((Spell) input).isFaceDown(game)) {
-            // face down spells don't have names, so it's not equal, see
-            // https://github.com/magefree/mage/issues/6569
+            // face down spells don't have names, so it's not equal, see https://github.com/magefree/mage/issues/6569
             return false;
         } else {
             // For regular cards, extract names from input and compare

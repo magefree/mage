@@ -2,10 +2,7 @@ package mage.cards;
 
 import java.util.UUID;
 
-import mage.abilities.Abilities;
-import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.RoomUnlockAbility;
 import mage.abilities.common.SimpleStaticAbility;

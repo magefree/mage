@@ -239,9 +239,6 @@ public class TriggeredAbilities extends LinkedHashMap<String, TriggeredAbility> 
                         }
                     }
                 }
-                boolean a = ability.checkTrigger(event, game);
-                boolean b = ability.checkTriggeredLimit(game);
-                boolean c = !ability.checkUsedAlready(game);
 
                 if (ability.checkTrigger(event, game) && ability.checkTriggeredLimit(game) && !ability.checkUsedAlready(game)) {
                     NumberOfTriggersEvent numberOfTriggersEvent = new NumberOfTriggersEvent(ability, event);

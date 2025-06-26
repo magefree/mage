@@ -1,4 +1,5 @@
 package mage.cards;
+
 /**
  * @author oscscull
  */

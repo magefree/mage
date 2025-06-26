@@ -35,7 +35,6 @@ public final class FireIce extends SplitCard {
     }
 
     @Override
-    
     public FireIce copy() {
         return new FireIce(this);
     }

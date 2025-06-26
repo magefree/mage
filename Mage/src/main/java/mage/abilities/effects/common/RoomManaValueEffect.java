@@ -17,6 +17,7 @@ import mage.game.permanent.PermanentCard; // Ensure this import is present
 import mage.Mana;
 
 /**
+ * @author oscscull
  * Continuous effect that sets the mv of a Room permanent based on its unlocked
  * halves.
  * 

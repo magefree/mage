@@ -202,7 +202,6 @@ public final class ZonesHandler {
                 cardsToMove = new CardsImpl(targetCard);
                 cardsToUpdate.get(toZone).addAll(cardsToMove);
             } else {
-                // Handle normal cards
                 cardsToMove = new CardsImpl(targetCard);
                 cardsToUpdate.get(toZone).addAll(cardsToMove);
             }
