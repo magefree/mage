@@ -2386,7 +2386,7 @@ public class VerifyCardDataTest {
         }
     }
 
-    private static final String[] wrongSymbols = {"’", "“", "”"};
+    private static final String[] wrongSymbols = {"’", "“", "”", "\n"};
 
     private void checkWrongSymbolsInRules(Card card) {
         for (String s : wrongSymbols) {
@@ -2395,6 +2395,7 @@ public class VerifyCardDataTest {
             }
         }
 
+        Pattern ruleNameCheck = Pattern.compile("(?<!named )"+Pattern.quote(card.getName())+"(?! \\{)");
         for (String rule : card.getRules()) {
             for (String s : wrongSymbols) {
                 if (rule.contains(s)) {
@@ -2403,6 +2404,12 @@ public class VerifyCardDataTest {
             }
             if (rule.contains("&mdash ")) {
                 fail(card, "rules", "card's rules contains restricted test [&mdash ] instead [&mdash;]");
+            }
+            if (ruleNameCheck.matcher(rule).find()) {
+                fail(card, "rules", "card's pre-formatted rules contains its name unexpectedly");
+            }
+            if (rule.contains("named {this}")) {
+                fail(card, "rules", "card's rules contains \"named {this}\", should use card's name");
             }
         }
     }
