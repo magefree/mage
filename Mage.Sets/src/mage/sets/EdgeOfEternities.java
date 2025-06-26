@@ -19,7 +19,6 @@ public final class EdgeOfEternities extends ExpansionSet {
         super("Edge of Eternities", "EOE", ExpansionSet.buildDate(2025, 8, 1), SetType.EXPANSION);
         this.blockName = "Edge of Eternities"; // for sorting in GUI
         this.rotationSet = true;
-        this.hasBasicLands = false; // temporary
 
         cards.add(new SetCardInfo("Alpharael, Dreaming Acolyte", 212, Rarity.UNCOMMON, mage.cards.a.AlpharaelDreamingAcolyte.class));
         cards.add(new SetCardInfo("Breeding Pool", 251, Rarity.RARE, mage.cards.b.BreedingPool.class));
