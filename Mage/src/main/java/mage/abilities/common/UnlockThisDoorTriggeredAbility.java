@@ -34,12 +34,6 @@ public class UnlockThisDoorTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        // Trigger when this door's specific half is unlocked
-        // This currently isn't working for this reason. 
-        // The code that removes the ability is based on lock status.
-        // The code that triggers the ability is based on lock status.
-        // So this card doesn't have the ability at the moment it should check the trigger, so it doesn't trigger!
-        // Work it out!
         return event.getTargetId().equals(getSourceId());
     }
 

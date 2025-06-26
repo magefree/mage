@@ -2,7 +2,10 @@ package mage.cards;
 
 import java.util.UUID;
 
+import mage.abilities.Abilities;
+import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.RoomUnlockAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -27,45 +30,44 @@ import mage.abilities.effects.common.continuous.LoseAbilitySourceEffect;
  * @author oscscull
  */
 public abstract class RoomCard extends SplitCard {
-    protected Ability leftDoorAbility;
-    protected Ability rightDoorAbility;
-
-    protected RoomCard(UUID ownerId, CardSetInfo setInfo, CardType[] typesLeft, CardType[] typesRight, String costsLeft,
+    protected RoomCard(UUID ownerId, CardSetInfo setInfo, CardType[] types, String costsLeft,
             String costsRight, SpellAbilityType spellAbilityType) {
-        super(ownerId, setInfo, CardType.mergeTypes(typesLeft, typesRight), costsLeft, costsRight, spellAbilityType);
+        super(ownerId, setInfo, types, costsLeft, costsRight, spellAbilityType, true);
 
         String[] names = setInfo.getName().split(" // ");
 
-        leftHalfCard = new RoomCardHalfImpl(this.getOwnerId(), new CardSetInfo(names[0], setInfo.getExpansionSetCode(), setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo()), typesLeft, costsLeft, this, SpellAbilityType.SPLIT_LEFT);
-        rightHalfCard = new RoomCardHalfImpl(this.getOwnerId(), new CardSetInfo(names[1], setInfo.getExpansionSetCode(), setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo()), typesRight, costsRight, this, SpellAbilityType.SPLIT_RIGHT);
+        leftHalfCard = new RoomCardHalfImpl(
+                this.getOwnerId(), new CardSetInfo(names[0], setInfo.getExpansionSetCode(), setInfo.getCardNumber(),
+                        setInfo.getRarity(), setInfo.getGraphicInfo()),
+                types, costsLeft, this, SpellAbilityType.SPLIT_LEFT);
+        rightHalfCard = new RoomCardHalfImpl(
+                this.getOwnerId(), new CardSetInfo(names[1], setInfo.getExpansionSetCode(), setInfo.getCardNumber(),
+                        setInfo.getRarity(), setInfo.getGraphicInfo()),
+                types, costsRight, this, SpellAbilityType.SPLIT_RIGHT);
     }
 
     protected RoomCard(RoomCard card) {
         super(card);
-        this.leftDoorAbility = card.leftDoorAbility;
-        this.rightDoorAbility = card.rightDoorAbility;
     }
 
     protected void AddRoomAbilities(Ability leftAbility, Ability rightAbility) {
-        this.leftDoorAbility = leftAbility;
-        this.rightDoorAbility = rightAbility;
-
         getLeftHalfCard().addAbility(leftAbility);
-        getRightHalfCard().addAbility(rightAbility);
-        
-        if (leftAbility != null) {
-            this.addAbility(leftAbility.setRuleAtTheTop(false));
-        }
-        if (rightAbility != null) {
-            this.addAbility(rightAbility.setRuleAtTheTop(false));
-        }
+        getRightHalfCard().addAbility(rightAbility);   
+        // Set the source of the abilities to be the main card, not the half.
+        // This is important or triggers will be looking for the wrong object (the half) as a source.
+        getLeftHalfCard().getAbilities().forEach(ability -> {
+            ability.setSourceId(this.getId());
+        });  
+        getRightHalfCard().getAbilities().forEach(ability -> {
+            ability.setSourceId(this.getId());
+        });  
 
         // Add the one-shot effect to unlock a door on cast -> ETB
         Ability entersAbility = new EntersBattlefieldAbility(new RoomEnterUnlockEffect());
         entersAbility.setRuleVisible(false);
         this.addAbility(entersAbility);
 
-        // Add abilities to remove locked door abilities
+        // Add abilities to remove locked door abilities - keep triggers or they won't trigger
         if (leftAbility != null && !(leftAbility instanceof UnlockThisDoorTriggeredAbility)) {
             Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                     new LoseAbilitySourceEffect(leftAbility, Duration.WhileOnBattlefield),

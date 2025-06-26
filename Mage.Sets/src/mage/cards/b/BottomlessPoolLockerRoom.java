@@ -23,7 +23,7 @@ public final class BottomlessPoolLockerRoom extends RoomCard {
 
     public BottomlessPoolLockerRoom(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,
-                new CardType[] { CardType.ENCHANTMENT }, new CardType[] { CardType.ENCHANTMENT },
+                new CardType[] { CardType.ENCHANTMENT },
                 "{U}", "{4}{U}", SpellAbilityType.SPLIT);
         this.subtype.add(SubType.ROOM);
 

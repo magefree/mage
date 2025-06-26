@@ -191,7 +191,18 @@ public final class ZonesHandler {
                         cardsToUpdate.get(toZone).add(mdfCard.getRightHalfCard());
                         break;
                 }
+            } else if (targetCard instanceof RoomCard || targetCard instanceof RoomCardHalf) {
+                // Room cards must be moved as single object
+                RoomCard roomCard = (RoomCard) targetCard.getMainCard();
+                cardsToMove = new CardsImpl(roomCard);
+                cardsToUpdate.get(toZone).add(roomCard);
+                // Move all parts together
+                cardsToUpdate.get(toZone).add(roomCard.getLeftHalfCard());
+                cardsToUpdate.get(toZone).add(roomCard.getRightHalfCard());
+                cardsToMove = new CardsImpl(targetCard);
+                cardsToUpdate.get(toZone).addAll(cardsToMove);
             } else {
+                // Handle normal cards
                 cardsToMove = new CardsImpl(targetCard);
                 cardsToUpdate.get(toZone).addAll(cardsToMove);
             }
@@ -361,6 +372,8 @@ public final class ZonesHandler {
             return false;
         }
 
+        // TODO: is it buggy? Card characteristics are global - if you change face down then it will be
+        //  changed in original card too, not in blueprint only
         card.setFaceDown(info.faceDown, game);
 
         boolean success = false;
@@ -368,40 +381,23 @@ public final class ZonesHandler {
             Zone fromZone = event.getFromZone();
             if (event.getToZone() == Zone.BATTLEFIELD) {
                 // PUT TO BATTLEFIELD AS PERMANENT
+                // prepare card and permanent (card must contain full data, even for face down)
+                // if needed to take attributes from the spell (e.g. color of spell was changed)
                 card = prepareBlueprintCardFromSpell(card, event, game);
-
-                // Room special handling
-                Card cardToRemove = card; // Default: remove the same card that's creating the permanent
-                Zone zoneToRemoveFrom = fromZone; // Default: remove from the event's fromZone
 
                 // controlling player can be replaced so use event player now
                 Permanent permanent;
                 if (card instanceof MeldCard) {
                     permanent = new PermanentMeld(card, event.getPlayerId(), game);
-                } else if (card instanceof ModalDoubleFacedCard) {
-                    // main mdf card must be processed before that call (e.g. only halves can be
-                    // moved to battlefield)
+                } else if (card instanceof RoomCardHalf) {
+                    // Only the main room card can etb
+                    permanent = new PermanentCard(card.getMainCard(), event.getPlayerId(), game);
+                }
+                else if (card instanceof ModalDoubleFacedCard) {
+                    // main mdf card must be processed before that call (e.g. only halves can be moved to battlefield)
                     throw new IllegalStateException("Unexpected trying of move mdf card to battlefield instead half");
                 } else if (card instanceof Permanent) {
                     throw new IllegalStateException("Unexpected trying of move permanent to battlefield instead card");
-                } else if (card instanceof SplitCardHalf
-                        && ((SplitCardHalf) card).getParentCard() instanceof RoomCard) {
-                    // For rooms, when a half resolves, put the main room card on the battlefield
-                    Card originalHalf = card; // The half that needs to be removed from stack
-                    Card mainRoomCard = ((SplitCardHalf) card).getParentCard();
-
-                    // Update the event to point to the main room card
-                    event.setTargetId(mainRoomCard.getId());
-
-                    // Create permanent from main room card
-                    permanent = new PermanentCard(mainRoomCard, event.getPlayerId(), game);
-
-                    // But remove the HALF from STACK (not main card from hand)
-                    cardToRemove = originalHalf;
-                    zoneToRemoveFrom = Zone.STACK;
-
-                    // Update card variable for subsequent ZCC operations
-                    card = mainRoomCard;
                 } else {
                     permanent = new PermanentCard(card, event.getPlayerId(), game);
                 }
@@ -422,14 +418,18 @@ public final class ZonesHandler {
                 }
 
                 permanent.setFaceDown(info.faceDown, game);
+                if (info.faceDown) {
+                    // TODO: need research cards with "setFaceDown(false"
+                    // TODO: delete after new release and new face down bugs (old code remove face down status from a card for unknown reason), 2024-02-20
+                    //card.setFaceDown(false, game);
+                }
 
-                // make sure the controller of all continuous effects of this card are switched
-                // to the current controller
+                // make sure the controller of all continuous effects of this card are switched to the current controller
                 game.setScopeRelevant(true);
                 try {
                     game.getContinuousEffects().setController(permanent.getId(), permanent.getControllerId());
                     if (permanent.entersBattlefield(source, game, fromZone, true)
-                            && cardToRemove.removeFromZone(game, zoneToRemoveFrom, source)) {
+                            && card.removeFromZone(game, fromZone, source)) {
                         success = true;
                         event.setTarget(permanent);
 
@@ -455,6 +455,10 @@ public final class ZonesHandler {
         }
         if (success) {
             // change ZCC on real enter
+            // warning, tokens creation code uses same zcc logic as cards (+1 zcc on enter to battlefield)
+            // so if you want to change zcc logic here (but I know you don't) then change token code
+            // too in TokenImpl.putOntoBattlefieldHelper
+            // KickerTest do many tests for token's zcc
             if (event.getToZone() == Zone.BATTLEFIELD && event.getTarget() != null) {
                 event.getTarget().updateZoneChangeCounter(game, event);
             } else if (!(card instanceof Permanent)) {
