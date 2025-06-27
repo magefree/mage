@@ -94,9 +94,7 @@ class TheFiveDoctorsSearchLibraryGraveyardEffect extends OneShotEffect {
         }
         if (controller.chooseUse(outcome, "Search your library for up to " + CardUtil.numberToText(cardsToSearch) + " " + filter.getMessage() + '?', source, game)) {
             TargetCardInLibrary targetLib = new TargetCardInLibrary(0, cardsToSearch, filter);
-            targetLib.clearChosen();
             if (controller.searchLibrary(targetLib, source, game)) {
-                if (!targetLib.getTargets().isEmpty()) {
                     for (UUID cardId : targetLib.getTargets()) {
                         Card card = game.getCard(cardId);
                         if (card != null) {
@@ -104,22 +102,18 @@ class TheFiveDoctorsSearchLibraryGraveyardEffect extends OneShotEffect {
                         }
                     }
                 }
-            }
             needShuffle = true;
         }
         cardsLeftToSearch = cardsToSearch - cardsFound.count(filter, game);
         if (cardsLeftToSearch > 0 && controller.chooseUse(outcome, "Search your graveyard for up to " + CardUtil.numberToText(cardsLeftToSearch) + " " + filter.getMessage() + '?', source, game)) {
             TargetCard targetGrave = new TargetCardInYourGraveyard(0, cardsLeftToSearch, filter, true);
-            targetGrave.clearChosen();
             if (controller.chooseTarget(outcome, controller.getGraveyard(), targetGrave, source, game)) {
-                if (!targetGrave.getTargets().isEmpty()) {
                     for (UUID cardId : targetGrave.getTargets()) {
                         Card card = game.getCard(cardId);
                         if (card != null) {
                             cardsFound.add(card);
                         }
                     }
-                }
             }
         }
         if (cardsFound != null) {
