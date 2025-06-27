@@ -188,11 +188,15 @@ public interface Target extends Copyable<Target>, Serializable {
 
     // some targets are chosen from players that are not the controller of the ability (e.g. Pandemonium)
     // TODO: research usage of setTargetController and setAbilityController - target adjusters must set it both, example: Necrotic Plague
+    //   replace by shared method like setAbilityAndTargetControllers()
+    @Deprecated
     void setTargetController(UUID playerId);
 
     UUID getTargetController();
 
     // TODO: research usage of setTargetController and setAbilityController - target adjusters must set it both, example: Necrotic Plague
+    //   replace by shared method like setAbilityAndTargetControllers()
+    @Deprecated
     void setAbilityController(UUID playerId);
 
     UUID getAbilityController();

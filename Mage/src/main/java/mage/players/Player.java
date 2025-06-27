@@ -816,6 +816,9 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void construct(Tournament tournament, Deck deck);
 
+    /**
+     * Draft related: pick next card from a booster
+     */
     void pickCard(List<Card> cards, Deck deck, Draft draft);
 
     // TODO: add result, process it in AI code (if something put creature to attack then it can broke current AI logic)

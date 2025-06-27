@@ -44,6 +44,9 @@ public interface Choice extends Serializable, Copyable<Choice> {
 
     ChoiceHintType getHintType();
 
+    /**
+     * For AI, mana auto-payment from choose color dialogs
+     */
     boolean isManaColorChoice();
 
     Choice setManaColorChoice(boolean manaColorChoice);
