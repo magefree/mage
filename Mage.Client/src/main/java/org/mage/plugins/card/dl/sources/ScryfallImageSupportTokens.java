@@ -2756,7 +2756,7 @@ public class ScryfallImageSupportTokens {
             put("FIN/Knight", "https://api.scryfall.com/cards/tfin/10/en?format=image");
             put("FIN/Moogle/1", "https://api.scryfall.com/cards/tfin/11/en?format=image");
             put("FIN/Moogle/2", "https://api.scryfall.com/cards/tfin/34/en?format=image");
-            put("FIN/Robot Warrior", "https://api.scryfall.com/cards/tfin/12/en?format=image");
+            put("FIN/Robot", "https://api.scryfall.com/cards/tfin/12/en?format=image");
             put("FIN/Horror", "https://api.scryfall.com/cards/tfin/13/en?format=image");
             put("FIN/Wizard/1", "https://api.scryfall.com/cards/tfin/14/en?format=image");
             put("FIN/Wizard/2", "https://api.scryfall.com/cards/tfin/15/en?format=image");
@@ -2814,7 +2814,7 @@ public class ScryfallImageSupportTokens {
             // UGL
             put("UGL/Goblin", "https://api.scryfall.com/cards/tugl/4?format=image");
             put("UGL/Pegasus", "https://api.scryfall.com/cards/tugl/1?format=image");
-            put("UGL/Sheep", "https://api.scryfall.com/cards/tugl/5?format=image");
+            put("UGL/Rabid Sheep", "https://api.scryfall.com/cards/tugl/5?format=image");
             put("UGL/Soldier", "https://api.scryfall.com/cards/tugl/2?format=image");
             put("UGL/Squirrel", "https://api.scryfall.com/cards/tugl/6?format=image");
             put("UGL/Zombie", "https://api.scryfall.com/cards/tugl/3?format=image");
