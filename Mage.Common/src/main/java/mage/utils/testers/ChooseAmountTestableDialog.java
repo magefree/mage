@@ -42,7 +42,7 @@ class ChooseAmountTestableDialog extends BaseTestableDialog {
     }
 
     private ChooseAmountTestableDialog aiMustChoose(boolean resStatus, int targetsCount) {
-        // TODO: AI use default distribution, imrove someday
+        // TODO: AI use default distribution, improve someday
         TargetTestableResult res = ((TargetTestableResult) this.getResult());
         res.aiAssertEnabled = true;
         res.aiAssertResStatus = resStatus;
