@@ -78,6 +78,7 @@ class FeveredSuspicionEffect extends OneShotEffect {
             }
         }
         controller.moveCards(cards, Zone.EXILED, source, game);
+        game.processAction();
         nonlands.retainZone(Zone.EXILED, game);
         CardUtil.castMultipleWithAttributeForFree(
                 controller, source, game, nonlands,
