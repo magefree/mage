@@ -64,14 +64,16 @@ public class GathererSets implements Iterable<DownloadJob> {
             "TSP", "TSB", "PLC", "FUT",
             "LRW", "MOR",
             "SHM", "EVE",
-            "MED", "ME2", "ME3", "ME4",
+            "ME2", "ME3", "ME4",
             "POR", "P02", "PTK",
             "ARC", "DD3EVG",
-            "W16", "W17",
+            "W16", "W17", 
             // "PALP" -- Gatherer does not have the set Asia Pacific Land Program
             // "ATH" -- has cards from many sets, symbol does not exist on gatherer
             // "CP", "DPA", "PELP", "PGPX", "PGRU", "H17", "JR", "SWS", // need to fix
-            "H09", "PD2", "PD3", "UNH", "CM1", "V11", "A25", "UST", "IMA", "DD2", "EVG", "DDC", "DDE", "DDD", "CHR", "G18", "GVL", "S00", "S99", "UGL" // ok
+            "H09", "PD2", "PD3", "UNH", "CM1", "V11", "A25", "UST", "IMA", "DD2",
+            "EVG", "DDC", "DDE", "DDD", "CHR", "G18", "GVL", "S00", "S99", "UGL",
+            "BTD" // ok
             // current testing
     };
 
@@ -110,12 +112,13 @@ public class GathererSets implements Iterable<DownloadJob> {
             "WOC", "SPG", "LCI", "LCC", "REX", "PIP", "MKM", "MKC", "CLU", "OTJ",
             "OTC", "OTP", "BIG", "MH3", "M3C", "ACR", "BLB", "BLC", "DSK", "DSC",
             "MB2", "FDN", "INR", "J25", "DRC", "DFT", "TDC", "TDM", "FCA", "FIC",
-            "FIN"
+            "FIN", "SIS", "SIR", "SLD", "AKR", "MD1", "ANB", "LTC", "BRR", "HA1",
+            "HA2", "HA3", "HA4", "HA5", "ZNC"
             // "HHO", "ANA" -- do not exist on gatherer
     };
 
     private static final String[] symbolsOnlyMyth = {
-            "DRB", "V09", "V10", "V12", "V13", "V14", "V15", "V16", "V17", "EXP", "MED"
+            "DRB", "V09", "V10", "V12", "V13", "V14", "V15", "V16", "V17", "EXP", "MED", "ZNE"
             // "HTR16" does not exist
     };
 
@@ -133,6 +136,7 @@ public class GathererSets implements Iterable<DownloadJob> {
         codeReplacements.put("APC", "AP");
         codeReplacements.put("ARN", "AN");
         codeReplacements.put("ATQ", "AQ");
+        codeReplacements.put("BTD", "BD");
         codeReplacements.put("CMA", "CM1");
         codeReplacements.put("CHR", "CH");
         codeReplacements.put("DVD", "DD3_DVD");
