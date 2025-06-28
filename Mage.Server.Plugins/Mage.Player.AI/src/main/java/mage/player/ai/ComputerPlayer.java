@@ -52,7 +52,7 @@ public class ComputerPlayer extends PlayerImpl {
     protected static final int PASSIVITY_PENALTY = 5; // Penalty value for doing nothing if some actions are available
 
     // debug only: set TRUE to debug simulation's code/games (on false sim thread will be stopped after few secs by timeout)
-    protected static final boolean COMPUTER_DISABLE_TIMEOUT_IN_GAME_SIMULATIONS = true; // DebugUtil.AI_ENABLE_DEBUG_MODE;
+    public static final boolean COMPUTER_DISABLE_TIMEOUT_IN_GAME_SIMULATIONS = false; // DebugUtil.AI_ENABLE_DEBUG_MODE;
 
     // AI agents uses game simulation thread for all calcs and it's high CPU consumption
     // More AI threads - more parallel AI games can be calculate
@@ -64,7 +64,7 @@ public class ComputerPlayer extends PlayerImpl {
     // * use yours CPU cores for best performance
     // TODO: add server config to control max AI threads (with CPU cores by default)
     // TODO: rework AI implementation to use multiple sims calculation instead one by one
-    final static int COMPUTER_MAX_THREADS_FOR_SIMULATIONS = 1;//DebugUtil.AI_ENABLE_DEBUG_MODE ? 1 : 5;
+    final static int COMPUTER_MAX_THREADS_FOR_SIMULATIONS = 5;//DebugUtil.AI_ENABLE_DEBUG_MODE ? 1 : 5;
 
 
     // remember picked cards for better draft choices
@@ -104,7 +104,7 @@ public class ComputerPlayer extends PlayerImpl {
     @Override
     public boolean chooseMulligan(Game game) {
         if (hand.size() < 6
-                || isTestsMode() // ignore mulligan in tests
+                || isTestMode() // ignore mulligan in tests
                 || game.getClass().getName().contains("Momir") // ignore mulligan in Momir games
         ) {
             return false;

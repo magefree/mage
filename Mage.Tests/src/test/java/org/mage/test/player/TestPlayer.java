@@ -775,7 +775,12 @@ public class TestPlayer implements Player {
                         AIRealGameControlUntil = endStep; // disable on end step
                         computerPlayer.priority(game);
                         actions.remove(action);
-                        computerPlayer.resetPassed(); // remove AI's pass, so runtime/check commands can be executed in same priority
+                        // remove AI's pass, so runtime/check commands can be executed in same priority
+                        // aiPlayStep can cause double priority call, but it's better to have workable checkXXX commands
+                        // (AI will do nothing on second priority call anyway)
+                        if (!actions.isEmpty()) {
+                            computerPlayer.resetPassed();
+                        }
                         return true;
                     }
 
@@ -3438,7 +3443,7 @@ public class TestPlayer implements Player {
     @Override
     public boolean isComputer() {
         // all players in unit tests are computers, so it allows testing different logic (Human vs AI)
-        if (isTestsMode()) {
+        if (isTestMode()) {
             // AIRealGameSimulation = true - full plyable AI
             // AIRealGameSimulation = false - choose assisted AI (Human)
             return AIRealGameSimulation;
@@ -3874,13 +3879,23 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean isTestsMode() {
-        return computerPlayer.isTestsMode();
+    public boolean isTestMode() {
+        return computerPlayer.isTestMode();
     }
 
     @Override
     public void setTestMode(boolean value) {
         computerPlayer.setTestMode(value);
+    }
+
+    @Override
+    public boolean isFastFailInTestMode() {
+        return computerPlayer.isFastFailInTestMode();
+    }
+
+    @Override
+    public void setFastFailInTestMode(boolean value) {
+        computerPlayer.setFastFailInTestMode(value);
     }
 
     @Override

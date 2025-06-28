@@ -114,6 +114,13 @@ public class ComputerPlayer6 extends ComputerPlayer {
         this.actionCache = player.actionCache;
     }
 
+    /**
+     * Change simulation timeout - used for AI stability tests only
+     */
+    public void setMaxThinkTimeSecs(int maxThinkTimeSecs) {
+        this.maxThinkTimeSecs = maxThinkTimeSecs;
+    }
+
     @Override
     public ComputerPlayer6 copy() {
         return new ComputerPlayer6(this);
@@ -431,6 +438,8 @@ public class ComputerPlayer6 extends ComputerPlayer {
      * @return
      */
     protected Integer addActionsTimed() {
+        // TODO: all actions added and calculated one by one,
+        //  multithreading do not supported here
         // run new game simulation in parallel thread
         FutureTask<Integer> task = new FutureTask<>(() -> addActions(root, maxDepth, Integer.MIN_VALUE, Integer.MAX_VALUE));
         threadPoolSimulations.execute(task);
@@ -446,15 +455,15 @@ public class ComputerPlayer6 extends ComputerPlayer {
             }
         } catch (TimeoutException | InterruptedException e) {
             // AI thinks too long
-            logger.info("ai simulating - timed out");
+            logger.warn("AI player thinks too long - " + getName() + " - " + root.game);
             task.cancel(true);
         } catch (ExecutionException e) {
             // game error
-            logger.error("AI simulation catch game error: " + e, e);
+            logger.error("AI player catch game error in simulation - " + getName() + " - " + root.game + ": " + e, e);
             task.cancel(true);
             // real games: must catch and log
             // unit tests: must raise again for fast fail
-            if (this.isTestsMode()) {
+            if (this.isTestMode() && this.isFastFailInTestMode()) {
                 throw new IllegalStateException("One of the simulated games raise the error: " + e, e);
             }
         } catch (Throwable e) {

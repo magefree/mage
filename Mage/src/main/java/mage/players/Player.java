@@ -79,7 +79,13 @@ public interface Player extends MageItem, Copyable<Player> {
      */
     boolean isHuman();
 
-    boolean isTestsMode();
+    boolean isTestMode();
+
+    void setTestMode(boolean value);
+
+    boolean isFastFailInTestMode();
+
+    void setFastFailInTestMode(boolean value);
 
     /**
      * Current player is AI. Use it in card's code and all other places.
@@ -397,8 +403,6 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param fullRestore return turn control to own
      */
     void setGameUnderYourControl(Game game, boolean value, boolean fullRestore);
-
-    void setTestMode(boolean value);
 
     void setAllowBadMoves(boolean allowBadMoves);
 

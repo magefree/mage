@@ -142,7 +142,8 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
                     }
                 }
             } else {
-                logger.info('[' + game.getPlayer(playerId).getName() + "][pre] Action: skip");
+                // nothing to choose or freeze/infinite game
+                logger.info("AI player can't find next action: " + getName());
             }
         } else {
             logger.debug("Next Action exists!");

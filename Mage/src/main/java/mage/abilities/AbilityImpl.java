@@ -377,7 +377,7 @@ public abstract class AbilityImpl implements Ability {
         // unit tests only: it allows to add targets/choices by two ways:
         // 1. From cast/activate command params (process it here)
         // 2. From single addTarget/setChoice, it's a preferred method for tests (process it in normal choose dialogs like human player)
-        if (controller.isTestsMode()) {
+        if (controller.isTestMode()) {
             if (!controller.addTargets(this, game)) {
                 return false;
             }

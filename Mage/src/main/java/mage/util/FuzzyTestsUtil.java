@@ -58,7 +58,7 @@ public class FuzzyTestsUtil {
             return;
         }
         Player samplePlayer = game.getPlayers().values().stream().findFirst().orElse(null);
-        if (samplePlayer == null || !samplePlayer.isTestsMode()) {
+        if (samplePlayer == null || !samplePlayer.isTestMode()) {
             return;
         }
 

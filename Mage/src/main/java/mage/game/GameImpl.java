@@ -1782,7 +1782,7 @@ public abstract class GameImpl implements Game {
 
                         // count total errors
                         Player activePlayer = this.getPlayer(getActivePlayerId());
-                        if (activePlayer != null && !activePlayer.isTestsMode()) {
+                        if (activePlayer != null && !activePlayer.isTestMode() && !activePlayer.isFastFailInTestMode()) {
                             // real game - try to continue
                             priorityErrorsCount++;
                             continue;
