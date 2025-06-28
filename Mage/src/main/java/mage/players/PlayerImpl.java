@@ -147,7 +147,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected Set<UUID> inRange = new HashSet<>(); // players list in current range of influence (updates each turn due rules)
 
     protected boolean isTestMode = false;
-    protected boolean isFastFailInTestMode = false;
+    protected boolean isFastFailInTestMode = true;
     protected boolean canGainLife = true;
     protected boolean canLoseLife = true;
     protected PayLifeCostLevel payLifeCostLevel = PayLifeCostLevel.allAbilities;
