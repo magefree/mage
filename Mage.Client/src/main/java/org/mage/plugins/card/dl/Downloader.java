@@ -46,8 +46,10 @@ public class Downloader extends AbstractLaternaBean {
 
     public Downloader() {
         // prepare 10 threads and start to waiting new download jobs from queue
+        // TODO: gatherer website has download rate limits, so limit max threads as temporary solution
+        int maxThreads = 3;
         PoolFiberFactory f = new PoolFiberFactory(pool);
-        for (int i = 0, numThreads = 10; i < numThreads; i++) {
+        for (int i = 0, numThreads = maxThreads; i < numThreads; i++) {
             Fiber fiber = f.create();
             fiber.start();
             fibers.add(fiber);

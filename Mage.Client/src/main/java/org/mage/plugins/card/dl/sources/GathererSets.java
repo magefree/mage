@@ -16,7 +16,9 @@ import static org.mage.plugins.card.utils.CardImageUtils.getImagesDir;
 /**
  * Download: set code symbols download from wizards web size
  * <p>
- * Warning, it's outdated source with low quality images. TODO: must migrate to scryfall like mana icons
+ * Warning, it's outdated source with low quality images.
+ * TODO: must migrate to scryfall like mana icons,
+ *   see https://github.com/magefree/mage/issues/13261
  */
 public class GathererSets implements Iterable<DownloadJob> {
 
@@ -41,9 +43,10 @@ public class GathererSets implements Iterable<DownloadJob> {
 
     private static File outDir;
 
-    private static final int DAYS_BEFORE_RELEASE_TO_DOWNLOAD = +14; // Try to load the symbolsBasic eralies 14 days before release date
+    private static final int DAYS_BEFORE_RELEASE_TO_DOWNLOAD = +14; // Try to load the symbolsBasic 14 days before release date
     private static final Logger logger = Logger.getLogger(GathererSets.class);
 
+    // TODO: find all possible sets from ExpansionRepository instead custom
     private static final String[] symbolsBasic = {"10E", "9ED", "8ED", "7ED", "6ED", "5ED", "4ED", "3ED", "2ED", "LEB", "LEA",
             "HOP",
             "ARN", "ATQ", "LEG", "DRK", "FEM", "HML",
@@ -113,9 +116,7 @@ public class GathererSets implements Iterable<DownloadJob> {
             "DRB", "V09", "V10", "V12", "V13", "V14", "V15", "V16", "V17", "EXP", "MED"
             // "HTR16" does not exist
     };
-    private static final String[] symbolsOnlySpecial = {
-            "MPS", "MP2"
-    };
+
 
     private static final HashMap<String, String> codeReplacements = new HashMap<>();
 
@@ -171,8 +172,7 @@ public class GathererSets implements Iterable<DownloadJob> {
     }
 
     public GathererSets() {
-
-        outDir = new File(getImagesDir() + Constants.RESOURCE_PATH_SYMBOLS);
+        outDir = new File(getImagesDir() + Constants.RESOURCE_PATH_SYMBOLS_RARITY_DEFAULT_PATH);
 
         if (!outDir.exists()) {
             outDir.mkdirs();
@@ -287,9 +287,9 @@ public class GathererSets implements Iterable<DownloadJob> {
             canDownload = false;
             if (exp != null && exp.getReleaseDate().before(compareDate)) {
                 canDownload = true;
-                jobs.add(generateDownloadJob(symbol, "C", "C"));
-                jobs.add(generateDownloadJob(symbol, "U", "U"));
-                jobs.add(generateDownloadJob(symbol, "R", "R"));
+                jobs.add(generateDownloadJob(symbol, "C", "common"));
+                jobs.add(generateDownloadJob(symbol, "U", "uncommon"));
+                jobs.add(generateDownloadJob(symbol, "R", "rare"));
             }
             CheckSearchResult(symbol, exp, canDownload, true, true, true, false);
         }
@@ -299,10 +299,10 @@ public class GathererSets implements Iterable<DownloadJob> {
             canDownload = false;
             if (exp != null && exp.getReleaseDate().before(compareDate)) {
                 canDownload = true;
-                jobs.add(generateDownloadJob(symbol, "C", "C"));
-                jobs.add(generateDownloadJob(symbol, "U", "U"));
-                jobs.add(generateDownloadJob(symbol, "R", "R"));
-                jobs.add(generateDownloadJob(symbol, "M", "M"));
+                jobs.add(generateDownloadJob(symbol, "C", "common"));
+                jobs.add(generateDownloadJob(symbol, "U", "uncommon"));
+                jobs.add(generateDownloadJob(symbol, "R", "rare"));
+                jobs.add(generateDownloadJob(symbol, "M", "mythic"));
             }
             CheckSearchResult(symbol, exp, canDownload, true, true, true, true);
         }
@@ -312,17 +312,7 @@ public class GathererSets implements Iterable<DownloadJob> {
             canDownload = false;
             if (exp != null && exp.getReleaseDate().before(compareDate)) {
                 canDownload = true;
-                jobs.add(generateDownloadJob(symbol, "M", "M"));
-            }
-            CheckSearchResult(symbol, exp, canDownload, false, false, false, true);
-        }
-
-        for (String symbol : symbolsOnlySpecial) {
-            ExpansionSet exp = Sets.findSet(symbol);
-            canDownload = false;
-            if (exp != null && exp.getReleaseDate().before(compareDate)) {
-                canDownload = true;
-                jobs.add(generateDownloadJob(symbol, "M", "S"));
+                jobs.add(generateDownloadJob(symbol, "M", "mythic"));
             }
             CheckSearchResult(symbol, exp, canDownload, false, false, false, true);
         }
@@ -334,11 +324,22 @@ public class GathererSets implements Iterable<DownloadJob> {
     }
 
     private DownloadJob generateDownloadJob(String set, String rarity, String urlRarity) {
-        File dst = new File(outDir, set + '-' + rarity + ".jpg");
+        File dst = new File(outDir, set + '-' + rarity + ".png");
         if (codeReplacements.containsKey(set)) {
             set = codeReplacements.get(set);
         }
-        String url = "https://gatherer.wizards.com/Handlers/Image.ashx?type=symbol&set=" + set + "&size=small&rarity=" + urlRarity;
+        // example:
+        // - small: https://gatherer-static.wizards.com/set_symbols/FIN/small-common-FIN.png
+        // - big: https://gatherer-static.wizards.com/set_symbols/FIN/large-rare-FIN.png
+
+        String useSet = set.toUpperCase(Locale.ENGLISH);
+        String useSize = "large"; // allow: small, large
+        String url = String.format("https://gatherer-static.wizards.com/set_symbols/%s/%s-%s-%s.png",
+                useSet,
+                useSize,
+                urlRarity,
+                useSet
+        );
         return new DownloadJob(set + '-' + rarity, url, toFile(dst), false);
     }
 }
