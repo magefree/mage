@@ -887,6 +887,12 @@ public abstract class GameImpl implements Game {
         if (state.isGameOver()) {
             return true;
         }
+
+        // stop on game thread ended by third party tools or AI's timeout
+        if (Thread.currentThread().isInterrupted()) {
+            return true;
+        }
+
         int remainingPlayers = 0;
         int numLosers = 0;
         for (Player player : state.getPlayers().values()) {
@@ -897,9 +903,10 @@ public abstract class GameImpl implements Game {
                 numLosers++;
             }
         }
+
+        // stop on no more active players
         boolean noMorePlayers = remainingPlayers <= 1 || numLosers >= state.getPlayers().size() - 1;
-        // stop on no more players or on stopped game sim thread
-        if (noMorePlayers || Thread.currentThread().isInterrupted()) {
+        if (noMorePlayers) {
             end();
             if (remainingPlayers == 0 && logger.isDebugEnabled()) {
                 logger.debug("DRAW for gameId: " + getId());
