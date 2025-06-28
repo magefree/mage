@@ -1527,12 +1527,18 @@
 |Generate|TOK:SLD|Food|3||FoodToken|
 |Generate|TOK:SLD|Food|4||FoodToken|
 |Generate|TOK:SLD|Food|5||FoodToken|
+|Generate|TOK:SLD|Food|6||FoodToken|
 |Generate|TOK:SLD|Goblin|||GoblinToken|
 |Generate|TOK:SLD|Hydra|||ZaxaraTheExemplaryHydraToken|
 |Generate|TOK:SLD|Icingdeath, Frost Tongue|||IcingdeathFrostTongueToken|
 |Generate|TOK:SLD|Marit Lage|||MaritLageToken|
 |Generate|TOK:SLD|Mechtitan|||MechtitanToken|
+|Generate|TOK:SLD|Myr|||MyrToken|
 |Generate|TOK:SLD|Saproling|||SaprolingToken|
+|Generate|TOK:SLD|Shapeshifter|1||ShapeshifterBlueToken|
+|Generate|TOK:SLD|Shapeshifter|2||ShapeshifterBlueToken|
+|Generate|TOK:SLD|Shapeshifter|3||ShapeshifterBlueToken|
+|Generate|TOK:SLD|Shapeshifter|4||ShapeshifterBlueToken|
 |Generate|TOK:SLD|Shrine|||ShrineToken|
 |Generate|TOK:SLD|Spirit|1||SpiritWhiteToken|
 |Generate|TOK:SLD|Spirit|2||SpiritToken|
@@ -1541,6 +1547,8 @@
 |Generate|TOK:SLD|Treasure|2||TreasureToken|
 |Generate|TOK:SLD|Treasure|3||TreasureToken|
 |Generate|TOK:SLD|Treasure|4||TreasureToken|
+|Generate|TOK:SLD|Treasure|5||TreasureToken|
+|Generate|TOK:SLD|Treasure|6||TreasureToken|
 |Generate|TOK:SLD|Walker|1||WalkerToken|
 |Generate|TOK:SLD|Walker|2||WalkerToken|
 |Generate|TOK:SLD|Walker|3||WalkerToken|

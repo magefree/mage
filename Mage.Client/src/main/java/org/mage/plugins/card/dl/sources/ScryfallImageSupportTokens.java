@@ -832,12 +832,18 @@ public class ScryfallImageSupportTokens {
             put("SLD/Food/3", "https://api.scryfall.com/cards/sld/2011?format=image");
             put("SLD/Food/4", "https://api.scryfall.com/cards/sld/2012?format=image");
             put("SLD/Food/5", "https://api.scryfall.com/cards/sld/2013?format=image");
+            put("SLD/Food/6", "https://api.scryfall.com/cards/sld/2064?format=image");
             put("SLD/Goblin", "https://api.scryfall.com/cards/sld/219?format=image");
             put("SLD/Hydra", "https://api.scryfall.com/cards/sld/1334?format=image");
             put("SLD/Icingdeath, Frost Tongue", "https://api.scryfall.com/cards/sld/1018?format=image");
             put("SLD/Marit Lage", "https://api.scryfall.com/cards/sld/1681?format=image");
             put("SLD/Mechtitan", "https://api.scryfall.com/cards/sld/1969?format=image");
+            put("SLD/Myr", "https://api.scryfall.com/cards/sld/2101?format=image");
             put("SLD/Saproling", "https://api.scryfall.com/cards/sld/1139?format=image");
+            put("SLD/Shapeshifter/1", "https://api.scryfall.com/cards/sld/1906?format=image");
+            put("SLD/Shapeshifter/2", "https://api.scryfall.com/cards/sld/1907?format=image");
+            put("SLD/Shapeshifter/3", "https://api.scryfall.com/cards/sld/1908?format=image");
+            put("SLD/Shapeshifter/4", "https://api.scryfall.com/cards/sld/1909?format=image");
             put("SLD/Shrine", "https://api.scryfall.com/cards/sld/1835?format=image");
             put("SLD/Spirit/1", "https://api.scryfall.com/cards/sld/1341?format=image");
             put("SLD/Spirit/2", "https://api.scryfall.com/cards/sld/1852?format=image");
@@ -846,6 +852,8 @@ public class ScryfallImageSupportTokens {
             put("SLD/Treasure/2", "https://api.scryfall.com/cards/sld/1736/en?format=image");
             put("SLD/Treasure/3", "https://api.scryfall.com/cards/sld/1507/en?format=image");
             put("SLD/Treasure/4", "https://api.scryfall.com/cards/sld/153/en?format=image");
+            put("SLD/Treasure/5", "https://api.scryfall.com/cards/sld/2065/en?format=image");
+            put("SLD/Treasure/6", "https://api.scryfall.com/cards/sld/2094/en?format=image");
             put("SLD/Walker/1", "https://api.scryfall.com/cards/sld/148/en?format=image");
             put("SLD/Walker/2", "https://api.scryfall.com/cards/sld/149/en?format=image");
             put("SLD/Walker/3", "https://api.scryfall.com/cards/sld/150/en?format=image");
