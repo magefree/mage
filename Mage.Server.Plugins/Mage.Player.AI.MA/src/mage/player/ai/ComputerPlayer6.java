@@ -213,10 +213,8 @@ public class ComputerPlayer6 extends ComputerPlayer {
             logger.trace("Add Action [" + depth + "] " + node.getAbilities().toString() + "  a: " + alpha + " b: " + beta);
         }
         Game game = node.getGame();
-        if (!COMPUTER_DISABLE_TIMEOUT_IN_GAME_SIMULATIONS
-                && Thread.interrupted()) {
-            Thread.currentThread().interrupt();
-            logger.debug("interrupted");
+        if (!COMPUTER_DISABLE_TIMEOUT_IN_GAME_SIMULATIONS && Thread.currentThread().isInterrupted()) {
+            logger.debug("AI game sim interrupted by timeout");
             return GameStateEvaluator2.evaluate(playerId, game).getTotalScore();
         }
         // Condition to stop deeper simulation
@@ -476,10 +474,8 @@ public class ComputerPlayer6 extends ComputerPlayer {
     }
 
     protected int simulatePriority(SimulationNode2 node, Game game, int depth, int alpha, int beta) {
-        if (!COMPUTER_DISABLE_TIMEOUT_IN_GAME_SIMULATIONS
-                && Thread.interrupted()) {
-            Thread.currentThread().interrupt();
-            logger.info("interrupted");
+        if (!COMPUTER_DISABLE_TIMEOUT_IN_GAME_SIMULATIONS && Thread.currentThread().isInterrupted()) {
+            logger.debug("AI game sim interrupted by timeout");
             return GameStateEvaluator2.evaluate(playerId, game).getTotalScore();
         }
         node.setGameValue(game.getState().getValue(true).hashCode());
@@ -507,9 +503,7 @@ public class ComputerPlayer6 extends ComputerPlayer {
         int bestValSubNodes = Integer.MIN_VALUE;
         for (Ability action : allActions) {
             actionNumber++;
-            if (!COMPUTER_DISABLE_TIMEOUT_IN_GAME_SIMULATIONS
-                    && Thread.interrupted()) {
-                Thread.currentThread().interrupt();
+            if (!COMPUTER_DISABLE_TIMEOUT_IN_GAME_SIMULATIONS && Thread.currentThread().isInterrupted()) {
                 logger.info("Sim Prio [" + depth + "] -- interrupted");
                 break;
             }

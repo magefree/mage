@@ -29,8 +29,7 @@ public final class EtaliPrimalStorm extends CardImpl {
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 
-        // Whenever Etali, Primal Storm attacks, exile the top card of each player's library, 
-        // then you may cast any number of nonland cards exiled this way without paying their mana costs.
+        // Whenever Etali, Primal Storm attacks, exile the top card of each player's library, then you may cast any number of nonland cards exiled this way without paying their mana costs.
         this.addAbility(new AttacksTriggeredAbility(new EtaliPrimalStormEffect(), false));
     }
 

@@ -897,7 +897,9 @@ public abstract class GameImpl implements Game {
                 numLosers++;
             }
         }
-        if (remainingPlayers <= 1 || numLosers >= state.getPlayers().size() - 1) {
+        boolean noMorePlayers = remainingPlayers <= 1 || numLosers >= state.getPlayers().size() - 1;
+        // stop on no more players or on stopped game sim thread
+        if (noMorePlayers || Thread.currentThread().isInterrupted()) {
             end();
             if (remainingPlayers == 0 && logger.isDebugEnabled()) {
                 logger.debug("DRAW for gameId: " + getId());

@@ -2834,8 +2834,10 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean canRespond() { // abort is checked here to get out of player requests (as example: after disconnect)
-        return isInGame() && !abort;
+    public boolean canRespond() {
+        // abort is checked here to get out of player requests (as example: after disconnect)
+        // thread is checked here to get out of AI game simulations or close by third party tools
+        return isInGame() && !abort && !Thread.currentThread().isInterrupted();
     }
 
     @Override
