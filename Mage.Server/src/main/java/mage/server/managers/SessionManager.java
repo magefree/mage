@@ -7,12 +7,12 @@ import mage.server.Session;
 import mage.server.User;
 import org.jboss.remoting.callback.InvokerCallbackHandler;
 
-import javax.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 import java.util.Optional;
 
 public interface SessionManager {
 
-    Optional<Session> getSession(@Nonnull String sessionId);
+    Optional<Session> getSession(@NonNull String sessionId);
 
     void createSession(String sessionId, InvokerCallbackHandler callbackHandler);
 
@@ -37,9 +37,9 @@ public interface SessionManager {
 
     boolean checkAdminAccess(String sessionId);
 
-    boolean isValidSession(@Nonnull String sessionId);
+    boolean isValidSession(@NonNull String sessionId);
 
-    Optional<User> getUser(@Nonnull String sessionId);
+    Optional<User> getUser(@NonNull String sessionId);
 
     boolean extendUserSession(String sessionId, String pingInfo);
 
