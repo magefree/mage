@@ -3,7 +3,6 @@ package mage.server.managers;
 import mage.game.Game;
 import mage.server.ChatSession;
 import mage.server.DisconnectReason;
-import mage.server.exceptions.UserNotFoundException;
 import mage.view.ChatMessage;
 
 import java.util.List;
