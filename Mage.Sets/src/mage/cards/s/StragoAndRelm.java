@@ -103,6 +103,7 @@ class StragoAndRelmEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
         Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (opponent == null) {
             return false;
@@ -115,7 +116,7 @@ class StragoAndRelmEffect extends OneShotEffect {
                 .map(Controllable::getControllerId)
                 .map(game::getPlayer)
                 .ifPresent(player -> CardUtil.castSpellWithAttributesForFree(
-                        opponent, source, game, new CardsImpl(card),
+                        controller, source, game, new CardsImpl(card),
                         StaticFilters.FILTER_CARD, StragoAndRelmTracker.instance
                 ));
         return true;
