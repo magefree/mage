@@ -118,10 +118,13 @@ public class GathererSets implements Iterable<DownloadJob> {
     };
 
     private static final String[] symbolsOnlyMyth = {
-            "DRB", "V09", "V10", "V12", "V13", "V14", "V15", "V16", "V17", "EXP", "MED", "ZNE", "MPS"
+            "DRB", "V09", "V10", "V12", "V13", "V14", "V15", "V16", "V17", "EXP", "MED", "ZNE"
             // "HTR16" does not exist
     };
 
+    private static final String[] symbolsOnlySpecial = {
+            "MPS", "MP2"
+    };
 
     private static final HashMap<String, String> codeReplacements = new HashMap<>();
 
@@ -322,6 +325,16 @@ public class GathererSets implements Iterable<DownloadJob> {
             if (exp != null && exp.getReleaseDate().before(compareDate)) {
                 canDownload = true;
                 jobs.add(generateDownloadJob(symbol, "M", "mythic"));
+            }
+            CheckSearchResult(symbol, exp, canDownload, false, false, false, true);
+        }
+
+        for (String symbol : symbolsOnlySpecial) {
+            ExpansionSet exp = Sets.findSet(symbol);
+            canDownload = false;
+            if (exp != null && exp.getReleaseDate().before(compareDate)) {
+                canDownload = true;
+                jobs.add(generateDownloadJob(symbol, "M", "special"));
             }
             CheckSearchResult(symbol, exp, canDownload, false, false, false, true);
         }
