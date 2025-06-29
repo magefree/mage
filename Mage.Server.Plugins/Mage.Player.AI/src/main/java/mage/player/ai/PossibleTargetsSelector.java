@@ -45,9 +45,8 @@ public class PossibleTargetsSelector {
 
     public void findNewTargets(Set<UUID> fromTargetsList) {
         // collect new valid targets
-        List<MageItem> found = target.possibleTargets(abilityControllerId, source, game).stream()
+        List<MageItem> found = target.possibleTargets(abilityControllerId, source, game, fromTargetsList).stream()
                 .filter(id -> !target.contains(id))
-                .filter(id -> fromTargetsList == null || fromTargetsList.contains(id))
                 .filter(id -> target.canTarget(abilityControllerId, id, source, game))
                 .map(id -> {
                     Player player = game.getPlayer(id);

@@ -30,10 +30,7 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetAmount;
 import mage.target.TargetCard;
-import mage.util.CardUtil;
-import mage.util.RandomUtil;
-import mage.util.ThreadUtils;
-import mage.util.XmageThreadFactory;
+import mage.util.*;
 import org.apache.log4j.Logger;
 
 import java.util.*;
@@ -453,6 +450,7 @@ public class ComputerPlayer6 extends ComputerPlayer {
             }
         } catch (TimeoutException | InterruptedException e) {
             // AI thinks too long
+            // how-to fix: look at stack info - it can contain bad ability with infinite choose dialog
             logger.warn("AI player thinks too long - " + getName() + " - " + root.game);
             task.cancel(true);
         } catch (ExecutionException e) {

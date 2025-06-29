@@ -2102,12 +2102,12 @@ public class TestPlayer implements Player {
         return "Ability: null";
     }
 
-    private String getInfo(Target target, Ability source, Game game) {
+    private String getInfo(Target target, Ability source, Game game, Cards cards) {
         if (target == null) {
             return "Target: null";
         }
         UUID abilityControllerId = target.getAffectedAbilityControllerId(this.getId());
-        Set<UUID> possibleTargets = target.possibleTargets(abilityControllerId, source, game);
+        Set<UUID> possibleTargets = target.possibleTargets(abilityControllerId, source, game, cards);
 
         return "Target: selected " + target.getSize() + ", possible " + possibleTargets.size()
                 + ", " + target.getClass().getSimpleName() + ": " + target.getMessage(game);
@@ -2480,7 +2480,7 @@ public class TestPlayer implements Player {
             }
         }
 
-        this.chooseStrictModeFailed("choice", game, getInfo(source, game) + "\n" + getInfo(target, source, game));
+        this.chooseStrictModeFailed("choice", game, getInfo(source, game) + "\n" + getInfo(target, source, game, null));
         return computerPlayer.choose(outcome, target, source, game, options);
     }
 
@@ -2806,7 +2806,7 @@ public class TestPlayer implements Player {
             Assert.fail(message);
         }
 
-        this.chooseStrictModeFailed("target", game, getInfo(source, game) + "\n" + getInfo(target, source, game));
+        this.chooseStrictModeFailed("target", game, getInfo(source, game) + "\n" + getInfo(target, source, game, null));
         return computerPlayer.chooseTarget(outcome, target, source, game);
     }
 
@@ -2849,7 +2849,7 @@ public class TestPlayer implements Player {
             LOGGER.warn("Wrong target");
         }
 
-        this.chooseStrictModeFailed("target", game, getInfo(source, game) + "\n" + getInfo(target, source, game));
+        this.chooseStrictModeFailed("target", game, getInfo(source, game) + "\n" + getInfo(target, source, game, cards));
         return computerPlayer.chooseTarget(outcome, cards, target, source, game);
     }
 
@@ -4320,7 +4320,7 @@ public class TestPlayer implements Player {
             assertWrongChoiceUsage(choices.size() > 0 ? choices.get(0) : "empty list");
         }
 
-        this.chooseStrictModeFailed("choice", game, getInfo(source, game) + "\n" + getInfo(target, source, game));
+        this.chooseStrictModeFailed("choice", game, getInfo(source, game) + "\n" + getInfo(target, source, game, cards));
         return computerPlayer.choose(outcome, cards, target, source, game);
     }
 
@@ -4407,7 +4407,7 @@ public class TestPlayer implements Player {
             }
         }
 
-        this.chooseStrictModeFailed("target", game, getInfo(source, game) + "\n" + getInfo(target, source, game));
+        this.chooseStrictModeFailed("target", game, getInfo(source, game) + "\n" + getInfo(target, source, game, null));
         return computerPlayer.chooseTargetAmount(outcome, target, source, game);
     }
 
@@ -4756,7 +4756,7 @@ public class TestPlayer implements Player {
         Assert.fail(String.format("Found wrong choice command (%s):\n%s\n%s\n%s",
                 reason,
                 lastChoice,
-                getInfo(target, source, game),
+                getInfo(target, source, game, null),
                 getInfo(source, game)
         ));
     }

@@ -14,6 +14,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -62,6 +63,13 @@ public interface Target extends Copyable<Target>, Serializable {
      * @return Set of the UUIDs of possible targets
      */
     Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game);
+
+    default Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game, Set<UUID> cards) {
+        // do not override
+        return possibleTargets(sourceControllerId, source, game).stream()
+                .filter(id -> cards == null || cards.contains(id))
+                .collect(Collectors.toSet());
+    }
 
     /**
      * Priority method to make a choice from cards and other places, not a player.chooseXXX

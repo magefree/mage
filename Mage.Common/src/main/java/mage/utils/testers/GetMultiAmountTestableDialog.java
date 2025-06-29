@@ -53,7 +53,9 @@ class GetMultiAmountTestableDialog extends BaseTestableDialog {
     }
 
     private GetMultiAmountTestableDialog aiMustChoose(Integer... needValues) {
-        // TODO: AI use default distribution (min possible values), improve someday
+        // TODO: AI use default distribution:
+        // - bad effect: min possible values
+        // - good effect: max possible and distributed values
         MultiAmountTestableResult res = ((MultiAmountTestableResult) this.getResult());
         res.aiAssertEnabled = true;
         res.aiAssertValues = Arrays.stream(needValues).collect(Collectors.toList());
