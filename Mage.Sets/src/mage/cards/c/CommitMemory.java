@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -13,16 +12,17 @@ import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
-import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.common.FilterSpellOrPermanent;
+import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetSpellOrPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class CommitMemory extends SplitCard {
@@ -30,7 +30,7 @@ public final class CommitMemory extends SplitCard {
     private static final FilterSpellOrPermanent filter = new FilterSpellOrPermanent("spell or nonland permanent");
 
     static {
-        filter.setPermanentFilter(new FilterNonlandPermanent());
+        filter.getPermanentFilter().add(Predicates.not(CardType.LAND.getPredicate()));
     }
 
     public CommitMemory(UUID ownerId, CardSetInfo setInfo) {
