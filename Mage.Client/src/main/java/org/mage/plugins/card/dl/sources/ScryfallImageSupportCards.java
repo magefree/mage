@@ -631,11 +631,11 @@ public class ScryfallImageSupportCards {
             // see test_checkMissingScryfallSettingsAndCardNumbers
 
             // SOI
-            put("SOI/Tamiyo's Journal/265+a", "https://api.scryfall.com/cards/soi/265†a/");
-            put("SOI/Tamiyo's Journal/265+b", "https://api.scryfall.com/cards/soi/265†b/");
-            put("SOI/Tamiyo's Journal/265+c", "https://api.scryfall.com/cards/soi/265†c/");
-            put("SOI/Tamiyo's Journal/265+d", "https://api.scryfall.com/cards/soi/265†d/");
-            put("SOI/Tamiyo's Journal/265+e", "https://api.scryfall.com/cards/soi/265†e/");
+            put("SOI/Tamiyo's Journal/265+a", "https://api.scryfall.com/cards/soi/265%E2%80%A0a/");
+            put("SOI/Tamiyo's Journal/265+b", "https://api.scryfall.com/cards/soi/265%E2%80%A0b/");
+            put("SOI/Tamiyo's Journal/265+c", "https://api.scryfall.com/cards/soi/265%E2%80%A0c/");
+            put("SOI/Tamiyo's Journal/265+d", "https://api.scryfall.com/cards/soi/265%E2%80%A0d/");
+            put("SOI/Tamiyo's Journal/265+e", "https://api.scryfall.com/cards/soi/265%E2%80%A0e/");
             // SLD
             // fake double faced cards
             put("SLD/Adrix and Nev, Twincasters/1544b", "https://api.scryfall.com/cards/sld/1544/en?format=image&face=back");
