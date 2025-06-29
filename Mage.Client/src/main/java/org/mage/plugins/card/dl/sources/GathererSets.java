@@ -118,7 +118,7 @@ public class GathererSets implements Iterable<DownloadJob> {
     };
 
     private static final String[] symbolsOnlyMyth = {
-            "DRB", "V09", "V10", "V12", "V13", "V14", "V15", "V16", "V17", "EXP", "MED", "ZNE"
+            "DRB", "V09", "V10", "V12", "V13", "V14", "V15", "V16", "V17", "EXP", "MED", "ZNE", "MPS"
             // "HTR16" does not exist
     };
 
