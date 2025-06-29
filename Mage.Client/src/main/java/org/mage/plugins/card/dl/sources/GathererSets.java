@@ -64,14 +64,16 @@ public class GathererSets implements Iterable<DownloadJob> {
             "TSP", "TSB", "PLC", "FUT",
             "LRW", "MOR",
             "SHM", "EVE",
-            "MED", "ME2", "ME3", "ME4",
+            "ME2", "ME3", "ME4",
             "POR", "P02", "PTK",
             "ARC", "DD3EVG",
-            "W16", "W17",
+            "W16", "W17", 
             // "PALP" -- Gatherer does not have the set Asia Pacific Land Program
             // "ATH" -- has cards from many sets, symbol does not exist on gatherer
             // "CP", "DPA", "PELP", "PGPX", "PGRU", "H17", "JR", "SWS", // need to fix
-            "H09", "PD2", "PD3", "UNH", "CM1", "V11", "A25", "UST", "IMA", "DD2", "EVG", "DDC", "DDE", "DDD", "CHR", "G18", "GVL", "S00", "S99", "UGL" // ok
+            "H09", "PD2", "PD3", "UNH", "CM1", "V11", "A25", "UST", "IMA", "DD2",
+            "EVG", "DDC", "DDE", "DDD", "CHR", "G18", "GVL", "S00", "S99", "UGL",
+            "BTD" // ok
             // current testing
     };
 
@@ -101,22 +103,28 @@ public class GathererSets implements Iterable<DownloadJob> {
             "GNT", "UMA", "GRN",
             "RNA", "WAR", "MH1",
             "M20",
-            "C19", "ELD", "MB1", "GN2", "J20", "THB", "UND", "C20", "IKO", "M21",
+            "C19", "ELD", "MB1", "GN2", "THB", "UND", "C20", "IKO", "M21",
             "JMP", "2XM", "ZNR", "KLR", "CMR", "KHC", "KHM", "TSR", "STX", "STA",
             "C21", "MH2", "AFR", "AFC", "J21", "MID", "MIC", "VOW", "VOC", "YMID",
-            "NEC", "YNEO", "NEO", "SNC", "NCC", "CLB", "2X2", "DMU", "DMC", "YDMU", "40K", "GN3",
-            "UNF", "BRO", "BRC", "BOT", "30A", "J22", "SCD", "DMR", "ONE", "ONC",
+            "NEC", "YNEO", "NEO", "SNC", "NCC", "CLB", "2X2", "DMU", "DMC", "40K", "GN3",
+            "UNF", "BRO", "BRC", "BOT", "J22", "DMR", "ONE", "ONC",
             "MOM", "MOC", "MUL", "MAT", "LTR", "CMM", "WOE", "WHO", "RVR", "WOT",
             "WOC", "SPG", "LCI", "LCC", "REX", "PIP", "MKM", "MKC", "CLU", "OTJ",
-            "OTC", "OTP", "BIG", "MH3", "M3C", "ACR", "BLB"
+            "OTC", "OTP", "BIG", "MH3", "M3C", "ACR", "BLB", "BLC", "DSK", "DSC",
+            "MB2", "FDN", "INR", "J25", "DRC", "DFT", "TDC", "TDM", "FCA", "FIC",
+            "FIN", "SIS", "SIR", "SLD", "AKR", "MD1", "ANB", "LTC", "BRR", "HA1",
+            "HA2", "HA3", "HA4", "HA5", "ZNC"
             // "HHO", "ANA" -- do not exist on gatherer
     };
 
     private static final String[] symbolsOnlyMyth = {
-            "DRB", "V09", "V10", "V12", "V13", "V14", "V15", "V16", "V17", "EXP", "MED"
+            "DRB", "V09", "V10", "V12", "V13", "V14", "V15", "V16", "V17", "EXP", "MED", "ZNE"
             // "HTR16" does not exist
     };
 
+    private static final String[] symbolsOnlySpecial = {
+            "MPS", "MP2"
+    };
 
     private static final HashMap<String, String> codeReplacements = new HashMap<>();
 
@@ -131,6 +139,7 @@ public class GathererSets implements Iterable<DownloadJob> {
         codeReplacements.put("APC", "AP");
         codeReplacements.put("ARN", "AN");
         codeReplacements.put("ATQ", "AQ");
+        codeReplacements.put("BTD", "BD");
         codeReplacements.put("CMA", "CM1");
         codeReplacements.put("CHR", "CH");
         codeReplacements.put("DVD", "DD3_DVD");
@@ -166,9 +175,12 @@ public class GathererSets implements Iterable<DownloadJob> {
         codeReplacements.put("UGIN", "FRF_UGIN");
         codeReplacements.put("UGL", "UG");
         codeReplacements.put("ULG", "GU");
+        codeReplacements.put("UNF", "UNFS");
         codeReplacements.put("USG", "UZ");
         codeReplacements.put("VIS", "VI");
         codeReplacements.put("WTH", "WL");
+        codeReplacements.put("YMID", "Y22");
+        codeReplacements.put("YNEO", "Y22NEO");
     }
 
     public GathererSets() {
@@ -313,6 +325,16 @@ public class GathererSets implements Iterable<DownloadJob> {
             if (exp != null && exp.getReleaseDate().before(compareDate)) {
                 canDownload = true;
                 jobs.add(generateDownloadJob(symbol, "M", "mythic"));
+            }
+            CheckSearchResult(symbol, exp, canDownload, false, false, false, true);
+        }
+
+        for (String symbol : symbolsOnlySpecial) {
+            ExpansionSet exp = Sets.findSet(symbol);
+            canDownload = false;
+            if (exp != null && exp.getReleaseDate().before(compareDate)) {
+                canDownload = true;
+                jobs.add(generateDownloadJob(symbol, "M", "special"));
             }
             CheckSearchResult(symbol, exp, canDownload, false, false, false, true);
         }
