@@ -5,10 +5,7 @@ import com.google.gson.Gson;
 import mage.MageObject;
 import mage.Mana;
 import mage.ObjectColor;
-import mage.abilities.Ability;
-import mage.abilities.AbilityImpl;
-import mage.abilities.Mode;
-import mage.abilities.TriggeredAbility;
+import mage.abilities.*;
 import mage.abilities.common.*;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
@@ -2019,7 +2016,6 @@ public class VerifyCardDataTest {
             }
         }
     }
-
     private void checkSubtypes(Card card, MtgJsonCard ref) {
         if (skipListHaveName(SKIP_LIST_SUBTYPE, card.getExpansionSetCode(), card.getName())) {
             return;
@@ -2082,6 +2078,73 @@ public class VerifyCardDataTest {
         if (!eqSet(card.getSuperType().stream().map(s -> s.toString()).collect(Collectors.toList()), expected)) {
             fail(card, "supertypes", card.getSuperType() + " != " + expected);
         }
+    }
+
+    // There are many cards that use the word "target" or "targets" in reference to spells/abilities that target rather than actually themselves having a target.
+    // Examples include Wall of Shadows, Psychic Battle, Coalition Honor Guard, Aboleth Spawn, Akroan Crusader, Grip of Chaos, and many more
+    Pattern singularTargetRegexPattern = Pattern.compile("\\b(?<!(can|the|that|could|each|single|its|new|spell's) )target\\b");
+    Pattern pluralTargetsRegexPattern = Pattern.compile("\\b(?<!(new|the|that|copy|choosing|it|more|spell|or|changing|legal|has) )targets\\b");
+
+    // Note that the check includes reminder text, so any keyword ability with reminder text always included in the card text doesn't need to be added
+    // FIN added equip abilities with flavor words, allow for those. There are also cards that affect equip costs or equip abilities, exclude those
+    // Technically Enchant should be in this list, but that's added to the SpellAbility in XMage
+    Pattern targetKeywordRegexPattern = Pattern.compile("^((.*— )?equip(?! cost| abilit)|bestow|partner with|modular|backup)\\b", Pattern.MULTILINE);
+
+    // Checks for targeted reflexive or delayed triggered abilities, ones that only can trigger as a result of another ability
+    // and thus have their "when" located after a previous statement (detected by a period or comma followed by a space) instead of the start.
+    // Some reflexive triggers (Cemetery Desecrator, Tranquil Frillback) have a modal decision before the word target, need to check across multiple lines of text for those (and . doesn't match newlines)
+    // Many delayed triggers only get caught by the recursiveTargetAbilityCheck, if we want to improve that check to be an "and" instead of the current "or", we'll need to add them here
+    Pattern indirectTriggerTargetRegexPattern = Pattern.compile("([.,] when)(.|—\\n)+target");
+
+    // Check if the word "target" is inside a quoted ability being granted or of a token (or is granting the scavenge ability)
+    // A quoted ability always has a space before the opening quote and never before the closing one, so we can use that to ensure we're only checking inside
+    Pattern quotedTargetRegexPattern = Pattern.compile(" \"[^\"]*target|has scavenge");
+
+    // This check looks inside the abilities' effects to try to find a target that's not part of the main ability
+    // Examples include reflexive triggers (Ahn-Crop Crasher), delayed triggers (Feral Encounter), ability granting (Acidic Sliver), or tokens with abilities (Dance with Devils)
+    // Ideally the indirect/quoted text check and this check would always return the same result, but that would require both better regexes for checking and a lot of card changes
+    boolean recursiveTargetObjectCheck(Object obj, int depth) {
+        if (depth < 0) {
+            return false;
+        }
+        if (obj instanceof Effect) {
+            return recursiveTargetEffectCheck((Effect) obj, depth - 1);
+        }
+        if (obj instanceof Ability) {
+            return recursiveTargetAbilityCheck((Ability) obj, depth - 1);
+        }
+        if (obj instanceof Token) {
+            return ((Token) obj).getAbilities().stream().anyMatch(ability -> recursiveTargetAbilityCheck(ability, depth - 1));
+        }
+        if (obj instanceof Collection) {
+            return ((Collection) obj).stream().anyMatch(x -> recursiveTargetObjectCheck(x, depth - 1));
+        }
+        return false;
+    }
+
+    boolean recursiveTargetEffectCheck(Effect effect, int depth) {
+        if (depth < 0) {
+            return false;
+        }
+        return Arrays.stream(effect.getClass().getDeclaredFields())
+                .anyMatch(f -> {
+                    f.setAccessible(true);
+                    try {
+                        return recursiveTargetObjectCheck(f.get(effect), depth); // Intentionally not decreasing depth here
+                    } catch (IllegalAccessException ex) {
+                        throw new RuntimeException(ex); // Should never happen due to setAccessible
+                    }
+                });
+    }
+
+    boolean recursiveTargetAbilityCheck(Ability ability, int depth) {
+        if (depth < 0) {
+            return false;
+        }
+        Collection<Mode> modes = ability.getModes().values();
+        return modes.stream().flatMap(mode -> mode.getTargets().stream()).anyMatch(target -> !target.isNotTarget())
+                || ability.getTargetAdjuster() != null
+                || modes.stream().flatMap(mode -> mode.getEffects().stream()).anyMatch(effect -> recursiveTargetEffectCheck(effect, depth - 1));
     }
 
     private void checkMissingAbilities(Card card, MtgJsonCard ref) {
@@ -2247,57 +2310,38 @@ public class VerifyCardDataTest {
             }
         }
 
+
         // special check: wrong targeted ability
-        // possible fixes:
-        //  * on "must set withNotTarget(true)":
-        //    - check card's ability constructors and fix missing withNotTarget(true) param/field
-        //    - it's can be a keyword action (only mtg rules contains a target word), so add it to the targetedKeywords
-        // * on "must be targeted":
-        //    - TODO: enable and research checkMissTargeted - too much errors with it (is it possible to use that checks?)
-        boolean checkMissNonTargeted = true; // must set withNotTarget(true)
-        boolean checkMissTargeted = false; // must be targeted
-        List<String> targetedKeywords = Arrays.asList(
-                "target",
-                "enchant",
-                "equip",
-                "backup",
-                "modular",
-                "partner"
-        );
-        // xmage card can contain rules text from both sides, so must search ref card for all sides too
-        String additionalName;
-        if (card instanceof CardWithSpellOption) {
-            // adventure/omen cards
-            additionalName = ((CardWithSpellOption) card).getSpellCard().getName();
-        } else if (card.isTransformable() && !card.isNightCard()) {
-            additionalName = card.getSecondCardFace().getName();
-        } else {
-            additionalName = null;
-        }
-        if (additionalName != null) {
-            MtgJsonCard additionalRef = MtgJsonService.cardFromSet(card.getExpansionSetCode(), additionalName, card.getCardNumber());
-            if (additionalRef == null) {
-                // how-to fix: add new card type processing for an additionalName searching above
-                fail(card, "abilities", "can't find second side info for target check");
-            } else {
-                if (additionalRef.text != null && !additionalRef.text.isEmpty()) {
-                    refLowerText += "\r\n" + additionalRef.text.toLowerCase(Locale.ENGLISH);
+        // Checks that any ability targets don't use withNotTarget (use OneShotNonTargetEffect if it's a choose effect)
+        // Checks that, if the text contains the word target, the ability does have a target.
+        // - In cases involving a target in a reflexive trigger or token or other complex situation, it assumes that it's fine
+        // - There are two versions of this complexity check, either can trigger: one on card text, one that uses Java reflection to inspect the ability's effects.
+        String[] excludedCards = {"Lodestone Bauble"}; // Needs to choose a player before targets are selected
+        if (Arrays.stream(excludedCards).noneMatch(x -> x.equals(ref.name))) {
+            for (Ability ability : card.getAbilities()) {
+                boolean foundNotTarget = ability.getModes().values().stream()
+                        .flatMap(mode -> mode.getTargets().stream()).anyMatch(Target::isNotTarget);
+                if (foundNotTarget) {
+                    fail(card, "abilities", "notTarget should not be used as ability target, should be inside ability effect");
+                }
+                String abilityText = ability.getRule().toLowerCase(Locale.ENGLISH);
+                boolean needTargetedAbility = singularTargetRegexPattern.matcher(abilityText).find() || pluralTargetsRegexPattern.matcher(abilityText).find() || targetKeywordRegexPattern.matcher(abilityText).find();
+                boolean recursiveAbilityRefText = indirectTriggerTargetRegexPattern.matcher(abilityText).find() || quotedTargetRegexPattern.matcher(abilityText).find();
+
+                boolean foundTargetedAbility = recursiveTargetAbilityCheck(ability, 0);
+                boolean recursiveAbility = recursiveTargetAbilityCheck(ability, 4);
+
+                if (needTargetedAbility && !(foundTargetedAbility || recursiveAbilityRefText || recursiveAbility)
+                        && card.getAbilities().stream().noneMatch(x -> x instanceof LevelUpAbility)) { // Targeting Level Up abilities' text is put in the power-toughness setting effect
+                    fail(card, "abilities", "wrong target settings (must be targeted, but is not):" + ability.getClass().getSimpleName());
+                }
+                if (!needTargetedAbility && foundTargetedAbility
+                        && !(ability instanceof SpellAbility && abilityText.equals("") && card.getSubtype().contains(SubType.AURA)) // Auras' SpellAbility targets, not the EnchantAbility
+                        && !(ability instanceof SpellAbility && (recursiveTargetAbilityCheck(card.getSpellAbility(), 0))) // SurgeAbility is a modified copy of the main SpellAbility, so it targets
+                        && !(ability instanceof SpellTransformedAbility)) { // DisturbAbility targets if the backside aura targets
+                    fail(card, "abilities", "wrong target settings (targeted ability found but no target in text):" + ability.getClass().getSimpleName());
                 }
             }
-        }
-
-        boolean needTargetedAbility = targetedKeywords.stream().anyMatch(refLowerText::contains);
-        boolean foundTargetedAbility = card.getAbilities()
-                .stream()
-                .map(Ability::getTargets)
-                .flatMap(Collection::stream)
-                .anyMatch(target -> !target.isNotTarget());
-        boolean foundProblem = needTargetedAbility != foundTargetedAbility;
-        if (checkMissTargeted && needTargetedAbility && foundProblem) {
-            fail(card, "abilities", "wrong target settings (must be targeted, but it not)");
-        }
-        if (checkMissNonTargeted && !needTargetedAbility && foundProblem) {
-            fail(card, "abilities", "wrong target settings (must set withNotTarget(true), but it not)");
         }
 
         // special check: missing or wrong ability/effect rules hint
