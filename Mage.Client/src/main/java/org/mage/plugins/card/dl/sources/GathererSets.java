@@ -172,9 +172,12 @@ public class GathererSets implements Iterable<DownloadJob> {
         codeReplacements.put("UGIN", "FRF_UGIN");
         codeReplacements.put("UGL", "UG");
         codeReplacements.put("ULG", "GU");
+        codeReplacements.put("UNF", "UNFS");
         codeReplacements.put("USG", "UZ");
         codeReplacements.put("VIS", "VI");
         codeReplacements.put("WTH", "WL");
+        codeReplacements.put("YMID", "Y22");
+        codeReplacements.put("YNEO", "Y22NEO");
     }
 
     public GathererSets() {
