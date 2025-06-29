@@ -218,7 +218,7 @@
         <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-core</artifactId>
-            <version>1.8.0</version>
+            <version>1.13.0</version>
         </dependency>
         <dependency>
             <groupId>javax.mail</groupId>
@@ -244,7 +244,7 @@
             <!-- database support - sqlite db engine (additional db for game records and stats) -->
             <groupId>org.xerial</groupId>
             <artifactId>sqlite-jdbc</artifactId>
-            <version>3.32.3.2</version>
+            <version>3.50.1.0</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
