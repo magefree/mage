@@ -1,6 +1,5 @@
 package mage.cards.l;
 
-import mage.abilities.costs.CompositeCost;
 import mage.abilities.costs.OrCost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.GenericManaCost;
