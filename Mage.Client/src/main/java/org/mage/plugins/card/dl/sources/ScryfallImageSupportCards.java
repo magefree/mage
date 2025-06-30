@@ -680,7 +680,7 @@ public class ScryfallImageSupportCards {
             put("SLD/Norin the Wary/827b", "https://api.scryfall.com/cards/sld/827/en?format=image&face=back");
             put("SLD/Noxious Ghoul/1459b", "https://api.scryfall.com/cards/sld/1459/en?format=image&face=back");
             put("SLD/Okaun, Eye of Chaos/380b", "https://api.scryfall.com/cards/sld/380/en?format=image&face=back");
-            put("SLD/Okaun, Eye of Chaos/380*b", "https://api.scryfall.com/cards/sld/380★/en?format=image&face=back");
+            put("SLD/Okaun, Eye of Chaos/380*b", "https://api.scryfall.com/cards/sld/380%E2%98%85/en?format=image&face=back");
             put("SLD/Parhelion II/1964b", "https://api.scryfall.com/cards/sld/1964/en?format=image&face=back");
             put("SLD/Peacewalker Colossus/1966b", "https://api.scryfall.com/cards/sld/1966/en?format=image&face=back");
             put("SLD/Propaganda/381b", "https://api.scryfall.com/cards/sld/381/en?format=image&face=back");
@@ -699,7 +699,7 @@ public class ScryfallImageSupportCards {
             put("SLD/Unholy Grotto/1462b", "https://api.scryfall.com/cards/sld/1462/en?format=image&face=back");
             put("SLD/Yargle, Glutton of Urborg/1542b", "https://api.scryfall.com/cards/sld/1542/en?format=image&face=back");
             put("SLD/Zndrsplt, Eye of Wisdom/379b", "https://api.scryfall.com/cards/sld/379/en?format=image&face=back");
-            put("SLD/Zndrsplt, Eye of Wisdom/379*b", "https://api.scryfall.com/cards/sld/379★/en?format=image&face=back");
+            put("SLD/Zndrsplt, Eye of Wisdom/379*b", "https://api.scryfall.com/cards/sld/379%E2%98%85/en?format=image&face=back");
             put("SLD/Zombie Master/1460b", "https://api.scryfall.com/cards/sld/1460/en?format=image&face=back");
             // normal cards
             put("SLD/Counterspell/99999SCTLR", "https://api.scryfall.com/cards/sld/SCTLR/"); // see issue 11157
