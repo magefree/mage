@@ -103,12 +103,10 @@ class ProfessorHojoEffect extends CostModificationEffectImpl {
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
 
         Set<UUID>  targets;
-        if(game.inCheckPlayableState()){
-            targets = CardUtil
-                    .getAllPossibleTargets(abilityToModify, game);
-        }else{
-            targets = CardUtil
-                    .getAllSelectedTargets(abilityToModify, game);
+        if (game.inCheckPlayableState()) {
+            targets = CardUtil.getAllPossibleTargets(abilityToModify, game);
+        } else {
+            targets = CardUtil.getAllSelectedTargets(abilityToModify, game);
         }
 
         return game.isActivePlayer(source.getControllerId())
