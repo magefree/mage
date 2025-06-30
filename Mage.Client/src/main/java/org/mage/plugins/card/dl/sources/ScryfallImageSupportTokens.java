@@ -837,7 +837,7 @@ public class ScryfallImageSupportTokens {
             put("SLD/Hydra", "https://api.scryfall.com/cards/sld/1334?format=image");
             put("SLD/Icingdeath, Frost Tongue", "https://api.scryfall.com/cards/sld/1018?format=image");
             put("SLD/Marit Lage", "https://api.scryfall.com/cards/sld/1681?format=image");
-            put("SLD/Mechtitan", "https://api.scryfall.com/cards/sld/1969?format=image");
+            put("SLD/Mechtitan", "https://api.scryfall.com/cards/sld/1969/en?format=image");
             put("SLD/Myr", "https://api.scryfall.com/cards/sld/2101?format=image");
             put("SLD/Saproling", "https://api.scryfall.com/cards/sld/1139?format=image");
             put("SLD/Shapeshifter/1", "https://api.scryfall.com/cards/sld/1906?format=image");
