@@ -837,7 +837,7 @@ public class ScryfallImageSupportTokens {
             put("SLD/Hydra", "https://api.scryfall.com/cards/sld/1334?format=image");
             put("SLD/Icingdeath, Frost Tongue", "https://api.scryfall.com/cards/sld/1018?format=image");
             put("SLD/Marit Lage", "https://api.scryfall.com/cards/sld/1681?format=image");
-            put("SLD/Mechtitan", "https://api.scryfall.com/cards/sld/1969?format=image");
+            put("SLD/Mechtitan", "https://api.scryfall.com/cards/sld/1969/en?format=image");
             put("SLD/Myr", "https://api.scryfall.com/cards/sld/2101?format=image");
             put("SLD/Saproling", "https://api.scryfall.com/cards/sld/1139?format=image");
             put("SLD/Shapeshifter/1", "https://api.scryfall.com/cards/sld/1906?format=image");
@@ -2859,7 +2859,7 @@ public class ScryfallImageSupportTokens {
             put("F17/Treasure/3", "https://api.scryfall.com/cards/f17/10?format=image&face=back");
 
             // HHO
-            put("HHO/Treasure", "https://api.scryfall.com/cards/hho/21★?format=image");
+            put("HHO/Treasure", "https://api.scryfall.com/cards/hho/21%E2%98%85?format=image");
 
             // J12
             put("J12/Centaur", "https://api.scryfall.com/cards/j12/9?format=image");
@@ -2896,10 +2896,10 @@ public class ScryfallImageSupportTokens {
             put("PEMN/Zombie/2", "https://api.scryfall.com/cards/pemn/1Z?format=image&face=back");
 
             // PHEL
-            put("PHEL/Angel", "https://api.scryfall.com/cards/phel/1★?format=image");
+            put("PHEL/Angel", "https://api.scryfall.com/cards/phel/1%E2%98%85?format=image");
 
             // PL21
-            put("PL21/Minotaur", "https://api.scryfall.com/cards/pl21/2★?format=image");
+            put("PL21/Minotaur", "https://api.scryfall.com/cards/pl21/2%E2%98%85?format=image");
 
             // PL23
             put("PL23/Food", "https://api.scryfall.com/cards/pl23/2?format=image");
