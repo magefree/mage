@@ -101,12 +101,18 @@ class ProfessorHojoEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
+
+        Set<UUID>  targets;
+        if (game.inCheckPlayableState()) {
+            targets = CardUtil.getAllPossibleTargets(abilityToModify, game);
+        } else {
+            targets = CardUtil.getAllSelectedTargets(abilityToModify, game);
+        }
+
         return game.isActivePlayer(source.getControllerId())
                 && abilityToModify.isControlledBy(source.getControllerId())
                 && !ProfessorHojoWatcher.checkPlayer(game, source)
-                && CardUtil
-                .getAllSelectedTargets(abilityToModify, game)
-                .stream()
+                && targets.stream()
                 .map(game::getPermanent)
                 .filter(Objects::nonNull)
                 .filter(permanent -> permanent.isCreature(game))
