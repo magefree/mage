@@ -18,6 +18,14 @@ public class Standard extends Constructed {
         super("Constructed - Standard");
 
         setCodes.addAll(makeLegalSets());
+
+        banned.add("Abuelo's Awakening");
+        banned.add("Cori-Steel Cutter");
+        banned.add("Heartfire Hero");
+        banned.add("Hopeless Nightmare");
+        banned.add("Monstrous Rage");
+        banned.add("This Town Ain't Big Enough");
+        banned.add("Up the Beanstalk");
     }
 
     static List<String> makeLegalSets() {
