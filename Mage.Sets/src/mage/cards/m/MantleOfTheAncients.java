@@ -103,10 +103,11 @@ class MantleOfTheAncientsEffect extends OneShotEffect {
             return false;
         }
         Set<Card> cards = getTargetPointer().getTargets(game, source).stream().map(game::getCard).filter(Objects::nonNull)
-                .filter(card ->permanent.cantBeAttachedBy(card, source, game, true)).collect(Collectors.toSet());
+                .filter(card -> !permanent.cantBeAttachedBy(card, source, game, true)).collect(Collectors.toSet());
         if (cards.isEmpty()) {
             return false;
         }
+
         cards.forEach(card -> game.getState().setValue("attachTo:" + card.getId(), permanent));
         player.moveCards(cards, Zone.BATTLEFIELD, source, game);
         Cards movedCards = new CardsImpl(cards);
