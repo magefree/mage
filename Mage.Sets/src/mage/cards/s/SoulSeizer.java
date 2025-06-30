@@ -38,7 +38,7 @@ public final class SoulSeizer extends CardImpl {
 
         // When Soul Seizer deals combat damage to a player, you may transform it. If you do, attach it to target creature that player controls.
         this.addAbility(new TransformAbility());
-        TriggeredAbility ability = new DealsCombatDamageToAPlayerTriggeredAbility(new SoulSeizerEffect(), true);
+        TriggeredAbility ability = new DealsCombatDamageToAPlayerTriggeredAbility(new SoulSeizerEffect(), true, true);
         ability.setTriggerPhrase("When {this} deals combat damage to a player, ");
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_CREATURE));
         ability.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster());

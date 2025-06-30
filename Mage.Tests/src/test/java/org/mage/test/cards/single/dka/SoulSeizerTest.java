@@ -19,7 +19,11 @@ public class SoulSeizerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Craw Wurm");
 
         attack(1, playerA, "Soul Seizer");
+        addTarget(playerA, "Craw Wurm");
+        setChoice(playerA, true);
+
         setStopAt(1, PhaseStep.END_COMBAT);
+        setStrictChooseMode(true);
         execute();
 
         assertLife(playerA, 20);
@@ -38,8 +42,13 @@ public class SoulSeizerTest extends CardTestPlayerBase {
 
 
         attack(1, playerA, "Soul Seizer");
+        addTarget(playerA, "Craw Wurm");
+        setChoice(playerA, true);
+
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Clear", "Ghastly Haunting");
+
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        setStrictChooseMode(true);
         execute();
 
         assertLife(playerA, 20);
@@ -59,7 +68,11 @@ public class SoulSeizerTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Battlegrowth", "Soul Seizer");
         attack(1, playerA, "Soul Seizer");
+        addTarget(playerA, "Craw Wurm");
+        setChoice(playerA, true);
+
         setStopAt(1, PhaseStep.END_COMBAT);
+        setStrictChooseMode(true);
         execute();
 
         assertLife(playerA, 20);
