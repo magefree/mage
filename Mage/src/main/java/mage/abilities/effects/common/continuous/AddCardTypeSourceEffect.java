@@ -7,11 +7,10 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.util.CardUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Locale;
 
 /**
  * @author emerald000
@@ -77,20 +76,19 @@ public class AddCardTypeSourceEffect extends ContinuousEffectImpl {
         }
         StringBuilder sb = new StringBuilder();
         sb.append("{this} becomes ");
-        sb.append(CardUtil.addArticle(
-                addedCardTypes
-                        .stream()
-                        .map(CardType::toString)
-                        .map(String::toLowerCase)
-                        .collect(Collectors.joining(" "))
-        ));
-        if (!addedCardTypes.contains(CardType.ARTIFACT) || !addedCardTypes.contains(CardType.CREATURE)) {
-            sb.append(" in addition to its other types");
+        boolean article = false;
+        for (CardType cardType : addedCardTypes) {
+            if (!article) {
+                if (cardType.toString().startsWith("A") || cardType.toString().startsWith("E")) {
+                    sb.append("an ");
+                } else {
+                    sb.append("a ");
+                }
+                article = true;
+            }
+            sb.append(cardType.toString().toLowerCase(Locale.ENGLISH)).append(" ");
         }
-        if (!this.getDuration().toString().isEmpty()) {
-            sb.append(' ');
-            sb.append(this.getDuration());
-        }
+        sb.append("in addition to its other types ").append(this.getDuration().toString());
         return sb.toString();
     }
 }
