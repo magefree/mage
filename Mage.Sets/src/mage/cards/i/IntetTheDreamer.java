@@ -10,12 +10,12 @@ import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
-import mage.abilities.effects.common.asthought.MayLookAtTargetCardEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
@@ -88,9 +88,10 @@ class IntetTheDreamerExileEffect extends OneShotEffect {
             ContinuousEffect effect = new IntetTheDreamerAsThoughEffect();
             effect.setTargetPointer(new FixedTarget(card.getId(), game.getState().getZoneChangeCounter(card.getId())));
             game.getState().addEffect(effect, source);
-            effect = new MayLookAtTargetCardEffect(controller.getId());
-            effect.setTargetPointer(new FixedTarget(card, game));
-            game.addEffect(effect, source);
+            ExileZone exileZone = game.getExile().getExileZone(exileId);
+            if (exileZone != null) {
+                exileZone.letPlayerSeeCards(controller.getId(), card);
+            }
         }
         return true;
     }
