@@ -4,7 +4,6 @@ import mage.MageObject;
 import mage.MageObjectImpl;
 import mage.Mana;
 import mage.abilities.*;
-import mage.abilities.common.AttachableToRestrictedAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.HasSubtypesSourceEffect;
@@ -935,13 +934,13 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             UUID controller = null;
             Permanent attachmentPermanent = game.getPermanent(attachment.getId());
             if (attachmentPermanent != null) {
-                spellAbility = attachmentPermanent.getSpellAbility();
+                spellAbility = attachmentPermanent.getSpellAbility(); // Permanent's SpellAbility might be modified, so if possible use that one
                 controller = attachmentPermanent.getControllerId();
-            } else {
+            } else { // Used for checking if it can be attached from the graveyard, such as Unfinished Business
                 Card attachmentCard = game.getCard(attachment.getId());
-                if (attachmentCard != null){
+                if (attachmentCard != null) {
                     spellAbility = attachmentCard.getSpellAbility();
-                    if (source != null){
+                    if (source != null) {
                         controller = source.getControllerId();
                     } else {
                         controller = attachmentCard.getControllerOrOwnerId();
@@ -953,11 +952,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 // Note: stillLegalTarget used exclusively to account for Dream Leash. Can be made canTarget in the event that that card is rewritten (and "stillLegalTarget" removed from TargetImpl).
                 canAttach &= spellAbility.getTargets().get(0).copy().withNotTarget(true).stillLegalTarget(controller, this.getId(), source, game);
             }
-        }
-        if (attachment.hasSubtype(SubType.EQUIPMENT, game)) {
-            canAttach &= attachment.getAbilities().stream()
-                    .filter(AttachableToRestrictedAbility.class::isInstance)
-                    .map(AttachableToRestrictedAbility.class::cast).allMatch(x -> x.canEquip(getId(), source, game));
         }
         return !canAttach || game.getContinuousEffects().preventedByRuleModification(new StayAttachedEvent(this.getId(), attachment.getId(), source), null, game, silentMode);
     }

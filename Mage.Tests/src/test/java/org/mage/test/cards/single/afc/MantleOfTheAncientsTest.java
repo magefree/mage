@@ -30,9 +30,8 @@ public class MantleOfTheAncientsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, creature);
         addCard(Zone.BATTLEFIELD, playerA, "Grim Guardian"); // Counts number of enchantments entering
 
-        addCard(Zone.GRAVEYARD, playerA, "Konda's Banner"); // No attach, Not legendary
+        addCard(Zone.GRAVEYARD, playerA, "Konda's Banner"); // No attach, Not legendary, but is returned
         addCard(Zone.GRAVEYARD, playerA, "O-Naginata"); // Yes attach, Pow >= 3
-        addCard(Zone.GRAVEYARD, playerA, "Gate Smasher"); // No attach, Tou < 4, then Yes attach on 2nd try
 
         addCard(Zone.GRAVEYARD, playerA, "Aether Tunnel"); // No attach, Pro Blue, then Yes attach on 2nd try
         addCard(Zone.GRAVEYARD, playerA, "Reprobation"); // Yes attach, Enchant Creature and removes Pro Blue ability
@@ -41,7 +40,7 @@ public class MantleOfTheAncientsTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mantle of the Ancients", creature);
         setChoice(playerA, "<i>Constellation"); //Stack trigger, Mantle + Grim
-        addTarget(playerA, "Konda's Banner^O-Naginata^Gate Smasher^Aether Tunnel^Reprobation^Indestructibility^Abundant Growth");
+        addTarget(playerA, "Konda's Banner^O-Naginata^Aether Tunnel^Reprobation^Indestructibility^Abundant Growth");
         setChoice(playerA, "<i>Constellation"); //Stack trigger, Grim x2
         checkPermanentCount("Gate Smasher not returned", 1, PhaseStep.BEGIN_COMBAT,  playerA, "Gate Smasher",0);
         checkPermanentCount("Aether Tunnel not returned", 1, PhaseStep.BEGIN_COMBAT,  playerA, "Aether Tunnel",0);
@@ -55,9 +54,9 @@ public class MantleOfTheAncientsTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertPermanentCount(playerA, "Konda's Banner", 0);
+        assertAttachedTo(playerA, "Konda's Banner", creature, false);
+        assertPermanentCount(playerA, "Konda's Banner", 1);
         assertAttachedTo(playerA, "O-Naginata", creature, true);
-        assertAttachedTo(playerA, "Gate Smasher", creature, true);
 
         assertAttachedTo(playerA, "Aether Tunnel", creature, true);
         assertAttachedTo(playerA, "Reprobation", creature, true);
@@ -65,7 +64,7 @@ public class MantleOfTheAncientsTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Abundant Growth", 0);
 
         assertPermanentCount(playerA, "Mantle of the Ancients", 2);
-        assertPowerToughness(playerA, creature, 0+(7*2)+1+3+3, 1+(7*2));
+        assertPowerToughness(playerA, creature, 16, 13); // base 0/1, 6 attachments so +12/+12, O-Naginata plus Aether Tunnel +4/+0
         assertLife(playerB, 15); // Mantle, Reprobation, Indestructibility + Mantle, Aether Tunnel
     }
 }
