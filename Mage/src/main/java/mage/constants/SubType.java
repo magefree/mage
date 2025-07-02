@@ -186,7 +186,7 @@ public enum SubType {
     FROG("Frog", SubTypeSet.CreatureType),
     FUNGUS("Fungus", SubTypeSet.CreatureType),
     // G
-    GAMER("Gamer", SubTypeSet.CreatureType, true), // Un-sets
+    GAMER("Gamer", SubTypeSet.CreatureType),
     GAMORREAN("Gamorrean", SubTypeSet.CreatureType, true), // Star Wars
     GAND("Gand", SubTypeSet.CreatureType, true), // Star Wars
     GARGOYLE("Gargoyle", SubTypeSet.CreatureType),
@@ -355,7 +355,7 @@ public enum SubType {
     SAPROLING("Saproling", SubTypeSet.CreatureType),
     SATYR("Satyr", SubTypeSet.CreatureType),
     SCARECROW("Scarecrow", SubTypeSet.CreatureType),
-    SCIENTIST("Scientist", SubTypeSet.CreatureType, true), // Unstable
+    SCIENTIST("Scientist", SubTypeSet.CreatureType),
     SCION("Scion", SubTypeSet.CreatureType),
     SCORPION("Scorpion", SubTypeSet.CreatureType),
     SCOUT("Scout", SubTypeSet.CreatureType),
@@ -426,7 +426,7 @@ public enum SubType {
     VAMPIRE("Vampire", SubTypeSet.CreatureType),
     VARMINT("Varmint", SubTypeSet.CreatureType),
     VEDALKEN("Vedalken", SubTypeSet.CreatureType),
-    VILLAIN("Villain", SubTypeSet.CreatureType, true), // Unstable
+    VILLAIN("Villain", SubTypeSet.CreatureType),
     VOLVER("Volver", SubTypeSet.CreatureType),
     // W
     WALL("Wall", SubTypeSet.CreatureType),

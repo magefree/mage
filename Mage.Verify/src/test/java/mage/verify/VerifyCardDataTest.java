@@ -2051,7 +2051,13 @@ public class VerifyCardDataTest {
         expected.removeIf(subtypesToIgnore::contains);
 
         for (SubType subType : card.getSubtype()) {
-            if (!subType.isCustomSet() && !subType.canGain(card)) {
+            if (subType.isCustomSet()) {
+                if (!ref.isFunny) {
+                    fail(card, "subtypes", "subtype " + subType + " is marked as \"custom\" but is in an official set");
+                }
+                continue;
+            }
+            if (!subType.canGain(card)) {
                 String cardTypeString = card
                         .getCardType()
                         .stream()

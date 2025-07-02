@@ -1,6 +1,6 @@
 package mage.cards.l;
 
-import mage.abilities.costs.CompositeCost;
+import mage.abilities.costs.OrCost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CounterTargetEffect;
@@ -33,9 +33,10 @@ public final class LouisoixsSacrifice extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
 
         // As an additional cost to cast this spell, sacrifice a legendary creature or pay {2}.
-        this.getSpellAbility().addCost(new CompositeCost(
+        this.getSpellAbility().addCost(new OrCost(
+                "sacrifice a legendary creature or pay {2}",
                 new SacrificeTargetCost(StaticFilters.FILTER_CREATURE_LEGENDARY),
-                new GenericManaCost(2), "sacrifice a legendary creature or pay {2}"
+                new GenericManaCost(2)
         ));
 
         // Counter target activated ability, triggered ability, or noncreature spell.

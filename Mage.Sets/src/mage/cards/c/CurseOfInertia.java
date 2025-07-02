@@ -13,11 +13,11 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
+import mage.target.targetadjustment.DefineByTriggerTargetAdjuster;
 
 import java.util.UUID;
 
@@ -56,6 +56,7 @@ class CurseOfInertiaTriggeredAbility extends TriggeredAbilityImpl {
 
     public CurseOfInertiaTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CurseOfInertiaTapOrUntapTargetEffect(), false);
+        setTargetAdjuster(DefineByTriggerTargetAdjuster.instance);
     }
 
     private CurseOfInertiaTriggeredAbility(final CurseOfInertiaTriggeredAbility ability) {
@@ -75,7 +76,8 @@ class CurseOfInertiaTriggeredAbility extends TriggeredAbilityImpl {
                 && game.getCombat().getPlayerDefenders(game, false).contains(enchantment.getAttachedTo())) {
             TargetPermanent target = new TargetPermanent();
             target.setTargetController(game.getCombat().getAttackingPlayerId());
-            addTarget(target);
+            this.getTargets().clear();
+            this.addTarget(target);
             return true;
         }
         return false;

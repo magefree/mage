@@ -2803,7 +2803,7 @@ public abstract class GameImpl implements Game {
                     if (attachedTo != null) {
                         for (Ability ability : perm.getAbilities(this)) {
                             if (ability instanceof AttachableToRestrictedAbility) {
-                                if (!((AttachableToRestrictedAbility) ability).canEquip(attachedTo, null, this)) {
+                                if (!((AttachableToRestrictedAbility) ability).canEquip(attachedTo.getId(), null, this)) {
                                     attachedTo = null;
                                     break;
                                 }
