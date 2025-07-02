@@ -111,6 +111,7 @@ class ProfessorHojoEffect extends CostModificationEffectImpl {
 
         return game.isActivePlayer(source.getControllerId())
                 && abilityToModify.isControlledBy(source.getControllerId())
+                && abilityToModify.isActivatedAbility()
                 && !ProfessorHojoWatcher.checkPlayer(game, source)
                 && targets.stream()
                 .map(game::getPermanent)
