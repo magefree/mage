@@ -91,17 +91,17 @@ public class OneShotNonTargetTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, muse, true);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}, {T}: Target player", playerB);
-        addTarget(playerB, "Island");
+        setChoice(playerB, "Island");
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Untap", muse);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}, {T}: Target player", playerB);
-        addTarget(playerB, "Corridor Monitor");
+        setChoice(playerB, "Corridor Monitor");
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Untap", muse);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}, {T}: Target player", playerA);
-        addTarget(playerA, "Squire");
+        setChoice(playerA, "Squire");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}: Choose");
@@ -118,7 +118,7 @@ public class OneShotNonTargetTest extends CardTestPlayerBase {
 
         waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN);
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{3}, {T}: Target player", playerA);
-        addTarget(playerA, "Alpha Myr");
+        setChoice(playerA, "Alpha Myr");
         waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN);
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{1}: Choose");
         setChoice(playerA, "Alpha Myr");

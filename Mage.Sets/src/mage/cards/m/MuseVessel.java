@@ -84,7 +84,7 @@ class MuseVesselExileEffect extends OneShotEffect {
         }
         TargetCardInHand target = new TargetCardInHand();
         if (target.canChoose(player.getId(), source, game)
-                && target.chooseTarget(Outcome.Exile, player.getId(), source, game)) {
+                && target.choose(Outcome.Exile, player.getId(), source, game)) {
             UUID exileId = CardUtil.getExileZoneId(game, source);
             return player.moveCardsToExile(new CardsImpl(target.getTargets()).getCards(game), source, game, true, exileId, sourceObject.getIdName());
         }
