@@ -2102,7 +2102,7 @@ public class VerifyCardDataTest {
     // Many delayed triggers only get caught by the recursiveTargetAbilityCheck, if we want to improve that check to be an "and" instead of the current "or", we'll need to add them here
     Pattern indirectTriggerTargetRegexPattern = Pattern.compile("([.,] when)(.|—\\n)+target");
 
-    // Check if the word "target" is inside a quoted ability being granted or of a token (or is granting the scavenge ability)
+    // Check if the word "target" is inside a quoted ability being granted or of a token (or is using GiveScavengeContinuousEffect)
     // A quoted ability always has a space before the opening quote and never before the closing one, so we can use that to ensure we're only checking inside
     Pattern quotedTargetRegexPattern = Pattern.compile(" \"[^\"]*target|has scavenge");
 
@@ -2318,7 +2318,7 @@ public class VerifyCardDataTest {
 
 
         // special check: wrong targeted ability
-        // Checks that any ability targets don't use withNotTarget (use OneShotNonTargetEffect if it's a choose effect)
+        // Checks that no ability targets use withNotTarget (use OneShotNonTargetEffect if it's a choose effect)
         // Checks that, if the text contains the word target, the ability does have a target.
         // - In cases involving a target in a reflexive trigger or token or other complex situation, it assumes that it's fine
         // - There are two versions of this complexity check, either can trigger: one on card text, one that uses Java reflection to inspect the ability's effects.
@@ -2332,12 +2332,12 @@ public class VerifyCardDataTest {
                 }
                 String abilityText = ability.getRule().toLowerCase(Locale.ENGLISH);
                 boolean needTargetedAbility = singularTargetRegexPattern.matcher(abilityText).find() || pluralTargetsRegexPattern.matcher(abilityText).find() || targetKeywordRegexPattern.matcher(abilityText).find();
-                boolean recursiveAbilityRefText = indirectTriggerTargetRegexPattern.matcher(abilityText).find() || quotedTargetRegexPattern.matcher(abilityText).find();
+                boolean recursiveAbilityText = indirectTriggerTargetRegexPattern.matcher(abilityText).find() || quotedTargetRegexPattern.matcher(abilityText).find();
 
                 boolean foundTargetedAbility = recursiveTargetAbilityCheck(ability, 0);
                 boolean recursiveAbility = recursiveTargetAbilityCheck(ability, 4);
 
-                if (needTargetedAbility && !(foundTargetedAbility || recursiveAbilityRefText || recursiveAbility)
+                if (needTargetedAbility && !(foundTargetedAbility || recursiveAbilityText || recursiveAbility)
                         && card.getAbilities().stream().noneMatch(x -> x instanceof LevelUpAbility)) { // Targeting Level Up abilities' text is put in the power-toughness setting effect
                     fail(card, "abilities", "wrong target settings (must be targeted, but is not):" + ability.getClass().getSimpleName());
                 }
