@@ -63,6 +63,7 @@ public enum SubType {
     JUNK("Junk", SubTypeSet.ArtifactType),
     MAP("Map", SubTypeSet.ArtifactType),
     POWERSTONE("Powerstone", SubTypeSet.ArtifactType),
+    SPACECRAFT("Spacecraft", SubTypeSet.ArtifactType),
     TREASURE("Treasure", SubTypeSet.ArtifactType),
     VEHICLE("Vehicle", SubTypeSet.ArtifactType),
     // 205.3m : Creatures and kindreds share their lists of subtypes; these subtypes are called creature types.
