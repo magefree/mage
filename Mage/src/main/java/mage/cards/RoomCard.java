@@ -126,11 +126,11 @@ class RoomEnterUnlockEffect extends OneShotEffect {
             return false;
         }
 
-        if (permanent.wasUnlockedOnCast()) {
+        if (permanent.roomWasUnlockedOnCast()) {
             return false;
         }
 
-        permanent.unlockOnCast(game);
+        permanent.roomUnlockOnCast(game);
         UUID permanentId = permanent.getId();
 
         SpellAbilityType lastCastHalf = (SpellAbilityType) game.getState()
@@ -138,9 +138,9 @@ class RoomEnterUnlockEffect extends OneShotEffect {
         game.getState().removeValue(permanentId.toString() + "_ROOM_LAST_CAST_HALF");
 
         if (lastCastHalf == SpellAbilityType.SPLIT_LEFT) {
-            return permanent.unlockLeftHalf(game, source);
+            return permanent.roomUnlockLeftDoor(game, source);
         } else if (lastCastHalf == SpellAbilityType.SPLIT_RIGHT) {
-            return permanent.unlockRightHalf(game, source);
+            return permanent.roomUnlockRightDoor(game, source);
         }
 
         return true;

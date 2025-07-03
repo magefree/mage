@@ -20,6 +20,6 @@ public enum RoomLeftHalfLockedCondition implements Condition {
         }
 
         // Return true if the permanent exists and its left half is NOT unlocked
-        return permanent != null && !permanent.isLeftHalfUnlocked();
+        return permanent != null && !permanent.roomLeftDoorUnlocked();
     }
 }

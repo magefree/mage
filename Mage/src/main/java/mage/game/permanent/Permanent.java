@@ -452,17 +452,17 @@ public interface Permanent extends Card, Controllable {
 
     boolean solve(Game game, Ability source);
 
-    boolean wasUnlockedOnCast();
+    boolean roomWasUnlockedOnCast();
     
-    boolean isLeftHalfUnlocked();
+    boolean roomLeftDoorUnlocked();
 
-    boolean isRightHalfUnlocked();
+    boolean roomRightDoorUnlocked();
 
-    boolean unlockOnCast(Game game);
+    boolean roomUnlockOnCast(Game game);
 
-    boolean unlockLeftHalf(Game game, Ability source);
+    boolean roomUnlockLeftDoor(Game game, Ability source);
     
-    boolean unlockRightHalf(Game game, Ability source);
+    boolean roomUnlockRightDoor(Game game, Ability source);
 
     @Override
     Permanent copy();

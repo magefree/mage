@@ -678,11 +678,11 @@ public class GameEvent implements Serializable {
         RADIATION_GAIN_LIFE,
         /* room door effects
          */
-        LOCK_DOOR,
-        UNLOCK_LEFT_DOOR,
-        UNLOCK_RIGHT_DOOR,
-        UNLOCK_DOOR,
-        FULLY_UNLOCK_ROOM,
+        ROOM_LOCK_DOOR,
+        ROOM_UNLOCK_DOOR,
+        ROOM_UNLOCK_LEFT_DOOR,
+        ROOM_UNLOCK_RIGHT_DOOR,
+        ROOM_UNLOCK_FULLY,
         // custom events - must store some unique data to track
         CUSTOM_EVENT;
 

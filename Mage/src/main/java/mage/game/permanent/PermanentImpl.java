@@ -2110,22 +2110,22 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public boolean wasUnlockedOnCast() {
+    public boolean roomWasUnlockedOnCast() {
         return wasUnlockedOnCast;
     }
 
     @Override
-    public boolean isLeftHalfUnlocked() {
+    public boolean roomLeftDoorUnlocked() {
         return leftHalfUnlocked;
     }
 
     @Override
-    public boolean isRightHalfUnlocked() {
+    public boolean roomRightDoorUnlocked() {
         return rightHalfUnlocked;
     }
 
     @Override
-    public boolean unlockOnCast(Game game) {
+    public boolean roomUnlockOnCast(Game game) {
         if (this.wasUnlockedOnCast) {
             return false;
         }
@@ -2134,13 +2134,13 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public boolean unlockLeftHalf(Game game, Ability source) {
+    public boolean roomUnlockLeftDoor(Game game, Ability source) {
         if (this.leftHalfUnlocked) {
             return false;
         }
 
         // Check if action can be prevented
-        GameEvent event = new GameEvent(GameEvent.EventType.UNLOCK_LEFT_DOOR, getId(),
+        GameEvent event = new GameEvent(GameEvent.EventType.ROOM_UNLOCK_LEFT_DOOR, getId(),
                 source, source.getControllerId());
         if (game.replaceEvent(event)) {
             return false;
@@ -2155,26 +2155,26 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.leftHalfUnlocked = true;
 
         // Fire generic door unlock event
-        game.fireEvent(new GameEvent(GameEvent.EventType.UNLOCK_DOOR, getId(), source, source.getControllerId()));
+        game.fireEvent(new GameEvent(GameEvent.EventType.ROOM_UNLOCK_DOOR, getId(), source, source.getControllerId()));
 
         // Fire specific left door event
-        game.fireEvent(new GameEvent(GameEvent.EventType.UNLOCK_LEFT_DOOR, getId(), source, source.getControllerId()));
+        game.fireEvent(new GameEvent(GameEvent.EventType.ROOM_UNLOCK_LEFT_DOOR, getId(), source, source.getControllerId()));
 
         // Check for fully unlocked trigger
         if (this.rightHalfUnlocked) {
-            game.fireEvent(new GameEvent(EventType.FULLY_UNLOCK_ROOM, getId(), source, source.getControllerId()));
+            game.fireEvent(new GameEvent(EventType.ROOM_UNLOCK_FULLY, getId(), source, source.getControllerId()));
         }
 
         return true;
     }
 
     @Override
-    public boolean unlockRightHalf(Game game, Ability source) {
+    public boolean roomUnlockRightDoor(Game game, Ability source) {
         if (this.rightHalfUnlocked) {
             return false;
         }
 
-        GameEvent event = new GameEvent(GameEvent.EventType.UNLOCK_RIGHT_DOOR, getId(),
+        GameEvent event = new GameEvent(GameEvent.EventType.ROOM_UNLOCK_RIGHT_DOOR, getId(),
                 source, source.getControllerId());
         if (game.replaceEvent(event)) {
             return false;
@@ -2189,13 +2189,13 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.rightHalfUnlocked = true;
 
         // Fire generic door unlock event
-        game.fireEvent(new GameEvent(GameEvent.EventType.UNLOCK_DOOR, getId(), source, source.getControllerId()));
+        game.fireEvent(new GameEvent(GameEvent.EventType.ROOM_UNLOCK_DOOR, getId(), source, source.getControllerId()));
 
         // Fire specific right door event
-        game.fireEvent(new GameEvent(GameEvent.EventType.UNLOCK_RIGHT_DOOR, getId(), source, source.getControllerId()));
+        game.fireEvent(new GameEvent(GameEvent.EventType.ROOM_UNLOCK_RIGHT_DOOR, getId(), source, source.getControllerId()));
 
         if (this.leftHalfUnlocked) {
-            game.fireEvent(new GameEvent(EventType.FULLY_UNLOCK_ROOM, getId(), source, source.getControllerId()));
+            game.fireEvent(new GameEvent(EventType.ROOM_UNLOCK_FULLY, getId(), source, source.getControllerId()));
         }
 
         return true;

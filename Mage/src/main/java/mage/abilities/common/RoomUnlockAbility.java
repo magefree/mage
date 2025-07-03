@@ -97,17 +97,17 @@ class RoomUnlockHalfEffect extends OneShotEffect {
             return false;
         }
 
-        if (isLeftHalf && permanent.isLeftHalfUnlocked()) {
+        if (isLeftHalf && permanent.roomLeftDoorUnlocked()) {
             return false;
         }
-        if (!isLeftHalf && permanent.isRightHalfUnlocked()) {
+        if (!isLeftHalf && permanent.roomRightDoorUnlocked()) {
             return false;
         }
 
         if (isLeftHalf) {
-            return permanent.unlockLeftHalf(game, source);
+            return permanent.roomUnlockLeftDoor(game, source);
         } else {
-            return permanent.unlockRightHalf(game, source);
+            return permanent.roomUnlockRightDoor(game, source);
         }
     }
 }
