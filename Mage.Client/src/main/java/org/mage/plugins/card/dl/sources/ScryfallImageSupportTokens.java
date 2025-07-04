@@ -2189,7 +2189,7 @@ public class ScryfallImageSupportTokens {
             put("WOC/Pirate", "https://api.scryfall.com/cards/twoc/12/en?format=image");
             put("WOC/Royal", "https://api.scryfall.com/cards/twoc/2/en?format=image");
             put("WOC/Saproling", "https://api.scryfall.com/cards/twoc/15/en?format=image");
-            put("WOC/Virtuous", "https://api.scryfall.com/cards/twoc/3/en?format=image");
+            put("WOC/Virtuous", "https://api.scryfall.com/cards/twoc/2/en?format=image");
 
             // WHO
             put("WHO/Alien", "https://api.scryfall.com/cards/twho/2?format=image");
