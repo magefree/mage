@@ -25,7 +25,12 @@ public class ChatMessage implements Serializable {
     }
 
     public enum MessageType {
-        USER_INFO, STATUS, GAME, TALK, WHISPER_FROM, WHISPER_TO
+        USER_INFO, // system messages
+        STATUS, // system messages
+        GAME, // game logs
+        TALK, // public chat
+        WHISPER_FROM, // private chat income
+        WHISPER_TO // private chat outcome
     }
 
     public enum SoundToPlay {

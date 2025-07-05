@@ -1,6 +1,8 @@
 package mage.server.managers;
 
 import mage.game.Game;
+import mage.game.Table;
+import mage.game.tournament.Tournament;
 import mage.server.ChatSession;
 import mage.server.DisconnectReason;
 import mage.view.ChatMessage;
@@ -10,7 +12,13 @@ import java.util.UUID;
 
 public interface ChatManager {
 
-    UUID createChatSession(String info);
+    UUID createRoomChatSession(UUID roomId);
+
+    UUID createTourneyChatSession(Tournament tournament);
+
+    UUID createTableChatSession(Table table);
+
+    UUID createGameChatSession(Game game);
 
     void joinChat(UUID chatId, UUID userId);
 
