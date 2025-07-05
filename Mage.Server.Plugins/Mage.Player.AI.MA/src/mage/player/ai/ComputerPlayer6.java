@@ -30,7 +30,10 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetAmount;
 import mage.target.TargetCard;
-import mage.util.*;
+import mage.util.CardUtil;
+import mage.util.RandomUtil;
+import mage.util.ThreadUtils;
+import mage.util.XmageThreadFactory;
 import org.apache.log4j.Logger;
 
 import java.util.*;
@@ -451,7 +454,14 @@ public class ComputerPlayer6 extends ComputerPlayer {
         } catch (TimeoutException | InterruptedException e) {
             // AI thinks too long
             // how-to fix: look at stack info - it can contain bad ability with infinite choose dialog
-            logger.warn("AI player thinks too long - " + getName() + " - " + root.game);
+            logger.warn("");
+            logger.warn("AI player thinks too long (report it to github):");
+            logger.warn(" - player: " + getName());
+            logger.warn(" - battlefield size: " + root.game.getBattlefield().getAllPermanents().size());
+            logger.warn(" - stack: " + root.game.getStack());
+            logger.warn(" - game: " + root.game);
+            printFreezeNode(root);
+            logger.warn("");
             task.cancel(true);
         } catch (ExecutionException e) {
             // game error
@@ -469,6 +479,30 @@ public class ComputerPlayer6 extends ComputerPlayer {
         }
         //TODO: timeout handling
         return 0;
+    }
+
+    private void printFreezeNode(SimulationNode2 root) {
+        // print simple tree - there are possible multiple child nodes, but ignore it - same for abilities
+        List<String> chain = new ArrayList<>();
+        SimulationNode2 node = root;
+        while (node != null) {
+            if (node.abilities != null && !node.abilities.isEmpty()) {
+                Ability ability = node.abilities.get(0);
+                String sourceInfo = CardUtil.getSourceIdName(node.game, ability);
+                chain.add(String.format("%s: %s",
+                        (sourceInfo.isEmpty() ? "unknown" : sourceInfo),
+                        ability
+                ));
+            }
+            node = node.children == null || node.children.isEmpty() ? null : node.children.get(0);
+        }
+        logger.warn("Possible freeze chain:");
+        if (root != null && chain.isEmpty()) {
+            logger.warn(" - unknown use case"); // maybe can't finish any calc, maybe related to target options, I don't know
+        }
+        chain.forEach(s -> {
+            logger.warn(" - " + s);
+        });
     }
 
     protected int simulatePriority(SimulationNode2 node, Game game, int depth, int alpha, int beta) {
