@@ -33,7 +33,7 @@ public class MediaAndCollaborationPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Chandra's Outrage", "2010-3", Rarity.COMMON, mage.cards.c.ChandrasOutrage.class));
         cards.add(new SetCardInfo("Chandra's Spitfire", "2010-4", Rarity.UNCOMMON, mage.cards.c.ChandrasSpitfire.class));
         cards.add(new SetCardInfo("Counterspell", "2021-1", Rarity.RARE, mage.cards.c.Counterspell.class));
-        cards.add(new SetCardInfo("Crop Rotation", "2020-7ww", Rarity.RARE, mage.cards.c.CropRotation.class));
+        cards.add(new SetCardInfo("Crop Rotation", "2020-7", Rarity.RARE, mage.cards.c.CropRotation.class));
         cards.add(new SetCardInfo("Culling the Weak", "2023-8", Rarity.RARE, mage.cards.c.CullingTheWeak.class));
         cards.add(new SetCardInfo("Cunning Sparkmage", "2010-2", Rarity.UNCOMMON, mage.cards.c.CunningSparkmage.class));
         cards.add(new SetCardInfo("Dark Ritual", "2020-4", Rarity.RARE, mage.cards.d.DarkRitual.class));
