@@ -191,6 +191,16 @@ public final class ZonesHandler {
                         cardsToUpdate.get(toZone).add(mdfCard.getRightHalfCard());
                         break;
                 }
+            } else if (targetCard instanceof RoomCard || targetCard instanceof RoomCardHalf) {
+                // Room cards must be moved as single object
+                RoomCard roomCard = (RoomCard) targetCard.getMainCard();
+                cardsToMove = new CardsImpl(roomCard);
+                cardsToUpdate.get(toZone).add(roomCard);
+                // Move all parts together
+                cardsToUpdate.get(toZone).add(roomCard.getLeftHalfCard());
+                cardsToUpdate.get(toZone).add(roomCard.getRightHalfCard());
+                cardsToMove = new CardsImpl(targetCard);
+                cardsToUpdate.get(toZone).addAll(cardsToMove);
             } else {
                 cardsToMove = new CardsImpl(targetCard);
                 cardsToUpdate.get(toZone).addAll(cardsToMove);
@@ -378,7 +388,11 @@ public final class ZonesHandler {
                 Permanent permanent;
                 if (card instanceof MeldCard) {
                     permanent = new PermanentMeld(card, event.getPlayerId(), game);
-                } else if (card instanceof ModalDoubleFacedCard) {
+                } else if (card instanceof RoomCardHalf) {
+                    // Only the main room card can etb
+                    permanent = new PermanentCard(card.getMainCard(), event.getPlayerId(), game);
+                }
+                else if (card instanceof ModalDoubleFacedCard) {
                     // main mdf card must be processed before that call (e.g. only halves can be moved to battlefield)
                     throw new IllegalStateException("Unexpected trying of move mdf card to battlefield instead half");
                 } else if (card instanceof Permanent) {
