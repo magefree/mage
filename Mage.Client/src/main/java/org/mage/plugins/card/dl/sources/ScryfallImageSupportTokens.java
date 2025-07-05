@@ -2859,7 +2859,7 @@ public class ScryfallImageSupportTokens {
             put("F17/Treasure/3", "https://api.scryfall.com/cards/f17/10?format=image&face=back");
 
             // HHO
-            put("HHO/Treasure", "https://api.scryfall.com/cards/hho/21%E2%98%85?format=image");
+            put("HHO/Treasure", "https://cards.scryfall.io/large/front/5/3/5379b994-5f9e-44ec-a69c-8d58ffb0dbd8.jpg?1749917487");
 
             // J12
             put("J12/Centaur", "https://api.scryfall.com/cards/j12/9?format=image");
@@ -2896,10 +2896,10 @@ public class ScryfallImageSupportTokens {
             put("PEMN/Zombie/2", "https://api.scryfall.com/cards/pemn/1Z?format=image&face=back");
 
             // PHEL
-            put("PHEL/Angel", "https://api.scryfall.com/cards/phel/1%E2%98%85?format=image");
+            put("PHEL/Angel", "https://cards.scryfall.io/large/front/4/a/4ac2b852-92b2-4daf-9d1f-f71d3b27c241.jpg?1561757080");
 
             // PL21
-            put("PL21/Minotaur", "https://api.scryfall.com/cards/pl21/2%E2%98%85?format=image");
+            put("PL21/Minotaur", "https://cards.scryfall.io/large/front/f/e/fe6b9fbc-4060-4ca4-bccb-a631268b57d9.jpg?1681762410");
 
             // PL23
             put("PL23/Food", "https://api.scryfall.com/cards/pl23/2?format=image");
