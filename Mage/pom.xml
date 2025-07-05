@@ -23,6 +23,10 @@
             <artifactId>gson</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.google.protobuf</groupId>
             <artifactId>protobuf-java</artifactId>
             <version>3.25.8</version>
@@ -42,34 +46,34 @@
                 </configuration>
             </plugin>
 
-
             <plugin>
                 <groupId>com.github.os72</groupId>
                 <artifactId>protoc-jar-maven-plugin</artifactId>
                 <version>3.11.4</version>
                 <executions>
                     <execution>
-			<phase>generate-sources</phase>
-			<goals>
-				<goal>run</goal>
-			</goals>
-                        
-			<configuration>
-                <protocArtifact>com.google.protobuf:protoc:3.25.8</protocArtifact>
-				<inputDirectories>
-					<include>${project.basedir}/src/main/proto</include>
-				</inputDirectories>
-				<outputTargets>
-					<outputTarget>
-						<type>java</type>
-						<addSources>none</addSources>
-						<outputDirectory>${project.build.directory}/generated-sources</outputDirectory>
-					</outputTarget>
-				</outputTargets>
-			</configuration>                        
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+
+                        <configuration>
+                            <protocArtifact>com.google.protobuf:protoc:3.25.8</protocArtifact>
+                            <inputDirectories>
+                                <include>${project.basedir}/src/main/proto</include>
+                            </inputDirectories>
+                            <outputTargets>
+                                <outputTarget>
+                                    <type>java</type>
+                                    <addSources>none</addSources>
+                                    <outputDirectory>${project.build.directory}/generated-sources</outputDirectory>
+                                </outputTarget>
+                            </outputTargets>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
+
             <!-- add generated proto buffer classes into the package -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -89,12 +93,10 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>            
+            </plugin>
         </plugins>
 
         <finalName>mage</finalName>
-
-
     </build>
 
     <!-- The properties below are added by following http://vlkan.com/blog/post/2015/11/27/maven-protobuf/ -->

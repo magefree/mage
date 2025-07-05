@@ -27,6 +27,7 @@ import mage.cards.*;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardInfo;
 import mage.choices.Choice;
+import mage.collectors.DataCollectorServices;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.counters.Counters;
@@ -94,6 +95,8 @@ import java.util.stream.Collectors;
  */
 public abstract class GameImpl implements Game {
 
+    private final static AtomicInteger GLOBAL_INDEX = new AtomicInteger();
+
     private static final int ROLLBACK_TURNS_MAX = 4;
     private static final String UNIT_TESTS_ERROR_TEXT = "Error in unit tests";
     private static final Logger logger = Logger.getLogger(GameImpl.class);
@@ -108,6 +111,8 @@ public abstract class GameImpl implements Game {
     protected AtomicInteger totalErrorsCount = new AtomicInteger(); // for debug only: error stats
 
     protected final UUID id;
+    protected final Integer gameIndex; // for better logs and history
+    protected UUID tableId = null;
 
     protected boolean ready;
     protected transient TableEventSource tableEventSource = new TableEventSource();
@@ -171,6 +176,7 @@ public abstract class GameImpl implements Game {
 
     public GameImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int minimumDeckSize, int startingLife, int startingHandSize) {
         this.id = UUID.randomUUID();
+        this.gameIndex = GLOBAL_INDEX.incrementAndGet();
         this.range = range;
         this.mulligan = mulligan;
         this.attackOption = attackOption;
@@ -191,6 +197,8 @@ public abstract class GameImpl implements Game {
         this.checkPlayableState = game.checkPlayableState;
 
         this.id = game.id;
+        this.gameIndex = game.gameIndex;
+        this.tableId = game.tableId;
         this.totalErrorsCount.set(game.totalErrorsCount.get());
 
         this.ready = game.ready;
@@ -248,6 +256,11 @@ public abstract class GameImpl implements Game {
         this.lastPlayersLifes = game.lastPlayersLifes;
         this.stackObjectsCheck = game.stackObjectsCheck;
          */
+    }
+
+    @Override
+    public Integer getGameIndex() {
+        return this.gameIndex;
     }
 
     @Override
@@ -1047,6 +1060,7 @@ public abstract class GameImpl implements Game {
     @Override
     public void start(UUID choosingPlayerId) {
         startTime = new Date();
+        DataCollectorServices.getInstance().onGameStart(this);
         if (state.getPlayers().values().iterator().hasNext()) {
             init(choosingPlayerId);
             play(startingPlayerId);
@@ -1562,6 +1576,11 @@ public abstract class GameImpl implements Game {
             endTime = new Date();
             state.endGame();
 
+            // cancel all player dialogs/feedbacks
+            for (Player player : state.getPlayers().values()) {
+                player.abort();
+            }
+
             // inform players about face down cards
             state.getBattlefield().getAllPermanents()
                     .stream()
@@ -1581,10 +1600,7 @@ public abstract class GameImpl implements Game {
                     .sorted()
                     .forEach(this::informPlayers);
 
-            // cancel all player dialogs/feedbacks
-            for (Player player : state.getPlayers().values()) {
-                player.abort();
-            }
+            DataCollectorServices.getInstance().onGameEnd(this);
         }
     }
 
@@ -3173,6 +3189,8 @@ public abstract class GameImpl implements Game {
 
     @Override
     public void informPlayers(String message) {
+        DataCollectorServices.getInstance().onGameLog(this, message);
+
         // Uncomment to print game messages
         // System.out.println(message.replaceAll("\\<.*?\\>", ""));
         if (simulation) {
@@ -4247,5 +4265,15 @@ public abstract class GameImpl implements Game {
                 .append("; stack: ").append(this.getStack().toString())
                 .append(this.getState().isGameOver() ? "; FINISHED: " + this.getWinner() : "");
         return sb.toString();
+    }
+
+    @Override
+    public UUID getTableId() {
+        return this.tableId;
+    }
+
+    @Override
+    public void setTableId(UUID tableId) {
+        this.tableId = tableId;
     }
 }

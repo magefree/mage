@@ -3,7 +3,10 @@ package mage.game;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
+
 import mage.cards.decks.DeckValidator;
+import mage.collectors.DataCollectorServices;
 import mage.constants.TableState;
 import mage.game.draft.Draft;
 import mage.game.events.Listener;
@@ -20,7 +23,10 @@ import mage.players.PlayerType;
  */
 public class Table implements Serializable {
 
+    private final static AtomicInteger GLOBAL_INDEX = new AtomicInteger();
+
     private UUID tableId;
+    private Integer tableIndex; // for better logs and history
     private UUID roomId;
     private String name;
     private String controllerName;
@@ -54,17 +60,23 @@ public class Table implements Serializable {
         this.tournament = tournament;
         this.isTournament = true;
         setState(TableState.WAITING);
+
+        DataCollectorServices.getInstance().onTableStart(this);
     }
 
     public Table(UUID roomId, String gameType, String name, String controllerName, DeckValidator validator, List<PlayerType> playerTypes, TableRecorder recorder, Match match, Set<String> bannedUsernames, boolean isPlaneChase) {
         this(roomId, gameType, name, controllerName, validator, playerTypes, recorder, bannedUsernames, isPlaneChase);
         this.match = match;
+        this.match.setTableId(this.getId());
         this.isTournament = false;
         setState(TableState.WAITING);
+
+        DataCollectorServices.getInstance().onTableStart(this);
     }
 
     protected Table(UUID roomId, String gameType, String name, String controllerName, DeckValidator validator, List<PlayerType> playerTypes, TableRecorder recorder, Set<String> bannedUsernames, boolean isPlaneChase) {
-        tableId = UUID.randomUUID();
+        this.tableId = UUID.randomUUID();
+        this.tableIndex = GLOBAL_INDEX.incrementAndGet();
         this.roomId = roomId;
         this.numSeats = playerTypes.size();
         this.gameType = gameType;
@@ -89,6 +101,10 @@ public class Table implements Serializable {
 
     public UUID getId() {
         return tableId;
+    }
+
+    public Integer getTableIndex() {
+        return tableIndex;
     }
 
     public UUID getParentTableId() {
@@ -132,6 +148,8 @@ public class Table implements Serializable {
             setState(TableState.FINISHED); // otherwise the table can be removed completely
         }
         this.validator = null;
+
+        DataCollectorServices.getInstance().onTableEnd(this);
     }
 
     /**
