@@ -569,6 +569,7 @@ public class ScryfallImageSupportCards {
             add("BIG"); // The Big Score
             add("MH3"); // Modern Horizons 3
             add("M3C"); // Modern Horizons 3 Commander
+            add("H2R"); // Modern Horizons 2 Timeshifts
             add("ACR"); // Assassin's Creed
             add("BLB"); // Bloomburrow
             add("BLC"); // Bloomburrow Commander
@@ -630,11 +631,11 @@ public class ScryfallImageSupportCards {
             // see test_checkMissingScryfallSettingsAndCardNumbers
 
             // SOI
-            put("SOI/Tamiyo's Journal/265+a", "https://api.scryfall.com/cards/soi/265†a/");
-            put("SOI/Tamiyo's Journal/265+b", "https://api.scryfall.com/cards/soi/265†b/");
-            put("SOI/Tamiyo's Journal/265+c", "https://api.scryfall.com/cards/soi/265†c/");
-            put("SOI/Tamiyo's Journal/265+d", "https://api.scryfall.com/cards/soi/265†d/");
-            put("SOI/Tamiyo's Journal/265+e", "https://api.scryfall.com/cards/soi/265†e/");
+            put("SOI/Tamiyo's Journal/265+a", "https://api.scryfall.com/cards/soi/265%E2%80%A0a/");
+            put("SOI/Tamiyo's Journal/265+b", "https://api.scryfall.com/cards/soi/265%E2%80%A0b/");
+            put("SOI/Tamiyo's Journal/265+c", "https://api.scryfall.com/cards/soi/265%E2%80%A0c/");
+            put("SOI/Tamiyo's Journal/265+d", "https://api.scryfall.com/cards/soi/265%E2%80%A0d/");
+            put("SOI/Tamiyo's Journal/265+e", "https://api.scryfall.com/cards/soi/265%E2%80%A0e/");
             // SLD
             // fake double faced cards
             put("SLD/Adrix and Nev, Twincasters/1544b", "https://api.scryfall.com/cards/sld/1544/en?format=image&face=back");
@@ -679,7 +680,7 @@ public class ScryfallImageSupportCards {
             put("SLD/Norin the Wary/827b", "https://api.scryfall.com/cards/sld/827/en?format=image&face=back");
             put("SLD/Noxious Ghoul/1459b", "https://api.scryfall.com/cards/sld/1459/en?format=image&face=back");
             put("SLD/Okaun, Eye of Chaos/380b", "https://api.scryfall.com/cards/sld/380/en?format=image&face=back");
-            put("SLD/Okaun, Eye of Chaos/380*b", "https://api.scryfall.com/cards/sld/380★/en?format=image&face=back");
+            put("SLD/Okaun, Eye of Chaos/380*b", "https://api.scryfall.com/cards/sld/380%E2%98%85/en?format=image&face=back");
             put("SLD/Parhelion II/1964b", "https://api.scryfall.com/cards/sld/1964/en?format=image&face=back");
             put("SLD/Peacewalker Colossus/1966b", "https://api.scryfall.com/cards/sld/1966/en?format=image&face=back");
             put("SLD/Propaganda/381b", "https://api.scryfall.com/cards/sld/381/en?format=image&face=back");
@@ -698,7 +699,7 @@ public class ScryfallImageSupportCards {
             put("SLD/Unholy Grotto/1462b", "https://api.scryfall.com/cards/sld/1462/en?format=image&face=back");
             put("SLD/Yargle, Glutton of Urborg/1542b", "https://api.scryfall.com/cards/sld/1542/en?format=image&face=back");
             put("SLD/Zndrsplt, Eye of Wisdom/379b", "https://api.scryfall.com/cards/sld/379/en?format=image&face=back");
-            put("SLD/Zndrsplt, Eye of Wisdom/379*b", "https://api.scryfall.com/cards/sld/379★/en?format=image&face=back");
+            put("SLD/Zndrsplt, Eye of Wisdom/379*b", "https://api.scryfall.com/cards/sld/379%E2%98%85/en?format=image&face=back");
             put("SLD/Zombie Master/1460b", "https://api.scryfall.com/cards/sld/1460/en?format=image&face=back");
             // normal cards
             put("SLD/Counterspell/99999SCTLR", "https://api.scryfall.com/cards/sld/SCTLR/"); // see issue 11157
