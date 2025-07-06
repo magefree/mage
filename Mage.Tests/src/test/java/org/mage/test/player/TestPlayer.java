@@ -14,6 +14,7 @@ import mage.abilities.mana.ManaOptions;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.cards.RoomCard;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.constants.*;
@@ -431,6 +432,15 @@ public class TestPlayer implements Player {
 
         if (nameOrAlias.startsWith(ALIAS_PREFIX) && object.getId().equals(getAliasByName(nameOrAlias))) {
             return true;
+        }
+
+        if (object instanceof RoomCard && object.getName().contains(" // ")) {
+            String[] sides = object.getName().split(" // ");
+            for (String side : sides) {
+                if (side.trim().equals(nameOrAlias)) {
+                    return true;
+                }
+            }
         }
 
         // must search any names, even empty (face down cards)
