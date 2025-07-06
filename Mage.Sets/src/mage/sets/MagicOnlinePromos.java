@@ -1209,7 +1209,7 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Helm of Kaldra", 31989, Rarity.RARE, mage.cards.h.HelmOfKaldra.class));
         cards.add(new SetCardInfo("Helm of Obedience", 65642, Rarity.RARE, mage.cards.h.HelmOfObedience.class));
         cards.add(new SetCardInfo("Hengegate Pathway", 88408, Rarity.RARE, mage.cards.h.HengegatePathway.class));
-        cards.add(new SetCardInfo("Henzie Toolbox Torre", 99789, Rarity.MYTHIC, mage.cards.h.HenzieToolboxTorre.class));
+        cards.add(new SetCardInfo("Henzie \"Toolbox\" Torre", 99789, Rarity.MYTHIC, mage.cards.h.HenzieToolboxTorre.class));
         cards.add(new SetCardInfo("Herd Migration", 103470, Rarity.RARE, mage.cards.h.HerdMigration.class));
         cards.add(new SetCardInfo("Hermit Druid", 36080, Rarity.RARE, mage.cards.h.HermitDruid.class));
         cards.add(new SetCardInfo("Hero of Bladehold", 39646, Rarity.MYTHIC, mage.cards.h.HeroOfBladehold.class));
