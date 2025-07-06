@@ -85,7 +85,7 @@ public final class PortalThreeKingdoms extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 170, Rarity.LAND, mage.cards.basiclands.Island.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 171, Rarity.LAND, mage.cards.basiclands.Island.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Kongming's Contraptions", 10, Rarity.RARE, mage.cards.k.KongmingsContraptions.class, RETRO_ART));
-        cards.add(new SetCardInfo("Kongming, Sleeping Dragon", 9, Rarity.RARE, mage.cards.k.KongmingSleepingDragon.class, RETRO_ART));
+        cards.add(new SetCardInfo("Kongming, \"Sleeping Dragon\"", 9, Rarity.RARE, mage.cards.k.KongmingSleepingDragon.class, RETRO_ART));
         cards.add(new SetCardInfo("Lady Sun", 45, Rarity.RARE, mage.cards.l.LadySun.class, RETRO_ART));
         cards.add(new SetCardInfo("Lady Zhurong, Warrior Queen", 139, Rarity.RARE, mage.cards.l.LadyZhurongWarriorQueen.class, RETRO_ART));
         cards.add(new SetCardInfo("Liu Bei, Lord of Shu", 11, Rarity.RARE, mage.cards.l.LiuBeiLordOfShu.class, RETRO_ART));

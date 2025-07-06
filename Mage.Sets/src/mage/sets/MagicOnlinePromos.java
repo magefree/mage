@@ -1486,7 +1486,7 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Kolvori, God of Kinship", 88348, Rarity.RARE, mage.cards.k.KolvoriGodOfKinship.class));
         cards.add(new SetCardInfo("Koma, Cosmos Serpent", 88356, Rarity.MYTHIC, mage.cards.k.KomaCosmosSerpent.class));
         cards.add(new SetCardInfo("Komainu Battle Armor", 97995, Rarity.RARE, mage.cards.k.KomainuBattleArmor.class));
-        cards.add(new SetCardInfo("Kongming, Sleeping Dragon", 33442, Rarity.RARE, mage.cards.k.KongmingSleepingDragon.class, RETRO_ART));
+        cards.add(new SetCardInfo("Kongming, \"Sleeping Dragon\"", 33442, Rarity.RARE, mage.cards.k.KongmingSleepingDragon.class, RETRO_ART));
         cards.add(new SetCardInfo("Kor Duelist", 36212, Rarity.UNCOMMON, mage.cards.k.KorDuelist.class));
         cards.add(new SetCardInfo("Kor Firewalker", 43574, Rarity.UNCOMMON, mage.cards.k.KorFirewalker.class));
         cards.add(new SetCardInfo("Kor Skyfisher", 43548, Rarity.COMMON, mage.cards.k.KorSkyfisher.class));
