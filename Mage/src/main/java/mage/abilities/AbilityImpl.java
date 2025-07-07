@@ -1707,15 +1707,14 @@ public abstract class AbilityImpl implements Ability {
 
     private int getCurrentSourceObjectZoneChangeCounter(Game game){
         int zcc = game.getState().getZoneChangeCounter(getSourceId());
-        // TODO: Enable this, #13710
-        /*if (game.getPermanentEntering(getSourceId()) != null){
+        if (game.getPermanentEntering(getSourceId()) != null){
             // If the triggered ability triggered while the permanent is entering the battlefield
             // then add 1 zcc so that it triggers as if the permanent was already on the battlefield
             // So "Enters with counters" causes "Whenever counters are placed" to trigger with battlefield zcc
             // Particularly relevant for Sagas, which always involve both
             // Note that this does NOT apply to "As ~ ETB" effects, those still use the stack zcc
             zcc += 1;
-        }*/
+        }
         return zcc;
     }
 
