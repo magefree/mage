@@ -63,6 +63,7 @@ public enum AbilityWord {
     THRESHOLD("Threshold"),
     UNDERGROWTH("Undergrowth"),
     VALIANT("Valiant"),
+    VOID("Void"),
     WILL_OF_THE_COUNCIL("Will of the council"),
     WILL_OF_THE_PLANESWALKERS("Will of the planeswalkers");
 
