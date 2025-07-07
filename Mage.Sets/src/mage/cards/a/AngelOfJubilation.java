@@ -1,9 +1,8 @@
 package mage.cards.a;
 
 import mage.MageInt;
-import mage.abilities.Ability;
+import mage.abilities.common.CantPayLifeOrSacrificeAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.CantPayLifeOrSacrificeEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -12,7 +11,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
 
 import java.util.UUID;
 
@@ -20,8 +18,6 @@ import java.util.UUID;
  * @author noxx
  */
 public final class AngelOfJubilation extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures");
 
     public AngelOfJubilation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{W}{W}");
@@ -36,8 +32,7 @@ public final class AngelOfJubilation extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES_NON_BLACK, true)));
 
         // Players can't pay life or sacrifice creatures to cast spells or activate abilities.
-        Ability ability = new SimpleStaticAbility(new CantPayLifeOrSacrificeEffect(filter));
-        this.addAbility(ability);
+        this.addAbility(new CantPayLifeOrSacrificeAbility(StaticFilters.FILTER_PERMANENT_CREATURES));
     }
 
     private AngelOfJubilation(final AngelOfJubilation card) {
