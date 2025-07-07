@@ -438,15 +438,15 @@ public class DeckGeneratorPool {
         }
 
         // more spells than needed - remove
-        else if (spellsSize > (deckSize - landCount)) {
-            int spellsRemoved = (spellsSize) - (deckSize - landCount);
-            for (int i = 0; i < spellsRemoved; ++i) {
-                deckCards.remove(RandomUtil.nextInt(deckCards.size()));
+        if (spellsSize > nonLandSize) {
+            int removeCount = spellsSize - nonLandSize;
+            for (int i = 0; i < removeCount; ++i) {
+                deckCards.remove(RandomUtil.randomFromCollection(deckCards));
             }
         }
 
         if (deckCards.size() != nonLandSize) {
-            logger.info("Can't generate full deck for selected settings - try again or choose more sets and less colors");
+            logger.info("Can't generate full deck for selected settings - try again or choose more sets and less colors (wrong non land cards amount)");
         }
 
         return deckCards;
@@ -610,10 +610,11 @@ public class DeckGeneratorPool {
         if (needCommandersCount > 0 && !genPool.cardCounts.isEmpty()) {
             throw new IllegalArgumentException("Wrong code usage: generateSpells with creatures and commanders must be called as first");
         }
-        List<CardInfo> cardPool = CardRepository.instance.findCards(criteria);
-        List<Card> commanderPool = cardPool.stream()
+        List<Card> cardsPool = CardRepository.instance.findCards(criteria).stream()
                 .map(CardInfo::createMockCard)
                 .filter(genPool::isValidSpellCard)
+                .collect(Collectors.toList());
+        List<Card> commandersPool = cardsPool.stream()
                 .filter(genPool::isValidCommander)
                 .collect(Collectors.toList());
 
@@ -621,14 +622,16 @@ public class DeckGeneratorPool {
         int usedCardsCount = 0;
         int validCommanders = 0;
         int reservesAdded = 0;
-        if (cardPool.size() > 0 && cardPool.size() >= needCardsCount) {
+        if (cardsPool.size() > 0 && cardsPool.size() >= needCardsCount) {
             int tries = 0;
+            List<Card> possibleCards = new ArrayList<>(cardsPool);
+            List<Card> possibleCommanders = new ArrayList<>(commandersPool);
             while (true) {
                 tries++;
 
                 // can't finish deck, stop and use reserved cards later
                 if (tries > DeckGenerator.MAX_TRIES) {
-                    logger.info("Can't generate full deck for selected settings - try again or choose more sets and less colors");
+                    logger.info("Can't generate full deck for selected settings - try again or choose more sets and less colors (max tries exceeded)");
                     break;
                 }
 
@@ -640,23 +643,31 @@ public class DeckGeneratorPool {
                         validCommanders = 0;
                         deckCMCs = genPool.getCMCsForSpellCount(needCardsCount);
                         genPool.clearCards(true);
+                        possibleCards = new ArrayList<>(cardsPool);
+                        possibleCommanders = new ArrayList<>(commandersPool);
                         continue;
                     }
                     break;
                 }
 
+                if (possibleCards.isEmpty()) {
+                    throw new IllegalStateException("Not enough cards to generate deck (possible cards is empty)");
+                }
+
                 // choose commander first
                 Card card = null;
-                if (validCommanders < needCommandersCount && !commanderPool.isEmpty()) {
-                    card = RandomUtil.randomFromCollection(commanderPool);
+                if (validCommanders < needCommandersCount && !possibleCommanders.isEmpty()) {
+                    card = RandomUtil.randomFromCollection(possibleCommanders);
                 }
 
                 // choose other cards after commander
                 if (card == null) {
-                    card = RandomUtil.randomFromCollection(cardPool).createMockCard();
+                    card = RandomUtil.randomFromCollection(possibleCards);
                 }
 
                 if (!genPool.isValidSpellCard(card)) {
+                    possibleCards.remove(card);
+                    possibleCommanders.remove(card);
                     continue;
                 }
 
@@ -681,7 +692,7 @@ public class DeckGeneratorPool {
                 }
             }
         } else {
-            throw new IllegalStateException("Not enough cards to generate deck.");
+            throw new IllegalStateException("Not enough cards to generate deck (cards pool too small)");
         }
     }
 
