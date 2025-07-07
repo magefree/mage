@@ -1,13 +1,15 @@
 package mage.cards.t;
 
+import java.util.UUID;
+
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SagaAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.ExileZone;
@@ -17,8 +19,6 @@ import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.util.CardUtil;
-
-import java.util.UUID;
 
 /**
  *
@@ -83,7 +83,7 @@ class TheAesirEscapeValhallaOneEffect extends OneShotEffect {
         controller.choose(outcome, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card != null) {
-            UUID exileId = CardUtil.getExileZoneId(game, source);
+            UUID exileId = CardUtil.getExileZoneId(game, source, 1);
             MageObject sourceObject = source.getSourceObject(game);
             String exileName = sourceObject != null ? sourceObject.getName() : "";
             controller.moveCardsToExile(card, source, game, false, exileId, exileName);

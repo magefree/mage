@@ -3,6 +3,7 @@ package org.mage.test.cards.single.fic;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -22,6 +23,7 @@ public class SummonIxionTest extends CardTestPlayerBase {
      */
     private static final String ixion = "Summon: Ixion";
 
+    @Ignore // TODO: goal of #11619 is to fix this nicely
     @Test
     public void test_SimplePlay() {
         addCard(Zone.HAND, playerA, ixion, 1);

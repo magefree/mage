@@ -2,7 +2,8 @@ package mage.cards.g;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SagaAbility;
-import mage.abilities.dynamicvalue.common.CountersSourceCount;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
@@ -18,6 +19,7 @@ import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.Permanent;
 import mage.game.permanent.token.DalekToken;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
@@ -42,7 +44,7 @@ public final class GenesisOfTheDaleks extends CardImpl {
         // I, II, III -- Create a 3/3 black Dalek artifact creature token with menace for each lore counter on Genesis of the Daleks.
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_III,
-                new CreateTokenEffect(new DalekToken(), new CountersSourceCount(CounterType.LORE))
+                new CreateTokenEffect(new DalekToken(), GenesisOfTheDaleksValue.instance)
         );
 
         // IV -- Target opponent faces a villainous choice -- Destroy all Dalek creatures and each of your opponents loses life equal to the total power of Daleks that died this turn, or destroy all non-Dalek creatures.
@@ -60,6 +62,41 @@ public final class GenesisOfTheDaleks extends CardImpl {
     @Override
     public GenesisOfTheDaleks copy() {
         return new GenesisOfTheDaleks(this);
+    }
+}
+
+enum GenesisOfTheDaleksValue implements DynamicValue {
+    instance;
+
+    @Override
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        Permanent permanent = sourceAbility.getSourcePermanentOrLKI(game);
+        if (permanent != null) {
+            return permanent
+                    .getCounters(game)
+                    .getCount(CounterType.LORE);
+        }
+        return Optional
+                .ofNullable(sourceAbility)
+                .map(Ability::getSourceId)
+                .map(game::getPermanentOrLKIBattlefield)
+                .map(p -> p.getCounters(game).getCount(CounterType.LORE))
+                .orElse(0);
+    }
+
+    @Override
+    public GenesisOfTheDaleksValue copy() {
+        return this;
+    }
+
+    @Override
+    public String getMessage() {
+        return "lore counter on {this}";
+    }
+
+    @Override
+    public String toString() {
+        return "1";
     }
 }
 
