@@ -42,14 +42,11 @@ public class MultiplayerRound {
         return this.roundNum;
     }
     
-    public void setMatch (Match match) {
+    public void setMatchAndTable(Match match, UUID tableId) {
         this.match = match;
-    }
-    
-    public void setTableId (UUID tableId) {
         this.tableId = tableId;
     }
-
+    
     public boolean isRoundOver() {
         boolean roundIsOver = true;
         if (this.match != null) {

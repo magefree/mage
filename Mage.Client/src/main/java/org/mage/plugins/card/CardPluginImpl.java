@@ -663,7 +663,9 @@ public class CardPluginImpl implements CardPlugin {
         // mana symbols (low quality)
         jobs = new GathererSymbols();
         for (DownloadJob job : jobs) {
-            downloader.add(job);
+            // TODO: gatherer removed mana symbols icons after 2025, see https://github.com/magefree/mage/issues/13797
+            //  remove GathererSymbols code after few releases as unused (2025.06.28)
+            // downloader.add(job);
         }
 
         // set code symbols (low quality)

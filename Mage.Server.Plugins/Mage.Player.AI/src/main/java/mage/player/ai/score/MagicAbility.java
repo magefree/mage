@@ -19,10 +19,10 @@ public final class MagicAbility {
         put(DoubleStrikeAbility.getInstance().getRule(), 100);
         put(new ExaltedAbility().getRule(), 10);
         put(FirstStrikeAbility.getInstance().getRule(), 50);
-        put(FlashAbility.getInstance().getRule(), 0);
+        put(FlashAbility.getInstance().getRule(), 20);
         put(FlyingAbility.getInstance().getRule(), 50);
         put(new ForestwalkAbility().getRule(), 10);
-        put(HasteAbility.getInstance().getRule(), 0);
+        put(HasteAbility.getInstance().getRule(), 20);
         put(IndestructibleAbility.getInstance().getRule(), 150);
         put(InfectAbility.getInstance().getRule(), 60);
         put(IntimidateAbility.getInstance().getRule(), 50);
@@ -47,7 +47,7 @@ public final class MagicAbility {
         if (!scores.containsKey(ability.getRule())) {
             //System.err.println("Couldn't find ability score: " + ability.getClass().getSimpleName() + " - " + ability.toString());
             //TODO: add handling protection from ..., levelup, kicker, etc. abilities
-            return 0;
+            return 2; // more abilities - more score in any use cases
         }
         return scores.get(ability.getRule());
     }

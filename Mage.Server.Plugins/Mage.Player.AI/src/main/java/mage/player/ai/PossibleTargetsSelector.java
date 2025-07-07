@@ -45,9 +45,8 @@ public class PossibleTargetsSelector {
 
     public void findNewTargets(Set<UUID> fromTargetsList) {
         // collect new valid targets
-        List<MageItem> found = target.possibleTargets(abilityControllerId, source, game).stream()
+        List<MageItem> found = target.possibleTargets(abilityControllerId, source, game, fromTargetsList).stream()
                 .filter(id -> !target.contains(id))
-                .filter(id -> fromTargetsList == null || fromTargetsList.contains(id))
                 .filter(id -> target.canTarget(abilityControllerId, id, source, game))
                 .map(id -> {
                     Player player = game.getPlayer(id);
@@ -85,13 +84,13 @@ public class PossibleTargetsSelector {
     private void sortByMostValuableTargets() {
         if (isGoodEffect()) {
             // for good effect must choose the biggest objects
-            this.me.sort(comparators.MY_MOST_VALUABLE_FIRST);
-            this.opponents.sort(comparators.MY_MOST_VALUABLE_LAST);
+            this.me.sort(comparators.ANY_MOST_VALUABLE_FIRST);
+            this.opponents.sort(comparators.ANY_MOST_VALUABLE_LAST);
             this.any.sort(comparators.ANY_MOST_VALUABLE_FIRST);
         } else {
             // for bad effect must choose the smallest objects
-            this.me.sort(comparators.MY_MOST_VALUABLE_LAST);
-            this.opponents.sort(comparators.MY_MOST_VALUABLE_FIRST);
+            this.me.sort(comparators.ANY_MOST_VALUABLE_LAST);
+            this.opponents.sort(comparators.ANY_MOST_VALUABLE_FIRST);
             this.any.sort(comparators.ANY_MOST_VALUABLE_LAST);
         }
     }
@@ -180,5 +179,9 @@ public class PossibleTargetsSelector {
             }
         }
         return false;
+    }
+
+    boolean hasAnyTargets() {
+        return !this.any.isEmpty();
     }
 }

@@ -17,6 +17,12 @@ public class DebugUtil {
     public static boolean AI_ENABLE_DEBUG_MODE = false;
     public static boolean AI_SHOW_TARGET_OPTIMIZATION_LOGS = false; // works with target amount
 
+    // SERVER
+    // data collectors - enable additional logs and data collection for better AI and human games debugging
+    public static boolean TESTS_DATA_COLLECTORS_ENABLE_SAVE_GAME_HISTORY = false; // WARNING, for debug only, can generate too much files
+    public static boolean SERVER_DATA_COLLECTORS_ENABLE_PRINT_GAME_LOGS = false;
+    public static boolean SERVER_DATA_COLLECTORS_ENABLE_SAVE_GAME_HISTORY = false;
+
     // GAME
     // print detail target info for activate/cast/trigger only, not a single choose dialog
     // can be useful to debug unit tests, auto-choose or AI

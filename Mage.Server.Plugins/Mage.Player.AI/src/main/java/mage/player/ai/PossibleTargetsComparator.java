@@ -53,8 +53,7 @@ public class PossibleTargetsComparator {
         }
     }
 
-    private int getScoreFromLife(MageItem item) {
-        // TODO: replace permanent/card life by battlefield score?
+    public static int getLifeForDamage(MageItem item, Game game) {
         int res = 0;
         if (item instanceof Player) {
             res = ((Player) item).getLife();
@@ -71,12 +70,16 @@ public class PossibleTargetsComparator {
                 }
                 res = Math.max(0, card.getToughness().getValue() - damage);
             }
-            // instant
-            if (res == 0) {
-                res = card.getManaValue();
-            }
         }
+        return res;
+    }
 
+    private int getScoreFromLife(MageItem item) {
+        // TODO: replace permanent/card life by battlefield score?
+        int res = getLifeForDamage(item, game);
+        if (res == 0 && item instanceof Card) {
+            res = ((Card) item).getManaValue();
+        }
         return res;
     }
 
@@ -138,13 +141,6 @@ public class PossibleTargetsComparator {
             .thenComparing(BY_NAME)
             .thenComparing(BY_ID);
     public final Comparator<MageItem> ANY_MOST_VALUABLE_LAST = ANY_MOST_VALUABLE_FIRST.reversed();
-
-    /**
-     * Default sorting for good effects - put own and biggest items to the top
-     */
-    public final Comparator<MageItem> MY_MOST_VALUABLE_FIRST = BY_ME
-            .thenComparing(ANY_MOST_VALUABLE_FIRST);
-    public final Comparator<MageItem> MY_MOST_VALUABLE_LAST = MY_MOST_VALUABLE_FIRST.reversed();
 
     /**
      * Sorting for discard effects - put the biggest unplayable at the top, lands at the end anyway

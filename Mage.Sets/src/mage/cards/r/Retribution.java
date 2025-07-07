@@ -1,6 +1,5 @@
 package mage.cards.r;
 
-import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -10,8 +9,7 @@ import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.PermanentIdPredicate;
+import mage.filter.predicate.permanent.PermanentReferenceInCollectionPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetImpl;
@@ -90,12 +88,7 @@ class RetributionEffect extends OneShotEffect {
                         .map(game::getPlayer)
                         .map(player -> {
                             FilterPermanent filter = new FilterPermanent();
-                            filter.add(Predicates.or(
-                                    canSac.stream()
-                                            .map(MageItem::getId)
-                                            .map(PermanentIdPredicate::new)
-                                            .collect(Collectors.toList())
-                            ));
+                            filter.add(new PermanentReferenceInCollectionPredicate(canSac, game));
                             TargetPermanent target = new TargetPermanent(filter);
                             target.withNotTarget(true);
                             player.choose(Outcome.Sacrifice, target, source, game);

@@ -147,6 +147,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected Set<UUID> inRange = new HashSet<>(); // players list in current range of influence (updates each turn due rules)
 
     protected boolean isTestMode = false;
+    protected boolean isFastFailInTestMode = true;
     protected boolean canGainLife = true;
     protected boolean canLoseLife = true;
     protected PayLifeCostLevel payLifeCostLevel = PayLifeCostLevel.allAbilities;
@@ -2833,8 +2834,10 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean canRespond() { // abort is checked here to get out of player requests (as example: after disconnect)
-        return isInGame() && !abort;
+    public boolean canRespond() {
+        // abort is checked here to get out of player requests (as example: after disconnect)
+        // thread is checked here to get out of AI game simulations or close by third party tools
+        return isInGame() && !abort && !Thread.currentThread().isInterrupted();
     }
 
     @Override
@@ -4602,13 +4605,23 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean isTestsMode() {
+    public boolean isTestMode() {
         return isTestMode;
     }
 
     @Override
     public void setTestMode(boolean value) {
         this.isTestMode = value;
+    }
+
+    @Override
+    public boolean isFastFailInTestMode() {
+        return isFastFailInTestMode;
+    }
+
+    @Override
+    public void setFastFailInTestMode(boolean value) {
+        this.isFastFailInTestMode = value;
     }
 
     @Override

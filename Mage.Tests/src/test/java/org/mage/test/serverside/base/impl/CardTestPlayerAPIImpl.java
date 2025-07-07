@@ -13,6 +13,7 @@ import mage.cards.decks.importer.DeckImporter;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.cards.repository.CardScanner;
+import mage.collectors.DataCollectorServices;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.Filter;
@@ -30,6 +31,7 @@ import mage.players.ManaPool;
 import mage.players.Player;
 import mage.server.game.GameSessionPlayer;
 import mage.util.CardUtil;
+import mage.util.DebugUtil;
 import mage.util.ThreadUtils;
 import mage.utils.SystemUtil;
 import mage.view.GameView;
@@ -243,6 +245,11 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         }
 
         ThreadUtils.ensureRunInGameThread();
+
+        DataCollectorServices.init(
+                true,
+                DebugUtil.TESTS_DATA_COLLECTORS_ENABLE_SAVE_GAME_HISTORY
+        );
 
         // check stop command
         int maxTurn = 1;

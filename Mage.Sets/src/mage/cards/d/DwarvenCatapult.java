@@ -17,13 +17,12 @@ import mage.util.CardUtil;
 import java.util.UUID;
 
 /**
- *
  * @author MarcoMarin
  */
 public final class DwarvenCatapult extends CardImpl {
 
     public DwarvenCatapult(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{R}");
 
         // Dwarven Catapult deals X damage divided evenly, rounded down, among all creatures target opponent controls.
         this.getSpellAbility().addTarget(new TargetOpponent());
@@ -55,10 +54,11 @@ class DwarvenCatapultEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int howMany = game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURES, source.getFirstTarget(), game).size();
-        int amount = CardUtil.getSourceCostsTag(game, source, "X", 0)/howMany;
-        
-        DamageAllControlledTargetEffect dmgEffect = new DamageAllControlledTargetEffect(amount, new FilterCreaturePermanent());
-        return dmgEffect.apply(game, source);
+        if (howMany > 0) {
+            int amount = CardUtil.getSourceCostsTag(game, source, "X", 0) / howMany;
+            return new DamageAllControlledTargetEffect(amount, new FilterCreaturePermanent()).apply(game, source);
+        }
+        return false;
     }
 
     @Override

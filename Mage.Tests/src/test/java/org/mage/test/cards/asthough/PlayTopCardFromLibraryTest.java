@@ -2,13 +2,15 @@ package org.mage.test.cards.asthough;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.player.ai.ComputerPlayer7;
+import org.junit.Ignore;
 import org.junit.Test;
-import org.mage.test.serverside.base.CardTestPlayerBase;
+import org.mage.test.serverside.base.CardTestPlayerBaseWithAIHelps;
 
 /**
  * @author JayDi85
  */
-public class PlayTopCardFromLibraryTest extends CardTestPlayerBase {
+public class PlayTopCardFromLibraryTest extends CardTestPlayerBaseWithAIHelps {
 
     /*
     Bolas's Citadel
@@ -217,5 +219,147 @@ public class PlayTopCardFromLibraryTest extends CardTestPlayerBase {
         assertLife(playerB, 20);
         assertGraveyardCount(playerA, "Balduvian Bears", 0);
         assertPermanentCount(playerA, "Balduvian Bears", 1);
+    }
+
+    @Test
+    public void test_EtaliPrimalStorm_NoCards_Manual() {
+        removeAllCardsFromLibrary(playerA);
+        removeAllCardsFromLibrary(playerB);
+
+        // Whenever Etali, Primal Storm attacks, exile the top card of each player's library,
+        // then you may cast any number of nonland cards exiled this way without paying their mana costs.
+        addCard(Zone.BATTLEFIELD, playerA, "Etali, Primal Storm", 1); // 6/6
+        //
+        addCard(Zone.LIBRARY, playerA, "Forest", 1);
+        addCard(Zone.LIBRARY, playerB, "Forest", 1);
+
+        // nothing to free cast
+        attack(1, playerA, "Etali, Primal Storm");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerB, 20 - 6);
+    }
+
+    @Test
+    public void test_EtaliPrimalStorm_NoCards_AI() {
+        removeAllCardsFromLibrary(playerA);
+        removeAllCardsFromLibrary(playerB);
+
+        // Whenever Etali, Primal Storm attacks, exile the top card of each player's library,
+        // then you may cast any number of nonland cards exiled this way without paying their mana costs.
+        addCard(Zone.BATTLEFIELD, playerA, "Etali, Primal Storm", 1); // 6/6
+        //
+        addCard(Zone.LIBRARY, playerA, "Forest", 1);
+        addCard(Zone.LIBRARY, playerB, "Forest", 1);
+
+        // ai must attack and nothing to free cast
+        attack(1, playerA, "Etali, Primal Storm");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerB, 20 - 6);
+    }
+
+    @Test
+    public void test_EtaliPrimalStorm_OneCard_Manual() {
+        removeAllCardsFromLibrary(playerA);
+        removeAllCardsFromLibrary(playerB);
+
+        // Whenever Etali, Primal Storm attacks, exile the top card of each player's library,
+        // then you may cast any number of nonland cards exiled this way without paying their mana costs.
+        addCard(Zone.BATTLEFIELD, playerA, "Etali, Primal Storm", 1); // 6/6
+        //
+        addCard(Zone.LIBRARY, playerA, "Lightning Bolt", 1);
+        addCard(Zone.LIBRARY, playerB, "Forest", 1);
+
+        attack(1, playerA, "Etali, Primal Storm");
+        setChoice(playerA, true); // use free cast
+        addTarget(playerA, playerB); // to damage
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerB, 20 - 6 - 3);
+    }
+
+    @Test
+    public void test_EtaliPrimalStorm_OneCard_AI() {
+        removeAllCardsFromLibrary(playerA);
+        removeAllCardsFromLibrary(playerB);
+
+        // Whenever Etali, Primal Storm attacks, exile the top card of each player's library,
+        // then you may cast any number of nonland cards exiled this way without paying their mana costs.
+        addCard(Zone.BATTLEFIELD, playerA, "Etali, Primal Storm", 1); // 6/6
+        //
+        addCard(Zone.LIBRARY, playerA, "Lightning Bolt", 1);
+        addCard(Zone.LIBRARY, playerB, "Forest", 1);
+
+        // ai must attack and free cast bolt to opponent's
+        aiPlayStep(1, PhaseStep.DECLARE_ATTACKERS, playerA);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerB, 20 - 6 - 3);
+    }
+
+    @Test
+    public void test_EtaliPrimalStorm_MultipleCards_Manual() {
+        removeAllCardsFromLibrary(playerA);
+        removeAllCardsFromLibrary(playerB);
+
+        // Whenever Etali, Primal Storm attacks, exile the top card of each player's library,
+        // then you may cast any number of nonland cards exiled this way without paying their mana costs.
+        addCard(Zone.BATTLEFIELD, playerA, "Etali, Primal Storm", 1); // 6/6
+        //
+        addCard(Zone.LIBRARY, playerA, "Lightning Bolt", 1); // 3 damage
+        addCard(Zone.LIBRARY, playerB, "Cleansing Screech", 1); // 4 damage
+
+        // choose cards one by one
+        attack(1, playerA, "Etali, Primal Storm");
+        // first card
+        setChoice(playerA, "Cleansing Screech");
+        setChoice(playerA, true); // use free
+        addTarget(playerA, playerB);
+        // last card (auto-chosen)
+        setChoice(playerA, true); // use free
+        addTarget(playerA, playerB);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerB, 20 - 6 - 4 - 3);
+    }
+
+    @Test
+    public void test_EtaliPrimalStorm_MultipleCards_AI() {
+        removeAllCardsFromLibrary(playerA);
+        removeAllCardsFromLibrary(playerB);
+
+        // Whenever Etali, Primal Storm attacks, exile the top card of each player's library,
+        // then you may cast any number of nonland cards exiled this way without paying their mana costs.
+        addCard(Zone.BATTLEFIELD, playerA, "Etali, Primal Storm", 1); // 6/6
+        //
+        addCard(Zone.LIBRARY, playerA, "Lightning Bolt", 1); // 3 damage
+        addCard(Zone.LIBRARY, playerB, "Cleansing Screech", 1); // 4 damage
+
+        // ai must attack and free cast two cards
+        // possible bug 1: game freeze due wrong dialog/selection logic
+        // possible bug 2: TargetCard can't find ALL zone
+        aiPlayStep(1, PhaseStep.DECLARE_ATTACKERS, playerA);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerB, 20 - 6 - 4 - 3);
     }
 }

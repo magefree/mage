@@ -43,7 +43,7 @@ public final class WillOfTheAbzan extends CardImpl {
                 .setText("any number of target opponents each sacrifice a creature " +
                         "with the greatest power among creatures that player controls"));
         this.getSpellAbility().addEffect(new LoseLifeTargetControllerEffect(3).setText("and lose 3 life"));
-        this.getSpellAbility().addTarget(new TargetOpponent(0, 1, false));
+        this.getSpellAbility().addTarget(new TargetOpponent(0, Integer.MAX_VALUE, false));
 
         // * Return target creature card from your graveyard to the battlefield.
         this.getSpellAbility().addMode(new Mode(new ReturnFromGraveyardToBattlefieldTargetEffect())

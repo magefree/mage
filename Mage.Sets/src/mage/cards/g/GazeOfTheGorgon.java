@@ -102,7 +102,7 @@ class GazeOfTheGorgonEffect extends OneShotEffect {
                 List<Permanent> toDestroy = new ArrayList<>();
                 for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game)) {
                     if (!creature.getId().equals(targetCreature.getSourceId())) {
-                        if (watcher.creatureHasBlockedAttacker(new MageObjectReference(creature, game), targetCreature, game) || watcher.creatureHasBlockedAttacker(targetCreature, new MageObjectReference(creature, game), game)) {
+                        if (watcher.creatureHasBlockedAttacker(new MageObjectReference(creature, game), targetCreature) || watcher.creatureHasBlockedAttacker(targetCreature, new MageObjectReference(creature, game))) {
                             toDestroy.add(creature);
                         }
                     }

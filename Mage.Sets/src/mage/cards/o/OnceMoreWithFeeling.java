@@ -38,7 +38,7 @@ public final class OnceMoreWithFeeling extends CardImpl {
 
         // DCI ruling — A deck can have only one card named Once More with Feeling.
         // (according to rule 112.6m, this shouldn't do anything)
-        this.getSpellAbility().addEffect(new InfoEffect("<br>DCI ruling &mdash; A deck can have only one card named Once More With Feeling"));
+        this.getSpellAbility().addEffect(new InfoEffect("<br>DCI ruling &mdash; A deck can have only one card named Once More with Feeling"));
     }
 
     private OnceMoreWithFeeling(final OnceMoreWithFeeling card) {

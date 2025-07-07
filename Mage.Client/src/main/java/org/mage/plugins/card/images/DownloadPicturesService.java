@@ -157,7 +157,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
 
     @Override
     public boolean isNeedCancel() {
-        return this.needCancel || (this.errorCount > MAX_ERRORS_COUNT_BEFORE_CANCEL) || Thread.interrupted();
+        return this.needCancel || (this.errorCount > MAX_ERRORS_COUNT_BEFORE_CANCEL) || Thread.currentThread().isInterrupted();
     }
 
     private void setNeedCancel(boolean needCancel) {

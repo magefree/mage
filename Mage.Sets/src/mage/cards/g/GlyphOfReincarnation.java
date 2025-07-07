@@ -22,7 +22,6 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInGraveyard;
-import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.BlockedAttackerWatcher;
 
 import java.util.HashMap;
@@ -87,7 +86,7 @@ class GlyphOfReincarnationEffect extends OneShotEffect {
                 Map<UUID, Player> destroyed = new HashMap<>();
                 for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game)) {
                     if (!creature.getId().equals(targetWall.getId())) {
-                        if (watcher.creatureHasBlockedAttacker(new MageObjectReference(creature, game), new MageObjectReference(targetWall, game), game)) {
+                        if (watcher.creatureHasBlockedAttacker(new MageObjectReference(creature, game), new MageObjectReference(targetWall, game))) {
                             if (creature.destroy(source, game, true)
                                     && game.getState().getZone(creature.getId()) == Zone.GRAVEYARD) { // If a commander is replaced to command zone, the creature does not die
                                 Player permController = game.getPlayer(creature.getControllerId());

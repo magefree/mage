@@ -20,7 +20,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.BlockedAttackerWatcher;
 
 /**
@@ -110,7 +109,7 @@ class GlyphOfDoomEffect extends OneShotEffect {
                 List<Permanent> toDestroy = new ArrayList<>();
                 for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game)) {
                     if (!creature.getId().equals(targetCreature.getSourceId())) {
-                        if (watcher.creatureHasBlockedAttacker(new MageObjectReference(creature, game), targetCreature, game)) {
+                        if (watcher.creatureHasBlockedAttacker(new MageObjectReference(creature, game), targetCreature)) {
                             toDestroy.add(creature);
                         }
                     }

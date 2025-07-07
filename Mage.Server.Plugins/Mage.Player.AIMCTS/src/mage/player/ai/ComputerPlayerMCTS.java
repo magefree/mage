@@ -196,7 +196,7 @@ public class ComputerPlayerMCTS extends ComputerPlayer {
                 } catch (ExecutionException e) {
                     // real games: must catch and log
                     // unit tests: must raise again for fast fail
-                    if (this.isTestsMode()) {
+                    if (this.isTestMode() && this.isFastFailInTestMode()) {
                         throw new IllegalStateException("One of the simulated games raise the error: " + e, e);
                     }
                 }

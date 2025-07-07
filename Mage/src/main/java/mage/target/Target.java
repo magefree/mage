@@ -14,6 +14,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -26,10 +27,8 @@ public interface Target extends Copyable<Target>, Serializable {
      * Warning, for "up to" targets it will return true all the time, so make sure your dialog
      * use do-while logic and call "choose" one time min or use isChoiceCompleted
      */
+    @Deprecated // TODO: replace with UUID abilityControllerId, Ability source, Game game
     boolean isChosen(Game game);
-
-    @Deprecated // TODO: replace usage in cards by full version from choose methods
-    boolean isChoiceCompleted(Game game);
 
     boolean isChoiceCompleted(UUID abilityControllerId, Ability source, Game game);
 
@@ -64,6 +63,13 @@ public interface Target extends Copyable<Target>, Serializable {
      * @return Set of the UUIDs of possible targets
      */
     Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game);
+
+    default Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game, Set<UUID> cards) {
+        // do not override
+        return possibleTargets(sourceControllerId, source, game).stream()
+                .filter(id -> cards == null || cards.contains(id))
+                .collect(Collectors.toSet());
+    }
 
     /**
      * Priority method to make a choice from cards and other places, not a player.chooseXXX
@@ -189,13 +195,21 @@ public interface Target extends Copyable<Target>, Serializable {
     Target copy();
 
     // some targets are chosen from players that are not the controller of the ability (e.g. Pandemonium)
+    // TODO: research usage of setTargetController and setAbilityController - target adjusters must set it both, example: Necrotic Plague
+    //   replace by shared method like setAbilityAndTargetControllers()
+    @Deprecated
     void setTargetController(UUID playerId);
 
     UUID getTargetController();
 
+    // TODO: research usage of setTargetController and setAbilityController - target adjusters must set it both, example: Necrotic Plague
+    //   replace by shared method like setAbilityAndTargetControllers()
+    @Deprecated
     void setAbilityController(UUID playerId);
 
     UUID getAbilityController();
+
+    UUID getAffectedAbilityControllerId(UUID choosingPlayerId);
 
     Player getTargetController(Game game, UUID playerId);
 

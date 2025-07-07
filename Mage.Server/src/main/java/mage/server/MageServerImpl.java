@@ -5,6 +5,7 @@ import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.DeckValidatorFactory;
 import mage.cards.repository.CardRepository;
 import mage.cards.repository.ExpansionRepository;
+import mage.collectors.DataCollectorServices;
 import mage.constants.Constants;
 import mage.constants.ManaType;
 import mage.constants.PlayerAction;
@@ -29,6 +30,7 @@ import mage.server.managers.ManagerFactory;
 import mage.server.services.impl.FeedbackServiceImpl;
 import mage.server.tournament.TournamentFactory;
 import mage.server.util.ServerMessagesUtil;
+import mage.util.DebugUtil;
 import mage.utils.*;
 import mage.view.*;
 import mage.view.ChatMessage.MessageColor;
@@ -68,6 +70,13 @@ public class MageServerImpl implements MageServer {
         this.detailsMode = detailsMode;
         this.callExecutor = managerFactory.threadExecutor().getCallExecutor();
         ServerMessagesUtil.instance.getMessages();
+
+        // additional logs
+        DataCollectorServices.init(
+                DebugUtil.SERVER_DATA_COLLECTORS_ENABLE_PRINT_GAME_LOGS,
+                DebugUtil.SERVER_DATA_COLLECTORS_ENABLE_SAVE_GAME_HISTORY
+        );
+        DataCollectorServices.getInstance().onServerStart();
     }
 
     @Override

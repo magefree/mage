@@ -1,6 +1,5 @@
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -12,8 +11,9 @@ import mage.constants.SpellAbilityType;
 import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class IntegrityIntervention extends SplitCard {
@@ -33,7 +33,7 @@ public final class IntegrityIntervention extends SplitCard {
         // Intervention
         // Intervention deals 3 damage to any target and you gain 3 life.
         this.getRightHalfCard().getSpellAbility().addEffect(
-                new DamageTargetEffect(3).setText("Intervention deals 3 damage to any target")
+                new DamageTargetEffect(3).setText("{this} deals 3 damage to any target")
         );
         this.getRightHalfCard().getSpellAbility().addEffect(
                 new GainLifeEffect(3).setText("and you gain 3 life")

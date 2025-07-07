@@ -82,6 +82,6 @@ class DeusOfCalamityTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever Deus of Calamity deals 6 or more damage to an opponent, destroy target land that player controls.";
+        return "Whenever {this} deals 6 or more damage to an opponent, destroy target land that player controls.";
     }
 }

@@ -25,7 +25,6 @@ public class SecretLairShowdown extends ExpansionSet {
         cards.add(new SetCardInfo("Dark Ritual", 16, Rarity.RARE, mage.cards.d.DarkRitual.class));
         cards.add(new SetCardInfo("Death's Shadow", 8, Rarity.RARE, mage.cards.d.DeathsShadow.class));
         cards.add(new SetCardInfo("Dragonlord Silumgar", 9, Rarity.MYTHIC, mage.cards.d.DragonlordSilumgar.class));
-        cards.add(new SetCardInfo("Echo of Death's Wail", 356, Rarity.RARE, mage.cards.e.EchoOfDeathsWail.class));
         cards.add(new SetCardInfo("Eldritch Evolution", 5, Rarity.RARE, mage.cards.e.EldritchEvolution.class));
         cards.add(new SetCardInfo("Explore", 12, Rarity.RARE, mage.cards.e.Explore.class));
         cards.add(new SetCardInfo("Expressive Iteration", 13, Rarity.RARE, mage.cards.e.ExpressiveIteration.class));
@@ -60,7 +59,6 @@ public class SecretLairShowdown extends ExpansionSet {
         cards.add(new SetCardInfo("Supreme Verdict", 26, Rarity.RARE, mage.cards.s.SupremeVerdict.class));
         cards.add(new SetCardInfo("Swamp", 33, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Swords to Plowshares", 20, Rarity.RARE, mage.cards.s.SwordsToPlowshares.class));
-        cards.add(new SetCardInfo("Tribute to Horobi", 356, Rarity.RARE, mage.cards.t.TributeToHorobi.class));
         cards.add(new SetCardInfo("Ugin, the Spirit Dragon", 6, Rarity.MYTHIC, mage.cards.u.UginTheSpiritDragon.class));
         cards.add(new SetCardInfo("Unholy Heat", 4, Rarity.RARE, mage.cards.u.UnholyHeat.class));
         cards.add(new SetCardInfo("Valakut, the Molten Pinnacle", 14, Rarity.RARE, mage.cards.v.ValakutTheMoltenPinnacle.class));

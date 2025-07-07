@@ -1,6 +1,5 @@
 package mage.cards.w;
 
-import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.TapTargetEffect;
@@ -12,8 +11,7 @@ import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.PermanentIdPredicate;
+import mage.filter.predicate.permanent.PermanentReferenceInCollectionPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -87,13 +85,7 @@ class WickedSlumberEffect extends OneShotEffect {
             return true;
         }
         FilterPermanent filter = new FilterCreaturePermanent();
-        filter.add(Predicates.or(
-                permanents
-                        .stream()
-                        .map(MageItem::getId)
-                        .map(PermanentIdPredicate::new)
-                        .collect(Collectors.toList())
-        ));
+        filter.add(new PermanentReferenceInCollectionPredicate(permanents, game));
         for (int i = 0; i < 2; i++) {
             TargetPermanent target = new TargetPermanent(filter);
             target.withNotTarget(true);

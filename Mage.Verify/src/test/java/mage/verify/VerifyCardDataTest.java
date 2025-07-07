@@ -1003,9 +1003,7 @@ public class VerifyCardDataTest {
                 // skip unofficial sets like Star Wars
                 continue;
             }
-            if ("EOC;TLA".contains(set.getCode())) {  // temporary skip
-                return;
-            }
+
             MtgJsonSet jsonSet = MtgJsonService.sets().getOrDefault(set.getCode().toUpperCase(Locale.ENGLISH), null);
             if (jsonSet == null) {
                 errorsList.add(String.format("Error: unknown official set: %s - %s (make sure it use correct set code or mark it as SetType.CUSTOM_SET)",
@@ -2057,7 +2055,13 @@ public class VerifyCardDataTest {
         expected.removeIf(subtypesToIgnore::contains);
 
         for (SubType subType : card.getSubtype()) {
-            if (!subType.isCustomSet() && !subType.canGain(card)) {
+            if (subType.isCustomSet()) {
+                if (!ref.isFunny) {
+                    fail(card, "subtypes", "subtype " + subType + " is marked as \"custom\" but is in an official set");
+                }
+                continue;
+            }
+            if (!subType.canGain(card)) {
                 String cardTypeString = card
                         .getCardType()
                         .stream()
