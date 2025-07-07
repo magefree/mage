@@ -20,7 +20,6 @@ import mage.designations.Designation;
 import mage.designations.DesignationType;
 import mage.filter.FilterCard;
 import mage.filter.FilterMana;
-import mage.filter.FilterPermanent;
 import mage.game.*;
 import mage.game.draft.Draft;
 import mage.game.events.GameEvent;
@@ -37,10 +36,7 @@ import mage.util.Copyable;
 import mage.util.MultiAmountMessage;
 
 import java.io.Serializable;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -57,16 +53,13 @@ import java.util.stream.Collectors;
 public interface Player extends MageItem, Copyable<Player> {
 
     /**
-     * Enum used to indicate what each player is allowed to spend life on.
-     * By default it is set to `allAbilities`, but can be changed by effects.
-     * E.g. Angel of Jubilation sets it to `nonSpellnonActivatedAbilities`,
-     * and Karn's Sylex sets it to `onlyManaAbilities`.
-     * <p>
-     * <p>
-     * Default is PayLifeCostLevel.allAbilities.
+     * Enum used to indicate what each player is not allowed to spend life on.
+     * By default a player has no restrictions, but can be changed by effects.
+     * E.g. Angel of Jubilation adds `CAST_SPELLS` and 'ACTIVATE_ABILITIES',
+     * and Karn's Sylex adds `CAST_SPELLS` and 'ACTIVATE_NON_MANA_ABILITIES'.
      */
-    enum PayLifeCostLevel {
-        allAbilities, nonSpellnonActivatedAbilities, onlyManaAbilities, none
+    enum PayLifeCostRestriction {
+        CAST_SPELLS, ACTIVATE_NON_MANA_ABILITIES, ACTIVATE_ABILITIES
     }
 
     /**
@@ -171,14 +164,14 @@ public interface Player extends MageItem, Copyable<Player> {
     boolean isCanGainLife();
 
     /**
-     * Is the player allowed to pay life for casting spells or activate activated abilities
+     * Adds a {@link PayLifeCostRestriction} to the set of restrictions.
      *
-     * @param payLifeCostLevel
+     * @param payLifeCostRestriction
      */
 
-    void setPayLifeCostLevel(PayLifeCostLevel payLifeCostLevel);
+    void addPayLifeCostRestriction(PayLifeCostRestriction payLifeCostRestriction);
 
-    PayLifeCostLevel getPayLifeCostLevel();
+    EnumSet<PayLifeCostRestriction> getPayLifeCostRestrictions();
 
     /**
      * Can the player pay life to cast or activate the given ability
@@ -187,10 +180,6 @@ public interface Player extends MageItem, Copyable<Player> {
      * @return
      */
     boolean canPayLifeCost(Ability Ability);
-
-    void setCanPaySacrificeCostFilter(FilterPermanent filter);
-
-    FilterPermanent getSacrificeCostFilter();
 
     boolean canPaySacrificeCost(Permanent permanent, Ability source, UUID controllerId, Game game);
 

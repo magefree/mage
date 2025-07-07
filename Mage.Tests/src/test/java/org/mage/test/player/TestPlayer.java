@@ -51,13 +51,14 @@ import mage.util.RandomUtil;
 import mage.watchers.common.AttackedOrBlockedThisCombatWatcher;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
-import static org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl.*;
 
 import java.io.Serializable;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
+import static org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl.*;
 
 /**
  * Basic implementation of testable player
@@ -3925,28 +3926,18 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public PayLifeCostLevel getPayLifeCostLevel() {
-        return computerPlayer.getPayLifeCostLevel();
+    public EnumSet<PayLifeCostRestriction> getPayLifeCostRestrictions() {
+        return computerPlayer.getPayLifeCostRestrictions();
     }
 
     @Override
-    public void setPayLifeCostLevel(PayLifeCostLevel payLifeCostLevel) {
-        computerPlayer.setPayLifeCostLevel(payLifeCostLevel);
+    public void addPayLifeCostRestriction(PayLifeCostRestriction payLifeCostRestriction) {
+        computerPlayer.addPayLifeCostRestriction(payLifeCostRestriction);
     }
 
     @Override
     public boolean canPaySacrificeCost(Permanent permanent, Ability source, UUID controllerId, Game game) {
         return computerPlayer.canPaySacrificeCost(permanent, source, controllerId, game);
-    }
-
-    @Override
-    public FilterPermanent getSacrificeCostFilter() {
-        return computerPlayer.getSacrificeCostFilter();
-    }
-
-    @Override
-    public void setCanPaySacrificeCostFilter(FilterPermanent permanent) {
-        computerPlayer.setCanPaySacrificeCostFilter(permanent);
     }
 
     @Override
