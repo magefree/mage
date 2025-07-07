@@ -2414,7 +2414,7 @@ public class VerifyCardDataTest {
                 fail(card, "rules", "card's rules contains restricted test [&mdash ] instead [&mdash;]");
             }
             if (ruleNameCheck.matcher(rule).find() && !overlapNames.contains(card.getName())) {
-                fail(card, "rules", "card's pre-formatted rules incorrectly contains its name directly, use {this} instead: "+rule);
+                fail(card, "rules", "card's pre-formatted rules incorrectly contains its name directly, use {this} instead");
             }
             if (rule.contains("named {this}")) {
                 fail(card, "rules", "card's rules contains \"named {this}\", should use card's name");
