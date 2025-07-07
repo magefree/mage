@@ -9,7 +9,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.players.Player;
@@ -46,7 +45,7 @@ class GoblinLyreEffect extends OneShotEffect {
     GoblinLyreEffect() {
         super(Outcome.Damage);
         this.staticText = "Flip a coin. If you win the flip, {this} deals damage to target opponent or planeswalker equal to the number of creatures you control. "
-                + "If you lose the flip, Goblin Lyre deals damage to you equal to the number of creatures that opponent or that planeswalker's controller controls";
+                + "If you lose the flip, {this} deals damage to you equal to the number of creatures that opponent or that planeswalker's controller controls";
     }
 
     private GoblinLyreEffect(final GoblinLyreEffect effect) {

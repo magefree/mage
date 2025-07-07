@@ -50,7 +50,7 @@ class InquisitionEffect extends OneShotEffect {
 
     public InquisitionEffect() {
         super(Outcome.Exile);
-        staticText = "Target player reveals their hand. Inquisition deals damage to that player equal to the number of white cards in their hand";
+        staticText = "Target player reveals their hand. {this} deals damage to that player equal to the number of white cards in their hand";
     }
 
     private InquisitionEffect(final InquisitionEffect effect) {

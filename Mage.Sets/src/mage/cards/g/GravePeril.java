@@ -1,6 +1,5 @@
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.Effect;
@@ -16,14 +15,15 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author emerald000
  */
 public final class GravePeril extends CardImpl {
 
     public GravePeril(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
 
         // When a nonblack creature enters the battlefield, sacrifice Grave Peril. If you do, destroy that creature.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new GravePerilEffect(), StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK, false, SetTargetPointer.PERMANENT).setTriggerPhrase("When a nonblack creature enters, "));
@@ -43,7 +43,7 @@ class GravePerilEffect extends OneShotEffect {
 
     GravePerilEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "sacrifice Grave Peril. If you do, destroy that creature";
+        this.staticText = "sacrifice {this}. If you do, destroy that creature";
     }
 
     private GravePerilEffect(final GravePerilEffect effect) {
