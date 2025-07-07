@@ -1,14 +1,15 @@
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.InfoEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.InfoEffect;
+
+import java.util.UUID;
 
 /**
  *
@@ -27,11 +28,11 @@ public final class LeovoldsOperative extends CardImpl {
 
         // TODO: Draft specific abilities not implemented
         // Draft Leovold’s Operative face up.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("Draft Leovold's Operative face up - not implemented.")));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("Draft {this} face up - not implemented.")));
 
         // As you draft a card, you may draft an additional card from that booster pack. If you do, turn Leovold's Operative face down, then pass the next booster pack without drafting a card from it.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("As you draft a card, you may draft an additional card from that booster pack. "
-                + "If you do, turn Leovold's Operative face down, then pass the next booster pack without drafting a card from it - not implemented.")));
+                + "If you do, turn {this} face down, then pass the next booster pack without drafting a card from it - not implemented.")));
     }
 
     private LeovoldsOperative(final LeovoldsOperative card) {

@@ -1,7 +1,6 @@
 
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
@@ -15,8 +14,9 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -81,6 +81,6 @@ class LairwatchGiantTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever Lairwatch Giant blocks two or more creatures, it gains first strike until end of turn.";
+        return "Whenever {this} blocks two or more creatures, it gains first strike until end of turn.";
     }
 }

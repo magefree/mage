@@ -32,7 +32,7 @@ public final class AgentOfAcquisitions extends CardImpl {
 
         // Instead of drafting a card from a booster pack, you may draft each card in that booster pack, one at a time. If you do, turn Agent of Acquisitions face down and you can’t draft cards for the rest of this draft round.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("Instead of drafting a card from a booster pack, "
-                + "you may draft each card in that booster pack, one at a time. If you do, turn Agent of Acquisitions face down and "
+                + "you may draft each card in that booster pack, one at a time. If you do, turn {this} face down and "
                 + "you can't draft cards for the rest of this draft round - not implemented.")));
     }
 

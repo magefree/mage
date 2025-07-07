@@ -1,6 +1,5 @@
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.dynamicvalue.common.CardsInTargetHandCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -11,6 +10,8 @@ import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.SpellAbilityType;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 public final class ToilTrouble extends SplitCard {
 
@@ -26,7 +27,7 @@ public final class ToilTrouble extends SplitCard {
         // Trouble
         // Trouble deals damage to target player equal to the number of cards in that player's hand.
         Effect effect = new DamageTargetEffect(CardsInTargetHandCount.instance);
-        effect.setText("Trouble deals damage to target player equal to the number of cards in that player's hand");
+        effect.setText("{this} deals damage to target player equal to the number of cards in that player's hand");
         getRightHalfCard().getSpellAbility().addEffect(effect);
         getRightHalfCard().getSpellAbility().addTarget(new TargetPlayer().withChooseHint("to deal damage to"));
 
