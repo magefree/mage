@@ -2401,7 +2401,7 @@ public class VerifyCardDataTest {
             }
         }
 
-        Pattern ruleNameCheck = Pattern.compile("\b(?<!named |name is )"+Pattern.quote(card.getName())+"(?! \\{)");
+        Pattern ruleNameCheck = Pattern.compile("\\b(?<!named |name is )"+Pattern.quote(card.getName())+"(?! \\{)");
         Set<String> overlapNames = Arrays.stream(SubType.class.getEnumConstants()).map(SubType::toString).collect(Collectors.toSet()); // Assembly-Worker, Coward, etc.
         overlapNames.add("Exile");
         for (String rule : card.getRules()) {
