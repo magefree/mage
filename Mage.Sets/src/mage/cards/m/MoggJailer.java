@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
@@ -9,13 +8,14 @@ import mage.abilities.effects.common.combat.CantAttackIfDefenderControlsPermanen
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.ComparisonType;
-import mage.constants.Zone;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
+
+import java.util.UUID;
 
 /**
  * @author BursegSardaukar
@@ -36,7 +36,7 @@ public final class MoggJailer extends CardImpl {
 
         // Mogg Jailer can't attack if defending player controls an untapped creature with power 2 or less.
         Effect effect = new CantAttackIfDefenderControlsPermanent(filter);
-        effect.setText("Mogg Jailer can't attack if defending player controls an untapped creature with power 2 or less.");
+        effect.setText("{this} can't attack if defending player controls an untapped creature with power 2 or less.");
         this.addAbility(new SimpleStaticAbility(effect));
     }
 

@@ -10,21 +10,45 @@ import java.util.List;
  */
 public class MultiAmountTestableResult extends BaseTestableResult {
 
-    List<Integer> values = new ArrayList<>();
+    List<Integer> selectedValues;
 
-    public void onFinish(boolean status, List<String> info, List<Integer> values) {
-        this.onFinish(status, info);
-        this.values = values;
+    boolean aiAssertEnabled = false;
+    List<Integer> aiAssertValues = new ArrayList<>();
+
+    public void onFinish(String resDebugSource, boolean status, List<String> info, List<Integer> selectedValues) {
+        this.onFinish(resDebugSource, status, info);
+        this.selectedValues = selectedValues;
     }
 
     @Override
-    public Boolean getResAssert() {
-        return null; // TODO: implement
+    public String getResAssert() {
+        if (!this.aiAssertEnabled) {
+            return null;
+        }
+
+        // not finished
+        if (this.selectedValues == null) {
+            return null;
+        }
+
+        // wrong selection
+        String selected = this.selectedValues.toString();
+        String need = this.aiAssertValues.toString();
+
+        if (!selected.equals(need)) {
+            return String.format("Wrong selection: need %s, but get %s",
+                    need,
+                    selected
+            );
+        }
+
+        // all fine
+        return "";
     }
 
     @Override
     public void onClear() {
         super.onClear();
-        this.values.clear();
+        this.selectedValues = null;
     }
 }

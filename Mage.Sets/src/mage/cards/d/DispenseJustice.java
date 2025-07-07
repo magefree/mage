@@ -7,7 +7,6 @@ import mage.abilities.effects.common.SacrificeEffect;
 import mage.abilities.hint.common.MetalcraftHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.common.FilterAttackingCreature;
@@ -44,7 +43,7 @@ public final class DispenseJustice extends CardImpl {
 
 class DispenseJusticeEffect extends OneShotEffect {
 
-    private static final String effectText = "Target player sacrifices an attacking creature.\r\n\r\n"
+    private static final String effectText = "Target player sacrifices an attacking creature.<br>"
             + "<i>Metalcraft</i> &mdash; That player sacrifices two attacking creatures instead if you control three or more artifacts";
 
     private static final FilterAttackingCreature filter = new FilterAttackingCreature();

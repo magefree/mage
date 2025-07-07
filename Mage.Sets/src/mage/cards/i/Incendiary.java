@@ -1,24 +1,25 @@
 package mage.cards.i;
 
-import java.util.UUID;
-import mage.constants.SubType;
-import mage.target.common.TargetCreaturePermanent;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.constants.Outcome;
-import mage.target.TargetPermanent;
 import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.counters.CounterType;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -47,7 +48,7 @@ public final class Incendiary extends CardImpl {
         // When enchanted creature dies, Incendiary deals X damage to any target, where X is the number of fuse counters on Incendiary.
         Effect effect = new DamageTargetEffect(new CountersSourceCount(CounterType.FUSE)).setText(rule);
         Ability ability2 = new DiesAttachedTriggeredAbility(effect, "enchanted creature");
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability2.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability2);
         
     }

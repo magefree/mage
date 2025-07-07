@@ -1,6 +1,5 @@
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
@@ -10,6 +9,8 @@ import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.SpellAbilityType;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  * @author Stravant
@@ -22,7 +23,7 @@ public final class CutRibbons extends SplitCard {
         // Cut
         // Cut deals 4 damage to target creature.
         getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
-        getLeftHalfCard().getSpellAbility().addEffect(new DamageTargetEffect(4).setText("Cut deals 4 damage to target creature"));
+        getLeftHalfCard().getSpellAbility().addEffect(new DamageTargetEffect(4).setText("{this} deals 4 damage to target creature"));
 
         // to
         // Ribbons

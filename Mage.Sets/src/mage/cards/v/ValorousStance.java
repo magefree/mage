@@ -14,6 +14,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -39,7 +40,7 @@ public final class ValorousStance extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // or destroy target creature with toughness 4 or greater.
         Mode mode1 = new Mode(new DestroyTargetEffect());
-        mode1.addTarget(new TargetCreaturePermanent(filter));
+        mode1.addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addMode(mode1);
 
     }

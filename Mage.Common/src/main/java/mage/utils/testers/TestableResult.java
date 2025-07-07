@@ -10,6 +10,11 @@ import java.util.List;
 public interface TestableResult {
 
     /**
+     * Get source code line with called dialog, use it as starting debug point
+     */
+    String getResDebugSource();
+
+    /**
      * Dialog's result
      */
     boolean getResStatus();
@@ -21,13 +26,18 @@ public interface TestableResult {
 
     /**
      * Save new result after show dialog
-     *
      */
-    void onFinish(boolean resStatus, List<String> resDetails);
+    void onFinish(String chooseDebugSource, boolean resStatus, List<String> resDetails);
 
     boolean isFinished();
 
     void onClear();
 
-    Boolean getResAssert();
+    /**
+     * Assert dialog result
+     * - null - not ready (dev must setup wanted result)
+     * - empty - good
+     * - not empty - fail (return error message)
+     */
+    String getResAssert();
 }

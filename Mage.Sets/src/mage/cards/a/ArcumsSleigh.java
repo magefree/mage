@@ -8,7 +8,7 @@ import mage.abilities.condition.common.DefendingPlayerControlsNoSourceCondition;
 import mage.abilities.condition.common.IsPhaseCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
@@ -41,7 +41,7 @@ public final class ArcumsSleigh extends CardImpl {
                 new DefendingPlayerControlsNoSourceCondition(filter) // Only if defending player controls a snow land
         );
 
-        Ability ability = new ConditionalActivatedAbility(
+        Ability ability = new ActivateIfConditionActivatedAbility(
                 new GainAbilityTargetEffect(VigilanceAbility.getInstance()), new GenericManaCost(2), condition);
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());

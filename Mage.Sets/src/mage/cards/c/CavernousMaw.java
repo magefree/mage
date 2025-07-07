@@ -3,7 +3,7 @@ package mage.cards.c;
 import mage.abilities.Ability;
 import mage.abilities.condition.IntCompareCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.dynamicvalue.AdditiveDynamicValue;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
@@ -41,7 +41,7 @@ public final class CavernousMaw extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {2}: Cavernous Maw becomes a 3/3 Elemental creature until end of turn. It's still a Cave land. Activate only if the number of other Caves you control plus the number of Cave cards in your graveyard is three or greater.
-        this.addAbility(new ConditionalActivatedAbility(
+        this.addAbility(new ActivateIfConditionActivatedAbility(
                 new BecomesCreatureSourceEffect(
                         new CreatureToken(3, 3, "3/3 Elemental creature")
                                 .withSubType(SubType.ELEMENTAL),

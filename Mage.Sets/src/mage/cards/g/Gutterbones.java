@@ -7,7 +7,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.condition.common.OpponentsLostLifeCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
 import mage.abilities.hint.common.OpponentsLostLifeHint;
 import mage.cards.CardImpl;
@@ -40,7 +40,7 @@ public final class Gutterbones extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
 
         // {1}{B}: Return Gutterbones from your graveyard to your hand. Activate this ability only during your turn and only if an opponent lost life this turn.
-        this.addAbility(new ConditionalActivatedAbility(
+        this.addAbility(new ActivateIfConditionActivatedAbility(
                 Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(),
                 new ManaCostsImpl<>("{1}{B}"), condition
         ).addHint(OpponentsLostLifeHint.instance));

@@ -15,14 +15,13 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.TargetPermanent;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class CracklingDoom extends CardImpl {
@@ -49,9 +48,11 @@ public final class CracklingDoom extends CardImpl {
 class CracklingDoomEffect extends OneShotEffect {
 
     static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature with the greatest power among creatures you control");
+
     static {
         filter.add(GreatestPowerControlledPredicate.instance);
     }
+
     public CracklingDoomEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "Each opponent sacrifices a creature with the greatest power among creatures that player controls";
@@ -75,7 +76,7 @@ class CracklingDoomEffect extends OneShotEffect {
                 if (controller.hasOpponent(playerId, game)) {
                     Player opponent = game.getPlayer(playerId);
                     if (opponent != null) {
-                        Target target = new TargetControlledCreaturePermanent(filter);
+                        Target target = new TargetPermanent(filter);
                         target.withNotTarget(true);
                         if (opponent.choose(outcome, target, source, game)) {
                             Permanent permanent = game.getPermanent(target.getFirstTarget());

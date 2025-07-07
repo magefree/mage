@@ -1,13 +1,12 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfFirstMainTriggeredAbility;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.triggers.BeginningOfFirstMainTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -16,6 +15,8 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -47,7 +48,7 @@ class BlackMarketEffect extends OneShotEffect {
 
     BlackMarketEffect() {
         super(Outcome.PutManaInPool);
-        this.staticText = "add {B} for each charge counter on Black Market";
+        this.staticText = "add {B} for each charge counter on {this}";
     }
 
     private BlackMarketEffect(final BlackMarketEffect effect) {

@@ -15,6 +15,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -44,7 +45,7 @@ public final class WillowSatyr extends CardImpl {
                 new GainControlTargetEffect(Duration.WhileControlled), SourceTappedCondition.TAPPED,
                 "Gain control of target legendary creature for as long as you control {this} and {this} remains tapped"
         ), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

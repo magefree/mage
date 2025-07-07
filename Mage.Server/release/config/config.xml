@@ -190,6 +190,7 @@
         <deckType name="Constructed - Old School 93/94 - EC Rules" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.OldSchool9394EC"/>
         <deckType name="Constructed - Premodern" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.Premodern"/>
         <deckType name="Constructed - Freeform" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.Freeform"/>
+        <deckType name="Constructed - Freeform Unlimited" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.FreeformUnlimited"/>
         <deckType name="Variant Magic - Commander" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.Commander"/>
         <deckType name="Variant Magic - Duel Commander" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.DuelCommander"/>
         <deckType name="Variant Magic - MTGO 1v1 Commander" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.MTGO1v1Commander"/>

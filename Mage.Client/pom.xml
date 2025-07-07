@@ -88,14 +88,6 @@
             <version>0.2.23</version>
         </dependency>
         <dependency>
-            <!-- amazon s3 cloud lib to upload game logs from experimental client -->
-            <!-- TODO: feature must be removed as unused or implemented for all -->
-            <groupId>com.amazonaws</groupId>
-            <artifactId>aws-java-sdk-s3</artifactId>
-            <version>1.12.78</version>
-        </dependency>
-
-        <dependency>
             <!-- GUI lib TODO: unused and can be deleted? -->
             <groupId>com.jgoodies</groupId>
             <artifactId>forms</artifactId>

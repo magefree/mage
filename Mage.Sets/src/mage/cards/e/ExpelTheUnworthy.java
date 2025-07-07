@@ -16,10 +16,13 @@ import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.ConditionalTargetAdjuster;
 
 import java.util.UUID;
+
+import static mage.abilities.condition.common.KickedCondition.ONCE;
 
 /**
  * @author Susucr
@@ -44,8 +47,8 @@ public final class ExpelTheUnworthy extends CardImpl {
         this.getSpellAbility().addEffect(new ExileTargetEffect().setText("Exile the chosen creature"));
         this.getSpellAbility().addEffect(new ExpelTheUnworthyEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().setTargetAdjuster(new ConditionalTargetAdjuster(KickedCondition.ONCE,
-                new TargetCreaturePermanent(filter), new TargetCreaturePermanent()));
+        this.getSpellAbility().setTargetAdjuster(new ConditionalTargetAdjuster(ONCE,
+                new TargetPermanent(filter), new TargetCreaturePermanent()));
     }
 
     private ExpelTheUnworthy(final ExpelTheUnworthy card) {

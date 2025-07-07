@@ -12,6 +12,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.DefendingPlayerControlsAttachedAttackingPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -33,7 +34,7 @@ public final class HeartPiercerBow extends CardImpl {
 
         // Whenever equipped creature attacks, Heart-Piercer Bow deals 1 damage to target creature defending player controls.
         Ability ability = new AttacksAttachedTriggeredAbility(new DamageTargetEffect(1));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
         // Equip {1}

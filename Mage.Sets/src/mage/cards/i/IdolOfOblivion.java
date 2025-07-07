@@ -12,7 +12,6 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.game.permanent.token.EldraziToken;
 import mage.watchers.common.CreatedTokenWatcher;
 
@@ -28,7 +27,7 @@ public final class IdolOfOblivion extends CardImpl {
 
         // {T}: Draw a card. Activate this ability only if you created a token this turn.
         this.addAbility(new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1),
+                new DrawCardSourceControllerEffect(1),
                 new TapSourceCost(), CreatedTokenThisTurnCondition.instance
         ).addHint(CreatedTokenThisTurnCondition.getHint()), new CreatedTokenWatcher());
 

@@ -15,7 +15,7 @@ import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -67,7 +67,7 @@ class JaddiLifestriderEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int tappedAmount = 0;
         Player you = game.getPlayer(source.getControllerId());
-        TargetCreaturePermanent target = new TargetCreaturePermanent(0, Integer.MAX_VALUE, filter, true);
+        TargetPermanent target = new TargetPermanent(0, Integer.MAX_VALUE, filter, true);
         if (target.canChoose(source.getControllerId(), source, game) && target.choose(Outcome.Tap, source.getControllerId(), source.getSourceId(), source, game)) {
             for (UUID creatureId : target.getTargets()) {
                 Permanent creature = game.getPermanent(creatureId);

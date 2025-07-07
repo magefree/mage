@@ -16,6 +16,7 @@ import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.target.Target;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -43,7 +44,7 @@ public final class KeepsakeGorgon extends CardImpl {
         this.addAbility(new MonstrosityAbility("{5}{B}{B}", 1));
         // When Keepsake Gorgon becomes monstrous, destroy target non-Gorgon creature an opponent controls.
         Ability ability = new BecomesMonstrousSourceTriggeredAbility(new DestroyTargetEffect());
-        Target target = new TargetCreaturePermanent(filter);
+        Target target = new TargetPermanent(filter);
         ability.addTarget(target);
         this.addAbility(ability);
     }

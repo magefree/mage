@@ -6,7 +6,6 @@ import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.hint.common.MyTurnHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
@@ -32,12 +31,10 @@ public final class PortalOfSanctuary extends CardImpl {
 
         // {1}, {T}: Return target creature you control and each Aura attached to it to their owners' hands. Activate this ability only during your turn.
         Ability ability = new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD, new PortalOfSanctuaryEffect(),
-                new GenericManaCost(1), MyTurnCondition.instance
+                new PortalOfSanctuaryEffect(), new GenericManaCost(1), MyTurnCondition.instance
         );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetControlledCreaturePermanent());
-        ability.addHint(MyTurnHint.instance);
         this.addAbility(ability);
     }
 

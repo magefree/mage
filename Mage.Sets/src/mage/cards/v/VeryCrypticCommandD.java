@@ -69,7 +69,7 @@ public final class VeryCrypticCommandD extends CardImpl {
 
         // Turn over target nontoken creature.
         mode = new Mode(new TurnOverEffect());
-        mode.addTarget(new TargetCreaturePermanent(filter2));
+        mode.addTarget(new TargetPermanent(filter2));
         this.getSpellAbility().getModes().addMode(mode);
     }
 

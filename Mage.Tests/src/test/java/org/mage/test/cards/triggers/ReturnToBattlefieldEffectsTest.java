@@ -157,4 +157,62 @@ public class ReturnToBattlefieldEffectsTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Reassembling Skeleton", 1);
 
     }
+
+    // issue #12974
+    private static final String rOrb = "Resurrection Orb";
+    // Whenever equipped creature dies, return that card to the battlefield under its owner's control at the beginning of the next end step.
+    private static final String lMiss = "Lone Missionary"; // ETB gain 4
+    private static final String cFeeder = "Carrion Feeder"; // sacrifice a creature: +1/+1 counter
+
+    @Test
+    public void testReturnAttachedToBattlefield() {
+        addCard(Zone.BATTLEFIELD, playerA, rOrb);
+        addCard(Zone.BATTLEFIELD, playerA, lMiss);
+        addCard(Zone.BATTLEFIELD, playerA, cFeeder);
+        addCard(Zone.BATTLEFIELD, playerA, "Wastes", 4);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip", lMiss);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sacrifice");
+        setChoice(playerA, lMiss);
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.UPKEEP);
+        execute();
+
+        assertLife(playerA, 24);
+        assertPermanentCount(playerA, lMiss, 1);
+        assertPowerToughness(playerA, cFeeder, 2, 2);
+
+    }
+
+    @Test
+    public void testNotReturnAttachedToBattlefieldAfterZoneChange() {
+        addCard(Zone.BATTLEFIELD, playerA, rOrb);
+        addCard(Zone.BATTLEFIELD, playerA, lMiss);
+        addCard(Zone.BATTLEFIELD, playerA, cFeeder);
+        addCard(Zone.BATTLEFIELD, playerA, "Wastes", 4);
+        addCard(Zone.BATTLEFIELD, playerB, "Crypt Creeper");
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip", lMiss);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sacrifice");
+        setChoice(playerA, lMiss);
+
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Sacrifice");
+        addTarget(playerB, lMiss);
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.UPKEEP);
+        execute();
+
+        assertLife(playerA, 20);
+        assertExileCount(playerA, lMiss, 1);
+        assertPowerToughness(playerA, cFeeder, 2, 2);
+        assertGraveyardCount(playerB, "Crypt Creeper", 1);
+
+    }
+
 }

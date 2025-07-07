@@ -16,6 +16,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.EnchantedPredicate;
 import mage.game.command.Plane;
 import mage.target.Target;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.PlanarRollWatcher;
 
@@ -44,7 +45,7 @@ public class AkoumPlane extends Plane {
 
         // Active player can roll the planar die: Whenever you roll {CHAOS}, destroy target creature that isn't enchanted
         Effect chaosEffect = new DestroyTargetEffect("destroy target creature that isn't enchanted");
-        Target chaosTarget = new TargetCreaturePermanent(filter);
+        Target chaosTarget = new TargetPermanent(filter);
 
         List<Effect> chaosEffects = new ArrayList<Effect>();
         chaosEffects.add(chaosEffect);

@@ -20,8 +20,10 @@ public final class NestOfScarabs extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
 
         // Whenever you put one or more -1/-1 counters on a creature, create that many 1/1 black Insect creature tokens.
-        this.addAbility(new PutCounterOnCreatureTriggeredAbility(new CreateTokenEffect(new NestOfScarabsBlackInsectToken(), new EffectKeyValue("countersAdded"))
-                .setText("create that many 1/1 black Insect creature tokens"), CounterType.M1M1.createInstance()));
+        this.addAbility(new PutCounterOnCreatureTriggeredAbility(
+                new CreateTokenEffect(new NestOfScarabsBlackInsectToken(),
+                        new EffectKeyValue("countersAdded", "that many")),
+                CounterType.M1M1.createInstance()));
     }
 
     private NestOfScarabs(final NestOfScarabs card) {

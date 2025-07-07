@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.target.common.TargetAnyTarget;
 
 import java.util.UUID;
@@ -30,7 +29,7 @@ public final class FireBowman extends CardImpl {
 
         // Sacrifice Fire Bowman: Fire Bowman deals 1 damage to any target. Activate this ability only during your turn, before attackers are declared.
         Ability ability = new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD, new DamageTargetEffect(1, "it"),
+                new DamageTargetEffect(1, "it"),
                 new SacrificeSourceCost(), MyTurnBeforeAttackersDeclaredCondition.instance
         );
         ability.addTarget(new TargetAnyTarget());

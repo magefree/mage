@@ -5,7 +5,7 @@ import mage.abilities.condition.common.ThresholdCondition;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.mana.RedManaAbility;
@@ -31,7 +31,7 @@ public final class BarbarianRing extends CardImpl {
         this.addAbility(redManaAbility);
 
         // Threshold - {R}, {T}, Sacrifice Barbarian Ring: Barbarian Ring deals 2 damage to any target. Activate this ability only if seven or more cards are in your graveyard.
-        Ability thresholdAbility = new ConditionalActivatedAbility(
+        Ability thresholdAbility = new ActivateIfConditionActivatedAbility(
                 new DamageTargetEffect(2, "it"),
                 new ManaCostsImpl<>("{R}"), ThresholdCondition.instance
         );

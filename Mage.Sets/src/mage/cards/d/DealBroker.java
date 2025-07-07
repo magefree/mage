@@ -1,6 +1,5 @@
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -12,6 +11,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  * 
@@ -28,7 +29,7 @@ public final class DealBroker extends CardImpl {
 
         // TODO: Draft specific abilities not implemented
         // Draft Deal Broker face up.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("Draft Deal Broker face up.")));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("Draft {this} face up.")));
 
         // Immediately after the draft, you may reveal a card in your card pool. Each other player may offer you one card in their card pool in exchange. You may accept any one offer.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("Immediately after the draft, you may reveal a card in your card pool. "

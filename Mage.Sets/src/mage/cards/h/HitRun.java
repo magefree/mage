@@ -12,13 +12,10 @@ import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterAttackingCreature;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetSacrifice;
 import mage.target.targetpointer.FixedTarget;
 
@@ -57,7 +54,7 @@ class HitEffect extends OneShotEffect {
 
     HitEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "Target player sacrifices an artifact or creature. Hit deals damage to that player equal to that permanent's mana value";
+        this.staticText = "Target player sacrifices an artifact or creature. {this} deals damage to that player equal to that permanent's mana value";
     }
 
     private HitEffect(final HitEffect effect) {

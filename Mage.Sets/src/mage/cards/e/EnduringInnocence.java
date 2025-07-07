@@ -2,7 +2,7 @@ package mage.cards.e;
 
 import mage.MageInt;
 import mage.abilities.common.EnduringGlimmerTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 public final class EnduringInnocence extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent();
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("one or more other creatures you control with power 2 or less");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -41,10 +41,9 @@ public final class EnduringInnocence extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // Whenever one or more other creatures you control with power 2 or less enter, draw a card. This ability triggers only once each turn.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(
                 new DrawCardSourceControllerEffect(1), filter
-        ).setTriggersLimitEachTurn(1)
-                .setTriggerPhrase("Whenever one or more other creatures you control with power 2 or less enter, "));
+        ).setTriggersLimitEachTurn(1));
 
         // When Enduring Innocence dies, if it was a creature, return it to the battlefield under its owner's control. It's an enchantment.
         this.addAbility(new EnduringGlimmerTriggeredAbility());

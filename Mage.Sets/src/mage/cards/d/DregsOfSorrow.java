@@ -7,10 +7,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.XTargetsCountAdjuster;
 
 import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES_NON_BLACK;
 
 /**
  * @author LevelX2
@@ -23,7 +26,7 @@ public final class DregsOfSorrow extends CardImpl {
         // Destroy X target nonblack creatures. Draw X cards.
         this.getSpellAbility().addEffect(new DestroyTargetEffect("Destroy X target nonblack creatures"));
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(GetXValue.instance));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_CREATURES_NON_BLACK));
+        this.getSpellAbility().addTarget(new TargetPermanent(FILTER_PERMANENT_CREATURES_NON_BLACK));
         this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
     }
 

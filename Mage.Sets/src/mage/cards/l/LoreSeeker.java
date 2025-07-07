@@ -1,15 +1,16 @@
 
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.InfoEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.InfoEffect;
+
+import java.util.UUID;
 
 /**
  *
@@ -27,8 +28,8 @@ public final class LoreSeeker extends CardImpl {
 
         // TODO: Draft specific abilities not implemented
         // Reveal Lore Seeker as you draft it. After you draft Lore Seeker, you may add a booster pack to the draft.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("Reveal Lore Seeker as you draft it. "
-                + "After you draft Lore Seeker, you may add a booster pack to the draft - not implemented.")));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("Reveal {this} as you draft it. "
+                + "After you draft {this}, you may add a booster pack to the draft - not implemented.")));
     }
 
     private LoreSeeker(final LoreSeeker card) {

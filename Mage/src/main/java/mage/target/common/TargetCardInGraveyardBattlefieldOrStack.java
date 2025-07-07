@@ -18,6 +18,7 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
+ *
  * @author LevelX2
  */
 public class TargetCardInGraveyardBattlefieldOrStack extends TargetCard {
@@ -97,7 +98,7 @@ public class TargetCardInGraveyardBattlefieldOrStack extends TargetCard {
 
     @Override
     public boolean canTarget(UUID id, Game game) {
-        return this.canTarget(null, id, null, game);
+        return this.canTarget(null, id, null, game); // wtf
     }
 
     @Override

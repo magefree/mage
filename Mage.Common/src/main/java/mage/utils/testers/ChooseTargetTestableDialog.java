@@ -6,6 +6,7 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.Targets;
+import mage.util.DebugUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -51,18 +52,23 @@ class ChooseTargetTestableDialog extends BaseTestableDialog {
         Player choosingPlayer = this.isYou ? player : opponent;
 
         boolean chooseRes;
+        String chooseDebugSource;
         if (this.isPlayerChoice) {
             // player.chooseXXX
             if (this.isTargetChoice) {
+                chooseDebugSource = DebugUtil.getMethodNameWithSource(0, "class");
                 chooseRes = choosingPlayer.chooseTarget(Outcome.Benefit, choosingTarget, source, game);
             } else {
+                chooseDebugSource = DebugUtil.getMethodNameWithSource(0, "class");
                 chooseRes = choosingPlayer.choose(Outcome.Benefit, choosingTarget, source, game);
             }
         } else {
             // target.chooseXXX
             if (this.isTargetChoice) {
+                chooseDebugSource = DebugUtil.getMethodNameWithSource(0, "class");
                 chooseRes = choosingTarget.chooseTarget(Outcome.Benefit, choosingPlayer.getId(), source, game);
             } else {
+                chooseDebugSource = DebugUtil.getMethodNameWithSource(0, "class");
                 chooseRes = choosingTarget.choose(Outcome.Benefit, choosingPlayer.getId(), source, game);
             }
         }
@@ -74,7 +80,7 @@ class ChooseTargetTestableDialog extends BaseTestableDialog {
             Targets.printDebugTargets(getGroup() + " - " + this.getName() + " - " + "FALSE", new Targets(choosingTarget), source, game, res);
         }
 
-        ((TargetTestableResult) this.getResult()).onFinish(chooseRes, res, choosingTarget);
+        ((TargetTestableResult) this.getResult()).onFinish(chooseDebugSource, chooseRes, res, choosingTarget);
     }
 
     private ChooseTargetTestableDialog aiMustChoose(boolean resStatus, int targetsCount) {
@@ -97,11 +103,11 @@ class ChooseTargetTestableDialog extends BaseTestableDialog {
             for (boolean isYou : isYous) {
                 for (boolean isTargetChoice : isTargetChoices) {
                     for (boolean isPlayerChoice : isPlayerChoices) {
-                        runner.registerDialog(new ChooseTargetTestableDialog(isPlayerChoice, isTargetChoice, notTarget, isYou, "any 0 e.g. X=0", createAnyTarget(0, 0)).aiMustChoose(true, 0)); // simulate X=0
+                        runner.registerDialog(new ChooseTargetTestableDialog(isPlayerChoice, isTargetChoice, notTarget, isYou, "any 0 e.g. X=0", createAnyTarget(0, 0)).aiMustChoose(false, 0)); // simulate X=0
                         runner.registerDialog(new ChooseTargetTestableDialog(isPlayerChoice, isTargetChoice, notTarget, isYou, "any 1", createAnyTarget(1, 1)).aiMustChoose(true, 1));
                         runner.registerDialog(new ChooseTargetTestableDialog(isPlayerChoice, isTargetChoice, notTarget, isYou, "any 3", createAnyTarget(3, 3)).aiMustChoose(true, 3));
                         runner.registerDialog(new ChooseTargetTestableDialog(isPlayerChoice, isTargetChoice, notTarget, isYou, "any 5", createAnyTarget(5, 5)).aiMustChoose(true, 5));
-                        runner.registerDialog(new ChooseTargetTestableDialog(isPlayerChoice, isTargetChoice, notTarget, isYou, "any max", createAnyTarget(0, Integer.MAX_VALUE)).aiMustChoose(true, 0));
+                        runner.registerDialog(new ChooseTargetTestableDialog(isPlayerChoice, isTargetChoice, notTarget, isYou, "any max", createAnyTarget(0, Integer.MAX_VALUE)).aiMustChoose(true, 6 + 1)); // 6 own cards + 1 own player
                         runner.registerDialog(new ChooseTargetTestableDialog(isPlayerChoice, isTargetChoice, notTarget, isYou, "any 0-1", createAnyTarget(0, 1)).aiMustChoose(true, 1));
                         runner.registerDialog(new ChooseTargetTestableDialog(isPlayerChoice, isTargetChoice, notTarget, isYou, "any 0-3", createAnyTarget(0, 3)).aiMustChoose(true, 3));
                         runner.registerDialog(new ChooseTargetTestableDialog(isPlayerChoice, isTargetChoice, notTarget, isYou, "any 0-5", createAnyTarget(0, 5)).aiMustChoose(true, 5));
@@ -110,7 +116,7 @@ class ChooseTargetTestableDialog extends BaseTestableDialog {
                         runner.registerDialog(new ChooseTargetTestableDialog(isPlayerChoice, isTargetChoice, notTarget, isYou, "any 1-5", createAnyTarget(1, 5)).aiMustChoose(true, 5));
                         runner.registerDialog(new ChooseTargetTestableDialog(isPlayerChoice, isTargetChoice, notTarget, isYou, "any 2-5", createAnyTarget(2, 5)).aiMustChoose(true, 5));
                         runner.registerDialog(new ChooseTargetTestableDialog(isPlayerChoice, isTargetChoice, notTarget, isYou, "any 3-5", createAnyTarget(3, 5)).aiMustChoose(true, 5));
-                        runner.registerDialog(new ChooseTargetTestableDialog(isPlayerChoice, isTargetChoice, notTarget, isYou, "any 4-5", createAnyTarget(4, 5)).aiMustChoose(true, 5)); // impossible on 3 targets
+                        runner.registerDialog(new ChooseTargetTestableDialog(isPlayerChoice, isTargetChoice, notTarget, isYou, "any 4-5", createAnyTarget(4, 5)).aiMustChoose(true, 5));
                         //
                         runner.registerDialog(new ChooseTargetTestableDialog(isPlayerChoice, isTargetChoice, notTarget, isYou, "impossible 0, e.g. X=0", createImpossibleTarget(0, 0)).aiMustChoose(false, 0));
                         runner.registerDialog(new ChooseTargetTestableDialog(isPlayerChoice, isTargetChoice, notTarget, isYou, "impossible 1", createImpossibleTarget(1, 1)).aiMustChoose(false, 0));

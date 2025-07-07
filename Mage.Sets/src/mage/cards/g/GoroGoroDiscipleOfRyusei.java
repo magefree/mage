@@ -5,7 +5,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.hint.ConditionHint;
@@ -13,7 +13,10 @@ import mage.abilities.hint.Hint;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -29,7 +32,7 @@ import java.util.UUID;
 public final class GoroGoroDiscipleOfRyusei extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterControlledCreaturePermanent("if you control an attacking modified creature");
+            = new FilterControlledCreaturePermanent("you control an attacking modified creature");
 
     static {
         filter.add(AttackingPredicate.instance);
@@ -37,9 +40,7 @@ public final class GoroGoroDiscipleOfRyusei extends CardImpl {
     }
 
     private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
-    private static final Hint hint = new ConditionHint(
-            condition, "You control and attacking modified creature"
-    );
+    private static final Hint hint = new ConditionHint(condition);
 
     public GoroGoroDiscipleOfRyusei(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
@@ -57,8 +58,8 @@ public final class GoroGoroDiscipleOfRyusei extends CardImpl {
         ), new ManaCostsImpl<>("{R}")));
 
         // {3}{R}{R}: Create a 5/5 red Dragon Spirit creature token with flying. Activate only if you control an attacking modified creature.
-        this.addAbility(new ConditionalActivatedAbility(
-                Zone.BATTLEFIELD, new CreateTokenEffect(new DragonSpiritToken()),
+        this.addAbility(new ActivateIfConditionActivatedAbility(
+                new CreateTokenEffect(new DragonSpiritToken()),
                 new ManaCostsImpl<>("{3}{R}{R}"), condition
         ).addHint(hint));
     }

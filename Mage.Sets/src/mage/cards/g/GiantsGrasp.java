@@ -1,24 +1,23 @@
 package mage.cards.g;
 
-import java.util.UUID;
-
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.continuous.GainControlTargetEffect;
-import mage.constants.Duration;
-import mage.constants.SubType;
 import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.AttachEffect;
-import mage.constants.Outcome;
-import mage.filter.common.FilterControlledPermanent;
-import mage.target.TargetPermanent;
+import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.filter.common.FilterControlledPermanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetNonlandPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class GiantsGrasp extends CardImpl {
@@ -40,7 +39,7 @@ public final class GiantsGrasp extends CardImpl {
 
         // When Giant's Grasp enters the battlefield, gain control of target nonland permanent for as long as Giant's Grasp remains on the battlefield.
         GainControlTargetEffect controlEffect = new GainControlTargetEffect(Duration.UntilSourceLeavesBattlefield);
-        controlEffect.setText("gain control of target nonland permanent for as long as Giant's Grasp remains on the battlefield");
+        controlEffect.setText("gain control of target nonland permanent for as long as {this} remains on the battlefield");
         ability = new EntersBattlefieldTriggeredAbility(controlEffect);
         ability.addTarget(new TargetNonlandPermanent());
         this.addAbility(ability);

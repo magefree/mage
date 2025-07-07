@@ -85,6 +85,7 @@ enum NecroticPlagueAdjuster implements TargetAdjuster {
         ability.setControllerId(creatureController.getId());
         ability.getTargets().clear();
         TargetPermanent target = new TargetOpponentsCreaturePermanent();
+        target.setAbilityController(ability.getControllerId());
         target.setTargetController(creatureController.getId());
         ability.getTargets().add(target);
     }

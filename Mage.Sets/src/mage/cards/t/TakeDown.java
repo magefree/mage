@@ -11,6 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -31,7 +32,7 @@ public final class TakeDown extends CardImpl {
         // Choose one —
         // • Take Down deals 4 damage to target creature with flying.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
 
         // • Take Down deals 1 damage to each creature with flying
         Mode mode = new Mode(new DamageAllEffect(1, filter));

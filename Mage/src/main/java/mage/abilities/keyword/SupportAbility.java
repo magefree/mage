@@ -1,12 +1,13 @@
-
 package mage.abilities.keyword;
 
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.keyword.SupportEffect;
 import mage.cards.Card;
+import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 
 /**
  * 701.32. Support
@@ -19,19 +20,25 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class SupportAbility extends EntersBattlefieldTriggeredAbility {
 
+    private static final FilterPermanent filter = new FilterCreaturePermanent("other target creatures");
+
+    static {
+        filter.add(AnotherPredicate.instance);
+    }
+
     /*
      * For enchantments, the text should not include the word "other".
      * The otherPermanent choice removes the word "other" from rule text creation.
      */
     public SupportAbility(Card card, int amount, boolean otherPermanent) {
         super(new SupportEffect(card, amount, otherPermanent));
-        if (!card.isInstantOrSorcery()) {
-            FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures");
-            if (card.isCreature()) {
-                filter.add(AnotherPredicate.instance);
-                filter.setMessage("other target creatures");
-            }
-            addTarget(new TargetCreaturePermanent(0, amount, filter, false));
+        if (card.isInstantOrSorcery()) {
+            return;
+        }
+        if (!card.isCreature()) {
+            addTarget(new TargetPermanent(0, amount, StaticFilters.FILTER_PERMANENT_CREATURES));
+        } else {
+            addTarget(new TargetPermanent(0, amount, filter));
         }
     }
 

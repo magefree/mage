@@ -78,6 +78,8 @@ class DanceWithCalamityEffect extends OneShotEffect {
             player.moveCards(card, Zone.EXILED, source, game);
             cards.add(card);
         }
+        game.processAction();
+        cards.retainZone(Zone.EXILED, game);
         if (cards
                 .getCards(game)
                 .stream()

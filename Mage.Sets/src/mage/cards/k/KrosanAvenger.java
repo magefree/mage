@@ -3,7 +3,7 @@ package mage.cards.k;
 import mage.MageInt;
 import mage.abilities.condition.common.ThresholdCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -31,7 +31,7 @@ public final class KrosanAvenger extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Threshold - {1}{G}: Regenerate Krosan Avenger. Activate this ability only if seven or more cards are in your graveyard.
-        this.addAbility(new ConditionalActivatedAbility(
+        this.addAbility(new ActivateIfConditionActivatedAbility(
                 new RegenerateSourceEffect(), new ManaCostsImpl<>("{1}{G}"), ThresholdCondition.instance
         ).setAbilityWord(AbilityWord.THRESHOLD));
     }

@@ -34,8 +34,7 @@ public final class DragonGrip extends CardImpl {
         AsThoughEffect effect = new CastAsThoughItHadFlashSourceEffect(Duration.EndOfGame);
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new ConditionalAsThoughEffect(effect,
                 FerociousCondition.instance).setText("<i>Ferocious</i> &mdash; If you control a creature with power 4 or greater, "
-                        + "you may cast Dragon Grip as though it had flash"))
-                .addHint(FerociousHint.instance));
+                + "you may cast this spell as though it had flash")).addHint(FerociousHint.instance));
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

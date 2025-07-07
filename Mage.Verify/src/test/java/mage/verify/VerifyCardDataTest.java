@@ -85,7 +85,7 @@ public class VerifyCardDataTest {
 
     private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
-    private static String FULL_ABILITIES_CHECK_SET_CODES = "BLC"; // check ability text due mtgjson, can use multiple sets like MAT;CMD or * for all
+    private static String FULL_ABILITIES_CHECK_SET_CODES = ""; // check ability text due mtgjson, can use multiple sets like MAT;CMD or * for all
     private static boolean CHECK_ONLY_ABILITIES_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
     private static final boolean CHECK_COPYABLE_FIELDS = true; // disable for better verify test performance
 
@@ -2055,7 +2055,13 @@ public class VerifyCardDataTest {
         expected.removeIf(subtypesToIgnore::contains);
 
         for (SubType subType : card.getSubtype()) {
-            if (!subType.isCustomSet() && !subType.canGain(card)) {
+            if (subType.isCustomSet()) {
+                if (!ref.isFunny) {
+                    fail(card, "subtypes", "subtype " + subType + " is marked as \"custom\" but is in an official set");
+                }
+                continue;
+            }
+            if (!subType.canGain(card)) {
                 String cardTypeString = card
                         .getCardType()
                         .stream()

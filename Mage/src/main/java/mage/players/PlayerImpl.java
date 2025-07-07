@@ -146,6 +146,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected Set<UUID> inRange = new HashSet<>(); // players list in current range of influence (updates each turn due rules)
 
     protected boolean isTestMode = false;
+    protected boolean isFastFailInTestMode = true;
     protected boolean canGainLife = true;
     protected boolean canLoseLife = true;
     protected EnumSet<PayLifeCostRestriction> payLifeCostRestrictions = EnumSet.noneOf(PayLifeCostRestriction.class);
@@ -2826,8 +2827,10 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean canRespond() { // abort is checked here to get out of player requests (as example: after disconnect)
-        return isInGame() && !abort;
+    public boolean canRespond() {
+        // abort is checked here to get out of player requests (as example: after disconnect)
+        // thread is checked here to get out of AI game simulations or close by third party tools
+        return isInGame() && !abort && !Thread.currentThread().isInterrupted();
     }
 
     @Override
@@ -4595,13 +4598,23 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean isTestsMode() {
+    public boolean isTestMode() {
         return isTestMode;
     }
 
     @Override
     public void setTestMode(boolean value) {
         this.isTestMode = value;
+    }
+
+    @Override
+    public boolean isFastFailInTestMode() {
+        return isFastFailInTestMode;
+    }
+
+    @Override
+    public void setFastFailInTestMode(boolean value) {
+        this.isFastFailInTestMode = value;
     }
 
     @Override
@@ -5438,7 +5451,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public SurveilResult doSurveil(int value, Ability source, Game game) {
         GameEvent event = new GameEvent(GameEvent.EventType.SURVEIL, getId(), source, getId(), value, true);
-        if (game.replaceEvent(event)) {
+        if (game.replaceEvent(event) || event.getAmount() < 1) {
             return SurveilResult.noSurveil();
         }
         game.informPlayers(getLogName() + " surveils " + event.getAmount() + CardUtil.getSourceLogName(game, source));

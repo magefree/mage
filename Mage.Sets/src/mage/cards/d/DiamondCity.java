@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -16,7 +16,6 @@ import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -27,7 +26,6 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- *
  * @author notgreat
  */
 public final class DiamondCity extends CardImpl {
@@ -46,11 +44,12 @@ public final class DiamondCity extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {T}: Move a shield counter from Diamond City onto target creature. Activate only if two or more creatures entered the battlefield under your control this turn.
-        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new MoveCountersFromSourceToTargetEffect(CounterType.SHIELD),
-                new TapSourceCost(), DiamondCityCondition.instance);
+        Ability ability = new ActivateIfConditionActivatedAbility(
+                new MoveCountersFromSourceToTargetEffect(CounterType.SHIELD),
+                new TapSourceCost(), DiamondCityCondition.instance
+        );
         ability.addTarget(new TargetCreaturePermanent());
-        ability.addHint(DiamondCityCreaturesThatEnteredThisTurnCount.getHint());
-        this.addAbility(ability, new PermanentsEnteredBattlefieldWatcher());
+        this.addAbility(ability.addHint(DiamondCityCreaturesThatEnteredThisTurnCount.getHint()), new PermanentsEnteredBattlefieldWatcher());
     }
 
     private DiamondCity(final DiamondCity card) {

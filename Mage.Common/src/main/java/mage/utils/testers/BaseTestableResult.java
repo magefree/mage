@@ -11,8 +11,14 @@ import java.util.List;
 public class BaseTestableResult implements TestableResult {
 
     boolean isFinished = false;
+    String resDebugSource = ""; // source code line to find starting place to debug
     boolean resStatus = false;
     List<String> resInfo = new ArrayList<>();
+
+    @Override
+    public String getResDebugSource() {
+        return this.resDebugSource;
+    }
 
     @Override
     public boolean getResStatus() {
@@ -25,13 +31,14 @@ public class BaseTestableResult implements TestableResult {
     }
 
     @Override
-    public Boolean getResAssert() {
+    public String getResAssert() {
         return null; // TODO: implement
     }
 
     @Override
-    public void onFinish(boolean resStatus, List<String> resDetails) {
+    public void onFinish(String resDebugSource, boolean resStatus, List<String> resDetails) {
         this.isFinished = true;
+        this.resDebugSource = resDebugSource;
         this.resStatus = resStatus;
         this.resInfo = resDetails;
     }

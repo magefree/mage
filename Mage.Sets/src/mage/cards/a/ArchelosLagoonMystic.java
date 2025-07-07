@@ -53,7 +53,7 @@ class ArchelosLagoonMysticEffect extends ReplacementEffectImpl {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         this.tapped = tapped;
         staticText = "as long as {this} is "
-                + (tapped ? "" : "un") + "tapped, other permanents enter the battlefield "
+                + (tapped ? "" : "un") + "tapped, other permanents enter "
                 + (tapped ? "" : "un") + "tapped";
     }
 

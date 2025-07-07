@@ -77,7 +77,7 @@ class RyanSinclairEffect extends OneShotEffect {
         if (card != null) {
             FilterCard filter = new FilterCard();
             filter.add(new ManaValuePredicate(
-                    ComparisonType.FEWER_THAN,
+                    ComparisonType.OR_LESS,
                     Optional.ofNullable(source.getSourcePermanentOrLKI(game))
                             .map(MageObject::getPower)
                             .map(MageInt::getValue)

@@ -14,13 +14,14 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.TargetController;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.FishToken;
 import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -85,15 +86,19 @@ class ReservoirKrakenEffect extends OneShotEffect {
         boolean opponentTapped = false;
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
             Player opponent = game.getPlayer(opponentId);
-            if (opponent != null) {
-                TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent(1, 1, filter, true);
-                if (target.canChoose(opponentId, source, game) && opponent.chooseUse(Outcome.AIDontUseIt, "Tap an untapped creature you control?", source, game)) {
-                    opponent.chooseTarget(Outcome.Tap, target, source, game);
-                    Permanent permanent = game.getPermanent(target.getFirstTarget());
-                    if (permanent != null && permanent.tap(source, game)) {
-                        opponentTapped = true;
-                    }
-                }
+            if (opponent == null) {
+                continue;
+            }
+            TargetPermanent target = new TargetPermanent(StaticFilters.FILTER_CONTROLLED_UNTAPPED_CREATURE);
+            target.withNotTarget(true);
+            if (!target.canChoose(opponentId, source, game)
+                    || !opponent.chooseUse(Outcome.AIDontUseIt, "Tap an untapped creature you control?", source, game)) {
+                continue;
+            }
+            opponent.chooseTarget(Outcome.Tap, target, source, game);
+            Permanent permanent = game.getPermanent(target.getFirstTarget());
+            if (permanent != null && permanent.tap(source, game)) {
+                opponentTapped = true;
             }
         }
         if (opponentTapped) {

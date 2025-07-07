@@ -61,18 +61,22 @@ class AettirAndPriwenEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        Permanent permanent = Optional
+                .ofNullable(source.getSourcePermanentIfItStillExists(game))
+                .map(Permanent::getAttachedTo)
+                .map(game::getPermanent)
+                .orElse(null);
         if (permanent == null) {
             return false;
         }
-        int life = Optional
-                .ofNullable(source)
+        Optional.ofNullable(source)
                 .map(Controllable::getControllerId)
                 .map(game::getPlayer)
                 .map(Player::getLife)
-                .orElse(0);
-        permanent.getPower().setModifiedBaseValue(life);
-        permanent.getToughness().setModifiedBaseValue(life);
+                .ifPresent(life -> {
+                    permanent.getPower().setModifiedBaseValue(life);
+                    permanent.getToughness().setModifiedBaseValue(life);
+                });
         return true;
     }
 }

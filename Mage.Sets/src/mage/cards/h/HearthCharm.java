@@ -13,7 +13,10 @@ import mage.constants.Duration;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import static mage.filter.StaticFilters.FILTER_PERMANENT_ARTIFACT_CREATURE;
 
 /**
  *
@@ -32,13 +35,13 @@ public final class HearthCharm extends CardImpl {
 
         // Choose one - Destroy target artifact creature
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_CREATURE));
+        this.getSpellAbility().addTarget(new TargetPermanent(FILTER_PERMANENT_ARTIFACT_CREATURE));
         // or attacking creatures get +1/+0 until end of turn
         Mode mode = new Mode(new BoostAllEffect(1, 0, Duration.EndOfTurn, StaticFilters.FILTER_ATTACKING_CREATURES, false));
         this.getSpellAbility().addMode(mode);
         // or target creature with power 2 or less is unblockable this turn.
         mode = new Mode(new CantBeBlockedTargetEffect());
-        mode.addTarget(new TargetCreaturePermanent(filter));
+        mode.addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addMode(mode);
     }
 

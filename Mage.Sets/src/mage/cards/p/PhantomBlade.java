@@ -16,8 +16,8 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.SecondTargetPointer;
 
 import java.util.UUID;
@@ -37,7 +37,7 @@ public final class PhantomBlade extends CardImpl {
         ability.addTarget(new TargetControlledCreaturePermanent(0, 1).setTargetTag(1));
 
         ability.addEffect(new DestroyTargetEffect().setTargetPointer(new SecondTargetPointer()));
-        ability.addTarget(new TargetCreaturePermanent(0, 1, StaticFilters.FILTER_ANOTHER_CREATURE_TARGET_2, false).setTargetTag(2));
+        ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_ANOTHER_CREATURE_TARGET_2).setTargetTag(2));
         this.addAbility(ability);
 
         // Equipped creature gets +1/+1 and has menace.

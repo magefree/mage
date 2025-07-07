@@ -5,10 +5,11 @@ import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -39,9 +40,9 @@ public final class RunAwayTogether extends CardImpl {
     }
 }
 
-class RunAwayTogetherTarget extends TargetCreaturePermanent {
+class RunAwayTogetherTarget extends TargetPermanent {
 
-    private static final FilterCreaturePermanent filter
+    private static final FilterPermanent filter
             = new FilterCreaturePermanent("creatures controlled by different players");
 
     RunAwayTogetherTarget() {

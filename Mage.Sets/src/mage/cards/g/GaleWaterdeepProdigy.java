@@ -1,21 +1,20 @@
 package mage.cards.g;
 
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.ChooseABackgroundAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.MayCastTargetCardEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterInstantOrSorcerySpell;
+import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.watchers.common.CastFromHandWatcher;
+import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetpointer.FirstTargetPointer;
 
 import java.util.UUID;
 
@@ -36,7 +35,14 @@ public final class GaleWaterdeepProdigy extends CardImpl {
         // Whenever you cast an instant or sorcery spell from your hand,
         // you may cast up to one of the other type from your graveyard.
         // If a spell cast from your graveyard this way would be put into your graveyard, exile it instead.
-        this.addAbility(new GaleWaterdeepProdigyTriggeredAbility());
+        Ability ability = new SpellCastControllerTriggeredAbility(Zone.BATTLEFIELD,
+                new MayCastTargetCardEffect(true)
+                        .setText("you may cast up to one target card of the other type from your graveyard. If a spell cast from your graveyard this way would be put into your graveyard, exile it instead."),
+                StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY,
+                false, SetTargetPointer.SPELL, Zone.HAND
+        );
+        ability.setTargetAdjuster(GaleWaterdeepProdigyAdjuster.instance);
+        this.addAbility(ability);
 
         // Choose a Background
         this.addAbility(ChooseABackgroundAbility.getInstance());
@@ -52,7 +58,8 @@ public final class GaleWaterdeepProdigy extends CardImpl {
     }
 }
 
-class GaleWaterdeepProdigyTriggeredAbility extends SpellCastControllerTriggeredAbility {
+enum GaleWaterdeepProdigyAdjuster implements TargetAdjuster {
+    instance;
 
     private static final FilterCard SORCERY_FILTER = new FilterCard("a sorcery card in your graveyard");
     private static final FilterCard INSTANT_FILTER = new FilterCard("an instant card in your graveyard");
@@ -61,51 +68,22 @@ class GaleWaterdeepProdigyTriggeredAbility extends SpellCastControllerTriggeredA
         SORCERY_FILTER.add(CardType.SORCERY.getPredicate());
         INSTANT_FILTER.add(CardType.INSTANT.getPredicate());
     }
-
-    public GaleWaterdeepProdigyTriggeredAbility() {
-        super(
-                new MayCastTargetCardEffect(true)
-                        .setText("you may cast up to one target card of the other type from your graveyard. "
-                                + "If a spell cast from your graveyard this way would be put into your graveyard, exile it instead."),
-                new FilterInstantOrSorcerySpell("an instant or sorcery spell from your hand"),
-                false
-        );
-        addWatcher(new CastFromHandWatcher());
-    }
-
-    private GaleWaterdeepProdigyTriggeredAbility(final GaleWaterdeepProdigyTriggeredAbility ability) {
-        super(ability);
-    }
-
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (!super.checkTrigger(event, game)) {
-            return false;
-        }
+    public void adjustTargets(Ability ability, Game game) {
+        UUID spellId = ability.getEffects().get(0).getTargetPointer().getFirst(game, ability);
+        ability.getTargets().clear();
+        ability.getAllEffects().setTargetPointer(new FirstTargetPointer());
 
-        CastFromHandWatcher watcher = game.getState().getWatcher(CastFromHandWatcher.class);
-        if (watcher == null || !watcher.spellWasCastFromHand(event.getSourceId())) {
-            return false;
-        }
-
-        Spell spell = game.getState().getStack().getSpell(event.getSourceId());
+        Spell spell = game.getSpellOrLKIStack(spellId);
         if (spell == null) {
-            return false;
+            return;
         }
-
-        FilterCard filterCard;
+        FilterCard filter;
         if (spell.isSorcery(game)) {
-            filterCard = INSTANT_FILTER;
+            filter = INSTANT_FILTER;
         } else {
-            filterCard = SORCERY_FILTER;
+            filter = SORCERY_FILTER;
         }
-        this.getTargets().clear();
-        this.getTargets().add(new TargetCardInYourGraveyard(filterCard));
-        return true;
-    }
-
-    @Override
-    public GaleWaterdeepProdigyTriggeredAbility copy() {
-        return new GaleWaterdeepProdigyTriggeredAbility(this);
+        ability.addTarget(new TargetCardInYourGraveyard(0, 1, filter));
     }
 }

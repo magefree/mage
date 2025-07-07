@@ -9,14 +9,17 @@ import mage.abilities.condition.common.AttackedOrBlockedThisCombatSourceConditio
 import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -56,9 +59,8 @@ public final class ClockworkSteed extends CardImpl {
         ).withInterveningIf(AttackedOrBlockedThisCombatSourceCondition.instance), new AttackedOrBlockedThisCombatWatcher());
 
         // {X}, {tap}: Put up to X +1/+0 counters on Clockwork Steed. This ability can't cause the total number of +1/+0 counters on Clockwork Steed to be greater than four. Activate this ability only during your upkeep.
-        Ability ability = new ConditionalActivatedAbility(
-                Zone.BATTLEFIELD, new ClockworkSteedEffect(),
-                new ManaCostsImpl<>("{X}"), new IsStepCondition(PhaseStep.UPKEEP)
+        Ability ability = new ActivateIfConditionActivatedAbility(
+                new ClockworkSteedEffect(), new ManaCostsImpl<>("{X}"), IsStepCondition.getMyUpkeep()
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

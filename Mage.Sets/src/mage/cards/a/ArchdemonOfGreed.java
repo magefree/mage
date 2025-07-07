@@ -2,10 +2,10 @@ package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -13,7 +13,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetSacrifice;
@@ -43,8 +42,9 @@ public final class ArchdemonOfGreed extends CardImpl {
 
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(TrampleAbility.getInstance());
+
         // At the beginning of your upkeep, sacrifice a Human. If you can't, tap Archdemon of Greed and it deals 9 damage to you.
-        this.addAbility(new OnEventTriggeredAbility(GameEvent.EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new ArchdemonOfGreedEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ArchdemonOfGreedEffect()));
     }
 
     private ArchdemonOfGreed(final ArchdemonOfGreed card) {
@@ -60,7 +60,7 @@ public final class ArchdemonOfGreed extends CardImpl {
 
         public ArchdemonOfGreedEffect() {
             super(Outcome.Damage);
-            this.staticText = "Sacrifice a Human. If you can't, tap {this} and it deals 9 damage to you.";
+            this.staticText = "sacrifice a Human. If you can't, tap {this} and it deals 9 damage to you.";
         }
 
         private ArchdemonOfGreedEffect(final ArchdemonOfGreedEffect effect) {

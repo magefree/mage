@@ -14,6 +14,7 @@ import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -32,7 +33,7 @@ public final class Wrangle extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}");
 
         // Gain control of target creature with power 4 or less until end of turn. Untap that creature. It gains haste until end of turn.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn));
         Effect effect = new UntapTargetEffect();
         effect.setText("Untap that creature");

@@ -39,7 +39,7 @@ public final class SigilOfSleep extends CardImpl {
         // Whenever enchanted creature deals damage to a player, return target creature that player controls to its owner's hand.
         Effect effect = new ReturnToHandTargetEffect();
         ability = new DealsDamageToAPlayerAttachedTriggeredAbility(effect, "enchanted", false, true, false);
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         ability.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster());
         this.addAbility(ability);
     }

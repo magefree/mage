@@ -110,6 +110,8 @@ class KyloxVisionaryInventorEffect extends OneShotEffect {
             return true;
         }
         player.moveCards(cards, Zone.EXILED, source, game);
+        game.processAction();
+        cards.retainZone(Zone.EXILED, game);
         CardUtil.castMultipleWithAttributeForFree(
                 player, source, game, cards,
                 StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY

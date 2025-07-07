@@ -7,7 +7,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SolvedSourceCondition;
 import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.abilities.hint.common.CaseSolvedHint;
@@ -45,7 +45,7 @@ public final class CaseOfTheBurningMasks extends CardImpl {
         initialAbility.addTarget(new TargetOpponentsCreaturePermanent());
         // To solve -- Three or more sources you controlled dealt damage this turn.
         // Solved -- Sacrifice this Case: Exile the top three cards of your library. Choose one of them. You may play that card this turn.
-        Ability solvedAbility = new ConditionalActivatedAbility(
+        Ability solvedAbility = new ActivateIfConditionActivatedAbility(
                 new ExileTopXMayPlayUntilEffect(3, true, Duration.EndOfTurn),
                 new SacrificeSourceCost().setText("sacrifice this Case"), SolvedSourceCondition.SOLVED
         );

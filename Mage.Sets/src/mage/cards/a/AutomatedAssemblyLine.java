@@ -11,7 +11,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
-import mage.game.permanent.token.RobotToken;
+import mage.game.permanent.token.Robot33Token;
 
 /**
  * @author Cguy7777
@@ -27,7 +27,7 @@ public final class AutomatedAssemblyLine extends CardImpl {
 
         // Pay {E}{E}{E}: Create a tapped 3/3 colorless Robot artifact creature token.
         this.addAbility(new SimpleActivatedAbility(
-                new CreateTokenEffect(new RobotToken(), 1, true),
+                new CreateTokenEffect(new Robot33Token(), 1, true),
                 new PayEnergyCost(3)));
     }
 

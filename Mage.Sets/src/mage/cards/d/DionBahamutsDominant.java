@@ -47,7 +47,7 @@ public final class DionBahamutsDominant extends CardImpl {
                 MyTurnCondition.instance, "during your turn, {this}"
         ));
         ability.addEffect(new ConditionalContinuousEffect(
-                new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.WhileControlled, filter),
+                new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, filter),
                 MyTurnCondition.instance, "and other Knights you control have flying"
         ));
         this.addAbility(ability.withFlavorWord("Dragonfire Dive"));

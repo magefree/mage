@@ -51,7 +51,7 @@ public final class VadersCommand extends CardImpl {
 
         //   Destroy target nonartifact creature.
         mode = new Mode(new DestroyTargetEffect());
-        mode.addTarget(new TargetCreaturePermanent(filterNonArtifact));
+        mode.addTarget(new TargetPermanent(filterNonArtifact));
         this.getSpellAbility().addMode(mode);
 
         //   Gain 5 life.

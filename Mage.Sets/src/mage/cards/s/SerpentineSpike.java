@@ -1,9 +1,6 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.replacement.DealtDamageToCreatureBySourceDies;
 import mage.abilities.keyword.DevoidAbility;
@@ -12,18 +9,28 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.other.AnotherTargetPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.DamagedByWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class SerpentineSpike extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterCreaturePermanent("another creature");
+
+    static {
+        filter.add(new AnotherTargetPredicate(3));
+    }
 
     public SerpentineSpike(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{R}{R}");
@@ -33,26 +40,12 @@ public final class SerpentineSpike extends CardImpl {
 
         // Serpentine Spike deals 2 damage to target creature, 3 damage to another target creature, and 4 damage to a third target creature. If a creature dealt damage this way would die this turn, exile it instead.
         this.getSpellAbility().addEffect(new SerpentineSpikeEffect());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent().withChooseHint("2 damage").setTargetTag(1));
+        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_CREATURE_TARGET_2).withChooseHint("3 damage").setTargetTag(2));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter).withChooseHint("4 damage").setTargetTag(3));
 
-        TargetCreaturePermanent target = new TargetCreaturePermanent(new FilterCreaturePermanent("creature (2 damage)"));
-        target.setTargetTag(1);
-        this.getSpellAbility().addTarget(target);
-
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature (3 damage)");
-        filter.add(new AnotherTargetPredicate(2));
-        target = new TargetCreaturePermanent(filter);
-        target.setTargetTag(2);
-        this.getSpellAbility().addTarget(target);
-
-        filter = new FilterCreaturePermanent("another target creature (4 damage)");
-        filter.add(new AnotherTargetPredicate(3));
-        target = new TargetCreaturePermanent(filter);
-        target.setTargetTag(3);
-        this.getSpellAbility().addTarget(target);
-
-        Effect effect = new DealtDamageToCreatureBySourceDies(this, Duration.EndOfTurn);
-        effect.setText("If a creature dealt damage this way would die this turn, exile it instead");
-        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addEffect(new DealtDamageToCreatureBySourceDies(this, Duration.EndOfTurn)
+                .setText("If a creature dealt damage this way would die this turn, exile it instead"));
         this.getSpellAbility().addWatcher(new DamagedByWatcher(false));
     }
 

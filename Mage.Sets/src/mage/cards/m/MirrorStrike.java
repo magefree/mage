@@ -17,6 +17,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.UnblockedPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -36,7 +37,7 @@ public final class MirrorStrike extends CardImpl {
 
         // All combat damage that would be dealt to you this turn by target unblocked creature is dealt to its controller instead.
         this.getSpellAbility().addEffect(new MirrorStrikeEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
     private MirrorStrike(final MirrorStrike card) {

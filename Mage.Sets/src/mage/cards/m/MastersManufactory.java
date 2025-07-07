@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.WatcherScope;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
@@ -27,11 +26,6 @@ import java.util.*;
  */
 public final class MastersManufactory extends CardImpl {
 
-    private static final Hint hint = new ConditionHint(
-            MastersManufactoryCondition.instance,
-            "{this} or another artifact entered under your control this turn"
-    );
-
     public MastersManufactory(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "");
         this.nightCard = true;
@@ -40,11 +34,9 @@ public final class MastersManufactory extends CardImpl {
 
         // {T}: Create a 4/4 white and blue Golem artifact creature token. Activate only if Master's Manufactory or another artifact entered the battlefield under your control this turn.
         this.addAbility(new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD,
                 new CreateTokenEffect(new GolemWhiteBlueToken()),
-                new TapSourceCost(),
-                MastersManufactoryCondition.instance
-        ).addHint(hint), new MastersManufactoryWatcher());
+                new TapSourceCost(), MastersManufactoryCondition.instance
+        ).addHint(MastersManufactoryCondition.getHint()), new MastersManufactoryWatcher());
     }
 
     private MastersManufactory(final MastersManufactory card) {
@@ -59,19 +51,23 @@ public final class MastersManufactory extends CardImpl {
 
 enum MastersManufactoryCondition implements Condition {
     instance;
+    private static final Hint hint = new ConditionHint(instance);
+
+    public static Hint getHint() {
+        return hint;
+    }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         MastersManufactoryWatcher watcher = game.getState().getWatcher(MastersManufactoryWatcher.class);
-        return watcher != null
-                && permanent != null
+        return watcher != null && permanent != null
                 && watcher.check(source.getControllerId(), new MageObjectReference(permanent, game));
     }
 
     @Override
     public String toString() {
-        return "if {this} or another artifact entered the battlefield under your control this turn";
+        return "{this} or another artifact entered the battlefield under your control this turn";
     }
 }
 

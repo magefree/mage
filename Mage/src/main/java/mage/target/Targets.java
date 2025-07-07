@@ -63,8 +63,8 @@ public class Targets extends ArrayList<Target> implements Copyable<Targets> {
         return unchosenIndex < res.size() ? res.get(unchosenIndex) : null;
     }
 
-    public boolean isChoiceCompleted(Game game) {
-        return stream().allMatch(t -> t.isChoiceCompleted(game));
+    public boolean isChoiceCompleted(UUID abilityControllerId, Ability source, Game game) {
+        return stream().allMatch(t -> t.isChoiceCompleted(abilityControllerId, source, game));
     }
 
     public void clearChosen() {
@@ -101,9 +101,7 @@ public class Targets extends ArrayList<Target> implements Copyable<Targets> {
 
                 // stop on cancel/done
                 if (!target.choose(outcome, playerId, sourceId, source, game)) {
-                    if (!target.isChosen(game)) {
-                        break;
-                    }
+                    break;
                 }
 
                 // target done, can take next one

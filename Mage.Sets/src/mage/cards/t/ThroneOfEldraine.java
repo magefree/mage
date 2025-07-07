@@ -11,9 +11,10 @@ import mage.abilities.costs.CostAdjuster;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.ChooseColorEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
@@ -41,14 +42,12 @@ public final class ThroneOfEldraine extends CardImpl {
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new ThroneOfEldraineManaEffect(), new TapSourceCost()));
 
         // {3}, {T}: Draw two cards. Spend only mana of the chosen color to activate this ability.
-        Ability ability = new ConditionalActivatedAbility(
-                Zone.BATTLEFIELD,
-                new DrawCardSourceControllerEffect(2),
-                new GenericManaCost(3),
-                ThroneOfEldraineChosenColorCondition.instance, // disable the ability if no color was chosen or cost is actually {0}.
-                "{3}, {T}: Draw two cards. Spend only mana of the chosen color to activate this ability."
-        );
+        Ability ability = new ActivateIfConditionActivatedAbility(
+                new DrawCardSourceControllerEffect(2), new GenericManaCost(3),
+                ThroneOfEldraineChosenColorCondition.instance // disable the ability if no color was chosen or cost is actually {0}.
+        ).hideCondition();
         ability.addCost(new TapSourceCost());
+        ability.addEffect(new InfoEffect("Spend only mana of the chosen color to activate this ability"));
         ability.setCostAdjuster(ThroneOfEldraineAdjuster.instance);
         this.addAbility(ability);
     }

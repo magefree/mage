@@ -42,7 +42,7 @@ class LashOutEffect extends OneShotEffect {
 
     LashOutEffect() {
         super(Outcome.Damage);
-        this.staticText = "Lash Out deals 3 damage to target creature. Clash with an opponent. If you win, Lash Out deals 3 damage to that creature's controller";
+        this.staticText = "{this} deals 3 damage to target creature. Clash with an opponent. If you win, {this} deals 3 damage to that creature's controller";
     }
 
     private LashOutEffect(final LashOutEffect effect) {

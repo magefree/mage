@@ -44,7 +44,7 @@ public final class LilianaTheNecromancer extends CardImpl {
 
         // −7: Destroy up to two target creatures. Put up to two creature cards from graveyards onto the battlefield under your control.
         ability = new LoyaltyAbility(new DestroyTargetEffect(), -7);
-        ability.addTarget(new TargetCreaturePermanent(0, 2, StaticFilters.FILTER_PERMANENT_CREATURES, false));
+        ability.addTarget(new TargetCreaturePermanent(0, 2));
         ability.addEffect(new LilianaTheNecromancerEffect());
         this.addAbility(ability);
     }

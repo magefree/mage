@@ -4,6 +4,8 @@ import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.constants.Constants;
 import mage.game.Game;
+import mage.game.Table;
+import mage.game.tournament.Tournament;
 import mage.server.game.GameController;
 import mage.server.managers.ChatManager;
 import mage.server.managers.ManagerFactory;
@@ -40,11 +42,39 @@ public class ChatManagerImpl implements ChatManager {
         this.managerFactory = managerFactory;
     }
 
+
     @Override
-    public UUID createChatSession(String info) {
+    public UUID createRoomChatSession(UUID roomId) {
+        return createChatSession("Room " + roomId)
+                .withRoom(roomId)
+                .getChatId();
+    }
+
+    @Override
+    public UUID createTourneyChatSession(Tournament tournament) {
+        return createChatSession("Tourney " + tournament.getId())
+                .withTourney(tournament)
+                .getChatId();
+    }
+
+    @Override
+    public UUID createTableChatSession(Table table) {
+        return createChatSession("Table " + table.getId())
+                .withTable(table)
+                .getChatId();
+    }
+
+    @Override
+    public UUID createGameChatSession(Game game) {
+        return createChatSession("Game " + game.getId())
+                .withGame(game)
+                .getChatId();
+    }
+
+    private ChatSession createChatSession(String info) {
         ChatSession chatSession = new ChatSession(managerFactory, info);
         chatSessions.put(chatSession.getChatId(), chatSession);
-        return chatSession.getChatId();
+        return chatSession;
     }
 
     @Override
@@ -94,7 +124,7 @@ public class ChatManagerImpl implements ChatManager {
         ChatSession chatSession = chatSessions.get(chatId);
         Optional<User> user = managerFactory.userManager().getUserByName(userName);
         if (chatSession != null) {
-            // special commads
+            // special commands
             if (message.startsWith("\\") || message.startsWith("/")) {
                 if (user.isPresent()) {
                     if (!performUserCommand(user.get(), message, chatId, false)) {

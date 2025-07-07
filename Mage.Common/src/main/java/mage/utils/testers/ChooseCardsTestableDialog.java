@@ -13,6 +13,7 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.Targets;
 import mage.target.common.TargetCardInHand;
+import mage.util.DebugUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -57,9 +58,12 @@ class ChooseCardsTestableDialog extends BaseTestableDialog {
         Cards choosingCards = new CardsImpl(all.stream().limit(100).collect(Collectors.toList()));
 
         boolean chooseRes;
+        String chooseDebugSource;
         if (this.isTargetChoice) {
+            chooseDebugSource = DebugUtil.getMethodNameWithSource(0, "class");
             chooseRes = choosingPlayer.chooseTarget(Outcome.Benefit, choosingCards, choosingTarget, source, game);
         } else {
+            chooseDebugSource = DebugUtil.getMethodNameWithSource(0, "class");
             chooseRes = choosingPlayer.choose(Outcome.Benefit, choosingCards, choosingTarget, source, game);
         }
 
@@ -70,7 +74,7 @@ class ChooseCardsTestableDialog extends BaseTestableDialog {
             Targets.printDebugTargets(getGroup() + " - " + this.getName() + " - " + "FALSE", new Targets(choosingTarget), source, game, res);
         }
 
-        ((TargetTestableResult) this.getResult()).onFinish(chooseRes, res, choosingTarget);
+        ((TargetTestableResult) this.getResult()).onFinish(chooseDebugSource, chooseRes, res, choosingTarget);
     }
 
     static public void register(TestableDialogsRunner runner) {

@@ -108,6 +108,7 @@ class JaceArchitectOfThoughtEffect3 extends OneShotEffect {
             controller.moveCards(card, Zone.EXILED, source, game);
             player.shuffleLibrary(source, game);
         }
+        game.processAction();
         cards.retainZone(Zone.EXILED, game);
         CardUtil.castMultipleWithAttributeForFree(controller, source, game, cards, StaticFilters.FILTER_CARD);
         return true;

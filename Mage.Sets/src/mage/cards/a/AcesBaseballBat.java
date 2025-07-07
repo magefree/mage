@@ -15,7 +15,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -60,7 +60,7 @@ public final class AcesBaseballBat extends CardImpl {
         // Equip legendary creature (1)
         this.addAbility(new EquipAbility(
                 Outcome.AddAbility, new GenericManaCost(1),
-                new TargetControlledCreaturePermanent(filterLegendary), false
+                new TargetPermanent(filterLegendary), false
         ));
 
         // Equip {3}

@@ -5,7 +5,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.hint.ConditionHint;
@@ -48,7 +48,7 @@ public final class HauntOfTheDeadMarshes extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(1, false)));
 
         // {2}{B}: Return Haunt of the Dead Marshes from your graveyard to the battlefield tapped. Activate only if you control a legendary creature.
-        this.addAbility(new ConditionalActivatedAbility(
+        this.addAbility(new ActivateIfConditionActivatedAbility(
                 Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(true, false),
                 new ManaCostsImpl<>("{2}{B}"), condition
         ).addHint(hint));

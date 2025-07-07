@@ -5,7 +5,7 @@ import mage.abilities.condition.common.ThresholdCondition;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.effects.common.DrawDiscardTargetEffect;
 import mage.abilities.mana.BlueManaAbility;
@@ -31,7 +31,7 @@ public final class CephalidColiseum extends CardImpl {
         this.addAbility(manaAbility);
 
         // Threshold - {U}, {tap}, Sacrifice Cephalid Coliseum: Target player draws three cards, then discards three cards. Activate this ability only if seven or more cards are in your graveyard.
-        Ability thresholdAbility = new ConditionalActivatedAbility(
+        Ability thresholdAbility = new ActivateIfConditionActivatedAbility(
                 new DrawDiscardTargetEffect(3, 3),
                 new ManaCostsImpl<>("{U}"), ThresholdCondition.instance
         );

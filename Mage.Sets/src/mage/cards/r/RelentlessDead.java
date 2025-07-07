@@ -3,22 +3,21 @@ package mage.cards.r;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
+import mage.abilities.costs.common.DynamicValueGenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.common.TargetManaValue;
 import mage.abilities.effects.common.DoIfCostPaid;
+import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.keyword.MenaceAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
+import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.AnotherPredicate;
-import mage.filter.predicate.mageobject.ManaValuePredicate;
-import mage.game.Game;
-import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.util.ManaUtil;
 
 import java.util.UUID;
 
@@ -26,6 +25,13 @@ import java.util.UUID;
  * @author LevelX2
  */
 public final class RelentlessDead extends CardImpl {
+
+    private static final FilterCard filter = new FilterCreatureCard("another target Zombie creature card with mana value X from your graveyard"); // This target defines X
+
+    static {
+        filter.add(SubType.ZOMBIE.getPredicate());
+        filter.add(AnotherPredicate.instance);
+    }
 
     public RelentlessDead(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{B}");
@@ -40,7 +46,11 @@ public final class RelentlessDead extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new DoIfCostPaid(new ReturnToHandSourceEffect().setText("return it to its owner's hand"), new ManaCostsImpl<>("{B}"))));
 
         // When Relentless Dead dies, you may pay {X}. If you do, return another target Zombie creature card with converted mana cost X from your graveyard to the battlefield.
-        this.addAbility(new DiesSourceTriggeredAbility(new RelentlessDeadEffect()));
+        Ability ability = new DiesSourceTriggeredAbility(new DoIfCostPaid(
+                new ReturnFromGraveyardToBattlefieldTargetEffect(),
+                new DynamicValueGenericManaCost(TargetManaValue.instance, "{X}")));
+        ability.addTarget(new TargetCardInYourGraveyard(filter));
+        this.addAbility(ability);
     }
 
     private RelentlessDead(final RelentlessDead card) {
@@ -50,48 +60,5 @@ public final class RelentlessDead extends CardImpl {
     @Override
     public RelentlessDead copy() {
         return new RelentlessDead(this);
-    }
-}
-
-class RelentlessDeadEffect extends OneShotEffect {
-
-    RelentlessDeadEffect() {
-        super(Outcome.PutCardInPlay);
-        this.staticText = "you may pay {X}. If you do, return another target Zombie creature card with mana value X from your graveyard to the battlefield";
-    }
-
-    private RelentlessDeadEffect(final RelentlessDeadEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public RelentlessDeadEffect copy() {
-        return new RelentlessDeadEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            if (controller.chooseUse(Outcome.Benefit, "Do you want to pay {X} to return zombie?", source, game)) {
-                int payCount = ManaUtil.playerPaysXGenericMana(true, "Relentless Dead", controller, source, game);
-                // can be 0
-                FilterCard filter = new FilterCard("Another target Zombie card with mana value {" + payCount + "}");
-                filter.add(SubType.ZOMBIE.getPredicate());
-                filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, payCount));
-                filter.add(AnotherPredicate.instance);
-                TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(filter);
-                if (controller.chooseTarget(outcome, target, source, game)) {
-                    Card card = game.getCard(target.getFirstTarget());
-                    if (card != null) {
-                        controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                    }
-                }
-
-            }
-            return true;
-        }
-        return false;
-
     }
 }

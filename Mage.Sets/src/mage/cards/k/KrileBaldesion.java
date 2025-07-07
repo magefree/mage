@@ -75,6 +75,7 @@ enum KrileBaldesionPredicate implements ObjectSourcePlayerPredicate<Card> {
         return CardUtil
                 .getEffectValueFromAbility(input.getSource(), "spellCast", Spell.class)
                 .map(Spell::getManaValue)
-                .equals(input.getObject().getManaValue());
+                .filter(x -> x == input.getObject().getManaValue())
+                .isPresent();
     }
 }

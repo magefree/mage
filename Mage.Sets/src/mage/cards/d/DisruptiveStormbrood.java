@@ -49,7 +49,7 @@ public final class DisruptiveStormbrood extends OmenCard {
         // Destroy target creature with power 3 or less.
         Effect spellEffect = new DestroyTargetEffect();
         this.getSpellCard().getSpellAbility().addEffect(spellEffect);
-        this.getSpellCard().getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellCard().getSpellAbility().addTarget(new TargetPermanent(filter));
         this.finalizeOmen();
     }
 

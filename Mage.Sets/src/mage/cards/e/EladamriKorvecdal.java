@@ -53,7 +53,7 @@ public final class EladamriKorvecdal extends CardImpl {
 
         // {G}, {T}, Tap two untapped creatures you control: Reveal a card from your hand or the top card of your library. If you reveal a creature card this way, put it onto the battlefield. Activate only during your turn.
         Ability ability = new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD, new EladamriKorvecdalEffect(), new ManaCostsImpl<>("{G}"), MyTurnCondition.instance
+                new EladamriKorvecdalEffect(), new ManaCostsImpl<>("{G}"), MyTurnCondition.instance
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new TapTargetCost(new TargetControlledPermanent(

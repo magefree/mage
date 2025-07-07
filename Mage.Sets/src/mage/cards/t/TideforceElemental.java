@@ -17,7 +17,10 @@ import mage.constants.SubType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import static mage.filter.StaticFilters.FILTER_ANOTHER_TARGET_CREATURE;
 
 /**
  *
@@ -37,7 +40,7 @@ public final class TideforceElemental extends CardImpl {
                 new MayTapOrUntapTargetEffect(), 
                 new ColoredManaCost(ColoredManaSymbol.U));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE));
+        ability.addTarget(new TargetPermanent(FILTER_ANOTHER_TARGET_CREATURE));
         this.addAbility(ability);
         // Landfall - Whenever a land you control enters, you may untap Tideforce Elemental.
         this.addAbility(new LandfallAbility(new UntapSourceEffect(), true));

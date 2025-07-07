@@ -21,8 +21,8 @@ import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.filter.predicate.permanent.EquippedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.TargetAdjuster;
 
 import java.util.UUID;
@@ -61,7 +61,7 @@ public final class NazahnReveredBladesmith extends CardImpl {
 
         // Whenever an equipped creature you control attacks, you may tap target creature defending player controls.
         Ability ability = new AttacksCreatureYouControlTriggeredAbility(new NazahnTapEffect(), true, equippedFilter, true);
-        ability.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature defending player controls")));
+        ability.addTarget(new TargetPermanent(new FilterCreaturePermanent("creature defending player controls")));
         ability.setTargetAdjuster(NazahnReveredBladesmithAdjuster.instance);
         this.addAbility(ability);
     }
@@ -89,8 +89,7 @@ enum NazahnReveredBladesmithAdjuster implements TargetAdjuster {
             }
         }
         ability.getTargets().clear();
-        TargetCreaturePermanent target = new TargetCreaturePermanent(filterDefender);
-        ability.addTarget(target);
+        ability.addTarget(new TargetPermanent(filterDefender));
     }
 }
 

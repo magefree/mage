@@ -13,6 +13,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -36,7 +37,7 @@ public final class PhyrexianBloodstock extends CardImpl {
 
         // When Phyrexian Bloodstock leaves the battlefield, destroy target white creature. It can't be regenerated.
         Ability ability = new LeavesBattlefieldTriggeredAbility(new DestroyTargetEffect(true), false);
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

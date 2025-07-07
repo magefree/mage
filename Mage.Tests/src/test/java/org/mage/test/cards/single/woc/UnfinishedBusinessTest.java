@@ -92,6 +92,7 @@ public class UnfinishedBusinessTest extends CardTestPlayerBase {
         // EEB should never have been attached and therefore the White knight should be untapped
         assertTapped(APOSTLE,false);
         assertAttachedTo(playerA, EEB, APOSTLE,false);
+        assertPermanentCount(playerA, EEB, 1);
 
         // Check that Ghoulflesh never entered the battlefield
         assertLife(playerA, 20);

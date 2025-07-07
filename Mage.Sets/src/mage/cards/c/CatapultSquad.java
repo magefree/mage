@@ -15,6 +15,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterAttackingOrBlockingCreature;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -40,7 +41,7 @@ public final class CatapultSquad extends CardImpl {
 
         // Tap two untapped Soldiers you control: Catapult Squad deals 2 damage to target attacking or blocking creature.
         Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(2), new TapTargetCost(new TargetControlledPermanent(2, 2, filter, false)));
-        ability.addTarget(new TargetCreaturePermanent(new FilterAttackingOrBlockingCreature()));
+        ability.addTarget(new TargetPermanent(new FilterAttackingOrBlockingCreature()));
         this.addAbility(ability);
     }
 
