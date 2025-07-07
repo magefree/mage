@@ -17,10 +17,9 @@ import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -55,7 +54,7 @@ public final class MagusOfTheOrder extends CardImpl {
         ability.addCost(new TapSourceCost());
         ability.addCost(new CompositeCost(
                 new SacrificeSourceCost(), new SacrificeTargetCost(filter2),
-                "sacrifice Magus of the Order and another green creature"
+                "sacrifice {this} and another green creature"
         ));
         this.addAbility(ability);
     }
