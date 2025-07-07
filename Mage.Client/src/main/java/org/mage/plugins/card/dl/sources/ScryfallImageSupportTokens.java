@@ -2554,7 +2554,8 @@ public class ScryfallImageSupportTokens {
             put("DSK/Primo, the Indivisible", "https://api.scryfall.com/cards/tdsk/14?format=image");
             put("DSK/Shard", "https://api.scryfall.com/cards/tdsk/2?format=image");
             put("DSK/Spider", "https://api.scryfall.com/cards/tdsk/12?format=image");
-            put("DSK/Spirit", "https://api.scryfall.com/cards/tdsk/8?format=image");
+            put("DSK/Spirit/1", "https://api.scryfall.com/cards/tdsk/6?format=image");
+            put("DSK/Spirit/2", "https://api.scryfall.com/cards/tdsk/8?format=image");
             put("DSK/Treasure", "https://api.scryfall.com/cards/tdsk/15?format=image");
 
             // DSC
