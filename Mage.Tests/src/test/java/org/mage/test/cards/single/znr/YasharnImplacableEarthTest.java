@@ -4,8 +4,10 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import mage.game.permanent.token.FoodToken;
 import mage.game.permanent.token.TreasureToken;
 import org.junit.Assert;
@@ -208,7 +210,7 @@ public class YasharnImplacableEarthTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void testCanSacrificeTriggeredAbility() {
+    public void canSacrificeTriggeredAbility() {
         /*
         Unscrupulous Contractor
         {2}{B}
@@ -255,5 +257,69 @@ public class YasharnImplacableEarthTest extends CardTestPlayerBase {
         assertHandCount(playerB, 1 + 2); //draw + contractor effect
         assertLife(playerB, 20 - 2);
         assertGraveyardCount(playerB, cub, 1);
+    }
+
+    @Test
+    public void canPayLifeForTriggeredAbility() {
+        /*
+        Arrogant Poet
+        {1}{B}
+        Creature — Human Warlock
+        Whenever this creature attacks, you may pay 2 life. If you do, it gains flying until end of turn.
+        2/1
+         */
+        String poet = "Arrogant Poet";
+        setStrictChooseMode(true);
+        addCard(Zone.BATTLEFIELD, playerA, poet);
+        addCard(Zone.BATTLEFIELD, playerA, yasharn);
+
+        attack(1, playerA, poet);
+        setChoice(playerA, true); // pay 2 life
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertLife(playerB, 20 - 2); // combat damage
+        assertLife(playerA, 20 - 2); // paid life
+        assertAbility(playerA, poet, FlyingAbility.getInstance(), true);
+    }
+
+    @Test
+    public void canSacWithGrist() {
+        /*
+        Grist, the Hunger Tide
+        {1}{B}{G}
+        Legendary Planeswalker — Grist
+        As long as Grist isn’t on the battlefield, it’s a 1/1 Insect creature in addition to its other types.
+        +1: Create a 1/1 black and green Insect creature token, then mill a card. If an Insect card was milled this way, put a loyalty counter on Grist and repeat this process.
+        −2: You may sacrifice a creature. When you do, destroy target creature or planeswalker.
+        −5: Each opponent loses life equal to the number of creature cards in your graveyard.
+        Loyalty: 3
+         */
+        String grist = "Grist, the Hunger Tide";
+        /*
+        Bear Cub
+        {1}{G}
+        Creature - Bear
+        2/2
+         */
+        String cub = "Bear Cub";
+        setStrictChooseMode(true);
+        addCard(Zone.BATTLEFIELD, playerA, grist);
+        addCard(Zone.BATTLEFIELD, playerA, yasharn);
+        addCard(Zone.BATTLEFIELD, playerA, cub);
+        addCard(Zone.BATTLEFIELD, playerB, grist + "@gristB");
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "-2:");
+        setChoice(playerA, true);
+        setChoice(playerA, cub);
+        addTarget(playerA, "@gristB");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertCounterCount(grist, CounterType.LOYALTY, 1);
+        assertGraveyardCount(playerB, grist, 1);
+        assertGraveyardCount(playerA, cub, 1);
     }
 }
