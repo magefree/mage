@@ -7,10 +7,8 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.YouControlPermanentCondition;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ChooseBasicLandTypeEffect;
-import mage.abilities.effects.common.continuous.AddChosenSubtypeEffect;
-import mage.abilities.effects.common.cost.CostModificationEffectImpl;
-import mage.abilities.effects.common.enterAttribute.EnterAttributeAddChosenSubtypeEffect;
 import mage.abilities.mana.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -21,6 +19,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -47,16 +46,15 @@ public class ThranPortal extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedUnlessAbility(condition).addHint(condition.getHint()));
 
         // As Thran Portal enters the battlefield, choose a basic land type.
-        // Thran Portal is the chosen type in addition to its other types.
         AsEntersBattlefieldAbility chooseLandTypeAbility = new AsEntersBattlefieldAbility(new ChooseBasicLandTypeEffect(Outcome.AddAbility));
-        chooseLandTypeAbility.addEffect(new EnterAttributeAddChosenSubtypeEffect()); // While it enters
+        chooseLandTypeAbility.addEffect(new ThranPortalAddSubtypeEnteringEffect());
         this.addAbility(chooseLandTypeAbility);
-        this.addAbility(new SimpleStaticAbility(new AddChosenSubtypeEffect())); // While on the battlefield
+
+        // Thran Portal is the chosen type in addition to its other types.
+        this.addAbility(new SimpleStaticAbility(new ThranPortalManaAbilityContinuousEffect()));
 
         // Mana abilities of Thran Portal cost an additional 1 life to activate.
-        // This also adds the mana ability
         Ability ability = new SimpleStaticAbility(new ThranPortalAdditionalCostEffect());
-        ability.addEffect(new ThranPortalManaAbilityContinousEffect());
         this.addAbility(ability);
     }
 
@@ -70,7 +68,34 @@ public class ThranPortal extends CardImpl {
     }
 }
 
-class ThranPortalManaAbilityContinousEffect extends ContinuousEffectImpl {
+class ThranPortalAddSubtypeEnteringEffect extends OneShotEffect {
+
+    public ThranPortalAddSubtypeEnteringEffect() {
+        super(Outcome.Benefit);
+    }
+
+    protected ThranPortalAddSubtypeEnteringEffect(final ThranPortalAddSubtypeEnteringEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public ThranPortalAddSubtypeEnteringEffect copy() {
+        return new ThranPortalAddSubtypeEnteringEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent thranPortal = game.getPermanentEntering(source.getSourceId());
+        SubType choice = SubType.byDescription((String) game.getState().getValue(source.getSourceId().toString() + ChooseBasicLandTypeEffect.VALUE_KEY));
+        if (thranPortal != null && choice != null) {
+            thranPortal.addSubType(choice);
+            return true;
+        }
+        return false;
+    }
+}
+
+class ThranPortalManaAbilityContinuousEffect extends ContinuousEffectImpl {
 
     private static final Map<SubType, BasicManaAbility> abilityMap = new HashMap<SubType, BasicManaAbility>() {{
         put(SubType.PLAINS, new WhiteManaAbility());
@@ -80,18 +105,18 @@ class ThranPortalManaAbilityContinousEffect extends ContinuousEffectImpl {
         put(SubType.FOREST, new GreenManaAbility());
     }};
 
-    public ThranPortalManaAbilityContinousEffect() {
+    public ThranPortalManaAbilityContinuousEffect() {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Neutral);
-        staticText = "mana abilities of {this} cost an additional 1 life to activate";
+        staticText = "{this} is the chosen type in addition to its other types.";
     }
 
-    private ThranPortalManaAbilityContinousEffect(final ThranPortalManaAbilityContinousEffect effect) {
+    private ThranPortalManaAbilityContinuousEffect(final ThranPortalManaAbilityContinuousEffect effect) {
         super(effect);
     }
 
     @Override
-    public ThranPortalManaAbilityContinousEffect copy() {
-        return new ThranPortalManaAbilityContinousEffect(this);
+    public ThranPortalManaAbilityContinuousEffect copy() {
+        return new ThranPortalManaAbilityContinuousEffect(this);
     }
 
     @Override
@@ -143,10 +168,11 @@ class ThranPortalManaAbilityContinousEffect extends ContinuousEffectImpl {
     }
 }
 
-class ThranPortalAdditionalCostEffect extends CostModificationEffectImpl {
+class ThranPortalAdditionalCostEffect extends ContinuousEffectImpl {
 
     ThranPortalAdditionalCostEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);
+        super(Duration.WhileOnBattlefield, Layer.RulesEffects, SubLayer.NA, Outcome.Benefit);
+        staticText = "mana abilities of {this} cost an additional 1 life to activate";
     }
 
     private ThranPortalAdditionalCostEffect(final ThranPortalAdditionalCostEffect effect) {
@@ -159,17 +185,22 @@ class ThranPortalAdditionalCostEffect extends CostModificationEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        abilityToModify.addCost(new PayLifeCost(1));
-        return true;
-    }
-
-    @Override
-    public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (!abilityToModify.getSourceId().equals(source.getSourceId())) {
+    public boolean apply(Game game, Ability source) {
+        Permanent thranPortal = game.getPermanent(source.getSourceId());
+        if (thranPortal == null) {
             return false;
         }
-
-        return abilityToModify instanceof ManaAbility;
+        List<Ability> abilities = thranPortal.getAbilities(game);
+        if (abilities.isEmpty()) {
+            return false;
+        }
+        boolean result = false;
+        for (Ability ability : abilities) {
+            if (ability.isManaAbility()) {
+                ability.addCost(new PayLifeCost(1));
+                result = true;
+            }
+        }
+        return result;
     }
 }
