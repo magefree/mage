@@ -2787,7 +2787,8 @@
 |Generate|TOK:DSK|Primo, the Indivisible|||PrimoTheIndivisibleToken|
 |Generate|TOK:DSK|Shard|||ShardToken|
 |Generate|TOK:DSK|Spider|||Spider22Token|
-|Generate|TOK:DSK|Spirit|||SpiritBlueToken|
+|Generate|TOK:DSK|Spirit|6||Spirit31Token|
+|Generate|TOK:DSK|Spirit|8||SpiritBlueToken|
 |Generate|TOK:DSK|Treasure|||TreasureToken|
 
 # FIN

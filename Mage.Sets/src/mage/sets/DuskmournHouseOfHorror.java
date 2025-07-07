@@ -142,6 +142,8 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Get Out", 60, Rarity.UNCOMMON, mage.cards.g.GetOut.class));
         cards.add(new SetCardInfo("Ghost Vacuum", 248, Rarity.RARE, mage.cards.g.GhostVacuum.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ghost Vacuum", 326, Rarity.RARE, mage.cards.g.GhostVacuum.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ghostly Dancers", 13, Rarity.RARE, mage.cards.g.GhostlyDancers.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ghostly Dancers", 302, Rarity.RARE, mage.cards.g.GhostlyDancers.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Give In to Violence", 101, Rarity.COMMON, mage.cards.g.GiveInToViolence.class));
         cards.add(new SetCardInfo("Glimmer Seeker", 14, Rarity.UNCOMMON, mage.cards.g.GlimmerSeeker.class));
         cards.add(new SetCardInfo("Glimmerburst", 62, Rarity.COMMON, mage.cards.g.Glimmerburst.class));
