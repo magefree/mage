@@ -44,7 +44,7 @@ public class DeckGeneratorPool {
     // List of cards so far in the deck
     private final List<Card> deckCards = new ArrayList<>();
     // List of reserve cards found to fix up undersized decks
-    private final List<Card> reserveSpells = new ArrayList<>();
+    private final Map<String, Card> reserveSpells = new HashMap<>();
     private final Deck deck;
 
     /**
@@ -170,12 +170,13 @@ public class DeckGeneratorPool {
      * @param card the card to add.
      */
     public void addCard(Card card) {
-        Object cnt = cardCounts.get((card.getName()));
-        if (cnt == null)
-            cardCounts.put(card.getName(), 0);
-        int existingCount = cardCounts.get((card.getName()));
-        cardCounts.put(card.getName(), existingCount + 1);
+        int count = cardCounts.getOrDefault(card.getName(), 0);
+        cardCounts.put(card.getName(), count + 1);
         deckCards.add(card);
+
+        if (deckCards.stream().distinct().collect(Collectors.toList()).size() != deckCards.size()) {
+            System.out.println("wtf " + card.getName());
+        }
     }
 
     public void clearCards(boolean isClearReserve) {
@@ -198,8 +199,8 @@ public class DeckGeneratorPool {
         // Only cards with CMC < 7 and don't already exist in the deck
         // can be added to our reserve pool as not to overwhelm the curve
         // with high CMC cards and duplicates.
-        if (cardCMC < 7 && getCardCount(card.getName()) == 0) {
-            this.reserveSpells.add(card);
+        if (cardCMC < 7 && getCardCount(card.getName()) == 0 && !this.reserveSpells.containsKey(card.getName())) {
+            this.reserveSpells.put(card.getName(), card);
             return true;
         }
         return false;
@@ -416,48 +417,38 @@ public class DeckGeneratorPool {
      * @return a fixed list of cards for this deck.
      */
     private List<Card> getFixedSpells() {
-        int spellSize = deckCards.size();
+        int spellsSize = deckCards.size();
         int nonLandSize = (deckSize - landCount);
 
-        // Less spells than needed
-        if (spellSize < nonLandSize) {
-
-            int spellsNeeded = nonLandSize - spellSize;
-
-            // If we haven't got enough spells in reserve to fulfil the amount we need, skip adding any.
-            if (reserveSpells.size() >= spellsNeeded) {
-
-                List<Card> spellsToAdd = new ArrayList<>(spellsNeeded);
-
-                // Initial reservoir
-                for (int i = 0; i < spellsNeeded; i++)
-                    spellsToAdd.add(reserveSpells.get(i));
-
-                for (int i = spellsNeeded + 1; i < reserveSpells.size() - 1; i++) {
-                    int j = RandomUtil.nextInt(i);
-                    Card randomCard = reserveSpells.get(j);
-                    if (isValidSpellCard(randomCard) && j < spellsToAdd.size()) {
-                        spellsToAdd.set(j, randomCard);
-                    }
+        // fewer spells than needed - add
+        if (spellsSize < nonLandSize) {
+            int needExtraSpells = nonLandSize - spellsSize;
+            List<Card> possibleSpells = new ArrayList<>(reserveSpells.values());
+            while (needExtraSpells > 0) {
+                Card card = RandomUtil.randomFromCollection(possibleSpells);
+                if (card == null) {
+                    break;
                 }
-                // Add randomly selected spells needed
-                deckCards.addAll(spellsToAdd);
+                if (isValidSpellCard(card)) {
+                    needExtraSpells--;
+                    deckCards.add(card);
+                }
+                possibleSpells.remove(card);
             }
         }
 
-        // More spells than needed
-        else if (spellSize > (deckSize - landCount)) {
-            int spellsRemoved = (spellSize) - (deckSize - landCount);
+        // more spells than needed - remove
+        else if (spellsSize > (deckSize - landCount)) {
+            int spellsRemoved = (spellsSize) - (deckSize - landCount);
             for (int i = 0; i < spellsRemoved; ++i) {
                 deckCards.remove(RandomUtil.nextInt(deckCards.size()));
             }
         }
 
-        // Check we have exactly the right amount of cards for a deck.
         if (deckCards.size() != nonLandSize) {
             logger.info("Can't generate full deck for selected settings - try again or choose more sets and less colors");
         }
-        // Return the fixed amount
+
         return deckCards;
     }
 
@@ -620,8 +611,14 @@ public class DeckGeneratorPool {
             throw new IllegalArgumentException("Wrong code usage: generateSpells with creatures and commanders must be called as first");
         }
         List<CardInfo> cardPool = CardRepository.instance.findCards(criteria);
+        List<Card> commanderPool = cardPool.stream()
+                .map(CardInfo::createMockCard)
+                .filter(genPool::isValidSpellCard)
+                .filter(genPool::isValidCommander)
+                .collect(Collectors.toList());
+
         List<DeckGeneratorCMC.CMC> deckCMCs = genPool.getCMCsForSpellCount(needCardsCount);
-        int count = 0;
+        int usedCardsCount = 0;
         int validCommanders = 0;
         int reservesAdded = 0;
         if (cardPool.size() > 0 && cardPool.size() >= needCardsCount) {
@@ -636,19 +633,29 @@ public class DeckGeneratorPool {
                 }
 
                 // can finish deck - but make sure it has commander
-                if (count >= needCardsCount) {
+                if (usedCardsCount >= needCardsCount) {
                     if (validCommanders < needCommandersCount) {
                         // reset deck search from scratch (except reserved cards)
-                        count = 0;
+                        usedCardsCount = 0;
                         validCommanders = 0;
                         deckCMCs = genPool.getCMCsForSpellCount(needCardsCount);
-                        genPool.clearCards(false);
+                        genPool.clearCards(true);
                         continue;
                     }
                     break;
                 }
 
-                Card card = cardPool.get(RandomUtil.nextInt(cardPool.size())).createMockCard();
+                // choose commander first
+                Card card = null;
+                if (validCommanders < needCommandersCount && !commanderPool.isEmpty()) {
+                    card = RandomUtil.randomFromCollection(commanderPool);
+                }
+
+                // choose other cards after commander
+                if (card == null) {
+                    card = RandomUtil.randomFromCollection(cardPool).createMockCard();
+                }
+
                 if (!genPool.isValidSpellCard(card)) {
                     continue;
                 }
@@ -656,11 +663,11 @@ public class DeckGeneratorPool {
                 int cardCMC = card.getManaValue();
                 for (DeckGeneratorCMC.CMC deckCMC : deckCMCs) {
                     if (cardCMC >= deckCMC.min && cardCMC <= deckCMC.max) {
-                        int currentAmount = deckCMC.getAmount();
-                        if (currentAmount > 0) {
-                            deckCMC.setAmount(currentAmount - 1);
+                        int needAmount = deckCMC.getAmount();
+                        if (needAmount > 0) {
+                            deckCMC.setAmount(needAmount - 1);
                             genPool.addCard(card.copy());
-                            count++;
+                            usedCardsCount++;
                             // make sure it has compatible commanders
                             if (genPool.isValidCommander(card)) {
                                 validCommanders++;
