@@ -1,7 +1,6 @@
 
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -13,13 +12,15 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.ZombieToken;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -54,7 +55,7 @@ class NoosegrafMobEffect extends OneShotEffect {
 
     NoosegrafMobEffect() {
         super(Outcome.Benefit);
-        staticText = "remove a +1/+1 counter from Noosegraf Mob. If you do, create a 2/2 black Zombie creature token";
+        staticText = "remove a +1/+1 counter from {this}. If you do, create a 2/2 black Zombie creature token";
     }
 
     private NoosegrafMobEffect(final NoosegrafMobEffect effect) {
