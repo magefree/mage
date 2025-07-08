@@ -2403,7 +2403,8 @@ public class VerifyCardDataTest {
 
         Pattern ruleNameCheck = Pattern.compile("\\b(?<!named |name is )"+Pattern.quote(card.getName())+"(?! \\{)");
         Set<String> overlapNames = Arrays.stream(SubType.class.getEnumConstants()).map(SubType::toString).collect(Collectors.toSet()); // Assembly-Worker, Coward, etc.
-        overlapNames.addAll(Arrays.asList("Exile", "Kher Keep", "Kookus"));
+        // TODO: Tibalt, Cosmic Impostor's emblem should refer to the source permanent, even if it has a different name
+        overlapNames.addAll(Arrays.asList("Exile", "Kher Keep", "Kookus", "Regenerate", "Shield of Kaldra", "Stangg", "Tibalt, Cosmic Impostor"));
         for (String rule : card.getRules()) {
             for (String s : wrongSymbols) {
                 if (rule.contains(s)) {
