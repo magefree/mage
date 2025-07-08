@@ -35,6 +35,9 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Breeding Pool", 373, Rarity.RARE, mage.cards.b.BreedingPool.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Command Bridge", 252, Rarity.COMMON, mage.cards.c.CommandBridge.class));
         cards.add(new SetCardInfo("Embrace Oblivion", 98, Rarity.COMMON, mage.cards.e.EmbraceOblivion.class));
+        cards.add(new SetCardInfo("Emissary Escort", 326, Rarity.RARE, mage.cards.e.EmissaryEscort.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Emissary Escort", 399, Rarity.RARE, mage.cards.e.EmissaryEscort.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Emissary Escort", 56, Rarity.RARE, mage.cards.e.EmissaryEscort.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 266, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", 371, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Galactic Wayfarer", 185, Rarity.COMMON, mage.cards.g.GalacticWayfarer.class));
