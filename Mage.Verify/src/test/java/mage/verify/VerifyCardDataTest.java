@@ -2415,10 +2415,10 @@ public class VerifyCardDataTest {
                 fail(card, "rules", "card's rules contains restricted test [&mdash ] instead [&mdash;]");
             }
             if (ruleNameCheck.matcher(rule).find() && !overlapNames.contains(card.getName())) {
-                fail(card, "rules", "card's pre-formatted rules incorrectly contains its name directly, use {this} instead");
+                fail(card, "rules", "card's pre-formatted rules incorrectly contains its name directly, probably use {this} instead or add to overlapNames exceptions list");
             }
-            if (rule.contains("named {this}")) {
-                fail(card, "rules", "card's rules contains \"named {this}\", should use card's name");
+            if (rule.contains("named {this}") || rule.contains("name is {this}")) {
+                fail(card, "rules", "card's rules contains \"named {this}\" or \"name is {this}\", should use card's name directly");
             }
         }
     }
