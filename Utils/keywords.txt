@@ -147,4 +147,5 @@ Unleash|new|
 Vanishing|number|
 Vigilance|instance|
 Ward|cost|
+Warp|card, manaString|
 Wither|instance|

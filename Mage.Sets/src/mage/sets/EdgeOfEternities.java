@@ -4,11 +4,15 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * @author TheElk801
  */
 public final class EdgeOfEternities extends ExpansionSet {
 
+    private static final List<String> unfinished = Arrays.asList("Anticausal Vestige");
     private static final EdgeOfEternities instance = new EdgeOfEternities();
 
     public static EdgeOfEternities getInstance() {
@@ -21,6 +25,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         this.rotationSet = true;
 
         cards.add(new SetCardInfo("Alpharael, Dreaming Acolyte", 212, Rarity.UNCOMMON, mage.cards.a.AlpharaelDreamingAcolyte.class));
+        cards.add(new SetCardInfo("Anticausal Vestige", 1, Rarity.RARE, mage.cards.a.AnticausalVestige.class));
         cards.add(new SetCardInfo("Breeding Pool", 251, Rarity.RARE, mage.cards.b.BreedingPool.class));
         cards.add(new SetCardInfo("Command Bridge", 252, Rarity.COMMON, mage.cards.c.CommandBridge.class));
         cards.add(new SetCardInfo("Embrace Oblivion", 98, Rarity.COMMON, mage.cards.e.EmbraceOblivion.class));
@@ -49,5 +54,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Tezzeret, Cruel Captain", 2, Rarity.MYTHIC, mage.cards.t.TezzeretCruelCaptain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tezzeret, Cruel Captain", 287, Rarity.MYTHIC, mage.cards.t.TezzeretCruelCaptain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Watery Grave", 261, Rarity.RARE, mage.cards.w.WateryGrave.class));
+
+        cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName()));
     }
 }
