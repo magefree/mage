@@ -23,8 +23,12 @@ public class DeckImportClipboardDialog extends MageDialog {
             "// Example:\n" +
                     "//1 Library of Congress\n" +
                     "//1 Cryptic Gateway\n" +
-                    "//1 Azami, Lady of Scrolls\n" +
                     "// NB: This is slow as, and will lock your screen :)\n" +
+                    "// Decks are processed as plain text format\n" +
+                    "// To process as mtga format, use a first line of\n" +
+                    "// Commander or Deck. Example:\n" +
+                    "// Deck\n" +
+                    "// 1 Runehorn Hellkite (SCD) 155\n" +
                     "\n" +
                     "// Your current clipboard:\n" +
                     "\n";
@@ -73,7 +77,7 @@ public class DeckImportClipboardDialog extends MageDialog {
 
         String tempDeckPath;
         // This dialog also accepts a paste in .mtga format
-        if (decklist.startsWith("Deck\n")) {  // An .mtga list always starts with the first line being "Deck". This kind of paste is processed as .mtga
+        if (decklist.startsWith("Deck\n") || decklist.startsWith("Commander\n")) {  // An .mtga list always starts with the first line being "Deck" or "Commander". This kind of paste is processed as .mtga
             tempDeckPath = DeckUtil.writeTextToTempFile("cbimportdeck", ".mtga", decklist);
         } else {
             // If the paste is not .mtga format, it's processed as plaintext
