@@ -36,6 +36,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Bygone Colossus", 235, Rarity.UNCOMMON, mage.cards.b.BygoneColossus.class));
         cards.add(new SetCardInfo("Command Bridge", 252, Rarity.COMMON, mage.cards.c.CommandBridge.class));
         cards.add(new SetCardInfo("Embrace Oblivion", 98, Rarity.COMMON, mage.cards.e.EmbraceOblivion.class));
+        cards.add(new SetCardInfo("Emergency Eject", 14, Rarity.UNCOMMON, mage.cards.e.EmergencyEject.class));
         cards.add(new SetCardInfo("Emissary Escort", 326, Rarity.RARE, mage.cards.e.EmissaryEscort.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Emissary Escort", 399, Rarity.RARE, mage.cards.e.EmissaryEscort.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Emissary Escort", 56, Rarity.RARE, mage.cards.e.EmissaryEscort.class, NON_FULL_USE_VARIOUS));
