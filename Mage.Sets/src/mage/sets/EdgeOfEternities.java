@@ -52,6 +52,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Sacred Foundry", 282, Rarity.RARE, mage.cards.s.SacredFoundry.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sacred Foundry", 377, Rarity.RARE, mage.cards.s.SacredFoundry.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sami, Ship's Engineer", 225, Rarity.UNCOMMON, mage.cards.s.SamiShipsEngineer.class));
+        cards.add(new SetCardInfo("Shattered Wings", 206, Rarity.COMMON, mage.cards.s.ShatteredWings.class));
         cards.add(new SetCardInfo("Sothera, the Supervoid", 115, Rarity.MYTHIC, mage.cards.s.SotheraTheSupervoid.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sothera, the Supervoid", 360, Rarity.MYTHIC, mage.cards.s.SotheraTheSupervoid.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sothera, the Supervoid", 382, Rarity.MYTHIC, mage.cards.s.SotheraTheSupervoid.class, NON_FULL_USE_VARIOUS));
