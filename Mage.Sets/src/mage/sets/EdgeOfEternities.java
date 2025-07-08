@@ -93,6 +93,9 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("The Seriema", 35, Rarity.RARE, mage.cards.t.TheSeriema.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thrumming Hivepool", 247, Rarity.RARE, mage.cards.t.ThrummingHivepool.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thrumming Hivepool", 356, Rarity.RARE, mage.cards.t.ThrummingHivepool.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Uthros, Titanic Godcore", 260, Rarity.MYTHIC, mage.cards.u.UthrosTitanicGodcore.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Uthros, Titanic Godcore", 285, Rarity.MYTHIC, mage.cards.u.UthrosTitanicGodcore.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Uthros, Titanic Godcore", 380, Rarity.MYTHIC, mage.cards.u.UthrosTitanicGodcore.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Virulent Silencer", 248, Rarity.UNCOMMON, mage.cards.v.VirulentSilencer.class));
         cards.add(new SetCardInfo("Watery Grave", 261, Rarity.RARE, mage.cards.w.WateryGrave.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Watery Grave", 286, Rarity.RARE, mage.cards.w.WateryGrave.class, NON_FULL_USE_VARIOUS));
