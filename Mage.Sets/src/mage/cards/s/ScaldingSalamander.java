@@ -1,20 +1,20 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.filter.predicate.permanent.DefendingPlayerControlsSourceAttackingPredicate;
+
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -37,10 +37,7 @@ public final class ScaldingSalamander extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Scalding Salamander attacks, you may have it deal 1 damage to each creature without flying defending player controls.
-        this.addAbility(new AttacksTriggeredAbility(
-                new DamageAllEffect(1, filter), true,
-                "Whenever Scalding Salamander attacks, you may have it deal 1 damage to each creature without flying defending player controls."
-        ));
+        this.addAbility(new AttacksTriggeredAbility(new DamageAllEffect(1, filter), true));
     }
 
     private ScaldingSalamander(final ScaldingSalamander card) {
