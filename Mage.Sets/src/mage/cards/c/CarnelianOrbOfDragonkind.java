@@ -1,5 +1,6 @@
 package mage.cards.c;
 
+import mage.MageItem;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -111,17 +112,23 @@ class CarnelianOrbOfDragonkindHasteEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            ((Permanent) object).addAbility(HasteAbility.getInstance(), source.getSourceId(), game);
+        }
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         CarnelianOrbOfDragonkindWatcher watcher = game.getState().getWatcher(CarnelianOrbOfDragonkindWatcher.class, source.getSourceId());
         if (watcher == null) {
             return false;
         }
-
-        for (Permanent perm : game.getBattlefield().getAllActivePermanents()) {
-            if (watcher.creatureCastWithOrbsMana(perm.getId())) {
-                perm.addAbility(HasteAbility.getInstance(), source.getSourceId(), game);
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents()) {
+            if (watcher.creatureCastWithOrbsMana(permanent.getId())) {
+                affectedObjects.add(permanent);
             }
         }
-        return true;
+        return !affectedObjects.isEmpty();
     }
 }

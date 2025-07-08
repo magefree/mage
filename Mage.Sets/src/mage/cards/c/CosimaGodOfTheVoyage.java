@@ -1,15 +1,16 @@
 package mage.cards.c;
 
 import mage.MageInt;
+import mage.MageItem;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.DealsDamageToAPlayerAllTriggeredAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.CrewAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.*;
 import mage.constants.*;
 import mage.counters.CounterType;
@@ -21,6 +22,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -136,17 +138,25 @@ class CosimaGodOfTheVoyageGainAbilityEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Card card = mor.getCard(game);
-        if (card != null && game.getState().getZone(card.getId()) == Zone.EXILED) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Card card = (Card) object;
             Ability ability = new CosimaGodOfTheVoyageTriggeredAbility();
             ability.setSourceId(card.getId());
             ability.setControllerId(source.getControllerId());
             game.getState().addOtherAbility(card, ability);
-        } else {
-            discard();
         }
-        return true;
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        Card card = mor.getCard(game);
+        if (card != null && game.getState().getZone(card.getId()) == Zone.EXILED) {
+            affectedObjects.add(card);
+            return true;
+        }
+        discard();
+        return false;
     }
 }
 

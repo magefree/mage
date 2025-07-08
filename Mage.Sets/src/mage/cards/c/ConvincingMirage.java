@@ -1,5 +1,6 @@
 package mage.cards.c;
 
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -16,6 +17,7 @@ import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -96,7 +98,35 @@ class ConvincingMirageContinousEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        SubType choice = SubType.byDescription((String) game.getState().getValue(source.getSourceId().toString() + ChooseBasicLandTypeEffect.VALUE_KEY));
+        for (MageItem object : affectedObjects) {
+            Permanent land = (Permanent) object;
+            land.removeAllSubTypes(game, SubTypeSet.NonBasicLandType);
+            land.addSubType(game, choice);
+            land.removeAllAbilities(source.getSourceId(), game);
+            switch (choice) {
+                case FOREST:
+                    land.addAbility(new GreenManaAbility(), source.getSourceId(), game);
+                    break;
+                case PLAINS:
+                    land.addAbility(new WhiteManaAbility(), source.getSourceId(), game);
+                    break;
+                case MOUNTAIN:
+                    land.addAbility(new RedManaAbility(), source.getSourceId(), game);
+                    break;
+                case ISLAND:
+                    land.addAbility(new BlueManaAbility(), source.getSourceId(), game);
+                    break;
+                case SWAMP:
+                    land.addAbility(new BlackManaAbility(), source.getSourceId(), game);
+                    break;
+            }
+        }
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         Permanent enchantment = game.getPermanent(source.getSourceId());
         SubType choice = SubType.byDescription((String) game.getState().getValue(source.getSourceId().toString() + ChooseBasicLandTypeEffect.VALUE_KEY));
         if (enchantment == null || enchantment.getAttachedTo() == null || choice == null) {
@@ -106,26 +136,7 @@ class ConvincingMirageContinousEffect extends ContinuousEffectImpl {
         if (land == null) {
             return false;
         }
-        land.removeAllSubTypes(game, SubTypeSet.NonBasicLandType);
-        land.addSubType(game, choice);
-        land.removeAllAbilities(source.getSourceId(), game);
-        switch (choice) {
-            case FOREST:
-                land.addAbility(new GreenManaAbility(), source.getSourceId(), game);
-                break;
-            case PLAINS:
-                land.addAbility(new WhiteManaAbility(), source.getSourceId(), game);
-                break;
-            case MOUNTAIN:
-                land.addAbility(new RedManaAbility(), source.getSourceId(), game);
-                break;
-            case ISLAND:
-                land.addAbility(new BlueManaAbility(), source.getSourceId(), game);
-                break;
-            case SWAMP:
-                land.addAbility(new BlackManaAbility(), source.getSourceId(), game);
-                break;
-        }
+        affectedObjects.add(land);
         return true;
     }
 }

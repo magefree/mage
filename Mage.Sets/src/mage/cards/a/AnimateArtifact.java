@@ -61,6 +61,8 @@ public final class AnimateArtifact extends CardImpl {
 
 class AnimateArtifactContinuousEffect extends ContinuousEffectImpl {
 
+    private boolean addedCreatureType = false;
+
     AnimateArtifactContinuousEffect(Duration duration) {
         super(duration, Outcome.Benefit);
         staticText = "As long as enchanted artifact isn't a creature, it's an artifact creature with power and toughness each equal to its mana value";
@@ -68,6 +70,7 @@ class AnimateArtifactContinuousEffect extends ContinuousEffectImpl {
 
     private AnimateArtifactContinuousEffect(final AnimateArtifactContinuousEffect effect) {
         super(effect);
+        this.addedCreatureType = effect.addedCreatureType;
     }
 
     @Override
@@ -82,6 +85,7 @@ class AnimateArtifactContinuousEffect extends ContinuousEffectImpl {
             switch (layer) {
                 case TypeChangingEffects_4:
                     permanent.addCardType(game, CardType.CREATURE);
+                    this.addedCreatureType = true;
                     break;
                 case PTChangingEffects_7:
                     if (sublayer != SubLayer.SetPT_7b) {
@@ -89,6 +93,7 @@ class AnimateArtifactContinuousEffect extends ContinuousEffectImpl {
                     }
                     permanent.getPower().setModifiedBaseValue(permanent.getManaValue());
                     permanent.getToughness().setModifiedBaseValue(permanent.getManaValue());
+                    this.addedCreatureType = false;
             }
         }
     }
@@ -100,7 +105,7 @@ class AnimateArtifactContinuousEffect extends ContinuousEffectImpl {
             return false;
         }
         Permanent permanent = game.getPermanent(enchantment.getAttachedTo());
-        if (permanent == null || permanent.isCreature(game)) {
+        if (permanent == null || (permanent.isCreature(game) && !this.addedCreatureType)) {
             return false;
         }
         affectedObjects.add(permanent);

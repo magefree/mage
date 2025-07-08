@@ -4,15 +4,13 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
+import mage.abilities.effects.common.continuous.BecomesXXConstructSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.util.CardUtil;
+import mage.constants.CardType;
+import mage.constants.Duration;
 
 import java.util.UUID;
 
@@ -25,7 +23,7 @@ public final class ChimericCoils extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
         // {X}{1}: Chimeric Coils becomes an X/X Construct artifact creature. Sacrifice it at the beginning of the next end step.
-        Ability ability = new SimpleActivatedAbility(new ChimericCoilsEffect(), new ManaCostsImpl<>("{X}{1}"));
+        Ability ability = new SimpleActivatedAbility(new BecomesXXConstructSourceEffect(Duration.Custom), new ManaCostsImpl<>("{X}{1}"));
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new SacrificeSourceEffect())));
         this.addAbility(ability);
     }
@@ -37,60 +35,5 @@ public final class ChimericCoils extends CardImpl {
     @Override
     public ChimericCoils copy() {
         return new ChimericCoils(this);
-    }
-}
-
-class ChimericCoilsEffect extends ContinuousEffectImpl {
-
-    ChimericCoilsEffect() {
-        super(Duration.Custom, Outcome.BecomeCreature);
-        staticText = "{this} becomes an X/X Construct artifact creature";
-        this.dependencyTypes.add(DependencyType.BecomeCreature);
-    }
-
-    private ChimericCoilsEffect(final ChimericCoilsEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ChimericCoilsEffect copy() {
-        return new ChimericCoilsEffect(this);
-    }
-
-    @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent == null) {
-            return false;
-        }
-        switch (layer) {
-            case TypeChangingEffects_4:
-                if (!permanent.isArtifact(game)) {
-                    permanent.addCardType(game, CardType.ARTIFACT);
-                }
-                if (!permanent.isCreature(game)) {
-                    permanent.addCardType(game, CardType.CREATURE);
-                }
-                permanent.removeAllCreatureTypes(game);
-                permanent.addSubType(game, SubType.CONSTRUCT);
-                break;
-            case PTChangingEffects_7:
-                if (sublayer == SubLayer.SetPT_7b) {
-                    int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
-                    permanent.getPower().setModifiedBaseValue(xValue);
-                    permanent.getToughness().setModifiedBaseValue(xValue);
-                }
-        }
-        return true;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.PTChangingEffects_7 || layer == Layer.TypeChangingEffects_4;
     }
 }

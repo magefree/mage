@@ -9,19 +9,19 @@ import mage.abilities.costs.VariableCostType;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.VariableManaCost;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.common.continuous.BecomesXXConstructSourceEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
-import mage.util.CardUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +49,7 @@ public final class EverythingamajigC extends CardImpl {
 
         // Chimeric Staff
         // X: Everythingamajig becomes an X/X Construct artifact creature until end of turn.
-        this.addAbility(new SimpleActivatedAbility(new ChimericStaffEffect(), new VariableManaCost(VariableCostType.NORMAL)));
+        this.addAbility(new SimpleActivatedAbility(new BecomesXXConstructSourceEffect(Duration.EndOfTurn), new VariableManaCost(VariableCostType.NORMAL)));
     }
 
     private EverythingamajigC(final EverythingamajigC card) {
@@ -122,60 +122,5 @@ class ManaScrewEffect extends ManaEffect {
             }
         }
         return new Mana();
-    }
-}
-
-class ChimericStaffEffect extends ContinuousEffectImpl {
-
-    ChimericStaffEffect() {
-        super(Duration.EndOfTurn, Outcome.BecomeCreature);
-        staticText = "{this} becomes an X/X Construct artifact creature until end of turn";
-        this.dependencyTypes.add(DependencyType.BecomeCreature);
-    }
-
-    private ChimericStaffEffect(final ChimericStaffEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ChimericStaffEffect copy() {
-        return new ChimericStaffEffect(this);
-    }
-
-    @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent == null) {
-            return false;
-        }
-        switch (layer) {
-            case TypeChangingEffects_4:
-                if (!permanent.isArtifact(game)) {
-                    permanent.addCardType(game, CardType.ARTIFACT);
-                }
-                if (!permanent.isCreature(game)) {
-                    permanent.addCardType(game, CardType.CREATURE);
-                }
-                permanent.removeAllCreatureTypes(game);
-                permanent.addSubType(game, SubType.CONSTRUCT);
-                break;
-            case PTChangingEffects_7:
-                if (sublayer == SubLayer.SetPT_7b) {
-                    int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
-                    permanent.getPower().setModifiedBaseValue(xValue);
-                    permanent.getToughness().setModifiedBaseValue(xValue);
-                }
-        }
-        return true;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.PTChangingEffects_7 || layer == Layer.TypeChangingEffects_4;
     }
 }

@@ -1,6 +1,7 @@
 package mage.cards.c;
 
 import mage.MageInt;
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -14,6 +15,7 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -52,7 +54,7 @@ public final class ChirrutImwe extends CardImpl {
 class ChirrutImweEffect extends ContinuousEffectImpl {
 
     public ChirrutImweEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Layer.RulesEffects, SubLayer.NA, Outcome.Benefit);
         staticText = "{this} can block up to two additional creatures";
     }
 
@@ -66,28 +68,21 @@ class ChirrutImweEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent perm = game.getPermanent(source.getSourceId());
-        if (perm != null) {
-            switch (layer) {
-                case RulesEffects:
-                    // maxBlocks = 0 equals to "can block any number of creatures"
-                    if (perm.getMaxBlocks() > 0) {
-                        perm.setMaxBlocks(perm.getMaxBlocks() + 2);
-                    }
-                    break;
-            }
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Permanent permanent = (Permanent) object;
+            permanent.setMaxBlocks(permanent.getMaxBlocks() + 2);
         }
-        return false;
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.RulesEffects;
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        // maxBlocks = 0 equals to "can block any number of creatures"
+        if (permanent == null || permanent.getMaxBlocks() == 0) {
+            return false;
+        }
+        affectedObjects.add(permanent);
+        return true;
     }
 }

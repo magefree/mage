@@ -1,6 +1,6 @@
 package mage.cards.l;
 
-import java.util.UUID;
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -18,6 +18,10 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -71,32 +75,45 @@ class ChangeLandAttachedEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Permanent permanent = (Permanent) object;
+            switch (layer) {
+                case TypeChangingEffects_4:
+                    permanent.removeAllSubTypes(game, SubTypeSet.NonBasicLandType);
+                    break;
+                case AbilityAddingRemovingEffects_6:
+                    permanent.removeAllAbilities(source.getSourceId(), game);
+                    permanent.addAbility(new ColorlessManaAbility(), source.getSourceId(), game);
+                    Ability ability = new AnyColorManaAbility();
+                    ability.addCost(new PayLifeCost(1));
+                    permanent.addAbility(ability, source.getSourceId(), game);
+                    break;
+            }
+        }
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         Permanent enchantment = game.getPermanent(source.getSourceId());
-        if (enchantment == null) {
+        if (enchantment == null || enchantment.getAttachedTo() == null) {
             return false;
         }
         Permanent permanent = game.getPermanent(enchantment.getAttachedTo());
         if (permanent == null) {
-            return true;
+            return false;
         }
-        switch (layer) {
-            case TypeChangingEffects_4:
-                permanent.removeAllSubTypes(game, SubTypeSet.NonBasicLandType);
-                break;
-            case AbilityAddingRemovingEffects_6:
-                permanent.removeAllAbilities(source.getSourceId(), game);
-                permanent.addAbility(new ColorlessManaAbility(), source.getSourceId(), game);
-                Ability ability = new AnyColorManaAbility();
-                ability.addCost(new PayLifeCost(1));
-                permanent.addAbility(ability, source.getSourceId(), game);
-                break;
-        }
+        affectedObjects.add(permanent);
         return true;
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        List<MageItem> affectedObjects = new ArrayList<>();
+        if (queryAffectedObjects(layer, source, game, affectedObjects)) {
+            applyToObjects(layer, sublayer, source, game, affectedObjects);
+            return true;
+        }
         return false;
     }
 
