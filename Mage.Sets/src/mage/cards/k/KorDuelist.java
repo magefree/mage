@@ -1,8 +1,6 @@
 
 package mage.cards.k;
 
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -13,11 +11,13 @@ import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -25,7 +25,7 @@ import mage.game.permanent.Permanent;
  */
 public final class KorDuelist extends CardImpl {
 
-    private static final String ruleText = "As long as Kor Duelist is equipped, it has double strike";
+    private static final String ruleText = "As long as {this} is equipped, it has double strike";
 
     public KorDuelist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

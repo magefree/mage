@@ -32,7 +32,7 @@ public final class FeastOfFlesh extends CardImpl {
         // Feast of Flesh deals X damage to target creature and you gain X life, where X is 1 plus the number of cards named Feast of Flesh in all graveyards.
         IntPlusDynamicValue value = new IntPlusDynamicValue(1, new CardsInAllGraveyardsCount(filter));
         Effect effect1 = new DamageTargetEffect(value);
-        effect1.setText("Feast of Flesh deals X damage to target creature");
+        effect1.setText("{this} deals X damage to target creature");
         Effect effect2 = new GainLifeEffect(value);
         effect2.setText("and you gain X life, where X is 1 plus the number of cards named Feast of Flesh in all graveyards");
         this.getSpellAbility().addEffect(effect1);

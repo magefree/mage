@@ -7,12 +7,10 @@ import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DoWhenCostPaid;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -50,7 +48,7 @@ public class SerumCoreChimera extends CardImpl {
         reflexiveTriggeredAbility.addTarget(new TargetCreatureOrPlaneswalker());
         activateAsSorceryActivatedAbility.addEffect(new DoWhenCostPaid(reflexiveTriggeredAbility,
                 new DiscardCardCost(StaticFilters.FILTER_CARD_A_NON_LAND), "Discard nonland card?")
-                .setText("Then you may discard a nonland card. When you discard a card this way, Serum-Core Chimera " +
+                .setText("Then you may discard a nonland card. When you discard a card this way, {this} " +
                 "deals 3 damage to target creature or planeswalker."));
         this.addAbility(activateAsSorceryActivatedAbility);
     }

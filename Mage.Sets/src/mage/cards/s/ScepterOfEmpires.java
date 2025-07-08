@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -10,10 +9,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetPlayerOrPlaneswalker;
+
+import java.util.UUID;
 
 /**
  * @author nantuko
@@ -43,7 +43,7 @@ class ScepterOfEmpiresEffect extends OneShotEffect {
 
     ScepterOfEmpiresEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "Scepter of Empires deals 1 damage to target player or planeswalker. It deals 3 damage instead if you control artifacts named Crown of Empires and Throne of Empires";
+        staticText = "{this} deals 1 damage to target player or planeswalker. It deals 3 damage instead if you control artifacts named Crown of Empires and Throne of Empires";
     }
 
     private ScepterOfEmpiresEffect(final ScepterOfEmpiresEffect effect) {

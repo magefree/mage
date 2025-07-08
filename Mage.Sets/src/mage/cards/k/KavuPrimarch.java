@@ -1,7 +1,6 @@
 
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.common.KickedCondition;
@@ -13,6 +12,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
+
+import java.util.UUID;
 
 /**
  *
@@ -36,7 +37,7 @@ public final class KavuPrimarch extends CardImpl {
 
         // If Kavu Primarch was kicked, it enters with four +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(4)),KickedCondition.ONCE,
-                "If Kavu Primarch was kicked, it enters with four +1/+1 counters on it.", ""));
+                "If {this} was kicked, it enters with four +1/+1 counters on it.", ""));
     }
 
     private KavuPrimarch(final KavuPrimarch card) {

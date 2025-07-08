@@ -1,14 +1,15 @@
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.InfoEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.InfoEffect;
+
+import java.util.UUID;
 
 /**
  *
@@ -26,10 +27,10 @@ public final class WhispergearSneak extends CardImpl {
 
         // TODO: Draft specific abilities not implemented
         // Draft Whispergear Sneak face up.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("Draft Whispergear Sneak face up - not implemented.")));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("Draft {this} face up - not implemented.")));
 
         // During the draft, you may turn Whispergear Sneak face down. If you do, look at any unopened booster pack in the draft or any booster pack not being looked at by another player.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("During the draft, you may turn Whispergear Sneak face down. If you do, "
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("During the draft, you may turn {this} face down. If you do, "
                 + "look at any unopened booster pack in the draft or any booster pack not being looked at by another player - not implemented.")));
     }
 

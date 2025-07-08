@@ -1,7 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.common.KickedCondition;
@@ -13,6 +12,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
+
+import java.util.UUID;
 
 /**
  *
@@ -31,7 +32,7 @@ public final class PhyrexianScuta extends CardImpl {
         // Kicker-Pay 3 life.
         this.addAbility(new KickerAbility(new PayLifeCost(3)));
         // If Phyrexian Scuta was kicked, it enters with two +1/+1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), KickedCondition.ONCE, "If Phyrexian Scuta was kicked, it enters with two +1/+1 counters on it.", ""));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), KickedCondition.ONCE, "If {this} was kicked, it enters with two +1/+1 counters on it.", ""));
     }
 
     private PhyrexianScuta(final PhyrexianScuta card) {

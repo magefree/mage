@@ -127,7 +127,7 @@ class KingNarfisBetrayalSecondEffect extends OneShotEffect {
 
     public KingNarfisBetrayalSecondEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Until end of turn, you may cast spells from among cards exiled with King Narfi's Betrayal," +
+        this.staticText = "Until end of turn, you may cast spells from among cards exiled with {this}," +
                 " and you may spend mana as though it were mana of any color to cast those spells";
     }
 

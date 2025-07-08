@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -12,6 +11,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -42,7 +43,7 @@ class SmashToSmithereensEffect extends OneShotEffect {
 
     SmashToSmithereensEffect() {
         super(Outcome.Detriment);
-        staticText = "Destroy target artifact. Smash to Smithereens deals 3 damage to that artifact's controller";
+        staticText = "Destroy target artifact. {this} deals 3 damage to that artifact's controller";
     }
 
     private SmashToSmithereensEffect(final SmashToSmithereensEffect effect) {

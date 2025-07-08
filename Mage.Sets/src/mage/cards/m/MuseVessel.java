@@ -45,7 +45,7 @@ public final class MuseVessel extends CardImpl {
         // {1}: Choose a card exiled with Muse Vessel. You may play that card this turn.
         SimpleActivatedAbility playAbility = new SimpleActivatedAbility(new OneShotNonTargetEffect(
                 new AddContinuousEffectToGame(new PlayFromNotOwnHandZoneTargetEffect(Zone.EXILED, Duration.EndOfTurn))
-                        .setText("Choose a card exiled with Muse Vessel. You may play that card this turn."),
+                        .setText("Choose a card exiled with {this}. You may play that card this turn."),
                 new TargetCardInExile(StaticFilters.FILTER_CARD), MuseVesselAdjuster.instance
         ), new ManaCostsImpl<>("{1}"));
         this.addAbility(playAbility);

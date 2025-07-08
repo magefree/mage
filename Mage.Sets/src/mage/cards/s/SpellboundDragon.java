@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -12,13 +11,15 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetDiscard;
+
+import java.util.UUID;
 
 /**
  *
@@ -54,7 +55,7 @@ class SpellboundDragonEffect extends OneShotEffect {
 
     SpellboundDragonEffect() {
         super(Outcome.BoostCreature);
-        staticText = "draw a card, then discard a card. Spellbound Dragon gets +X/+0 until end of turn, where X is the discarded card's mana value";
+        staticText = "draw a card, then discard a card. {this} gets +X/+0 until end of turn, where X is the discarded card's mana value";
     }
 
     private SpellboundDragonEffect(final SpellboundDragonEffect effect) {

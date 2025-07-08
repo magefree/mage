@@ -1,6 +1,5 @@
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -11,18 +10,20 @@ import mage.abilities.effects.common.DoIfAnyNumberCostPaid;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.HasteAbility;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.token.TokenImpl;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -62,7 +63,7 @@ class PrimalAdversaryEffect extends OneShotEffect {
 
     PrimalAdversaryEffect() {
         super(Outcome.Benefit);
-        staticText = "put that many +1/+1 counters on Primal Adversary, " +
+        staticText = "put that many +1/+1 counters on {this}, " +
                 "then up to that many target lands you control become 3/3 Wolf creatures with haste that are still lands";
     }
 

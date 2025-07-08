@@ -1,7 +1,6 @@
 
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalReplacementEffect;
@@ -13,6 +12,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.target.common.TargetAnyTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -31,7 +32,7 @@ public final class OrimsTouch extends CardImpl {
                 new PreventDamageToTargetEffect(Duration.EndOfTurn, 4),
                 new LockedInCondition(KickedCondition.ONCE),
                 new PreventDamageToTargetEffect(Duration.EndOfTurn, 2));
-        effect.setText("Prevent the next 2 damage that would be dealt to any target this turn. If Orim's Touch was kicked, prevent the next 4 damage that would be dealt to that permanent or player this turn instead");
+        effect.setText("Prevent the next 2 damage that would be dealt to any target this turn. If {this} was kicked, prevent the next 4 damage that would be dealt to that permanent or player this turn instead");
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addEffect(effect);
     }

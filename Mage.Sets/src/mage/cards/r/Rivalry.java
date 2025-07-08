@@ -1,7 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -12,8 +11,9 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -87,6 +87,6 @@ class RivalryTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "At the beginning of each player's upkeep, if that player controls more lands than each other player, Rivalry deals 2 damage to them.";
+        return "At the beginning of each player's upkeep, if that player controls more lands than each other player, {this} deals 2 damage to them.";
     }
 }

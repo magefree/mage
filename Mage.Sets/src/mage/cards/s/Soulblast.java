@@ -46,7 +46,7 @@ class SoulblastEffect extends OneShotEffect {
 
     SoulblastEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Soulblast deals damage to any target equal to the total power of the sacrificed creatures";
+        this.staticText = "{this} deals damage to any target equal to the total power of the sacrificed creatures";
     }
 
     private SoulblastEffect(final SoulblastEffect effect) {
