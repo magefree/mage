@@ -97,7 +97,7 @@ class ValkiGodOfLiesRevealExileEffect extends OneShotEffect {
 
     ValkiGodOfLiesRevealExileEffect() {
         super(Outcome.Benefit);
-        staticText = "each opponent reveals their hand. For each opponent, exile a creature card they revealed this way until Valki leaves the battlefield.";
+        staticText = "each opponent reveals their hand. For each opponent, exile a creature card they revealed this way until {this} leaves the battlefield.";
     }
 
     private ValkiGodOfLiesRevealExileEffect(final ValkiGodOfLiesRevealExileEffect effect) {
@@ -147,7 +147,7 @@ class ValkiGodOfLiesCopyExiledEffect extends OneShotEffect {
 
     ValkiGodOfLiesCopyExiledEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Choose a creature card exiled with Valki with mana value X. Valki becomes a copy of that card.";
+        this.staticText = "Choose a creature card exiled with {this} with mana value X. {this} becomes a copy of that card.";
     }
 
     private ValkiGodOfLiesCopyExiledEffect(final ValkiGodOfLiesCopyExiledEffect effect) {

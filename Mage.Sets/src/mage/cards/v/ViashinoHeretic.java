@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -53,7 +52,7 @@ class ViashinoHereticEffect extends OneShotEffect {
 
     public ViashinoHereticEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "Destroy target artifact. Viashino Heretic deals damage to that artifact's controller equal to the artifact's mana value";
+        this.staticText = "Destroy target artifact. {this} deals damage to that artifact's controller equal to the artifact's mana value";
     }
 
     private ViashinoHereticEffect(final ViashinoHereticEffect effect) {
