@@ -89,6 +89,8 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Temporal Intervention", 120, Rarity.COMMON, mage.cards.t.TemporalIntervention.class));
         cards.add(new SetCardInfo("Tezzeret, Cruel Captain", 2, Rarity.MYTHIC, mage.cards.t.TezzeretCruelCaptain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tezzeret, Cruel Captain", 287, Rarity.MYTHIC, mage.cards.t.TezzeretCruelCaptain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Seriema", 323, Rarity.RARE, mage.cards.t.TheSeriema.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Seriema", 35, Rarity.RARE, mage.cards.t.TheSeriema.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thrumming Hivepool", 247, Rarity.RARE, mage.cards.t.ThrummingHivepool.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thrumming Hivepool", 356, Rarity.RARE, mage.cards.t.ThrummingHivepool.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Virulent Silencer", 248, Rarity.UNCOMMON, mage.cards.v.VirulentSilencer.class));
