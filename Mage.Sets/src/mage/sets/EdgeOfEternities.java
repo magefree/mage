@@ -27,7 +27,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Alpharael, Dreaming Acolyte", 212, Rarity.UNCOMMON, mage.cards.a.AlpharaelDreamingAcolyte.class));
         cards.add(new SetCardInfo("Anticausal Vestige", 1, Rarity.RARE, mage.cards.a.AnticausalVestige.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Anticausal Vestige", 317, Rarity.RARE, mage.cards.a.AnticausalVestige.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Anticausal Vestige", 357, Rarity.RARE, mage.cards.a.AnticausalVestige.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Anticausal Vestige", 357, Rarity.MYTHIC, mage.cards.a.AnticausalVestige.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Anticausal Vestige", 383, Rarity.RARE, mage.cards.a.AnticausalVestige.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Banishing Light", 6, Rarity.COMMON, mage.cards.b.BanishingLight.class));
         cards.add(new SetCardInfo("Breeding Pool", 251, Rarity.RARE, mage.cards.b.BreedingPool.class, NON_FULL_USE_VARIOUS));
@@ -46,6 +46,8 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Exalted Sunborn", 358, Rarity.MYTHIC, mage.cards.e.ExaltedSunborn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Exalted Sunborn", 384, Rarity.MYTHIC, mage.cards.e.ExaltedSunborn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 266, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 275, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 276, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 371, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Galactic Wayfarer", 185, Rarity.COMMON, mage.cards.g.GalacticWayfarer.class));
         cards.add(new SetCardInfo("Godless Shrine", 254, Rarity.RARE, mage.cards.g.GodlessShrine.class, NON_FULL_USE_VARIOUS));
@@ -53,15 +55,21 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Godless Shrine", 375, Rarity.RARE, mage.cards.g.GodlessShrine.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Harmonious Grovestrider", 189, Rarity.UNCOMMON, mage.cards.h.HarmoniousGrovestrider.class));
         cards.add(new SetCardInfo("Island", 263, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Island", 269, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 270, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 368, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mechanozoa", 66, Rarity.COMMON, mage.cards.m.Mechanozoa.class));
         cards.add(new SetCardInfo("Mountain", 265, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 273, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 274, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 370, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Nova Hellkite", 148, Rarity.RARE, mage.cards.n.NovaHellkite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nova Hellkite", 309, Rarity.RARE, mage.cards.n.NovaHellkite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ouroboroid", 201, Rarity.MYTHIC, mage.cards.o.Ouroboroid.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ouroboroid", 345, Rarity.MYTHIC, mage.cards.o.Ouroboroid.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 262, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 267, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 268, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 367, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Red Tiger Mechan", 154, Rarity.COMMON, mage.cards.r.RedTigerMechan.class));
         cards.add(new SetCardInfo("Sacred Foundry", 256, Rarity.RARE, mage.cards.s.SacredFoundry.class, NON_FULL_USE_VARIOUS));
@@ -84,6 +92,8 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Sunset Saboteur", 116, Rarity.RARE, mage.cards.s.SunsetSaboteur.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sunset Saboteur", 334, Rarity.RARE, mage.cards.s.SunsetSaboteur.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 264, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 271, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 272, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 369, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Tannuk, Memorial Ensign", 233, Rarity.UNCOMMON, mage.cards.t.TannukMemorialEnsign.class));
         cards.add(new SetCardInfo("Temporal Intervention", 120, Rarity.COMMON, mage.cards.t.TemporalIntervention.class));
