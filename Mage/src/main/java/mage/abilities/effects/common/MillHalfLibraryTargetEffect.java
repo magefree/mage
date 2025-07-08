@@ -7,6 +7,8 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
  * @author TheElk801
  */
@@ -31,12 +33,15 @@ public class MillHalfLibraryTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if (player == null) {
-            return false;
+        for (UUID playerId : getTargetPointer().getTargets(game, source)) {
+            Player player = game.getPlayer(playerId);
+            if (player == null) {
+                return false;
+            }
+            int count = player.getLibrary().size();
+            player.millCards(count / 2 + (roundUp ? count % 2 : 0), source, game);
         }
-        int count = player.getLibrary().size();
-        return player.millCards(count / 2 + (roundUp ? count % 2 : 0), source, game).size() > 0;
+        return true;
     }
 
     @Override
