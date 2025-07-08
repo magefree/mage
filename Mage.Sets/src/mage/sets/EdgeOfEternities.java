@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class EdgeOfEternities extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Anticausal Vestige");
+    private static final List<String> unfinished = Arrays.asList("Anticausal Vestige", "Astelli Reclaimer", "Bygone Colossus", "Eusocial Engineering", "Exalted Sunborn", "Haliya, Guided by Light", "Mechanozoa", "Nova Hellkite", "Quantum Riddler", "Red Tiger Mechan", "Starbreach Whale", "Starfield Shepherd", "Starfield Vocalist", "Timeline Culler", "Weftstalker Ardent");
     private static final EdgeOfEternities instance = new EdgeOfEternities();
 
     public static EdgeOfEternities getInstance() {
@@ -25,14 +25,22 @@ public final class EdgeOfEternities extends ExpansionSet {
         this.rotationSet = true;
 
         cards.add(new SetCardInfo("Alpharael, Dreaming Acolyte", 212, Rarity.UNCOMMON, mage.cards.a.AlpharaelDreamingAcolyte.class));
-        cards.add(new SetCardInfo("Anticausal Vestige", 1, Rarity.RARE, mage.cards.a.AnticausalVestige.class));
-        cards.add(new SetCardInfo("Breeding Pool", 251, Rarity.RARE, mage.cards.b.BreedingPool.class));
+        cards.add(new SetCardInfo("Anticausal Vestige", 1, Rarity.RARE, mage.cards.a.AnticausalVestige.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Anticausal Vestige", 317, Rarity.RARE, mage.cards.a.AnticausalVestige.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Anticausal Vestige", 357, Rarity.RARE, mage.cards.a.AnticausalVestige.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Anticausal Vestige", 383, Rarity.RARE, mage.cards.a.AnticausalVestige.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Banishing Light", 6, Rarity.COMMON, mage.cards.b.BanishingLight.class));
+        cards.add(new SetCardInfo("Breeding Pool", 251, Rarity.RARE, mage.cards.b.BreedingPool.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Breeding Pool", 278, Rarity.RARE, mage.cards.b.BreedingPool.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Breeding Pool", 373, Rarity.RARE, mage.cards.b.BreedingPool.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Command Bridge", 252, Rarity.COMMON, mage.cards.c.CommandBridge.class));
         cards.add(new SetCardInfo("Embrace Oblivion", 98, Rarity.COMMON, mage.cards.e.EmbraceOblivion.class));
         cards.add(new SetCardInfo("Forest", 266, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", 371, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Galactic Wayfarer", 185, Rarity.COMMON, mage.cards.g.GalacticWayfarer.class));
-        cards.add(new SetCardInfo("Godless Shrine", 254, Rarity.RARE, mage.cards.g.GodlessShrine.class));
+        cards.add(new SetCardInfo("Godless Shrine", 254, Rarity.RARE, mage.cards.g.GodlessShrine.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Godless Shrine", 280, Rarity.RARE, mage.cards.g.GodlessShrine.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Godless Shrine", 375, Rarity.RARE, mage.cards.g.GodlessShrine.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Harmonious Grovestrider", 189, Rarity.UNCOMMON, mage.cards.h.HarmoniousGrovestrider.class));
         cards.add(new SetCardInfo("Island", 263, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Island", 368, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
@@ -40,20 +48,26 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 370, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Plains", 262, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Plains", 367, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
-        cards.add(new SetCardInfo("Sacred Foundry", 256, Rarity.RARE, mage.cards.s.SacredFoundry.class));
+        cards.add(new SetCardInfo("Sacred Foundry", 256, Rarity.RARE, mage.cards.s.SacredFoundry.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sacred Foundry", 282, Rarity.RARE, mage.cards.s.SacredFoundry.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sacred Foundry", 377, Rarity.RARE, mage.cards.s.SacredFoundry.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sami, Ship's Engineer", 225, Rarity.UNCOMMON, mage.cards.s.SamiShipsEngineer.class));
         cards.add(new SetCardInfo("Sothera, the Supervoid", 115, Rarity.MYTHIC, mage.cards.s.SotheraTheSupervoid.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sothera, the Supervoid", 360, Rarity.MYTHIC, mage.cards.s.SotheraTheSupervoid.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sothera, the Supervoid", 382, Rarity.MYTHIC, mage.cards.s.SotheraTheSupervoid.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sothera, the Supervoid", 386, Rarity.MYTHIC, mage.cards.s.SotheraTheSupervoid.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Stomping Ground", 258, Rarity.RARE, mage.cards.s.StompingGround.class));
+        cards.add(new SetCardInfo("Stomping Ground", 258, Rarity.RARE, mage.cards.s.StompingGround.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Stomping Ground", 283, Rarity.RARE, mage.cards.s.StompingGround.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Stomping Ground", 378, Rarity.RARE, mage.cards.s.StompingGround.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 264, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 369, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Tannuk, Memorial Ensign", 233, Rarity.UNCOMMON, mage.cards.t.TannukMemorialEnsign.class));
         cards.add(new SetCardInfo("Temporal Intervention", 120, Rarity.COMMON, mage.cards.t.TemporalIntervention.class));
         cards.add(new SetCardInfo("Tezzeret, Cruel Captain", 2, Rarity.MYTHIC, mage.cards.t.TezzeretCruelCaptain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tezzeret, Cruel Captain", 287, Rarity.MYTHIC, mage.cards.t.TezzeretCruelCaptain.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Watery Grave", 261, Rarity.RARE, mage.cards.w.WateryGrave.class));
+        cards.add(new SetCardInfo("Watery Grave", 261, Rarity.RARE, mage.cards.w.WateryGrave.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Watery Grave", 286, Rarity.RARE, mage.cards.w.WateryGrave.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Watery Grave", 381, Rarity.RARE, mage.cards.w.WateryGrave.class, NON_FULL_USE_VARIOUS));
 
         cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName()));
     }
