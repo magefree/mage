@@ -52,6 +52,10 @@ public class StationLevelAbility extends StaticAbility {
                 .map(CardUtil::getTextWithFirstCharUpperCase)
                 .collect(Collectors.joining("<br>"));
     }
+
+    public boolean hasPT() {
+        return this.getEffects().stream().anyMatch(StationLevelCreatureEffect.class::isInstance);
+    }
 }
 
 class StationLevelAbilityEffect extends ContinuousEffectImpl {
