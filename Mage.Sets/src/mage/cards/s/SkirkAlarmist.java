@@ -22,6 +22,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.card.FaceDownPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -52,7 +53,7 @@ public final class SkirkAlarmist extends CardImpl {
         // {tap}: Turn target face-down creature you control face up. At the beginning of the next end step, sacrifice it.
         Ability ability = new SimpleActivatedAbility(new TurnFaceUpTargetEffect(), new TapSourceCost());
         ability.addEffect(new SkirkAlarmistEffect());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

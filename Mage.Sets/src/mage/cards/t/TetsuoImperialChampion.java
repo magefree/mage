@@ -5,11 +5,9 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.condition.common.EquippedSourceCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.common.GreatestAmongPermanentsValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.cost.CastFromHandForFreeEffect;
-import mage.abilities.hint.Hint;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -40,10 +38,9 @@ public final class TetsuoImperialChampion extends CardImpl {
     }
 
     static final GreatestAmongPermanentsValue xValue = new GreatestAmongPermanentsValue(GreatestAmongPermanentsValue.Quality.ManaValue, filterEquipment);
-    private static final Hint hint = xValue.getHint();
     private static final FilterCard filter = new FilterInstantOrSorceryCard(
             "an instant or sorcery spell from your hand with mana value " +
-                    "less than or equal to the highest mana value among Equipment attached to {this}"
+                    "less than or equal to the greatest mana value among Equipment attached to {this}"
     );
 
     static {
@@ -61,19 +58,16 @@ public final class TetsuoImperialChampion extends CardImpl {
 
         // Whenever Tetsuo, Imperial Champion attacks, if it's equipped, choose one --
         // * Tetsuo deals damage equal to the greatest mana value among Equipment attached to it to any target.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new AttacksTriggeredAbility(new DamageTargetEffect(
-                        xValue, "it"
-                ).setText("{this} deals damage equal to the greatest mana value " +
-                        "among Equipment attached to it to any target")
-                ).setTriggerPhrase("Whenever {this} attacks, if it's equipped, "),
-                EquippedSourceCondition.instance, null
-        );
+        Ability ability = new AttacksTriggeredAbility(
+                new DamageTargetEffect(xValue, "it")
+                        .setText("{this} deals damage equal to the greatest mana value " +
+                                "among Equipment attached to it to any target")
+        ).withInterveningIf(EquippedSourceCondition.instance);
         ability.addTarget(new TargetAnyTarget());
 
         // * You may cast an instant or sorcery spell from your hand with mana value less than or equal to the greatest mana value among Equipment attached to Tetsuo without paying its mana cost.
         ability.addMode(new Mode(new CastFromHandForFreeEffect(filter)));
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(xValue.getHint()));
     }
 
     private TetsuoImperialChampion(final TetsuoImperialChampion card) {

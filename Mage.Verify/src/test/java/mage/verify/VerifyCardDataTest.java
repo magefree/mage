@@ -16,6 +16,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
 import mage.abilities.effects.common.FightTargetsEffect;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.counter.ProliferateEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.hint.common.CitysBlessingHint;
@@ -36,6 +37,7 @@ import mage.constants.*;
 import mage.filter.Filter;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
+import mage.game.FakeGame;
 import mage.game.Game;
 import mage.game.command.Dungeon;
 import mage.game.command.Plane;
@@ -83,9 +85,21 @@ public class VerifyCardDataTest {
 
     private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
-    private static final String FULL_ABILITIES_CHECK_SET_CODES = "BLC"; // check ability text due mtgjson, can use multiple sets like MAT;CMD or * for all
-    private static final boolean CHECK_ONLY_ABILITIES_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
+    private static String FULL_ABILITIES_CHECK_SET_CODES = ""; // check ability text due mtgjson, can use multiple sets like MAT;CMD or * for all
+    private static boolean CHECK_ONLY_ABILITIES_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
     private static final boolean CHECK_COPYABLE_FIELDS = true; // disable for better verify test performance
+
+    // for automated local testing support
+    static {
+        String val = System.getProperty("xmage.tests.verifyCheckSetCodes");
+        if (val != null) {
+            FULL_ABILITIES_CHECK_SET_CODES = val;
+        }
+        val = System.getProperty("xmage.tests.verifyCheckOnlyText");
+        if (val != null) {
+            CHECK_ONLY_ABILITIES_TEXT = Boolean.parseBoolean(val);
+        }
+    }
 
     private static final boolean AUTO_FIX_SAMPLE_DECKS = false; // debug only: auto-fix sample decks by test_checkSampleDecks test run
 
@@ -1683,6 +1697,61 @@ public class VerifyCardDataTest {
         }
     }
 
+    @Test
+    @Ignore
+    // experimental test to find potentially fail conditions with NPE see https://github.com/magefree/mage/issues/13752
+    public void test_checkBadConditions() {
+        // all conditions in AsThoughEffect must be compatible with empty source param (e.g. must be able to use inside ConditionalAsThoughEffect)
+        // see AsThoughEffectType.needAffectedAbility ?
+        // 370+ failed conditions
+        Collection<String> errorsList = new ArrayList<>();
+        Game fakeGame = new FakeGame();
+        Ability fakeAbility = new SimpleStaticAbility(new InfoEffect("fake"));
+
+        // TODO: add classes support (see example with tokens and default constructor)?
+        Reflections reflections = new Reflections("mage.");
+        Set<Class<?>> conditionEnums = reflections.getSubTypesOf(Condition.class)
+                .stream()
+                .filter(Class::isEnum)
+                .sorted(Comparator.comparing(Class::toString))
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+        for (Class<?> enumClass : conditionEnums) {
+            for (Object enumItem : enumClass.getEnumConstants()) {
+                // miss watcher will fail in both use cases, but miss ability only one
+                String errorOnAbility = "";
+                try {
+                    ((Condition) enumItem).apply(fakeGame, fakeAbility);
+                } catch (Exception e) {
+                    errorOnAbility = Arrays.stream(e.getStackTrace())
+                            .map(StackTraceElement::toString)
+                            .limit(5)
+                            .collect(Collectors.joining("\n"));
+                }
+
+                String errorOnEmptyAbility = "";
+                try {
+                    ((Condition) enumItem).apply(fakeGame, null);
+                } catch (Exception e) {
+                    errorOnEmptyAbility = Arrays.stream(e.getStackTrace())
+                            .map(StackTraceElement::toString)
+                            .limit(5)
+                            .collect(Collectors.joining("\n"));
+                }
+
+                if (errorOnAbility.isEmpty() && !errorOnEmptyAbility.isEmpty()) {
+                    System.out.println();
+                    System.out.println("bad condition " + enumClass.getName() + "\n" + errorOnEmptyAbility);
+                    errorsList.add("Error: condition must support empty and non-empty source params: " + enumClass.getName());
+                }
+            }
+        }
+
+        printMessages(errorsList);
+        if (!errorsList.isEmpty()) {
+            Assert.fail("Found conditions errors: " + errorsList.size());
+        }
+    }
+
     private void check(Card card, int cardIndex) {
         MtgJsonCard ref = MtgJsonService.cardFromSet(card.getExpansionSetCode(), card.getName(), card.getCardNumber());
         if (ref != null) {
@@ -1986,7 +2055,13 @@ public class VerifyCardDataTest {
         expected.removeIf(subtypesToIgnore::contains);
 
         for (SubType subType : card.getSubtype()) {
-            if (!subType.isCustomSet() && !subType.canGain(card)) {
+            if (subType.isCustomSet()) {
+                if (!ref.isFunny) {
+                    fail(card, "subtypes", "subtype " + subType + " is marked as \"custom\" but is in an official set");
+                }
+                continue;
+            }
+            if (!subType.canGain(card)) {
                 String cardTypeString = card
                         .getCardType()
                         .stream()

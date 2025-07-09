@@ -10,12 +10,16 @@ import mage.game.Game;
  *
  * @author Susucr
  */
-
 public enum SourceInExileCondition implements Condition {
     instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
         return game.getState().getZone(source.getSourceId()) == Zone.EXILED;
+    }
+
+    @Override
+    public String toString() {
+        return "this card is exiled";
     }
 }

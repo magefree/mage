@@ -9,9 +9,11 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ChooseACardNameEffect;
-import mage.abilities.hint.common.MyTurnHint;
 import mage.cards.*;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
@@ -33,11 +35,13 @@ public final class Nebuchadnezzar extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {X}, {T}: Choose a card name. Target opponent reveals X cards at random from their hand. Then that player discards all cards with that name revealed this way. Activate this ability only during your turn.
-        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.ALL), new ManaCostsImpl<>("{X}"), MyTurnCondition.instance);
+        Ability ability = new ActivateIfConditionActivatedAbility(
+                new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.ALL),
+                new ManaCostsImpl<>("{X}"), MyTurnCondition.instance
+        );
         ability.addCost(new TapSourceCost());
         ability.addEffect(new NebuchadnezzarEffect());
         ability.addTarget(new TargetOpponent());
-        ability.addHint(MyTurnHint.instance);
         this.addAbility(ability);
     }
 

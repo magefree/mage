@@ -1,25 +1,27 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.keyword.BushidoAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class SokenzanRenegade extends CardImpl {
@@ -36,12 +38,8 @@ public final class SokenzanRenegade extends CardImpl {
 
         // At the beginning of your upkeep, if a player has more cards in hand than each other player,
         // the player who has the most cards in hand gains control of Sokenzan Renegade.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new SokenzanRenegadeEffect()),
-                OnePlayerHasTheMostCards.instance,
-                "At the beginning of your upkeep, if a player has more cards in hand than each other player, the player who has the most cards in hand gains control of {this}"
-        ));
-
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SokenzanRenegadeEffect())
+                .withInterveningIf(OnePlayerHasTheMostCards.instance));
     }
 
     private SokenzanRenegade(final SokenzanRenegade card) {

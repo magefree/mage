@@ -4,8 +4,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.effects.Effects;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.WhiteManaAbility;
@@ -40,15 +38,10 @@ public final class GatewatchBeacon extends CardImpl {
 
         // Whenever a planeswalker you control enters, if Gatewatch Beacon has loyalty
         // counters on it, you may move a loyalty counter from Gatewatch Beacon onto that planeswalker.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldControlledTriggeredAbility(
-                        Zone.BATTLEFIELD,
-                        new GatewatchBeaconMoveCounterEffect(),
-                        StaticFilters.FILTER_PERMANENT_PLANESWALKER,
-                        true
-                ), GatewatchBeaconCondition.instance, "Whenever a planeswalker you control enters, if {this} has " +
-                "loyalty counters on it, you may move a loyalty counter from {this} onto that planeswalker"
-        ));
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
+                Zone.BATTLEFIELD, new GatewatchBeaconMoveCounterEffect(),
+                StaticFilters.FILTER_PERMANENT_PLANESWALKER, true
+        ).withInterveningIf(GatewatchBeaconCondition.instance));
     }
 
     private GatewatchBeacon(final GatewatchBeacon card) {
@@ -67,15 +60,12 @@ enum GatewatchBeaconCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-        if (permanent == null) {
-            return false;
-        }
-        Effects effects = source.getEffects();
-        if (effects.isEmpty()) {
-            return false;
-        }
+        return permanent != null && permanent.getCounters(game).getCount(CounterType.LOYALTY) > 0;
+    }
 
-        return permanent.getCounters(game).getCount(CounterType.LOYALTY) > 0;
+    @Override
+    public String toString() {
+        return "{this} has loyalty counters on it";
     }
 }
 

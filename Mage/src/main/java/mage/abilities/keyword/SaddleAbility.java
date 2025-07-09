@@ -20,7 +20,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.watchers.common.SaddledMountWatcher;
 
 import java.awt.*;
@@ -128,7 +128,7 @@ class SaddleCost extends CostImpl {
 
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
-        Target target = new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, filter, true) {
+        Target target = new TargetPermanent(0, Integer.MAX_VALUE, filter, true) {
             @Override
             public String getMessage(Game game) {
                 // shows selected power

@@ -1,7 +1,8 @@
 package mage.cards.c;
 
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.Ability;
+import mage.abilities.common.SourceDealsNoncombatDamageToOpponentTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
@@ -10,13 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.DamagedPlayerEvent;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -33,7 +28,9 @@ public final class ChandrasPyreling extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever a source you control deals noncombat damage to an opponent, Chandra's Pyreling gets +1/+0 and gains double strike until end of turn.
-        this.addAbility(new ChandrasPyrelingAbility());
+        Ability ability = new SourceDealsNoncombatDamageToOpponentTriggeredAbility(new BoostSourceEffect(1, 0, Duration.EndOfTurn).setText("this creature gets +1/+0"));
+        ability.addEffect(new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn).setText("and gains double strike until end of turn"));
+        this.addAbility(ability);
     }
 
     private ChandrasPyreling(final ChandrasPyreling card) {
@@ -43,40 +40,5 @@ public final class ChandrasPyreling extends CardImpl {
     @Override
     public ChandrasPyreling copy() {
         return new ChandrasPyreling(this);
-    }
-}
-
-class ChandrasPyrelingAbility extends TriggeredAbilityImpl {
-
-    ChandrasPyrelingAbility() {
-        super(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn));
-        addEffect(new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn));
-    }
-
-    private ChandrasPyrelingAbility(final ChandrasPyrelingAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public ChandrasPyrelingAbility copy() {
-        return new ChandrasPyrelingAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
-        return !damageEvent.isCombatDamage()
-                && game.getOpponents(controllerId).contains(event.getTargetId())
-                && Objects.equals(controllerId, game.getControllerId(event.getSourceId()));
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a source you control deals noncombat damage to an opponent, {this} gets +1/+0 and gains double strike until end of turn.";
     }
 }

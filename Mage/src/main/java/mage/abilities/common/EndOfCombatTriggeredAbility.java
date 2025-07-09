@@ -40,7 +40,7 @@ public class EndOfCombatTriggeredAbility extends AtStepTriggeredAbility {
             case ANY:
                 return "At end of combat, ";
             case YOU:
-                return "At the end of combat on your turn, ";
+                return "At end of combat on your turn, ";
             default:
                 throw new UnsupportedOperationException("Unsupported TargetController in EndOfCombatTriggeredAbility: " + targetController);
         }

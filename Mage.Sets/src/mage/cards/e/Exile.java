@@ -18,6 +18,7 @@ import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -37,7 +38,7 @@ public final class Exile extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");
 
         // Exile target nonwhite attacking creature. 
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new ExileTargetEffect());
         // You gain life equal to its toughness.
         this.getSpellAbility().addEffect(new ExileEffect());

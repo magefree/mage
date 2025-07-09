@@ -1,7 +1,5 @@
-
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -10,36 +8,29 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.other.AnotherTargetPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
  */
 public final class FeralContest extends CardImpl {
 
     public FeralContest(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}");
 
         // Put a +1/+1 counter on target creature you control.
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
-        
-        TargetControlledCreaturePermanent target1 = new TargetControlledCreaturePermanent();
-        target1.setTargetTag(1);
-        this.getSpellAbility().addTarget(target1);
-        
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent().setTargetTag(1));
+
         // Another target creature blocks it this turn if able.
         this.getSpellAbility().addEffect(new FeralContestEffect());
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature (must block this turn)");
-        filter.add(new AnotherTargetPredicate(2));
-        TargetCreaturePermanent target2 = new TargetCreaturePermanent(filter);
-        target2.setTargetTag(2);
-        this.getSpellAbility().addTarget(target2);
+        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_CREATURE_TARGET_2).withChooseHint("to force to block").setTargetTag(2));
     }
 
     private FeralContest(final FeralContest card) {

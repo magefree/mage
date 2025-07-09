@@ -27,7 +27,7 @@ import java.util.UUID;
  */
 public final class CathedralAcolyte extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creature that entered the battlefield this turn");
+    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creature that entered this turn");
 
     static {
         filter.add(CounterAnyPredicate.instance);

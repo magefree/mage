@@ -57,10 +57,10 @@ public final class CaitCageBrawler extends CardImpl {
 
 class CaitCageBrawlerEffect extends OneShotEffect {
 
-    public CaitCageBrawlerEffect() {
+    CaitCageBrawlerEffect() {
         super(Outcome.Benefit);
         this.staticText = "you and defending player each draw a card, then discard a card. Put two +1/+1 counters on " +
-                "{this} if you discarded the card with the highest mana value among those cards or tied for highest.";
+                "{this} if you discarded the card with the greatest mana value among those cards or tied for greatest";
     }
 
     protected CaitCageBrawlerEffect(final CaitCageBrawlerEffect effect) {

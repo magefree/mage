@@ -20,6 +20,7 @@ public class TaigamMasterOpportunistTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
 
         addCard(Zone.BATTLEFIELD, playerA, TAIGAM);
+        addCard(Zone.BATTLEFIELD, playerA, "Yawgmoth's Bargain"); // Can shuffle to the top of the library, prevent drawing it
         addCard(Zone.HAND, playerA, ORNITHOPTER);
         addCard(Zone.HAND, playerA, TWINMAW);
         addCard(Zone.BATTLEFIELD, playerA, "Plateau", 6);

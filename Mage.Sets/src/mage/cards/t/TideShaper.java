@@ -9,7 +9,6 @@ import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.continuous.BecomesBasicLandTargetEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.hint.ConditionHint;
@@ -18,7 +17,6 @@ import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -54,11 +52,7 @@ public final class TideShaper extends CardImpl {
         this.addAbility(new KickerAbility("{1}"));
 
         // When Tide Shaper enters the battlefield, if it was kicked, target land becomes an Island for as long as Tide Shaper remains on the battlefield.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new TideShaperEffect()),
-                KickedCondition.ONCE, "When {this} enters, if it was kicked, " +
-                "target land becomes an Island for as long as {this} remains on the battlefield."
-        );
+        Ability ability = new EntersBattlefieldTriggeredAbility(new TideShaperEffect()).withInterveningIf(KickedCondition.ONCE);
         ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);
 
@@ -83,6 +77,7 @@ class TideShaperEffect extends BecomesBasicLandTargetEffect {
 
     TideShaperEffect() {
         super(Duration.Custom, false, true, SubType.ISLAND);
+        staticText = "target land becomes an Island for as long as {this} remains on the battlefield";
     }
 
     private TideShaperEffect(final TideShaperEffect effect) {
@@ -101,6 +96,7 @@ class TideShaperEffect extends BecomesBasicLandTargetEffect {
             discard();
         }
     }
+
     @Override
     public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         if (source.getSourcePermanentIfItStillExists(game) == null) {

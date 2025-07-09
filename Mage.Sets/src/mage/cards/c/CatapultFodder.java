@@ -1,25 +1,42 @@
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.TransformSourceEffect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.TransformAbility;
-import mage.constants.SubType;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.constants.ComparisonType;
+import mage.constants.SubType;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.ToughnessGreaterThanPowerPredicate;
+
+import java.util.UUID;
 
 /**
- *
  * @author weirddan455
  */
 public final class CatapultFodder extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent(
+            "you control three or more creatures that each have toughness greater than their power"
+    );
+
+    static {
+        filter.add(ToughnessGreaterThanPowerPredicate.instance);
+    }
+
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 2);
+    private static final Hint hint = new ValueHint(
+            "Creatures you control with toughness greater than their power", new PermanentsOnBattlefieldCount(filter)
+    );
 
     public CatapultFodder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
@@ -31,11 +48,7 @@ public final class CatapultFodder extends CardImpl {
 
         // At the beginning of combat on your turn, if you control three or more creatures that each have toughness greater than their power, transform Catapult Fodder.
         this.addAbility(new TransformAbility());
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfCombatTriggeredAbility(new TransformSourceEffect()),
-                CatapultFodderCondition.instance,
-                "At the beginning of combat on your turn, if you control three or more creatures that each have toughness greater than their power, transform {this}"
-        ));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(new TransformSourceEffect()).withInterveningIf(condition));
     }
 
     private CatapultFodder(final CatapultFodder card) {
@@ -45,28 +58,5 @@ public final class CatapultFodder extends CardImpl {
     @Override
     public CatapultFodder copy() {
         return new CatapultFodder(this);
-    }
-}
-
-enum CatapultFodderCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        int creatures = 0;
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(source.getControllerId())) {
-            if (permanent.isCreature(game) && permanent.getToughness().getValue() > permanent.getPower().getValue()) {
-                creatures++;
-                if (creatures >= 3) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String toString() {
-        return "you control three or more creatures that each have toughness greater than their power";
     }
 }

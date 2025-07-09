@@ -1,6 +1,5 @@
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -9,13 +8,13 @@ import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoWhenCostPaid;
-import mage.cards.Card;
-import mage.constants.Outcome;
-import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
@@ -24,6 +23,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -54,7 +55,7 @@ public final class ResplendentMarshal extends CardImpl {
         this.addAbility(new EntersBattlefieldOrDiesSourceTriggeredAbility(
                 new DoWhenCostPaid(
                         new ReflexiveTriggeredAbility(new ResplendentMarshalEffect(), false,
-                                "put a +1/+1 counter on each creature you control other than Resplendent Marshal that shares a creature type with the exiled card"),
+                                "put a +1/+1 counter on each creature you control other than {this} that shares a creature type with the exiled card"),
                         new ExileFromGraveCost(new TargetCardInYourGraveyard(filter), true),
                         "Exile another creature card from your graveyard?"
                 ), false

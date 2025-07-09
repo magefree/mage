@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -13,7 +12,10 @@ import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffec
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -36,10 +38,7 @@ public final class ScourgeOfTheSkyclaves extends CardImpl {
         this.addAbility(new KickerAbility("{4}{B}"));
 
         // When you cast this spell, if it was kicked, each player loses half their life, rounded up.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new CastSourceTriggeredAbility(new ScourgeOfTheSkyclavesEffect()), KickedCondition.ONCE,
-                "When you cast this spell, if it was kicked, each player loses half their life, rounded up."
-        ));
+        this.addAbility(new CastSourceTriggeredAbility(new ScourgeOfTheSkyclavesEffect()).withInterveningIf(KickedCondition.ONCE));
 
         // Scourge of the Skyclaves's power and toughness are each equal to 20 minus the highest life total among players.
         this.addAbility(new SimpleStaticAbility(
@@ -89,6 +88,7 @@ class ScourgeOfTheSkyclavesEffect extends OneShotEffect {
 
     ScourgeOfTheSkyclavesEffect() {
         super(Outcome.Benefit);
+        staticText = "each player loses half their life, rounded up";
     }
 
     private ScourgeOfTheSkyclavesEffect(final ScourgeOfTheSkyclavesEffect effect) {

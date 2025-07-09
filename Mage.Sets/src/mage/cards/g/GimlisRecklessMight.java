@@ -1,30 +1,31 @@
 package mage.cards.g;
 
-import mage.abilities.TriggeredAbility;
+import mage.abilities.Ability;
 import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.FormidableCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.AbilityWord;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.TargetController;
+import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterAttackingCreature;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
 /**
- *
  * @author notgreat
  */
 public final class GimlisRecklessMight extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterAttackingCreature("attacking creature you control");
+    private static final FilterPermanent filter = new FilterAttackingCreature("attacking creature you control");
 
     static {
         filter.add(TargetController.YOU.getControllerPredicate());
@@ -35,14 +36,15 @@ public final class GimlisRecklessMight extends CardImpl {
 
         // Creatures you control have haste.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
-                HasteAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES)));
+                HasteAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES
+        )));
+
         // Formidable -- Whenever you attack, if creatures you control have total power 8 or greater, target attacking creature you control fights up to one target creature you don't control.
-        TriggeredAbility ability = new AttacksWithCreaturesTriggeredAbility(new FightTargetsEffect(),1);
+        Ability ability = new AttacksWithCreaturesTriggeredAbility(new FightTargetsEffect(), 1)
+                .withInterveningIf(FormidableCondition.instance);
         ability.addTarget(new TargetPermanent(filter));
         ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
-        ability.setAbilityWord(AbilityWord.FORMIDABLE);
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, FormidableCondition.instance,
-                "<i>Formidable</i> &mdash; Whenever you attack, if creatures you control have total power 8 or greater, target attacking creature you control fights up to one target creature you don't control."));
+        this.addAbility(ability.setAbilityWord(AbilityWord.FORMIDABLE));
     }
 
     private GimlisRecklessMight(final GimlisRecklessMight card) {

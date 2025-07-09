@@ -1,29 +1,25 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
-import mage.abilities.condition.IntCompareCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.PartnerWithAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ComparisonType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.token.WarriorToken;
-import mage.players.Player;
 import mage.watchers.common.PlayerGainedLifeWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class RegnaTheRedeemer extends CardImpl {
@@ -43,15 +39,9 @@ public final class RegnaTheRedeemer extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // At the beginning of each end step, if your team gained life this turn, create two 1/1 white Warrior creature tokens.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfEndStepTriggeredAbility(
-                        TargetController.ANY, new CreateTokenEffect(new WarriorToken(), 2),
-                        false
-                ),
-                new RegnaTheRedeemerCondition(),
-                "At the beginning of each end step, "
-                + "if your team gained life this turn, "
-                + "create two 1/1 white Warrior creature tokens"
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(
+                TargetController.ANY, new CreateTokenEffect(new WarriorToken(), 2),
+                false, RegnaTheRedeemerCondition.instance
         ), new PlayerGainedLifeWatcher());
     }
 
@@ -65,27 +55,20 @@ public final class RegnaTheRedeemer extends CardImpl {
     }
 }
 
-class RegnaTheRedeemerCondition extends IntCompareCondition {
+enum RegnaTheRedeemerCondition implements Condition {
+    instance;
 
-    public RegnaTheRedeemerCondition() {
-        super(ComparisonType.MORE_THAN, 0);
+    @Override
+    public boolean apply(Game game, Ability source) {
+        // TODO: if teammates are ever implemented this will need to be refactored
+        return game
+                .getState()
+                .getWatcher(PlayerGainedLifeWatcher.class)
+                .getLifeGained(source.getControllerId()) > 0;
     }
 
     @Override
-    protected int getInputValue(Game game, Ability source) {
-        int gainedLife = 0;
-        PlayerGainedLifeWatcher watcher = game.getState().getWatcher(PlayerGainedLifeWatcher.class);
-        if (watcher != null) {
-            for (UUID playerId : game.getPlayerList()) {
-                Player player = game.getPlayer(playerId);
-                if (player != null && !player.hasOpponent(source.getControllerId(), game)) {
-                    gainedLife = watcher.getLifeGained(playerId);
-                    if (gainedLife > 0) {
-                        break;
-                    }
-                }
-            }
-        }
-        return gainedLife;
+    public String toString() {
+        return "your team gained life this turn";
     }
 }

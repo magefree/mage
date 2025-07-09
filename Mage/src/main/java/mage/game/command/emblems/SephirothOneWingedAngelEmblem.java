@@ -2,7 +2,7 @@ package mage.game.command.emblems;
 
 import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
-import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
@@ -21,7 +21,7 @@ public final class SephirothOneWingedAngelEmblem extends Emblem {
                 Zone.COMMAND, new LoseLifeTargetEffect(1), false,
                 StaticFilters.FILTER_PERMANENT_A_CREATURE, false
         );
-        ability.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
+        ability.addEffect(new GainLifeEffect(1).concatBy("and"));
         ability.addTarget(new TargetOpponent());
         this.getAbilities().add(ability);
     }

@@ -41,6 +41,7 @@ public class MeldEffect extends OneShotEffect {
         this.meldWithName = meldWithName;
         this.meldIntoName = meldIntoName;
         this.attacking = attacking;
+        this.staticText = "exile them, then meld them into " + meldIntoName;
     }
 
     protected MeldEffect(final MeldEffect effect) {

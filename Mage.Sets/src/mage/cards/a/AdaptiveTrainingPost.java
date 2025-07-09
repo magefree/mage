@@ -31,7 +31,7 @@ public final class AdaptiveTrainingPost extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.CHARGE.createInstance()),
                 StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, false
-        ).withInterveningIf(condition));
+        ).withInterveningIf(condition).withRuleTextReplacement(true));
 
         // Remove three charge counters from this artifact: When you next cast an instant or sorcery spell this turn, copy it and you may choose new targets for the copy.
         this.addAbility(new SimpleActivatedAbility(

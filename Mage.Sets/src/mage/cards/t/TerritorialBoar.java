@@ -2,7 +2,7 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.VigilanceAbility;
@@ -13,7 +13,7 @@ import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 
 import java.util.UUID;
@@ -24,7 +24,7 @@ import java.util.UUID;
 public final class TerritorialBoar extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterCreaturePermanent("a creature with power 4 or greater");
+            = new FilterControlledCreaturePermanent("a creature you control with power 4 or greater");
 
     static {
         filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 3));
@@ -38,7 +38,7 @@ public final class TerritorialBoar extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever a creature with power 4 or greater you control enters, Territorial Boar gets +1/+1 and gains vigilance until end of turn.
-        Ability ability = new EntersBattlefieldControlledTriggeredAbility(new BoostSourceEffect(
+        Ability ability = new EntersBattlefieldAllTriggeredAbility(new BoostSourceEffect(
                 1, 1, Duration.EndOfTurn
         ).setText("{this} gets +1/+1"), filter);
         ability.addEffect(new GainAbilitySourceEffect(

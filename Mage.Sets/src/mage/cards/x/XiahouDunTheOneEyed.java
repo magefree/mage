@@ -44,7 +44,7 @@ public final class XiahouDunTheOneEyed extends CardImpl {
         this.addAbility(HorsemanshipAbility.getInstance());
 
         // Sacrifice Xiahou Dun, the One-Eyed: Return target black card from your graveyard to your hand. Activate this ability only during your turn, before attackers are declared.
-        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new ActivateIfConditionActivatedAbility(
                 new ReturnFromGraveyardToHandTargetEffect(), new SacrificeSourceCost(), MyTurnBeforeAttackersDeclaredCondition.instance);
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);

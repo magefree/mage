@@ -16,6 +16,7 @@ import mage.game.permanent.PermanentToken;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetCard;
+import mage.util.FuzzyTestsUtil;
 
 import java.util.*;
 
@@ -416,6 +417,9 @@ public final class ZonesHandler {
                             && card.removeFromZone(game, fromZone, source)) {
                         success = true;
                         event.setTarget(permanent);
+
+                        // tests only: inject fuzzy data with random phased out permanents
+                        FuzzyTestsUtil.addRandomPhasedOutPermanent(permanent, source, game);
                     } else {
                         // revert controller to owner if permanent does not enter
                         game.getContinuousEffects().setController(permanent.getId(), permanent.getOwnerId());

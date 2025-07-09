@@ -1,31 +1,30 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.card.OwnerIdPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetCardInGraveyard;
+import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetOpponent;
+import mage.target.targetadjustment.TargetAdjuster;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class MausoleumTurnkey extends CardImpl {
+
+    private static final FilterCreatureCard filter = new FilterCreatureCard("creature card of an opponent's choice");
 
     public MausoleumTurnkey(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
@@ -36,8 +35,10 @@ public final class MausoleumTurnkey extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Mausoleum Turnkey enters the battlefield, return target creature card of an opponent's choice from your graveyard to your hand.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new MausoleumTurnkeyEffect(), false));
-
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect());
+        ability.addTarget(new TargetCardInYourGraveyard(filter));
+        ability.setTargetAdjuster(MausoleumTurnkeyAdjuster.instance);
+        this.addAbility(ability);
     }
 
     private MausoleumTurnkey(final MausoleumTurnkey card) {
@@ -50,50 +51,27 @@ public final class MausoleumTurnkey extends CardImpl {
     }
 }
 
-class MausoleumTurnkeyEffect extends OneShotEffect {
-
-    MausoleumTurnkeyEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "return target creature card of an opponent's choice from your graveyard to your hand";
-    }
-
-    private MausoleumTurnkeyEffect(final MausoleumTurnkeyEffect effect) {
-        super(effect);
-    }
+// Exact copy of KarplusanMinotaurAdjuster
+enum MausoleumTurnkeyAdjuster implements TargetAdjuster {
+    instance;
 
     @Override
-    public MausoleumTurnkeyEffect copy() {
-        return new MausoleumTurnkeyEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            UUID opponentId = null;
-            if (game.getOpponents(controller.getId()).size() > 1) {
-                Target target = new TargetOpponent(true);
-                if (controller.chooseTarget(outcome, target, source, game)) {
-                    opponentId = target.getFirstTarget();
-                }
-            } else {
-                opponentId = game.getOpponents(controller.getId()).iterator().next();
-            }
-            if (opponentId != null) {
-                Player opponent = game.getPlayer(opponentId);
-                if (opponent != null) {
-                    FilterCreatureCard filter = new FilterCreatureCard("creature card from " + controller.getLogName() + " graveyard");
-                    filter.add(new OwnerIdPredicate(controller.getId()));
-                    Target target = new TargetCardInGraveyard(filter);
-                    opponent.chooseTarget(outcome, target, source, game);
-                    Card card = game.getCard(target.getFirstTarget());
-                    if (card != null) {
-                        controller.moveCards(card, Zone.HAND, source, game);
-                    }
-                }
-            }
-            return true;
+    public void adjustTargets(Ability ability, Game game) {
+        Player controller = game.getPlayer(ability.getControllerId());
+        if (controller == null) {
+            return;
         }
-        return false;
+        UUID opponentId = null;
+        if (game.getOpponents(controller.getId()).size() > 1) {
+            Target target = new TargetOpponent(true);
+            if (controller.chooseTarget(Outcome.Neutral, target, ability, game)) {
+                opponentId = target.getFirstTarget();
+            }
+        } else {
+            opponentId = game.getOpponents(controller.getId()).iterator().next();
+        }
+        if (opponentId != null) {
+            ability.getTargets().get(0).setTargetController(opponentId);
+        }
     }
 }

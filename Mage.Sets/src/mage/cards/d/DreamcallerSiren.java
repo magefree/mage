@@ -1,13 +1,12 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbility;
+import mage.abilities.Ability;
 import mage.abilities.common.CanBlockOnlyFlyingAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -15,24 +14,25 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.common.TargetNonlandPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class DreamcallerSiren extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another Pirate");
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.PIRATE, "you control another Pirate");
 
     static {
-        filter.add(SubType.PIRATE.getPredicate());
         filter.add(AnotherPredicate.instance);
-        filter.add(TargetController.YOU.getControllerPredicate());
     }
+
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
 
     public DreamcallerSiren(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
@@ -52,11 +52,9 @@ public final class DreamcallerSiren extends CardImpl {
         this.addAbility(new CanBlockOnlyFlyingAbility());
 
         // When Dreamcaller Siren enters the battlefield, if you control another Pirate, tap up to two nonland permanents.
-        TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new TapTargetEffect());
+        Ability ability = new EntersBattlefieldTriggeredAbility(new TapTargetEffect()).withInterveningIf(condition);
         ability.addTarget(new TargetNonlandPermanent(0, 2, false));
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability,
-                new PermanentsOnTheBattlefieldCondition(filter),
-                "when {this} enters, if you control another Pirate, tap up to two target nonland permanents."));
+        this.addAbility(ability);
     }
 
     private DreamcallerSiren(final DreamcallerSiren card) {

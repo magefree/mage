@@ -1,7 +1,5 @@
-
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
@@ -12,17 +10,18 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class NorwoodPriestess extends CardImpl {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("a green creature card");
+    private static final FilterCard filter = new FilterCreatureCard("a green creature card");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.GREEN));
@@ -37,10 +36,8 @@ public final class NorwoodPriestess extends CardImpl {
 
         // {tap}: You may put a green creature card from your hand onto the battlefield. Activate this ability only during your turn, before attackers are declared.
         this.addAbility(new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD,
                 new PutCardFromHandOntoBattlefieldEffect(filter),
-                new TapSourceCost(),
-                MyTurnBeforeAttackersDeclaredCondition.instance
+                new TapSourceCost(), MyTurnBeforeAttackersDeclaredCondition.instance
         ));
     }
 

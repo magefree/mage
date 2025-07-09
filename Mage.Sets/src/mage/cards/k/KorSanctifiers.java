@@ -1,10 +1,9 @@
-
 package mage.cards.k;
 
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
@@ -17,13 +16,12 @@ import mage.target.TargetPermanent;
 import java.util.UUID;
 
 /**
- *
  * @author Loki
  */
 public final class KorSanctifiers extends CardImpl {
 
-    public KorSanctifiers (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
+    public KorSanctifiers(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.subtype.add(SubType.KOR);
         this.subtype.add(SubType.CLERIC);
 
@@ -34,9 +32,9 @@ public final class KorSanctifiers extends CardImpl {
         this.addAbility(new KickerAbility("{W}"));
 
         // When Kor Sanctifiers enters the battlefield, if it was kicked, destroy target artifact or enchantment.
-        EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect()).withInterveningIf(KickedCondition.ONCE);
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, KickedCondition.ONCE, "When {this} enters, if it was kicked, destroy target artifact or enchantment."));
+        this.addAbility(ability);
     }
 
     private KorSanctifiers(final KorSanctifiers card) {

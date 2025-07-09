@@ -297,7 +297,7 @@ public class HumanPlayer extends PlayerImpl {
                 return;
             }
             if (logger.isDebugEnabled()) {
-                logger.debug("Setting game priority for " + getId() + " [" + DebugUtil.getMethodNameWithSource(1) + ']');
+                logger.debug("Setting game priority for " + getId() + " [" + DebugUtil.getMethodNameWithSource(1, "method") + ']');
             }
             game.getState().setPriorityPlayerId(getId());
         }
@@ -328,7 +328,7 @@ public class HumanPlayer extends PlayerImpl {
         while (loop) {
             // start waiting for next answer
             response.clear();
-            response.setActiveAction(game, DebugUtil.getMethodNameWithSource(1));
+            response.setActiveAction(game, DebugUtil.getMethodNameWithSource(1, "method"));
             game.resumeTimer(getTurnControlledBy());
             responseOpenedForAnswer = true;
 
@@ -690,12 +690,8 @@ public class HumanPlayer extends PlayerImpl {
             return false;
         }
 
-        // choose one or multiple permanents
-        UUID abilityControllerId = playerId;
-        if (target.getTargetController() != null
-                && target.getAbilityController() != null) {
-            abilityControllerId = target.getAbilityController();
-        }
+        // choose one or multiple targets
+        UUID abilityControllerId = target.getAffectedAbilityControllerId(this.getId());
         if (options == null) {
             options = new HashMap<>();
         }
@@ -782,11 +778,7 @@ public class HumanPlayer extends PlayerImpl {
         }
 
         // choose one or multiple targets
-        UUID abilityControllerId = playerId;
-        if (target.getAbilityController() != null) {
-            abilityControllerId = target.getAbilityController();
-        }
-
+        UUID abilityControllerId = target.getAffectedAbilityControllerId(this.getId());
         Map<String, Serializable> options = new HashMap<>();
 
         while (canRespond()) {
@@ -869,13 +861,7 @@ public class HumanPlayer extends PlayerImpl {
             return false;
         }
 
-        UUID abilityControllerId;
-        if (target.getTargetController() != null
-                && target.getAbilityController() != null) {
-            abilityControllerId = target.getAbilityController();
-        } else {
-            abilityControllerId = playerId;
-        }
+        UUID abilityControllerId = target.getAffectedAbilityControllerId(this.getId());
 
         while (canRespond()) {
 
@@ -966,13 +952,7 @@ public class HumanPlayer extends PlayerImpl {
             return false;
         }
 
-        UUID abilityControllerId;
-        if (target.getTargetController() != null
-                && target.getAbilityController() != null) {
-            abilityControllerId = target.getAbilityController();
-        } else {
-            abilityControllerId = playerId;
-        }
+        UUID abilityControllerId = target.getAffectedAbilityControllerId(this.getId());
 
         while (canRespond()) {
             boolean required = target.isRequiredExplicitlySet() ? target.isRequired() : target.isRequired(source);
@@ -1042,14 +1022,20 @@ public class HumanPlayer extends PlayerImpl {
             return false;
         }
 
+        // nothing to choose
+        target.prepareAmount(source, game);
+        if (target.getAmountRemaining() <= 0) {
+            return false;
+        }
+        if (target.getMaxNumberOfTargets() == 0 && target.getMinNumberOfTargets() == 0) {
+            return false;
+        }
+
         if (source == null) {
             return false;
         }
 
-        UUID abilityControllerId = playerId;
-        if (target.getAbilityController() != null) {
-            abilityControllerId = target.getAbilityController();
-        }
+        UUID abilityControllerId = target.getAffectedAbilityControllerId(this.getId());
 
         int amountTotal = target.getAmountTotal(game, source);
         if (amountTotal == 0) {

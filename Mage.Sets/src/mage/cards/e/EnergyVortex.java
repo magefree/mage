@@ -15,7 +15,9 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -49,12 +51,11 @@ public final class EnergyVortex extends CardImpl {
 
         // {X}: Put X vortex counters on Energy Vortex. Activate this ability only during your upkeep.
         this.addAbility(new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD,
                 new AddCountersSourceEffect(
                         CounterType.VORTEX.createInstance(),
                         GetXValue.instance, true
                 ), new ManaCostsImpl<>("{X}"),
-                new IsStepCondition(PhaseStep.UPKEEP)
+                IsStepCondition.getMyUpkeep()
         ));
     }
 

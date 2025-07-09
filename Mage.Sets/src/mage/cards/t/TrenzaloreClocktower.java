@@ -8,7 +8,7 @@ import mage.abilities.costs.common.ExileSourceCost;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -47,7 +47,7 @@ public final class TrenzaloreClocktower extends CardImpl {
         // {1}{U}, {T}, Remove twelve time counters from Trenzalore Clocktower and exile it:
         // Shuffle your graveyard and hand into your library, then draw seven cards.
         // Activate only if you control a Time Lord.
-        Ability wheelAbility = new ConditionalActivatedAbility(
+        Ability wheelAbility = new ActivateIfConditionActivatedAbility(
                 new TrenzaloreClocktowerEffect(),
                 new ManaCostsImpl<>("{1}{U}"),
                 new PermanentsOnTheBattlefieldCondition(filter));

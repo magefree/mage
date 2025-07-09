@@ -55,7 +55,7 @@ class ThranWeaponryEffect extends BoostAllEffect{
 
     public ThranWeaponryEffect() {
         super(2, 2, Duration.WhileOnBattlefield);
-        staticText = "All creatures get +2/+2 for as long as Thran Weaponry remains tapped";
+        staticText = "All creatures get +2/+2 for as long as {this} remains tapped";
     }
 
     private ThranWeaponryEffect(final ThranWeaponryEffect effect) {

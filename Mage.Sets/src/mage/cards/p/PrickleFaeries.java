@@ -1,30 +1,23 @@
 package mage.cards.p;
 
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.condition.common.CardsInHandCondition;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
+import mage.constants.*;
 
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
 import java.util.UUID;
 
 /**
  * @author TheElk801
  */
 public final class PrickleFaeries extends CardImpl {
+
+    private static final Condition condition = new CardsInHandCondition(ComparisonType.FEWER_THAN, 3, TargetController.ACTIVE);
 
     public PrickleFaeries(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
@@ -39,13 +32,10 @@ public final class PrickleFaeries extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // At the beginning of each opponent's upkeep, if that player has two or fewer cards in hand, Prickle Faeries deals 2 damage to them.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(
-                        Zone.BATTLEFIELD, TargetController.OPPONENT, new DamageTargetEffect(2),
-                        false
-                ), PrickleFaeriesCondition.instance, "At the beginning of each opponent's upkeep, " +
-                "if that player has two or fewer cards in hand, {this} deals 2 damage to them."
-        ));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
+                Zone.BATTLEFIELD, TargetController.OPPONENT,
+                new DamageTargetEffect(2, true, "them"), false
+        ).withInterveningIf(condition));
     }
 
     private PrickleFaeries(final PrickleFaeries card) {
@@ -55,20 +45,5 @@ public final class PrickleFaeries extends CardImpl {
     @Override
     public PrickleFaeries copy() {
         return new PrickleFaeries(this);
-    }
-}
-
-enum PrickleFaeriesCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return Optional
-                .ofNullable(game.getActivePlayerId())
-                .map(game::getPlayer)
-                .filter(Objects::nonNull)
-                .map(Player::getHand)
-                .map(Set::size)
-                .orElse(0) <= 2;
     }
 }

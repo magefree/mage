@@ -5,7 +5,6 @@ import mage.abilities.ActivatedAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CastFromEverywhereSourceCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.Card;
@@ -37,11 +36,8 @@ public final class TerritoryForge extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}{R}");
 
         // When Territory Forge enters the battlefield, if you cast it, exile target artifact or land.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new ExileTargetEffect().setToSourceExileZone(true)),
-                CastFromEverywhereSourceCondition.instance,
-                "When {this} enters, if you cast it, exile target artifact or land."
-        );
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileTargetEffect().setToSourceExileZone(true))
+                .withInterveningIf(CastFromEverywhereSourceCondition.instance);
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
@@ -89,7 +85,7 @@ class TerritoryForgeStaticEffect extends ContinuousEffectImpl {
         }
         for (Card card : exileZone.getCards(game)) {
             for (Ability ability : card.getAbilities(game)) {
-                if (ability.isActivatedAbility()){
+                if (ability.isActivatedAbility()) {
                     ActivatedAbility copyAbility = (ActivatedAbility) ability.copy();
                     permanent.addAbility(copyAbility, source.getSourceId(), game, true);
                 }

@@ -15,6 +15,7 @@ import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -39,7 +40,7 @@ public final class CrashLanding extends CardImpl {
         this.getSpellAbility().addEffect(new LoseAbilityTargetEffect(
                 FlyingAbility.getInstance(), Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new DamageTargetEffect(amount).setText("{this} deals damage to that creature equal to the number of Forests you control"));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter2));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter2));
     }
 
     private CrashLanding(final CrashLanding card) {

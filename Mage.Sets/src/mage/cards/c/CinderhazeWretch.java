@@ -14,7 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.target.TargetPlayer;
 
@@ -34,14 +33,16 @@ public final class CinderhazeWretch extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {T}: Target player discards a card. Activate this ability only during your turn.
-        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(1), new TapSourceCost(), MyTurnCondition.instance);
-        ability.addHint(MyTurnHint.instance);
+        Ability ability = new ActivateIfConditionActivatedAbility(
+                new DiscardTargetEffect(1), new TapSourceCost(), MyTurnCondition.instance
+        );
         ability.addTarget(new TargetPlayer());
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(MyTurnHint.instance));
 
         // Put a -1/-1 counter on Cinderhaze Wretch: Untap Cinderhaze Wretch.
-        this.addAbility(new SimpleActivatedAbility(new UntapSourceEffect(), new PutCountersSourceCost(CounterType.M1M1.createInstance(1))));
-
+        this.addAbility(new SimpleActivatedAbility(
+                new UntapSourceEffect(), new PutCountersSourceCost(CounterType.M1M1.createInstance(1))
+        ));
     }
 
     private CinderhazeWretch(final CinderhazeWretch card) {

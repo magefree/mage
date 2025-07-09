@@ -10,6 +10,7 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetEnchantmentPermanent;
 
@@ -31,7 +32,7 @@ public final class DestroyEvil extends CardImpl {
         // Choose one--
         // * Destroy target creature with toughness 4 or greater.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
 
         // * Destroy target enchantment.
         Mode mode = new Mode(new DestroyTargetEffect());

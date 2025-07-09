@@ -1,12 +1,10 @@
 package mage.cards.n;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
@@ -28,11 +26,10 @@ import java.util.UUID;
  */
 public final class NogiDracoZealot extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledPermanent();
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.DRAGON, "you control three or more Dragons");
     private static final FilterCard filter2 = new FilterCard("Dragon spells");
 
     static {
-        filter.add(SubType.DRAGON.getPredicate());
         filter2.add(SubType.DRAGON.getPredicate());
     }
 
@@ -54,16 +51,12 @@ public final class NogiDracoZealot extends CardImpl {
 
         // Whenever Nogi, Draco-Zealot attacks, if you control three or more Dragons, until end
         // of turn, Nogi becomes a Dragon with base power and toughness 5/5 and gains flying.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new AttacksTriggeredAbility(new BecomesCreatureSourceEffect(
-                        new CreatureToken(5, 5, "Dragon with base power and toughness 5/5 and gains flying")
-                                .withSubType(SubType.DRAGON)
-                                .withAbility(FlyingAbility.getInstance()),
-                        CardType.CREATURE, Duration.EndOfTurn), false
-                ), condition, "Whenever {this} attacks, if you control three or more Dragons, until end of turn, " +
-                "{this} becomes a Dragon with base power and toughness 5/5 and gains flying"
-        );
-        this.addAbility(ability.addHint(hint));
+        this.addAbility(new AttacksTriggeredAbility(new BecomesCreatureSourceEffect(
+                new CreatureToken(
+                        5, 5, "Dragon with base power and toughness 5/5 and gains flying"
+                ).withSubType(SubType.DRAGON).withAbility(FlyingAbility.getInstance()),
+                CardType.CREATURE, Duration.EndOfTurn
+        ), false).withInterveningIf(condition).addHint(hint));
     }
 
     private NogiDracoZealot(final NogiDracoZealot card) {

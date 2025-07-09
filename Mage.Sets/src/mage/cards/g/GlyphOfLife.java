@@ -19,6 +19,7 @@ import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -37,7 +38,7 @@ public final class GlyphOfLife extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
 
         // Choose target Wall creature. Whenever that creature is dealt damage by an attacking creature this turn, you gain that much life.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new InfoEffect("Choose target Wall creature"));
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new GlyphOfLifeTriggeredAbility()));
     }

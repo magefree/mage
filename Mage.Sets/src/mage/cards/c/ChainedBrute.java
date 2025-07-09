@@ -13,9 +13,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -36,8 +34,7 @@ public final class ChainedBrute extends CardImpl {
 
         // {1}, Sacrifice another creature: Untap Chained Brute. Activate this ability only during your turn.
         Ability ability = new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD, new UntapSourceEffect(),
-                new GenericManaCost(1), MyTurnCondition.instance
+                new UntapSourceEffect(), new GenericManaCost(1), MyTurnCondition.instance
         );
         ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         this.addAbility(ability);

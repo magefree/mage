@@ -52,7 +52,7 @@ class RefuseEffect extends OneShotEffect {
 
     RefuseEffect() {
         super(Outcome.Damage);
-        staticText = "Refuse deals damage to target spell's controller equal to that spell's mana value";
+        staticText = "{this} deals damage to target spell's controller equal to that spell's mana value";
     }
 
     private RefuseEffect(final RefuseEffect effect) {

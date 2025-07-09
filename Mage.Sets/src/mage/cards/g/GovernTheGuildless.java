@@ -12,6 +12,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.MonocoloredPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -31,7 +32,7 @@ public final class GovernTheGuildless extends CardImpl {
 
         // Gain control of target monocolored creature.
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.Custom));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
 
         // Forecast - {1}{U}, Reveal Govern the Guildless from your hand: Target creature becomes the color or colors of your choice until end of turn.
         ForecastAbility ability = new ForecastAbility(new BecomesColorOrColorsTargetEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{1}{U}"));

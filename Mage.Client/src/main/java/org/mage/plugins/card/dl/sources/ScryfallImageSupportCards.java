@@ -588,7 +588,10 @@ public class ScryfallImageSupportCards {
             add("FIN"); // Final Fantasy
             add("FIC"); // Final Fantasy Commander
             add("FCA"); // Final Fantasy: Through the Ages
+            add("EOE"); // Edge of Eternities
+            add("EOC"); // Edge of Eternities Commander
             add("SPE"); // Marvel's Spider-Man Eternal
+            add("TLA"); // Avatar: The Last Airbender
 
             // Custom sets using Scryfall images - must provide a direct link for each card in directDownloadLinks
             add("CALC"); // Custom Alchemized versions of existing cards

@@ -1,26 +1,27 @@
-
 package mage.cards.m;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.ExileSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.filter.FilterSpell;
+import mage.constants.CardType;
+import mage.constants.ComparisonType;
+import mage.constants.Outcome;
+import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledArtifactPermanent;
-import mage.filter.common.FilterInstantOrSorceryCard;
-import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.token.MetallurgicSummoningsConstructToken;
 import mage.game.stack.Spell;
 import mage.players.Player;
 
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -28,26 +29,23 @@ import java.util.UUID;
  */
 public final class MetallurgicSummonings extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("an instant or sorcery spell");
-
-    static {
-        filter.add(Predicates.or(
-                CardType.INSTANT.getPredicate(),
-                CardType.SORCERY.getPredicate()));
-    }
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(
+            new FilterControlledArtifactPermanent("you control six or more artifacts"),
+            ComparisonType.MORE_THAN, 5
+    );
 
     public MetallurgicSummonings(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
 
         // Whenever you cast an instant or sorcery spell, create an X/X colorless Construct artifact creature token, where X is that spell's converted mana cost.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new MetallurgicSummoningsTokenEffect(), filter, false, SetTargetPointer.SPELL));
+        this.addAbility(new SpellCastControllerTriggeredAbility(
+                new MetallurgicSummoningsTokenEffect(), StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, false
+        ));
 
         // {3}{U}{U}, Exile Metallurgic Summons: Return all instant and sorcery cards from your graveyard to your hand. Activate this ability only if you control six or more artifacts.
-        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
-                new MetallurgicSummoningsReturnEffect(), new ManaCostsImpl<>("{3}{U}{U}"),
-                new PermanentsOnTheBattlefieldCondition(new FilterControlledArtifactPermanent(), ComparisonType.MORE_THAN, 5),
-                "{3}{U}{U}, Exile {this}: Return all instant and sorcery cards from your graveyard to your hand."
-                        + " Activate only if you control six or more artifacts.");
+        Ability ability = new ActivateIfConditionActivatedAbility(
+                new MetallurgicSummoningsReturnEffect(), new ManaCostsImpl<>("{3}{U}{U}"), condition
+        );
         ability.addCost(new ExileSourceCost());
         this.addAbility(ability);
     }
@@ -75,15 +73,11 @@ class MetallurgicSummoningsTokenEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getSpellOrLKIStack(this.getTargetPointer().getFirst(game, source));
-        if (spell != null) {
-            int cmc = spell.getManaValue();
-            if (cmc > 0) {
-                return new CreateTokenEffect(new MetallurgicSummoningsConstructToken(cmc)).apply(game, source);
-            }
-            return true;
-        }
-        return false;
+        int mv = Optional
+                .ofNullable((Spell) getValue("spellCast"))
+                .map(Spell::getManaValue)
+                .orElse(0);
+        return new MetallurgicSummoningsConstructToken(mv).putOntoBattlefield(1, game, source);
     }
 
     @Override
@@ -96,7 +90,7 @@ class MetallurgicSummoningsReturnEffect extends OneShotEffect {
 
     MetallurgicSummoningsReturnEffect() {
         super(Outcome.PutCardInPlay);
-        this.staticText = "Return all instant and sorcery cards from your graveyard to your hand. Activate only if you control six or more artifacts";
+        this.staticText = "return all instant and sorcery cards from your graveyard to your hand";
     }
 
     private MetallurgicSummoningsReturnEffect(final MetallurgicSummoningsReturnEffect effect) {
@@ -111,10 +105,11 @@ class MetallurgicSummoningsReturnEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            return controller.moveCards(controller.getGraveyard().getCards(new FilterInstantOrSorceryCard(),
-                    source.getControllerId(), source, game), Zone.HAND, source, game);
-        }
-        return false;
+        return controller != null && controller.moveCards(
+                controller.getGraveyard().getCards(
+                        StaticFilters.FILTER_CARDS_INSTANT_AND_SORCERY,
+                        source.getControllerId(), source, game
+                ), Zone.HAND, source, game
+        );
     }
 }

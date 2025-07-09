@@ -89,7 +89,7 @@ class SimianSlingTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever Simian Sling or equipped creature becomes blocked, it deals 1 damage to defending player.";
+        return "Whenever {this} or equipped creature becomes blocked, it deals 1 damage to defending player.";
     }
 }
 

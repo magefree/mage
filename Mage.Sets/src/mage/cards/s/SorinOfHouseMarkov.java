@@ -1,17 +1,15 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.constants.Pronoun;
-import mage.abilities.triggers.BeginningOfPostcombatMainTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.YouGainedLifeCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.ExileAndReturnSourceEffect;
 import mage.abilities.hint.ConditionHint;
 import mage.abilities.hint.Hint;
 import mage.abilities.keyword.ExtortAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.TransformAbility;
+import mage.abilities.triggers.BeginningOfPostcombatMainTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -24,8 +22,8 @@ import java.util.UUID;
  */
 public final class SorinOfHouseMarkov extends CardImpl {
 
-    private static final Condition condition = new YouGainedLifeCondition(ComparisonType.OR_GREATER, 3);
-    private static final Hint hint = new ConditionHint(condition, "You gained 3 or more life this turn");
+    private static final Condition condition = new YouGainedLifeCondition(ComparisonType.MORE_THAN, 2);
+    private static final Hint hint = new ConditionHint(condition);
 
     public SorinOfHouseMarkov(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
@@ -46,14 +44,9 @@ public final class SorinOfHouseMarkov extends CardImpl {
 
         // At the beginning of your postcombat main phase, if you gained 3 or more life this turn, exile Sorin of House Markov, then return him to the battlefield transformed under his owner's control.
         this.addAbility(new TransformAbility());
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfPostcombatMainTriggeredAbility(
-                        new ExileAndReturnSourceEffect(PutCards.BATTLEFIELD_TRANSFORMED, Pronoun.SHE),
-                        false
-                ), condition, "At the beginning of your postcombat main phase, "
-                + "if you gained 3 or more life this turn, exile {this}, "
-                + "then return him to the battlefield transformed under his owner's control."
-        ).addHint(hint), new PlayerGainedLifeWatcher());
+        this.addAbility(new BeginningOfPostcombatMainTriggeredAbility(
+                new ExileAndReturnSourceEffect(PutCards.BATTLEFIELD_TRANSFORMED, Pronoun.HE), false
+        ).withInterveningIf(condition).addHint(hint), new PlayerGainedLifeWatcher());
     }
 
     private SorinOfHouseMarkov(final SorinOfHouseMarkov card) {

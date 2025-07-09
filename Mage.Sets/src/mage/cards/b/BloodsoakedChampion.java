@@ -1,11 +1,10 @@
 package mage.cards.b;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.CantBlockAbility;
 import mage.abilities.condition.common.RaidCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.abilities.hint.common.RaidHint;
 import mage.cards.CardImpl;
@@ -34,15 +33,10 @@ public final class BloodsoakedChampion extends CardImpl {
         this.addAbility(new CantBlockAbility());
 
         // <i>Raid</i> &mdash; {1}{B}: Return Bloodstained Brave from your graveyard to the battlefield. Activate this ability only if you attacked this turn.
-        Ability ability = new ConditionalActivatedAbility(
-                Zone.GRAVEYARD,
-                new ReturnSourceFromGraveyardToBattlefieldEffect(),
-                new ManaCostsImpl<>("{1}{B}"),
-                RaidCondition.instance,
-                "<i>Raid</i> &mdash; {1}{B}: Return {this} from your graveyard to the battlefield. Activate only if you attacked this turn.");
-        ability.setAbilityWord(AbilityWord.RAID);
-        ability.addHint(RaidHint.instance);
-        this.addAbility(ability, new PlayerAttackedWatcher());
+        this.addAbility(new ActivateIfConditionActivatedAbility(
+                Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(),
+                new ManaCostsImpl<>("{1}{B}"), RaidCondition.instance
+        ).setAbilityWord(AbilityWord.RAID).addHint(RaidHint.instance), new PlayerAttackedWatcher());
     }
 
     private BloodsoakedChampion(final BloodsoakedChampion card) {

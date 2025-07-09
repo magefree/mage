@@ -1,7 +1,6 @@
 
 package mage.cards.u;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -15,6 +14,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
+
+import java.util.UUID;
 
 /**
  *
@@ -39,7 +40,7 @@ public final class UntamedKavu extends CardImpl {
         // If Untamed Kavu was kicked, it enters with three +1/+1 counters on it.
         Ability ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(3)),
                 KickedCondition.ONCE,
-                "If Untamed Kavu was kicked, it enters with three +1/+1 counters on it.", "");
+                "If {this} was kicked, it enters with three +1/+1 counters on it.", "");
         this.addAbility(ability);
     }
 

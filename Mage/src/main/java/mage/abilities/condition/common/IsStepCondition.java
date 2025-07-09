@@ -7,13 +7,17 @@ import mage.constants.PhaseStep;
 import mage.game.Game;
 
 /**
- *
  * @author LevelX2
  */
 public class IsStepCondition implements Condition {
 
     protected PhaseStep phaseStep;
     protected boolean onlyDuringYourSteps;
+    private static final IsStepCondition myUpkeep = new IsStepCondition(PhaseStep.UPKEEP, true);
+
+    public static IsStepCondition getMyUpkeep() {
+        return myUpkeep;
+    }
 
     public IsStepCondition(PhaseStep phaseStep) {
         this(phaseStep, true);

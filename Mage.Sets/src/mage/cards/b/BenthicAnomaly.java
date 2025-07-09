@@ -1,7 +1,6 @@
 package mage.cards.b;
 
 import mage.MageInt;
-import mage.MageItem;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -16,9 +15,8 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
-import mage.filter.predicate.permanent.PermanentIdPredicate;
+import mage.filter.predicate.permanent.PermanentReferenceInCollectionPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -28,7 +26,6 @@ import mage.util.RandomUtil;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -114,13 +111,7 @@ class BenthicAnomalyEffect extends OneShotEffect {
                 break;
             default:
                 FilterPermanent filter = new FilterPermanent("a creature to create a copy of");
-                filter.add(Predicates.or(
-                        permanents
-                                .stream()
-                                .map(MageItem::getId)
-                                .map(PermanentIdPredicate::new)
-                                .collect(Collectors.toSet())
-                ));
+                filter.add(new PermanentReferenceInCollectionPredicate(permanents, game));
                 TargetPermanent target = new TargetPermanent(filter);
                 target.withNotTarget(true);
                 player.choose(outcome, target, source, game);

@@ -1,18 +1,12 @@
-
 package mage.cards.o;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -20,31 +14,36 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.Watcher;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE;
+
 /**
- *
  * @author LevelX2
  */
 public final class OathOfChandra extends CardImpl {
 
     public OathOfChandra(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
         this.supertype.add(SuperType.LEGENDARY);
 
         // When Oath of Chandra enters the battlefield, it deals 3 damage to target creature an opponent controls.
-        Effect effect = new DamageTargetEffect(3);
-        effect.setText("it deals 3 damage to target creature an opponent controls");
-        Ability ability = new EntersBattlefieldTriggeredAbility(effect, false);
-        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(3, "it"));
+        ability.addTarget(new TargetPermanent(FILTER_OPPONENTS_PERMANENT_CREATURE));
         this.addAbility(ability);
 
         // At the beginning of each end step, if a planeswalker entered the battlefield under your control this turn, Oath of Chandra deals 2 damage to each opponent.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new BeginningOfEndStepTriggeredAbility(
-                TargetController.ANY, new DamagePlayersEffect(Outcome.Damage, StaticValue.get(2), TargetController.OPPONENT),
-                false), OathOfChandraCondition.instance,
-                "At the beginning of each end step, if a planeswalker entered the battlefield under your control this turn, {this} deals 2 damage to each opponent."), new OathOfChandraWatcher());
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(
+                TargetController.ANY,
+                new DamagePlayersEffect(Outcome.Damage, StaticValue.get(2), TargetController.OPPONENT),
+                false, OathOfChandraCondition.instance
+        ), new OathOfChandraWatcher());
     }
 
     private OathOfChandra(final OathOfChandra card) {
@@ -58,7 +57,6 @@ public final class OathOfChandra extends CardImpl {
 }
 
 enum OathOfChandraCondition implements Condition {
-
     instance;
 
     @Override
@@ -69,7 +67,7 @@ enum OathOfChandraCondition implements Condition {
 
     @Override
     public String toString() {
-        return "if a planeswalker entered the battlefield under your control this turn";
+        return "a planeswalker entered the battlefield under your control this turn";
     }
 
 }
@@ -101,5 +99,4 @@ class OathOfChandraWatcher extends Watcher {
     public boolean enteredPlaneswalkerForPlayer(UUID playerId) {
         return players.contains(playerId);
     }
-
 }

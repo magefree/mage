@@ -2,18 +2,17 @@ package mage.cards.d;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.OpponentControlsMoreCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.hint.ConditionHint;
 import mage.abilities.hint.Hint;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -34,11 +33,11 @@ import java.util.UUID;
  * @author Susucr
  */
 public final class DiscerningFinancier extends CardImpl {
-    private static final Condition condition = new OpponentControlsMoreCondition(StaticFilters.FILTER_LAND);
+    private static final Condition condition = new OpponentControlsMoreCondition(StaticFilters.FILTER_LANDS);
 
     private static final Hint hint = new ConditionHint(
-            condition, "An opponent controls more land than you", null,
-            "No opponent controls more land than you", null, true
+            condition, "An opponent controls more lands than you", null,
+            "No opponent controls more lands than you", null, true
     );
 
     private static final FilterControlledPermanent filter =
@@ -53,14 +52,9 @@ public final class DiscerningFinancier extends CardImpl {
         this.toughness = new MageInt(3);
 
         // At the beginning of your upkeep, if an opponent controls more lands than you, create a Treasure token.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(
-                        new CreateTokenEffect(new TreasureToken()), false
-                ),
-                condition,
-                "At the beginning of your upkeep, if an opponent controls more lands than you, create a Treasure token."
-        ).addHint(hint));
-
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
+                new CreateTokenEffect(new TreasureToken()), false
+        ).withInterveningIf(condition).addHint(hint));
 
         // {2}{W}: Choose another player. That player gains control of target Treasure you control. You draw a card.
         Ability ability = new SimpleActivatedAbility(

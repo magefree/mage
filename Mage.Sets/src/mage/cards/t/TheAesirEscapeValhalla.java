@@ -1,15 +1,13 @@
 package mage.cards.t;
 
-import java.util.UUID;
-
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SagaAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
-import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.ExileZone;
@@ -19,6 +17,8 @@ import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -140,7 +140,7 @@ class TheAesirEscapeValhallaThreeEffect extends OneShotEffect {
 
     TheAesirEscapeValhallaThreeEffect() {
         super(Outcome.Neutral);
-        staticText = "Return The Aesir Escape Valhalla and the exiled card to their owner's hand.";
+        staticText = "Return {this} and the exiled card to their owner's hand.";
     }
 
     private TheAesirEscapeValhallaThreeEffect(final TheAesirEscapeValhallaThreeEffect effect) {

@@ -4,7 +4,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.AddendumCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
@@ -37,23 +36,19 @@ public final class SentinelsMark extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget);
-        this.addAbility(ability);
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted creature gets +1/+2 and has vigilance.
-        ability = new SimpleStaticAbility(new BoostEnchantedEffect(1, 2));
+        Ability ability = new SimpleStaticAbility(new BoostEnchantedEffect(1, 2));
         ability.addEffect(new GainAbilityAttachedEffect(
                 VigilanceAbility.getInstance(), AttachmentType.AURA
         ).setText("and has vigilance"));
         this.addAbility(ability);
 
         // Addendum — When Sentinel's Mark enters the battlefield, if you cast it during your main phase, enchanted creature gains lifelink until end of turn.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new GainAbilityAttachedEffect(
-                        LifelinkAbility.getInstance(), AttachmentType.AURA, Duration.EndOfTurn
-                )), AddendumCondition.instance, "<br><i>Addendum</i> &mdash; When {this} enters, " +
-                "if you cast it during your main phase, enchanted creature gains lifelink until end of turn."
-        ));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new GainAbilityAttachedEffect(
+                LifelinkAbility.getInstance(), AttachmentType.AURA, Duration.EndOfTurn
+        )).withInterveningIf(AddendumCondition.instance).setAbilityWord(AbilityWord.ADDENDUM));
     }
 
     private SentinelsMark(final SentinelsMark card) {

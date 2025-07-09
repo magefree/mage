@@ -13,6 +13,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.permanent.token.ZombieToken;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -36,7 +37,7 @@ public final class FeastOrFamine extends CardImpl {
         
         // or destroy target nonartifact, nonblack creature and it can't be regenerated.
         Mode mode = new Mode(new DestroyTargetEffect(true));
-        mode.addTarget(new TargetCreaturePermanent(filter));
+        mode.addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addMode(mode);
     }
 

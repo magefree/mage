@@ -58,6 +58,7 @@ class IronApprenticeEffect extends OneShotEffect {
 
     IronApprenticeEffect() {
         super(Outcome.Benefit);
+        staticText = "put those counters on target creature you control";
     }
 
     private IronApprenticeEffect(final IronApprenticeEffect effect) {

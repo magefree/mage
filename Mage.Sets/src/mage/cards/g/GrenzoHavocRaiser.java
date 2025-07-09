@@ -19,7 +19,9 @@ import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetadjustment.DefineByTriggerTargetAdjuster;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
@@ -69,6 +71,7 @@ class GrenzoHavocRaiserTriggeredAbility extends TriggeredAbilityImpl {
     public GrenzoHavocRaiserTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
         setTriggerPhrase("Whenever a creature you control deals combat damage to a player, ");
+        setTargetAdjuster(DefineByTriggerTargetAdjuster.instance);
     }
 
     private GrenzoHavocRaiserTriggeredAbility(final GrenzoHavocRaiserTriggeredAbility ability) {
@@ -107,7 +110,7 @@ class GrenzoHavocRaiserTriggeredAbility extends TriggeredAbilityImpl {
             FilterCreaturePermanent filter = new FilterCreaturePermanent("creature " + damagedPlayer.getLogName() + " controls");
             filter.add(new ControllerIdPredicate(damagedPlayer.getId()));
             this.getTargets().clear();
-            this.addTarget(new TargetCreaturePermanent(filter));
+            this.addTarget(new TargetPermanent(filter));
             for (Effect effect : this.getAllEffects()) {
                 if (effect instanceof GrenzoHavocRaiserEffect) {
                     effect.setTargetPointer(new FixedTarget(event.getPlayerId()));

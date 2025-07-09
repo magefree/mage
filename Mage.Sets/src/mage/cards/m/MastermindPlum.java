@@ -1,25 +1,18 @@
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.constants.Outcome;
-import mage.constants.SetTargetPointer;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Zone;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
@@ -28,6 +21,8 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
 import mage.watchers.common.ManaPaidSourceWatcher;
+
+import java.util.UUID;
 
 /**
  * Mastermind Plum {2}{B}
@@ -54,15 +49,11 @@ public final class MastermindPlum extends CardImpl {
         this.addAbility(ability);
 
         // Whenever you cast a spell, if mana from a Treasure was spent to cast it, you draw a card and you lose 1 life.
-        ability = new ConditionalInterveningIfTriggeredAbility(
-                new SpellCastControllerTriggeredAbility(
-                        new DrawCardSourceControllerEffect(1), StaticFilters.FILTER_SPELL,
-                        false, SetTargetPointer.SPELL),
-                MastermindPlumCondition.instance,
-                "Whenever you cast a spell, if mana from a Treasure was spent to cast it, " +
-                        "you draw a card and you lose 1 life."
-        );
-        ability.addEffect(new LoseLifeSourceControllerEffect(1));
+        ability = new SpellCastControllerTriggeredAbility(
+                new DrawCardSourceControllerEffect(1, true),
+                StaticFilters.FILTER_SPELL_A, false, SetTargetPointer.SPELL
+        ).withInterveningIf(MastermindPlumCondition.instance);
+        ability.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
         this.addAbility(ability);
     }
 
@@ -119,5 +110,10 @@ enum MastermindPlumCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         Spell spell = (Spell) source.getEffects().get(0).getValue("spellCast");
         return spell != null && ManaPaidSourceWatcher.getTreasurePaid(spell.getSourceId(), game) > 0;
+    }
+
+    @Override
+    public String toString() {
+        return "mana from a Treasure was spent to cast it";
     }
 }

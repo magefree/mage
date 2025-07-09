@@ -5,11 +5,13 @@ import mage.abilities.Ability;
 import mage.abilities.common.CanBeYourCommanderAbility;
 import mage.abilities.common.CommanderChooseColorAbility;
 import mage.abilities.keyword.CompanionAbility;
+import mage.abilities.keyword.StationLevelAbility;
 import mage.cards.Card;
 import mage.cards.decks.Constructed;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckValidatorErrorType;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterMana;
 import mage.util.CardUtil;
 import mage.util.ManaUtil;
@@ -51,9 +53,19 @@ public abstract class AbstractCommander extends Constructed {
     protected abstract boolean checkBanned(Map<String, Integer> counts);
 
     protected boolean checkCommander(Card commander, Set<Card> commanders) {
-        return commander.hasCardTypeForDeckbuilding(CardType.CREATURE) && commander.isLegendary()
-                || commander.getAbilities().contains(CanBeYourCommanderAbility.getInstance())
-                || (validators.stream().anyMatch(validator -> validator.specialCheck(commander)) && commanders.size() == 2);
+        if (commander.getAbilities().contains(CanBeYourCommanderAbility.getInstance())) {
+            return true;
+        }
+        if (commander.isLegendary()
+                && (commander.hasCardTypeForDeckbuilding(CardType.CREATURE)
+                || commander.hasSubTypeForDeckbuilding(SubType.VEHICLE)
+                || commander.hasSubTypeForDeckbuilding(SubType.SPACECRAFT)
+                && CardUtil
+                .castStream(commander.getAbilities(), StationLevelAbility.class)
+                .anyMatch(StationLevelAbility::hasPT))) {
+            return true;
+        }
+        return commanders.size() == 2 && validators.stream().anyMatch(validator -> validator.specialCheck(commander));
     }
 
     protected boolean checkPartners(Set<Card> commanders) {

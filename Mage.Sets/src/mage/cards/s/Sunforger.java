@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.ApprovingObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -17,12 +16,7 @@ import mage.abilities.keyword.EquipAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
@@ -32,6 +26,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *
@@ -52,7 +48,7 @@ public final class Sunforger extends CardImpl {
         // without paying its mana cost. Then shuffle your library.
         Ability ability = new SimpleActivatedAbility(
                 new SunforgerEffect(), new ManaCostsImpl<>("{R}{W}"));
-        ability.addCost(new SunforgerUnattachCost(this.getName()));
+        ability.addCost(new SunforgerUnattachCost());
         this.addAbility(ability);
 
         // Equip {3}
@@ -127,8 +123,8 @@ class SunforgerEffect extends OneShotEffect {
 
 class SunforgerUnattachCost extends CostImpl {
 
-    public SunforgerUnattachCost(String name) {
-        this.text = "Unattach " + name;
+    public SunforgerUnattachCost() {
+        this.text = "Unattach {this}";
     }
 
     private SunforgerUnattachCost(final SunforgerUnattachCost cost) {

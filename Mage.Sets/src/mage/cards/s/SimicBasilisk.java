@@ -20,7 +20,10 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import static mage.filter.StaticFilters.FILTER_A_CREATURE_P1P1;
 
 /**
  *
@@ -46,7 +49,7 @@ public final class SimicBasilisk extends CardImpl {
                 new DealsDamageToACreatureTriggeredAbility(effect, true, false, true), Duration.EndOfTurn)
                 .setText("Until end of turn, target creature with a +1/+1 counter on it gains \"Whenever this creature deals combat damage to a creature, destroy that creature at end of combat.\""),
                 new ManaCostsImpl<>("{1}{G}"));
-        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_A_CREATURE_P1P1));
+        ability.addTarget(new TargetPermanent(FILTER_A_CREATURE_P1P1));
         this.addAbility(ability);
     }
 

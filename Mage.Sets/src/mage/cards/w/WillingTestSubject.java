@@ -1,4 +1,3 @@
-
 package mage.cards.w;
 
 import mage.MageInt;
@@ -58,8 +57,9 @@ public final class WillingTestSubject extends CardImpl {
 
 class WillingTestSubjectTriggeredAbility extends TriggeredAbilityImpl {
 
-    public WillingTestSubjectTriggeredAbility() {
+    WillingTestSubjectTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
+        setTriggerPhrase("Whenever you roll a 4 or higher on a die, ");
     }
 
     private WillingTestSubjectTriggeredAbility(final WillingTestSubjectTriggeredAbility ability) {
@@ -83,8 +83,4 @@ class WillingTestSubjectTriggeredAbility extends TriggeredAbilityImpl {
         return this.isControlledBy(event.getTargetId()) && drEvent.getResult() >= 4;
     }
 
-    @Override
-    public String getRule() {
-        return "Whenever you roll a 4 or higher on a die, put a +1/+1 counter on {this}";
-    }
 }

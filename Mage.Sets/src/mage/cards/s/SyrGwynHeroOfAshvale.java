@@ -15,10 +15,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.EquippedPredicate;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -27,11 +27,9 @@ import java.util.UUID;
  */
 public final class SyrGwynHeroOfAshvale extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter
+    private static final FilterPermanent filter
             = new FilterControlledCreaturePermanent("equipped creature you control");
     private static final FilterPermanent filter2
-            = new FilterControlledPermanent(SubType.EQUIPMENT);
-    private static final FilterControlledCreaturePermanent filter3
             = new FilterControlledCreaturePermanent(SubType.KNIGHT, "Knight");
 
     static {
@@ -63,9 +61,8 @@ public final class SyrGwynHeroOfAshvale extends CardImpl {
         // Equipment you control have equip Knight {0}.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
                 new EquipAbility(
-                        Outcome.AddAbility, new GenericManaCost(0),
-                        new TargetControlledCreaturePermanent(filter3)
-                ), Duration.WhileOnBattlefield, filter2
+                        Outcome.AddAbility, new GenericManaCost(0), new TargetPermanent(filter2)
+                ), Duration.WhileOnBattlefield, StaticFilters.FILTER_CONTROLLED_PERMANENT_EQUIPMENT
         ).setText("Equipment you control have equip Knight {0}.")));
     }
 

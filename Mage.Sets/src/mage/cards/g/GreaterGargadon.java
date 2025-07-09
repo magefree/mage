@@ -1,7 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -18,7 +17,8 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
-import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -81,6 +81,6 @@ class GreaterGargadonAbility extends ActivatedAbilityImpl {
 
     @Override
     public String getRule() {
-        return super.getRule() + " Activate only if Greater Gargadon is suspended.";
+        return super.getRule() + " Activate only if {this} is suspended.";
     }
 }

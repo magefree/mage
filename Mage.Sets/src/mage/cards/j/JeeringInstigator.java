@@ -3,10 +3,10 @@ package mage.cards.j;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
-import mage.abilities.condition.common.MyTurnCondition;
+import mage.abilities.condition.Condition;
+import mage.abilities.condition.InvertCondition;
+import mage.abilities.condition.common.NotMyTurnCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
@@ -18,9 +18,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
-import mage.target.common.TargetCreaturePermanent;
+import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -29,11 +28,7 @@ import java.util.UUID;
  */
 public final class JeeringInstigator extends CardImpl {
 
-    static final private FilterCreaturePermanent filter = new FilterCreaturePermanent();
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
+    private static final Condition condition = new InvertCondition(NotMyTurnCondition.instance, "it's your turn");
 
     public JeeringInstigator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
@@ -47,20 +42,16 @@ public final class JeeringInstigator extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{2}{R}")));
 
         // When Jeering Instigator is turned face up, if it's your turn, gain control of another target creature until end of turn. Untap it. That creature gains haste until end of turn.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new TurnedFaceUpSourceTriggeredAbility(new GainControlTargetEffect(Duration.EndOfTurn), false, false),
-                MyTurnCondition.instance,
-                "When {this} is turned face up, if it's your turn, gain control of another target creature until end of turn. Untap that creature. It gains haste until end of turn.");
+        Ability ability = new TurnedFaceUpSourceTriggeredAbility(
+                new GainControlTargetEffect(Duration.EndOfTurn), false, false
+        ).withInterveningIf(condition);
+        ability.addEffect(new UntapTargetEffect().setText("Untap that creature"));
+        ability.addEffect(new GainAbilityTargetEffect(
+                HasteAbility.getInstance(), Duration.EndOfTurn
+        ).setText("It gains haste until end of turn"));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE));
         ability.setWorksFaceDown(true);
-        Effect effect = new UntapTargetEffect();
-        effect.setText("Untap that creature");
-        ability.addEffect(effect);
-        effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("It gains haste until end of turn");
-        ability.addEffect(effect);
-        ability.addTarget(new TargetCreaturePermanent(filter));
-        ability.addHint(MyTurnHint.instance);
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(MyTurnHint.instance));
     }
 
     private JeeringInstigator(final JeeringInstigator card) {

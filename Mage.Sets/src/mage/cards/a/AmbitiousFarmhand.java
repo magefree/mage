@@ -11,7 +11,10 @@ import mage.abilities.hint.common.CovenHint;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.AbilityWord;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.target.common.TargetCardInLibrary;
 
@@ -46,8 +49,7 @@ public final class AmbitiousFarmhand extends CardImpl {
         // Coven—{1}{W}{W}: Transform Ambitious Farmhand. Activate only if you control three or more creatures with different powers.
         this.addAbility(new TransformAbility());
         this.addAbility(new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD, new TransformSourceEffect(),
-                new ManaCostsImpl<>("{1}{W}{W}"), CovenCondition.instance
+                new TransformSourceEffect(), new ManaCostsImpl<>("{1}{W}{W}"), CovenCondition.instance
         ).setAbilityWord(AbilityWord.COVEN).addHint(CovenHint.instance));
     }
 

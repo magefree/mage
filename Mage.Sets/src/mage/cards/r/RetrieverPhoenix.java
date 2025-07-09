@@ -1,12 +1,10 @@
 package mage.cards.r;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CastFromEverywhereSourceCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.LearnEffect;
 import mage.abilities.hint.common.OpenSideboardHint;
@@ -41,10 +39,8 @@ public final class RetrieverPhoenix extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // When Retriever Phoenix enters the battlefield, if you cast it, learn.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new LearnEffect()), CastFromEverywhereSourceCondition.instance,
-                "When {this} enters, if you cast it, " + LearnEffect.getDefaultText()
-        ).addHint(OpenSideboardHint.instance));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new LearnEffect())
+                .withInterveningIf(CastFromEverywhereSourceCondition.instance).addHint(OpenSideboardHint.instance));
 
         // As long as Retriever Phoenix is in your graveyard, if you would learn, you may instead return Retriever Phoenix to the battlefield.
         this.addAbility(new SimpleStaticAbility(Zone.GRAVEYARD, new RetrieverPhoenixEffect()));
@@ -64,8 +60,8 @@ class RetrieverPhoenixEffect extends ReplacementEffectImpl {
 
     RetrieverPhoenixEffect() {
         super(Duration.WhileInGraveyard, Outcome.PutCreatureInPlay);
-        staticText = "as long as {this} is in your graveyard, if you would learn, " +
-                "you may instead return {this} to the battlefield";
+        staticText = "as long as this card is in your graveyard, if you would learn, " +
+                "you may instead return this card to the battlefield";
     }
 
     private RetrieverPhoenixEffect(final RetrieverPhoenixEffect effect) {

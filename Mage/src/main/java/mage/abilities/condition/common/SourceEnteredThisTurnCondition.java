@@ -25,6 +25,6 @@ public enum SourceEnteredThisTurnCondition implements Condition {
 
     @Override
     public String toString() {
-        return "{this} " + (flag ? "entered" : "didn't enter") + " the battlefield this turn";
+        return "{this} " + (flag ? "entered" : "didn't enter the battlefield") + " this turn";
     }
 }

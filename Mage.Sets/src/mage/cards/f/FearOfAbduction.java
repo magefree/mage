@@ -21,9 +21,12 @@ import mage.filter.StaticFilters;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
+
+import static mage.filter.StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE;
 
 /**
  * @author Cguy7777
@@ -46,7 +49,7 @@ public final class FearOfAbduction extends CardImpl {
 
         // When Fear of Abduction enters, exile target creature an opponent controls.
         Ability ability = new EntersBattlefieldTriggeredAbility(new FearOfAbductionExileEffect());
-        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
+        ability.addTarget(new TargetPermanent(FILTER_OPPONENTS_PERMANENT_CREATURE));
         this.addAbility(ability);
 
         // When Fear of Abduction leaves the battlefield, put each card exiled with it into its owner's hand.

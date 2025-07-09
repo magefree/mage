@@ -1,16 +1,15 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.InvertCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.SacrificeControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -18,13 +17,12 @@ import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.Target;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class ShadowbornDemon extends CardImpl {
@@ -35,6 +33,11 @@ public final class ShadowbornDemon extends CardImpl {
         filter.add(Predicates.not(SubType.DEMON.getPredicate()));
     }
 
+    private static final Condition condition = new InvertCondition(
+            new CardsInControllerGraveyardCondition(6, StaticFilters.FILTER_CARD_CREATURE),
+            "there are fewer than six creature cards in your graveyard"
+    );
+
     public ShadowbornDemon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
         this.subtype.add(SubType.DEMON);
@@ -44,18 +47,16 @@ public final class ShadowbornDemon extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+
         // When Shadowborn Demon enters the battlefield, destroy target non-Demon creature.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
-        Target target = new TargetCreaturePermanent(filter);
-        ability.addTarget(target);
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
         // At the beginning of your upkeep, if there are fewer than six creature cards in your graveyard, sacrifice a creature.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new SacrificeControllerEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, "")),
-                new InvertCondition(new CreatureCardsInControllerGraveyardCondition(6)),
-                "At the beginning of your upkeep, if there are fewer than six creature cards in your graveyard, sacrifice a creature"));
-
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeControllerEffect(
+                StaticFilters.FILTER_PERMANENT_CREATURE, 1, ""
+        )).withInterveningIf(condition));
     }
 
     private ShadowbornDemon(final ShadowbornDemon card) {
@@ -65,23 +66,5 @@ public final class ShadowbornDemon extends CardImpl {
     @Override
     public ShadowbornDemon copy() {
         return new ShadowbornDemon(this);
-    }
-}
-
-class CreatureCardsInControllerGraveyardCondition implements Condition {
-
-    private int value;
-
-    public CreatureCardsInControllerGraveyardCondition(int value) {
-        this.value = value;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player p = game.getPlayer(source.getControllerId());
-        if (p != null && p.getGraveyard().count(StaticFilters.FILTER_CARD_CREATURE, game) >= value) {
-            return true;
-        }
-        return false;
     }
 }

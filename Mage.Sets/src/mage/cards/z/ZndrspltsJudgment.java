@@ -1,7 +1,5 @@
-
 package mage.cards.z;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -16,11 +14,12 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class ZndrspltsJudgment extends CardImpl {
@@ -72,7 +71,8 @@ class ZndrspltsJudgmentEffect extends OneShotEffect {
             }
             FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you control");
             filter.add(new ControllerIdPredicate(player.getId()));
-            TargetCreaturePermanent target = new TargetCreaturePermanent(1, 1, filter, true);
+            TargetPermanent target = new TargetPermanent(filter);
+            target.withNotTarget(true);
             if (!player.choose(Outcome.Copy, target, source, game)) {
                 continue;
             }
@@ -83,7 +83,8 @@ class ZndrspltsJudgmentEffect extends OneShotEffect {
         for (Player player : choice.getFoes()) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you control");
             filter.add(new ControllerIdPredicate(player.getId()));
-            TargetCreaturePermanent target = new TargetCreaturePermanent(1, 1, filter, true);
+            TargetPermanent target = new TargetPermanent(filter);
+            target.withNotTarget(true);
             if (!player.choose(Outcome.ReturnToHand, target, source, game)) {
                 continue;
             }

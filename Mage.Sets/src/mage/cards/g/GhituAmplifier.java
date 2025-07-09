@@ -5,7 +5,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.KickerAbility;
@@ -36,11 +35,7 @@ public final class GhituAmplifier extends CardImpl {
         this.addAbility(new KickerAbility("{2}{U}"));
 
         // When Ghitu Amplifier enters the battlefield, if it was kicked, return target creature an opponent controls to its owner's hand.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect()),
-                KickedCondition.ONCE, "When {this} enters, " +
-                "if it was kicked, return target creature an opponent controls to its owner's hand."
-        );
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect()).withInterveningIf(KickedCondition.ONCE);
         ability.addTarget(new TargetOpponentsCreaturePermanent());
         this.addAbility(ability);
 

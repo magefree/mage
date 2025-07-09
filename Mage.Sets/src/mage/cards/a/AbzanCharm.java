@@ -13,6 +13,7 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetCreaturePermanentAmount;
 
@@ -33,7 +34,7 @@ public final class AbzanCharm extends CardImpl {
 
         // Choose one -
         // *Exile target creature with power 3 or greater
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(FILTER));
+        this.getSpellAbility().addTarget(new TargetPermanent(FILTER));
         this.getSpellAbility().addEffect(new ExileTargetEffect());
 
         // *You draw two cards and you lose 2 life

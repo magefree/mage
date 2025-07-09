@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TimingRule;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.watchers.common.PlayerAttackedWatcher;
 
@@ -33,12 +32,8 @@ public final class TempleOfCivilization extends CardImpl {
 
         // {2}{W}, {T}: Transform Temple of Civilization. Activate only if you attacked with three or more creatures this turn and only as a sorcery.
         Ability ability = new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD,
-                new TransformSourceEffect(),
-                new ManaCostsImpl<>("{2}{W}"),
-                TempleOfCivilizationCondition.instance,
-                TimingRule.SORCERY
-        );
+                new TransformSourceEffect(), new ManaCostsImpl<>("{2}{W}"), TempleOfCivilizationCondition.instance
+        ).setTiming(TimingRule.SORCERY);
         ability.addCost(new TapSourceCost());
         this.addAbility(ability, new PlayerAttackedWatcher());
     }

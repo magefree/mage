@@ -1,11 +1,8 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
@@ -14,8 +11,9 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.game.permanent.token.SoldierToken;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class SergeantAtArms extends CardImpl {
@@ -32,9 +30,8 @@ public final class SergeantAtArms extends CardImpl {
         this.addAbility(new KickerAbility("{2}{W}"));
 
         // When Sergeant-at-Arms enters the battlefield, if it was kicked, create two 1/1 white soldier creature tokens.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new SoldierToken(), 2)), KickedCondition.ONCE,
-                "When {this} enters, if it was kicked, create two 1/1 white Soldier creature tokens."));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new SoldierToken(), 2))
+                .withInterveningIf(KickedCondition.ONCE));
     }
 
     private SergeantAtArms(final SergeantAtArms card) {

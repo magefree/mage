@@ -45,7 +45,7 @@ public final class SynthInfiltrator extends CardImpl {
             }
         };
         Effect effect = new CopyPermanentEffect(StaticFilters.FILTER_PERMANENT_CREATURE, synthInfiltratorCopyApplier);
-        effect.setText("You may have {this} enter the battlefield as a copy of any creature on the battlefield, except it's a Synth artifact creature in addition to its other types");
+        effect.setText("You may have {this} enter as a copy of any creature on the battlefield, except it's a Synth artifact creature in addition to its other types");
         Ability ability = new SimpleStaticAbility(Zone.ALL, new EntersBattlefieldEffect(effect, "", true));
         this.addAbility(ability);
     }

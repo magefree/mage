@@ -1,27 +1,24 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.condition.InvertCondition;
-import mage.abilities.condition.OrCondition;
 import mage.abilities.condition.common.AttackedThisTurnSourceCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
-import mage.constants.SubType;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.Optional;
+import java.util.UUID;
 
 /**
  * @author xenohedron
  */
-
 public final class MadDog extends CardImpl {
 
     public MadDog(UUID ownerId, CardSetInfo setInfo) {
@@ -32,12 +29,9 @@ public final class MadDog extends CardImpl {
         this.toughness = new MageInt(2);
 
         // At the beginning of your end step, if Mad Dog didn't attack or come under your control this turn, sacrifice it.
-        Condition condition = new InvertCondition(new OrCondition(AttackedThisTurnSourceCondition.instance, MadDogCondition.instance));
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(new BeginningOfEndStepTriggeredAbility(
-                new SacrificeSourceEffect()), condition,
-                "At the beginning of your end step, if {this} didn't attack or come under your control this turn, sacrifice it");
-        this.addAbility(ability);
-
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(
+                new SacrificeSourceEffect().setText("sacrifice it")
+        ).withInterveningIf(MadDogCondition.instance));
     }
 
     private MadDog(final MadDog card) {
@@ -55,8 +49,15 @@ enum MadDogCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = source.getSourcePermanentOrLKI(game);
-        // TRUE if came under your control this turn
-        return permanent != null && !permanent.wasControlledFromStartOfControllerTurn();
+        return !AttackedThisTurnSourceCondition.instance.apply(game, source)
+                && Optional
+                .ofNullable(source.getSourcePermanentOrLKI(game))
+                .filter(Permanent::wasControlledFromStartOfControllerTurn)
+                .isPresent();
+    }
+
+    @Override
+    public String toString() {
+        return "{this} didn't attack or come under your control this turn";
     }
 }

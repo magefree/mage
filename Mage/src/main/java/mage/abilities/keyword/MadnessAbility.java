@@ -291,4 +291,9 @@ enum MadnessCondition implements Condition {
 
         return ((Spell) madnessSpell).getSpellAbility().getSpellAbilityCastMode() == SpellAbilityCastMode.MADNESS;
     }
+
+    @Override
+    public String toString() {
+        return "its madness cost was paid";
+    }
 }

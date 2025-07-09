@@ -11,14 +11,13 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.RollDieEvent;
 import mage.game.permanent.token.BrainiacToken;
 import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
 
@@ -27,7 +26,7 @@ import java.util.UUID;
  */
 public final class TheBigIdea extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent(SubType.BRAINIAC, "Brainiac creatures");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.BRAINIAC, "Brainiacs");
 
     static {
         filter.add(TappedPredicate.UNTAPPED);
@@ -48,7 +47,7 @@ public final class TheBigIdea extends CardImpl {
         this.addAbility(ability);
 
         // Tap three untapped Brainiacs you control: The next time you would roll a six-sided die, instead roll two six-sided dice and use the total of those results.
-        this.addAbility(new SimpleActivatedAbility(new TheBigIdeaReplacementEffect(), new TapTargetCost(new TargetControlledCreaturePermanent(3, 3, filter, true))));
+        this.addAbility(new SimpleActivatedAbility(new TheBigIdeaReplacementEffect(), new TapTargetCost(3, filter)));
     }
 
     private TheBigIdea(final TheBigIdea card) {

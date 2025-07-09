@@ -1,14 +1,11 @@
-
 package mage.cards.z;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.CastFromEverywhereSourceCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -21,13 +18,13 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class ZacamaPrimalCalamity extends CardImpl {
@@ -51,10 +48,8 @@ public final class ZacamaPrimalCalamity extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // When Zacama, Primal Calamity enters the battlefield, if you cast it, untap all lands you control.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new UntapAllLandsControllerEffect(), false),
-                CastFromEverywhereSourceCondition.instance,
-                "When {this} enters, if you cast it, untap all lands you control."));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new UntapAllLandsControllerEffect())
+                .withInterveningIf(CastFromEverywhereSourceCondition.instance));
 
         // {2}{R}: Zacama deals 3 damage to target creature.
         Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(3), new ManaCostsImpl<>("{2}{R}"));

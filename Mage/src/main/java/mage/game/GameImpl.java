@@ -27,6 +27,7 @@ import mage.cards.*;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardInfo;
 import mage.choices.Choice;
+import mage.collectors.DataCollectorServices;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.counters.Counters;
@@ -94,6 +95,8 @@ import java.util.stream.Collectors;
  */
 public abstract class GameImpl implements Game {
 
+    private final static AtomicInteger GLOBAL_INDEX = new AtomicInteger();
+
     private static final int ROLLBACK_TURNS_MAX = 4;
     private static final String UNIT_TESTS_ERROR_TEXT = "Error in unit tests";
     private static final Logger logger = Logger.getLogger(GameImpl.class);
@@ -108,6 +111,8 @@ public abstract class GameImpl implements Game {
     protected AtomicInteger totalErrorsCount = new AtomicInteger(); // for debug only: error stats
 
     protected final UUID id;
+    protected final Integer gameIndex; // for better logs and history
+    protected UUID tableId = null;
 
     protected boolean ready;
     protected transient TableEventSource tableEventSource = new TableEventSource();
@@ -121,6 +126,8 @@ public abstract class GameImpl implements Game {
     protected Map<UUID, Map<Integer, MageObject>> lkiExtended = new HashMap<>();
     // Used to check if an object was moved by the current effect in resolution (so Wrath like effect can be handled correctly)
     protected Map<Zone, Set<UUID>> lkiShortLiving = new EnumMap<>(Zone.class);
+    // For checking "becomes the target" triggers accurately. Cleared on short living LKI reset
+    protected Map<String, Map<UUID, Set<UUID>>> targetedMap = new HashMap<>();
 
     // Permanents entering the Battlefield while handling replacement effects before they are added to the battlefield
     protected Map<UUID, Permanent> permanentsEntering = new HashMap<>();
@@ -169,6 +176,7 @@ public abstract class GameImpl implements Game {
 
     public GameImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int minimumDeckSize, int startingLife, int startingHandSize) {
         this.id = UUID.randomUUID();
+        this.gameIndex = GLOBAL_INDEX.incrementAndGet();
         this.range = range;
         this.mulligan = mulligan;
         this.attackOption = attackOption;
@@ -189,6 +197,8 @@ public abstract class GameImpl implements Game {
         this.checkPlayableState = game.checkPlayableState;
 
         this.id = game.id;
+        this.gameIndex = game.gameIndex;
+        this.tableId = game.tableId;
         this.totalErrorsCount.set(game.totalErrorsCount.get());
 
         this.ready = game.ready;
@@ -202,6 +212,7 @@ public abstract class GameImpl implements Game {
         this.lkiCardState = CardUtil.deepCopyObject(game.lkiCardState);
         this.lkiExtended = CardUtil.deepCopyObject(game.lkiExtended);
         this.lkiShortLiving = CardUtil.deepCopyObject(game.lkiShortLiving);
+        this.targetedMap = CardUtil.deepCopyObject(game.targetedMap);
 
         this.permanentsEntering = CardUtil.deepCopyObject(game.permanentsEntering);
         this.enterWithCounters = CardUtil.deepCopyObject(game.enterWithCounters);
@@ -245,6 +256,11 @@ public abstract class GameImpl implements Game {
         this.lastPlayersLifes = game.lastPlayersLifes;
         this.stackObjectsCheck = game.stackObjectsCheck;
          */
+    }
+
+    @Override
+    public Integer getGameIndex() {
+        return this.gameIndex;
     }
 
     @Override
@@ -884,6 +900,12 @@ public abstract class GameImpl implements Game {
         if (state.isGameOver()) {
             return true;
         }
+
+        // stop on game thread ended by third party tools or AI's timeout
+        if (Thread.currentThread().isInterrupted()) {
+            return true;
+        }
+
         int remainingPlayers = 0;
         int numLosers = 0;
         for (Player player : state.getPlayers().values()) {
@@ -894,7 +916,10 @@ public abstract class GameImpl implements Game {
                 numLosers++;
             }
         }
-        if (remainingPlayers <= 1 || numLosers >= state.getPlayers().size() - 1) {
+
+        // stop on no more active players
+        boolean noMorePlayers = remainingPlayers <= 1 || numLosers >= state.getPlayers().size() - 1;
+        if (noMorePlayers) {
             end();
             if (remainingPlayers == 0 && logger.isDebugEnabled()) {
                 logger.debug("DRAW for gameId: " + getId());
@@ -1035,6 +1060,7 @@ public abstract class GameImpl implements Game {
     @Override
     public void start(UUID choosingPlayerId) {
         startTime = new Date();
+        DataCollectorServices.getInstance().onGameStart(this);
         if (state.getPlayers().values().iterator().hasNext()) {
             init(choosingPlayerId);
             play(startingPlayerId);
@@ -1412,21 +1438,21 @@ public abstract class GameImpl implements Game {
 
     public void initGameDefaultWatchers() {
         List<Watcher> newWatchers = new ArrayList<>();
-        newWatchers.add(new CastSpellLastTurnWatcher());
-        newWatchers.add(new PlayerLostLifeWatcher());
+        newWatchers.add(new CastSpellLastTurnWatcher()); // SPELL_CAST
+        newWatchers.add(new PlayerLostLifeWatcher()); // LOST_LIFE
         newWatchers.add(new FirstStrikeWatcher()); // required for combat code
-        newWatchers.add(new BlockedAttackerWatcher());
+        newWatchers.add(new BlockedAttackerWatcher()); // BLOCKER_DECLARED
         newWatchers.add(new PlanarRollWatcher()); // needed for RollDiceTest (planechase code needs improves)
-        newWatchers.add(new AttackedThisTurnWatcher());
-        newWatchers.add(new CardsDrawnThisTurnWatcher());
-        newWatchers.add(new ManaSpentToCastWatcher());
-        newWatchers.add(new ManaPaidSourceWatcher());
-        newWatchers.add(new BlockingOrBlockedWatcher());
-        newWatchers.add(new EndStepCountWatcher());
+        newWatchers.add(new AttackedThisTurnWatcher()); // ATTACKER_DECLARED
+        newWatchers.add(new CardsDrawnThisTurnWatcher()); // DREW_CARD
+        newWatchers.add(new ManaSpentToCastWatcher()); // SPELL_CAST
+        newWatchers.add(new ManaPaidSourceWatcher()); // MANA_PAID
+        newWatchers.add(new BlockingOrBlockedWatcher()); // BLOCKER_DECLARED, END_COMBAT_STEP_POST, REMOVED_FROM_COMBAT
+        newWatchers.add(new EndStepCountWatcher()); // for continuous effects
         newWatchers.add(new CommanderPlaysCountWatcher()); // commander plays count uses in non commander games by some cards
-        newWatchers.add(new CreaturesDiedWatcher());
-        newWatchers.add(new TemptedByTheRingWatcher());
-        newWatchers.add(new SpellsCastWatcher());
+        newWatchers.add(new CreaturesDiedWatcher()); // ZONE_CHANGE
+        newWatchers.add(new TemptedByTheRingWatcher()); // TEMPTED_BY_RING
+        newWatchers.add(new SpellsCastWatcher()); // SPELL_CAST
         newWatchers.add(new AttackedOrBlockedThisCombatWatcher()); // required for tests
 
         // runtime check - allows only GAME scope (one watcher per game)
@@ -1550,6 +1576,11 @@ public abstract class GameImpl implements Game {
             endTime = new Date();
             state.endGame();
 
+            // cancel all player dialogs/feedbacks
+            for (Player player : state.getPlayers().values()) {
+                player.abort();
+            }
+
             // inform players about face down cards
             state.getBattlefield().getAllPermanents()
                     .stream()
@@ -1569,10 +1600,7 @@ public abstract class GameImpl implements Game {
                     .sorted()
                     .forEach(this::informPlayers);
 
-            // cancel all player dialogs/feedbacks
-            for (Player player : state.getPlayers().values()) {
-                player.abort();
-            }
+            DataCollectorServices.getInstance().onGameEnd(this);
         }
     }
 
@@ -1779,7 +1807,7 @@ public abstract class GameImpl implements Game {
 
                         // count total errors
                         Player activePlayer = this.getPlayer(getActivePlayerId());
-                        if (activePlayer != null && !activePlayer.isTestsMode()) {
+                        if (activePlayer != null && !activePlayer.isTestMode() && !activePlayer.isFastFailInTestMode()) {
                             // real game - try to continue
                             priorityErrorsCount++;
                             continue;
@@ -2791,7 +2819,7 @@ public abstract class GameImpl implements Game {
                     if (attachedTo != null) {
                         for (Ability ability : perm.getAbilities(this)) {
                             if (ability instanceof AttachableToRestrictedAbility) {
-                                if (!((AttachableToRestrictedAbility) ability).canEquip(attachedTo, null, this)) {
+                                if (!((AttachableToRestrictedAbility) ability).canEquip(attachedTo.getId(), null, this)) {
                                     attachedTo = null;
                                     break;
                                 }
@@ -3161,6 +3189,8 @@ public abstract class GameImpl implements Game {
 
     @Override
     public void informPlayers(String message) {
+        DataCollectorServices.getInstance().onGameLog(this, message);
+
         // Uncomment to print game messages
         // System.out.println(message.replaceAll("\\<.*?\\>", ""));
         if (simulation) {
@@ -3687,6 +3717,39 @@ public abstract class GameImpl implements Game {
     @Override
     public void resetShortLivingLKI() {
         lkiShortLiving.clear();
+        targetedMap.clear();
+    }
+
+    @Override
+    public StackObject findTargetingStackObject(String checkingReference, GameEvent event) {
+        // In case of multiple simultaneous triggered abilities from the same source,
+        // need to get the actual one that targeted, see #8026, #8378, rulings for Battle Mammoth
+        // In case of copied triggered abilities, need to trigger on each independently, see #13498
+        // Also avoids triggering on cancelled selections, see #8802
+        Map<UUID, Set<UUID>> targetMap = targetedMap.getOrDefault(checkingReference, null);
+        // targetMap: key - targetId; value - Set of stackObject Ids
+        if (targetMap == null) {
+            targetMap = new HashMap<>();
+        } else {
+            targetMap = new HashMap<>(targetMap); // must have new object reference if saved back
+        }
+        Set<UUID> targetingObjects = targetMap.computeIfAbsent(event.getTargetId(), k -> new HashSet<>());
+        for (StackObject stackObject : getStack()) {
+            Ability stackAbility = stackObject.getStackAbility();
+            if (stackAbility == null || !stackAbility.getSourceId().equals(event.getSourceId())) {
+                continue;
+            }
+            if (CardUtil.getAllSelectedTargets(stackAbility, this).contains(event.getTargetId())) {
+                if (!targetingObjects.add(stackObject.getId())) {
+                    continue; // The trigger/watcher already recorded that target of the stack object, check for another
+                }
+                // Otherwise, store this combination of trigger/watcher + target + stack object
+                targetMap.put(event.getTargetId(), targetingObjects);
+                targetedMap.put(checkingReference, targetMap);
+                return stackObject;
+            }
+        }
+        return null;
     }
 
     @Override
@@ -4202,5 +4265,15 @@ public abstract class GameImpl implements Game {
                 .append("; stack: ").append(this.getStack().toString())
                 .append(this.getState().isGameOver() ? "; FINISHED: " + this.getWinner() : "");
         return sb.toString();
+    }
+
+    @Override
+    public UUID getTableId() {
+        return this.tableId;
+    }
+
+    @Override
+    public void setTableId(UUID tableId) {
+        this.tableId = tableId;
     }
 }

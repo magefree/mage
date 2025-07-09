@@ -19,7 +19,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetOpponent;
 import mage.util.CardUtil;
 
@@ -46,7 +45,7 @@ public final class FallOfTheFirstCivilization extends CardImpl {
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_I,
                 new Effects(
-                        new DrawCardSourceControllerEffect(1).setText("you"),
+                        new DrawCardSourceControllerEffect(2).setText("you"),
                         new DrawCardTargetEffect(2).setText("and target opponent each draw two cards")
                 ), new TargetOpponent()
         );
@@ -114,7 +113,7 @@ class FallOfTheFirstCivilizationEffect extends OneShotEffect {
                             ));
                     break;
                 default:
-                    TargetPermanent target = new TargetControlledCreaturePermanent(3);
+                    TargetPermanent target = new TargetPermanent(3, StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND);
                     target.withNotTarget(true);
                     target.withChooseHint("to prevent being destroyed");
                     player.choose(outcome, target, source, game);

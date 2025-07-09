@@ -12,7 +12,11 @@ import mage.game.permanent.Permanent;
  */
 public class OpponentPlaysLandTriggeredAbility extends TriggeredAbilityImpl {
 
-    public OpponentPlaysLandTriggeredAbility(Zone zone, Effect effect, Boolean optional) {
+    public OpponentPlaysLandTriggeredAbility(Effect effect, boolean optional) {
+        this(Zone.BATTLEFIELD, effect, optional);
+    }
+
+    public OpponentPlaysLandTriggeredAbility(Zone zone, Effect effect, boolean optional) {
         super(zone, effect, optional);
         setTriggerPhrase("Whenever an opponent plays a land, ");
     }

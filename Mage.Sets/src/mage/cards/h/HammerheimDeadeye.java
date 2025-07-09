@@ -15,6 +15,7 @@ import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.target.Target;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -40,7 +41,7 @@ public final class HammerheimDeadeye extends CardImpl {
         this.addAbility(new EchoAbility("{5}{R}"));
         // When Hammerheim Deadeye enters the battlefield, destroy target creature with flying.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect());
-        Target target = new TargetCreaturePermanent(filter);
+        Target target = new TargetPermanent(filter);
         ability.addTarget(target);
         this.addAbility(ability);
     }

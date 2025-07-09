@@ -4,16 +4,13 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -22,12 +19,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class CunningGeysermage extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterCreaturePermanent("another creature");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public CunningGeysermage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
@@ -41,12 +32,9 @@ public final class CunningGeysermage extends CardImpl {
         this.addAbility(new KickerAbility("{2}{U}"));
 
         // When Cunning Geysermage enters the battlefield, if it was kicked, return up to one other target creature to its owner's hand.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect()),
-                KickedCondition.ONCE, "When {this} enters, " +
-                "if it was kicked, return up to one other target creature to its owner's hand."
-        );
-        ability.addTarget(new TargetPermanent(0, 1, filter, false));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect()
+                .setText("return up to one other target creature to its owner's hand")).withInterveningIf(KickedCondition.ONCE);
+        ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_ANOTHER_CREATURE));
         this.addAbility(ability);
     }
 

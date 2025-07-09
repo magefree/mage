@@ -6,7 +6,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
@@ -33,7 +33,7 @@ public final class LuxaRiverShrine extends CardImpl {
         this.addAbility(ability);
 
         // {T}: You gain 2 life. Activate this ability only if there are three or more brick counters on Luxa River Shrine.
-        this.addAbility(new ConditionalActivatedAbility(new GainLifeEffect(2), new TapSourceCost(), condition));
+        this.addAbility(new ActivateIfConditionActivatedAbility(new GainLifeEffect(2), new TapSourceCost(), condition));
     }
 
     private LuxaRiverShrine(final LuxaRiverShrine card) {

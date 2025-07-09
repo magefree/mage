@@ -17,7 +17,7 @@ public class AdditionalTriggerControlledETBReplacementEffect extends Replacement
 
     public AdditionalTriggerControlledETBReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "If a permanent entering the battlefield causes a triggered ability " +
+        staticText = "If a permanent entering causes a triggered ability " +
                 "of a permanent you control to trigger, that ability triggers an additional time";
     }
 

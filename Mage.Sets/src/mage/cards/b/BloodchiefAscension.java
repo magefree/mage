@@ -38,7 +38,7 @@ public final class BloodchiefAscension extends CardImpl {
 
         // Whenever a card is put into an opponent's graveyard from anywhere, if Bloodchief Ascension has three or more quest counters on it, you may have that player lose 2 life. If you do, you gain 2 life.
         Ability ability = new PutCardIntoGraveFromAnywhereAllTriggeredAbility(
-                new LoseLifeTargetEffect(2), true, StaticFilters.FILTER_CARD_A,
+                new LoseLifeTargetEffect(2).setText("have that player lose 2 life"), true, StaticFilters.FILTER_CARD_A,
                 TargetController.OPPONENT, SetTargetPointer.PLAYER
         ).withInterveningIf(condition);
         ability.addEffect(new GainLifeEffect(2).concatBy("If you do,"));

@@ -10,6 +10,7 @@ import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.target.Target;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -30,7 +31,7 @@ public final class RendFlesh extends CardImpl {
         this.subtype.add(SubType.ARCANE);
 
         // Destroy target non-Spirit creature.
-        Target target = new TargetCreaturePermanent(filter);
+        Target target = new TargetPermanent(filter);
         this.getSpellAbility().addTarget(target);
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }

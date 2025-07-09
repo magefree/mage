@@ -3,19 +3,18 @@ package mage.cards.h;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -24,12 +23,6 @@ import java.util.UUID;
  * @author L_J
  */
 public final class Halfdane extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("target creature other than Halfdane");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public Halfdane(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}{B}");
@@ -40,7 +33,7 @@ public final class Halfdane extends CardImpl {
 
         // At the beginning of your upkeep, change Halfdane's base power and toughness to the power and toughness of target creature other than Halfdane until the end of your next upkeep.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new HalfdaneUpkeepEffect());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE));
         this.addAbility(ability);
     }
 
@@ -58,7 +51,7 @@ class HalfdaneUpkeepEffect extends OneShotEffect {
 
     HalfdaneUpkeepEffect() {
         super(Outcome.Detriment);
-        this.staticText = "change {this}'s base power and toughness to the power and toughness of target creature other than Halfdane until the end of your next upkeep";
+        this.staticText = "change {this}'s base power and toughness to the power and toughness of target creature other than {this} until the end of your next upkeep";
     }
 
     private HalfdaneUpkeepEffect(final HalfdaneUpkeepEffect effect) {

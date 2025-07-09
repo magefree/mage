@@ -54,8 +54,8 @@ public class LoadTest {
     private static final String TEST_AI_RANDOM_DECK_SETS = ""; // sets list for random generated decks (GRN,ACR for specific sets, empty for all sets, PELP for lands only - communication test)
     private static final String TEST_AI_RANDOM_DECK_COLORS_FOR_EMPTY_GAME = "GR";  // colors list for deck generation, empty for all colors
     private static final String TEST_AI_RANDOM_DECK_COLORS_FOR_AI_GAME = "WUBRG";
-    private static final String TEST_AI_CUSTOM_DECK_PATH_1 = ""; // custom deck file instead random for player 1 (empty for random)
-    private static final String TEST_AI_CUSTOM_DECK_PATH_2 = ""; // custom deck file instead random for player 2 (empty for random)
+    private static String TEST_AI_CUSTOM_DECK_PATH_1 = ""; // custom deck file instead random for player 1 (empty for random)
+    private static String TEST_AI_CUSTOM_DECK_PATH_2 = ""; // custom deck file instead random for player 2 (empty for random)
 
     @BeforeClass
     public static void initDatabase() {
@@ -150,6 +150,10 @@ public class LoadTest {
         Thread.sleep(minimumSleepTime);
         Assert.assertEquals("Can't see users count change 2", startUsersCount + 2, monitor.getAllRoomUsers().size());
         Assert.assertNotNull("Can't find user 2", monitor.findUser(player2.userName));
+
+        player1.disconnect();
+        player2.disconnect();
+        monitor.disconnect();
     }
 
     @Test
@@ -213,6 +217,10 @@ public class LoadTest {
                 logger.error(e.getMessage(), e);
             }
         }
+
+        player1.disconnect();
+        player2.disconnect();
+        monitor.disconnect();
     }
 
     public void playTwoAIGame(String gameName, Integer taskNumber, TasksProgress tasksProgress, long randomSeed, String deckColors, String deckAllowedSets, LoadTestGameResult gameResult) {
@@ -251,11 +259,20 @@ public class LoadTest {
 
             String finishInfo = "";
             if (state == TableState.FINISHED) {
-                finishInfo = gameView == null ? "??" : gameView.getStep().getStepShortText().toLowerCase(Locale.ENGLISH);
+                finishInfo = gameView == null || gameView.getStep() == null ? "??" : gameView.getStep().getStepShortText().toLowerCase(Locale.ENGLISH);
             }
             tasksProgress.update(taskNumber, finishInfo, gameView == null ? 0 : gameView.getTurn());
             String globalProgress = tasksProgress.getInfo();
             monitor.client.updateGlobalProgress(globalProgress);
+
+            // disconnected by unknown reason TODO: research the reason
+            if (!monitor.session.isConnected()) {
+                logger.error(monitor.userName + " disconnected from server on game " + gameView);
+                if (gameView != null) {
+                    gameResult.finish(gameView);
+                }
+                break;
+            }
 
             if (gameView != null && checkGame != null) {
                 logger.info(globalProgress + ", " + checkGame.getTableName() + ": ---");
@@ -314,7 +331,7 @@ public class LoadTest {
         }
 
         // all done, can disconnect now
-        monitor.session.connectStop(false, false);
+        monitor.disconnect();
     }
 
     @Test
@@ -322,6 +339,31 @@ public class LoadTest {
     public void test_TwoAIPlayGame_One() {
         LoadTestGameResultsList gameResults = new LoadTestGameResultsList();
         long randomSeed = RandomUtil.nextInt();
+        LoadTestGameResult gameResult = gameResults.createGame(0, "test game", randomSeed);
+        TasksProgress tasksProgress = new TasksProgress();
+        tasksProgress.update(1, "", 0);
+        playTwoAIGame("Single AI game", 1, tasksProgress, randomSeed, "WGUBR", TEST_AI_RANDOM_DECK_SETS, gameResult);
+
+        printGameResults(gameResults);
+    }
+
+    @Test
+    @Ignore
+    public void test_TwoAIPlayGame_Debug() {
+        // usage:
+        // - run test_TwoAIPlayGame_Multiple
+        // - wait some freeze games and stop
+        // - find active table and game in server's games history
+        // - set deck files here
+        // - run single game and debug on server side like stack dump
+        long randomSeed = 1708140198; // 0 for random
+        TEST_AI_CUSTOM_DECK_PATH_1 = ".\\deck_player_1.dck";
+        TEST_AI_CUSTOM_DECK_PATH_2 = ".\\deck_player_2.dck";
+
+        LoadTestGameResultsList gameResults = new LoadTestGameResultsList();
+        if (randomSeed == 0) {
+            randomSeed = RandomUtil.nextInt();
+        }
         LoadTestGameResult gameResult = gameResults.createGame(0, "test game", randomSeed);
         TasksProgress tasksProgress = new TasksProgress();
         tasksProgress.update(1, "", 0);
@@ -673,7 +715,8 @@ public class LoadTest {
             this.client.setSession(this.session);
             this.roomID = this.session.getMainRoomId();
 
-            Assert.assertTrue("client must be connected to server", this.session.isServerReady());
+            Assert.assertTrue("client must be connected to server", this.session.isConnected());
+            Assert.assertTrue("client must get server data", this.session.isServerReady());
         }
 
         public ArrayList<UsersView> getAllRoomUsers() {
@@ -918,12 +961,17 @@ public class LoadTest {
         public int getTotalEffectsCount() {
             return finalGameView == null ? 0 : this.finalGameView.getTotalEffectsCount();
         }
+
+        public int getGameCycle() {
+            return finalGameView == null ? 0 : this.finalGameView.getGameCycle();
+        }
     }
 
     private static class LoadTestGameResultsList extends HashMap<Integer, LoadTestGameResult> {
 
-        private static final String tableFormatHeader = "|%-10s|%-15s|%-20s|%-10s|%-10s|%-10s|%-10s|%-10s|%-15s|%-15s|%-10s|%n";
-        private static final String tableFormatData = "|%-10s|%15s|%20s|%10s|%10s|%10s|%10s|%10s|%15s|%15s|%10s|%n";
+        // index, name, random sid, game cycle, errors, effects, turn, life p1, life p2, creatures p1, creatures p2, =time, sec, ~time, sec
+        private static final String tableFormatHeader = "|%-10s|%-15s|%-20s|%-10s|%-10s|%-10s|%-10s|%-10s|%-10s|%-15s|%-15s|%-15s|%-15s|%n";
+        private static final String tableFormatData = "|%-10s|%15s|%20s|%10s|%10s|%10s|%10s|%10s|%10s|%15s|%15s|%15s|%15s|%n";
 
         public LoadTestGameResult createGame(int index, String name, long randomSeed) {
             if (this.containsKey(index)) {
@@ -939,6 +987,7 @@ public class LoadTest {
                     "index",
                     "name",
                     "random sid",
+                    "game cycles",
                     "errors",
                     "effects",
                     "turn",
@@ -946,8 +995,8 @@ public class LoadTest {
                     "life p2",
                     "creatures p1",
                     "creatures p2",
-                    "time, sec",
-                    "time per turn, sec"
+                    "=time, sec",
+                    "~time, sec"
             );
             System.out.printf(tableFormatHeader, data.toArray());
         }
@@ -961,6 +1010,7 @@ public class LoadTest {
                     String.valueOf(gameResult.index), //"index",
                     gameResult.name, //"name",
                     String.valueOf(gameResult.randomSeed), // "random sid",
+                    String.valueOf(gameResult.getGameCycle()), // "game cycles",
                     String.valueOf(gameResult.getTotalErrorsCount()), // "errors",
                     String.valueOf(gameResult.getTotalEffectsCount()), // "effects",
                     gameResult.getTurnInfo(), //"turn",
@@ -979,21 +1029,26 @@ public class LoadTest {
                     "TOTAL/AVG", //"index",
                     String.valueOf(this.size()), //"name",
                     "total, secs: " + String.format("%.3f", (float) this.getTotalDurationMs() / 1000), // "random sid",
-                    String.valueOf(this.getTotalErrorsCount()), // errors
-                    String.valueOf(this.getAvgEffectsCount()), // effects
-                    String.valueOf(this.getAvgTurn()), // turn
-                    String.valueOf(this.getAvgLife1()), // life p1
-                    String.valueOf(this.getAvgLife2()), // life p2
-                    String.valueOf(this.getAvgCreaturesCount1()), // creatures p1
-                    String.valueOf(this.getAvgCreaturesCount2()), // creatures p2
-                    String.valueOf(String.format("%.3f", (float) this.getAvgDurationMs() / 1000)), // time, sec
-                    String.valueOf(String.format("%.3f", (float) this.getAvgDurationPerTurnMs() / 1000)) // time per turn, sec
+                    "~" + this.getAvgGameCycle(), // game cycles
+                    "=" + this.getTotalErrorsCount(), // errors
+                    "~" + this.getAvgEffectsCount(), // effects
+                    "~" + this.getAvgTurn(), // turn
+                    "~" + this.getAvgLife1(), // life p1
+                    "~" + this.getAvgLife2(), // life p2
+                    "~" + this.getAvgCreaturesCount1(), // creatures p1
+                    "~" + this.getAvgCreaturesCount2(), // creatures p2
+                    "~" + String.format("%.3f", (float) this.getAvgDurationMs() / 1000), // time, sec
+                    "~" + String.format("%.3f", (float) this.getAvgDurationPerTurnMs() / 1000) // time per turn, sec
             );
             System.out.printf(tableFormatData, data.toArray());
         }
 
         private int getTotalErrorsCount() {
             return this.values().stream().mapToInt(LoadTestGameResult::getTotalErrorsCount).sum();
+        }
+
+        private int getAvgGameCycle() {
+            return this.size() == 0 ? 0 : this.values().stream().mapToInt(LoadTestGameResult::getGameCycle).sum() / this.size();
         }
 
         private int getAvgEffectsCount() {

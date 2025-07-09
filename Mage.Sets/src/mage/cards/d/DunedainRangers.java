@@ -4,11 +4,9 @@ import mage.MageInt;
 import mage.abilities.common.LandfallAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.keyword.TheRingTemptsYouEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.SubType;
@@ -23,15 +21,13 @@ import java.util.UUID;
  */
 public final class DunedainRangers extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledPermanent();
+    private static final FilterPermanent filter = new FilterControlledPermanent("you don't control a Ring-bearer");
 
     static {
         filter.add(RingBearerPredicate.instance);
     }
 
-    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(
-            filter, ComparisonType.EQUAL_TO, 0
-    );
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.EQUAL_TO, 0);
 
     public DunedainRangers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
@@ -42,11 +38,7 @@ public final class DunedainRangers extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Landfall -- Whenever a land you control enters, if you don't control a Ring-bearer, the Ring tempts you.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new LandfallAbility(new TheRingTemptsYouEffect()),
-                condition, "Whenever a land you control enters, " +
-                "if you don't control a Ring-bearer, the Ring tempts you."
-        ).setAbilityWord(AbilityWord.LANDFALL));
+        this.addAbility(new LandfallAbility(new TheRingTemptsYouEffect()).withInterveningIf(condition));
     }
 
     private DunedainRangers(final DunedainRangers card) {

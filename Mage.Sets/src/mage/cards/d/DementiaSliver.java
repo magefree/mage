@@ -10,10 +10,13 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ChooseACardNameEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
-import mage.abilities.hint.common.MyTurnHint;
 import mage.cards.*;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
@@ -39,12 +42,15 @@ public final class DementiaSliver extends CardImpl {
         this.toughness = new MageInt(3);
 
         // All Slivers have "{T}: Name a card. Target opponent reveals a card at random from their hand. If it's the named card, that player discards it. Activate this ability only during your turn."
-        Ability gainedAbility = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.ALL), new TapSourceCost(), MyTurnCondition.instance);
+        Ability gainedAbility = new ActivateIfConditionActivatedAbility(
+                new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.ALL),
+                new TapSourceCost(), MyTurnCondition.instance
+        );
         gainedAbility.addEffect(new DementiaSliverEffect());
         gainedAbility.addTarget(new TargetOpponent());
-        gainedAbility.addHint(MyTurnHint.instance);
         this.addAbility(new SimpleStaticAbility(
-                new GainAbilityAllEffect(gainedAbility, Duration.WhileOnBattlefield, filter,
+                new GainAbilityAllEffect(
+                        gainedAbility, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_ALL_SLIVERS,
                         "All Slivers have \"{T}: Choose a card name. "
                                 + "Target opponent reveals a card at random from their hand."
                                 + " If that card has the chosen name, that player discards it."
@@ -67,7 +73,7 @@ class DementiaSliverEffect extends OneShotEffect {
 
     DementiaSliverEffect() {
         super(Outcome.Damage);
-        staticText = "Target opponent reveals a card at random from their hand. If that card has the chose name, that player discards it";
+        staticText = "Target opponent reveals a card at random from their hand. If that card has the chosen name, that player discards it";
     }
 
     private DementiaSliverEffect(final DementiaSliverEffect effect) {

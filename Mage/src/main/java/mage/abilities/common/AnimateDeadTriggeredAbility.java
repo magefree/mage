@@ -17,7 +17,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 import mage.watchers.Watcher;
@@ -63,13 +63,13 @@ class AnimateDeadReplaceAbilityEffect extends ContinuousEffectImpl {
 
     private final boolean becomesAura;
     private Ability newAbility;
-    private TargetCreaturePermanent newTarget;
+    private TargetPermanent newTarget;
 
     public AnimateDeadReplaceAbilityEffect(boolean becomesAura) {
         super(Duration.Custom, Outcome.AddAbility);
         this.becomesAura = becomesAura;
         staticText = (becomesAura ? "it becomes an Aura with" :
-            "it loses \"enchant creature card in a graveyard\" and gains"
+                "it loses \"enchant creature card in a graveyard\" and gains"
         ) + " \"enchant creature put onto the battlefield with {this}.\"";
         if (becomesAura) {
             dependencyTypes.add(DependencyType.AuraAddingRemoving);
@@ -95,7 +95,7 @@ class AnimateDeadReplaceAbilityEffect extends ContinuousEffectImpl {
 
         FilterCreaturePermanent filter = new FilterCreaturePermanent("creature put onto the battlefield with {this}");
         filter.add(new AnimateDeadPredicate(source.getSourceId()));
-        newTarget = new TargetCreaturePermanent(filter);
+        newTarget = new TargetPermanent(filter);
         newAbility = new EnchantAbility(newTarget);
     }
 

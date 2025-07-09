@@ -12,7 +12,6 @@ import mage.util.CardUtil;
  * @author Susucr
  */
 public enum BargainedCondition implements Condition {
-
     instance;
 
     @Override
@@ -22,7 +21,6 @@ public enum BargainedCondition implements Condition {
 
     @Override
     public String toString() {
-        return "{this} was Bargained";
+        return "it was bargained";
     }
-
 }

@@ -8,18 +8,15 @@ import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
-import mage.abilities.hint.common.MyTurnHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.players.Player;
@@ -46,11 +43,12 @@ public final class WishclawTalisman extends CardImpl {
 
         // {1}, {T}, Remove a wish counter from Wishclaw Talisman: Search your library for a card, put it into your hand, then shuffle your library. An opponent gains control of Wishclaw Talisman. Activate this ability only during your turn.
         Ability ability = new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD, new WishclawTalismanEffect(), new GenericManaCost(1), MyTurnCondition.instance
+                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(), false),
+                new GenericManaCost(1), MyTurnCondition.instance
         );
+        ability.addEffect(new WishclawTalismanEffect());
         ability.addCost(new TapSourceCost());
         ability.addCost(new RemoveCountersSourceCost(CounterType.WISH.createInstance()));
-        ability.addHint(MyTurnHint.instance);
         this.addAbility(ability);
     }
 
@@ -66,12 +64,9 @@ public final class WishclawTalisman extends CardImpl {
 
 class WishclawTalismanEffect extends OneShotEffect {
 
-    private static final Effect effect = new SearchLibraryPutInHandEffect(new TargetCardInLibrary(), false);
-
     WishclawTalismanEffect() {
         super(Outcome.Benefit);
-        staticText = "Search your library for a card, put it into your hand, then shuffle. " +
-                "An opponent gains control of {this}";
+        staticText = "An opponent gains control of {this}";
     }
 
     private WishclawTalismanEffect(final WishclawTalismanEffect effect) {
@@ -85,7 +80,6 @@ class WishclawTalismanEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        effect.apply(game, source);
         Player player = game.getPlayer(source.getControllerId());
         if (player == null) {
             return false;

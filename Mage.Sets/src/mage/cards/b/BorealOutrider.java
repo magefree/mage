@@ -61,7 +61,7 @@ enum BorealOutriderCondition implements Condition {
 
     @Override
     public String toString() {
-        return "{S} of any of that spell's color was spent to cast it";
+        return "{S} of any of that spell's colors was spent to cast it";
     }
 }
 
@@ -69,6 +69,7 @@ class BorealOutriderEffect extends ReplacementEffectImpl {
 
     BorealOutriderEffect() {
         super(Duration.EndOfStep, Outcome.BoostCreature);
+        staticText = "that creature enters with an additional +1/+1 counter on it";
     }
 
     private BorealOutriderEffect(BorealOutriderEffect effect) {

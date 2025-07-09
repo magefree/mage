@@ -4,7 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.condition.common.CitysBlessingCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.hint.common.CitysBlessingHint;
 import mage.abilities.keyword.AscendAbility;
@@ -12,7 +12,6 @@ import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
 
 import java.util.UUID;
 
@@ -31,10 +30,9 @@ public final class ArchOfOrazca extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {5}, {T}: Draw a card. Activate this ability only if you have the city's blessing.
-        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
-                new DrawCardSourceControllerEffect(1),
-                new GenericManaCost(5),
-                CitysBlessingCondition.instance);
+        Ability ability = new ActivateIfConditionActivatedAbility(
+                new DrawCardSourceControllerEffect(1), new GenericManaCost(5), CitysBlessingCondition.instance
+        );
         ability.addCost(new TapSourceCost());
         ability.addHint(CitysBlessingHint.instance);
         this.addAbility(ability);

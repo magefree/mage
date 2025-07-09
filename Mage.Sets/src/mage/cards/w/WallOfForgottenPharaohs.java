@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 
 import java.util.UUID;
@@ -33,8 +32,7 @@ public final class WallOfForgottenPharaohs extends CardImpl {
 
         // {T}: Wall of Forgotten Pharaohs deals 1 damage to target player. Activate this ability only if you control a Desert or there is a Desert card in your graveyard.
         Ability ability = new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD, new DamageTargetEffect(1),
-                new TapSourceCost(), DesertControlledOrGraveyardCondition.instance
+                new DamageTargetEffect(1), new TapSourceCost(), DesertControlledOrGraveyardCondition.instance
         );
         ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability.addHint(DesertControlledOrGraveyardCondition.getHint()));

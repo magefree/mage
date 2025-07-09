@@ -21,6 +21,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -46,7 +47,7 @@ public final class JiwariTheEarthAflame extends CardImpl {
         // {X}{R}, {tap}: Jiwari, the Earth Aflame deals X damage to target creature without flying.
         Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(GetXValue.instance), new ManaCostsImpl<>("{X}{R}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
         // Channel - {X}{R}{R}{R}, Discard Jiwari: Jiwari deals X damage to each creature without flying.

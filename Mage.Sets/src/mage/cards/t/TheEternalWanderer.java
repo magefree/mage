@@ -1,37 +1,37 @@
 package mage.cards.t;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-import mage.constants.SuperType;
-import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.delayed.AtTheBeginOfPlayersNextEndStepDelayedTriggeredAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.SuperType;
+import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
-import mage.target.TargetPermanent;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.delayed.AtTheBeginOfPlayersNextEndStepDelayedTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.RestrictionEffect;
-import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.DoublestrikeSamuraiToken;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 
 /**
@@ -181,8 +181,7 @@ class TheEternalWandererAttackRestrictionEffect extends RestrictionEffect {
 
     TheEternalWandererAttackRestrictionEffect() {
         super(Duration.WhileOnBattlefield);
-        staticText = "No more than one creature can attack" + 
-                     " The Eternal Wanderer each combat";
+        staticText = "No more than one creature can attack {this} each combat";
     }
 
     private TheEternalWandererAttackRestrictionEffect(final TheEternalWandererAttackRestrictionEffect effect) {

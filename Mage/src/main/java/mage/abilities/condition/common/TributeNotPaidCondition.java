@@ -1,4 +1,3 @@
-
 package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
@@ -11,8 +10,7 @@ import mage.game.Game;
  * @author LevelX2
  */
 public enum TributeNotPaidCondition implements Condition {
-
-   instance;
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
@@ -21,5 +19,10 @@ public enum TributeNotPaidCondition implements Condition {
             return ((String) tribute).equals("no");
         }
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return "tribute wasn't paid";
     }
 }

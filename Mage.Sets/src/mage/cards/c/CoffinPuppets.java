@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import mage.MageInt;
@@ -12,12 +11,10 @@ import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffec
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.PhaseStep;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -38,7 +35,7 @@ public final class CoffinPuppets extends CardImpl {
     private static final Condition condition = new CompoundCondition(
             "during your upkeep and only if you control a Swamp",
             new PermanentsOnTheBattlefieldCondition(filter),
-            new IsStepCondition(PhaseStep.UPKEEP)
+            IsStepCondition.getMyUpkeep()
     );
 
     public CoffinPuppets(UUID ownerId, CardSetInfo setInfo) {

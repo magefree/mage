@@ -1,6 +1,6 @@
 package mage.cards.s;
 
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -8,7 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -20,7 +20,7 @@ import java.util.UUID;
  */
 public final class SymmetryMatrix extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent("a creature with power equal to its toughness");
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("a creature you control with power equal to its toughness");
 
     static {
         filter.add(SymmetryMatrixPredicate.instance);
@@ -30,9 +30,9 @@ public final class SymmetryMatrix extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // Whenever a creature with power equal to its toughness you control enters, you may pay {1}. If you do, draw a card.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new DoIfCostPaid(
-                new DrawCardSourceControllerEffect(1), new GenericManaCost(1)
-        ), filter));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(
+                new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new GenericManaCost(1)), filter
+        ));
     }
 
     private SymmetryMatrix(final SymmetryMatrix card) {

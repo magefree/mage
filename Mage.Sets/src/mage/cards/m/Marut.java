@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.TreasureSpentToCastCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -35,11 +34,9 @@ public final class Marut extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // When Marut enters the battlefield, if mana from a Treasure was spent to cast it, create a Treasure token for each mana from a Treasure spent to cast it.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new TreasureToken(), MarutValue.instance)),
-                TreasureSpentToCastCondition.instance, "When {this} enters, if mana from a " +
-                "Treasure was spent to cast it, create a Treasure token for each mana from a Treasure spent to cast it."
-        ));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new CreateTokenEffect(new TreasureToken(), MarutValue.instance)
+        ).withInterveningIf(TreasureSpentToCastCondition.instance));
     }
 
     private Marut(final Marut card) {
@@ -67,6 +64,11 @@ enum MarutValue implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "";
+        return "mana from a Treasure spent to cast it";
+    }
+
+    @Override
+    public String toString() {
+        return "1";
     }
 }

@@ -2,16 +2,15 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.FullPartyCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PartyCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.hint.common.PartyCountHint;
 import mage.abilities.keyword.IndestructibleAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -36,23 +35,19 @@ public final class SquadCommander extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Squad Commander enters the battlefield, create a 1/1 white Kor Warrior creature token for each creature in your party.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(
-                new KorWarriorToken(), PartyCount.instance)
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new CreateTokenEffect(new KorWarriorToken(), PartyCount.instance)
         ).addHint(PartyCountHint.instance));
 
         // At the beginning of combat on your turn, if you have a full party, creatures you control get +1/+0 and gain indestructible until end of turn.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfCombatTriggeredAbility(
-                        new BoostControlledEffect(
-                                1, 0, Duration.EndOfTurn
-                        )
-                ), FullPartyCondition.instance, "At the beginning of combat on your turn, " +
-                "if you have a full party, creatures you control get +1/+0 and gain indestructible until end of turn."
-        );
+        Ability ability = new BeginningOfCombatTriggeredAbility(
+                new BoostControlledEffect(1, 0, Duration.EndOfTurn)
+                        .setText("creatures you control get +1/+0")
+        ).withInterveningIf(FullPartyCondition.instance);
         ability.addEffect(new GainAbilityAllEffect(
                 IndestructibleAbility.getInstance(), Duration.EndOfTurn,
                 StaticFilters.FILTER_CONTROLLED_CREATURE
-        ));
+        ).setText("and gain indestructible until end of turn"));
         this.addAbility(ability);
     }
 

@@ -6,20 +6,16 @@ import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.LookAtTargetPlayerHandEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
-import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.NinjutsuAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.common.TargetControlledPermanent;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -28,7 +24,7 @@ import java.util.UUID;
  */
 public final class WalkerOfSecretWays extends CardImpl {
 
-    private static final FilterControlledPermanent filterCreature = new FilterControlledPermanent(SubType.NINJA, "Ninja you control");
+    private static final FilterPermanent filterCreature = new FilterControlledPermanent(SubType.NINJA, "Ninja you control");
 
     public WalkerOfSecretWays(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
@@ -42,15 +38,16 @@ public final class WalkerOfSecretWays extends CardImpl {
         this.addAbility(new NinjutsuAbility("{1}{U}"));
 
         // Whenever Walker of Secret Ways deals combat damage to a player, look at that player's hand.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new WalkerOfSecretWaysEffect(), false, true));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
+                new LookAtTargetPlayerHandEffect(), false, true
+        ));
 
         // {1}{U}: Return target Ninja you control to its owner's hand. Activate this ability only during your turn.
-        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl<>("{1}{U}"), MyTurnCondition.instance);
-        ability.addTarget(new TargetControlledPermanent(filterCreature));
-        ability.addHint(MyTurnHint.instance);
+        Ability ability = new ActivateIfConditionActivatedAbility(
+                new ReturnToHandTargetEffect(), new ManaCostsImpl<>("{1}{U}"), MyTurnCondition.instance
+        );
+        ability.addTarget(new TargetPermanent(filterCreature));
         this.addAbility(ability);
-
-
     }
 
     private WalkerOfSecretWays(final WalkerOfSecretWays card) {
@@ -61,31 +58,4 @@ public final class WalkerOfSecretWays extends CardImpl {
     public WalkerOfSecretWays copy() {
         return new WalkerOfSecretWays(this);
     }
-}
-
-class WalkerOfSecretWaysEffect extends OneShotEffect {
-    WalkerOfSecretWaysEffect() {
-        super(Outcome.Detriment);
-        staticText = "look at that player's hand";
-    }
-
-    private WalkerOfSecretWaysEffect(final WalkerOfSecretWaysEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if (player != null && controller != null) {
-            controller.lookAtCards("Walker of Secret Ways", player.getHand(), game);
-        }
-        return true;
-    }
-
-    @Override
-    public WalkerOfSecretWaysEffect copy() {
-        return new WalkerOfSecretWaysEffect(this);
-    }
-
 }

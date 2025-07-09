@@ -3,7 +3,6 @@ package mage.cards.o;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.condition.common.FerociousCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.hint.common.FerociousHint;
 import mage.abilities.keyword.DeathtouchAbility;
@@ -31,12 +30,8 @@ public final class OrneryDilophosaur extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
 
         // Whenever Ornery Dilophosaur attacks, if you control a creature with power 4 or greater, Ornery Dilophosaur gets +2/+2 until end of turn.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new AttacksTriggeredAbility(
-                        new BoostSourceEffect(2, 2, Duration.EndOfTurn), false
-                ), FerociousCondition.instance, "Whenever {this} attacks, " +
-                "if you control a creature with power 4 or greater, {this} gets +2/+2 until end of turn."
-        ).addHint(FerociousHint.instance));
+        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn))
+                .withInterveningIf(FerociousCondition.instance).addHint(FerociousHint.instance));
     }
 
     private OrneryDilophosaur(final OrneryDilophosaur card) {

@@ -14,9 +14,12 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.GoadedPredicate;
 import mage.game.Game;
 import mage.game.permanent.token.MarkOfTheRaniToken;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_ANOTHER_CREATURE;
 
 /**
  *
@@ -42,7 +45,7 @@ public final class TheRani extends CardImpl {
         // Whenever The Rani enters the battlefield or attacks, create a red Aura enchantment token named Mark of the Rani attached to another target creature. That token has enchant creature and "Enchanted creature gets +2/+2 and is goaded."
         Ability ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(
                 new TheRaniEffect());
-        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_ANOTHER_CREATURE));
+        ability.addTarget(new TargetPermanent(FILTER_ANOTHER_CREATURE));
         this.addAbility(ability);
 
         // Whenever a goaded creature deals combat damage to one of your opponents, investigate.

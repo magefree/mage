@@ -17,13 +17,13 @@ import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
 
@@ -33,7 +33,7 @@ import java.util.UUID;
 public final class GrandArchitect extends CardImpl {
 
     private static final FilterCreaturePermanent boostFilter = new FilterCreaturePermanent("blue creatures");
-    private static final FilterControlledCreaturePermanent tapFilter = new FilterControlledCreaturePermanent("untapped blue creature you control");
+    private static final FilterControlledPermanent tapFilter = new FilterControlledCreaturePermanent("untapped blue creature you control");
 
     static {
         boostFilter.add(new ColorPredicate(ObjectColor.BLUE));
@@ -108,9 +108,8 @@ class GrandArchitectManaAbility extends ActivatedManaAbilityImpl {
 
     private final FilterPermanent filter;
 
-    GrandArchitectManaAbility(FilterControlledCreaturePermanent filter) {
-        super(Zone.BATTLEFIELD, new BasicManaEffect(new GrandArchitectConditionalMana()),
-                new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true)));
+    GrandArchitectManaAbility(FilterControlledPermanent filter) {
+        super(Zone.BATTLEFIELD, new BasicManaEffect(new GrandArchitectConditionalMana()), new TapTargetCost(filter));
         this.netMana.add(new GrandArchitectConditionalMana());
         this.filter = filter;
     }

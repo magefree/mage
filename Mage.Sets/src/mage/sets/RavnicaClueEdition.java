@@ -78,7 +78,7 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Dimir Guildgate", 234, Rarity.COMMON, mage.cards.d.DimirGuildgate.class));
         cards.add(new SetCardInfo("Dimir Guildmage", 186, Rarity.UNCOMMON, mage.cards.d.DimirGuildmage.class));
         cards.add(new SetCardInfo("Dimir Signet", 221, Rarity.COMMON, mage.cards.d.DimirSignet.class));
-        //cards.add(new SetCardInfo("Dimir Strandcatcher", 30, Rarity.RARE, mage.cards.d.DimirStrandcatcher.class));
+        cards.add(new SetCardInfo("Dimir Strandcatcher", 30, Rarity.RARE, mage.cards.d.DimirStrandcatcher.class));
         cards.add(new SetCardInfo("Dining Room", 15, Rarity.UNCOMMON, mage.cards.d.DiningRoom.class));
         cards.add(new SetCardInfo("Direct Current", 132, Rarity.COMMON, mage.cards.d.DirectCurrent.class));
         cards.add(new SetCardInfo("Discovery // Dispersal", 187, Rarity.UNCOMMON, mage.cards.d.DiscoveryDispersal.class));
@@ -195,7 +195,7 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 255, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 256, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 257, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Portal Manipulator", 40, Rarity.UNCOMMON, mage.cards.p.PortalManipulator.class));
+        cards.add(new SetCardInfo("Portal Manipulator", 40, Rarity.UNCOMMON, mage.cards.p.PortalManipulator.class));
         cards.add(new SetCardInfo("Predatory Impetus", 172, Rarity.COMMON, mage.cards.p.PredatoryImpetus.class));
         cards.add(new SetCardInfo("Psychic Impetus", 92, Rarity.COMMON, mage.cards.p.PsychicImpetus.class));
         cards.add(new SetCardInfo("Pyrewild Shaman", 144, Rarity.UNCOMMON, mage.cards.p.PyrewildShaman.class));

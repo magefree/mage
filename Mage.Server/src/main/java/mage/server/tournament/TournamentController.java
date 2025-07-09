@@ -54,7 +54,7 @@ public class TournamentController {
     public TournamentController(ManagerFactory managerFactory, Tournament tournament, ConcurrentMap<UUID, UUID> userPlayerMap, UUID tableId) {
         this.managerFactory = managerFactory;
         this.userPlayerMap = userPlayerMap;
-        chatId = managerFactory.chatManager().createChatSession("Tournament " + tournament.getId());
+        this.chatId = managerFactory.chatManager().createTourneyChatSession(tournament);
         this.tournament = tournament;
         this.tableId = tableId;
         init();
@@ -261,9 +261,7 @@ public class TournamentController {
             table.setState(TableState.STARTING);
             tableManager.startTournamentSubMatch(null, table.getId());
             tableManager.getMatch(table.getId()).ifPresent(match -> {
-                match.setTableId(tableId);
-                pair.setMatch(match);
-                pair.setTableId(table.getId());
+                pair.setMatchAndTable(match, table.getId());
                 player1.setState(TournamentPlayerState.DUELING);
                 player2.setState(TournamentPlayerState.DUELING);
             });
@@ -291,9 +289,7 @@ public class TournamentController {
                 table.setState(TableState.STARTING);
                 tableManager.startTournamentSubMatch(null, table.getId());
                 tableManager.getMatch(table.getId()).ifPresent(match -> {
-                    match.setTableId(tableId);
-                    round.setMatch(match);
-                    round.setTableId(table.getId());
+                    round.setMatchAndTable(match, table.getId());
                     for (TournamentPlayer player : round.getAllPlayers()) {
                         player.setState(TournamentPlayerState.DUELING);
                     }

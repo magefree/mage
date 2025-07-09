@@ -8,10 +8,9 @@ import mage.filter.FilterStackObject;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.stack.StackObject;
 import mage.game.permanent.Permanent;
+import mage.game.stack.StackObject;
 import mage.target.targetpointer.FixedTarget;
-import mage.util.CardUtil;
 
 /**
  * @author LoneFox
@@ -54,7 +53,7 @@ public class BecomesTargetAttachedTriggeredAbility extends TriggeredAbilityImpl 
         if (enchantment == null || enchantment.getAttachedTo() == null || !event.getTargetId().equals(enchantment.getAttachedTo())) {
             return false;
         }
-        StackObject targetingObject = CardUtil.findTargetingStackObject(this.getId().toString(), event, game);
+        StackObject targetingObject = game.findTargetingStackObject(this.getId().toString(), event);
         if (targetingObject == null || !filter.match(targetingObject, getControllerId(), this, game)) {
             return false;
         }

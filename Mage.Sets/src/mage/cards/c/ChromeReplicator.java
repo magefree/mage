@@ -5,7 +5,6 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -37,12 +36,7 @@ public final class ChromeReplicator extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When Chrome Replicator enters the battlefield, if you control two or more nonland, nontoken permanents with the same name as one another, create a 4/4 colorless Construct artifact creature token.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new Construct4Token())),
-                ChromeReplicatorCondition.instance, "When {this} enters, " +
-                "if you control two or more nonland, nontoken permanents with the same name as one another, " +
-                "create a 4/4 colorless Construct artifact creature token."
-        ));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new Construct4Token())).withInterveningIf(ChromeReplicatorCondition.instance));
     }
 
     private ChromeReplicator(final ChromeReplicator card) {
@@ -77,5 +71,10 @@ enum ChromeReplicatorCondition implements Condition {
                 .filter(Objects::nonNull)
                 .filter(s -> !s.isEmpty())
                 .anyMatch(s -> nameMap.compute(s, CardUtil::setOrIncrementValue) >= 2);
+    }
+
+    @Override
+    public String toString() {
+        return "you control two or more nonland, nontoken permanents with the same name as one another";
     }
 }

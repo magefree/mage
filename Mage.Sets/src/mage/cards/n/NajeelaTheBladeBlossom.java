@@ -1,13 +1,13 @@
 
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksAllTriggeredAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.IsPhaseCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.AdditionalCombatPhaseEffect;
 import mage.abilities.effects.common.CreateTokenTargetEffect;
@@ -18,24 +18,20 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SetTargetPointer;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.TurnPhase;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.WarriorToken;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class NajeelaTheBladeBlossom extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.WARRIOR, "Warrior");
+    private static final Condition condition = new IsPhaseCondition(TurnPhase.COMBAT);
 
     public NajeelaTheBladeBlossom(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
@@ -54,25 +50,20 @@ public final class NajeelaTheBladeBlossom extends CardImpl {
         ));
 
         // {W}{U}{B}{R}{G}: Untap all attacking creatures. They gain trample, lifelink, and haste until end of turn. After this phase, there is an additional combat phase. Activate this ability only during combat.
-        Ability ability = new ConditionalActivatedAbility(
-                Zone.BATTLEFIELD,
+        Ability ability = new ActivateIfConditionActivatedAbility(
                 new UntapAllEffect(StaticFilters.FILTER_ATTACKING_CREATURES),
-                new ManaCostsImpl<>("{W}{U}{B}{R}{G}"),
-                new IsPhaseCondition(TurnPhase.COMBAT)
+                new ManaCostsImpl<>("{W}{U}{B}{R}{G}"), condition
         );
         ability.addEffect(new GainAbilityAllEffect(
-                TrampleAbility.getInstance(),
-                Duration.EndOfTurn,
+                TrampleAbility.getInstance(), Duration.EndOfTurn,
                 StaticFilters.FILTER_ATTACKING_CREATURES
         ).setText("They gain trample"));
         ability.addEffect(new GainAbilityAllEffect(
-                LifelinkAbility.getInstance(),
-                Duration.EndOfTurn,
+                LifelinkAbility.getInstance(), Duration.EndOfTurn,
                 StaticFilters.FILTER_ATTACKING_CREATURES
         ).setText(", lifelink"));
         ability.addEffect(new GainAbilityAllEffect(
-                HasteAbility.getInstance(),
-                Duration.EndOfTurn,
+                HasteAbility.getInstance(), Duration.EndOfTurn,
                 StaticFilters.FILTER_ATTACKING_CREATURES
         ).setText(", and haste until end of turn"));
         ability.addEffect(new AdditionalCombatPhaseEffect());

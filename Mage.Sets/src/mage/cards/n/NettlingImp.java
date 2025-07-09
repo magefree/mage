@@ -1,14 +1,14 @@
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.InvertCondition;
+import mage.abilities.condition.common.OpponentsTurnCondition;
 import mage.abilities.condition.common.TargetAttackedThisTurnCondition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.combat.AttacksIfAbleTargetEffect;
@@ -19,24 +19,23 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.ControlledFromStartOfControllerTurnPredicate;
 import mage.game.Game;
-import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
-import mage.watchers.common.AttackedThisTurnWatcher;
+
+import java.util.UUID;
 
 /**
- *
  * @author MTGfan
  */
 public final class NettlingImp extends CardImpl {
 
-    static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Wall");
+    static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Wall creature the active player has controlled continuously since the beginning of the turn");
 
     static {
         filter.add(Predicates.not(SubType.WALL.getPredicate()));
         filter.add(new ControlledFromStartOfControllerTurnPredicate());
         filter.add(TargetController.ACTIVE.getControllerPredicate());
-        filter.setMessage("non-Wall creature the active player has controlled continuously since the beginning of the turn.");
     }
 
     public NettlingImp(UUID ownerId, CardSetInfo setInfo) {
@@ -47,13 +46,14 @@ public final class NettlingImp extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {T}: Choose target non-Wall creature the active player has controlled continuously since the beginning of the turn. That creature attacks this turn if able. If it doesn't, destroy it at the beginning of the next end step. Activate this ability only during an opponent's turn, before attackers are declared.
-        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new AttacksIfAbleTargetEffect(Duration.EndOfTurn),
-                new TapSourceCost(), new NettlingImpTurnCondition(),
-                "{T}: Choose target non-Wall creature the active player has controlled continuously since the beginning of the turn. "
-                + "That creature attacks this turn if able. If it doesn't, destroy it at the beginning of the next end step. "
-                + "Activate only during an opponent's turn, before attackers are declared.");
+        Ability ability = new ActivateIfConditionActivatedAbility(
+                new AttacksIfAbleTargetEffect(Duration.EndOfTurn)
+                        .setText("choose target non-Wall creature the active player has controlled " +
+                                "continuously since the beginning of the turn. That creature attacks this turn if able"),
+                new TapSourceCost(), NettlingImpTurnCondition.instance
+        );
         ability.addEffect(new NettlingImpDelayedDestroyEffect());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
     }
@@ -68,17 +68,17 @@ public final class NettlingImp extends CardImpl {
     }
 }
 
-class NettlingImpTurnCondition implements Condition {
+enum NettlingImpTurnCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player activePlayer = game.getPlayer(game.getActivePlayerId());
-        return activePlayer != null && activePlayer.hasOpponent(source.getControllerId(), game) && game.getPhase().getStep().getType().getIndex() < 5;
+        return OpponentsTurnCondition.instance.apply(game, source) && !game.getTurn().isDeclareAttackersStepStarted();
     }
 
     @Override
     public String toString() {
-        return "";
+        return "during an opponent's turn, before attackers are declared";
     }
 }
 
@@ -86,7 +86,7 @@ class NettlingImpDelayedDestroyEffect extends OneShotEffect {
 
     NettlingImpDelayedDestroyEffect() {
         super(Outcome.Detriment);
-        this.staticText = "If it doesn't, destroy it at the beginning of the next end step";
+        this.staticText = "Destroy it at the beginning of the next end step if it didn't attack this turn";
     }
 
     private NettlingImpDelayedDestroyEffect(final NettlingImpDelayedDestroyEffect effect) {

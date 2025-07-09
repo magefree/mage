@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.ConvokeAbility;
 import mage.cards.CardImpl;
@@ -24,7 +23,7 @@ import java.util.UUID;
  */
 public final class MartyrsSoul extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledLandPermanent();
+    private static final FilterPermanent filter = new FilterControlledLandPermanent("you control no tapped lands");
 
     static {
         filter.add(TappedPredicate.TAPPED);
@@ -45,12 +44,10 @@ public final class MartyrsSoul extends CardImpl {
         this.addAbility(new ConvokeAbility());
 
         // When Martyr's Soul enters the battlefield, if you control no tapped lands, put two +1/+1 counters on it.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(
-                        CounterType.P1P1.createInstance(2)
-                )), condition, "When {this} enters, " +
-                "if you control no tapped lands, put two +1/+1 counters on it."
-        ));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(2))
+                        .setText("put two +1/+1 counters on it")
+        ).withInterveningIf(condition));
     }
 
     private MartyrsSoul(final MartyrsSoul card) {

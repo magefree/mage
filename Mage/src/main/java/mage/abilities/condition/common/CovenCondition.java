@@ -33,6 +33,6 @@ public enum CovenCondition implements Condition {
 
     @Override
     public String toString() {
-        return "if you control three or more creatures with different powers";
+        return "you control three or more creatures with different powers";
     }
 }

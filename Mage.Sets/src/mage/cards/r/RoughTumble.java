@@ -1,7 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -12,6 +11,8 @@ import mage.constants.SpellAbilityType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -33,13 +34,13 @@ public final class RoughTumble extends SplitCard {
         // Rough
         // Rough deals 2 damage to each creature without flying.
         Effect effect = new DamageAllEffect(2, filterWithoutFlying);
-        effect.setText("Rough deals 2 damage to each creature without flying");
+        effect.setText("{this} deals 2 damage to each creature without flying");
         getLeftHalfCard().getSpellAbility().addEffect(effect);
 
         // Tumble
         // Tumble deals 6 damage to each creature with flying.
         effect = new DamageAllEffect(6, filterFlying);
-        effect.setText("Tumble deals 6 damage to each creature with flying");
+        effect.setText("{this} deals 6 damage to each creature with flying");
         getRightHalfCard().getSpellAbility().addEffect(effect);
 
     }

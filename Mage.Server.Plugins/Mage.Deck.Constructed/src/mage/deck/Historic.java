@@ -32,7 +32,6 @@ public class Historic extends Constructed {
         banned.add("Agent of Treachery");
         banned.add("Brainstorm");
         banned.add("Channel");
-        banned.add("Counterspell");
         banned.add("Dark Ritual");
         banned.add("Demonic Tutor");
         banned.add("Fires of Invention");

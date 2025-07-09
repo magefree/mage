@@ -55,9 +55,8 @@ class ParoxysmEffect extends OneShotEffect {
 
     ParoxysmEffect() {
         super(Outcome.BoostCreature);
-        this.staticText = "that player reveals the top card of their library. \n"
-                + "If that card is a land card, destroy that creature. \n"
-                + "Otherwise, it gets +3/+3 until end of turn.";
+        this.staticText = "that player reveals the top card of their library. If that card is a land card, "+
+                "destroy that creature. Otherwise, it gets +3/+3 until end of turn.";
     }
 
     private ParoxysmEffect(final ParoxysmEffect effect) {

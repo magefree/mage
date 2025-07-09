@@ -17,7 +17,7 @@ import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -41,7 +41,7 @@ public final class EagleOfDeliverance extends CardImpl {
         TriggeredAbility trigger = new EntersBattlefieldTriggeredAbility(
                 new AddCountersTargetEffect(CounterType.INDESTRUCTIBLE.createInstance())
         );
-        trigger.addTarget(new TargetControlledCreaturePermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
+        trigger.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
         trigger.addEffect(new EagleOfDeliveranceEffect());
         this.addAbility(trigger);
     }

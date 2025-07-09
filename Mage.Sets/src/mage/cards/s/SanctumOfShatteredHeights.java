@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -45,7 +44,7 @@ public final class SanctumOfShatteredHeights extends CardImpl {
 
         // {1}, Discard a land card or Shrine card: Sanctum of Shattered Heights deals X damage to target creature or planeswalker, where X is the number of Shrines you control.
         Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(xValue)
-                .setText("Sanctum of Shattered Heights deals X damage to target creature or planeswalker, where X is the number of Shrines you control"),
+                .setText("{this} deals X damage to target creature or planeswalker, where X is the number of Shrines you control"),
                 new ManaCostsImpl<>("{1}"))
                 .addHint(new ValueHint("Shrines you control", xValue));
         ability.addCost(new DiscardTargetCost(new TargetCardInHand(filter)));

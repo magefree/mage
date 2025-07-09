@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -10,19 +9,16 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -59,7 +55,7 @@ class StormchaserChimeraEffect extends OneShotEffect {
 
     StormchaserChimeraEffect() {
         super(Outcome.Benefit);
-        this.staticText = ", then reveal the top card of your library. Stormchaser Chimera gets +X/+0 until end of turn, where X is that card's mana value";
+        this.staticText = ", then reveal the top card of your library. {this} gets +X/+0 until end of turn, where X is that card's mana value";
     }
 
     private StormchaserChimeraEffect(final StormchaserChimeraEffect effect) {

@@ -1,20 +1,17 @@
 package mage.cards.f;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.keyword.HasteAbility;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.abilities.keyword.TrampleAbility;
-import mage.abilities.keyword.HasteAbility;
-import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
@@ -24,6 +21,11 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
+import mage.target.targetadjustment.DefineByTriggerTargetAdjuster;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -64,6 +66,7 @@ class FroghemothTriggeredAbility extends DealsCombatDamageToAPlayerTriggeredAbil
 
     public FroghemothTriggeredAbility() {
         super(new FroghemothEffect(), false);
+        setTargetAdjuster(DefineByTriggerTargetAdjuster.instance);
     }
 
     private FroghemothTriggeredAbility(final FroghemothTriggeredAbility ability) {

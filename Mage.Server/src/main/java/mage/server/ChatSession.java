@@ -1,6 +1,9 @@
 package mage.server;
 
+import mage.collectors.DataCollectorServices;
 import mage.game.Game;
+import mage.game.Table;
+import mage.game.tournament.Tournament;
 import mage.interfaces.callback.ClientCallback;
 import mage.interfaces.callback.ClientCallbackMethod;
 import mage.server.managers.ManagerFactory;
@@ -27,6 +30,13 @@ public class ChatSession {
     private final ManagerFactory managerFactory;
     private final ReadWriteLock lock = new ReentrantReadWriteLock(); // TODO: no needs due ConcurrentHashMap usage?
 
+    // only 1 field must be filled per chat type
+    // TODO: rework chat sessions to share logic (one server room/lobby + one table/subtable + one games/match)
+    private UUID roomId = null;
+    private UUID tourneyId = null;
+    private UUID tableId = null;
+    private UUID gameId = null;
+
     private final ConcurrentMap<UUID, String> users = new ConcurrentHashMap<>(); // active users
     private final Set<UUID> usersHistory = new HashSet<>(); // all users that was here (need for system messages like connection problem)
     private final UUID chatId;
@@ -38,6 +48,26 @@ public class ChatSession {
         this.chatId = UUID.randomUUID();
         this.createTime = new Date();
         this.info = info;
+    }
+
+    public ChatSession withRoom(UUID roomId) {
+        this.roomId = roomId;
+        return this;
+    }
+
+    public ChatSession withTourney(Tournament tournament) {
+        this.tourneyId = tournament.getId();
+        return this;
+    }
+
+    public ChatSession withTable(Table table) {
+        this.tableId = table.getId();
+        return this;
+    }
+
+    public ChatSession withGame(Game game) {
+        this.gameId = game.getId();
+        return this;
     }
 
     public void join(UUID userId) {
@@ -112,9 +142,36 @@ public class ChatSession {
         // TODO: is it freeze on someone's connection fail/freeze with play multiple games/chats/lobby?
         // TODO: send messages in another thread?!
         if (!message.isEmpty()) {
+            ChatMessage chatMessage = new ChatMessage(userName, message, (withTime ? new Date() : null), game, color, messageType, soundToPlay);
+
+            switch (messageType) {
+                case USER_INFO:
+                case STATUS:
+                case TALK:
+                    if (this.roomId != null) {
+                        DataCollectorServices.getInstance().onChatRoom(this.roomId, userName, message);
+                    } else if (this.tourneyId != null) {
+                        DataCollectorServices.getInstance().onChatTourney(this.tourneyId, userName, message);
+                    } else if (this.tableId != null) {
+                        DataCollectorServices.getInstance().onChatTable(this.tableId, userName, message);
+                    } else if (this.gameId != null) {
+                        DataCollectorServices.getInstance().onChatGame(this.gameId, userName, message);
+                    }
+                    break;
+                case GAME:
+                    // game logs processing in other place
+                    break;
+                case WHISPER_FROM:
+                case WHISPER_TO:
+                    // ignore private messages
+                    break;
+                default:
+                    throw new IllegalStateException("Unsupported message type " + messageType);
+            }
+
+            // TODO: wtf, remove all that locks/tries and make it simpler
             Set<UUID> clientsToRemove = new HashSet<>();
-            ClientCallback clientCallback = new ClientCallback(ClientCallbackMethod.CHATMESSAGE, chatId,
-                    new ChatMessage(userName, message, (withTime ? new Date() : null), game, color, messageType, soundToPlay));
+            ClientCallback clientCallback = new ClientCallback(ClientCallbackMethod.CHATMESSAGE, chatId, chatMessage);
             List<UUID> chatUserIds = new ArrayList<>();
             final Lock r = lock.readLock();
             r.lock();
