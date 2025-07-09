@@ -1,6 +1,7 @@
 package mage.cards.d;
 
 import mage.MageInt;
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
@@ -19,6 +20,7 @@ import mage.players.ManaPoolItem;
 import mage.util.CardUtil;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -105,12 +107,31 @@ class DranaAndLinvalaGainAbilitiesEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        List<Ability> abilities = getOpponentActivatedAbilities(game, source);
+        for (MageItem object : affectedObjects) {
+            Permanent permanent = (Permanent) object;
+            for (Ability ability : abilities) {
+                Ability addedAbility = permanent.addAbility(ability, source.getSourceId(), game, true);
+                if (addedAbility != null) {
+                    addedAbility.getEffects().setValue("dranaLinvalaFlag", true);
+                }
+            }
+        }
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         Permanent perm = source.getSourcePermanentIfItStillExists(game);
         if (perm == null) {
             return false;
         }
-        for (Ability ability : game
+        affectedObjects.add(perm);
+        return true;
+    }
+
+    private List<Ability> getOpponentActivatedAbilities(Game game, Ability source) {
+        return game
                 .getBattlefield()
                 .getActivePermanents(
                         StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE,
@@ -121,13 +142,7 @@ class DranaAndLinvalaGainAbilitiesEffect extends ContinuousEffectImpl {
                 .flatMap(Collection::stream)
                 .filter(Objects::nonNull)
                 .filter(Ability::isActivatedAbility)
-                .collect(Collectors.toList())) {
-            Ability addedAbility = perm.addAbility(ability, source.getSourceId(), game, true);
-            if (addedAbility != null) {
-                addedAbility.getEffects().setValue("dranaLinvalaFlag", true);
-            }
-        }
-        return true;
+                .collect(Collectors.toList());
     }
 
     @Override
