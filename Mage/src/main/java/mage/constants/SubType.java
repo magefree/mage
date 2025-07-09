@@ -160,6 +160,7 @@ public enum SubType {
     DRAGON("Dragon", SubTypeSet.CreatureType),
     DRAKE("Drake", SubTypeSet.CreatureType),
     DREADNOUGHT("Dreadnought", SubTypeSet.CreatureType),
+    DRIX("Drix", SubTypeSet.CreatureType),
     DROID("Droid", SubTypeSet.CreatureType, true), // Star Wars
     DRONE("Drone", SubTypeSet.CreatureType),
     DRUID("Druid", SubTypeSet.CreatureType),
