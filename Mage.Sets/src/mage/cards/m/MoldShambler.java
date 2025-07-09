@@ -1,6 +1,7 @@
 package mage.cards.m;
 
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -9,26 +10,18 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
 /**
- *
  * @author North
  */
 public final class MoldShambler extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("noncreature permanent");
-
-    static {
-        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
-    }
-
     public MoldShambler(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
         this.subtype.add(SubType.FUNGUS);
         this.subtype.add(SubType.BEAST);
 
@@ -39,9 +32,9 @@ public final class MoldShambler extends CardImpl {
         this.addAbility(new KickerAbility("{1}{G}"));
 
         // When Mold Shambler enters the battlefield, if it was kicked, destroy target noncreature permanent.
-        EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
-        ability.addTarget(new TargetPermanent(filter));
-        this.addAbility(ability.withInterveningIf(KickedCondition.ONCE));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect()).withInterveningIf(KickedCondition.ONCE);
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_NON_CREATURE));
+        this.addAbility(ability);
     }
 
     private MoldShambler(final MoldShambler card) {

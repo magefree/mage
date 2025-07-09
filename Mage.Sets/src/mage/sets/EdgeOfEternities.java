@@ -55,6 +55,8 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Exalted Sunborn", 318, Rarity.MYTHIC, mage.cards.e.ExaltedSunborn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Exalted Sunborn", 358, Rarity.MYTHIC, mage.cards.e.ExaltedSunborn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Exalted Sunborn", 384, Rarity.MYTHIC, mage.cards.e.ExaltedSunborn.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Extinguisher Battleship", 242, Rarity.RARE, mage.cards.e.ExtinguisherBattleship.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Extinguisher Battleship", 355, Rarity.RARE, mage.cards.e.ExtinguisherBattleship.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 266, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", 275, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 276, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));

@@ -909,6 +909,13 @@ public final class StaticFilters {
         FILTER_PERMANENT_BATTLES.setLockedFilter(true);
     }
 
+    public static final FilterPermanent FILTER_PERMANENT_NON_CREATURE = new FilterPermanent("noncreature permanent");
+
+    static {
+        FILTER_PERMANENT_NON_CREATURE.add(Predicates.not(CardType.CREATURE.getPredicate()));
+        FILTER_PERMANENT_NON_CREATURE.setLockedFilter(true);
+    }
+
     public static final FilterNonlandPermanent FILTER_PERMANENT_NON_LAND = new FilterNonlandPermanent();
 
     static {

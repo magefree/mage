@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import mage.MageInt;
@@ -8,11 +7,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.ElephantToken;
@@ -24,16 +22,9 @@ import java.util.Map.Entry;
 import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
  */
 public final class Terastodon extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterPermanent("noncreature permanent");
-
-    static {
-        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
-    }
 
     public Terastodon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{G}{G}");
@@ -44,7 +35,7 @@ public final class Terastodon extends CardImpl {
 
         // When Terastodon enters the battlefield, you may destroy up to three target noncreature permanents. For each permanent put into a graveyard this way, its controller creates a 3/3 green Elephant creature token.
         Ability ability = new EntersBattlefieldTriggeredAbility(new TerastodonEffect(), true);
-        ability.addTarget(new TargetPermanent(0, 3, filter, false));
+        ability.addTarget(new TargetPermanent(0, 3, StaticFilters.FILTER_PERMANENT_NON_CREATURE, false));
         this.addAbility(ability);
     }
 
