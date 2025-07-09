@@ -41,6 +41,8 @@ public final class EdgeOfEternitiesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Evolving Wilds", 158, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Fabled Passage", 60, Rarity.RARE, mage.cards.f.FabledPassage.class));
         cards.add(new SetCardInfo("Farseek", 50, Rarity.COMMON, mage.cards.f.Farseek.class));
+        cards.add(new SetCardInfo("Festering Thicket", 21, Rarity.RARE, mage.cards.f.FesteringThicket.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Festering Thicket", 41, Rarity.RARE, mage.cards.f.FesteringThicket.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Formless Genesis", 96, Rarity.RARE, mage.cards.f.FormlessGenesis.class));
         cards.add(new SetCardInfo("Gaze of Granite", 116, Rarity.RARE, mage.cards.g.GazeOfGranite.class));
         cards.add(new SetCardInfo("God-Eternal Bontu", 83, Rarity.MYTHIC, mage.cards.g.GodEternalBontu.class));
