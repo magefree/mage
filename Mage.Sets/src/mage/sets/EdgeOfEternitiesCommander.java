@@ -95,6 +95,8 @@ public final class EdgeOfEternitiesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Titania, Protector of Argoth", 111, Rarity.MYTHIC, mage.cards.t.TitaniaProtectorOfArgoth.class));
         cards.add(new SetCardInfo("Twilight Mire", 189, Rarity.RARE, mage.cards.t.TwilightMire.class));
         cards.add(new SetCardInfo("Uurg, Spawn of Turg", 127, Rarity.UNCOMMON, mage.cards.u.UurgSpawnOfTurg.class));
+        cards.add(new SetCardInfo("Vernal Fen", 24, Rarity.RARE, mage.cards.v.VernalFen.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vernal Fen", 44, Rarity.RARE, mage.cards.v.VernalFen.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Viridescent Bog", 190, Rarity.RARE, mage.cards.v.ViridescentBog.class));
         cards.add(new SetCardInfo("Wastes", 191, Rarity.COMMON, mage.cards.w.Wastes.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Windgrace's Judgment", 129, Rarity.RARE, mage.cards.w.WindgracesJudgment.class));
