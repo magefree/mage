@@ -23,5 +23,7 @@ public final class EdgeOfEternitiesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Inspirit, Flagship Vessel", 2, Rarity.MYTHIC, mage.cards.i.InspiritFlagshipVessel.class));
         cards.add(new SetCardInfo("Kilo, Apogee Mind", 3, Rarity.MYTHIC, mage.cards.k.KiloApogeeMind.class));
         cards.add(new SetCardInfo("Szarel, Genesis Shepherd", 4, Rarity.MYTHIC, mage.cards.s.SzarelGenesisShepherd.class));
+        cards.add(new SetCardInfo("Baloth Prime", 13, Rarity.RARE, mage.cards.b.BalothPrime.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Baloth Prime", 33, Rarity.RARE, mage.cards.b.BalothPrime.class, NON_FULL_USE_VARIOUS));
     }
 }
