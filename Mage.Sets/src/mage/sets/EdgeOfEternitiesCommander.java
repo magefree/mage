@@ -50,6 +50,8 @@ public final class EdgeOfEternitiesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Hammer of Purphoros", 88, Rarity.RARE, mage.cards.h.HammerOfPurphoros.class));
         cards.add(new SetCardInfo("Harrow", 98, Rarity.COMMON, mage.cards.h.Harrow.class));
         cards.add(new SetCardInfo("Hearthhull, the Worldseed", 1, Rarity.MYTHIC, mage.cards.h.HearthhullTheWorldseed.class));
+        cards.add(new SetCardInfo("Horizon Explorer", 15, Rarity.RARE, mage.cards.h.HorizonExplorer.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Horizon Explorer", 35, Rarity.RARE, mage.cards.h.HorizonExplorer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Infernal Grasp", 84, Rarity.UNCOMMON, mage.cards.i.InfernalGrasp.class));
         cards.add(new SetCardInfo("Inspirit, Flagship Vessel", 2, Rarity.MYTHIC, mage.cards.i.InspiritFlagshipVessel.class));
         cards.add(new SetCardInfo("Juri, Master of the Revue", 119, Rarity.UNCOMMON, mage.cards.j.JuriMasterOfTheRevue.class));
