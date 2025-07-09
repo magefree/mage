@@ -79,6 +79,8 @@ public final class EdgeOfEternitiesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Rocky Tar Pit", 173, Rarity.UNCOMMON, mage.cards.r.RockyTarPit.class));
         cards.add(new SetCardInfo("Roiling Regrowth", 105, Rarity.UNCOMMON, mage.cards.r.RoilingRegrowth.class));
         cards.add(new SetCardInfo("Satyr Wayfinder", 106, Rarity.COMMON, mage.cards.s.SatyrWayfinder.class));
+        cards.add(new SetCardInfo("Scouring Swarm", 16, Rarity.RARE, mage.cards.s.ScouringSwarm.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Scouring Swarm", 36, Rarity.RARE, mage.cards.s.ScouringSwarm.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sheltered Thicket", 178, Rarity.RARE, mage.cards.s.ShelteredThicket.class));
         cards.add(new SetCardInfo("Skyshroud Claim", 107, Rarity.COMMON, mage.cards.s.SkyshroudClaim.class));
         cards.add(new SetCardInfo("Smoldering Marsh", 182, Rarity.RARE, mage.cards.s.SmolderingMarsh.class));
