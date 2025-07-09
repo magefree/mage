@@ -125,6 +125,8 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Syr Vondam, the Lucent", 232, Rarity.UNCOMMON, mage.cards.s.SyrVondamTheLucent.class));
         cards.add(new SetCardInfo("Tannuk, Memorial Ensign", 233, Rarity.UNCOMMON, mage.cards.t.TannukMemorialEnsign.class));
         cards.add(new SetCardInfo("Temporal Intervention", 120, Rarity.COMMON, mage.cards.t.TemporalIntervention.class));
+        cards.add(new SetCardInfo("Terrasymbiosis", 210, Rarity.RARE, mage.cards.t.Terrasymbiosis.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Terrasymbiosis", 312, Rarity.RARE, mage.cards.t.Terrasymbiosis.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tezzeret, Cruel Captain", 2, Rarity.MYTHIC, mage.cards.t.TezzeretCruelCaptain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tezzeret, Cruel Captain", 287, Rarity.MYTHIC, mage.cards.t.TezzeretCruelCaptain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Seriema", 323, Rarity.RARE, mage.cards.t.TheSeriema.class, NON_FULL_USE_VARIOUS));
