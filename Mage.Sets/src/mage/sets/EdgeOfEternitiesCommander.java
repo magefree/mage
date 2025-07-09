@@ -19,6 +19,7 @@ public final class EdgeOfEternitiesCommander extends ExpansionSet {
         super("Edge of Eternities Commander", "EOC", ExpansionSet.buildDate(2025, 8, 1), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
 
+        cards.add(new SetCardInfo("Hearthhull, the Worldseed", 1, Rarity.MYTHIC, mage.cards.h.HearthhullTheWorldseed.class));
         cards.add(new SetCardInfo("Kilo, Apogee Mind", 3, Rarity.MYTHIC, mage.cards.k.KiloApogeeMind.class));
         cards.add(new SetCardInfo("Szarel, Genesis Shepherd", 4, Rarity.MYTHIC, mage.cards.s.SzarelGenesisShepherd.class));
     }
