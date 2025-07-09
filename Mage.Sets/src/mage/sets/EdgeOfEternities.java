@@ -160,6 +160,8 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Uthros, Titanic Godcore", 380, Rarity.MYTHIC, mage.cards.u.UthrosTitanicGodcore.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Virulent Silencer", 248, Rarity.UNCOMMON, mage.cards.v.VirulentSilencer.class));
         cards.add(new SetCardInfo("Voidforged Titan", 125, Rarity.UNCOMMON, mage.cards.v.VoidforgedTitan.class));
+        cards.add(new SetCardInfo("Warmaker Gunship", 167, Rarity.RARE, mage.cards.w.WarmakerGunship.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Warmaker Gunship", 339, Rarity.RARE, mage.cards.w.WarmakerGunship.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Watery Grave", 261, Rarity.RARE, mage.cards.w.WateryGrave.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Watery Grave", 286, Rarity.RARE, mage.cards.w.WateryGrave.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Watery Grave", 381, Rarity.RARE, mage.cards.w.WateryGrave.class, NON_FULL_USE_VARIOUS));
