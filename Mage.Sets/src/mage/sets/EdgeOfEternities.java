@@ -30,6 +30,8 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Anticausal Vestige", 357, Rarity.MYTHIC, mage.cards.a.AnticausalVestige.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Anticausal Vestige", 383, Rarity.RARE, mage.cards.a.AnticausalVestige.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Banishing Light", 6, Rarity.COMMON, mage.cards.b.BanishingLight.class));
+        cards.add(new SetCardInfo("Biotech Specialist", 214, Rarity.RARE, mage.cards.b.BiotechSpecialist.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Biotech Specialist", 347, Rarity.RARE, mage.cards.b.BiotechSpecialist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Breeding Pool", 251, Rarity.RARE, mage.cards.b.BreedingPool.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Breeding Pool", 278, Rarity.RARE, mage.cards.b.BreedingPool.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Breeding Pool", 373, Rarity.RARE, mage.cards.b.BreedingPool.class, NON_FULL_USE_VARIOUS));
