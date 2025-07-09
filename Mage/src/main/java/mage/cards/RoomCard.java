@@ -2,6 +2,8 @@ package mage.cards;
 
 import java.util.UUID;
 
+import mage.abilities.Abilities;
+import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.RoomUnlockAbility;
@@ -49,22 +51,16 @@ public abstract class RoomCard extends SplitCard {
 
     protected void AddRoomAbilities(Ability leftAbility, Ability rightAbility) {
         getLeftHalfCard().addAbility(leftAbility);
-        getRightHalfCard().addAbility(rightAbility);   
-        // Set the source of the abilities to be the main card, not the half.
-        // This is important or triggers will be looking for the wrong object (the half) as a source.
-        getLeftHalfCard().getAbilities().forEach(ability -> {
-            ability.setSourceId(this.getId());
-        });  
-        getRightHalfCard().getAbilities().forEach(ability -> {
-            ability.setSourceId(this.getId());
-        });  
+        getRightHalfCard().addAbility(rightAbility);
+        this.addAbility(leftAbility.copy());
+        this.addAbility(rightAbility.copy());
 
         // Add the one-shot effect to unlock a door on cast -> ETB
         Ability entersAbility = new EntersBattlefieldAbility(new RoomEnterUnlockEffect());
         entersAbility.setRuleVisible(false);
         this.addAbility(entersAbility);
 
-        // Add abilities to remove locked door abilities - keep triggers or they won't trigger
+        // Remove locked door abilities - keeping unlock triggers (or they won't trigger when unlocked)
         if (leftAbility != null && !(leftAbility instanceof UnlockThisDoorTriggeredAbility)) {
             Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                     new LoseAbilitySourceEffect(leftAbility, Duration.WhileOnBattlefield),
@@ -100,6 +96,30 @@ public abstract class RoomCard extends SplitCard {
         }
 
         this.addAbility(new RoomAbility());
+    }
+
+    @Override
+    public Abilities<Ability> getAbilities() {
+        return this.abilities;
+    }
+
+    @Override
+    public Abilities<Ability> getAbilities(Game game) {
+        return this.abilities;
+    }
+
+    @Override
+    public void setZone(Zone zone, Game game) {
+        super.setZone(zone, game);
+
+        if (zone == Zone.BATTLEFIELD) {
+            game.setZone(getLeftHalfCard().getId(), Zone.OUTSIDE);
+            game.setZone(getRightHalfCard().getId(), Zone.OUTSIDE);
+            return;
+
+        }
+        game.setZone(getLeftHalfCard().getId(), zone);
+        game.setZone(getRightHalfCard().getId(), zone);
     }
 }
 

@@ -42,4 +42,17 @@ public class RoomCardHalfImpl extends SplitCardHalfImpl implements RoomCardHalf 
 
         return super.cast(game, fromZone, ability, controllerId);
     }
+    
+    @Override
+    public void setZone(Zone zone, Game game) {
+        if (zone == Zone.BATTLEFIELD) {
+            game.setZone(splitCardParent.getId(), zone);
+            game.setZone(splitCardParent.getLeftHalfCard().getId(), Zone.OUTSIDE);
+            game.setZone(splitCardParent.getRightHalfCard().getId(), Zone.OUTSIDE);
+            return;
+        }
+        game.setZone(splitCardParent.getId(), zone);
+        game.setZone(splitCardParent.getLeftHalfCard().getId(), zone);
+        game.setZone(splitCardParent.getRightHalfCard().getId(), zone);
+    }
 }

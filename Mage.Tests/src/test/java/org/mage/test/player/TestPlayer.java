@@ -434,15 +434,6 @@ public class TestPlayer implements Player {
             return true;
         }
 
-        if (object instanceof RoomCard && object.getName().contains(" // ")) {
-            String[] sides = object.getName().split(" // ");
-            for (String side : sides) {
-                if (side.trim().equals(nameOrAlias)) {
-                    return true;
-                }
-            }
-        }
-
         // must search any names, even empty (face down cards)
         if (CardUtil.haveSameNames(nameOrAlias, object.getName(), true)) {
             return true;

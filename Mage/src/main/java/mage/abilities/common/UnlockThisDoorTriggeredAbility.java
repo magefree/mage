@@ -16,7 +16,7 @@ public class UnlockThisDoorTriggeredAbility extends TriggeredAbilityImpl {
     private final boolean isLeftHalf;
 
     public UnlockThisDoorTriggeredAbility(Effect effect, boolean optional, boolean isLeftHalf) {
-        super(Zone.BATTLEFIELD, effect, isLeftHalf);
+        super(Zone.BATTLEFIELD, effect, optional);
         this.isLeftHalf = isLeftHalf;
         this.setTriggerPhrase("When you unlock this door, ");
     }

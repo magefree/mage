@@ -196,11 +196,19 @@ public final class ZonesHandler {
                 RoomCard roomCard = (RoomCard) targetCard.getMainCard();
                 cardsToMove = new CardsImpl(roomCard);
                 cardsToUpdate.get(toZone).add(roomCard);
-                // Move all parts together
-                cardsToUpdate.get(toZone).add(roomCard.getLeftHalfCard());
-                cardsToUpdate.get(toZone).add(roomCard.getRightHalfCard());
-                cardsToMove = new CardsImpl(targetCard);
-                cardsToUpdate.get(toZone).addAll(cardsToMove);
+                switch (toZone) {
+                    case STACK:
+                    case BATTLEFIELD:
+                        // We don't want room halves to ever be on the battlefield
+                        cardsToUpdate.get(Zone.OUTSIDE).add(roomCard.getLeftHalfCard());
+                        cardsToUpdate.get(Zone.OUTSIDE).add(roomCard.getRightHalfCard());
+                        break;
+                        default:
+                        // move all parts
+                        cardsToUpdate.get(toZone).add(roomCard.getLeftHalfCard());
+                        cardsToUpdate.get(toZone).add(roomCard.getRightHalfCard());
+                        break;
+                }
             } else {
                 cardsToMove = new CardsImpl(targetCard);
                 cardsToUpdate.get(toZone).addAll(cardsToMove);
@@ -279,8 +287,12 @@ public final class ZonesHandler {
         }
 
         // update zone in main
-        game.setZone(event.getTargetId(), event.getToZone());
-
+        if (targetCard instanceof RoomCardHalf && (toZone == Zone.BATTLEFIELD)) {
+            game.setZone(event.getTargetId(), Zone.OUTSIDE);
+        } else {
+            game.setZone(event.getTargetId(), event.getToZone());
+        }
+        
         // update zone in other parts (meld cards, mdf half cards)
         cardsToUpdate.entrySet().forEach(entry -> {
             for (Card card : entry.getValue().getCards(game)) {
