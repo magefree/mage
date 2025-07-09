@@ -16,6 +16,12 @@ import mage.target.common.TargetCardInLibrary;
  */
 public final class LanderToken extends TokenImpl {
 
+    public static String getReminderText() {
+        return "<i>(It's an artifact with \"{2}, {T}, Sacrifice this token: "
+                + "Search your library for a basic land card, put it onto the "
+                + "battlefield tapped, then shuffle.\")</i>";
+    }
+
     public LanderToken() {
         super("Lander Token", "Lander token");
         cardType.add(CardType.ARTIFACT);
