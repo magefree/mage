@@ -111,14 +111,14 @@ class CascadeEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        Card sourceCard = game.getCard(source.getSourceId());
-        if (sourceCard == null) {
+        Spell sourceSpell = game.getSpell(source.getSourceId());
+        if (sourceSpell == null) {
             return false;
         }
 
         // exile cards from the top of your library until you exile a nonland card whose converted mana cost is less than this spell's converted mana cost
         Cards cardsToExile = new CardsImpl();
-        int sourceCost = sourceCard.getManaValue();
+        int sourceCost = sourceSpell.getManaValue();
         Card cardToCast = null;
         for (Card card : controller.getLibrary().getCards(game)) {
             cardsToExile.add(card);
