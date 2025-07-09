@@ -24,6 +24,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         this.blockName = "Edge of Eternities"; // for sorting in GUI
         this.rotationSet = true;
 
+        cards.add(new SetCardInfo("Adagia, Windswept Bastion", 250, Rarity.MYTHIC, mage.cards.a.AdagiaWindsweptBastion.class));
         cards.add(new SetCardInfo("Alpharael, Dreaming Acolyte", 212, Rarity.UNCOMMON, mage.cards.a.AlpharaelDreamingAcolyte.class));
         cards.add(new SetCardInfo("Anticausal Vestige", 1, Rarity.RARE, mage.cards.a.AnticausalVestige.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Anticausal Vestige", 317, Rarity.RARE, mage.cards.a.AnticausalVestige.class, NON_FULL_USE_VARIOUS));
