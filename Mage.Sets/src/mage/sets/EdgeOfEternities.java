@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class EdgeOfEternities extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Anticausal Vestige", "Astelli Reclaimer", "Bygone Colossus", "Eusocial Engineering", "Exalted Sunborn", "Haliya, Guided by Light", "Mechanozoa", "Nova Hellkite", "Quantum Riddler", "Red Tiger Mechan", "Starbreach Whale", "Starfield Shepherd", "Starfield Vocalist", "Timeline Culler", "Weftstalker Ardent");
+    private static final List<String> unfinished = Arrays.asList("Anticausal Vestige", "Astelli Reclaimer", "Broodguard Elite", "Bygone Colossus", "Eusocial Engineering", "Exalted Sunborn", "Haliya, Guided by Light", "Mechanozoa", "Nova Hellkite", "Quantum Riddler", "Red Tiger Mechan", "Starbreach Whale", "Starfield Shepherd", "Starfield Vocalist", "Timeline Culler", "Weftstalker Ardent");
     private static final EdgeOfEternities instance = new EdgeOfEternities();
 
     public static EdgeOfEternities getInstance() {
@@ -38,6 +38,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Breeding Pool", 251, Rarity.RARE, mage.cards.b.BreedingPool.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Breeding Pool", 278, Rarity.RARE, mage.cards.b.BreedingPool.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Breeding Pool", 373, Rarity.RARE, mage.cards.b.BreedingPool.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Broodguard Elite", 175, Rarity.UNCOMMON, mage.cards.b.BroodguardElite.class));
         cards.add(new SetCardInfo("Bygone Colossus", 235, Rarity.UNCOMMON, mage.cards.b.BygoneColossus.class));
         cards.add(new SetCardInfo("Chrome Companion", 236, Rarity.COMMON, mage.cards.c.ChromeCompanion.class));
         cards.add(new SetCardInfo("Command Bridge", 252, Rarity.COMMON, mage.cards.c.CommandBridge.class));
