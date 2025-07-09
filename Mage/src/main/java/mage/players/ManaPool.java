@@ -101,7 +101,7 @@ public class ManaPool implements Serializable {
     /**
      * @param manaType      the mana type that should be paid
      * @param ability
-     * @param filter
+     * @param filter        filters the source of mana, only matching source are accepted.
      * @param game
      * @param costToPay     complete costs to pay (needed to check conditional
      *                      mana)
@@ -140,7 +140,8 @@ public class ManaPool implements Serializable {
         }
 
         for (ManaPoolItem mana : manaItems) {
-            if (filter != null && !filter.match(mana.getSourceObject(), game)) {
+            MageObject sourceObject = mana.getSourceObject();
+            if (filter != null && (!filter.checkObjectClass(sourceObject) || !filter.match(sourceObject, game))) {
                 // If here, then mana source does not match the filter
                 // However, alternate mana payment abilities such as convoke won't match the filter but are valid
                 // So we need to do some ugly checks to allow them

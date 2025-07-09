@@ -1,11 +1,15 @@
 package mage.filter;
 
+import mage.abilities.Ability;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @param <E>
@@ -14,7 +18,8 @@ import java.util.List;
  */
 public abstract class FilterImpl<E> implements Filter<E> {
 
-    protected List<Predicate<? super E>> predicates = new ArrayList<>();
+    private List<Predicate<? super E>> predicates = new ArrayList<>();
+    private List<ObjectSourcePlayerPredicate<E>> extraPredicates = new ArrayList<>();
     protected String message;
     protected boolean lockedFilter; // Helps to prevent "accidentally" modifying the StaticFilters objects
 
@@ -29,6 +34,7 @@ public abstract class FilterImpl<E> implements Filter<E> {
     protected FilterImpl(final FilterImpl<E> filter) {
         this.message = filter.message;
         this.predicates = new ArrayList<>(filter.predicates);
+        this.extraPredicates = new ArrayList<>(filter.extraPredicates);
         this.lockedFilter = false;// After copying a filter it's allowed to modify
     }
 
@@ -41,12 +47,25 @@ public abstract class FilterImpl<E> implements Filter<E> {
     }
 
     @Override
-    public final Filter<E> add(Predicate<? super E> predicate) {
-        if (isLockedFilter()) {
-            throw new UnsupportedOperationException("You may not modify a locked filter");
+    public boolean match(E object, UUID sourceControllerId, Ability source, Game game) {
+        if (!this.match(object, game)) {
+            return false;
         }
+        ObjectSourcePlayer osp = new ObjectSourcePlayer<>(object, sourceControllerId, source);
+        return extraPredicates.stream().allMatch(p -> p.apply(osp, game));
+    }
+
+    @Override
+    public Filter<E> add(Predicate<? super E> predicate) {
+        checkUnlockedFilter();
         predicates.add(predicate);
         return this;
+    }
+
+    @Override
+    public final void addExtra(ObjectSourcePlayerPredicate predicate) {
+        checkUnlockedFilter();
+        extraPredicates.add(predicate);
     }
 
     @Override
@@ -56,10 +75,14 @@ public abstract class FilterImpl<E> implements Filter<E> {
 
     @Override
     public final void setMessage(String message) {
+        checkUnlockedFilter();
+        this.message = message;
+    }
+
+    protected void checkUnlockedFilter() {
         if (isLockedFilter()) {
             throw new UnsupportedOperationException("You may not modify a locked filter");
         }
-        this.message = message;
     }
 
     @Override
@@ -79,5 +102,13 @@ public abstract class FilterImpl<E> implements Filter<E> {
 
     public List<Predicate<? super E>> getPredicates() {
         return predicates;
+    }
+
+    public List<ObjectSourcePlayerPredicate<E>> getExtraPredicates() {
+        return new ArrayList<>(extraPredicates);
+    }
+
+    public boolean hasPredicates() {
+        return !predicates.isEmpty() || !extraPredicates.isEmpty();
     }
 }

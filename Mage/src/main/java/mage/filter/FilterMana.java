@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * TODO: Not really a Filter. Should be renamed?
+ *
  * @author nantuko
  */
 public class FilterMana implements Serializable {
