@@ -46,6 +46,8 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Cosmogoyf", 313, Rarity.RARE, mage.cards.c.Cosmogoyf.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cosmogrand Zenith", 9, Rarity.MYTHIC, mage.cards.c.CosmograndZenith.class));
         cards.add(new SetCardInfo("Decode Transmissions", 94, Rarity.COMMON, mage.cards.d.DecodeTransmissions.class));
+        cards.add(new SetCardInfo("Elegy Acolyte", 293, Rarity.RARE, mage.cards.e.ElegyAcolyte.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Elegy Acolyte", 97, Rarity.RARE, mage.cards.e.ElegyAcolyte.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Embrace Oblivion", 98, Rarity.COMMON, mage.cards.e.EmbraceOblivion.class));
         cards.add(new SetCardInfo("Emergency Eject", 14, Rarity.UNCOMMON, mage.cards.e.EmergencyEject.class));
         cards.add(new SetCardInfo("Emissary Escort", 326, Rarity.RARE, mage.cards.e.EmissaryEscort.class, NON_FULL_USE_VARIOUS));
