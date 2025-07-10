@@ -87,6 +87,7 @@ public final class EdgeOfEternitiesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Horizon Explorer", 15, Rarity.RARE, mage.cards.h.HorizonExplorer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Horizon Explorer", 35, Rarity.RARE, mage.cards.h.HorizonExplorer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Infernal Grasp", 84, Rarity.UNCOMMON, mage.cards.i.InfernalGrasp.class));
+        cards.add(new SetCardInfo("Insight Engine", 6, Rarity.RARE, mage.cards.i.InsightEngine.class));
         cards.add(new SetCardInfo("Inspirit, Flagship Vessel", 2, Rarity.MYTHIC, mage.cards.i.InspiritFlagshipVessel.class));
         cards.add(new SetCardInfo("Irrigated Farmland", 162, Rarity.RARE, mage.cards.i.IrrigatedFarmland.class));
         cards.add(new SetCardInfo("Jhoira, Weatherlight Captain", 118, Rarity.RARE, mage.cards.j.JhoiraWeatherlightCaptain.class));
