@@ -110,6 +110,8 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Ragost, Deft Gastronaut", 224, Rarity.RARE, mage.cards.r.RagostDeftGastronaut.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ragost, Deft Gastronaut", 300, Rarity.RARE, mage.cards.r.RagostDeftGastronaut.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Red Tiger Mechan", 154, Rarity.COMMON, mage.cards.r.RedTigerMechan.class));
+        cards.add(new SetCardInfo("Rust Harvester", 159, Rarity.RARE, mage.cards.r.RustHarvester.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Rust Harvester", 310, Rarity.RARE, mage.cards.r.RustHarvester.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sacred Foundry", 256, Rarity.RARE, mage.cards.s.SacredFoundry.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sacred Foundry", 282, Rarity.RARE, mage.cards.s.SacredFoundry.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sacred Foundry", 377, Rarity.RARE, mage.cards.s.SacredFoundry.class, NON_FULL_USE_VARIOUS));
