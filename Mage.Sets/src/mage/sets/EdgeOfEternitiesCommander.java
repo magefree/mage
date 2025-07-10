@@ -54,6 +54,7 @@ public final class EdgeOfEternitiesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Dakmor Salvage", 156, Rarity.UNCOMMON, mage.cards.d.DakmorSalvage.class));
         cards.add(new SetCardInfo("Darksteel Reactor", 134, Rarity.RARE, mage.cards.d.DarksteelReactor.class));
         cards.add(new SetCardInfo("Deepglow Skate", 70, Rarity.RARE, mage.cards.d.DeepglowSkate.class));
+        cards.add(new SetCardInfo("Depthshaker Titan", 9, Rarity.RARE, mage.cards.d.DepthshakerTitan.class));
         cards.add(new SetCardInfo("Dispatch", 64, Rarity.UNCOMMON, mage.cards.d.Dispatch.class));
         cards.add(new SetCardInfo("Empowered Autogenerator", 135, Rarity.RARE, mage.cards.e.EmpoweredAutogenerator.class));
         cards.add(new SetCardInfo("Emry, Lurker of the Loch", 71, Rarity.RARE, mage.cards.e.EmryLurkerOfTheLoch.class));
