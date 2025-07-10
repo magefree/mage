@@ -2788,6 +2788,23 @@ public class ScryfallImageSupportTokens {
             // EOE
             put("EOE/Lander", "https://api.scryfall.com/cards/teoe/8/en?format=image");
 
+            // EOC
+            put("EOC/Bird", "https://api.scryfall.com/cards/teoc/3/en?format=image");
+            put("EOC/Insect", "https://api.scryfall.com/cards/teoc/4/en?format=image");
+            put("EOC/Beast/1", "https://api.scryfall.com/cards/teoc/5/en?format=image");
+            put("EOC/Beast/2", "https://api.scryfall.com/cards/teoc/6/en?format=image");
+            put("EOC/Elemental/1", "https://api.scryfall.com/cards/teoc/7/en?format=image");
+            put("EOC/Elemental/2", "https://api.scryfall.com/cards/teoc/8/en?format=image");
+            put("EOC/Pest", "https://api.scryfall.com/cards/teoc/9/en?format=image");
+            put("EOC/Clue", "https://api.scryfall.com/cards/teoc/10/en?format=image");
+            put("EOC/Gnome", "https://api.scryfall.com/cards/teoc/11/en?format=image");
+            put("EOC/Elemental/1", "https://api.scryfall.com/cards/teoc/12/en?format=image");
+            put("EOC/Elemental/2", "https://api.scryfall.com/cards/teoc/13/en?format=image");
+            put("EOC/Elemental/3", "https://api.scryfall.com/cards/teoc/14/en?format=image");
+            put("EOC/Incubator", "https://api.scryfall.com/cards/teoc/15/en?format=image&face=front");
+            put("EOC/Phyrexian", "https://api.scryfall.com/cards/teoc/15/en?format=image&face=back");
+            put("EOC/Thopter", "https://api.scryfall.com/cards/teoc/16/en?format=image");
+
             // JVC
             put("JVC/Elemental Shaman", "https://api.scryfall.com/cards/tjvc/4?format=image");
 
