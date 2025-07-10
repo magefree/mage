@@ -1,23 +1,16 @@
 package mage.cards.a;
 
 import mage.MageInt;
-import mage.abilities.Ability;
+import mage.abilities.common.CantPayLifeOrSacrificeAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.filter.Filter;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.game.Game;
-import mage.players.Player;
 
 import java.util.UUID;
 
@@ -39,9 +32,7 @@ public final class AngelOfJubilation extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES_NON_BLACK, true)));
 
         // Players can't pay life or sacrifice creatures to cast spells or activate abilities.
-        Ability ability = new SimpleStaticAbility(new AngelOfJubilationEffect());
-        ability.addEffect(new AngelOfJubilationSacrificeFilterEffect());
-        this.addAbility(ability);
+        this.addAbility(new CantPayLifeOrSacrificeAbility(StaticFilters.FILTER_PERMANENT_CREATURES));
     }
 
     private AngelOfJubilation(final AngelOfJubilation card) {
@@ -52,67 +43,4 @@ public final class AngelOfJubilation extends CardImpl {
     public AngelOfJubilation copy() {
         return new AngelOfJubilation(this);
     }
-}
-
-class AngelOfJubilationEffect extends ContinuousEffectImpl {
-
-    AngelOfJubilationEffect() {
-        super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Detriment);
-        staticText = "Players can't pay life or sacrifice creatures to cast spells";
-    }
-
-    private AngelOfJubilationEffect(final AngelOfJubilationEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public AngelOfJubilationEffect copy() {
-        return new AngelOfJubilationEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
-            Player player = game.getPlayer(playerId);
-            player.setPayLifeCostLevel(Player.PayLifeCostLevel.nonSpellnonActivatedAbilities);
-            player.setCanPaySacrificeCostFilter(new FilterCreaturePermanent());
-        }
-        return true;
-    }
-}
-
-class AngelOfJubilationSacrificeFilterEffect extends CostModificationEffectImpl {
-
-    AngelOfJubilationSacrificeFilterEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment, CostModificationType.SET_COST);
-        staticText = "or activate abilities";
-    }
-
-    protected AngelOfJubilationSacrificeFilterEffect(AngelOfJubilationSacrificeFilterEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        for (Cost cost : abilityToModify.getCosts()) {
-            if (cost instanceof SacrificeTargetCost) {
-                SacrificeTargetCost sacrificeCost = (SacrificeTargetCost) cost;
-                Filter filter = sacrificeCost.getTargets().get(0).getFilter();
-                filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        return (abilityToModify.isActivatedAbility() || abilityToModify.getAbilityType() == AbilityType.SPELL)
-                && game.getState().getPlayersInRange(source.getControllerId(), game).contains(abilityToModify.getControllerId());
-    }
-
-    @Override
-    public AngelOfJubilationSacrificeFilterEffect copy() {
-        return new AngelOfJubilationSacrificeFilterEffect(this);
-    }
-
 }

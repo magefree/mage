@@ -2,21 +2,22 @@ package mage.cards.k;
 
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
+import mage.abilities.common.CantPayLifeOrSacrificeAbility;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.ExileSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.ComparisonType;
+import mage.constants.Outcome;
+import mage.constants.SuperType;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -33,7 +34,7 @@ public class KarnsSylex extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
 
         // Players can’t pay life to cast spells or to activate abilities that aren’t mana abilities.
-        this.addAbility(new SimpleStaticAbility(new KarnsSylexEffect()));
+        this.addAbility(new CantPayLifeOrSacrificeAbility(true, null));
 
         // {X}, {T}, Exile Karn’s Sylex: Destroy each nonland permanent with mana value X or less. Activate only as a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(new KarnsSylexDestroyEffect(), new ManaCostsImpl<>("{X}"));
@@ -49,32 +50,6 @@ public class KarnsSylex extends CardImpl {
     @Override
     public KarnsSylex copy() {
         return new KarnsSylex(this);
-    }
-}
-
-class KarnsSylexEffect extends ContinuousEffectImpl {
-
-    KarnsSylexEffect() {
-        super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Detriment);
-        staticText = "Players can't pay life to cast spells or to activate abilities that aren't mana abilities";
-    }
-
-    private KarnsSylexEffect(final KarnsSylexEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public KarnsSylexEffect copy() {
-        return new KarnsSylexEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
-            Player player = game.getPlayer(playerId);
-            player.setPayLifeCostLevel(Player.PayLifeCostLevel.onlyManaAbilities);
-        }
-        return true;
     }
 }
 

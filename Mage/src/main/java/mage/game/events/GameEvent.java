@@ -676,6 +676,13 @@ public class GameEvent implements Serializable {
         /* rad counter life loss/gain effect
          */
         RADIATION_GAIN_LIFE,
+        /* for checking sacrifice as a cost
+         targetId   the permanent to be sacrificed
+         sourceId   of the ability
+         playerId   controller of ability
+         data       id of the ability being paid for
+         */
+        PAY_SACRIFICE_COST,
         // custom events - must store some unique data to track
         CUSTOM_EVENT;
 
