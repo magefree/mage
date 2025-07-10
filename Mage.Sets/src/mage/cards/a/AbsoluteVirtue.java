@@ -79,7 +79,7 @@ class AbsoluteVirtueAbility extends ProtectionAbility {
                 .ofNullable(source)
                 .map(MageItem::getId)
                 .map(game::getControllerId)
-                .map(uuid -> !game.getOpponents(this.getControllerId()).contains(uuid))
+                .map(uuid -> !game.getOpponents(this.getSourceId()).contains(uuid))
                 .orElse(true);
     }
 }
