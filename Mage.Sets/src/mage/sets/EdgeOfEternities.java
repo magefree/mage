@@ -115,6 +115,10 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 274, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 370, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mouth of the Storm", 70, Rarity.UNCOMMON, mage.cards.m.MouthOfTheStorm.class));
+        cards.add(new SetCardInfo("Mutinous Massacre", 222, Rarity.RARE, mage.cards.m.MutinousMassacre.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mutinous Massacre", 314, Rarity.RARE, mage.cards.m.MutinousMassacre.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mutinous Massacre", 363, Rarity.MYTHIC, mage.cards.m.MutinousMassacre.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mutinous Massacre", 389, Rarity.MYTHIC, mage.cards.m.MutinousMassacre.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nova Hellkite", 148, Rarity.RARE, mage.cards.n.NovaHellkite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nova Hellkite", 309, Rarity.RARE, mage.cards.n.NovaHellkite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nutrient Block", 243, Rarity.COMMON, mage.cards.n.NutrientBlock.class));
