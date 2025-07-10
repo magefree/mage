@@ -122,6 +122,7 @@ public final class EdgeOfEternitiesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Planetary Annihilation", 32, Rarity.RARE, mage.cards.p.PlanetaryAnnihilation.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Pull from Tomorrow", 76, Rarity.RARE, mage.cards.p.PullFromTomorrow.class));
         cards.add(new SetCardInfo("Putrefy", 124, Rarity.UNCOMMON, mage.cards.p.Putrefy.class));
+        cards.add(new SetCardInfo("Radiant Summit", 23, Rarity.RARE, mage.cards.r.RadiantSummit.class));
         cards.add(new SetCardInfo("Rakdos Charm", 125, Rarity.UNCOMMON, mage.cards.r.RakdosCharm.class));
         cards.add(new SetCardInfo("Rampaging Baloths", 104, Rarity.RARE, mage.cards.r.RampagingBaloths.class));
         cards.add(new SetCardInfo("Razortide Bridge", 171, Rarity.COMMON, mage.cards.r.RazortideBridge.class));
