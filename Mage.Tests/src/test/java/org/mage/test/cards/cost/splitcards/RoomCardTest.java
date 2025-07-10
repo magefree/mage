@@ -1,6 +1,7 @@
 package org.mage.test.cards.cost.splitcards;
 
 import mage.constants.CardType;
+import mage.constants.EmptyNames;
 import mage.constants.PhaseStep;
 import mage.constants.SubType;
 import mage.constants.Zone;
@@ -130,4 +131,105 @@ public class RoomCardTest extends CardTestPlayerBase {
         // Verify that "Bottomless Pool // Locker Room" has the Room subtype.
         assertSubtype("Bottomless Pool // Locker Room", SubType.ROOM);
     }
+
+    @Test
+    public void testFlickerNameAndManaCost() {
+        skipInitShuffling();
+        // Bottomless Pool {U} When you unlock this door, return up to one target
+        // creature to its owner’s hand.
+        // Locker Room {4}{U} Whenever one or more creatures you control deal combat
+        // damage to a player, draw a card.
+        addCard(Zone.HAND, playerA, "Bottomless Pool // Locker Room");
+        addCard(Zone.HAND, playerA, "Felidar Guardian");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+
+        // creatures owned by player A
+        addCard(Zone.BATTLEFIELD, playerA, "Memnite", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bottomless Pool");
+        // resolve spell cast
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        // unlock and trigger bounce on Memnite
+        addTarget(playerA, "Memnite");
+        // resolve bounce
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Felidar Guardian");
+        // resolve spell cast
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        // etb and flicker on Bottomless Pool
+        setChoice(playerA, "Yes");
+        addTarget(playerA, "Bottomless Pool");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        setStopAt(1, PhaseStep.END_TURN);
+
+        setStrictChooseMode(true);
+        execute();
+
+        // Assertions:
+        // Verify that one "Memnite" has been returned to playerA's hand.
+        assertHandCount(playerA, "Memnite", 1);
+        // Verify that a room with no name is on playerA's battlefield.
+        assertPermanentCount(playerA, EmptyNames.FULLY_LOCKED_ROOM.getTestCommand(), 1);
+        // Verify that "Felidar Guardian" is on playerA's battlefield.
+        assertPermanentCount(playerA, "Felidar Guardian", 1);
+        // Verify that a room with no name is an Enchantment.
+        assertType(EmptyNames.FULLY_LOCKED_ROOM.getTestCommand(), CardType.ENCHANTMENT, true);
+        // Verify that a room with no name has the Room subtype.
+        assertSubtype(EmptyNames.FULLY_LOCKED_ROOM.getTestCommand(), SubType.ROOM);
+    }
+
+    @Test
+    public void testFlickerCanBeUnlockedAgain() {
+        skipInitShuffling();
+        // Bottomless Pool {U} When you unlock this door, return up to one target
+        // creature to its owner’s hand.
+        // Locker Room {4}{U} Whenever one or more creatures you control deal combat
+        // damage to a player, draw a card.
+        addCard(Zone.HAND, playerA, "Bottomless Pool // Locker Room");
+        addCard(Zone.HAND, playerA, "Felidar Guardian");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+
+        // creatures owned by player A
+        addCard(Zone.BATTLEFIELD, playerA, "Memnite", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Black Knight", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bottomless Pool");
+        // resolve spell cast
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        // unlock and trigger bounce on Memnite
+        addTarget(playerA, "Memnite");
+        // resolve bounce
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Felidar Guardian");
+        // resolve spell cast
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        // etb and flicker on Bottomless Pool
+        setChoice(playerA, "Yes");
+        addTarget(playerA, "Bottomless Pool");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        // can unlock again
+        checkPlayableAbility("playerA can unlock Bottomless Pool", 1, PhaseStep.PRECOMBAT_MAIN, playerA,
+                "{U}: Unlock the left half.", true);
+        // unlock again
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA,
+                "{U}: Unlock the left half.");
+        addTarget(playerA, "Black Knight");
+        setStopAt(1, PhaseStep.END_TURN);
+
+        setStrictChooseMode(true);
+        execute();
+
+        // Assertions:
+        // Verify that one "Memnite" has been returned to playerA's hand.
+        assertHandCount(playerA, "Memnite", 1);
+        // Verify that one "Black Knight" has been returned to playerA's hand.
+        assertHandCount(playerA, "Black Knight", 1);
+        // Verify that "Bottomless Pool" is on playerA's battlefield.
+        assertPermanentCount(playerA, "Bottomless Pool", 1);
+        // Verify that "Felidar Guardian" is on playerA's battlefield.
+        assertPermanentCount(playerA, "Felidar Guardian", 1);
+    }
+
 }
