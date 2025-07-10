@@ -12,19 +12,23 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class RoomCardTest extends CardTestPlayerBase {
 
-    // Bottomless pool is cast. It unlocks, and the trigger to return a creature should bounce one of two grizzly bears.
+    // Bottomless pool is cast. It unlocks, and the trigger to return a creature
+    // should bounce one of two grizzly bears.
     @Test
     public void testBottomlessPoolETB() {
         skipInitShuffling();
-        // Bottomless Pool {U} When you unlock this door, return up to one target creature to its owner’s hand.
-        // Locker Room {4}{U} Whenever one or more creatures you control deal combat damage to a player, draw a card.
+        // Bottomless Pool {U} When you unlock this door, return up to one target
+        // creature to its owner’s hand.
+        // Locker Room {4}{U} Whenever one or more creatures you control deal combat
+        // damage to a player, draw a card.
         addCard(Zone.HAND, playerA, "Bottomless Pool // Locker Room");
         addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears", 2);
 
-        checkPlayableAbility("playerA can cast Bottomless Pool", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Bottomless Pool", true);
+        checkPlayableAbility("playerA can cast Bottomless Pool", 1, PhaseStep.PRECOMBAT_MAIN, playerA,
+                "Cast Bottomless Pool", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bottomless Pool");
-        
+
         // Target one of playerB's "Grizzly Bears" with the return effect.
         addTarget(playerA, "Grizzly Bears");
         setStrictChooseMode(true);
@@ -44,12 +48,15 @@ public class RoomCardTest extends CardTestPlayerBase {
         assertSubtype("Bottomless Pool", SubType.ROOM);
     }
 
-    // Locker room is cast. It enters, and gives a coastal piracy effect that triggers on damage.
-        @Test
+    // Locker room is cast. It enters, and gives a coastal piracy effect that
+    // triggers on damage.
+    @Test
     public void testLockerRoomCombatDamageTrigger() {
         skipInitShuffling();
-        // Bottomless Pool {U} When you unlock this door, return up to one target creature to its owner’s hand.
-        // Locker Room {4}{U} Whenever one or more creatures you control deal combat damage to a player, draw a card.
+        // Bottomless Pool {U} When you unlock this door, return up to one target
+        // creature to its owner’s hand.
+        // Locker Room {4}{U} Whenever one or more creatures you control deal combat
+        // damage to a player, draw a card.
         addCard(Zone.HAND, playerA, "Bottomless Pool // Locker Room");
         addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
 
@@ -65,13 +72,15 @@ public class RoomCardTest extends CardTestPlayerBase {
         // After combat damage, Memnites dealt combat damage to playerB (1 damage * 2).
         // 2 Locker Room triggers should go on the stack.
         checkStackSize("Locker Room trigger must be on the stack", 1, PhaseStep.COMBAT_DAMAGE, playerA, 2);
-        checkStackObject("Locker Room trigger must be correct", 1, PhaseStep.COMBAT_DAMAGE, playerA, "Whenever a creature you control deals combat damage to an opponent, draw a card.", 2);
+        checkStackObject("Locker Room trigger must be correct", 1, PhaseStep.COMBAT_DAMAGE, playerA,
+                "Whenever a creature you control deals combat damage to an opponent, draw a card.", 2);
 
         // Stop at the end of the combat phase to check triggers.
         setStopAt(1, PhaseStep.END_COMBAT);
         execute();
 
-        // Assertions after the first execute() (Locker Room and creatures are on battlefield, combat resolved):
+        // Assertions after the first execute() (Locker Room and creatures are on
+        // battlefield, combat resolved):
         assertPermanentCount(playerA, "Locker Room", 1);
         assertType("Locker Room", CardType.ENCHANTMENT, true);
         assertSubtype("Locker Room", SubType.ROOM);
@@ -82,5 +91,43 @@ public class RoomCardTest extends CardTestPlayerBase {
 
         // PlayerA should have drawn two plains cards
         assertHandCount(playerA, "Plains", 2);
+    }
+
+    @Test
+    public void testBottomlessPoolUnlock() {
+        skipInitShuffling();
+        // Bottomless Pool {U} When you unlock this door, return up to one target
+        // creature to its owner’s hand.
+        // Locker Room {4}{U} Whenever one or more creatures you control deal combat
+        // damage to a player, draw a card.
+        addCard(Zone.HAND, playerA, "Bottomless Pool // Locker Room");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
+
+        // 2 creatures owned by player A
+        addCard(Zone.BATTLEFIELD, playerA, "Memnite", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Locker Room");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPlayableAbility("playerA can unlock Bottomless Pool", 1, PhaseStep.PRECOMBAT_MAIN, playerA,
+                "{U}: Unlock the left half.", true);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA,
+                "{U}: Unlock the left half. <i>(Activate only as a sorcery, and only if the left half is locked.)</i>");
+        addTarget(playerA, "Memnite");
+        setStopAt(1, PhaseStep.END_TURN);
+
+        setStrictChooseMode(true);
+        execute();
+
+        // Assertions:
+        // Verify that one "Memnite" is still on playerA's battlefield.
+        assertPermanentCount(playerA, "Memnite", 1);
+        // Verify that one "Memnite" has been returned to playerA's hand.
+        assertHandCount(playerA, "Memnite", 1);
+        // Verify that "Bottomless Pool // Locker Room" is on playerA's battlefield.
+        assertPermanentCount(playerA, "Bottomless Pool // Locker Room", 1);
+        // Verify that "Bottomless Pool // Locker Room" is an Enchantment.
+        assertType("Bottomless Pool // Locker Room", CardType.ENCHANTMENT, true);
+        // Verify that "Bottomless Pool // Locker Room" has the Room subtype.
+        assertSubtype("Bottomless Pool // Locker Room", SubType.ROOM);
     }
 }
