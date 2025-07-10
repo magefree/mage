@@ -36,59 +36,65 @@ public class NamePredicate implements Predicate<MageObject> {
         this.ignoreMtgRuleForEmptyNames = ignoreMtgRuleForEmptyNames;
     }
 
+    // Determines the names to search for (from the predicate's 'name' field)
+    private String[] getSearchNames(String nameString) {
+        // According to MTG rules, if a player "names a card", and that card is a split card,
+        // they can name either half but not both
+        if (nameString == null) {
+            return new String[]{};
+        }
+        if (nameString.contains(" // ")) {
+            // If the predicate itself is initialized with a split name (e.g., "Other // Dangerous"),
+            // we should treat it as a single specific name to match against.
+            // It's not about matching one of its halves, but matching that exact full name.
+            return new String[] { nameString };
+        } else {
+            // If the predicate is initialized with a single name (e.g., "Armed"),
+            // it means we are looking for a card that has this name, or a split card with this half.
+            return new String[] { nameString };
+        }
+    }
+
+    // Determines the names available on the target MageObject for comparison
+    private String[] getTargetNames(MageObject input, Game game) {
+        if (input instanceof SplitCard) {
+            SplitCard splitCard = (SplitCard) input;
+            // A split card has its individual half names and its full name for matching purposes.
+            return new String[] {
+                    splitCard.getLeftHalfCard().getName(),
+                    splitCard.getRightHalfCard().getName(),
+                    splitCard.getName() // The full name (e.g., "Armed // Dangerous")
+            };
+        } else if (input instanceof Spell
+                && ((Spell) input).getSpellAbility().getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED) {
+            SplitCard card = (SplitCard) ((Spell) input).getCard();
+            return new String[] {
+                    card.getLeftHalfCard().getName(),
+                    card.getRightHalfCard().getName(),
+                    card.getName()
+            };
+        } else if (input instanceof Spell && ((Spell) input).isFaceDown(game)) {
+            // face down spells don't have names, so it's not equal
+            return new String[]{}; // Return empty array as it has no name
+        } else {
+            // For regular cards, just use their single name
+            return new String[] { input.getName() };
+        }
+    }
+
+
     @Override
     public boolean apply(MageObject input, Game game) {
         if (name == null) {
             return false;
         }
 
-        // If a player names a card, the player may name either half of a split card, but not both. 
-        // A split card has the chosen name if one of its two names matches the chosen name.
-        // This is NOT the same for double faced cards, where only the front side matches
+        String[] searchNames = getSearchNames(this.name);
+        String[] targetNames = getTargetNames(input, game); // Pass game for isFaceDown check
 
-        // Test of Talents ruling:
-        // If the back face of a modal double-faced card is countered, you will not be able to exile any cards,
-        // including the one that you countered, because those cards have only their front-face characteristics
-        // (including name) in the graveyard, hand, and library. (2021-04-16)
-
-        String[] searchNames = extractNames(name);
-
-        if (input instanceof SplitCard) {
-            SplitCard splitCard = (SplitCard) input;
-            // Check against left half, right half, and full card name
-            return matchesAnyName(searchNames, new String[] {
-                    splitCard.getLeftHalfCard().getName(),
-                    splitCard.getRightHalfCard().getName(),
-                    splitCard.getName()
-            });
-        } else if (input instanceof Spell
-                && ((Spell) input).getSpellAbility().getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED) {
-            SplitCard card = (SplitCard) ((Spell) input).getCard();
-            // Check against left half, right half, and full card name
-            return matchesAnyName(searchNames, new String[] {
-                    card.getLeftHalfCard().getName(),
-                    card.getRightHalfCard().getName(),
-                    card.getName()
-            });
-        } else if (input instanceof Spell && ((Spell) input).isFaceDown(game)) {
-            // face down spells don't have names, so it's not equal, see https://github.com/magefree/mage/issues/6569
-            return false;
-        } else {
-            // For regular cards, extract names from input and compare
-            String[] inputNames = extractNames(input.getName());
-            return matchesAnyName(searchNames, inputNames);
-        }
+        return matchesAnyName(searchNames, targetNames);
     }
 
-    private String[] extractNames(String nameString) {
-        if (nameString.contains(" // ")) {
-            String leftName = nameString.substring(0, nameString.indexOf(" // "));
-            String rightName = nameString.substring(nameString.indexOf(" // ") + 4);
-            return new String[] { leftName, rightName };
-        } else {
-            return new String[] { nameString };
-        }
-    }
 
     private boolean matchesAnyName(String[] searchNames, String[] targetNames) {
         for (String searchName : searchNames) {
