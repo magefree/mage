@@ -75,6 +75,7 @@ public final class EdgeOfEternitiesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Gavel of the Righteous", 55, Rarity.RARE, mage.cards.g.GavelOfTheRighteous.class));
         cards.add(new SetCardInfo("Gaze of Granite", 116, Rarity.RARE, mage.cards.g.GazeOfGranite.class));
         cards.add(new SetCardInfo("Glacial Fortress", 160, Rarity.RARE, mage.cards.g.GlacialFortress.class));
+        cards.add(new SetCardInfo("Glittering Massif", 22, Rarity.RARE, mage.cards.g.GlitteringMassif.class));
         cards.add(new SetCardInfo("God-Eternal Bontu", 83, Rarity.MYTHIC, mage.cards.g.GodEternalBontu.class));
         cards.add(new SetCardInfo("Golem Foundry", 138, Rarity.COMMON, mage.cards.g.GolemFoundry.class));
         cards.add(new SetCardInfo("Great Furnace", 161, Rarity.COMMON, mage.cards.g.GreatFurnace.class));
