@@ -24,9 +24,12 @@ public final class EdgeOfEternities extends ExpansionSet {
         this.blockName = "Edge of Eternities"; // for sorting in GUI
         this.rotationSet = true;
 
-        cards.add(new SetCardInfo("Adagia, Windswept Bastion", 250, Rarity.MYTHIC, mage.cards.a.AdagiaWindsweptBastion.class));
+        cards.add(new SetCardInfo("Adagia, Windswept Bastion", 250, Rarity.MYTHIC, mage.cards.a.AdagiaWindsweptBastion.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Adagia, Windswept Bastion", 277, Rarity.MYTHIC, mage.cards.a.AdagiaWindsweptBastion.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Adagia, Windswept Bastion", 372, Rarity.MYTHIC, mage.cards.a.AdagiaWindsweptBastion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Alpharael, Dreaming Acolyte", 212, Rarity.UNCOMMON, mage.cards.a.AlpharaelDreamingAcolyte.class));
-        cards.add(new SetCardInfo("Annul", 394, Rarity.UNCOMMON, mage.cards.a.Annul.class));
+        cards.add(new SetCardInfo("Annul", 394, Rarity.UNCOMMON, mage.cards.a.Annul.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Annul", 46, Rarity.UNCOMMON, mage.cards.a.Annul.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Anticausal Vestige", 1, Rarity.RARE, mage.cards.a.AnticausalVestige.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Anticausal Vestige", 317, Rarity.RARE, mage.cards.a.AnticausalVestige.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Anticausal Vestige", 357, Rarity.MYTHIC, mage.cards.a.AnticausalVestige.class, NON_FULL_USE_VARIOUS));
@@ -47,8 +50,10 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Consult the Star Charts", 51, Rarity.RARE, mage.cards.c.ConsultTheStarCharts.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cosmogoyf", 215, Rarity.RARE, mage.cards.c.Cosmogoyf.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cosmogoyf", 313, Rarity.RARE, mage.cards.c.Cosmogoyf.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Cosmogrand Zenith", 9, Rarity.MYTHIC, mage.cards.c.CosmograndZenith.class));
-        cards.add(new SetCardInfo("Dawnsire, Sunstar Dreadnought", 238, Rarity.MYTHIC, mage.cards.d.DawnsireSunstarDreadnought.class));
+        cards.add(new SetCardInfo("Cosmogrand Zenith", 304, Rarity.MYTHIC, mage.cards.c.CosmograndZenith.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Cosmogrand Zenith", 9, Rarity.MYTHIC, mage.cards.c.CosmograndZenith.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Dawnsire, Sunstar Dreadnought", 238, Rarity.MYTHIC, mage.cards.d.DawnsireSunstarDreadnought.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Dawnsire, Sunstar Dreadnought", 351, Rarity.MYTHIC, mage.cards.d.DawnsireSunstarDreadnought.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Debris Field Crusher", 131, Rarity.UNCOMMON, mage.cards.d.DebrisFieldCrusher.class));
         cards.add(new SetCardInfo("Decode Transmissions", 94, Rarity.COMMON, mage.cards.d.DecodeTransmissions.class));
         cards.add(new SetCardInfo("Elegy Acolyte", 293, Rarity.RARE, mage.cards.e.ElegyAcolyte.class, NON_FULL_USE_VARIOUS));
@@ -91,7 +96,9 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 269, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 270, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 368, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
-        cards.add(new SetCardInfo("Kavaron, Memorial World", 255, Rarity.MYTHIC, mage.cards.k.KavaronMemorialWorld.class));
+        cards.add(new SetCardInfo("Kavaron, Memorial World", 255, Rarity.MYTHIC, mage.cards.k.KavaronMemorialWorld.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kavaron, Memorial World", 281, Rarity.MYTHIC, mage.cards.k.KavaronMemorialWorld.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kavaron, Memorial World", 376, Rarity.MYTHIC, mage.cards.k.KavaronMemorialWorld.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mechanozoa", 66, Rarity.COMMON, mage.cards.m.Mechanozoa.class));
         cards.add(new SetCardInfo("Mountain", 265, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 273, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
