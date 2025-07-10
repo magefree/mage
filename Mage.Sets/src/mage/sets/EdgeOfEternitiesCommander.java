@@ -155,6 +155,7 @@ public final class EdgeOfEternitiesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Steel Overseer", 144, Rarity.RARE, mage.cards.s.SteelOverseer.class));
         cards.add(new SetCardInfo("Sulfur Falls", 184, Rarity.RARE, mage.cards.s.SulfurFalls.class));
         cards.add(new SetCardInfo("Sulfurous Springs", 185, Rarity.RARE, mage.cards.s.SulfurousSprings.class));
+        cards.add(new SetCardInfo("Surge Conductor", 19, Rarity.RARE, mage.cards.s.SurgeConductor.class));
         cards.add(new SetCardInfo("Swan Song", 46, Rarity.RARE, mage.cards.s.SwanSong.class));
         cards.add(new SetCardInfo("Swords to Plowshares", 45, Rarity.UNCOMMON, mage.cards.s.SwordsToPlowshares.class));
         cards.add(new SetCardInfo("Szarel, Genesis Shepherd", 4, Rarity.MYTHIC, mage.cards.s.SzarelGenesisShepherd.class));
