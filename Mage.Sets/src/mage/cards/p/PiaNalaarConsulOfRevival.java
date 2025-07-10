@@ -1,7 +1,7 @@
 package mage.cards.p;
 
 import mage.MageInt;
-import mage.abilities.common.PlayLandOrCastSpellFromExileTriggeredAbility;
+import mage.abilities.common.PlayLandOrCastSpellTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
@@ -39,7 +39,9 @@ public final class PiaNalaarConsulOfRevival extends CardImpl {
         )));
 
         // Whenever you play a land from exile or cast a spell from exile, create a 1/1 colorless Thopter artifact creature token with flying.
-        this.addAbility(new PlayLandOrCastSpellFromExileTriggeredAbility(new CreateTokenEffect(new ThopterColorlessToken())));
+        this.addAbility(new PlayLandOrCastSpellTriggeredAbility(
+                new CreateTokenEffect(new ThopterColorlessToken()), true, false
+        ));
     }
 
     private PiaNalaarConsulOfRevival(final PiaNalaarConsulOfRevival card) {
