@@ -87,6 +87,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Godless Shrine", 254, Rarity.RARE, mage.cards.g.GodlessShrine.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Godless Shrine", 280, Rarity.RARE, mage.cards.g.GodlessShrine.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Godless Shrine", 375, Rarity.RARE, mage.cards.g.GodlessShrine.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Gravkill", 103, Rarity.COMMON, mage.cards.g.Gravkill.class));
         cards.add(new SetCardInfo("Haliya, Guided by Light", 19, Rarity.RARE, mage.cards.h.HaliyaGuidedByLight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Haliya, Guided by Light", 289, Rarity.RARE, mage.cards.h.HaliyaGuidedByLight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Harmonious Grovestrider", 189, Rarity.UNCOMMON, mage.cards.h.HarmoniousGrovestrider.class));
