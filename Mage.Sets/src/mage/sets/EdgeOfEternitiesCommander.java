@@ -72,6 +72,8 @@ public final class EdgeOfEternitiesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Omnath, Locus of Rage", 123, Rarity.MYTHIC, mage.cards.o.OmnathLocusOfRage.class));
         cards.add(new SetCardInfo("Oracle of Mul Daya", 102, Rarity.RARE, mage.cards.o.OracleOfMulDaya.class));
         cards.add(new SetCardInfo("Pest Infestation", 103, Rarity.RARE, mage.cards.p.PestInfestation.class));
+        cards.add(new SetCardInfo("Planetary Annihilation", 12, Rarity.RARE, mage.cards.p.PlanetaryAnnihilation.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Planetary Annihilation", 32, Rarity.RARE, mage.cards.p.PlanetaryAnnihilation.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Putrefy", 124, Rarity.UNCOMMON, mage.cards.p.Putrefy.class));
         cards.add(new SetCardInfo("Rakdos Charm", 125, Rarity.UNCOMMON, mage.cards.r.RakdosCharm.class));
         cards.add(new SetCardInfo("Rampaging Baloths", 104, Rarity.RARE, mage.cards.r.RampagingBaloths.class));
