@@ -26,10 +26,11 @@ public final class EdgeOfEternities extends ExpansionSet {
 
         cards.add(new SetCardInfo("Adagia, Windswept Bastion", 250, Rarity.MYTHIC, mage.cards.a.AdagiaWindsweptBastion.class));
         cards.add(new SetCardInfo("Alpharael, Dreaming Acolyte", 212, Rarity.UNCOMMON, mage.cards.a.AlpharaelDreamingAcolyte.class));
+        cards.add(new SetCardInfo("Annul", 394, Rarity.UNCOMMON, mage.cards.a.Annul.class));
         cards.add(new SetCardInfo("Anticausal Vestige", 1, Rarity.RARE, mage.cards.a.AnticausalVestige.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Anticausal Vestige", 317, Rarity.RARE, mage.cards.a.AnticausalVestige.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Anticausal Vestige", 357, Rarity.MYTHIC, mage.cards.a.AnticausalVestige.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Anticausal Vestige", 383, Rarity.RARE, mage.cards.a.AnticausalVestige.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Anticausal Vestige", 383, Rarity.MYTHIC, mage.cards.a.AnticausalVestige.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Archenemy's Charm", 307, Rarity.RARE, mage.cards.a.ArchenemysCharm.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Archenemy's Charm", 88, Rarity.RARE, mage.cards.a.ArchenemysCharm.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Banishing Light", 6, Rarity.COMMON, mage.cards.b.BanishingLight.class));
@@ -125,10 +126,11 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Sothera, the Supervoid", 382, Rarity.MYTHIC, mage.cards.s.SotheraTheSupervoid.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sothera, the Supervoid", 386, Rarity.MYTHIC, mage.cards.s.SotheraTheSupervoid.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Starbreach Whale", 77, Rarity.COMMON, mage.cards.s.StarbreachWhale.class));
-        cards.add(new SetCardInfo("Starfield Shepherd", 37, Rarity.UNCOMMON, mage.cards.s.StarfieldShepherd.class));
+        cards.add(new SetCardInfo("Starfield Shepherd", 37, Rarity.UNCOMMON, mage.cards.s.StarfieldShepherd.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Starfield Shepherd", 393, Rarity.UNCOMMON, mage.cards.s.StarfieldShepherd.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Starfield Vocalist", 328, Rarity.RARE, mage.cards.s.StarfieldVocalist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Starfield Vocalist", 359, Rarity.MYTHIC, mage.cards.s.StarfieldVocalist.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Starfield Vocalist", 385, Rarity.RARE, mage.cards.s.StarfieldVocalist.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Starfield Vocalist", 385, Rarity.MYTHIC, mage.cards.s.StarfieldVocalist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Starfield Vocalist", 78, Rarity.RARE, mage.cards.s.StarfieldVocalist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Starfighter Pilot", 38, Rarity.COMMON, mage.cards.s.StarfighterPilot.class));
         cards.add(new SetCardInfo("Stomping Ground", 258, Rarity.RARE, mage.cards.s.StompingGround.class, NON_FULL_USE_VARIOUS));
