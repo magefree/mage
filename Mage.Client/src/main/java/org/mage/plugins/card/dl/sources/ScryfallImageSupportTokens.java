@@ -2785,6 +2785,9 @@ public class ScryfallImageSupportTokens {
             put("FIC/The Blackjack", "https://api.scryfall.com/cards/tfic/8/en?format=image");
             put("FIC/Clue", "https://api.scryfall.com/cards/tfic/9/en?format=image");
 
+            // EOE
+            put("EOE/Lander", "https://api.scryfall.com/cards/teoe/8/en?format=image");
+
             // JVC
             put("JVC/Elemental Shaman", "https://api.scryfall.com/cards/tjvc/4?format=image");
 

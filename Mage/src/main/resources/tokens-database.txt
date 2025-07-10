@@ -2826,7 +2826,7 @@
 |Generate|TOK:FIN|Treasure|1||TreasureToken|
 |Generate|TOK:FIN|Treasure|2||TreasureToken|
 
-# FIN
+# FIC
 |Generate|TOK:FIC|Human Soldier|||HumanSoldierToken|
 |Generate|TOK:FIC|Soldier|||SoldierToken|
 |Generate|TOK:FIC|Spirit|||SpiritWhiteToken|
@@ -2836,6 +2836,9 @@
 |Generate|TOK:FIC|Rebel|||RebelRedToken|
 |Generate|TOK:FIC|The Blackjack|||TheBlackjackToken|
 |Generate|TOK:FIC|Clue|||ClueArtifactToken|
+
+#EOE
+|Generate|TOK:EOE|Lander|||LanderToken|
 
 # JVC
 |Generate|TOK:JVC|Elemental Shaman|||ElementalShamanToken|
