@@ -265,7 +265,7 @@ public enum SubType {
     LICID("Licid", SubTypeSet.CreatureType),
     LIZARD("Lizard", SubTypeSet.CreatureType),
     LLAMA("Llama", SubTypeSet.CreatureType),
-    LOBSTER("Lobster", SubTypeSet.CreatureType, true), // Unglued
+    LOBSTER("Lobster", SubTypeSet.CreatureType),
     // M
     MANTELLIAN("Mantellian", SubTypeSet.CreatureType, true), // Star Wars
     MANTICORE("Manticore", SubTypeSet.CreatureType),
