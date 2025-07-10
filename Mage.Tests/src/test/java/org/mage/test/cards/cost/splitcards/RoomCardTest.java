@@ -111,7 +111,7 @@ public class RoomCardTest extends CardTestPlayerBase {
         checkPlayableAbility("playerA can unlock Bottomless Pool", 1, PhaseStep.PRECOMBAT_MAIN, playerA,
                 "{U}: Unlock the left half.", true);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA,
-                "{U}: Unlock the left half. <i>(Activate only as a sorcery, and only if the left half is locked.)</i>");
+                "{U}: Unlock the left half.");
         addTarget(playerA, "Memnite");
         setStopAt(1, PhaseStep.END_TURN);
 
