@@ -20,7 +20,7 @@ public class PlayLandOrCastSpellTriggeredAbility extends TriggeredAbilityImpl {
     public PlayLandOrCastSpellTriggeredAbility(Effect effect, boolean fromExile, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.fromExile = fromExile;
-        setTriggerPhrase("Whenever you play a land from exile or cast a spell" + (fromExile ? " from exile" : "") + ", ");
+        setTriggerPhrase("Whenever you play a land" + (fromExile ? " from exile" : "") + " or cast a spell" + (fromExile ? " from exile" : "") + ", ");
     }
 
     private PlayLandOrCastSpellTriggeredAbility(final PlayLandOrCastSpellTriggeredAbility ability) {
