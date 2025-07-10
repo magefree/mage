@@ -115,6 +115,7 @@ public final class EdgeOfEternitiesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Omnath, Locus of Rage", 123, Rarity.MYTHIC, mage.cards.o.OmnathLocusOfRage.class));
         cards.add(new SetCardInfo("Oracle of Mul Daya", 102, Rarity.RARE, mage.cards.o.OracleOfMulDaya.class));
         cards.add(new SetCardInfo("Organic Extinction", 66, Rarity.RARE, mage.cards.o.OrganicExtinction.class));
+        cards.add(new SetCardInfo("Patrolling Peacemaker", 5, Rarity.RARE, mage.cards.p.PatrollingPeacemaker.class));
         cards.add(new SetCardInfo("Pentad Prism", 56, Rarity.UNCOMMON, mage.cards.p.PentadPrism.class));
         cards.add(new SetCardInfo("Pest Infestation", 103, Rarity.RARE, mage.cards.p.PestInfestation.class));
         cards.add(new SetCardInfo("Phyrexian Metamorph", 75, Rarity.RARE, mage.cards.p.PhyrexianMetamorph.class));
