@@ -28,6 +28,8 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Adagia, Windswept Bastion", 277, Rarity.MYTHIC, mage.cards.a.AdagiaWindsweptBastion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Adagia, Windswept Bastion", 372, Rarity.MYTHIC, mage.cards.a.AdagiaWindsweptBastion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Alpharael, Dreaming Acolyte", 212, Rarity.UNCOMMON, mage.cards.a.AlpharaelDreamingAcolyte.class));
+        cards.add(new SetCardInfo("Alpharael, Stonechosen", 292, Rarity.MYTHIC, mage.cards.a.AlpharaelStonechosen.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Alpharael, Stonechosen", 87, Rarity.MYTHIC, mage.cards.a.AlpharaelStonechosen.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Annul", 394, Rarity.UNCOMMON, mage.cards.a.Annul.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Annul", 46, Rarity.UNCOMMON, mage.cards.a.Annul.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Anticausal Vestige", 1, Rarity.RARE, mage.cards.a.AnticausalVestige.class, NON_FULL_USE_VARIOUS));
