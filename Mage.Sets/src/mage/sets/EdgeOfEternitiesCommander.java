@@ -100,6 +100,7 @@ public final class EdgeOfEternitiesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Llanowar Wastes", 165, Rarity.RARE, mage.cards.l.LlanowarWastes.class));
         cards.add(new SetCardInfo("Loamcrafter Faun", 99, Rarity.RARE, mage.cards.l.LoamcrafterFaun.class));
         cards.add(new SetCardInfo("Lonely Sandbar", 166, Rarity.COMMON, mage.cards.l.LonelySandbar.class));
+        cards.add(new SetCardInfo("Long-Range Sensor", 11, Rarity.RARE, mage.cards.l.LongRangeSensor.class));
         cards.add(new SetCardInfo("Lux Artillery", 140, Rarity.RARE, mage.cards.l.LuxArtillery.class));
         cards.add(new SetCardInfo("Lux Cannon", 141, Rarity.RARE, mage.cards.l.LuxCannon.class));
         cards.add(new SetCardInfo("Maestros Theater", 167, Rarity.COMMON, mage.cards.m.MaestrosTheater.class));
