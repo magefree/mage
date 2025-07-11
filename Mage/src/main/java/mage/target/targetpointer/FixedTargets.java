@@ -40,6 +40,7 @@ public class FixedTargets extends TargetPointerImpl {
         this(token.getLastAddedTokenIds()
                 .stream()
                 .map(game::getPermanent)
+                .filter(Objects::nonNull)
                 .collect(Collectors.toList()), game);
     }
 
