@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class EdgeOfEternities extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Anticausal Vestige", "Astelli Reclaimer", "Broodguard Elite", "Bygone Colossus", "Eusocial Engineering", "Exalted Sunborn", "Haliya, Guided by Light", "Mechanozoa", "Memorial Team Leader", "Mightform Harmonizer", "Nova Hellkite", "Possibility Technician", "Quantum Riddler", "Red Tiger Mechan", "Starbreach Whale", "Starfield Shepherd", "Starfield Vocalist", "Timeline Culler", "Weftstalker Ardent");
+    private static final List<String> unfinished = Arrays.asList("All-Fates Stalker", "Anticausal Vestige", "Astelli Reclaimer", "Broodguard Elite", "Bygone Colossus", "Eusocial Engineering", "Exalted Sunborn", "Haliya, Guided by Light", "Mechanozoa", "Memorial Team Leader", "Mightform Harmonizer", "Nova Hellkite", "Possibility Technician", "Quantum Riddler", "Red Tiger Mechan", "Starbreach Whale", "Starfield Shepherd", "Starfield Vocalist", "Timeline Culler", "Weftstalker Ardent");
     private static final EdgeOfEternities instance = new EdgeOfEternities();
 
     public static EdgeOfEternities getInstance() {
@@ -42,7 +42,8 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Astelli Reclaimer", 288, Rarity.RARE, mage.cards.a.AstelliReclaimer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Astelli Reclaimer", 4, Rarity.RARE, mage.cards.a.AstelliReclaimer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Banishing Light", 6, Rarity.COMMON, mage.cards.b.BanishingLight.class));
-        cards.add(new SetCardInfo("Bioengineered Future", 340, Rarity.RARE, mage.cards.b.BioengineeredFuture.class));
+        cards.add(new SetCardInfo("Bioengineered Future", 172, Rarity.RARE, mage.cards.b.BioengineeredFuture.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Bioengineered Future", 340, Rarity.RARE, mage.cards.b.BioengineeredFuture.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Biotech Specialist", 214, Rarity.RARE, mage.cards.b.BiotechSpecialist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Biotech Specialist", 347, Rarity.RARE, mage.cards.b.BiotechSpecialist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Breeding Pool", 251, Rarity.RARE, mage.cards.b.BreedingPool.class, NON_FULL_USE_VARIOUS));
