@@ -1,45 +1,46 @@
 package mage.cards.n;
 
-import java.util.*;
-import java.util.stream.Collectors;
-
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalAsThoughEffect;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
+import mage.abilities.dynamicvalue.common.DifferentlyNamedPermanentCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
-import mage.cards.Card;
-import mage.cards.Cards;
-import mage.constants.*;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.hint.Hint;
 import mage.abilities.keyword.DeathtouchAbility;
+import mage.abilities.keyword.FlyingAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
-import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.GoblinToken;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
 import mage.watchers.common.AttackedThisTurnWatcher;
 
+import java.util.Collection;
+import java.util.Objects;
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
 /**
- *
  * @author Jmlundeen
  */
 public final class NerivCracklingVanguard extends CardImpl {
 
     public NerivCracklingVanguard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{W}{B}");
-        
+
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
         this.subtype.add(SubType.DRAGON);
@@ -56,7 +57,7 @@ public final class NerivCracklingVanguard extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new GoblinToken(false), 2)));
 
         // Whenever Neriv attacks, exile a number of cards from the top of your library equal to the number of differently named tokens you control. During any turn you attacked with a commander, you may play those cards.
-        this.addAbility(new AttacksTriggeredAbility(new NerivCracklingVanguardEffect()));
+        this.addAbility(new AttacksTriggeredAbility(new NerivCracklingVanguardEffect()).addHint(NerivCracklingVanguardEffect.getHint()));
     }
 
     private NerivCracklingVanguard(final NerivCracklingVanguard card) {
@@ -70,6 +71,18 @@ public final class NerivCracklingVanguard extends CardImpl {
 }
 
 class NerivCracklingVanguardEffect extends OneShotEffect {
+
+    private static final FilterPermanent filter = new FilterControlledPermanent("tokens you control");
+
+    static {
+        filter.add(TokenPredicate.TRUE);
+    }
+
+    private static final DifferentlyNamedPermanentCount xValue = new DifferentlyNamedPermanentCount(filter);
+
+    static final Hint getHint() {
+        return xValue.getHint();
+    }
 
     NerivCracklingVanguardEffect() {
         super(Outcome.Benefit);
@@ -89,7 +102,7 @@ class NerivCracklingVanguardEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        int tokenNameCount = NerivDynamicValue.instance.calculate(game, source, this);
+        int tokenNameCount = xValue.calculate(game, source, this);
         if (controller == null || tokenNameCount == 0) {
             return false;
         }
@@ -108,30 +121,6 @@ class NerivCracklingVanguardEffect extends OneShotEffect {
         playOnlyIfAttackedWithCommander.setTargetPointer(new FixedTargets(cards, game));
         game.addEffect(playOnlyIfAttackedWithCommander, copiedAbility);
         return true;
-    }
-}
-
-enum NerivDynamicValue implements DynamicValue {
-    instance;
-
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return (int) game.getBattlefield().getAllActivePermanents(sourceAbility.getControllerId()).stream()
-                .filter(permanent -> permanent instanceof PermanentToken)
-                .map(MageObject::getName)
-                .distinct()
-                .count();
-    }
-
-    @Override
-    public DynamicValue copy() {
-        return instance;
-    }
-
-    @Override
-    public String getMessage() {
-        return "X";
     }
 }
 
