@@ -159,6 +159,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Sami, Ship's Engineer", 225, Rarity.UNCOMMON, mage.cards.s.SamiShipsEngineer.class));
         cards.add(new SetCardInfo("Sami, Wildcat Captain", 226, Rarity.MYTHIC, mage.cards.s.SamiWildcatCaptain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sami, Wildcat Captain", 301, Rarity.MYTHIC, mage.cards.s.SamiWildcatCaptain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Seedship Broodtender", 227, Rarity.UNCOMMON, mage.cards.s.SeedshipBroodtender.class));
         cards.add(new SetCardInfo("Seedship Impact", 205, Rarity.UNCOMMON, mage.cards.s.SeedshipImpact.class));
         cards.add(new SetCardInfo("Shattered Wings", 206, Rarity.COMMON, mage.cards.s.ShatteredWings.class));
         cards.add(new SetCardInfo("Singularity Rupture", 228, Rarity.RARE, mage.cards.s.SingularityRupture.class, NON_FULL_USE_VARIOUS));
