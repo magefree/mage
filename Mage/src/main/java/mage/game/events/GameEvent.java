@@ -40,6 +40,7 @@ public class GameEvent implements Serializable {
         PREVENT_DAMAGE, PREVENTED_DAMAGE,
         //Turn-based events
         PLAY_TURN, EXTRA_TURN,
+        BEGIN_TURN, // event fired on actual begin of turn.
         CHANGE_PHASE, PHASE_CHANGED,
         CHANGE_STEP, STEP_CHANGED,
         BEGINNING_PHASE, BEGINNING_PHASE_PRE, BEGINNING_PHASE_POST, // The normal beginning phase -- at the beginning of turn
