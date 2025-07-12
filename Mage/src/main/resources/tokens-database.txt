@@ -1532,7 +1532,8 @@
 |Generate|TOK:SLD|Hydra|||ZaxaraTheExemplaryHydraToken|
 |Generate|TOK:SLD|Icingdeath, Frost Tongue|||IcingdeathFrostTongueToken|
 |Generate|TOK:SLD|Marit Lage|||MaritLageToken|
-|Generate|TOK:SLD|Mechtitan|||MechtitanToken|
+|Generate|TOK:SLD|Mechtitan|1||MechtitanToken|
+|Generate|TOK:SLD|Mechtitan|2||MechtitanToken|
 |Generate|TOK:SLD|Myr|||MyrToken|
 |Generate|TOK:SLD|Saproling|||SaprolingToken|
 |Generate|TOK:SLD|Shapeshifter|1||ShapeshifterBlueToken|
