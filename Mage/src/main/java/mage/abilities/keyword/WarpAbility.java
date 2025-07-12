@@ -44,8 +44,11 @@ public class WarpAbility extends SpellAbility {
     }
 
     @Override
-    public boolean resolve(Game game) {
-        return super.resolve(game);
+    public ActivationStatus canActivate(UUID playerId, Game game) {
+        if (Zone.HAND.match(game.getState().getZone(getSourceId()))) {
+            return super.canActivate(playerId, game);
+        }
+        return ActivationStatus.getFalse();
     }
 
     private WarpAbility(final WarpAbility ability) {
