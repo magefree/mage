@@ -723,7 +723,7 @@ public class SessionImpl implements Session {
     public Optional<UUID> getRoomChatId(UUID roomId) {
         try {
             if (isConnected()) {
-                return Optional.of(server.chatFindByRoom(roomId));
+                return Optional.ofNullable(server.chatFindByRoom(roomId));
             }
         } catch (MageException ex) {
             handleMageException(ex);
@@ -735,7 +735,7 @@ public class SessionImpl implements Session {
     public Optional<UUID> getTableChatId(UUID tableId) {
         try {
             if (isConnected()) {
-                return Optional.of(server.chatFindByTable(tableId));
+                return Optional.ofNullable(server.chatFindByTable(tableId));
             }
         } catch (MageException ex) {
             handleMageException(ex);
@@ -747,7 +747,7 @@ public class SessionImpl implements Session {
     public Optional<UUID> getGameChatId(UUID gameId) {
         try {
             if (isConnected()) {
-                return Optional.of(server.chatFindByGame(gameId));
+                return Optional.ofNullable(server.chatFindByGame(gameId));
             }
         } catch (MageException ex) {
             handleMageException(ex);
@@ -761,7 +761,7 @@ public class SessionImpl implements Session {
     public Optional<TableView> getTable(UUID roomId, UUID tableId) {
         try {
             if (isConnected()) {
-                return Optional.of(server.roomGetTableById(roomId, tableId));
+                return Optional.ofNullable(server.roomGetTableById(roomId, tableId));
             }
         } catch (MageException ex) {
             handleMageException(ex);
@@ -905,7 +905,7 @@ public class SessionImpl implements Session {
     public Optional<UUID> getTournamentChatId(UUID tournamentId) {
         try {
             if (isConnected()) {
-                return Optional.of(server.chatFindByTournament(tournamentId));
+                return Optional.ofNullable(server.chatFindByTournament(tournamentId));
             }
         } catch (MageException ex) {
             handleMageException(ex);
