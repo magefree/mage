@@ -3,7 +3,7 @@ package mage.cards.a;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.WarpAbility;
 import mage.cards.Card;
@@ -28,8 +28,7 @@ import java.util.UUID;
 public final class AstelliReclaimer extends CardImpl {
 
     private static final FilterCard filter = new FilterCard(
-            "noncreature, nonland permanent card with mana value X or less from your graveyard " +
-                    "to the battlefield, where X is the amount of mana spent to cast this creature"
+            "noncreature, nonland permanent card with mana value X or less"
     );
 
     static {
@@ -51,7 +50,9 @@ public final class AstelliReclaimer extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When this creature enters, return target noncreature, nonland permanent card with mana value X or less from your graveyard to the battlefield, where X is the amount of mana spent to cast this creature.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect());
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect()
+                .setText("return target noncreature, nonland permanent card with mana value X or less from " +
+                        "your graveyard to the battlefield, where X is the amount of mana spent to cast this creature"));
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
 

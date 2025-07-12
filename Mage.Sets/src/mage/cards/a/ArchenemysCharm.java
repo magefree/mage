@@ -45,7 +45,7 @@ public final class ArchenemysCharm extends CardImpl {
                 .addTarget(new TargetCardInYourGraveyard(1, 2, filter)));
 
         // * Put two +1/+1 counters on target creature you control. It gains lifelink until end of turn.
-        this.getSpellAbility().addMode(new Mode(new AddCountersTargetEffect(CounterType.P1P1.createInstance()))
+        this.getSpellAbility().addMode(new Mode(new AddCountersTargetEffect(CounterType.P1P1.createInstance(2)))
                 .addEffect(new GainAbilityTargetEffect(LifelinkAbility.getInstance())
                         .setText("It gains lifelink until end of turn"))
                 .addTarget(new TargetControlledCreaturePermanent()));

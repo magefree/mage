@@ -50,7 +50,7 @@ public final class DepthshakerTitan extends CardImpl {
         ).setText("any number of target noncreature artifacts you control"));
         ability.addEffect(new SetBasePowerToughnessTargetEffect(
                 3, 3, Duration.Custom
-        ).setText(" 3/3 artifact creatures"));
+        ).setText(" become 3/3 artifact creatures"));
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(
                 new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
                         new SacrificeTargetEffect().setText("sacrifice those artifacts")

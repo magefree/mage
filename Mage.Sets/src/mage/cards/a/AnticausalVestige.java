@@ -8,6 +8,7 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.PutCardFromHandOntoBattlefieldEffect;
 import mage.abilities.hint.common.LandsYouControlHint;
 import mage.abilities.keyword.WarpAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -17,7 +18,6 @@ import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 import java.util.UUID;
 
@@ -60,11 +60,11 @@ public final class AnticausalVestige extends CardImpl {
     }
 }
 
-enum AnticausalVestigePredicate implements ObjectSourcePlayerPredicate<Permanent> {
+enum AnticausalVestigePredicate implements ObjectSourcePlayerPredicate<Card> {
     instance;
 
     @Override
-    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
+    public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
         return input.getObject().getManaValue()
                 <= LandsYouControlCount.instance.calculate(game, input.getSource(), null);
     }

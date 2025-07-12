@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterNonlandCard;
 
 import java.util.UUID;
@@ -21,7 +20,7 @@ import java.util.UUID;
  */
 public final class SamiWildcatCaptain extends CardImpl {
 
-    private static final FilterNonlandCard filter = new FilterNonlandCard("Spells you cast");
+    private static final FilterNonlandCard filter = new FilterNonlandCard("spells you cast");
 
     public SamiWildcatCaptain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{W}");
@@ -40,9 +39,9 @@ public final class SamiWildcatCaptain extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Spells you cast have affinity for artifacts.
-        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledSpellsEffect(
-                new AffinityForArtifactsAbility(), StaticFilters.FILTER_CARD_NON_LAND
-        )));
+        this.addAbility(new SimpleStaticAbility(
+                new GainAbilityControlledSpellsEffect(new AffinityForArtifactsAbility(), filter)
+        ));
     }
 
     private SamiWildcatCaptain(final SamiWildcatCaptain card) {

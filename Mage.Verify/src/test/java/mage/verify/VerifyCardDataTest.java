@@ -2424,6 +2424,7 @@ public class VerifyCardDataTest {
     private static final List<SubType> selfRefNamedSubtypes = Arrays.asList(
             SubType.EQUIPMENT,
             SubType.VEHICLE,
+            SubType.SPACECRAFT,
             SubType.AURA,
             SubType.CLASS,
             SubType.SAGA,

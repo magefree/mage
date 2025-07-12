@@ -44,7 +44,9 @@ public final class InfiniteGuidelineStation extends CardImpl {
         this.subtype.add(SubType.SPACECRAFT);
 
         // When Infinite Guideline Station enters, create a tapped 2/2 colorless Robot artifact creature token for each multicolored permanent you control.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new RobotToken(), xValue)).addHint(hint));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new CreateTokenEffect(new RobotToken(), xValue, true, false)
+        ).addHint(hint));
 
         // Station
         this.addAbility(new StationAbility());

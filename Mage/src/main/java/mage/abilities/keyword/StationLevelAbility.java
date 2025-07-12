@@ -45,7 +45,7 @@ public class StationLevelAbility extends StaticAbility {
 
     @Override
     public String getRule() {
-        return "STATION " + level + "+" + this
+        return "STATION " + level + "+<br>" + this
                 .getEffects()
                 .stream()
                 .map(effect -> effect.getText(this.getModes().getMode()))

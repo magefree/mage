@@ -42,7 +42,9 @@ public final class SusurSecundiVoidAltar extends CardImpl {
         // STATION 12+
         // {1}{B}, {T}, Pay 2 life, Sacrifice a creature: Draw cards equal to the sacrificed creature's power. Activate only as a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(
-                new DrawCardSourceControllerEffect(SacrificeCostCreaturesPower.instance), new ManaCostsImpl<>("{1}{B}")
+                new DrawCardSourceControllerEffect(SacrificeCostCreaturesPower.instance)
+                        .setText("draw cards equal to the sacrificed creature's power"),
+                new ManaCostsImpl<>("{1}{B}")
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new PayLifeCost(2));
