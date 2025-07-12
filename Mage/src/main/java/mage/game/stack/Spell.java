@@ -422,7 +422,7 @@ public class Spell extends StackObjectImpl implements Card {
         } else {
             MageObjectReference mor = new MageObjectReference(getSpellAbility());
             game.storePermanentCostsTags(mor, getSpellAbility());
-            WarpAbility.addDelayedTrigger(ability, game);
+            WarpAbility.addDelayedTrigger(getSpellAbility(), game);
             return controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null);
         }
     }

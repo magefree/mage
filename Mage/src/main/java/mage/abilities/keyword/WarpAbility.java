@@ -13,6 +13,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
  * @author TheElk801
  */
@@ -113,6 +115,11 @@ class WarpExileEffect extends OneShotEffect {
         if (permanent == null || permanent.getZoneChangeCounter(game) != source.getSourceObjectZoneChangeCounter() + 1) {
             return false;
         }
+        player.moveCardsToExile(
+                permanent, source, game, true,
+                CardUtil.getExileZoneId(player.getId() + "- Warped", game),
+                "Warped by " + player.getLogName()
+        );
         player.moveCards(permanent, Zone.EXILED, source, game);
         CardUtil.makeCardPlayable(
                 game, source, permanent.getMainCard(), true,
