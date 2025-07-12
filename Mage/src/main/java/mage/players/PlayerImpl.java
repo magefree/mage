@@ -547,8 +547,6 @@ public abstract class PlayerImpl implements Player, Serializable {
         resetLandsPlayed();
         updateRange(game);
         game.getState().removeTurnStartEffect(game);
-        GameEvent event = new GameEvent(GameEvent.EventType.BEGIN_TURN, null, null, getId());
-        game.fireEvent(event);
     }
 
     @Override
