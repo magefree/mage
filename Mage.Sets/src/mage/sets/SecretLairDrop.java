@@ -1946,8 +1946,6 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Reckoner Bankbuster", "1967b", Rarity.RARE, mage.cards.r.ReckonerBankbuster.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Smuggler's Copter", 1968, Rarity.RARE, mage.cards.s.SmugglersCopter.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Smuggler's Copter", "1968b", Rarity.RARE, mage.cards.s.SmugglersCopter.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Mechtitan Core", 1969, Rarity.COMMON, mage.cards.m.MechtitanCore.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Mechtitan Core", "1969b", Rarity.COMMON, mage.cards.m.MechtitanCore.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dragonlord Atarka", 1970, Rarity.MYTHIC, mage.cards.d.DragonlordAtarka.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dragonlord Atarka", "1970b", Rarity.MYTHIC, mage.cards.d.DragonlordAtarka.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dragonlord Dromoka", 1971, Rarity.MYTHIC, mage.cards.d.DragonlordDromoka.class, NON_FULL_USE_VARIOUS));

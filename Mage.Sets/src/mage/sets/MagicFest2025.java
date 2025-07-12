@@ -25,6 +25,12 @@ public class MagicFest2025 extends ExpansionSet {
         cards.add(new SetCardInfo("Ponder", 2, Rarity.RARE, mage.cards.p.Ponder.class));
         cards.add(new SetCardInfo("Serra the Benevolent", 1, Rarity.MYTHIC, mage.cards.s.SerraTheBenevolent.class, RETRO_ART));
         cards.add(new SetCardInfo("The First Sliver", 3, Rarity.MYTHIC, mage.cards.t.TheFirstSliver.class));
-        cards.add(new SetCardInfo("Yoshimaru, Ever Faithful", 4, Rarity.MYTHIC, mage.cards.y.YoshimaruEverFaithful.class));
+        cards.add(new SetCardInfo("Yoshimaru, Ever Faithful", 5, Rarity.MYTHIC, mage.cards.y.YoshimaruEverFaithful.class));
+        cards.add(new SetCardInfo("Ugin, the Spirit Dragon", 6, Rarity.MYTHIC, mage.cards.u.UginTheSpiritDragon.class, RETRO_ART));
+        cards.add(new SetCardInfo("Sliver Hive", 7, Rarity.RARE, mage.cards.s.SliverHive.class, RETRO_ART));
+        cards.add(new SetCardInfo("Tifa Lockhart", 9, Rarity.RARE, mage.cards.t.TifaLockhart.class));
+        cards.add(new SetCardInfo("Arcane Signet", 10, Rarity.RARE, mage.cards.a.ArcaneSignet.class));
+        cards.add(new SetCardInfo("Rograkh, Son of Rohgahh", 11, Rarity.RARE, mage.cards.r.RograkhSonOfRohgahh.class));
+        cards.add(new SetCardInfo("Swords to Plowshares", 13, Rarity.RARE, mage.cards.s.SwordsToPlowshares.class));
     }
 }
