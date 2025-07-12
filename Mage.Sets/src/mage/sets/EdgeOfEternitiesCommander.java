@@ -116,6 +116,8 @@ public final class EdgeOfEternitiesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Mindless Automaton", 142, Rarity.UNCOMMON, mage.cards.m.MindlessAutomaton.class));
         cards.add(new SetCardInfo("Moraug, Fury of Akoum", 89, Rarity.MYTHIC, mage.cards.m.MoraugFuryOfAkoum.class));
         cards.add(new SetCardInfo("Mountain Valley", 61, Rarity.UNCOMMON, mage.cards.m.MountainValley.class));
+        cards.add(new SetCardInfo("Moxite Refinery", 17, Rarity.RARE, mage.cards.m.MoxiteRefinery.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Moxite Refinery", 37, Rarity.RARE, mage.cards.m.MoxiteRefinery.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Multani, Yavimaya's Avatar", 100, Rarity.MYTHIC, mage.cards.m.MultaniYavimayasAvatar.class));
         cards.add(new SetCardInfo("Myriad Landscape", 169, Rarity.UNCOMMON, mage.cards.m.MyriadLandscape.class));
         cards.add(new SetCardInfo("Mystic Monastery", 170, Rarity.UNCOMMON, mage.cards.m.MysticMonastery.class));
