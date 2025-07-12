@@ -1,10 +1,17 @@
 package mage.abilities.keyword;
 
+import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
+import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
-import mage.constants.SpellAbilityType;
-import mage.constants.TimingRule;
+import mage.constants.*;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  * @author TheElk801
@@ -14,10 +21,29 @@ public class WarpAbility extends SpellAbility {
     public static final String WARP_ACTIVATION_VALUE_KEY = "warpActivation";
 
     public WarpAbility(Card card, String manaString) {
-        super(new ManaCostsImpl<>(manaString), card.getName() + " with Warp");
+        super(card.getSpellAbility());
+        this.newId();
+        this.setCardName(card.getName() + " with Warp");
+        this.zone = Zone.HAND;
         this.spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
+        this.clearManaCosts();
+        this.clearManaCostsToPay();
+        this.addCost(new ManaCostsImpl<>(manaString));
         this.setAdditionalCostsRuleVisible(false);
         this.timing = TimingRule.SORCERY;
+    }
+
+    public static void addDelayedTrigger(SpellAbility spellAbility, Game game) {
+        if (spellAbility instanceof WarpAbility) {
+            game.addDelayedTriggeredAbility(
+                    new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new WarpExileEffect()), spellAbility
+            );
+        }
+    }
+
+    @Override
+    public boolean resolve(Game game) {
+        return super.resolve(game);
     }
 
     private WarpAbility(final WarpAbility ability) {
@@ -47,5 +73,51 @@ public class WarpAbility extends SpellAbility {
         sb.append("Exile this creature at the beginning of the next end step, ");
         sb.append("then you may cast it from exile on a later turn.)</i>");
         return sb.toString();
+    }
+}
+
+class WarpExileEffect extends OneShotEffect {
+
+    class WarpCondition implements Condition {
+
+        private final int turnNumber;
+
+        WarpCondition(Game game) {
+            this.turnNumber = game.getTurnNum();
+        }
+
+        @Override
+        public boolean apply(Game game, Ability source) {
+            return game.getTurnNum() > turnNumber;
+        }
+    }
+
+    WarpExileEffect() {
+        super(Outcome.Benefit);
+        staticText = "exile this creature if it was cast for its warp cost";
+    }
+
+    private WarpExileEffect(final WarpExileEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public WarpExileEffect copy() {
+        return new WarpExileEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent == null || permanent.getZoneChangeCounter(game) != source.getSourceObjectZoneChangeCounter() + 1) {
+            return false;
+        }
+        player.moveCards(permanent, Zone.EXILED, source, game);
+        CardUtil.makeCardPlayable(
+                game, source, permanent.getMainCard(), true,
+                Duration.Custom, false, player.getId(), new WarpCondition(game)
+        );
+        return true;
     }
 }

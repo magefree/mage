@@ -8,6 +8,7 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.keyword.BestowAbility;
 import mage.abilities.keyword.PrototypeAbility;
 import mage.abilities.keyword.TransformAbility;
+import mage.abilities.keyword.WarpAbility;
 import mage.cards.*;
 import mage.constants.*;
 import mage.counters.Counter;
@@ -421,6 +422,7 @@ public class Spell extends StackObjectImpl implements Card {
         } else {
             MageObjectReference mor = new MageObjectReference(getSpellAbility());
             game.storePermanentCostsTags(mor, getSpellAbility());
+            WarpAbility.addDelayedTrigger(ability, game);
             return controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null);
         }
     }
