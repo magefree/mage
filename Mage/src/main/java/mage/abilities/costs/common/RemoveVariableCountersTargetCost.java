@@ -8,19 +8,21 @@ import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
+import java.util.stream.IntStream;
 
 /**
  * @author LevelX
  */
 public class RemoveVariableCountersTargetCost extends VariableCostImpl {
 
-    protected FilterPermanent filter;
-    protected CounterType counterTypeToRemove;
-    protected int minValue;
+    protected final FilterPermanent filter;
+    protected final CounterType counterTypeToRemove;
+    protected final int minValue;
+    protected final boolean onlyOne;
 
     public RemoveVariableCountersTargetCost(FilterPermanent filter) {
         this(filter, null);
@@ -35,15 +37,20 @@ public class RemoveVariableCountersTargetCost extends VariableCostImpl {
     }
 
     public RemoveVariableCountersTargetCost(FilterPermanent filter, CounterType counterTypeToRemove, String xText, int minValue, String text) {
+        this(filter, counterTypeToRemove, xText, minValue, false, text);
+    }
+
+    public RemoveVariableCountersTargetCost(FilterPermanent filter, CounterType counterTypeToRemove, String xText, int minValue, boolean onlyOne, String text) {
         super(VariableCostType.NORMAL, xText, new StringBuilder(counterTypeToRemove != null ? counterTypeToRemove.getName() + ' ' : "").append("counters to remove").toString());
         this.filter = filter;
         this.counterTypeToRemove = counterTypeToRemove;
+        this.minValue = minValue;
+        this.onlyOne = onlyOne;
         if (text != null && !text.isEmpty()) {
             this.text = text;
         } else {
             this.text = setText();
         }
-        this.minValue = minValue;
     }
 
     protected RemoveVariableCountersTargetCost(final RemoveVariableCountersTargetCost cost) {
@@ -51,6 +58,7 @@ public class RemoveVariableCountersTargetCost extends VariableCostImpl {
         this.filter = cost.filter;
         this.counterTypeToRemove = cost.counterTypeToRemove;
         this.minValue = cost.minValue;
+        this.onlyOne = cost.onlyOne;
     }
 
     @Override
@@ -59,11 +67,19 @@ public class RemoveVariableCountersTargetCost extends VariableCostImpl {
     }
 
     private String setText() {
-        StringBuilder sb = new StringBuilder("Remove ").append(xText);
+        StringBuilder sb = new StringBuilder("Remove ");
+        sb.append(xText);
         if (counterTypeToRemove != null) {
-            sb.append(' ').append(counterTypeToRemove.getName());
+            sb.append(' ');
+            sb.append(counterTypeToRemove.getName());
         }
-        sb.append(" counters from among ").append(filter.getMessage());
+        sb.append(" counters from ");
+        if (onlyOne) {
+            sb.append(CardUtil.addArticle(filter.getMessage()));
+        } else {
+            sb.append("among ");
+            sb.append(filter.getMessage());
+        }
         return sb.toString();
     }
 
@@ -84,22 +100,24 @@ public class RemoveVariableCountersTargetCost extends VariableCostImpl {
 
     @Override
     public int getMaxValue(Ability source, Game game) {
-        int maxValue = 0;
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
-            if (counterTypeToRemove != null) {
-                maxValue += permanent.getCounters(game).getCount(counterTypeToRemove);
-            } else {
-                for (Counter counter : permanent.getCounters(game).values()) {
-                    maxValue += counter.getCount();
-                }
-            }
+        IntStream stream = game
+                .getBattlefield()
+                .getAllActivePermanents(filter, source.getControllerId(), game)
+                .stream()
+                .map(permanent -> permanent.getCounters(game))
+                .mapToInt(counters -> counterTypeToRemove == null
+                        ? counters.values().stream().mapToInt(Counter::getCount).sum()
+                        : counters.getCount(counterTypeToRemove));
+        if (onlyOne) {
+            return stream.max().orElse(0);
         }
-        return maxValue;
+        return stream.sum();
     }
 
     @Override
     public Cost getFixedCostsFromAnnouncedValue(int xValue) {
-        return new RemoveCounterCost(new TargetPermanent(minValue, Integer.MAX_VALUE, filter, true), counterTypeToRemove, xValue);
+        return new RemoveCounterCost(
+                new TargetPermanent(minValue, onlyOne ? 1 : Integer.MAX_VALUE, filter, true), counterTypeToRemove, xValue
+        );
     }
-
 }
