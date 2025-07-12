@@ -1,5 +1,6 @@
 package mage.cards.c;
 
+import mage.MageItem;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -23,6 +24,7 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -100,7 +102,40 @@ class CommandersPlateEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        Player player = game.getPlayer(source.getControllerId());
+        Set<UUID> commanders = game.getCommandersIds(player, CommanderCardType.COMMANDER_OR_OATHBREAKER, false);
+        for (MageItem object : affectedObjects) {
+            Permanent permanent = (Permanent) object;
+            ObjectColor color = new ObjectColor("WUBRG");
+            for (UUID commanderId : commanders) {
+                Card card = game.getCard(commanderId);
+                if (card == null) {
+                    continue;
+                }
+                FilterMana identity = card.getColorIdentity();
+                if (identity.isWhite()) {
+                    color.setWhite(false);
+                }
+                if (identity.isBlue()) {
+                    color.setBlue(false);
+                }
+                if (identity.isBlack()) {
+                    color.setBlack(false);
+                }
+                if (identity.isRed()) {
+                    color.setRed(false);
+                }
+                if (identity.isGreen()) {
+                    color.setGreen(false);
+                }
+            }
+            permanent.addAbility(ProtectionAbility.from(color), source.getSourceId(), game);
+        }
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         Player player = game.getPlayer(source.getControllerId());
         if (player == null) {
             return false;
@@ -119,35 +154,10 @@ class CommandersPlateEffect extends ContinuousEffectImpl {
             }
         }
         Set<UUID> commanders = game.getCommandersIds(player, CommanderCardType.COMMANDER_OR_OATHBREAKER, false);
-        if (commanders.isEmpty()) {
+        if (commanders.isEmpty() || permanent == null) {
             return false;
         }
-        ObjectColor color = new ObjectColor("WUBRG");
-        for (UUID commanderId : commanders) {
-            Card card = game.getCard(commanderId);
-            if (card == null) {
-                continue;
-            }
-            FilterMana identity = card.getColorIdentity();
-            if (identity.isWhite()) {
-                color.setWhite(false);
-            }
-            if (identity.isBlue()) {
-                color.setBlue(false);
-            }
-            if (identity.isBlack()) {
-                color.setBlack(false);
-            }
-            if (identity.isRed()) {
-                color.setRed(false);
-            }
-            if (identity.isGreen()) {
-                color.setGreen(false);
-            }
-        }
-        if (permanent != null) {
-            permanent.addAbility(ProtectionAbility.from(color), source.getSourceId(), game);
-        }
+        affectedObjects.add(permanent);
         return true;
     }
 }

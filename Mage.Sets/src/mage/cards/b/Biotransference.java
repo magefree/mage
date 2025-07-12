@@ -1,5 +1,7 @@
 package mage.cards.b;
 
+import mage.MageItem;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -67,7 +69,14 @@ class BiotransferenceEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            ((MageObject) object).addCardType(game, CardType.ARTIFACT);
+        }
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null) {
             return false;
@@ -77,26 +86,26 @@ class BiotransferenceEffect extends ContinuousEffectImpl {
         for (UUID cardId : controller.getGraveyard()) {
             Card card = game.getCard(cardId);
             if (card != null && card.isCreature(game) && !card.isArtifact(game)) {
-                card.addCardType(game, CardType.ARTIFACT);
+                affectedObjects.add(card);
             }
         }
         // on Hand
         for (UUID cardId : controller.getHand()) {
             Card card = game.getCard(cardId);
             if (card != null && card.isCreature(game) && !card.isArtifact(game)) {
-                card.addCardType(game, CardType.ARTIFACT);
+                affectedObjects.add(card);
             }
         }
         // in Exile
         for (Card card : game.getState().getExile().getAllCards(game, source.getControllerId())) {
             if (card.isCreature(game) && !card.isArtifact(game)) {
-                card.addCardType(game, CardType.ARTIFACT);
+                affectedObjects.add(card);
             }
         }
         // in Library (e.g. for Mystical Teachings)
         for (Card card : controller.getLibrary().getCards(game)) {
             if (card.isOwnedBy(controller.getId()) && card.isCreature(game) && !card.isArtifact(game)) {
-                card.addCardType(game, CardType.ARTIFACT);
+                affectedObjects.add(card);
             }
         }
         // commander in command zone
@@ -105,7 +114,7 @@ class BiotransferenceEffect extends ContinuousEffectImpl {
                 Card card = game.getCard((commandObject).getId());
                 if (card != null && card.isOwnedBy(controller.getId())
                         && card.isCreature(game) && !card.isArtifact(game)) {
-                    card.addCardType(game, CardType.ARTIFACT);
+                    affectedObjects.add(card);
                 }
             }
         }
@@ -117,7 +126,7 @@ class BiotransferenceEffect extends ContinuousEffectImpl {
                     && stackObject.isCreature(game)
                     && !stackObject.isArtifact(game)) {
                 Card card = ((Spell) stackObject).getCard();
-                card.addCardType(game, CardType.ARTIFACT);
+                affectedObjects.add(card);
             }
         }
         // creatures you control
@@ -125,10 +134,9 @@ class BiotransferenceEffect extends ContinuousEffectImpl {
                 new FilterControlledCreaturePermanent(), source.getControllerId(), game);
         for (Permanent creature : creatures) {
             if (creature != null) {
-                creature.addCardType(game, CardType.ARTIFACT);
+                affectedObjects.add(creature);
             }
         }
-        return true;
-
+        return !affectedObjects.isEmpty();
     }
 }

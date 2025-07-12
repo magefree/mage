@@ -1,6 +1,7 @@
 
 package mage.abilities.effects.common.combat;
 
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
@@ -12,6 +13,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
+import java.util.List;
+
 /**
  * @author emerald000
  */
@@ -22,7 +25,7 @@ public class CanBlockAdditionalCreatureAllEffect extends ContinuousEffectImpl {
     protected FilterPermanent filter;
 
     public CanBlockAdditionalCreatureAllEffect(int amount, FilterPermanent filter, Duration duration) {
-        super(duration, Outcome.Benefit);
+        super(duration, Layer.RulesEffects, SubLayer.NA, Outcome.Benefit);
         this.amount = amount;
         this.filter = filter;
         staticText = setText();
@@ -40,25 +43,24 @@ public class CanBlockAdditionalCreatureAllEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
-            if (permanent != null) {
-                // maxBlocks = 0 equals to "can block any number of creatures"
-                if (amount > 0) {
-                    if (permanent.getMaxBlocks() > 0) {
-                        permanent.setMaxBlocks(permanent.getMaxBlocks() + amount);
-                    }
-                } else {
-                    permanent.setMaxBlocks(0);
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Permanent permanent = (Permanent) object;
+            // maxBlocks = 0 equals to "can block any number of creatures"
+            if (amount > 0) {
+                if (permanent.getMaxBlocks() > 0) {
+                    permanent.setMaxBlocks(permanent.getMaxBlocks() + amount);
                 }
+            } else {
+                permanent.setMaxBlocks(amount);
             }
         }
-        return true;
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        affectedObjects.addAll(game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game));
+        return !affectedObjects.isEmpty();
     }
 
     private String setText() {
@@ -76,10 +78,5 @@ public class CanBlockAdditionalCreatureAllEffect extends ContinuousEffectImpl {
                 sb.append(" additional creatures");
         }
         return sb.toString();
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.RulesEffects;
     }
 }

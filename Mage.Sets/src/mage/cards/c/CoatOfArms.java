@@ -1,6 +1,7 @@
 
 package mage.cards.c;
 
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -53,22 +54,26 @@ class CoatOfArmsEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        List<Permanent> permanents = game.getBattlefield().getActivePermanents(
-                StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game
-        );
-        for (Permanent permanent : permanents) {
-            int amount = getAmount(permanents, permanent, game);
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Permanent permanent = (Permanent) object;
+            int amount = getAmount(affectedObjects, permanent, game);
             permanent.addPower(amount);
             permanent.addToughness(amount);
         }
-        return true;
     }
 
-    private int getAmount(List<Permanent> permanents, Permanent target, Game game) {
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        affectedObjects.addAll(game.getBattlefield().getActivePermanents(
+                StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game));
+        return !affectedObjects.isEmpty();
+    }
+
+    private int getAmount(List<MageItem> permanents, Permanent target, Game game) {
         int amount = 0;
-        for (Permanent permanent : permanents) {
-            if (!permanent.getId().equals(target.getId()) && permanent.shareCreatureTypes(game, target)) {
+        for (MageItem permanent : permanents) {
+            if (!permanent.getId().equals(target.getId()) && ((Permanent) permanent).shareCreatureTypes(game, target)) {
                 amount++;
             }
         }

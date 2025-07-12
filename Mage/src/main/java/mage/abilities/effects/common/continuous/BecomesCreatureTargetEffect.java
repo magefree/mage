@@ -1,5 +1,6 @@
 package mage.abilities.effects.common.continuous;
 
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -8,6 +9,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -78,13 +81,20 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        boolean result = false;
-        for (UUID permanentId : getTargetPointer().getTargets(game, source)) {
-            Permanent permanent = game.getPermanent(permanentId);
-            if (permanent == null) {
-                continue;
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (UUID targetId : getTargetPointer().getTargets(game, source)) {
+            Permanent permanent = game.getPermanent(targetId);
+            if (permanent != null) {
+                affectedObjects.add(permanent);
             }
+        }
+        return !affectedObjects.isEmpty();
+    }
+
+    @Override
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Permanent permanent = (Permanent) object;
             switch (layer) {
                 case TextChangingEffects_3:
                     if (loseName) {
@@ -145,22 +155,25 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
                         permanent.getPower().setModifiedBaseValue(token.getPower().getValue());
                     }
             }
-            result = true;
         }
-        if (!result && this.duration == Duration.Custom) {
+    }
+
+    @Override
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        List<MageItem> affectedObjects = new ArrayList<>();
+        if (queryAffectedObjects(layer, source, game, affectedObjects)) {
+            applyToObjects(layer, sublayer, source, game, affectedObjects);
+            return true;
+        }
+        if (duration == Duration.Custom) {
             this.discard();
         }
-        return result;
+        return false;
     }
 
     public BecomesCreatureTargetEffect setRemoveSubtypes(boolean removeSubtypes) {
         this.removeSubtypes = removeSubtypes;
         return this;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
     }
 
     @Override

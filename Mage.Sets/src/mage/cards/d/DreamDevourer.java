@@ -1,7 +1,7 @@
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.common.ForetellSourceControllerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -9,19 +9,16 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.ForetellAbility;
 import mage.cards.*;
-import mage.constants.SubType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -78,12 +75,9 @@ class DreamDevourerAddAbilityEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-        for (Card card : controller.getHand().getCards(filter, game)) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Card card = (Card) object;
             ForetellAbility foretellAbility = null;
             if (card instanceof SplitCard) {
                 String leftHalfCost = CardUtil.reduceCost(((SplitCard) card).getLeftHalfCard().getManaCost(), 2).getText();
@@ -117,6 +111,15 @@ class DreamDevourerAddAbilityEffect extends ContinuousEffectImpl {
                 game.getState().addOtherAbility(card, foretellAbility);
             }
         }
-        return true;
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
+        affectedObjects.addAll(controller.getHand().getCards(filter, game));
+        return !affectedObjects.isEmpty();
     }
 }

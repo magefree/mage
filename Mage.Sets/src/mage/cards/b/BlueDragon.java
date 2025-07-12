@@ -1,6 +1,7 @@
 package mage.cards.b;
 
 import mage.MageInt;
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -16,6 +17,9 @@ import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -61,6 +65,8 @@ public final class BlueDragon extends CardImpl {
 
 class BlueDragonEffect extends ContinuousEffectImpl {
 
+    Map<UUID, Integer> powerMap = new HashMap<>();
+
     BlueDragonEffect() {
         super(Duration.UntilYourNextTurn, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.UnboostCreature);
         this.staticText = "until your next turn, target creature an opponent controls gets -3/-0, up to one other target creature gets -2/-0, and up to one other target creature gets -1/-0";
@@ -68,6 +74,7 @@ class BlueDragonEffect extends ContinuousEffectImpl {
 
     private BlueDragonEffect(final BlueDragonEffect effect) {
         super(effect);
+        powerMap.putAll(effect.powerMap);
     }
 
     @Override
@@ -76,17 +83,24 @@ class BlueDragonEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        int power = -3;
-        int affectedTargets = 0;
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Permanent permanent = (Permanent) object;
+            int power = -4 + powerMap.get(permanent.getId());
+            permanent.addPower(power);
+        }
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        powerMap.clear();
         for (Target target : source.getTargets()) {
             Permanent permanent = game.getPermanent(target.getFirstTarget());
-            if (permanent != null && permanent.isCreature(game)) {
-                permanent.addPower(power);
-                affectedTargets++;
+            if (permanent != null && permanent.isCreature()) {
+                affectedObjects.add(permanent);
+                powerMap.put(permanent.getId(), target.getTargetTag());
             }
-            power++;
         }
-        return affectedTargets > 0;
+        return !affectedObjects.isEmpty();
     }
 }

@@ -1,6 +1,7 @@
 package mage.game.permanent.token;
 
 import mage.MageInt;
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -10,6 +11,8 @@ import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.List;
 
 /**
  * @author TheElk801
@@ -59,14 +62,22 @@ class AlienAngelTokenEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Permanent permanent = (Permanent) object;
+            permanent.removeAllSubTypes(game, SubTypeSet.CreatureType);
+            permanent.removeCardType(game, CardType.CREATURE);
+        }
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent == null) {
             discard();
             return false;
         }
-        permanent.removeAllSubTypes(game, SubTypeSet.CreatureType);
-        permanent.removeCardType(game, CardType.CREATURE);
+        affectedObjects.add(permanent);
         return true;
     }
 }

@@ -1,11 +1,14 @@
 package mage.abilities.effects.common.continuous;
 
+import mage.MageItem;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.List;
 
 /**
  * @author noxx
@@ -27,24 +30,33 @@ public class AddCardColorAttachedEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Permanent target = (Permanent) object;
+            if (addedColor.isBlack())
+                target.getColor(game).setBlack(true);
+            if (addedColor.isBlue())
+                target.getColor(game).setBlue(true);
+            if (addedColor.isWhite())
+                target.getColor(game).setWhite(true);
+            if (addedColor.isGreen())
+                target.getColor(game).setGreen(true);
+            if (addedColor.isRed())
+                target.getColor(game).setRed(true);
+        }
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         Permanent equipment = game.getPermanent(source.getSourceId());
         if (equipment != null && equipment.getAttachedTo() != null) {
             Permanent target = game.getPermanent(equipment.getAttachedTo());
             if (target != null) {
-                if (addedColor.isBlack())
-                    target.getColor(game).setBlack(true);
-                if (addedColor.isBlue())
-                    target.getColor(game).setBlue(true);
-                if (addedColor.isWhite())
-                    target.getColor(game).setWhite(true);
-                if (addedColor.isGreen())
-                    target.getColor(game).setGreen(true);
-                if (addedColor.isRed())
-                    target.getColor(game).setRed(true);
+                affectedObjects.add(target);
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package mage.abilities.effects.common.continuous;
 
+import mage.MageItem;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -16,6 +17,7 @@ import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -89,27 +91,40 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         if (getAffectedObjectsSet()) {
-            for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext(); ) {
+            for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext(); ) { // filter may not be used again, because object can have changed filter relevant attributes but still geets boost
                 Permanent permanent = it.next().getPermanent(game);
                 if (permanent != null) {
-                    permanent.addPower(power.calculate(game, source, this));
-                    permanent.addToughness(toughness.calculate(game, source, this));
+                    affectedObjects.add(permanent);
                 } else {
                     it.remove(); // no longer on the battlefield, remove reference to object
                 }
             }
         } else {
-            for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
-                if (perm.isControlledBy(source.getControllerId())
-                        && (!(excludeSource && perm.getId().equals(source.getSourceId())))) {
-                    perm.addPower(power.calculate(game, source, this));
-                    perm.addToughness(toughness.calculate(game, source, this));
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
+                if (permanent.isControlledBy(source.getControllerId()) &&
+                        !(excludeSource && permanent.getId().equals(source.getSourceId()))) {
+                    affectedObjects.add(permanent);
                 }
             }
         }
+        if (affectedObjects.isEmpty()) {
+            if (duration == Duration.Custom) {
+                this.discard();
+            }
+            return false;
+        }
         return true;
+    }
+
+    @Override
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Permanent permanent = (Permanent) object;
+            permanent.addPower(power.calculate(game, source, this));
+            permanent.addToughness(toughness.calculate(game, source, this));
+        }
     }
 
     private void setText() {

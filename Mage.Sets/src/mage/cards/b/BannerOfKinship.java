@@ -1,5 +1,6 @@
 package mage.cards.b;
 
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -10,12 +11,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -94,20 +95,29 @@ class BannerOfKinshipBoostEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            SubType subtype = (SubType) game.getState().getValue(permanent.getId() + "_type");
-            if (subtype != null) {
-                for (Permanent perm : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURES, source.getControllerId(), game)) {
-                    if (perm.hasSubtype(subtype, game)) {
-                        int boost = permanent.getCounters(game).getCount(CounterType.FELLOWSHIP);
-                        perm.addPower(boost);
-                        perm.addToughness(boost);
-                    }
-                }
-            }
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        int boost = game.getPermanent(source.getSourceId())
+                .getCounters(game)
+                .getCount(CounterType.FELLOWSHIP);
+        for (MageItem object : affectedObjects) {
+            Permanent permanent = (Permanent) object;
+            permanent.addPower(boost);
+            permanent.addToughness(boost);
         }
-        return true;
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent == null) {
+            return false;
+        }
+        SubType subtype = (SubType) game.getState().getValue(source.getSourceId() + "_type");
+        if (subtype == null) {
+            return false;
+        }
+        FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent(subtype);
+        affectedObjects.addAll(game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game));
+        return !affectedObjects.isEmpty();
     }
 }

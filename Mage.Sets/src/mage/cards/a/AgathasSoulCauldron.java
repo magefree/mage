@@ -1,5 +1,6 @@
 package mage.cards.a;
 
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -28,6 +29,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 import mage.util.CardUtil;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -119,7 +121,26 @@ class AgathasSoulCauldronAbilityEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(
+                game, source.getSourceId(), game.getState().getZoneChangeCounter(source.getSourceId())
+        ));
+        Set<Ability> abilities = exileZone
+                .getCards(StaticFilters.FILTER_CARD_CREATURE, game)
+                .stream()
+                .map(card -> card.getAbilities(game))
+                .flatMap(Collection::stream)
+                .filter(Ability::isActivatedAbility)
+                .collect(Collectors.toSet());
+        for (MageItem object : affectedObjects) {
+            for (Ability ability : abilities) {
+                ((Permanent) object).addAbility(ability, source.getSourceId(), game, true);
+            }
+        }
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(
                 game, source.getSourceId(), game.getState().getZoneChangeCounter(source.getSourceId())
         ));
@@ -136,12 +157,8 @@ class AgathasSoulCauldronAbilityEffect extends ContinuousEffectImpl {
         if (abilities.isEmpty()) {
             return false;
         }
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
-            for (Ability ability : abilities) {
-                permanent.addAbility(ability, source.getSourceId(), game, true);
-            }
-        }
-        return true;
+        affectedObjects.addAll(game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game));
+        return !affectedObjects.isEmpty();
     }
 
     @Override

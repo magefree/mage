@@ -28,6 +28,10 @@ public class AscendEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return AscendAbility.checkAscend(game, source, true);
+        if (AscendAbility.checkAscend(game, source, true)) {
+            AscendAbility.applyAscend(game, game.getPlayer(source.getControllerId()));
+            return true;
+        }
+        return false;
     }
 }

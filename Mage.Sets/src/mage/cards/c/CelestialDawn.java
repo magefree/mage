@@ -1,5 +1,6 @@
 package mage.cards.c;
 
+import mage.MageItem;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -8,7 +9,6 @@ import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.AsThoughManaEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.mana.WhiteManaAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -22,6 +22,7 @@ import mage.game.stack.Spell;
 import mage.players.ManaPoolItem;
 import mage.players.Player;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -61,7 +62,7 @@ class CelestialDawnToPlainsEffect extends ContinuousEffectImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent();
 
     CelestialDawnToPlainsEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
+        super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Detriment);
         this.staticText = "Lands you control are Plains";
     }
 
@@ -70,35 +71,28 @@ class CelestialDawnToPlainsEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
     public CelestialDawnToPlainsEffect copy() {
         return new CelestialDawnToPlainsEffect(this);
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        for (Permanent land : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
-            switch (layer) {
-                case AbilityAddingRemovingEffects_6:
-                    land.removeAllAbilities(source.getSourceId(), game);
-                    land.addAbility(new WhiteManaAbility(), source.getSourceId(), game);
-                    break;
-                case TypeChangingEffects_4:
-                    land.removeAllSubTypes(game, SubTypeSet.NonBasicLandType);
-                    land.addSubType(game, SubType.PLAINS);
-                    break;
-            }
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Permanent land = (Permanent) object;
+            // 305.7 Note that this doesn't remove any abilities that were granted to the land by other effects
+            // So the ability removing has to be done before Layer 6
+            // Lands have their mana ability intrinsically, so that is added in layer 4
+            land.removeAllAbilities(source.getSourceId(), game);
+            land.removeAllSubTypes(game, SubTypeSet.NonBasicLandType);
+            land.addSubType(game, SubType.PLAINS);
+            land.addAbility(new WhiteManaAbility(), source.getSourceId(), game);
         }
-        return true;
     }
 
     @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.TypeChangingEffects_4;
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        affectedObjects.addAll(game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game));
+        return !affectedObjects.isEmpty();
     }
 
 }
@@ -113,56 +107,42 @@ class CelestialDawnToWhiteEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            for (Permanent perm : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
-                setColor(perm.getColor(game), game);
-            }
-            // Stack
-            for (MageObject object : game.getStack()) {
-                if (object instanceof Spell && ((Spell) object).isControlledBy(controller.getId())) {
-                    setColor(object.getColor(game), game);
-                }
-            }
-            // Exile
-            for (Card card : game.getExile().getAllCards(game)) {
-                if (card.isOwnedBy(controller.getId())) {
-                    setColor(card.getColor(game), game);
-                }
-            }
-            // Command
-            for (CommandObject commandObject : game.getState().getCommand()) {
-                if (commandObject instanceof Commander) {
-                    if (commandObject.isControlledBy(controller.getId())) {
-                        setColor(commandObject.getColor(game), game);
-                    }
-                }
-            }
-
-            // Hand
-            for (Card card : controller.getHand().getCards(game)) {
-                setColor(card.getColor(game), game);
-            }
-            // Library
-            for (Card card : controller.getLibrary().getCards(game)) {
-                setColor(card.getColor(game), game);
-            }
-            // Graveyard
-            for (Card card : controller.getGraveyard().getCards(game)) {
-                setColor(card.getColor(game), game);
-            }
-            return true;
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            ((MageObject) object).getColor(game).setColor(ObjectColor.WHITE);
         }
-        return false;
     }
 
-    protected static void setColor(ObjectColor color, Game game) {
-        color.setWhite(true);
-        color.setGreen(false);
-        color.setBlue(false);
-        color.setBlack(false);
-        color.setRed(false);
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
+        // Battlefield
+        affectedObjects.addAll(game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game));
+        // Stack
+        for (MageObject object : game.getStack()) {
+            if (object instanceof Spell && ((Spell) object).isControlledBy(controller.getId())) {
+                affectedObjects.add(object);
+            }
+        }
+        // Exile
+        affectedObjects.addAll(game.getExile().getAllCards(game, controller.getId()));
+        // Command
+        for (CommandObject commandObject : game.getState().getCommand()) {
+            if (commandObject instanceof Commander && commandObject.isControlledBy(controller.getId())) {
+                affectedObjects.add(commandObject);
+            }
+        }
+        // Hand
+        affectedObjects.addAll(controller.getHand().getCards(game));
+        // Library
+        affectedObjects.addAll(controller.getLibrary().getCards(game));
+        // Graveyard
+        affectedObjects.addAll(controller.getGraveyard().getCards(game));
+
+        return !affectedObjects.isEmpty();
     }
 
     @Override

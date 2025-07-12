@@ -1,6 +1,7 @@
 
 package mage.abilities.effects.common.continuous;
 
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
@@ -10,13 +11,15 @@ import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.List;
+
 /**
  * @author noxx
  */
 public class BoostPairedEffect extends ContinuousEffectImpl {
 
-    private int power;
-    private int toughness;
+    private final int power;
+    private final int toughness;
 
     public BoostPairedEffect(int power, int toughness, String rule) {
         super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
@@ -37,19 +40,24 @@ public class BoostPairedEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null && permanent.getPairedCard() != null) {
             Permanent paired = permanent.getPairedCard().getPermanent(game);
             if (paired != null) {
-                permanent.addPower(power);
-                permanent.addToughness(toughness);
-                paired.addPower(power);
-                paired.addToughness(toughness);
-                return true;
+                affectedObjects.add(permanent);
+                affectedObjects.add(paired);
             }
         }
-        return false;
+        return !affectedObjects.isEmpty();
     }
 
+    @Override
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Permanent permanent = (Permanent) object;
+            permanent.addPower(power);
+            permanent.addToughness(toughness);
+        }
+    }
 }

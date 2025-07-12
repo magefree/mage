@@ -1,5 +1,6 @@
 package mage.abilities.effects.common.continuous;
 
+import mage.MageItem;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -13,10 +14,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -96,58 +94,65 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        for (UUID targetPermanent : getTargetPointer().getTargets(game, source)) {
-            Permanent land = game.getPermanent(targetPermanent);
-            if (land == null) {
-                continue;
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (UUID targetId : getTargetPointer().getTargets(game, source)) {
+            Permanent permanent = game.getPermanent(targetId);
+            if (permanent != null) {
+                affectedObjects.add(permanent);
             }
-            if (!land.isLand(game)) {
-                land.addCardType(game, CardType.LAND);
+        }
+        return !affectedObjects.isEmpty();
+    }
+
+    @Override
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Permanent permanent = (Permanent) object;
+            if (!permanent.isLand(game)) {
+                permanent.addCardType(game, CardType.LAND);
             }
             if (loseOther) {
                 // 305.7 Note that this doesn't remove any abilities
                 // that were granted to the land by other effects
                 // So the ability removing has to be done before Layer 6
-                land.removeAllAbilities(source.getSourceId(), game);
+                permanent.removeAllAbilities(source.getSourceId(), game);
                 // 305.7
-                land.removeAllSubTypes(game, SubTypeSet.NonBasicLandType);
+                permanent.removeAllSubTypes(game, SubTypeSet.NonBasicLandType);
             }
-            land.addSubType(game, landTypes);
+            permanent.addSubType(game, landTypes);
 
             // add intrinsic land abilities here not in layer 6
-            Abilities<Ability> landAbilities = land.getAbilities(game);
+            Abilities<Ability> landAbilities = permanent.getAbilities(game);
             for (SubType landType : landTypes) {
                 switch (landType) {
                     case PLAINS:
                         if (!landAbilities.containsClass(WhiteManaAbility.class)) {
-                            land.addAbility(new WhiteManaAbility(), source.getSourceId(), game);
+                            permanent.addAbility(new WhiteManaAbility(), source.getSourceId(), game);
                         }
                         break;
                     case ISLAND:
                         if (!landAbilities.containsClass(BlueManaAbility.class)) {
-                            land.addAbility(new BlueManaAbility(), source.getSourceId(), game);
+                            permanent.addAbility(new BlueManaAbility(), source.getSourceId(), game);
                         }
                         break;
                     case SWAMP:
                         if (!landAbilities.containsClass(BlackManaAbility.class)) {
-                            land.addAbility(new BlackManaAbility(), source.getSourceId(), game);
+                            permanent.addAbility(new BlackManaAbility(), source.getSourceId(), game);
                         }
                         break;
                     case MOUNTAIN:
                         if (!landAbilities.containsClass(RedManaAbility.class)) {
-                            land.addAbility(new RedManaAbility(), source.getSourceId(), game);
+                            permanent.addAbility(new RedManaAbility(), source.getSourceId(), game);
                         }
                         break;
                     case FOREST:
                         if (!landAbilities.containsClass(GreenManaAbility.class)) {
-                            land.addAbility(new GreenManaAbility(), source.getSourceId(), game);
+                            permanent.addAbility(new GreenManaAbility(), source.getSourceId(), game);
                         }
                         break;
                 }
             }
         }
-        return true;
     }
 
     @Override

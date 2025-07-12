@@ -1,10 +1,11 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.MageItem;
+import mage.abilities.Abilities;
+import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
-import mage.abilities.MageSingleton;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.*;
@@ -12,9 +13,12 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.*;
 
 /**
  *
@@ -47,6 +51,22 @@ public final class CairnWanderer extends CardImpl {
 
     static class CairnWandererEffect extends ContinuousEffectImpl {
 
+        private static final Set<Class<? extends Ability>> KEYWORD_ABILITIES = new HashSet<>(Arrays.asList(
+                FlyingAbility.class,
+                FearAbility.class,
+                FirstStrikeAbility.class,
+                DoubleStrikeAbility.class,
+                DeathtouchAbility.class,
+                HasteAbility.class,
+                LandwalkAbility.class,
+                LifelinkAbility.class,
+                ProtectionAbility.class,
+                ReachAbility.class,
+                TrampleAbility.class,
+                ShroudAbility.class,
+                VigilanceAbility.class
+        ));
+
         public CairnWandererEffect() {
             super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
             this.addDependedToType(DependencyType.AddingAbility);
@@ -58,45 +78,48 @@ public final class CairnWanderer extends CardImpl {
         }
 
         @Override
-        public boolean apply(Game game, Ability source) {
+        public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+            Abilities<Ability> graveyardAbilities = new AbilitiesImpl<>();
+            getAbilitiesInGraveyards(game, source, graveyardAbilities);
+
+            for (MageItem object : affectedObjects) {
+                Permanent permanent = (Permanent) object;
+                for (Ability ability : graveyardAbilities) {
+                    if (isValidKeywordAbility(ability.getClass())) {
+                        permanent.addAbility(ability, source.getSourceId(), game);
+                    }
+                }
+            }
+        }
+
+        @Override
+        public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
             Permanent sourcePermanent = game.getPermanent(source.getSourceId());
 
             if (sourcePermanent == null) {
                 return false;
             }
+            affectedObjects.add(sourcePermanent);
+            return true;
+        }
 
+        private void getAbilitiesInGraveyards(Game game, Ability source, Abilities<Ability> graveyardAbilities) {
             for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                 Player player = game.getPlayer(playerId);
-
-                if (player != null) {
-                    for (Card card : player.getGraveyard().getCards(game)) {
-                        if (card.isCreature(game)) {
-                            for (Ability ability : card.getAbilities(game)) {
-                                if (ability instanceof MageSingleton) {
-                                    if (ability instanceof FlyingAbility
-                                            || ability instanceof FearAbility
-                                            || ability instanceof FirstStrikeAbility
-                                            || ability instanceof DoubleStrikeAbility
-                                            || ability instanceof DeathtouchAbility
-                                            || ability instanceof HasteAbility
-                                            || ability instanceof LifelinkAbility
-                                            || ability instanceof ReachAbility
-                                            || ability instanceof TrampleAbility
-                                            || ability instanceof ShroudAbility
-                                            || ability instanceof VigilanceAbility) {
-                                        sourcePermanent.addAbility(ability, source.getSourceId(), game);
-                                    }
-                                } else if (ability instanceof ProtectionAbility
-                                        || ability instanceof LandwalkAbility) {
-                                    sourcePermanent.addAbility(ability, source.getSourceId(), game);
-                                }
-                            }
-                        }
-                    }
+                if (player == null) {
+                    continue;
+                }
+                for (Card card : player.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, game)) {
+                    graveyardAbilities.addAll(card.getAbilities(game));
                 }
             }
+        }
 
-            return true;
+        private boolean isValidKeywordAbility(Class<? extends Ability> abilityClass) {
+            return KEYWORD_ABILITIES.stream()
+                    .anyMatch(keywordClass ->
+                            keywordClass.isAssignableFrom(abilityClass)
+                    );
         }
 
         @Override

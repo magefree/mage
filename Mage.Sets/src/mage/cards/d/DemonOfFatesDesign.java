@@ -1,6 +1,7 @@
 package mage.cards.d;
 
 import mage.MageInt;
+import mage.MageItem;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -34,6 +35,7 @@ import mage.players.Player;
 import mage.watchers.Watcher;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -191,19 +193,26 @@ class DemonOfFatesDesignCastEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Player controller = (Player) object;
+            controller.getAlternativeSourceCosts().add(alternativeCastingCostAbility);
+        }
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         Player controller = game.getPlayer(source.getControllerId());
         DemonOfFatesDesignWatcher watcher = game.getState().getWatcher(DemonOfFatesDesignWatcher.class);
         if (controller == null || watcher == null) {
             return false;
         }
-
         alternativeCastingCostAbility.setSourceId(source.getSourceId());
         if (!watcher.canAbilityBeUsed(game, source, alternativeCastingCostAbility.getMor(game))) {
             return false;
         }
 
-        controller.getAlternativeSourceCosts().add(alternativeCastingCostAbility);
+        affectedObjects.add(controller);
         return true;
     }
 }

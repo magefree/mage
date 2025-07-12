@@ -1,6 +1,7 @@
 
 package mage.abilities.keyword;
 
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -14,6 +15,8 @@ import mage.designations.DesignationType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.List;
 
 /**
  * @author LevelX2
@@ -40,8 +43,7 @@ public class AscendAbility extends SimpleStaticAbility {
         if (controller != null) {
             if (!controller.hasDesignation(DesignationType.CITYS_BLESSING)) {
                 if (game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT, controller.getId(), game) > 9) {
-                    controller.addDesignation(new CitysBlessing());
-                    game.informPlayers(controller.getLogName() + " gets the city's blessing for the rest of the game.");
+                    return true;
                 } else {
                     if (verbose) {
                         game.informPlayers(controller.getLogName() + " does not get the city's blessing.");
@@ -52,9 +54,13 @@ public class AscendAbility extends SimpleStaticAbility {
                     game.informPlayers(controller.getLogName() + " already has the city's blessing.");
                 }
             }
-            return true;
         }
         return false;
+    }
+
+    public static void applyAscend(Game game, Player player) {
+        player.addDesignation(new CitysBlessing());
+        game.informPlayers(player.getLogName() + " gets the city's blessing for the rest of the game.");
     }
 
     @Override
@@ -76,8 +82,20 @@ class AscendContinuousEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return AscendAbility.checkAscend(game, source, false);
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Player player = (Player) object;
+            AscendAbility.applyAscend(game, player);
+        }
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        if (AscendAbility.checkAscend(game, source, false)) {
+            affectedObjects.add(game.getPlayer(source.getControllerId()));
+            return true;
+        }
+        return false;
     }
 
     @Override

@@ -2,6 +2,7 @@
 package mage.cards.d;
 
 import mage.MageInt;
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -18,6 +19,7 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -59,32 +61,40 @@ public final class DragonsoulKnight extends CardImpl {
     public DragonsoulKnight copy() {
         return new DragonsoulKnight(this);
     }
+}
 
-    private static class DragonsoulKnightEffect extends ContinuousEffectImpl {
+class DragonsoulKnightEffect extends ContinuousEffectImpl {
 
-        private DragonsoulKnightEffect() {
-            super(Duration.EndOfTurn, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.BecomeCreature);
-            staticText = "Until end of turn, {this} becomes a Dragon";
-        }
+    public DragonsoulKnightEffect() {
+        super(Duration.EndOfTurn, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.BecomeCreature);
+        staticText = "Until end of turn, {this} becomes a Dragon";
+    }
 
-        private DragonsoulKnightEffect(final DragonsoulKnightEffect effect) {
-            super(effect);
-        }
+    private DragonsoulKnightEffect(final DragonsoulKnightEffect effect) {
+        super(effect);
+    }
 
-        @Override
-        public DragonsoulKnightEffect copy() {
-            return new DragonsoulKnightEffect(this);
-        }
+    @Override
+    public DragonsoulKnightEffect copy() {
+        return new DragonsoulKnightEffect(this);
+    }
 
-        @Override
-        public boolean apply(Game game, Ability source) {
-            Permanent permanent = game.getPermanent(source.getSourceId());
-            if (permanent == null) {
-                return false;
-            }
+    @Override
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Permanent permanent = (Permanent) object;
             permanent.removeAllCreatureTypes(game);
             permanent.addSubType(game, SubType.DRAGON);
-            return true;
         }
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent == null) {
+            return false;
+        }
+        affectedObjects.add(permanent);
+        return true;
     }
 }

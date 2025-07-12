@@ -1,5 +1,6 @@
 package mage.game.command.emblems;
 
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
@@ -137,14 +138,21 @@ class DackFaydenEmblemEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            ((Permanent) object).changeControllerId(source.getControllerId(), game, source);
+        }
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         for (UUID permanentId : fixedTargets.getTargets(game, source)) {
             Permanent permanent = game.getPermanent(permanentId);
             if (permanent != null) {
-                permanent.changeControllerId(source.getControllerId(), game, source);
+                affectedObjects.add(permanent);
             }
         }
-        return true;
+        return !affectedObjects.isEmpty();
     }
 
     public void setTargets(List<Permanent> targetedPermanents, Game game) {

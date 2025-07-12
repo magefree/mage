@@ -1,6 +1,7 @@
 package mage.cards.b;
 
 import mage.MageInt;
+import mage.MageItem;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -19,7 +20,8 @@ import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.util.Iterator;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -81,46 +83,59 @@ class BelloBardOfTheBramblesEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        if (!source.isControlledBy(game.getActivePlayerId())) {
-            return false;
-        }
-        switch (layer) {
-            case TypeChangingEffects_4:
-                affectedObjectList.clear();
-                for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Permanent permanent = (Permanent) object;
+            switch (layer) {
+                case TypeChangingEffects_4:
                     permanent.addCardType(game, CardType.CREATURE);
                     permanent.addSubType(game, SubType.ELEMENTAL);
-                    affectedObjectList.add(new MageObjectReference(permanent, game));
-                }
-                return true;
-            case AbilityAddingRemovingEffects_6:
-                for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext(); ) {
-                    Permanent permanent = it.next().getPermanent(game);
-                    if (permanent == null) {
-                        continue;
-                    }
+                    break;
+                case AbilityAddingRemovingEffects_6:
                     permanent.addAbility(IndestructibleAbility.getInstance(), source.getSourceId(), game);
                     permanent.addAbility(HasteAbility.getInstance(), source.getSourceId(), game);
                     permanent.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DrawCardSourceControllerEffect(1)), source.getSourceId(), game);
-                }
-                return true;
-            case PTChangingEffects_7:
-                if (sublayer != SubLayer.SetPT_7b) {
-                    return false;
-                }
-                for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext(); ) {
-                    Permanent permanent = it.next().getPermanent(game);
-                    if (permanent == null) {
-                        continue;
+                    break;
+                case PTChangingEffects_7:
+                    if (sublayer == SubLayer.SetPT_7b) {
+                        permanent.getPower().setModifiedBaseValue(4);
+                        permanent.getToughness().setModifiedBaseValue(4);
                     }
-                    permanent.getPower().setModifiedBaseValue(4);
-                    permanent.getToughness().setModifiedBaseValue(4);
-                }
-                return true;
-            default:
-                return false;
+                    break;
+            }
         }
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        if (!source.isControlledBy(game.getActivePlayerId())) {
+            return false;
+        }
+        if (layer == Layer.TypeChangingEffects_4) {
+            affectedObjectList.clear();
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
+                affectedObjectList.add(new MageObjectReference(permanent, game));
+                affectedObjects.add(permanent);
+            }
+        } else {
+            for (MageObjectReference mor : affectedObjectList) {
+                Permanent permanent = mor.getPermanent(game);
+                if (permanent != null) {
+                    affectedObjects.add(permanent);
+                }
+            }
+        }
+        return !affectedObjects.isEmpty();
+    }
+
+    @Override
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        List<MageItem> affectedObjects = new ArrayList<>();
+        if (queryAffectedObjects(layer, source, game, affectedObjects)) {
+            applyToObjects(layer, sublayer, source, game, affectedObjects);
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -128,11 +143,6 @@ class BelloBardOfTheBramblesEffect extends ContinuousEffectImpl {
         return layer == Layer.TypeChangingEffects_4
                 || layer == Layer.AbilityAddingRemovingEffects_6
                 || layer == Layer.PTChangingEffects_7;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
     }
 
     @Override

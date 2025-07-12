@@ -1,13 +1,13 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.MageItem;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -15,6 +15,9 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -37,7 +40,6 @@ public final class AvenMimeomancer extends CardImpl {
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new AddCountersTargetEffect(CounterType.FEATHER.createInstance()), true);
         ability.addTarget(new TargetCreaturePermanent());
         ability.addEffect(new AvenEffect());
-        ability.addEffect(new AvenEffect2());
         this.addAbility(ability);
     }
 
@@ -54,7 +56,7 @@ public final class AvenMimeomancer extends CardImpl {
 class AvenEffect extends ContinuousEffectImpl {
 
     AvenEffect() {
-        super(Duration.Custom, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
+        super(Duration.Custom, Outcome.BoostCreature);
         this.staticText = "If you do, that creature has base power and toughness 3/1 and has flying for as long as it has a feather counter on it";
     }
 
@@ -68,59 +70,37 @@ class AvenEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Permanent permanent = (Permanent) object;
+            switch (layer) {
+                case AbilityAddingRemovingEffects_6:
+                    permanent.addAbility(FlyingAbility.getInstance(), source.getSourceId(), game);
+                    break;
+                case PTChangingEffects_7:
+                    if (sublayer == SubLayer.SetPT_7b) {
+                        permanent.getPower().setModifiedBaseValue(3);
+                        permanent.getToughness().setModifiedBaseValue(1);
+                    }
+                    break;
+            }
+        }
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         Permanent target = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (target == null) {
+        if (target == null || target.getCounters(game).getCount(CounterType.FEATHER) < 1) {
+            this.discard();
             return false;
         }
-        target.getPower().setModifiedBaseValue(3);
-        target.getToughness().setModifiedBaseValue(1);
+        affectedObjects.add(target);
         return true;
     }
 
     @Override
-    public boolean isInactive(Ability source, Game game) {
-        Permanent creature = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (creature != null && creature.getCounters(game).getCount(CounterType.FEATHER) < 1) {
-            return true;
-        }
-        return false;
-    }
-}
-
-class AvenEffect2 extends ContinuousEffectImpl {
-
-    public AvenEffect2() {
-        super(Duration.Custom, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.BoostCreature);
-    }
-
-    private AvenEffect2(final AvenEffect2 effect) {
-        super(effect);
-    }
-
-    @Override
-    public AvenEffect2 copy() {
-        return new AvenEffect2(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent target = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (target != null) {
-            if (!target.getAbilities().contains(FlyingAbility.getInstance())) {
-                target.addAbility(FlyingAbility.getInstance(), source.getSourceId(), game);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean isInactive(Ability source, Game game) {
-        Permanent creature = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (creature != null && creature.getCounters(game).getCount(CounterType.FEATHER) < 1) {
-            return true;
-        }
-        return false;
+    public boolean hasLayer(Layer layer) {
+        return layer == Layer.AbilityAddingRemovingEffects_6
+                || layer == Layer.PTChangingEffects_7;
     }
 }

@@ -1,6 +1,7 @@
 package mage.cards.c;
 
 import mage.MageInt;
+import mage.MageItem;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -18,6 +19,7 @@ import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -87,19 +89,10 @@ class CyberdriveAwakenerEffect extends ContinuousEffectImpl {
                 .map(permanent -> new MageObjectReference(permanent, game))
                 .forEach(affectedObjectList::add);
     }
-
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        List<Permanent> permanents = affectedObjectList
-                .stream()
-                .map(mor -> mor.getPermanent(game))
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList());
-        if (permanents.isEmpty()) {
-            discard();
-            return false;
-        }
-        for (Permanent permanent : permanents) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Permanent permanent = (Permanent) object;
             switch (layer) {
                 case TypeChangingEffects_4:
                     permanent.addCardType(game, CardType.ARTIFACT, CardType.CREATURE);
@@ -111,18 +104,37 @@ class CyberdriveAwakenerEffect extends ContinuousEffectImpl {
                     }
             }
         }
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        List<Permanent> permanents = affectedObjectList
+                .stream()
+                .map(mor -> mor.getPermanent(game))
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+        if (permanents.isEmpty()) {
+            discard();
+            return false;
+        }
+        affectedObjects.addAll(permanents);
         return true;
+    }
+
+    @Override
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        List<MageItem> affectedObjects = new ArrayList<>();
+        if (queryAffectedObjects(layer, source, game, affectedObjects)) {
+            applyToObjects(layer, sublayer, source, game, affectedObjects);
+            return true;
+        }
+        return false;
     }
 
     @Override
     public boolean hasLayer(Layer layer) {
         return layer == Layer.TypeChangingEffects_4
                 || layer == Layer.PTChangingEffects_7;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
     }
 
     @Override

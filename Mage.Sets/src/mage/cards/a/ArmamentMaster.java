@@ -2,12 +2,14 @@
 package mage.cards.a;
 
 import mage.MageInt;
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -50,7 +52,7 @@ public final class ArmamentMaster extends CardImpl {
 
 class ArmamentMasterEffect extends ContinuousEffectImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Other Kor creatures you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Other Kor creatures you control");
 
     static {
         filter.add(SubType.KOR.getPredicate());
@@ -71,16 +73,23 @@ class ArmamentMasterEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        int count = countEquipment(game, source);
-        List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game);
-        for (Permanent perm : permanents) {
-            if (!perm.getId().equals(source.getSourceId())) {
-                perm.addPower(2 * count);
-                perm.addToughness(2 * count);
-            }
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        int equipmentCount = countEquipment(game, source);
+        for (MageItem object : affectedObjects) {
+            Permanent permanent = (Permanent) object;
+            permanent.addPower(2 * equipmentCount);
+            permanent.addToughness(2 * equipmentCount);
         }
-        return true;
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        int equipmentCount = countEquipment(game, source);
+        if (equipmentCount < 1) {
+            return false;
+        }
+        affectedObjects.addAll(game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game));
+        return !affectedObjects.isEmpty();
     }
 
     private int countEquipment(Game game, Ability source) {

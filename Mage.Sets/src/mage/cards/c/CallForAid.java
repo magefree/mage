@@ -1,5 +1,6 @@
 package mage.cards.c;
 
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -153,13 +154,20 @@ class CallForAidYouCantSacrificeEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            ((Permanent) object).setCanBeSacrificed(false);
+        }
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
             if (permanent.getControllerId().equals(playerId)) {
-                permanent.setCanBeSacrificed(false);
+                affectedObjects.add(permanent);
             }
         }
-        return true;
+        return !affectedObjects.isEmpty();
     }
 
 }
