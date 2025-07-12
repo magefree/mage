@@ -1,10 +1,12 @@
 package mage.watchers.common;
 
+import mage.abilities.keyword.WarpAbility;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.stack.Spell;
 import mage.watchers.Watcher;
 
 import java.util.HashSet;
@@ -12,8 +14,6 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- * TODO: this doesn't handle warp yet
- *
  * @author TheElk801
  */
 public class VoidWatcher extends Watcher {
@@ -29,6 +29,10 @@ public class VoidWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         switch (event.getType()) {
             case SPELL_CAST:
+                Spell spell = game.getSpell(event.getTargetId());
+                if (spell != null && spell.getSpellAbility() instanceof WarpAbility) {
+                    players.addAll(game.getState().getPlayersInRange(spell.getControllerId(), game));
+                }
                 return;
             case ZONE_CHANGE:
                 ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
