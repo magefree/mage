@@ -36,7 +36,7 @@ public final class BalothPrime extends CardImpl {
 
         // This creature enters tapped with six stun counters on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)
         Ability ability = new EntersBattlefieldAbility(
-                new TapSourceEffect(true), "tapped with a stun counter on it. "
+                new TapSourceEffect(true), "tapped with six stun counters on it. "
                 + "<i>(If a permanent with a stun counter would become untapped, remove one from it instead.)</i>"
         );
         ability.addEffect(new AddCountersSourceEffect(CounterType.STUN.createInstance(6)));
@@ -44,7 +44,7 @@ public final class BalothPrime extends CardImpl {
 
         // Whenever you sacrifice a land, create a tapped 4/4 green Beast creature token and untap this creature.
         ability = new SacrificePermanentTriggeredAbility(
-                new CreateTokenEffect(new BeastToken2()), StaticFilters.FILTER_LAND
+                new CreateTokenEffect(new BeastToken2(), 1, true), StaticFilters.FILTER_LAND
         );
         ability.addEffect(new UntapSourceEffect().concatBy("and"));
         this.addAbility(ability);

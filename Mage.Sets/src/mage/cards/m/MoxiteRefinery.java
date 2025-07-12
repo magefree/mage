@@ -33,6 +33,7 @@ public final class MoxiteRefinery extends CardImpl {
                 CounterType.CHARGE.createInstance(), GetXValue.instance
         ), new GenericManaCost(2)).setTiming(TimingRule.SORCERY);
         ability.addCost(new TapSourceCost());
+        // TODO: this cost is not actually the right one to use here
         ability.addCost(new RemoveVariableCountersTargetCost(
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_OR_CREATURE, CounterType.CHARGE
         ));

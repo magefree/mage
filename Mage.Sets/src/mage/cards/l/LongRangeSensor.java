@@ -30,7 +30,7 @@ public final class LongRangeSensor extends CardImpl {
 
         // {1}, Remove two charge counters from this artifact: Discover 4. Activate only as a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(new DiscoverEffect(4), new GenericManaCost(1));
-        ability.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance(2)));
+        ability.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(2)));
         this.addAbility(ability);
     }
 
