@@ -76,7 +76,9 @@ class MirrorGolemImprintEffect extends OneShotEffect {
             Permanent sourcePermanent = game.getPermanent(source.getSourceId());
             Card card = game.getCard(this.getTargetPointer().getFirst(game, source));
             if (card != null) {
-                controller.moveCardsToExile(card, source, game, true, CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()), source.getSourceObject(game).getIdName());
+                UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), sourcePermanent.getZoneChangeCounter(game));
+                String exileZoneName = source.getSourceObject(game).getIdName();
+                controller.moveCardsToExile(card, source, game, true, exileZoneId, exileZoneName);
                 if (sourcePermanent != null) {
                     sourcePermanent.imprint(this.getTargetPointer().getFirst(game, source), game);
                 }
@@ -102,9 +104,10 @@ class MirrorGolemEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent sourceObject = game.getPermanent(source.getSourceId());
-        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source.getSourceId()));
+        UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), sourceObject.getZoneChangeCounter(game));
+        ExileZone exileZone = game.getExile().getExileZone(exileZoneId);
 
-        if (sourceObject == null || sourceObject.getImprinted() == null) {
+        if (sourceObject == null || sourceObject.getImprinted() == null || exileZone == null) {
             return false;
         }
 
