@@ -8,17 +8,22 @@ import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffec
 import mage.abilities.effects.common.SacrificeSourceUnlessConditionEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.permanent.DefendingPlayerControlsAttachedAttackingPredicate;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.watchers.common.VoidWatcher;
 
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -29,7 +34,7 @@ public final class ChoraleOfTheVoid extends CardImpl {
     private static final FilterCard filter = new FilterCreatureCard("creature card from defending player's graveyard");
 
     static {
-        filter.add(DefendingPlayerControlsAttachedAttackingPredicate.instance);
+        filter.add(ChoraleOfTheVoidPredicate.instance);
     }
 
     public ChoraleOfTheVoid(UUID ownerId, CardSetInfo setInfo) {
@@ -64,5 +69,21 @@ public final class ChoraleOfTheVoid extends CardImpl {
     @Override
     public ChoraleOfTheVoid copy() {
         return new ChoraleOfTheVoid(this);
+    }
+}
+
+enum ChoraleOfTheVoidPredicate implements ObjectSourcePlayerPredicate<Card> {
+    instance;
+
+    @Override
+    public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
+        return Optional
+                .ofNullable(input)
+                .map(ObjectSourcePlayer::getSource)
+                .map(source -> source.getSourcePermanentOrLKI(game))
+                .map(Permanent::getAttachedTo)
+                .map(attachmentId -> game.getCombat().getDefendingPlayerId(attachmentId, game))
+                .filter(playerId -> input.getObject().isOwnedBy(playerId))
+                .isPresent();
     }
 }
