@@ -66,10 +66,14 @@ public final class EdgeOfEternitiesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Etherium Sculptor", 72, Rarity.COMMON, mage.cards.e.EtheriumSculptor.class));
         cards.add(new SetCardInfo("Eumidian Hatchery", 20, Rarity.RARE, mage.cards.e.EumidianHatchery.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Eumidian Hatchery", 40, Rarity.RARE, mage.cards.e.EumidianHatchery.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Eumidian Wastewaker", 28, Rarity.RARE, mage.cards.e.EumidianWastewaker.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Eumidian Wastewaker", 8, Rarity.RARE, mage.cards.e.EumidianWastewaker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Everflowing Chalice", 137, Rarity.UNCOMMON, mage.cards.e.EverflowingChalice.class));
         cards.add(new SetCardInfo("Evolving Wilds", 158, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Exotic Orchard", 159, Rarity.RARE, mage.cards.e.ExoticOrchard.class));
         cards.add(new SetCardInfo("Experimental Augury", 73, Rarity.COMMON, mage.cards.e.ExperimentalAugury.class));
+        cards.add(new SetCardInfo("Exploration Broodship", 14, Rarity.RARE, mage.cards.e.ExplorationBroodship.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Exploration Broodship", 34, Rarity.RARE, mage.cards.e.ExplorationBroodship.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fabled Passage", 60, Rarity.RARE, mage.cards.f.FabledPassage.class));
         cards.add(new SetCardInfo("Farseek", 50, Rarity.COMMON, mage.cards.f.Farseek.class));
         cards.add(new SetCardInfo("Festering Thicket", 21, Rarity.RARE, mage.cards.f.FesteringThicket.class, NON_FULL_USE_VARIOUS));
