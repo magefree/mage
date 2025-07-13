@@ -87,6 +87,27 @@ public class WarpTest extends CardTestPlayerBase {
         }
     }
 
+    private static final String bolt = "Plasma Bolt";
+
+    @Test
+    public void testVoid() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3 + 1);
+        addCard(Zone.HAND, playerA, colossus);
+        addCard(Zone.HAND, playerA, bolt);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, colossus + " with Warp");
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, bolt, playerB);
+        waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN, playerA);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, colossus, 1);
+        assertLife(playerB, 20 - 3);
+    }
+
     private static final String culler = "Timeline Culler";
 
     @Test
