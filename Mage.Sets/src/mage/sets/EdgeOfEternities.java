@@ -206,6 +206,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Systems Override", 161, Rarity.UNCOMMON, mage.cards.s.SystemsOverride.class));
         cards.add(new SetCardInfo("Tannuk, Memorial Ensign", 233, Rarity.UNCOMMON, mage.cards.t.TannukMemorialEnsign.class));
         cards.add(new SetCardInfo("Temporal Intervention", 120, Rarity.COMMON, mage.cards.t.TemporalIntervention.class));
+        cards.add(new SetCardInfo("Terminal Velocity", 338, Rarity.RARE, mage.cards.t.TerminalVelocity.class));
         cards.add(new SetCardInfo("Terrapact Intimidator", 164, Rarity.UNCOMMON, mage.cards.t.TerrapactIntimidator.class));
         cards.add(new SetCardInfo("Terrasymbiosis", 210, Rarity.RARE, mage.cards.t.Terrasymbiosis.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Terrasymbiosis", 312, Rarity.RARE, mage.cards.t.Terrasymbiosis.class, NON_FULL_USE_VARIOUS));
