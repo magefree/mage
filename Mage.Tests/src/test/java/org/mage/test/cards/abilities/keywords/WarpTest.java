@@ -2,6 +2,7 @@ package org.mage.test.cards.abilities.keywords;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -60,5 +61,29 @@ public class WarpTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerA, colossus, 1);
+    }
+
+    @Test
+    public void testWarpExileOptions() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        addCard(Zone.HAND, playerA, colossus);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, colossus + " with Warp");
+
+        waitStackResolved(1, PhaseStep.END_TURN, playerA);
+
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, colossus + " with Warp");
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.END_TURN);
+        try {
+            execute();
+        } catch (Throwable e) {
+            Assert.assertEquals(
+                    "Should fail to be able to cast " + colossus + " with warp",
+                    "Can't find ability to activate command: Cast " + colossus + " with Warp",
+                    e.getMessage()
+            );
+        }
     }
 }
