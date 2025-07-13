@@ -225,6 +225,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("The Seriema", 35, Rarity.RARE, mage.cards.t.TheSeriema.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thrumming Hivepool", 247, Rarity.RARE, mage.cards.t.ThrummingHivepool.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thrumming Hivepool", 356, Rarity.RARE, mage.cards.t.ThrummingHivepool.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Timeline Culler", 121, Rarity.UNCOMMON, mage.cards.t.TimelineCuller.class));
         cards.add(new SetCardInfo("Tragic Trajectory", 122, Rarity.UNCOMMON, mage.cards.t.TragicTrajectory.class));
         cards.add(new SetCardInfo("Umbral Collar Zealot", 123, Rarity.UNCOMMON, mage.cards.u.UmbralCollarZealot.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Umbral Collar Zealot", 395, Rarity.UNCOMMON, mage.cards.u.UmbralCollarZealot.class, NON_FULL_USE_VARIOUS));

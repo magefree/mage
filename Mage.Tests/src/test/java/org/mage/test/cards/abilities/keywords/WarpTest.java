@@ -86,4 +86,23 @@ public class WarpTest extends CardTestPlayerBase {
             );
         }
     }
+
+    private static final String culler = "Timeline Culler";
+
+    @Test
+    public void testTimelineCuller() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp");
+        addCard(Zone.GRAVEYARD, playerA, culler);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, culler + " with Warp");
+
+        waitStackResolved(1, PhaseStep.END_TURN, playerA);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertExileCount(playerA, culler, 1);
+        assertLife(playerA, 20 - 2);
+    }
 }

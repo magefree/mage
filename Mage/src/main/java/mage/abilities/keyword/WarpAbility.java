@@ -20,19 +20,29 @@ import java.util.UUID;
  */
 public class WarpAbility extends SpellAbility {
 
-    public static final String WARP_ACTIVATION_VALUE_KEY = "warpActivation";
+    private final boolean allowGraveyard;
 
     public WarpAbility(Card card, String manaString) {
+        this(card, manaString, false);
+    }
+
+    public WarpAbility(Card card, String manaString, boolean allowGraveyard) {
         super(card.getSpellAbility());
         this.newId();
         this.setCardName(card.getName() + " with Warp");
         this.zone = Zone.HAND;
         this.spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
+        this.timing = TimingRule.SORCERY;
         this.clearManaCosts();
         this.clearManaCostsToPay();
         this.addCost(new ManaCostsImpl<>(manaString));
         this.setAdditionalCostsRuleVisible(false);
-        this.timing = TimingRule.SORCERY;
+        this.allowGraveyard = allowGraveyard;
+    }
+
+    private WarpAbility(final WarpAbility ability) {
+        super(ability);
+        this.allowGraveyard = ability.allowGraveyard;
     }
 
     public static void addDelayedTrigger(SpellAbility spellAbility, Game game) {
@@ -45,14 +55,15 @@ public class WarpAbility extends SpellAbility {
 
     @Override
     public ActivationStatus canActivate(UUID playerId, Game game) {
-        if (Zone.HAND.match(game.getState().getZone(getSourceId()))) {
-            return super.canActivate(playerId, game);
+        switch (game.getState().getZone(getSourceId())) {
+            case GRAVEYARD:
+                if (!allowGraveyard) {
+                    break;
+                }
+            case HAND:
+                return super.canActivate(playerId, game);
         }
         return ActivationStatus.getFalse();
-    }
-
-    private WarpAbility(final WarpAbility ability) {
-        super(ability);
     }
 
     @Override
