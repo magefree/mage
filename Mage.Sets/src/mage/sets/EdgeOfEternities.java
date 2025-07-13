@@ -67,6 +67,8 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Dawnsire, Sunstar Dreadnought", 351, Rarity.MYTHIC, mage.cards.d.DawnsireSunstarDreadnought.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Debris Field Crusher", 131, Rarity.UNCOMMON, mage.cards.d.DebrisFieldCrusher.class));
         cards.add(new SetCardInfo("Decode Transmissions", 94, Rarity.COMMON, mage.cards.d.DecodeTransmissions.class));
+        cards.add(new SetCardInfo("Dyadrine, Synthesis Amalgam", 216, Rarity.RARE, mage.cards.d.DyadrineSynthesisAmalgam.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Dyadrine, Synthesis Amalgam", 298, Rarity.RARE, mage.cards.d.DyadrineSynthesisAmalgam.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Elegy Acolyte", 293, Rarity.RARE, mage.cards.e.ElegyAcolyte.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Elegy Acolyte", 97, Rarity.RARE, mage.cards.e.ElegyAcolyte.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Embrace Oblivion", 98, Rarity.COMMON, mage.cards.e.EmbraceOblivion.class));
