@@ -75,4 +75,23 @@ public class StationTest extends CardTestPlayerBase {
         assertTapped(giant, true);
         checkSpacecraft(3);
     }
+
+    private static final String warden = "Tapestry Warden";
+
+    @Test
+    public void testTapestryWarden() {
+        addCard(Zone.BATTLEFIELD, playerA, sawship);
+        addCard(Zone.BATTLEFIELD, playerA, warden);
+        addCard(Zone.BATTLEFIELD, playerA, devils);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "station");
+        setChoice(playerA, devils);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertTapped(devils, true);
+        checkSpacecraft(3);
+    }
 }

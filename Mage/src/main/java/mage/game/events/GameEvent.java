@@ -228,6 +228,13 @@ public class GameEvent implements Serializable {
          sourceId    sourceId of the mount
          playerId    the id of the controlling player
          */
+        STATION_PERMANENT,
+        /* STATION_PERMANENT
+         targetId    the id of the creature stationing
+         sourceId    sourceId of the spaceship or planet
+         playerId    the id of the controlling player
+         amount      how many counters are being added
+         */
         CAST_SPELL,
         CAST_SPELL_LATE,
         /* SPELL_CAST, CAST_SPELL_LATE

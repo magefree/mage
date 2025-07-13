@@ -1,7 +1,5 @@
 package mage.abilities.keyword;
 
-import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapTargetCost;
@@ -11,10 +9,10 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * @author TheElk801
@@ -61,14 +59,21 @@ class StationAbilityEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        int power = Optional
-                .ofNullable((List<Permanent>) getValue("tappedPermanents"))
-                .map(permanents -> permanents
-                        .stream()
-                        .map(MageObject::getPower)
-                        .mapToInt(MageInt::getValue)
-                        .sum())
-                .orElse(0);
+        List<Permanent> creatures = (List<Permanent>) getValue("tappedPermanents");
+        if (creatures == null) {
+            return false;
+        }
+        int power = 0;
+        for (Permanent creature : creatures) {
+            GameEvent event = GameEvent.getEvent(
+                    GameEvent.EventType.STATION_PERMANENT, creature.getId(),
+                    source, source.getControllerId(), creature.getPower().getValue()
+            );
+            if (game.replaceEvent(event)) {
+                continue;
+            }
+            power += event.getAmount();
+        }
         return power > 0 && permanent.addCounters(CounterType.CHARGE.createInstance(power), source, game);
     }
 }
