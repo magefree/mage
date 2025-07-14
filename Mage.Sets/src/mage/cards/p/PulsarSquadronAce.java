@@ -84,6 +84,7 @@ class PulsarSquadronAceEffect extends OneShotEffect {
                     .isPresent();
             return true;
         }
+        player.revealCards(source, new CardsImpl(card), game);
         player.moveCards(card, Zone.HAND, source, game);
         cards.retainZone(Zone.LIBRARY, game);
         player.putCardsOnBottomOfLibrary(cards, game, source, false);
