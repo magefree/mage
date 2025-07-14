@@ -79,7 +79,7 @@ public final class SpecialGuests extends ExpansionSet {
         cards.add(new SetCardInfo("Lord of the Undead", 88, Rarity.MYTHIC, mage.cards.l.LordOfTheUndead.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lord of the Undead", 98, Rarity.MYTHIC, mage.cards.l.LordOfTheUndead.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Maddening Hex", 70, Rarity.MYTHIC, mage.cards.m.MaddeningHex.class));
-        cards.add(new SetCardInfo("Magus of the Moon", 125, Rarity.RARE, mage.cards.m.MagusOfTheMoon.class));
+        cards.add(new SetCardInfo("Magus of the Moon", 125, Rarity.RARE, mage.cards.m.MagusOfTheMoon.class, FULL_ART));
         cards.add(new SetCardInfo("Malcolm, Keen-Eyed Navigator", 2, Rarity.UNCOMMON, mage.cards.m.MalcolmKeenEyedNavigator.class));
         cards.add(new SetCardInfo("Mana Crypt", "17a", Rarity.MYTHIC, mage.cards.m.ManaCrypt.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mana Crypt", "17b", Rarity.MYTHIC, mage.cards.m.ManaCrypt.class, NON_FULL_USE_VARIOUS));
@@ -96,11 +96,11 @@ public final class SpecialGuests extends ExpansionSet {
         cards.add(new SetCardInfo("Misty Rainforest", 116, Rarity.MYTHIC, mage.cards.m.MistyRainforest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Morbid Opportunist", 32, Rarity.MYTHIC, mage.cards.m.MorbidOpportunist.class));
         cards.add(new SetCardInfo("Mystic Snake", 35, Rarity.MYTHIC, mage.cards.m.MysticSnake.class));
-        cards.add(new SetCardInfo("Nexus of Fate", 122, Rarity.MYTHIC, mage.cards.n.NexusOfFate.class));
+        cards.add(new SetCardInfo("Nexus of Fate", 122, Rarity.MYTHIC, mage.cards.n.NexusOfFate.class, FULL_ART));
         cards.add(new SetCardInfo("Notion Thief", 36, Rarity.MYTHIC, mage.cards.n.NotionThief.class));
         cards.add(new SetCardInfo("Noxious Revival", 73, Rarity.MYTHIC, mage.cards.n.NoxiousRevival.class));
         cards.add(new SetCardInfo("Paradise Druid", 80, Rarity.MYTHIC, mage.cards.p.ParadiseDruid.class));
-        cards.add(new SetCardInfo("Paradox Haze", 123, Rarity.MYTHIC, mage.cards.p.ParadoxHaze.class));
+        cards.add(new SetCardInfo("Paradox Haze", 123, Rarity.MYTHIC, mage.cards.p.ParadoxHaze.class, FULL_ART));
         cards.add(new SetCardInfo("Pathbreaker Ibex", 101, Rarity.MYTHIC, mage.cards.p.PathbreakerIbex.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Pathbreaker Ibex", 91, Rarity.MYTHIC, mage.cards.p.PathbreakerIbex.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Persist", 42, Rarity.MYTHIC, mage.cards.p.Persist.class));
@@ -122,7 +122,7 @@ public final class SpecialGuests extends ExpansionSet {
         cards.add(new SetCardInfo("Show and Tell", 21, Rarity.MYTHIC, mage.cards.s.ShowAndTell.class));
         cards.add(new SetCardInfo("Skysovereign, Consul Flagship", 103, Rarity.MYTHIC, mage.cards.s.SkysovereignConsulFlagship.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Skysovereign, Consul Flagship", 93, Rarity.MYTHIC, mage.cards.s.SkysovereignConsulFlagship.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Sliver Overlord", 128, Rarity.RARE, mage.cards.s.SliverOverlord.class));
+        cards.add(new SetCardInfo("Sliver Overlord", 128, Rarity.RARE, mage.cards.s.SliverOverlord.class, FULL_ART));
         cards.add(new SetCardInfo("Solitude", 44, Rarity.MYTHIC, mage.cards.s.Solitude.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Solitude", 49, Rarity.MYTHIC, mage.cards.s.Solitude.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Soul Warden", 65, Rarity.MYTHIC, mage.cards.s.SoulWarden.class));
@@ -147,7 +147,7 @@ public final class SpecialGuests extends ExpansionSet {
         cards.add(new SetCardInfo("Verdant Catacombs", 113, Rarity.MYTHIC, mage.cards.v.VerdantCatacombs.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Verdant Catacombs", 118, Rarity.MYTHIC, mage.cards.v.VerdantCatacombs.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Victimize", 23, Rarity.MYTHIC, mage.cards.v.Victimize.class));
-        cards.add(new SetCardInfo("Warping Wail", 119, Rarity.MYTHIC, mage.cards.w.WarpingWail.class));
+        cards.add(new SetCardInfo("Warping Wail", 119, Rarity.MYTHIC, mage.cards.w.WarpingWail.class, FULL_ART));
         cards.add(new SetCardInfo("Whir of Invention", 86, Rarity.MYTHIC, mage.cards.w.WhirOfInvention.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Whir of Invention", 96, Rarity.MYTHIC, mage.cards.w.WhirOfInvention.class, NON_FULL_USE_VARIOUS));
     }
