@@ -8,7 +8,10 @@ import mage.constants.Outcome;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -20,8 +23,15 @@ import java.util.List;
  */
 public class StationAbility extends SimpleActivatedAbility {
 
+    private static final FilterControlledPermanent filter = new FilterControlledCreaturePermanent("another creature you control");
+
+    static {
+        filter.add(AnotherPredicate.instance);
+        filter.add(TappedPredicate.UNTAPPED);
+    }
+
     public StationAbility() {
-        super(Zone.BATTLEFIELD, new StationAbilityEffect(), new TapTargetCost(StaticFilters.FILTER_OTHER_CONTROLLED_CREATURE));
+        super(Zone.BATTLEFIELD, new StationAbilityEffect(), new TapTargetCost(filter));
         this.timing = TimingRule.SORCERY;
     }
 
@@ -36,7 +46,7 @@ public class StationAbility extends SimpleActivatedAbility {
 
     @Override
     public String getRule() {
-        return "station <i>(Tap another creature you control: Put charge counters equal to its power on {this}. Station only as a sorcery.)</i>";
+        return "Station <i>(Tap another creature you control: Put charge counters equal to its power on {this}. Station only as a sorcery.)</i>";
     }
 }
 
