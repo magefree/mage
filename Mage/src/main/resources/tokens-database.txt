@@ -2826,7 +2826,7 @@
 |Generate|TOK:FIN|Treasure|1||TreasureToken|
 |Generate|TOK:FIN|Treasure|2||TreasureToken|
 
-# FIN
+# FIC
 |Generate|TOK:FIC|Human Soldier|||HumanSoldierToken|
 |Generate|TOK:FIC|Soldier|||SoldierToken|
 |Generate|TOK:FIC|Spirit|||SpiritWhiteToken|
@@ -2836,6 +2836,26 @@
 |Generate|TOK:FIC|Rebel|||RebelRedToken|
 |Generate|TOK:FIC|The Blackjack|||TheBlackjackToken|
 |Generate|TOK:FIC|Clue|||ClueArtifactToken|
+
+#EOE
+|Generate|TOK:EOE|Lander|||LanderToken|
+
+#EOC
+|Generate|TOK:EOC|Beast|1||BeastToken|
+|Generate|TOK:EOC|Beast|2||BeastToken2|
+|Generate|TOK:EOC|Bird|||SwanSongBirdToken|
+|Generate|TOK:EOC|Clue|||ClueArtifactToken|
+|Generate|TOK:EOC|Elemental|1||TitaniaProtectorOfArgothElementalToken|
+|Generate|TOK:EOC|Elemental|2||OmnathElementalToken|
+|Generate|TOK:EOC|Gnome|||GnomeToken|
+|Generate|TOK:EOC|Golem|1||GolemToken|
+|Generate|TOK:EOC|Golem|2||HammerOfPurphorosGolemToken|
+|Generate|TOK:EOC|Golem|3||TitanForgeGolemToken|
+|Generate|TOK:EOC|Incubator|||IncubatorToken|
+|Generate|TOK:EOC|Insect|||XiraBlackInsectToken|
+|Generate|TOK:EOC|Pest|||Pest11GainLifeToken|
+|Generate|TOK:EOC|Phyrexian|||Phyrexian00Token|
+|Generate|TOK:EOC|Thopter|||ThopterColorlessToken|
 
 # JVC
 |Generate|TOK:JVC|Elemental Shaman|||ElementalShamanToken|
