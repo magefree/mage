@@ -29,7 +29,7 @@ public enum CreaturesYouControlCount implements DynamicValue {
 
     @Override
     public CreaturesYouControlCount copy() {
-        return PLURAL;
+        return this;
     }
 
     @Override
