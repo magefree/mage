@@ -40,7 +40,7 @@ public final class EvendoWakingHaven extends CardImpl {
         // STATION 12+
         // {G}, {T}: Add {G} for each creature you control.
         Ability ability = new DynamicManaAbility(
-                Mana.GreenMana(1), CreaturesYouControlCount.instance, new ManaCostsImpl<>("{G}")
+                Mana.GreenMana(1), CreaturesYouControlCount.SINGULAR, new ManaCostsImpl<>("{G}")
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(new StationLevelAbility(12).withLevelAbility(ability).addHint(CreaturesYouControlHint.instance));

@@ -23,7 +23,7 @@ public final class KingHaraldsRevenge extends CardImpl {
 
         // Until end of turn, target creature gets +1/+1 for each creature you control and gains trample. It must be blocked this turn if able.
         this.getSpellAbility().addEffect(new BoostTargetEffect(
-                CreaturesYouControlCount.instance, CreaturesYouControlCount.instance, Duration.EndOfTurn
+                CreaturesYouControlCount.PLURAL, CreaturesYouControlCount.PLURAL, Duration.EndOfTurn
         ).setText("until end of turn, target creature gets +1/+1 for each creature you control"));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(
                 TrampleAbility.getInstance(), Duration.EndOfTurn

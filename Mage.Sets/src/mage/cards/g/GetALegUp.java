@@ -23,7 +23,7 @@ public final class GetALegUp extends CardImpl {
 
         // Until end of turn, target creature gets +1/+1 for each creature you control and gains reach.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new BoostTargetEffect(CreaturesYouControlCount.instance, CreaturesYouControlCount.instance, Duration.EndOfTurn)
+        this.getSpellAbility().addEffect(new BoostTargetEffect(CreaturesYouControlCount.PLURAL, CreaturesYouControlCount.PLURAL, Duration.EndOfTurn)
                 .setText("until end of turn, target creature gets +1/+1 for each creature you control"));
 
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(ReachAbility.getInstance(), Duration.EndOfTurn)

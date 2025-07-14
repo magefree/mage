@@ -105,15 +105,15 @@ public class ReturnFromGraveyardToBattlefieldTargetEffect extends OneShotEffect 
         }
         sb.append(yourGrave ? " to" : " onto");
         sb.append(" the battlefield");
+        if (!yourGrave) {
+            sb.append(" under your control");
+        }
         if (tapped && attacking) {
             sb.append(" tapped and attacking");
         } else if (tapped) {
             sb.append(" tapped");
         } else if (attacking) {
             sb.append(" attacking");
-        }
-        if (!yourGrave) {
-            sb.append(" under your control");
         }
         return sb.toString();
     }

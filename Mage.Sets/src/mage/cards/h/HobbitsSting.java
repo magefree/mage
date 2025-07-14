@@ -22,7 +22,7 @@ import java.util.UUID;
 public final class HobbitsSting extends CardImpl {
 
     private static final DynamicValue xValue = new AdditiveDynamicValue(
-            CreaturesYouControlCount.instance,
+            CreaturesYouControlCount.PLURAL,
             new PermanentsOnBattlefieldCount(new FilterControlledPermanent(SubType.FOOD))
     );
     private static final Hint hint = new ValueHint("Creatures and Foods you control", xValue);

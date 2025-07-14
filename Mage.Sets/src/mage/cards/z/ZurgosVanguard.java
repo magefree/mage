@@ -30,7 +30,7 @@ public final class ZurgosVanguard extends CardImpl {
         this.addAbility(new MobilizeAbility(1));
 
         // This creature's power is equal to the number of creatures you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerSourceEffect(CreaturesYouControlCount.instance)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerSourceEffect(CreaturesYouControlCount.PLURAL)));
     }
 
     private ZurgosVanguard(final ZurgosVanguard card) {

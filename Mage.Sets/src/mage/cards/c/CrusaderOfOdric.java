@@ -27,7 +27,7 @@ public final class CrusaderOfOdric extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Crusader of Odric's power and toughness are each equal to the number of creatures you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(CreaturesYouControlCount.instance))
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(CreaturesYouControlCount.PLURAL))
                 .addHint(CreaturesYouControlHint.instance));
     }
 

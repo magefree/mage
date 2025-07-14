@@ -6,7 +6,6 @@ import mage.abilities.dynamicvalue.common.CreaturesYouControlCount;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 
 /**
  * @author spjspj
@@ -25,7 +24,7 @@ public final class VoiceOfResurgenceToken extends TokenImpl {
 
         // This creature's power and toughness are each equal to the number of creatures you control.
         this.addAbility(new SimpleStaticAbility(new SetBasePowerToughnessSourceEffect(
-                CreaturesYouControlCount.instance)));
+                CreaturesYouControlCount.PLURAL)));
     }
 
     private VoiceOfResurgenceToken(final VoiceOfResurgenceToken token) {

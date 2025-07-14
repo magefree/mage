@@ -110,7 +110,7 @@ class AjaniNacatlAvengerZeroEffect extends OneShotEffect {
         }
 
         ReflexiveTriggeredAbility reflexive = new ReflexiveTriggeredAbility(
-                new DamageTargetEffect(CreaturesYouControlCount.instance),
+                new DamageTargetEffect(CreaturesYouControlCount.PLURAL),
                 false,
                 "When you do, if you control a red permanent other than {this}, "
                         + "he deals damage equal to the number of creatures you control to any target.",

@@ -22,7 +22,7 @@ public final class GaeasCradle extends CardImpl {
 
         // {T}: Add {G} for each creature you control.
         this.addAbility(new DynamicManaAbility(
-                Mana.GreenMana(1), CreaturesYouControlCount.instance
+                Mana.GreenMana(1), CreaturesYouControlCount.SINGULAR
         ).addHint(CreaturesYouControlHint.instance));
     }
 

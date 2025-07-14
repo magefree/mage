@@ -2,7 +2,7 @@ package mage.cards.d;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
@@ -51,9 +51,9 @@ public final class DyadrineSynthesisAmalgam extends CardImpl {
         ), "with a number of +1/+1 counters on it equal to the amount of mana spent to cast it"));
 
         // Whenever you attack, you may remove a +1/+1 counter from each of two creatures you control. If you do, draw a card and create a 2/2 colorless Robot artifact creature token.
-        this.addAbility(new AttacksTriggeredAbility(new DoIfCostPaid(
+        this.addAbility(new AttacksWithCreaturesTriggeredAbility(new DoIfCostPaid(
                 new DrawCardSourceControllerEffect(1), new DyadrineSynthesisAmalgamCost()
-        ).addEffect(new CreateTokenEffect(new RobotToken()).concatBy("and"))));
+        ).addEffect(new CreateTokenEffect(new RobotToken()).concatBy("and")), 1));
     }
 
     private DyadrineSynthesisAmalgam(final DyadrineSynthesisAmalgam card) {

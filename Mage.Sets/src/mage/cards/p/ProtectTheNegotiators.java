@@ -34,7 +34,7 @@ public final class ProtectTheNegotiators extends CardImpl {
         ));
 
         // Counter target spell unless its controller pays {1} for each creature you control.
-        this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(CreaturesYouControlCount.instance)
+        this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(CreaturesYouControlCount.PLURAL)
                 .setText("<br>Counter target spell unless its controller pays {1} for each creature you control."));
         this.getSpellAbility().addTarget(new TargetSpell());
     }
