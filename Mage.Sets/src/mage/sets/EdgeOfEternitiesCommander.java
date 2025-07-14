@@ -165,6 +165,8 @@ public final class EdgeOfEternitiesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Skyshroud Claim", 107, Rarity.COMMON, mage.cards.s.SkyshroudClaim.class));
         cards.add(new SetCardInfo("Smoldering Marsh", 182, Rarity.RARE, mage.cards.s.SmolderingMarsh.class));
         cards.add(new SetCardInfo("Sol Ring", 57, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
+        cards.add(new SetCardInfo("Solar Array", 18, Rarity.RARE, mage.cards.s.SolarArray.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Solar Array", 38, Rarity.RARE, mage.cards.s.SolarArray.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Soul of Windgrace", 126, Rarity.MYTHIC, mage.cards.s.SoulOfWindgrace.class));
         cards.add(new SetCardInfo("Soul-Guide Lantern", 143, Rarity.UNCOMMON, mage.cards.s.SoulGuideLantern.class));
         cards.add(new SetCardInfo("Spire of Industry", 183, Rarity.RARE, mage.cards.s.SpireOfIndustry.class));
