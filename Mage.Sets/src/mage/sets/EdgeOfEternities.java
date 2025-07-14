@@ -108,6 +108,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Gravkill", 103, Rarity.COMMON, mage.cards.g.Gravkill.class));
         cards.add(new SetCardInfo("Haliya, Guided by Light", 19, Rarity.RARE, mage.cards.h.HaliyaGuidedByLight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Haliya, Guided by Light", 289, Rarity.RARE, mage.cards.h.HaliyaGuidedByLight.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Hardlight Containment", 20, Rarity.RARE, mage.cards.h.HardlightContainment.class));
         cards.add(new SetCardInfo("Harmonious Grovestrider", 189, Rarity.UNCOMMON, mage.cards.h.HarmoniousGrovestrider.class));
         cards.add(new SetCardInfo("Hemosymbic Mite", 190, Rarity.UNCOMMON, mage.cards.h.HemosymbicMite.class));
         cards.add(new SetCardInfo("Hullcarver", 105, Rarity.COMMON, mage.cards.h.Hullcarver.class));
