@@ -12,7 +12,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
+import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterPermanentCard;
 
 import java.util.UUID;
 
@@ -20,6 +22,8 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class ExplorationBroodship extends CardImpl {
+
+    private static final FilterCard filter = new FilterPermanentCard("a permanent spell");
 
     public ExplorationBroodship(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{G}");
@@ -42,8 +46,7 @@ public final class ExplorationBroodship extends CardImpl {
         this.addAbility(new StationLevelAbility(8)
                 .withLevelAbility(FlyingAbility.getInstance())
                 .withLevelAbility(new CastFromGraveyardOnceDuringEachOfYourTurnAbility(
-                        StaticFilters.FILTER_CARD_A_CREATURE_SPELL,
-                        new SacrificeTargetCost(StaticFilters.FILTER_LAND).setText("sacrificing a land")
+                        filter, new SacrificeTargetCost(StaticFilters.FILTER_LAND).setText("sacrificing a land")
                 ))
                 .withPT(4, 4));
     }
