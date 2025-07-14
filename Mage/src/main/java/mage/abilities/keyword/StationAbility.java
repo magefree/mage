@@ -5,6 +5,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
+import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
@@ -21,6 +22,7 @@ public class StationAbility extends SimpleActivatedAbility {
 
     public StationAbility() {
         super(Zone.BATTLEFIELD, new StationAbilityEffect(), new TapTargetCost(StaticFilters.FILTER_OTHER_CONTROLLED_CREATURE));
+        this.timing = TimingRule.SORCERY;
     }
 
     private StationAbility(final StationAbility ability) {
