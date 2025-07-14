@@ -43,6 +43,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Astelli Reclaimer", 288, Rarity.RARE, mage.cards.a.AstelliReclaimer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Astelli Reclaimer", 4, Rarity.RARE, mage.cards.a.AstelliReclaimer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Banishing Light", 6, Rarity.COMMON, mage.cards.b.BanishingLight.class));
+        cards.add(new SetCardInfo("Beyond the Quiet", 7, Rarity.RARE, mage.cards.b.BeyondTheQuiet.class));
         cards.add(new SetCardInfo("Bioengineered Future", 172, Rarity.RARE, mage.cards.b.BioengineeredFuture.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bioengineered Future", 340, Rarity.RARE, mage.cards.b.BioengineeredFuture.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Biomechan Engineer", 213, Rarity.UNCOMMON, mage.cards.b.BiomechanEngineer.class));
