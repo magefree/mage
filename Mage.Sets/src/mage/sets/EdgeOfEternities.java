@@ -64,6 +64,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Cosmogoyf", 313, Rarity.RARE, mage.cards.c.Cosmogoyf.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cosmogrand Zenith", 304, Rarity.MYTHIC, mage.cards.c.CosmograndZenith.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cosmogrand Zenith", 9, Rarity.MYTHIC, mage.cards.c.CosmograndZenith.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Cryogen Relic", 52, Rarity.COMMON, mage.cards.c.CryogenRelic.class));
         cards.add(new SetCardInfo("Dawnsire, Sunstar Dreadnought", 238, Rarity.MYTHIC, mage.cards.d.DawnsireSunstarDreadnought.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dawnsire, Sunstar Dreadnought", 351, Rarity.MYTHIC, mage.cards.d.DawnsireSunstarDreadnought.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Debris Field Crusher", 131, Rarity.UNCOMMON, mage.cards.d.DebrisFieldCrusher.class));
