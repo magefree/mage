@@ -47,7 +47,7 @@ public class StationTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, sawship);
         addCard(Zone.BATTLEFIELD, playerA, devils);
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "station");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Station");
         setChoice(playerA, devils);
 
         setStrictChooseMode(true);
@@ -65,7 +65,7 @@ public class StationTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, sawship);
         addCard(Zone.BATTLEFIELD, playerA, giant);
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "station");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Station");
         setChoice(playerA, giant);
 
         setStrictChooseMode(true);
@@ -84,7 +84,7 @@ public class StationTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, warden);
         addCard(Zone.BATTLEFIELD, playerA, devils);
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "station");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Station");
         setChoice(playerA, devils);
 
         setStrictChooseMode(true);
