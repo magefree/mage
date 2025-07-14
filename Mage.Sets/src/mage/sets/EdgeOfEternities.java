@@ -120,13 +120,15 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 270, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 368, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Kav Landseeker", 138, Rarity.COMMON, mage.cards.k.KavLandseeker.class));
-        cards.add(new SetCardInfo("Kavaron Harrier", 139, Rarity.UNCOMMON, mage.cards.k.KavaronHarrier.class));
+        cards.add(new SetCardInfo("Kavaron Harrier", 139, Rarity.UNCOMMON, mage.cards.k.KavaronHarrier.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kavaron Harrier", 396, Rarity.UNCOMMON, mage.cards.k.KavaronHarrier.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kavaron, Memorial World", 255, Rarity.MYTHIC, mage.cards.k.KavaronMemorialWorld.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kavaron, Memorial World", 281, Rarity.MYTHIC, mage.cards.k.KavaronMemorialWorld.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kavaron, Memorial World", 376, Rarity.MYTHIC, mage.cards.k.KavaronMemorialWorld.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mechanozoa", 66, Rarity.COMMON, mage.cards.m.Mechanozoa.class));
         cards.add(new SetCardInfo("Memorial Team Leader", 144, Rarity.UNCOMMON, mage.cards.m.MemorialTeamLeader.class));
-        cards.add(new SetCardInfo("Mightform Harmonizer", 200, Rarity.RARE, mage.cards.m.MightformHarmonizer.class));
+        cards.add(new SetCardInfo("Mightform Harmonizer", 200, Rarity.RARE, mage.cards.m.MightformHarmonizer.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mightform Harmonizer", 297, Rarity.RARE, mage.cards.m.MightformHarmonizer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mm'menon, the Right Hand", 290, Rarity.RARE, mage.cards.m.MmmenonTheRightHand.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mm'menon, the Right Hand", 68, Rarity.RARE, mage.cards.m.MmmenonTheRightHand.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Monoist Circuit-Feeder", 110, Rarity.UNCOMMON, mage.cards.m.MonoistCircuitFeeder.class));
@@ -253,7 +255,8 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Weapons Manufacturing", 168, Rarity.RARE, mage.cards.w.WeaponsManufacturing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Weapons Manufacturing", 311, Rarity.RARE, mage.cards.w.WeaponsManufacturing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Weftstalker Ardent", 169, Rarity.UNCOMMON, mage.cards.w.WeftstalkerArdent.class));
-        cards.add(new SetCardInfo("Weftwalking", 86, Rarity.MYTHIC, mage.cards.w.Weftwalking.class));
+        cards.add(new SetCardInfo("Weftwalking", 330, Rarity.MYTHIC, mage.cards.w.Weftwalking.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Weftwalking", 86, Rarity.MYTHIC, mage.cards.w.Weftwalking.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wurmwall Sweeper", 249, Rarity.COMMON, mage.cards.w.WurmwallSweeper.class));
         cards.add(new SetCardInfo("Zero Point Ballad", 335, Rarity.RARE, mage.cards.z.ZeroPointBallad.class));
 
