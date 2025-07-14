@@ -49,9 +49,8 @@ public final class EdgeOfEternitiesStellarSights extends ExpansionSet {
         cards.add(new SetCardInfo("High Market", 63, Rarity.RARE, mage.cards.h.HighMarket.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Inkmoth Nexus", 110, Rarity.MYTHIC, mage.cards.i.InkmothNexus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Inkmoth Nexus", 155, Rarity.MYTHIC, mage.cards.i.InkmothNexus.class, NON_FULL_USE_VARIOUS));
-        // Non-English Prints
-        //cards.add(new SetCardInfo("Inkmoth Nexus", 20, Rarity.MYTHIC, mage.cards.i.AAA.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Inkmoth Nexus", 65, Rarity.MYTHIC, mage.cards.i.AAA.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Inkmoth Nexus", 20, Rarity.MYTHIC, mage.cards.i.InkmothNexus.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Inkmoth Nexus", 65, Rarity.MYTHIC, mage.cards.i.InkmothNexus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Inventors' Fair", 21, Rarity.MYTHIC, mage.cards.i.InventorsFair.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Inventors' Fair", 66, Rarity.MYTHIC, mage.cards.i.InventorsFair.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mana Confluence", 115, Rarity.MYTHIC, mage.cards.m.ManaConfluence.class, NON_FULL_USE_VARIOUS));
