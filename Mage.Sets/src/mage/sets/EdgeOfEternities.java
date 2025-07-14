@@ -127,6 +127,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Kavaron, Memorial World", 281, Rarity.MYTHIC, mage.cards.k.KavaronMemorialWorld.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kavaron, Memorial World", 376, Rarity.MYTHIC, mage.cards.k.KavaronMemorialWorld.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mechanozoa", 66, Rarity.COMMON, mage.cards.m.Mechanozoa.class));
+        cards.add(new SetCardInfo("Melded Moxite", 143, Rarity.COMMON, mage.cards.m.MeldedMoxite.class));
         cards.add(new SetCardInfo("Memorial Team Leader", 144, Rarity.UNCOMMON, mage.cards.m.MemorialTeamLeader.class));
         cards.add(new SetCardInfo("Mightform Harmonizer", 200, Rarity.RARE, mage.cards.m.MightformHarmonizer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mightform Harmonizer", 297, Rarity.RARE, mage.cards.m.MightformHarmonizer.class, NON_FULL_USE_VARIOUS));
