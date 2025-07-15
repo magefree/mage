@@ -285,6 +285,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Weftwalking", 330, Rarity.MYTHIC, mage.cards.w.Weftwalking.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Weftwalking", 86, Rarity.MYTHIC, mage.cards.w.Weftwalking.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wurmwall Sweeper", 249, Rarity.COMMON, mage.cards.w.WurmwallSweeper.class));
+        cards.add(new SetCardInfo("Xu-Ifit, Osteoharmonist", 127, Rarity.RARE, mage.cards.x.XuIfitOsteoharmonist.class));
         cards.add(new SetCardInfo("Zero Point Ballad", 335, Rarity.RARE, mage.cards.z.ZeroPointBallad.class));
 
         cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName()));
