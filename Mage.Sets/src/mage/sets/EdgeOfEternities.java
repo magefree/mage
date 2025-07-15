@@ -139,6 +139,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Luxknight Breacher", 26, Rarity.COMMON, mage.cards.l.LuxknightBreacher.class));
         cards.add(new SetCardInfo("Mechanozoa", 66, Rarity.COMMON, mage.cards.m.Mechanozoa.class));
         cards.add(new SetCardInfo("Melded Moxite", 143, Rarity.COMMON, mage.cards.m.MeldedMoxite.class));
+        cards.add(new SetCardInfo("Meltstrider Eulogist", 197, Rarity.UNCOMMON, mage.cards.m.MeltstriderEulogist.class));
         cards.add(new SetCardInfo("Memorial Team Leader", 144, Rarity.UNCOMMON, mage.cards.m.MemorialTeamLeader.class));
         cards.add(new SetCardInfo("Mightform Harmonizer", 200, Rarity.RARE, mage.cards.m.MightformHarmonizer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mightform Harmonizer", 297, Rarity.RARE, mage.cards.m.MightformHarmonizer.class, NON_FULL_USE_VARIOUS));
