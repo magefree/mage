@@ -90,6 +90,10 @@ public class WarpAbility extends SpellAbility {
         sb.append("then you may cast it from exile on a later turn.)</i>");
         return sb.toString();
     }
+
+    public static String makeWarpString(UUID playerId) {
+        return playerId + "- Warped";
+    }
 }
 
 class WarpExileEffect extends OneShotEffect {
@@ -131,7 +135,7 @@ class WarpExileEffect extends OneShotEffect {
         }
         player.moveCardsToExile(
                 permanent, source, game, true,
-                CardUtil.getExileZoneId(player.getId() + "- Warped", game),
+                CardUtil.getExileZoneId(WarpAbility.makeWarpString(player.getId()), game),
                 "Warped by " + player.getLogName()
         );
         player.moveCards(permanent, Zone.EXILED, source, game);

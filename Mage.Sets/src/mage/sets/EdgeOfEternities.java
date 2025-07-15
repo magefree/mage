@@ -54,6 +54,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Chorale of the Void", 331, Rarity.RARE, mage.cards.c.ChoraleOfTheVoid.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chorale of the Void", 91, Rarity.RARE, mage.cards.c.ChoraleOfTheVoid.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chrome Companion", 236, Rarity.COMMON, mage.cards.c.ChromeCompanion.class));
+        cards.add(new SetCardInfo("Close Encounter", 176, Rarity.UNCOMMON, mage.cards.c.CloseEncounter.class));
         cards.add(new SetCardInfo("Command Bridge", 252, Rarity.COMMON, mage.cards.c.CommandBridge.class));
         cards.add(new SetCardInfo("Consult the Star Charts", 325, Rarity.RARE, mage.cards.c.ConsultTheStarCharts.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Consult the Star Charts", 51, Rarity.RARE, mage.cards.c.ConsultTheStarCharts.class, NON_FULL_USE_VARIOUS));
