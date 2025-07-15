@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class EdgeOfEternities extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("All-Fates Stalker", "Anticausal Vestige", "Astelli Reclaimer", "Broodguard Elite", "Bygone Colossus", "Drix Fatemaker", "Eusocial Engineering", "Exalted Sunborn", "Haliya, Guided by Light", "Loading Zone", "Mechanozoa", "Memorial Team Leader", "Mightform Harmonizer", "Nova Hellkite", "Pinnacle Emissary", "Possibility Technician", "Quantum Riddler", "Red Tiger Mechan", "Starbreach Whale", "Starfield Shepherd", "Starfield Vocalist", "Timeline Culler", "Weftstalker Ardent");
+    private static final List<String> unfinished = Arrays.asList("All-Fates Stalker", "Anticausal Vestige", "Astelli Reclaimer", "Broodguard Elite", "Bygone Colossus", "Drix Fatemaker", "Eusocial Engineering", "Exalted Sunborn", "Haliya, Guided by Light", "Loading Zone", "Mechanozoa", "Memorial Team Leader", "Mightform Harmonizer", "Nova Hellkite", "Pinnacle Emissary", "Possibility Technician", "Quantum Riddler", "Rayblade Trooper", "Red Tiger Mechan", "Starbreach Whale", "Starfield Shepherd", "Starfield Vocalist", "Timeline Culler", "Weftstalker Ardent");
     private static final EdgeOfEternities instance = new EdgeOfEternities();
 
     public static EdgeOfEternities getInstance() {
@@ -178,6 +178,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Radiant Strike", 29, Rarity.COMMON, mage.cards.r.RadiantStrike.class));
         cards.add(new SetCardInfo("Ragost, Deft Gastronaut", 224, Rarity.RARE, mage.cards.r.RagostDeftGastronaut.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ragost, Deft Gastronaut", 300, Rarity.RARE, mage.cards.r.RagostDeftGastronaut.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Rayblade Trooper", 30, Rarity.UNCOMMON, mage.cards.r.RaybladeTrooper.class));
         cards.add(new SetCardInfo("Red Tiger Mechan", 154, Rarity.COMMON, mage.cards.r.RedTigerMechan.class));
         cards.add(new SetCardInfo("Remnant Elemental", 155, Rarity.UNCOMMON, mage.cards.r.RemnantElemental.class));
         cards.add(new SetCardInfo("Reroute Systems", 31, Rarity.UNCOMMON, mage.cards.r.RerouteSystems.class));
