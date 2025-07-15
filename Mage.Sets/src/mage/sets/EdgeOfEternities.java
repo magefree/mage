@@ -97,6 +97,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Famished Worldsire", 182, Rarity.MYTHIC, mage.cards.f.FamishedWorldsire.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Famished Worldsire", 341, Rarity.MYTHIC, mage.cards.f.FamishedWorldsire.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fell Gravship", 101, Rarity.UNCOMMON, mage.cards.f.FellGravship.class));
+        cards.add(new SetCardInfo("Focus Fire", 18, Rarity.COMMON, mage.cards.f.FocusFire.class));
         cards.add(new SetCardInfo("Forest", 266, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", 275, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 276, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
