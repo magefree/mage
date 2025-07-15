@@ -263,6 +263,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Umbral Collar Zealot", 123, Rarity.UNCOMMON, mage.cards.u.UmbralCollarZealot.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Umbral Collar Zealot", 395, Rarity.UNCOMMON, mage.cards.u.UmbralCollarZealot.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Unravel", 83, Rarity.UNCOMMON, mage.cards.u.Unravel.class));
+        cards.add(new SetCardInfo("Uthros Psionicist", 84, Rarity.UNCOMMON, mage.cards.u.UthrosPsionicist.class));
         cards.add(new SetCardInfo("Uthros Scanship", 85, Rarity.UNCOMMON, mage.cards.u.UthrosScanship.class));
         cards.add(new SetCardInfo("Uthros, Titanic Godcore", 260, Rarity.MYTHIC, mage.cards.u.UthrosTitanicGodcore.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Uthros, Titanic Godcore", 285, Rarity.MYTHIC, mage.cards.u.UthrosTitanicGodcore.class, NON_FULL_USE_VARIOUS));
