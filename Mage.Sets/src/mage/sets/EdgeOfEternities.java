@@ -232,6 +232,8 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 271, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 272, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 369, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Synthesizer Labship", 329, Rarity.RARE, mage.cards.s.SynthesizerLabship.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Synthesizer Labship", 81, Rarity.RARE, mage.cards.s.SynthesizerLabship.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Syr Vondam, Sunstar Exemplar", 231, Rarity.RARE, mage.cards.s.SyrVondamSunstarExemplar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Syr Vondam, Sunstar Exemplar", 302, Rarity.RARE, mage.cards.s.SyrVondamSunstarExemplar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Syr Vondam, the Lucent", 232, Rarity.UNCOMMON, mage.cards.s.SyrVondamTheLucent.class));
