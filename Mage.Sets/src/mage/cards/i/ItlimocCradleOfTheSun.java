@@ -1,7 +1,7 @@
 package mage.cards.i;
 
 import mage.Mana;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.dynamicvalue.common.CreaturesYouControlCount;
 import mage.abilities.hint.common.CreaturesYouControlHint;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.abilities.mana.GreenManaAbility;
@@ -9,7 +9,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SuperType;
-import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -30,7 +29,9 @@ public final class ItlimocCradleOfTheSun extends CardImpl {
         this.addAbility(new GreenManaAbility());
 
         // {T}: Add {G} for each creature you control.
-        this.addAbility(new DynamicManaAbility(Mana.GreenMana(1), new PermanentsOnBattlefieldCount(StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED)).addHint(CreaturesYouControlHint.instance));
+        this.addAbility(new DynamicManaAbility(
+                Mana.GreenMana(1), CreaturesYouControlCount.SINGULAR
+        ).addHint(CreaturesYouControlHint.instance));
     }
 
     private ItlimocCradleOfTheSun(final ItlimocCradleOfTheSun card) {

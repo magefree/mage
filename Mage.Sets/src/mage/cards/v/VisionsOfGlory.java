@@ -23,7 +23,7 @@ public final class VisionsOfGlory extends CardImpl {
 
         // Create a 1/1 white Human creature token for each creature you control.
         this.getSpellAbility().addEffect(new CreateTokenEffect(
-                new HumanToken(), CreaturesYouControlCount.instance
+                new HumanToken(), CreaturesYouControlCount.PLURAL
         ).setText("create a 1/1 white Human creature token for each creature you control"));
 
         // Flashback {8}{W}{W}. This spell costs {X} less to cast this way, where X is the greatest mana value of a commander you own on the battlefield or in the command zone.

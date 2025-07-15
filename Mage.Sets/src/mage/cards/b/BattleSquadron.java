@@ -29,7 +29,7 @@ public final class BattleSquadron extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Battle Squadron's power and toughness are each equal to the number of creatures you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(CreaturesYouControlCount.instance))
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(CreaturesYouControlCount.PLURAL))
                 .addHint(CreaturesYouControlHint.instance));
     }
 

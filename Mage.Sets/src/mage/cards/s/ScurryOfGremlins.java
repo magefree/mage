@@ -17,7 +17,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.Gremlin11Token;
-import mage.game.permanent.token.GremlinToken;
 
 import java.util.UUID;
 
@@ -31,7 +30,7 @@ public final class ScurryOfGremlins extends CardImpl {
 
         // When Scurry of Gremlins enters the battlefield, create two 1/1 red Gremlin creature tokens. Then you get an amount of {E} equal to the number of creatures you control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new Gremlin11Token(), 2));
-        ability.addEffect(new GetEnergyCountersControllerEffect(CreaturesYouControlCount.instance)
+        ability.addEffect(new GetEnergyCountersControllerEffect(CreaturesYouControlCount.PLURAL)
                 .setText("Then you get an amount of {E} equal to the number of creatures you control"));
         this.addAbility(ability.addHint(CreaturesYouControlHint.instance));
 

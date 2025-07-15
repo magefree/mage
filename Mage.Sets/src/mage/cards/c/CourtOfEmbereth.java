@@ -36,7 +36,7 @@ public final class CourtOfEmbereth extends CardImpl {
                 new CreateTokenEffect(new Knight31RedToken())
         );
         ability.addEffect(new ConditionalOneShotEffect(
-                new DamagePlayersEffect(CreaturesYouControlCount.instance, TargetController.OPPONENT)
+                new DamagePlayersEffect(CreaturesYouControlCount.PLURAL, TargetController.OPPONENT)
                         .setText("{this} deals X damage to each opponent, where X is the number of creatures you control"),
                 MonarchIsSourceControllerCondition.instance
         ).concatBy("Then"));

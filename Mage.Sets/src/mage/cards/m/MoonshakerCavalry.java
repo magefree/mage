@@ -39,7 +39,7 @@ public final class MoonshakerCavalry extends CardImpl {
                 StaticFilters.FILTER_PERMANENT_CREATURES
         ).setText("creatures you control gain flying"));
         ability.addEffect(new BoostControlledEffect(
-                CreaturesYouControlCount.instance, CreaturesYouControlCount.instance, Duration.EndOfTurn
+                CreaturesYouControlCount.PLURAL, CreaturesYouControlCount.PLURAL, Duration.EndOfTurn
         ).setText("and get +X/+X until end of turn, where X is the number of creatures you control"));
         this.addAbility(ability.addHint(CreaturesYouControlHint.instance));
     }

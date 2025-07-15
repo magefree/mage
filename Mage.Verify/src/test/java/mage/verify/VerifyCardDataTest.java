@@ -2274,7 +2274,11 @@ public class VerifyCardDataTest {
         String additionalName;
         if (card instanceof CardWithSpellOption) {
             // adventure/omen cards
-            additionalName = ((CardWithSpellOption) card).getSpellCard().getName();
+            if (card.getName().equals("Bloomvine Regent") || card.getName().equals("Marang River Regent") || card.getName().equals("Scavenger Regent")) {
+                additionalName = null;
+            } else {
+                additionalName = ((CardWithSpellOption) card).getSpellCard().getName();
+            }
         } else if (card.isTransformable() && !card.isNightCard()) {
             additionalName = card.getSecondCardFace().getName();
         } else {

@@ -39,7 +39,7 @@ public final class RinoaHeartilly extends CardImpl {
 
         // Angelo Cannon -- Whenever Rinoa Heartilly attacks, another target creature you control gets +1/+1 until end of turn for each creature you control.
         Ability ability = new AttacksTriggeredAbility(new BoostTargetEffect(
-                CreaturesYouControlCount.instance, CreaturesYouControlCount.instance
+                CreaturesYouControlCount.PLURAL, CreaturesYouControlCount.PLURAL
         ).setText("another target creature you control gets +1/+1 until end of turn for each creature you control"));
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
         this.addAbility(ability.withFlavorWord("Angelo Cannon").addHint(CreaturesYouControlHint.instance));

@@ -22,7 +22,7 @@ public final class DenyTheWitch extends CardImpl {
         // Counter target spell, activated ability, or triggered ability. Its controller loses life equal to the number of creatures you control.
         this.getSpellAbility().addEffect(new CounterTargetEffect().setText("Counter target spell, activated ability, or triggered ability"));
         this.getSpellAbility().addTarget(new TargetStackObject());
-        this.getSpellAbility().addEffect(new LoseLifeTargetControllerEffect(CreaturesYouControlCount.instance)
+        this.getSpellAbility().addEffect(new LoseLifeTargetControllerEffect(CreaturesYouControlCount.PLURAL)
                 .setText("Its controller loses life equal to the number of creatures you control"));
         this.getSpellAbility().addHint(CreaturesYouControlHint.instance);
     }

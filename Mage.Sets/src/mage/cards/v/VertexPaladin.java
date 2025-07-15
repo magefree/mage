@@ -33,7 +33,7 @@ public final class VertexPaladin extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Vertex Paladin's power and toughness are each equal to the number of creatures you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(CreaturesYouControlCount.instance)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(CreaturesYouControlCount.PLURAL)));
     }
 
     private VertexPaladin(final VertexPaladin card) {

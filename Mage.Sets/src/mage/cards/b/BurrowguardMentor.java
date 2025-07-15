@@ -32,7 +32,7 @@ public final class BurrowguardMentor extends CardImpl {
 
         // Burrowguard Mentor's power and toughness are each equal to the number of creatures you control.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SetBasePowerToughnessSourceEffect(CreaturesYouControlCount.instance)
+                Zone.ALL, new SetBasePowerToughnessSourceEffect(CreaturesYouControlCount.PLURAL)
         ).addHint(CreaturesYouControlHint.instance));
     }
 

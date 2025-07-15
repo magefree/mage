@@ -32,7 +32,7 @@ public final class JunkyoBell extends CardImpl {
         // At the beginning of your upkeep, you may have target creature you control get +X/+X until end of turn,
         // where X is the number of creatures you control. If you do, sacrifice that creature at the beginning of the next end step.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new BoostTargetEffect(CreaturesYouControlCount.instance, CreaturesYouControlCount.instance, Duration.EndOfTurn), true
+                new BoostTargetEffect(CreaturesYouControlCount.PLURAL, CreaturesYouControlCount.PLURAL, Duration.EndOfTurn), true
         );
         ability.addTarget(new TargetControlledCreaturePermanent());
         ability.addEffect(new JunkyoBellSacrificeEffect());

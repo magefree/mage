@@ -36,7 +36,7 @@ public final class ChancellorOfTheForge extends CardImpl {
         this.addAbility(new ChancellorAbility(new ChancellorOfTheForgeDelayedTriggeredAbility(), abilityText));
 
         // When Chancellor of the Forge enters the battlefield, create X 1/1 red Goblin creature tokens with haste, where X is the number of creatures you control.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new PhyrexianGoblinHasteToken(), CreaturesYouControlCount.instance), false)
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new PhyrexianGoblinHasteToken(), CreaturesYouControlCount.PLURAL), false)
                 .addHint(CreaturesYouControlHint.instance));
     }
 

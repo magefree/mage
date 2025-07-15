@@ -43,7 +43,7 @@ public final class WillOfTheMardu extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
 
         // * Will of the Mardu deals damage to target creature equal to the number of creatures you control.
-        this.getSpellAbility().addMode(new Mode(new DamageTargetEffect(CreaturesYouControlCount.instance)
+        this.getSpellAbility().addMode(new Mode(new DamageTargetEffect(CreaturesYouControlCount.PLURAL)
                 .setText("{this} deals damage to target creature equal to the number of creatures you control")).addTarget(new TargetCreaturePermanent()));
         this.getSpellAbility().addHint(WillOfTheMarduHint.instance);
     }

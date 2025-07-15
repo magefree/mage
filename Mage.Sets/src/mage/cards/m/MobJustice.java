@@ -20,7 +20,7 @@ public final class MobJustice extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}");
 
         // Mob Justice deals damage to target player equal to the number of creatures you control.
-        Effect effect = new DamageTargetEffect(CreaturesYouControlCount.instance);
+        Effect effect = new DamageTargetEffect(CreaturesYouControlCount.PLURAL);
         effect.setText("{this} deals damage to target player or planeswalker equal to the number of creatures you control");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());

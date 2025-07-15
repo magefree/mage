@@ -11,16 +11,25 @@ import mage.game.Game;
  */
 public enum CreaturesYouControlCount implements DynamicValue {
 
-    instance;
+    PLURAL(true),
+    SINGULAR(false);
+    private final boolean plural;
+
+    CreaturesYouControlCount(boolean plural) {
+        this.plural = plural;
+    }
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return game.getBattlefield().count(StaticFilters.FILTER_CONTROLLED_CREATURES, sourceAbility.getControllerId(), sourceAbility, game);
+        return game.getBattlefield().count(
+                StaticFilters.FILTER_CONTROLLED_CREATURES,
+                sourceAbility.getControllerId(), sourceAbility, game
+        );
     }
 
     @Override
     public CreaturesYouControlCount copy() {
-        return instance;
+        return this;
     }
 
     @Override
@@ -30,6 +39,6 @@ public enum CreaturesYouControlCount implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "creatures you control";
+        return "creature" + (plural ? "s" : "") + " you control";
     }
 }

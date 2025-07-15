@@ -30,7 +30,7 @@ public final class HornOfValhalla extends AdventureCard {
 
         // Equipped creature gets +1/+1 for each creature you control.
         this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(
-                CreaturesYouControlCount.instance, CreaturesYouControlCount.instance
+                CreaturesYouControlCount.PLURAL, CreaturesYouControlCount.PLURAL
         ).setText("equipped creature gets +1/+1 for each creature you control")).addHint(CreaturesYouControlHint.instance));
 
         // Equip {3}

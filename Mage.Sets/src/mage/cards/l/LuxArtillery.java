@@ -1,20 +1,18 @@
 package mage.cards.l;
 
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.keyword.SunburstAbility;
-import mage.cards.Card;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.counters.Counter;
-import mage.filter.FilterPermanent;
+import mage.counters.Counters;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
@@ -37,11 +35,14 @@ public final class LuxArtillery extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // Whenever you cast an artifact creature spell, it gains sunburst.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new LuxArtilleryEffect(this), filter, false, SetTargetPointer.SPELL));
+        this.addAbility(new SpellCastControllerTriggeredAbility(
+                new LuxArtilleryEffect(), filter, false, SetTargetPointer.SPELL
+        ));
 
         // At the beginning of your end step, if there are thirty or more counters among artifacts and creatures you control, Lux Artillery deals 10 damage to each opponent.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new DamagePlayersEffect(10, TargetController.OPPONENT))
-                .withInterveningIf(LuxArtilleryCondition.instance));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(
+                new DamagePlayersEffect(10, TargetController.OPPONENT)
+        ).withInterveningIf(LuxArtilleryCondition.instance));
     }
 
     private LuxArtillery(final LuxArtillery card) {
@@ -56,21 +57,18 @@ public final class LuxArtillery extends CardImpl {
 
 class LuxArtilleryEffect extends ContinuousEffectImpl {
 
-    private final Ability ability;
-    private int zoneChangeCounter;
     private UUID permanentId;
+    private int zoneChangeCounter;
 
-    LuxArtilleryEffect(Card card) {
+    LuxArtilleryEffect() {
         super(Duration.OneUse, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         staticText = "it gains sunburst. <i>(It enters the battlefield with a +1/+1 counter on it for each color of mana spent to cast it.)</i>";
-        ability = new SunburstAbility(card);
     }
 
     private LuxArtilleryEffect(final LuxArtilleryEffect effect) {
         super(effect);
-        this.ability = effect.ability.copy();
-        this.zoneChangeCounter = effect.zoneChangeCounter;
         this.permanentId = effect.permanentId;
+        this.zoneChangeCounter = effect.zoneChangeCounter;
     }
 
     @Override
@@ -81,26 +79,27 @@ class LuxArtilleryEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        Spell object = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
+        Spell object = game.getSpell(getTargetPointer().getFirst(game, source));
         if (object != null) {
-            zoneChangeCounter = game.getState().getZoneChangeCounter(object.getSourceId()) + 1;
             permanentId = object.getSourceId();
+            zoneChangeCounter = game.getState().getZoneChangeCounter(object.getSourceId()) + 1;
         }
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
+        if (game.getState().getZoneChangeCounter(permanentId) >= zoneChangeCounter) {
+            discard();
+            return false;
+        }
         Permanent permanent = game.getPermanent(permanentId);
         if (permanent != null && permanent.getZoneChangeCounter(game) <= zoneChangeCounter) {
             permanent.addAbility(new SunburstAbility(permanent), source.getSourceId(), game);
-        } else {
-            if (game.getState().getZoneChangeCounter(permanentId) >= zoneChangeCounter) {
-                discard();
-            }
-            Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
-            if (spell != null) {
-                game.getState().addOtherAbility(spell.getCard(), ability, true);
-            }
+            return true;
+        }
+        Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
+        if (spell != null) {
+            game.getState().addOtherAbility(spell.getCard(), new SunburstAbility(spell), true);
         }
         return true;
     }
@@ -109,25 +108,18 @@ class LuxArtilleryEffect extends ContinuousEffectImpl {
 enum LuxArtilleryCondition implements Condition {
     instance;
 
-    private static final FilterPermanent filter = new FilterPermanent("artifacts and creatures you control");
-
-    static {
-        filter.add(Predicates.or(CardType.ARTIFACT.getPredicate(), CardType.CREATURE.getPredicate()));
-        filter.add(TargetController.YOU.getControllerPredicate());
-    }
-
     @Override
     public boolean apply(Game game, Ability source) {
-        int totalCounters = 0;
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
-            if (permanent == null) {
-                continue;
-            }
-            for (Counter counter : permanent.getCounters(game).values()) {
-                totalCounters += counter.getCount();
-            }
-        }
-        return totalCounters >= 30;
+        return game
+                .getBattlefield()
+                .getActivePermanents(
+                        StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_OR_CREATURE,
+                        source.getControllerId(), source, game
+                )
+                .stream()
+                .map(permanent -> permanent.getCounters(game))
+                .mapToInt(Counters::getTotalCount)
+                .sum() >= 30;
     }
 
     @Override

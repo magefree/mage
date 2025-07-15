@@ -30,7 +30,7 @@ import java.util.UUID;
  */
 public final class ThrabenCharm extends CardImpl {
 
-    private static final DynamicValue xValue = new MultipliedValue(CreaturesYouControlCount.instance, 2);
+    private static final DynamicValue xValue = new MultipliedValue(CreaturesYouControlCount.PLURAL, 2);
 
     public ThrabenCharm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");

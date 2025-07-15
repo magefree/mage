@@ -47,7 +47,7 @@ public class DifferentlyNamedPermanentCount implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "differently named " + filter.getMessage();
+        return "the number of differently named " + filter.getMessage();
     }
 
     @Override

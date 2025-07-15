@@ -68,6 +68,8 @@ public final class EdgeOfEternitiesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Eumidian Hatchery", 40, Rarity.RARE, mage.cards.e.EumidianHatchery.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Eumidian Wastewaker", 28, Rarity.RARE, mage.cards.e.EumidianWastewaker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Eumidian Wastewaker", 8, Rarity.RARE, mage.cards.e.EumidianWastewaker.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Evendo Brushrazer", 10, Rarity.RARE, mage.cards.e.EvendoBrushrazer.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Evendo Brushrazer", 30, Rarity.RARE, mage.cards.e.EvendoBrushrazer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Everflowing Chalice", 137, Rarity.UNCOMMON, mage.cards.e.EverflowingChalice.class));
         cards.add(new SetCardInfo("Evolving Wilds", 158, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Exotic Orchard", 159, Rarity.RARE, mage.cards.e.ExoticOrchard.class));
@@ -163,6 +165,8 @@ public final class EdgeOfEternitiesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Skyshroud Claim", 107, Rarity.COMMON, mage.cards.s.SkyshroudClaim.class));
         cards.add(new SetCardInfo("Smoldering Marsh", 182, Rarity.RARE, mage.cards.s.SmolderingMarsh.class));
         cards.add(new SetCardInfo("Sol Ring", 57, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
+        cards.add(new SetCardInfo("Solar Array", 18, Rarity.RARE, mage.cards.s.SolarArray.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Solar Array", 38, Rarity.RARE, mage.cards.s.SolarArray.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Soul of Windgrace", 126, Rarity.MYTHIC, mage.cards.s.SoulOfWindgrace.class));
         cards.add(new SetCardInfo("Soul-Guide Lantern", 143, Rarity.UNCOMMON, mage.cards.s.SoulGuideLantern.class));
         cards.add(new SetCardInfo("Spire of Industry", 183, Rarity.RARE, mage.cards.s.SpireOfIndustry.class));

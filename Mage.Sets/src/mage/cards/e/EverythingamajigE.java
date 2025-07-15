@@ -26,8 +26,6 @@ import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -47,7 +45,7 @@ public final class EverythingamajigE extends CardImpl {
         // Sacrifice a creature: Add {C}{C} to your mana pool.
         SacrificeTargetCost cost = new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE);
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD,
-                new BasicManaEffect(Mana.ColorlessMana(2), CreaturesYouControlCount.instance),
+                new BasicManaEffect(Mana.ColorlessMana(2), CreaturesYouControlCount.PLURAL),
                 cost));
 
         // Urza's Hot Tub

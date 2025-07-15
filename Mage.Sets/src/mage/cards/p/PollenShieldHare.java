@@ -43,7 +43,7 @@ public final class PollenShieldHare extends AdventureCard {
                         .setText("target creature you control gains vigilance")
         );
         this.getSpellCard().getSpellAbility().addEffect(
-                new BoostTargetEffect(CreaturesYouControlCount.instance, CreaturesYouControlCount.instance)
+                new BoostTargetEffect(CreaturesYouControlCount.PLURAL, CreaturesYouControlCount.PLURAL)
                         .setText("and gets +X/+X until end of turn, where X is the number of creatures you control")
         );
         this.getSpellCard().getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
