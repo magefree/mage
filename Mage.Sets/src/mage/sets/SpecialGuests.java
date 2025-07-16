@@ -30,6 +30,7 @@ public final class SpecialGuests extends ExpansionSet {
         cards.add(new SetCardInfo("Brazen Borrower", 30, Rarity.MYTHIC, mage.cards.b.BrazenBorrower.class));
         cards.add(new SetCardInfo("Breeches, Brazen Plunderer", 6, Rarity.UNCOMMON, mage.cards.b.BreechesBrazenPlunderer.class));
         cards.add(new SetCardInfo("Bridge from Below", 3, Rarity.RARE, mage.cards.b.BridgeFromBelow.class));
+        cards.add(new SetCardInfo("Burgeoning", 126, Rarity.MYTHIC, mage.cards.b.Burgeoning.class, FULL_ART));
         cards.add(new SetCardInfo("Carnage Tyrant", 10, Rarity.MYTHIC, mage.cards.c.CarnageTyrant.class));
         cards.add(new SetCardInfo("Cavalier of Dawn", 84, Rarity.MYTHIC, mage.cards.c.CavalierOfDawn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cavalier of Dawn", 94, Rarity.MYTHIC, mage.cards.c.CavalierOfDawn.class, NON_FULL_USE_VARIOUS));
@@ -42,6 +43,8 @@ public final class SpecialGuests extends ExpansionSet {
         cards.add(new SetCardInfo("Crashing Footfalls", 25, Rarity.MYTHIC, mage.cards.c.CrashingFootfalls.class));
         cards.add(new SetCardInfo("Damnation", 68, Rarity.MYTHIC, mage.cards.d.Damnation.class));
         cards.add(new SetCardInfo("Dargo, the Shipwrecker", 7, Rarity.UNCOMMON, mage.cards.d.DargoTheShipwrecker.class));
+        cards.add(new SetCardInfo("Darkness", 124, Rarity.MYTHIC, mage.cards.d.Darkness.class, FULL_ART));
+        cards.add(new SetCardInfo("Deafening Silence", 120, Rarity.MYTHIC, mage.cards.d.DeafeningSilence.class, FULL_ART));
         cards.add(new SetCardInfo("Desert", 37, Rarity.MYTHIC, mage.cards.d.Desert.class));
         cards.add(new SetCardInfo("Desertion", 31, Rarity.MYTHIC, mage.cards.d.Desertion.class));
         cards.add(new SetCardInfo("Dismember", 41, Rarity.MYTHIC, mage.cards.d.Dismember.class));
@@ -66,6 +69,7 @@ public final class SpecialGuests extends ExpansionSet {
         cards.add(new SetCardInfo("Ghalta, Primal Hunger", 11, Rarity.RARE, mage.cards.g.GhaltaPrimalHunger.class));
         cards.add(new SetCardInfo("Ghostly Prison", 19, Rarity.MYTHIC, mage.cards.g.GhostlyPrison.class));
         cards.add(new SetCardInfo("Goblin Bushwhacker", 78, Rarity.MYTHIC, mage.cards.g.GoblinBushwhacker.class));
+        cards.add(new SetCardInfo("Green Sun's Zenith", 119, Rarity.MYTHIC, mage.cards.g.GreenSunsZenith.class, FULL_ART));
         cards.add(new SetCardInfo("Grief", 46, Rarity.MYTHIC, mage.cards.g.Grief.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Grief", 51, Rarity.MYTHIC, mage.cards.g.Grief.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Grim Tutor", 76, Rarity.MYTHIC, mage.cards.g.GrimTutor.class));
@@ -113,6 +117,7 @@ public final class SpecialGuests extends ExpansionSet {
         cards.add(new SetCardInfo("Rampaging Ferocidon", 8, Rarity.RARE, mage.cards.r.RampagingFerocidon.class));
         cards.add(new SetCardInfo("Rat Colony", 56, Rarity.MYTHIC, mage.cards.r.RatColony.class));
         cards.add(new SetCardInfo("Relentless Rats", 57, Rarity.MYTHIC, mage.cards.r.RelentlessRats.class));
+        cards.add(new SetCardInfo("Robe of Stars", 121, Rarity.MYTHIC, mage.cards.r.RobeOfStars.class, FULL_ART));
         cards.add(new SetCardInfo("Ruinous Ultimatum", 108, Rarity.MYTHIC, mage.cards.r.RuinousUltimatum.class));
         cards.add(new SetCardInfo("Sacrifice", 69, Rarity.MYTHIC, mage.cards.s.Sacrifice.class));
         cards.add(new SetCardInfo("Scalding Tarn", 112, Rarity.MYTHIC, mage.cards.s.ScaldingTarn.class, NON_FULL_USE_VARIOUS));
