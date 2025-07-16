@@ -196,6 +196,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Rayblade Trooper", 30, Rarity.UNCOMMON, mage.cards.r.RaybladeTrooper.class));
         cards.add(new SetCardInfo("Red Tiger Mechan", 154, Rarity.COMMON, mage.cards.r.RedTigerMechan.class));
         cards.add(new SetCardInfo("Remnant Elemental", 155, Rarity.UNCOMMON, mage.cards.r.RemnantElemental.class));
+        cards.add(new SetCardInfo("Requiem Monolith", 113, Rarity.RARE, mage.cards.r.RequiemMonolith.class));
         cards.add(new SetCardInfo("Reroute Systems", 31, Rarity.UNCOMMON, mage.cards.r.RerouteSystems.class));
         cards.add(new SetCardInfo("Rescue Skiff", 32, Rarity.UNCOMMON, mage.cards.r.RescueSkiff.class));
         cards.add(new SetCardInfo("Roving Actuator", 157, Rarity.UNCOMMON, mage.cards.r.RovingActuator.class));
