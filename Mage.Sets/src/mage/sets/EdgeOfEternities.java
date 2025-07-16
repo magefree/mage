@@ -211,6 +211,8 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Sothera, the Supervoid", 360, Rarity.MYTHIC, mage.cards.s.SotheraTheSupervoid.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sothera, the Supervoid", 382, Rarity.MYTHIC, mage.cards.s.SotheraTheSupervoid.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sothera, the Supervoid", 386, Rarity.MYTHIC, mage.cards.s.SotheraTheSupervoid.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Space-Time Anomaly", 229, Rarity.RARE, mage.cards.s.SpaceTimeAnomaly.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Space-Time Anomaly", 315, Rarity.RARE, mage.cards.s.SpaceTimeAnomaly.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Specimen Freighter", 76, Rarity.UNCOMMON, mage.cards.s.SpecimenFreighter.class));
         cards.add(new SetCardInfo("Starbreach Whale", 77, Rarity.COMMON, mage.cards.s.StarbreachWhale.class));
         cards.add(new SetCardInfo("Starfield Shepherd", 37, Rarity.UNCOMMON, mage.cards.s.StarfieldShepherd.class, NON_FULL_USE_VARIOUS));
