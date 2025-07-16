@@ -24,10 +24,8 @@ import mage.target.TargetPermanent;
 import mage.util.functions.CopyApplier;
 import mage.util.functions.CopyTokenFunction;
 import mage.util.functions.EmptyCopyApplier;
-import mage.watchers.Watcher;
+import mage.watchers.common.CreatedTokenWatcher;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -47,7 +45,7 @@ public final class EsixFractalBloom extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // The first time you would create one or more tokens during each of your turns, you may instead choose a creature other than Esix, Fractal Bloom and create that many tokens that are copies of that creature.
-        this.addAbility(new SimpleStaticAbility(new EsixFractalBloomEffect()), new EsixFractalBloomWatcher());
+        this.addAbility(new SimpleStaticAbility(new EsixFractalBloomEffect()), new CreatedTokenWatcher());
     }
 
     private EsixFractalBloom(final EsixFractalBloom card) {
@@ -88,7 +86,7 @@ class EsixFractalBloomEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         return source.isControlledBy(event.getPlayerId())
                 && game.isActivePlayer(source.getControllerId())
-                && !EsixFractalBloomWatcher.checkPlayer(source.getControllerId(), game)
+                && !CreatedTokenWatcher.checkPlayer(source.getControllerId(), game)
                 && game.getBattlefield().count(
                 filter, source.getControllerId(), source, game
         ) > 0;
@@ -147,32 +145,5 @@ class EsixFractalBloomEffect extends ReplacementEffectImpl {
         Token token = CopyTokenFunction.createTokenCopy(copyFromPermanent, game); // needed so that entersBattlefied triggered abilities see the attributes (e.g. Master Biomancer)
         applier.apply(game, token, source, permanent.getId());
         return token;
-    }
-}
-
-class EsixFractalBloomWatcher extends Watcher {
-
-    private final Set<UUID> createdThisTurn = new HashSet<>();
-
-    EsixFractalBloomWatcher() {
-        super(WatcherScope.GAME);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.CREATED_TOKEN) {
-            createdThisTurn.add(event.getPlayerId());
-        }
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-        createdThisTurn.clear();
-    }
-
-    static boolean checkPlayer(UUID playerId, Game game) {
-        EsixFractalBloomWatcher watcher = game.getState().getWatcher(EsixFractalBloomWatcher.class);
-        return watcher != null && watcher.createdThisTurn.contains(playerId);
     }
 }
