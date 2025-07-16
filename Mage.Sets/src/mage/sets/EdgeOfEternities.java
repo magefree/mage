@@ -128,6 +128,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Infinite Guideline Station", 348, Rarity.RARE, mage.cards.i.InfiniteGuidelineStation.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Insatiable Skittermaw", 108, Rarity.COMMON, mage.cards.i.InsatiableSkittermaw.class));
         cards.add(new SetCardInfo("Interceptor Mechan", 220, Rarity.UNCOMMON, mage.cards.i.InterceptorMechan.class));
+        cards.add(new SetCardInfo("Invasive Maneuvers", 137, Rarity.UNCOMMON, mage.cards.i.InvasiveManeuvers.class));
         cards.add(new SetCardInfo("Island", 263, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Island", 269, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 270, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
