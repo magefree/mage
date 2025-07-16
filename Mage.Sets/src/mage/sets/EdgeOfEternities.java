@@ -285,6 +285,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Watery Grave", 381, Rarity.RARE, mage.cards.w.WateryGrave.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Weapons Manufacturing", 168, Rarity.RARE, mage.cards.w.WeaponsManufacturing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Weapons Manufacturing", 311, Rarity.RARE, mage.cards.w.WeaponsManufacturing.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Wedgelight Rammer", 43, Rarity.UNCOMMON, mage.cards.w.WedgelightRammer.class));
         cards.add(new SetCardInfo("Weftstalker Ardent", 169, Rarity.UNCOMMON, mage.cards.w.WeftstalkerArdent.class));
         cards.add(new SetCardInfo("Weftwalking", 330, Rarity.MYTHIC, mage.cards.w.Weftwalking.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Weftwalking", 86, Rarity.MYTHIC, mage.cards.w.Weftwalking.class, NON_FULL_USE_VARIOUS));
