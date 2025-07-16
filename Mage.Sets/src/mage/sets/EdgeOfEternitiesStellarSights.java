@@ -46,6 +46,8 @@ public final class EdgeOfEternitiesStellarSights extends ExpansionSet {
         cards.add(new SetCardInfo("Crystal Quarry", 55, Rarity.RARE, mage.cards.c.CrystalQuarry.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Crystal Quarry", 100, Rarity.RARE, mage.cards.c.CrystalQuarry.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Crystal Quarry", 145, Rarity.RARE, mage.cards.c.CrystalQuarry.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Deserted Temple", 11, Rarity.MYTHIC, mage.cards.d.DesertedTemple.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Deserted Temple", 56, Rarity.MYTHIC, mage.cards.d.DesertedTemple.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dust Bowl", 12, Rarity.MYTHIC, mage.cards.d.DustBowl.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dust Bowl", 57, Rarity.MYTHIC, mage.cards.d.DustBowl.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dust Bowl", 102, Rarity.MYTHIC, mage.cards.d.DustBowl.class, NON_FULL_USE_VARIOUS));
