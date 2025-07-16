@@ -148,6 +148,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Kavaron, Memorial World", 281, Rarity.MYTHIC, mage.cards.k.KavaronMemorialWorld.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kavaron, Memorial World", 376, Rarity.MYTHIC, mage.cards.k.KavaronMemorialWorld.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lightless Evangel", 109, Rarity.UNCOMMON, mage.cards.l.LightlessEvangel.class));
+        cards.add(new SetCardInfo("Lithobraking", 142, Rarity.UNCOMMON, mage.cards.l.Lithobraking.class));
         cards.add(new SetCardInfo("Loading Zone", 196, Rarity.RARE, mage.cards.l.LoadingZone.class));
         cards.add(new SetCardInfo("Lumen-Class Frigate", 25, Rarity.RARE, mage.cards.l.LumenClassFrigate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lumen-Class Frigate", 321, Rarity.RARE, mage.cards.l.LumenClassFrigate.class, NON_FULL_USE_VARIOUS));
