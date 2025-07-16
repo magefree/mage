@@ -128,6 +128,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Honored Knight-Captain", 22, Rarity.UNCOMMON, mage.cards.h.HonoredKnightCaptain.class));
         cards.add(new SetCardInfo("Hullcarver", 105, Rarity.COMMON, mage.cards.h.Hullcarver.class));
         cards.add(new SetCardInfo("Hylderblade", 106, Rarity.UNCOMMON, mage.cards.h.Hylderblade.class));
+        cards.add(new SetCardInfo("Hymn of the Faller", 107, Rarity.UNCOMMON, mage.cards.h.HymnOfTheFaller.class));
         cards.add(new SetCardInfo("Illvoi Galeblade", 58, Rarity.COMMON, mage.cards.i.IllvoiGaleblade.class));
         cards.add(new SetCardInfo("Infinite Guideline Station", 219, Rarity.RARE, mage.cards.i.InfiniteGuidelineStation.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Infinite Guideline Station", 348, Rarity.RARE, mage.cards.i.InfiniteGuidelineStation.class, NON_FULL_USE_VARIOUS));
