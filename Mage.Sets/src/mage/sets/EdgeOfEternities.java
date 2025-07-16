@@ -81,6 +81,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Dubious Delicacy", 96, Rarity.UNCOMMON, mage.cards.d.DubiousDelicacy.class));
         cards.add(new SetCardInfo("Dyadrine, Synthesis Amalgam", 216, Rarity.RARE, mage.cards.d.DyadrineSynthesisAmalgam.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dyadrine, Synthesis Amalgam", 298, Rarity.RARE, mage.cards.d.DyadrineSynthesisAmalgam.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Edge Rover", 179, Rarity.UNCOMMON, mage.cards.e.EdgeRover.class));
         cards.add(new SetCardInfo("Elegy Acolyte", 293, Rarity.RARE, mage.cards.e.ElegyAcolyte.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Elegy Acolyte", 97, Rarity.RARE, mage.cards.e.ElegyAcolyte.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Embrace Oblivion", 98, Rarity.COMMON, mage.cards.e.EmbraceOblivion.class));
