@@ -69,7 +69,7 @@ public final class SpecialGuests extends ExpansionSet {
         cards.add(new SetCardInfo("Ghalta, Primal Hunger", 11, Rarity.RARE, mage.cards.g.GhaltaPrimalHunger.class));
         cards.add(new SetCardInfo("Ghostly Prison", 19, Rarity.MYTHIC, mage.cards.g.GhostlyPrison.class));
         cards.add(new SetCardInfo("Goblin Bushwhacker", 78, Rarity.MYTHIC, mage.cards.g.GoblinBushwhacker.class));
-        cards.add(new SetCardInfo("Green Sun's Zenith", 119, Rarity.MYTHIC, mage.cards.g.GreenSunsZenith.class, FULL_ART));
+        cards.add(new SetCardInfo("Green Sun's Zenith", 127, Rarity.MYTHIC, mage.cards.g.GreenSunsZenith.class, FULL_ART));
         cards.add(new SetCardInfo("Grief", 46, Rarity.MYTHIC, mage.cards.g.Grief.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Grief", 51, Rarity.MYTHIC, mage.cards.g.Grief.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Grim Tutor", 76, Rarity.MYTHIC, mage.cards.g.GrimTutor.class));
