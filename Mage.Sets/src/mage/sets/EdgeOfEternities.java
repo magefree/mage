@@ -44,7 +44,8 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Astelli Reclaimer", 4, Rarity.RARE, mage.cards.a.AstelliReclaimer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Atmospheric Greenhouse", 171, Rarity.UNCOMMON, mage.cards.a.AtmosphericGreenhouse.class));
         cards.add(new SetCardInfo("Banishing Light", 6, Rarity.COMMON, mage.cards.b.BanishingLight.class));
-        cards.add(new SetCardInfo("Beyond the Quiet", 7, Rarity.RARE, mage.cards.b.BeyondTheQuiet.class));
+        cards.add(new SetCardInfo("Beyond the Quiet", 303, Rarity.RARE, mage.cards.b.BeyondTheQuiet.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Beyond the Quiet", 7, Rarity.RARE, mage.cards.b.BeyondTheQuiet.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bioengineered Future", 172, Rarity.RARE, mage.cards.b.BioengineeredFuture.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bioengineered Future", 340, Rarity.RARE, mage.cards.b.BioengineeredFuture.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Biomechan Engineer", 213, Rarity.UNCOMMON, mage.cards.b.BiomechanEngineer.class));
@@ -138,7 +139,8 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Kavaron, Memorial World", 376, Rarity.MYTHIC, mage.cards.k.KavaronMemorialWorld.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lightless Evangel", 109, Rarity.UNCOMMON, mage.cards.l.LightlessEvangel.class));
         cards.add(new SetCardInfo("Loading Zone", 196, Rarity.RARE, mage.cards.l.LoadingZone.class));
-        cards.add(new SetCardInfo("Lumen-Class Frigate", 25, Rarity.RARE, mage.cards.l.LumenClassFrigate.class));
+        cards.add(new SetCardInfo("Lumen-Class Frigate", 25, Rarity.RARE, mage.cards.l.LumenClassFrigate.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lumen-Class Frigate", 321, Rarity.RARE, mage.cards.l.LumenClassFrigate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Luxknight Breacher", 26, Rarity.COMMON, mage.cards.l.LuxknightBreacher.class));
         cards.add(new SetCardInfo("Mechanozoa", 66, Rarity.COMMON, mage.cards.m.Mechanozoa.class));
         cards.add(new SetCardInfo("Melded Moxite", 143, Rarity.COMMON, mage.cards.m.MeldedMoxite.class));
