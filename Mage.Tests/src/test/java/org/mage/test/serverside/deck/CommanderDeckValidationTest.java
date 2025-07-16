@@ -108,6 +108,42 @@ public class CommanderDeckValidationTest extends MageTestPlayerBase {
     }
 
     @Test()
+    public void testDoctorsCompanion() {
+        DeckTester deckTester = new DeckTester(new Commander());
+        deckTester.addMaindeck("Plains", 98);
+
+        deckTester.addSideboard("The First Doctor", 1);
+        deckTester.addSideboard("Barbara Wright", 1);
+
+        deckTester.validate("You can have two commanders if one is a Time Lord Doctor and the other has 'Doctor's companion'");
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testDoctorsCompanion2() {
+        DeckTester deckTester = new DeckTester(new Commander());
+        deckTester.addMaindeck("Plains", 98);
+
+        deckTester.addSideboard("The First Doctor", 1);
+        deckTester.addSideboard("Isamaru, Hound of Konda", 1);
+
+        deckTester.validate("You can't have two commanders if one is a Time Lord Doctor and the other doesn't have 'Doctor's companion'");
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testDoctorsCompanion3() {
+        DeckTester deckTester = new DeckTester(new Commander());
+        deckTester.addMaindeck("Plains", 98);
+
+        deckTester.addSideboard("Mistform Ultimus", 1);
+        deckTester.addSideboard("Barbara Wright", 1);
+
+        deckTester.validate(
+                "You can't have two commanders if one has 'Doctor's companion' " +
+                        "but the other has additional creature types in addition to being a Time Lord Doctor"
+        );
+    }
+
+    @Test()
     public void testVehicles1() {
         DeckTester deckTester = new DeckTester(new Commander());
         deckTester.addMaindeck("Plains", 99);
