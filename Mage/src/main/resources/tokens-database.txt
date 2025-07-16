@@ -146,6 +146,7 @@
 |Generate|EMBLEM:INR|Emblem Wrenn|||WrennAndSevenEmblem|
 |Generate|EMBLEM:DFT|Emblem Chandra|||ChandraSparkHunterEmblem|
 |Generate|EMBLEM:FIN|Emblem Sephiroth|||SephirothOneWingedAngelEmblem|
+|Generate|EMBLEM:EOE|Emblem Tezzeret|||TezzeretCruelCaptainEmblem|
 
 
 # ALL PLANES
