@@ -181,6 +181,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Pain for All", 151, Rarity.RARE, mage.cards.p.PainForAll.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Pain for All", 337, Rarity.RARE, mage.cards.p.PainForAll.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Pinnacle Emissary", 223, Rarity.RARE, mage.cards.p.PinnacleEmissary.class));
+        cards.add(new SetCardInfo("Pinnacle Starcage", 27, Rarity.RARE, mage.cards.p.PinnacleStarcage.class));
         cards.add(new SetCardInfo("Plains", 262, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Plains", 267, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 268, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
