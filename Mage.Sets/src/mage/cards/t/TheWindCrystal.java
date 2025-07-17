@@ -10,6 +10,7 @@ import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.abilities.effects.common.replacement.GainDoubleLifeReplacementEffect;
 import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -50,7 +51,7 @@ public final class TheWindCrystal extends CardImpl {
         ).setText("creatures you control gain flying"), new ManaCostsImpl<>("{4}{W}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new GainAbilityControlledEffect(
-                FlyingAbility.getInstance(), Duration.EndOfTurn,
+                LifelinkAbility.getInstance(), Duration.EndOfTurn,
                 StaticFilters.FILTER_PERMANENT_CREATURE
         ).setText("and lifelink until end of turn"));
         this.addAbility(ability);
