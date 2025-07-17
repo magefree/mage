@@ -118,6 +118,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Galvanizing Sawship", 136, Rarity.UNCOMMON, mage.cards.g.GalvanizingSawship.class));
         cards.add(new SetCardInfo("Genemorph Imago", 217, Rarity.RARE, mage.cards.g.GenemorphImago.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Genemorph Imago", 299, Rarity.RARE, mage.cards.g.GenemorphImago.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Glacier Godmaw", 188, Rarity.UNCOMMON, mage.cards.g.GlacierGodmaw.class));
         cards.add(new SetCardInfo("Godless Shrine", 254, Rarity.RARE, mage.cards.g.GodlessShrine.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Godless Shrine", 280, Rarity.RARE, mage.cards.g.GodlessShrine.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Godless Shrine", 375, Rarity.RARE, mage.cards.g.GodlessShrine.class, NON_FULL_USE_VARIOUS));
