@@ -66,7 +66,8 @@ public final class EdgeOfEternitiesStellarSights extends ExpansionSet {
         cards.add(new SetCardInfo("Eldrazi Temple", 59, Rarity.RARE, mage.cards.e.EldraziTemple.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Eldrazi Temple", 104, Rarity.RARE, mage.cards.e.EldraziTemple.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Eldrazi Temple", 149, Rarity.RARE, mage.cards.e.EldraziTemple.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Endless Sands", 15, Rarity.RARE, mage.cards.e.EndlessSands.class));
+        cards.add(new SetCardInfo("Endless Sands", 15, Rarity.RARE, mage.cards.e.EndlessSands.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Endless Sands", 60, Rarity.RARE, mage.cards.e.EndlessSands.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gemstone Caverns", 16, Rarity.MYTHIC, mage.cards.g.GemstoneCaverns.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gemstone Caverns", 61, Rarity.MYTHIC, mage.cards.g.GemstoneCaverns.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gemstone Caverns", 106, Rarity.MYTHIC, mage.cards.g.GemstoneCaverns.class, NON_FULL_USE_VARIOUS));
