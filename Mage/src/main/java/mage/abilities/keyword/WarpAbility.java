@@ -45,6 +45,7 @@ public class WarpAbility extends SpellAbility {
         this.allowGraveyard = ability.allowGraveyard;
     }
 
+    // The ability sets up a delayed trigger which can't be set up using the cost tag system
     public static void addDelayedTrigger(SpellAbility spellAbility, Game game) {
         if (spellAbility instanceof WarpAbility) {
             game.addDelayedTriggeredAbility(
