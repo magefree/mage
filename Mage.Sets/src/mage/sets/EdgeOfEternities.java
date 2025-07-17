@@ -211,6 +211,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Plasma Bolt", 152, Rarity.COMMON, mage.cards.p.PlasmaBolt.class));
         cards.add(new SetCardInfo("Possibility Technician", 153, Rarity.RARE, mage.cards.p.PossibilityTechnician.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Possibility Technician", 295, Rarity.RARE, mage.cards.p.PossibilityTechnician.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Pull Through the Weft", 202, Rarity.UNCOMMON, mage.cards.p.PullThroughTheWeft.class));
         cards.add(new SetCardInfo("Pulsar Squadron Ace", 28, Rarity.UNCOMMON, mage.cards.p.PulsarSquadronAce.class));
         cards.add(new SetCardInfo("Quantum Riddler", 305, Rarity.MYTHIC, mage.cards.q.QuantumRiddler.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Quantum Riddler", 72, Rarity.MYTHIC, mage.cards.q.QuantumRiddler.class, NON_FULL_USE_VARIOUS));
