@@ -40,7 +40,9 @@ import mage.filter.predicate.Predicates;
 import mage.game.FakeGame;
 import mage.game.Game;
 import mage.game.command.Dungeon;
+import mage.game.command.Emblem;
 import mage.game.command.Plane;
+import mage.game.command.emblems.EmblemOfCard;
 import mage.game.draft.DraftCube;
 import mage.game.permanent.token.Token;
 import mage.game.permanent.token.TokenImpl;
@@ -1694,6 +1696,64 @@ public class VerifyCardDataTest {
         printMessages(errorsList);
         if (errorsList.size() > 0) {
             Assert.fail("Found dungeon errors: " + errorsList.size());
+        }
+    }
+
+    @Test
+    // TODO: add same images verify for tokens/dungeons and other
+    // TODO: add same verify for Speed and other new command objects
+    public void test_checkMissingEmblemsData() {
+        Collection<String> errorsList = new ArrayList<>();
+
+        // prepare DBs
+        CardScanner.scan();
+
+        Reflections reflections = new Reflections("mage.");
+        Set<Class<? extends Emblem>> emblemClassesList = reflections.getSubTypesOf(Emblem.class).stream()
+                .filter(c -> !c.equals(EmblemOfCard.class)) // ignore emblem card
+                .collect(Collectors.toSet());
+
+        // 1. correct class name
+        for (Class<? extends Emblem> emblemClass : emblemClassesList) {
+            if (!emblemClass.getName().endsWith("Emblem")) {
+                String className = extractShortClass(emblemClass);
+                errorsList.add("Error: emblem class must ends with Emblem: " + className + " from " + emblemClass.getName());
+            }
+        }
+
+        // 2. correct package
+        for (Class<? extends Emblem> emblemClass : emblemClassesList) {
+            String fullClass = emblemClass.getName();
+            if (!fullClass.startsWith("mage.game.command.emblems.")) {
+                String className = extractShortClass(emblemClass);
+                errorsList.add("Error: emblem must be stored in mage.game.command.emblems package: " + className + " from " + emblemClass.getName());
+            }
+        }
+
+        // 3. correct constructor
+        MageObject fakeObject = CardRepository.instance.findCard("Forest").createCard();
+        for (Class<? extends Emblem> emblemClass : emblemClassesList) {
+            String className = extractShortClass(emblemClass);
+            Emblem emblem;
+            try {
+                emblem = (Emblem) createNewObject(emblemClass);
+
+                // 4. correct tokens-database (image)
+                try {
+                    emblem.setSourceObjectAndInitImage(fakeObject);
+                } catch (Throwable e) {
+                    e.printStackTrace();
+                    errorsList.add("Error: can't setup emblem's image data - make sure tokens-database.txt has it: " + className + " from " + emblemClass.getName());
+                }
+            } catch (Throwable e) {
+                e.printStackTrace();
+                errorsList.add("Error: can't create emblem with default constructor: " + className + " from " + emblemClass.getName());
+            }
+        }
+
+        printMessages(errorsList);
+        if (errorsList.size() > 0) {
+            Assert.fail("Found emblem errors: " + errorsList.size());
         }
     }
 

@@ -1,5 +1,6 @@
 package mage.game.command.emblems;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.OneShotEffect;
@@ -34,6 +35,13 @@ public class RadiationEmblem extends Emblem {
                 Zone.ALL, TargetController.YOU, new RadiationEffect(), false
         ).withInterveningIf(RadiationCondition.instance).setTriggerPhrase("At the beginning of each player's precombat main phase, "));
 
+        // radiation don't have source, so image can be initialized immediately
+        setSourceObjectAndInitImage(null);
+    }
+
+    @Override
+    public void setSourceObjectAndInitImage(MageObject sourceObject) {
+        this.sourceObject = sourceObject;
         TokenInfo foundInfo = TokenRepository.instance.findPreferredTokenInfoForXmage(TokenRepository.XMAGE_IMAGE_NAME_RADIATION, null);
         if (foundInfo != null) {
             this.setExpansionSetCode(foundInfo.getSetCode());
