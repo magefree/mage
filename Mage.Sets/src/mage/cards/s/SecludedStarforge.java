@@ -30,7 +30,7 @@ public final class SecludedStarforge extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledArtifactPermanent("untapped artifacts you control");
 
     static {
-        filter.add(TappedPredicate.UNTAPPED)
+        filter.add(TappedPredicate.UNTAPPED);
     }
 
     public SecludedStarforge(UUID ownerId, CardSetInfo setInfo) {
