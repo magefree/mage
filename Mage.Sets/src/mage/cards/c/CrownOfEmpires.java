@@ -1,7 +1,7 @@
 package mage.cards.c;
 
+import mage.MageItem;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -17,6 +17,7 @@ import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -102,11 +103,20 @@ class CrownOfEmpiresControlEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        UUID controllerId = (UUID) game.getState().getValue(source.getSourceId().toString());
+        for (MageItem object : affectedObjects) {
+            ((Permanent) object).changeControllerId(controllerId, game, source);
+        }
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         UUID controllerId = (UUID) game.getState().getValue(source.getSourceId().toString());
         if (permanent != null && controllerId != null) {
-            return permanent.changeControllerId(controllerId, game, source);
+            affectedObjects.add(permanent);
+            return true;
         }
         return false;
     }

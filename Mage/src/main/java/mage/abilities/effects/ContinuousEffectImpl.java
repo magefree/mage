@@ -1,5 +1,6 @@
 package mage.abilities.effects;
 
+import mage.MageItem;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.CompoundAbility;
@@ -115,8 +116,32 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         if (this.layer == layer && this.sublayer == sublayer) {
-            return apply(game, source);
+            List<MageItem> affectedObjects = new ArrayList<>();
+            if (queryAffectedObjects(layer, source, game, affectedObjects)) {
+                applyToObjects(layer, sublayer, source, game, affectedObjects);
+                return true;
+            } else {
+                return apply(game, source);
+            }
         }
+        return false;
+    }
+
+    @Override
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+
+        }
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        return false;
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        // Do nothing in new query logic and override in old apply logic
         return false;
     }
 

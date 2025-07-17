@@ -1,31 +1,33 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
+import mage.abilities.effects.common.continuous.BoostAllOfChosenSubtypeEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.StaticFilters;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
+
+import java.util.UUID;
 
 /**
  *
  * @author Plopman
  */
 public final class DoorOfDestinies extends CardImpl {
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures you control of the chosen type");
 
+    static {
+        filter.add(TargetController.YOU.getControllerPredicate());
+    }
     public DoorOfDestinies(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
@@ -36,7 +38,8 @@ public final class DoorOfDestinies extends CardImpl {
         this.addAbility(new AddCounterAbility());
 
         // Creatures you control of the chosen type get +1/+1 for each charge counter on Door of Destinies.
-        this.addAbility(new SimpleStaticAbility(new BoostCreatureEffectEffect()));
+        this.addAbility(new SimpleStaticAbility(new BoostAllOfChosenSubtypeEffect(1, 1,
+                Duration.WhileOnBattlefield, filter, false)));
     }
 
     private DoorOfDestinies(final DoorOfDestinies card) {
@@ -87,40 +90,4 @@ class AddCounterAbility extends TriggeredAbilityImpl {
     public String getRule() {
         return "Whenever you cast a spell of the chosen type, put a charge counter on {this}.";
     }
-}
-
-class BoostCreatureEffectEffect extends ContinuousEffectImpl {
-
-    BoostCreatureEffectEffect() {
-        super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
-        staticText = "Creatures you control of the chosen type get +1/+1 for each charge counter on {this}";
-    }
-
-    private BoostCreatureEffectEffect(final BoostCreatureEffectEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public BoostCreatureEffectEffect copy() {
-        return new BoostCreatureEffectEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            SubType subtype = (SubType) game.getState().getValue(permanent.getId() + "_type");
-            if (subtype != null) {
-                for (Permanent perm : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURES, source.getControllerId(), game)) {
-                    if (perm.hasSubtype(subtype, game)) {
-                        int boost = permanent.getCounters(game).getCount(CounterType.CHARGE);
-                        perm.addPower(boost);
-                        perm.addToughness(boost);
-                    }
-                }
-            }
-        }
-        return true;
-    }
-
 }

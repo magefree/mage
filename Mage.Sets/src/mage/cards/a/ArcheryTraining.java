@@ -1,5 +1,6 @@
 package mage.cards.a;
 
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -22,6 +23,7 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetAttackingOrBlockingCreature;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -78,7 +80,22 @@ class ArcheryTrainingEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        Permanent aura = game.getPermanent(source.getSourceId());
+        for (MageItem object : affectedObjects) {
+            Permanent permanent = game.getPermanent(object.getId());
+            String rule = "this creature deals X damage to target attacking or blocking creature, " +
+                    "where X is the number of arrow counters on " + aura.getName();
+            Ability ability = new SimpleActivatedAbility(
+                    new DamageTargetEffect(new ArcheryTrainingValue(aura)).setText(rule), new TapSourceCost()
+            );
+            ability.addTarget(new TargetAttackingOrBlockingCreature());
+            permanent.addAbility(ability, source.getSourceId(), game);
+        }
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         Permanent aura = game.getPermanent(source.getSourceId());
         if (aura == null) {
             return false;
@@ -87,13 +104,7 @@ class ArcheryTrainingEffect extends ContinuousEffectImpl {
         if (permanent == null) {
             return false;
         }
-        String rule = "this creature deals X damage to target attacking or blocking creature, " +
-                "where X is the number of arrow counters on " + aura.getName();
-        Ability ability = new SimpleActivatedAbility(
-                new DamageTargetEffect(new ArcheryTrainingValue(aura)).setText(rule), new TapSourceCost()
-        );
-        ability.addTarget(new TargetAttackingOrBlockingCreature());
-        permanent.addAbility(ability, source.getSourceId(), game);
+        affectedObjects.add(permanent);
         return true;
     }
 }

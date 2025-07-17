@@ -1,5 +1,6 @@
 package mage.abilities.common;
 
+import mage.MageItem;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -10,6 +11,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.List;
 
 /**
  * @author TheElk801, PurpleCrowbar
@@ -80,16 +83,35 @@ class EnduringGlimmerTypeEffect extends ContinuousEffectImpl {
         return new EnduringGlimmerTypeEffect(this);
     }
 
+
     @Override
-    public boolean apply(Game game, Ability source) {
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (permanent == null) {
+        if (permanent != null) {
+            affectedObjects.add(permanent);
+        }
+        return !affectedObjects.isEmpty();
+    }
+
+    @Override
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Permanent permanent = (Permanent) object;
+            permanent.retainAllEnchantmentSubTypes(game);
+            permanent.removeAllCardTypes(game);
+            permanent.addCardType(game, CardType.ENCHANTMENT);
+        }
+    }
+
+    @Override
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        if (this.layer != layer && this.sublayer != sublayer) {
+            return false;
+        }
+        if (!super.apply(layer, sublayer, source, game)) {
             discard();
             return false;
         }
-        permanent.retainAllEnchantmentSubTypes(game);
-        permanent.removeAllCardTypes(game);
-        permanent.addCardType(game, CardType.ENCHANTMENT);
         return true;
     }
 }

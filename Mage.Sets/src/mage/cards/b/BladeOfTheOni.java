@@ -1,6 +1,7 @@
 package mage.cards.b;
 
 import mage.MageInt;
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -12,6 +13,8 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -65,7 +68,31 @@ class BladeOfTheOniEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Permanent permanent = (Permanent) object;
+            switch (layer) {
+                case TypeChangingEffects_4:
+                    permanent.addSubType(game, SubType.DEMON);
+                    break;
+                case ColorChangingEffects_5:
+                    permanent.getColor(game).setBlack(true);
+                    break;
+                case AbilityAddingRemovingEffects_6:
+                    permanent.addAbility(new MenaceAbility(false), source.getSourceId(), game);
+                    break;
+                case PTChangingEffects_7:
+                    if (sublayer == SubLayer.SetPT_7b) {
+                        permanent.getPower().setModifiedBaseValue(5);
+                        permanent.getToughness().setModifiedBaseValue(5);
+                    }
+                    break;
+            }
+        }
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         if (sourcePermanent == null) {
             return false;
@@ -74,29 +101,17 @@ class BladeOfTheOniEffect extends ContinuousEffectImpl {
         if (permanent == null) {
             return false;
         }
-        switch (layer) {
-            case AbilityAddingRemovingEffects_6:
-                permanent.addAbility(new MenaceAbility(false), source.getSourceId(), game);
-                return true;
-            case ColorChangingEffects_5:
-                permanent.getColor(game).setBlack(true);
-                return true;
-            case TypeChangingEffects_4:
-                permanent.addSubType(game, SubType.DEMON);
-                return true;
-            case PTChangingEffects_7:
-                if (sublayer != SubLayer.SetPT_7b) {
-                    return false;
-                }
-                permanent.getPower().setModifiedBaseValue(5);
-                permanent.getToughness().setModifiedBaseValue(5);
-                return true;
-        }
-        return false;
+        affectedObjects.add(permanent);
+        return true;
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        List<MageItem> affectedObjects = new ArrayList<>();
+        if (queryAffectedObjects(layer, source, game, affectedObjects)) {
+            applyToObjects(layer, sublayer, source, game, affectedObjects);
+            return true;
+        }
         return false;
     }
 

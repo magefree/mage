@@ -1,5 +1,6 @@
 package mage.cards.d;
 
+import mage.MageItem;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -19,6 +20,7 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -112,7 +114,7 @@ class DarksteelMonolithAlternativeCost extends AlternativeCostSourceAbility {
 class DarksteelMonolithAddAltCostEffect extends ContinuousEffectImpl {
 
     DarksteelMonolithAddAltCostEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Layer.RulesEffects, SubLayer.NA, Outcome.Benefit);
         staticText = "Once each turn, you may pay {0} rather than pay the mana cost for a colorless spell you cast from your hand.";
     }
 
@@ -126,35 +128,31 @@ class DarksteelMonolithAddAltCostEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-            if (sourcePermanent != null) {
-                Boolean wasItUsed = (Boolean) game.getState().getValue(
-                        sourcePermanent.getId().toString()
-                                + sourcePermanent.getZoneChangeCounter(game)
-                                + sourcePermanent.getTurnsOnBattlefield());
-                // If we haven't used it yet this turn, give the option of using the zero alternative cost
-                if (wasItUsed == null) {
-                    DarksteelMonolithAlternativeCost alternateCostAbility = new DarksteelMonolithAlternativeCost();
-                    alternateCostAbility.setSourceId(source.getSourceId());
-                    controller.getAlternativeSourceCosts().add(alternateCostAbility);
-                }
-                // Return true even if we didn't add the alt cost. We still applied the effect
-                return true;
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Permanent sourcePermanent = (Permanent) object;
+            Player controller = game.getPlayer(source.getControllerId());
+            Boolean wasItUsed = (Boolean) game.getState().getValue(
+                    sourcePermanent.getId().toString()
+                            + sourcePermanent.getZoneChangeCounter(game)
+                            + sourcePermanent.getTurnsOnBattlefield());
+            // If we haven't used it yet this turn, give the option of using the zero alternative cost
+            if (wasItUsed == null) {
+                DarksteelMonolithAlternativeCost alternateCostAbility = new DarksteelMonolithAlternativeCost();
+                alternateCostAbility.setSourceId(source.getSourceId());
+                controller.getAlternativeSourceCosts().add(alternateCostAbility);
             }
         }
-        return false;
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.RulesEffects;
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        Player controller = game.getPlayer(source.getControllerId());
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (controller == null || permanent == null) {
+            return false;
+        }
+        affectedObjects.add(permanent);
+        return true;
     }
 }

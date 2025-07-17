@@ -1,41 +1,26 @@
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.MageItem;
 import mage.abilities.Ability;
-import mage.abilities.MageSingleton;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.keyword.DoubleStrikeAbility;
-import mage.abilities.keyword.FearAbility;
-import mage.abilities.keyword.FirstStrikeAbility;
-import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.HasteAbility;
-import mage.abilities.keyword.LandwalkAbility;
-import mage.abilities.keyword.ProtectionAbility;
-import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.keyword.*;
 import mage.cards.Card;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityWord;
-import mage.constants.CardType;
-import mage.constants.DependencyType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.util.CardUtil;
+
+import java.util.*;
 
 /**
  *
@@ -71,6 +56,17 @@ public final class DeathMaskDuplicant extends CardImpl {
 
     static class DeathMaskDuplicantEffect extends ContinuousEffectImpl {
 
+        private static final Set<Class<? extends Ability>> KEYWORD_ABILITIES = new HashSet<>(Arrays.asList(
+                FlyingAbility.class,
+                FearAbility.class,
+                FirstStrikeAbility.class,
+                DoubleStrikeAbility.class,
+                HasteAbility.class,
+                LandwalkAbility.class,
+                ProtectionAbility.class,
+                TrampleAbility.class
+        ));
+
         public DeathMaskDuplicantEffect() {
             super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
             this.addDependedToType(DependencyType.AddingAbility);
@@ -82,43 +78,46 @@ public final class DeathMaskDuplicant extends CardImpl {
         }
 
         @Override
-        public boolean apply(Game game, Ability source) {
-            Permanent sourceObject = game.getPermanent(source.getSourceId());
+        public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+            Set<Ability> exileAbilities = new HashSet<>();
 
-            if (sourceObject == null) {
-                return false;
-            }
-
-            for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
-                Player player = game.getPlayer(playerId);
-                if (player != null) {
-                    ExileZone exileZone = game.getState().getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), sourceObject.getZoneChangeCounter(game)));
-                    if (exileZone != null && !exileZone.isEmpty()) {
-                        for (UUID cardId : exileZone) {
-                            Card card = game.getCard(cardId);
-                            if (card != null && card.isCreature(game)) {
-                                for (Ability ability : card.getAbilities(game)) {
-                                    if (ability instanceof MageSingleton) {
-                                        if (ability instanceof FlyingAbility
-                                                || ability instanceof FearAbility
-                                                || ability instanceof FirstStrikeAbility
-                                                || ability instanceof DoubleStrikeAbility
-                                                || ability instanceof HasteAbility
-                                                || ability instanceof TrampleAbility) {
-                                            sourceObject.addAbility(ability, source.getSourceId(), game);
-                                        }
-                                    } else if (ability instanceof ProtectionAbility
-                                            || ability instanceof LandwalkAbility) {
-                                        sourceObject.addAbility(ability, source.getSourceId(), game);
-                                    }
-                                }
-                            }
-                        }
+            for (MageItem object : affectedObjects) {
+                Permanent permanent = (Permanent) object;
+                getAbilitiesInExile(game, source, permanent, exileAbilities);
+                for (Ability ability : exileAbilities) {
+                    if (isValidKeywordAbility(ability.getClass())) {
+                        permanent.addAbility(ability, source.getSourceId(), game);
                     }
                 }
             }
+        }
 
+        @Override
+        public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+            Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+
+            if (sourcePermanent == null) {
+                return false;
+            }
+            affectedObjects.add(sourcePermanent);
             return true;
+        }
+
+        private void getAbilitiesInExile(Game game, Ability source, Permanent sourcePermanent, Set<Ability> exileAbilities) {
+            ExileZone exileZone = game.getState().getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), sourcePermanent.getZoneChangeCounter(game)));
+            if (exileZone == null || exileZone.isEmpty()) {
+                return;
+            }
+            for (Card card : exileZone.getCards(StaticFilters.FILTER_CARD_CREATURE, game)) {
+                exileAbilities.addAll(card.getAbilities(game));
+            }
+        }
+
+        private boolean isValidKeywordAbility(Class<? extends Ability> abilityClass) {
+            return KEYWORD_ABILITIES.stream()
+                    .anyMatch(keywordClass ->
+                            keywordClass.isAssignableFrom(abilityClass)
+                    );
         }
 
         @Override

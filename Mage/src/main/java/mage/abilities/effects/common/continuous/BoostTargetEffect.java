@@ -1,5 +1,6 @@
 package mage.abilities.effects.common.continuous;
 
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -12,6 +13,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -62,17 +64,23 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        int affectedTargets = 0;
-        for (UUID permanentId : getTargetPointer().getTargets(game, source)) {
-            Permanent target = game.getPermanent(permanentId);
-            if (target != null && target.isCreature(game)) {
-                target.addPower(power.calculate(game, source, this));
-                target.addToughness(toughness.calculate(game, source, this));
-                affectedTargets++;
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (UUID targetId : getTargetPointer().getTargets(game, source)) {
+            Permanent permanent = game.getPermanent(targetId);
+            if (permanent != null && permanent.isCreature(game)) {
+                affectedObjects.add(permanent);
             }
         }
-        return affectedTargets > 0;
+        return !affectedObjects.isEmpty();
+    }
+
+    @Override
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Permanent permanent = (Permanent) object;
+            permanent.addPower(power.calculate(game, source, this));
+            permanent.addToughness(toughness.calculate(game, source, this));
+        }
     }
 
     @Override

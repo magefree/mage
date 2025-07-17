@@ -2,7 +2,7 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksCreatureYouControlTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -12,10 +12,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.Layer;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -54,12 +57,12 @@ class BeastmasterAscensionEffect extends BoostControlledEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null && permanent.getCounters(game).getCount(CounterType.QUEST) > 6) {
-            super.apply(game, source);
+        if (permanent == null || permanent.getCounters(game).getCount(CounterType.QUEST) < 7) {
+            return false;
         }
-        return false;
+        return super.queryAffectedObjects(layer, source, game, affectedObjects);
     }
 
     @Override

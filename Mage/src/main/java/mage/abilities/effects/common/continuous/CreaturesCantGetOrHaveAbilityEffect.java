@@ -1,5 +1,6 @@
 package mage.abilities.effects.common.continuous;
 
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.DependencyType;
@@ -12,6 +13,8 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.List;
 
 /**
  * @author LevelX2
@@ -26,7 +29,7 @@ public class CreaturesCantGetOrHaveAbilityEffect extends ContinuousEffectImpl {
     }
 
     public CreaturesCantGetOrHaveAbilityEffect(Ability ability, Duration duration, FilterCreaturePermanent filter) {
-        super(duration, Outcome.Detriment);
+        super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.Detriment);
         this.ability = ability;
         this.filter = filter;
         staticText = filter.getMessage() + " lose " + ability.getRule() + " and can't have or gain " + ability.getRule();
@@ -45,27 +48,19 @@ public class CreaturesCantGetOrHaveAbilityEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
-                if (permanent != null) {
-                    permanent.removeAbility(ability, source.getSourceId(), game);
-                }
-            }
-            return true;
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            ((Permanent) object).removeAbility(ability, source.getSourceId(), game);
         }
-        return false;
-
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.AbilityAddingRemovingEffects_6;
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
+        affectedObjects.addAll(game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game));
+        return !affectedObjects.isEmpty();
     }
 }

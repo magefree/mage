@@ -1,11 +1,14 @@
 package mage.abilities.effects.common.continuous;
 
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.List;
 
 public class AddChosenSubtypeEffect extends ContinuousEffectImpl {
 
@@ -19,15 +22,24 @@ public class AddChosenSubtypeEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Permanent permanent = (Permanent) object;
+            SubType subType = ChooseCreatureTypeEffect.getChosenCreatureType(permanent.getId(), game);
+            permanent.addSubType(game, subType);
+        }
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
             SubType subType = ChooseCreatureTypeEffect.getChosenCreatureType(permanent.getId(), game);
             if (subType != null) {
-                permanent.addSubType(game, subType);
+                affectedObjects.add(permanent);
             }
         }
-        return true;
+        return !affectedObjects.isEmpty();
     }
 
     @Override
