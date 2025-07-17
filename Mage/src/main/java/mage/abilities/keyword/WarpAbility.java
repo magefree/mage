@@ -98,7 +98,7 @@ public class WarpAbility extends SpellAbility {
 
 class WarpExileEffect extends OneShotEffect {
 
-    class WarpCondition implements Condition {
+    private static class WarpCondition implements Condition {
 
         private final int turnNumber;
 
@@ -138,7 +138,6 @@ class WarpExileEffect extends OneShotEffect {
                 CardUtil.getExileZoneId(WarpAbility.makeWarpString(player.getId()), game),
                 "Warped by " + player.getLogName()
         );
-        player.moveCards(permanent, Zone.EXILED, source, game);
         CardUtil.makeCardPlayable(
                 game, source, permanent.getMainCard(), true,
                 Duration.Custom, false, player.getId(), new WarpCondition(game)

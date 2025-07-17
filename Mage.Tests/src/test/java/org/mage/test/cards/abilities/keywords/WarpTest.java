@@ -108,6 +108,25 @@ public class WarpTest extends CardTestPlayerBase {
         assertLife(playerB, 20 - 3);
     }
 
+    @Test
+    public void testNoVoid() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 9 + 1);
+        addCard(Zone.HAND, playerA, colossus);
+        addCard(Zone.HAND, playerA, bolt);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, colossus);
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, bolt, playerB);
+        waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN, playerA);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, colossus, 1);
+        assertLife(playerB, 20 - 2);
+    }
+
     private static final String culler = "Timeline Culler";
 
     @Test
