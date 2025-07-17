@@ -1,5 +1,6 @@
 package mage.abilities.keyword;
 
+import mage.MageIdentifier;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
@@ -13,6 +14,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -20,6 +22,7 @@ import java.util.UUID;
  */
 public class WarpAbility extends SpellAbility {
 
+    public static final String WARP_ACTIVATION_VALUE_KEY = "warpActivation";
     private final boolean allowGraveyard;
 
     public WarpAbility(Card card, String manaString) {
@@ -65,6 +68,15 @@ public class WarpAbility extends SpellAbility {
                 return super.canActivate(playerId, game);
         }
         return ActivationStatus.getFalse();
+    }
+
+    @Override
+    public boolean activate(Game game, Set<MageIdentifier> allowedIdentifiers, boolean noMana) {
+        if (!super.activate(game, allowedIdentifiers, noMana)) {
+            return false;
+        }
+        this.setCostsTag(WARP_ACTIVATION_VALUE_KEY, null);
+        return true;
     }
 
     @Override

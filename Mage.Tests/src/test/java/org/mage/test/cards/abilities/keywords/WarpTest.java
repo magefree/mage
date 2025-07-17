@@ -1,5 +1,7 @@
 package org.mage.test.cards.abilities.keywords;
 
+import mage.abilities.keyword.HasteAbility;
+import mage.abilities.keyword.TrampleAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Assert;
@@ -144,5 +146,45 @@ public class WarpTest extends CardTestPlayerBase {
 
         assertExileCount(playerA, culler, 1);
         assertLife(playerA, 20 - 2);
+    }
+
+    private static final String bore = "Full Bore";
+
+    @Test
+    public void testFullBoreWithoutWarp() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 9 + 1);
+        addCard(Zone.HAND, playerA, colossus);
+        addCard(Zone.HAND, playerA, bore);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, colossus);
+
+        castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, bore, colossus);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPowerToughness(playerA, colossus, 9 + 3, 9 + 2);
+        assertAbility(playerA, colossus, TrampleAbility.getInstance(), false);
+        assertAbility(playerA, colossus, HasteAbility.getInstance(), false);
+    }
+
+    @Test
+    public void testFullBoreWithWarp() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3 + 1);
+        addCard(Zone.HAND, playerA, colossus);
+        addCard(Zone.HAND, playerA, bore);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, colossus + " with Warp");
+
+        castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, bore, colossus);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPowerToughness(playerA, colossus, 9 + 3, 9 + 2);
+        assertAbility(playerA, colossus, TrampleAbility.getInstance(), true);
+        assertAbility(playerA, colossus, HasteAbility.getInstance(), true);
     }
 }
