@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class EdgeOfEternities extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("All-Fates Stalker", "Anticausal Vestige", "Astelli Reclaimer", "Broodguard Elite", "Bygone Colossus", "Drix Fatemaker", "Eusocial Engineering", "Exalted Sunborn", "Haliya, Guided by Light", "Loading Zone", "Mechanozoa", "Memorial Team Leader", "Mightform Harmonizer", "Nova Hellkite", "Pinnacle Emissary", "Possibility Technician", "Quantum Riddler", "Rayblade Trooper", "Red Tiger Mechan", "Starbreach Whale", "Starfield Shepherd", "Starfield Vocalist", "Starwinder", "Timeline Culler", "Weftstalker Ardent");
+    private static final List<String> unfinished = Arrays.asList("All-Fates Stalker", "Anticausal Vestige", "Astelli Reclaimer", "Broodguard Elite", "Bygone Colossus", "Codecracker Hound", "Drix Fatemaker", "Eusocial Engineering", "Exalted Sunborn", "Haliya, Guided by Light", "Loading Zone", "Mechanozoa", "Memorial Team Leader", "Mightform Harmonizer", "Nova Hellkite", "Pinnacle Emissary", "Possibility Technician", "Quantum Riddler", "Rayblade Trooper", "Red Tiger Mechan", "Starbreach Whale", "Starfield Shepherd", "Starfield Vocalist", "Starwinder", "Timeline Culler", "Weftstalker Ardent");
     private static final EdgeOfEternities instance = new EdgeOfEternities();
 
     public static EdgeOfEternities getInstance() {
@@ -190,7 +190,8 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Pinnacle Emissary", 223, Rarity.RARE, mage.cards.p.PinnacleEmissary.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Pinnacle Emissary", 349, Rarity.RARE, mage.cards.p.PinnacleEmissary.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Pinnacle Kill-Ship", 244, Rarity.COMMON, mage.cards.p.PinnacleKillShip.class));
-        cards.add(new SetCardInfo("Pinnacle Starcage", 27, Rarity.RARE, mage.cards.p.PinnacleStarcage.class));
+        cards.add(new SetCardInfo("Pinnacle Starcage", 27, Rarity.RARE, mage.cards.p.PinnacleStarcage.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Pinnacle Starcage", 322, Rarity.RARE, mage.cards.p.PinnacleStarcage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 262, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Plains", 267, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 268, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
@@ -225,6 +226,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Scout for Survivors", 33, Rarity.UNCOMMON, mage.cards.s.ScoutForSurvivors.class));
         cards.add(new SetCardInfo("Secluded Starforge", 257, Rarity.RARE, mage.cards.s.SecludedStarforge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Secluded Starforge", 316, Rarity.RARE, mage.cards.s.SecludedStarforge.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Secluded Starforge", 366, Rarity.RARE, mage.cards.s.SecludedStarforge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Secluded Starforge", 392, Rarity.MYTHIC, mage.cards.s.SecludedStarforge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Seedship Broodtender", 227, Rarity.UNCOMMON, mage.cards.s.SeedshipBroodtender.class));
         cards.add(new SetCardInfo("Seedship Impact", 205, Rarity.UNCOMMON, mage.cards.s.SeedshipImpact.class));
