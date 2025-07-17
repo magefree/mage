@@ -73,6 +73,8 @@
 |Generate|EMBLEM:MD1|Emblem Elspeth|||ElspethKnightErrantEmblem|
 |Generate|EMBLEM:SWS|Emblem Obi-Wan Kenobi|||ObiWanKenobiEmblem|
 |Generate|EMBLEM:SWS|Emblem Luke Skywalker|||LukeSkywalkerEmblem|
+|Generate|EMBLEM:SWS|Emblem Yoda|||YodaEmblem|
+|Generate|EMBLEM:SWS|Emblem Aurra Sing|||AurraSingBaneOfJediEmblem|
 |Generate|EMBLEM:RIX|Emblem Huatli|||HuatliRadiantChampionEmblem|
 |Generate|EMBLEM:RNA|Emblem Domri|||DomriChaosBringerEmblem|
 |Generate|EMBLEM:WAR|Emblem Nissa|||NissaWhoShakesTheWorldEmblem|
