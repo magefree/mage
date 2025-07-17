@@ -103,6 +103,15 @@ public class Exile implements Serializable, Copyable<Exile> {
         return false;
     }
 
+    public void removeCardAndCopyVisibility(Card card, ExileZone targetZone) {
+        for (ExileZone exile : exileZones.values()) {
+            if (exile.contains(card.getId())) {
+                exile.copyCardVisibility(card, targetZone);
+                exile.remove(card.getId());
+            }
+        }
+    }
+
     /**
      * Move card from one exile zone to another. Use case example: create special zone for exiled and castable card.
      */
@@ -113,7 +122,7 @@ public class Exile implements Serializable, Copyable<Exile> {
         if (exileZone == null) {
             throw new IllegalArgumentException("Exile zone must exists: " + card.getIdName());
         }
-        removeCard(card);
+        removeCardAndCopyVisibility(card, exileZone);
         exileZone.add(card);
     }
 
@@ -147,6 +156,7 @@ public class Exile implements Serializable, Copyable<Exile> {
         for (ExileZone zone : exileZones.values()) {
             if (zone.isCleanupOnEndTurn()) {
                 for (Card card : zone.getCards(game)) {
+                    zone.copyCardVisibility(card, mainZone);
                     mainZone.add(card);
                     zone.remove(card);
                 }
