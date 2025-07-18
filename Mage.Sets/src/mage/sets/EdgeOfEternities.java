@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class EdgeOfEternities extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("All-Fates Stalker", "Anticausal Vestige", "Astelli Reclaimer", "Broodguard Elite", "Bygone Colossus", "Codecracker Hound", "Drix Fatemaker", "Eusocial Engineering", "Exalted Sunborn", "Haliya, Guided by Light", "Loading Zone", "Mechanozoa", "Memorial Team Leader", "Mightform Harmonizer", "Nova Hellkite", "Pinnacle Emissary", "Possibility Technician", "Quantum Riddler", "Rayblade Trooper", "Red Tiger Mechan", "Starbreach Whale", "Starfield Shepherd", "Starfield Vocalist", "Starwinder", "Timeline Culler", "Weftstalker Ardent");
+    private static final List<String> unfinished = Arrays.asList("All-Fates Stalker", "Anticausal Vestige", "Astelli Reclaimer", "Broodguard Elite", "Bygone Colossus", "Codecracker Hound", "Drix Fatemaker", "Eusocial Engineering", "Exalted Sunborn", "Haliya, Guided by Light", "Loading Zone", "Mechanozoa", "Memorial Team Leader", "Mightform Harmonizer", "Nova Hellkite", "Pinnacle Emissary", "Possibility Technician", "Quantum Riddler", "Rayblade Trooper", "Red Tiger Mechan", "Sinister Cryologist", "Starbreach Whale", "Starfield Shepherd", "Starfield Vocalist", "Starwinder", "Timeline Culler", "Weftstalker Ardent");
     private static final EdgeOfEternities instance = new EdgeOfEternities();
 
     public static EdgeOfEternities getInstance() {
@@ -270,6 +270,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Singularity Rupture", 228, Rarity.RARE, mage.cards.s.SingularityRupture.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Singularity Rupture", 350, Rarity.RARE, mage.cards.s.SingularityRupture.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Singularity Rupture", 398, Rarity.RARE, mage.cards.s.SingularityRupture.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sinister Cryologist", 75, Rarity.COMMON, mage.cards.s.SinisterCryologist.class));
         cards.add(new SetCardInfo("Slagdrill Scrapper", 160, Rarity.COMMON, mage.cards.s.SlagdrillScrapper.class));
         cards.add(new SetCardInfo("Sledge-Class Seedship", 208, Rarity.RARE, mage.cards.s.SledgeClassSeedship.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sledge-Class Seedship", 346, Rarity.RARE, mage.cards.s.SledgeClassSeedship.class, NON_FULL_USE_VARIOUS));
