@@ -573,6 +573,7 @@ public class ScryfallImageSupportCards {
             add("ACR"); // Assassin's Creed
             add("BLB"); // Bloomburrow
             add("BLC"); // Bloomburrow Commander
+            add("PCBB"); // Cowboy Bebop
             add("MB2"); // Mystery Booster 2
             add("DSK"); // Duskmourn: House of Horror
             add("DSC"); // Duskmourn: House of Horror Commander
