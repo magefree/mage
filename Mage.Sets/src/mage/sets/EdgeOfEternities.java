@@ -69,6 +69,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Chrome Companion", 236, Rarity.COMMON, mage.cards.c.ChromeCompanion.class));
         cards.add(new SetCardInfo("Cloudsculpt Technician", 49, Rarity.COMMON, mage.cards.c.CloudsculptTechnician.class));
         cards.add(new SetCardInfo("Codecracker Hound", 50, Rarity.UNCOMMON, mage.cards.c.CodecrackerHound.class));
+        cards.add(new SetCardInfo("Comet Crawler", 92, Rarity.COMMON, mage.cards.c.CometCrawler.class));
         cards.add(new SetCardInfo("Command Bridge", 252, Rarity.COMMON, mage.cards.c.CommandBridge.class));
         cards.add(new SetCardInfo("Consult the Star Charts", 325, Rarity.RARE, mage.cards.c.ConsultTheStarCharts.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Consult the Star Charts", 51, Rarity.RARE, mage.cards.c.ConsultTheStarCharts.class, NON_FULL_USE_VARIOUS));
