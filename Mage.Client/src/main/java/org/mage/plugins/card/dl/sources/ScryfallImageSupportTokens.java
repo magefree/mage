@@ -837,7 +837,8 @@ public class ScryfallImageSupportTokens {
             put("SLD/Hydra", "https://api.scryfall.com/cards/sld/1334?format=image");
             put("SLD/Icingdeath, Frost Tongue", "https://api.scryfall.com/cards/sld/1018?format=image");
             put("SLD/Marit Lage", "https://api.scryfall.com/cards/sld/1681?format=image");
-            put("SLD/Mechtitan", "https://api.scryfall.com/cards/sld/1969?format=image");
+            put("SLD/Mechtitan/1", "https://api.scryfall.com/cards/sld/1969/en?format=image");
+            put("SLD/Mechtitan/2", "https://api.scryfall.com/cards/sld/1969/en?format=image&face=back");
             put("SLD/Myr", "https://api.scryfall.com/cards/sld/2101?format=image");
             put("SLD/Saproling", "https://api.scryfall.com/cards/sld/1139?format=image");
             put("SLD/Shapeshifter/1", "https://api.scryfall.com/cards/sld/1906?format=image");
@@ -2873,7 +2874,7 @@ public class ScryfallImageSupportTokens {
             put("F17/Treasure/3", "https://api.scryfall.com/cards/f17/10?format=image&face=back");
 
             // HHO
-            put("HHO/Treasure", "https://api.scryfall.com/cards/hho/21★?format=image");
+            put("HHO/Treasure", "https://cards.scryfall.io/large/front/5/3/5379b994-5f9e-44ec-a69c-8d58ffb0dbd8.jpg?1749917487");
 
             // J12
             put("J12/Centaur", "https://api.scryfall.com/cards/j12/9?format=image");
@@ -2910,10 +2911,10 @@ public class ScryfallImageSupportTokens {
             put("PEMN/Zombie/2", "https://api.scryfall.com/cards/pemn/1Z?format=image&face=back");
 
             // PHEL
-            put("PHEL/Angel", "https://api.scryfall.com/cards/phel/1★?format=image");
+            put("PHEL/Angel", "https://cards.scryfall.io/large/front/4/a/4ac2b852-92b2-4daf-9d1f-f71d3b27c241.jpg?1561757080");
 
             // PL21
-            put("PL21/Minotaur", "https://api.scryfall.com/cards/pl21/2★?format=image");
+            put("PL21/Minotaur", "https://cards.scryfall.io/large/front/f/e/fe6b9fbc-4060-4ca4-bccb-a631268b57d9.jpg?1681762410");
 
             // PL23
             put("PL23/Food", "https://api.scryfall.com/cards/pl23/2?format=image");
