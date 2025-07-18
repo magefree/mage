@@ -177,6 +177,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Lightless Evangel", 109, Rarity.UNCOMMON, mage.cards.l.LightlessEvangel.class));
         cards.add(new SetCardInfo("Lithobraking", 142, Rarity.UNCOMMON, mage.cards.l.Lithobraking.class));
         cards.add(new SetCardInfo("Loading Zone", 196, Rarity.RARE, mage.cards.l.LoadingZone.class));
+        cards.add(new SetCardInfo("Lost in Space", 62, Rarity.COMMON, mage.cards.l.LostInSpace.class));
         cards.add(new SetCardInfo("Lumen-Class Frigate", 25, Rarity.RARE, mage.cards.l.LumenClassFrigate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lumen-Class Frigate", 321, Rarity.RARE, mage.cards.l.LumenClassFrigate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Luxknight Breacher", 26, Rarity.COMMON, mage.cards.l.LuxknightBreacher.class));
