@@ -328,6 +328,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Starwinder", 306, Rarity.RARE, mage.cards.s.Starwinder.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Starwinder", 79, Rarity.RARE, mage.cards.s.Starwinder.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Station Monitor", 230, Rarity.UNCOMMON, mage.cards.s.StationMonitor.class));
+        cards.add(new SetCardInfo("Steelswarm Operator", 80, Rarity.UNCOMMON, mage.cards.s.SteelswarmOperator.class));
         cards.add(new SetCardInfo("Stomping Ground", 258, Rarity.RARE, mage.cards.s.StompingGround.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stomping Ground", 283, Rarity.RARE, mage.cards.s.StompingGround.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stomping Ground", 378, Rarity.RARE, mage.cards.s.StompingGround.class, NON_FULL_USE_VARIOUS));
