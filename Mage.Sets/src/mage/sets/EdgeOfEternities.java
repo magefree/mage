@@ -90,6 +90,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Divert Disaster", 55, Rarity.COMMON, mage.cards.d.DivertDisaster.class));
         cards.add(new SetCardInfo("Drill Too Deep", 133, Rarity.COMMON, mage.cards.d.DrillTooDeep.class));
         cards.add(new SetCardInfo("Drix Fatemaker", 178, Rarity.COMMON, mage.cards.d.DrixFatemaker.class));
+        cards.add(new SetCardInfo("Dual-Sun Adepts", 12, Rarity.UNCOMMON, mage.cards.d.DualSunAdepts.class));
         cards.add(new SetCardInfo("Dual-Sun Technique", 13, Rarity.UNCOMMON, mage.cards.d.DualSunTechnique.class));
         cards.add(new SetCardInfo("Dubious Delicacy", 96, Rarity.UNCOMMON, mage.cards.d.DubiousDelicacy.class));
         cards.add(new SetCardInfo("Dyadrine, Synthesis Amalgam", 216, Rarity.RARE, mage.cards.d.DyadrineSynthesisAmalgam.class, NON_FULL_USE_VARIOUS));
