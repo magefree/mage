@@ -23,6 +23,10 @@ public final class EdgeOfEternitiesStellarSights extends ExpansionSet {
         cards.add(new SetCardInfo("Ancient Tomb", 46, Rarity.MYTHIC, mage.cards.a.AncientTomb.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ancient Tomb", 91, Rarity.MYTHIC, mage.cards.a.AncientTomb.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ancient Tomb", 136, Rarity.MYTHIC, mage.cards.a.AncientTomb.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Blast Zone", 2, Rarity.RARE, mage.cards.b.BlastZone.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Blast Zone", 47, Rarity.RARE, mage.cards.b.BlastZone.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Blast Zone", 92, Rarity.RARE, mage.cards.b.BlastZone.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Blast Zone", 137, Rarity.RARE, mage.cards.b.BlastZone.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Blinkmoth Nexus", 3, Rarity.RARE, mage.cards.b.BlinkmothNexus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Blinkmoth Nexus", 48, Rarity.RARE, mage.cards.b.BlinkmothNexus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Blinkmoth Nexus", 93, Rarity.RARE, mage.cards.b.BlinkmothNexus.class, NON_FULL_USE_VARIOUS));
@@ -33,6 +37,8 @@ public final class EdgeOfEternitiesStellarSights extends ExpansionSet {
         cards.add(new SetCardInfo("Bonders' Enclave", 139, Rarity.RARE, mage.cards.b.BondersEnclave.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cascading Cataracts", 5, Rarity.RARE, mage.cards.c.CascadingCataracts.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cascading Cataracts", 50, Rarity.RARE, mage.cards.c.CascadingCataracts.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Cascading Cataracts", 95, Rarity.RARE, mage.cards.c.CascadingCataracts.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Cascading Cataracts", 140, Rarity.RARE, mage.cards.c.CascadingCataracts.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cathedral of War", 6, Rarity.RARE, mage.cards.c.CathedralOfWar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cathedral of War", 51, Rarity.RARE, mage.cards.c.CathedralOfWar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cathedral of War", 96, Rarity.RARE, mage.cards.c.CathedralOfWar.class, NON_FULL_USE_VARIOUS));
@@ -41,7 +47,10 @@ public final class EdgeOfEternitiesStellarSights extends ExpansionSet {
         cards.add(new SetCardInfo("Celestial Colonnade", 52, Rarity.RARE, mage.cards.c.CelestialColonnade.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Celestial Colonnade", 97, Rarity.RARE, mage.cards.c.CelestialColonnade.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Celestial Colonnade", 142, Rarity.RARE, mage.cards.c.CelestialColonnade.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Contested War Zone", 8, Rarity.RARE, mage.cards.c.ContestedWarZone.class));
+        cards.add(new SetCardInfo("Contested War Zone", 8, Rarity.RARE, mage.cards.c.ContestedWarZone.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Contested War Zone", 53, Rarity.RARE, mage.cards.c.ContestedWarZone.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Contested War Zone", 98, Rarity.RARE, mage.cards.c.ContestedWarZone.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Contested War Zone", 143, Rarity.RARE, mage.cards.c.ContestedWarZone.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Creeping Tar Pit", 9, Rarity.RARE, mage.cards.c.CreepingTarPit.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Creeping Tar Pit", 54, Rarity.RARE, mage.cards.c.CreepingTarPit.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Creeping Tar Pit", 99, Rarity.RARE, mage.cards.c.CreepingTarPit.class, NON_FULL_USE_VARIOUS));
@@ -68,6 +77,8 @@ public final class EdgeOfEternitiesStellarSights extends ExpansionSet {
         cards.add(new SetCardInfo("Eldrazi Temple", 149, Rarity.RARE, mage.cards.e.EldraziTemple.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Endless Sands", 15, Rarity.RARE, mage.cards.e.EndlessSands.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Endless Sands", 60, Rarity.RARE, mage.cards.e.EndlessSands.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Endless Sands", 105, Rarity.RARE, mage.cards.e.EndlessSands.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Endless Sands", 150, Rarity.RARE, mage.cards.e.EndlessSands.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gemstone Caverns", 16, Rarity.MYTHIC, mage.cards.g.GemstoneCaverns.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gemstone Caverns", 61, Rarity.MYTHIC, mage.cards.g.GemstoneCaverns.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gemstone Caverns", 106, Rarity.MYTHIC, mage.cards.g.GemstoneCaverns.class, NON_FULL_USE_VARIOUS));
@@ -90,6 +101,8 @@ public final class EdgeOfEternitiesStellarSights extends ExpansionSet {
         cards.add(new SetCardInfo("Inkmoth Nexus", 155, Rarity.MYTHIC, mage.cards.i.InkmothNexus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Inventors' Fair", 21, Rarity.MYTHIC, mage.cards.i.InventorsFair.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Inventors' Fair", 66, Rarity.MYTHIC, mage.cards.i.InventorsFair.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Inventors' Fair", 111, Rarity.MYTHIC, mage.cards.i.InventorsFair.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Inventors' Fair", 156, Rarity.MYTHIC, mage.cards.i.InventorsFair.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lavaclaw Reaches", 22, Rarity.RARE, mage.cards.l.LavaclawReaches.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lavaclaw Reaches", 67, Rarity.RARE, mage.cards.l.LavaclawReaches.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lavaclaw Reaches", 112, Rarity.RARE, mage.cards.l.LavaclawReaches.class, NON_FULL_USE_VARIOUS));
@@ -132,12 +145,16 @@ public final class EdgeOfEternitiesStellarSights extends ExpansionSet {
         cards.add(new SetCardInfo("Nesting Grounds", 166, Rarity.RARE, mage.cards.n.NestingGrounds.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Petrified Field", 32, Rarity.MYTHIC, mage.cards.p.PetrifiedField.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Petrified Field", 77, Rarity.MYTHIC, mage.cards.p.PetrifiedField.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Petrified Field", 122, Rarity.MYTHIC, mage.cards.p.PetrifiedField.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Petrified Field", 167, Rarity.MYTHIC, mage.cards.p.PetrifiedField.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plaza of Heroes", 33, Rarity.MYTHIC, mage.cards.p.PlazaOfHeroes.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plaza of Heroes", 78, Rarity.MYTHIC, mage.cards.p.PlazaOfHeroes.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plaza of Heroes", 123, Rarity.MYTHIC, mage.cards.p.PlazaOfHeroes.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plaza of Heroes", 168, Rarity.MYTHIC, mage.cards.p.PlazaOfHeroes.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Power Depot", 34, Rarity.RARE, mage.cards.p.PowerDepot.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Power Depot", 79, Rarity.RARE, mage.cards.p.PowerDepot.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Power Depot", 124, Rarity.RARE, mage.cards.p.PowerDepot.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Power Depot", 169, Rarity.RARE, mage.cards.p.PowerDepot.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Raging Ravine", 35, Rarity.RARE, mage.cards.r.RagingRavine.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Raging Ravine", 80, Rarity.RARE, mage.cards.r.RagingRavine.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Raging Ravine", 125, Rarity.RARE, mage.cards.r.RagingRavine.class, NON_FULL_USE_VARIOUS));
@@ -148,6 +165,8 @@ public final class EdgeOfEternitiesStellarSights extends ExpansionSet {
         cards.add(new SetCardInfo("Reflecting Pool", 171, Rarity.MYTHIC, mage.cards.r.ReflectingPool.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Scavenger Grounds", 37, Rarity.RARE, mage.cards.s.ScavengerGrounds.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Scavenger Grounds", 82, Rarity.RARE, mage.cards.s.ScavengerGrounds.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Scavenger Grounds", 127, Rarity.RARE, mage.cards.s.ScavengerGrounds.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Scavenger Grounds", 172, Rarity.RARE, mage.cards.s.ScavengerGrounds.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shambling Vent", 38, Rarity.RARE, mage.cards.s.ShamblingVent.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shambling Vent", 83, Rarity.RARE, mage.cards.s.ShamblingVent.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shambling Vent", 128, Rarity.RARE, mage.cards.s.ShamblingVent.class, NON_FULL_USE_VARIOUS));
