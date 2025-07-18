@@ -109,6 +109,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Emissary Escort", 56, Rarity.RARE, mage.cards.e.EmissaryEscort.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Entropic Battlecruiser", 332, Rarity.RARE, mage.cards.e.EntropicBattlecruiser.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Entropic Battlecruiser", 99, Rarity.RARE, mage.cards.e.EntropicBattlecruiser.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Eumidian Terrabotanist", 180, Rarity.UNCOMMON, mage.cards.e.EumidianTerrabotanist.class));
         cards.add(new SetCardInfo("Eusocial Engineering", 181, Rarity.UNCOMMON, mage.cards.e.EusocialEngineering.class));
         cards.add(new SetCardInfo("Evendo, Waking Haven", 253, Rarity.MYTHIC, mage.cards.e.EvendoWakingHaven.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Evendo, Waking Haven", 279, Rarity.MYTHIC, mage.cards.e.EvendoWakingHaven.class, NON_FULL_USE_VARIOUS));
