@@ -203,6 +203,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Mm'menon, the Right Hand", 68, Rarity.RARE, mage.cards.m.MmmenonTheRightHand.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Molecular Modifier", 146, Rarity.UNCOMMON, mage.cards.m.MolecularModifier.class));
         cards.add(new SetCardInfo("Monoist Circuit-Feeder", 110, Rarity.UNCOMMON, mage.cards.m.MonoistCircuitFeeder.class));
+        cards.add(new SetCardInfo("Monoist Sentry", 111, Rarity.UNCOMMON, mage.cards.m.MonoistSentry.class));
         cards.add(new SetCardInfo("Moonlit Meditation", 327, Rarity.RARE, mage.cards.m.MoonlitMeditation.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Moonlit Meditation", 69, Rarity.RARE, mage.cards.m.MoonlitMeditation.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 265, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
