@@ -257,6 +257,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Sami, Ship's Engineer", 225, Rarity.UNCOMMON, mage.cards.s.SamiShipsEngineer.class));
         cards.add(new SetCardInfo("Sami, Wildcat Captain", 226, Rarity.MYTHIC, mage.cards.s.SamiWildcatCaptain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sami, Wildcat Captain", 301, Rarity.MYTHIC, mage.cards.s.SamiWildcatCaptain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Scour for Scrap", 73, Rarity.UNCOMMON, mage.cards.s.ScourForScrap.class));
         cards.add(new SetCardInfo("Scout for Survivors", 33, Rarity.UNCOMMON, mage.cards.s.ScoutForSurvivors.class));
         cards.add(new SetCardInfo("Secluded Starforge", 257, Rarity.RARE, mage.cards.s.SecludedStarforge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Secluded Starforge", 316, Rarity.RARE, mage.cards.s.SecludedStarforge.class, NON_FULL_USE_VARIOUS));
