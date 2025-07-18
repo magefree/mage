@@ -2867,6 +2867,7 @@
 |Generate|TOK:EOC|Insect|||XiraBlackInsectToken|
 |Generate|TOK:EOC|Pest|||Pest11GainLifeToken|
 |Generate|TOK:EOC|Phyrexian|||Phyrexian00Token|
+|Generate|TOK:EOC|Shapeshifter|||ShapeshifterDeathtouchToken|
 |Generate|TOK:EOC|Thopter|||ThopterColorlessToken|
 
 # JVC

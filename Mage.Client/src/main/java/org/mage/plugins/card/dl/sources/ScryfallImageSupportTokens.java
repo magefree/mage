@@ -2812,6 +2812,7 @@ public class ScryfallImageSupportTokens {
             put("EOC/Insect", "https://api.scryfall.com/cards/teoc/4/en?format=image");
             put("EOC/Pest", "https://api.scryfall.com/cards/teoc/9/en?format=image");
             put("EOC/Phyrexian", "https://api.scryfall.com/cards/teoc/15/en?format=image&face=back");
+            put("EOC/Shapeshifter", "https://api.scryfall.com/cards/teoc/2/en?format=image");
             put("EOC/Thopter", "https://api.scryfall.com/cards/teoc/16/en?format=image");
 
             // JVC
