@@ -52,6 +52,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Bioengineered Future", 172, Rarity.RARE, mage.cards.b.BioengineeredFuture.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bioengineered Future", 340, Rarity.RARE, mage.cards.b.BioengineeredFuture.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Biomechan Engineer", 213, Rarity.UNCOMMON, mage.cards.b.BiomechanEngineer.class));
+        cards.add(new SetCardInfo("Biosynthic Burst", 173, Rarity.COMMON, mage.cards.b.BiosynthicBurst.class));
         cards.add(new SetCardInfo("Biotech Specialist", 214, Rarity.RARE, mage.cards.b.BiotechSpecialist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Biotech Specialist", 347, Rarity.RARE, mage.cards.b.BiotechSpecialist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Blade of the Swarm", 90, Rarity.UNCOMMON, mage.cards.b.BladeOfTheSwarm.class));
