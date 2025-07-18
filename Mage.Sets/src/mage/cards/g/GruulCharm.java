@@ -1,6 +1,5 @@
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.combat.CantBlockAllEffect;
@@ -12,29 +11,28 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class GruulCharm extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures without flying");
     private static final FilterPermanent filter2 = new FilterPermanent("permanents you own");
-    private static final FilterCreaturePermanent filter3 = new FilterCreaturePermanent("creature with flying");
 
     static {
         filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
         filter2.add(TargetController.YOU.getOwnerPredicate());
-        filter3.add(new AbilityPredicate(FlyingAbility.class));
     }
 
     public GruulCharm(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}{G}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}{G}");
 
         // Choose one - Creatures without flying can't block this turn;
         this.getSpellAbility().addEffect(new CantBlockAllEffect(filter, Duration.EndOfTurn));
@@ -43,7 +41,7 @@ public final class GruulCharm extends CardImpl {
         this.getSpellAbility().addMode(new Mode(new GainControlAllEffect(Duration.Custom, filter2)));
 
         // or Gruul Charm deals 3 damage to each creature with flying.
-        this.getSpellAbility().addMode(new Mode(new DamageAllEffect(3, filter3)));
+        this.getSpellAbility().addMode(new Mode(new DamageAllEffect(3, StaticFilters.FILTER_CREATURE_FLYING)));
     }
 
     private GruulCharm(final GruulCharm card) {

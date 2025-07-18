@@ -1,6 +1,7 @@
 package mage.filter;
 
 import mage.ObjectColor;
+import mage.abilities.keyword.FlyingAbility;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.*;
@@ -1157,6 +1158,13 @@ public final class StaticFilters {
     static {
         FILTER_CREATURES_NON_TOKEN.add(TokenPredicate.FALSE);
         FILTER_CREATURES_NON_TOKEN.setLockedFilter(true);
+    }
+
+    public static final FilterCreaturePermanent FILTER_CREATURE_FLYING = new FilterCreaturePermanent("creature with flying");
+
+    static {
+        FILTER_CREATURE_FLYING.add(new AbilityPredicate(FlyingAbility.class));
+        FILTER_CREATURE_FLYING.setLockedFilter(true);
     }
 
     public static final FilterControlledCreaturePermanent FILTER_A_CONTROLLED_CREATURE_P1P1 = new FilterControlledCreaturePermanent("a creature you control with a +1/+1 counter on it");
