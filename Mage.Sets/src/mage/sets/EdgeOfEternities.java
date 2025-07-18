@@ -60,6 +60,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Breeding Pool", 251, Rarity.RARE, mage.cards.b.BreedingPool.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Breeding Pool", 278, Rarity.RARE, mage.cards.b.BreedingPool.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Breeding Pool", 373, Rarity.RARE, mage.cards.b.BreedingPool.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Brightspear Zealot", 8, Rarity.COMMON, mage.cards.b.BrightspearZealot.class));
         cards.add(new SetCardInfo("Broodguard Elite", 175, Rarity.UNCOMMON, mage.cards.b.BroodguardElite.class));
         cards.add(new SetCardInfo("Bygone Colossus", 235, Rarity.UNCOMMON, mage.cards.b.BygoneColossus.class));
         cards.add(new SetCardInfo("Cerebral Download", 48, Rarity.UNCOMMON, mage.cards.c.CerebralDownload.class));
