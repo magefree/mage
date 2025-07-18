@@ -7,6 +7,7 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 
 import java.util.UUID;
@@ -23,6 +24,7 @@ public final class DiplomaticRelations extends CardImpl {
         this.getSpellAbility().addEffect(new BoostTargetEffect(1, 0));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(VigilanceAbility.getInstance())
                 .setText("and gains vigilance until end of turn"));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new DamageWithPowerFromOneToAnotherTargetEffect("it"));
         this.getSpellAbility().addTarget(new TargetOpponentsCreaturePermanent());
     }
