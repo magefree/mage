@@ -250,6 +250,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Singularity Rupture", 228, Rarity.RARE, mage.cards.s.SingularityRupture.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Singularity Rupture", 350, Rarity.RARE, mage.cards.s.SingularityRupture.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Singularity Rupture", 398, Rarity.RARE, mage.cards.s.SingularityRupture.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Slagdrill Scrapper", 160, Rarity.COMMON, mage.cards.s.SlagdrillScrapper.class));
         cards.add(new SetCardInfo("Sledge-Class Seedship", 208, Rarity.RARE, mage.cards.s.SledgeClassSeedship.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sledge-Class Seedship", 346, Rarity.RARE, mage.cards.s.SledgeClassSeedship.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sothera, the Supervoid", 115, Rarity.MYTHIC, mage.cards.s.SotheraTheSupervoid.class, NON_FULL_USE_VARIOUS));
