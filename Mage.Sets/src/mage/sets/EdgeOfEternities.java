@@ -93,6 +93,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Devastating Onslaught", 132, Rarity.MYTHIC, mage.cards.d.DevastatingOnslaught.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Devastating Onslaught", 308, Rarity.MYTHIC, mage.cards.d.DevastatingOnslaught.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Devastating Onslaught", 361, Rarity.MYTHIC, mage.cards.d.DevastatingOnslaught.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Devastating Onslaught", 387, Rarity.MYTHIC, mage.cards.d.DevastatingOnslaught.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Diplomatic Relations", 177, Rarity.COMMON, mage.cards.d.DiplomaticRelations.class));
         cards.add(new SetCardInfo("Divert Disaster", 55, Rarity.COMMON, mage.cards.d.DivertDisaster.class));
         cards.add(new SetCardInfo("Dockworker Drone", 11, Rarity.COMMON, mage.cards.d.DockworkerDrone.class));
@@ -197,7 +198,8 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Lashwhip Predator", 195, Rarity.UNCOMMON, mage.cards.l.LashwhipPredator.class));
         cards.add(new SetCardInfo("Lightless Evangel", 109, Rarity.UNCOMMON, mage.cards.l.LightlessEvangel.class));
         cards.add(new SetCardInfo("Lithobraking", 142, Rarity.UNCOMMON, mage.cards.l.Lithobraking.class));
-        cards.add(new SetCardInfo("Loading Zone", 196, Rarity.RARE, mage.cards.l.LoadingZone.class));
+        cards.add(new SetCardInfo("Loading Zone", 196, Rarity.RARE, mage.cards.l.LoadingZone.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Loading Zone", 344, Rarity.RARE, mage.cards.l.LoadingZone.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lost in Space", 62, Rarity.COMMON, mage.cards.l.LostInSpace.class));
         cards.add(new SetCardInfo("Lumen-Class Frigate", 25, Rarity.RARE, mage.cards.l.LumenClassFrigate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lumen-Class Frigate", 321, Rarity.RARE, mage.cards.l.LumenClassFrigate.class, NON_FULL_USE_VARIOUS));
@@ -355,7 +357,8 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Tannuk, Memorial Ensign", 233, Rarity.UNCOMMON, mage.cards.t.TannukMemorialEnsign.class));
         cards.add(new SetCardInfo("Tapestry Warden", 209, Rarity.UNCOMMON, mage.cards.t.TapestryWarden.class));
         cards.add(new SetCardInfo("Temporal Intervention", 120, Rarity.COMMON, mage.cards.t.TemporalIntervention.class));
-        cards.add(new SetCardInfo("Terminal Velocity", 338, Rarity.RARE, mage.cards.t.TerminalVelocity.class));
+        cards.add(new SetCardInfo("Terminal Velocity", 163, Rarity.RARE, mage.cards.t.TerminalVelocity.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Terminal Velocity", 338, Rarity.RARE, mage.cards.t.TerminalVelocity.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Terrapact Intimidator", 164, Rarity.UNCOMMON, mage.cards.t.TerrapactIntimidator.class));
         cards.add(new SetCardInfo("Terrasymbiosis", 210, Rarity.RARE, mage.cards.t.Terrasymbiosis.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Terrasymbiosis", 312, Rarity.RARE, mage.cards.t.Terrasymbiosis.class, NON_FULL_USE_VARIOUS));
