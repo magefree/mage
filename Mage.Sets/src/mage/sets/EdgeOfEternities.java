@@ -134,8 +134,8 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 371, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Frenzied Baloth", 183, Rarity.RARE, mage.cards.f.FrenziedBaloth.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Frenzied Baloth", 342, Rarity.RARE, mage.cards.f.FrenziedBaloth.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Full Bore", 135, Rarity.UNCOMMON, mage.cards.f.FullBore.class));
         cards.add(new SetCardInfo("Frontline War-Rager", 134, Rarity.COMMON, mage.cards.f.FrontlineWarRager.class));
+        cards.add(new SetCardInfo("Full Bore", 135, Rarity.UNCOMMON, mage.cards.f.FullBore.class));
         cards.add(new SetCardInfo("Fungal Colossus", 184, Rarity.COMMON, mage.cards.f.FungalColossus.class));
         cards.add(new SetCardInfo("Galactic Wayfarer", 185, Rarity.COMMON, mage.cards.g.GalacticWayfarer.class));
         cards.add(new SetCardInfo("Galvanizing Sawship", 136, Rarity.UNCOMMON, mage.cards.g.GalvanizingSawship.class));
@@ -408,7 +408,6 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Wurmwall Sweeper", 249, Rarity.COMMON, mage.cards.w.WurmwallSweeper.class));
         cards.add(new SetCardInfo("Xu-Ifit, Osteoharmonist", 127, Rarity.RARE, mage.cards.x.XuIfitOsteoharmonist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Xu-Ifit, Osteoharmonist", 294, Rarity.RARE, mage.cards.x.XuIfitOsteoharmonist.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Zero Point Ballad", 335, Rarity.RARE, mage.cards.z.ZeroPointBallad.class));
         cards.add(new SetCardInfo("Zealous Display", 45, Rarity.COMMON, mage.cards.z.ZealousDisplay.class));
         cards.add(new SetCardInfo("Zero Point Ballad", 128, Rarity.RARE, mage.cards.z.ZeroPointBallad.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Zero Point Ballad", 335, Rarity.RARE, mage.cards.z.ZeroPointBallad.class, NON_FULL_USE_VARIOUS));
