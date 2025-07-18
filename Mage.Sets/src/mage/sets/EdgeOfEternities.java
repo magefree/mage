@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class EdgeOfEternities extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("All-Fates Stalker", "Anticausal Vestige", "Astelli Reclaimer", "Broodguard Elite", "Bygone Colossus", "Codecracker Hound", "Drix Fatemaker", "Eusocial Engineering", "Exalted Sunborn", "Haliya, Guided by Light", "Loading Zone", "Mechanozoa", "Memorial Team Leader", "Mightform Harmonizer", "Nova Hellkite", "Pinnacle Emissary", "Possibility Technician", "Quantum Riddler", "Rayblade Trooper", "Red Tiger Mechan", "Starbreach Whale", "Starfield Shepherd", "Starfield Vocalist", "Starwinder", "Timeline Culler", "Weftstalker Ardent");
+    private static final List<String> unfinished = Arrays.asList("All-Fates Stalker", "Anticausal Vestige", "Astelli Reclaimer", "Broodguard Elite", "Bygone Colossus", "Codecracker Hound", "Drix Fatemaker", "Eusocial Engineering", "Exalted Sunborn", "Germinating Wurm", "Haliya, Guided by Light", "Knight Luminary", "Loading Zone", "Mechanozoa", "Memorial Team Leader", "Mightform Harmonizer", "Nova Hellkite", "Perigee Beckoner", "Pinnacle Emissary", "Possibility Technician", "Quantum Riddler", "Rayblade Trooper", "Red Tiger Mechan", "Sinister Cryologist", "Starbreach Whale", "Starfield Shepherd", "Starfield Vocalist", "Starwinder", "Susurian Voidborn", "Timeline Culler", "Weftblade Enhancer", "Weftstalker Ardent");
     private static final EdgeOfEternities instance = new EdgeOfEternities();
 
     public static EdgeOfEternities getInstance() {
@@ -44,7 +44,9 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Astelli Reclaimer", 4, Rarity.RARE, mage.cards.a.AstelliReclaimer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Atmospheric Greenhouse", 171, Rarity.UNCOMMON, mage.cards.a.AtmosphericGreenhouse.class));
         cards.add(new SetCardInfo("Atomic Microsizer", 47, Rarity.UNCOMMON, mage.cards.a.AtomicMicrosizer.class));
+        cards.add(new SetCardInfo("Auxiliary Boosters", 5, Rarity.COMMON, mage.cards.a.AuxiliaryBoosters.class));
         cards.add(new SetCardInfo("Banishing Light", 6, Rarity.COMMON, mage.cards.b.BanishingLight.class));
+        cards.add(new SetCardInfo("Beamsaw Prospector", 89, Rarity.COMMON, mage.cards.b.BeamsawProspector.class));
         cards.add(new SetCardInfo("Beyond the Quiet", 303, Rarity.RARE, mage.cards.b.BeyondTheQuiet.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Beyond the Quiet", 7, Rarity.RARE, mage.cards.b.BeyondTheQuiet.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bioengineered Future", 172, Rarity.RARE, mage.cards.b.BioengineeredFuture.class, NON_FULL_USE_VARIOUS));
@@ -53,6 +55,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Biotech Specialist", 214, Rarity.RARE, mage.cards.b.BiotechSpecialist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Biotech Specialist", 347, Rarity.RARE, mage.cards.b.BiotechSpecialist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Blade of the Swarm", 90, Rarity.UNCOMMON, mage.cards.b.BladeOfTheSwarm.class));
+        cards.add(new SetCardInfo("Bombard", 129, Rarity.COMMON, mage.cards.b.Bombard.class));
         cards.add(new SetCardInfo("Breeding Pool", 251, Rarity.RARE, mage.cards.b.BreedingPool.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Breeding Pool", 278, Rarity.RARE, mage.cards.b.BreedingPool.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Breeding Pool", 373, Rarity.RARE, mage.cards.b.BreedingPool.class, NON_FULL_USE_VARIOUS));
@@ -62,6 +65,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Chorale of the Void", 331, Rarity.RARE, mage.cards.c.ChoraleOfTheVoid.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chorale of the Void", 91, Rarity.RARE, mage.cards.c.ChoraleOfTheVoid.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chrome Companion", 236, Rarity.COMMON, mage.cards.c.ChromeCompanion.class));
+        cards.add(new SetCardInfo("Cloudsculpt Technician", 49, Rarity.COMMON, mage.cards.c.CloudsculptTechnician.class));
         cards.add(new SetCardInfo("Codecracker Hound", 50, Rarity.UNCOMMON, mage.cards.c.CodecrackerHound.class));
         cards.add(new SetCardInfo("Command Bridge", 252, Rarity.COMMON, mage.cards.c.CommandBridge.class));
         cards.add(new SetCardInfo("Consult the Star Charts", 325, Rarity.RARE, mage.cards.c.ConsultTheStarCharts.class, NON_FULL_USE_VARIOUS));
@@ -71,17 +75,22 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Cosmogrand Zenith", 304, Rarity.MYTHIC, mage.cards.c.CosmograndZenith.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cosmogrand Zenith", 9, Rarity.MYTHIC, mage.cards.c.CosmograndZenith.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cryogen Relic", 52, Rarity.COMMON, mage.cards.c.CryogenRelic.class));
+        cards.add(new SetCardInfo("Cryoshatter", 53, Rarity.COMMON, mage.cards.c.Cryoshatter.class));
         cards.add(new SetCardInfo("Cut Propulsion", 130, Rarity.UNCOMMON, mage.cards.c.CutPropulsion.class));
         cards.add(new SetCardInfo("Dauntless Scrapbot", 237, Rarity.UNCOMMON, mage.cards.d.DauntlessScrapbot.class));
         cards.add(new SetCardInfo("Dawnsire, Sunstar Dreadnought", 238, Rarity.MYTHIC, mage.cards.d.DawnsireSunstarDreadnought.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dawnsire, Sunstar Dreadnought", 351, Rarity.MYTHIC, mage.cards.d.DawnsireSunstarDreadnought.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Dawnstrike Vanguard", 10, Rarity.UNCOMMON, mage.cards.d.DawnstrikeVanguard.class));
         cards.add(new SetCardInfo("Debris Field Crusher", 131, Rarity.UNCOMMON, mage.cards.d.DebrisFieldCrusher.class));
         cards.add(new SetCardInfo("Decode Transmissions", 94, Rarity.COMMON, mage.cards.d.DecodeTransmissions.class));
         cards.add(new SetCardInfo("Desculpting Blast", 54, Rarity.UNCOMMON, mage.cards.d.DesculptingBlast.class));
         cards.add(new SetCardInfo("Devastating Onslaught", 132, Rarity.MYTHIC, mage.cards.d.DevastatingOnslaught.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Devastating Onslaught", 308, Rarity.MYTHIC, mage.cards.d.DevastatingOnslaught.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Devastating Onslaught", 361, Rarity.MYTHIC, mage.cards.d.DevastatingOnslaught.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Divert Disaster", 55, Rarity.COMMON, mage.cards.d.DivertDisaster.class));
+        cards.add(new SetCardInfo("Drill Too Deep", 133, Rarity.COMMON, mage.cards.d.DrillTooDeep.class));
         cards.add(new SetCardInfo("Drix Fatemaker", 178, Rarity.COMMON, mage.cards.d.DrixFatemaker.class));
+        cards.add(new SetCardInfo("Dual-Sun Adepts", 12, Rarity.UNCOMMON, mage.cards.d.DualSunAdepts.class));
         cards.add(new SetCardInfo("Dual-Sun Technique", 13, Rarity.UNCOMMON, mage.cards.d.DualSunTechnique.class));
         cards.add(new SetCardInfo("Dubious Delicacy", 96, Rarity.UNCOMMON, mage.cards.d.DubiousDelicacy.class));
         cards.add(new SetCardInfo("Dyadrine, Synthesis Amalgam", 216, Rarity.RARE, mage.cards.d.DyadrineSynthesisAmalgam.class, NON_FULL_USE_VARIOUS));
@@ -110,6 +119,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Famished Worldsire", 182, Rarity.MYTHIC, mage.cards.f.FamishedWorldsire.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Famished Worldsire", 341, Rarity.MYTHIC, mage.cards.f.FamishedWorldsire.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fell Gravship", 101, Rarity.UNCOMMON, mage.cards.f.FellGravship.class));
+        cards.add(new SetCardInfo("Flight-Deck Coordinator", 17, Rarity.COMMON, mage.cards.f.FlightDeckCoordinator.class));
         cards.add(new SetCardInfo("Focus Fire", 18, Rarity.COMMON, mage.cards.f.FocusFire.class));
         cards.add(new SetCardInfo("Forest", 266, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", 275, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
@@ -117,6 +127,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 371, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Frenzied Baloth", 183, Rarity.RARE, mage.cards.f.FrenziedBaloth.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Frenzied Baloth", 342, Rarity.RARE, mage.cards.f.FrenziedBaloth.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Frontline War-Rager", 134, Rarity.COMMON, mage.cards.f.FrontlineWarRager.class));
         cards.add(new SetCardInfo("Fungal Colossus", 184, Rarity.COMMON, mage.cards.f.FungalColossus.class));
         cards.add(new SetCardInfo("Galactic Wayfarer", 185, Rarity.COMMON, mage.cards.g.GalacticWayfarer.class));
         cards.add(new SetCardInfo("Galvanizing Sawship", 136, Rarity.UNCOMMON, mage.cards.g.GalvanizingSawship.class));
@@ -129,6 +140,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Godless Shrine", 280, Rarity.RARE, mage.cards.g.GodlessShrine.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Godless Shrine", 375, Rarity.RARE, mage.cards.g.GodlessShrine.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gravkill", 103, Rarity.COMMON, mage.cards.g.Gravkill.class));
+        cards.add(new SetCardInfo("Gravpack Monoist", 104, Rarity.COMMON, mage.cards.g.GravpackMonoist.class));
         cards.add(new SetCardInfo("Haliya, Ascendant Cadet", 218, Rarity.UNCOMMON, mage.cards.h.HaliyaAscendantCadet.class));
         cards.add(new SetCardInfo("Haliya, Guided by Light", 19, Rarity.RARE, mage.cards.h.HaliyaGuidedByLight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Haliya, Guided by Light", 289, Rarity.RARE, mage.cards.h.HaliyaGuidedByLight.class, NON_FULL_USE_VARIOUS));
@@ -144,8 +156,11 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Icetill Explorer", 192, Rarity.RARE, mage.cards.i.IcetillExplorer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Icetill Explorer", 343, Rarity.RARE, mage.cards.i.IcetillExplorer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Icetill Explorer", 362, Rarity.MYTHIC, mage.cards.i.IcetillExplorer.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Icetill Explorer", 388, Rarity.RARE, mage.cards.i.IcetillExplorer.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Icetill Explorer", 388, Rarity.MYTHIC, mage.cards.i.IcetillExplorer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Illvoi Galeblade", 58, Rarity.COMMON, mage.cards.i.IllvoiGaleblade.class));
+        cards.add(new SetCardInfo("Illvoi Infiltrator", 59, Rarity.UNCOMMON, mage.cards.i.IllvoiInfiltrator.class));
+        cards.add(new SetCardInfo("Illvoi Light Jammer", 60, Rarity.COMMON, mage.cards.i.IllvoiLightJammer.class));
+        cards.add(new SetCardInfo("Illvoi Operative", 61, Rarity.COMMON, mage.cards.i.IllvoiOperative.class));
         cards.add(new SetCardInfo("Infinite Guideline Station", 219, Rarity.RARE, mage.cards.i.InfiniteGuidelineStation.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Infinite Guideline Station", 348, Rarity.RARE, mage.cards.i.InfiniteGuidelineStation.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Insatiable Skittermaw", 108, Rarity.COMMON, mage.cards.i.InsatiableSkittermaw.class));
@@ -158,30 +173,38 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Kav Landseeker", 138, Rarity.COMMON, mage.cards.k.KavLandseeker.class));
         cards.add(new SetCardInfo("Kavaron Harrier", 139, Rarity.UNCOMMON, mage.cards.k.KavaronHarrier.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kavaron Harrier", 396, Rarity.UNCOMMON, mage.cards.k.KavaronHarrier.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kavaron Skywarden", 140, Rarity.COMMON, mage.cards.k.KavaronSkywarden.class));
+        cards.add(new SetCardInfo("Kavaron Turbodrone", 141, Rarity.COMMON, mage.cards.k.KavaronTurbodrone.class));
         cards.add(new SetCardInfo("Kavaron, Memorial World", 255, Rarity.MYTHIC, mage.cards.k.KavaronMemorialWorld.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kavaron, Memorial World", 281, Rarity.MYTHIC, mage.cards.k.KavaronMemorialWorld.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kavaron, Memorial World", 376, Rarity.MYTHIC, mage.cards.k.KavaronMemorialWorld.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Knight Luminary", 23, Rarity.COMMON, mage.cards.k.KnightLuminary.class));
         cards.add(new SetCardInfo("Larval Scoutlander", 194, Rarity.UNCOMMON, mage.cards.l.LarvalScoutlander.class));
         cards.add(new SetCardInfo("Lashwhip Predator", 195, Rarity.UNCOMMON, mage.cards.l.LashwhipPredator.class));
         cards.add(new SetCardInfo("Lightless Evangel", 109, Rarity.UNCOMMON, mage.cards.l.LightlessEvangel.class));
         cards.add(new SetCardInfo("Lithobraking", 142, Rarity.UNCOMMON, mage.cards.l.Lithobraking.class));
         cards.add(new SetCardInfo("Loading Zone", 196, Rarity.RARE, mage.cards.l.LoadingZone.class));
+        cards.add(new SetCardInfo("Lost in Space", 62, Rarity.COMMON, mage.cards.l.LostInSpace.class));
         cards.add(new SetCardInfo("Lumen-Class Frigate", 25, Rarity.RARE, mage.cards.l.LumenClassFrigate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lumen-Class Frigate", 321, Rarity.RARE, mage.cards.l.LumenClassFrigate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Luxknight Breacher", 26, Rarity.COMMON, mage.cards.l.LuxknightBreacher.class));
         cards.add(new SetCardInfo("Mechan Assembler", 63, Rarity.UNCOMMON, mage.cards.m.MechanAssembler.class));
         cards.add(new SetCardInfo("Mechan Navigator", 64, Rarity.UNCOMMON, mage.cards.m.MechanNavigator.class));
+        cards.add(new SetCardInfo("Mechan Shieldmate", 65, Rarity.COMMON, mage.cards.m.MechanShieldmate.class));
         cards.add(new SetCardInfo("Mechanozoa", 66, Rarity.COMMON, mage.cards.m.Mechanozoa.class));
         cards.add(new SetCardInfo("Melded Moxite", 143, Rarity.COMMON, mage.cards.m.MeldedMoxite.class));
         cards.add(new SetCardInfo("Meltstrider Eulogist", 197, Rarity.UNCOMMON, mage.cards.m.MeltstriderEulogist.class));
         cards.add(new SetCardInfo("Meltstrider's Resolve", 199, Rarity.UNCOMMON, mage.cards.m.MeltstridersResolve.class));
         cards.add(new SetCardInfo("Memorial Team Leader", 144, Rarity.UNCOMMON, mage.cards.m.MemorialTeamLeader.class));
+        cards.add(new SetCardInfo("Mental Modulation", 67, Rarity.COMMON, mage.cards.m.MentalModulation.class));
         cards.add(new SetCardInfo("Mightform Harmonizer", 200, Rarity.RARE, mage.cards.m.MightformHarmonizer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mightform Harmonizer", 297, Rarity.RARE, mage.cards.m.MightformHarmonizer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mm'menon, Uthros Exile", 221, Rarity.UNCOMMON, mage.cards.m.MmmenonUthrosExile.class));
         cards.add(new SetCardInfo("Mm'menon, the Right Hand", 290, Rarity.RARE, mage.cards.m.MmmenonTheRightHand.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mm'menon, the Right Hand", 68, Rarity.RARE, mage.cards.m.MmmenonTheRightHand.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Molecular Modifier", 146, Rarity.UNCOMMON, mage.cards.m.MolecularModifier.class));
         cards.add(new SetCardInfo("Monoist Circuit-Feeder", 110, Rarity.UNCOMMON, mage.cards.m.MonoistCircuitFeeder.class));
+        cards.add(new SetCardInfo("Monoist Sentry", 111, Rarity.UNCOMMON, mage.cards.m.MonoistSentry.class));
         cards.add(new SetCardInfo("Moonlit Meditation", 327, Rarity.RARE, mage.cards.m.MoonlitMeditation.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Moonlit Meditation", 69, Rarity.RARE, mage.cards.m.MoonlitMeditation.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 265, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
@@ -193,9 +216,13 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Mutinous Massacre", 314, Rarity.RARE, mage.cards.m.MutinousMassacre.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mutinous Massacre", 363, Rarity.MYTHIC, mage.cards.m.MutinousMassacre.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mutinous Massacre", 389, Rarity.MYTHIC, mage.cards.m.MutinousMassacre.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Nanoform Sentinel", 71, Rarity.COMMON, mage.cards.n.NanoformSentinel.class));
+        cards.add(new SetCardInfo("Nebula Dragon", 147, Rarity.COMMON, mage.cards.n.NebulaDragon.class));
         cards.add(new SetCardInfo("Nova Hellkite", 148, Rarity.RARE, mage.cards.n.NovaHellkite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nova Hellkite", 309, Rarity.RARE, mage.cards.n.NovaHellkite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nutrient Block", 243, Rarity.COMMON, mage.cards.n.NutrientBlock.class));
+        cards.add(new SetCardInfo("Orbital Plunge", 149, Rarity.COMMON, mage.cards.o.OrbitalPlunge.class));
+        cards.add(new SetCardInfo("Oreplate Pangolin", 150, Rarity.COMMON, mage.cards.o.OreplatePangolin.class));
         cards.add(new SetCardInfo("Ouroboroid", 201, Rarity.MYTHIC, mage.cards.o.Ouroboroid.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ouroboroid", 345, Rarity.MYTHIC, mage.cards.o.Ouroboroid.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Pain for All", 151, Rarity.RARE, mage.cards.p.PainForAll.class, NON_FULL_USE_VARIOUS));
@@ -212,7 +239,8 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Plasma Bolt", 152, Rarity.COMMON, mage.cards.p.PlasmaBolt.class));
         cards.add(new SetCardInfo("Possibility Technician", 153, Rarity.RARE, mage.cards.p.PossibilityTechnician.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Possibility Technician", 295, Rarity.RARE, mage.cards.p.PossibilityTechnician.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Pull Through the Weft", 202, Rarity.UNCOMMON, mage.cards.p.PullThroughTheWeft.class));
+        cards.add(new SetCardInfo("Pull Through the Weft", 202, Rarity.UNCOMMON, mage.cards.p.PullThroughTheWeft.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Pull Through the Weft", 397, Rarity.UNCOMMON, mage.cards.p.PullThroughTheWeft.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Pulsar Squadron Ace", 28, Rarity.UNCOMMON, mage.cards.p.PulsarSquadronAce.class));
         cards.add(new SetCardInfo("Quantum Riddler", 305, Rarity.MYTHIC, mage.cards.q.QuantumRiddler.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Quantum Riddler", 72, Rarity.MYTHIC, mage.cards.q.QuantumRiddler.class, NON_FULL_USE_VARIOUS));
@@ -226,6 +254,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Requiem Monolith", 333, Rarity.RARE, mage.cards.r.RequiemMonolith.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Reroute Systems", 31, Rarity.UNCOMMON, mage.cards.r.RerouteSystems.class));
         cards.add(new SetCardInfo("Rescue Skiff", 32, Rarity.UNCOMMON, mage.cards.r.RescueSkiff.class));
+        cards.add(new SetCardInfo("Rig for War", 156, Rarity.COMMON, mage.cards.r.RigForWar.class));
         cards.add(new SetCardInfo("Roving Actuator", 157, Rarity.UNCOMMON, mage.cards.r.RovingActuator.class));
         cards.add(new SetCardInfo("Ruinous Rampage", 158, Rarity.UNCOMMON, mage.cards.r.RuinousRampage.class));
         cards.add(new SetCardInfo("Rust Harvester", 159, Rarity.RARE, mage.cards.r.RustHarvester.class, NON_FULL_USE_VARIOUS));
@@ -237,17 +266,22 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Sami, Ship's Engineer", 225, Rarity.UNCOMMON, mage.cards.s.SamiShipsEngineer.class));
         cards.add(new SetCardInfo("Sami, Wildcat Captain", 226, Rarity.MYTHIC, mage.cards.s.SamiWildcatCaptain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sami, Wildcat Captain", 301, Rarity.MYTHIC, mage.cards.s.SamiWildcatCaptain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Scour for Scrap", 73, Rarity.UNCOMMON, mage.cards.s.ScourForScrap.class));
         cards.add(new SetCardInfo("Scout for Survivors", 33, Rarity.UNCOMMON, mage.cards.s.ScoutForSurvivors.class));
+        cards.add(new SetCardInfo("Seam Rip", 34, Rarity.UNCOMMON, mage.cards.s.SeamRip.class));
         cards.add(new SetCardInfo("Secluded Starforge", 257, Rarity.RARE, mage.cards.s.SecludedStarforge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Secluded Starforge", 316, Rarity.RARE, mage.cards.s.SecludedStarforge.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Secluded Starforge", 366, Rarity.RARE, mage.cards.s.SecludedStarforge.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Secluded Starforge", 366, Rarity.MYTHIC, mage.cards.s.SecludedStarforge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Secluded Starforge", 392, Rarity.MYTHIC, mage.cards.s.SecludedStarforge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Seedship Broodtender", 227, Rarity.UNCOMMON, mage.cards.s.SeedshipBroodtender.class));
         cards.add(new SetCardInfo("Seedship Impact", 205, Rarity.UNCOMMON, mage.cards.s.SeedshipImpact.class));
+        cards.add(new SetCardInfo("Selfcraft Mechan", 74, Rarity.COMMON, mage.cards.s.SelfcraftMechan.class));
         cards.add(new SetCardInfo("Shattered Wings", 206, Rarity.COMMON, mage.cards.s.ShatteredWings.class));
         cards.add(new SetCardInfo("Singularity Rupture", 228, Rarity.RARE, mage.cards.s.SingularityRupture.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Singularity Rupture", 350, Rarity.RARE, mage.cards.s.SingularityRupture.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Singularity Rupture", 398, Rarity.RARE, mage.cards.s.SingularityRupture.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sinister Cryologist", 75, Rarity.COMMON, mage.cards.s.SinisterCryologist.class));
+        cards.add(new SetCardInfo("Slagdrill Scrapper", 160, Rarity.COMMON, mage.cards.s.SlagdrillScrapper.class));
         cards.add(new SetCardInfo("Sledge-Class Seedship", 208, Rarity.RARE, mage.cards.s.SledgeClassSeedship.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sledge-Class Seedship", 346, Rarity.RARE, mage.cards.s.SledgeClassSeedship.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sothera, the Supervoid", 115, Rarity.MYTHIC, mage.cards.s.SotheraTheSupervoid.class, NON_FULL_USE_VARIOUS));
@@ -257,6 +291,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Space-Time Anomaly", 229, Rarity.RARE, mage.cards.s.SpaceTimeAnomaly.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Space-Time Anomaly", 315, Rarity.RARE, mage.cards.s.SpaceTimeAnomaly.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Specimen Freighter", 76, Rarity.UNCOMMON, mage.cards.s.SpecimenFreighter.class));
+        cards.add(new SetCardInfo("Squire's Lightblade", 36, Rarity.COMMON, mage.cards.s.SquiresLightblade.class));
         cards.add(new SetCardInfo("Starbreach Whale", 77, Rarity.COMMON, mage.cards.s.StarbreachWhale.class));
         cards.add(new SetCardInfo("Starfield Shepherd", 37, Rarity.UNCOMMON, mage.cards.s.StarfieldShepherd.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Starfield Shepherd", 393, Rarity.UNCOMMON, mage.cards.s.StarfieldShepherd.class, NON_FULL_USE_VARIOUS));
@@ -278,6 +313,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Sunstar Chaplain", 324, Rarity.RARE, mage.cards.s.SunstarChaplain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sunstar Chaplain", 40, Rarity.RARE, mage.cards.s.SunstarChaplain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sunstar Expansionist", 41, Rarity.UNCOMMON, mage.cards.s.SunstarExpansionist.class));
+        cards.add(new SetCardInfo("Sunstar Lightsmith", 42, Rarity.UNCOMMON, mage.cards.s.SunstarLightsmith.class));
         cards.add(new SetCardInfo("Survey Mechan", 245, Rarity.UNCOMMON, mage.cards.s.SurveyMechan.class));
         cards.add(new SetCardInfo("Susur Secundi, Void Altar", 259, Rarity.MYTHIC, mage.cards.s.SusurSecundiVoidAltar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Susur Secundi, Void Altar", 284, Rarity.MYTHIC, mage.cards.s.SusurSecundiVoidAltar.class, NON_FULL_USE_VARIOUS));
@@ -299,6 +335,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Terrapact Intimidator", 164, Rarity.UNCOMMON, mage.cards.t.TerrapactIntimidator.class));
         cards.add(new SetCardInfo("Terrasymbiosis", 210, Rarity.RARE, mage.cards.t.Terrasymbiosis.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Terrasymbiosis", 312, Rarity.RARE, mage.cards.t.Terrasymbiosis.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Territorial Bruntar", 165, Rarity.UNCOMMON, mage.cards.t.TerritorialBruntar.class));
         cards.add(new SetCardInfo("Tezzeret, Cruel Captain", 2, Rarity.MYTHIC, mage.cards.t.TezzeretCruelCaptain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tezzeret, Cruel Captain", 287, Rarity.MYTHIC, mage.cards.t.TezzeretCruelCaptain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Dominion Bracelet", 239, Rarity.MYTHIC, mage.cards.t.TheDominionBracelet.class, NON_FULL_USE_VARIOUS));
@@ -325,9 +362,11 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Uthros, Titanic Godcore", 260, Rarity.MYTHIC, mage.cards.u.UthrosTitanicGodcore.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Uthros, Titanic Godcore", 285, Rarity.MYTHIC, mage.cards.u.UthrosTitanicGodcore.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Uthros, Titanic Godcore", 380, Rarity.MYTHIC, mage.cards.u.UthrosTitanicGodcore.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vaultguard Trooper", 166, Rarity.UNCOMMON, mage.cards.v.VaultguardTrooper.class));
         cards.add(new SetCardInfo("Virulent Silencer", 248, Rarity.UNCOMMON, mage.cards.v.VirulentSilencer.class));
         cards.add(new SetCardInfo("Virus Beetle", 124, Rarity.COMMON, mage.cards.v.VirusBeetle.class));
         cards.add(new SetCardInfo("Voidforged Titan", 125, Rarity.UNCOMMON, mage.cards.v.VoidforgedTitan.class));
+        cards.add(new SetCardInfo("Vote Out", 126, Rarity.UNCOMMON, mage.cards.v.VoteOut.class));
         cards.add(new SetCardInfo("Warmaker Gunship", 167, Rarity.RARE, mage.cards.w.WarmakerGunship.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Warmaker Gunship", 339, Rarity.RARE, mage.cards.w.WarmakerGunship.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Watery Grave", 261, Rarity.RARE, mage.cards.w.WateryGrave.class, NON_FULL_USE_VARIOUS));
@@ -336,13 +375,17 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Weapons Manufacturing", 168, Rarity.RARE, mage.cards.w.WeaponsManufacturing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Weapons Manufacturing", 311, Rarity.RARE, mage.cards.w.WeaponsManufacturing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wedgelight Rammer", 43, Rarity.UNCOMMON, mage.cards.w.WedgelightRammer.class));
+        cards.add(new SetCardInfo("Weftblade Enhancer", 44, Rarity.COMMON, mage.cards.w.WeftbladeEnhancer.class));
         cards.add(new SetCardInfo("Weftstalker Ardent", 169, Rarity.UNCOMMON, mage.cards.w.WeftstalkerArdent.class));
         cards.add(new SetCardInfo("Weftwalking", 330, Rarity.MYTHIC, mage.cards.w.Weftwalking.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Weftwalking", 86, Rarity.MYTHIC, mage.cards.w.Weftwalking.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wurmwall Sweeper", 249, Rarity.COMMON, mage.cards.w.WurmwallSweeper.class));
         cards.add(new SetCardInfo("Xu-Ifit, Osteoharmonist", 127, Rarity.RARE, mage.cards.x.XuIfitOsteoharmonist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Xu-Ifit, Osteoharmonist", 294, Rarity.RARE, mage.cards.x.XuIfitOsteoharmonist.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Zero Point Ballad", 335, Rarity.RARE, mage.cards.z.ZeroPointBallad.class));
+        cards.add(new SetCardInfo("Zealous Display", 45, Rarity.COMMON, mage.cards.z.ZealousDisplay.class));
+        cards.add(new SetCardInfo("Zero Point Ballad", 128, Rarity.RARE, mage.cards.z.ZeroPointBallad.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Zero Point Ballad", 335, Rarity.RARE, mage.cards.z.ZeroPointBallad.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Zookeeper Mechan", 170, Rarity.COMMON, mage.cards.z.ZookeeperMechan.class));
 
         cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName()));
     }
