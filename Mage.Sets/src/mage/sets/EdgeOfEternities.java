@@ -198,6 +198,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Nova Hellkite", 148, Rarity.RARE, mage.cards.n.NovaHellkite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nova Hellkite", 309, Rarity.RARE, mage.cards.n.NovaHellkite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nutrient Block", 243, Rarity.COMMON, mage.cards.n.NutrientBlock.class));
+        cards.add(new SetCardInfo("Oreplate Pangolin", 150, Rarity.COMMON, mage.cards.o.OreplatePangolin.class));
         cards.add(new SetCardInfo("Ouroboroid", 201, Rarity.MYTHIC, mage.cards.o.Ouroboroid.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ouroboroid", 345, Rarity.MYTHIC, mage.cards.o.Ouroboroid.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Pain for All", 151, Rarity.RARE, mage.cards.p.PainForAll.class, NON_FULL_USE_VARIOUS));
