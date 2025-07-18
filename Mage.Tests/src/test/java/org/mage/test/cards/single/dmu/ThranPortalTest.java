@@ -5,8 +5,6 @@ import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
-import java.lang.annotation.Target;
-
 /**
  * {@link mage.cards.t.ThranPortal Thran Portal}
  * Land Gate
