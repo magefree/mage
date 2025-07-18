@@ -327,6 +327,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Uthros, Titanic Godcore", 260, Rarity.MYTHIC, mage.cards.u.UthrosTitanicGodcore.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Uthros, Titanic Godcore", 285, Rarity.MYTHIC, mage.cards.u.UthrosTitanicGodcore.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Uthros, Titanic Godcore", 380, Rarity.MYTHIC, mage.cards.u.UthrosTitanicGodcore.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vaultguard Trooper", 166, Rarity.UNCOMMON, mage.cards.v.VaultguardTrooper.class));
         cards.add(new SetCardInfo("Virulent Silencer", 248, Rarity.UNCOMMON, mage.cards.v.VirulentSilencer.class));
         cards.add(new SetCardInfo("Virus Beetle", 124, Rarity.COMMON, mage.cards.v.VirusBeetle.class));
         cards.add(new SetCardInfo("Voidforged Titan", 125, Rarity.UNCOMMON, mage.cards.v.VoidforgedTitan.class));
