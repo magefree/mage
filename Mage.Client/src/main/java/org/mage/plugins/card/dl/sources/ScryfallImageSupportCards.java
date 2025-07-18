@@ -579,6 +579,7 @@ public class ScryfallImageSupportCards {
             add("J25"); // Foundations Jumpstart
             add("PIO"); // Pioneer Masters
             add("PW25"); // Wizards Play Network 2025
+            add("PSPL"); // Spotlight Series
             add("INR"); // Innistrad Remastered
             add("PF25"); // MagicFest 2025
             add("DFT"); // Aetherdrift
