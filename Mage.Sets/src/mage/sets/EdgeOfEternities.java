@@ -65,7 +65,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Chorale of the Void", 331, Rarity.RARE, mage.cards.c.ChoraleOfTheVoid.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chorale of the Void", 91, Rarity.RARE, mage.cards.c.ChoraleOfTheVoid.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chrome Companion", 236, Rarity.COMMON, mage.cards.c.ChromeCompanion.class));
-        cards.add(new SetCardInfo("Cloudsqculpt Technician", 49, Rarity.COMMON, mage.cards.c.CloudsculptTechnician.class));
+        cards.add(new SetCardInfo("Cloudsculpt Technician", 49, Rarity.COMMON, mage.cards.c.CloudsculptTechnician.class));
         cards.add(new SetCardInfo("Codecracker Hound", 50, Rarity.UNCOMMON, mage.cards.c.CodecrackerHound.class));
         cards.add(new SetCardInfo("Command Bridge", 252, Rarity.COMMON, mage.cards.c.CommandBridge.class));
         cards.add(new SetCardInfo("Consult the Star Charts", 325, Rarity.RARE, mage.cards.c.ConsultTheStarCharts.class, NON_FULL_USE_VARIOUS));
@@ -364,6 +364,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Virulent Silencer", 248, Rarity.UNCOMMON, mage.cards.v.VirulentSilencer.class));
         cards.add(new SetCardInfo("Virus Beetle", 124, Rarity.COMMON, mage.cards.v.VirusBeetle.class));
         cards.add(new SetCardInfo("Voidforged Titan", 125, Rarity.UNCOMMON, mage.cards.v.VoidforgedTitan.class));
+        cards.add(new SetCardInfo("Vote Out", 126, Rarity.UNCOMMON, mage.cards.v.VoteOut.class));
         cards.add(new SetCardInfo("Warmaker Gunship", 167, Rarity.RARE, mage.cards.w.WarmakerGunship.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Warmaker Gunship", 339, Rarity.RARE, mage.cards.w.WarmakerGunship.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Watery Grave", 261, Rarity.RARE, mage.cards.w.WateryGrave.class, NON_FULL_USE_VARIOUS));
