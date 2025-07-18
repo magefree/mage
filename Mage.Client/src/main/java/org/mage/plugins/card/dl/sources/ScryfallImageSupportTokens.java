@@ -2786,7 +2786,16 @@ public class ScryfallImageSupportTokens {
             put("FIC/Clue", "https://api.scryfall.com/cards/tfic/9/en?format=image");
 
             // EOE
-            put("EOE/Lander", "https://api.scryfall.com/cards/teoe/8/en?format=image");
+            put("EOE/Drone", "https://api.scryfall.com/cards/teoe/3?format=image");
+            put("EOE/Human Soldier", "https://api.scryfall.com/cards/teoe/2?format=image");
+            put("EOE/Lander/1", "https://api.scryfall.com/cards/teoe/4?format=image");
+            put("EOE/Lander/2", "https://api.scryfall.com/cards/teoe/5?format=image");
+            put("EOE/Lander/3", "https://api.scryfall.com/cards/teoe/6?format=image");
+            put("EOE/Lander/4", "https://api.scryfall.com/cards/teoe/7?format=image");
+            put("EOE/Lander/5", "https://api.scryfall.com/cards/teoe/8?format=image");
+            put("EOE/Munitions", "https://api.scryfall.com/cards/teoe/9?format=image");
+            put("EOE/Robot", "https://api.scryfall.com/cards/teoe/10?format=image");
+            put("EOE/Sliver", "https://api.scryfall.com/cards/teoe/1?format=image");
 
             // EOC
             put("EOC/Beast/1", "https://api.scryfall.com/cards/teoc/5/en?format=image");
