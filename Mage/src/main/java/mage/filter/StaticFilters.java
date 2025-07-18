@@ -412,6 +412,13 @@ public final class StaticFilters {
         FILTER_CONTROLLED_A_PERMANENT.setLockedFilter(true);
     }
 
+    public static final FilterControlledPermanent FILTER_CONTROLLED_UNTAPPED_PERMANENT = new FilterControlledPermanent("an untapped permanent you control");
+
+    static {
+        FILTER_CONTROLLED_UNTAPPED_PERMANENT.add(TappedPredicate.UNTAPPED);
+        FILTER_CONTROLLED_UNTAPPED_PERMANENT.setLockedFilter(true);
+    }
+
     public static final FilterControlledPermanent FILTER_CONTROLLED_ANOTHER_PERMANENT = new FilterControlledPermanent("another permanent you control");
 
     static {
