@@ -139,9 +139,9 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Fungal Colossus", 184, Rarity.COMMON, mage.cards.f.FungalColossus.class));
         cards.add(new SetCardInfo("Galactic Wayfarer", 185, Rarity.COMMON, mage.cards.g.GalacticWayfarer.class));
         cards.add(new SetCardInfo("Galvanizing Sawship", 136, Rarity.UNCOMMON, mage.cards.g.GalvanizingSawship.class));
+        cards.add(new SetCardInfo("Gene Pollinator", 186, Rarity.COMMON, mage.cards.g.GenePollinator.class));
         cards.add(new SetCardInfo("Genemorph Imago", 217, Rarity.RARE, mage.cards.g.GenemorphImago.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Genemorph Imago", 299, Rarity.RARE, mage.cards.g.GenemorphImago.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Gene Pollinator", 186, Rarity.COMMON, mage.cards.g.GenePollinator.class));
         cards.add(new SetCardInfo("Germinating Wurm", 187, Rarity.COMMON, mage.cards.g.GerminatingWurm.class));
         cards.add(new SetCardInfo("Gigastorm Titan", 57, Rarity.UNCOMMON, mage.cards.g.GigastormTitan.class));
         cards.add(new SetCardInfo("Glacier Godmaw", 188, Rarity.UNCOMMON, mage.cards.g.GlacierGodmaw.class));
@@ -333,6 +333,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Susur Secundi, Void Altar", 259, Rarity.MYTHIC, mage.cards.s.SusurSecundiVoidAltar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Susur Secundi, Void Altar", 284, Rarity.MYTHIC, mage.cards.s.SusurSecundiVoidAltar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Susur Secundi, Void Altar", 379, Rarity.MYTHIC, mage.cards.s.SusurSecundiVoidAltar.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Susurian Dirgecraft", 117, Rarity.UNCOMMON, mage.cards.s.SusurianDirgecraft.class));
         cards.add(new SetCardInfo("Susurian Voidborn", 118, Rarity.UNCOMMON, mage.cards.s.SusurianVoidborn.class));
         cards.add(new SetCardInfo("Swamp", 264, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 271, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
