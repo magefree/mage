@@ -113,6 +113,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Exalted Sunborn", 318, Rarity.MYTHIC, mage.cards.e.ExaltedSunborn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Exalted Sunborn", 358, Rarity.MYTHIC, mage.cards.e.ExaltedSunborn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Exalted Sunborn", 384, Rarity.MYTHIC, mage.cards.e.ExaltedSunborn.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Exosuit Savior", 16, Rarity.COMMON, mage.cards.e.ExosuitSavior.class));
         cards.add(new SetCardInfo("Extinguisher Battleship", 242, Rarity.RARE, mage.cards.e.ExtinguisherBattleship.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Extinguisher Battleship", 355, Rarity.RARE, mage.cards.e.ExtinguisherBattleship.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Faller's Faithful", 100, Rarity.UNCOMMON, mage.cards.f.FallersFaithful.class));
