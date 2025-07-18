@@ -265,6 +265,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Secluded Starforge", 392, Rarity.MYTHIC, mage.cards.s.SecludedStarforge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Seedship Broodtender", 227, Rarity.UNCOMMON, mage.cards.s.SeedshipBroodtender.class));
         cards.add(new SetCardInfo("Seedship Impact", 205, Rarity.UNCOMMON, mage.cards.s.SeedshipImpact.class));
+        cards.add(new SetCardInfo("Selfcraft Mechan", 74, Rarity.COMMON, mage.cards.s.SelfcraftMechan.class));
         cards.add(new SetCardInfo("Shattered Wings", 206, Rarity.COMMON, mage.cards.s.ShatteredWings.class));
         cards.add(new SetCardInfo("Singularity Rupture", 228, Rarity.RARE, mage.cards.s.SingularityRupture.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Singularity Rupture", 350, Rarity.RARE, mage.cards.s.SingularityRupture.class, NON_FULL_USE_VARIOUS));
