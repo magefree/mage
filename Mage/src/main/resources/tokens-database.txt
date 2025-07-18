@@ -2850,7 +2850,7 @@
 |Generate|TOK:EOE|Lander|5||LanderToken|
 |Generate|TOK:EOE|Munitions|||MunitionsToken|
 |Generate|TOK:EOE|Robot|||RobotToken|
-|Generate|TOK:EOE|Sliver|||SliverToken |
+|Generate|TOK:EOE|Sliver|||SliverToken|
 
 #EOC
 |Generate|TOK:EOC|Beast|1||BeastToken|
