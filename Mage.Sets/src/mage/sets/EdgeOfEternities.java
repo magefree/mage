@@ -183,6 +183,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Luxknight Breacher", 26, Rarity.COMMON, mage.cards.l.LuxknightBreacher.class));
         cards.add(new SetCardInfo("Mechan Assembler", 63, Rarity.UNCOMMON, mage.cards.m.MechanAssembler.class));
         cards.add(new SetCardInfo("Mechan Navigator", 64, Rarity.UNCOMMON, mage.cards.m.MechanNavigator.class));
+        cards.add(new SetCardInfo("Mechan Shieldmate", 65, Rarity.COMMON, mage.cards.m.MechanShieldmate.class));
         cards.add(new SetCardInfo("Mechanozoa", 66, Rarity.COMMON, mage.cards.m.Mechanozoa.class));
         cards.add(new SetCardInfo("Melded Moxite", 143, Rarity.COMMON, mage.cards.m.MeldedMoxite.class));
         cards.add(new SetCardInfo("Meltstrider Eulogist", 197, Rarity.UNCOMMON, mage.cards.m.MeltstriderEulogist.class));
