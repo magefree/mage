@@ -585,6 +585,7 @@ public class ScryfallImageSupportCards {
             add("PF25"); // MagicFest 2025
             add("DFT"); // Aetherdrift
             add("DRC"); // Aetherdrift Commander
+            add("PLG25"); // Love Your LGS 2025
             add("TDM"); // Tarkir: Dragonstorm
             add("TDC"); // Tarkir: Dragonstorm Commander
             add("FIN"); // Final Fantasy
