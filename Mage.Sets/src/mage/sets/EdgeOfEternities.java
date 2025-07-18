@@ -195,6 +195,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Mutinous Massacre", 314, Rarity.RARE, mage.cards.m.MutinousMassacre.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mutinous Massacre", 363, Rarity.MYTHIC, mage.cards.m.MutinousMassacre.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mutinous Massacre", 389, Rarity.MYTHIC, mage.cards.m.MutinousMassacre.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Nebula Dragon", 147, Rarity.COMMON, mage.cards.n.NebulaDragon.class));
         cards.add(new SetCardInfo("Nova Hellkite", 148, Rarity.RARE, mage.cards.n.NovaHellkite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nova Hellkite", 309, Rarity.RARE, mage.cards.n.NovaHellkite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nutrient Block", 243, Rarity.COMMON, mage.cards.n.NutrientBlock.class));
