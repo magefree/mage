@@ -301,6 +301,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Terrapact Intimidator", 164, Rarity.UNCOMMON, mage.cards.t.TerrapactIntimidator.class));
         cards.add(new SetCardInfo("Terrasymbiosis", 210, Rarity.RARE, mage.cards.t.Terrasymbiosis.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Terrasymbiosis", 312, Rarity.RARE, mage.cards.t.Terrasymbiosis.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Territorial Bruntar", 165, Rarity.UNCOMMON, mage.cards.t.TerritorialBruntar.class));
         cards.add(new SetCardInfo("Tezzeret, Cruel Captain", 2, Rarity.MYTHIC, mage.cards.t.TezzeretCruelCaptain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tezzeret, Cruel Captain", 287, Rarity.MYTHIC, mage.cards.t.TezzeretCruelCaptain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Dominion Bracelet", 239, Rarity.MYTHIC, mage.cards.t.TheDominionBracelet.class, NON_FULL_USE_VARIOUS));
