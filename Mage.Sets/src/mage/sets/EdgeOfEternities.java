@@ -319,6 +319,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Susur Secundi, Void Altar", 259, Rarity.MYTHIC, mage.cards.s.SusurSecundiVoidAltar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Susur Secundi, Void Altar", 284, Rarity.MYTHIC, mage.cards.s.SusurSecundiVoidAltar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Susur Secundi, Void Altar", 379, Rarity.MYTHIC, mage.cards.s.SusurSecundiVoidAltar.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Susurian Voidborn", 118, Rarity.UNCOMMON, mage.cards.s.SusurianVoidborn.class));
         cards.add(new SetCardInfo("Swamp", 264, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 271, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 272, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
