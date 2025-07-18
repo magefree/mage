@@ -8,8 +8,7 @@ import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.permanent.TappedPredicate;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -17,13 +16,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class CommandBridge extends CardImpl {
-
-    private static final FilterControlledPermanent filter
-            = new FilterControlledPermanent("an untapped permanent you control");
-
-    static {
-        filter.add(TappedPredicate.UNTAPPED);
-    }
 
     public CommandBridge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
@@ -33,7 +25,7 @@ public final class CommandBridge extends CardImpl {
 
         // When this land enters, sacrifice it unless you tap an untapped permanent you control.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new SacrificeSourceUnlessPaysEffect(new TapTargetCost(filter))
+                new SacrificeSourceUnlessPaysEffect(new TapTargetCost(StaticFilters.FILTER_CONTROLLED_UNTAPPED_PERMANENT))
         ));
 
         // {T}: Add one mana of any color.
