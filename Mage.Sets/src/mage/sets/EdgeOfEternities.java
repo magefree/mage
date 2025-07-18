@@ -160,6 +160,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Kav Landseeker", 138, Rarity.COMMON, mage.cards.k.KavLandseeker.class));
         cards.add(new SetCardInfo("Kavaron Harrier", 139, Rarity.UNCOMMON, mage.cards.k.KavaronHarrier.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kavaron Harrier", 396, Rarity.UNCOMMON, mage.cards.k.KavaronHarrier.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kavaron Turbodrone", 141, Rarity.COMMON, mage.cards.k.KavaronTurbodrone.class));
         cards.add(new SetCardInfo("Kavaron, Memorial World", 255, Rarity.MYTHIC, mage.cards.k.KavaronMemorialWorld.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kavaron, Memorial World", 281, Rarity.MYTHIC, mage.cards.k.KavaronMemorialWorld.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kavaron, Memorial World", 376, Rarity.MYTHIC, mage.cards.k.KavaronMemorialWorld.class, NON_FULL_USE_VARIOUS));
