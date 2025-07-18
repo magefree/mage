@@ -75,6 +75,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Dauntless Scrapbot", 237, Rarity.UNCOMMON, mage.cards.d.DauntlessScrapbot.class));
         cards.add(new SetCardInfo("Dawnsire, Sunstar Dreadnought", 238, Rarity.MYTHIC, mage.cards.d.DawnsireSunstarDreadnought.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dawnsire, Sunstar Dreadnought", 351, Rarity.MYTHIC, mage.cards.d.DawnsireSunstarDreadnought.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Dawnstrike Vanguard", 10, Rarity.UNCOMMON, mage.cards.d.DawnstrikeVanguard.class));
         cards.add(new SetCardInfo("Debris Field Crusher", 131, Rarity.UNCOMMON, mage.cards.d.DebrisFieldCrusher.class));
         cards.add(new SetCardInfo("Decode Transmissions", 94, Rarity.COMMON, mage.cards.d.DecodeTransmissions.class));
         cards.add(new SetCardInfo("Desculpting Blast", 54, Rarity.UNCOMMON, mage.cards.d.DesculptingBlast.class));
