@@ -163,7 +163,7 @@ public class AlaniaDivergentStormTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
-        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 10);
         addCard(Zone.HAND, playerA, "Faerie Guidemother"); // adventure card
         addCard(Zone.HAND, playerA, "Maximize Velocity");
         addCard(Zone.HAND, playerA, alania);
@@ -181,7 +181,7 @@ public class AlaniaDivergentStormTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        // Copied: Gift of the Fae, Not copied: Ancestral Recall
+        // Copied: Gift of the Fae, Not copied: Maximize Velocity
         assertPowerToughness(playerA, alania, 3 + 2*2 + 1, 5 + 2 + 1);
         assertAbility(playerA, alania, FlyingAbility.getInstance(), true);
         assertAbility(playerA, alania, HasteAbility.getInstance(), true);
