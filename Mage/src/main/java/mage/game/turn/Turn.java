@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.constants.PhaseStep;
 import mage.constants.TurnPhase;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.game.events.PhaseChangedEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
@@ -106,6 +107,8 @@ public class Turn implements Serializable {
         checkTurnIsControlledByOtherPlayer(game, activePlayer.getId());
 
         game.getPlayer(activePlayer.getId()).beginTurn(game);
+        GameEvent event = new GameEvent(GameEvent.EventType.BEGIN_TURN, null, null, activePlayer.getId());
+        game.fireEvent(event);
         for (Phase phase : phases) {
             if (game.isPaused() || game.checkIfGameIsOver()) {
                 return false;

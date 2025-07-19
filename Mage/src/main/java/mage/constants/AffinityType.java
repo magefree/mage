@@ -41,6 +41,7 @@ public enum AffinityType {
     LIZARDS(new FilterControlledPermanent(SubType.LIZARD, "Lizards")),
     BIRDS(new FilterControlledPermanent(SubType.BIRD, "Birds")),
     CITIZENS(new FilterControlledPermanent(SubType.CITIZEN, "Citizens")),
+    SLIVERS(new FilterControlledPermanent(SubType.SLIVER, "Slivers")),
     TOWNS(new FilterControlledPermanent(SubType.TOWN, "Towns")),
     GATES(new FilterControlledPermanent(SubType.GATE, "Gates"), GatesYouControlHint.instance),
     SNOW_LANDS(AffinityFilters.SNOW_LANDS),

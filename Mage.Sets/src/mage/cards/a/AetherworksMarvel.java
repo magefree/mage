@@ -35,7 +35,7 @@ public final class AetherworksMarvel extends CardImpl {
         this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(
                 new GetEnergyCountersControllerEffect(1), false,
                 StaticFilters.FILTER_CONTROLLED_A_PERMANENT, false
-        ));
+        ).setTriggerPhrase("Whenever a permanent you control is put into a graveyard, "));
 
         // {T}, Pay {E}{E}{E}{E}{E}{E}: Look at the top six cards of your library. 
         // You may cast a card from among them without paying its mana cost. 

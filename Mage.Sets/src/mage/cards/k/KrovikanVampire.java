@@ -126,7 +126,7 @@ class KrovikanVampireInterveningIfCondition implements Condition {
 
     @Override
     public String toString() {
-        return "if a creature dealt damage by Krovikan Vampire this turn died";
+        return "if a creature dealt damage by {this} this turn died";
     }
 }
 

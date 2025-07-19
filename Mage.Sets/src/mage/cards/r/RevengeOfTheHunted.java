@@ -25,7 +25,7 @@ public final class RevengeOfTheHunted extends CardImpl {
         // Until end of turn, target creature gets +6/+6 and gains trample, and all creatures able to block it this turn do so.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new BoostTargetEffect(6, 6, Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn).withTargetDescription("and"));
         Effect effect = new MustBeBlockedByAllTargetEffect(Duration.EndOfTurn);
         effect.setText("and all creatures able to block it this turn do so");
         this.getSpellAbility().addEffect(effect);

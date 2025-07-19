@@ -163,7 +163,7 @@ class GilgameshMasterAtArmsAttachEffect extends OneShotEffect {
                 break;
         }
         FilterPermanent filterPermanent = new FilterPermanent("Equipment");
-        filter.add(new PermanentReferenceInCollectionPredicate(permanents, game));
+        filterPermanent.add(new PermanentReferenceInCollectionPredicate(permanents, game));
         return Optional
                 .of(new TargetPermanent(0, 1, filterPermanent, true))
                 .map(t -> {

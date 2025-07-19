@@ -7,15 +7,12 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -24,12 +21,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class SunsetStrikemaster extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterCreaturePermanent("creature with flying");
-
-    static {
-        filter.add(new AbilityPredicate(FlyingAbility.class));
-    }
 
     public SunsetStrikemaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
@@ -48,7 +39,7 @@ public final class SunsetStrikemaster extends CardImpl {
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_FLYING));
         this.addAbility(ability);
     }
 

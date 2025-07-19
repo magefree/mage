@@ -40,6 +40,7 @@ public class GameEvent implements Serializable {
         PREVENT_DAMAGE, PREVENTED_DAMAGE,
         //Turn-based events
         PLAY_TURN, EXTRA_TURN,
+        BEGIN_TURN, // event fired on actual begin of turn.
         CHANGE_PHASE, PHASE_CHANGED,
         CHANGE_STEP, STEP_CHANGED,
         BEGINNING_PHASE, BEGINNING_PHASE_PRE, BEGINNING_PHASE_POST, // The normal beginning phase -- at the beginning of turn
@@ -226,6 +227,13 @@ public class GameEvent implements Serializable {
          targetId    the id of the mount
          sourceId    sourceId of the mount
          playerId    the id of the controlling player
+         */
+        STATION_PERMANENT,
+        /* STATION_PERMANENT
+         targetId    the id of the creature stationing
+         sourceId    sourceId of the spaceship or planet
+         playerId    the id of the controlling player
+         amount      how many counters are being added
          */
         CAST_SPELL,
         CAST_SPELL_LATE,

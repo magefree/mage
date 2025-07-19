@@ -32,7 +32,7 @@ public final class SnowVilliers extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Snow Villiers's power is equal to the number of creatures you control.
-        this.addAbility(new SimpleStaticAbility(new SetBasePowerSourceEffect(CreaturesYouControlCount.instance)));
+        this.addAbility(new SimpleStaticAbility(new SetBasePowerSourceEffect(CreaturesYouControlCount.PLURAL)));
     }
 
     private SnowVilliers(final SnowVilliers card) {

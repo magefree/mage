@@ -45,7 +45,7 @@ class MorgueBurstEffect extends OneShotEffect {
 
     MorgueBurstEffect() {
         super(Outcome.ReturnToHand);
-        this.staticText = "Return target creature card from your graveyard to your hand. Morgue Burst deals damage to any target equal to the power of the card returned this way";
+        this.staticText = "Return target creature card from your graveyard to your hand. {this} deals damage to any target equal to the power of the card returned this way";
     }
 
     private MorgueBurstEffect(final MorgueBurstEffect effect) {

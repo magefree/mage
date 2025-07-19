@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -18,6 +17,8 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
  *
  * @author TheElk801
@@ -28,7 +29,7 @@ public final class SkullStorm extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{7}{B}{B}");
 
         // When you cast this spell, copy it for each time you've cast your commander from the command zone this game.
-        this.addAbility(new CommanderStormAbility());
+        this.addAbility(new CommanderStormAbility(false));
 
         // Each opponent sacrifices a creature. Each opponent who can't loses half their life, rounded up.
         this.getSpellAbility().addEffect(new SkullStormEffect());
@@ -48,7 +49,7 @@ class SkullStormEffect extends OneShotEffect {
 
     SkullStormEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Each opponent sacrifices a creature. "
+        this.staticText = "Each opponent sacrifices a creature of their choice. "
                 + "Each opponent who can't loses half their life, rounded up.";
     }
 

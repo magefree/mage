@@ -53,7 +53,7 @@ class OwlbearCubTriggeredAbility extends TriggeredAbilityImpl {
     OwlbearCubTriggeredAbility() {
         super(Zone.BATTLEFIELD, new OwlbearCubEffect());
         this.withFlavorWord("Mama's Coming");
-        setTriggerPhrase("Whenever Owlbear Cub attacks a player who controls eight or more lands, ");
+        setTriggerPhrase("Whenever {this} attacks a player who controls eight or more lands, ");
     }
 
     private OwlbearCubTriggeredAbility(final OwlbearCubTriggeredAbility ability) {

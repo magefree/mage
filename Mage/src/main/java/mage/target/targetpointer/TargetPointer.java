@@ -57,9 +57,13 @@ public interface TargetPointer extends Serializable, Copyable<TargetPointer> {
     /**
      * Describes the appropriate subset of targets for ability text.
      */
-    default String describeTargets(Targets targets, String defaultDescription) {
-        return defaultDescription;
-    }
+    String describeTargets(Targets targets, String defaultDescription);
+
+    /**
+     * Overwrite the default target description
+     */
+    void setTargetDescription(String description);
+    String getTargetDescription();
 
     default boolean isPlural(Targets targets) {
         return false;

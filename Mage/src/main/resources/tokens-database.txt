@@ -73,6 +73,8 @@
 |Generate|EMBLEM:MD1|Emblem Elspeth|||ElspethKnightErrantEmblem|
 |Generate|EMBLEM:SWS|Emblem Obi-Wan Kenobi|||ObiWanKenobiEmblem|
 |Generate|EMBLEM:SWS|Emblem Luke Skywalker|||LukeSkywalkerEmblem|
+|Generate|EMBLEM:SWS|Emblem Yoda|||YodaEmblem|
+|Generate|EMBLEM:SWS|Emblem Aurra Sing|||AurraSingBaneOfJediEmblem|
 |Generate|EMBLEM:RIX|Emblem Huatli|||HuatliRadiantChampionEmblem|
 |Generate|EMBLEM:RNA|Emblem Domri|||DomriChaosBringerEmblem|
 |Generate|EMBLEM:WAR|Emblem Nissa|||NissaWhoShakesTheWorldEmblem|
@@ -146,6 +148,7 @@
 |Generate|EMBLEM:INR|Emblem Wrenn|||WrennAndSevenEmblem|
 |Generate|EMBLEM:DFT|Emblem Chandra|||ChandraSparkHunterEmblem|
 |Generate|EMBLEM:FIN|Emblem Sephiroth|||SephirothOneWingedAngelEmblem|
+|Generate|EMBLEM:EOE|Emblem Tezzeret|||TezzeretCruelCaptainEmblem|
 
 
 # ALL PLANES
@@ -2235,22 +2238,15 @@
 |Generate|TOK:WOE|Young Hero|||YoungHeroRoleToken|
 
 # WOC
-|Generate|TOK:WOC|Cat|1||CatToken2|
-|Generate|TOK:WOC|Cat|2||CatToken|
-|Generate|TOK:WOC|Elephant|||ElephantToken|
 |Generate|TOK:WOC|Faerie|||FaerieToken|
 |Generate|TOK:WOC|Faerie Rogue|1||FaerieRogueToken|
 |Generate|TOK:WOC|Faerie Rogue|2||OonaQueenFaerieRogueToken|
-|Generate|TOK:WOC|Human Monk|||HumanMonkToken|
 |Generate|TOK:WOC|Human Soldier|||HumanSoldierToken|
 |Generate|TOK:WOC|Monster|||MonsterRoleToken|
-|Generate|TOK:WOC|Ox|||OxToken|
 |Generate|TOK:WOC|Pegasus|||PegasusToken2|
 |Generate|TOK:WOC|Pirate|||NettlingNuisancePirateToken|
 |Generate|TOK:WOC|Royal|||RoyalRoleToken|
 |Generate|TOK:WOC|Saproling|||SaprolingToken|
-|Generate|TOK:WOC|Sorcerer|||SorcererRoleToken|
-|Generate|TOK:WOC|Spirit|||WhiteBlackSpiritToken|
 |Generate|TOK:WOC|Virtuous|||VirtuousRoleToken|
 
 # WHO
@@ -2794,7 +2790,8 @@
 |Generate|TOK:DSK|Primo, the Indivisible|||PrimoTheIndivisibleToken|
 |Generate|TOK:DSK|Shard|||ShardToken|
 |Generate|TOK:DSK|Spider|||Spider22Token|
-|Generate|TOK:DSK|Spirit|||SpiritBlueToken|
+|Generate|TOK:DSK|Spirit|1||Spirit31Token|
+|Generate|TOK:DSK|Spirit|2||SpiritBlueToken|
 |Generate|TOK:DSK|Treasure|||TreasureToken|
 
 # FIN
@@ -2832,7 +2829,7 @@
 |Generate|TOK:FIN|Treasure|1||TreasureToken|
 |Generate|TOK:FIN|Treasure|2||TreasureToken|
 
-# FIN
+# FIC
 |Generate|TOK:FIC|Human Soldier|||HumanSoldierToken|
 |Generate|TOK:FIC|Soldier|||SoldierToken|
 |Generate|TOK:FIC|Spirit|||SpiritWhiteToken|
@@ -2842,6 +2839,36 @@
 |Generate|TOK:FIC|Rebel|||RebelRedToken|
 |Generate|TOK:FIC|The Blackjack|||TheBlackjackToken|
 |Generate|TOK:FIC|Clue|||ClueArtifactToken|
+
+#EOE
+|Generate|TOK:EOE|Drone|||DroneToken2|
+|Generate|TOK:EOE|Human Soldier|||HumanSoldierToken|
+|Generate|TOK:EOE|Lander|1||LanderToken|
+|Generate|TOK:EOE|Lander|2||LanderToken|
+|Generate|TOK:EOE|Lander|3||LanderToken|
+|Generate|TOK:EOE|Lander|4||LanderToken|
+|Generate|TOK:EOE|Lander|5||LanderToken|
+|Generate|TOK:EOE|Munitions|||MunitionsToken|
+|Generate|TOK:EOE|Robot|||RobotToken|
+|Generate|TOK:EOE|Sliver|||SliverToken|
+
+#EOC
+|Generate|TOK:EOC|Beast|1||BeastToken|
+|Generate|TOK:EOC|Beast|2||BeastToken2|
+|Generate|TOK:EOC|Bird|||SwanSongBirdToken|
+|Generate|TOK:EOC|Clue|||ClueArtifactToken|
+|Generate|TOK:EOC|Elemental|1||TitaniaProtectorOfArgothElementalToken|
+|Generate|TOK:EOC|Elemental|2||OmnathElementalToken|
+|Generate|TOK:EOC|Gnome|||GnomeToken|
+|Generate|TOK:EOC|Golem|1||GolemToken|
+|Generate|TOK:EOC|Golem|2||HammerOfPurphorosGolemToken|
+|Generate|TOK:EOC|Golem|3||TitanForgeGolemToken|
+|Generate|TOK:EOC|Incubator|||IncubatorToken|
+|Generate|TOK:EOC|Insect|||XiraBlackInsectToken|
+|Generate|TOK:EOC|Pest|||Pest11GainLifeToken|
+|Generate|TOK:EOC|Phyrexian|||Phyrexian00Token|
+|Generate|TOK:EOC|Shapeshifter|||ShapeshifterDeathtouchToken|
+|Generate|TOK:EOC|Thopter|||ThopterColorlessToken|
 
 # JVC
 |Generate|TOK:JVC|Elemental Shaman|||ElementalShamanToken|

@@ -1,12 +1,13 @@
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.CommanderStormAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.game.permanent.token.AngelToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -18,7 +19,7 @@ public final class EmpyrialStorm extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{W}{W}");
 
         // When you cast this spell, copy it for each time you've cast your commander from the command zone this game.
-        this.addAbility(new CommanderStormAbility());
+        this.addAbility(new CommanderStormAbility(false));
 
         // Create a 4/4 white Angel creature token with flying.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new AngelToken()));

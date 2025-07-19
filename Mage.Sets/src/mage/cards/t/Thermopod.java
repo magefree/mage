@@ -20,7 +20,6 @@ import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -39,7 +38,7 @@ public final class Thermopod extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(
                 HasteAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{S}")));
         // Sacrifice a creature: Add {R}.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(Mana.RedMana(1), CreaturesYouControlCount.instance),
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(Mana.RedMana(1), CreaturesYouControlCount.PLURAL),
                 new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE)));
     }
 

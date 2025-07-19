@@ -31,7 +31,7 @@ public final class TheBattleOfBywater extends CardImpl {
         // Destroy all creatures with power 3 or greater. Then create a Food token for each creature you control.
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
         this.getSpellAbility().addEffect(new CreateTokenEffect(
-                new FoodToken(), CreaturesYouControlCount.instance
+                new FoodToken(), CreaturesYouControlCount.PLURAL
         ).setText("Then create a Food token for each creature you control"));
     }
 

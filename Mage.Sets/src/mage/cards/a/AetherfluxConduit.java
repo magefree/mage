@@ -1,19 +1,22 @@
 package mage.cards.a;
 
+import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.common.PayEnergyCost;
 import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.counters.CounterType;
 import mage.filter.StaticFilters;
+import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
@@ -34,8 +37,8 @@ public final class AetherfluxConduit extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new AetherfluxConduitManaEffect(), false));
 
         // {T}, Pay fifty {E}: Draw seven cards. You may cast any number of spells from your hand without paying their mana costs.
-        final Ability ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(7), new TapSourceCost());
-        ability.addCost(new PayEnergyCost(50).setText("Pay fifty {E}"));
+        Ability ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(7), new TapSourceCost());
+        ability.addCost(new PayEnergyCost(50).setText("pay fifty {E}"));
         ability.addEffect(new AetherfluxConduitCastEffect());
         this.addAbility(ability);
     }
@@ -68,10 +71,21 @@ class AetherfluxConduitManaEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Optional.ofNullable(this.getValue("spellCast"))
+        int amount = Optional
+                .ofNullable(this.getValue("spellCast"))
                 .map(Spell.class::cast)
-                .ifPresent(spell -> new GetEnergyCountersControllerEffect(spell.getManaValue()).apply(game, source));
-        return true;
+                .map(Spell::getStackAbility)
+                .map(Ability::getManaCostsToPay)
+                .map(ManaCost::getUsedManaToPay)
+                .map(Mana::count)
+                .orElse(0);
+        return amount > 0
+                && Optional
+                .ofNullable(source)
+                .map(Controllable::getControllerId)
+                .map(game::getPlayer)
+                .filter(player -> player.addCounters(CounterType.ENERGY.createInstance(amount), player.getId(), source, game))
+                .isPresent();
     }
 }
 

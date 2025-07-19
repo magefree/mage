@@ -3,40 +3,40 @@ package mage.abilities.effects.common.replacement;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.cards.Card;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
 
 /**
- * Used to affect a spell on the stack.
- * The permanent it may become enters tapped.
+ * Used to affect a card that will enter the battlefield (land played, or card put into play by effect).
+ * The permanent it becomes enters tapped.
  * <p>
- * Short-lived replacement effect, auto-cleanup if the mor is no longer a spell.
+ * Short-lived replacement effect, auto-cleanup if the mor is no longer current.
  *
  * @author Susucr
  */
-public class MorEnteringTappedEffect extends ReplacementEffectImpl {
+public class CardMorEnteringTappedEffect extends ReplacementEffectImpl {
 
     private final MageObjectReference mor;
 
-    public MorEnteringTappedEffect(MageObjectReference mor) {
+    public CardMorEnteringTappedEffect(MageObjectReference mor) {
         super(Duration.OneUse, Outcome.Tap);
         this.staticText = "That permanent enters the battlefield tapped";
         this.mor = mor;
     }
 
-    private MorEnteringTappedEffect(final MorEnteringTappedEffect effect) {
+    private CardMorEnteringTappedEffect(final CardMorEnteringTappedEffect effect) {
         super(effect);
         this.mor = effect.mor;
     }
 
     @Override
-    public MorEnteringTappedEffect copy() {
-        return new MorEnteringTappedEffect(this);
+    public CardMorEnteringTappedEffect copy() {
+        return new CardMorEnteringTappedEffect(this);
     }
 
     @Override
@@ -46,16 +46,13 @@ public class MorEnteringTappedEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Spell spell = game.getSpell(event.getSourceId());
-        Spell morSpell = mor.getSpell(game);
-        if (morSpell == null) {
+        Card morCard = mor.getCard(game);
+        if (morCard == null) {
             // cleanup if something other than resolving happens to the spell.
             discard();
             return false;
         }
-        return spell != null
-                && morSpell.getSourceId() == spell.getSourceId()
-                && morSpell.getZoneChangeCounter(game) == spell.getZoneChangeCounter(game);
+        return event.getTargetId().equals(morCard.getId());
     }
 
     @Override

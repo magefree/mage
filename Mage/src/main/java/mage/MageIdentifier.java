@@ -84,7 +84,8 @@ public enum MageIdentifier {
     QuilledGreatwurmAlternateCast,
     WickerfolkIndomitableAlternateCast,
     UriangerAugureltAlternateCast,
-    ValgavothTerrorEaterAlternateCast;
+    ValgavothTerrorEaterAlternateCast,
+    LightstallInquisitorAlternateCast;
 
     /**
      * Additional text if there is need to differentiate two very similar effects

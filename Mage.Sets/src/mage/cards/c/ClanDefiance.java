@@ -7,11 +7,11 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 
 import java.util.UUID;
@@ -21,11 +21,9 @@ import java.util.UUID;
  */
 public final class ClanDefiance extends CardImpl {
 
-    static final private FilterCreaturePermanent filterFlying = new FilterCreaturePermanent("creature with flying");
     static final private FilterCreaturePermanent filterWithoutFlying = new FilterCreaturePermanent("creature without flying");
 
     static {
-        filterFlying.add(new AbilityPredicate(FlyingAbility.class));
         filterWithoutFlying.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
     }
 
@@ -37,7 +35,7 @@ public final class ClanDefiance extends CardImpl {
         this.getSpellAbility().getModes().setMaxModes(3);
         // Clan Defiance deals X damage to target creature with flying;
         this.getSpellAbility().addEffect(new DamageTargetEffect(GetXValue.instance));
-        this.getSpellAbility().addTarget(new TargetPermanent(filterFlying).withChooseHint("deals X damage, with flying"));
+        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_FLYING).withChooseHint("deals X damage, with flying"));
         // Clan Defiance deals X damage to target creature without flying;
         Mode mode1 = new Mode(new DamageTargetEffect(GetXValue.instance));
         mode1.addTarget(new TargetPermanent(filterWithoutFlying).withChooseHint("deals X damage, without flying"));

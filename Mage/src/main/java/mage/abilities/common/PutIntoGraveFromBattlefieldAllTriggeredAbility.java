@@ -32,7 +32,7 @@ public class PutIntoGraveFromBattlefieldAllTriggeredAbility extends TriggeredAbi
         this.onlyToControllerGraveyard = onlyToControllerGraveyard;
         this.setTargetPointer = setTargetPointer;
         setTriggerPhrase("Whenever " + CardUtil.addArticle(filter.getMessage()) + " is put into " +
-                (onlyToControllerGraveyard ? "your" : "a") + " graveyard, ");
+                (onlyToControllerGraveyard ? "your" : "a") + " graveyard from the battlefield, ");
     }
 
     protected PutIntoGraveFromBattlefieldAllTriggeredAbility(final PutIntoGraveFromBattlefieldAllTriggeredAbility ability) {

@@ -7,7 +7,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterOpponentsCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.target.TargetPermanent;
@@ -20,13 +20,10 @@ import java.util.UUID;
 public final class SagittarsVolley extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterCreaturePermanent("creature with flying");
-    private static final FilterPermanent filter2
             = new FilterOpponentsCreaturePermanent("creature with flying your opponents control");
 
     static {
         filter.add(new AbilityPredicate(FlyingAbility.class));
-        filter2.add(new AbilityPredicate(FlyingAbility.class));
     }
 
     public SagittarsVolley(UUID ownerId, CardSetInfo setInfo) {
@@ -34,8 +31,8 @@ public final class SagittarsVolley extends CardImpl {
 
         // Destroy target creature with flying. Sagittars' Volley deals 1 damage to each creature with flying your opponents control.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
-        this.getSpellAbility().addEffect(new DamageAllEffect(1, filter2));
+        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_FLYING));
+        this.getSpellAbility().addEffect(new DamageAllEffect(1, filter));
     }
 
     private SagittarsVolley(final SagittarsVolley card) {

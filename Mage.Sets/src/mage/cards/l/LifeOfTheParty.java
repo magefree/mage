@@ -63,7 +63,7 @@ public final class LifeOfTheParty extends CardImpl {
 
         // Whenever Life of the Party attacks, it gets +X/+0 until end of turn, where X is the number of creatures you control.
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(
-                CreaturesYouControlCount.instance, StaticValue.get(0),
+                CreaturesYouControlCount.PLURAL, StaticValue.get(0),
                 Duration.EndOfTurn, "it"
         ).setText("it gets +X/+0 until end of turn, where X is the number of creatures you control"))
                 .addHint(CreaturesYouControlHint.instance));

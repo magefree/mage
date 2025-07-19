@@ -1,7 +1,6 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -21,6 +20,8 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -83,6 +84,6 @@ class WarBargeDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "When War Barge leaves the battlefield this turn, destroy that creature. A creature destroyed this way can't be regenerated.";
+        return "When {this} leaves the battlefield this turn, destroy that creature. A creature destroyed this way can't be regenerated.";
     }
 }

@@ -1,7 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
@@ -12,6 +11,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -28,8 +29,8 @@ public final class TurnAgainst extends CardImpl {
         // Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new UntapTargetEffect());
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new UntapTargetEffect().withTargetDescription("that creature"));
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn).withTargetDescription("It"));
     }
 
     private TurnAgainst(final TurnAgainst card) {

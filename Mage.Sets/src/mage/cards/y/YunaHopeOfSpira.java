@@ -54,14 +54,14 @@ public final class YunaHopeOfSpira extends CardImpl {
 
         // During your turn, Yuna and enchantment creatures you control have trample, lifelink, and ward {2}.
         Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
-                new GainAbilityAllEffect(TrampleAbility.getInstance(), Duration.WhileControlled, filter2),
+                new GainAbilityAllEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, filter2),
                 MyTurnCondition.instance, "during your turn, {this} and enchantment creatures you control have trample"
         ));
         ability.addEffect(new ConditionalContinuousEffect(new GainAbilityAllEffect(
-                LifelinkAbility.getInstance(), Duration.WhileControlled, filter2
+                LifelinkAbility.getInstance(), Duration.WhileOnBattlefield, filter2
         ), MyTurnCondition.instance, ", lifelink"));
         ability.addEffect(new ConditionalContinuousEffect(new GainAbilityAllEffect(
-                new WardAbility(new GenericManaCost(2)), Duration.WhileControlled, filter2
+                new WardAbility(new GenericManaCost(2)), Duration.WhileOnBattlefield, filter2
         ), MyTurnCondition.instance, ", and ward {2}"));
         this.addAbility(ability);
 

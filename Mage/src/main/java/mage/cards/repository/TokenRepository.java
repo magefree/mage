@@ -270,6 +270,7 @@ public enum TokenRepository {
         res.add(createXmageToken(XMAGE_IMAGE_NAME_COPY, 10, "https://api.scryfall.com/cards/tdsk/1/en?format=image"));
         res.add(createXmageToken(XMAGE_IMAGE_NAME_COPY, 11, "https://api.scryfall.com/cards/tacr/1/en?format=image"));
         res.add(createXmageToken(XMAGE_IMAGE_NAME_COPY, 12, "https://api.scryfall.com/cards/tpip/1/en?format=image"));
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_COPY, 13, "https://api.scryfall.com/cards/teoc/1/en?format=image"));
 
         // City's Blessing
         // https://scryfall.com/search?q=type%3Atoken+include%3Aextras+unique%3Aprints+City%27s+Blessing+&unique=cards&as=grid&order=name

@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.Effect;
@@ -17,6 +16,8 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author LevelX2
@@ -29,7 +30,7 @@ public final class StruggleSurvive extends SplitCard {
         // Struggle
         // Struggle deals damage to target creature equal to the number of lands you control.
         Effect effect = new DamageTargetEffect(new PermanentsOnBattlefieldCount(new FilterControlledLandPermanent("the number of lands you control")));
-        effect.setText("Struggle deals damage to target creature equal to the number of lands you control");
+        effect.setText("{this} deals damage to target creature equal to the number of lands you control");
         getLeftHalfCard().getSpellAbility().addEffect(effect);
         getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
 

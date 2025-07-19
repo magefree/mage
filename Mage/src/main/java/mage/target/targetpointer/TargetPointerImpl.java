@@ -5,6 +5,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
+import mage.target.Targets;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,6 +19,7 @@ public abstract class TargetPointerImpl implements TargetPointer {
     private Map<String, String> data;
 
     private boolean initialized = false;
+    protected String targetDescription = null;
 
     protected TargetPointerImpl() {
         super();
@@ -30,6 +32,7 @@ public abstract class TargetPointerImpl implements TargetPointer {
             this.data.putAll(targetPointer.data);
         }
         this.initialized = targetPointer.initialized;
+        this.targetDescription = targetPointer.targetDescription;
     }
 
     @Override
@@ -72,6 +75,20 @@ public abstract class TargetPointerImpl implements TargetPointer {
         }
         data.put(key, value);
         return this;
+    }
+
+    @Override
+    public String describeTargets(Targets targets, String defaultDescription) {
+        return targetDescription != null ? targetDescription : defaultDescription;
+    }
+
+    @Override
+    public void setTargetDescription(String description) {
+        targetDescription = description;
+    }
+    @Override
+    public String getTargetDescription() {
+        return targetDescription;
     }
 
 }

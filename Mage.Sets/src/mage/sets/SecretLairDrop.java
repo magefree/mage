@@ -1550,7 +1550,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Dire Undercurrents", 1578, Rarity.RARE, mage.cards.d.DireUndercurrents.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dire Undercurrents", "1578*", Rarity.RARE, mage.cards.d.DireUndercurrents.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Obeka, Brute Chronologist", 1579, Rarity.MYTHIC, mage.cards.o.ObekaBruteChronologist.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Obeka, Brute Chronologist", "1579*", Rarity.RARE, mage.cards.o.ObekaBruteChronologist.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Obeka, Brute Chronologist", "1579*", Rarity.MYTHIC, mage.cards.o.ObekaBruteChronologist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rose Noble", 1580, Rarity.RARE, mage.cards.r.RoseNoble.class));
         cards.add(new SetCardInfo("The Meep", 1581, Rarity.RARE, mage.cards.t.TheMeep.class));
 //        cards.add(new SetCardInfo("The Celestial Toymaker", 1582, Rarity.RARE, mage.cards.t.TheCelestialToymaker.class));

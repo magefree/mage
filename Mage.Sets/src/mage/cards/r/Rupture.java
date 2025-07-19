@@ -52,7 +52,7 @@ class RuptureEffect extends OneShotEffect {
 
     public RuptureEffect() {
         super(Outcome.Damage);
-        staticText = "Sacrifice a creature. Rupture deals damage equal to that creature's power to each creature without flying and each player";
+        staticText = "Sacrifice a creature. {this} deals damage equal to that creature's power to each creature without flying and each player";
     }
 
     private RuptureEffect(final RuptureEffect effect) {

@@ -29,7 +29,7 @@ public final class SaltRoadPackbeast extends CardImpl {
 
         // This spell costs {1} less to cast for each creature you control.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SpellCostReductionForEachSourceEffect(1, CreaturesYouControlCount.instance)
+                Zone.ALL, new SpellCostReductionForEachSourceEffect(1, CreaturesYouControlCount.SINGULAR)
         ).addHint(CreaturesYouControlHint.instance));
 
         // When this creature enters, draw a card.

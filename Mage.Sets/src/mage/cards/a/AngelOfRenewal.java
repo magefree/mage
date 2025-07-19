@@ -27,7 +27,7 @@ public final class AngelOfRenewal extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // When Angel of Renewal enters the battlefield, you gain 1 life for each creature you control.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(CreaturesYouControlCount.instance).setText("you gain 1 life for each creature you control")));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(CreaturesYouControlCount.PLURAL).setText("you gain 1 life for each creature you control")));
     }
 
     private AngelOfRenewal(final AngelOfRenewal card) {

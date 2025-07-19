@@ -1,25 +1,27 @@
 package mage.cards.g;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.dynamicvalue.common.DifferentlyNamedPermanentCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
+import mage.abilities.hint.Hint;
 import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
+import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledArtifactPermanent;
+import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.GremlinArtifactToken;
 import mage.game.permanent.token.Token;
 
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -43,9 +45,8 @@ public final class GimbalGremlinProdigy extends CardImpl {
         )));
 
         // At the beginning of your end step, create a 0/0 red Gremlin artifact creature token. Put X +1/+1 counters on it, where X is the number of differently named artifact tokens you control.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new GimbalGremlinProdigyEffect()
-        ));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new GimbalGremlinProdigyEffect())
+                .addHint(GimbalGremlinProdigyEffect.getHint()));
     }
 
     private GimbalGremlinProdigy(final GimbalGremlinProdigy card) {
@@ -59,6 +60,18 @@ public final class GimbalGremlinProdigy extends CardImpl {
 }
 
 class GimbalGremlinProdigyEffect extends OneShotEffect {
+
+    private static final FilterPermanent filter = new FilterControlledArtifactPermanent("artifact tokens you control");
+
+    static {
+        filter.add(TokenPredicate.TRUE);
+    }
+
+    private static final DifferentlyNamedPermanentCount xValue = new DifferentlyNamedPermanentCount(filter);
+
+    static final Hint getHint() {
+        return xValue.getHint();
+    }
 
     GimbalGremlinProdigyEffect() {
         super(Outcome.Benefit);
@@ -79,20 +92,7 @@ class GimbalGremlinProdigyEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Token token = new GremlinArtifactToken();
         token.putOntoBattlefield(1, game, source);
-        int amount = game
-                .getBattlefield()
-                .getActivePermanents(
-                        StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT,
-                        source.getControllerId(), source, game
-                )
-                .stream()
-                .filter(PermanentToken.class::isInstance)
-                .map(MageObject::getName)
-                .filter(Objects::nonNull)
-                .filter(s -> !s.isEmpty())
-                .distinct()
-                .mapToInt(i -> 1)
-                .sum();
+        int amount = xValue.calculate(game, source, this);
         for (UUID tokenId : token.getLastAddedTokenIds()) {
             Permanent permanent = game.getPermanent(tokenId);
             if (permanent != null) {

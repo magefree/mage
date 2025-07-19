@@ -6,8 +6,10 @@ import mage.abilities.common.LandfallAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.dynamicvalue.common.DifferentlyNamedPermanentCount;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.hint.Hint;
 import mage.abilities.keyword.DredgeAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -42,7 +44,7 @@ public final class TheNecrobloom extends CardImpl {
                 new CreateTokenEffect(new PlantToken()),
                 TheNecrobloomCondition.instance, "create a 0/1 green Plant creature token. If you control " +
                 "seven or more lands with different names, create a 2/2 black Zombie creature token instead"
-        )));
+        )).addHint(TheNecrobloomCondition.getHint()));
 
         // Land cards in your graveyard have dredge 2.
         this.addAbility(new SimpleStaticAbility(new TheNecrobloomDredgeEffect()));
@@ -61,20 +63,20 @@ public final class TheNecrobloom extends CardImpl {
 enum TheNecrobloomCondition implements Condition {
     instance;
 
+    private static final DifferentlyNamedPermanentCount xValue = new DifferentlyNamedPermanentCount(StaticFilters.FILTER_CONTROLLED_PERMANENT_LANDS);
+
+    static Hint getHint() {
+        return xValue.getHint();
+    }
+
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
-        return game
-                .getBattlefield()
-                .getAllActivePermanents(StaticFilters.FILTER_LAND, source.getControllerId(), game)
-                .stream()
-                .map(permanent -> permanent.getName())
-                .filter(s -> s.length() > 0)
-                .distinct()
-                .count() > 6;
+        return xValue.calculate(game, source, null) >= 7;
+    }
+
+    @Override
+    public String toString() {
+        return "you control seven or more lands with different names";
     }
 }
 

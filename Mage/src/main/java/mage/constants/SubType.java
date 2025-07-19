@@ -31,6 +31,7 @@ public enum SubType {
     GATE("Gate", SubTypeSet.NonBasicLandType),
     LAIR("Lair", SubTypeSet.NonBasicLandType),
     LOCUS("Locus", SubTypeSet.NonBasicLandType),
+    PLANET("Planet", SubTypeSet.NonBasicLandType),
     SPHERE("Sphere", SubTypeSet.NonBasicLandType),
     URZAS("Urza's", SubTypeSet.NonBasicLandType),
     MINE("Mine", SubTypeSet.NonBasicLandType),
@@ -61,8 +62,10 @@ public enum SubType {
     GOLD("Gold", SubTypeSet.ArtifactType),
     INCUBATOR("Incubator", SubTypeSet.ArtifactType),
     JUNK("Junk", SubTypeSet.ArtifactType),
+    LANDER("Lander", SubTypeSet.ArtifactType),
     MAP("Map", SubTypeSet.ArtifactType),
     POWERSTONE("Powerstone", SubTypeSet.ArtifactType),
+    SPACECRAFT("Spacecraft", SubTypeSet.ArtifactType),
     TREASURE("Treasure", SubTypeSet.ArtifactType),
     VEHICLE("Vehicle", SubTypeSet.ArtifactType),
     // 205.3m : Creatures and kindreds share their lists of subtypes; these subtypes are called creature types.
@@ -157,6 +160,7 @@ public enum SubType {
     DRAGON("Dragon", SubTypeSet.CreatureType),
     DRAKE("Drake", SubTypeSet.CreatureType),
     DREADNOUGHT("Dreadnought", SubTypeSet.CreatureType),
+    DRIX("Drix", SubTypeSet.CreatureType),
     DROID("Droid", SubTypeSet.CreatureType, true), // Star Wars
     DRONE("Drone", SubTypeSet.CreatureType),
     DRUID("Druid", SubTypeSet.CreatureType),
@@ -261,7 +265,7 @@ public enum SubType {
     LICID("Licid", SubTypeSet.CreatureType),
     LIZARD("Lizard", SubTypeSet.CreatureType),
     LLAMA("Llama", SubTypeSet.CreatureType),
-    LOBSTER("Lobster", SubTypeSet.CreatureType, true), // Unglued
+    LOBSTER("Lobster", SubTypeSet.CreatureType),
     // M
     MANTELLIAN("Mantellian", SubTypeSet.CreatureType, true), // Star Wars
     MANTICORE("Manticore", SubTypeSet.CreatureType),

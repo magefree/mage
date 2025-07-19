@@ -1,8 +1,8 @@
 package mage.cards.s;
 
 import mage.MageInt;
+import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.DealtDamageAnyTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.abilities.keyword.FlashAbility;
@@ -50,7 +50,7 @@ public final class SonicTheHedgehog extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Gotta Go Fast -- Whenever Sonic the Hedgehog attacks, put a +1/+1 counter on each creature you control with flash or haste.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(
+        this.addAbility(new AttacksTriggeredAbility(
                 new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter)
         ).withFlavorWord("Gotta Go Fast"));
 

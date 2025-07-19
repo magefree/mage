@@ -2180,23 +2180,16 @@ public class ScryfallImageSupportTokens {
             put("WOE/Young Hero", "https://api.scryfall.com/cards/twoe/16/en?format=image");
 
             // WOC
-            put("WOC/Cat/1", "https://api.scryfall.com/cards/twoc/6/en?format=image");
-            put("WOC/Cat/2", "https://api.scryfall.com/cards/twoc/5/en?format=image");
-            put("WOC/Elephant", "https://api.scryfall.com/cards/twoc/13/en?format=image");
             put("WOC/Faerie", "https://api.scryfall.com/cards/twoc/10/en?format=image");
             put("WOC/Faerie Rogue/1", "https://api.scryfall.com/cards/twoc/11/en?format=image");
             put("WOC/Faerie Rogue/2", "https://api.scryfall.com/cards/twoc/16/en?format=image");
-            put("WOC/Human Monk", "https://api.scryfall.com/cards/twoc/14/en?format=image");
             put("WOC/Human Soldier", "https://api.scryfall.com/cards/twoc/7/en?format=image");
             put("WOC/Monster", "https://api.scryfall.com/cards/twoc/1/en?format=image");
-            put("WOC/Ox", "https://api.scryfall.com/cards/twoc/8/en?format=image");
             put("WOC/Pegasus", "https://api.scryfall.com/cards/twoc/9/en?format=image");
             put("WOC/Pirate", "https://api.scryfall.com/cards/twoc/12/en?format=image");
             put("WOC/Royal", "https://api.scryfall.com/cards/twoc/2/en?format=image");
             put("WOC/Saproling", "https://api.scryfall.com/cards/twoc/15/en?format=image");
-            put("WOC/Sorcerer", "https://api.scryfall.com/cards/twoc/3/en?format=image");
-            put("WOC/Spirit", "https://api.scryfall.com/cards/twoc/17/en?format=image");
-            put("WOC/Virtuous", "https://api.scryfall.com/cards/twoc/3/en?format=image");
+            put("WOC/Virtuous", "https://api.scryfall.com/cards/twoc/2/en?format=image");
 
             // WHO
             put("WHO/Alien", "https://api.scryfall.com/cards/twho/2?format=image");
@@ -2561,7 +2554,8 @@ public class ScryfallImageSupportTokens {
             put("DSK/Primo, the Indivisible", "https://api.scryfall.com/cards/tdsk/14?format=image");
             put("DSK/Shard", "https://api.scryfall.com/cards/tdsk/2?format=image");
             put("DSK/Spider", "https://api.scryfall.com/cards/tdsk/12?format=image");
-            put("DSK/Spirit", "https://api.scryfall.com/cards/tdsk/8?format=image");
+            put("DSK/Spirit/1", "https://api.scryfall.com/cards/tdsk/6?format=image");
+            put("DSK/Spirit/2", "https://api.scryfall.com/cards/tdsk/8?format=image");
             put("DSK/Treasure", "https://api.scryfall.com/cards/tdsk/15?format=image");
 
             // DSC
@@ -2790,6 +2784,36 @@ public class ScryfallImageSupportTokens {
             put("FIC/Rebel", "https://api.scryfall.com/cards/tfic/7/en?format=image");
             put("FIC/The Blackjack", "https://api.scryfall.com/cards/tfic/8/en?format=image");
             put("FIC/Clue", "https://api.scryfall.com/cards/tfic/9/en?format=image");
+
+            // EOE
+            put("EOE/Drone", "https://api.scryfall.com/cards/teoe/3?format=image");
+            put("EOE/Human Soldier", "https://api.scryfall.com/cards/teoe/2?format=image");
+            put("EOE/Lander/1", "https://api.scryfall.com/cards/teoe/4?format=image");
+            put("EOE/Lander/2", "https://api.scryfall.com/cards/teoe/5?format=image");
+            put("EOE/Lander/3", "https://api.scryfall.com/cards/teoe/6?format=image");
+            put("EOE/Lander/4", "https://api.scryfall.com/cards/teoe/7?format=image");
+            put("EOE/Lander/5", "https://api.scryfall.com/cards/teoe/8?format=image");
+            put("EOE/Munitions", "https://api.scryfall.com/cards/teoe/9?format=image");
+            put("EOE/Robot", "https://api.scryfall.com/cards/teoe/10?format=image");
+            put("EOE/Sliver", "https://api.scryfall.com/cards/teoe/1?format=image");
+
+            // EOC
+            put("EOC/Beast/1", "https://api.scryfall.com/cards/teoc/5/en?format=image");
+            put("EOC/Beast/2", "https://api.scryfall.com/cards/teoc/6/en?format=image");
+            put("EOC/Bird", "https://api.scryfall.com/cards/teoc/3/en?format=image");
+            put("EOC/Clue", "https://api.scryfall.com/cards/teoc/10/en?format=image");
+            put("EOC/Elemental/1", "https://api.scryfall.com/cards/teoc/7/en?format=image");
+            put("EOC/Elemental/2", "https://api.scryfall.com/cards/teoc/8/en?format=image");
+            put("EOC/Gnome", "https://api.scryfall.com/cards/teoc/11/en?format=image");
+            put("EOC/Golem/1", "https://api.scryfall.com/cards/teoc/12/en?format=image");
+            put("EOC/Golem/2", "https://api.scryfall.com/cards/teoc/13/en?format=image");
+            put("EOC/Golem/3", "https://api.scryfall.com/cards/teoc/14/en?format=image");
+            put("EOC/Incubator", "https://api.scryfall.com/cards/teoc/15/en?format=image&face=front");
+            put("EOC/Insect", "https://api.scryfall.com/cards/teoc/4/en?format=image");
+            put("EOC/Pest", "https://api.scryfall.com/cards/teoc/9/en?format=image");
+            put("EOC/Phyrexian", "https://api.scryfall.com/cards/teoc/15/en?format=image&face=back");
+            put("EOC/Shapeshifter", "https://api.scryfall.com/cards/teoc/2/en?format=image");
+            put("EOC/Thopter", "https://api.scryfall.com/cards/teoc/16/en?format=image");
 
             // JVC
             put("JVC/Elemental Shaman", "https://api.scryfall.com/cards/tjvc/4?format=image");
