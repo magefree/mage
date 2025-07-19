@@ -59,6 +59,12 @@ public interface Effect extends Serializable, Copyable<Effect> {
 
     TargetPointer getTargetPointer();
 
+    /**
+     * Sets the target pointer's description to the given string.
+     * WARNING: won't apply if target pointer is set afterwards
+     */
+    Effect withTargetDescription(String target);
+
     void setValue(String key, Object value);
 
     Object getValue(String key);

@@ -96,4 +96,9 @@ public class CreateDelayedTriggeredAbilityEffect extends OneShotEffect {
         this.copyToPointer = copyToPointer;
         return this;
     }
+
+    @Override
+    public CreateDelayedTriggeredAbilityEffect withTargetDescription(String target) {
+        throw new UnsupportedOperationException("Cannot overwrite target descriptions for CreateDelayedTriggeredAbilityEffect (Adjust the inner effects' pointers instead)");
+    }
 }

@@ -448,6 +448,12 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         return this;
     }
 
+    @Override
+    public ContinuousEffect withTargetDescription(String target) {
+        super.withTargetDescription(target);
+        return this;
+    }
+
     /**
      * Auto-generates dependencies on different effects (what's apply first and
      * what's apply second)

@@ -120,6 +120,7 @@ public class EachTargetPointer extends TargetPointerImpl {
 
     @Override
     public String describeTargets(Targets targets, String defaultDescription) {
+        if (overwriteTargetDescription != null) return overwriteTargetDescription;
         if (targets.isEmpty()) {
             return defaultDescription;
         }

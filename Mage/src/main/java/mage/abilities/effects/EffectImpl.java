@@ -105,6 +105,12 @@ public abstract class EffectImpl implements Effect {
     }
 
     @Override
+    public Effect withTargetDescription(String target) {
+        this.targetPointer.setTargetDescription(target);
+        return this;
+    }
+
+    @Override
     public void newId() {
         if (!(this instanceof MageSingleton)) {
             this.id = UUID.randomUUID();

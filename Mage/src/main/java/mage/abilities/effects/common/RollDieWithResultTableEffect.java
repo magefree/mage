@@ -160,4 +160,9 @@ public class RollDieWithResultTableEffect extends OneShotEffect {
         super.setTargetPointer(targetPointer);
         return this;
     }
+
+    @Override
+    public RollDieWithResultTableEffect withTargetDescription(String target) {
+        throw new UnsupportedOperationException("Cannot overwrite target descriptions for RollDieWithResultTableEffect (Adjust the inner effects' pointers instead)");
+    }
 }

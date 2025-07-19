@@ -73,6 +73,12 @@ public class OneShotNonTargetEffect extends OneShotEffect {
     }
 
     @Override
+    public OneShotEffect withTargetDescription(String target) {
+        effect.withTargetDescription(target);
+        return super.withTargetDescription(target);
+    }
+
+    @Override
     public void setValue(String key, Object value) {
         effect.setValue(key, value);
         super.setValue(key, value);
