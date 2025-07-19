@@ -22,9 +22,9 @@ public final class HymnOfTheFaller extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");
 
         // Surveil 1, then you draw a card and lose 1 life.
-        this.getSpellAbility().addEffect(new SurveilEffect(1));
+        this.getSpellAbility().addEffect(new SurveilEffect(1, false));
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1, true).concatBy(", then"));
-        this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(1).setText("and you lose one life"));
+        this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(1).setText("and lose 1 life"));
 
         // Void -- If a nonland permanent left the battlefield this turn or a spell was warped this turn, draw another card.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(

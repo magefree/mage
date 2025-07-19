@@ -2,7 +2,7 @@ package mage.cards.e;
 
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.common.DiscardedByOpponentTriggeredAbility;
+import mage.abilities.common.DiscardsACardOpponentTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.keyword.DeathtouchAbility;
@@ -38,9 +38,9 @@ public final class EntropicBattlecruiser extends CardImpl {
 
         // STATION 1+
         // Whenever an opponent discards a card, they lose 3 life.
-        this.addAbility(new StationLevelAbility(1).withLevelAbility(
-                new DiscardedByOpponentTriggeredAbility(new LoseLifeTargetEffect(3).setText("they lose 3 life"))
-        ));
+        this.addAbility(new StationLevelAbility(1).withLevelAbility(new DiscardsACardOpponentTriggeredAbility(
+                new LoseLifeTargetEffect(3).setText("they lose 3 life"), false
+        )));
 
         // STATION 8+
         // Flying

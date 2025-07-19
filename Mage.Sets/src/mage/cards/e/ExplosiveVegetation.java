@@ -19,7 +19,7 @@ public final class ExplosiveVegetation extends CardImpl {
 
         // Search your library for up to two basic land cards and put them onto the battlefield tapped. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(
-                new TargetCardInLibrary(2, StaticFilters.FILTER_CARD_BASIC_LANDS), true
+                new TargetCardInLibrary(0, 2, StaticFilters.FILTER_CARD_BASIC_LANDS), true
         ));
     }
 

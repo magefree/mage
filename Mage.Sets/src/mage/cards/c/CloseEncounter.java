@@ -42,7 +42,8 @@ public final class CloseEncounter extends CardImpl {
         this.getSpellAbility().addCost(new CloseEncounterCost());
 
         // Close Encounter deals damage equal to the power of the chosen creature or card to target creature.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(CloseEncounterValue.instance));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(CloseEncounterValue.instance)
+                .setText("{this} deals damage equal to the power of the chosen creature or card to target creature"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

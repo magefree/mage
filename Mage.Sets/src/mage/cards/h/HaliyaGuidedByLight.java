@@ -40,7 +40,7 @@ public final class HaliyaGuidedByLight extends CardImpl {
         // Whenever Haliya or another creature or artifact you control enters, you gain 1 life.
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new GainLifeEffect(1),
-                StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_OR_CREATURE,
+                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE_OR_ARTIFACT,
                 false, false
         ));
 
