@@ -134,7 +134,9 @@ public class ConditionalOneShotEffect extends OneShotEffect {
 
     @Override
     public ConditionalOneShotEffect withTargetDescription(String target) {
-        throw new UnsupportedOperationException("Cannot overwrite target descriptions for ConditionalOneShotEffect (Adjust the inner effects' pointers instead)");
+        effects.forEach(effect -> effect.withTargetDescription(target));
+        otherwiseEffects.forEach(effect -> effect.withTargetDescription(target));
+        return this;
     }
 
     @Override

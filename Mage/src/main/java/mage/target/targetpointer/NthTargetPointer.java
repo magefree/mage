@@ -148,7 +148,7 @@ public abstract class NthTargetPointer extends TargetPointerImpl {
 
     @Override
     public String describeTargets(Targets targets, String defaultDescription) {
-        if (overwriteTargetDescription != null) return overwriteTargetDescription;
+        if (targetDescription != null) return targetDescription;
         if (targets.size() <= this.targetIndex) {
             // TODO: need research, is it used for non setup targets ?!
             // Typical usage example: trigger sets fixed target pointer

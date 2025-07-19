@@ -19,7 +19,7 @@ public abstract class TargetPointerImpl implements TargetPointer {
     private Map<String, String> data;
 
     private boolean initialized = false;
-    protected String overwriteTargetDescription;
+    protected String targetDescription = null;
 
     protected TargetPointerImpl() {
         super();
@@ -32,7 +32,7 @@ public abstract class TargetPointerImpl implements TargetPointer {
             this.data.putAll(targetPointer.data);
         }
         this.initialized = targetPointer.initialized;
-        this.overwriteTargetDescription = targetPointer.overwriteTargetDescription;
+        this.targetDescription = targetPointer.targetDescription;
     }
 
     @Override
@@ -79,12 +79,12 @@ public abstract class TargetPointerImpl implements TargetPointer {
 
     @Override
     public String describeTargets(Targets targets, String defaultDescription) {
-        return overwriteTargetDescription != null ? overwriteTargetDescription : defaultDescription;
+        return targetDescription != null ? targetDescription : defaultDescription;
     }
 
     @Override
     public void setTargetDescription(String defaultDescription) {
-        overwriteTargetDescription = defaultDescription;
+        targetDescription = defaultDescription;
     }
 
 }

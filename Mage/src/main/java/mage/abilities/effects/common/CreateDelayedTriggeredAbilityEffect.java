@@ -99,6 +99,8 @@ public class CreateDelayedTriggeredAbilityEffect extends OneShotEffect {
 
     @Override
     public CreateDelayedTriggeredAbilityEffect withTargetDescription(String target) {
-        throw new UnsupportedOperationException("Cannot overwrite target descriptions for CreateDelayedTriggeredAbilityEffect (Adjust the inner effects' pointers instead)");
+        ability.getEffects().forEach(effect -> effect.withTargetDescription(target));
+        super.withTargetDescription(target);
+        return this;
     }
 }
