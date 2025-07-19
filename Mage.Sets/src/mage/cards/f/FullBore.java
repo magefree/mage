@@ -17,7 +17,7 @@ import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
-import java.util.Map;
+import java.util.Collections;
 import java.util.UUID;
 
 /**
@@ -63,13 +63,11 @@ class FullBoreEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (permanent == null) {
-            return false;
-        }
-        Map<String, Object> costTags = game
+        if (permanent == null
+                || !game
                 .getPermanentCostsTags()
-                .getOrDefault(new MageObjectReference(permanent, game, -1), null);
-        if (costTags == null || !costTags.containsKey(WarpAbility.WARP_ACTIVATION_VALUE_KEY)) {
+                .getOrDefault(new MageObjectReference(permanent, game, -1), Collections.emptyMap())
+                .containsKey(WarpAbility.WARP_ACTIVATION_VALUE_KEY)) {
             return false;
         }
         game.addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance())
