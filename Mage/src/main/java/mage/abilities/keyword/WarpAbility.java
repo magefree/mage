@@ -98,9 +98,6 @@ public class WarpAbility extends SpellAbility {
             sb.append(getCosts().getText());
             sb.append('.');
         }
-        sb.append(" <i>(You may cast this card from your hand for its warp cost. ");
-        sb.append("Exile this creature at the beginning of the next end step, ");
-        sb.append("then you may cast it from exile on a later turn.)</i>");
         return sb.toString();
     }
 
