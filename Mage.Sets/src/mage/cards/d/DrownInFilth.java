@@ -32,7 +32,7 @@ public final class DrownInFilth extends CardImpl {
         effect.setText("Choose target creature. Mill four cards");
         this.getSpellAbility().addEffect(effect);
         DynamicValue landCards = new SignInversionDynamicValue(new CardsInControllerGraveyardCount(new FilterLandCard()));
-        this.getSpellAbility().addEffect(new BoostTargetEffect(landCards, landCards, Duration.EndOfTurn).withTargetDescription("that creature"));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(landCards, landCards, Duration.EndOfTurn).withTargetDescription(", then that creature"));
     }
 
     private DrownInFilth(final DrownInFilth card) {

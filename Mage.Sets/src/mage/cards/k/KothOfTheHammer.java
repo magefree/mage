@@ -65,7 +65,7 @@ public final class KothOfTheHammer extends CardImpl {
 class KothOfTheHammerToken extends TokenImpl {
 
     public KothOfTheHammerToken() {
-        super("Elemental", "4/4 red Elemental");
+        super("Elemental", "4/4 red Elemental creature");
         this.cardType.add(CardType.CREATURE);
         this.subtype.add(SubType.ELEMENTAL);
 

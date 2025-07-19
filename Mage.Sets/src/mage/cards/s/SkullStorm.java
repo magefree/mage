@@ -49,7 +49,7 @@ class SkullStormEffect extends OneShotEffect {
 
     SkullStormEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Each opponent sacrifices a creature. "
+        this.staticText = "Each opponent sacrifices a creature of their choice. "
                 + "Each opponent who can't loses half their life, rounded up.";
     }
 

@@ -36,6 +36,7 @@ public final class HeliodsEmissary extends CardImpl {
         this.addAbility(new BestowAbility(this, "{6}{W}"));
         // Whenever Heliod's Emissary or enchanted creature attacks, tap target creature an opponent controls.
         Ability ability = new OrTriggeredAbility(Zone.BATTLEFIELD, new TapTargetEffect(),
+                false, "Whenever {this} or enchanted creature attacks, ",
                 new AttacksTriggeredAbility(null, false),
                 new AttacksAttachedTriggeredAbility(null, AttachmentType.AURA, false));
         ability.addTarget(new TargetPermanent(FILTER_OPPONENTS_PERMANENT_CREATURE));
