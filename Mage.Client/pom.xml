@@ -154,6 +154,14 @@
             <version>11.0.2</version>
         </dependency>
         <!-- JavaFX support (build-in browser) END -->
+
+        <!-- FlatLaf theme START-->
+        <dependency>
+            <groupId>com.formdev</groupId>
+            <artifactId>flatlaf</artifactId>
+            <version>3.4.1</version>
+        </dependency>
+        <!-- FlatLaf theme END -->
     </dependencies>
 
     <!-- to get the reference to local repository with com\googlecode\jspf\jspf-core\0.9.1\ -->
@@ -171,6 +179,13 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <configuration>
                     <mainClass>mage.client.MageFrame</mainClass>
+                    <additionalDependencies>
+                        <dependency>
+                            <groupId>com.formdev</groupId>
+                            <artifactId>flatlaf</artifactId>
+                            <version>3.4.1</version>
+                        </dependency>
+                    </additionalDependencies>
                 </configuration>
             </plugin>
             <plugin>

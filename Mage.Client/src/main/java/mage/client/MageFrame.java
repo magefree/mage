@@ -999,24 +999,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         menuDownloadSymbols = new javax.swing.JMenuItem();
         menuDownloadImages = new javax.swing.JMenuItem();
         desktopPane = new MageJDesktop();
-        mageToolbar = new javax.swing.JToolBar();
-        btnPreferences = new javax.swing.JButton();
-        jSeparator4 = new javax.swing.JToolBar.Separator();
-        btnConnect = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JToolBar.Separator();
-        btnDeckEditor = new javax.swing.JButton();
-        jSeparator2 = new javax.swing.JToolBar.Separator();
-        btnCollectionViewer = new javax.swing.JButton();
-        jSeparator5 = new javax.swing.JToolBar.Separator();
-        btnSendFeedback = new javax.swing.JButton();
-        jSeparator6 = new javax.swing.JToolBar.Separator();
-        btnDownload = new javax.swing.JButton();
-        jSeparatorSymbols = new javax.swing.JToolBar.Separator();
-        btnAbout = new javax.swing.JButton();
-        jSeparator7 = new javax.swing.JToolBar.Separator();
-        btnDebug = new javax.swing.JButton();
-        separatorDebug = new javax.swing.JToolBar.Separator();
-        jMemUsageLabel = new javax.swing.JLabel();
+        mageToolbar = createMageToolbar();
 
         menuDebugTestModalDialog.setText("Test Modal Dialogs");
         menuDebugTestModalDialog.addActionListener(new java.awt.event.ActionListener() {
@@ -1181,20 +1164,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         jMemUsageLabel.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         mageToolbar.add(jMemUsageLabel);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 838, Short.MAX_VALUE)
-                        .addComponent(mageToolbar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addComponent(mageToolbar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(2, 2, 2)
-                                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE))
-        );
+        getContentPane().setLayout(new java.awt.BorderLayout());
+        getContentPane().add(mageToolbar, java.awt.BorderLayout.NORTH);
+        getContentPane().add(desktopPane, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -1227,6 +1199,157 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private void btnCollectionViewerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCollectionViewerActionPerformed
         showCollectionViewer();
     }//GEN-LAST:event_btnCollectionViewerActionPerformed
+
+    private JToolBar createMageToolbar() {
+        JToolBar toolbar = new JToolBar();
+        toolbar.setFloatable(false);
+        toolbar.setRollover(true);
+        toolbar.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
+        toolbar.setMaximumSize(new java.awt.Dimension(614, 60));
+        toolbar.setMinimumSize(new java.awt.Dimension(566, 60));
+        toolbar.setPreferredSize(new java.awt.Dimension(614, 60));
+
+        addToolbarButtons(toolbar);
+
+        return toolbar;
+    }
+
+    private void addToolbarButtons(JToolBar toolbar) {
+        btnPreferences = new javax.swing.JButton();
+        btnPreferences.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/preferences.png"))); // NOI18N
+        btnPreferences.setText("Preferences");
+        btnPreferences.setToolTipText("By changing the settings in the preferences window you can adjust the look and behaviour of xmage.");
+        btnPreferences.setFocusable(false);
+        btnPreferences.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnPreferences.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPreferencesActionPerformed(evt);
+            }
+        });
+        toolbar.add(btnPreferences);
+
+        jSeparator4 = new JToolBar.Separator();
+        toolbar.add(jSeparator4);
+
+        btnConnect = new javax.swing.JButton();
+        btnConnect.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/connect.png"))); // NOI18N
+        btnConnect.setToolTipText("Connect to or disconnect from a XMage server.");
+        btnConnect.setFocusable(false);
+        btnConnect.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnConnect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConnectActionPerformed(evt);
+            }
+        });
+        toolbar.add(btnConnect);
+
+        jSeparator1 = new JToolBar.Separator();
+        toolbar.add(jSeparator1);
+
+        btnDeckEditor = new javax.swing.JButton();
+        btnDeckEditor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/deck_editor.png"))); // NOI18N
+        btnDeckEditor.setText("Deck Editor");
+        btnDeckEditor.setToolTipText("Start the deck editor to create or modify decks.");
+        btnDeckEditor.setFocusable(false);
+        btnDeckEditor.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnDeckEditor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeckEditorActionPerformed(evt);
+            }
+        });
+        toolbar.add(btnDeckEditor);
+
+        jSeparator2 = new JToolBar.Separator();
+        toolbar.add(jSeparator2);
+
+        btnCollectionViewer = new javax.swing.JButton();
+        btnCollectionViewer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/collection.png"))); // NOI18N
+        btnCollectionViewer.setText("Card Viewer");
+        btnCollectionViewer.setToolTipText("Card viewer to show the cards of sets. ");
+        btnCollectionViewer.setFocusable(false);
+        btnCollectionViewer.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnCollectionViewer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCollectionViewerActionPerformed(evt);
+            }
+        });
+        toolbar.add(btnCollectionViewer);
+
+        jSeparator5 = new JToolBar.Separator();
+        toolbar.add(jSeparator5);
+
+        btnSendFeedback = new javax.swing.JButton();
+        btnSendFeedback.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/feedback.png"))); // NOI18N
+        btnSendFeedback.setText("Feedback");
+        btnSendFeedback.setToolTipText("Send some feedback to the developers.");
+        btnSendFeedback.setFocusable(false);
+        btnSendFeedback.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnSendFeedback.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSendFeedbackActionPerformed(evt);
+            }
+        });
+        toolbar.add(btnSendFeedback);
+
+        jSeparator6 = new JToolBar.Separator();
+        toolbar.add(jSeparator6);
+
+        btnDownload = new javax.swing.JButton();
+        btnDownload.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/images.png"))); // NOI18N
+        btnDownload.setText("Download");
+        btnDownload.setToolTipText("Download cards images and mana symbols");
+        btnDownload.setFocusable(false);
+        btnDownload.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnDownload.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDownloadMouseClicked(evt);
+            }
+        });
+        toolbar.add(btnDownload);
+
+        jSeparatorSymbols = new JToolBar.Separator();
+        toolbar.add(jSeparatorSymbols);
+
+        btnAbout = new javax.swing.JButton();
+        btnAbout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/about.png"))); // NOI18N
+        btnAbout.setText("About");
+        btnAbout.setToolTipText("About app");
+        btnAbout.setFocusable(false);
+        btnAbout.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnAbout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAboutActionPerformed(evt);
+            }
+        });
+        toolbar.add(btnAbout);
+
+        jSeparator7 = new JToolBar.Separator();
+        toolbar.add(jSeparator7);
+
+        btnDebug = new javax.swing.JButton();
+        btnDebug.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/connect.png"))); // NOI18N
+        btnDebug.setText("Debug");
+        btnDebug.setToolTipText("Show debug tools");
+        btnDebug.setFocusable(false);
+        btnDebug.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnDebug.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDebugMouseClicked(evt);
+            }
+        });
+        toolbar.add(btnDebug);
+
+        separatorDebug = new JToolBar.Separator();
+        toolbar.add(separatorDebug);
+
+        jMemUsageLabel = new javax.swing.JLabel();
+        jMemUsageLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jMemUsageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/memory.png"))); // NOI18N
+        jMemUsageLabel.setText("100% Free mem");
+        jMemUsageLabel.setFocusable(false);
+        jMemUsageLabel.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        toolbar.add(jMemUsageLabel);
+    }
 
     public void btnPreferencesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreferencesActionPerformed
         PreferencesDialog.main(new String[]{});
@@ -1522,6 +1645,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
      */
     public static void main(final String[] args) {
         // Workaround for #451
+        com.formdev.flatlaf.FlatDarculaLaf.setup();
         System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
         LOGGER.info("Starting MAGE CLIENT version: " + VERSION);
         LOGGER.info("Java version: " + System.getProperty("java.version"));
