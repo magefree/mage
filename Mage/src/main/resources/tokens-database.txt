@@ -2841,7 +2841,16 @@
 |Generate|TOK:FIC|Clue|||ClueArtifactToken|
 
 #EOE
-|Generate|TOK:EOE|Lander|||LanderToken|
+|Generate|TOK:EOE|Drone|||DroneToken2|
+|Generate|TOK:EOE|Human Soldier|||HumanSoldierToken|
+|Generate|TOK:EOE|Lander|1||LanderToken|
+|Generate|TOK:EOE|Lander|2||LanderToken|
+|Generate|TOK:EOE|Lander|3||LanderToken|
+|Generate|TOK:EOE|Lander|4||LanderToken|
+|Generate|TOK:EOE|Lander|5||LanderToken|
+|Generate|TOK:EOE|Munitions|||MunitionsToken|
+|Generate|TOK:EOE|Robot|||RobotToken|
+|Generate|TOK:EOE|Sliver|||SliverToken|
 
 #EOC
 |Generate|TOK:EOC|Beast|1||BeastToken|
@@ -2858,6 +2867,7 @@
 |Generate|TOK:EOC|Insect|||XiraBlackInsectToken|
 |Generate|TOK:EOC|Pest|||Pest11GainLifeToken|
 |Generate|TOK:EOC|Phyrexian|||Phyrexian00Token|
+|Generate|TOK:EOC|Shapeshifter|||ShapeshifterDeathtouchToken|
 |Generate|TOK:EOC|Thopter|||ThopterColorlessToken|
 
 # JVC
