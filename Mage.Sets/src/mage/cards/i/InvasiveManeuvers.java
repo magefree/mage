@@ -9,6 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
@@ -28,6 +29,7 @@ public final class InvasiveManeuvers extends CardImpl {
                 new DamageTargetEffect(5), new DamageTargetEffect(3), condition,
                 "{this} deals 3 damage to target creature. It deals 5 damage instead if you control a Spacecraft"
         ));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     private InvasiveManeuvers(final InvasiveManeuvers card) {
