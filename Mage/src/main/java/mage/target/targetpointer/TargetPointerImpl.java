@@ -83,8 +83,12 @@ public abstract class TargetPointerImpl implements TargetPointer {
     }
 
     @Override
-    public void setTargetDescription(String defaultDescription) {
-        targetDescription = defaultDescription;
+    public void setTargetDescription(String description) {
+        targetDescription = description;
+    }
+    @Override
+    public String getTargetDescription() {
+        return targetDescription;
     }
 
 }

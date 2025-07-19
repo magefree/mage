@@ -62,7 +62,8 @@ public interface TargetPointer extends Serializable, Copyable<TargetPointer> {
     /**
      * Overwrite the default target description
      */
-    void setTargetDescription(String defaultDescription);
+    void setTargetDescription(String description);
+    String getTargetDescription();
 
     default boolean isPlural(Targets targets) {
         return false;
