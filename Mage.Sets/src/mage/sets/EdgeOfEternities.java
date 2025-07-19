@@ -197,6 +197,8 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Larval Scoutlander", 194, Rarity.UNCOMMON, mage.cards.l.LarvalScoutlander.class));
         cards.add(new SetCardInfo("Lashwhip Predator", 195, Rarity.UNCOMMON, mage.cards.l.LashwhipPredator.class));
         cards.add(new SetCardInfo("Lightless Evangel", 109, Rarity.UNCOMMON, mage.cards.l.LightlessEvangel.class));
+        cards.add(new SetCardInfo("Lightstall Inquisitor", 24, Rarity.RARE, mage.cards.l.LightstallInquisitor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lightstall Inquisitor", 320, Rarity.RARE, mage.cards.l.LightstallInquisitor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lithobraking", 142, Rarity.UNCOMMON, mage.cards.l.Lithobraking.class));
         cards.add(new SetCardInfo("Loading Zone", 196, Rarity.RARE, mage.cards.l.LoadingZone.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Loading Zone", 344, Rarity.RARE, mage.cards.l.LoadingZone.class, NON_FULL_USE_VARIOUS));
