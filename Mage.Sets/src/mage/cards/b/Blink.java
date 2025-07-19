@@ -51,7 +51,7 @@ public final class Blink extends CardImpl {
                 this, SagaChapter.CHAPTER_IV,
                 new CreateTokenEffect(new AlienAngelToken())
         );
-        this.addAbility(sagaAbility);
+        this.addAbility(sagaAbility); //TODO: These should be a single AddChapterEffect, but currently XMage does not support noncontiguous Saga chapters
     }
 
     private Blink(final Blink card) {
