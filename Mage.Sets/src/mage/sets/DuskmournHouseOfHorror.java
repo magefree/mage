@@ -43,6 +43,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Blazemire Verge", 329, Rarity.RARE, mage.cards.b.BlazemireVerge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bleeding Woods", 257, Rarity.COMMON, mage.cards.b.BleedingWoods.class));
         cards.add(new SetCardInfo("Boilerbilges Ripper", 127, Rarity.COMMON, mage.cards.b.BoilerbilgesRipper.class));
+        cards.add(new SetCardInfo("Bottomless Pool // Locker Room", 43, Rarity.UNCOMMON, mage.cards.b.BottomlessPoolLockerRoom.class));
         cards.add(new SetCardInfo("Break Down the Door", 170, Rarity.UNCOMMON, mage.cards.b.BreakDownTheDoor.class));
         cards.add(new SetCardInfo("Broodspinner", 211, Rarity.UNCOMMON, mage.cards.b.Broodspinner.class));
         cards.add(new SetCardInfo("Cackling Slasher", 85, Rarity.COMMON, mage.cards.c.CacklingSlasher.class));
