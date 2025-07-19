@@ -20,8 +20,11 @@ import mage.watchers.common.CommanderPlaysCountWatcher;
  */
 public class CommanderStormAbility extends TriggeredAbilityImpl {
 
-    public CommanderStormAbility() {
-        super(Zone.STACK, new CommanderStormEffect());
+    public CommanderStormAbility(boolean newTargetsText) {
+        super(Zone.STACK, new CommanderStormEffect().setText("copy it for each time you've "
+                + "cast your commander from the command zone this game."
+                + (newTargetsText ? " You may choose new targets for the copies." : "")));
+        this.setTriggerPhrase("When you cast this spell, ");
         this.setRuleAtTheTop(true);
     }
 
@@ -53,13 +56,6 @@ public class CommanderStormAbility extends TriggeredAbilityImpl {
             effect.setValue("StormSpellRef", new MageObjectReference(spell.getId(), game));
         }
         return true;
-    }
-
-    @Override
-    public String getRule() {
-        return "When you cast this spell, copy it for each time you've "
-                + "cast your commander from the command zone this game. "
-                + "You may choose new targets for the copies.";
     }
 }
 
