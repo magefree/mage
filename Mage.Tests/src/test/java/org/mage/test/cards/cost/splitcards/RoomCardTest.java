@@ -6,6 +6,7 @@ import mage.constants.PhaseStep;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -230,6 +231,79 @@ public class RoomCardTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Bottomless Pool", 1);
         // Verify that "Felidar Guardian" is on playerA's battlefield.
         assertPermanentCount(playerA, "Felidar Guardian", 1);
+    }
+    
+    @Test
+    public void testEerie() {
+        skipInitShuffling();
+        // Bottomless Pool {U} When you unlock this door, return up to one target
+        // creature to its owner’s hand.
+        // Locker Room {4}{U} Whenever one or more creatures you control deal combat
+        // damage to a player, draw a card.
+        addCard(Zone.HAND, playerA, "Bottomless Pool // Locker Room");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
+        addCard(Zone.BATTLEFIELD, playerA, "Erratic Apparition", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bottomless Pool");
+        // resolve spell cast
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        setChoice(playerA, "When you unlock"); // x2 triggers
+        // don't bounce anything
+        addTarget(playerA, TestPlayer.TARGET_SKIP);
+        // resolve ability
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        // unlock other side
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA,
+                "{4}{U}: Unlock the right half.");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        // Assertions:
+        // Verify that "Bottomless Pool // Locker Room" is on playerA's battlefield.
+        assertPermanentCount(playerA, "Bottomless Pool // Locker Room", 1);
+        // Verify that "Erratic Apparition" is on playerA's battlefield.
+        assertPermanentCount(playerA, "Erratic Apparition", 1);
+        // Verify that "Erratic Apparition" has been pumped twice (etb + fully unlock)
+        assertPowerToughness(playerA, "Erratic Apparition", 3, 5);
+    }
+    
+    @Test
+    public void testCopyOnStack() {
+        skipInitShuffling();
+        // Bottomless Pool {U} When you unlock this door, return up to one target
+        // creature to its owner’s hand.
+        // Locker Room {4}{U} Whenever one or more creatures you control deal combat
+        // damage to a player, draw a card.
+        addCard(Zone.HAND, playerA, "Bottomless Pool // Locker Room");
+        addCard(Zone.HAND, playerA, "See Double");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Memnite", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Ornithopter", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bottomless Pool");
+        // Copy spell on the stack
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "See Double");
+        setModeChoice(playerA, "1"); 
+        addTarget(playerA, "Bottomless Pool");        
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 3);
+        addTarget(playerA, "Memnite");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        addTarget(playerA, "Ornithopter");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        // Assertions:
+        // Verify that one "Memnite" has been returned to playerA's hand.
+        assertHandCount(playerA, "Memnite", 1);
+        // Verify that one "Ornithopter" has been returned to playerA's hand.
+        assertHandCount(playerA, "Ornithopter", 1);
+        // Verify that 2 "Bottomless Pool" are on playerA's battlefield.
+        assertPermanentCount(playerA, "Bottomless Pool", 2);
     }
 
 }
