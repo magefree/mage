@@ -2348,6 +2348,16 @@ public class VerifyCardDataTest {
                     fail(card, "abilities", "wrong target settings (targeted ability found but no target in text):" + ability.getClass().getSimpleName());
                 }
             }
+            // Also check that the reference text and the final ability text have the same number of "target"
+
+            // remove reminder text
+            String preparedRefText = refLowerText.replaceAll("\\([^)].+\\)", "");
+            int refTargetCount = (preparedRefText.length() - preparedRefText.replace("target", "").length());
+            String preparedRuleText = cardLowerText.replaceAll("\\([^)].+\\)", "");
+            int cardTargetCount = (preparedRuleText.length() - preparedRuleText.replace("target", "").length());
+            if (refTargetCount != cardTargetCount) {
+                fail(card, "abilities", "target count text discrepancy: " + (refTargetCount / 6) + " in reference but " + (cardTargetCount / 6) + " in card. <" + preparedRefText + ">|<" + preparedRuleText + ">");
+            }
         }
 
         // special check: missing or wrong ability/effect rules hint
