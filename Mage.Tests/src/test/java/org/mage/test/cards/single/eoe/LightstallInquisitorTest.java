@@ -56,5 +56,6 @@ public class LightstallInquisitorTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerB, "Centaur Courser", 1);
         assertTappedCount("Forest", true, 4);
+        assertTappedCount("Centaur Courser", false, 1);
     }
 }
