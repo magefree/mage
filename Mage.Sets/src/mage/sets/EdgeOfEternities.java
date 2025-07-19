@@ -4,15 +4,11 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * @author TheElk801
  */
 public final class EdgeOfEternities extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("All-Fates Stalker", "Anticausal Vestige", "Astelli Reclaimer", "Broodguard Elite", "Bygone Colossus", "Codecracker Hound", "Drix Fatemaker", "Eusocial Engineering", "Exalted Sunborn", "Germinating Wurm", "Haliya, Guided by Light", "Knight Luminary", "Loading Zone", "Mechanozoa", "Memorial Team Leader", "Mightform Harmonizer", "Nova Hellkite", "Perigee Beckoner", "Pinnacle Emissary", "Possibility Technician", "Quantum Riddler", "Rayblade Trooper", "Red Tiger Mechan", "Sinister Cryologist", "Starbreach Whale", "Starfield Shepherd", "Starfield Vocalist", "Starwinder", "Susurian Voidborn", "Timeline Culler", "Weftblade Enhancer", "Weftstalker Ardent");
     private static final EdgeOfEternities instance = new EdgeOfEternities();
 
     public static EdgeOfEternities getInstance() {
@@ -71,6 +67,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Chorale of the Void", 331, Rarity.RARE, mage.cards.c.ChoraleOfTheVoid.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chorale of the Void", 91, Rarity.RARE, mage.cards.c.ChoraleOfTheVoid.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chrome Companion", 236, Rarity.COMMON, mage.cards.c.ChromeCompanion.class));
+        cards.add(new SetCardInfo("Close Encounter", 176, Rarity.UNCOMMON, mage.cards.c.CloseEncounter.class));
         cards.add(new SetCardInfo("Cloudsculpt Technician", 49, Rarity.COMMON, mage.cards.c.CloudsculptTechnician.class));
         cards.add(new SetCardInfo("Codecracker Hound", 50, Rarity.UNCOMMON, mage.cards.c.CodecrackerHound.class));
         cards.add(new SetCardInfo("Comet Crawler", 92, Rarity.COMMON, mage.cards.c.CometCrawler.class));
@@ -142,6 +139,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Frenzied Baloth", 183, Rarity.RARE, mage.cards.f.FrenziedBaloth.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Frenzied Baloth", 342, Rarity.RARE, mage.cards.f.FrenziedBaloth.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Frontline War-Rager", 134, Rarity.COMMON, mage.cards.f.FrontlineWarRager.class));
+        cards.add(new SetCardInfo("Full Bore", 135, Rarity.UNCOMMON, mage.cards.f.FullBore.class));
         cards.add(new SetCardInfo("Fungal Colossus", 184, Rarity.COMMON, mage.cards.f.FungalColossus.class));
         cards.add(new SetCardInfo("Galactic Wayfarer", 185, Rarity.COMMON, mage.cards.g.GalacticWayfarer.class));
         cards.add(new SetCardInfo("Galvanizing Sawship", 136, Rarity.UNCOMMON, mage.cards.g.GalvanizingSawship.class));
@@ -361,6 +359,8 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Syr Vondam, the Lucent", 232, Rarity.UNCOMMON, mage.cards.s.SyrVondamTheLucent.class));
         cards.add(new SetCardInfo("Systems Override", 161, Rarity.UNCOMMON, mage.cards.s.SystemsOverride.class));
         cards.add(new SetCardInfo("Tannuk, Memorial Ensign", 233, Rarity.UNCOMMON, mage.cards.t.TannukMemorialEnsign.class));
+        cards.add(new SetCardInfo("Tannuk, Steadfast Second", 162, Rarity.MYTHIC, mage.cards.t.TannukSteadfastSecond.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Tannuk, Steadfast Second", 296, Rarity.MYTHIC, mage.cards.t.TannukSteadfastSecond.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tapestry Warden", 209, Rarity.UNCOMMON, mage.cards.t.TapestryWarden.class));
         cards.add(new SetCardInfo("Temporal Intervention", 120, Rarity.COMMON, mage.cards.t.TemporalIntervention.class));
         cards.add(new SetCardInfo("Terminal Velocity", 163, Rarity.RARE, mage.cards.t.TerminalVelocity.class, NON_FULL_USE_VARIOUS));
@@ -387,6 +387,7 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("The Seriema", 35, Rarity.RARE, mage.cards.t.TheSeriema.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thrumming Hivepool", 247, Rarity.RARE, mage.cards.t.ThrummingHivepool.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thrumming Hivepool", 356, Rarity.RARE, mage.cards.t.ThrummingHivepool.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Timeline Culler", 121, Rarity.UNCOMMON, mage.cards.t.TimelineCuller.class));
         cards.add(new SetCardInfo("Tractor Beam", 82, Rarity.UNCOMMON, mage.cards.t.TractorBeam.class));
         cards.add(new SetCardInfo("Tragic Trajectory", 122, Rarity.UNCOMMON, mage.cards.t.TragicTrajectory.class));
         cards.add(new SetCardInfo("Umbral Collar Zealot", 123, Rarity.UNCOMMON, mage.cards.u.UmbralCollarZealot.class, NON_FULL_USE_VARIOUS));
@@ -421,7 +422,5 @@ public final class EdgeOfEternities extends ExpansionSet {
         cards.add(new SetCardInfo("Zero Point Ballad", 128, Rarity.RARE, mage.cards.z.ZeroPointBallad.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Zero Point Ballad", 335, Rarity.RARE, mage.cards.z.ZeroPointBallad.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Zookeeper Mechan", 170, Rarity.COMMON, mage.cards.z.ZookeeperMechan.class));
-
-        cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName()));
     }
 }
