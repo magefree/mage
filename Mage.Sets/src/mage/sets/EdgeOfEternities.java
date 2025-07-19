@@ -22,6 +22,9 @@ public final class EdgeOfEternities extends ExpansionSet {
     private EdgeOfEternities() {
         super("Edge of Eternities", "EOE", ExpansionSet.buildDate(2025, 8, 1), SetType.EXPANSION);
         this.blockName = "Edge of Eternities"; // for sorting in GUI
+        this.hasBasicLands = true;
+
+        this.enablePlayBooster(Integer.MAX_VALUE);
         this.rotationSet = true;
 
         cards.add(new SetCardInfo("Adagia, Windswept Bastion", 250, Rarity.MYTHIC, mage.cards.a.AdagiaWindsweptBastion.class, NON_FULL_USE_VARIOUS));
