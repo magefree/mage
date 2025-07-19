@@ -96,4 +96,11 @@ public class CreateDelayedTriggeredAbilityEffect extends OneShotEffect {
         this.copyToPointer = copyToPointer;
         return this;
     }
+
+    @Override
+    public CreateDelayedTriggeredAbilityEffect withTargetDescription(String target) {
+        ability.getEffects().forEach(effect -> effect.withTargetDescription(target));
+        super.withTargetDescription(target);
+        return this;
+    }
 }
