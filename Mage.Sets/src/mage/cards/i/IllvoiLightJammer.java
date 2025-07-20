@@ -21,7 +21,7 @@ import java.util.UUID;
 public final class IllvoiLightJammer extends CardImpl {
 
     public IllvoiLightJammer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}{U}");
 
         this.subtype.add(SubType.EQUIPMENT);
 
