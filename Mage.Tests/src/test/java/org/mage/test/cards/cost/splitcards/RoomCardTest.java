@@ -232,7 +232,7 @@ public class RoomCardTest extends CardTestPlayerBase {
         // Verify that "Felidar Guardian" is on playerA's battlefield.
         assertPermanentCount(playerA, "Felidar Guardian", 1);
     }
-    
+
     @Test
     public void testEerie() {
         skipInitShuffling();
@@ -269,7 +269,7 @@ public class RoomCardTest extends CardTestPlayerBase {
         // Verify that "Erratic Apparition" has been pumped twice (etb + fully unlock)
         assertPowerToughness(playerA, "Erratic Apparition", 3, 5);
     }
-    
+
     @Test
     public void testCopyOnStack() {
         skipInitShuffling();
@@ -286,8 +286,8 @@ public class RoomCardTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bottomless Pool");
         // Copy spell on the stack
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "See Double");
-        setModeChoice(playerA, "1"); 
-        addTarget(playerA, "Bottomless Pool");        
+        setModeChoice(playerA, "1");
+        addTarget(playerA, "Bottomless Pool");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 3);
         addTarget(playerA, "Memnite");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
@@ -306,4 +306,47 @@ public class RoomCardTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Bottomless Pool", 2);
     }
 
+    @Test
+    public void testCopyOnBattlefield() {
+        skipInitShuffling();
+        // Bottomless Pool {U} When you unlock this door, return up to one target
+        // creature to its owner's hand.
+        // Locker Room {4}{U} Whenever one or more creatures you control deal combat
+        // damage to a player, draw a card.
+        addCard(Zone.HAND, playerA, "Bottomless Pool // Locker Room");
+        addCard(Zone.HAND, playerA, "Clever Impersonator");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
+        addCard(Zone.BATTLEFIELD, playerA, "Memnite", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Ornithopter", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bottomless Pool");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        addTarget(playerA, "Memnite");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        // Copy spell on the battlefield
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Clever Impersonator");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        setChoice(playerA, "Yes");
+        setChoice(playerA, "Bottomless Pool");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA,
+                "{U}: Unlock the left half.");
+        addTarget(playerA, "Ornithopter");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        // Assertions:
+        // Verify that one "Memnite" has been returned to playerA's hand (from original
+        // unlock).
+        assertHandCount(playerA, "Memnite", 1);
+        // Verify that "Ornithopter" has been returned to playerA's hand (from clone
+        // unlock).
+        assertHandCount(playerA, "Ornithopter", 1);
+        // Verify that the original "Bottomless Pool" is on playerA's battlefield, and a
+        // clone.
+        assertPermanentCount(playerA, "Bottomless Pool", 2);
+    }
 }
