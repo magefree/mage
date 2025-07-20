@@ -1818,7 +1818,7 @@ public class VerifyCardDataTest {
     private void check(Card card, int cardIndex) {
         MtgJsonCard ref = MtgJsonService.cardFromSet(card.getExpansionSetCode(), card.getName(), card.getCardNumber());
         if (ref != null) {
-            if (card instanceof SpellOptionCard && ref.layout.equals("reversible_card")) {
+            if ((card instanceof CardWithSpellOption || card instanceof SpellOptionCard) && ref.layout.equals("reversible_card")) {
                 // TODO: Remove when MtgJson updated
                 // workaround for reversible omen cards e.g. Bloomvine Regent // Claim Territory // Bloomvine Regent
                 // both sides have main card info
@@ -2337,11 +2337,7 @@ public class VerifyCardDataTest {
         String additionalName;
         if (card instanceof CardWithSpellOption) {
             // adventure/omen cards
-            if (card.getName().equals("Bloomvine Regent") || card.getName().equals("Marang River Regent") || card.getName().equals("Scavenger Regent")) {
-                additionalName = null;
-            } else {
-                additionalName = ((CardWithSpellOption) card).getSpellCard().getName();
-            }
+            additionalName = ((CardWithSpellOption) card).getSpellCard().getName();
         } else if (card.isTransformable() && !card.isNightCard()) {
             additionalName = card.getSecondCardFace().getName();
         } else {
