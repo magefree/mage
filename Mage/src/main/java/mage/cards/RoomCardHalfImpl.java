@@ -30,14 +30,14 @@ public class RoomCardHalfImpl extends SplitCardHalfImpl implements RoomCardHalf 
     @Override
     public boolean cast(Game game, Zone fromZone, SpellAbility ability, UUID controllerId) {
         SpellAbilityType abilityType = ability.getSpellAbilityType();
-        UUID parentCardId = this.getParentCard().getId();
+        RoomCard parentCard = (RoomCard) this.getParentCard();
 
         if (abilityType == SpellAbilityType.SPLIT_LEFT) {
-            game.getState().setValue(parentCardId + "_ROOM_LAST_CAST_HALF", SpellAbilityType.SPLIT_LEFT);
+            parentCard.setLastCastHalf(SpellAbilityType.SPLIT_LEFT);
         } else if (abilityType == SpellAbilityType.SPLIT_RIGHT) {
-            game.getState().setValue(parentCardId + "_ROOM_LAST_CAST_HALF", SpellAbilityType.SPLIT_RIGHT);
+            parentCard.setLastCastHalf(SpellAbilityType.SPLIT_RIGHT);
         } else {
-            game.getState().setValue(parentCardId + "_ROOM_LAST_CAST_HALF", null);
+            parentCard.setLastCastHalf(null);
         }
 
         return super.cast(game, fromZone, ability, controllerId);

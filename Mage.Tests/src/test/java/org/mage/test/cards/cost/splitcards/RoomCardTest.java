@@ -189,8 +189,8 @@ public class RoomCardTest extends CardTestPlayerBase {
         // damage to a player, draw a card.
         addCard(Zone.HAND, playerA, "Bottomless Pool // Locker Room");
         addCard(Zone.HAND, playerA, "Felidar Guardian");
-        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
-        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
 
         // creatures owned by player A
         addCard(Zone.BATTLEFIELD, playerA, "Memnite", 1);

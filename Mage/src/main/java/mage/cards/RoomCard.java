@@ -3,7 +3,6 @@ package mage.cards;
 import java.util.UUID;
 
 import mage.abilities.Abilities;
-import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.RoomUnlockAbility;
@@ -23,12 +22,15 @@ import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentToken;
 import mage.abilities.effects.common.continuous.LoseAbilitySourceEffect;
 
 /**
  * @author oscscull
  */
 public abstract class RoomCard extends SplitCard {
+    private SpellAbilityType lastCastHalf = null;
+
     protected RoomCard(UUID ownerId, CardSetInfo setInfo, CardType[] types, String costsLeft,
             String costsRight, SpellAbilityType spellAbilityType) {
         super(ownerId, setInfo, types, costsLeft, costsRight, spellAbilityType, true);
@@ -47,6 +49,15 @@ public abstract class RoomCard extends SplitCard {
 
     protected RoomCard(RoomCard card) {
         super(card);
+        this.lastCastHalf = card.lastCastHalf;
+    }
+
+    public SpellAbilityType getLastCastHalf() {
+        return lastCastHalf;
+    }
+
+    public void setLastCastHalf(SpellAbilityType lastCastHalf) {
+        this.lastCastHalf = lastCastHalf;
     }
 
     protected void AddRoomAbilities(Ability leftAbility, Ability rightAbility) {
@@ -60,7 +71,8 @@ public abstract class RoomCard extends SplitCard {
         entersAbility.setRuleVisible(false);
         this.addAbility(entersAbility);
 
-        // Remove locked door abilities - keeping unlock triggers (or they won't trigger when unlocked)
+        // Remove locked door abilities - keeping unlock triggers (or they won't trigger
+        // when unlocked)
         if (leftAbility != null && !(leftAbility instanceof UnlockThisDoorTriggeredAbility)) {
             Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                     new LoseAbilitySourceEffect(leftAbility, Duration.WhileOnBattlefield),
@@ -151,15 +163,24 @@ class RoomEnterUnlockEffect extends OneShotEffect {
         }
 
         permanent.roomUnlockOnCast(game);
-        UUID permanentId = permanent.getId();
+        RoomCard roomCard = null;
+        // Get the parent card to access the lastCastHalf variable
+        if (permanent instanceof PermanentToken) {
+            roomCard = (RoomCard) permanent.getMainCard();
+        } else {
+            roomCard = (RoomCard) game.getCard(permanent.getId());
+        }
+        if (roomCard == null) {
+            return true;
+        }
 
-        SpellAbilityType lastCastHalf = (SpellAbilityType) game.getState()
-                .getValue(permanentId.toString() + "_ROOM_LAST_CAST_HALF");
-        game.getState().removeValue(permanentId.toString() + "_ROOM_LAST_CAST_HALF");
+        SpellAbilityType lastCastHalf = roomCard.getLastCastHalf();
 
         if (lastCastHalf == SpellAbilityType.SPLIT_LEFT) {
+            roomCard.setLastCastHalf(null);
             return permanent.roomUnlockLeftDoor(game, source);
         } else if (lastCastHalf == SpellAbilityType.SPLIT_RIGHT) {
+            roomCard.setLastCastHalf(null);
             return permanent.roomUnlockRightDoor(game, source);
         }
 
