@@ -21,7 +21,8 @@ public final class DiplomaticRelations extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{G}");
 
         // Target creature you control gets +1/+0 and gains vigilance until end of turn. It deals damage equal to its power to target creature an opponent controls.
-        this.getSpellAbility().addEffect(new BoostTargetEffect(1, 0));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(1, 0)
+                .setText("target creature you control gets +1/+0"));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(VigilanceAbility.getInstance())
                 .setText("and gains vigilance until end of turn"));
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());

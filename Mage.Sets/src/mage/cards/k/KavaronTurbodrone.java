@@ -32,7 +32,7 @@ public final class KavaronTurbodrone extends CardImpl {
         // {T}: Target creature you control gets +1/+1 and gains haste until end of turn. Activate only as a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(
                 new BoostTargetEffect(1, 1, Duration.EndOfTurn)
-                        .setText("Target creature gets +1/+1"),
+                        .setText("Target creature you control gets +1/+1"),
                 new TapSourceCost()
         );
         ability.addEffect(new GainAbilityTargetEffect(

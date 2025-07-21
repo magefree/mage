@@ -21,7 +21,7 @@ import java.util.UUID;
 public final class MentalModulation extends CardImpl {
 
     public MentalModulation(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{W}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
         // This spell costs {1} less to cast during your turn.
         Ability ability = new SimpleStaticAbility(

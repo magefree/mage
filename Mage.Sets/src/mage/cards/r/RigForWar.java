@@ -7,7 +7,6 @@ import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -21,12 +20,12 @@ public final class RigForWar extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}");
 
         // Target creature gets +3/+0 and gains first strike and reach until end of turn.
-        getSpellAbility().addEffect(new BoostTargetEffect(3, 0, Duration.EndOfTurn)
+        getSpellAbility().addEffect(new BoostTargetEffect(3, 0)
                 .setText("target creature gets +3/+0"));
-        getSpellAbility().addEffect(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn)
+        getSpellAbility().addEffect(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance())
                 .setText("and gains first strike"));
-        getSpellAbility().addEffect(new GainAbilityTargetEffect(ReachAbility.getInstance(), Duration.EndOfTurn)
-                .setText("and first reach until end of turn"));
+        getSpellAbility().addEffect(new GainAbilityTargetEffect(ReachAbility.getInstance())
+                .setText("and reach until end of turn"));
         getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

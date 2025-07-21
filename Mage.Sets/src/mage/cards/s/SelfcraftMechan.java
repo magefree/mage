@@ -32,7 +32,7 @@ public final class SelfcraftMechan extends CardImpl {
 
         // When this creature enters, you may sacrifice an artifact. When you do, put a +1/+1 counter on target creature and draw a card.
         ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), false);
-        ability.addEffect(new DrawCardSourceControllerEffect(1));
+        ability.addEffect(new DrawCardSourceControllerEffect(1).concatBy("and"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DoWhenCostPaid(
                 ability, new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN),

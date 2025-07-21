@@ -43,7 +43,7 @@ class OrbitalPlungeEffect extends OneShotEffect {
     OrbitalPlungeEffect() {
         super(Outcome.Benefit);
         staticText = "{this} deals 6 damage to target creature. " +
-                "If excess damage was dealt to a permanent this way, create a Lander token.";
+                "If excess damage was dealt this way, create a Lander token.";
     }
 
     private OrbitalPlungeEffect(final OrbitalPlungeEffect effect) {

@@ -37,7 +37,7 @@ public final class MechanShieldmate extends CardImpl {
                         new ConditionalAsThoughEffect(
                                 new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.WhileOnBattlefield),
                                 ArtifactEnteredUnderYourControlCondition.instance
-                        ).setText("As long as an artifact entered the battlefield under your control this turn,"
+                        ).setText("As long as an artifact entered the battlefield under your control this turn, "
                                 + "this creature can attack as though it didn't have defender")
                 ).addHint(new ConditionHint(ArtifactEnteredUnderYourControlCondition.instance)),
                 new ArtifactEnteredControllerWatcher()
