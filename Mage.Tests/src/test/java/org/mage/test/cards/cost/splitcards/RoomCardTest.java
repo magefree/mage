@@ -791,4 +791,69 @@ public class RoomCardTest extends CardTestPlayerBase {
         // Verify the room is now fully unlocked
         assertPermanentCount(playerA, "Bottomless Pool // Locker Room", 1);
     }
+
+    // Test converting one permanent into one room, then another (the room halves should STAY UNLOCKED on the appropriate side!)
+    @Test
+    public void testUnlockingPermanentMakeCopyOfOtherRoom() {
+        skipInitShuffling();
+        // Bottomless Pool {U} When you unlock this door, return up to one target
+        // creature to its owner's hand.
+        // Locker Room {4}{U} Whenever one or more creatures you control deal combat
+        // damage to a player, draw a card.
+        //
+        // Surgical Suite {1}{W}
+        // When you unlock this door, return target creature card with mana value 3 or
+        // less from your graveyard to the battlefield.
+        // Hospital Room {3}{W}
+        // Whenever you attack, put a +1/+1 counter on target attacking creature.
+        //
+        // Mirage Mirror {3}
+        // {3}: Mirage Mirror becomes a copy of target artifact, creature, enchantment,
+        // or
+        // land until end of turn.
+
+        addCard(Zone.HAND, playerA, "Bottomless Pool // Locker Room");
+        addCard(Zone.HAND, playerA, "Surgical Suite // Hospital Room");
+        addCard(Zone.BATTLEFIELD, playerA, "Mirage Mirror");
+        addCard(Zone.BATTLEFIELD, playerA, "Tundra", 20);
+        addCard(Zone.BATTLEFIELD, playerA, "Memnite", 1);
+
+        // Cast Bottomless Pool (unlocked left half only)
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bottomless Pool");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        addTarget(playerA, TestPlayer.TARGET_SKIP);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{4}{U}: Unlock the right half.");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+
+        // Cast Surgical Suite (unlocked left half only)
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Surgical Suite");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}: {this} becomes a copy");
+        addTarget(playerA, "Bottomless Pool // Locker Room");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{4}{U}: Unlock the right half.");
+
+        setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}: {this} becomes a copy");
+        addTarget(playerA, "Surgical Suite");
+        
+        attack(3, playerA, "Memnite");
+        addTarget(playerA, "Memnite");
+        setStopAt(3, PhaseStep.END_TURN);
+
+        setStrictChooseMode(true);
+        execute();
+
+        // Verify unlocked Bottomless pool
+        assertPermanentCount(playerA, "Bottomless Pool // Locker Room", 1);
+        // Verify unlocked Surgical Suite
+        assertPermanentCount(playerA, "Surgical Suite", 1);
+        // Verify mirage mirror is Hospital Room
+        assertPermanentCount(playerA, "Hospital Room", 1);
+        // Memnite got a buff
+        assertPowerToughness(playerA, "Memnite", 2, 2);
+    }
 }
