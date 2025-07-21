@@ -383,15 +383,64 @@ public class RoomCardTest extends CardTestPlayerBase {
         // three cards of target player’s library.
         addTarget(playerA, playerA);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-        
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bottomless Pool");
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA,
-        "{U}{U}, Sacrifice {this}:");
+                "{U}{U}, Sacrifice {this}:");
         addTarget(playerA, "Bottomless Pool");
-
 
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
+    }
+
+    @Test
+    public void testCounterspellThenReanimate() {
+        skipInitShuffling();
+        // Bottomless Pool {U} When you unlock this door, return up to one target
+        // creature to its owner's hand.
+        // Locker Room {4}{U} Whenever one or more creatures you control deal combat
+        // damage to a player, draw a card.
+        addCard(Zone.HAND, playerA, "Bottomless Pool // Locker Room");
+        addCard(Zone.HAND, playerA, "Counterspell");
+        addCard(Zone.HAND, playerA, "Campus Renovation");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+
+        // Target creature for potential bounce (should not be bounced)
+        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears", 1);
+
+        // Cast Bottomless Pool
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bottomless Pool");
+
+        // Counter it while on stack
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Counterspell");
+        addTarget(playerA, "Bottomless Pool");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // Use Campus Renovation to return it from graveyard
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Campus Renovation");
+        addTarget(playerA, "Bottomless Pool // Locker Room");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        // Assertions:
+        // Verify that "Grizzly Bears" is still on playerB's battlefield (not bounced)
+        assertPermanentCount(playerB, "Grizzly Bears", 1);
+        // Verify that "Grizzly Bears" is not in playerB's hand
+        assertHandCount(playerB, "Grizzly Bears", 0);
+        // Verify that a room with no name is on playerA's battlefield
+        assertPermanentCount(playerA, EmptyNames.FULLY_LOCKED_ROOM.getTestCommand(), 1);
+        // Verify that the nameless room is an Enchantment
+        assertType(EmptyNames.FULLY_LOCKED_ROOM.getTestCommand(), CardType.ENCHANTMENT, true);
+        // Verify that the nameless room has the Room subtype
+        assertSubtype(EmptyNames.FULLY_LOCKED_ROOM.getTestCommand(), SubType.ROOM);
+        // Verify that Campus Renovation is in graveyard
+        assertGraveyardCount(playerA, "Campus Renovation", 1);
+        // Verify that Counterspell is in graveyard
+        assertGraveyardCount(playerA, "Counterspell", 1);
     }
 }

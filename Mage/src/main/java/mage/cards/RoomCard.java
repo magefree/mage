@@ -128,8 +128,8 @@ public abstract class RoomCard extends SplitCard {
             game.setZone(getLeftHalfCard().getId(), Zone.OUTSIDE);
             game.setZone(getRightHalfCard().getId(), Zone.OUTSIDE);
             return;
-
         }
+        
         game.setZone(getLeftHalfCard().getId(), zone);
         game.setZone(getRightHalfCard().getId(), zone);
     }
