@@ -720,4 +720,75 @@ public class RoomCardTest extends CardTestPlayerBase {
         // Verify that Counterspell is in graveyard
         assertGraveyardCount(playerA, "Counterspell", 1);
     }
+
+    @Test
+    public void testPithingNeedleActivatedAbility() {
+        skipInitShuffling();
+        // Bottomless Pool {U} When you unlock this door, return up to one target
+        // creature to its owner's hand.
+        // Locker Room {4}{U} Whenever one or more creatures you control deal combat
+        // damage to a player, draw a card.
+        //
+        // Opalescence
+        // {2}{W}{W}
+        // Enchantment
+        // Each other non-Aura enchantment is a creature in addition to its other types
+        // and has base power and base toughness each equal to its mana value.
+        //
+        // Diviner's Wand
+        // {3}
+        // Kindred Artifact — Wizard Equipment
+        // Equipped creature has "Whenever you draw a card, this creature gets +1/+1
+        // and gains flying until end of turn" and "{4}: Draw a card."
+        // Whenever a Wizard creature enters, you may attach this Equipment to it.
+        // Equip {3}
+        //
+        // Pithing Needle
+        // {1}
+        // Artifact
+        // As Pithing Needle enters, choose a card name.
+        // Activated abilities of sources with the chosen name can't be activated.
+
+        addCard(Zone.HAND, playerA, "Bottomless Pool // Locker Room");
+        addCard(Zone.HAND, playerA, "Pithing Needle");
+        addCard(Zone.BATTLEFIELD, playerA, "Opalescence");
+        addCard(Zone.BATTLEFIELD, playerA, "Diviner's Wand");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 20);
+
+        // Cast Bottomless Pool (unlocked left half only)
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bottomless Pool");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        addTarget(playerA, TestPlayer.TARGET_SKIP);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // Equip Diviner's Wand
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {3}");
+        addTarget(playerA, "Bottomless Pool");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // Cast Pithing Needle naming the locked side
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pithing Needle");
+        setChoice(playerA, "Locker Room");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // Validate that the room can activate the gained ability
+        checkPlayableAbility("Room can use Diviner's Wand ability", 1, PhaseStep.PRECOMBAT_MAIN, playerA,
+                "{4}: Draw a card.", true);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // Unlock the other side
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{4}{U}: Unlock the right half.");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // Validate that you can no longer activate the ability
+        checkPlayableAbility("Room cannot use Diviner's Wand ability after unlock", 1, PhaseStep.PRECOMBAT_MAIN,
+                playerA, "{4}: Draw a card.", false);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        // Verify the room is now fully unlocked
+        assertPermanentCount(playerA, "Bottomless Pool // Locker Room", 1);
+    }
 }
