@@ -349,4 +349,49 @@ public class RoomCardTest extends CardTestPlayerBase {
         // clone.
         assertPermanentCount(playerA, "Bottomless Pool", 2);
     }
+
+    @Test
+    public void testNameMatchOnStack() {
+        skipInitShuffling();
+        // Bottomless Pool {U} When you unlock this door, return up to one target
+        // creature to its owner's hand.
+        // Locker Room {4}{U} Whenever one or more creatures you control deal combat
+        // damage to a player, draw a card.
+
+        // Mindreaver
+        // {U}{U}
+        // Creature — Human Wizard
+        // Heroic — Whenever you cast a spell that targets this creature, exile the top
+        // three cards of target player’s library.
+        // {U}{U}, Sacrifice this creature: Counter target spell with the same name as a
+        // card exiled with this creature.
+
+        addCard(Zone.HAND, playerA, "Bottomless Pool // Locker Room");
+        addCard(Zone.HAND, playerA, "Twiddle");
+        addCard(Zone.BATTLEFIELD, playerA, "Mindreaver", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
+        addCard(Zone.LIBRARY, playerA, "Bottomless Pool // Locker Room", 1);
+        addCard(Zone.LIBRARY, playerA, "Plains", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Twiddle");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        // tap or untap target permanent
+        addTarget(playerA, "Mindreaver");
+        // tap that permanent?
+        setChoice(playerA, "No");
+        // Whenever you cast a spell that targets this creature, exile the top
+        // three cards of target player’s library.
+        addTarget(playerA, playerA);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bottomless Pool");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA,
+        "{U}{U}, Sacrifice {this}:");
+        addTarget(playerA, "Bottomless Pool");
+
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+    }
 }
