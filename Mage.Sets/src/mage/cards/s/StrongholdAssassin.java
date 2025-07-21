@@ -14,8 +14,11 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.target.Target;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK;
 
 /**
  *
@@ -35,7 +38,7 @@ public final class StrongholdAssassin extends CardImpl {
         // {tap}, Sacrifice a creature: Destroy target nonblack creature.
         Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
-        Target target = new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK);
+        Target target = new TargetPermanent(FILTER_PERMANENT_CREATURE_NON_BLACK);
         ability.addTarget(target);
         this.addAbility(ability);
     }

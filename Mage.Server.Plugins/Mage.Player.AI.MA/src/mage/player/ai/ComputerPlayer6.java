@@ -23,6 +23,7 @@ import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 import mage.player.ai.ma.optimizers.TreeOptimizer;
 import mage.player.ai.ma.optimizers.impl.*;
+import mage.player.ai.score.GameStateEvaluator2;
 import mage.player.ai.util.CombatInfo;
 import mage.player.ai.util.CombatUtil;
 import mage.players.Player;
@@ -111,6 +112,13 @@ public class ComputerPlayer6 extends ComputerPlayer {
         this.targets.addAll(player.targets);
         this.choices.addAll(player.choices);
         this.actionCache = player.actionCache;
+    }
+
+    /**
+     * Change simulation timeout - used for AI stability tests only
+     */
+    public void setMaxThinkTimeSecs(int maxThinkTimeSecs) {
+        this.maxThinkTimeSecs = maxThinkTimeSecs;
     }
 
     @Override
@@ -205,10 +213,8 @@ public class ComputerPlayer6 extends ComputerPlayer {
             logger.trace("Add Action [" + depth + "] " + node.getAbilities().toString() + "  a: " + alpha + " b: " + beta);
         }
         Game game = node.getGame();
-        if (!COMPUTER_DISABLE_TIMEOUT_IN_GAME_SIMULATIONS
-                && Thread.interrupted()) {
-            Thread.currentThread().interrupt();
-            logger.debug("interrupted");
+        if (!COMPUTER_DISABLE_TIMEOUT_IN_GAME_SIMULATIONS && Thread.currentThread().isInterrupted()) {
+            logger.debug("AI game sim interrupted by timeout");
             return GameStateEvaluator2.evaluate(playerId, game).getTotalScore();
         }
         // Condition to stop deeper simulation
@@ -399,7 +405,7 @@ public class ComputerPlayer6 extends ComputerPlayer {
             if (effect != null
                     && stackObject.getControllerId().equals(playerId)) {
                 Target target = effect.getTarget();
-                if (!target.isChoiceCompleted(game)) {
+                if (!target.isChoiceCompleted(getId(), (StackAbility) stackObject, game)) {
                     for (UUID targetId : target.possibleTargets(stackObject.getControllerId(), stackObject.getStackAbility(), game)) {
                         Game sim = game.createSimulationForAI();
                         StackAbility newAbility = (StackAbility) stackObject.copy();
@@ -430,6 +436,8 @@ public class ComputerPlayer6 extends ComputerPlayer {
      * @return
      */
     protected Integer addActionsTimed() {
+        // TODO: all actions added and calculated one by one,
+        //  multithreading do not supported here
         // run new game simulation in parallel thread
         FutureTask<Integer> task = new FutureTask<>(() -> addActions(root, maxDepth, Integer.MIN_VALUE, Integer.MAX_VALUE));
         threadPoolSimulations.execute(task);
@@ -445,15 +453,23 @@ public class ComputerPlayer6 extends ComputerPlayer {
             }
         } catch (TimeoutException | InterruptedException e) {
             // AI thinks too long
-            logger.info("ai simulating - timed out");
+            // how-to fix: look at stack info - it can contain bad ability with infinite choose dialog
+            logger.warn("");
+            logger.warn("AI player thinks too long (report it to github):");
+            logger.warn(" - player: " + getName());
+            logger.warn(" - battlefield size: " + root.game.getBattlefield().getAllPermanents().size());
+            logger.warn(" - stack: " + root.game.getStack());
+            logger.warn(" - game: " + root.game);
+            printFreezeNode(root);
+            logger.warn("");
             task.cancel(true);
         } catch (ExecutionException e) {
             // game error
-            logger.error("AI simulation catch game error: " + e, e);
+            logger.error("AI player catch game error in simulation - " + getName() + " - " + root.game + ": " + e, e);
             task.cancel(true);
             // real games: must catch and log
             // unit tests: must raise again for fast fail
-            if (this.isTestsMode()) {
+            if (this.isTestMode() && this.isFastFailInTestMode()) {
                 throw new IllegalStateException("One of the simulated games raise the error: " + e, e);
             }
         } catch (Throwable e) {
@@ -465,11 +481,33 @@ public class ComputerPlayer6 extends ComputerPlayer {
         return 0;
     }
 
+    private void printFreezeNode(SimulationNode2 root) {
+        // print simple tree - there are possible multiple child nodes, but ignore it - same for abilities
+        List<String> chain = new ArrayList<>();
+        SimulationNode2 node = root;
+        while (node != null) {
+            if (node.abilities != null && !node.abilities.isEmpty()) {
+                Ability ability = node.abilities.get(0);
+                String sourceInfo = CardUtil.getSourceIdName(node.game, ability);
+                chain.add(String.format("%s: %s",
+                        (sourceInfo.isEmpty() ? "unknown" : sourceInfo),
+                        ability
+                ));
+            }
+            node = node.children == null || node.children.isEmpty() ? null : node.children.get(0);
+        }
+        logger.warn("Possible freeze chain:");
+        if (root != null && chain.isEmpty()) {
+            logger.warn(" - unknown use case"); // maybe can't finish any calc, maybe related to target options, I don't know
+        }
+        chain.forEach(s -> {
+            logger.warn(" - " + s);
+        });
+    }
+
     protected int simulatePriority(SimulationNode2 node, Game game, int depth, int alpha, int beta) {
-        if (!COMPUTER_DISABLE_TIMEOUT_IN_GAME_SIMULATIONS
-                && Thread.interrupted()) {
-            Thread.currentThread().interrupt();
-            logger.info("interrupted");
+        if (!COMPUTER_DISABLE_TIMEOUT_IN_GAME_SIMULATIONS && Thread.currentThread().isInterrupted()) {
+            logger.debug("AI game sim interrupted by timeout");
             return GameStateEvaluator2.evaluate(playerId, game).getTotalScore();
         }
         node.setGameValue(game.getState().getValue(true).hashCode());
@@ -497,9 +535,7 @@ public class ComputerPlayer6 extends ComputerPlayer {
         int bestValSubNodes = Integer.MIN_VALUE;
         for (Ability action : allActions) {
             actionNumber++;
-            if (!COMPUTER_DISABLE_TIMEOUT_IN_GAME_SIMULATIONS
-                    && Thread.interrupted()) {
-                Thread.currentThread().interrupt();
+            if (!COMPUTER_DISABLE_TIMEOUT_IN_GAME_SIMULATIONS && Thread.currentThread().isInterrupted()) {
                 logger.info("Sim Prio [" + depth + "] -- interrupted");
                 break;
             }
@@ -848,10 +884,12 @@ public class ComputerPlayer6 extends ComputerPlayer {
         if (targets.isEmpty()) {
             return super.chooseTarget(outcome, cards, target, source, game);
         }
-        if (!target.isChoiceCompleted(game)) {
+
+        UUID abilityControllerId = target.getAffectedAbilityControllerId(getId());
+        if (!target.isChoiceCompleted(abilityControllerId, source, game)) {
             for (UUID targetId : targets) {
                 target.addTarget(targetId, source, game);
-                if (target.isChoiceCompleted(game)) {
+                if (target.isChoiceCompleted(abilityControllerId, source, game)) {
                     targets.clear();
                     return true;
                 }
@@ -866,10 +904,12 @@ public class ComputerPlayer6 extends ComputerPlayer {
         if (targets.isEmpty()) {
             return super.choose(outcome, cards, target, source, game);
         }
-        if (!target.isChoiceCompleted(game)) {
+
+        UUID abilityControllerId = target.getAffectedAbilityControllerId(getId());
+        if (!target.isChoiceCompleted(abilityControllerId, source, game)) {
             for (UUID targetId : targets) {
                 target.add(targetId, game);
-                if (target.isChoiceCompleted(game)) {
+                if (target.isChoiceCompleted(abilityControllerId, source, game)) {
                     targets.clear();
                     return true;
                 }

@@ -1,6 +1,5 @@
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -15,6 +14,8 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -50,7 +51,7 @@ class WarrenPilferersReturnEffect extends OneShotEffect {
 
     WarrenPilferersReturnEffect() {
         super(Outcome.ReturnToHand);
-        staticText = "return target creature card from your graveyard to your hand. If that card is a Goblin card, Warren Pilferers gains haste until end of turn";
+        staticText = "return target creature card from your graveyard to your hand. If that card is a Goblin card, {this} gains haste until end of turn";
     }
 
     private WarrenPilferersReturnEffect(final WarrenPilferersReturnEffect effect) {

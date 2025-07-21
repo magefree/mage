@@ -15,7 +15,7 @@ public class ImpelledGiantTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Impelled Giant"); // Creature 3/3
         addCard(Zone.BATTLEFIELD, playerA, "Hurloon Minotaur"); // Creature 2/3
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tap an untapped red creature you control other than Impelled Giant");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tap an untapped red creature you control other than");
         setChoice(playerA, "Hurloon Minotaur");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

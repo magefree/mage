@@ -20,7 +20,6 @@ import mage.target.common.TargetCreaturePermanent;
 import java.util.UUID;
 
 /**
- *
  * @author JRHerlehy
  */
 public final class RimescaleDragon extends CardImpl {
@@ -33,7 +32,7 @@ public final class RimescaleDragon extends CardImpl {
 
     public RimescaleDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}{R}");
-        
+
         this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(5);
@@ -50,7 +49,7 @@ public final class RimescaleDragon extends CardImpl {
         Effect effect = new AddCountersTargetEffect(CounterType.ICE.createInstance());
         effect.setText("and put an ice counter on it");
         ability.addEffect(effect);
-        ability.addTarget(new TargetCreaturePermanent(1));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
         // Creatures with ice counters on them don't untap during their controllers' untap steps.

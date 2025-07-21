@@ -6,7 +6,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.ThresholdCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -36,7 +36,7 @@ public final class Chainflinger extends CardImpl {
         this.addAbility(ability);
 
         // Threshold - {2}{R}, {tap}: Chainflinger deals 2 damage to any target. Activate this ability only if seven or more cards are in your graveyard.
-        Ability thresholdAbility = new ConditionalActivatedAbility(
+        Ability thresholdAbility = new ActivateIfConditionActivatedAbility(
                 new DamageTargetEffect(2), new ManaCostsImpl<>("{2}{R}"), ThresholdCondition.instance
         );
         thresholdAbility.addCost(new TapSourceCost());

@@ -22,11 +22,12 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
+import mage.game.Controllable;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.TargetPermanent;
 
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -167,13 +168,16 @@ class AugustaDeanOfOrderEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, filter, true);
-        Player controller = game.getPlayer(source.getControllerId());
-        controller.chooseTarget(Outcome.Benefit, target, source, game);
-        target.getTargets().forEach(t -> {
-            Permanent permanent = game.getPermanent(t);
-            permanent.tap(source, game);
-        });
+        TargetPermanent target = new TargetPermanent(0, Integer.MAX_VALUE, filter, true);
+        Optional.ofNullable(source)
+                .map(Controllable::getControllerId)
+                .map(game::getPlayer)
+                .ifPresent(player -> player.chooseTarget(Outcome.Benefit, target, source, game));
+        for (UUID targetId : target.getTargets()) {
+            Optional.ofNullable(targetId)
+                    .map(game::getPermanent)
+                    .ifPresent(permanent -> permanent.tap(source, game));
+        }
         return true;
     }
 

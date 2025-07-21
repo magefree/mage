@@ -39,7 +39,7 @@ public final class PalazzoArchers extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
 
         // Whenever a creature with flying attacks you or a planeswalker you control, Palazzo Archers deals damage equal to its power to that creature.
-        this.addAbility(new AttacksAllTriggeredAbility(new DamageTargetEffect(SourcePermanentPowerValue.NOT_NEGATIVE),
+        this.addAbility(new AttacksAllTriggeredAbility(new DamageTargetEffect(SourcePermanentPowerValue.NOT_NEGATIVE).withTargetDescription("that creature"),
                 false, filter, SetTargetPointer.PERMANENT, true));
     }
 

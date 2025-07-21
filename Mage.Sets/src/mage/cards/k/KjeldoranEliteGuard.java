@@ -3,9 +3,10 @@ package mage.cards.k;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.IsPhaseCondition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -24,6 +25,8 @@ import java.util.UUID;
  */
 public final class KjeldoranEliteGuard extends CardImpl {
 
+    private static final Condition condition = new IsPhaseCondition(TurnPhase.COMBAT, false);
+
     public KjeldoranEliteGuard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.subtype.add(SubType.HUMAN);
@@ -34,13 +37,10 @@ public final class KjeldoranEliteGuard extends CardImpl {
         // Target creature gets +2/+2 until end of turn.
         // When that creature leaves the battlefield this turn, sacrifice Kjeldoran Elite Guard.
         // Activate only during combat.
-        Ability ability = new ConditionalActivatedAbility(
-                Zone.BATTLEFIELD,
-                new KjeldoranEliteGuardEffect(),
-                new TapSourceCost(),
-                new IsPhaseCondition(TurnPhase.COMBAT, false));
+        Ability ability = new ActivateIfConditionActivatedAbility(
+                new KjeldoranEliteGuardEffect(), new TapSourceCost(), condition
+        );
         ability.addTarget(new TargetCreaturePermanent());
-
         this.addAbility(ability);
     }
 

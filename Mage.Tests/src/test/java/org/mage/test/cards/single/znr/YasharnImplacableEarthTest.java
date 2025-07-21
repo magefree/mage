@@ -1,23 +1,22 @@
 package org.mage.test.cards.single.znr;
 
-import mage.cards.decks.Deck;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.assertj.core.api.Assertions;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- * {@link mage.cards.y.YasharnImplacableEarth Yasharn, Implacable Earth}
- * When Yasharn enters the battlefield, search your library for a basic Forest card and a basic Plains card, reveal those cards, put them into your hand, then shuffle.
- * Players can’t pay life or sacrifice nonland permanents to cast spells or activate abilities.
- *
  * @author Alex-Vasile
  */
 public class YasharnImplacableEarthTest extends CardTestPlayerBase {
 
+    /**
+     * {@link mage.cards.y.YasharnImplacableEarth Yasharn, Implacable Earth}
+     * When Yasharn enters the battlefield, search your library for a basic Forest card and a basic Plains card, reveal those cards, put them into your hand, then shuffle.
+     * Players can’t pay life or sacrifice nonland permanents to cast spells or activate abilities.
+     */
     private static final String yasharn = "Yasharn, Implacable Earth";
 
     /**
@@ -143,6 +142,8 @@ public class YasharnImplacableEarthTest extends CardTestPlayerBase {
      */
     @Test
     public void canSacrificeLandToActivate() {
+        removeAllCardsFromLibrary(playerA);
+
         addCard(Zone.BATTLEFIELD, playerA, yasharn);
         addCard(Zone.BATTLEFIELD, playerA, "Evolving Wilds");
         addCard(Zone.LIBRARY, playerA, "Island");

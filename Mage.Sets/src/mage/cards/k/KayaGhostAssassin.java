@@ -13,7 +13,6 @@ import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -27,8 +26,6 @@ import java.util.UUID;
  */
 public final class KayaGhostAssassin extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("target creature to exile. Choose no targets to exile Kaya.");
-
     public KayaGhostAssassin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{B}");
         this.supertype.add(SuperType.LEGENDARY);
@@ -39,21 +36,17 @@ public final class KayaGhostAssassin extends CardImpl {
         // 0: Exile Kaya, Ghost Assassin or up to one target creature. Return that card to the battlefield under its owner's control at the beginning of your next upkeep.
         // You lose 2 life.
         Ability ability = new LoyaltyAbility(new KayaGhostAssassinEffect(), 0);
-        ability.addTarget(new TargetCreaturePermanent(0, 1, filter, false));
+        ability.addTarget(new TargetCreaturePermanent(0, 1).withChooseHint("Choose no targets to exile Kaya"));
         this.addAbility(ability);
 
         // -1: Each opponent loses 2 life and you gain 2 life.
         ability = new LoyaltyAbility(new LoseLifeOpponentsEffect(2), -1);
-        Effect effect = new GainLifeEffect(2);
-        effect.setText("and you gain 2 life");
-        ability.addEffect(effect);
+        ability.addEffect(new GainLifeEffect(2).setText("and you gain 2 life"));
         this.addAbility(ability);
 
         // -2: Each opponent discards a card and you draw a card.
         ability = new LoyaltyAbility(new DiscardEachPlayerEffect(TargetController.OPPONENT), -2);
-        effect = new DrawCardSourceControllerEffect(1);
-        effect.setText("and you draw a card");
-        ability.addEffect(effect);
+        ability.addEffect(new DrawCardSourceControllerEffect(1).setText("and you draw a card"));
         this.addAbility(ability);
     }
 

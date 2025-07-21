@@ -93,7 +93,7 @@ public abstract class EffectImpl implements Effect {
             // first target pointer is default
             throw new IllegalArgumentException("Wrong code usage: target pointer can't be set to null: " + this);
         }
-
+        targetPointer.setTargetDescription(this.targetPointer.getTargetDescription()); // copies the null if not set
         this.targetPointer = targetPointer;
         initNewTargetPointer();
         return this;
@@ -102,6 +102,12 @@ public abstract class EffectImpl implements Effect {
     @Override
     public TargetPointer getTargetPointer() {
         return this.targetPointer;
+    }
+
+    @Override
+    public Effect withTargetDescription(String target) {
+        this.targetPointer.setTargetDescription(target);
+        return this;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package mage.filter;
 
 import mage.ObjectColor;
+import mage.abilities.keyword.FlyingAbility;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.*;
@@ -232,6 +233,12 @@ public final class StaticFilters {
         FILTER_CARD_INSTANT_AND_SORCERY.setLockedFilter(true);
     }
 
+    public static final FilterInstantOrSorceryCard FILTER_CARDS_INSTANT_AND_SORCERY = new FilterInstantOrSorceryCard("instant and sorcery cards");
+
+    static {
+        FILTER_CARDS_INSTANT_AND_SORCERY.setLockedFilter(true);
+    }
+
     public static final FilterPermanentCard FILTER_CARD_PERMANENT = new FilterPermanentCard("permanent card");
 
     static {
@@ -404,6 +411,13 @@ public final class StaticFilters {
 
     static {
         FILTER_CONTROLLED_A_PERMANENT.setLockedFilter(true);
+    }
+
+    public static final FilterControlledPermanent FILTER_CONTROLLED_UNTAPPED_PERMANENT = new FilterControlledPermanent("an untapped permanent you control");
+
+    static {
+        FILTER_CONTROLLED_UNTAPPED_PERMANENT.add(TappedPredicate.UNTAPPED);
+        FILTER_CONTROLLED_UNTAPPED_PERMANENT.setLockedFilter(true);
     }
 
     public static final FilterControlledPermanent FILTER_CONTROLLED_ANOTHER_PERMANENT = new FilterControlledPermanent("another permanent you control");
@@ -903,6 +917,13 @@ public final class StaticFilters {
         FILTER_PERMANENT_BATTLES.setLockedFilter(true);
     }
 
+    public static final FilterPermanent FILTER_PERMANENT_NON_CREATURE = new FilterPermanent("noncreature permanent");
+
+    static {
+        FILTER_PERMANENT_NON_CREATURE.add(Predicates.not(CardType.CREATURE.getPredicate()));
+        FILTER_PERMANENT_NON_CREATURE.setLockedFilter(true);
+    }
+
     public static final FilterNonlandPermanent FILTER_PERMANENT_NON_LAND = new FilterNonlandPermanent();
 
     static {
@@ -1137,6 +1158,13 @@ public final class StaticFilters {
     static {
         FILTER_CREATURES_NON_TOKEN.add(TokenPredicate.FALSE);
         FILTER_CREATURES_NON_TOKEN.setLockedFilter(true);
+    }
+
+    public static final FilterCreaturePermanent FILTER_CREATURE_FLYING = new FilterCreaturePermanent("creature with flying");
+
+    static {
+        FILTER_CREATURE_FLYING.add(new AbilityPredicate(FlyingAbility.class));
+        FILTER_CREATURE_FLYING.setLockedFilter(true);
     }
 
     public static final FilterControlledCreaturePermanent FILTER_A_CONTROLLED_CREATURE_P1P1 = new FilterControlledCreaturePermanent("a creature you control with a +1/+1 counter on it");

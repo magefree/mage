@@ -91,7 +91,7 @@ class BoobyTrapTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "The chosen player reveals each card they draw.\n" +
+        return "The chosen player reveals each card they draw.<br>" +
                 "When the chosen player draws the named card, sacrifice {this}. If you do, {this} deals 10 damage to that player.";
     }
 }

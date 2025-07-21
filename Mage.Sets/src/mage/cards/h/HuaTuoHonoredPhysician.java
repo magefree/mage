@@ -1,7 +1,5 @@
-
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
@@ -13,12 +11,12 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class HuaTuoHonoredPhysician extends CardImpl {
@@ -32,7 +30,10 @@ public final class HuaTuoHonoredPhysician extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {tap}: Put target creature card from your graveyard on top of your library. Activate this ability only during your turn, before attackers are declared.
-        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new PutOnLibraryTargetEffect(true), new TapSourceCost(), MyTurnBeforeAttackersDeclaredCondition.instance);
+        Ability ability = new ActivateIfConditionActivatedAbility(
+                new PutOnLibraryTargetEffect(true), new TapSourceCost(),
+                MyTurnBeforeAttackersDeclaredCondition.instance
+        );
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.addAbility(ability);
     }

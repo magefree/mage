@@ -61,6 +61,7 @@ class MirrodinBesiegedEffect extends OneShotEffect {
 
     MirrodinBesiegedEffect() {
         super(Outcome.Benefit);
+        this.setText("draw a card, then discard a card. Then if there are fifteen or more artifact cards in your graveyard, target opponent loses the game.");
     }
 
     private MirrodinBesiegedEffect(final MirrodinBesiegedEffect effect) {

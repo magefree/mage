@@ -22,7 +22,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -102,7 +101,7 @@ class GiftOfDoomEffect extends OneShotEffect {
         if (player == null || giftOfDoom == null) {
             return false;
         }
-        TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
+        TargetPermanent target = new TargetPermanent(filter);
         target.withNotTarget(true);
         if (player.choose(outcome, target, source, game)
                 && game.getPermanent(target.getFirstTarget()) != null

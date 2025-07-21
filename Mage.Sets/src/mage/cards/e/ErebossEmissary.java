@@ -1,6 +1,5 @@
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -15,9 +14,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInHand;
+
+import java.util.UUID;
 
 /**
  *
@@ -39,7 +39,7 @@ public final class ErebossEmissary extends CardImpl {
                 new BoostEnchantedEffect(2, 2, Duration.EndOfTurn),
                 new BoostSourceEffect(2, 2, Duration.EndOfTurn),
                 new SourceHasSubtypeCondition(SubType.AURA),
-                "{this} gets +2/+2 until end of turn. If Erebos's Emissary is an Aura, enchanted creature gets +2/+2 until end of turn instead"),
+                "{this} gets +2/+2 until end of turn. If {this} is an Aura, enchanted creature gets +2/+2 until end of turn instead"),
                 new DiscardTargetCost(new TargetCardInHand(StaticFilters.FILTER_CARD_CREATURE))));
 
         // Enchanted creature gets +3/+3

@@ -79,6 +79,8 @@ class HazoretsUndyingFuryEffect extends OneShotEffect {
         // move cards from library to exile
         Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 4));
         controller.moveCards(cards, Zone.EXILED, source, game);
+        game.processAction();
+        cards.retainZone(Zone.EXILED, game);
         // cast the possible cards without paying the mana
         CardUtil.castMultipleWithAttributeForFree(controller, source, game, cards, filter);
         return true;

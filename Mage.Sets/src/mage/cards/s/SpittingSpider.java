@@ -1,35 +1,26 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.DamageAllEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author Plopman
  */
 public final class SpittingSpider extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new  FilterCreaturePermanent("creature with flying");
-    static{
-        filter.add(new AbilityPredicate(FlyingAbility.class));
-    }
     public SpittingSpider(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
         this.subtype.add(SubType.SPIDER);
 
         this.power = new MageInt(3);
@@ -37,8 +28,9 @@ public final class SpittingSpider extends CardImpl {
 
         // Reach
         this.addAbility(ReachAbility.getInstance());
+
         // Sacrifice a land: Spitting Spider deals 1 damage to each creature with flying.
-        this.addAbility(new SimpleActivatedAbility(new DamageAllEffect(1, filter), new SacrificeTargetCost(StaticFilters.FILTER_LAND)));
+        this.addAbility(new SimpleActivatedAbility(new DamageAllEffect(1, StaticFilters.FILTER_CREATURE_FLYING), new SacrificeTargetCost(StaticFilters.FILTER_LAND)));
     }
 
     private SpittingSpider(final SpittingSpider card) {

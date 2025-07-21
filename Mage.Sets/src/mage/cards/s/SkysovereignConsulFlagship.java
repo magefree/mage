@@ -14,7 +14,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
-import mage.target.common.TargetCreatureOrPlaneswalker;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -41,7 +41,7 @@ public final class SkysovereignConsulFlagship extends CardImpl {
 
         // Whenever Skysovereign, Consul Flagship enters the battlefield or attacks, it deals 3 damage to target creature or planeswalker an opponent controls.
         Ability ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(new DamageTargetEffect(3, "it"));
-        ability.addTarget(new TargetCreatureOrPlaneswalker(1, 1, filter, false));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
         // Crew 3

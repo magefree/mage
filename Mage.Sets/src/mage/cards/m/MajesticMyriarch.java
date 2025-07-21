@@ -2,7 +2,6 @@ package mage.cards.m;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.MultipliedValue;
@@ -12,6 +11,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.keyword.*;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -87,7 +87,7 @@ class MajesticMyriarchEffect extends OneShotEffect {
 
     MajesticMyriarchEffect() {
         super(Outcome.BoostCreature);
-        this.staticText = "if you control a creature with flying, Majestic Myriarch gains flying until end of turn. " +
+        this.staticText = "if you control a creature with flying, {this} gains flying until end of turn. " +
                 "The same is true for first strike, double strike, deathtouch, haste, hexproof, indestructible, lifelink, menace, reach, trample, and vigilance.";
     }
 

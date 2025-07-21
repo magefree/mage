@@ -8,7 +8,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -22,7 +21,7 @@ public final class PhyrexianAltar extends CardImpl {
         // Sacrifice a creature: Add one mana of any color.
         this.addAbility(new AnyColorManaAbility(
                 new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE),
-                CreaturesYouControlCount.instance,
+                CreaturesYouControlCount.PLURAL,
                 false
         ));
     }

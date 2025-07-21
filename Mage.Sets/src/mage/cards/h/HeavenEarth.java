@@ -1,6 +1,5 @@
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.keyword.AftermathAbility;
@@ -9,21 +8,21 @@ import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.SpellAbilityType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 
+import java.util.UUID;
+
 /**
- *
  * @author Styxo
  */
 public final class HeavenEarth extends SplitCard {
 
-    private static final FilterCreaturePermanent filterFlying = new FilterCreaturePermanent("creature with flying");
     private static final FilterCreaturePermanent filterWithouFlying = new FilterCreaturePermanent("creature without flying");
 
     static {
-        filterFlying.add(new AbilityPredicate(FlyingAbility.class));
         filterWithouFlying.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
     }
 
@@ -32,7 +31,7 @@ public final class HeavenEarth extends SplitCard {
 
         // Falling
         // Falling deals X damage to each creature with flying.
-        getLeftHalfCard().getSpellAbility().addEffect(new DamageAllEffect(GetXValue.instance, filterFlying));
+        getLeftHalfCard().getSpellAbility().addEffect(new DamageAllEffect(GetXValue.instance, StaticFilters.FILTER_CREATURE_FLYING));
 
         // to
         // Earth

@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.GainLifeAllEffect;
 import mage.cards.*;
 import mage.constants.*;
 import mage.filter.FilterCard;
@@ -49,6 +50,7 @@ public final class WanderingArchaic extends ModalDoubleFacedCard {
         // Sorcery
         // Each player looks at the top five cards of their library, reveals a land card and/or an instant or sorcery card from among them, then puts the cards they revealed this way into their hand and the rest on the bottom of their library in a random order. Each player gains 3 life.
         this.getRightHalfCard().getSpellAbility().addEffect(new ExploreTheVastlandsEffect());
+        this.getRightHalfCard().getSpellAbility().addEffect(new GainLifeAllEffect(3));
     }
 
     private WanderingArchaic(final WanderingArchaic card) {
@@ -105,7 +107,7 @@ class ExploreTheVastlandsEffect extends OneShotEffect {
         staticText = "each player looks at the top five cards of their library " +
                 "and may reveal a land card and/or an instant or sorcery card from among them. " +
                 "Each player puts the cards they revealed this way into their hand and the rest " +
-                "on the bottom of their library in a random order. Each player gains 3 life";
+                "on the bottom of their library in a random order.";
     }
 
     private ExploreTheVastlandsEffect(final ExploreTheVastlandsEffect effect) {
@@ -132,12 +134,6 @@ class ExploreTheVastlandsEffect extends OneShotEffect {
             player.revealCards(source, toHand, game);
             player.moveCards(toHand, Zone.HAND, source, game);
             player.putCardsOnBottomOfLibrary(cards, game, source, false);
-        }
-        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                player.gainLife(3, game, source);
-            }
         }
         return true;
     }

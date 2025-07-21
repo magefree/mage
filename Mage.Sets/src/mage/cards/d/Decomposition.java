@@ -36,7 +36,7 @@ public final class Decomposition extends CardImpl {
         this.subtype.add(SubType.AURA);
 
         // Enchant black creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent(filter);
+        TargetPermanent auraTarget = new TargetPermanent(filter);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         this.addAbility(new EnchantAbility(auraTarget));

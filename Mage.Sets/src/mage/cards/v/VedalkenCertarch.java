@@ -12,13 +12,11 @@ import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
-
 
 /**
  * @author Loki
@@ -41,11 +39,11 @@ public final class VedalkenCertarch extends CardImpl {
         this.toughness = new MageInt(1);
 
         // <i>Metalcraft</i> &mdash; {T}: Tap target artifact, creature, or land. Activate this ability only if you control three or more artifacts.
-        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new TapSourceCost(), MetalcraftCondition.instance);
+        Ability ability = new ActivateIfConditionActivatedAbility(
+                new TapTargetEffect(), new TapSourceCost(), MetalcraftCondition.instance
+        );
         ability.addTarget(new TargetPermanent(filter));
-        ability.setAbilityWord(AbilityWord.METALCRAFT);
-        ability.addHint(MetalcraftHint.instance);
-        this.addAbility(ability);
+        this.addAbility(ability.setAbilityWord(AbilityWord.METALCRAFT).addHint(MetalcraftHint.instance));
     }
 
     private VedalkenCertarch(final VedalkenCertarch card) {
@@ -56,5 +54,4 @@ public final class VedalkenCertarch extends CardImpl {
     public VedalkenCertarch copy() {
         return new VedalkenCertarch(this);
     }
-
 }

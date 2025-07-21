@@ -6,7 +6,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
@@ -42,7 +42,7 @@ public final class OraclesVault extends CardImpl {
 
         // {T}: Exile the top card of your library. Until end of turn, you may play that card without paying its mana cost.
         // Activate this ability only if there are three or more brick counters on Oracle's Vault.
-        this.addAbility(new ConditionalActivatedAbility(new OraclesVaultFreeEffect(), new TapSourceCost(), condition));
+        this.addAbility(new ActivateIfConditionActivatedAbility(new OraclesVaultFreeEffect(), new TapSourceCost(), condition));
     }
 
     private OraclesVault(final OraclesVault card) {

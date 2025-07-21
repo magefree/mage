@@ -114,6 +114,7 @@ class KefkaDancingMadEffect extends OneShotEffect {
             return false;
         }
         controller.moveCards(cards, Zone.EXILED, source, game);
+        game.processAction();
         cards.retainZone(Zone.EXILED, game);
         KefkaDancingMadTracker tracker = new KefkaDancingMadTracker();
         CardUtil.castMultipleWithAttributeForFree(

@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.UndauntedAbility;
 import mage.cards.CardImpl;
@@ -9,8 +7,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class CurtainsCall extends CardImpl {
@@ -20,6 +19,7 @@ public final class CurtainsCall extends CardImpl {
 
         // Undaunted
         this.addAbility(new UndauntedAbility());
+
         // Destroy two target creatures.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(2));

@@ -10,8 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -20,12 +19,6 @@ import java.util.UUID;
  * @author LevelX2
  */
 public final class NessianDemolok extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterPermanent("noncreature permanent");
-
-    static {
-        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
-    }
 
     public NessianDemolok(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
@@ -40,7 +33,7 @@ public final class NessianDemolok extends CardImpl {
         // When Nessian Demolok enters the battlefield, if tribute wasn't paid, destroy target noncreature permanent.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect())
                 .withInterveningIf(TributeNotPaidCondition.instance);
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_NON_CREATURE));
         this.addAbility(ability);
     }
 

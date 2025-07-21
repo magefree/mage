@@ -70,8 +70,8 @@ class UglukOfTheWhiteHandEffect extends OneShotEffect {
 
     public UglukOfTheWhiteHandEffect() {
         super(Outcome.Benefit);
-        staticText = "put a +1/+1 counter on Ugluk of the White Hand. " +
-            "If that creature was a Goblin or Orc, put two +1/+1 counters on Ugluk instead.";
+        staticText = "put a +1/+1 counter on {this}. " +
+                "If that creature was a Goblin or Orc, put two +1/+1 counters on {this} instead.";
     }
 
     private UglukOfTheWhiteHandEffect(final UglukOfTheWhiteHandEffect effect) {

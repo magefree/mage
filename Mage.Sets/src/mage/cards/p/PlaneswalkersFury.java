@@ -42,7 +42,7 @@ class PlaneswalkersFuryEffect extends OneShotEffect {
 
     PlaneswalkersFuryEffect() {
         super(Outcome.Damage);
-        staticText = "Target opponent reveals a card at random from their hand. Planeswalker's Fury deals damage equal to that card's mana value to that player";
+        staticText = "Target opponent reveals a card at random from their hand. {this} deals damage equal to that card's mana value to that player";
     }
 
     private PlaneswalkersFuryEffect(final PlaneswalkersFuryEffect effect) {

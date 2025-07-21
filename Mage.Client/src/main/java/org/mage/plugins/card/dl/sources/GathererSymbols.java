@@ -75,7 +75,7 @@ public class GathererSymbols implements Iterable<DownloadJob> {
                         continue;
                     }
                     String symbol = sym.replaceAll("/", "");
-                    File dst = new File(dir, symbol + ".gif");
+                    File dst = new File(dir, symbol + ".png");
 
                     // workaround for miss icons on Gatherer (no cards with it, so no icons)
                     // TODO: comment and try download without workaround, keep fix for symbols with "Resource not found" error

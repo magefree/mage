@@ -33,8 +33,8 @@ public class AlaniaDivergentStormTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, alania, true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Coruscation Mage", true);
         setChoice(playerA, "No"); // Offspring?
+        addTarget(playerA, playerB); // Who draws?
         setChoice(playerA, "Yes"); // Copy spell?
-        setChoice(playerA, "PlayerB"); // Who draws?
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -61,8 +61,8 @@ public class AlaniaDivergentStormTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, alania, true);
 
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Stormcatch Mentor", true);
+        addTarget(playerA, playerB); // Who draws?
         setChoice(playerA, "Yes"); // Copy spell?
-        setChoice(playerA, "PlayerB"); // Who draws?
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Coruscation Mage", true);
         setChoice(playerA, "No"); // Offspring?
 
@@ -93,16 +93,16 @@ public class AlaniaDivergentStormTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, alania, true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Frolicking Familiar", true);
+        addTarget(playerA, playerB); // Who draws?
         setChoice(playerA, "Yes"); // Copy spell?
-        setChoice(playerA, "PlayerB"); // Who draws?
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Coruscation Mage", true);
         setChoice(playerA, "No"); // Offspring?
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Blow Off Steam", true);
         setChoice(playerA, "Whenever you cast an instant", 2); // Add Frolicking Familiar triggers first
         setChoice(playerA, "Whenever you cast a noncreature"); // Add Coruscation Mage trigger
         // Alania's trigger will add last
+        addTarget(playerA, playerB); // Who draws?
         setChoice(playerA, "Yes"); // Copy spell?
-        setChoice(playerA, "PlayerB"); // Who draws?
         addTarget(playerA, playerB);
         setChoice(playerA, "No"); // Change target?
 
@@ -137,8 +137,8 @@ public class AlaniaDivergentStormTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, alania, true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Acrobatic Leap", true);
+        addTarget(playerA, playerB); // Who draws?
         setChoice(playerA, "Yes"); // Copy spell?
-        setChoice(playerA, "PlayerB"); // Who draws?
         addTarget(playerA, alania); // Target creature
         setChoice(playerA, "No"); // Change target?
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ancestral Recall", true);
@@ -161,17 +161,17 @@ public class AlaniaDivergentStormTest extends CardTestPlayerBase {
         // Test that the "first sorcery you've cast this turn" clause works
         // Also copies an adventure sorcery
 
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
-        addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
-        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 10);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 10);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 10);
         addCard(Zone.HAND, playerA, "Faerie Guidemother"); // adventure card
         addCard(Zone.HAND, playerA, "Maximize Velocity");
         addCard(Zone.HAND, playerA, alania);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, alania, true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gift of the Fae", true);
+        addTarget(playerA, playerB); // Who draws?
         setChoice(playerA, "Yes"); // Copy spell?
-        setChoice(playerA, "PlayerB"); // Who draws?
         addTarget(playerA, alania); // Target creature
         setChoice(playerA, "No"); // Change target?
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Maximize Velocity", true);
@@ -181,7 +181,7 @@ public class AlaniaDivergentStormTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        // Copied: Gift of the Fae, Not copied: Ancestral Recall
+        // Copied: Gift of the Fae, Not copied: Maximize Velocity
         assertPowerToughness(playerA, alania, 3 + 2*2 + 1, 5 + 2 + 1);
         assertAbility(playerA, alania, FlyingAbility.getInstance(), true);
         assertAbility(playerA, alania, HasteAbility.getInstance(), true);

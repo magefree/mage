@@ -75,7 +75,7 @@ public class DraftPickLogger {
   private void appendToDraftLog(String data) {
     if (logging) {
       try {
-        Files.write(logPath, data.getBytes(), StandardOpenOption.APPEND);
+        Files.write(logPath, data.getBytes(), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
       } catch (IOException ex) {
         LOGGER.error(null, ex);
       }

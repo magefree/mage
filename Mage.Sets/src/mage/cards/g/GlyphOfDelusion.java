@@ -20,7 +20,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.BlockedAttackerWatcher;
 
@@ -43,7 +42,7 @@ public final class GlyphOfDelusion extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
 
         // Put X glyph counters on target creature that target Wall blocked this turn, where X is the power of that blocked creature. The creature gains “This creature doesn’t untap during your untap step if it has a glyph counter on it” and “At the beginning of your upkeep, remove a glyph counter from this creature.”
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addTarget(new GlyphOfDelusionSecondTarget());
         this.getSpellAbility().addEffect(new GlyphOfDelusionEffect());
     }
@@ -82,7 +81,7 @@ class GlyphOfDelusionSecondTarget extends TargetPermanent {
                 if (targetSource != null) {
                     for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, sourceControllerId, source, game)) {
                         if (!targets.containsKey(creature.getId()) && creature.canBeTargetedBy(targetSource, sourceControllerId, source, game)) {
-                            if (watcher.creatureHasBlockedAttacker(new MageObjectReference(creature, game), new MageObjectReference(firstTarget, game), game)) {
+                            if (watcher.creatureHasBlockedAttacker(new MageObjectReference(creature, game), new MageObjectReference(firstTarget, game))) {
                                 possibleTargets.add(creature.getId());
                             }
                         }

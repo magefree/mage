@@ -13,7 +13,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -28,7 +28,6 @@ public final class AtraxiWarden extends CardImpl {
         filter.add(TappedPredicate.TAPPED);
     }
 
-
     public AtraxiWarden(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
 
@@ -42,7 +41,7 @@ public final class AtraxiWarden extends CardImpl {
 
         // When Atraxi Warden enters the battlefield, exile up to one target tapped creature.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExileTargetEffect());
-        ability.addTarget(new TargetCreaturePermanent(0, 1, filter, false));
+        ability.addTarget(new TargetPermanent(0, 1, filter));
         this.addAbility(ability);
 
         // Suspend 5--{1}{W}

@@ -9,12 +9,14 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.mana.AddManaToManaPoolTargetControllerEffect;
-import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.mana.EnchantedTappedTriggeredManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.ColoredManaSymbol;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.permanent.token.WolfToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
@@ -45,11 +47,9 @@ public final class WolfwillowHaven extends CardImpl {
 
         // {4}{G}, Sacrifice Wolfwillow Haven: Create a 2/2 green Wolf creature token. Activate this ability only during your turn.
         ability = new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD, new CreateTokenEffect(new WolfToken()),
-                new ManaCostsImpl<>("{4}{G}"), MyTurnCondition.instance
+                new CreateTokenEffect(new WolfToken()), new ManaCostsImpl<>("{4}{G}"), MyTurnCondition.instance
         );
         ability.addCost(new SacrificeSourceCost());
-        ability.addHint(MyTurnHint.instance);
         this.addAbility(ability);
     }
 

@@ -1,7 +1,7 @@
 package mage.cards.d;
 
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.AttacksPlayerWithCreaturesTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -12,12 +12,11 @@ import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.game.Controllable;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
-import mage.game.events.DefenderAttackedEvent;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.DemonToken;
 import mage.players.Player;
@@ -30,6 +29,7 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class DemonicCovenant extends CardImpl {
+    FilterPermanent filter = new FilterControlledPermanent(SubType.DEMON,"Demons you control");
 
     public DemonicCovenant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.KINDRED, CardType.ENCHANTMENT}, "{4}{B}{B}");
@@ -37,12 +37,14 @@ public final class DemonicCovenant extends CardImpl {
         this.subtype.add(SubType.DEMON);
 
         // Whenever one or more Demons you control attack a player, you draw a card and lose 1 life.
-        this.addAbility(new DemonicCovenantTriggeredAbility());
+        Ability abilityAttack = new AttacksPlayerWithCreaturesTriggeredAbility(new DrawCardSourceControllerEffect(1, true), filter, SetTargetPointer.NONE);
+        abilityAttack.addEffect(new LoseLifeSourceControllerEffect(1).setText("and lose 1 life"));
+        this.addAbility(abilityAttack);
 
         // At the beginning of your end step, create a 5/5 black Demon creature token with flying, then mill two cards. If two cards that share all their card types were milled this way, sacrifice Demonic Covenant.
-        Ability ability = new BeginningOfEndStepTriggeredAbility(new CreateTokenEffect(new DemonToken()));
-        ability.addEffect(new DemonicCovenantEffect());
-        this.addAbility(ability);
+        Ability abilityEndStep = new BeginningOfEndStepTriggeredAbility(new CreateTokenEffect(new DemonToken()));
+        abilityEndStep.addEffect(new DemonicCovenantEffect());
+        this.addAbility(abilityEndStep);
     }
 
     private DemonicCovenant(final DemonicCovenant card) {
@@ -52,40 +54,6 @@ public final class DemonicCovenant extends CardImpl {
     @Override
     public DemonicCovenant copy() {
         return new DemonicCovenant(this);
-    }
-}
-
-class DemonicCovenantTriggeredAbility extends TriggeredAbilityImpl {
-
-    DemonicCovenantTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1, true));
-        this.addEffect(new LoseLifeSourceControllerEffect(1).setText("and lose 1 life"));
-        this.setTriggerPhrase("Whenever one or more Demons you control attack a player, ");
-    }
-
-    private DemonicCovenantTriggeredAbility(final DemonicCovenantTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public DemonicCovenantTriggeredAbility copy() {
-        return new DemonicCovenantTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DEFENDER_ATTACKED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return game.getPlayer(event.getTargetId()) != null
-                && ((DefenderAttackedEvent) event)
-                .getAttackers(game)
-                .stream()
-                .filter(permanent -> permanent.hasSubtype(SubType.DEMON, game))
-                .map(Controllable::getControllerId)
-                .anyMatch(this::isControlledBy);
     }
 }
 

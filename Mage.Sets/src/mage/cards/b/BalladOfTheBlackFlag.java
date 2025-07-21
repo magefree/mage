@@ -6,6 +6,7 @@ import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.SagaChapter;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
@@ -40,7 +41,8 @@ public final class BalladOfTheBlackFlag extends CardImpl {
         // IV - Historic spells you cast this turn cost {2} less to cast.
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_IV,
-                new SpellsCostReductionControllerEffect(filter, 2)
+                new SpellsCostReductionControllerEffect(filter, 2).setDuration(Duration.EndOfTurn)
+                        .setText("historic spells you cast this turn cost {2} less to cast")
         );
 
         this.addAbility(sagaAbility);

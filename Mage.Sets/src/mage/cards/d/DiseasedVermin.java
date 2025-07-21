@@ -1,19 +1,16 @@
 package mage.cards.d;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.common.CountersSourceCount;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.constants.SubType;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.WatcherScope;
 import mage.counters.CounterType;
 import mage.filter.FilterOpponent;
@@ -21,16 +18,24 @@ import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.watchers.Watcher;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class DiseasedVermin extends CardImpl {
+
+    private static final FilterOpponent filter = new FilterOpponent("player previously dealt damage by {this}");
+
+    static {
+        filter.add(new DiseasedVerminPredicate());
+    }
 
     public DiseasedVermin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
@@ -46,12 +51,11 @@ public final class DiseasedVermin extends CardImpl {
                 false));
 
         // At the beginning of your upkeep, Diseased Vermin deals X damage to target opponent previously dealt damage by it, where X is the number of infection counters on it.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new DiseasedVerminEffect()
-        );
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DamageTargetEffect(new CountersSourceCount(CounterType.INFECTION))
+                .setText("{this} deals X damage to target opponent previously dealt damage by it, where X is the number of infection counters on it"));
+        ability.addTarget(new TargetPlayer(filter));
         ability.addWatcher(new DiseasedVerminWatcher());
         this.addAbility(ability);
-
     }
 
     private DiseasedVermin(final DiseasedVermin card) {
@@ -61,51 +65,6 @@ public final class DiseasedVermin extends CardImpl {
     @Override
     public DiseasedVermin copy() {
         return new DiseasedVermin(this);
-    }
-}
-
-class DiseasedVerminEffect extends OneShotEffect {
-
-    static final FilterOpponent filter = new FilterOpponent("player previously dealt damage by {this}");
-
-    static {
-        filter.add(new DiseasedVerminPredicate());
-    }
-
-    public DiseasedVerminEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "{this} deals X damage to target opponent previously dealt damage by it, where X is the number of infection counters on it";
-    }
-
-    private DiseasedVerminEffect(final DiseasedVerminEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public DiseasedVerminEffect copy() {
-        return new DiseasedVerminEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if (sourcePermanent != null
-                && controller != null) {
-            TargetPlayer targetOpponent = new TargetPlayer(1, 1, false, filter);
-            if (targetOpponent.canChoose(controller.getId(), source, game)
-                    && controller.choose(Outcome.Damage, targetOpponent, source, game)) {
-                Player opponent = game.getPlayer(targetOpponent.getFirstTarget());
-                if (opponent != null
-                        && sourcePermanent.getCounters(game).getCount(CounterType.INFECTION) > 0) {
-                    opponent.damage(
-                            sourcePermanent.getCounters(game).getCount(CounterType.INFECTION), 
-                            source.getSourceId(), source, game, false, true);
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 }
 

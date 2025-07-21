@@ -101,7 +101,7 @@ class TakklemaggotEffect extends OneShotEffect {
         }
         FilterCreaturePermanent filter = new FilterCreaturePermanent();
         filter.add(new CanBeEnchantedByPredicate(auraCard));
-        Target target = new TargetCreaturePermanent(filter).withNotTarget(true);
+        Target target = new TargetPermanent(filter).withNotTarget(true);
         if (!game.getBattlefield().getActivePermanents(filter, player.getId(), source, game).isEmpty()
                 && player.choose(outcome, target, source, game)) {
             // return attached to that creature

@@ -17,6 +17,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -36,7 +37,7 @@ public final class GideonsDefeat extends CardImpl {
 
         // Exile target white creature that's attacking or blocking. If it was a Gideon planeswalker, you gain 5 life.
         this.getSpellAbility().addEffect(new GideonsDefeatEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
     private GideonsDefeat(final GideonsDefeat card) {

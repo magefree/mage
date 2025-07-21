@@ -115,7 +115,7 @@ class StragoAndRelmEffect extends OneShotEffect {
                 .map(Controllable::getControllerId)
                 .map(game::getPlayer)
                 .ifPresent(player -> CardUtil.castSpellWithAttributesForFree(
-                        opponent, source, game, new CardsImpl(card),
+                        player, source, game, new CardsImpl(card),
                         StaticFilters.FILTER_CARD, StragoAndRelmTracker.instance
                 ));
         return true;

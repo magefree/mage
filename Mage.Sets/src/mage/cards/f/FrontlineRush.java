@@ -26,7 +26,7 @@ public final class FrontlineRush extends CardImpl {
 
         // * Target creature gets +X/+X until end of turn, where X is the number of creatures you control.
         this.getSpellAbility().addMode(new Mode(new BoostTargetEffect(
-                CreaturesYouControlCount.instance, CreaturesYouControlCount.instance
+                CreaturesYouControlCount.PLURAL, CreaturesYouControlCount.PLURAL
         )).addTarget(new TargetCreaturePermanent()));
     }
 

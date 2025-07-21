@@ -918,27 +918,41 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     @Override
     public boolean cantBeAttachedBy(MageObject attachment, Ability source, Game game, boolean silentMode) {
+        boolean canAttach = true;
         for (ProtectionAbility ability : this.getAbilities(game).getProtectionAbilities()) {
             if ((!attachment.hasSubtype(SubType.AURA, game) || ability.removesAuras())
                     && (!attachment.hasSubtype(SubType.EQUIPMENT, game) || ability.removesEquipment())
                     && !attachment.getId().equals(ability.getAuraIdNotToBeRemoved())
                     && !ability.canTarget(attachment, game)) {
-                return !ability.getDoesntRemoveControlled() || Objects.equals(getControllerOrOwnerId(), game.getControllerId(attachment.getId()));
+                canAttach &= ability.getDoesntRemoveControlled() && Objects.equals(getControllerOrOwnerId(), game.getControllerId(attachment.getId()));
             }
         }
 
-        boolean canAttach = true;
-        Permanent attachmentPermanent = game.getPermanent(attachment.getId());
         // If attachment is an aura, ensures this permanent can still be legally enchanted, according to the enchantment's Enchant ability
-        if (attachment.hasSubtype(SubType.AURA, game)
-                && attachmentPermanent != null
-                && attachmentPermanent.getSpellAbility() != null
-                && !attachmentPermanent.getSpellAbility().getTargets().isEmpty()) {
-            // Line of code below functionally gets the target of the aura's Enchant ability, then compares to this permanent. Enchant improperly implemented in XMage, see #9583
-            // Note: stillLegalTarget used exclusively to account for Dream Leash. Can be made canTarget in the event that that card is rewritten (and "stillLegalTarget" removed from TargetImpl).
-            canAttach = attachmentPermanent.getSpellAbility().getTargets().get(0).copy().withNotTarget(true).stillLegalTarget(attachmentPermanent.getControllerId(), this.getId(), source, game);
+        if (attachment.hasSubtype(SubType.AURA, game)) {
+            SpellAbility spellAbility = null;
+            UUID controller = null;
+            Permanent attachmentPermanent = game.getPermanent(attachment.getId());
+            if (attachmentPermanent != null) {
+                spellAbility = attachmentPermanent.getSpellAbility(); // Permanent's SpellAbility might be modified, so if possible use that one
+                controller = attachmentPermanent.getControllerId();
+            } else { // Used for checking if it can be attached from the graveyard, such as Unfinished Business
+                Card attachmentCard = game.getCard(attachment.getId());
+                if (attachmentCard != null) {
+                    spellAbility = attachmentCard.getSpellAbility();
+                    if (source != null) {
+                        controller = source.getControllerId();
+                    } else {
+                        controller = attachmentCard.getControllerOrOwnerId();
+                    }
+                }
+            }
+            if (controller != null && spellAbility != null && !spellAbility.getTargets().isEmpty()){
+                // Line of code below functionally gets the target of the aura's Enchant ability, then compares to this permanent. Enchant improperly implemented in XMage, see #9583
+                // Note: stillLegalTarget used exclusively to account for Dream Leash. Can be made canTarget in the event that that card is rewritten (and "stillLegalTarget" removed from TargetImpl).
+                canAttach &= spellAbility.getTargets().get(0).copy().withNotTarget(true).stillLegalTarget(controller, this.getId(), source, game);
+            }
         }
-
         return !canAttach || game.getContinuousEffects().preventedByRuleModification(new StayAttachedEvent(this.getId(), attachment.getId(), source), null, game, silentMode);
     }
 

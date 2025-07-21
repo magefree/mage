@@ -12,7 +12,7 @@ import mage.constants.CardType;
 import mage.filter.common.FilterCreatureOrPlayer;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetPermanentOrPlayer;
 
 import java.util.UUID;
 
@@ -33,7 +33,7 @@ public final class ThermalDetonator extends CardImpl {
         // {2}, Sacrifice Thermal Detonator: Thermal Detonator deals 2 damage to target creature without spaceflight or target player.
         Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(2), new ManaCostsImpl<>("{2}"));
         ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetCreatureOrPlayer(filter));
+        ability.addTarget(new TargetPermanentOrPlayer(filter));
         this.addAbility(ability);
     }
 

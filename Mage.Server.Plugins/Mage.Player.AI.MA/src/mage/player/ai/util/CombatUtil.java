@@ -13,7 +13,7 @@ import mage.game.permanent.Permanent;
 import mage.game.turn.CombatDamageStep;
 import mage.game.turn.EndOfCombatStep;
 import mage.game.turn.Step;
-import mage.player.ai.GameStateEvaluator2;
+import mage.player.ai.score.GameStateEvaluator2;
 import mage.players.Player;
 import org.apache.log4j.Logger;
 

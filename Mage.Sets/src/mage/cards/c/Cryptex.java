@@ -4,7 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.costs.common.CollectEvidenceCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.keyword.SurveilEffect;
@@ -31,7 +31,7 @@ public final class Cryptex extends CardImpl {
         this.addAbility(ability);
 
         // Sacrifice Cryptex: Surveil 3, then draw three cards. Activate only if Cryptex has five or more unlock counters on it.
-        Ability sacAbility = new ConditionalActivatedAbility(new SurveilEffect(3, false), new SacrificeSourceCost(),
+        Ability sacAbility = new ActivateIfConditionActivatedAbility(new SurveilEffect(3, false), new SacrificeSourceCost(),
                 new SourceHasCounterCondition(CounterType.UNLOCK, 5));
         sacAbility.addEffect(new DrawCardSourceControllerEffect(3).concatBy(", then"));
         this.addAbility(sacAbility);

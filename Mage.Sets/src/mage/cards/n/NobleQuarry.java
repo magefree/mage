@@ -1,7 +1,6 @@
 
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -14,9 +13,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -35,7 +35,7 @@ public final class NobleQuarry extends CardImpl {
         this.addAbility(new BestowAbility(this, "{5}{G}"));
         // All creatures able to block Noble Quarry or enchanted creature do so.
         Effect effect = new MustBeBlockedByAllSourceEffect(Duration.WhileOnBattlefield);
-        effect.setText("All creatures able to block Noble Quarry");
+        effect.setText("All creatures able to block {this}");
         Ability ability = new SimpleStaticAbility(effect);
         effect = new MustBeBlockedByAllAttachedEffect(Duration.WhileOnBattlefield, AttachmentType.AURA);
         effect.setText("or enchanted creature do so");

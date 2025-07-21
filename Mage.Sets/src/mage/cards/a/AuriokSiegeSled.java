@@ -13,7 +13,10 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import static mage.filter.StaticFilters.FILTER_PERMANENT_ARTIFACT_CREATURE;
 
 /**
  *
@@ -31,7 +34,7 @@ public final class AuriokSiegeSled extends CardImpl {
         MustBeBlockedByTargetSourceEffect effect = new MustBeBlockedByTargetSourceEffect(Duration.EndOfTurn);
         effect.setText("target artifact creature blocks {this} this turn if able");
         Ability ability1 = new SimpleActivatedAbility(effect, new GenericManaCost(1));
-        ability1.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_CREATURE));
+        ability1.addTarget(new TargetPermanent(FILTER_PERMANENT_ARTIFACT_CREATURE));
         this.addAbility(ability1);
 
         // {1}: Target artifact creature can't block Auriok Siege Sled this turn.
@@ -39,7 +42,7 @@ public final class AuriokSiegeSled extends CardImpl {
                 new CantBeBlockedByTargetSourceEffect(Duration.EndOfTurn),
                 new GenericManaCost(1)
         );
-        ability2.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_CREATURE));
+        ability2.addTarget(new TargetPermanent(FILTER_PERMANENT_ARTIFACT_CREATURE));
         this.addAbility(ability2);
     }
 

@@ -1,7 +1,5 @@
-
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -13,13 +11,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.StaticFilters;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetOpponentsCreaturePermanent;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class WitchHunter extends CardImpl {
@@ -39,8 +36,7 @@ public final class WitchHunter extends CardImpl {
         // {1}{W}{W}, {tap}: Return target creature an opponent controls to its owner's hand.
         Ability returnAbility = new SimpleActivatedAbility(new ReturnToHandTargetEffect(), new ManaCostsImpl<>("{1}{W}{W}"));
         returnAbility.addCost(new TapSourceCost());
-        TargetCreaturePermanent target = new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE);
-        returnAbility.addTarget(target);
+        returnAbility.addTarget(new TargetOpponentsCreaturePermanent());
         this.addAbility(returnAbility);
     }
 

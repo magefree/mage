@@ -67,6 +67,7 @@ public class GameView implements Serializable {
     // TODO: implement and support in admin tools
     private int totalErrorsCount;
     private int totalEffectsCount;
+    private int gameCycle;
 
     public GameView(GameState state, Game game, UUID createdForPlayerId, UUID watcherUserId) {
         Player createdForPlayer = null;
@@ -214,6 +215,7 @@ public class GameView implements Serializable {
         this.rollbackTurnsAllowed = game.getOptions().rollbackTurnsAllowed;
         this.totalErrorsCount = game.getTotalErrorsCount();
         this.totalEffectsCount = game.getTotalEffectsCount();
+        this.gameCycle = game.getState().getApplyEffectsCounter();
     }
 
     private void checkPaid(UUID uuid, StackAbility stackAbility) {
@@ -357,5 +359,9 @@ public class GameView implements Serializable {
 
     public int getTotalEffectsCount() {
         return this.totalEffectsCount;
+    }
+
+    public int getGameCycle() {
+        return this.gameCycle;
     }
 }

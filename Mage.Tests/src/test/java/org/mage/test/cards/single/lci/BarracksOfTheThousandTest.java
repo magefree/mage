@@ -56,22 +56,28 @@ public class BarracksOfTheThousandTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void trigger_onlyonce_doublemana() {
+    public void trigger_onceTwice_doublemana() {
         setStrictChooseMode(true);
 
-        addCard(Zone.BATTLEFIELD, playerB, "Heartbeat of Spring");
+        addCard(Zone.BATTLEFIELD, playerA, "Mana Reflection");
         addCard(Zone.HAND, playerA, "Armored Warhorse");
+        addCard(Zone.HAND, playerA, "Savannah Lions", 2);
         initToTransform();
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Armored Warhorse");
+        checkPermanentCount("One Gnome Soldier Token", 1, PhaseStep.BEGIN_COMBAT, playerA, "Gnome Soldier Token", 1);
 
-        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Savannah Lions");
+        waitStackResolved(3, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Savannah Lions");
+
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertPermanentCount(playerA, "Gnome Soldier Token", 1);
+        assertPermanentCount(playerA, "Gnome Soldier Token", 3);
         assertPermanentCount(playerA, "Armored Warhorse", 1);
+        assertPermanentCount(playerA, "Savannah Lions", 2);
     }
-
 
     @Test
     public void noTrigger_NotPaidWithBarrack() {

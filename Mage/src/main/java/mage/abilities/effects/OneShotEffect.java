@@ -43,5 +43,11 @@ public abstract class OneShotEffect extends EffectImpl {
     }
 
     @Override
+    public OneShotEffect withTargetDescription(String target) {
+        super.withTargetDescription(target);
+        return this;
+    }
+
+    @Override
     abstract public OneShotEffect copy();
 }

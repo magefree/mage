@@ -1,7 +1,6 @@
 
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -12,6 +11,8 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -40,7 +41,7 @@ public final class LightningDart extends CardImpl {
 
         public LightningDartEffect() {
             super(Outcome.Damage);
-            this.staticText = "Lightning Dart deals 1 damage to target creature. If that creature is white or blue, Lightning Dart deals 4 damage to it instead";
+            this.staticText = "{this} deals 1 damage to target creature. If that creature is white or blue, {this} deals 4 damage to it instead";
         }
 
         private LightningDartEffect(final LightningDartEffect effect) {

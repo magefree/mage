@@ -76,10 +76,7 @@ public class TargetCardInLibrary extends TargetCard {
         Cards cardsId = new CardsImpl();
         cards.forEach(cardsId::add);
 
-        UUID abilityControllerId = playerId;
-        if (this.getTargetController() != null && this.getAbilityController() != null) {
-            abilityControllerId = this.getAbilityController();
-        }
+        UUID abilityControllerId = this.getAffectedAbilityControllerId(playerId);
 
         chosen = false;
         do {

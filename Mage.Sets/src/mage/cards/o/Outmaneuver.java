@@ -11,6 +11,7 @@ import mage.constants.Outcome;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.BlockedPredicate;
 import mage.game.Game;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.XTargetsCountAdjuster;
 
@@ -31,7 +32,7 @@ public final class Outmaneuver extends CardImpl {
 
         // X target blocked creatures assign their combat damage this turn as though they weren't blocked.
         this.getSpellAbility().addEffect(new OutmaneuverEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
     }
 

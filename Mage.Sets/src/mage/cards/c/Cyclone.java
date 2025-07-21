@@ -1,14 +1,13 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -17,6 +16,8 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 
 
@@ -48,7 +49,7 @@ class CycloneEffect extends OneShotEffect {
 
     CycloneEffect() {
         super(Outcome.Damage);
-        this.staticText = "Pay Green Mana for each counter to damage everything or sacrifice Cyclone.";
+        this.staticText = ", then sacrifice {this} unless you pay {G} for each wind counter on it. If you pay, {this} deals damage equal to the number of wind counters on it to each creature and each player";
     }
 
     private CycloneEffect(final CycloneEffect effect) {

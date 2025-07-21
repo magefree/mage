@@ -1,25 +1,28 @@
 package mage.cards.h;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.combat.CantAttackBlockAttachedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
-import mage.constants.*;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.common.TargetCreaturePermanent;
-import mage.abilities.effects.common.AttachEffect;
-import mage.target.TargetPermanent;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AttachmentType;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -81,7 +84,7 @@ class HoldForRansomSacrificeEffect extends OneShotEffect {
 
     HoldForRansomSacrificeEffect() {
         super(Outcome.Sacrifice);
-        this.staticText = "Hold for Ransom's controller sacrifices it and draws a card";
+        this.staticText = "{this}'s controller sacrifices it and draws a card";
     }
 
     private HoldForRansomSacrificeEffect(final HoldForRansomSacrificeEffect effect) {

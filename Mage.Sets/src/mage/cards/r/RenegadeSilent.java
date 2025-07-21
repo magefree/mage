@@ -12,9 +12,12 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL;
 
 /**
  * @author Susucr
@@ -33,7 +36,7 @@ public final class RenegadeSilent extends CardImpl {
         Ability ability = new BeginningOfEndStepTriggeredAbility(
                 new GoadTargetEffect().setText("goad up to one target creature you don't control")
         );
-        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
+        ability.addTarget(new TargetPermanent(FILTER_CREATURE_YOU_DONT_CONTROL));
         ability.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance())
                 .concatBy("and"));
         ability.addEffect(new PhaseOutSourceEffect());

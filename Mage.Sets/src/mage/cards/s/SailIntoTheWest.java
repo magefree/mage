@@ -56,7 +56,7 @@ class SailIntoTheWestEffect extends OneShotEffect {
         super(Outcome.Benefit);
         staticText = "starting with you, each player votes for return or embark. " +
                 "If return gets more votes, each player returns up to two cards from their graveyard " +
-                    "to their hand, then you exile Sail into the West. " +
+                    "to their hand, then you exile {this}. " +
                 "If embark gets more votes or the vote is tied, each player may discard their hand and draw seven cards.";
     }
 

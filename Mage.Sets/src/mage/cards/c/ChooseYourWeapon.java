@@ -5,15 +5,12 @@ import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -26,12 +23,6 @@ import java.util.UUID;
  */
 public final class ChooseYourWeapon extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent("creature with flying");
-
-    static {
-        filter.add(new AbilityPredicate(FlyingAbility.class));
-    }
-
     public ChooseYourWeapon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{G}");
 
@@ -43,7 +34,7 @@ public final class ChooseYourWeapon extends CardImpl {
 
         // • Archery — This spell deals 5 damage to target creature with flying.
         Mode mode = new Mode(new DamageTargetEffect(5, "this spell"));
-        mode.addTarget(new TargetPermanent(filter));
+        mode.addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_FLYING));
         this.getSpellAbility().addMode(mode.withFlavorWord("Archery"));
     }
 

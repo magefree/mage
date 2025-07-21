@@ -13,8 +13,11 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.StaticFilters;
 import mage.game.Game;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import static mage.filter.StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL;
 
 /**
  *
@@ -28,7 +31,7 @@ public final class WolfStrike extends CardImpl {
         // Target creature you control gets +2/+0 until end of turn if it's night.
         // Then it deals damage equal to its power to target creature you don't control.
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
+        this.getSpellAbility().addTarget(new TargetPermanent(FILTER_CREATURE_YOU_DONT_CONTROL));
         this.getSpellAbility().addEffect(new WolfStikeEffect());
         this.getSpellAbility().addEffect(new DamageWithPowerFromOneToAnotherTargetEffect("it").concatBy("Then"));
     }

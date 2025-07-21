@@ -36,6 +36,15 @@ class GetAmountTestableDialog extends BaseTestableDialog {
         this.max = max;
     }
 
+    private GetAmountTestableDialog aiMustChoose(int minAmount, int maxAmount) {
+        // require min/max cause AI logic uses random choices
+        AmountTestableResult res = ((AmountTestableResult) this.getResult());
+        res.aiAssertEnabled = true;
+        res.aiAssertMinAmount = minAmount;
+        res.aiAssertMaxAmount = maxAmount;
+        return this;
+    }
+
     @Override
     public void showDialog(Player player, Ability source, Game game, Player opponent) {
         Player choosingPlayer = this.isYou ? player : opponent;
@@ -51,17 +60,20 @@ class GetAmountTestableDialog extends BaseTestableDialog {
     static public void register(TestableDialogsRunner runner) {
         List<Boolean> isYous = Arrays.asList(false, true);
         for (boolean isYou : isYous) {
-            runner.registerDialog(new GetAmountTestableDialog(isYou, 0, 0));
-            runner.registerDialog(new GetAmountTestableDialog(isYou, 0, 1));
-            runner.registerDialog(new GetAmountTestableDialog(isYou, 0, 3));
-            runner.registerDialog(new GetAmountTestableDialog(isYou, 0, 50));
-            runner.registerDialog(new GetAmountTestableDialog(isYou, 0, 500));
-            runner.registerDialog(new GetAmountTestableDialog(isYou, 1, 1));
-            runner.registerDialog(new GetAmountTestableDialog(isYou, 1, 3));
-            runner.registerDialog(new GetAmountTestableDialog(isYou, 1, 50));
-            runner.registerDialog(new GetAmountTestableDialog(isYou, 3, 3));
-            runner.registerDialog(new GetAmountTestableDialog(isYou, 3, 10));
-            runner.registerDialog(new GetAmountTestableDialog(isYou, 10, 10));
+            // TODO: add good and bad effects:
+            // - on good: choose random big value
+            // - on bad: choose lower value
+            runner.registerDialog(new GetAmountTestableDialog(isYou, 0, 0).aiMustChoose(0, 0));
+            runner.registerDialog(new GetAmountTestableDialog(isYou, 0, 1).aiMustChoose(0, 1));
+            runner.registerDialog(new GetAmountTestableDialog(isYou, 0, 3).aiMustChoose(0, 3));
+            runner.registerDialog(new GetAmountTestableDialog(isYou, 0, 50).aiMustChoose(0, 50));
+            runner.registerDialog(new GetAmountTestableDialog(isYou, 0, 500).aiMustChoose(0, 500));
+            runner.registerDialog(new GetAmountTestableDialog(isYou, 1, 1).aiMustChoose(1, 1));
+            runner.registerDialog(new GetAmountTestableDialog(isYou, 1, 3).aiMustChoose(1, 3));
+            runner.registerDialog(new GetAmountTestableDialog(isYou, 1, 50).aiMustChoose(1, 50));
+            runner.registerDialog(new GetAmountTestableDialog(isYou, 3, 3).aiMustChoose(3, 3));
+            runner.registerDialog(new GetAmountTestableDialog(isYou, 3, 10).aiMustChoose(3, 10));
+            runner.registerDialog(new GetAmountTestableDialog(isYou, 10, 10).aiMustChoose(10, 10));
         }
     }
 }

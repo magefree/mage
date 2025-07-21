@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * Part of testable game dialogs
@@ -49,6 +50,28 @@ class GetMultiAmountTestableDialog extends BaseTestableDialog {
             String mes = "<font color=green>option</font> " + optionNumber + " with html";
             this.amountOptions.add(new MultiAmountMessage(mes, single.get(0), single.get(1), single.get(2)));
         }
+    }
+
+    private GetMultiAmountTestableDialog aiMustChoose(Integer... needValues) {
+        // TODO: AI use default distribution:
+        // - bad effect: min possible values
+        // - good effect: max possible and distributed values
+        MultiAmountTestableResult res = ((MultiAmountTestableResult) this.getResult());
+        res.aiAssertEnabled = true;
+        res.aiAssertValues = Arrays.stream(needValues).collect(Collectors.toList());
+        return this;
+    }
+
+    private GetMultiAmountTestableDialog aiMustChooseMany(Integer options, Integer perOption) {
+        List<Integer> need = new ArrayList<>();
+        IntStream.rangeClosed(1, options).forEach(x -> {
+            need.add(perOption);
+        });
+
+        MultiAmountTestableResult res = ((MultiAmountTestableResult) this.getResult());
+        res.aiAssertEnabled = true;
+        res.aiAssertValues = need;
+        return this;
     }
 
     @Override
@@ -91,29 +114,29 @@ class GetMultiAmountTestableDialog extends BaseTestableDialog {
         for (boolean isYou : isYous) {
             // make sure default values are valid due min/max settings
 
+            // TODO: add bad effect for AI (must test default distribution)
+
             // single target
-            runner.registerDialog(new GetMultiAmountTestableDialog(isYou, "one, 0 def", 0, 1, genSameOptions(1, 0, 1, 0)));
-            runner.registerDialog(new GetMultiAmountTestableDialog(isYou, "one, 0 def", 0, 3, genSameOptions(1, 0, 3, 0)));
-            runner.registerDialog(new GetMultiAmountTestableDialog(isYou, "one, 1 def", 1, 1, genSameOptions(1, 1, 1, 1)));
-            runner.registerDialog(new GetMultiAmountTestableDialog(isYou, "one, 1 def", 1, 3, genSameOptions(1, 1, 3, 1)));
-            runner.registerDialog(new GetMultiAmountTestableDialog(isYou, "one, 5 def", 0, 10, genSameOptions(1, 0, 10, 5)));
-            runner.registerDialog(new GetMultiAmountTestableDialog(isYou, "one, 10 def", 10, 10, genSameOptions(1, 0, 10, 10)));
+            runner.registerDialog(new GetMultiAmountTestableDialog(isYou, "one, 0 def", 0, 1, genSameOptions(1, 0, 1, 0)).aiMustChoose(1));
+            runner.registerDialog(new GetMultiAmountTestableDialog(isYou, "one, 0 def", 0, 3, genSameOptions(1, 0, 3, 0)).aiMustChoose(3));
+            runner.registerDialog(new GetMultiAmountTestableDialog(isYou, "one, 1 def", 1, 1, genSameOptions(1, 1, 1, 1)).aiMustChoose(1));
+            runner.registerDialog(new GetMultiAmountTestableDialog(isYou, "one, 1 def", 1, 3, genSameOptions(1, 1, 3, 1)).aiMustChoose(3));
+            runner.registerDialog(new GetMultiAmountTestableDialog(isYou, "one, 5 def", 0, 10, genSameOptions(1, 0, 10, 5)).aiMustChoose(10));
+            runner.registerDialog(new GetMultiAmountTestableDialog(isYou, "one, 10 def", 10, 10, genSameOptions(1, 0, 10, 10)).aiMustChoose(10));
             // multiple targets
-            runner.registerDialog(new GetMultiAmountTestableDialog(isYou, "many, 0 def", 0, 5, genSameOptions(3, 0, 3, 0)));
-            runner.registerDialog(new GetMultiAmountTestableDialog(isYou, "many, 0 def", 0, 5, genSameOptions(3, 0, 3, 0)));
-            runner.registerDialog(new GetMultiAmountTestableDialog(isYou, "many, 1 def", 1, 5, genSameOptions(3, 1, 3, 1)));
-            runner.registerDialog(new GetMultiAmountTestableDialog(isYou, "many, 1 def", 1, 5, genSameOptions(3, 1, 3, 1)));
-            runner.registerDialog(new GetMultiAmountTestableDialog(isYou, "many, 20 def", 0, 60, genSameOptions(3, 0, 60, 20)));
-            runner.registerDialog(new GetMultiAmountTestableDialog(isYou, "many, 20 def", 60, 60, genSameOptions(3, 0, 60, 20)));
+            runner.registerDialog(new GetMultiAmountTestableDialog(isYou, "many, 0 def", 0, 5, genSameOptions(3, 0, 3, 0)).aiMustChoose(2, 2, 1));
+            runner.registerDialog(new GetMultiAmountTestableDialog(isYou, "many, 1 def", 1, 5, genSameOptions(3, 1, 3, 1)).aiMustChoose(2, 2, 1));
+            runner.registerDialog(new GetMultiAmountTestableDialog(isYou, "many, 20 def", 0, 60, genSameOptions(3, 0, 60, 20)).aiMustChoose(20, 20, 20));
+            runner.registerDialog(new GetMultiAmountTestableDialog(isYou, "many, 20 def", 60, 60, genSameOptions(3, 0, 60, 20)).aiMustChoose(20, 20, 20));
             // big lists
-            runner.registerDialog(new GetMultiAmountTestableDialog(isYou, "big list", 0, 100, genSameOptions(20, 0, 100, 0)));
-            runner.registerDialog(new GetMultiAmountTestableDialog(isYou, "big list", 0, 100, genSameOptions(100, 0, 100, 0)));
+            runner.registerDialog(new GetMultiAmountTestableDialog(isYou, "big list", 0, 100, genSameOptions(20, 0, 100, 0)).aiMustChooseMany(20, 5));
+            runner.registerDialog(new GetMultiAmountTestableDialog(isYou, "big list", 0, 100, genSameOptions(100, 0, 100, 0)).aiMustChooseMany(100, 1));
         }
     }
 
-    private static List<List<Integer>> genSameOptions(int amount, int min, int max, int def) {
+    private static List<List<Integer>> genSameOptions(int options, int min, int max, int def) {
         List<List<Integer>> res = new ArrayList<>();
-        for (int i = 0; i < amount; i++) {
+        for (int i = 0; i < options; i++) {
             // min, max, default
             res.add(Arrays.asList(min, max, def));
         }

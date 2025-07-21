@@ -15,16 +15,14 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
 /**
- *
  * @author ciaccona007
  */
 public final class DropkickBomber extends CardImpl {
@@ -41,7 +39,7 @@ public final class DropkickBomber extends CardImpl {
 
     public DropkickBomber(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        
+
         this.subtype.add(SubType.GOBLIN);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(2);
@@ -67,7 +65,7 @@ public final class DropkickBomber extends CardImpl {
                         Duration.EndOfTurn
                 ).setText("and \"When this creature deals combat damage, sacrifice it.\"")
         );
-        ability.addTarget(new TargetControlledCreaturePermanent(filter2));
+        ability.addTarget(new TargetPermanent(filter2));
         this.addAbility(ability);
     }
 

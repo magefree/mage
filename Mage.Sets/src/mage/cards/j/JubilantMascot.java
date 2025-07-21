@@ -1,24 +1,23 @@
 
 package mage.cards.j;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DoIfCostPaid;
-import mage.abilities.effects.common.counter.AddCountersTargetEffect;
-import mage.constants.SubType;
+import mage.abilities.effects.keyword.SupportEffect;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.counters.CounterType;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author TheElk801
  */
 public final class JubilantMascot extends CardImpl {
@@ -39,11 +38,10 @@ public final class JubilantMascot extends CardImpl {
         // At the beginning of combat on your turn, you may pay {3}{W}. If you do, support 2. (Put a +1/+1 counter on each of up to two other target creatures.)
         Ability ability = new BeginningOfCombatTriggeredAbility(
                 new DoIfCostPaid(
-                        new AddCountersTargetEffect(CounterType.P1P1.createInstance())
-                                .setText("support 2"),
+                        new SupportEffect(this, 2, true),
                         new ManaCostsImpl<>("{3}{W}")
                 ));
-        ability.addTarget(new TargetCreaturePermanent(0, 2, filter, false));
+        ability.addTarget(new TargetPermanent(0, 2, filter));
         this.addAbility(ability);
     }
 

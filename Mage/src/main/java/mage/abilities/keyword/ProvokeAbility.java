@@ -1,19 +1,19 @@
 
 package mage.abilities.keyword;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.constants.Duration;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
+import mage.constants.SetTargetPointer;
+import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
+import mage.target.targetadjustment.ThatPlayerControlsTargetAdjuster;
+
+import java.util.UUID;
 
 /**
  * 702.38. Provoke 702.38a Provoke is a triggered ability. “Provoke” means
@@ -31,26 +31,14 @@ public class ProvokeAbility extends AttacksTriggeredAbility {
     }
 
     public ProvokeAbility(String text) {
-        super(new UntapTargetEffect(), true, text);
+        super(new UntapTargetEffect(), true, text, SetTargetPointer.PLAYER);
         this.addEffect(new ProvokeRequirementEffect());
+        this.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_CREATURE));
+        this.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster());
     }
 
     protected ProvokeAbility(final ProvokeAbility ability) {
         super(ability);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (super.checkTrigger(event, game)) {
-            FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
-            UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(sourceId, game);
-            filter.add(new ControllerIdPredicate(defendingPlayerId));
-            this.getTargets().clear();
-            TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
-            this.addTarget(target);
-            return true;
-        }
-        return false;
     }
 
     @Override

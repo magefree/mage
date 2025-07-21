@@ -1,17 +1,15 @@
-
 package mage.target.common;
 
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.cards.Card;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
+import mage.filter.predicate.card.OwnerIdPredicate;
 import mage.game.Game;
 import mage.target.TargetCard;
 
 import java.util.UUID;
-
-import mage.filter.StaticFilters;
-import mage.filter.predicate.card.OwnerIdPredicate;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -54,5 +52,4 @@ public class TargetDiscard extends TargetCard {
     public TargetDiscard copy() {
         return new TargetDiscard(this);
     }
-
 }

@@ -10,6 +10,8 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
  * @author ayratn
  */
@@ -30,13 +32,15 @@ public class SwitchPowerToughnessTargetEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent target = game.getPermanent(this.getTargetPointer().getFirst(game, source));
-        if (target == null) {
-            return false;
+        int affectedTargets = 0;
+        for (UUID uuid : getTargetPointer().getTargets(game, source)) {
+            Permanent target = game.getPermanent(uuid);
+            if (target != null) {
+                target.switchPowerToughness();
+                affectedTargets++;
+            }
         }
-
-        target.switchPowerToughness();
-        return true;
+        return affectedTargets > 0;
     }
 
     @Override

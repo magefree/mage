@@ -14,12 +14,15 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.Watcher;
 
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE;
 
 /**
  * @author LevelX2
@@ -32,7 +35,7 @@ public final class OathOfChandra extends CardImpl {
 
         // When Oath of Chandra enters the battlefield, it deals 3 damage to target creature an opponent controls.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(3, "it"));
-        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
+        ability.addTarget(new TargetPermanent(FILTER_OPPONENTS_PERMANENT_CREATURE));
         this.addAbility(ability);
 
         // At the beginning of each end step, if a planeswalker entered the battlefield under your control this turn, Oath of Chandra deals 2 damage to each opponent.

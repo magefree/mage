@@ -91,7 +91,7 @@ class DorotheasRetributionEffect extends OneShotEffect {
         game.addDelayedTriggeredAbility(new AtTheEndOfCombatDelayedTriggeredAbility(
                 new SacrificeTargetEffect()
                         .setTargetPointer(new FixedTargets(token, game))
-                        .setText("sacrifce that token")
+                        .setText("sacrifice that token")
         ), source);
         return true;
     }

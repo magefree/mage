@@ -5,7 +5,7 @@ import mage.abilities.ActivatedAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.abilities.mana.ColorlessManaAbility;
@@ -13,7 +13,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TimingRule;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
@@ -39,13 +38,11 @@ public final class HallOfOracles extends CardImpl {
         this.addAbility(ability);
 
         // {T}: Put a +1/+1 counter on target creature. Activate only as a sorcery and only if you've cast an instant or sorcery spell this turn.
-        ability = new ConditionalActivatedAbility(
-                Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new TapSourceCost(),
-                HallOfOraclesCondition.instance, "{T}: Put a +1/+1 counter on target creature. " +
-                "Activate only as a sorcery and only if you've cast an instant or sorcery spell this turn."
-        );
+        ability = new ActivateIfConditionActivatedAbility(
+                new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
+                new TapSourceCost(), HallOfOraclesCondition.instance
+        ).setTiming(TimingRule.SORCERY);
         ability.addTarget(new TargetCreaturePermanent());
-        ability.setTiming(TimingRule.SORCERY);
         this.addAbility(ability);
     }
 
@@ -70,5 +67,10 @@ enum HallOfOraclesCondition implements Condition {
                 .stream()
                 .filter(Objects::nonNull)
                 .anyMatch(spell -> spell.isInstantOrSorcery(game));
+    }
+
+    @Override
+    public String toString() {
+        return "you've cast an instant or sorcery spell this turn";
     }
 }

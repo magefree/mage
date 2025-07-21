@@ -257,10 +257,7 @@ public class CallbackClientImpl implements CallbackClient {
                         if (panel != null) {
                             Session session = SessionHandler.getSession();
                             if (session.isJsonLogActive()) {
-                                UUID gameId = callback.getObjectId();
                                 appendJsonEvent("GAME_OVER", callback.getObjectId(), message);
-                                String logFileName = "game-" + gameId + ".json";
-                                S3Uploader.upload(logFileName, gameId.toString());
                             }
                             panel.endMessage(callback.getMessageId(), message.getGameView(), message.getOptions(), message.getMessage());
                         }

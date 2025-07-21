@@ -110,6 +110,12 @@ public class TargetCard extends TargetObject {
                         possibleTargets += countPossibleTargetInCommandZone(game, player, sourceControllerId, source,
                                 filter, isNotTarget(), this.minNumberOfTargets - possibleTargets);
                         break;
+                    case ALL:
+                        possibleTargets += countPossibleTargetInAnyZone(game, player, sourceControllerId, source,
+                                filter, isNotTarget(), this.minNumberOfTargets - possibleTargets);
+                        break;
+                    default:
+                        throw new IllegalArgumentException("Unsupported TargetCard zone: " + zone);
                 }
                 if (possibleTargets >= this.minNumberOfTargets) {
                     return true;
@@ -214,6 +220,25 @@ public class TargetCard extends TargetObject {
         return possibleTargets;
     }
 
+    /**
+     * count up to N possible target cards in ANY zone
+     */
+    protected static int countPossibleTargetInAnyZone(Game game, Player player, UUID sourceControllerId, Ability source, FilterCard filter, boolean isNotTarget, int countUpTo) {
+        UUID sourceId = source != null ? source.getSourceId() : null;
+        int possibleTargets = 0;
+        for (Card card : game.getCards()) {
+            if (sourceId == null || isNotTarget || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
+                if (filter.match(card, game)) {
+                    possibleTargets++;
+                    if (possibleTargets >= countUpTo) {
+                        return possibleTargets; // early return for faster computation.
+                    }
+                }
+            }
+        }
+        return possibleTargets;
+    }
+
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
         return possibleTargets(sourceControllerId, null, game);
@@ -245,6 +270,11 @@ public class TargetCard extends TargetObject {
                     case COMMAND:
                         possibleTargets.addAll(getAllPossibleTargetInCommandZone(game, player, sourceControllerId, source, filter, isNotTarget()));
                         break;
+                    case ALL:
+                        possibleTargets.addAll(getAllPossibleTargetInAnyZone(game, player, sourceControllerId, source, filter, isNotTarget()));
+                        break;
+                    default:
+                        throw new IllegalArgumentException("Unsupported TargetCard zone: " + zone);
                 }
             }
         }
@@ -327,6 +357,22 @@ public class TargetCard extends TargetObject {
         for (Card card : possibleCards) {
             if (sourceId == null || isNotTarget || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
                 possibleTargets.add(card.getId());
+            }
+        }
+        return possibleTargets;
+    }
+
+    /**
+     * set of all matching target in ANY zone
+     */
+    protected static Set<UUID> getAllPossibleTargetInAnyZone(Game game, Player player, UUID sourceControllerId, Ability source, FilterCard filter, boolean isNotTarget) {
+        Set<UUID> possibleTargets = new HashSet<>();
+        UUID sourceId = source != null ? source.getSourceId() : null;
+        for (Card card : game.getCards()) {
+            if (sourceId == null || isNotTarget || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
+                if (filter.match(card, sourceControllerId, source, game)) {
+                    possibleTargets.add(card.getId());
+                }
             }
         }
         return possibleTargets;

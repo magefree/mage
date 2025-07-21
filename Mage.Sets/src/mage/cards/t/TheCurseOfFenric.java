@@ -30,6 +30,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import static mage.constants.Duration.EndOfGame;
+import static mage.constants.SagaChapter.CHAPTER_II;
+
 /**
  * @author padfoothelix 
  */
@@ -72,12 +75,12 @@ public final class TheCurseOfFenric extends CardImpl {
 
         // II -- Target nontoken creature becomes a 6/6 legendary Horror creature named Fenric and loses all abilities.
         sagaAbility.addChapterEffect(
-                this, SagaChapter.CHAPTER_II,
+                this, CHAPTER_II,
                 new BecomesCreatureTargetEffect(
                         new TheCurseOfFenricHorrorToken(),
-                        true, false, Duration.EndOfGame, true
+                        true, false, EndOfGame, true
                 ),
-                new TargetCreaturePermanent(nontokenFilter)
+                new TargetPermanent(nontokenFilter)
         );
 
         // III -- Target Mutant fights another target creature named Fenric.
@@ -88,7 +91,7 @@ public final class TheCurseOfFenric extends CardImpl {
                             "Target Mutant fights another target creature named Fenric"
                     ));
                     ability.addTarget(new TargetPermanent(mutantFilter).setTargetTag(1));
-                    ability.addTarget(new TargetCreaturePermanent(fenricFilter).setTargetTag(2));
+                    ability.addTarget(new TargetPermanent(fenricFilter).setTargetTag(2));
                 }
         );
 

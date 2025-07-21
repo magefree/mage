@@ -18,6 +18,7 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -52,7 +53,7 @@ public final class HigureTheStillWind extends CardImpl {
 
         // {2}: Target Ninja creature can't be blocked this turn.
         Ability ability = new SimpleActivatedAbility(new CantBeBlockedTargetEffect(), new GenericManaCost(2));
-        ability.addTarget(new TargetCreaturePermanent(filterCreature));
+        ability.addTarget(new TargetPermanent(filterCreature));
         this.addAbility(ability);
 
     }

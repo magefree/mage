@@ -7,13 +7,14 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
+import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.other.AnotherTargetPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +26,7 @@ import java.util.UUID;
  */
 public final class FriendlyRivalry extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent("other target legendary creature you control");
+    private static final FilterPermanent filter2 = new FilterControlledCreaturePermanent("other target legendary creature you control");
 
     static {
         filter2.add(new AnotherTargetPredicate(2));
@@ -37,15 +38,9 @@ public final class FriendlyRivalry extends CardImpl {
 
         // Target creature you control and up to one other target legendary creature you control each deal damage equal to their power to target creature you don't control.
         this.getSpellAbility().addEffect(new FriendlyRivalryEffect());
-
-        TargetControlledCreaturePermanent target1 = new TargetControlledCreaturePermanent();
-        this.getSpellAbility().addTarget(target1.setTargetTag(1).withChooseHint("to deal damage"));
-
-        TargetControlledCreaturePermanent target2 = new TargetControlledCreaturePermanent(0, 1, filter2, false);
-        this.getSpellAbility().addTarget(target2.setTargetTag(2).withChooseHint("to deal damage"));
-
-        TargetCreaturePermanent target3 = new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL);
-        this.getSpellAbility().addTarget(target3.setTargetTag(3).withChooseHint("to take damage"));
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent().setTargetTag(1).withChooseHint("to deal damage"));
+        this.getSpellAbility().addTarget(new TargetPermanent(0, 1, filter2).setTargetTag(2).withChooseHint("to deal damage"));
+        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL).setTargetTag(3).withChooseHint("to take damage"));
     }
 
     private FriendlyRivalry(final FriendlyRivalry card) {

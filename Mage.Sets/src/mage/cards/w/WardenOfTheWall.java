@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.game.permanent.token.TokenImpl;
 
 import java.util.UUID;
@@ -37,7 +36,7 @@ public final class WardenOfTheWall extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BecomesCreatureSourceEffect(new GargoyleToken(), CardType.ARTIFACT, Duration.WhileOnBattlefield),
                 NotMyTurnCondition.instance,
-                "During turns other than yours, Warden of the Wall is a 2/3 Gargoyle artifact creature with flying"))
+                "During turns other than yours, {this} is a 2/3 Gargoyle artifact creature with flying"))
                 .addHint(NotMyTurnHint.instance));
     }
 

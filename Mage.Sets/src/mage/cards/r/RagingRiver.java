@@ -12,6 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -22,7 +23,7 @@ import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.ArrayList;
@@ -57,6 +58,12 @@ public final class RagingRiver extends CardImpl {
 
 class RagingRiverEffect extends OneShotEffect {
 
+    private static final FilterPermanent filterBlockers = new FilterControlledCreaturePermanent("creatures without flying you control to assign to the \"left\" pile (creatures not chosen will be assigned to the \"right\" pile)");
+
+    static {
+        filterBlockers.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
+    }
+
     RagingRiverEffect() {
         super(Outcome.Detriment);
         staticText = "each defending player divides all creatures without flying they control into a \"left\" pile and a \"right\" pile. Then, for each attacking creature you control, choose \"left\" or \"right.\" That creature can't be blocked this combat except by creatures with flying and creatures in a pile with the chosen label";
@@ -74,84 +81,87 @@ class RagingRiverEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            List<Permanent> left = new ArrayList<>();
-            List<Permanent> right = new ArrayList<>();
-
-            for (UUID defenderId : game.getCombat().getPlayerDefenders(game)) {
-                Player defender = game.getPlayer(defenderId);
-                if (defender != null) {
-                    List<Permanent> leftLog = new ArrayList<>();
-                    List<Permanent> rightLog = new ArrayList<>();
-                    FilterControlledCreaturePermanent filterBlockers = new FilterControlledCreaturePermanent("creatures without flying you control to assign to the \"left\" pile (creatures not chosen will be assigned to the \"right\" pile)");
-                    filterBlockers.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
-                    Target target = new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, filterBlockers, true);
-                    if (target.canChoose(defenderId, source, game)) {
-                        if (defender.chooseTarget(Outcome.Neutral, target, source, game)) {
-                            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), defenderId, game)) {
-                                if (target.getTargets().contains(permanent.getId())) {
-                                    left.add(permanent);
-                                    leftLog.add(permanent);
-                                } else if (filterBlockers.match(permanent, defenderId, source, game)) {
-                                    right.add(permanent);
-                                    rightLog.add(permanent);
-                                }
-                            }
-                        }
-
-                        // it could be nice to invoke some graphic indicator of which creature is Left or Right in this spot
-                        StringBuilder sb = new StringBuilder("Left pile of ").append(defender.getLogName()).append(": ");
-                        sb.append(leftLog.stream().map(MageObject::getLogName).collect(Collectors.joining(", ")));
-
-                        game.informPlayers(sb.toString());
-
-                        sb = new StringBuilder("Right pile of ").append(defender.getLogName()).append(": ");
-                        sb.append(rightLog.stream().map(MageObject::getLogName).collect(Collectors.joining(", ")));
-
-                        game.informPlayers(sb.toString());
-                    }
-                }
-            }
-
-            for (UUID attackers : game.getCombat().getAttackers()) {
-                Permanent attacker = game.getPermanent(attackers);
-                if (attacker != null && Objects.equals(attacker.getControllerId(), controller.getId())) {
-                    CombatGroup combatGroup = game.getCombat().findGroup(attacker.getId());
-                    if (combatGroup != null) {
-                        FilterCreaturePermanent filter = new FilterCreaturePermanent();
-                        Player defender = game.getPlayer(combatGroup.getDefendingPlayerId());
-                        if (defender != null) {
-                            if (left.isEmpty() && right.isEmpty()) {
-                                // shortcut in case of no labeled blockers available
-                                filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
-                            } else {
-                                List<Permanent> leftLog = left.stream()
-                                        .filter(permanent -> permanent.getControllerId() != null)
-                                        .filter(permanent -> permanent.isControlledBy(defender.getId()))
-                                        .collect(Collectors.toList());
-                                List<Permanent> rightLog = right.stream()
-                                        .filter(permanent -> permanent.getControllerId() != null)
-                                        .filter(permanent -> permanent.isControlledBy(defender.getId()))
-                                        .collect(Collectors.toList());
-
-
-                                if (controller.choosePile(outcome, attacker.getName() + ": attacking " + defender.getName(), leftLog, rightLog, game)) {
-                                    filter.add(Predicates.not(Predicates.or(new AbilityPredicate(FlyingAbility.class), new PermanentReferenceInCollectionPredicate(left, game))));
-                                    game.informPlayers(attacker.getLogName() + ": attacks left (" + defender.getLogName() + ")");
-                                } else {
-                                    filter.add(Predicates.not(Predicates.or(new AbilityPredicate(FlyingAbility.class), new PermanentReferenceInCollectionPredicate(right, game))));
-                                    game.informPlayers(attacker.getLogName() + ": attacks right (" + defender.getLogName() + ")");
-                                }
-                            }
-                            RestrictionEffect effect = new CantBeBlockedByAllTargetEffect(filter, Duration.EndOfCombat);
-                            effect.setTargetPointer(new FixedTarget(attacker.getId(), game));
-                            game.addEffect(effect, source);
-                        }
-                    }
-                }
-            }
-            return true;
+        if (controller == null) {
+            return false;
         }
-        return false;
+        List<Permanent> left = new ArrayList<>();
+        List<Permanent> right = new ArrayList<>();
+
+        for (UUID defenderId : game.getCombat().getPlayerDefenders(game)) {
+            Player defender = game.getPlayer(defenderId);
+            if (defender == null) {
+                continue;
+            }
+            List<Permanent> leftLog = new ArrayList<>();
+            List<Permanent> rightLog = new ArrayList<>();
+            Target target = new TargetPermanent(0, Integer.MAX_VALUE, filterBlockers, true);
+            if (!target.canChoose(defenderId, source, game)) {
+                continue;
+            }
+            if (defender.chooseTarget(Outcome.Neutral, target, source, game)) {
+                for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), defenderId, game)) {
+                    if (target.getTargets().contains(permanent.getId())) {
+                        left.add(permanent);
+                        leftLog.add(permanent);
+                    } else if (filterBlockers.match(permanent, defenderId, source, game)) {
+                        right.add(permanent);
+                        rightLog.add(permanent);
+                    }
+                }
+            }
+
+            // it could be nice to invoke some graphic indicator of which creature is Left or Right in this spot
+            StringBuilder sb = new StringBuilder("Left pile of ").append(defender.getLogName()).append(": ");
+            sb.append(leftLog.stream().map(MageObject::getLogName).collect(Collectors.joining(", ")));
+
+            game.informPlayers(sb.toString());
+
+            sb = new StringBuilder("Right pile of ").append(defender.getLogName()).append(": ");
+            sb.append(rightLog.stream().map(MageObject::getLogName).collect(Collectors.joining(", ")));
+
+            game.informPlayers(sb.toString());
+        }
+
+        for (UUID attackers : game.getCombat().getAttackers()) {
+            Permanent attacker = game.getPermanent(attackers);
+            if (attacker == null || !Objects.equals(attacker.getControllerId(), controller.getId())) {
+                continue;
+            }
+            CombatGroup combatGroup = game.getCombat().findGroup(attacker.getId());
+            if (combatGroup == null) {
+                continue;
+            }
+            FilterCreaturePermanent filter = new FilterCreaturePermanent();
+            Player defender = game.getPlayer(combatGroup.getDefendingPlayerId());
+            if (defender == null) {
+                continue;
+            }
+            if (left.isEmpty() && right.isEmpty()) {
+                // shortcut in case of no labeled blockers available
+                filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
+            } else {
+                List<Permanent> leftLog = left.stream()
+                        .filter(permanent -> permanent.getControllerId() != null)
+                        .filter(permanent -> permanent.isControlledBy(defender.getId()))
+                        .collect(Collectors.toList());
+                List<Permanent> rightLog = right.stream()
+                        .filter(permanent -> permanent.getControllerId() != null)
+                        .filter(permanent -> permanent.isControlledBy(defender.getId()))
+                        .collect(Collectors.toList());
+
+
+                if (controller.choosePile(outcome, attacker.getName() + ": attacking " + defender.getName(), leftLog, rightLog, game)) {
+                    filter.add(Predicates.not(Predicates.or(new AbilityPredicate(FlyingAbility.class), new PermanentReferenceInCollectionPredicate(left, game))));
+                    game.informPlayers(attacker.getLogName() + ": attacks left (" + defender.getLogName() + ")");
+                } else {
+                    filter.add(Predicates.not(Predicates.or(new AbilityPredicate(FlyingAbility.class), new PermanentReferenceInCollectionPredicate(right, game))));
+                    game.informPlayers(attacker.getLogName() + ": attacks right (" + defender.getLogName() + ")");
+                }
+            }
+            RestrictionEffect effect = new CantBeBlockedByAllTargetEffect(filter, Duration.EndOfCombat);
+            effect.setTargetPointer(new FixedTarget(attacker.getId(), game));
+            game.addEffect(effect, source);
+        }
+        return true;
     }
 }

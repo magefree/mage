@@ -1,25 +1,23 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.Target;
-import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
  */
 public final class DiscipleOfBolas extends CardImpl {
@@ -65,21 +63,24 @@ class DiscipleOfBolasEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Target target = new TargetControlledCreaturePermanent(1, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, true);
-            target.setRequired(true);
-            if (target.canChoose(source.getControllerId(), source, game)) {
-                controller.chooseTarget(outcome, target, source, game);
-                Permanent sacrificed = game.getPermanent(target.getFirstTarget());
-                if (sacrificed != null) {
-                    sacrificed.sacrifice(source, game);
-                    int power = sacrificed.getPower().getValue();
-                    controller.gainLife(power, game, source);
-                    controller.drawCards(power, source, game);
-                }
-            }
-            return true;
+        if (controller == null) {
+            return false;
         }
-        return false;
+        SacrificeTargetCost cost = new SacrificeTargetCost(StaticFilters.FILTER_ANOTHER_CREATURE);
+        if (!cost.canPay(source, source, source.getControllerId(), game)
+                || !cost.pay(source, game, source, source.getControllerId(), true)) {
+            return false;
+        }
+        int power = cost
+                .getPermanents()
+                .stream()
+                .map(MageObject::getPower)
+                .mapToInt(MageInt::getValue)
+                .sum();
+        if (power > 0) {
+            controller.gainLife(power, game, source);
+            controller.drawCards(power, source, game);
+        }
+        return true;
     }
 }

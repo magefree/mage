@@ -19,7 +19,6 @@ import mage.client.dialog.AddLandDialog;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.Event;
-import mage.client.util.GUISizeHelper;
 import mage.client.util.Listener;
 import mage.client.util.audio.AudioManager;
 import mage.components.CardInfoPane;
@@ -31,7 +30,6 @@ import mage.util.XmageThreadFactory;
 import mage.view.CardView;
 import mage.view.SimpleCardView;
 import org.apache.log4j.Logger;
-import org.mage.card.arcane.ManaSymbols;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -534,7 +532,8 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                         }
                     }
                 });
-        refreshDeck(true);
+
+        refreshDeck(true, false);
 
         // auto-import dropped files from OS
         if (mode == DeckEditorMode.FREE_BUILDING) {
@@ -673,18 +672,26 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
     private void refreshDeck() {
         if (this.isVisible()) { // TODO: test auto-close deck with active lands dialog, e.g. on timeout
-            refreshDeck(false);
+            refreshDeck(false, false);
         }
     }
 
-    private void refreshDeck(boolean useLayout) {
+    private void refreshDeck(boolean useLayout, boolean useDeckValidation) {
         try {
-            setCursor(new Cursor(Cursor.WAIT_CURSOR));
+            MageFrame.getDesktop().setCursor(new Cursor(Cursor.WAIT_CURSOR));
             this.txtDeckName.setText(deck.getName());
             deckArea.loadDeck(deck, useLayout, bigCard);
+            if (useDeckValidation) {
+                validateDeck();
+            }
         } finally {
-            setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+            MageFrame.getDesktop().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }
+    }
+
+    private void validateDeck() {
+        this.deckLegalityDisplay.setVisible(true);
+        this.deckLegalityDisplay.validateDeck(deck);
     }
 
     private void setTimeout(int s) {
@@ -762,7 +769,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
                     if (newDeck != null) {
                         deck = newDeck;
-                        refreshDeck();
+                        refreshDeck(false, true);
                     }
 
                     // save last deck import folder
@@ -818,7 +825,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                     Deck deckToAppend = Deck.load(DeckImporter.importDeckFromFile(tempDeckPath, errorMessages, false), true, true);
                     processAndShowImportErrors(errorMessages);
                     this.deck = Deck.append(deckToAppend, this.deck);
-                    refreshDeck();
+                    refreshDeck(false, true);
                 } catch (GameException e1) {
                     JOptionPane.showMessageDialog(MageFrame.getDesktop(), e1.getMessage(), "Error loading deck", JOptionPane.ERROR_MESSAGE);
                 } finally {
@@ -922,7 +929,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
             if (newDeck != null) {
                 deck = newDeck;
-                refreshDeck();
+                refreshDeck(false, true);
                 return true;
             }
 
@@ -1441,7 +1448,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
                 if (newDeck != null) {
                     deck = newDeck;
-                    refreshDeck(true);
+                    refreshDeck(true, true);
                 }
 
                 // save last deck history
@@ -1474,7 +1481,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             // in deck editor mode - clear all cards
             deck = new Deck();
         }
-        refreshDeck();
+        refreshDeck(false, true);
     }//GEN-LAST:event_btnNewActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
@@ -1483,7 +1490,9 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
     private void btnAddLandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddLandActionPerformed
         AddLandDialog dialog = new AddLandDialog();
-        dialog.showDialog(deck, mode, this::refreshDeck);
+        dialog.showDialog(deck, mode, () -> {
+            this.refreshDeck(false, true);
+        });
     }//GEN-LAST:event_btnAddLandActionPerformed
 
     private void btnGenDeckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenDeckActionPerformed
@@ -1501,7 +1510,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         } finally {
             MageFrame.getDesktop().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }
-        refreshDeck();
+        refreshDeck(false, true);
     }//GEN-LAST:event_btnGenDeckActionPerformed
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
@@ -1548,8 +1557,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnExportActionPerformed
 
     private void btnLegalityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLegalityActionPerformed
-        this.deckLegalityDisplay.setVisible(true);
-        this.deckLegalityDisplay.validateDeck(deck);
+        validateDeck();
     }//GEN-LAST:event_btnLegalityActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

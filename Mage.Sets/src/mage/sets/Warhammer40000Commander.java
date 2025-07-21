@@ -30,7 +30,6 @@ public final class Warhammer40000Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Abundance", 210, Rarity.RARE, mage.cards.a.Abundance.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Acolyte Hybrid", "70*", Rarity.UNCOMMON, mage.cards.a.AcolyteHybrid.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Acolyte Hybrid", 70, Rarity.UNCOMMON, mage.cards.a.AcolyteHybrid.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Adaptive Automaton", 322, Rarity.RARE, mage.cards.a.AdaptiveAutomaton.class));
         cards.add(new SetCardInfo("Aetherize", "191*", Rarity.UNCOMMON, mage.cards.a.Aetherize.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aetherize", 191, Rarity.UNCOMMON, mage.cards.a.Aetherize.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("And They Shall Know No Fear", "9*", Rarity.UNCOMMON, mage.cards.a.AndTheyShallKnowNoFear.class, NON_FULL_USE_VARIOUS));

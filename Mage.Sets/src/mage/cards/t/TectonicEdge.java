@@ -1,6 +1,5 @@
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.condition.Condition;
@@ -14,12 +13,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
-import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.target.common.TargetNonBasicLandPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public final class TectonicEdge extends CardImpl {
@@ -29,14 +28,14 @@ public final class TectonicEdge extends CardImpl {
     );
 
     public TectonicEdge(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, null);
 
         // Tap: Add 1.
         this.addAbility(new ColorlessManaAbility());
 
         // {1}, {T}, Sacrifice Tectonic Edge: Destroy target nonbasic land. Activate only if an opponent controls four or more lands.
         Ability ability = new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD, new DestroyTargetEffect(), new GenericManaCost(1), condition
+                new DestroyTargetEffect(), new GenericManaCost(1), condition
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

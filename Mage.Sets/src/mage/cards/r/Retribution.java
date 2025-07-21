@@ -1,8 +1,5 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -10,15 +7,22 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
+import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.PermanentReferenceInCollectionPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetImpl;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetPermanentSameController;
+
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
- *
  * @author jeffwadsworth
  */
 public final class Retribution extends CardImpl {
@@ -28,8 +32,7 @@ public final class Retribution extends CardImpl {
 
         // Choose two target creatures an opponent controls. That player chooses and sacrifices one of those creatures. Put a -1/-1 counter on the other.
         this.getSpellAbility().addEffect(new RetributionEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanentOpponentSameController(2, 2, StaticFilters.FILTER_PERMANENT_CREATURE, false));
-
+        this.getSpellAbility().addTarget(new TargetPermanentSameController(2, StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURES));
     }
 
     private Retribution(final Retribution card) {
@@ -60,66 +63,48 @@ class RetributionEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject sourceObject = source.getSourceObject(game);
-        if (sourceObject != null) {
-            boolean sacrificeDone = false;
-            int count = 0;
-            for (UUID targetId : getTargetPointer().getTargets(game, source)) {
-                Permanent creature = game.getPermanent(targetId);
-                if (creature != null) {
-                    Player controllerOfCreature = game.getPlayer(creature.getControllerId());
-                    if ((count == 0 && controllerOfCreature != null
-                            && controllerOfCreature.chooseUse(Outcome.Sacrifice, "Sacrifice " + creature.getLogName() + '?', source, game))
-                            || (count == 1
-                            && !sacrificeDone)) {
-                        creature.sacrifice(source, game);
-                        sacrificeDone = true;
-                    } else {
-                        creature.addCounters(CounterType.M1M1.createInstance(), source.getControllerId(), source, game);
-                    }
-                    count++;
-                }
-            }
-            return true;
+        List<Permanent> permanents = this
+                .getTargetPointer()
+                .getTargets(game, source)
+                .stream()
+                .map(game::getPermanent)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+        List<Permanent> canSac = permanents
+                .stream()
+                .filter(Permanent::canBeSacrificed)
+                .collect(Collectors.toList());
+        Permanent toSacrifice;
+        switch (canSac.size()) {
+            case 0:
+                toSacrifice = null;
+                break;
+            case 1:
+                toSacrifice = canSac.get(0);
+                break;
+            default:
+                toSacrifice = Optional
+                        .ofNullable(canSac.get(0).getControllerId())
+                        .map(game::getPlayer)
+                        .map(player -> {
+                            FilterPermanent filter = new FilterPermanent();
+                            filter.add(new PermanentReferenceInCollectionPredicate(canSac, game));
+                            TargetPermanent target = new TargetPermanent(filter);
+                            target.withNotTarget(true);
+                            player.choose(Outcome.Sacrifice, target, source, game);
+                            return target;
+                        })
+                        .map(TargetImpl::getFirstTarget)
+                        .map(game::getPermanent)
+                        .orElse(null);
         }
-        return false;
-    }
-}
-
-class TargetCreaturePermanentOpponentSameController extends TargetCreaturePermanent {
-
-    public TargetCreaturePermanentOpponentSameController(int minNumTargets, int maxNumTargets, FilterCreaturePermanent filter, boolean notTarget) {
-        super(minNumTargets, maxNumTargets, filter, notTarget);
-    }
-
-    private TargetCreaturePermanentOpponentSameController(final TargetCreaturePermanentOpponentSameController target) {
-        super(target);
-    }
-
-    @Override
-    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
-        if (super.canTarget(controllerId, id, source, game)) {
-            Permanent firstTargetPermanent = game.getPermanent(id);
-            if (firstTargetPermanent != null
-                    && game.getOpponents(controllerId).contains(firstTargetPermanent.getControllerId())) {
-                for (UUID targetId : getTargets()) {
-                    Permanent targetPermanent = game.getPermanent(targetId);
-                    if (targetPermanent != null) {
-                        if (!firstTargetPermanent.getId().equals(targetPermanent.getId())) {
-                            if (!firstTargetPermanent.isControlledBy(targetPermanent.getOwnerId())) {
-                                return false;
-                            }
-                        }
-                    }
-                }
-                return true;
-            }
+        if (toSacrifice != null) {
+            permanents.remove(toSacrifice);
+            toSacrifice.sacrifice(source, game);
         }
-        return false;
-    }
-
-    @Override
-    public TargetCreaturePermanentOpponentSameController copy() {
-        return new TargetCreaturePermanentOpponentSameController(this);
+        for (Permanent permanent : permanents) {
+            permanent.addCounters(CounterType.M1M1.createInstance(), source, game);
+        }
+        return true;
     }
 }

@@ -1,14 +1,14 @@
 package mage.cards.a;
 
 import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.InfoEffect;
 
 import java.util.UUID;
 
@@ -27,12 +27,12 @@ public final class ArchdemonOfPaliano extends CardImpl {
 
         // TODO: Draft specific abilities not implemented
         // Draft Archdemon of Paliano face up.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("Draft Archdemon of Paliano face up - not implemented.")));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("Draft {this} face up - not implemented.")));
 
         // As long as Archdemon of Paliano is face up during the draft, you can’t look at booster packs and must draft cards at random. After you draft three cards this way, turn Archdemon of Paliano face down.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("As long as Archdemon of Paliano is face up during the draft, "
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("As long as {this} is face up during the draft, "
                 + "you can't look at booster packs and must draft cards at random. "
-                + "After you draft three cards this way, turn Archdemon of Paliano face down. - not implemented.")));
+                + "After you draft three cards this way, turn {this} face down. - not implemented.")));
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());

@@ -22,6 +22,7 @@ import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.BlockingOrBlockedWatcher;
 
@@ -60,7 +61,7 @@ public final class PlasmaCaster extends CardImpl {
                         + "Otherwise, {this} deals 1 damage to it"),
                 new PayEnergyCost(2)
         );
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
         // Equip {2}

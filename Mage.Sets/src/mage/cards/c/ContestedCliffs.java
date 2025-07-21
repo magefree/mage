@@ -18,7 +18,10 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.Target;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import static mage.filter.StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE;
 
 /**
  *
@@ -42,9 +45,9 @@ public final class ContestedCliffs extends CardImpl {
         Effect effect = new FightTargetsEffect();
         Ability ability = new SimpleActivatedAbility(effect, new ManaCostsImpl<>("{R}{G}"));
         ability.addCost(new TapSourceCost());
-        Target target1 = new TargetCreaturePermanent(filter1);
+        Target target1 = new TargetPermanent(filter1);
         ability.addTarget(target1);
-        Target target2 = new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE);
+        Target target2 = new TargetPermanent(FILTER_OPPONENTS_PERMANENT_CREATURE);
         ability.addTarget(target2);
         this.addAbility(ability);
     }

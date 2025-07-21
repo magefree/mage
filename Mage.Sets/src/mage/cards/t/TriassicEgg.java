@@ -8,7 +8,7 @@ import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.PutCardFromHandOntoBattlefieldEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -39,7 +39,7 @@ public final class TriassicEgg extends CardImpl {
         this.addAbility(ability);
 
         // Sacrifice Triassic Egg: Choose one - You may put a creature card from your hand onto the battlefield;
-        ability = new ConditionalActivatedAbility(
+        ability = new ActivateIfConditionActivatedAbility(
                 new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_CREATURE_A),
                 new SacrificeSourceCost(), condition
         ).hideCondition();

@@ -17,6 +17,7 @@ import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -49,7 +50,7 @@ public final class ShadowbornDemon extends CardImpl {
 
         // When Shadowborn Demon enters the battlefield, destroy target non-Demon creature.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
         // At the beginning of your upkeep, if there are fewer than six creature cards in your graveyard, sacrifice a creature.

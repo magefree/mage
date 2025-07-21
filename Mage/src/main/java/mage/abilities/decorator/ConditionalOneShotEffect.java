@@ -133,6 +133,13 @@ public class ConditionalOneShotEffect extends OneShotEffect {
     }
 
     @Override
+    public ConditionalOneShotEffect withTargetDescription(String target) {
+        effects.forEach(effect -> effect.withTargetDescription(target));
+        otherwiseEffects.forEach(effect -> effect.withTargetDescription(target));
+        return this;
+    }
+
+    @Override
     public Condition getCondition() {
         return condition;
     }

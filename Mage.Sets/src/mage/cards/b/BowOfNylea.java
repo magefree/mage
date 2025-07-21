@@ -1,6 +1,5 @@
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -13,29 +12,26 @@ import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.DeathtouchAbility;
-import mage.abilities.keyword.FlyingAbility;
-import mage.cards.*;
-import mage.constants.*;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class BowOfNylea extends CardImpl {
 
-    private static final FilterCreaturePermanent filterFlying = new FilterCreaturePermanent("creature with flying");
-    static {
-        filterFlying.add(new AbilityPredicate(FlyingAbility.class));
-    }
-
     public BowOfNylea(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.ARTIFACT},"{1}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.ARTIFACT}, "{1}{G}{G}");
         this.supertype.add(SuperType.LEGENDARY);
 
         // Attacking creatures you control have deathtouch.
@@ -49,7 +45,7 @@ public final class BowOfNylea extends CardImpl {
         ability.addCost(new TapSourceCost());
         // or Bow of Nylea deals 2 damage to target creature with flying;
         Mode mode = new Mode(new DamageTargetEffect(2));
-        mode.addTarget(new TargetCreaturePermanent(filterFlying));
+        mode.addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_FLYING));
         ability.addMode(mode);
         // or you gain 3 life;
         mode = new Mode(new GainLifeEffect(3));

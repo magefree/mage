@@ -32,7 +32,7 @@ public final class SeraphOfTheMasses extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Seraph of the Masses's power and toughness are each equal to the number of creatures you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(CreaturesYouControlCount.instance))
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(CreaturesYouControlCount.PLURAL))
                 .addHint(CreaturesYouControlHint.instance));
     }
 

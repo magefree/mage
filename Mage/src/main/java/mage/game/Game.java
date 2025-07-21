@@ -48,6 +48,11 @@ import java.util.stream.Collectors;
 
 public interface Game extends MageItem, Serializable, Copyable<Game> {
 
+    /**
+     * Return global game index (used for better logs and history)
+     */
+    Integer getGameIndex();
+
     MatchType getGameType();
 
     int getNumPlayers();
@@ -137,6 +142,7 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
     Map<UUID, Permanent> getPermanentsEntering();
 
     Map<Zone, Map<UUID, MageObject>> getLKI();
+
     Map<MageObjectReference, Map<String, Object>> getPermanentCostsTags();
 
     /**
@@ -171,9 +177,9 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
     PlayerList getPlayerList();
 
     /**
-     *  Returns opponents list in range for the given playerId. Use it to interate by starting turn order.
-     *
-     *  Warning, it will return leaved players until end of turn. For dialogs and one shot effects use excludeLeavedPlayers
+     * Returns opponents list in range for the given playerId. Use it to interate by starting turn order.
+     * <p>
+     * Warning, it will return leaved players until end of turn. For dialogs and one shot effects use excludeLeavedPlayers
      */
     // TODO: check usage of getOpponents in cards and replace with correct call of excludeLeavedPlayers, see #13289
     default Set<UUID> getOpponents(UUID playerId) {
@@ -181,8 +187,8 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
     }
 
     /**
-     *  Returns opponents list in range for the given playerId. Use it to interate by starting turn order.
-     *  Warning, it will return dead players until end of turn.
+     * Returns opponents list in range for the given playerId. Use it to interate by starting turn order.
+     * Warning, it will return dead players until end of turn.
      *
      * @param excludeLeavedPlayers exclude dead player immediately without waiting range update on next turn
      */
@@ -245,7 +251,7 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     /**
      * Id of the player the current turn it is.
-     *
+     * <p>
      * Player can be under control of another player, so search a real GUI's controller by Player->getTurnControlledBy
      *
      * @return
@@ -563,14 +569,15 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
      */
     void processAction();
 
-    @Deprecated // TODO: must research usage and remove it from all non engine code (example: Bestow ability, ProcessActions must be used instead)
+    @Deprecated
+        // TODO: must research usage and remove it from all non engine code (example: Bestow ability, ProcessActions must be used instead)
     boolean checkStateAndTriggered();
 
     /**
      * Play priority by all players
      *
      * @param activePlayerId starting priority player
-     * @param resuming false to reset passed priority and ask it again
+     * @param resuming       false to reset passed priority and ask it again
      */
     void playPriority(UUID activePlayerId, boolean resuming);
 
@@ -600,6 +607,7 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     /**
      * TODO: remove logic changed, must research each usage of removeBookmark and replace it with new code
+     *
      * @param bookmark
      */
     void removeBookmark_v2(int bookmark);
@@ -620,6 +628,7 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     // game cheats (for tests only)
     void cheat(UUID ownerId, Map<Zone, String> commands);
+
     void cheat(UUID ownerId, List<Card> library, List<Card> hand, List<PutToBattlefieldInfo> battlefield, List<Card> graveyard, List<Card> command, List<Card> exiled);
 
     // controlling the behaviour of replacement effects while permanents entering the battlefield
@@ -811,4 +820,8 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
     boolean isGameStopped();
 
     boolean isTurnOrderReversed();
+
+    UUID getTableId();
+
+    void setTableId(UUID tableId);
 }

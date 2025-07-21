@@ -14,7 +14,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED;
 
 
 /**
@@ -29,7 +32,7 @@ public final class MizziumSkin extends CardImpl {
 
 
         // Target creature you control gets +0/+1 and gains hexproof until end of turn.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED));
+        this.getSpellAbility().addTarget(new TargetPermanent(FILTER_PERMANENT_CREATURE_CONTROLLED));
         this.getSpellAbility().addEffect(new BoostTargetEffect(0,1, Duration.EndOfTurn).setText("target creature you control gets +0/+1"));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HexproofAbility.getInstance(), Duration.EndOfTurn).setText("and gains hexproof until end of turn"));
 

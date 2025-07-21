@@ -17,8 +17,9 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.TargetPermanent;
 
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -42,7 +43,7 @@ public final class ZephyrSentinel extends CardImpl {
 
         // When Zephyr Sentinel enters the battlefield, return up to one other target creature you control to its owner's hand. If it was a Soldier, put a +1/+1 counter on Zephyr Sentinel.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ZephyrSentinelEffect());
-        ability.addTarget(new TargetControlledCreaturePermanent(0, 1, StaticFilters.FILTER_OTHER_CONTROLLED_CREATURE, false));
+        ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_OTHER_CONTROLLED_CREATURE));
         this.addAbility(ability);
     }
 
@@ -74,21 +75,16 @@ class ZephyrSentinelEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent targetPermanent = game.getPermanent(source.getFirstTarget());
-        if (targetPermanent == null) {
-            return false;
-        }
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
+        Permanent targetPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (controller == null || targetPermanent == null) {
             return false;
         }
         boolean soldier = targetPermanent.hasSubtype(SubType.SOLDIER, game);
         controller.moveCards(targetPermanent, Zone.HAND, source, game);
         if (soldier) {
-            Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
-            if (sourcePermanent != null) {
-                sourcePermanent.addCounters(CounterType.P1P1.createInstance(), source, game);
-            }
+            Optional.ofNullable(source.getSourcePermanentIfItStillExists(game))
+                    .ifPresent(permanent -> permanent.addCounters(CounterType.P1P1.createInstance(), source, game));
         }
         return true;
     }

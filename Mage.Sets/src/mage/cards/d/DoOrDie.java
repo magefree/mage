@@ -12,21 +12,20 @@ import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetCreaturePermanent;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 public final class DoOrDie extends CardImpl {
 
     public DoOrDie(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");
 
         // Separate all creatures target player controls into two piles. Destroy all creatures in the pile of that player's choice. They can't be regenerated.
         this.getSpellAbility().addEffect(new DoOrDieEffect());
@@ -68,7 +67,7 @@ class DoOrDieEffect extends OneShotEffect {
         }
         FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures to put in the first pile");
         filter.add(new ControllerIdPredicate(targetPlayer.getId()));
-        TargetCreaturePermanent creatures = new TargetCreaturePermanent(0, Integer.MAX_VALUE, filter, true);
+        TargetPermanent creatures = new TargetPermanent(0, Integer.MAX_VALUE, filter, true);
         List<Permanent> pile1 = new ArrayList<>();
         if (player.choose(Outcome.Neutral, creatures, source, game)) {
             List<UUID> targets = creatures.getTargets();

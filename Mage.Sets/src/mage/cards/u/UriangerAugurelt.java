@@ -3,7 +3,7 @@ package mage.cards.u;
 import mage.MageIdentifier;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.PlayLandOrCastSpellFromExileTriggeredAbility;
+import mage.abilities.common.PlayLandOrCastSpellTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.AsThoughEffectImpl;
@@ -38,7 +38,7 @@ public final class UriangerAugurelt extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever you play a land from exile or cast a spell from exile, you gain 2 life.
-        this.addAbility(new PlayLandOrCastSpellFromExileTriggeredAbility(new GainLifeEffect(2)));
+        this.addAbility(new PlayLandOrCastSpellTriggeredAbility(new GainLifeEffect(2), true, false));
 
         // Draw Arcanum -- {T}: Look at the top card of your library. You may exile it face down.
         this.addAbility(new SimpleActivatedAbility(
