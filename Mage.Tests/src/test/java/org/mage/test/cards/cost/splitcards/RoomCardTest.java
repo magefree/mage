@@ -395,6 +395,283 @@ public class RoomCardTest extends CardTestPlayerBase {
     }
 
     @Test
+    public void testNameMatchOnFieldFromLocked() {
+        skipInitShuffling();
+        // Bottomless Pool {U} When you unlock this door, return up to one target
+        // creature to its owner's hand.
+        // Locker Room {4}{U} Whenever one or more creatures you control deal combat
+        // damage to a player, draw a card.
+        //
+        // Opalescence
+        // {2}{W}{W}
+        // Enchantment
+        // Each other non-Aura enchantment is a creature in addition to its other types
+        // and has base power and base toughness each equal to its mana value.
+        //
+        // Glorious Anthem
+        // {1}{W}{W}
+        // Enchantment
+        // Creatures you control get +1/+1.
+        //
+        // Cackling Counterpart
+        // {1}{U}{U}
+        // Instant
+        // Create a token that's a copy of target creature you control.
+        //
+        // Bile Blight
+        // {B}{B}
+        // Instant
+        // Target creature and all other creatures with the same name as that creature
+        // get -3/-3 until end of turn.
+
+        addCard(Zone.HAND, playerA, "Bottomless Pool // Locker Room", 4);
+        addCard(Zone.HAND, playerA, "Cackling Counterpart");
+        addCard(Zone.HAND, playerA, "Bile Blight");
+        addCard(Zone.BATTLEFIELD, playerA, "Underground Sea", 17);
+        addCard(Zone.BATTLEFIELD, playerA, "Glorious Anthem");
+        addCard(Zone.BATTLEFIELD, playerA, "Opalescence");
+
+        // Cast Bottomless Pool (unlocked left half)
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bottomless Pool");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        addTarget(playerA, TestPlayer.TARGET_SKIP);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // Cast Locker Room (unlocked right half)
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Locker Room");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // Cast Bottomless Pool then unlock Locker Room (both halves unlocked)
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bottomless Pool");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        addTarget(playerA, TestPlayer.TARGET_SKIP);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{4}{U}: Unlock the right half.");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // Create a fully locked room using Cackling Counterpart
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cackling Counterpart");
+        addTarget(playerA, "Bottomless Pool // Locker Room");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // Cast Bile Blight targeting the fully locked room
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bile Blight");
+        addTarget(playerA, EmptyNames.FULLY_LOCKED_ROOM.getTestCommand());
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        // Assertions:
+        // The fully locked room should be affected by Bile Blight (-3/-3)
+        // Since it's a 0/0 creature (mana value 0) +1/+1 from anthem, it becomes 1/1,
+        // then -2/-2 after Bile Blight (dies)
+        assertPermanentCount(playerA, EmptyNames.FULLY_LOCKED_ROOM.getTestCommand(), 0);
+        // Token, so nothing should be in grave
+        assertGraveyardCount(playerA, "Bottomless Pool // Locker Room", 0);
+
+        // Other rooms should NOT be affected by Bile Blight since they have different
+        // names
+        // Bottomless Pool: 1/1 base + 1/1 from anthem = 2/2
+        assertPowerToughness(playerA, "Bottomless Pool", 2, 2);
+        // Locker Room: 5/5 base + 1/1 from anthem = 6/6
+        assertPowerToughness(playerA, "Locker Room", 6, 6);
+        // Bottomless Pool // Locker Room: 6/6 base + 1/1 from anthem = 7/7
+        assertPowerToughness(playerA, "Bottomless Pool // Locker Room", 7, 7);
+
+        // Verify remaining rooms are still on battlefield
+        assertPermanentCount(playerA, "Bottomless Pool", 1);
+        assertPermanentCount(playerA, "Locker Room", 1);
+        assertPermanentCount(playerA, "Bottomless Pool // Locker Room", 1);
+    }
+
+    @Test
+    public void testNameMatchOnFieldFromHalf() {
+        skipInitShuffling();
+        // Bottomless Pool {U} When you unlock this door, return up to one target
+        // creature to its owner's hand.
+        // Locker Room {4}{U} Whenever one or more creatures you control deal combat
+        // damage to a player, draw a card.
+        //
+        // Opalescence
+        // {2}{W}{W}
+        // Enchantment
+        // Each other non-Aura enchantment is a creature in addition to its other types
+        // and has base power and base toughness each equal to its mana value.
+        //
+        // Glorious Anthem
+        // {1}{W}{W}
+        // Enchantment
+        // Creatures you control get +1/+1.
+        //
+        // Cackling Counterpart
+        // {1}{U}{U}
+        // Instant
+        // Create a token that's a copy of target creature you control.
+        //
+        // Bile Blight
+        // {B}{B}
+        // Instant
+        // Target creature and all other creatures with the same name as that creature
+        // get -3/-3 until end of turn.
+
+        addCard(Zone.HAND, playerA, "Bottomless Pool // Locker Room", 4);
+        addCard(Zone.HAND, playerA, "Cackling Counterpart");
+        addCard(Zone.HAND, playerA, "Bile Blight");
+        addCard(Zone.BATTLEFIELD, playerA, "Underground Sea", 17);
+        addCard(Zone.BATTLEFIELD, playerA, "Glorious Anthem");
+        addCard(Zone.BATTLEFIELD, playerA, "Opalescence");
+
+        // Cast Bottomless Pool (unlocked left half)
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bottomless Pool");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        addTarget(playerA, TestPlayer.TARGET_SKIP);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // Cast Locker Room (unlocked right half)
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Locker Room");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // Cast Bottomless Pool then unlock Locker Room (both halves unlocked)
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bottomless Pool");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        addTarget(playerA, TestPlayer.TARGET_SKIP);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{4}{U}: Unlock the right half.");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // Create a fully locked room using Cackling Counterpart
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cackling Counterpart");
+        addTarget(playerA, "Bottomless Pool // Locker Room");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // Cast Bile Blight targeting the half locked room
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bile Blight");
+        addTarget(playerA, "Locker Room");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        // Assertions:
+        // Locker Room and Bottomless Pool // Locker Room should both be affected by
+        // Bile Blight
+        // since they share the "Locker Room" name component
+
+        // Locker Room: 5/5 base + 1/1 from anthem - 3/3 from Bile Blight = 3/3
+        assertPowerToughness(playerA, "Locker Room", 3, 3);
+        // Bottomless Pool // Locker Room: 6/6 base + 1/1 from anthem - 3/3 from Bile
+        // Blight = 4/4
+        assertPowerToughness(playerA, "Bottomless Pool // Locker Room", 4, 4);
+
+        // Other rooms should NOT be affected
+        // Bottomless Pool: 1/1 base + 1/1 from anthem = 2/2 (unaffected)
+        assertPowerToughness(playerA, "Bottomless Pool", 2, 2);
+        // Fully locked room: 0/0 base + 1/1 from anthem = 1/1 (unaffected)
+        assertPowerToughness(playerA, EmptyNames.FULLY_LOCKED_ROOM.getTestCommand(), 1, 1);
+
+        // Verify all rooms are still on battlefield
+        assertPermanentCount(playerA, "Bottomless Pool", 1);
+        assertPermanentCount(playerA, "Locker Room", 1);
+        assertPermanentCount(playerA, "Bottomless Pool // Locker Room", 1);
+        assertPermanentCount(playerA, EmptyNames.FULLY_LOCKED_ROOM.getTestCommand(), 1);
+    }
+
+    @Test
+    public void testNameMatchOnFieldFromUnlocked() {
+        skipInitShuffling();
+        // Bottomless Pool {U} When you unlock this door, return up to one target
+        // creature to its owner's hand.
+        // Locker Room {4}{U} Whenever one or more creatures you control deal combat
+        // damage to a player, draw a card.
+        //
+        // Opalescence
+        // {2}{W}{W}
+        // Enchantment
+        // Each other non-Aura enchantment is a creature in addition to its other types
+        // and has base power and base toughness each equal to its mana value.
+        //
+        // Glorious Anthem
+        // {1}{W}{W}
+        // Enchantment
+        // Creatures you control get +1/+1.
+        //
+        // Cackling Counterpart
+        // {1}{U}{U}
+        // Instant
+        // Create a token that's a copy of target creature you control.
+        //
+        // Bile Blight
+        // {B}{B}
+        // Instant
+        // Target creature and all other creatures with the same name as that creature
+        // get -3/-3 until end of turn.
+
+        addCard(Zone.HAND, playerA, "Bottomless Pool // Locker Room", 4);
+        addCard(Zone.HAND, playerA, "Cackling Counterpart");
+        addCard(Zone.HAND, playerA, "Bile Blight");
+        addCard(Zone.BATTLEFIELD, playerA, "Underground Sea", 17);
+        addCard(Zone.BATTLEFIELD, playerA, "Glorious Anthem");
+        addCard(Zone.BATTLEFIELD, playerA, "Opalescence");
+
+        // Cast Bottomless Pool (unlocked left half)
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bottomless Pool");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        addTarget(playerA, TestPlayer.TARGET_SKIP);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // Cast Locker Room (unlocked right half)
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Locker Room");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // Cast Bottomless Pool then unlock Locker Room (both halves unlocked)
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bottomless Pool");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        addTarget(playerA, TestPlayer.TARGET_SKIP);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{4}{U}: Unlock the right half.");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // Create a fully locked room using Cackling Counterpart
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cackling Counterpart");
+        addTarget(playerA, "Bottomless Pool // Locker Room");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // Cast Bile Blight targeting the fully locked room
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bile Blight");
+        addTarget(playerA, "Bottomless Pool // Locker Room");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        // Assertions:
+        // All rooms except the fully locked room should be affected by Bile Blight
+        // since they all share name components with "Bottomless Pool // Locker Room"
+
+        // Bottomless Pool: 1/1 base + 1/1 from anthem - 3/3 from Bile Blight = -1/-1
+        // (dies)
+        assertPermanentCount(playerA, "Bottomless Pool", 0);
+        assertGraveyardCount(playerA, "Bottomless Pool // Locker Room", 1);
+
+        // Locker Room: 5/5 base + 1/1 from anthem - 3/3 from Bile Blight = 3/3
+        assertPowerToughness(playerA, "Locker Room", 3, 3);
+
+        // Bottomless Pool // Locker Room: 6/6 base + 1/1 from anthem - 3/3 from Bile
+        // Blight = 4/4
+        assertPowerToughness(playerA, "Bottomless Pool // Locker Room", 4, 4);
+
+        // Fully locked room should NOT be affected (different name)
+        // Fully locked room: 0/0 base + 1/1 from anthem = 1/1 (unaffected)
+        assertPowerToughness(playerA, EmptyNames.FULLY_LOCKED_ROOM.getTestCommand(), 1, 1);
+
+        // Verify remaining rooms are still on battlefield
+        assertPermanentCount(playerA, "Locker Room", 1);
+        assertPermanentCount(playerA, "Bottomless Pool // Locker Room", 1);
+        assertPermanentCount(playerA, EmptyNames.FULLY_LOCKED_ROOM.getTestCommand(), 1);
+    }
+
+    @Test
     public void testCounterspellThenReanimate() {
         skipInitShuffling();
         // Bottomless Pool {U} When you unlock this door, return up to one target
