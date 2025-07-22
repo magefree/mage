@@ -6,9 +6,8 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- * https://scryfall.com/sets/ppro
- * https://mtg.gamepedia.com/Promotional_cards#Pro_tour_cards
- * @author JayDi85
+ * https://scryfall.com/sets/sch
+ * @author ReSech
  */
 public final class StoreChampionships extends ExpansionSet {
 
