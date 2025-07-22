@@ -5,6 +5,8 @@ import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.Optional;
+
 /**
  * Filters out the id of the enchanted object, if the source is an enchantment
  *
@@ -15,8 +17,13 @@ public enum AnotherEnchantedPredicate implements ObjectSourcePlayerPredicate<Per
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
-        Permanent enchantment = input.getSource().getSourcePermanentIfItStillExists(game);
-        return enchantment != null && !input.getObject().getId().equals(enchantment.getAttachedTo());
+        return !Optional
+                .ofNullable(input)
+                .map(ObjectSourcePlayer::getSource)
+                .map(source -> source.getSourcePermanentOrLKI(game))
+                .map(Permanent::getAttachedTo)
+                .filter(input.getObject().getId()::equals)
+                .isPresent();
     }
 
     @Override

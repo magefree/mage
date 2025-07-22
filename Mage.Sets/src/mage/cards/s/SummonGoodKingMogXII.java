@@ -17,7 +17,9 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -120,6 +122,11 @@ class SummonGoodKingMogXIITriggeredAbility extends DelayedTriggeredAbility {
 class SummonGoodKingMogXIIEffect extends OneShotEffect {
 
     private static final FilterPermanent filter = new FilterControlledPermanent("non-Saga token you control");
+
+    static {
+        filter.add(Predicates.not(SubType.SAGA.getPredicate()));
+        filter.add(TokenPredicate.TRUE);
+    }
 
     SummonGoodKingMogXIIEffect() {
         super(Outcome.Benefit);

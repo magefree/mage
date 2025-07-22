@@ -28,7 +28,7 @@ public final class AuxiliaryBoosters extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // When this Equipment enters, create a 2/2 colorless Robot artifact creature token and attach this Equipment to it.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenAttachSourceEffect(new RobotToken())));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenAttachSourceEffect(new RobotToken(), " and")));
 
         // Equipped creature gets +1/+2 and has flying.
         Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(1, 2));

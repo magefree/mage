@@ -32,7 +32,7 @@ public final class PerigeeBeckoner extends CardImpl {
 
         // When this creature enters, until end of turn, another target creature you control gets +2/+0 and gains "When this creature dies, return it to the battlefield tapped under its owner's control."
         Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(2, 0)
-                .setText("another target creature you control gets +2/+0"));
+                .setText("until end of turn, another target creature you control gets +2/+0"));
         ability.addEffect(new GainAbilityTargetEffect(new DiesSourceTriggeredAbility(
                 new ReturnSourceFromGraveyardToBattlefieldEffect(true, true), false
         ), Duration.EndOfTurn, "and gains \"When this creature dies, " +

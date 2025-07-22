@@ -9,9 +9,9 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.common.FilterAnyTarget;
 import mage.filter.common.FilterPermanentOrPlayer;
-import mage.filter.predicate.ObjectSourcePlayer;
-import mage.filter.predicate.ObjectSourcePlayerPredicate;
+import mage.filter.predicate.permanent.AnotherEnchantedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -26,10 +26,10 @@ import java.util.UUID;
  */
 public final class PainForAll extends CardImpl {
 
-    private static final FilterPermanentOrPlayer filter = new FilterPermanentOrPlayer("any other target");
+    private static final FilterPermanentOrPlayer filter = new FilterAnyTarget("any other target");
 
     static {
-        filter.getPermanentFilter().add(PainForAllPredicate.instance);
+        filter.getPermanentFilter().add(AnotherEnchantedPredicate.instance);
     }
 
     public PainForAll(UUID ownerId, CardSetInfo setInfo) {
@@ -61,21 +61,6 @@ public final class PainForAll extends CardImpl {
     @Override
     public PainForAll copy() {
         return new PainForAll(this);
-    }
-}
-
-enum PainForAllPredicate implements ObjectSourcePlayerPredicate<Permanent> {
-    instance;
-
-    @Override
-    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
-        return Optional
-                .ofNullable(input)
-                .map(ObjectSourcePlayer::getSource)
-                .map(source -> source.getSourcePermanentOrLKI(game))
-                .map(Permanent::getAttachedTo)
-                .filter(permanentId -> !permanentId.equals(input.getObject().getId()))
-                .isPresent();
     }
 }
 
