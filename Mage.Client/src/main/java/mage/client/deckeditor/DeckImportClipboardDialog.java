@@ -5,6 +5,9 @@ import mage.client.dialog.MageDialog;
 import mage.util.DeckUtil;
 
 import javax.swing.*;
+
+import org.apache.commons.lang3.StringUtils;
+
 import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.UnsupportedFlavorException;
@@ -77,7 +80,8 @@ public class DeckImportClipboardDialog extends MageDialog {
 
         String tempDeckPath;
         // This dialog also accepts a paste in .mtga format
-        if (decklist.startsWith("Deck\n") || decklist.startsWith("Commander\n")) {  // An .mtga list always starts with the first line being "Deck" or "Commander". This kind of paste is processed as .mtga
+        if (StringUtils.startsWithIgnoreCase(decklist, "Deck\n") || StringUtils.startsWithIgnoreCase(decklist, "Commander\n")) { 
+            // An .mtga list always starts with the first line being "Deck" or "Commander". This kind of paste is processed as .mtga
             tempDeckPath = DeckUtil.writeTextToTempFile("cbimportdeck", ".mtga", decklist);
         } else {
             // If the paste is not .mtga format, it's processed as plaintext

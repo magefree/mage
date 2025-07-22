@@ -35,12 +35,12 @@ public class MtgaImporter extends PlainTextDeckImporter {
 
         line = line.trim();
 
-        if (line.equals("Deck")) {
+        if (line.equalsIgnoreCase("Deck")) {
             sideboard = false;
             return;
         }
 
-        if (line.equals("Sideboard") || line.equals("") || line.equals("Commander")) {
+        if (line.equalsIgnoreCase("Sideboard") || line.equalsIgnoreCase("") || line.equalsIgnoreCase("Commander")) {
             sideboard = true;
             return;
         }
