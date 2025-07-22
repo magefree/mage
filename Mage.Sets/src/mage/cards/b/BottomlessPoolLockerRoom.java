@@ -26,8 +26,6 @@ public final class BottomlessPoolLockerRoom extends RoomCard {
                 new CardType[] { CardType.ENCHANTMENT },
                 "{U}", "{4}{U}", SpellAbilityType.SPLIT);
         this.subtype.add(SubType.ROOM);
-        this.getLeftHalfCard().addSubType(SubType.ROOM);
-        this.getRightHalfCard().addSubType(SubType.ROOM);
 
         // Left half ability - "When you unlock this door" trigger (delayed triggered
         // ability)

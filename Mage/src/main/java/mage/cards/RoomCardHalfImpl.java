@@ -3,6 +3,7 @@ package mage.cards;
 import mage.abilities.SpellAbility;
 import mage.constants.CardType;
 import mage.constants.SpellAbilityType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 
@@ -16,6 +17,7 @@ public class RoomCardHalfImpl extends SplitCardHalfImpl implements RoomCardHalf 
     public RoomCardHalfImpl(UUID ownerId, CardSetInfo setInfo, CardType[] cardTypes, String costs,
             RoomCard splitCardParent, SpellAbilityType spellAbilityType) {
         super(ownerId, setInfo, cardTypes, costs, splitCardParent, spellAbilityType);
+        this.addSubType(SubType.ROOM);
     }
 
     protected RoomCardHalfImpl(final RoomCardHalfImpl card) {
