@@ -13,6 +13,7 @@ import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.effects.common.continuous.AddCardSubtypeAllEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
+import mage.abilities.hint.ConditionHint;
 import mage.abilities.token.FoodAbility;
 import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
@@ -59,7 +60,7 @@ public final class RagostDeftGastronaut extends CardImpl {
         // At the beginning of each end step, if you gained life this turn, untap Ragost.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 TargetController.ANY, new UntapSourceEffect(), false, condition
-        ));
+        ).addHint(new ConditionHint(condition)));
     }
 
     private RagostDeftGastronaut(final RagostDeftGastronaut card) {
