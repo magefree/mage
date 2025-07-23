@@ -1,6 +1,7 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
@@ -18,5 +19,7 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         super("Marvel's Spider-Man", "SPM", ExpansionSet.buildDate(2025, 9, 26), SetType.EXPANSION);
         this.blockName = "Marvel's Spider-Man"; // for sorting in GUI
         this.hasBasicLands = false; // temporary
+
+        cards.add(new SetCardInfo("Origin of Spider-Man", 9, Rarity.RARE, mage.cards.o.OriginOfSpiderMan.class));
     }
 }
