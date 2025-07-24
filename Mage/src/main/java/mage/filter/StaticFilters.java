@@ -1093,6 +1093,13 @@ public final class StaticFilters {
         FILTER_SPELL_KICKED_A.setLockedFilter(true);
     }
 
+    public static final FilterSpell FILTER_SPELL_MV_4_OR_GREATER = new FilterSpell("spell with mana value 4 or greater");
+
+    static {
+        FILTER_SPELL_MV_4_OR_GREATER.add(new ManaValuePredicate(ComparisonType.OR_GREATER, 4));
+        FILTER_SPELL_MV_4_OR_GREATER.setLockedFilter(true);
+    }
+
     public static final FilterSpell FILTER_SPELL_NO_MANA_SPENT = new FilterSpell("a spell, if no mana was spent to cast it");
 
     static {

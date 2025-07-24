@@ -10,6 +10,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  * @author North, Susucr
@@ -103,7 +104,7 @@ public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     private void makeTriggerPhrase() {
-        String text = getWhen() + "you cast " + filter.getMessage();
+        String text = getWhen() + "you cast " + CardUtil.addArticle(filter.getMessage());
 
         switch (fromZone) {
             case ALL:
