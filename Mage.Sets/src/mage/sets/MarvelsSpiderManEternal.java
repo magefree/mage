@@ -35,6 +35,7 @@ public final class MarvelsSpiderManEternal extends ExpansionSet {
         cards.add(new SetCardInfo("MJ, Rising Star", 3, Rarity.UNCOMMON, mage.cards.m.MJRisingStar.class));
         cards.add(new SetCardInfo("Prowler, Misguided Mentor", 17, Rarity.UNCOMMON, mage.cards.p.ProwlerMisguidedMentor.class));
         cards.add(new SetCardInfo("Pumpkin Bombs", 26, Rarity.RARE, mage.cards.p.PumpkinBombs.class));
+        cards.add(new SetCardInfo("Rampaging Classmate", 16, Rarity.COMMON, mage.cards.r.RampagingClassmate.class));
         cards.add(new SetCardInfo("Sensational Spider-Man", 25, Rarity.RARE, mage.cards.s.SensationalSpiderMan.class));
         cards.add(new SetCardInfo("Spider-Man, Miles Morales", 18, Rarity.MYTHIC, mage.cards.s.SpiderManMilesMorales.class));
         cards.add(new SetCardInfo("Spider-Man, Peter Parker", 4, Rarity.MYTHIC, mage.cards.s.SpiderManPeterParker.class));
