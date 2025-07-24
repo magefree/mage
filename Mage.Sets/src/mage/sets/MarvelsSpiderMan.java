@@ -39,6 +39,7 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Risky Research", 62, Rarity.COMMON, mage.cards.r.RiskyResearch.class));
         cards.add(new SetCardInfo("Scorpion's Sting", 65, Rarity.COMMON, mage.cards.s.ScorpionsSting.class));
         cards.add(new SetCardInfo("Scorpion, Seething Striker", 64, Rarity.UNCOMMON, mage.cards.s.ScorpionSeethingStriker.class));
+        cards.add(new SetCardInfo("Scout the City", 113, Rarity.COMMON, mage.cards.s.ScoutTheCity.class));
         cards.add(new SetCardInfo("Selfless Police Captain", 12, Rarity.COMMON, mage.cards.s.SelflessPoliceCaptain.class));
         cards.add(new SetCardInfo("Shock", 88, Rarity.COMMON, mage.cards.s.Shock.class));
         cards.add(new SetCardInfo("Spectacular Tactics", 15, Rarity.COMMON, mage.cards.s.SpectacularTactics.class));
