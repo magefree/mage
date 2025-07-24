@@ -60,6 +60,7 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Spider-Man, Web-Slinger", 16, Rarity.COMMON, mage.cards.s.SpiderManWebSlinger.class));
         cards.add(new SetCardInfo("Spider-Rex, Daring Dino", 116, Rarity.COMMON, mage.cards.s.SpiderRexDaringDino.class));
         cards.add(new SetCardInfo("Starling, Aerial Ally", 18, Rarity.COMMON, mage.cards.s.StarlingAerialAlly.class));
+        cards.add(new SetCardInfo("Stegron the Dinosaur Man", 95, Rarity.COMMON, mage.cards.s.StegronTheDinosaurMan.class));
         cards.add(new SetCardInfo("Swamp", 196, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Taxi Driver", 97, Rarity.COMMON, mage.cards.t.TaxiDriver.class));
         cards.add(new SetCardInfo("Thwip!", 20, Rarity.COMMON, mage.cards.t.Thwip.class));
