@@ -21,6 +21,7 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Aunt May", 3, Rarity.UNCOMMON, mage.cards.a.AuntMay.class));
+        cards.add(new SetCardInfo("Beetle, Legacy Criminal", 26, Rarity.COMMON, mage.cards.b.BeetleLegacyCriminal.class));
         cards.add(new SetCardInfo("Daily Bugle Reporters", 6, Rarity.COMMON, mage.cards.d.DailyBugleReporters.class));
         cards.add(new SetCardInfo("Doc Ock's Henchmen", 30, Rarity.COMMON, mage.cards.d.DocOcksHenchmen.class));
         cards.add(new SetCardInfo("Eerie Gravestone", 163, Rarity.COMMON, mage.cards.e.EerieGravestone.class));
