@@ -44,5 +44,6 @@ public final class MarvelsSpiderManEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Twisted Spider-Clone", 19, Rarity.COMMON, mage.cards.t.TwistedSpiderClone.class));
         cards.add(new SetCardInfo("Venom Blast", 20, Rarity.RARE, mage.cards.v.VenomBlast.class));
         cards.add(new SetCardInfo("Venom, Deadly Devourer", 22, Rarity.RARE, mage.cards.v.VenomDeadlyDevourer.class));
+        cards.add(new SetCardInfo("Venom, Eddie Brock", 12, Rarity.MYTHIC, mage.cards.v.VenomEddieBrock.class));
     }
 }
