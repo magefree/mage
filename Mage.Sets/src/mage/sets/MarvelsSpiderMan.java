@@ -63,5 +63,6 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Venom's Hunger", 73, Rarity.COMMON, mage.cards.v.VenomsHunger.class));
         cards.add(new SetCardInfo("Web Up", 21, Rarity.COMMON, mage.cards.w.WebUp.class));
         cards.add(new SetCardInfo("Whoosh!", 48, Rarity.COMMON, mage.cards.w.Whoosh.class));
+        cards.add(new SetCardInfo("Wild Pack Squad", 23, Rarity.COMMON, mage.cards.w.WildPackSquad.class));
     }
 }
