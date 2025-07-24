@@ -17,6 +17,7 @@ import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.ModifiedPredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
@@ -46,6 +47,8 @@ public final class SPDrPilotedByPeni extends CardImpl {
 
         // When SP//dr enters, put a +1/+1 counter on target creature.
         Ability ability = new EntersBattlefieldTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
 
         // Whenever a modified creature you control deals combat damage to a player, draw a card.
         this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(
