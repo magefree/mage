@@ -1,4 +1,4 @@
-package mage.cards.i;
+package mage.cards.w;
 
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -13,17 +13,17 @@ import mage.target.common.TargetNonlandPermanent;
 import java.util.UUID;
 
 /**
- * @author Viserion
+ * @author TheElk801
  */
-public final class IntoTheRoil extends CardImpl {
+public final class Whoosh extends CardImpl {
 
-    public IntoTheRoil(UUID ownerId, CardSetInfo setInfo) {
+    public Whoosh(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
-        // Kicker {1}{U} (You may pay an additional {1}{U} as you cast this spell.)
+        // Kicker {1}{U}
         this.addAbility(new KickerAbility("{1}{U}"));
 
-        // Return target nonland permanent to its owner's hand. If Into the Roil was kicked, draw a card.
+        // Return target nonland permanent to its owner's hand. If this spell was kicked, draw a card.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DrawCardSourceControllerEffect(1),
@@ -32,13 +32,12 @@ public final class IntoTheRoil extends CardImpl {
         this.getSpellAbility().addTarget(new TargetNonlandPermanent());
     }
 
-    private IntoTheRoil(final IntoTheRoil card) {
+    private Whoosh(final Whoosh card) {
         super(card);
     }
 
     @Override
-    public IntoTheRoil copy() {
-        return new IntoTheRoil(this);
+    public Whoosh copy() {
+        return new Whoosh(this);
     }
-
 }
