@@ -3064,6 +3064,11 @@ public class VerifyCardDataTest {
             return;
         }
 
+        // Spacecraft are ignored as they shouldn't have a printed power/toughness but they do in the data
+        if (ref.subtypes.contains("Spacecraft")) {
+            return;
+        }
+
         if (!eqPT(card.getPower().toString(), ref.power) || !eqPT(card.getToughness().toString(), ref.toughness)) {
             String pt = card.getPower() + "/" + card.getToughness();
             String expected = ref.power + '/' + ref.toughness;

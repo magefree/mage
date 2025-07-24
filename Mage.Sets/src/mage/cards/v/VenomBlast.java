@@ -24,7 +24,7 @@ public final class VenomBlast extends CardImpl {
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance(2)));
         this.getSpellAbility().addEffect(new DamageWithPowerFromOneToAnotherTargetEffect()
                 .setText("It deals damage equal to its power to up to one other target creature"));
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent().setTargetTag(1));
         this.getSpellAbility().addTarget(new TargetPermanent(
                 0, 1, StaticFilters.FILTER_ANOTHER_CREATURE_TARGET_2
         ).setTargetTag(2));
