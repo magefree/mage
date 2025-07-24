@@ -26,6 +26,7 @@ public final class MarvelsSpiderManEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Future Flight", 6, Rarity.RARE, mage.cards.f.FutureFlight.class));
         cards.add(new SetCardInfo("Grasping Tentacles", 21, Rarity.RARE, mage.cards.g.GraspingTentacles.class));
         cards.add(new SetCardInfo("Green Goblin, Nemesis", 23, Rarity.RARE, mage.cards.g.GreenGoblinNemesis.class));
+        cards.add(new SetCardInfo("Lyla, Holographic Assistant", 7, Rarity.UNCOMMON, mage.cards.l.LylaHolographicAssistant.class));
         cards.add(new SetCardInfo("MJ, Rising Star", 3, Rarity.UNCOMMON, mage.cards.m.MJRisingStar.class));
         cards.add(new SetCardInfo("Pumpkin Bombs", 26, Rarity.RARE, mage.cards.p.PumpkinBombs.class));
         cards.add(new SetCardInfo("Sensational Spider-Man", 25, Rarity.RARE, mage.cards.s.SensationalSpiderMan.class));
