@@ -23,6 +23,7 @@ public final class MarvelsSpiderManEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Alchemax Slayer-Bots", 5, Rarity.COMMON, mage.cards.a.AlchemaxSlayerBots.class));
         cards.add(new SetCardInfo("Amateur Hero", 1, Rarity.COMMON, mage.cards.a.AmateurHero.class));
         cards.add(new SetCardInfo("Doc Ock, Evil Inventor", 24, Rarity.RARE, mage.cards.d.DocOckEvilInventor.class));
+        cards.add(new SetCardInfo("Future Flight", 6, Rarity.RARE, mage.cards.f.FutureFlight.class));
         cards.add(new SetCardInfo("Grasping Tentacles", 21, Rarity.RARE, mage.cards.g.GraspingTentacles.class));
         cards.add(new SetCardInfo("Green Goblin, Nemesis", 23, Rarity.RARE, mage.cards.g.GreenGoblinNemesis.class));
         cards.add(new SetCardInfo("MJ, Rising Star", 3, Rarity.UNCOMMON, mage.cards.m.MJRisingStar.class));
