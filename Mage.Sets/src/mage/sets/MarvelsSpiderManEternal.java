@@ -41,6 +41,7 @@ public final class MarvelsSpiderManEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Spider-Man, Miles Morales", 18, Rarity.MYTHIC, mage.cards.s.SpiderManMilesMorales.class));
         cards.add(new SetCardInfo("Spider-Man, Peter Parker", 4, Rarity.MYTHIC, mage.cards.s.SpiderManPeterParker.class));
         cards.add(new SetCardInfo("Symbiote Spawn", 11, Rarity.COMMON, mage.cards.s.SymbioteSpawn.class));
+        cards.add(new SetCardInfo("The Mary Janes", 15, Rarity.UNCOMMON, mage.cards.t.TheMaryJanes.class));
         cards.add(new SetCardInfo("Twisted Spider-Clone", 19, Rarity.COMMON, mage.cards.t.TwistedSpiderClone.class));
         cards.add(new SetCardInfo("Venom Blast", 20, Rarity.RARE, mage.cards.v.VenomBlast.class));
         cards.add(new SetCardInfo("Venom, Deadly Devourer", 22, Rarity.RARE, mage.cards.v.VenomDeadlyDevourer.class));
