@@ -26,6 +26,7 @@ public final class MarvelsSpiderManEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Doc Ock, Evil Inventor", 24, Rarity.RARE, mage.cards.d.DocOckEvilInventor.class));
         cards.add(new SetCardInfo("Double Trouble", 13, Rarity.RARE, mage.cards.d.DoubleTrouble.class));
         cards.add(new SetCardInfo("Future Flight", 6, Rarity.RARE, mage.cards.f.FutureFlight.class));
+        cards.add(new SetCardInfo("Ghost-Spider, Gwen Stacy", 14, Rarity.MYTHIC, mage.cards.g.GhostSpiderGwenStacy.class));
         cards.add(new SetCardInfo("Grasping Tentacles", 21, Rarity.RARE, mage.cards.g.GraspingTentacles.class));
         cards.add(new SetCardInfo("Green Goblin, Nemesis", 23, Rarity.RARE, mage.cards.g.GreenGoblinNemesis.class));
         cards.add(new SetCardInfo("Grendel, Spawn of Knull", 9, Rarity.UNCOMMON, mage.cards.g.GrendelSpawnOfKnull.class));
