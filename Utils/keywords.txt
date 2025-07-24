@@ -149,4 +149,5 @@ Vanishing|number|
 Vigilance|instance|
 Ward|cost|
 Warp|card, manaString|
+Web-slinging|card, manaString|
 Wither|instance|
