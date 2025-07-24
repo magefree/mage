@@ -31,6 +31,7 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Doc Ock's Henchmen", 30, Rarity.COMMON, mage.cards.d.DocOcksHenchmen.class));
         cards.add(new SetCardInfo("Doc Ock, Sinister Scientist", 29, Rarity.COMMON, mage.cards.d.DocOckSinisterScientist.class));
         cards.add(new SetCardInfo("Eerie Gravestone", 163, Rarity.COMMON, mage.cards.e.EerieGravestone.class));
+        cards.add(new SetCardInfo("Electro's Bolt", 77, Rarity.COMMON, mage.cards.e.ElectrosBolt.class));
         cards.add(new SetCardInfo("Flying Octobot", 31, Rarity.UNCOMMON, mage.cards.f.FlyingOctobot.class));
         cards.add(new SetCardInfo("Forest", 198, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Grow Extra Arms", 101, Rarity.COMMON, mage.cards.g.GrowExtraArms.class));
