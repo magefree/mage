@@ -62,6 +62,7 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Taxi Driver", 97, Rarity.COMMON, mage.cards.t.TaxiDriver.class));
         cards.add(new SetCardInfo("Thwip!", 20, Rarity.COMMON, mage.cards.t.Thwip.class));
         cards.add(new SetCardInfo("Tombstone, Career Criminal", 70, Rarity.UNCOMMON, mage.cards.t.TombstoneCareerCriminal.class));
+        cards.add(new SetCardInfo("Unstable Experiment", 47, Rarity.COMMON, mage.cards.u.UnstableExperiment.class));
         cards.add(new SetCardInfo("Venom's Hunger", 73, Rarity.COMMON, mage.cards.v.VenomsHunger.class));
         cards.add(new SetCardInfo("Venom, Evil Unleashed", 71, Rarity.COMMON, mage.cards.v.VenomEvilUnleashed.class));
         cards.add(new SetCardInfo("Web Up", 21, Rarity.COMMON, mage.cards.w.WebUp.class));
