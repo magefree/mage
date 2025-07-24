@@ -2,7 +2,9 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.effects.keyword.ConniveTargetEffect;
+import mage.abilities.hint.common.MorbidHint;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
@@ -33,9 +35,9 @@ public final class ScorpionSeethingStriker extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
 
         // At the beginning of your end step, if a creature died this turn, target creature you control connives.
-        Ability ability = new BeginningOfEndStepTriggeredAbility(new ConniveTargetEffect());
+        Ability ability = new BeginningOfEndStepTriggeredAbility(new ConniveTargetEffect()).withInterveningIf(MorbidCondition.instance);
         ability.addTarget(new TargetControlledCreaturePermanent());
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(MorbidHint.instance));
     }
 
     private ScorpionSeethingStriker(final ScorpionSeethingStriker card) {
