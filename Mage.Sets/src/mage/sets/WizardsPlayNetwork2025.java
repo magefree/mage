@@ -20,8 +20,11 @@ public class WizardsPlayNetwork2025 extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
-        cards.add(new SetCardInfo("Dragon's Hoard", 2, Rarity.RARE, mage.cards.d.DragonsHoard.class, RETRO_ART));
+        cards.add(new SetCardInfo("Culling Ritual", 4, Rarity.RARE, mage.cards.c.CullingRitual.class));
+        cards.add(new SetCardInfo("Despark", 2, Rarity.UNCOMMON, mage.cards.d.Despark.class));
+        cards.add(new SetCardInfo("Dragon's Hoard", "1p", Rarity.RARE, mage.cards.d.DragonsHoard.class, RETRO_ART));
         cards.add(new SetCardInfo("Dragonspeaker Shaman", 3, Rarity.RARE, mage.cards.d.DragonspeakerShaman.class));
         cards.add(new SetCardInfo("Rishkar's Expertise", 1, Rarity.RARE, mage.cards.r.RishkarsExpertise.class, RETRO_ART));
+        cards.add(new SetCardInfo("Zidane, Tantalus Thief", 5, Rarity.MYTHIC, mage.cards.z.ZidaneTantalusThief.class));
     }
 }
