@@ -138,7 +138,13 @@ public class PermanentToken extends PermanentImpl {
 
     @Override
     public Card getMainCard() {
-        // token don't have game card, so return itself
+        // Check if we have a copy source card (for tokens created from copied spells)
+        Card copySourceCard = token.getCopySourceCard();
+        if (copySourceCard != null) {
+            return copySourceCard;
+        }
+
+        // Fallback to current behavior
         return this;
     }
 
