@@ -13,10 +13,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterBasicLandCard;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.permanent.DefendingPlayerControlsSourceAttackingPredicate;
 import mage.game.Controllable;
@@ -32,8 +30,6 @@ import java.util.stream.Collectors;
  */
 public final class AerialSurveyor extends CardImpl {
 
-    private static final FilterCard filter = new FilterBasicLandCard(SubType.PLAINS);
-
     public AerialSurveyor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}{W}");
 
@@ -45,7 +41,7 @@ public final class AerialSurveyor extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever Aerial Surveyor attacks, if defending player controls more lands than you, search your library for a basic Plains card, put it onto the battlefield tapped, then shuffle.
-        this.addAbility(new AttacksTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), true))
+        this.addAbility(new AttacksTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_PLAINS), true))
                 .withInterveningIf(AerialSurveyorCondition.instance)
                 .addHint(LandsYouControlHint.instance)
                 .addHint(AerialSurveyorHint.instance));

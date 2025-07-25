@@ -14,8 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
@@ -24,13 +23,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class AmbitiousFarmhand extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("basic Plains card");
-
-    static {
-        filter.add(SuperType.BASIC.getPredicate());
-        filter.add(SubType.PLAINS.getPredicate());
-    }
 
     public AmbitiousFarmhand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
@@ -43,7 +35,7 @@ public final class AmbitiousFarmhand extends CardImpl {
 
         // When Ambitious Farmhand enters the battlefield, you may search your library for a basic Plains card, reveal it, put it into your hand, then shuffle.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true), true
+                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_PLAINS), true), true
         ));
 
         // Coven—{1}{W}{W}: Transform Ambitious Farmhand. Activate only if you control three or more creatures with different powers.

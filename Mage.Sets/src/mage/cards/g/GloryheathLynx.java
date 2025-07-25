@@ -9,8 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
@@ -19,13 +18,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class GloryheathLynx extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("basic Plains card");
-
-    static {
-        filter.add(SuperType.BASIC.getPredicate());
-        filter.add(SubType.PLAINS.getPredicate());
-    }
 
     public GloryheathLynx(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
@@ -40,7 +32,7 @@ public final class GloryheathLynx extends CardImpl {
 
         // Whenever this creature attacks while saddled, search your library for a basic Plains card, reveal it, put it into your hand, then shuffle.
         this.addAbility(new AttacksWhileSaddledTriggeredAbility(
-                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true)
+                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_PLAINS), true)
         ));
 
         // Saddle 2

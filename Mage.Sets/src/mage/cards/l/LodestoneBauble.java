@@ -1,8 +1,6 @@
 
 package mage.cards.l;
 
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -14,23 +12,21 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
-import mage.cards.Card;
-import mage.cards.Cards;
-import mage.cards.CardImpl;
-import mage.cards.CardsImpl;
-import mage.cards.CardSetInfo;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterBasicLandCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author ThomasLerner, LevelX2 & L_J
  */
 public final class LodestoneBauble extends CardImpl {
@@ -61,7 +57,7 @@ public final class LodestoneBauble extends CardImpl {
 class LodestoneBaubleTarget extends TargetCardInGraveyard {
 
     public LodestoneBaubleTarget() {
-        super(0, 4, new FilterBasicLandCard("basic land cards from a player's graveyard"));
+        super(0, 4, StaticFilters.FILTER_CARD_BASIC_LANDS);
     }
 
     private LodestoneBaubleTarget(final LodestoneBaubleTarget target) {
@@ -87,7 +83,7 @@ class LodestoneBaubleTarget extends TargetCardInGraveyard {
 }
 
 class LodestoneBaubleEffect extends OneShotEffect {
-    
+
     LodestoneBaubleEffect() {
         super(Outcome.Detriment);
         this.staticText = "Put up to four target basic land cards from a player's graveyard on top of their library in any order";

@@ -10,8 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInLibrary;
 
@@ -21,13 +19,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class ScoutingHawk extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("a basic Plains card");
-
-    static {
-        filter.add(SuperType.BASIC.getPredicate());
-        filter.add(SubType.PLAINS.getPredicate());
-    }
 
     private static final Condition condition = new OpponentControlsMoreCondition(StaticFilters.FILTER_LANDS);
 
@@ -43,7 +34,7 @@ public final class ScoutingHawk extends CardImpl {
 
         // Keen Sight — When Scouting Hawk enters the battlefield, if an opponent controls more lands than you, search your library for a basic Plains card, put it onto the battlefield tapped, then shuffle.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), true)
+                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_PLAINS), true)
         ).withInterveningIf(condition).withFlavorWord("Keen Sight"));
     }
 

@@ -10,11 +10,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterBasicCard;
 import mage.game.Game;
 import mage.game.permanent.token.SoldierToken;
 import mage.target.common.TargetCardInLibrary;
@@ -25,13 +25,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class KeeperOfTheAccord extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("basic Plains card");
-
-    static {
-        filter.add(SuperType.BASIC.getPredicate());
-        filter.add(SubType.PLAINS.getPredicate());
-    }
 
     public KeeperOfTheAccord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
