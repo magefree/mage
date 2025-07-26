@@ -1078,6 +1078,7 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Gladehart Cavalry", 59661, Rarity.RARE, mage.cards.g.GladehartCavalry.class));
         cards.add(new SetCardInfo("Glasspool Mimic", 83872, Rarity.RARE, mage.cards.g.GlasspoolMimic.class));
         cards.add(new SetCardInfo("Gleancrawler", 32017, Rarity.RARE, mage.cards.g.Gleancrawler.class));
+        cards.add(new SetCardInfo("Gleemox", 26584, Rarity.RARE, mage.cards.g.Gleemox.class));
         cards.add(new SetCardInfo("Glimpse of Tomorrow", 91287, Rarity.RARE, mage.cards.g.GlimpseOfTomorrow.class));
         cards.add(new SetCardInfo("Glimpse the Unthinkable", 102297, Rarity.RARE, mage.cards.g.GlimpseTheUnthinkable.class));
         cards.add(new SetCardInfo("Glint Raker", 105660, Rarity.RARE, mage.cards.g.GlintRaker.class, NON_FULL_USE_VARIOUS));
