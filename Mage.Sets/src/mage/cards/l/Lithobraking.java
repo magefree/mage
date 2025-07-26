@@ -28,7 +28,7 @@ public final class Lithobraking extends CardImpl {
                         new DamageAllEffect(2, StaticFilters.FILTER_PERMANENT_CREATURE), false
                 ), new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_ARTIFACT),
                 "Sacrifice an artifact?"
-        ));
+        ).concatBy("Then"));
     }
 
     private Lithobraking(final Lithobraking card) {

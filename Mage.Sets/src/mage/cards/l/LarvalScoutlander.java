@@ -40,7 +40,7 @@ public final class LarvalScoutlander extends CardImpl {
         // When this Spacecraft enters, you may sacrifice a land or a Lander. If you do, search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DoIfCostPaid(
                 new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(
-                        2, StaticFilters.FILTER_CARD_BASIC_LANDS
+                        0, 2, StaticFilters.FILTER_CARD_BASIC_LANDS
                 ), true), new SacrificeTargetCost(filter)
         )));
 

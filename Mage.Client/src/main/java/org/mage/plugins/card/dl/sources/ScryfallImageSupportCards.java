@@ -591,6 +591,7 @@ public class ScryfallImageSupportCards {
             add("EOE"); // Edge of Eternities
             add("EOC"); // Edge of Eternities Commander
             add("EOS"); // Edge of Eternities: Stellar Sights
+            add("SPM"); // Marvel's Spider-Man
             add("SPE"); // Marvel's Spider-Man Eternal
             add("TLA"); // Avatar: The Last Airbender
 

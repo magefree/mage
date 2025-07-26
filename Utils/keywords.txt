@@ -84,6 +84,7 @@ Lifelink|instance|
 Living metal|new|
 Living weapon|new|
 Madness|cost|
+Mayhem|card, manaString|
 Melee|new|
 Menace|new|
 Mentor|new|
@@ -149,4 +150,5 @@ Vanishing|number|
 Vigilance|instance|
 Ward|cost|
 Warp|card, manaString|
+Web-slinging|card, manaString|
 Wither|instance|

@@ -1,14 +1,13 @@
 package mage.cards.j;
 
-import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.abilities.effects.common.MayExileCardFromHandPlottedEffect;
+import mage.abilities.effects.common.ruleModifying.CantCastDuringFirstThreeTurnsEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -18,7 +17,6 @@ import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
-import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
@@ -43,7 +41,7 @@ public final class JaceReawakened extends CardImpl {
         this.setStartingLoyalty(3);
 
         // You can't cast this spell during your first, second, or third turns of the game.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new CantCastJaceReawakenedEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new CantCastDuringFirstThreeTurnsEffect()));
 
         // +1: Draw a card, then discard a card.
         this.addAbility(new LoyaltyAbility(new DrawDiscardControllerEffect(1, 1), 1));
@@ -66,43 +64,6 @@ public final class JaceReawakened extends CardImpl {
     @Override
     public JaceReawakened copy() {
         return new JaceReawakened(this);
-    }
-}
-
-/**
- * Same as {@link mage.cards.s.SerraAvenger Serra Avenger}
- */
-class CantCastJaceReawakenedEffect extends ContinuousRuleModifyingEffectImpl {
-
-    CantCastJaceReawakenedEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "You can't cast this spell during your first, second, or third turns of the game";
-    }
-
-    private CantCastJaceReawakenedEffect(final CantCastJaceReawakenedEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public CantCastJaceReawakenedEffect copy() {
-        return new CantCastJaceReawakenedEffect(this);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.CAST_SPELL;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getSourceId().equals(source.getSourceId())) {
-            Player controller = game.getPlayer(source.getControllerId());
-            // it can be cast on other players turn 1 - 3 if some effect let allow you to do this
-            if (controller != null && controller.getTurns() <= 3 && game.isActivePlayer(source.getControllerId())) {
-                return true;
-            }
-        }
-        return false;
     }
 }
 

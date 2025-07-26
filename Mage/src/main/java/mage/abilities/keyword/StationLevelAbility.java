@@ -127,7 +127,7 @@ class StationLevelCreatureEffect extends ContinuousEffectImpl {
         }
         switch (layer) {
             case TypeChangingEffects_4:
-                permanent.addCardType(game, CardType.ARTIFACT, CardType.CREATURE);
+                permanent.addCardType(game, CardType.CREATURE);
                 return true;
             case PTChangingEffects_7:
                 if (sublayer != SubLayer.SetPT_7b) {

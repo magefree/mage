@@ -158,7 +158,6 @@ public class VerifyCardDataTest {
 
         // color
         // skipListAddName(SKIP_LIST_COLOR, set, cardName);
-        skipListAddName(SKIP_LIST_COLOR, "FIN", "Summon: Alexander");
 
         // cost
         // skipListAddName(SKIP_LIST_COST, set, cardName);
@@ -921,6 +920,27 @@ public class VerifyCardDataTest {
         }
     }
 
+    private static final Set<String> ignoreBoosterSets = new HashSet<>();
+
+    static {
+        // temporary, TODO: remove after set release and mtgjson get info
+        ignoreBoosterSets.add("Edge of Eternities");
+        // jumpstart, TODO: must implement from JumpstartPoolGenerator, see #13264
+        ignoreBoosterSets.add("Jumpstart");
+        ignoreBoosterSets.add("Jumpstart 2022");
+        ignoreBoosterSets.add("Foundations Jumpstart");
+        ignoreBoosterSets.add("Ravnica: Clue Edition");
+        // joke or un-sets, low implemented cards
+        ignoreBoosterSets.add("Unglued");
+        ignoreBoosterSets.add("Unhinged");
+        ignoreBoosterSets.add("Unstable");
+        ignoreBoosterSets.add("Unfinity");
+        // other
+        ignoreBoosterSets.add("Secret Lair Drop"); // cards shop
+        ignoreBoosterSets.add("Zendikar Rising Expeditions"); // box toppers
+        ignoreBoosterSets.add("March of the Machine: The Aftermath"); // epilogue boosters aren't for draft
+    }
+
     @Test
     public void test_checkMissingSetData() {
         Collection<String> errorsList = new ArrayList<>();
@@ -1071,24 +1091,6 @@ public class VerifyCardDataTest {
         }
 
         // CHECK: miss booster settings
-        Set<String> ignoreBoosterSets = new HashSet<>();
-        // temporary, TODO: remove after set release and mtgjson get info
-        ignoreBoosterSets.add("Edge of Eternities");
-        // jumpstart, TODO: must implement from JumpstartPoolGenerator, see #13264
-        ignoreBoosterSets.add("Jumpstart");
-        ignoreBoosterSets.add("Jumpstart 2022");
-        ignoreBoosterSets.add("Foundations Jumpstart");
-        ignoreBoosterSets.add("Ravnica: Clue Edition");
-        // joke or un-sets, low implemented cards
-        ignoreBoosterSets.add("Unglued");
-        ignoreBoosterSets.add("Unhinged");
-        ignoreBoosterSets.add("Unstable");
-        ignoreBoosterSets.add("Unfinity");
-        // other
-        ignoreBoosterSets.add("Secret Lair Drop"); // cards shop
-        ignoreBoosterSets.add("Zendikar Rising Expeditions"); // box toppers
-        ignoreBoosterSets.add("March of the Machine: The Aftermath"); // epilogue boosters aren't for draft
-
         // make sure mtgjson has booster data
         boolean hasBoostersInfo = MtgJsonService.sets().values().stream().anyMatch(s -> s.booster != null && !s.booster.isEmpty());
         for (ExpansionSet set : sets) {
@@ -1812,7 +1814,7 @@ public class VerifyCardDataTest {
     private void check(Card card, int cardIndex) {
         MtgJsonCard ref = MtgJsonService.cardFromSet(card.getExpansionSetCode(), card.getName(), card.getCardNumber());
         if (ref != null) {
-            if (card instanceof SpellOptionCard && ref.layout.equals("reversible_card")) {
+            if ((card instanceof CardWithSpellOption || card instanceof SpellOptionCard) && ref.layout.equals("reversible_card")) {
                 // TODO: Remove when MtgJson updated
                 // workaround for reversible omen cards e.g. Bloomvine Regent // Claim Territory // Bloomvine Regent
                 // both sides have main card info
@@ -3116,6 +3118,11 @@ public class VerifyCardDataTest {
 
     private void checkPT(Card card, MtgJsonCard ref) {
         if (skipListHaveName(SKIP_LIST_PT, card.getExpansionSetCode(), card.getName())) {
+            return;
+        }
+
+        // Spacecraft are ignored as they shouldn't have a printed power/toughness but they do in the data
+        if (ref.subtypes.contains("Spacecraft")) {
             return;
         }
 

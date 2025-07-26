@@ -2,7 +2,7 @@ package mage.cards.c;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.keyword.ConniveSourceEffect;
+import mage.abilities.effects.keyword.ConniveTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -30,6 +30,7 @@ public final class ChangeOfPlans extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{1}{U}");
 
         // Each of X target creatures you control connive. You may have any number of them phase out.
+        this.getSpellAbility().addEffect(new ConniveTargetEffect().setText("each of X target creatures you control connive"));
         this.getSpellAbility().addEffect(new ChangeOfPlansEffect());
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
@@ -49,7 +50,7 @@ class ChangeOfPlansEffect extends OneShotEffect {
 
     ChangeOfPlansEffect() {
         super(Outcome.Benefit);
-        staticText = "each of X target creatures you control connive. You may have any number of them phase out";
+        staticText = "You may have any number of them phase out";
     }
 
     private ChangeOfPlansEffect(final ChangeOfPlansEffect effect) {
@@ -72,9 +73,6 @@ class ChangeOfPlansEffect extends OneShotEffect {
                 .collect(Collectors.toSet());
         if (permanents.isEmpty()) {
             return false;
-        }
-        for (Permanent permanent : permanents) {
-            ConniveSourceEffect.connive(permanent, 1, source, game);
         }
         Player player = game.getPlayer(source.getControllerId());
         if (player == null) {

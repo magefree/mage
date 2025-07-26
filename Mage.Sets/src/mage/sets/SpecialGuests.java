@@ -83,7 +83,7 @@ public final class SpecialGuests extends ExpansionSet {
         cards.add(new SetCardInfo("Lord of the Undead", 88, Rarity.MYTHIC, mage.cards.l.LordOfTheUndead.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lord of the Undead", 98, Rarity.MYTHIC, mage.cards.l.LordOfTheUndead.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Maddening Hex", 70, Rarity.MYTHIC, mage.cards.m.MaddeningHex.class));
-        cards.add(new SetCardInfo("Magus of the Moon", 125, Rarity.RARE, mage.cards.m.MagusOfTheMoon.class, FULL_ART));
+        cards.add(new SetCardInfo("Magus of the Moon", 125, Rarity.MYTHIC, mage.cards.m.MagusOfTheMoon.class, FULL_ART));
         cards.add(new SetCardInfo("Malcolm, Keen-Eyed Navigator", 2, Rarity.UNCOMMON, mage.cards.m.MalcolmKeenEyedNavigator.class));
         cards.add(new SetCardInfo("Mana Crypt", "17a", Rarity.MYTHIC, mage.cards.m.ManaCrypt.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mana Crypt", "17b", Rarity.MYTHIC, mage.cards.m.ManaCrypt.class, NON_FULL_USE_VARIOUS));
@@ -127,7 +127,7 @@ public final class SpecialGuests extends ExpansionSet {
         cards.add(new SetCardInfo("Show and Tell", 21, Rarity.MYTHIC, mage.cards.s.ShowAndTell.class));
         cards.add(new SetCardInfo("Skysovereign, Consul Flagship", 103, Rarity.MYTHIC, mage.cards.s.SkysovereignConsulFlagship.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Skysovereign, Consul Flagship", 93, Rarity.MYTHIC, mage.cards.s.SkysovereignConsulFlagship.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Sliver Overlord", 128, Rarity.RARE, mage.cards.s.SliverOverlord.class, FULL_ART));
+        cards.add(new SetCardInfo("Sliver Overlord", 128, Rarity.MYTHIC, mage.cards.s.SliverOverlord.class, FULL_ART));
         cards.add(new SetCardInfo("Solitude", 44, Rarity.MYTHIC, mage.cards.s.Solitude.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Solitude", 49, Rarity.MYTHIC, mage.cards.s.Solitude.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Soul Warden", 65, Rarity.MYTHIC, mage.cards.s.SoulWarden.class));

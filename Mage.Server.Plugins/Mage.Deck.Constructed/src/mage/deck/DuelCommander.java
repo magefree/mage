@@ -10,6 +10,7 @@ public class DuelCommander extends Commander {
         banned.add("Ancestral Recall");
         banned.add("Ancient Tomb");
         banned.add("Back to Basics");
+        banned.add("Balance");
         banned.add("Bazaar of Baghdad");
         banned.add("Black Lotus");
         banned.add("Capture of Jingzhou");
@@ -32,9 +33,9 @@ public class DuelCommander extends Commander {
         banned.add("Gifts Ungiven");
         banned.add("Grim Monolith");
         banned.add("Hermit Druid");
-        banned.add("Hogaak, Arisen Necropolis");
         banned.add("Humility");
         banned.add("Imperial Seal");
+        banned.add("Invert Polarity");
         banned.add("Jeweled Lotus");
         banned.add("Karakas");
         banned.add("Library of Alexandria");
@@ -63,6 +64,7 @@ public class DuelCommander extends Commander {
         banned.add("Protean Hulk");
         banned.add("Ragavan, Nimble Pilferer");
         banned.add("Rain of Filth");
+        banned.add("Reanimate");
         banned.add("Scapeshift");
         banned.add("Sensei's Divining Top");
         banned.add("Serra's Sanctum");
@@ -78,13 +80,14 @@ public class DuelCommander extends Commander {
         banned.add("Time Warp");
         banned.add("Tinker");
         banned.add("Tolarian Academy");
+        banned.add("Trazyn The Infinite");
         banned.add("Treasure Cruise");
         banned.add("Uro, Titan of Nature's Wrath");
         banned.add("Vampiric Tutor");
         banned.add("Wasteland");
+        banned.add("White Plume Adventurer");
 
         bannedCommander.add("Ajani, Nacatl Pariah");
-        bannedCommander.add("Akiri, Line-Slinger");
         bannedCommander.add("Arahbo, Roar of the World");
         bannedCommander.add("Asmoranomardicadaistinaculdacar");
         bannedCommander.add("Baral, Chief of Compliance");
@@ -96,14 +99,16 @@ public class DuelCommander extends Commander {
         bannedCommander.add("Emry, Lurker of the Loch");
         bannedCommander.add("Eris, Roar of the Storm");
         bannedCommander.add("Esior, Wardwing Familiar");
+        bannedCommander.add("Ezio Auditore da Firenze");
         bannedCommander.add("Geist of Saint Traft");
         bannedCommander.add("Inalla, Archmage Ritualist");
+        bannedCommander.add("Hogaak, Arisen Necropolis");
         bannedCommander.add("Krark, the Thumbless");
         bannedCommander.add("Minsc & Boo, Timeless Heroes");
         bannedCommander.add("Nadu, Winged Wisdom");
         bannedCommander.add("Najeela, the Blade-Blossom");
-        bannedCommander.add("Oloro, Ageless Ascetic");
         bannedCommander.add("Old Stickfingers");
+        bannedCommander.add("Oloro, Ageless Ascetic");
         bannedCommander.add("Omnath, Locus of Creation");
         bannedCommander.add("Prime Speaker Vannifar");
         bannedCommander.add("Raffine, Scheming Seer");
@@ -115,6 +120,5 @@ public class DuelCommander extends Commander {
         bannedCommander.add("Vial Smasher the Fierce");
         bannedCommander.add("Winota, Joiner of Forces");
         bannedCommander.add("Yuriko, the Tiger's Shadow");
-        bannedCommander.add("Zurgo Bellstriker");
     }
 }

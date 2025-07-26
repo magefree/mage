@@ -104,7 +104,7 @@ class PinnacleStarcageTokenEffect extends OneShotEffect {
     PinnacleStarcageTokenEffect() {
         super(Outcome.Benefit);
         staticText = "put each card exiled with this artifact into its owner's graveyard, " +
-                "then create a 2/2 colorless Robot artifact token for each card put into a graveyard this way";
+                "then create a 2/2 colorless Robot artifact creature token for each card put into a graveyard this way";
     }
 
     private PinnacleStarcageTokenEffect(final PinnacleStarcageTokenEffect effect) {
