@@ -11,6 +11,7 @@ import mage.abilities.costs.Costs;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.AsThoughEffectImpl;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
@@ -88,6 +89,10 @@ public class ForetellAbility extends SpecialAction {
     @Override
     public String getGameLogMessage(Game game) {
         return " foretells a card from hand";
+    }
+
+    public static ContinuousEffect getForetellAddCostEffect(MageObjectReference mor) {
+        return new ForetellAddCostEffect(mor);
     }
 
     static class ForetellExileEffect extends OneShotEffect {
@@ -190,7 +195,7 @@ public class ForetellAbility extends SpecialAction {
         }
     }
 
-    public static class ForetellAddCostEffect extends ContinuousEffectImpl {
+    static class ForetellAddCostEffect extends ContinuousEffectImpl {
 
         private final MageObjectReference mor;
 
