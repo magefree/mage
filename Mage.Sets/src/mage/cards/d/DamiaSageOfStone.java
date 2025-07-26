@@ -1,30 +1,28 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.IntPlusDynamicValue;
-import mage.abilities.dynamicvalue.MultipliedValue;
-import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.CardsInHandCondition;
+import mage.abilities.effects.common.DrawCardsEqualToDifferenceEffect;
 import mage.abilities.effects.common.SkipDrawStepEffect;
 import mage.abilities.keyword.DeathtouchAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
-import mage.game.Game;
-import mage.players.Player;
+
+import java.util.UUID;
 
 /**
- *
  * @author emerald000
  */
 public final class DamiaSageOfStone extends CardImpl {
+
+    private static final Condition condition = new CardsInHandCondition(ComparisonType.FEWER_THAN, 7);
 
     public DamiaSageOfStone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{G}{U}");
@@ -42,7 +40,7 @@ public final class DamiaSageOfStone extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new SkipDrawStepEffect()));
 
         // At the beginning of your upkeep, if you have fewer than seven cards in hand, draw cards equal to the difference.
-        this.addAbility(new DamiaSageOfStoneTriggeredAbility());
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DrawCardsEqualToDifferenceEffect(7)).withInterveningIf(condition));
     }
 
     private DamiaSageOfStone(final DamiaSageOfStone card) {
@@ -52,35 +50,5 @@ public final class DamiaSageOfStone extends CardImpl {
     @Override
     public DamiaSageOfStone copy() {
         return new DamiaSageOfStone(this);
-    }
-}
-
-class DamiaSageOfStoneTriggeredAbility extends BeginningOfUpkeepTriggeredAbility {
-
-    DamiaSageOfStoneTriggeredAbility() {
-        super(TargetController.YOU, new DrawCardSourceControllerEffect(new IntPlusDynamicValue(7, new MultipliedValue(CardsInControllerHandCount.ANY, -1))), false);
-    }
-
-    private DamiaSageOfStoneTriggeredAbility(final DamiaSageOfStoneTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public DamiaSageOfStoneTriggeredAbility copy() {
-        return new DamiaSageOfStoneTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkInterveningIfClause(Game game) {
-        Player player = game.getPlayer(this.getControllerId());
-        if (player != null) {
-            return player.getHand().size() < 7;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "At the beginning of your upkeep, if you have fewer than seven cards in hand, draw cards equal to the difference.";
     }
 }
