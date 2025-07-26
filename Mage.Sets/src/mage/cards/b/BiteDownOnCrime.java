@@ -65,7 +65,7 @@ enum BiteDownOnCrimeAdjuster implements CostAdjuster {
     @Override
     public void reduceCost(Ability ability, Game game) {
         if (CollectedEvidenceCondition.instance.apply(game, ability)
-                || (game.inCheckPlayableState() && collectEvidenceCost.canPay(ability, null, ability.getControllerId(), game))) {
+                || (game.inCheckPlayableState() && collectEvidenceCost.canPay(ability, ability, ability.getControllerId(), game))) {
             CardUtil.reduceCost(ability, 2);
         }
     }
