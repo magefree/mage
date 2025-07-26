@@ -1,16 +1,19 @@
 package mage.abilities.keyword;
 
-import mage.ApprovingObject;
 import mage.MageIdentifier;
+import mage.MageObjectReference;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.cards.Card;
 import mage.constants.SpellAbilityType;
+import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.players.Player;
-import mage.watchers.common.CastSpellLastTurnWatcher;
+import mage.game.events.DiscardedCardsEvent;
+import mage.game.events.GameEvent;
+import mage.watchers.Watcher;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -33,10 +36,10 @@ public class MayhemAbility extends SpellAbility {
         this.clearManaCosts();
         this.clearManaCostsToPay();
         this.addCost(new ManaCostsImpl<>(manaString));
-
+        this.addWatcher(new MayhemWatcher());
         this.setRuleAtTheTop(true);
-        this.rule = "Surge " + manaString +
-                " <i>(You may cast this card from your graveyard for "+manaString+
+        this.rule = "Mayhem " + manaString +
+                " <i>(You may cast this card from your graveyard for " + manaString +
                 " if you discarded it this turn. Timing rules still apply.)</i>";
     }
 
@@ -47,8 +50,11 @@ public class MayhemAbility extends SpellAbility {
 
     @Override
     public ActivationStatus canActivate(UUID playerId, Game game) {
-        // TODO: Implement this
-        return super.canActivate(playerId,game);
+        if (!Zone.GRAVEYARD.match(game.getState().getZone(getSourceId()))
+                || !MayhemWatcher.checkCard(getSourceId(), game)) {
+            return ActivationStatus.getFalse();
+        }
+        return super.canActivate(playerId, game);
     }
 
     @Override
@@ -69,5 +75,38 @@ public class MayhemAbility extends SpellAbility {
     public String getRule() {
         return rule;
     }
+}
 
+class MayhemWatcher extends Watcher {
+
+    private final Set<MageObjectReference> set = new HashSet<>();
+
+    MayhemWatcher() {
+        super(WatcherScope.GAME);
+    }
+
+    @Override
+    public void watch(GameEvent event, Game game) {
+        if (event.getType() != GameEvent.EventType.DISCARDED_CARDS) {
+            return;
+        }
+        for (Card card : ((DiscardedCardsEvent) event).getDiscardedCards().getCards(game)) {
+            set.add(new MageObjectReference(card, game));
+        }
+    }
+
+    @Override
+    public void reset() {
+        super.reset();
+        set.clear();
+    }
+
+    static boolean checkCard(UUID cardId, Game game) {
+        return game
+                .getState()
+                .getWatcher(MayhemWatcher.class)
+                .set
+                .stream()
+                .anyMatch(mor -> mor.refersTo(cardId, game));
+    }
 }
