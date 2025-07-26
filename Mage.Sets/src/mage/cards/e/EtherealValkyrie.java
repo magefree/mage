@@ -16,6 +16,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
+import mage.watchers.common.ForetoldWatcher;
 
 import java.util.UUID;
 
@@ -36,7 +37,7 @@ public final class EtherealValkyrie extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever Ethereal Valkyrie enters the battlefield or attacks, draw a card, then exile a card from your hand face down. It becomes foretold. Its foretell cost is its mana cost reduced by {2}.
-        this.addAbility(new EntersBattlefieldOrAttacksSourceTriggeredAbility(new EtherealValkyrieEffect()));
+        this.addAbility(new EntersBattlefieldOrAttacksSourceTriggeredAbility(new EtherealValkyrieEffect()), new ForetoldWatcher());
     }
 
     private EtherealValkyrie(final EtherealValkyrie card) {
