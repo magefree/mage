@@ -1,6 +1,6 @@
 package mage.cards.a;
 
-import mage.MageObject;
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -10,11 +10,12 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.util.CardUtil;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -55,31 +56,30 @@ class AshesOfTheFallenEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        SubType subType = ChooseCreatureTypeEffect.getChosenCreatureType(permanent.getId(), game);
+        for (MageItem object : affectedObjects) {
+            Card card = (Card) object;
+            card.addSubType(game, subType);
+        }
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (controller != null && permanent != null) {
-            SubType subType = ChooseCreatureTypeEffect.getChosenCreatureType(permanent.getId(), game);
-            if (subType != null) {
-                for (UUID cardId : controller.getGraveyard()) {
-                    Card card = game.getCard(cardId);
-                    if (card != null && card.isCreature(game) && !card.hasSubtype(subType, game)) {
-                        MageObject mageObject = game.getObject(card.getId());
-                        if (mageObject != null) {
-                            CardUtil.getObjectPartsAsObjects(mageObject).forEach(objectPart ->{
-                                if (objectPart.isCreature(game)) {
-                                    game.getState().getCreateMageObjectAttribute(objectPart, game).getSubtype().add(subType);
-                                }
-                            });
-                        }
-                    }
-                }
-            } else {
-                discard();
-            }
-            return true;
+        if (controller == null || permanent == null) {
+            return false;
         }
-        return false;
+        SubType subType = ChooseCreatureTypeEffect.getChosenCreatureType(permanent.getId(), game);
+        for (Card card : controller.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, game)) {
+            if (!card.hasSubtype(subType, game)) {
+                continue;
+            }
+            affectedObjects.add(card);
+        }
+        return !affectedObjects.isEmpty();
     }
 
     @Override

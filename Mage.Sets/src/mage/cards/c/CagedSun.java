@@ -1,8 +1,6 @@
 package mage.cards.c;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import mage.MageItem;
 import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -19,6 +17,10 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author BetaSteward
@@ -67,22 +69,30 @@ class CagedSunEffect2 extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            ObjectColor color = (ObjectColor) game.getState().getValue(permanent.getId() + "_color");
-            if (color != null) {
-                for (Permanent perm : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
-                    if (perm.getColor(game).contains(color)) {
-                        perm.addPower(1);
-                        perm.addToughness(1);
-                    }
-                }
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        ObjectColor color = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");
+        for (MageItem object : affectedObjects) {
+            Permanent permanent = (Permanent) object;
+            if (permanent.getColor(game).contains(color)) {
+                permanent.addPower(1);
+                permanent.addToughness(1);
             }
         }
-        return true;
     }
 
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent == null) {
+            return false;
+        }
+        ObjectColor color = (ObjectColor) game.getState().getValue(permanent.getId() + "_color");
+        if (color == null) {
+            return false;
+        }
+        affectedObjects.addAll(game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game));
+        return !affectedObjects.isEmpty();
+    }
 }
 
 class CagedSunTriggeredAbility extends TriggeredManaAbility {

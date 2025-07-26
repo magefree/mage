@@ -1,6 +1,7 @@
 package mage.cards.b;
 
 import mage.MageInt;
+import mage.MageItem;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -14,6 +15,7 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -82,24 +84,24 @@ class BackdraftHellkiteEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Card card = (Card) object;
+            FlashbackAbility ability = new FlashbackAbility(card, card.getManaCost());
+            ability.setSourceId(card.getId());
+            ability.setControllerId(card.getOwnerId());
+            game.getState().addOtherAbility(card, ability);
         }
-        player.getGraveyard()
-                .stream()
-                .filter(cardId -> affectedObjectList.contains(new MageObjectReference(cardId, game)))
-                .forEachOrdered(cardId -> {
-                    Card card = game.getCard(cardId);
-                    if (card == null) {
-                        return;
-                    }
-                    FlashbackAbility ability = new FlashbackAbility(card, card.getManaCost());
-                    ability.setSourceId(cardId);
-                    ability.setControllerId(card.getOwnerId());
-                    game.getState().addOtherAbility(card, ability);
-                });
-        return true;
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageObjectReference mor : affectedObjectList) {
+            Card card = mor.getCard(game);
+            if (card != null) {
+                affectedObjects.add(card);
+            }
+        }
+        return !affectedObjects.isEmpty();
     }
 }

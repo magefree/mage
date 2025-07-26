@@ -1,18 +1,22 @@
 package mage.cards.a;
 
 import mage.MageInt;
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TokenImpl;
 import mage.target.TargetPermanent;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -64,13 +68,12 @@ class AwakenerDruidBecomesCreatureEffect extends BecomesCreatureTargetEffect {
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if (sourcePermanent == null) {
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        if (game.getPermanent(source.getSourceId()) == null) {
             this.discard();
             return false;
         }
-        return super.apply(layer, sublayer, source, game);
+        return super.queryAffectedObjects(layer, source, game, affectedObjects);
     }
 }
 

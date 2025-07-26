@@ -1,7 +1,7 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.SourceIsSpellCondition;
@@ -16,6 +16,9 @@ import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.mageobject.SharesColorWithSourcePredicate;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -52,7 +55,7 @@ class DreamHallsEffect extends ContinuousEffectImpl {
     private final AlternativeCostSourceAbility alternativeCastingCostAbility = new AlternativeCostSourceAbility(new DiscardCardCost(filter), SourceIsSpellCondition.instance);
 
     public DreamHallsEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
+        super(Duration.WhileOnBattlefield, Layer.RulesEffects, SubLayer.NA, Outcome.Detriment);
         staticText = "Rather than pay the mana cost for a spell, its controller may discard a card that shares a color with that spell";
     }
 
@@ -70,30 +73,27 @@ class DreamHallsEffect extends ContinuousEffectImpl {
         super.init(source, game, activePlayerId);
         alternativeCastingCostAbility.setSourceId(source.getSourceId());
     }
-    
-    @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                Player player = game.getPlayer(playerId);
-                if (player != null) {
-                    player.getAlternativeSourceCosts().add(alternativeCastingCostAbility);
-                }
-            }
 
-            return true;
+    @Override
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Player player = (Player) object;
+            player.getAlternativeSourceCosts().add(alternativeCastingCostAbility);
         }
-        return false;
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.RulesEffects;
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
+        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+            Player player = game.getPlayer(playerId);
+            if (player != null) {
+                affectedObjects.add(player);
+            }
+        }
+        return true;
     }
 }

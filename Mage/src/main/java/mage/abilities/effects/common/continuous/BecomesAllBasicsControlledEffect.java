@@ -1,5 +1,6 @@
 package mage.abilities.effects.common.continuous;
 
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.mana.*;
@@ -8,7 +9,6 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -44,9 +44,16 @@ public class BecomesAllBasicsControlledEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(
-                StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND, source.getControllerId(), game)) {
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        affectedObjects.addAll(game.getBattlefield().getActivePermanents(
+                StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND, source.getControllerId(), game));
+        return !affectedObjects.isEmpty();
+    }
+
+    @Override
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Permanent permanent = (Permanent) object;
             permanent.addSubType(game,
                     SubType.PLAINS,
                     SubType.ISLAND,
@@ -67,6 +74,5 @@ public class BecomesAllBasicsControlledEffect extends ContinuousEffectImpl {
                 permanent.addAbility(ability, source.getSourceId(), game);
             }
         }
-        return true;
     }
 }

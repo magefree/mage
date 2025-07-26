@@ -1,6 +1,7 @@
 package mage.cards.a;
 
 import mage.MageInt;
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -18,6 +19,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -79,10 +81,17 @@ class AeveProgenitorOozeNonLegendaryEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            ((Permanent) object).removeSuperType(game, SuperType.LEGENDARY);
+        }
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent instanceof PermanentToken) {
-            permanent.removeSuperType(game, SuperType.LEGENDARY);
+            affectedObjects.add(permanent);
             return true;
         }
         return false;

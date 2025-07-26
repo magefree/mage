@@ -1,6 +1,7 @@
 package mage.cards.d;
 
 import mage.MageInt;
+import mage.MageItem;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -19,6 +20,7 @@ import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -108,7 +110,27 @@ class DuplicantContinuousEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Permanent permanent = (Permanent) object;
+            List<UUID> imprinted = permanent.getImprinted();
+            Card card = game.getCard(imprinted.get(imprinted.size() - 1));
+            switch (layer) {
+                case TypeChangingEffects_4:
+                    permanent.copySubTypesFrom(game, card, SubTypeSet.CreatureType);
+                    break;
+                case PTChangingEffects_7:
+                    if (sublayer == SubLayer.SetPT_7b) {
+                        permanent.getPower().setModifiedBaseValue(card.getPower().getValue());
+                        permanent.getToughness().setModifiedBaseValue(card.getToughness().getValue());
+                    }
+                    break;
+            }
+        }
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent == null) {
             return false;
@@ -124,22 +146,17 @@ class DuplicantContinuousEffect extends ContinuousEffectImpl {
         if (card == null || !card.isCreature(game)) {
             return false;
         }
-        switch (layer) {
-            case TypeChangingEffects_4:
-                permanent.copySubTypesFrom(game, card, SubTypeSet.CreatureType);
-                break;
-            case PTChangingEffects_7:
-                if (sublayer == SubLayer.SetPT_7b) {
-                    permanent.getPower().setModifiedBaseValue(card.getPower().getValue());
-                    permanent.getToughness().setModifiedBaseValue(card.getToughness().getValue());
-                }
-        }
+        affectedObjects.add(permanent);
         return true;
-
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        List<MageItem> affectedObjects = new ArrayList<>();
+        if (queryAffectedObjects(layer, source, game, affectedObjects)) {
+            applyToObjects(layer, sublayer, source, game, affectedObjects);
+            return true;
+        }
         return false;
     }
 

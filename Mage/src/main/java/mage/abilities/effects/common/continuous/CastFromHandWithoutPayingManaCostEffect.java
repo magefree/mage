@@ -1,5 +1,6 @@
 package mage.abilities.effects.common.continuous;
 
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.condition.CompoundCondition;
 import mage.abilities.condition.Condition;
@@ -16,6 +17,8 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.List;
+
 public class CastFromHandWithoutPayingManaCostEffect extends ContinuousEffectImpl {
 
     private final AlternativeCostSourceAbility alternativeCastingCostAbility;
@@ -29,7 +32,7 @@ public class CastFromHandWithoutPayingManaCostEffect extends ContinuousEffectImp
     }
 
     public CastFromHandWithoutPayingManaCostEffect(FilterCard filter, boolean fromHand, Duration duration) {
-        super(duration, Outcome.Detriment);
+        super(duration, Layer.RulesEffects, SubLayer.NA, Outcome.Detriment);
         Condition condition;
         if (fromHand) {
             condition = new CompoundCondition(SourceIsSpellCondition.instance, IsBeingCastFromHandCondition.instance);
@@ -53,23 +56,21 @@ public class CastFromHandWithoutPayingManaCostEffect extends ContinuousEffectImp
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Player player = (Player) object;
+            alternativeCastingCostAbility.setSourceId(source.getSourceId());
+            player.getAlternativeSourceCosts().add(alternativeCastingCostAbility);
+        }
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null) {
             return false;
         }
-        alternativeCastingCostAbility.setSourceId(source.getSourceId());
-        controller.getAlternativeSourceCosts().add(alternativeCastingCostAbility);
+        affectedObjects.add(controller);
         return true;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.RulesEffects;
     }
 }

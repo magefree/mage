@@ -1,7 +1,7 @@
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.MageItem;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -15,6 +15,10 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 public final class BloodBaronOfVizkopa extends CardImpl {
 
@@ -61,7 +65,25 @@ class BloodBaronOfVizkopaEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Permanent creature = (Permanent) object;
+            switch (layer) {
+                case PTChangingEffects_7:
+                    if (sublayer == SubLayer.ModifyPT_7c) {
+                        creature.addPower(6);
+                        creature.addToughness(6);
+                    }
+                    break;
+                case AbilityAddingRemovingEffects_6:
+                    creature.addAbility(FlyingAbility.getInstance(), source.getSourceId(), game);
+                    break;
+            }
+        }
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         if (!conditionState(source, game)) {
             return false;
         }
@@ -70,24 +92,18 @@ class BloodBaronOfVizkopaEffect extends ContinuousEffectImpl {
         if (creature == null) {
             return false;
         }
-
-        switch (layer) {
-            case PTChangingEffects_7:
-                if (sublayer == SubLayer.ModifyPT_7c) {
-                    creature.addPower(6);
-                    creature.addToughness(6);
-                }
-                break;
-            case AbilityAddingRemovingEffects_6:
-                if (sublayer == SubLayer.NA) {
-                    creature.addAbility(FlyingAbility.getInstance(), source.getSourceId(), game);
-                }
-                break;
-            default:
-                return false;
-        }
-
+        affectedObjects.add(creature);
         return true;
+    }
+
+    @Override
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        List<MageItem> affectedObjects = new ArrayList<>();
+        if (queryAffectedObjects(layer, source, game, affectedObjects)) {
+            applyToObjects(layer, sublayer, source, game, affectedObjects);
+            return true;
+        }
+        return false;
     }
 
     private boolean conditionState(Ability source, Game game) {
@@ -101,11 +117,6 @@ class BloodBaronOfVizkopaEffect extends ContinuousEffectImpl {
                 return true;
             }
         }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
         return false;
     }
 

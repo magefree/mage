@@ -1,5 +1,6 @@
 package mage.abilities.common;
 
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.StaticAbility;
@@ -14,6 +15,8 @@ import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
+
+import java.util.List;
 
 /**
  * @author TheElk801
@@ -70,21 +73,29 @@ class MaxSpeedAbilityEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         if (ControllerSpeedCount.instance.calculate(game, source, null) < 4) {
             return false;
         }
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            permanent.addAbility(ability, source.getSourceId(), game);
-            return true;
+            affectedObjects.add(permanent);
+        } else if (game.getCard(source.getSourceId()) != null) {
+            Card card = game.getCard(source.getSourceId());
+            affectedObjects.add(card);
         }
-        Card card = game.getCard(source.getSourceId());
-        if (card == null) {
-            return false;
+        return !affectedObjects.isEmpty();
+    }
+
+    @Override
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            if (object instanceof Permanent) {
+                ((Permanent) object).addAbility(ability, source.getSourceId(), game);
+            } else {
+                game.getState().addOtherAbility((Card) object, ability);
+            }
         }
-        game.getState().addOtherAbility(card, ability);
-        return true;
     }
 
     @Override

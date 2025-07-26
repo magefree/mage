@@ -1,16 +1,16 @@
 package mage.cards.x;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.MageItem;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
 import mage.abilities.effects.common.UntapAllEffect;
 import mage.abilities.effects.common.continuous.BecomesBasicLandTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
-import mage.constants.*;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -18,6 +18,9 @@ import mage.filter.predicate.permanent.CounterAnyPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetLandPermanent;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -81,12 +84,13 @@ class XolatoyacTheSmilingFloodEffect extends BecomesBasicLandTargetEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         Permanent land = game.getPermanent(this.getTargetPointer().getFirst(game, source));
         if (land == null || land.getCounters(game).getCount(CounterType.FLOOD) < 1) {
             discard();
             return false;
         }
-        return super.apply(game, source);
+        affectedObjects.add(land);
+        return true;
     }
 }

@@ -1,17 +1,18 @@
 
 package mage.abilities.effects.common.combat;
 
+import mage.MageItem;
+import mage.abilities.Ability;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
-import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
-
-
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
+
+import java.util.List;
 
 /**
  * @author Quercitron
@@ -29,7 +30,7 @@ public class CantBeBlockedByMoreThanOneSourceEffect extends ContinuousEffectImpl
     }
 
     public CantBeBlockedByMoreThanOneSourceEffect(int amount, Duration duration) {
-        super(duration, Outcome.Benefit);
+        super(duration, Layer.RulesEffects, SubLayer.NA, Outcome.Benefit);
         this.amount = amount;
         staticText = "{this} can't be blocked by more than " + CardUtil.numberToText(amount) + " creature" + (amount > 1 ? "s" : "")
                 + (duration == Duration.EndOfTurn ? " each combat this turn" : "");
@@ -46,24 +47,19 @@ public class CantBeBlockedByMoreThanOneSourceEffect extends ContinuousEffectImpl
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent perm = game.getPermanent(source.getSourceId());
-        if (perm != null) {
-            if (layer == Layer.RulesEffects) {
-                perm.setMaxBlockedBy(amount);
-            }
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            ((Permanent) object).setMaxBlockedBy(amount);
+        }
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null) {
+            affectedObjects.add(permanent);
             return true;
         }
         return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.RulesEffects;
     }
 }

@@ -1,6 +1,7 @@
 package mage.cards.a;
 
 import mage.MageInt;
+import mage.MageItem;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -22,6 +23,7 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -87,14 +89,22 @@ class ArixmethesIsLandEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Permanent permanent = (Permanent) object;
+            permanent.removeAllCardTypes(game);
+            permanent.addCardType(game, CardType.LAND);
+            permanent.removeAllSubTypes(game);
+        }
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent == null) {
             return false;
         }
-        permanent.removeAllCardTypes(game);
-        permanent.addCardType(game, CardType.LAND);
-        permanent.removeAllSubTypes(game);
+        affectedObjects.add(permanent);
         return true;
     }
 }

@@ -1,6 +1,7 @@
 package mage.game.permanent.token;
 
 import mage.MageInt;
+import mage.MageItem;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -10,6 +11,8 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.List;
 
 /**
  * @author spjspj
@@ -54,7 +57,18 @@ class DaxosSpiritSetPTEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Player controller = game.getPlayer(source.getControllerId());
+            Permanent permanent = (Permanent) object;
+            int amount = controller.getCountersCount(CounterType.EXPERIENCE);
+            permanent.getPower().setModifiedBaseValue(amount);
+            permanent.getToughness().setModifiedBaseValue(amount);
+        }
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null) {
             return false;
@@ -64,10 +78,7 @@ class DaxosSpiritSetPTEffect extends ContinuousEffectImpl {
             discard();
             return false;
         }
-
-        int amount = controller.getCountersCount(CounterType.EXPERIENCE);
-        permanent.getPower().setModifiedBaseValue(amount);
-        permanent.getToughness().setModifiedBaseValue(amount);
+        affectedObjects.add(permanent);
         return true;
     }
 }

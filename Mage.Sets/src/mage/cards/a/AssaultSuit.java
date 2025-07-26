@@ -1,7 +1,7 @@
 package mage.cards.a;
 
+import mage.MageItem;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -12,6 +12,7 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.HasteAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -20,7 +21,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
-import java.util.Optional;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -78,12 +79,24 @@ class AssaultSuitCantBeSacrificed extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Optional.ofNullable(source.getSourcePermanentIfItStillExists(game))
-                .map(Permanent::getAttachedTo)
-                .map(game::getPermanent)
-                .ifPresent(permanent -> permanent.setCanBeSacrificed(false));
-        return true;
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            ((Permanent) object).setCanBeSacrificed(false);
+        }
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        Permanent attachment = source.getSourcePermanentIfItStillExists(game);
+        if (attachment == null || attachment.getAttachedTo() == null) {
+            return false;
+        }
+        Permanent permanent = game.getPermanent(attachment.getAttachedTo());
+        if (permanent != null) {
+            affectedObjects.add(permanent);
+            return true;
+        }
+        return false;
     }
 }
 
