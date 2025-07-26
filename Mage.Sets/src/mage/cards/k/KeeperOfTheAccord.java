@@ -11,10 +11,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterBasicCard;
 import mage.game.Game;
 import mage.game.permanent.token.SoldierToken;
 import mage.target.common.TargetCardInLibrary;
@@ -41,7 +39,7 @@ public final class KeeperOfTheAccord extends CardImpl {
 
         // At the beginning of each opponent's end step, if that player controls more lands than you, you may search your library for a basic Plains card, put it onto the battlefield tapped, then shuffle your library.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                TargetController.OPPONENT, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), true), true
+                TargetController.OPPONENT, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_PLAINS), true), true
         ).withInterveningIf(KeeperOfTheAccordCondition.LANDS));
     }
 
