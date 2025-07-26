@@ -89,7 +89,7 @@ class RanarTheEverWatchfulCostReductionEffect extends CostModificationEffectImpl
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         ForetoldWatcher watcher = game.getState().getWatcher(ForetoldWatcher.class);
         return (watcher != null
-                && watcher.countNumberForetellThisTurn() == 0
+                && watcher.getPlayerForetellCountThisTurn(source.getControllerId()) == 0
                 && abilityToModify.isControlledBy(source.getControllerId())
                 && abilityToModify instanceof ForetellAbility);
     }

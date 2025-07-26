@@ -615,8 +615,12 @@ public class GameEvent implements Serializable {
         DUNGEON_COMPLETED,
         TEMPTED_BY_RING, RING_BEARER_CHOSEN,
         REMOVED_FROM_COMBAT, // targetId    id of permanent removed from combat
-        FORETOLD, // targetId   id of card foretold
-        FORETELL, // targetId   id of card foretell  playerId   id of the controller
+        /* card foretold
+        targetId    id of card foretold
+        playerId    id of player foretelling card
+        flag        true if player did foretell, false if became foretold without foretell
+         */
+        CARD_FORETOLD,
         /* villainous choice
          targetId    player making the choice
          sourceId    sourceId of the ability forcing the choice

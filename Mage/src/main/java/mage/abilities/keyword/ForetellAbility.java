@@ -143,7 +143,7 @@ public class ForetellAbility extends SpecialAction {
                 effect.apply(game, source);
                 card.setFaceDown(true, game);
                 game.addEffect(new ForetellAddCostEffect(new MageObjectReference(card, game)), source);
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.FORETELL, card.getId(), null, source.getControllerId()));
+                game.fireEvent(new GameEvent(GameEvent.EventType.CARD_FORETOLD, card.getId(), source, source.getControllerId(), 0, true));
                 return true;
             }
             return false;

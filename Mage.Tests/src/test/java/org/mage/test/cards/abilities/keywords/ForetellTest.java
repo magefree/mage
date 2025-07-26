@@ -155,7 +155,7 @@ public class ForetellTest extends CardTestPlayerBase {
         // turn 4, draw card B
         activateAbility(4, PhaseStep.PRECOMBAT_MAIN, playerB, "Foretell {1}{B}", flamespeaker);
         // foretold, so scry 2 (cards C and D)
-        addTarget(playerA, cardD); // scrying D bottom (C remains on top)
+        addTarget(playerB, cardD); // scrying D bottom (C remains on top)
 
         setStrictChooseMode(true);
         setStopAt(4, PhaseStep.END_TURN);

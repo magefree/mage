@@ -24,16 +24,14 @@ public class ForetellSourceControllerTriggeredAbility extends TriggeredAbilityIm
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.FORETELL;
+        return event.getType() == GameEvent.EventType.CARD_FORETOLD;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Card card = game.getCard(event.getTargetId());
         Player player = game.getPlayer(event.getPlayerId());
-        return (card != null
-                && player != null
-                && isControlledBy(player.getId()));
+        return event.getFlag() && card != null && player != null && isControlledBy(player.getId());
     }
 
     @Override
