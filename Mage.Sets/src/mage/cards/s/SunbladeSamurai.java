@@ -11,6 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
+import mage.filter.common.FilterBasicCard;
 import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
@@ -20,7 +21,7 @@ import java.util.UUID;
  */
 public final class SunbladeSamurai extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard(SubType.PLAINS);
+    private static final FilterCard filter = new FilterBasicCard(SubType.PLAINS);
 
     public SunbladeSamurai(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{4}{W}");
