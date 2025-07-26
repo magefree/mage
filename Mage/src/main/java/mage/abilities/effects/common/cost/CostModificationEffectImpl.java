@@ -1,13 +1,11 @@
 package mage.abilities.effects.common.cost;
 
-import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.CostModificationEffect;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.EffectType;
 import mage.constants.Outcome;
-import mage.game.Game;
 
 /**
  * Simple implementation of a {@link CostModificationEffect} offering simplified
@@ -38,19 +36,6 @@ public abstract class CostModificationEffectImpl extends ContinuousEffectImpl im
         super(effect);
         this.modificationType = effect.modificationType;
         this.worksOnStackOnly = effect.worksOnStackOnly;
-    }
-
-    /**
-     * Overridden and 'no-op' implementation put in place.
-     *
-     * @param game
-     * @param source
-     * @return
-     * @see #apply(mage.game.Game, mage.abilities.Ability, mage.abilities.Ability)
-     */
-    @Override
-    public final boolean apply(Game game, Ability source) {
-        return false;
     }
 
     @Override

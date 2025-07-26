@@ -1,6 +1,7 @@
 package mage.cards.t;
 
 import mage.MageInt;
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -15,14 +16,13 @@ import mage.abilities.hint.Hint;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.TargetController;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.target.common.TargetLandPermanent;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -98,11 +98,17 @@ class TideShaperEffect extends BecomesBasicLandTargetEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         if (source.getSourcePermanentIfItStillExists(game) == null) {
+            this.discard();
+            return false;
+        }
+        Permanent land = game.getPermanent(this.getTargetPointer().getFirst(game, source));
+        if (land == null) {
             discard();
             return false;
         }
-        return super.apply(game, source);
+        affectedObjects.add(land);
+        return true;
     }
 }

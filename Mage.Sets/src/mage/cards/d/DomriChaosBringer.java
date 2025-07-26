@@ -1,16 +1,19 @@
 package mage.cards.d;
 
+import mage.MageItem;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.effects.mana.BasicManaEffect;
+import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.keyword.RiotAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -18,11 +21,11 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.command.emblems.DomriChaosBringerEmblem;
 import mage.game.events.GameEvent;
+import mage.game.stack.StackObject;
 import mage.players.Player;
 
+import java.util.List;
 import java.util.UUID;
-import mage.abilities.effects.ContinuousEffectImpl;
-import mage.game.stack.StackObject;
 
 /**
  * @author TheElk801
@@ -167,11 +170,19 @@ class DomriChaosBringAddRiotToSpellEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        if (cardId != null) {
-            game.getState().addOtherAbility(game.getCard(cardId), riotAbility);
-            return true;
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            game.getState().addOtherAbility((Card) object, riotAbility);
         }
-        return false;
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        Card card = game.getCard(cardId);
+        if (card == null) {
+            return false;
+        }
+        affectedObjects.add(card);
+        return true;
     }
 }

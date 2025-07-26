@@ -1,6 +1,7 @@
 package mage.cards.d;
 
 import mage.MageInt;
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -21,6 +22,7 @@ import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -100,19 +102,31 @@ class DarkImpostorContinuousEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source));
-        if (permanent == null || exileZone == null || exileZone.isEmpty()) {
-            return false;
-        }
-        for (Card card : exileZone.getCards(StaticFilters.FILTER_CARD_CREATURE, game)) {
-            for (Ability ability : card.getAbilities(game)) {
-                if (ability.isActivatedAbility()) {
-                    permanent.addAbility(ability, source.getSourceId(), game, true);
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+
+        for (MageItem object : affectedObjects) {
+            Permanent permanent = (Permanent) object;
+            ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source, permanent.getZoneChangeCounter(game)));
+            if (exileZone == null || exileZone.isEmpty()) {
+                continue;
+            }
+            for (Card card : exileZone.getCards(StaticFilters.FILTER_CARD_CREATURE, game)) {
+                for (Ability ability : card.getAbilities(game)) {
+                    if (ability.isActivatedAbility()) {
+                        permanent.addAbility(ability, source.getSourceId(), game);
+                    }
                 }
             }
         }
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        if (permanent == null) {
+            return false;
+        }
+        affectedObjects.add(permanent);
         return true;
     }
 

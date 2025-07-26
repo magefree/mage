@@ -1,6 +1,7 @@
 
 package mage.abilities.effects.common.continuous;
 
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -9,6 +10,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -29,21 +31,28 @@ public class AddCardSubTypeTargetEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        boolean result = false;
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Permanent permanent = (Permanent) object;
+            permanent.addSubType(game, addedSubType);
+        }
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         for (UUID targetId : getTargetPointer().getTargets(game, source)) {
             Permanent target = game.getPermanent(targetId);
             if (target != null) {
-                target.addSubType(game, addedSubType);
-                result = true;
+                affectedObjects.add(target);
             }
         }
-        if (!result) {
-            if (this.getDuration() == Duration.Custom) {
+        if (affectedObjects.isEmpty()) {
+            if (duration == Duration.Custom) {
                 this.discard();
             }
+            return false;
         }
-        return result;
+        return true;
     }
 
     @Override

@@ -3,16 +3,16 @@ package mage.cards.a;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BlocksSourceTriggeredAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.continuous.AddCardSubTypeSourceEffect;
 import mage.abilities.effects.common.continuous.LoseAbilitySourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
 
 import java.util.UUID;
 
@@ -35,7 +35,8 @@ public final class AgelessSentinels extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Ageless Sentinels blocks, it becomes a Bird Giant, and it loses defender.
-        Ability ability = new BlocksSourceTriggeredAbility(new AgelessSentinelsEffect()).setTriggerPhrase("When {this} blocks, ");
+        Effect becomeBirdGiantEffect = new AddCardSubTypeSourceEffect(Duration.WhileOnBattlefield, SubType.BIRD, SubType.GIANT);
+        Ability ability = new BlocksSourceTriggeredAbility(becomeBirdGiantEffect).setTriggerPhrase("When {this} blocks, ");
         Effect effect = new LoseAbilitySourceEffect(DefenderAbility.getInstance(), Duration.WhileOnBattlefield);
         effect.setText(", and it loses defender. <i>(It's no longer a Wall. This effect lasts indefinitely.)</i>");
         ability.addEffect(effect);
@@ -49,38 +50,5 @@ public final class AgelessSentinels extends CardImpl {
     @Override
     public AgelessSentinels copy() {
         return new AgelessSentinels(this);
-    }
-}
-
-class AgelessSentinelsEffect extends ContinuousEffectImpl {
-
-    AgelessSentinelsEffect() {
-        super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.BecomeCreature);
-        staticText = "it becomes a Bird Giant";
-    }
-
-    private AgelessSentinelsEffect(final AgelessSentinelsEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public AgelessSentinelsEffect copy() {
-        return new AgelessSentinelsEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent == null) {
-            return false;
-        }
-        permanent.removeAllCreatureTypes(game);
-        permanent.addSubType(game, SubType.BIRD, SubType.GIANT);
-        return true;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.TypeChangingEffects_4;
     }
 }

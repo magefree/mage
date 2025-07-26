@@ -1,11 +1,14 @@
 package mage.abilities.effects.common.combat;
 
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
+
+import java.util.List;
 
 /**
  * @author LevelX2, edited by Cguy7777
@@ -42,12 +45,19 @@ public class CantBeBlockedByMoreThanOneAttachedEffect extends ContinuousEffectIm
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            ((Permanent) object).setMaxBlockedBy(amount);
+        }
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         Permanent attachment = game.getPermanent(source.getSourceId());
         if (attachment != null && attachment.getAttachedTo() != null) {
-            Permanent perm = game.getPermanent(attachment.getAttachedTo());
-            if (perm != null) {
-                perm.setMaxBlockedBy(amount);
+            Permanent permanent = game.getPermanent(attachment.getAttachedTo());
+            if (permanent != null) {
+                affectedObjects.add(permanent);
                 return true;
             }
         }

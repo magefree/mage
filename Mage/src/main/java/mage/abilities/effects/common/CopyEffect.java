@@ -1,5 +1,6 @@
 package mage.abilities.effects.common;
 
+import mage.MageItem;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -13,6 +14,7 @@ import mage.game.permanent.PermanentToken;
 import mage.util.CardUtil;
 import mage.util.functions.CopyApplier;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -56,7 +58,10 @@ public class CopyEffect extends ContinuousEffectImpl {
 
         Permanent permanent = game.getPermanent(copyToObjectId);
         if (permanent != null) {
-            affectedObjectList.add(new MageObjectReference(permanent, game));
+            MageObjectReference mor = new MageObjectReference(permanent, game);
+            if (!affectedObjectList.contains(mor)) {
+                affectedObjectList.add(mor);
+            }
         } else if (source.getAbilityType() == AbilityType.STATIC) {
             // for replacement effects that let a permanent enter the battlefield as a copy of another permanent we need to apply that copy
             // before the permanent is added to the battlefield
@@ -68,34 +73,43 @@ public class CopyEffect extends ContinuousEffectImpl {
                 if (permanent instanceof PermanentToken) {
                     ZCCDiff = 0;
                 }
-                affectedObjectList.add(new MageObjectReference(permanent.getId(), game.getState().getZoneChangeCounter(copyToObjectId) + ZCCDiff, game));
+                MageObjectReference mor = new MageObjectReference(permanent.getId(), game.getState().getZoneChangeCounter(copyToObjectId) + ZCCDiff, game);
+                if (!affectedObjectList.contains(mor)) {
+                    affectedObjectList.add(mor);
+                }
             }
         }
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        if (affectedObjectList.isEmpty()) {
-            this.discard();
-            return false;
-        }
-        Permanent permanent = affectedObjectList.get(0).getPermanent(game);
-        if (permanent == null) {
-            if (!game.checkShortLivingLKI(getSourceId(), Zone.BATTLEFIELD)) {
-                discard();
-                return false;
-            }
-            // As long as the permanent is still in the short living LKI continue to copy to get triggered abilities to TriggeredAbilities for dies events.
-            permanent = (Permanent) game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD, source.getSourceObjectZoneChangeCounter());
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageObjectReference mor : affectedObjectList) {
+            Permanent permanent = mor.getPermanent(game);
             if (permanent == null) {
-                discard();
-                return false;
+                if (!game.checkShortLivingLKI(getSourceId(), Zone.BATTLEFIELD)) {
+                    this.discard();
+                    return false;
+                }
+                // As long as the permanent is still in the short living LKI continue to copy to get triggered abilities to TriggeredAbilities for dies events.
+                permanent = (Permanent) game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD, source.getSourceObjectZoneChangeCounter());
+                if (permanent == null) {
+                    this.discard();
+                    return false;
+                }
             }
+            affectedObjects.add(permanent);
         }
-        return copyToPermanent(permanent, game, source);
+        return !affectedObjects.isEmpty();
     }
 
-    protected boolean copyToPermanent(Permanent permanent, Game game, Ability source) {
+    @Override
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            copyToPermanent((Permanent) object, game, source);
+        }
+    }
+
+    protected void copyToPermanent(Permanent permanent, Game game, Ability source) {
         if (copyFromObject.getCopyFrom() != null) {
             // copy from temp blueprints (they are already copies)
             permanent.setCopy(true, copyFromObject.getCopyFrom());
@@ -155,7 +169,6 @@ public class CopyEffect extends ContinuousEffectImpl {
 
         CardUtil.copySetAndCardNumber(permanent, copyFromObject);
 
-        return true;
     }
 
     @Override

@@ -1,6 +1,7 @@
 
 package mage.abilities.effects.common.combat;
 
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
@@ -10,6 +11,8 @@ import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
+
+import java.util.List;
 
 /**
  * @author LevelX2
@@ -32,7 +35,7 @@ public class CanBlockAdditionalCreatureEffect extends ContinuousEffectImpl {
     }
 
     public CanBlockAdditionalCreatureEffect(Duration duration, int amount) {
-        super(duration, Outcome.Benefit);
+        super(duration, Layer.RulesEffects, SubLayer.NA, Outcome.Benefit);
         this.amount = amount;
         staticText = setText();
     }
@@ -48,9 +51,9 @@ public class CanBlockAdditionalCreatureEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Permanent permanent = (Permanent) object;
             // maxBlocks = 0 equals to "can block any number of creatures"
             if (amount > 0) {
                 if (permanent.getMaxBlocks() > 0) {
@@ -59,13 +62,16 @@ public class CanBlockAdditionalCreatureEffect extends ContinuousEffectImpl {
             } else {
                 permanent.setMaxBlocks(0);
             }
-            return true;
         }
-        return false;
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null) {
+            affectedObjects.add(permanent);
+            return true;
+        }
         return false;
     }
 
@@ -85,11 +91,6 @@ public class CanBlockAdditionalCreatureEffect extends ContinuousEffectImpl {
             sb.append(" each combat");
         }
         return sb.toString();
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.RulesEffects;
     }
 
 }

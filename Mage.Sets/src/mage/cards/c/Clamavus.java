@@ -1,6 +1,7 @@
 package mage.cards.c;
 
 import mage.MageInt;
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -60,17 +61,23 @@ class ClamavusEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        List<Permanent> permanents = game.getBattlefield().getActivePermanents(
-                StaticFilters.FILTER_CONTROLLED_CREATURE, source.getControllerId(), game
-        );
-        for (Permanent permanent : permanents) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Permanent permanent = (Permanent) object;
             int count = permanent.getCounters(game).getCount(CounterType.P1P1);
-            if (count > 0) {
-                permanent.addPower(count);
-                permanent.addToughness(count);
+            permanent.addPower(count);
+            permanent.addToughness(count);
+        }
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(
+                StaticFilters.FILTER_CONTROLLED_CREATURE, source.getControllerId(), game)) {
+            if (permanent.getCounters(game).getCount(CounterType.P1P1) > 0) {
+                affectedObjects.add(permanent);
             }
         }
-        return true;
+        return !affectedObjects.isEmpty();
     }
 }

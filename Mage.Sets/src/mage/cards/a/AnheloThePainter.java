@@ -1,6 +1,7 @@
 package mage.cards.a;
 
 import mage.MageInt;
+import mage.MageItem;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -19,6 +20,7 @@ import mage.players.Player;
 import mage.watchers.Watcher;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -67,6 +69,35 @@ class AnheloThePainterGainCausalityEffect extends ContinuousEffectImpl {
 
     private AnheloThePainterGainCausalityEffect(final AnheloThePainterGainCausalityEffect effect) {
         super(effect);
+    }
+
+    @Override
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Card card = (Card) object;
+            game.getState().addOtherAbility(card, new CasualtyAbility(2));
+        }
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        Player controller = game.getPlayer(source.getControllerId());
+        AnheloThePainterWatcher watcher = game.getState().getWatcher(AnheloThePainterWatcher.class);
+        if (controller == null || watcher == null) {
+            return false;
+        }
+
+        for (StackObject stackObject : game.getStack()) {
+            if (!(stackObject instanceof Spell)
+                    || stackObject.isCopy()
+                    || !stackObject.isControlledBy(source.getControllerId())
+                    || !AnheloThePainterWatcher.checkSpell(stackObject, game)) {
+                continue;
+            }
+            Card card = ((Spell) stackObject).getCard();
+            affectedObjects.add(card);
+        }
+        return !affectedObjects.isEmpty();
     }
 
     @Override

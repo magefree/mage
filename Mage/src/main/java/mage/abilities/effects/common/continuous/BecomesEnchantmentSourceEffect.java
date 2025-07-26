@@ -1,11 +1,14 @@
 package mage.abilities.effects.common.continuous;
 
+import mage.MageItem;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.List;
 
 /**
  * @author jeffwadsworth
@@ -34,15 +37,27 @@ public class BecomesEnchantmentSourceEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = affectedObjectList.get(0).getPermanent(game);
-        if (permanent == null) {
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageObjectReference mor : affectedObjectList) {
+            Permanent permanent = mor.getPermanent(game);
+            if (permanent != null) {
+                affectedObjects.add(permanent);
+            }
+        }
+        if (affectedObjects.isEmpty()) {
             this.discard();
             return false;
         }
-        permanent.removeAllCardTypes(game);
-        permanent.addCardType(game, CardType.ENCHANTMENT);
-        permanent.retainAllEnchantmentSubTypes(game);
         return true;
+    }
+
+    @Override
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Permanent permanent = (Permanent) object;
+            permanent.removeAllCardTypes(game);
+            permanent.addCardType(game, CardType.ENCHANTMENT);
+            permanent.retainAllEnchantmentSubTypes(game);
+        }
     }
 }

@@ -1,10 +1,14 @@
 package mage.abilities.effects.common.continuous;
 
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author JRHerlehy Created on 4/8/17.
@@ -41,7 +45,7 @@ public class AddCreatureTypeAdditionEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         Permanent creature;
         if (source.getTargets().getFirstTarget() == null) {
             creature = game.getPermanent(getTargetPointer().getFirst(game, source));
@@ -51,25 +55,37 @@ public class AddCreatureTypeAdditionEffect extends ContinuousEffectImpl {
                 creature = game.getPermanentEntering(source.getTargets().getFirstTarget());
             }
         }
-        if (creature == null) {
-            this.used = true;
-            return false;
+        if (creature != null) {
+            affectedObjects.add(creature);
         }
-        switch (layer) {
-            case TypeChangingEffects_4:
-                creature.addSubType(game, subType);
-                break;
-            case ColorChangingEffects_5:
-                if (this.giveBlackColor) {
-                    creature.getColor(game).setBlack(true);
-                }
-                break;
-        }
-        return true;
+        return !affectedObjects.isEmpty();
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Permanent creature = (Permanent) object;
+            switch (layer) {
+                case TypeChangingEffects_4:
+                    creature.addSubType(game, subType);
+                    break;
+                case ColorChangingEffects_5:
+                    if (this.giveBlackColor) {
+                        creature.getColor(game).setBlack(true);
+                    }
+                    break;
+            }
+        }
+    }
+
+    @Override
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        List<MageItem> affectedObjects = new ArrayList<>();
+        if (queryAffectedObjects(layer, source, game, affectedObjects)) {
+            applyToObjects(layer, sublayer, source, game, affectedObjects);
+            return true;
+        }
+        this.used = true;
         return false;
     }
 

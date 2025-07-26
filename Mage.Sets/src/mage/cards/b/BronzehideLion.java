@@ -1,9 +1,7 @@
 package mage.cards.b;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -25,6 +23,10 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.util.CardUtil;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author LevelX2, TheElk801
@@ -124,12 +126,42 @@ class BronzehideLionContinuousEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Permanent lion =  (Permanent) object;
+            switch (layer) {
+                case TypeChangingEffects_4:
+                    lion.removeAllCardTypes(game);
+                    lion.addCardType(game, CardType.ENCHANTMENT);
+                    lion.removeAllSubTypes(game);
+                    lion.addSubType(game, SubType.AURA);
+                    break;
+                case AbilityAddingRemovingEffects_6:
+                    List<Ability> toRemove = new ArrayList<>();
+                    for (Ability ability : lion.getAbilities(game)) {
+                        if (!lion.getSpellAbility().equals(ability)) {
+                            toRemove.add(ability);
+                        }
+                    }
+                    lion.removeAbilities(toRemove, source.getSourceId(), game);
+
+                    lion.getSpellAbility().getTargets().clear();
+                    lion.getSpellAbility().getEffects().clear();
+                    TargetPermanent auraTarget = new TargetControlledCreaturePermanent();
+                    lion.getSpellAbility().addTarget(auraTarget);
+                    lion.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+                    lion.addAbility(new EnchantAbility(auraTarget), source.getSourceId(), game);
+
+                    // add the activated ability
+                    activatedAbility.setControllerId(source.getControllerId());
+                    lion.addAbility(activatedAbility, source.getSourceId(), game);
+                    break;
+            }
+        }
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         if (game.getState().getZoneChangeCounter(source.getSourceId()) > zoneChangeCounter) {
             discard();
         }
@@ -140,36 +172,18 @@ class BronzehideLionContinuousEffect extends ContinuousEffectImpl {
         if (sourceObject == null) {
             return false;
         }
-        Permanent lion = sourceObject;
-        switch (layer) {
-            case TypeChangingEffects_4:
-                lion.removeAllCardTypes(game);
-                lion.addCardType(game, CardType.ENCHANTMENT);
-                lion.removeAllSubTypes(game);
-                lion.addSubType(game, SubType.AURA);
-                break;
-            case AbilityAddingRemovingEffects_6:
-                List<Ability> toRemove = new ArrayList<>();
-                for (Ability ability : lion.getAbilities(game)) {
-                    if (!lion.getSpellAbility().equals(ability)) {
-                        toRemove.add(ability);
-                    }
-                }
-                lion.removeAbilities(toRemove, source.getSourceId(), game);
-
-                lion.getSpellAbility().getTargets().clear();
-                lion.getSpellAbility().getEffects().clear();
-                TargetPermanent auraTarget = new TargetControlledCreaturePermanent();
-                lion.getSpellAbility().addTarget(auraTarget);
-                lion.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-                lion.addAbility(new EnchantAbility(auraTarget), source.getSourceId(), game);
-
-                // add the activated ability
-                activatedAbility.setControllerId(source.getControllerId());
-                lion.addAbility(activatedAbility, source.getSourceId(), game);
-                break;
-        }
+        affectedObjects.add(sourceObject);
         return true;
+    }
+
+    @Override
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        List<MageItem> affectedObjects = new ArrayList<>();
+        if (queryAffectedObjects(layer, source, game, affectedObjects)) {
+            applyToObjects(layer, sublayer, source, game, affectedObjects);
+            return true;
+        }
+        return false;
     }
 
     @Override

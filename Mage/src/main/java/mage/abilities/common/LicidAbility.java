@@ -1,5 +1,7 @@
 package mage.abilities.common;
 
+import mage.MageItem;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.SpecialAction;
@@ -97,14 +99,29 @@ class LicidContinuousEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        if (layer == Layer.TypeChangingEffects_4) {
+            affectedObjectList.clear();
+            Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+            if (permanent != null) {
+                affectedObjects.add(permanent);
+                affectedObjectList.add(new MageObjectReference(permanent, game));
+            }
+        } else {
+            for (MageObjectReference mor : affectedObjectList) {
+                Permanent permanent = mor.getPermanent(game);
+                if (permanent != null) {
+                    affectedObjects.add(permanent);
+                }
+            }
+        }
+        return !affectedObjects.isEmpty();
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent licid = source.getSourcePermanentIfItStillExists(game);
-        if (licid != null) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Permanent licid = (Permanent) object;
             switch (layer) {
                 case TypeChangingEffects_4:
                     licid.removeAllCardTypes(game);
@@ -131,9 +148,17 @@ class LicidContinuousEffect extends ContinuousEffectImpl {
                     licid.getSpellAbility().getTargets().clear();
                     licid.getSpellAbility().getTargets().add(target);
             }
+        }
+    }
+
+    @Override
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        ArrayList<MageItem> affectedObjects = new ArrayList<>();
+        if (queryAffectedObjects(layer, source, game, affectedObjects)) {
+            applyToObjects(layer, sublayer, source, game, affectedObjects);
             return true;
         }
-        discard();
+        this.discard();
         return false;
     }
 

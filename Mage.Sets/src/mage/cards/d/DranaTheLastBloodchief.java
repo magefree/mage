@@ -1,6 +1,7 @@
 package mage.cards.d;
 
 import mage.MageInt;
+import mage.MageItem;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -24,6 +25,7 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInGraveyard;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -120,19 +122,21 @@ class DranaTheLastBloodchiefSubtypeEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent creature = mor.getPermanent(game);
-        if (creature != null) {
-            creature.addSubType(game, SubType.VAMPIRE);
-            return true;
-        } else {
-            this.used = true;
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Permanent permanent = (Permanent) object;
+            permanent.addSubType(game, SubType.VAMPIRE);
         }
-        return false;
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        Permanent creature = mor.getPermanent(game);
+        if (creature != null) {
+            affectedObjects.add(creature);
+            return true;
+        }
+        this.used = true;
         return false;
     }
 

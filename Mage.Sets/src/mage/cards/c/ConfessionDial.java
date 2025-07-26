@@ -1,7 +1,6 @@
 package mage.cards.c;
 
-import java.util.UUID;
-
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -16,6 +15,9 @@ import mage.constants.*;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author Cguy7777
@@ -66,15 +68,23 @@ class ConfessionDialEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Card card = (Card) object;
+            Ability ability = new EscapeAbility(card, card.getManaCost().getText(), 3);
+            ability.setSourceId(card.getId());
+            ability.setControllerId(card.getOwnerId());
+            game.getState().addOtherAbility(card, ability);
+        }
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (card == null || card.getManaCost().getText().isEmpty()) {
             return false;
         }
-        Ability ability = new EscapeAbility(card, card.getManaCost().getText(), 3);
-        ability.setSourceId(card.getId());
-        ability.setControllerId(card.getOwnerId());
-        game.getState().addOtherAbility(card, ability);
+        affectedObjects.add(card);
         return true;
     }
 

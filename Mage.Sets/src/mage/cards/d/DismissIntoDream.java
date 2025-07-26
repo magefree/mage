@@ -1,7 +1,7 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesTargetSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -14,6 +14,9 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -57,26 +60,23 @@ class DismissIntoDreamEffect extends CreaturesBecomeOtherTypeEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
     public DismissIntoDreamEffect copy() {
         return new DismissIntoDreamEffect(this);
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        super.apply(layer, sublayer, source, game);
-
-        if (layer == Layer.AbilityAddingRemovingEffects_6) {
-            for (Permanent object: game.getBattlefield().getActivePermanents(this.filter, source.getControllerId(), game)) {
-                object.addAbility(new BecomesTargetSourceTriggeredAbility(new SacrificeSourceEffect()), source.getSourceId(), game);
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Permanent permanent = (Permanent) object;
+            switch (layer) {
+                case TypeChangingEffects_4:
+                    permanent.addSubType(game, this.subType);
+                    break;
+                case AbilityAddingRemovingEffects_6:
+                    permanent.addAbility(new BecomesTargetSourceTriggeredAbility(new SacrificeSourceEffect()), source.getSourceId(), game);
+                    break;
             }
         }
-
-        return true;
     }
 
     @Override

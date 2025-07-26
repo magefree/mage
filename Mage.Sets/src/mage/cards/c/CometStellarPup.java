@@ -1,5 +1,6 @@
 package mage.cards.c;
 
+import mage.MageItem;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
@@ -29,6 +30,7 @@ import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.targetpointer.FixedTarget;
 import mage.target.targetpointer.FixedTargets;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -177,11 +179,20 @@ class CometStellarPupContinuousEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Permanent comet = (Permanent) object;
+            comet.incrementLoyaltyActivationsAvailable();
+            comet.incrementLoyaltyActivationsAvailable();
+
+        }
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         Permanent comet = cometMOR.getPermanent(game);
         if (comet != null) {
-            comet.incrementLoyaltyActivationsAvailable();
-            comet.incrementLoyaltyActivationsAvailable();
+            affectedObjects.add(comet);
             return true;
         }
         return false;

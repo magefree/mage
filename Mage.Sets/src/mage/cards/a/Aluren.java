@@ -1,6 +1,7 @@
 package mage.cards.a;
 
 import mage.MageIdentifier;
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.SourceIsSpellCondition;
@@ -16,6 +17,7 @@ import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -92,19 +94,27 @@ class AlurenRuleEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        alternativeCastingCostAbility.setSourceId(source.getControllerId());
+        for (MageItem object : affectedObjects) {
+            Player player = (Player) object;
+            player.getAlternativeSourceCosts().add(alternativeCastingCostAbility);
+        }
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null) {
             return false;
         }
-        alternativeCastingCostAbility.setSourceId(source.getSourceId());
         for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                player.getAlternativeSourceCosts().add(alternativeCastingCostAbility);
+                affectedObjects.add(player);
             }
         }
-        return true;
+        return !affectedObjects.isEmpty();
     }
 
 }

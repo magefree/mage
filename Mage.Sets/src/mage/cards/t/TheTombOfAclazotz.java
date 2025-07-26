@@ -1,6 +1,7 @@
 package mage.cards.t;
 
 import mage.MageIdentifier;
+import mage.MageItem;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -19,14 +20,15 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 import mage.util.SubTypes;
 import mage.watchers.Watcher;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -213,7 +215,7 @@ class AddSubtypeEnteringCreatureEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Spell target = game.getSpell(event.getSourceId());
         if (target != null) {
-            AddCardSubTypeEnteringTargetEffect effect = new AddCardSubTypeEnteringTargetEffect(mor, subType, Duration.WhileOnBattlefield);
+            AddCardSubTypeEnteringTargetEffect effect = new AddCardSubTypeEnteringTargetEffect(subType, Duration.WhileOnBattlefield);
             effect.setTargetPointer(new FixedTarget(target, game));
             game.addEffect(effect, source);
         }
@@ -229,44 +231,63 @@ class AddSubtypeEnteringCreatureEffect extends ReplacementEffectImpl {
 class AddCardSubTypeEnteringTargetEffect extends ContinuousEffectImpl {
 
     private final SubType addedSubType;
-    private final MageObjectReference mor;
-    private Card card;
 
-    AddCardSubTypeEnteringTargetEffect(MageObjectReference mor, SubType addedSubType, Duration duration) {
+    AddCardSubTypeEnteringTargetEffect(SubType addedSubType, Duration duration) {
         super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
         this.addedSubType = addedSubType;
-        this.mor = mor;
     }
 
     protected AddCardSubTypeEnteringTargetEffect(final AddCardSubTypeEnteringTargetEffect effect) {
         super(effect);
         this.addedSubType = effect.addedSubType;
-        this.mor = effect.mor;
-        this.card = effect.card;
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Spell spell = game.getSpell(getTargetPointer().getFirst(game, source));
-        MageObject target = game.getObject(getTargetPointer().getFirst(game, source));
-        if (spell != null) {
-            card = spell.getCard();
-        }
-        for (StackObject stackObject : game.getStack()) {
-            if (stackObject instanceof Spell
-                    && target != null
-                    && target.equals(stackObject)
-                    && mor.refersTo(target, game)) {
-                setCreatureSubtype(stackObject, addedSubType, game);
-                setCreatureSubtype(((Spell) stackObject).getCard(), addedSubType, game);
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        if (getAffectedObjectsSet()) {
+            Spell spell = game.getSpell(getTargetPointer().getFirst(game, source));
+            if (spell != null) {
+                Card card = spell.getCard();
+                // set a mage object reference for the permanent on the battlefield
+                // target pointer will be used to the find the spell on the stack
+                MageObjectReference mor = new MageObjectReference(card, game, 1);
+                affectedObjectList.add(mor);
             }
         }
-        if (card != null
-                && game.getPermanent(card.getId()) != null
-                && game.getState().getZoneChangeCounter(card.getId()) == mor.getZoneChangeCounter() + 1) { // blinking, etc
-            game.getPermanent(card.getId()).addSubType(game, addedSubType);
+    }
+
+    @Override
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            if (object instanceof Spell) {
+                Spell spell = (Spell) object;
+                setCreatureSubtype(spell, addedSubType, game);
+                setCreatureSubtype(spell.getCard(), addedSubType, game);
+            } else {
+                Permanent permanent = (Permanent) object;
+                setCreatureSubtype(permanent, addedSubType, game);
+            }
         }
-        return true;
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        MageObject target = game.getSpell(getTargetPointer().getFirst(game, source));
+        if (target == null) {
+            for (MageObjectReference mor : affectedObjectList) {
+                target = mor.getPermanent(game);
+                if (target != null) {
+                    break;
+                }
+            }
+        }
+        if (target != null) {
+            affectedObjects.add(target);
+            return true;
+        }
+        this.discard();
+        return false;
     }
 
     private void setCreatureSubtype(MageObject object, SubType subtype, Game game) {

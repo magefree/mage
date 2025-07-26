@@ -1,23 +1,25 @@
 package mage.cards.a;
 
-import java.util.UUID;
-
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.common.counter.AddCountersAttachedEffect;
-import mage.constants.*;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.counter.AddCountersAttachedEffect;
+import mage.abilities.keyword.EnchantAbility;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-import mage.abilities.keyword.EnchantAbility;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -72,7 +74,16 @@ class AwakenedAwarenessEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Permanent permanent = (Permanent) object;
+            permanent.getPower().setModifiedBaseValue(1);
+            permanent.getToughness().setModifiedBaseValue(1);
+        }
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         Permanent enchantment = source.getSourcePermanentIfItStillExists(game);
         if (enchantment == null) {
             return false;
@@ -82,9 +93,7 @@ class AwakenedAwarenessEffect extends ContinuousEffectImpl {
         if (creature == null || !creature.isCreature(game)) {
             return false;
         }
-
-        creature.getPower().setModifiedBaseValue(1);
-        creature.getToughness().setModifiedBaseValue(1);
+        affectedObjects.add(creature);
         return true;
     }
 }

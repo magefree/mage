@@ -1,5 +1,6 @@
 package mage.abilities.effects.common.continuous;
 
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
@@ -11,6 +12,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
+
+import java.util.List;
 
 /**
  * @author BetaSteward_at_googlemail.com, North
@@ -66,25 +69,33 @@ public class BoostEnchantedEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = null;
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         if (getAffectedObjectsSet()) {
-            permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-            if (permanent == null) {
-                discard();
-                return true;
+            Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+            if (permanent != null) {
+                affectedObjects.add(permanent);
+            } else {
+                this.discard();
+                return false;
             }
         } else {
             Permanent equipment = game.getPermanent(source.getSourceId());
             if (equipment != null && equipment.getAttachedTo() != null) {
-                permanent = game.getPermanent(equipment.getAttachedTo());
+                Permanent attachedTo = game.getPermanent(equipment.getAttachedTo());
+                if (attachedTo != null) {
+                    affectedObjects.add(attachedTo);
+                }
             }
         }
-        if (permanent != null) {
+        return !affectedObjects.isEmpty();
+    }
+
+    @Override
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Permanent permanent = (Permanent) object;
             permanent.addPower(power.calculate(game, source, this));
             permanent.addToughness(toughness.calculate(game, source, this));
         }
-        return true;
     }
-
 }

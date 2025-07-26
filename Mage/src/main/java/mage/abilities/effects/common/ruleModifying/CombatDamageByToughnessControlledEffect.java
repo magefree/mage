@@ -1,5 +1,6 @@
 package mage.abilities.effects.common.ruleModifying;
 
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
@@ -10,6 +11,9 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
+
+import java.util.List;
 
 /**
  * @author TheElk801, xenohedron
@@ -49,11 +53,20 @@ public class CombatDamageByToughnessControlledEffect extends ContinuousEffectImp
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
         FilterCreaturePermanent filterPermanent = filter.copy();
         filterPermanent.add(new ControllerIdPredicate(source.getControllerId()));
         game.getCombat().setUseToughnessForDamage(true);
         game.getCombat().addUseToughnessForDamageFilter(filterPermanent);
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent == null) {
+            return false;
+        }
+        affectedObjects.add(permanent);
         return true;
     }
 }

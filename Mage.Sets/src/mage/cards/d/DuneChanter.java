@@ -1,6 +1,8 @@
 package mage.cards.d;
 
 import mage.MageInt;
+import mage.MageItem;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -19,7 +21,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterOwnedCard;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 import java.util.List;
@@ -88,50 +89,52 @@ class DuneChanterContinuousEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            ((MageObject) object).addSubType(game, subType);
+        }
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         UUID controllerId = source.getControllerId();
         Player controller = game.getPlayer(controllerId);
         if (controller == null) {
             return false;
         }
-
         // lands cards you own that aren't on the battlefield
         // in graveyard
         for (UUID cardId : controller.getGraveyard()) {
             Card card = game.getCard(cardId);
             if (filterCard.match(card, controllerId, source, game) && !card.hasSubtype(subType, game)) {
-                game.getState().getCreateMageObjectAttribute(card, game).getSubtype().add(subType);
+                affectedObjects.add(card);
             }
         }
         // on hand
         for (UUID cardId : controller.getHand()) {
             Card card = game.getCard(cardId);
             if (filterCard.match(card, controllerId, source, game) && !card.hasSubtype(subType, game)) {
-                game.getState().getCreateMageObjectAttribute(card, game).getSubtype().add(subType);
+                affectedObjects.add(card);
             }
         }
         // in exile
         for (Card card : game.getState().getExile().getAllCards(game, controllerId)) {
             if (filterCard.match(card, controllerId, source, game) && !card.hasSubtype(subType, game)) {
-                game.getState().getCreateMageObjectAttribute(card, game).getSubtype().add(subType);
+                affectedObjects.add(card);
             }
         }
         // in library
         for (Card card : controller.getLibrary().getCards(game)) {
             if (filterCard.match(card, controllerId, source, game) && !card.hasSubtype(subType, game)) {
-                game.getState().getCreateMageObjectAttribute(card, game).getSubtype().add(subType);
+                affectedObjects.add(card);
             }
         }
 
         // lands you control
-        List<Permanent> lands = game.getBattlefield().getAllActivePermanents(
-                filterPermanent, controllerId, game);
-        for (Permanent land : lands) {
-            if (land != null) {
-                land.addSubType(game, subType);
-            }
-        }
-        return true;
+        affectedObjects.addAll(game.getBattlefield().getAllActivePermanents(
+                filterPermanent, controllerId, game
+        ));
+        return !affectedObjects.isEmpty();
     }
 }
 

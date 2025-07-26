@@ -1,8 +1,8 @@
 package mage.cards.n;
 
+import mage.MageItem;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -22,6 +22,7 @@ import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -129,11 +130,22 @@ class ChangeCreatureTypeTargetEffect extends ContinuousEffectImpl {
             }
         }
     }
+    @Override
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            MageObject mageObject = (MageObject) object;
+            mageObject.removeSubType(game, fromSubType);
+            mageObject.addSubType(game, toSubType);
+        }
+    }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null) {
+            if (duration == Duration.Custom) {
+                discard();
+            }
             return false;
         }
         if (fromSubType == null) {
@@ -145,27 +157,14 @@ class ChangeCreatureTypeTargetEffect extends ContinuousEffectImpl {
             if (targetObject != null) {
                 objectFound = true;
                 if (targetObject.hasSubtype(fromSubType, game)) {
-                    targetObject.removeSubType(game, fromSubType);
-                    if (!targetObject.hasSubtype(toSubType, game)) {
-                        targetObject.addSubType(game, toSubType);
-                    }
+                    affectedObjects.add(targetObject);
                 }
             }
-            if (!objectFound && this.getDuration() == Duration.Custom) {
-                this.discard();
-            }
+        }
+        if (!objectFound && this.getDuration() == Duration.Custom) {
+            this.discard();
         }
         return true;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.TypeChangingEffects_4;
     }
 
     @Override

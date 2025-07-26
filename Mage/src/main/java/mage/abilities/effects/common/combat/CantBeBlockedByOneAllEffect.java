@@ -1,23 +1,26 @@
 
 package mage.abilities.effects.common.combat;
 
+import mage.MageItem;
+import mage.abilities.Ability;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
-import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
+
+import java.util.List;
 
 /**
  * @author LevelX2
  */
 public class CantBeBlockedByOneAllEffect extends ContinuousEffectImpl {
 
-    private FilterCreaturePermanent filter;
+    private final FilterCreaturePermanent filter;
     protected int amount;
 
     public CantBeBlockedByOneAllEffect(int amount, FilterCreaturePermanent filter) {
@@ -25,7 +28,7 @@ public class CantBeBlockedByOneAllEffect extends ContinuousEffectImpl {
     }
 
     public CantBeBlockedByOneAllEffect(int amount, FilterCreaturePermanent filter, Duration duration) {
-        super(duration, Outcome.Benefit);
+        super(duration, Layer.RulesEffects, SubLayer.NA, Outcome.Benefit);
         this.amount = amount;
         this.filter = filter;
         StringBuilder sb = new StringBuilder("each ").append(filter.getMessage()).append(" can't be blocked ");
@@ -48,24 +51,15 @@ public class CantBeBlockedByOneAllEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        switch (layer) {
-            case RulesEffects:
-                for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
-                    perm.setMinBlockedBy(amount);
-                }
-                break;
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            ((Permanent) object).setMinBlockedBy(amount);
         }
-        return true;
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.RulesEffects;
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        affectedObjects.addAll(game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game));
+        return !affectedObjects.isEmpty();
     }
 }

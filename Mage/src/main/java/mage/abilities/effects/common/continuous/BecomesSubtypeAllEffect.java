@@ -1,5 +1,6 @@
 package mage.abilities.effects.common.continuous;
 
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.*;
@@ -8,9 +9,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author LevelX2
@@ -50,24 +49,26 @@ public class BecomesSubtypeAllEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        boolean flag = false;
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
-            if (permanent == null) {
-                continue;
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        affectedObjects.addAll(game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game));
+        if (affectedObjects.isEmpty()) {
+            if (duration == Duration.Custom) {
+                this.discard();
             }
-            flag = true;
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Permanent permanent = (Permanent) object;
             if (loseOther) {
                 permanent.removeAllCreatureTypes(game);
             }
-            for (SubType subtype : subtypes) {
-                permanent.addSubType(game, subtype);
-            }
+            permanent.addSubType(game, subtypes);
         }
-        if (!flag && duration == Duration.Custom) {
-            discard();
-        }
-        return true;
     }
 
     private String setText() {

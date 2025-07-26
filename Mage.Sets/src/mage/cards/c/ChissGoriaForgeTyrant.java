@@ -1,6 +1,7 @@
 package mage.cards.c;
 
 import mage.MageInt;
+import mage.MageItem;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -158,25 +159,33 @@ class ChissGoriaForgeTyrantAffinityEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            game.getState().addOtherAbility((Card) object, new AffinityForArtifactsAbility());
+        }
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         if (!ChissGoriaForgeTyrantWatcher.checkRef(source, morSet, game)) {
             discard();
             return false;
         }
 
-        for (Card card : game.getExile().getAllCardsByRange(game, source.getControllerId())) {
-            if (morSet.contains(new MageObjectReference(card, game)) && card.isArtifact(game)) {
-                game.getState().addOtherAbility(card, new AffinityForArtifactsAbility());
+        for (MageObjectReference mor : morSet) {
+            Card card = mor.getCard(game);
+            if (card != null && card.isArtifact(game)) {
+                affectedObjects.add(card);
             }
         }
 
         for (StackObject stackObject : game.getStack()) {
-            if (!(stackObject instanceof Spell) || !stackObject.isControlledBy(source.getControllerId())) {
+            if (!(stackObject instanceof  Spell) || !stackObject.isControlledBy(source.getControllerId())) {
                 continue;
             }
             Card card = game.getCard(stackObject.getSourceId());
             if (card != null && morSet.contains(new MageObjectReference(card, game, -1))) {
-                game.getState().addOtherAbility(card, new AffinityForArtifactsAbility());
+                affectedObjects.add(card);
             }
         }
         return true;
