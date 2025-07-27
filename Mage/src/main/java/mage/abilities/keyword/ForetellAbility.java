@@ -11,11 +11,15 @@ import mage.abilities.costs.Costs;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.AsThoughEffectImpl;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.*;
 import mage.constants.*;
+import mage.filter.common.FilterNonlandCard;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -93,6 +97,10 @@ public class ForetellAbility extends SpecialAction {
     public static boolean isCardInForetell(Card card, Game game) {
         // searching ForetellCostAbility - it adds for foretelled cards only after exile
         return card.getAbilities(game).containsClass(ForetellCostAbility.class);
+    }
+
+    public static ContinuousEffect makeAddForetellEffect() {
+        return new ForetellAddAbilityEffect();
     }
 
     /**
@@ -541,4 +549,70 @@ class ForetellCostAbility extends SpellAbility {
         this.abilityName = abilityName;
     }
 
+}
+
+class ForetellAddAbilityEffect extends ContinuousEffectImpl {
+
+    private static final FilterNonlandCard filter = new FilterNonlandCard();
+
+    static {
+        filter.add(Predicates.not(new AbilityPredicate(ForetellAbility.class)));
+    }
+
+    ForetellAddAbilityEffect() {
+        super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+        this.staticText = "Each nonland card in your hand without foretell has foretell. Its foretell cost is equal to its mana cost reduced by {2}";
+    }
+
+    private ForetellAddAbilityEffect(final ForetellAddAbilityEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public ForetellAddAbilityEffect copy() {
+        return new ForetellAddAbilityEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
+        for (Card card : controller.getHand().getCards(filter, game)) {
+            ForetellAbility foretellAbility = null;
+            if (card instanceof SplitCard) {
+                String leftHalfCost = CardUtil.reduceCost(((SplitCard) card).getLeftHalfCard().getManaCost(), 2).getText();
+                String rightHalfCost = CardUtil.reduceCost(((SplitCard) card).getRightHalfCard().getManaCost(), 2).getText();
+                foretellAbility = new ForetellAbility(card, leftHalfCost, rightHalfCost);
+            } else if (card instanceof ModalDoubleFacedCard) {
+                ModalDoubleFacedCardHalf leftHalfCard = ((ModalDoubleFacedCard) card).getLeftHalfCard();
+                // If front side of MDFC is land, do nothing as Dream Devourer does not apply to lands
+                // MDFC cards in hand are considered lands if front side is land
+                if (!leftHalfCard.isLand(game)) {
+                    String leftHalfCost = CardUtil.reduceCost(leftHalfCard.getManaCost(), 2).getText();
+                    ModalDoubleFacedCardHalf rightHalfCard = ((ModalDoubleFacedCard) card).getRightHalfCard();
+                    if (rightHalfCard.isLand(game)) {
+                        foretellAbility = new ForetellAbility(card, leftHalfCost);
+                    } else {
+                        String rightHalfCost = CardUtil.reduceCost(rightHalfCard.getManaCost(), 2).getText();
+                        foretellAbility = new ForetellAbility(card, leftHalfCost, rightHalfCost);
+                    }
+                }
+            } else if (card instanceof CardWithSpellOption) {
+                String creatureCost = CardUtil.reduceCost(card.getMainCard().getManaCost(), 2).getText();
+                String spellCost = CardUtil.reduceCost(((CardWithSpellOption) card).getSpellCard().getManaCost(), 2).getText();
+                foretellAbility = new ForetellAbility(card, creatureCost, spellCost);
+            } else {
+                String costText = CardUtil.reduceCost(card.getManaCost(), 2).getText();
+                foretellAbility = new ForetellAbility(card, costText);
+            }
+            if (foretellAbility != null) {
+                foretellAbility.setSourceId(card.getId());
+                foretellAbility.setControllerId(card.getOwnerId());
+                game.getState().addOtherAbility(card, foretellAbility);
+            }
+        }
+        return true;
+    }
 }
