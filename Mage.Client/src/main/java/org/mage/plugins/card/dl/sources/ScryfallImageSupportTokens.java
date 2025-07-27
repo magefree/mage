@@ -1,9 +1,9 @@
 package org.mage.plugins.card.dl.sources;
 
-import mage.cards.repository.TokenRepository;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import mage.cards.repository.TokenRepository;
 
 /**
  * @author JayDi85
@@ -2787,6 +2787,7 @@ public class ScryfallImageSupportTokens {
 
             // EOE
             put("EOE/Drone", "https://api.scryfall.com/cards/teoe/3?format=image");
+            put("EOE/Emblem Tezzeret", "https://api.scryfall.com/cards/teoe/11?format=image");
             put("EOE/Human Soldier", "https://api.scryfall.com/cards/teoe/2?format=image");
             put("EOE/Lander/1", "https://api.scryfall.com/cards/teoe/4?format=image");
             put("EOE/Lander/2", "https://api.scryfall.com/cards/teoe/5?format=image");
