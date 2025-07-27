@@ -182,7 +182,7 @@ class ForetellExileEffect extends OneShotEffect {
         this.foretellSplitCost = foretellSplitCost;
     }
 
-    protected ForetellExileEffect(final ForetellExileEffect effect) {
+    private ForetellExileEffect(final ForetellExileEffect effect) {
         super(effect);
         this.card = effect.card;
         this.foretellCost = effect.foretellCost;
@@ -235,7 +235,7 @@ class ForetellLookAtCardEffect extends AsThoughEffectImpl {
         super(AsThoughEffectType.LOOK_AT_FACE_DOWN, Duration.EndOfGame, Outcome.AIDontUseIt);
     }
 
-    protected ForetellLookAtCardEffect(final ForetellLookAtCardEffect effect) {
+    private ForetellLookAtCardEffect(final ForetellLookAtCardEffect effect) {
         super(effect);
     }
 
@@ -273,13 +273,13 @@ class ForetellAddCostEffect extends ContinuousEffectImpl {
 
     private final MageObjectReference mor;
 
-    public ForetellAddCostEffect(MageObjectReference mor) {
+    ForetellAddCostEffect(MageObjectReference mor) {
         super(Duration.EndOfGame, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.mor = mor;
         staticText = "Foretold card";
     }
 
-    protected ForetellAddCostEffect(final ForetellAddCostEffect effect) {
+    private ForetellAddCostEffect(final ForetellAddCostEffect effect) {
         super(effect);
         this.mor = effect.mor;
     }
@@ -394,7 +394,7 @@ class ForetellCostAbility extends SpellAbility {
         this.addCost(new ManaCostsImpl<>(foretellCost));
     }
 
-    protected ForetellCostAbility(final ForetellCostAbility ability) {
+    private ForetellCostAbility(final ForetellCostAbility ability) {
         super(ability);
         this.spellAbilityType = ability.spellAbilityType;
         this.abilityName = ability.abilityName;
@@ -537,7 +537,7 @@ class ForetellCostAbility extends SpellAbility {
      * Used for split card in PlayerImpl method:
      * getOtherUseableActivatedAbilities
      */
-    public void setAbilityName(String abilityName) {
+    void setAbilityName(String abilityName) {
         this.abilityName = abilityName;
     }
 
