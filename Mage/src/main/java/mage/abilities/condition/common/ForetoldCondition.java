@@ -17,7 +17,7 @@ public enum ForetoldCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         ForetoldWatcher watcher = game.getState().getWatcher(ForetoldWatcher.class);
         if (watcher != null) {
-            return watcher.cardWasForetold(source.getSourceId());
+            return watcher.checkForetold(source.getSourceId(), game);
         }
         return false;
     }
