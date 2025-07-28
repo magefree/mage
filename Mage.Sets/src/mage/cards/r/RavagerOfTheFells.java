@@ -19,6 +19,7 @@ import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetOpponentOrPlaneswalker;
+import mage.target.targetpointer.EachTargetPointer;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -69,6 +70,7 @@ class RavagerOfTheFellsEffect extends OneShotEffect {
 
     RavagerOfTheFellsEffect() {
         super(Outcome.Damage);
+        this.setTargetPointer(new EachTargetPointer());
         staticText = "it deals 2 damage to target opponent or planeswalker and 2 damage " +
                 "to up to one target creature that player or that planeswalker's controller controls.";
     }
@@ -84,10 +86,11 @@ class RavagerOfTheFellsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        game.damagePlayerOrPermanent(source.getTargets().get(0).getFirstTarget(), 2, source.getSourceId(), source, game, false, true);
-        Permanent creature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
-        if (creature != null) {
-            creature.damage(2, source.getSourceId(), source, game, false, true);
+        for (UUID targetId : getTargetPointer().getTargets(game, source)) {
+            game.damagePlayerOrPermanent(
+                    targetId, 2, source.getSourceId(), source,
+                    game, false, true
+            );
         }
         return true;
     }
