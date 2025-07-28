@@ -13,17 +13,20 @@ public class DuelCommander extends Commander {
         banned.add("Balance");
         banned.add("Bazaar of Baghdad");
         banned.add("Black Lotus");
+        banned.add("Blood Moon");
         banned.add("Capture of Jingzhou");
         banned.add("Cavern of Souls");
         banned.add("Channel");
         banned.add("Chrome Mox");
         banned.add("Comet, Stellar Pup");
+        banned.add("Dark Ritual");
         banned.add("Deadly Rollick");
         banned.add("Deflecting Swat");
         banned.add("Dig Through Time");
         banned.add("Emrakul, the Aeons Torn");
         banned.add("Entomb");
         banned.add("Fastbond");
+        banned.add("Force of Will");
         banned.add("Field of the Dead");
         banned.add("Fierce Guardianship");
         banned.add("Flawless Maneuver");
@@ -82,6 +85,7 @@ public class DuelCommander extends Commander {
         banned.add("Tolarian Academy");
         banned.add("Trazyn The Infinite");
         banned.add("Treasure Cruise");
+        banned.add("Underworld Breach");
         banned.add("Uro, Titan of Nature's Wrath");
         banned.add("Vampiric Tutor");
         banned.add("Wasteland");
