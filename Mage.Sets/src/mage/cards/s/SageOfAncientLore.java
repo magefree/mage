@@ -4,9 +4,8 @@ import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.WerewolfFrontTriggeredAbility;
-import mage.abilities.condition.common.TransformedCondition;
+import mage.abilities.condition.common.NotTransformedCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
@@ -35,10 +34,13 @@ public final class SageOfAncientLore extends CardImpl {
         this.secondSideCardClazz = mage.cards.w.WerewolfOfAncientHunger.class;
 
         // Sage of Ancient Lore's power and toughness are each equal to the number of cards in your hand.
-        DynamicValue xValue = CardsInControllerHandCount.ANY;
-        this.addAbility(new SimpleStaticAbility(Zone.ALL,
-                new ConditionalContinuousEffect(new SetBasePowerToughnessSourceEffect(xValue),
-                        new TransformedCondition(true), "{this}'s power and toughness are each equal to the total number of cards in your hand")));
+        this.addAbility(new SimpleStaticAbility(
+                Zone.ALL,
+                new ConditionalContinuousEffect(
+                        new SetBasePowerToughnessSourceEffect(CardsInControllerHandCount.ANY), NotTransformedCondition.instance,
+                        "{this}'s power and toughness are each equal to the total number of cards in your hand"
+                )
+        ));
 
         // When Sage of Ancient Lore enters the battlefield, draw a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1), false));

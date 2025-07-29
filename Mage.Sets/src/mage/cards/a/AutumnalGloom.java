@@ -1,21 +1,20 @@
 package mage.cards.a;
 
-import java.util.UUID;
-
-import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.TargetController;
+
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -31,10 +30,9 @@ public final class AutumnalGloom extends CardImpl {
 
         // <i>Delirium</i> &mdash; At the beginning of your end step, if there are four or more card types among cards in your graveyard, transform Autumnal Gloom.
         this.addAbility(new TransformAbility());
-        Ability ability = new BeginningOfEndStepTriggeredAbility(TargetController.YOU, new TransformSourceEffect(), false, DeliriumCondition.instance);
-        ability.setAbilityWord(AbilityWord.DELIRIUM);
-        ability.addHint(CardTypesInGraveyardCount.YOU.getHint());
-        this.addAbility(ability);
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(
+                TargetController.YOU, new TransformSourceEffect(), false, DeliriumCondition.instance
+        ).setAbilityWord(AbilityWord.DELIRIUM).addHint(CardTypesInGraveyardCount.YOU.getHint()));
     }
 
     private AutumnalGloom(final AutumnalGloom card) {
