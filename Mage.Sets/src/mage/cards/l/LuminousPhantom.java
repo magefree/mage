@@ -2,9 +2,8 @@ package mage.cards.l;
 
 import mage.MageInt;
 import mage.abilities.common.LeavesBattlefieldAllTriggeredAbility;
-import mage.abilities.common.PutIntoGraveFromAnywhereSourceAbility;
-import mage.abilities.effects.common.ExileSourceEffect;
 import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.keyword.DisturbAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -36,7 +35,7 @@ public final class LuminousPhantom extends CardImpl {
         this.addAbility(new LeavesBattlefieldAllTriggeredAbility(new GainLifeEffect(1), StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL));
 
         // If Luminous Phantom would be put into a graveyard from anywhere, exile it instead.
-        this.addAbility(new PutIntoGraveFromAnywhereSourceAbility(new ExileSourceEffect().setText("exile it instead")));
+        this.addAbility(DisturbAbility.makeBackAbility());
     }
 
     private LuminousPhantom(final LuminousPhantom card) {

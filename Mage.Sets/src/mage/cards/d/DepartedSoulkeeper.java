@@ -2,8 +2,7 @@ package mage.cards.d;
 
 import mage.MageInt;
 import mage.abilities.common.CanBlockOnlyFlyingAbility;
-import mage.abilities.common.PutIntoGraveFromAnywhereSourceAbility;
-import mage.abilities.effects.common.ExileSourceEffect;
+import mage.abilities.keyword.DisturbAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -34,7 +33,7 @@ public final class DepartedSoulkeeper extends CardImpl {
         this.addAbility(new CanBlockOnlyFlyingAbility());
 
         // If Departed Soulkeeper would be put into a graveyard from anywhere, exile it instead.
-        this.addAbility(new PutIntoGraveFromAnywhereSourceAbility(new ExileSourceEffect().setText("exile it instead")));
+        this.addAbility(DisturbAbility.makeBackAbility());
     }
 
     private DepartedSoulkeeper(final DepartedSoulkeeper card) {

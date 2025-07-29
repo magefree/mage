@@ -1,11 +1,10 @@
 package mage.cards.c;
 
 import mage.MageInt;
-import mage.abilities.common.PutIntoGraveFromAnywhereSourceAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.ExileSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
+import mage.abilities.keyword.DisturbAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.WardAbility;
@@ -48,7 +47,7 @@ public final class ChapelShieldgeist extends CardImpl {
                 "counter it unless that player pays 1.)</i>")));
 
         // If Chapel Shieldgeist would be put into a graveyard from anywhere, exile it instead.
-        this.addAbility(new PutIntoGraveFromAnywhereSourceAbility(new ExileSourceEffect().setText("exile it instead")));
+        this.addAbility(DisturbAbility.makeBackAbility());
     }
 
     private ChapelShieldgeist(final ChapelShieldgeist card) {

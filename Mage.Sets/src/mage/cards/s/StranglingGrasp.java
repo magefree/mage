@@ -1,10 +1,10 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -14,11 +14,14 @@ import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
 import mage.filter.common.FilterNonlandPermanent;
+import mage.filter.predicate.permanent.CanBeSacrificedPredicate;
+import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -44,13 +47,10 @@ public final class StranglingGrasp extends CardImpl {
         TargetPermanent auraTarget = new TargetPermanent(filter);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget);
-        this.addAbility(ability);
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // At the beginning of your upkeep, enchanted permanent's controller sacrifices a nonland permanent and loses 1 life.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new StranglingGraspEffect()
-        ));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new StranglingGraspEffect()));
     }
 
     private StranglingGrasp(final StranglingGrasp card) {
@@ -69,6 +69,7 @@ class StranglingGraspEffect extends OneShotEffect {
 
     static {
         filter.add(TargetController.YOU.getControllerPredicate());
+        filter.add(CanBeSacrificedPredicate.instance);
     }
 
     StranglingGraspEffect() {
@@ -87,15 +88,13 @@ class StranglingGraspEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent sourcePermanent = source.getSourcePermanentOrLKI(game);
-        if (sourcePermanent == null) {
-            return false;
-        }
-        Permanent attachedTo = game.getPermanentOrLKIBattlefield(sourcePermanent.getAttachedTo());
-        if (attachedTo == null) {
-            return false;
-        }
-        Player player = game.getPlayer(attachedTo.getControllerId());
+        Player player = Optional
+                .ofNullable(source.getSourcePermanentOrLKI(game))
+                .map(Permanent::getAttachedTo)
+                .map(game::getPermanentOrLKIBattlefield)
+                .map(Controllable::getControllerId)
+                .map(game::getPlayer)
+                .orElse(null);
         if (player == null) {
             return false;
         }
