@@ -1,8 +1,9 @@
 package org.mage.test.cards.abilities.keywords;
 
-import mage.cards.s.SpringOfEternalPeace;
+import mage.ObjectColor;
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import org.junit.Test;
@@ -519,6 +520,54 @@ public class TransformTest extends CardTestPlayerBase {
         assertLife(playerB, 20);
         assertGraveyardCount(playerA, "Dress Down", 1);
         assertPermanentCount(playerA, "Huntmaster of the Fells", 1);
-        assertPermanentCount(playerA, 6+1+1);
+        assertPermanentCount(playerA, 6 + 1 + 1);
+    }
+
+    /**
+     * The following tests exist to make sure the TDFC refactor workaround functions correctly.
+     * They should eventually not be necessary
+     */
+
+    private static final String youth = "Cloistered Youth";
+
+    @Test
+    public void testWorkaroundCloisteredYouth() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        addCard(Zone.HAND, playerA, youth);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, youth);
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+
+        setStrictChooseMode(true);
+        execute();
+
+        assertPowerToughness(playerA, youth, 1, 1);
+        assertColor(playerA, youth, ObjectColor.WHITE, true);
+        assertColor(playerA, youth, ObjectColor.BLACK, false);
+        assertSubtype(youth, SubType.HUMAN);
+        assertNotSubtype(youth, SubType.HORROR);
+    }
+
+    private static final String fiend = "Unholy Fiend";
+
+    @Test
+    public void testWorkaroundUnholyFiend() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        addCard(Zone.HAND, playerA, youth);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, youth);
+        setChoice(playerA, true);
+        setStopAt(3, PhaseStep.END_TURN);
+
+        setStrictChooseMode(true);
+        execute();
+
+        assertPowerToughness(playerA, fiend, 3, 3);
+        assertColor(playerA, fiend, ObjectColor.BLACK, true);
+        assertColor(playerA, fiend, ObjectColor.WHITE, false);
+        assertSubtype(fiend, SubType.HORROR);
+        assertNotSubtype(fiend, SubType.HUMAN);
+        assertLife(playerA, 20 - 1);
     }
 }

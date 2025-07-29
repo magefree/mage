@@ -1,33 +1,22 @@
-
 package mage.cards.u;
 
-import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
-import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
+import mage.cards.c.CloisteredYouth;
 import mage.constants.CardType;
-import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
- *
  * @author Loki
  */
 public final class UnholyFiend extends CardImpl {
 
     public UnholyFiend(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
-        this.subtype.add(SubType.HORROR);
-
-        this.color.setBlack(true);
-
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-
+        super(ownerId, setInfo, new CardType[]{}, "");
         this.nightCard = true;
-
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new LoseLifeSourceControllerEffect(1)));
+        TransformingDoubleFacedCard.copyToBackFace(new CloisteredYouth(ownerId, setInfo), this);
     }
 
     private UnholyFiend(final UnholyFiend card) {
