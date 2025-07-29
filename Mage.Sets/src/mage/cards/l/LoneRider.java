@@ -3,9 +3,8 @@ package mage.cards.l;
 import mage.MageInt;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.YouGainedLifeCondition;
+import mage.abilities.dynamicvalue.common.ControllerGainedLifeCount;
 import mage.abilities.effects.common.TransformSourceEffect;
-import mage.abilities.hint.ConditionHint;
-import mage.abilities.hint.Hint;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.TransformAbility;
@@ -26,7 +25,6 @@ import java.util.UUID;
 public final class LoneRider extends CardImpl {
 
     private static final Condition condition = new YouGainedLifeCondition(ComparisonType.MORE_THAN, 2);
-    private static final Hint hint = new ConditionHint(condition);
 
     public LoneRider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
@@ -47,7 +45,7 @@ public final class LoneRider extends CardImpl {
         this.addAbility(new TransformAbility());
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 TargetController.NEXT, new TransformSourceEffect(), false
-        ).withInterveningIf(condition).addHint(hint), new PlayerGainedLifeWatcher());
+        ).withInterveningIf(condition).addHint(ControllerGainedLifeCount.getHint()), new PlayerGainedLifeWatcher());
     }
 
     private LoneRider(final LoneRider card) {

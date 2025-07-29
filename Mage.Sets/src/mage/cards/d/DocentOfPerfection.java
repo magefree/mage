@@ -1,42 +1,40 @@
-
 package mage.cards.d;
-
-import java.util.UUID;
 
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
+import mage.constants.ComparisonType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.filter.FilterPermanent;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicates;
-import mage.game.Game;
+import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.HumanWizardToken;
-import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  * @author fireshoes
  */
 public final class DocentOfPerfection extends CardImpl {
 
-    private static final FilterSpell filterSpell = new FilterSpell("an instant or sorcery spell");
-
-    static {
-        filterSpell.add(Predicates.or(
-                CardType.INSTANT.getPredicate(),
-                CardType.SORCERY.getPredicate()));
-    }
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(
+            new FilterControlledPermanent(SubType.WIZARD), ComparisonType.MORE_THAN, 2
+    );
+    private static final Hint hint = new ValueHint(
+            "Wizards you control", new PermanentsOnBattlefieldCount(new FilterControlledPermanent(SubType.WIZARD))
+    );
 
     public DocentOfPerfection(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
@@ -53,10 +51,15 @@ public final class DocentOfPerfection extends CardImpl {
         // Whenever you cast an instant or sorcery spell, create a 1/1 blue Human Wizard creature token.
         // Then if you control three or more Wizards, transform Docent of Perfection.
         this.addAbility(new TransformAbility());
-        Effect effect = new DocentOfPerfectionEffect();
-        Ability ability = new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new HumanWizardToken()), filterSpell, false);
-        ability.addEffect(effect);
-        this.addAbility(ability);
+        Ability ability = new SpellCastControllerTriggeredAbility(
+                new CreateTokenEffect(new HumanWizardToken()),
+                StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, false
+        );
+        ability.addEffect(new ConditionalOneShotEffect(
+                new TransformSourceEffect(), condition,
+                "Then if you control three or more Wizards, transform {this}"
+        ));
+        this.addAbility(ability.addHint(hint));
     }
 
     private DocentOfPerfection(final DocentOfPerfection card) {
@@ -66,40 +69,5 @@ public final class DocentOfPerfection extends CardImpl {
     @Override
     public DocentOfPerfection copy() {
         return new DocentOfPerfection(this);
-    }
-}
-
-class DocentOfPerfectionEffect extends OneShotEffect {
-
-    private static final FilterPermanent filter = new FilterPermanent("Wizards");
-
-    static {
-        filter.add(SubType.WIZARD.getPredicate());
-        filter.add(TargetController.YOU.getControllerPredicate());
-    }
-
-    public DocentOfPerfectionEffect() {
-        super(Outcome.Benefit);
-        staticText = "Then if you control three or more Wizards, transform {this}";
-    }
-
-    private DocentOfPerfectionEffect(final DocentOfPerfectionEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public DocentOfPerfectionEffect copy() {
-        return new DocentOfPerfectionEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            if (game.getBattlefield().count(filter, source.getControllerId(), source, game) >= 3) {
-                return new TransformSourceEffect().apply(game, source);
-            }
-        }
-        return false;
     }
 }

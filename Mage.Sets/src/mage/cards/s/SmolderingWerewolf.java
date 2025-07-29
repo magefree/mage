@@ -1,14 +1,10 @@
-
 package mage.cards.s;
-
-import java.util.UUID;
 
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
@@ -16,8 +12,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  * @author fireshoes
@@ -34,9 +31,7 @@ public final class SmolderingWerewolf extends CardImpl {
         this.secondSideCardClazz = mage.cards.e.EruptingDreadwolf.class;
 
         // When Smoldering Werewolf enters the battlefield, it deals 1 damage to each of up to two target creatures.
-        Effect effect = new DamageTargetEffect(1);
-        effect.setText("it deals 1 damage to each of up to two target creatures");
-        Ability ability = new EntersBattlefieldTriggeredAbility(effect, false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(1, "it"));
         ability.addTarget(new TargetCreaturePermanent(0, 2));
         this.addAbility(ability);
 
