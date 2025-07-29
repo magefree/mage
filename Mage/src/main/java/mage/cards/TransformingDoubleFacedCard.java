@@ -2,6 +2,7 @@ package mage.cards;
 
 import mage.ObjectColor;
 import mage.abilities.Ability;
+import mage.abilities.keyword.TransformAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
@@ -73,6 +74,7 @@ public abstract class TransformingDoubleFacedCard extends CardImpl {
         for (Ability ability : this.getLeftHalfCard().getAbilities()) {
             this.addAbility(ability);
         }
+        this.addAbility(new TransformAbility());
         this.power = this.getLeftHalfCard().getPower().copy();
         this.toughness = this.getLeftHalfCard().getToughness().copy();
     }

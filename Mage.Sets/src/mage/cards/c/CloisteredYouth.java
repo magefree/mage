@@ -2,7 +2,6 @@ package mage.cards.c;
 
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
-import mage.abilities.keyword.TransformAbility;
 import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardSetInfo;
@@ -30,7 +29,6 @@ public final class CloisteredYouth extends TransformingDoubleFacedCard {
         this.secondSideCardClazz = mage.cards.u.UnholyFiend.class;
 
         // At the beginning of your upkeep, you may transform Cloistered Youth.
-        this.getLeftHalfCard().addAbility(new TransformAbility());
         this.getLeftHalfCard().addAbility(new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(), true));
 
         // Unholy Fiend
