@@ -75,7 +75,6 @@ public abstract class TransformingDoubleFacedCard extends CardImpl {
 
     protected void finalizeDFC() {
         this.getSuperType().addAll(this.getLeftHalfCard().getSuperType());
-        this.getCardType().addAll(this.getLeftHalfCard().getCardType());
         this.getSubtype().addAll(this.getLeftHalfCard().getSubtype());
         for (Ability ability : this.getLeftHalfCard().getAbilities()) {
             if (!ability.equals(this.getLeftHalfCard().getSpellAbility())) {
@@ -104,7 +103,6 @@ public abstract class TransformingDoubleFacedCard extends CardImpl {
     public static void copyToBackFace(TransformingDoubleFacedCard tdfc, Card card) {
         card.getColor().setColor(tdfc.getRightHalfCard().getColor());
         card.getSuperType().addAll(tdfc.getRightHalfCard().getSuperType());
-        card.getCardType().addAll(tdfc.getRightHalfCard().getCardType());
         card.getSubtype().addAll(tdfc.getRightHalfCard().getSubtype());
         for (Ability ability : tdfc.getRightHalfCard().getAbilities()) {
             if (!ability.equals(tdfc.getRightHalfCard().getSpellAbility())) {

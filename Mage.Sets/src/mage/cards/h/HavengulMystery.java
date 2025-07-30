@@ -13,7 +13,7 @@ import java.util.UUID;
 public final class HavengulMystery extends CardImpl {
 
     public HavengulMystery(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{}, "");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
         this.nightCard = true;
         TransformingDoubleFacedCard.copyToBackFace(new mage.cards.h.HavengulLaboratory(ownerId, setInfo), this);
     }

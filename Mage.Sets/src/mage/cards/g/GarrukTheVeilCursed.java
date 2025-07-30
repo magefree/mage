@@ -13,7 +13,7 @@ import java.util.UUID;
 public final class GarrukTheVeilCursed extends CardImpl {
 
     public GarrukTheVeilCursed(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{}, "");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "");
         this.nightCard = true;
         TransformingDoubleFacedCard.copyToBackFace(new mage.cards.g.GarrukRelentless(ownerId, setInfo), this);
     }

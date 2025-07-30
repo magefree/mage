@@ -13,7 +13,7 @@ import java.util.UUID;
 public final class ValorsReachTagTeam extends CardImpl {
 
     public ValorsReachTagTeam(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{}, "");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "");
         this.nightCard = true;
         TransformingDoubleFacedCard.copyToBackFace(new mage.cards.i.InvasionOfKylem(ownerId, setInfo), this);
     }

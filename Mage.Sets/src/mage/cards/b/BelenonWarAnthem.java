@@ -13,7 +13,7 @@ import java.util.UUID;
 public final class BelenonWarAnthem extends CardImpl {
 
     public BelenonWarAnthem(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{}, "");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "");
         this.nightCard = true;
         TransformingDoubleFacedCard.copyToBackFace(new mage.cards.i.InvasionOfBelenon(ownerId, setInfo), this);
     }

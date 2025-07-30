@@ -13,7 +13,7 @@ import java.util.UUID;
 public final class PersistentNightmare extends CardImpl {
 
     public PersistentNightmare(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{}, "");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
         this.nightCard = true;
         TransformingDoubleFacedCard.copyToBackFace(new mage.cards.s.StartledAwake(ownerId, setInfo), this);
     }
