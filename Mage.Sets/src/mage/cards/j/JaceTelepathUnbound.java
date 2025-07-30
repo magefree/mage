@@ -15,7 +15,7 @@ public final class JaceTelepathUnbound extends CardImpl {
     public JaceTelepathUnbound(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{}, "");
         this.nightCard = true;
-        TransformingDoubleFacedCard.copyToBackFace(new JaceVrynsProdigy(ownerId, setInfo), this);
+        TransformingDoubleFacedCard.copyToBackFace(new mage.cards.j.JaceVrynsProdigy(ownerId, setInfo), this);
     }
 
     private JaceTelepathUnbound(final JaceTelepathUnbound card) {

@@ -15,7 +15,7 @@ public final class HavengulMystery extends CardImpl {
     public HavengulMystery(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{}, "");
         this.nightCard = true;
-        TransformingDoubleFacedCard.copyToBackFace(new HavengulLaboratory(ownerId, setInfo), this);
+        TransformingDoubleFacedCard.copyToBackFace(new mage.cards.h.HavengulLaboratory(ownerId, setInfo), this);
     }
 
     private HavengulMystery(final HavengulMystery card) {

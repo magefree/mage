@@ -3,7 +3,6 @@ package mage.cards.o;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.TransformingDoubleFacedCard;
-import mage.cards.w.WestvaleAbbey;
 import mage.constants.CardType;
 
 import java.util.UUID;
@@ -16,7 +15,7 @@ public final class OrmendahlProfanePrince extends CardImpl {
     public OrmendahlProfanePrince(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{}, "");
         this.nightCard = true;
-        TransformingDoubleFacedCard.copyToBackFace(new WestvaleAbbey(ownerId, setInfo), this);
+        TransformingDoubleFacedCard.copyToBackFace(new mage.cards.w.WestvaleAbbey(ownerId, setInfo), this);
     }
 
     private OrmendahlProfanePrince(final OrmendahlProfanePrince card) {
