@@ -18,6 +18,7 @@ import mage.game.GameState;
 import mage.game.Ownerable;
 import mage.game.permanent.Permanent;
 import mage.util.ManaUtil;
+import mage.watchers.Watcher;
 import mage.watchers.common.CommanderPlaysCountWatcher;
 
 import java.util.List;
@@ -154,6 +155,11 @@ public interface Card extends MageObject, Ownerable {
     Counters getCounters(Game game);
 
     Counters getCounters(GameState state);
+
+    default void addAbility(Ability ability, Watcher watcher) {
+        addAbility(ability);
+        ability.addWatcher(watcher);
+    }
 
     void addAbility(Ability ability);
 

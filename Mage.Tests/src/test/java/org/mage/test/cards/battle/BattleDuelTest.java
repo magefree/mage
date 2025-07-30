@@ -4,6 +4,7 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 
 /**
  * @author TheElk801, JayDi85
@@ -263,5 +264,25 @@ public class BattleDuelTest extends BattleBaseTest {
         assertLife(playerB, 20);
         assertCounterCount(belenon, CounterType.DEFENSE, 5);
         assertCounterCount(fayden, CounterType.LOYALTY, 3 - 2);
+    }
+
+    @Test
+    public void testInvasionOfKylem() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plateau", 4 + 6);
+        addCard(Zone.HAND, playerA, kylem);
+        addCard(Zone.HAND, playerA, impact);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, kylem);
+        addTarget(playerA, TestPlayer.TARGET_SKIP); // don't choose any targets for etb trigger
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, impact, kylem);
+        setChoice(playerA, true); // yes to cast it transformed
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, kylem, 0);
+        assertPermanentCount(playerA, "Warrior Token", 2);
     }
 }

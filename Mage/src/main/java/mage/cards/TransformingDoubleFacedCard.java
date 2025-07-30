@@ -41,8 +41,8 @@ public abstract class TransformingDoubleFacedCard extends CardImpl {
             SuperType[] superTypesRight, CardType[] typesRight, SubType[] subTypesRight, String colorRight
     ) {
         super(ownerId, setInfo, typesLeft, costsLeft);
-        this.leftHalfCard = new TransformingDoubleFacedCardHalfImpl(ownerId, setInfo, costsLeft);
-        this.rightHalfCard = new TransformingDoubleFacedCardHalfImpl(ownerId, setInfo, "");
+        this.leftHalfCard = new TransformingDoubleFacedCardHalfImpl(ownerId, setInfo, typesLeft, costsLeft);
+        this.rightHalfCard = new TransformingDoubleFacedCardHalfImpl(ownerId, setInfo, typesRight, "");
         for (SuperType superType : superTypesLeft) {
             this.getLeftHalfCard().getSuperType().add(superType);
         }
@@ -50,7 +50,6 @@ public abstract class TransformingDoubleFacedCard extends CardImpl {
         for (SuperType superType : superTypesRight) {
             this.getRightHalfCard().getSuperType().add(superType);
         }
-        this.getRightHalfCard().addCardType(typesRight);
         this.getRightHalfCard().setName(secondSideName);
         this.getRightHalfCard().addSubType(subTypesRight);
         this.getRightHalfCard().getColor().addColor(new ObjectColor(colorRight));
@@ -86,11 +85,14 @@ public abstract class TransformingDoubleFacedCard extends CardImpl {
         if (!this.getAbilities().containsClass(TransformAbility.class)) {
             this.addAbility(new TransformAbility());
         }
-        for (Effect effect : this.getLeftHalfCard().getSpellAbility().getEffects()) {
-            this.getSpellAbility().addEffect(effect);
-        }
-        for (Target target : this.getLeftHalfCard().getSpellAbility().getTargets()) {
-            this.getSpellAbility().addTarget(target);
+        if (this.getLeftHalfCard().getSpellAbility() != null) {
+            for (Effect effect : this.getLeftHalfCard().getSpellAbility().getEffects()) {
+                this.getSpellAbility().addEffect(effect);
+            }
+            for (Target target : this.getLeftHalfCard().getSpellAbility().getTargets()) {
+                this.getSpellAbility().addTarget(target);
+            }
+            this.getSpellAbility().setTargetAdjuster(this.getLeftHalfCard().getSpellAbility().getTargetAdjuster());
         }
         this.power = this.getLeftHalfCard().getPower().copy();
         this.toughness = this.getLeftHalfCard().getToughness().copy();
@@ -109,11 +111,14 @@ public abstract class TransformingDoubleFacedCard extends CardImpl {
                 card.addAbility(ability);
             }
         }
-        for (Effect effect : tdfc.getRightHalfCard().getSpellAbility().getEffects()) {
-            card.getSpellAbility().addEffect(effect);
-        }
-        for (Target target : tdfc.getRightHalfCard().getSpellAbility().getTargets()) {
-            card.getSpellAbility().addTarget(target);
+        if (tdfc.getRightHalfCard().getSpellAbility() != null) {
+            for (Effect effect : tdfc.getRightHalfCard().getSpellAbility().getEffects()) {
+                card.getSpellAbility().addEffect(effect);
+            }
+            for (Target target : tdfc.getRightHalfCard().getSpellAbility().getTargets()) {
+                card.getSpellAbility().addTarget(target);
+            }
+            card.getSpellAbility().setTargetAdjuster(tdfc.getRightHalfCard().getSpellAbility().getTargetAdjuster());
         }
         card.setPT(tdfc.getRightHalfCard().getPower().copy(), tdfc.getRightHalfCard().getToughness().copy());
         card.setStartingLoyalty(tdfc.getRightHalfCard().getStartingLoyalty());

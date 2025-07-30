@@ -26,7 +26,6 @@ import mage.game.stack.StackObject;
 import mage.util.CardUtil;
 import mage.util.GameLog;
 import mage.util.ManaUtil;
-import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
 
 import java.lang.reflect.Constructor;
@@ -355,11 +354,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 }
             }
         }
-    }
-
-    protected void addAbility(Ability ability, Watcher watcher) {
-        addAbility(ability);
-        ability.addWatcher(watcher);
     }
 
     public void replaceSpellAbility(SpellAbility newAbility) {

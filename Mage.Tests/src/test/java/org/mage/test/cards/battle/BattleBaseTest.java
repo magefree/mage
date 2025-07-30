@@ -19,6 +19,7 @@ public class BattleBaseTest extends CardTestPlayerBaseWithAIHelps {
     protected static final String impact = "Explosive Impact";
     protected static final String stifle = "Stifle";
     protected static final String fayden = "Dack Fayden";
+    protected static final String kylem = "Invasion of Kylem";
 
     protected void assertBattle(Player controller, Player protector, String name) {
         assertPermanentCount(controller, name, 1);

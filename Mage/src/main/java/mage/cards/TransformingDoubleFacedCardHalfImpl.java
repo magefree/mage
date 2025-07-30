@@ -9,8 +9,8 @@ import java.util.UUID;
  */
 public class TransformingDoubleFacedCardHalfImpl extends CardImpl {
 
-    TransformingDoubleFacedCardHalfImpl(UUID ownerId, CardSetInfo setInfo, String costs) {
-        super(ownerId, setInfo, new CardType[]{}, costs);
+    TransformingDoubleFacedCardHalfImpl(UUID ownerId, CardSetInfo setInfo, CardType[] cardTypes, String costs) {
+        super(ownerId, setInfo, cardTypes, costs);
     }
 
     private TransformingDoubleFacedCardHalfImpl(final TransformingDoubleFacedCardHalfImpl card) {

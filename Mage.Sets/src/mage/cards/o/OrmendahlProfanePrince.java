@@ -1,43 +1,22 @@
-
 package mage.cards.o;
 
-import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.HasteAbility;
-import mage.abilities.keyword.IndestructibleAbility;
-import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
+import mage.cards.w.WestvaleAbbey;
 import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+
+import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 public final class OrmendahlProfanePrince extends CardImpl {
 
     public OrmendahlProfanePrince(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
-        this.supertype.add(SuperType.LEGENDARY);
-        this.subtype.add(SubType.DEMON);
-        this.power = new MageInt(9);
-        this.toughness = new MageInt(7);
-        this.color.setBlack(true);
-
-        // this card is the second face of double-faced card
+        super(ownerId, setInfo, new CardType[]{}, "");
         this.nightCard = true;
-
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        // Lifelink
-        this.addAbility(LifelinkAbility.getInstance());
-        // Indestructible
-        this.addAbility(IndestructibleAbility.getInstance());
-        // Haste
-        this.addAbility(HasteAbility.getInstance());
+        TransformingDoubleFacedCard.copyToBackFace(new WestvaleAbbey(ownerId, setInfo), this);
     }
 
     private OrmendahlProfanePrince(final OrmendahlProfanePrince card) {
