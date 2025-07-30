@@ -63,7 +63,7 @@ enum HamletGluttonAdjuster implements CostAdjuster {
     @Override
     public void reduceCost(Ability ability, Game game) {
         if (BargainedCondition.instance.apply(game, ability)
-                || (game.inCheckPlayableState() && bargainCost.canPay(ability, null, ability.getControllerId(), game))) {
+                || (game.inCheckPlayableState() && bargainCost.canPay(ability, ability, ability.getControllerId(), game))) {
             CardUtil.reduceCost(ability, 2);
         }
     }
