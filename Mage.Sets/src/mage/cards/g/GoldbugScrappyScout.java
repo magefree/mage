@@ -1,20 +1,17 @@
 package mage.cards.g;
 
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CantBeCounteredControlledEffect;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.LivingMetalAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.FilterSpell;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -58,47 +55,5 @@ public final class GoldbugScrappyScout extends CardImpl {
     @Override
     public GoldbugScrappyScout copy() {
         return new GoldbugScrappyScout(this);
-    }
-}
-
-class GoldbugScrappyScoutTriggeredAbility extends TriggeredAbilityImpl {
-
-    GoldbugScrappyScoutTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1));
-        this.addEffect(new TransformSourceEffect());
-    }
-
-    private GoldbugScrappyScoutTriggeredAbility(final GoldbugScrappyScoutTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public GoldbugScrappyScoutTriggeredAbility copy() {
-        return new GoldbugScrappyScoutTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DECLARED_ATTACKERS;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return game
-                .getCombat()
-                .getAttackers()
-                .contains(getSourceId())
-                && game
-                .getCombat()
-                .getAttackers()
-                .stream()
-                .map(game::getPermanent)
-                .filter(Objects::nonNull)
-                .anyMatch(permanent -> permanent.hasSubtype(SubType.HUMAN, game));
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} and at least one Human attack, draw a card and convert {this}.";
     }
 }
