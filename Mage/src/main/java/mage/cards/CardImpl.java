@@ -1,5 +1,6 @@
 package mage.cards;
 
+import mage.MageInt;
 import mage.MageObject;
 import mage.MageObjectImpl;
 import mage.Mana;
@@ -25,7 +26,6 @@ import mage.game.stack.StackObject;
 import mage.util.CardUtil;
 import mage.util.GameLog;
 import mage.util.ManaUtil;
-import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
 
 import java.lang.reflect.Constructor;
@@ -356,11 +356,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         }
     }
 
-    protected void addAbility(Ability ability, Watcher watcher) {
-        addAbility(ability);
-        ability.addWatcher(watcher);
-    }
-
     public void replaceSpellAbility(SpellAbility newAbility) {
         SpellAbility oldAbility = this.getSpellAbility();
         while (oldAbility != null) {
@@ -391,6 +386,17 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     public void setOwnerId(UUID ownerId) {
         this.ownerId = ownerId;
         this.abilities.setControllerId(ownerId);
+    }
+
+    @Override
+    public void setPT(int power, int toughness) {
+        this.setPT(new MageInt(power), new MageInt(toughness));
+    }
+
+    @Override
+    public void setPT(MageInt power, MageInt toughness) {
+        this.power = power;
+        this.toughness = toughness;
     }
 
     @Override
@@ -947,7 +953,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                     }
                 }
             }
-            if (controller != null && spellAbility != null && !spellAbility.getTargets().isEmpty()){
+            if (controller != null && spellAbility != null && !spellAbility.getTargets().isEmpty()) {
                 // Line of code below functionally gets the target of the aura's Enchant ability, then compares to this permanent. Enchant improperly implemented in XMage, see #9583
                 // Note: stillLegalTarget used exclusively to account for Dream Leash. Can be made canTarget in the event that that card is rewritten (and "stillLegalTarget" removed from TargetImpl).
                 canAttach &= spellAbility.getTargets().get(0).copy().withNotTarget(true).stillLegalTarget(controller, this.getId(), source, game);

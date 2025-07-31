@@ -778,6 +778,16 @@ public class Spell extends StackObjectImpl implements Card {
     }
 
     @Override
+    public void setPT(int power, int toughness) {
+        throw new UnsupportedOperationException("Unsupported operation");
+    }
+
+    @Override
+    public void setPT(MageInt power, MageInt toughness) {
+        throw new UnsupportedOperationException("Unsupported operation");
+    }
+
+    @Override
     public List<String> getRules() {
         return card.getRules();
     }
