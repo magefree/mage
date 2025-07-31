@@ -5,7 +5,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author LevelX2
  */
 public final class Starter1999 extends ExpansionSet {
@@ -114,7 +113,7 @@ public final class Starter1999 extends ExpansionSet {
         cards.add(new SetCardInfo("Man-o'-War", 41, Rarity.UNCOMMON, mage.cards.m.ManOWar.class, RETRO_ART));
         cards.add(new SetCardInfo("Merfolk of the Pearl Trident", 42, Rarity.COMMON, mage.cards.m.MerfolkOfThePearlTrident.class, RETRO_ART));
         cards.add(new SetCardInfo("Mind Rot", 83, Rarity.COMMON, mage.cards.m.MindRot.class, RETRO_ART));
-        cards.add(new SetCardInfo("Mons's Goblin Raiders", 112, Rarity.RARE, mage.cards.m.MonssGoblinRaiders.class, RETRO_ART));
+        cards.add(new SetCardInfo("Mons's Goblin Raiders", 112, Rarity.COMMON, mage.cards.m.MonssGoblinRaiders.class, RETRO_ART));
         cards.add(new SetCardInfo("Monstrous Growth", 132, Rarity.COMMON, mage.cards.m.MonstrousGrowth.class, RETRO_ART));
         cards.add(new SetCardInfo("Moon Sprite", 133, Rarity.UNCOMMON, mage.cards.m.MoonSprite.class, RETRO_ART));
         cards.add(new SetCardInfo("Mountain", 166, Rarity.LAND, mage.cards.basiclands.Mountain.class, RETRO_ART_USE_VARIOUS));
