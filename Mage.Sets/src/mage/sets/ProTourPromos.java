@@ -27,10 +27,12 @@ public final class ProTourPromos extends ExpansionSet {
          * https://github.com/magefree/mage/pull/6190#issuecomment-582353697
          * https://github.com/magefree/mage/pull/6190#issuecomment-582354790
          */
+        cards.add(new SetCardInfo("Aerith Gainsborough", "2025-3", Rarity.RARE, mage.cards.a.AerithGainsborough.class));
         cards.add(new SetCardInfo("Aether Vial", "2020-3", Rarity.RARE, mage.cards.a.AetherVial.class));
         cards.add(new SetCardInfo("Ajani Goldmane", 2011, Rarity.MYTHIC, mage.cards.a.AjaniGoldmane.class));
         cards.add(new SetCardInfo("Arcbound Ravager", 2019, Rarity.RARE, mage.cards.a.ArcboundRavager.class));
         cards.add(new SetCardInfo("Avatar of Woe", 2010, Rarity.RARE, mage.cards.a.AvatarOfWoe.class));
+        cards.add(new SetCardInfo("Cloud, Midgar Mercenary", "2025-1", Rarity.MYTHIC, mage.cards.c.CloudMidgarMercenary.class));
         cards.add(new SetCardInfo("Cryptic Command", "2020-1", Rarity.RARE, mage.cards.c.CrypticCommand.class));
         cards.add(new SetCardInfo("Emrakul, the Aeons Torn", 2017, Rarity.MYTHIC, mage.cards.e.EmrakulTheAeonsTorn.class));
         cards.add(new SetCardInfo("Eternal Dragon", 2007, Rarity.RARE, mage.cards.e.EternalDragon.class));
