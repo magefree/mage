@@ -29,6 +29,7 @@ public final class ConstructedFormats {
     public static final String JOKE = "- Joke Sets";
     public static final String CUSTOM = "- Custom";
     public static final String XMAGE_SETS = "- XMAGE"; // inner sets like XMAGE (special tokens)
+    public static final String OLDSCHOOL = "- Old School";
     public static final Standard STANDARD_CARDS = new Standard();
 
     // Attention -Month is 0 Based so Feb = 1 for example. //
@@ -37,6 +38,7 @@ public final class ConstructedFormats {
     private static final Date pioneerDate = new GregorianCalendar(2012, Calendar.OCTOBER, 5 - 1).getTime();
     private static final Date modernDate = new GregorianCalendar(2003, Calendar.JULY, 28 - 1).getTime();
     private static final Date historicDate = new GregorianCalendar(2017, Calendar.SEPTEMBER, 29 - 1).getTime();
+    private static final Date oldschoolDate = new GregorianCalendar(1994, Calendar.AUGUST, 10 - 1).getTime();
 
     // for all sets just return empty list
     private static final List<String> all = new ArrayList<>();
@@ -105,6 +107,7 @@ public final class ConstructedFormats {
         underlyingSetCodesPerFormat.put(JOKE, new ArrayList<>());
         underlyingSetCodesPerFormat.put(CUSTOM, new ArrayList<>());
         underlyingSetCodesPerFormat.put(XMAGE_SETS, new ArrayList<>());
+        underlyingSetCodesPerFormat.put(OLDSCHOOL, new ArrayList<>());
         final Map<String, ExpansionInfo> expansionInfo = new HashMap<>();
         formats.clear(); // prevent NPE on sorting if this is not the first try
 
@@ -170,6 +173,12 @@ public final class ConstructedFormats {
             if (set.getType().isModernLegal() && set.getReleaseDate().after(modernDate)) {
                 underlyingSetCodesPerFormat.get(MODERN).add(set.getCode());
             }
+
+            // old school
+            if(set.getReleaseDate().before(oldschoolDate)){
+                underlyingSetCodesPerFormat.get(OLDSCHOOL).add(set.getCode());
+            }
+
 
             // BLOCKS formats
 
@@ -289,6 +298,7 @@ public final class ConstructedFormats {
             formats.add(0, FRONTIER);
             formats.add(0, EXTENDED);
             formats.add(0, STANDARD);
+            formats.add(0, OLDSCHOOL);
         }
         formats.add(0, ALL_SETS);
     }
