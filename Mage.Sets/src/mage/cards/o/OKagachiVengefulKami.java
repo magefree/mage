@@ -52,7 +52,8 @@ public final class OKagachiVengefulKami extends CardImpl {
         ability.addTarget(new TargetPermanent(filter));
         ability.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster());
         ability.withInterveningIf(KagachiVengefulKamiCondition.instance);
-        this.addAbility(ability);
+
+        this.addAbility(ability, new OKagachiVengefulKamiWatcher());
     }
 
     private OKagachiVengefulKami(final OKagachiVengefulKami card) {

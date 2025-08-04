@@ -1,5 +1,6 @@
 package mage.cards.n;
 
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.cards.Card;
@@ -15,7 +16,9 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.watchers.common.BlockedAttackerWatcher;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -55,49 +58,26 @@ class TargetCreatureWithLessPowerPermanent extends TargetPermanent {
     }
 
     @Override
-    public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
-        int maxPower = Integer.MIN_VALUE; // get the most powerful controlled creature that can be targeted
-        Card sourceCard = game.getCard(source.getSourceId());
-        if (sourceCard == null) {
-            return false;
-        }
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURES, sourceControllerId, game)) {
-            if (permanent.getPower().getValue() > maxPower && permanent.canBeTargetedBy(sourceCard, sourceControllerId, source, game)) {
-                maxPower = permanent.getPower().getValue();
-            }
-        }
-        // now check, if another creature has less power and can be targeted
-        FilterCreaturePermanent checkFilter = new FilterCreaturePermanent();
-        checkFilter.add(new PowerPredicate(ComparisonType.FEWER_THAN, maxPower));
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(checkFilter, sourceControllerId, source, game)) {
-            if (permanent.canBeTargetedBy(sourceCard, sourceControllerId, source, game)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
-        Spell spell = game.getStack().getSpell(source.getSourceId());
-        if (spell != null) {
-            Permanent firstTarget = getPermanentFromFirstTarget(spell.getSpellAbility(), game);
-            if (firstTarget != null) {
-                int power = firstTarget.getPower().getValue();
-                // overwrite the filter with the power predicate
-                filter = new FilterCreaturePermanent("creature with power less than " + power);
-                filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, power));
+        Set<UUID> possibleTargets = new HashSet<>();
+
+        Permanent firstPermanent = game.getPermanent(source.getFirstTarget());
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
+            if (firstPermanent == null) {
+                // playable or first target not yet selected
+                // use all
+                possibleTargets.add(permanent.getId());
+            } else {
+                // real
+                // filter by power
+                if (firstPermanent.getPower().getValue() > permanent.getPower().getValue()) {
+                    possibleTargets.add(permanent.getId());
+                }
             }
         }
-        return super.possibleTargets(sourceControllerId, source, game);
-    }
+        possibleTargets.removeIf(id -> firstPermanent != null && firstPermanent.getId().equals(id));
 
-    private Permanent getPermanentFromFirstTarget(Ability source, Game game) {
-        Permanent firstTarget = null;
-        if (source.getTargets().size() == 2) {
-            firstTarget = game.getPermanent(source.getTargets().get(0).getFirstTarget());
-        }
-        return firstTarget;
+        return keepValidPossibleTargets(possibleTargets, sourceControllerId, source, game);
     }
 
     @Override

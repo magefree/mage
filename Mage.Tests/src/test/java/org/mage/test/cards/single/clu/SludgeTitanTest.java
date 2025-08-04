@@ -1,4 +1,3 @@
-
 package org.mage.test.cards.single.clu;
 
 import mage.constants.PhaseStep;
@@ -6,6 +5,7 @@ import mage.constants.Zone;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -41,35 +41,11 @@ public class SludgeTitanTest extends CardTestPlayerBase {
         addCard(Zone.LIBRARY, playerA, divination, 5);
 
         attack(1, playerA, titan, playerB);
-        setChoice(playerA, playerA.CHOICE_SKIP);
 
         setStopAt(1, PhaseStep.DECLARE_BLOCKERS);
         execute();
 
         assertGraveyardCount(playerA, divination, 5);
-    }
-
-    @Test
-    public void testNoValidChoiceInvalid() {
-        setStrictChooseMode(true);
-        skipInitShuffling();
-
-        addCard(Zone.BATTLEFIELD, playerA, titan);
-        addCard(Zone.LIBRARY, playerA, divination, 5);
-
-        attack(1, playerA, titan, playerB);
-        setChoice(playerA, divination); // invalid, titan doesn't allow for choosing sorcery
-
-        setStopAt(1, PhaseStep.DECLARE_BLOCKERS);
-
-        try {
-            execute();
-            Assert.fail("must throw exception on execute");
-        } catch (Throwable e) {
-            if (!e.getMessage().startsWith("Missing CHOICE def")) {
-                Assert.fail("Unexpected exception " + e.getMessage());
-            }
-        }
     }
 
     @Test
@@ -81,7 +57,7 @@ public class SludgeTitanTest extends CardTestPlayerBase {
         addCard(Zone.LIBRARY, playerA, piker, 5);
 
         attack(1, playerA, titan, playerB);
-        setChoice(playerA, playerA.CHOICE_SKIP);
+        setChoice(playerA, TestPlayer.CHOICE_SKIP);
 
         setStopAt(1, PhaseStep.DECLARE_BLOCKERS);
         execute();
@@ -207,6 +183,8 @@ public class SludgeTitanTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, titan);
         addCard(Zone.LIBRARY, playerA, brownscale, 5);
 
+        // must able to select only 1 creature, so after first choice it must auto-finish
+        // if you see miss choice here then something broken in TestPlayer's choose method
         attack(1, playerA, titan, playerB);
         setChoice(playerA, brownscale);
 

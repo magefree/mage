@@ -22,10 +22,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 import mage.util.CardUtil;
 
 import java.awt.*;
-import java.util.Collection;
-import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -113,7 +110,10 @@ class NethergoyfTarget extends TargetCardInYourGraveyard {
             return false;
         }
         // Check that exiling all the possible cards would have >= 4 different card types
-        return metCondition(this.possibleTargets(sourceControllerId, source, game), game);
+        Set<UUID> idsToCheck = new HashSet<>();
+        idsToCheck.addAll(this.getTargets());
+        idsToCheck.addAll(this.possibleTargets(sourceControllerId, source, game));
+        return metCondition(idsToCheck, game);
     }
 
     private static Set<CardType> typesAmongSelection(Collection<UUID> cardsIds, Game game) {

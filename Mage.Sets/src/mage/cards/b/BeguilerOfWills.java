@@ -66,12 +66,12 @@ class BeguilerOfWillsTarget extends TargetPermanent {
     }
 
     @Override
-    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
+    public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
         Permanent permanent = game.getPermanent(id);
         int count = game.getBattlefield().countAll(this.filter, source.getControllerId(), game);
 
         if (permanent != null && permanent.getPower().getValue() <= count) {
-            return super.canTarget(controllerId, id, source, game);
+            return super.canTarget(playerId, id, source, game);
         }
         return false;
     }

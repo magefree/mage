@@ -8,10 +8,7 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 
-import java.util.Collection;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -120,10 +117,8 @@ public class TestableDialogsRunner {
             choice = prepareSelectDialogChoice(needGroup);
             player.choose(Outcome.Benefit, choice, game);
             if (choice.getChoiceKey() != null) {
-                int needIndex = Integer.parseInt(choice.getChoiceKey());
-                if (needIndex < this.dialogs.size()) {
-                    needDialog = this.dialogs.get(needIndex);
-                }
+                int needRegNumber = Integer.parseInt(choice.getChoiceKey());
+                needDialog = this.dialogs.getOrDefault(needRegNumber, null);
             }
         }
         if (needDialog == null) {
@@ -144,15 +139,20 @@ public class TestableDialogsRunner {
         Choice choice = new ChoiceImpl(false);
         choice.setMessage("Choose dialogs group to run");
 
+        // use min reg number for groups
+        Map<String, Integer> groupNumber = new HashMap<>();
+        this.dialogs.values().forEach(dialog -> {
+            groupNumber.put(dialog.getGroup(), Math.min(groupNumber.getOrDefault(dialog.getGroup(), Integer.MAX_VALUE), dialog.getRegNumber()));
+        });
+
         // main groups
-        int recNumber = 0;
         for (int i = 0; i < groups.size(); i++) {
-            recNumber++;
             String group = groups.get(i);
+            Integer groupMinNumber = groupNumber.getOrDefault(group, 0);
             choice.withItem(
                     String.valueOf(i),
-                    String.format("%02d. %s", recNumber, group),
-                    recNumber,
+                    String.format("%02d. %s", groupMinNumber, group),
+                    groupMinNumber,
                     ChoiceHintType.TEXT,
                     String.join("<br>", group)
             );
@@ -186,18 +186,15 @@ public class TestableDialogsRunner {
     private Choice prepareSelectDialogChoice(String needGroup) {
         Choice choice = new ChoiceImpl(false);
         choice.setMessage("Choose game dialog to run from " + needGroup);
-        int recNumber = 0;
-        for (int i = 0; i < this.dialogs.size(); i++) {
-            TestableDialog dialog = this.dialogs.get(i);
+        for (TestableDialog dialog : this.dialogs.values()) {
             if (!dialog.getGroup().equals(needGroup)) {
                 continue;
             }
-            recNumber++;
             String info = String.format("%s - %s - %s", dialog.getGroup(), dialog.getName(), dialog.getDescription());
             choice.withItem(
-                    String.valueOf(i),
-                    String.format("%02d. %s", recNumber, info),
-                    recNumber,
+                    String.valueOf(dialog.getRegNumber()),
+                    String.format("%02d. %s", dialog.getRegNumber(), info),
+                    dialog.getRegNumber(),
                     ChoiceHintType.TEXT,
                     String.join("<br>", info)
             );

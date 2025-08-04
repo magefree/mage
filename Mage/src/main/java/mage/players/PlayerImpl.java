@@ -101,7 +101,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected Cards sideboard;
     protected Cards hand;
     protected Graveyard graveyard;
-    protected Set<UUID> commandersIds = new HashSet<>(0);
+    protected Set<UUID> commandersIds = new HashSet<>();
 
     protected Abilities<Ability> abilities;
     protected Counters counters;
@@ -1546,7 +1546,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             setStoredBookmark(bookmark); // move global bookmark to current state (if you activated mana before then you can't rollback it)
             ability.newId();
             ability.setControllerId(playerId);
-            game.getStack().push(new StackAbility(ability, playerId));
+            game.getStack().push(game, new StackAbility(ability, playerId));
             if (ability.activate(game, false)) {
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATED_ABILITY,
                         ability.getId(), ability, playerId));
@@ -1711,7 +1711,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         ability.adjustTargets(game);
         if (ability.canChooseTarget(game, playerId)) {
             if (ability.isUsesStack()) {
-                game.getStack().push(new StackAbility(ability, playerId));
+                game.getStack().push(game, new StackAbility(ability, playerId));
             }
             if (ability.activate(game, false)) {
                 if ((ability.isUsesStack()
@@ -4561,29 +4561,46 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     /**
-     * AI related code
+     * AI related code, generate all possible usage use cases for activating ability (all possible targets combination)
      */
     protected void addTargetOptions(List<Ability> options, Ability option, int targetNum, Game game) {
         // TODO: target options calculated for triggered ability too, but do not used in real game
         // TODO: there are rare errors with wrong targetNum - maybe multiple game sims can change same target object somehow?
         //  do not hide NullPointError here, research instead
-        for (Target target : option.getTargets().getNextUnchosen(game, targetNum).getTargetOptions(option, game)) {
+
+        if (targetNum >= option.getTargets().size()) {
+            return;
+        }
+
+        // already selected for some reason (TODO: is it possible?)
+        Target currentTarget = option.getTargets().get(targetNum);
+        if (currentTarget.isChoiceSelected()) {
+            return;
+        }
+
+        // analyse all possible use cases
+        for (Target targetOption : currentTarget.getTargetOptions(option, game)) {
+            // fill target
             Ability newOption = option.copy();
-            if (target instanceof TargetAmount) {
-                for (UUID targetId : target.getTargets()) {
-                    int amount = target.getTargetAmount(targetId);
+            if (targetOption instanceof TargetAmount) {
+                for (UUID targetId : targetOption.getTargets()) {
+                    int amount = targetOption.getTargetAmount(targetId);
                     newOption.getTargets().get(targetNum).addTarget(targetId, amount, newOption, game, true);
                 }
             } else {
-                for (UUID targetId : target.getTargets()) {
+                for (UUID targetId : targetOption.getTargets()) {
                     newOption.getTargets().get(targetNum).addTarget(targetId, newOption, game, true);
                 }
             }
-            if (targetNum < option.getTargets().size() - 2) { // wtf
+
+            if (targetNum + 1 < option.getTargets().size()) {
+                // fill more targets
                 addTargetOptions(options, newOption, targetNum + 1, game);
             } else if (!option.getCosts().getTargets().isEmpty()) {
+                // fill cost
                 addCostTargetOptions(options, newOption, 0, game);
             } else {
+                // all filled, ability ready with all targets and costs
                 options.add(newOption);
             }
         }
@@ -4938,6 +4955,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 List<ZoneChangeInfo> infoList = new ArrayList<>();
                 for (Card card : cards) {
                     fromZone = game.getState().getZone(card.getId());
+
                     // 712.14a. If a spell or ability puts a transforming double-faced card onto the battlefield "transformed"
                     // or "converted," it enters the battlefield with its back face up. If a player is instructed to put a card
                     // that isn't a transforming double-faced card onto the battlefield transformed or converted, that card stays in
@@ -4946,15 +4964,29 @@ public abstract class PlayerImpl implements Player, Serializable {
                     if (enterTransformed != null && enterTransformed && !card.isTransformable()) {
                         continue;
                     }
+
                     // 303.4g. If an Aura is entering the battlefield and there is no legal object or player for it to enchant,
                     // the Aura remains in its current zone, unless that zone is the stack. In that case, the Aura is put into
                     // its owner's graveyard instead of entering the battlefield. If the Aura is a token, it isn't created.
-                    if (card.hasSubtype(SubType.AURA, game)
-                            && card.getSpellAbility() != null
-                            && !card.getSpellAbility().getTargets().isEmpty()
-                            && !card.getSpellAbility().getTargets().get(0).copy().withNotTarget(true).canChoose(byOwner ? card.getOwnerId() : getId(), game)) {
-                        continue;
+                    if (card.hasSubtype(SubType.AURA, game) && !(source instanceof BestowAbility)) {
+                        SpellAbility auraSpellAbility;
+                        if (source instanceof SpellAbility && card.getAbilities(game).contains(source)) {
+                            // cast aura - use source ability
+                            auraSpellAbility = (SpellAbility) source;
+                        } else {
+                            // put to battlefield by another effect - use default spell
+                            auraSpellAbility = card.getSpellAbility();
+                        }
+                        if (auraSpellAbility != null) {
+                            if (auraSpellAbility.getTargets().isEmpty()) {
+                                throw new IllegalArgumentException("Something wrong, found etb aura with empty spell ability or without any targets: " + card + ", source: " + source);
+                            }
+                            if (!auraSpellAbility.getTargets().get(0).copy().withNotTarget(true).canChooseOrAlreadyChosen(byOwner ? card.getOwnerId() : getId(), source, game)) {
+                                continue;
+                            }
+                        }
                     }
+
                     ZoneChangeEvent event = new ZoneChangeEvent(card.getId(), source,
                             byOwner ? card.getOwnerId() : getId(), fromZone, Zone.BATTLEFIELD, appliedEffects);
                     infoList.add(new ZoneChangeInfo.Battlefield(event, faceDown, tapped, source));

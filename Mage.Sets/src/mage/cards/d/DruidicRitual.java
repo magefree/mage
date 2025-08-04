@@ -105,11 +105,10 @@ class RevivalExperimentTarget extends TargetCardInYourGraveyard {
         return cardTypeAssigner.getRoleCount(cards, game) >= cards.size();
     }
 
-
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = super.possibleTargets(sourceControllerId, source, game);
-        possibleTargets.removeIf(uuid -> !this.canTarget(sourceControllerId, uuid, null, game));
+        possibleTargets.removeIf(uuid -> !this.canTarget(sourceControllerId, uuid, source, game));
         return possibleTargets;
     }
 }

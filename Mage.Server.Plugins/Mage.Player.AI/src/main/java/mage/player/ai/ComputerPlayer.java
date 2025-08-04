@@ -142,17 +142,27 @@ public class ComputerPlayer extends PlayerImpl {
         UUID abilityControllerId = target.getAffectedAbilityControllerId(getId());
 
         // nothing to choose, e.g. X=0
-        if (target.isChoiceCompleted(abilityControllerId, source, game)) {
+        if (target.isChoiceCompleted(abilityControllerId, source, game, fromCards)) {
             return false;
         }
 
-        // default logic for any targets
         PossibleTargetsSelector possibleTargetsSelector = new PossibleTargetsSelector(outcome, target, abilityControllerId, source, game);
         possibleTargetsSelector.findNewTargets(fromCards);
+
+        // nothing to choose, e.g. no valid targets
+        if (!possibleTargetsSelector.hasAnyTargets()) {
+            return false;
+        }
+
+        // can't choose
+        if (!possibleTargetsSelector.hasMinNumberOfTargets()) {
+            return false;
+        }
+
         // good targets -- choose as much as possible
         for (MageItem item : possibleTargetsSelector.getGoodTargets()) {
             target.add(item.getId(), game);
-            if (target.isChoiceCompleted(abilityControllerId, source, game)) {
+            if (target.isChoiceCompleted(abilityControllerId, source, game, fromCards)) {
                 return true;
             }
         }
@@ -226,7 +236,7 @@ public class ComputerPlayer extends PlayerImpl {
         UUID abilityControllerId = target.getAffectedAbilityControllerId(getId());
 
         // nothing to choose, e.g. X=0
-        if (target.isChoiceCompleted(abilityControllerId, source, game)) {
+        if (target.isChoiceCompleted(abilityControllerId, source, game, null)) {
             return false;
         }
 
@@ -235,6 +245,11 @@ public class ComputerPlayer extends PlayerImpl {
 
         // nothing to choose, e.g. no valid targets
         if (!possibleTargetsSelector.hasAnyTargets()) {
+            return false;
+        }
+
+        // can't choose
+        if (!possibleTargetsSelector.hasMinNumberOfTargets()) {
             return false;
         }
 
@@ -251,7 +266,7 @@ public class ComputerPlayer extends PlayerImpl {
                 int leftLife = PossibleTargetsComparator.getLifeForDamage(item, game);
                 if (leftLife > 0 && leftLife <= target.getAmountRemaining()) {
                     target.addTarget(item.getId(), leftLife, source, game);
-                    if (target.isChoiceCompleted(abilityControllerId, source, game)) {
+                    if (target.isChoiceCompleted(abilityControllerId, source, game, null)) {
                         return true;
                     }
                 }
@@ -268,7 +283,7 @@ public class ComputerPlayer extends PlayerImpl {
                 int leftLife = PossibleTargetsComparator.getLifeForDamage(item, game);
                 if (leftLife > 0 && leftLife <= target.getAmountRemaining()) {
                     target.addTarget(item.getId(), leftLife, source, game);
-                    if (target.isChoiceCompleted(abilityControllerId, source, game)) {
+                    if (target.isChoiceCompleted(abilityControllerId, source, game, null)) {
                         return true;
                     }
                 }
@@ -283,7 +298,7 @@ public class ComputerPlayer extends PlayerImpl {
                     continue;
                 }
                 target.addTarget(item.getId(), target.getAmountRemaining(), source, game);
-                if (target.isChoiceCompleted(abilityControllerId, source, game)) {
+                if (target.isChoiceCompleted(abilityControllerId, source, game, null)) {
                     return true;
                 }
             }
@@ -303,7 +318,7 @@ public class ComputerPlayer extends PlayerImpl {
                 int leftLife = PossibleTargetsComparator.getLifeForDamage(item, game);
                 if (leftLife > 1) {
                     target.addTarget(item.getId(), Math.min(leftLife - 1, target.getAmountRemaining()), source, game);
-                    if (target.isChoiceCompleted(abilityControllerId, source, game)) {
+                    if (target.isChoiceCompleted(abilityControllerId, source, game, null)) {
                         return true;
                     }
                 }
@@ -322,7 +337,7 @@ public class ComputerPlayer extends PlayerImpl {
                     return !target.getTargets().isEmpty();
                 }
                 target.addTarget(item.getId(), target.getAmountRemaining(), source, game);
-                if (target.isChoiceCompleted(abilityControllerId, source, game)) {
+                if (target.isChoiceCompleted(abilityControllerId, source, game, null)) {
                     return true;
                 }
             }
@@ -339,7 +354,7 @@ public class ComputerPlayer extends PlayerImpl {
                 continue;
             }
             target.addTarget(item.getId(), target.getAmountRemaining(), source, game);
-            if (target.isChoiceCompleted(abilityControllerId, source, game)) {
+            if (target.isChoiceCompleted(abilityControllerId, source, game, null)) {
                 return true;
             }
         }
@@ -355,7 +370,7 @@ public class ComputerPlayer extends PlayerImpl {
                 return !target.getTargets().isEmpty();
             }
             target.addTarget(item.getId(), target.getAmountRemaining(), source, game);
-            if (target.isChoiceCompleted(abilityControllerId, source, game)) {
+            if (target.isChoiceCompleted(abilityControllerId, source, game, null)) {
                 return true;
             }
         }

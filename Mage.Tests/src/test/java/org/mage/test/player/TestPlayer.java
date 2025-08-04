@@ -16,6 +16,7 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
+import mage.collectors.DataCollectorServices;
 import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.CounterType;
@@ -41,6 +42,7 @@ import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 import mage.game.tournament.Tournament;
 import mage.player.ai.ComputerPlayer;
+import mage.player.ai.PossibleTargetsSelector;
 import mage.players.*;
 import mage.players.net.UserData;
 import mage.target.*;
@@ -51,13 +53,14 @@ import mage.util.RandomUtil;
 import mage.watchers.common.AttackedOrBlockedThisCombatWatcher;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
-import static org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl.*;
 
 import java.io.Serializable;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
+import static org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl.*;
 
 /**
  * Basic implementation of testable player
@@ -72,6 +75,7 @@ public class TestPlayer implements Player {
 
     public static final String TARGET_SKIP = "[target_skip]"; // stop/skip targeting
     public static final String CHOICE_SKIP = "[choice_skip]"; // stop/skip choice
+    public static final String MODE_SKIP = "[mode_skip]"; // stop/skip mode selection
     public static final String CHOICE_NORMAL_COST = "Cast with no alternative cost: "; // when there is the possibility for an alternative cost, use the normal cost instead.
     public static final String MANA_CANCEL = "[mana_cancel]"; // cancel payment
     public static final String SKIP_FAILED_COMMAND = "[skip_failed_command]"; // skip next command in player's queue (can remove cast commands after try to activate)
@@ -101,7 +105,10 @@ public class TestPlayer implements Player {
     private final List<String> choices = new ArrayList<>(); // choices stack for choice
     private final List<String> targets = new ArrayList<>(); // targets stack for choose (it's uses on empty direct target by cast command)
     private final Map<String, UUID> aliases = new HashMap<>(); // aliases for game objects/players (use it for cards with same name to save and use)
-    private final List<String> modesSet = new ArrayList<>();
+    private final List<String> modes = new ArrayList<>();
+
+    // debug only: ignore all next commands so choose dialog will raise error with full info
+    private boolean isSkipAllNextChooseCommands = false;
 
     private final ComputerPlayer computerPlayer; // real player
 
@@ -144,11 +151,12 @@ public class TestPlayer implements Player {
         this.choices.addAll(testPlayer.choices);
         this.targets.addAll(testPlayer.targets);
         this.aliases.putAll(testPlayer.aliases);
-        this.modesSet.addAll(testPlayer.modesSet);
+        this.modes.addAll(testPlayer.modes);
         this.computerPlayer = testPlayer.computerPlayer.copy();
         if (testPlayer.groupsForTargetHandling != null) {
             this.groupsForTargetHandling = testPlayer.groupsForTargetHandling.clone();
         }
+        this.isSkipAllNextChooseCommands = testPlayer.isSkipAllNextChooseCommands;
         this.strictChooseMode = testPlayer.strictChooseMode;
     }
 
@@ -159,6 +167,10 @@ public class TestPlayer implements Player {
         // * for replacement/triggers choices: comment choice command, look at logs for triggers list and use starting text in the choice instead empty
         Assert.assertNotEquals("Choice can't be empty", "", choice);
         choice = EmptyNames.replaceTestCommandByObjectName(choice);
+
+        if (this.isSkipAllNextChooseCommands) {
+            return;
+        }
 
         choices.add(choice);
     }
@@ -184,7 +196,10 @@ public class TestPlayer implements Player {
     }
 
     public void addModeChoice(String mode) {
-        modesSet.add(mode);
+        if (this.isSkipAllNextChooseCommands) {
+            return;
+        }
+        modes.add(mode);
     }
 
     public void addTarget(String target) {
@@ -193,6 +208,10 @@ public class TestPlayer implements Player {
         Assert.assertNotEquals("Target can't be empty", "", target);
 
         target = EmptyNames.replaceTestCommandByObjectName(target);
+
+        if (this.isSkipAllNextChooseCommands) {
+            return;
+        }
 
         targets.add(target);
     }
@@ -366,6 +385,10 @@ public class TestPlayer implements Player {
                     return true; // targetAmount have to be set by setTargetAmount in the test script
                 }
                 ability.getTargets().get(0).addTarget(player.getId(), ability, game);
+
+                String reason = CardUtil.getSourceLogName(game, "by cast/activate, ability: ", ability, "", "");
+                DataCollectorServices.getInstance().onTestsTargetUse(game, player, target, reason);
+
                 targetsSet++;
                 break;
             }
@@ -464,9 +487,12 @@ public class TestPlayer implements Player {
         int index = 0;
         int targetsSet = 0;
         for (String targetName : targetList) {
+
+            // choose target for specific mode
             Mode selectedMode;
             if (targetName.startsWith("mode=")) {
-                int modeNr = Integer.parseInt(targetName.substring(5, 6));
+                String modeStr = targetName.substring(5, 6);
+                int modeNr = Integer.parseInt(modeStr);
                 if (modeNr == 0 || modeNr > (ability.getModes().isMayChooseSameModeMoreThanOnce() ? ability.getModes().getSelectedModes().size() : ability.getModes().size())) {
                     throw new UnsupportedOperationException("Given mode number (" + modeNr + ") not available for " + ability.toString());
                 }
@@ -489,18 +515,23 @@ public class TestPlayer implements Player {
             if (index >= selectedMode.getTargets().size()) {
                 break; // this can happen if targets should be set but can't be used because of hexproof e.g.
             }
+
+            // choose player
             Target currentTarget = selectedMode.getTargets().get(index);
             if (targetName.startsWith("targetPlayer=")) {
                 target = targetName.substring(targetName.indexOf("targetPlayer=") + 13);
                 for (Player player : game.getPlayers().values()) {
                     if (player.getName().equals(target)) {
                         currentTarget.addTarget(player.getId(), ability, game);
+                        String reason = CardUtil.getSourceLogName(game, "by cast/activate, ability: ", ability, "", "");
+                        DataCollectorServices.getInstance().onTestsTargetUse(game, this, target, reason);
                         index++;
                         targetsSet++;
                         break;
                     }
                 }
             } else {
+                // choose object
                 boolean originOnly = false;
                 boolean copyOnly = false;
                 if (targetName.endsWith("]")) {
@@ -551,6 +582,10 @@ public class TestPlayer implements Player {
                             currentTarget.addTarget(id, ability, game);
                             targetsSet++;
                         }
+
+                        String reason = CardUtil.getSourceLogName(game, "by cast/activate, ability: ", ability, "", "");
+                        DataCollectorServices.getInstance().onTestsTargetUse(game, this, targetName, reason);
+
                         if (currentTarget.getTargets().size() == currentTarget.getMaxNumberOfTargets()) {
                             index++;
                         }
@@ -628,7 +663,7 @@ public class TestPlayer implements Player {
                                 // skip failed command
                                 if (!choices.isEmpty() && choices.get(0).equals(SKIP_FAILED_COMMAND)) {
                                     actions.remove(action);
-                                    choices.remove(0);
+                                    choicesRemoveCurrent(game, "on priority");
                                     return true;
                                 }
                             }
@@ -1267,7 +1302,7 @@ public class TestPlayer implements Player {
                 .map(c -> (((c instanceof PermanentToken) ? "[T] " : "[C] ")
                         + c.getIdName()
                         + (c.isCopy() ? " [copy of " + c.getCopyFrom().getId().toString().substring(0, 3) + "]" : "")
-                        + " class " + c.getMainCard().getClass().getSimpleName() + ""
+                        + " class " + getSimpleClassName(c.getMainCard().getClass()) + ""
                         + " - " + c.getPower().getValue() + "/" + c.getToughness().getValue()
                         + (c.isPlaneswalker(game) ? " - L" + c.getCounters(game).getCount(CounterType.LOYALTY) : "")
                         + ", " + (c.isTapped() ? "Tapped" : "Untapped")
@@ -1307,7 +1342,7 @@ public class TestPlayer implements Player {
                         + (a.toString().startsWith("Cast ") ? "[" + a.getManaCostsToPay().getText() + "] -> " : "") // printed cost, not modified
                         + (a.toString().length() > 0
                         ? CardUtil.substring(a.toString(), 40, "...")
-                        : a.getClass().getSimpleName())
+                        : getSimpleClassName(a.getClass()))
                 ))
                 .sorted()
                 .collect(Collectors.toList());
@@ -2091,13 +2126,13 @@ public class TestPlayer implements Player {
     }
 
     private String getInfo(MageObject o) {
-        return "Object: " + (o != null ? o.getClass().getSimpleName() + ": " + o.getName() : "null");
+        return "Object: " + (o != null ? getSimpleClassName(o.getClass()) + ": " + o.getName() : "null");
     }
 
     private String getInfo(Ability o, Game game) {
         if (o != null) {
             MageObject object = o.getSourceObject(game);
-            return "Ability: " + (object == null ? "" : object.getIdName() + " - " + o.getClass().getSimpleName() + ": " + o.getRule());
+            return "Ability: " + (object == null ? "" : object.getIdName() + " - " + getSimpleClassName(o.getClass()) + ": " + o.getRule());
         }
         return "Ability: null";
     }
@@ -2109,8 +2144,8 @@ public class TestPlayer implements Player {
         UUID abilityControllerId = target.getAffectedAbilityControllerId(this.getId());
         Set<UUID> possibleTargets = target.possibleTargets(abilityControllerId, source, game, cards);
 
-        return "Target: selected " + target.getSize() + ", possible " + possibleTargets.size()
-                + ", " + target.getClass().getSimpleName() + ": " + target.getMessage(game);
+        return "Target: selected " + target.getSize() + ", more possible " + possibleTargets.size()
+                + ", " + getSimpleClassName(target.getClass()) + ": " + target.getMessage(game);
     }
 
     private void assertAliasSupportInChoices(boolean methodSupportAliases) {
@@ -2166,6 +2201,13 @@ public class TestPlayer implements Player {
                 });
                 printEnd();
             }
+            if (choiceType.equals("mode")) {
+                printStart(game, "Unused modes");
+                if (!modes.isEmpty()) {
+                    System.out.println(String.join("\n", modes));
+                }
+                printEnd();
+            }
             Assert.fail("Missing " + choiceType.toUpperCase(Locale.ENGLISH) + " def for"
                     + " turn " + game.getTurnNum()
                     + ", step " + (game.getStep() != null ? game.getTurnStepType().name() : "not started")
@@ -2176,23 +2218,8 @@ public class TestPlayer implements Player {
 
     @Override
     public Mode chooseMode(Modes modes, Ability source, Game game) {
-        if (!modesSet.isEmpty() && modes.getMaxModes(game, source) > modes.getSelectedModes().size()) {
-            // set mode to null to select less than maximum modes if multiple modes are allowed
-            if (modesSet.get(0) == null) {
-                modesSet.remove(0);
-                return null;
-            }
-            int needMode = Integer.parseInt(modesSet.get(0));
-            int i = 1;
-            for (Mode mode : modes.getAvailableModes(source, game)) {
-                if (i == needMode) {
-                    modesSet.remove(0);
-                    return mode;
-                }
-                i++;
-            }
-        }
-        if (modes.getMinModes() <= modes.getSelectedModes().size()) {
+        if (modes.getSelectedModes().size() >= modes.getMaxModes(game, source)) {
+            // TODO: no needs here cause min/max mode must be checked by parent code? try to remove it from here
             return null;
         }
 
@@ -2207,6 +2234,27 @@ public class TestPlayer implements Player {
             i++;
         }
 
+        if (!this.modes.isEmpty()) {
+
+            // skip modes
+            if (tryToSkipSelection(game, null, this.modes, MODE_SKIP)) {
+                return null;
+            }
+
+            String needModeStr = this.modes.get(0);
+            int needModeNumber = Integer.parseInt(needModeStr);
+            i = 1;
+            for (Mode mode : modes.getAvailableModes(source, game)) {
+                if (i == needModeNumber) {
+                    modesRemoveCurrent(game, mode);
+                    return mode;
+                }
+                i++;
+            }
+
+            Assert.fail("Can't use mode: " + needModeNumber + "\n" + getInfo(source, game) + modesInfo);
+        }
+
         this.chooseStrictModeFailed("mode", game, getInfo(source, game) + modesInfo);
         return computerPlayer.chooseMode(modes, source, game);
     }
@@ -2219,9 +2267,8 @@ public class TestPlayer implements Player {
             String possibleChoice = choices.get(0);
 
             // skip choices
-            if (possibleChoice.equals(CHOICE_SKIP)) {
-                choices.remove(0);
-                return false; // false - stop to choose
+            if (tryToSkipSelection(game, null, choices, CHOICE_SKIP)) {
+                return false;
             }
 
             if (choice.setChoiceByAnswers(choices, true)) {
@@ -2254,7 +2301,7 @@ public class TestPlayer implements Player {
             int index = 0;
             for (Map.Entry<String, String> entry : effectsMap.entrySet()) {
                 if (entry.getValue().startsWith(choice)) {
-                    choices.remove(0);
+                    choicesRemoveCurrent(game, "on choose replacements"); // TODO: add short lists?
                     return index;
                 }
                 index++;
@@ -2269,219 +2316,7 @@ public class TestPlayer implements Player {
 
     @Override
     public boolean choose(Outcome outcome, Target target, Ability source, Game game, Map<String, Serializable> options) {
-
-        // choose itself for starting player all the time
-        if (target.getMessage(game).equals("Select a starting player")) {
-            target.add(this.getId(), game);
-            return true;
-        }
-
-        UUID abilityControllerId = target.getAffectedAbilityControllerId(this.getId());
-
-        // TODO: warning, some cards call player.choose methods instead target.choose, see #8254
-        //  most use cases - discard and other cost with choice like that method
-        //  must migrate all choices.remove(xxx) to choices.remove(0), takeMaxTargetsPerChoose can help to find it
-
-        boolean isAddedSomething = false; // must return true on any changes in targets, so game can ask next choose dialog until finish
-
-        assertAliasSupportInChoices(true);
-        if (!choices.isEmpty()) {
-
-            // skip choices
-            if (tryToSkipSelection(choices, CHOICE_SKIP)) {
-                Assert.assertTrue("found skip choice, but it require more choices, needs "
-                                + (target.getMinNumberOfTargets() - target.getTargets().size()) + " more",
-                        target.getTargets().size() >= target.getMinNumberOfTargets());
-                return false; // false - stop to choose
-            }
-
-            // TODO: Allow to choose a player with TargetPermanentOrPlayer
-            if ((target.getOriginalTarget() instanceof TargetPermanent)
-                    || (target.getOriginalTarget() instanceof TargetPermanentOrPlayer)) { // player target not implemented yet
-                FilterPermanent filterPermanent;
-                if (target.getOriginalTarget() instanceof TargetPermanentOrPlayer) {
-                    filterPermanent = ((TargetPermanentOrPlayer) target.getOriginalTarget()).getFilterPermanent();
-                } else {
-                    filterPermanent = ((TargetPermanent) target.getOriginalTarget()).getFilter();
-                }
-                while (!choices.isEmpty()) { // TODO: remove cycle after main commits
-                    if (tryToSkipSelection(choices, CHOICE_SKIP)) {
-                        return false; // stop dialog
-                    }
-                    String choiceRecord = choices.get(0);
-                    String[] targetList = choiceRecord.split("\\^");
-                    isAddedSomething = false;
-                    for (String targetName : targetList) {
-                        boolean originOnly = false;
-                        boolean copyOnly = false;
-                        if (targetName.endsWith("]")) {
-                            if (targetName.endsWith("[no copy]")) {
-                                originOnly = true;
-                                targetName = targetName.substring(0, targetName.length() - 9);
-                            }
-                            if (targetName.endsWith("[only copy]")) {
-                                copyOnly = true;
-                                targetName = targetName.substring(0, targetName.length() - 11);
-                            }
-                        }
-                        for (Permanent permanent : game.getBattlefield().getActivePermanents(filterPermanent, abilityControllerId, source, game)) {
-                            if (target.contains(permanent.getId())) {
-                                continue;
-                            }
-                            if (hasObjectTargetNameOrAlias(permanent, targetName)) {
-                                if (target.canTarget(abilityControllerId, permanent.getId(), source, game) && !target.contains(permanent.getId())) {
-                                    if ((permanent.isCopy() && !originOnly) || (!permanent.isCopy() && !copyOnly)) {
-                                        target.add(permanent.getId(), game);
-                                        isAddedSomething = true;
-                                        break;
-                                    }
-                                }
-                            } else if ((permanent.getName() + '-' + permanent.getExpansionSetCode()).equals(targetName)) { // TODO: remove search by exp code?
-                                if (target.canTarget(abilityControllerId, permanent.getId(), source, game) && !target.contains(permanent.getId())) {
-                                    if ((permanent.isCopy() && !originOnly) || (!permanent.isCopy() && !copyOnly)) {
-                                        target.add(permanent.getId(), game);
-                                        isAddedSomething = true;
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                    try {
-                        if (isAddedSomething) {
-                            if (target.isChoiceCompleted(abilityControllerId, source, game)) {
-                                return true;
-                            }
-                        } else {
-                            failOnLastBadChoice(game, source, target, choiceRecord, "invalid target or miss skip command");
-                        }
-                    } finally {
-                        choices.remove(0);
-                    }
-                    return isAddedSomething;
-                } // choices
-            }
-
-            if (target instanceof TargetPlayer) {
-                while (!choices.isEmpty()) { // TODO: remove cycle after main commits
-                    if (tryToSkipSelection(choices, CHOICE_SKIP)) {
-                        return false; // stop dialog
-                    }
-                    String choiceRecord = choices.get(0);
-                    isAddedSomething = false;
-                    for (Player player : game.getPlayers().values()) {
-                        if (player.getName().equals(choiceRecord)) {
-                            if (target.canTarget(abilityControllerId, player.getId(), source, game) && !target.contains(player.getId())) {
-                                target.add(player.getId(), game);
-                                isAddedSomething = true;
-                            }
-                        }
-                    }
-
-                    try {
-                        if (isAddedSomething) {
-                            if (target.isChoiceCompleted(abilityControllerId, source, game)) {
-                                return true;
-                            }
-                        } else {
-                            failOnLastBadChoice(game, source, target, choiceRecord, "invalid target or miss skip command");
-                        }
-                    } finally {
-                        choices.remove(0);
-                    }
-                    return isAddedSomething;
-                } // while choices
-            }
-
-            // TODO: add same choices fixes for other target types (one choice must uses only one time for one target)
-            if (target.getOriginalTarget() instanceof TargetCard) {
-                // one choice per target
-                // only unique targets
-                //TargetCard targetFull = ((TargetCard) target);
-
-                for (String choiceRecord : new ArrayList<>(choices)) { // TODO: remove cycle after main commits
-                    if (tryToSkipSelection(choices, CHOICE_SKIP)) {
-                        return false; // stop dialog
-                    }
-                    isAddedSomething = false;
-                    String[] possibleChoices = choiceRecord.split("\\^");
-
-                    for (String possibleChoice : possibleChoices) {
-                        Set<UUID> possibleCards = target.possibleTargets(abilityControllerId, source, game);
-                        for (UUID targetId : possibleCards) {
-                            MageObject targetObject = game.getCard(targetId);
-                            if (hasObjectTargetNameOrAlias(targetObject, possibleChoice)) {
-                                if (target.canTarget(targetObject.getId(), game) && !target.contains(targetObject.getId())) {
-                                    target.add(targetObject.getId(), game);
-                                    isAddedSomething = true;
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    try {
-                        if (isAddedSomething) {
-                            if (target.isChoiceCompleted(abilityControllerId, source, game)) {
-                                return true;
-                            }
-                        } else {
-                            failOnLastBadChoice(game, source, target, choiceRecord, "invalid target or miss skip command");
-                        }
-                    } finally {
-                        choices.remove(0);
-                    }
-                    return isAddedSomething;
-                } // for choices
-            }
-
-            if (target.getOriginalTarget() instanceof TargetSource) {
-                TargetSource t = ((TargetSource) target.getOriginalTarget());
-                Set<UUID> possibleTargets = t.possibleTargets(abilityControllerId, source, game);
-                // TODO: enable choices.get first instead all
-                for (String choiceRecord : new ArrayList<>(choices)) { // TODO: remove cycle after main commits
-                    if (tryToSkipSelection(choices, CHOICE_SKIP)) {
-                        return false; // stop dialog
-                    }
-                    String[] targetList = choiceRecord.split("\\^");
-                    isAddedSomething = false;
-                    for (String targetName : targetList) {
-                        for (UUID targetId : possibleTargets) {
-                            MageObject targetObject = game.getObject(targetId);
-                            if (targetObject != null) {
-                                if (hasObjectTargetNameOrAlias(targetObject, targetName)) {
-                                    if (t.canTarget(targetObject.getId(), game) && !target.contains(targetObject.getId())) {
-                                        target.add(targetObject.getId(), game);
-                                        isAddedSomething = true;
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    try {
-                        if (isAddedSomething) {
-                            if (target.isChoiceCompleted(abilityControllerId, source, game)) {
-                                return true;
-                            }
-                        } else {
-                            failOnLastBadChoice(game, source, target, choiceRecord, "invalid target or miss skip command");
-                        }
-                    } finally {
-                        choices.remove(choiceRecord);
-                    }
-                    return isAddedSomething;
-                } // for choices
-            }
-
-            // TODO: enable fail checks and fix tests
-            if (!target.getTargetName().equals("starting player")) {
-                assertWrongChoiceUsage(choices.size() > 0 ? choices.get(0) : "empty list");
-            }
-        }
-
-        this.chooseStrictModeFailed("choice", game, getInfo(source, game) + "\n" + getInfo(target, source, game, null));
-        return computerPlayer.choose(outcome, target, source, game, options);
+        return makeChoose(outcome, target, source, game, null);
     }
 
     private void checkTargetDefinitionMarksSupport(Target needTarget, String targetDefinition, String canSupportChars) {
@@ -2502,7 +2337,7 @@ public class TestPlayer implements Player {
         // how to fix: change target definition for addTarget in test's code or update choose from targets implementation in TestPlayer
         if ((foundMulti && !canMulti) || (foundSpecialStart && !canSpecialStart) || (foundSpecialClose && !canSpecialClose) || (foundEquals && !canEquals)) {
             Assert.fail(this.getName() + " - Targets list was setup by addTarget with " + targets + ", but target definition [" + targetDefinition + "]"
-                    + " is not supported by [" + canSupportChars + "] for target class " + needTarget.getClass().getSimpleName());
+                    + " is not supported by [" + canSupportChars + "] for target class " + getSimpleClassName(needTarget.getClass()));
         }
     }
 
@@ -2514,12 +2349,11 @@ public class TestPlayer implements Player {
         if (!targets.isEmpty()) {
 
             // skip targets
-            if (targets.get(0).equals(TARGET_SKIP)) {
+            if (tryToSkipSelection(game, target, targets, TARGET_SKIP)) {
                 Assert.assertTrue("found skip target, but it require more targets, needs "
                                 + (target.getMinNumberOfTargets() - target.getTargets().size()) + " more",
                         target.getTargets().size() >= target.getMinNumberOfTargets());
-                targets.remove(0);
-                return false; // false - stop to choose
+                return target.getSize() > 0 && target.isChosen(game);
             }
 
             Set<Zone> targetCardZonesChecked = new HashSet<>(); // control miss implementation
@@ -2538,7 +2372,7 @@ public class TestPlayer implements Player {
                                 && target.canTarget(abilityControllerId, player.getId(), source, game)
                                 && !target.contains(player.getId())) {
                             target.addTarget(player.getId(), source, game);
-                            targets.remove(targetDefinition);
+                            targetsRemoveCurrent(targetDefinition, game, "on choose target - player");
                             return true;
                         }
                     }
@@ -2590,7 +2424,7 @@ public class TestPlayer implements Player {
                         }
                     }
                     if (targetFound) {
-                        targets.remove(targetDefinition);
+                        targetsRemoveCurrent(targetDefinition, game, "on choose target - permanent");
                         return true;
                     }
                 }
@@ -2618,7 +2452,7 @@ public class TestPlayer implements Player {
                         }
                     }
                     if (targetFound) {
-                        targets.remove(targetDefinition);
+                        targetsRemoveCurrent(targetDefinition, game, "on choose target - hand");
                         return true;
                     }
                 }
@@ -2637,7 +2471,7 @@ public class TestPlayer implements Player {
                 }
                 if (filter == null) {
                     Assert.fail("Unsupported exile target filter in TestPlayer: "
-                            + target.getOriginalTarget().getClass().getCanonicalName());
+                            + getSimpleClassName(target.getOriginalTarget().getClass()));
                 }
 
                 for (String targetDefinition : targets.stream().limit(takeMaxTargetsPerChoose).collect(Collectors.toList())) {
@@ -2656,7 +2490,7 @@ public class TestPlayer implements Player {
                         }
                     }
                     if (targetFound) {
-                        targets.remove(targetDefinition);
+                        targetsRemoveCurrent(targetDefinition, game, "on choose target - exile");
                         return true;
                     }
                 }
@@ -2681,7 +2515,7 @@ public class TestPlayer implements Player {
                         }
                     }
                     if (targetFound) {
-                        targets.remove(targetDefinition);
+                        targetsRemoveCurrent(targetDefinition, game, "on choose target - card in battlefield");
                         return true;
                     }
                 }
@@ -2735,7 +2569,7 @@ public class TestPlayer implements Player {
                         }
                     }
                     if (targetFound) {
-                        targets.remove(targetDefinition);
+                        targetsRemoveCurrent(targetDefinition, game, "on choose target - graveyard");
                         return true;
                     }
                 }
@@ -2762,7 +2596,7 @@ public class TestPlayer implements Player {
                         }
                     }
                     if (targetFound) {
-                        targets.remove(targetDefinition);
+                        targetsRemoveCurrent(targetDefinition, game, "on choose target - stack");
                         return true;
                     }
                 }
@@ -2772,13 +2606,13 @@ public class TestPlayer implements Player {
             if (target.getOriginalTarget() instanceof TargetCardInLibrary
                     || (target.getOriginalTarget() instanceof TargetCard && target.getOriginalTarget().getZone() == Zone.LIBRARY)) {
                 // user don't have access to library, so it must be targeted through list/revealed cards
-                Assert.fail("Library zone is private, you must target through cards list, e.g. revealed: " + target.getOriginalTarget().getClass().getCanonicalName());
+                Assert.fail("Library zone is private, you must target through cards list, e.g. revealed: " + getSimpleClassName(target.getOriginalTarget().getClass()));
             }
 
             // uninplemented TargetCard's zone
             if (target.getOriginalTarget() instanceof TargetCard && !targetCardZonesChecked.contains(target.getOriginalTarget().getZone())) {
                 Assert.fail("Found unimplemented TargetCard's zone or TargetCard's extented class: "
-                        + target.getOriginalTarget().getClass().getCanonicalName()
+                        + getSimpleClassName(target.getOriginalTarget().getClass())
                         + ", zone " + target.getOriginalTarget().getZone()
                         + ", from " + (source == null ? "unknown source" : source.getSourceObject(game)));
             }
@@ -2793,14 +2627,14 @@ public class TestPlayer implements Player {
             if (source != null) {
                 message = this.getName() + " - Targets list was setup by addTarget with " + targets + ", but not used"
                         + "\nCard: " + source.getSourceObject(game)
-                        + "\nAbility: " + source.getClass().getSimpleName() + " (" + source.getRule() + ")"
-                        + "\nTarget: selected " + target.getSize() + ", possible " + possibleTargets.size() + ", " + target.getClass().getSimpleName() + " (" + target.getMessage(game) + ")"
+                        + "\nAbility: " + getSimpleClassName(source.getClass()) + " (" + source.getRule() + ")"
+                        + "\nTarget: selected " + target.getSize() + ", more possible " + possibleTargets.size() + ", " + getSimpleClassName(target.getClass()) + " (" + target.getMessage(game) + ")"
                         + "\nYou must implement target class support in TestPlayer, \"filter instanceof\", or setup good targets";
             } else {
                 message = this.getName() + " - Targets list was setup by addTarget with " + targets + ", but not used"
                         + "\nCard: unknown source"
                         + "\nAbility: unknown source"
-                        + "\nTarget: selected " + target.getSize() + ", possible " + possibleTargets.size() + ", " + target.getClass().getSimpleName() + " (" + target.getMessage(game) + ")"
+                        + "\nTarget: selected " + target.getSize() + ", more possible " + possibleTargets.size() + ", " + getSimpleClassName(target.getClass()) + " (" + target.getMessage(game) + ")"
                         + "\nYou must implement target class support in TestPlayer, \"filter instanceof\", or setup good targets";
             }
             Assert.fail(message);
@@ -2816,13 +2650,13 @@ public class TestPlayer implements Player {
 
         assertAliasSupportInTargets(false);
         if (!targets.isEmpty()) {
+
             // skip targets
-            if (targets.get(0).equals(TARGET_SKIP)) {
+            if (tryToSkipSelection(game, target, targets, TARGET_SKIP)) {
                 Assert.assertTrue("found skip target, but it require more targets, needs "
                                 + (target.getMinNumberOfTargets() - target.getTargets().size()) + " more",
                         target.getTargets().size() >= target.getMinNumberOfTargets());
-                targets.remove(0);
-                return false; // false - stop to choose
+                return target.getSize() > 0 && target.isChosen(game);
             }
             for (String targetDefinition : targets.stream().limit(takeMaxTargetsPerChoose).collect(Collectors.toList())) {
                 String[] targetList = targetDefinition.split("\\^");
@@ -2839,7 +2673,7 @@ public class TestPlayer implements Player {
                     }
                 }
                 if (targetFound) {
-                    targets.remove(targetDefinition);
+                    targetsRemoveCurrent(targetDefinition, game, "on choose target from cards");
                     return true;
                 }
             }
@@ -2861,7 +2695,7 @@ public class TestPlayer implements Player {
 
             for (TriggeredAbility ability : abilities) {
                 if (ability.toString().startsWith(choice)) {
-                    choices.remove(0);
+                    choicesRemoveCurrent(game, "on choose triggers"); // TODO: add short lists?
                     return ability;
                 }
             }
@@ -2890,11 +2724,11 @@ public class TestPlayer implements Player {
             String choice = choices.get(0);
 
             if (choice.equals("No")) {
-                choices.remove(0);
+                choicesRemoveCurrent(game, source);
                 return false;
             }
             if (choice.equals("Yes")) {
-                choices.remove(0);
+                choicesRemoveCurrent(game, source);
                 return true;
             }
 
@@ -2921,7 +2755,7 @@ public class TestPlayer implements Player {
             if (choices.get(0).startsWith("X=")) {
                 int xValue = Integer.parseInt(choices.get(0).substring(2));
                 assertXMinMaxValue(game, source, xValue, min, max);
-                choices.remove(0);
+                choicesRemoveCurrent(game, source);
                 return xValue;
             }
         }
@@ -2960,7 +2794,7 @@ public class TestPlayer implements Player {
         if (!choices.isEmpty()) {
             if (choices.get(0).startsWith("X=")) {
                 int xValue = Integer.parseInt(choices.get(0).substring(2));
-                choices.remove(0);
+                choicesRemoveCurrent(game, source);
                 return xValue;
             }
         }
@@ -2986,16 +2820,16 @@ public class TestPlayer implements Player {
             // must fill all possible choices or skip it
             for (int i = 0; i < messages.size(); i++) {
                 if (!choices.isEmpty()) {
+                    // skip
+                    if (tryToSkipSelection(game, null, choices, CHOICE_SKIP)) {
+                        break;
+                    }
+
                     // normal choice
                     if (choices.get(0).startsWith("X=")) {
                         answer.set(i, Integer.parseInt(choices.get(0).substring(2)));
-                        choices.remove(0);
+                        choicesRemoveCurrent(game, "on multi amount"); // TODO: add info?
                         continue;
-                    }
-                    // skip
-                    if (choices.get(0).equals(CHOICE_SKIP)) {
-                        choices.remove(0);
-                        break;
                     }
                 }
                 Assert.fail(String.format("Missing choice in multi amount: %s (pos %d - %s)", type.getHeader(), i, messages));
@@ -3054,7 +2888,7 @@ public class TestPlayer implements Player {
     @Override
     public void restore(Player player) {
         if (!(player instanceof TestPlayer)) {
-            throw new IllegalArgumentException("Wrong code usage: can't restore from player class " + player.getClass().getName());
+            throw new IllegalArgumentException("Wrong code usage: can't restore from player class " + getSimpleClassName(player.getClass()));
         }
 
         // no rollback for test player metadata (modesSet, actions, choices, targets, aliases, etc)
@@ -3799,10 +3633,10 @@ public class TestPlayer implements Player {
         if (!choices.isEmpty()) {
             String nextResult = choices.get(0);
             if (nextResult.equals(FLIPCOIN_RESULT_TRUE)) {
-                choices.remove(0);
+                choicesRemoveCurrent(game, "on flip coin");
                 return true;
             } else if (nextResult.equals(FLIPCOIN_RESULT_FALSE)) {
-                choices.remove(0);
+                choicesRemoveCurrent(game, "on flip coin");
                 return false;
             }
         }
@@ -3823,7 +3657,7 @@ public class TestPlayer implements Player {
         if (!choices.isEmpty()) {
             String nextResult = choices.get(0);
             if (nextResult.startsWith(DIE_ROLL)) {
-                choices.remove(0);
+                choicesRemoveCurrent(game, "on roll die");
                 return Integer.parseInt(nextResult.substring(DIE_ROLL.length()));
             }
         }
@@ -4266,62 +4100,143 @@ public class TestPlayer implements Player {
         return choose(outcome, target, source, game, null);
     }
 
-    private boolean tryToSkipSelection(List<String> selections, String selectionMark) {
-        if (!selections.isEmpty() && selections.get(0).equals(selectionMark)) {
+    public void skipAllNextChooseCommands() {
+        this.isSkipAllNextChooseCommands = true;
+    }
+
+    public boolean isSkipAllNextChooseCommands() {
+        return this.isSkipAllNextChooseCommands;
+    }
+
+    private boolean tryToSkipSelection(Game game, Target target, List<String> selections, String skipCommand) {
+        if (!selections.isEmpty() && selections.get(0).equals(skipCommand)) {
+
+            // mark target as skip, so choose dialog can be stopped on partly selection
+            if (target != null) {
+                if (target.getMaxNumberOfTargets() > target.getMinNumberOfTargets()) {
+                    target.setSkipChoice(true);
+                } else {
+                    Assert.fail("Wrong skip command found - it can be used with up to targets, but used in " + target);
+                }
+            }
+
             selections.remove(0);
+            DataCollectorServices.getInstance().onTestsChoiceUse(game, this, skipCommand, "by skip command");
+
             return true;
         }
         return false;
     }
 
-    @Override
-    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
-        assertAliasSupportInChoices(false);
-        if (!choices.isEmpty()) {
+    private boolean makeChoose(Outcome outcome, Target target, Ability source, Game game, Cards fromCards) {
+        assertAliasSupportInChoices(true);
 
+        // choose itself for starting player all the time
+        if (target.getMessage(game).equals("Select a starting player")) {
+            target.add(this.getId(), game);
+            return true;
+        }
+
+
+        UUID abilityControllerId = target.getAffectedAbilityControllerId(this.getId());
+
+        PossibleTargetsSelector possibleTargetsSelector = new PossibleTargetsSelector(outcome, target, abilityControllerId, source, game);
+        possibleTargetsSelector.findNewTargets(fromCards);
+
+        // nothing to choose, e.g. no valid targets
+        if (!possibleTargetsSelector.hasAnyTargets()) {
+            return false;
+        }
+
+        // can't choose
+        if (!possibleTargetsSelector.hasMinNumberOfTargets()) {
+            return false;
+        }
+
+        while (!choices.isEmpty()) {
             // skip choices
-            if (tryToSkipSelection(choices, CHOICE_SKIP)) {
-                if (cards.isEmpty()) {
-                    // cancel button forced in GUI on no possible choices
-                    // TODO: need research
-                    return false;
-                } else {
-                    Assert.assertTrue("found skip choice, but it require more choices, needs "
-                                    + (target.getMinNumberOfTargets() - target.getTargets().size()) + " more",
-                            target.getTargets().size() >= target.getMinNumberOfTargets());
-                    return false; // stop dialog
-                }
+            if (tryToSkipSelection(game, target, choices, CHOICE_SKIP)) {
+                Assert.assertTrue("found skip choice, but it require more choices, needs "
+                                + (target.getMinNumberOfTargets() - target.getTargets().size()) + " more",
+                        target.getTargets().size() >= target.getMinNumberOfTargets());
+                return target.getSize() > 0 && target.isChosen(game);
             }
 
-            for (String choose2 : new ArrayList<>(choices)) {
-                // TODO: More targetting to fix
-                String[] targetList = choose2.split("\\^");
-                boolean targetFound = false;
-                for (String targetName : targetList) {
-                    for (Card card : cards.getCards(game)) {
-                        if (target.contains(card.getId())) {
-                            continue;
-                        }
-                        if (hasObjectTargetNameOrAlias(card, targetName)) {
-                            if (target.isNotTarget() || target.canTarget(card.getId(), source, game)) {
-                                target.add(card.getId(), game);
-                                targetFound = true;
+            String choiceRecord = choices.get(0);
+            String[] targetList = choiceRecord.split("\\^");
+            boolean isAddedSomething = false;
+            for (String targetName : targetList) {
+                boolean originOnly = false;
+                boolean copyOnly = false;
+                if (targetName.endsWith("]")) {
+                    if (targetName.endsWith("[no copy]")) {
+                        originOnly = true;
+                        targetName = targetName.substring(0, targetName.length() - 9);
+                    }
+                    if (targetName.endsWith("[only copy]")) {
+                        copyOnly = true;
+                        targetName = targetName.substring(0, targetName.length() - 11);
+                    }
+                }
+
+                for (MageItem item : possibleTargetsSelector.getAny()) {
+                    if (target.contains(item.getId())) {
+                        continue;
+                    }
+                    if (item instanceof MageObject) {
+                        MageObject object = (MageObject) item;
+                        if (hasObjectTargetNameOrAlias(object, targetName)) {
+                            if ((object.isCopy() && !originOnly) || (!object.isCopy() && !copyOnly)) {
+                                target.add(object.getId(), game);
+                                isAddedSomething = true;
+                                break;
+                            }
+                        } else if ((object.getName() + '-' + object.getExpansionSetCode()).equals(targetName)) { // TODO: remove search by exp code?
+                            if ((object.isCopy() && !originOnly) || (!object.isCopy() && !copyOnly)) {
+                                target.add(object.getId(), game);
+                                isAddedSomething = true;
                                 break;
                             }
                         }
+                    } else if (item instanceof Player) {
+                        Player player = (Player) item;
+                        if (player.getName().equals(choiceRecord)) {
+                            target.add(player.getId(), game);
+                            isAddedSomething = true;
+                            break;
+                        }
+                    } else {
+                        throw new IllegalArgumentException("Unknown possible target type: " + getSimpleClassName(item.getClass()));
                     }
-                }
-                if (targetFound) {
-                    choices.remove(choose2);
-                    return true;
                 }
             }
 
-            assertWrongChoiceUsage(choices.size() > 0 ? choices.get(0) : "empty list");
+            try {
+                if (isAddedSomething) {
+                    if (target.isChoiceCompleted(abilityControllerId, source, game, fromCards)) {
+                        return true;
+                    }
+                    // must refresh possible targets after each "add" cause there are dynamic targets like TargetCardAndOrCard from Sludge Titan
+                    possibleTargetsSelector.findNewTargets(fromCards);
+                } else {
+                    failOnLastBadChoice(game, source, target, choiceRecord, "invalid target or miss skip command");
+                }
+            } finally {
+                choicesRemoveCurrent(game, source);
+            }
         }
 
-        this.chooseStrictModeFailed("choice", game, getInfo(source, game) + "\n" + getInfo(target, source, game, cards));
-        return computerPlayer.choose(outcome, cards, target, source, game);
+        this.chooseStrictModeFailed("choice", game, getInfo(source, game) + "\n" + getInfo(target, source, game, fromCards));
+        if (fromCards != null) {
+            return computerPlayer.choose(outcome, fromCards, (TargetCard) target, source, game);
+        } else {
+            return computerPlayer.choose(outcome, target, source, game);
+        }
+    }
+
+    @Override
+    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
+        return makeChoose(outcome, target, source, game, cards);
     }
 
     @Override
@@ -4347,12 +4262,11 @@ public class TestPlayer implements Player {
         while (!targets.isEmpty()) {
 
             // skip targets
-            if (targets.get(0).equals(TARGET_SKIP)) {
+            if (tryToSkipSelection(game, target, targets, TARGET_SKIP)) {
                 Assert.assertTrue("found skip target, but it require more targets, needs "
                                 + (target.getMinNumberOfTargets() - target.getTargets().size()) + " more",
                         target.getTargets().size() >= target.getMinNumberOfTargets());
-                targets.remove(0);
-                return false; // false - stop to choose
+                return target.getSize() > 0 && target.isChosen(game);
             }
 
             // only target amount needs
@@ -4376,7 +4290,7 @@ public class TestPlayer implements Player {
             Assert.assertTrue("target amount must be <= remaining = " + target.getAmountRemaining() + " " + targetInfo, targetAmount <= target.getAmountRemaining());
 
             if (target.getAmountRemaining() > 0) {
-                for (UUID possibleTarget : target.possibleTargets(source.getControllerId(), source, game)) {
+                for (UUID possibleTarget : target.possibleTargets(abilityControllerId, source, game)) {
                     boolean foundTarget = false;
 
                     // permanent
@@ -4392,10 +4306,10 @@ public class TestPlayer implements Player {
                     }
 
                     if (foundTarget) {
-                        if (!target.contains(possibleTarget) && target.canTarget(possibleTarget, source, game)) {
+                        if (!target.contains(possibleTarget) && target.canTarget(abilityControllerId, possibleTarget, source, game)) {
                             // can select
                             target.addTarget(possibleTarget, targetAmount, source, game);
-                            targets.remove(0);
+                            targetsRemoveCurrent(null, game, "on choose target amount");
                             // allow test player to choose as much as possible until skip command
                             if (target.getAmountRemaining() <= 0) {
                                 return true;
@@ -4437,7 +4351,7 @@ public class TestPlayer implements Player {
 
                 // simulate cancel on mana payment (e.g. user press on cancel button)
                 if (choices.get(0).equals(MANA_CANCEL)) {
-                    choices.remove(0);
+                    choicesRemoveCurrent(game, "on play mana"); // TODO: add info?
                     return false;
                 }
 
@@ -4487,7 +4401,7 @@ public class TestPlayer implements Player {
                     for (SpecialAction specialAction : specialActions.values()) {
                         if (specialAction.getRule(true).startsWith(choice)) {
                             if (specialAction.canActivate(this.getId(), game).canActivate()) {
-                                choices.remove(0);
+                                choicesRemoveCurrent(game, "on play mana"); // TODO: add info?
                                 choiceRemoved = true;
                                 if (activateAbility(specialAction, game)) {
                                     choiceUsed = true;
@@ -4501,7 +4415,7 @@ public class TestPlayer implements Player {
 
                 if (choiceUsed) {
                     if (!choiceRemoved) {
-                        choices.remove(0);
+                        choicesRemoveCurrent(game, "on play mana"); // TODO: add info?
                     }
                     return true;
                 } else {
@@ -4682,7 +4596,7 @@ public class TestPlayer implements Player {
             String choice = choices.get(0);
             for (SpellAbility ability : useable.values()) {
                 if (ability.toString().startsWith(choice)) {
-                    choices.remove(0);
+                    choicesRemoveCurrent(game, "on choose ability for cast - " + card.getName());
                     return ability;
                 }
             }
@@ -4714,7 +4628,7 @@ public class TestPlayer implements Player {
         if (!choices.isEmpty()) {
             for (ActivatedAbility ability : useable.values()) {
                 if (ability.toString().startsWith(choices.get(0))) {
-                    choices.remove(0);
+                    choicesRemoveCurrent(game, "on choose land or spell ability - " + card.getName());
                     return ability;
                 }
             }
@@ -4762,13 +4676,52 @@ public class TestPlayer implements Player {
     }
 
     private void assertWrongChoiceUsage(String choice) {
-        // TODO: enable fail checks and fix tests, it's a part of setStrictChooseMode's implementation to all tests
-        //Assert.fail("Wrong choice command: " + choice);
-        LOGGER.warn("Wrong choice command: " + choice);
+        // TODO: enable and fix all failed tests
+        assertWrongChoiceUsage(choice, false);
+    }
+
+    private void assertWrongChoiceUsage(String choice, boolean isRaiseError) {
+        if (isRaiseError) {
+            Assert.fail("Wrong choice command: " + choice);
+        } else {
+            LOGGER.warn("Wrong choice command: " + choice);
+        }
     }
 
     @Override
     public Player getRealPlayer() {
         return this.computerPlayer;
+    }
+
+    private void choicesRemoveCurrent(Game game, Ability source) {
+        choicesRemoveCurrent(game, CardUtil.getSourceLogName(game, "ability: ", source, "", ""));
+    }
+
+    private void choicesRemoveCurrent(Game game, String reason) {
+        String realReason = reason.isEmpty() ? "SBA" : reason;
+        DataCollectorServices.getInstance().onTestsChoiceUse(game, this, choices.get(0), "by setChoice, " + realReason);
+        choices.remove(0);
+    }
+
+    // TODO: implement after takeMaxTargetsPerChoose fix/remove (targets must use while logic all the time - same as choices)
+    // TODO: make same logs for AI choices
+    private void targetsRemoveCurrent(String targetToRemove, Game game, String reason) {
+        String realReason = reason.isEmpty() ? "SBA" : reason;
+        DataCollectorServices.getInstance().onTestsTargetUse(game, this, targets.get(0), "by addTarget, " + realReason);
+        if (targetToRemove == null) {
+            targets.remove(0);
+        } else {
+            targets.remove(targetToRemove); // TODO: must be targets.remove(0), see todos above
+        }
+    }
+
+    private void modesRemoveCurrent(Game game, Mode mode) {
+        DataCollectorServices.getInstance().onTestsChoiceUse(game, this, modes.get(0), "by setMode, mode: " + mode.getEffects().getText(mode));
+        modes.remove(0);
+    }
+
+    private String getSimpleClassName(Class clazz) {
+        // anon classes don't have names, so return name instead simple
+        return clazz.getSimpleName().isEmpty() ? clazz.getName() : clazz.getSimpleName();
     }
 }

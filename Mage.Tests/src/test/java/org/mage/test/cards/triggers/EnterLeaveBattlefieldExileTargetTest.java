@@ -24,7 +24,6 @@ public class EnterLeaveBattlefieldExileTargetTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Angel of Serenity");
         addTarget(playerA, "Silvercoat Lion^Pillarfield Ox");
-        addTarget(playerA, TestPlayer.TARGET_SKIP);
         setChoice(playerA, true);
 
         setStrictChooseMode(true);

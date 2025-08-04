@@ -4,6 +4,7 @@ import mage.collectors.services.PrintGameLogsDataCollector;
 import mage.collectors.services.SaveGameHistoryDataCollector;
 import mage.game.Game;
 import mage.game.Table;
+import mage.players.Player;
 import org.apache.log4j.Logger;
 
 import java.util.LinkedHashSet;
@@ -139,5 +140,29 @@ final public class DataCollectorServices implements DataCollector {
     @Override
     public void onChatGame(UUID gameId, String userName, String message) {
         activeServices.forEach(c -> c.onChatGame(gameId, userName, message));
+    }
+
+    @Override
+    public void onTestsChoiceUse(Game game, Player player, String usingChoice, String reason) {
+        if (game.isSimulation()) return;
+        activeServices.forEach(c -> c.onTestsChoiceUse(game, player, usingChoice, reason));
+    }
+
+    @Override
+    public void onTestsTargetUse(Game game, Player player, String usingTarget, String reason) {
+        if (game.isSimulation()) return;
+        activeServices.forEach(c -> c.onTestsTargetUse(game, player, usingTarget, reason));
+    }
+
+    @Override
+    public void onTestsStackPush(Game game) {
+        if (game.isSimulation()) return;
+        activeServices.forEach(c -> c.onTestsStackPush(game));
+    }
+
+    @Override
+    public void onTestsStackResolve(Game game) {
+        if (game.isSimulation()) return;
+        activeServices.forEach(c -> c.onTestsStackResolve(game));
     }
 }

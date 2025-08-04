@@ -100,7 +100,6 @@ public class BarrowgoyfTest extends CardTestPlayerBase {
 
         attack(1, playerA, barrowgoyf, playerB);
         setChoice(playerA, true);
-        setChoice(playerA, TestPlayer.CHOICE_SKIP); // decide to not return. There was no choice anyway.
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();

@@ -162,7 +162,7 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
     // Result must be checked for null. Possible errors search pattern: (\S*) = game.getPlayer.+\n(?!.+\1 != null)
     Player getPlayer(UUID playerId);
 
-    Player getPlayerOrPlaneswalkerController(UUID playerId);
+    Player getPlayerOrPlaneswalkerController(UUID targetId);
 
     /**
      * Static players list from start of the game. Use it to find player by ID or in game engine.

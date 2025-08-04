@@ -42,7 +42,11 @@ public class Spell extends StackObjectImpl implements Card {
 
     private final List<SpellAbility> spellAbilities = new ArrayList<>();
 
+    // this.card.getSpellAbility() - blueprint ability with zero selected targets
+    // this.ability - real casting ability with selected targets
+    // so if you need to check targets on cast then try to use "Ability source" param first (e.g. aura legality on etb)
     private final Card card;
+
     private ManaCosts<ManaCost> manaCost;
     private final ObjectColor color;
     private final ObjectColor frameColor;
@@ -1157,7 +1161,7 @@ public class Spell extends StackObjectImpl implements Card {
             applier.modifySpell(spellCopy, game);
         }
         spellCopy.setZone(Zone.STACK, game);  // required for targeting ex: Nivmagus Elemental
-        game.getStack().push(spellCopy);
+        game.getStack().push(game, spellCopy);
 
         // new targets
         if (newTargetFilterPredicate != null) {

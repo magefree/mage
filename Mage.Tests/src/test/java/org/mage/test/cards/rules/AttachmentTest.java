@@ -282,9 +282,9 @@ public class AttachmentTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Show and Tell");
-        setChoice(playerA, true);
-        setChoice(playerB, false);
+        setChoice(playerA, true); // yes, put from hand to battle
         addTarget(playerA, "Aether Tunnel");
+        setChoice(playerB, false); // no, do not put
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

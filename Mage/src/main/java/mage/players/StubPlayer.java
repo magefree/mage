@@ -43,7 +43,7 @@ public class StubPlayer extends PlayerImpl {
         if (target instanceof TargetPlayer) {
             for (Player player : game.getPlayers().values()) {
                 if (player.getId().equals(getId())
-                        && target.canTarget(getId(), game)
+                        && target.canTarget(getId(), source, game)
                         && !target.contains(getId())) {
                     target.add(player.getId(), game);
                     return true;

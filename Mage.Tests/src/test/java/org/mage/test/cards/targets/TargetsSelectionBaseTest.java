@@ -54,11 +54,10 @@ public class TargetsSelectionBaseTest extends CardTestPlayerBaseWithAIHelps {
         checkHandCardCount("prepare", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Swamp", availableCardsCount);
         checkExileCount("prepare", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Swamp", 0);
 
+        // cause minTarget = 0, so ability can be activated at any time
+        checkPlayableAbility("can activate on any targets", 1, PhaseStep.PRECOMBAT_MAIN, playerA, startingText, true);
         if (availableCardsCount > 0) {
-            checkPlayableAbility("can activate on non-zero targets", 1, PhaseStep.PRECOMBAT_MAIN, playerA, startingText, true);
             activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, startingText);
-        } else {
-            checkPlayableAbility("can't activate on zero targets", 1, PhaseStep.PRECOMBAT_MAIN, playerA, startingText, false);
         }
 
         if (chooseCardsCount > 0) {
@@ -74,7 +73,8 @@ public class TargetsSelectionBaseTest extends CardTestPlayerBaseWithAIHelps {
             // - 2 of 3 - yes
             // - 3 of 3 - no, it's auto-finish on last select
             // - 3 of 5 - no, it's auto-finish on last select
-            if (chooseCardsCount < maxTarget) {
+            int maxPossibleChoose = Math.min(availableCardsCount, maxTarget);
+            if (chooseCardsCount < maxPossibleChoose) {
                 addTarget(playerA, TestPlayer.TARGET_SKIP);
             }
         } else {
@@ -128,20 +128,18 @@ public class TargetsSelectionBaseTest extends CardTestPlayerBaseWithAIHelps {
                 targetCards.add("Swamp");
             });
             setChoice(playerA, String.join("^", targetCards));
-        } else {
-            // need skip
-            // on 0 cards there are must be dialog with done button anyway
+        }
 
-            // end selection:
-            // - x of 0 - yes
-            // - 1 of 3 - yes
-            // - 2 of 3 - yes
-            // - 3 of 3 - no, it's auto-finish on last select
-            // - 3 of 5 - no, it's auto-finish on last select
-            if (chooseCardsCount < maxTarget) {
-                setChoice(playerA, TestPlayer.CHOICE_SKIP);
-            }
-
+        // choose skip
+        // end selection condition:
+        // - x of 0 - yes
+        // - 1 of 3 - yes
+        // - 2 of 3 - yes
+        // - 3 of 3 - no, it's auto-finish on last select
+        // - 3 of 5 - no, it's auto-finish on last select and nothing to choose
+        int canSelectCount = Math.min(maxTarget, availableCardsCount);
+        if (canSelectCount > 0 && chooseCardsCount < canSelectCount) {
+            setChoice(playerA, TestPlayer.CHOICE_SKIP);
         }
 
         if (DEBUG_ENABLE_DETAIL_LOGS) {

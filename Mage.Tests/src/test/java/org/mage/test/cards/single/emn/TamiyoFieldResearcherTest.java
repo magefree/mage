@@ -78,7 +78,7 @@ public class TamiyoFieldResearcherTest extends CardTestPlayerBase {
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Choose up to two");
         addTarget(playerA, "Bronze Sable");
-        addTarget(playerA, TestPlayer.TARGET_SKIP);
+        //addTarget(playerA, TestPlayer.TARGET_SKIP); // there are only 1 creature, so choose 1 of 2, no need in skip
 
         attack(1, playerA, "Bronze Sable");
 
@@ -240,7 +240,7 @@ public class TamiyoFieldResearcherTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tamiyo, Field Researcher", true);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Choose up to two");
         addTarget(playerA, "Bronze Sable");
-        addTarget(playerA, TestPlayer.TARGET_SKIP);
+        //addTarget(playerA, TestPlayer.TARGET_SKIP); // there are only 1 creature, so choose 1 of 2, no need in skip
 
         attack(2, playerB, "Bronze Sable");
 

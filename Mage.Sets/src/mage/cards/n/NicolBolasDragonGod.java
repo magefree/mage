@@ -150,7 +150,7 @@ class NicolBolasDragonGodPlusOneEffect extends OneShotEffect {
             TargetPermanent targetPermanent = new TargetControlledPermanent();
             targetPermanent.withNotTarget(true);
             targetPermanent.setTargetController(opponentId);
-            if (!targetPermanent.possibleTargets(opponentId, game).isEmpty()) {
+            if (!targetPermanent.possibleTargets(opponentId, source, game).isEmpty()) {
                 possibleTargetTypes.add(targetPermanent);
             }
 

@@ -3,6 +3,7 @@ package mage.collectors.services;
 import mage.collectors.DataCollector;
 import mage.game.Game;
 import mage.game.Table;
+import mage.players.Player;
 
 import java.util.UUID;
 
@@ -65,6 +66,26 @@ public abstract class EmptyDataCollector implements DataCollector {
 
     @Override
     public void onChatGame(UUID gameId, String userName, String message) {
+        // nothing
+    }
+
+    @Override
+    public void onTestsChoiceUse(Game game, Player player, String usingChoice, String reason) {
+        // nothing
+    }
+
+    @Override
+    public void onTestsTargetUse(Game game, Player player, String usingTarget, String reason) {
+        // nothing
+    }
+
+    @Override
+    public void onTestsStackPush(Game game) {
+        // nothing
+    }
+
+    @Override
+    public void onTestsStackResolve(Game game) {
         // nothing
     }
 }

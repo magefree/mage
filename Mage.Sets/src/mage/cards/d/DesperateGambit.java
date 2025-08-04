@@ -137,49 +137,12 @@ class TargetControlledSource extends TargetSource {
     }
 
     @Override
-    public boolean canChoose(UUID sourceControllerId, Game game) {
-        int count = 0;
-        for (StackObject stackObject : game.getStack()) {
-            if (game.getState().getPlayersInRange(sourceControllerId, game).contains(stackObject.getControllerId())
-                    && Objects.equals(stackObject.getControllerId(), sourceControllerId)) {
-                count++;
-                if (count >= this.minNumberOfTargets) {
-                    return true;
-                }
-            }
-        }
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(sourceControllerId, game)) {
-            if (Objects.equals(permanent.getControllerId(), sourceControllerId)) {
-                count++;
-                if (count >= this.minNumberOfTargets) {
-                    return true;
-                }
-            }
-        }
-        for (Player player : game.getPlayers().values()) {
-            if (Objects.equals(player, game.getPlayer(sourceControllerId))) {
-                for (Card card : player.getGraveyard().getCards(game)) {
-                    count++;
-                    if (count >= this.minNumberOfTargets) {
-                        return true;
-                    }
-                }
-                // 108.4a If anything asks for the controller of a card that doesn't have one (because it's not a permanent or spell), use its owner instead.
-                for (Card card : game.getExile().getAllCards(game)) {
-                    if (Objects.equals(card.getOwnerId(), sourceControllerId)) {
-                        count++;
-                        if (count >= this.minNumberOfTargets) {
-                            return true;
-                        }
-                    }
-                }
-            }
-        }
-        return false;
+    public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
+        return canChooseFromPossibleTargets(sourceControllerId, source, game);
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
         for (StackObject stackObject : game.getStack()) {
             if (game.getState().getPlayersInRange(sourceControllerId, game).contains(stackObject.getControllerId())
@@ -205,7 +168,7 @@ class TargetControlledSource extends TargetSource {
                 }
             }
         }
-        return possibleTargets;
+        return keepValidPossibleTargets(possibleTargets, sourceControllerId, source, game);
     }
 
     @Override

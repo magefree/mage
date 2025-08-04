@@ -80,59 +80,9 @@ public class TargetCardInYourGraveyard extends TargetCard {
         Set<UUID> possibleTargets = new HashSet<>();
         Player player = game.getPlayer(sourceControllerId);
         for (Card card : player.getGraveyard().getCards(filter, sourceControllerId, source, game)) {
-            if (source == null || source.getSourceId() == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, source.getSourceId(), sourceControllerId))) {
-                possibleTargets.add(card.getId());
-            }
+            possibleTargets.add(card.getId());
         }
-        return possibleTargets;
-    }
-
-    @Override
-    public Set<UUID> possibleTargets(UUID sourceControllerId, Cards cards, Ability source, Game game) {
-        Set<UUID> possibleTargets = new HashSet<>();
-        Player player = game.getPlayer(sourceControllerId);
-        if (player == null) {
-            return possibleTargets;
-        }
-
-        for (Card card : cards.getCards(filter, sourceControllerId, source, game)) {
-            if (player.getGraveyard().getCards(game).contains(card)) {
-                possibleTargets.add(card.getId());
-            }
-        }
-        return possibleTargets;
-    }
-
-    /**
-     * Checks if there are enough {@link Card} that can be selected.
-     *
-     * @param sourceControllerId - controller of the select event
-     * @param game
-     * @return - true if enough valid {@link Card} exist
-     */
-    @Override
-    public boolean canChoose(UUID sourceControllerId, Game game) {
-        return game.getPlayer(sourceControllerId).getGraveyard().count(filter, game) >= this.minNumberOfTargets;
-    }
-
-    @Override
-    public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
-        Player player = game.getPlayer(sourceControllerId);
-        if (player != null) {
-            if (this.minNumberOfTargets == 0) {
-                return true;
-            }
-            int possibleTargets = 0;
-            for (Card card : player.getGraveyard().getCards(filter, sourceControllerId, source, game)) {
-                if (source == null || source.getSourceId() == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, source.getSourceId(), sourceControllerId))) {
-                    possibleTargets++;
-                    if (possibleTargets >= this.minNumberOfTargets) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
+        return keepValidPossibleTargets(possibleTargets, sourceControllerId, source, game);
     }
 
     @Override

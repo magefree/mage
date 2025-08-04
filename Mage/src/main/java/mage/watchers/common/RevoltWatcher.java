@@ -17,7 +17,7 @@ import java.util.UUID;
  */
 public class RevoltWatcher extends Watcher {
 
-    private final Set<UUID> revoltActivePlayerIds = new HashSet<>(0);
+    private final Set<UUID> revoltActivePlayerIds = new HashSet<>();
 
     public RevoltWatcher() {
         super(WatcherScope.GAME);

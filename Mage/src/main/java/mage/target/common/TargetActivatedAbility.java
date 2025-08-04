@@ -54,38 +54,21 @@ public class TargetActivatedAbility extends TargetObject {
 
     @Override
     public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
-        return canChoose(sourceControllerId, game);
-    }
-
-    @Override
-    public boolean canChoose(UUID sourceControllerId, Game game) {
-        for (StackObject stackObject : game.getStack()) {
-            if (stackObject.getStackAbility() != null
-                    && stackObject.getStackAbility().isActivatedAbility()
-                    && game.getState().getPlayersInRange(sourceControllerId, game).contains(stackObject.getStackAbility().getControllerId())
-            ) {
-                return true;
-            }
-        }
-        return false;
+        return canChooseFromPossibleTargets(sourceControllerId, source, game);
     }
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
-        return possibleTargets(sourceControllerId, game);
-    }
-
-    @Override
-    public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
         for (StackObject stackObject : game.getStack()) {
             if (stackObject.getStackAbility().isActivatedAbility()
                     && game.getState().getPlayersInRange(sourceControllerId, game).contains(stackObject.getStackAbility().getControllerId())
-                    && filter.match(stackObject, game)) {
+                    && filter.match(stackObject,sourceControllerId, source, game)
+                    && this.notContains(stackObject.getId())) {
                 possibleTargets.add(stackObject.getStackAbility().getId());
             }
         }
-        return possibleTargets;
+        return keepValidPossibleTargets(possibleTargets, sourceControllerId, source, game);
     }
 
     @Override

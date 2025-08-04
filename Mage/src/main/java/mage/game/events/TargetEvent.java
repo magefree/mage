@@ -12,24 +12,21 @@ import java.util.UUID;
 public class TargetEvent extends GameEvent {
 
     /**
-     * @param target
-     * @param sourceId
      * @param sourceControllerId can be different from real controller (example: ability instructs another player to targeting)
      */
     public TargetEvent(Card target, UUID sourceId, UUID sourceControllerId) {
-        super(GameEvent.EventType.TARGET, target.getId(), null, sourceControllerId);
-        this.setSourceId(sourceId);
+        this(target.getId(), sourceId, sourceControllerId);
     }
 
     public TargetEvent(Player target, UUID sourceId, UUID sourceControllerId) {
-        super(GameEvent.EventType.TARGET, target.getId(), null, sourceControllerId);
+        this(target.getId(), sourceId, sourceControllerId);
+    }
+
+    public TargetEvent(UUID targetId, UUID sourceId, UUID sourceControllerId) {
+        super(GameEvent.EventType.TARGET, targetId, null, sourceControllerId);
         this.setSourceId(sourceId);
     }
 
-    /**
-     * @param targetId
-     * @param source
-     */
     public TargetEvent(UUID targetId, Ability source) {
         super(GameEvent.EventType.TARGET, targetId, source, source.getControllerId());
     }

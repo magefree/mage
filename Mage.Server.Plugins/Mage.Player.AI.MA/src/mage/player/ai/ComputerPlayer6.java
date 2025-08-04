@@ -405,13 +405,13 @@ public class ComputerPlayer6 extends ComputerPlayer {
             if (effect != null
                     && stackObject.getControllerId().equals(playerId)) {
                 Target target = effect.getTarget();
-                if (!target.isChoiceCompleted(getId(), (StackAbility) stackObject, game)) {
+                if (!target.isChoiceCompleted(getId(), (StackAbility) stackObject, game, null)) {
                     for (UUID targetId : target.possibleTargets(stackObject.getControllerId(), stackObject.getStackAbility(), game)) {
                         Game sim = game.createSimulationForAI();
                         StackAbility newAbility = (StackAbility) stackObject.copy();
                         SearchEffect newEffect = getSearchEffect(newAbility);
                         newEffect.getTarget().addTarget(targetId, newAbility, sim);
-                        sim.getStack().push(newAbility);
+                        sim.getStack().push(sim, newAbility);
                         SimulationNode2 newNode = new SimulationNode2(node, sim, depth, stackObject.getControllerId());
                         node.children.add(newNode);
                         newNode.getTargets().add(targetId);
@@ -886,10 +886,10 @@ public class ComputerPlayer6 extends ComputerPlayer {
         }
 
         UUID abilityControllerId = target.getAffectedAbilityControllerId(getId());
-        if (!target.isChoiceCompleted(abilityControllerId, source, game)) {
+        if (!target.isChoiceCompleted(abilityControllerId, source, game, cards)) {
             for (UUID targetId : targets) {
                 target.addTarget(targetId, source, game);
-                if (target.isChoiceCompleted(abilityControllerId, source, game)) {
+                if (target.isChoiceCompleted(abilityControllerId, source, game, cards)) {
                     targets.clear();
                     return true;
                 }
@@ -906,10 +906,10 @@ public class ComputerPlayer6 extends ComputerPlayer {
         }
 
         UUID abilityControllerId = target.getAffectedAbilityControllerId(getId());
-        if (!target.isChoiceCompleted(abilityControllerId, source, game)) {
+        if (!target.isChoiceCompleted(abilityControllerId, source, game, cards)) {
             for (UUID targetId : targets) {
                 target.add(targetId, game);
-                if (target.isChoiceCompleted(abilityControllerId, source, game)) {
+                if (target.isChoiceCompleted(abilityControllerId, source, game, cards)) {
                     targets.clear();
                     return true;
                 }

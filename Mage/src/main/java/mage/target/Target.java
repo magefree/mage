@@ -1,11 +1,13 @@
 package mage.target;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.cards.Cards;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.Copyable;
 
@@ -27,10 +29,24 @@ public interface Target extends Copyable<Target>, Serializable {
      * Warning, for "up to" targets it will return true all the time, so make sure your dialog
      * use do-while logic and call "choose" one time min or use isChoiceCompleted
      */
-    @Deprecated // TODO: replace with UUID abilityControllerId, Ability source, Game game
+    @Deprecated
+    // TODO: replace with UUID abilityControllerId, Ability source, Game game
     boolean isChosen(Game game);
 
-    boolean isChoiceCompleted(UUID abilityControllerId, Ability source, Game game);
+    /**
+     * Checking target complete and nothing to choose (X=0, all selected, all possible selected, etc)
+     *
+     * @param fromCards can be null for non cards selection
+     */
+    boolean isChoiceCompleted(UUID abilityControllerId, Ability source, Game game, Cards fromCards);
+
+    /**
+     * Temporary status to work with "up to" targets (mark target that it was skip on selection)
+     * TODO: remove after target.chooseXXX remove
+     */
+    boolean isSkipChoice();
+
+    void setSkipChoice(boolean isSkipChoice);
 
     void clearChosen();
 
@@ -51,16 +67,50 @@ public interface Target extends Copyable<Target>, Serializable {
      */
     Target withNotTarget(boolean notTarget);
 
-    // methods for targets
+    /**
+     * Checks if there are enough targets the player can choose from among them
+     * or if they are autochosen since there are fewer than the minimum number.
+     * <p>
+     * Implement as return canChooseFromPossibleTargets(sourceControllerId, source, game);
+     * TODO: remove after all canChoose replaced with default
+     *
+     * @param sourceControllerId - controller of the target event source
+     * @param source             - can be null
+     * @param game
+     * @return - true if enough valid choices exist
+     */
     boolean canChoose(UUID sourceControllerId, Ability source, Game game);
 
     /**
+     * Make sure target can be fully selected or already selected, e.g. by AI sims
+     * <p>
+     * Do not override
+     */
+    default boolean canChooseOrAlreadyChosen(UUID sourceControllerId, Ability source, Game game) {
+        return this.isChosen(game) || this.canChoose(sourceControllerId, source, game);
+    }
+
+    default boolean canChooseFromPossibleTargets(UUID sourceControllerId, Ability source, Game game) {
+        // TODO: replace all canChoose override methods by that code call
+        if (getMinNumberOfTargets() == 0) {
+            return true;
+        }
+
+        int selectedCount = getSize();
+        int moreSelectCount = possibleTargets(sourceControllerId, source, game).size();
+
+        if (selectedCount >= getMaxNumberOfTargets()) {
+            return false;
+        }
+
+        return moreSelectCount > 0 && selectedCount + moreSelectCount >= getMinNumberOfTargets();
+    }
+
+    /**
      * Returns a set of all possible targets that match the criteria of the implemented Target class.
+     * WARNING, it must filter already selected targets by keepValidPossibleTargets call at the end
      *
-     * @param sourceControllerId UUID of the ability's controller
-     * @param source             Ability which requires the targets
-     * @param game               Current game
-     * @return Set of the UUIDs of possible targets
+     * @param source - can be null
      */
     Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game);
 
@@ -68,6 +118,42 @@ public interface Target extends Copyable<Target>, Serializable {
         // do not override
         return possibleTargets(sourceControllerId, source, game).stream()
                 .filter(id -> cards == null || cards.contains(id))
+                .collect(Collectors.toSet());
+    }
+
+    /**
+     * Keep only valid and not selected targets - must be used inside any possibleTargets implementation
+     */
+    default Set<UUID> keepValidPossibleTargets(Set<UUID> possibleTargets, UUID sourceControllerId, Ability source, Game game) {
+        // TODO: check target amount in human dialogs - is it allow to select it again
+        // do not override
+        // keep only valid and not selected targets list
+        return possibleTargets.stream()
+                .filter(this::notContains)
+                .filter(targetId -> {
+                    // non-target allow any
+                    if (source == null || source.getSourceId() == null || isNotTarget()) {
+                        return true;
+                    }
+                    MageObject sourceObject = game.getObject(source);
+                    if (sourceObject == null) {
+                        return true;
+                    }
+
+                    // target allow non-protected
+                    Player targetPlayer = game.getPlayer(targetId);
+                    if (targetPlayer != null) {
+                        return !targetPlayer.hasLeft()
+                                && canTarget(sourceControllerId, targetId, source, game)
+                                && targetPlayer.canBeTargetedBy(sourceObject, sourceControllerId, source, game);
+                    }
+                    Permanent targetPermanent = game.getPermanent(targetId);
+                    if (targetPermanent != null) {
+                        return canTarget(sourceControllerId, targetId, source, game)
+                                && targetPermanent.canBeTargetedBy(sourceObject, sourceControllerId, source, game);
+                    }
+                    return true;
+                })
                 .collect(Collectors.toSet());
     }
 
@@ -86,8 +172,6 @@ public interface Target extends Copyable<Target>, Serializable {
     void addTarget(UUID id, Ability source, Game game, boolean skipEvent);
 
     void addTarget(UUID id, int amount, Ability source, Game game, boolean skipEvent);
-
-    boolean canTarget(UUID id, Game game);
 
     /**
      * @param id
@@ -108,11 +192,12 @@ public interface Target extends Copyable<Target>, Serializable {
      */
     List<? extends Target> getTargetOptions(Ability source, Game game);
 
-    boolean canChoose(UUID sourceControllerId, Game game);
+    default boolean canChoose(UUID sourceControllerId, Game game) {
+        return canChoose(sourceControllerId, null, game);
+    }
 
-    Set<UUID> possibleTargets(UUID sourceControllerId, Game game);
-
-    @Deprecated // TODO: need replace to source only version?
+    @Deprecated
+        // TODO: need replace to source only version?
     boolean choose(Outcome outcome, UUID playerId, UUID sourceId, Ability source, Game game);
 
     /**
@@ -235,6 +320,11 @@ public interface Target extends Copyable<Target>, Serializable {
     int getSize();
 
     boolean contains(UUID targetId);
+
+    default boolean notContains(UUID targetId) {
+        // for better usage in streams
+        return !contains(targetId);
+    }
 
     /**
      * This function tries to auto-choose the next target.

@@ -3,6 +3,7 @@ package org.mage.test.cards.abilities.keywords;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -24,8 +25,9 @@ public class SpreeTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, bear, 1);
         addCard(Zone.HAND, playerA, accident);
 
-        setModeChoice(playerA, "1");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, accident, bear);
+        setModeChoice(playerA, "1");
+        setModeChoice(playerA, TestPlayer.MODE_SKIP);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -41,8 +43,9 @@ public class SpreeTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1 + 1);
         addCard(Zone.HAND, playerA, accident);
 
-        setModeChoice(playerA, "2");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, accident);
+        setModeChoice(playerA, "2");
+        setModeChoice(playerA, TestPlayer.MODE_SKIP);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -58,9 +61,10 @@ public class SpreeTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, bear, 1);
         addCard(Zone.HAND, playerA, accident);
 
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, accident, bear);
         setModeChoice(playerA, "1");
         setModeChoice(playerA, "2");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, accident, bear);
+        setModeChoice(playerA, TestPlayer.MODE_SKIP);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -80,9 +84,10 @@ public class SpreeTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, electromancer, 1);
         addCard(Zone.HAND, playerA, accident);
 
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, accident, bear);
         setModeChoice(playerA, "1");
         setModeChoice(playerA, "2");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, accident, bear);
+        setModeChoice(playerA, TestPlayer.MODE_SKIP);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);

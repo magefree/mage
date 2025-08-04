@@ -5,6 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.cards.Card;
+import mage.cards.Cards;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -68,7 +69,7 @@ public abstract class TargetAmount extends TargetImpl {
     }
 
     @Override
-    public boolean isChoiceCompleted(UUID abilityControllerId, Ability source, Game game) {
+    public boolean isChoiceCompleted(UUID abilityControllerId, Ability source, Game game, Cards fromCards) {
         // make sure target request called one time minimum (for "up to" targets)
         // choice is selected after any addTarget call (by test, AI or human players)
         if (!isChoiceSelected()) {
@@ -78,6 +79,11 @@ public abstract class TargetAmount extends TargetImpl {
         // make sure selected targets are valid
         if (!isChosen(game)) {
             return false;
+        }
+
+        // already selected
+        if (this.getSize() >= getMaxNumberOfTargets()) {
+            return true;
         }
 
         // TODO: need auto-choose here? See super
@@ -178,7 +184,7 @@ public abstract class TargetAmount extends TargetImpl {
             chosen = isChosen(game);
 
             // stop by full complete
-            if (isChoiceCompleted(targetController.getId(), source, game)) {
+            if (isChoiceCompleted(targetController.getId(), source, game, null)) {
                 break;
             }
 

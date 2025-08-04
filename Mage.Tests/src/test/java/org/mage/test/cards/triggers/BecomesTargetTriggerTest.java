@@ -7,6 +7,7 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.Filter;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -478,6 +479,7 @@ public class BecomesTargetTriggerTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, hostility);
         setModeChoice(playerA, "1");
+        setModeChoice(playerA, TestPlayer.MODE_SKIP);
         addTarget(playerA, protector);
 
         setStrictChooseMode(true);
@@ -502,6 +504,7 @@ public class BecomesTargetTriggerTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, hostility);
         setModeChoice(playerA, "2");
+        setModeChoice(playerA, TestPlayer.MODE_SKIP);
         addTarget(playerA, dragon);
 
         setStrictChooseMode(true);

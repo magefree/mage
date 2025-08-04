@@ -97,7 +97,7 @@ public class TargetCardInLibrary extends TargetCard {
             chosen = isChosen(game);
 
             // stop by full complete
-            if (isChoiceCompleted(abilityControllerId, source, game)) {
+            if (isChoiceCompleted(abilityControllerId, source, game, null)) {
                 break;
             }
 
