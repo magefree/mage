@@ -47,7 +47,6 @@ public class PossibleTargetsSelector {
         // collect new valid targets
         List<MageItem> found = target.possibleTargets(abilityControllerId, source, game, fromTargetsList).stream()
                 .filter(id -> !target.contains(id))
-                .filter(id -> target.canTarget(abilityControllerId, id, source, game))
                 .map(id -> {
                     Player player = game.getPlayer(id);
                     if (player != null) {
@@ -137,6 +136,10 @@ public class PossibleTargetsSelector {
         }
     }
 
+    public List<MageItem> getAny() {
+        return this.any;
+    }
+
     public static boolean isMyItem(UUID abilityControllerId, MageItem item) {
         if (item instanceof Player) {
             return item.getId().equals(abilityControllerId);
@@ -181,7 +184,12 @@ public class PossibleTargetsSelector {
         return false;
     }
 
-    boolean hasAnyTargets() {
+    public boolean hasAnyTargets() {
         return !this.any.isEmpty();
+    }
+
+    public boolean hasMinNumberOfTargets() {
+        return this.target.getMinNumberOfTargets() == 0
+                || this.any.size() >= this.target.getMinNumberOfTargets();
     }
 }

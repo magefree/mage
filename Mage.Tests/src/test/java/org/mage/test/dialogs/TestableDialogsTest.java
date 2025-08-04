@@ -6,6 +6,7 @@ import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.continuous.PlayAdditionalLandsAllEffect;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.util.ConsoleUtil;
 import mage.utils.testers.TestableDialog;
 import mage.utils.testers.TestableDialogsRunner;
 import org.junit.Assert;
@@ -107,7 +108,7 @@ public class TestableDialogsTest extends CardTestPlayerBaseWithAIHelps {
     @Test
     @Ignore // debug only - run single dialog by reg number
     public void test_RunSingle_Debugging() {
-        int needRegNumber = 557;
+        int needRegNumber = 5;
 
         prepareCards();
 
@@ -233,15 +234,15 @@ public class TestableDialogsTest extends CardTestPlayerBaseWithAIHelps {
             if (resAssert == null) {
                 totalUnknown++;
                 status = "?";
-                coloredTexts.put("?", asYellow("?"));
+                coloredTexts.put("?", ConsoleUtil.asYellow("?"));
             } else if (resAssert.isEmpty()) {
                 totalGood++;
                 status = "OK";
-                coloredTexts.put("OK", asGreen("OK"));
+                coloredTexts.put("OK", ConsoleUtil.asGreen("OK"));
             } else {
                 totalBad++;
                 status = "FAIL";
-                coloredTexts.put("FAIL", asRed("FAIL"));
+                coloredTexts.put("FAIL", ConsoleUtil.asRed("FAIL"));
                 assertError = resAssert;
             }
             if (!assertError.isEmpty()) {
@@ -256,8 +257,8 @@ public class TestableDialogsTest extends CardTestPlayerBaseWithAIHelps {
             // print dialog error
             if (!assertError.isEmpty()) {
                 coloredTexts.clear();
-                coloredTexts.put(resAssert, asRed(resAssert));
-                coloredTexts.put(resDebugSource, asRed(resDebugSource));
+                coloredTexts.put(resAssert, ConsoleUtil.asRed(resAssert));
+                coloredTexts.put(resDebugSource, ConsoleUtil.asRed(resDebugSource));
                 String badAssert = getColoredRow(totalsRightFormat, coloredTexts, resAssert);
                 String badDebugSource = getColoredRow(totalsRightFormat, coloredTexts, resDebugSource);
                 if (firstBadDialog == null) {
@@ -283,15 +284,15 @@ public class TestableDialogsTest extends CardTestPlayerBaseWithAIHelps {
         String badStats = String.format("%d bad", totalBad);
         String unknownStats = String.format("%d unknown", totalUnknown);
         coloredTexts.clear();
-        coloredTexts.put(goodStats, String.format("%s good", asGreen(String.valueOf(totalGood))));
-        coloredTexts.put(badStats, String.format("%s bad", asRed(String.valueOf(totalBad))));
-        coloredTexts.put(unknownStats, String.format("%s unknown", asYellow(String.valueOf(totalUnknown))));
+        coloredTexts.put(goodStats, String.format("%s good", ConsoleUtil.asGreen(String.valueOf(totalGood))));
+        coloredTexts.put(badStats, String.format("%s bad", ConsoleUtil.asRed(String.valueOf(totalBad))));
+        coloredTexts.put(unknownStats, String.format("%s unknown", ConsoleUtil.asYellow(String.valueOf(totalUnknown))));
         System.out.print(getColoredRow(totalsLeftFormat, coloredTexts, String.format("Total results: %s, %s, %s",
                 goodStats, badStats, unknownStats)));
         // first error for fast access in big list
         if (totalDialogs > 1 && firstBadDialog != null) {
             System.out.println(horizontalBorder);
-            System.out.print(getColoredRow(totalsRightFormat, coloredTexts, "First bad dialog: " + firstBadDialog.getRegNumber()));
+            System.out.print(getColoredRow(totalsRightFormat, coloredTexts, "First bad dialog: " + firstBadDialog.getRegNumber() + " (debug it by test_RunSingle_Debugging)"));
             System.out.print(getColoredRow(totalsRightFormat, coloredTexts, firstBadDialog.getName() + " - " + firstBadDialog.getDescription()));
             System.out.print(firstBadAssert);
             System.out.print(firstBadDebugSource);
@@ -312,17 +313,5 @@ public class TestableDialogsTest extends CardTestPlayerBaseWithAIHelps {
             line = line.replace(coloredText, coloredTexts.get(coloredText));
         }
         return line;
-    }
-
-    private String asRed(String text) {
-        return "\u001B[31m" + text + "\u001B[0m";
-    }
-
-    private String asGreen(String text) {
-        return "\u001B[32m" + text + "\u001B[0m";
-    }
-
-    private String asYellow(String text) {
-        return "\u001B[33m" + text + "\u001B[0m";
     }
 }

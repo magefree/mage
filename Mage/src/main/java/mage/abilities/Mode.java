@@ -130,4 +130,9 @@ public class Mode implements Serializable {
     public int getPawPrintValue() {
         return pawPrintValue;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%s", this.getEffects().getText(this));
+    }
 }

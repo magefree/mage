@@ -7,6 +7,7 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
+import mage.target.TargetPlayer;
 import mage.target.common.TargetPermanentOrPlayer;
 
 /**
@@ -74,6 +75,10 @@ abstract class BaseTestableDialog implements TestableDialog {
 
     static Target createAnyTarget(int min, int max) {
         return createAnyTarget(min, max, false);
+    }
+
+    static Target createPlayerTarget(int min, int max, boolean notTarget) {
+        return new TargetPlayer(min, max, notTarget);
     }
 
     private static Target createAnyTarget(int min, int max, boolean notTarget) {
