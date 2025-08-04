@@ -55,18 +55,7 @@ public class TargetPermanentOrSuspendedCard extends TargetImpl {
 
     @Override
     public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
-        MageObject sourceObject = game.getObject(source);
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter.getPermanentFilter(), sourceControllerId, game)) {
-            if (permanent.canBeTargetedBy(sourceObject, sourceControllerId, source, game) && filter.match(permanent, sourceControllerId, source, game)) {
-                return true;
-            }
-        }
-        for (Card card : game.getExile().getAllCards(game)) {
-            if (filter.match(card, sourceControllerId, source, game)) {
-                return true;
-            }
-        }
-        return false;
+        return canChooseFromPossibleTargets(sourceControllerId, source, game);
     }
 
     @Override
