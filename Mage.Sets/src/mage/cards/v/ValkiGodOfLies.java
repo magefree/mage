@@ -123,8 +123,7 @@ class ValkiGodOfLiesRevealExileEffect extends OneShotEffect {
                 TargetCard targetToExile = new TargetCard(Zone.HAND, StaticFilters.FILTER_CARD_CREATURE);
                 targetToExile.withChooseHint("card to exile");
                 targetToExile.withNotTarget(true);
-                if (opponent.getHand().count(StaticFilters.FILTER_CARD_CREATURE, game) > 0 &&
-                        controller.choose(Outcome.Exile, opponent.getHand(), targetToExile, source, game)) {
+                if (controller.choose(Outcome.Exile, opponent.getHand(), targetToExile, source, game)) {
                     Card targetedCardToExile = game.getCard(targetToExile.getFirstTarget());
                     if (targetedCardToExile != null
                             && game.getState().getZone(source.getSourceId()) == Zone.BATTLEFIELD) {

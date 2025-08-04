@@ -65,14 +65,10 @@ public class TargetTriggeredAbility extends TargetObject {
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
-        return possibleTargets(sourceControllerId, game);
-    }
-
-    @Override
-    public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
         return game.getStack().stream()
                 .filter(TargetTriggeredAbility::isTriggeredAbility)
                 .map(stackObject -> stackObject.getStackAbility().getId())
+                .filter(this::notContains)
                 .collect(Collectors.toSet());
     }
 

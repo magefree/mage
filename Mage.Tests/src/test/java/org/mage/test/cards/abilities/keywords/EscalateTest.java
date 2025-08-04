@@ -4,6 +4,7 @@ package org.mage.test.cards.abilities.keywords;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -27,7 +28,9 @@ public class EscalateTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Savage Alliance", "mode=2Silvercoat Lion");
         setModeChoice(playerA, "2");
+        setModeChoice(playerA, TestPlayer.MODE_SKIP);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
@@ -52,7 +55,9 @@ public class EscalateTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Collective Defiance", playerB);
         setModeChoice(playerA, "3"); // deal 3 dmg to opponent
+        setModeChoice(playerA, TestPlayer.MODE_SKIP);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -78,10 +83,12 @@ public class EscalateTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Collective Defiance"); // {1}{R}{R} sorcery
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Collective Defiance", "mode=2Gaddock Teeg");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Collective Defiance", "mode=2Gaddock Teeg^mode=3targetPlayer=PlayerB");
         setModeChoice(playerA, "2"); // deal 4 dmg to target creature (gaddock teeg)
         setModeChoice(playerA, "3"); // deal 3 dmg to opponent
+        setModeChoice(playerA, TestPlayer.MODE_SKIP);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -109,8 +116,6 @@ public class EscalateTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Collective Defiance"); // {1}{R}{R} sorcery
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
 
-        setStrictChooseMode(true);
-
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Collective Defiance", "mode=2Wall of Omens");
         setModeChoice(playerA, "1"); // opponent discards hand and draws that many
         setModeChoice(playerA, "2"); // deal 4 dmg to target creature (Wall of Omens)
@@ -120,6 +125,8 @@ public class EscalateTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Spell Queller");
         addTarget(playerB, "Collective Defiance");
+
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 

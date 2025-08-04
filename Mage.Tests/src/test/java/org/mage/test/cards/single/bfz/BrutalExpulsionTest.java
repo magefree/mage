@@ -4,6 +4,7 @@ package org.mage.test.cards.single.bfz;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -27,7 +28,7 @@ public class BrutalExpulsionTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Brutal Expulsion", "mode=2Augmenting Automaton");
         setModeChoice(playerA, "2");
-        setModeChoice(playerA, null); // ignore last one mode
+        setModeChoice(playerA, TestPlayer.MODE_SKIP); // ignore last one mode
         //addTarget(playerA, "mode=2Augmenting Automaton"); // doesn't work with mode
 
         setStopAt(1, PhaseStep.END_COMBAT);
@@ -56,7 +57,7 @@ public class BrutalExpulsionTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Brutal Expulsion", "mode=2Kiora, the Crashing Wave");
         setModeChoice(playerA, "2");
-        setModeChoice(playerA, null); // ignore last one mode
+        setModeChoice(playerA, TestPlayer.MODE_SKIP); // ignore last one mode
 
         setStopAt(1, PhaseStep.END_COMBAT);
         execute();
@@ -116,7 +117,7 @@ public class BrutalExpulsionTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Brutal Expulsion", "mode=2Gideon, Ally of Zendikar");
         setModeChoice(playerA, "2");
-        setModeChoice(playerA, null); // ignore last one mode
+        setModeChoice(playerA, TestPlayer.MODE_SKIP); // ignore last one mode
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shock", "Gideon, Ally of Zendikar");
 
         setStopAt(1, PhaseStep.END_COMBAT);

@@ -20,9 +20,9 @@ public class DiluvianPrimordialTest extends CardTestPlayerBase {
      */
     private static final String primordial = "Diluvian Primordial";
 
-    // Bug: NPE on casting Valakut Awakening
     @Test
     public void test_MDFC() {
+        // possible bug: NPE on casting Valakut Awakening
         setStrictChooseMode(true);
 
         addCard(Zone.HAND, playerA, primordial);
@@ -32,7 +32,7 @@ public class DiluvianPrimordialTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, primordial);
         addTarget(playerA, "Valakut Awakening");
         setChoice(playerA, true); // Yes to "You may"
-        setChoice(playerA, TestPlayer.CHOICE_SKIP); // No choice for Awakening's effect
+        //setChoice(playerA, TestPlayer.CHOICE_SKIP); // no need in skip, cause no valid choices for Awakening's effect
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

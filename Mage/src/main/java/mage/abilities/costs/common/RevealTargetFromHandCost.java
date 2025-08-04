@@ -89,7 +89,7 @@ public class RevealTargetFromHandCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return allowNoReveal || this.getTargets().canChoose(controllerId, source, game);
+        return allowNoReveal || canChooseOrAlreadyChosen(ability, source, controllerId, game);
     }
 
     @Override

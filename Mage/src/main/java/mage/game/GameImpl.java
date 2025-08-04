@@ -412,12 +412,12 @@ public abstract class GameImpl implements Game {
     }
 
     @Override
-    public Player getPlayerOrPlaneswalkerController(UUID playerId) {
-        Player player = getPlayer(playerId);
+    public Player getPlayerOrPlaneswalkerController(UUID targetId) {
+        Player player = getPlayer(targetId);
         if (player != null) {
             return player;
         }
-        Permanent permanent = getPermanent(playerId);
+        Permanent permanent = getPermanent(targetId);
         if (permanent == null) {
             return null;
         }
@@ -1841,6 +1841,7 @@ public abstract class GameImpl implements Game {
         boolean wasError = false;
         try {
             top = state.getStack().peek();
+            DataCollectorServices.getInstance().onTestsStackResolve(this);
             top.resolve(this);
             resetControlAfterSpellResolve(top.getId());
         } catch (Throwable e) {
@@ -2819,7 +2820,7 @@ public abstract class GameImpl implements Game {
                     if (attachedTo != null) {
                         for (Ability ability : perm.getAbilities(this)) {
                             if (ability instanceof AttachableToRestrictedAbility) {
-                                if (!((AttachableToRestrictedAbility) ability).canEquip(attachedTo.getId(), null, this)) {
+                                if (!((AttachableToRestrictedAbility) ability).canEquip(attachedTo.getId(), this)) {
                                     attachedTo = null;
                                     break;
                                 }

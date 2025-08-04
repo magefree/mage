@@ -7,6 +7,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -68,7 +69,7 @@ class ReckonerShakedownEffect extends OneShotEffect {
             return false;
         }
         player.revealCards(source, player.getHand(), game);
-        TargetCard target = new TargetCardInHand(0, 1, StaticFilters.FILTER_CARD_A_NON_LAND);
+        TargetCard target = new TargetCard(0, 1, Zone.HAND, StaticFilters.FILTER_CARD_A_NON_LAND);
         controller.choose(Outcome.Discard, player.getHand(), target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card != null) {

@@ -6,6 +6,7 @@ import mage.counters.CounterType;
 import mage.players.Player;
 import org.junit.Assert;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -82,6 +83,7 @@ public class IzzetGeneratoriumTest extends CardTestPlayerBase {
         checkPlayableAbility("1: condition not met before losing counters", 2, PhaseStep.UPKEEP, playerA, "{T}: Draw", false);
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Final Act");
         setModeChoice(playerB, "5"); // each opponent loses all counters.
+        setModeChoice(playerB, TestPlayer.MODE_SKIP);
         waitStackResolved(2, PhaseStep.PRECOMBAT_MAIN);
         runCode("energy counter is 0", 2, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> checkEnergyCount(info, player, 0));
         checkPlayableAbility("2: condition met after losing counters", 2, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Draw", true);

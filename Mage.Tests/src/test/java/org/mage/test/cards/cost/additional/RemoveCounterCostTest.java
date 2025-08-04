@@ -23,7 +23,6 @@ public class RemoveCounterCostTest extends CardTestPlayerBase {
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}, Remove two +1/+1 counters");
         setChoice(playerA, "Novijen Sages"); // counters to remove
-        setChoice(playerA, TestPlayer.CHOICE_SKIP);
         setChoice(playerA, "X=2"); // counters to remove
 
         setStrictChooseMode(true);

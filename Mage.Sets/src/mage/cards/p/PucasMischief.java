@@ -1,21 +1,18 @@
 
 package mage.cards.p;
 
-import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.continuous.ExchangeControlTargetEffect;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -33,7 +30,7 @@ public final class PucasMischief extends CardImpl {
 
         // At the beginning of your upkeep, you may exchange control of target nonland permanent you control and target nonland permanent an opponent controls with an equal or lesser converted mana cost.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new ExchangeControlTargetEffect(Duration.EndOfGame, rule, false, true), true);
-        ability.addTarget(new TargetControlledPermanentWithCMCGreaterOrLessThanOpponentPermanent());
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND));
         ability.addTarget(new PucasMischiefSecondTarget());
         this.addAbility(ability);
 
@@ -49,89 +46,53 @@ public final class PucasMischief extends CardImpl {
     }
 }
 
-class TargetControlledPermanentWithCMCGreaterOrLessThanOpponentPermanent extends TargetControlledPermanent {
-
-    public TargetControlledPermanentWithCMCGreaterOrLessThanOpponentPermanent() {
-        super();
-        this.filter = this.filter.copy();
-        filter.add(Predicates.not(CardType.LAND.getPredicate()));
-        withTargetName("nonland permanent you control");
-    }
-
-    private TargetControlledPermanentWithCMCGreaterOrLessThanOpponentPermanent(final TargetControlledPermanentWithCMCGreaterOrLessThanOpponentPermanent target) {
-        super(target);
-    }
-
-    @Override
-    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
-        Set<UUID> possibleTargets = new HashSet<>();
-        MageObject targetSource = game.getObject(source);
-        if (targetSource != null) {
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
-                if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, source, game)) {
-                    possibleTargets.add(permanent.getId());
-                }
-            }
-        }
-        return possibleTargets;
-    }
-
-    @Override
-    public TargetControlledPermanentWithCMCGreaterOrLessThanOpponentPermanent copy() {
-        return new TargetControlledPermanentWithCMCGreaterOrLessThanOpponentPermanent(this);
-    }
-}
-
 class PucasMischiefSecondTarget extends TargetPermanent {
 
-    private Permanent firstTarget = null;
-
     public PucasMischiefSecondTarget() {
-        super();
-        this.filter = this.filter.copy();
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-        filter.add(Predicates.not(CardType.LAND.getPredicate()));
+        super(StaticFilters.FILTER_OPPONENTS_PERMANENT_NON_LAND);
         withTargetName("permanent an opponent controls with an equal or lesser mana value");
     }
 
     private PucasMischiefSecondTarget(final PucasMischiefSecondTarget target) {
         super(target);
-        this.firstTarget = target.firstTarget;
     }
 
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
-        if (super.canTarget(id, source, game)) {
-            Permanent target1 = game.getPermanent(source.getFirstTarget());
-            Permanent opponentPermanent = game.getPermanent(id);
-            if (target1 != null && opponentPermanent != null) {
-                return target1.getManaValue() >= opponentPermanent.getManaValue();
-            }
+        Permanent ownPermanent = game.getPermanent(source.getFirstTarget());
+        Permanent possiblePermanent = game.getPermanent(id);
+        if (ownPermanent == null || possiblePermanent == null) {
+            return false;
         }
-        return false;
+        return super.canTarget(id, source, game) && ownPermanent.getManaValue() >= possiblePermanent.getManaValue();
     }
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
-        if (firstTarget != null) {
-            MageObject targetSource = game.getObject(source);
-            if (targetSource != null) {
-                for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
-                    if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, source, game)) {
-                        if (firstTarget.getManaValue() >= permanent.getManaValue()) {
-                            possibleTargets.add(permanent.getId());
-                        }
-                    }
+
+        Permanent ownPermanent = game.getPermanent(source.getFirstTarget());
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
+            if (ownPermanent == null) {
+                // playable or first target not yet selected
+                // use all
+                possibleTargets.add(permanent.getId());
+            } else {
+                // real
+                // filter by cmc
+                if (ownPermanent.getManaValue() >= permanent.getManaValue()) {
+                    possibleTargets.add(permanent.getId());
                 }
             }
         }
-        return possibleTargets;
+        possibleTargets.removeIf(id -> ownPermanent != null && ownPermanent.getId().equals(id));
+
+        return keepValidPossibleTargets(possibleTargets, sourceControllerId, source, game);
     }
 
     @Override
     public boolean chooseTarget(Outcome outcome, UUID playerId, Ability source, Game game) {
-        firstTarget = game.getPermanent(source.getFirstTarget());
+        // AI hint with better outcome
         return super.chooseTarget(Outcome.GainControl, playerId, source, game);
     }
 

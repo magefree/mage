@@ -69,6 +69,7 @@ public class ValakutTheMoltenPinnacleTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Scapeshift");
         setChoice(playerA, "Forest^Forest^Forest^Forest^Forest^Forest"); // to sac
+        setChoice(playerA, TestPlayer.CHOICE_SKIP);
         addTarget(playerA, "Mountain^Mountain^Mountain^Mountain^Mountain^Mountain"); // to search
         setChoice(playerA, "Whenever a Mountain", 6 - 1); // x6 triggers from valakut
         addTarget(playerA, playerB, 6); // to deal damage

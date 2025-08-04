@@ -74,7 +74,7 @@ class LobotomyEffect extends SearchTargetGraveyardHandLibraryForCardNameAndExile
             TargetCard target = new TargetCard(Zone.HAND, filter);
             target.withNotTarget(true);
             Card chosenCard = null;
-            if (controller.chooseTarget(Outcome.Benefit, targetPlayer.getHand(), target, source, game)) {
+            if (controller.choose(Outcome.Benefit, targetPlayer.getHand(), target, source, game)) {
                 chosenCard = game.getCard(target.getFirstTarget());
             }
 

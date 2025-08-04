@@ -139,14 +139,7 @@ class StickTogetherTarget extends TargetPermanent {
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = super.possibleTargets(sourceControllerId, source, game);
-        possibleTargets.removeIf(uuid -> !this.canTarget(sourceControllerId, uuid, null, game));
+        possibleTargets.removeIf(uuid -> !this.canTarget(sourceControllerId, uuid, source, game));
         return possibleTargets;
-    }
-
-    static int checkTargetCount(Ability source, Game game) {
-        List<Permanent> permanents = game
-                .getBattlefield()
-                .getActivePermanents(filterParty, source.getControllerId(), source, game);
-        return subTypeAssigner.getRoleCount(new CardsImpl(permanents), game);
     }
 }

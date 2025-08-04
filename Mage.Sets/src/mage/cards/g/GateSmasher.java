@@ -9,13 +9,12 @@ import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.constants.SubType;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
+import mage.target.TargetCard;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;

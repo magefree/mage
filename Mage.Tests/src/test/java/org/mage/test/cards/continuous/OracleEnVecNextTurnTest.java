@@ -3,6 +3,7 @@ package org.mage.test.cards.continuous;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -22,7 +23,9 @@ public class OracleEnVecNextTurnTest extends CardTestPlayerBase {
 
         // 1 - activate
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Target opponent", playerB);
-        setChoice(playerB, "Balduvian Bears^Angelic Wall");
+        setChoice(playerB, "Balduvian Bears");
+        setChoice(playerB, "Angelic Wall");
+        setChoice(playerB, TestPlayer.CHOICE_SKIP);
         //
         checkLife("turn 1", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, 20);
         checkPermanentCount("turn 1", 1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Balduvian Bears", 1);

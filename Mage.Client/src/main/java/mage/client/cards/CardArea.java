@@ -18,10 +18,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.*;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
@@ -258,7 +256,7 @@ public class CardArea extends JPanel implements CardEventProducer {
         this.reloaded = false;
     }
 
-    public void selectCards(List<UUID> selected) {
+    public void selectCards(Set<UUID> selected) {
         for (Component component : cardArea.getComponents()) {
             if (component instanceof MageCard) {
                 MageCard mageCard = (MageCard) component;
@@ -269,7 +267,7 @@ public class CardArea extends JPanel implements CardEventProducer {
         }
     }
 
-    public void markCards(List<UUID> marked) {
+    public void markCards(Set<UUID> marked) {
         for (Component component : cardArea.getComponents()) {
             if (component instanceof MageCard) {
                 MageCard mageCard = (MageCard) component;

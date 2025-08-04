@@ -3,6 +3,7 @@ package mage.target;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.cards.Card;
+import mage.cards.Cards;
 import mage.constants.AbilityType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -41,6 +42,8 @@ public abstract class TargetImpl implements Target {
      */
     protected boolean chosen = false;
 
+    protected boolean isSkipChoice = false;
+
     // is the target handled as targeted spell/ability (notTarget = true is used for not targeted effects like e.g. sacrifice)
     protected boolean notTarget = false;
     protected boolean atRandom = false; // for inner choose logic
@@ -70,6 +73,7 @@ public abstract class TargetImpl implements Target {
         this.required = target.required;
         this.requiredExplicitlySet = target.requiredExplicitlySet;
         this.chosen = target.chosen;
+        this.isSkipChoice = target.isSkipChoice;
         this.targets.putAll(target.targets);
         this.zoneChangeCounters.putAll(target.zoneChangeCounters);
         this.atRandom = target.atRandom;
@@ -161,6 +165,16 @@ public abstract class TargetImpl implements Target {
         int min = getMinNumberOfTargets();
         int max = getMaxNumberOfTargets();
         return min == 0 && max == Integer.MAX_VALUE;
+    }
+
+    @Override
+    public boolean isSkipChoice() {
+        return this.isSkipChoice;
+    }
+
+    @Override
+    public void setSkipChoice(boolean isSkipChoice) {
+        this.isSkipChoice = isSkipChoice;
     }
 
     @Override
@@ -261,7 +275,7 @@ public abstract class TargetImpl implements Target {
     }
 
     @Override
-    public boolean isChoiceCompleted(UUID abilityControllerId, Ability source, Game game) {
+    public boolean isChoiceCompleted(UUID abilityControllerId, Ability source, Game game, Cards fromCards) {
         // make sure target request called one time minimum (for "up to" targets)
         // choice is selected after any addTarget call (by test, AI or human players)
         if (!isChoiceSelected()) {
@@ -273,22 +287,23 @@ public abstract class TargetImpl implements Target {
             return false;
         }
 
+        // already selected
+        if (this.getSize() >= getMaxNumberOfTargets()) {
+            return true;
+        }
+
         // make sure to auto-finish on all targets selection
         // - human player can select and deselect targets until fill all targets amount or press done button
         // - AI player can select all new targets as much as possible
         if (getMaxNumberOfTargets() > 0) {
-            if (getMaxNumberOfTargets() == Integer.MAX_VALUE) {
-                if (abilityControllerId != null && source != null) {
-                    // any amount - nothing to choose
-                    return this.getSize() >= this.possibleTargets(abilityControllerId, source, game).size();
-                } else {
-                    // any amount - any selected
-                    return this.getSize() > 0;
-                }
-            } else {
-                // check selected limit
-                return this.getSize() >= getMaxNumberOfTargets();
+            // full selection
+            if (this.getSize() >= getMaxNumberOfTargets()) {
+                return true;
             }
+
+            // partly selection
+            int moreSelectCount = this.possibleTargets(abilityControllerId, source, game, fromCards).size();
+            return moreSelectCount == 0 || isSkipChoice();
         }
 
         // all other use cases are fine
@@ -300,6 +315,7 @@ public abstract class TargetImpl implements Target {
         targets.clear();
         zoneChangeCounters.clear();
         chosen = false;
+        isSkipChoice = false;
     }
 
     @Override
@@ -423,7 +439,7 @@ public abstract class TargetImpl implements Target {
             chosen = isChosen(game);
 
             // stop by full complete
-            if (isChoiceCompleted(abilityControllerId, source, game)) {
+            if (isChoiceCompleted(abilityControllerId, source, game, null)) {
                 break;
             }
 
@@ -503,7 +519,7 @@ public abstract class TargetImpl implements Target {
             chosen = isChosen(game);
 
             // stop by full complete
-            if (isChoiceCompleted(abilityControllerId, source, game)) {
+            if (isChoiceCompleted(abilityControllerId, source, game, null)) {
                 break;
             }
 
@@ -570,9 +586,7 @@ public abstract class TargetImpl implements Target {
     @Override
     public List<? extends TargetImpl> getTargetOptions(Ability source, Game game) {
         List<TargetImpl> options = new ArrayList<>();
-        List<UUID> possibleTargets = new ArrayList<>();
-        possibleTargets.addAll(possibleTargets(source.getControllerId(), source, game));
-        possibleTargets.removeAll(getTargets());
+        List<UUID> possibleTargets = new ArrayList<>(possibleTargets(source.getControllerId(), source, game));
 
         // get the length of the array
         // e.g. for {'A','B','C','D'} => N = 4

@@ -64,41 +64,16 @@ public class TargetSpell extends TargetObject {
 
     @Override
     public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
-        if (this.minNumberOfTargets == 0) {
-            return true;
-        }
-        int count = 0;
-        for (StackObject stackObject : game.getStack()) {
-            // rule 114.4. A spell or ability on the stack is an illegal target for itself.
-            if (source.getSourceId() != null && source.getSourceId().equals(stackObject.getSourceId())) {
-                continue;
-            }
-            if (canBeChosen(stackObject, sourceControllerId, source, game)) {
-                count++;
-                if (count >= this.minNumberOfTargets) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean canChoose(UUID sourceControllerId, Game game) {
-        return canChoose(sourceControllerId, null, game);
+        return canChooseFromPossibleTargets(sourceControllerId, source, game);
     }
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
-        return game.getStack().stream()
+        Set<UUID> possibleTargets = game.getStack().stream()
                 .filter(stackObject -> canBeChosen(stackObject, sourceControllerId, source, game))
                 .map(StackObject::getId)
                 .collect(Collectors.toSet());
-    }
-
-    @Override
-    public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
-        return this.possibleTargets(sourceControllerId, null, game);
+        return keepValidPossibleTargets(possibleTargets, sourceControllerId, source, game);
     }
 
     @Override
@@ -107,7 +82,11 @@ public class TargetSpell extends TargetObject {
     }
 
     private boolean canBeChosen(StackObject stackObject, UUID sourceControllerId, Ability source, Game game) {
+        // rule 114.4. A spell or ability on the stack is an illegal target for itself.
+        boolean isSelfTarget = source.getSourceId() != null && source.getSourceId().equals(stackObject.getSourceId());
+
         return stackObject instanceof Spell
+                && !isSelfTarget
                 && game.getState().getPlayersInRange(sourceControllerId, game).contains(stackObject.getControllerId())
                 && canTarget(sourceControllerId, stackObject.getId(), source, game);
     }

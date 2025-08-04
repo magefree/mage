@@ -1,9 +1,13 @@
 package org.mage.test.cards.single.mkm;
 
+import mage.abilities.Mode;
+import mage.abilities.effects.common.ExileAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -21,6 +25,11 @@ public class KayaSpiritsJusticeTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerA, "Fyndhorn Elves");
         addCard(Zone.HAND, playerA, "Thraben Inspector");
         addCard(Zone.HAND, playerA, "Astrid Peth");
+        // Choose one or more —
+        // • Exile all artifacts.
+        // • Exile all creatures.
+        // • Exile all enchantments.
+        // • Exile all graveyards.
         addCard(Zone.HAND, playerA, "Farewell");
 
         // Creates a Clue token
@@ -35,6 +44,7 @@ public class KayaSpiritsJusticeTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Farewell");
         setModeChoice(playerA, "2");
         setModeChoice(playerA, "4");
+        setModeChoice(playerA, TestPlayer.MODE_SKIP);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 1);
 
         // Kaya's first ability triggers twice, so choose which is put on the stack:

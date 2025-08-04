@@ -27,8 +27,8 @@ public class GeodeGolemTest extends CardTestCommanderDuelBase {
 
         // attack and cast first time (free)
         attack(1, playerA, "Geode Golem");
-        setChoice(playerA, true); // cast commander
         setChoice(playerA, "Grizzly Bears"); // commander choice
+        setChoice(playerA, true); // cast commander
         waitStackResolved(1, PhaseStep.COMBAT_DAMAGE);
         checkPermanentCount("after 1", 1, PhaseStep.COMBAT_DAMAGE, playerA, "Grizzly Bears", 1);
         checkPermanentTapped("after 1", 1, PhaseStep.COMBAT_DAMAGE, playerA, "Forest", true, 0);
@@ -40,8 +40,8 @@ public class GeodeGolemTest extends CardTestCommanderDuelBase {
         // turn 3 - second cast (1x tax)
 
         attack(3, playerA, "Geode Golem");
-        setChoice(playerA, true); // cast commander
         setChoice(playerA, "Grizzly Bears"); // commander choice
+        setChoice(playerA, true); // cast commander
         waitStackResolved(3, PhaseStep.COMBAT_DAMAGE);
         checkPermanentCount("after 2", 3, PhaseStep.COMBAT_DAMAGE, playerA, "Grizzly Bears", 1);
         checkPermanentTapped("after 2", 3, PhaseStep.COMBAT_DAMAGE, playerA, "Forest", true, 2); // 1x tax
@@ -53,8 +53,8 @@ public class GeodeGolemTest extends CardTestCommanderDuelBase {
         // turn 5 - third cast (2x tax)
 
         attack(5, playerA, "Geode Golem");
-        setChoice(playerA, true); // cast commander
         setChoice(playerA, "Grizzly Bears"); // commander choice
+        setChoice(playerA, true); // cast commander
         waitStackResolved(5, PhaseStep.COMBAT_DAMAGE);
         checkPermanentCount("after 3", 5, PhaseStep.COMBAT_DAMAGE, playerA, "Grizzly Bears", 1);
         checkPermanentTapped("after 3", 5, PhaseStep.COMBAT_DAMAGE, playerA, "Forest", true, 2 * 2); // 2x tax
@@ -85,8 +85,8 @@ public class GeodeGolemTest extends CardTestCommanderDuelBase {
 
         // attack and cast first time (free)
         attack(1, playerA, "Geode Golem");
-        setChoice(playerA, true); // cast commander
         setChoice(playerA, "Akoum Warrior"); // commander choice
+        setChoice(playerA, true); // cast commander
         waitStackResolved(1, PhaseStep.COMBAT_DAMAGE);
         checkPermanentCount("after 1", 1, PhaseStep.COMBAT_DAMAGE, playerA, "Akoum Warrior", 1);
         checkPermanentTapped("after 1", 1, PhaseStep.COMBAT_DAMAGE, playerA, "Mountain", true, 0);
@@ -98,8 +98,8 @@ public class GeodeGolemTest extends CardTestCommanderDuelBase {
         // turn 3 - second cast (1x tax)
 
         attack(3, playerA, "Geode Golem");
-        setChoice(playerA, true); // cast commander
         setChoice(playerA, "Akoum Warrior"); // commander choice
+        setChoice(playerA, true); // cast commander
         waitStackResolved(3, PhaseStep.COMBAT_DAMAGE);
         checkPermanentCount("after 2", 3, PhaseStep.COMBAT_DAMAGE, playerA, "Akoum Warrior", 1);
         checkPermanentTapped("after 2", 3, PhaseStep.COMBAT_DAMAGE, playerA, "Mountain", true, 2); // 1x tax
@@ -111,8 +111,8 @@ public class GeodeGolemTest extends CardTestCommanderDuelBase {
         // turn 5 - third cast (2x tax)
 
         attack(5, playerA, "Geode Golem");
-        setChoice(playerA, true); // cast commander
         setChoice(playerA, "Akoum Warrior"); // commander choice
+        setChoice(playerA, true); // cast commander
         waitStackResolved(5, PhaseStep.COMBAT_DAMAGE);
         checkPermanentCount("after 3", 5, PhaseStep.COMBAT_DAMAGE, playerA, "Akoum Warrior", 1);
         checkPermanentTapped("after 3", 5, PhaseStep.COMBAT_DAMAGE, playerA, "Mountain", true, 2 * 2); // 2x tax
@@ -144,8 +144,8 @@ public class GeodeGolemTest extends CardTestCommanderDuelBase {
 
         // attack and cast first time (free)
         attack(1, playerA, "Geode Golem");
-        setChoice(playerA, true); // cast commander
         setChoice(playerA, "Birgi, God of Storytelling"); // commander choice
+        setChoice(playerA, true); // cast commander
         setChoice(playerA, "Cast Birgi, God of Storytelling"); // spell choice
         waitStackResolved(1, PhaseStep.COMBAT_DAMAGE);
         checkPermanentCount("after 1", 1, PhaseStep.COMBAT_DAMAGE, playerA, "Birgi, God of Storytelling", 1);
@@ -158,8 +158,8 @@ public class GeodeGolemTest extends CardTestCommanderDuelBase {
         // turn 3 - second cast, LEFT side (1x tax)
 
         attack(3, playerA, "Geode Golem");
-        setChoice(playerA, true); // cast commander
         setChoice(playerA, "Birgi, God of Storytelling"); // commander choice
+        setChoice(playerA, true); // cast commander
         setChoice(playerA, "Cast Birgi, God of Storytelling"); // spell choice
         waitStackResolved(3, PhaseStep.COMBAT_DAMAGE);
         checkPermanentCount("after 2", 3, PhaseStep.COMBAT_DAMAGE, playerA, "Birgi, God of Storytelling", 1);
@@ -172,8 +172,8 @@ public class GeodeGolemTest extends CardTestCommanderDuelBase {
         // turn 5 - third cast, RIGHT side (2x tax)
 
         attack(5, playerA, "Geode Golem");
-        setChoice(playerA, true); // cast commander
         setChoice(playerA, "Birgi, God of Storytelling"); // commander choice
+        setChoice(playerA, true); // cast commander
         setChoice(playerA, "Cast Harnfel, Horn of Bounty"); // spell choice
         waitStackResolved(5, PhaseStep.COMBAT_DAMAGE);
         checkPermanentCount("after 3", 5, PhaseStep.COMBAT_DAMAGE, playerA, "Harnfel, Horn of Bounty", 1);
@@ -186,8 +186,8 @@ public class GeodeGolemTest extends CardTestCommanderDuelBase {
         // turn 7 - fourth cast, RIGHT side (3x tax)
 
         attack(7, playerA, "Geode Golem");
-        setChoice(playerA, true); // cast commander
         setChoice(playerA, "Birgi, God of Storytelling"); // commander choice
+        setChoice(playerA, true); // cast commander
         setChoice(playerA, "Cast Harnfel, Horn of Bounty"); // spell choice
         waitStackResolved(7, PhaseStep.COMBAT_DAMAGE);
         checkPermanentCount("after 4", 7, PhaseStep.COMBAT_DAMAGE, playerA, "Harnfel, Horn of Bounty", 1);

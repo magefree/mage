@@ -78,16 +78,7 @@ public class TargetPermanentAmount extends TargetAmount {
     }
 
     @Override
-    public boolean canTarget(UUID objectId, Game game) {
-        Permanent permanent = game.getPermanent(objectId);
-        return filter.match(permanent, game);
-    }
-
-    @Override
     public boolean canTarget(UUID objectId, Ability source, Game game) {
-        if (getMaxNumberOfTargets() > 0 && getTargets().size() >= getMaxNumberOfTargets()) {
-            return getTargets().contains(objectId);
-        }
         Permanent permanent = game.getPermanent(objectId);
         if (permanent == null) {
             return false;
@@ -95,8 +86,7 @@ public class TargetPermanentAmount extends TargetAmount {
         if (source == null) {
             return filter.match(permanent, game);
         }
-        MageObject targetSource = source.getSourceObject(game);
-        return (notTarget || permanent.canBeTargetedBy(targetSource, source.getControllerId(), source, game))
+        return (isNotTarget() || permanent.canBeTargetedBy(game.getObject(source), source.getControllerId(), source, game))
                 && filter.match(permanent, source.getControllerId(), source, game);
     }
 
@@ -107,47 +97,18 @@ public class TargetPermanentAmount extends TargetAmount {
 
     @Override
     public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
-        return game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game).size()
-                >= this.minNumberOfTargets;
-    }
-
-    @Override
-    public boolean canChoose(UUID sourceControllerId, Game game) {
-        return game.getBattlefield().getActivePermanents(filter, sourceControllerId, game).size()
-                >= this.minNumberOfTargets;
+        return canChooseFromPossibleTargets(sourceControllerId, source, game);
     }
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
-        if (getMaxNumberOfTargets() > 0 && getTargets().size() >= getMaxNumberOfTargets()) {
-            return getTargets()
-                    .stream()
-                    .collect(Collectors.toSet());
-        }
-        MageObject targetSource = game.getObject(source);
-        return game
+        Set<UUID> possibleTargets = game
                 .getBattlefield()
                 .getActivePermanents(filter, sourceControllerId, source, game)
                 .stream()
-                .filter(Objects::nonNull)
-                .filter(permanent -> notTarget || permanent.canBeTargetedBy(targetSource, sourceControllerId, source, game))
                 .map(Permanent::getId)
                 .collect(Collectors.toSet());
-    }
-
-    @Override
-    public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
-        if (getMaxNumberOfTargets() > 0 && getTargets().size() >= getMaxNumberOfTargets()) {
-            return getTargets()
-                    .stream()
-                    .collect(Collectors.toSet());
-        }
-        return game
-                .getBattlefield()
-                .getActivePermanents(filter, sourceControllerId, game)
-                .stream()
-                .map(Permanent::getId)
-                .collect(Collectors.toSet());
+        return keepValidPossibleTargets(possibleTargets, sourceControllerId, source, game);
     }
 
     @Override

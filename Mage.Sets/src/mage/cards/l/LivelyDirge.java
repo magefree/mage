@@ -103,8 +103,8 @@ class LivelyDirgeTarget extends TargetCardInYourGraveyard {
     }
 
     @Override
-    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
-        return super.canTarget(controllerId, id, source, game)
+    public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
+        return super.canTarget(playerId, id, source, game)
                 && CardUtil.checkCanTargetTotalValueLimit(
                 this.getTargets(), id, MageObject::getManaValue, 4, game);
     }

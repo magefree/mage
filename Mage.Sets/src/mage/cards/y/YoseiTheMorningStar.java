@@ -69,12 +69,12 @@ class YoseiTheMorningStarTarget extends TargetPermanent {
     }
 
     @Override
-    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
+    public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
         Player player = game.getPlayer(source.getFirstTarget());
         if (player != null) {
             this.filter = filterTemplate.copy();
             this.filter.add(new ControllerIdPredicate(player.getId()));
-            return super.canTarget(controllerId, id, source, game);
+            return super.canTarget(playerId, id, source, game);
         }
         return false;
     }

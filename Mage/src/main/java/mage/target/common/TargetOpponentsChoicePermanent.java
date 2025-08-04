@@ -12,6 +12,8 @@ import mage.target.TargetPermanent;
 import java.util.UUID;
 
 /**
+ * TODO: rework to support possible targets
+ *
  * @author Mael
  */
 public class TargetOpponentsChoicePermanent extends TargetPermanent {
@@ -28,20 +30,15 @@ public class TargetOpponentsChoicePermanent extends TargetPermanent {
     }
 
     @Override
-    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game, boolean flag) {
-        return opponentId != null && super.canTarget(opponentId, id, source, game, flag);
-    }
-
-    @Override
-    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
+    public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
         Permanent permanent = game.getPermanent(id);
         if (opponentId != null) {
             if (permanent != null) {
                 if (source != null) {
                     boolean canSourceControllerTarget = true;
                     if (!isNotTarget()) {
-                        if (!permanent.canBeTargetedBy(game.getObject(source.getId()), controllerId, source, game)
-                                || !permanent.canBeTargetedBy(game.getObject(source), controllerId, source, game)) {
+                        if (!permanent.canBeTargetedBy(game.getObject(source.getId()), playerId, source, game)
+                                || !permanent.canBeTargetedBy(game.getObject(source), playerId, source, game)) {
                             canSourceControllerTarget = false;
                         }
                     }
