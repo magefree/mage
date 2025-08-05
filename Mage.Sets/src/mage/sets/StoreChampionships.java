@@ -61,7 +61,7 @@ public final class StoreChampionships extends ExpansionSet {
         cards.add(new SetCardInfo("Transcendent Message", 16, Rarity.RARE, mage.cards.t.TranscendentMessage.class));
         cards.add(new SetCardInfo("Urza's Saga", 29, Rarity.RARE, mage.cards.u.UrzasSaga.class, FULL_ART));
         cards.add(new SetCardInfo("Vengevine", 26, Rarity.RARE, mage.cards.v.Vengevine.class, FULL_ART));
-        cards.add(new SetCardInfo("Virtue of Persistence // Locthwain Scorn", 35, Rarity.MYTHIC, mage.cards.v.VirtueOfPersistence.class));
+        cards.add(new SetCardInfo("Virtue of Persistence", 35, Rarity.MYTHIC, mage.cards.v.VirtueOfPersistence.class));
         cards.add(new SetCardInfo("Void Winnower", 32, Rarity.RARE, mage.cards.v.VoidWinnower.class, FULL_ART));
     }
 
