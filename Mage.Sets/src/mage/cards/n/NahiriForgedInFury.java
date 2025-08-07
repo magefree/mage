@@ -11,6 +11,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.permanent.EquippedPredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -23,6 +24,10 @@ public final class NahiriForgedInFury extends CardImpl {
 
     private static final FilterControlledCreaturePermanent equippedFilter = new FilterControlledCreaturePermanent(
             "an equipped creature you control");
+
+    static {
+        equippedFilter.add(EquippedPredicate.instance);
+    }
 
     public NahiriForgedInFury(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{W}");
