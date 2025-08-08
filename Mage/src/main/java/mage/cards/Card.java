@@ -1,5 +1,6 @@
 package mage.cards;
 
+import mage.MageInt;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Abilities;
@@ -17,6 +18,7 @@ import mage.game.GameState;
 import mage.game.Ownerable;
 import mage.game.permanent.Permanent;
 import mage.util.ManaUtil;
+import mage.watchers.Watcher;
 import mage.watchers.common.CommanderPlaysCountWatcher;
 
 import java.util.List;
@@ -154,6 +156,11 @@ public interface Card extends MageObject, Ownerable {
 
     Counters getCounters(GameState state);
 
+    default void addAbility(Ability ability, Watcher watcher) {
+        addAbility(ability);
+        ability.addWatcher(watcher);
+    }
+
     void addAbility(Ability ability);
 
     void looseAllAbilities(Game game);
@@ -249,6 +256,10 @@ public interface Card extends MageObject, Ownerable {
     FilterMana getColorIdentity();
 
     List<UUID> getAttachments();
+
+    void setPT(int power, int toughness);
+
+    void setPT(MageInt power, MageInt toughness);
 
     /**
      * @param attachment can be any object: card, permanent, token

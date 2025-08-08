@@ -115,17 +115,6 @@ public class ModalDoubleFacedCardHalfImpl extends CardImpl implements ModalDoubl
     }
 
     @Override
-    public void setPT(int power, int toughness) {
-        this.setPT(new MageInt(power), new MageInt(toughness));
-    }
-
-    @Override
-    public void setPT(MageInt power, MageInt toughness) {
-        this.power = power;
-        this.toughness = toughness;
-    }
-
-    @Override
     public String getIdName() {
         // id must send to main card (popup card hint in game logs)
         return getName() + " [" + parentCard.getId().toString().substring(0, 3) + ']';
