@@ -70,6 +70,7 @@ public class MediaAndCollaborationPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Phantasmal Dragon", "2011-1", Rarity.UNCOMMON, mage.cards.p.PhantasmalDragon.class));
         cards.add(new SetCardInfo("Phyrexian Rager", "2000-5", Rarity.COMMON, mage.cards.p.PhyrexianRager.class, RETRO_ART));
         cards.add(new SetCardInfo("Pyromancer's Gauntlet", "2023-6", Rarity.RARE, mage.cards.p.PyromancersGauntlet.class, RETRO_ART));
+        cards.add(new SetCardInfo("Ravager of the Fells", "2025-17", Rarity.RARE, mage.cards.r.RavagerOfTheFells.class));
         cards.add(new SetCardInfo("Ruin Crab", "2023-4", Rarity.RARE, mage.cards.r.RuinCrab.class, RETRO_ART));
         cards.add(new SetCardInfo("Sandbar Crocodile", "1996-1", Rarity.COMMON, mage.cards.s.SandbarCrocodile.class, RETRO_ART));
         cards.add(new SetCardInfo("Scent of Cinder", "1999-1", Rarity.COMMON, mage.cards.s.ScentOfCinder.class, RETRO_ART));
