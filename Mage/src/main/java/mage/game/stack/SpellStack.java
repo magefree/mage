@@ -51,6 +51,16 @@ public class SpellStack extends ArrayDeque<StackObject> {
         }
     }
 
+    @Override
+    @Deprecated // must use getFirstOrNull instead
+    public StackObject getFirst() {
+        return super.getFirst();
+    }
+
+    public StackObject getFirstOrNull() {
+        return this.isEmpty() ? null : this.getFirst();
+    }
+
     public boolean remove(StackObject object, Game game) {
         for (StackObject spell : this) {
             if (spell.getId().equals(object.getId())) {

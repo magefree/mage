@@ -398,7 +398,10 @@ public class ComputerPlayer6 extends ComputerPlayer {
     }
 
     protected void resolve(SimulationNode2 node, int depth, Game game) {
-        StackObject stackObject = game.getStack().getFirst();
+        StackObject stackObject = game.getStack().getFirstOrNull();
+        if (stackObject == null) {
+            throw new IllegalStateException("Catch empty stack on resolve (something wrong with sim code)");
+        }
         if (stackObject instanceof StackAbility) {
             // AI hint for search effects (calc all possible cards for best score)
             SearchEffect effect = getSearchEffect((StackAbility) stackObject);

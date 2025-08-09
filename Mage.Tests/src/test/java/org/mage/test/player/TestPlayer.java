@@ -334,11 +334,8 @@ public class TestPlayer implements Player {
             return true;
         } else if (groups[2].startsWith("spellOnTopOfStack=")) {
             String spellOnTopOFStack = groups[2].substring(18);
-            if (!game.getStack().isEmpty()) {
-                StackObject stackObject = game.getStack().getFirst();
-                return stackObject != null && stackObject.getStackAbility().toString().contains(spellOnTopOFStack);
-            }
-            return false;
+            StackObject stackObject = game.getStack().getFirstOrNull();
+            return stackObject != null && stackObject.getStackAbility().toString().contains(spellOnTopOFStack);
         } else if (groups[2].startsWith("manaInPool=")) {
             String manaInPool = groups[2].substring(11);
             int amountOfMana = Integer.parseInt(manaInPool);

@@ -40,7 +40,7 @@ public class DisturbTest extends CardTestPlayerBase {
         checkStackObject("on stack", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Hook-Haunt Drifter using Disturb", 1);
         runCode("check stack", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
             // Stack must contain another card side, so spell/card characteristics must be diff from main side (only mana value is same)
-            Spell spell = (Spell) game.getStack().getFirst();
+            Spell spell = (Spell) game.getStack().getFirstOrNull();
             Assert.assertEquals("Hook-Haunt Drifter", spell.getName());
             Assert.assertEquals(1, spell.getCardType(game).size());
             Assert.assertEquals(CardType.CREATURE, spell.getCardType(game).get(0));
@@ -91,7 +91,7 @@ public class DisturbTest extends CardTestPlayerBase {
         checkStackObject("on stack", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Waildrifter using Disturb", 1);
         runCode("check stack", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
             // Stack must contain another card side, so spell/card characteristics must be diff from main side (only mana value is same)
-            Spell spell = (Spell) game.getStack().getFirst();
+            Spell spell = (Spell) game.getStack().getFirstOrNull();
             Assert.assertEquals("Waildrifter", spell.getName());
             Assert.assertEquals(1, spell.getCardType(game).size());
             Assert.assertEquals(CardType.CREATURE, spell.getCardType(game).get(0));
@@ -187,7 +187,7 @@ public class DisturbTest extends CardTestPlayerBase {
         // cast with disturb
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Hook-Haunt Drifter using Disturb");
         runCode("check stack", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
-            Spell spell = (Spell) game.getStack().getFirst();
+            Spell spell = (Spell) game.getStack().getFirstOrNull();
             Assert.assertEquals("mana value must be from main side", 2, spell.getManaValue());
             Assert.assertEquals("mana cost to pay must be modified", "{U}", spell.getSpellAbility().getManaCostsToPay().getText());
         });

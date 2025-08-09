@@ -53,11 +53,9 @@ public abstract class SpecialAction extends ActivatedAbilityImpl {
         if (isManaAction()) {
             // limit play mana abilities by steps
             int currentStepOrder = 0;
-            if (!game.getStack().isEmpty()) {
-                StackObject stackObject = game.getStack().getFirst();
-                if (stackObject instanceof Spell) {
-                    currentStepOrder = ((Spell) stackObject).getCurrentActivatingManaAbilitiesStep().getStepOrder();
-                }
+            StackObject stackObject = game.getStack().getFirstOrNull();
+            if (stackObject instanceof Spell) {
+                currentStepOrder = ((Spell) stackObject).getCurrentActivatingManaAbilitiesStep().getStepOrder();
             }
             if (currentStepOrder > manaAbility.useOnActivationManaAbilityStep().getStepOrder()) {
                 return ActivationStatus.getFalse();

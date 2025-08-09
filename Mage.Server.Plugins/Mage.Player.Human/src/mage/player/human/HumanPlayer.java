@@ -638,8 +638,8 @@ public class HumanPlayer extends PlayerImpl {
             // Check check if the spell being paid for cares about the color of mana being paid
             // See: https://github.com/magefree/mage/issues/9070
             boolean caresAboutManaColor = false;
-            if (!game.getStack().isEmpty() && game.getStack().getFirst() instanceof Spell) {
-                Spell spellBeingCast = (Spell) game.getStack().getFirst();
+            if (game.getStack().getFirstOrNull() instanceof Spell) {
+                Spell spellBeingCast = (Spell) game.getStack().getFirstOrNull();
                 if (!spellBeingCast.isResolving() && spellBeingCast.getControllerId().equals(this.getId())) {
                     CardImpl card = (CardImpl) game.getCard(spellBeingCast.getSourceId());
                     caresAboutManaColor = card.caresAboutManaColor(game);
