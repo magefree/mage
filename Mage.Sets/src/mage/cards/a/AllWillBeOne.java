@@ -12,6 +12,8 @@ import mage.filter.common.FilterCreaturePlayerOrPlaneswalker;
 import mage.filter.common.FilterPermanentOrPlayer;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.common.TargetPermanentOrPlayer;
 
 import java.util.UUID;
@@ -67,6 +69,16 @@ class AllWillBeOneTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (!isControlledBy(event.getPlayerId())) {
             return false;
+        }
+        Player player = game.getPlayer(event.getTargetId());
+        if (player == null) {
+            Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
+            if (permanent == null) {
+                permanent = game.getPermanentEntering(event.getTargetId());
+                if (permanent == null) {
+                    return false;
+                }
+            }
         }
         getEffects().setValue("damage", event.getAmount());
         return true;
