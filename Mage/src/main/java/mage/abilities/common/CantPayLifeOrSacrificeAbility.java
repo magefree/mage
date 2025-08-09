@@ -1,7 +1,6 @@
 package mage.abilities.common;
 
 import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.constants.*;
@@ -20,22 +19,23 @@ import java.util.UUID;
  */
 public class CantPayLifeOrSacrificeAbility extends SimpleStaticAbility {
 
-    final String rule;
+    private final String rule;
 
     public CantPayLifeOrSacrificeAbility(FilterPermanent sacrificeFilter) {
         this(false, sacrificeFilter);
     }
 
     /**
-     * @param allowNonManaAbilities boolean to set if the restriction should only apply to non-mana abilities
-     * @param sacrificeFilter filter for types of permanents that cannot be sacrificed
+     * @param onlyNonManaAbilities boolean to set if the restriction should only apply to non-mana abilities
+     * @param sacrificeFilter filter for types of permanents that cannot be sacrificed, can be null if sacrifice not needed.
+     *                        e.g. Karn's Sylex
      */
-    public CantPayLifeOrSacrificeAbility(boolean allowNonManaAbilities, FilterPermanent sacrificeFilter) {
-        super(new CantPayLifeEffect(allowNonManaAbilities));
+    public CantPayLifeOrSacrificeAbility(boolean onlyNonManaAbilities, FilterPermanent sacrificeFilter) {
+        super(new CantPayLifeEffect(onlyNonManaAbilities));
         if (sacrificeFilter != null) {
-            addEffect(new CantSacrificeEffect(allowNonManaAbilities, sacrificeFilter));
+            addEffect(new CantSacrificeEffect(onlyNonManaAbilities, sacrificeFilter));
         }
-        this.rule = makeRule(allowNonManaAbilities, sacrificeFilter);
+        this.rule = makeRule(onlyNonManaAbilities, sacrificeFilter);
     }
 
     private CantPayLifeOrSacrificeAbility(CantPayLifeOrSacrificeAbility effect) {
@@ -68,19 +68,19 @@ public class CantPayLifeOrSacrificeAbility extends SimpleStaticAbility {
 
 class CantPayLifeEffect extends ContinuousEffectImpl {
 
-    private final boolean nonManaAbilities;
+    private final boolean onlyNonManaAbilities;
 
     /**
-     * @param nonManaAbilities boolean to set if the restriction should only apply to non-mana abilities
+     * @param onlyNonManaAbilities boolean to set if the restriction should only apply to non-mana abilities
      */
-    public CantPayLifeEffect(boolean nonManaAbilities) {
+    CantPayLifeEffect(boolean onlyNonManaAbilities) {
         super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Detriment);
-        this.nonManaAbilities = nonManaAbilities;
+        this.onlyNonManaAbilities = onlyNonManaAbilities;
     }
 
     private CantPayLifeEffect(CantPayLifeEffect effect) {
         super(effect);
-        this.nonManaAbilities = effect.nonManaAbilities;
+        this.onlyNonManaAbilities = effect.onlyNonManaAbilities;
     }
 
     public CantPayLifeEffect copy() {
@@ -95,10 +95,11 @@ class CantPayLifeEffect extends ContinuousEffectImpl {
                 return false;
             }
             player.addPayLifeCostRestriction(Player.PayLifeCostRestriction.CAST_SPELLS);
-            if (this.nonManaAbilities) {
+            if (this.onlyNonManaAbilities) {
                 player.addPayLifeCostRestriction(Player.PayLifeCostRestriction.ACTIVATE_NON_MANA_ABILITIES);
             } else {
-                player.addPayLifeCostRestriction(Player.PayLifeCostRestriction.ACTIVATE_ABILITIES);
+                player.addPayLifeCostRestriction(Player.PayLifeCostRestriction.ACTIVATE_MANA_ABILITIES);
+                player.addPayLifeCostRestriction(Player.PayLifeCostRestriction.ACTIVATE_NON_MANA_ABILITIES);
             }
         }
         return true;
@@ -108,18 +109,18 @@ class CantPayLifeEffect extends ContinuousEffectImpl {
 class CantSacrificeEffect extends ContinuousRuleModifyingEffectImpl {
 
     private final FilterPermanent sacrificeFilter;
-    private final boolean allowNonManaAbilities;
+    private final boolean onlyNonManaAbilities;
 
-    public CantSacrificeEffect(boolean allowNonManaAbilities, FilterPermanent sacrificeFilter) {
+    CantSacrificeEffect(boolean onlyNonManaAbilities, FilterPermanent sacrificeFilter) {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         this.sacrificeFilter = sacrificeFilter;
-        this.allowNonManaAbilities = allowNonManaAbilities;
+        this.onlyNonManaAbilities = onlyNonManaAbilities;
     }
 
     private CantSacrificeEffect(CantSacrificeEffect effect) {
         super(effect);
         this.sacrificeFilter = effect.sacrificeFilter.copy();
-        this.allowNonManaAbilities = effect.allowNonManaAbilities;
+        this.onlyNonManaAbilities = effect.onlyNonManaAbilities;
     }
 
     @Override
@@ -135,8 +136,8 @@ class CantSacrificeEffect extends ContinuousRuleModifyingEffectImpl {
             return false;
         }
         Ability abilityWithCost = abilityOptional.get();
-        boolean isActivatedAbility = (allowNonManaAbilities && abilityWithCost.isManaActivatedAbility()) ||
-                (!allowNonManaAbilities && abilityWithCost.isActivatedAbility());
+        boolean isActivatedAbility = (onlyNonManaAbilities && abilityWithCost.isManaActivatedAbility()) ||
+                (!onlyNonManaAbilities && abilityWithCost.isActivatedAbility());
         if (!isActivatedAbility && abilityWithCost.getAbilityType() != AbilityType.SPELL) {
             return false;
         }
@@ -144,7 +145,7 @@ class CantSacrificeEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public ContinuousEffect copy() {
+    public CantSacrificeEffect copy() {
         return new CantSacrificeEffect(this);
     }
 }

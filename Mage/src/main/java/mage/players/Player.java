@@ -59,7 +59,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * and Karn's Sylex adds `CAST_SPELLS` and 'ACTIVATE_NON_MANA_ABILITIES'.
      */
     enum PayLifeCostRestriction {
-        CAST_SPELLS, ACTIVATE_NON_MANA_ABILITIES, ACTIVATE_ABILITIES
+        CAST_SPELLS, ACTIVATE_NON_MANA_ABILITIES, ACTIVATE_MANA_ABILITIES
     }
 
     /**

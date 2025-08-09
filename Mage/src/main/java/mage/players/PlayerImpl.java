@@ -4668,10 +4668,10 @@ public abstract class PlayerImpl implements Player, Serializable {
                     canPay &= ability.getAbilityType() != AbilityType.SPELL;
                     break;
                 case ACTIVATE_NON_MANA_ABILITIES:
-                    canPay &= ability.isManaActivatedAbility();
+                    canPay &= !ability.isNonManaActivatedAbility();
                     break;
-                case ACTIVATE_ABILITIES:
-                    canPay &= !ability.isActivatedAbility();
+                case ACTIVATE_MANA_ABILITIES:
+                    canPay &= !ability.isManaActivatedAbility();
                     break;
             }
         }
