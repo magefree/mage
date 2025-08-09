@@ -12,11 +12,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -65,7 +63,7 @@ enum BiteDownOnCrimeAdjuster implements CostAdjuster {
     @Override
     public void reduceCost(Ability ability, Game game) {
         if (CollectedEvidenceCondition.instance.apply(game, ability)
-                || (game.inCheckPlayableState() && collectEvidenceCost.canPay(ability, null, ability.getControllerId(), game))) {
+                || (game.inCheckPlayableState() && collectEvidenceCost.canPay(ability, ability, ability.getControllerId(), game))) {
             CardUtil.reduceCost(ability, 2);
         }
     }

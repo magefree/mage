@@ -3760,28 +3760,18 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public PayLifeCostLevel getPayLifeCostLevel() {
-        return computerPlayer.getPayLifeCostLevel();
+    public EnumSet<PayLifeCostRestriction> getPayLifeCostRestrictions() {
+        return computerPlayer.getPayLifeCostRestrictions();
     }
 
     @Override
-    public void setPayLifeCostLevel(PayLifeCostLevel payLifeCostLevel) {
-        computerPlayer.setPayLifeCostLevel(payLifeCostLevel);
+    public void addPayLifeCostRestriction(PayLifeCostRestriction payLifeCostRestriction) {
+        computerPlayer.addPayLifeCostRestriction(payLifeCostRestriction);
     }
 
     @Override
     public boolean canPaySacrificeCost(Permanent permanent, Ability source, UUID controllerId, Game game) {
         return computerPlayer.canPaySacrificeCost(permanent, source, controllerId, game);
-    }
-
-    @Override
-    public FilterPermanent getSacrificeCostFilter() {
-        return computerPlayer.getSacrificeCostFilter();
-    }
-
-    @Override
-    public void setCanPaySacrificeCostFilter(FilterPermanent permanent) {
-        computerPlayer.setCanPaySacrificeCostFilter(permanent);
     }
 
     @Override

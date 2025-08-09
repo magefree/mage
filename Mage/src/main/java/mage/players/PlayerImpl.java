@@ -30,7 +30,6 @@ import mage.designations.DesignationType;
 import mage.designations.Speed;
 import mage.filter.FilterCard;
 import mage.filter.FilterMana;
-import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreatureForCombat;
@@ -150,14 +149,13 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected boolean isFastFailInTestMode = true;
     protected boolean canGainLife = true;
     protected boolean canLoseLife = true;
-    protected PayLifeCostLevel payLifeCostLevel = PayLifeCostLevel.allAbilities;
+    protected EnumSet<PayLifeCostRestriction> payLifeCostRestrictions = EnumSet.noneOf(PayLifeCostRestriction.class);
     protected boolean loseByZeroOrLessLife = true;
     protected boolean canPlotFromTopOfLibrary = false;
     protected boolean drawsFromBottom = false;
     protected boolean drawsOnOpponentsTurn = false;
     protected int speed = 0;
 
-    protected FilterPermanent sacrificeCostFilter;
     protected List<AlternativeSourceCosts> alternativeSourceCosts = new ArrayList<>();
 
     // TODO: rework turn controller to use single list (see other todos)
@@ -264,8 +262,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.userData = player.userData;
         this.matchPlayer = player.matchPlayer;
 
-        this.payLifeCostLevel = player.payLifeCostLevel;
-        this.sacrificeCostFilter = player.sacrificeCostFilter;
+        this.payLifeCostRestrictions = player.payLifeCostRestrictions;
         this.alternativeSourceCosts = CardUtil.deepCopyObject(player.alternativeSourceCosts);
         this.storedBookmark = player.storedBookmark;
 
@@ -364,9 +361,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
         this.inRange.clear();
         this.inRange.addAll(((PlayerImpl) player).inRange);
-        this.payLifeCostLevel = player.getPayLifeCostLevel();
-        this.sacrificeCostFilter = player.getSacrificeCostFilter() != null
-                ? player.getSacrificeCostFilter().copy() : null;
+        this.payLifeCostRestrictions = player.getPayLifeCostRestrictions();
         this.loseByZeroOrLessLife = player.canLoseByZeroOrLessLife();
         this.canPlotFromTopOfLibrary = player.canPlotFromTopOfLibrary();
         this.drawsFromBottom = player.isDrawsFromBottom();
@@ -481,14 +476,13 @@ public abstract class PlayerImpl implements Player, Serializable {
         //this.isTestMode // must keep
         this.canGainLife = true;
         this.canLoseLife = true;
-        this.payLifeCostLevel = PayLifeCostLevel.allAbilities;
+        this.payLifeCostRestrictions.clear();
         this.loseByZeroOrLessLife = true;
         this.canPlotFromTopOfLibrary = false;
         this.drawsFromBottom = false;
         this.drawsOnOpponentsTurn = false;
         this.speed = 0;
 
-        this.sacrificeCostFilter = null;
         this.alternativeSourceCosts.clear();
 
         this.isGameUnderControl = true;
@@ -524,8 +518,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.maxAttackedBy = Integer.MAX_VALUE;
         this.canGainLife = true;
         this.canLoseLife = true;
-        this.payLifeCostLevel = PayLifeCostLevel.allAbilities;
-        this.sacrificeCostFilter = null;
+        this.payLifeCostRestrictions.clear();
         this.loseByZeroOrLessLife = true;
         this.canPlotFromTopOfLibrary = false;
         this.drawsFromBottom = false;
@@ -4683,46 +4676,41 @@ public abstract class PlayerImpl implements Player, Serializable {
             return false;
         }
 
-        switch (payLifeCostLevel) {
-            case allAbilities:
-                return true;
-            case onlyManaAbilities:
-                return ability.isManaAbility();
-            case nonSpellnonActivatedAbilities:
-                return !ability.getAbilityType().isActivatedAbility()
-                        && ability.getAbilityType() != AbilityType.SPELL;
-            case none:
-            default:
-                return false;
+        boolean canPay = true;
+        for (PayLifeCostRestriction restriction : payLifeCostRestrictions) {
+            switch (restriction) {
+                case CAST_SPELLS:
+                    canPay &= ability.getAbilityType() != AbilityType.SPELL;
+                    break;
+                case ACTIVATE_NON_MANA_ABILITIES:
+                    canPay &= !ability.isNonManaActivatedAbility();
+                    break;
+                case ACTIVATE_MANA_ABILITIES:
+                    canPay &= !ability.isManaActivatedAbility();
+                    break;
+            }
         }
+        return canPay;
     }
 
     @Override
-    public PayLifeCostLevel getPayLifeCostLevel() {
-        return payLifeCostLevel;
+    public EnumSet<PayLifeCostRestriction> getPayLifeCostRestrictions() {
+        return payLifeCostRestrictions;
     }
 
 
     @Override
-    public void setPayLifeCostLevel(PayLifeCostLevel payLifeCostLevel) {
-        this.payLifeCostLevel = payLifeCostLevel;
+    public void addPayLifeCostRestriction(PayLifeCostRestriction payLifeCostRestriction) {
+        this.payLifeCostRestrictions.add(payLifeCostRestriction);
     }
 
     @Override
     public boolean canPaySacrificeCost(Permanent permanent, Ability source, UUID controllerId, Game game) {
-        return permanent.canBeSacrificed() &&
-                (sacrificeCostFilter == null || !sacrificeCostFilter.match(permanent, controllerId, source, game));
-    }
-
-    @Override
-    public void setCanPaySacrificeCostFilter(FilterPermanent filter
-    ) {
-        this.sacrificeCostFilter = filter;
-    }
-
-    @Override
-    public FilterPermanent getSacrificeCostFilter() {
-        return sacrificeCostFilter;
+        if (!permanent.canBeSacrificed()) {
+            return false;
+        }
+        String sourceIdString = source.getId().toString();
+        return !(game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.PAY_SACRIFICE_COST, permanent.getId(), source, controllerId, sourceIdString, 1)));
     }
 
     @Override
