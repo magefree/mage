@@ -41,8 +41,8 @@ public interface Target extends Copyable<Target>, Serializable {
     boolean isChoiceCompleted(UUID abilityControllerId, Ability source, Game game, Cards fromCards);
 
     /**
-     * Temporary status to work with "up to" targets (mark target that it was skip on selection)
-     * TODO: remove after target.chooseXXX remove
+     * Tests and AI related for "up to" targets (mark target that it was skipped on selection, so new choose dialog will be called)
+     * Example: AI sim possible target options
      */
     boolean isSkipChoice();
 

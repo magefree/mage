@@ -6,7 +6,6 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBaseAI;
 
@@ -21,7 +20,6 @@ import java.util.List;
  *  TODO: add tests and implement best choice selection on timeout
  *    (AI must make any good/bad choice on timeout with game log - not a skip)
  * <p>
- * TODO: AI do not support game simulations for target options in triggered
  *
  * @author JayDi85
  */
@@ -106,28 +104,24 @@ public class SimulationPerformanceAITest extends CardTestPlayerBaseAI {
     }
 
     @Test
-    @Ignore // enable after triggered supported or need performance test
     public void test_ManyTargetOptions_Triggered_Single() {
         // 2 damage to bear and 3 damage to player B
         runManyTargetOptionsInTrigger("1 target creature", 1, 1, false, 20 - 3);
     }
 
     @Test
-    @Ignore // enable after triggered supported or need performance test
     public void test_ManyTargetOptions_Triggered_Few() {
         // 4 damage to x2 bears and 1 damage to player B
         runManyTargetOptionsInTrigger("2 target creatures", 2, 2, false, 20 - 1);
     }
 
     @Test
-    @Ignore // enable after triggered supported or need performance test
     public void test_ManyTargetOptions_Triggered_Many() {
         // 4 damage to x2 bears and 1 damage to player B
         runManyTargetOptionsInTrigger("5 target creatures", 5, 2, false, 20 - 1);
     }
 
     @Test
-    @Ignore // enable after triggered supported or need performance test
     public void test_ManyTargetOptions_Triggered_TooMuch() {
         // warning, can be slow
 
@@ -139,7 +133,6 @@ public class SimulationPerformanceAITest extends CardTestPlayerBaseAI {
     }
 
     @Test
-    @Ignore // enable after triggered supported or need performance test
     public void test_ManyTargetOptions_Triggered_TargetGroups() {
         // make sure targets optimization can find unique creatures, e.g. damaged
 
@@ -212,5 +205,30 @@ public class SimulationPerformanceAITest extends CardTestPlayerBaseAI {
 
         // 4 damage to x2 bears and 1 damage to damaged bear
         runManyTargetOptionsInActivate("5 target creatures with one damaged", 5, 3, true, 20);
+    }
+
+    @Test
+    public void test_ElderDeepFiend_TooManyUpToChoices() {
+        // bug: game freeze with 100% CPU usage
+        // https://github.com/magefree/mage/issues/9518
+        int cardsCount = 2; // 2+ cards will generate too much target options for simulations
+
+        // Boulderfall deals 5 damage divided as you choose among any number of targets.
+        // Flash
+        // Emerge {5}{U}{U} (You may cast this spell by sacrificing a creature and paying the emerge cost reduced by that creature's mana value.)
+        // When you cast this spell, tap up to four target permanents.
+        addCard(Zone.HAND, playerA, "Elder Deep-Fiend", cardsCount); // {8}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 8 * cardsCount);
+        //
+        addCard(Zone.BATTLEFIELD, playerB, "Balduvian Bears", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Kitesail Corsair", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Alpha Tyrranax", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Abbey Griffin", 2);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Elder Deep-Fiend", cardsCount); // ai must cast it
     }
 }

@@ -19,7 +19,7 @@ import mage.util.RandomUtil;
 import java.util.*;
 
 /**
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public abstract class TargetImpl implements Target {
 
@@ -321,7 +321,7 @@ public abstract class TargetImpl implements Target {
     @Override
     public boolean isChoiceSelected() {
         // min = max = 0 - for abilities with X=0, e.g. nothing to choose
-        return chosen || getMaxNumberOfTargets() == 0 && getMinNumberOfTargets() == 0;
+        return chosen || getMaxNumberOfTargets() == 0 && getMinNumberOfTargets() == 0 || isSkipChoice();
     }
 
     @Override
@@ -586,11 +586,24 @@ public abstract class TargetImpl implements Target {
     @Override
     public List<? extends TargetImpl> getTargetOptions(Ability source, Game game) {
         List<TargetImpl> options = new ArrayList<>();
-        List<UUID> possibleTargets = new ArrayList<>(possibleTargets(source.getControllerId(), source, game));
+        Set<UUID> possibleTargets = possibleTargets(source.getControllerId(), source, game);
+
+        // optimizations for less memory/cpu consumptions
+        int maxPossibleTargetsToSimulate = Math.min(TargetOptimization.AI_MAX_POSSIBLE_TARGETS_TO_CHOOSE, possibleTargets.size()); // see TargetAmount
+        if (getMinNumberOfTargets() > 0) {
+            maxPossibleTargetsToSimulate = Math.max(maxPossibleTargetsToSimulate, getMinNumberOfTargets());
+        }
+        TargetOptimization.printTargetsVariationsForTarget("target - before optimize", game, possibleTargets, options, false);
+        TargetOptimization.optimizePossibleTargets(source, game, possibleTargets, maxPossibleTargetsToSimulate);
+        TargetOptimization.printTargetsVariationsForTarget("target - after optimize", game, possibleTargets, options, false);
+
+        // calc all optimized combinations
+        // TODO: replace by google/apache lib to generate all combinations
+        List<UUID> needPossibleTargets = new ArrayList<>(possibleTargets);
 
         // get the length of the array
         // e.g. for {'A','B','C','D'} => N = 4
-        int N = possibleTargets.size();
+        int N = needPossibleTargets.size();
         // not enough targets, return no option
         if (N < getMinNumberOfTargets()) {
             return options;
@@ -598,6 +611,7 @@ public abstract class TargetImpl implements Target {
         // not target but that's allowed, return one empty option
         if (N == 0) {
             TargetImpl target = this.copy();
+            target.setSkipChoice(true);
             options.add(target);
             return options;
         }
@@ -617,6 +631,7 @@ public abstract class TargetImpl implements Target {
         int minK = getMinNumberOfTargets();
         if (getMinNumberOfTargets() == 0) { // add option without targets if possible
             TargetImpl target = this.copy();
+            target.setSkipChoice(true);
             options.add(target);
             minK = 1;
         }
@@ -645,7 +660,7 @@ public abstract class TargetImpl implements Target {
                         //add the new target option
                         TargetImpl target = this.copy();
                         for (int i = 0; i < combination.length; i++) {
-                            target.addTarget(possibleTargets.get(combination[i]), source, game, true);
+                            target.addTarget(needPossibleTargets.get(combination[i]), source, game, true);
                         }
                         options.add(target);
                         index++;
@@ -664,6 +679,9 @@ public abstract class TargetImpl implements Target {
                 }
             }
         }
+
+        TargetOptimization.printTargetsVariationsForTarget("target - after calc", game, possibleTargets, options, true);
+
         return options;
     }
 

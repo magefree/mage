@@ -318,6 +318,7 @@ public final class SimulatedPlayer2 extends ComputerPlayer {
         Ability ability = source.copy();
         List<Ability> options = getPlayableOptions(ability, game);
         if (options.isEmpty()) {
+            // no options - activate as is
             logger.debug("simulating -- triggered ability:" + ability);
             game.getStack().push(game, new StackAbility(ability, playerId));
             if (ability.activate(game, false) && ability.isUsesStack()) {
@@ -326,6 +327,8 @@ public final class SimulatedPlayer2 extends ComputerPlayer {
             game.applyEffects();
             game.getPlayers().resetPassed();
         } else {
+            // many options - activate and add to sims tree
+            // TODO: AI run all sims, but do not use best option for triggers yet
             SimulationNode2 parent = (SimulationNode2) game.getCustomData();
             int depth = parent.getDepth() - 1;
             if (depth == 0) {
@@ -350,7 +353,7 @@ public final class SimulatedPlayer2 extends ComputerPlayer {
         logger.debug("simulating -- node #:" + SimulationNode2.getCount() + " triggered ability option");
         for (Target target : ability.getTargets()) {
             for (UUID targetId : target.getTargets()) {
-                newNode.getTargets().add(targetId); // save for info only (real targets in newNode.ability already)
+                newNode.getTargets().add(targetId); // save for info only (real targets in newNode.game.stack already)
             }
         }
         parent.children.add(newNode);

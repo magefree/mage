@@ -4524,7 +4524,6 @@ public abstract class PlayerImpl implements Player, Serializable {
         } else if (ability.getCosts().getTargets().getNextUnchosen(game) != null) {
             addCostTargetOptions(options, ability, 0, game);
         }
-
         return options;
     }
 
@@ -4565,9 +4564,6 @@ public abstract class PlayerImpl implements Player, Serializable {
      */
     protected void addTargetOptions(List<Ability> options, Ability option, int targetNum, Game game) {
         // TODO: target options calculated for triggered ability too, but do not used in real game
-        // TODO: there are rare errors with wrong targetNum - maybe multiple game sims can change same target object somehow?
-        //  do not hide NullPointError here, research instead
-
         if (targetNum >= option.getTargets().size()) {
             return;
         }
@@ -4592,6 +4588,8 @@ public abstract class PlayerImpl implements Player, Serializable {
                     newOption.getTargets().get(targetNum).addTarget(targetId, newOption, game, true);
                 }
             }
+            // don't forget about target's status (if it zero then must set skip choice too)
+            newOption.getTargets().get(targetNum).setSkipChoice(targetOption.isSkipChoice());
 
             if (targetNum + 1 < option.getTargets().size()) {
                 // fill more targets

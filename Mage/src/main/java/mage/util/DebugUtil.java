@@ -15,7 +15,7 @@ public class DebugUtil {
     // game simulations runs in multiple threads, if you stop code to debug then it will be terminated by timeout
     // so AI debug mode will make single simulation thread without any timeouts
     public static boolean AI_ENABLE_DEBUG_MODE = false;
-    public static boolean AI_SHOW_TARGET_OPTIMIZATION_LOGS = false; // works with target amount
+    public static boolean AI_SHOW_TARGET_OPTIMIZATION_LOGS = false; // works with target and target amount calculations
 
     // SERVER
     // data collectors - enable additional logs and data collection for better AI and human games debugging
