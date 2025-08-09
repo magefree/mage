@@ -93,7 +93,7 @@ class SharedFateReplacementEffect extends ReplacementEffectImpl {
         FilterPlayer filter = new FilterPlayer("opponent");
         List<PlayerIdPredicate> opponentPredicates = new ArrayList<>();
         for (UUID opponentId : game.getOpponents(playerToDraw.getId())) {
-            if (playersInPlayerRange.contains(opponentId)) {
+            if (playersInPlayerRange.contains(opponentId) && playersInControllerRange.contains(opponentId)) {
                 opponentPredicates.add(new PlayerIdPredicate(opponentId));
             }
         }
