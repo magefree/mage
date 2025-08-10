@@ -515,6 +515,7 @@ public class ScryfallImageSupportCards {
             add("SLX"); // Universes Within
             add("CLB"); // Commander Legends: Battle for Baldur's Gate
             add("2X2"); // Double Masters 2022
+            add("SCH"); // Store Championships
             add("DMU"); // Dominaria United
             add("DMC"); // Dominaria United Commander
             add("YDMU"); // Alchemy: Dominaria
@@ -573,6 +574,7 @@ public class ScryfallImageSupportCards {
             add("ACR"); // Assassin's Creed
             add("BLB"); // Bloomburrow
             add("BLC"); // Bloomburrow Commander
+            add("PCBB"); // Cowboy Bebop
             add("MB2"); // Mystery Booster 2
             add("DSK"); // Duskmourn: House of Horror
             add("DSC"); // Duskmourn: House of Horror Commander
@@ -580,15 +582,18 @@ public class ScryfallImageSupportCards {
             add("J25"); // Foundations Jumpstart
             add("PIO"); // Pioneer Masters
             add("PW25"); // Wizards Play Network 2025
+            add("PSPL"); // Spotlight Series
             add("INR"); // Innistrad Remastered
             add("PF25"); // MagicFest 2025
             add("DFT"); // Aetherdrift
             add("DRC"); // Aetherdrift Commander
+            add("PLG25"); // Love Your LGS 2025
             add("TDM"); // Tarkir: Dragonstorm
             add("TDC"); // Tarkir: Dragonstorm Commander
             add("FIN"); // Final Fantasy
             add("FIC"); // Final Fantasy Commander
             add("FCA"); // Final Fantasy: Through the Ages
+            add("PSS5"); // FIN Standard Showdown
             add("EOE"); // Edge of Eternities
             add("EOC"); // Edge of Eternities Commander
             add("EOS"); // Edge of Eternities: Stellar Sights
