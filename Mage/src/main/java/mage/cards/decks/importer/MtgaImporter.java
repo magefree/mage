@@ -8,6 +8,7 @@ import mage.cards.repository.CardInfo;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -18,7 +19,11 @@ import java.util.regex.Pattern;
 public class MtgaImporter extends PlainTextDeckImporter {
 
     private static final Map<String, String> SET_REMAPPING = ImmutableMap.of("DAR", "DOM");
-    private static final Pattern MTGA_PATTERN = Pattern.compile(
+
+    // example:
+    // 4 Accumulated Knowledge (A25) 40
+    // 4 Accumulated Knowledge
+    public static final Pattern MTGA_PATTERN = Pattern.compile(
             "(\\p{Digit}+)" +
                     "\\p{javaWhitespace}+" +
                     "(" + CardNameUtil.CARD_NAME_PATTERN.pattern() + ")" +
@@ -34,12 +39,15 @@ public class MtgaImporter extends PlainTextDeckImporter {
     protected void readLine(String line, DeckCardLists deckList, FixedInfo fixedInfo) {
 
         line = line.trim();
+        String lowerLine = line.toLowerCase(Locale.ENGLISH);
 
-        if (line.equals("Deck")) {
+        // mainboard to support decks from archidekt.com
+        if (lowerLine.equals("deck") || lowerLine.equals("mainboard")) {
+            sideboard = false;
             return;
         }
 
-        if (line.equals("Sideboard") || line.equals("")) {
+        if (lowerLine.equals("sideboard") || lowerLine.equals("commander") || lowerLine.equals("maybeboard") || lowerLine.equals("")) {
             sideboard = true;
             return;
         }
@@ -72,6 +80,36 @@ public class MtgaImporter extends PlainTextDeckImporter {
         List<DeckCardInfo> zone = sideboard ? deckList.getSideboard() : deckList.getCards();
         DeckCardInfo deckCardInfo = new DeckCardInfo(found.getName(), found.getCardNumber(), found.getSetCode());
         zone.addAll(Collections.nCopies(count, deckCardInfo.copy()));
+    }
+
+    public static boolean isMTGA(String data) {
+        // examples:
+        // 4 Accumulated Knowledge (A25) 40
+        // 4 Accumulated Knowledge
+        // Deck
+        // Commander
+        // Mainboard - extra mark for archidekt.com
+        // Sideboard - extra mark for archidekt.com
+        // Maybeboard - extra mark for archidekt.com
+
+        String firstLine = data.split("\\R", 2)[0];
+        String firstLineLower = firstLine.toLowerCase(Locale.ENGLISH);
+
+        // by deck marks
+        if (firstLineLower.startsWith("deck")
+                || firstLineLower.startsWith("mainboard")
+                || firstLineLower.startsWith("sideboard")
+                || firstLineLower.startsWith("commander")
+                || firstLineLower.startsWith("maybeboard")) {
+            return true;
+        }
+
+        // by card marks
+        Matcher pattern = MtgaImporter.MTGA_PATTERN.matcher(CardNameUtil.normalizeCardName(firstLine));
+        return pattern.matches()
+                && pattern.groupCount() >= 4
+                && pattern.group(3) != null
+                && pattern.group(4) != null;
     }
 
 }
