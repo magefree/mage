@@ -44,6 +44,12 @@ public class DownloaderTest {
     }
 
     @Test
+    public void test_DownloadText_ScryfallUtf8() {
+        String s = XmageURLConnection.downloadText("https://api.scryfall.com/cards/sld/379★/en");
+        Assert.assertTrue("must have text data (utf8 url must work)", s.contains("Zndrsplt, Eye of Wisdom"));
+    }
+
+    @Test
     public void test_DownloadFile_ByHttp() throws IOException {
         // use any public image here
         InputStream stream = XmageURLConnection.downloadBinary("http://xmage.today/images/xmage-logo.png");

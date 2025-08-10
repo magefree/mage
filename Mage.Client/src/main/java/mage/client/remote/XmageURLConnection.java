@@ -10,10 +10,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.InetSocketAddress;
-import java.net.Proxy;
-import java.net.URL;
+import java.net.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
@@ -93,7 +90,9 @@ public class XmageURLConnection {
         initDefaultProxy();
 
         try {
-            URL url = new URL(this.url);
+            // convert utf8 url to ascii format (e.g. url encode)
+            URI uri = new URI(this.url);
+            URL url = new URL(uri.toASCIIString());
 
             // proxy settings
             if (this.proxy != null) {
@@ -107,7 +106,7 @@ public class XmageURLConnection {
             this.connection.setReadTimeout(CONNECTION_READING_TIMEOUT_MS);
 
             initDefaultHeaders();
-        } catch (IOException e) {
+        } catch (IOException | URISyntaxException e) {
             this.connection = null;
         }
     }
