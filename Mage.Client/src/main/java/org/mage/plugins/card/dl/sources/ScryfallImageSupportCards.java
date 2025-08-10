@@ -569,6 +569,7 @@ public class ScryfallImageSupportCards {
             add("BIG"); // The Big Score
             add("MH3"); // Modern Horizons 3
             add("M3C"); // Modern Horizons 3 Commander
+            add("H2R"); // Modern Horizons 2 Timeshifts
             add("ACR"); // Assassin's Creed
             add("BLB"); // Bloomburrow
             add("BLC"); // Bloomburrow Commander
