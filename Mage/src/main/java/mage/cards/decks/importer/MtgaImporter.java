@@ -38,16 +38,19 @@ public class MtgaImporter extends PlainTextDeckImporter {
     @Override
     protected void readLine(String line, DeckCardLists deckList, FixedInfo fixedInfo) {
 
+        // moxfield support - remove foil status
+        line = line.replace(" *F*", "");
+
         line = line.trim();
         String lowerLine = line.toLowerCase(Locale.ENGLISH);
 
         // mainboard to support decks from archidekt.com
-        if (lowerLine.equals("deck") || lowerLine.equals("mainboard")) {
+        if (lowerLine.startsWith("deck") || lowerLine.startsWith("mainboard")) {
             sideboard = false;
             return;
         }
 
-        if (lowerLine.equals("sideboard") || lowerLine.equals("commander") || lowerLine.equals("maybeboard") || lowerLine.equals("")) {
+        if (lowerLine.startsWith("sideboard") || lowerLine.startsWith("commander") || lowerLine.startsWith("maybeboard") || lowerLine.equals("")) {
             sideboard = true;
             return;
         }
