@@ -33,11 +33,10 @@ public class DecDeckImporter extends PlainTextDeckImporter {
         String lineName = line.substring(delim).trim();
         try {
             int num = Integer.parseInt(lineNum);
-            Optional<CardInfo> cardLookup = getCardLookup().lookupCardInfo(lineName);
-            if (!cardLookup.isPresent()) {
+            CardInfo cardInfo = getCardLookup().lookupCardInfo(lineName);
+            if (cardInfo == null) {
                 sbMessage.append("Could not find card: '").append(lineName).append("' at line ").append(lineCount).append('\n');
             } else {
-                CardInfo cardInfo = cardLookup.get();
                 DeckCardInfo.makeSureCardAmountFine(num, cardInfo.getName());
                 DeckCardInfo deckCardInfo = new DeckCardInfo(cardInfo.getName(), cardInfo.getCardNumber(), cardInfo.getSetCode());
                 for (int i = 0; i < num; i++) {

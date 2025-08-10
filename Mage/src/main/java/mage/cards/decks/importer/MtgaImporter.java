@@ -65,12 +65,12 @@ public class MtgaImporter extends PlainTextDeckImporter {
         CardInfo found;
         int count = Integer.parseInt(pattern.group(1));
         String name = pattern.group(2);
-        if (pattern.group(3) != null && pattern.group(4) != null) {
+        if (pattern.group(3) != null) {
             String set = SET_REMAPPING.getOrDefault(pattern.group(3), pattern.group(3));
-            String cardNumber = pattern.group(4);
-            found = lookup.lookupCardInfo(name, set, cardNumber).orElse(null);
+            String cardNumber = pattern.groupCount() >= 4 ? pattern.group(4) : null;
+            found = lookup.lookupCardInfo(name, set, cardNumber);
         } else {
-            found = lookup.lookupCardInfo(name).orElse(null);
+            found = lookup.lookupCardInfo(name, null, null);
         }
 
         if (found == null) {
@@ -110,9 +110,8 @@ public class MtgaImporter extends PlainTextDeckImporter {
         // by card marks
         Matcher pattern = MtgaImporter.MTGA_PATTERN.matcher(CardNameUtil.normalizeCardName(firstLine));
         return pattern.matches()
-                && pattern.groupCount() >= 4
-                && pattern.group(3) != null
-                && pattern.group(4) != null;
+                && pattern.groupCount() >= 3
+                && pattern.group(3) != null;
     }
 
 }
