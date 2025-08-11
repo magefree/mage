@@ -1,11 +1,9 @@
 package mage.cards.t;
 
-import mage.MageInt;
-import mage.abilities.keyword.NightboundAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
-import mage.constants.SubType;
 
 import java.util.UUID;
 
@@ -16,18 +14,8 @@ public final class TavernSmasher extends CardImpl {
 
     public TavernSmasher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
-
-        this.subtype.add(SubType.WEREWOLF);
-
-        this.color.setRed(true);
-
         this.nightCard = true;
-
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(5);
-
-        // Nightbound
-        this.addAbility(new NightboundAbility());
+        TransformingDoubleFacedCard.copyToBackFace(new mage.cards.t.TavernRuffian(ownerId, setInfo), this);
     }
 
     private TavernSmasher(final TavernSmasher card) {

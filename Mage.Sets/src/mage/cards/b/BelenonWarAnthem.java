@@ -1,11 +1,9 @@
 package mage.cards.b;
 
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
-import mage.constants.Duration;
 
 import java.util.UUID;
 
@@ -16,12 +14,8 @@ public final class BelenonWarAnthem extends CardImpl {
 
     public BelenonWarAnthem(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "");
-
-        this.color.setWhite(true);
         this.nightCard = true;
-
-        // Creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield)));
+        TransformingDoubleFacedCard.copyToBackFace(new mage.cards.i.InvasionOfBelenon(ownerId, setInfo), this);
     }
 
     private BelenonWarAnthem(final BelenonWarAnthem card) {

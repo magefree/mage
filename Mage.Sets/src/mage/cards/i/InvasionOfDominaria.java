@@ -5,8 +5,10 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SiegeAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
-import mage.cards.CardImpl;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
@@ -15,22 +17,36 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class InvasionOfDominaria extends CardImpl {
+public final class InvasionOfDominaria extends TransformingDoubleFacedCard {
 
     public InvasionOfDominaria(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.BATTLE}, "{2}{W}");
+        super(
+                ownerId, setInfo,
+                new CardType[]{CardType.BATTLE}, new SubType[]{SubType.SIEGE}, "{2}{W}",
+                "Serra Faithkeeper",
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.ANGEL}, "W"
+        );
+        this.getLeftHalfCard().setStartingDefense(5);
+        this.getRightHalfCard().setPT(4, 4);
 
-        this.subtype.add(SubType.SIEGE);
-        this.setStartingDefense(5);
         this.secondSideCardClazz = mage.cards.s.SerraFaithkeeper.class;
 
         // (As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)
-        this.addAbility(new SiegeAbility());
+        this.getLeftHalfCard().addAbility(new SiegeAbility());
 
         // When Invasion of Dominaria enters the battlefield, you gain 4 life and draw a card.
         Ability ability = new EntersBattlefieldTriggeredAbility(new GainLifeEffect(4));
         ability.addEffect(new DrawCardSourceControllerEffect(1).concatBy("and"));
-        this.addAbility(ability);
+        this.getLeftHalfCard().addAbility(ability);
+
+        // Serra Faithkeeper
+        // Flying
+        this.getRightHalfCard().addAbility(FlyingAbility.getInstance());
+
+        // Vigilance
+        this.getRightHalfCard().addAbility(VigilanceAbility.getInstance());
+
+        this.finalizeDFC();
     }
 
     private InvasionOfDominaria(final InvasionOfDominaria card) {

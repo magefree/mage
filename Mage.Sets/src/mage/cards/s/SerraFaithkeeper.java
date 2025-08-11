@@ -1,12 +1,9 @@
 package mage.cards.s;
 
-import mage.MageInt;
-import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
-import mage.constants.SubType;
 
 import java.util.UUID;
 
@@ -17,18 +14,8 @@ public final class SerraFaithkeeper extends CardImpl {
 
     public SerraFaithkeeper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
-
-        this.subtype.add(SubType.ANGEL);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
-        this.color.setWhite(true);
         this.nightCard = true;
-
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-
-        // Vigilance
-        this.addAbility(VigilanceAbility.getInstance());
+        TransformingDoubleFacedCard.copyToBackFace(new mage.cards.i.InvasionOfDominaria(ownerId, setInfo), this);
     }
 
     private SerraFaithkeeper(final SerraFaithkeeper card) {
