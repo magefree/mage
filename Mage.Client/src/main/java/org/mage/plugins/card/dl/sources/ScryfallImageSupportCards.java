@@ -560,6 +560,7 @@ public class ScryfallImageSupportCards {
             add("SPG"); // Special Guests
             add("PW24"); // Wizards Play Network 2024
             add("RVR"); // Ravnica Remastered
+            add("PL24"); // Year of the Dragon 2024
             add("PIP"); // Fallout
             add("MKM"); // Murders at Karlov Manor
             add("MKC"); // Murders at Karlov Manor Commander
@@ -585,6 +586,7 @@ public class ScryfallImageSupportCards {
             add("PSPL"); // Spotlight Series
             add("INR"); // Innistrad Remastered
             add("PF25"); // MagicFest 2025
+            add("PL25"); // Year of the Snake 2025
             add("DFT"); // Aetherdrift
             add("DRC"); // Aetherdrift Commander
             add("PLG25"); // Love Your LGS 2025
