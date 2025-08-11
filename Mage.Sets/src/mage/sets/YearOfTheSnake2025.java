@@ -18,7 +18,7 @@ public class YearOfTheSnake2025 extends ExpansionSet {
     private YearOfTheSnake2025() {
         super("Year of the Snake 2025", "PL25", ExpansionSet.buildDate(2025, 2, 14), SetType.PROMOTIONAL);
         this.hasBoosters = false;
-        this.hasBasicLands = false;
+        this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Forest", 6, Rarity.RARE, mage.cards.basiclands.Forest.class));
         cards.add(new SetCardInfo("Kaseto, Orochi Archmage", 5, Rarity.MYTHIC, mage.cards.k.KasetoOrochiArchmage.class));

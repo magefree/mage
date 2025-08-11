@@ -18,7 +18,7 @@ public class YearOfTheDragon2024 extends ExpansionSet {
     private YearOfTheDragon2024() {
         super("Year of the Dragon 2024", "PL24", ExpansionSet.buildDate(2024, 2, 8), SetType.PROMOTIONAL);
         this.hasBoosters = false;
-        this.hasBasicLands = false;
+        this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Dragon Tempest", 7, Rarity.RARE, mage.cards.d.DragonTempest.class));
         cards.add(new SetCardInfo("Dragonlord's Servant", 1, Rarity.RARE, mage.cards.d.DragonlordsServant.class));
