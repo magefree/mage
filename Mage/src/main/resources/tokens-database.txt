@@ -2943,3 +2943,9 @@
 
 # PL23
 |Generate|TOK:PL23|Food|||FoodToken|
+
+# PL24
+|Generate|TOK:PL24|Dragon|||DragonToken|
+
+# PL25
+|Generate|TOK:PL25|Snake|||SnakeToken|
