@@ -465,6 +465,7 @@ public class ScryfallImageSupportCards {
             // add("MD1"); // Modern Event Deck
             // add("DD3"); // Duel Decks Anthology
             // add("PZ1"); // Legendary Cube
+            add("PLG20"); // Love Your LGS 2020
             add("IKO"); // Ikoria: Lair of Behemoths
             add("C20"); // Commander 2020
             add("M21"); // Core Set 2021
