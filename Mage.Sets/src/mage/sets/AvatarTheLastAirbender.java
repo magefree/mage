@@ -21,6 +21,7 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         this.rotationSet = true;
         this.hasBasicLands = false; // temporary
 
+        cards.add(new SetCardInfo("Avatar Enthusiasts", 11, Rarity.COMMON, mage.cards.a.AvatarEnthusiasts.class));
         cards.add(new SetCardInfo("Katara, the Fearless", 230, Rarity.RARE, mage.cards.k.KataraTheFearless.class));
         cards.add(new SetCardInfo("Sokka's Haiku", 71, Rarity.UNCOMMON, mage.cards.s.SokkasHaiku.class));
     }
