@@ -19,7 +19,7 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         super("Avatar: The Last Airbender", "TLA", ExpansionSet.buildDate(2025, 11, 21), SetType.EXPANSION);
         this.blockName = "Avatar: The Last Airbender"; // for sorting in GUI
         this.rotationSet = true;
-        this.hasBasicLands = false; // temporary
+        this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Appa, Steadfast Guardian", 10, Rarity.MYTHIC, mage.cards.a.AppaSteadfastGuardian.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Appa, Steadfast Guardian", 316, Rarity.MYTHIC, mage.cards.a.AppaSteadfastGuardian.class, NON_FULL_USE_VARIOUS));
