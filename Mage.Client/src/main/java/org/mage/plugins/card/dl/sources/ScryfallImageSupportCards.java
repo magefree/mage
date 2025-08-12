@@ -546,9 +546,11 @@ public class ScryfallImageSupportCards {
             add("30A"); // 30th Anniversary Edition
             add("P30A"); // 30th Anniversary Play Promos
             add("P30M"); // 30th Anniversary Misc Promos
+            add("P30H"); // 30th Anniversary History Promos
             add("PEWK"); // Eternal Weekend
             add("LTR"); // The Lord of the Rings: Tales of Middle-Earth
             add("LTC"); // Tales of Middle-Earth Commander
+            add("PF23"); // MagicFest 2023
             add("CMM"); // Commander Masters
             add("WHO"); // Doctor Who
             add("WOE"); // Wilds of Eldraine
