@@ -52,6 +52,7 @@ Exploit|new|
 Extort|new|
 Fabricate|number|
 Fear|instance|
+Firebending|number|
 First strike|instance|
 Flanking|new|
 Flash|instance|
