@@ -1,6 +1,7 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
@@ -19,5 +20,7 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         this.blockName = "Avatar: The Last Airbender"; // for sorting in GUI
         this.rotationSet = true;
         this.hasBasicLands = false; // temporary
+
+        cards.add(new SetCardInfo("Katara, the Fearless", 230, Rarity.RARE, mage.cards.k.KataraTheFearless.class));
     }
 }
