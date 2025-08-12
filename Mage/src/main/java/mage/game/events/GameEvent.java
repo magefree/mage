@@ -698,6 +698,7 @@ public class GameEvent implements Serializable {
         EARTHBENDED,
         AIRBENDED,
         FIREBENDED,
+        WATERBENDED,
         // custom events - must store some unique data to track
         CUSTOM_EVENT;
 
