@@ -16,7 +16,7 @@ public class LoveYourLGS2024 extends ExpansionSet {
     }
 
     private LoveYourLGS2024() {
-        super("Love Your LGS 2025", "PLG25", ExpansionSet.buildDate(2024, 8, 6), SetType.PROMOTIONAL);
+        super("Love Your LGS 2024", "PLG24", ExpansionSet.buildDate(2024, 8, 6), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
