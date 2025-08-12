@@ -30,6 +30,7 @@ Antiquities|ATQ|
 Assassin's Creed|ACR|
 Avacyn Restored|AVR|
 Avatar: The Last Airbender|TLA|
+Avatar: The Last Airbender Eternal|TLE|
 Battle for Zendikar|BFZ|
 Battlebond|BBD|
 Born of the Gods|BNG|
