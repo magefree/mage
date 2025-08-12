@@ -22,23 +22,23 @@ import mage.util.CardUtil;
 /**
  * @author TheElk801
  */
-public class EarthbendEffect extends OneShotEffect {
+public class EarthbendTargetEffect extends OneShotEffect {
 
     private final int amount;
 
-    public EarthbendEffect(int amount) {
+    public EarthbendTargetEffect(int amount) {
         super(Outcome.Benefit);
         this.amount = amount;
     }
 
-    private EarthbendEffect(final EarthbendEffect effect) {
+    private EarthbendTargetEffect(final EarthbendTargetEffect effect) {
         super(effect);
         this.amount = effect.amount;
     }
 
     @Override
-    public EarthbendEffect copy() {
-        return new EarthbendEffect(this);
+    public EarthbendTargetEffect copy() {
+        return new EarthbendTargetEffect(this);
     }
 
     @Override

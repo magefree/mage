@@ -1,6 +1,6 @@
 package mage.cards.e;
 
-import mage.abilities.effects.keyword.EarthbendEffect;
+import mage.abilities.effects.keyword.EarthbendTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -21,7 +21,7 @@ public final class EarthbendingLesson extends CardImpl {
         this.subtype.add(SubType.LESSON);
 
         // Earthbend 4.
-        this.getSpellAbility().addEffect(new EarthbendEffect(4));
+        this.getSpellAbility().addEffect(new EarthbendTargetEffect(4));
         this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND));
     }
 
