@@ -20,7 +20,7 @@ public class YearOfTheSnake2025 extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = true;
 
-        cards.add(new SetCardInfo("Forest", 6, Rarity.LAND, mage.cards.basiclands.Forest.class));
+        cards.add(new SetCardInfo("Forest", 6, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Kaseto, Orochi Archmage", 5, Rarity.MYTHIC, mage.cards.k.KasetoOrochiArchmage.class));
         cards.add(new SetCardInfo("Lotus Cobra", 3, Rarity.RARE, mage.cards.l.LotusCobra.class));
         cards.add(new SetCardInfo("Sakura-Tribe Elder", 4, Rarity.RARE, mage.cards.s.SakuraTribeElder.class));
