@@ -559,11 +559,13 @@ public class ScryfallImageSupportCards {
             add("REX"); // Jurassic World Collection
             add("SPG"); // Special Guests
             add("PW24"); // Wizards Play Network 2024
+            add("PF24"); // MagicFest 2024
             add("RVR"); // Ravnica Remastered
             add("PL24"); // Year of the Dragon 2024
             add("PIP"); // Fallout
             add("MKM"); // Murders at Karlov Manor
             add("MKC"); // Murders at Karlov Manor Commander
+            add("PSS4"); // MKM Standard Showdown
             add("CLU"); // Ravnica: Clue Edition
             add("OTJ"); // Outlaws of Thunder Junction
             add("OTC"); // Outlaws of Thunder Junction Commander
@@ -575,6 +577,7 @@ public class ScryfallImageSupportCards {
             add("ACR"); // Assassin's Creed
             add("BLB"); // Bloomburrow
             add("BLC"); // Bloomburrow Commander
+            add("PLG24"); // Love Your LGS 2024
             add("PCBB"); // Cowboy Bebop
             add("MB2"); // Mystery Booster 2
             add("DSK"); // Duskmourn: House of Horror
