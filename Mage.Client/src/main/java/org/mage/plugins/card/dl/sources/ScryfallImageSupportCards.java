@@ -514,11 +514,13 @@ public class ScryfallImageSupportCards {
             add("NCC"); // New Capenna Commander
             add("SLX"); // Universes Within
             add("CLB"); // Commander Legends: Battle for Baldur's Gate
+            add("PLG22"); // Love Your LGS 2022
             add("2X2"); // Double Masters 2022
             add("SCH"); // Store Championships
             add("DMU"); // Dominaria United
             add("DMC"); // Dominaria United Commander
             add("YDMU"); // Alchemy: Dominaria
+            add("PRCQ"); // Regional Championship Qualifiers 2022
             add("40K"); // Warhammer 40,000 Commander
             add("UNF"); // Unfinity
             add("GN3"); // Game Night: Free-for-All
