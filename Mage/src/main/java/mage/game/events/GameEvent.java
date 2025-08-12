@@ -696,6 +696,7 @@ public class GameEvent implements Serializable {
          */
         PAY_SACRIFICE_COST,
         EARTHBENDED,
+        AIRBENDED,
         FIREBENDED,
         // custom events - must store some unique data to track
         CUSTOM_EVENT;
