@@ -11,6 +11,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -52,6 +53,7 @@ public class EarthbendTargetEffect extends OneShotEffect {
                         .withAbility(HasteAbility.getInstance()),
                 false, true, Duration.Custom
         ), source);
+        permanent.addCounters(CounterType.P1P1.createInstance(amount), source, game);
         game.addDelayedTriggeredAbility(new EarthbendingDelayedTriggeredAbility(permanent, game), source);
         game.fireEvent(GameEvent.getEvent(
                 GameEvent.EventType.EARTHBENDED, permanent.getId(),
