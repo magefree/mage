@@ -2,13 +2,13 @@ package mage.cards.a;
 
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.common.WaterbendCost;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.keyword.FlashAbility;
-import mage.abilities.keyword.WaterbendAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -42,9 +42,9 @@ public final class AangsIceberg extends CardImpl {
         this.addAbility(ability);
 
         // Waterbend {3}: Sacrifice this enchantment. If you do, scry 2.
-        this.addAbility(new WaterbendAbility(new DoIfCostPaid(
+        this.addAbility(new SimpleActivatedAbility(new DoIfCostPaid(
                 new ScryEffect(2), new SacrificeSourceCost(), null, false
-        ), new GenericManaCost(3)));
+        ), new WaterbendCost(3)));
     }
 
     private AangsIceberg(final AangsIceberg card) {

@@ -2,12 +2,12 @@ package mage.cards.y;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.common.WaterbendCost;
 import mage.abilities.effects.common.cost.CastFromHandForFreeEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
-import mage.abilities.keyword.WaterbendAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -45,7 +45,7 @@ public final class YueTheMoonSpirit extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Waterbend {5}, {T}: You may cast a noncreature spell from your hand without paying its mana cost.
-        Ability ability = new WaterbendAbility(new CastFromHandForFreeEffect(filter), new GenericManaCost(5));
+        Ability ability = new SimpleActivatedAbility(new CastFromHandForFreeEffect(filter), new WaterbendCost(5));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
