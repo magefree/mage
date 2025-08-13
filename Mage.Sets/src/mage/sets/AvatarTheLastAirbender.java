@@ -37,6 +37,8 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("Earthbending Lesson", 176, Rarity.COMMON, mage.cards.e.EarthbendingLesson.class));
         cards.add(new SetCardInfo("Fated Firepower", 132, Rarity.MYTHIC, mage.cards.f.FatedFirepower.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fated Firepower", 341, Rarity.MYTHIC, mage.cards.f.FatedFirepower.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Fire Lord Zuko", 221, Rarity.RARE, mage.cards.f.FireLordZuko.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Fire Lord Zuko", 360, Rarity.RARE, mage.cards.f.FireLordZuko.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fire Nation Attacks", 133, Rarity.UNCOMMON, mage.cards.f.FireNationAttacks.class));
         cards.add(new SetCardInfo("Forest", 291, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Island", 288, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
