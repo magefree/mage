@@ -1,10 +1,6 @@
 package mage.cards.m;
 
-import java.util.UUID;
-
-import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.CantBeCounteredSourceAbility;
 import mage.abilities.common.EntersBattlefieldTappedUnlessAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.YouControlPermanentCondition;
@@ -13,7 +9,6 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AddContinuousEffectToGame;
-import mage.abilities.effects.common.continuous.NextSpellCastHasAbilityEffect;
 import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -27,6 +22,10 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
+import mage.watchers.common.SpellsCastWatcher;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -71,6 +70,8 @@ public final class MistriseVillage extends CardImpl {
 
 class MistriseCantBeCounteredEffect extends ContinuousRuleModifyingEffectImpl {
 
+    private int spellsCastThisTurn;
+
     public MistriseCantBeCounteredEffect() {
         super(Duration.OneUse, Outcome.Benefit, false, true);
         staticText = "the next spell you cast this turn can't be countered";
@@ -78,6 +79,7 @@ class MistriseCantBeCounteredEffect extends ContinuousRuleModifyingEffectImpl {
 
     protected MistriseCantBeCounteredEffect(final MistriseCantBeCounteredEffect effect) {
         super(effect);
+        this.spellsCastThisTurn = effect.spellsCastThisTurn;
     }
 
     @Override
@@ -88,6 +90,15 @@ class MistriseCantBeCounteredEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.COUNTER;
+    }
+
+    @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
+        if (watcher != null) {
+            spellsCastThisTurn = watcher.getSpellsCastThisTurn(source.getControllerId()).size();
+        }
     }
 
     @Override
@@ -103,10 +114,17 @@ class MistriseCantBeCounteredEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        boolean res = spell != null && spell.isControlledBy(source.getControllerId());
-        if (res) {
-            discard();
+        SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
+        if (spell == null || !spell.isControlledBy(source.getControllerId()) || watcher == null) {
+            return false;
         }
-        return res;
+        List<Spell> spellsCast = watcher.getSpellsCastThisTurn(source.getControllerId());
+        for (int i = 0; i < spellsCast.size(); i++) {
+            if (i == spellsCastThisTurn && spellsCast.get(i).getId().equals(spell.getId())) {
+                discard();
+                return true;
+            }
+        }
+        return false;
     }
 }
