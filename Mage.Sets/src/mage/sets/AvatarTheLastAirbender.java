@@ -27,8 +27,12 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
 
         cards.add(new SetCardInfo("Aang's Iceberg", 336, Rarity.RARE, mage.cards.a.AangsIceberg.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aang's Iceberg", 5, Rarity.RARE, mage.cards.a.AangsIceberg.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Aang, Master of Elements", 207, Rarity.MYTHIC, mage.cards.a.AangMasterOfElements.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Aang, Master of Elements", 363, Rarity.MYTHIC, mage.cards.a.AangMasterOfElements.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Appa, Steadfast Guardian", 10, Rarity.MYTHIC, mage.cards.a.AppaSteadfastGuardian.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Appa, Steadfast Guardian", 316, Rarity.MYTHIC, mage.cards.a.AppaSteadfastGuardian.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Avatar Aang", 207, Rarity.MYTHIC, mage.cards.a.AvatarAang.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Avatar Aang", 363, Rarity.MYTHIC, mage.cards.a.AvatarAang.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Avatar Enthusiasts", 11, Rarity.COMMON, mage.cards.a.AvatarEnthusiasts.class));
         cards.add(new SetCardInfo("Earthbending Lesson", 176, Rarity.COMMON, mage.cards.e.EarthbendingLesson.class));
         cards.add(new SetCardInfo("Fire Nation Attacks", 133, Rarity.UNCOMMON, mage.cards.f.FireNationAttacks.class));
