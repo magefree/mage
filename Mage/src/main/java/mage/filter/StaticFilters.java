@@ -1197,6 +1197,13 @@ public final class StaticFilters {
         FILTER_CONTROLLED_CREATURE_P1P1.setLockedFilter(true);
     }
 
+    public static final FilterControlledCreaturePermanent FILTER_CONTROLLED_CREATURES_P1P1 = new FilterControlledCreaturePermanent("creatures you control with a +1/+1 counter on it");
+
+    static {
+        FILTER_CONTROLLED_CREATURES_P1P1.add(CounterType.P1P1.getPredicate());
+        FILTER_CONTROLLED_CREATURES_P1P1.setLockedFilter(true);
+    }
+
     public static final FilterControlledCreaturePermanent FILTER_EACH_CONTROLLED_CREATURE_P1P1 = new FilterControlledCreaturePermanent("each creature you control with a +1/+1 counter on it");
 
     static {
