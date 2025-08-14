@@ -1018,9 +1018,6 @@ public class VerifyCardDataTest {
 
         // CHECK: unknown set or wrong name
         for (ExpansionSet set : sets) {
-            if ("TLE".equals(set.getCode())) { // temporary
-                continue;
-            }
             if (set.getSetType().equals(SetType.CUSTOM_SET)) {
                 // skip unofficial sets like Star Wars
                 continue;
@@ -2081,7 +2078,6 @@ public class VerifyCardDataTest {
             }
         }
     }
-
     private void checkSubtypes(Card card, MtgJsonCard ref) {
         if (skipListHaveName(SKIP_LIST_SUBTYPE, card.getExpansionSetCode(), card.getName())) {
             return;
