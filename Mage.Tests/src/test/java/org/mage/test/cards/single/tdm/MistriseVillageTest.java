@@ -137,7 +137,7 @@ public class MistriseVillageTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, AETHER_SPELLBOMB);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, FORCE_OF_NEGATION, AETHER_SPELLBOMB); // Successful counter
-        setStopAt(1, PhaseStep.END_TURN);
+        setStopAt(2, PhaseStep.END_TURN);
         execute();
 
         assertPermanentCount(playerA, NARSET_PARTER_OF_VEILS, 1);
@@ -162,7 +162,6 @@ public class MistriseVillageTest extends CardTestPlayerBase {
 
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, NARSET_PARTER_OF_VEILS);
-        checkPlayableAbility("cast force", 1, PhaseStep.PRECOMBAT_MAIN, playerB, "Cast Force", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, FORCE_OF_NEGATION, NARSET_PARTER_OF_VEILS); // Fail to counter
         setChoice(playerB, "Cast with no alternative cost");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
@@ -181,5 +180,38 @@ public class MistriseVillageTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, NARSET_PARTER_OF_VEILS, 1);
         assertGraveyardCount(playerB, FORCE_OF_NEGATION, 2);
         assertPermanentCount(playerA, AETHER_SPELLBOMB, 1);
+    }
+
+    @Test
+    public void testCastingMultipleSpells() {
+        setStrictChooseMode(true);
+        skipInitShuffling();
+
+        addCard(Zone.BATTLEFIELD, playerA, MISTRISE,2);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 13);
+        addCard(Zone.HAND, playerA, NARSET_PARTER_OF_VEILS);
+        addCard(Zone.HAND, playerA, "Hieroglyphic Illumination");
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 6);
+        addCard(Zone.HAND, playerB, FORCE_OF_NEGATION, 2);
+        addCard(Zone.LIBRARY, playerA, AETHER_SPELLBOMB);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{U}, {T}"); // Activate mistrise
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 2);
+
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, NARSET_PARTER_OF_VEILS);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hieroglyphic Illumination");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, FORCE_OF_NEGATION, NARSET_PARTER_OF_VEILS); // Fail to counter
+        setChoice(playerB, "Cast with no alternative cost");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, AETHER_SPELLBOMB);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, FORCE_OF_NEGATION, AETHER_SPELLBOMB); // Successful counter
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, NARSET_PARTER_OF_VEILS, 1);
+        assertGraveyardCount(playerB, FORCE_OF_NEGATION, 2);
+        assertExileCount(playerA, AETHER_SPELLBOMB, 1);
     }
 }

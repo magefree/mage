@@ -1,25 +1,22 @@
 package mage.cards.m;
 
 import mage.abilities.Ability;
+import mage.abilities.common.CantBeCounteredSourceAbility;
 import mage.abilities.common.EntersBattlefieldTappedUnlessAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.YouControlPermanentCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AddContinuousEffectToGame;
 import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
+import mage.constants.*;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.watchers.common.SpellsCastWatcher;
@@ -43,7 +40,7 @@ public final class MistriseVillage extends CardImpl {
 
     public MistriseVillage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
-        
+
 
         // This land enters tapped unless you control a Mountain or a Forest.
         this.addAbility(new EntersBattlefieldTappedUnlessAbility(condition).addHint(condition.getHint()));
@@ -68,12 +65,12 @@ public final class MistriseVillage extends CardImpl {
     }
 }
 
-class MistriseCantBeCounteredEffect extends ContinuousRuleModifyingEffectImpl {
+class MistriseCantBeCounteredEffect extends ContinuousEffectImpl {
 
     private int spellsCastThisTurn;
 
     public MistriseCantBeCounteredEffect() {
-        super(Duration.OneUse, Outcome.Benefit, false, true);
+        super(Duration.EndOfTurn, Layer.RulesEffects, SubLayer.NA, Outcome.Benefit);
         staticText = "the next spell you cast this turn can't be countered";
     }
 
@@ -88,11 +85,6 @@ class MistriseCantBeCounteredEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.COUNTER;
-    }
-
-    @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
         SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
@@ -102,27 +94,27 @@ class MistriseCantBeCounteredEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        StackObject sourceObject = game.getStack().getStackObject(event.getSourceId());
-        StackObject targetObject = game.getStack().getStackObject(event.getTargetId());
-        if (sourceObject != null && targetObject != null) {
-            return targetObject.getName() + " cannot be countered by " + sourceObject.getName();
-        }
-        return staticText;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        Spell spell = game.getStack().getSpell(event.getTargetId());
+    public boolean apply(Game game, Ability source) {
         SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
-        if (spell == null || !spell.isControlledBy(source.getControllerId()) || watcher == null) {
+        if (watcher == null) {
             return false;
         }
-        List<Spell> spellsCast = watcher.getSpellsCastThisTurn(source.getControllerId());
-        for (int i = 0; i < spellsCast.size(); i++) {
-            if (i == spellsCastThisTurn && spellsCast.get(i).getId().equals(spell.getId())) {
-                discard();
-                return true;
+        if (game.getStack().isEmpty() && watcher.getSpellsCastThisTurn(source.getControllerId()).size() >= spellsCastThisTurn + 1) {
+            discard();
+            return false;
+        }
+        for (StackObject stackObject : game.getStack()) {
+            if (!(stackObject instanceof Spell) || !stackObject.isControlledBy(source.getControllerId())) {
+                continue;
+            }
+            Spell spell = (Spell) stackObject;
+
+            List<Spell> spellsCast = watcher.getSpellsCastThisTurn(source.getControllerId());
+            for (int i = 0; i < spellsCast.size(); i++) {
+                if (i == spellsCastThisTurn && spellsCast.get(i).getId().equals(spell.getId())) {
+                    game.getState().addOtherAbility(spell.getCard(), new CantBeCounteredSourceAbility());
+                    return true;
+                }
             }
         }
         return false;
