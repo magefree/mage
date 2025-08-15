@@ -74,7 +74,7 @@ class TopographyTrackerEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId()); 
-        return permanent != null && permanent.isControlledBy(source.getPlayerId());
+        return permanent != null && permanent.isControlledBy(source.getControllerId());
     }
 
     @Override
