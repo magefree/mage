@@ -109,6 +109,7 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("Toph, the First Metalbender", 247, Rarity.RARE, mage.cards.t.TophTheFirstMetalbender.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Toph, the First Metalbender", 353, Rarity.RARE, mage.cards.t.TophTheFirstMetalbender.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Toph, the First Metalbender", 362, Rarity.RARE, mage.cards.t.TophTheFirstMetalbender.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Turtle-Duck", 200, Rarity.COMMON, mage.cards.t.TurtleDuck.class));
         cards.add(new SetCardInfo("Yue, the Moon Spirit", 338, Rarity.RARE, mage.cards.y.YueTheMoonSpirit.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Yue, the Moon Spirit", 83, Rarity.RARE, mage.cards.y.YueTheMoonSpirit.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Yuyan Archers", 161, Rarity.COMMON, mage.cards.y.YuyanArchers.class));
