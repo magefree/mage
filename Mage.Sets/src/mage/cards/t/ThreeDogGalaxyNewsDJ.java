@@ -18,14 +18,12 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterAttackingCreature;
-import mage.filter.predicate.ObjectSourcePlayer;
-import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.predicate.permanent.AttachedToSourcePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
-import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -61,24 +59,7 @@ class ThreeDogGalaxyNewsDJEffect extends OneShotEffect {
     private static final FilterPermanent filter = new FilterPermanent(SubType.AURA, "Aura attached to this creature");
 
     static {
-        filter.add(ThreeDogGalaxyNewsDJPredicate.instance);
-    }
-
-    enum ThreeDogGalaxyNewsDJPredicate implements ObjectSourcePlayerPredicate<Permanent> {
-        instance;
-
-        @Override
-        public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
-            return input
-                    .getSource()
-                    .getSourceObjectIfItStillExists(game) != null
-                    && Optional
-                    .ofNullable(input)
-                    .map(ObjectSourcePlayer::getObject)
-                    .map(Permanent::getAttachedTo)
-                    .map(input.getSourceId()::equals)
-                    .orElse(false);
-        }
+        filter.add(AttachedToSourcePredicate.instance);
     }
 
     ThreeDogGalaxyNewsDJEffect() {
@@ -133,18 +114,18 @@ class ThreeDogGalaxyNewsDJTokenEffect extends OneShotEffect {
         filter.add(AnotherPredicate.instance);
     }
 
-    private final Permanent permanent;
+    private final Permanent sacPermanent;
 
     ThreeDogGalaxyNewsDJTokenEffect(Permanent permanent) {
         super(Outcome.Benefit);
-        this.permanent = permanent != null ? permanent.copy() : null;
+        this.sacPermanent = permanent != null ? permanent.copy() : null;
         staticText = "for each other attacking creature you control, " +
                 "create a token that's a copy of that Aura attached to that creature";
     }
 
     private ThreeDogGalaxyNewsDJTokenEffect(final ThreeDogGalaxyNewsDJTokenEffect effect) {
         super(effect);
-        this.permanent = effect.permanent != null ? effect.permanent.copy() : null;
+        this.sacPermanent = effect.sacPermanent != null ? effect.sacPermanent.copy() : null;
     }
 
     @Override
@@ -154,15 +135,15 @@ class ThreeDogGalaxyNewsDJTokenEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (permanent == null) {
+        if (sacPermanent == null) {
             return false;
         }
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(
+        for (Permanent attacker : game.getBattlefield().getActivePermanents(
                 filter, source.getControllerId(), source, game
         )) {
             new CreateTokenCopyTargetEffect()
-                    .setSavedPermanent(permanent)
-                    .setAttachedTo(permanent.getId())
+                    .setSavedPermanent(sacPermanent)
+                    .setAttachedTo(attacker.getId())
                     .apply(game, source);
         }
         return true;
