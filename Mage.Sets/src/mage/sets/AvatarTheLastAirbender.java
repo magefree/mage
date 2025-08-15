@@ -84,6 +84,7 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("Merchant of Many Hats", 110, Rarity.COMMON, mage.cards.m.MerchantOfManyHats.class));
         cards.add(new SetCardInfo("Mongoose Lizard", 148, Rarity.COMMON, mage.cards.m.MongooseLizard.class));
         cards.add(new SetCardInfo("Mountain", 290, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Ostrich-Horse", 188, Rarity.COMMON, mage.cards.o.OstrichHorse.class));
         cards.add(new SetCardInfo("Ozai's Cruelty", 113, Rarity.UNCOMMON, mage.cards.o.OzaisCruelty.class));
         cards.add(new SetCardInfo("Plains", 287, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Pretending Poxbearers", 237, Rarity.COMMON, mage.cards.p.PretendingPoxbearers.class));
