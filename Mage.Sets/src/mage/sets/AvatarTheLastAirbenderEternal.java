@@ -4,10 +4,15 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * @author TheElk801
  */
 public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
+
+    private static final List<String> unfinished = Arrays.asList("Water Whip");
 
     private static final AvatarTheLastAirbenderEternal instance = new AvatarTheLastAirbenderEternal();
 
@@ -45,8 +50,11 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Thriving Heath", 262, Rarity.COMMON, mage.cards.t.ThrivingHeath.class));
         cards.add(new SetCardInfo("Thriving Isle", 263, Rarity.COMMON, mage.cards.t.ThrivingIsle.class));
         cards.add(new SetCardInfo("Thriving Moor", 264, Rarity.COMMON, mage.cards.t.ThrivingMoor.class));
+        cards.add(new SetCardInfo("Water Whip", 227, Rarity.RARE, mage.cards.w.WaterWhip.class));
         cards.add(new SetCardInfo("Wolf Cove Villager", 221, Rarity.COMMON, mage.cards.w.WolfCoveVillager.class));
         cards.add(new SetCardInfo("Zhao, the Seething Flame", 245, Rarity.UNCOMMON, mage.cards.z.ZhaoTheSeethingFlame.class));
         cards.add(new SetCardInfo("Zuko's Offense", 247, Rarity.COMMON, mage.cards.z.ZukosOffense.class));
+
+        cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName()));
     }
 }
