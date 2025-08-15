@@ -8,6 +8,7 @@ import mage.constants.Zone;
 import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.GameState;
+import mage.util.CardUtil;
 
 import java.util.List;
 import java.util.Set;
@@ -188,7 +189,7 @@ public interface Permanent extends Card, Controllable {
 
     default int damageWithExcess(int damage, UUID attackerId, Ability source, Game game) {
         int lethal = getLethalDamage(attackerId, game);
-        int excess = Math.max(damage - lethal, 0);
+        int excess = Math.max(CardUtil.overflowDec(damage, lethal), 0);
         int dealt = Math.min(lethal, damage);
         this.damage(dealt, attackerId, source, game);
         return excess;
