@@ -57,6 +57,7 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Katara, Waterbending Master", 93, Rarity.MYTHIC, mage.cards.k.KataraWaterbendingMaster.class));
         cards.add(new SetCardInfo("Komodo Rhino", 241, Rarity.COMMON, mage.cards.k.KomodoRhino.class));
         cards.add(new SetCardInfo("Kyoshi Warrior Guard", 216, Rarity.COMMON, mage.cards.k.KyoshiWarriorGuard.class));
+        cards.add(new SetCardInfo("Loyal Fire Sage", 242, Rarity.UNCOMMON, mage.cards.l.LoyalFireSage.class));
         cards.add(new SetCardInfo("Run Amok", 258, Rarity.COMMON, mage.cards.r.RunAmok.class));
         cards.add(new SetCardInfo("The Cabbage Merchant", 134, Rarity.RARE, mage.cards.t.TheCabbageMerchant.class));
         cards.add(new SetCardInfo("The Great Henge", 41, Rarity.MYTHIC, mage.cards.t.TheGreatHenge.class));
