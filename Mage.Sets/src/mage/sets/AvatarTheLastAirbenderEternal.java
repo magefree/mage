@@ -36,6 +36,7 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Capital Guard", 234, Rarity.COMMON, mage.cards.c.CapitalGuard.class));
         cards.add(new SetCardInfo("Deny Entry", 222, Rarity.COMMON, mage.cards.d.DenyEntry.class));
         cards.add(new SetCardInfo("Dragon Moose", 235, Rarity.COMMON, mage.cards.d.DragonMoose.class));
+        cards.add(new SetCardInfo("Earthbending Student", 249, Rarity.UNCOMMON, mage.cards.e.EarthbendingStudent.class));
         cards.add(new SetCardInfo("Eel-Hounds", 250, Rarity.UNCOMMON, mage.cards.e.EelHounds.class));
         cards.add(new SetCardInfo("Elephant-Rat", 228, Rarity.COMMON, mage.cards.e.ElephantRat.class));
         cards.add(new SetCardInfo("Explore", 259, Rarity.COMMON, mage.cards.e.Explore.class));
