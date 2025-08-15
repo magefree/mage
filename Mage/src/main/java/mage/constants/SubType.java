@@ -262,6 +262,7 @@ public enum SubType {
     LAMIA("Lamia", SubTypeSet.CreatureType),
     LAMMASU("Lammasu", SubTypeSet.CreatureType),
     LEECH("Leech", SubTypeSet.CreatureType),
+    LEMUR("Lemur", SubTypeSet.CreatureType),
     LEVIATHAN("Leviathan", SubTypeSet.CreatureType),
     LHURGOYF("Lhurgoyf", SubTypeSet.CreatureType),
     LICID("Licid", SubTypeSet.CreatureType),
