@@ -2,6 +2,7 @@
 package mage.cards.h;
 
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.keyword.EarthbendTargetEffect;
 import mage.cards.CardImpl;
@@ -9,8 +10,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -36,9 +39,9 @@ public final class HaruHiddenTalent extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever another Ally you control enters, earthbend 1.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(
-                new EarthbendTargetEffect(1), filter
-        ));
+        Ability ability = new EntersBattlefieldAllTriggeredAbility(new EarthbendTargetEffect(1), filter);
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND));
+        this.addAbility(ability);
     }
 
     private HaruHiddenTalent(final HaruHiddenTalent card) {
