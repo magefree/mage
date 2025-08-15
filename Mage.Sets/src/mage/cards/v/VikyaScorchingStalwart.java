@@ -14,11 +14,13 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
+import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -91,14 +93,11 @@ class VikyaScorchingStalwartEffect extends OneShotEffect {
         if (!permanent.isCreature(game)) {
             return permanent.damage(amount, source, game) > 0;
         }
-        int lethal = permanent.getLethalDamage(source.getSourceId(), game);
-        permanent.damage(amount, source.getSourceId(), source, game);
-        if (lethal >= amount) {
-            return true;
-        }
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            player.drawCards(1, source, game);
+        if (permanent.damageWithExcess(amount, source, game) > 0) {
+            Optional.ofNullable(source)
+                    .map(Controllable::getControllerId)
+                    .map(game::getPlayer)
+                    .ifPresent(player -> player.drawCards(1, source, game));
         }
         return true;
     }

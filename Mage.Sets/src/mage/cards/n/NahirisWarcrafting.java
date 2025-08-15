@@ -80,9 +80,8 @@ class NahirisWarcraftingEffect extends OneShotEffect {
         if (player == null || permanent == null) {
             return false;
         }
-        int lethal = permanent.getLethalDamage(source.getSourceId(), game);
-        int excess = permanent.damage(5, source, game) - lethal;
-        if (excess <= 0) {
+        int excess = permanent.damageWithExcess(5, source, game);
+        if (excess < 1) {
             return true;
         }
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, excess));

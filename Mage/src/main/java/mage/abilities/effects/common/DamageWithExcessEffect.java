@@ -6,9 +6,11 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
+import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
+
+import java.util.Optional;
 
 /**
  * @author TheElk801
@@ -47,12 +49,12 @@ public class DamageWithExcessEffect extends OneShotEffect {
             return false;
         }
         int damage = amount.calculate(game, source, this);
-        int lethal = permanent.getLethalDamage(source.getSourceId(), game);
-        lethal = Math.min(lethal, damage);
-        permanent.damage(lethal, source.getSourceId(), source, game);
-        Player player = game.getPlayer(permanent.getControllerId());
-        if (player != null && lethal < damage) {
-            player.damage(damage - lethal, source.getSourceId(), source, game);
+        int excess = permanent.damageWithExcess(damage, source, game);
+        if (excess > 0) {
+            Optional.ofNullable(permanent)
+                    .map(Controllable::getControllerId)
+                    .map(game::getPlayer)
+                    .ifPresent(player -> player.damage(excess, source, game));
         }
         return true;
     }

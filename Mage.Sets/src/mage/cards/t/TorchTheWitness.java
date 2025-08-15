@@ -60,8 +60,7 @@ class TorchTheWitnessEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        int lethal = permanent.getLethalDamage(source.getSourceId(), game);
-        if (lethal < permanent.damage(2 * CardUtil.getSourceCostsTag(game, source, "X", 0), source, game)) {
+        if (permanent.damageWithExcess(2 * CardUtil.getSourceCostsTag(game, source, "X", 0), source, game) > 0) {
             InvestigateEffect.doInvestigate(source.getControllerId(), 1, game, source);
         }
         return true;
