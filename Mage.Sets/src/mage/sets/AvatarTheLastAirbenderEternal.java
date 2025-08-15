@@ -62,6 +62,7 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Mechanical Glider", 256, Rarity.COMMON, mage.cards.m.MechanicalGlider.class));
         cards.add(new SetCardInfo("Momo, Rambunctious Rascal", 217, Rarity.UNCOMMON, mage.cards.m.MomoRambunctiousRascal.class));
         cards.add(new SetCardInfo("Purple Pentapus", 233, Rarity.COMMON, mage.cards.p.PurplePentapus.class));
+        cards.add(new SetCardInfo("Roku's Mastery", 243, Rarity.UNCOMMON, mage.cards.r.RokusMastery.class));
         cards.add(new SetCardInfo("Run Amok", 258, Rarity.COMMON, mage.cards.r.RunAmok.class));
         cards.add(new SetCardInfo("The Cabbage Merchant", 134, Rarity.RARE, mage.cards.t.TheCabbageMerchant.class));
         cards.add(new SetCardInfo("The Great Henge", 41, Rarity.MYTHIC, mage.cards.t.TheGreatHenge.class));
