@@ -45,6 +45,7 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Run Amok", 258, Rarity.COMMON, mage.cards.r.RunAmok.class));
         cards.add(new SetCardInfo("The Cabbage Merchant", 134, Rarity.RARE, mage.cards.t.TheCabbageMerchant.class));
         cards.add(new SetCardInfo("The Great Henge", 41, Rarity.MYTHIC, mage.cards.t.TheGreatHenge.class));
+        cards.add(new SetCardInfo("The Terror of Serpent's Pass", 225, Rarity.RARE, mage.cards.t.TheTerrorOfSerpentsPass.class));
         cards.add(new SetCardInfo("Thriving Bluff", 260, Rarity.COMMON, mage.cards.t.ThrivingBluff.class));
         cards.add(new SetCardInfo("Thriving Grove", 261, Rarity.COMMON, mage.cards.t.ThrivingGrove.class));
         cards.add(new SetCardInfo("Thriving Heath", 262, Rarity.COMMON, mage.cards.t.ThrivingHeath.class));
