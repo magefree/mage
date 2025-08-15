@@ -7,7 +7,7 @@ import mage.constants.SetType;
 /**
  * Italian version of Renaissance
  * <p>
- * https://scryfall.com/sets/ren
+ * https://scryfall.com/sets/rin
  * https://mtg.wiki/page/Renaissance
  *
  * @author JayDi85
