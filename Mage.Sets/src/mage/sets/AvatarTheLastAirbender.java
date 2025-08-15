@@ -71,6 +71,7 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("Iguana Parrot", 56, Rarity.COMMON, mage.cards.i.IguanaParrot.class));
         cards.add(new SetCardInfo("Island", 288, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("It'll Quench Ya!", 58, Rarity.COMMON, mage.cards.i.ItllQuenchYa.class));
+        cards.add(new SetCardInfo("Jeong Jeong's Deserters", 25, Rarity.COMMON, mage.cards.j.JeongJeongsDeserters.class));
         cards.add(new SetCardInfo("Katara, Water Tribe's Hope", 231, Rarity.RARE, mage.cards.k.KataraWaterTribesHope.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Katara, Water Tribe's Hope", 351, Rarity.RARE, mage.cards.k.KataraWaterTribesHope.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Katara, the Fearless", 230, Rarity.RARE, mage.cards.k.KataraTheFearless.class, NON_FULL_USE_VARIOUS));
