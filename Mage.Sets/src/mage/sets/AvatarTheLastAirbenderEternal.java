@@ -41,6 +41,7 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Explore", 259, Rarity.COMMON, mage.cards.e.Explore.class));
         cards.add(new SetCardInfo("Explosive Shot", 236, Rarity.COMMON, mage.cards.e.ExplosiveShot.class));
         cards.add(new SetCardInfo("Feed the Swarm", 257, Rarity.COMMON, mage.cards.f.FeedTheSwarm.class));
+        cards.add(new SetCardInfo("Fire Nation Ambushers", 229, Rarity.COMMON, mage.cards.f.FireNationAmbushers.class));
         cards.add(new SetCardInfo("Fire Nation Soldier", 238, Rarity.COMMON, mage.cards.f.FireNationSoldier.class));
         cards.add(new SetCardInfo("Force of Negation", 13, Rarity.MYTHIC, mage.cards.f.ForceOfNegation.class));
         cards.add(new SetCardInfo("Katara, Waterbending Master", 93, Rarity.MYTHIC, mage.cards.k.KataraWaterbendingMaster.class));
