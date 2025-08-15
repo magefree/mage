@@ -28,6 +28,8 @@ public class ScryfallImageSupportCards {
             add("2ED"); // Unlimited Edition
             //add("CEI"); // Intl. Collectors’ Edition
             //add("CED"); // Collectors’ Edition
+            add("RIN"); // Rinascimento
+            add("REN"); // Renaissance
             add("ARN"); // Arabian Nights
             add("ATQ"); // Antiquities
             //add("FBB"); // Foreign Black Border
