@@ -66,6 +66,7 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Purple Pentapus", 233, Rarity.COMMON, mage.cards.p.PurplePentapus.class));
         cards.add(new SetCardInfo("Roku's Mastery", 243, Rarity.UNCOMMON, mage.cards.r.RokusMastery.class));
         cards.add(new SetCardInfo("Run Amok", 258, Rarity.COMMON, mage.cards.r.RunAmok.class));
+        cards.add(new SetCardInfo("Seismic Tutelage", 254, Rarity.RARE, mage.cards.s.SeismicTutelage.class));
         cards.add(new SetCardInfo("Sledding Otter-Penguin", 218, Rarity.COMMON, mage.cards.s.SleddingOtterPenguin.class));
         cards.add(new SetCardInfo("Sokka, Wolf Cove's Protector", 219, Rarity.UNCOMMON, mage.cards.s.SokkaWolfCovesProtector.class));
         cards.add(new SetCardInfo("The Cabbage Merchant", 134, Rarity.RARE, mage.cards.t.TheCabbageMerchant.class));
