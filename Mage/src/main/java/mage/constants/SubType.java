@@ -246,6 +246,7 @@ public enum SubType {
     JUGGERNAUT("Juggernaut", SubTypeSet.CreatureType),
     // K
     KALEESH("Kaleesh", SubTypeSet.CreatureType, true), // Star Wars
+    KANGAROO("Kangaroo", SubTypeSet.CreatureType),
     KAVU("Kavu", SubTypeSet.CreatureType),
     KELDOR("KelDor", SubTypeSet.CreatureType, true),
     KILLBOT("Killbot", SubTypeSet.CreatureType, true), // Unstable
