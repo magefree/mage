@@ -60,13 +60,11 @@ class HellToPayEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        int damage = CardUtil.getSourceCostsTag(game, source, "X", 0);
-        int lethal = Math.min(permanent.getLethalDamage(source.getSourceId(), game), damage);
-        permanent.damage(damage, source.getSourceId(), source, game);
-        if (damage > lethal) {
-            new TreasureToken().putOntoBattlefield(
-                    damage - lethal, game, source, source.getControllerId(), true, false
-            );
+        int excess = permanent.damageWithExcess(
+                CardUtil.getSourceCostsTag(game, source, "X", 0), source, game
+        );
+        if (excess > 0) {
+            new TreasureToken().putOntoBattlefield(excess, game, source, source.getControllerId(), true, false);
         }
         return true;
     }

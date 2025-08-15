@@ -177,6 +177,23 @@ public interface Permanent extends Card, Controllable {
 
     int getLethalDamage(UUID attackerId, Game game);
 
+    /**
+     * Same arguments as regular damage method, but returns the amount of excess damage dealt instead
+     *
+     * @return
+     */
+    default int damageWithExcess(int damage, Ability source, Game game) {
+        return this.damageWithExcess(damage, source.getSourceId(), source, game);
+    }
+
+    default int damageWithExcess(int damage, UUID attackerId, Ability source, Game game) {
+        int lethal = getLethalDamage(attackerId, game);
+        int excess = Math.max(damage - lethal, 0);
+        int dealt = Math.min(lethal, damage);
+        this.damage(dealt, attackerId, source, game);
+        return excess;
+    }
+
     void removeAllDamage(Game game);
 
     void reset(Game game);
