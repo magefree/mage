@@ -50,7 +50,7 @@ public final class SokkaLateralStrategist extends CardImpl {
 class SokkaLateralStrategistTriggeredAbility extends TriggeredAbilityImpl {
 
     SokkaLateralStrategistTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect());
+        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1));
         this.setTriggerPhrase("Whenever {this} and at least one other creature attack, ");
     }
 
