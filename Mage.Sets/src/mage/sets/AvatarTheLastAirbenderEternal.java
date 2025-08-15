@@ -33,9 +33,17 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Dragon Moose", 235, Rarity.COMMON, mage.cards.d.DragonMoose.class));
         cards.add(new SetCardInfo("Eel-Hounds", 250, Rarity.UNCOMMON, mage.cards.e.EelHounds.class));
         cards.add(new SetCardInfo("Elephant-Rat", 228, Rarity.COMMON, mage.cards.e.ElephantRat.class));
+        cards.add(new SetCardInfo("Explore", 259, Rarity.COMMON, mage.cards.e.Explore.class));
+        cards.add(new SetCardInfo("Feed the Swarm", 257, Rarity.COMMON, mage.cards.f.FeedTheSwarm.class));
         cards.add(new SetCardInfo("Force of Negation", 13, Rarity.MYTHIC, mage.cards.f.ForceOfNegation.class));
         cards.add(new SetCardInfo("Katara, Waterbending Master", 93, Rarity.MYTHIC, mage.cards.k.KataraWaterbendingMaster.class));
+        cards.add(new SetCardInfo("Run Amok", 258, Rarity.COMMON, mage.cards.r.RunAmok.class));
         cards.add(new SetCardInfo("The Cabbage Merchant", 134, Rarity.RARE, mage.cards.t.TheCabbageMerchant.class));
         cards.add(new SetCardInfo("The Great Henge", 41, Rarity.MYTHIC, mage.cards.t.TheGreatHenge.class));
+        cards.add(new SetCardInfo("Thriving Bluff", 260, Rarity.COMMON, mage.cards.t.ThrivingBluff.class));
+        cards.add(new SetCardInfo("Thriving Grove", 261, Rarity.COMMON, mage.cards.t.ThrivingGrove.class));
+        cards.add(new SetCardInfo("Thriving Heath", 262, Rarity.COMMON, mage.cards.t.ThrivingHeath.class));
+        cards.add(new SetCardInfo("Thriving Isle", 263, Rarity.COMMON, mage.cards.t.ThrivingIsle.class));
+        cards.add(new SetCardInfo("Thriving Moor", 264, Rarity.COMMON, mage.cards.t.ThrivingMoor.class));
     }
 }
