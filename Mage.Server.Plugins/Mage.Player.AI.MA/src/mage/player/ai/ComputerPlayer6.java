@@ -502,7 +502,7 @@ public class ComputerPlayer6 extends ComputerPlayer {
         }
         logger.warn("Possible freeze chain:");
         if (root != null && chain.isEmpty()) {
-            logger.warn(" - unknown use case (too many possible targets?)"); // maybe can't finish any calc, maybe related to target options, I don't know
+            logger.warn(" - unknown use case (too many possible targets?)"); // maybe can't finish any calc, maybe related to target options
         }
         chain.forEach(s -> {
             logger.warn(" - " + s);
