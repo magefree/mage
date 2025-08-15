@@ -8,10 +8,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.Predicates;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetControlledLandPermanent;
 import mage.target.common.TargetOpponent;
 
 import java.util.UUID;
@@ -39,7 +38,7 @@ public final class DaiLiIndoctrination extends CardImpl {
 
         // * Earthbend 2.
         this.getSpellAbility().addMode(new Mode(new EarthbendTargetEffect(2))
-                .addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND)));
+                .addTarget(new TargetControlledLandPermanent()));
     }
 
     private DaiLiIndoctrination(final DaiLiIndoctrination card) {

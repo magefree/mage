@@ -10,15 +10,13 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetControlledLandPermanent;
 
 import java.util.UUID;
 
 /**
- *
  * @author Grath
  */
 public final class HaruHiddenTalent extends CardImpl {
@@ -30,7 +28,7 @@ public final class HaruHiddenTalent extends CardImpl {
     }
 
     public HaruHiddenTalent(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.PEASANT);
         this.subtype.add(SubType.ALLY);
@@ -40,7 +38,7 @@ public final class HaruHiddenTalent extends CardImpl {
 
         // Whenever another Ally you control enters, earthbend 1.
         Ability ability = new EntersBattlefieldAllTriggeredAbility(new EarthbendTargetEffect(1), filter);
-        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND));
+        ability.addTarget(new TargetControlledLandPermanent());
         this.addAbility(ability);
     }
 

@@ -5,8 +5,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.StaticFilters;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetControlledLandPermanent;
 
 import java.util.UUID;
 
@@ -22,7 +21,7 @@ public final class EarthbendingLesson extends CardImpl {
 
         // Earthbend 4.
         this.getSpellAbility().addEffect(new EarthbendTargetEffect(4));
-        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND));
+        this.getSpellAbility().addTarget(new TargetControlledLandPermanent());
     }
 
     private EarthbendingLesson(final EarthbendingLesson card) {

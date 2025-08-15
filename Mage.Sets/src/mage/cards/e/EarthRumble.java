@@ -9,10 +9,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetControlledLandPermanent;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 
 import java.util.UUID;
@@ -27,7 +26,7 @@ public final class EarthRumble extends CardImpl {
 
         // Earthbend 2. When you do, up to one target creature you control fights target creature an opponent controls.
         this.getSpellAbility().addEffect(new EarthbendTargetEffect(2));
-        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND));
+        this.getSpellAbility().addTarget(new TargetControlledLandPermanent());
         this.getSpellAbility().addEffect(new EarthRumbleEffect());
     }
 

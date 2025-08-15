@@ -13,9 +13,8 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetControlledLandPermanent;
 
 import java.util.UUID;
 
@@ -42,7 +41,7 @@ public final class BumiEclecticEarthbender extends CardImpl {
 
         // When Bumi enters, earthbend 1.
         Ability ability = new EntersBattlefieldTriggeredAbility(new EarthbendTargetEffect(1));
-        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND));
+        ability.addTarget(new TargetControlledLandPermanent());
         this.addAbility(ability);
 
         // Whenever Bumi attacks, put two +1/+1 counters on each land creature you control.

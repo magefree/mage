@@ -13,7 +13,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetControlledLandPermanent;
 
 import java.util.UUID;
 
@@ -32,7 +32,7 @@ public final class Badgermole extends CardImpl {
 
         // When this creature enters, earthbend 2.
         Ability ability = new EntersBattlefieldTriggeredAbility(new EarthbendTargetEffect(2));
-        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND));
+        ability.addTarget(new TargetControlledLandPermanent());
         this.addAbility(ability);
 
         // Creatures you control with +1/+1 counters on them have trample.

@@ -10,12 +10,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetControlledLandPermanent;
 
 import java.util.UUID;
 
@@ -39,7 +38,7 @@ public final class TophTheFirstMetalbender extends CardImpl {
 
         // At the beginning of your end step, earthbend 2.
         Ability ability = new BeginningOfEndStepTriggeredAbility(new EarthbendTargetEffect(2));
-        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND));
+        ability.addTarget(new TargetControlledLandPermanent());
         this.addAbility(ability);
     }
 

@@ -8,8 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.StaticFilters;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetControlledLandPermanent;
 
 import java.util.UUID;
 
@@ -29,7 +28,7 @@ public final class EarthVillageRuffians extends CardImpl {
 
         // When this creature dies, earthbend 2.
         Ability ability = new DiesSourceTriggeredAbility(new EarthbendTargetEffect(2));
-        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND));
+        ability.addTarget(new TargetControlledLandPermanent());
         this.addAbility(ability);
     }
 
