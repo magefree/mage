@@ -45,5 +45,6 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Thriving Heath", 262, Rarity.COMMON, mage.cards.t.ThrivingHeath.class));
         cards.add(new SetCardInfo("Thriving Isle", 263, Rarity.COMMON, mage.cards.t.ThrivingIsle.class));
         cards.add(new SetCardInfo("Thriving Moor", 264, Rarity.COMMON, mage.cards.t.ThrivingMoor.class));
+        cards.add(new SetCardInfo("Zhao, the Seething Flame", 245, Rarity.UNCOMMON, mage.cards.z.ZhaoTheSeethingFlame.class));
     }
 }
