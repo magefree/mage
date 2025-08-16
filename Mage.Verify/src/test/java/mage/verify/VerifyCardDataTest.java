@@ -772,12 +772,6 @@ public class VerifyCardDataTest {
         Collection<String> errorsList = new ArrayList<>();
         Collection<ExpansionSet> xmageSets = Sets.getInstance().values();
 
-        // fast check instead card's db search (only main side card)
-        Set<String> implementedIndex = new HashSet<>();
-        CardRepository.instance.findCards(new CardCriteria()).forEach(card -> {
-            implementedIndex.add(card.getName());
-        });
-
         // CHECK: wrong card numbers
         for (ExpansionSet set : xmageSets) {
             if (skipListHaveName(SKIP_LIST_WRONG_CARD_NUMBERS, set.getCode())) {
@@ -790,14 +784,8 @@ public class VerifyCardDataTest {
                     continue;
                 }
 
-                // CHECK: poster promoType must use full art setting
-                if ((jsonCard.promoTypes != null && jsonCard.promoTypes.contains("poster")) && !card.isFullArt()) {
-                    errorsList.add("Error: card must use full art setting: "
-                            + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
-                }
-
-                // CHECK: textless must use full art setting
-                if (jsonCard.isTextless && !card.isFullArt()) {
+                // CHECK: poster promoType and/or textless must use full art setting
+                if (((jsonCard.promoTypes != null && jsonCard.promoTypes.contains("poster")) || jsonCard.isTextless) && !card.isFullArt()) {
                     errorsList.add("Error: card must use full art setting: "
                             + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
                 }
