@@ -1,5 +1,6 @@
 package mage.cards.n;
 
+import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.SacrificeCost;
 import mage.abilities.costs.VariableCostImpl;
@@ -15,6 +16,9 @@ import mage.constants.ComparisonType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.common.TargetCreaturePermanentAmount;
 
 import java.util.UUID;
@@ -90,4 +94,33 @@ class SacrificeXManaValueCost extends VariableCostImpl implements SacrificeCost 
         return new SacrificeTargetCost(manavaluefilter);
     }
 
+    @Override
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
+        Player controller = game.getPlayer(controllerId);
+        if (controller == null) {
+            return false;
+        }
+        int validTargets = 0;
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, controllerId, game)) {
+            if (controller.canPaySacrificeCost(permanent, source, controllerId, game)) {
+                validTargets++;
+            }
+        }
+        return validTargets > 0;
+    }
+
+    @Override
+    public int getMaxValue(Ability source, Game game) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return super.getMaxValue(source, game);
+        }
+        int maxValue = 0;
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, controller.getId(), game)) {
+            if (controller.canPaySacrificeCost(permanent, source, controller.getId(), game)) {
+                maxValue = Math.max(maxValue, permanent.getManaValue());
+            }
+        }
+        return maxValue;
+    }
 }
