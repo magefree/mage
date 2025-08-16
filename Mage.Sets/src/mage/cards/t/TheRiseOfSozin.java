@@ -7,6 +7,7 @@ import mage.abilities.effects.common.ChooseACardNameEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.effects.common.ExileSagaAndReturnTransformedEffect;
 import mage.abilities.effects.common.search.SearchTargetGraveyardHandLibraryForCardNameAndExileEffect;
+import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -46,6 +47,7 @@ public final class TheRiseOfSozin extends CardImpl {
         );
 
         // III -- Exile this Saga, then return it to the battlefield transformed under your control.
+        this.addAbility(new TransformAbility());
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III, new ExileSagaAndReturnTransformedEffect());
         this.addAbility(sagaAbility);
     }
