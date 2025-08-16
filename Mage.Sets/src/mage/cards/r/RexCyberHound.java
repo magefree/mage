@@ -129,7 +129,6 @@ class RexCyberhoundContinuousEffect extends ContinuousEffectImpl {
             for (Ability ability : card.getAbilities(game)) {
                 if (ability.isActivatedAbility()) {
                     ActivatedAbility copyAbility = (ActivatedAbility) ability.copy();
-                    copyAbility.setMaxActivationsPerTurn(1);
                     perm.addAbility(copyAbility, source.getSourceId(), game, true);
                 }
             }
