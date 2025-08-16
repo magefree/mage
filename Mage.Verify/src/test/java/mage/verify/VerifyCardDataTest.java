@@ -718,6 +718,18 @@ public class VerifyCardDataTest {
 //                            + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
 //                }
 
+                // CHECK: poster promoType must use full art setting
+                if (jsonCard.promoTypes.contains("poster") && !card.isFullArt()) {
+                   errorsList.add("Error: card must use full art setting: "
+                           + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
+               }
+
+                // CHECK: textless must use full art setting
+                if (jsonCard.isTextless && !card.isFullArt()) {
+                   errorsList.add("Error: card must use full art setting: "
+                           + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
+               }
+
                 // CHECK: must use retro frame setting
                 if ((jsonCard.frameVersion.equals("1993") || jsonCard.frameVersion.equals("1997")) && !card.isRetroFrame()) {
                     errorsList.add("Error: card must use retro art setting: "
