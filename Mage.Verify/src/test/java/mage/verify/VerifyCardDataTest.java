@@ -719,7 +719,7 @@ public class VerifyCardDataTest {
 //                }
 
                 // CHECK: poster promoType must use full art setting
-                if (jsonCard.promoTypes.contains("poster") && !card.isFullArt()) {
+                if ((jsonCard.promoTypes != null && jsonCard.promoTypes.contains("poster")) && !card.isFullArt()) {
                     errorsList.add("Error: card must use full art setting: "
                             + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
                 }
