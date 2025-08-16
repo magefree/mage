@@ -91,6 +91,8 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("Master Pakku", 63, Rarity.UNCOMMON, mage.cards.m.MasterPakku.class));
         cards.add(new SetCardInfo("Master Piandao", 28, Rarity.UNCOMMON, mage.cards.m.MasterPiandao.class));
         cards.add(new SetCardInfo("Merchant of Many Hats", 110, Rarity.COMMON, mage.cards.m.MerchantOfManyHats.class));
+        cards.add(new SetCardInfo("Momo, Friendly Flier", 29, Rarity.RARE, mage.cards.m.MomoFriendlyFlier.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Momo, Friendly Flier", 317, Rarity.RARE, mage.cards.m.MomoFriendlyFlier.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mongoose Lizard", 148, Rarity.COMMON, mage.cards.m.MongooseLizard.class));
         cards.add(new SetCardInfo("Mountain", 285, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 290, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
