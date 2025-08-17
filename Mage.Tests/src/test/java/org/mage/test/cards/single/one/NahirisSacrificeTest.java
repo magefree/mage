@@ -2,6 +2,7 @@ package org.mage.test.cards.single.one;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -40,6 +41,7 @@ public class NahirisSacrificeTest extends CardTestPlayerBase {
     }
 
     @Test
+    @Ignore // Enable after merging #13916
     public void testNahirisSacrificePrevented() {
         setStrictChooseMode(true);
 
