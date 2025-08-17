@@ -2079,6 +2079,7 @@ public class VerifyCardDataTest {
             }
         }
     }
+
     private void checkSubtypes(Card card, MtgJsonCard ref) {
         if (skipListHaveName(SKIP_LIST_SUBTYPE, card.getExpansionSetCode(), card.getName())) {
             return;
@@ -2343,7 +2344,11 @@ public class VerifyCardDataTest {
 
 
                 // search and check dies related abilities
-                String rules = triggeredAbility.getRule();
+                // remove reminder text
+                String rules = triggeredAbility
+                        .getRule()
+                        .replaceAll("(?i) <i>\\(.+\\)</i>", "")
+                        .replaceAll("(?i) \\(.+\\)", "");
                 if (ignoredAbilities.stream().anyMatch(rules::contains)) {
                     continue;
                 }

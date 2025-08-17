@@ -38,14 +38,6 @@ public class TargetCardAndOrCardInLibrary extends TargetCardInLibrary {
 
     private final PredicateCardAssignment assignment;
 
-    /**
-     * a [firstType] card and/or a [secondType] card
-     */
-    protected TargetCardAndOrCardInLibrary(Predicate<? super Card> firstPredicate, Predicate<? super Card> secondPredicate, String filterText) {
-        super(0, 2, makeFilter(firstPredicate, secondPredicate, filterText));
-        this.assignment = new PredicateCardAssignment(firstPredicate, secondPredicate);
-    }
-
     public TargetCardAndOrCardInLibrary(CardType firstType, CardType secondType) {
         this(firstType.getPredicate(), secondType.getPredicate(), makeFilterText(
                 CardUtil.getTextWithFirstCharLowerCase(firstType.toString()),
@@ -58,6 +50,14 @@ public class TargetCardAndOrCardInLibrary extends TargetCardInLibrary {
 
     public TargetCardAndOrCardInLibrary(SubType firstType, SubType secondType) {
         this(firstType.getPredicate(), secondType.getPredicate(), makeFilterText(firstType.getDescription(), secondType.getDescription()));
+    }
+
+    /**
+     * a [firstType] card and/or a [secondType] card
+     */
+    public TargetCardAndOrCardInLibrary(Predicate<? super Card> firstPredicate, Predicate<? super Card> secondPredicate, String filterText) {
+        super(0, 2, makeFilter(firstPredicate, secondPredicate, filterText));
+        this.assignment = new PredicateCardAssignment(firstPredicate, secondPredicate);
     }
 
     protected TargetCardAndOrCardInLibrary(final TargetCardAndOrCardInLibrary target) {
