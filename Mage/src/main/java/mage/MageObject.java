@@ -6,12 +6,14 @@ import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.cards.Card;
 import mage.cards.FrameStyle;
+import mage.cards.ModalDoubleFacedCardHalf;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SubTypeSet;
 import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.Permanent;
 import mage.util.Copyable;
 import mage.util.SubTypes;
 
@@ -301,6 +303,12 @@ public interface MageObject extends MageItem, Serializable, Copyable<MageObject>
 
     default boolean isWorld(Game game) {
         return getSuperType(game).contains(SuperType.WORLD);
+    }
+
+    default boolean canTurnFaceDown(Game game) {
+        return !game.getPermanent(getId()).isFaceDown(game)
+                && !game.getPermanent(getId()).isTransformable()
+                && !(game.getCard(getId()) instanceof ModalDoubleFacedCardHalf);
     }
 
     default void addSuperType(SuperType superType) {

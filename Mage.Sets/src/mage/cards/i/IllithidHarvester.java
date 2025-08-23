@@ -8,8 +8,7 @@ import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEf
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureAllEffect;
 import mage.abilities.effects.common.continuous.BecomesSubtypeAllEffect;
-import mage.cards.AdventureCard;
-import mage.cards.CardSetInfo;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -97,7 +96,7 @@ class IllithidHarvesterEffect extends OneShotEffect {
         Predicate<Permanent> pred = new PermanentIdPredicate(UUID.randomUUID());
         for (Target target : source.getTargets()) {
             for (UUID targetId : target.getTargets()) {
-                if (!game.getPermanent(targetId).isTransformable()) {
+                if (game.getPermanent(targetId).canTurnFaceDown(game)) {
                     pred = Predicates.or(pred, new PermanentIdPredicate(targetId));
                 }
             }
