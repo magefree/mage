@@ -27,7 +27,6 @@ public final class LivingPlane extends CardImpl {
                 new CreatureToken(1, 1, "1/1 creatures"),
                 "lands", filter, Duration.WhileOnBattlefield, false);
         effect.getDependedToTypes().add(DependencyType.BecomeNonbasicLand);
-        effect.getDependencyTypes().add(DependencyType.BecomeCreature);
         this.addAbility(new SimpleStaticAbility(effect));
     }
 

@@ -52,11 +52,6 @@ class RealmwrightEffect extends ContinuousEffectImpl {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Neutral);
         staticText = "Lands you control are the chosen type in addition to their other types";
         dependendToTypes.add(DependencyType.BecomeNonbasicLand);
-        dependencyTypes.add(DependencyType.BecomeMountain);
-        dependencyTypes.add(DependencyType.BecomeForest);
-        dependencyTypes.add(DependencyType.BecomeSwamp);
-        dependencyTypes.add(DependencyType.BecomeIsland);
-        dependencyTypes.add(DependencyType.BecomePlains);
     }
 
     private RealmwrightEffect(final RealmwrightEffect effect) {

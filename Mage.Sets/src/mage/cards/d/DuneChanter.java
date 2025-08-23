@@ -50,7 +50,7 @@ public final class DuneChanter extends CardImpl {
                 new AnyColorManaAbility(), Duration.WhileOnBattlefield,
                 StaticFilters.FILTER_LANDS, false
         );
-        effect.getDependencyTypes().add(DependencyType.BecomeNonbasicLand);
+        effect.getDependedToTypes().add(DependencyType.BecomeNonbasicLand);
         this.addAbility(new SimpleStaticAbility(effect));
 
         // {T}: Mill two cards. You gain 1 life for each land card milled this way.

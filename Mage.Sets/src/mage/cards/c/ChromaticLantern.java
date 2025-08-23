@@ -23,7 +23,7 @@ public final class ChromaticLantern extends CardImpl {
 
         // Lands you control have "{T}: Add one mana of any color."
         ContinuousEffect effect = new GainAbilityControlledEffect(new AnyColorManaAbility(), Duration.WhileOnBattlefield, StaticFilters.FILTER_LANDS, false);
-        effect.getDependencyTypes().add(DependencyType.BecomeNonbasicLand);
+        effect.getDependedToTypes().add(DependencyType.BecomeNonbasicLand);
         this.addAbility(new SimpleStaticAbility(effect));
 
 

@@ -29,7 +29,6 @@ public final class NaturesRevolt extends CardImpl {
                 new CreatureToken(2, 2, "2/2 creatures"),
                 "lands", filter, Duration.WhileOnBattlefield, false);
         effect.getDependedToTypes().add(DependencyType.BecomeNonbasicLand);
-        effect.getDependencyTypes().add(DependencyType.BecomeCreature);
         this.addAbility(new SimpleStaticAbility(effect));
     }
 
