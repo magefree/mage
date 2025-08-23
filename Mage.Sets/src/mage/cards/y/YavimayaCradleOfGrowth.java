@@ -1,12 +1,10 @@
 package mage.cards.y;
 
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.continuous.AddBasicLandTypeAllLandsEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.DependencyType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 
@@ -23,9 +21,7 @@ public final class YavimayaCradleOfGrowth extends CardImpl {
         this.supertype.add(SuperType.LEGENDARY);
 
         // Each land is a Forest in addition to its other land types.
-        ContinuousEffect effect = new AddBasicLandTypeAllLandsEffect(SubType.FOREST);
-        effect.getDependedToTypes().add(DependencyType.BecomeNonbasicLand);
-        this.addAbility(new SimpleStaticAbility(effect));
+        this.addAbility(new SimpleStaticAbility(new AddBasicLandTypeAllLandsEffect(SubType.FOREST)));
     }
 
     private YavimayaCradleOfGrowth(final YavimayaCradleOfGrowth card) {

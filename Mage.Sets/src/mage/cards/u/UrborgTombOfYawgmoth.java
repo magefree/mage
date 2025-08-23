@@ -1,7 +1,6 @@
 package mage.cards.u;
 
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.continuous.AddBasicLandTypeAllLandsEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -19,9 +18,7 @@ public final class UrborgTombOfYawgmoth extends CardImpl {
         this.supertype.add(SuperType.LEGENDARY);
 
         // Each land is a Swamp in addition to its other land types.
-        ContinuousEffect effect = new AddBasicLandTypeAllLandsEffect(SubType.SWAMP);
-        effect.getDependedToTypes().add(DependencyType.BecomeNonbasicLand);
-        this.addAbility(new SimpleStaticAbility(effect));
+        this.addAbility(new SimpleStaticAbility(new AddBasicLandTypeAllLandsEffect(SubType.SWAMP)));
     }
 
     private UrborgTombOfYawgmoth(final UrborgTombOfYawgmoth card) {
