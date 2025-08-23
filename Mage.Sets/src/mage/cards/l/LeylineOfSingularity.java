@@ -3,7 +3,6 @@ package mage.cards.l;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.LeylineAbility;
@@ -47,6 +46,7 @@ class SetSupertypeAllEffect extends ContinuousEffectImpl {
     public SetSupertypeAllEffect() {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Detriment);
         this.staticText = "All nonland permanents are legendary";
+        this.dependendToTypes.add(DependencyType.BecomeNonbasicLand);
     }
 
     private SetSupertypeAllEffect(final SetSupertypeAllEffect effect) {

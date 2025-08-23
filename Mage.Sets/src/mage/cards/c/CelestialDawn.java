@@ -63,6 +63,7 @@ class CelestialDawnToPlainsEffect extends ContinuousEffectImpl {
     CelestialDawnToPlainsEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         this.staticText = "Lands you control are Plains";
+        this.dependendToTypes.add(DependencyType.BecomeNonbasicLand);
     }
 
     private CelestialDawnToPlainsEffect(final CelestialDawnToPlainsEffect effect) {
@@ -126,7 +127,7 @@ class CelestialDawnToWhiteEffect extends ContinuousEffectImpl {
                 }
             }
             // Exile
-            for (Card card : game.getExile().getAllCards(game)) {
+            for (Card card : game.getExile().getAllCardsByRange(game, controller.getId())) {
                 if (card.isOwnedBy(controller.getId())) {
                     setColor(card.getColor(game), game);
                 }
