@@ -64,6 +64,7 @@ class CelestialDawnToPlainsEffect extends ContinuousEffectImpl {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         this.staticText = "Lands you control are Plains";
         this.dependendToTypes.add(DependencyType.BecomeNonbasicLand);
+        this.dependencyTypes.add(DependencyType.BecomePlains);
     }
 
     private CelestialDawnToPlainsEffect(final CelestialDawnToPlainsEffect effect) {

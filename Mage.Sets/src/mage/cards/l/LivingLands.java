@@ -27,7 +27,11 @@ public final class LivingLands extends CardImpl {
                 new CreatureToken(1, 1, "1/1 creatures"),
                 "lands", filter, Duration.WhileOnBattlefield, false);
         effect.getDependedToTypes().add(DependencyType.BecomeNonbasicLand);
-        effect.getDependedToTypes().add(DependencyType.BecomeForest);
+        effect.addDependedToType(DependencyType.BecomeForest);
+        effect.addDependedToType(DependencyType.BecomeIsland);
+        effect.addDependedToType(DependencyType.BecomeMountain);
+        effect.addDependedToType(DependencyType.BecomePlains);
+        effect.addDependedToType(DependencyType.BecomeSwamp);
         this.addAbility(new SimpleStaticAbility(effect));
     }
 

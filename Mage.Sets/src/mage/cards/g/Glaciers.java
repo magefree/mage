@@ -51,6 +51,12 @@ public final class Glaciers extends CardImpl {
         GlaciersEffect() {
             super(Duration.WhileOnBattlefield, Outcome.Detriment);
             this.staticText = "All Mountains are Plains";
+            this.dependendToTypes.add(DependencyType.BecomeForest);
+            this.dependendToTypes.add(DependencyType.BecomeIsland);
+            this.dependendToTypes.add(DependencyType.BecomeMountain);
+            this.dependendToTypes.add(DependencyType.BecomePlains);
+            this.dependendToTypes.add(DependencyType.BecomeSwamp);
+            this.dependencyTypes.add(DependencyType.BecomePlains);
         }
 
         private GlaciersEffect(final GlaciersEffect effect) {
