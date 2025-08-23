@@ -62,6 +62,23 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
         }
         this.chooseLandType = chooseLandType;
         this.loseOther = loseOther;
+        if (this.loseOther) {
+            if (!landTypes.contains(SubType.MOUNTAIN)) {
+                dependendToTypes.add(DependencyType.BecomeMountain);
+            }
+            if (!landTypes.contains(SubType.FOREST)) {
+                dependendToTypes.add(DependencyType.BecomeForest);
+            }
+            if (!landTypes.contains(SubType.SWAMP)) {
+                dependendToTypes.add(DependencyType.BecomeSwamp);
+            }
+            if (!landTypes.contains(SubType.ISLAND)) {
+                dependendToTypes.add(DependencyType.BecomeIsland);
+            }
+            if (!landTypes.contains(SubType.PLAINS)) {
+                dependendToTypes.add(DependencyType.BecomePlains);
+            }
+        }
     }
 
     protected BecomesBasicLandTargetEffect(final BecomesBasicLandTargetEffect effect) {
