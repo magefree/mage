@@ -17,6 +17,7 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SaprolingToken;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -35,7 +36,7 @@ public final class FlashFoliage extends CardImpl {
 
         // Create a 1/1 green Saproling creature token that’s blocking target creature attacking you.
         this.getSpellAbility().addEffect(new FlashFoliageEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterCreatureAttackingYou()));
+        this.getSpellAbility().addTarget(new TargetPermanent(new FilterCreatureAttackingYou()));
 
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));

@@ -6,13 +6,11 @@ import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
-import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CommanderPredicate;
 import mage.target.TargetPermanent;
@@ -39,13 +37,12 @@ public final class SanctumOfEternity extends CardImpl {
 
         // {2}, {T}: Return target commander you own from the battlefield to your hand. Activate this ability only during your turn.
         Ability ability = new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD, new ReturnToHandTargetEffect()
-                .setText("return target commander you own from the battlefield to your hand"),
+                new ReturnToHandTargetEffect()
+                        .setText("return target commander you own from the battlefield to your hand"),
                 new GenericManaCost(2), MyTurnCondition.instance
         );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
-        ability.addHint(MyTurnHint.instance);
         this.addAbility(ability);
     }
 

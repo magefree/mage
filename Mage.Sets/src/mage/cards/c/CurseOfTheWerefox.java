@@ -3,8 +3,6 @@ package mage.cards.c;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateRoleAttachedTargetEffect;
-import mage.abilities.effects.common.FightTargetsEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -13,11 +11,9 @@ import mage.constants.RoleType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
-import mage.target.common.TargetOpponentsCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
-import mage.util.GameLog;
 
 import java.util.UUID;
 
@@ -64,24 +60,15 @@ class CurseOfTheWerefoxEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent target = game.getPermanent(source.getFirstTarget());
-        if (target == null) {
-            return false;
-        }
-
-        boolean didCreate =
-                new CreateRoleAttachedTargetEffect(RoleType.MONSTER)
-                        .setTargetPointer(new FixedTarget(target, game))
-                        .apply(game, source);
-        if (!didCreate) {
+        if (target == null || RoleType.MONSTER.createToken(target, game, source).getLastAddedTokenIds().isEmpty()) {
             return false;
         }
 
         ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
-                new CurseOfTheWerefoxFightEffect(), false,
-                "that creature fights up to one target creature you don't control"
+                new CurseOfTheWerefoxFightEffect().setTargetPointer(new FixedTarget(target.getId(), game)),
+                false, "that creature fights up to one target creature you don't control"
         );
-        ability.getEffects().setTargetPointer(new FixedTarget(target.getId(), game));
-        ability.addTarget(new TargetCreaturePermanent(0, 1, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL, false));
+        ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
         game.fireReflexiveTriggeredAbility(ability, source);
         return true;
     }

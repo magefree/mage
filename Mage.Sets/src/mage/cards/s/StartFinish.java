@@ -14,6 +14,7 @@ import mage.constants.SpellAbilityType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.WarriorVigilantToken;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -37,7 +38,7 @@ public final class StartFinish extends SplitCard {
         // As an additional cost to cast Finish, sacrifice a creature. Destroy target creature.
         getRightHalfCard().addAbility(new AftermathAbility().setRuleAtTheTop(true));
         getRightHalfCard().getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
-        getRightHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature (to destoy)")));
+        getRightHalfCard().getSpellAbility().addTarget(new TargetPermanent(new FilterCreaturePermanent("creature (to destoy)")));
         getRightHalfCard().getSpellAbility().addEffect(new DestroyTargetEffect("Destroy target creature"));
     }
 

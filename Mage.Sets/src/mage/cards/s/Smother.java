@@ -9,6 +9,7 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -27,7 +28,7 @@ public final class Smother extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}");
 
 
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
     }
 

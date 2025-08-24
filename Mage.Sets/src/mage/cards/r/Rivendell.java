@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
@@ -44,9 +43,7 @@ public final class Rivendell extends CardImpl {
 
         // {1}{U}, {T}: Scry 2. Activate only if you control a legendary creature.
         Ability ability = new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD,
-                new ScryEffect(2, false),
-                new ManaCostsImpl<>("{1}{U}"), condition
+                new ScryEffect(2, false), new ManaCostsImpl<>("{1}{U}"), condition
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

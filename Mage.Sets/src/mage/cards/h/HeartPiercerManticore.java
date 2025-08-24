@@ -1,9 +1,11 @@
 package mage.cards.h;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
+import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -15,11 +17,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.Target;
-import mage.target.common.TargetAnyTarget;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
 
@@ -36,7 +34,7 @@ public final class HeartPiercerManticore extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Heart-Piercer Manticore enters the battlefield, you may sacrifice another creature. When you do, Heart-Piercer Manticore deals damage equal to that creature's power to any target.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new HeartPiercerManticoreSacrificeEffect(), true));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new HeartPiercerManticoreEffect()));
 
         // Embalm {5}{R}
         this.addAbility(new EmbalmAbility(new ManaCostsImpl<>("{5}{R}"), this));
@@ -52,21 +50,21 @@ public final class HeartPiercerManticore extends CardImpl {
     }
 }
 
-class HeartPiercerManticoreSacrificeEffect extends OneShotEffect {
+class HeartPiercerManticoreEffect extends OneShotEffect {
 
-    HeartPiercerManticoreSacrificeEffect() {
+    HeartPiercerManticoreEffect() {
         super(Outcome.Damage);
-        this.staticText = "sacrifice another creature. When you do, "
+        this.staticText = "you may sacrifice another creature. When you do, "
                 + "{this} deals damage equal to that creature's power to any target";
     }
 
-    private HeartPiercerManticoreSacrificeEffect(final HeartPiercerManticoreSacrificeEffect effect) {
+    private HeartPiercerManticoreEffect(final HeartPiercerManticoreEffect effect) {
         super(effect);
     }
 
     @Override
-    public HeartPiercerManticoreSacrificeEffect copy() {
-        return new HeartPiercerManticoreSacrificeEffect(this);
+    public HeartPiercerManticoreEffect copy() {
+        return new HeartPiercerManticoreEffect(this);
     }
 
     @Override
@@ -75,26 +73,22 @@ class HeartPiercerManticoreSacrificeEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        Target target = new TargetControlledCreaturePermanent(
-                1, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, true
-        );
-        if (!controller.choose(outcome, target, source, game)) {
+        SacrificeTargetCost cost = new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE);
+        if (!cost.canPay(source, source, source.getControllerId(), game)
+                || !controller.chooseUse(outcome, "Sacrifice another creature?", source, game)
+                || !cost.pay(source, game, source, source.getControllerId(), false)) {
             return false;
         }
-        Permanent toSacrifice = game.getPermanent(target.getFirstTarget());
-        if (toSacrifice == null) {
-            return false;
-        }
-        int power = toSacrifice.getPower().getValue();
-        if (!toSacrifice.sacrifice(source, game)) {
-            return false;
-        }
+        int power = cost
+                .getPermanents()
+                .stream()
+                .map(MageObject::getPower)
+                .mapToInt(MageInt::getValue)
+                .sum();
         ReflexiveTriggeredAbility trigger = new ReflexiveTriggeredAbility(
                 new DamageTargetEffect(power), false,
                 "{this} deals damage equal to that creature's power to any target."
         );
-        trigger.addTarget(new TargetAnyTarget());
-        game.fireReflexiveTriggeredAbility(trigger, source);
         return true;
     }
 }

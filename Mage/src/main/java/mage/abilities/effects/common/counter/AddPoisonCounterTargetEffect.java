@@ -51,8 +51,8 @@ public class AddPoisonCounterTargetEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return getTargetPointer().describeTargets(mode.getTargets(), "it") +
+        return getTargetPointer().describeTargets(mode.getTargets(), "that player") +
                 (getTargetPointer().isPlural(mode.getTargets()) ? " get " : " gets ") +
-                CardUtil.getSimpleCountersText(amount, "a",  "poison");
+                CardUtil.getSimpleCountersText(amount, "a", "poison");
     }
 }

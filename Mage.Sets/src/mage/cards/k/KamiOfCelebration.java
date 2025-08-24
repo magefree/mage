@@ -1,21 +1,17 @@
 package mage.cards.k;
 
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.AttacksCreatureYouControlTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.ModifiedPredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
@@ -45,7 +41,12 @@ public final class KamiOfCelebration extends CardImpl {
         ));
 
         // Whenever you cast a spell from exile, put a +1/+1 counter on target creature you control.
-        this.addAbility(new KamiOfCelebrationAbility());
+        Ability ability = new SpellCastControllerTriggeredAbility(
+                Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()), null,
+                false, SetTargetPointer.NONE, Zone.EXILED
+        );
+        ability.addTarget(new TargetControlledCreaturePermanent());
+        this.addAbility(ability);
     }
 
     private KamiOfCelebration(final KamiOfCelebration card) {
@@ -55,32 +56,5 @@ public final class KamiOfCelebration extends CardImpl {
     @Override
     public KamiOfCelebration copy() {
         return new KamiOfCelebration(this);
-    }
-}
-
-class KamiOfCelebrationAbility extends SpellCastControllerTriggeredAbility {
-
-    KamiOfCelebrationAbility() {
-        super(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), false);
-        this.addTarget(new TargetControlledCreaturePermanent());
-    }
-
-    private KamiOfCelebrationAbility(final KamiOfCelebrationAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public KamiOfCelebrationAbility copy() {
-        return new KamiOfCelebrationAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getZone() == Zone.EXILED && super.checkTrigger(event, game);
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you cast a spell from exile, put a +1/+1 counter on target creature you control.";
     }
 }

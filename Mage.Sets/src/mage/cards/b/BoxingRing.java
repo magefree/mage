@@ -6,12 +6,15 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
+import mage.constants.WatcherScope;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
@@ -53,9 +56,8 @@ public final class BoxingRing extends CardImpl {
         this.addAbility(ability);
 
         // {T}: Create a Treasure token. Activate only if you control a creature that fought this turn.
-        this.addAbility(new ConditionalActivatedAbility(
-                Zone.BATTLEFIELD, new CreateTokenEffect(new TreasureToken()),
-                new TapSourceCost(), BoxingRingCondition.instance
+        this.addAbility(new ActivateIfConditionActivatedAbility(
+                new CreateTokenEffect(new TreasureToken()), new TapSourceCost(), BoxingRingCondition.instance
         ), new BoxingRingWatcher());
     }
 

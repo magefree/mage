@@ -18,6 +18,7 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -54,7 +55,7 @@ public final class VisceridDrone extends CardImpl {
                 new SacrificeTargetCost(filter2),
                 "Sacrifice a creature and a Swamp"
         ));
-        ability.addTarget(new TargetCreaturePermanent(filter1));
+        ability.addTarget(new TargetPermanent(filter1));
         this.addAbility(ability);
 
         // {tap}, Sacrifice a creature and a snow Swamp: Destroy target creature. It can't be regenerated.

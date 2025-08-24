@@ -19,7 +19,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.watchers.common.BlockedAttackerWatcher;
 
 /**
@@ -38,7 +38,7 @@ public final class GlyphOfDoom extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}");
 
         // Choose target Wall creature. At this turn's next end of combat, destroy all creatures that were blocked by that creature this turn.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new InfoEffect("Choose target Wall creature"));
         this.getSpellAbility().addEffect(new GlyphOfDoomCreateDelayedTriggeredAbilityEffect());
     }
@@ -109,7 +109,7 @@ class GlyphOfDoomEffect extends OneShotEffect {
                 List<Permanent> toDestroy = new ArrayList<>();
                 for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game)) {
                     if (!creature.getId().equals(targetCreature.getSourceId())) {
-                        if (watcher.creatureHasBlockedAttacker(new MageObjectReference(creature, game), targetCreature, game)) {
+                        if (watcher.creatureHasBlockedAttacker(new MageObjectReference(creature, game), targetCreature)) {
                             toDestroy.add(creature);
                         }
                     }

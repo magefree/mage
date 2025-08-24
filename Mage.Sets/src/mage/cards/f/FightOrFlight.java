@@ -1,9 +1,9 @@
 package mage.cards.f;
 
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.combat.CantAttackAllEffect;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -18,7 +18,7 @@ import mage.filter.predicate.permanent.PermanentReferenceInCollectionPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,13 +26,12 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
- *
  * @author LevelX2 & L_J
  */
 public final class FightOrFlight extends CardImpl {
 
     public FightOrFlight(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
 
         // At the beginning of combat on each opponent’s turn, separate all creatures that player controls into two piles. Only creatures in the pile of their choice can attack this turn.
         this.addAbility(new BeginningOfCombatTriggeredAbility(TargetController.OPPONENT, new FightOrFlightEffect(), false));
@@ -73,7 +72,7 @@ class FightOrFlightEffect extends OneShotEffect {
         }
         FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures to put in the first pile");
         filter.add(new ControllerIdPredicate(targetPlayer.getId()));
-        TargetCreaturePermanent creatures = new TargetCreaturePermanent(0, Integer.MAX_VALUE, filter, true);
+        TargetPermanent creatures = new TargetPermanent(0, Integer.MAX_VALUE, filter, true);
         List<Permanent> pile1 = new ArrayList<>();
         if (player.choose(Outcome.Neutral, creatures, source, game)) {
             List<UUID> targets = creatures.getTargets();

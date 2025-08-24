@@ -78,6 +78,9 @@ class NibelheimAflameEffect extends OneShotEffect {
         for (Permanent creature : game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_ANOTHER_CREATURE, source.getControllerId(), source, game
         )) {
+            if(creature.equals(permanent)){
+                continue;
+            }
             creature.damage(power, permanent.getId(), source, game);
         }
         return true;

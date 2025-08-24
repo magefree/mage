@@ -1,8 +1,9 @@
 package mage.cards.v;
 
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.CycleTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.EffectKeyValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.*;
 import mage.cards.CardImpl;
@@ -10,12 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.token.PilotSaddleCrewToken;
-import mage.game.stack.StackObject;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -48,7 +44,8 @@ public final class ValorsFlagship extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{X}{2}{W}")));
 
         // When you cycle this card, create X 1/1 colorless Pilot creature tokens with "This token saddles Mounts and crews Vehicles as though its power were 2 greater."
-        this.addAbility(new ValorsFlagshipTriggeredAbility());
+        this.addAbility(new CycleTriggeredAbility(
+                new CreateTokenEffect(new PilotSaddleCrewToken(), new EffectKeyValue("cycleXValue", "X"))));
     }
 
     private ValorsFlagship(final ValorsFlagship card) {
@@ -58,47 +55,5 @@ public final class ValorsFlagship extends CardImpl {
     @Override
     public ValorsFlagship copy() {
         return new ValorsFlagship(this);
-    }
-}
-
-class ValorsFlagshipTriggeredAbility extends TriggeredAbilityImpl {
-
-    ValorsFlagshipTriggeredAbility() {
-        super(Zone.ALL, null);
-    }
-
-    private ValorsFlagshipTriggeredAbility(final ValorsFlagshipTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public ValorsFlagshipTriggeredAbility copy() {
-        return new ValorsFlagshipTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ACTIVATED_ABILITY;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (!event.getSourceId().equals(this.getSourceId())) {
-            return false;
-        }
-        StackObject object = game.getStack().getStackObject(event.getSourceId());
-        if (object == null || !(object.getStackAbility() instanceof CyclingAbility)) {
-            return false;
-        }
-        this.getEffects().clear();
-        int amount = CardUtil.getSourceCostsTag(game, object.getStackAbility(), "X", 0);
-        this.addEffect(new CreateTokenEffect(new PilotSaddleCrewToken(), amount));
-        return true;
-    }
-
-    @Override
-    public String getRule() {
-        return "When you cycle this card, create X 1/1 colorless Pilot creature tokens with " +
-                "\"This token saddles Mounts and crews Vehicles as though its power were 2 greater.\"";
     }
 }

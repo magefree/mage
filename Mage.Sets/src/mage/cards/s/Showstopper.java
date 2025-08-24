@@ -12,7 +12,10 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.StaticFilters;
 import mage.target.Target;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import static mage.filter.StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE;
 
 /**
  *
@@ -27,7 +30,7 @@ public final class Showstopper extends CardImpl {
 
         // Until end of turn, creatures you control gain "When this creature dies, it deals 2 damage to target creature an opponent controls."
         TriggeredAbility ability = new DiesSourceTriggeredAbility(new DamageTargetEffect(2, "it"), false);
-        Target target = new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE);
+        Target target = new TargetPermanent(FILTER_OPPONENTS_PERMANENT_CREATURE);
         ability.addTarget(target);
         Effect effect = new GainAbilityControlledEffect(ability, Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES);
         effect.setText("Until end of turn, creatures you control gain \"When this creature dies, it deals 2 damage to target creature an opponent controls.\"");

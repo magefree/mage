@@ -15,6 +15,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.PreventDamageEvent;
 import mage.game.events.PreventedDamageEvent;
 import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -35,7 +36,7 @@ public final class BraceForImpact extends CardImpl {
 
         // Prevent all damage that would be dealt to target multicolored creature this turn. For each 1 damage prevented this way, put a +1/+1 counter on that creature.
         this.getSpellAbility().addEffect(new BraceForImpactPreventDamageTargetEffect(Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
     private BraceForImpact(final BraceForImpact card) {

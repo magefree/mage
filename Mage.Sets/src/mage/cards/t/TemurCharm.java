@@ -16,11 +16,14 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.target.Target;
+import mage.target.TargetPermanent;
 import mage.target.TargetSpell;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL;
 
 /**
  * @author LevelX2
@@ -44,7 +47,7 @@ public final class TemurCharm extends CardImpl {
         effect.setText("It fights target creature you don't control");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        Target target = new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL);
+        Target target = new TargetPermanent(FILTER_CREATURE_YOU_DONT_CONTROL);
         this.getSpellAbility().addTarget(target);
 
         // Counter target spell unless its controller pays {3}.

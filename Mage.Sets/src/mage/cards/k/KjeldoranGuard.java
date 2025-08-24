@@ -5,11 +5,12 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.condition.CompoundCondition;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.DefendingPlayerControlsNoSourceCondition;
 import mage.abilities.condition.common.IsPhaseCondition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -36,6 +37,12 @@ public final class KjeldoranGuard extends CardImpl {
         filter.add(SuperType.SNOW.getPredicate());
     }
 
+    private static final Condition condition = new CompoundCondition(
+            "during combat and only if defending player controls no snow lands",
+            new IsPhaseCondition(TurnPhase.COMBAT, false), // Only during combat
+            new InvertCondition(new DefendingPlayerControlsNoSourceCondition(filter)) // Only if defending player controls no snow land
+    );
+
     public KjeldoranGuard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
 
@@ -45,19 +52,8 @@ public final class KjeldoranGuard extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {T}: Target creature gets +1/+1 until end of turn. When that creature leaves the battlefield this turn, sacrifice Kjeldoran Guard. Activate only during combat and only if defending player controls no snow lands.
-        CompoundCondition condition = new CompoundCondition(
-                new IsPhaseCondition(TurnPhase.COMBAT, false), // Only during combat
-                new InvertCondition(new DefendingPlayerControlsNoSourceCondition(filter)) // Only if defending player controls no snow land
-        );
-
-        Ability ability = new ConditionalActivatedAbility(
-                Zone.BATTLEFIELD,
-                new KjeldoranGuardEffect(),
-                new TapSourceCost(),
-                condition,
-                "{T}: Target creature gets +1/+1 until end of turn. "
-                        + "When that creature leaves the battlefield this turn, sacrifice {this}. "
-                        + "Activate only during combat and only if defending player controls no snow lands."
+        Ability ability = new ActivateIfConditionActivatedAbility(
+                new KjeldoranGuardEffect(), new TapSourceCost(), condition
         );
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
@@ -77,7 +73,7 @@ class KjeldoranGuardEffect extends OneShotEffect {
 
     KjeldoranGuardEffect() {
         super(Outcome.BoostCreature);
-        staticText = "Target creature gets +1/+1 until end of turn. "
+        staticText = "target creature gets +1/+1 until end of turn. "
                 + "When that creature leaves the battlefield this turn, sacrifice {this}.";
     }
 
@@ -109,7 +105,7 @@ class KjeldoranGuardEffect extends OneShotEffect {
 
         // Locking in the Kjeldoran Guard (and its zcc), to be sacrificed later.
         Permanent guard = source.getSourcePermanentIfItStillExists(game);
-        if(guard != null) {
+        if (guard != null) {
             delayed.getEffects().setTargetPointer(new FixedTarget(guard, game));
         }
         game.addDelayedTriggeredAbility(delayed, source);

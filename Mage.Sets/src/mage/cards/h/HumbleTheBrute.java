@@ -10,6 +10,7 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -29,7 +30,7 @@ public final class HumbleTheBrute extends CardImpl {
 
         // Destroy target creature with power 4 or greater.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
 
         // Investigate.
         this.getSpellAbility().addEffect(new InvestigateEffect().concatBy("<br>"));

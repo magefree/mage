@@ -3,6 +3,7 @@ package mage.player.ai;
 import mage.abilities.Ability;
 import mage.constants.RangeOfInfluence;
 import mage.game.Game;
+import mage.player.ai.score.GameStateEvaluator2;
 import org.apache.log4j.Logger;
 
 import java.util.Date;
@@ -111,8 +112,6 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
 
     protected void calculateActions(Game game) {
         if (!getNextAction(game)) {
-            //logger.info("--- calculating possible actions for " + this.getName() + " on " + game.toString());
-            Date startTime = new Date();
             currentScore = GameStateEvaluator2.evaluate(playerId, game).getTotalScore();
             Game sim = createSimulation(game);
             SimulationNode2.resetCount();
@@ -143,17 +142,9 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
                     }
                 }
             } else {
-                logger.info('[' + game.getPlayer(playerId).getName() + "][pre] Action: skip");
+                // nothing to choose or freeze/infinite game
+                logger.info("AI player can't find next action: " + getName());
             }
-            Date endTime = new Date();
-            this.setLastThinkTime((endTime.getTime() - startTime.getTime()));
-
-            /*
-            logger.warn("Last think time: " + this.getLastThinkTime()
-                    + "; actions: " + actions.size()
-                    + "; hand: " + this.getHand().size()
-                    + "; permanents: " + game.getBattlefield().getAllPermanents().size());
-             */
         } else {
             logger.debug("Next Action exists!");
         }

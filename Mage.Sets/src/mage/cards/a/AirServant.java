@@ -2,7 +2,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -13,32 +12,27 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.target.common.TargetCreaturePermanent;
+import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public final class AirServant extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
-
-    static {
-        filter.add(new AbilityPredicate(FlyingAbility.class));
-    }
-
     public AirServant(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}");
 
         this.subtype.add(SubType.ELEMENTAL);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
+
         this.addAbility(FlyingAbility.getInstance());
+
         Ability ability = new SimpleActivatedAbility(new TapTargetEffect(), new ManaCostsImpl<>("{2}{U}"));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_FLYING));
         this.addAbility(ability);
     }
 

@@ -48,7 +48,7 @@ public final class KjeldoranPride extends CardImpl {
 
         // 2U: Attach Kjeldoran Pride to target creature other than enchanted creature.
         Ability ability = new SimpleActivatedAbility(new AttachEffect(Outcome.Benefit, "attach {this} to target " + filter.getMessage()), new ManaCostsImpl<>("{2}{U}"));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

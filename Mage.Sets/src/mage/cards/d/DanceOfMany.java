@@ -23,6 +23,7 @@ import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -45,7 +46,7 @@ public final class DanceOfMany extends CardImpl {
 
         // When Dance of Many enters the battlefield, create a token that's a copy of target nontoken creature.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DanceOfManyCreateTokenCopyEffect(), false);
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
         // When Dance of Many leaves the battlefield, exile the token.

@@ -1,11 +1,12 @@
 package mage.utils.testers;
 
-import mage.constants.SubType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.constants.ComparisonType;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetPermanentOrPlayer;
 
 /**
@@ -79,12 +80,14 @@ abstract class BaseTestableDialog implements TestableDialog {
         return new TargetPermanentOrPlayer(min, max).withNotTarget(notTarget);
     }
 
-    static Target createImpossibleTarget(int min, int max) {
-        return createImpossibleTarget(min, max, false);
+    private static final FilterPermanent impossibleFilter = new FilterPermanent();
+
+    static {
+        impossibleFilter.add(new ManaValuePredicate(ComparisonType.OR_LESS, -1));
     }
 
-    private static Target createImpossibleTarget(int min, int max, boolean notTarget) {
-        return new TargetCreaturePermanent(min, max, new FilterCreaturePermanent(SubType.TROOPER, "rare type"), notTarget);
+    static Target createImpossibleTarget(int min, int max) {
+        return new TargetPermanent(min, max, impossibleFilter);
     }
 
     @Override

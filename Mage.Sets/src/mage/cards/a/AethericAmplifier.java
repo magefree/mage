@@ -1,12 +1,8 @@
 package mage.cards.a;
 
-import java.util.Set;
-import java.util.UUID;
-import java.util.stream.Collectors;
-
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.common.ActivateAsSorceryActivatedAbility;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
@@ -15,12 +11,17 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.TimingRule;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
+
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author sobiech
@@ -35,8 +36,9 @@ public final class AethericAmplifier extends CardImpl {
 
         // {4}, {T}: Choose one. Activate only as a sorcery.
         // * Double the number of each kind of counter on target permanent.
-        final Ability ability = new ActivateAsSorceryActivatedAbility(new AethericAmplifierDoublePermanentEffect(), new GenericManaCost(4))
-                .withShowActivateText(false);
+        Ability ability = new SimpleActivatedAbility(
+                new AethericAmplifierDoublePermanentEffect(), new GenericManaCost(4)
+        ).setTiming(TimingRule.SORCERY);
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent());
         ability.getModes().setChooseText("choose one. Activate only as a sorcery.");
@@ -145,5 +147,3 @@ class AethericAmplifierDoubleControllerEffect extends OneShotEffect {
         return new AethericAmplifierDoubleControllerEffect(this);
     }
 }
-
-

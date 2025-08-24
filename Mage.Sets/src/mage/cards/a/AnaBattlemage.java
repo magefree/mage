@@ -19,6 +19,7 @@ import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -58,7 +59,7 @@ public final class AnaBattlemage extends CardImpl {
         // When Ana Battlemage enters the battlefield, if it was kicked with its {1}{B} kicker, tap target untapped creature and that creature deals damage equal to its power to its controller.
         ability = new EntersBattlefieldTriggeredAbility(new TapTargetEffect()).withInterveningIf(condition2);
         ability.addEffect(new AnaBattlemageEffect());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

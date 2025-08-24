@@ -11,9 +11,12 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE;
 
 /**
  * @author JayDi85
@@ -32,7 +35,7 @@ public final class VengeantVampire extends CardImpl {
         // When Vengeant Vampire dies, destroy target creature an opponent controls and you gain 4 life.
         Ability ability = new DiesSourceTriggeredAbility(new DestroyTargetEffect());
         ability.addEffect(new GainLifeEffect(4).concatBy("and"));
-        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
+        ability.addTarget(new TargetPermanent(FILTER_OPPONENTS_PERMANENT_CREATURE));
         this.addAbility(ability);
     }
 

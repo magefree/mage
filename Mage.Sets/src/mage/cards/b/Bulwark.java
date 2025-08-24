@@ -1,8 +1,8 @@
 package mage.cards.b;
 
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -43,7 +43,7 @@ class BulwarkDamageEffect extends OneShotEffect {
 
     BulwarkDamageEffect() {
         super(Outcome.Damage);
-        staticText = "Bulwark deals X damage to target opponent, where X is the number of cards in your hand minus the number of cards in that player's hand";
+        staticText = "{this} deals X damage to target opponent, where X is the number of cards in your hand minus the number of cards in that player's hand";
     }
 
     private BulwarkDamageEffect(final BulwarkDamageEffect effect) {

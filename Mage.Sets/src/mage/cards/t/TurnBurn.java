@@ -1,7 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -9,12 +8,14 @@ import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.SpellAbilityType;
+import mage.constants.SubType;
 import mage.game.permanent.token.TokenImpl;
 import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -34,9 +35,7 @@ public final class TurnBurn extends SplitCard {
 
         // Burn
         // Burn deals 2 damage to any target.
-        effect = new DamageTargetEffect(2);
-        effect.setText("Burn deals 2 damage to any target");
-        getRightHalfCard().getSpellAbility().addEffect(effect);
+        getRightHalfCard().getSpellAbility().addEffect(new DamageTargetEffect(2));
         getRightHalfCard().getSpellAbility().addTarget(new TargetAnyTarget().withChooseHint("2 damage"));
 
     }

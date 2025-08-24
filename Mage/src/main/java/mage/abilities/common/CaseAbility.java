@@ -5,7 +5,6 @@ import mage.abilities.TriggeredAbility;
 import mage.abilities.condition.CompoundCondition;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SolvedSourceCondition;
-import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.decorator.ConditionalAsThoughEffect;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.decorator.ConditionalReplacementEffect;
@@ -62,7 +61,7 @@ public class CaseAbility extends SimpleStaticAbility {
      * </ul>
      * The "Solved" ability must be one of the following:
      * <ul>
-     *     <li>{@link ConditionalActivatedAbility} using the condition {@link SolvedSourceCondition}.SOLVED</li>
+     *     <li>{@link ActivateIfConditionActivatedAbility} using the condition {@link SolvedSourceCondition}.SOLVED</li>
      *     <li>{@link TriggeredAbility} using the condition {@link SolvedSourceCondition}.SOLVED</li>
      *     <li>{@link SimpleStaticAbility} with only {@link ConditionalAsThoughEffect} or {@link ConditionalContinuousEffect} effects</li>
      * </ul>
@@ -81,7 +80,7 @@ public class CaseAbility extends SimpleStaticAbility {
 
         addSubAbility(new CaseSolveAbility(toSolveCondition));
 
-        if (!(solvedAbility instanceof ConditionalActivatedAbility)) {
+        if (!(solvedAbility instanceof ActivateIfConditionActivatedAbility)) {
             if (solvedAbility instanceof TriggeredAbility) {
                 if (!(((TriggeredAbility) solvedAbility).getTriggerCondition() instanceof SolvedSourceCondition)) {
                     throw new IllegalArgumentException("Wrong code usage: if solvedAbility is a TriggeredAbility it must have SolvedSourceCondition as its trigger condition");
@@ -92,17 +91,17 @@ public class CaseAbility extends SimpleStaticAbility {
                         if (!(effect instanceof ConditionalContinuousEffect ||
                                 effect instanceof ConditionalAsThoughEffect ||
                                 effect instanceof ConditionalReplacementEffect)) {
-                            throw new IllegalArgumentException("Wrong code usage: solvedAbility must be one of ConditionalActivatedAbility, " +
+                            throw new IllegalArgumentException("Wrong code usage: solvedAbility must be one of ActivateIfConditionActivatedAbility, " +
                                     "TriggeredAbility, or StaticAbility with conditional effects.");
                         }
                     }
                 } else {
-                    throw new IllegalArgumentException("Wrong code usage: solvedAbility must be one of ConditionalActivatedAbility, " +
+                    throw new IllegalArgumentException("Wrong code usage: solvedAbility must be one of ActivateIfConditionActivatedAbility, " +
                             "TriggeredAbility, or StaticAbility with conditional effects.");
                 }
             }
         } else {
-            ((ConditionalActivatedAbility) solvedAbility).hideCondition();
+            ((ActivateIfConditionActivatedAbility) solvedAbility).hideCondition();
         }
         addSubAbility(solvedAbility.withFlavorWord("Solved")); // TODO: Technically this shouldn't be italicized
     }

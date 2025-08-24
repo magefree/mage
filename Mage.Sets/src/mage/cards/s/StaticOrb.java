@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.RestrictionUntapNotMoreThanEffect;
@@ -9,11 +8,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -45,7 +45,7 @@ class StaticOrbEffect extends RestrictionUntapNotMoreThanEffect {
 
     public StaticOrbEffect() {
         super(Duration.WhileOnBattlefield, 2, filter);
-        staticText = "As long as Static Orb is untapped, players can't untap more than two permanents during their untap steps";
+        staticText = "As long as {this} is untapped, players can't untap more than two permanents during their untap steps";
     }
 
     private StaticOrbEffect(final StaticOrbEffect effect) {

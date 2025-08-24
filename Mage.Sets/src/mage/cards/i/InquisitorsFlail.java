@@ -3,12 +3,14 @@ package mage.cards.i;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
@@ -16,7 +18,6 @@ import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
 import java.util.UUID;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author nantuko
@@ -32,7 +33,7 @@ public final class InquisitorsFlail extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new InquisitorsFlailEffect()));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), new TargetControlledCreaturePermanent(), false));
+        this.addAbility(new EquipAbility(2, false));
     }
 
     private InquisitorsFlail(final InquisitorsFlail card) {
@@ -49,7 +50,7 @@ class InquisitorsFlailEffect extends ReplacementEffectImpl {
 
     InquisitorsFlailEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Damage);
-        staticText = "If equipped creature would deal combat damage, it deals double that damage instead. \n"
+        staticText = "If equipped creature would deal combat damage, it deals double that damage instead.<br>"
                 + "If another creature would deal combat damage to equipped creature, it deals double that damage to equipped creature instead";
     }
 

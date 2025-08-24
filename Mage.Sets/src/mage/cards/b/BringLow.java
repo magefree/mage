@@ -1,7 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -13,6 +12,8 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -29,7 +30,7 @@ public final class BringLow extends CardImpl {
                 new DamageTargetEffect(5),
                 new DamageTargetEffect(3),
                 new TargetHasCounterCondition(CounterType.P1P1),
-                "{this} deals 3 damage to target creature. If that creature has a +1/+1 counter on it, Bring Low deals 5 damage to it instead"));
+                "{this} deals 3 damage to target creature. If that creature has a +1/+1 counter on it, {this} deals 5 damage to it instead"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

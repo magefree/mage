@@ -8,7 +8,7 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.CostsImpl;
 import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.common.replacement.MorEnteringTappedEffect;
+import mage.abilities.effects.common.replacement.SpellMorEnteringTappedEffect;
 import mage.cards.Card;
 import mage.constants.*;
 import mage.filter.FilterCard;
@@ -170,7 +170,7 @@ class CastFromGraveyardOnceWatcher extends Watcher {
             if (target != null) {
                 MageObjectReference mor = new MageObjectReference(target, game);
                 game.getState().addEffect(
-                        new MorEnteringTappedEffect(mor),
+                        new SpellMorEnteringTappedEffect(mor),
                         event.getApprovingObject().getApprovingAbility() // ability that approved the cast is the source of the tapping.
                 );
             }

@@ -2,14 +2,15 @@ package mage.cards.e;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
 import mage.game.Game;
@@ -24,7 +25,7 @@ import java.util.UUID;
  */
 public final class EldraziMimic extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another colorless creature");
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("another colorless creature you control");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -39,7 +40,7 @@ public final class EldraziMimic extends CardImpl {
 
         // Whenever another colorless creature you control enters, you may have the base power and toughness of Eldrazi Mimic
         // become that creature's power and toughness until end of turn.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(
                 Zone.BATTLEFIELD, new EldraziMimicEffect(), filter,
                 true, SetTargetPointer.PERMANENT
         ));
@@ -59,7 +60,7 @@ class EldraziMimicEffect extends OneShotEffect {
 
     EldraziMimicEffect() {
         super(Outcome.BoostCreature);
-        staticText = "you may have the base power and toughness of {this} become that creature's power and toughness until end of turn";
+        staticText = "you may change {this}'s base power and toughness to that creature's power and toughness until end of turn";
     }
 
     private EldraziMimicEffect(final EldraziMimicEffect effect) {

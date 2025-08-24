@@ -18,7 +18,10 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import static mage.filter.StaticFilters.FILTER_CREATURE_P1P1;
 
 /**
  *
@@ -44,7 +47,7 @@ public final class CytoplastManipulator extends CardImpl {
                 "gain control of target creature with a +1/+1 counter on it for as long as {this} remains on the battlefield");
         Ability ability = new SimpleActivatedAbility(effect, new ManaCostsImpl<>("{U}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_P1P1));
+        ability.addTarget(new TargetPermanent(FILTER_CREATURE_P1P1));
         this.addAbility(ability);
         
     }

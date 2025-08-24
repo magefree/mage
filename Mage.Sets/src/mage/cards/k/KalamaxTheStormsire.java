@@ -103,7 +103,7 @@ class KalamaxTheStormsireSpellCastAbility extends SpellCastControllerTriggeredAb
     @Override
     public String getRule() {
         return "Whenever you cast your first instant spell each turn, " +
-                "if Kalamax, the Stormsire is tapped, " +
+                "if {this} is tapped, " +
                 "copy that spell. You may choose new targets for the copy.";
     }
 }

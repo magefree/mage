@@ -9,8 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -19,12 +18,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class AstralDragon extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterPermanent("noncreature permanent");
-
-    static {
-        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
-    }
 
     public AstralDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{U}{U}");
@@ -37,14 +30,13 @@ public final class AstralDragon extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Project Image — When Astral Dragon enters the battlefield, create two tokens that are copies of target noncreature permanent, except they're 3/3 Dragon creatures in addition to their other types, and they have flying.
-        CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(
+        Ability ability = new EntersBattlefieldTriggeredAbility(new CreateTokenCopyTargetEffect(
                 null, CardType.CREATURE, false, 2, false,
-                false, null, 3, 3, true);
-        effect.setText("create two tokens that are copies of target noncreature permanent, " +
-                "except they're 3/3 Dragon creatures in addition to their other types, and they have flying");
-        effect.withAdditionalSubType(SubType.DRAGON);
-        Ability ability = new EntersBattlefieldTriggeredAbility(effect);
-        ability.addTarget(new TargetPermanent(filter));
+                false, null, 3, 3, true
+        ).withAdditionalSubType(SubType.DRAGON)
+                .setText("create two tokens that are copies of target noncreature permanent, " +
+                        "except they're 3/3 Dragon creatures in addition to their other types, and they have flying"));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_NON_CREATURE));
         this.addAbility(ability.withFlavorWord("Project Image"));
     }
 

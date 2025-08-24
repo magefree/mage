@@ -86,7 +86,7 @@ class ConformerShurikenEffect extends OneShotEffect {
                 .map(game::getPermanent)
                 .map(MageObject::getPower)
                 .map(MageInt::getValue)
-                .map(x -> permanent.getPower().getValue() - x)
+                .map(targetsPower -> targetsPower - permanent.getPower().getValue())
                 .filter(x -> x > 0 && permanent.addCounters(CounterType.P1P1.createInstance(x), source, game))
                 .isPresent();
     }

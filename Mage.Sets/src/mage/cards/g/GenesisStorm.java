@@ -1,19 +1,16 @@
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.CommanderStormAbility;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -25,7 +22,7 @@ public final class GenesisStorm extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{G}{G}");
 
         // When you cast this spell, copy it for each time you've cast your commander from the command zone this game.
-        this.addAbility(new CommanderStormAbility());
+        this.addAbility(new CommanderStormAbility(false));
 
         // Reveal cards from the top of your library until you reveal a nonland permanent card. You may put that card onto the battlefield. Then put all cards revealed this way that weren't put onto the battlefield on the bottom of your library in a random order.
         this.getSpellAbility().addEffect(new GenesisStormEffect());

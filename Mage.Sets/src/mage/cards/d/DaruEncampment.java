@@ -14,6 +14,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -37,7 +38,7 @@ public final class DaruEncampment extends CardImpl {
                 new BoostTargetEffect(1, 1, Duration.EndOfTurn),
                 new ManaCostsImpl<>("{W}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

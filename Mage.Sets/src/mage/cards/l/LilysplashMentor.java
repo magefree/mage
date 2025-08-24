@@ -19,20 +19,19 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.util.CardUtil;
 
 import java.util.UUID;
 
 /**
- *
  * @author notgreat
  */
 public final class LilysplashMentor extends CardImpl {
 
     public LilysplashMentor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{U}");
-        
+
         this.subtype.add(SubType.FROG);
         this.subtype.add(SubType.DRUID);
         this.power = new MageInt(4);
@@ -43,7 +42,7 @@ public final class LilysplashMentor extends CardImpl {
 
         // {1}{G}{U}: Exile another target creature you control, then return it to the battlefield under its owner's control with a +1/+1 counter on it. Activate only as a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(new LilysplashMentorEffect(), new ManaCostsImpl<>("{1}{G}{U}"));
-        ability.addTarget(new TargetControlledCreaturePermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
         this.addAbility(ability);
     }
 
@@ -56,6 +55,7 @@ public final class LilysplashMentor extends CardImpl {
         return new LilysplashMentor(this);
     }
 }
+
 //Copied from Planar Incision
 class LilysplashMentorEffect extends OneShotEffect {
 

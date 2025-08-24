@@ -16,12 +16,15 @@ import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.Objects;
 import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL;
 
 /**
  * @author TheElk801
@@ -49,7 +52,7 @@ public final class InscriptionOfAbundance extends CardImpl {
         // • Target creature you control fights target creature you don't control.
         mode = new Mode(new FightTargetsEffect(false));
         mode.addTarget(new TargetControlledCreaturePermanent().withChooseHint("fights"));
-        mode.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL).withChooseHint("fights"));
+        mode.addTarget(new TargetPermanent(FILTER_CREATURE_YOU_DONT_CONTROL).withChooseHint("fights"));
         this.getSpellAbility().addMode(mode);
     }
 

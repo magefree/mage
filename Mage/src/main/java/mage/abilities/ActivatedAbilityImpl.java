@@ -182,8 +182,9 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
     }
 
     @Override
-    public void setMayActivate(TargetController mayActivate) {
+    public ActivatedAbilityImpl setMayActivate(TargetController mayActivate) {
         this.mayActivate = mayActivate;
+        return this;
     }
 
     public UUID getActivatorId() {

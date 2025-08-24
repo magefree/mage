@@ -14,8 +14,11 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import static mage.filter.StaticFilters.FILTER_ANOTHER_CREATURE_TARGET_2;
 
 /**
  *
@@ -32,7 +35,7 @@ public final class ContestOfClaws extends CardImpl {
         Target target = new TargetControlledCreaturePermanent().setTargetTag(1);
         this.getSpellAbility().addTarget(target);
 
-        Target target2 = new TargetCreaturePermanent(StaticFilters.FILTER_ANOTHER_CREATURE_TARGET_2).setTargetTag(2);
+        Target target2 = new TargetPermanent(FILTER_ANOTHER_CREATURE_TARGET_2).setTargetTag(2);
         this.getSpellAbility().addTarget(target2);
     }
 

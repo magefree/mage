@@ -63,6 +63,9 @@ public final class Constants {
     public static final String RESOURCE_SYMBOL_FOLDER_SVG = "svg";
     public static final String RESOURCE_SYMBOL_FOLDER_PNG = "png";
 
+    // download rarity icons to large folder by default
+    public static final String RESOURCE_PATH_SYMBOLS_RARITY_DEFAULT_PATH = RESOURCE_PATH_SYMBOLS + File.separator + RESOURCE_SYMBOL_FOLDER_LARGE;
+
     public enum ResourceSymbolSize {
         SMALL, // TODO: delete SMALL, MEDIUM and LARGE as outdated (svg or generated png works fine)
         MEDIUM,
@@ -74,12 +77,12 @@ public final class Constants {
     // resources - sets
     public static final String RESOURCE_PATH_SETS = File.separator + "sets";
     public static final String RESOURCE_SET_FOLDER_SMALL = "small";
-    public static final String RESOURCE_SET_FOLDER_MEDIUM = ""; // empty, medium images laydown in "sets" folder, TODO: delete that and auto gen, use png for html, not gif
+    public static final String RESOURCE_SET_FOLDER_LARGE = "large";
     public static final String RESOURCE_SET_FOLDER_SVG = "svg";
 
     public enum ResourceSetSize {
         SMALL,
-        MEDIUM,
+        LARGE,
         SVG
     }
 

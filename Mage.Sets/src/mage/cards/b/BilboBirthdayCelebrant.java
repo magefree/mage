@@ -7,7 +7,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.ExileSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.replacement.GainPlusOneLifeReplacementEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
@@ -39,7 +39,7 @@ public final class BilboBirthdayCelebrant extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new GainPlusOneLifeReplacementEffect()));
 
         // {2}{W}{B}{G}, {T}, Exile Bilbo, Birthday Celebrant: Search your library for any number of creature cards, put them onto the battlefield, then shuffle. Activate only if you have 111 or more life.
-        Ability ability = new ConditionalActivatedAbility(new SearchLibraryPutInPlayEffect(
+        Ability ability = new ActivateIfConditionActivatedAbility(new SearchLibraryPutInPlayEffect(
                 new TargetCardInLibrary(0, Integer.MAX_VALUE, StaticFilters.FILTER_CARD_CREATURES)
         ), new ManaCostsImpl<>("{2}{W}{B}{G}"), BilboBirthdayCelebrantCondition.instance);
         ability.addCost(new TapSourceCost());

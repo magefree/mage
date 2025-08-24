@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.ThresholdCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -30,7 +30,7 @@ public final class InfectedVermin extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(new DamageEverythingEffect(1), new ManaCostsImpl<>("{2}{B}")));
 
         // Threshold - {3}{B}: Infected Vermin deals 3 damage to each creature and each player. Activate this ability only if seven or more cards are in your graveyard.
-        this.addAbility(new ConditionalActivatedAbility(
+        this.addAbility(new ActivateIfConditionActivatedAbility(
                 new DamageEverythingEffect(3), new ManaCostsImpl<>("{3}{B}"), ThresholdCondition.instance
         ).setAbilityWord(AbilityWord.THRESHOLD));
     }

@@ -16,6 +16,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.AttackingPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -50,7 +51,7 @@ public final class FeySteed extends CardImpl {
         // Whenever Fey Steed attacks, another target attacking creature you control gains indestructible until end of turn.
         Ability ability = new AttacksTriggeredAbility(
                 new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn), false);
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
         // Whenever a creature or planeswalker you control becomes the target of a spell or ability an opponent controls, you may draw a card.

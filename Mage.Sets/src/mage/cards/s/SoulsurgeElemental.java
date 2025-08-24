@@ -31,7 +31,7 @@ public final class SoulsurgeElemental extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // Soulsurge Elemental's power is equal to the number of creatures you control.
-        Effect effect = new SetBasePowerSourceEffect(CreaturesYouControlCount.instance);
+        Effect effect = new SetBasePowerSourceEffect(CreaturesYouControlCount.PLURAL);
         this.addAbility(new SimpleStaticAbility(Zone.ALL, effect)
                 .addHint(CreaturesYouControlHint.instance));
     }

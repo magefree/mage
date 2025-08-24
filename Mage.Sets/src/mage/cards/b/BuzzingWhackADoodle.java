@@ -1,14 +1,11 @@
-
 package mage.cards.b;
 
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.IntCompareCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -18,15 +15,16 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetOpponent;
 
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class BuzzingWhackADoodle extends CardImpl {
@@ -38,16 +36,22 @@ public final class BuzzingWhackADoodle extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BuzzingWhackADoodleEffect(), false));
 
         // *Whack - T: Target player loses 2 life.
-        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2), new TapSourceCost(), new WhackCondition());
+        Ability ability = new ActivateIfConditionActivatedAbility(
+                new LoseLifeTargetEffect(2), new TapSourceCost(), new WhackCondition()
+        );
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
 
         // *Doodle - T: You gain 3 life.
-        Ability ability2 = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(3), new TapSourceCost(), new DoodleCondition());
+        Ability ability2 = new ActivateIfConditionActivatedAbility(
+                new GainLifeEffect(3), new TapSourceCost(), new DoodleCondition()
+        );
         this.addAbility(ability2);
 
         // *Buzz - 2, T: Draw a card.
-        Ability ability3 = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{2}"), new BuzzCondition());
+        Ability ability3 = new ActivateIfConditionActivatedAbility(
+                new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{2}"), new BuzzCondition()
+        );
         ability3.addCost(new TapSourceCost());
         this.addAbility(ability3);
     }
@@ -144,7 +148,7 @@ class WhackCondition extends IntCompareCondition {
 
     @Override
     public String toString() {
-        return "if both players picked 'Whack'";
+        return "both players picked 'Whack'";
     }
 }
 
@@ -165,7 +169,7 @@ class DoodleCondition extends IntCompareCondition {
 
     @Override
     public String toString() {
-        return "if both players picked 'Doodle'";
+        return "both players picked 'Doodle'";
     }
 }
 
@@ -186,6 +190,6 @@ class BuzzCondition extends IntCompareCondition {
 
     @Override
     public String toString() {
-        return "if both players picked differently";
+        return "both players picked differently";
     }
 }

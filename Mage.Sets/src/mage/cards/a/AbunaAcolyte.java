@@ -14,6 +14,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -39,7 +40,7 @@ public final class AbunaAcolyte extends CardImpl {
         Ability ability1 = new SimpleActivatedAbility(new PreventDamageToTargetEffect(Duration.EndOfTurn, 1), new TapSourceCost());
         ability1.addTarget(new TargetAnyTarget());
         Ability ability2 = new SimpleActivatedAbility(new PreventDamageToTargetEffect(Duration.EndOfTurn, 2), new TapSourceCost());
-        ability2.addTarget(new TargetCreaturePermanent(filter));
+        ability2.addTarget(new TargetPermanent(filter));
         this.addAbility(ability1);
         this.addAbility(ability2);
     }

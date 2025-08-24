@@ -15,6 +15,7 @@ import mage.constants.SuperType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.HistoricPredicate;
 import mage.filter.predicate.permanent.AttackingPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -45,7 +46,7 @@ public final class TeganJovanka extends CardImpl {
                         .setText("target attacking historic creature gets +1/+1"),
                 1
         );
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         ability.addEffect(new GainAbilityTargetEffect(IndestructibleAbility.getInstance())
                 .setText("and gains indestructible until end of turn"));
         this.addAbility(ability.withFlavorWord("Brave Heart"));

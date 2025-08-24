@@ -1,6 +1,7 @@
 package mage.abilities.effects.common.continuous;
 
 import mage.abilities.Ability;
+import mage.abilities.ActivatedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
@@ -20,6 +21,7 @@ import mage.target.Targets;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.Collections;
+import java.util.function.Consumer;
 
 /**
  * @author TheElk801
@@ -30,18 +32,24 @@ public class GainAbilityWithAttachmentEffect extends ContinuousEffectImpl {
     private final Targets targets = new Targets();
     private final Costs<Cost> costs = new CostsImpl<>();
     protected final UseAttachedCost useAttachedCost;
+    private final Consumer<ActivatedAbility> consumer;
 
     public GainAbilityWithAttachmentEffect(String rule, Effect effect, Target target, UseAttachedCost attachedCost, Cost... costs) {
         this(rule, new Effects(effect), new Targets(target), attachedCost, costs);
     }
 
     public GainAbilityWithAttachmentEffect(String rule, Effects effects, Targets targets, UseAttachedCost attachedCost, Cost... costs) {
+        this(rule, effects, targets, attachedCost, null, costs);
+    }
+
+    public GainAbilityWithAttachmentEffect(String rule, Effects effects, Targets targets, UseAttachedCost attachedCost, Consumer<ActivatedAbility> consumer, Cost... costs) {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.staticText = rule;
         this.effects.addAll(effects);
         this.targets.addAll(targets);
         Collections.addAll(this.costs, costs);
         this.useAttachedCost = attachedCost;
+        this.consumer = consumer;
         this.generateGainAbilityDependencies(makeAbility(null, null), null);
     }
 
@@ -51,6 +59,7 @@ public class GainAbilityWithAttachmentEffect extends ContinuousEffectImpl {
         this.targets.addAll(effect.targets);
         this.costs.addAll(effect.costs);
         this.useAttachedCost = effect.useAttachedCost == null ? null : effect.useAttachedCost.copy();
+        this.consumer = effect.consumer;
     }
 
     @Override
@@ -94,7 +103,7 @@ public class GainAbilityWithAttachmentEffect extends ContinuousEffectImpl {
     }
 
     protected Ability makeAbility(Game game, Ability source) {
-        Ability ability = new SimpleActivatedAbility(null, null);
+        ActivatedAbility ability = new SimpleActivatedAbility(null, null);
         for (Effect effect : effects) {
             if (effect == null) {
                 continue;
@@ -115,6 +124,9 @@ public class GainAbilityWithAttachmentEffect extends ContinuousEffectImpl {
         }
         if (source != null && game != null) {
             ability.addCost(useAttachedCost.copy().setMageObjectReference(source, game));
+        }
+        if (consumer != null) {
+            consumer.accept(ability);
         }
         return ability;
     }

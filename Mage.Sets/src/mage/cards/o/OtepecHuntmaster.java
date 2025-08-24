@@ -18,6 +18,7 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -47,7 +48,7 @@ public final class OtepecHuntmaster extends CardImpl {
 
         // {T}: Target Dinosaur gains haste until end of turn.
         Ability ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter2));
+        ability.addTarget(new TargetPermanent(filter2));
         this.addAbility(ability);
     }
 

@@ -1,19 +1,16 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author emerald000
  */
 public final class Scapegoat extends CardImpl {
@@ -25,10 +22,8 @@ public final class Scapegoat extends CardImpl {
         this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
 
         // Return any number of target creatures you control to their owner's hand.
-        Effect effect = new ReturnToHandTargetEffect();
-        effect.setText("Return any number of target creatures you control to their owner's hand");
-        this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, new FilterControlledCreaturePermanent(), false));
+        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect().setText("Return any number of target creatures you control to their owner's hand"));
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE));
     }
 
     private Scapegoat(final Scapegoat card) {

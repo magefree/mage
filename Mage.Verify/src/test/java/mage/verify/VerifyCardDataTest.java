@@ -40,7 +40,9 @@ import mage.filter.predicate.Predicates;
 import mage.game.FakeGame;
 import mage.game.Game;
 import mage.game.command.Dungeon;
+import mage.game.command.Emblem;
 import mage.game.command.Plane;
+import mage.game.command.emblems.EmblemOfCard;
 import mage.game.draft.DraftCube;
 import mage.game.permanent.token.Token;
 import mage.game.permanent.token.TokenImpl;
@@ -85,7 +87,7 @@ public class VerifyCardDataTest {
 
     private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
-    private static String FULL_ABILITIES_CHECK_SET_CODES = "BLC"; // check ability text due mtgjson, can use multiple sets like MAT;CMD or * for all
+    private static String FULL_ABILITIES_CHECK_SET_CODES = ""; // check ability text due mtgjson, can use multiple sets like MAT;CMD or * for all
     private static boolean CHECK_ONLY_ABILITIES_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
     private static final boolean CHECK_COPYABLE_FIELDS = true; // disable for better verify test performance
 
@@ -159,7 +161,6 @@ public class VerifyCardDataTest {
 
         // color
         // skipListAddName(SKIP_LIST_COLOR, set, cardName);
-        skipListAddName(SKIP_LIST_COLOR, "FIN", "Summon: Alexander");
 
         // cost
         // skipListAddName(SKIP_LIST_COST, set, cardName);
@@ -922,6 +923,27 @@ public class VerifyCardDataTest {
         }
     }
 
+    private static final Set<String> ignoreBoosterSets = new HashSet<>();
+
+    static {
+        // temporary, TODO: remove after set release and mtgjson get info
+        ignoreBoosterSets.add("Edge of Eternities");
+        // jumpstart, TODO: must implement from JumpstartPoolGenerator, see #13264
+        ignoreBoosterSets.add("Jumpstart");
+        ignoreBoosterSets.add("Jumpstart 2022");
+        ignoreBoosterSets.add("Foundations Jumpstart");
+        ignoreBoosterSets.add("Ravnica: Clue Edition");
+        // joke or un-sets, low implemented cards
+        ignoreBoosterSets.add("Unglued");
+        ignoreBoosterSets.add("Unhinged");
+        ignoreBoosterSets.add("Unstable");
+        ignoreBoosterSets.add("Unfinity");
+        // other
+        ignoreBoosterSets.add("Secret Lair Drop"); // cards shop
+        ignoreBoosterSets.add("Zendikar Rising Expeditions"); // box toppers
+        ignoreBoosterSets.add("March of the Machine: The Aftermath"); // epilogue boosters aren't for draft
+    }
+
     @Test
     public void test_checkMissingSetData() {
         Collection<String> errorsList = new ArrayList<>();
@@ -1072,24 +1094,6 @@ public class VerifyCardDataTest {
         }
 
         // CHECK: miss booster settings
-        Set<String> ignoreBoosterSets = new HashSet<>();
-        // temporary, TODO: remove after set release and mtgjson get info
-        ignoreBoosterSets.add("Final Fantasy");
-        // jumpstart, TODO: must implement from JumpstartPoolGenerator, see #13264
-        ignoreBoosterSets.add("Jumpstart");
-        ignoreBoosterSets.add("Jumpstart 2022");
-        ignoreBoosterSets.add("Foundations Jumpstart");
-        ignoreBoosterSets.add("Ravnica: Clue Edition");
-        // joke or un-sets, low implemented cards
-        ignoreBoosterSets.add("Unglued");
-        ignoreBoosterSets.add("Unhinged");
-        ignoreBoosterSets.add("Unstable");
-        ignoreBoosterSets.add("Unfinity");
-        // other
-        ignoreBoosterSets.add("Secret Lair Drop"); // cards shop
-        ignoreBoosterSets.add("Zendikar Rising Expeditions"); // box toppers
-        ignoreBoosterSets.add("March of the Machine: The Aftermath"); // epilogue boosters aren't for draft
-
         // make sure mtgjson has booster data
         boolean hasBoostersInfo = MtgJsonService.sets().values().stream().anyMatch(s -> s.booster != null && !s.booster.isEmpty());
         for (ExpansionSet set : sets) {
@@ -1698,6 +1702,64 @@ public class VerifyCardDataTest {
     }
 
     @Test
+    // TODO: add same images verify for tokens/dungeons and other
+    // TODO: add same verify for Speed and other new command objects
+    public void test_checkMissingEmblemsData() {
+        Collection<String> errorsList = new ArrayList<>();
+
+        // prepare DBs
+        CardScanner.scan();
+
+        Reflections reflections = new Reflections("mage.");
+        Set<Class<? extends Emblem>> emblemClassesList = reflections.getSubTypesOf(Emblem.class).stream()
+                .filter(c -> !c.equals(EmblemOfCard.class)) // ignore emblem card
+                .collect(Collectors.toSet());
+
+        // 1. correct class name
+        for (Class<? extends Emblem> emblemClass : emblemClassesList) {
+            if (!emblemClass.getName().endsWith("Emblem")) {
+                String className = extractShortClass(emblemClass);
+                errorsList.add("Error: emblem class must ends with Emblem: " + className + " from " + emblemClass.getName());
+            }
+        }
+
+        // 2. correct package
+        for (Class<? extends Emblem> emblemClass : emblemClassesList) {
+            String fullClass = emblemClass.getName();
+            if (!fullClass.startsWith("mage.game.command.emblems.")) {
+                String className = extractShortClass(emblemClass);
+                errorsList.add("Error: emblem must be stored in mage.game.command.emblems package: " + className + " from " + emblemClass.getName());
+            }
+        }
+
+        // 3. correct constructor
+        MageObject fakeObject = CardRepository.instance.findCard("Forest").createCard();
+        for (Class<? extends Emblem> emblemClass : emblemClassesList) {
+            String className = extractShortClass(emblemClass);
+            Emblem emblem;
+            try {
+                emblem = (Emblem) createNewObject(emblemClass);
+
+                // 4. correct tokens-database (image)
+                try {
+                    emblem.setSourceObjectAndInitImage(fakeObject);
+                } catch (Throwable e) {
+                    e.printStackTrace();
+                    errorsList.add("Error: can't setup emblem's image data - make sure tokens-database.txt has it: " + className + " from " + emblemClass.getName());
+                }
+            } catch (Throwable e) {
+                e.printStackTrace();
+                errorsList.add("Error: can't create emblem with default constructor: " + className + " from " + emblemClass.getName());
+            }
+        }
+
+        printMessages(errorsList);
+        if (errorsList.size() > 0) {
+            Assert.fail("Found emblem errors: " + errorsList.size());
+        }
+    }
+
+    @Test
     @Ignore
     // experimental test to find potentially fail conditions with NPE see https://github.com/magefree/mage/issues/13752
     public void test_checkBadConditions() {
@@ -1755,7 +1817,7 @@ public class VerifyCardDataTest {
     private void check(Card card, int cardIndex) {
         MtgJsonCard ref = MtgJsonService.cardFromSet(card.getExpansionSetCode(), card.getName(), card.getCardNumber());
         if (ref != null) {
-            if (card instanceof SpellOptionCard && ref.layout.equals("reversible_card")) {
+            if ((card instanceof CardWithSpellOption || card instanceof SpellOptionCard) && ref.layout.equals("reversible_card")) {
                 // TODO: Remove when MtgJson updated
                 // workaround for reversible omen cards e.g. Bloomvine Regent // Claim Territory // Bloomvine Regent
                 // both sides have main card info
@@ -2055,7 +2117,13 @@ public class VerifyCardDataTest {
         expected.removeIf(subtypesToIgnore::contains);
 
         for (SubType subType : card.getSubtype()) {
-            if (!subType.isCustomSet() && !subType.canGain(card)) {
+            if (subType.isCustomSet()) {
+                if (!ref.isFunny) {
+                    fail(card, "subtypes", "subtype " + subType + " is marked as \"custom\" but is in an official set");
+                }
+                continue;
+            }
+            if (!subType.canGain(card)) {
                 String cardTypeString = card
                         .getCardType()
                         .stream()
@@ -2418,6 +2486,7 @@ public class VerifyCardDataTest {
     private static final List<SubType> selfRefNamedSubtypes = Arrays.asList(
             SubType.EQUIPMENT,
             SubType.VEHICLE,
+            SubType.SPACECRAFT,
             SubType.AURA,
             SubType.CLASS,
             SubType.SAGA,

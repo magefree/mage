@@ -17,6 +17,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterAttackingOrBlockingCreature;
 import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -42,7 +43,7 @@ public final class VenomspoutBrackus extends CardImpl {
         // {1}{G}, {tap}: Venomspout Brackus deals 5 damage to target attacking or blocking creature with flying.
         Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(5), new ManaCostsImpl<>("{1}{G}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
         // Morph {3}{G}{G}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{3}{G}{G}")));

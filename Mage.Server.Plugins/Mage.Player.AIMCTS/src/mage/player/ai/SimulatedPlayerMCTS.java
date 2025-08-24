@@ -288,7 +288,13 @@ public final class SimulatedPlayerMCTS extends MCTSPlayer {
 
     @Override
     public boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Ability source, Game game) {
+
+        // nothing to choose
+        target.prepareAmount(source, game);
         if (target.getAmountRemaining() <= 0) {
+            return false;
+        }
+        if (target.getMaxNumberOfTargets() == 0 && target.getMinNumberOfTargets() == 0) {
             return false;
         }
 

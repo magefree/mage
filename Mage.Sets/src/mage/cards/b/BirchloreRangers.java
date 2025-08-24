@@ -1,8 +1,5 @@
 package mage.cards.b;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -15,18 +12,26 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetControlledPermanent;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class BirchloreRangers extends CardImpl {
+
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.ELF, "untapped Elves you control");
+
+    static {
+        filter.add(TappedPredicate.UNTAPPED);
+    }
 
     public BirchloreRangers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");
@@ -36,14 +41,11 @@ public final class BirchloreRangers extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Tap two untapped Elves you control: Add one mana of any color.
-        FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Elves you control");
-        filter.add(TappedPredicate.UNTAPPED);
-        filter.add(SubType.ELF.getPredicate());
         this.addAbility(new SimpleManaAbility(
-                Zone.BATTLEFIELD,
                 new BirchloreRangersManaEffect(filter),
-                new TapTargetCost(new TargetControlledCreaturePermanent(2, 2, filter, false))));        
-        
+                new TapTargetCost(new TargetControlledPermanent(2, filter))
+        ));
+
         // Morph {G}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{G}")));
     }

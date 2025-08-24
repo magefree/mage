@@ -17,6 +17,7 @@ import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.other.DamagedPlayerThisTurnPredicate;
 import mage.target.Target;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -44,7 +45,7 @@ public final class SpearOfHeliod extends CardImpl {
         // {1}{W}{W}, {T}: Destroy target creature that dealt damage to you this turn.
         Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new ManaCostsImpl<>("{1}{W}{W}"));
         ability.addCost(new TapSourceCost());
-        Target target = new TargetCreaturePermanent(filter);
+        Target target = new TargetPermanent(filter);
         ability.addTarget(target);
         this.addAbility(ability);
     }

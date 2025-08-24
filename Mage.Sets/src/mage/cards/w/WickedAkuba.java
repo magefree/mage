@@ -1,7 +1,6 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -10,9 +9,8 @@ import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.ColoredManaSymbol;
-import mage.constants.Zone;
+import mage.constants.SubType;
 import mage.filter.FilterPlayer;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
@@ -21,13 +19,15 @@ import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.watchers.common.PlayerDamagedBySourceWatcher;
 
+import java.util.UUID;
+
 /**
  *
  * @author North
  */
 public final class WickedAkuba extends CardImpl {
 
-    private static final FilterPlayer filter = new FilterPlayer("player dealt damage by Wicked Akuba this turn");
+    private static final FilterPlayer filter = new FilterPlayer("player dealt damage by {this} this turn");
 
     static {
         filter.add(new WickedAkubaPredicate());

@@ -3,6 +3,8 @@ package mage.target.common;
 import mage.filter.common.FilterAnyTarget;
 
 /**
+ * Warning, it's a target for damage effects only (ignore lands, artifacts and other non-damageable objects)
+ *
  * @author JRHerlehy Created on 4/8/18.
  */
 public class TargetAnyTarget extends TargetPermanentOrPlayer {
@@ -13,20 +15,12 @@ public class TargetAnyTarget extends TargetPermanentOrPlayer {
         this(1);
     }
 
-    public TargetAnyTarget(FilterAnyTarget filter) {
-        this(1, 1, filter);
-    }
-
     public TargetAnyTarget(int numTargets) {
         this(numTargets, numTargets);
     }
 
     public TargetAnyTarget(int minNumTargets, int maxNumTargets) {
-        this(minNumTargets, maxNumTargets, defaultFilter);
-    }
-
-    public TargetAnyTarget(int minNumTargets, int maxNumTargets, FilterAnyTarget filter) {
-        super(minNumTargets, maxNumTargets, filter, false);
+        super(minNumTargets, maxNumTargets, defaultFilter, false);
     }
 
     protected TargetAnyTarget(final TargetAnyTarget target) {

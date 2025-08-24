@@ -27,6 +27,7 @@ public class TriggeredAbilities extends LinkedHashMap<String, TriggeredAbility> 
     // reason: game engine can generate additional events and triggers while checking another one,
     // it can generate multiple bugs, freeze, etc, see https://github.com/magefree/mage/issues/8426
     // all checks can be catches by existing tests
+    private boolean enableIntegrityChecks = false; // TODO: disabled by default, enable for load tests or debug only
     private boolean enableIntegrityCheck1_MustKeepSameTriggersOrder = true; // good
     private boolean enableIntegrityCheck2_MustKeepSameTriggersList = false; // bad, impossible to fix due dynamic triggers gen
     private boolean enableIntegrityCheck3_CantStartEventProcessingBeforeFinishPrev = false; // bad, impossible to fix due dynamic triggers gen
@@ -52,6 +53,7 @@ public class TriggeredAbilities extends LinkedHashMap<String, TriggeredAbility> 
             sources.put(entry.getKey(), entry.getValue());
         }
 
+        this.enableIntegrityChecks = abilities.enableIntegrityChecks;
         this.enableIntegrityCheck1_MustKeepSameTriggersOrder = abilities.enableIntegrityCheck1_MustKeepSameTriggersOrder;
         this.enableIntegrityCheck2_MustKeepSameTriggersList = abilities.enableIntegrityCheck2_MustKeepSameTriggersList;
         this.enableIntegrityCheck3_CantStartEventProcessingBeforeFinishPrev = abilities.enableIntegrityCheck3_CantStartEventProcessingBeforeFinishPrev;
@@ -66,7 +68,7 @@ public class TriggeredAbilities extends LinkedHashMap<String, TriggeredAbility> 
         this.processingDone = CardUtil.deepCopyObject(abilities.processingDone);
 
         // runtime check: triggers order (not required by paper rules, by required by xmage to make same result for all game instances)
-        if (this.enableIntegrityCheck1_MustKeepSameTriggersOrder) {
+        if (this.enableIntegrityChecks && this.enableIntegrityCheck1_MustKeepSameTriggersOrder) {
             if (!Objects.equals(this.values().stream().findFirst().orElse(null) + "",
                     abilities.values().stream().findFirst().orElse(null) + "")) {
                 // how-to fix: use LinkedHashMap instead HashMap/ConcurrentHashMap
@@ -119,7 +121,12 @@ public class TriggeredAbilities extends LinkedHashMap<String, TriggeredAbility> 
     }
 
     private void makeSureNotProcessing(GameEvent newEvent) {
-        if (this.enableIntegrityCheck2_MustKeepSameTriggersList
+        if (!this.enableIntegrityChecks) {
+            return;
+        }
+
+        if (this.enableIntegrityChecks
+                && this.enableIntegrityCheck2_MustKeepSameTriggersList
                 && this.processingStarted) {
             List<String> info = new ArrayList<>();
             info.add("old event: " + this.processingStartedEvent);
@@ -131,6 +138,10 @@ public class TriggeredAbilities extends LinkedHashMap<String, TriggeredAbility> 
     }
 
     private void processingStart(GameEvent newEvent) {
+        if (!this.enableIntegrityChecks) {
+            return;
+        }
+
         makeSureNotProcessing(newEvent);
 
         this.processingStarted = true;
@@ -141,12 +152,21 @@ public class TriggeredAbilities extends LinkedHashMap<String, TriggeredAbility> 
     }
 
     private void processingDone(TriggeredAbility trigger) {
+        if (!this.enableIntegrityChecks) {
+            return;
+        }
+
         this.processingDone.add(trigger);
     }
 
     private void processingEnd(boolean needErrorChecks) {
+        if (!this.enableIntegrityChecks) {
+            return;
+        }
+
         if (needErrorChecks) {
-            if (this.enableIntegrityCheck3_CantStartEventProcessingBeforeFinishPrev
+            if (this.enableIntegrityChecks
+                    && this.enableIntegrityCheck3_CantStartEventProcessingBeforeFinishPrev
                     && !this.processingStarted) {
                 throw new IllegalArgumentException("Triggers integrity failed: can't finish event before start");
             }
@@ -170,19 +190,22 @@ public class TriggeredAbilities extends LinkedHashMap<String, TriggeredAbility> 
                     + "\n" + "Done: "
                     + "\n" + (doneInfo.isEmpty() ? "-" : doneInfo);
 
-            if (this.enableIntegrityCheck4_EventMustProcessAllOldTriggers
+            if (this.enableIntegrityChecks
+                    && this.enableIntegrityCheck4_EventMustProcessAllOldTriggers
                     && this.processingDone.size() < this.processingNeed.size()) {
                 throw new IllegalArgumentException("Triggers integrity failed: event processing miss some triggers" + errorInfo);
             }
 
-            if (this.enableIntegrityCheck5_EventMustProcessInSameOrder
+            if (this.enableIntegrityChecks
+                    && this.enableIntegrityCheck5_EventMustProcessInSameOrder
                     && this.processingDone.size() > 0
                     && this.processingDone.size() == this.processingNeed.size()
                     && !needIds.toString().equals(doneIds.toString())) {
                 throw new IllegalArgumentException("Triggers integrity failed: event processing used wrong order" + errorInfo);
             }
 
-            if (this.enableIntegrityCheck6_EventMustNotProcessNewTriggers
+            if (this.enableIntegrityChecks
+                    && this.enableIntegrityCheck6_EventMustNotProcessNewTriggers
                     && this.processingDone.size() > this.processingNeed.size()) {
                 throw new IllegalArgumentException("Triggers integrity failed: event processing must not process new triggers" + errorInfo);
             }

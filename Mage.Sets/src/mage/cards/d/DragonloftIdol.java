@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -14,8 +13,13 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -38,9 +42,9 @@ public final class DragonloftIdol extends CardImpl {
 
         // As long as you control a Dragon, Dragonloft Idol gets +1/+1 and has flying and trample.
 
-        Effect effect = new ConditionalContinuousEffect(new BoostSourceEffect(1,1, Duration.WhileOnBattlefield),
+        Effect effect = new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield),
                 new PermanentsOnTheBattlefieldCondition(filter),
-                "As long as you control a Dragon, Dragonloft Idol gets +1/+1");
+                "As long as you control a Dragon, {this} gets +1/+1");
         Ability ability = new SimpleStaticAbility(effect);
         effect = new ConditionalContinuousEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance()),
                 new PermanentsOnTheBattlefieldCondition(filter),

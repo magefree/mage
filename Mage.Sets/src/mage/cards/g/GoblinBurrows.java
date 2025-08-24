@@ -15,6 +15,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -37,7 +38,7 @@ public final class GoblinBurrows extends CardImpl {
         // {1}{R}, {tap}: Target Goblin creature gets +2/+0 until end of turn.
         Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(2,0, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{R}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

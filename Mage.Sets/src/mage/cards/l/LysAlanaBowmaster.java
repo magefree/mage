@@ -4,16 +4,14 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterSpell;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.target.common.TargetCreaturePermanent;
+import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -23,11 +21,9 @@ import java.util.UUID;
 public final class LysAlanaBowmaster extends CardImpl {
 
     private static final FilterSpell filterElf = new FilterSpell("an Elf spell");
-    private static final FilterCreaturePermanent filterFlying = new FilterCreaturePermanent("creature with flying");
 
     static {
         filterElf.add(SubType.ELF.getPredicate());
-        filterFlying.add(new AbilityPredicate(FlyingAbility.class));
     }
 
     public LysAlanaBowmaster(UUID ownerId, CardSetInfo setInfo) {
@@ -40,7 +36,7 @@ public final class LysAlanaBowmaster extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
         Ability ability = new SpellCastControllerTriggeredAbility(new DamageTargetEffect(2)
                 .setText("{this} deal 2 damage to target creature with flying"), filterElf, true);
-        ability.addTarget(new TargetCreaturePermanent(filterFlying));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_FLYING));
         this.addAbility(ability);
     }
 

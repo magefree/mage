@@ -44,7 +44,7 @@ public final class AurraSingBaneOfJedi extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
-        // -4: Target player gets an emblem wiht "Whenever a nontoken creature you control leave the battlefied, discard a card.".
+        // -4: Target player gets an emblem with "Whenever a nontoken creature you control leave the battlefied, discard a card.".
         ability = new LoyaltyAbility(new GetEmblemTargetPlayerEffect(new AurraSingBaneOfJediEmblem()), -4);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

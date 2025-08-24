@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -15,6 +14,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -31,7 +32,7 @@ public final class CanalDredger extends CardImpl {
 
         // TODO: Draft specific abilities not implemented
         // Draft Canal Dredger face up.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("Draft Canal Dredger face up - not implemented.")));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("Draft {this} face up - not implemented.")));
 
         // Each player passes the last card from each booster pack to a player who drafted a card named Canal Dredger.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("Each player passes the last card from each booster pack to a player who drafted a card named Canal Dredger - not implemented.")));

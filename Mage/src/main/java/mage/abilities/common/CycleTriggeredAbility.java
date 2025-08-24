@@ -6,6 +6,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.StackObject;
+import mage.util.CardUtil;
 
 /**
  * @author Plopman
@@ -40,6 +41,7 @@ public class CycleTriggeredAbility extends ZoneChangeTriggeredAbility {
             return false;
         }
         this.getEffects().setValue("cycleCosts", object.getStackAbility().getCosts());
+        this.getEffects().setValue("cycleXValue", CardUtil.getSourceCostsTag(game, object.getStackAbility(), "X", 0));
         return true;
     }
 

@@ -14,6 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -48,7 +49,7 @@ public final class SmeltWardIgnus extends CardImpl {
                 HasteAbility.getInstance(), Duration.EndOfTurn
         ).setText("It gains haste until end of turn"));
         ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

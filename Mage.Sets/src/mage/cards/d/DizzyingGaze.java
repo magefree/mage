@@ -1,40 +1,29 @@
 package mage.cards.d;
 
-import java.util.UUID;
-import mage.constants.SubType;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
-import mage.constants.Outcome;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.filter.StaticFilters;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
+
+import java.util.Optional;
+import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
  */
 public final class DizzyingGaze extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("with flying");
-
-    static {
-        filter.add(new AbilityPredicate(FlyingAbility.class));
-    }
 
     public DizzyingGaze(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{R}");
@@ -45,18 +34,12 @@ public final class DizzyingGaze extends CardImpl {
         TargetPermanent auraTarget = new TargetControlledCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget);
-        this.addAbility(ability);
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // {R}: Enchanted creature deals 1 damage to target creature with flying.
-        Ability ability2 = new SimpleActivatedAbility(new DamageTargetEffect(1), new ManaCostsImpl<>("{R}"));
-        ability2.addTarget(new TargetCreaturePermanent(filter));
-        this.addAbility(new SimpleStaticAbility(
-                new GainAbilityAttachedEffect(
-                        ability2,
-                        AttachmentType.AURA,
-                        Duration.WhileOnBattlefield)));
-
+        Ability ability = new SimpleActivatedAbility(new DizzyingGazeEffect(), new ManaCostsImpl<>("{R}"));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_FLYING));
+        this.addAbility(ability);
     }
 
     private DizzyingGaze(final DizzyingGaze card) {
@@ -66,5 +49,33 @@ public final class DizzyingGaze extends CardImpl {
     @Override
     public DizzyingGaze copy() {
         return new DizzyingGaze(this);
+    }
+}
+
+class DizzyingGazeEffect extends OneShotEffect {
+
+    DizzyingGazeEffect() {
+        super(Outcome.Benefit);
+        staticText = "enchanted creature deals 1 damage to target creature with flying";
+    }
+
+    private DizzyingGazeEffect(final DizzyingGazeEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public DizzyingGazeEffect copy() {
+        return new DizzyingGazeEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent creature = game.getPermanent(getTargetPointer().getFirst(game, source));
+        return creature != null
+                && Optional
+                .ofNullable(source.getSourcePermanentOrLKI(game))
+                .map(Permanent::getAttachedTo)
+                .filter(permanentId -> creature.damage(1, permanentId, source, game) > 0)
+                .isPresent();
     }
 }

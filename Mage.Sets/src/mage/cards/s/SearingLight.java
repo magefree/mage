@@ -9,6 +9,7 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.filter.common.FilterAttackingOrBlockingCreature;
 import mage.filter.predicate.mageobject.PowerPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -27,7 +28,7 @@ public final class SearingLight extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
 
         // Destroying target attacking or blocking creature with power 2 or less.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }
 

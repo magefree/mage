@@ -1,7 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
@@ -17,8 +16,9 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  * modified tiera3 - added Hint
  */
@@ -29,16 +29,17 @@ public final class GalvanicBombardment extends CardImpl {
     static {
         filter.add(new NamePredicate("Galvanic Bombardment"));
     }
+
     private static final Hint hint = new ValueHint(
             "Cards named Galvanic Bombardment in your graveyard", new GalvanicBombardmentCardsInControllerGraveyardCount(filter)
     );
 
     public GalvanicBombardment(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");
 
         // Galvanic Bombardment deals X damage to target creature, where X is 2 plus the number of cards named Galvanic Bombardment in your graveyard.
         Effect effect = new DamageTargetEffect(new GalvanicBombardmentCardsInControllerGraveyardCount(filter));
-        effect.setText("{this} deals X damage to target creature, where X is 2 plus the number of cards named {this} in your graveyard");
+        effect.setText("{this} deals X damage to target creature, where X is 2 plus the number of cards named Galvanic Bombardment in your graveyard");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addHint(hint);
@@ -71,8 +72,8 @@ class GalvanicBombardmentCardsInControllerGraveyardCount implements DynamicValue
         int amount = 0;
         Player controller = game.getPlayer(sourceAbility.getControllerId());
         if (controller != null) {
-                amount += controller.getGraveyard().count(filter, sourceAbility.getControllerId(), sourceAbility, game);
-            }
+            amount += controller.getGraveyard().count(filter, sourceAbility.getControllerId(), sourceAbility, game);
+        }
         return amount + 2;
     }
 

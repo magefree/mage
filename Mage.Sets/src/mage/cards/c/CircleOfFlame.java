@@ -30,7 +30,7 @@ public final class CircleOfFlame extends CardImpl {
 
 
         // Whenever a creature without flying attacks you or a planeswalker you control, Circle of Flame deals 1 damage to that creature.
-        this.addAbility(new AttacksAllTriggeredAbility(new DamageTargetEffect(1), false,
+        this.addAbility(new AttacksAllTriggeredAbility(new DamageTargetEffect(1).withTargetDescription("that creature"), false,
                 filter, SetTargetPointer.PERMANENT, true));
     }
 

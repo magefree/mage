@@ -1,5 +1,6 @@
 package mage.game.command.emblems;
 
+import mage.MageObject;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.hint.Hint;
@@ -20,6 +21,13 @@ public class XmageHelperEmblem extends Emblem {
         super("Helper Emblem");
         this.frameStyle = FrameStyle.M15_NORMAL;
 
+        // helper don't have source, so image can be initialized immediately
+        setSourceObjectAndInitImage(null);
+    }
+
+    @Override
+    public void setSourceObjectAndInitImage(MageObject sourceObject) {
+        this.sourceObject = sourceObject;
         TokenInfo foundInfo = TokenRepository.instance.findPreferredTokenInfoForXmage(TokenRepository.XMAGE_IMAGE_NAME_HELPER_EMBLEM, null);
         if (foundInfo != null) {
             this.setExpansionSetCode(foundInfo.getSetCode());

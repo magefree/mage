@@ -1,33 +1,34 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.GainLifeAllEffect;
+import mage.abilities.effects.common.LoseLifeAllPlayersEffect;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
-import mage.players.PlayerList;
+
+import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 public final class Triskaidekaphobia extends CardImpl {
 
     public Triskaidekaphobia(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");
 
         // At the beginning of your upkeep, choose one - Each player with exactly 13 life loses the game, then each player gains 1 life.
         // Each player with exactly 13 life loses the game, then each player loses 1 life.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new TriskaidekaphobiaGainLifeEffect());
-        Mode mode = new Mode(new TriskaidekaphobiaLoseLifeEffect());
-        ability.addMode(mode);
+        ability.addEffect(new GainLifeAllEffect(1).concatBy(", then"));
+        ability.addMode(new Mode(new TriskaidekaphobiaGainLifeEffect())
+                .addEffect(new LoseLifeAllPlayersEffect(1).concatBy(", then")));
         this.addAbility(ability);
     }
 
@@ -45,7 +46,7 @@ class TriskaidekaphobiaGainLifeEffect extends OneShotEffect {
 
     TriskaidekaphobiaGainLifeEffect() {
         super(Outcome.Neutral);
-        this.staticText = "Each player with exactly 13 life loses the game, then each player gains 1 life";
+        this.staticText = "each player with exactly 13 life loses the game";
     }
 
     private TriskaidekaphobiaGainLifeEffect(final TriskaidekaphobiaGainLifeEffect effect) {
@@ -59,60 +60,10 @@ class TriskaidekaphobiaGainLifeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int life;
-        PlayerList playerList = game.getState().getPlayersInRange(source.getControllerId(), game);
-        for (UUID pid : playerList) {
-            Player player = game.getPlayer(pid);
-            if (player != null) {
-                life = player.getLife();
-                if (life == 13) {
-                    player.lost(game);
-                }
-            }
-        }
-        for (UUID pid : playerList) {
-            Player player = game.getPlayer(pid);
-            if (player != null) {
-                player.gainLife(1, game, source);
-            }
-        }
-        return true;
-    }
-}
-
-class TriskaidekaphobiaLoseLifeEffect extends OneShotEffect {
-
-    TriskaidekaphobiaLoseLifeEffect() {
-        super(Outcome.Neutral);
-        this.staticText = "Each player with exactly 13 life loses the game, then each player loses 1 life";
-    }
-
-    private TriskaidekaphobiaLoseLifeEffect(final TriskaidekaphobiaLoseLifeEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public TriskaidekaphobiaLoseLifeEffect copy() {
-        return new TriskaidekaphobiaLoseLifeEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        int life;
-        PlayerList playerList = game.getState().getPlayersInRange(source.getControllerId(), game);
-        for (UUID pid : playerList) {
-            Player player = game.getPlayer(pid);
-            if (player != null) {
-                life = player.getLife();
-                if (life == 13) {
-                    player.lost(game);
-                }
-            }
-        }
-        for (UUID pid : playerList) {
-            Player player = game.getPlayer(pid);
-            if (player != null) {
-                player.loseLife(1, game, source, false);
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
+            Player player = game.getPlayer(playerId);
+            if (player != null && player.getLife() == 13) {
+                player.lost(game);
             }
         }
         return true;

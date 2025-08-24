@@ -16,6 +16,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 
@@ -45,7 +46,7 @@ public final class UnrulySureshot extends CardImpl {
 
         // {3}{R}: Unruly Sureshot deals 2 damage to target creature with a bounty counter on it.
         ability = new SimpleActivatedAbility(new DamageTargetEffect(2), new ManaCostsImpl<>("{3}{R}"));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

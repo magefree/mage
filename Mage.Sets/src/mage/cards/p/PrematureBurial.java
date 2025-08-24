@@ -15,6 +15,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.Watcher;
 
@@ -38,7 +39,7 @@ public final class PrematureBurial extends CardImpl {
 
         // Destroy target nonblack creature that entered the battlefield since your last turn ended.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addWatcher(new PrematureBurialWatcher());
     }
 

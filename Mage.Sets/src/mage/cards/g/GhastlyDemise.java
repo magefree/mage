@@ -10,9 +10,12 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK;
 
 /**
  * @author cbt33
@@ -23,7 +26,7 @@ public final class GhastlyDemise extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}");
 
         // Destroy target nonblack creature if its toughness is less than or equal to the number of cards in your graveyard.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK));
+        this.getSpellAbility().addTarget(new TargetPermanent(FILTER_PERMANENT_CREATURE_NON_BLACK));
         this.getSpellAbility().addEffect(new GhastlyDemiseEffect());
     }
 

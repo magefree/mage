@@ -6,7 +6,7 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.condition.common.SourceAttackingCondition;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.HasteAbility;
@@ -41,9 +41,8 @@ public final class GlintHornBuccaneer extends CardImpl {
         this.addAbility(new GlintHornBuccaneerTriggeredAbility());
 
         // {1}{R}, Discard a card: Draw a card. Activate this ability only if Glint-Horn Buccaneer is attacking.
-        Ability ability = new ConditionalActivatedAbility(
-                Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1),
-                new ManaCostsImpl<>("{1}{R}"), SourceAttackingCondition.instance
+        Ability ability = new ActivateIfConditionActivatedAbility(
+                new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{1}{R}"), SourceAttackingCondition.instance
         );
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);

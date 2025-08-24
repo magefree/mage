@@ -18,7 +18,7 @@ import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.permanent.token.custom.CreatureToken;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -53,7 +53,7 @@ public final class RestlessVinestalk extends CardImpl {
 
         // Whenever Restless Vinestalk attacks, up to one other target creature has base power and toughness 3/3 until end of turn.
         Ability ability = new AttacksTriggeredAbility(new SetBasePowerToughnessTargetEffect(3, 3, Duration.EndOfTurn), false);
-        ability.addTarget(new TargetCreaturePermanent(0, 1, filter, false));
+        ability.addTarget(new TargetPermanent(0, 1, filter));
         this.addAbility(ability);
     }
 

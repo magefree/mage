@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.TimingRule;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 
 import java.util.UUID;
@@ -39,9 +38,8 @@ public final class TempleOfCyclicalTime extends CardImpl {
 
         // {2}{U}, {T}: Transform Temple of Cyclical Time. Activate only if it has no time counters on it and only as a sorcery.
         ability = new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD, new TransformSourceEffect(),
-                new ManaCostsImpl<>("{2}{U}"), condition, TimingRule.SORCERY
-        );
+                new TransformSourceEffect(), new ManaCostsImpl<>("{2}{U}"), condition
+        ).setTiming(TimingRule.SORCERY);
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

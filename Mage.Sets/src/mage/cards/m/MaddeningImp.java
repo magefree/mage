@@ -1,18 +1,15 @@
-
 package mage.cards.m;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.InvertCondition;
+import mage.abilities.condition.common.OpponentsTurnCondition;
 import mage.abilities.condition.common.TargetAttackedThisTurnCondition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.combat.AttacksIfAbleAllEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -26,18 +23,20 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.watchers.common.AttackedThisTurnWatcher;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class MaddeningImp extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Wall creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Wall creatures the active player controls");
 
     static {
         filter.add(Predicates.not(SubType.WALL.getPredicate()));
         filter.add(TargetController.ACTIVE.getControllerPredicate());
-        filter.setMessage("non-Wall creatures the active player controls");
     }
 
     public MaddeningImp(UUID ownerId, CardSetInfo setInfo) {
@@ -50,14 +49,12 @@ public final class MaddeningImp extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {T}: Non-Wall creatures the active player controls attack this turn if able. At the beginning of the next end step, destroy each of those creatures that didn't attack this turn. Activate this ability only during an opponent's turn and only before combat.
-        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new AttacksIfAbleAllEffect(filter, Duration.EndOfTurn),
-                new TapSourceCost(), new MaddeningImpTurnCondition(),
-                "{T}: Non-Wall creatures the active player controls attack this turn if able. "
-                + "At the beginning of the next end step, destroy each of those creatures that didn't attack this turn. "
-                + "Activate only during an opponent's turn and only before combat.");
+        Ability ability = new ActivateIfConditionActivatedAbility(
+                new AttacksIfAbleAllEffect(filter, Duration.EndOfTurn),
+                new TapSourceCost(), MaddeningImpTurnCondition.instance
+        );
         ability.addEffect(new MaddeningImpCreateDelayedTriggeredAbilityEffect());
         this.addAbility(ability);
-
     }
 
     private MaddeningImp(final MaddeningImp card) {
@@ -70,17 +67,17 @@ public final class MaddeningImp extends CardImpl {
     }
 }
 
-class MaddeningImpTurnCondition implements Condition {
+enum MaddeningImpTurnCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player activePlayer = game.getPlayer(game.getActivePlayerId());
-        return activePlayer != null && activePlayer.hasOpponent(source.getControllerId(), game) && game.getPhase().getStep().getType().getIndex() < 5;
+        return OpponentsTurnCondition.instance.apply(game, source) && !game.getTurn().isDeclareAttackersStepStarted();
     }
 
     @Override
     public String toString() {
-        return "";
+        return "during an opponent's turn and only before combat";
     }
 }
 
@@ -150,7 +147,7 @@ class MaddeningImpDelayedDestroyEffect extends OneShotEffect {
         Player player = game.getPlayer(game.getActivePlayerId());
         if (player != null) {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(player.getId())) {
-                
+
                 MageObjectReference mor = new MageObjectReference(permanent, game);
                 // Only affect permanents present when the ability resolved
                 if (!activeCreatures.contains(mor)) {

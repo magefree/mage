@@ -1,9 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -17,9 +14,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.FilterStackObject;
 import mage.filter.FilterPermanent;
+import mage.filter.FilterStackObject;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -29,27 +25,29 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
- *
  * @author L_J
  */
 public final class RaidingParty extends CardImpl {
-    
+
     private static final FilterStackObject filterWhite = new FilterStackObject("white spells or abilities from white sources");
     private static final FilterControlledPermanent filterOrc = new FilterControlledPermanent(SubType.ORC, "an Orc");
-    
+
     static {
         filterWhite.add(new ColorPredicate(ObjectColor.WHITE));
     }
 
     public RaidingParty(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
 
         // Raiding Party can't be the target of white spells or abilities from white sources.
         this.addAbility(new SimpleStaticAbility(new CantBeTargetedSourceEffect(filterWhite, Duration.WhileOnBattlefield)));
-        
+
         // Sacrifice an Orc: Each player may tap any number of untapped white creatures they control. For each creature tapped this way, that player chooses up to two Plains. Then destroy all Plains that weren't chosen this way by any player.
         this.addAbility(new SimpleActivatedAbility(new RaidingPartyEffect(), new SacrificeTargetCost(filterOrc)));
     }
@@ -66,7 +64,7 @@ public final class RaidingParty extends CardImpl {
 
 class RaidingPartyEffect extends OneShotEffect {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped white creatures");
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("untapped white creatures");
     private static final FilterPermanent filter2 = new FilterPermanent("Plains");
 
     static {
@@ -99,7 +97,7 @@ class RaidingPartyEffect extends OneShotEffect {
                 if (player != null) {
                     int countBattlefield = game.getBattlefield().getAllActivePermanents(filter, game.getActivePlayerId(), game).size();
                     int tappedCount = 0;
-                    Target untappedCreatureTarget = new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, filter, true);
+                    Target untappedCreatureTarget = new TargetPermanent(0, Integer.MAX_VALUE, filter, true);
                     if (player.choose(Outcome.Benefit, untappedCreatureTarget, source, game)) {
                         tappedCount = untappedCreatureTarget.getTargets().size();
                         for (UUID creatureId : untappedCreatureTarget.getTargets()) {

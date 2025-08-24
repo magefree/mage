@@ -80,6 +80,8 @@ class KotisTheFangkeeperEffect extends OneShotEffect {
         controller.moveCards(cards, Zone.EXILED, source, game);
         FilterCard filter = new FilterCard();
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue + 1));
+        game.processAction();
+        cards.retainZone(Zone.EXILED, game);
         CardUtil.castMultipleWithAttributeForFree(controller, source, game, cards, filter);
         return true;
     }

@@ -2,14 +2,16 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.InspiredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.turn.TurnMod;
 import mage.game.turn.UpkeepStep;
@@ -20,8 +22,6 @@ import java.util.UUID;
  * @author PurpleCrowbar
  */
 public final class TheNinthDoctor extends CardImpl {
-
-    private static final Condition condition = new IsStepCondition(PhaseStep.UNTAP);
 
     public TheNinthDoctor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{R}");
@@ -35,7 +35,7 @@ public final class TheNinthDoctor extends CardImpl {
 
         // Into the TARDIS — Whenever The Ninth Doctor becomes untapped during your untap step, you get an additional upkeep step after this step.
         this.addAbility(new InspiredAbility(new TheNinthDoctorEffect(), false, false)
-                .withTriggerCondition(condition)
+                .withTriggerCondition(IsStepCondition.getMyUpkeep())
                 .withFlavorWord("Into the TARDIS"));
     }
 

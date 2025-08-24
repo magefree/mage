@@ -2,10 +2,10 @@ package mage.cards.m;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.BandingAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -51,7 +51,7 @@ class MishrasWarMachineEffect extends OneShotEffect {
 
     MishrasWarMachineEffect() {
         super(Outcome.Sacrifice);
-        staticText = "{this} deals 3 damage to you unless you discard a card. If Mishra's War Machine deals damage to you this way, tap it";
+        staticText = "{this} deals 3 damage to you unless you discard a card. If {this} deals damage to you this way, tap it";
     }
 
     private MishrasWarMachineEffect(final MishrasWarMachineEffect effect) {

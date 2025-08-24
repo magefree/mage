@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CardsInOpponentGraveyardCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.ExileAndReturnSourceEffect;
 import mage.abilities.effects.common.SacrificeOpponentsEffect;
 import mage.abilities.keyword.MenaceAbility;
@@ -48,7 +48,7 @@ public final class Sheoldred extends CardImpl {
 
         // {4}{B}: Exile Sheoldred, then return it to the battlefield transformed under its owner's control. Activate only as a sorcery and only if an opponent has eight or more cards in their graveyard.
         this.addAbility(new TransformAbility());
-        this.addAbility(new ConditionalActivatedAbility(
+        this.addAbility(new ActivateIfConditionActivatedAbility(
                 new ExileAndReturnSourceEffect(PutCards.BATTLEFIELD_TRANSFORMED),
                 new ManaCostsImpl<>("{4}{B}"), CardsInOpponentGraveyardCondition.EIGHT
         ).setTiming(TimingRule.SORCERY).addHint(CardsInOpponentGraveyardCondition.EIGHT.getHint()));

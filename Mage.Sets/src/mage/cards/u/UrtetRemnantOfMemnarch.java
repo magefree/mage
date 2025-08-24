@@ -3,7 +3,6 @@ package mage.cards.u;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
-import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.costs.common.TapSourceCost;
@@ -11,10 +10,12 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.UntapAllControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
-import mage.abilities.hint.common.MyTurnHint;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterControlledPermanent;
@@ -49,9 +50,11 @@ public final class UrtetRemnantOfMemnarch extends CardImpl {
         this.addAbility(new BeginningOfCombatTriggeredAbility(new UntapAllControllerEffect(filter2, "untap each Myr you control")));
 
         // {W}{U}{B}{R}{G}, {T}: Put three +1/+1 counters on each Myr you control. Activate only during your turn.
-        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new AddCountersAllEffect(CounterType.P1P1.createInstance(3), filter2), new ManaCostsImpl<>("{W}{U}{B}{R}{G}"), MyTurnCondition.instance);
+        Ability ability = new ActivateIfConditionActivatedAbility(
+                new AddCountersAllEffect(CounterType.P1P1.createInstance(3), filter2),
+                new ManaCostsImpl<>("{W}{U}{B}{R}{G}"), MyTurnCondition.instance
+        );
         ability.addCost(new TapSourceCost());
-        ability.addHint(MyTurnHint.instance);
         this.addAbility(ability);
     }
 

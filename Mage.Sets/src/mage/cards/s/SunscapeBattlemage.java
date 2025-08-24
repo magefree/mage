@@ -7,14 +7,12 @@ import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.KickedCostCondition;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -23,12 +21,6 @@ import java.util.UUID;
  * @author FenrisulfrX
  */
 public final class SunscapeBattlemage extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
-
-    static {
-        filter.add(new AbilityPredicate(FlyingAbility.class));
-    }
 
     private static final Condition condition = new KickedCostCondition("{1}{G}");
     private static final Condition condition2 = new KickedCostCondition("{2}{U}");
@@ -47,7 +39,7 @@ public final class SunscapeBattlemage extends CardImpl {
 
         // When {this} enters, if it was kicked with its {1}{G} kicker, destroy target creature with flying.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect()).withInterveningIf(condition);
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_FLYING));
         this.addAbility(ability);
 
         // When {this} enters, if it was kicked with its {2}{U} kicker, draw two cards.

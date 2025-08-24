@@ -14,6 +14,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -42,7 +43,7 @@ public final class WolfhuntersQuiver extends CardImpl {
         
         // and "{T}: This creature deals 3 damage to target Werewolf creature."
         abilityToGain = new SimpleActivatedAbility(new DamageTargetEffect(3), new TapSourceCost());
-        abilityToGain.addTarget(new TargetCreaturePermanent(filter));
+        abilityToGain.addTarget(new TargetPermanent(filter));
         effect = new GainAbilityAttachedEffect(abilityToGain, AttachmentType.EQUIPMENT);
         effect.setText("and \"{T}: This creature deals 3 damage to target Werewolf creature.\"");
         ability.addEffect(effect);

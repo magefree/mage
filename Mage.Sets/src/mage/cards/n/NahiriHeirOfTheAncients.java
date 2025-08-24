@@ -1,6 +1,5 @@
 package mage.cards.n;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -15,7 +14,7 @@ import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.PermanentIdPredicate;
+import mage.filter.predicate.permanent.PermanentReferenceInCollectionPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.KorWarriorToken;
@@ -119,12 +118,7 @@ class NahiriHeirOfTheAncientsEffect extends OneShotEffect {
         Permanent tokenCreature = tokens.get(0);
         if (tokens.size() > 1) {
             FilterPermanent tokenFilter = new FilterPermanent("token");
-            tokenFilter.add(Predicates.or(
-                    tokens.stream()
-                            .map(MageObject::getId)
-                            .map(PermanentIdPredicate::new)
-                            .collect(Collectors.toSet())
-            ));
+            tokenFilter.add(new PermanentReferenceInCollectionPredicate(tokens, game));
             TargetPermanent target = new TargetPermanent(tokenFilter);
             target.withNotTarget(true);
             player.choose(outcome, target, source, game);

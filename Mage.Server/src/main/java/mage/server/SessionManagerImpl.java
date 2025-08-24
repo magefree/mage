@@ -8,7 +8,6 @@ import mage.util.ThreadUtils;
 import org.apache.log4j.Logger;
 import org.jboss.remoting.callback.InvokerCallbackHandler;
 
-import javax.annotation.Nonnull;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -29,7 +28,7 @@ public class SessionManagerImpl implements SessionManager {
     }
 
     @Override
-    public Optional<Session> getSession(@Nonnull String sessionId) {
+    public Optional<Session> getSession(String sessionId) {
         return Optional.ofNullable(sessions.getOrDefault(sessionId, null));
     }
 
@@ -180,12 +179,12 @@ public class SessionManagerImpl implements SessionManager {
     }
 
     @Override
-    public boolean isValidSession(@Nonnull String sessionId) {
+    public boolean isValidSession(String sessionId) {
         return sessions.containsKey(sessionId);
     }
 
     @Override
-    public Optional<User> getUser(@Nonnull String sessionId) {
+    public Optional<User> getUser(String sessionId) {
         Session session = sessions.get(sessionId);
         if (session != null) {
             return managerFactory.userManager().getUser(sessions.get(sessionId).getUserId());

@@ -17,6 +17,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -47,7 +48,7 @@ public final class NeurokTransmuter extends CardImpl {
         Effect blueEffect = new BecomesColorTargetEffect(ObjectColor.BLUE, Duration.EndOfTurn);
         blueEffect.setText("Until end of turn, target artifact creature becomes blue");
         Ability becomeBlueAbility = new SimpleActivatedAbility(blueEffect, new ManaCostsImpl<>("{U}"));
-        becomeBlueAbility.addTarget(new TargetCreaturePermanent(filter));
+        becomeBlueAbility.addTarget(new TargetPermanent(filter));
         Effect loseArtifactEffect = new LoseArtifactTypeTargetEffect(Duration.EndOfTurn);
         loseArtifactEffect.setText("and isn't an artifact");
         becomeBlueAbility.addEffect(loseArtifactEffect);

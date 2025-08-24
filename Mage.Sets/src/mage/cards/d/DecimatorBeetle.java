@@ -18,8 +18,8 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.DefendingPlayerControlsSourceAttackingPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
@@ -51,7 +51,7 @@ public final class DecimatorBeetle extends CardImpl {
         // Whenever Decimator Beetle attacks, remove a -1/-1 counter from target creature you control and put a -1/-1 counter on up to one target creature defending player controls.
         ability = new AttacksTriggeredAbility(new DecimatorBeetleEffect(), false);
         ability.addTarget(new TargetControlledCreaturePermanent());
-        ability.addTarget(new TargetCreaturePermanent(0, 1, filter, false));
+        ability.addTarget(new TargetPermanent(0, 1, filter));
         this.addAbility(ability);
     }
 

@@ -13,6 +13,7 @@ import mage.constants.SubType;
 import mage.constants.TimingRule;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -39,7 +40,7 @@ public final class CroakingCounterpart extends CardImpl {
         effect.setOnlySubType(SubType.FROG);
         effect.setText("Create a token that's a copy of target non-Frog creature, except it's a 1/1 green Frog");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
 
         // Flashback {3}{G}{U}
         this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{3}{G}{U}")));

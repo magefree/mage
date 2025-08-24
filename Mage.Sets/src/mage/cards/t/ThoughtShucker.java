@@ -1,9 +1,9 @@
 package mage.cards.t;
 
 import mage.MageInt;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.condition.common.ThresholdCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
@@ -42,7 +42,7 @@ public final class ThoughtShucker extends CardImpl {
     }
 }
 
-class ThoughtShuckerActivatedAbility extends ConditionalActivatedAbility {
+class ThoughtShuckerActivatedAbility extends ActivateIfConditionActivatedAbility {
     ThoughtShuckerActivatedAbility() {
         super(new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
                 new ManaCostsImpl<>("{1}{U}"), ThresholdCondition.instance);

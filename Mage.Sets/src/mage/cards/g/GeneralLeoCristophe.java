@@ -45,7 +45,7 @@ public final class GeneralLeoCristophe extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect());
         ability.addTarget(new TargetCardInYourGraveyard(0, 1, filter));
         ability.addEffect(new AddCountersSourceEffect(
-                CounterType.P1P1.createInstance(), CreaturesYouControlCount.instance
+                CounterType.P1P1.createInstance(), CreaturesYouControlCount.PLURAL
         ).setText("Then put a +1/+1 counter on {this} for each creature you control"));
         this.addAbility(ability.addHint(CreaturesYouControlHint.instance));
     }

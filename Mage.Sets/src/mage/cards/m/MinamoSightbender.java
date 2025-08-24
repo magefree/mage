@@ -13,6 +13,7 @@ import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.PowerTargetAdjuster;
 
@@ -36,7 +37,7 @@ public final class MinamoSightbender extends CardImpl {
 
         // {X}, {T}: Target creature with power X or less can't be blocked this turn.
         Ability ability = new SimpleActivatedAbility(new CantBeBlockedTargetEffect(), new ManaCostsImpl<>("{X}"));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         ability.setTargetAdjuster(new PowerTargetAdjuster(ComparisonType.OR_LESS));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

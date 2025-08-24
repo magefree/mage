@@ -42,8 +42,9 @@ public class TournamentPairing {
         return match;
     }
 
-    public void setMatch(Match match) {
+    public void setMatchAndTable(Match match, UUID tableId) {
         this.match = match;
+        this.tableId = tableId;
     }
 
     /**
@@ -86,10 +87,6 @@ public class TournamentPairing {
 
     public UUID getTableId() {
         return tableId;
-    }
-
-    public void setTableId(UUID tableId) {
-        this.tableId = tableId;
     }
 
     public boolean isAlreadyPublished() {

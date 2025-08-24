@@ -20,6 +20,7 @@ import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -42,7 +43,7 @@ public final class GargantuanGorilla extends CardImpl {
         Ability ability = new SimpleActivatedAbility(new GargantuanGorillaFightEffect(), new TapSourceCost());
         FilterCreaturePermanent filter = new FilterCreaturePermanent();
         filter.add(AnotherPredicate.instance);
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

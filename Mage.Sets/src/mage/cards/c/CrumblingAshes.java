@@ -11,6 +11,7 @@ import mage.constants.CardType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.Target;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -31,7 +32,7 @@ public final class CrumblingAshes extends CardImpl {
 
         // At the beginning of your upkeep, destroy target creature with a -1/-1 counter on it.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new DestroyTargetEffect());
-        Target target = new TargetCreaturePermanent(filter);
+        Target target = new TargetPermanent(filter);
         ability.addTarget(target);
         this.addAbility(ability);
         

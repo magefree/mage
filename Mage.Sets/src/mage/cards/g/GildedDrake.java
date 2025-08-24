@@ -1,7 +1,5 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -12,17 +10,17 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.filter.StaticFilters;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetOpponentsCreaturePermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class GildedDrake extends CardImpl {
@@ -36,11 +34,12 @@ public final class GildedDrake extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+
         // When Gilded Drake enters the battlefield, exchange control of Gilded Drake and up to one target creature an opponent controls. If you don't make an exchange, sacrifice Gilded Drake.
         // This ability can't be countered except by spells and abilities.
         Ability ability = new EntersBattlefieldTriggeredAbility(new GildedDrakeEffect());
         ability.setCanFizzle(false);
-        ability.addTarget(new TargetCreaturePermanent(0, 1, StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE, false));
+        ability.addTarget(new TargetOpponentsCreaturePermanent(0, 1));
         this.addAbility(ability);
     }
 

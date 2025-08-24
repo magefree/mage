@@ -8,8 +8,9 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.filter.FilterPermanent;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledPlaneswalkerPermanent;
 
 import java.util.UUID;
@@ -19,9 +20,9 @@ import java.util.UUID;
  */
 public final class BramblefortFink extends CardImpl {
 
-    private static final FilterPermanent filter
-            = new FilterControlledPlaneswalkerPermanent(SubType.OKO, "you control an Oko planeswalker");
-    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(
+            new FilterControlledPlaneswalkerPermanent(SubType.OKO, "you control an Oko planeswalker")
+    );
 
     public BramblefortFink(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
@@ -32,10 +33,10 @@ public final class BramblefortFink extends CardImpl {
 
         // {8}: Bramblefort Fink has base power and toughness 10/10 until end of turn. Activate this ability only if you control an Oko planeswalker.
         this.addAbility(new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD,
-                new SetBasePowerToughnessSourceEffect(10, 10, Duration.EndOfTurn),
-                new GenericManaCost(8),
-                condition));
+                new SetBasePowerToughnessSourceEffect(
+                        10, 10, Duration.EndOfTurn
+                ), new GenericManaCost(8), condition
+        ));
     }
 
     private BramblefortFink(final BramblefortFink card) {

@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -17,6 +16,8 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.target.TargetSpell;
+
+import java.util.UUID;
 
 /**
  *
@@ -57,7 +58,7 @@ class DrainingWhelkEffect extends CounterTargetEffect {
     
     DrainingWhelkEffect() {
         super();
-        staticText = "counter target spell. Put X +1/+1 counters on Draining Whelk, where X is that spell's mana value";
+        staticText = "counter target spell. Put X +1/+1 counters on {this}, where X is that spell's mana value";
     }
     
     private DrainingWhelkEffect(final DrainingWhelkEffect effect) {

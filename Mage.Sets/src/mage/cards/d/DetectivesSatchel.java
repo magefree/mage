@@ -3,7 +3,7 @@ package mage.cards.d;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.SacrificedArtifactThisTurnCondition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.keyword.InvestigateEffect;
 import mage.cards.CardImpl;
@@ -26,7 +26,7 @@ public final class DetectivesSatchel extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new InvestigateEffect(2)));
 
         // {T}: Create a 1/1 colorless Thopter artifact creature token with flying. Activate only if you've sacrificed an artifact this turn.
-        this.addAbility(new ConditionalActivatedAbility(
+        this.addAbility(new ActivateIfConditionActivatedAbility(
                 new CreateTokenEffect(new ThopterColorlessToken()), new TapSourceCost(),
                 SacrificedArtifactThisTurnCondition.instance
         ).addHint(SacrificedArtifactThisTurnCondition.getHint()), new PermanentsSacrificedWatcher());

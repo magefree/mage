@@ -1,38 +1,30 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.common.CantBeCounteredSourceAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.target.common.TargetCreaturePermanent;
+import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 public final class TearsOfValakut extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
-
-    static {
-        filter.add(new AbilityPredicate(FlyingAbility.class));
-    }
-
     public TearsOfValakut(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}");
 
         // This spell can't be countered.
         this.addAbility(new CantBeCounteredSourceAbility().setRuleAtTheTop(true));
 
         // Tears of Valakut deals 5 damage to target creature with flying.
         this.getSpellAbility().addEffect(new DamageTargetEffect(5));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_FLYING));
     }
 
     private TearsOfValakut(final TearsOfValakut card) {

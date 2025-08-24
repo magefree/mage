@@ -11,8 +11,8 @@ import mage.filter.predicate.other.AnotherTargetPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetPermanentOrPlayer;
 import mage.target.targetpointer.EachTargetPointer;
 
 import java.util.List;
@@ -36,7 +36,7 @@ public final class SelfDestruct extends CardImpl {
         // Target creature you control deals X damage to any other target and X damage to itself, where X is its power.
         this.getSpellAbility().addEffect(new SelfDestructEffect());
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent().setTargetTag(1));
-        this.getSpellAbility().addTarget(new TargetAnyTarget(filter).setTargetTag(2));
+        this.getSpellAbility().addTarget(new TargetPermanentOrPlayer(filter).setTargetTag(2));
     }
 
     private SelfDestruct(final SelfDestruct card) {

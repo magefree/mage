@@ -7,7 +7,7 @@ import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.combat.CantAttackTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -40,7 +40,7 @@ public final class EdificeOfAuthority extends CardImpl {
         this.addAbility(ability);
 
         // {1}, {T}: Until your next turn, target creature can't attack or block and its activated abilities can't be activated. Activate this ability only if there are three or more brick counter on Edifice of Authority.
-        Ability ability2 = new ConditionalActivatedAbility(new EdificeOfAuthorityEffect(), new GenericManaCost(1), condition);
+        Ability ability2 = new ActivateIfConditionActivatedAbility(new EdificeOfAuthorityEffect(), new GenericManaCost(1), condition);
         ability2.addCost(new TapSourceCost());
         ability2.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability2);

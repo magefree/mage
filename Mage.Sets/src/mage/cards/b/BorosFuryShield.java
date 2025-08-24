@@ -15,6 +15,7 @@ import mage.filter.common.FilterAttackingOrBlockingCreature;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -29,7 +30,7 @@ public final class BorosFuryShield extends CardImpl {
 
         // Prevent all combat damage that would be dealt by target attacking or blocking creature this turn.
         this.getSpellAbility().addEffect(new PreventDamageByTargetEffect(Duration.EndOfTurn, true));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
 
         // If {R} was spent to cast Boros Fury-Shield, it deals damage to that creature's controller equal to the creature's power.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(

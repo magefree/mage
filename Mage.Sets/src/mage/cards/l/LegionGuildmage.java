@@ -14,7 +14,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import static mage.filter.StaticFilters.FILTER_ANOTHER_TARGET_CREATURE;
 
 /**
  *
@@ -44,7 +47,7 @@ public final class LegionGuildmage extends CardImpl {
                 new ManaCostsImpl<>("{2}{W}")
         );
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE));
+        ability.addTarget(new TargetPermanent(FILTER_ANOTHER_TARGET_CREATURE));
         this.addAbility(ability);
     }
 

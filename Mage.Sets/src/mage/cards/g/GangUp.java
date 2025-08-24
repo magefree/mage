@@ -8,10 +8,13 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.PowerTargetAdjuster;
 
 import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURE;
 
 /**
  * @author TheElk801
@@ -26,7 +29,7 @@ public final class GangUp extends CardImpl {
 
         // Destroy target creature with power X or less.
         this.getSpellAbility().addEffect(new DestroyTargetEffect("destroy target creature with power X or less"));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_CREATURE));
+        this.getSpellAbility().addTarget(new TargetPermanent(FILTER_PERMANENT_CREATURE));
         this.getSpellAbility().setTargetAdjuster(new PowerTargetAdjuster(ComparisonType.OR_LESS));
     }
 

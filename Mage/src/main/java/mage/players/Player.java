@@ -79,7 +79,13 @@ public interface Player extends MageItem, Copyable<Player> {
      */
     boolean isHuman();
 
-    boolean isTestsMode();
+    boolean isTestMode();
+
+    void setTestMode(boolean value);
+
+    boolean isFastFailInTestMode();
+
+    void setFastFailInTestMode(boolean value);
 
     /**
      * Current player is AI. Use it in card's code and all other places.
@@ -397,8 +403,6 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param fullRestore return turn control to own
      */
     void setGameUnderYourControl(Game game, boolean value, boolean fullRestore);
-
-    void setTestMode(boolean value);
 
     void setAllowBadMoves(boolean allowBadMoves);
 
@@ -816,6 +820,9 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void construct(Tournament tournament, Deck deck);
 
+    /**
+     * Draft related: pick next card from a booster
+     */
     void pickCard(List<Card> cards, Deck deck, Draft draft);
 
     // TODO: add result, process it in AI code (if something put creature to attack then it can broke current AI logic)

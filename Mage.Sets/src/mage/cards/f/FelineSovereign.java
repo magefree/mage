@@ -15,10 +15,8 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.target.TargetPermanent;
+import mage.target.targetadjustment.ThatPlayerControlsTargetAdjuster;
 
 import java.util.UUID;
 
@@ -52,7 +50,10 @@ public final class FelineSovereign extends CardImpl {
         this.addAbility(ability);
 
         // Whenever one or more Cats you control deal combat damage to a player, destroy up to one target artifact or enchantment that player controls.
-        this.addAbility(new FelineSovereignTriggeredAbility());
+        Ability ability2 = new OneOrMoreCombatDamagePlayerTriggeredAbility(new DestroyTargetEffect(), SetTargetPointer.PLAYER, filterCat, false);
+        ability2.addTarget(new TargetPermanent(0, 1, new FilterArtifactOrEnchantmentPermanent("artifact or enchantment that player controls")));
+        ability2.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster());
+        this.addAbility(ability2);
     }
 
     private FelineSovereign(final FelineSovereign card) {
@@ -63,35 +64,4 @@ public final class FelineSovereign extends CardImpl {
     public FelineSovereign copy() {
         return new FelineSovereign(this);
     }
-}
-
-class FelineSovereignTriggeredAbility extends OneOrMoreCombatDamagePlayerTriggeredAbility {
-
-    private static final FilterCreaturePermanent catFilter = new FilterCreaturePermanent(SubType.CAT, "Cats");
-
-    FelineSovereignTriggeredAbility() {
-        super(new DestroyTargetEffect().setText("destroy up to one target artifact or enchantment that player controls"), catFilter);
-    }
-
-    private FelineSovereignTriggeredAbility(final FelineSovereignTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public FelineSovereignTriggeredAbility copy() {
-        return new FelineSovereignTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (!super.checkTrigger(event, game)) {
-            return false;
-        }
-        this.getTargets().clear();
-        FilterArtifactOrEnchantmentPermanent filter = new FilterArtifactOrEnchantmentPermanent();
-        filter.add(new ControllerIdPredicate(event.getTargetId()));
-        this.addTarget(new TargetPermanent(0, 1, filter, false));
-        return true;
-    }
-
 }

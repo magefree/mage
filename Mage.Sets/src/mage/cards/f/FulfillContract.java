@@ -15,6 +15,7 @@ import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -37,7 +38,7 @@ public final class FulfillContract extends CardImpl {
 
         // Destroy target creature with a bounty counter on it. If that creature is destroyed this way, you may put a +1/+1 counter on target Rogue or Hunter you control.
         this.getSpellAbility().addEffect(new FulfillContractEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filterBountyCreature));
+        this.getSpellAbility().addTarget(new TargetPermanent(filterBountyCreature));
         this.getSpellAbility().addTarget(new TargetControlledPermanent(filterRogueOrHunter));
 
     }

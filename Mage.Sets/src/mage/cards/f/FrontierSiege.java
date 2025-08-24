@@ -21,9 +21,12 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL;
 
 /**
  * @author LevelX2
@@ -49,7 +52,7 @@ public final class FrontierSiege extends CardImpl {
         Ability ability = new EntersBattlefieldAllTriggeredAbility(
                 Zone.BATTLEFIELD, new FrontierSiegeFightEffect(), filter, true, SetTargetPointer.PERMANENT
         );
-        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
+        ability.addTarget(new TargetPermanent(FILTER_CREATURE_YOU_DONT_CONTROL));
         this.addAbility(new SimpleStaticAbility(new GainAnchorWordAbilitySourceEffect(ability, ModeChoice.DRAGONS)));
     }
 

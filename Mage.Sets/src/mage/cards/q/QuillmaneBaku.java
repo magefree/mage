@@ -17,6 +17,7 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.XManaValueTargetAdjuster;
 
@@ -43,7 +44,7 @@ public final class QuillmaneBaku extends CardImpl {
         Ability ability = new SimpleActivatedAbility(new ReturnToHandTargetEffect(), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addCost(new RemoveVariableCountersSourceCost(CounterType.KI));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         ability.setTargetAdjuster(new XManaValueTargetAdjuster(ComparisonType.OR_LESS));
         this.addAbility(ability);
     }

@@ -1,6 +1,5 @@
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -13,10 +12,11 @@ import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author spjspj
  */
 public final class EnergyTap extends CardImpl {
@@ -31,7 +31,7 @@ public final class EnergyTap extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{U}");
 
         // Tap target untapped creature you control. If you do, add an amount of {C} equal to that creature's converted mana cost.
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new EnergyTapEffect());
     }
 

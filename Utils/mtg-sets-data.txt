@@ -29,6 +29,7 @@ Anthologies|ATH|
 Antiquities|ATQ|
 Assassin's Creed|ACR|
 Avacyn Restored|AVR|
+Avatar: The Last Airbender|TLA|
 Battle for Zendikar|BFZ|
 Battlebond|BBD|
 Born of the Gods|BNG|
@@ -100,6 +101,8 @@ Darksteel|DST|
 Dragons of Tarkir|DTK|
 Archenemy: Nicol Bolas|E01|
 Explorers of Ixalan|E02|
+Edge of Eternities|EOE|
+Edge of Eternities Commander|EOC|
 Eternal Masters|EMA|
 Eldritch Moon|EMN|
 European Land Program|EURO|

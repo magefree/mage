@@ -14,12 +14,11 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.TargetPermanent;
 
 import java.util.*;
 
 /**
- *
  * @author notgreat
  */
 public final class OlorinsSearingLight extends CardImpl {
@@ -41,17 +40,20 @@ public final class OlorinsSearingLight extends CardImpl {
         return new OlorinsSearingLight(this);
     }
 }
+
 //See Crackling Doom
 class OlorinsSearingLightEffect extends OneShotEffect {
 
     static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature with the greatest power among creatures you control");
+
     static {
         filter.add(GreatestPowerControlledPredicate.instance);
     }
+
     public OlorinsSearingLightEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "Each opponent exiles a creature with the greatest power among creatures that player controls.<br>"
-                +"<i>Spell mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, {this} deals damage to each opponent equal to the power of the creature they exiled.";
+                + "<i>Spell mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, {this} deals damage to each opponent equal to the power of the creature they exiled.";
     }
 
     private OlorinsSearingLightEffect(final OlorinsSearingLightEffect effect) {
@@ -72,7 +74,7 @@ class OlorinsSearingLightEffect extends OneShotEffect {
                 if (controller.hasOpponent(playerId, game)) {
                     Player opponent = game.getPlayer(playerId);
                     if (opponent != null) {
-                        Target target = new TargetControlledCreaturePermanent(filter);
+                        Target target = new TargetPermanent(filter);
                         target.withNotTarget(true);
                         if (opponent.choose(outcome, target, source, game)) {
                             Permanent permanentChosen = game.getPermanent(target.getFirstTarget());
@@ -91,7 +93,7 @@ class OlorinsSearingLightEffect extends OneShotEffect {
                     opponent.moveCards(permanent, Zone.EXILED, source, game);
                 }
             }
-            if (SpellMasteryCondition.instance.apply(game, source)){
+            if (SpellMasteryCondition.instance.apply(game, source)) {
                 game.processAction();
                 for (Map.Entry<Player, Integer> entry : damageList) {
                     entry.getKey().damage(entry.getValue(), source, game);

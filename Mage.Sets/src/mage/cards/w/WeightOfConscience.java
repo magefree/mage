@@ -14,6 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.mageobject.SharesCreatureTypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
@@ -21,7 +22,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.*;
@@ -59,9 +60,9 @@ public final class WeightOfConscience extends CardImpl {
     }
 }
 
-class WeightOfConscienceTarget extends TargetControlledCreaturePermanent {
+class WeightOfConscienceTarget extends TargetControlledPermanent {
 
-    private static final FilterControlledCreaturePermanent filterUntapped = new FilterControlledCreaturePermanent("untapped creatures you control that share a creature type");
+    private static final FilterControlledPermanent filterUntapped = new FilterControlledCreaturePermanent("untapped creatures you control that share a creature type");
 
     static {
         filterUntapped.add(TappedPredicate.UNTAPPED);

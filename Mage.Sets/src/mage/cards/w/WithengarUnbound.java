@@ -1,7 +1,6 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -17,6 +16,8 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+
+import java.util.UUID;
 
 /**
  *
@@ -81,6 +82,6 @@ class WithengarUnboundTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a player loses the game, put thirteen +1/+1 counters on Withengar Unbound.";
+        return "Whenever a player loses the game, put thirteen +1/+1 counters on {this}.";
     }
 }

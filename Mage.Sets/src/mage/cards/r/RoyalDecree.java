@@ -1,7 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -21,6 +20,8 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -94,6 +95,6 @@ class RoyalDecreeAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a Swamp, Mountain, black permanent, or red permanent becomes tapped, Royal Decree deals 1 damage to that permanent's controller.";
+        return "Whenever a Swamp, Mountain, black permanent, or red permanent becomes tapped, {this} deals 1 damage to that permanent's controller.";
     }
 }

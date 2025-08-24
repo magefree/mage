@@ -2,9 +2,9 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -48,7 +48,7 @@ class SmokestackEffect extends OneShotEffect {
 
     SmokestackEffect() {
         super(Outcome.Sacrifice);
-        this.staticText = "that player sacrifices a permanent for each soot counter on Smokestack";
+        this.staticText = "that player sacrifices a permanent of their choice for each soot counter on {this}";
     }
 
     private SmokestackEffect(final SmokestackEffect effect) {

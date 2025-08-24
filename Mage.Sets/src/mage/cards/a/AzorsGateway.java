@@ -1,10 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -20,12 +16,15 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 import mage.util.CardUtil;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -63,7 +62,7 @@ class AzorsGatewayEffect extends OneShotEffect {
         super(Outcome.Benefit);
         this.staticText = "Draw a card, then exile a card from your hand. " +
                 "If cards with five or more different mana values are exiled with {this}, " +
-                "you gain 5 life, untap Azor's Gateway, and transform it";
+                "you gain 5 life, untap {this}, and transform it";
     }
 
     private AzorsGatewayEffect(final AzorsGatewayEffect effect) {

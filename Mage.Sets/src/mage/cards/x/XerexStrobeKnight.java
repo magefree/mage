@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.token.KnightWhiteBlueToken;
 import mage.watchers.common.CastSpellLastTurnWatcher;
@@ -40,7 +39,7 @@ public final class XerexStrobeKnight extends CardImpl {
 
         // {T}: Create a 2/2 white and blue Knight creature token with vigilance. Activate only if you've cast two or more spells this turn.
         this.addAbility(new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD, new CreateTokenEffect(new KnightWhiteBlueToken()),
+                new CreateTokenEffect(new KnightWhiteBlueToken()),
                 new TapSourceCost(), XerexStrobeKnightCondition.instance
         ));
     }

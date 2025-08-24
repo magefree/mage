@@ -1,9 +1,8 @@
 package mage.watchers.common;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
+
 import mage.MageObjectReference;
 import mage.constants.WatcherScope;
 import mage.game.Game;
@@ -17,7 +16,9 @@ import mage.watchers.Watcher;
  */
 public class BlockedAttackerWatcher extends Watcher {
 
-    private final Map<MageObjectReference, Set<MageObjectReference>> blockData = new HashMap<>();
+    // key: blocking creatures
+    // value: set of creatures blocked
+    private final Map<MageObjectReference, Set<MageObjectReference>> blockerMap = new HashMap<>();
 
     /**
      * Game default watcher
@@ -29,31 +30,31 @@ public class BlockedAttackerWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.BLOCKER_DECLARED) {
-            MageObjectReference blocker = new MageObjectReference(event.getSourceId(), game);
-            Set<MageObjectReference> blockedAttackers = blockData.get(blocker);
-            if (blockedAttackers != null) {
-                blockedAttackers.add(new MageObjectReference(event.getTargetId(), game));
-            } else {
-                blockedAttackers = new HashSet<>();
-                blockedAttackers.add(new MageObjectReference(event.getTargetId(), game));
-                blockData.put(blocker, blockedAttackers);
-            }
+            blockerMap.computeIfAbsent(new MageObjectReference(event.getSourceId(), game), k -> new HashSet<>())
+                    .add(new MageObjectReference(event.getTargetId(), game));
         }
     }
 
     @Override
     public void reset() {
         super.reset();
-        blockData.clear();
+        blockerMap.clear();
     }
 
     public boolean creatureHasBlockedAttacker(Permanent attacker, Permanent blocker, Game game) {
-        Set<MageObjectReference> blockedAttackers = blockData.get(new MageObjectReference(blocker, game));
-        return blockedAttackers != null && blockedAttackers.contains(new MageObjectReference(attacker, game));
+        return blockerMap.getOrDefault(new MageObjectReference(blocker, game), Collections.emptySet())
+                .contains(new MageObjectReference(attacker, game));
     }
 
-    public boolean creatureHasBlockedAttacker(MageObjectReference attacker, MageObjectReference blocker, Game game) {
-        Set<MageObjectReference> blockedAttackers = blockData.get(blocker);
-        return blockedAttackers != null && blockedAttackers.contains(attacker);
+    public boolean creatureHasBlockedAttacker(MageObjectReference attacker, MageObjectReference blocker) {
+        return blockerMap.getOrDefault(blocker, Collections.emptySet()).contains(attacker);
+    }
+
+    public Set<Permanent> getBlockedCreatures(MageObjectReference blocker, Game game) {
+        return blockerMap.getOrDefault(blocker, Collections.emptySet())
+                .stream()
+                .map(m -> m.getPermanent(game))
+                .filter(Objects::nonNull)
+                .collect(Collectors.toSet());
     }
 }

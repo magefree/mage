@@ -80,7 +80,7 @@ class StolenUniformAttachEffect extends OneShotEffect {
                 .map(game::getPermanent)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
-        return permanents.size() >= 2 && permanents.get(1).addAttachment(permanents.get(0).getId(), source, game);
+        return permanents.size() >= 2 && permanents.get(0).addAttachment(permanents.get(1).getId(), source, game);
     }
 }
 
@@ -116,16 +116,19 @@ class StolenUniformTriggerEffect extends OneShotEffect {
 class StolenUniformTriggeredAbility extends DelayedTriggeredAbility {
 
     private final MageObjectReference mor;
+    private final int turnNum;
 
     StolenUniformTriggeredAbility(Permanent permanent, Game game) {
-        super(new StolenUniformUnattachEffect(permanent, game), Duration.EndOfTurn, true, false);
+        super(new StolenUniformUnattachEffect(permanent, game), Duration.Custom, false, false);
         setTriggerPhrase("When you lose control of that Equipment this turn, ");
         this.mor = new MageObjectReference(permanent, game);
+        this.turnNum = game.getTurnNum();
     }
 
     private StolenUniformTriggeredAbility(final StolenUniformTriggeredAbility ability) {
         super(ability);
         this.mor = ability.mor;
+        this.turnNum = ability.turnNum;
     }
 
     @Override
@@ -140,6 +143,11 @@ class StolenUniformTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
+        // We can't use end of turn duration as losing control happens after the trigger has gone away, so we need this workaround
+        if (game.getTurnNum() > this.turnNum) {
+            this.setDuration(Duration.EndOfTurn);
+            return false;
+        }
         return isControlledBy(event.getPlayerId())
                 && mor.zoneCounterIsCurrent(game)
                 && event.getTargetId().equals(mor.getSourceId());
