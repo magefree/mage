@@ -3,13 +3,14 @@ package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.DependencyType;
 import mage.constants.Duration;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 
 /**
@@ -21,7 +22,10 @@ public final class ChromaticLantern extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // Lands you control have "{T}: Add one mana of any color."
-        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(new AnyColorManaAbility(), Duration.WhileOnBattlefield, StaticFilters.FILTER_LANDS, false)));
+        ContinuousEffect effect = new GainAbilityControlledEffect(new AnyColorManaAbility(), Duration.WhileOnBattlefield, StaticFilters.FILTER_LANDS, false);
+        effect.getDependedToTypes().add(DependencyType.BecomeNonbasicLand);
+        this.addAbility(new SimpleStaticAbility(effect));
+
 
         // {T}: Add one mana of any color.
         this.addAbility(new AnyColorManaAbility());

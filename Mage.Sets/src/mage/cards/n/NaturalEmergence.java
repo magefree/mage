@@ -3,12 +3,14 @@ package mage.cards.n;
 import mage.ObjectColor;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.ReturnToHandChosenControlledPermanentEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureAllEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.DependencyType;
 import mage.constants.Duration;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledEnchantmentPermanent;
@@ -37,12 +39,14 @@ public final class NaturalEmergence extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(filter), false));
 
         // Lands you control are 2/2 creatures with first strike. They're still lands.
-        this.addAbility(new SimpleStaticAbility(new BecomesCreatureAllEffect(
+        ContinuousEffect effect = new BecomesCreatureAllEffect(
                 new CreatureToken(
                         2, 2, "2/2 creatures with first strike"
                 ).withAbility(FirstStrikeAbility.getInstance()), "lands",
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_LANDS, Duration.WhileOnBattlefield, false
-        )));
+        );
+        effect.getDependedToTypes().add(DependencyType.BecomeNonbasicLand);
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private NaturalEmergence(final NaturalEmergence card) {

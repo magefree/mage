@@ -54,6 +54,7 @@ class MagusOfTheMoonEffect extends ContinuousEffectImpl {
     MagusOfTheMoonEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         this.staticText = "Nonbasic lands are Mountains";
+        dependendToTypes.add(DependencyType.BecomeNonbasicLand);
         dependencyTypes.add(DependencyType.BecomeMountain);
     }
 

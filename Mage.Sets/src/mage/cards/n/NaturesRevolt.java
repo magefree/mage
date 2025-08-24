@@ -2,12 +2,13 @@ package mage.cards.n;
 
 import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.DependencyType;
 import mage.constants.Duration;
-import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.permanent.token.custom.CreatureToken;
 
@@ -24,9 +25,11 @@ public final class NaturesRevolt extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}{G}");
 
         // All lands are 2/2 creatures that are still lands.
-        this.addAbility(new SimpleStaticAbility(new BecomesCreatureAllEffect(
+        ContinuousEffect effect = new BecomesCreatureAllEffect(
                 new CreatureToken(2, 2, "2/2 creatures"),
-                "lands", filter, Duration.WhileOnBattlefield, false)));
+                "lands", filter, Duration.WhileOnBattlefield, false);
+        effect.getDependedToTypes().add(DependencyType.BecomeNonbasicLand);
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private NaturesRevolt(final NaturesRevolt card) {

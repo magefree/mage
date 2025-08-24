@@ -27,11 +27,12 @@ public final class KormusBell extends CardImpl {
                 new CreatureToken(1, 1, "1/1 black creatures").withColor("B"),
                 "lands", filter,
                 Duration.WhileOnBattlefield, true);
-        effect.addDependedToType(DependencyType.BecomeSwamp); // TODO: are these dependencies correct/complete?
-        effect.addDependedToType(DependencyType.BecomeIsland);
+        effect.addDependedToType(DependencyType.BecomeNonbasicLand);
         effect.addDependedToType(DependencyType.BecomeForest);
+        effect.addDependedToType(DependencyType.BecomeIsland);
         effect.addDependedToType(DependencyType.BecomeMountain);
         effect.addDependedToType(DependencyType.BecomePlains);
+        effect.addDependedToType(DependencyType.BecomeSwamp);
         this.addAbility(new SimpleStaticAbility(effect));
     }
 

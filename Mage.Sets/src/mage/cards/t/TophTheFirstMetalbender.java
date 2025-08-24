@@ -63,6 +63,8 @@ class TophTheFirstMetalbenderEffect extends ContinuousEffectImpl {
     TophTheFirstMetalbenderEffect() {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
         staticText = "nontoken artifacts you control are lands in addition to their other types";
+        this.dependendToTypes.add(DependencyType.ArtifactAddingRemoving);
+        this.dependencyTypes.add(DependencyType.BecomeNonbasicLand);
     }
 
     private TophTheFirstMetalbenderEffect(final TophTheFirstMetalbenderEffect effect) {
