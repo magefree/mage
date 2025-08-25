@@ -97,7 +97,7 @@ public class ScryfallApiCard {
                 // broken adventure/omen card (scryfall changed it for some reason)
                 // Scavenger Regent // Exude Toxin
                 // https://scryfall.com/card/tdm/90/scavenger-regent-exude-toxin
-                if (this.name.contains("//")) {
+                if (this.name.contains(" // ")) {
                     throw new IllegalArgumentException("Scryfall: unsupported data type, broken reversible_card must have same simple name"
                             + this.set + " - " + this.collector_number + " - " + this.name);
                 }
