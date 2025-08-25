@@ -1,7 +1,6 @@
 package mage.target.common;
 
 import mage.filter.FilterOpponent;
-import mage.filter.FilterPlayer;
 import mage.target.TargetPlayer;
 
 /**
