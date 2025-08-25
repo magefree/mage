@@ -767,6 +767,51 @@ public class VerifyCardDataTest {
     }
 
     @Test
+    @Ignore
+    public void test_checkWrongFullArtAndRetro() {
+        Collection<String> errorsList = new ArrayList<>();
+        Collection<ExpansionSet> xmageSets = Sets.getInstance().values();
+
+        // CHECK: wrong card numbers
+        for (ExpansionSet set : xmageSets) {
+            if (skipListHaveName(SKIP_LIST_WRONG_CARD_NUMBERS, set.getCode())) {
+                continue;
+            }
+
+            for (ExpansionSet.SetCardInfo card : set.getSetCardInfo()) {
+                MtgJsonCard jsonCard = MtgJsonService.cardFromSet(set.getCode(), card.getName(), card.getCardNumber());
+                if (jsonCard == null) {
+                    continue;
+                }
+
+                // CHECK: poster promoType and/or textless must use full art setting
+                if (((jsonCard.promoTypes != null && jsonCard.promoTypes.contains("poster")) || jsonCard.isTextless) && !card.isFullArt()) {
+                    errorsList.add("Error: card must use full art setting: "
+                            + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
+                }
+
+               // CHECK: full art lands must use full art setting
+               boolean isLand = card.getRarity().equals(Rarity.LAND);
+               if (jsonCard.isFullArt && isLand && !card.isFullArt()) {
+                   errorsList.add("Error: card must use full art setting: "
+                           + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
+               }
+
+                // CHECK: must use retro frame setting
+                if ((jsonCard.frameVersion.equals("1993") || jsonCard.frameVersion.equals("1997")) && !card.isRetroFrame()) {
+                    errorsList.add("Error: card must use retro art setting: "
+                            + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
+                }
+            }
+        }
+
+        printMessages(errorsList);
+        if (errorsList.size() > 0) {
+            Assert.fail("Found wrong cards data in sets, errors: " + errorsList.size());
+        }
+    }
+
+    @Test
     @Ignore // TODO: enable after all missing cards and settings fixes
     public void test_checkMissingScryfallSettingsAndCardNumbers() {
         Collection<String> errorsList = new ArrayList<>();
