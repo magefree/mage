@@ -6,6 +6,7 @@ import mage.abilities.costs.SacrificeCost;
 import mage.abilities.costs.UseAttachedCost;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 import java.util.UUID;
 
@@ -52,7 +53,12 @@ public class SacrificeAttachmentCost extends UseAttachedCost implements Sacrific
         if (!super.canPay(ability, source, controllerId, game)) {
             return false;
         }
-        return game.getPermanent(source.getSourceId()).canBeSacrificed();
+        Player controller = game.getPlayer(controllerId);
+        Permanent permanent = mageObjectReference.getPermanent(game);
+        if (controller == null ||  permanent == null) {
+            return false;
+        }
+        return controller.canPaySacrificeCost(permanent, source, controllerId, game);
     }
 
     @Override
