@@ -22,7 +22,7 @@ public final class MagicFest2019 extends ExpansionSet {
 
         cards.add(new SetCardInfo("Forest", 6, Rarity.LAND, mage.cards.basiclands.Forest.class));
         cards.add(new SetCardInfo("Island", 3, Rarity.LAND, mage.cards.basiclands.Island.class));
-        cards.add(new SetCardInfo("Lightning Bolt", 1, Rarity.RARE, mage.cards.l.LightningBolt.class));
+        cards.add(new SetCardInfo("Lightning Bolt", 1, Rarity.RARE, mage.cards.l.LightningBolt.class, FULL_ART));
         cards.add(new SetCardInfo("Mountain", 5, Rarity.LAND, mage.cards.basiclands.Mountain.class));
         cards.add(new SetCardInfo("Plains", 2, Rarity.LAND, mage.cards.basiclands.Plains.class));
         cards.add(new SetCardInfo("Sol Ring", 7, Rarity.RARE, mage.cards.s.SolRing.class));

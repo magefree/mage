@@ -1,8 +1,6 @@
 package mage.sets;
 
-import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
-import mage.cards.FrameStyle;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
@@ -22,14 +20,12 @@ public class MagicPlayerRewards2008 extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
-        final CardGraphicInfo MPR_FULL_ART = new CardGraphicInfo(FrameStyle.MPRP_FULL_ART_BASIC, false);
-
-        cards.add(new SetCardInfo("Corrupt", 7, Rarity.RARE, mage.cards.c.Corrupt.class));
-        cards.add(new SetCardInfo("Damnation", 1, Rarity.RARE, mage.cards.d.Damnation.class));
-        cards.add(new SetCardInfo("Harmonize", 5, Rarity.RARE, mage.cards.h.Harmonize.class));
-        cards.add(new SetCardInfo("Incinerate", 3, Rarity.RARE, mage.cards.i.Incinerate.class));
-        cards.add(new SetCardInfo("Mana Tithe", 4, Rarity.RARE, mage.cards.m.ManaTithe.class));
-        cards.add(new SetCardInfo("Ponder", 6, Rarity.RARE, mage.cards.p.Ponder.class));
-        cards.add(new SetCardInfo("Tidings", 2, Rarity.RARE, mage.cards.t.Tidings.class));
+        cards.add(new SetCardInfo("Corrupt", 7, Rarity.RARE, mage.cards.c.Corrupt.class, FULL_ART));
+        cards.add(new SetCardInfo("Damnation", 1, Rarity.RARE, mage.cards.d.Damnation.class, FULL_ART));
+        cards.add(new SetCardInfo("Harmonize", 5, Rarity.RARE, mage.cards.h.Harmonize.class, FULL_ART));
+        cards.add(new SetCardInfo("Incinerate", 3, Rarity.RARE, mage.cards.i.Incinerate.class, FULL_ART));
+        cards.add(new SetCardInfo("Mana Tithe", 4, Rarity.RARE, mage.cards.m.ManaTithe.class, FULL_ART));
+        cards.add(new SetCardInfo("Ponder", 6, Rarity.RARE, mage.cards.p.Ponder.class, FULL_ART));
+        cards.add(new SetCardInfo("Tidings", 2, Rarity.RARE, mage.cards.t.Tidings.class, FULL_ART));
      }
 }
