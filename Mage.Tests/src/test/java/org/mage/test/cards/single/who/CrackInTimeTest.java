@@ -19,21 +19,29 @@ public class CrackInTimeTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Crack in Time"); // {3}{W}
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
         addCard(Zone.BATTLEFIELD, playerB, "Balduvian Bears", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears", 1);
 
-        // exile
+        // exile on etb
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Crack in Time");
         addTarget(playerA, "Balduvian Bears"); // exile on etb
-        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-        checkExileCount("on exile", 1, PhaseStep.PRECOMBAT_MAIN, playerB, "Balduvian Bears", 1);
+        checkExileCount("on etb Balduvian", 1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Balduvian Bears", 1);
+        checkExileCount("on etb Grizzly", 1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Grizzly Bears", 0);
+
+        // exile on next precombat main
+        addTarget(playerA, "Grizzly Bears"); // exile on etb
+        checkExileCount("on main Balduvian", 3, PhaseStep.BEGIN_COMBAT, playerB, "Balduvian Bears", 1);
+        checkExileCount("on main Grizzly", 3, PhaseStep.BEGIN_COMBAT, playerB, "Grizzly Bears", 1);
 
         // destroy and return
-        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "target destroy", "Crack in Time");
-        waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN);
-        checkExileCount("on return", 1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Balduvian Bears", 0);
-        checkPermanentCount("on return", 1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Balduvian Bears", 1);
+        activateAbility(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "target destroy", "Crack in Time");
 
         setStrictChooseMode(true);
-        setStopAt(1, PhaseStep.END_TURN);
+        setStopAt(3, PhaseStep.END_TURN);
         execute();
+
+        assertExileCount(playerB, "Balduvian Bears", 0);
+        assertPermanentCount(playerB, "Balduvian Bears", 1);
+        assertExileCount(playerB, "Grizzly Bears", 0);
+        assertPermanentCount(playerB, "Grizzly Bears", 1);
     }
 }
