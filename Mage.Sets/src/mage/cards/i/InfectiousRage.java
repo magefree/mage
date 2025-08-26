@@ -83,7 +83,7 @@ class InfectiousRageReattachEffect extends OneShotEffect {
         if (controller == null || auraCard == null) {
             return false;
         }
-        if (source.getSourceObjectZoneChangeCounter() != auraCard.getZoneChangeCounter(game)) {
+        if (source.getStackMomentSourceZCC() != auraCard.getZoneChangeCounter(game)) {
             return false;
         }
 

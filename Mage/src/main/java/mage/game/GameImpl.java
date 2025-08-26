@@ -2264,7 +2264,7 @@ public abstract class GameImpl implements Game {
             //
             // There are two possibility for the zcc:
             // 1/ the source is an Ability with a valid (not 0) zcc, and we must use the same.
-            int zcc = source.getSourceObjectZoneChangeCounter();
+            int zcc = source.getStackMomentSourceZCC();
             if (zcc == 0) {
                 // 2/ the source has not a valid zcc (it is most likely a StaticAbility instantiated at beginning of game)
                 //    we use the source objects's zcc

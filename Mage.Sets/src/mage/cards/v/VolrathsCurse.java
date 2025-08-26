@@ -176,7 +176,7 @@ class VolrathsCurseIgnoreEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        String key = source.getSourceId().toString() + source.getSourceObjectZoneChangeCounter() + VolrathsCurse.keyString + game.getTurnNum() + ((ActivatedAbilityImpl) source).getActivatorId();
+        String key = source.getSourceId().toString() + source.getStackMomentSourceZCC() + VolrathsCurse.keyString + game.getTurnNum() + ((ActivatedAbilityImpl) source).getActivatorId();
         game.getState().setValue(key, true);
         return true;
     }

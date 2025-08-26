@@ -82,7 +82,7 @@ enum OrvarTheAllFormCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         Spell spell = (Spell) source.getEffects().get(0).getValue("spellCast");
         MageObjectReference mor;
-        if (source.getSourceObjectZoneChangeCounter() == 0) {
+        if (source.getStackMomentSourceZCC() == 0) {
             mor = new MageObjectReference(source.getSourceId(), game);
         } else {
             mor = new MageObjectReference(source);

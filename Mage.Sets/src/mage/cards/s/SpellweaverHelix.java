@@ -83,7 +83,7 @@ class SpellweaverHelixImprintEffect extends OneShotEffect {
             for (UUID targetId : this.getTargetPointer().getTargets(game, source)) {
                 Card card = game.getCard(targetId);
                 if (card != null) {
-                    controller.moveCardsToExile(card, source, game, true, CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()), source.getSourceObject(game).getIdName());
+                    controller.moveCardsToExile(card, source, game, true, CardUtil.getExileZoneId(game, source.getSourceId(), source.getStackMomentSourceZCC()), source.getSourceObject(game).getIdName());
                     if (sourcePermanent != null) {
                         sourcePermanent.imprint(targetId, game);
                     }

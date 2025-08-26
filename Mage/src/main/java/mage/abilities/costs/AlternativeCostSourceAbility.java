@@ -203,7 +203,7 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
     }
 
     private String getActivatedKey(Ability source) {
-        return getActivatedKey(this.getOriginalId(), source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+        return getActivatedKey(this.getOriginalId(), source.getSourceId(), source.getStackMomentSourceZCC());
     }
 
     private static String getActivatedKey(UUID alternativeCostOriginalId, UUID sourceId, int sourceZCC) {
@@ -217,7 +217,7 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
     }
 
     private String getDynamicCostActivatedKey(Ability source) {
-        return getDynamicCostActivatedKey(this.getOriginalId(), source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+        return getDynamicCostActivatedKey(this.getOriginalId(), source.getSourceId(), source.getStackMomentSourceZCC());
     }
 
     private static String getDynamicCostActivatedKey(UUID alternativeCostOriginalId, UUID sourceId, int sourceZCC) {
@@ -243,7 +243,7 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
         String key = getActivatedKey(
                 alternativeCostOriginalId,
                 source.getSourceId(),
-                source.getSourceObjectZoneChangeCounter() + (searchPrevZCC ? -1 : 0)
+                source.getStackMomentSourceZCC() + (searchPrevZCC ? -1 : 0)
         );
         Boolean status = (Boolean) game.getState().getValue(key);
         return status != null && status;

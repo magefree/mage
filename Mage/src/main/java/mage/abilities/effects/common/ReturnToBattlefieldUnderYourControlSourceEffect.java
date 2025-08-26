@@ -38,7 +38,7 @@ public class ReturnToBattlefieldUnderYourControlSourceEffect extends OneShotEffe
         if (controller == null) {
             return false;
         }
-        UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+        UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getStackMomentSourceZCC());
         ExileZone exileZone = game.getExile().getExileZone(exileZoneId);
         if (exileZone != null && exileZone.contains(source.getSourceId())) {
             Card card = game.getCard(source.getSourceId());

@@ -111,8 +111,8 @@ public class UntilYourNextTurnDelayedTriggeredAbility extends DelayedTriggeredAb
     }
 
     @Override
-    public int getSourceObjectZoneChangeCounter() {
-        return ability.getSourceObjectZoneChangeCounter();
+    public int getStackMomentSourceZCC() {
+        return ability.getStackMomentSourceZCC();
     }
 
     @Override

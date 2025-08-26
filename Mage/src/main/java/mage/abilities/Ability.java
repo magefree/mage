@@ -516,11 +516,12 @@ public interface Ability extends Controllable, Serializable {
      */
     void initSourceObjectZoneChangeCounter(Game game, boolean force);
 
-    // TODO: it's activating time of ability, not current object's zcc, see #13737,
-    //   in most use cases you must use game.getState().getZoneChangeCounter or input.getObject().getZoneChangeCounter(game)
-    //   only ability related logic can use it (example: delayed triggers)
-    @Deprecated
-    int getSourceObjectZoneChangeCounter();
+    /**
+     * Returns the internally stored Source Object ZCC value, which is set at the time this ability was put on the stack.
+     * For static abilities or trigger conditions, you probably want to use
+     * game.getState().getZoneChangeCounter or input.getObject().getZoneChangeCounter(game) instead
+     */
+    int getStackMomentSourceZCC();
 
     /**
      * Finds the source object (Permanent, StackObject, Card, etc.) as long as its zcc has not changed, otherwise null

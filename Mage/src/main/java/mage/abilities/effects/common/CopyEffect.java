@@ -86,7 +86,7 @@ public class CopyEffect extends ContinuousEffectImpl {
                 return false;
             }
             // As long as the permanent is still in the short living LKI continue to copy to get triggered abilities to TriggeredAbilities for dies events.
-            permanent = (Permanent) game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD, source.getSourceObjectZoneChangeCounter());
+            permanent = (Permanent) game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD, source.getStackMomentSourceZCC());
             if (permanent == null) {
                 discard();
                 return false;

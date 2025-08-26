@@ -102,6 +102,6 @@ class SkyclaveShadeEffect extends AsThoughEffectImpl {
         Card card = game.getCard(source.getSourceId());
         return card != null
                 && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD
-                && source.getSourceObjectZoneChangeCounter() == card.getZoneChangeCounter(game);
+                && source.getStackMomentSourceZCC() == card.getZoneChangeCounter(game);
     }
 }

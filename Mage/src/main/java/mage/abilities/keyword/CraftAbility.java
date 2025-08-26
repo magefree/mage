@@ -169,7 +169,7 @@ class CraftEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Card card = game.getCard(source.getSourceId());
-        if (player == null || card == null || card.getZoneChangeCounter(game) != source.getSourceObjectZoneChangeCounter() + 1) {
+        if (player == null || card == null || card.getZoneChangeCounter(game) != source.getStackMomentSourceZCC() + 1) {
             return false;
         }
         game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);

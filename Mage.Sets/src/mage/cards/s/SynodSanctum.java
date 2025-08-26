@@ -83,7 +83,7 @@ class SynodSanctumEffect extends OneShotEffect {
             if (getTargetPointer().getFirst(game, source) != null) {
                 Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
                 if (permanent != null) {
-                    UUID exileZone = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+                    UUID exileZone = CardUtil.getExileZoneId(game, source.getSourceId(), source.getStackMomentSourceZCC());
                     if (exileZone != null) {
                         controller.moveCardToExileWithInfo(permanent, exileZone, sourceObject.getIdName(), source, game, Zone.BATTLEFIELD, true);
                     }
@@ -113,7 +113,7 @@ class SynodSanctumEffect2 extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+        UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getStackMomentSourceZCC());
         ExileZone exileZone = game.getExile().getExileZone(exileId);
         if (exileZone == null) {
             return true;

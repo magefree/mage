@@ -88,7 +88,7 @@ class MirrorOfLifeTrappingEffect extends OneShotEffect {
             return false;
         }
 
-        UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+        UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getStackMomentSourceZCC());
         ExileZone exileZone = game.getExile().getExileZone(exileZoneId);
 
         Cards toBattlefield = null;

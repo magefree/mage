@@ -72,7 +72,7 @@ class FuriousRiseEffect extends OneShotEffect {
             Card cardToExile = controller.getLibrary().getFromTop(game);
 
             UUID exileId = CardUtil.getCardExileZoneId(game, source);
-            controller.moveCardsToExile(cardToExile, source, game, true, exileId, mageObject.getIdName() + " (" + source.getSourceObjectZoneChangeCounter() + ")");
+            controller.moveCardsToExile(cardToExile, source, game, true, exileId, mageObject.getIdName() + " (" + source.getStackMomentSourceZCC() + ")");
             Card cardToPlay = game.getCard(cardToExile.getId());
 
             endPreviousEffect(game, source); // workaround for Furious Rise
@@ -90,7 +90,7 @@ class FuriousRiseEffect extends OneShotEffect {
             if (effect instanceof FuriousRisePlayEffect) {
                 for (Ability ability : game.getContinuousEffects().getAsThoughEffectsAbility(effect)) {
                     if (ability.getSourceId().equals(source.getSourceId())
-                            && source.getSourceObjectZoneChangeCounter() == ability.getSourceObjectZoneChangeCounter()) {
+                            && source.getStackMomentSourceZCC() == ability.getStackMomentSourceZCC()) {
                         effect.discard();
                         return true;
                     }

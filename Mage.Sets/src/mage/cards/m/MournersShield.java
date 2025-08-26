@@ -83,7 +83,7 @@ class MournersShieldImprintEffect extends OneShotEffect {
         if (controller != null) {
             Card card = game.getCard(this.getTargetPointer().getFirst(game, source));
             if (card != null) {
-                controller.moveCardsToExile(card, source, game, true, CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()), source.getSourceObject(game).getIdName());
+                controller.moveCardsToExile(card, source, game, true, CardUtil.getExileZoneId(game, source.getSourceId(), source.getStackMomentSourceZCC()), source.getSourceObject(game).getIdName());
                 Permanent sourcePermanent = game.getPermanent(source.getSourceId());
                 if (sourcePermanent != null) {
                     sourcePermanent.imprint(this.getTargetPointer().getFirst(game, source), game);

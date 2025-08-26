@@ -111,7 +111,7 @@ public class ExileTargetEffect extends OneShotEffect {
             }
             if (toSourceExileZone) {
                 MageObject sourceObject = source.getSourceObject(game);
-                exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+                exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getStackMomentSourceZCC());
                 if (sourceObject != null) {
                     exileZone = sourceObject.getIdName();
                 }

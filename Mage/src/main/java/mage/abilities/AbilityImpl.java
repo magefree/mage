@@ -1658,8 +1658,8 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public MageObject getSourceObjectIfItStillExists(Game game) {
-        if (getSourceObjectZoneChangeCounter() == 0
-                || getSourceObjectZoneChangeCounter() == getCurrentSourceObjectZoneChangeCounter(game)) {
+        if (getStackMomentSourceZCC() == 0
+                || getStackMomentSourceZCC() == getCurrentSourceObjectZoneChangeCounter(game)) {
             // exists or lki from battlefield
             return game.getObject(getSourceId());
         }
@@ -1688,7 +1688,7 @@ public abstract class AbilityImpl implements Ability {
     public Permanent getSourcePermanentOrLKI(Game game) {
         Permanent permanent = getSourcePermanentIfItStillExists(game);
         if (permanent == null) {
-            permanent = (Permanent) game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD, getSourceObjectZoneChangeCounter());
+            permanent = (Permanent) game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD, getStackMomentSourceZCC());
         }
         return permanent;
     }
@@ -1720,7 +1720,7 @@ public abstract class AbilityImpl implements Ability {
     }
 
     @Override
-    public int getSourceObjectZoneChangeCounter() {
+    public int getStackMomentSourceZCC() {
         return sourceObjectZoneChangeCounter;
     }
 
