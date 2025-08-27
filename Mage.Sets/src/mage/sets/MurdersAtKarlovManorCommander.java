@@ -311,6 +311,8 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Twilight Prophet", 143, Rarity.MYTHIC, mage.cards.t.TwilightProphet.class));
         cards.add(new SetCardInfo("Ugin's Mastery", 53, Rarity.RARE, mage.cards.u.UginsMastery.class));
         cards.add(new SetCardInfo("Ulvenwald Mysteries", 193, Rarity.UNCOMMON, mage.cards.u.UlvenwaldMysteries.class));
+        cards.add(new SetCardInfo("Unexplained Absence", 17, Rarity.RARE, mage.cards.u.UnexplainedAbsence.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Unexplained Absence", 328, Rarity.RARE, mage.cards.u.UnexplainedAbsence.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Unshakable Tail", 29, Rarity.RARE, mage.cards.u.UnshakableTail.class));
         cards.add(new SetCardInfo("Vengeful Ancestor", 163, Rarity.RARE, mage.cards.v.VengefulAncestor.class));
         cards.add(new SetCardInfo("Vizier of Many Faces", 123, Rarity.RARE, mage.cards.v.VizierOfManyFaces.class));
