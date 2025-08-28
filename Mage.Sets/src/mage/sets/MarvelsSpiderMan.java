@@ -42,6 +42,8 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Iron Spider, Stark Upgrade", 279, Rarity.RARE, mage.cards.i.IronSpiderStarkUpgrade.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 190, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Island", 195, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("J. Jonah Jameson", 261, Rarity.RARE, mage.cards.j.JJonahJameson.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("J. Jonah Jameson", 81, Rarity.RARE, mage.cards.j.JJonahJameson.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kapow!", 103, Rarity.COMMON, mage.cards.k.Kapow.class));
         cards.add(new SetCardInfo("Kraven's Cats", 104, Rarity.COMMON, mage.cards.k.KravensCats.class));
         cards.add(new SetCardInfo("Kraven's Last Hunt", 105, Rarity.RARE, mage.cards.k.KravensLastHunt.class, NON_FULL_USE_VARIOUS));
