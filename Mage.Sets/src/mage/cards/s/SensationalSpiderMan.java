@@ -95,7 +95,7 @@ class SensationalSpiderManEffect extends OneShotEffect {
         // TODO: this ideally would be able to prevent the player from choosing a number greater than the number of stun counters available to remove
         TargetPermanentAmount target = new TargetPermanentAmount(3, 0, filter);
         target.withNotTarget(true);
-        player.choose(outcome, target, source, game);
+        player.chooseTarget(outcome, target, source, game);
         int amountRemoved = target
                 .getTargets()
                 .stream()
