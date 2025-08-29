@@ -126,6 +126,7 @@ public final class OutlawsOfThunderJunctionCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Finale of Promise", 166, Rarity.MYTHIC, mage.cards.f.FinaleOfPromise.class));
         cards.add(new SetCardInfo("Finale of Revelation", 97, Rarity.MYTHIC, mage.cards.f.FinaleOfRevelation.class));
         cards.add(new SetCardInfo("Flooded Grove", 297, Rarity.RARE, mage.cards.f.FloodedGrove.class));
+        cards.add(new SetCardInfo("Forger's Foundry", 14, Rarity.RARE, mage.cards.f.ForgersFoundry.class));
         cards.add(new SetCardInfo("Frostboil Snarl", 298, Rarity.RARE, mage.cards.f.FrostboilSnarl.class));
         cards.add(new SetCardInfo("Galvanic Iteration", 227, Rarity.RARE, mage.cards.g.GalvanicIteration.class));
         cards.add(new SetCardInfo("Genesis Hydra", 193, Rarity.RARE, mage.cards.g.GenesisHydra.class));
