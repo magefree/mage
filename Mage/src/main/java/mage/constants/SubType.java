@@ -234,6 +234,7 @@ public enum SubType {
     ILLUSION("Illusion", SubTypeSet.CreatureType),
     IMP("Imp", SubTypeSet.CreatureType),
     INCARNATION("Incarnation", SubTypeSet.CreatureType),
+    INFINITY("Infinity", SubTypeSet.ArtifactType),
     INKLING("Inkling", SubTypeSet.CreatureType),
     INQUISITOR("Inquisitor", SubTypeSet.CreatureType),
     INSECT("Insect", SubTypeSet.CreatureType),
@@ -402,6 +403,7 @@ public enum SubType {
     SQUIRREL("Squirrel", SubTypeSet.CreatureType),
     STARFISH("Starfish", SubTypeSet.CreatureType),
     STARSHIP("Starship", SubTypeSet.CreatureType, true), // Star Wars
+    STONE("Stone", SubTypeSet.ArtifactType),
     SULLUSTAN("Sullustan", SubTypeSet.CreatureType, true), // Star Wars
     SURRAKAR("Surrakar", SubTypeSet.CreatureType),
     SURVIVOR("Survivor", SubTypeSet.CreatureType),
