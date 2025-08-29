@@ -155,4 +155,10 @@ public class PermanentToken extends PermanentImpl {
     public MageObject getOtherFace() {
         return this.transformed ? token : this.token.getBackFace();
     }
+
+    @Override
+    public PermanentToken saveImmutableCopy(Game game) {
+        return new ImmutablePermanentToken(this, game.getState().getMageObjectAttribute(getId()),
+                game.getState().getCardState(getId()));
+    }
 }

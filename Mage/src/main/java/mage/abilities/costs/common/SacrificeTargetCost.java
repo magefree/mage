@@ -78,7 +78,7 @@ public class SacrificeTargetCost extends CostImpl implements SacrificeCost {
      * For storing additional info upon selecting permanents to sacrifice
      */
     protected void addSacrificeTarget(Game game, Permanent permanent) {
-        permanents.add(permanent.copy());
+        permanents.add(permanent.saveImmutableCopy(game));
     }
 
     @Override
