@@ -2,7 +2,6 @@ package org.mage.test.cards.single.big;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -21,7 +20,6 @@ public class EsotericDuplicatorTest extends CardTestPlayerBase {
     private static final String esotericDuplicator = "Esoteric Duplicator";
 
     @Test
-    @Ignore("Sculpting steel doesn't retain copy on entering battlefield")
     public void testEsotericDuplicator() {
         setStrictChooseMode(true);
 
