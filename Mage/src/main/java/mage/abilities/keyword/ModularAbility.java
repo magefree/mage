@@ -47,6 +47,10 @@ public class ModularAbility extends DiesSourceTriggeredAbility {
     private final int amount;
     private final boolean sunburst;
 
+    public ModularAbility(int amount) {
+        this(null, amount);
+    }
+
     public ModularAbility(Card card, int amount) {
         this(card, amount, false);
     }
