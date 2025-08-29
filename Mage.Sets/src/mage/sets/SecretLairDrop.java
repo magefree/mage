@@ -1201,6 +1201,10 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Gaea's Blessing", 1303, Rarity.RARE, mage.cards.g.GaeasBlessing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Twilight Prophet", 1304, Rarity.MYTHIC, mage.cards.t.TwilightProphet.class));
         cards.add(new SetCardInfo("Worldspine Wurm", 1305, Rarity.MYTHIC, mage.cards.w.WorldspineWurm.class));
+        cards.add(new SetCardInfo("Pack Rat", 1307, Rarity.RARE, mage.cards.p.PackRat.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Shared Summons", 1308, Rarity.RARE, mage.cards.s.SharedSummons.class));
+        cards.add(new SetCardInfo("Sylvan Offering", 1309, Rarity.RARE, mage.cards.s.SylvanOffering.class));
+        cards.add(new SetCardInfo("Sliver Legion", 1310, Rarity.MYTHIC, mage.cards.s.SliverLegion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Goblin Lackey", 1311, Rarity.RARE, mage.cards.g.GoblinLackey.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Goblin Lackey", "1311*", Rarity.RARE, mage.cards.g.GoblinLackey.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Goblin Matron", 1312, Rarity.RARE, mage.cards.g.GoblinMatron.class, NON_FULL_USE_VARIOUS));
