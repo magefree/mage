@@ -63,7 +63,7 @@ sub generateCardInfo {
 
     my $cardAbilities = $card[8];
     my @abilities = split(/\$/, $cardAbilities);
-    my $abilitiesFormatted = join("\n ", @abilities);
+    my $abilitiesFormatted = join("\n    ", @abilities);
     $vars{'abilities'} = $abilitiesFormatted;
     if ($card[6]) {
         $vars{'powerToughness'} = "$card[6]/$card[7]"
@@ -151,7 +151,6 @@ my %vars;
 $vars{'className'} = toCamelCase($mainCardName);
 $vars{'classNameLower'} = lcfirst(toCamelCase($mainCardName));
 $vars{'cardNameFirstLetter'} = lc substr($mainCardName, 0, 1);
-my @card;
 
 foreach my $setName (keys %{$cards{$originalName}}) {
     $setCode = lc($sets{$setName});
@@ -181,7 +180,7 @@ my $allCardInfo = generateCardInfo($mainCardName, $infoTemplate);
 # Generate additional card info templates
 foreach my $additionalCard (@additionalCards) {
     my $additionalInfo = generateCardInfo($additionalCard, $infoTemplate);
-    if ($additionalInfo) {
+    if (defined $additionalInfo) {
         $allCardInfo .= "\n\n" . $additionalInfo;
     }
 }
