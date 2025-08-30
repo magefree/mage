@@ -27,7 +27,7 @@ import java.util.UUID;
 public final class SandmanShiftingScoundrel extends CardImpl {
 
     public SandmanShiftingScoundrel(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
 
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SAND);
