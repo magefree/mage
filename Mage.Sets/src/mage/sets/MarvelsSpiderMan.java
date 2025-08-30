@@ -25,7 +25,8 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Anti-Venom, Horrifying Healer", 244, Rarity.MYTHIC, mage.cards.a.AntiVenomHorrifyingHealer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aunt May", 3, Rarity.UNCOMMON, mage.cards.a.AuntMay.class));
         cards.add(new SetCardInfo("Beetle, Legacy Criminal", 26, Rarity.COMMON, mage.cards.b.BeetleLegacyCriminal.class));
-        cards.add(new SetCardInfo("Carnage, Crimson Chaos", 9999, Rarity.RARE, mage.cards.c.CarnageCrimsonChaos.class));
+        cards.add(new SetCardInfo("Carnage, Crimson Chaos", 125, Rarity.RARE, mage.cards.c.CarnageCrimsonChaos.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Carnage, Crimson Chaos", 227, Rarity.RARE, mage.cards.c.CarnageCrimsonChaos.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Daily Bugle Reporters", 6, Rarity.COMMON, mage.cards.d.DailyBugleReporters.class));
         cards.add(new SetCardInfo("Doc Ock's Henchmen", 30, Rarity.COMMON, mage.cards.d.DocOcksHenchmen.class));
         cards.add(new SetCardInfo("Doc Ock, Sinister Scientist", 29, Rarity.COMMON, mage.cards.d.DocOckSinisterScientist.class));
@@ -39,7 +40,7 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Green Goblin, Revenant", 130, Rarity.UNCOMMON, mage.cards.g.GreenGoblinRevenant.class));
         cards.add(new SetCardInfo("Grow Extra Arms", 101, Rarity.COMMON, mage.cards.g.GrowExtraArms.class));
         cards.add(new SetCardInfo("Guy in the Chair", 102, Rarity.COMMON, mage.cards.g.GuyInTheChair.class));
-        cards.add(new SetCardInfo("Gwenom, Remorseless", 9998, Rarity.MYTHIC, mage.cards.g.GwenomRemorseless.class));
+        cards.add(new SetCardInfo("Gwenom, Remorseless", 56, Rarity.MYTHIC, mage.cards.g.GwenomRemorseless.class));
         cards.add(new SetCardInfo("Iron Spider, Stark Upgrade", 166, Rarity.RARE, mage.cards.i.IronSpiderStarkUpgrade.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Iron Spider, Stark Upgrade", 279, Rarity.RARE, mage.cards.i.IronSpiderStarkUpgrade.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 190, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
