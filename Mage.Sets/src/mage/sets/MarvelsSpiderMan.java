@@ -79,6 +79,7 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Origin of Spider-Man", 218, Rarity.RARE, mage.cards.o.OriginOfSpiderMan.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Origin of Spider-Man", 9, Rarity.RARE, mage.cards.o.OriginOfSpiderMan.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Oscorp Research Team", 40, Rarity.COMMON, mage.cards.o.OscorpResearchTeam.class));
+        cards.add(new SetCardInfo("Pictures of Spider-Man", 109, Rarity.UNCOMMON, mage.cards.p.PicturesOfSpiderMan.class));
         cards.add(new SetCardInfo("Plains", 189, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 194, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Prowler, Clawed Thief", 138, Rarity.UNCOMMON, mage.cards.p.ProwlerClawedThief.class));
