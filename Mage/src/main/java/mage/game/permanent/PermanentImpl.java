@@ -261,6 +261,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
+    public boolean hasName(String name) {
+        return !faceDown && super.hasName(name);
+    }
+
+    @Override
     public String getValue(GameState state) {
         StringBuilder sb = threadLocalBuilder.get();
         sb.append(controllerId).append(getName()).append(tapped).append(damage);
