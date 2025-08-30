@@ -27,6 +27,7 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Beetle, Legacy Criminal", 26, Rarity.COMMON, mage.cards.b.BeetleLegacyCriminal.class));
         cards.add(new SetCardInfo("Carnage, Crimson Chaos", 125, Rarity.RARE, mage.cards.c.CarnageCrimsonChaos.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Carnage, Crimson Chaos", 227, Rarity.RARE, mage.cards.c.CarnageCrimsonChaos.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("City Pigeon", 4, Rarity.COMMON, mage.cards.c.CityPigeon.class));
         cards.add(new SetCardInfo("Daily Bugle Reporters", 6, Rarity.COMMON, mage.cards.d.DailyBugleReporters.class));
         cards.add(new SetCardInfo("Doc Ock's Henchmen", 30, Rarity.COMMON, mage.cards.d.DocOcksHenchmen.class));
         cards.add(new SetCardInfo("Doc Ock, Sinister Scientist", 29, Rarity.COMMON, mage.cards.d.DocOckSinisterScientist.class));
