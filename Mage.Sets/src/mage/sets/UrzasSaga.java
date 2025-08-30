@@ -352,7 +352,7 @@ public final class UrzasSaga extends ExpansionSet {
         cards.add(new SetCardInfo("Unworthy Dead", "163s", Rarity.COMMON, mage.cards.u.UnworthyDead.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Urza's Armor", 313, Rarity.UNCOMMON, mage.cards.u.UrzasArmor.class, RETRO_ART));
         cards.add(new SetCardInfo("Vampiric Embrace", 164, Rarity.UNCOMMON, mage.cards.v.VampiricEmbrace.class, RETRO_ART_USE_VARIOUS));
-        cards.add(new SetCardInfo("Vampiric Embrace", "164s", Rarity.UNCOMMON, mage.cards.v.VampiricEmbrace.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vampiric Embrace", "164s", Rarity.UNCOMMON, mage.cards.v.VampiricEmbrace.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Vebulid", 165, Rarity.RARE, mage.cards.v.Vebulid.class, RETRO_ART));
         cards.add(new SetCardInfo("Veil of Birds", 106, Rarity.COMMON, mage.cards.v.VeilOfBirds.class, RETRO_ART));
         cards.add(new SetCardInfo("Veiled Apparition", 107, Rarity.UNCOMMON, mage.cards.v.VeiledApparition.class, RETRO_ART));

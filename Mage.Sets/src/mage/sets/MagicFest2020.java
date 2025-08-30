@@ -23,7 +23,7 @@ public class MagicFest2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 6, Rarity.LAND, mage.cards.basiclands.Forest.class));
         cards.add(new SetCardInfo("Island", 3, Rarity.LAND, mage.cards.basiclands.Island.class));
         cards.add(new SetCardInfo("Mountain", 5, Rarity.LAND, mage.cards.basiclands.Mountain.class));
-        cards.add(new SetCardInfo("Path to Exile", 1, Rarity.RARE, mage.cards.p.PathToExile.class));
+        cards.add(new SetCardInfo("Path to Exile", 1, Rarity.RARE, mage.cards.p.PathToExile.class, FULL_ART));
         cards.add(new SetCardInfo("Plains", 2, Rarity.LAND, mage.cards.basiclands.Plains.class));
         cards.add(new SetCardInfo("Swamp", 4, Rarity.LAND, mage.cards.basiclands.Swamp.class));
      }
