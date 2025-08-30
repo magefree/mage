@@ -50,7 +50,7 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Grow Extra Arms", 101, Rarity.COMMON, mage.cards.g.GrowExtraArms.class));
         cards.add(new SetCardInfo("Guy in the Chair", 102, Rarity.COMMON, mage.cards.g.GuyInTheChair.class));
         cards.add(new SetCardInfo("Gwenom, Remorseless", 256, Rarity.MYTHIC, mage.cards.g.GwenomRemorseless.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Gwenom, Remorseless", 286, Rarity.COMMON, mage.cards.g.GwenomRemorseless.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Gwenom, Remorseless", 286, Rarity.MYTHIC, mage.cards.g.GwenomRemorseless.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gwenom, Remorseless", 56, Rarity.MYTHIC, mage.cards.g.GwenomRemorseless.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Iron Spider, Stark Upgrade", 166, Rarity.RARE, mage.cards.i.IronSpiderStarkUpgrade.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Iron Spider, Stark Upgrade", 279, Rarity.RARE, mage.cards.i.IronSpiderStarkUpgrade.class, NON_FULL_USE_VARIOUS));
