@@ -467,6 +467,7 @@ public class ScryfallImageSupportCards {
             // add("MD1"); // Modern Event Deck
             // add("DD3"); // Duel Decks Anthology
             // add("PZ1"); // Legendary Cube
+            add("PLG20"); // Love Your LGS 2020
             add("IKO"); // Ikoria: Lair of Behemoths
             add("C20"); // Commander 2020
             add("M21"); // Core Set 2021
@@ -516,11 +517,13 @@ public class ScryfallImageSupportCards {
             add("NCC"); // New Capenna Commander
             add("SLX"); // Universes Within
             add("CLB"); // Commander Legends: Battle for Baldur's Gate
+            add("PLG22"); // Love Your LGS 2022
             add("2X2"); // Double Masters 2022
             add("SCH"); // Store Championships
             add("DMU"); // Dominaria United
             add("DMC"); // Dominaria United Commander
             add("YDMU"); // Alchemy: Dominaria
+            add("PRCQ"); // Regional Championship Qualifiers 2022
             add("40K"); // Warhammer 40,000 Commander
             add("UNF"); // Unfinity
             add("GN3"); // Game Night: Free-for-All
@@ -548,9 +551,11 @@ public class ScryfallImageSupportCards {
             add("30A"); // 30th Anniversary Edition
             add("P30A"); // 30th Anniversary Play Promos
             add("P30M"); // 30th Anniversary Misc Promos
+            add("P30H"); // 30th Anniversary History Promos
             add("PEWK"); // Eternal Weekend
             add("LTR"); // The Lord of the Rings: Tales of Middle-Earth
             add("LTC"); // Tales of Middle-Earth Commander
+            add("PF23"); // MagicFest 2023
             add("CMM"); // Commander Masters
             add("WHO"); // Doctor Who
             add("WOE"); // Wilds of Eldraine
@@ -561,10 +566,13 @@ public class ScryfallImageSupportCards {
             add("REX"); // Jurassic World Collection
             add("SPG"); // Special Guests
             add("PW24"); // Wizards Play Network 2024
+            add("PF24"); // MagicFest 2024
             add("RVR"); // Ravnica Remastered
+            add("PL24"); // Year of the Dragon 2024
             add("PIP"); // Fallout
             add("MKM"); // Murders at Karlov Manor
             add("MKC"); // Murders at Karlov Manor Commander
+            add("PSS4"); // MKM Standard Showdown
             add("CLU"); // Ravnica: Clue Edition
             add("OTJ"); // Outlaws of Thunder Junction
             add("OTC"); // Outlaws of Thunder Junction Commander
@@ -576,6 +584,7 @@ public class ScryfallImageSupportCards {
             add("ACR"); // Assassin's Creed
             add("BLB"); // Bloomburrow
             add("BLC"); // Bloomburrow Commander
+            add("PLG24"); // Love Your LGS 2024
             add("PCBB"); // Cowboy Bebop
             add("MB2"); // Mystery Booster 2
             add("DSK"); // Duskmourn: House of Horror
@@ -587,6 +596,7 @@ public class ScryfallImageSupportCards {
             add("PSPL"); // Spotlight Series
             add("INR"); // Innistrad Remastered
             add("PF25"); // MagicFest 2025
+            add("PL25"); // Year of the Snake 2025
             add("DFT"); // Aetherdrift
             add("DRC"); // Aetherdrift Commander
             add("PLG25"); // Love Your LGS 2025
