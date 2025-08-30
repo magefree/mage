@@ -98,7 +98,7 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
         } else {
             Permanent equipment = game.getPermanent(source.getSourceId());
             if (equipment != null && equipment.getAttachedTo() != null) {
-                permanent = game.getPermanentOrLKIBattlefield(equipment.getAttachedTo());
+                permanent = game.getPermanent(equipment.getAttachedTo());
             } else {
                 permanent = null;
             }
