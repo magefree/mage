@@ -134,5 +134,6 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Web-Warriors", 203, Rarity.UNCOMMON, mage.cards.w.WebWarriors.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Whoosh!", 48, Rarity.COMMON, mage.cards.w.Whoosh.class));
         cards.add(new SetCardInfo("Wild Pack Squad", 23, Rarity.COMMON, mage.cards.w.WildPackSquad.class));
+        cards.add(new SetCardInfo("With Great Power...", 24, Rarity.RARE, mage.cards.w.WithGreatPower.class));
     }
 }
