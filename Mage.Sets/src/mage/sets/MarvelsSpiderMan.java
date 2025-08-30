@@ -106,6 +106,9 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Symbiote Spider-Man", 156, Rarity.RARE, mage.cards.s.SymbioteSpiderMan.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Symbiote Spider-Man", 217, Rarity.RARE, mage.cards.s.SymbioteSpiderMan.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Taxi Driver", 97, Rarity.COMMON, mage.cards.t.TaxiDriver.class));
+        cards.add(new SetCardInfo("The Soul Stone", 242, Rarity.MYTHIC, mage.cards.t.TheSoulStone.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Soul Stone", 243, Rarity.MYTHIC, mage.cards.t.TheSoulStone.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Soul Stone", 66, Rarity.MYTHIC, mage.cards.t.TheSoulStone.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thwip!", 20, Rarity.COMMON, mage.cards.t.Thwip.class));
         cards.add(new SetCardInfo("Tombstone, Career Criminal", 70, Rarity.UNCOMMON, mage.cards.t.TombstoneCareerCriminal.class));
         cards.add(new SetCardInfo("Ultimate Green Goblin", 157, Rarity.RARE, mage.cards.u.UltimateGreenGoblin.class));
