@@ -86,6 +86,7 @@ public enum MageIdentifier {
     UriangerAugureltAlternateCast,
     ValgavothTerrorEaterAlternateCast,
     LightstallInquisitorAlternateCast,
+    UndeadSprinterAlternateCast,
     GwenomRemorselessAlternateCast;
 
     /**
