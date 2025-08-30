@@ -8,15 +8,21 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.FilterPlayer;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.other.PlayerIdPredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.players.PlayerList;
-import mage.target.common.TargetOpponent;
+import mage.target.Target;
+import mage.target.TargetPlayer;
 import mage.util.CardUtil;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -74,28 +80,31 @@ class SharedFateReplacementEffect extends ReplacementEffectImpl {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         Player playerToDraw = game.getPlayer(event.getPlayerId());
         Player controller = game.getPlayer(source.getControllerId());
-        PlayerList playersInRange = game.getState().getPlayersInRange(source.getControllerId(), game);
+        PlayerList playersInControllerRange = game.getState().getPlayersInRange(source.getControllerId(), game);
+        // Check if the player currently drawing is in range of the source
         if (sourcePermanent == null || playerToDraw == null || controller == null
-                || !playersInRange.contains(playerToDraw.getId())) {
+                || !playersInControllerRange.contains(playerToDraw.getId())) {
             return false;
         }
 
-        TargetOpponent target = new TargetOpponent(true);
+
+        // Create opponent filter list manually because otherwise opponent check prevents controller of this to be valid
+        PlayerList playersInPlayerRange = game.getState().getPlayersInRange(playerToDraw.getId(), game);
+        FilterPlayer filter = new FilterPlayer("opponent");
+        List<PlayerIdPredicate> opponentPredicates = new ArrayList<>();
+        for (UUID opponentId : game.getOpponents(playerToDraw.getId())) {
+            if (playersInPlayerRange.contains(opponentId) && playersInControllerRange.contains(opponentId)) {
+                opponentPredicates.add(new PlayerIdPredicate(opponentId));
+            }
+        }
+        filter.add(Predicates.or(opponentPredicates));
+        Target target = new TargetPlayer(1, 1, true, filter);
         if (!playerToDraw.choose(Outcome.DrawCard, target, source, game)) {
             return false;
         }
 
         Player chosenPlayer = game.getPlayer(target.getFirstTarget());
         if (chosenPlayer == null) {
-            return false;
-        }
-
-        if (!playersInRange.contains(chosenPlayer.getId())) {
-            game.informPlayers(
-                    "Nothing exiled. " + playerToDraw.getLogName()
-                            + " chose to exile from " + chosenPlayer.getLogName() + "'s library. "
-                            + "That player is outside of " + controller.getLogName() + "'s range of influence."
-            );
             return false;
         }
 
