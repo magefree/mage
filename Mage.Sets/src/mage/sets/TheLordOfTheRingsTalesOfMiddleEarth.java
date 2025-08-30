@@ -27,7 +27,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Anduril, Flame of the West", 236, Rarity.MYTHIC, mage.cards.a.AndurilFlameOfTheWest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Anduril, Flame of the West", 375, Rarity.MYTHIC, mage.cards.a.AndurilFlameOfTheWest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Anduril, Flame of the West", 687, Rarity.MYTHIC, mage.cards.a.AndurilFlameOfTheWest.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Anduril, Flame of the West", 746, Rarity.MYTHIC, mage.cards.a.AndurilFlameOfTheWest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Anduril, Flame of the West", 746, Rarity.MYTHIC, mage.cards.a.AndurilFlameOfTheWest.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Anduril, Flame of the West", 786, Rarity.MYTHIC, mage.cards.a.AndurilFlameOfTheWest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aragorn and Arwen, Wed", 287, Rarity.MYTHIC, mage.cards.a.AragornAndArwenWed.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aragorn and Arwen, Wed", 394, Rarity.MYTHIC, mage.cards.a.AragornAndArwenWed.class, NON_FULL_USE_VARIOUS));
@@ -40,7 +40,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Aragorn, the Uniter", 317, Rarity.MYTHIC, mage.cards.a.AragornTheUniter.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aragorn, the Uniter", 434, Rarity.MYTHIC, mage.cards.a.AragornTheUniter.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aragorn, the Uniter", 643, Rarity.MYTHIC, mage.cards.a.AragornTheUniter.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Aragorn, the Uniter", 741, Rarity.MYTHIC, mage.cards.a.AragornTheUniter.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Aragorn, the Uniter", 741, Rarity.MYTHIC, mage.cards.a.AragornTheUniter.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Aragorn, the Uniter", 809, Rarity.MYTHIC, mage.cards.a.AragornTheUniter.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arwen Undomiel", 194, Rarity.UNCOMMON, mage.cards.a.ArwenUndomiel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arwen Undomiel", 645, Rarity.UNCOMMON, mage.cards.a.ArwenUndomiel.class, NON_FULL_USE_VARIOUS));
@@ -49,7 +49,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Arwen, Mortal Queen", 193, Rarity.MYTHIC, mage.cards.a.ArwenMortalQueen.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arwen, Mortal Queen", 367, Rarity.MYTHIC, mage.cards.a.ArwenMortalQueen.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arwen, Mortal Queen", 644, Rarity.MYTHIC, mage.cards.a.ArwenMortalQueen.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Arwen, Mortal Queen", 742, Rarity.MYTHIC, mage.cards.a.ArwenMortalQueen.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Arwen, Mortal Queen", 742, Rarity.MYTHIC, mage.cards.a.ArwenMortalQueen.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Arwen, Mortal Queen", 778, Rarity.MYTHIC, mage.cards.a.ArwenMortalQueen.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Assault on Osgiliath", 285, Rarity.RARE, mage.cards.a.AssaultOnOsgiliath.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Assault on Osgiliath", 386, Rarity.RARE, mage.cards.a.AssaultOnOsgiliath.class, NON_FULL_USE_VARIOUS));
@@ -121,7 +121,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Dawn of a New Age", 347, Rarity.MYTHIC, mage.cards.d.DawnOfANewAge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dawn of a New Age", 456, Rarity.MYTHIC, mage.cards.d.DawnOfANewAge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dawn of a New Age", 5, Rarity.MYTHIC, mage.cards.d.DawnOfANewAge.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Dawn of a New Age", 731, Rarity.MYTHIC, mage.cards.d.DawnOfANewAge.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Dawn of a New Age", 731, Rarity.MYTHIC, mage.cards.d.DawnOfANewAge.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Dawn of a New Age", 758, Rarity.MYTHIC, mage.cards.d.DawnOfANewAge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Deceive the Messenger", 47, Rarity.COMMON, mage.cards.d.DeceiveTheMessenger.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Deceive the Messenger", 498, Rarity.COMMON, mage.cards.d.DeceiveTheMessenger.class, NON_FULL_USE_VARIOUS));
@@ -287,7 +287,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Gandalf the White", 305, Rarity.MYTHIC, mage.cards.g.GandalfTheWhite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gandalf the White", 442, Rarity.MYTHIC, mage.cards.g.GandalfTheWhite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gandalf the White", 470, Rarity.MYTHIC, mage.cards.g.GandalfTheWhite.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Gandalf the White", 732, Rarity.MYTHIC, mage.cards.g.GandalfTheWhite.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Gandalf the White", 732, Rarity.MYTHIC, mage.cards.g.GandalfTheWhite.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Gandalf the White", 797, Rarity.MYTHIC, mage.cards.g.GandalfTheWhite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gandalf's Sanction", 208, Rarity.UNCOMMON, mage.cards.g.GandalfsSanction.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gandalf's Sanction", 659, Rarity.UNCOMMON, mage.cards.g.GandalfsSanction.class, NON_FULL_USE_VARIOUS));
@@ -318,7 +318,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Glamdring", 239, Rarity.MYTHIC, mage.cards.g.Glamdring.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Glamdring", 376, Rarity.MYTHIC, mage.cards.g.Glamdring.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Glamdring", 690, Rarity.MYTHIC, mage.cards.g.Glamdring.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Glamdring", 747, Rarity.MYTHIC, mage.cards.g.Glamdring.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Glamdring", 747, Rarity.MYTHIC, mage.cards.g.Glamdring.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Glamdring", 787, Rarity.MYTHIC, mage.cards.g.Glamdring.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gloin, Dwarf Emissary", 132, Rarity.RARE, mage.cards.g.GloinDwarfEmissary.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gloin, Dwarf Emissary", 360, Rarity.RARE, mage.cards.g.GloinDwarfEmissary.class, NON_FULL_USE_VARIOUS));
@@ -368,7 +368,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Hew the Entwood", 136, Rarity.MYTHIC, mage.cards.h.HewTheEntwood.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hew the Entwood", 361, Rarity.MYTHIC, mage.cards.h.HewTheEntwood.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hew the Entwood", 587, Rarity.MYTHIC, mage.cards.h.HewTheEntwood.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Hew the Entwood", 737, Rarity.MYTHIC, mage.cards.h.HewTheEntwood.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Hew the Entwood", 737, Rarity.MYTHIC, mage.cards.h.HewTheEntwood.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Hew the Entwood", 772, Rarity.MYTHIC, mage.cards.h.HewTheEntwood.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hithlain Knots", 505, Rarity.COMMON, mage.cards.h.HithlainKnots.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hithlain Knots", 54, Rarity.COMMON, mage.cards.h.HithlainKnots.class, NON_FULL_USE_VARIOUS));
@@ -420,7 +420,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Last March of the Ents", 172, Rarity.MYTHIC, mage.cards.l.LastMarchOfTheEnts.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Last March of the Ents", 418, Rarity.MYTHIC, mage.cards.l.LastMarchOfTheEnts.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Last March of the Ents", 623, Rarity.MYTHIC, mage.cards.l.LastMarchOfTheEnts.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Last March of the Ents", 739, Rarity.MYTHIC, mage.cards.l.LastMarchOfTheEnts.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Last March of the Ents", 739, Rarity.MYTHIC, mage.cards.l.LastMarchOfTheEnts.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Legolas, Counter of Kills", 212, Rarity.UNCOMMON, mage.cards.l.LegolasCounterOfKills.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Legolas, Counter of Kills", 324, Rarity.UNCOMMON, mage.cards.l.LegolasCounterOfKills.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Legolas, Counter of Kills", 663, Rarity.UNCOMMON, mage.cards.l.LegolasCounterOfKills.class, NON_FULL_USE_VARIOUS));
@@ -509,7 +509,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Mount Doom", 258, Rarity.MYTHIC, mage.cards.m.MountDoom.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mount Doom", 343, Rarity.MYTHIC, mage.cards.m.MountDoom.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mount Doom", 709, Rarity.MYTHIC, mage.cards.m.MountDoom.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Mount Doom", 750, Rarity.MYTHIC, mage.cards.m.MountDoom.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mount Doom", 750, Rarity.MYTHIC, mage.cards.m.MountDoom.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Mount Doom", 754, Rarity.MYTHIC, mage.cards.m.MountDoom.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 268, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 269, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
@@ -565,7 +565,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Palantir of Orthanc", 247, Rarity.MYTHIC, mage.cards.p.PalantirOfOrthanc.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Palantir of Orthanc", 381, Rarity.MYTHIC, mage.cards.p.PalantirOfOrthanc.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Palantir of Orthanc", 698, Rarity.MYTHIC, mage.cards.p.PalantirOfOrthanc.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Palantir of Orthanc", 749, Rarity.MYTHIC, mage.cards.p.PalantirOfOrthanc.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Palantir of Orthanc", 749, Rarity.MYTHIC, mage.cards.p.PalantirOfOrthanc.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Palantir of Orthanc", 792, Rarity.MYTHIC, mage.cards.p.PalantirOfOrthanc.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Pelargir Survivor", 515, Rarity.COMMON, mage.cards.p.PelargirSurvivor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Pelargir Survivor", 64, Rarity.COMMON, mage.cards.p.PelargirSurvivor.class, NON_FULL_USE_VARIOUS));
@@ -608,7 +608,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Radagast the Brown", 184, Rarity.MYTHIC, mage.cards.r.RadagastTheBrown.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Radagast the Brown", 365, Rarity.MYTHIC, mage.cards.r.RadagastTheBrown.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Radagast the Brown", 635, Rarity.MYTHIC, mage.cards.r.RadagastTheBrown.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Radagast the Brown", 740, Rarity.MYTHIC, mage.cards.r.RadagastTheBrown.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Radagast the Brown", 740, Rarity.MYTHIC, mage.cards.r.RadagastTheBrown.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Radagast the Brown", 776, Rarity.MYTHIC, mage.cards.r.RadagastTheBrown.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rally at the Hornburg", 142, Rarity.COMMON, mage.cards.r.RallyAtTheHornburg.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rally at the Hornburg", 593, Rarity.COMMON, mage.cards.r.RallyAtTheHornburg.class, NON_FULL_USE_VARIOUS));
@@ -664,7 +664,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Saruman of Many Colors", 328, Rarity.MYTHIC, mage.cards.s.SarumanOfManyColors.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Saruman of Many Colors", 412, Rarity.MYTHIC, mage.cards.s.SarumanOfManyColors.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Saruman of Many Colors", 674, Rarity.MYTHIC, mage.cards.s.SarumanOfManyColors.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Saruman of Many Colors", 743, Rarity.MYTHIC, mage.cards.s.SarumanOfManyColors.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Saruman of Many Colors", 743, Rarity.MYTHIC, mage.cards.s.SarumanOfManyColors.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Saruman of Many Colors", 820, Rarity.MYTHIC, mage.cards.s.SarumanOfManyColors.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Saruman the White", 518, Rarity.UNCOMMON, mage.cards.s.SarumanTheWhite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Saruman the White", 67, Rarity.UNCOMMON, mage.cards.s.SarumanTheWhite.class, NON_FULL_USE_VARIOUS));
@@ -678,7 +678,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Sauron, the Dark Lord", 301, Rarity.MYTHIC, mage.cards.s.SauronTheDarkLord.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sauron, the Dark Lord", 329, Rarity.MYTHIC, mage.cards.s.SauronTheDarkLord.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sauron, the Dark Lord", 675, Rarity.MYTHIC, mage.cards.s.SauronTheDarkLord.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Sauron, the Dark Lord", 744, Rarity.MYTHIC, mage.cards.s.SauronTheDarkLord.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sauron, the Dark Lord", 744, Rarity.MYTHIC, mage.cards.s.SauronTheDarkLord.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Sauron, the Dark Lord", 821, Rarity.MYTHIC, mage.cards.s.SauronTheDarkLord.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sauron, the Lidless Eye", 288, Rarity.MYTHIC, mage.cards.s.SauronTheLidlessEye.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sauron, the Lidless Eye", 396, Rarity.MYTHIC, mage.cards.s.SauronTheLidlessEye.class, NON_FULL_USE_VARIOUS));
@@ -695,7 +695,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Shadow of the Enemy", 107, Rarity.MYTHIC, mage.cards.s.ShadowOfTheEnemy.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shadow of the Enemy", 424, Rarity.MYTHIC, mage.cards.s.ShadowOfTheEnemy.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shadow of the Enemy", 558, Rarity.MYTHIC, mage.cards.s.ShadowOfTheEnemy.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Shadow of the Enemy", 735, Rarity.MYTHIC, mage.cards.s.ShadowOfTheEnemy.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Shadow of the Enemy", 735, Rarity.MYTHIC, mage.cards.s.ShadowOfTheEnemy.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Shadowfax, Lord of Horses", 227, Rarity.UNCOMMON, mage.cards.s.ShadowfaxLordOfHorses.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shadowfax, Lord of Horses", 678, Rarity.UNCOMMON, mage.cards.s.ShadowfaxLordOfHorses.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shagrat, Loot Bearer", 228, Rarity.RARE, mage.cards.s.ShagratLootBearer.class, NON_FULL_USE_VARIOUS));
@@ -740,7 +740,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Spiteful Banditry", 149, Rarity.MYTHIC, mage.cards.s.SpitefulBanditry.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Spiteful Banditry", 439, Rarity.MYTHIC, mage.cards.s.SpitefulBanditry.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Spiteful Banditry", 600, Rarity.MYTHIC, mage.cards.s.SpitefulBanditry.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Spiteful Banditry", 738, Rarity.MYTHIC, mage.cards.s.SpitefulBanditry.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Spiteful Banditry", 738, Rarity.MYTHIC, mage.cards.s.SpitefulBanditry.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Stalwarts of Osgiliath", 33, Rarity.COMMON, mage.cards.s.StalwartsOfOsgiliath.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stalwarts of Osgiliath", 484, Rarity.COMMON, mage.cards.s.StalwartsOfOsgiliath.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stern Scolding", 522, Rarity.UNCOMMON, mage.cards.s.SternScolding.class, NON_FULL_USE_VARIOUS));
@@ -755,7 +755,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Storm of Saruman", 413, Rarity.MYTHIC, mage.cards.s.StormOfSaruman.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Storm of Saruman", 523, Rarity.MYTHIC, mage.cards.s.StormOfSaruman.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Storm of Saruman", 72, Rarity.MYTHIC, mage.cards.s.StormOfSaruman.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Storm of Saruman", 733, Rarity.MYTHIC, mage.cards.s.StormOfSaruman.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Storm of Saruman", 733, Rarity.MYTHIC, mage.cards.s.StormOfSaruman.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Strider, Ranger of the North", 232, Rarity.UNCOMMON, mage.cards.s.StriderRangerOfTheNorth.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Strider, Ranger of the North", 683, Rarity.UNCOMMON, mage.cards.s.StriderRangerOfTheNorth.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Surrounded by Orcs", 524, Rarity.COMMON, mage.cards.s.SurroundedByOrcs.class, NON_FULL_USE_VARIOUS));
@@ -793,7 +793,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("The One Ring", 380, Rarity.MYTHIC, mage.cards.t.TheOneRing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The One Ring", 451, Rarity.MYTHIC, mage.cards.t.TheOneRing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The One Ring", 697, Rarity.MYTHIC, mage.cards.t.TheOneRing.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("The One Ring", 748, Rarity.MYTHIC, mage.cards.t.TheOneRing.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The One Ring", 748, Rarity.MYTHIC, mage.cards.t.TheOneRing.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("The One Ring", 791, Rarity.MYTHIC, mage.cards.t.TheOneRing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Ring Goes South", 186, Rarity.RARE, mage.cards.t.TheRingGoesSouth.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Ring Goes South", 366, Rarity.RARE, mage.cards.t.TheRingGoesSouth.class, NON_FULL_USE_VARIOUS));
@@ -807,7 +807,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("The Torment of Gollum", 561, Rarity.COMMON, mage.cards.t.TheTormentOfGollum.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Watcher in the Water", 354, Rarity.MYTHIC, mage.cards.t.TheWatcherInTheWater.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Watcher in the Water", 526, Rarity.MYTHIC, mage.cards.t.TheWatcherInTheWater.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("The Watcher in the Water", 734, Rarity.MYTHIC, mage.cards.t.TheWatcherInTheWater.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Watcher in the Water", 734, Rarity.MYTHIC, mage.cards.t.TheWatcherInTheWater.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("The Watcher in the Water", 75, Rarity.MYTHIC, mage.cards.t.TheWatcherInTheWater.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Watcher in the Water", 765, Rarity.MYTHIC, mage.cards.t.TheWatcherInTheWater.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Theoden, King of Rohan", 233, Rarity.UNCOMMON, mage.cards.t.TheodenKingOfRohan.class, NON_FULL_USE_VARIOUS));
@@ -817,7 +817,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Tom Bombadil", 234, Rarity.MYTHIC, mage.cards.t.TomBombadil.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tom Bombadil", 331, Rarity.MYTHIC, mage.cards.t.TomBombadil.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tom Bombadil", 685, Rarity.MYTHIC, mage.cards.t.TomBombadil.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Tom Bombadil", 745, Rarity.MYTHIC, mage.cards.t.TomBombadil.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Tom Bombadil", 745, Rarity.MYTHIC, mage.cards.t.TomBombadil.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Tom Bombadil", 823, Rarity.MYTHIC, mage.cards.t.TomBombadil.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Took Reaper", 35, Rarity.COMMON, mage.cards.t.TookReaper.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Took Reaper", 486, Rarity.COMMON, mage.cards.t.TookReaper.class, NON_FULL_USE_VARIOUS));
@@ -847,7 +847,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Witch-king of Angmar", 311, Rarity.MYTHIC, mage.cards.w.WitchKingOfAngmar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Witch-king of Angmar", 423, Rarity.MYTHIC, mage.cards.w.WitchKingOfAngmar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Witch-king of Angmar", 565, Rarity.MYTHIC, mage.cards.w.WitchKingOfAngmar.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Witch-king of Angmar", 736, Rarity.MYTHIC, mage.cards.w.WitchKingOfAngmar.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Witch-king of Angmar", 736, Rarity.MYTHIC, mage.cards.w.WitchKingOfAngmar.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Witch-king of Angmar", 803, Rarity.MYTHIC, mage.cards.w.WitchKingOfAngmar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Witch-king, Bringer of Ruin", 293, Rarity.RARE, mage.cards.w.WitchKingBringerOfRuin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Witch-king, Bringer of Ruin", 391, Rarity.RARE, mage.cards.w.WitchKingBringerOfRuin.class, NON_FULL_USE_VARIOUS));

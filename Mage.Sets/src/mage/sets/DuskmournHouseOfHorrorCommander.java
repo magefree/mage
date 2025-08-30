@@ -29,7 +29,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Arcane Sanctum", 259, Rarity.UNCOMMON, mage.cards.a.ArcaneSanctum.class));
         cards.add(new SetCardInfo("Arcane Signet", 92, Rarity.COMMON, mage.cards.a.ArcaneSignet.class));
         cards.add(new SetCardInfo("Archetype of Imagination", 111, Rarity.UNCOMMON, mage.cards.a.ArchetypeOfImagination.class));
-        cards.add(new SetCardInfo("Archon of Cruelty", 371, Rarity.MYTHIC, mage.cards.a.ArchonOfCruelty.class));
+        cards.add(new SetCardInfo("Archon of Cruelty", 371, Rarity.MYTHIC, mage.cards.a.ArchonOfCruelty.class, FULL_ART));
         cards.add(new SetCardInfo("Arixmethes, Slumbering Isle", 211, Rarity.RARE, mage.cards.a.ArixmethesSlumberingIsle.class));
         cards.add(new SetCardInfo("Arvinox, the Mind Flail", 130, Rarity.MYTHIC, mage.cards.a.ArvinoxTheMindFlail.class));
         cards.add(new SetCardInfo("Ash Barrens", 260, Rarity.COMMON, mage.cards.a.AshBarrens.class));
@@ -126,7 +126,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Gnarlwood Dryad", 180, Rarity.UNCOMMON, mage.cards.g.GnarlwoodDryad.class));
         cards.add(new SetCardInfo("Golgari Rot Farm", 279, Rarity.UNCOMMON, mage.cards.g.GolgariRotFarm.class));
         cards.add(new SetCardInfo("Golgari Signet", 246, Rarity.UNCOMMON, mage.cards.g.GolgariSignet.class));
-        cards.add(new SetCardInfo("Goryo's Vengeance", 372, Rarity.MYTHIC, mage.cards.g.GoryosVengeance.class));
+        cards.add(new SetCardInfo("Goryo's Vengeance", 372, Rarity.MYTHIC, mage.cards.g.GoryosVengeance.class, FULL_ART));
         cards.add(new SetCardInfo("Grapple with the Past", 82, Rarity.COMMON, mage.cards.g.GrappleWithThePast.class));
         cards.add(new SetCardInfo("Graven Cairns", 280, Rarity.RARE, mage.cards.g.GravenCairns.class));
         cards.add(new SetCardInfo("Gray Merchant of Asphodel", 142, Rarity.UNCOMMON, mage.cards.g.GrayMerchantOfAsphodel.class));
@@ -161,7 +161,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Life Insurance", 224, Rarity.RARE, mage.cards.l.LifeInsurance.class));
         cards.add(new SetCardInfo("Light Up the Stage", 166, Rarity.UNCOMMON, mage.cards.l.LightUpTheStage.class));
         cards.add(new SetCardInfo("Lightning Greaves", 93, Rarity.UNCOMMON, mage.cards.l.LightningGreaves.class));
-        cards.add(new SetCardInfo("Living Death", 373, Rarity.MYTHIC, mage.cards.l.LivingDeath.class));
+        cards.add(new SetCardInfo("Living Death", 373, Rarity.MYTHIC, mage.cards.l.LivingDeath.class, FULL_ART));
         cards.add(new SetCardInfo("Llanowar Wastes", 287, Rarity.RARE, mage.cards.l.LlanowarWastes.class));
         cards.add(new SetCardInfo("Mask of Griselbrand", 145, Rarity.RARE, mage.cards.m.MaskOfGriselbrand.class));
         cards.add(new SetCardInfo("Massacre Girl", 146, Rarity.RARE, mage.cards.m.MassacreGirl.class));
