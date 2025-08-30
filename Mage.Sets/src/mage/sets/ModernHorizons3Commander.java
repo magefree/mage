@@ -157,6 +157,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Hideous Taskmaster", 57, Rarity.RARE, mage.cards.h.HideousTaskmaster.class));
         cards.add(new SetCardInfo("Horizon of Progress", 78, Rarity.RARE, mage.cards.h.HorizonOfProgress.class));
         cards.add(new SetCardInfo("Hour of Promise", 232, Rarity.RARE, mage.cards.h.HourOfPromise.class));
+        cards.add(new SetCardInfo("Hourglass of the Lost", 40, Rarity.RARE, mage.cards.h.HourglassOfTheLost.class));
         cards.add(new SetCardInfo("Hydra Broodmaster", 233, Rarity.RARE, mage.cards.h.HydraBroodmaster.class));
         cards.add(new SetCardInfo("Hydroid Krasis", 266, Rarity.RARE, mage.cards.h.HydroidKrasis.class));
         cards.add(new SetCardInfo("Idol of Oblivion", 297, Rarity.UNCOMMON, mage.cards.i.IdolOfOblivion.class));
