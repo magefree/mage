@@ -697,32 +697,6 @@ public class VerifyCardDataTest {
 //                String code = MtgJsonService.xMageToMtgJsonCodes.getOrDefault(set.getCode(), set.getCode()) + " - " + jsonCard.getNameAsFull() + " - " + jsonCard.number;
 //                foundedJsonCards.add(code);
 //
-//                // CHECK: only lands can use full art in current version;
-//                // Another cards must be in text render mode as normal, example: https://scryfall.com/card/sld/76/athreos-god-of-passage
-//                // TODO: add support textless cards like https://scryfall.com/card/sch/12/thalia-and-the-gitrog-monster
-//                boolean isLand = card.getRarity().equals(Rarity.LAND);
-//                if (card.isFullArt() && !isLand) {
-//                    errorsList.add("Error: only lands can use full art setting: "
-//                            + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
-//                }
-//
-//                // CHECK: must use full art setting
-//                if (jsonCard.isFullArt && isLand && !card.isFullArt()) {
-//                    errorsList.add("Error: card must use full art setting: "
-//                            + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
-//                }
-//
-//                // CHECK: must not use full art setting
-//                if (!jsonCard.isFullArt && card.isFullArt()) {
-//                    errorsList.add("Error: card must NOT use full art setting: "
-//                            + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
-//                }
-
-                // CHECK: must use retro frame setting
-                if ((jsonCard.frameVersion.equals("1993") || jsonCard.frameVersion.equals("1997")) && !card.isRetroFrame()) {
-                    errorsList.add("Error: card must use retro art setting: "
-                            + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
-                }
             }
         }
 
@@ -760,6 +734,63 @@ public class VerifyCardDataTest {
         }
 
         printMessages(warningsList);
+        printMessages(errorsList);
+        if (errorsList.size() > 0) {
+            Assert.fail("Found wrong cards data in sets, errors: " + errorsList.size());
+        }
+    }
+
+    @Test
+    @Ignore
+    public void test_checkWrongFullArtAndRetro() {
+        Collection<String> errorsList = new ArrayList<>();
+        Collection<ExpansionSet> xmageSets = Sets.getInstance().values();
+
+        // CHECK: wrong card numbers
+        for (ExpansionSet set : xmageSets) {
+            if (skipListHaveName(SKIP_LIST_WRONG_CARD_NUMBERS, set.getCode())) {
+                continue;
+            }
+
+            for (ExpansionSet.SetCardInfo card : set.getSetCardInfo()) {
+                MtgJsonCard jsonCard = MtgJsonService.cardFromSet(set.getCode(), card.getName(), card.getCardNumber());
+                if (jsonCard == null) {
+                    continue;
+                }
+
+                // CHECK: poster promoType and/or textless must use full art setting
+                if (((jsonCard.promoTypes != null && jsonCard.promoTypes.contains("poster")) || jsonCard.isTextless) && !card.isFullArt()) {
+                    errorsList.add("Error: card must use full art setting: "
+                            + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
+                }
+
+               // CHECK: full art lands must use full art setting
+               boolean isLand = card.getRarity().equals(Rarity.LAND);
+               if (isLand && jsonCard.isFullArt && !card.isFullArt()) {
+                   errorsList.add("Error: card must use full art lands setting: "
+                           + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
+               }
+
+               // CHECK: non-full art lands must not use full art setting
+               if (isLand && !jsonCard.isFullArt && card.isFullArt()) {
+                   errorsList.add("Error: card must NOT use full art lands setting: "
+                           + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
+               }
+
+                // CHECK: must use retro frame setting
+                if ((jsonCard.frameVersion.equals("1993") || jsonCard.frameVersion.equals("1997")) && !card.isRetroFrame()) {
+                    errorsList.add("Error: card must use retro art setting: "
+                            + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
+                }
+                
+                // CHECK: must not use retro frame setting
+                if ((!(jsonCard.frameVersion.equals("1993") || jsonCard.frameVersion.equals("1997"))) && card.isRetroFrame()) {
+                    errorsList.add("Error: card must NOT use retro art setting: "
+                            + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
+                }
+            }
+        }
+
         printMessages(errorsList);
         if (errorsList.size() > 0) {
             Assert.fail("Found wrong cards data in sets, errors: " + errorsList.size());
