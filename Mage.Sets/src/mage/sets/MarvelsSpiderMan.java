@@ -109,6 +109,9 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Spider-Man Noir", 67, Rarity.UNCOMMON, mage.cards.s.SpiderManNoir.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Spider-Man, Brooklyn Visionary", 115, Rarity.COMMON, mage.cards.s.SpiderManBrooklynVisionary.class));
         cards.add(new SetCardInfo("Spider-Man, Web-Slinger", 16, Rarity.COMMON, mage.cards.s.SpiderManWebSlinger.class));
+        cards.add(new SetCardInfo("Spider-Punk", 207, Rarity.RARE, mage.cards.s.SpiderPunk.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Spider-Punk", 210, Rarity.RARE, mage.cards.s.SpiderPunk.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Spider-Punk", 92, Rarity.RARE, mage.cards.s.SpiderPunk.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Spider-Rex, Daring Dino", 116, Rarity.COMMON, mage.cards.s.SpiderRexDaringDino.class));
         cards.add(new SetCardInfo("Spider-Suit", 176, Rarity.UNCOMMON, mage.cards.s.SpiderSuit.class));
         cards.add(new SetCardInfo("Starling, Aerial Ally", 18, Rarity.COMMON, mage.cards.s.StarlingAerialAlly.class));
