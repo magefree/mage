@@ -46,6 +46,8 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Eddie Brock", 55, Rarity.MYTHIC, mage.cards.e.EddieBrock.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Eerie Gravestone", 163, Rarity.COMMON, mage.cards.e.EerieGravestone.class));
         cards.add(new SetCardInfo("Electro's Bolt", 77, Rarity.COMMON, mage.cards.e.ElectrosBolt.class));
+        cards.add(new SetCardInfo("Electro, Assaulting Battery", 260, Rarity.RARE, mage.cards.e.ElectroAssaultingBattery.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Electro, Assaulting Battery", 76, Rarity.RARE, mage.cards.e.ElectroAssaultingBattery.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Flying Octobot", 31, Rarity.UNCOMMON, mage.cards.f.FlyingOctobot.class));
         cards.add(new SetCardInfo("Forest", 193, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 198, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
