@@ -412,12 +412,12 @@ public abstract class GameImpl implements Game {
     }
 
     @Override
-    public Player getPlayerOrPlaneswalkerController(UUID playerId) {
-        Player player = getPlayer(playerId);
+    public Player getPlayerOrPlaneswalkerController(UUID targetId) {
+        Player player = getPlayer(targetId);
         if (player != null) {
             return player;
         }
-        Permanent permanent = getPermanent(playerId);
+        Permanent permanent = getPermanent(targetId);
         if (permanent == null) {
             return null;
         }
@@ -1841,6 +1841,7 @@ public abstract class GameImpl implements Game {
         boolean wasError = false;
         try {
             top = state.getStack().peek();
+            DataCollectorServices.getInstance().onTestsStackResolve(this);
             top.resolve(this);
             resetControlAfterSpellResolve(top.getId());
         } catch (Throwable e) {
@@ -2263,7 +2264,7 @@ public abstract class GameImpl implements Game {
             //
             // There are two possibility for the zcc:
             // 1/ the source is an Ability with a valid (not 0) zcc, and we must use the same.
-            int zcc = source.getSourceObjectZoneChangeCounter();
+            int zcc = source.getStackMomentSourceZCC();
             if (zcc == 0) {
                 // 2/ the source has not a valid zcc (it is most likely a StaticAbility instantiated at beginning of game)
                 //    we use the source objects's zcc
@@ -2819,7 +2820,7 @@ public abstract class GameImpl implements Game {
                     if (attachedTo != null) {
                         for (Ability ability : perm.getAbilities(this)) {
                             if (ability instanceof AttachableToRestrictedAbility) {
-                                if (!((AttachableToRestrictedAbility) ability).canEquip(attachedTo.getId(), null, this)) {
+                                if (!((AttachableToRestrictedAbility) ability).canEquip(attachedTo.getId(), this)) {
                                     attachedTo = null;
                                     break;
                                 }

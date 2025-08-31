@@ -147,7 +147,7 @@ class CyclopeanTombEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObjectReference mor = new MageObjectReference(source.getSourceId(), source.getSourceObjectZoneChangeCounter(), game);
+        MageObjectReference mor = new MageObjectReference(source.getSourceId(), source.getStackMomentSourceZCC(), game);
         CyclopeanTombCounterWatcher watcher = game.getState().getWatcher(CyclopeanTombCounterWatcher.class);
         if (controller != null && watcher != null) {
 

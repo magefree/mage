@@ -52,8 +52,7 @@ public final class YorionSkyNomad extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // When Yorion enters the battlefield, exile any number of other nonland permanents you own
-        // and control. Return those cards to the battlefield at the beginning of the next end step.
+        // When Yorion enters the battlefield, exile any number of other nonland permanents you own and control. Return those cards to the battlefield at the beginning of the next end step.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new OneShotNonTargetEffect(
                 new ExileReturnBattlefieldNextEndStepTargetEffect().setText(ruleText),
                 new TargetPermanent(0, Integer.MAX_VALUE, filter, true))));

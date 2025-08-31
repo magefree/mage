@@ -2,6 +2,7 @@ package mage.filter;
 
 import mage.abilities.Ability;
 import mage.cards.Card;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
@@ -29,7 +30,18 @@ public class FilterCard extends FilterObject<Card> {
     }
 
     public FilterCard(String name) {
+        this(null, name);
+    }
+
+    public FilterCard(SubType subType) {
+        this(subType, subType + " card");
+    }
+
+    public FilterCard(SubType subType, String name) {
         super(name);
+        if (subType != null) {
+            this.add(subType.getPredicate());
+        }
     }
 
     protected FilterCard(final FilterCard filter) {

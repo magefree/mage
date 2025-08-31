@@ -76,8 +76,8 @@ class ServantOfTheScaleEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
         if (sourcePermanent != null && controller != null
-                && (sourcePermanent.getZoneChangeCounter(game) == source.getSourceObjectZoneChangeCounter() // Token
-                || sourcePermanent.getZoneChangeCounter(game) + 1 == source.getSourceObjectZoneChangeCounter())) { // PermanentCard
+                && (sourcePermanent.getZoneChangeCounter(game) == source.getStackMomentSourceZCC() // Token
+                || sourcePermanent.getZoneChangeCounter(game) + 1 == source.getStackMomentSourceZCC())) { // PermanentCard
             int amount = sourcePermanent.getCounters(game).getCount(CounterType.P1P1);
             if (amount > 0) {
                 Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(amount));

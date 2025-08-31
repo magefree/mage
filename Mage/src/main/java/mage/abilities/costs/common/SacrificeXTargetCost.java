@@ -7,7 +7,11 @@ import mage.abilities.costs.VariableCostImpl;
 import mage.abilities.costs.VariableCostType;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.common.TargetSacrifice;
+
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -40,6 +44,26 @@ public class SacrificeXTargetCost extends VariableCostImpl implements SacrificeC
     }
 
     @Override
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
+        int canSacAmount = getValidSacAmount(source, controllerId, game);
+        return canSacAmount >= minValue;
+    }
+
+    private int getValidSacAmount(Ability source, UUID controllerId, Game game) {
+        Player controller = game.getPlayer(controllerId);
+        if (controller == null) {
+            return -1;
+        }
+        int canSacAmount = 0;
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, controllerId, game)) {
+            if (controller.canPaySacrificeCost(permanent, source, controllerId, game)) {
+                canSacAmount++;
+            }
+        }
+        return canSacAmount;
+    }
+
+    @Override
     public SacrificeXTargetCost copy() {
         return new SacrificeXTargetCost(this);
     }
@@ -51,7 +75,7 @@ public class SacrificeXTargetCost extends VariableCostImpl implements SacrificeC
 
     @Override
     public int getMaxValue(Ability source, Game game) {
-        return game.getBattlefield().count(filter, source.getControllerId(), source, game);
+        return getValidSacAmount(source, source.getControllerId(), game);
     }
 
     @Override

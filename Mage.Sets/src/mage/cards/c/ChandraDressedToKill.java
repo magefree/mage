@@ -97,7 +97,7 @@ class ChandraDressedToKillExile1Effect extends OneShotEffect {
         if (card == null) {
             return false;
         }
-        UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+        UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getStackMomentSourceZCC());
         MageObject sourceObject = source.getSourceObject(game);
         String exileName = sourceObject == null ? null : sourceObject.getIdName();
         controller.moveCardsToExile(card, source, game, true, exileId, exileName);
@@ -135,7 +135,7 @@ class ChandraDressedToKillExile5Effect extends OneShotEffect {
         if (cards.isEmpty()) {
             return false;
         }
-        UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+        UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getStackMomentSourceZCC());
         MageObject sourceObject = source.getSourceObject(game);
         String exileName = sourceObject == null ? null : sourceObject.getIdName();
         controller.moveCardsToExile(cards, source, game, true, exileId, exileName);

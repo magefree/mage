@@ -1,18 +1,19 @@
-
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.continuous.ExchangeControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -33,8 +34,8 @@ public final class Spawnbroker extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Spawnbroker enters the battlefield, you may exchange control of target creature you control and target creature with power less than or equal to that creature's power an opponent controls.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ExchangeControlTargetEffect(Duration.Custom, rule, false, true), true);
-        ability.addTarget(new TargetControlledCreatureWithPowerGreaterOrLessThanOpponentPermanent());
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ExchangeControlTargetEffect(Duration.EndOfGame, rule, false, true), true);
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_CREATURE));
         ability.addTarget(new SpawnbrokerSecondTarget());
         this.addAbility(ability);
 
@@ -50,89 +51,53 @@ public final class Spawnbroker extends CardImpl {
     }
 }
 
-class TargetControlledCreatureWithPowerGreaterOrLessThanOpponentPermanent extends TargetControlledPermanent {
-
-    public TargetControlledCreatureWithPowerGreaterOrLessThanOpponentPermanent() {
-        super();
-        this.filter = this.filter.copy();
-        filter.add(CardType.CREATURE.getPredicate());
-        withTargetName("creature you control");
-    }
-
-    private TargetControlledCreatureWithPowerGreaterOrLessThanOpponentPermanent(final TargetControlledCreatureWithPowerGreaterOrLessThanOpponentPermanent target) {
-        super(target);
-    }
-
-    @Override
-    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
-        Set<UUID> possibleTargets = new HashSet<>();
-        MageObject targetSource = game.getObject(source);
-        if (targetSource != null) {
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
-                if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, source, game)) {
-                    possibleTargets.add(permanent.getId());
-                }
-            }
-        }
-        return possibleTargets;
-    }
-
-    @Override
-    public TargetControlledCreatureWithPowerGreaterOrLessThanOpponentPermanent copy() {
-        return new TargetControlledCreatureWithPowerGreaterOrLessThanOpponentPermanent(this);
-    }
-}
-
 class SpawnbrokerSecondTarget extends TargetPermanent {
 
-    private Permanent firstTarget = null;
-
     public SpawnbrokerSecondTarget() {
-        super();
-        this.filter = this.filter.copy();
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-        filter.add(CardType.CREATURE.getPredicate());
+        super(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE);
         withTargetName("creature with power less than or equal to that creature's power an opponent controls");
     }
 
     private SpawnbrokerSecondTarget(final SpawnbrokerSecondTarget target) {
         super(target);
-        this.firstTarget = target.firstTarget;
     }
 
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
-        if (super.canTarget(id, source, game)) {
-            Permanent target1 = game.getPermanent(source.getFirstTarget());
-            Permanent opponentPermanent = game.getPermanent(id);
-            if (target1 != null && opponentPermanent != null) {
-                return target1.getPower().getValue() >= opponentPermanent.getPower().getValue();
-            }
+        Permanent ownPermanent = game.getPermanent(source.getFirstTarget());
+        Permanent possiblePermanent = game.getPermanent(id);
+        if (ownPermanent == null || possiblePermanent == null) {
+            return false;
         }
-        return false;
+        return super.canTarget(id, source, game) && ownPermanent.getPower().getValue() >= possiblePermanent.getPower().getValue();
     }
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
-        if (firstTarget != null) {
-            MageObject targetSource = game.getObject(source);
-            if (targetSource != null) {
-                for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
-                    if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, source, game)) {
-                        if (firstTarget.getPower().getValue() >= permanent.getPower().getValue()) {
-                            possibleTargets.add(permanent.getId());
-                        }
-                    }
+
+        Permanent ownPermanent = game.getPermanent(source.getFirstTarget());
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
+            if (ownPermanent == null) {
+                // playable or first target not yet selected
+                // use all
+                possibleTargets.add(permanent.getId());
+            } else {
+                // real
+                // filter by power
+                if (ownPermanent.getPower().getValue() >= permanent.getPower().getValue()) {
+                    possibleTargets.add(permanent.getId());
                 }
             }
         }
-        return possibleTargets;
+        possibleTargets.removeIf(id -> ownPermanent != null && ownPermanent.getId().equals(id));
+
+        return keepValidPossibleTargets(possibleTargets, sourceControllerId, source, game);
     }
 
     @Override
     public boolean chooseTarget(Outcome outcome, UUID playerId, Ability source, Game game) {
-        firstTarget = game.getPermanent(source.getFirstTarget());
+        // AI hint with better outcome
         return super.chooseTarget(Outcome.GainControl, playerId, source, game);
     }
 

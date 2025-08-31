@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
+import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -12,12 +13,20 @@ import mage.game.permanent.Permanent;
  */
 public class PutSourceCountersOnTargetEffect extends OneShotEffect {
 
+    private final CounterType counterType;
+
     public PutSourceCountersOnTargetEffect() {
+        this((CounterType) null);
+    }
+
+    public PutSourceCountersOnTargetEffect(CounterType counterType) {
         super(Outcome.Benefit);
+        this.counterType = counterType;
     }
 
     private PutSourceCountersOnTargetEffect(final PutSourceCountersOnTargetEffect effect) {
         super(effect);
+        this.counterType = effect.counterType;
     }
 
     @Override
@@ -32,6 +41,10 @@ public class PutSourceCountersOnTargetEffect extends OneShotEffect {
         if (sourcePermanent == null || permanent == null) {
             return false;
         }
+        if (counterType != null) {
+            int count = sourcePermanent.getCounters(game).getCount(counterType);
+            return count > 0 && permanent.addCounters(counterType.createInstance(count), source, game);
+        }
         sourcePermanent
                 .getCounters(game)
                 .values()
@@ -45,6 +58,7 @@ public class PutSourceCountersOnTargetEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return "put its counters on " + getTargetPointer().describeTargets(mode.getTargets(), "that creature");
+        return "put its" + (counterType != null ? " " + counterType : "") + " counters on " +
+                getTargetPointer().describeTargets(mode.getTargets(), "that creature");
     }
 }

@@ -170,6 +170,7 @@ public final class EdgeOfEternitiesStellarSights extends ExpansionSet {
         cards.add(new SetCardInfo("Shambling Vent", 38, Rarity.RARE, mage.cards.s.ShamblingVent.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shambling Vent", 83, Rarity.RARE, mage.cards.s.ShamblingVent.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shambling Vent", 128, Rarity.RARE, mage.cards.s.ShamblingVent.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Shambling Vent", 173, Rarity.RARE, mage.cards.s.ShamblingVent.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stirring Wildwood", 39, Rarity.RARE, mage.cards.s.StirringWildwood.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stirring Wildwood", 84, Rarity.RARE, mage.cards.s.StirringWildwood.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stirring Wildwood", 129, Rarity.RARE, mage.cards.s.StirringWildwood.class, NON_FULL_USE_VARIOUS));
@@ -177,7 +178,6 @@ public final class EdgeOfEternitiesStellarSights extends ExpansionSet {
         cards.add(new SetCardInfo("Strip Mine", 40, Rarity.MYTHIC, mage.cards.s.StripMine.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Strip Mine", 85, Rarity.MYTHIC, mage.cards.s.StripMine.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Strip Mine", 130, Rarity.MYTHIC, mage.cards.s.StripMine.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Strip Mine", 173, Rarity.MYTHIC, mage.cards.s.StripMine.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Strip Mine", 175, Rarity.MYTHIC, mage.cards.s.StripMine.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sunken Citadel", 41, Rarity.RARE, mage.cards.s.SunkenCitadel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sunken Citadel", 86, Rarity.RARE, mage.cards.s.SunkenCitadel.class, NON_FULL_USE_VARIOUS));

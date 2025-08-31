@@ -59,7 +59,7 @@ enum BlazingEffigyCount implements DynamicValue {
         if (watcher == null) {
             return 3;
         }
-        int effigyDamage = watcher.damageDoneTo(sourceAbility.getSourceId(), sourceAbility.getSourceObjectZoneChangeCounter() - 1, game);
+        int effigyDamage = watcher.damageDoneTo(sourceAbility.getSourceId(), sourceAbility.getStackMomentSourceZCC() - 1, game);
         return CardUtil.overflowInc(3, effigyDamage);
     }
 

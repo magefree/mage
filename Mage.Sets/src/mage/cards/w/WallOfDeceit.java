@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -70,7 +69,7 @@ class WallOfDeceitEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (sourcePermanent != null
-                && source.getSourceObjectZoneChangeCounter() == sourcePermanent.getZoneChangeCounter(game) // in case source was blinked after ability was set to stack
+                && source.getStackMomentSourceZCC() == sourcePermanent.getZoneChangeCounter(game) // in case source was blinked after ability was set to stack
                 && !sourcePermanent.isFaceDown(game)) {
             sourcePermanent.setFaceDown(true, game);
         }

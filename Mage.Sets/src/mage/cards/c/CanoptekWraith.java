@@ -12,13 +12,10 @@ import mage.abilities.keyword.CantBeBlockedSourceAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterBasicLandCard;
+import mage.filter.common.FilterLandCard;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -101,7 +98,8 @@ class CanoptekWraithEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        FilterCard filter = new FilterBasicLandCard("basic land cards with the same name as the chosen land");
+        FilterCard filter = new FilterLandCard("basic land cards with the same name as the chosen land");
+        filter.add(SuperType.BASIC.getPredicate());
         filter.add(new CanoptekWraithPredicate(permanent));
         TargetCardInLibrary targetCard = new TargetCardInLibrary(0, 2, filter);
         player.searchLibrary(targetCard, source, game);

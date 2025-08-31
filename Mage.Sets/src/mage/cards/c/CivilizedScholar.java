@@ -1,23 +1,23 @@
 package mage.cards.c;
 
-import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.SubType;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.Optional;
+import java.util.UUID;
 
 /**
  * @author nantuko
@@ -35,8 +35,10 @@ public final class CivilizedScholar extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: Draw a card, then discard a card. If a creature card is discarded this way, untap Civilized Scholar, then transform it.
-        this.addAbility(new SimpleActivatedAbility(new CivilizedScholarEffect(), new TapSourceCost()));
+        Ability ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new TapSourceCost());
+        ability.addEffect(new CivilizedScholarEffect());
         this.addAbility(new TransformAbility());
+        this.addAbility(ability);
     }
 
     private CivilizedScholar(final CivilizedScholar card) {
@@ -50,12 +52,11 @@ public final class CivilizedScholar extends CardImpl {
 }
 
 
-
 class CivilizedScholarEffect extends OneShotEffect {
 
     CivilizedScholarEffect() {
         super(Outcome.DrawCard);
-        staticText = "Draw a card, then discard a card. If a creature card is discarded this way, untap {this}, then transform it";
+        staticText = ", then discard a card. If a creature card is discarded this way, untap {this}, then transform it";
     }
 
     private CivilizedScholarEffect(final CivilizedScholarEffect effect) {
@@ -70,18 +71,18 @@ class CivilizedScholarEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            player.drawCards(1, source, game);
-            Card card = player.discardOne(false, false, source, game);
-            if (card != null && card.isCreature(game)) {
-                Permanent permanent = game.getPermanent(source.getSourceId());
-                if (permanent != null) {
-                    permanent.untap(game);
-                    permanent.transform(source, game);
-                }
-            }
+        if (player == null) {
+            return false;
+        }
+        Card card = player.discardOne(false, false, source, game);
+        if (card == null || !card.isCreature(game)) {
             return true;
         }
-        return false;
+        Optional.ofNullable(source.getSourcePermanentIfItStillExists(game))
+                .ifPresent(permanent -> {
+                    permanent.untap(game);
+                    permanent.transform(source, game);
+                });
+        return true;
     }
 }

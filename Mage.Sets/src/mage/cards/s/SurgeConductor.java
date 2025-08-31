@@ -24,7 +24,7 @@ public final class SurgeConductor extends CardImpl {
 
     static {
         filter.add(AnotherPredicate.instance);
-        filter.add(TokenPredicate.TRUE);
+        filter.add(TokenPredicate.FALSE);
     }
 
     public SurgeConductor(UUID ownerId, CardSetInfo setInfo) {

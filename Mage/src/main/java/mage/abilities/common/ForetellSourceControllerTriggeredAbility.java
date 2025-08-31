@@ -7,6 +7,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
+import mage.watchers.common.ForetoldWatcher;
 
 /**
  * @author jeffwadsworth
@@ -16,6 +17,7 @@ public class ForetellSourceControllerTriggeredAbility extends TriggeredAbilityIm
     public ForetellSourceControllerTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
         setTriggerPhrase("Whenever you foretell a card, ");
+        addWatcher(new ForetoldWatcher());
     }
 
     protected ForetellSourceControllerTriggeredAbility(final ForetellSourceControllerTriggeredAbility ability) {
@@ -24,16 +26,14 @@ public class ForetellSourceControllerTriggeredAbility extends TriggeredAbilityIm
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.FORETELL;
+        return event.getType() == GameEvent.EventType.CARD_FORETOLD;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Card card = game.getCard(event.getTargetId());
         Player player = game.getPlayer(event.getPlayerId());
-        return (card != null
-                && player != null
-                && isControlledBy(player.getId()));
+        return event.getFlag() && card != null && player != null && isControlledBy(player.getId());
     }
 
     @Override

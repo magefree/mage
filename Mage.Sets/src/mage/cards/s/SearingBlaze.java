@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -11,19 +10,16 @@ import mage.constants.Outcome;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 import mage.watchers.common.LandfallWatcher;
 
-import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
 /**
- * @author BetaSteward_at_googlemail.com
- * @author North
+ * @author BetaSteward_at_googlemail.com, North
  */
 public final class SearingBlaze extends CardImpl {
 
@@ -111,21 +107,21 @@ class SearingBlazeTarget extends TargetPermanent {
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
-        Set<UUID> availablePossibleTargets = super.possibleTargets(sourceControllerId, source, game);
-        Set<UUID> possibleTargets = new HashSet<>();
-        MageObject object = game.getObject(source);
-        if (object instanceof StackObject) {
-            UUID playerId = ((StackObject) object).getStackAbility().getFirstTarget();
-            Player player = game.getPlayerOrPlaneswalkerController(playerId);
-            if (player != null) {
-                for (UUID targetId : availablePossibleTargets) {
-                    Permanent permanent = game.getPermanent(targetId);
-                    if (permanent != null && permanent.isControlledBy(player.getId())) {
-                        possibleTargets.add(targetId);
-                    }
-                }
-            }
+        Set<UUID> possibleTargets = super.possibleTargets(sourceControllerId, source, game);
+
+        Player needPlayer = game.getPlayerOrPlaneswalkerController(source.getFirstTarget());
+        if (needPlayer == null) {
+            // playable or not selected - use any
+        } else {
+            // filter by controller
+            possibleTargets.removeIf(id -> {
+                Permanent permanent = game.getPermanent(id);
+                return permanent == null
+                        || permanent.getId().equals(source.getFirstTarget())
+                        || !permanent.isControlledBy(needPlayer.getId());
+            });
         }
+
         return possibleTargets;
     }
 

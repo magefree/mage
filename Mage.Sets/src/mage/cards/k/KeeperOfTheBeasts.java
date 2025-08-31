@@ -1,7 +1,6 @@
 package mage.cards.k;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -15,10 +14,8 @@ import mage.filter.FilterOpponent;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.token.BeastToken4;
-import mage.players.Player;
 import mage.target.TargetPlayer;
 
-import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -35,7 +32,7 @@ public final class KeeperOfTheBeasts extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
-        // {G}, {tap}: Choose target opponent who controlled more creatures than you did as you activated this ability. Put a 2/2 green Beast creature token onto the battlefield.
+        // {G}, {T}: Choose target opponent who controlled more creatures than you did as you activated this ability. Put a 2/2 green Beast creature token onto the battlefield.
         Ability ability = new SimpleActivatedAbility(new CreateTokenEffect(new BeastToken4()).setText("Choose target opponent who controlled more creatures than you did as you activated this ability. Create a 2/2 green Beast creature token."),
                 new ManaCostsImpl<>("{G}"));
         ability.addCost(new TapSourceCost());
@@ -65,40 +62,10 @@ class KeeperOfTheBeastsTarget extends TargetPlayer {
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
-        Set<UUID> availablePossibleTargets = super.possibleTargets(sourceControllerId, source, game);
-        Set<UUID> possibleTargets = new HashSet<>();
-        int creaturesController = game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, sourceControllerId, game);
-
-        for (UUID targetId : availablePossibleTargets) {
-            if (game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, targetId, game) > creaturesController) {
-                possibleTargets.add(targetId);
-            }
-        }
+        Set<UUID> possibleTargets = super.possibleTargets(sourceControllerId, source, game);
+        int myCount = game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, sourceControllerId, game);
+        possibleTargets.removeIf(playerId -> game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, playerId, game) < myCount);
         return possibleTargets;
-    }
-
-    @Override
-    public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
-        int count = 0;
-        MageObject targetSource = game.getObject(source);
-        Player controller = game.getPlayer(sourceControllerId);
-        if (controller != null && targetSource != null) {
-            for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
-                Player player = game.getPlayer(playerId);
-                if (player != null
-                        && game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, sourceControllerId, game)
-                        < game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, playerId, game)
-                        && !player.hasLeft()
-                        && filter.match(player, sourceControllerId, source, game)
-                        && player.canBeTargetedBy(targetSource, sourceControllerId, source, game)) {
-                    count++;
-                    if (count >= this.minNumberOfTargets) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
     }
 
     @Override

@@ -1,8 +1,6 @@
-
 package mage.cards.k;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -12,13 +10,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.FilterOpponent;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 
-import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -67,43 +63,19 @@ class KeeperOfTheLightTarget extends TargetPlayer {
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
-        Set<UUID> availablePossibleTargets = super.possibleTargets(sourceControllerId, source, game);
-        Set<UUID> possibleTargets = new HashSet<>();
-        int lifeController = game.getPlayer(sourceControllerId).getLife();
+        Set<UUID> possibleTargets = super.possibleTargets(sourceControllerId, source, game);
 
-        for (UUID targetId : availablePossibleTargets) {
-            Player opponent = game.getPlayer(targetId);
-            if (opponent != null) {
-                int lifeOpponent = opponent.getLife();
-                if (lifeOpponent > lifeController) {
-                    possibleTargets.add(targetId);
-                }
-            }
-        }
-        return possibleTargets;
-    }
-
-    @Override
-    public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
-        int count = 0;
-        MageObject targetSource = game.getObject(source);
         Player controller = game.getPlayer(sourceControllerId);
-        if (controller != null && targetSource != null) {
-            for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
-                Player player = game.getPlayer(playerId);
-                if (player != null
-                        && controller.getLife() < player.getLife()
-                        && !player.hasLeft()
-                        && filter.match(player, sourceControllerId, source, game)
-                        && player.canBeTargetedBy(targetSource, sourceControllerId, source, game)) {
-                    count++;
-                    if (count >= this.minNumberOfTargets) {
-                        return true;
-                    }
-                }
-            }
+        if (controller == null) {
+            return possibleTargets;
         }
-        return false;
+
+        possibleTargets.removeIf(playerId -> {
+            Player player = game.getPlayer(playerId);
+            return player == null || player.getLife() >= controller.getLife();
+        });
+
+        return possibleTargets;
     }
 
     @Override

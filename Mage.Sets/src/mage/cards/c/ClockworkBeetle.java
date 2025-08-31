@@ -66,7 +66,7 @@ class ClockworkBeetleEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
             Effect effect = new RemoveCounterTargetEffect(CounterType.P1P1.createInstance());
-            effect.setTargetPointer(new FixedTarget(source.getSourceId(), source.getSourceObjectZoneChangeCounter()));
+            effect.setTargetPointer(new FixedTarget(source.getSourceId(), source.getStackMomentSourceZCC()));
             game.addDelayedTriggeredAbility(new AtTheEndOfCombatDelayedTriggeredAbility(effect), source);
             return true;
         }

@@ -2,6 +2,7 @@ package mage.collectors;
 
 import mage.game.Game;
 import mage.game.Table;
+import mage.players.Player;
 
 import java.util.UUID;
 
@@ -11,10 +12,12 @@ import java.util.UUID;
  * Supported features:
  * - [x] collect and print game logs in server output, including unit tests
  * - [x] collect and save full games history and decks
- * - [ ] collect and print performance metrics like ApplyEffects calc time or inform players time (pings)
- * - [ ] collect and send metrics to third party tools like prometheus + grafana
- * - [ ] prepare "attachable" game data for bug reports
- * - [ ] record game replays data (GameView history)
+ * - [ ] TODO: collect and print performance metrics like ApplyEffects calc time or inform players time (pings)
+ * - [ ] TODO: collect and send metrics to third party tools like prometheus + grafana
+ * - [x] tests: print used selections (choices, targets, modes, skips) TODO: add yes/no, replacement effect, coins, other choices
+ * - [ ] TODO: tests: print additional info like current resolve ability?
+ * - [ ] TODO: prepare "attachable" game data for bug reports
+ * - [ ] TODO: record game replays data (GameView history)
  * <p>
  * How-to enable or disable:
  * - use java params like -Dxmage.dataCollectors.saveGameHistory=true
@@ -62,7 +65,27 @@ public interface DataCollector {
     void onChatTable(UUID tableId, String userName, String message);
 
     /**
-     * @param gameId chat sessings don't have full game access, so use onGameStart event to find game's ID before chat
+     * @param gameId chat session don't have full game access, so use onGameStart event to find game's ID before chat
      */
     void onChatGame(UUID gameId, String userName, String message);
+
+    /**
+     * Tests only: on any non-target choice like yes/no, mode, etc
+     */
+    void onTestsChoiceUse(Game game, Player player, String usingChoice, String reason);
+
+    /**
+     * Tests only: on any target choice
+     */
+    void onTestsTargetUse(Game game, Player player, String usingTarget, String reason);
+
+    /**
+     * Tests only: on push object to stack (calls before activate and make any choice/announce)
+     */
+    void onTestsStackPush(Game game);
+
+    /**
+     * Tests only: on stack object resolve (calls before starting resolve)
+     */
+    void onTestsStackResolve(Game game);
 }

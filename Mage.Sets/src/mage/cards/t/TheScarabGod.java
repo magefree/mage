@@ -127,7 +127,7 @@ class TheScarabGodEffectDieEffect extends OneShotEffect {
         // Create delayed triggered ability
         Effect effect = new ReturnToHandTargetEffect();
         effect.setText("return {this} to its owner's hand");
-        effect.setTargetPointer(new FixedTarget(source.getSourceId(), source.getSourceObjectZoneChangeCounter()));
+        effect.setTargetPointer(new FixedTarget(source.getSourceId(), source.getStackMomentSourceZCC()));
         DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
         game.addDelayedTriggeredAbility(delayedAbility, source);
         return true;

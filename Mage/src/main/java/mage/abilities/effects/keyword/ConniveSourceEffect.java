@@ -85,13 +85,9 @@ public class ConniveSourceEffect extends OneShotEffect {
      * @return
      */
     public static boolean connive(Permanent permanent, int amount, Ability source, Game game) {
-        if (amount < 1) {
+        if (permanent == null || amount < 1) {
             return false;
         }
-        if (permanent == null) {
-            return false;
-        }
-
         boolean permanentStillOnBattlefield = game.getState().getZone(permanent.getId()) == Zone.BATTLEFIELD;
         Player player = game.getPlayer(permanent.getControllerId());
         if (player == null) {

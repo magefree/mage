@@ -1,7 +1,9 @@
 package mage.collectors.services;
 
 import mage.game.Game;
+import mage.players.Player;
 import mage.util.CardUtil;
+import mage.util.ConsoleUtil;
 import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 
@@ -40,9 +42,47 @@ public class PrintGameLogsDataCollector extends EmptyDataCollector {
     @Override
     public void onGameLog(Game game, String message) {
         String needMessage = Jsoup.parse(message).text();
-        writeLog("GAME", "LOG", String.format("%s: %s",
+        writeLog("LOG", "GAME", String.format("%s: %s",
                 CardUtil.getTurnInfo(game),
                 needMessage
+        ));
+    }
+
+    @Override
+    public void onTestsChoiceUse(Game game, Player player, String choice, String reason) {
+        String needReason = Jsoup.parse(reason).text();
+        writeLog("LOG", "GAME", ConsoleUtil.asYellow(String.format("%s: %s using choice: %s%s",
+                CardUtil.getTurnInfo(game),
+                player.getName(),
+                choice,
+                reason.isEmpty() ? "" : " (" + needReason + ")"
+        )));
+    }
+
+    @Override
+    public void onTestsTargetUse(Game game, Player player, String target, String reason) {
+        String needReason = Jsoup.parse(reason).text();
+        writeLog("LOG", "GAME", ConsoleUtil.asYellow(String.format("%s: %s using target: %s%s",
+                CardUtil.getTurnInfo(game),
+                player.getName(),
+                target,
+                reason.isEmpty() ? "" : " (" + needReason + ")"
+        )));
+    }
+
+    @Override
+    public void onTestsStackPush(Game game) {
+        writeLog("LOG", "GAME", String.format("%s: Stack push: %s",
+                CardUtil.getTurnInfo(game),
+                game.getStack().toString()
+        ));
+    }
+
+    @Override
+    public void onTestsStackResolve(Game game) {
+        writeLog("LOG", "GAME", String.format("%s: Stack resolve: %s",
+                CardUtil.getTurnInfo(game),
+                game.getStack().toString()
         ));
     }
 }

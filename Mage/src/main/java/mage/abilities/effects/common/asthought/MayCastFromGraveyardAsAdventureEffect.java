@@ -49,6 +49,6 @@ public class MayCastFromGraveyardAsAdventureEffect extends AsThoughEffectImpl {
 
         return sourceCard != null
                 && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD
-                && source.getSourceObjectZoneChangeCounter() == sourceCard.getZoneChangeCounter(game);
+                && source.getStackMomentSourceZCC() == sourceCard.getZoneChangeCounter(game);
     }
 }

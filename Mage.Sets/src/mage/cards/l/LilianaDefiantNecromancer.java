@@ -23,7 +23,7 @@ import java.util.UUID;
  */
 public final class LilianaDefiantNecromancer extends CardImpl {
 
-    protected static final FilterCreatureCard filter = new FilterCreatureCard("nonlegendary creature card with mana value X from your graveyard");
+    private static final FilterCreatureCard filter = new FilterCreatureCard("nonlegendary creature card with mana value X from your graveyard");
 
     static {
         filter.add(Predicates.not(SuperType.LEGENDARY.getPredicate()));

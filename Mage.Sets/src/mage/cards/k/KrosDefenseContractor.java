@@ -3,7 +3,7 @@ package mage.cards.k;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.common.PutCounterOnCreatureTriggeredAbility;
+import mage.abilities.common.PutCounterOnPermanentTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.combat.GoadTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
@@ -42,7 +42,8 @@ public final class KrosDefenseContractor extends CardImpl {
         this.addAbility(ability);
 
         // Whenever you put one or more counters on a creature you don't control, tap that creature and goad it. It gains trample until your next turn.
-        this.addAbility(new PutCounterOnCreatureTriggeredAbility(new KrosDefenseContractorEffect(), null, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL, true));
+        this.addAbility(new PutCounterOnPermanentTriggeredAbility(new KrosDefenseContractorEffect(),
+                null, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL, true, false));
     }
 
     private KrosDefenseContractor(final KrosDefenseContractor card) {

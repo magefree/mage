@@ -175,20 +175,17 @@ class TargetSecondPilePermanent extends TargetPermanent {
         this.firstPile = firstPile;
     }
 
-    @Override
-    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game, boolean flag) {
-        if (firstPile.contains(id)) {
-            return false;
-        }
-        return super.canTarget(controllerId, id, source, game, flag);
+    public TargetSecondPilePermanent(final TargetSecondPilePermanent target) {
+        super(target);
+        this.firstPile = new HashSet<>(target.firstPile);
     }
 
     @Override
-    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
+    public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
         if (firstPile.contains(id)) {
             return false;
         }
-        return super.canTarget(controllerId, id, source, game);
+        return super.canTarget(playerId, id, source, game);
     }
 
     @Override
@@ -199,4 +196,8 @@ class TargetSecondPilePermanent extends TargetPermanent {
         return super.canTarget(id, source, game);
     }
 
+    @Override
+    public TargetSecondPilePermanent copy() {
+        return new TargetSecondPilePermanent(this);
+    }
 }

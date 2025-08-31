@@ -65,7 +65,7 @@ public class MageObjectReference implements Comparable<MageObjectReference>, Ser
     @Deprecated // cause of many bugs, see issue #10479
     public MageObjectReference(Ability source, int modifier) {
         this.sourceId = source.getSourceId();
-        this.zoneChangeCounter = source.getSourceObjectZoneChangeCounter() + modifier;
+        this.zoneChangeCounter = source.getStackMomentSourceZCC() + modifier;
     }
 
     /**
@@ -162,8 +162,8 @@ public class MageObjectReference implements Comparable<MageObjectReference>, Ser
         if (source == null || !source.getSourceId().equals(sourceId)) {
             return false;
         }
-        return zoneChangeCounter * source.getSourceObjectZoneChangeCounter() == 0
-                || zoneChangeCounter == source.getSourceObjectZoneChangeCounter();
+        return zoneChangeCounter * source.getStackMomentSourceZCC() == 0
+                || zoneChangeCounter == source.getStackMomentSourceZCC();
     }
 
     public Permanent getPermanent(Game game) {

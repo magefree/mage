@@ -67,7 +67,7 @@ class GhostwayEffect extends OneShotEffect {
         if (sourceObject != null && controller != null) {
             Set<Card> toExile = new HashSet<>();
             toExile.addAll(game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game));
-            UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+            UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getStackMomentSourceZCC());
             controller.moveCardsToExile(toExile, source, game, true, exileId, sourceObject.getIdName());
 
             Cards cardsToReturn = new CardsImpl();

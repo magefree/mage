@@ -86,7 +86,7 @@ public class SpellsCastWatcher extends Watcher {
                     .map(Spell::getCard)
                     .map(Card::getMainCard)
                     .anyMatch(card -> card.getId().equals(source.getSourceId())
-                            && card.getZoneChangeCounter(game) == source.getSourceObjectZoneChangeCounter())) {
+                            && card.getZoneChangeCounter(game) == source.getStackMomentSourceZCC())) {
                 return entry.getKey();
             }
         }

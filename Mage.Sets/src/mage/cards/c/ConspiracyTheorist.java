@@ -119,8 +119,7 @@ class ConspiracyTheoristEffect extends OneShotEffect {
         if (controller != null) {
             CardsImpl cards = new CardsImpl(discardedCards);
             TargetCard target = new TargetCard(Zone.GRAVEYARD, new FilterCard("card to exile"));
-            boolean validTarget = cards.stream()
-                    .anyMatch(card -> target.canTarget(card, game));
+            boolean validTarget = cards.stream().anyMatch(card -> target.canTarget(card, source, game));
             if (validTarget && controller.chooseUse(Outcome.Benefit, "Exile a card?", source, game)) {
                 if (controller.choose(Outcome.Benefit, cards, target, source, game)) {
                     Card card = cards.get(target.getFirstTarget(), game);

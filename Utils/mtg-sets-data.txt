@@ -30,6 +30,7 @@ Antiquities|ATQ|
 Assassin's Creed|ACR|
 Avacyn Restored|AVR|
 Avatar: The Last Airbender|TLA|
+Avatar: The Last Airbender Eternal|TLE|
 Battle for Zendikar|BFZ|
 Battlebond|BBD|
 Born of the Gods|BNG|
@@ -176,6 +177,7 @@ Masters 25|A25|
 Magic: The Gathering-Commander|CMD|
 Magic: The Gathering-Conspiracy|CNS|
 Media Inserts|MBP|
+Marvel's Spider-Man|SPM|
 Marvel's Spider-Man Eternal|SPE|
 March of the Machine|MOM|
 March of the Machine Commander|MOC|

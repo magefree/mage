@@ -235,7 +235,7 @@ public class TakeControlWhileSearchingLibraryTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Buried Alive");
         setChoice(playerB, true); // continue after new control
         addTarget(playerB, "Balduvian Bears");
-        addTarget(playerB, TestPlayer.TARGET_SKIP);
+        //addTarget(playerB, TestPlayer.TARGET_SKIP);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         checkGraveyardCount("after grave a", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Balduvian Bears", 0);
         checkGraveyardCount("after grave b", 1, PhaseStep.PRECOMBAT_MAIN, playerB, "Balduvian Bears", 0);

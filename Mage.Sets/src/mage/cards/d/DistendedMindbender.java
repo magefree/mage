@@ -90,10 +90,10 @@ class DistendedMindbenderEffect extends OneShotEffect {
         TargetCard targetThreeOrLess = new TargetCard(1, Zone.HAND, filterThreeOrLess);
         TargetCard targetFourOrGreater = new TargetCard(1, Zone.HAND, filterFourOrGreater);
         Cards toDiscard = new CardsImpl();
-        if (controller.chooseTarget(Outcome.Benefit, opponent.getHand(), targetThreeOrLess, source, game)) {
+        if (controller.choose(Outcome.Benefit, opponent.getHand(), targetThreeOrLess, source, game)) {
             toDiscard.addAll(targetThreeOrLess.getTargets());
         }
-        if (controller.chooseTarget(Outcome.Benefit, opponent.getHand(), targetFourOrGreater, source, game)) {
+        if (controller.choose(Outcome.Benefit, opponent.getHand(), targetFourOrGreater, source, game)) {
             toDiscard.addAll(targetFourOrGreater.getTargets());
         }
         opponent.discard(toDiscard, false, source, game);

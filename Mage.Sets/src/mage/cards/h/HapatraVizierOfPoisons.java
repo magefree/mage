@@ -3,7 +3,7 @@ package mage.cards.h;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.common.PutCounterOnCreatureTriggeredAbility;
+import mage.abilities.common.PutCounterOnPermanentTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
@@ -12,6 +12,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.DeathtouchSnakeToken;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -37,7 +38,8 @@ public final class HapatraVizierOfPoisons extends CardImpl {
         this.addAbility(ability);
 
         // Whenever you put one or more -1/-1 counters on a creature, create a 1/1 green Snake creature token with deathtouch.
-        this.addAbility(new PutCounterOnCreatureTriggeredAbility(new CreateTokenEffect(new DeathtouchSnakeToken()), CounterType.M1M1.createInstance()));
+        this.addAbility(new PutCounterOnPermanentTriggeredAbility(new CreateTokenEffect(new DeathtouchSnakeToken()),
+                CounterType.M1M1, StaticFilters.FILTER_PERMANENT_CREATURE));
     }
 
     private HapatraVizierOfPoisons(final HapatraVizierOfPoisons card) {

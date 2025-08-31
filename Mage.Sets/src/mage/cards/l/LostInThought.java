@@ -173,7 +173,7 @@ class LostInThoughtIgnoreEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        String key = source.getSourceId().toString() + source.getSourceObjectZoneChangeCounter() + LostInThought.keyString + game.getTurnNum() + ((ActivatedAbilityImpl) source).getActivatorId();
+        String key = source.getSourceId().toString() + source.getStackMomentSourceZCC() + LostInThought.keyString + game.getTurnNum() + ((ActivatedAbilityImpl) source).getActivatorId();
         game.getState().setValue(key, true);
         return true;
     }

@@ -88,9 +88,7 @@ class ShimianSpecterEffect extends SearchTargetGraveyardHandLibraryForCardNameAn
 
             // You choose a nonland card from it
             TargetCard target = new TargetCard(Zone.HAND, new FilterNonlandCard());
-            target.withNotTarget(true);
-            if (target.canChoose(controller.getId(), source, game)
-                    && controller.chooseTarget(Outcome.Benefit, targetPlayer.getHand(), target, source, game)) {
+            if (controller.choose(Outcome.Benefit, targetPlayer.getHand(), target, source, game)) {
                 return applySearchAndExile(game, source, CardUtil.getCardNameForSameNameSearch(game.getCard(target.getFirstTarget())), getTargetPointer().getFirst(game, source));
             }
         }

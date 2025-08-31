@@ -15,6 +15,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
+import mage.target.TargetCard;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInLibrary;
@@ -107,9 +108,9 @@ class KotoseTheSilentSpiderEffect extends OneShotEffect {
         cards.addAll(targetCardInGraveyard.getTargets());
 
         filter.setMessage("cards named " + card.getName() + " from " + opponent.getName() + "'s hand");
-        TargetCardInHand targetCardInHand = new TargetCardInHand(0, Integer.MAX_VALUE, filter);
-        controller.choose(outcome, opponent.getHand(), targetCardInHand, source, game);
-        cards.addAll(targetCardInHand.getTargets());
+        TargetCard targetCard = new TargetCard(0, Integer.MAX_VALUE, Zone.HAND, filter);
+        controller.choose(outcome, opponent.getHand(), targetCard, source, game);
+        cards.addAll(targetCard.getTargets());
 
         filter.setMessage("cards named " + card.getName() + " from " + opponent.getName() + "'s library");
         TargetCardInLibrary target = new TargetCardInLibrary(0, Integer.MAX_VALUE, filter);

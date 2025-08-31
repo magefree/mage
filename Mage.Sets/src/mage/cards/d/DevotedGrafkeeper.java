@@ -1,20 +1,19 @@
 package mage.cards.d;
 
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.keyword.DisturbAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -37,7 +36,12 @@ public final class DevotedGrafkeeper extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new MillCardsControllerEffect(2)));
 
         // Whenever you cast a spell from your graveyard, tap target creature you don't control.
-        this.addAbility(new DevotedGrafkeeperTriggeredAbility());
+        Ability ability = new SpellCastControllerTriggeredAbility(
+                Zone.BATTLEFIELD, new TapTargetEffect(), StaticFilters.FILTER_SPELL_A,
+                false, SetTargetPointer.NONE, Zone.GRAVEYARD
+        );
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
+        this.addAbility(ability);
 
         // Disturb {1}{W}{U}
         this.addAbility(new DisturbAbility(this, "{1}{W}{U}"));
@@ -50,37 +54,5 @@ public final class DevotedGrafkeeper extends CardImpl {
     @Override
     public DevotedGrafkeeper copy() {
         return new DevotedGrafkeeper(this);
-    }
-}
-
-class DevotedGrafkeeperTriggeredAbility extends TriggeredAbilityImpl {
-
-    DevotedGrafkeeperTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new TapTargetEffect(), false);
-        this.addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
-    }
-
-    private DevotedGrafkeeperTriggeredAbility(DevotedGrafkeeperTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.SPELL_CAST;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return isControlledBy(event.getPlayerId()) && event.getZone() == Zone.GRAVEYARD;
-    }
-
-    @Override
-    public DevotedGrafkeeperTriggeredAbility copy() {
-        return new DevotedGrafkeeperTriggeredAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you cast a spell from your graveyard, tap target creature you don't control.";
     }
 }

@@ -84,7 +84,7 @@ class JacobHaukenInspectorExileEffect extends OneShotEffect {
             controller.chooseTarget(outcome, controller.getHand(), target, source, game);
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
-                UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+                UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getStackMomentSourceZCC());
                 MageObject sourceObject = source.getSourceObject(game);
                 String exileName = sourceObject == null ? null : sourceObject.getIdName();
                 card.setFaceDown(true, game);

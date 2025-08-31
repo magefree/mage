@@ -28,6 +28,8 @@ public class SimulationStabilityAITest extends CardTestPlayerBaseWithAIHelps {
 
     @Before
     public void prepare() {
+        // WARNING, for some reason java 8 sometime can't compile and run test with updated AI settings, so it's ok to freeze on it
+
         // comment it to enable AI code debug
         Assert.assertFalse("AI stability tests must be run under release config", ComputerPlayer.COMPUTER_DISABLE_TIMEOUT_IN_GAME_SIMULATIONS);
     }

@@ -97,7 +97,7 @@ class ValakutExplorationExileEffect extends OneShotEffect {
         }
         controller.moveCardsToExile(
                 card, source, game, true, CardUtil.getExileZoneId(
-                        game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()
+                        game, source.getSourceId(), source.getStackMomentSourceZCC()
                 ), sourcePermanent.getIdName()
         );
         ContinuousEffect effect = new PlayFromNotOwnHandZoneTargetEffect(Duration.EndOfGame);
@@ -130,7 +130,7 @@ class ValakutExplorationDamageEffect extends OneShotEffect {
             return false;
         }
         ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(
-                game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()
+                game, source.getSourceId(), source.getStackMomentSourceZCC()
         ));
         if (exileZone == null) {
             return false;

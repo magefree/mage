@@ -1,12 +1,11 @@
 package mage.cards.l;
 
 import mage.abilities.Ability;
-import mage.abilities.common.PutIntoGraveFromAnywhereSourceAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.ExileSourceEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
+import mage.abilities.keyword.DisturbAbility;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -33,11 +32,10 @@ public final class LanternsLift extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget);
-        this.addAbility(ability);
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted creature gets +1/+1 and has flying.
-        ability = new SimpleStaticAbility(new BoostEnchantedEffect(
+        Ability ability = new SimpleStaticAbility(new BoostEnchantedEffect(
                 1, 1, Duration.WhileOnBattlefield
         ));
         ability.addEffect(new GainAbilityAttachedEffect(
@@ -46,7 +44,7 @@ public final class LanternsLift extends CardImpl {
         this.addAbility(ability);
 
         // If Lanterns' Lift would be put into a graveyard from anywhere, exile it instead.
-        this.addAbility(new PutIntoGraveFromAnywhereSourceAbility(new ExileSourceEffect().setText("exile it instead")));
+        this.addAbility(DisturbAbility.makeBackAbility());
     }
 
     private LanternsLift(final LanternsLift card) {

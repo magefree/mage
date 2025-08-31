@@ -27,7 +27,7 @@ public final class RazorPendulum extends CardImpl {
                 TargetController.EACH_PLAYER,
                 new DamageTargetEffect(2, true, "that player"),
                 false, condition
-        ).withTargetPointerSet(true));
+        ));
     }
 
     private RazorPendulum(final RazorPendulum card) {

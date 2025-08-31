@@ -12,6 +12,7 @@ import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.target.TargetCard;
 import mage.util.CardUtil;
 
@@ -71,47 +72,22 @@ public class TargetCardAndOrCard extends TargetCard {
     }
 
     @Override
-    public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
-        if (!super.canTarget(playerId, id, source, game)) {
-            return false;
-        }
-        Card card = game.getCard(id);
-        if (card == null) {
-            return false;
-        }
-        if (this.getTargets().isEmpty()) {
-            return true;
-        }
-        Cards cards = new CardsImpl(this.getTargets());
-        cards.add(card);
-        return assignment.getRoleCount(cards, game) >= cards.size();
-    }
-
-    @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = super.possibleTargets(sourceControllerId, source, game);
-        // assuming max targets = 2, need to expand this code if not
-        Card card = game.getCard(this.getFirstTarget());
-        if (card == null) {
-            return possibleTargets; // no further restriction if no target yet chosen
-        }
-        Cards cards = new CardsImpl(card);
-        if (assignment.getRoleCount(cards, game) == 2) {
-            // if the first chosen target is both types, no further restriction
-            return possibleTargets;
-        }
-        Set<UUID> leftPossibleTargets = new HashSet<>();
-        for (UUID possibleId : possibleTargets) {
-            Card possibleCard = game.getCard(possibleId);
-            Cards checkCards = cards.copy();
-            checkCards.add(possibleCard);
-            if (assignment.getRoleCount(checkCards, game) == 2) {
-                // if the possible target and the existing target have both types, it's legal
-                // but this prevents the case of both targets with the same type
-                leftPossibleTargets.add(possibleId);
+
+        // only valid roles
+        Cards existingTargets = new CardsImpl(this.getTargets());
+        possibleTargets.removeIf(id -> {
+            Card card = game.getCard(id);
+            if (card == null) {
+                return true;
             }
-        }
-        return leftPossibleTargets;
+            Cards newTargets = existingTargets.copy();
+            newTargets.add(card);
+            return assignment.getRoleCount(newTargets, game) < newTargets.size();
+        });
+
+        return possibleTargets;
     }
 
     @Override

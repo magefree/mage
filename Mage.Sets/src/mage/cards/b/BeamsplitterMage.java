@@ -121,11 +121,11 @@ class BeamsplitterMageTriggeredAbility extends TriggeredAbilityImpl {
 
     private boolean checkNotSource(Permanent permanent, Game game) {
         // workaround for zcc not being set before first intervening if check
-        if (this.getSourceObjectZoneChangeCounter() == 0) {
+        if (this.getStackMomentSourceZCC() == 0) {
             return !permanent.getId().equals(this.getSourceId());
         }
         return !permanent.getId().equals(this.getSourceId())
-                || permanent.getZoneChangeCounter(game) != this.getSourceObjectZoneChangeCounter();
+                || permanent.getZoneChangeCounter(game) != this.getStackMomentSourceZCC();
     }
 
     @Override

@@ -1,26 +1,26 @@
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.events.ExploreEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.MapToken;
 
+import java.util.UUID;
+
 /**
- *
  * @author Grath
  */
 public final class TopographyTracker extends CardImpl {
@@ -74,7 +74,7 @@ class TopographyTrackerEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId()); 
-        return permanent != null && permanent.isControlledBy(event.getPlayerId());
+        return permanent != null && permanent.isControlledBy(source.getControllerId());
     }
 
     @Override

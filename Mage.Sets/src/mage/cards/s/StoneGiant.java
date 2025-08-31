@@ -68,13 +68,13 @@ class StoneGiantTarget extends TargetPermanent {
     }
 
     @Override
-    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
+    public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
         Permanent sourceCreature = game.getPermanent(source.getSourceId());
         Permanent targetCreature = game.getPermanent(id);
 
         if (targetCreature != null && sourceCreature != null
                 && targetCreature.getToughness().getValue() < sourceCreature.getPower().getValue()) {
-            return super.canTarget(controllerId, id, source, game);
+            return super.canTarget(playerId, id, source, game);
         }
         return false;
     }

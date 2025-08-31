@@ -678,8 +678,8 @@ public class StackAbility extends StackObjectImpl implements Ability {
         ability.initSourceObjectZoneChangeCounter(game, force);
     }
     @Override
-    public int getSourceObjectZoneChangeCounter() {
-        return ability.getSourceObjectZoneChangeCounter();
+    public int getStackMomentSourceZCC() {
+        return ability.getStackMomentSourceZCC();
     }
 
     @Override
@@ -744,7 +744,7 @@ public class StackAbility extends StackObjectImpl implements Ability {
         newAbility.setControllerId(newControllerId);
 
         StackAbility newStackAbility = new StackAbility(newAbility, newControllerId);
-        game.getStack().push(newStackAbility);
+        game.getStack().push(game, newStackAbility);
 
         // new targets
         if (newTargetFilterPredicate != null) {

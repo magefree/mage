@@ -42,12 +42,11 @@ public class CycleControllerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (game.getState().getStack().isEmpty()
-                || !event.getPlayerId().equals(this.getControllerId())
+        if (!event.getPlayerId().equals(this.getControllerId())
                 || (event.getSourceId().equals(this.getSourceId()) && excludeSource)) {
             return false;
         }
-        StackObject item = game.getState().getStack().getFirst();
+        StackObject item = game.getState().getStack().getFirstOrNull();
         return item instanceof StackAbility
                 && item.getStackAbility() instanceof CyclingAbility;
     }

@@ -50,6 +50,9 @@ public class MantleOfTheAncientsTest extends CardTestPlayerBase {
         addTarget(playerA, "Gate Smasher^Aether Tunnel");
         addTarget(playerA, TestPlayer.TARGET_SKIP);
 
+
+        showBattlefield("after", 1, PhaseStep.END_TURN, playerA);
+
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();

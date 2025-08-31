@@ -8,6 +8,7 @@ import mage.cards.repository.CardInfo;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -18,7 +19,11 @@ import java.util.regex.Pattern;
 public class MtgaImporter extends PlainTextDeckImporter {
 
     private static final Map<String, String> SET_REMAPPING = ImmutableMap.of("DAR", "DOM");
-    private static final Pattern MTGA_PATTERN = Pattern.compile(
+
+    // example:
+    // 4 Accumulated Knowledge (A25) 40
+    // 4 Accumulated Knowledge
+    public static final Pattern MTGA_PATTERN = Pattern.compile(
             "(\\p{Digit}+)" +
                     "\\p{javaWhitespace}+" +
                     "(" + CardNameUtil.CARD_NAME_PATTERN.pattern() + ")" +
@@ -33,13 +38,19 @@ public class MtgaImporter extends PlainTextDeckImporter {
     @Override
     protected void readLine(String line, DeckCardLists deckList, FixedInfo fixedInfo) {
 
-        line = line.trim();
+        // moxfield support - remove foil status
+        line = line.replace(" *F*", "");
 
-        if (line.equals("Deck")) {
+        line = line.trim();
+        String lowerLine = line.toLowerCase(Locale.ENGLISH);
+
+        // mainboard to support decks from archidekt.com
+        if (lowerLine.startsWith("deck") || lowerLine.startsWith("mainboard")) {
+            sideboard = false;
             return;
         }
 
-        if (line.equals("Sideboard") || line.equals("")) {
+        if (lowerLine.startsWith("sideboard") || lowerLine.startsWith("commander") || lowerLine.startsWith("maybeboard") || lowerLine.equals("")) {
             sideboard = true;
             return;
         }
@@ -54,12 +65,12 @@ public class MtgaImporter extends PlainTextDeckImporter {
         CardInfo found;
         int count = Integer.parseInt(pattern.group(1));
         String name = pattern.group(2);
-        if (pattern.group(3) != null && pattern.group(4) != null) {
+        if (pattern.group(3) != null) {
             String set = SET_REMAPPING.getOrDefault(pattern.group(3), pattern.group(3));
-            String cardNumber = pattern.group(4);
-            found = lookup.lookupCardInfo(name, set, cardNumber).orElse(null);
+            String cardNumber = pattern.groupCount() >= 4 ? pattern.group(4) : null;
+            found = lookup.lookupCardInfo(name, set, cardNumber);
         } else {
-            found = lookup.lookupCardInfo(name).orElse(null);
+            found = lookup.lookupCardInfo(name, null, null);
         }
 
         if (found == null) {
@@ -72,6 +83,35 @@ public class MtgaImporter extends PlainTextDeckImporter {
         List<DeckCardInfo> zone = sideboard ? deckList.getSideboard() : deckList.getCards();
         DeckCardInfo deckCardInfo = new DeckCardInfo(found.getName(), found.getCardNumber(), found.getSetCode());
         zone.addAll(Collections.nCopies(count, deckCardInfo.copy()));
+    }
+
+    public static boolean isMTGA(String data) {
+        // examples:
+        // 4 Accumulated Knowledge (A25) 40
+        // 4 Accumulated Knowledge
+        // Deck
+        // Commander
+        // Mainboard - extra mark for archidekt.com
+        // Sideboard - extra mark for archidekt.com
+        // Maybeboard - extra mark for archidekt.com
+
+        String firstLine = data.split("\\R", 2)[0];
+        String firstLineLower = firstLine.toLowerCase(Locale.ENGLISH);
+
+        // by deck marks
+        if (firstLineLower.startsWith("deck")
+                || firstLineLower.startsWith("mainboard")
+                || firstLineLower.startsWith("sideboard")
+                || firstLineLower.startsWith("commander")
+                || firstLineLower.startsWith("maybeboard")) {
+            return true;
+        }
+
+        // by card marks
+        Matcher pattern = MtgaImporter.MTGA_PATTERN.matcher(CardNameUtil.normalizeCardName(firstLine));
+        return pattern.matches()
+                && pattern.groupCount() >= 3
+                && pattern.group(3) != null;
     }
 
 }

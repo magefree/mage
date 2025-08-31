@@ -1,27 +1,27 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
-import mage.cards.OmenCard;
-import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardSetInfo;
+import mage.cards.OmenCard;
 import mage.constants.CardType;
-import mage.filter.common.FilterBasicLandCard;
+import mage.constants.SubType;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.UUID;
+
 /**
- *
  * @author Jmlundeen
  */
 public final class SaguWildling extends OmenCard {
 
     public SaguWildling(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE},  new CardType[]{CardType.SORCERY}, "{4}{G}", "Roost Seek", "{G}");
-        
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{4}{G}", "Roost Seek", "{G}");
+
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -34,7 +34,7 @@ public final class SaguWildling extends OmenCard {
 
         // Roost Seek
         // Search your library for a basic land card, reveal it, put it into your hand, then shuffle.
-        TargetCardInLibrary target = new TargetCardInLibrary(new FilterBasicLandCard());
+        TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND);
         this.getSpellCard().getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(target, true));
         this.finalizeOmen();
     }

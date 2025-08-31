@@ -18,13 +18,11 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
 
 import static mage.filter.StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE;
@@ -87,7 +85,7 @@ class BishopOfBindingExileEffect extends OneShotEffect {
         // the target creature won't be exiled.
         if (permanent != null) {
             new ExileTargetEffect(
-                    CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()), permanent.getIdName()
+                    CardUtil.getExileZoneId(game, source.getSourceId(), source.getStackMomentSourceZCC()), permanent.getIdName()
             ).apply(game, source);
             game.addDelayedTriggeredAbility(new OnLeaveReturnExiledAbility(), source);
             return true;
@@ -101,7 +99,7 @@ enum BishopOfBindingValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, sourceAbility.getSourceId(), sourceAbility.getSourceObjectZoneChangeCounter()));
+        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, sourceAbility.getSourceId(), sourceAbility.getStackMomentSourceZCC()));
         if (exileZone != null) {
             Card exiledCard = exileZone.getRandom(game);
             if (exiledCard != null) {

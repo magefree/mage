@@ -147,6 +147,7 @@ class BattleForBretagardTarget extends TargetPermanent {
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = super.possibleTargets(sourceControllerId, source, game);
+
         Set<String> names = this.getTargets()
                 .stream()
                 .map(game::getPermanent)
@@ -159,6 +160,7 @@ class BattleForBretagardTarget extends TargetPermanent {
             Permanent permanent = game.getPermanent(uuid);
             return permanent == null || names.contains(permanent.getName());
         });
+
         return possibleTargets;
     }
 }

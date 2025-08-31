@@ -4,6 +4,7 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -32,9 +33,10 @@ public class RipplesOfPotentialTest extends CardTestPlayerBase {
         setChoice(playerA, "Blast Zone^Arcbound Javelineer^Chandra, Pyromaster^Atraxa's Skitterfang");
         // Phase out choice
         setChoice(playerA, "Blast Zone^Arcbound Javelineer^Chandra, Pyromaster");
+        setChoice(playerA, TestPlayer.CHOICE_SKIP); // keep Atraxa's Skitterfang
+        setChoice(playerA, false); // Atraxa's Skitterfang ability - do not remove oil
 
         setStrictChooseMode(true);
-        setChoice(playerA, false); // Atraxa's Skitterfang ability
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 

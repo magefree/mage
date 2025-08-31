@@ -120,13 +120,8 @@ enum SoulSculptorCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (!game.getStack().isEmpty()) {
-            StackObject stackObject = game.getStack().getFirst();
-            if (stackObject != null) {
-                return !stackObject.getCardType(game).contains(CardType.CREATURE);
-            }
-        }
-        return true;
+        StackObject stackObject = game.getStack().getFirstOrNull();
+        return stackObject != null && !stackObject.getCardType(game).contains(CardType.CREATURE);
     }
 
     @Override

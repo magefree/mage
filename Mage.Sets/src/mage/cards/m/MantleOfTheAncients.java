@@ -4,7 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
@@ -15,8 +15,10 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.permanent.AttachedToAttachedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -34,13 +36,21 @@ import java.util.stream.Collectors;
  */
 public final class MantleOfTheAncients extends CardImpl {
     private static final FilterCard filter = new FilterPermanentCard();
+    private static final FilterPermanent filter2 = new FilterPermanent("Aura and Equipment attached to it");
 
     static {
         filter.add(Predicates.or(
                 SubType.AURA.getPredicate(),
                 SubType.EQUIPMENT.getPredicate()
         ));
+        filter2.add(Predicates.or(
+                SubType.AURA.getPredicate(),
+                SubType.EQUIPMENT.getPredicate()
+        ));
+        filter2.add(AttachedToAttachedPredicate.instance);
     }
+
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter2);
 
     public MantleOfTheAncients(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{W}");
@@ -59,9 +69,7 @@ public final class MantleOfTheAncients extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +1/+1 for each Aura and Equipment attached to it.
-        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(
-                MantleOfTheAncientsValue.instance, MantleOfTheAncientsValue.instance
-        )));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(xValue, xValue)));
     }
 
     private MantleOfTheAncients(final MantleOfTheAncients card) {
@@ -114,41 +122,5 @@ class MantleOfTheAncientsEffect extends OneShotEffect {
         movedCards.retainZone(Zone.BATTLEFIELD, game);
         movedCards.forEach(card -> permanent.addAttachment(card, source, game));
         return true;
-    }
-}
-
-enum MantleOfTheAncientsValue implements DynamicValue {
-    instance;
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        Permanent sourcePermanent = sourceAbility.getSourcePermanentOrLKI(game);
-        if (sourcePermanent == null) {
-            return 0;
-        }
-        Permanent permanent = game.getPermanent(sourcePermanent.getAttachedTo());
-        return permanent == null ? 0 : permanent
-                .getAttachments()
-                .stream()
-                .map(game::getPermanentOrLKIBattlefield)
-                .filter(Objects::nonNull)
-                .map(p -> p.hasSubtype(SubType.EQUIPMENT, game) || p.hasSubtype(SubType.AURA, game))
-                .mapToInt(b -> b ? 1 : 0)
-                .sum();
-    }
-
-    @Override
-    public MantleOfTheAncientsValue copy() {
-        return instance;
-    }
-
-    @Override
-    public String getMessage() {
-        return "Aura and Equipment attached to it";
-    }
-
-    @Override
-    public String toString() {
-        return "1";
     }
 }

@@ -85,7 +85,7 @@ class SkywayRobberCastForFreeEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        String exileZoneName = CardUtil.getObjectZoneString(CardUtil.SOURCE_EXILE_ZONE_TEXT, source.getSourceId(), game, source.getSourceObjectZoneChangeCounter()-1, false);
+        String exileZoneName = CardUtil.getObjectZoneString(CardUtil.SOURCE_EXILE_ZONE_TEXT, source.getSourceId(), game, source.getStackMomentSourceZCC()-1, false);
         UUID exileId = CardUtil.getExileZoneId(exileZoneName, game);
         ExileZone exileZone = game.getExile().getExileZone(exileId);
         if (exileZone == null) {

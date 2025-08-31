@@ -185,7 +185,7 @@ class OutOfTimeReplacementEffect extends ContinuousRuleModifyingEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         Set<UUID> creatureIds = (Set<UUID>) game.getState().getValue("phasedOutCreatures"
                 + source.getId().toString());
-        return source.getSourceObjectZoneChangeCounter() == game.getState().getZoneChangeCounter(source.getSourceId()) // blinked
+        return source.getStackMomentSourceZCC() == game.getState().getZoneChangeCounter(source.getSourceId()) // blinked
                 && creatureIds != null
                 && creatureIds.contains(event.getTargetId());
     }

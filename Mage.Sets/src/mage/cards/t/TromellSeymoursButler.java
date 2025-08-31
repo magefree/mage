@@ -22,6 +22,7 @@ import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.EnteredThisTurnPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
@@ -33,7 +34,7 @@ import java.util.UUID;
  */
 public final class TromellSeymoursButler extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("nontoken creature");
+    private static final FilterPermanent filter = new FilterCreaturePermanent("nontoken creature");
 
     static {
         filter.add(TokenPredicate.FALSE);

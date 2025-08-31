@@ -18,7 +18,7 @@ public enum SaddledSourceThisTurnPredicate implements ObjectSourcePlayerPredicat
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
         // for delayed triggers must use starting zcc (when delayed trigger created)
-        MageObjectReference startingMor = new MageObjectReference(input.getSourceId(), input.getSource().getSourceObjectZoneChangeCounter(), game);
+        MageObjectReference startingMor = new MageObjectReference(input.getSourceId(), input.getSource().getStackMomentSourceZCC(), game);
         return SaddledMountWatcher.checkIfSaddledThisTurn(input.getObject(), startingMor, game);
     }
 

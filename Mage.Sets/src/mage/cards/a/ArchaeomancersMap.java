@@ -9,10 +9,7 @@ import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.constants.TargetController;
-import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandPermanent;
@@ -26,13 +23,10 @@ import java.util.UUID;
  */
 public final class ArchaeomancersMap extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("basic Plains cards");
-    private static final FilterPermanent filter2 = new FilterLandPermanent("a land an opponent controls");
+    private static final FilterPermanent filter = new FilterLandPermanent("a land an opponent controls");
 
     static {
-        filter.add(SubType.PLAINS.getPredicate());
-        filter.add(SuperType.BASIC.getPredicate());
-        filter2.add(TargetController.OPPONENT.getControllerPredicate());
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public ArchaeomancersMap(UUID ownerId, CardSetInfo setInfo) {
@@ -40,12 +34,12 @@ public final class ArchaeomancersMap extends CardImpl {
 
         // When Archaeomancer's Map enters the battlefield, search your library for up to two basic Plains cards, reveal them, put them into your hand, then shuffle.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 2, filter), true)
+                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 2, StaticFilters.FILTER_CARD_BASIC_PLAINS), true)
         ));
 
         // Whenever a land enters the battlefield under an opponent's control, if that player controls more lands than you, you may put a land card from your hand onto the battlefield.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
-                new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_LAND_A), filter2
+                new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_LAND_A), filter
         ).withInterveningIf(ArchaeomancersMapCondition.instance));
     }
 

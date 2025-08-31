@@ -12,7 +12,6 @@ import mage.cards.Card;
 import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterSpell;
 import mage.game.Game;
 import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
@@ -152,7 +151,7 @@ class GontiExileEffect extends OneShotEffect {
         if (card == null) {
             return false;
         }
-        UUID exileZoneId = CardUtil.getExileZoneId(game, controller.getId(), source.getSourceObjectZoneChangeCounter());
+        UUID exileZoneId = CardUtil.getExileZoneId(game, controller.getId(), source.getStackMomentSourceZCC());
         String exileName = CardUtil.getSourceName(game, source) + " - " + controller.getName();
         if (controller.moveCardsToExile(card, source, game, false, exileZoneId, exileName)) {
             card.setFaceDown(true, game);

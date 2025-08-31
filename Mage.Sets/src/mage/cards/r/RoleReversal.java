@@ -53,8 +53,8 @@ class TargetPermanentsThatShareCardType extends TargetPermanent {
     }
 
     @Override
-    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
-        if (super.canTarget(controllerId, id, source, game)) {
+    public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
+        if (super.canTarget(playerId, id, source, game)) {
             if (!getTargets().isEmpty()) {
                 Permanent targetOne = game.getPermanent(getTargets().get(0));
                 Permanent targetTwo = game.getPermanent(id);

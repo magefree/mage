@@ -14,7 +14,6 @@ import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
-import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.Objects;
@@ -62,28 +61,31 @@ class JourneyForTheElixirEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
         }
-        TargetCardInLibrary targetCardInLibrary = new JourneyForTheElixirLibraryTarget();
-        player.searchLibrary(targetCardInLibrary, source, game);
-        Cards cards = new CardsImpl(targetCardInLibrary.getTargets());
-        TargetCard target = new JourneyForTheElixirGraveyardTarget(cards);
-        player.choose(outcome, target, source, game);
-        cards.addAll(target.getTargets());
-        player.revealCards(source, cards, game);
-        player.moveCards(cards, Zone.HAND, source, game);
-        player.shuffleLibrary(source, game);
-        return true;
+
+        // search your library and graveyard for 2 cards
+        Cards allCards = new CardsImpl();
+        allCards.addAll(controller.getLibrary().getCardList());
+        allCards.addAll(controller.getGraveyard());
+        TargetCard target = new JourneyForTheElixirTarget();
+        if (controller.choose(Outcome.Benefit, allCards, target, source, game)) {
+            Cards cards = new CardsImpl(target.getTargets());
+            controller.revealCards(source, cards, game);
+            controller.moveCards(cards, Zone.HAND, source, game);
+            controller.shuffleLibrary(source, game);
+            return true;
+        }
+        return false;
     }
 }
 
-class JourneyForTheElixirLibraryTarget extends TargetCardInLibrary {
+class JourneyForTheElixirTarget extends TargetCard {
 
     private static final String name = "Jiang Yanggu";
-    private static final FilterCard filter
-            = new FilterCard("a basic land card and a card named Jiang Yanggu");
+    private static final FilterCard filter = new FilterCard("a basic land card and a card named Jiang Yanggu");
 
     static {
         filter.add(Predicates.or(
@@ -95,17 +97,17 @@ class JourneyForTheElixirLibraryTarget extends TargetCardInLibrary {
         ));
     }
 
-    JourneyForTheElixirLibraryTarget() {
-        super(0, 2, filter);
+    JourneyForTheElixirTarget() {
+        super(2, 2, Zone.ALL, filter);
     }
 
-    private JourneyForTheElixirLibraryTarget(final JourneyForTheElixirLibraryTarget target) {
+    private JourneyForTheElixirTarget(final JourneyForTheElixirTarget target) {
         super(target);
     }
 
     @Override
-    public JourneyForTheElixirLibraryTarget copy() {
-        return new JourneyForTheElixirLibraryTarget(this);
+    public JourneyForTheElixirTarget copy() {
+        return new JourneyForTheElixirTarget(this);
     }
 
     @Override
@@ -117,95 +119,35 @@ class JourneyForTheElixirLibraryTarget extends TargetCardInLibrary {
         if (card == null) {
             return false;
         }
-        if (this.getTargets().isEmpty()) {
-            return true;
-        }
+
         Cards cards = new CardsImpl(this.getTargets());
-        if (card.isBasic(game)
-                && card.isLand(game)
-                && cards
+        boolean hasLand = cards
                 .getCards(game)
                 .stream()
                 .filter(Objects::nonNull)
                 .filter(c -> c.isBasic(game))
-                .anyMatch(c -> c.isLand(game))) {
-            return false;
-        }
-        if (name.equals(card.getName())
-                && cards
+                .anyMatch(c -> c.isLand(game));
+        boolean hasJiang = cards
                 .getCards(game)
                 .stream()
                 .map(MageObject::getName)
-                .anyMatch(name::equals)) {
-            return false;
+                .anyMatch(name::equals);
+
+        if (!hasLand && card.isBasic(game) && card.isLand(game)) {
+            return true;
         }
-        return true;
-    }
-}
 
-class JourneyForTheElixirGraveyardTarget extends TargetCardInYourGraveyard {
+        if (!hasJiang && name.equals(card.getName())) {
+            return true;
+        }
 
-    private static final String name = "Jiang Yanggu";
-    private static final FilterCard filter
-            = new FilterCard("a basic land card and a card named Jiang Yanggu");
-
-    static {
-        filter.add(Predicates.or(
-                Predicates.and(
-                        SuperType.BASIC.getPredicate(),
-                        CardType.LAND.getPredicate()
-                ),
-                new NamePredicate(name)
-        ));
-    }
-
-    private final Cards cards = new CardsImpl();
-
-    JourneyForTheElixirGraveyardTarget(Cards cards) {
-        super(0, Integer.MAX_VALUE, filter, true);
-        this.cards.addAll(cards);
-    }
-
-    private JourneyForTheElixirGraveyardTarget(final JourneyForTheElixirGraveyardTarget target) {
-        super(target);
-        this.cards.addAll(target.cards);
-    }
-
-    @Override
-    public JourneyForTheElixirGraveyardTarget copy() {
-        return new JourneyForTheElixirGraveyardTarget(this);
+        return false;
     }
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = super.possibleTargets(sourceControllerId, source, game);
-        Cards alreadyTargeted = new CardsImpl(this.getTargets());
-        alreadyTargeted.addAll(cards);
-        boolean hasBasic = alreadyTargeted
-                .getCards(game)
-                .stream()
-                .filter(Objects::nonNull)
-                .filter(c -> c.isLand(game))
-                .anyMatch(c -> c.isBasic(game));
-        possibleTargets.removeIf(uuid -> {
-            Card card = game.getCard(uuid);
-            return card != null
-                    && hasBasic
-                    && card.isLand(game)
-                    && card.isBasic(game);
-        });
-        boolean hasYanggu = alreadyTargeted
-                .getCards(game)
-                .stream()
-                .filter(Objects::nonNull)
-                .map(MageObject::getName)
-                .anyMatch(name::equals);
-        possibleTargets.removeIf(uuid -> {
-            Card card = game.getCard(uuid);
-            return card != null
-                    && hasYanggu
-                    && name.equals(card.getName());
-        });
+        possibleTargets.removeIf(uuid -> !this.canTarget(sourceControllerId, uuid, source, game));
         return possibleTargets;
     }
 }

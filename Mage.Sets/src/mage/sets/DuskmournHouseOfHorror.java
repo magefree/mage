@@ -217,6 +217,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Meathook Massacre II", 311, Rarity.MYTHIC, mage.cards.m.MeathookMassacreII.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Miasma Demon", 109, Rarity.UNCOMMON, mage.cards.m.MiasmaDemon.class));
         cards.add(new SetCardInfo("Midnight Mayhem", 222, Rarity.UNCOMMON, mage.cards.m.MidnightMayhem.class));
+        cards.add(new SetCardInfo("Monstrous Emergence", 191, Rarity.COMMON, mage.cards.m.MonstrousEmergence.class));
         cards.add(new SetCardInfo("Most Valuable Slayer", 144, Rarity.COMMON, mage.cards.m.MostValuableSlayer.class));
         cards.add(new SetCardInfo("Mountain", 275, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 283, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
@@ -354,6 +355,8 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Tyvar, the Pummeler", 353, Rarity.MYTHIC, mage.cards.t.TyvarThePummeler.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tyvar, the Pummeler", 408, Rarity.MYTHIC, mage.cards.t.TyvarThePummeler.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Unable to Scream", 78, Rarity.COMMON, mage.cards.u.UnableToScream.class));
+        cards.add(new SetCardInfo("Undead Sprinter", 237, Rarity.RARE, mage.cards.u.UndeadSprinter.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Undead Sprinter", 350, Rarity.RARE, mage.cards.u.UndeadSprinter.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Under the Skin", 203, Rarity.UNCOMMON, mage.cards.u.UnderTheSkin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Under the Skin", 323, Rarity.UNCOMMON, mage.cards.u.UnderTheSkin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Unidentified Hovership", 305, Rarity.RARE, mage.cards.u.UnidentifiedHovership.class, NON_FULL_USE_VARIOUS));

@@ -63,7 +63,7 @@ class TreeOfPerditionEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player opponent = game.getPlayer(source.getFirstTarget());
         Permanent perm = game.getPermanent(source.getSourceId());
-        if (perm == null || opponent == null || !opponent.isLifeTotalCanChange()) {
+        if (perm == null || opponent == null || !opponent.isLifeTotalCanChange() || !perm.isCreature(game)) {
             return false;
         }
 

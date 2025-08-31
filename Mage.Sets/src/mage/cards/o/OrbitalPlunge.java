@@ -2,7 +2,6 @@ package mage.cards.o;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -61,10 +60,8 @@ class OrbitalPlungeEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        int lethal = permanent.getLethalDamage(source.getSourceId(), game);
-        permanent.damage(6, source.getSourceId(), source, game);
-        if (lethal < 6) {
-            new CreateTokenEffect(new LanderToken()).apply(game, source);
+        if (permanent.damageWithExcess(6, source, game) > 0) {
+            new LanderToken().putOntoBattlefield(1, game, source);
         }
         return true;
     }

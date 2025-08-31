@@ -13,6 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -81,7 +82,7 @@ class OildeepGearhulkEffect extends OneShotEffect {
         }
 
         controller.lookAtCards(targetPlayer.getName() + " Hand", targetPlayer.getHand(), game);
-        TargetCard chosenCard = new TargetCardInHand(0, 1, new FilterCard("card to discard"));
+        TargetCard chosenCard = new TargetCard(0, 1, Zone.HAND, new FilterCard("card to discard"));
         if (!controller.choose(Outcome.Discard, targetPlayer.getHand(), chosenCard, source, game)) {
             return false;
         }

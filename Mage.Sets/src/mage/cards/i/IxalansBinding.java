@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -78,7 +77,7 @@ class IxalansBindingReplacementEffect extends ContinuousRuleModifyingEffectImpl 
         }
         Card card = spellAbility.getCharacteristics(game);
         if (sourcePermanent != null && card != null) {
-            UUID exileZone = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+            UUID exileZone = CardUtil.getExileZoneId(game, source.getSourceId(), source.getStackMomentSourceZCC());
             if (exileZone != null) {
                 ExileZone exile = game.getExile().getExileZone(exileZone);
                 if (exile == null) {

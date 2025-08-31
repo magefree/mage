@@ -3,7 +3,7 @@ package mage.cards.o;
 import mage.MageInt;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.common.PutCounterOnCreatureTriggeredAbility;
+import mage.abilities.common.PutCounterOnPermanentTriggeredAbility;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -49,10 +49,9 @@ public final class OmarthisGhostfireInitiate extends CardImpl {
 
         // Whenever you put one or more +1/+1 counters on another colorless creature, you may put a +1/+1 counter on Omarthis.
         this.addAbility(
-            new PutCounterOnCreatureTriggeredAbility(
+            new PutCounterOnPermanentTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                CounterType.P1P1.createInstance(), filter,
-                false, true
+                CounterType.P1P1, filter, false, true
             )
         );
 

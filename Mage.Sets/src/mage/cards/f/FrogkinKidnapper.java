@@ -85,7 +85,7 @@ class FrogkinKidnapperEffect extends OneShotEffect {
         opponent.revealCards(source, opponent.getHand(), game);
         TargetCard target = new TargetCard(1, Zone.HAND, StaticFilters.FILTER_CARD_A_NON_LAND);
         Cards toRansom = new CardsImpl();
-        if (controller.chooseTarget(outcome, opponent.getHand(), target, source, game)) {
+        if (controller.choose(outcome, opponent.getHand(), target, source, game)) {
             toRansom.addAll(target.getTargets());
 
             String exileName = "Ransomed (owned by " + opponent.getName() + ")";

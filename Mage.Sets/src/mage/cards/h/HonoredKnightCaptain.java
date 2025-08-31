@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterBySubtypeCard;
 import mage.game.permanent.token.HumanSoldierToken;
 import mage.target.common.TargetCardInLibrary;
 
@@ -24,7 +23,7 @@ import java.util.UUID;
  */
 public final class HonoredKnightCaptain extends CardImpl {
 
-    private static final FilterCard filter = new FilterBySubtypeCard(SubType.EQUIPMENT);
+    private static final FilterCard filter = new FilterCard(SubType.EQUIPMENT);
 
     public HonoredKnightCaptain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");

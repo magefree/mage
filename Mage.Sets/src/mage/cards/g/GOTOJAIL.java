@@ -13,13 +13,11 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
 
 import java.util.List;
@@ -82,7 +80,7 @@ class GoToJailExileEffect extends OneShotEffect {
             if (controller != null) {
                 game.getState().setValue(permanent.getId() + ChooseOpponentEffect.VALUE_KEY, controller.getId());
                 new ExileTargetEffect(
-                        CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()), permanent.getIdName()
+                        CardUtil.getExileZoneId(game, source.getSourceId(), source.getStackMomentSourceZCC()), permanent.getIdName()
                 ).apply(game, source);
                 game.addDelayedTriggeredAbility(new OnLeaveReturnExiledAbility(), source);
                 return true;

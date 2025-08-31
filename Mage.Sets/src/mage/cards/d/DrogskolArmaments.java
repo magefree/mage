@@ -1,11 +1,9 @@
 package mage.cards.d;
 
-import mage.abilities.Ability;
-import mage.abilities.common.PutIntoGraveFromAnywhereSourceAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.ExileSourceEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
+import mage.abilities.keyword.DisturbAbility;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -33,14 +31,13 @@ public final class DrogskolArmaments extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget);
-        this.addAbility(ability);
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted creature gets +2/+2.
         this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(2, 2)));
 
         // If Drogskol Armaments would be put into a graveyard from anywhere, exile it instead.
-        this.addAbility(new PutIntoGraveFromAnywhereSourceAbility(new ExileSourceEffect().setText("exile it instead")));
+        this.addAbility(DisturbAbility.makeBackAbility());
     }
 
     private DrogskolArmaments(final DrogskolArmaments card) {

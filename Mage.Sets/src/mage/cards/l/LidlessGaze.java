@@ -65,7 +65,7 @@ class LidlessGazeEffect extends OneShotEffect {
             return false;
         }
 
-        UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+        UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getStackMomentSourceZCC());
         MageObject sourceObject = source.getSourceObject(game);
         String exileName = sourceObject == null ? null : sourceObject.getIdName();
 

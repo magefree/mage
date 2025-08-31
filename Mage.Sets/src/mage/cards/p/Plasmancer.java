@@ -8,8 +8,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.filter.FilterCard;
+import mage.filter.common.FilterBasicCard;
 import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
@@ -19,12 +19,7 @@ import java.util.UUID;
  */
 public final class Plasmancer extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("a basic Swamp card");
-
-    static {
-        filter.add(SuperType.BASIC.getPredicate());
-        filter.add(SubType.SWAMP.getPredicate());
-    }
+    private static final FilterCard filter = new FilterBasicCard(SubType.SWAMP);
 
     public Plasmancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}{B}{B}");

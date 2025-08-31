@@ -114,7 +114,7 @@ class AngelOfDestinyLoseEffect extends OneShotEffect {
             return false;
         }
         Set<UUID> playerSet = watcher.getPlayers(new MageObjectReference(
-                source.getSourceId(), source.getSourceObjectZoneChangeCounter(), game
+                source.getSourceId(), source.getStackMomentSourceZCC(), game
         ));
         if (playerSet == null) {
             return false;

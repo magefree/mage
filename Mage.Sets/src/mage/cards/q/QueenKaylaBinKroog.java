@@ -110,25 +110,10 @@ class QueenKaylaBinKroogTarget extends TargetCard {
     }
 
     @Override
-    public boolean canTarget(UUID playerId, UUID id, Ability ability, Game game) {
-        if (!super.canTarget(playerId, id, ability, game)) {
-            return false;
-        }
-        Card card = game.getCard(id);
-        return card != null && 1 <= card.getManaValue() && card.getManaValue() <= 3 && this
-                .getTargets()
-                .stream()
-                .map(game::getCard)
-                .filter(Objects::nonNull)
-                .mapToInt(MageObject::getManaValue)
-                .noneMatch(x -> card.getManaValue() == x);
-    }
-
-
-    @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = super.possibleTargets(sourceControllerId, source, game);
-        Set<Integer> manaValues = this
+
+        Set<Integer> usedManaValues = this
                 .getTargets()
                 .stream()
                 .map(game::getCard)
@@ -137,8 +122,9 @@ class QueenKaylaBinKroogTarget extends TargetCard {
                 .collect(Collectors.toSet());
         possibleTargets.removeIf(uuid -> {
             Card card = game.getCard(uuid);
-            return card != null && manaValues.contains(card.getManaValue());
+            return card == null || usedManaValues.contains(card.getManaValue());
         });
+
         return possibleTargets;
     }
 }

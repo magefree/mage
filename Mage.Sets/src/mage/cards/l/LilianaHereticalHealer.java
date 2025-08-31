@@ -1,7 +1,6 @@
 package mage.cards.l;
 
 import mage.MageInt;
-import mage.constants.Pronoun;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ExileAndReturnSourceEffect;
@@ -10,7 +9,8 @@ import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.ZombieToken;
@@ -22,10 +22,9 @@ import java.util.UUID;
  */
 public final class LilianaHereticalHealer extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another nontoken creature you control");
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("another nontoken creature you control");
 
     static {
-        filter.add(TargetController.YOU.getControllerPredicate());
         filter.add(AnotherPredicate.instance);
         filter.add(TokenPredicate.FALSE);
     }

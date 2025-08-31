@@ -10,9 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.constants.TargetController;
-import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -25,13 +23,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class KeeperOfTheAccord extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("basic Plains card");
-
-    static {
-        filter.add(SuperType.BASIC.getPredicate());
-        filter.add(SubType.PLAINS.getPredicate());
-    }
 
     public KeeperOfTheAccord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
@@ -48,7 +39,7 @@ public final class KeeperOfTheAccord extends CardImpl {
 
         // At the beginning of each opponent's end step, if that player controls more lands than you, you may search your library for a basic Plains card, put it onto the battlefield tapped, then shuffle your library.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                TargetController.OPPONENT, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), true), true
+                TargetController.OPPONENT, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_PLAINS), true), true
         ).withInterveningIf(KeeperOfTheAccordCondition.LANDS));
     }
 

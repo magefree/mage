@@ -135,7 +135,7 @@ class LifestreamsBlessingWatcher extends Watcher {
                 .getWatcher(LifestreamsBlessingWatcher.class)
                 .map
                 .getOrDefault(new MageObjectReference(
-                        source.getSourceId(), source.getSourceObjectZoneChangeCounter(), game
+                        source.getSourceId(), source.getStackMomentSourceZCC(), game
                 ), 0);
     }
 }

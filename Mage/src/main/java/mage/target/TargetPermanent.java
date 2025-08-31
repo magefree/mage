@@ -51,11 +51,11 @@ public class TargetPermanent extends TargetObject {
 
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
-        return canTarget(source.getControllerId(), id, source, game);
+        return canTarget(source == null ? null : source.getControllerId(), id, source, game);
     }
 
     @Override
-    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
+    public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
         Permanent permanent = game.getPermanent(id);
         if (permanent == null) {
             return false;
@@ -67,19 +67,14 @@ public class TargetPermanent extends TargetObject {
             // first for protection from spells or abilities (e.g. protection from colored spells, r1753)
             // second for protection from sources (e.g. protection from artifacts + equip ability)
             if (!isNotTarget()) {
-                if (!permanent.canBeTargetedBy(game.getObject(source.getId()), controllerId, source, game)
-                        || !permanent.canBeTargetedBy(game.getObject(source), controllerId, source, game)) {
+                if (!permanent.canBeTargetedBy(game.getObject(source.getId()), playerId, source, game)
+                        || !permanent.canBeTargetedBy(game.getObject(source), playerId, source, game)) {
                     return false;
                 }
             }
         }
 
-        return filter.match(permanent, controllerId, source, game);
-    }
-
-    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game, boolean flag) {
-        Permanent permanent = game.getPermanent(id);
-        return filter.match(permanent, controllerId, source, game);
+        return filter.match(permanent, playerId, source, game);
     }
 
     @Override
@@ -87,91 +82,19 @@ public class TargetPermanent extends TargetObject {
         return this.filter;
     }
 
-    /**
-     * Checks if there are enough {@link Permanent} that can be chosen.
-     * <p>
-     * Takes into account notTarget parameter, in case it's true doesn't check
-     * for protection, shroud etc.
-     *
-     * @param sourceControllerId controller of the target event source
-     * @param source
-     * @param game
-     * @return true if enough valid {@link Permanent} exist
-     */
     @Override
     public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
-        int remainingTargets = this.minNumberOfTargets - targets.size();
-        if (remainingTargets <= 0) {
-            return true;
-        }
-        int count = 0;
-        MageObject targetSource = game.getObject(source);
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
-            if (!targets.containsKey(permanent.getId())) {
-                if (notTarget || permanent.canBeTargetedBy(targetSource, sourceControllerId, source, game)) {
-                    count++;
-                    if (count >= remainingTargets) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Checks if there are enough {@link Permanent} that can be selected. Should
-     * not be used for Ability targets since this does not check for protection,
-     * shroud etc.
-     *
-     * @param sourceControllerId - controller of the select event
-     * @param game
-     * @return - true if enough valid {@link Permanent} exist
-     */
-    @Override
-    public boolean canChoose(UUID sourceControllerId, Game game) {
-        int remainingTargets = this.minNumberOfTargets - targets.size();
-        if (remainingTargets == 0) {
-            // if we return true, then AnowonTheRuinSage will hang for AI when no targets in play
-            // TODO: retest Anowon the Ruin Sage
-            return true;
-        }
-        int count = 0;
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, game)) {
-            if (!targets.containsKey(permanent.getId())) {
-                count++;
-                if (count >= remainingTargets) {
-                    return true;
-                }
-            }
-        }
-        return false;
+        return canChooseFromPossibleTargets(sourceControllerId, source, game);
     }
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         // TODO: check if possible targets works with setTargetController from some cards like Nicol Bolas, Dragon-God
         Set<UUID> possibleTargets = new HashSet<>();
-        MageObject targetSource = game.getObject(source);
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
-            if (!targets.containsKey(permanent.getId())) {
-                if (notTarget || permanent.canBeTargetedBy(targetSource, sourceControllerId, source, game)) {
-                    possibleTargets.add(permanent.getId());
-                }
-            }
+            possibleTargets.add(permanent.getId());
         }
-        return possibleTargets;
-    }
-
-    @Override
-    public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
-        Set<UUID> possibleTargets = new HashSet<>();
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, game)) {
-            if (!targets.containsKey(permanent.getId())) {
-                possibleTargets.add(permanent.getId());
-            }
-        }
-        return possibleTargets;
+        return keepValidPossibleTargets(possibleTargets, sourceControllerId, source, game);
     }
 
     @Override
