@@ -64,6 +64,8 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("J. Jonah Jameson", 261, Rarity.RARE, mage.cards.j.JJonahJameson.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("J. Jonah Jameson", 81, Rarity.RARE, mage.cards.j.JJonahJameson.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kapow!", 103, Rarity.COMMON, mage.cards.k.Kapow.class));
+        cards.add(new SetCardInfo("Kraven the Hunter", 133, Rarity.RARE, mage.cards.k.KravenTheHunter.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kraven the Hunter", 273, Rarity.RARE, mage.cards.k.KravenTheHunter.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kraven's Cats", 104, Rarity.COMMON, mage.cards.k.KravensCats.class));
         cards.add(new SetCardInfo("Kraven's Last Hunt", 105, Rarity.RARE, mage.cards.k.KravensLastHunt.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kraven's Last Hunt", 226, Rarity.RARE, mage.cards.k.KravensLastHunt.class, FULL_ART_USE_VARIOUS));
