@@ -35,10 +35,10 @@ public final class GwenStacy extends ModalDoubleFacedCard {
         this.getRightHalfCard().setPT(4, 4);
 
         // When Gwen Stacy enters, exile the top card of your library. You may play that card for as long as you control this creature.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ExileTopXMayPlayUntilEffect(1, Duration.WhileControlled)
+        this.getLeftHalfCard().addAbility(new EntersBattlefieldTriggeredAbility(new ExileTopXMayPlayUntilEffect(1, Duration.WhileControlled)
                 .withTextOptions("that card", true)));
         // {2}{U}{R}{W}: Transform Gwen Stacy. Activate only as a sorcery.
-        this.addAbility(new ActivateAsSorceryActivatedAbility(new TransformSourceEffect(), new ManaCostsImpl<>("{2}{U}{R}{W}")));
+        this.getLeftHalfCard().addAbility(new ActivateAsSorceryActivatedAbility(new TransformSourceEffect(), new ManaCostsImpl<>("{2}{U}{R}{W}")));
 
         // Ghost-Spider
         // Flying

@@ -40,15 +40,16 @@ public final class NormanOsborn extends ModalDoubleFacedCard {
                 new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.GOBLIN, SubType.HUMAN, SubType.VILLAIN}, "{1}{U}{B}{R}");
 
         this.getLeftHalfCard().setPT(1, 1);
+        this.getRightHalfCard().setPT(3, 3);
 
         // Norman Osborn can't be blocked.
-        this.addAbility(new CantBeBlockedSourceAbility());
+        this.getLeftHalfCard().addAbility(new CantBeBlockedSourceAbility());
 
         // Whenever Norman Osborn deals combat damage to a player, he connives.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new ConniveSourceEffect("he")));
+        this.getLeftHalfCard().addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new ConniveSourceEffect("he")));
 
         // {1}{U}{B}{R}: Transform Norman Osborn. Activate only as a sorcery.
-        this.addAbility(new ActivateAsSorceryActivatedAbility(
+        this.getLeftHalfCard().addAbility(new ActivateAsSorceryActivatedAbility(
                 new TransformSourceEffect(), new ManaCostsImpl<>("{1}{U}{B}{R}")
         ));
 

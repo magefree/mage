@@ -44,7 +44,7 @@ public final class PeterParker extends ModalDoubleFacedCard {
         this.getRightHalfCard().setPT(4, 4);
 
         // When Peter Parker enters, create a 2/1 green Spider creature token with reach.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new Spider21Token())));
+        this.getLeftHalfCard().addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new Spider21Token())));
 
         // {1}{G}{W}{U}: Transform Peter Parker. Activate only as a sorcery.
         this.getLeftHalfCard().addAbility(new ActivateAsSorceryActivatedAbility(
