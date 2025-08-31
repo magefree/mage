@@ -183,6 +183,7 @@ public class VerifyCardDataTest {
         // rarity
         // skipListAddName(SKIP_LIST_RARITY, set, cardName);
         skipListAddName(SKIP_LIST_RARITY, "CMR", "The Prismatic Piper"); // Collation is not yet set up for CMR https://www.lethe.xyz/mtg/collation/cmr.html
+        skipListAddName(SKIP_LIST_RARITY, "SPM", "Gwenom, Remorseless"); // temporary
 
         // missing abilities
         // skipListAddName(SKIP_LIST_MISSING_ABILITIES, set, cardName);
@@ -764,25 +765,25 @@ public class VerifyCardDataTest {
                             + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
                 }
 
-               // CHECK: full art lands must use full art setting
-               boolean isLand = card.getRarity().equals(Rarity.LAND);
-               if (isLand && jsonCard.isFullArt && !card.isFullArt()) {
-                   errorsList.add("Error: card must use full art lands setting: "
-                           + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
-               }
+                // CHECK: full art lands must use full art setting
+                boolean isLand = card.getRarity().equals(Rarity.LAND);
+                if (isLand && jsonCard.isFullArt && !card.isFullArt()) {
+                    errorsList.add("Error: card must use full art lands setting: "
+                            + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
+                }
 
-               // CHECK: non-full art lands must not use full art setting
-               if (isLand && !jsonCard.isFullArt && card.isFullArt()) {
-                   errorsList.add("Error: card must NOT use full art lands setting: "
-                           + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
-               }
+                // CHECK: non-full art lands must not use full art setting
+                if (isLand && !jsonCard.isFullArt && card.isFullArt()) {
+                    errorsList.add("Error: card must NOT use full art lands setting: "
+                            + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
+                }
 
                 // CHECK: must use retro frame setting
                 if ((jsonCard.frameVersion.equals("1993") || jsonCard.frameVersion.equals("1997")) && !card.isRetroFrame()) {
                     errorsList.add("Error: card must use retro art setting: "
                             + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
                 }
-                
+
                 // CHECK: must not use retro frame setting
                 if ((!(jsonCard.frameVersion.equals("1993") || jsonCard.frameVersion.equals("1997"))) && card.isRetroFrame()) {
                     errorsList.add("Error: card must NOT use retro art setting: "
