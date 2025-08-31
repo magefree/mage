@@ -1,9 +1,6 @@
 package mage.cards.g;
 
-import mage.abilities.common.ActivateAsSorceryActivatedAbility;
-import mage.abilities.common.ControllerPlaysLandTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.*;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
@@ -51,8 +48,8 @@ public final class GwenStacy extends ModalDoubleFacedCard {
         this.getRightHalfCard().addAbility(HasteAbility.getInstance());
 
         // Whenever you play a land from exile or cast a spell from exile, put a +1/+1 counter on Ghost-Spider.
-        this.getRightHalfCard().addAbility(new ControllerPlaysLandTriggeredAbility(Zone.BATTLEFIELD,
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
+        this.getRightHalfCard().addAbility(new PlayLandOrCastSpellTriggeredAbility(
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true, false));
         // Remove two counters from Ghost-Spider: Exile the top card of your library. You may play that card this turn.
         this.getRightHalfCard().addAbility(new SimpleActivatedAbility(
                 new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn),
