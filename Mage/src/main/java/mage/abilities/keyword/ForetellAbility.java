@@ -1,16 +1,13 @@
 package mage.abilities.keyword;
 
-import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.SpecialAction;
 import mage.abilities.SpellAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -228,7 +225,7 @@ class ForetellExileEffect extends OneShotEffect {
                 game.getExile().getExileZone(exileId)
                         .letPlayerSeeCards(controller.getId(), card);
                 game.addEffect(new ForetellAddCostEffect(new MageObjectReference(card, game)), source);
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CARD_FORETOLD, card.getId(), source, source.getControllerId(), 0, true));
+            game.fireEvent(new GameEvent(GameEvent.EventType.CARD_FORETOLD, card.getId(), source, source.getControllerId(), 0, true));
                 return true;
             }
             return false;
