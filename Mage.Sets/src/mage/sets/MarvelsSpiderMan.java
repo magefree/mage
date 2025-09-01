@@ -24,6 +24,8 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         this.blockName = "Marvel's Spider-Man"; // for sorting in GUI
         this.hasBasicLands = true;
 
+        cards.add(new SetCardInfo("Agent Venom", 255, Rarity.RARE, mage.cards.a.AgentVenom.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Agent Venom", 49, Rarity.RARE, mage.cards.a.AgentVenom.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Angry Rabble", 75, Rarity.COMMON, mage.cards.a.AngryRabble.class));
         cards.add(new SetCardInfo("Anti-Venom, Horrifying Healer", 1, Rarity.MYTHIC, mage.cards.a.AntiVenomHorrifyingHealer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Anti-Venom, Horrifying Healer", 244, Rarity.MYTHIC, mage.cards.a.AntiVenomHorrifyingHealer.class, NON_FULL_USE_VARIOUS));
