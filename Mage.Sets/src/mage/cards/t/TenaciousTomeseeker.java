@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.BargainedCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.hint.common.BargainCostWasPaidHint;
 import mage.abilities.keyword.BargainAbility;
@@ -34,11 +33,7 @@ public final class TenaciousTomeseeker extends CardImpl {
         this.addAbility(new BargainAbility());
 
         // When Tenacious Tomeseeker enters the battlefield, if it was bargained, return target instant or sorcery card from your graveyard to your hand.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect()),
-                BargainedCondition.instance, "When {this} enters, if it was bargained, " +
-                "return target instant or sorcery card from your graveyard to your hand."
-        );
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect()).withInterveningIf(BargainedCondition.instance);
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY_FROM_YOUR_GRAVEYARD));
         this.addAbility(ability.addHint(BargainCostWasPaidHint.instance));
     }

@@ -1,16 +1,20 @@
 package mage.cards.p;
 
 import mage.MageInt;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.DiesThisOrAnotherTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.YouGainedLifeCondition;
+import mage.abilities.dynamicvalue.common.ControllerGainedLifeCount;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.ComparisonType;
+import mage.constants.SubType;
+import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.watchers.common.PlayerGainedLifeWatcher;
 
@@ -42,7 +46,7 @@ public final class PanickedBystander extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 TargetController.YOU, new TransformSourceEffect(),
                 false, condition
-        ), new PlayerGainedLifeWatcher());
+        ).addHint(ControllerGainedLifeCount.getHint()), new PlayerGainedLifeWatcher());
     }
 
     private PanickedBystander(final PanickedBystander card) {

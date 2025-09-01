@@ -3,7 +3,6 @@ package mage.cards.c;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CastFromHandSourcePermanentCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -37,13 +36,10 @@ public final class CycloneSummoner extends CardImpl {
         this.toughness = new MageInt(7);
 
         // When Cyclone Summoner enters the battlefield, if you cast it from your hand, return all permanents to their owners' hands except for Giants, Wizards, and lands.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(
-                        new ReturnToHandFromBattlefieldAllEffect(filter), false
-                ), CastFromHandSourcePermanentCondition.instance, "When {this} enters, " +
-                "if you cast it from your hand, return all permanents to their owners' hands " +
-                "except for Giants, Wizards, and lands."
-        ), new CastFromHandWatcher());
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new ReturnToHandFromBattlefieldAllEffect(filter)
+                        .setText("return all permanents to their owners' hands except for Giants, Wizards, and lands")
+        ).withInterveningIf(CastFromHandSourcePermanentCondition.instance), new CastFromHandWatcher());
     }
 
     private CycloneSummoner(final CycloneSummoner card) {

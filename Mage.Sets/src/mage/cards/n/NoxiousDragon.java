@@ -14,6 +14,7 @@ import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -39,7 +40,7 @@ public final class NoxiousDragon extends CardImpl {
 
         // When Noxious Dragon dies, you may destroy target creature with converted mana cost 3 or less.
         Ability ability = new DiesSourceTriggeredAbility(new DestroyTargetEffect(), true);
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
         
     }

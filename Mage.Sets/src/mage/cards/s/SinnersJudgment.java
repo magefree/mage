@@ -1,12 +1,12 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.common.PutIntoGraveFromAnywhereSourceAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.ExileSourceEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.keyword.DisturbAbility;
 import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -15,9 +15,9 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.TargetPlayer;
 
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -37,16 +37,15 @@ public final class SinnersJudgment extends CardImpl {
         TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget);
-        this.addAbility(ability);
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // At the beginning of your upkeep, put a judgment counter on Sinner's Judgment. Then if there are three or more judgment counters on it, enchanted player loses the game.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new SinnersJudgmentEffect()
-        ));
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.JUDGMENT.createInstance()));
+        ability.addEffect(new SinnersJudgmentEffect());
+        this.addAbility(ability);
 
         // If Sinner's Judgment would be put into a graveyard from anywhere, exile it instead.
-        this.addAbility(new PutIntoGraveFromAnywhereSourceAbility(new ExileSourceEffect().setText("exile it instead")));
+        this.addAbility(DisturbAbility.makeBackAbility());
     }
 
     private SinnersJudgment(final SinnersJudgment card) {
@@ -63,8 +62,7 @@ class SinnersJudgmentEffect extends OneShotEffect {
 
     SinnersJudgmentEffect() {
         super(Outcome.Benefit);
-        staticText = "put a judgment counter on {this}. Then if there are three " +
-                "or more judgment counters on it, enchanted player loses the game";
+        staticText = "Then if there are three or more judgment counters on it, enchanted player loses the game";
     }
 
     private SinnersJudgmentEffect(final SinnersJudgmentEffect effect) {
@@ -78,18 +76,15 @@ class SinnersJudgmentEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-        if (permanent == null) {
-            return false;
-        }
-        permanent.addCounters(CounterType.JUDGMENT.createInstance(), source, game);
-        if (permanent.getCounters(game).getCount(CounterType.JUDGMENT) < 3) {
-            return true;
-        }
-        Player player = game.getPlayer(permanent.getAttachedTo());
-        if (player != null) {
-            player.lost(game);
-        }
-        return true;
+        return Optional
+                .ofNullable(source.getSourcePermanentOrLKI(game))
+                .filter(permanent -> permanent.getCounters(game).getCount(CounterType.JUDGMENT) >= 3)
+                .map(Permanent::getAttachedTo)
+                .map(game::getPlayer)
+                .filter(player -> {
+                    player.lost(game);
+                    return true;
+                })
+                .isPresent();
     }
 }

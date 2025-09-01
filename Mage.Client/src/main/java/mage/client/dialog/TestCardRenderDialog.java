@@ -16,7 +16,7 @@ import mage.client.cards.BigCard;
 import mage.client.game.PlayAreaPanel;
 import mage.client.game.PlayerPanelExt;
 import mage.client.themes.ThemeType;
-import mage.client.util.ClientEventType;
+import mage.client.util.*;
 import mage.client.util.Event;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.Listener;
@@ -82,6 +82,7 @@ public class TestCardRenderDialog extends MageDialog {
         getRootPane().setDefaultButton(buttonCancel);
 
         // init render mode
+        this.comboRenderMode.setModel(new DefaultComboBoxModel<>(CardRenderMode.toList()));
         this.comboRenderMode.setSelectedIndex(PreferencesDialog.getRenderMode());
 
         // init themes list
@@ -326,6 +327,13 @@ public class TestCardRenderDialog extends MageDialog {
             possibleTargets.add(playerYou.getId());
         }
 
+        // chosen target
+        Set<UUID> chosenTargets = null;
+        if (false) { // TODO: add GUI's checkbox for checkPlayerAsChosen
+            chosenTargets = new LinkedHashSet<>();
+            chosenTargets.add(playerYou.getId());
+        }
+
         // player's panel
         if (this.player == null) {
             // create new panel
@@ -345,7 +353,7 @@ public class TestCardRenderDialog extends MageDialog {
                 .findFirst()
                 .orElse(null);
         this.player.init(this.game.getId(), playerYou.getId(), isMe, this.bigCard, 0);
-        this.player.update(gameView, currentPlayerView, possibleTargets);
+        this.player.update(gameView, currentPlayerView, possibleTargets, chosenTargets);
         this.player.sizePlayerPanel(smallMode);
 
         // update CARDS
@@ -424,6 +432,7 @@ public class TestCardRenderDialog extends MageDialog {
         cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "185", 0, 0, 0, true, false, null)); // Judith, the Scourge Diva
         cardViews.add(createHandCard(game, playerYou.getId(), "DIS", "153")); // Odds // Ends (split card)
         cardViews.add(createHandCard(game, playerYou.getId(), "ELD", "38")); // Animating Faerie (adventure card)
+        cardViews.add(createHandCard(game, playerYou.getId(), "LEA", "278")); // Bayou (retro frame)
         cardViews.add(createFaceDownCard(game, playerOpponent.getId(), "ELD", "38", false, false, false)); // face down
         cardViews.add(createFaceDownCard(game, playerOpponent.getId(), "ELD", "38", true, false, true)); // morphed
         cardViews.add(createFaceDownCard(game, playerOpponent.getId(), "ELD", "38", false, true, false)); // manifested
@@ -628,7 +637,7 @@ public class TestCardRenderDialog extends MageDialog {
 
         labelRenderMode.setText("Render mode:");
 
-        comboRenderMode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MTGO", "Image" }));
+        comboRenderMode.setToolTipText("<HTML>Image - Renders card image with text overlay<br> MTGO - Renders card frame around card art<br> Forced M15 - Renders all cards in the MTGO style with the modern frame<br> Forced Retro - Renders all cards in the MTGO style with the retro frame");
         comboRenderMode.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboRenderModeItemStateChanged(evt);

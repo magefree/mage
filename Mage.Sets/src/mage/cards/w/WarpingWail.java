@@ -16,6 +16,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
 import mage.game.permanent.token.EldraziScionToken;
+import mage.target.TargetPermanent;
 import mage.target.TargetSpell;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -42,7 +43,7 @@ public final class WarpingWail extends CardImpl {
         Effect effect = new ExileTargetEffect();
         effect.setText("Exile target creature with power or toughness 1 or less.");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filterCreature));
+        this.getSpellAbility().addTarget(new TargetPermanent(filterCreature));
 
         // Counter target sorcery spell.
         Mode mode = new Mode(new CounterTargetEffect());

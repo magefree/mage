@@ -15,6 +15,7 @@ import mage.util.CardUtil;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBaseWithAIHelps;
 
 import java.util.Arrays;
@@ -509,6 +510,7 @@ public class AdjusterCostTest extends CardTestPlayerBaseWithAIHelps {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fireball");
         setChoice(playerA, "X=2");
         addTarget(playerA, "Arbor Elf^Arbor Elf");
+        addTarget(playerA, TestPlayer.TARGET_SKIP);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);

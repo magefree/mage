@@ -1,20 +1,16 @@
-
 package mage.cards.c;
 
 import mage.MageInt;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
-import mage.abilities.hint.ValueHint;
+import mage.abilities.hint.common.PermanentsYouControlHint;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.SubType;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 
 import java.util.UUID;
@@ -25,7 +21,7 @@ import java.util.UUID;
 public final class ComplexAutomaton extends CardImpl {
 
     private static final Condition condition = new PermanentsOnTheBattlefieldCondition(
-            StaticFilters.FILTER_CONTROLLED_PERMANENT, ComparisonType.MORE_THAN, 6
+            new FilterControlledPermanent("you control seven or more permanents"), ComparisonType.MORE_THAN, 6
     );
 
     public ComplexAutomaton(UUID ownerId, CardSetInfo setInfo) {
@@ -36,12 +32,8 @@ public final class ComplexAutomaton extends CardImpl {
         this.toughness = new MageInt(4);
 
         // At the beginning of your upkeep, if you control seven or more permanents, return Complex Automaton to its owner's hand.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(
-                        new ReturnToHandSourceEffect(true), false
-                ), condition, "At the beginning of your upkeep, " +
-                "if you control seven or more permanents, return {this} to its owner's hand."
-        ).addHint(new ValueHint("Permanents you control", new PermanentsOnBattlefieldCount(new FilterControlledPermanent()))));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ReturnToHandSourceEffect(true))
+                .withInterveningIf(condition).addHint(PermanentsYouControlHint.instance));
     }
 
     private ComplexAutomaton(final ComplexAutomaton card) {

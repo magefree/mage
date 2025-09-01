@@ -1,7 +1,6 @@
 
 package mage.cards.j;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -12,21 +11,25 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.MultikickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class JoragaWarcaller extends CardImpl {
-    
-    private static final String rule = "Other Elf creatures you control get +1/+1 for each +1/+1 counter on Joraga Warcaller";
-    
+
+    private static final String rule = "Other Elf creatures you control get +1/+1 for each +1/+1 counter on {this}";
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("elf creatures you control");
-    
+
     static {
         filter.add(TargetController.YOU.getControllerPredicate());
         filter.add(SubType.ELF.getPredicate());

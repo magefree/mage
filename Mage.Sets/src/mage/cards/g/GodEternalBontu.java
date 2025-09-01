@@ -12,9 +12,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -59,12 +57,6 @@ public final class GodEternalBontu extends CardImpl {
 
 class GodEternalBontuEffect extends OneShotEffect {
 
-    private static final FilterPermanent filter = new FilterControlledPermanent("other permanents you control");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
-
     GodEternalBontuEffect() {
         super(Outcome.Benefit);
         staticText = "sacrifice any number of other permanents, then draw that many cards.";
@@ -85,7 +77,7 @@ class GodEternalBontuEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        Target target = new TargetSacrifice(0, Integer.MAX_VALUE, filter);
+        Target target = new TargetSacrifice(0, Integer.MAX_VALUE, StaticFilters.FILTER_OTHER_CONTROLLED_PERMANENTS);
         if (!player.choose(outcome, target, source, game)) {
             return false;
         }

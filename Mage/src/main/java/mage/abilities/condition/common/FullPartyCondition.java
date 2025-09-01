@@ -8,12 +8,16 @@ import mage.game.Game;
 /**
  * @author TheElk801
  */
-
 public enum FullPartyCondition implements Condition {
     instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
         return PartyCount.instance.calculate(game, source, null) >= 4;
+    }
+
+    @Override
+    public String toString() {
+        return "you have a full party";
     }
 }

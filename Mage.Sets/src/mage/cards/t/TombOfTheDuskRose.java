@@ -1,7 +1,5 @@
 package mage.cards.t;
 
-import java.util.UUID;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -20,10 +18,12 @@ import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
+import mage.target.common.TargetCardInExile;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class TombOfTheDuskRose extends CardImpl {
@@ -60,7 +60,7 @@ class TombOfTheDuskRoseEffect extends OneShotEffect {
 
     TombOfTheDuskRoseEffect() {
         super(Outcome.PutCardInPlay);
-        this.staticText = "Put a creature card exiled with this permanent onto the battlefield under your control";
+        this.staticText = "put a creature card exiled with this permanent onto the battlefield under your control";
     }
 
     private TombOfTheDuskRoseEffect(final TombOfTheDuskRoseEffect effect) {
@@ -75,20 +75,17 @@ class TombOfTheDuskRoseEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        UUID exileId = CardUtil.getCardExileZoneId(game, source);
-        MageObject sourceObject = source.getSourceObject(game);
-        if (controller != null && exileId != null && sourceObject != null) {
-            ExileZone exileZone = game.getExile().getExileZone(exileId);
-            if (exileZone != null) {
-                TargetCard targetCard = new TargetCard(Zone.EXILED, StaticFilters.FILTER_CARD_CREATURE);
-                controller.chooseTarget(outcome, exileZone, targetCard, source, game);
-                Card card = game.getCard(targetCard.getFirstTarget());
-                if (card != null) {
-                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                }
-            }
-            return true;
+        if (controller == null) {
+            return false;
         }
-        return false;
+        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source));
+        if (exileZone == null || exileZone.count(StaticFilters.FILTER_CARD_CREATURE, game) < 1) {
+            return false;
+        }
+        TargetCard targetCard = new TargetCardInExile(StaticFilters.FILTER_CARD_CREATURE, exileZone.getId());
+        targetCard.withNotTarget(true);
+        controller.choose(outcome, targetCard, source, game);
+        Card card = game.getCard(targetCard.getFirstTarget());
+        return card != null && controller.moveCards(card, Zone.BATTLEFIELD, source, game);
     }
 }

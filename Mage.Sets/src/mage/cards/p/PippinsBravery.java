@@ -25,7 +25,7 @@ public final class PippinsBravery extends CardImpl {
         // You may sacrifice a Food. If you do, target creature gets +4/+4 until end of turn. Otherwise, that creature gets +2/+2 until end of turn.
         this.getSpellAbility().addEffect(new DoIfCostPaid(
                 new BoostTargetEffect(4, 4),
-                new BoostTargetEffect(2, 2),
+                new BoostTargetEffect(2, 2).withTargetDescription("that creature"),
                 new SacrificeTargetCost(filter)
         ));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

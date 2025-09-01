@@ -87,8 +87,8 @@ public class SorinOfHouseMarkovTest extends CardTestPlayerBase {
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "+2");
 
         // Activate both foods
-        activateAbility(5, PhaseStep.UPKEEP, playerA, "{2}, {T}, Sacrifice this artifact: You gain 3 life");
-        activateAbility(5, PhaseStep.UPKEEP, playerA, "{2}, {T}, Sacrifice this artifact: You gain 3 life");
+        activateAbility(5, PhaseStep.UPKEEP, playerA, "{2}, {T}, Sacrifice");
+        activateAbility(5, PhaseStep.UPKEEP, playerA, "{2}, {T}, Sacrifice");
 
         activateAbility(5, PhaseStep.PRECOMBAT_MAIN, playerA, "-1");
         addTarget(playerA, playerB);

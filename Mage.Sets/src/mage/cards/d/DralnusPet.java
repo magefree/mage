@@ -92,7 +92,7 @@ class DralnusPetEffect extends OneShotEffect {
             SpellAbility spellAbility = (SpellAbility) getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
             if (spellAbility != null
                     && spellAbility.getSourceId().equals(source.getSourceId())
-                    && permanent.getZoneChangeCounter(game) == spellAbility.getSourceObjectZoneChangeCounter()) {
+                    && permanent.getZoneChangeCounter(game) == spellAbility.getStackMomentSourceZCC()) {
                 int cmc = 0;
                 for (Cost cost : spellAbility.getCosts()) {
                     if (cost instanceof DiscardCardCost && !((DiscardCardCost) cost).getCards().isEmpty()) {

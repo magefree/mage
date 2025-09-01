@@ -56,6 +56,7 @@ public class IncreasingCardsTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Increasing Confusion");
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback {X}{U}");
 
+        setStrictChooseMode(false); // TODO: good test for AI's announceX - duplicate it as AI test
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
 

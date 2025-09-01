@@ -90,7 +90,7 @@ class GrimoireThiefExileEffect extends OneShotEffect {
                     card.setFaceDown(true, game);
                 }
                 UUID exileZoneId = CardUtil.getExileZoneId(game,
-                        source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+                        source.getSourceId(), source.getStackMomentSourceZCC());
                 targetOpponent.moveCardsToExile(cards, source, game, false,
                         exileZoneId, sourceObject.getIdName());
                 for (Card card : cards) {

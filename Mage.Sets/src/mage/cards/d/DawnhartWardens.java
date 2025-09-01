@@ -1,15 +1,17 @@
 package mage.cards.d;
 
 import mage.MageInt;
-import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.common.CovenCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.hint.common.CovenHint;
 import mage.abilities.keyword.VigilanceAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.AbilityWord;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
 
 import java.util.UUID;
 
@@ -30,13 +32,8 @@ public final class DawnhartWardens extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Coven — At the beginning of combat on your turn, if you control three or more creatures with different powers, creatures you control get +1/+0 until end of turn.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfCombatTriggeredAbility(
-                        new BoostControlledEffect(1, 0, Duration.EndOfTurn)
-                ), CovenCondition.instance, "At the beginning of combat on your turn, " +
-                "if you control three or more creatures with different powers, " +
-                "creatures you control get +1/+0 until end of turn."
-        ).addHint(CovenHint.instance).setAbilityWord(AbilityWord.COVEN));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(new BoostControlledEffect(1, 0, Duration.EndOfTurn))
+                .withInterveningIf(CovenCondition.instance).addHint(CovenHint.instance).setAbilityWord(AbilityWord.COVEN));
     }
 
     private DawnhartWardens(final DawnhartWardens card) {

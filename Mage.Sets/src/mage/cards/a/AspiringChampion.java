@@ -13,6 +13,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -81,7 +82,8 @@ class AspiringChampionEffect extends OneShotEffect {
         toReveal.retainZone(Zone.LIBRARY, game);
         player.putCardsOnBottomOfLibrary(toReveal, game, source, false);
         player.shuffleLibrary(source, game);
-        Permanent creature = game.getPermanent(card.getId());
+        game.processAction();
+        Permanent creature = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
         if (creature == null
                 || !creature.hasSubtype(SubType.DEMON, game)
                 || creature.getPower().getValue() < 1) {

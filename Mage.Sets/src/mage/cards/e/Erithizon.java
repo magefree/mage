@@ -12,6 +12,7 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.TargetAdjuster;
 
@@ -32,7 +33,7 @@ public final class Erithizon extends CardImpl {
 
         // Whenever Erithizon attacks, put a +1/+1 counter on target creature of defending player's choice.
         Ability ability = new AttacksTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         ability.setTargetAdjuster(ErithizonAdjuster.instance);
         this.addAbility(ability);
     }

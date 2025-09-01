@@ -1,30 +1,25 @@
 package mage.cards.h;
 
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.SuspectTargetEffect;
 import mage.abilities.effects.common.combat.GoadTargetEffect;
 import mage.abilities.effects.common.continuous.GainControlAllUntapGainHasteEffect;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.WatcherScope;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.GoadedPredicate;
 import mage.filter.predicate.permanent.SuspectedPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.target.common.TargetOpponentsCreaturePermanent;
-import mage.watchers.Watcher;
+import mage.watchers.common.PlayerLostGameWatcher;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -52,13 +47,8 @@ public final class HotPursuit extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of combat on your turn, if two or more players have lost the game, gain control of all goaded and/or suspected creatures until end of turn. Untap them. They gain haste until end of turn.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfCombatTriggeredAbility(
-                        new GainControlAllUntapGainHasteEffect(filter)
-                ), HotPursuitCondition.instance, "At the beginning of combat on your turn, " +
-                "if two or more players have lost the game, gain control of all goaded and/or " +
-                "suspected creatures until end of turn. Untap them. They gain haste until end of turn."
-        ), new HotPursuitWatcher());
+        this.addAbility(new BeginningOfCombatTriggeredAbility(new GainControlAllUntapGainHasteEffect(filter))
+                .withInterveningIf(HotPursuitCondition.instance), new PlayerLostGameWatcher());
     }
 
     private HotPursuit(final HotPursuit card) {
@@ -76,36 +66,11 @@ enum HotPursuitCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return HotPursuitWatcher.checkCondition(game);
-    }
-}
-
-class HotPursuitWatcher extends Watcher {
-
-    private final Set<UUID> players = new HashSet<>();
-
-    HotPursuitWatcher() {
-        super(WatcherScope.GAME);
+        return PlayerLostGameWatcher.getCount(game) >= 2;
     }
 
     @Override
-    public void watch(GameEvent event, Game game) {
-        switch (event.getType()) {
-            case BEGINNING_PHASE_PRE:
-                if (game.getTurnNum() == 1) {
-                    players.clear();
-                }
-                return;
-            case LOST:
-                players.add(event.getPlayerId());
-        }
-    }
-
-    static boolean checkCondition(Game game) {
-        return game
-                .getState()
-                .getWatcher(HotPursuitWatcher.class)
-                .players
-                .size() >= 2;
+    public String toString() {
+        return "two or more players have lost the game";
     }
 }

@@ -6,6 +6,7 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -33,6 +34,7 @@ public class TakeControlWhileSearchingLibraryTest extends CardTestPlayerBase {
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {B}", 3);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Buried Alive");
         addTarget(playerA, "Balduvian Bears");
+        addTarget(playerA, TestPlayer.TARGET_SKIP);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         // after
@@ -73,6 +75,7 @@ public class TakeControlWhileSearchingLibraryTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Buried Alive");
         setChoice(playerB, true); // continue
         addTarget(playerB, "Balduvian Bears"); // player B must take control for searching
+        addTarget(playerB, TestPlayer.TARGET_SKIP);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         // after
@@ -116,6 +119,7 @@ public class TakeControlWhileSearchingLibraryTest extends CardTestPlayerBase {
         setChoice(playerA, true); // yes, try to cast a creature card from lib
         setChoice(playerA, "Panglacial Wurm"); // try to cast
         addTarget(playerA, "Balduvian Bears"); // choice for searching
+        addTarget(playerA, TestPlayer.TARGET_SKIP);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         // after
@@ -170,6 +174,7 @@ public class TakeControlWhileSearchingLibraryTest extends CardTestPlayerBase {
         setChoice(playerB, true); // yes, try to cast a creature card from lib
         setChoice(playerB, "Panglacial Wurm"); // try to cast
         addTarget(playerB, "Balduvian Bears"); // choice for searching
+        addTarget(playerB, TestPlayer.TARGET_SKIP);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         // after
@@ -230,6 +235,7 @@ public class TakeControlWhileSearchingLibraryTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Buried Alive");
         setChoice(playerB, true); // continue after new control
         addTarget(playerB, "Balduvian Bears");
+        //addTarget(playerB, TestPlayer.TARGET_SKIP);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         checkGraveyardCount("after grave a", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Balduvian Bears", 0);
         checkGraveyardCount("after grave b", 1, PhaseStep.PRECOMBAT_MAIN, playerB, "Balduvian Bears", 0);

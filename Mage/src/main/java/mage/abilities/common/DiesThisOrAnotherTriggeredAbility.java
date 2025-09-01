@@ -29,7 +29,7 @@ public class DiesThisOrAnotherTriggeredAbility extends TriggeredAbilityImpl {
         if (filterMessage.startsWith("a ")) {
             filterMessage = filterMessage.substring(2);
         }
-        setTriggerPhrase("Whenever {this} or another " + filterMessage + " dies, ");
+        setTriggerPhrase("Whenever {this} or " + (filterMessage.startsWith("another") ? "" : "another ") + filterMessage + " dies, ");
         setLeavesTheBattlefieldTrigger(true);
     }
 

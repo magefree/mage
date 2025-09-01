@@ -25,6 +25,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
 
+import static mage.filter.StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL;
+
 /**
  *
  * @author jimga150
@@ -50,7 +52,7 @@ public final class ArchdruidsCharm extends CardImpl {
         Mode mode2 = new Mode(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
         mode2.addTarget(new TargetControlledCreaturePermanent());
         mode2.addEffect(new DamageWithPowerFromOneToAnotherTargetEffect("it"));
-        mode2.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
+        mode2.addTarget(new TargetPermanent(FILTER_CREATURE_YOU_DONT_CONTROL));
         this.getSpellAbility().addMode(mode2);
 
         // * Exile target artifact or enchantment.
@@ -137,7 +139,7 @@ class ArchdruidsCharmMode1Effect extends SearchEffect {
     private void setText() {
         StringBuilder sb = new StringBuilder();
         sb.append("Search your library for ");
-        if (target.getNumberOfTargets() == 0 && target.getMaxNumberOfTargets() > 0) {
+        if (target.getMinNumberOfTargets() == 0 && target.getMaxNumberOfTargets() > 0) {
             sb.append("up to ").append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(' ');
             sb.append(target.getTargetName()).append(revealCards ? " and reveal them." : ".");
         } else {

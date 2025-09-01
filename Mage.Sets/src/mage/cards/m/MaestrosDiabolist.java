@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.HasteAbility;
@@ -25,7 +24,7 @@ import java.util.UUID;
  */
 public final class MaestrosDiabolist extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.DEVIL);
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.DEVIL, "you don't control a Devil token");
 
     static {
         filter.add(TokenPredicate.TRUE);
@@ -49,13 +48,9 @@ public final class MaestrosDiabolist extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Whenever Maestros Diabolist attacks, if you don't control a Devil token, create a tapped and attacking 1/1 red Devil creature token with "When this creature dies, it deals 1 damage to any target."
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new AttacksTriggeredAbility(
-                        new CreateTokenEffect(new DevilToken(), 1, true, true)
-                ), condition, "Whenever {this} attacks, if you don't control a Devil token, " +
-                "create a tapped and attacking 1/1 red Devil creature token with " +
-                "\"When this creature dies, it deals 1 damage to any target.\""
-        ));
+        this.addAbility(new AttacksTriggeredAbility(
+                new CreateTokenEffect(new DevilToken(), 1, true, true)
+        ).withInterveningIf(condition));
     }
 
     private MaestrosDiabolist(final MaestrosDiabolist card) {

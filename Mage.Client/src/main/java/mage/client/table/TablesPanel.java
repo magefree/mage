@@ -896,7 +896,7 @@ public class TablesPanel extends javax.swing.JPanel {
             formatFilterList.add(RowFilter.regexFilter("^Limited", TablesTableModel.COLUMN_DECK_TYPE));
         }
         if (btnFormatOther.isSelected()) {
-            formatFilterList.add(RowFilter.regexFilter("^Momir Basic|^Constructed - Pauper|^Constructed - Frontier|^Constructed - Extended|^Constructed - Eternal|^Constructed - Historical|^Constructed - Super|^Constructed - Freeform|^Australian Highlander|^European Highlander|^Canadian Highlander|^Constructed - Old|^Constructed - Historic", TablesTableModel.COLUMN_DECK_TYPE));
+            formatFilterList.add(RowFilter.regexFilter("^Momir Basic|^Constructed - Pauper|^Constructed - Frontier|^Constructed - Extended|^Constructed - Eternal|^Constructed - Historical|^Constructed - Super|^Constructed - Freeform|^Constructed - Freeform Unlimited|^Australian Highlander|^European Highlander|^Canadian Highlander|^Constructed - Old|^Constructed - Historic", TablesTableModel.COLUMN_DECK_TYPE));
         }
 
         // skill
@@ -1163,7 +1163,7 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar1.add(btnTypeMatch);
 
         btnTypeTourneyConstructed.setSelected(true);
-        btnTypeTourneyConstructed.setText("Constructed tourn.");
+        btnTypeTourneyConstructed.setText("Constructed tourney");
         btnTypeTourneyConstructed.setToolTipText("Shows all constructed tournament tables.");
         btnTypeTourneyConstructed.setActionCommand("typeTourneyConstructed");
         btnTypeTourneyConstructed.setFocusPainted(false);
@@ -1178,7 +1178,7 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar1.add(btnTypeTourneyConstructed);
 
         btnTypeTourneyLimited.setSelected(true);
-        btnTypeTourneyLimited.setText("Limited tourn.");
+        btnTypeTourneyLimited.setText("Limited tourney");
         btnTypeTourneyLimited.setToolTipText("Shows all limited tournament tables.");
         btnTypeTourneyLimited.setActionCommand("typeTourneyLimited");
         btnTypeTourneyLimited.setFocusPainted(false);
@@ -1694,13 +1694,13 @@ public class TablesPanel extends javax.swing.JPanel {
             DeckCardLists testDeck = DeckImporter.importDeckFromFile(testDeckFile, false);
 
             PlayerType aiType = useMonteCarloAI ? PlayerType.COMPUTER_MONTE_CARLO : PlayerType.COMPUTER_MAD;
-            int numSeats = gameName.contains("2") || gameName.contains("Monte Carlo") ? 2 : 4;
-            boolean multiPlayer = numSeats > 2;
+            int numPlayers = gameName.contains("2") || gameName.contains("Monte Carlo") ? 2 : 4;
+            boolean multiPlayer = numPlayers > 2;
 
-            MatchOptions options = new MatchOptions(gameName, gameType, multiPlayer, numSeats);
+            MatchOptions options = new MatchOptions(gameName, gameType, multiPlayer);
             options.getPlayerTypes().add(PlayerType.HUMAN);
             options.getPlayerTypes().add(aiType);
-            for (int i=2 ; i < numSeats ; i++) {
+            for (int i=2 ; i < numPlayers ; i++) {
                 options.getPlayerTypes().add(aiType);
             }
             options.setDeckType("Variant Magic - Freeform Commander");
@@ -1720,7 +1720,7 @@ public class TablesPanel extends javax.swing.JPanel {
 
             SessionHandler.joinTable(roomId, table.getTableId(), "Human", PlayerType.HUMAN, 1, testDeck, "");
             SessionHandler.joinTable(roomId, table.getTableId(), "Computer", aiType, 1, testDeck, "");
-            for (int i=2 ; i < numSeats ; i++) {
+            for (int i=2 ; i < numPlayers ; i++) {
                 SessionHandler.joinTable(roomId, table.getTableId(), "Computer" + i, aiType, 1, testDeck, "");
             }
             SessionHandler.startMatch(roomId, table.getTableId());

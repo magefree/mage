@@ -22,6 +22,7 @@ import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -59,7 +60,7 @@ public final class SavageAlliance extends CardImpl {
         Effect effect = new DamageTargetEffect(2);
         effect.setText("{this} deals 2 damage to target creature");
         Mode mode = new Mode(effect);
-        mode.addTarget(new TargetCreaturePermanent(filterCreature).withChooseHint("deals 2 damage to"));
+        mode.addTarget(new TargetPermanent(filterCreature).withChooseHint("deals 2 damage to"));
         this.getSpellAbility().addMode(mode);
 
         // Savage Alliance deals 1 damage to each creature target opponent controls.

@@ -13,7 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.card.ManaValueLessThanControlledLandCountPredicate;
+import mage.filter.predicate.mageobject.ManaValueLessThanControlledLandCountPredicate;
 
 import java.util.UUID;
 

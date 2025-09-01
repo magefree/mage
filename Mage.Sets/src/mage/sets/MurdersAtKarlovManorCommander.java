@@ -115,6 +115,7 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Finale of Revelation", 106, Rarity.MYTHIC, mage.cards.f.FinaleOfRevelation.class));
         cards.add(new SetCardInfo("Follow the Bodies", 23, Rarity.RARE, mage.cards.f.FollowTheBodies.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Follow the Bodies", 333, Rarity.RARE, mage.cards.f.FollowTheBodies.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Foreboding Steamboat", 28, Rarity.RARE, mage.cards.f.ForebodingSteamboat.class));
         cards.add(new SetCardInfo("Fortified Village", 262, Rarity.RARE, mage.cards.f.FortifiedVillage.class));
         cards.add(new SetCardInfo("Frontier Warmonger", 154, Rarity.RARE, mage.cards.f.FrontierWarmonger.class));
         cards.add(new SetCardInfo("Fumigate", 66, Rarity.RARE, mage.cards.f.Fumigate.class));
@@ -177,6 +178,7 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Mirko, Obsessive Theorist", 316, Rarity.MYTHIC, mage.cards.m.MirkoObsessiveTheorist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mirror Entity", 75, Rarity.RARE, mage.cards.m.MirrorEntity.class));
         cards.add(new SetCardInfo("Mission Briefing", 110, Rarity.RARE, mage.cards.m.MissionBriefing.class));
+        cards.add(new SetCardInfo("Mob Verdict", 33, Rarity.RARE, mage.cards.m.MobVerdict.class));
         cards.add(new SetCardInfo("Morska, Undersea Sleuth", 3, Rarity.MYTHIC, mage.cards.m.MorskaUnderseaSleuth.class));
         cards.add(new SetCardInfo("Mossfire Valley", 274, Rarity.RARE, mage.cards.m.MossfireValley.class));
         cards.add(new SetCardInfo("Mosswort Bridge", 275, Rarity.RARE, mage.cards.m.MosswortBridge.class));
@@ -309,6 +311,8 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Twilight Prophet", 143, Rarity.MYTHIC, mage.cards.t.TwilightProphet.class));
         cards.add(new SetCardInfo("Ugin's Mastery", 53, Rarity.RARE, mage.cards.u.UginsMastery.class));
         cards.add(new SetCardInfo("Ulvenwald Mysteries", 193, Rarity.UNCOMMON, mage.cards.u.UlvenwaldMysteries.class));
+        cards.add(new SetCardInfo("Unexplained Absence", 17, Rarity.RARE, mage.cards.u.UnexplainedAbsence.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Unexplained Absence", 328, Rarity.RARE, mage.cards.u.UnexplainedAbsence.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Unshakable Tail", 29, Rarity.RARE, mage.cards.u.UnshakableTail.class));
         cards.add(new SetCardInfo("Vengeful Ancestor", 163, Rarity.RARE, mage.cards.v.VengefulAncestor.class));
         cards.add(new SetCardInfo("Vizier of Many Faces", 123, Rarity.RARE, mage.cards.v.VizierOfManyFaces.class));

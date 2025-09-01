@@ -9,7 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -21,12 +21,6 @@ import java.util.UUID;
  */
 public final class ArmoryAutomaton extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("Equipment");
-
-    static {
-        filter.add(SubType.EQUIPMENT.getPredicate());
-    }
-
     public ArmoryAutomaton(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
 
@@ -36,7 +30,7 @@ public final class ArmoryAutomaton extends CardImpl {
 
         // Whenever Armory Automaton enters or attacks, you may attach any number of target Equipment to it.
         Ability ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(new ArmoryAutomatonEffect(), true);
-        ability.addTarget(new TargetPermanent(0, Integer.MAX_VALUE, filter));
+        ability.addTarget(new TargetPermanent(0, Integer.MAX_VALUE, StaticFilters.FILTER_PERMANENT_EQUIPMENT));
         this.addAbility(ability);
     }
 

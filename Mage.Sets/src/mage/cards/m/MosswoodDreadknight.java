@@ -1,17 +1,15 @@
 package mage.cards.m;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
-import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
+import mage.abilities.effects.common.asthought.MayCastFromGraveyardAsAdventureEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.AdventureCard;
-import mage.cards.Card;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.game.Game;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 import java.util.UUID;
 
@@ -33,7 +31,7 @@ public final class MosswoodDreadknight extends AdventureCard {
         this.addAbility(TrampleAbility.getInstance());
 
         // When Mosswood Dreadknight dies, you may cast it from your graveyard as an Adventure until the end of your next turn.
-        this.addAbility(new DiesSourceTriggeredAbility(new MosswoodDreadknightEffect()));
+        this.addAbility(new DiesSourceTriggeredAbility(new MayCastFromGraveyardAsAdventureEffect()));
 
         // Dread Whispers
         // You draw a card and you lose 1 life.
@@ -50,44 +48,5 @@ public final class MosswoodDreadknight extends AdventureCard {
     @Override
     public MosswoodDreadknight copy() {
         return new MosswoodDreadknight(this);
-    }
-}
-
-class MosswoodDreadknightEffect extends AsThoughEffectImpl {
-
-    MosswoodDreadknightEffect() {
-        super(AsThoughEffectType.CAST_ADVENTURE_FROM_NOT_OWN_HAND_ZONE, Duration.UntilEndOfYourNextTurn, Outcome.Benefit);
-        staticText = "you may cast it from your graveyard as an Adventure until the end of your next turn";
-    }
-
-    private MosswoodDreadknightEffect(final MosswoodDreadknightEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public MosswoodDreadknightEffect copy() {
-        return new MosswoodDreadknightEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        if (!source.isControlledBy(affectedControllerId)) {
-            return false;
-        }
-        Card card = game.getCard(sourceId);
-        if (card == null || card.getMainCard() == null || !card.getMainCard().getId().equals(source.getSourceId())) {
-            return false;
-        }
-
-        Card sourceCard = game.getCard(source.getSourceId());
-
-        return sourceCard != null
-                && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD
-                && source.getSourceObjectZoneChangeCounter() == sourceCard.getZoneChangeCounter(game);
     }
 }

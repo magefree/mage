@@ -189,7 +189,7 @@ public class Oathbreaker extends Constructed {
 
         for (Card card : deck.getCards()) {
             if (!ManaUtil.isColorIdentityCompatible(allCommandersColor, card.getColorIdentity())) {
-                addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid color (" + card.getColorIdentity() + ')', true);
+                addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid color (need " + allCommandersColor + ", but get " + card.getColorIdentity() + ")", true);
                 valid = false;
             }
         }

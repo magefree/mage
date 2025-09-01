@@ -78,7 +78,7 @@ public class ExileTargetForSourceEffect extends OneShotEffect {
             }
         }
 
-        UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+        UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getStackMomentSourceZCC());
 
         // it can target permanents on battlefield, so use objects first
         Set<Card> cardsToMove = objectsToMove.stream()

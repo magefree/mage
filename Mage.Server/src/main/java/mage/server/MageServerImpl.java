@@ -5,6 +5,7 @@ import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.DeckValidatorFactory;
 import mage.cards.repository.CardRepository;
 import mage.cards.repository.ExpansionRepository;
+import mage.collectors.DataCollectorServices;
 import mage.constants.Constants;
 import mage.constants.ManaType;
 import mage.constants.PlayerAction;
@@ -29,6 +30,7 @@ import mage.server.managers.ManagerFactory;
 import mage.server.services.impl.FeedbackServiceImpl;
 import mage.server.tournament.TournamentFactory;
 import mage.server.util.ServerMessagesUtil;
+import mage.util.DebugUtil;
 import mage.utils.*;
 import mage.view.*;
 import mage.view.ChatMessage.MessageColor;
@@ -68,6 +70,13 @@ public class MageServerImpl implements MageServer {
         this.detailsMode = detailsMode;
         this.callExecutor = managerFactory.threadExecutor().getCallExecutor();
         ServerMessagesUtil.instance.getMessages();
+
+        // additional logs
+        DataCollectorServices.init(
+                DebugUtil.SERVER_DATA_COLLECTORS_ENABLE_PRINT_GAME_LOGS,
+                DebugUtil.SERVER_DATA_COLLECTORS_ENABLE_SAVE_GAME_HISTORY
+        );
+        DataCollectorServices.getInstance().onServerStart();
     }
 
     @Override
@@ -222,15 +231,12 @@ public class MageServerImpl implements MageServer {
                         throw new MageException("No message");
                     }
 
-                    // check AI players max
+                    // limit number of workable AI opponents (draft bots are unlimited)
                     String maxAiOpponents = managerFactory.configSettings().getMaxAiOpponents();
                     if (maxAiOpponents != null) {
-                        int aiPlayers = 0;
-                        for (PlayerType playerType : options.getPlayerTypes()) {
-                            if (playerType != PlayerType.HUMAN) {
-                                aiPlayers++;
-                            }
-                        }
+                        int aiPlayers = options.getPlayerTypes().stream()
+                                .mapToInt(t -> t.isAI() && t.isWorkablePlayer() ? 1 : 0)
+                                .sum();
                         int max = Integer.parseInt(maxAiOpponents);
                         if (aiPlayers > max) {
                             user.showUserMessage("Create tournament", "It's only allowed to use a maximum of " + max + " AI players.");
@@ -324,7 +330,7 @@ public class MageServerImpl implements MageServer {
                 UUID userId = session.get().getUserId();
                 if (logger.isTraceEnabled()) {
                     Optional<User> user = managerFactory.userManager().getUser(userId);
-                    user.ifPresent(user1 -> logger.trace("join tourn. tableId: " + tableId + ' ' + name));
+                    user.ifPresent(user1 -> logger.trace("join tourney tableId: " + tableId + ' ' + name));
                 }
                 if (userId == null) {
                     logger.fatal("Got no userId from sessionId" + sessionId + " tableId" + tableId);
@@ -1001,7 +1007,7 @@ public class MageServerImpl implements MageServer {
 
     public void handleException(Exception ex) throws MageException {
         if (ex.getMessage() != null && !ex.getMessage().equals("No message")) {
-            throw new MageException("Server error: " + ex.getMessage());
+            throw new MageException(ex.getMessage());
         }
 
         if (ex instanceof ConcurrentModificationException) {

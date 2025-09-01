@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.ProwlCostWasPaidCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.search.SearchLibraryAndExileTargetEffect;
 import mage.abilities.hint.common.ProwlCostWasPaidHint;
 import mage.abilities.keyword.ProwlAbility;
@@ -33,16 +32,11 @@ public final class EarwigSquad extends CardImpl {
         this.addAbility(new ProwlAbility("{2}{B}"));
 
         // When Earwig Squad enters the battlefield, if its prowl cost was paid, search target opponent's library for three cards and exile them. Then that player shuffles their library.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(
-                        new SearchLibraryAndExileTargetEffect(3, true), false
-                ), ProwlCostWasPaidCondition.instance, "When {this} enters, " +
-                "if its prowl cost was paid, search target opponent's library for three cards " +
-                "and exile them. Then that player shuffles."
-        );
+        Ability ability = new EntersBattlefieldTriggeredAbility(
+                new SearchLibraryAndExileTargetEffect(3, false), false
+        ).withInterveningIf(ProwlCostWasPaidCondition.instance);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability.addHint(ProwlCostWasPaidHint.instance));
-
     }
 
     private EarwigSquad(final EarwigSquad card) {

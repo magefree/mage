@@ -1,12 +1,10 @@
 package mage.cards.b;
 
-import mage.abilities.Ability;
 import mage.abilities.common.BecomesTargetAttachedTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.PutIntoGraveFromAnywhereSourceAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.ExileSourceEffect;
+import mage.abilities.keyword.DisturbAbility;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.meta.OrTriggeredAbility;
 import mage.cards.CardImpl;
@@ -43,8 +41,7 @@ public final class BrineboundGift extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget);
-        this.addAbility(ability);
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Whenever Brinebound Gift enters the battlefield or enchanted creature becomes the target of an Aura spell, create a 1/1 white Spirit creature token with flying.
         this.addAbility(new OrTriggeredAbility(Zone.ALL, new CreateTokenEffect(new SpiritWhiteToken()), false,
@@ -53,7 +50,7 @@ public final class BrineboundGift extends CardImpl {
                 new BecomesTargetAttachedTriggeredAbility(null, filter, SetTargetPointer.NONE, false)));
 
         // If Brinebound Gift would be put into a graveyard from anywhere, exile it instead.
-        this.addAbility(new PutIntoGraveFromAnywhereSourceAbility(new ExileSourceEffect().setText("exile it instead")));
+        this.addAbility(DisturbAbility.makeBackAbility());
     }
 
     private BrineboundGift(final BrineboundGift card) {

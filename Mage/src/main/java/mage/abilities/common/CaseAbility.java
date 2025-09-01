@@ -1,14 +1,13 @@
 package mage.abilities.common;
 
 import mage.abilities.Ability;
+import mage.abilities.TriggeredAbility;
 import mage.abilities.condition.CompoundCondition;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SolvedSourceCondition;
-import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.decorator.ConditionalAsThoughEffect;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.decorator.ConditionalReplacementEffect;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
@@ -62,14 +61,14 @@ public class CaseAbility extends SimpleStaticAbility {
      * </ul>
      * The "Solved" ability must be one of the following:
      * <ul>
-     *     <li>{@link ConditionalActivatedAbility} using the condition {@link SolvedSourceCondition}.SOLVED</li>
-     *     <li>{@link ConditionalTriggeredAbility} using the condition {@link SolvedSourceCondition}.SOLVED</li>
+     *     <li>{@link ActivateIfConditionActivatedAbility} using the condition {@link SolvedSourceCondition}.SOLVED</li>
+     *     <li>{@link TriggeredAbility} using the condition {@link SolvedSourceCondition}.SOLVED</li>
      *     <li>{@link SimpleStaticAbility} with only {@link ConditionalAsThoughEffect} or {@link ConditionalContinuousEffect} effects</li>
      * </ul>
      *
-     * @param initialAbility The ability that a Case has at all times
+     * @param initialAbility   The ability that a Case has at all times
      * @param toSolveCondition The condition to be checked when solving
-     * @param solvedAbility The ability that a solved Case has
+     * @param solvedAbility    The ability that a solved Case has
      */
     public CaseAbility(Ability initialAbility, Condition toSolveCondition, Ability solvedAbility) {
         super(Zone.ALL, null);
@@ -81,22 +80,28 @@ public class CaseAbility extends SimpleStaticAbility {
 
         addSubAbility(new CaseSolveAbility(toSolveCondition));
 
-        if (solvedAbility instanceof ConditionalActivatedAbility) {
-            ((ConditionalActivatedAbility) solvedAbility).hideCondition();
-        } else if (!(solvedAbility instanceof ConditionalTriggeredAbility)) {
-            if (solvedAbility instanceof SimpleStaticAbility) {
-                for (Effect effect : solvedAbility.getEffects()) {
-                    if (!(effect instanceof ConditionalContinuousEffect ||
-                            effect instanceof ConditionalAsThoughEffect ||
-                            effect instanceof ConditionalReplacementEffect)) {
-                        throw new IllegalArgumentException("Wrong code usage: solvedAbility must be one of ConditionalActivatedAbility, " +
-                                "ConditionalTriggeredAbility, or StaticAbility with conditional effects.");
-                    }
+        if (!(solvedAbility instanceof ActivateIfConditionActivatedAbility)) {
+            if (solvedAbility instanceof TriggeredAbility) {
+                if (!(((TriggeredAbility) solvedAbility).getTriggerCondition() instanceof SolvedSourceCondition)) {
+                    throw new IllegalArgumentException("Wrong code usage: if solvedAbility is a TriggeredAbility it must have SolvedSourceCondition as its trigger condition");
                 }
             } else {
-                throw new IllegalArgumentException("Wrong code usage: solvedAbility must be one of ConditionalActivatedAbility, " +
-                        "ConditionalTriggeredAbility, or StaticAbility with conditional effects.");
+                if (solvedAbility instanceof SimpleStaticAbility) {
+                    for (Effect effect : solvedAbility.getEffects()) {
+                        if (!(effect instanceof ConditionalContinuousEffect ||
+                                effect instanceof ConditionalAsThoughEffect ||
+                                effect instanceof ConditionalReplacementEffect)) {
+                            throw new IllegalArgumentException("Wrong code usage: solvedAbility must be one of ActivateIfConditionActivatedAbility, " +
+                                    "TriggeredAbility, or StaticAbility with conditional effects.");
+                        }
+                    }
+                } else {
+                    throw new IllegalArgumentException("Wrong code usage: solvedAbility must be one of ActivateIfConditionActivatedAbility, " +
+                            "TriggeredAbility, or StaticAbility with conditional effects.");
+                }
             }
+        } else {
+            ((ActivateIfConditionActivatedAbility) solvedAbility).hideCondition();
         }
         addSubAbility(solvedAbility.withFlavorWord("Solved")); // TODO: Technically this shouldn't be italicized
     }

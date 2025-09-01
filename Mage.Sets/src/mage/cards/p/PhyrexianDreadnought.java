@@ -1,7 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -12,16 +11,18 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.players.Player;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class PhyrexianDreadnought extends CardImpl {
@@ -36,6 +37,7 @@ public final class PhyrexianDreadnought extends CardImpl {
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());
+
         // When Phyrexian Dreadnought enters the battlefield, sacrifice it unless you sacrifice any number of creatures with total power 12 or greater.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new PhyrexianDreadnoughtSacrificeCost())));
 
@@ -56,7 +58,7 @@ class PhyrexianDreadnoughtSacrificeCost extends CostImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("any number of creatures with total power 12 or greater");
 
     public PhyrexianDreadnoughtSacrificeCost() {
-        this.addTarget(new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, filter, true));
+        this.addTarget(new TargetPermanent(0, Integer.MAX_VALUE, filter, true));
         this.text = "sacrifice any number of creatures with total power 12 or greater";
     }
 
@@ -82,9 +84,15 @@ class PhyrexianDreadnoughtSacrificeCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
+        Player controller = game.getPlayer(controllerId);
+        if (controller == null) {
+            return false;
+        }
         int sumPower = 0;
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, controllerId, game)) {
-            sumPower += permanent.getPower().getValue();
+            if (controller.canPaySacrificeCost(permanent, source, controllerId, game)) {
+                sumPower += permanent.getPower().getValue();
+            }
         }
         return sumPower >= 12;
     }

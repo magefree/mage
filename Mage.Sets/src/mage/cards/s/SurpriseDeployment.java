@@ -24,6 +24,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  *
@@ -85,7 +86,7 @@ class SurpriseDeploymentEffect extends OneShotEffect {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
                         if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
-                            Permanent permanent = game.getPermanent(card.getId());
+                            Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
                             if (permanent != null) {
                                 ReturnToHandTargetEffect effect = new ReturnToHandTargetEffect();
                                 effect.setTargetPointer(new FixedTarget(permanent, game));

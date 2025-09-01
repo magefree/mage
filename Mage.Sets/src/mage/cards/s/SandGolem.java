@@ -32,7 +32,7 @@ public final class SandGolem extends CardImpl {
                 new ReturnSourceFromGraveyardToBattlefieldWithCounterEffect(CounterType.P1P1.createInstance(), false)));
         effect.setText("return {this} from your graveyard to the battlefield with a +1/+1 counter on it at the beginning of the next end step");
 
-        this.addAbility(new DiscardedByOpponentTriggeredAbility(effect, true));
+        this.addAbility(new DiscardedByOpponentTriggeredAbility(effect));
     }
 
     private SandGolem(final SandGolem card) {

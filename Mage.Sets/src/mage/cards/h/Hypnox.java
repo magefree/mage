@@ -5,7 +5,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CastFromHandSourcePermanentCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -39,11 +38,8 @@ public final class Hypnox extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Hypnox enters the battlefield, if you cast it from your hand, exile all cards from target opponent's hand.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new HypnoxExileEffect()),
-                CastFromHandSourcePermanentCondition.instance, "When {this} enters, " +
-                "if you cast it from your hand, exile all cards from target opponent's hand."
-        );
+        Ability ability = new EntersBattlefieldTriggeredAbility(new HypnoxExileEffect())
+                .withInterveningIf(CastFromHandSourcePermanentCondition.instance);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability, new CastFromHandWatcher());
 
@@ -66,7 +62,7 @@ class HypnoxExileEffect extends OneShotEffect {
 
     HypnoxExileEffect() {
         super(Outcome.Exile);
-        staticText = "Exile all cards from target opponent's hand";
+        staticText = "exile all cards from target opponent's hand";
     }
 
     private HypnoxExileEffect(final HypnoxExileEffect effect) {

@@ -382,7 +382,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                             break;
                         }
                         int damageAssigned = 0;
-                        damageAssigned = player.getAmount(0, damage, "Assign damage to " + defendingCreature.getName(), game);
+                        damageAssigned = player.getAmount(0, damage, "Assign damage to " + defendingCreature.getName(), null, game);
                         assigned.put(defendingCreature.getId(), damageAssigned);
                         damage -= damageAssigned;
                     }

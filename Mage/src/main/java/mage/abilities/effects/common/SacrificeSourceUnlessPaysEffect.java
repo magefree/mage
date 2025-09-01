@@ -76,7 +76,7 @@ public class SacrificeSourceUnlessPaysEffect extends OneShotEffect {
             }
 
             game.informPlayers(player.getLogName() + " chooses not to " + logMessage + " to prevent sacrifice effect");
-            if (source.getSourceObjectZoneChangeCounter() == game.getState().getZoneChangeCounter(source.getSourceId())
+            if (source.getStackMomentSourceZCC() == game.getState().getZoneChangeCounter(source.getSourceId())
                     && game.getState().getZone(source.getSourceId()) == Zone.BATTLEFIELD) {
                 sourcePermanent.sacrifice(source, game);
             }

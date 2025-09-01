@@ -12,7 +12,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 import mage.target.targetpointer.FixedTarget;
-import mage.util.CardUtil;
 
 /**
  * @author xenohedron
@@ -70,7 +69,7 @@ public class BecomesTargetAnyTriggeredAbility extends TriggeredAbilityImpl {
         if (permanent == null || !filterTarget.match(permanent, getControllerId(), this, game)) {
             return false;
         }
-        StackObject targetingObject = CardUtil.findTargetingStackObject(this.getId().toString(), event, game);
+        StackObject targetingObject = game.findTargetingStackObject(this.getId().toString(), event);
         if (targetingObject == null || !filterStack.match(targetingObject, getControllerId(), this, game)) {
             return false;
         }

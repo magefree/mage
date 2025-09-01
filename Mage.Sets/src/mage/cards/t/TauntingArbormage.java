@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.combat.MustBeBlockedByAllTargetEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
@@ -33,11 +32,7 @@ public final class TauntingArbormage extends CardImpl {
         this.addAbility(new KickerAbility("{3}"));
 
         // When Taunting Arbormage enters the battlefield, if it was kicked, all creatures able to block target creature this turn do so.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new MustBeBlockedByAllTargetEffect(Duration.EndOfTurn)),
-                KickedCondition.ONCE, "When {this} enters, if it was kicked, " +
-                "all creatures able to block target creature this turn do so."
-        );
+        Ability ability = new EntersBattlefieldTriggeredAbility(new MustBeBlockedByAllTargetEffect(Duration.EndOfTurn)).withInterveningIf(KickedCondition.ONCE);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

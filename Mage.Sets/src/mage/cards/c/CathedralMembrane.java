@@ -1,21 +1,22 @@
-
 package mage.cards.c;
 
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.common.ZoneChangeTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.TurnPhase;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.watchers.Watcher;
+import mage.watchers.common.BlockedAttackerWatcher;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -35,8 +36,7 @@ public final class CathedralMembrane extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // When Cathedral Membrane dies during combat, it deals 6 damage to each creature it blocked this combat.
-        this.addAbility(new CathedralMembraneAbility(), new CathedralMembraneWatcher());
-
+        this.addAbility(new CathedralMembraneAbility());
     }
 
     private CathedralMembrane(final CathedralMembrane card) {
@@ -49,10 +49,11 @@ public final class CathedralMembrane extends CardImpl {
     }
 }
 
-class CathedralMembraneAbility extends ZoneChangeTriggeredAbility {
+class CathedralMembraneAbility extends DiesSourceTriggeredAbility {
 
     CathedralMembraneAbility() {
-        super(Zone.BATTLEFIELD, Zone.GRAVEYARD, new CathedralMembraneEffect(), "When {this} dies during combat, ", false);
+        super(new CathedralMembraneEffect());
+        setTriggerPhrase("When {this} dies during combat, ");
     }
 
     private CathedralMembraneAbility(CathedralMembraneAbility ability) {
@@ -66,12 +67,7 @@ class CathedralMembraneAbility extends ZoneChangeTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (super.checkTrigger(event, game)) {
-            if (game.getTurnPhaseType() == TurnPhase.COMBAT) {
-                return true;
-            }
-        }
-        return false;
+        return game.getTurnPhaseType() == TurnPhase.COMBAT && super.checkTrigger(event, game);
     }
 
 }
@@ -94,41 +90,13 @@ class CathedralMembraneEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        CathedralMembraneWatcher watcher = game.getState().getWatcher(CathedralMembraneWatcher.class, source.getSourceId());
-        if (watcher != null) {
-            for (UUID uuid : watcher.getBlockedCreatures()) {
-                Permanent permanent = game.getPermanent(uuid);
-                if (permanent != null) {
-                    permanent.damage(6, source.getSourceId(), source, game, false, true);
-                }
+        Permanent permanent = source.getSourcePermanentOrLKI(game);
+        BlockedAttackerWatcher watcher = game.getState().getWatcher(BlockedAttackerWatcher.class);
+        if (watcher != null && permanent != null) {
+            for (Permanent p : watcher.getBlockedCreatures(new MageObjectReference(permanent, game), game)) {
+                p.damage(6, source.getSourceId(), source, game, false, true);
             }
         }
         return true;
-    }
-}
-
-class CathedralMembraneWatcher extends Watcher {
-
-    private final Set<UUID> blockedCreatures = new HashSet<>();
-
-    CathedralMembraneWatcher() {
-        super(WatcherScope.CARD);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.BLOCKER_DECLARED && event.getSourceId().equals(sourceId)) {
-            blockedCreatures.add(event.getTargetId());
-        }
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-        blockedCreatures.clear();
-    }
-
-     Set<UUID> getBlockedCreatures() {
-        return blockedCreatures;
     }
 }

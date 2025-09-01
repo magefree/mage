@@ -27,7 +27,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.command.Plane;
 import mage.target.Target;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.watchers.common.PlanarRollWatcher;
 
 import java.util.ArrayList;
@@ -62,7 +62,7 @@ public class BantPlane extends Plane {
 
         // Active player can roll the planar die: Whenever you roll {CHAOS}, put a divinity counter on target green, white, or blue creature.  That creature gains indestructible for as long as it has a divinity counter on it.
         Effect chaosEffect = new ConditionalContinuousEffect(new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.Custom), new TargetHasCounterCondition(CounterType.DIVINITY), rule);
-        Target chaosTarget = new TargetCreaturePermanent(1, 1, filter2, false);
+        Target chaosTarget = new TargetPermanent(filter2);
         Effect chaosEffect2 = new AddCountersTargetEffect(CounterType.DIVINITY.createInstance());
 
         List<Effect> chaosEffects = new ArrayList<Effect>();

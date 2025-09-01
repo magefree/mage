@@ -695,7 +695,8 @@ public class Combat implements Serializable, Copyable<Combat> {
                     // real game: send warning
                     // test: fast fail
                     game.informPlayers(controller.getLogName() + ": WARNING - AI can't find good blocker combination and will skip it - report your battlefield to github - " + game.getCombat());
-                    if (controller.isTestsMode()) {
+                    if (controller.isTestMode() && controller.isFastFailInTestMode()) {
+                        // fast fail in tests
                         // how-to fix: AI code must support failed abilities or use cases
                         throw new IllegalArgumentException("AI can't find good blocker combination");
                     }

@@ -13,7 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
-import mage.target.common.TargetArtifactPermanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -42,7 +42,7 @@ public final class SonicScrewdriver extends CardImpl {
                 new GenericManaCost(1)
         );
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetArtifactPermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
         // {2}, {T}: Scry 1.

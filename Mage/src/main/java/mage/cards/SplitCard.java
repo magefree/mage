@@ -38,6 +38,7 @@ public abstract class SplitCard extends CardImpl implements CardWithHalves {
 
     protected SplitCard(SplitCard card) {
         super(card);
+        // make sure all parts created and parent ref added
         this.leftHalfCard = card.getLeftHalfCard().copy();
         ((SplitCardHalf) leftHalfCard).setParentCard(this);
         this.rightHalfCard = card.rightHalfCard.copy();

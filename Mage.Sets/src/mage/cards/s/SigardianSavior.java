@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CastFromEverywhereSourceCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -42,12 +41,8 @@ public final class SigardianSavior extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Sigardian Savior enters the battlefield, if you cast it, return up to two target creature cards with mana value 2 or less from your graveyard to the battlefield.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect()),
-                CastFromEverywhereSourceCondition.instance, "When {this} enters, " +
-                "if you cast it, return up to two target creature cards with mana value " +
-                "2 or less from your graveyard to the battlefield."
-        );
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect())
+                .withInterveningIf(CastFromEverywhereSourceCondition.instance);
         ability.addTarget(new TargetCardInYourGraveyard(0, 2, filter));
         this.addAbility(ability);
     }

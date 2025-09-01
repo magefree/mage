@@ -15,8 +15,11 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
+
+import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK;
 
 /**
  *
@@ -31,7 +34,7 @@ public final class MurderousBetrayal extends CardImpl {
         Effect effect = new DestroyTargetEffect(true);
         Ability ability = new SimpleActivatedAbility(effect, new MurderousBetrayalCost());
         ability.addCost(new ManaCostsImpl<>("{B}{B}"));
-        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK));
+        ability.addTarget(new TargetPermanent(FILTER_PERMANENT_CREATURE_NON_BLACK));
         this.addAbility(ability);
     }
 

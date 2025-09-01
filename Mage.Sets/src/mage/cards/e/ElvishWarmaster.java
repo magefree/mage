@@ -2,7 +2,7 @@ package mage.cards.e;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -15,6 +15,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.permanent.token.ElfWarriorToken;
@@ -26,7 +27,7 @@ import java.util.UUID;
  */
 public final class ElvishWarmaster extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent(SubType.ELF, "one or more other Elves");
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.ELF, "one or more other Elves you control");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent(SubType.ELF, "Elves");
 
     static {
@@ -42,7 +43,7 @@ public final class ElvishWarmaster extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever one or more other Elves you control enters, create a 1/1 green Elf Warrior creature token. This ability triggers only once each turn.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(
                 new CreateTokenEffect(new ElfWarriorToken()), filter
         ).setTriggersLimitEachTurn(1));
 

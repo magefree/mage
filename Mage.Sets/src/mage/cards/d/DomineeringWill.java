@@ -1,7 +1,5 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
@@ -20,12 +18,13 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.SecondTargetPointer;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class DomineeringWill extends CardImpl {
@@ -37,13 +36,12 @@ public final class DomineeringWill extends CardImpl {
     }
 
     public DomineeringWill(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{U}");
 
         // Target player gains control of up to three target nonattacking creatures until end of turn. Untap those creatures. They block this turn if able.
         this.getSpellAbility().addEffect(new DomineeringWillEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 3, filter, false));
-
+        this.getSpellAbility().addTarget(new TargetPermanent(0, 3, filter));
     }
 
     private DomineeringWill(final DomineeringWill card) {

@@ -41,7 +41,7 @@ public class DontCauseTriggerEffect extends ContinuousRuleModifyingEffectImpl {
         this.filterEntering = filterEntering;
         this.orDying = orDying;
         this.filterTriggering = filterTriggering;
-        staticText = filterEntering.getMessage() + " entering the battlefield"
+        staticText = filterEntering.getMessage() + " entering"
                 + (orDying ? " or dying" : "") + " don't cause abilities"
                 + (filterTriggering == null ? "" : " of " + filterTriggering.getMessage())
                 + " to trigger";

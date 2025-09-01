@@ -1,11 +1,9 @@
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -19,14 +17,15 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class ForgeOfHeroes extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterPermanent("commander that entered the battlefield this turn");
+            = new FilterPermanent("commander that entered this turn");
 
     static {
         filter.add(CommanderPredicate.instance);
@@ -40,10 +39,7 @@ public final class ForgeOfHeroes extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {T}: Choose target commander that entered the battlefield this turn. Put a +1/+1 counter on it if it's a creature and a loyalty counter on it if it's a planeswalker.
-        Ability ability = new SimpleActivatedAbility(
-                new ForgeOfHeroesEffect(),
-                new TapSourceCost()
-        );
+        Ability ability = new SimpleActivatedAbility(new ForgeOfHeroesEffect(), new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
@@ -62,7 +58,7 @@ class ForgeOfHeroesEffect extends OneShotEffect {
 
     ForgeOfHeroesEffect() {
         super(Outcome.Benefit);
-        this.staticText = "choose target commander that entered the battlefield this turn. "
+        this.staticText = "choose target commander that entered this turn. "
                 + "Put a +1/+1 counter on it if it's a creature "
                 + "and a loyalty counter on it if it's a planeswalker";
     }
@@ -78,20 +74,15 @@ class ForgeOfHeroesEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent == null) {
             return false;
         }
         if (permanent.isCreature(game)) {
-            new AddCountersTargetEffect(
-                    CounterType.P1P1.createInstance()
-            ).apply(game, source);
-        } else if (permanent.isPlaneswalker(game)) {
-            new AddCountersTargetEffect(
-                    CounterType.LOYALTY.createInstance()
-            ).apply(game, source);
-        } else {
-            return false;
+            permanent.addCounters(CounterType.P1P1.createInstance(), source, game);
+        }
+        if (permanent.isPlaneswalker(game)) {
+            permanent.addCounters(CounterType.LOYALTY.createInstance(), source, game);
         }
         return true;
     }

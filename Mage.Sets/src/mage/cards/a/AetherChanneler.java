@@ -14,12 +14,11 @@ import mage.constants.SubType;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.permanent.token.BirdToken;
-import mage.target.common.TargetNonlandPermanent;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
 /**
- *
  * @author weirddan455
  */
 public final class AetherChanneler extends CardImpl {
@@ -44,7 +43,7 @@ public final class AetherChanneler extends CardImpl {
         // * Draw a card.
         Ability ability = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new BirdToken()));
         Mode mode = new Mode(new ReturnToHandTargetEffect());
-        mode.addTarget(new TargetNonlandPermanent(filter));
+        mode.addTarget(new TargetPermanent(filter));
         ability.addMode(mode);
         ability.addMode(new Mode(new DrawCardSourceControllerEffect(1)));
         this.addAbility(ability);

@@ -71,50 +71,6 @@ public class TargetCardInOpponentsGraveyard extends TargetCard {
     }
 
     @Override
-    public boolean canChoose(UUID sourceControllerId, Game game) {
-        return canChoose(sourceControllerId, null, game);
-    }
-
-    /**
-     * Checks if there are enough {@link Card} that can be chosen.
-     *
-     * @param sourceControllerId - controller of the target event source
-     * @param source
-     * @param game
-     * @return - true if enough valid {@link Card} exist
-     */
-    @Override
-    public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
-        int possibleTargets = 0;
-        if (getNumberOfTargets() == 0) { // if 0 target is valid, the canChoose is always true
-            return true;
-        }
-        Player sourceController = game.getPlayer(sourceControllerId);
-        for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
-            if (!sourceController.hasOpponent(playerId, game)) {
-                continue;
-            }
-            if (this.allFromOneOpponent) {
-                possibleTargets = 0;
-            }
-            if (!playerId.equals(sourceControllerId)) {
-                Player player = game.getPlayer(playerId);
-                if (player != null) {
-                    for (Card card : player.getGraveyard().getCards(filter, sourceControllerId, source, game)) {
-                        if (source == null || source.getSourceId() == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, source.getSourceId(), sourceControllerId))) {
-                            possibleTargets++;
-                            if (possibleTargets >= this.minNumberOfTargets) {
-                                return true;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
         Player sourceController = game.getPlayer(sourceControllerId);
@@ -126,9 +82,7 @@ public class TargetCardInOpponentsGraveyard extends TargetCard {
             if (player != null) {
                 Set<UUID> targetsInThisGraveyeard = new HashSet<>();
                 for (Card card : player.getGraveyard().getCards(filter, sourceControllerId, source, game)) {
-                    if (source == null || source.getSourceId() == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, source.getSourceId(), sourceControllerId))) {
-                        targetsInThisGraveyeard.add(card.getId());
-                    }
+                    targetsInThisGraveyeard.add(card.getId());
                 }
                 // if there is not enough possible targets, the can't be any
                 if (this.allFromOneOpponent && targetsInThisGraveyeard.size() < this.minNumberOfTargets) {
@@ -137,7 +91,7 @@ public class TargetCardInOpponentsGraveyard extends TargetCard {
                 possibleTargets.addAll(targetsInThisGraveyeard);
             }
         }
-        return possibleTargets;
+        return keepValidPossibleTargets(possibleTargets, sourceControllerId, source, game);
     }
 
     @Override

@@ -1,8 +1,8 @@
 package mage.cards.y;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.OneShotNonTargetEffect;
 import mage.abilities.effects.common.ExileReturnBattlefieldNextEndStepTargetEffect;
 import mage.abilities.keyword.CompanionAbility;
 import mage.abilities.keyword.CompanionCondition;
@@ -52,12 +52,10 @@ public final class YorionSkyNomad extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // When Yorion enters the battlefield, exile any number of other nonland permanents you own
-        // and control. Return those cards to the battlefield at the beginning of the next end step.
-        Ability ability = new EntersBattlefieldTriggeredAbility(
-                new ExileReturnBattlefieldNextEndStepTargetEffect().setText(ruleText));
-        ability.addTarget(new TargetPermanent(0, Integer.MAX_VALUE, filter, true));
-        this.addAbility(ability);
+        // When Yorion enters the battlefield, exile any number of other nonland permanents you own and control. Return those cards to the battlefield at the beginning of the next end step.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new OneShotNonTargetEffect(
+                new ExileReturnBattlefieldNextEndStepTargetEffect().setText(ruleText),
+                new TargetPermanent(0, Integer.MAX_VALUE, filter, true))));
     }
 
     private YorionSkyNomad(final YorionSkyNomad card) {

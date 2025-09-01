@@ -17,10 +17,12 @@ import mage.abilities.keyword.CantBeBlockedSourceAbility;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.game.Game;
 
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -50,7 +52,7 @@ public final class SurgeEngine extends CardImpl {
 
         // {2}{U}: Surge Engine becomes blue and has base power and toughness 5/4. Activate only if Surge Engine doesn't have defender.
         ability = new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD, new BecomesColorSourceEffect(ObjectColor.BLUE, Duration.Custom),
+                new BecomesColorSourceEffect(ObjectColor.BLUE, Duration.Custom),
                 new ManaCostsImpl<>("{2}{U}"), SurgeEngineCondition.instance
         );
         ability.addEffect(new SetBasePowerToughnessSourceEffect(
@@ -85,7 +87,7 @@ enum SurgeEngineCondition implements Condition {
 
     @Override
     public String toString() {
-        return "if {this} doesn't have defender";
+        return "{this} doesn't have defender";
     }
 }
 

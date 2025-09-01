@@ -37,7 +37,7 @@ public final class InfernalKirin extends CardImpl {
 
         // Whenever you cast a Spirit or Arcane spell, target player reveals their hand and discards all cards with that spell's converted mana cost.
         Ability ability = new SpellCastControllerTriggeredAbility(
-                new InfernalKirinEffect(), StaticFilters.FILTER_SPIRIT_OR_ARCANE_CARD,
+                new InfernalKirinEffect(), StaticFilters.FILTER_SPELL_SPIRIT_OR_ARCANE,
                 false, SetTargetPointer.SPELL
         );
         ability.addTarget(new TargetPlayer());

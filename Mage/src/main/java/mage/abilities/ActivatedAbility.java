@@ -75,7 +75,7 @@ public interface ActivatedAbility extends Ability {
      *
      * @param mayActivate
      */
-    void setMayActivate(TargetController mayActivate);
+    ActivatedAbility setMayActivate(TargetController mayActivate);
 
     /**
      * Returns the minimal possible cost for what the ability can be activated
@@ -98,6 +98,11 @@ public interface ActivatedAbility extends Ability {
     void setMaxActivationsPerTurn(int maxActivationsPerTurn);
 
     int getMaxActivationsPerTurn(Game game);
+
+    /**
+     * how many more time can this be activated this turn?
+     */
+    int getMaxMoreActivationsThisTurn(Game game);
 
     ActivatedAbility setTiming(TimingRule timing);
 

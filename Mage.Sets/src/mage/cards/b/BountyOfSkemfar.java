@@ -48,8 +48,8 @@ class BountyOfSkemfarEffect extends OneShotEffect {
 
     BountyOfSkemfarEffect() {
         super(Outcome.Benefit);
-        staticText = "reveal the top six cards of your library. You may put a land card from among them " +
-                "onto the battlefield tapped and an Elf card from among them into your hand. " +
+        staticText = "reveal the top six cards of your library. You may put up to one land card from among them " +
+                "onto the battlefield tapped and up to one Elf card from among them into your hand. " +
                 "Put the rest on the bottom of your library in a random order";
     }
 

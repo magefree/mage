@@ -16,7 +16,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 
@@ -46,7 +45,7 @@ public final class VileManifestation extends CardImpl {
         // Vile Manifestation gets +1/+0 for each card with cycling in your graveyard.
         DynamicValue amount = new CardsInControllerGraveyardCount(filter);
         Effect effect = new BoostSourceEffect(amount, StaticValue.get(0), Duration.WhileOnBattlefield);
-        effect.setText("Vile Manifestation gets +1/+0 for each card with cycling in your graveyard.");
+        effect.setText("{this} gets +1/+0 for each card with cycling in your graveyard.");
         Ability ability = new SimpleStaticAbility(effect);
         this.addAbility(ability);
 

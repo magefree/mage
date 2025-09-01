@@ -77,7 +77,7 @@ class FaerieArtisansEffect extends OneShotEffect {
             CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(null, CardType.ARTIFACT, false);
             effect.setTargetPointer(new FixedTarget(permanentToCopy, game));
             if (effect.apply(game, source)) {
-                String oldTokens = (String) game.getState().getValue(source.getSourceId().toString() + source.getSourceObjectZoneChangeCounter());
+                String oldTokens = (String) game.getState().getValue(source.getSourceId().toString() + source.getStackMomentSourceZCC());
                 StringBuilder sb = new StringBuilder();
                 for (Permanent permanent : effect.getAddedPermanents()) {
                     if (sb.length() > 0) {
@@ -85,7 +85,7 @@ class FaerieArtisansEffect extends OneShotEffect {
                     }
                     sb.append(permanent.getId());
                 }
-                game.getState().setValue(source.getSourceId().toString() + source.getSourceObjectZoneChangeCounter(), sb.toString());
+                game.getState().setValue(source.getSourceId().toString() + source.getStackMomentSourceZCC(), sb.toString());
 
                 if (oldTokens != null) {
                     Cards cards = new CardsImpl();

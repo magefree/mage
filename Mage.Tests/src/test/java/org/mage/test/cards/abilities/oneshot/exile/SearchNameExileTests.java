@@ -125,9 +125,9 @@ public class SearchNameExileTests extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Test of Talents", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
 
-        addCard(Zone.GRAVEYARD, playerB, "Ready // Willing", 1);
+        addCard(Zone.GRAVEYARD, playerB, "Ready // Willing", 2);
         addCard(Zone.HAND, playerB, "Ready // Willing", 2);
-        addCard(Zone.LIBRARY, playerB, "Ready // Willing", 1);
+        addCard(Zone.LIBRARY, playerB, "Ready // Willing", 2);
         addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
         addCard(Zone.BATTLEFIELD, playerB, "Forest", 2);
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 2);
@@ -136,6 +136,8 @@ public class SearchNameExileTests extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "fused Ready // Willing");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Test of Talents", "Ready // Willing", "Ready // Willing");
 
+        // TODO: a non strict cause a good AI choice test - make strict and duplicate as really AI test?
+        // in non strict mode AI must choose as much as possible from grave/library due good exile effect/cost
         setStrictChooseMode(false);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -147,6 +149,6 @@ public class SearchNameExileTests extends CardTestPlayerBase {
         assertHandCount(playerB, "Ready // Willing", 0);
         assertHandCount(playerB, 1); //add 2, cast 1, last is exiled+redrawn
 
-        assertExileCount(playerB, "Ready // Willing", 4);
+        assertExileCount(playerB, "Ready // Willing", 6);
     }
 }

@@ -1,6 +1,5 @@
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
@@ -16,21 +15,21 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.PhaseStep;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponentOrPlaneswalker;
 
+import java.util.UUID;
+
 /**
- *
  * @author Ketsuban
  */
 public final class InfernalSpawnOfEvil extends CardImpl {
 
     public InfernalSpawnOfEvil(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[] { CardType.CREATURE }, "{6}{B}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{B}{B}{B}");
         this.subtype.add(SubType.BEAST);
 
         this.power = new MageInt(7);
@@ -47,13 +46,13 @@ public final class InfernalSpawnOfEvil extends CardImpl {
         // Activate this ability only during your upkeep and only once each turn.
         Ability ability = new LimitedTimesPerTurnActivatedAbility(Zone.HAND, new DamageTargetEffect(1),
                 new CompositeCost(
-                    new ManaCostsImpl<>("{1}{B}"),
-                    new CompositeCost(
-                        new RevealSourceFromYourHandCost(),
-                        new SayCost("It's coming!"),
-                        "Reveal {this} from your hand, Say \"It's coming!\""),
-                    "{1}{B}, Reveal {this} from your hand, Say \"It's coming!\""),
-                1, new IsStepCondition(PhaseStep.UPKEEP, true));
+                        new ManaCostsImpl<>("{1}{B}"),
+                        new CompositeCost(
+                                new RevealSourceFromYourHandCost(),
+                                new SayCost("It's coming!"),
+                                "Reveal {this} from your hand, Say \"It's coming!\""),
+                        "{1}{B}, Reveal {this} from your hand, Say \"It's coming!\""),
+                1, IsStepCondition.getMyUpkeep());
         ability.addTarget(new TargetOpponentOrPlaneswalker());
         this.addAbility(ability);
     }

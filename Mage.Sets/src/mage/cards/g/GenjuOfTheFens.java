@@ -1,14 +1,10 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureAttachedWithActivatedAbilityOrSpellEffect;
@@ -16,40 +12,45 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.filter.common.FilterLandPermanent;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.filter.FilterPermanent;
 import mage.game.permanent.token.TokenImpl;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetLandPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class GenjuOfTheFens extends CardImpl {
 
-    private static final FilterLandPermanent FILTER = new FilterLandPermanent(SubType.SWAMP, "Swamp");
+    private static final FilterPermanent FILTER = new FilterPermanent(SubType.SWAMP, "Swamp");
 
     public GenjuOfTheFens(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{B}");
         this.subtype.add(SubType.AURA);
 
         // Enchant Swamp
-        TargetPermanent auraTarget = new TargetLandPermanent(FILTER);
+        TargetPermanent auraTarget = new TargetPermanent(FILTER);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.PutCreatureInPlay));
-        Ability ability = new EnchantAbility(auraTarget);
-        this.addAbility(ability);
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // {2}: Until end of turn, enchanted Swamp becomes a 2/2 black Spirit creature with "{B}: This creature gets +1/+1 until end of turn." It's still a land.
-        Ability ability2 = new SimpleActivatedAbility(new BecomesCreatureAttachedWithActivatedAbilityOrSpellEffect(new SpiritToken(), "Until end of turn, enchanted Swamp becomes a 2/2 black Spirit creature with \"{B}: This creature gets +1/+1 until end of turn.\" It's still a land", Duration.EndOfTurn), new GenericManaCost(2));
-        this.addAbility(ability2);
+        this.addAbility(new SimpleActivatedAbility(new BecomesCreatureAttachedWithActivatedAbilityOrSpellEffect(
+                new SpiritToken(), "Until end of turn, enchanted Swamp becomes a 2/2 black Spirit creature " +
+                "with \"{B}: This creature gets +1/+1 until end of turn.\" It's still a land", Duration.EndOfTurn
+        ), new GenericManaCost(2)));
 
         // When enchanted Swamp is put into a graveyard, you may return Genju of the Fens from your graveyard to your hand.
-        Effect effect = new ReturnToHandSourceEffect(false, true);
-        effect.setText("you may return {this} from your graveyard to your hand");
-        Ability ability3 = new DiesAttachedTriggeredAbility(effect, "enchanted Swamp", true, false);
-        this.addAbility(ability3);
+        this.addAbility(new DiesAttachedTriggeredAbility(
+                new ReturnToHandSourceEffect(false, true)
+                        .setText("you may return {this} from your graveyard to your hand"),
+                "enchanted Swamp", true, false
+        ));
     }
 
     private GenjuOfTheFens(final GenjuOfTheFens card) {

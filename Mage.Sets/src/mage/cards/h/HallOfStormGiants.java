@@ -1,7 +1,5 @@
 package mage.cards.h;
 
-import java.util.UUID;
-
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
@@ -14,13 +12,17 @@ import mage.abilities.keyword.WardAbility;
 import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.ComparisonType;
+import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.permanent.token.custom.CreatureToken;
 
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class HallOfStormGiants extends CardImpl {
@@ -51,10 +53,10 @@ public final class HallOfStormGiants extends CardImpl {
                         .withSubType(SubType.GIANT)
                         .withAbility(new WardAbility(new GenericManaCost(3))),
                 CardType.LAND, Duration.EndOfTurn).setText(
-                        "Until end of turn, Hall of Storm Giants becomes a 7/7 blue Giant creature with ward {3}. " +
-                                "It's still a land. " +
-                                "<i>(Whenever it becomes the target of a spell or ability an opponent controls, " +
-                                "counter it unless that player pays {3}.)</i>"),
+                "Until end of turn, {this} becomes a 7/7 blue Giant creature with ward {3}. " +
+                        "It's still a land. " +
+                        "<i>(Whenever it becomes the target of a spell or ability an opponent controls, " +
+                        "counter it unless that player pays {3}.)</i>"),
                 new ManaCostsImpl<>("{5}{U}")));
     }
 

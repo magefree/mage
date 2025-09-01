@@ -55,7 +55,7 @@ public class DisguiseTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dog Walker using Disguise");
         runCode("face up on stack", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
             Assert.assertEquals("stack, server - can't find spell", 1, currentGame.getStack().size());
-            SpellAbility spellAbility = (SpellAbility) currentGame.getStack().getFirst().getStackAbility();
+            SpellAbility spellAbility = (SpellAbility) currentGame.getStack().getFirstOrNull().getStackAbility();
             Assert.assertEquals("stack, server - can't find spell", "Cast Dog Walker using Disguise", spellAbility.getName());
             CardView spellView = getGameView(playerA).getStack().values().stream().findFirst().orElse(null);
             Assert.assertNotNull("stack, client: can't find spell", spellView);

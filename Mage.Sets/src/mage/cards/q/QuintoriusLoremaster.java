@@ -36,7 +36,6 @@ import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -173,7 +172,7 @@ class QuintoriusLoremasterReplacementEffect extends ReplacementEffectImpl {
         Card card = mor.getCard(game);
         return controller != null
                 && card != null
-                && controller.putCardsOnBottomOfLibrary(card, game, source, false);
+                && controller.putCardsOnBottomOfLibrary(card, game, source);
     }
 
     @Override

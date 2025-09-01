@@ -17,7 +17,7 @@ import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.other.DamagedPlayerThisTurnPredicate;
 import mage.target.Target;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -26,8 +26,7 @@ import java.util.UUID;
  */
 public final class SpearOfHeliod extends CardImpl {
 
-    private static final FilterCreaturePermanent filter
-            = new FilterCreaturePermanent("creature that dealt damage to you this turn");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that dealt damage to you this turn");
 
     static {
         filter.add(new DamagedPlayerThisTurnPredicate(TargetController.YOU));
@@ -37,15 +36,13 @@ public final class SpearOfHeliod extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.ARTIFACT}, "{1}{W}{W}");
         this.supertype.add(SuperType.LEGENDARY);
 
-
         // Creatures you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield)));
 
         // {1}{W}{W}, {T}: Destroy target creature that dealt damage to you this turn.
         Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new ManaCostsImpl<>("{1}{W}{W}"));
         ability.addCost(new TapSourceCost());
-        Target target = new TargetCreaturePermanent(filter);
-        ability.addTarget(target);
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

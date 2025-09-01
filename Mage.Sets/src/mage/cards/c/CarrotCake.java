@@ -37,7 +37,7 @@ public final class CarrotCake extends CardImpl {
         this.addAbility(ability);
 
         // {2}, {T}, Sacrifice Carrot Cake: You gain 3 life.
-        this.addAbility(new FoodAbility(true));
+        this.addAbility(new FoodAbility());
     }
 
     private CarrotCake(final CarrotCake card) {

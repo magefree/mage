@@ -74,7 +74,7 @@ class ZamWesselEffect extends OneShotEffect {
             if (targetPlayer != null && you != null) {
                 if (!targetPlayer.getHand().isEmpty()) {
                     TargetCard target = new TargetCard(0, 1, Zone.HAND, StaticFilters.FILTER_CARD_CREATURE);
-                    if (you.chooseTarget(Outcome.Benefit, targetPlayer.getHand(), target, source, game)) {
+                    if (you.choose(Outcome.Benefit, targetPlayer.getHand(), target, source, game)) {
                         Card card = game.getCard(target.getFirstTarget());
                         if (card != null) {
                             ContinuousEffect copyEffect = new CopyEffect(Duration.EndOfGame, card.getMainCard(), source.getSourceId());

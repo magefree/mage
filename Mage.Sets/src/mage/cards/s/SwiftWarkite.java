@@ -17,9 +17,11 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -99,15 +101,18 @@ class SwiftWarkiteEffect extends OneShotEffect {
         target.withNotTarget(true);
         controller.choose(outcome, cards, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
-        if (card != null) {
-            controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-
+        if (card == null) {
+            return true;
+        }
+        controller.moveCards(card, Zone.BATTLEFIELD, source, game);
+        Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
+        if (permanent != null) {
             ContinuousEffect gainHasteEffect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
-            gainHasteEffect.setTargetPointer(new FixedTarget(card, game));
+            gainHasteEffect.setTargetPointer(new FixedTarget(permanent, game));
             game.addEffect(gainHasteEffect, source);
 
             Effect returnToHandEffect = new ReturnToHandTargetEffect();
-            returnToHandEffect.setTargetPointer(new FixedTarget(card, game));
+            returnToHandEffect.setTargetPointer(new FixedTarget(permanent, game));
             DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(returnToHandEffect);
             game.addDelayedTriggeredAbility(delayedAbility, source);
         }

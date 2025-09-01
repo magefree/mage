@@ -1,10 +1,7 @@
 package mage.cards.k;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -15,21 +12,23 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.FilterPlayer;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class KeeperOfTheDead extends CardImpl {
@@ -95,8 +94,14 @@ class KeeperOfDeadPredicate implements ObjectSourcePlayerPredicate<Player> {
 
 class KeeperOfTheDeadCreatureTarget extends TargetPermanent {
 
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature that player controls");
+
+    static {
+        filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
+    }
+
     public KeeperOfTheDeadCreatureTarget() {
-        super(1, 1, new FilterCreaturePermanent("nonblack creature that player controls"), false);
+        super(1, 1, filter);
     }
 
     private KeeperOfTheDeadCreatureTarget(final KeeperOfTheDeadCreatureTarget target) {
@@ -104,39 +109,22 @@ class KeeperOfTheDeadCreatureTarget extends TargetPermanent {
     }
 
     @Override
-    public boolean canTarget(UUID id, Ability source, Game game) {
-        UUID firstTarget = source.getFirstTarget();
-        Permanent permanent = game.getPermanent(id);
-        if (firstTarget != null && permanent != null && permanent.isControlledBy(firstTarget)) {
-            return super.canTarget(id, source, game);
-        }
-        return false;
-    }
-
-    @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
-        Set<UUID> availablePossibleTargets = super.possibleTargets(sourceControllerId, source, game);
-        Set<UUID> possibleTargets = new HashSet<>();
-        MageObject object = game.getObject(source);
+        Set<UUID> possibleTargets = super.possibleTargets(sourceControllerId, source, game);
 
-        for (StackObject item : game.getState().getStack()) {
-            if (item.getId().equals(source.getSourceId())) {
-                object = item;
-            }
-            if (item.getSourceId().equals(source.getSourceId())) {
-                object = item;
-            }
+        Player needPlayer = game.getPlayerOrPlaneswalkerController(source.getFirstTarget());
+        if (needPlayer == null) {
+            // playable or not selected - use any
+        } else {
+            // filter by controller
+            possibleTargets.removeIf(id -> {
+                Permanent permanent = game.getPermanent(id);
+                return permanent == null
+                        || permanent.getId().equals(source.getFirstTarget())
+                        || !permanent.isControlledBy(needPlayer.getId());
+            });
         }
 
-        if (object instanceof StackObject) {
-            UUID playerId = ((StackObject) object).getStackAbility().getFirstTarget();
-            for (UUID targetId : availablePossibleTargets) {
-                Permanent permanent = game.getPermanent(targetId);
-                if (permanent != null && StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK.match(permanent, game) && permanent.isControlledBy(playerId)) {
-                    possibleTargets.add(targetId);
-                }
-            }
-        }
         return possibleTargets;
     }
 

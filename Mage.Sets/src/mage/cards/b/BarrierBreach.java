@@ -6,8 +6,8 @@ import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterEnchantmentPermanent;
-import mage.target.common.TargetEnchantmentPermanent;
+import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -21,8 +21,9 @@ public final class BarrierBreach extends CardImpl {
 
         // Exile up to three target enchantments.
         this.getSpellAbility().addEffect(new ExileTargetEffect());
-        this.getSpellAbility().addTarget(new TargetEnchantmentPermanent(0, 3,
-                new FilterEnchantmentPermanent("enchantments"), false));
+        this.getSpellAbility().addTarget(new TargetPermanent(
+                0, 3, StaticFilters.FILTER_PERMANENT_ENCHANTMENTS
+        ));
 
         // Cycling {2}
         this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));

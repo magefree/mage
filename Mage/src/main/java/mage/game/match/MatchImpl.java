@@ -192,6 +192,7 @@ public abstract class MatchImpl implements Match {
     }
 
     protected void initGame(Game game) throws GameException {
+        game.setTableId(this.tableId);
         addGame(); // raises only the number
         shufflePlayers();
         for (MatchPlayer matchPlayer : this.players) {
@@ -291,6 +292,9 @@ public abstract class MatchImpl implements Match {
     @Override
     public void setTableId(UUID tableId) {
         this.tableId = tableId;
+
+        // sync tableId with all games (needs for data collectors)
+        this.games.forEach(game -> game.setTableId(tableId));
     }
 
     @Override

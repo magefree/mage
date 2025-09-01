@@ -130,8 +130,9 @@ public class EntersBattlefieldOrAttacksAllTriggeredAbility extends TriggeredAbil
     }
 
     private String generateTriggerPhrase() {
-        StringBuilder sb = new StringBuilder("Whenever ").append(filter.getMessage());
-        sb.append(" enters the battlefield ");
+        StringBuilder sb = new StringBuilder("Whenever ");
+        sb.append(filter.getMessage());
+        sb.append(" enters ");
         if (controlledText) {
             sb.append("under your control, ");
         } else {

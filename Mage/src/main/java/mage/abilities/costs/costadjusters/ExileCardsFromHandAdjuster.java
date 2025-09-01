@@ -40,7 +40,7 @@ public class ExileCardsFromHandAdjuster implements CostAdjuster {
             // real - need to choose
             // TODO: need early target cost instead dialog here
             int toExile = cardCount == 0 ? 0 : player.getAmount(
-                    0, cardCount, "Choose how many " + filter.getMessage() + " to exile", game
+                    0, cardCount, "Choose how many " + filter.getMessage() + " to exile", ability, game
             );
             reduceCount = 2 * toExile;
             if (toExile > 0) {

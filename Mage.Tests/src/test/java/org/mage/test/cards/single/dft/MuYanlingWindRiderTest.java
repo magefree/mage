@@ -5,6 +5,7 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -45,6 +46,7 @@ public class MuYanlingWindRiderTest extends CardTestPlayerBase {
 
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Crew 1");
         setChoice(playerA, "Memnite");
+        setChoice(playerA, TestPlayer.CHOICE_SKIP);
 
         attack(3, playerA, "Vehicle Token", playerB);
         attack(3, playerA, muyanling, playerB);

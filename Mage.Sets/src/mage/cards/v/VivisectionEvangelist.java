@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CorruptedCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
@@ -43,12 +42,8 @@ public final class VivisectionEvangelist extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Corrupted -- When Vivisection Evangelist enters the battlefield, if an opponent has three or more poison counters, destroy target creature or planeswalker an opponent controls.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false),
-                CorruptedCondition.instance, "When {this} enters, " +
-                "if an opponent has three or more poison counters, " +
-                "destroy target creature or planeswalker an opponent controls."
-        );
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect())
+                .withInterveningIf(CorruptedCondition.instance);
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability.setAbilityWord(AbilityWord.CORRUPTED).addHint(CorruptedCondition.getHint()));
     }

@@ -11,11 +11,12 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.common.TargetArtifactPermanent;
 
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -72,16 +73,18 @@ class WerewolfRansackerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent == null) {
             return false;
         }
-        Player player = game.getPlayer(permanent.getControllerId());
-        permanent.destroy(source, game, false);
-        if (game.getState().getZone(permanent.getId()) != Zone.GRAVEYARD || player == null) {
+        permanent.destroy(source, game);
+        if (game.getState().getZone(permanent.getId()) != Zone.GRAVEYARD) {
             return true;
         }
-        player.damage(3, source.getSourceId(), source, game);
+        Optional.ofNullable(permanent)
+                .map(Controllable::getControllerId)
+                .map(game::getPlayer)
+                .ifPresent(player -> player.damage(3, source, game));
         return true;
     }
 }

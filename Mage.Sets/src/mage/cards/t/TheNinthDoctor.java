@@ -2,15 +2,16 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.condition.common.IsStepCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.InspiredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.turn.TurnMod;
 import mage.game.turn.UpkeepStep;
@@ -33,9 +34,9 @@ public final class TheNinthDoctor extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Into the TARDIS — Whenever The Ninth Doctor becomes untapped during your untap step, you get an additional upkeep step after this step.
-        TriggeredAbilityImpl ability = new InspiredAbility(new TheNinthDoctorEffect(), false, false).setTriggerPhrase("Whenever {this} becomes untapped during your untap step, ");
-        ability.withFlavorWord("Into the TARDIS");
-        this.addAbility(new ConditionalTriggeredAbility(ability, new IsStepCondition(PhaseStep.UNTAP), ""));
+        this.addAbility(new InspiredAbility(new TheNinthDoctorEffect(), false, false)
+                .withTriggerCondition(IsStepCondition.getMyUpkeep())
+                .withFlavorWord("Into the TARDIS"));
     }
 
     private TheNinthDoctor(final TheNinthDoctor card) {

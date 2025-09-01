@@ -71,7 +71,7 @@ public class PreventDamageAndRemoveCountersEffect extends PreventionEffectImpl {
         if (permanent == null || watcher == null || damageAmount <= 0) {
             return false;
         }
-        MageObjectReference mor = new MageObjectReference(source.getId(), source.getSourceObjectZoneChangeCounter(), game);
+        MageObjectReference mor = new MageObjectReference(source.getId(), source.getStackMomentSourceZCC(), game);
         int beforeCount = permanent.getCounters(game).getCount(CounterType.P1P1);
         if (thatMany) {
             // Remove them.
@@ -110,7 +110,7 @@ public class PreventDamageAndRemoveCountersEffect extends PreventionEffectImpl {
         if (whileHasCounter && !permanent.getCounters(game).containsKey(CounterType.P1P1)) {
             // If the last counter has already be removed for the same batch of prevention, we still want to prevent the damage.
             PreventDamageAndRemoveCountersWatcher watcher = game.getState().getWatcher(PreventDamageAndRemoveCountersWatcher.class);
-            MageObjectReference mor = new MageObjectReference(source.getId(), source.getSourceObjectZoneChangeCounter(), game);
+            MageObjectReference mor = new MageObjectReference(source.getId(), source.getStackMomentSourceZCC(), game);
             return watcher != null && watcher.hadMORCounterRemovedThisBatch(mor);
         }
         return true;

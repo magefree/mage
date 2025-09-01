@@ -15,6 +15,7 @@ import mage.filter.FilterPlayer;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetOpponentOrPlaneswalker;
@@ -47,7 +48,7 @@ public final class CollectiveDefiance extends CardImpl {
         Effect effect = new DamageTargetEffect(4);
         effect.setText("{this} deals 4 damage to target creature");
         Mode mode = new Mode(effect);
-        mode.addTarget(new TargetCreaturePermanent(filterCreature).withChooseHint("deals 4 damage to"));
+        mode.addTarget(new TargetPermanent(filterCreature).withChooseHint("deals 4 damage to"));
         this.getSpellAbility().addMode(mode);
 
         // Collective Defiance deals 3 damage to target opponent or planeswalker.

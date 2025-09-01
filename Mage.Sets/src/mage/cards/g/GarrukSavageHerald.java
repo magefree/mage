@@ -12,19 +12,11 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.other.AnotherTargetPredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -49,14 +41,8 @@ public final class GarrukSavageHerald extends CardImpl {
         effect.setText("Target creature you control deals damage equal to its power to another target creature");
 
         Ability minusAbility = new LoyaltyAbility(effect, -2);
-        TargetControlledCreaturePermanent controlledCreature = new TargetControlledCreaturePermanent();
-        controlledCreature.setTargetTag(1);
-        minusAbility.addTarget(controlledCreature);
-
-        FilterCreaturePermanent filter = new FilterCreaturePermanent();
-        filter.add(new AnotherTargetPredicate(2));
-        TargetCreaturePermanent anotherTargetCreature = new TargetCreaturePermanent(filter);
-        minusAbility.addTarget(anotherTargetCreature.withChooseHint("another creature to deal damage to"));
+        minusAbility.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_CREATURE).setTargetTag(1));
+        minusAbility.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_CREATURE_TARGET_2).setTargetTag(2));
 
         this.addAbility(minusAbility);
 
@@ -107,7 +93,7 @@ class GarrukSavageHeraldEffect extends OneShotEffect {
         if (card.isCreature(game)) {
             return player.moveCards(card, Zone.HAND, source, game);
         } else {
-            return player.putCardsOnBottomOfLibrary(card, game, source, false);
+            return player.putCardsOnBottomOfLibrary(card, game, source);
         }
     }
 }

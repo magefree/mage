@@ -2,17 +2,19 @@ package mage.cards.e;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.LoseCreatureTypeSourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.watchers.common.PermanentsEnteredBattlefieldWatcher;
@@ -40,13 +42,9 @@ public final class EpharaGodOfThePolis extends CardImpl {
                 .addHint(DevotionCount.WU.getHint()));
 
         // At the beginning of each upkeep, if you had another creature enter the battlefield under your control last turn, draw a card.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(
-                        Zone.BATTLEFIELD, TargetController.ANY, new DrawCardSourceControllerEffect(1),
-                        false
-                ), EpharaGodOfThePolisCondition.instance, "At the beginning of each upkeep, " +
-                "if you had another creature enter the battlefield under your control last turn, draw a card."
-        ), new PermanentsEnteredBattlefieldWatcher());
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
+                TargetController.ANY, new DrawCardSourceControllerEffect(1), false
+        ).withInterveningIf(EpharaGodOfThePolisCondition.instance), new PermanentsEnteredBattlefieldWatcher());
     }
 
     private EpharaGodOfThePolis(final EpharaGodOfThePolis card) {
@@ -70,5 +68,10 @@ enum EpharaGodOfThePolisCondition implements Condition {
         return sourcePermanent != null
                 && watcher != null
                 && watcher.anotherCreatureEnteredBattlefieldUnderPlayersControlLastTurn(sourcePermanent, game);
+    }
+
+    @Override
+    public String toString() {
+        return "you had another creature enter the battlefield under your control last turn";
     }
 }

@@ -52,6 +52,7 @@ public class DealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbility
             return false;
         }
         getAllEffects().setValue("damage", event.getAmount());
+        getAllEffects().setValue("damagedPlayer", event.getPlayerId());
         if (setTargetPointer) {
             getAllEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
         }

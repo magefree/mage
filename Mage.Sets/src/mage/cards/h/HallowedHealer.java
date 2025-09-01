@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.ThresholdCondition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -37,7 +37,7 @@ public final class HallowedHealer extends CardImpl {
         this.addAbility(ability);
 
         // Threshold - {tap}: Prevent the next 4 damage that would be dealt to any target this turn. Activate this ability only if seven or more cards are in your graveyard.
-        Ability thresholdAbility = new ConditionalActivatedAbility(
+        Ability thresholdAbility = new ActivateIfConditionActivatedAbility(
                 new PreventDamageToTargetEffect(Duration.EndOfTurn, 4),
                 new TapSourceCost(), ThresholdCondition.instance
         );

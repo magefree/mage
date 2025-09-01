@@ -140,7 +140,7 @@ class GarthOneEyeEffect extends OneShotEffect {
 
     static final String getKey(Ability source) {
         return source.getSourceId() + "_"
-                + source.getSourceObjectZoneChangeCounter() + "_"
+                + source.getStackMomentSourceZCC() + "_"
                 + source.getOriginalId() + "_garth";
     }
 }

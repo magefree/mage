@@ -24,6 +24,6 @@ public enum HateCondition implements Condition {
 
     @Override
     public String toString() {
-        return "if an opponent lost life from source other than combat damage this turn";
+        return "an opponent lost life from source other than combat damage this turn";
     }
 }

@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.OpponentsLostLifeCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.hint.common.OpponentsLostLifeHint;
@@ -29,13 +28,10 @@ public final class ArrogantOutlaw extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Arrogant Outlaw enters the battlefield, if an opponent lost life this turn, each opponent loses 2 life and you gain 2 life.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(
-                        new LoseLifeOpponentsEffect(2), false
-                ), OpponentsLostLifeCondition.instance, "When {this} enters, " +
-                "if an opponent lost life this turn, each opponent loses 2 life and you gain 2 life."
-        );
-        ability.addEffect(new GainLifeEffect(2));
+        Ability ability = new EntersBattlefieldTriggeredAbility(
+                new LoseLifeOpponentsEffect(2), false
+        ).withInterveningIf(OpponentsLostLifeCondition.instance);
+        ability.addEffect(new GainLifeEffect(2).concatBy("and"));
         this.addAbility(ability.addHint(OpponentsLostLifeHint.instance));
     }
 

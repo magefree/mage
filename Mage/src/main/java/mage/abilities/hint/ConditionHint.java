@@ -20,7 +20,7 @@ public class ConditionHint implements Hint {
     private final boolean useIcons;
 
     public ConditionHint(Condition condition) {
-        this(condition, condition.toString());
+        this(condition, CardUtil.getTextWithFirstCharUpperCase(condition.toString()));
     }
 
     public ConditionHint(Condition condition, String textWithIcons) {

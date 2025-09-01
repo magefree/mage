@@ -1,9 +1,7 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
+import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -20,14 +18,15 @@ import mage.constants.SuperType;
 import mage.game.permanent.token.WolfToken;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class ArlinnKord extends CardImpl {
 
     public ArlinnKord(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{R}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{G}");
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ARLINN);
 
@@ -36,15 +35,15 @@ public final class ArlinnKord extends CardImpl {
         this.setStartingLoyalty(3);
 
         // +1: Until end of turn, up to one target creature gets +2/+2 and gains vigilance and haste.
-        Effect effect = new BoostTargetEffect(2, 2, Duration.EndOfTurn);
-        effect.setText("Until end of turn, up to one target creature gets +2/+2");
-        LoyaltyAbility ability = new LoyaltyAbility(effect, 1);
-        effect = new GainAbilityTargetEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("and gains vigilance");
-        ability.addEffect(effect);
-        effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("and haste");
-        ability.addEffect(effect);
+        Ability ability = new LoyaltyAbility(new BoostTargetEffect(
+                2, 2, Duration.EndOfTurn
+        ).setText("until end of turn, up to one target creature gets +2/+2"), 1);
+        ability.addEffect(new GainAbilityTargetEffect(
+                VigilanceAbility.getInstance(), Duration.EndOfTurn
+        ).setText("and gains vigilance"));
+        ability.addEffect(new GainAbilityTargetEffect(
+                HasteAbility.getInstance(), Duration.EndOfTurn
+        ).setText("and haste"));
         ability.addTarget(new TargetCreaturePermanent(0, 1));
         this.addAbility(ability);
 

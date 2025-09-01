@@ -28,6 +28,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
+import mage.target.common.TargetCardInGraveyard;
 import mage.util.CardUtil;
 
 import java.util.*;
@@ -47,7 +48,9 @@ public final class PitOfOfferings extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
 
         // When Pit of Offerings enters the battlefield, exile up to three target cards from graveyards.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new PitOfOfferingsEffect(), false));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new PitOfOfferingsEffect(), false);
+        ability.addTarget(new TargetCardInGraveyard(0, 3));
+        this.addAbility(ability);
 
         // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
@@ -124,8 +127,6 @@ class PitOfOfferingsEffect extends OneShotEffect {
         ), game);
     }
 
-    private static final FilterCard filter = new FilterCard("cards from graveyards");
-
     public PitOfOfferingsEffect() {
         super(Outcome.Benefit);
         staticText = "exile up to three target cards from graveyards";
@@ -142,16 +143,11 @@ class PitOfOfferingsEffect extends OneShotEffect {
         if (controller == null || sourceObject == null) {
             return false;
         }
-
-        TargetCard target = new TargetCard(0, 3, Zone.GRAVEYARD, filter);
-        if (target.choose(outcome, source.getControllerId(), source.getSourceId(), source, game)) {
-            Cards cardsExiled = new CardsImpl();
-            cardsExiled.addAll(target.getTargets());
-            controller.moveCardsToExile(
-                    cardsExiled.getCards(game), source, game, true,
-                    getExileZoneId(sourceObject, game), sourceObject.getIdName()
-            );
-        }
+        Cards cardsExiled = new CardsImpl(getTargetPointer().getTargets(game, source));
+        controller.moveCardsToExile(
+                cardsExiled.getCards(game), source, game, true,
+                getExileZoneId(sourceObject, game), sourceObject.getIdName()
+        );
         return true;
     }
 

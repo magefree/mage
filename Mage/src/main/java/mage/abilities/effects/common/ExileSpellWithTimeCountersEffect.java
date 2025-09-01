@@ -23,7 +23,7 @@ public class ExileSpellWithTimeCountersEffect extends OneShotEffect {
     private final boolean gainsSuspend;
 
     public ExileSpellWithTimeCountersEffect(int counters) {
-        this (counters, false);
+        this(counters, false);
     }
 
     public ExileSpellWithTimeCountersEffect(int counters, boolean gainsSuspend) {
@@ -33,6 +33,7 @@ public class ExileSpellWithTimeCountersEffect extends OneShotEffect {
         this.staticText = "exile {this} with " + CardUtil.numberToText(this.counters) + " time counters on it"
                 + (gainsSuspend ? ". It gains suspend" : "");
     }
+
     private ExileSpellWithTimeCountersEffect(final ExileSpellWithTimeCountersEffect effect) {
         super(effect);
         this.counters = effect.counters;

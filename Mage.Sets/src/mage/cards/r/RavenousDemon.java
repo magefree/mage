@@ -1,7 +1,4 @@
-
 package mage.cards.r;
-
-import java.util.UUID;
 
 import mage.MageInt;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
@@ -12,19 +9,16 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
  * @author intimidatingant
  */
 public final class RavenousDemon extends CardImpl {
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Human");
 
-    static {
-        filter.add(SubType.HUMAN.getPredicate());
-    }
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.HUMAN, "Human");
 
     public RavenousDemon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
@@ -37,7 +31,7 @@ public final class RavenousDemon extends CardImpl {
 
         // Sacrifice a Human: Transform Ravenous Demon. Activate this ability only any time you could cast a sorcery.
         this.addAbility(new TransformAbility());
-        this.addAbility(new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(), new SacrificeTargetCost(filter)));
+        this.addAbility(new ActivateAsSorceryActivatedAbility(new TransformSourceEffect(), new SacrificeTargetCost(filter)));
     }
 
     private RavenousDemon(final RavenousDemon card) {

@@ -6,7 +6,6 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.ExileFromGraveCost;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessPlusOneSourceEffect;
 import mage.abilities.hint.HintUtils;
@@ -23,10 +22,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 import mage.util.CardUtil;
 
 import java.awt.*;
-import java.util.Collection;
-import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -100,7 +96,11 @@ class NethergoyfTarget extends TargetCardInYourGraveyard {
                 types.size() + " of 4",
                 types.size() >= 4 ? Color.GREEN : Color.RED
         );
-        text += " [" + types.stream().map(CardType::toString).collect(Collectors.joining(", ")) + "])";
+        String info = types.stream().map(CardType::toString).collect(Collectors.joining(", "));
+        if (!info.isEmpty()) {
+            text += " [" + info + "]";
+        }
+        text += ")";
         return text;
     }
 
@@ -110,7 +110,10 @@ class NethergoyfTarget extends TargetCardInYourGraveyard {
             return false;
         }
         // Check that exiling all the possible cards would have >= 4 different card types
-        return metCondition(this.possibleTargets(sourceControllerId, source, game), game);
+        Set<UUID> idsToCheck = new HashSet<>();
+        idsToCheck.addAll(this.getTargets());
+        idsToCheck.addAll(this.possibleTargets(sourceControllerId, source, game));
+        return metCondition(idsToCheck, game);
     }
 
     private static Set<CardType> typesAmongSelection(Collection<UUID> cardsIds, Game game) {

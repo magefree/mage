@@ -19,7 +19,6 @@ import mage.filter.predicate.Predicates;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetCard;
 import mage.target.common.TargetCardInExile;
 import mage.util.CardUtil;
 
@@ -73,7 +72,7 @@ class SkywayRobberCastForFreeEffect extends OneShotEffect {
 
     public SkywayRobberCastForFreeEffect() {
         super(Outcome.PlayForFree);
-        this.staticText = "you may cast an artifact, instant, or sorcery spell from among cards exiled with Skyway Robber without paying its mana cost";
+        this.staticText = "you may cast an artifact, instant, or sorcery spell from among cards exiled with {this} without paying its mana cost";
     }
 
     private SkywayRobberCastForFreeEffect(final SkywayRobberCastForFreeEffect effect) {
@@ -86,7 +85,7 @@ class SkywayRobberCastForFreeEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        String exileZoneName = CardUtil.getObjectZoneString(CardUtil.SOURCE_EXILE_ZONE_TEXT, source.getSourceId(), game, source.getSourceObjectZoneChangeCounter()-1, false);
+        String exileZoneName = CardUtil.getObjectZoneString(CardUtil.SOURCE_EXILE_ZONE_TEXT, source.getSourceId(), game, source.getStackMomentSourceZCC()-1, false);
         UUID exileId = CardUtil.getExileZoneId(exileZoneName, game);
         ExileZone exileZone = game.getExile().getExileZone(exileId);
         if (exileZone == null) {

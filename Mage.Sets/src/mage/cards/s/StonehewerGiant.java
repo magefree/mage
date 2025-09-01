@@ -22,6 +22,7 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -90,7 +91,7 @@ class StonehewerGiantEffect extends OneShotEffect {
             Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
             if (card != null) {
                 controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                Permanent equipment = game.getPermanent(card.getId());
+                Permanent equipment = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
                 Target targetCreature = new TargetControlledCreaturePermanent();
                 targetCreature.withNotTarget(true);
                 if (equipment != null && controller.choose(Outcome.BoostCreature, targetCreature, source, game)) {

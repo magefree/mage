@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -30,8 +29,9 @@ public final class GreenhiltTrainee extends CardImpl {
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
+
         Ability ability = new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD, new BoostTargetEffect(4, 4, Duration.EndOfTurn),
+                new BoostTargetEffect(4, 4, Duration.EndOfTurn),
                 new TapSourceCost(), GreenhiltTraineeCondition.instance
         );
         ability.addTarget(new TargetCreaturePermanent());

@@ -5,7 +5,6 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepEnchantedEffect;
 import mage.abilities.effects.common.TapEnchantedEffect;
@@ -31,14 +30,14 @@ import java.util.UUID;
  */
 public final class SoShiny extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledPermanent();
+    private static final FilterPermanent filter = new FilterControlledPermanent("you control a token");
 
     static {
         filter.add(TokenPredicate.TRUE);
     }
 
     private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
-    private static final Hint hint = new ConditionHint(condition, "You control a token");
+    private static final Hint hint = new ConditionHint(condition);
 
     public SoShiny(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
@@ -49,16 +48,11 @@ public final class SoShiny extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget);
-        this.addAbility(ability);
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // When So Shiny enters the battlefield, if you control a token, tap enchanted creature, then scry 2.
-        ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new TapEnchantedEffect()),
-                condition, "When {this} enters, " +
-                "if you control a token, tap enchanted creature, then scry 2."
-        );
-        ability.addEffect(new ScryEffect(2));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new TapEnchantedEffect()).withInterveningIf(condition);
+        ability.addEffect(new ScryEffect(2).concatBy(", then"));
         this.addAbility(ability.addHint(hint));
 
         // Enchanted creature doesn't untap during its controller's untap step.

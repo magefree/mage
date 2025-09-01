@@ -3,7 +3,6 @@ package mage.abilities.decorator;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.condition.Condition;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
@@ -126,10 +125,18 @@ public class ConditionalOneShotEffect extends OneShotEffect {
     }
 
     @Override
-    public Effect setTargetPointer(TargetPointer targetPointer) {
+    public ConditionalOneShotEffect setTargetPointer(TargetPointer targetPointer) {
         effects.setTargetPointer(targetPointer);
         otherwiseEffects.setTargetPointer(targetPointer);
-        return super.setTargetPointer(targetPointer);
+        super.setTargetPointer(targetPointer);
+        return this;
+    }
+
+    @Override
+    public ConditionalOneShotEffect withTargetDescription(String target) {
+        effects.forEach(effect -> effect.withTargetDescription(target));
+        otherwiseEffects.forEach(effect -> effect.withTargetDescription(target));
+        return this;
     }
 
     @Override

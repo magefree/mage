@@ -72,7 +72,7 @@ public class TableController {
         }
         this.table = new Table(roomId, options.getGameType(), options.getName(), controllerName, DeckValidatorFactory.instance.createDeckValidator(options.getDeckType()),
                 options.getPlayerTypes(), new TableRecorderImpl(managerFactory.userManager()), match, options.getBannedUsers(), options.isPlaneChase());
-        this.chatId = managerFactory.chatManager().createChatSession("Match Table " + table.getId());
+        this.chatId = managerFactory.chatManager().createTableChatSession(table);
         init();
     }
 
@@ -94,7 +94,7 @@ public class TableController {
         }
         table = new Table(roomId, options.getTournamentType(), options.getName(), controllerName, DeckValidatorFactory.instance.createDeckValidator(options.getMatchOptions().getDeckType()),
                 options.getPlayerTypes(), new TableRecorderImpl(managerFactory.userManager()), tournament, options.getMatchOptions().getBannedUsers(), options.isPlaneChase());
-        chatId = managerFactory.chatManager().createChatSession("Tourn. table " + table.getId());
+        chatId = managerFactory.chatManager().createTableChatSession(table);
     }
 
     private void init() {
@@ -325,7 +325,7 @@ public class TableController {
         // user - restrict by deck power level and cards colors (see edh power level for details)
         int edhPowerLevel = table.getMatch().getOptions().getEdhPowerLevel();
         if (edhPowerLevel > 0 && table.getValidator().getName().toLowerCase(Locale.ENGLISH).equals("commander")) {
-            int deckEdhPowerLevel = table.getValidator().getEdhPowerLevel(deck);
+            int deckEdhPowerLevel = table.getValidator().getEdhPowerLevel(deck, new ArrayList<>(), new ArrayList<>());
             if (deckEdhPowerLevel % 100 > edhPowerLevel) {
                 String message = new StringBuilder("Your deck appears to be too powerful for this table.\n\nReduce the number of extra turn cards, infect, counters, fogs, reconsider your commander. ")
                         .append("\nThe table requirement has a maximum power level of ").append(edhPowerLevel).append(" whilst your deck has a calculated power level of ")
@@ -575,7 +575,7 @@ public class TableController {
             logger.error("No tournament object - userId: " + userId + "  table: " + table.getId());
             return;
         }
-        if (this.userId != null && this.userId.equals(userId) // tourn. sub tables have no creator user
+        if (this.userId != null && this.userId.equals(userId) // tourney sub tables have no creator user
                 && (table.getState() == TableState.WAITING
                 || table.getState() == TableState.READY_TO_START)) {
             // table not started yet and user is the owner, removeUserFromAllTablesAndChat the table

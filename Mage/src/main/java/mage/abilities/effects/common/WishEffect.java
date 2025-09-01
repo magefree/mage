@@ -125,7 +125,7 @@ public class WishEffect extends OneShotEffect {
 
         TargetCard target = new TargetCard(Zone.ALL, filter);
         target.withNotTarget(true);
-        if (controller.choose(Outcome.Benefit, filteredCards, target, source, game)) {
+        if (controller.choose(Outcome.PutCardInPlay, filteredCards, target, source, game)) {
             Card card = controller.getSideboard().get(target.getFirstTarget(), game);
             if (card == null && alsoFromExile) {
                 card = game.getCard(target.getFirstTarget());

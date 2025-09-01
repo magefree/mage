@@ -30,7 +30,7 @@ public final class ElderOfLaurels extends CardImpl {
 
         // {3}{G}: Target creature gets +X/+X until end of turn, where X is the number of creatures you control.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(
-                new BoostTargetEffect(CreaturesYouControlCount.instance, CreaturesYouControlCount.instance, Duration.EndOfTurn),
+                new BoostTargetEffect(CreaturesYouControlCount.PLURAL, CreaturesYouControlCount.PLURAL, Duration.EndOfTurn),
                 new ManaCostsImpl<>("{3}{G}"));
         ability.addTarget(new TargetCreaturePermanent());
         ability.addHint(CreaturesYouControlHint.instance);

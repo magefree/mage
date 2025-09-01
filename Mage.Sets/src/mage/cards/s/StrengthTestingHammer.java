@@ -31,11 +31,7 @@ public final class StrengthTestingHammer extends CardImpl {
 
         this.subtype.add(SubType.EQUIPMENT);
 
-        //Whenever equipped creature attacks, roll a six-sided die.
-        // That creature gets +X/+0 until end of turn, where X is the result.
-        // Then, if it has the greatest power or is tied for greatest power among creatures on the battlefield, draw a card.
-
-
+        // Whenever equipped creature attacks, roll a six-sided die. That creature gets +X/+0 until end of turn, where X is the result. Then, if it has the greatest power or is tied for greatest power among creatures on the battlefield, draw a card.
         TriggeredAbility ability = new AttacksAttachedTriggeredAbility(new StrengthTestingHammerEffect());
         ability.addEffect(new ConditionalOneShotEffect(new DrawCardSourceControllerEffect(1), StrengthTestingHammerCondition.instance).setText("Then if it has the greatest power or is tied for greatest power among creatures on the battlefield, draw a card."));
         this.addAbility(ability);

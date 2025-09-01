@@ -5,19 +5,19 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.combat.CantAttackTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.turn.Step;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -27,7 +27,7 @@ import java.util.UUID;
  */
 public final class EdificeOfAuthority extends CardImpl {
 
-    private static final String rule = "{1}, {T}: Until your next turn, target creature can't attack or block and its activated abilities can't be activated. Activate only if there are three or more brick counters on {this}.";
+    private static final Condition condition = new SourceHasCounterCondition(CounterType.BRICK, 3);
 
     public EdificeOfAuthority(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
@@ -40,12 +40,10 @@ public final class EdificeOfAuthority extends CardImpl {
         this.addAbility(ability);
 
         // {1}, {T}: Until your next turn, target creature can't attack or block and its activated abilities can't be activated. Activate this ability only if there are three or more brick counter on Edifice of Authority.
-        Condition condition = new SourceHasCounterCondition(CounterType.BRICK, 3, Integer.MAX_VALUE);
-        Ability ability2 = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new EdificeOfAuthorityEffect(), new ManaCostsImpl<>("{1}"), condition, rule);
+        Ability ability2 = new ActivateIfConditionActivatedAbility(new EdificeOfAuthorityEffect(), new GenericManaCost(1), condition);
         ability2.addCost(new TapSourceCost());
         ability2.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability2);
-
     }
 
     private EdificeOfAuthority(final EdificeOfAuthority card) {
@@ -58,42 +56,14 @@ public final class EdificeOfAuthority extends CardImpl {
     }
 }
 
-class EdificeOfAuthorityEffect extends OneShotEffect {
+class EdificeOfAuthorityEffect extends RestrictionEffect {
 
     EdificeOfAuthorityEffect() {
-        super(Outcome.LoseAbility);
-    }
-
-    public EdificeOfAuthorityEffect(String ruleText) {
-        super(Outcome.LoseAbility);
-        staticText = ruleText;
+        super(Duration.UntilYourNextTurn);
+        staticText = "until your next turn, target creature can't attack or block and its activated abilities can't be activated";
     }
 
     private EdificeOfAuthorityEffect(final EdificeOfAuthorityEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public EdificeOfAuthorityEffect copy() {
-        return new EdificeOfAuthorityEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        EdificeOfAuthorityRestrictionEffect effect = new EdificeOfAuthorityRestrictionEffect();
-        game.addEffect(effect, source);
-        return true;
-    }
-}
-
-class EdificeOfAuthorityRestrictionEffect extends RestrictionEffect {
-
-    EdificeOfAuthorityRestrictionEffect() {
-        super(Duration.Custom);
-        staticText = "";
-    }
-
-    private EdificeOfAuthorityRestrictionEffect(final EdificeOfAuthorityRestrictionEffect effect) {
         super(effect);
     }
 
@@ -106,24 +76,6 @@ class EdificeOfAuthorityRestrictionEffect extends RestrictionEffect {
                 permanent.addInfo("Can't attack or block and its activated abilities can't be activated." + getId(), "", game);
             }
         }
-    }
-
-    @Override
-    public boolean isInactive(Ability source, Game game) {
-        if (game.getPhase().getStep().getType() == PhaseStep.UNTAP
-                && game.getStep().getStepPart() == Step.StepPart.PRE) {
-            if (game.isActivePlayer(source.getControllerId())
-                    || game.getPlayer(source.getControllerId()).hasReachedNextTurnAfterLeaving()) {
-                for (UUID targetId : this.getTargetPointer().getTargets(game, source)) {
-                    Permanent permanent = game.getPermanent(targetId);
-                    if (permanent != null) {
-                        permanent.addInfo("Can't attack or block and its activated abilities can't be activated." + getId(), "", game);
-                    }
-                }
-                return true;
-            }
-        }
-        return false;
     }
 
     @Override
@@ -147,8 +99,8 @@ class EdificeOfAuthorityRestrictionEffect extends RestrictionEffect {
     }
 
     @Override
-    public EdificeOfAuthorityRestrictionEffect copy() {
-        return new EdificeOfAuthorityRestrictionEffect(this);
+    public EdificeOfAuthorityEffect copy() {
+        return new EdificeOfAuthorityEffect(this);
     }
 
 }

@@ -144,6 +144,7 @@ class GixYawgmothPraetorExileEffect extends OneShotEffect {
         int xValue = GetXValue.instance.calculate(game, source, this);
         Set<Card> toExile = opponent.getLibrary().getTopCards(game, xValue);
         controller.moveCards(toExile, Zone.EXILED, source, game);
+        game.processAction();
         Cards cards = new CardsImpl(toExile);
         cards.retainZone(Zone.EXILED, game);
         CardUtil.castMultipleWithAttributeForFree(controller, source, game, cards, StaticFilters.FILTER_CARD, Integer.MAX_VALUE, null, true);

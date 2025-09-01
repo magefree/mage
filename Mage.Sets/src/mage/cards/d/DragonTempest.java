@@ -1,8 +1,7 @@
 package mage.cards.d;
 
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
-import mage.abilities.effects.Effect;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -10,8 +9,9 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -25,31 +25,27 @@ import java.util.UUID;
  */
 public final class DragonTempest extends CardImpl {
 
-    private static final FilterCreaturePermanent filterFlying = new FilterCreaturePermanent("a creature with flying");
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("a creature you control with flying");
+    private static final FilterPermanent filter2 = new FilterControlledPermanent(SubType.DRAGON, "a Dragon you control");
 
     static {
-        filterFlying.add(new AbilityPredicate(FlyingAbility.class));
+        filter.add(new AbilityPredicate(FlyingAbility.class));
     }
 
     public DragonTempest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
 
         // Whenever a creature with flying you control enters, it gains haste until the end of turn.
-        Effect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("it gains haste until end of turn");
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, effect, filterFlying, false, SetTargetPointer.PERMANENT));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(
+                Zone.BATTLEFIELD, new GainAbilityTargetEffect(HasteAbility.getInstance())
+                .setText("it gains haste until end of turn"),
+                filter, false, SetTargetPointer.PERMANENT
+        ));
 
         // Whenever a Dragon you control enters, it deals X damage to any target, where X is the number of Dragons you control.
-        Ability ability = new EntersBattlefieldControlledTriggeredAbility(
-                Zone.BATTLEFIELD,
-                new DragonTempestDamageEffect(),
-                new FilterCreaturePermanent(SubType.DRAGON, "a Dragon"),
-                false,
-                SetTargetPointer.NONE
-        );
+        Ability ability = new EntersBattlefieldAllTriggeredAbility(new DragonTempestDamageEffect(), filter2);
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
-
     }
 
     private DragonTempest(final DragonTempest card) {

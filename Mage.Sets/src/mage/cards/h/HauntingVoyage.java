@@ -1,28 +1,26 @@
 package mage.cards.h;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.condition.common.ForetoldCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
 import mage.abilities.keyword.ForetellAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterBySubtypeCard;
+import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.TargetCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class HauntingVoyage extends CardImpl {
@@ -70,30 +68,15 @@ class HauntingVoyageEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         SubType chosenSubType = ChooseCreatureTypeEffect.getChosenCreatureType(source.getSourceId(), game);
-        if (controller != null && chosenSubType != null) {
-            Set<Card> cardsToBattlefield = new LinkedHashSet<>();
-            if (!ForetoldCondition.instance.apply(game, source)) {
-                TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(0, 2, new FilterBySubtypeCard(chosenSubType), true);
-                controller.chooseTarget(outcome, target, source, game);
-                for (UUID cardId : target.getTargets()) {
-                    Card card = game.getCard(cardId);
-                    if (card != null) {
-                        cardsToBattlefield.add(card);
-                    }
-                }
-            } else {
-                for (UUID cardId : controller.getGraveyard()) {
-                    Card card = game.getCard(cardId);
-                    if (card != null && card.hasSubtype(chosenSubType, game)) {
-                        cardsToBattlefield.add(card);
-                    }
-                }
-            }
-            if (!cardsToBattlefield.isEmpty()) {
-                controller.moveCards(cardsToBattlefield, Zone.BATTLEFIELD, source, game);
-                return true;
-            }
+        if (controller == null || chosenSubType == null) {
+            return false;
         }
-        return false;
+        FilterCard filter = new FilterCard(chosenSubType);
+        if (ForetoldCondition.instance.apply(game, source)) {
+            return controller.moveCards(controller.getGraveyard().getCards(filter, game), Zone.BATTLEFIELD, source, game);
+        }
+        TargetCard target = new TargetCardInYourGraveyard(0, 2, filter, true);
+        controller.chooseTarget(outcome, target, source, game);
+        return controller.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, source, game);
     }
 }

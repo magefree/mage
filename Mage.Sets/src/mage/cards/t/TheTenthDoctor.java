@@ -1,21 +1,17 @@
 package mage.cards.t;
 
 import mage.MageInt;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.InfoEffect;
-import mage.abilities.effects.common.continuous.GainSuspendEffect;
 import mage.abilities.effects.common.counter.TimeTravelEffect;
 import mage.abilities.keyword.SuspendAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.counters.CounterType;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -38,9 +34,8 @@ public final class TheTenthDoctor extends CardImpl {
 
         // Timey-Wimey — {7}: Time travel three times. Activate only as a sorcery. (For each suspended card you own and each permanent you control with a time counter on it, you may add or remove a time counter. Then do it two more times.)
         Ability ability = new ActivateAsSorceryActivatedAbility(new TimeTravelEffect().setText("Time travel three times"), new GenericManaCost(7));
-        ability.addEffect(new TimeTravelEffect().setText(""));
-        ability.addEffect(new TimeTravelEffect().setText(""));
-        ability.addEffect(new InfoEffect("<i>(For each suspended card you own and each permanent you control with a time counter on it, you may add or remove a time counter. Then do it two more times.)</i>"));
+        ability.addEffect(new TimeTravelEffect().setText("<i>(For each suspended card you own and each permanent you control with a time counter on it"));
+        ability.addEffect(new TimeTravelEffect().setText(", you may add or remove a time counter. Then do it two more times.)</i>"));
         this.addAbility(ability.withFlavorWord("Timey-Wimey"));
     }
 
@@ -73,19 +68,11 @@ class TheTenthDoctorEffect extends OneShotEffect {
             return false;
         }
         for (Card card : controller.getLibrary().getCards(game)) {
-            if (!card.isLand(game)) {
-                boolean hasSuspend = card.getAbilities(game).containsClass(SuspendAbility.class);
-                UUID exileId = SuspendAbility.getSuspendExileId(controller.getId(), game);
-                if (controller.moveCardToExileWithInfo(card, exileId, "Suspended cards of " + controller.getName(), source, game, Zone.LIBRARY, true)) {
-                    card.addCounters(CounterType.TIME.createInstance(3), source.getControllerId(), source, game);
-                    if (!hasSuspend) {
-                        game.addEffect(new GainSuspendEffect(new MageObjectReference(card, game)), source);
-                    }
-                    game.informPlayers(controller.getLogName() + " suspends 3 - " + card.getName());
-                }
-                break;
-            }
             controller.moveCards(card, Zone.EXILED, source, game);
+            if (!card.isLand(game)) {
+                SuspendAbility.addTimeCountersAndSuspend(card, 3, source, game);
+                return true;
+            }
         }
         return true;
     }

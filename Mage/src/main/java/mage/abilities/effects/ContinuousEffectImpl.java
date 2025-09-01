@@ -448,6 +448,12 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         return this;
     }
 
+    @Override
+    public ContinuousEffect withTargetDescription(String target) {
+        super.withTargetDescription(target);
+        return this;
+    }
+
     /**
      * Auto-generates dependencies on different effects (what's apply first and
      * what's apply second)
@@ -507,13 +513,10 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         // If the top card of your library changes while you’re casting a spell, playing a land, or activating an ability,
         // you can’t look at the new top card until you finish doing so. This means that if you cast the top card of
         // your library, you can’t look at the next one until you’re done paying for that spell. (2019-05-03)
-        if (!game.getStack().isEmpty()) {
-            StackObject stackObject = game.getStack().getFirst();
-            return !(stackObject instanceof Spell)
-                    || !Zone.LIBRARY.equals(((Spell) stackObject).getFromZone())
-                    || stackObject.getStackAbility().getManaCostsToPay().isPaid(); // mana payment finished
-        }
-        return true;
+        StackObject stackObject = game.getStack().getFirstOrNull();
+        return !(stackObject instanceof Spell)
+                || !Zone.LIBRARY.equals(((Spell) stackObject).getFromZone())
+                || stackObject.getStackAbility().getManaCostsToPay().isPaid(); // mana payment finished
     }
 
     @Override

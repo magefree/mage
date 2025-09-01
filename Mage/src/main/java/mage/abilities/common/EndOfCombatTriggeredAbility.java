@@ -1,7 +1,8 @@
 package mage.abilities.common;
 
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.abilities.triggers.AtStepTriggeredAbility;
+import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -9,23 +10,18 @@ import mage.game.events.GameEvent;
 /**
  * @author LevelX2
  */
-public class EndOfCombatTriggeredAbility extends TriggeredAbilityImpl {
-
-    private final String rule;
+public class EndOfCombatTriggeredAbility extends AtStepTriggeredAbility {
 
     public EndOfCombatTriggeredAbility(Effect effect, boolean optional) {
-        this(effect, optional, null);
+        this(effect, TargetController.ANY, optional);
     }
 
-    public EndOfCombatTriggeredAbility(Effect effect, boolean optional, String rule) {
-        super(Zone.BATTLEFIELD, effect, optional);
-        this.rule = rule;
-        setTriggerPhrase("At end of combat, ");
+    public EndOfCombatTriggeredAbility(Effect effect, TargetController targetController, boolean optional) {
+        super(Zone.BATTLEFIELD, targetController, effect, optional);
     }
 
     protected EndOfCombatTriggeredAbility(final EndOfCombatTriggeredAbility ability) {
         super(ability);
-        this.rule = ability.rule;
     }
 
     @Override
@@ -39,15 +35,14 @@ public class EndOfCombatTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return true;
-    }
-
-    @Override
-    public String getRule() {
-        if (rule != null) {
-            return rule;
+    protected String generateTriggerPhrase() {
+        switch (targetController) {
+            case ANY:
+                return "At end of combat, ";
+            case YOU:
+                return "At end of combat on your turn, ";
+            default:
+                throw new UnsupportedOperationException("Unsupported TargetController in EndOfCombatTriggeredAbility: " + targetController);
         }
-        return super.getRule();
     }
 }

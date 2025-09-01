@@ -6,7 +6,6 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CastFromHandSourcePermanentCondition;
 import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.abilities.hint.common.MyTurnHint;
@@ -19,7 +18,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.FoodToken;
-import mage.target.common.TargetControlledPermanent;
 import mage.watchers.common.CastFromHandWatcher;
 
 import java.util.UUID;
@@ -46,11 +44,8 @@ public final class FeastingTrollKing extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // When Feasting Troll King enters the battlefield, if you cast it from your hand, create three Food tokens.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new FoodToken(), 3)),
-                CastFromHandSourcePermanentCondition.instance, "When {this} enters, " +
-                "if you cast it from your hand, create three Food tokens."
-        ), new CastFromHandWatcher());
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new FoodToken(), 3))
+                .withInterveningIf(CastFromHandSourcePermanentCondition.instance), new CastFromHandWatcher());
 
         // Sacrifice three Foods: Return Feasting Troll King from your graveyard to the battlefield. Activate this ability only during your turn.
         this.addAbility(new ActivateIfConditionActivatedAbility(

@@ -4,7 +4,6 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CastFromEverywhereSourceCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -35,11 +34,8 @@ public final class WeddingRing extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}{W}{W}");
 
         // When Wedding Ring enters the battlefield, if it was cast, target opponent creates a token that's a copy of it.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new WeddingRingEffect()),
-                CastFromEverywhereSourceCondition.instance, "When {this} enters, " +
-                "if it was cast, target opponent creates a token that's a copy of it."
-        );
+        Ability ability = new EntersBattlefieldTriggeredAbility(new WeddingRingEffect())
+                .withInterveningIf(CastFromEverywhereSourceCondition.instance);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
 
@@ -64,6 +60,7 @@ class WeddingRingEffect extends OneShotEffect {
 
     WeddingRingEffect() {
         super(Outcome.Benefit);
+        staticText = "target opponent creates a token that's a copy of it";
     }
 
     private WeddingRingEffect(final WeddingRingEffect effect) {

@@ -26,7 +26,7 @@ public final class MangarasBlessing extends CardImpl {
 
         // When a spell or ability an opponent controls causes you to discard Mangara's Blessing,
         // you gain 2 life, and you return Mangara's Blessing from your graveyard to your hand at the beginning of the next end step.
-        Ability ability = new DiscardedByOpponentTriggeredAbility(new GainLifeEffect(2), true);
+        Ability ability = new DiscardedByOpponentTriggeredAbility(new GainLifeEffect(2));
 
         Effect graveyardReturnNextEndEffect = new CreateDelayedTriggeredAbilityEffect(
                 new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnSourceFromGraveyardToHandEffect()));

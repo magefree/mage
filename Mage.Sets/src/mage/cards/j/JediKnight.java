@@ -1,7 +1,5 @@
-
 package mage.cards.j;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
@@ -14,10 +12,11 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterNonlandPermanent;
-import mage.target.common.TargetNonlandPermanent;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author Styxo
  */
 public final class JediKnight extends CardImpl {
@@ -38,7 +37,7 @@ public final class JediKnight extends CardImpl {
 
         // When Jedi Knight leaves the battlefield, return target nonland permanent you don't control to its owner's hands.
         Ability ability = new LeavesBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), false);
-        ability.addTarget(new TargetNonlandPermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
         // Meditate {1}{U}

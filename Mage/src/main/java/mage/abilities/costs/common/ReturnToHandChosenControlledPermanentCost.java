@@ -25,7 +25,7 @@ public class ReturnToHandChosenControlledPermanentCost extends CostImpl {
     public ReturnToHandChosenControlledPermanentCost(TargetControlledPermanent target) {
         target.withNotTarget(true);
         this.addTarget(target);
-        if (target.getMaxNumberOfTargets() > 1 && target.getMaxNumberOfTargets() == target.getNumberOfTargets()) {
+        if (target.getMaxNumberOfTargets() > 1 && target.getMaxNumberOfTargets() == target.getMinNumberOfTargets()) {
             this.text = "return " + CardUtil.numberToText(target.getMaxNumberOfTargets()) + ' '
                     + target.getTargetName()
                     + (target.getTargetName().endsWith(" you control") ? "" : " you control")
@@ -71,7 +71,7 @@ public class ReturnToHandChosenControlledPermanentCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return this.getTargets().canChoose(controllerId, source, game);
+        return canChooseOrAlreadyChosen(ability, source, controllerId, game);
     }
 
     @Override

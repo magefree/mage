@@ -1,13 +1,11 @@
 package mage.cards.d;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
+import mage.abilities.dynamicvalue.common.GreatestAmongPermanentsValue;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.effects.common.continuous.SetBasePowerSourceEffect;
@@ -16,8 +14,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
+import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
@@ -37,8 +35,11 @@ public final class DarettiRocketeerEngineer extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Daretti's power is equal to the greatest mana value among artifacts you control.
-        this.addAbility(new SimpleStaticAbility(new SetBasePowerSourceEffect(DarettiRocketeerEngineerValue.instance)
-                .setText("{this}'s power is equal to the greatest mana value among artifacts you control")));
+        this.addAbility(new SimpleStaticAbility(
+                Zone.ALL,
+                new SetBasePowerSourceEffect(GreatestAmongPermanentsValue.MANAVALUE_CONTROLLED_ARTIFACTS)
+                        .setText("{this}'s power is equal to the greatest mana value among artifacts you control")
+        ));
 
         // Whenever Daretti enters or attacks, choose target artifact card in your graveyard. You may sacrifice an artifact. If you do, return the chosen card to the battlefield.
         Ability ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(new DoIfCostPaid(
@@ -56,38 +57,5 @@ public final class DarettiRocketeerEngineer extends CardImpl {
     @Override
     public DarettiRocketeerEngineer copy() {
         return new DarettiRocketeerEngineer(this);
-    }
-}
-
-enum DarettiRocketeerEngineerValue implements DynamicValue {
-    instance;
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return game
-                .getBattlefield()
-                .getActivePermanents(
-                        StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT,
-                        sourceAbility.getControllerId(), sourceAbility, game
-                )
-                .stream()
-                .mapToInt(MageObject::getManaValue)
-                .max()
-                .orElse(0);
-    }
-
-    @Override
-    public DarettiRocketeerEngineerValue copy() {
-        return this;
-    }
-
-    @Override
-    public String getMessage() {
-        return "";
-    }
-
-    @Override
-    public String toString() {
-        return "1";
     }
 }

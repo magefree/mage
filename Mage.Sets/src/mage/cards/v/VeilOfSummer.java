@@ -120,10 +120,12 @@ class VeilOfSummerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         game.addEffect(new GainAbilityControlledEffect(
-                HexproofFromBlueAbility.getInstance(), Duration.EndOfTurn
+                HexproofFromBlueAbility.getInstance(), Duration.EndOfTurn,
+                StaticFilters.FILTER_PERMANENTS
         ), source);
         game.addEffect(new GainAbilityControlledEffect(
-                HexproofFromBlackAbility.getInstance(), Duration.EndOfTurn
+                HexproofFromBlackAbility.getInstance(), Duration.EndOfTurn,
+                StaticFilters.FILTER_PERMANENTS
         ), source);
         game.addEffect(new GainAbilityControllerEffect(
                 HexproofFromBlueAbility.getInstance(), Duration.EndOfTurn

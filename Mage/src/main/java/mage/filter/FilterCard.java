@@ -2,6 +2,7 @@ package mage.filter;
 
 import mage.abilities.Ability;
 import mage.cards.Card;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
@@ -11,9 +12,7 @@ import mage.game.Game;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * Works with cards only. For objects like commanders you must override your canTarget method.
@@ -31,7 +30,18 @@ public class FilterCard extends FilterObject<Card> {
     }
 
     public FilterCard(String name) {
+        this(null, name);
+    }
+
+    public FilterCard(SubType subType) {
+        this(subType, subType + " card");
+    }
+
+    public FilterCard(SubType subType, String name) {
         super(name);
+        if (subType != null) {
+            this.add(subType.getPredicate());
+        }
     }
 
     protected FilterCard(final FilterCard filter) {
@@ -56,10 +66,6 @@ public class FilterCard extends FilterObject<Card> {
         return super.match(card, game);
     }
 
-    public boolean match(Card card, UUID playerId, Game game) {
-        return match(card, playerId, null, game);
-    }
-
     public boolean match(Card card, UUID playerId, Ability source, Game game) {
         if (!this.match(card, game)) {
             return false;
@@ -78,10 +84,6 @@ public class FilterCard extends FilterObject<Card> {
         Predicates.makeSurePredicateCompatibleWithFilter(predicate, Card.class);
 
         extraPredicates.add(predicate);
-    }
-
-    public Set<Card> filter(Set<Card> cards, Game game) {
-        return cards.stream().filter(card -> match(card, game)).collect(Collectors.toSet());
     }
 
     public boolean hasPredicates() {

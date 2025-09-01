@@ -1,19 +1,22 @@
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.Target;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
+
+import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
- *
  * @author LoneFox
  */
 public final class DeadRingers extends CardImpl {
@@ -23,7 +26,7 @@ public final class DeadRingers extends CardImpl {
 
         // Destroy two target nonblack creatures unless either one is a color the other isn't. They can't be regenerated.
         this.getSpellAbility().addEffect(new DeadRingersEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(2, 2, StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK, false));
+        this.getSpellAbility().addTarget(new TargetPermanent(2, StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK));
     }
 
     private DeadRingers(final DeadRingers card) {
@@ -36,11 +39,11 @@ public final class DeadRingers extends CardImpl {
     }
 }
 
-class DeadRingersEffect extends DestroyTargetEffect {
+class DeadRingersEffect extends OneShotEffect {
 
     DeadRingersEffect() {
-        super(true);
-        staticText = "Destroy two target nonblack creatures unless either one is a color the other isn't. They can't be regenerated.";
+        super(Outcome.DestroyPermanent);
+        staticText = "destroy two target nonblack creatures unless either one is a color the other isn't. They can't be regenerated.";
     }
 
     private DeadRingersEffect(final DeadRingersEffect effect) {
@@ -54,17 +57,23 @@ class DeadRingersEffect extends DestroyTargetEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Target target = source.getTargets().get(0);
-        if (target != null
-                && target.getTargets().size() > 1) {
-            Permanent first = game.getPermanentOrLKIBattlefield(target.getTargets().get(0));
-            Permanent second = game.getPermanentOrLKIBattlefield(target.getTargets().get(1));
-            if (first != null
-                    && second != null
-                    && first.getColor(game).equals(second.getColor(game))) {
-                return super.apply(game, source);
-            }
+        List<Permanent> permanents = this
+                .getTargetPointer()
+                .getTargets(game, source)
+                .stream()
+                .map(game::getPermanent)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+        if (permanents.size() < 2) {
+            return false;
         }
-        return false;
+        Permanent first = permanents.get(0);
+        Permanent second = permanents.get(1);
+        if (!first.getColor(game).equals(second.getColor(game))) {
+            return false;
+        }
+        first.destroy(source, game, true);
+        second.destroy(source, game, true);
+        return true;
     }
 }

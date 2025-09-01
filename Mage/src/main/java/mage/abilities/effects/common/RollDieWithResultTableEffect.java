@@ -153,10 +153,20 @@ public class RollDieWithResultTableEffect extends OneShotEffect {
     }
 
     @Override
-    public Effect setTargetPointer(TargetPointer targetPointer) {
+    public RollDieWithResultTableEffect setTargetPointer(TargetPointer targetPointer) {
         for (TableEntry tableEntry : resultsTable) {
             tableEntry.effects.setTargetPointer(targetPointer);
         }
-        return super.setTargetPointer(targetPointer);
+        super.setTargetPointer(targetPointer);
+        return this;
+    }
+
+
+    @Override
+    public RollDieWithResultTableEffect withTargetDescription(String target) {
+        resultsTable.forEach(tableEntry -> tableEntry.effects.forEach(
+                effect -> effect.withTargetDescription(target)));
+        super.withTargetDescription(target);
+        return this;
     }
 }

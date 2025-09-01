@@ -60,7 +60,7 @@ class CircleOfSolaceEffect extends PreventionEffectImpl {
                 Permanent perm = game.getPermanent(event.getSourceId());
                 if (perm != null) {
                     SubType subType = ChooseCreatureTypeEffect.getChosenCreatureType(source.getSourceId(), game);
-                    return perm.getCardType().contains(CardType.CREATURE) && perm.getSubtype().contains(subType);
+                    return perm.isCreature() && perm.hasSubtype(subType, game);
                 }
             }
         }

@@ -1,12 +1,9 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbility;
+import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.KickerAbility;
@@ -16,15 +13,15 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.target.common.TargetEnchantmentPermanent;
 
-/**
- *
- * @author LoneFox
+import java.util.UUID;
 
+/**
+ * @author LoneFox
  */
 public final class TolarianEmissary extends CardImpl {
 
     public TolarianEmissary(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(1);
@@ -32,13 +29,14 @@ public final class TolarianEmissary extends CardImpl {
 
         // Kicker {1}{W}
         this.addAbility(new KickerAbility("{1}{W}"));
+
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+
         // When Tolarian Emissary enters the battlefield, if it was kicked, destroy target enchantment.
-        TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect());
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect()).withInterveningIf(KickedCondition.ONCE);
         ability.addTarget(new TargetEnchantmentPermanent());
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, KickedCondition.ONCE,
-            "When {this} enters, if it was kicked, destroy target enchantment."));
+        this.addAbility(ability);
     }
 
     private TolarianEmissary(final TolarianEmissary card) {

@@ -1,7 +1,6 @@
 package mage.abilities.keyword;
 
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
@@ -13,6 +12,7 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.AddContinuousEffectToGame;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -37,7 +37,7 @@ public class ImpendingAbility extends AlternativeSourceCostsImpl {
     private static final String IMPENDING_REMINDER = "If you cast this spell for its impending cost, " +
             "it enters with %s time counters and isn't a creature until the last is removed. " +
             "At the beginning of your end step, remove a time counter from it.";
-    private static final Condition counterCondition = new SourceHasCounterCondition(CounterType.TIME, 0, 0);
+    private static final Condition counterCondition = new SourceHasCounterCondition(CounterType.TIME, ComparisonType.EQUAL_TO, 0);
 
     public ImpendingAbility(int amount, String manaString) {
         super(IMPENDING_KEYWORD + ' ' + amount, String.format(IMPENDING_REMINDER, CardUtil.numberToText(amount)), new ManaCostsImpl<>(manaString), IMPENDING_KEYWORD);

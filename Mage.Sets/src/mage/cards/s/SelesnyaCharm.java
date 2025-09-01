@@ -17,6 +17,7 @@ import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.permanent.token.KnightToken;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -46,7 +47,7 @@ public final class SelesnyaCharm extends CardImpl {
 
         // or exile target creature with power 5 or greater;
         Mode mode = new Mode(new ExileTargetEffect());
-        mode.addTarget(new TargetCreaturePermanent(filter));
+        mode.addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addMode(mode);
 
         // or create a 2/2 white Knight creature token with vigilance.

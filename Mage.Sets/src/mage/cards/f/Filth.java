@@ -23,7 +23,7 @@ import mage.filter.common.FilterControlledPermanent;
  */
 public final class Filth extends CardImpl {
 
-    private static final String ruleText = "As long as Filth is in your graveyard and you control a Swamp, creatures you control have swampwalk";
+    private static final String ruleText = "As long as this card is in your graveyard and you control a Swamp, creatures you control have swampwalk";
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Swamp");
 

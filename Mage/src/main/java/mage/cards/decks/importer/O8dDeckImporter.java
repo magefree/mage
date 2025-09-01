@@ -63,12 +63,11 @@ public class O8dDeckImporter extends XmlDeckImporter {
     private static Function<Node, Stream<DeckCardInfo>> toDeckCardInfo(CardLookup lookup, StringBuilder errors) {
         return node -> {
             String name = node.getTextContent();
-            Optional<CardInfo> cardInfo = lookup.lookupCardInfo(name);
-            if (cardInfo.isPresent()) {
-                CardInfo info = cardInfo.get();
+            CardInfo cardInfo = lookup.lookupCardInfo(name);
+            if (cardInfo != null) {
                 return Collections.nCopies(
                         getQuantityFromNode(node),
-                        new DeckCardInfo(info.getName(), info.getCardNumber(), info.getSetCode())).stream();
+                        new DeckCardInfo(cardInfo.getName(), cardInfo.getCardNumber(), cardInfo.getSetCode())).stream();
             } else {
                 errors.append("Could not find card: '").append(name).append("'\n");
                 return Stream.empty();

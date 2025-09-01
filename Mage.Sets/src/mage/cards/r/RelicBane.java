@@ -1,22 +1,18 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetArtifactPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -33,10 +29,11 @@ public final class RelicBane extends CardImpl {
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         this.addAbility(new EnchantAbility(auraTarget));
+
         // Enchanted artifact has "At the beginning of your upkeep, you lose 2 life."
         this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(
-            new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(2)
-            ), AttachmentType.AURA)));
+                new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(2)),
+                AttachmentType.AURA, Duration.WhileOnBattlefield, null, "artifact")));
      }
 
     private RelicBane(final RelicBane card) {

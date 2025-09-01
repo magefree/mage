@@ -48,15 +48,15 @@ public final class ToughCookie extends CardImpl {
         // {2}{G}: Target noncreature artifact you control becomes a 4/4 artifact creature until end of turn.
         Ability ability = new SimpleActivatedAbility(new AddCardTypeTargetEffect(
                 Duration.EndOfTurn, CardType.ARTIFACT, CardType.CREATURE
-        ).setText("target noncreature artifact you control becomes"), new ManaCostsImpl<>("{2}{G}"));
+        ).setText("until end of turn, target noncreature artifact you control becomes"), new ManaCostsImpl<>("{2}{G}"));
         ability.addEffect(new SetBasePowerToughnessTargetEffect(
                 4, 4, Duration.EndOfTurn
-        ).setText(" a 4/4 artifact creature until end of turn"));
+        ).setText(" a 4/4 artifact creature"));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
         // {2}, {T}, Sacrifice Tough Cookie: You gain 3 life.
-        this.addAbility(new FoodAbility(true));
+        this.addAbility(new FoodAbility());
     }
 
     private ToughCookie(final ToughCookie card) {

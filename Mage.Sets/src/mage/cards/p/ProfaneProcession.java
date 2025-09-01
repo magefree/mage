@@ -1,27 +1,24 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
-
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ExileTargetEffect;
+import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.effects.common.ExileTargetForSourceEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SuperType;
-import mage.constants.Zone;
-import mage.game.ExileZone;
 import mage.game.Game;
-import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
+
+import java.util.Optional;
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -37,7 +34,11 @@ public final class ProfaneProcession extends CardImpl {
 
         // {3}{W}{B}: Exile target creature. Then if there are three or more cards exiled with Profane Procession, transform it.
         this.addAbility(new TransformAbility());
-        Ability ability = new SimpleActivatedAbility(new ProfaneProcessionEffect(), new ManaCostsImpl<>("{3}{W}{B}"));
+        Ability ability = new SimpleActivatedAbility(new ExileTargetForSourceEffect(), new ManaCostsImpl<>("{3}{W}{B}"));
+        ability.addEffect(new ConditionalOneShotEffect(
+                new TransformSourceEffect(), ProfaneProcessionCondition.instance,
+                "Then if there are three or more cards exiled with {this}, transform it"
+        ));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
@@ -52,36 +53,14 @@ public final class ProfaneProcession extends CardImpl {
     }
 }
 
-class ProfaneProcessionEffect extends OneShotEffect {
-
-    ProfaneProcessionEffect() {
-        super(Outcome.Exile);
-        this.staticText = "Exile target creature. Then if there are three or more cards exiled with {this}, transform it.";
-    }
-
-    private ProfaneProcessionEffect(final ProfaneProcessionEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ProfaneProcessionEffect copy() {
-        return new ProfaneProcessionEffect(this);
-    }
+enum ProfaneProcessionCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        UUID exileId = CardUtil.getCardExileZoneId(game, source);
-        MageObject sourceObject = source.getSourceObject(game);
-        if (controller != null && exileId != null && sourceObject != null) {
-            new ExileTargetEffect(exileId, sourceObject.getIdName()).setTargetPointer(this.getTargetPointer().copy()).apply(game, source);
-            game.processAction();
-            ExileZone exileZone = game.getExile().getExileZone(exileId);
-            if (exileZone != null && exileZone.size() > 2) {
-                new TransformSourceEffect().apply(game, source);
-            }
-            return true;
-        }
-        return false;
+        return Optional
+                .ofNullable(game.getExile().getExileZone(CardUtil.getExileZoneId(game, source)))
+                .filter(cards -> cards.size() >= 3)
+                .isPresent();
     }
 }

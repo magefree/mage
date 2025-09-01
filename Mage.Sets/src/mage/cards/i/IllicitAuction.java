@@ -89,7 +89,7 @@ class IllicitAuctionEffect extends GainControlTargetEffect {
                         newBid = Math.max(creatureValue % 2, computerLife - 100);
                     } else {
                         if (currentPlayer.canRespond()) {
-                            newBid = currentPlayer.getAmount(highBid + 1, Integer.MAX_VALUE, "Choose bid", game);
+                            newBid = currentPlayer.getAmount(highBid + 1, Integer.MAX_VALUE, "Choose bid", source, game);
                         }
                     }
                     if (newBid > highBid) {

@@ -2,7 +2,6 @@ package mage.cards.b;
 
 import mage.abilities.Mode;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
@@ -11,6 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 
@@ -27,10 +27,12 @@ public final class BorosCharm extends CardImpl {
         //Choose one - Boros Charm deals 4 damage to target player
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
         this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
+
         //or permanents you control are indestructible this turn
         this.getSpellAbility().addMode(new Mode(new GainAbilityControlledEffect(
-                IndestructibleAbility.getInstance(), Duration.EndOfTurn
+                IndestructibleAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENTS
         )));
+
         //or target creature gains double strike until end of turn.
         Mode mode2 = new Mode(new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn));
         mode2.addTarget(new TargetCreaturePermanent());

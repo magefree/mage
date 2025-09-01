@@ -69,7 +69,7 @@ class FeastOfWormsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(id);
+        Permanent permanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         Player targetPlayer = null;
         if (permanent != null) {
             targetPlayer = game.getPlayer(permanent.getControllerId());

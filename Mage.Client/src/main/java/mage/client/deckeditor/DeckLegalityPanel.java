@@ -5,6 +5,8 @@ import mage.cards.decks.Deck;
 import mage.cards.decks.DeckValidator;
 import mage.cards.mock.MockCard;
 import mage.cards.mock.MockSplitCard;
+import mage.client.components.BracketLegalityLabel;
+import mage.client.components.EdhPowerLevelLegalityLabel;
 import mage.client.components.LegalityLabel;
 import mage.deck.*;
 import org.apache.log4j.Logger;
@@ -15,7 +17,7 @@ import java.util.stream.Stream;
 
 
 /**
- * @author Elandril
+ * @author Elandril, JayDi85
  */
 public class DeckLegalityPanel extends javax.swing.JPanel {
 
@@ -101,6 +103,16 @@ public class DeckLegalityPanel extends javax.swing.JPanel {
                 new Frontier(), new HistoricalType2(), new PennyDreadfulCommander(), new EuropeanHighlander(), new CanadianHighlander()
                 // not used: new Eternal(), new Momir(), new TinyLeaders()
         ).forEach(this::addLegalityLabel);
+
+        // extra buttons like score
+        this.add(new EdhPowerLevelLegalityLabel());
+        // only 3 buttons allowed for one line
+        this.add(new BracketLegalityLabel("Bracket 1", "B1", 1));
+        this.add(new BracketLegalityLabel("Bracket 2", "B2", 2));
+        this.add(new BracketLegalityLabel("Bracket 3", "B3", 3));
+        this.add(new BracketLegalityLabel("Bracket 4", "B4", 4));
+        this.add(new BracketLegalityLabel("Bracket 5", "B5", 5));
+
         addHidePanelButton();
 
         revalidate();
@@ -147,5 +159,4 @@ public class DeckLegalityPanel extends javax.swing.JPanel {
                 .map(LegalityLabel.class::cast)
                 .forEach(label -> label.validateDeck(deckToValidate));
     }
-
 }

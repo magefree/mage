@@ -1,8 +1,7 @@
 package mage.cards.w;
 
 import mage.MageInt;
-import mage.abilities.common.PutIntoGraveFromAnywhereSourceAbility;
-import mage.abilities.effects.common.ExileSourceEffect;
+import mage.abilities.keyword.DisturbAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -30,7 +29,7 @@ public final class Waildrifter extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // If Waildrifter would be put into a graveyard from anywhere, exile it instead.
-        this.addAbility(new PutIntoGraveFromAnywhereSourceAbility(new ExileSourceEffect().setText("exile it instead")));
+        this.addAbility(DisturbAbility.makeBackAbility());
     }
 
     private Waildrifter(final Waildrifter card) {

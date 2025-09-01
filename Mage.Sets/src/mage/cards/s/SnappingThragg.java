@@ -13,7 +13,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.DamagedPlayerControlsTargetAdjuster;
+import mage.target.targetadjustment.ThatPlayerControlsTargetAdjuster;
 
 import java.util.UUID;
 
@@ -35,7 +35,7 @@ public final class SnappingThragg extends CardImpl {
         // Whenever Snapping Thragg deals combat damage to a player, you may have it deal 3 damage to target creature that player controls.
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new DamageTargetEffect(3), true, true);
         ability.addTarget(new TargetPermanent(filter));
-        ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
+        ability.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster());
         this.addAbility(ability);
 
         // Morph {4}{R}{R}

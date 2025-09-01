@@ -78,7 +78,7 @@ class TilonallisSummonerEffect extends OneShotEffect {
         if (controller != null) {
             ManaCosts cost = new ManaCostsImpl<>("{X}{R}");
             if (controller.chooseUse(outcome, "Pay " + cost.getText() + "? If you do, you create X 1/1 red Elemental creature tokens that are tapped and attacking.", source, game)) {
-                int costX = controller.announceXMana(0, Integer.MAX_VALUE, "Announce the value for {X}", game, source);
+                int costX = controller.announceX(0, Integer.MAX_VALUE, "Announce the value for {X} (pay for tokens)", game, source, true);
                 cost.add(new GenericManaCost(costX));
                 if (cost.pay(source, game, source, source.getControllerId(), false, null)) {
                     controller.resetStoredBookmark(game); // otherwise you can undo the payment

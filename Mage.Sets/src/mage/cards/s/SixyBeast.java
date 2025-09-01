@@ -67,7 +67,7 @@ class SixyBeastEffect extends OneShotEffect {
         Permanent permanent = game.getPermanentEntering(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
         if (permanent != null && controller != null) {
-            int counterAmount = controller.getAmount(0, 6, "Secretly put up to six counters on " + permanent.getName(), game);
+            int counterAmount = controller.getAmount(0, 6, "Secretly put up to six counters on " + permanent.getName(), source, game);
             permanent.addCounters(CounterType.P1P1.createInstance(counterAmount), source.getControllerId(), source, game);
             Player opponent = null;
             Set<UUID> opponents = game.getOpponents(source.getControllerId());
@@ -82,7 +82,7 @@ class SixyBeastEffect extends OneShotEffect {
                 }
             }
             if (opponent != null) {
-                int guessedAmount = opponent.getAmount(0, 6, "Guess the number of counters on " + permanent.getName(), game);
+                int guessedAmount = opponent.getAmount(0, 6, "Guess the number of counters on " + permanent.getName(), source, game);
                 game.informPlayers(opponent.getLogName() + " guessed " + guessedAmount + " as the number of counters on " + permanent.getLogName());
                 if (counterAmount == guessedAmount) {
                     permanent.sacrifice(source, game);

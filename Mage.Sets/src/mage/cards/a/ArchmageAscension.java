@@ -1,12 +1,11 @@
 package mage.cards.a;
 
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -30,12 +29,9 @@ public final class ArchmageAscension extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
 
         // At the beginning of each end step, if you drew two or more cards this turn, you may put a quest counter on Archmage Ascension.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfEndStepTriggeredAbility(
-                        TargetController.EACH_PLAYER, new AddCountersSourceEffect(CounterType.QUEST.createInstance(1)),
-                        true
-                ), ArchmageAscensionCondition.instance, "At the beginning of each end step, " +
-                "if you drew two or more cards this turn, you may put a quest counter on {this}."
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(
+                TargetController.ANY, new AddCountersSourceEffect(CounterType.QUEST.createInstance()),
+                true, ArchmageAscensionCondition.instance
         ), new CardsAmountDrawnThisTurnWatcher());
 
         // As long as Archmage Ascension has six or more quest counters on it, if you would draw a card,
@@ -60,6 +56,11 @@ enum ArchmageAscensionCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         CardsAmountDrawnThisTurnWatcher watcher = game.getState().getWatcher(CardsAmountDrawnThisTurnWatcher.class);
         return watcher != null && watcher.getAmountCardsDrawn(source.getControllerId()) >= 2;
+    }
+
+    @Override
+    public String toString() {
+        return "you drew two or more cards this turn";
     }
 }
 

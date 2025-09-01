@@ -111,7 +111,7 @@ class BagOfHoldingReturnCardsEffect extends OneShotEffect {
             return false;
         }
         ExileZone exileZone = game.getExile().getExileZone(
-                CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter())
+                CardUtil.getExileZoneId(game, source.getSourceId(), source.getStackMomentSourceZCC())
         );
         if (exileZone == null) {
             return true;

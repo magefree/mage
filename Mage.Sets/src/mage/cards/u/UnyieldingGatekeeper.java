@@ -1,35 +1,35 @@
 package mage.cards.u;
 
-import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenControllerTargetEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.ExileThenReturnTargetEffect;
-import mage.constants.Outcome;
-import mage.constants.PutCards;
-import mage.constants.SubType;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.DisguiseAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.PutCards;
+import mage.constants.SubType;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.DetectiveToken;
-import mage.target.common.TargetNonlandPermanent;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  * @author Cguy7777
  */
 public final class UnyieldingGatekeeper extends CardImpl {
 
-    private static final FilterNonlandPermanent filter = new FilterNonlandPermanent();
+    private static final FilterNonlandPermanent filter = new FilterNonlandPermanent("another target nonland permanent");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -50,7 +50,7 @@ public final class UnyieldingGatekeeper extends CardImpl {
         // If you controlled it, return it to the battlefield tapped.
         // Otherwise, its controller creates a 2/2 white and blue Detective creature token.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new UnyieldingGatekeeperEffect());
-        ability.addTarget(new TargetNonlandPermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

@@ -57,7 +57,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
 
         // data init
         init(player, bigCard, gameId, priorityTime);
-        update(null, player, null);
+        update(null, player, null, null);
         playerPanel.sizePlayerPanel(isSmallMode());
 
         // init popup menu (must run after data init)
@@ -510,8 +510,8 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         this.isMe = player.getControlled();
     }
 
-    public final void update(GameView game, PlayerView player, Set<UUID> possibleTargets) {
-        this.playerPanel.update(game, player, possibleTargets);
+    public final void update(GameView game, PlayerView player, Set<UUID> possibleTargets, Set<UUID> chosenTargets) {
+        this.playerPanel.update(game, player, possibleTargets, chosenTargets);
         this.battlefieldPanel.update(player.getBattlefield());
         if (this.allowViewHandCardsMenuItem != null) {
             this.allowViewHandCardsMenuItem.setSelected(player.getUserData().isAllowRequestHandToAll());

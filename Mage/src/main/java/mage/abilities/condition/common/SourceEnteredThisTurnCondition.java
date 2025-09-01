@@ -1,4 +1,3 @@
-
 package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
@@ -9,20 +8,23 @@ import mage.game.permanent.Permanent;
 /**
  * @author xenohedron
  */
-
 public enum SourceEnteredThisTurnCondition implements Condition {
+    DID(true),
+    DIDNT(false);
+    private final boolean flag;
 
-    instance;
+    SourceEnteredThisTurnCondition(boolean flag) {
+        this.flag = flag;
+    }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = source.getSourcePermanentOrLKI(game);
-        return permanent != null && permanent.getTurnsOnBattlefield() == 0;
+        return permanent != null && (permanent.getTurnsOnBattlefield() == 0) == flag;
     }
 
     @Override
     public String toString() {
-        return "{this} entered the battlefield this turn";
+        return "{this} " + (flag ? "entered" : "didn't enter the battlefield") + " this turn";
     }
-
 }

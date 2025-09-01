@@ -1,40 +1,36 @@
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.condition.common.SourceOnBattlefieldCondition;
-import mage.abilities.condition.common.SourceRemainsInZoneCondition;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.SacrificeControllerEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
+import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class InfernalDenizen extends CardImpl {
@@ -50,11 +46,11 @@ public final class InfernalDenizen extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new InfernalDenizenEffect()));
 
         // {tap}: Gain control of target creature for as long as Infernal Denizen remains on the battlefield.
-        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(
-                new GainControlTargetEffect(Duration.Custom, true),
-                new SourceRemainsInZoneCondition(Zone.BATTLEFIELD),
-                "gain control of target creature for as long as {this} remains on the battlefield");
-        Ability ability = new SimpleActivatedAbility(effect, new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(
+                new GainControlTargetEffect(Duration.UntilSourceLeavesBattlefield, true)
+                        .setText("gain control of target creature for as long as {this} remains on the battlefield"),
+                new TapSourceCost()
+        );
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
@@ -71,12 +67,7 @@ public final class InfernalDenizen extends CardImpl {
 
 class InfernalDenizenEffect extends OneShotEffect {
 
-    private static final FilterPermanent filter = new FilterPermanent();
-
-    static {
-        filter.add(SubType.SWAMP.getPredicate());
-        filter.add(TargetController.YOU.getControllerPredicate());
-    }
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.SWAMP);
 
     InfernalDenizenEffect() {
         super(Outcome.Benefit);
@@ -96,41 +87,36 @@ class InfernalDenizenEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent creature = game.getPermanent(source.getSourceId());
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            DynamicValue swamps = new PermanentsOnBattlefieldCount(filter);
-            boolean canSac = swamps.calculate(game, source, this) > 1;
-            Effect effect = new SacrificeControllerEffect(filter, 2, "Sacrifice two Swamps");
-            effect.apply(game, source);
-            if (!canSac) {
-                if (creature != null) {
-                    creature.tap(source, game);
-                }
-                TargetOpponent targetOpp = new TargetOpponent(true);
-                if (targetOpp.canChoose(player.getId(), source, game)
-                        && targetOpp.choose(Outcome.Detriment, player.getId(), source.getSourceId(), source, game)) {
-                    Player opponent = game.getPlayer(targetOpp.getFirstTarget());
-                    if (opponent != null) {
-                        FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creature controlled by " + player.getLogName());
-                        filter2.add(new ControllerIdPredicate(player.getId()));
-                        TargetCreaturePermanent targetCreature = new TargetCreaturePermanent(1, 1, filter2, true);
-                        targetCreature.setTargetController(opponent.getId());
-                        if (targetCreature.canChoose(id, source, game)
-                                && opponent.chooseUse(Outcome.GainControl, "Gain control of a creature?", source, game)
-                                && opponent.chooseTarget(Outcome.GainControl, targetCreature, source, game)) {
-                            ConditionalContinuousEffect giveEffect = new ConditionalContinuousEffect(
-                                    new GainControlTargetEffect(Duration.Custom, true, opponent.getId()),
-                                    SourceOnBattlefieldCondition.instance,
-                                    "");
-                            giveEffect.setTargetPointer(new FixedTarget(targetCreature.getFirstTarget(), game));
-                            game.addEffect(giveEffect, source);
-                            return true;
-                        }
-                    }
-                }
-            }
+        Cost cost = new SacrificeTargetCost(filter);
+        if (cost.canPay(source, source, source.getControllerId(), game)
+                && cost.pay(source, game, source, source.getControllerId(), true)) {
+            return true;
         }
-        return false;
+        Permanent creature = source.getSourcePermanentIfItStillExists(game);
+        if (creature == null) {
+            return false;
+        }
+        creature.tap(source, game);
+        TargetPlayer targetPlayer = new TargetOpponent(true);
+        Player player = game.getPlayer(source.getControllerId());
+        if (player == null) {
+            return true;
+        }
+        player.choose(outcome, targetPlayer, source, game);
+        Player opponent = game.getPlayer(targetPlayer.getFirstTarget());
+        if (opponent == null) {
+            return true;
+        }
+        FilterPermanent filterPermanent = new FilterCreaturePermanent("creature controlled by " + player.getName());
+        filterPermanent.add(new ControllerIdPredicate(player.getId()));
+        TargetPermanent target = new TargetPermanent(0, 1, filterPermanent, true);
+        opponent.choose(outcome, target, source, game);
+        Permanent permanent = game.getPermanent(target.getFirstTarget());
+        if (permanent != null) {
+            game.addEffect(new GainControlTargetEffect(
+                    Duration.UntilSourceLeavesBattlefield, true, opponent.getId()
+            ).setTargetPointer(new FixedTarget(permanent, game)), source);
+        }
+        return true;
     }
 }

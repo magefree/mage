@@ -66,7 +66,7 @@ public class ReturnFromExileForSourceEffect extends OneShotEffect {
         if (permanentLeftBattlefield != null) {
             exileId = CardUtil.getExileZoneId(game, source.getSourceId(), permanentLeftBattlefield.getZoneChangeCounter(game));
         } else {
-            exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+            exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getStackMomentSourceZCC());
         }
 
         ExileZone exile = game.getExile().getExileZone(exileId);

@@ -56,6 +56,7 @@ class EdgarsAwakeningTriggeredAbility extends TriggeredAbilityImpl {
 
     EdgarsAwakeningTriggeredAbility() {
         super(Zone.ALL, new DoWhenCostPaid(makeAbility(), new ManaCostsImpl<>("{B}"), "Pay {B}?"));
+        this.setTriggerPhrase("When you discard this card, ");
     }
 
     private EdgarsAwakeningTriggeredAbility(final EdgarsAwakeningTriggeredAbility ability) {
@@ -75,11 +76,5 @@ class EdgarsAwakeningTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return this.getSourceId().equals(event.getTargetId());
-    }
-
-    @Override
-    public String getRule() {
-        return "When you discard {this}, you may pay {B}. " +
-                "When you do, return target creature card from your graveyard to your hand.";
     }
 }

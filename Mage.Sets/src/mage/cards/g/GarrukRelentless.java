@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import mage.abilities.Ability;
@@ -6,6 +5,7 @@ import mage.abilities.LoyaltyAbility;
 import mage.abilities.StateTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
@@ -39,13 +39,13 @@ public final class GarrukRelentless extends CardImpl {
         this.addAbility(new GarrukRelentlessStateTrigger());
 
         // 0: Garruk Relentless deals 3 damage to target creature. That creature deals damage equal to its power to him
-        LoyaltyAbility ability1 = new LoyaltyAbility(new GarrukRelentlessDamageEffect(), 0);
-        ability1.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability1);
+        Ability ability = new LoyaltyAbility(new DamageTargetEffect(3), 0);
+        ability.addEffect(new GarrukRelentlessDamageEffect());
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
 
         // 0: Create a 2/2 green Wolf creature token.
-        LoyaltyAbility ability2 = new LoyaltyAbility(new CreateTokenEffect(new WolfToken()), 0);
-        this.addAbility(ability2);
+        this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new WolfToken()), 0));
     }
 
     private GarrukRelentless(final GarrukRelentless card) {
@@ -89,7 +89,7 @@ class GarrukRelentlessDamageEffect extends OneShotEffect {
 
     GarrukRelentlessDamageEffect() {
         super(Outcome.Damage);
-        staticText = "{this} deals 3 damage to target creature. That creature deals damage equal to its power to him";
+        staticText = "That creature deals damage equal to its power to him";
     }
 
     private GarrukRelentlessDamageEffect(final GarrukRelentlessDamageEffect effect) {
@@ -98,19 +98,11 @@ class GarrukRelentlessDamageEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (permanent != null) {
-            int damage = permanent.getPower().getValue();
-            permanent.damage(3, source.getSourceId(), source, game, false, true);
-            if (damage > 0) {
-                Permanent garruk = game.getPermanent(source.getSourceId());
-                if (garruk != null) {
-                    garruk.damage(damage, permanent.getId(), source, game, false, true);
-                }
-            }
-            return true;
-        }
-        return false;
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        Permanent creature = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+        return permanent != null
+                && creature != null
+                && permanent.damage(creature.getPower().getValue(), creature.getId(), source, game) > 0;
     }
 
     @Override

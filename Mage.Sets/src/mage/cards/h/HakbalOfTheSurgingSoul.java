@@ -1,35 +1,35 @@
 package mage.cards.h;
 
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.keyword.ExploreSourceEffect;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.Card;
-import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.FilterCard;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInHand;
-import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
- *
  * @author Grath
  */
 public final class HakbalOfTheSurgingSoul extends CardImpl {
 
     public HakbalOfTheSurgingSoul(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{U}");
-        
+
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.MERFOLK);
         this.subtype.add(SubType.SCOUT);
@@ -55,24 +55,24 @@ public final class HakbalOfTheSurgingSoul extends CardImpl {
 
 class HakbalOfTheSurgingSoulExploreEffect extends OneShotEffect {
 
-    HakbalOfTheSurgingSoulExploreEffect( ) {
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent(SubType.MERFOLK);
+
+    HakbalOfTheSurgingSoulExploreEffect() {
         super(Outcome.Benefit);
         staticText = "each Merfolk creature you control explores";
     }
 
-    HakbalOfTheSurgingSoulExploreEffect(HakbalOfTheSurgingSoulExploreEffect effect ) {
+    HakbalOfTheSurgingSoulExploreEffect(HakbalOfTheSurgingSoulExploreEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent(SubType.MERFOLK);
-
         List<Permanent> creatures = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game);
 
         Player player = game.getPlayer(source.getControllerId());
         if (player != null && player.chooseUse(Outcome.AIDontUseIt, "Choose order for Merfolk to explore? (Note: You will need to set \"Auto-choose targets for player:\" to \"Off\" in Preferences.)", source, game)) {
-            TargetPermanent target = new TargetControlledCreaturePermanent(creatures.size(), creatures.size(), filter, true);
+            TargetPermanent target = new TargetPermanent(creatures.size(), creatures.size(), filter, true);
             target.withChooseHint("the order in which to explore (first selected will explore first)");
             player.choose(outcome, target, source, game);
             for (UUID targetId : target.getTargets()) {

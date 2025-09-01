@@ -427,18 +427,20 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
         String savageBeating = "Savage Beating";
 
         skipInitShuffling();
-        addCard(Zone.LIBRARY, playerA, savageBeating, 2);
+        addCard(Zone.LIBRARY, playerA, savageBeating, 2); // to free cast
         addCard(Zone.HAND, playerA, jeleva);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
 
+        // prepare and exile cards from libs
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, jeleva);
 
+        // attack and use free cast from exile
         attack(3, playerA, jeleva);
-        setChoice(playerA, true); // opt to use Jeleva ability
-        setChoice(playerA, savageBeating); // choose to cast Savage Beating for free
-        setChoice(playerA, false); // opt not to pay entwine cost
+        setChoice(playerA, savageBeating); // to free cast
+        setChoice(playerA, true); // confirm free cast
+        setChoice(playerA, false); // ignore entwine cost
         setModeChoice(playerA, "1"); // use first mode of Savage Beating granting double strike
 
         setStopAt(3, PhaseStep.END_COMBAT);
@@ -448,6 +450,5 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
         assertTapped(jeleva, true);
         assertLife(playerB, 18);
         assertAbility(playerA, jeleva, DoubleStrikeAbility.getInstance(), true);
-
     }
 }

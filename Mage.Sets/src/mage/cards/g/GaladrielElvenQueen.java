@@ -3,10 +3,9 @@ package mage.cards.g;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.TwoChoiceVote;
@@ -35,18 +34,9 @@ public final class GaladrielElvenQueen extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Will of the council -- At the beginning of combat on your turn, if another Elf entered the battlefield under your control this turn, starting with you, each player votes for dominion or guidance. If dominion gets more votes, the Ring tempts you, then you put a +1/+1 counter on your Ring-bearer. If guidance gets more votes or the vote is tied, draw a card.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfCombatTriggeredAbility(
-                        Zone.BATTLEFIELD,
-                        TargetController.YOU, new GaladrielElvenQueenEffect(),
-                        false
-                ),
-                GaladrielElvenQueenCondition.instance,
-                "At the beginning of combat on your turn, if another Elf entered the battlefield under "
-                        + "your control this turn, starting with you, each player votes for dominion or guidance. "
-                        + "If dominion gets more votes, the Ring tempts you, then you put a +1/+1 counter on your "
-                        + "Ring-bearer. If guidance gets more votes or the vote is tied, draw a card."
-        ).setAbilityWord(AbilityWord.WILL_OF_THE_COUNCIL), new GaladrielElvenQueenWatcher());
+        this.addAbility(new BeginningOfCombatTriggeredAbility(
+                Zone.BATTLEFIELD, TargetController.YOU, new GaladrielElvenQueenEffect(), false
+        ).withInterveningIf(GaladrielElvenQueenCondition.instance).setAbilityWord(AbilityWord.WILL_OF_THE_COUNCIL), new GaladrielElvenQueenWatcher());
     }
 
     private GaladrielElvenQueen(final GaladrielElvenQueen card) {
@@ -72,6 +62,11 @@ enum GaladrielElvenQueenCondition implements Condition {
                         source.getSourcePermanentOrLKI(game),
                         source.getControllerId()
                 );
+    }
+
+    @Override
+    public String toString() {
+        return "another Elf entered the battlefield under your control this turn";
     }
 }
 

@@ -3,7 +3,7 @@ package org.mage.plugins.card;
 import mage.cards.MageCard;
 import mage.cards.MagePermanent;
 import mage.cards.action.ActionCallback;
-import mage.client.util.GUISizeHelper;
+import mage.client.util.*;
 import mage.interfaces.plugin.CardPlugin;
 import mage.view.CardView;
 import mage.view.CounterView;
@@ -34,6 +34,8 @@ import java.beans.PropertyChangeListener;
 import java.util.List;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+
+import static mage.client.util.CardRenderMode.*;
 
 /**
  * {@link CardPlugin} implementation.
@@ -102,16 +104,19 @@ public class CardPluginImpl implements CardPlugin {
      * yet, so use old component based rendering for the split cards.
      */
     private CardPanel makeCardPanel(CardView view, UUID gameId, boolean loadImage, ActionCallback callback,
-                                    boolean isFoil, Dimension dimension, int renderMode, boolean needFullPermanentRender) {
-        switch (renderMode) {
-            case 0:
+                                    boolean isFoil, Dimension dimension, int renderModeId, boolean needFullPermanentRender) {
+        CardRenderMode cardRenderMode = CardRenderMode.fromId(renderModeId);
+        switch (cardRenderMode) {
+            case MTGO:
+            case FORCED_M15:
+            case FORCED_RETRO:
                 return new CardPanelRenderModeMTGO(view, gameId, loadImage, callback, isFoil, dimension,
-                        needFullPermanentRender);
-            case 1:
+                        needFullPermanentRender, renderModeId);
+            case IMAGE:
                 return new CardPanelRenderModeImage(view, gameId, loadImage, callback, isFoil, dimension,
                         needFullPermanentRender);
             default:
-                throw new IllegalStateException("Unknown render mode " + renderMode);
+                throw new IllegalStateException("Unknown render mode " + cardRenderMode);
         }
     }
 
@@ -658,7 +663,9 @@ public class CardPluginImpl implements CardPlugin {
         // mana symbols (low quality)
         jobs = new GathererSymbols();
         for (DownloadJob job : jobs) {
-            downloader.add(job);
+            // TODO: gatherer removed mana symbols icons after 2025, see https://github.com/magefree/mage/issues/13797
+            //  remove GathererSymbols code after few releases as unused (2025.06.28)
+            // downloader.add(job);
         }
 
         // set code symbols (low quality)

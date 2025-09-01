@@ -17,7 +17,7 @@ public enum AttachedPermanentToughnessCount implements DynamicValue {
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         Permanent attachmentPermanent = game.getPermanent(sourceAbility.getSourceId());
         if (attachmentPermanent == null) {
-            attachmentPermanent = (Permanent) game.getLastKnownInformation(sourceAbility.getSourceId(), Zone.BATTLEFIELD, sourceAbility.getSourceObjectZoneChangeCounter());
+            attachmentPermanent = (Permanent) game.getLastKnownInformation(sourceAbility.getSourceId(), Zone.BATTLEFIELD, sourceAbility.getStackMomentSourceZCC());
         }
         if (attachmentPermanent == null || attachmentPermanent.getAttachedTo() == null) {
             return 0;

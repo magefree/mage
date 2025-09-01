@@ -4,9 +4,12 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.decorator.ConditionalAsThoughEffect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
+import mage.abilities.effects.common.asthought.YouMaySpendManaAsAnyColorToCastTargetEffect;
 import mage.abilities.hint.ConditionHint;
+import mage.abilities.hint.Hint;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.Card;
@@ -15,19 +18,19 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 import mage.watchers.common.AttackedThisTurnWatcher;
+
 import java.util.Objects;
 import java.util.UUID;
-import mage.abilities.decorator.ConditionalAsThoughEffect;
-import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
-import mage.abilities.effects.common.asthought.YouMaySpendManaAsAnyColorToCastTargetEffect;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  * @author TheElk801
  */
 public final class RobberOfTheRich extends CardImpl {
+
+    private static final Hint hint = new ConditionHint(new RogueAttackedThisTurnCondition(null));
 
     public RobberOfTheRich(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
@@ -45,14 +48,9 @@ public final class RobberOfTheRich extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Whenever Robber of the Rich attacks, if defending player has more cards in hand than you, exile the top card of their library. During any turn you attacked with a Rogue, you may cast that card and you may spend mana as though it were mana of any color to cast that spell.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new AttacksTriggeredAbility(
-                        new RobberOfTheRichEffect(), false, "", SetTargetPointer.PLAYER
-                ), RobberOfTheRichAttacksCondition.instance, "Whenever {this} attacks, " +
-                "if defending player has more cards in hand than you, exile the top card of their library. " +
-                "During any turn you attacked with a Rogue, you may cast that card and " +
-                "you may spend mana as though it were mana of any color to cast that spell."
-        ).addHint(new ConditionHint(new RogueAttackedThisTurnCondition(null))));
+        this.addAbility(new AttacksTriggeredAbility(
+                new RobberOfTheRichEffect(), false, "", SetTargetPointer.PLAYER
+        ).withInterveningIf(RobberOfTheRichAttacksCondition.instance).addHint(hint));
     }
 
     private RobberOfTheRich(final RobberOfTheRich card) {
@@ -72,16 +70,21 @@ enum RobberOfTheRichAttacksCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player player = game.getPlayer(game.getCombat().getDefendingPlayerId(source.getSourceId(), game));
-        return controller != null 
-                && player != null 
+        return controller != null
+                && player != null
                 && controller.getHand().size() < player.getHand().size();
+    }
+
+    @Override
+    public String toString() {
+        return "defending player has more cards in hand than you";
     }
 }
 
 class RogueAttackedThisTurnCondition implements Condition {
- 
+
     private Ability ability;
-    
+
     RogueAttackedThisTurnCondition(Ability source) {
         this.ability = source;
     }
@@ -108,7 +111,7 @@ class RogueAttackedThisTurnCondition implements Condition {
 
     @Override
     public String toString() {
-        return "During that turn you attacked with a Rogue";
+        return "You attacked with a Rogue this turn";
     }
 }
 
@@ -116,6 +119,8 @@ class RobberOfTheRichEffect extends OneShotEffect {
 
     RobberOfTheRichEffect() {
         super(Outcome.Benefit);
+        staticText = "exile the top card of their library. During any turn you attacked with a Rogue, " +
+                "you may cast that card and you may spend mana as though it were mana of any color to cast that spell";
     }
 
     private RobberOfTheRichEffect(final RobberOfTheRichEffect effect) {
@@ -131,7 +136,7 @@ class RobberOfTheRichEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player damagedPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
-        if (controller == null 
+        if (controller == null
                 || damagedPlayer == null) {
             return false;
         }

@@ -6,7 +6,6 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.condition.common.SourceEnteredThisTurnCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.HasteAbility;
@@ -38,19 +37,17 @@ public final class KeldonStrikeTeam extends CardImpl {
         this.addAbility(new KickerAbility("{1}{W}"));
 
         // When Keldon Strike Team enters the battlefield, if it was kicked, create two 1/1 white Soldier creature tokens.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new SoldierToken(), 2)),
-                KickedCondition.ONCE, "When {this} enters, if it was kicked, " +
-                "create two 1/1 white Soldier creature tokens."
-        ));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new CreateTokenEffect(new SoldierToken(), 2)
+        ).withInterveningIf(KickedCondition.ONCE));
 
         // As long as Keldon Strike Team entered the battlefield this turn, creatures you control have haste.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilityControlledEffect(
                         HasteAbility.getInstance(), Duration.WhileOnBattlefield,
                         StaticFilters.FILTER_CONTROLLED_CREATURE
-                ), SourceEnteredThisTurnCondition.instance, "as long as {this} " +
-                "entered the battlefield this turn, creatures you control have haste"
+                ), SourceEnteredThisTurnCondition.DID, "as long as {this} " +
+                "entered this turn, creatures you control have haste"
         )));
     }
 

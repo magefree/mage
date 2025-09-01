@@ -1,5 +1,6 @@
 package mage.abilities.common;
 
+import mage.MageItem;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
@@ -23,6 +24,7 @@ public class AttacksWithCreaturesTriggeredAbility extends TriggeredAbilityImpl {
 
     // retrieve the number of attackers in triggered effects with getValue
     public static final String VALUEKEY_NUMBER_ATTACKERS = "number_attackers";
+    public static final String VALUEKEY_NUMBER_DEFENDING_PLAYERS = "number_defending_players";
 
     private final FilterPermanent filter;
     private final int minAttackers;
@@ -41,7 +43,11 @@ public class AttacksWithCreaturesTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     public AttacksWithCreaturesTriggeredAbility(Zone zone, Effect effect, int minAttackers, FilterPermanent filter, boolean setTargetPointer) {
-        super(zone, effect);
+        this(zone, effect, minAttackers, filter, setTargetPointer, false);
+    }
+
+    public AttacksWithCreaturesTriggeredAbility(Zone zone, Effect effect, int minAttackers, FilterPermanent filter, boolean setTargetPointer, boolean optional) {
+        super(zone, effect, optional);
         this.filter = filter;
         this.minAttackers = minAttackers;
         this.setTargetPointer = setTargetPointer;
@@ -87,6 +93,17 @@ public class AttacksWithCreaturesTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         getEffects().setValue(VALUEKEY_NUMBER_ATTACKERS, attackers.size());
+        getEffects().setValue(
+                VALUEKEY_NUMBER_DEFENDING_PLAYERS,
+                attackers.stream()
+                        .map(MageItem::getId)
+                        .map(game.getCombat()::getDefenderId)
+                        .distinct()
+                        .map(game::getPlayer)
+                        .filter(Objects::nonNull)
+                        .mapToInt(x -> 1)
+                        .sum()
+        );
         if (setTargetPointer) {
             getEffects().setTargetPointer(new FixedTargets(new ArrayList<>(attackers), game));
         }

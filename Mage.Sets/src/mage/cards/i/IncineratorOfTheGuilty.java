@@ -88,7 +88,7 @@ class IncineratorOfTheGuiltyEffect extends OneShotEffect {
             return false;
         }
 
-        int xValue = controller.announceXMana(0, Integer.MAX_VALUE, "Announce the value for X", game, source);
+        int xValue = controller.announceX(0, Integer.MAX_VALUE, "Announce the value for {X} (collect evidence)", game, source, false);
         CollectEvidenceCost cost = new CollectEvidenceCost(xValue);
         if (!cost.pay(source, game, source, source.getControllerId(), false, null)) {
             return false;

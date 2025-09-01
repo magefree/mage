@@ -34,7 +34,7 @@ public final class GoldenEgg extends CardImpl {
         this.addAbility(ability);
 
         // {2}, {T}, Sacrifice Golden Egg: You gain 3 life.
-        this.addAbility(new FoodAbility(true));
+        this.addAbility(new FoodAbility());
     }
 
     private GoldenEgg(final GoldenEgg card) {

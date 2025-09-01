@@ -1,20 +1,21 @@
 package mage.abilities.keyword;
 
 import mage.MageIdentifier;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.SpecialAction;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.SuspendedCondition;
 import mage.abilities.costs.VariableCostType;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.costs.mana.VariableManaCost;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continuous.GainSuspendEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.Card;
 import mage.cards.CardsImpl;
 import mage.cards.ModalDoubleFacedCard;
@@ -145,7 +146,7 @@ public class SuspendAbility extends SpecialAction {
             if (card.getManaCost().isEmpty()) {
                 setRuleAtTheTop(true);
             }
-            addSubAbility(new SuspendBeginningOfUpkeepInterveningIfTriggeredAbility());
+            addSubAbility(new SuspendUpkeepAbility());
             addSubAbility(new SuspendPlayCardAbility());
         } else {
             ruleText = "Suspend";
@@ -186,8 +187,7 @@ public class SuspendAbility extends SpecialAction {
         ability.setControllerId(card.getOwnerId());
         game.getState().addOtherAbility(card, ability);
 
-        SuspendBeginningOfUpkeepInterveningIfTriggeredAbility ability1
-                = new SuspendBeginningOfUpkeepInterveningIfTriggeredAbility();
+        SuspendUpkeepAbility ability1 = new SuspendUpkeepAbility();
         ability1.setSourceId(card.getId());
         ability1.setControllerId(card.getOwnerId());
         game.getState().addOtherAbility(card, ability1);
@@ -228,6 +228,34 @@ public class SuspendAbility extends SpecialAction {
             return ActivationStatus.getFalse();
         }
         return super.canActivate(playerId, game);
+    }
+
+    public static boolean addTimeCountersAndSuspend(Card card, int amount, Ability source, Game game) {
+        if (card == null || card.isCopy()) {
+            return false;
+        }
+        if (!Zone.EXILED.match(game.getState().getZone(card.getId()))) {
+            return false;
+        }
+        Player owner = game.getPlayer(card.getOwnerId());
+        if (owner == null) {
+            return false;
+        }
+        game.getExile().moveToAnotherZone(
+                card.getMainCard(), game,
+                game.getExile().createZone(
+                        SuspendAbility.getSuspendExileId(owner.getId(), game),
+                        "Suspended cards of " + owner.getName()
+                )
+        );
+        if (amount > 0) {
+            card.addCounters(CounterType.TIME.createInstance(amount), owner.getId(), source, game);
+        }
+        if (!card.getAbilities(game).containsClass(SuspendAbility.class)) {
+            game.addEffect(new GainSuspendEffect(new MageObjectReference(card, game)), source);
+        }
+        game.informPlayers(owner.getLogName() + " suspends " + amount + " - " + card.getName());
+        return true;
     }
 
     @Override
@@ -404,23 +432,20 @@ class GainHasteEffect extends ContinuousEffectImpl {
 
 }
 
-class SuspendBeginningOfUpkeepInterveningIfTriggeredAbility extends ConditionalInterveningIfTriggeredAbility {
+class SuspendUpkeepAbility extends BeginningOfUpkeepTriggeredAbility {
 
-    SuspendBeginningOfUpkeepInterveningIfTriggeredAbility() {
-        super(new BeginningOfUpkeepTriggeredAbility(Zone.EXILED, TargetController.YOU, new RemoveCounterSourceEffect(CounterType.TIME.createInstance()),
-                        false),
-                SuspendedCondition.instance,
-                "At the beginning of your upkeep, if {this} is suspended, remove a time counter from it.");
+    SuspendUpkeepAbility() {
+        super(Zone.EXILED, TargetController.YOU, new RemoveCounterSourceEffect(CounterType.TIME.createInstance()).setText("remove a time counter from it"), false);
+        this.withInterveningIf(SuspendedCondition.instance);
         this.setRuleVisible(false);
-
     }
 
-    private SuspendBeginningOfUpkeepInterveningIfTriggeredAbility(final SuspendBeginningOfUpkeepInterveningIfTriggeredAbility effect) {
+    private SuspendUpkeepAbility(final SuspendUpkeepAbility effect) {
         super(effect);
     }
 
     @Override
-    public SuspendBeginningOfUpkeepInterveningIfTriggeredAbility copy() {
-        return new SuspendBeginningOfUpkeepInterveningIfTriggeredAbility(this);
+    public SuspendUpkeepAbility copy() {
+        return new SuspendUpkeepAbility(this);
     }
 }

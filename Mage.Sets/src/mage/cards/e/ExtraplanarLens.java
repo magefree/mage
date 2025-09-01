@@ -1,7 +1,6 @@
 
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.Effect;
@@ -14,30 +13,24 @@ import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ManaEvent;
 import mage.game.events.TappedForManaEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetLandPermanent;
+import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class ExtraplanarLens extends CardImpl {
-
-    private static final FilterLandPermanent filter = new FilterLandPermanent("land you control");
-
-    static {
-        filter.add(TargetController.YOU.getControllerPredicate());
-    }
 
     public ExtraplanarLens(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
@@ -45,12 +38,11 @@ public final class ExtraplanarLens extends CardImpl {
         // Imprint - When Extraplanar Lens enters the battlefield, you may exile target land you control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExtraplanarLensImprintEffect(), true);
         ability.setAbilityWord(AbilityWord.IMPRINT);
-        ability.addTarget(new TargetLandPermanent(filter));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND));
         this.addAbility(ability);
 
         // Whenever a land with the same name as the exiled card is tapped for mana, its controller adds one mana of any type that land produced.
         this.addAbility(new ExtraplanarLensTriggeredAbility());
-
     }
 
     private ExtraplanarLens(final ExtraplanarLens card) {

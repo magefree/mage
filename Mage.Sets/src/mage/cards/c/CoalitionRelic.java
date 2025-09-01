@@ -3,18 +3,17 @@ package mage.cards.c;
 
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfFirstMainTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.AnyColorManaAbility;
+import mage.abilities.triggers.BeginningOfFirstMainTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -52,7 +51,7 @@ class CoalitionRelicEffect extends OneShotEffect {
 
     CoalitionRelicEffect() {
         super(Outcome.PutManaInPool);
-        this.staticText = "remove all charge counters from Coalition Relic. Add one mana of any color for each charge counter removed this way";
+        this.staticText = "remove all charge counters from {this}. Add one mana of any color for each charge counter removed this way";
     }
 
     private CoalitionRelicEffect(final CoalitionRelicEffect effect) {

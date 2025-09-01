@@ -46,12 +46,12 @@ public final class Cocoon extends CardImpl {
 
         // When Cocoon enters the battlefield, tap enchanted creature and put three pupa counters on Cocoon.
         Ability ability = new EntersBattlefieldTriggeredAbility(new TapEnchantedEffect());
-        ability.addEffect(new AddCountersSourceEffect(CounterType.PUPA.createInstance(3)));
+        ability.addEffect(new AddCountersSourceEffect(CounterType.PUPA.createInstance(3)).concatBy("and"));
         this.addAbility(ability);
 
         // Enchanted creature doesn’t untap during your untap step if Cocoon has a pupa counter on it.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousRuleModifyingEffect(new DontUntapInControllersUntapStepEnchantedEffect(),
-                new SourceHasCounterCondition(CounterType.PUPA)).setText("Enchanted creature doesn't untap during its controller's untap step if Cocoon has a pupa counter on it")));
+                new SourceHasCounterCondition(CounterType.PUPA)).setText("Enchanted creature doesn't untap during your untap step if {this} has a pupa counter on it")));
 
         // At the beginning of your upkeep, remove a pupa counter from Cocoon. If you can’t, sacrifice it, put a +1/+1 counter on enchanted creature, and that creature gains flying.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CocoonEffect()));

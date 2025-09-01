@@ -5,12 +5,10 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.continuous.GainSuspendEffect;
 import mage.abilities.keyword.SuspendAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -89,16 +87,20 @@ class GandalfOfTheSecretFireTriggeredAbility extends TriggeredAbilityImpl {
 
 class GandalfOfTheSecretFireEffect extends ReplacementEffectImpl {
 
-    private final MageObjectReference mor;
+    // we store both Spell and Card to work properly on split cards.
+    private final MageObjectReference morSpell;
+    private final MageObjectReference morCard;
 
     GandalfOfTheSecretFireEffect(Spell spell, Game game) {
         super(Duration.OneUse, Outcome.Benefit);
-        this.mor = new MageObjectReference(spell.getCard(), game);
+        this.morSpell = new MageObjectReference(spell.getCard(), game);
+        this.morCard = new MageObjectReference(spell.getMainCard(), game);
     }
 
     private GandalfOfTheSecretFireEffect(final GandalfOfTheSecretFireEffect effect) {
         super(effect);
-        this.mor = effect.mor;
+        this.morSpell = effect.morSpell;
+        this.morCard = effect.morCard;
     }
 
     @Override
@@ -109,18 +111,12 @@ class GandalfOfTheSecretFireEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
-        Spell sourceSpell = game.getStack().getSpell(event.getTargetId());
+        Spell sourceSpell = morSpell.getSpell(game);
         if (controller == null || sourceSpell == null || sourceSpell.isCopy()) {
             return false;
         }
-        UUID exileId = SuspendAbility.getSuspendExileId(controller.getId(), game);
-        if (controller.moveCardsToExile(sourceSpell, source, game, true, exileId, "Suspended cards of " + controller.getName())) {
-            sourceSpell.addCounters(CounterType.TIME.createInstance(3), controller.getId(), source, game);
-            game.informPlayers(controller.getLogName() + " exiles " + sourceSpell.getLogName() + " with 3 time counters on it");
-        }
-        if (!sourceSpell.getAbilities(game).containsClass(SuspendAbility.class)) {
-            game.addEffect(new GainSuspendEffect(new MageObjectReference(sourceSpell.getMainCard(), game)), source);
-        }
+        controller.moveCards(sourceSpell, Zone.EXILED, source, game);
+        SuspendAbility.addTimeCountersAndSuspend(sourceSpell.getMainCard(), 3, source, game);
         return true;
     }
 
@@ -132,14 +128,9 @@ class GandalfOfTheSecretFireEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         ZoneChangeEvent zEvent = ((ZoneChangeEvent) event);
-        if (zEvent.getFromZone() != Zone.STACK
-                || zEvent.getToZone() != Zone.GRAVEYARD
-                || event.getSourceId() == null
-                || !event.getSourceId().equals(event.getTargetId())
-                || !mor.equals(new MageObjectReference(event.getTargetId(), game))) {
-            return false;
-        }
-        Spell spell = game.getStack().getSpell(mor.getSourceId());
-        return spell != null && spell.isInstantOrSorcery(game);
+        return Zone.STACK.equals(zEvent.getFromZone())
+                && Zone.GRAVEYARD.equals(zEvent.getToZone())
+                && morSpell.refersTo(event.getSourceId(), game) // this is how we check that the spell resolved properly (and was not countered or the like)
+                && morCard.refersTo(event.getTargetId(), game); // this is how we check that the card being moved is the one we want.
     }
 }

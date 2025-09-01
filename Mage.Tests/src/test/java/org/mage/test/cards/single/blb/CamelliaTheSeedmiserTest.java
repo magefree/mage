@@ -7,7 +7,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author Grath
  */
 public class CamelliaTheSeedmiserTest extends CardTestPlayerBase {
@@ -57,7 +56,7 @@ public class CamelliaTheSeedmiserTest extends CardTestPlayerBase {
 
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
-        activateAbility(3, PhaseStep.UPKEEP, playerA, "{2}, {T}, Sacrifice this artifact: You gain 3 life");
+        activateAbility(3, PhaseStep.UPKEEP, playerA, "{2}, {T}, Sacrifice");
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();

@@ -1,6 +1,7 @@
 package mage.cards.p;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
@@ -49,10 +50,7 @@ public final class PheliaExuberantShepherd extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
 
         // Whenever Phelia, Exuberant Shepherd attacks, exile up to one other target nonland permanent. At the beginning of the next end step, return that card to the battlefield under its owner's control. If it entered under your control, put a +1/+1 counter on Phelia.
-        Ability ability = new AttacksTriggeredAbility(new ExileTargetEffect().setToSourceExileZone(true));
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(
-                new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new PheliaExuberantShepherdEffect()), false
-        ));
+        Ability ability = new AttacksTriggeredAbility(new PheliaExuberantShepherdExileEffect());
         ability.addTarget(new TargetPermanent(0, 1, filter));
         this.addAbility(ability);
     }
@@ -67,16 +65,55 @@ public final class PheliaExuberantShepherd extends CardImpl {
     }
 }
 
+class PheliaExuberantShepherdExileEffect extends ExileTargetEffect {
+
+    PheliaExuberantShepherdExileEffect() {
+        super();
+        outcome = Outcome.Neutral; // quite contextual outcome.
+        staticText = "exile up to one other target nonland permanent. At the beginning of the next end step, "
+                + "return that card to the battlefield under its owner's control. If it entered under your control, "
+                + "put a +1/+1 counter on {this}.";
+    }
+
+    private PheliaExuberantShepherdExileEffect(final PheliaExuberantShepherdExileEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public PheliaExuberantShepherdExileEffect copy() {
+        return new PheliaExuberantShepherdExileEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        MageObject sourceObject = source.getSourceObject(game);
+        this.exileId = UUID.randomUUID();
+        this.exileZone = sourceObject == null ? null : sourceObject.getIdName();
+        // attempting to exile to the fresh exileId
+        boolean didSomething = super.apply(game, source);
+        // delayed trigger is created even if exiling failed.
+        didSomething |= new CreateDelayedTriggeredAbilityEffect(
+                new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
+                        new PheliaExuberantShepherdEffect(this.exileId)), false
+        ).apply(game, source);
+        return didSomething;
+    }
+}
+
 class PheliaExuberantShepherdEffect extends OneShotEffect {
 
-    PheliaExuberantShepherdEffect() {
+    private final UUID zoneId; // the exile zone's id for cards to return.
+
+    PheliaExuberantShepherdEffect(UUID zoneId) {
         super(Outcome.Benefit);
         staticText = "return that card to the battlefield under its owner's control. "
                 + "If it entered under your control, put a +1/+1 counter on {this}";
+        this.zoneId = zoneId;
     }
 
     private PheliaExuberantShepherdEffect(final PheliaExuberantShepherdEffect effect) {
         super(effect);
+        this.zoneId = effect.zoneId;
     }
 
     @Override
@@ -90,7 +127,6 @@ class PheliaExuberantShepherdEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        UUID zoneId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
         ExileZone exileZone = game.getExile().getExileZone(zoneId);
         if (exileZone == null || exileZone.isEmpty()) {
             return false;
@@ -106,7 +142,7 @@ class PheliaExuberantShepherdEffect extends OneShotEffect {
         boolean enteredUnderYourControl = false;
         for (Card card : cards) {
             // Try to find the permanent that card became
-            Permanent permanent = game.getPermanent(card.getId());
+            Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
             if (permanent != null && permanent.getControllerId().equals(source.getControllerId())) {
                 enteredUnderYourControl = true;
                 break;

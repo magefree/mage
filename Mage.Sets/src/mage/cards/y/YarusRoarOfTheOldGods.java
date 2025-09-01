@@ -28,6 +28,7 @@ import mage.filter.predicate.card.FaceDownPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  *
@@ -109,7 +110,7 @@ class YarusRoarOfTheOldGodsEffect extends OneShotEffect {
                 BecomesFaceDownCreatureEffect.FaceDownType.MANUAL), newSource);
         controller.moveCards(card, Zone.BATTLEFIELD, source, game, false, true, true, null);
 
-        Permanent permanent = game.getPermanent(card.getId());
+        Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
         if (permanent != null) {
             permanent.turnFaceUp(source, game, source.getControllerId());
         }

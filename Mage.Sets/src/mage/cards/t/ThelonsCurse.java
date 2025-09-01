@@ -1,14 +1,13 @@
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepAllEffect;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -23,10 +22,11 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author spjspj & L_J
  */
 public final class ThelonsCurse extends CardImpl {
@@ -85,22 +85,23 @@ class ThelonsCurseEffect extends OneShotEffect {
 
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if (player != null && sourcePermanent != null) {
-            int countBattlefield = game.getBattlefield().getAllActivePermanents(filter, game.getActivePlayerId(), game).size();
-            while (player.canRespond() && countBattlefield > 0 && player.chooseUse(Outcome.AIDontUseIt, "Pay {U} and untap a tapped blue creature under your control?", source, game)) {
-                Target tappedCreatureTarget = new TargetControlledCreaturePermanent(1, 1, filter, true);
-                if (player.choose(Outcome.Detriment, tappedCreatureTarget, source, game)) {
-                    Cost cost = new ManaCostsImpl<>("{U}");
-                    Permanent tappedCreature = game.getPermanent(tappedCreatureTarget.getFirstTarget());
-
-                    if (cost.pay(source, game, source, player.getId(), false)) {
-                        tappedCreature.untap(game);
-                    }
-                }
-                countBattlefield = game.getBattlefield().getAllActivePermanents(filter, game.getActivePlayerId(), game).size();
-            }
-            return true;
+        if (player == null || sourcePermanent == null) {
+            return false;
         }
-        return false;
+        int countBattlefield = game.getBattlefield().getAllActivePermanents(filter, game.getActivePlayerId(), game).size();
+        while (player.canRespond() && countBattlefield > 0 && player.chooseUse(Outcome.AIDontUseIt, "Pay {U} and untap a tapped blue creature under your control?", source, game)) {
+            Target tappedCreatureTarget = new TargetPermanent(filter);
+            tappedCreatureTarget.withNotTarget(true);
+            if (player.choose(Outcome.Detriment, tappedCreatureTarget, source, game)) {
+                Cost cost = new ManaCostsImpl<>("{U}");
+                Permanent tappedCreature = game.getPermanent(tappedCreatureTarget.getFirstTarget());
+
+                if (cost.pay(source, game, source, player.getId(), false)) {
+                    tappedCreature.untap(game);
+                }
+            }
+            countBattlefield = game.getBattlefield().getAllActivePermanents(filter, game.getActivePlayerId(), game).size();
+        }
+        return true;
     }
 }

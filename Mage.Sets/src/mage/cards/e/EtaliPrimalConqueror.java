@@ -91,6 +91,8 @@ class EtaliPrimalConquerorEffect extends OneShotEffect {
                 }
             }
         }
+        game.processAction();
+        cards.retainZone(Zone.EXILED, game);
         CardUtil.castMultipleWithAttributeForFree(controller, source, game, cards, StaticFilters.FILTER_CARD);
         return true;
     }

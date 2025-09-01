@@ -92,7 +92,7 @@ class TidehollowScullerExileEffect extends OneShotEffect {
                             true,
                             CardUtil.getExileZoneId(game,
                                     source.getSourceId(),
-                                    source.getSourceObjectZoneChangeCounter()),
+                                    source.getStackMomentSourceZCC()),
                             "Tidehollow Sculler");
                 }
             }
@@ -124,8 +124,8 @@ class TidehollowScullerLeaveEffect extends OneShotEffect {
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
             int zoneChangeCounter = (sourceObject instanceof PermanentToken)
-                    ? source.getSourceObjectZoneChangeCounter()
-                    : source.getSourceObjectZoneChangeCounter() - 1;
+                    ? source.getStackMomentSourceZCC()
+                    : source.getStackMomentSourceZCC() - 1;
             ExileZone exZone = game.getExile().getExileZone(
                     CardUtil.getExileZoneId(game, source.getSourceId(), zoneChangeCounter));
             if (exZone != null) {

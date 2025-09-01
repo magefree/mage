@@ -32,7 +32,7 @@ public class DekDeckImporter extends PlainTextDeckImporter {
             }
 
             boolean isSideboard = "true".equals(extractAttribute(line, "Sideboard"));
-            CardInfo cardInfo = getCardLookup().lookupCardInfo(cardName).orElse(null);
+            CardInfo cardInfo = getCardLookup().lookupCardInfo(cardName);
             if (cardInfo == null) {
                 sbMessage.append("Could not find card: '").append(cardName).append("' at line ").append(lineCount).append('\n');
             } else {

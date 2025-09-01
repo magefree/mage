@@ -14,13 +14,14 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterPlaneswalkerPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.PreventDamageEvent;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetPlaneswalkerPermanent;
-import mage.target.targetadjustment.DamagedPlayerControlsTargetAdjuster;
+import mage.target.TargetPermanent;
+import mage.target.targetadjustment.ThatPlayerControlsTargetAdjuster;
 
 import java.util.UUID;
 
@@ -28,7 +29,7 @@ import java.util.UUID;
  * @author TheElk801, notgreat
  */
 public final class QuestingBeast extends CardImpl {
-    private static final FilterPlaneswalkerPermanent filter = new FilterPlaneswalkerPermanent("planeswalker that player controls");
+    private static final FilterPermanent filter = new FilterPlaneswalkerPermanent("planeswalker that player controls");
 
     public QuestingBeast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
@@ -55,8 +56,8 @@ public final class QuestingBeast extends CardImpl {
 
         // Whenever Questing Beast deals combat damage to an opponent, it deals that much damage to target planeswalker that player controls.
         Ability ability = new DealsDamageToOpponentTriggeredAbility(new DamageTargetEffect(SavedDamageValue.MUCH), false, true, true);
-        ability.addTarget(new TargetPlaneswalkerPermanent(filter));
-        ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
+        ability.addTarget(new TargetPermanent(filter));
+        ability.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster());
         this.addAbility(ability);
     }
 

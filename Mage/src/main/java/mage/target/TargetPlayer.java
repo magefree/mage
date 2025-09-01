@@ -51,97 +51,30 @@ public class TargetPlayer extends TargetImpl {
         return filter;
     }
 
-    /**
-     * Checks if there are enough {@link Player} that can be chosen. Should only
-     * be used for Ability targets since this checks for protection, shroud etc.
-     *
-     * @param sourceControllerId - controller of the target event source
-     * @param source
-     * @param game
-     * @return - true if enough valid {@link Player} exist
-     */
     @Override
     public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
-        int count = 0;
-        MageObject targetSource = game.getObject(source);
-        for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
-            Player player = game.getPlayer(playerId);
-            if (player != null && !player.hasLeft() && filter.match(player, sourceControllerId, source, game)) {
-                if (player.canBeTargetedBy(targetSource, sourceControllerId, source, game)) {
-                    count++;
-                    if (count >= this.minNumberOfTargets) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Checks if there are enough {@link Player} that can be selected. Should
-     * not be used for Ability targets since this does not check for protection,
-     * shroud etc.
-     *
-     * @param sourceControllerId - controller of the select event
-     * @param game
-     * @return - true if enough valid {@link Player} exist
-     */
-    @Override
-    public boolean canChoose(UUID sourceControllerId, Game game) {
-        int count = 0;
-        for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
-            Player player = game.getPlayer(playerId);
-            if (player != null && !player.hasLeft() && filter.match(player, game)) {
-                count++;
-                if (count >= this.minNumberOfTargets) {
-                    return true;
-                }
-            }
-        }
-        return false;
+        return canChooseFromPossibleTargets(sourceControllerId, source, game);
     }
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
-        MageObject targetSource = game.getObject(source);
         for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
             Player player = game.getPlayer(playerId);
-            if (player != null && !player.hasLeft() && filter.match(player, sourceControllerId, source, game)) {
-                if (isNotTarget() || player.canBeTargetedBy(targetSource, sourceControllerId, source, game)) {
-                    possibleTargets.add(playerId);
-                }
-            }
-        }
-        return possibleTargets;
-    }
-
-    @Override
-    public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
-        Set<UUID> possibleTargets = new HashSet<>();
-        for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
-            Player player = game.getPlayer(playerId);
-            if (player != null && !player.hasLeft() && filter.match(player, game)) {
+            if (player != null && filter.match(player, sourceControllerId, source, game)) {
                 possibleTargets.add(playerId);
             }
         }
-        return possibleTargets;
+        return keepValidPossibleTargets(possibleTargets, sourceControllerId, source, game);
     }
 
     @Override
     public boolean isLegal(Ability source, Game game) {
         //20101001 - 608.2b
-        if (getNumberOfTargets() == 0 && targets.isEmpty()) {
+        if (getMinNumberOfTargets() == 0 && targets.isEmpty()) {
             return true; // 0 targets selected is valid
         }
         return targets.keySet().stream().anyMatch(playerId -> canTarget(playerId, source, game));
-    }
-
-    @Override
-    public boolean canTarget(UUID id, Game game) {
-        Player player = game.getPlayer(id);
-        return filter.match(player, game);
     }
 
     @Override

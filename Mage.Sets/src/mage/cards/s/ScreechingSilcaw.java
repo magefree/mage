@@ -1,10 +1,8 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.condition.common.MetalcraftCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.hint.common.MetalcraftHint;
 import mage.abilities.keyword.FlyingAbility;
@@ -31,15 +29,9 @@ public final class ScreechingSilcaw extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         //"<i>Metalcraft</i> &mdash; Whenever Screeching Silcaw deals combat damage to a player, if you control three or more artifacts, that player puts the top four cards of their library into their graveyard.
-        TriggeredAbility conditional = new ConditionalInterveningIfTriggeredAbility(
-                new DealsCombatDamageToAPlayerTriggeredAbility(
-                        new MillCardsTargetEffect(4), false, true
-                ), MetalcraftCondition.instance, "Whenever {this} " +
-                "deals combat damage to a player, if you control three or more artifacts, that player mills four cards."
-        );
-        conditional.setAbilityWord(AbilityWord.METALCRAFT);
-        conditional.addHint(MetalcraftHint.instance);
-        this.addAbility(conditional);
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
+                new MillCardsTargetEffect(4), false, true
+        ).withInterveningIf(MetalcraftCondition.instance).setAbilityWord(AbilityWord.METALCRAFT).addHint(MetalcraftHint.instance));
     }
 
     private ScreechingSilcaw(final ScreechingSilcaw card) {

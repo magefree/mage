@@ -1,10 +1,10 @@
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -20,6 +20,8 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.UUID;
+
 /**
  * @author LevelX2
  */
@@ -30,6 +32,8 @@ public final class MistveilPlains extends CardImpl {
     static {
         filter.add(new ColorPredicate(ObjectColor.WHITE));
     }
+
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1);
 
     public MistveilPlains(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
@@ -43,15 +47,11 @@ public final class MistveilPlains extends CardImpl {
 
         // {W}, {tap}: Put target card from your graveyard on the bottom of your library. Activate this ability only if you control two or more white permanents.
         Ability ability = new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD,
-                new MistveilPlainsGraveyardToLibraryEffect(),
-                new ManaCostsImpl<>("{W}"),
-                new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1)
+                new MistveilPlainsGraveyardToLibraryEffect(), new ManaCostsImpl<>("{W}"), condition
         );
         ability.addTarget(new TargetCardInYourGraveyard());
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
-
     }
 
     private MistveilPlains(final MistveilPlains card) {
@@ -88,6 +88,6 @@ class MistveilPlainsGraveyardToLibraryEffect extends OneShotEffect {
                 || game.getState().getZone(card.getId()) != Zone.GRAVEYARD) {
             return false;
         }
-        return player.putCardsOnBottomOfLibrary(card, game, source, false);
+        return player.putCardsOnBottomOfLibrary(card, game, source);
     }
 }

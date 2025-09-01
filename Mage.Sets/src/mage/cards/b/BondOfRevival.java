@@ -14,9 +14,11 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -69,13 +71,14 @@ class BondOfRevivalEffect extends OneShotEffect {
         if (player == null || card == null) {
             return false;
         }
-        ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.UntilYourNextTurn);
-        effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game) + 1));
         if (player.moveCards(card, Zone.BATTLEFIELD, source, game)) {
-            game.addEffect(effect, source);
+            Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
+            if (permanent != null) {
+                ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.UntilYourNextTurn);
+                effect.setTargetPointer(new FixedTarget(permanent.getId(), game));
+                game.addEffect(effect, source);
+            }
         }
         return true;
     }
 }
-
-

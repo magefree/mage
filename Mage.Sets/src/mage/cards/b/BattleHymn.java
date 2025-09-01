@@ -18,7 +18,7 @@ public final class BattleHymn extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}");
 
         // Add {R} for each creature you control.
-        this.getSpellAbility().addEffect(new DynamicManaEffect(Mana.RedMana(1), CreaturesYouControlCount.instance));
+        this.getSpellAbility().addEffect(new DynamicManaEffect(Mana.RedMana(1), CreaturesYouControlCount.SINGULAR));
     }
 
     private BattleHymn(final BattleHymn card) {

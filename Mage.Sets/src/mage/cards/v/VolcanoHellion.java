@@ -82,7 +82,7 @@ class VolcanoHellionEffect extends OneShotEffect {
                 }
             } else {
                 //Human choose
-                amount = controller.getAmount(0, Integer.MAX_VALUE, "Choose the amount of damage to deliver to you and a target creature. The damage can't be prevented.", game);
+                amount = controller.getAmount(0, Integer.MAX_VALUE, "Choose the amount of damage to deliver to you and a target creature. The damage can't be prevented.", source, game);
             }
 
             if (amount > 0) {

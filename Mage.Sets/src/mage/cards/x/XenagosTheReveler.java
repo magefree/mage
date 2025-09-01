@@ -81,7 +81,7 @@ class XenagosManaEffect extends OneShotEffect {
             }
 
             Mana mana = new Mana();
-            int redCount = player.getAmount(0, x, "How much <b>RED</b> mana add to pool? (available: " + x + ", another mana goes to <b>GREEN</b>)?", game);
+            int redCount = player.getAmount(0, x, "How much <b>RED</b> mana add to pool? (available: " + x + ", another mana goes to <b>GREEN</b>)?", source, game);
             int greenCount = Math.max(0, x - redCount);
             mana.setRed(redCount);
             mana.setGreen(greenCount);

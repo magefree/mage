@@ -3,8 +3,7 @@ package mage.cards.g;
 import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.HighestManaValueCount;
+import mage.abilities.dynamicvalue.common.GreatestAmongPermanentsValue;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.RevealLibraryPickControllerEffect;
@@ -25,8 +24,6 @@ import java.util.UUID;
  */
 public final class GlintRaker extends CardImpl {
 
-    private static final DynamicValue xValue = new HighestManaValueCount(StaticFilters.FILTER_PERMANENT_ARTIFACTS);
-
     public GlintRaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
 
@@ -39,8 +36,9 @@ public final class GlintRaker extends CardImpl {
 
         // Glint Raker gets +X/+0, where X is the highest mana value among artifacts you control.
         this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(
-                xValue, StaticValue.get(0), Duration.WhileOnBattlefield
-        )));
+                GreatestAmongPermanentsValue.MANAVALUE_CONTROLLED_ARTIFACTS,
+                StaticValue.get(0), Duration.WhileOnBattlefield
+        )).addHint(GreatestAmongPermanentsValue.MANAVALUE_CONTROLLED_ARTIFACTS.getHint()));
 
         // Whenever Glint Raker deals combat damage to a player, you may reveal that many cards from the top of your library. Put an artifact card revealed this way into your hand and the rest into your graveyard.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(

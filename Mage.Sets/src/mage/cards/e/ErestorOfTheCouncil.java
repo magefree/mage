@@ -5,6 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.FinishVotingTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -13,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.permanent.token.TreasureToken;
-import mage.players.Player;
 
 import java.util.Set;
 import java.util.UUID;
@@ -68,19 +68,16 @@ class ErestorOfTheCouncilEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Set<UUID> playerIds = (Set<UUID>) getValue("votedAgainst");
-        int count = 0;
+        int scryCount = 0;
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
             if (playerIds.contains(opponentId)) {
-                count++;
+                scryCount++;
             } else {
                 new TreasureToken().putOntoBattlefield(1, game, source, opponentId);
             }
         }
-        if (count > 0) {
-            Player player = game.getPlayer(source.getControllerId());
-            if (player != null) {
-                player.scry(count, source, game);
-            }
+        if (scryCount > 0) {
+            new ScryEffect(scryCount).apply(game, source);
         }
         return true;
     }

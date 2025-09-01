@@ -3,6 +3,7 @@ package org.mage.test.cards.single.mh3;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBaseWithAIHelps;
 
 /**
@@ -72,6 +73,7 @@ public class NethergoyfTest extends CardTestPlayerBaseWithAIHelps {
         checkPlayableAbility("can escape", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast " + nethergoyf + " with Escape", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, nethergoyf + " with Escape");
         setChoice(playerA, "Memnite^Memnite^Memnite^Memnite^Bitterblossom"); // cards exiled for escape cost: Exile all the Memnite but one.
+        setChoice(playerA, TestPlayer.CHOICE_SKIP);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -181,6 +183,7 @@ public class NethergoyfTest extends CardTestPlayerBaseWithAIHelps {
         // The same is true for permanent spells you control and nonland permanent cards you own that aren’t on the battlefield.
         addCard(Zone.HAND, playerA, "Encroaching Mycosynth");
 
+        // AI must be able to choose good targets combination
         aiPlayStep(1, PhaseStep.PRECOMBAT_MAIN, playerA);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

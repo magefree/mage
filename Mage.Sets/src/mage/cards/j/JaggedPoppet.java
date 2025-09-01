@@ -1,12 +1,9 @@
 package mage.cards.j;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.DealtDamageToSourceTriggeredAbility;
 import mage.abilities.condition.common.HellbentCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.common.discard.DiscardControllerEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
@@ -16,8 +13,9 @@ import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.UUID;
+
 /**
- *
  * @author jerekwilson
  */
 public final class JaggedPoppet extends CardImpl {
@@ -31,15 +29,16 @@ public final class JaggedPoppet extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever Jagged Poppet is dealt damage, discard that many cards.
-        this.addAbility(new DealtDamageToSourceTriggeredAbility(new DiscardControllerEffect(SavedDamageValue.MANY), false));
+        this.addAbility(new DealtDamageToSourceTriggeredAbility(
+                new DiscardControllerEffect(SavedDamageValue.MANY), false
+        ));
 
         // Hellbent - Whenever Jagged Poppet deals combat damage to a player, if you have no cards in hand, that player discards cards equal to the damage.
-        Ability hellbentAbility = new ConditionalInterveningIfTriggeredAbility(
-                new DealsCombatDamageToAPlayerTriggeredAbility(new DiscardTargetEffect(SavedDamageValue.MANY), false, true),
-                HellbentCondition.instance,
-                "Whenever {this} deals combat damage to a player, if you have no cards in hand, that player discards cards equal to the damage.");
-        hellbentAbility.setAbilityWord(AbilityWord.HELLBENT);
-        this.addAbility(hellbentAbility);
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
+                new DiscardTargetEffect(SavedDamageValue.MANY)
+                        .setText("that player discards cards equal to the damage"),
+                false, true
+        ).withInterveningIf(HellbentCondition.instance).setAbilityWord(AbilityWord.HELLBENT));
     }
 
     private JaggedPoppet(final JaggedPoppet card) {

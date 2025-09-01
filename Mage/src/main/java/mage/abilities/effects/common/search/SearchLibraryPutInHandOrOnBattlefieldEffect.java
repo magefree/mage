@@ -87,7 +87,7 @@ public class SearchLibraryPutInHandOrOnBattlefieldEffect extends SearchEffect {
     private void setText() {
         StringBuilder sb = new StringBuilder();
         sb.append("search your library for ");
-        if (target.getNumberOfTargets() == 0 && target.getMaxNumberOfTargets() > 0) {
+        if (target.getMinNumberOfTargets() == 0 && target.getMaxNumberOfTargets() > 0) {
             sb.append("up to ").append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(' ');
             sb.append(target.getTargetName()).append(revealCards ? ", reveal them," : "").append(" and put them into your hand");
         } else {

@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -11,12 +10,12 @@ import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.common.DoWhenCostPaid;
 import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
 import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
@@ -24,13 +23,14 @@ import mage.game.Game;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author Jmlundeen
  */
 public final class SaheeliRadiantCreator extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("Artificer or artifact spell");
+    private static final FilterSpell filter = new FilterSpell("an Artificer or artifact spell");
 
     static {
         filter.add(Predicates.or(
@@ -41,7 +41,7 @@ public final class SaheeliRadiantCreator extends CardImpl {
 
     public SaheeliRadiantCreator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{U}{R}");
-        
+
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ARTIFICER);

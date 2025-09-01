@@ -7,7 +7,6 @@ import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedByAllTargetEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
@@ -34,7 +33,7 @@ import java.util.UUID;
  */
 public final class TatsunariToadRider extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent();
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("you don't control a creature named Keimi");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent();
     private static final FilterPermanent filter3 = new FilterControlledPermanent(SubType.FROG);
 
@@ -56,14 +55,10 @@ public final class TatsunariToadRider extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever you cast an enchantment spell, if you don't control a creature named Keimi, create Keimi, a legendary 3/3 black and green Frog creature token with "Whenever you cast an enchantment spell, each opponent loses 1 life and you gain 1 life."
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new SpellCastControllerTriggeredAbility(
-                        new CreateTokenEffect(new KeimiToken()),
-                        StaticFilters.FILTER_SPELL_AN_ENCHANTMENT, false
-                ), condition, "Whenever you cast an enchantment spell, if you don't control " +
-                "a creature named Keimi, create Keimi, a legendary 3/3 black and green Frog creature token with " +
-                "\"Whenever you cast an enchantment spell, each opponent loses 1 life and you gain 1 life.\""
-        ));
+        this.addAbility(new SpellCastControllerTriggeredAbility(
+                new CreateTokenEffect(new KeimiToken()),
+                StaticFilters.FILTER_SPELL_AN_ENCHANTMENT, false
+        ).withInterveningIf(condition));
 
         // {1}{G/U}: Tatsunari, Toad Rider and target Frog you control can't be blocked this turn except by creatures with flying or reach.
         Ability ability = new SimpleActivatedAbility(

@@ -91,9 +91,7 @@ public class SacrificeAllEffect extends OneShotEffect {
                 continue;
             }
             TargetSacrifice target = new TargetSacrifice(numTargets, filter);
-            while (!target.isChosen(game) && target.canChoose(player.getId(), source, game) && player.canRespond()) {
-                player.choose(Outcome.Sacrifice, target, source, game);
-            }
+            target.choose(Outcome.Sacrifice, player.getId(), source, game);
             perms.addAll(target.getTargets());
         }
 

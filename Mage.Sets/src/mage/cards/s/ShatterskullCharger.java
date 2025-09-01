@@ -1,18 +1,17 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.condition.common.SourceHasCounterCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.KickerAbility;
 import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -26,8 +25,10 @@ import java.util.UUID;
  */
 public final class ShatterskullCharger extends CardImpl {
 
-    private static final Condition condition
-            = new InvertCondition(new SourceHasCounterCondition(CounterType.P1P1, 1));
+    private static final Condition condition = new InvertCondition(
+            new SourceHasCounterCondition(CounterType.P1P1),
+            "{this} doesn't have a +1/+1 counter on it"
+    );
 
     public ShatterskullCharger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
@@ -53,12 +54,8 @@ public final class ShatterskullCharger extends CardImpl {
         ));
 
         // At the beginning of your end step, if Shatterskull Charger doesn't have a +1/+1 counter on it, return it to its owner's hand.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfEndStepTriggeredAbility(
-                        new ReturnToHandSourceEffect(true)
-                ), condition, "At the beginning of your end step, " +
-                "if {this} doesn't have a +1/+1 counter on it, return it to its owner's hand."
-        ));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new ReturnToHandSourceEffect(true)
+                .setText("return it to its owner's hand")).withInterveningIf(condition));
     }
 
     private ShatterskullCharger(final ShatterskullCharger card) {

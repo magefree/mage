@@ -59,7 +59,7 @@ public class EntersBattlefieldUnderControlOfOpponentOfChoiceEffect extends OneSh
                 Duration.Custom, true, opponent.getId()
         );
         continuousEffect.setTargetPointer(new FixedTarget(
-                source.getSourceId(), source.getSourceObjectZoneChangeCounter()
+                source.getSourceId(), source.getStackMomentSourceZCC()
         ));
         game.addEffect(continuousEffect, source);
         return true;

@@ -29,8 +29,7 @@ import java.util.UUID;
  */
 public final class ArixmethesSlumberingIsle extends CardImpl {
 
-    private static final Condition condition
-            = new SourceHasCounterCondition(CounterType.SLUMBER, 1, Integer.MAX_VALUE);
+    private static final Condition condition = new SourceHasCounterCondition(CounterType.SLUMBER);
 
     public ArixmethesSlumberingIsle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{U}");

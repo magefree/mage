@@ -2,22 +2,24 @@ package mage.cards.f;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SpellCastAllTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.counters.CounterType;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,9 +37,9 @@ public final class ForgottenAncient extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever a player casts a spell, you may put a +1/+1 counter on Forgotten Ancient.
-        Effect effect = new AddCountersSourceEffect(CounterType.P1P1.createInstance());
-        Ability ability = new SpellCastAllTriggeredAbility(effect, true);
-        this.addAbility(ability);
+        this.addAbility(new SpellCastAllTriggeredAbility(
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true
+        ));
 
         // At the beginning of your upkeep, you may move any number of +1/+1 counters from Forgotten Ancient onto other creatures.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ForgottenAncientEffect(), true));
@@ -56,7 +58,7 @@ public final class ForgottenAncient extends CardImpl {
 
 class ForgottenAncientEffect extends OneShotEffect {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
+    private static final FilterPermanent filter = new FilterCreaturePermanent("another creature");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -98,7 +100,7 @@ class ForgottenAncientEffect extends OneShotEffect {
         List<CounterMovement> counterMovements = new ArrayList<>();
 
         do {
-            Target target = new TargetCreaturePermanent(1, 1, filter, true);
+            Target target = new TargetPermanent(1, 1, filter, true);
             if (!target.canChoose(controller.getId(), source, game)) {
                 break;
             }
@@ -107,7 +109,7 @@ class ForgottenAncientEffect extends OneShotEffect {
                 break;
             }
 
-            int amountToMove = controller.getAmount(0, numCounters, "Choose how many counters to move (" + numCounters + " counters remaining.)", game);
+            int amountToMove = controller.getAmount(0, numCounters, "Choose how many counters to move (" + numCounters + " counters remaining.)", source, game);
             if (amountToMove == 0) {
                 break;
             }

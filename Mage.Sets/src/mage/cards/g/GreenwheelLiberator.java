@@ -1,18 +1,19 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.common.RevoltCondition;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.watchers.common.RevoltWatcher;
+
+import java.util.UUID;
 
 /**
  * @author JRHerlehy
@@ -29,11 +30,11 @@ public final class GreenwheelLiberator extends CardImpl {
 
         // <i>Revolt</i> &mdash; Greenbelt Liberator enters the battlefield with two +1/+1 counters on it if a
         // permanent you controlled left the battlefield this turn.
-        Ability ability = new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), false, RevoltCondition.instance,
-                "<i>Revolt</i> &mdash; {this} enters with two +1/+1 counters on it if a permanent you controlled left the battlefield this turn.", null);
-        ability.addWatcher(new RevoltWatcher());
-        this.addAbility(ability.addHint(RevoltCondition.getHint()));
+        this.addAbility(new EntersBattlefieldAbility(
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), false,
+                RevoltCondition.instance, "{this} enters with two +1/+1 counters on it " +
+                "if a permanent you controlled left the battlefield this turn.", null
+        ).setAbilityWord(AbilityWord.REVOLT).addHint(RevoltCondition.getHint()), new RevoltWatcher());
     }
 
     private GreenwheelLiberator(final GreenwheelLiberator card) {

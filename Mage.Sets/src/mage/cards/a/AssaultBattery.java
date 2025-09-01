@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -12,6 +11,8 @@ import mage.constants.SpellAbilityType;
 import mage.game.permanent.token.ElephantToken;
 import mage.target.common.TargetAnyTarget;
 
+import java.util.UUID;
+
 public final class AssaultBattery extends SplitCard {
 
     public AssaultBattery(UUID ownerId, CardSetInfo setInfo) {
@@ -20,7 +21,7 @@ public final class AssaultBattery extends SplitCard {
         // Assault
         // Assault deals 2 damage to any target.
         Effect effect = new DamageTargetEffect(2);
-        effect.setText("Assault deals 2 damage to any target");
+        effect.setText("{this} deals 2 damage to any target");
         getLeftHalfCard().getSpellAbility().addEffect(effect);
         getLeftHalfCard().getSpellAbility().addTarget(new TargetAnyTarget());
 

@@ -5,6 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.effects.keyword.SurveilEffect;
 import mage.abilities.keyword.FlashAbility;
@@ -42,8 +43,9 @@ public final class DreamEater extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Dream Eater enters the battlefield, surveil 4. When you do, you may return target nonland permanent an opponent controls to its owner's hand.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new SurveilEffect(4));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new SurveilEffect(4, false));
         ability.addEffect(new DreamEaterEffect());
+        ability.addEffect(new InfoEffect("<i>(To surveil 4, look at the top four cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)</i>"));
         this.addAbility(ability);
     }
 

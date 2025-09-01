@@ -1,28 +1,24 @@
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.constants.PutCards;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.filter.predicate.mageobject.PermanentPredicate;
 
+import java.util.UUID;
+
 /**
- *
  * @author padfoot
  */
 public final class WilfredMott extends CardImpl {
@@ -32,12 +28,12 @@ public final class WilfredMott extends CardImpl {
 
     static {
         filter.add(PermanentPredicate.instance);
-	filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     public WilfredMott(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
-        
+
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
@@ -45,13 +41,15 @@ public final class WilfredMott extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Look to the Stars -- At the beginning of your upkeep, put a time counter on Wilfred Mott. Then look at the top X cards of your library, where X is the number of time counters on Wilfred Mott. You may put a nonland permanent card with mana value 3 or less from among them onto the battlefield. Put the rest on the bottom of your library in a random order.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance())).withFlavorWord("Look to the Stars");
-        LookLibraryAndPickControllerEffect effect = new LookLibraryAndPickControllerEffect(xValue, 1, filter, PutCards.BATTLEFIELD, PutCards.BOTTOM_RANDOM);
-	effect.setText("Then look at the top X cards of your library, where X is the number of time counters on Wilfred Mott. " + 
-			" You may put a nonland permanent card with mana value 3 or less from among them onto the battlefield. " +
-			" Put the rest on the bottom of your library in a random order.");
-        ability.addEffect(effect);
-	this.addAbility(ability);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(
+                new AddCountersSourceEffect(CounterType.TIME.createInstance())
+        ).withFlavorWord("Look to the Stars");
+        ability.addEffect(new LookLibraryAndPickControllerEffect(
+                xValue, 1, filter, PutCards.BATTLEFIELD, PutCards.BOTTOM_RANDOM
+        ).setText("Then look at the top X cards of your library, where X is the number of time counters on {this}. " +
+                "You may put a nonland permanent card with mana value 3 or less from among them onto the battlefield. " +
+                "Put the rest on the bottom of your library in a random order."));
+        this.addAbility(ability);
     }
 
     private WilfredMott(final WilfredMott card) {

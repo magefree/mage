@@ -12,7 +12,7 @@ import mage.game.Game;
 public enum CreaturesYouControlHint implements Hint {
 
     instance;
-    private static final Hint hint = new ValueHint("Creatures you control", CreaturesYouControlCount.instance);
+    private static final Hint hint = new ValueHint("Creatures you control", CreaturesYouControlCount.PLURAL);
 
     @Override
     public String getText(Game game, Ability ability) {

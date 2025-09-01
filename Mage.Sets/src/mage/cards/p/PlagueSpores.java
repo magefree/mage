@@ -6,9 +6,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetLandPermanent;
 import mage.target.targetpointer.EachTargetPointer;
+
+import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK;
 
 /**
  *
@@ -22,7 +25,7 @@ public final class PlagueSpores extends CardImpl {
 
         // Destroy target nonblack creature and target land. They can't be regenerated.
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true).setTargetPointer(new EachTargetPointer()));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK));
+        this.getSpellAbility().addTarget(new TargetPermanent(FILTER_PERMANENT_CREATURE_NON_BLACK));
         this.getSpellAbility().addTarget(new TargetLandPermanent());
     }
 

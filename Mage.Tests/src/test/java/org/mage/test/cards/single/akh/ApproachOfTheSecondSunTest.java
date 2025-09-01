@@ -169,19 +169,29 @@ public class ApproachOfTheSecondSunTest extends CardTestPlayerBase {
     @Test
     public void testCastFromGraveyard() {
         removeAllCardsFromLibrary(playerA);
+
         addCard(Zone.LIBRARY, playerA, "Plains", 6);
-        addCard(Zone.HAND, playerA, "Approach of the Second Sun", 1);
-        addCard(Zone.GRAVEYARD, playerA, "Approach of the Second Sun", 2);
-        addCard(Zone.HAND, playerA, "Finale of Promise", 2);
-        addCard(Zone.BATTLEFIELD, playerA, "Mystic Monastery", 25);
+        //
+        // If this spell was cast from your hand and you've cast another spell named Approach of the Second Sun this game,
+        // you win the game. Otherwise, put Approach of the Second Sun into its owner's library seventh from the top
+        // and you gain 7 life.
+        addCard(Zone.HAND, playerA, "Approach of the Second Sun", 1); // {6}{W}
+        addCard(Zone.GRAVEYARD, playerA, "Approach of the Second Sun", 2); // {6}{W}
+        //
+        // You may cast up to one target instant card and/or up to one target sorcery card from your graveyard each
+        // with mana value X or less without paying their mana costs. If a spell cast this way would be put into
+        // your graveyard, exile it instead. If X is 10 or more, copy each of those spells twice. You may choose
+        // new targets for the copies.
+        addCard(Zone.HAND, playerA, "Finale of Promise", 2); // {X}{R}{R}
+        //
+        addCard(Zone.BATTLEFIELD, playerA, "Mystic Monastery", 25); // for mana
 
         // first may have been cast from anywhere.
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Finale of Promise", true);
-        // You may cast up to one target instant card and/or up to one target sorcery card from your graveyard each with mana value X or less without paying their mana costs. If a spell cast this way would be put into your graveyard, exile it instead. If X is 10 or more, copy each of those spells twice. You may choose new targets for the copies.
         setChoice(playerA, "X=7"); // each with mana value X or less
+        addTarget(playerA, TARGET_SKIP); // skip instant target
+        addTarget(playerA, "Approach of the Second Sun"); // use sorcery target
         setChoice(playerA, "Yes"); // You may cast
-        addTarget(playerA, TARGET_SKIP); // up to one target instant card
-        addTarget(playerA, "Approach of the Second Sun"); // and/or up to one target sorcery card from your graveyard
         checkLife("Approach of the Second Sun cast from graveyard gains life", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 27);
         checkLibraryCount("Approach of the Second Sun cast from graveyard goes to library",
                 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Approach of the Second Sun", 1);
@@ -190,9 +200,9 @@ public class ApproachOfTheSecondSunTest extends CardTestPlayerBase {
         // The second Approach of the Second Sun that you cast must be cast from your hand,
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Finale of Promise", true);
         setChoice(playerA, "X=7"); // each with mana value X or less
-        setChoice(playerA, "Yes"); // You may cast
         addTarget(playerA, TARGET_SKIP); // up to one target instant card
         addTarget(playerA, "Approach of the Second Sun"); // and/or up to one target sorcery card from your graveyard
+        setChoice(playerA, "Yes"); // You may cast
         checkLife("Approach of the Second Sun cast from graveyard gains life", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 34);
         checkLibraryCount("Approach of the Second Sun cast from graveyard goes to library",
                 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Approach of the Second Sun", 2);

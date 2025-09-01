@@ -26,7 +26,10 @@ public final class ViridianJoiner extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {T}: Add an amount of {G} equal to Viridian Joiner's power.
-        this.addAbility(new DynamicManaAbility(Mana.GreenMana(1), SourcePermanentPowerValue.NOT_NEGATIVE));
+        this.addAbility(new DynamicManaAbility(Mana.GreenMana(1),
+                SourcePermanentPowerValue.NOT_NEGATIVE,
+                "Add an amount of {G} equal to {this}'s power"
+        ));
     }
 
     private ViridianJoiner(final ViridianJoiner card) {

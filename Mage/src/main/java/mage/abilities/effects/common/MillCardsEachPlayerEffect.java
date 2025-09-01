@@ -97,11 +97,17 @@ public class MillCardsEachPlayerEffect extends OneShotEffect {
                 throw new UnsupportedOperationException("TargetController type not supported.");
         }
         sb.append("mills ");
-        if (numberCards.toString().equals("1")) {
-            sb.append("a card");
-        } else {
-            sb.append(CardUtil.numberToText(numberCards.toString()));
-            sb.append(" cards");
+        switch (numberCards.toString()) {
+            case "1":
+                sb.append("a card");
+                break;
+            case "X":
+                sb.append("X cards, where X is ");
+                sb.append(numberCards.getMessage());
+                break;
+            default:
+                sb.append(CardUtil.numberToText(numberCards.toString()));
+                sb.append(" cards");
         }
         return sb.toString();
     }

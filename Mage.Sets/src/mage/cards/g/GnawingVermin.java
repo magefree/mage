@@ -12,8 +12,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
+
+import static mage.filter.StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL;
 
 /**
  *
@@ -35,7 +38,7 @@ public final class GnawingVermin extends CardImpl {
 
         // When Gnawing Vermin dies, target creature you don't control gets -1/-1 until end of turn.
         ability = new DiesSourceTriggeredAbility(new BoostTargetEffect(-1, -1));
-        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
+        ability.addTarget(new TargetPermanent(FILTER_CREATURE_YOU_DONT_CONTROL));
         this.addAbility(ability);
     }
 

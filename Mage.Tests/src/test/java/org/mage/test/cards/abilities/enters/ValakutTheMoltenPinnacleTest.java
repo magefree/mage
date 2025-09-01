@@ -3,6 +3,7 @@ package org.mage.test.cards.abilities.enters;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -61,18 +62,20 @@ public class ValakutTheMoltenPinnacleTest extends CardTestPlayerBase {
     @Test
     public void sixEnterWithScapeshiftDamageToPlayerB() {
 
-        addCard(Zone.LIBRARY, playerA, "Mountain", 6);
+        addCard(Zone.LIBRARY, playerA, "Mountain", 10);
         addCard(Zone.BATTLEFIELD, playerA, "Valakut, the Molten Pinnacle");
-        addCard(Zone.BATTLEFIELD, playerA, "Forest", 6);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 10);
         addCard(Zone.HAND, playerA, "Scapeshift");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Scapeshift");
-        setChoice(playerA, "Forest^Forest^Forest^Forest^Forest^Forest");
-        addTarget(playerA, "Mountain^Mountain^Mountain^Mountain^Mountain^Mountain");
-        setChoice(playerA, "Whenever", 5); // order triggers
-        setChoice(playerA, true, 6); // yes to deal damage
+        setChoice(playerA, "Forest^Forest^Forest^Forest^Forest^Forest"); // to sac
+        setChoice(playerA, TestPlayer.CHOICE_SKIP);
+        addTarget(playerA, "Mountain^Mountain^Mountain^Mountain^Mountain^Mountain"); // to search
+        setChoice(playerA, "Whenever a Mountain", 6 - 1); // x6 triggers from valakut
         addTarget(playerA, playerB, 6); // to deal damage
+        setChoice(playerA, true, 6); // yes to deal damage
 
+        setStrictChooseMode(true);
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -81,7 +84,7 @@ public class ValakutTheMoltenPinnacleTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Mountain", 6);
 
         assertLife(playerA, 20);
-        assertLife(playerB, 2); // 6 * 3 damage = 18
+        assertLife(playerB, 20 - 18); // 6 * 3 damage = 18
 
     }
 

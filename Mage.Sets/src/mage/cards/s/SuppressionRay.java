@@ -114,6 +114,7 @@ class SuppressionRayTargetEffect extends OneShotEffect {
         int numberToPay = controller.getAmount(
                 0, maxEnergy,
                 "How many {E} do you like to pay? (" + tappedThisWay.size() + " creature(s) were tapped)",
+                source,
                 game
         );
         if (numberToPay == 0) {

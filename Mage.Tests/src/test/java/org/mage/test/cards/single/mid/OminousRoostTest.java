@@ -15,48 +15,48 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  * @author alexander-novo, Alex-Vasile
  */
 public class OminousRoostTest extends CardTestPlayerBase {
-	private static final String ominousRoost = "Ominous Roost";
+    private static final String ominousRoost = "Ominous Roost";
 
-	/**
-	 * Reported bug: https://github.com/magefree/mage/issues/9078
-	 * 		If Ominous Roost is in your library, it will trigger any time you cast a spell from your graveyard.
-	 */
-	@Test
-	public void doesNotTriggerFromOtherZones() {
-		addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+    /**
+     * Reported bug: https://github.com/magefree/mage/issues/9078
+     *         If Ominous Roost is in your library, it will trigger any time you cast a spell from your graveyard.
+     */
+    @Test
+    public void doesNotTriggerFromOtherZones() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
 
-		addCard(Zone.EXILED, playerA, ominousRoost);
-		addCard(Zone.LIBRARY, playerA, ominousRoost);
-		addCard(Zone.GRAVEYARD, playerA, ominousRoost);
-		addCard(Zone.HAND, playerA, ominousRoost);
+        addCard(Zone.EXILED, playerA, ominousRoost);
+        addCard(Zone.LIBRARY, playerA, ominousRoost);
+        addCard(Zone.GRAVEYARD, playerA, ominousRoost);
+        addCard(Zone.HAND, playerA, ominousRoost);
 
-		// Flashback {2}{R}
-		// Create a treasure token
-		addCard(Zone.GRAVEYARD, playerA, "Strike It Rich");
+        // Flashback {2}{R}
+        // Create a treasure token
+        addCard(Zone.GRAVEYARD, playerA, "Strike It Rich");
 
-		setStrictChooseMode(true);
+        setStrictChooseMode(true);
 
-		activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback {2}{R}");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback {2}{R}");
 
-		setStopAt(1, PhaseStep.END_TURN);
-		execute();
-		assertPermanentCount(playerA, ominousRoost, 0);
-		assertPermanentCount(playerA, "Bird Token", 0); // None of the cards are on the field, so it should not have triggered
-	}
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertPermanentCount(playerA, ominousRoost, 0);
+        assertPermanentCount(playerA, "Bird Token", 0); // None of the cards are on the field, so it should not have triggered
+    }
 
-	/**
-	 * Test that it triggers on ETB
-	 */
-	@Test
-	public void triggersOnOwnETB() {
-		addCard(Zone.HAND, playerA, ominousRoost);
-		addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+    /**
+     * Test that it triggers on ETB
+     */
+    @Test
+    public void triggersOnOwnETB() {
+        addCard(Zone.HAND, playerA, ominousRoost);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
 
-		castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, ominousRoost);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, ominousRoost);
 
-		setStopAt(1, PhaseStep.END_TURN);
-		execute();
-		assertPermanentCount(playerA, ominousRoost, 1);
-		assertPermanentCount(playerA, "Bird Token", 1);
-	}
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertPermanentCount(playerA, ominousRoost, 1);
+        assertPermanentCount(playerA, "Bird Token", 1);
+    }
 }

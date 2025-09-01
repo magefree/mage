@@ -125,7 +125,7 @@ class AshiokNightmareWeaverPutIntoPlayEffect extends OneShotEffect {
             return true;
         }
         controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-        Permanent permanent = game.getPermanent(card.getId());
+        Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
         if (permanent != null) {
             game.addEffect(new AddCardSubTypeTargetEffect(
                     SubType.NIGHTMARE, Duration.EndOfTurn

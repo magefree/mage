@@ -1,8 +1,5 @@
-
-
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -13,15 +10,15 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.common.TargetNonlandPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Viserion
  */
 public final class IntoTheRoil extends CardImpl {
 
     public IntoTheRoil(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
         // Kicker {1}{U} (You may pay an additional {1}{U} as you cast this spell.)
         this.addAbility(new KickerAbility("{1}{U}"));
@@ -30,8 +27,8 @@ public final class IntoTheRoil extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DrawCardSourceControllerEffect(1),
-                KickedCondition.ONCE,
-                "if this spell was kicked, draw a card"));
+                KickedCondition.ONCE, "if this spell was kicked, draw a card"
+        ));
         this.getSpellAbility().addTarget(new TargetNonlandPermanent());
     }
 

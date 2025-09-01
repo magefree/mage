@@ -4,6 +4,8 @@ import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.ForetellAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -31,6 +33,7 @@ public final class RiseOfTheDreadMarn extends CardImpl {
                 new ZombieBerserkerToken(), RiseOfTheDreadMarnValue.instance
         ));
         this.getSpellAbility().addWatcher(new RiseOfTheDreadMarnWatcher());
+        this.getSpellAbility().addHint(RiseOfTheDreadMarnValue.getHint());
 
         // Foretell {B}
         this.addAbility(new ForetellAbility(this, "{B}"));
@@ -48,11 +51,18 @@ public final class RiseOfTheDreadMarn extends CardImpl {
 
 enum RiseOfTheDreadMarnValue implements DynamicValue {
     instance;
+    private static final Hint hint = new ValueHint("Nontoken creatures that died this turn", instance);
+
+    public static Hint getHint() {
+        return hint;
+    }
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        RiseOfTheDreadMarnWatcher watcher = game.getState().getWatcher(RiseOfTheDreadMarnWatcher.class);
-        return watcher != null ? watcher.getCreaturesDied() : 0;
+        return game
+                .getState()
+                .getWatcher(RiseOfTheDreadMarnWatcher.class)
+                .getCreaturesDied();
     }
 
     @Override
@@ -81,9 +91,13 @@ class RiseOfTheDreadMarnWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE
-                && ((ZoneChangeEvent) event).isDiesEvent()
-                && !(((ZoneChangeEvent) event).getTarget() instanceof PermanentToken)) {
+        if (event.getType() != GameEvent.EventType.ZONE_CHANGE) {
+            return;
+        }
+        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        if (zEvent.isDiesEvent()
+                && zEvent.getTarget().isCreature(game)
+                && !(zEvent.getTarget() instanceof PermanentToken)) {
             creaturesDied += 1;
         }
     }

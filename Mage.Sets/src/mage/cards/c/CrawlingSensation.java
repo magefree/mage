@@ -1,10 +1,9 @@
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.MillCardsControllerEffect;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -15,8 +14,9 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeGroupEvent;
 import mage.game.permanent.token.InsectToken;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class CrawlingSensation extends CardImpl {
@@ -25,7 +25,7 @@ public final class CrawlingSensation extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
 
         // At the beginning of your upkeep, you may put the top two cards of your library into your graveyard.
-        this.addAbility(new OnEventTriggeredAbility(GameEvent.EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new MillCardsControllerEffect(2), true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new MillCardsControllerEffect(2), true));
 
         // Whenever one or more land cards are put into your graveyard from anywhere for the first time each turn, create a 1/1 green Insect creature token.
         this.addAbility(new CrawlingSensationTriggeredAbility());

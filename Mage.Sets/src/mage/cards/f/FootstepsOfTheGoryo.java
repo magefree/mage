@@ -20,6 +20,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  *
@@ -69,7 +70,7 @@ class FootstepsOfTheGoryoEffect extends OneShotEffect {
             Card card = game.getCard(getTargetPointer().getFirst(game, source));
             if (card != null) {
                 if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
-                    Permanent permanent = game.getPermanent(card.getId());
+                    Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
                     if (permanent != null) {
                         // Sacrifice it at end of turn
                         Effect sacrificeEffect = new SacrificeTargetEffect("Sacrifice that creature at the beginning of next end step", source.getControllerId());

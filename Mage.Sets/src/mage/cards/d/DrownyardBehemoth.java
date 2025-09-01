@@ -38,7 +38,7 @@ public final class DrownyardBehemoth extends CardImpl {
         // Drownyard Behemoth has hexproof as long as it entered the battlefield this turn.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield),
-                SourceEnteredThisTurnCondition.instance, "{this} has hexproof as long as it entered the battlefield this turn"
+                SourceEnteredThisTurnCondition.DID, "{this} has hexproof as long as it entered the battlefield this turn"
         )));
     }
 

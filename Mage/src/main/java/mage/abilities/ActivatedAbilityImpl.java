@@ -182,8 +182,9 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
     }
 
     @Override
-    public void setMayActivate(TargetController mayActivate) {
+    public ActivatedAbilityImpl setMayActivate(TargetController mayActivate) {
         this.mayActivate = mayActivate;
+        return this;
     }
 
     public UUID getActivatorId() {
@@ -213,6 +214,23 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
         }
         return activationInfo.turnNum != game.getTurnNum()
                 || activationInfo.activationCounter < getMaxActivationsPerTurn(game);
+    }
+
+    public int getMaxMoreActivationsThisTurn(Game game) {
+        if (getMaxActivationsPerTurn(game) == Integer.MAX_VALUE && maxActivationsPerGame == Integer.MAX_VALUE) {
+            return Integer.MAX_VALUE;
+        }
+        ActivationInfo activationInfo = getActivationInfo(game);
+        if (activationInfo == null) {
+            return Math.min(maxActivationsPerGame, getMaxActivationsPerTurn(game));
+        }
+        if (activationInfo.totalActivations >= maxActivationsPerGame) {
+            return 0;
+        }
+        if (activationInfo.turnNum != game.getTurnNum()) {
+            return getMaxActivationsPerTurn(game);
+        }
+        return Math.max(0, getMaxActivationsPerTurn(game) - activationInfo.activationCounter);
     }
 
     @Override

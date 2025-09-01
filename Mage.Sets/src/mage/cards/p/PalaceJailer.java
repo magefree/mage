@@ -20,13 +20,14 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.StaticFilters;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.util.CardUtil;
+
+import static mage.filter.StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE;
 
 /**
  *
@@ -47,7 +48,7 @@ public final class PalaceJailer extends CardImpl {
 
         // When Palace Jailer enters the battlefield, exile target creature an opponent controls until an opponent becomes the monarch. (That creature returns under its owner's control.)
         Ability ability = new EntersBattlefieldTriggeredAbility(new PalaceJailerExileEffect());
-        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
+        ability.addTarget(new TargetPermanent(FILTER_OPPONENTS_PERMANENT_CREATURE));
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnOpponentBecomesMonarchReturnExiledToBattlefieldAbility()));
         this.addAbility(ability);
     }
@@ -82,7 +83,7 @@ class PalaceJailerExileEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         MageObject sourceObject = source.getSourceObject(game);
         if (sourceObject != null) {
-            return new ExileTargetEffect(CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()), sourceObject.getIdName()).apply(game, source);
+            return new ExileTargetEffect(CardUtil.getExileZoneId(game, source.getSourceId(), source.getStackMomentSourceZCC()), sourceObject.getIdName()).apply(game, source);
         }
         return false;
     }
@@ -137,7 +138,7 @@ class PalaceJailerReturnExiledPermanentsEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         if (sourceObject != null && controller != null) {
-            UUID exileZone = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+            UUID exileZone = CardUtil.getExileZoneId(game, source.getSourceId(), source.getStackMomentSourceZCC());
             if (exileZone != null) {
                 ExileZone exile = game.getExile().getExileZone(exileZone);
                 if (exile != null) {

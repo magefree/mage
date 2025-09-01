@@ -7,6 +7,7 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardsImpl;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -60,7 +61,7 @@ public class LookTargetHandChooseDiscardEffect extends OneShotEffect {
             }
             return true;
         }
-        TargetCard target = new TargetCardInHand(upTo ? 0 : num, num, filter);
+        TargetCard target = new TargetCard(upTo ? 0 : num, num, Zone.HAND, filter);
         if (controller.choose(Outcome.Discard, player.getHand(), target, source, game)) {
             // TODO: must fizzle discard effect on not full choice
             // - tests: affected (allow to choose and discard 1 instead 2)

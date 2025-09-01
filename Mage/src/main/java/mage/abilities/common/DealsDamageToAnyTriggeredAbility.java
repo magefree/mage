@@ -15,6 +15,8 @@ import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 /**
+ * Whenever [[filtered permanent]] deals (combat)? damage, [[effect]]
+ *
  * @author xenohedron
  */
 public class DealsDamageToAnyTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedEvent> {

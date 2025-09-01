@@ -95,7 +95,7 @@ class HaktosTheUnscarredChooseEffect extends OneShotEffect {
         }
         int number = 2 + RandomUtil.nextInt(3);
         game.informPlayers(permanent.getLogName() + ": " + controller.getLogName() + " has chosen " + number + " at random");
-        game.getState().setValue(permanent.getId() + "" + source.getSourceObjectZoneChangeCounter() + "_haktos_number", number);
+        game.getState().setValue(permanent.getId() + "" + source.getStackMomentSourceZCC() + "_haktos_number", number);
         permanent.addInfo("chosen number", CardUtil.addToolTipMarkTags("Chosen number: " + number), game);
         return true;
     }
@@ -106,7 +106,7 @@ enum HaktosTheUnscarredPredicate implements ObjectSourcePlayerPredicate<Card> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
-        Object obj = game.getState().getValue(input.getSourceId() + "" + input.getSource().getSourceObjectZoneChangeCounter() + "_haktos_number");
+        Object obj = game.getState().getValue(input.getSourceId() + "" + input.getObject().getZoneChangeCounter(game) + "_haktos_number");
         if (!(obj instanceof Integer)) {
             return false;
         }

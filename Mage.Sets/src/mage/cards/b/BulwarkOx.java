@@ -16,6 +16,9 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.counters.CounterType;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.CounterAnyPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -24,6 +27,12 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class BulwarkOx extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterCreaturePermanent();
+
+    static {
+        filter.add(CounterAnyPredicate.instance);
+    }
 
     public BulwarkOx(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
@@ -40,10 +49,10 @@ public final class BulwarkOx extends CardImpl {
 
         // Sacrifice this creature: Creatures you control with counters on them gain hexproof and indestructible until end of turn.
         ability = new SimpleActivatedAbility(new GainAbilityControlledEffect(
-                HexproofAbility.getInstance(), Duration.EndOfTurn
+                HexproofAbility.getInstance(), Duration.EndOfTurn, filter
         ).setText("creatures you control with counters on them gain hexproof"), new SacrificeSourceCost());
         ability.addEffect(new GainAbilityControlledEffect(
-                IndestructibleAbility.getInstance(), Duration.EndOfTurn
+                IndestructibleAbility.getInstance(), Duration.EndOfTurn, filter
         ).setText("and indestructible until end of turn"));
         this.addAbility(ability);
 

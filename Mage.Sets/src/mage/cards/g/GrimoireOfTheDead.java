@@ -22,10 +22,10 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 import mage.target.targetpointer.FixedTargets;
+import mage.util.CardUtil;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward
@@ -90,7 +90,11 @@ class GrimoireOfTheDeadEffect extends OneShotEffect {
             creatureCards.addAll(player.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, game));
         }
         controller.moveCards(creatureCards, Zone.BATTLEFIELD, source, game);
-        game.addEffect(new GrimoireOfTheDeadEffect2().setTargetPointer(new FixedTargets(creatureCards, game)), source);
+        List<Permanent> permanents = creatureCards.stream()
+                .map(c -> CardUtil.getPermanentFromCardPutToBattlefield(c, game))
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+        game.addEffect(new GrimoireOfTheDeadEffect2().setTargetPointer(new FixedTargets(permanents, game)), source);
         return true;
     }
 
@@ -103,7 +107,7 @@ class GrimoireOfTheDeadEffect extends OneShotEffect {
 
 class GrimoireOfTheDeadEffect2 extends ContinuousEffectImpl {
 
-    public GrimoireOfTheDeadEffect2() {
+    GrimoireOfTheDeadEffect2() {
         super(Duration.Custom, Outcome.Neutral);
     }
 

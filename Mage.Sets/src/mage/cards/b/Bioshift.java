@@ -1,7 +1,5 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -10,6 +8,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
@@ -18,34 +17,33 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class Bioshift extends CardImpl {
 
-    public Bioshift(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G/U}");
+    private static final FilterPermanent filter = new FilterCreaturePermanent("another target creature with the same controller");
 
-        // Move any number of +1/+1 counters from target creature onto another target creature with the same controller.
-        getSpellAbility().addEffect(new MoveCounterFromTargetToTargetEffect());
-        
-        TargetCreaturePermanent target = new TargetCreaturePermanent(
-                new FilterCreaturePermanent("creature (you take counters from)"));
-        target.setTargetTag(1);
-        this.getSpellAbility().addTarget(target);
-        
-        FilterCreaturePermanent filter = new FilterCreaturePermanent(
-                "another target creature with the same controller (counters go to)");
+    static {
         filter.add(new AnotherTargetPredicate(2));
         filter.add(new SameControllerPredicate());
-        TargetCreaturePermanent target2 = new TargetCreaturePermanent(filter);
-        target2.setTargetTag(2);
-        this.getSpellAbility().addTarget(target2);
     }
-    
+
+    public Bioshift(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G/U}");
+
+        // Move any number of +1/+1 counters from target creature onto another target creature with the same controller.
+        this.getSpellAbility().addEffect(new MoveCounterFromTargetToTargetEffect());
+
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent().withChooseHint("to take counters from").setTargetTag(1));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter).withChooseHint("to put counter on").setTargetTag(2));
+    }
+
 
     private Bioshift(final Bioshift card) {
         super(card);
@@ -87,7 +85,7 @@ class MoveCounterFromTargetToTargetEffect extends OneShotEffect {
             }
             int amountCounters = fromPermanent.getCounters(game).getCount(CounterType.P1P1);
             if (amountCounters > 0) {
-                int amountToMove = controller.getAmount(0, amountCounters, "Choose how many counters to move", game);
+                int amountToMove = controller.getAmount(0, amountCounters, "Choose how many counters to move", source, game);
                 if (amountToMove > 0) {
                     fromPermanent.removeCounters(CounterType.P1P1.createInstance(amountToMove), source, game);
                     toPermanent.addCounters(CounterType.P1P1.createInstance(amountToMove), source.getControllerId(), source, game);
@@ -107,7 +105,7 @@ class SameControllerPredicate implements ObjectSourcePlayerPredicate<MageItem> {
         StackObject source = game.getStack().getStackObject(input.getSourceId());
         if (source != null) {
             if (source.getStackAbility().getTargets().isEmpty()
-                || source.getStackAbility().getTargets().get(0).getTargets().isEmpty()) {
+                    || source.getStackAbility().getTargets().get(0).getTargets().isEmpty()) {
                 return true;
             }
             Permanent firstTarget = game.getPermanent(
@@ -124,5 +122,5 @@ class SameControllerPredicate implements ObjectSourcePlayerPredicate<MageItem> {
     public String toString() {
         return "Target with the same controller";
     }
-    
+
 }

@@ -6,7 +6,6 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectsList;
-import mage.abilities.effects.Effect;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
@@ -14,6 +13,7 @@ import mage.cards.decks.importer.DeckImporter;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.cards.repository.CardScanner;
+import mage.collectors.DataCollectorServices;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.Filter;
@@ -31,8 +31,8 @@ import mage.players.ManaPool;
 import mage.players.Player;
 import mage.server.game.GameSessionPlayer;
 import mage.util.CardUtil;
+import mage.util.DebugUtil;
 import mage.util.ThreadUtils;
-import mage.utils.StreamUtils;
 import mage.utils.SystemUtil;
 import mage.view.GameView;
 import org.junit.Assert;
@@ -180,8 +180,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         }
 
         // prepare fake match (needs for testing some client-server code)
-        // always 4 seats
-        MatchOptions matchOptions = new MatchOptions("test match", "test game type", true, 4);
+        MatchOptions matchOptions = new MatchOptions("test match", "test game type", true);
         currentMatch = new FreeForAllMatch(matchOptions);
         currentGame = createNewGameAndPlayers();
 
@@ -246,6 +245,11 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         }
 
         ThreadUtils.ensureRunInGameThread();
+
+        DataCollectorServices.init(
+                true,
+                DebugUtil.TESTS_DATA_COLLECTORS_ENABLE_SAVE_GAME_HISTORY
+        );
 
         // check stop command
         int maxTurn = 1;
@@ -1677,7 +1681,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     public void assertChoicesCount(TestPlayer player, int count) throws AssertionError {
         String mes = String.format(
-                "(Choices of %s) Count are not equal (found %s). Some inner choose dialogs can be set up only in strict mode.",
+                "(Choices of %s) Count are not equal (found %s). Make sure you use target.chooseXXX instead player.choose. Also some inner choose dialogs can be set up only in strict mode.",
                 player.getName(),
                 player.getChoices()
         );
@@ -1686,7 +1690,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     public void assertTargetsCount(TestPlayer player, int count) throws AssertionError {
         String mes = String.format(
-                "(Targets of %s) Count are not equal (found %s). Some inner choose dialogs can be set up only in strict mode.",
+                "(Targets of %s) Count are not equal (found %s). Make sure you use target.chooseXXX instead player.choose. Also some inner choose dialogs can be set up only in strict mode.",
                 player.getName(),
                 player.getTargets()
         );
@@ -1702,6 +1706,11 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     private void assertAllCommandsUsed() throws AssertionError {
         for (Player player : currentGame.getPlayers().values()) {
             TestPlayer testPlayer = (TestPlayer) player;
+
+            if (testPlayer.isSkipAllNextChooseCommands()) {
+                Assert.fail(testPlayer.getName() + " used skip next choose commands, but game do not call any choose dialog after it. Skip must be removed after debug.");
+            }
+
             assertActionsMustBeEmpty(testPlayer);
             assertChoicesCount(testPlayer, 0);
             assertTargetsCount(testPlayer, 0);
@@ -2004,7 +2013,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param step
      * @param player
      * @param cardName
-     * @param targetName for modes you can add "mode=3" before target name;
+     * @param targetName for non default mode you can add target by "mode=3target_name" style;
      *                   multiple targets can be separated by ^;
      *                   no target marks as TestPlayer.NO_TARGET;
      *                   warning, do not support cards with target adjusters - use addTarget instead
@@ -2271,11 +2280,18 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         setChoice(player, choice ? "Yes" : "No", timesToChoose);
     }
 
+    /**
+     * Declare non target choice. You can use multiple choices in one line like setChoice(name1^name2)
+     * Also support "up to" choices, e.g. choose 2 of 3 cards by setChoice(card1^card2) + setChoice(TestPlayer.CHOICE_SKIP)
+     */
     public void setChoice(TestPlayer player, String choice) {
         setChoice(player, choice, 1);
     }
 
     public void setChoice(TestPlayer player, String choice, int timesToChoose) {
+        if (choice.equals(TestPlayer.TARGET_SKIP)) {
+            Assert.fail("setChoice allow only TestPlayer.CHOICE_SKIP, but found " + choice);
+        }
         for (int i = 0; i < timesToChoose; i++) {
             player.addChoice(choice);
         }
@@ -2304,6 +2320,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      *               spell mode can be used only once like Demonic Pact, the
      *               value has to be set to the number of the remaining modes
      *               (e.g. if only 2 are left the number need to be 1 or 2).
+     *               If you need to partly select then use TestPlayer.MODE_SKIP
      */
     public void setModeChoice(TestPlayer player, String choice) {
         player.addModeChoice(choice);
@@ -2340,13 +2357,18 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      *
      * @param player
      * @param target you can add multiple targets by separating them by the "^"
-     *               character e.g. "creatureName1^creatureName2" you can
-     *               qualify the target additional by setcode e.g.
+     *               character e.g. "creatureName1^creatureName2"
+     *               -
+     *               you can qualify the target additional by setcode e.g.
      *               "creatureName-M15" you can add [no copy] to the end of the
      *               target name to prohibit targets that are copied you can add
      *               [only copy] to the end of the target name to allow only
      *               targets that are copies. For modal spells use a prefix with
      *               the mode number: mode=1Lightning Bolt^mode=2Silvercoat Lion
+     *               -
+     *               it's also support multiple addTarget commands instead single line,
+     *               so you can declare not full "up to" targets list by addTarget(name)
+     *               and addTarget(TestPlayer.TARGET_SKIP)
      */
     // TODO: mode options doesn't work here (see BrutalExpulsionTest)
     public void addTarget(TestPlayer player, String target) {
@@ -2354,6 +2376,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     public void addTarget(TestPlayer player, String target, int timesToChoose) {
+        if (target.equals(TestPlayer.CHOICE_SKIP)) {
+            Assert.fail("addTarget allow only TestPlayer.TARGET_SKIP, but found " + target);
+        }
+
         for (int i = 0; i < timesToChoose; i++) {
             assertAliaseSupportInActivateCommand(target, true);
             player.addTarget(target);
@@ -2417,6 +2443,26 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     protected void skipInitShuffling() {
         gameOptions.skipInitShuffling = true;
+    }
+
+    /**
+     * Debug only: skip all choose commands after that command.
+     * <p>
+     * Alternative to comment/uncomment all test commands:
+     * - insert skip before first choice command;
+     * - run test and look at error message about miss choice;
+     * - make sure test use correct choice;
+     * - move skip command to next test's choice and repeat;
+     */
+    protected void skipAllNextChooseCommands() {
+        playerA.skipAllNextChooseCommands();
+        playerB.skipAllNextChooseCommands();
+        if (playerC != null) {
+            playerC.skipAllNextChooseCommands();
+        }
+        if (playerD != null) {
+            playerD.skipAllNextChooseCommands();
+        }
     }
 
     public void assertDamageReceived(Player player, String cardName, int expected) {

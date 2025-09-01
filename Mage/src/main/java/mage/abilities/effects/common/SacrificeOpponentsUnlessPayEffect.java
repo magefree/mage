@@ -74,8 +74,7 @@ public class SacrificeOpponentsUnlessPayEffect extends OneShotEffect {
 
                 if (game.getBattlefield().count(TargetSacrifice.makeFilter(filter), player.getId(), source, game) > 0) {
                     TargetSacrifice target = new TargetSacrifice(1, filter);
-                    if (target.canChoose(player.getId(), source, game)) {
-                        player.choose(Outcome.Sacrifice, target, source, game);
+                    if (player.choose(Outcome.Sacrifice, target, source, game)) {
                         permsToSacrifice.addAll(target.getTargets());
                     }
                 }

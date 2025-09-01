@@ -14,7 +14,7 @@ import mage.constants.Duration;
 public final class TheGirlInTheFireplaceHumanNobleToken extends TokenImpl {
 
     public TheGirlInTheFireplaceHumanNobleToken() {
-        super("Human Noble Token", "1/1 white Human Noble creature token with vanishing 3 and \"Prevent all damage that would be dealt to this creature.\"");
+        super("Human Noble Token", "1/1 white Human Noble creature token with vanishing 3 and \"Prevent all damage that would be dealt to this token.\"");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add(SubType.HUMAN,SubType.NOBLE);
@@ -25,7 +25,7 @@ public final class TheGirlInTheFireplaceHumanNobleToken extends TokenImpl {
 	        new PreventDamageToSourceEffect(
 			Duration.WhileOnBattlefield, 
 			Integer.MAX_VALUE
-		).setText("Prevent all damage that would be dealt to this creature.")
+		).setText("Prevent all damage that would be dealt to this token.")
 	));
     }
 

@@ -31,10 +31,7 @@ public class CycleAllTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (game.getState().getStack().isEmpty()) {
-            return false;
-        }
-        StackObject item = game.getState().getStack().getFirst();
+        StackObject item = game.getState().getStack().getFirstOrNull();
         return item instanceof StackAbility
                 && item.getStackAbility() instanceof CyclingAbility;
     }

@@ -1,7 +1,6 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -15,9 +14,10 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -40,11 +40,11 @@ public final class HundredHandedOne extends CardImpl {
 
         // As long as Hundred-Handed One is monstrous, it has reach and can block an additional ninety-nine creatures each combat.
         ConditionalContinuousEffect effect1 = new ConditionalContinuousEffect(
-                new GainAbilitySourceEffect(ReachAbility.getInstance(), Duration.WhileOnBattlefield), 
+                new GainAbilitySourceEffect(ReachAbility.getInstance(), Duration.WhileOnBattlefield),
                 MonstrousCondition.instance,
-                "As long as Hundred-Handed One is monstrous, it has reach");
+                "As long as {this} is monstrous, it has reach");
         ConditionalContinuousEffect effect2 = new ConditionalContinuousEffect(
-                new CanBlockAdditionalCreatureEffect(99), 
+                new CanBlockAdditionalCreatureEffect(99),
                 MonstrousCondition.instance,
                 "and can block an additional ninety-nine creatures each combat");
         Ability ability = new SimpleStaticAbility(effect1);

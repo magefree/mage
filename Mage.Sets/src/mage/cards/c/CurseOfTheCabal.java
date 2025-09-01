@@ -1,16 +1,15 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.SuspendedCondition;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.SuspendAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -44,8 +43,9 @@ public final class CurseOfTheCabal extends CardImpl {
         this.addAbility(new SuspendAbility(2, new ManaCostsImpl<>("{2}{B}{B}"), this));
 
         // At the beginning of each player's upkeep, if Curse of the Cabal is suspended, that player may sacrifice a permanent. If they do, put two time counters on Curse of the Cabal.
-        this.addAbility(new CurseOfTheCabalInterveningIfTriggeredAbility());
-
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
+                Zone.EXILED, TargetController.EACH_PLAYER, new CurseOfTheCabalTriggeredAbilityConditionalDelay(), false
+        ).withInterveningIf(SuspendedCondition.instance));
     }
 
     private CurseOfTheCabal(final CurseOfTheCabal card) {
@@ -62,7 +62,7 @@ class CurseOfTheCabalSacrificeEffect extends OneShotEffect {
 
     CurseOfTheCabalSacrificeEffect() {
         super(Outcome.Sacrifice);
-        this.staticText = "Target player sacrifices half the permanents they control, rounded down.";
+        this.staticText = "Target player sacrifices half the permanents they control of their choice, rounded down.";
     }
 
     private CurseOfTheCabalSacrificeEffect(final CurseOfTheCabalSacrificeEffect effect) {
@@ -100,36 +100,11 @@ class CurseOfTheCabalSacrificeEffect extends OneShotEffect {
     }
 }
 
-class CurseOfTheCabalInterveningIfTriggeredAbility extends ConditionalInterveningIfTriggeredAbility {
-
-    public CurseOfTheCabalInterveningIfTriggeredAbility() {
-        super(new BeginningOfUpkeepTriggeredAbility(
-                        Zone.EXILED, TargetController.ANY, new CurseOfTheCabalTriggeredAbilityConditionalDelay(),
-                        false
-                ),
-                SuspendedCondition.instance,
-                "At the beginning of each player's upkeep, if {this} is suspended, "
-                        + "that player may sacrifice a permanent. If the player does, "
-                        + "put two time counters on {this}."
-        );
-        // controller has to sac a permanent
-        // counters aren't placed
-    }
-
-    private CurseOfTheCabalInterveningIfTriggeredAbility(final CurseOfTheCabalInterveningIfTriggeredAbility effect) {
-        super(effect);
-    }
-
-    @Override
-    public CurseOfTheCabalInterveningIfTriggeredAbility copy() {
-        return new CurseOfTheCabalInterveningIfTriggeredAbility(this);
-    }
-}
-
 class CurseOfTheCabalTriggeredAbilityConditionalDelay extends AddCountersSourceEffect {
 
     public CurseOfTheCabalTriggeredAbilityConditionalDelay() {
         super(CounterType.TIME.createInstance(), StaticValue.get(2), false, true);
+        staticText = "that player may sacrifice a permanent of their choice. If the player does, put two time counters on this card";
     }
 
     @Override

@@ -18,6 +18,7 @@ import mage.filter.common.FilterCreatureCard;
 import mage.filter.StaticFilters;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.util.CardUtil;
 
 import java.util.*;
 /**
@@ -90,7 +91,7 @@ class TheNightOfTheDoctorEffect extends OneShotEffect {
         if (card == null || !controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
             return false;
         }
-        Permanent permanent = game.getPermanent(card.getId());
+        Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
         if (permanent == null) {
             return false;
         }

@@ -99,8 +99,8 @@ class InkTreaderNephilimTriggeredAbility extends TriggeredAbilityImpl {
                 if (permanent == null || !permanent.getId().equals(getSourceId())) {
                     return false;
                 }
-                if (getSourceObjectZoneChangeCounter() != 0
-                        && getSourceObjectZoneChangeCounter() != permanent.getZoneChangeCounter(game)) {
+                if (getStackMomentSourceZCC() != 0
+                        && getStackMomentSourceZCC() != permanent.getZoneChangeCounter(game)) {
                     return false;
                 }
                 flag = true;

@@ -1,33 +1,32 @@
 package mage.cards.h;
 
-import java.util.UUID;
-
+import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.AttachedToMatchesFilterCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.dynamicvalue.common.GreatestAmongPermanentsValue;
+import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
-import mage.constants.ComparisonType;
-import mage.constants.SubType;
-import mage.abilities.effects.common.AttachEffect;
-import mage.constants.Outcome;
-import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.PowerPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.target.TargetPermanent;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.filter.StaticFilters;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
+
+import java.util.Optional;
+import java.util.UUID;
 
 /**
- *
  * @author weirddan455
  */
 public final class HistoriansWisdom extends CardImpl {
@@ -46,17 +45,13 @@ public final class HistoriansWisdom extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // When Historian's Wisdom enters the battlefield, if enchanted permanent is a creature with the greatest power among creatures on the battlefield, draw a card.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)),
-                HistoriansWisdomCondition.instance,
-                "When {this} enters, if enchanted permanent is a creature with the greatest power among creatures on the battlefield, draw a card."
-        ));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1))
+                .withInterveningIf(HistoriansWisdomCondition.instance).addHint(GreatestAmongPermanentsValue.POWER_ALL_CREATURES.getHint()));
 
         // As long as enchanted permanent is a creature, it gets +2/+1.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
-                new BoostEnchantedEffect(2, 1),
-                creatureCondition,
-                "As long as enchanted permanent is a creature, it gets +2/+1"
+                new BoostEnchantedEffect(2, 1), creatureCondition,
+                "as long as enchanted permanent is a creature, it gets +2/+1"
         )));
     }
 
@@ -75,21 +70,19 @@ enum HistoriansWisdomCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        //game.applyEffects(); // Make sure +2/+1 buff gets applied first
-        // TODO: not appropriate to call here - investigate where in the engine to apply effects to solve bug
-        Permanent enchantment = source.getSourcePermanentIfItStillExists(game);
-        if (enchantment == null) {
-            return false;
-        }
-        Permanent creature = game.getPermanent(enchantment.getAttachedTo());
-        if (creature == null) {
-            return false;
-        }
-        if (!creature.isCreature(game)) {
-            return false;
-        }
-        FilterCreaturePermanent filter = new FilterCreaturePermanent();
-        filter.add(new PowerPredicate(ComparisonType.MORE_THAN, creature.getPower().getValue()));
-        return game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game).isEmpty();
+        return Optional
+                .ofNullable(source.getSourcePermanentIfItStillExists(game))
+                .map(Permanent::getAttachedTo)
+                .map(game::getPermanent)
+                .filter(permanent -> permanent.isCreature(game))
+                .map(MageObject::getPower)
+                .map(MageInt::getValue)
+                .filter(x -> x >= GreatestAmongPermanentsValue.POWER_ALL_CREATURES.calculate(game, source, null))
+                .isPresent();
+    }
+
+    @Override
+    public String toString() {
+        return "enchanted permanent is a creature with the greatest power among creatures on the battlefield";
     }
 }

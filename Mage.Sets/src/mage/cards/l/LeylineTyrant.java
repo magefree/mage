@@ -111,10 +111,8 @@ class LeylineTyrantDamageEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        int costX = player.announceXMana(
-                0, Integer.MAX_VALUE,
-                "Announce the value for {X}", game, source
-        );
+        // TODO: add some AI hints by min/max values
+        int costX = player.announceX(0, Integer.MAX_VALUE, "Announce the value for {X}", game, source, true);
         String manaString;
         if (costX == 0) {
             manaString = "{0}";

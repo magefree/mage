@@ -1,14 +1,16 @@
 package mage.cards.g;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.GreatestAmongPermanentsValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValuePositiveHint;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -30,13 +32,17 @@ import java.util.UUID;
  */
 public final class GhaltaAndMavren extends CardImpl {
 
-    static final FilterPermanent filter = new FilterAttackingCreature("other attacking creatures");
+    private static final FilterPermanent filter = new FilterAttackingCreature("other attacking creatures");
 
     static {
         filter.add(AnotherPredicate.instance);
     }
 
-    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter, null);
+    static final GreatestAmongPermanentsValue xValue = new GreatestAmongPermanentsValue(GreatestAmongPermanentsValue.Quality.Power, filter);
+    private static final Hint hint = new ValuePositiveHint("Greatest power among other attacking creatures", xValue);
+
+    private static final DynamicValue xValue2 = new PermanentsOnBattlefieldCount(filter, null);
+    private static final Hint hint2 = new ValuePositiveHint("Number of other attacking creatures", xValue2);
 
     public GhaltaAndMavren(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}{W}{W}");
@@ -53,9 +59,11 @@ public final class GhaltaAndMavren extends CardImpl {
         // Whenever you attack, choose one --
         // * Create a tapped and attacking X/X green Dinosaur creature token with trample, where X is the greatest power among other attacking creatures.
         Ability ability = new AttacksWithCreaturesTriggeredAbility(new GhaltaAndMavrenEffect(), 1);
+        ability.addHint(hint);
 
         // * Create X 1/1 white Vampire creature tokens with lifelink, where X is the number of other attacking creatures.
-        ability.addMode(new Mode(new CreateTokenEffect(new IxalanVampireToken(), xValue)));
+        ability.addMode(new Mode(new CreateTokenEffect(new IxalanVampireToken(), xValue2)));
+        ability.addHint(hint2);
         this.addAbility(ability);
     }
 
@@ -88,16 +96,7 @@ class GhaltaAndMavrenEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int power = game
-                .getBattlefield()
-                .getActivePermanents(GhaltaAndMavren.filter, source.getControllerId(), source, game)
-                .stream()
-                .map(MageObject::getPower)
-                .mapToInt(MageInt::getValue)
-                .max()
-                .orElse(0);
-        return new DinosaurXXToken(power).putOntoBattlefield(
-                1, game, source, source.getControllerId(), true, true
-        );
+        int power = GhaltaAndMavren.xValue.calculate(game, source, this);
+        return new CreateTokenEffect(new DinosaurXXToken(power), 1, true, true).apply(game, source);
     }
 }

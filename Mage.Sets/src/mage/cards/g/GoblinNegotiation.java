@@ -15,7 +15,6 @@ import mage.util.CardUtil;
 import java.util.UUID;
 
 /**
- *
  * @author ciaccona007
  */
 public final class GoblinNegotiation extends CardImpl {
@@ -62,13 +61,11 @@ class GoblinNegotiationEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        int damage = CardUtil.getSourceCostsTag(game, source, "X", 0);
-        int lethal = Math.min(permanent.getLethalDamage(source.getSourceId(), game), damage);
-        permanent.damage(damage, source.getSourceId(), source, game);
-        if (damage > lethal) {
-            new GoblinToken().putOntoBattlefield(
-                    damage - lethal, game, source, source.getControllerId()
-            );
+        int excess = permanent.damageWithExcess(
+                CardUtil.getSourceCostsTag(game, source, "X", 0), source, game
+        );
+        if (excess > 0) {
+            new GoblinToken().putOntoBattlefield(excess, game, source);
         }
         return true;
     }

@@ -5,7 +5,7 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageSourceTriggeredAbility;
 import mage.abilities.common.DealsDamageToAPlayerTriggeredAbility;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.effects.common.LoseGameTargetPlayerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
@@ -49,12 +49,9 @@ public final class VesselOfTheAllConsuming extends CardImpl {
         this.addAbility(new DealsDamageSourceTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())));
 
         // Whenever Vessel of the All-Consuming deals damage to a player, if it has dealt 10 or more damage to that player this turn, they lose the game.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new DealsDamageToAPlayerTriggeredAbility(
-                        new LoseGameTargetPlayerEffect(), false, true
-                ), VesselOfTheAllConsumingWatcher::checkPermanent, "Whenever {this} deals damage to a player, " +
-                "if it has dealt 10 or more damage to that player this turn, they lose the game."
-        ));
+        this.addAbility(new DealsDamageToAPlayerTriggeredAbility(
+                new LoseGameTargetPlayerEffect().setText("they lose the game"), false, true
+        ).withInterveningIf(VesselOfTheAllConsumingCondition.instance));
     }
 
     private VesselOfTheAllConsuming(final VesselOfTheAllConsuming card) {
@@ -68,6 +65,20 @@ public final class VesselOfTheAllConsuming extends CardImpl {
 
     public static Watcher makeWatcher() {
         return new VesselOfTheAllConsumingWatcher();
+    }
+}
+
+enum VesselOfTheAllConsumingCondition implements Condition {
+    instance;
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return VesselOfTheAllConsumingWatcher.checkPermanent(game, source);
+    }
+
+    @Override
+    public String toString() {
+        return "it has dealt 10 or more damage to that player this turn";
     }
 }
 

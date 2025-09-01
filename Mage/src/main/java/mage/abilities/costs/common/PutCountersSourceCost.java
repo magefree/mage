@@ -10,7 +10,6 @@ import mage.game.permanent.Permanent;
 import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
  */
 public class PutCountersSourceCost extends CostImpl {
@@ -29,6 +28,7 @@ public class PutCountersSourceCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
+        // TODO: implement permanent.canAddCounters with replacement events check, see tests with Devoted Druid
         return true;
     }
 

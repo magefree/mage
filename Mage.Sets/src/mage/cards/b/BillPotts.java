@@ -1,48 +1,38 @@
 package mage.cards.b;
 
 import mage.MageInt;
-import mage.MageItem;
-import mage.abilities.Ability;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
+import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.ActivateAbilityTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.CopyStackObjectEffect;
-import mage.abilities.meta.OrTriggeredAbility;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.abilities.keyword.DoctorsCompanionAbility;
+import mage.abilities.meta.OrTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SetTargetPointer;
-import mage.constants.Zone;
-import mage.filter.common.FilterInstantOrSorcerySpell;
+import mage.constants.*;
 import mage.filter.FilterSpell;
 import mage.filter.FilterStackObject;
+import mage.filter.common.FilterInstantOrSorcerySpell;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
-import mage.game.stack.StackObject;
 import mage.game.stack.Spell;
+import mage.game.stack.StackObject;
 import mage.target.Target;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import java.util.UUID;
 
 /**
- *
- * @author padfoot 
+ * @author padfoot
  */
 public final class BillPotts extends CardImpl {
 
-    private static final FilterSpell filterInstantOrSorcery = new FilterInstantOrSorcerySpell("an instant or sorcery that targets only {this}");
+    private static final FilterSpell filterInstantOrSorcery = new FilterInstantOrSorcerySpell("an instant or sorcery spell that targets only {this}");
     private static final FilterStackObject filterAbility = new FilterStackObject("an ability that targets only {this}");
 
     static {
@@ -52,32 +42,32 @@ public final class BillPotts extends CardImpl {
 
     public BillPotts(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
-        
+
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 
         // Whenever you cast an instant or sorcery spell that targets only Bill Potts or activate an ability that targets only Bill Potts, copy that spell or ability. You may choose new targets for the copy. This ability triggers only once each turn.
-	this.addAbility(new OrTriggeredAbility(
-	        Zone.BATTLEFIELD,
-		new CopyStackObjectEffect("that spell or ability"),
-		false,
-		"",
-		new SpellCastControllerTriggeredAbility(
-			null, 
-			filterInstantOrSorcery, 
-			false, 
-			SetTargetPointer.SPELL
-		),
-		new ActivateAbilityTriggeredAbility(
-			null, 
-			filterAbility, 
-			SetTargetPointer.SPELL
-		)
+        this.addAbility(new OrTriggeredAbility(
+                Zone.BATTLEFIELD,
+                new CopyStackObjectEffect("that spell or ability"),
+                false,
+                "",
+                new SpellCastControllerTriggeredAbility(
+                        null,
+                        filterInstantOrSorcery,
+                        false,
+                        SetTargetPointer.SPELL
+                ),
+                new ActivateAbilityTriggeredAbility(
+                        null,
+                        filterAbility,
+                        SetTargetPointer.SPELL
+                )
         ).setTriggersLimitEachTurn(1));
 
-	// Doctor's companion
+        // Doctor's companion
         this.addAbility(DoctorsCompanionAbility.getInstance());
 
     }
@@ -97,7 +87,7 @@ enum BillPottsPredicate implements ObjectSourcePlayerPredicate<StackObject> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<StackObject> input, Game game) {
-	List<UUID> oneTargetList = Arrays.asList(input.getSourceId()); 
+        List<UUID> oneTargetList = Arrays.asList(input.getSourceId());
         return (makeStream(input, game).collect(Collectors.toList()).equals(oneTargetList));
     }
 
@@ -108,9 +98,9 @@ enum BillPottsPredicate implements ObjectSourcePlayerPredicate<StackObject> {
         } else {
             objectAbilities.add(input.getObject().getStackAbility());
         }
-	return objectAbilities
-		.stream()
-      		.map(Ability::getModes)
+        return objectAbilities
+                .stream()
+                .map(Ability::getModes)
                 .flatMap(m -> m.getSelectedModes().stream().map(m::get))
                 .filter(Objects::nonNull)
                 .map(Mode::getTargets)

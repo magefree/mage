@@ -17,7 +17,7 @@ import mage.constants.SuperType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -52,7 +52,7 @@ public final class MarthaJones extends CardImpl {
         );
         ability.addEffect(new CantBeBlockedTargetEffect()
                 .setText("and up to one other target creature can't be blocked this turn"));
-        ability.addTarget(new TargetCreaturePermanent(0, 1, filterOther, false));
+        ability.addTarget(new TargetPermanent(0, 1, filterOther));
         this.addAbility(ability);
 
         // Doctor's companion

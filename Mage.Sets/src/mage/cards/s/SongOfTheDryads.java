@@ -50,6 +50,7 @@ class BecomesColorlessForestLandEffect extends ContinuousEffectImpl {
     BecomesColorlessForestLandEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         this.staticText = "Enchanted permanent is a colorless Forest land";
+        dependencyTypes.add(DependencyType.BecomeNonbasicLand);
         dependencyTypes.add(DependencyType.BecomeForest);
     }
 

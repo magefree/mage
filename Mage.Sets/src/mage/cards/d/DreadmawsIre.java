@@ -15,7 +15,7 @@ import mage.constants.CardType;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetAttackingCreature;
-import mage.target.targetadjustment.DamagedPlayerControlsTargetAdjuster;
+import mage.target.targetadjustment.ThatPlayerControlsTargetAdjuster;
 
 import java.util.UUID;
 
@@ -41,7 +41,7 @@ public final class DreadmawsIre extends CardImpl {
         effect.setText("have it deal damage equal to its power to target creature that player controls.");
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new DestroyTargetEffect(), false, true);
         ability.addTarget(new TargetPermanent(filter));
-        ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
+        ability.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster());
 
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(ability)
                 .setText("and \"Whenever this creature deals combat damage to a player, destroy target artifact that player controls.\""));

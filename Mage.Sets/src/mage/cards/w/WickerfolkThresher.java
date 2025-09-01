@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.condition.common.DeliriumCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -29,12 +28,10 @@ public final class WickerfolkThresher extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Delirium -- Whenever Wickerfolk Thresher attacks, if there are four or more card types among cards in your graveyard, look at the top card of your library. If it's a land card, you may put it onto the battlefield. If you don't put the card onto the battlefield, put it into your hand.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new AttacksTriggeredAbility(new WickerfolkThresherEffect()),
-                DeliriumCondition.instance, "Whenever {this} attacks, if there are four or more card types " +
-                "among cards in your graveyard, look at the top card of your library. If it's a land card, you may " +
-                "put it onto the battlefield. If you don't put the card onto the battlefield, put it into your hand."
-        ).setAbilityWord(AbilityWord.DELIRIUM).addHint(CardTypesInGraveyardCount.YOU.getHint()));
+        this.addAbility(new AttacksTriggeredAbility(new WickerfolkThresherEffect())
+                .withInterveningIf(DeliriumCondition.instance)
+                .setAbilityWord(AbilityWord.DELIRIUM)
+                .addHint(CardTypesInGraveyardCount.YOU.getHint()));
     }
 
     private WickerfolkThresher(final WickerfolkThresher card) {
@@ -51,6 +48,8 @@ class WickerfolkThresherEffect extends OneShotEffect {
 
     WickerfolkThresherEffect() {
         super(Outcome.Benefit);
+        staticText = "look at the top card of your library. If it's a land card, you may put it onto the battlefield. " +
+                "If you don't put the card onto the battlefield, put it into your hand";
     }
 
     private WickerfolkThresherEffect(final WickerfolkThresherEffect effect) {

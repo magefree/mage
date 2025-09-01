@@ -8,13 +8,12 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -66,7 +65,7 @@ class TooGreedilyTooDeepEffect extends OneShotEffect {
         }
         controller.moveCards(card, Zone.BATTLEFIELD, source, game);
         game.processAction();
-        Permanent returnedCreature = game.getPermanent(card.getId());
+        Permanent returnedCreature = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
         if (returnedCreature != null && returnedCreature.getPower().getValue() > 0) {
             for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game)) {
                 if (!creature.getId().equals(returnedCreature.getId())) {

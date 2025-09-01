@@ -4,7 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
-import mage.abilities.effects.common.continuous.SetBasePowerToughnessEnchantedEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
@@ -35,7 +35,7 @@ public final class AlmostPerfect extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted creature has base power and toughness 9/10 and has indestructible.
-        Ability ability = new SimpleStaticAbility(new SetBasePowerToughnessEnchantedEffect(9, 10));
+        Ability ability = new SimpleStaticAbility(new SetBasePowerToughnessAttachedEffect(9, 10, AttachmentType.AURA));
         ability.addEffect(new GainAbilityAttachedEffect(
                 IndestructibleAbility.getInstance(), AttachmentType.AURA
         ).setText("and has indestructible"));

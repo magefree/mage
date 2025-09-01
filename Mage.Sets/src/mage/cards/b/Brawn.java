@@ -24,7 +24,7 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public final class Brawn extends CardImpl {
 
-    private static final String ruleText = "As long as Brawn is in your graveyard and you control a Forest, creatures you control have trample";
+    private static final String ruleText = "As long as this card is in your graveyard and you control a Forest, creatures you control have trample";
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Forest");
 

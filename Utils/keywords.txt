@@ -52,6 +52,7 @@ Exploit|new|
 Extort|new|
 Fabricate|number|
 Fear|instance|
+Firebending|number|
 First strike|instance|
 Flanking|new|
 Flash|instance|
@@ -76,6 +77,7 @@ Intimidate|instance|
 Ingest|new|
 Islandcycling|cost|
 Islandwalk|new|
+Job select|new|
 Jump-start|card|
 Kicker|manaString|
 Level up|cost|
@@ -83,6 +85,7 @@ Lifelink|instance|
 Living metal|new|
 Living weapon|new|
 Madness|cost|
+Mayhem|card, manaString|
 Melee|new|
 Menace|new|
 Mentor|new|
@@ -127,12 +130,14 @@ Spectacle|card, cost|
 Spree|card|
 Squad|cost|
 Start your engines!|new|
+Station|new|
 Storm|new|
 Sunburst|new|
 Suspend|number, cost, card|
 Swampcycling|cost|
 Swampwalk|new|
 Umbra armor|new|
+Tiered|card|
 Toxic|number|
 Training|new|
 Trample|instance|
@@ -145,4 +150,6 @@ Unleash|new|
 Vanishing|number|
 Vigilance|instance|
 Ward|cost|
+Warp|card, manaString|
+Web-slinging|card, manaString|
 Wither|instance|

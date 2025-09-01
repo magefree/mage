@@ -54,6 +54,7 @@ class HarbingerOfTheSeasEffect extends ContinuousEffectImpl {
     HarbingerOfTheSeasEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         this.staticText = "Nonbasic lands are Islands";
+        dependendToTypes.add(DependencyType.BecomeNonbasicLand);
         dependencyTypes.add(DependencyType.BecomeIsland);
     }
 

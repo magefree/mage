@@ -35,7 +35,7 @@ public class MeliraSylvokOutcastTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
 
-        // TODO: Needed since Melira's ability isn't been caught by the is playable check
+        // TODO: improve PutCountersSourceCost, so it can find real playable ability here instead restriction
         try {
             execute();
             Assert.fail("must throw exception on execute");

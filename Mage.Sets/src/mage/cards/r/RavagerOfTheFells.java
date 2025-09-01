@@ -1,7 +1,6 @@
 package mage.cards.r;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.TransformIntoSourceTriggeredAbility;
 import mage.abilities.common.WerewolfBackTriggeredAbility;
@@ -15,12 +14,11 @@ import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetOpponentOrPlaneswalker;
+import mage.target.targetpointer.EachTargetPointer;
 
-import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -69,6 +67,7 @@ class RavagerOfTheFellsEffect extends OneShotEffect {
 
     RavagerOfTheFellsEffect() {
         super(Outcome.Damage);
+        this.setTargetPointer(new EachTargetPointer());
         staticText = "it deals 2 damage to target opponent or planeswalker and 2 damage " +
                 "to up to one target creature that player or that planeswalker's controller controls.";
     }
@@ -84,10 +83,11 @@ class RavagerOfTheFellsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        game.damagePlayerOrPermanent(source.getTargets().get(0).getFirstTarget(), 2, source.getSourceId(), source, game, false, true);
-        Permanent creature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
-        if (creature != null) {
-            creature.damage(2, source.getSourceId(), source, game, false, true);
+        for (UUID targetId : getTargetPointer().getTargets(game, source)) {
+            game.damagePlayerOrPermanent(
+                    targetId, 2, source.getSourceId(), source,
+                    game, false, true
+            );
         }
         return true;
     }
@@ -97,7 +97,7 @@ class RavagerOfTheFellsEffect extends OneShotEffect {
 class RavagerOfTheFellsTarget extends TargetPermanent {
 
     RavagerOfTheFellsTarget() {
-        super(0, 1, StaticFilters.FILTER_PERMANENT_CREATURE, false);
+        super(0, 1, StaticFilters.FILTER_PERMANENT_CREATURE);
     }
 
     private RavagerOfTheFellsTarget(final RavagerOfTheFellsTarget target) {
@@ -105,46 +105,22 @@ class RavagerOfTheFellsTarget extends TargetPermanent {
     }
 
     @Override
-    public boolean canTarget(UUID id, Ability source, Game game) {
-        Player player = game.getPlayerOrPlaneswalkerController(source.getFirstTarget());
-        if (player == null) {
-            return false;
-        }
-        UUID firstTarget = player.getId();
-        Permanent permanent = game.getPermanent(id);
-        if (firstTarget != null && permanent != null && permanent.isControlledBy(firstTarget)) {
-            return super.canTarget(id, source, game);
-        }
-        return false;
-    }
-
-    @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
-        Set<UUID> availablePossibleTargets = super.possibleTargets(sourceControllerId, source, game);
-        Set<UUID> possibleTargets = new HashSet<>();
-        MageObject object = game.getObject(source);
+        Set<UUID> possibleTargets = super.possibleTargets(sourceControllerId, source, game);
 
-        for (StackObject item : game.getState().getStack()) {
-            if (item.getId().equals(source.getSourceId())) {
-                object = item;
-            }
-            if (item.getSourceId().equals(source.getSourceId())) {
-                object = item;
-            }
+        Player needPlayer = game.getPlayerOrPlaneswalkerController(source.getFirstTarget());
+        if (needPlayer == null) {
+            // playable or not selected - use any
+        } else {
+            // filter by controller
+            possibleTargets.removeIf(id -> {
+                Permanent permanent = game.getPermanent(id);
+                return permanent == null
+                        || permanent.getId().equals(source.getFirstTarget())
+                        || !permanent.isControlledBy(needPlayer.getId());
+            });
         }
 
-        if (object instanceof StackObject) {
-            UUID playerId = ((StackObject) object).getStackAbility().getFirstTarget();
-            Player player = game.getPlayerOrPlaneswalkerController(playerId);
-            if (player != null) {
-                for (UUID targetId : availablePossibleTargets) {
-                    Permanent permanent = game.getPermanent(targetId);
-                    if (permanent != null && permanent.isControlledBy(player.getId())) {
-                        possibleTargets.add(targetId);
-                    }
-                }
-            }
-        }
         return possibleTargets;
     }
 

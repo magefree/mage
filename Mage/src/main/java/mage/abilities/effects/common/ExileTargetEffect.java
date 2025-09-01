@@ -12,9 +12,6 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
-import mage.target.Target;
-import mage.target.targetpointer.FirstTargetPointer;
-import mage.target.targetpointer.SecondTargetPointer;
 import mage.util.CardUtil;
 
 import java.util.LinkedHashSet;
@@ -27,8 +24,8 @@ import java.util.UUID;
 public class ExileTargetEffect extends OneShotEffect {
 
     private final Zone onlyFromZone;
-    private String exileZone = null;
-    private UUID exileId = null;
+    protected String exileZone = null;
+    protected UUID exileId = null;
     private boolean toSourceExileZone = false; // exile the targets to a source object specific exile zone (takes care of zone change counter)
     private boolean withName = true; // for face down - allows to hide card name in game logs before real face down apply
 
@@ -114,7 +111,7 @@ public class ExileTargetEffect extends OneShotEffect {
             }
             if (toSourceExileZone) {
                 MageObject sourceObject = source.getSourceObject(game);
-                exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+                exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getStackMomentSourceZCC());
                 if (sourceObject != null) {
                     exileZone = sourceObject.getIdName();
                 }

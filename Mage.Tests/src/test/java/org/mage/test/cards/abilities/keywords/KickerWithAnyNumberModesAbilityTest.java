@@ -3,6 +3,7 @@ package org.mage.test.cards.abilities.keywords;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -50,6 +51,7 @@ public class KickerWithAnyNumberModesAbilityTest extends CardTestPlayerBase {
         setChoice(playerA, true); // use kicker
         setModeChoice(playerA, "2");
         setModeChoice(playerA, "1");
+        setModeChoice(playerA, TestPlayer.MODE_SKIP);
         addTarget(playerA, playerA); // gain x life
         addTarget(playerA, "Balduvian Bears"); // get counters
 
@@ -79,6 +81,7 @@ public class KickerWithAnyNumberModesAbilityTest extends CardTestPlayerBase {
         setChoice(playerA, true); // use kicker
         setModeChoice(playerA, "2");
         setModeChoice(playerA, "1");
+        setModeChoice(playerA, TestPlayer.MODE_SKIP);
         addTarget(playerA, playerA); // gain x life
         addTarget(playerA, "Balduvian Bears"); // get counters
 
@@ -108,6 +111,7 @@ public class KickerWithAnyNumberModesAbilityTest extends CardTestPlayerBase {
         setChoice(playerA, true); // use kicker
         setModeChoice(playerA, "2");
         setModeChoice(playerA, "1");
+        setModeChoice(playerA, TestPlayer.MODE_SKIP);
         addTarget(playerA, playerA); // gain x life
         addTarget(playerA, "Balduvian Bears"); // get counters
 
@@ -139,6 +143,7 @@ public class KickerWithAnyNumberModesAbilityTest extends CardTestPlayerBase {
         setChoice(playerA, true); // use kicker
         setModeChoice(playerA, "2");
         setModeChoice(playerA, "1");
+        setModeChoice(playerA, TestPlayer.MODE_SKIP);
         addTarget(playerA, playerA); // gain x life
         addTarget(playerA, "Balduvian Bears"); // get counters
 

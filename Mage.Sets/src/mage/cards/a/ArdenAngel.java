@@ -49,7 +49,7 @@ class ArdenAngelEffect extends OneShotEffect {
 
     ArdenAngelEffect() {
         super(Outcome.Benefit);
-        this.staticText = "roll a four-sided die. If the result is 1, return {this} from your graveyard to the battlefield";
+        this.staticText = "roll a four-sided die. If the result is 1, return this card from your graveyard to the battlefield";
     }
 
     private ArdenAngelEffect(final ArdenAngelEffect effect) {

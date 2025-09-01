@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterSpell;
-import mage.filter.common.FilterArtifactSpell;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
@@ -58,17 +57,18 @@ public final class GoblinArtisans extends CardImpl {
 
 class GoblinArtisansTarget extends TargetSpell {
 
-    private static final FilterSpell filter = new FilterArtifactSpell(
+    private static final FilterSpell filterSpell = new FilterSpell(
             "target artifact spell you control that isn't the target " +
                     "of an ability from another creature named Goblin Artisans"
     );
 
     static {
-        filter.add(TargetController.YOU.getOwnerPredicate());
+        filterSpell.add(CardType.ARTIFACT.getPredicate());
+        filterSpell.add(TargetController.YOU.getOwnerPredicate());
     }
 
     GoblinArtisansTarget() {
-        super(filter);
+        super(filterSpell);
     }
 
     private GoblinArtisansTarget(final GoblinArtisansTarget target) {
@@ -81,8 +81,8 @@ class GoblinArtisansTarget extends TargetSpell {
     }
 
     @Override
-    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
-        if (!super.canTarget(controllerId, id, source, game)) {
+    public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
+        if (!super.canTarget(playerId, id, source, game)) {
             return false;
         }
         MageObjectReference sourceRef = new MageObjectReference(source.getSourceObject(game), game);

@@ -2,12 +2,10 @@
 package mage.abilities.keyword;
 
 import mage.abilities.ActivatedAbilityImpl;
-import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.RevealSourceFromYourHandCost;
 import mage.abilities.effects.Effect;
-import mage.constants.PhaseStep;
 import mage.constants.Zone;
 
 /**
@@ -26,12 +24,10 @@ import mage.constants.Zone;
  */
 public class ForecastAbility extends ActivatedAbilityImpl {
 
-    private static final Condition upkeepCondition = new IsStepCondition(PhaseStep.UPKEEP, true);
-
     public ForecastAbility(Effect effect, Cost cost) {
         super(Zone.HAND, effect, cost);
         this.maxActivationsPerTurn = 1;
-        this.condition = upkeepCondition;
+        this.condition = IsStepCondition.getMyUpkeep();
         this.addCost(new RevealSourceFromYourHandCost());
     }
 

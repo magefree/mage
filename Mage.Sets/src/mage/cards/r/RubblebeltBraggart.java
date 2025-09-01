@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.SuspectSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -29,11 +28,8 @@ public final class RubblebeltBraggart extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Whenever Rubblebelt Braggart attacks, if it's not suspected, you may suspect it.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new AttacksTriggeredAbility(new SuspectSourceEffect(), true),
-                RubblebeltBraggartCondition.instance, "Whenever {this} attacks, " +
-                "if it's not suspected, you may suspect it."
-        ));
+        this.addAbility(new AttacksTriggeredAbility(new SuspectSourceEffect(), true)
+                .withInterveningIf(RubblebeltBraggartCondition.instance));
     }
 
     private RubblebeltBraggart(final RubblebeltBraggart card) {
@@ -53,7 +49,12 @@ enum RubblebeltBraggartCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         return Optional
                 .ofNullable(source.getSourcePermanentIfItStillExists(game))
-                .map(permanent -> !permanent.isSuspected())
-                .orElse(false);
+                .filter(permanent -> !permanent.isSuspected())
+                .isPresent();
+    }
+
+    @Override
+    public String toString() {
+        return "it's not suspected";
     }
 }

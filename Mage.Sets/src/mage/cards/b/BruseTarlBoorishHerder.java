@@ -1,11 +1,8 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.LifelinkAbility;
@@ -16,11 +13,11 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class BruseTarlBoorishHerder extends CardImpl {
@@ -34,14 +31,13 @@ public final class BruseTarlBoorishHerder extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever Bruse Tarl, Boorish Herder enters the battlefield or attacks, target creature you control gains double strike and lifelink until end of turn.
-        Effect effect = new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("target creature you control gains double strike");
-        Ability ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(effect);
-        effect = new GainAbilityTargetEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("and lifelink until end of turn");
-        ability.addEffect(effect);
-        ability.addTarget(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("target creature you control")));
-
+        Ability ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(new GainAbilityTargetEffect(
+                DoubleStrikeAbility.getInstance(), Duration.EndOfTurn
+        ).setText("target creature you control gains double strike"));
+        ability.addEffect(new GainAbilityTargetEffect(
+                LifelinkAbility.getInstance(), Duration.EndOfTurn
+        ).setText("and lifelink until end of turn"));
+        ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
 
         // Partner

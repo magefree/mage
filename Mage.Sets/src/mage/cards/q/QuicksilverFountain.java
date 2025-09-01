@@ -1,14 +1,14 @@
 package mage.cards.q;
 
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BecomesBasicLandTargetEffect;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -19,6 +19,7 @@ import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
 import mage.target.targetadjustment.TargetAdjuster;
 
@@ -68,7 +69,7 @@ enum QuicksilverFountainAdjuster implements TargetAdjuster {
             FilterLandPermanent filter = new FilterLandPermanent();
             filter.add(Predicates.not(SubType.ISLAND.getPredicate()));
             filter.add(TargetController.ACTIVE.getControllerPredicate());
-            TargetLandPermanent target = new TargetLandPermanent(1, 1, filter, false);
+            TargetPermanent target = new TargetPermanent(1, 1, filter, false);
             target.setTargetController(activePlayer.getId());
             ability.getTargets().add(target);
         }

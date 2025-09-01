@@ -1,4 +1,3 @@
-
 package mage.cards.n;
 
 import mage.MageInt;
@@ -10,14 +9,17 @@ import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterPermanentCard;
 import mage.game.command.emblems.NissaVitalForceEmblem;
 import mage.game.permanent.token.TokenImpl;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetLandPermanent;
 
 import java.util.UUID;
 
@@ -26,12 +28,7 @@ import java.util.UUID;
  */
 public final class NissaVitalForce extends CardImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("land you control");
-    private static final FilterCard filter2 = new FilterPermanentCard("permanent card from your graveyard");
-
-    static {
-        filter.add(TargetController.YOU.getControllerPredicate());
-    }
+    private static final FilterCard filter = new FilterPermanentCard("permanent card from your graveyard");
 
     public NissaVitalForce(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{G}{G}");
@@ -45,12 +42,12 @@ public final class NissaVitalForce extends CardImpl {
         ability.addEffect(new BecomesCreatureTargetEffect(
                 new NissaVitalForceToken(), false, true, Duration.UntilYourNextTurn
         ).withDurationRuleAtStart(true).setText("Until your next turn, it becomes a 5/5 Elemental creature with haste. It's still a land"));
-        ability.addTarget(new TargetLandPermanent(filter));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND));
         this.addAbility(ability);
 
         // -3: Return target permanent card from your graveyard to your hand.
         ability = new LoyaltyAbility(new ReturnFromGraveyardToHandTargetEffect(), -3);
-        ability.addTarget(new TargetCardInYourGraveyard(filter2));
+        ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
 
         // -6: You get an emblem with "Whenever a land you control enters, you may draw a card."

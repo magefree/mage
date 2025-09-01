@@ -65,7 +65,7 @@ class EtherWellEffect extends OneShotEffect {
                 && player.chooseUse(outcome, "Put " + permanent.getLogName() +
                 " on the bottom of its owner's library?", source, game
         )) {
-            player.putCardsOnBottomOfLibrary(permanent, game, source, true);
+            player.putCardsOnBottomOfLibrary(permanent, game, source);
             return true;
         }
         player.putCardsOnTopOfLibrary(new CardsImpl(permanent), game, source, true);

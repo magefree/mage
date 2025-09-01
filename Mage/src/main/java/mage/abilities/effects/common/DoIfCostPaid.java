@@ -3,6 +3,7 @@ package mage.abilities.effects.common;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
+import mage.abilities.TriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
@@ -110,6 +111,7 @@ public class DoIfCostPaid extends OneShotEffect {
                 didPay = true;
                 game.informPlayers(player.getLogName() + " paid for " + mageObject.getLogName() + " - " + message);
                 applyEffects(game, source, executingEffects);
+                TriggeredAbility.setDidThisTurn(source, game);
                 player.resetStoredBookmark(game); // otherwise you can e.g. undo card drawn with Mentor of the Meek
             } else {
                 // Paying cost was cancels so try to undo payment so far

@@ -1,12 +1,10 @@
-
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
@@ -14,28 +12,26 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.SubType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledPermanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
- *
  */
 public final class NoggleHedgeMage extends CardImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent();
-    private static final FilterLandPermanent filter2 = new FilterLandPermanent();
-
-    static {
-        filter.add(SubType.ISLAND.getPredicate());
-        filter2.add(SubType.MOUNTAIN.getPredicate());
-    }
-
-    private static final String rule = "When {this} enters, if you control two or more Islands, you may tap two target permanents.";
-    private static final String rule2 = "When {this} enters, if you control two or more Mountains, you may have {this} deal 2 damage to target player or planeswalker.";
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(
+            new FilterControlledPermanent(SubType.ISLAND, "you control two or more Islands"),
+            ComparisonType.MORE_THAN, 1
+    );
+    private static final Condition condition2 = new PermanentsOnTheBattlefieldCondition(
+            new FilterControlledPermanent(SubType.MOUNTAIN, "you control two or more Mountains"),
+            ComparisonType.MORE_THAN, 1
+    );
 
     public NoggleHedgeMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U/R}");
@@ -46,14 +42,14 @@ public final class NoggleHedgeMage extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Noggle Hedge-Mage enters the battlefield, if you control two or more Islands, you may tap two target permanents.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldTriggeredAbility(new TapTargetEffect(), true), new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1), rule);
-        ability.addTarget(new TargetPermanent(2, new FilterPermanent()));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new TapTargetEffect(), true).withInterveningIf(condition);
+        ability.addTarget(new TargetPermanent(2, StaticFilters.FILTER_PERMANENTS));
         this.addAbility(ability);
 
         // When Noggle Hedge-Mage enters the battlefield, if you control two or more Mountains, you may have Noggle Hedge-Mage deal 2 damage to target player.
-        Ability ability2 = new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(2), true), new PermanentsOnTheBattlefieldCondition(filter2, ComparisonType.MORE_THAN, 1), rule2);
-        ability2.addTarget(new TargetPlayerOrPlaneswalker());
-        this.addAbility(ability2);
+        ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(2), true).withInterveningIf(condition2);
+        ability.addTarget(new TargetPlayerOrPlaneswalker());
+        this.addAbility(ability);
     }
 
     private NoggleHedgeMage(final NoggleHedgeMage card) {

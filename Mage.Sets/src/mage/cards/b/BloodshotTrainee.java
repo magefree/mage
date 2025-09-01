@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -31,8 +30,7 @@ public final class BloodshotTrainee extends CardImpl {
         this.toughness = new MageInt(3);
 
         Ability ability = new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD, new DamageTargetEffect(4),
-                new TapSourceCost(), BloodshotTraineeCondition.instance
+                new DamageTargetEffect(4), new TapSourceCost(), BloodshotTraineeCondition.instance
         );
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

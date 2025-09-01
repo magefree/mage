@@ -9,8 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SagaChapter;
 import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.ArtifactWallToken;
 import mage.target.common.TargetCardInLibrary;
 
@@ -20,13 +19,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class TheBirthOfMeletis extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("a basic Plains card");
-
-    static {
-        filter.add(SubType.PLAINS.getPredicate());
-        filter.add(SuperType.BASIC.getPredicate());
-    }
 
     public TheBirthOfMeletis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
@@ -39,7 +31,7 @@ public final class TheBirthOfMeletis extends CardImpl {
         // I — Search your library for a basic Plains card, reveal it, put it into your hand, then shuffle your library.
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_I, new SearchLibraryPutInHandEffect(
-                        new TargetCardInLibrary(filter), true
+                        new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_PLAINS), true
                 )
         );
 

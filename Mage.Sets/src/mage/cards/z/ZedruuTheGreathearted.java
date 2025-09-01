@@ -2,6 +2,7 @@ package mage.cards.z;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -38,7 +39,7 @@ public final class ZedruuTheGreathearted extends CardImpl {
         effect = new DrawCardSourceControllerEffect(PermanentsYouOwnThatOpponentsControlCount.instance);
         effect.setText("and draw X cards, where X is the number of permanents you own that your opponents control");
         ability.addEffect(effect);
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(new ValueHint("Permanents you own that your opponents control", PermanentsYouOwnThatOpponentsControlCount.instance)));
 
         // {R}{W}{U}: Target opponent gains control of target permanent you control.
         ability = new SimpleActivatedAbility(new TargetPlayerGainControlTargetPermanentEffect(), new ManaCostsImpl<>("{U}{R}{W}"));

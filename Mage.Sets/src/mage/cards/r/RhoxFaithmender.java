@@ -1,32 +1,23 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.replacement.GainDoubleLifeReplacementEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author noxx and jeffwadsworth
  */
 public final class RhoxFaithmender extends CardImpl {
 
     public RhoxFaithmender(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.subtype.add(SubType.RHINO);
         this.subtype.add(SubType.MONK);
 
@@ -35,9 +26,9 @@ public final class RhoxFaithmender extends CardImpl {
 
         // Lifelink
         this.addAbility(LifelinkAbility.getInstance());
-        
+
         // If you would gain life, you gain twice that much life instead.
-        this.addAbility(new SimpleStaticAbility(new RhoxFaithmenderEffect()));
+        this.addAbility(new SimpleStaticAbility(new GainDoubleLifeReplacementEffect()));
     }
 
     private RhoxFaithmender(final RhoxFaithmender card) {
@@ -47,38 +38,5 @@ public final class RhoxFaithmender extends CardImpl {
     @Override
     public RhoxFaithmender copy() {
         return new RhoxFaithmender(this);
-    }
-}
-
-class RhoxFaithmenderEffect extends ReplacementEffectImpl {
-
-    RhoxFaithmenderEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "If you would gain life, you gain twice that much life instead";
-    }
-
-    private RhoxFaithmenderEffect(final RhoxFaithmenderEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public RhoxFaithmenderEffect copy() {
-        return new RhoxFaithmenderEffect(this);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmount(CardUtil.overflowMultiply(event.getAmount(), 2));
-        return false;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.GAIN_LIFE;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getPlayerId().equals(source.getControllerId()) && (source.getControllerId() != null);
     }
 }

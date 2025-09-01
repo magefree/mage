@@ -2,19 +2,18 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.DifferentManaValuesInGraveCondition;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.keyword.SurveilEffect;
 import mage.abilities.hint.common.DifferentManaValuesInGraveHint;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.MenaceAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -48,12 +47,9 @@ public final class SanguineSpy extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of your end step, if there are five or more mana values among cards in your graveyard, you may pay 2 life. If you do, draw a card.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfEndStepTriggeredAbility(
-                        new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new PayLifeCost(2))
-                ), DifferentManaValuesInGraveCondition.FIVE, "At the beginning of your end step, if there are " +
-                "five or more mana values among cards in your graveyard, you may pay 2 life. If you do, draw a card."
-        ).addHint(DifferentManaValuesInGraveHint.instance));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(
+                new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new PayLifeCost(2))
+        ).withInterveningIf(DifferentManaValuesInGraveCondition.FIVE).addHint(DifferentManaValuesInGraveHint.instance));
     }
 
     private SanguineSpy(final SanguineSpy card) {

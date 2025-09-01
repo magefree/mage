@@ -79,6 +79,8 @@ class EmergentUltimatumEffect extends OneShotEffect {
         boolean searched = player.searchLibrary(targetCardInLibrary, source, game);
         Cards cards = new CardsImpl(targetCardInLibrary.getTargets());
         player.moveCards(cards, Zone.EXILED, source, game);
+        game.processAction();
+        cards.retainZone(Zone.EXILED, game);
         if (cards.isEmpty()) {
             if (searched) {
                 player.shuffleLibrary(source, game);
@@ -100,7 +102,7 @@ class EmergentUltimatumEffect extends OneShotEffect {
         opponent.choose(outcome, cards, targetCardInExile, source, game);
         Card toShuffle = game.getCard(targetCardInExile.getFirstTarget());
         if (toShuffle != null) {
-            player.putCardsOnBottomOfLibrary(toShuffle, game, source, false);
+            player.putCardsOnBottomOfLibrary(toShuffle, game, source);
             player.shuffleLibrary(source, game);
             cards.remove(toShuffle);
         }

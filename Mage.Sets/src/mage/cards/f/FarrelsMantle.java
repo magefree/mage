@@ -21,6 +21,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetadjustment.DefineByTriggerTargetAdjuster;
 
 import java.util.UUID;
 
@@ -58,6 +59,7 @@ class FarrelsMantleTriggeredAbility extends TriggeredAbilityImpl {
 
     FarrelsMantleTriggeredAbility() {
         super(Zone.BATTLEFIELD, null, false);
+        setTargetAdjuster(DefineByTriggerTargetAdjuster.instance);
     }
 
     private FarrelsMantleTriggeredAbility(final FarrelsMantleTriggeredAbility ability) {

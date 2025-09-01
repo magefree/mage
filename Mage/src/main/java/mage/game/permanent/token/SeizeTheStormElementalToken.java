@@ -22,7 +22,7 @@ public final class SeizeTheStormElementalToken extends TokenImpl {
 
     public SeizeTheStormElementalToken(DynamicValue xValue, Hint hint) {
         super("Elemental Token", "red Elemental creature token with trample and " +
-                "\"This creature's power and toughness are each equal to the number of instant " +
+                "\"This token's power and toughness are each equal to the number of instant " +
                 "and sorcery cards in your graveyard plus the number of cards with flashback you own in exile.\"");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
@@ -32,7 +32,7 @@ public final class SeizeTheStormElementalToken extends TokenImpl {
         this.addAbility(TrampleAbility.getInstance());
         this.addAbility(new SimpleStaticAbility(new SetBasePowerToughnessSourceEffect(
                 xValue
-        ).setText("this creature's power and toughness are each equal to the number of " +
+        ).setText("this token's power and toughness are each equal to the number of " +
                 "instant and sorcery cards in your graveyard, plus the number of cards with flashback you own in exile")
         ).addHint(hint));
     }

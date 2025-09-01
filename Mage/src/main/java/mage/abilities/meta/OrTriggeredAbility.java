@@ -90,12 +90,14 @@ public class OrTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         boolean toRet = false;
         for (TriggeredAbility ability : triggeredAbilities) {
-            for (Effect e : getEffects()) { //Add effects to the sub-abilities so that they can set target pointers
+            for (Effect e : getEffects()) { // Add effects to the sub-abilities so that they can set target pointers
                 ability.addEffect(e);
             }
-            if (ability.checkEventType(event, game) && ability.checkTrigger(event, game)) {
+            ability.getTargets().addAll(this.getTargets()); // AtStepTriggeredAbility automatically sets target pointer if it can't find any targets
+            if (ability.checkEventType(event, game) && ability.checkTrigger(event, game) && ability.checkTriggerCondition(game)) {
                 toRet = true;
             }
+            ability.getTargets().clear();
             ability.getEffects().clear(); //Remove afterwards, ensures that they remain synced even with copying
         }
         return toRet;

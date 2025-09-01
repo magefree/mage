@@ -25,6 +25,7 @@ public class GoadTargetEffect extends ContinuousEffectImpl {
      * turn of the controller of that spell or ability, that creature attacks
      * each combat if able and attacks a player other than that player if able.
      */
+    public static String goadReminderText = "<i>(Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)</i>";
     public GoadTargetEffect() {
         this(Duration.UntilYourNextTurn);
     }
@@ -33,7 +34,7 @@ public class GoadTargetEffect extends ContinuousEffectImpl {
         super(duration, Layer.RulesEffects, SubLayer.NA, Outcome.Detriment);
     }
 
-    private GoadTargetEffect(final GoadTargetEffect effect) {
+    protected GoadTargetEffect(final GoadTargetEffect effect) {
         super(effect);
     }
 
@@ -74,6 +75,6 @@ public class GoadTargetEffect extends ContinuousEffectImpl {
             return staticText;
         }
         return "goad " + getTargetPointer().describeTargets(mode.getTargets(), "that creature")
-                + ". <i>(Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)</i>";
+                + ". "+goadReminderText;
     }
 }

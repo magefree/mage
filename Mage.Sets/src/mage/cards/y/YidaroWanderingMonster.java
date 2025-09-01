@@ -109,7 +109,7 @@ class YidaroWanderingMonsterEffect extends OneShotEffect {
         }
         YidaroWanderingMonsterWatcher watcher = game.getState().getWatcher(YidaroWanderingMonsterWatcher.class);
         if (watcher == null || watcher.getYidaroCount(player.getId()) < 4) {
-            player.putCardsOnBottomOfLibrary(card, game, source, true);
+            player.putCardsOnBottomOfLibrary(card, game, source);
             player.shuffleLibrary(source, game);
         } else {
             player.moveCards(card, Zone.BATTLEFIELD, source, game);

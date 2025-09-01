@@ -1,8 +1,5 @@
 package mage.cards.a;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -11,12 +8,11 @@ import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
-import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -25,15 +21,18 @@ import mage.players.Player;
 import mage.target.common.TargetOpponent;
 import mage.watchers.Watcher;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 /**
- *
  * @author jimga150
  */
 public final class AlaniaDivergentStorm extends CardImpl {
 
     public AlaniaDivergentStorm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{R}");
-        
+
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.OTTER);
         this.subtype.add(SubType.WIZARD);
@@ -43,18 +42,13 @@ public final class AlaniaDivergentStorm extends CardImpl {
         // Whenever you cast a spell, if it's the first instant spell, the first sorcery spell, or the first Otter
         // spell other than Alania you've cast this turn, you may have target opponent draw a card. If you do, copy
         // that spell. You may choose new targets for the copy.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new SpellCastControllerTriggeredAbility(new DoIfCostPaid(
-                        new CopyTargetStackObjectEffect(true),
-                        new AlaniaDivergentStormCost()
-                ), null, false, SetTargetPointer.SPELL)
-                .setTriggerPhrase("Whenever you cast a spell, if it's the first instant spell, the first sorcery " +
-                        "spell, or the first Otter spell other than Alania you've cast this turn, "),
-                AlaniaDivergentStormCondition.instance, ""
-        );
-        ability.addWatcher(new AlaniaDivergentStormWatcher());
-        this.addAbility(ability);
-
+        Ability ability = new SpellCastControllerTriggeredAbility(
+                new DoIfCostPaid(new CopyTargetStackObjectEffect(true).setText("copy that spell. You may choose new targets for the copy")
+                        , new AlaniaDivergentStormCost()),
+                null, false, SetTargetPointer.SPELL
+        ).withInterveningIf(AlaniaDivergentStormCondition.instance);
+        ability.addTarget(new TargetOpponent());
+        this.addAbility(ability, new AlaniaDivergentStormWatcher());
     }
 
     private AlaniaDivergentStorm(final AlaniaDivergentStorm card) {
@@ -67,12 +61,10 @@ public final class AlaniaDivergentStorm extends CardImpl {
     }
 }
 
-// Based on MarathWillOfTheWildRemoveCountersCost
 class AlaniaDivergentStormCost extends CostImpl {
 
     AlaniaDivergentStormCost() {
         this.text = "have target opponent draw a card";
-        this.addTarget(new TargetOpponent());
     }
 
     private AlaniaDivergentStormCost(AlaniaDivergentStormCost cost) {
@@ -82,32 +74,18 @@ class AlaniaDivergentStormCost extends CostImpl {
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         Player player = game.getPlayer(controllerId);
-        if (player == null) {
-            return false;
-        }
-        for (UUID opponentID : game.getOpponents(controllerId)){
-            Player opponent = game.getPlayer(opponentID);
-            if (opponent == null) {
-                continue;
-            }
-            if (opponent.canBeTargetedBy(source.getSourceObject(game), controllerId, source, game)) {
-                return true;
-            }
-        }
-        return false;
+        Player opponent = game.getPlayer(source.getFirstTarget());
+        return player != null && opponent != null;
     }
 
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
-        this.getTargets().clearChosen();
         paid = false;
-        if (this.getTargets().choose(Outcome.DrawCard, controllerId, source.getSourceId(), source, game)) {
-            Player opponent = game.getPlayer(this.getTargets().getFirstTarget());
-            if (opponent == null || !opponent.canRespond()){
-                return false;
-            }
-            paid = opponent.drawCards(1, source, game) > 0;
+        Player opponent = game.getPlayer(source.getFirstTarget());
+        if (opponent == null || !opponent.canRespond()) {
+            return false;
         }
+        paid = opponent.drawCards(1, source, game) > 0;
         return paid;
     }
 
@@ -136,6 +114,11 @@ enum AlaniaDivergentStormCondition implements Condition {
         UUID spellControllerID = spell.getControllerId();
         MageObjectReference spellMOR = new MageObjectReference(spell, game);
         return watcher.spellIsFirstISOCast(spellControllerID, spellMOR, sourceSpellMOR);
+    }
+
+    @Override
+    public String toString() {
+        return "it's the first instant spell, the first sorcery spell, or the first Otter spell other than {this} you've cast this turn";
     }
 }
 
@@ -168,7 +151,7 @@ class AlaniaDivergentStormWatcher extends Watcher {
         if (spell.getCardType(game).contains(CardType.SORCERY)) {
             playerFirstSorceryCast.putIfAbsent(spellControllerID, spellMOR);
         }
-        if (spell.getSubtype(game).contains(SubType.OTTER)){
+        if (spell.hasSubtype(SubType.OTTER, game)) {
             if (playerFirstOtterCast.containsKey(spellControllerID)) {
                 // We already cast an otter this turn, put it on the second otter list
                 playerSecondOtterCast.putIfAbsent(spellControllerID, spellMOR);

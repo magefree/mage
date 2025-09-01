@@ -82,7 +82,7 @@ class EmberwildeDjinnEffect extends OneShotEffect {
         if (player.chooseUse(Outcome.GainControl, "Gain control of " + sourceObject.getLogName() + "?", source, game)) {
             if (cost.pay(source, game, source, player.getId(), false)) {
                 ContinuousEffect effect = new GainControlTargetEffect(Duration.Custom, false, player.getId());
-                effect.setTargetPointer(new FixedTarget(source.getSourceId(), source.getSourceObjectZoneChangeCounter()));
+                effect.setTargetPointer(new FixedTarget(source.getSourceId(), source.getStackMomentSourceZCC()));
                 game.addEffect(effect, source);
                 player.resetStoredBookmark(game);
             }

@@ -3,6 +3,7 @@ package org.mage.test.cards.single.afc;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestCommander4Players;
 
 
@@ -313,14 +314,14 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
         // Cast an adventure card from hand
         castSpell(5, PhaseStep.PRECOMBAT_MAIN, playerA, "Dizzying Swoop");
         addTarget(playerA, "Prosper, Tome-Bound");
+        //addTarget(playerA, TestPlayer.TARGET_SKIP); // only 1 creature, so tap 1 of 2, no need in skip
         waitStackResolved(5, PhaseStep.PRECOMBAT_MAIN);
 
         // Make sure the creature card can't be played from exile since there isn't the {W}{W} for it
         checkPlayableAbility("creature cast", 5, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Ardenvale Tactician", false);
 
-        setStopAt(5, PhaseStep.POSTCOMBAT_MAIN);
-
         setStrictChooseMode(true);
+        setStopAt(5, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
         // 1 exiled with Share the Spoils

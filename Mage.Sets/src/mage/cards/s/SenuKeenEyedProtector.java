@@ -7,7 +7,6 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.SourceInExileCondition;
 import mage.abilities.costs.common.ExileSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.keyword.ScryEffect;
@@ -17,8 +16,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -29,13 +27,6 @@ import java.util.UUID;
  * @author Susucr
  */
 public final class SenuKeenEyedProtector extends CardImpl {
-
-    private static final FilterPermanent filter =
-            new FilterControlledCreaturePermanent("a legendary creature you control");
-
-    static {
-        filter.add(SuperType.LEGENDARY.getPredicate());
-    }
 
     public SenuKeenEyedProtector(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
@@ -53,24 +44,15 @@ public final class SenuKeenEyedProtector extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // {T}, Exile Senu, Keen-Eyed Protector: You gain 2 life and scry 2.
-        Ability ability = new SimpleActivatedAbility(
-                new GainLifeEffect(2),
-                new TapSourceCost()
-        );
+        Ability ability = new SimpleActivatedAbility(new GainLifeEffect(2), new TapSourceCost());
         ability.addCost(new ExileSourceCost());
         ability.addEffect(new ScryEffect(2).concatBy("and"));
         this.addAbility(ability);
 
         // When a legendary creature you control attacks and isn't blocked, if Senu is exiled, put it onto the battlefield attacking.
-        this.addAbility(
-                new ConditionalInterveningIfTriggeredAbility(
-                        new AttacksAndIsNotBlockedAllTriggeredAbility(
-                                Zone.EXILED, new SenuKeenEyedProtectorEffect(), filter
-                        ), SourceInExileCondition.instance,
-                        "When a legendary creature you control attacks and isn't blocked, "
-                                + "if {this} is exiled, put it onto the battlefield attacking"
-                )
-        );
+        this.addAbility(new AttacksAndIsNotBlockedAllTriggeredAbility(
+                Zone.EXILED, new SenuKeenEyedProtectorEffect(), StaticFilters.FILTER_CONTROLLED_CREATURE_LEGENDARY
+        ).withInterveningIf(SourceInExileCondition.instance).setTriggerPhrase("When a legendary creature you control attacks and isn't blocked, "));
     }
 
     private SenuKeenEyedProtector(final SenuKeenEyedProtector card) {
@@ -113,5 +95,4 @@ class SenuKeenEyedProtectorEffect extends OneShotEffect {
         }
         return true;
     }
-
 }

@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CovenCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.hint.common.CovenHint;
@@ -53,12 +52,9 @@ public final class SigardaChampionOfLight extends CardImpl {
         // Coven — Whenever Sigarda attacks, if you control three or more creatures with different powers,
         // look at the top five cards of your library. You may reveal a Human creature card from among them and put it into your hand.
         // Put the rest on the bottom of your library in a random order.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new AttacksTriggeredAbility(new LookLibraryAndPickControllerEffect(5, 1, filter2, PutCards.HAND, PutCards.BOTTOM_RANDOM)), CovenCondition.instance, "Whenever {this} attacks, " +
-                "if you control three or more creatures with different powers, look at the top five cards " +
-                "of your library. You may reveal a Human creature card from among them and put it into your hand. " +
-                "Put the rest on the bottom of your library in a random order."
-        ).addHint(CovenHint.instance).setAbilityWord(AbilityWord.COVEN));
+        this.addAbility(new AttacksTriggeredAbility(new LookLibraryAndPickControllerEffect(
+                5, 1, filter2, PutCards.HAND, PutCards.BOTTOM_RANDOM
+        )).withInterveningIf(CovenCondition.instance).addHint(CovenHint.instance).setAbilityWord(AbilityWord.COVEN));
     }
 
     private SigardaChampionOfLight(final SigardaChampionOfLight card) {

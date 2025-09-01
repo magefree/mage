@@ -82,7 +82,7 @@ class DescendantsPathEffect extends OneShotEffect {
             CardUtil.castSpellWithAttributesForFree(controller, source, game, card);
         }
         if (game.getState().getZone(card.getId()) == Zone.LIBRARY) {
-            controller.putCardsOnBottomOfLibrary(card, game, source, false);
+            controller.putCardsOnBottomOfLibrary(card, game, source);
         }
         return true;
     }

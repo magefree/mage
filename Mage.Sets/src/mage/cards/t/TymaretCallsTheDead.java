@@ -2,15 +2,22 @@ package mage.cards.t;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SagaAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.MillCardsControllerEffect;
+import mage.abilities.effects.keyword.ScryEffect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.token.ZombieToken;
@@ -24,6 +31,11 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class TymaretCallsTheDead extends CardImpl {
+
+
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent(SubType.ZOMBIE, "Zombies you control");
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter, null);
+    private static final Hint hint = new ValueHint("Number of Rats you control", xValue);
 
     public TymaretCallsTheDead(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
@@ -39,7 +51,10 @@ public final class TymaretCallsTheDead extends CardImpl {
         );
 
         // III — You gain X life and scry X, where X is the number of Zombies you control.
-        sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III, new TymaretCallsTheDeadLastEffect());
+        sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III,
+                new GainLifeEffect(xValue).setText("You gain X life"),
+                new ScryEffect(xValue).concatBy("and"));
+        sagaAbility.addHint(hint);
 
         this.addAbility(sagaAbility);
     }
@@ -100,39 +115,5 @@ class TymaretCallsTheDeadFirstEffect extends OneShotEffect {
         }
         return player.moveCards(game.getCard(target.getFirstTarget()), Zone.EXILED, source, game)
                 && tokenEffect.apply(game, source);
-    }
-}
-
-class TymaretCallsTheDeadLastEffect extends OneShotEffect {
-
-    private static final FilterPermanent filter = new FilterPermanent(SubType.ZOMBIE, "");
-
-    TymaretCallsTheDeadLastEffect() {
-        super(Outcome.Benefit);
-        staticText = "You gain X life and scry X, where X is the number of Zombies you control.";
-    }
-
-    private TymaretCallsTheDeadLastEffect(final TymaretCallsTheDeadLastEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public TymaretCallsTheDeadLastEffect copy() {
-        return new TymaretCallsTheDeadLastEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
-        int zombieCount = game.getBattlefield().countAll(filter, source.getControllerId(), game);
-        if (zombieCount <= 0) {
-            return true;
-        }
-        player.gainLife(zombieCount, game, source);
-        player.scry(zombieCount, source, game);
-        return true;
     }
 }

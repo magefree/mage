@@ -2,7 +2,7 @@ package mage.cards.l;
 
 import mage.MageInt;
 import mage.MageObject;
-import mage.abilities.common.CastFromGraveyardOnceEachTurnAbility;
+import mage.abilities.common.CastFromGraveyardOnceDuringEachOfYourTurnAbility;
 import mage.abilities.keyword.CompanionAbility;
 import mage.abilities.keyword.CompanionCondition;
 import mage.abilities.keyword.LifelinkAbility;
@@ -13,8 +13,10 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
+import mage.filter.FilterCard;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
+import mage.filter.predicate.mageobject.PermanentPredicate;
 
 import java.util.Set;
 import java.util.UUID;
@@ -24,9 +26,10 @@ import java.util.UUID;
  */
 public final class LurrusOfTheDreamDen extends CardImpl {
 
-    private static final FilterPermanentCard filter = new FilterPermanentCard("a permanent spell with mana value 2 or less");
+    private static final FilterCard filter = new FilterPermanentCard("a permanent spell with mana value 2 or less");
 
     static {
+        filter.add(PermanentPredicate.instance);
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 3));
     }
 
@@ -46,7 +49,7 @@ public final class LurrusOfTheDreamDen extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // During each of your turns, you may cast one permanent spell with converted mana cost 2 or less from your graveyard.
-        this.addAbility(new CastFromGraveyardOnceEachTurnAbility(filter));
+        this.addAbility(new CastFromGraveyardOnceDuringEachOfYourTurnAbility(filter));
     }
 
     private LurrusOfTheDreamDen(final LurrusOfTheDreamDen card) {

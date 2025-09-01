@@ -3,7 +3,6 @@ package mage.cards.s;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.ChoosePlayerEffect;
 import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
@@ -14,6 +13,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.TargetPlayer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,8 +30,6 @@ public final class SpectralSearchlight extends CardImpl {
         // {T}: Choose a player. That player adds one mana of any color they chooses.
         ManaEffect effect = new SpectralSearchlightManaEffect();
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
-        // choosing player as first effect, before adding mana effect
-        ability.getEffects().add(0, new ChoosePlayerEffect(Outcome.PutManaInPool));
         this.addAbility(ability);
     }
 
@@ -49,7 +47,7 @@ class SpectralSearchlightManaEffect extends ManaEffect {
 
     SpectralSearchlightManaEffect() {
         super();
-        this.staticText = "That player adds one mana of any color they choose";
+        this.staticText = "Choose a player. That player adds one mana of any color they choose";
     }
 
     private SpectralSearchlightManaEffect(final SpectralSearchlightManaEffect effect) {
@@ -58,7 +56,13 @@ class SpectralSearchlightManaEffect extends ManaEffect {
 
     @Override
     public Player getPlayer(Game game, Ability source) {
-        return game.getPlayer((UUID) game.getState().getValue(source.getSourceId() + "_player"));
+        if (!game.inCheckPlayableState()) {
+            TargetPlayer target = new TargetPlayer(1, 1, true);
+            if (target.choose(Outcome.PutManaInPool, source.getControllerId(), source, game)) {
+                return game.getPlayer(target.getFirstTarget());
+            }
+        }
+        return game.getPlayer(source.getControllerId()); // Count as controller's potential mana for card playability
     }
 
     @Override

@@ -16,12 +16,11 @@ import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.common.FilterHistoricCard;
 import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.predicate.mageobject.HistoricPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.FoodToken;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -32,11 +31,12 @@ public final class SamwiseGamgee extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent("another nontoken creature");
     private static final FilterControlledPermanent filter2 = new FilterControlledPermanent(SubType.FOOD, "Foods");
-    private static final FilterCard filter3 = new FilterHistoricCard("historic card from your graveyard");
+    private static final FilterCard filter3 = new FilterCard("historic card from your graveyard");
 
     static {
         filter.add(AnotherPredicate.instance);
         filter.add(TokenPredicate.FALSE);
+        filter3.add(HistoricPredicate.instance);
     }
 
     public SamwiseGamgee(UUID ownerId, CardSetInfo setInfo) {

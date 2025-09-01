@@ -9,7 +9,6 @@ import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
@@ -26,10 +25,6 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl {
     protected FilterPermanent filter;
     protected boolean forceQuotes = false;
     protected boolean durationRuleAtStart = false; // put duration rule to the start of the rules instead end
-
-    public GainAbilityControlledEffect(Ability ability, Duration duration) {
-        this(ability, duration, StaticFilters.FILTER_PERMANENTS);
-    }
 
     public GainAbilityControlledEffect(Ability ability, Duration duration, FilterPermanent filter) {
         this(ability, duration, filter, false);

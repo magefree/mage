@@ -5,7 +5,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.hint.ConditionHint;
@@ -16,6 +15,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -25,8 +25,10 @@ import java.util.UUID;
  */
 public final class WaylayingPirates extends CardImpl {
 
-    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT);
-    private static final Hint hint = new ConditionHint(condition, "You control an artifact");
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(
+            new FilterControlledArtifactPermanent("you control an artifact")
+    );
+    private static final Hint hint = new ConditionHint(condition);
 
     public WaylayingPirates(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
@@ -37,12 +39,8 @@ public final class WaylayingPirates extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Waylaying Pirates enters the battlefield, if you control an artifact, tap target artifact or creature an opponent controls and put a stun counter on it.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new TapTargetEffect()),
-                condition, "When {this} enters, if you control an artifact, " +
-                "tap target artifact or creature an opponent controls and put a stun counter on it."
-        );
-        ability.addEffect(new AddCountersTargetEffect(CounterType.STUN.createInstance()));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new TapTargetEffect()).withInterveningIf(condition);
+        ability.addEffect(new AddCountersTargetEffect(CounterType.STUN.createInstance()).setText("and put a stun counter on it"));
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_ARTIFACT_OR_CREATURE));
         this.addAbility(ability.addHint(hint));
     }

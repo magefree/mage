@@ -12,25 +12,25 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.MageObjectReferencePredicate;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
+import mage.filter.predicate.permanent.CrewedSourceThisTurnPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-import mage.util.CardUtil;
 import mage.util.functions.CopyApplier;
 import mage.watchers.Watcher;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * @author TheElk801
  */
 public final class MindlinkMech extends CardImpl {
-
     public MindlinkMech(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}{U}");
 
@@ -60,9 +60,18 @@ public final class MindlinkMech extends CardImpl {
 
 class MindlinkMechTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final FilterPermanent filter = new FilterCreaturePermanent("nonlegendary creature that crewed it this turn");
+
+    static {
+        filter.add(CrewedSourceThisTurnPredicate.instance);
+        filter.add(Predicates.not(SuperType.LEGENDARY.getPredicate()));
+    }
+
     MindlinkMechTriggeredAbility() {
         super(Zone.BATTLEFIELD, new MindlinkMechEffect());
         this.addWatcher(new MindlinkMechWatcher());
+        this.addTarget(new TargetPermanent(filter));
+        this.setTriggerPhrase("Whenever {this} becomes crewed for the first time each turn");
     }
 
     private MindlinkMechTriggeredAbility(final MindlinkMechTriggeredAbility ability) {
@@ -81,26 +90,13 @@ class MindlinkMechTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (!event.getSourceId().equals(getSourceId()) || !MindlinkMechWatcher.checkVehicle(this, game)) {
-            return false;
-        }
-        this.getTargets().clear();
-        this.addTarget(new TargetPermanent(MindlinkMechWatcher.makeFilter(this, game)));
-        return true;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} becomes crewed for the first time each turn, until end of turn, " +
-                "{this} becomes a copy of target nonlegendary creature that crewed it this turn, " +
-                "except it's 4/3, it's a Vehicle artifact in addition to its other types, and it has flying.";
+        return event.getSourceId().equals(getSourceId()) && MindlinkMechWatcher.checkVehicle(this, game);
     }
 }
 
 class MindlinkMechWatcher extends Watcher {
 
     private final Map<MageObjectReference, Integer> crewCount = new HashMap<>();
-    private final Map<MageObjectReference, Set<MageObjectReference>> crewMap = new HashMap<>();
     private static final FilterPermanent invalidFilter = new FilterPermanent();
 
     static {
@@ -114,34 +110,16 @@ class MindlinkMechWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         Permanent vehicle;
-        Permanent crewer;
-        switch (event.getType()) {
-            case VEHICLE_CREWED:
-                vehicle = game.getPermanent(event.getTargetId());
-                crewer = null;
-                break;
-            case CREWED_VEHICLE:
-                vehicle = game.getPermanent(event.getSourceId());
-                crewer = game.getPermanent(event.getTargetId());
-                break;
-            default:
-                return;
-        }
-        if (vehicle == null) {
-            return;
-        }
-        if (crewer == null) {
+        if (event.getType() == GameEvent.EventType.VEHICLE_CREWED) {
+            vehicle = game.getPermanent(event.getTargetId());
             crewCount.compute(new MageObjectReference(vehicle, game), (m, i) -> i == null ? 1 : Integer.sum(i, 1));
-            return;
         }
-        crewMap.computeIfAbsent(new MageObjectReference(vehicle, game), x -> new HashSet<>()).add(new MageObjectReference(crewer, game));
     }
 
     @Override
     public void reset() {
         super.reset();
         crewCount.clear();
-        crewMap.clear();
     }
 
     public static boolean checkVehicle(Ability source, Game game) {
@@ -151,34 +129,14 @@ class MindlinkMechWatcher extends Watcher {
                 .crewCount
                 .getOrDefault(new MageObjectReference(source), 0) < 2;
     }
-
-    public static FilterPermanent makeFilter(Ability source, Game game) {
-        Set<MageObjectReferencePredicate> predicates = game
-                .getState()
-                .getWatcher(MindlinkMechWatcher.class)
-                .crewMap
-                .computeIfAbsent(new MageObjectReference(game.getPermanent(source.getSourceId()), game), x -> new HashSet<>())
-                .stream()
-                .filter(mor -> {
-                    Permanent permanent = mor.getPermanent(game);
-                    return permanent != null && !permanent.isLegendary(game) && permanent.isCreature(game);
-                }).map(MageObjectReferencePredicate::new)
-                .collect(Collectors.toSet());
-        if (predicates.isEmpty()) {
-            return invalidFilter;
-        }
-        FilterPermanent filterPermanent = new FilterPermanent(
-                "nonlegendary creature that crewed " + CardUtil.getSourceName(game, source) + " this turn"
-        );
-        filterPermanent.add(Predicates.or(predicates));
-        return filterPermanent;
-    }
 }
 
 class MindlinkMechEffect extends OneShotEffect {
 
     MindlinkMechEffect() {
         super(Outcome.Benefit);
+        this.setText("until end of turn, {this} becomes a copy of target nonlegendary creature that crewed it this turn, " +
+                "except it's 4/3, it's a Vehicle artifact in addition to its other types, and it has flying.");
     }
 
     private MindlinkMechEffect(final MindlinkMechEffect effect) {

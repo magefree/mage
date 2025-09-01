@@ -44,7 +44,7 @@ public final class Gurzigost extends CardImpl {
         
         // {G}{G}, Discard a card: You may have Gurzigost assign its combat damage this turn as though it weren't blocked.
         Effect effect = new GainAbilitySourceEffect(DamageAsThoughNotBlockedAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("You may have Gurzigost assign its combat damage this turn as though it weren't blocked");
+        effect.setText("You may have {this} assign its combat damage this turn as though it weren't blocked");
         Ability ability = new SimpleActivatedAbility(effect, new ManaCostsImpl<>("{G}{G}"));
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);
@@ -92,7 +92,7 @@ class GurzigostCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return this.getTargets().canChoose(controllerId, source, game);
+        return canChooseOrAlreadyChosen(ability, source, controllerId, game);
     }
 
     @Override

@@ -61,32 +61,37 @@ public class CumulativeUpkeepTest extends CardTestPlayerBase {
         // Whenever Kor Celebrant or another creature you control enters, you gain 1 life.
         addCard(Zone.HAND, playerB, "Kor Celebrant", 1); // Creature {2}{W}
         addCard(Zone.BATTLEFIELD, playerB, "Plains", 3);
-        
-        addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
+        //
         // Cumulative upkeep {2}
-        // When Illusions of Grandeur enters the battlefield, you gain 20 life.
+        // At the beginning of your upkeep, put an age counter on this permanent,
+        // then sacrifice it unless you pay its upkeep cost for each age counter on it.
         // When Illusions of Grandeur leaves the battlefield, you lose 20 life.
         addCard(Zone.HAND, playerA, "Illusions of Grandeur"); // Enchantment {3}{U}
-        
-        // At the beginning of your upkeep, you may exchange control of target nonland permanent you control and target nonland permanent an opponent controls with an equal or lesser converted mana cost.        
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
+        //
+        // At the beginning of your upkeep, you may exchange control of target nonland permanent you control
+        // and target nonland permanent an opponent controls with an equal or lesser converted mana cost.
         addCard(Zone.HAND, playerA, "Puca's Mischief"); // Enchantment {3}{U}
 
-        
+        // turn 1, 2 - prepare cumulative upkeep and gain life triggers
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Illusions of Grandeur");
-             
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Kor Celebrant");
-        
-        // Illusions of Grandeur - CumulativeUpkeepAbility: Cumulative upkeep {2}
-        setChoice(playerA, true); // Pay {2}?
-        
+
+        // turn 3 - upkeep trigger and prepare control card
+        setChoice(playerA, true); // use upkeep cost {2}
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Puca's Mischief");
-        
-        setChoice(playerA, "Cumulative upkeep"); // Triggered list (total 2) which trigger goes first on the stack
-        addTarget(playerA, "Illusions of Grandeur"); // Own target permanent of Puca's Mischief
-        addTarget(playerA, "Kor Celebrant"); // Opponent's target permanent of Puca's Mischief
-        
-        setChoice(playerA, true); // At the beginning of your upkeep, you may exchange control of target nonland permanent you control and target nonland permanent an opponent controls with an equal or lesser converted mana cost.
-        setChoice(playerA, false); // Pay {2}{2}?
+
+        // turn 5 - multiple upkeep triggers
+        // first put upkeep, then put change control - so control will be resolved before upkeep cost
+        setChoice(playerA, "Cumulative upkeep");
+
+        // resolve change control first
+        addTarget(playerA, "Illusions of Grandeur"); // own target
+        addTarget(playerA, "Kor Celebrant"); // opponent target
+        setChoice(playerA, true); // yes, resolve change control
+
+        // resolve upkeep
+        setChoice(playerA, false); // no, do not pay upkeep cost
         
         checkPermanentCounters("Age counters", 5, PhaseStep.PRECOMBAT_MAIN, playerB, "Illusions of Grandeur", CounterType.AGE, 2);
         

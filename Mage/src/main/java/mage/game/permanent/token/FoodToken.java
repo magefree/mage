@@ -15,7 +15,7 @@ public final class FoodToken extends TokenImpl {
         cardType.add(CardType.ARTIFACT);
         subtype.add(SubType.FOOD);
 
-        this.addAbility(new FoodAbility(false));
+        this.addAbility(new FoodAbility());
     }
 
     private FoodToken(final FoodToken token) {

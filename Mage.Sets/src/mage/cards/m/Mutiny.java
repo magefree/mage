@@ -1,6 +1,5 @@
 package mage.cards.m;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -9,17 +8,16 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
-import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 
+import java.util.Set;
 import java.util.UUID;
 
 /**
+ * TODO: combine with BreakingOfTheFellowship
+ *
  * @author LevelX2
  */
 public final class Mutiny extends CardImpl {
@@ -29,9 +27,9 @@ public final class Mutiny extends CardImpl {
 
         // Target creature an opponent controls deals damage equal to its power to another target creature that player controls.
         this.getSpellAbility().addEffect(new MutinyEffect());
-        this.getSpellAbility().addTarget(new MutinyFirstTarget(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("another target creature that player controls")));
-
+        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
+        this.getSpellAbility().addTarget(new MutinySecondTarget());
+        this.getSpellAbility().addTarget(new TargetPermanent(new FilterCreaturePermanent("another target creature that player controls")));
     }
 
     private Mutiny(final Mutiny card) {
@@ -72,74 +70,45 @@ class MutinyEffect extends OneShotEffect {
         }
         return true;
     }
-
 }
 
-class MutinyFirstTarget extends TargetCreaturePermanent {
+class MutinySecondTarget extends TargetPermanent {
 
-    public MutinyFirstTarget(FilterCreaturePermanent filter) {
-        super(1, 1, filter, false);
+    public MutinySecondTarget() {
+        super(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE);
     }
 
-    private MutinyFirstTarget(final MutinyFirstTarget target) {
+    private MutinySecondTarget(final MutinySecondTarget target) {
         super(target);
     }
 
     @Override
-    public void addTarget(UUID id, Ability source, Game game, boolean skipEvent) {
-        super.addTarget(id, source, game, skipEvent);
-        // Update the second target
-        UUID firstController = game.getControllerId(id);
-        if (firstController != null && source.getTargets().size() > 1) {
-            Player controllingPlayer = game.getPlayer(firstController);
-            TargetCreaturePermanent targetCreaturePermanent = (TargetCreaturePermanent) source.getTargets().get(1);
-            // Set a new filter to the second target with the needed restrictions
-            FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature that player " + controllingPlayer.getName() + " controls");
-            filter.add(new ControllerIdPredicate(firstController));
-            filter.add(Predicates.not(new PermanentIdPredicate(id)));
-            targetCreaturePermanent.replaceFilter(filter);
-        }
-    }
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
+        Set<UUID> possibleTargets = super.possibleTargets(sourceControllerId, source, game);
 
-    @Override
-    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
-        if (super.canTarget(controllerId, id, source, game)) {
-            // can only target, if the controller has at least two targetable creatures
-            UUID controllingPlayerId = game.getControllerId(id);
-            int possibleTargets = 0;
-            MageObject sourceObject = game.getObject(source.getId());
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, controllingPlayerId, game)) {
-                if (permanent.canBeTargetedBy(sourceObject, controllerId, source, game)) {
-                    possibleTargets++;
-                }
+        Permanent firstTarget = game.getPermanent(source.getFirstTarget());
+        if (firstTarget == null) {
+            // playable or first target not yet selected
+            // use all
+            if (possibleTargets.size() == 1) {
+                // workaround to make 1 target invalid
+                possibleTargets.clear();
             }
-            return possibleTargets > 1;
+        } else {
+            // real
+            // filter by same player
+            possibleTargets.removeIf(id -> {
+                Permanent permanent = game.getPermanent(id);
+                return permanent == null || !permanent.isControlledBy(firstTarget.getControllerId());
+            });
         }
-        return false;
+        possibleTargets.removeIf(id -> firstTarget != null && firstTarget.getId().equals(id));
+
+        return possibleTargets;
     }
 
     @Override
-    public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
-        if (super.canChoose(sourceControllerId, source, game)) {
-            UUID controllingPlayerId = game.getControllerId(source.getSourceId());
-            for (UUID playerId : game.getOpponents(controllingPlayerId)) {
-                int possibleTargets = 0;
-                MageObject sourceObject = game.getObject(source);
-                for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, playerId, game)) {
-                    if (permanent.canBeTargetedBy(sourceObject, controllingPlayerId, source, game)) {
-                        possibleTargets++;
-                    }
-                }
-                if (possibleTargets > 1) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public MutinyFirstTarget copy() {
-        return new MutinyFirstTarget(this);
+    public MutinySecondTarget copy() {
+        return new MutinySecondTarget(this);
     }
 }

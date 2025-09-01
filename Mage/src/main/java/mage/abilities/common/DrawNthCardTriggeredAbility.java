@@ -6,12 +6,14 @@ import mage.abilities.effects.Effect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
 import mage.constants.TargetController;
+import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.players.Player;
 import mage.util.CardUtil;
-import mage.watchers.common.CardsDrawnThisTurnWatcher;
+import mage.watchers.Watcher;
+
+import java.util.*;
 
 /**
  * @author TheElk801
@@ -48,6 +50,7 @@ public class DrawNthCardTriggeredAbility extends TriggeredAbilityImpl {
             this.addHint(hint);
         }
         setTriggerPhrase(generateTriggerPhrase());
+        this.addWatcher(new DrawNthCardWatcher());
     }
 
     protected DrawNthCardTriggeredAbility(final DrawNthCardTriggeredAbility ability) {
@@ -75,8 +78,7 @@ public class DrawNthCardTriggeredAbility extends TriggeredAbilityImpl {
                 }
                 break;
             case OPPONENT:
-                Player controller = game.getPlayer(controllerId);
-                if (controller == null || !controller.hasOpponent(event.getPlayerId(), game)) {
+                if (!game.getOpponents(getControllerId()).contains(event.getPlayerId())) {
                     return false;
                 }
                 break;
@@ -86,8 +88,7 @@ public class DrawNthCardTriggeredAbility extends TriggeredAbilityImpl {
             default:
                 throw new IllegalArgumentException("TargetController " + targetController + " not supported");
         }
-        CardsDrawnThisTurnWatcher watcher = game.getState().getWatcher(CardsDrawnThisTurnWatcher.class);
-        return watcher != null && watcher.getCardsDrawnThisTurn(event.getPlayerId()) == cardNumber;
+        return DrawNthCardWatcher.checkEvent(event.getPlayerId(), event.getId(), game) + 1 == cardNumber;
     }
 
     public String generateTriggerPhrase() {
@@ -108,5 +109,38 @@ public class DrawNthCardTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public DrawNthCardTriggeredAbility copy() {
         return new DrawNthCardTriggeredAbility(this);
+    }
+}
+
+class DrawNthCardWatcher extends Watcher {
+
+    private final Map<UUID, List<UUID>> playerDrawEventMap = new HashMap<>();
+
+    DrawNthCardWatcher() {
+        super(WatcherScope.GAME);
+    }
+
+    @Override
+    public void watch(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.DREW_CARD) {
+            playerDrawEventMap
+                    .computeIfAbsent(event.getPlayerId(), x -> new ArrayList<>())
+                    .add(event.getId());
+        }
+    }
+
+    @Override
+    public void reset() {
+        super.reset();
+        playerDrawEventMap.clear();
+    }
+
+    static int checkEvent(UUID playerId, UUID eventId, Game game) {
+        return game
+                .getState()
+                .getWatcher(DrawNthCardWatcher.class)
+                .playerDrawEventMap
+                .getOrDefault(playerId, Collections.emptyList())
+                .indexOf(eventId);
     }
 }

@@ -1,5 +1,6 @@
 package mage.client.deckeditor;
 
+import mage.cards.decks.importer.MtgaImporter;
 import mage.client.MageFrame;
 import mage.client.dialog.MageDialog;
 import mage.util.DeckUtil;
@@ -20,11 +21,18 @@ import java.util.Optional;
 public class DeckImportClipboardDialog extends MageDialog {
 
     private static final String FORMAT_TEXT =
-            "// Example:\n" +
-                    "//1 Library of Congress\n" +
-                    "//1 Cryptic Gateway\n" +
-                    "//1 Azami, Lady of Scrolls\n" +
-                    "// NB: This is slow as, and will lock your screen :)\n" +
+            "// MTGO format example:\n" +
+                    "// 1 Library of Congress\n" +
+                    "// 3 Cryptic Gateway\n" +
+                    "//\n" +
+                    "// MTGA, moxfield, archidekt format example:\n" +
+                    "// Deck\n" +
+                    "// 4 Accumulated Knowledge (A25) 40\n" +
+                    "// 2 Adarkar Wastes (EOC) 147\n" +
+                    "// Commander\n" +
+                    "// 1 Grizzly Bears\n" +
+                    "//\n" +
+                    "// Importing deck can take some time to finish\n" +
                     "\n" +
                     "// Your current clipboard:\n" +
                     "\n";
@@ -68,17 +76,19 @@ public class DeckImportClipboardDialog extends MageDialog {
     }
 
     private void onOK() {
-        String decklist = editData.getText();
-        decklist = decklist.replace(FORMAT_TEXT, "");
+        String importData = editData.getText();
+        importData = importData.replace(FORMAT_TEXT, "").trim();
 
+        // find possible data format
         String tempDeckPath;
-        // This dialog also accepts a paste in .mtga format
-        if (decklist.startsWith("Deck\n")) {  // An .mtga list always starts with the first line being "Deck". This kind of paste is processed as .mtga
-            tempDeckPath = DeckUtil.writeTextToTempFile("cbimportdeck", ".mtga", decklist);
+        if (MtgaImporter.isMTGA(importData)) {
+            // MTGA or Moxfield
+            tempDeckPath = DeckUtil.writeTextToTempFile("cbimportdeck", ".mtga", importData);
         } else {
-            // If the paste is not .mtga format, it's processed as plaintext
-            tempDeckPath = DeckUtil.writeTextToTempFile(decklist);
+            // text
+            tempDeckPath = DeckUtil.writeTextToTempFile(importData);
         }
+
         if (this.callback != null) {
             callback.onImportDone(tempDeckPath);
         }

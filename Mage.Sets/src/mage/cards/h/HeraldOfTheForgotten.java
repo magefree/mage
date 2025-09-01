@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CastFromEverywhereSourceCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -43,11 +42,8 @@ public final class HeraldOfTheForgotten extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Herald of the Forgotten enters the battlefield, if you cast it, return any number of target permanent cards with cycling abilities from your graveyard to the battlefield.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect()),
-                CastFromEverywhereSourceCondition.instance, "When {this} enters, if you cast it, " +
-                "return any number of target permanent cards with cycling abilities from your graveyard to the battlefield."
-        );
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect())
+                .withInterveningIf(CastFromEverywhereSourceCondition.instance);
         ability.addTarget(new TargetCardInYourGraveyard(0, Integer.MAX_VALUE, filter));
         this.addAbility(ability);
     }

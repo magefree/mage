@@ -3,7 +3,6 @@ package mage.cards.d;
 import mage.MageInt;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.condition.common.LastTimeCounterRemovedCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.VanishingAbility;
 import mage.cards.CardImpl;
@@ -29,8 +28,7 @@ public final class DeadlyGrub extends CardImpl {
         this.addAbility(new VanishingAbility(3));
 
         // When Deadly Grub dies, if it had no time counters on it, create a 6/1 green Insect creature token with shroud.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new DeadlyGrubInsectToken(), 1)),
-                LastTimeCounterRemovedCondition.instance, "When {this} dies, if it had no time counters on it, create a 6/1 green Insect creature token with shroud."));
+        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new DeadlyGrubInsectToken(), 1)).withInterveningIf(LastTimeCounterRemovedCondition.instance));
     }
 
     private DeadlyGrub(final DeadlyGrub card) {

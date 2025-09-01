@@ -4,7 +4,6 @@ import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.keyword.ScryEffect;
@@ -41,11 +40,7 @@ public final class JaceMirrorMage extends CardImpl {
         this.addAbility(new KickerAbility("{2}"));
 
         // When Jace, Mirror Mage enters the battlefield, if Jace was kicked, create a token that's a copy of Jace, Mirror Mage except it's not legendary and its starting loyalty is 1.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new JaceMirrorMageCopyEffect()),
-                KickedCondition.ONCE, "When {this} enters, if {this} was kicked, " +
-                "create a token that's a copy of {this}, except it's not legendary and its starting loyalty is 1."
-        ));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new JaceMirrorMageCopyEffect()).withInterveningIf(KickedCondition.ONCE));
 
         // +1: Scry 2.
         this.addAbility(new LoyaltyAbility(new ScryEffect(2), 1));
@@ -68,6 +63,7 @@ class JaceMirrorMageCopyEffect extends OneShotEffect {
 
     JaceMirrorMageCopyEffect() {
         super(Outcome.Benefit);
+        staticText = "create a token that's a copy of {this}, except it's not legendary and its starting loyalty is 1.";
     }
 
     private JaceMirrorMageCopyEffect(final JaceMirrorMageCopyEffect effect) {

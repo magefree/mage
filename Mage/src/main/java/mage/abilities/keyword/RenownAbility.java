@@ -15,7 +15,6 @@ import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
 /**
- *
  * @author LevelX2
  */
 public class RenownAbility extends TriggeredAbilityImpl {

@@ -1,9 +1,7 @@
 package mage.cards.g;
 
-import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.decorator.ConditionalContinuousRuleModifyingEffect;
@@ -11,16 +9,18 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.BlockedAttackerWatcher;
 
@@ -43,7 +43,7 @@ public final class GlyphOfDelusion extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
 
         // Put X glyph counters on target creature that target Wall blocked this turn, where X is the power of that blocked creature. The creature gains “This creature doesn’t untap during your untap step if it has a glyph counter on it” and “At the beginning of your upkeep, remove a glyph counter from this creature.”
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addTarget(new GlyphOfDelusionSecondTarget());
         this.getSpellAbility().addEffect(new GlyphOfDelusionEffect());
     }
@@ -60,8 +60,6 @@ public final class GlyphOfDelusion extends CardImpl {
 
 class GlyphOfDelusionSecondTarget extends TargetPermanent {
 
-    private Permanent firstTarget = null;
-
     public GlyphOfDelusionSecondTarget() {
         super();
         withTargetName("target creature that target Wall blocked this turn");
@@ -69,33 +67,39 @@ class GlyphOfDelusionSecondTarget extends TargetPermanent {
 
     private GlyphOfDelusionSecondTarget(final GlyphOfDelusionSecondTarget target) {
         super(target);
-        this.firstTarget = target.firstTarget;
     }
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
-        if (firstTarget != null) {
-            BlockedAttackerWatcher watcher = game.getState().getWatcher(BlockedAttackerWatcher.class);
-            if (watcher != null) {
-                MageObject targetSource = game.getObject(source);
-                if (targetSource != null) {
-                    for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, sourceControllerId, source, game)) {
-                        if (!targets.containsKey(creature.getId()) && creature.canBeTargetedBy(targetSource, sourceControllerId, source, game)) {
-                            if (watcher.creatureHasBlockedAttacker(new MageObjectReference(creature, game), new MageObjectReference(firstTarget, game), game)) {
-                                possibleTargets.add(creature.getId());
-                            }
-                        }
-                    }
+
+        BlockedAttackerWatcher watcher = game.getState().getWatcher(BlockedAttackerWatcher.class);
+        if (watcher == null) {
+            return possibleTargets;
+        }
+
+        Permanent targetWall = game.getPermanent(source.getFirstTarget());
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
+            if (targetWall == null) {
+                // playable or first target not yet selected
+                // use all
+                possibleTargets.add(permanent.getId());
+            } else {
+                // real
+                // filter by blocked
+                if (watcher.creatureHasBlockedAttacker(new MageObjectReference(permanent, game), new MageObjectReference(targetWall, game))) {
+                    possibleTargets.add(permanent.getId());
                 }
             }
         }
-        return possibleTargets;
+        possibleTargets.removeIf(id -> targetWall != null && targetWall.getId().equals(id));
+
+        return keepValidPossibleTargets(possibleTargets, sourceControllerId, source, game);
     }
 
     @Override
     public boolean chooseTarget(Outcome outcome, UUID playerId, Ability source, Game game) {
-        firstTarget = game.getPermanent(source.getFirstTarget());
+        // AI hint with better outcome
         return super.chooseTarget(Outcome.Tap, playerId, source, game);
     }
 
@@ -134,8 +138,7 @@ class GlyphOfDelusionEffect extends OneShotEffect {
                 effect.setTargetPointer(new FixedTarget(targetPermanent.getId(), game));
                 game.addEffect(effect, source);
 
-                BeginningOfUpkeepTriggeredAbility ability2 = new BeginningOfUpkeepTriggeredAbility(new RemoveCounterSourceEffect(CounterType.GLYPH.createInstance())
-                );
+                BeginningOfUpkeepTriggeredAbility ability2 = new BeginningOfUpkeepTriggeredAbility(new RemoveCounterSourceEffect(CounterType.GLYPH.createInstance()));
                 GainAbilityTargetEffect effect2 = new GainAbilityTargetEffect(ability2, Duration.Custom);
                 effect2.setTargetPointer(new FixedTarget(targetPermanent.getId(), game));
                 game.addEffect(effect2, source);

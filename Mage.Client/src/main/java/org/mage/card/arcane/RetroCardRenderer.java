@@ -326,7 +326,7 @@ public class RetroCardRenderer extends CardRenderer {
                 innerContentWidth - 4, (int) ((cardHeight - borderWidth * 2) * 0.32f));
 
         // Draw the bottom right stuff
-        drawBottomRight(g, borderPaint, boxColor);
+        drawBottomRight(g, attribs, borderPaint, boxColor);
     }
 
     private void drawInsetFrame(Graphics2D g2, int x, int y, int width, int height, Paint borderPaint, boolean isLand) {
@@ -540,7 +540,7 @@ public class RetroCardRenderer extends CardRenderer {
     }
 
     // Draw the P/T and/or Loyalty boxes
-    protected void drawBottomRight(Graphics2D g, Paint borderPaint, Color fill) {
+    protected void drawBottomRight(Graphics2D g, CardPanelAttributes attribs, Paint borderPaint, Color fill) {
         // No bottom right for abilities
         if (cardView.isAbility()) {
             return;
@@ -583,7 +583,8 @@ public class RetroCardRenderer extends CardRenderer {
 
             // Draw text
             Color defaultTextColor = Color.black;
-            boolean defaultTextLight = true;
+            boolean defaultTextLight = cardView.getColor().isMulticolored() || cardView.getColor().equals(ObjectColor.RED)
+                    || cardView.getColor().equals(ObjectColor.COLORLESS);
             g.setFont(ptTextFont);
 
             // real PT info
@@ -608,7 +609,7 @@ public class RetroCardRenderer extends CardRenderer {
             g.setColor(defaultTextColor);
 
             // Advance
-            curY -= boxHeight;
+            curY -= ptBoxHeight;
         }
 
         // Is it a walker? (But don't draw the box if it's a non-permanent view
@@ -712,14 +713,14 @@ public class RetroCardRenderer extends CardRenderer {
         // does it have damage on it?
         if ((cardView instanceof PermanentView) && ((PermanentView) cardView).getDamage() > 0) {
             int x = cardWidth - partBoxWidth - borderWidth;
-            int y = curY - boxHeight;
+            int y = curY - ptBoxHeight;
             String damage = String.valueOf(((PermanentView) cardView).getDamage());
             g.setFont(ptTextFont);
             int txWidth = g.getFontMetrics().stringWidth(damage);
             g.setColor(Color.red);
-            g.fillRect(x, y, partBoxWidth, boxHeight);
+            g.fillRect(x, y, partBoxWidth, ptBoxHeight);
             g.setColor(Color.white);
-            g.drawRect(x, y, partBoxWidth, boxHeight);
+            g.drawRect(x, y, partBoxWidth, ptBoxHeight);
             g.drawString(damage, x + (partBoxWidth - txWidth) / 2, curY - 1);
         }
     }

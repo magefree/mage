@@ -43,6 +43,9 @@ public enum CardRepository {
 
     private Dao<CardInfo, Object> cardsDao;
 
+    // store names lists like all cards, lands, etc (it's static data and can be calculated one time only)
+    private static final Map<String, Set<String>> namesQueryCache = new HashMap<>();
+
     // sets with exclusively snow basics
     public static final Set<String> snowLandSetCodes = new HashSet<>(Arrays.asList(
             "CSP",
@@ -156,8 +159,11 @@ public enum CardRepository {
         return snowLandSetCodes.contains(setCode);
     }
 
-    public Set<String> getNames() {
-        Set<String> names = new TreeSet<>();
+    public synchronized Set<String> getNames() {
+        Set<String> names = namesQueryCache.computeIfAbsent("getNames", x -> new TreeSet<>());
+        if (!names.isEmpty()) {
+            return names;
+        }
         try {
             QueryBuilder<CardInfo, Object> qb = cardsDao.queryBuilder();
             qb.distinct().selectColumns("name", "modalDoubleFacedSecondSideName", "secondSideName", "flipCardName", "spellOptionCardName");
@@ -172,8 +178,11 @@ public enum CardRepository {
         return names;
     }
 
-    public Set<String> getNonLandNames() {
-        Set<String> names = new TreeSet<>();
+    public synchronized Set<String> getNonLandNames() {
+        Set<String> names = namesQueryCache.computeIfAbsent("getNonLandNames", x -> new TreeSet<>());
+        if (!names.isEmpty()) {
+            return names;
+        }
         try {
             QueryBuilder<CardInfo, Object> qb = cardsDao.queryBuilder();
             qb.distinct().selectColumns("name", "modalDoubleFacedSecondSideName", "secondSideName", "flipCardName", "spellOptionCardName");
@@ -189,8 +198,11 @@ public enum CardRepository {
         return names;
     }
 
-    public Set<String> getNonbasicLandNames() {
-        Set<String> names = new TreeSet<>();
+    public synchronized Set<String> getNonbasicLandNames() {
+        Set<String> names = namesQueryCache.computeIfAbsent("getNonbasicLandNames", x -> new TreeSet<>());
+        if (!names.isEmpty()) {
+            return names;
+        }
         try {
             QueryBuilder<CardInfo, Object> qb = cardsDao.queryBuilder();
             qb.distinct().selectColumns("name", "modalDoubleFacedSecondSideName", "secondSideName", "flipCardName", "spellOptionCardName");
@@ -210,8 +222,11 @@ public enum CardRepository {
         return names;
     }
 
-    public Set<String> getNotBasicLandNames() {
-        Set<String> names = new TreeSet<>();
+    public synchronized Set<String> getNotBasicLandNames() {
+        Set<String> names = namesQueryCache.computeIfAbsent("getNotBasicLandNames", x -> new TreeSet<>());
+        if (!names.isEmpty()) {
+            return names;
+        }
         try {
             QueryBuilder<CardInfo, Object> qb = cardsDao.queryBuilder();
             qb.distinct().selectColumns("name", "modalDoubleFacedSecondSideName", "secondSideName", "flipCardName", "spellOptionCardName");
@@ -227,8 +242,11 @@ public enum CardRepository {
         return names;
     }
 
-    public Set<String> getCreatureNames() {
-        Set<String> names = new TreeSet<>();
+    public synchronized Set<String> getCreatureNames() {
+        Set<String> names = namesQueryCache.computeIfAbsent("getCreatureNames", x -> new TreeSet<>());
+        if (!names.isEmpty()) {
+            return names;
+        }
         try {
             QueryBuilder<CardInfo, Object> qb = cardsDao.queryBuilder();
             qb.distinct().selectColumns("name", "modalDoubleFacedSecondSideName", "secondSideName", "flipCardName", "spellOptionCardName");
@@ -244,8 +262,11 @@ public enum CardRepository {
         return names;
     }
 
-    public Set<String> getArtifactNames() {
-        Set<String> names = new TreeSet<>();
+    public synchronized Set<String> getArtifactNames() {
+        Set<String> names = namesQueryCache.computeIfAbsent("getArtifactNames", x -> new TreeSet<>());
+        if (!names.isEmpty()) {
+            return names;
+        }
         try {
             QueryBuilder<CardInfo, Object> qb = cardsDao.queryBuilder();
             qb.distinct().selectColumns("name", "modalDoubleFacedSecondSideName", "secondSideName", "flipCardName", "spellOptionCardName");
@@ -261,8 +282,11 @@ public enum CardRepository {
         return names;
     }
 
-    public Set<String> getNonLandAndNonCreatureNames() {
-        Set<String> names = new TreeSet<>();
+    public synchronized Set<String> getNonLandAndNonCreatureNames() {
+        Set<String> names = namesQueryCache.computeIfAbsent("getNonLandAndNonCreatureNames", x -> new TreeSet<>());
+        if (!names.isEmpty()) {
+            return names;
+        }
         try {
             QueryBuilder<CardInfo, Object> qb = cardsDao.queryBuilder();
             qb.distinct().selectColumns("name", "modalDoubleFacedSecondSideName", "secondSideName", "flipCardName", "spellOptionCardName");
@@ -282,8 +306,11 @@ public enum CardRepository {
         return names;
     }
 
-    public Set<String> getNonArtifactAndNonLandNames() {
-        Set<String> names = new TreeSet<>();
+    public synchronized Set<String> getNonArtifactAndNonLandNames() {
+        Set<String> names = namesQueryCache.computeIfAbsent("getNonArtifactAndNonLandNames", x -> new TreeSet<>());
+        if (!names.isEmpty()) {
+            return names;
+        }
         try {
             QueryBuilder<CardInfo, Object> qb = cardsDao.queryBuilder();
             qb.distinct().selectColumns("name", "modalDoubleFacedSecondSideName", "secondSideName", "flipCardName", "spellOptionCardName");

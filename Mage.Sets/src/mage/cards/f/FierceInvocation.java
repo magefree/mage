@@ -17,6 +17,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  *
@@ -64,7 +65,7 @@ class FierceInvocationEffect extends OneShotEffect {
             Card card = controller.getLibrary().getFromTop(game);
             if (card != null) {
                 new ManifestEffect(1).apply(game, source);
-                Permanent permanent = game.getPermanent(card.getId());
+                Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
                 if (permanent != null) {
                     Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(2));
                     effect.setTargetPointer(new FixedTarget(permanent, game));

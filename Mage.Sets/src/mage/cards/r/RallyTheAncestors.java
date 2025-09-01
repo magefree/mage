@@ -81,7 +81,7 @@ class RallyTheAncestorsEffect extends OneShotEffect {
             List<Permanent> toExile = new ArrayList<>(cards.size());
             for (Card card : cards) {
                 if (card != null) {
-                    Permanent permanent = game.getPermanent(card.getId());
+                    Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
                     if (permanent != null) {
                         toExile.add(permanent);
                     }

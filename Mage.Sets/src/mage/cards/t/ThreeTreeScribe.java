@@ -75,7 +75,12 @@ class ThreeTreeScribeTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         Permanent permanent = zEvent.getTarget();
-        return (permanent != null || !permanent.isControlledBy(getControllerId()))
-                && (permanent.getId().equals(getSourceId()) || permanent.isCreature(game));
+        if (permanent == null) {
+            return false;
+        }
+        if (permanent.getId().equals(getSourceId())) {
+            return true; // {this} or another
+        }
+        return permanent.isCreature(game) && permanent.isControlledBy(getControllerId());
     }
 }

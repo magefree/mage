@@ -1,9 +1,7 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
+import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
@@ -21,8 +19,9 @@ import mage.filter.StaticFilters;
 import mage.game.command.emblems.ArlinnEmbracedByTheMoonEmblem;
 import mage.target.common.TargetAnyTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class ArlinnEmbracedByTheMoon extends CardImpl {
@@ -37,12 +36,14 @@ public final class ArlinnEmbracedByTheMoon extends CardImpl {
         this.nightCard = true;
 
         // +1: Creatures you control get +1/+1 and gain trample until end of turn.
-        Effect effect = new BoostControlledEffect(1, 1, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE);
-        effect.setText("Creatures you control get +1/+1");
-        LoyaltyAbility ability = new LoyaltyAbility(effect, 1);
-        effect = new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE);
-        effect.setText("and gain trample until end of turn");
-        ability.addEffect(effect);
+        Ability ability = new LoyaltyAbility(new BoostControlledEffect(
+                1, 1, Duration.EndOfTurn,
+                StaticFilters.FILTER_PERMANENT_CREATURE
+        ).setText("Creatures you control get +1/+1"), 1);
+        ability.addEffect(new GainAbilityControlledEffect(
+                TrampleAbility.getInstance(), Duration.EndOfTurn,
+                StaticFilters.FILTER_PERMANENT_CREATURE
+        ).setText("and gain trample until end of turn"));
         this.addAbility(ability);
 
         // -1: Arlinn, Embraced by the Moon deals 3 damage to any target. Transform Arlinn, Embraced by the Moon.

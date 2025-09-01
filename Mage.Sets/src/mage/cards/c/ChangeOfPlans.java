@@ -1,16 +1,14 @@
 package mage.cards.c;
 
-import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.keyword.ConniveSourceEffect;
+import mage.abilities.effects.keyword.ConniveTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.PermanentIdPredicate;
+import mage.filter.predicate.permanent.PermanentReferenceInCollectionPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -32,6 +30,7 @@ public final class ChangeOfPlans extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{1}{U}");
 
         // Each of X target creatures you control connive. You may have any number of them phase out.
+        this.getSpellAbility().addEffect(new ConniveTargetEffect().setText("each of X target creatures you control connive"));
         this.getSpellAbility().addEffect(new ChangeOfPlansEffect());
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
@@ -51,7 +50,7 @@ class ChangeOfPlansEffect extends OneShotEffect {
 
     ChangeOfPlansEffect() {
         super(Outcome.Benefit);
-        staticText = "each of X target creatures you control connive. You may have any number of them phase out";
+        staticText = "You may have any number of them phase out";
     }
 
     private ChangeOfPlansEffect(final ChangeOfPlansEffect effect) {
@@ -75,21 +74,12 @@ class ChangeOfPlansEffect extends OneShotEffect {
         if (permanents.isEmpty()) {
             return false;
         }
-        for (Permanent permanent : permanents) {
-            ConniveSourceEffect.connive(permanent, 1, source, game);
-        }
         Player player = game.getPlayer(source.getControllerId());
         if (player == null) {
             return true;
         }
         FilterPermanent filter = new FilterPermanent("creatures");
-        filter.add(Predicates.or(
-                permanents
-                        .stream()
-                        .map(MageItem::getId)
-                        .map(PermanentIdPredicate::new)
-                        .collect(Collectors.toSet())
-        ));
+        filter.add(new PermanentReferenceInCollectionPredicate(permanents, game));
         TargetPermanent target = new TargetPermanent(0, Integer.MAX_VALUE, filter, true);
         player.choose(outcome, target.withChooseHint("to phase out"), source, game);
         for (UUID targetId : target.getTargets()) {

@@ -109,7 +109,7 @@ class UginTheIneffableEffect extends OneShotEffect {
         }
 
         // exile and look
-        UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+        UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getStackMomentSourceZCC());
         CardUtil.moveCardsToExileFaceDown(game, source, player, card, exileZoneId, sourceObject.getIdName() + " (" + player.getName() + ")", true);
         // create token
         Set<MageObjectReference> tokenObjs = new HashSet<>();

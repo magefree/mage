@@ -189,27 +189,21 @@ class OublietteTarget extends TargetSacrifice {
     }
 
     @Override
-    public boolean canTarget(UUID playerId, UUID id, Ability ability, Game game) {
-        if (!super.canTarget(playerId, id, ability, game)) {
-            return false;
-        }
-        Permanent permanent = game.getPermanent(id);
-        if (permanent == null) {
-            return false;
-        }
-        if (this.getTargets().isEmpty()) {
-            return true;
-        }
-        Cards cards = new CardsImpl(this.getTargets());
-        cards.add(permanent);
-        return cardTypeAssigner.getRoleCount(cards, game) >= cards.size();
-    }
-
-
-    @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = super.possibleTargets(sourceControllerId, source, game);
-        possibleTargets.removeIf(uuid -> !this.canTarget(sourceControllerId, uuid, null, game));
+
+        // only valid roles
+        Cards existingTargets = new CardsImpl(this.getTargets());
+        possibleTargets.removeIf(id -> {
+            Permanent permanent = game.getPermanent(id);
+            if (permanent == null) {
+                return true;
+            }
+            Cards newTargets = existingTargets.copy();
+            newTargets.add(permanent);
+            return cardTypeAssigner.getRoleCount(newTargets, game) < newTargets.size();
+        });
+
         return possibleTargets;
     }
 

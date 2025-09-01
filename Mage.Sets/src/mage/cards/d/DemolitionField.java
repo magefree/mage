@@ -1,7 +1,5 @@
 package mage.cards.d;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -17,19 +15,21 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
+import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetLandPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author weirddan455
  */
 public final class DemolitionField extends CardImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("nonbasic land an opponent controls");
+    private static final FilterPermanent filter = new FilterLandPermanent("nonbasic land an opponent controls");
 
     static {
         filter.add(TargetController.OPPONENT.getControllerPredicate());
@@ -56,7 +56,7 @@ public final class DemolitionField extends CardImpl {
                 new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND_A),
                 false, false, true
         ));
-        ability.addTarget(new TargetLandPermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

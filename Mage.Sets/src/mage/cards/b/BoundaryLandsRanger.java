@@ -1,13 +1,12 @@
 package mage.cards.b;
 
 import mage.MageInt;
-import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.common.FerociousCondition;
 import mage.abilities.costs.common.DiscardCardCost;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.hint.common.FerociousHint;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -29,14 +28,9 @@ public final class BoundaryLandsRanger extends CardImpl {
         this.toughness = new MageInt(2);
 
         // At the beginning of combat on your turn, if you control a creature with power 4 or greater, you may discard a card. If you do, draw a card.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfCombatTriggeredAbility(
-                        new DoIfCostPaid(
-                                new DrawCardSourceControllerEffect(1), new DiscardCardCost()
-                        )
-                ), FerociousCondition.instance, "At the beginning of combat on your turn, if you control " +
-                "a creature with power 4 or greater, you may discard a card. If you do, draw a card."
-        ).addHint(FerociousHint.instance));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(new DoIfCostPaid(
+                new DrawCardSourceControllerEffect(1), new DiscardCardCost()
+        )).withInterveningIf(FerociousCondition.instance).addHint(FerociousHint.instance));
     }
 
     private BoundaryLandsRanger(final BoundaryLandsRanger card) {

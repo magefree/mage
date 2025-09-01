@@ -1,7 +1,6 @@
 package mage.cards.t;
 
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.abilityword.StriveAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -11,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -36,8 +34,7 @@ public final class Twinflame extends CardImpl {
 
         // Choose any number of target creatures you control. For each of them, create a token that's a copy of that creature, except it has haste. Exile them at the beginning of the next end step.
         this.getSpellAbility().addEffect(new TwinflameCopyEffect());
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, new FilterControlledCreaturePermanent(), false));
-
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE));
     }
 
     private Twinflame(final Twinflame card) {
@@ -69,23 +66,22 @@ class TwinflameCopyEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            List<Permanent> toExile = new ArrayList<>();
-            for (UUID creatureId : this.getTargetPointer().getTargets(game, source)) {
-                Permanent creature = game.getPermanentOrLKIBattlefield(creatureId);
-                if (creature != null) {
-                    CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(source.getControllerId(), null, true);
-                    effect.setTargetPointer(new FixedTarget(creature, game));
-                    effect.apply(game, source);
-                    toExile.addAll(effect.getAddedPermanents());
-                }
-            }
-            ExileTargetEffect exileEffect = new ExileTargetEffect();
-            exileEffect.setTargetPointer(new FixedTargets(toExile, game));
-            DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
-            game.addDelayedTriggeredAbility(delayedAbility, source);
-            return true;
+        if (controller == null) {
+            return false;
         }
-        return false;
+        List<Permanent> toExile = new ArrayList<>();
+        for (UUID creatureId : this.getTargetPointer().getTargets(game, source)) {
+            Permanent creature = game.getPermanentOrLKIBattlefield(creatureId);
+            if (creature != null) {
+                CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(source.getControllerId(), null, true);
+                effect.setTargetPointer(new FixedTarget(creature, game));
+                effect.apply(game, source);
+                toExile.addAll(effect.getAddedPermanents());
+            }
+        }
+        game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
+                new ExileTargetEffect().setTargetPointer(new FixedTargets(toExile, game))
+        ), source);
+        return true;
     }
 }

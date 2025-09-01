@@ -1,7 +1,5 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.effects.Effect;
@@ -12,20 +10,22 @@ import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.other.AnotherTargetPredicate;
+import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.turn.TurnMod;
-import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetAnyTarget;
 import mage.target.targetpointer.SecondTargetPointer;
 
+import java.util.Optional;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class RalZarek extends CardImpl {
@@ -64,7 +64,6 @@ public final class RalZarek extends CardImpl {
 
         // -7: Flip five coins. Take an extra turn after this one for each coin that comes up heads.
         this.addAbility(new LoyaltyAbility(new RalZarekExtraTurnsEffect(), -7));
-
     }
 
     private RalZarek(final RalZarek card) {
@@ -95,15 +94,19 @@ class RalZarekExtraTurnsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            for (int i = 0; i < 5; i++) {
-                if (controller.flipCoin(source, game, false)) {
-                    game.getState().getTurnMods().add(new TurnMod(source.getControllerId()).withExtraTurn());
-                }
-            }
-            return true;
+        int amount = Optional
+                .ofNullable(source)
+                .map(Controllable::getControllerId)
+                .map(game::getPlayer)
+                .map(player -> player
+                        .flipCoins(source, game, 5, true)
+                        .stream()
+                        .mapToInt(x -> x ? 1 : 0)
+                        .sum()
+                ).orElse(0);
+        for (int i = 0; i < amount; i++) {
+            game.getState().getTurnMods().add(new TurnMod(source.getControllerId()).withExtraTurn());
         }
-        return false;
+        return true;
     }
 }

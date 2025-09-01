@@ -11,8 +11,8 @@ import mage.filter.predicate.other.AnotherTargetPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 import java.util.List;
 import java.util.Objects;
@@ -35,7 +35,7 @@ public final class BetrayalAtTheVault extends CardImpl {
         // Target creature you control deals damage equal to its power to each of two other target creatures.
         this.getSpellAbility().addEffect(new BetrayalAtTheVaultEffect());
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent().setTargetTag(1));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(2, 2, filter, false).setTargetTag(2));
+        this.getSpellAbility().addTarget(new TargetPermanent(2, filter).setTargetTag(2));
     }
 
     private BetrayalAtTheVault(final BetrayalAtTheVault card) {

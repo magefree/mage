@@ -1,10 +1,8 @@
 
 package mage.cards.y;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DoIfCostPaid;
@@ -13,19 +11,18 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.SuperType;
-import mage.constants.TargetController;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -33,7 +30,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class YasovaDragonclaw extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls with power less than Yasova Dragonclaw's power");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls with power less than {this}'s power");
 
     static {
         filter.add(new YasovaDragonclawPowerLessThanSourcePredicate());
@@ -57,7 +54,7 @@ public final class YasovaDragonclaw extends CardImpl {
         effect.addEffect(effect2);
         effect.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn, ", and it gains haste until end of turn"));
         Ability ability = new BeginningOfCombatTriggeredAbility(effect);
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 
@@ -81,6 +78,6 @@ class YasovaDragonclawPowerLessThanSourcePredicate implements ObjectSourcePlayer
 
     @Override
     public String toString() {
-        return "power less than Yasova Dragonclaw's power";
+        return "power less than {this}'s power";
     }
 }

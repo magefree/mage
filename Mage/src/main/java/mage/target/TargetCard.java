@@ -1,6 +1,5 @@
 package mage.target;
 
-import mage.MageItem;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.cards.Cards;
@@ -50,190 +49,139 @@ public class TargetCard extends TargetObject {
         return this.filter;
     }
 
-    /**
-     * Checks if there are enough {@link Card cards} in the appropriate zone that the player can choose from among them
-     * or if they are autochosen since there are fewer than the minimum number.
-     *
-     * @param sourceControllerId - controller of the target event source
-     * @param source
-     * @param game
-     * @return - true if enough valid {@link Card} exist
-     */
     @Override
-    public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
-        UUID sourceId = source != null ? source.getSourceId() : null;
-        int possibleTargets = 0;
-        if (getNumberOfTargets() == 0) { // if 0 target is valid, the canChoose is always true
-            return true;
-        }
-        for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                if (this.minNumberOfTargets == 0) {
-                    return true;
-                }
-                switch (zone) {
-                    case HAND:
-                        for (Card card : player.getHand().getCards(filter, sourceControllerId, source, game)) {
-                            if (sourceId == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
-                                possibleTargets++;
-                                if (possibleTargets >= this.minNumberOfTargets) {
-                                    return true;
-                                }
-                            }
-                        }
-                        break;
-                    case GRAVEYARD:
-                        for (Card card : player.getGraveyard().getCards(filter, sourceControllerId, source, game)) {
-                            if (sourceId == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
-                                possibleTargets++;
-                                if (possibleTargets >= this.minNumberOfTargets) {
-                                    return true;
-                                }
-                            }
-                        }
-                        break;
-                    case LIBRARY:
-                        for (Card card : player.getLibrary().getUniqueCards(game)) {
-                            if (sourceId == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
-                                if (filter.match(card, game)) {
-                                    possibleTargets++;
-                                    if (possibleTargets >= this.minNumberOfTargets) {
-                                        return true;
-                                    }
-                                }
-                            }
-                        }
-                        break;
-                    case EXILED:
-                        for (Card card : game.getExile().getPermanentExile().getCards(game)) {
-                            if (sourceId == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
-                                if (filter.match(card, player.getId(), game)) {
-                                    possibleTargets++;
-                                    if (possibleTargets >= this.minNumberOfTargets) {
-                                        return true;
-                                    }
-                                }
-                            }
-                        }
-                        break;
-                    case COMMAND:
-                        List<Card> possibleCards = game.getCommandersIds(player, CommanderCardType.ANY, false).stream()
-                                .map(game::getCard)
-                                .filter(Objects::nonNull)
-                                .filter(card -> game.getState().getZone(card.getId()).equals(Zone.COMMAND))
-                                .filter(card -> filter.match(card, sourceControllerId, source, game))
-                                .collect(Collectors.toList());
-                        for (Card card : possibleCards) {
-                            if (sourceId == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
-                                possibleTargets++;
-                                if (possibleTargets >= this.minNumberOfTargets) {
-                                    return true;
-                                }
-                            }
-                        }
-                        break;
-                }
-            }
-        }
-        return false;
+    public TargetCard withNotTarget(boolean notTarget) {
+        super.withNotTarget(notTarget);
+        return this;
     }
 
-    /**
-     * Checks if there are enough {@link Card} that can be selected.
-     *
-     * @param sourceControllerId - controller of the select event
-     * @param game
-     * @return - true if enough valid {@link Card} exist
-     */
     @Override
-    public boolean canChoose(UUID sourceControllerId, Game game) {
-        return canChoose(sourceControllerId, null, game);
+    public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
+        return canChooseFromPossibleTargets(sourceControllerId, source, game);
     }
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
-        UUID sourceId = source != null ? source.getSourceId() : null;
         for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 switch (zone) {
                     case HAND:
-                        for (Card card : player.getHand().getCards(filter, sourceControllerId, source, game)) {
-                            // TODO: Why for sourceId == null?
-                            if (sourceId == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
-                                possibleTargets.add(card.getId());
-                            }
-                        }
+                        possibleTargets.addAll(getAllPossibleTargetInHand(game, player, sourceControllerId, source, filter, isNotTarget()));
                         break;
                     case GRAVEYARD:
-                        for (Card card : player.getGraveyard().getCards(filter, sourceControllerId, source, game)) {
-                            if (sourceId == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
-                                possibleTargets.add(card.getId());
-                            }
-                        }
+                        possibleTargets.addAll(getAllPossibleTargetInGraveyard(game, player, sourceControllerId, source, filter, isNotTarget()));
                         break;
                     case LIBRARY:
-                        for (Card card : player.getLibrary().getUniqueCards(game)) {
-                            if (sourceId == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
-                                if (filter.match(card, sourceControllerId, source, game)) {
-                                    possibleTargets.add(card.getId());
-                                }
-                            }
-                        }
+                        possibleTargets.addAll(getAllPossibleTargetInLibrary(game, player, sourceControllerId, source, filter, isNotTarget()));
                         break;
                     case EXILED:
-                        for (Card card : game.getExile().getPermanentExile().getCards(game)) {
-                            if (sourceId == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
-                                if (filter.match(card, sourceControllerId, source, game)) {
-                                    possibleTargets.add(card.getId());
-                                }
-                            }
-                        }
+                        possibleTargets.addAll(getAllPossibleTargetInExile(game, player, sourceControllerId, source, filter, isNotTarget()));
                         break;
                     case COMMAND:
-                        List<Card> possibleCards = game.getCommandersIds(player, CommanderCardType.ANY, false).stream()
-                                .map(game::getCard)
-                                .filter(Objects::nonNull)
-                                .filter(card -> game.getState().getZone(card.getId()).equals(Zone.COMMAND))
-                                .filter(card -> filter.match(card, sourceControllerId, source, game))
-                                .collect(Collectors.toList());
-                        for (Card card : possibleCards) {
-                            if (sourceId == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
-                                possibleTargets.add(card.getId());
-                            }
-                        }
+                        possibleTargets.addAll(getAllPossibleTargetInCommandZone(game, player, sourceControllerId, source, filter, isNotTarget()));
                         break;
+                    case ALL:
+                        possibleTargets.addAll(getAllPossibleTargetInAnyZone(game, player, sourceControllerId, source, filter, isNotTarget()));
+                        break;
+                    default:
+                        throw new IllegalArgumentException("Unsupported TargetCard zone: " + zone);
                 }
+            }
+        }
+        return keepValidPossibleTargets(possibleTargets, sourceControllerId, source, game);
+    }
+
+    /**
+     * set of all matching target in a player's hand
+     */
+    protected static Set<UUID> getAllPossibleTargetInHand(Game game, Player player, UUID sourceControllerId, Ability source, FilterCard filter, boolean isNotTarget) {
+        Set<UUID> possibleTargets = new HashSet<>();
+        for (Card card : player.getHand().getCards(filter, sourceControllerId, source, game)) {
+            possibleTargets.add(card.getId());
+        }
+        return possibleTargets;
+    }
+
+    /**
+     * set of all matching target in a player's hand
+     */
+    protected static Set<UUID> getAllPossibleTargetInGraveyard(Game game, Player player, UUID sourceControllerId, Ability source, FilterCard filter, boolean isNotTarget) {
+        Set<UUID> possibleTargets = new HashSet<>();
+        for (Card card : player.getGraveyard().getCards(filter, sourceControllerId, source, game)) {
+            possibleTargets.add(card.getId());
+        }
+        return possibleTargets;
+    }
+
+    /**
+     * set of all matching target in a player's hand
+     */
+    protected static Set<UUID> getAllPossibleTargetInLibrary(Game game, Player player, UUID sourceControllerId, Ability source, FilterCard filter, boolean isNotTarget) {
+        Set<UUID> possibleTargets = new HashSet<>();
+        for (Card card : player.getLibrary().getUniqueCards(game)) {
+            if (filter.match(card, sourceControllerId, source, game)) {
+                possibleTargets.add(card.getId());
             }
         }
         return possibleTargets;
     }
 
-    public Set<UUID> possibleTargets(UUID sourceControllerId, Cards cards, Ability source, Game game) {
-        return cards.getCards(filter, sourceControllerId, source, game).stream().map(MageItem::getId).collect(Collectors.toSet());
+    /**
+     * set of all matching target for a player in exile
+     */
+    protected static Set<UUID> getAllPossibleTargetInExile(Game game, Player player, UUID sourceControllerId, Ability source, FilterCard filter, boolean isNotTarget) {
+        Set<UUID> possibleTargets = new HashSet<>();
+        UUID sourceId = source != null ? source.getSourceId() : null;
+        for (Card card : game.getExile().getAllCardsByRange(game, sourceControllerId)) {
+            if (filter.match(card, sourceControllerId, source, game)) {
+                possibleTargets.add(card.getId());
+            }
+        }
+        return possibleTargets;
+    }
+
+    /**
+     * set of all matching target in a player's command zone
+     */
+    protected static Set<UUID> getAllPossibleTargetInCommandZone(Game game, Player player, UUID sourceControllerId, Ability source, FilterCard filter, boolean isNotTarget) {
+        Set<UUID> possibleTargets = new HashSet<>();
+        UUID sourceId = source != null ? source.getSourceId() : null;
+        List<Card> possibleCards = game.getCommandersIds(player, CommanderCardType.ANY, false).stream()
+                .map(game::getCard)
+                .filter(Objects::nonNull)
+                .filter(card -> game.getState().getZone(card.getId()).equals(Zone.COMMAND))
+                .filter(card -> filter.match(card, sourceControllerId, source, game))
+                .collect(Collectors.toList());
+        for (Card card : possibleCards) {
+            if (sourceId == null || isNotTarget || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
+                possibleTargets.add(card.getId());
+            }
+        }
+        return possibleTargets;
+    }
+
+    /**
+     * set of all matching target in ANY zone
+     */
+    protected static Set<UUID> getAllPossibleTargetInAnyZone(Game game, Player player, UUID sourceControllerId, Ability source, FilterCard filter, boolean isNotTarget) {
+        Set<UUID> possibleTargets = new HashSet<>();
+        for (Card card : game.getCards()) {
+            if (filter.match(card, sourceControllerId, source, game)) {
+                possibleTargets.add(card.getId());
+            }
+        }
+        return possibleTargets;
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
-        return possibleTargets(sourceControllerId, (Ability) null, game);
-    }
-
-    // TODO: check all class targets, if it override canTarget then make sure it override ALL 3 METHODS with canTarget and possibleTargets (method with cards doesn't need)
-
-    @Override
-    public boolean canTarget(UUID id, Game game) {
+    public boolean canTarget(UUID id, Ability source, Game game) {
         // copy-pasted from super but with card instead object
         Card card = game.getCard(id);
         return card != null
                 && zone != null && zone.match(game.getState().getZone(id))
                 && getFilter() != null && getFilter().match(card, game);
-    }
-
-    @Override
-    public boolean canTarget(UUID id, Ability source, Game game) {
-        return canTarget(id, game);
     }
 
     @Override

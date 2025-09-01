@@ -1,18 +1,19 @@
 package mage.cards.e;
 
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.SourceHasCounterCondition;
+import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.RemoveAllCountersSourceEffect;
+import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.EdgarMarkovsCoffinVampireToken;
 
 import java.util.UUID;
@@ -21,6 +22,8 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class EdgarMarkovsCoffin extends CardImpl {
+
+    private static final Condition condition = new SourceHasCounterCondition(CounterType.BLOODLINE, 3);
 
     public EdgarMarkovsCoffin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "");
@@ -31,13 +34,12 @@ public final class EdgarMarkovsCoffin extends CardImpl {
         this.nightCard = true;
 
         // At the beginning of your upkeep, create a 1/1 white and black Vampire creature token with lifelink and put a bloodline counter on Edgar Markov's Coffin. Then if there are three or more bloodline counters on it, remove those counters and transform it.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new CreateTokenEffect(new EdgarMarkovsCoffinVampireToken())
-        );
-        ability.addEffect(new AddCountersSourceEffect(
-                CounterType.BLOODLINE.createInstance()
-        ).concatBy("and"));
-        ability.addEffect(new EdgarMarkovsCoffinEffect());
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new EdgarMarkovsCoffinVampireToken()));
+        ability.addEffect(new AddCountersSourceEffect(CounterType.BLOODLINE.createInstance()).concatBy("and"));
+        ability.addEffect(new ConditionalOneShotEffect(
+                new RemoveAllCountersSourceEffect(CounterType.BLOODLINE), condition,
+                "Then if there are three or more bloodline counters on it, remove those counters and transform it"
+        ).addEffect(new TransformSourceEffect()));
         this.addAbility(ability);
     }
 
@@ -48,37 +50,5 @@ public final class EdgarMarkovsCoffin extends CardImpl {
     @Override
     public EdgarMarkovsCoffin copy() {
         return new EdgarMarkovsCoffin(this);
-    }
-}
-
-class EdgarMarkovsCoffinEffect extends OneShotEffect {
-
-    EdgarMarkovsCoffinEffect() {
-        super(Outcome.Benefit);
-        staticText = "Then if there are three or more bloodline counters on it, remove those counters and transform it";
-    }
-
-    private EdgarMarkovsCoffinEffect(final EdgarMarkovsCoffinEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public EdgarMarkovsCoffinEffect copy() {
-        return new EdgarMarkovsCoffinEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-        if (permanent == null) {
-            return false;
-        }
-        int counters = permanent.getCounters(game).getCount(CounterType.BLOODLINE);
-        if (counters < 3) {
-            return false;
-        }
-        permanent.removeCounters(CounterType.BLOODLINE.createInstance(counters), source, game);
-        permanent.transform(source, game);
-        return true;
     }
 }

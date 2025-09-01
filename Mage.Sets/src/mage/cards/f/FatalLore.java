@@ -98,7 +98,7 @@ class FatalLoreEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        int toDraw = player.getAmount(0, 3, "Choose how many cards to draw", game);
+        int toDraw = player.getAmount(0, 3, "Choose how many cards to draw", source, game);
         return player.drawCards(toDraw, source, game) > 0;
     }
 }

@@ -6,10 +6,12 @@ import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.SpellAbilityType;
-import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL;
 
 /**
  * @author dustinconrad
@@ -21,13 +23,13 @@ public final class DeadGone extends SplitCard {
 
         // Dead
         // Dead deals 2 damage to target creature.
-        getLeftHalfCard().getSpellAbility().addEffect(new DamageTargetEffect(2, "Dead"));
+        getLeftHalfCard().getSpellAbility().addEffect(new DamageTargetEffect(2));
         getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Gone
         // Return target creature you don't control to its owner's hand.
         getRightHalfCard().getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        getRightHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
+        getRightHalfCard().getSpellAbility().addTarget(new TargetPermanent(FILTER_CREATURE_YOU_DONT_CONTROL));
     }
 
     private DeadGone(final DeadGone card) {

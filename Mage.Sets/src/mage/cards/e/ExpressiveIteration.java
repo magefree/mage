@@ -88,7 +88,7 @@ class ExpressiveIterationEffect extends OneShotEffect {
         player.choose(outcome, cards, target, source, game);
         card = game.getCard(target.getFirstTarget());
         if (card != null) {
-            player.putCardsOnBottomOfLibrary(card, game, source, false);
+            player.putCardsOnBottomOfLibrary(card, game, source);
             cards.remove(card);
         }
         if (cards.isEmpty()) {

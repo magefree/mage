@@ -76,17 +76,41 @@ public class TargetCardInLibrary extends TargetCard {
         Cards cardsId = new CardsImpl();
         cards.forEach(cardsId::add);
 
-        chosen = targets.size() >= getMinNumberOfTargets();
+        UUID abilityControllerId = this.getAffectedAbilityControllerId(playerId);
+
+        chosen = false;
         do {
+            int prevTargetsCount = this.getTargets().size();
+
+            // stop by disconnect
             if (!player.canRespond()) {
-                return chosen;
+                break;
             }
+
+            // stop by cancel/done
+            // TODO: need research - why it used chooseTarget instead choose? Need random and other options?
+            //  someday must be replaced by player.choose (require whole tests fix from addTarget to setChoice)
             if (!player.chooseTarget(outcome, cardsId, this, source, game)) {
                 return chosen;
             }
-            chosen = targets.size() >= getMinNumberOfTargets();
-        } while (!isChosen(game) && !doneChoosing(game));
-        return chosen;
+
+            chosen = isChosen(game);
+
+            // stop by full complete
+            if (isChoiceCompleted(abilityControllerId, source, game, null)) {
+                break;
+            }
+
+            // stop by nothing to use (actual for human and done button)
+            if (prevTargetsCount == this.getTargets().size()) {
+                break;
+            }
+
+            // can select next target
+        } while (true);
+
+        chosen = isChosen(game);
+        return this.getTargets().size() > 0;
     }
 
     @Override

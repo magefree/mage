@@ -5,7 +5,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.DrawCardControllerTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.DescendCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
@@ -38,13 +37,8 @@ public final class StarvingRevenant extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new StarvingRevenantEffect()));
 
         // Descend 8 -- Whenever you draw a card, if there are eight or more permanent cards in your graveyard, target opponent loses 1 life and you gain 1 life.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new DrawCardControllerTriggeredAbility(new LoseLifeTargetEffect(1), false),
-                DescendCondition.EIGHT, "Whenever you draw a card, "
-                + "if there are eight or more permanent cards in your graveyard, "
-                + "target opponent loses 1 life and you gain 1 life."
-        );
-        ability.addEffect(new GainLifeEffect(1));
+        Ability ability = new DrawCardControllerTriggeredAbility(new LoseLifeTargetEffect(1), false).withInterveningIf(DescendCondition.EIGHT);
+        ability.addEffect(new GainLifeEffect(1).concatBy("and"));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability.addHint(DescendCondition.getHint()).setAbilityWord(AbilityWord.DESCEND_8));
     }

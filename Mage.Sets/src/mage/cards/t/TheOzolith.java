@@ -1,11 +1,10 @@
 package mage.cards.t;
 
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldAllTriggeredAbility;
 import mage.abilities.condition.common.SourceHasCountersCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -36,12 +35,9 @@ public final class TheOzolith extends CardImpl {
         this.addAbility(new TheOzolithTriggeredAbility());
 
         // At the beginning of combat on your turn, if The Ozolith has counters on it, you may move all counters from The Ozolith onto target creature.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfCombatTriggeredAbility(
-                        new TheOzolithMoveCountersEffect(), true
-                ), SourceHasCountersCondition.instance, "At the beginning of combat on your turn, " +
-                "if {this} has counters on it, you may move all counters from {this} onto target creature."
-        );
+        Ability ability = new BeginningOfCombatTriggeredAbility(
+                new TheOzolithMoveCountersEffect(), true
+        ).withInterveningIf(SourceHasCountersCondition.instance);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
@@ -126,6 +122,7 @@ class TheOzolithMoveCountersEffect extends OneShotEffect {
 
     TheOzolithMoveCountersEffect() {
         super(Outcome.Benefit);
+        staticText = "you may move all counters from {this} onto target creature";
     }
 
     private TheOzolithMoveCountersEffect(final TheOzolithMoveCountersEffect effect) {

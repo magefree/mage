@@ -86,7 +86,7 @@ class KnowledgePoolExileThreeCardsEffect extends OneShotEffect {
                     source,
                     game,
                     true,
-                    CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()),
+                    CardUtil.getExileZoneId(game, source.getSourceId(), source.getStackMomentSourceZCC()),
                     sourceObject.getIdName() + " (" + sourceObject.getZoneChangeCounter(game) + ')'
             );
         }

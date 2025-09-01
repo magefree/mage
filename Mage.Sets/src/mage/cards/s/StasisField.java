@@ -4,7 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continuous.SetBasePowerToughnessEnchantedEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessAttachedEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
@@ -36,7 +36,7 @@ public final class StasisField extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted creature has base power and toughness 0/2, has defender, and loses all other abilities.
-        Ability ability = new SimpleStaticAbility(new SetBasePowerToughnessEnchantedEffect(0, 2));
+        Ability ability = new SimpleStaticAbility(new SetBasePowerToughnessAttachedEffect(0, 2, AttachmentType.AURA));
         ability.addEffect(new StasisFieldEffect());
         this.addAbility(ability);
     }

@@ -45,7 +45,7 @@ public final class Melee extends CardImpl {
         // Cast Melee only during your turn and only during combat before blockers are declared.
         this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(
                 null, null, condition,
-                "Cast this spell only during your turn and only during combat before blockers are declared"
+                "Cast this spell only during combat on your turn before blockers are declared"
         ).addHint(hint));
 
         // You choose which creatures block this combat and how those creatures block.

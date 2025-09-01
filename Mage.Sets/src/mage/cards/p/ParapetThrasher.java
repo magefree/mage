@@ -22,7 +22,7 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.DamagedPlayerControlsTargetAdjuster;
+import mage.target.targetadjustment.ThatPlayerControlsTargetAdjuster;
 
 /**
  *
@@ -49,7 +49,7 @@ public final class ParapetThrasher extends CardImpl {
                 filter, true, true, SetTargetPointer.PLAYER, false)
                 .setTriggerPhrase("Whenever one or more Dragons you control deal combat damage to an opponent, ");
         ability.addTarget(new TargetPermanent(artifactFilter));
-        ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
+        ability.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster());
         ability.setModeTag("destroy artifact");
         ability.getModes().setLimitUsageByOnce(true);
 

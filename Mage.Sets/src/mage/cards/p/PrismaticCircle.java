@@ -1,30 +1,32 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
-import mage.ObjectColor;
-import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ChooseColorEffect;
-import mage.abilities.effects.common.PreventNextDamageFromChosenSourceToYouEffect;
+import mage.abilities.effects.common.PreventNextDamageFromChosenSourceEffect;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.filter.FilterObject;
-import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.game.Game;
+import mage.filter.FilterSource;
+import mage.filter.predicate.mageobject.ChosenColorPredicate;
+
+import java.util.UUID;
 
 /**
- *
  * @author TheElk801
  */
 public final class PrismaticCircle extends CardImpl {
+
+    private static FilterSource filter = new FilterSource("a source of your choice of the chosen color");
+
+    static {
+        filter.add(ChosenColorPredicate.TRUE);
+    }
 
     public PrismaticCircle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
@@ -36,7 +38,10 @@ public final class PrismaticCircle extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral)));
 
         // {1}: The next time a source of your choice of the chosen color would deal damage to you this turn, prevent that damage.
-        this.addAbility(new SimpleActivatedAbility(new PrismaticCircleEffect(), new ManaCostsImpl<>("{1}")));
+        this.addAbility(new SimpleActivatedAbility(
+                new PreventNextDamageFromChosenSourceEffect(Duration.EndOfTurn, true, filter),
+                new ManaCostsImpl<>("{1}")
+        ));
     }
 
     private PrismaticCircle(final PrismaticCircle card) {
@@ -47,29 +52,4 @@ public final class PrismaticCircle extends CardImpl {
     public PrismaticCircle copy() {
         return new PrismaticCircle(this);
     }
-}
-
-class PrismaticCircleEffect extends PreventNextDamageFromChosenSourceToYouEffect {
-
-    PrismaticCircleEffect() {
-        super(Duration.EndOfTurn);
-        staticText = "The next time a source of your choice of the chosen color would deal damage to you this turn, prevent that damage.";
-    }
-
-    @Override
-    public void init(Ability source, Game game) {
-        super.init(source, game);
-        FilterObject filter = targetSource.getFilter();
-        filter.add(new ColorPredicate((ObjectColor) game.getState().getValue(source.getSourceId() + "_color")));
-    }
-
-    private PrismaticCircleEffect(final PrismaticCircleEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public PrismaticCircleEffect copy() {
-        return new PrismaticCircleEffect(this);
-    }
-
 }

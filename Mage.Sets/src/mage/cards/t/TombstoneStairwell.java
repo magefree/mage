@@ -1,22 +1,16 @@
 package mage.cards.t;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -28,8 +22,11 @@ import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class TombstoneStairwell extends CardImpl {
@@ -75,7 +72,6 @@ class TombstoneStairwellCreateTokenEffect extends OneShotEffect {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public boolean apply(Game game, Ability source) {
         Token token = new TombspawnZombieToken();
         Player activePlayer = game.getPlayer(game.getActivePlayerId());
@@ -108,6 +104,7 @@ class TombstoneStairwellTriggeredAbility extends TriggeredAbilityImpl {
 
     TombstoneStairwellTriggeredAbility() {
         super(Zone.BATTLEFIELD, new TombstoneStairwellDestroyEffect(), false);
+        this.setLeavesTheBattlefieldTrigger(true);
     }
 
     private TombstoneStairwellTriggeredAbility(final TombstoneStairwellTriggeredAbility ability) {
@@ -181,7 +178,6 @@ class TombstoneStairwellDestroyEffect extends OneShotEffect {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public boolean apply(Game game, Ability source) {
         Object object = game.getState().getValue(cardZoneString);
         if (object != null) {

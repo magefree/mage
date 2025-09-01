@@ -62,7 +62,7 @@ public final class BladegraftAspirant extends CardImpl {
 
 class BladegraftAspirantCostReductionEffect extends CostModificationEffectImpl {
 
-    private static final String effectText = "Activated abilities of Equipment you control that target Bladegraft Aspirant cost {1} less to activate.";
+    private static final String effectText = "Activated abilities of Equipment you control that target {this} cost {1} less to activate.";
 
     BladegraftAspirantCostReductionEffect() {
         super(Duration.Custom, Outcome.Benefit, CostModificationType.REDUCE_COST);
@@ -96,7 +96,7 @@ class BladegraftAspirantCostReductionEffect extends CostModificationEffectImpl {
 
         Permanent permanent = game.getPermanentOrLKIBattlefield(abilityToModify.getSourceId());
 
-        if (!(permanent != null && permanent.getSubtype(game).contains(SubType.EQUIPMENT) && permanent.isControlledBy(source.getControllerId()))) {
+        if (!(permanent != null && permanent.hasSubtype(SubType.EQUIPMENT, game) && permanent.isControlledBy(source.getControllerId()))) {
             return false;
         }
 

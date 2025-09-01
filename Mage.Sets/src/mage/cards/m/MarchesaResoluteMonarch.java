@@ -3,16 +3,19 @@ package mage.cards.m;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.counter.RemoveAllCountersPermanentTargetEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.MenaceAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.constants.WatcherScope;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.DamagedEvent;
@@ -52,13 +55,9 @@ public final class MarchesaResoluteMonarch extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of your upkeep, if you haven't been dealt combat damage since your last turn, you draw a card and you lose 1 life.
-        ability = new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(
-                        new DrawCardSourceControllerEffect(1), false
-                ), MarchesaResoluteMonarchWatcher::checkPlayer, "At the beginning of your upkeep, " +
-                "if you haven't been dealt combat damage since your last turn, you draw a card and you lose 1 life."
-        );
-        ability.addEffect(new LoseLifeSourceControllerEffect(1));
+        ability = new BeginningOfUpkeepTriggeredAbility(new DrawCardSourceControllerEffect(1, true))
+                .withInterveningIf(MarchesaResoluteMonarchCondition.instance);
+        ability.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
         this.addAbility(ability);
     }
 
@@ -73,6 +72,20 @@ public final class MarchesaResoluteMonarch extends CardImpl {
 
     public static MarchesaResoluteMonarchWatcher makeWatcher() {
         return new MarchesaResoluteMonarchWatcher();
+    }
+}
+
+enum MarchesaResoluteMonarchCondition implements Condition {
+    instance;
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return MarchesaResoluteMonarchWatcher.checkPlayer(game, source);
+    }
+
+    @Override
+    public String toString() {
+        return "you haven't been dealt combat damage since your last turn";
     }
 }
 

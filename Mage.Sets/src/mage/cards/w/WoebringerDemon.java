@@ -55,7 +55,7 @@ class WoebringerDemonEffect extends OneShotEffect {
 
     WoebringerDemonEffect() {
         super(Outcome.Detriment);
-        this.staticText = "that player sacrifices a creature. If the player can't, sacrifice {this}";
+        this.staticText = "that player sacrifices a creature of their choice. If the player can't, sacrifice {this}";
     }
 
     private WoebringerDemonEffect(final WoebringerDemonEffect effect) {
@@ -84,7 +84,7 @@ class WoebringerDemonEffect extends OneShotEffect {
                 }
             }
             Permanent sourceObject = game.getPermanent(source.getSourceId());
-            if (sourceObject != null && sourceObject.getZoneChangeCounter(game) == source.getSourceObjectZoneChangeCounter()) {
+            if (sourceObject != null && sourceObject.getZoneChangeCounter(game) == source.getStackMomentSourceZCC()) {
                 sourceObject.sacrifice(source, game);
             }
             return true;

@@ -3,7 +3,6 @@ package mage.cards.c;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.DisturbAbility;
 import mage.cards.CardImpl;
@@ -27,7 +26,7 @@ public final class CovertCutpurse extends CardImpl {
             = new FilterCreaturePermanent("creature you don't control that was dealt damage this turn");
 
     static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
+        filter.add(TargetController.NOT_YOU.getControllerPredicate());
         filter.add(WasDealtDamageThisTurnPredicate.instance);
     }
 

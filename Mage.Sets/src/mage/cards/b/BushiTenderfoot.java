@@ -11,8 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.WasDealtDamageThisTurnPredicate;
 import mage.game.permanent.token.TokenImpl;
 
 import java.util.UUID;
@@ -21,12 +19,6 @@ import java.util.UUID;
  * @author LevelX
  */
 public final class BushiTenderfoot extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that was dealt damage this turn");
-
-    static {
-        filter.add(WasDealtDamageThisTurnPredicate.instance);
-    }
 
     public BushiTenderfoot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");
@@ -68,6 +60,7 @@ class KenzoTheHardhearted extends TokenImpl {
         this.addAbility(DoubleStrikeAbility.getInstance());
         this.addAbility(new BushidoAbility(2));
     }
+
     private KenzoTheHardhearted(final KenzoTheHardhearted token) {
         super(token);
     }

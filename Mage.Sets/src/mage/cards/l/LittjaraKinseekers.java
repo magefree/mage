@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.common.GreatestSharedCreatureTypeCount;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.keyword.ScryEffect;
@@ -34,14 +33,9 @@ public final class LittjaraKinseekers extends CardImpl {
         this.addAbility(new ChangelingAbility());
 
         // When Littjara Kinseekers enters the battlefield, if you control three or more creatures that share a creature type, put a +1/+1 counter on Littjara Kinseekers, then scry 1.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(
-                        new AddCountersSourceEffect(CounterType.P1P1.createInstance())
-                ), LittjaraKinseekersCondition.instance, "When {this} enters, " +
-                "if you control three or more creatures that share a creature type, " +
-                "put a +1/+1 counter on {this}, then scry 1."
-        );
-        ability.addEffect(new ScryEffect(1));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()))
+                .withInterveningIf(LittjaraKinseekersCondition.instance);
+        ability.addEffect(new ScryEffect(1).concatBy(", then"));
         this.addAbility(ability.addHint(GreatestSharedCreatureTypeCount.getHint()));
     }
 
@@ -61,5 +55,10 @@ enum LittjaraKinseekersCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         return GreatestSharedCreatureTypeCount.instance.calculate(game, source, null) >= 3;
+    }
+
+    @Override
+    public String toString() {
+        return "you control three or more creatures that share a creature type";
     }
 }

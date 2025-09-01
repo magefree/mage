@@ -1,11 +1,10 @@
 package mage.cards.h;
 
 import mage.MageInt;
-import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.common.CovenCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.abilities.hint.common.CovenHint;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -19,7 +18,7 @@ import java.util.UUID;
  */
 public final class HarvesttideSentry extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with power 2 or less");
 
     static {
         filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 3));
@@ -34,13 +33,9 @@ public final class HarvesttideSentry extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Coven — At the beginning of combat on your turn, if you control three or more creatures with different powers, Harvesttide Sentry can't be blocked by creatures with power 2 or less this turn.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfCombatTriggeredAbility(
-                        new CantBeBlockedByCreaturesSourceEffect(filter, Duration.EndOfTurn)
-                ), CovenCondition.instance, "At the beginning of combat on your turn, " +
-                "if you control three or more creatures with different powers, " +
-                "{this} can't be blocked by creatures with power 2 or less this turn."
-        ).addHint(CovenHint.instance).setAbilityWord(AbilityWord.COVEN));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(
+                new CantBeBlockedByCreaturesSourceEffect(filter, Duration.EndOfTurn)
+        ).withInterveningIf(CovenCondition.instance).addHint(CovenHint.instance).setAbilityWord(AbilityWord.COVEN));
     }
 
     private HarvesttideSentry(final HarvesttideSentry card) {

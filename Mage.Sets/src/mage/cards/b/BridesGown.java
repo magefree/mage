@@ -17,12 +17,9 @@ import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterEquipmentPermanent;
-import mage.filter.predicate.ObjectSourcePlayer;
-import mage.filter.predicate.ObjectSourcePlayerPredicate;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.NamePredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.filter.predicate.permanent.AttachedToPredicate;
 
 import java.util.UUID;
 
@@ -31,11 +28,11 @@ import java.util.UUID;
  */
 public final class BridesGown extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterEquipmentPermanent();
+    private static final FilterPermanent filter = new FilterPermanent(SubType.EQUIPMENT, "");
 
     static {
         filter.add(new NamePredicate("Groom's Finery"));
-        filter.add(BridesGownPredicate.instance);
+        filter.add(new AttachedToPredicate(StaticFilters.FILTER_CONTROLLED_CREATURE));
     }
 
     private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter, false);
@@ -73,17 +70,5 @@ public final class BridesGown extends CardImpl {
     @Override
     public BridesGown copy() {
         return new BridesGown(this);
-    }
-}
-
-enum BridesGownPredicate implements ObjectSourcePlayerPredicate<Permanent> {
-    instance;
-
-    @Override
-    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
-        Permanent permanent = game.getPermanent(input.getObject().getAttachedTo());
-        return permanent != null
-                && permanent.isCreature(game)
-                && permanent.isControlledBy(input.getPlayerId());
     }
 }

@@ -4,6 +4,7 @@ package org.mage.test.cards.single.emn;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -77,6 +78,7 @@ public class TamiyoFieldResearcherTest extends CardTestPlayerBase {
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Choose up to two");
         addTarget(playerA, "Bronze Sable");
+        //addTarget(playerA, TestPlayer.TARGET_SKIP); // there are only 1 creature, so choose 1 of 2, no need in skip
 
         attack(1, playerA, "Bronze Sable");
 
@@ -135,6 +137,7 @@ public class TamiyoFieldResearcherTest extends CardTestPlayerBase {
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Choose up to two");
         addTarget(playerA, "Sylvan Advocate");
+        addTarget(playerA, TestPlayer.TARGET_SKIP);
 
         attack(1, playerA, "Sylvan Advocate");
         attack(2, playerB, "Memnite");
@@ -167,6 +170,7 @@ public class TamiyoFieldResearcherTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tamiyo, Field Researcher", true);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Choose up to two");
         addTarget(playerA, "Sylvan Advocate");
+        addTarget(playerA, TestPlayer.TARGET_SKIP);
 
         attack(1, playerA, "Sylvan Advocate");
 
@@ -236,6 +240,7 @@ public class TamiyoFieldResearcherTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tamiyo, Field Researcher", true);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Choose up to two");
         addTarget(playerA, "Bronze Sable");
+        //addTarget(playerA, TestPlayer.TARGET_SKIP); // there are only 1 creature, so choose 1 of 2, no need in skip
 
         attack(2, playerB, "Bronze Sable");
 

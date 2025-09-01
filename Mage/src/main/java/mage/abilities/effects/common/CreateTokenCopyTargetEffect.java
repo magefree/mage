@@ -176,8 +176,8 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         }
 
         // can target card or permanent
-        Card copyFrom;
-        CopyApplier applier = new EmptyCopyApplier();
+        Card copyFrom = null;
+        CopyApplier applier = null;
         if (permanent != null) {
             // handle copies of copies
             Permanent copyFromPermanent = permanent;
@@ -196,9 +196,17 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
                     }
                 }
             }
+            // check if permanent was copying, but copy effect is no longer active
+            if (applier == null) {
+                if (permanent.isCopy() && permanent.getCopyFrom() instanceof Permanent) {
+                    copyFromPermanent = (Permanent) permanent.getCopyFrom();
+                }
+                applier = new EmptyCopyApplier();
+            }
             copyFrom = copyFromPermanent;
         } else {
             copyFrom = game.getCard(getTargetPointer().getFirst(game, source));
+            applier = new EmptyCopyApplier();
         }
 
         if (copyFrom == null) {

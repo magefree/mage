@@ -50,14 +50,7 @@ public class ChooseACardNameEffect extends OneShotEffect {
             return nameSupplier.get();
         }
 
-        public String getChoice(Game game, Ability source) {
-            return getChoice(game.getPlayer(source.getControllerId()), game, source, true);
-        }
-
-        public String getChoice(Player player, Game game, Ability source, boolean setValue) {
-            if (player == null) {
-                return null;
-            }
+        public Choice makeChoiceObject() {
             Choice cardChoice = new ChoiceImpl(true, ChoiceHintType.CARD);
             Set<String> names = this.getNames();
             if (names.isEmpty()) {
@@ -68,6 +61,18 @@ public class ChooseACardNameEffect extends OneShotEffect {
             cardChoice.setChoices(names);
             cardChoice.setMessage(CardUtil.getTextWithFirstCharUpperCase(this.getMessage()));
             cardChoice.clearChoice();
+            return cardChoice;
+        }
+
+        public String getChoice(Game game, Ability source) {
+            return getChoice(game.getPlayer(source.getControllerId()), game, source, true);
+        }
+
+        public String getChoice(Player player, Game game, Ability source, boolean setValue) {
+            if (player == null) {
+                return null;
+            }
+            Choice cardChoice = makeChoiceObject();
             player.choose(Outcome.Detriment, cardChoice, game);
             String cardName = cardChoice.getChoice();
             if (cardName == null) {

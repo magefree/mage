@@ -128,11 +128,22 @@ class GorexTheTombshellReturnEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(
-                game, source.getSourceId(), source.getSourceObjectZoneChangeCounter() - 1
-        ));
-        if (player == null || exileZone == null || exileZone.isEmpty()) {
+        if (player == null) {
             return false;
+        }
+        // exile zone corresponds to object on stack
+        // relative zcc depends on object zone (battlefield for attacks trigger, graveyard for dies)
+        // so try both zcc offsets to find zone
+        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(
+                game, source.getSourceId(), source.getStackMomentSourceZCC() - 1
+        ));
+        if (exileZone == null || exileZone.isEmpty()) {
+            exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(
+                    game, source.getSourceId(), source.getStackMomentSourceZCC() - 2
+            ));
+            if (exileZone == null || exileZone.isEmpty()) {
+                return false;
+            }
         }
         return player.moveCards(exileZone.getRandom(game), Zone.HAND, source, game);
     }

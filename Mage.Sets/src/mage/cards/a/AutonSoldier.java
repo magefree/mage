@@ -47,7 +47,7 @@ public final class AutonSoldier extends CardImpl {
                 Zone.ALL,
                 new EntersBattlefieldEffect(new CopyPermanentEffect(
                         StaticFilters.FILTER_PERMANENT_CREATURE, applier
-                ).setText("You may have {this} enter the battlefield as a copy of any creature on the battlefield, " +
+                ).setText("You may have {this} enter as a copy of any creature on the battlefield, " +
                         "except it isn't legendary, is an artifact in addition to its other types, and has myriad"), "", true))
         );
     }

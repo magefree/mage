@@ -60,7 +60,7 @@ class PainsRewardEffect extends OneShotEffect {
             playerList.setCurrent(controller.getId());
             Player winner = game.getPlayer(controller.getId());
 
-            int highBid = chooseLifeAmountToBid(controller, -1, game); // -1 for start with 0 min big
+            int highBid = chooseLifeAmountToBid(controller, -1, source, game); // -1 for start with 0 min big
             game.informPlayers(winner.getLogName() + " has bet " + highBid + " lifes");
 
             Player currentPlayer = playerList.getNextInRange(controller, game);
@@ -72,7 +72,7 @@ class PainsRewardEffect extends OneShotEffect {
                 Outcome aiOutcome = (highBid + 1 <= safeLifeToLost) ? Outcome.Benefit : Outcome.Detriment;
 
                 if (currentPlayer.chooseUse(aiOutcome, text, source, game)) {
-                    int newBid = chooseLifeAmountToBid(currentPlayer, highBid, game);
+                    int newBid = chooseLifeAmountToBid(currentPlayer, highBid, source, game);
                     if (newBid > highBid) {
                         highBid = newBid;
                         winner = currentPlayer;
@@ -90,14 +90,14 @@ class PainsRewardEffect extends OneShotEffect {
         return false;
     }
 
-    private int chooseLifeAmountToBid(Player player, int currentBig, Game game) {
+    private int chooseLifeAmountToBid(Player player, int currentBig, Ability source, Game game) {
         int newBid;
         if (player.isComputer()) {
             // AI choose
             newBid = currentBig + 1;
         } else {
             // Human choose
-            newBid = player.getAmount(currentBig + 1, Integer.MAX_VALUE, "Choose amount of life to bid", game);
+            newBid = player.getAmount(currentBig + 1, Integer.MAX_VALUE, "Choose amount of life to bid", source, game);
         }
         return newBid;
     }

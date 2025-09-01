@@ -5,6 +5,7 @@ import mage.abilities.Mode;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.constants.PutCards;
@@ -14,13 +15,14 @@ import mage.players.Player;
 import mage.util.ManaUtil;
 
 /**
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, Susucr
  */
 public class CounterUnlessPaysEffect extends OneShotEffect {
 
     protected Cost cost;
     protected DynamicValue genericMana;
     private final boolean exile;
+    private Effect effectIfTheyDo = null; // optional "If they do, [...]" effect
 
     public CounterUnlessPaysEffect(Cost cost) {
         this(cost, false);
@@ -51,6 +53,17 @@ public class CounterUnlessPaysEffect extends OneShotEffect {
             this.genericMana = effect.genericMana.copy();
         }
         this.exile = effect.exile;
+        if (effect.effectIfTheyDo != null) {
+            this.effectIfTheyDo = effect.effectIfTheyDo.copy();
+        }
+    }
+
+    public CounterUnlessPaysEffect withIfTheyDo(Effect effect) {
+        if (effectIfTheyDo != null) {
+            throw new IllegalStateException("Wrong code usage: only a single 'if they do' effect is expected.");
+        }
+        effectIfTheyDo = effect.copy();
+        return this;
     }
 
     @Override
@@ -89,8 +102,12 @@ public class CounterUnlessPaysEffect extends OneShotEffect {
                 && costToPay.pay(source, game, source, spell.getControllerId(), false, null))) {
             game.informPlayers(player.getLogName() + " chooses not to pay " + costValueMessage + " to prevent the counter effect");
             game.getStack().counter(spell.getId(), source, game, exile ? PutCards.EXILED : PutCards.GRAVEYARD);
+        } else {
+            game.informPlayers(player.getLogName() + " chooses to pay " + costValueMessage + " to prevent the counter effect");
+            if (effectIfTheyDo != null) {
+                effectIfTheyDo.apply(game, source);
+            }
         }
-        game.informPlayers(player.getLogName() + " chooses to pay " + costValueMessage + " to prevent the counter effect");
         return true;
     }
 
@@ -113,6 +130,10 @@ public class CounterUnlessPaysEffect extends OneShotEffect {
         }
         if (exile) {
             sb.append(". If that spell is countered this way, exile it instead of putting it into its owner's graveyard");
+        }
+        if (effectIfTheyDo != null) {
+            sb.append(". If they do, ");
+            sb.append(effectIfTheyDo.getText(mode));
         }
         return sb.toString();
     }

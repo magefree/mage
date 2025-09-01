@@ -1,6 +1,9 @@
 package org.mage.test.cards.copy;
 
 import mage.abilities.MageSingleton;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.AdventureCard;
 import mage.cards.Card;
@@ -956,5 +959,24 @@ public class CopySpellTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_COMBAT);
         execute();
+    }
+
+    private static final String engine = "Lithoform Engine";
+
+    @Test
+    public void testAbilityCantBeCopied() {
+        addCustomCardWithAbility("activator", playerA, new SimpleActivatedAbility(new GainLifeEffect(1), new TapSourceCost()).withCanBeCopied(false));
+        addCard(Zone.BATTLEFIELD, playerA, "Wastes", 2);
+        addCard(Zone.BATTLEFIELD, playerA, engine);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}", "stack ability ({T");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertTapped(engine, true);
+        assertLife(playerA, 20 + 1);
     }
 }

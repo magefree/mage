@@ -10,13 +10,15 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.TappedPredicate;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SoldierLifelinkToken;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -57,13 +59,6 @@ public final class LedevChampion extends CardImpl {
 
 class LedevChampionEffect extends OneShotEffect {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("untapped creatures you control");
-
-    static {
-        filter.add(TargetController.YOU.getControllerPredicate());
-        filter.add(TappedPredicate.UNTAPPED);
-    }
-
     public LedevChampionEffect() {
         super(Outcome.GainLife);
         staticText = "you may tap any number of untapped creatures you control. "
@@ -76,16 +71,14 @@ class LedevChampionEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        TargetPermanent target = new TargetPermanent(0, Integer.MAX_VALUE, StaticFilters.FILTER_CONTROLLED_UNTAPPED_CREATURES, true);
+        target.choose(Outcome.Tap, source.getControllerId(), source.getSourceId(), source, game);
         int tappedAmount = 0;
-        TargetCreaturePermanent target = new TargetCreaturePermanent(0, Integer.MAX_VALUE, filter, true);
-        if (target.canChoose(source.getControllerId(), source, game)
-                && target.choose(Outcome.Tap, source.getControllerId(), source.getSourceId(), source, game)) {
-            for (UUID creatureId : target.getTargets()) {
-                Permanent creature = game.getPermanent(creatureId);
-                if (creature != null) {
-                    creature.tap(source, game);
-                    tappedAmount++;
-                }
+        for (UUID creatureId : target.getTargets()) {
+            Permanent creature = game.getPermanent(creatureId);
+            if (creature != null) {
+                creature.tap(source, game);
+                tappedAmount++;
             }
         }
         if (tappedAmount > 0) {

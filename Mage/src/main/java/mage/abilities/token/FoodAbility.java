@@ -9,11 +9,12 @@ import mage.constants.Zone;
 
 public class FoodAbility extends ActivatedAbilityImpl {
 
-    public FoodAbility(boolean named) {
+    public FoodAbility() {
         super(Zone.BATTLEFIELD, new GainLifeEffect(3), new GenericManaCost(2));
+
         // {2}, {T}, Sacrifice this artifact: You gain 3 life.”
         this.addCost(new TapSourceCost());
-        this.addCost(new SacrificeSourceCost().setText("sacrifice " + (named ? "{this}" : "this artifact")));
+        this.addCost(new SacrificeSourceCost());
     }
 
     private FoodAbility(final FoodAbility ability) {
@@ -24,5 +25,5 @@ public class FoodAbility extends ActivatedAbilityImpl {
     public FoodAbility copy() {
         return new FoodAbility(this);
     }
-    
+
 }

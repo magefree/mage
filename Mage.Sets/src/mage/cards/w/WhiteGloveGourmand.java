@@ -3,13 +3,12 @@ package mage.cards.w;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.hint.ConditionHint;
 import mage.abilities.hint.Hint;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -42,11 +41,8 @@ public final class WhiteGloveGourmand extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new HumanSoldierToken(), 2)));
 
         // At the beginning of your end step, if another Human died under your control this turn, create a Food token.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfEndStepTriggeredAbility(new CreateTokenEffect(new FoodToken())),
-                WhiteGloveGourmandCondition.instance,
-                "At the beginning of your end step, if another Human died under your control this turn, create a Food token."
-        ).addHint(WhiteGloveGourmandCondition.hint), new WhiteGloveGourmandWatcher());
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new CreateTokenEffect(new FoodToken()))
+                .withInterveningIf(WhiteGloveGourmandCondition.instance).addHint(WhiteGloveGourmandCondition.hint), new WhiteGloveGourmandWatcher());
     }
 
     private WhiteGloveGourmand(final WhiteGloveGourmand card) {

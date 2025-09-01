@@ -1,28 +1,27 @@
 package mage.target;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.cards.Card;
+import mage.cards.Cards;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.util.DebugUtil;
-import mage.util.RandomUtil;
+import mage.util.CardUtil;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * @author BetaSteward_at_googlemail.com
+ * Distribute value between targets list (damage, counters, etc)
+ *
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public abstract class TargetAmount extends TargetImpl {
 
     boolean amountWasSet = false;
     DynamicValue amount;
-    int remainingAmount;
+    int remainingAmount; // before any change to it - make sure you call prepareAmount
 
     protected TargetAmount(DynamicValue amount, int minNumberOfTargets, int maxNumberOfTargets) {
         this.amount = amount;
@@ -46,15 +45,47 @@ public abstract class TargetAmount extends TargetImpl {
 
     @Override
     public boolean isChosen(Game game) {
-        return doneChoosing(game);
+        if (!super.isChosen(game)) {
+            return false;
+        }
+
+        // selection not started
+        if (!amountWasSet) {
+            return false;
+        }
+
+        // distribution
+        if (getMinNumberOfTargets() == 0 && this.targets.isEmpty()) {
+            // allow 0 distribution, e.g. for "up to" targets like Vivien, Arkbow Ranger
+            return true;
+        } else {
+            // need full distribution
+            return remainingAmount == 0;
+        }
     }
 
     @Override
-    public boolean doneChoosing(Game game) {
-        return amountWasSet
-                && (remainingAmount == 0
-                || (getMinNumberOfTargets() < getMaxNumberOfTargets()
-                && getTargets().size() >= getMinNumberOfTargets()));
+    public boolean isChoiceCompleted(UUID abilityControllerId, Ability source, Game game, Cards fromCards) {
+        // make sure target request called one time minimum (for "up to" targets)
+        // choice is selected after any addTarget call (by test, AI or human players)
+        if (!isChoiceSelected()) {
+            return false;
+        }
+
+        // make sure selected targets are valid
+        if (!isChosen(game)) {
+            return false;
+        }
+
+        // already selected
+        if (this.getSize() >= getMaxNumberOfTargets()) {
+            return true;
+        }
+
+        // TODO: need auto-choose here? See super
+
+        // all other use cases are fine
+        return true;
     }
 
     @Override
@@ -68,9 +99,14 @@ public abstract class TargetAmount extends TargetImpl {
         this.amount = amount;
     }
 
-    public void setAmount(Ability source, Game game) {
-        remainingAmount = amount.calculate(game, source, null);
-        amountWasSet = true;
+    /**
+     * Prepare new targets for choosing
+     */
+    public void prepareAmount(Ability source, Game game) {
+        if (!amountWasSet) {
+            remainingAmount = amount.calculate(game, source, null);
+            amountWasSet = true;
+        }
     }
 
     public DynamicValue getAmount() {
@@ -83,12 +119,11 @@ public abstract class TargetAmount extends TargetImpl {
 
     @Override
     public void addTarget(UUID id, int amount, Ability source, Game game, boolean skipEvent) {
-        if (!amountWasSet) {
-            setAmount(source, game);
-        }
+        prepareAmount(source, game);
+
         if (amount <= remainingAmount) {
-            super.addTarget(id, amount, source, game, skipEvent);
             remainingAmount -= amount;
+            super.addTarget(id, amount, source, game, skipEvent);
         }
     }
 
@@ -100,249 +135,90 @@ public abstract class TargetAmount extends TargetImpl {
     }
 
     @Override
+    public boolean choose(Outcome outcome, UUID playerId, UUID sourceId, Ability source, Game game) {
+        throw new IllegalArgumentException("Wrong code usage. TargetAmount must be called by player.chooseTarget, not player.choose");
+    }
+
+    @Override
+    @Deprecated // TODO: replace by player.chooseTargetAmount call
     public boolean chooseTarget(Outcome outcome, UUID playerId, Ability source, Game game) {
-        Player player = game.getPlayer(playerId);
-        if (player == null) {
+        Player targetController = getTargetController(game, playerId);
+        if (targetController == null) {
             return false;
         }
 
-        if (!amountWasSet) {
-            setAmount(source, game);
-        }
-        chosen = isChosen(game);
-        while (remainingAmount > 0) {
-            if (!player.canRespond()) {
-                return chosen;
+        prepareAmount(source, game);
+
+        chosen = false;
+        do {
+            int prevTargetsCount = this.getTargets().size();
+
+            // stop by disconnect
+            if (!targetController.canRespond()) {
+                break;
             }
-            if (!getTargetController(game, playerId).chooseTargetAmount(outcome, this, source, game)) {
-                return chosen;
+
+            // MAKE A CHOICE
+            if (isRandom()) {
+                // random choice
+                throw new IllegalArgumentException("Wrong code usage. TargetAmount do not support random choices");
+            } else {
+                // player's choice
+
+                // TargetAmount do not support auto-choice
+
+                // manual
+
+                // stop by cancel/done
+                if (!targetController.chooseTargetAmount(outcome, this, source, game)) {
+                    break;
+                }
+
+                // continue to next target
             }
+
             chosen = isChosen(game);
-        }
-        return chosen;
+
+            // stop by full complete
+            if (isChoiceCompleted(targetController.getId(), source, game, null)) {
+                break;
+            }
+
+            // stop by nothing to choose (actual for human and done button?)
+            if (prevTargetsCount == this.getTargets().size()) {
+                break;
+            }
+
+            // can select next target
+        } while (true);
+
+        chosen = isChosen(game);
+        return chosen && !this.getTargets().isEmpty();
     }
 
     @Override
     final public List<? extends TargetAmount> getTargetOptions(Ability source, Game game) {
-        if (!amountWasSet) {
-            setAmount(source, game);
-        }
+        prepareAmount(source, game);
 
         List<TargetAmount> options = new ArrayList<>();
         Set<UUID> possibleTargets = possibleTargets(source.getControllerId(), source, game);
 
         // optimizations for less memory/cpu consumptions
-        printTargetsTableAndVariations("before optimize", game, possibleTargets, options, false);
-        optimizePossibleTargets(source, game, possibleTargets);
-        printTargetsTableAndVariations("after optimize", game, possibleTargets, options, false);
-
-        // calc possible amount variations
-        addTargets(this, possibleTargets, options, source, game);
-        printTargetsTableAndVariations("after calc", game, possibleTargets, options, true);
-
-        return options;
-    }
-
-    /**
-     * AI related, trying to reduce targets for simulations
-     */
-    private void optimizePossibleTargets(Ability source, Game game, Set<UUID> possibleTargets) {
-        // remove duplicated/same creatures (example: distribute 3 damage between 10+ same tokens)
-
+        TargetOptimization.printTargetsVariationsForTargetAmount("target amount - before optimize", game, possibleTargets, options, false);
         // it must have additional threshold to keep more variations for analyse
-        //
         // bad example:
         // - Blessings of Nature
         // - Distribute four +1/+1 counters among any number of target creatures.
         // on low targets threshold AI can put 1/1 to opponent's creature instead own, see TargetAmountAITest.test_AI_SimulateTargets
+        int maxPossibleTargetsToSimulate = CardUtil.overflowMultiply(this.remainingAmount, 2);
+        TargetOptimization.optimizePossibleTargets(source, game, possibleTargets, maxPossibleTargetsToSimulate);
+        TargetOptimization.printTargetsVariationsForTargetAmount("target amount - after optimize", game, possibleTargets, options, false);
 
-        int maxPossibleTargetsToSimulate = this.remainingAmount * 2;
-        if (possibleTargets.size() < maxPossibleTargetsToSimulate) {
-            return;
-        }
+        // calc possible amount variations
+        addTargets(this, possibleTargets, options, source, game);
+        TargetOptimization.printTargetsVariationsForTargetAmount("target amount - after calc", game, possibleTargets, options, true);
 
-        // split targets by groups
-        Map<UUID, String> targetGroups = new HashMap<>();
-        possibleTargets.forEach(id -> {
-            String groupKey = "";
-
-            // player
-            Player player = game.getPlayer(id);
-            if (player != null) {
-                groupKey = getTargetGroupKeyAsPlayer(player);
-            }
-
-            // game object
-            MageObject object = game.getObject(id);
-            if (object != null) {
-                groupKey = object.getName();
-                if (object instanceof Permanent) {
-                    groupKey += getTargetGroupKeyAsPermanent(game, (Permanent) object);
-                } else if (object instanceof Card) {
-                    groupKey += getTargetGroupKeyAsCard(game, (Card) object);
-                } else {
-                    groupKey += getTargetGroupKeyAsOther(game, object);
-                }
-            }
-
-            // unknown - use all
-            if (groupKey.isEmpty()) {
-                groupKey = id.toString();
-            }
-
-            targetGroups.put(id, groupKey);
-        });
-
-        Map<String, List<UUID>> groups = new HashMap<>();
-        targetGroups.forEach((id, groupKey) -> {
-            groups.computeIfAbsent(groupKey, k -> new ArrayList<>());
-            groups.get(groupKey).add(id);
-        });
-
-        // optimize logic:
-        // - use one target from each target group all the time
-        // - add random target from random group until fill all remainingAmount condition
-
-        // use one target per group
-        Set<UUID> newPossibleTargets = new HashSet<>();
-        groups.forEach((groupKey, groupTargets) -> {
-            UUID targetId = RandomUtil.randomFromCollection(groupTargets);
-            if (targetId != null) {
-                newPossibleTargets.add(targetId);
-                groupTargets.remove(targetId);
-            }
-        });
-
-        // use random target until fill condition
-        while (newPossibleTargets.size() < maxPossibleTargetsToSimulate) {
-            String groupKey = RandomUtil.randomFromCollection(groups.keySet());
-            if (groupKey == null) {
-                break;
-            }
-            List<UUID> groupTargets = groups.getOrDefault(groupKey, null);
-            if (groupTargets == null || groupTargets.isEmpty()) {
-                groups.remove(groupKey);
-                continue;
-            }
-            UUID targetId = RandomUtil.randomFromCollection(groupTargets);
-            if (targetId != null) {
-                newPossibleTargets.add(targetId);
-                groupTargets.remove(targetId);
-            }
-        }
-
-        // keep final result
-        possibleTargets.clear();
-        possibleTargets.addAll(newPossibleTargets);
-    }
-
-    private String getTargetGroupKeyAsPlayer(Player player) {
-        // use all
-        return String.join(";", Arrays.asList(
-                player.getName(),
-                String.valueOf(player.getId().hashCode())
-        ));
-    }
-
-    private String getTargetGroupKeyAsPermanent(Game game, Permanent permanent) {
-        // split by name and stats
-        // TODO: rework and combine with PermanentEvaluator (to use battlefield score)
-
-        // try to use short text/hash for lesser data on debug
-        return String.join(";", Arrays.asList(
-                permanent.getName(),
-                String.valueOf(permanent.getControllerId().hashCode()),
-                String.valueOf(permanent.getOwnerId().hashCode()),
-                String.valueOf(permanent.isTapped()),
-                String.valueOf(permanent.getPower().getValue()),
-                String.valueOf(permanent.getToughness().getValue()),
-                String.valueOf(permanent.getDamage()),
-                String.valueOf(permanent.getCardType(game).toString().hashCode()),
-                String.valueOf(permanent.getSubtype(game).toString().hashCode()),
-                String.valueOf(permanent.getCounters(game).getTotalCount()),
-                String.valueOf(permanent.getAbilities(game).size()),
-                String.valueOf(permanent.getRules(game).toString().hashCode())
-        ));
-    }
-
-    private String getTargetGroupKeyAsCard(Game game, Card card) {
-        // split by name and stats
-        return String.join(";", Arrays.asList(
-                card.getName(),
-                String.valueOf(card.getOwnerId().hashCode()),
-                String.valueOf(card.getCardType(game).toString().hashCode()),
-                String.valueOf(card.getSubtype(game).toString().hashCode()),
-                String.valueOf(card.getCounters(game).getTotalCount()),
-                String.valueOf(card.getAbilities(game).size()),
-                String.valueOf(card.getRules(game).toString().hashCode())
-        ));
-    }
-
-    private String getTargetGroupKeyAsOther(Game game, MageObject item) {
-        // use all
-        return String.join(";", Arrays.asList(
-                item.getName(),
-                String.valueOf(item.getId().hashCode())
-        ));
-    }
-
-    /**
-     * Debug only. Print targets table and variations.
-     */
-    private void printTargetsTableAndVariations(String info, Game game, Set<UUID> possibleTargets, List<TargetAmount> options, boolean isPrintOptions) {
-        if (!DebugUtil.AI_SHOW_TARGET_OPTIMIZATION_LOGS) return;
-
-        // output example:
-        //
-        // Targets (after optimize): 5
-        // 0. Balduvian Bears [ac8], C, BalduvianBears, DKM:22::0, 2/2
-        // 1. PlayerA (SimulatedPlayer2)
-        //
-        // Target variations (info): 126
-        // 0 -> 1; 1 -> 1; 2 -> 1; 3 -> 1; 4 -> 1
-        // 0 -> 1; 1 -> 1; 2 -> 1; 3 -> 2
-        // 0 -> 1; 1 -> 1; 2 -> 1; 4 -> 2
-
-        // print table
-        List<UUID> list = new ArrayList<>(possibleTargets);
-        Collections.sort(list);
-        HashMap<UUID, Integer> targetNumbers = new HashMap<>();
-        System.out.println();
-        System.out.println(String.format("Targets (%s): %d", info, list.size()));
-        for (int i = 0; i < list.size(); i++) {
-            targetNumbers.put(list.get(i), i);
-            String targetName;
-            Player player = game.getPlayer(list.get(i));
-            if (player != null) {
-                targetName = player.toString();
-            } else {
-                MageObject object = game.getObject(list.get(i));
-                if (object != null) {
-                    targetName = object.toString();
-                } else {
-                    targetName = "unknown";
-                }
-            }
-            System.out.println(String.format("%d. %s", i, targetName));
-        }
-        System.out.println();
-
-        if (!isPrintOptions) {
-            return;
-        }
-
-        // print amount variations
-        List<String> res = options
-                .stream()
-                .map(t -> t.getTargets()
-                        .stream()
-                        .map(id -> targetNumbers.get(id) + " -> " + t.getTargetAmount(id))
-                        .sorted()
-                        .collect(Collectors.joining("; "))).sorted().collect(Collectors.toList());
-        System.out.println();
-        System.out.println(String.format("Target variations (info): %d", options.size()));
-        System.out.println(String.join("\n", res));
-        System.out.println();
+        return options;
     }
 
     final protected void addTargets(TargetAmount target, Set<UUID> possibleTargets, List<TargetAmount> options, Ability source, Game game) {
@@ -366,9 +242,8 @@ public abstract class TargetAmount extends TargetImpl {
     }
 
     public void setTargetAmount(UUID targetId, int amount, Ability source, Game game) {
-        if (!amountWasSet) {
-            setAmount(source, game);
-        }
+        prepareAmount(source, game);
+
         remainingAmount -= (amount - this.getTargetAmount(targetId));
         this.setTargetAmount(targetId, amount, game);
     }
@@ -391,5 +266,14 @@ public abstract class TargetAmount extends TargetImpl {
         // (such as damage or counters) among one or more targets, the player announces the division.
         // Each of these targets must receive at least one of whatever is being divided.
         return amount instanceof StaticValue && max == ((StaticValue) amount).getValue();
+    }
+
+    @Override
+    public String toString() {
+        if (amountWasSet) {
+            return super.toString() + String.format(" (remain amount %d of %s)", this.remainingAmount, this.amount.toString());
+        } else {
+            return super.toString() + String.format(" (remain not prepared, %s)", this.amount.toString());
+        }
     }
 }

@@ -42,7 +42,9 @@ public final class CollisionCourse extends CardImpl {
 
         // Choose one --
         // * Collision Course deals X damage to target creature, where X is the number of permanents you control that are creatures and/or Vehicles.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(xValue));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(xValue)
+                .setText("{this} deals X damage to target creature, where X is " +
+                        "the number of permanents you control that are creatures and/or Vehicles"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addHint(hint);
 

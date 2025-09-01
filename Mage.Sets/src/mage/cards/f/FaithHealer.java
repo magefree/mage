@@ -1,4 +1,3 @@
-
 package mage.cards.f;
 
 import mage.MageInt;
@@ -10,10 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledEnchantmentPermanent;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -29,8 +25,9 @@ public final class FaithHealer extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // Sacrifice an enchantment: You gain life equal to the sacrificed enchantment's converted mana cost.
-        this.addAbility(new SimpleActivatedAbility(new GainLifeEffect(SacrificeCostManaValue.ENCHANTMENT),
+        // Sacrifice an enchantment: You gain life equal to the sacrificed enchantment's mana value.
+        this.addAbility(new SimpleActivatedAbility(new GainLifeEffect(SacrificeCostManaValue.ENCHANTMENT)
+                .setText("you gain life equal to the sacrificed enchantment's mana value"),
                 new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_ENCHANTMENT)));
     }
 

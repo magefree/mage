@@ -1,9 +1,9 @@
 package mage.cards.g;
 
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.common.CreateTokenTargetEffect;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -16,7 +16,6 @@ import mage.players.Player;
 import java.util.UUID;
 
 /**
- *
  * @author TheElk801
  */
 public final class GreenerPastures extends CardImpl {
@@ -26,7 +25,7 @@ public final class GreenerPastures extends CardImpl {
 
         // At the beginning of each player's upkeep, if that player controls more lands than each other player, the player creates a 1/1 green Saproling creature token.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                TargetController.EACH_PLAYER, new CreateTokenTargetEffect(new SaprolingToken()),
+                TargetController.EACH_PLAYER, new CreateTokenTargetEffect(new SaprolingToken()).setText("the player creates a 1/1 green Saproling creature token"),
                 false
         ).withInterveningIf(ActivePlayerMostLandsCondition.instance));
     }

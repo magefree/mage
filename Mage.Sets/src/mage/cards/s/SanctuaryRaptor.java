@@ -5,7 +5,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
@@ -30,16 +29,14 @@ import java.util.UUID;
  */
 public final class SanctuaryRaptor extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledPermanent();
+    private static final FilterPermanent filter = new FilterControlledPermanent("you control three or more tokens");
 
     static {
         filter.add(TokenPredicate.TRUE);
     }
 
-    private static final Condition condition
-            = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 2);
-    private static final Hint hint
-            = new ValueHint("Tokens you control", new PermanentsOnBattlefieldCount(filter));
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 2);
+    private static final Hint hint = new ValueHint("Tokens you control", new PermanentsOnBattlefieldCount(filter));
 
     public SanctuaryRaptor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
@@ -52,13 +49,12 @@ public final class SanctuaryRaptor extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever Sanctuary Raptor attacks, if you control three or more tokens, Sanctuary Raptor gets +2/+0 and gains first strike until end of turn.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new AttacksTriggeredAbility(
-                        new BoostSourceEffect(2, 0, Duration.EndOfTurn), false
-                ), condition, "Whenever {this} attacks, if you control three or more tokens, " +
-                "{this} gets +2/+0 and gains first strike until end of turn."
-        );
-        ability.addEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn));
+        Ability ability = new AttacksTriggeredAbility(new BoostSourceEffect(
+                2, 0, Duration.EndOfTurn
+        ).setText("{this} gets +2/+0")).withInterveningIf(condition);
+        ability.addEffect(new GainAbilitySourceEffect(
+                FirstStrikeAbility.getInstance(), Duration.EndOfTurn
+        ).setText("and gains first strike until end of turn"));
         this.addAbility(ability.addHint(hint));
     }
 

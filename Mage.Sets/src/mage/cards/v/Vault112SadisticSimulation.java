@@ -92,7 +92,7 @@ class Vault112SadisticSimulationChapterEffect extends OneShotEffect {
         }
         int numberToPay = controller.getAmount(
                 0, controller.getCountersCount(CounterType.ENERGY),
-                "How many {E} do you like to pay?", game
+                "How many {E} do you like to pay?", source, game
         );
         if (numberToPay <= 0) {
             return true;

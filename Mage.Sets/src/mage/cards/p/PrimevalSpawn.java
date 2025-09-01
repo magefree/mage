@@ -132,6 +132,8 @@ class PrimevalSpawnSpellEffect extends OneShotEffect {
         }
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 10));
         player.moveCards(cards, Zone.EXILED, source, game);
+        game.processAction();
+        cards.retainZone(Zone.EXILED, game);
         CardUtil.castMultipleWithAttributeForFree(
                 player, source, game, cards, StaticFilters.FILTER_CARD,
                 Integer.MAX_VALUE, new PrimevalSpawnTracker()

@@ -11,7 +11,6 @@ import mage.abilities.costs.Costs;
 import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.RemoveCounterCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -25,7 +24,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.CounterAnyPredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -44,11 +43,10 @@ public final class QuilledGreatwurm extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Whenever a creature you control deals combat damage during your turn, put that many +1/+1 counters on it.
-        this.addAbility(new ConditionalTriggeredAbility(new DealsDamageToAnyTriggeredAbility(
-                Zone.BATTLEFIELD, new AddCountersTargetEffect(
-                        CounterType.P1P1.createInstance(), SavedDamageValue.MANY
-                ), StaticFilters.FILTER_CONTROLLED_A_CREATURE, SetTargetPointer.PERMANENT, true, false
-        ), MyTurnCondition.instance, "Whenever a creature you control deals combat damage during your turn, put that many +1/+1 counters on it"));
+        this.addAbility(new DealsDamageToAnyTriggeredAbility(
+                Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance(), SavedDamageValue.MANY),
+                StaticFilters.FILTER_CONTROLLED_A_CREATURE, SetTargetPointer.PERMANENT, true, false
+        ).withTriggerCondition(MyTurnCondition.instance));
 
         // You may cast this card from your graveyard by removing six counters from among creatures you control in addition to paying its other costs.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new QuilledGreatwurmEffect()).setIdentifier(MageIdentifier.QuilledGreatwurmAlternateCast));
@@ -104,7 +102,7 @@ class QuilledGreatwurmEffect extends AsThoughEffectImpl {
             return false;
         }
         Costs<Cost> costs = new CostsImpl<>();
-        costs.add(new RemoveCounterCost(new TargetControlledCreaturePermanent(1, 6, filter, true), null, 6));
+        costs.add(new RemoveCounterCost(new TargetControlledPermanent(1, 6, filter, true), null, 6));
         controller.setCastSourceIdWithAlternateMana(
                 objectId, new ManaCostsImpl<>("{4}{G}{G}"), costs,
                 MageIdentifier.QuilledGreatwurmAlternateCast

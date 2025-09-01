@@ -1,7 +1,5 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -17,8 +15,9 @@ import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class PrimalWellspring extends CardImpl {
@@ -33,9 +32,10 @@ public final class PrimalWellspring extends CardImpl {
         this.addAbility(ability);
 
         // When that mana is spent to cast an instant or sorcery spell, copy that spell and you may choose new targets for the copy.
-        Effect effect = new CopyTargetStackObjectEffect(true);
-        effect.setText("copy that spell and you may choose new targets for the copy");
-        this.addAbility(new PyrimalWellspringTriggeredAbility(ability.getOriginalId(), effect));
+        this.addAbility(new PrimalWellspringTriggeredAbility(
+                ability.getOriginalId(), new CopyTargetStackObjectEffect(true)
+                .setText("copy that spell and you may choose new targets for the copy")
+        ));
     }
 
     private PrimalWellspring(final PrimalWellspring card) {
@@ -48,26 +48,26 @@ public final class PrimalWellspring extends CardImpl {
     }
 }
 
-class PyrimalWellspringTriggeredAbility extends TriggeredAbilityImpl {
+class PrimalWellspringTriggeredAbility extends TriggeredAbilityImpl {
 
     private static final FilterInstantOrSorcerySpell filter = new FilterInstantOrSorcerySpell();
 
     String abilityOriginalId;
 
-    public PyrimalWellspringTriggeredAbility(UUID abilityOriginalId, Effect effect) {
+    public PrimalWellspringTriggeredAbility(UUID abilityOriginalId, Effect effect) {
         super(Zone.ALL, effect, false);
         this.abilityOriginalId = abilityOriginalId.toString();
         setTriggerPhrase("When that mana is used to cast an instant or sorcery spell, ");
     }
 
-    private PyrimalWellspringTriggeredAbility(final PyrimalWellspringTriggeredAbility ability) {
+    private PrimalWellspringTriggeredAbility(final PrimalWellspringTriggeredAbility ability) {
         super(ability);
         this.abilityOriginalId = ability.abilityOriginalId;
     }
 
     @Override
-    public PyrimalWellspringTriggeredAbility copy() {
-        return new PyrimalWellspringTriggeredAbility(this);
+    public PrimalWellspringTriggeredAbility copy() {
+        return new PrimalWellspringTriggeredAbility(this);
     }
 
     @Override

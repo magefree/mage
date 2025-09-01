@@ -1,7 +1,5 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -15,22 +13,23 @@ import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.SubType;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.AnotherPredicate;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class ParagonOfOpenGraves extends CardImpl {
 
-    private static final FilterCreaturePermanent filterCreatures = new FilterCreaturePermanent("black creatures");
+    private static final FilterPermanent filterCreatures = new FilterCreaturePermanent("black creatures");
     private static final FilterControlledCreaturePermanent filterCreature = new FilterControlledCreaturePermanent("another target black creature you control");
 
     static {
@@ -40,7 +39,7 @@ public final class ParagonOfOpenGraves extends CardImpl {
     }
 
     public ParagonOfOpenGraves(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.subtype.add(SubType.SKELETON);
         this.subtype.add(SubType.WARRIOR);
 
@@ -48,12 +47,16 @@ public final class ParagonOfOpenGraves extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Other black creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterCreatures, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(
+                1, 1, Duration.WhileOnBattlefield, filterCreatures, true
+        )));
 
         // {2}{B}, {T}: Another target black creature you control gains deathtouch until end of turn.
-        Ability ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{2}{B}"));
+        Ability ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(
+                DeathtouchAbility.getInstance(), Duration.EndOfTurn
+        ), new ManaCostsImpl<>("{2}{B}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetControlledCreaturePermanent(filterCreature));
+        ability.addTarget(new TargetPermanent(filterCreature));
         this.addAbility(ability);
     }
 

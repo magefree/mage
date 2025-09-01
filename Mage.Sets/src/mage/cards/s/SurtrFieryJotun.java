@@ -10,8 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.filter.FilterSpell;
-import mage.filter.common.FilterHistoricSpell;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetAnyTarget;
 
 import java.util.UUID;
@@ -20,8 +19,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class SurtrFieryJotun extends CardImpl {
-
-    private static final FilterSpell filter = new FilterHistoricSpell();
 
     public SurtrFieryJotun(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
@@ -37,7 +34,7 @@ public final class SurtrFieryJotun extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Whenever you cast a historic spell, Surtr, Fiery Jotun deals 3 damage to any target.
-        Ability ability = new SpellCastControllerTriggeredAbility(new DamageTargetEffect(3), filter, false);
+        Ability ability = new SpellCastControllerTriggeredAbility(new DamageTargetEffect(3), StaticFilters.FILTER_SPELL_HISTORIC, false);
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

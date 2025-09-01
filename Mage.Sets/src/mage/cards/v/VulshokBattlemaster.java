@@ -10,7 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -30,6 +30,7 @@ public final class VulshokBattlemaster extends CardImpl {
 
         // Haste
         this.addAbility(HasteAbility.getInstance());
+
         // When Vulshok Battlemaster enters the battlefield, attach all Equipment on the battlefield to it.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new VulshokBattlemasterEffect()));
     }
@@ -43,39 +44,35 @@ public final class VulshokBattlemaster extends CardImpl {
         return new VulshokBattlemaster(this);
     }
 
-    static class VulshokBattlemasterEffect extends OneShotEffect {
+}
 
-        public VulshokBattlemasterEffect() {
-            super(Outcome.Benefit);
-            this.staticText = "attach all Equipment on the battlefield to it";
-        }
+class VulshokBattlemasterEffect extends OneShotEffect {
 
-        private VulshokBattlemasterEffect(final VulshokBattlemasterEffect effect) {
-            super(effect);
-        }
+    VulshokBattlemasterEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "attach all Equipment on the battlefield to it";
+    }
 
-        @Override
-        public VulshokBattlemasterEffect copy() {
-            return new VulshokBattlemasterEffect(this);
-        }
+    private VulshokBattlemasterEffect(final VulshokBattlemasterEffect effect) {
+        super(effect);
+    }
 
-        @Override
-        public boolean apply(Game game, Ability source) {
-            Permanent battlemaster = game.getPermanent(source.getSourceId());
-            if (battlemaster != null) {
-                FilterPermanent filter = new FilterPermanent();
-                filter.add(SubType.EQUIPMENT.getPredicate());
-                for (Permanent equipment : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
-                    if (equipment != null) {
-                        //If an Equipment can't equip Vulshok Battlemaster, it isn't attached to the Battlemaster, and it doesn't become unattached (if it's attached to a creature). (https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=48125)
-                        if (!battlemaster.cantBeAttachedBy(equipment, source, game, false)) {
-                            battlemaster.addAttachment(equipment.getId(), source, game);
-                        }
-                    }
-                }
-                return true;
-            }
+    @Override
+    public VulshokBattlemasterEffect copy() {
+        return new VulshokBattlemasterEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        if (permanent == null) {
             return false;
         }
+        for (Permanent equipment : game.getBattlefield().getActivePermanents(
+                StaticFilters.FILTER_PERMANENT_EQUIPMENT, source.getControllerId(), source, game
+        )) {
+            permanent.addAttachment(equipment.getId(), source, game);
+        }
+        return true;
     }
 }

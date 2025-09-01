@@ -6,7 +6,7 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.dynamicvalue.common.HighestCMCOfPermanentValue;
+import mage.abilities.dynamicvalue.common.GreatestAmongPermanentsValue;
 import mage.abilities.dynamicvalue.common.SacrificeCostManaValue;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -36,7 +35,7 @@ public final class PriestOfYawgmoth extends CardImpl {
                 new TapSourceCost(),
                 "add an amount of {B} equal to the sacrificed artifact's mana value",
                 false,
-                new HighestCMCOfPermanentValue(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT, true)
+                GreatestAmongPermanentsValue.MANAVALUE_OTHER_CONTROLLED_ARTIFACTS
         );
         ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT));
         this.addAbility(ability);

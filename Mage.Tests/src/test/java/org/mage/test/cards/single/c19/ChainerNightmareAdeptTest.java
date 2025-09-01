@@ -24,6 +24,7 @@ public class ChainerNightmareAdeptTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerA, maaka, 2);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Discard");
+        setChoice(playerA, mountain); // discard cost
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, maaka);
 
@@ -33,8 +34,8 @@ public class ChainerNightmareAdeptTest extends CardTestPlayerBase {
 
         attack(1, playerA, maaka);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
-
         execute();
 
         assertPermanentCount(playerA, maaka, 1);
@@ -52,7 +53,10 @@ public class ChainerNightmareAdeptTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerA, khenra);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Discard");
-        setChoice(playerA, true);
+        setChoice(playerA, mountain); // discard cost
+        setChoice(playerA, true); // use copy
+        setChoice(playerA, "0"); // for casting main spell - x2 permitting object
+        setChoice(playerA, "0"); // for casting copied spell - x2 permitting object
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, maaka, true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, khenra);
@@ -60,8 +64,8 @@ public class ChainerNightmareAdeptTest extends CardTestPlayerBase {
         attack(1, playerA, maaka);
         attack(1, playerA, khenra);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
-
         execute();
 
         assertPermanentCount(playerA, maaka, 1);
@@ -88,8 +92,8 @@ public class ChainerNightmareAdeptTest extends CardTestPlayerBase {
 
         attack(1, playerA, maaka);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
-
         execute();
 
         assertPermanentCount(playerA, maaka, 1);

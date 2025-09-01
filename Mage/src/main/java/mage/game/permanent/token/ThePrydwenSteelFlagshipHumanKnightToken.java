@@ -19,7 +19,7 @@ public class ThePrydwenSteelFlagshipHumanKnightToken extends TokenImpl {
      * /!\ You need to add ArtifactEnteredControllerWatcher to any card using this token
      */
     public ThePrydwenSteelFlagshipHumanKnightToken() {
-        super("Human Knight Token", "2/2 white Human Knight creature token with \"This creature " +
+        super("Human Knight Token", "2/2 white Human Knight creature token with \"This token " +
                 "gets +2/+2 as long as an artifact entered the battlefield under your control this turn.\"");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);

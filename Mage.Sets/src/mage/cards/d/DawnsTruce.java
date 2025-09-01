@@ -13,6 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.GiftType;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -32,11 +33,12 @@ public final class DawnsTruce extends CardImpl {
                 HexproofAbility.getInstance(), Duration.EndOfTurn
         ).setText("you"));
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(
-                HexproofAbility.getInstance(), Duration.EndOfTurn
+                HexproofAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENTS
         ).concatBy("and"));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new AddContinuousEffectToGame(new GainAbilityControlledEffect(
-                        IndestructibleAbility.getInstance(), Duration.EndOfTurn
+                        IndestructibleAbility.getInstance(), Duration.EndOfTurn,
+                        StaticFilters.FILTER_PERMANENTS
                 )), GiftWasPromisedCondition.TRUE, "if the gift was promised, " +
                 "permanents you control also gain indestructible until end of turn"
         ));

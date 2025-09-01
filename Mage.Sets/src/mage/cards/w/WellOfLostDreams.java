@@ -59,7 +59,7 @@ class WellOfLostDreamsEffect extends OneShotEffect {
         if (controller != null) {
             int amount = SavedGainedLifeValue.MANY.calculate(game, source, this);
             if (amount > 0) {
-                int xValue = controller.announceXMana(0, amount, "Announce X Value", game, source);
+                int xValue = controller.announceX(0, amount, "Announce the value for {X} (pay for draw cards)", game, source, true);
                 if (xValue > 0) {
                     if (new GenericManaCost(xValue).pay(source, game, source, controller.getId(), false)) {
                         game.informPlayers(controller.getLogName() + " payed {" + xValue + '}');

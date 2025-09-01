@@ -18,13 +18,14 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.util.CardUtil;
+
+import static mage.filter.StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE;
 
 /**
  *
@@ -42,12 +43,12 @@ public final class BishopOfBinding extends CardImpl {
 
         // When Bishop of Binding enters the battlefield, exile target creature an opponent controls until Bishop of Binding leaves the battlefield.
         Ability ability = new EntersBattlefieldTriggeredAbility(new BishopOfBindingExileEffect());
-        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
+        ability.addTarget(new TargetPermanent(FILTER_OPPONENTS_PERMANENT_CREATURE));
         this.addAbility(ability);
 
         // Whenever Bishop of Binding attacks, target Vampire gets +X/+X until end of turn, where X is the power of the exiled card.
         ability = new AttacksTriggeredAbility(new BoostTargetEffect(BishopOfBindingValue.instance, BishopOfBindingValue.instance, Duration.EndOfTurn));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 
@@ -84,7 +85,7 @@ class BishopOfBindingExileEffect extends OneShotEffect {
         // the target creature won't be exiled.
         if (permanent != null) {
             new ExileTargetEffect(
-                    CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()), permanent.getIdName()
+                    CardUtil.getExileZoneId(game, source.getSourceId(), source.getStackMomentSourceZCC()), permanent.getIdName()
             ).apply(game, source);
             game.addDelayedTriggeredAbility(new OnLeaveReturnExiledAbility(), source);
             return true;
@@ -98,7 +99,7 @@ enum BishopOfBindingValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, sourceAbility.getSourceId(), sourceAbility.getSourceObjectZoneChangeCounter()));
+        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, sourceAbility.getSourceId(), sourceAbility.getStackMomentSourceZCC()));
         if (exileZone != null) {
             Card exiledCard = exileZone.getRandom(game);
             if (exiledCard != null) {

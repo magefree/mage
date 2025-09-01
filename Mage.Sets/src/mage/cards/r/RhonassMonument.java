@@ -1,6 +1,5 @@
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -15,28 +14,23 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class RhonassMonument extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Green creature spells");
-    private static final FilterSpell filter2 = new FilterSpell("a creature spell");
 
     static {
         filter.add(Predicates.and(new ColorPredicate(ObjectColor.GREEN), CardType.CREATURE.getPredicate()));
-    }
-
-    static {
-        filter2.add(CardType.CREATURE.getPredicate());
     }
 
     public RhonassMonument(UUID ownerId, CardSetInfo setInfo) {
@@ -49,7 +43,7 @@ public final class RhonassMonument extends CardImpl {
 
         // Whenever you cast a creature spell, target creature you control gets +2/+2 and gains trample until end of turn.
         Ability ability = new SpellCastControllerTriggeredAbility(new BoostTargetEffect(2, 2, Duration.EndOfTurn)
-                .setText("target creature you control gets +2/+2"), filter2, false);
+                .setText("target creature you control gets +2/+2"), StaticFilters.FILTER_SPELL_A_CREATURE, false);
         Effect effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gains trample until end of turn");
         ability.addEffect(effect);

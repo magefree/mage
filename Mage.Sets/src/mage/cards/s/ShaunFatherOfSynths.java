@@ -1,9 +1,7 @@
 package mage.cards.s;
 
-import java.util.UUID;
-
 import mage.MageInt;
-import mage.abilities.TriggeredAbility;
+import mage.abilities.Ability;
 import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.effects.Effect;
@@ -14,6 +12,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
+import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
@@ -21,8 +21,9 @@ import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.target.TargetPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author alexander-novo
  */
 public class ShaunFatherOfSynths extends CardImpl {
@@ -41,7 +42,7 @@ public class ShaunFatherOfSynths extends CardImpl {
     }
 
     public ShaunFatherOfSynths(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[] { CardType.CREATURE }, "{3}{U}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{R}");
 
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
@@ -58,11 +59,14 @@ public class ShaunFatherOfSynths extends CardImpl {
                     token.addCardType(CardType.CREATURE);
                     token.addCardType(CardType.ARTIFACT);
                     token.addSubType(SubType.SYNTH);
-                }).setText(
-                        "create a tapped and attacking token that's a copy of target attacking legendary creature you control other than Shaun, except it's not legendary and it's a Synth artifact creature in addition to its other types");
-        TriggeredAbility ability = new AttacksWithCreaturesTriggeredAbility(effect, 1);
+                }).setText("create a tapped and attacking token that's a copy of target " +
+                        "attacking legendary creature you control other than {this}, " +
+                        "except it's not legendary and it's a Synth artifact creature in addition to its other types");
+        Ability ability = new AttacksWithCreaturesTriggeredAbility(
+                Zone.BATTLEFIELD, effect, 1,
+                StaticFilters.FILTER_PERMANENT_CREATURES, false, true
+        );
         ability.addTarget(new TargetPermanent(attackFilter));
-        ability.setOptional();
         this.addAbility(ability);
 
         // When Shaun leaves the battlefield, exile all Synth tokens you control.

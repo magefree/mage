@@ -74,22 +74,11 @@ public class TargetSpellOrPermanent extends TargetImpl {
     }
 
     @Override
-    public boolean canTarget(UUID id, Game game) {
-        Permanent permanent = game.getPermanent(id);
-        if (permanent != null) {
-            return filter.match(permanent, game);
-        }
-        Spell spell = game.getStack().getSpell(id);
-        return filter.match(spell, game);
-    }
-
-    @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
         Permanent permanent = game.getPermanent(id);
         if (permanent != null) {
             if (source != null) {
-                MageObject targetSource = game.getObject(source);
-                return permanent.canBeTargetedBy(targetSource, source.getControllerId(), source, game)
+                return (isNotTarget() || permanent.canBeTargetedBy(game.getObject(source), source.getControllerId(), source, game))
                         && filter.match(permanent, source.getControllerId(), source, game);
             } else {
                 return filter.match(permanent, game);
@@ -183,35 +172,18 @@ public class TargetSpellOrPermanent extends TargetImpl {
         for (StackObject stackObject : game.getStack()) {
             Spell spell = game.getStack().getSpell(stackObject.getId());
             if (spell != null
-                    && !source.getSourceId().equals(spell.getSourceId())
+                    && targetSource != null
+                    && !targetSource.getId().equals(spell.getSourceId())
                     && filter.match(spell, sourceControllerId, source, game)) {
                 possibleTargets.add(spell.getId());
             }
         }
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter.getPermanentFilter(), sourceControllerId, game)) {
-            if (permanent.canBeTargetedBy(targetSource, sourceControllerId, source, game) && filter.match(permanent, sourceControllerId, source, game)) {
+            if (filter.match(permanent, sourceControllerId, source, game)) {
                 possibleTargets.add(permanent.getId());
             }
         }
-        return possibleTargets;
-    }
-
-    @Override
-    public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
-        Set<UUID> possibleTargets = new HashSet<>();
-        for (StackObject stackObject : game.getStack()) {
-            Spell spell = game.getStack().getSpell(stackObject.getId());
-            if (spell != null
-                    && filter.match(spell, sourceControllerId, null, game)) {
-                possibleTargets.add(spell.getId());
-            }
-        }
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter.getPermanentFilter(), sourceControllerId, game)) {
-            if (filter.match(permanent, sourceControllerId, null, game)) {
-                possibleTargets.add(permanent.getId());
-            }
-        }
-        return possibleTargets;
+        return keepValidPossibleTargets(possibleTargets, sourceControllerId, source, game);
     }
 
     @Override

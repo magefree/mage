@@ -1,10 +1,14 @@
 package mage.target;
 
+import mage.MageObject;
 import mage.abilities.Ability;
+import mage.cards.Cards;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.players.Player;
 import mage.util.Copyable;
+import mage.util.DebugUtil;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -37,8 +41,31 @@ public class Targets extends ArrayList<Target> implements Copyable<Targets> {
         return this;
     }
 
-    public List<Target> getUnchosen(Game game) {
-        return stream().filter(target -> !target.isChosen(game)).collect(Collectors.toList());
+    public Target getByTag(int tag) {
+        return this.stream().filter(t -> t.getTargetTag() == tag).findFirst().orElse(null);
+    }
+
+    public List<UUID> getTargetsByTag(int tag) {
+        Target target = getByTag(tag);
+        if (target == null) {
+            return new ArrayList<>();
+        }
+        return target.getTargets();
+    }
+
+    public Target getNextUnchosen(Game game) {
+        return getNextUnchosen(game, 0);
+    }
+
+    public Target getNextUnchosen(Game game, int unchosenIndex) {
+        List<Target> res = stream()
+                .filter(target -> !target.isChoiceSelected())
+                .collect(Collectors.toList());
+        return unchosenIndex < res.size() ? res.get(unchosenIndex) : null;
+    }
+
+    public boolean isChoiceCompleted(UUID abilityControllerId, Ability source, Game game, Cards fromCards) {
+        return stream().allMatch(t -> t.isChoiceCompleted(abilityControllerId, source, game, fromCards));
     }
 
     public void clearChosen() {
@@ -52,59 +79,108 @@ public class Targets extends ArrayList<Target> implements Copyable<Targets> {
     }
 
     public boolean choose(Outcome outcome, UUID playerId, UUID sourceId, Ability source, Game game) {
-        if (this.size() > 0) {
-            if (!canChoose(playerId, source, game)) {
-                return false;
-            }
-            while (!isChosen(game)) {
-                Target target = this.getUnchosen(game).get(0);
-                if (!target.choose(outcome, playerId, sourceId, source, game)) {
-                    return false;
-                }
-            }
-        }
-        return true;
+        return makeChoice(false, outcome, playerId, source, false, game, false);
     }
 
     public boolean chooseTargets(Outcome outcome, UUID playerId, Ability source, boolean noMana, Game game, boolean canCancel) {
-        if (this.size() > 0) {
-            if (!canChoose(playerId, source, game)) {
+        return makeChoice(true, outcome, playerId, source, noMana, game, canCancel);
+    }
+
+    private boolean makeChoice(boolean isTargetChoice, Outcome outcome, UUID playerId, Ability source, boolean noMana, Game game, boolean canCancel) {
+        // in test mode some targets can be predefined already, e.g. by cast/activate command
+        // so do not clear chosen status here
+
+        // there are possible multiple targets, so must check per target, not whole list
+        // good example: cast Scatter to the Winds with awaken
+        for (Target target : this) {
+            UUID abilityControllerId = target.getAffectedAbilityControllerId(playerId);
+
+            // stop on disconnect
+            Player player = game.getPlayer(abilityControllerId);
+            if (player == null || !player.canRespond()) {
                 return false;
             }
 
-            //int state = game.bookmarkState();
-            while (!isChosen(game)) {
-                Target target = this.getUnchosen(game).get(0);
-                UUID targetController = playerId;
+            // continue on nothing to choose or complete
+            if (target.isChoiceSelected() || !target.canChoose(abilityControllerId, source, game)) {
+                continue;
+            }
 
-                // some targets can have controller different than ability controller
-                if (target.getTargetController() != null) {
-                    targetController = target.getTargetController();
-                }
+            // TODO: need research and remove or re-implement for other choices
+            // disable cancel button - if cast without mana (e.g. by Suspend) you may not be able to cancel the casting if you are able to cast it
+            if (noMana) {
+                target.setRequired(true);
+            }
+            // enable cancel button
+            if (canCancel) {
+                target.setRequired(false);
+            }
 
-                // if cast without mana (e.g. by suspend you may not be able to cancel the casting if you are able to cast it
-                if (noMana) {
-                    target.setRequired(true);
-                }
+            // continue on cancel/skip one of the target
+            boolean choiceRes;
+            if (isTargetChoice) {
+                choiceRes = target.chooseTarget(outcome, abilityControllerId, source, game);
+            } else {
+                choiceRes = target.choose(outcome, abilityControllerId, source, game);
+            }
+            if (!choiceRes) {
+                //break; // do not stop targeting, example: two "or" targets from Finale of Promise
+            }
+        }
 
-                // can be cancel by user
-                if (canCancel) {
-                    target.setRequired(false);
-                }
+        // TODO: need research or wait bug reports - old version was able to continue selection from scratch,
+        //   current version just clear the chosen, but do not start selection again
+        // reset on wrong restrictions and start from scratch
+        if (isTargetChoice && isChosen(game) && game.replaceEvent(new GameEvent(GameEvent.EventType.TARGETS_VALID, source.getSourceId(), source, source.getControllerId()), source)) {
+            clearChosen();
+        }
 
-                // make response checks
-                if (!target.chooseTarget(outcome, targetController, source, game)) {
-                    return false;
-                }
-                // Check if there are some rules for targets are violated, if so reset the targets and start again
-                if (this.getUnchosen(game).isEmpty()
-                        && game.replaceEvent(new GameEvent(GameEvent.EventType.TARGETS_VALID, source.getSourceId(), source, source.getControllerId()), source)) {
-                    //game.restoreState(state, "Targets");
-                    clearChosen();
+        if (DebugUtil.GAME_SHOW_CHOOSE_TARGET_LOGS && !game.isSimulation()) {
+            printDebugTargets(isTargetChoice ? "target finish" : "choose finish", this, source, game);
+        }
+
+        return isChosen(game);
+    }
+
+    public static void printDebugTargets(String name, Targets targets, Ability source, Game game) {
+        List<String> output = new ArrayList<>();
+        printDebugTargets(name, targets, source, game, output);
+        output.forEach(System.out::println);
+    }
+
+    public static void printDebugTargets(String name, Targets targets, Ability source, Game game, List<String> output) {
+        output.add("");
+        output.add(name + ":");
+        output.add(String.format("* chosen: %s", targets.isChosen(game) ? "yes" : "no"));
+        output.add(String.format("* ability: %s", source));
+        for (int i = 0; i < targets.size(); i++) {
+            Target target = targets.get(i);
+            output.add(String.format("* target %d: %s", i + 1, target));
+            if (target.getTargets().isEmpty()) {
+                output.add("  - no choices");
+            } else {
+                for (int j = 0; j < target.getTargets().size(); j++) {
+                    UUID targetId = target.getTargets().get(j);
+                    String targetInfo;
+                    Player targetPlayer = game.getPlayer(targetId);
+                    if (targetPlayer != null) {
+                        targetInfo = targetPlayer.toString();
+                    } else {
+                        MageObject targetObject = game.getObject(targetId);
+                        if (targetObject != null) {
+                            targetInfo = targetObject.toString();
+                        } else {
+                            targetInfo = "unknown " + targetId;
+                        }
+                    }
+                    if (target instanceof TargetAmount) {
+                        output.add(String.format("  - choice %d.%d: amount %d, %s", i + 1, j + 1, target.getTargetAmount(targetId), targetInfo));
+                    } else {
+                        output.add(String.format("  - choice %d.%d: %s", i + 1, j + 1, targetInfo));
+                    }
                 }
             }
         }
-        return true;
     }
 
     public boolean stillLegal(Ability source, Game game) {

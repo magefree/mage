@@ -41,7 +41,7 @@ public final class PhyrexianTotem extends CardImpl {
         // Whenever {this} is dealt damage, if it's a creature, sacrifice that many permanents.
         this.addAbility(new DealtDamageToSourceTriggeredAbility(
                 new SacrificeControllerEffect(StaticFilters.FILTER_PERMANENTS, SavedDamageValue.MANY, ""), false
-        ).withInterveningIf(PhyrexianTotemCondition.instance));
+        ).withInterveningIf(PhyrexianTotemCondition.instance).setTriggerPhrase("Whenever this permanent is dealt damage, "));
     }
 
     private PhyrexianTotem(final PhyrexianTotem card) {

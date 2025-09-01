@@ -79,7 +79,7 @@ class CorrosiveOozeEffect extends OneShotEffect {
         if (watcher == null) {
             return false;
         }
-        MageObjectReference sourceMor = new MageObjectReference(source.getSourceId(), source.getSourceObjectZoneChangeCounter(), game);
+        MageObjectReference sourceMor = new MageObjectReference(source.getSourceId(), source.getStackMomentSourceZCC(), game);
         List<Permanent> equipments = watcher.getEquipmentsToDestroy(sourceMor)
                 .stream()
                 .map(mor -> mor.getPermanent(game))

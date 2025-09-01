@@ -12,8 +12,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  * @author noxx
@@ -61,17 +63,18 @@ class DreadSlaverEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
+        Card card = game.getCard(getTargetPointer().getFirst(game, source));
+        if (controller == null || card == null) {
             return false;
         }
-        Card card = game.getCard(getTargetPointer().getFirst(game, source));
-        if (card != null) {
-            if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
+        if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
+            Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
+            if (permanent != null) {
                 ContinuousEffect effect = new AddCreatureTypeAdditionEffect(SubType.ZOMBIE, true);
-                effect.setTargetPointer(new FixedTarget(card.getId(), game));
+                effect.setTargetPointer(new FixedTarget(permanent.getId(), game));
                 game.addEffect(effect, source);
-                return true;
             }
+            return true;
         }
         return false;
     }

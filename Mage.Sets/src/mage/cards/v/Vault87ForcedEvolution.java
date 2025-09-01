@@ -1,45 +1,51 @@
 package mage.cards.v;
 
-import java.util.UUID;
-
-import mage.MageInt;
-import mage.MageObject;
-import mage.abilities.Ability;
 import mage.abilities.common.SagaAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
+import mage.abilities.dynamicvalue.common.GreatestAmongPermanentsValue;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.AddCardSubTypeTargetEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.hint.Hint;
-import mage.abilities.hint.ValueHint;
-import mage.constants.Duration;
-import mage.constants.SagaChapter;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SagaChapter;
+import mage.constants.SubType;
 import mage.counters.CounterType;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.game.Game;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
+
+import static mage.constants.Duration.WhileControlled;
+import static mage.constants.SagaChapter.CHAPTER_I;
 
 /**
  * @author Cguy7777
  */
 public final class Vault87ForcedEvolution extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Mutant creature");
-    private static final Hint hint = new ValueHint(
-            "Highest power among Mutants you control", Vault87ForcedEvolutionValue.instance);
+    private static final FilterCreaturePermanent filterNonMutant = new FilterCreaturePermanent("non-Mutant creature");
 
     static {
-        filter.add(Predicates.not(SubType.MUTANT.getPredicate()));
+        filterNonMutant.add(Predicates.not(SubType.MUTANT.getPredicate()));
     }
+
+    private static final FilterControlledPermanent filterMutant = new FilterControlledPermanent("Mutants you control");
+
+    static {
+        filterMutant.add(SubType.MUTANT.getPredicate());
+    }
+
+    private static final GreatestAmongPermanentsValue xValue = new GreatestAmongPermanentsValue(GreatestAmongPermanentsValue.Quality.Power, filterMutant);
+    private static final Hint hint = xValue.getHint();
 
     public Vault87ForcedEvolution(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}{U}");
@@ -52,9 +58,9 @@ public final class Vault87ForcedEvolution extends CardImpl {
         // I -- Gain control of target non-Mutant creature for as long as you control Vault 87.
         sagaAbility.addChapterEffect(
                 this,
-                SagaChapter.CHAPTER_I,
-                new GainControlTargetEffect(Duration.WhileControlled),
-                new TargetCreaturePermanent(filter));
+                CHAPTER_I,
+                new GainControlTargetEffect(WhileControlled),
+                new TargetPermanent(filterNonMutant));
 
         // II -- Put a +1/+1 counter on target creature you control. It becomes a Mutant in addition to its other types.
         sagaAbility.addChapterEffect(
@@ -70,7 +76,7 @@ public final class Vault87ForcedEvolution extends CardImpl {
         sagaAbility.addChapterEffect(
                 this,
                 SagaChapter.CHAPTER_III,
-                new DrawCardSourceControllerEffect(Vault87ForcedEvolutionValue.instance)
+                new DrawCardSourceControllerEffect(xValue)
                         .setText("draw cards equal to the greatest power among Mutants you control"));
         this.addAbility(sagaAbility.addHint(hint));
     }
@@ -82,32 +88,5 @@ public final class Vault87ForcedEvolution extends CardImpl {
     @Override
     public Vault87ForcedEvolution copy() {
         return new Vault87ForcedEvolution(this);
-    }
-}
-
-enum Vault87ForcedEvolutionValue implements DynamicValue {
-    instance;
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return game.getBattlefield()
-                .getAllActivePermanents(sourceAbility.getControllerId())
-                .stream()
-                .filter(permanent1 -> permanent1.isCreature(game))
-                .filter(permanent -> permanent.hasSubtype(SubType.MUTANT, game))
-                .map(MageObject::getPower)
-                .mapToInt(MageInt::getValue)
-                .max()
-                .orElse(0);
-    }
-
-    @Override
-    public DynamicValue copy() {
-        return instance;
-    }
-
-    @Override
-    public String getMessage() {
-        return "";
     }
 }

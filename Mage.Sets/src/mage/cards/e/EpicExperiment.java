@@ -67,6 +67,8 @@ class EpicExperimentEffect extends OneShotEffect {
         }
         Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, CardUtil.getSourceCostsTag(game, source, "X", 0)));
         controller.moveCards(cards, Zone.EXILED, source, game);
+        game.processAction();
+        cards.retainZone(Zone.EXILED, game);
         FilterCard filter = new FilterInstantOrSorceryCard();
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, CardUtil.getSourceCostsTag(game, source, "X", 0) + 1));
         CardUtil.castMultipleWithAttributeForFree(controller, source, game, cards, filter);

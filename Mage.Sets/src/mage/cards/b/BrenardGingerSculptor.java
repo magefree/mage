@@ -108,7 +108,7 @@ class BrenardGingerSculptorEffect extends OneShotEffect {
         effect.setBecomesArtifact(true);
         effect.withAdditionalSubType(SubType.FOOD);
         effect.withAdditionalSubType(SubType.GOLEM);
-        effect.addAdditionalAbilities(new FoodAbility(false));
+        effect.addAdditionalAbilities(new FoodAbility());
 
         player.moveCards(card, Zone.EXILED, source, game);
         effect.apply(game, source);

@@ -14,9 +14,11 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInHand;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -78,7 +80,7 @@ class CultivatorColossusEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        while (player.getHand().count(StaticFilters.FILTER_CARD_LAND, game) > 0) {
+        while (player.canRespond() && player.getHand().count(StaticFilters.FILTER_CARD_LAND, game) > 0) {
             TargetCard target = new TargetCardInHand(
                     0, 1, StaticFilters.FILTER_CARD_LAND
             );
@@ -91,10 +93,10 @@ class CultivatorColossusEffect extends OneShotEffect {
                     card, Zone.BATTLEFIELD, source, game, true,
                     false, false, null
             );
-            if (game.getPermanent(card.getId()) == null) {
-                break;
+            Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
+            if (permanent != null) {
+                player.drawCards(1, source, game);
             }
-            player.drawCards(1, source, game);
         }
         return true;
     }

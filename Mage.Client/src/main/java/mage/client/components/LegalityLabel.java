@@ -3,17 +3,18 @@ package mage.client.components;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckValidator;
 import mage.cards.decks.DeckValidatorError;
-import mage.cards.decks.importer.DeckImporter;
 import org.unbescape.html.HtmlEscape;
 import org.unbescape.html.HtmlEscapeLevel;
 import org.unbescape.html.HtmlEscapeType;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
+import java.util.Collections;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
- * @author Elandril
+ * @author Elandril, JayDi85
  */
 public class LegalityLabel extends JLabel {
 
@@ -24,9 +25,12 @@ public class LegalityLabel extends JLabel {
     protected static final Color COLOR_TEXT = new Color(255, 255, 255);
     protected static final Dimension DIM_MINIMUM = new Dimension(75, 25);
     protected static final Dimension DIM_MAXIMUM = new Dimension(150, 75);
-    protected static final Dimension DIM_PREFERRED = new Dimension(75, 25);
+    protected static final Dimension DIM_PREFERRED_1_OF_3 = new Dimension(75, 25);
+    protected static final Dimension DIM_PREFERRED_2_OF_3 = new Dimension(DIM_PREFERRED_1_OF_3.width * 2 + 5, 25);
+    protected static final Dimension DIM_PREFERRED_3_OF_3 = new Dimension(DIM_PREFERRED_1_OF_3.width * 3 + 5 * 2, 25);
+    protected static final Dimension DIM_PREFERRED_1_OF_5 = new Dimension((DIM_PREFERRED_3_OF_3.width - 5 * 4) / 5, 25);
 
-    protected static final int TOOLTIP_TABLE_WIDTH = 300; // size of the label's tooltip
+    protected static final int TOOLTIP_TABLE_WIDTH = 400; // size of the label's tooltip
     protected static final int TOOLTIP_MAX_ERRORS = 20; // max errors to show in tooltip
 
     protected Deck currentDeck;
@@ -51,7 +55,7 @@ public class LegalityLabel extends JLabel {
         setMaximumSize(DIM_MAXIMUM);
         setName(text); // NOI18N
         setOpaque(true);
-        setPreferredSize(DIM_PREFERRED);
+        setPreferredSize(DIM_PREFERRED_1_OF_3);
     }
 
     /**
@@ -77,7 +81,7 @@ public class LegalityLabel extends JLabel {
         setMinimumSize(DIM_MINIMUM);
         setMaximumSize(DIM_MAXIMUM);
         setOpaque(true);
-        setPreferredSize(DIM_PREFERRED);
+        setPreferredSize(DIM_PREFERRED_1_OF_3);
     }
 
     /**
@@ -88,21 +92,8 @@ public class LegalityLabel extends JLabel {
         button.setHorizontalAlignment(SwingConstants.CENTER);
         button.setMinimumSize(DIM_MINIMUM);
         button.setMaximumSize(DIM_MAXIMUM);
-        button.setPreferredSize(DIM_PREFERRED);
+        button.setPreferredSize(DIM_PREFERRED_1_OF_3);
         return button;
-    }
-
-    public String getErrorMessage() {
-        return errorMessage;
-    }
-
-    public DeckValidator getValidator() {
-        return validator;
-    }
-
-    public void setValidator(DeckValidator validator) {
-        this.validator = validator;
-        revalidateDeck();
     }
 
     protected String escapeHtml(String string) {
@@ -146,25 +137,33 @@ public class LegalityLabel extends JLabel {
         setBackground(color);
     }
 
-    public void showState(Color color, String tooltip) {
+    public void showState(Color color, String tooltip, boolean useErrors) {
         setBackground(color);
-        setToolTipText(appendErrorMessage(tooltip));
+        if (useErrors) {
+            setToolTipText(appendErrorMessage(tooltip));
+        } else {
+            setToolTipText(tooltip);
+        }
+    }
+
+    public void showStateInfo(String tooltip) {
+        showState(COLOR_LEGAL, tooltip, false);
     }
 
     public void showStateUnknown(String tooltip) {
-        showState(COLOR_UNKNOWN, tooltip);
+        showState(COLOR_UNKNOWN, tooltip, true);
     }
 
     public void showStateLegal(String tooltip) {
-        showState(COLOR_LEGAL, tooltip);
+        showState(COLOR_LEGAL, tooltip, true);
     }
 
     public void showStatePartlyLegal(String tooltip) {
-        showState(COLOR_PARTLY_LEGAL, tooltip);
+        showState(COLOR_PARTLY_LEGAL, tooltip, true);
     }
 
     public void showStateNotLegal(String tooltip) {
-        showState(COLOR_NOT_LEGAL, tooltip);
+        showState(COLOR_NOT_LEGAL, tooltip, true);
     }
 
     public void validateDeck(Deck deck) {
@@ -191,28 +190,13 @@ public class LegalityLabel extends JLabel {
         }
     }
 
-    public void validateDeck(File deckFile) {
-        deckFile = deckFile.getAbsoluteFile();
-        if (!deckFile.exists()) {
-            errorMessage = String.format("Deck file '%s' does not exist.", deckFile.getAbsolutePath());
-            showStateUnknown("<html><body><b>No Deck loaded!</b></body></html>");
-            return;
+    public java.util.List<String> selectCards() {
+        if (this.validator == null) {
+            return Collections.emptyList();
         }
-        try {
-            StringBuilder errorMessages = new StringBuilder();
-            Deck deck = Deck.load(DeckImporter.importDeckFromFile(deckFile.getAbsolutePath(), errorMessages, false), true, true);
-            errorMessage = errorMessages.toString();
-            validateDeck(deck);
-        } catch (Exception ex) {
-            errorMessage = String.format("Error importing deck from file '%s'!", deckFile.getAbsolutePath());
-        }
-    }
-
-    public void revalidateDeck() {
-        validateDeck(currentDeck);
-    }
-
-    public void validateDeck(String deckFile) {
-        validateDeck(new File(deckFile));
+        return this.validator.getErrorsList().stream()
+                .map(DeckValidatorError::getCardName)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
     }
 }

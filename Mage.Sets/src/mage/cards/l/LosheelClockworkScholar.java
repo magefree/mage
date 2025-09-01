@@ -1,7 +1,7 @@
 package mage.cards.l;
 
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.PreventAllDamageToAllEffect;
@@ -22,7 +22,7 @@ public final class LosheelClockworkScholar extends CardImpl {
     private static final FilterPermanent filter
             = new FilterArtifactCreaturePermanent("attacking artifact creatures you control");
     private static final FilterPermanent filter2
-            = new FilterArtifactCreaturePermanent("one or more artifact creatures");
+            = new FilterArtifactCreaturePermanent("one or more artifact creatures you control");
 
     static {
         filter.add(TargetController.YOU.getControllerPredicate());
@@ -45,7 +45,7 @@ public final class LosheelClockworkScholar extends CardImpl {
         )));
 
         // Whenever one or more artifact creatures enter the battlefield under your control, draw a card. This ability triggers only once each turn.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(
                 new DrawCardSourceControllerEffect(1), filter2
         ).setTriggersLimitEachTurn(1));
     }

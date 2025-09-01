@@ -1,11 +1,10 @@
-
 package mage.cards.l;
 
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.SpellCastOpponentNoManaSpentTriggeredAbility;
+import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.Card;
@@ -24,13 +23,12 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- *
  * @author NinthWorld
  */
 public final class LaviniaAzoriusRenegade extends CardImpl {
 
     public LaviniaAzoriusRenegade(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{U}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
         this.supertype.add(SuperType.LEGENDARY);
@@ -42,7 +40,10 @@ public final class LaviniaAzoriusRenegade extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new LaviniaAzoriusRenegadeReplacementEffect()));
 
         // Whenever an opponent casts a spell, if no mana was spent to cast it, counter that spell.
-        this.addAbility(new SpellCastOpponentNoManaSpentTriggeredAbility(new CounterTargetEffect().setText("counter that spell")));
+        this.addAbility(new SpellCastOpponentTriggeredAbility(
+                Zone.BATTLEFIELD, new CounterTargetEffect(),
+                StaticFilters.FILTER_SPELL_NO_MANA_SPENT, false
+        ));
     }
 
     private LaviniaAzoriusRenegade(final LaviniaAzoriusRenegade card) {
@@ -96,7 +97,7 @@ class LaviniaAzoriusRenegadeReplacementEffect extends ContinuousRuleModifyingEff
     private int getLandCount(Ability source, GameEvent event, Game game) {
         int landCount = 0;
         UUID playerId = event.getPlayerId();
-        if(playerId != null) {
+        if (playerId != null) {
             List<Permanent> permanents = game.getBattlefield().getActivePermanents(StaticFilters.FILTER_LAND, playerId, source, game);
             for (Permanent permanent : permanents) {
                 if (permanent.isControlledBy(playerId)) {

@@ -19,6 +19,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  *
@@ -111,7 +112,7 @@ class ArthurMarigoldKnightEffect extends OneShotEffect {
         )) {
             return player.putCardsOnBottomOfLibrary(cards, game, source, false);
         }
-        Permanent permanent = game.getPermanent(card.getId());
+        Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
         if (permanent == null) {
             return player.putCardsOnBottomOfLibrary(cards, game, source, false);
         }

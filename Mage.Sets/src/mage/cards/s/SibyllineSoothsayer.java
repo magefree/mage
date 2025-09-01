@@ -1,20 +1,16 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.GainSuspendEffect;
 import mage.abilities.keyword.SuspendAbility;
 import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.counters.CounterType;
 import mage.game.Game;
-import mage.players.Library;
 import mage.players.Player;
 
 import java.util.UUID;
@@ -49,8 +45,10 @@ class SibyllineSoothsayerEffect extends OneShotEffect {
 
     SibyllineSoothsayerEffect() {
         super(Outcome.Benefit);
-        staticText = "reveal cards from the top of your library until you reveal a nonland card with mana value 3 or greater. Exile that card with three time " +
-                "counters on it. If it doesn't have suspend, it gains suspend. Put the rest of the revealed cards on the bottom of your library in a random order.";
+        staticText = "reveal cards from the top of your library until you reveal a nonland card " +
+                "with mana value 3 or greater. Exile that card with three time counters on it. " +
+                "If it doesn't have suspend, it gains suspend. Put the rest of the revealed cards " +
+                "on the bottom of your library in a random order.";
     }
 
     private SibyllineSoothsayerEffect(final SibyllineSoothsayerEffect effect) {
@@ -65,36 +63,20 @@ class SibyllineSoothsayerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        if (player == null || !player.getLibrary().hasCards()) {
             return false;
         }
-        Library library = player.getLibrary();
-        if (!library.hasCards()) {
-            return true;
-        }
         Cards cards = new CardsImpl();
-        Card toSuspend = null;
-        for (Card card : library.getCards(game)) {
+        for (Card card : player.getLibrary().getCards(game)) {
             cards.add(card);
             if (!card.isLand(game) && card.getManaValue() >= 3) {
-                toSuspend = card;
+                player.revealCards(source, cards, game);
+                player.moveCards(card, Zone.EXILED, source, game);
+                SuspendAbility.addTimeCountersAndSuspend(card, 3, source, game);
                 break;
             }
         }
-
-        player.revealCards(source, cards, game);
-        if (toSuspend != null) {
-            boolean hasSuspend = toSuspend.getAbilities(game).containsClass(SuspendAbility.class);
-            UUID exileId = SuspendAbility.getSuspendExileId(player.getId(), game);
-            if (player.moveCardToExileWithInfo(toSuspend, exileId, "Suspended cards of " + player.getName(), source, game, Zone.LIBRARY, true)) {
-                toSuspend.addCounters(CounterType.TIME.createInstance(3), source.getControllerId(), source, game);
-                if (!hasSuspend) {
-                    game.addEffect(new GainSuspendEffect(new MageObjectReference(toSuspend, game)), source);
-                }
-                game.informPlayers(player.getLogName() + " suspends 3 - " + toSuspend.getName());
-            }
-        }
-        cards.remove(toSuspend);
+        cards.retainZone(Zone.LIBRARY, game);
         if (!cards.isEmpty()) {
             player.putCardsOnBottomOfLibrary(cards, game, source, false);
         }

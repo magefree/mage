@@ -18,7 +18,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterBySubtypeCard;
+import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.util.CardUtil;
 
@@ -29,6 +29,8 @@ import java.util.UUID;
  * Based on [Crown of Gondor][Dread Wanderer][Forerunner of the Coalition][Thirst for Discovery][Mask of Memory]
  */
 public final class ArmMountedAnchor extends CardImpl {
+
+    private static final FilterCard filter = new FilterCard(SubType.PIRATE);
 
     public ArmMountedAnchor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
@@ -42,11 +44,12 @@ public final class ArmMountedAnchor extends CardImpl {
         this.addAbility(firstAbility);
 
         // Whenever equipped creature deals combat damage to a player, draw two cards. Then discard two cards unless you discard a Pirate card.
-        Ability drawAbility = new DealsDamageToAPlayerAttachedTriggeredAbility(new DrawCardSourceControllerEffect(2), "equipped creature", false);
-        DiscardCardCost cost = new DiscardCardCost(new FilterBySubtypeCard(SubType.PIRATE));
-        cost.setText("Discard a Pirate card instead of discarding two cards");
+        Ability drawAbility = new DealsDamageToAPlayerAttachedTriggeredAbility(
+                new DrawCardSourceControllerEffect(2), "equipped creature", false
+        );
         drawAbility.addEffect(new DoIfCostPaid(
-                null, new DiscardControllerEffect(2), cost
+                null, new DiscardControllerEffect(2),
+                new DiscardCardCost(filter).setText("Discard a Pirate card instead of discarding two cards")
         ).setText("Then discard two cards unless you discard a Pirate card"));
         this.addAbility(drawAbility);
 

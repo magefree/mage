@@ -1,6 +1,5 @@
 package mage.cards.t;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -13,11 +12,9 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetOpponent;
 
-import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -31,6 +28,7 @@ public final class ThranTome extends CardImpl {
         // Reveal the top three cards of your library. Target opponent chooses one of those cards. Put that card into your graveyard, then draw two cards.
         Ability ability = new SimpleActivatedAbility(new ThranTomeEffect(), new ManaCostsImpl<>("{5}"));
         ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }
 
@@ -62,35 +60,18 @@ class ThranTomeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        // validate source and controller exist
+        // validate opponent and controller exist
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source);
+        Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
 
-        if (sourceObject == null || controller == null) {
+        if (opponent == null || controller == null) {
             return false;
-        }
-
-        // target an opponent, if able
-        Player opponent;
-        Set<UUID> opponents = game.getOpponents(controller.getId());
-        opponents.removeIf(opp -> !game.getPlayer(opp).canBeTargetedBy(sourceObject, source.getControllerId(), source, game));
-
-        if (opponents.isEmpty()) {
-            return false;
-        } else {
-            if (opponents.size() == 1) {
-                opponent = game.getPlayer(opponents.iterator().next());
-            } else {
-                Target target = new TargetOpponent();
-                controller.chooseTarget(Outcome.Detriment, target, source, game);
-                opponent = game.getPlayer(target.getFirstTarget());
-            }
         }
 
         // reveal the cards and choose one. put it in the graveyard
         Card cardToGraveyard;
         Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 3));
-        controller.revealCards(sourceObject.getIdName(), cards, game);
+        controller.revealCards(source, cards, game);
 
         if (cards.size() == 1) {
             cardToGraveyard = cards.getRandom(game);

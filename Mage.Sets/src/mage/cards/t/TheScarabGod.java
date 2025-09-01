@@ -4,6 +4,8 @@ import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
+import mage.abilities.effects.common.LoseLifeOpponentsEffect;
+import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -31,7 +33,6 @@ import mage.target.targetpointer.FixedTarget;
 import java.util.UUID;
 
 /**
- *
  * @author spjspj
  */
 public final class TheScarabGod extends CardImpl {
@@ -51,15 +52,17 @@ public final class TheScarabGod extends CardImpl {
         this.toughness = new MageInt(5);
 
         // At the beginning of your upkeep, each opponent loses X life and you scry X, where X is the number of Zombies you control.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TheScarabGodEffect(xValue)).addHint(hint));
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new LoseLifeOpponentsEffect(xValue).setText("each opponent loses X life"));
+        ability.addEffect(new ScryEffect(xValue).concatBy("and you"));
+        this.addAbility(ability.addHint(hint));
 
         // {2}{U}{B}: Exile target creature card from a graveyard. Create a token that's a copy of it, except it's a 4/4 black Zombie.
-        Ability ability = new SimpleActivatedAbility(new TheScarabGodEffect2(), new ManaCostsImpl<>("{2}{U}{B}"));
+        ability = new SimpleActivatedAbility(new TheScarabGodExileEffect(), new ManaCostsImpl<>("{2}{U}{B}"));
         ability.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE_A_GRAVEYARD));
         this.addAbility(ability);
 
         // When The Scarab God dies, return it to its owner's hand at the beginning of the next end step.
-        this.addAbility(new DiesSourceTriggeredAbility(new TheScarabGodEffect3()));
+        this.addAbility(new DiesSourceTriggeredAbility(new TheScarabGodEffectDieEffect()));
     }
 
     private TheScarabGod(final TheScarabGod card) {
@@ -72,61 +75,20 @@ public final class TheScarabGod extends CardImpl {
     }
 }
 
-class TheScarabGodEffect extends OneShotEffect {
+class TheScarabGodExileEffect extends OneShotEffect {
 
-    private final DynamicValue numOfZombies;
-
-    public TheScarabGodEffect(DynamicValue numOfZombies) {
-        super(Outcome.Benefit);
-        this.numOfZombies = numOfZombies;
-        staticText = "each opponent loses X life and you scry X, where X is the number of Zombies you control";
-    }
-
-    private TheScarabGodEffect(final TheScarabGodEffect effect) {
-        super(effect);
-        this.numOfZombies = effect.numOfZombies;
-    }
-
-    @Override
-    public TheScarabGodEffect copy() {
-        return new TheScarabGodEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            int numZombies = numOfZombies.calculate(game, source, this);
-            if (numZombies > 0) {
-                for (UUID playerId : game.getOpponents(source.getControllerId())) {
-                    Player opponent = game.getPlayer(playerId);
-                    if (opponent != null) {
-                        opponent.loseLife(numZombies, game, source, false);
-                    }
-                }
-                controller.scry(numZombies, source, game);
-            }
-
-            return true;
-        }
-        return false;
-    }
-}
-
-class TheScarabGodEffect2 extends OneShotEffect {
-
-    public TheScarabGodEffect2() {
+    public TheScarabGodExileEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Exile target creature card from a graveyard. Create a token that's a copy of it, except it's a 4/4 black Zombie.";
     }
 
-    private TheScarabGodEffect2(final TheScarabGodEffect2 effect) {
+    private TheScarabGodExileEffect(final TheScarabGodExileEffect effect) {
         super(effect);
     }
 
     @Override
-    public TheScarabGodEffect2 copy() {
-        return new TheScarabGodEffect2(this);
+    public TheScarabGodExileEffect copy() {
+        return new TheScarabGodExileEffect(this);
     }
 
     @Override
@@ -147,16 +109,16 @@ class TheScarabGodEffect2 extends OneShotEffect {
     }
 }
 
-class TheScarabGodEffect3 extends OneShotEffect {
+class TheScarabGodEffectDieEffect extends OneShotEffect {
 
     private static final String effectText = "return it to its owner's hand at the beginning of the next end step";
 
-    TheScarabGodEffect3() {
+    TheScarabGodEffectDieEffect() {
         super(Outcome.Benefit);
         staticText = effectText;
     }
 
-    private TheScarabGodEffect3(final TheScarabGodEffect3 effect) {
+    private TheScarabGodEffectDieEffect(final TheScarabGodEffectDieEffect effect) {
         super(effect);
     }
 
@@ -165,14 +127,14 @@ class TheScarabGodEffect3 extends OneShotEffect {
         // Create delayed triggered ability
         Effect effect = new ReturnToHandTargetEffect();
         effect.setText("return {this} to its owner's hand");
-        effect.setTargetPointer(new FixedTarget(source.getSourceId(), source.getSourceObjectZoneChangeCounter()));
+        effect.setTargetPointer(new FixedTarget(source.getSourceId(), source.getStackMomentSourceZCC()));
         DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
         game.addDelayedTriggeredAbility(delayedAbility, source);
         return true;
     }
 
     @Override
-    public TheScarabGodEffect3 copy() {
-        return new TheScarabGodEffect3(this);
+    public TheScarabGodEffectDieEffect copy() {
+        return new TheScarabGodEffectDieEffect(this);
     }
 }

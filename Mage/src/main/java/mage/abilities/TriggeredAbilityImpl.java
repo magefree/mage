@@ -27,6 +27,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
 
     private boolean optional;
     private Condition interveningIfCondition;
+    private Condition triggerCondition;
     private boolean leavesTheBattlefieldTrigger;
     private int triggerLimitEachTurn = Integer.MAX_VALUE; // for "triggers only once|twice each turn"
     private int triggerLimitEachGame = Integer.MAX_VALUE; // for "triggers only once|twice"
@@ -57,6 +58,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         super(ability);
         this.optional = ability.optional;
         this.interveningIfCondition = ability.interveningIfCondition;
+        this.triggerCondition = ability.triggerCondition;
         this.leavesTheBattlefieldTrigger = ability.leavesTheBattlefieldTrigger;
         this.triggerLimitEachTurn = ability.triggerLimitEachTurn;
         this.triggerLimitEachGame = ability.triggerLimitEachGame;
@@ -69,7 +71,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     @Override
     public void trigger(Game game, UUID controllerId, GameEvent triggeringEvent) {
         //20091005 - 603.4
-        if (checkInterveningIfClause(game)) {
+        if (checkInterveningIfClause(game) && checkTriggerCondition(game)) {
             updateTurnCount(game);
             updateGameCount(game);
             game.addTriggeredAbility(this, triggeringEvent);
@@ -154,13 +156,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
 
     @Override
     public boolean checkUsedAlready(Game game) {
-        if (!doOnlyOnceEachTurn) {
-            return false;
-        }
-        Integer lastTurnUsed = (Integer) game.getState().getValue(
-                CardUtil.getCardZoneString("lastTurnUsed" + getOriginalId(), sourceId, game)
-        );
-        return lastTurnUsed != null && lastTurnUsed == game.getTurnNum();
+        return doOnlyOnceEachTurn && TriggeredAbility.checkDidThisTurn(this, game);
     }
 
     @Override
@@ -207,7 +203,9 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     @Override
     public TriggeredAbility setDoOnlyOnceEachTurn(boolean doOnlyOnce) {
         this.doOnlyOnceEachTurn = doOnlyOnce;
-        setOptional();
+        if (CardUtil.castStream(this.getAllEffects(), DoIfCostPaid.class).noneMatch(DoIfCostPaid::isOptional)) {
+            this.optional = true;
+        }
         return this;
     }
 
@@ -220,12 +218,35 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     @Override
     public TriggeredAbility withInterveningIf(Condition interveningIfCondition) {
         this.interveningIfCondition = interveningIfCondition;
+        this.replaceRuleText = false;
         return this;
     }
 
     @Override
     public boolean checkInterveningIfClause(Game game) {
         return interveningIfCondition == null || interveningIfCondition.apply(game, this);
+    }
+
+    @Override
+    public TriggeredAbility withTriggerCondition(Condition condition) {
+        this.triggerCondition = condition;
+        if (this.triggerPhrase != null && !condition.toString().isEmpty()) {
+            this.setTriggerPhrase(
+                    this.triggerPhrase.substring(0, this.triggerPhrase.length() - 2) + ' ' +
+                            (condition.toString().startsWith("during") ? "" : "while ") + condition + ", "
+            );
+        }
+        return this;
+    }
+
+    @Override
+    public Condition getTriggerCondition() {
+        return triggerCondition;
+    }
+
+    @Override
+    public boolean checkTriggerCondition(Game game) {
+        return triggerCondition == null || triggerCondition.apply(game, this);
     }
 
     @Override
@@ -244,11 +265,9 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
             )) {
                 return false;
             }
-        }
-        if (doOnlyOnceEachTurn) {
-            game.getState().setValue(CardUtil.getCardZoneString(
-                    "lastTurnUsed" + getOriginalId(), sourceId, game
-            ), game.getTurnNum());
+            if (doOnlyOnceEachTurn) {
+                TriggeredAbility.setDidThisTurn(this, game);
+            }
         }
         //20091005 - 603.4
         if (!super.resolve(game)) {
@@ -276,16 +295,6 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     @Override
     public String getRule() {
         StringBuilder sb = new StringBuilder();
-        String prefix;
-        if (abilityWord != null) {
-            prefix = abilityWord.formatWord();
-        } else if (flavorWord != null) {
-            prefix = CardUtil.italicizeWithEmDash(flavorWord);
-        } else {
-            prefix = "";
-        }
-        sb.append(prefix);
-
         sb.append(triggerPhrase == null ? "" : triggerPhrase);
 
         if (interveningIfCondition != null) {
@@ -293,6 +302,9 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
             if (!conditionText.isEmpty()) { // e.g. CaseSolveAbility
                 if (replaceRuleText && triggerPhrase != null && triggerPhrase.contains("{this}")) {
                     conditionText = conditionText.replace("{this}", "it");
+                    if (conditionText.startsWith("it is ")) {
+                        conditionText = conditionText.replace("it is ", "it's ");
+                    }
                 }
                 if (!conditionText.startsWith("if ")) {
                     sb.append("if ");
@@ -321,7 +333,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                 }
             }
             if (replaceRuleText && triggerPhrase != null) {
-                superRule = superRule.replaceFirst("^((?:you may )?sacrifice |(put|remove) [^ ]+ [^ ]+ counters? (on|from) |return |transform |untap |regenerate )?\\{this\\}", "$1it");
+                superRule = superRule.replaceFirst("^((?:you may )?sacrifice |(put|remove) [^ ]+ [^ ]+ counters? (on|from) |return |transform |untap |regenerate |attach )?\\{this\\}", "$1it");
             }
             sb.append(superRule);
             if (triggerLimitEachTurn != Integer.MAX_VALUE) {
@@ -358,11 +370,12 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                 sb.append(" Do this only once each turn.");
             }
         }
-        return sb.toString();
+        return addRulePrefix(sb.toString());
     }
 
     private static boolean startsWithVerb(String ruleLow) {
         return ruleLow.startsWith("attach")
+                || ruleLow.startsWith("cast")
                 || ruleLow.startsWith("change")
                 || ruleLow.startsWith("counter")
                 || ruleLow.startsWith("create")
@@ -475,20 +488,6 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     @Override
     public boolean isOptional() {
         return optional;
-    }
-
-    @Override
-    public TriggeredAbility setOptional() {
-        this.optional = true;
-
-        if (getEffects().stream().anyMatch(
-                effect -> effect instanceof DoIfCostPaid && ((DoIfCostPaid) effect).isOptional())) {
-            throw new IllegalArgumentException(
-                    "DoIfCostPaid effect must have only one optional settings, but it have two (trigger + DoIfCostPaid): "
-                            + this.getClass().getSimpleName());
-        }
-
-        return this;
     }
 
     @Override

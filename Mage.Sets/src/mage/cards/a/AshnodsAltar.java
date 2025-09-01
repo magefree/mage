@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -26,7 +25,7 @@ public final class AshnodsAltar extends CardImpl {
         // Sacrifice a creature: Add {C}{C}.
         SacrificeTargetCost cost = new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE);
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, 
-                new BasicManaEffect(Mana.ColorlessMana(2), CreaturesYouControlCount.instance), 
+                new BasicManaEffect(Mana.ColorlessMana(2), CreaturesYouControlCount.PLURAL),
                 cost));
     }
 

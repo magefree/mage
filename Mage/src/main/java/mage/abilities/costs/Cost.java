@@ -19,8 +19,19 @@ public interface Cost extends Serializable, Copyable<Cost> {
     /**
      * Check is it possible to pay
      * For mana it checks only single color and amount available, not total mana cost
+     * <p>
+     * Warning, if you want to use canChoose, then don't forget about already selected targets (important for AI sims).
      */
     boolean canPay(Ability ability, Ability source, UUID controllerId, Game game);
+
+    /**
+     * Simple canPay logic implementation with targets - cost has possible targets or already selected it, e.g. by AI sims
+     * <p>
+     * Do not override
+     */
+    default boolean canChooseOrAlreadyChosen(Ability ability, Ability source, UUID controllerId, Game game) {
+        return this.getTargets().stream().allMatch(target -> target.isChosen(game) || target.canChoose(controllerId, source, game));
+    }
 
     boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana);
 

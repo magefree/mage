@@ -1,6 +1,5 @@
 package mage.cards.c;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -11,7 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.predicate.Predicates;
@@ -23,10 +22,11 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 
+import java.util.Optional;
 import java.util.UUID;
 
 /**
- * @author spjspj
+ * @author TheElk801
  */
 public final class CrownOfTheAges extends CardImpl {
 
@@ -61,7 +61,7 @@ class CrownOfTheAgesEffect extends OneShotEffect {
 
     CrownOfTheAgesEffect() {
         super(Outcome.BoostCreature);
-        this.staticText = "Attach target Aura attached to a creature to another creature";
+        this.staticText = "attach target Aura attached to a creature to another creature";
     }
 
     private CrownOfTheAgesEffect(final CrownOfTheAgesEffect effect) {
@@ -75,47 +75,27 @@ class CrownOfTheAgesEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent aura = game.getPermanent(source.getFirstTarget());
+        Permanent aura = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (aura == null) {
             return false;
         }
-        Permanent fromPermanent = game.getPermanent(aura.getAttachedTo());
-        Player controller = game.getPlayer(source.getControllerId());
-        if (fromPermanent == null || controller == null) {
+        FilterPermanent filter = new FilterCreaturePermanent("another creature");
+        filter.add(Predicates.not(new PermanentIdPredicate(aura.getAttachedTo())));
+        if (!game.getBattlefield().contains(filter, source, game, 1)) {
             return false;
         }
-        boolean passed = true;
-        FilterCreaturePermanent filterChoice = new FilterCreaturePermanent("another creature");
-        filterChoice.add(Predicates.not(new PermanentIdPredicate(fromPermanent.getId())));
-
-        Target chosenCreatureToAttachAura = new TargetPermanent(filterChoice);
-        chosenCreatureToAttachAura.withNotTarget(true);
-
-        if (chosenCreatureToAttachAura.canChoose(source.getControllerId(), source, game)
-                && controller.choose(Outcome.Neutral, chosenCreatureToAttachAura, source, game)) {
-            Permanent creatureToAttachAura = game.getPermanent(chosenCreatureToAttachAura.getFirstTarget());
-            if (creatureToAttachAura != null) {
-                if (passed) {
-                    // Check the target filter
-                    Target target = aura.getSpellAbility().getTargets().get(0);
-                    if (target instanceof TargetPermanent) {
-                        if (!target.getFilter().match(creatureToAttachAura, game)) {
-                            passed = false;
-                        }
-                    }
-                    // Check for protection
-                    MageObject auraObject = game.getObject(aura.getId());
-                    if (auraObject != null && creatureToAttachAura.cantBeAttachedBy(auraObject, source, game, true)) {
-                        passed = false;
-                    }
-                }
-                if (passed) {
-                    fromPermanent.removeAttachment(aura.getId(), source, game);
-                    creatureToAttachAura.addAttachment(aura.getId(), source, game);
-                    return true;
-                }
-            }
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
         }
-        return true;
+        Target target = new TargetPermanent(filter);
+        target.withNotTarget(true);
+        controller.choose(Outcome.Neutral, target, source, game);
+        return Optional
+                .ofNullable(target)
+                .map(Target::getFirstTarget)
+                .map(game::getPermanent)
+                .map(permanent -> permanent.addAttachment(aura.getId(), source, game))
+                .orElse(false);
     }
 }

@@ -29,9 +29,7 @@ public class MastersRebuke extends CardImpl {
         // Target creature you control deals damage equal to its power to target creature or planeswalker you don’t control.
         this.getSpellAbility().addEffect(new DamageWithPowerFromOneToAnotherTargetEffect());
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        TargetPermanent targetForDamage = new TargetPermanent(filter);
-        targetForDamage.setTargetTag(2);
-        this.getSpellAbility().addTarget(targetForDamage);
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
     private MastersRebuke(final MastersRebuke card) { super(card); }

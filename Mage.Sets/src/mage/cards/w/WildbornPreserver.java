@@ -94,7 +94,7 @@ class WildbornPreserverCreateReflexiveTriggerEffect extends OneShotEffect {
         if (!player.chooseUse(outcome, "Pay " + cost.getText() + "?", source, game)) {
             return false;
         }
-        int costX = player.announceXMana(0, Integer.MAX_VALUE, "Announce the value for {X}", game, source);
+        int costX = player.announceX(0, Integer.MAX_VALUE, "Announce the value for {X} (pay for counters)", game, source, true);
         cost.add(new GenericManaCost(costX));
         if (!cost.pay(source, game, source, source.getControllerId(), false, null)) {
             return false;

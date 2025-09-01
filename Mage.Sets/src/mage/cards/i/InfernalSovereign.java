@@ -1,7 +1,8 @@
 package mage.cards.i;
 
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.Ability;
+import mage.abilities.common.PlayLandOrCastSpellTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
@@ -12,9 +13,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 
 import java.util.UUID;
 
@@ -39,7 +37,9 @@ public final class InfernalSovereign extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new SkipDrawStepEffect()));
 
         // Whenever you play a land or cast a spell, you draw a card and you lose 1 life.
-        this.addAbility(new InfernalSovereignTriggeredAbility());
+        Ability ability = new PlayLandOrCastSpellTriggeredAbility(new DrawCardSourceControllerEffect(1, true));
+        ability.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
+        this.addAbility(ability);
     }
 
     private InfernalSovereign(final InfernalSovereign card) {
@@ -49,33 +49,5 @@ public final class InfernalSovereign extends CardImpl {
     @Override
     public InfernalSovereign copy() {
         return new InfernalSovereign(this);
-    }
-}
-
-class InfernalSovereignTriggeredAbility extends TriggeredAbilityImpl {
-
-    public InfernalSovereignTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1).setText("you draw a card"));
-        this.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
-        setTriggerPhrase("Whenever you play a land or cast a spell, ");
-    }
-
-    private InfernalSovereignTriggeredAbility(final InfernalSovereignTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public InfernalSovereignTriggeredAbility copy() {
-        return new InfernalSovereignTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.LAND_PLAYED || event.getType() == GameEvent.EventType.SPELL_CAST;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getPlayerId().equals(controllerId);
     }
 }

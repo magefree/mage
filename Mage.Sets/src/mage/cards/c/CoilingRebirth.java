@@ -18,6 +18,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -74,7 +75,7 @@ class CoilingRebirthEffect extends OneShotEffect {
         controller.moveCards(card, Zone.BATTLEFIELD, source, game);
         if (GiftWasPromisedCondition.TRUE.apply(game, source)) {
             game.processAction();
-            Permanent permanent = game.getPermanent(card.getId());
+            Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
             if (permanent != null && !permanent.isLegendary(game)) {
                 CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(
                         null, null, false, 1, false, false,

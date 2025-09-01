@@ -21,7 +21,7 @@ import java.util.UUID;
  * @author notgreat
  */
 public final class DaringWaverider extends CardImpl {
-    private static final FilterCard filter = new FilterInstantOrSorceryCard("instant or sorcery card with mana value 4 or less");
+    private static final FilterCard filter = new FilterInstantOrSorceryCard("instant or sorcery card with mana value 4 or less from your graveyard");
 
     static {
         filter.add(new ManaValuePredicate(ComparisonType.OR_LESS, 4));

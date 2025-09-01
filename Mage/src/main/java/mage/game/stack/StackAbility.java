@@ -584,6 +584,11 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
+    public String addRulePrefix(String rule) {
+        throw new UnsupportedOperationException("Not supported.");
+    }
+
+    @Override
     public Ability withFirstModeFlavorWord(String flavorWord) {
         throw new UnsupportedOperationException("Not supported.");
     }
@@ -669,8 +674,12 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
-    public int getSourceObjectZoneChangeCounter() {
-        return ability.getSourceObjectZoneChangeCounter();
+    public void initSourceObjectZoneChangeCounter(Game game, boolean force) {
+        ability.initSourceObjectZoneChangeCounter(game, force);
+    }
+    @Override
+    public int getStackMomentSourceZCC() {
+        return ability.getStackMomentSourceZCC();
     }
 
     @Override
@@ -719,13 +728,23 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
+    public boolean canBeCopied() {
+        return ability.canBeCopied();
+    }
+
+    @Override
+    public Ability withCanBeCopied(boolean canBeCopied) {
+        throw new UnsupportedOperationException("Not supported.");
+    }
+
+    @Override
     public void createSingleCopy(UUID newControllerId, StackObjectCopyApplier applier, MageObjectReferencePredicate newTargetFilterPredicate, Game game, Ability source, boolean chooseNewTargets) {
         Ability newAbility = this.ability.copy();
         newAbility.newId();
         newAbility.setControllerId(newControllerId);
 
         StackAbility newStackAbility = new StackAbility(newAbility, newControllerId);
-        game.getStack().push(newStackAbility);
+        game.getStack().push(game, newStackAbility);
 
         // new targets
         if (newTargetFilterPredicate != null) {

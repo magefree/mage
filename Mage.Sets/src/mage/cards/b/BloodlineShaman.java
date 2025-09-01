@@ -89,7 +89,7 @@ class BloodlineShamanEffect extends OneShotEffect {
 
             if (card != null) {
                 // If that card is a creature card of the chosen type, put it into your hand.
-                if (card.isCreature(game) && subType != null && card.getSubtype(game).contains(subType)) {
+                if (card.isCreature(game) && subType != null && card.hasSubtype(subType, game)) {
                     controller.moveCards(card, Zone.HAND, source, game);
                     // Otherwise, put it into your graveyard.
                 } else {

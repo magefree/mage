@@ -83,6 +83,7 @@ public abstract class AbilityImpl implements Ability {
     private List<Watcher> watchers = new ArrayList<>(); // access to it by GetWatchers only (it can be overridden by some abilities)
     private List<Ability> subAbilities = null;
     private boolean canFizzle = true; // for Gilded Drake
+    private boolean canBeCopied = true;
     private TargetAdjuster targetAdjuster = null;
     private CostAdjuster costAdjuster = null;
     private List<Hint> hints = new ArrayList<>();
@@ -129,6 +130,7 @@ public abstract class AbilityImpl implements Ability {
         this.flavorWord = ability.flavorWord;
         this.sourceObjectZoneChangeCounter = ability.sourceObjectZoneChangeCounter;
         this.canFizzle = ability.canFizzle;
+        this.canBeCopied = ability.canBeCopied;
         this.targetAdjuster = ability.targetAdjuster;
         this.costAdjuster = ability.costAdjuster;
         this.hints = CardUtil.deepCopyObject(ability.hints);
@@ -270,9 +272,7 @@ public abstract class AbilityImpl implements Ability {
         game.applyEffects();
 
         MageObject sourceObject = getSourceObject(game);
-        if (getSourceObjectZoneChangeCounter() == 0) {
-            setSourceObjectZoneChangeCounter(game.getState().getZoneChangeCounter(getSourceId()));
-        }
+        initSourceObjectZoneChangeCounter(game, false);
         setSourcePermanentTransformCount(game);
 
         // if ability can be cast for no mana, clear the mana costs now, because additional mana costs must be paid.
@@ -376,8 +376,8 @@ public abstract class AbilityImpl implements Ability {
 
         // unit tests only: it allows to add targets/choices by two ways:
         // 1. From cast/activate command params (process it here)
-        // 2. From single addTarget/setChoice, it's a preffered method for tests (process it in normal choose dialogs like human player)
-        if (controller.isTestsMode()) {
+        // 2. From single addTarget/setChoice, it's a preferred method for tests (process it in normal choose dialogs like human player)
+        if (controller.isTestMode()) {
             if (!controller.addTargets(this, game)) {
                 return false;
             }
@@ -787,8 +787,8 @@ public abstract class AbilityImpl implements Ability {
                         xValue = variableManaCost.getAmount();
                     } else {
                         // announce by player
-                        xValue = controller.announceXMana(variableManaCost.getMinX(), variableManaCost.getMaxX(),
-                                "Announce the value for " + variableManaCost.getText(), game, this);
+                        xValue = controller.announceX(variableManaCost.getMinX(), variableManaCost.getMaxX(),
+                                "Announce the value for " + variableManaCost.getText(), game, this, true);
                     }
 
                     int amountMana = xValue * variableManaCost.getXInstancesCount();
@@ -1016,38 +1016,28 @@ public abstract class AbilityImpl implements Ability {
 
         String ruleStart = sbRule.toString();
         String text = getModes().getText();
-        String rule;
+        StringBuilder rule = new StringBuilder();
         if (!text.isEmpty()) {
             if (ruleStart.length() > 1) {
                 String end = ruleStart.substring(ruleStart.length() - 2).trim();
                 if (end.isEmpty() || end.equals(":") || end.equals(".")) {
-                    rule = ruleStart + CardUtil.getTextWithFirstCharUpperCase(text);
+                    rule.append(ruleStart + CardUtil.getTextWithFirstCharUpperCase(text));
                 } else {
-                    rule = ruleStart + text;
+                    rule.append(ruleStart + text);
                 }
             } else {
-                rule = ruleStart + text;
+                rule.append(ruleStart + text);
             }
         } else {
-            rule = ruleStart;
-        }
-        String prefix;
-        if (this instanceof TriggeredAbility || this instanceof EntersBattlefieldAbility) {
-            prefix = null;
-        } else if (abilityWord != null) {
-            prefix = abilityWord.formatWord();
-        } else if (flavorWord != null) {
-            prefix = CardUtil.italicizeWithEmDash(flavorWord);
-        } else {
-            prefix = null;
-        }
-        if (prefix != null) {
-            rule = prefix + CardUtil.getTextWithFirstCharUpperCase(rule);
+            rule.append(ruleStart);
         }
         if (appendToRule != null) {
-            rule = rule.concat(appendToRule);
+            rule.append(appendToRule);
         }
-        return rule;
+        if (this instanceof TriggeredAbility || this instanceof EntersBattlefieldAbility) {
+            return rule.toString();
+        }
+        return addRulePrefix(rule.toString());
     }
 
     @Override
@@ -1236,11 +1226,8 @@ public abstract class AbilityImpl implements Ability {
         for (Mode mode : modes.values()) {
             boolean validTargets = true;
             for (Target target : mode.getTargets()) {
-                UUID abilityControllerId = controllerId;
-                if (target.getTargetController() != null) {
-                    abilityControllerId = target.getTargetController();
-                }
-                if (!target.canChoose(abilityControllerId, ability, game)) {
+                UUID abilityControllerId = target.getAffectedAbilityControllerId(controllerId);
+                if (!target.canChooseOrAlreadyChosen(abilityControllerId, ability, game)) {
                     validTargets = false;
                     break;
                 }
@@ -1478,6 +1465,17 @@ public abstract class AbilityImpl implements Ability {
     }
 
     @Override
+    public String addRulePrefix(String rule) {
+        if (abilityWord != null) {
+            return abilityWord.formatWord() + CardUtil.getTextWithFirstCharUpperCase(rule);
+        } else if (flavorWord != null) {
+            return CardUtil.italicizeWithEmDash(flavorWord) + CardUtil.getTextWithFirstCharUpperCase(rule);
+        } else {
+            return rule;
+        }
+    }
+
+    @Override
     public Ability withFirstModeFlavorWord(String flavorWord) {
         this.modes.getMode().withFlavorWord(flavorWord);
         return this;
@@ -1660,8 +1658,8 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public MageObject getSourceObjectIfItStillExists(Game game) {
-        if (getSourceObjectZoneChangeCounter() == 0
-                || getSourceObjectZoneChangeCounter() == game.getState().getZoneChangeCounter(getSourceId())) {
+        if (getStackMomentSourceZCC() == 0
+                || getStackMomentSourceZCC() == getCurrentSourceObjectZoneChangeCounter(game)) {
             // exists or lki from battlefield
             return game.getObject(getSourceId());
         }
@@ -1690,7 +1688,7 @@ public abstract class AbilityImpl implements Ability {
     public Permanent getSourcePermanentOrLKI(Game game) {
         Permanent permanent = getSourcePermanentIfItStillExists(game);
         if (permanent == null) {
-            permanent = (Permanent) game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD, getSourceObjectZoneChangeCounter());
+            permanent = (Permanent) game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD, getStackMomentSourceZCC());
         }
         return permanent;
     }
@@ -1701,7 +1699,28 @@ public abstract class AbilityImpl implements Ability {
     }
 
     @Override
-    public int getSourceObjectZoneChangeCounter() {
+    public void initSourceObjectZoneChangeCounter(Game game, boolean force) {
+        if (!(this instanceof MageSingleton) && (force || sourceObjectZoneChangeCounter == 0 )) {
+            setSourceObjectZoneChangeCounter(getCurrentSourceObjectZoneChangeCounter(game));
+        }
+    }
+
+    private int getCurrentSourceObjectZoneChangeCounter(Game game){
+        int zcc = game.getState().getZoneChangeCounter(getSourceId());
+        // TODO: Enable this, #13710
+        /*if (game.getPermanentEntering(getSourceId()) != null){
+            // If the triggered ability triggered while the permanent is entering the battlefield
+            // then add 1 zcc so that it triggers as if the permanent was already on the battlefield
+            // So "Enters with counters" causes "Whenever counters are placed" to trigger with battlefield zcc
+            // Particularly relevant for Sagas, which always involve both
+            // Note that this does NOT apply to "As ~ ETB" effects, those still use the stack zcc
+            zcc += 1;
+        }*/
+        return zcc;
+    }
+
+    @Override
+    public int getStackMomentSourceZCC() {
         return sourceObjectZoneChangeCounter;
     }
 
@@ -1734,7 +1753,22 @@ public abstract class AbilityImpl implements Ability {
     }
 
     @Override
+    public boolean canBeCopied() {
+        return canBeCopied;
+    }
+
+    @Override
+    public Ability withCanBeCopied(boolean canBeCopied) {
+        this.canBeCopied = canBeCopied;
+        return this;
+    }
+
+    @Override
     public AbilityImpl setTargetAdjuster(TargetAdjuster targetAdjuster) {
+        if (targetAdjuster == null) {
+            this.targetAdjuster = null;
+            return this;
+        }
         if (targetAdjuster instanceof GenericTargetAdjuster && this.getTargets().isEmpty()) {
             throw new IllegalStateException("Target adjuster being added but no targets are set!");
         }

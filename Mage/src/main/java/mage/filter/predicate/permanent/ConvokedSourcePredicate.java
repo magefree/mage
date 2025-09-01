@@ -17,7 +17,7 @@ public enum ConvokedSourcePredicate implements ObjectSourcePlayerPredicate<Perma
     instance;
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
-        HashSet<MageObjectReference> set = CardUtil.getSourceCostsTag(game, input.getSource(), ConvokeAbility.convokingCreaturesKey, new HashSet<>(0));
+        HashSet<MageObjectReference> set = CardUtil.getSourceCostsTag(game, input.getSource(), ConvokeAbility.convokingCreaturesKey, new HashSet<>());
         return set.contains(new MageObjectReference(input.getObject(), game));
     }
 }

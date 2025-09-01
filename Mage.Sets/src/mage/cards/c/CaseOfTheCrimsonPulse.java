@@ -1,24 +1,23 @@
 package mage.cards.c;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.CaseAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.HellbentCondition;
 import mage.abilities.condition.common.SolvedSourceCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.discard.DiscardControllerEffect;
 import mage.abilities.effects.common.discard.DiscardHandControllerEffect;
 import mage.abilities.hint.common.CaseSolvedHint;
-import mage.constants.SubType;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  * Case of the Crimson Pulse {2}{R}
@@ -41,9 +40,8 @@ public final class CaseOfTheCrimsonPulse extends CardImpl {
         initialAbility.addEffect(new DrawCardSourceControllerEffect(2).setText(", then draw two cards."));
         // To solve -- You have no cards in hand.
         // Solved -- At the beginning of your upkeep, discard your hand, then draw two cards.
-        Ability solvedAbility = new ConditionalTriggeredAbility(new BeginningOfUpkeepTriggeredAbility(
-                new DiscardHandControllerEffect()),
-                SolvedSourceCondition.SOLVED, null);
+        Ability solvedAbility = new BeginningOfUpkeepTriggeredAbility(new DiscardHandControllerEffect())
+                .withTriggerCondition(SolvedSourceCondition.SOLVED);
         solvedAbility.addEffect(new DrawCardSourceControllerEffect(2).concatBy(", then"));
 
         this.addAbility(new CaseAbility(initialAbility, HellbentCondition.instance, solvedAbility)

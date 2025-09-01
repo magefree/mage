@@ -52,7 +52,7 @@ class RhetTombMysticEffect extends ContinuousEffectImpl {
 
     RhetTombMysticEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-        this.staticText = "Each creature card in your hand has cycling {1}{B}";
+        this.staticText = "Each creature card in your hand has cycling {1}{U}";
     }
 
     private RhetTombMysticEffect(final RhetTombMysticEffect effect) {
@@ -66,7 +66,7 @@ class RhetTombMysticEffect extends ContinuousEffectImpl {
             return false;
 
         controller.getHand().getCards(StaticFilters.FILTER_CARD_CREATURE, game)
-                .forEach(card -> game.getState().addOtherAbility(card, new CyclingAbility(new ManaCostsImpl<>("{1}{B}"))));
+                .forEach(card -> game.getState().addOtherAbility(card, new CyclingAbility(new ManaCostsImpl<>("{1}{U}"))));
 
         return true;
     }

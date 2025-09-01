@@ -173,8 +173,8 @@ class AssistEffect extends OneShotEffect {
             // AI can't assist other players, maybe for teammates only (but tests must work as normal)
             int amountToPay = 0;
             if (!targetPlayer.isComputer()) {
-                amountToPay = targetPlayer.announceXMana(0, unpaid.getMana().getGeneric(),
-                        "How much mana to pay as assist for " + controller.getName() + "?", game, source);
+                amountToPay = targetPlayer.announceX(0, unpaid.getMana().getGeneric(),
+                        "How much mana to pay as assist for " + controller.getName() + "?", game, source, true);
             }
 
             if (amountToPay > 0) {

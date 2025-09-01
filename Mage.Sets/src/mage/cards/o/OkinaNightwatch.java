@@ -33,7 +33,7 @@ public final class OkinaNightwatch extends CardImpl {
         Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(3,3, Duration.WhileOnBattlefield),
                 MoreCardsInHandThanOpponentsCondition.instance,
-                "As long as you have more cards in hand than each opponent, Okina Nightwatch gets +3/+3"));
+                "As long as you have more cards in hand than each opponent, {this} gets +3/+3"));
         this.addAbility(ability);
     }
 

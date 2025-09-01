@@ -44,6 +44,7 @@ public class DrawCardOpponentTriggeredAbility extends TriggeredAbilityImpl {
         if (!game.getPlayer(this.getControllerId()).hasOpponent(event.getPlayerId(), game)) {
             return false;
         }
+        this.getEffects().setValue("playerDrew", event.getPlayerId());
         if (setTargetPointer) {
             this.getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
         }

@@ -5,7 +5,6 @@ import mage.MageObject;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
@@ -54,10 +53,9 @@ public final class VerdelothTheAncient extends CardImpl {
         )));
 
         // When Verdeloth the Ancient enters the battlefield, if it was kicked, create X 1/1 green Saproling creature tokens.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldTriggeredAbility(
-                new CreateTokenEffect(new SaprolingToken(), GetXValue.instance), false
-        ), KickedCondition.ONCE, "When {this} enters, " +
-                "if it was kicked, create X 1/1 green Saproling creature tokens."));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new CreateTokenEffect(new SaprolingToken(), GetXValue.instance)
+        ).withInterveningIf(KickedCondition.ONCE));
     }
 
     private VerdelothTheAncient(final VerdelothTheAncient card) {

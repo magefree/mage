@@ -19,4 +19,9 @@ public enum TreasureSpentToCastCondition implements Condition {
         }
         return ManaPaidSourceWatcher.getTreasurePaid(source.getSourceId(), game) > 0;
     }
+
+    @Override
+    public String toString() {
+        return "mana from a Treasure was spent to cast it";
+    }
 }

@@ -19,6 +19,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -26,7 +27,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
 
@@ -39,8 +40,8 @@ public final class SalvationSwan extends CardImpl {
 
     static final String VALUE_PREFIX = "SalvationSwanExile";
 
-    private static final FilterControlledPermanent filterBird = new FilterControlledPermanent(SubType.BIRD, "Bird you control");
-    private static final FilterControlledCreaturePermanent filterWithoutFlying = new FilterControlledCreaturePermanent("creature you control without flying");
+    private static final FilterPermanent filterBird = new FilterControlledPermanent(SubType.BIRD, "Bird you control");
+    private static final FilterPermanent filterWithoutFlying = new FilterControlledCreaturePermanent("creature you control without flying");
 
     static {
         filterWithoutFlying.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
@@ -64,7 +65,7 @@ public final class SalvationSwan extends CardImpl {
         Ability ability = new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new SalvationSwanTargetEffect(), filterBird, false, false
         );
-        ability.addTarget(new TargetControlledCreaturePermanent(0, 1, filterWithoutFlying, false));
+        ability.addTarget(new TargetPermanent(0, 1, filterWithoutFlying));
         this.addAbility(ability);
     }
 
@@ -122,7 +123,7 @@ class SalvationSwanTargetEffect extends OneShotEffect {
         game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect), source);
 
         // move exiled cards to shared zone for better UX
-        String exileKey = SalvationSwan.VALUE_PREFIX + "_" + source.getSourceId() + "_" + source.getSourceObjectZoneChangeCounter();
+        String exileKey = SalvationSwan.VALUE_PREFIX + "_" + source.getSourceId() + "_" + source.getStackMomentSourceZCC();
         ExileZone sharedExileZone = game.getExile().createZone(
                 CardUtil.getExileZoneId(exileKey, game),
                 sourceObject.getIdName()

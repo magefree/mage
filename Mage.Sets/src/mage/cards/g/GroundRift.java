@@ -12,6 +12,7 @@ import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -31,7 +32,7 @@ public final class GroundRift extends CardImpl {
 
 
         // Target creature without flying can't block this turn.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new CantBlockTargetEffect(Duration.EndOfTurn));
         // Storm
         this.addAbility(new StormAbility());

@@ -12,7 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterNoncreatureCard;
+import mage.filter.predicate.Predicates;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
 
@@ -22,9 +22,10 @@ import mage.target.common.TargetCardInLibrary;
  */
 public final class ArcumDagsson extends CardImpl {
 
-    private static final FilterCard filter = new FilterNoncreatureCard("noncreature artifact card");
+    private static final FilterCard filter = new FilterCard("noncreature artifact card");
 
     static {
+        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
         filter.add(CardType.ARTIFACT.getPredicate());
     }
 

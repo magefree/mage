@@ -1,38 +1,38 @@
 package mage.cards.a;
 
-import java.util.UUID;
-import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.RevoltCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.*;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterPermanentCard;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 import mage.watchers.common.RevoltWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class AidFromTheCowl extends CardImpl {
-
-    private static final String ruleText = "<i>Revolt</i> &mdash; At the beginning of your end step, if a permanent you controlled left the battlefield this turn, "
-            + "reveal the top card of your library. If it's a permanent card, you may put it onto the battlefield. Otherwise, you may put it on the bottom of your library.";
 
     public AidFromTheCowl(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}{G}");
 
         // <i>Revolt</i> &mdash; At the beginning of your end step, if a permanent you controlled left the battlefield this turn,
         // reveal the top card of your library. If it is a permanent card, you may put it onto the battlefield. Otherwise, put it on the bottom of your library.
-        TriggeredAbility ability = new BeginningOfEndStepTriggeredAbility(new AidFromTheCowlEffect());
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, RevoltCondition.instance, ruleText).addHint(RevoltCondition.getHint()), new RevoltWatcher());
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new AidFromTheCowlEffect())
+                .withInterveningIf(RevoltCondition.instance)
+                .setAbilityWord(AbilityWord.REVOLT)
+                .addHint(RevoltCondition.getHint()), new RevoltWatcher());
     }
 
     private AidFromTheCowl(final AidFromTheCowl card) {
@@ -49,7 +49,8 @@ class AidFromTheCowlEffect extends OneShotEffect {
 
     AidFromTheCowlEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "reveal the top card of your library. If it's a permanent card, you may put it onto the battlefield. Otherwise, you may put that card on the bottom of your library";
+        this.staticText = "reveal the top card of your library. If it's a permanent card, " +
+                "you may put it onto the battlefield. Otherwise, you may put it on the bottom of your library";
     }
 
     private AidFromTheCowlEffect(final AidFromTheCowlEffect effect) {
@@ -64,25 +65,20 @@ class AidFromTheCowlEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source);
-        if (controller == null || sourceObject == null) {
+        if (controller == null || !controller.getLibrary().hasCards()) {
             return false;
         }
-
-        if (controller.getLibrary().hasCards()) {
-            Card card = controller.getLibrary().getFromTop(game);
-            Cards cards = new CardsImpl(card);
-            controller.revealCards(sourceObject.getIdName(), cards, game);
-
-            if (card != null) {
-                if (new FilterPermanentCard().match(card, game) && controller.chooseUse(Outcome.Neutral, "Put " + card.getIdName() + " onto the battlefield?", source, game)) {
-                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                } else if (controller.chooseUse(Outcome.Neutral, "Put " + card.getIdName() + " on the bottom of your library?", source, game)) {
-                    controller.putCardsOnBottomOfLibrary(cards, game, source, false);
-                } else {
-                    game.informPlayers(controller.getLogName() + " puts the revealed card back to the top of the library.");
-                }
-            }
+        Card card = controller.getLibrary().getFromTop(game);
+        if (card == null) {
+            return false;
+        }
+        controller.revealCards(CardUtil.getSourceIdName(game, source), new CardsImpl(card), game);
+        if (card.isPermanent(game) && controller.chooseUse(Outcome.Neutral, "Put " + card.getIdName() + " onto the battlefield?", source, game)) {
+            controller.moveCards(card, Zone.BATTLEFIELD, source, game);
+        } else if (controller.chooseUse(Outcome.Neutral, "Put " + card.getIdName() + " on the bottom of your library?", source, game)) {
+            controller.putCardsOnBottomOfLibrary(card, game, source);
+        } else {
+            game.informPlayers(controller.getLogName() + " puts the revealed card back to the top of the library.");
         }
         return true;
     }

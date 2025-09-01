@@ -73,7 +73,7 @@ class CabarettiAscendencyEffect extends OneShotEffect {
             controller.revealCards(source, new CardsImpl(card), game);
             controller.moveCards(card, Zone.HAND, source, game);
         } else if (controller.chooseUse(Outcome.Neutral, "Put " + card.getIdName() + " on the bottom of your library?", source, game)) {
-            controller.putCardsOnBottomOfLibrary(card, game, source, false);
+            controller.putCardsOnBottomOfLibrary(card, game, source);
         }
         return true;
     }

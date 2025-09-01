@@ -14,8 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -23,12 +22,6 @@ import java.util.UUID;
  * @author North
  */
 public final class CraterhoofBehemoth extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-
-    static {
-        filter.add(TargetController.YOU.getControllerPredicate());
-    }
 
     public CraterhoofBehemoth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}{G}{G}");
@@ -41,11 +34,11 @@ public final class CraterhoofBehemoth extends CardImpl {
 
         // When Craterhoof Behemoth enters the battlefield, creatures you control gain trample and get +X/+X until end of turn, where X is the number of creatures you control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new GainAbilityControlledEffect(
-                TrampleAbility.getInstance(), Duration.EndOfTurn, filter
+                TrampleAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES
         ).setText("creatures you control gain trample"));
         ability.addEffect(new BoostControlledEffect(
-                CreaturesYouControlCount.instance, CreaturesYouControlCount.instance,
-                Duration.EndOfTurn, filter, false
+                CreaturesYouControlCount.PLURAL, CreaturesYouControlCount.PLURAL,
+                Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES, false
         ).setText("and get +X/+X until end of turn, where X is the number of creatures you control"));
         ability.addHint(CreaturesYouControlHint.instance);
         this.addAbility(ability);

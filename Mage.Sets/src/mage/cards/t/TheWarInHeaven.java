@@ -97,7 +97,7 @@ class TheWarInHeavenEffect extends OneShotEffect {
             Card card = game.getCard(targetId);
             if (card != null) {
                 card.moveToZone(Zone.BATTLEFIELD, source, game, false);
-                Permanent permanent = game.getPermanent(card.getId());
+                Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
                 if (permanent != null) {
                     permanent.addCounters(CounterType.NECRODERMIS.createInstance(), source, game);
                     game.addEffect(new AddCardTypeTargetEffect(Duration.Custom, CardType.ARTIFACT)
@@ -128,8 +128,8 @@ class TheWarInHeavenTarget extends TargetCardInYourGraveyard {
     }
 
     @Override
-    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
-        return super.canTarget(controllerId, id, source, game)
+    public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
+        return super.canTarget(playerId, id, source, game)
                 && CardUtil.checkCanTargetTotalValueLimit(
                 this.getTargets(), id, MageObject::getManaValue, 8, game);
     }

@@ -26,7 +26,7 @@ public final class MajesticGenesis extends CardImpl {
     public MajesticGenesis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{6}{G}{G}");
 
-        // Reveal the top X cards of your library, where X is the highest mana value of a commander you own on the battlefield or in the command zone. You may put any number of a permanent cards from among them onto the battlefield. Put the rest on the bottom of your library in a random order.
+        // Reveal the top X cards of your library, where X is the greatest mana value of a commander you own on the battlefield or in the command zone. You may put any number of a permanent cards from among them onto the battlefield. Put the rest on the bottom of your library in a random order.
         this.getSpellAbility().addEffect(new MajesticGenesisEffect());
         this.getSpellAbility().addHint(GreatestCommanderManaValue.getHint());
     }

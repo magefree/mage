@@ -46,7 +46,7 @@ public final class Gingerbrute extends CardImpl {
         ));
 
         // {2}, {T}, Sacrifice Gingerbrute: You gain 3 life.
-        this.addAbility(new FoodAbility(true));
+        this.addAbility(new FoodAbility());
     }
 
     private Gingerbrute(final Gingerbrute card) {

@@ -29,6 +29,7 @@ public class AddManaOfAnyTypeProducedTest extends CardTestPlayerBase {
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Vedalken Mastermind");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -52,6 +53,7 @@ public class AddManaOfAnyTypeProducedTest extends CardTestPlayerBase {
 
         activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}");
 
+        setStrictChooseMode(true);
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -71,19 +73,26 @@ public class AddManaOfAnyTypeProducedTest extends CardTestPlayerBase {
         // If Gemstone Caverns is in your opening hand and you're not playing first, you may begin the game with Gemstone Caverns on the battlefield with a luck counter on it. If you do, exile a card from your hand.
         // {T}: Add {C}. If Gemstone Caverns has a luck counter on it, instead add one mana of any color.
         addCard(Zone.HAND, playerB, "Gemstone Caverns", 1);
+        addCard(Zone.HAND, playerB, "Swamp", 1);
 
         addCard(Zone.HAND, playerB, "Silvercoat Lion", 2);
+
+        // pay and put Gemstone to battlefield on starting
+        setChoice(playerB, true);
+        setChoice(playerB, "Swamp");
 
         activateManaAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{T}: Add");
         setChoice(playerB, "White");
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Silvercoat Lion");
+
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertPermanentCount(playerB, "Gemstone Caverns", 1);
         assertCounterCount("Gemstone Caverns", CounterType.LUCK, 1);
         assertPermanentCount(playerB, "Silvercoat Lion", 1);
-        assertExileCount("Silvercoat Lion", 1);
+        assertExileCount("Swamp", 1);
         assertTapped("Gemstone Caverns", true);
 
     }
@@ -99,12 +108,19 @@ public class AddManaOfAnyTypeProducedTest extends CardTestPlayerBase {
         // If Gemstone Caverns is in your opening hand and you're not playing first, you may begin the game with Gemstone Caverns on the battlefield with a luck counter on it. If you do, exile a card from your hand.
         // {T}: Add {C}. If Gemstone Caverns has a luck counter on it, instead add one mana of any color.
         addCard(Zone.HAND, playerB, "Gemstone Caverns", 1);
+        addCard(Zone.HAND, playerB, "Swamp", 1);
 
         addCard(Zone.HAND, playerB, "Silvercoat Lion", 2);
 
-        activateManaAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{T}: Add");
+        // pay and put Gemstone to battlefield on starting
+        setChoice(playerB, true);
+        setChoice(playerB, "Swamp");
+
+        activateManaAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{T}: Add {C}");
         setChoice(playerB, "White");
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Vorinclex, Voice of Hunger");
+
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -112,7 +128,6 @@ public class AddManaOfAnyTypeProducedTest extends CardTestPlayerBase {
         assertCounterCount("Gemstone Caverns", CounterType.LUCK, 1);
         assertPermanentCount(playerB, "Vorinclex, Voice of Hunger", 1);
         assertTapped("Gemstone Caverns", true);
-
     }
 
     private static final String kinnan = "Kinnan, Bonder Prodigy";

@@ -33,9 +33,9 @@ public class ExileFromGraveCost extends CostImpl {
         this.addTarget(target);
         if (target.getMaxNumberOfTargets() > 1) {
             this.text = "exile "
-                    + (target.getNumberOfTargets() == 1
+                    + (target.getMinNumberOfTargets() == 1
                     && target.getMaxNumberOfTargets() == Integer.MAX_VALUE ? "one or more"
-                    : ((target.getNumberOfTargets() < target.getMaxNumberOfTargets() ? "up to " : ""))
+                    : ((target.getMinNumberOfTargets() < target.getMaxNumberOfTargets() ? "up to " : ""))
                     + CardUtil.numberToText(target.getMaxNumberOfTargets()))
                     + ' ' + target.getTargetName();
         } else {
@@ -120,7 +120,7 @@ public class ExileFromGraveCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return this.getTargets().canChoose(controllerId, source, game);
+        return canChooseOrAlreadyChosen(ability, source, controllerId, game);
     }
 
     @Override

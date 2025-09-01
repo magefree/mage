@@ -43,7 +43,8 @@ public final class SteamVines extends CardImpl {
 
         // When enchanted land becomes tapped, destroy it and Steam Vines deals 1 damage to that land's controller.
         // That player attaches Steam Vines to a land of their choice.
-        this.addAbility(new BecomesTappedAttachedTriggeredAbility(new SteamVinesEffect(), "enchanted land"));
+        this.addAbility(new BecomesTappedAttachedTriggeredAbility(new SteamVinesEffect(), "enchanted land")
+                .setTriggerPhrase("When enchanted land becomes tapped, "));
 
     }
 

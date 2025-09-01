@@ -1,17 +1,15 @@
-
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.mana.AddManaOfAnyColorEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
- *
  * @author TheElk801
  */
 public final class LostVale extends CardImpl {
@@ -22,7 +20,7 @@ public final class LostVale extends CardImpl {
         this.nightCard = true;
 
         // T: Add three mana of any one color.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(3), new TapSourceCost()));
+        this.addAbility(new SimpleManaAbility(new AddManaOfAnyColorEffect(3), new TapSourceCost()));
     }
 
     private LostVale(final LostVale card) {

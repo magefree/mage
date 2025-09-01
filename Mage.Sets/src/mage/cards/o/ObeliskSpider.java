@@ -1,11 +1,9 @@
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageToACreatureTriggeredAbility;
-import mage.abilities.common.PutCounterOnCreatureTriggeredAbility;
-import mage.abilities.effects.Effect;
+import mage.abilities.common.PutCounterOnPermanentTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -15,6 +13,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
  *
@@ -36,10 +37,9 @@ public final class ObeliskSpider extends CardImpl {
         this.addAbility(new DealsDamageToACreatureTriggeredAbility(new AddCountersTargetEffect(CounterType.M1M1.createInstance(1)), true, false, true));
 
         // Whenever you put one or more -1/-1 counters on a creature, each opponent loses 1 life and you gain 1 life.
-        Ability ability = new PutCounterOnCreatureTriggeredAbility(new LoseLifeOpponentsEffect(1), CounterType.M1M1.createInstance());
-        Effect effect = new GainLifeEffect(1);
-        effect.setText("and you gain 1 life");
-        ability.addEffect(effect);
+        Ability ability = new PutCounterOnPermanentTriggeredAbility(new LoseLifeOpponentsEffect(1),
+                CounterType.M1M1, StaticFilters.FILTER_PERMANENT_CREATURE);
+        ability.addEffect(new GainLifeEffect(1).concatBy("and"));
         this.addAbility(ability);
     }
 

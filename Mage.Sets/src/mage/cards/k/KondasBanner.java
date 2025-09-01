@@ -1,29 +1,30 @@
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.AttachableToRestrictedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterCreatureCard;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.Target;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.TargetCard;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX
  */
 public final class KondasBanner extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent legendaryFilter = new FilterControlledCreaturePermanent("legendary creature");
+    private static final FilterPermanent legendaryFilter = new FilterCreaturePermanent("legendary creature");
 
     static {
         legendaryFilter.add(SuperType.LEGENDARY.getPredicate());
@@ -34,9 +35,8 @@ public final class KondasBanner extends CardImpl {
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.EQUIPMENT);
 
-        Target target = new TargetControlledCreaturePermanent(1, 1, legendaryFilter, false);
         // Konda's Banner can be attached only to a legendary creature.
-        this.addAbility(new AttachableToRestrictedAbility(target));
+        this.addAbility(new AttachableToRestrictedAbility(new TargetPermanent(legendaryFilter)));
 
         // Creatures that share a color with equipped creature get +1/+1.
         this.addAbility(new SimpleStaticAbility(new KondasBannerColorBoostEffect()));
@@ -45,8 +45,7 @@ public final class KondasBanner extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new KondasBannerTypeBoostEffect()));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), target, false));
-
+        this.addAbility(new EquipAbility(2, false));
     }
 
     private KondasBanner(final KondasBanner card) {

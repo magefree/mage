@@ -8,6 +8,7 @@ import mage.constants.Zone;
 import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.GameState;
+import mage.util.CardUtil;
 
 import java.util.List;
 import java.util.Set;
@@ -132,16 +133,6 @@ public interface Permanent extends Card, Controllable {
 
     boolean hasProtectionFrom(MageObject source, Game game);
 
-    /**
-     * @param attachment can be any object: card, permanent, token
-     * @param source     can be null for default checks like state base
-     * @param game
-     * @param silentMode - use it to ignore warning message for users (e.g. for
-     *                   checking only)
-     * @return
-     */
-    boolean cantBeAttachedBy(MageObject attachment, Ability source, Game game, boolean silentMode);
-
     boolean wasControlledFromStartOfControllerTurn();
 
     boolean hasSummoningSickness();
@@ -186,6 +177,23 @@ public interface Permanent extends Card, Controllable {
     int applyDamage(Game game);
 
     int getLethalDamage(UUID attackerId, Game game);
+
+    /**
+     * Same arguments as regular damage method, but returns the amount of excess damage dealt instead
+     *
+     * @return
+     */
+    default int damageWithExcess(int damage, Ability source, Game game) {
+        return this.damageWithExcess(damage, source.getSourceId(), source, game);
+    }
+
+    default int damageWithExcess(int damage, UUID attackerId, Ability source, Game game) {
+        int lethal = getLethalDamage(attackerId, game);
+        int excess = Math.max(CardUtil.overflowDec(damage, lethal), 0);
+        int dealt = Math.min(lethal, damage);
+        this.damage(dealt, attackerId, source, game);
+        return excess;
+    }
 
     void removeAllDamage(Game game);
 

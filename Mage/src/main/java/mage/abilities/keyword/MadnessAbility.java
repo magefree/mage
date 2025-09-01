@@ -280,7 +280,7 @@ enum MadnessCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject madnessSpell = game.getLastKnownInformation(source.getSourceId(), Zone.STACK, source.getSourceObjectZoneChangeCounter() - 1);
+        MageObject madnessSpell = game.getLastKnownInformation(source.getSourceId(), Zone.STACK, source.getStackMomentSourceZCC() - 1);
         if (!(madnessSpell instanceof Spell)) {
             return false;
         }
@@ -290,5 +290,10 @@ enum MadnessCondition implements Condition {
         }
 
         return ((Spell) madnessSpell).getSpellAbility().getSpellAbilityCastMode() == SpellAbilityCastMode.MADNESS;
+    }
+
+    @Override
+    public String toString() {
+        return "its madness cost was paid";
     }
 }

@@ -3,7 +3,6 @@ package mage.cards.o;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.TributeNotPaidCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.cost.CastFromHandForFreeEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TributeAbility;
@@ -11,7 +10,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.StaticFilters;
+import mage.filter.FilterCard;
+import mage.filter.common.FilterInstantOrSorceryCard;
 
 import java.util.UUID;
 
@@ -19,6 +19,8 @@ import java.util.UUID;
  * @author LevelX2
  */
 public final class OracleOfBones extends CardImpl {
+
+    private static final FilterCard filter = new FilterInstantOrSorceryCard("an instant or sorcery spell");
 
     public OracleOfBones(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
@@ -30,18 +32,14 @@ public final class OracleOfBones extends CardImpl {
 
         // Haste
         this.addAbility(HasteAbility.getInstance());
+
         // Tribute 2
         this.addAbility(new TributeAbility(2));
+
         // When Oracle of Bones enters the battlefield, if tribute wasn't paid, 
         // you may cast an instant or sorcery card from your hand without paying its mana cost.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new CastFromHandForFreeEffect(
-                        StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY
-                ), false),
-                TributeNotPaidCondition.instance, "When {this} enters, " +
-                "if tribute wasn't paid, you may cast an instant or " +
-                "sorcery spell from your hand without paying its mana cost."
-        ));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CastFromHandForFreeEffect(filter))
+                .withInterveningIf(TributeNotPaidCondition.instance));
     }
 
     private OracleOfBones(final OracleOfBones card) {

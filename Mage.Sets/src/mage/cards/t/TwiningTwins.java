@@ -12,6 +12,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -46,7 +47,7 @@ public final class TwiningTwins extends AdventureCard {
         // Swift Spiral
         // Exile target nontoken creature. Return it to the battlefield under its owner’s control at the beginning of the next end step.
         this.getSpellCard().getSpellAbility().addEffect(new ExileReturnBattlefieldNextEndStepTargetEffect().withTextThatCard(false));
-        this.getSpellCard().getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellCard().getSpellAbility().addTarget(new TargetPermanent(filter));
 
         this.finalizeAdventure();
     }

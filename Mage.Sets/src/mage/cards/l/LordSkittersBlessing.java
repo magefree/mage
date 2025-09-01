@@ -1,16 +1,15 @@
 package mage.cards.l;
 
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfDrawTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateRoleAttachedTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.hint.ConditionHint;
 import mage.abilities.hint.Hint;
+import mage.abilities.triggers.BeginningOfDrawTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -28,14 +27,14 @@ import java.util.UUID;
  */
 public final class LordSkittersBlessing extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent();
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("you control an enchanted creature");
 
     static {
         filter.add(EnchantedPredicate.instance);
     }
 
     private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
-    private static final Hint hint = new ConditionHint(condition, "You control an enchanted creature");
+    private static final Hint hint = new ConditionHint(condition);
 
     public LordSkittersBlessing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
@@ -46,13 +45,10 @@ public final class LordSkittersBlessing extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of your draw step, if you control an enchanted creature, you lose 1 life and you draw an additional card.
-        ability = new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfDrawTriggeredAbility(
-                        TargetController.YOU, new LoseLifeSourceControllerEffect(1), false
-                ), condition, "At the beginning of your draw step, if you control " +
-                "an enchanted creature, you lose 1 life and you draw an additional card."
-        );
-        ability.addEffect(new DrawCardSourceControllerEffect(1));
+        ability = new BeginningOfDrawTriggeredAbility(
+                TargetController.YOU, new LoseLifeSourceControllerEffect(1), false
+        ).withInterveningIf(condition);
+        ability.addEffect(new DrawCardSourceControllerEffect(1).setText("and you draw an additional card"));
         this.addAbility(ability.addHint(hint));
     }
 

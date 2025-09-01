@@ -13,7 +13,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.permanent.DefendingPlayerControlsSourceAttackingPredicate;
-import mage.target.common.TargetArtifactPermanent;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -39,7 +39,7 @@ public final class KukemssaPirates extends CardImpl {
         // Whenever Kukemssa Pirates attacks and isn't blocked, you may gain control of target artifact defending player controls. If you do, Kukemssa Pirates assigns no combat damage this turn.
         Ability ability = new AttacksAndIsNotBlockedTriggeredAbility(new GainControlTargetEffect(Duration.Custom), true);
         ability.addEffect(new AssignNoCombatDamageSourceEffect(Duration.EndOfTurn, true));
-        ability.addTarget(new TargetArtifactPermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

@@ -92,9 +92,10 @@ class FaldornDreadWolfHeraldTriggeredAbility extends TriggeredAbilityImpl {
                 return Optional
                         .ofNullable(game.getSpell(event.getTargetId()))
                         .map(Spell::getFromZone)
-                        .orElse(Zone.ALL)
-                        .equals(Zone.EXILED);
+                        .filter(Zone.EXILED::match)
+                        .isPresent();
+            default:
+                return false;
         }
-        return false;
     }
 }

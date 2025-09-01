@@ -24,6 +24,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.util.CardUtil;
 
 /**
  * @author LevelX2, TheElk801
@@ -94,7 +95,7 @@ class BronzehideLionReturnEffect extends OneShotEffect {
         }
         game.addEffect(new BronzehideLionContinuousEffect(game.getState().getZoneChangeCounter(source.getSourceId()) + 1), source);
         controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-        Permanent aura = game.getPermanent(card.getId());
+        Permanent aura = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
         Permanent creature = game.getPermanent(target.getFirstTarget());
         if (aura == null || creature == null) {
             return true;

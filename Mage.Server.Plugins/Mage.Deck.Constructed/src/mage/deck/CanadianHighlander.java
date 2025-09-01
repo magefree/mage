@@ -19,6 +19,7 @@ public class CanadianHighlander extends Constructed {
     static {
         pointMap.put("Ancestral Recall", 8);
         pointMap.put("Ancient Tomb", 1);
+        pointMap.put("Balance", 1);
         pointMap.put("Black Lotus", 7);
         pointMap.put("Demonic Tutor", 3);
         pointMap.put("Dig Through Time", 1);
@@ -30,19 +31,22 @@ public class CanadianHighlander extends Constructed {
         pointMap.put("Mana Crypt", 5);
         pointMap.put("Mana Drain", 1);
         pointMap.put("Mana Vault", 1);
+        pointMap.put("Merchant Scroll", 1);
+        pointMap.put("Minsc & Boo, Timeless Heroes", 1);
         pointMap.put("Mox Emerald", 3);
         pointMap.put("Mox Jet", 3);
         pointMap.put("Mox Pearl", 3);
         pointMap.put("Mox Ruby", 3);
         pointMap.put("Mox Sapphire", 3);
         pointMap.put("Mystical Tutor", 1);
+        pointMap.put("Nadu, Winged Wisdom", 1);
         pointMap.put("Natural Order", 1);
-        pointMap.put("Sol Ring", 4);
-        pointMap.put("Spellseeker", 1);
-        pointMap.put("Strip Mine", 2);
-        pointMap.put("Survival of the Fittest", 1);
+        pointMap.put("Psychic Frog", 1);
+        pointMap.put("Reanimate", 1);
+        pointMap.put("Sol Ring", 3);
+        pointMap.put("Strip Mine", 1);
         pointMap.put("Tainted Pact", 1);
-        pointMap.put("Thassa's Oracle", 7);
+        pointMap.put("Thassa's Oracle", 6);
         pointMap.put("Time Vault", 7);
         pointMap.put("Time Walk", 6);
         pointMap.put("Tinker", 3);
@@ -50,8 +54,11 @@ public class CanadianHighlander extends Constructed {
         pointMap.put("Treasure Cruise", 1);
         pointMap.put("True-Name Nemesis", 1);
         pointMap.put("Underworld Breach", 3);
+        pointMap.put("Urza's Saga", 1);
         pointMap.put("Vampiric Tutor", 2);
+        pointMap.put("White Plume Adventurer", 1);
         pointMap.put("Wishclaw Talisman", 1);
+        pointMap.put("Wrenn and Six", 1);
     }
 
     public CanadianHighlander() {

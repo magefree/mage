@@ -76,7 +76,7 @@ class UnderworldSentinelEffect extends OneShotEffect {
             return false;
         }
         ExileZone exileZone = game.getExile().getExileZone(
-                CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter())
+                CardUtil.getExileZoneId(game, source.getSourceId(), source.getStackMomentSourceZCC())
         );
         return exileZone != null && controller.moveCards(exileZone, Zone.BATTLEFIELD, source, game);
     }

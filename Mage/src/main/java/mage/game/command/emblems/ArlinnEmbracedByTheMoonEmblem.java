@@ -33,7 +33,7 @@ public final class ArlinnEmbracedByTheMoonEmblem extends Emblem {
         Ability ability2 = new SimpleActivatedAbility(effect2, new TapSourceCost());
         ability2.addTarget(new TargetAnyTarget());
         effect = new GainAbilityControlledEffect(ability2, Duration.EndOfGame, filter);
-        effect.setText("and '{T}: This creature deals damage equal to its power to any target");
+        effect.setText("and '{T}: This creature deals damage equal to its power to any target'");
         ability.addEffect(effect);
         this.getAbilities().add(ability);
     }

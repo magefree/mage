@@ -12,7 +12,10 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import static mage.filter.StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE;
 
 /**
  *
@@ -29,7 +32,7 @@ public final class ShamblingGoblin extends CardImpl {
 
         // When Shambling Goblin dies, target creature an opponent controls gets -1/-1 until end of turn.
         Ability ability = new DiesSourceTriggeredAbility(new BoostTargetEffect(-1,-1, Duration.EndOfTurn));
-        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
+        ability.addTarget(new TargetPermanent(FILTER_OPPONENTS_PERMANENT_CREATURE));
         this.addAbility(ability);
 
     }

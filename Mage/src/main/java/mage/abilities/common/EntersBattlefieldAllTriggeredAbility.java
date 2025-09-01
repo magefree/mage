@@ -23,7 +23,11 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
      * zone = BATTLEFIELD optional = false
      */
     public EntersBattlefieldAllTriggeredAbility(Effect effect, FilterPermanent filter) {
-        this(Zone.BATTLEFIELD, effect, filter, false);
+        this(effect, filter, false);
+    }
+
+    public EntersBattlefieldAllTriggeredAbility(Effect effect, FilterPermanent filter, boolean optional) {
+        this(Zone.BATTLEFIELD, effect, filter, optional);
     }
 
     public EntersBattlefieldAllTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional) {
@@ -72,8 +76,9 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
         String filterMessage = filter.getMessage();
         if (filterMessage.startsWith("one or more")) {
             setTriggerPhrase(getWhen() + filterMessage + " enter, ");
+        } else {
+            setTriggerPhrase(getWhen() + CardUtil.addArticle(filterMessage) + " enters, ");
         }
-        setTriggerPhrase(getWhen() + CardUtil.addArticle(filterMessage) + " enters, ");
     }
 
     @Override

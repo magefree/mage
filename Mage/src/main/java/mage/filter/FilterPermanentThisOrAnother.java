@@ -48,14 +48,18 @@ public class FilterPermanentThisOrAnother extends FilterPermanent {
     }
 
     protected static String generateFilterMessage(FilterPermanent otherFilter) {
+        StringBuilder sb = new StringBuilder("{this} or another ");
         // Remove the indefinite article from the beginning of the message:
-        String otherFilterMessage = otherFilter.getMessage();
-        if (otherFilterMessage.startsWith("a ")) {
-            otherFilterMessage = otherFilterMessage.substring(2);
-        } else if (otherFilterMessage.startsWith("an ")) {
-            otherFilterMessage = otherFilterMessage.substring(3);
+        String message = otherFilter.getMessage();
+        if (message.startsWith("a ")) {
+            sb.append(message.substring(2));
+        } else if (message.startsWith("an ")) {
+            sb.append(message.substring(3));
+        } else if (message.startsWith("another ")) {
+            sb.append(message.substring(8));
+        } else {
+            sb.append(message);
         }
-
-        return "{this} or another " + otherFilterMessage;
+        return sb.toString();
     }
 }

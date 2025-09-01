@@ -87,7 +87,7 @@ class MinionOfTheWastesEffect extends ReplacementEffectImpl {
         if (creature == null || controller == null) {
             return false;
         }
-        int payAmount = controller.getAmount(0, controller.getLife(), "Pay any amount of life", game);
+        int payAmount = controller.getAmount(0, controller.getLife(), "Pay any amount of life", source, game);
         Cost cost = new PayLifeCost(payAmount);
         if (!cost.pay(source, game, source, source.getControllerId(), true)) {
             return false;

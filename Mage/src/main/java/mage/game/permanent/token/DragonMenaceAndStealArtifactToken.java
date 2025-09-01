@@ -11,7 +11,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.DamagedPlayerControlsTargetAdjuster;
+import mage.target.targetadjustment.ThatPlayerControlsTargetAdjuster;
 
 public class DragonMenaceAndStealArtifactToken extends TokenImpl {
 
@@ -31,7 +31,7 @@ public class DragonMenaceAndStealArtifactToken extends TokenImpl {
 
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new GainControlTargetEffect(Duration.EndOfGame), false, true);
         ability.addTarget(new TargetPermanent(filter));
-        ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
+        ability.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster());
         addAbility(ability);
     }
 

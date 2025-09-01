@@ -216,6 +216,14 @@ public final class GamePanel extends javax.swing.JPanel {
             });
         }
 
+        public Set<UUID> getChosenTargets() {
+            if (options != null && options.containsKey("chosenTargets")) {
+                return (Set<UUID>) options.get("chosenTargets");
+            } else {
+                return Collections.emptySet();
+            }
+        }
+
         public CardView findCard(UUID id) {
             return this.allCardsIndex.getOrDefault(id, null);
         }
@@ -642,7 +650,7 @@ public final class GamePanel extends javax.swing.JPanel {
                     // see test render dialog for refresh commands order
                     playPanel.getPlayerPanel().fullRefresh(GUISizeHelper.playerPanelGuiScale);
                     playPanel.init(player, bigCard, gameId, player.getPriorityTimeLeftSecs());
-                    playPanel.update(lastGameData.game, player, lastGameData.targets);
+                    playPanel.update(lastGameData.game, player, lastGameData.targets, lastGameData.getChosenTargets());
                     playPanel.getPlayerPanel().sizePlayerPanel(false);
                 }
             });
@@ -1170,7 +1178,7 @@ public final class GamePanel extends javax.swing.JPanel {
                         }
                     }
                 }
-                players.get(player.getPlayerId()).update(lastGameData.game, player, lastGameData.targets);
+                players.get(player.getPlayerId()).update(lastGameData.game, player, lastGameData.targets, lastGameData.getChosenTargets());
                 if (player.getPlayerId().equals(playerId)) {
                     skipButtons.updateFromPlayer(player);
                 }
@@ -1786,12 +1794,7 @@ public final class GamePanel extends javax.swing.JPanel {
             needZone = (Zone) lastGameData.options.get("targetZone");
         }
 
-        List<UUID> needChosen;
-        if (lastGameData.options != null && lastGameData.options.containsKey("chosenTargets")) {
-            needChosen = (List<UUID>) lastGameData.options.get("chosenTargets");
-        } else {
-            needChosen = new ArrayList<>();
-        }
+        Set<UUID> needChosen = lastGameData.getChosenTargets();
 
         Set<UUID> needSelectable;
         if (lastGameData.targets != null) {
@@ -2021,7 +2024,7 @@ public final class GamePanel extends javax.swing.JPanel {
     private void prepareSelectableWindows(
             Collection<CardInfoWindowDialog> windows,
             Set<UUID> needSelectable,
-            List<UUID> needChosen,
+            Set<UUID> needChosen,
             PlayableObjectsList needPlayable
     ) {
         // lookAt or reveals windows clean up on next priority, so users can see dialogs, but xmage can't restore it

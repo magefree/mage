@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.ObjectColor;
@@ -16,6 +15,8 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
  *
  * @author fireshoes
@@ -29,7 +30,7 @@ public final class AnHavvaConstable extends CardImpl {
         this.toughness = new MageInt(1);
 
         // An-Havva Constable's toughness is equal to 1 plus the number of green creatures on the battlefield.
-        this.addAbility(new SimpleStaticAbility(new AnHavvaConstableEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new AnHavvaConstableEffect()));
     }
 
     private AnHavvaConstable(final AnHavvaConstable card) {
@@ -72,7 +73,7 @@ class AnHavvaConstableEffect extends ContinuousEffectImpl {
 
         FilterCreaturePermanent filter = new FilterCreaturePermanent("green creatures");
         filter.add(new ColorPredicate(ObjectColor.GREEN));
-        int numberOfGreenCreatures = game.getBattlefield().count(filter, source.getSourceId(), source, game);
+        int numberOfGreenCreatures = game.getBattlefield().count(filter, source.getControllerId(), source, game);
 
         mageObject.getToughness().setModifiedBaseValue(1 + numberOfGreenCreatures);
 

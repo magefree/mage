@@ -1,24 +1,22 @@
-
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepAllEffect;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetLandPermanent;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -26,7 +24,7 @@ import mage.target.common.TargetLandPermanent;
 public final class HokoriDustDrinker extends CardImpl {
 
     public HokoriDustDrinker(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
 
@@ -71,18 +69,16 @@ class HokoriDustDrinkerUntapEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(game.getActivePlayerId());
-        FilterLandPermanent filter = new FilterLandPermanent("land you control");
-        filter.add(new ControllerIdPredicate(game.getActivePlayerId()));
-        Target target = new TargetLandPermanent(filter);
-        if (player != null && player.chooseTarget(Outcome.Untap, target, source, game)) {
-            for (UUID landId : target.getTargets()) {
-                Permanent land = game.getPermanent(landId);
-                if (land != null) {
-                    land.untap(game);
-                }
-            }
-            return true;
+        Target target = new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND);
+        if (player == null || !player.chooseTarget(Outcome.Untap, target, source, game)) {
+            return false;
         }
-        return false;
+        for (UUID landId : target.getTargets()) {
+            Permanent land = game.getPermanent(landId);
+            if (land != null) {
+                land.untap(game);
+            }
+        }
+        return true;
     }
 }

@@ -2,14 +2,13 @@ package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.CardsInHandCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.keyword.MadnessAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -24,6 +23,8 @@ import java.util.UUID;
  */
 public final class AsylumVisitor extends CardImpl {
 
+    private static final Condition condition = new CardsInHandCondition(ComparisonType.EQUAL_TO, 0, TargetController.ACTIVE);
+
     public AsylumVisitor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
         this.subtype.add(SubType.VAMPIRE);
@@ -32,12 +33,10 @@ public final class AsylumVisitor extends CardImpl {
         this.toughness = new MageInt(1);
 
         // At the beginning of each player's upkeep, if that player has no cards in hand, you draw a card and you lose 1 life.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new DrawCardSourceControllerEffect(1, true), false),
-                new CardsInHandCondition(ComparisonType.EQUAL_TO, 0, TargetController.ACTIVE),
-                "At the beginning of each player's upkeep, if that player has no cards in hand, you draw a card and you lose 1 life.");
-        Effect effect = new LoseLifeSourceControllerEffect(1);
-        ability.addEffect(effect);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(
+                TargetController.EACH_PLAYER, new DrawCardSourceControllerEffect(1, true), false
+        ).withInterveningIf(condition);
+        ability.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
         this.addAbility(ability);
 
         // Madness {1}{B}

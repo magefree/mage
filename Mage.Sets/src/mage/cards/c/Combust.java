@@ -15,6 +15,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -36,7 +37,7 @@ public final class Combust extends CardImpl {
 
         // Combust deals 5 damage to target white or blue creature. The damage can't be prevented.
         this.getSpellAbility().addEffect(new DamageTargetEffect(5, false));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
         
         // Combust can't be countered.
         Ability ability = new SimpleStaticAbility(Zone.STACK, new CantBeCounteredSourceEffect());

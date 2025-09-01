@@ -60,7 +60,7 @@ public class ReturnToHandSourceEffect extends OneShotEffect {
         }
         MageObject mageObject;
         if (returnFromNextZone
-                && game.getState().getZoneChangeCounter(source.getSourceId()) == source.getSourceObjectZoneChangeCounter() + 1) {
+                && game.getState().getZoneChangeCounter(source.getSourceId()) == source.getStackMomentSourceZCC() + 1) {
             mageObject = game.getObject(source);
         } else {
             mageObject = source.getSourceObjectIfItStillExists(game);

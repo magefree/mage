@@ -19,6 +19,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -51,13 +52,13 @@ public final class OrcishHealer extends CardImpl {
         // {B}{B}{R}, {tap}: Regenerate target black or green creature.
         ability = new SimpleActivatedAbility(new RegenerateTargetEffect(), new ManaCostsImpl<>("{B}{B}{R}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
         // {R}{G}{G}, {tap}: Regenerate target black or green creature.
         ability = new SimpleActivatedAbility(new RegenerateTargetEffect(), new ManaCostsImpl<>("{R}{G}{G}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

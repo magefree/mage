@@ -1,12 +1,10 @@
 package mage.cards.m;
 
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.RaidCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.abilities.hint.common.RaidHint;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
@@ -30,15 +28,9 @@ public final class MaraudingLooter extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Raid - At the beginning of your end step, if you attacked this turn, you may draw a card. If you do, discard a card.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfEndStepTriggeredAbility(new DrawDiscardControllerEffect(1, 1, true)),
-                RaidCondition.instance,
-                "At the beginning of your end step, "
-                        + "if you attacked this turn, "
-                        + "you may draw a card. If you do, discard a card.");
-        ability.setAbilityWord(AbilityWord.RAID);
-        ability.addHint(RaidHint.instance);
-        this.addAbility(ability, new PlayerAttackedWatcher());
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(
+                new DrawDiscardControllerEffect(1, 1, true)
+        ).withInterveningIf(RaidCondition.instance).setAbilityWord(AbilityWord.RAID).addHint(RaidHint.instance), new PlayerAttackedWatcher());
     }
 
     private MaraudingLooter(final MaraudingLooter card) {

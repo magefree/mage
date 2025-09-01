@@ -10,7 +10,6 @@ import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
 
 import java.util.UUID;
 
@@ -27,8 +26,7 @@ public final class BondersEnclave extends CardImpl {
 
         // {3}, {T}: Draw a card. Activate this ability only if you control a creature with power 4 or greater.
         Ability ability = new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1),
-                new GenericManaCost(3), FerociousCondition.instance
+                new DrawCardSourceControllerEffect(1), new GenericManaCost(3), FerociousCondition.instance
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

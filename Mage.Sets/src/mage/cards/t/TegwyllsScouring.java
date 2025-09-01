@@ -16,7 +16,6 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.permanent.token.FaerieRogueToken;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
 
@@ -24,6 +23,7 @@ import java.util.UUID;
  * @author karapuzz14
  */
 public final class TegwyllsScouring extends CardImpl {
+
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creatures you control with flying");
 
     static {
@@ -34,11 +34,9 @@ public final class TegwyllsScouring extends CardImpl {
     public TegwyllsScouring(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");
 
-
         // You may cast Tegwyll's Scouring as though it had flash by tapping three untapped creatures you control with flying in addition to paying its other costs.
-        Cost asThoughCost = new TapTargetCost(new TargetControlledCreaturePermanent(3, 3, filter, true)).setText("");
         CostsImpl<Cost> costs = new CostsImpl<>().setText("tapping three untapped creatures you control with flying");
-        costs.add(asThoughCost);
+        costs.add(new TapTargetCost(3, filter).setText(""));
 
         Ability ability = new PayMoreToCastAsThoughtItHadFlashAbility(this, costs);
         ability.addEffect(new DestroyAllEffect(StaticFilters.FILTER_PERMANENT_CREATURES));

@@ -1,11 +1,10 @@
-
 package mage.cards.c;
 
 import mage.abilities.Ability;
-import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -17,7 +16,6 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -27,15 +25,13 @@ import mage.target.targetpointer.FixedTarget;
 import java.util.UUID;
 
 /**
- *
  * @author BetaSteward
  */
 public final class CurseOfMisfortunes extends CardImpl {
 
     public CurseOfMisfortunes(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{B}");
         this.subtype.add(SubType.AURA, SubType.CURSE);
-
 
         // Enchant player
         TargetPlayer auraTarget = new TargetPlayer();
@@ -44,7 +40,7 @@ public final class CurseOfMisfortunes extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // At the beginning of your upkeep, you may search your library for a Curse card that doesn't have the same name as a Curse attached to enchanted player, put it onto the battlefield attached to that player, then shuffle your library.
-        this.addAbility(new OnEventTriggeredAbility(GameEvent.EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new CurseOfMisfortunesEffect(), true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CurseOfMisfortunesEffect(), true));
     }
 
     private CurseOfMisfortunes(final CurseOfMisfortunes card) {
@@ -79,7 +75,7 @@ class CurseOfMisfortunesEffect extends OneShotEffect {
                 FilterCard filter = new FilterCard("Curse card that doesn't have the same name as a Curse attached to enchanted player");
                 filter.add(SubType.CURSE.getPredicate());
                 // get the names of attached Curses
-                for (UUID attachmentId: targetPlayer.getAttachments()) {
+                for (UUID attachmentId : targetPlayer.getAttachments()) {
                     Permanent attachment = game.getPermanent(attachmentId);
                     if (attachment != null && attachment.hasSubtype(SubType.CURSE, game)) {
                         filter.add(Predicates.not(new NamePredicate(attachment.getName())));

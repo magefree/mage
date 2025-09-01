@@ -1,11 +1,9 @@
-
 package mage.cards.d;
 
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.condition.common.OnOpponentsTurnCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.condition.common.OpponentsTurnCondition;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -18,13 +16,12 @@ import mage.target.common.TargetCreaturePermanent;
 import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class DreamspoilerWitches extends CardImpl {
 
     public DreamspoilerWitches(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.subtype.add(SubType.FAERIE);
         this.subtype.add(SubType.WIZARD);
 
@@ -33,9 +30,11 @@ public final class DreamspoilerWitches extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+
         // Whenever you cast a spell during an opponent's turn, you may have target creature get -1/-1 until end of turn.
-        Ability ability = new ConditionalTriggeredAbility(new SpellCastControllerTriggeredAbility(new BoostTargetEffect(-1, -1, Duration.EndOfTurn), true), OnOpponentsTurnCondition.instance,
-                "Whenever you cast a spell during an opponent's turn, you may have target creature get -1/-1 until end of turn.");
+        Ability ability = new SpellCastControllerTriggeredAbility(
+                new BoostTargetEffect(-1, -1, Duration.EndOfTurn), true
+        ).withTriggerCondition(OpponentsTurnCondition.instance);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

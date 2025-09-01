@@ -25,6 +25,7 @@ import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetadjustment.XManaValueTargetAdjuster;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -84,7 +85,7 @@ class ScrapWelderEffect extends OneShotEffect {
             return false;
         }
         controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-        Permanent permanent = game.getPermanent(card.getId());
+        Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
         if (permanent != null) {
             ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance());
             effect.setTargetPointer(new FixedTarget(permanent, game));

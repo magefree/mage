@@ -1,21 +1,14 @@
 package mage.abilities.keyword;
 
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.AffinityEffect;
-import mage.abilities.hint.common.ArtifactYouControlHint;
-import mage.constants.Zone;
-import mage.filter.StaticFilters;
+import mage.constants.AffinityType;
 
 /**
  * Affinity for artifacts
  */
-public class AffinityForArtifactsAbility extends SimpleStaticAbility {
+public class AffinityForArtifactsAbility extends AffinityAbility {
 
     public AffinityForArtifactsAbility() {
-        super(Zone.ALL, new AffinityEffect(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT));
-        setRuleAtTheTop(true);
-
-        this.addHint(ArtifactYouControlHint.instance);
+        super(AffinityType.ARTIFACTS);
     }
 
     protected AffinityForArtifactsAbility(final AffinityForArtifactsAbility ability) {
@@ -25,10 +18,5 @@ public class AffinityForArtifactsAbility extends SimpleStaticAbility {
     @Override
     public AffinityForArtifactsAbility copy() {
         return new AffinityForArtifactsAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return "Affinity for artifacts <i>(This spell costs {1} less to cast for each artifact you control.)</i>";
     }
 }

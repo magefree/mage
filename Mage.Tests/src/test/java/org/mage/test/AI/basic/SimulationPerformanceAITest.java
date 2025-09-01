@@ -20,8 +20,9 @@ import java.util.List;
  * <p>
  *  TODO: add tests and implement best choice selection on timeout
  *    (AI must make any good/bad choice on timeout with game log - not a skip)
+ *
+ *  TODO: AI do not support game sims from triggered (it's run, but do not use results)
  * <p>
- * TODO: AI do not support game simulations for target options in triggered
  *
  * @author JayDi85
  */
@@ -212,5 +213,31 @@ public class SimulationPerformanceAITest extends CardTestPlayerBaseAI {
 
         // 4 damage to x2 bears and 1 damage to damaged bear
         runManyTargetOptionsInActivate("5 target creatures with one damaged", 5, 3, true, 20);
+    }
+
+    @Test
+    @Ignore // TODO: enable and fix random error with too many sim nodes (depends on machine performance?)
+    public void test_ElderDeepFiend_TooManyUpToChoices() {
+        // bug: game freeze with 100% CPU usage
+        // https://github.com/magefree/mage/issues/9518
+        int cardsCount = 2; // 2+ cards will generate too much target options for simulations
+
+        // Boulderfall deals 5 damage divided as you choose among any number of targets.
+        // Flash
+        // Emerge {5}{U}{U} (You may cast this spell by sacrificing a creature and paying the emerge cost reduced by that creature's mana value.)
+        // When you cast this spell, tap up to four target permanents.
+        addCard(Zone.HAND, playerA, "Elder Deep-Fiend", cardsCount); // {8}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 8 * cardsCount);
+        //
+        addCard(Zone.BATTLEFIELD, playerB, "Balduvian Bears", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Kitesail Corsair", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Alpha Tyrranax", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Abbey Griffin", 2);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Elder Deep-Fiend", cardsCount); // ai must cast it
     }
 }

@@ -13,9 +13,7 @@ import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.command.emblems.TamiyoFieldResearcherEmblem;
 import mage.game.events.DamagedBatchBySourceEvent;
@@ -35,12 +33,6 @@ import java.util.UUID;
  */
 public final class TamiyoFieldResearcher extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("nonland permanent");
-
-    static {
-        filter.add(Predicates.not(CardType.LAND.getPredicate()));
-    }
-
     public TamiyoFieldResearcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{G}{W}{U}");
         this.supertype.add(SuperType.LEGENDARY);
@@ -50,12 +42,12 @@ public final class TamiyoFieldResearcher extends CardImpl {
 
         // +1: Choose up to two target creatures. Until your next turn, whenever either of those creatures deals combat damage, you draw a card.
         Ability ability = new LoyaltyAbility(new TamiyoFieldResearcherEffect1(), 1);
-        ability.addTarget(new TargetCreaturePermanent(0, 2, StaticFilters.FILTER_PERMANENT_CREATURES, false));
+        ability.addTarget(new TargetCreaturePermanent(0, 2));
         this.addAbility(ability);
 
         // -2: Tap up to two target nonland permanents. They don't untap during their controller's next untap step.
         ability = new LoyaltyAbility(new TapTargetEffect(), -2);
-        ability.addTarget(new TargetPermanent(0, 2, filter, false));
+        ability.addTarget(new TargetPermanent(0, 2, StaticFilters.FILTER_PERMANENTS_NON_LAND, false));
         ability.addEffect(new DontUntapInControllersNextUntapStepTargetEffect("They"));
         this.addAbility(ability);
 

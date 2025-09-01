@@ -10,9 +10,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
@@ -21,13 +20,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class PilgrimOfTheAges extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("a basic Plains card");
-
-    static {
-        filter.add(SuperType.BASIC.getPredicate());
-        filter.add(SubType.PLAINS.getPredicate());
-    }
 
     public PilgrimOfTheAges(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
@@ -38,7 +30,7 @@ public final class PilgrimOfTheAges extends CardImpl {
 
         // When Pilgrim of the Ages enters the battlefield, you may search your library for a basic Plains card, reveal it, put it into your hand, then shuffle.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(
-                new TargetCardInLibrary(filter), true
+                new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_PLAINS), true
         ), true));
 
         // {6}: Return Pilgrim of the Ages from your graveyard to your hand.

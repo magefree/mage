@@ -2,7 +2,6 @@ package mage.cards.c;
 
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -16,16 +15,13 @@ import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.filter.FilterPlayer;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
-import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetEnchantmentPermanent;
 
@@ -36,13 +32,10 @@ import java.util.UUID;
  */
 public final class CollectiveEffort extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filterUntapped = new FilterControlledCreaturePermanent("untapped creature you control");
     private static final FilterCreaturePermanent filterDestroyCreature = new FilterCreaturePermanent("creature with power 4 or greater");
-    private static final FilterEnchantmentPermanent filterDestroyEnchantment = new FilterEnchantmentPermanent("enchantment to destroy");
     private static final FilterPlayer filterPlayer = new FilterPlayer("player whose creatures get +1/+1 counters");
 
     static {
-        filterUntapped.add(TappedPredicate.UNTAPPED);
         filterDestroyCreature.add(new PowerPredicate(ComparisonType.MORE_THAN, 3));
     }
 
@@ -50,9 +43,7 @@ public final class CollectiveEffort extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{W}{W}");
 
         // Escalate &mdash; Tap an untapped creature you control.
-        Cost cost = new TapTargetCost(new TargetControlledCreaturePermanent(filterUntapped));
-        cost.setText("&mdash; Tap an untapped creature you control");
-        this.addAbility(new EscalateAbility(cost));
+        this.addAbility(new EscalateAbility(new TapTargetCost(StaticFilters.FILTER_CONTROLLED_UNTAPPED_CREATURE)));
 
         // Choose one or more &mdash;
         this.getSpellAbility().getModes().setMinModes(1);
@@ -60,13 +51,13 @@ public final class CollectiveEffort extends CardImpl {
 
         // Destroy target creature with power 4 or greater.;
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filterDestroyCreature).withChooseHint("destroy"));
+        this.getSpellAbility().addTarget(new TargetPermanent(filterDestroyCreature).withChooseHint("destroy"));
 
         // Destroy target enchantment.;
         Effect effect = new DestroyTargetEffect();
         effect.setText("Destroy target enchantment");
         Mode mode = new Mode(effect);
-        mode.addTarget(new TargetEnchantmentPermanent(filterDestroyEnchantment).withChooseHint("destroy"));
+        mode.addTarget(new TargetEnchantmentPermanent().withChooseHint("destroy"));
         this.getSpellAbility().addMode(mode);
 
         // Put a +1/+1 counter on each creature target player controls.

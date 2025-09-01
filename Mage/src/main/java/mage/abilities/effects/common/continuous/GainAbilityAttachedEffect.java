@@ -151,7 +151,7 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
         if (quotes) {
             sb.append('"');
         }
-        sb.append(CardUtil.stripReminderText(ability.getRule("This " + targetObjectName)));
+        sb.append(CardUtil.stripReminderText(ability.getRule("this " + targetObjectName)));
         if (quotes) {
             sb.append('"');
         }

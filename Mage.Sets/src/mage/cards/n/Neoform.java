@@ -3,25 +3,20 @@ package mage.cards.n;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
+import mage.counters.Counters;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
-import mage.game.events.EntersTheBattlefieldEvent;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -88,12 +83,8 @@ class NeoformEffect extends OneShotEffect {
         if (controller.searchLibrary(target, source, game)) {
             Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
             if (card != null) {
-                ContinuousEffectImpl effect = new NeoformReplacementEffect();
-                effect.setTargetPointer(new FixedTarget(card, game));
-                game.addEffect(effect, source);
-                if (!controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
-                    effect.discard();
-                }
+                game.setEnterWithCounters(card.getId(), new Counters(CounterType.P1P1.createInstance()));
+                controller.moveCards(card, Zone.BATTLEFIELD, source, game);
             }
         }
         controller.shuffleLibrary(source, game);
@@ -103,41 +94,5 @@ class NeoformEffect extends OneShotEffect {
     @Override
     public NeoformEffect copy() {
         return new NeoformEffect(this);
-    }
-}
-
-class NeoformReplacementEffect extends ReplacementEffectImpl {
-
-    NeoformReplacementEffect() {
-        super(Duration.EndOfStep, Outcome.BoostCreature);
-    }
-
-    private NeoformReplacementEffect(NeoformReplacementEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getTargetId().equals(getTargetPointer().getFirst(game, source));
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
-        if (creature != null) {
-            creature.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game, event.getAppliedEffects());
-        }
-        discard();
-        return false;
-    }
-
-    @Override
-    public NeoformReplacementEffect copy() {
-        return new NeoformReplacementEffect(this);
     }
 }

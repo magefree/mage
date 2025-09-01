@@ -5,6 +5,7 @@ import mage.constants.PhaseStep;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -65,6 +66,7 @@ public class TenthDistrictHeroTest extends CardTestPlayerBase {
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}");
         setChoice(playerA, giant);
+        setChoice(playerA, TestPlayer.CHOICE_SKIP);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -92,6 +94,7 @@ public class TenthDistrictHeroTest extends CardTestPlayerBase {
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}");
         setChoice(playerA, giant);
+        setChoice(playerA, TestPlayer.CHOICE_SKIP);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

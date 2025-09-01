@@ -2,7 +2,6 @@
 
 package mage.cards.j;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -12,21 +11,23 @@ import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public final class JundPanorama extends CardImpl {
 
-     private static final FilterCard filter = new FilterCard("a basic Swamp, Mountain, or Forest card");
+    private static final FilterCard filter = new FilterCard("a basic Swamp, Mountain, or Forest card");
 
     static {
-        filter.add(CardType.LAND.getPredicate());
         filter.add(SuperType.BASIC.getPredicate());
         filter.add(Predicates.or(
                 SubType.SWAMP.getPredicate(),
@@ -35,7 +36,7 @@ public final class JundPanorama extends CardImpl {
     }
 
     public JundPanorama(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, null);
         this.addAbility(new ColorlessManaAbility());
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
         Ability ability = new SimpleActivatedAbility(new SearchLibraryPutInPlayEffect(target, true), new GenericManaCost(1));

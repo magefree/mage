@@ -29,6 +29,7 @@ public class PostMortemLungeTest extends CardTestPlayerBase {
 
         attack(1, playerA, "Elite Vanguard");
 
+        setStrictChooseMode(false); // TODO: good test for AI's announceX - duplicate it as AI test
         setStopAt(1, PhaseStep.CLEANUP);
         execute();
 

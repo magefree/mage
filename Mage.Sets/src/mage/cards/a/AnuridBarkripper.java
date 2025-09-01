@@ -29,7 +29,7 @@ public final class AnuridBarkripper extends CardImpl {
         // Threshold - Anurid Barkripper gets +2/+2 as long as seven or more cards are in your graveyard.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield), ThresholdCondition.instance,
-                "as long as seven or more cards are in your graveyard, {this} gets +2/+2"
+                "{this} gets +2/+2 as long as seven or more cards are in your graveyard"
         )).setAbilityWord(AbilityWord.THRESHOLD));
     }
 

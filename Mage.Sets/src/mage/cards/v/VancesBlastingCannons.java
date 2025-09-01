@@ -3,21 +3,18 @@ package mage.cards.v;
 
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 import mage.watchers.common.CastSpellLastTurnWatcher;
 
 import java.util.UUID;
@@ -38,7 +35,7 @@ public final class VancesBlastingCannons extends CardImpl {
 
         // Whenever you cast your third spell in a turn, transform Vance's Blasting Cannons.
         this.addAbility(new TransformAbility());
-        this.addAbility(new VancesBlastingCannonsFlipTrigger());
+        this.addAbility(new VancesBlastingCannonsTriggeredAbility());
     }
 
     private VancesBlastingCannons(final VancesBlastingCannons card) {
@@ -69,72 +66,36 @@ class VancesBlastingCannonsExileEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (controller != null && sourcePermanent != null) {
-            Card card = controller.getLibrary().getFromTop(game);
-            if (card != null) {
-                String exileName = sourcePermanent.getIdName() + (card.isLand(game) ? "" : " <this card may be cast the turn it was exiled");
-                controller.moveCardsToExile(card, source, game, true, source.getSourceId(), exileName);
-                if (game.getState().getZone(card.getId()) == Zone.EXILED && !card.isLand(game)) {
-                    ContinuousEffect effect = new CastFromNonHandZoneTargetEffect(Duration.EndOfTurn);
-                    effect.setTargetPointer(new FixedTarget(card, game));
-                    game.addEffect(effect, source);
-                }
-            }
-            return true;
+        Player player = game.getPlayer(source.getControllerId());
+        if (player == null) {
+            return false;
         }
-        return false;
-    }
-}
-
-class CastFromNonHandZoneTargetEffect extends AsThoughEffectImpl {
-
-    CastFromNonHandZoneTargetEffect(Duration duration) {
-        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, duration, Outcome.Benefit);
-        staticText = "If it's a nonland card, you may cast that card this turn";
-    }
-
-    private CastFromNonHandZoneTargetEffect(final CastFromNonHandZoneTargetEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
+        Card card = player.getLibrary().getFromTop(game);
+        if (card == null) {
+            return false;
+        }
+        player.moveCards(card, Zone.EXILED, source, game);
+        if (!card.isLand(game)) {
+            CardUtil.makeCardPlayable(game, source, card, true, Duration.EndOfTurn, false);
+        }
         return true;
     }
-
-    @Override
-    public CastFromNonHandZoneTargetEffect copy() {
-        return new CastFromNonHandZoneTargetEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (getTargetPointer().getTargets(game, source).contains(objectId)
-                && source.isControlledBy(affectedControllerId)) {
-            Card card = game.getCard(objectId);
-            if (card != null) {
-                return true;
-            }
-        }
-        return false;
-    }
 }
 
-class VancesBlastingCannonsFlipTrigger extends TriggeredAbilityImpl {
+class VancesBlastingCannonsTriggeredAbility extends TriggeredAbilityImpl {
 
-    public VancesBlastingCannonsFlipTrigger() {
+    public VancesBlastingCannonsTriggeredAbility() {
         super(Zone.BATTLEFIELD, new TransformSourceEffect(), true);
+        setTriggerPhrase("Whenever you cast your third spell in a turn, ");
     }
 
-    private VancesBlastingCannonsFlipTrigger(final VancesBlastingCannonsFlipTrigger ability) {
+    private VancesBlastingCannonsTriggeredAbility(final VancesBlastingCannonsTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
-    public VancesBlastingCannonsFlipTrigger copy() {
-        return new VancesBlastingCannonsFlipTrigger(this);
+    public VancesBlastingCannonsTriggeredAbility copy() {
+        return new VancesBlastingCannonsTriggeredAbility(this);
     }
 
     @Override
@@ -144,17 +105,10 @@ class VancesBlastingCannonsFlipTrigger extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getPlayerId().equals(controllerId)) {
-            CastSpellLastTurnWatcher watcher = game.getState().getWatcher(CastSpellLastTurnWatcher.class);
-            if (watcher != null && watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(event.getPlayerId()) == 3) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you cast your third spell in a turn, you may transform {this}";
+        return isControlledBy(event.getPlayerId())
+                && game
+                .getState()
+                .getWatcher(CastSpellLastTurnWatcher.class)
+                .getAmountOfSpellsPlayerCastOnCurrentTurn(event.getPlayerId()) == 3;
     }
 }

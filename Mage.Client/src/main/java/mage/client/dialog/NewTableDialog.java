@@ -594,7 +594,7 @@ public class NewTableDialog extends MageDialog {
     private MatchOptions getMatchOptions() {
         // current settings
         GameTypeView gameType = (GameTypeView) cbGameType.getSelectedItem();
-        MatchOptions options = new MatchOptions(this.txtName.getText(), gameType.getName(), false, 2);
+        MatchOptions options = new MatchOptions(this.txtName.getText(), gameType.getName(), false);
         options.getPlayerTypes().add(PlayerType.HUMAN);
         for (TablePlayerPanel player : players) {
             options.getPlayerTypes().add(player.getPlayerType());

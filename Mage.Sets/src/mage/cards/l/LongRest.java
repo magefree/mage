@@ -21,7 +21,6 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- *
  * @author weirddan455
  */
 public final class LongRest extends CardImpl {
@@ -67,19 +66,22 @@ class LongRestTarget extends TargetCardInYourGraveyard {
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
-        Set<Integer> manaValues = new HashSet<>();
+
+        Set<Integer> usedManaValues = new HashSet<>();
         for (UUID targetId : this.getTargets()) {
             Card card = game.getCard(targetId);
             if (card != null) {
-                manaValues.add(card.getManaValue());
+                usedManaValues.add(card.getManaValue());
             }
         }
+
         for (UUID possibleTargetId : super.possibleTargets(sourceControllerId, source, game)) {
             Card card = game.getCard(possibleTargetId);
-            if (card != null && !manaValues.contains(card.getManaValue())) {
+            if (card != null && !usedManaValues.contains(card.getManaValue())) {
                 possibleTargets.add(possibleTargetId);
             }
         }
+
         return possibleTargets;
     }
 }

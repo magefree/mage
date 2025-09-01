@@ -3,13 +3,13 @@ package mage.cards.a;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.replacement.GainDoubleLifeReplacementEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
-import mage.util.CardUtil;
 import mage.watchers.common.CardsDrawnDuringDrawStepWatcher;
 
 import java.util.UUID;
@@ -24,7 +24,7 @@ public final class AlhammarretsArchive extends CardImpl {
         this.supertype.add(SuperType.LEGENDARY);
 
         // If you would gain life, you gain twice that much life instead.
-        this.addAbility(new SimpleStaticAbility(new AlhammarretsArchiveEffect()));
+        this.addAbility(new SimpleStaticAbility(new GainDoubleLifeReplacementEffect()));
 
         // If you draw a card except the first one you draw in each of your draw steps, draw two cards instead.
         this.addAbility(new SimpleStaticAbility(new AlhammarretsArchiveReplacementEffect()), new CardsDrawnDuringDrawStepWatcher());
@@ -37,39 +37,6 @@ public final class AlhammarretsArchive extends CardImpl {
     @Override
     public AlhammarretsArchive copy() {
         return new AlhammarretsArchive(this);
-    }
-}
-
-class AlhammarretsArchiveEffect extends ReplacementEffectImpl {
-
-    AlhammarretsArchiveEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "If you would gain life, you gain twice that much life instead";
-    }
-
-    private AlhammarretsArchiveEffect(final AlhammarretsArchiveEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public AlhammarretsArchiveEffect copy() {
-        return new AlhammarretsArchiveEffect(this);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmount(CardUtil.overflowMultiply(event.getAmount(), 2));
-        return false;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.GAIN_LIFE;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getPlayerId().equals(source.getControllerId()) && (source.getControllerId() != null);
     }
 }
 

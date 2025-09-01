@@ -43,7 +43,8 @@ public final class ZurgoThundersDecree extends CardImpl {
 
         // During your end step, Warrior tokens you control have "This token can't be sacrificed."
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(new GainAbilityControlledEffect(
-                new SimpleStaticAbility(new CantBeSacrificedSourceEffect()), Duration.WhileOnBattlefield
+                new SimpleStaticAbility(new CantBeSacrificedSourceEffect()),
+                Duration.WhileOnBattlefield, filter
         ), condition, "during your end step, Warrior tokens you control have \"This token can't be sacrificed.\"")));
     }
 

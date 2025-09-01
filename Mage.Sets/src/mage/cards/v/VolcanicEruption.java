@@ -8,12 +8,13 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetLandPermanent;
+import mage.target.TargetPermanent;
 import mage.target.targetadjustment.XTargetsCountAdjuster;
 
 import java.util.List;
@@ -23,15 +24,15 @@ import java.util.UUID;
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
 public final class VolcanicEruption extends CardImpl {
-    private static final FilterLandPermanent filter
-            = new FilterLandPermanent(SubType.MOUNTAIN, "Mountain");
+
+    private static final FilterPermanent filter = new FilterLandPermanent(SubType.MOUNTAIN, "Mountain");
 
     public VolcanicEruption(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{U}{U}{U}");
 
         // Destroy X target Mountains. Volcanic Eruption deals damage to each creature and each player equal to the number of Mountains put into a graveyard this way.
         this.getSpellAbility().addEffect(new VolcanicEruptionEffect());
-        this.getSpellAbility().addTarget(new TargetLandPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
     }
 

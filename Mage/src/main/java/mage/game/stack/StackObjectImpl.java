@@ -154,6 +154,9 @@ public abstract class StackObjectImpl implements StackObject {
 
     @Override
     public void createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets, int amount, StackObjectCopyApplier applier) {
+        if (!this.canBeCopied()) {
+            return;
+        }
         GameEvent gameEvent = new CopyStackObjectEvent(source, this, newControllerId, amount);
         if (game.replaceEvent(gameEvent)) {
             return;

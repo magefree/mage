@@ -89,7 +89,7 @@ public class ReturnFromGraveyardToBattlefieldTargetEffect extends OneShotEffect 
             if (target.getMaxNumberOfTargets() == Integer.MAX_VALUE
                     && target.getMinNumberOfTargets() == 0) {
                 sb.append("any number of ");
-            } else if (target.getMaxNumberOfTargets() != target.getNumberOfTargets()) {
+            } else if (target.getMaxNumberOfTargets() != target.getMinNumberOfTargets()) {
                 sb.append("up to ");
                 sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets()));
                 sb.append(' ');
@@ -105,15 +105,15 @@ public class ReturnFromGraveyardToBattlefieldTargetEffect extends OneShotEffect 
         }
         sb.append(yourGrave ? " to" : " onto");
         sb.append(" the battlefield");
+        if (!yourGrave) {
+            sb.append(" under your control");
+        }
         if (tapped && attacking) {
             sb.append(" tapped and attacking");
         } else if (tapped) {
             sb.append(" tapped");
         } else if (attacking) {
             sb.append(" attacking");
-        }
-        if (!yourGrave) {
-            sb.append(" under your control");
         }
         return sb.toString();
     }

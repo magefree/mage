@@ -3,7 +3,9 @@ package org.mage.test.cards.modal;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import org.junit.Assert;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -61,25 +63,17 @@ public class PawPrintsTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Season of Gathering");
         setModeChoice(playerA, "1");
         setModeChoice(playerA, "2");
-        setModeChoice(playerA, "3"); // Will be unused
+        setModeChoice(playerA, "3"); // no more paws for mode 3, see exception below
         addTarget(playerA, "Memnite"); // for 1
         setChoice(playerA, "Enchantment");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
-        execute();
-
-        // Add one more counter from Hardened Scales, which was still on the battlefield when the counter placing effect triggered
-        assertPowerToughness(playerA, "Memnite", 3, 3);
-        assertCounterCount("Memnite", CounterType.P1P1, 2);
-
-        // But not anymore...
-        assertPermanentCount(playerA, "Hardened Scales", 0);
-        assertGraveyardCount(playerA, "Hardened Scales", 1);
-
-        // Draw effect didnt trigger
-        assertHandCount(playerA, 0);
-
+        try {
+            execute();
+        } catch (AssertionError e) {
+            Assert.assertTrue("mode 3 must not be able to choose due total paws cost", e.getMessage().contains("Can't use mode: 3"));
+        }
     }
 
     @Test

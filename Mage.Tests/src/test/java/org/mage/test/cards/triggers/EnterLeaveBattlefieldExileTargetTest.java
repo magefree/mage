@@ -3,6 +3,7 @@ package org.mage.test.cards.triggers;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -75,7 +76,8 @@ public class EnterLeaveBattlefieldExileTargetTest extends CardTestPlayerBase {
         // test NPE error while AI targeting battlefield with tokens
 
         // Flying
-        // When Angel of Serenity enters the battlefield, you may exile up to three other target creatures from the battlefield and/or creature cards from graveyards.
+        // When Angel of Serenity enters the battlefield, you may exile up to three other target creatures
+        // from the battlefield and/or creature cards from graveyards.
         addCard(Zone.HAND, playerA, "Angel of Serenity");
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 7);
         //
@@ -96,6 +98,7 @@ public class EnterLeaveBattlefieldExileTargetTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Angel of Serenity");
         setChoice(playerA, true);
         //addTarget(playerA, "Silvercoat Lion^Balduvian Bears"); // AI must target
+        //addTarget(playerA, TestPlayer.TARGET_SKIP);
 
         setStrictChooseMode(false); // AI must target
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);

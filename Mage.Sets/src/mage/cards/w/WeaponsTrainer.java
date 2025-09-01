@@ -1,7 +1,5 @@
-
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -12,24 +10,19 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 public final class WeaponsTrainer extends CardImpl {
 
     private static final String rule = "Other creatures you control get +1/+0 as long as you control an Equipment.";
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("an Equipment");
-
-    static {
-        filter.add(SubType.EQUIPMENT.getPredicate());
-    }
 
     public WeaponsTrainer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{W}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
         this.subtype.add(SubType.ALLY);
@@ -38,7 +31,7 @@ public final class WeaponsTrainer extends CardImpl {
 
         // Other creatures you control get +1/+0 as long as you control an Equipment.
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new BoostControlledEffect(1, 0, Duration.WhileOnBattlefield, true),
-                new PermanentsOnTheBattlefieldCondition(filter), rule);
+                new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_CONTROLLED_PERMANENT_EQUIPMENT), rule);
         this.addAbility(new SimpleStaticAbility(effect));
     }
 

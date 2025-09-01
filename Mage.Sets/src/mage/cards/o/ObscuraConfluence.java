@@ -5,7 +5,7 @@ import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.LoseAllAbilitiesTargetEffect;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessTargetEffect;
-import mage.abilities.effects.keyword.ConniveSourceEffect;
+import mage.abilities.effects.keyword.ConniveTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -14,7 +14,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.TargetPlayer;
@@ -44,7 +43,7 @@ public final class ObscuraConfluence extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // • Target creature connives.
-        this.getSpellAbility().addMode(new Mode(new ObscuraConfluenceConniveEffect()).addTarget(new TargetCreaturePermanent()));
+        this.getSpellAbility().addMode(new Mode(new ConniveTargetEffect()).addTarget(new TargetCreaturePermanent()));
 
         // • Target player returns a creature card from their graveyard to their hand.
         this.getSpellAbility().addMode(new Mode(new ObscuraConfluenceReturnEffect()).addTarget(new TargetPlayer()));
@@ -57,30 +56,6 @@ public final class ObscuraConfluence extends CardImpl {
     @Override
     public ObscuraConfluence copy() {
         return new ObscuraConfluence(this);
-    }
-}
-
-class ObscuraConfluenceConniveEffect extends OneShotEffect {
-
-    ObscuraConfluenceConniveEffect() {
-        super(Outcome.Benefit);
-        staticText = "target creature connives. <i>(Draw a card, then discard a card. " +
-                "If you discarded a nonland card, put a +1/+1 counter on that creature.)</i>";
-    }
-
-    private ObscuraConfluenceConniveEffect(final ObscuraConfluenceConniveEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ObscuraConfluenceConniveEffect copy() {
-        return new ObscuraConfluenceConniveEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
-        return ConniveSourceEffect.connive(permanent, 1, source, game);
     }
 }
 

@@ -70,6 +70,7 @@ class KarnLiberatedEffect extends OneShotEffect {
 
     private KarnLiberatedEffect(final KarnLiberatedEffect effect) {
         super(effect);
+        this.exileId = effect.exileId;
     }
 
     @Override
@@ -80,7 +81,7 @@ class KarnLiberatedEffect extends OneShotEffect {
         }
         List<Card> keepExiled = new ArrayList<>();
         for (ExileZone zone : game.getExile().getExileZones()) {
-            exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+            exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getStackMomentSourceZCC());
             if (zone.getId().equals(exileId)) {
                 for (Card card : zone.getCards(game)) {
                     if (!card.hasSubtype(SubType.AURA, game)
@@ -201,7 +202,7 @@ class KarnLiberatedDelayedEffect extends OneShotEffect {
         controller.moveCards(cards, Zone.BATTLEFIELD, source, game);
         for (Card card : cards.getCards(game)) {
             if (card != null) {
-                Permanent permanent = game.getPermanent(card.getId());
+                Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
                 if (permanent != null) {
                     ((PermanentImpl) permanent).removeSummoningSickness();
                 }
@@ -242,7 +243,7 @@ class KarnPlayerExileEffect extends OneShotEffect {
         TargetCardInHand target = new TargetCardInHand();
         if (target.canChoose(player.getId(), source, game)
                 && target.chooseTarget(Outcome.Exile, player.getId(), source, game)) {
-            UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+            UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getStackMomentSourceZCC());
             return player.moveCardsToExile(new CardsImpl(target.getTargets()).getCards(game), source, game, true, exileId, sourceObject.getIdName());
         }
         return false;

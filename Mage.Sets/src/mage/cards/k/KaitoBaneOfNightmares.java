@@ -19,7 +19,10 @@ import mage.abilities.keyword.HexproofAbility;
 import mage.abilities.keyword.NinjutsuAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.command.emblems.KaitoBaneOfNightmaresEmblem;
@@ -31,7 +34,6 @@ import mage.watchers.common.PlayerLostLifeWatcher;
 import java.util.UUID;
 
 /**
- *
  * @author jackd149
  */
 public final class KaitoBaneOfNightmares extends CardImpl {
@@ -61,8 +63,8 @@ public final class KaitoBaneOfNightmares extends CardImpl {
 
         // 0: Surveil 2. Then draw a card for each opponent who lost life this turn.
         Ability ability = new LoyaltyAbility(new SurveilEffect(2), 0);
-        ability.addEffect(new DrawCardSourceControllerEffect(KaitoBaneOfNightmaresCount.instance));
-        this.addAbility(ability, new PlayerLostLifeWatcher());
+        ability.addEffect(new DrawCardSourceControllerEffect(KaitoBaneOfNightmaresCount.instance).concatBy("Then"));
+        this.addAbility(ability);
 
         // -2: Tap target creature. Put two stun counters on it.
         Ability minusTwoAbility = new LoyaltyAbility(new TapTargetEffect(), -2);
@@ -87,10 +89,10 @@ enum KaitoBaneOfNightmaresCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (!MyTurnCondition.instance.apply(game, source)){
+        if (!MyTurnCondition.instance.apply(game, source)) {
             return false;
         }
-        
+
         Permanent permanent = game.getPermanent(source.getSourceId());
 
         if (permanent == null) {

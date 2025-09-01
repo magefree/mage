@@ -22,7 +22,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.util.CardUtil;
 
 import java.awt.*;
@@ -146,7 +146,7 @@ class CrewCost extends CostImpl {
             paid = true;
             return true;
         }
-        Target target = new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, filter, true) {
+        Target target = new TargetPermanent(0, Integer.MAX_VALUE, filter, true) {
             @Override
             public String getMessage(Game game) {
                 // shows selected power

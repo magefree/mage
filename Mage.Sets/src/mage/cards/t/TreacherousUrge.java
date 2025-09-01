@@ -24,6 +24,7 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  *
@@ -81,7 +82,7 @@ class TreacherousUrgeEffect extends OneShotEffect {
                         card = opponent.getHand().get(target.getFirstTarget(), game);
                         if (card != null) {
                             if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
-                                Permanent permanent = game.getPermanent(card.getId());
+                                Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
                                 if (permanent != null) {
                                     ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
                                     effect.setTargetPointer(new FixedTarget(permanent, game));

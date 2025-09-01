@@ -7,7 +7,6 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.LandfallAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.KickerAbility;
@@ -45,12 +44,8 @@ public final class SkyclaveShade extends CardImpl {
         ));
 
         // Landfall — Whenever a land you control enters, if Skyclave Shade is in your graveyard and it's your turn, you may cast it from your graveyard this turn.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new LandfallAbility(Zone.GRAVEYARD, new SkyclaveShadeEffect(), false),
-                SkyclaveShadeCondition.instance, "<i>Landfall</i> &mdash; Whenever a land " +
-                "you control enters, if {this} is in your graveyard and it's your turn, " +
-                "you may cast it from your graveyard this turn."
-        ));
+        this.addAbility(new LandfallAbility(Zone.GRAVEYARD, new SkyclaveShadeEffect(), false)
+                .withInterveningIf(SkyclaveShadeCondition.instance));
     }
 
     private SkyclaveShade(final SkyclaveShade card) {
@@ -71,12 +66,18 @@ enum SkyclaveShadeCondition implements Condition {
         return game.getActivePlayerId().equals(source.getControllerId())
                 && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD;
     }
+
+    @Override
+    public String toString() {
+        return "this card is in your graveyard and it's your turn";
+    }
 }
 
 class SkyclaveShadeEffect extends AsThoughEffectImpl {
 
     SkyclaveShadeEffect() {
         super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
+        staticText = "you may cast it from your graveyard this turn";
     }
 
     private SkyclaveShadeEffect(final SkyclaveShadeEffect effect) {
@@ -101,6 +102,6 @@ class SkyclaveShadeEffect extends AsThoughEffectImpl {
         Card card = game.getCard(source.getSourceId());
         return card != null
                 && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD
-                && source.getSourceObjectZoneChangeCounter() == card.getZoneChangeCounter(game);
+                && source.getStackMomentSourceZCC() == card.getZoneChangeCounter(game);
     }
 }

@@ -128,7 +128,7 @@ class PlagueReaverDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     PlagueReaverDelayedTriggeredAbility(UUID playerId, Ability source) {
         super(new PlagueReaverReturnEffect(playerId).setTargetPointer(
-                new FixedTarget(source.getSourceId(), source.getSourceObjectZoneChangeCounter() + 1)
+                new FixedTarget(source.getSourceId(), source.getStackMomentSourceZCC() + 1)
         ), Duration.Custom, true, false);
         this.playerId = playerId;
     }

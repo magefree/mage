@@ -2,15 +2,16 @@ package mage.cards.v;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.replacement.CreaturesAreExiledOnDeathReplacementEffect;
+import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.WardAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -31,6 +32,10 @@ import java.util.UUID;
  */
 public final class VrenTheRelentless extends CardImpl {
 
+    private static final Hint hint = new ValueHint(
+            "Creatures exiled under opponents' control this turn", VrenTheRelentlessCount.instance
+    );
+
     public VrenTheRelentless(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{B}");
         this.supertype.add(SuperType.LEGENDARY);
@@ -49,11 +54,8 @@ public final class VrenTheRelentless extends CardImpl {
         // At the beginning of each end step, create X 1/1 black Rat creature tokens with "This creature gets +1/+1 for each
         // other Rat you control," where X is the number of creatures your opponents controlled that were exiled this turn.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                TargetController.ANY, new CreateTokenEffect(new VrenRatToken(), VrenTheRelentlessCount.instance)
-                        .setText("create X 1/1 black Rat creature tokens with \"This creature gets +1/+1 for each other Rat you " +
-                                "control,\" where X is the number of creatures your opponents controlled that were exiled this turn"),
-                false
-        ).addHint(new ValueHint("Creatures exiled under opponents' control this turn", VrenTheRelentlessCount.instance)), new VrenTheRelentlessWatcher());
+                TargetController.ANY, new CreateTokenEffect(new VrenRatToken(), VrenTheRelentlessCount.instance), false
+        ).addHint(hint), new VrenTheRelentlessWatcher());
     }
 
     private VrenTheRelentless(final VrenTheRelentless card) {
@@ -72,7 +74,7 @@ enum VrenTheRelentlessCount implements DynamicValue {
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         VrenTheRelentlessWatcher watcher = game.getState().getWatcher(VrenTheRelentlessWatcher.class);
-        return watcher == null ? 0 : watcher.getCount(sourceAbility.getControllerId());
+        return watcher == null ? 0 : watcher.getCount(sourceAbility.getControllerId(), game);
     }
 
     @Override
@@ -81,8 +83,13 @@ enum VrenTheRelentlessCount implements DynamicValue {
     }
 
     @Override
+    public String toString() {
+        return "X";
+    }
+
+    @Override
     public String getMessage() {
-        return "";
+        return "the number of creatures that were exiled under your opponents' control this turn";
     }
 }
 
@@ -100,7 +107,9 @@ class VrenTheRelentlessWatcher extends Watcher {
             return;
         }
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if ((zEvent.getToZone() == Zone.EXILED && zEvent.getFromZone() == Zone.BATTLEFIELD) && zEvent.getTarget().isCreature(game)) {
+        if (zEvent.getToZone() == Zone.EXILED
+                && zEvent.getFromZone() == Zone.BATTLEFIELD
+                && zEvent.getTarget().isCreature(game)) {
             playerMap.compute(zEvent.getTarget().getControllerId(), CardUtil::setOrIncrementValue);
         }
     }
@@ -111,10 +120,11 @@ class VrenTheRelentlessWatcher extends Watcher {
         super.reset();
     }
 
-    int getCount(UUID playerId) {
-        return playerMap.entrySet().stream()
-                .filter(entry -> !entry.getKey().equals(playerId))
-                .mapToInt(Map.Entry::getValue)
+    int getCount(UUID playerId, Game game) {
+        return game
+                .getOpponents(playerId)
+                .stream()
+                .mapToInt(uuid -> playerMap.getOrDefault(uuid, 0))
                 .sum();
     }
 }

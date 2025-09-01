@@ -43,7 +43,7 @@ public final class ShimianNightStalker extends CardImpl {
         // {B}, {T}: All damage that would be dealt to you this turn by target attacking creature is dealt to Shimian Night Stalker instead.
         Ability ability = new SimpleActivatedAbility(new ShimianNightStalkerRedirectDamageEffect(), new ManaCostsImpl<>("{B}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

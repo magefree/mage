@@ -29,6 +29,7 @@ public final class FrodoDeterminedHero extends CardImpl {
             = new FilterControlledPermanent("Equipment you control with mana value 2 or 3");
 
     static {
+        filter.add(SubType.EQUIPMENT.getPredicate());
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
         filter.add(new ManaValuePredicate(ComparisonType.MORE_THAN, 1));
     }

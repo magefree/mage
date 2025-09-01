@@ -8,10 +8,13 @@ import mage.cards.ModalDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL;
 
 /**
  * @author JayDi85
@@ -31,7 +34,7 @@ public final class KhalniAmbush extends ModalDoubleFacedCard {
         // Target creature you control fights target creature you don't control.
         this.getLeftHalfCard().getSpellAbility().addEffect(new FightTargetsEffect());
         this.getLeftHalfCard().getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        this.getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
+        this.getLeftHalfCard().getSpellAbility().addTarget(new TargetPermanent(FILTER_CREATURE_YOU_DONT_CONTROL));
 
         // 2.
         // Khalni Territory

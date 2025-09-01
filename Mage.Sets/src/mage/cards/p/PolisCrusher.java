@@ -1,10 +1,9 @@
 package mage.cards.p;
 
 import mage.MageInt;
-import mage.abilities.TriggeredAbility;
+import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.condition.common.MonstrousCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.MonstrosityAbility;
 import mage.abilities.keyword.ProtectionAbility;
@@ -14,10 +13,11 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterEnchantmentCard;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.DamagedPlayerControlsTargetAdjuster;
+import mage.target.targetadjustment.ThatPlayerControlsTargetAdjuster;
 
 import java.util.UUID;
 
@@ -27,11 +27,7 @@ import java.util.UUID;
 public final class PolisCrusher extends CardImpl {
 
     private static final FilterCard filterCard = new FilterEnchantmentCard("enchantments");
-    private static final FilterEnchantmentPermanent filterPermanent = new FilterEnchantmentPermanent("enchantment that player controls");
-
-    static {
-        filterCard.add(CardType.ENCHANTMENT.getPredicate());
-    }
+    private static final FilterPermanent filterPermanent = new FilterEnchantmentPermanent("enchantment that player controls");
 
     public PolisCrusher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{G}");
@@ -50,12 +46,11 @@ public final class PolisCrusher extends CardImpl {
         this.addAbility(new MonstrosityAbility("{4}{R}{G}", 3));
 
         // Whenever Polis Crusher deals combat damage to a player, if Polis Crusher is monstrous, destroy target enchantment that player controls.
-        TriggeredAbility ability = new DealsCombatDamageToAPlayerTriggeredAbility(new DestroyTargetEffect(), false, true);
+        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(
+                new DestroyTargetEffect(), false, true
+        ).withInterveningIf(MonstrousCondition.instance);
         ability.addTarget(new TargetPermanent(filterPermanent));
-        ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
-
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, MonstrousCondition.instance,
-                "Whenever {this} deals combat damage to a player, if {this} is monstrous, destroy target enchantment that player controls."));
+        this.addAbility(ability.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster()));
     }
 
     private PolisCrusher(final PolisCrusher card) {

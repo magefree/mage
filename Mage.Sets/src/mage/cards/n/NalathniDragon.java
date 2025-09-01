@@ -20,7 +20,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 
 /**
@@ -78,7 +77,7 @@ class NalathniDragonEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        ActivationInfo activationInfo = ActivationInfo.getInstance(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+        ActivationInfo activationInfo = ActivationInfo.getInstance(game, source.getSourceId(), source.getStackMomentSourceZCC());
         activationInfo.addActivation(game);
         if (activationInfo.getActivationCounter() >= 4) {
             DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new SacrificeSourceEffect());

@@ -11,6 +11,7 @@ import mage.constants.ComparisonType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.target.Target;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -30,7 +31,7 @@ public final class VanquishTheFoul extends CardImpl {
 
         // Destroy target creature with power 4 or greater. Scry 1.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        Target target = new TargetCreaturePermanent(filter);
+        Target target = new TargetPermanent(filter);
         this.getSpellAbility().addTarget(target);
         this.getSpellAbility().addEffect(new ScryEffect(1));
     }

@@ -19,6 +19,7 @@ import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.token.EldraziSpawnToken;
 import mage.target.Target;
+import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCreaturePermanent;
@@ -91,7 +92,7 @@ enum KozileksCommandAdjuster implements TargetAdjuster {
                     mode.getTargets().clear();
                     FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with mana value " + xValue + " or less");
                     filter.add(new ManaValuePredicate(ComparisonType.OR_LESS, xValue));
-                    mode.addTarget(new TargetCreaturePermanent(filter));
+                    mode.addTarget(new TargetPermanent(filter));
                 }
                 if (target instanceof TargetCardInGraveyard) {
                     mode.getTargets().clear();

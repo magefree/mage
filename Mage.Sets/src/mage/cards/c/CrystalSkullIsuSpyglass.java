@@ -9,7 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterHistoricCard;
+import mage.filter.predicate.mageobject.HistoricPredicate;
 
 import java.util.UUID;
 
@@ -18,7 +18,10 @@ import java.util.UUID;
  */
 public final class CrystalSkullIsuSpyglass extends CardImpl {
 
-    private static final FilterCard filter = new FilterHistoricCard("play historic lands and cast historic spells");
+    private static final FilterCard filter = new FilterCard("play historic lands and cast historic spells");
+    static {
+        filter.add(HistoricPredicate.instance);
+    }
 
     public CrystalSkullIsuSpyglass(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}{U}{U}");

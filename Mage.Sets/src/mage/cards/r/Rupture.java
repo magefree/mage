@@ -52,7 +52,7 @@ class RuptureEffect extends OneShotEffect {
 
     public RuptureEffect() {
         super(Outcome.Damage);
-        staticText = "Sacrifice a creature. Rupture deals damage equal to that creature's power to each creature without flying and each player";
+        staticText = "Sacrifice a creature. {this} deals damage equal to that creature's power to each creature without flying and each player";
     }
 
     private RuptureEffect(final RuptureEffect effect) {
@@ -65,10 +65,7 @@ class RuptureEffect extends OneShotEffect {
         if (player != null) {
             int power = 0;
             TargetSacrifice target = new TargetSacrifice(StaticFilters.FILTER_PERMANENT_CREATURE);
-            if (target.canChoose(player.getId(), source, game)) {
-                while (!target.isChosen(game) && target.canChoose(player.getId(), source, game) && player.canRespond()) {
-                    player.choose(Outcome.Sacrifice, target, source, game);
-                }
+            if (player.choose(Outcome.Sacrifice, target, source, game)){
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null) {
                     power = permanent.getPower().getValue();

@@ -32,7 +32,7 @@ public final class BushyBodyguard extends CardImpl {
 
         // When this creature enters, you may forage. If you do, put two +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DoIfCostPaid(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), new ForageCost()
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)).setText("put two +1/+1 counters on it"), new ForageCost()
         )));
     }
 

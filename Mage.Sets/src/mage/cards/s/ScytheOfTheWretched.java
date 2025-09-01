@@ -13,9 +13,12 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -34,7 +37,8 @@ public final class ScytheOfTheWretched extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(2, 2, Duration.WhileOnBattlefield)));
 
         // Whenever a creature dealt damage by equipped creature this turn dies, return that card to the battlefield under your control. Attach Scythe of the Wretched to that creature.
-        this.addAbility(new DealtDamageAttachedAndDiedTriggeredAbility(new ScytheOfTheWretchedReanimateEffect(), false));
+        this.addAbility(new DealtDamageAttachedAndDiedTriggeredAbility(new ScytheOfTheWretchedReanimateEffect(), false,
+                StaticFilters.FILTER_PERMANENT_CREATURE, SetTargetPointer.CARD, AttachmentType.EQUIPMENT));
 
         // Equip {4}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(4), false));
@@ -65,14 +69,17 @@ class ScytheOfTheWretchedReanimateEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
-        if (card != null && controller != null) {
-            controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-            Effect effect = new AttachEffect(Outcome.AddAbility);
-            effect.setTargetPointer(new FixedTarget(card.getId()));
-            effect.apply(game, source);
-            return true;
+        if (card == null || controller == null) {
+            return false;
         }
-        return false;
+        controller.moveCards(card, Zone.BATTLEFIELD, source, game);
+        Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
+        if (permanent != null) {
+            Effect effect = new AttachEffect(Outcome.AddAbility);
+            effect.setTargetPointer(new FixedTarget(permanent.getId(), game));
+            effect.apply(game, source);
+        }
+        return true;
     }
 
     @Override

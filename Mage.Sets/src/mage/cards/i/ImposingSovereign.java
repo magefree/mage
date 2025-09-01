@@ -26,7 +26,7 @@ public final class ImposingSovereign extends CardImpl {
         // Creatures your opponents control enter the battlefield tapped.
         this.addAbility(new SimpleStaticAbility(new PermanentsEnterBattlefieldTappedEffect(
                 StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE
-        ).setText("creatures your opponents control enter the battlefield tapped")));
+        ).setText("creatures your opponents control enter tapped")));
     }
 
     private ImposingSovereign(final ImposingSovereign card) {

@@ -144,7 +144,9 @@ public class SacredGroundTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Molten Rain", "Caves of Koilos");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 1);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Surgical Extraction", "Caves of Koilos");
+        setChoice(playerA, true); // Pay 2 life instead of {B}
 
+        //setStrictChooseMode(true); TODO: good example of AI choices, so add new AI test instead non strict here
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 

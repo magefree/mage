@@ -16,12 +16,12 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -88,7 +88,7 @@ class LimDulTheNecromancerEffect extends OneShotEffect {
             if (card != null) {
                 if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)
                         && card.isCreature(game)) {
-                    Permanent creature = game.getPermanent(card.getId());
+                    Permanent creature = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
                     ContinuousEffect effect = new AddCardSubTypeTargetEffect(SubType.ZOMBIE, Duration.WhileOnBattlefield);
                     effect.setTargetPointer(new FixedTarget(creature.getId(), game));
                     game.addEffect(effect, source);

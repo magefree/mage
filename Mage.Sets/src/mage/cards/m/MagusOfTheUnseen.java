@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -18,29 +17,29 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.target.common.TargetArtifactPermanent;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author emerald000
  */
 public final class MagusOfTheUnseen extends CardImpl {
-    
+
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("artifact an opponent controls");
+
     static {
         filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public MagusOfTheUnseen(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
 
@@ -50,7 +49,7 @@ public final class MagusOfTheUnseen extends CardImpl {
         // {1}{U}, {tap}: Untap target artifact an opponent controls and gain control of it until end of turn. It gains haste until end of turn. When you lose control of the artifact, tap it.
         Ability ability = new SimpleActivatedAbility(new UntapTargetEffect(), new ManaCostsImpl<>("{1}{U}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetArtifactPermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         Effect effect = new GainControlTargetEffect(Duration.EndOfTurn);
         effect.setText("and gain control of it until end of turn. ");
         ability.addEffect(effect);
@@ -88,15 +87,15 @@ class MagusOfTheUnseenDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getPlayerId().equals(controllerId) 
+        return event.getPlayerId().equals(controllerId)
                 && event.getTargetId().equals(this.getEffects().get(0).getTargetPointer().getFirst(game, this));
     }
-    
+
     @Override
     public MagusOfTheUnseenDelayedTriggeredAbility copy() {
         return new MagusOfTheUnseenDelayedTriggeredAbility(this);
     }
-    
+
     @Override
     public String getRule() {
         return "When you lose control of the artifact, tap it";

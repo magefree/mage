@@ -50,6 +50,7 @@ class LeylineOfTheGuildpactEffect extends ContinuousEffectImpl {
     LeylineOfTheGuildpactEffect() {
         super(Duration.WhileOnBattlefield, Layer.ColorChangingEffects_5, SubLayer.NA, Outcome.Benefit);
         staticText = "each nonland permanent you control is all colors";
+        dependendToTypes.add(DependencyType.BecomeNonbasicLand);
     }
 
     private LeylineOfTheGuildpactEffect(final LeylineOfTheGuildpactEffect effect) {

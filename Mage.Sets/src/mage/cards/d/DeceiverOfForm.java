@@ -1,12 +1,11 @@
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopyEffect;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.*;
 import mage.constants.*;
 import mage.filter.StaticFilters;
@@ -14,6 +13,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -47,7 +48,9 @@ class DeceiverOfFormEffect extends OneShotEffect {
 
     DeceiverOfFormEffect() {
         super(Outcome.Copy);
-        this.staticText = "reveal the top card of your library. If a creature card is revealed this way, you may have creatures you control other than Deceiver of Form becomes copies of that card until end of turn. You may put that card on the bottom of your library";
+        this.staticText = "reveal the top card of your library. If a creature card is revealed this way, " +
+                "you may have creatures you control other than {this} become copies of that card until end of turn. " +
+                "You may put that card on the bottom of your library";
     }
 
     private DeceiverOfFormEffect(final DeceiverOfFormEffect effect) {

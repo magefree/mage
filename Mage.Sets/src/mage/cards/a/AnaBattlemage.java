@@ -2,11 +2,11 @@ package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.KickedCostCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
@@ -19,6 +19,7 @@ import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -35,6 +36,9 @@ public final class AnaBattlemage extends CardImpl {
         filter.add(TappedPredicate.UNTAPPED);
     }
 
+    private static final Condition condition = new KickedCostCondition("{2}{U}");
+    private static final Condition condition2 = new KickedCostCondition("{1}{B}");
+
     public AnaBattlemage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.subtype.add(SubType.HUMAN);
@@ -46,16 +50,17 @@ public final class AnaBattlemage extends CardImpl {
         KickerAbility kickerAbility = new KickerAbility("{2}{U}");
         kickerAbility.addKickerCost("{1}{B}");
         this.addAbility(kickerAbility);
+
         // When Ana Battlemage enters the battlefield, if it was kicked with its {2}{U} kicker, target player discards three cards.
-        TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DiscardTargetEffect(3));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DiscardTargetEffect(3)).withInterveningIf(condition);
         ability.addTarget(new TargetPlayer());
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new KickedCostCondition("{2}{U}"),
-                "When {this} enters, if it was kicked with its {2}{U} kicker, target player discards three cards."));
+        this.addAbility(ability);
+
         // When Ana Battlemage enters the battlefield, if it was kicked with its {1}{B} kicker, tap target untapped creature and that creature deals damage equal to its power to its controller.
-        ability = new EntersBattlefieldTriggeredAbility(new AnaBattlemageKickerEffect());
-        ability.addTarget(new TargetCreaturePermanent(filter));
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new KickedCostCondition("{1}{B}"),
-                "When {this} enters, if it was kicked with its {1}{B} kicker, tap target untapped creature and that creature deals damage equal to its power to its controller."));
+        ability = new EntersBattlefieldTriggeredAbility(new TapTargetEffect()).withInterveningIf(condition2);
+        ability.addEffect(new AnaBattlemageEffect());
+        ability.addTarget(new TargetPermanent(filter));
+        this.addAbility(ability);
     }
 
     private AnaBattlemage(final AnaBattlemage card) {
@@ -68,34 +73,31 @@ public final class AnaBattlemage extends CardImpl {
     }
 }
 
-class AnaBattlemageKickerEffect extends OneShotEffect {
+class AnaBattlemageEffect extends OneShotEffect {
 
-    AnaBattlemageKickerEffect() {
+    AnaBattlemageEffect() {
         super(Outcome.Detriment);
-        this.staticText = "tap target untapped creature and it deals damage equal to its power to its controller";
+        this.staticText = "and that creature deals damage equal to its power to its controller";
     }
 
-    private AnaBattlemageKickerEffect(final AnaBattlemageKickerEffect effect) {
+    private AnaBattlemageEffect(final AnaBattlemageEffect effect) {
         super(effect);
     }
 
     @Override
-    public AnaBattlemageKickerEffect copy() {
-        return new AnaBattlemageKickerEffect(this);
+    public AnaBattlemageEffect copy() {
+        return new AnaBattlemageEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        boolean applied = false;
         Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (targetCreature != null) {
-            applied = targetCreature.tap(source, game);
-            Player controller = game.getPlayer(targetCreature.getControllerId());
-            if (controller != null) {
-                controller.damage(targetCreature.getPower().getValue(), source.getSourceId(), source, game);
-                applied = true;
-            }
+        if (targetCreature == null) {
+            return false;
         }
-        return applied;
+        Player controller = game.getPlayer(targetCreature.getControllerId());
+        return controller != null && controller.damage(
+                targetCreature.getPower().getValue(), source.getSourceId(), source, game
+        ) > 0;
     }
 }

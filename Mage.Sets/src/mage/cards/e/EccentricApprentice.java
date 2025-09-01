@@ -2,14 +2,13 @@ package mage.cards.e;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CompletedDungeonCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.keyword.VentureIntoTheDungeonEffect;
 import mage.abilities.hint.common.CurrentDungeonHint;
 import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -41,13 +40,8 @@ public final class EccentricApprentice extends CardImpl {
                 .addHint(CurrentDungeonHint.instance));
 
         // At the beginning of combat on your turn, if you've completed a dungeon, up to one target creature becomes a Bird with base power and toughness 1/1 and flying until end of turn.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfCombatTriggeredAbility(
-                        new EccentricApprenticeEffect()
-                ), CompletedDungeonCondition.instance, "At the beginning of combat on your turn, " +
-                "if you've completed a dungeon, up to one target creature becomes a Bird " +
-                "with base power and toughness 1/1 and flying until end of turn."
-        ).addHint(CompletedDungeonCondition.getHint());
+        Ability ability = new BeginningOfCombatTriggeredAbility(new EccentricApprenticeEffect())
+                .withInterveningIf(CompletedDungeonCondition.instance).addHint(CompletedDungeonCondition.getHint());
         ability.addTarget(new TargetCreaturePermanent(0, 1));
         this.addAbility(ability, new CompletedDungeonWatcher());
     }
@@ -66,6 +60,7 @@ class EccentricApprenticeEffect extends ContinuousEffectImpl {
 
     EccentricApprenticeEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
+        staticText = "up to one target creature becomes a Bird with base power and toughness 1/1 and flying until end of turn";
     }
 
     private EccentricApprenticeEffect(final EccentricApprenticeEffect effect) {

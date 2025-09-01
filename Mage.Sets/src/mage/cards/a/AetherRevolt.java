@@ -33,7 +33,7 @@ public final class AetherRevolt extends CardImpl {
         // Revolt -- As long as a permanent you controlled left the battlefield this turn, if a source you control would deal noncombat damage to an opponent or a permanent an opponent controls, it deals that much damage plus 2 instead.
         this.addAbility(new SimpleStaticAbility(new ConditionalReplacementEffect(
                 new AetherRevoltEffect(), RevoltCondition.instance
-        ).setText("As long as a permanent you controlled left the battlefield this turn, "
+        ).setText("as long as a permanent left the battlefield under your control this turn, "
                 + "if a source you control would deal noncombat damage to an opponent or a permanent an opponent controls, "
                 + "it deals that much damage plus 2 instead")
         ).setAbilityWord(AbilityWord.REVOLT).addHint(RevoltCondition.getHint()), new RevoltWatcher());

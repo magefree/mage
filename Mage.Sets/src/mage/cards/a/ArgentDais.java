@@ -19,7 +19,7 @@ import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.target.common.TargetNonlandPermanent;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -53,7 +53,7 @@ public final class ArgentDais extends CardImpl {
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new RemoveCountersSourceCost(CounterType.OIL.createInstance(2)));
-        ability.addTarget(new TargetNonlandPermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         ability.addEffect(new DrawCardTargetControllerEffect(2));
         this.addAbility(ability);
     }

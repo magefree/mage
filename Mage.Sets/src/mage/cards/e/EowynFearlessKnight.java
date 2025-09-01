@@ -76,6 +76,11 @@ enum EowynFearlessKnightPredicate implements ObjectSourcePlayerPredicate<Permane
                 .map(permanent -> permanent.getPower().getValue()
                         < input.getObject().getPower().getValue()).orElse(false);
     }
+
+    @Override
+    public String toString() {
+        return "another Human entered the battlefield under your control this turn";
+    }
 }
 
 class EowynFearlessKnightEffect extends OneShotEffect {

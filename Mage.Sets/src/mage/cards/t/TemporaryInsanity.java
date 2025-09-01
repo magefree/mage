@@ -1,9 +1,5 @@
-
 package mage.cards.t;
 
-import mage.MageObject;
-import mage.abilities.Ability;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
@@ -12,10 +8,17 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.players.Player;
+import mage.target.TargetPermanent;
 
+import java.util.HashSet;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -23,22 +26,20 @@ import java.util.UUID;
  */
 public final class TemporaryInsanity extends CardImpl {
 
+    private static final FilterPermanent filter = new FilterCreaturePermanent("creature with power less than the number of cards in your graveyard");
+
     public TemporaryInsanity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{R}");
 
         // Untap target creature with power less than the number of cards in your graveyard
-        this.getSpellAbility().addTarget(new TargetCreatureWithPowerLessThanNumberOfCardsInYourGraveyard());
         this.getSpellAbility().addEffect(new UntapTargetEffect());
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
 
         // and gain control of it until end of turn.
-        Effect effect = new GainControlTargetEffect(Duration.EndOfTurn);
-        effect.setText("and gain control of it until end of turn. ");
-        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn).setText("and gain control of it until end of turn"));
 
         // That creature gains haste until end of turn.
-        effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("That creature gains haste until end of turn.");
-        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn).setText("That creature gains haste until end of turn."));
     }
 
     private TemporaryInsanity(final TemporaryInsanity card) {
@@ -51,46 +52,17 @@ public final class TemporaryInsanity extends CardImpl {
     }
 }
 
-class TargetCreatureWithPowerLessThanNumberOfCardsInYourGraveyard extends TargetCreaturePermanent {
-
-    public TargetCreatureWithPowerLessThanNumberOfCardsInYourGraveyard() {
-        super();
-        targetName = "creature with power less than the number of cards in your graveyard";
-    }
-
-    private TargetCreatureWithPowerLessThanNumberOfCardsInYourGraveyard(final TargetCreatureWithPowerLessThanNumberOfCardsInYourGraveyard target) {
-        super(target);
-    }
+enum TemporaryInsanityPredicate implements ObjectSourcePlayerPredicate<Permanent> {
+    instance;
 
     @Override
-    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
-        if (super.canTarget(controllerId, id, source, game)) {
-            Permanent target = game.getPermanent(id);
-            if (target != null) {
-                return target.getPower().getValue() < game.getPlayer(source.getControllerId()).getGraveyard().size();
-            }
-            return false;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
-        MageObject targetSource = game.getObject(source);
-        if (targetSource != null) {
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
-                if (permanent.canBeTargetedBy(targetSource, sourceControllerId, source, game)) {
-                    if (permanent.getPower().getValue() < game.getPlayer(sourceControllerId).getGraveyard().size()) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public TargetCreatureWithPowerLessThanNumberOfCardsInYourGraveyard copy() {
-        return new TargetCreatureWithPowerLessThanNumberOfCardsInYourGraveyard(this);
+    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
+        return Optional
+                .ofNullable(input.getPlayerId())
+                .map(game::getPlayer)
+                .map(Player::getGraveyard)
+                .map(HashSet::size)
+                .filter(x -> input.getObject().getPower().getValue() < x)
+                .isPresent();
     }
 }

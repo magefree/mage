@@ -1,11 +1,10 @@
 package mage.cards.i;
 
 import mage.MageInt;
-import mage.abilities.TriggeredAbility;
+import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceMatchesFilterCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -25,7 +24,7 @@ import java.util.UUID;
  */
 public final class IanTheReckless extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent();
+    private static final FilterPermanent filter = new FilterPermanent("it's modified");
 
     static {
         filter.add(ModifiedPredicate.instance);
@@ -43,12 +42,11 @@ public final class IanTheReckless extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Ian the Reckless attacks, if it's modified, you may have it deal damage equal to its power to you and any target.
-        TriggeredAbility ability = new AttacksTriggeredAbility(new DamageControllerEffect(
-                SourcePermanentPowerValue.NOT_NEGATIVE).setText("have it deal damage equal to its power to you"), true);
+        Ability ability = new AttacksTriggeredAbility(new DamageControllerEffect(SourcePermanentPowerValue.NOT_NEGATIVE)
+                .setText("have it deal damage equal to its power to you"), true).withInterveningIf(condition);
         ability.addEffect(new DamageTargetEffect(SourcePermanentPowerValue.NOT_NEGATIVE).setText("and any target"));
         ability.addTarget(new TargetAnyTarget());
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, condition,
-                "Whenever {this} attacks, if it's modified, you may have it deal damage equal to its power to you and any target."));
+        this.addAbility(ability);
     }
 
     private IanTheReckless(final IanTheReckless card) {

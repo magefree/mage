@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.constants.Outcome;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledPermanent;
@@ -20,11 +21,23 @@ public class TapTargetCost extends CostImpl {
 
     TargetControlledPermanent target;
 
+    public TapTargetCost(FilterControlledPermanent filter) {
+        this(1, filter);
+    }
+
+    public TapTargetCost(int amount, FilterControlledPermanent filter) {
+        this(amount, amount, filter);
+    }
+
+    public TapTargetCost(int minAmount, int maxAmount, FilterControlledPermanent filter) {
+        this(new TargetControlledPermanent(minAmount, maxAmount, filter, true));
+    }
+
     public TapTargetCost(TargetControlledPermanent target) {
         this.target = target;
         this.target.withNotTarget(true); // costs are never targeted
         this.target.setRequired(false); // can be cancel by user
-        this.text = "tap " + (target.getNumberOfTargets() > 1
+        this.text = "tap " + (target.getMinNumberOfTargets() > 1
                 ? CardUtil.numberToText(target.getMaxNumberOfTargets()) + ' ' + target.getTargetName()
                 : CardUtil.addArticle(target.getTargetName()));
     }
@@ -47,7 +60,7 @@ public class TapTargetCost extends CostImpl {
                 permanents.add(permanent);
             }
         }
-        if (target.getNumberOfTargets() == 0) {
+        if (target.getMinNumberOfTargets() == 0) {
             paid = true; // e.g. Aryel with X = 0
         }
         source.getEffects().setValue("tappedPermanents", permanents);
@@ -56,7 +69,7 @@ public class TapTargetCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return target.canChoose(controllerId, source, game);
+        return target.canChooseOrAlreadyChosen(controllerId, source, game);
     }
 
     public TargetControlledPermanent getTarget() {

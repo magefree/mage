@@ -1,7 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -15,12 +14,12 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -59,7 +58,7 @@ class TimeVaultReplacementEffect extends ReplacementEffectImpl {
     
     TimeVaultReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Untap);
-        staticText = "If you would begin your turn while {this} is tapped, you may skip that turn instead. If you do, untap Time Vault.";        
+        staticText = "If you would begin your turn while {this} is tapped, you may skip that turn instead. If you do, untap {this}.";
     }
     
     private TimeVaultReplacementEffect(final TimeVaultReplacementEffect effect) {

@@ -168,6 +168,8 @@ public class Library implements Serializable {
     }
 
     public Collection<Card> getUniqueCards(Game game) {
+        // TODO: on no performance issues - remove unique code after few releases, 2025-05-13
+        if (true) return getCards(game);
         Map<String, Card> cards = new HashMap<>();
         for (UUID cardId : library) {
             Card card = game.getCard(cardId);

@@ -2,7 +2,7 @@ package mage.cards.m;
 
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.GreatestPowerAmongControlledCreaturesValue;
+import mage.abilities.dynamicvalue.common.GreatestAmongPermanentsValue;
 import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -27,8 +27,8 @@ public final class MoltenMonstrosity extends CardImpl {
 
         // This spell costs {X} less to cast, where X is the greatest power among creatures you control.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SpellCostReductionSourceEffect(GreatestPowerAmongControlledCreaturesValue.instance)
-        ).setRuleAtTheTop(true).addHint(GreatestPowerAmongControlledCreaturesValue.getHint()));
+                Zone.ALL, new SpellCostReductionSourceEffect(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES)
+        ).setRuleAtTheTop(true).addHint(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES.getHint()));
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());

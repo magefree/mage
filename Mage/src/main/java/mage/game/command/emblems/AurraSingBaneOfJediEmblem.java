@@ -13,7 +13,7 @@ public final class AurraSingBaneOfJediEmblem extends Emblem {
 
     //  Whenever a nontoken creature you control leaves the battlefied, discard a card.
     public AurraSingBaneOfJediEmblem() {
-        super("Emblem Aurra Sing, Bane of Jedi");
+        super("Emblem Aurra Sing");
         getAbilities().add(new LeavesBattlefieldAllTriggeredAbility(Zone.COMMAND, new DiscardControllerEffect(1), StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN, false));
     }
 

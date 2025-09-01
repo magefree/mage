@@ -83,7 +83,7 @@ class SpellweaverHelixImprintEffect extends OneShotEffect {
             for (UUID targetId : this.getTargetPointer().getTargets(game, source)) {
                 Card card = game.getCard(targetId);
                 if (card != null) {
-                    controller.moveCardsToExile(card, source, game, true, CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()), source.getSourceObject(game).getIdName());
+                    controller.moveCardsToExile(card, source, game, true, CardUtil.getExileZoneId(game, source.getSourceId(), source.getStackMomentSourceZCC()), source.getSourceObject(game).getIdName());
                     if (sourcePermanent != null) {
                         sourcePermanent.imprint(targetId, game);
                     }
@@ -148,7 +148,7 @@ class SpellweaverHelixTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a player casts a card, if it has the same name as one of the cards exiled with Spellweaver Helix, you may copy the other. If you do, you may cast the copy without paying its mana cost.";
+        return "Whenever a player casts a card, if it has the same name as one of the cards exiled with {this}, you may copy the other. If you do, you may cast the copy without paying its mana cost.";
     }
 }
 

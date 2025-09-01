@@ -8,6 +8,7 @@ import mage.util.CardUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Optional;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -29,11 +30,21 @@ public class Effects extends ArrayList<Effect> {
     }
 
     public String getTextStartingUpperCase(Mode mode) {
-        String text = getText(mode);
-        if (text.length() > 3) {
-            return CardUtil.getTextWithFirstCharUpperCase(text);
+        StringBuilder text = Optional
+                .of(getText(mode))
+                .map(s -> s.length() > 3 ? CardUtil.getTextWithFirstCharUpperCase(s) : s)
+                .map(StringBuilder::new)
+                .get();
+        // cost
+        if (mode.getCost() != null) {
+            text.insert(0, " &mdash; ");
+            text.insert(0, mode.getCost().getText());
         }
-        return text;
+        // flavor word
+        if (mode.getFlavorWord() != null) {
+            text.insert(0, CardUtil.italicizeWithEmDash(mode.getFlavorWord()));
+        }
+        return text.toString();
     }
 
     public String getText(Mode mode) {
@@ -113,12 +124,6 @@ public class Effects extends ArrayList<Effect> {
                 && !lastRule.endsWith("<br>")
                 && !lastRule.endsWith("</i>")) {
             sbText.append('.');
-        }
-
-        // flavor word
-        if (mode.getFlavorWord() != null) {
-            return CardUtil.italicizeWithEmDash(mode.getFlavorWord())
-                    + CardUtil.getTextWithFirstCharUpperCase(sbText.toString());
         }
 
         return sbText.toString();

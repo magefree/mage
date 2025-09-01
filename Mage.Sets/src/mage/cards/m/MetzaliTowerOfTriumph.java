@@ -1,10 +1,5 @@
 package mage.cards.m;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -18,15 +13,16 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.RandomUtil;
-import mage.watchers.Watcher;
 import mage.watchers.common.AttackedThisTurnWatcher;
 
+import java.util.Objects;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
 /**
- *
  * @author LevelX2
  */
 public final class MetzaliTowerOfTriumph extends CardImpl {
@@ -51,7 +47,6 @@ public final class MetzaliTowerOfTriumph extends CardImpl {
         ability = new SimpleActivatedAbility(new MetzaliTowerOfTriumphEffect(), new ManaCostsImpl<>("{2}{W}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
-
     }
 
     private MetzaliTowerOfTriumph(final MetzaliTowerOfTriumph card) {
@@ -69,7 +64,7 @@ class MetzaliTowerOfTriumphEffect extends OneShotEffect {
 
     MetzaliTowerOfTriumphEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "Choose a creature at random that attacked this turn. Destroy that creature";
+        this.staticText = "choose a creature at random that attacked this turn. Destroy that creature";
     }
 
     private MetzaliTowerOfTriumphEffect(final MetzaliTowerOfTriumphEffect effect) {
@@ -83,24 +78,15 @@ class MetzaliTowerOfTriumphEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Watcher watcher = game.getState().getWatcher(AttackedThisTurnWatcher.class);
-        if (watcher instanceof AttackedThisTurnWatcher) {
-            Set<MageObjectReference> attackedThisTurn = ((AttackedThisTurnWatcher) watcher).getAttackedThisTurnCreatures();
-            List<Permanent> available = new ArrayList<>();
-            for (MageObjectReference mor : attackedThisTurn) {
-                Permanent permanent = mor.getPermanent(game);
-                if (permanent != null && permanent.isCreature(game)) {
-                    available.add(permanent);
-                }
-            }
-            if (!available.isEmpty()) {
-                Permanent permanent = available.get(RandomUtil.nextInt(available.size()));
-                if (permanent != null) {
-                    permanent.destroy(source, game, false);
-                }
-            }
-            return true;
-        }
-        return false;
+        Permanent permanent = RandomUtil.randomFromCollection(
+                game.getState()
+                        .getWatcher(AttackedThisTurnWatcher.class)
+                        .getAttackedThisTurnCreatures()
+                        .stream()
+                        .map(mor -> mor.getPermanent(game))
+                        .filter(Objects::nonNull)
+                        .collect(Collectors.toSet())
+        );
+        return permanent != null && permanent.destroy(source, game);
     }
 }

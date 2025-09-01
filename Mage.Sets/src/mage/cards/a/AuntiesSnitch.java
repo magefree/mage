@@ -44,7 +44,7 @@ public final class AuntiesSnitch extends CardImpl {
 
         // Whenever a Goblin or Rogue you control deals combat damage to a player, if Auntie's Snitch is in your graveyard, you may return Auntie's Snitch to your hand.
         this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(Zone.GRAVEYARD,
-                new ReturnSourceFromGraveyardToHandEffect().setText("return {this} to your hand"),
+                new ReturnSourceFromGraveyardToHandEffect().setText("return this card to your hand"),
                 filter, true, SetTargetPointer.NONE, true, false
                 ).withInterveningIf(SourceInGraveyardCondition.instance));
     }

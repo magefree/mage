@@ -8,7 +8,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterBasicLandCard;
+import mage.filter.common.FilterBasicCard;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -19,7 +19,7 @@ import java.util.UUID;
  */
 public final class GlimpseTheCore extends CardImpl {
 
-    private static final FilterCard filter = new FilterBasicLandCard(SubType.FOREST);
+    private static final FilterCard filter = new FilterBasicCard(SubType.FOREST);
     private static final FilterCard filter2 = new FilterCard("Cave card from your graveyard");
 
     static {

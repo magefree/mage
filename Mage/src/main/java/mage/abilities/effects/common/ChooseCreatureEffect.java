@@ -13,27 +13,30 @@ import mage.target.TargetPermanent;
 import mage.util.CardUtil;
 
 /**
- * To be used with AsEntersBattlefieldAbility (otherwise Zone Change Counter will be wrong)
+ * To be used with AsEntersBattlefieldAbility with useOffset=false (otherwise Zone Change Counter will be wrong)
  *
  * @author weirddan455
  */
 public class ChooseCreatureEffect extends OneShotEffect {
 
     private final FilterPermanent filter;
+    private final boolean useOffset;
 
     public ChooseCreatureEffect() {
-        this(StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL);
+        this(StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL, true);
     }
 
-    public ChooseCreatureEffect(FilterPermanent filter) {
+    public ChooseCreatureEffect(FilterPermanent filter, boolean useOffset) {
         super(Outcome.Benefit);
         this.filter = filter;
-        this.staticText = "choose " + filter.getMessage();
+        this.staticText = "choose " + CardUtil.addArticle(filter.getMessage());
+        this.useOffset = useOffset;
     }
 
     private ChooseCreatureEffect(final ChooseCreatureEffect effect) {
         super(effect);
         this.filter = effect.filter;
+        this.useOffset = effect.useOffset;
     }
 
     @Override
@@ -44,11 +47,11 @@ public class ChooseCreatureEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
         Permanent sourcePermanent = game.getPermanentEntering(source.getSourceId());
         if (sourcePermanent == null) {
+            sourcePermanent = game.getPermanent(source.getSourceId());
+        }
+        if (controller == null || sourcePermanent == null) {
             return false;
         }
         TargetPermanent target = new TargetPermanent(1, 1, filter, true);
@@ -58,7 +61,10 @@ public class ChooseCreatureEffect extends OneShotEffect {
             return false;
         }
         game.getState().setValue(
-                CardUtil.getObjectZoneString("chosenCreature", sourcePermanent.getId(), game, sourcePermanent.getZoneChangeCounter(game) + 1, false),
+                CardUtil.getObjectZoneString(
+                        "chosenCreature", sourcePermanent.getId(), game,
+                        sourcePermanent.getZoneChangeCounter(game) + (useOffset ? 1 : 0), false
+                ),
                 new MageObjectReference(chosenCreature, game)
         );
         sourcePermanent.addInfo("chosen creature", CardUtil.addToolTipMarkTags("Chosen Creature " + chosenCreature.getIdName()), game);

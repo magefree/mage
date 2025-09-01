@@ -67,10 +67,7 @@ class GoblinWarCryEffect extends OneShotEffect {
         FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you control");
         filter.add(new ControllerIdPredicate(player.getId()));
         Target target = new TargetPermanent(1, 1, filter, true);
-        if (target.canChoose(player.getId(), source, game)) {
-            while (!target.isChosen(game) && target.canChoose(player.getId(), source, game) && player.canRespond()) {
-                player.chooseTarget(Outcome.DestroyPermanent, target, source, game);
-            }
+        if (player.chooseTarget(Outcome.DestroyPermanent, target, source, game)) {
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null) {
                 game.informPlayers(player.getLogName() + " has chosen " + permanent.getLogName() + " as their only creature able to block this turn");
