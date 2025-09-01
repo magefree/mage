@@ -100,6 +100,8 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 189, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 194, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Prowler, Clawed Thief", 138, Rarity.UNCOMMON, mage.cards.p.ProwlerClawedThief.class));
+        cards.add(new SetCardInfo("Radioactive Spider", 213, Rarity.RARE, mage.cards.r.RadioactiveSpider.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Radioactive Spider", 285, Rarity.RARE, mage.cards.r.RadioactiveSpider.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Raging Goblinoids", 85, Rarity.UNCOMMON, mage.cards.r.RagingGoblinoids.class));
         cards.add(new SetCardInfo("Rhino, Barreling Brute", 140, Rarity.UNCOMMON, mage.cards.r.RhinoBarrelingBrute.class));
         cards.add(new SetCardInfo("Risky Research", 62, Rarity.COMMON, mage.cards.r.RiskyResearch.class));
