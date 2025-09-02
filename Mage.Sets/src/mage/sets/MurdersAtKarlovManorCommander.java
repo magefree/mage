@@ -245,7 +245,6 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Selfless Squire", 82, Rarity.RARE, mage.cards.s.SelflessSquire.class));
         cards.add(new SetCardInfo("Selvala, Explorer Returned", 218, Rarity.RARE, mage.cards.s.SelvalaExplorerReturned.class));
         cards.add(new SetCardInfo("Serene Sleuth", 14, Rarity.RARE, mage.cards.s.SereneSleuth.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Serene Sleuth", 14, Rarity.RARE, mage.cards.s.SereneSleuth.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Serene Sleuth", 325, Rarity.RARE, mage.cards.s.SereneSleuth.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sevinne's Reclamation", 83, Rarity.RARE, mage.cards.s.SevinnesReclamation.class));
         cards.add(new SetCardInfo("Sheltered Thicket", 291, Rarity.RARE, mage.cards.s.ShelteredThicket.class));
