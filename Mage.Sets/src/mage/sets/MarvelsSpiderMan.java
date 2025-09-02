@@ -64,6 +64,7 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Gwenom, Remorseless", 256, Rarity.MYTHIC, mage.cards.g.GwenomRemorseless.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gwenom, Remorseless", 286, Rarity.MYTHIC, mage.cards.g.GwenomRemorseless.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gwenom, Remorseless", 56, Rarity.MYTHIC, mage.cards.g.GwenomRemorseless.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Impostor Syndrome", 34, Rarity.MYTHIC, mage.cards.i.ImpostorSyndrome.class));
         cards.add(new SetCardInfo("Iron Spider, Stark Upgrade", 166, Rarity.RARE, mage.cards.i.IronSpiderStarkUpgrade.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Iron Spider, Stark Upgrade", 279, Rarity.RARE, mage.cards.i.IronSpiderStarkUpgrade.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 190, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
