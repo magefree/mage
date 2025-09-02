@@ -1,7 +1,5 @@
 package mage.cards.p;
 
-import java.util.Objects;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -12,17 +10,27 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.abilities.hint.common.ModesAlreadyUsedHint;
-import mage.constants.*;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
+import mage.game.events.DamagedBatchForOnePlayerEvent;
+import mage.game.events.DamagedEvent;
+import mage.game.events.DamagedPlayerEvent;
+import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.ThatPlayerControlsTargetAdjuster;
+import mage.target.targetadjustment.DefineByTriggerTargetAdjuster;
+import mage.target.targetpointer.FixedTarget;
+
+import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
 
 /**
  *
@@ -31,7 +39,6 @@ import mage.target.targetadjustment.ThatPlayerControlsTargetAdjuster;
 public final class ParapetThrasher extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.DRAGON, "Dragons you control");
-    private static final FilterPermanent artifactFilter = new FilterArtifactPermanent("artifact that opponent controls");
 
     public ParapetThrasher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
@@ -45,11 +52,7 @@ public final class ParapetThrasher extends CardImpl {
 
         // Whenever one or more Dragons you control deal combat damage to an opponent, choose one that hasn't been chosen this turn --
         // * Destroy target artifact that opponent controls.
-        Ability ability = new OneOrMoreDamagePlayerTriggeredAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(),
-                filter, true, true, SetTargetPointer.PLAYER, false)
-                .setTriggerPhrase("Whenever one or more Dragons you control deal combat damage to an opponent, ");
-        ability.addTarget(new TargetPermanent(artifactFilter));
-        ability.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster());
+        Ability ability = new ParapetThrasherTriggeredAbility(new DestroyTargetEffect(), filter);
         ability.setModeTag("destroy artifact");
         ability.getModes().setLimitUsageByOnce(true);
 
@@ -75,6 +78,47 @@ public final class ParapetThrasher extends CardImpl {
     @Override
     public ParapetThrasher copy() {
         return new ParapetThrasher(this);
+    }
+}
+
+class ParapetThrasherTriggeredAbility extends OneOrMoreDamagePlayerTriggeredAbility {
+
+
+    public ParapetThrasherTriggeredAbility(Effect effect, FilterPermanent filter) {
+        super(Zone.BATTLEFIELD, effect,
+                filter, true, true, SetTargetPointer.PLAYER, false);
+        setTargetAdjuster(DefineByTriggerTargetAdjuster.instance);
+    }
+
+    private ParapetThrasherTriggeredAbility(final ParapetThrasherTriggeredAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public ParapetThrasherTriggeredAbility copy() {
+        return new ParapetThrasherTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        List<DamagedPlayerEvent> events = getFilteredEvents((DamagedBatchForOnePlayerEvent) event, game);
+        if (events.isEmpty()) {
+            return false;
+        }
+        this.getAllEffects().setValue("damage", events.stream().mapToInt(DamagedEvent::getAmount).sum());
+        Player damagedPlayer = game.getPlayer(event.getTargetId());
+
+        FilterPermanent artifactFilter = new FilterArtifactPermanent("artifact " + damagedPlayer.getLogName() + " controls");
+        artifactFilter.add(new ControllerIdPredicate(damagedPlayer.getId()));
+        this.getTargets().clear();
+        this.addTarget(new TargetPermanent(artifactFilter));
+
+        for (Effect effect : this.getAllEffects()) {
+            if (effect instanceof ParapetThrasherDamageEffect) {
+                effect.setTargetPointer(new FixedTarget(damagedPlayer.getId()));
+            }
+        }
+        return true;
     }
 }
 
