@@ -64,7 +64,8 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Gwenom, Remorseless", 256, Rarity.MYTHIC, mage.cards.g.GwenomRemorseless.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gwenom, Remorseless", 286, Rarity.MYTHIC, mage.cards.g.GwenomRemorseless.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gwenom, Remorseless", 56, Rarity.MYTHIC, mage.cards.g.GwenomRemorseless.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Impostor Syndrome", 34, Rarity.MYTHIC, mage.cards.i.ImpostorSyndrome.class));
+        cards.add(new SetCardInfo("Impostor Syndrome", 251, Rarity.MYTHIC, mage.cards.i.ImpostorSyndrome.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Impostor Syndrome", 34, Rarity.MYTHIC, mage.cards.i.ImpostorSyndrome.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Iron Spider, Stark Upgrade", 166, Rarity.RARE, mage.cards.i.IronSpiderStarkUpgrade.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Iron Spider, Stark Upgrade", 279, Rarity.RARE, mage.cards.i.IronSpiderStarkUpgrade.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 190, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
@@ -105,10 +106,12 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 189, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 194, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Prowler, Clawed Thief", 138, Rarity.UNCOMMON, mage.cards.p.ProwlerClawedThief.class));
-        cards.add(new SetCardInfo("Radioactive Spider", 213, Rarity.RARE, mage.cards.r.RadioactiveSpider.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Radioactive Spider", 111, Rarity.RARE, mage.cards.r.RadioactiveSpider.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Radioactive Spider", 212, Rarity.RARE, mage.cards.r.RadioactiveSpider.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Radioactive Spider", 285, Rarity.RARE, mage.cards.r.RadioactiveSpider.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Raging Goblinoids", 85, Rarity.UNCOMMON, mage.cards.r.RagingGoblinoids.class));
-        cards.add(new SetCardInfo("Rent Is Due", 11, Rarity.RARE, mage.cards.r.RentIsDue.class));
+        cards.add(new SetCardInfo("Rent Is Due", 11, Rarity.RARE, mage.cards.r.RentIsDue.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Rent Is Due", 247, Rarity.RARE, mage.cards.r.RentIsDue.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rhino, Barreling Brute", 140, Rarity.UNCOMMON, mage.cards.r.RhinoBarrelingBrute.class));
         cards.add(new SetCardInfo("Risky Research", 62, Rarity.COMMON, mage.cards.r.RiskyResearch.class));
         cards.add(new SetCardInfo("Romantic Rendezvous", 86, Rarity.COMMON, mage.cards.r.RomanticRendezvous.class));
@@ -168,12 +171,14 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Venom, Evil Unleashed", 71, Rarity.COMMON, mage.cards.v.VenomEvilUnleashed.class));
         cards.add(new SetCardInfo("Vulture, Scheming Scavenger", 158, Rarity.UNCOMMON, mage.cards.v.VultureSchemingScavenger.class));
         cards.add(new SetCardInfo("Web Up", 21, Rarity.COMMON, mage.cards.w.WebUp.class));
-        cards.add(new SetCardInfo("Web of Life and Destiny", 122, Rarity.MYTHIC, mage.cards.w.WebOfLifeAndDestiny.class));
+        cards.add(new SetCardInfo("Web of Life and Destiny", 122, Rarity.MYTHIC, mage.cards.w.WebOfLifeAndDestiny.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Web of Life and Destiny", 268, Rarity.MYTHIC, mage.cards.w.WebOfLifeAndDestiny.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Web-Warriors", 159, Rarity.UNCOMMON, mage.cards.w.WebWarriors.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Web-Warriors", 203, Rarity.UNCOMMON, mage.cards.w.WebWarriors.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Whoosh!", 48, Rarity.COMMON, mage.cards.w.Whoosh.class));
         cards.add(new SetCardInfo("Wild Pack Squad", 23, Rarity.COMMON, mage.cards.w.WildPackSquad.class));
-        cards.add(new SetCardInfo("With Great Power...", 24, Rarity.RARE, mage.cards.w.WithGreatPower.class));
+        cards.add(new SetCardInfo("With Great Power...", 24, Rarity.RARE, mage.cards.w.WithGreatPower.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("With Great Power...", 248, Rarity.RARE, mage.cards.w.WithGreatPower.class, NON_FULL_USE_VARIOUS));
 
         cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName()));
     }
