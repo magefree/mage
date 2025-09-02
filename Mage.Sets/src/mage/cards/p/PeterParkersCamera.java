@@ -44,6 +44,7 @@ public final class PeterParkersCamera extends CardImpl {
         ability.addCost(new TapSourceCost());
         ability.addCost(new RemoveCountersSourceCost(CounterType.FILM.createInstance()));
         ability.addTarget(new TargetStackObject(filter));
+        this.addAbility(ability);
     }
 
     private PeterParkersCamera(final PeterParkersCamera card) {

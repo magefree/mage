@@ -33,7 +33,6 @@ import java.util.Objects;
 import java.util.UUID;
 
 /**
- *
  * @author Jmlundeen
  */
 public final class ParapetThrasher extends CardImpl {
@@ -42,7 +41,7 @@ public final class ParapetThrasher extends CardImpl {
 
     public ParapetThrasher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
-        
+
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
@@ -52,7 +51,7 @@ public final class ParapetThrasher extends CardImpl {
 
         // Whenever one or more Dragons you control deal combat damage to an opponent, choose one that hasn't been chosen this turn --
         // * Destroy target artifact that opponent controls.
-        Ability ability = new ParapetThrasherTriggeredAbility(new DestroyTargetEffect(), filter);
+        Ability ability = new ParapetThrasherTriggeredAbility(new DestroyTargetEffect().setText("destroy target artifact that opponent controls"), filter);
         ability.setModeTag("destroy artifact");
         ability.getModes().setLimitUsageByOnce(true);
 
