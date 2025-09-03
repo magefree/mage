@@ -87,7 +87,7 @@ class HarnessSoulStoneEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        game.getState().setValue(source.getId() + " Harnessed", true);
+        permanent.setHarnessed(game, true);
         return true;
     }
 }
@@ -102,8 +102,8 @@ class TheSoulStoneInfAbility extends BeginningOfUpkeepTriggeredAbility {
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
         boolean valid = super.checkEventType(event, game);
-        Boolean harnessed = (Boolean) game.getState().getValue(id.toString() + " Harnessed");
-        return valid && !(harnessed == null) && harnessed;
+        Permanent permanent = this.getSourcePermanentIfItStillExists(game);
+        return valid && permanent != null && permanent.isHarnessed();
     }
 
 

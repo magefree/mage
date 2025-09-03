@@ -49,8 +49,8 @@ public class TheSoulStoneTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 7);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{6}{B}, {T}");
-        setChoice(playerA, bearCub);
-        addTarget(playerA, bearCub);
+        setChoice(playerA, bearCub); // exile as cost
+        addTarget(playerA, bearCub); // return to battlefield
 
         setStopAt(3, PhaseStep.END_TURN);
         execute();
@@ -79,5 +79,6 @@ public class TheSoulStoneTest extends CardTestPlayerBase {
         execute();
 
         assertExileCount(playerA, bearCub, 1);
+        assertGraveyardCount(playerA, bearCub, 1);
     }
 }

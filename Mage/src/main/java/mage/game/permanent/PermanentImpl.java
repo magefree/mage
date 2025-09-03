@@ -72,6 +72,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected boolean monstrous;
     protected boolean renowned;
     protected boolean suspected;
+    protected boolean harnessed;
     protected boolean manifested = false;
     protected boolean cloaked = false;
     protected boolean morphed = false;
@@ -176,6 +177,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.monstrous = permanent.monstrous;
         this.renowned = permanent.renowned;
         this.suspected = permanent.suspected;
+        this.harnessed = permanent.harnessed;
         this.ringBearerFlag = permanent.ringBearerFlag;
         this.classLevel = permanent.classLevel;
         this.goadingPlayers.addAll(permanent.goadingPlayers);
@@ -2002,6 +2004,23 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         game.fireEvent(new GameEvent(EventType.CASE_SOLVED, getId(), source,
                 source.getControllerId()));
         return true;
+    }
+
+    @Override
+    public boolean isHarnessed() {
+        return this.harnessed;
+    }
+
+    private static final String harnessedInfoKey = "IS_HARNESSED";
+
+    @Override
+    public void setHarnessed(Game game, boolean value) {
+        this.harnessed = value;
+        if (this.harnessed) {
+            addInfo(harnessedInfoKey, CardUtil.addToolTipMarkTags("Harnessed"), game);
+        } else {
+            addInfo(harnessedInfoKey, null, game);
+        }
     }
 
     @Override

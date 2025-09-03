@@ -470,6 +470,10 @@ public interface Permanent extends Card, Controllable {
 
     boolean solve(Game game, Ability source);
 
+    boolean isHarnessed();
+
+    void setHarnessed(Game game, boolean value);
+
     @Override
     Permanent copy();
 
