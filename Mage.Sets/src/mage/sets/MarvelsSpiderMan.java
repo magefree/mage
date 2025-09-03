@@ -96,6 +96,7 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Miles Morales", 200, Rarity.MYTHIC, mage.cards.m.MilesMorales.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Miles Morales", 211, Rarity.MYTHIC, mage.cards.m.MilesMorales.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Miles Morales", 234, Rarity.MYTHIC, mage.cards.m.MilesMorales.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mob Lookout", 136, Rarity.COMMON, mage.cards.m.MobLookout.class));
         cards.add(new SetCardInfo("Mountain", 192, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 197, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Multiversal Passage", 180, Rarity.RARE, mage.cards.m.MultiversalPassage.class, NON_FULL_USE_VARIOUS));
