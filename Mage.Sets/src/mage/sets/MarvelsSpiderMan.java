@@ -101,6 +101,7 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Multiversal Passage", 206, Rarity.RARE, mage.cards.m.MultiversalPassage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mysterio, Master of Illusion", 253, Rarity.RARE, mage.cards.m.MysterioMasterOfIllusion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mysterio, Master of Illusion", 37, Rarity.RARE, mage.cards.m.MysterioMasterOfIllusion.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("News Helicopter", 169, Rarity.COMMON, mage.cards.n.NewsHelicopter.class));
         cards.add(new SetCardInfo("Norman Osborn", 220, Rarity.MYTHIC, mage.cards.n.NormanOsborn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Norman Osborn", 39, Rarity.MYTHIC, mage.cards.n.NormanOsborn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ominous Asylum", 181, Rarity.COMMON, mage.cards.o.OminousAsylum.class));
