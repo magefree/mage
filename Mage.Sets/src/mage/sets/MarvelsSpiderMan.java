@@ -35,6 +35,7 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Behold the Sinister Six!", 51, Rarity.MYTHIC, mage.cards.b.BeholdTheSinisterSix.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Carnage, Crimson Chaos", 125, Rarity.RARE, mage.cards.c.CarnageCrimsonChaos.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Carnage, Crimson Chaos", 227, Rarity.RARE, mage.cards.c.CarnageCrimsonChaos.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Chameleon, Master of Disguise", 27, Rarity.UNCOMMON, mage.cards.c.ChameleonMasterOfDisguise.class));
         cards.add(new SetCardInfo("City Pigeon", 4, Rarity.COMMON, mage.cards.c.CityPigeon.class));
         cards.add(new SetCardInfo("Costume Closet", 5, Rarity.UNCOMMON, mage.cards.c.CostumeCloset.class));
         cards.add(new SetCardInfo("Daily Bugle Building", 179, Rarity.UNCOMMON, mage.cards.d.DailyBugleBuilding.class));
