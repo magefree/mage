@@ -78,6 +78,8 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Gwenom, Remorseless", 56, Rarity.MYTHIC, mage.cards.g.GwenomRemorseless.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Heroes' Hangout", 79, Rarity.UNCOMMON, mage.cards.h.HeroesHangout.class));
         cards.add(new SetCardInfo("Hot Dog Cart", 164, Rarity.COMMON, mage.cards.h.HotDogCart.class));
+        cards.add(new SetCardInfo("Hydro-Man, Fluid Felon", 250, Rarity.RARE, mage.cards.h.HydroManFluidFelon.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Hydro-Man, Fluid Felon", 33, Rarity.RARE, mage.cards.h.HydroManFluidFelon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Impostor Syndrome", 251, Rarity.MYTHIC, mage.cards.i.ImpostorSyndrome.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Impostor Syndrome", 34, Rarity.MYTHIC, mage.cards.i.ImpostorSyndrome.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Interdimensional Web Watch", 165, Rarity.RARE, mage.cards.i.InterdimensionalWebWatch.class, NON_FULL_USE_VARIOUS));
