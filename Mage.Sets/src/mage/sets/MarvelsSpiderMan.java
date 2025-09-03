@@ -186,6 +186,7 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Supportive Parents", 119, Rarity.UNCOMMON, mage.cards.s.SupportiveParents.class));
         cards.add(new SetCardInfo("Swamp", 191, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 196, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swarm, Being of Bees", 69, Rarity.COMMON, mage.cards.s.SwarmBeingOfBees.class));
         cards.add(new SetCardInfo("Symbiote Spider-Man", 156, Rarity.RARE, mage.cards.s.SymbioteSpiderMan.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Symbiote Spider-Man", 217, Rarity.RARE, mage.cards.s.SymbioteSpiderMan.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Taxi Driver", 97, Rarity.COMMON, mage.cards.t.TaxiDriver.class));
