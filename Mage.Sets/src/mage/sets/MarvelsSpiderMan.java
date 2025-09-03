@@ -101,6 +101,7 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Lady Octopus, Inspired Inventor", 252, Rarity.RARE, mage.cards.l.LadyOctopusInspiredInventor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lady Octopus, Inspired Inventor", 35, Rarity.RARE, mage.cards.l.LadyOctopusInspiredInventor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lurking Lizards", 107, Rarity.COMMON, mage.cards.l.LurkingLizards.class));
+        cards.add(new SetCardInfo("Madame Web, Clairvoyant", 36, Rarity.UNCOMMON, mage.cards.m.MadameWebClairvoyant.class));
         cards.add(new SetCardInfo("Mary Jane Watson", 134, Rarity.RARE, mage.cards.m.MaryJaneWatson.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mary Jane Watson", 229, Rarity.RARE, mage.cards.m.MaryJaneWatson.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Masked Meower", 82, Rarity.COMMON, mage.cards.m.MaskedMeower.class));
