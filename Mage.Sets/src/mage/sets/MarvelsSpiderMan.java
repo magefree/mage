@@ -191,6 +191,7 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Unstable Experiment", 47, Rarity.COMMON, mage.cards.u.UnstableExperiment.class));
         cards.add(new SetCardInfo("Venom's Hunger", 73, Rarity.COMMON, mage.cards.v.VenomsHunger.class));
         cards.add(new SetCardInfo("Venom, Evil Unleashed", 71, Rarity.COMMON, mage.cards.v.VenomEvilUnleashed.class));
+        cards.add(new SetCardInfo("Vibrant Cityscape", 188, Rarity.COMMON, mage.cards.v.VibrantCityscape.class));
         cards.add(new SetCardInfo("Vulture, Scheming Scavenger", 158, Rarity.UNCOMMON, mage.cards.v.VultureSchemingScavenger.class));
         cards.add(new SetCardInfo("Web Up", 21, Rarity.COMMON, mage.cards.w.WebUp.class));
         cards.add(new SetCardInfo("Web of Life and Destiny", 122, Rarity.MYTHIC, mage.cards.w.WebOfLifeAndDestiny.class, NON_FULL_USE_VARIOUS));
