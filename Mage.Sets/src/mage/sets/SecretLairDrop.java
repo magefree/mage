@@ -1971,6 +1971,11 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Zulaport Cutthroat", 1982, Rarity.RARE, mage.cards.z.ZulaportCutthroat.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aggravated Assault", 1983, Rarity.RARE, mage.cards.a.AggravatedAssault.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Desperate Ritual", 1984, Rarity.RARE, mage.cards.d.DesperateRitual.class));
+        cards.add(new SetCardInfo("Fact or Fiction", 1995, Rarity.RARE, mage.cards.f.FactOrFiction.class, FULL_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Frantic Search", 1996, Rarity.RARE, mage.cards.f.FranticSearch.class, FULL_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Scheming Symmetry", 1997, Rarity.RARE, mage.cards.s.SchemingSymmetry.class, FULL_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Blasphemous Act", 1998, Rarity.RARE, mage.cards.b.BlasphemousAct.class, FULL_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Impact Tremors", 1999, Rarity.RARE, mage.cards.i.ImpactTremors.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Agent of Treachery", 2005, Rarity.RARE, mage.cards.a.AgentOfTreachery.class));
         cards.add(new SetCardInfo("Priest of Forgotten Gods", 2006, Rarity.RARE, mage.cards.p.PriestOfForgottenGods.class));
         cards.add(new SetCardInfo("Treasonous Ogre", 2007, Rarity.RARE, mage.cards.t.TreasonousOgre.class));
