@@ -90,6 +90,8 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Kraven's Last Hunt", 226, Rarity.RARE, mage.cards.k.KravensLastHunt.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Kraven, Proud Predator", 132, Rarity.UNCOMMON, mage.cards.k.KravenProudPredator.class));
         cards.add(new SetCardInfo("Lurking Lizards", 107, Rarity.COMMON, mage.cards.l.LurkingLizards.class));
+        cards.add(new SetCardInfo("Mary Jane Watson", 134, Rarity.RARE, mage.cards.m.MaryJaneWatson.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mary Jane Watson", 229, Rarity.RARE, mage.cards.m.MaryJaneWatson.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Masked Meower", 82, Rarity.COMMON, mage.cards.m.MaskedMeower.class));
         cards.add(new SetCardInfo("Mechanical Mobster", 168, Rarity.COMMON, mage.cards.m.MechanicalMobster.class));
         cards.add(new SetCardInfo("Merciless Enforcers", 58, Rarity.COMMON, mage.cards.m.MercilessEnforcers.class));
