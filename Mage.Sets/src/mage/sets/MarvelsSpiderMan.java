@@ -77,6 +77,8 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Hot Dog Cart", 164, Rarity.COMMON, mage.cards.h.HotDogCart.class));
         cards.add(new SetCardInfo("Impostor Syndrome", 251, Rarity.MYTHIC, mage.cards.i.ImpostorSyndrome.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Impostor Syndrome", 34, Rarity.MYTHIC, mage.cards.i.ImpostorSyndrome.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Interdimensional Web Watch", 165, Rarity.RARE, mage.cards.i.InterdimensionalWebWatch.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Interdimensional Web Watch", 278, Rarity.RARE, mage.cards.i.InterdimensionalWebWatch.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Iron Spider, Stark Upgrade", 166, Rarity.RARE, mage.cards.i.IronSpiderStarkUpgrade.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Iron Spider, Stark Upgrade", 279, Rarity.RARE, mage.cards.i.IronSpiderStarkUpgrade.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 190, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
