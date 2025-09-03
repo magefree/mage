@@ -88,7 +88,7 @@ class UnidentifiedHovershipEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source));
+        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source, -1));
         if (exileZone == null || exileZone.isEmpty()) {
             return false;
         }
