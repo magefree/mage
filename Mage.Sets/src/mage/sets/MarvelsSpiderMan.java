@@ -32,6 +32,7 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Arana, Heart of the Spider", 123, Rarity.RARE, mage.cards.a.AranaHeartOfTheSpider.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arana, Heart of the Spider", 213, Rarity.RARE, mage.cards.a.AranaHeartOfTheSpider.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aunt May", 3, Rarity.UNCOMMON, mage.cards.a.AuntMay.class));
+        cards.add(new SetCardInfo("Bagel and Schmear", 161, Rarity.COMMON, mage.cards.b.BagelAndSchmear.class));
         cards.add(new SetCardInfo("Beetle, Legacy Criminal", 26, Rarity.COMMON, mage.cards.b.BeetleLegacyCriminal.class));
         cards.add(new SetCardInfo("Behold the Sinister Six!", 221, Rarity.MYTHIC, mage.cards.b.BeholdTheSinisterSix.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Behold the Sinister Six!", 51, Rarity.MYTHIC, mage.cards.b.BeholdTheSinisterSix.class, NON_FULL_USE_VARIOUS));
