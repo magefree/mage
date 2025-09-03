@@ -110,6 +110,7 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Pictures of Spider-Man", 109, Rarity.UNCOMMON, mage.cards.p.PicturesOfSpiderMan.class));
         cards.add(new SetCardInfo("Plains", 189, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 194, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Prison Break", 61, Rarity.UNCOMMON, mage.cards.p.PrisonBreak.class));
         cards.add(new SetCardInfo("Prowler, Clawed Thief", 138, Rarity.UNCOMMON, mage.cards.p.ProwlerClawedThief.class));
         cards.add(new SetCardInfo("Radioactive Spider", 111, Rarity.RARE, mage.cards.r.RadioactiveSpider.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Radioactive Spider", 212, Rarity.RARE, mage.cards.r.RadioactiveSpider.class, NON_FULL_USE_VARIOUS));
