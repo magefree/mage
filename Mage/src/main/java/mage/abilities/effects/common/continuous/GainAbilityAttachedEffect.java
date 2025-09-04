@@ -143,8 +143,10 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
             return staticText;
         }
         StringBuilder sb = new StringBuilder();
-        sb.append(attachmentType.verb().toLowerCase());
-        sb.append(" " + targetObjectName + " ");
+        if (attachmentType != null) {
+            sb.append(attachmentType.verb().toLowerCase());
+            sb.append(" " + targetObjectName + " ");
+        }
         if (duration == Duration.WhileOnBattlefield) {
             sb.append("has ");
         } else {
