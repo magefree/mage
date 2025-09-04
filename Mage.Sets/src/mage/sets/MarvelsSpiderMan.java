@@ -201,6 +201,9 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Spider-Punk", 210, Rarity.RARE, mage.cards.s.SpiderPunk.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Spider-Punk", 92, Rarity.RARE, mage.cards.s.SpiderPunk.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Spider-Rex, Daring Dino", 116, Rarity.COMMON, mage.cards.s.SpiderRexDaringDino.class));
+        cards.add(new SetCardInfo("Spider-Sense", 254, Rarity.RARE, mage.cards.s.SpiderSense.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Spider-Sense", 284, Rarity.RARE, mage.cards.s.SpiderSense.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Spider-Sense", 46, Rarity.RARE, mage.cards.s.SpiderSense.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Spider-Suit", 176, Rarity.UNCOMMON, mage.cards.s.SpiderSuit.class));
         cards.add(new SetCardInfo("Spider-UK", 17, Rarity.UNCOMMON, mage.cards.s.SpiderUK.class));
         cards.add(new SetCardInfo("Spider-Woman, Stunning Savior", 152, Rarity.RARE, mage.cards.s.SpiderWomanStunningSavior.class, NON_FULL_USE_VARIOUS));
