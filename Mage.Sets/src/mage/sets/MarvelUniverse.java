@@ -25,12 +25,14 @@ public class MarvelUniverse extends ExpansionSet {
         cards.add(new SetCardInfo("Arasta of the Endless Web", 32, Rarity.MYTHIC, mage.cards.a.ArastaOfTheEndlessWeb.class));
         cards.add(new SetCardInfo("Beast Within", 33, Rarity.MYTHIC, mage.cards.b.BeastWithin.class));
         cards.add(new SetCardInfo("Clever Impersonator", 8, Rarity.MYTHIC, mage.cards.c.CleverImpersonator.class));
+        cards.add(new SetCardInfo("Comeuppance", 1, Rarity.MYTHIC, mage.cards.c.Comeuppance.class));
         cards.add(new SetCardInfo("Counterspell", 9, Rarity.MYTHIC, mage.cards.c.Counterspell.class));
         cards.add(new SetCardInfo("Feed the Swarm", 16, Rarity.MYTHIC, mage.cards.f.FeedTheSwarm.class));
         cards.add(new SetCardInfo("Goblin Bombardment", 23, Rarity.MYTHIC, mage.cards.g.GoblinBombardment.class));
         cards.add(new SetCardInfo("Heroic Intervention", 34, Rarity.MYTHIC, mage.cards.h.HeroicIntervention.class));
         cards.add(new SetCardInfo("Hex", 17, Rarity.MYTHIC, mage.cards.h.Hex.class));
         cards.add(new SetCardInfo("Hunter's Insight", 35, Rarity.MYTHIC, mage.cards.h.HuntersInsight.class));
+        cards.add(new SetCardInfo("Infernal Grasp", 18, Rarity.MYTHIC, mage.cards.i.InfernalGrasp.class));
         cards.add(new SetCardInfo("Leyline Binding", 2, Rarity.MYTHIC, mage.cards.l.LeylineBinding.class));
         cards.add(new SetCardInfo("Lorthos, the Tidemaker", 10, Rarity.MYTHIC, mage.cards.l.LorthosTheTidemaker.class));
         cards.add(new SetCardInfo("Mindbreak Trap", 11, Rarity.MYTHIC, mage.cards.m.MindbreakTrap.class));
@@ -44,9 +46,11 @@ public class MarvelUniverse extends ExpansionSet {
         cards.add(new SetCardInfo("Reanimate", 20, Rarity.MYTHIC, mage.cards.r.Reanimate.class));
         cards.add(new SetCardInfo("Relentless Assault", 25, Rarity.MYTHIC, mage.cards.r.RelentlessAssault.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Relentless Assault", 9999, Rarity.MYTHIC, mage.cards.r.RelentlessAssault.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Reprieve", 5, Rarity.MYTHIC, mage.cards.r.Reprieve.class));
         cards.add(new SetCardInfo("Rest in Peace", 6, Rarity.MYTHIC, mage.cards.r.RestInPeace.class));
         cards.add(new SetCardInfo("Rite of Replication", 14, Rarity.MYTHIC, mage.cards.r.RiteOfReplication.class));
         cards.add(new SetCardInfo("Savage Beating", 26, Rarity.MYTHIC, mage.cards.s.SavageBeating.class));
+        cards.add(new SetCardInfo("Saw in Half", 21, Rarity.MYTHIC, mage.cards.s.SawInHalf.class));
         cards.add(new SetCardInfo("Shock", 27, Rarity.MYTHIC, mage.cards.s.Shock.class));
         cards.add(new SetCardInfo("Silkguard", 37, Rarity.MYTHIC, mage.cards.s.Silkguard.class));
         cards.add(new SetCardInfo("Skithiryx, the Blight Dragon", 22, Rarity.MYTHIC, mage.cards.s.SkithiryxTheBlightDragon.class));
