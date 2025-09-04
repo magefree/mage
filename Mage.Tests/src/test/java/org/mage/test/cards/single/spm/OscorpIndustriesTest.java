@@ -41,7 +41,7 @@ public class OscorpIndustriesTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Draw");
         setChoice(playerA, oscorpIndustries);
 
-        playLand(1, PhaseStep.POSTCOMBAT_MAIN, playerA, oscorpIndustries + " with mayhem");
+        playLand(1, PhaseStep.POSTCOMBAT_MAIN, playerA, oscorpIndustries + " with Mayhem");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
