@@ -233,6 +233,7 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Ultimate Green Goblin", 276, Rarity.RARE, mage.cards.u.UltimateGreenGoblin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("University Campus", 186, Rarity.COMMON, mage.cards.u.UniversityCampus.class));
         cards.add(new SetCardInfo("Unstable Experiment", 47, Rarity.COMMON, mage.cards.u.UnstableExperiment.class));
+        cards.add(new SetCardInfo("Urban Retreat", 187, Rarity.RARE, mage.cards.u.UrbanRetreat.class));
         cards.add(new SetCardInfo("Venom's Hunger", 73, Rarity.COMMON, mage.cards.v.VenomsHunger.class));
         cards.add(new SetCardInfo("Venom, Evil Unleashed", 71, Rarity.COMMON, mage.cards.v.VenomEvilUnleashed.class));
         cards.add(new SetCardInfo("Venomized Cat", 72, Rarity.COMMON, mage.cards.v.VenomizedCat.class));
