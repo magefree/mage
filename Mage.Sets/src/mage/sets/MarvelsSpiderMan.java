@@ -130,6 +130,8 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Origin of Spider-Man", 9, Rarity.RARE, mage.cards.o.OriginOfSpiderMan.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Oscorp Industries", 182, Rarity.RARE, mage.cards.o.OscorpIndustries.class));
         cards.add(new SetCardInfo("Oscorp Research Team", 40, Rarity.COMMON, mage.cards.o.OscorpResearchTeam.class));
+        cards.add(new SetCardInfo("Parker Luck", 258, Rarity.RARE, mage.cards.p.ParkerLuck.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Parker Luck", 60, Rarity.RARE, mage.cards.p.ParkerLuck.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Peter Parker", 10, Rarity.MYTHIC, mage.cards.p.PeterParker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Peter Parker", 208, Rarity.MYTHIC, mage.cards.p.PeterParker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Peter Parker", 232, Rarity.MYTHIC, mage.cards.p.PeterParker.class, NON_FULL_USE_VARIOUS));
