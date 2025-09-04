@@ -52,6 +52,8 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Daily Bugle Reporters", 6, Rarity.COMMON, mage.cards.d.DailyBugleReporters.class));
         cards.add(new SetCardInfo("Damage Control Crew", 99, Rarity.UNCOMMON, mage.cards.d.DamageControlCrew.class));
         cards.add(new SetCardInfo("Doc Ock's Henchmen", 30, Rarity.COMMON, mage.cards.d.DocOcksHenchmen.class));
+        cards.add(new SetCardInfo("Doc Ock's Tentacles", 162, Rarity.RARE, mage.cards.d.DocOcksTentacles.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Doc Ock's Tentacles", 277, Rarity.RARE, mage.cards.d.DocOcksTentacles.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Doc Ock, Sinister Scientist", 29, Rarity.COMMON, mage.cards.d.DocOckSinisterScientist.class));
         cards.add(new SetCardInfo("Doctor Octopus, Master Planner", 128, Rarity.MYTHIC, mage.cards.d.DoctorOctopusMasterPlanner.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Doctor Octopus, Master Planner", 228, Rarity.MYTHIC, mage.cards.d.DoctorOctopusMasterPlanner.class, NON_FULL_USE_VARIOUS));
