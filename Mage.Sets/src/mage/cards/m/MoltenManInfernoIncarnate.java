@@ -26,9 +26,9 @@ import java.util.UUID;
  *
  * @author Jmlundeen
  */
-public final class MoltenManIncarnationOfHellfire extends CardImpl {
+public final class MoltenManInfernoIncarnate extends CardImpl {
 
-    public MoltenManIncarnationOfHellfire(UUID ownerId, CardSetInfo setInfo) {
+    public MoltenManInfernoIncarnate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
         
         this.supertype.add(SuperType.LEGENDARY);
@@ -52,12 +52,12 @@ public final class MoltenManIncarnationOfHellfire extends CardImpl {
         );
     }
 
-    private MoltenManIncarnationOfHellfire(final MoltenManIncarnationOfHellfire card) {
+    private MoltenManInfernoIncarnate(final MoltenManInfernoIncarnate card) {
         super(card);
     }
 
     @Override
-    public MoltenManIncarnationOfHellfire copy() {
-        return new MoltenManIncarnationOfHellfire(this);
+    public MoltenManInfernoIncarnate copy() {
+        return new MoltenManInfernoIncarnate(this);
     }
 }
