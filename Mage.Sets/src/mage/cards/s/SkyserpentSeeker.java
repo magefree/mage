@@ -1,22 +1,24 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.RevealCardsFromLibraryUntilEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.keyword.ExhaustAbility;
-import mage.cards.*;
-import mage.constants.*;
-import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.DeathtouchAbility;
+import mage.abilities.keyword.ExhaustAbility;
+import mage.abilities.keyword.FlyingAbility;
+import mage.cards.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.PutCards;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -84,8 +86,9 @@ class SkyserpentSeekerEffect extends OneShotEffect {
                 if (lands.size() == 2) {
                     break;
                 }
+            } else {
+                revealedCards.add(card);
             }
-            revealedCards.add(card);
         }
         controller.revealCards(source, revealedCards, game);
         PutCards.BATTLEFIELD_TAPPED.moveCards(controller, lands, source, game);
