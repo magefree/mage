@@ -188,6 +188,7 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Spider Manifestation", 148, Rarity.COMMON, mage.cards.s.SpiderManifestation.class));
         cards.add(new SetCardInfo("Spider-Bot", 173, Rarity.COMMON, mage.cards.s.SpiderBot.class));
         cards.add(new SetCardInfo("Spider-Byte, Web Warden", 44, Rarity.UNCOMMON, mage.cards.s.SpiderByteWebWarden.class));
+        cards.add(new SetCardInfo("Spider-Girl, Legacy Hero", 149, Rarity.UNCOMMON, mage.cards.s.SpiderGirlLegacyHero.class));
         cards.add(new SetCardInfo("Spider-Gwen, Free Spirit", 90, Rarity.COMMON, mage.cards.s.SpiderGwenFreeSpirit.class));
         cards.add(new SetCardInfo("Spider-Ham, Peter Porker", 114, Rarity.RARE, mage.cards.s.SpiderHamPeterPorker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Spider-Ham, Peter Porker", 201, Rarity.RARE, mage.cards.s.SpiderHamPeterPorker.class, NON_FULL_USE_VARIOUS));
