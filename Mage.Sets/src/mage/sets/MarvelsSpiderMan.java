@@ -127,6 +127,7 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 197, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Multiversal Passage", 180, Rarity.RARE, mage.cards.m.MultiversalPassage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Multiversal Passage", 206, Rarity.RARE, mage.cards.m.MultiversalPassage.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mysterio's Phantasm", 38, Rarity.COMMON, mage.cards.m.MysteriosPhantasm.class));
         cards.add(new SetCardInfo("Mysterio, Master of Illusion", 253, Rarity.RARE, mage.cards.m.MysterioMasterOfIllusion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mysterio, Master of Illusion", 37, Rarity.RARE, mage.cards.m.MysterioMasterOfIllusion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("News Helicopter", 169, Rarity.COMMON, mage.cards.n.NewsHelicopter.class));
