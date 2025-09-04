@@ -164,6 +164,7 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Robotics Mastery", 41, Rarity.UNCOMMON, mage.cards.r.RoboticsMastery.class));
         cards.add(new SetCardInfo("Rocket-Powered Goblin Glider", 172, Rarity.RARE, mage.cards.r.RocketPoweredGoblinGlider.class));
         cards.add(new SetCardInfo("Romantic Rendezvous", 86, Rarity.COMMON, mage.cards.r.RomanticRendezvous.class));
+        cards.add(new SetCardInfo("Sandman's Quicksand", 63, Rarity.UNCOMMON, mage.cards.s.SandmansQuicksand.class));
         cards.add(new SetCardInfo("Sandman, Shifting Scoundrel", 112, Rarity.RARE, mage.cards.s.SandmanShiftingScoundrel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sandman, Shifting Scoundrel", 266, Rarity.RARE, mage.cards.s.SandmanShiftingScoundrel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Scarlet Spider, Kaine", 143, Rarity.UNCOMMON, mage.cards.s.ScarletSpiderKaine.class));
