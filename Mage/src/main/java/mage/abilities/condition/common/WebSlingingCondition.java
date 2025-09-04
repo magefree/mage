@@ -10,7 +10,8 @@ import mage.util.CardUtil;
  * @author TheElk801
  */
 public enum WebSlingingCondition implements Condition {
-    THEY("they were");
+    THEY("they were"),
+    THIS("{this}");
     private final String message;
 
     WebSlingingCondition(String message) {
