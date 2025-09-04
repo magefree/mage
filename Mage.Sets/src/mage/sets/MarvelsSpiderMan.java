@@ -104,6 +104,7 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Kraven, Proud Predator", 132, Rarity.UNCOMMON, mage.cards.k.KravenProudPredator.class));
         cards.add(new SetCardInfo("Lady Octopus, Inspired Inventor", 252, Rarity.RARE, mage.cards.l.LadyOctopusInspiredInventor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lady Octopus, Inspired Inventor", 35, Rarity.RARE, mage.cards.l.LadyOctopusInspiredInventor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Living Brain, Mechanical Marvel", 167, Rarity.UNCOMMON, mage.cards.l.LivingBrainMechanicalMarvel.class));
         cards.add(new SetCardInfo("Lizard, Connors's Curse", 106, Rarity.RARE, mage.cards.l.LizardConnorssCurse.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lizard, Connors's Curse", 265, Rarity.RARE, mage.cards.l.LizardConnorssCurse.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lurking Lizards", 107, Rarity.COMMON, mage.cards.l.LurkingLizards.class));
