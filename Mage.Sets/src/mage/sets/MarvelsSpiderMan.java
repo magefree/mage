@@ -185,6 +185,7 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Sandman's Quicksand", 63, Rarity.UNCOMMON, mage.cards.s.SandmansQuicksand.class));
         cards.add(new SetCardInfo("Sandman, Shifting Scoundrel", 112, Rarity.RARE, mage.cards.s.SandmanShiftingScoundrel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sandman, Shifting Scoundrel", 266, Rarity.RARE, mage.cards.s.SandmanShiftingScoundrel.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Savage Mansion", 183, Rarity.COMMON, mage.cards.s.SavageMansion.class));
         cards.add(new SetCardInfo("Scarlet Spider, Ben Reilly", 142, Rarity.RARE, mage.cards.s.ScarletSpiderBenReilly.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Scarlet Spider, Ben Reilly", 214, Rarity.RARE, mage.cards.s.ScarletSpiderBenReilly.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Scarlet Spider, Kaine", 143, Rarity.UNCOMMON, mage.cards.s.ScarletSpiderKaine.class));
