@@ -254,6 +254,8 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Starling, Aerial Ally", 18, Rarity.COMMON, mage.cards.s.StarlingAerialAlly.class));
         cards.add(new SetCardInfo("Steel Wrecking Ball", 177, Rarity.COMMON, mage.cards.s.SteelWreckingBall.class));
         cards.add(new SetCardInfo("Stegron the Dinosaur Man", 95, Rarity.COMMON, mage.cards.s.StegronTheDinosaurMan.class));
+        cards.add(new SetCardInfo("Strength of Will", 118, Rarity.RARE, mage.cards.s.StrengthOfWill.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Strength of Will", 267, Rarity.RARE, mage.cards.s.StrengthOfWill.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Suburban Sanctuary", 185, Rarity.COMMON, mage.cards.s.SuburbanSanctuary.class));
         cards.add(new SetCardInfo("Subway Train", 178, Rarity.COMMON, mage.cards.s.SubwayTrain.class));
         cards.add(new SetCardInfo("Sudden Strike", 19, Rarity.UNCOMMON, mage.cards.s.SuddenStrike.class));
