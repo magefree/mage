@@ -62,7 +62,7 @@ public final class RhinosRampage extends CardImpl {
 
 class RhinosRampageEffect extends OneShotEffect {
 
-    public RhinosRampageEffect() {
+    RhinosRampageEffect() {
         super(Outcome.BoostCreature);
         staticText = "When excess damage is dealt to the creature an opponent controls this way, destroy up to one target noncreature " +
                 "artifact with mana value 3 or less";

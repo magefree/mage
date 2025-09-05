@@ -51,7 +51,7 @@ public final class BlackCatCunningThief extends CardImpl {
 }
 class BlackCatCunningThiefEffect extends OneShotEffect {
 
-    public BlackCatCunningThiefEffect() {
+    BlackCatCunningThiefEffect() {
         super(Outcome.Benefit);
         this.staticText = "look at the top nine cards of target opponent's library, exile two of them face down, then put the rest on the bottom of their library in a random order. You may play the exiled cards for as long as they remain exiled. Mana of any type can be spent to cast spells this way";
     }

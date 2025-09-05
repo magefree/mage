@@ -49,7 +49,7 @@ public final class CheeringCrowd extends CardImpl {
 }
 class CheeringCrowdDoIfPaidEffect extends DoIfCostPaid {
 
-    public CheeringCrowdDoIfPaidEffect() {
+    CheeringCrowdDoIfPaidEffect() {
         super(new CheeringCrowdEffect(), new PutCountersSourceCost(CounterType.P1P1.createInstance()),
                 "Put a +1/+1 counter on Cheering Crowd and add {C} for each counter on it?", true);
         staticText = "that player may put a +1/+1 counter on this creature. If they do, they add {C} for each counter on it";

@@ -57,7 +57,7 @@ public final class MisterNegative extends CardImpl {
 
 class MisterNegativeEffect extends OneShotEffect {
 
-    public MisterNegativeEffect() {
+    MisterNegativeEffect() {
         super(Outcome.Neutral);
         staticText = "When {this} enters, you may exchange your life total with target opponent. If you lose life this way, draw that many cards.";
     }

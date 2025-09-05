@@ -51,7 +51,7 @@ public final class ShadowOfTheGoblin extends CardImpl {
 
 class ShadowOfTheGoblinTriggeredAbility extends TriggeredAbilityImpl {
 
-    public ShadowOfTheGoblinTriggeredAbility(Effect effect) {
+    ShadowOfTheGoblinTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
         setTriggerPhrase("Whenever you play a land or cast a spell from anywhere other than your hand, ");
     }

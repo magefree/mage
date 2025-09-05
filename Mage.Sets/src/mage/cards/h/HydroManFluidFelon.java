@@ -70,7 +70,7 @@ public final class HydroManFluidFelon extends CardImpl {
 }
 class HydroManFluidFelonEffect extends ContinuousEffectImpl {
 
-    public HydroManFluidFelonEffect() {
+    HydroManFluidFelonEffect() {
         super(Duration.UntilYourNextTurn, Outcome.Neutral);
         this.staticText = "Until your next turn, he becomes a land and gains \"{T}: Add {U}.\"";
         this.addDependencyType(DependencyType.BecomeNonbasicLand);

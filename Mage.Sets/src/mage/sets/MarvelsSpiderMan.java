@@ -256,6 +256,7 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Stegron the Dinosaur Man", 95, Rarity.COMMON, mage.cards.s.StegronTheDinosaurMan.class));
         cards.add(new SetCardInfo("Suburban Sanctuary", 185, Rarity.COMMON, mage.cards.s.SuburbanSanctuary.class));
         cards.add(new SetCardInfo("Subway Train", 178, Rarity.COMMON, mage.cards.s.SubwayTrain.class));
+        cards.add(new SetCardInfo("Sudden Strike", 19, Rarity.UNCOMMON, mage.cards.s.SuddenStrike.class));
         cards.add(new SetCardInfo("Sun-Spider, Nimble Webber", 154, Rarity.UNCOMMON, mage.cards.s.SunSpiderNimbleWebber.class));
         cards.add(new SetCardInfo("Supportive Parents", 119, Rarity.UNCOMMON, mage.cards.s.SupportiveParents.class));
         cards.add(new SetCardInfo("Swamp", 191, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));

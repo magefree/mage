@@ -44,7 +44,7 @@ public final class ParkerLuck extends CardImpl {
 
 class ParkerLuckEffect extends OneShotEffect {
 
-    public ParkerLuckEffect() {
+    ParkerLuckEffect() {
         super(Outcome.Damage);
         staticText = "two target players each reveal the top card of their library. " +
                 "They each lose life equal to the mana value of the card " +
