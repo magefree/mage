@@ -18,7 +18,7 @@ public class MisterNegativeTest extends CardTestPlayerBase {
     When Misterr Negative enters, you may exchange your life total with target opponent. If you lose life this way, draw that many cards.
     5/5
     */
-    private static final String misterNegative = "Misterr Negative";
+    private static final String misterNegative = "Mister Negative";
 
     @Test
     public void testMisterNegative() {
