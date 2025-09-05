@@ -19,14 +19,13 @@ import mage.target.common.TargetOpponent;
 import java.util.UUID;
 
 /**
- *
  * @author Jmlundeen
  */
-public final class MrNegative extends CardImpl {
+public final class MisterNegative extends CardImpl {
 
-    public MrNegative(UUID ownerId, CardSetInfo setInfo) {
+    public MisterNegative(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}{B}");
-        
+
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.VILLAIN);
@@ -40,35 +39,35 @@ public final class MrNegative extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // When Mr. Negative enters, you may exchange your life total with target opponent. If you lose life this way, draw that many cards.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new MrNegativeEffect(), true);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new MisterNegativeEffect(), true);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }
 
-    private MrNegative(final MrNegative card) {
+    private MisterNegative(final MisterNegative card) {
         super(card);
     }
 
     @Override
-    public MrNegative copy() {
-        return new MrNegative(this);
+    public MisterNegative copy() {
+        return new MisterNegative(this);
     }
 }
 
-class MrNegativeEffect extends OneShotEffect {
+class MisterNegativeEffect extends OneShotEffect {
 
-    public MrNegativeEffect() {
+    public MisterNegativeEffect() {
         super(Outcome.Neutral);
         staticText = "When {this} enters, you may exchange your life total with target opponent. If you lose life this way, draw that many cards.";
     }
 
-    protected MrNegativeEffect(final MrNegativeEffect effect) {
+    protected MisterNegativeEffect(final MisterNegativeEffect effect) {
         super(effect);
     }
 
     @Override
-    public MrNegativeEffect copy() {
-        return new MrNegativeEffect(this);
+    public MisterNegativeEffect copy() {
+        return new MisterNegativeEffect(this);
     }
 
     @Override

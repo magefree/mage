@@ -31,7 +31,8 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Angry Rabble", 75, Rarity.COMMON, mage.cards.a.AngryRabble.class));
         cards.add(new SetCardInfo("Anti-Venom, Horrifying Healer", 1, Rarity.MYTHIC, mage.cards.a.AntiVenomHorrifyingHealer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Anti-Venom, Horrifying Healer", 244, Rarity.MYTHIC, mage.cards.a.AntiVenomHorrifyingHealer.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Arachne, Psionic Weaver", 2, Rarity.RARE, mage.cards.a.ArachnePsionicWeaver.class));
+        cards.add(new SetCardInfo("Arachne, Psionic Weaver", 2, Rarity.RARE, mage.cards.a.ArachnePsionicWeaver.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Arachne, Psionic Weaver", 245, Rarity.RARE, mage.cards.a.ArachnePsionicWeaver.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arana, Heart of the Spider", 123, Rarity.RARE, mage.cards.a.AranaHeartOfTheSpider.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arana, Heart of the Spider", 213, Rarity.RARE, mage.cards.a.AranaHeartOfTheSpider.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aunt May", 3, Rarity.UNCOMMON, mage.cards.a.AuntMay.class));
@@ -74,7 +75,8 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Flying Octobot", 31, Rarity.UNCOMMON, mage.cards.f.FlyingOctobot.class));
         cards.add(new SetCardInfo("Forest", 193, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 198, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Friendly Neighborhood", 246, Rarity.RARE, mage.cards.f.FriendlyNeighborhood.class));
+        cards.add(new SetCardInfo("Friendly Neighborhood", 246, Rarity.RARE, mage.cards.f.FriendlyNeighborhood.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Friendly Neighborhood", 8, Rarity.RARE, mage.cards.f.FriendlyNeighborhood.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gallant Citizen", 129, Rarity.COMMON, mage.cards.g.GallantCitizen.class));
         cards.add(new SetCardInfo("Green Goblin, Revenant", 130, Rarity.UNCOMMON, mage.cards.g.GreenGoblinRevenant.class));
         cards.add(new SetCardInfo("Grow Extra Arms", 101, Rarity.COMMON, mage.cards.g.GrowExtraArms.class));
@@ -129,6 +131,8 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Miles Morales", 200, Rarity.MYTHIC, mage.cards.m.MilesMorales.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Miles Morales", 211, Rarity.MYTHIC, mage.cards.m.MilesMorales.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Miles Morales", 234, Rarity.MYTHIC, mage.cards.m.MilesMorales.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mister Negative", 135, Rarity.MYTHIC, mage.cards.m.MisterNegative.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mister Negative", 274, Rarity.MYTHIC, mage.cards.m.MisterNegative.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mob Lookout", 136, Rarity.COMMON, mage.cards.m.MobLookout.class));
         cards.add(new SetCardInfo("Molten Man, Inferno Incarnate", 84, Rarity.UNCOMMON, mage.cards.m.MoltenManInfernoIncarnate.class));
         cards.add(new SetCardInfo("Morbius the Living Vampire", 137, Rarity.UNCOMMON, mage.cards.m.MorbiusTheLivingVampire.class));
@@ -136,7 +140,6 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Morlun, Devourer of Spiders", 59, Rarity.RARE, mage.cards.m.MorlunDevourerOfSpiders.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 192, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 197, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Mr. Negative", 135, Rarity.MYTHIC, mage.cards.m.MrNegative.class));
         cards.add(new SetCardInfo("Multiversal Passage", 180, Rarity.RARE, mage.cards.m.MultiversalPassage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Multiversal Passage", 206, Rarity.RARE, mage.cards.m.MultiversalPassage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mysterio's Phantasm", 38, Rarity.COMMON, mage.cards.m.MysteriosPhantasm.class));
@@ -148,7 +151,8 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Ominous Asylum", 181, Rarity.COMMON, mage.cards.o.OminousAsylum.class));
         cards.add(new SetCardInfo("Origin of Spider-Man", 218, Rarity.RARE, mage.cards.o.OriginOfSpiderMan.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Origin of Spider-Man", 9, Rarity.RARE, mage.cards.o.OriginOfSpiderMan.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Oscorp Industries", 182, Rarity.RARE, mage.cards.o.OscorpIndustries.class));
+        cards.add(new SetCardInfo("Oscorp Industries", 182, Rarity.RARE, mage.cards.o.OscorpIndustries.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Oscorp Industries", 282, Rarity.RARE, mage.cards.o.OscorpIndustries.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Oscorp Research Team", 40, Rarity.COMMON, mage.cards.o.OscorpResearchTeam.class));
         cards.add(new SetCardInfo("Parker Luck", 258, Rarity.RARE, mage.cards.p.ParkerLuck.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Parker Luck", 60, Rarity.RARE, mage.cards.p.ParkerLuck.class, NON_FULL_USE_VARIOUS));
@@ -175,7 +179,8 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Rhino, Barreling Brute", 140, Rarity.UNCOMMON, mage.cards.r.RhinoBarrelingBrute.class));
         cards.add(new SetCardInfo("Risky Research", 62, Rarity.COMMON, mage.cards.r.RiskyResearch.class));
         cards.add(new SetCardInfo("Robotics Mastery", 41, Rarity.UNCOMMON, mage.cards.r.RoboticsMastery.class));
-        cards.add(new SetCardInfo("Rocket-Powered Goblin Glider", 172, Rarity.RARE, mage.cards.r.RocketPoweredGoblinGlider.class));
+        cards.add(new SetCardInfo("Rocket-Powered Goblin Glider", 172, Rarity.RARE, mage.cards.r.RocketPoweredGoblinGlider.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Rocket-Powered Goblin Glider", 281, Rarity.RARE, mage.cards.r.RocketPoweredGoblinGlider.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Romantic Rendezvous", 86, Rarity.COMMON, mage.cards.r.RomanticRendezvous.class));
         cards.add(new SetCardInfo("Sandman's Quicksand", 63, Rarity.UNCOMMON, mage.cards.s.SandmansQuicksand.class));
         cards.add(new SetCardInfo("Sandman, Shifting Scoundrel", 112, Rarity.RARE, mage.cards.s.SandmanShiftingScoundrel.class, NON_FULL_USE_VARIOUS));
@@ -255,7 +260,8 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Ultimate Green Goblin", 276, Rarity.RARE, mage.cards.u.UltimateGreenGoblin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("University Campus", 186, Rarity.COMMON, mage.cards.u.UniversityCampus.class));
         cards.add(new SetCardInfo("Unstable Experiment", 47, Rarity.COMMON, mage.cards.u.UnstableExperiment.class));
-        cards.add(new SetCardInfo("Urban Retreat", 187, Rarity.RARE, mage.cards.u.UrbanRetreat.class));
+        cards.add(new SetCardInfo("Urban Retreat", 187, Rarity.RARE, mage.cards.u.UrbanRetreat.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Urban Retreat", 283, Rarity.RARE, mage.cards.u.UrbanRetreat.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Venom's Hunger", 73, Rarity.COMMON, mage.cards.v.VenomsHunger.class));
         cards.add(new SetCardInfo("Venom, Evil Unleashed", 71, Rarity.COMMON, mage.cards.v.VenomEvilUnleashed.class));
         cards.add(new SetCardInfo("Venomized Cat", 72, Rarity.COMMON, mage.cards.v.VenomizedCat.class));
