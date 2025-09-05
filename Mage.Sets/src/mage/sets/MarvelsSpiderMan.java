@@ -261,6 +261,8 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Sudden Strike", 19, Rarity.UNCOMMON, mage.cards.s.SuddenStrike.class));
         cards.add(new SetCardInfo("Sun-Spider, Nimble Webber", 154, Rarity.UNCOMMON, mage.cards.s.SunSpiderNimbleWebber.class));
         cards.add(new SetCardInfo("Superior Foes of Spider-Man", 96, Rarity.UNCOMMON, mage.cards.s.SuperiorFoesOfSpiderMan.class));
+        cards.add(new SetCardInfo("Superior Spider-Man", 155, Rarity.RARE, mage.cards.s.SuperiorSpiderMan.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Superior Spider-Man", 275, Rarity.RARE, mage.cards.s.SuperiorSpiderMan.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Supportive Parents", 119, Rarity.UNCOMMON, mage.cards.s.SupportiveParents.class));
         cards.add(new SetCardInfo("Swamp", 191, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 196, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
