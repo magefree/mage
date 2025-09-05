@@ -90,6 +90,7 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Heroes' Hangout", 79, Rarity.UNCOMMON, mage.cards.h.HeroesHangout.class));
         cards.add(new SetCardInfo("Hide on the Ceiling", 249, Rarity.RARE, mage.cards.h.HideOnTheCeiling.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hide on the Ceiling", 32, Rarity.RARE, mage.cards.h.HideOnTheCeiling.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Hobgoblin, Mantled Marauder", 80, Rarity.UNCOMMON, mage.cards.h.HobgoblinMantledMarauder.class));
         cards.add(new SetCardInfo("Hot Dog Cart", 164, Rarity.COMMON, mage.cards.h.HotDogCart.class));
         cards.add(new SetCardInfo("Hydro-Man, Fluid Felon", 250, Rarity.RARE, mage.cards.h.HydroManFluidFelon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hydro-Man, Fluid Felon", 33, Rarity.RARE, mage.cards.h.HydroManFluidFelon.class, NON_FULL_USE_VARIOUS));
