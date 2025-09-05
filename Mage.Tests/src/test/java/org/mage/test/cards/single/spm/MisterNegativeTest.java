@@ -6,30 +6,29 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author Jmlundeen
  */
-public class MrNegativeTest extends CardTestPlayerBase {
+public class MisterNegativeTest extends CardTestPlayerBase {
 
     /*
-    Mr. Negative
+    Misterr Negative
     {5}{W}{B}
     Legendary Creature - Human Villain
     Vigilance, lifelink
-    When Mr. Negative enters, you may exchange your life total with target opponent. If you lose life this way, draw that many cards.
+    When Misterr Negative enters, you may exchange your life total with target opponent. If you lose life this way, draw that many cards.
     5/5
     */
-    private static final String mrNegative = "Mr. Negative";
+    private static final String misterNegative = "Misterr Negative";
 
     @Test
-    public void testMrNegative() {
+    public void testMisterNegative() {
         setStrictChooseMode(true);
 
-        addCard(Zone.HAND, playerA, mrNegative);
+        addCard(Zone.HAND, playerA, misterNegative);
         addCard(Zone.BATTLEFIELD, playerA, "Scrubland", 7);
         setLife(playerB, 15);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, mrNegative);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, misterNegative);
         addTarget(playerA, playerB);
         setChoice(playerA, true);
 
@@ -42,14 +41,14 @@ public class MrNegativeTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void testMrNegativeNoDraw() {
+    public void testMisterNegativeNoDraw() {
         setStrictChooseMode(true);
 
-        addCard(Zone.HAND, playerA, mrNegative);
+        addCard(Zone.HAND, playerA, misterNegative);
         addCard(Zone.BATTLEFIELD, playerA, "Scrubland", 7);
         setLife(playerB, 21);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, mrNegative);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, misterNegative);
         addTarget(playerA, playerB);
         setChoice(playerA, true);
 
