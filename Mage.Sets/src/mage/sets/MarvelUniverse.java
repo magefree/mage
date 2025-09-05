@@ -59,6 +59,7 @@ public class MarvelUniverse extends ExpansionSet {
         cards.add(new SetCardInfo("Thrill of Possibility", 28, Rarity.MYTHIC, mage.cards.t.ThrillOfPossibility.class));
         cards.add(new SetCardInfo("Traumatize", 15, Rarity.MYTHIC, mage.cards.t.Traumatize.class));
         cards.add(new SetCardInfo("Unexpected Windfall", 29, Rarity.MYTHIC, mage.cards.u.UnexpectedWindfall.class));
+        cards.add(new SetCardInfo("Wedding Ring", 7, Rarity.MYTHIC, mage.cards.w.WeddingRing.class));
         cards.add(new SetCardInfo("Winds of Change", 30, Rarity.MYTHIC, mage.cards.w.WindsOfChange.class));
     }
 }
