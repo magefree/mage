@@ -6,6 +6,7 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import org.junit.Assert;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -39,7 +40,7 @@ public class OneOrMoreTest extends CardTestPlayerBase {
         addTarget(playerA, "Silvercoat Lion"); // for 3
         addTarget(playerA, "Silvercoat Lion"); // for 4
         addTarget(playerA, playerB); // for 5
-        setModeChoice(playerA, null);
+        setModeChoice(playerA, TestPlayer.MODE_SKIP);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -76,7 +77,7 @@ public class OneOrMoreTest extends CardTestPlayerBase {
         addTarget(playerA, "Silvercoat Lion"); // for 3
         addTarget(playerA, "Silvercoat Lion"); // for 4
         addTarget(playerA, playerB); // for 5
-        setModeChoice(playerA, null);
+        setModeChoice(playerA, TestPlayer.MODE_SKIP);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

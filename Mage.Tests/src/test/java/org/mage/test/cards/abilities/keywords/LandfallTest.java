@@ -1,15 +1,12 @@
-
 package org.mage.test.cards.abilities.keywords;
 
 import mage.abilities.keyword.IntimidateAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 public class LandfallTest extends CardTestPlayerBase {
@@ -26,9 +23,12 @@ public class LandfallTest extends CardTestPlayerBase {
 
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Plains");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Rest for the Weary");
+        addTarget(playerA, playerA);
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Rest for the Weary");
+        addTarget(playerA, playerA);
 
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -43,7 +43,6 @@ public class LandfallTest extends CardTestPlayerBase {
      * If you Hive Mind an opponent's Rest for the Weary and redirect its target
      * to yourself when it's not your turn, the game spits out this message and
      * rolls back to before Rest for the Weary was cast.
-     *
      */
     @Test
     public void testHiveMind() {
@@ -57,15 +56,17 @@ public class LandfallTest extends CardTestPlayerBase {
         // Landfall - If you had a land enter the battlefield under your control this turn, that player gains 8 life instead.
         addCard(Zone.HAND, playerA, "Rest for the Weary", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Rest for the Weary");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Rest for the Weary", playerA);
+        setChoice(playerB, true); // change target of copied spell
+        addTarget(playerB, playerB);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertGraveyardCount(playerA, "Rest for the Weary", 1);
         assertLife(playerA, 24);
         assertLife(playerB, 24);
-
     }
 
     @Test
@@ -76,6 +77,7 @@ public class LandfallTest extends CardTestPlayerBase {
 
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Plains");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -104,10 +106,14 @@ public class LandfallTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
 
+        // prepare landfall
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mountain");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Searing Blaze");
+        addTarget(playerA, playerB);
+        addTarget(playerA, "Silvercoat Lion");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -133,6 +139,7 @@ public class LandfallTest extends CardTestPlayerBase {
         attack(2, playerB, "Silvercoat Lion");
         castSpell(2, PhaseStep.DECLARE_ATTACKERS, playerB, "Groundswell", "Silvercoat Lion");
 
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_COMBAT);
         execute();
 
@@ -179,6 +186,7 @@ public class LandfallTest extends CardTestPlayerBase {
         attack(2, playerB, "Silvercoat Lion");
         castSpell(2, PhaseStep.DECLARE_ATTACKERS, playerB, "Groundswell", "Silvercoat Lion");
 
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_COMBAT);
         execute();
 

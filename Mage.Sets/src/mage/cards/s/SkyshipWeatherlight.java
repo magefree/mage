@@ -86,7 +86,7 @@ class SkyshipWeatherlightEffect extends SearchEffect {
         MageObject sourceObject = source.getSourceObject(game);
         if (sourceObject != null && controller != null) {
             if (controller.searchLibrary(target, source, game)) {
-                UUID exileZone = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+                UUID exileZone = CardUtil.getExileZoneId(game, source.getSourceId(), source.getStackMomentSourceZCC());
                 if (!target.getTargets().isEmpty()) {
                     for (UUID cardID : target.getTargets()) {
                         Card card = controller.getLibrary().getCard(cardID, game);
@@ -125,7 +125,7 @@ class SkyshipWeatherlightEffect2 extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         if (sourceObject != null && controller != null) {
-            ExileZone exZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()));
+            ExileZone exZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), source.getStackMomentSourceZCC()));
             if (exZone != null) {
                 controller.moveCards(exZone.getRandom(game), Zone.HAND, source, game);
             }

@@ -36,9 +36,9 @@ public class MWSDeckImporter extends PlainTextDeckImporter {
             int num = Integer.parseInt(lineNum);
             CardInfo cardInfo = null;
             if (setCode.isEmpty()) {
-                cardInfo = getCardLookup().lookupCardInfo(lineName, setCode).orElse(null);
+                cardInfo = getCardLookup().lookupCardInfo(lineName, setCode, null);
             } else {
-                cardInfo = getCardLookup().lookupCardInfo(lineName).orElse(null);
+                cardInfo = getCardLookup().lookupCardInfo(lineName);
             }
 
             if (cardInfo == null) {

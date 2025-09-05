@@ -185,22 +185,31 @@ public final class StaticFilters {
         FILTER_CARD_LAND_A.setLockedFilter(true);
     }
 
-    public static final FilterBasicLandCard FILTER_CARD_BASIC_LAND = new FilterBasicLandCard();
+    public static final FilterLandCard FILTER_CARD_BASIC_LAND = new FilterLandCard("basic land card");
 
     static {
+        FILTER_CARD_BASIC_LAND.add(SuperType.BASIC.getPredicate());
         FILTER_CARD_BASIC_LAND.setLockedFilter(true);
     }
 
-    public static final FilterBasicLandCard FILTER_CARD_BASIC_LANDS = new FilterBasicLandCard("basic land cards");
+    public static final FilterLandCard FILTER_CARD_BASIC_LANDS = new FilterLandCard("basic land cards");
 
     static {
+        FILTER_CARD_BASIC_LANDS.add(SuperType.BASIC.getPredicate());
         FILTER_CARD_BASIC_LANDS.setLockedFilter(true);
     }
 
-    public static final FilterBasicLandCard FILTER_CARD_BASIC_LAND_A = new FilterBasicLandCard("a basic land card");
+    public static final FilterLandCard FILTER_CARD_BASIC_LAND_A = new FilterLandCard("a basic land card");
 
     static {
+        FILTER_CARD_BASIC_LAND_A.add(SuperType.BASIC.getPredicate());
         FILTER_CARD_BASIC_LAND_A.setLockedFilter(true);
+    }
+
+    public static final FilterBasicCard FILTER_CARD_BASIC_PLAINS = new FilterBasicCard(SubType.PLAINS);
+
+    static {
+        FILTER_CARD_BASIC_PLAINS.setLockedFilter(true);
     }
 
     public static final FilterNonlandCard FILTER_CARD_NON_LAND = new FilterNonlandCard();
@@ -1186,6 +1195,13 @@ public final class StaticFilters {
     static {
         FILTER_CONTROLLED_CREATURE_P1P1.add(CounterType.P1P1.getPredicate());
         FILTER_CONTROLLED_CREATURE_P1P1.setLockedFilter(true);
+    }
+
+    public static final FilterControlledCreaturePermanent FILTER_CONTROLLED_CREATURES_P1P1 = new FilterControlledCreaturePermanent("creatures you control with a +1/+1 counter on it");
+
+    static {
+        FILTER_CONTROLLED_CREATURES_P1P1.add(CounterType.P1P1.getPredicate());
+        FILTER_CONTROLLED_CREATURES_P1P1.setLockedFilter(true);
     }
 
     public static final FilterControlledCreaturePermanent FILTER_EACH_CONTROLLED_CREATURE_P1P1 = new FilterControlledCreaturePermanent("each creature you control with a +1/+1 counter on it");

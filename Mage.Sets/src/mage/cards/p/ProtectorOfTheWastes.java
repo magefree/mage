@@ -1,36 +1,36 @@
 package mage.cards.p;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.keyword.MonstrosityAbility;
-import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.MonstrosityAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
+import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 
+import java.util.Objects;
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
 /**
- *
  * @author Jmlundeen
  */
 public final class ProtectorOfTheWastes extends CardImpl {
 
     public ProtectorOfTheWastes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
-        
+
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
@@ -76,36 +76,19 @@ class ProtectorOfTheWastesTarget extends TargetPermanent {
     }
 
     @Override
-    public boolean canTarget(UUID id, Ability source, Game game) {
-        if (!super.canTarget(id, source, game)) {
-            return false;
-        }
-        Permanent permanent = game.getPermanent(id);
-        if (permanent == null) {
-            return false;
-        }
-        return this.getTargets().stream()
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
+        Set<UUID> possibleTargets = super.possibleTargets(sourceControllerId, source, game);
+
+        Set<UUID> usedControllers = this.getTargets().stream()
                 .map(game::getPermanent)
                 .filter(Objects::nonNull)
-                .noneMatch(perm -> !perm.getId().equals(permanent.getId())
-                        && perm.isControlledBy(permanent.getControllerId()));
-    }
+                .map(Controllable::getControllerId)
+                .collect(Collectors.toSet());
+        possibleTargets.removeIf(id -> {
+            Permanent permanent = game.getPermanent(id);
+            return permanent == null || usedControllers.contains(permanent.getControllerId());
+        });
 
-    @Override
-    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
-        Set<UUID> possibleTargets = new HashSet<>();
-        MageObject targetSource = game.getObject(source);
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
-            boolean validTarget = this.getTargets().stream()
-                    .map(game::getPermanent)
-                    .filter(Objects::nonNull)
-                    .noneMatch(perm -> !perm.getId().equals(permanent.getId()) && perm.isControlledBy(permanent.getControllerId()));
-            if (validTarget) {
-                if (notTarget || permanent.canBeTargetedBy(targetSource, sourceControllerId, source, game)) {
-                    possibleTargets.add(permanent.getId());
-                }
-            }
-        }
         return possibleTargets;
     }
 }

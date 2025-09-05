@@ -52,6 +52,7 @@ Exploit|new|
 Extort|new|
 Fabricate|number|
 Fear|instance|
+Firebending|number|
 First strike|instance|
 Flanking|new|
 Flash|instance|
@@ -84,6 +85,7 @@ Lifelink|instance|
 Living metal|new|
 Living weapon|new|
 Madness|cost|
+Mayhem|card, manaString|
 Melee|new|
 Menace|new|
 Mentor|new|

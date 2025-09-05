@@ -945,7 +945,7 @@ public class ModalDoubleFacedCardsTest extends CardTestPlayerBase {
         // cast as copy of mdf card
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Zam Wesell");
         addTarget(playerA, playerB); // target opponent
-        addTarget(playerA, "Akoum Warrior"); // creature card to copy
+        setChoice(playerA, "Akoum Warrior"); // creature card to copy
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior", 1);
 

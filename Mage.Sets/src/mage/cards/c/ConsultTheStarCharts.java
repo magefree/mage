@@ -2,7 +2,7 @@ package mage.cards.c;
 
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.dynamicvalue.common.ManaSpentToCastCount;
+import mage.abilities.dynamicvalue.common.LandsYouControlCount;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
@@ -25,8 +25,8 @@ public final class ConsultTheStarCharts extends CardImpl {
 
         // Look at the top X cards of your library, where X is the number of lands you control. Put one of those cards into your hand. If this spell was kicked, put two of those cards into your hand instead. Put the rest on the bottom of your library in a random order.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new LookLibraryAndPickControllerEffect(ManaSpentToCastCount.instance, 2, PutCards.HAND, PutCards.BOTTOM_RANDOM),
-                new LookLibraryAndPickControllerEffect(ManaSpentToCastCount.instance, 1, PutCards.HAND, PutCards.BOTTOM_RANDOM),
+                new LookLibraryAndPickControllerEffect(LandsYouControlCount.instance, 2, PutCards.HAND, PutCards.BOTTOM_RANDOM),
+                new LookLibraryAndPickControllerEffect(LandsYouControlCount.instance, 1, PutCards.HAND, PutCards.BOTTOM_RANDOM),
                 KickedCondition.ONCE, "look at the top X cards of your library, where X is the number of lands you control. " +
                 "Put one of those cards into your hand. If this spell was kicked, put two of those cards into your hand instead. " +
                 "Put the rest on the bottom of your library in a random order"

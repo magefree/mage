@@ -22,7 +22,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.token.TheLocustGodInsectToken;
 import mage.target.targetpointer.FixedTarget;
@@ -83,7 +82,7 @@ class TheLocustGodEffect extends OneShotEffect {
         // Create delayed triggered ability
         Effect effect = new ReturnToHandTargetEffect();
         effect.setText("return {this} to its owner's hand");
-        effect.setTargetPointer(new FixedTarget(source.getSourceId(), source.getSourceObjectZoneChangeCounter()));
+        effect.setTargetPointer(new FixedTarget(source.getSourceId(), source.getStackMomentSourceZCC()));
         DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
         game.addDelayedTriggeredAbility(delayedAbility, source);
         return true;

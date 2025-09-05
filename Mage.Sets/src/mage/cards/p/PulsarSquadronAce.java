@@ -11,7 +11,6 @@ import mage.constants.PutCards;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterBySubtypeCard;
 
 import java.util.UUID;
 
@@ -20,7 +19,7 @@ import java.util.UUID;
  */
 public final class PulsarSquadronAce extends CardImpl {
 
-    private static final FilterCard filter = new FilterBySubtypeCard(SubType.SPACECRAFT);
+    private static final FilterCard filter = new FilterCard(SubType.SPACECRAFT);
 
     public PulsarSquadronAce(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");

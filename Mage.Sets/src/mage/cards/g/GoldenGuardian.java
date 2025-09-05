@@ -104,17 +104,11 @@ class GoldenGuardianReturnTransformedEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            if (game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
-                game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
-                Card card = game.getCard(source.getSourceId());
-                if (card != null) {
-                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                }
-            }
-            return true;
+        if (controller == null || game.getState().getZone(source.getSourceId()) != Zone.GRAVEYARD) {
+            return false;
         }
-        return false;
+        game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
+        Card card = game.getCard(source.getSourceId());
+        return card != null && controller.moveCards(card, Zone.BATTLEFIELD, source, game);
     }
-
 }

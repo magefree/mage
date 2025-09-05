@@ -13,6 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.token.SpiritXXToken;
@@ -86,7 +87,7 @@ class SeverancePriestEffect extends OneShotEffect {
             return false;
         }
         opponent.revealCards(source, opponent.getHand(), game);
-        TargetCard target = new TargetCardInHand(0, 1, StaticFilters.FILTER_CARD_NON_LAND);
+        TargetCard target = new TargetCard(0, 1, Zone.HAND, StaticFilters.FILTER_CARD_NON_LAND);
         controller.choose(Outcome.Discard, opponent.getHand(), target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         return card != null && controller.moveCardsToExile(

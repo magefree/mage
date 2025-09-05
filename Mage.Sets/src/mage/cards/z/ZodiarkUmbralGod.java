@@ -14,7 +14,7 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.CanBeSacrificedPredicate;
@@ -66,8 +66,8 @@ public final class ZodiarkUmbralGod extends CardImpl {
 
 class ZodiarkUmbralGodEffect extends OneShotEffect {
 
-    private static final FilterPermanent filter = new FilterControlledPermanent("non-God creatures you control");
-    private static final FilterPermanent filter2 = new FilterControlledPermanent("non-God creatures you control");
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("non-God creatures you control");
+    private static final FilterPermanent filter2 = new FilterControlledCreaturePermanent("non-God creatures you control");
     private static final Predicate<MageObject> predicate = Predicates.not(SubType.GOD.getPredicate());
 
     static {

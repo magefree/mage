@@ -176,7 +176,7 @@ class WhispersteelDaggerWatcher extends Watcher {
             return false;
         }
         MageObjectReference mor = new MageObjectReference(
-                source.getSourceId(), source.getSourceObjectZoneChangeCounter(), game
+                source.getSourceId(), source.getStackMomentSourceZCC(), game
         );
         if (!morMap.containsKey(mor)) {
             return false;
@@ -188,7 +188,7 @@ class WhispersteelDaggerWatcher extends Watcher {
 
     void addPlayable(Ability source, UUID ownerId, Game game) {
         MageObjectReference mor = new MageObjectReference(
-                source.getSourceId(), source.getSourceObjectZoneChangeCounter(), game
+                source.getSourceId(), source.getStackMomentSourceZCC(), game
         );
         morMap.computeIfAbsent(mor, m -> new HashMap<>())
                 .computeIfAbsent(ownerId, m -> new HashMap<>())

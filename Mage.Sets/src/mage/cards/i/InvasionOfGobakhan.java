@@ -79,9 +79,7 @@ class InvasionOfGobakhanEffect extends OneShotEffect {
         if (controller == null || opponent == null || opponent.getHand().isEmpty()) {
             return false;
         }
-        TargetCard target = new TargetCardInHand(
-                0, 1, StaticFilters.FILTER_CARD_A_NON_LAND
-        );
+        TargetCard target = new TargetCard(0, 1, Zone.HAND, StaticFilters.FILTER_CARD_A_NON_LAND);
         controller.choose(outcome, opponent.getHand(), target, source, game);
         Card card = opponent.getHand().get(target.getFirstTarget(), game);
         if (card == null) {

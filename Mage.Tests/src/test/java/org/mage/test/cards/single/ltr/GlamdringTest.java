@@ -2,6 +2,7 @@ package org.mage.test.cards.single.ltr;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -29,14 +30,16 @@ public class GlamdringTest extends CardTestPlayerBase {
 
         attack(1, playerA, "Blur Sliver");
         setChoice(playerA, "In Garruk's Wake"); // 9 mana, so we shouldn't be able to choose it
-        setChoice(playerA, "Yes");
 
         try {
             setStopAt(1, PhaseStep.FIRST_COMBAT_DAMAGE);
             execute();
         }
         catch (AssertionError e) {
-            assert(e.getMessage().contains("Missing CHOICE def for turn 1, step FIRST_COMBAT_DAMAGE, PlayerA"));
+            Assert.assertTrue(
+                    "catch wrong exception: " + e.getMessage(),
+                    e.getMessage().contains("Found wrong choice command") && e.getMessage().contains("In Garruk's Wake")
+            );
             return;
         }
         fail("Was able to pick [[In Garruk's Wake]] but it costs more than 2");

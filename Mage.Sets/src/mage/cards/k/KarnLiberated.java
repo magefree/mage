@@ -81,7 +81,7 @@ class KarnLiberatedEffect extends OneShotEffect {
         }
         List<Card> keepExiled = new ArrayList<>();
         for (ExileZone zone : game.getExile().getExileZones()) {
-            exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+            exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getStackMomentSourceZCC());
             if (zone.getId().equals(exileId)) {
                 for (Card card : zone.getCards(game)) {
                     if (!card.hasSubtype(SubType.AURA, game)
@@ -243,7 +243,7 @@ class KarnPlayerExileEffect extends OneShotEffect {
         TargetCardInHand target = new TargetCardInHand();
         if (target.canChoose(player.getId(), source, game)
                 && target.chooseTarget(Outcome.Exile, player.getId(), source, game)) {
-            UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+            UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getStackMomentSourceZCC());
             return player.moveCardsToExile(new CardsImpl(target.getTargets()).getCards(game), source, game, true, exileId, sourceObject.getIdName());
         }
         return false;

@@ -44,19 +44,16 @@ public abstract class ActivatedManaAbilityImpl extends ActivatedAbilityImpl impl
     public ActivationStatus canActivate(UUID playerId, Game game) {
         // check if player is in the process of playing spell costs and they are no longer allowed to use
         // activated mana abilities (e.g. because they started to use improvise or convoke)
-        if (!game.getStack().isEmpty()) {
-            StackObject stackObject = game.getStack().getFirst();
-            if (stackObject instanceof Spell) {
-                switch (((Spell) stackObject).getCurrentActivatingManaAbilitiesStep()) {
-                    case BEFORE:
-                    case NORMAL:
-                        break;
-                    case AFTER:
-                        return ActivationStatus.getFalse();
-                }
+        StackObject stackObject = game.getStack().getFirstOrNull();
+        if (stackObject instanceof Spell) {
+            switch (((Spell) stackObject).getCurrentActivatingManaAbilitiesStep()) {
+                case BEFORE:
+                case NORMAL:
+                    break;
+                case AFTER:
+                    return ActivationStatus.getFalse();
             }
         }
-
         return super.canActivate(playerId, game);
     }
 

@@ -36,11 +36,12 @@ public class MtgaImporterTest {
                 .addMain("Expansion // Explosion", 1)
                 .addMain("Forest", 1)
                 .addMain("Teferi, Hero of Dominaria", 1)
+                .addMain("Benalish Marshal", 3)
 
                 .addSide("Unmoored Ego", 3)
                 .addSide("Beacon Bolt", 1)
 
-                .verify(deck, 8, 4);
+                .verify(deck, 11, 4);
     }
 
 }

@@ -130,7 +130,7 @@ enum LumberingBattlementValue implements DynamicValue {
         }
         ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(
                 game, sourceAbility.getSourceId(),
-                sourceAbility.getSourceObjectZoneChangeCounter()
+                sourceAbility.getStackMomentSourceZCC()
         ));
         if (exileZone == null) {
             exileZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, sourceAbility));

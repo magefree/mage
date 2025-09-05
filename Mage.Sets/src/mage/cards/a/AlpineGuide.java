@@ -13,7 +13,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterBySubtypeCard;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetCardInLibrary;
 
@@ -24,7 +23,7 @@ import java.util.UUID;
  */
 public final class AlpineGuide extends CardImpl {
 
-    private static final FilterCard filter = new FilterBySubtypeCard(SubType.MOUNTAIN);
+    private static final FilterCard filter = new FilterCard(SubType.MOUNTAIN);
     private static final FilterPermanent filter2 = new FilterControlledPermanent(SubType.MOUNTAIN, "Mountain");
 
     public AlpineGuide(UUID ownerId, CardSetInfo setInfo) {

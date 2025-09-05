@@ -1,6 +1,5 @@
 package org.mage.test.cards.abilities.keywords;
 
-import mage.cards.s.SpringOfEternalPeace;
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
@@ -384,7 +383,6 @@ public class TransformTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Huntmaster of the Fells", 2, 2);
         assertTappedCount("Plains", true, 2);
         assertTappedCount("Wastes", true, 1);
-
     }
 
     @Test
@@ -413,8 +411,32 @@ public class TransformTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Ravager of the Fells", 0);
         assertPermanentCount(playerA, "Huntmaster of the Fells", 1);
         assertPowerToughness(playerA, "Huntmaster of the Fells", 2, 2);
+    }
 
+    @Test
+    public void testWildsongHowlerTrigger() {
+        // The only Daybound/Nightbound card with a Transforms trigger on the back side
+        removeAllCardsFromLibrary(playerA);
+        addCard(Zone.HAND, playerA, "Howlpack Piper", 2); // Creature {2}{R}{G}
+        addCard(Zone.LIBRARY, playerA, "Silvercoat Lion", 50);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
 
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Howlpack Piper");
+        setChoice(playerA, true); //Transform trigger
+        addTarget(playerA, "Silvercoat Lion");
+
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Howlpack Piper");
+        setChoice(playerA, true); //ETB trigger
+        addTarget(playerA, "Silvercoat Lion");
+        setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
+        setStrictChooseMode(true);
+
+        execute();
+
+        assertPermanentCount(playerA, "Wildsong Howler", 2);
+        assertPermanentCount(playerA, "Howlpack Piper", 0); // They should be both transformed
+        assertHandCount(playerA, "Silvercoat Lion", 3);
+        assertHandCount(playerA, 3); //The two Silvercoat Lions from triggers and 1 from natural card draw
     }
 
     /**

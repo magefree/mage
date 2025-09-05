@@ -17,6 +17,7 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -83,9 +84,15 @@ class PhyrexianDreadnoughtSacrificeCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
+        Player controller = game.getPlayer(controllerId);
+        if (controller == null) {
+            return false;
+        }
         int sumPower = 0;
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, controllerId, game)) {
-            sumPower += permanent.getPower().getValue();
+            if (controller.canPaySacrificeCost(permanent, source, controllerId, game)) {
+                sumPower += permanent.getPower().getValue();
+            }
         }
         return sumPower >= 12;
     }

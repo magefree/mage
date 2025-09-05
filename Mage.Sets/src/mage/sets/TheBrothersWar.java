@@ -360,7 +360,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Terror Ballista", 290, Rarity.RARE, mage.cards.t.TerrorBallista.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Terror Ballista", 375, Rarity.RARE, mage.cards.t.TerrorBallista.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Fall of Kroog", 133, Rarity.UNCOMMON, mage.cards.t.TheFallOfKroog.class));
-        cards.add(new SetCardInfo("The Mightstone and Weakstone", "238a", Rarity.RARE, mage.cards.t.TheMightstoneAndWeakstone.class));
+        cards.add(new SetCardInfo("The Mightstone and Weakstone", "238", Rarity.RARE, mage.cards.t.TheMightstoneAndWeakstone.class));
         cards.add(new SetCardInfo("The Stasis Coffin", 245, Rarity.RARE, mage.cards.t.TheStasisCoffin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Stasis Coffin", 366, Rarity.RARE, mage.cards.t.TheStasisCoffin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Stone Brain", 247, Rarity.RARE, mage.cards.t.TheStoneBrain.class, NON_FULL_USE_VARIOUS));

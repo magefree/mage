@@ -44,7 +44,7 @@ public final class BeetleLegacyCriminal extends CardImpl {
         ability.addCost(new ExileSourceFromGraveCost());
         ability.addTarget(new TargetCreaturePermanent());
         ability.addEffect(new GainAbilityTargetEffect(FlyingAbility.getInstance())
-                .setText("Put a +1/+1 counter on target creature"));
+                .setText("It gains flying until end of turn"));
         this.addAbility(ability);
     }
 

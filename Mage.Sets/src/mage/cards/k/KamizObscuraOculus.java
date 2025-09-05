@@ -6,7 +6,7 @@ import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.effects.keyword.ConniveSourceEffect;
+import mage.abilities.effects.keyword.ConniveTargetEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -39,7 +39,7 @@ public final class KamizObscuraOculus extends CardImpl {
 
         // Whenever you attack, target attacking creature can't be blocked this turn. It connives. Then choose another attacking creature with lesser power. That creature gains double strike until end of turn.
         Ability ability = new AttacksWithCreaturesTriggeredAbility(new CantBeBlockedTargetEffect(), 1);
-        ability.addEffect(new KamizConniveEffect());
+        ability.addEffect(new ConniveTargetEffect().setText("it connives"));
         ability.addEffect(new KamizDoubleStrikeEffect().concatBy("Then"));
         ability.addTarget(new TargetAttackingCreature());
         this.addAbility(ability);
@@ -52,29 +52,6 @@ public final class KamizObscuraOculus extends CardImpl {
     @Override
     public KamizObscuraOculus copy() {
         return new KamizObscuraOculus(this);
-    }
-}
-
-class KamizConniveEffect extends OneShotEffect {
-
-    KamizConniveEffect() {
-        super(Outcome.Benefit);
-        staticText = "it connives";
-    }
-
-    private KamizConniveEffect(final KamizConniveEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public KamizConniveEffect copy() {
-        return new KamizConniveEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
-        return ConniveSourceEffect.connive(permanent, 1, source, game);
     }
 }
 
@@ -109,8 +86,8 @@ class KamizDoubleStrikeEffect extends OneShotEffect {
         if (target.choose(outcome, source.getControllerId(), source.getSourceId(), source, game)) {
             game.addEffect(
                     new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance())
-                    .setTargetPointer(new FixedTarget(target.getFirstTarget(), game))
-                    , source);
+                            .setTargetPointer(new FixedTarget(target.getFirstTarget(), game)), source
+            );
         }
         return true;
     }

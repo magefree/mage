@@ -102,7 +102,7 @@ class RasputinDreamweaverWatcher extends Watcher {
         filter.add(TappedPredicate.UNTAPPED);
     }
 
-    private final Set<UUID> startedUntapped = new HashSet<>(0);
+    private final Set<UUID> startedUntapped = new HashSet<>();
 
     RasputinDreamweaverWatcher() {
         super(WatcherScope.GAME);

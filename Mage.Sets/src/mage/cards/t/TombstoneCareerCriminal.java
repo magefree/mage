@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterBySubtypeCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
@@ -22,8 +21,8 @@ import java.util.UUID;
  */
 public final class TombstoneCareerCriminal extends CardImpl {
 
-    private static final FilterCard filter = new FilterBySubtypeCard(SubType.VILLAIN);
-    private static final FilterCard filter2 = new FilterBySubtypeCard(SubType.VILLAIN, "Villain spells");
+    private static final FilterCard filter = new FilterCard(SubType.VILLAIN);
+    private static final FilterCard filter2 = new FilterCard(SubType.VILLAIN, "Villain spells");
 
     public TombstoneCareerCriminal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");

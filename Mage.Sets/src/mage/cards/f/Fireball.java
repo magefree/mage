@@ -134,7 +134,6 @@ class FireballTargetCreatureOrPlayer extends TargetAnyTarget {
                 continue;
             }
 
-            possibleTargets.removeAll(getTargets());
             for (UUID targetId : possibleTargets) {
                 TargetAnyTarget target = this.copy();
                 target.clearChosen();

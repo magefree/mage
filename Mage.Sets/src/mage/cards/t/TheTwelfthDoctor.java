@@ -99,12 +99,10 @@ enum FirstSpellCastFromNotHandEachTurnCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (game.getStack().isEmpty()) {
-            return false;
-        }
         TheTwelfthDoctorWatcher watcher = game.getState().getWatcher(TheTwelfthDoctorWatcher.class);
-        StackObject so = game.getStack().getFirst();
-        return watcher != null
+        StackObject so = game.getStack().getFirstOrNull();
+        return so != null
+                && watcher != null
                 && TheTwelfthDoctorWatcher.checkSpell(so, game);
     }
 }

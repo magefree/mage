@@ -90,7 +90,7 @@ class AshioksErasureExileEffect extends OneShotEffect {
                 || spell == null) {
             return false;
         }
-        UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+        UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getStackMomentSourceZCC());
         return controller.moveCardsToExile(spell, source, game, true, exileId, sourceObject.getIdName());
     }
 }
@@ -126,7 +126,7 @@ class AshioksErasureReplacementEffect extends ContinuousRuleModifyingEffectImpl 
                 || card == null) {
             return false;
         }
-        UUID exileZone = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+        UUID exileZone = CardUtil.getExileZoneId(game, source.getSourceId(), source.getStackMomentSourceZCC());
 
         ExileZone exile = game.getExile().getExileZone(exileZone);
         if (exile == null) {

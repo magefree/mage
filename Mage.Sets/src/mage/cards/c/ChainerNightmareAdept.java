@@ -141,14 +141,14 @@ class ChainerNightmareAdeptWatcher extends Watcher {
             return false;
         }
         MageObjectReference mor = new MageObjectReference(
-                source.getSourceId(), source.getSourceObjectZoneChangeCounter(), game
+                source.getSourceId(), source.getStackMomentSourceZCC(), game
         );
         return morMap.computeIfAbsent(mor, m -> new HashMap<>()).getOrDefault(playerId, 0) > 0;
     }
 
     void addPlayable(Ability source, Game game) {
         MageObjectReference mor = new MageObjectReference(
-                source.getSourceId(), source.getSourceObjectZoneChangeCounter(), game
+                source.getSourceId(), source.getStackMomentSourceZCC(), game
         );
         morMap.computeIfAbsent(mor, m -> new HashMap<>())
                 .compute(source.getControllerId(), CardUtil::setOrIncrementValue);

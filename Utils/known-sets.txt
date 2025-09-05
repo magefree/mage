@@ -19,6 +19,7 @@ Asia Pacific Land Program|AsiaPacificLandProgram|
 Assassin's Creed|AssassinsCreed|
 Avacyn Restored|AvacynRestored|
 Avatar: The Last Airbender|AvatarTheLastAirbender|
+Avatar: The Last Airbender Eternal|AvatarTheLastAirbenderEternal|
 Battlebond|Battlebond|
 Battle for Zendikar|BattleForZendikar|
 Betrayers of Kamigawa|BetrayersOfKamigawa|

@@ -157,4 +157,29 @@ public class EmblemsTest extends CardTestPlayerBase {
         assertHandCount(playerA, 0);
 
     }
+
+    @Test
+    public void testJayaFieryNegotiator() {
+        setStrictChooseMode(true);
+        addCard(Zone.BATTLEFIELD, playerA, "Jaya, Fiery Negotiator");
+        addCard(Zone.HAND, playerA, "Wrenn's Resolve");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        addCard(Zone.LIBRARY, playerA, "Lightning Bolt", 2);
+        skipInitShuffling();
+
+        addCounters(1, PhaseStep.UPKEEP, playerA, "Jaya, Fiery Negotiator", CounterType.LOYALTY, 6);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "-8: You get an emblem");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Wrenn's Resolve");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        setChoice(playerA, false, 2);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertExileCount(playerA, 6 - 1);
+        assertLife(playerB, 20 - 3 * 3);
+    }
 }

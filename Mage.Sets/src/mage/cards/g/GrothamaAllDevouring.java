@@ -19,7 +19,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.WatcherScope;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
@@ -152,7 +151,7 @@ class GrothamaAllDevouringDrawCardsEffect extends OneShotEffect {
         if (watcher == null) {
             return false;
         }
-        Map<UUID, Integer> damageMap = watcher.getDamageMap(new MageObjectReference(source.getSourceId(), source.getSourceObjectZoneChangeCounter() - 1, game));
+        Map<UUID, Integer> damageMap = watcher.getDamageMap(new MageObjectReference(source.getSourceId(), source.getStackMomentSourceZCC() - 1, game));
         for (UUID playerId : game.getPlayerList()) {
             Player player = game.getPlayer(playerId);
             if (player != null) {

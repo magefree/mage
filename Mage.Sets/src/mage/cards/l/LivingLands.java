@@ -26,7 +26,12 @@ public final class LivingLands extends CardImpl {
         ContinuousEffect effect = new BecomesCreatureAllEffect(
                 new CreatureToken(1, 1, "1/1 creatures"),
                 "lands", filter, Duration.WhileOnBattlefield, false);
-        effect.getDependencyTypes().add(DependencyType.BecomeForest); // TODO: are these dependencies correct/complete?
+        effect.getDependedToTypes().add(DependencyType.BecomeNonbasicLand);
+        effect.addDependedToType(DependencyType.BecomeForest);
+        effect.addDependedToType(DependencyType.BecomeIsland);
+        effect.addDependedToType(DependencyType.BecomeMountain);
+        effect.addDependedToType(DependencyType.BecomePlains);
+        effect.addDependedToType(DependencyType.BecomeSwamp);
         this.addAbility(new SimpleStaticAbility(effect));
     }
 

@@ -20,6 +20,7 @@ public class AddBasicLandTypeAllLandsEffect extends ContinuousEffectImpl {
         this.subType = subType;
         this.staticText = "Each land is " + subType.getIndefiniteArticle() + " "
                 + subType.getDescription() + " in addition to its other land types";
+        this.dependendToTypes.add(DependencyType.BecomeNonbasicLand);
         switch (subType) {
             case PLAINS:
                 this.dependencyTypes.add(DependencyType.BecomePlains);

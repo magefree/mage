@@ -87,7 +87,7 @@ class UnearthDelayedTriggeredAbility extends DelayedTriggeredAbility {
         }
         // The delayed trigger source is the card in the graveyard.
         // So we need to exile the zcc + 1 permanent
-        MageObjectReference object = new MageObjectReference(getSourceId(), getSourceObjectZoneChangeCounter() + 1, game);
+        MageObjectReference object = new MageObjectReference(getSourceId(), getStackMomentSourceZCC() + 1, game);
         Permanent permanent = object.getPermanent(game);
         if (permanent == null || !permanent.isPhasedIn()) {
             // Triggers, but do nothing.
@@ -131,7 +131,7 @@ class UnearthLeavesBattlefieldEffect extends ReplacementEffectImpl {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() != Zone.EXILED) {
                 // Only move it to exile if it was this instance that was moved to battlefield with unearth
-                return source.getSourceObjectZoneChangeCounter() == game.getState().getZoneChangeCounter(source.getSourceId());
+                return source.getStackMomentSourceZCC() == game.getState().getZoneChangeCounter(source.getSourceId());
             }
         }
         return false;

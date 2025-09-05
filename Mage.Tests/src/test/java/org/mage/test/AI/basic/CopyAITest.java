@@ -116,7 +116,7 @@ public class CopyAITest extends CardTestPlayerBaseWithAIHelps {
         //
         addCard(Zone.GRAVEYARD, playerB, "Balduvian Bears", 1); // 2/2
 
-        // copy (AI must choose most valueable permanent - own)
+        // copy (AI must choose most valuable permanent - own)
         aiPlayPriority(1, PhaseStep.PRECOMBAT_MAIN, playerA);
 
         setStopAt(1, PhaseStep.END_TURN);

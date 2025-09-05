@@ -129,7 +129,7 @@ class EnchantmentAlterationEffect extends OneShotEffect {
                 if (oldPermanent != null
                         && !oldPermanent.equals(permanentToBeAttachedTo)) {
                     Target auraTarget = aura.getSpellAbility().getTargets().get(0);
-                    if (!auraTarget.canTarget(permanentToBeAttachedTo.getId(), game)) {
+                    if (!auraTarget.canTarget(permanentToBeAttachedTo.getId(), source, game)) {
                         game.informPlayers(aura.getLogName() + " was not attched to " + permanentToBeAttachedTo.getLogName() + " because it's no legal target for the aura");
                     } else if (oldPermanent.removeAttachment(aura.getId(), source, game)) {
                         game.informPlayers(aura.getLogName() + " was unattached from " + oldPermanent.getLogName() + " and attached to " + permanentToBeAttachedTo.getLogName());

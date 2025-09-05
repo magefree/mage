@@ -1,6 +1,6 @@
 package mage.cards.t;
 
-import mage.abilities.common.PutCounterOnCreatureTriggeredAbility;
+import mage.abilities.common.PutCounterOnPermanentTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.EffectKeyValue;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -23,9 +23,9 @@ public final class Terrasymbiosis extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
 
         // Whenever you put one or more +1/+1 counters on a creature you control, you may draw that many cards. Do this only once each turn.
-        this.addAbility(new PutCounterOnCreatureTriggeredAbility(
+        this.addAbility(new PutCounterOnPermanentTriggeredAbility(
                 new DrawCardSourceControllerEffect(xValue),
-                CounterType.P1P1.createInstance(), StaticFilters.FILTER_CONTROLLED_CREATURE
+                CounterType.P1P1, StaticFilters.FILTER_CONTROLLED_CREATURE
         ).setDoOnlyOnceEachTurn(true));
     }
 

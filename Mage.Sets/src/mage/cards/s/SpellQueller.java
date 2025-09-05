@@ -96,7 +96,7 @@ class SpellQuellerEntersEffect extends OneShotEffect {
         if (controller != null && sourceObject != null) {
             Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
             if (spell != null) {
-                UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+                UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getStackMomentSourceZCC());
                 return controller.moveCardsToExile(spell, source, game, true, exileId, sourceObject.getIdName());
             }
             return true;

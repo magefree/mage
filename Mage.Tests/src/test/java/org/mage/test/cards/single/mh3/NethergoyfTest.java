@@ -183,6 +183,7 @@ public class NethergoyfTest extends CardTestPlayerBaseWithAIHelps {
         // The same is true for permanent spells you control and nonland permanent cards you own that aren’t on the battlefield.
         addCard(Zone.HAND, playerA, "Encroaching Mycosynth");
 
+        // AI must be able to choose good targets combination
         aiPlayStep(1, PhaseStep.PRECOMBAT_MAIN, playerA);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

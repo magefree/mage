@@ -2,8 +2,8 @@ package mage.cards.k;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.common.PutCounterOnPermanentTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
@@ -18,7 +18,6 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.token.SoldierToken;
 
 import java.util.UUID;
@@ -38,7 +37,8 @@ public final class KateStewart extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever you put one or more time counters on a permanent you control, create a 1/1 white Soldier creature token.
-        this.addAbility(new KateStewartTriggeredAbility());
+        this.addAbility(new PutCounterOnPermanentTriggeredAbility(new CreateTokenEffect(new SoldierToken()),
+                CounterType.TIME, StaticFilters.FILTER_CONTROLLED_PERMANENT));
 
         // Whenever Kate Stewart attacks, you may pay {8}. If you do, attacking creatures get +X/+X until end of turn, where X is the number of time counters among permanents you control.
         this.addAbility(new AttacksTriggeredAbility(new DoIfCostPaid(new BoostAllEffect(
@@ -54,35 +54,6 @@ public final class KateStewart extends CardImpl {
     @Override
     public KateStewart copy() {
         return new KateStewart(this);
-    }
-}
-
-class KateStewartTriggeredAbility extends TriggeredAbilityImpl {
-
-    KateStewartTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new CreateTokenEffect(new SoldierToken()));
-        setTriggerPhrase("Whenever you put one or more time counters on a permanent you control, ");
-    }
-
-    private KateStewartTriggeredAbility(final KateStewartTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public KateStewartTriggeredAbility copy() {
-        return new KateStewartTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.COUNTERS_ADDED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return CounterType.TIME.getName().equals(event.getData())
-                && this.isControlledBy(event.getPlayerId())
-                && this.isControlledBy(game.getControllerId(event.getTargetId()));
     }
 }
 

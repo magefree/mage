@@ -34,46 +34,25 @@ public class TargetCardInYourGraveyardOrExile extends TargetCard {
     }
 
     @Override
-    public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
-        Player player = game.getPlayer(sourceControllerId);
-        if (player == null) {
-            return false;
-        }
-        int possibleTargets = 0;
-        // in your graveyard:
-        possibleTargets += countPossibleTargetInGraveyard(game, player, sourceControllerId, source,
-                filterGraveyard, isNotTarget(), this.minNumberOfTargets - possibleTargets);
-        if (possibleTargets >= this.minNumberOfTargets) {
-            return true;
-        }
-        // in exile:
-        possibleTargets += countPossibleTargetInExile(game, player, sourceControllerId, source,
-                filterExile, isNotTarget(), this.minNumberOfTargets - possibleTargets);
-        return possibleTargets >= this.minNumberOfTargets;
-    }
-
-    @Override
-    public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
-        return this.possibleTargets(sourceControllerId, (Ability) null, game);
-    }
-
-    @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
+
         Player player = game.getPlayer(sourceControllerId);
         if (player == null) {
             return possibleTargets;
         }
-        // in your graveyard:
+
+        // in your graveyard
         possibleTargets.addAll(getAllPossibleTargetInGraveyard(game, player, sourceControllerId, source, filterGraveyard, isNotTarget()));
-        // in exile:
+        // in exile
         possibleTargets.addAll(getAllPossibleTargetInExile(game, player, sourceControllerId, source, filterExile, isNotTarget()));
-        return possibleTargets;
+
+        return keepValidPossibleTargets(possibleTargets, sourceControllerId, source, game);
     }
 
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
-        return this.canTarget(source.getControllerId(), id, source, game);
+        return this.canTarget(source == null ? null : source.getControllerId(), id, source, game);
     }
 
     @Override
@@ -84,17 +63,12 @@ public class TargetCardInYourGraveyardOrExile extends TargetCard {
         }
         switch (game.getState().getZone(id)) {
             case GRAVEYARD:
-                return filterGraveyard.match(card, playerId, source, game);
+                return playerId == null ? filterGraveyard.match(card, game) : filterGraveyard.match(card, playerId, source, game);
             case EXILED:
-                return filterExile.match(card, playerId, source, game);
+                return playerId == null ? filterExile.match(card, game) : filterExile.match(card, playerId, source, game);
             default:
                 return false;
         }
-    }
-
-    @Override
-    public boolean canTarget(UUID id, Game game) {
-        return this.canTarget(null, id, null, game);
     }
 
     @Override

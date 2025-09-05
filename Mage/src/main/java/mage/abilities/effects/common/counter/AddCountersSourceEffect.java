@@ -110,8 +110,8 @@ public class AddCountersSourceEffect extends OneShotEffect {
                 return false;
             }
 
-            if ((source.getSourceObjectZoneChangeCounter() == 0 // from static ability
-                    || source.getSourceObjectZoneChangeCounter() == permanent.getZoneChangeCounter(game))) { // prevent to add counters to later source objects
+            if ((source.getStackMomentSourceZCC() == 0 // from static ability
+                    || source.getStackMomentSourceZCC() == permanent.getZoneChangeCounter(game))) { // prevent to add counters to later source objects
                 Counter newCounter = counter.copy();
                 int countersToAdd = amount.calculate(game, source, this);
                 if (amount instanceof StaticValue || countersToAdd > 0) {

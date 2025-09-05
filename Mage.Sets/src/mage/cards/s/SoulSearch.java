@@ -69,7 +69,7 @@ class SoulSearchEffect extends OneShotEffect {
         if (opponent.getHand().count(StaticFilters.FILTER_CARD_NON_LAND, game) < 1) {
             return true;
         }
-        TargetCard target = new TargetCardInHand(StaticFilters.FILTER_CARD_NON_LAND);
+        TargetCard target = new TargetCard(1, Zone.HAND, StaticFilters.FILTER_CARD_NON_LAND);
         controller.choose(Outcome.Discard, opponent.getHand(), target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card == null) {

@@ -3,6 +3,7 @@ package mage.game.stack;
 
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.collectors.DataCollectorServices;
 import mage.constants.PutCards;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -48,6 +49,16 @@ public class SpellStack extends ArrayDeque<StackObject> {
                 }
             }
         }
+    }
+
+    @Override
+    @Deprecated // must use getFirstOrNull instead
+    public StackObject getFirst() {
+        return super.getFirst();
+    }
+
+    public StackObject getFirstOrNull() {
+        return this.isEmpty() ? null : this.getFirst();
     }
 
     public boolean remove(StackObject object, Game game) {
@@ -136,9 +147,16 @@ public class SpellStack extends ArrayDeque<StackObject> {
     }
 
     @Override
+    @Deprecated // must use only full version with game param
     public void push(StackObject e) {
         super.push(e);
         this.dateLastAdded = new Date();
+    }
+
+    public void push(Game game, StackObject e) {
+        super.push(e);
+        this.dateLastAdded = new Date();
+        DataCollectorServices.getInstance().onTestsStackPush(game);
     }
 
     public Date getDateLastAdded() {

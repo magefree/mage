@@ -8,10 +8,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterBasicCard;
 import mage.filter.common.FilterControlledPlaneswalkerPermanent;
 import mage.target.common.TargetCardInLibrary;
 
@@ -22,13 +22,8 @@ import java.util.UUID;
  */
 public final class NissasTriumph extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("basic Forest cards");
+    private static final FilterCard filter = new FilterBasicCard(SubType.FOREST, "basic Forest cards");
     private static final FilterPermanent filter2 = new FilterControlledPlaneswalkerPermanent(SubType.NISSA);
-
-    static {
-        filter.add(SuperType.BASIC.getPredicate());
-        filter.add(SubType.FOREST.getPredicate());
-    }
 
     private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter2);
 

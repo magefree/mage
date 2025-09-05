@@ -9,8 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterBasicLandCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
@@ -19,8 +18,6 @@ import java.util.UUID;
  * @author fireshoes
  */
 public final class Groundskeeper extends CardImpl {
-
-    private static final FilterCard filter = new FilterBasicLandCard("basic land card from your graveyard");
 
     public Groundskeeper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");
@@ -31,7 +28,7 @@ public final class Groundskeeper extends CardImpl {
 
         // {1}{G}: Return target basic land card from your graveyard to your hand.
         Ability ability = new SimpleActivatedAbility(new ReturnFromGraveyardToHandTargetEffect(), new ManaCostsImpl<>("{1}{G}"));
-        ability.addTarget(new TargetCardInYourGraveyard(filter));
+        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_BASIC_LAND));
         this.addAbility(ability);
     }
 

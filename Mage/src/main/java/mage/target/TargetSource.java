@@ -90,62 +90,8 @@ public class TargetSource extends TargetObject {
     }
 
     @Override
-    public boolean canChoose(UUID sourceControllerId, Game game) {
-        return canChoose(sourceControllerId, (Ability) null, game);
-    }
-
-    @Override
     public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
-        int count = 0;
-        for (StackObject stackObject : game.getStack()) {
-            if (game.getState().getPlayersInRange(sourceControllerId, game).contains(stackObject.getControllerId())
-                    && filter.match(stackObject, sourceControllerId, source, game)) {
-                count++;
-                if (count >= this.minNumberOfTargets) {
-                    return true;
-                }
-            }
-        }
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(sourceControllerId, game)) {
-            if (filter.match(permanent, sourceControllerId, source, game)) {
-                count++;
-                if (count >= this.minNumberOfTargets) {
-                    return true;
-                }
-            }
-        }
-        for (Player player : game.getPlayers().values()) {
-            for (Card card : player.getGraveyard().getCards(game)) {
-                if (filter.match(card, sourceControllerId, source, game)) {
-                    count++;
-                    if (count >= this.minNumberOfTargets) {
-                        return true;
-                    }
-                }
-            }
-        }
-        for (Card card : game.getExile().getAllCards(game)) {
-            if (filter.match(card, sourceControllerId, source, game)) {
-                count++;
-                if (count >= this.minNumberOfTargets) {
-                    return true;
-                }
-            }
-        }
-        for (CommandObject commandObject : game.getState().getCommand()) {
-            if (filter.match(commandObject, sourceControllerId, source, game)) {
-                count++;
-                if (count >= this.minNumberOfTargets) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
-        return possibleTargets(sourceControllerId, (Ability) null, game);
+        return canChooseFromPossibleTargets(sourceControllerId, source, game);
     }
 
     @Override
@@ -179,7 +125,8 @@ public class TargetSource extends TargetObject {
                 possibleTargets.add(commandObject.getId());
             }
         }
-        return possibleTargets;
+
+        return keepValidPossibleTargets(possibleTargets, sourceControllerId, source, game);
     }
 
     @Override

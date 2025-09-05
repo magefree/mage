@@ -92,7 +92,7 @@ class GurzigostCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return this.getTargets().canChoose(controllerId, source, game);
+        return canChooseOrAlreadyChosen(ability, source, controllerId, game);
     }
 
     @Override

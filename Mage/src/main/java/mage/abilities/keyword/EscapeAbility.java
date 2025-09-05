@@ -101,7 +101,7 @@ public class EscapeAbility extends SpellAbility {
     @Override
     public boolean activate(Game game, Set<MageIdentifier> allowedIdentifiers, boolean noMana) {
         if (super.activate(game, allowedIdentifiers, noMana)) {
-            game.getState().setValue(CASTED_WITH_ESCAPE_KEY + getSourceId().toString() + (getSourceObjectZoneChangeCounter() + 1), Boolean.TRUE);
+            game.getState().setValue(CASTED_WITH_ESCAPE_KEY + getSourceId().toString() + (getStackMomentSourceZCC() + 1), Boolean.TRUE);
             return true;
         }
         return false;

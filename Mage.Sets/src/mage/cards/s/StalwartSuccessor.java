@@ -78,14 +78,19 @@ class StalwartSuccessorTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
+        int zccOffset = 0;
         Permanent permanent = game.getPermanent(event.getTargetId());
+        if (permanent == null) {
+            permanent = game.getPermanentEntering(event.getTargetId());
+            zccOffset = 1;
+        }
         if (permanent == null
                 || !permanent.isCreature(game)
                 || !permanent.isControlledBy(getControllerId())
                 || !StalwartSuccessorWatcher.checkCreature(permanent, event, game)) {
             return false;
         }
-        this.getEffects().setTargetPointer(new FixedTarget(permanent, game));
+        this.getEffects().setTargetPointer(new FixedTarget(permanent.getId(), permanent.getZoneChangeCounter(game) + zccOffset));
         return true;
     }
 }
@@ -101,6 +106,11 @@ class StalwartSuccessorWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.COUNTERS_ADDED) {
+            if (game.getPermanent(event.getTargetId()) == null) {
+                // permanent entering
+                Permanent permanent = game.getPermanentEntering(event.getTargetId());
+                map.putIfAbsent(new MageObjectReference(event.getTargetId(), permanent.getZoneChangeCounter(game) + 1, game), event.getId());
+            }
             map.putIfAbsent(new MageObjectReference(event.getTargetId(), game), event.getId());
         }
     }

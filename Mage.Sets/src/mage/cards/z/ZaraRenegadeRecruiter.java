@@ -18,6 +18,7 @@ import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetCard;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 import mage.target.targetpointer.FixedTarget;
@@ -83,10 +84,8 @@ class ZaraRenegadeRecruiterEffect extends OneShotEffect {
         if (controller == null || player == null || player.getHand().isEmpty()) {
             return false;
         }
-        TargetCardInHand targetCard = new TargetCardInHand(
-                0, 1, StaticFilters.FILTER_CARD_CREATURE
-        );
-        controller.choose(outcome, player.getHand(), targetCard, source, game);
+        TargetCard targetCard = new TargetCard(0, 1, Zone.HAND, StaticFilters.FILTER_CARD_CREATURE);
+        controller.choose(Outcome.Detriment, player.getHand(), targetCard, source, game);
         Card card = game.getCard(targetCard.getFirstTarget());
         if (card == null) {
             return false;

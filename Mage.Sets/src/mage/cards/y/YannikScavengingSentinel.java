@@ -93,7 +93,7 @@ class YannikScavengingSentinelEffect extends OneShotEffect {
         }
         int power = permanent.getPower().getValue();
         new ExileTargetEffect(CardUtil.getExileZoneId(
-                game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()
+                game, source.getSourceId(), source.getStackMomentSourceZCC()
         ), permanent.getIdName()).setTargetPointer(new FixedTarget(permanent, game)).apply(game, source);
         game.addDelayedTriggeredAbility(new OnLeaveReturnExiledAbility(), source);
         if (game.getState().getZone(permanent.getId()) != Zone.BATTLEFIELD) {

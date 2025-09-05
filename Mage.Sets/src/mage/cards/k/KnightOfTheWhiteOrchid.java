@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterBySubtypeCard;
 import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
@@ -22,7 +21,7 @@ import java.util.UUID;
  */
 public final class KnightOfTheWhiteOrchid extends CardImpl {
 
-    private static final FilterCard filter = new FilterBySubtypeCard(SubType.PLAINS);
+    private static final FilterCard filter = new FilterCard(SubType.PLAINS);
     private static final Condition condition = new OpponentControlsMoreCondition(StaticFilters.FILTER_LANDS);
 
     public KnightOfTheWhiteOrchid(UUID ownerId, CardSetInfo setInfo) {

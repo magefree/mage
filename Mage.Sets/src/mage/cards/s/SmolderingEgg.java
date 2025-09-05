@@ -1,28 +1,39 @@
 package mage.cards.s;
 
 import mage.MageInt;
+import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.AbilityImpl;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.SourceHasCounterCondition;
+import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.RemoveAllCountersSourceEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
-import mage.watchers.common.ManaPaidSourceWatcher;
 
+import java.util.Optional;
 import java.util.UUID;
 
 /**
  * @author TheElk801
  */
 public final class SmolderingEgg extends CardImpl {
+
+    private static final Condition condition = new SourceHasCounterCondition(CounterType.EMBER, 7);
 
     public SmolderingEgg(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
@@ -38,10 +49,16 @@ public final class SmolderingEgg extends CardImpl {
 
         // Whenever you cast an instant or sorcery spell, put a number of ember counters on Smoldering Egg equal to the amount of mana spent to cast that spell. Then if Smoldering Egg has seven or more ember counters on it, remove them and transform Smoldering Egg.
         this.addAbility(new TransformAbility());
-        this.addAbility(new SpellCastControllerTriggeredAbility(
-                new SmolderingEggEffect(), StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY,
-                false, SetTargetPointer.SPELL
-        ));
+        Ability ability = new SpellCastControllerTriggeredAbility(
+                new AddCountersSourceEffect(CounterType.EMBER.createInstance(), SmolderingEggValue.instance)
+                        .setText("put a number of ember counters on {this} equal to the amount of mana spent to cast that spell"),
+                StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, false
+        );
+        ability.addEffect(new ConditionalOneShotEffect(
+                new RemoveAllCountersSourceEffect(CounterType.EMBER), condition,
+                "Then if {this} has seven or more ember counters on it, remove them and transform {this}"
+        ).addEffect(new TransformSourceEffect()));
+        this.addAbility(ability);
     }
 
     private SmolderingEgg(final SmolderingEgg card) {
@@ -54,43 +71,32 @@ public final class SmolderingEgg extends CardImpl {
     }
 }
 
-class SmolderingEggEffect extends OneShotEffect {
+enum SmolderingEggValue implements DynamicValue {
+    instance;
 
-    SmolderingEggEffect() {
-        super(Outcome.Benefit);
-        staticText = "put a number of ember counters on {this} equal to the amount of mana spent to cast that spell. " +
-                "Then if {this} has seven or more ember counters on it, remove them and transform {this}";
-    }
-
-    private SmolderingEggEffect(final SmolderingEggEffect effect) {
-        super(effect);
+    @Override
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        return Optional
+                .ofNullable((Spell) effect.getValue("spellCast"))
+                .map(Spell::getSpellAbility)
+                .map(AbilityImpl::getManaCostsToPay)
+                .map(ManaCost::getUsedManaToPay)
+                .map(Mana::count)
+                .orElse(0);
     }
 
     @Override
-    public SmolderingEggEffect copy() {
-        return new SmolderingEggEffect(this);
+    public SmolderingEggValue copy() {
+        return this;
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-        if (permanent == null) {
-            return false;
-        }
-        Spell spell = (Spell) getValue("spellCast");
-        if (spell != null) {
-            permanent.addCounters(
-                    CounterType.EMBER.createInstance(
-                            ManaPaidSourceWatcher.getTotalPaid(spell.getId(), game)
-                    ), source.getControllerId(), source, game
-            );
-        }
-        int counters = permanent.getCounters(game).getCount(CounterType.EMBER);
-        if (counters < 7) {
-            return true;
-        }
-        permanent.removeCounters(CounterType.EMBER.createInstance(counters), source, game);
-        new TransformSourceEffect().apply(game, source);
-        return true;
+    public String getMessage() {
+        return "";
+    }
+
+    @Override
+    public String toString() {
+        return "1";
     }
 }

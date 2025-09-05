@@ -10,8 +10,12 @@ import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.ComparisonType;
+import mage.constants.SagaChapter;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.common.TargetCardInLibrary;
@@ -24,14 +28,10 @@ import java.util.UUID;
  */
 public final class TheRestorationOfEiganjo extends CardImpl {
 
-    private static final FilterCard filter
-            = new FilterCard("a basic Plains card");
     private static final FilterCard filter2
             = new FilterPermanentCard("permanent card with mana value 2 or less from your graveyard");
 
     static {
-        filter.add(SubType.PLAINS.getPredicate());
-        filter.add(SuperType.BASIC.getPredicate());
         filter2.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 3));
     }
 
@@ -47,7 +47,7 @@ public final class TheRestorationOfEiganjo extends CardImpl {
         // I - Search your library for a basic Plains card, reveal it, put it into your hand, then shuffle.
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_I, new SearchLibraryPutInHandEffect(
-                        new TargetCardInLibrary(filter), true
+                        new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_PLAINS), true
                 )
         );
 

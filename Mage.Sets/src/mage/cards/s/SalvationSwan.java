@@ -123,7 +123,7 @@ class SalvationSwanTargetEffect extends OneShotEffect {
         game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect), source);
 
         // move exiled cards to shared zone for better UX
-        String exileKey = SalvationSwan.VALUE_PREFIX + "_" + source.getSourceId() + "_" + source.getSourceObjectZoneChangeCounter();
+        String exileKey = SalvationSwan.VALUE_PREFIX + "_" + source.getSourceId() + "_" + source.getStackMomentSourceZCC();
         ExileZone sharedExileZone = game.getExile().createZone(
                 CardUtil.getExileZoneId(exileKey, game),
                 sourceObject.getIdName()

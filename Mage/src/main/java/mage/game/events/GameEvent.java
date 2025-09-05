@@ -615,8 +615,12 @@ public class GameEvent implements Serializable {
         DUNGEON_COMPLETED,
         TEMPTED_BY_RING, RING_BEARER_CHOSEN,
         REMOVED_FROM_COMBAT, // targetId    id of permanent removed from combat
-        FORETOLD, // targetId   id of card foretold
-        FORETELL, // targetId   id of card foretell  playerId   id of the controller
+        /* card foretold
+        targetId    id of card foretold
+        playerId    id of player foretelling card
+        flag        true if player did foretell, false if became foretold without foretell
+         */
+        CARD_FORETOLD,
         /* villainous choice
          targetId    player making the choice
          sourceId    sourceId of the ability forcing the choice
@@ -684,6 +688,17 @@ public class GameEvent implements Serializable {
         /* rad counter life loss/gain effect
          */
         RADIATION_GAIN_LIFE,
+        /* for checking sacrifice as a cost
+         targetId   the permanent to be sacrificed
+         sourceId   of the ability
+         playerId   controller of ability
+         data       id of the ability being paid for
+         */
+        PAY_SACRIFICE_COST,
+        EARTHBENDED,
+        AIRBENDED,
+        FIREBENDED,
+        WATERBENDED,
         // custom events - must store some unique data to track
         CUSTOM_EVENT;
 

@@ -7,9 +7,9 @@ import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.CardsInHandCondition;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.effects.common.CounterTargetEffect;
+import mage.abilities.effects.common.DrawCardsEqualToDifferenceEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -44,7 +44,7 @@ public final class KozilekTheGreatDistortion extends CardImpl {
         this.toughness = new MageInt(12);
 
         // When you cast Kozilek, the Great Distortion, if you have fewer than seven cards in hand, draw cards equal to the difference.
-        this.addAbility(new CastSourceTriggeredAbility(new KozilekDrawEffect(), false).withInterveningIf(condition));
+        this.addAbility(new CastSourceTriggeredAbility(new DrawCardsEqualToDifferenceEffect(7)).withInterveningIf(condition));
 
         // Menace
         this.addAbility(new MenaceAbility(false));
@@ -62,33 +62,6 @@ public final class KozilekTheGreatDistortion extends CardImpl {
     @Override
     public KozilekTheGreatDistortion copy() {
         return new KozilekTheGreatDistortion(this);
-    }
-}
-
-class KozilekDrawEffect extends OneShotEffect {
-
-    KozilekDrawEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "draw cards equal to the difference";
-    }
-
-    private KozilekDrawEffect(final KozilekDrawEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public KozilekDrawEffect copy() {
-        return new KozilekDrawEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            controller.drawCards(7 - controller.getHand().size(), source, game);
-            return true;
-        }
-        return false;
     }
 }
 
@@ -156,5 +129,4 @@ class KozilekDiscardCost extends CostImpl {
     public KozilekDiscardCost copy() {
         return new KozilekDiscardCost(this);
     }
-
 }

@@ -1,18 +1,20 @@
 package mage.cards.l;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.WerewolfFrontTriggeredAbility;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.condition.Condition;
+import mage.abilities.condition.InvertCondition;
+import mage.abilities.condition.common.FerociousCondition;
+import mage.abilities.decorator.ConditionalRestrictionEffect;
+import mage.abilities.effects.common.combat.CantAttackSourceEffect;
+import mage.abilities.hint.common.FerociousHint;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.PowerPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
 
 import java.util.UUID;
 
@@ -20,6 +22,8 @@ import java.util.UUID;
  * @author fireshoes
  */
 public final class LambholtPacifist extends CardImpl {
+
+    private static final Condition condition = new InvertCondition(FerociousCondition.instance);
 
     public LambholtPacifist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
@@ -32,7 +36,10 @@ public final class LambholtPacifist extends CardImpl {
         this.secondSideCardClazz = mage.cards.l.LambholtButcher.class;
 
         // Lambholt Pacifist can't attack unless you control a creature with power 4 or greater.
-        this.addAbility(new SimpleStaticAbility(new LambholtPacifistEffect()));
+        this.addAbility(new SimpleStaticAbility(new ConditionalRestrictionEffect(
+                new CantAttackSourceEffect(Duration.WhileOnBattlefield), condition,
+                "{this} can't attack unless you control a creature with power 4 or greater"
+        )).addHint(FerociousHint.instance));
 
         // At the beginning of each upkeep, if no spells were cast last turn, transform Lambholt Pacifist.
         this.addAbility(new TransformAbility());
@@ -46,41 +53,5 @@ public final class LambholtPacifist extends CardImpl {
     @Override
     public LambholtPacifist copy() {
         return new LambholtPacifist(this);
-    }
-}
-
-class LambholtPacifistEffect extends RestrictionEffect {
-
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a creature with power 4 or greater");
-
-    static {
-        filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 3));
-    }
-
-    public LambholtPacifistEffect() {
-        super(Duration.WhileOnBattlefield);
-        staticText = "{this} can't attack unless you control a creature with power 4 or greater";
-    }
-
-    private LambholtPacifistEffect(final LambholtPacifistEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public LambholtPacifistEffect copy() {
-        return new LambholtPacifistEffect(this);
-    }
-
-    @Override
-    public boolean canAttack(Game game, boolean canUseChooseDialogs) {
-        return false;
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getId().equals(source.getSourceId())) {
-            return game.getBattlefield().countAll(filter, source.getControllerId(), game) <= 0;
-        }  // do not apply to other creatures.
-        return false;
     }
 }

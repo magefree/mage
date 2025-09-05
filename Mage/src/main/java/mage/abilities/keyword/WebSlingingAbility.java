@@ -16,7 +16,7 @@ import mage.target.common.TargetControlledPermanent;
 import java.util.Set;
 
 /**
- * @author LevelX2
+ * @author TheElk801
  */
 public class WebSlingingAbility extends SpellAbility {
 

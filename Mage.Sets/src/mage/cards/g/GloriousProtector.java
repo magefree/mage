@@ -100,7 +100,7 @@ class GloriousProtectorEffect extends OneShotEffect {
         player.moveCardsToExile(
                 new CardsImpl(target.getTargets()).getCards(game),
                 source, game, true, CardUtil.getExileZoneId(
-                        game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()
+                        game, source.getSourceId(), source.getStackMomentSourceZCC()
                 ), sourceObject.getIdName()
         );
         game.addDelayedTriggeredAbility(new OnLeaveReturnExiledAbility(), source);

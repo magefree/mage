@@ -1,22 +1,18 @@
 
 package mage.cards.l;
 
-import java.util.UUID;
-
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
-import mage.constants.SuperType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
+import mage.constants.SuperType;
 import mage.game.permanent.token.IxalanVampireToken;
+
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -35,7 +31,7 @@ public final class LegionsLanding extends CardImpl {
 
         // When you attack with three or more creatures, transform Legion's Landing.
         this.addAbility(new TransformAbility());
-        this.addAbility(new LegionsLandingTriggeredAbility(new TransformSourceEffect()));
+        this.addAbility(new AttacksWithCreaturesTriggeredAbility(new TransformSourceEffect(), 3).setTriggerPhrase("When you attack with three or more creatures, "));
     }
 
     private LegionsLanding(final LegionsLanding card) {
@@ -45,32 +41,5 @@ public final class LegionsLanding extends CardImpl {
     @Override
     public LegionsLanding copy() {
         return new LegionsLanding(this);
-    }
-}
-
-class LegionsLandingTriggeredAbility extends TriggeredAbilityImpl {
-
-    public LegionsLandingTriggeredAbility(Effect effect) {
-        super(Zone.BATTLEFIELD, effect, false);
-        setTriggerPhrase("When you attack with three or more creatures, " );
-    }
-
-    private LegionsLandingTriggeredAbility(final LegionsLandingTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public LegionsLandingTriggeredAbility copy() {
-        return new LegionsLandingTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DECLARED_ATTACKERS;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return game.getCombat().getAttackers().size() >= 3 && game.getCombat().getAttackingPlayerId().equals(getControllerId());
     }
 }

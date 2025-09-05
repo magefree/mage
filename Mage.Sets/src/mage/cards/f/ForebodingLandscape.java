@@ -14,7 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterBasicLandCard;
+import mage.filter.common.FilterBasicCard;
 import mage.filter.predicate.Predicates;
 import mage.target.common.TargetCardInLibrary;
 
@@ -25,7 +25,7 @@ import java.util.UUID;
  */
 public final class ForebodingLandscape extends CardImpl {
 
-    private static final FilterCard filter = new FilterBasicLandCard("a basic Swamp, Forest, or Island card");
+    private static final FilterCard filter = new FilterBasicCard("a basic Swamp, Forest, or Island card");
 
     static {
         filter.add(Predicates.or(

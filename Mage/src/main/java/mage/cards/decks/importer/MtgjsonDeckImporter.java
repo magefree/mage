@@ -63,11 +63,10 @@ public class MtgjsonDeckImporter extends JsonDeckImporter {
             }
 
             int num = JsonUtil.getAsInt(card, "count");
-            Optional<CardInfo> cardLookup = getCardLookup().lookupCardInfo(name, setCode);
-            if (!cardLookup.isPresent()) {
+            CardInfo cardInfo = getCardLookup().lookupCardInfo(name, setCode, null);
+            if (cardInfo == null) {
                 sbMessage.append("Could not find card: '").append(name).append("'\n");
             } else {
-                CardInfo cardInfo = cardLookup.get();
                 for (int i = 0; i < num; i++) {
                     list.add(new DeckCardInfo(cardInfo.getName(), cardInfo.getCardNumber(), cardInfo.getSetCode()));
                 }

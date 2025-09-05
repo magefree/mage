@@ -2,9 +2,9 @@ package mage.cards.i;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TransformAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -34,9 +34,7 @@ public final class InnocentTraveler extends CardImpl {
 
         // At the beginning of your upkeep, any opponent may sacrifice a creature. If no one does, transform Innocent Traveler.
         this.addAbility(new TransformAbility());
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new InnocentTravelerEffect()
-        ));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new InnocentTravelerEffect()));
     }
 
     private InnocentTraveler(final InnocentTraveler card) {

@@ -59,7 +59,7 @@ class TreeOfRedemptionEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Permanent perm = game.getPermanent(source.getSourceId());
-        if (perm == null || player == null || !player.isLifeTotalCanChange()) {
+        if (perm == null || player == null || !player.isLifeTotalCanChange() || !perm.isCreature(game)) {
             return false;
         }
 

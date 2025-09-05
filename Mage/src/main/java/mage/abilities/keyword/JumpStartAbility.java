@@ -126,7 +126,7 @@ class JumpStartReplacementEffect extends ReplacementEffectImpl {
         if (event.getTargetId().equals(source.getSourceId())
                 && ((ZoneChangeEvent) event).getFromZone() == Zone.STACK
                 && ((ZoneChangeEvent) event).getToZone() != Zone.EXILED) {
-            return game.getState().getZoneChangeCounter(source.getSourceId()) == source.getSourceObjectZoneChangeCounter() + 1;
+            return game.getState().getZoneChangeCounter(source.getSourceId()) == source.getStackMomentSourceZCC() + 1;
 
         }
         return false;

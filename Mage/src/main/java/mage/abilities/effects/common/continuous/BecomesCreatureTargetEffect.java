@@ -7,6 +7,7 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -194,8 +195,11 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
                     " lose all their abilities and" :
                     " loses all abilities and");
         }
-        sb.append(getTargetPointer().isPlural(mode.getTargets()) ? " become " : " becomes a ");
-        sb.append(token.getDescription());
+        if (getTargetPointer().isPlural(mode.getTargets())) {
+            sb.append(" become ").append(token.getDescription());
+        } else {
+            sb.append(" becomes ").append(CardUtil.addArticle(token.getDescription()));
+        }
         if (!durationRuleAtStart && !duration.toString().isEmpty()) {
             sb.append(' ').append(duration.toString());
         }

@@ -9,9 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.counters.CounterType;
-import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterBasicLandCard;
 import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
@@ -21,8 +19,6 @@ import java.util.UUID;
  */
 public final class VastwoodSurge extends CardImpl {
 
-    private static final FilterCard filter = new FilterBasicLandCard("basic land cards");
-
     public VastwoodSurge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}");
 
@@ -31,7 +27,7 @@ public final class VastwoodSurge extends CardImpl {
 
         // Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle your library. If this spell was kicked, put two +1/+1 counters on each creature you control.
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(
-                new TargetCardInLibrary(0, 2, filter), true
+                new TargetCardInLibrary(0, 2, StaticFilters.FILTER_CARD_BASIC_LANDS), true
         ));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new AddCountersAllEffect(

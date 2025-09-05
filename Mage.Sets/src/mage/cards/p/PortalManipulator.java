@@ -38,7 +38,7 @@ import java.util.stream.Collectors;
  */
 public final class PortalManipulator extends CardImpl {
 
-    private static final Condition condition = new IsStepCondition(PhaseStep.DECLARE_ATTACKERS);
+    private static final Condition condition = new IsStepCondition(PhaseStep.DECLARE_ATTACKERS, false);
     private static final FilterPermanent filter = new FilterAttackingCreature("attacking creatures controlled by that player's opponents");
 
     static {

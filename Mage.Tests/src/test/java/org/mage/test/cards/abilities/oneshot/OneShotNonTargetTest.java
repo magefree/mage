@@ -5,22 +5,31 @@ import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
+
 /**
- *
  * @author notgreat
  */
 public class OneShotNonTargetTest extends CardTestPlayerBase {
+
     @Test
     public void YorionChooseAfterTriggerTest() {
+        // When Yorion enters the battlefield, exile any number of other nonland permanents you own and control.
+        // Return those cards to the battlefield at the beginning of the next end step.
         addCard(Zone.HAND, playerA, "Yorion, Sky Nomad");
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 7);
+        //
+        // When Resolute Reinforcements enters the battlefield, create a 1/1 white Soldier creature token.
         addCard(Zone.HAND, playerA, "Resolute Reinforcements");
 
+        // prepare yori and put trigger on stack
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Yorion, Sky Nomad");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, true);
         checkPermanentCount("Yorion on battlefield", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Yorion, Sky Nomad", 1);
+
+        // prepare another create before yori trigger resolve
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Resolute Reinforcements");
-        setChoice(playerA, "Resolute Reinforcements");
+        setChoice(playerA, "Resolute Reinforcements"); // 1 of 2 target for yori trigger
+        setChoice(playerA, TestPlayer.CHOICE_SKIP);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -30,6 +39,7 @@ public class OneShotNonTargetTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Resolute Reinforcements", 1);
         assertTappedCount("Plains", true, 7);
     }
+
     @Test
     public void NonTargetAdjusterTest() {
         addCard(Zone.HAND, playerA, "Temporal Firestorm");
@@ -52,21 +62,30 @@ public class OneShotNonTargetTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Python", 0);
         assertGraveyardCount(playerA, "Watchwolf", 1);
     }
+
     @Test
     public void ModeSelectionTest() {
-        addCard(Zone.HAND, playerA, "SOLDIER Military Program");
+        // At the beginning of combat on your turn, choose one. If you control a commander, you may choose both instead.
+        // * Create a 1/1 white Soldier creature token.
+        // * Put a +1/+1 counter on each of up to two Soldiers you control.
+        addCard(Zone.HAND, playerA, "SOLDIER Military Program"); // {2}{W}
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
-        addCard(Zone.BATTLEFIELD, playerA, "Squire", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Squire", 1); // 1/2
 
+        // prepare mode ability
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "SOLDIER Military Program");
+
+        // turn 1 combat - put counter
         setModeChoice(playerA, "2");
         setChoice(playerA, "Squire");
-        setChoice(playerA, TestPlayer.CHOICE_SKIP);
 
+        // turn 3 combat - create token
         setModeChoice(playerA, "1");
 
+        // turn 5 combat - put counter
         setModeChoice(playerA, "2");
-        setChoice(playerA, "Squire^Soldier Token");
+        setChoice(playerA, "Squire");
+        setChoice(playerA, "Soldier Token");
 
         setStrictChooseMode(true);
         setStopAt(5, PhaseStep.END_TURN);

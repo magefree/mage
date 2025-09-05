@@ -126,6 +126,19 @@ class ChooseTargetTestableDialog extends BaseTestableDialog {
                         runner.registerDialog(new ChooseTargetTestableDialog(isPlayerChoice, isTargetChoice, notTarget, isYou, "impossible 1-3", createImpossibleTarget(1, 3)).aiMustChoose(false, 0));
                         runner.registerDialog(new ChooseTargetTestableDialog(isPlayerChoice, isTargetChoice, notTarget, isYou, "impossible 2-3", createImpossibleTarget(2, 3)).aiMustChoose(false, 0));
                         runner.registerDialog(new ChooseTargetTestableDialog(isPlayerChoice, isTargetChoice, notTarget, isYou, "impossible max", createImpossibleTarget(0, Integer.MAX_VALUE)).aiMustChoose(false, 0));
+                        //
+                        // additional tests for 2 possible options limitation
+                        runner.registerDialog(new ChooseTargetTestableDialog(isPlayerChoice, isTargetChoice, notTarget, isYou, "player 0", createPlayerTarget(0, 0, notTarget)).aiMustChoose(false, 0));
+                        runner.registerDialog(new ChooseTargetTestableDialog(isPlayerChoice, isTargetChoice, notTarget, isYou, "player 0-1", createPlayerTarget(0, 1, notTarget)).aiMustChoose(true, 1));
+                        runner.registerDialog(new ChooseTargetTestableDialog(isPlayerChoice, isTargetChoice, notTarget, isYou, "player 0-2", createPlayerTarget(0, 2, notTarget)).aiMustChoose(true, 1));
+                        runner.registerDialog(new ChooseTargetTestableDialog(isPlayerChoice, isTargetChoice, notTarget, isYou, "player 0-5", createPlayerTarget(0, 5, notTarget)).aiMustChoose(true, 1));
+                        runner.registerDialog(new ChooseTargetTestableDialog(isPlayerChoice, isTargetChoice, notTarget, isYou, "player 1", createPlayerTarget(1, 1, notTarget)).aiMustChoose(true, 1));
+                        runner.registerDialog(new ChooseTargetTestableDialog(isPlayerChoice, isTargetChoice, notTarget, isYou, "player 1-2", createPlayerTarget(1, 2, notTarget)).aiMustChoose(true, 1));
+                        runner.registerDialog(new ChooseTargetTestableDialog(isPlayerChoice, isTargetChoice, notTarget, isYou, "player 1-5", createPlayerTarget(1, 5, notTarget)).aiMustChoose(true, 1));
+                        runner.registerDialog(new ChooseTargetTestableDialog(isPlayerChoice, isTargetChoice, notTarget, isYou, "player 2", createPlayerTarget(2, 2, notTarget)).aiMustChoose(true, 2));
+                        runner.registerDialog(new ChooseTargetTestableDialog(isPlayerChoice, isTargetChoice, notTarget, isYou, "player 2-5", createPlayerTarget(2, 5, notTarget)).aiMustChoose(true, 2));
+                        runner.registerDialog(new ChooseTargetTestableDialog(isPlayerChoice, isTargetChoice, notTarget, isYou, "player 3", createPlayerTarget(3, 3, notTarget)).aiMustChoose(false, 0));
+                        runner.registerDialog(new ChooseTargetTestableDialog(isPlayerChoice, isTargetChoice, notTarget, isYou, "player 3-5", createPlayerTarget(3, 5, notTarget)).aiMustChoose(false, 0));
                     }
                 }
             }

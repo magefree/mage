@@ -2,7 +2,6 @@ package org.mage.test.cards.single.dmu;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -75,5 +74,27 @@ public class KarnsSylexTest extends CardTestPlayerBase {
         assertLife(playerA, 20 - 1);
         assertLife(playerB, 20 - 3);
         assertGraveyardCount(playerA, "Lightning Bolt", 1);
+    }
+
+    /**
+     * Test that it does not work with mana abilities, e.g. Thran Portal, with Yasharn, Implacable Earth.
+     */
+    @Test
+    public void blockedManaAbilitiesWithYasharn() {
+        addCard(Zone.HAND, playerA, "Thran Portal");
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+        addCard(Zone.BATTLEFIELD, playerA, karnsSylex);
+        addCard(Zone.BATTLEFIELD, playerA, "Yasharn, Implacable Earth");
+
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Thran Portal");
+        setChoice(playerA, "Thran");
+        setChoice(playerA, "Mountain");
+
+        checkPlayableAbility("restricted by Yasharn", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Lightning Bolt", false);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
     }
 }

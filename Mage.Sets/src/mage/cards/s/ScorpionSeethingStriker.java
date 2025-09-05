@@ -2,17 +2,16 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.keyword.ConniveSourceEffect;
+import mage.abilities.condition.common.MorbidCondition;
+import mage.abilities.effects.keyword.ConniveTargetEffect;
+import mage.abilities.hint.common.MorbidHint;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.game.Game;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
@@ -36,9 +35,9 @@ public final class ScorpionSeethingStriker extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
 
         // At the beginning of your end step, if a creature died this turn, target creature you control connives.
-        Ability ability = new BeginningOfEndStepTriggeredAbility(new ScorpionSeethingStrikerEffect());
+        Ability ability = new BeginningOfEndStepTriggeredAbility(new ConniveTargetEffect()).withInterveningIf(MorbidCondition.instance);
         ability.addTarget(new TargetControlledCreaturePermanent());
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(MorbidHint.instance));
     }
 
     private ScorpionSeethingStriker(final ScorpionSeethingStriker card) {
@@ -48,29 +47,5 @@ public final class ScorpionSeethingStriker extends CardImpl {
     @Override
     public ScorpionSeethingStriker copy() {
         return new ScorpionSeethingStriker(this);
-    }
-}
-
-class ScorpionSeethingStrikerEffect extends OneShotEffect {
-
-    ScorpionSeethingStrikerEffect() {
-        super(Outcome.Benefit);
-        staticText = "target creature you control connives";
-    }
-
-    private ScorpionSeethingStrikerEffect(final ScorpionSeethingStrikerEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ScorpionSeethingStrikerEffect copy() {
-        return new ScorpionSeethingStrikerEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return ConniveSourceEffect.connive(
-                game.getPermanent(getTargetPointer().getFirst(game, source)), 1, source, game
-        );
     }
 }

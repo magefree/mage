@@ -1,13 +1,12 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.constants.Pronoun;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceDealtDamageCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -23,8 +22,9 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 import mage.watchers.common.DamageDoneWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class ChandraFireOfKaladesh extends CardImpl {
@@ -34,6 +34,8 @@ public final class ChandraFireOfKaladesh extends CardImpl {
     static {
         filter.add(new ColorPredicate(ObjectColor.RED));
     }
+
+    private static final Condition condition = new SourceDealtDamageCondition(3);
 
     public ChandraFireOfKaladesh(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
@@ -51,10 +53,11 @@ public final class ChandraFireOfKaladesh extends CardImpl {
         // {T}: Chandra, Fire of Kaladesh deals 1 damage to target player. If Chandra has dealt 3 or more damage this turn, exile her, then return her to the battlefield transformed under her owner's control.        
         this.addAbility(new TransformAbility());
         Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new TapSourceCost());
-        ability.addEffect(new ConditionalOneShotEffect(new ExileAndReturnSourceEffect(PutCards.BATTLEFIELD_TRANSFORMED,Pronoun.SHE), new SourceDealtDamageCondition(3)));
+        ability.addEffect(new ConditionalOneShotEffect(
+                new ExileAndReturnSourceEffect(PutCards.BATTLEFIELD_TRANSFORMED, Pronoun.SHE), condition
+        ));
         ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability, new DamageDoneWatcher());
-
     }
 
     private ChandraFireOfKaladesh(final ChandraFireOfKaladesh card) {

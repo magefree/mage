@@ -29,26 +29,29 @@ public class FakeCardLookup extends CardLookup {
         return this;
     }
 
-    public Optional<CardInfo> lookupCardInfo(String cardName) {
+    public CardInfo lookupCardInfo(String cardName) {
         CardInfo card = lookup.get(cardName);
         if (card != null) {
-            return Optional.of(card);
+            return card;
         }
 
         if (alwaysMatches) {
-            return Optional.of(new CardInfo() {{
+            return new CardInfo() {{
                 name = cardName;
-            }});
+            }};
         }
 
-        return Optional.empty();
+        return null;
     }
 
     @Override
     public List<CardInfo> lookupCardInfo(CardCriteria criteria) {
-        return lookupCardInfo(criteria.getName())
-                .map(Collections::singletonList)
-                .orElse(Collections.emptyList());
+        CardInfo found = lookupCardInfo(criteria.getName());
+        if (found != null) {
+            return new ArrayList<>(Collections.singletonList(found));
+        } else {
+            return Collections.emptyList();
+        }
     }
 
 }

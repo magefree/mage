@@ -74,11 +74,11 @@ class BogardanPhoenixEffect extends OneShotEffect {
         if (permanent == null
                 || controller == null
                 || permanent.getZoneChangeCounter(game) + 1
-                != source.getSourceObjectZoneChangeCounter()) {
+                != source.getStackMomentSourceZCC()) {
             return false;
         }
         Card card = game.getCard(permanent.getId());
-        if (card == null || card.getZoneChangeCounter(game) != source.getSourceObjectZoneChangeCounter()) {
+        if (card == null || card.getZoneChangeCounter(game) != source.getStackMomentSourceZCC()) {
             return false;
         }
         if (permanent.getCounters(game).containsKey(CounterType.DEATH)) {

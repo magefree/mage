@@ -1,9 +1,9 @@
 package org.mage.plugins.card.dl.sources;
 
-import mage.cards.repository.TokenRepository;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import mage.cards.repository.TokenRepository;
 
 /**
  * @author JayDi85
@@ -837,6 +837,8 @@ public class ScryfallImageSupportTokens {
             put("SLD/Hydra", "https://api.scryfall.com/cards/sld/1334?format=image");
             put("SLD/Icingdeath, Frost Tongue", "https://api.scryfall.com/cards/sld/1018?format=image");
             put("SLD/Marit Lage", "https://api.scryfall.com/cards/sld/1681?format=image");
+            put("SLD/Mechtitan/1", "https://api.scryfall.com/cards/sld/1969?format=image");
+            put("SLD/Mechtitan/2", "https://api.scryfall.com/cards/sld/1969/en?format=image&face=back");
             put("SLD/Mechtitan", "https://api.scryfall.com/cards/sld/1969?format=image");
             put("SLD/Myr", "https://api.scryfall.com/cards/sld/2101?format=image");
             put("SLD/Saproling", "https://api.scryfall.com/cards/sld/1139?format=image");
@@ -2787,6 +2789,7 @@ public class ScryfallImageSupportTokens {
 
             // EOE
             put("EOE/Drone", "https://api.scryfall.com/cards/teoe/3?format=image");
+            put("EOE/Emblem Tezzeret", "https://api.scryfall.com/cards/teoe/11?format=image");
             put("EOE/Human Soldier", "https://api.scryfall.com/cards/teoe/2?format=image");
             put("EOE/Lander/1", "https://api.scryfall.com/cards/teoe/4?format=image");
             put("EOE/Lander/2", "https://api.scryfall.com/cards/teoe/5?format=image");
@@ -2927,6 +2930,12 @@ public class ScryfallImageSupportTokens {
 
             // PL23
             put("PL23/Food", "https://api.scryfall.com/cards/pl23/2?format=image");
+
+            // PL24
+            put("PL24/Dragon", "https://api.scryfall.com/cards/pl24/3?format=image");
+
+            // PL25
+            put("PL25/Snake", "https://api.scryfall.com/cards/pl25/2?format=image");
 
             // generate supported sets
             supportedSets.clear();

@@ -64,7 +64,7 @@ class EvraHalcyonWitnessEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null && player.isLifeTotalCanChange()) {
             Permanent perm = game.getPermanent(source.getSourceId());
-            if (perm != null) {
+            if (perm != null && perm.isCreature(game)) {
                 int amount = perm.getPower().getValue();
                 int life = player.getLife();
                 if (life == amount) {

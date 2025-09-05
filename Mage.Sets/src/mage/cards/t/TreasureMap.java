@@ -2,22 +2,22 @@ package mage.cards.t;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.RemoveAllCountersSourceEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TreasureToken;
-import mage.players.Player;
 
 import java.util.UUID;
 
@@ -26,6 +26,8 @@ import java.util.UUID;
  */
 public final class TreasureMap extends CardImpl {
 
+    private static final Condition condition = new SourceHasCounterCondition(CounterType.LANDMARK, 3);
+
     public TreasureMap(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
@@ -33,8 +35,13 @@ public final class TreasureMap extends CardImpl {
 
         // {1}, {T}: Scry 1. Put a landmark counter on Treasure Map. Then if there are three or more landmark counters on it, remove those counters, transform Treasure Map, and create three colorless Treasure artifact tokens with "{T}, Sacrifice this artifact: Add one mana of any color."
         this.addAbility(new TransformAbility());
-        Ability ability = new SimpleActivatedAbility(new TreasureMapEffect(), new ManaCostsImpl<>("{1}"));
+        Ability ability = new SimpleActivatedAbility(new ScryEffect(1, false), new ManaCostsImpl<>("{1}"));
         ability.addCost(new TapSourceCost());
+        ability.addEffect(new AddCountersSourceEffect(CounterType.LANDMARK.createInstance()));
+        ability.addEffect(new ConditionalOneShotEffect(
+                new RemoveAllCountersSourceEffect(CounterType.LANDMARK), condition, "Then if there are three or " +
+                "more landmark counters on it, remove those counters, transform {this}, and create three Treasure tokens"
+        ).addEffect(new TransformSourceEffect()).addEffect(new CreateTokenEffect(new TreasureToken(), 3)));
         this.addAbility(ability);
     }
 
@@ -45,45 +52,5 @@ public final class TreasureMap extends CardImpl {
     @Override
     public TreasureMap copy() {
         return new TreasureMap(this);
-    }
-}
-
-class TreasureMapEffect extends OneShotEffect {
-
-    TreasureMapEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "Scry 1. Put a landmark counter on {this}. "
-                + "Then if there are three or more landmark counters on it, "
-                + "remove those counters, transform {this}, and create "
-                + "three Treasure tokens";
-    }
-
-    private TreasureMapEffect(final TreasureMapEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public TreasureMapEffect copy() {
-        return new TreasureMapEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            player.scry(1, source, game);
-            if (permanent != null) {
-                permanent.addCounters(CounterType.LANDMARK.createInstance(), source.getControllerId(), source, game);
-                int counters = permanent.getCounters(game).getCount(CounterType.LANDMARK);
-                if (counters > 2) {
-                    permanent.removeCounters(CounterType.LANDMARK.getName(), counters, source, game);
-                    new TransformSourceEffect().apply(game, source);
-                    new CreateTokenEffect(new TreasureToken(), 3).apply(game, source);
-                }
-                return true;
-            }
-        }
-        return false;
     }
 }

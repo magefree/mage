@@ -5,9 +5,7 @@ import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterBasicLandCard;
 import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
@@ -17,8 +15,6 @@ import java.util.UUID;
  */
 public final class RoilingRegrowth extends CardImpl {
 
-    private static final FilterCard filter = new FilterBasicLandCard("basic land cards");
-
     public RoilingRegrowth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{G}");
 
@@ -27,7 +23,7 @@ public final class RoilingRegrowth extends CardImpl {
                 StaticFilters.FILTER_LAND, 1, null
         ).setText("Sacrifice a land."));
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(
-                new TargetCardInLibrary(0, 2, filter), true
+                new TargetCardInLibrary(0, 2, StaticFilters.FILTER_CARD_BASIC_LANDS), true
         ));
     }
 

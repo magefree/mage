@@ -78,7 +78,7 @@ public class DampingEngine extends CardImpl {
         return "dampingEngine_"
                 + playerId + "_"
                 + source.getSourceId() + "_"
-                + source.getSourceObjectZoneChangeCounter() + "_"
+                + source.getStackMomentSourceZCC() + "_"
                 + game.getTurnNum();
     }
 

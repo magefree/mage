@@ -15,7 +15,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterBySubtypeCard;
+import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -54,7 +54,7 @@ public final class TempleOfTheDragonQueen extends CardImpl {
 
 class TempleOfTheDragonQueenEffect extends OneShotEffect {
 
-    private static final FilterBySubtypeCard filter = new FilterBySubtypeCard(SubType.DRAGON);
+    private static final FilterCard filter = new FilterCard(SubType.DRAGON);
 
     public TempleOfTheDragonQueenEffect() {
         super(Outcome.Tap);

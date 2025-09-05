@@ -6,6 +6,9 @@ import mage.abilities.Ability;
 import mage.abilities.common.PlayLandOrCastSpellTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -14,7 +17,6 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.game.Controllable;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
@@ -142,14 +144,16 @@ class UriangerAugureltPlayEffect extends AsThoughEffectImpl {
         if (card.isLand(game)) {
             return true;
         }
-        // TODO: This should ideally apply the reduction while the spell is being cast because effects that increase the cost apply first
-        Optional.ofNullable(source)
-                .map(Controllable::getControllerId)
-                .map(game::getPlayer)
-                .ifPresent(player -> player.setCastSourceIdWithAlternateMana(
-                        card.getId(), CardUtil.reduceCost(card.getManaCost(), 2),
-                        null, MageIdentifier.UriangerAugureltAlternateCast
-                ));
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            ManaCosts<ManaCost> newCost = CardUtil.reduceCost(card.getManaCost(), 2);
+            if (newCost.isEmpty()) {
+                newCost.add(new GenericManaCost(0));
+            }
+            controller.setCastSourceIdWithAlternateMana(
+                    card.getId(), newCost, null, MageIdentifier.UriangerAugureltAlternateCast
+            );
+        }
         return true;
     }
 }

@@ -94,7 +94,7 @@ class LazavWearerOfFacesEffect extends OneShotEffect {
             return false;
         }
 
-        UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+        UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getStackMomentSourceZCC());
         ExileZone exile = game.getExile().getExileZone(exileId);
         if (exile == null) {
             return false;
