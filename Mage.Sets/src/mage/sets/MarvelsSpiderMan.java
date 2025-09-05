@@ -132,6 +132,8 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Mob Lookout", 136, Rarity.COMMON, mage.cards.m.MobLookout.class));
         cards.add(new SetCardInfo("Molten Man, Inferno Incarnate", 84, Rarity.UNCOMMON, mage.cards.m.MoltenManInfernoIncarnate.class));
         cards.add(new SetCardInfo("Morbius the Living Vampire", 137, Rarity.UNCOMMON, mage.cards.m.MorbiusTheLivingVampire.class));
+        cards.add(new SetCardInfo("Morlun, Devourer of Spiders", 257, Rarity.RARE, mage.cards.m.MorlunDevourerOfSpiders.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Morlun, Devourer of Spiders", 59, Rarity.RARE, mage.cards.m.MorlunDevourerOfSpiders.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 192, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 197, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Multiversal Passage", 180, Rarity.RARE, mage.cards.m.MultiversalPassage.class, NON_FULL_USE_VARIOUS));
