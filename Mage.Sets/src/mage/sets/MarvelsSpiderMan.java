@@ -200,6 +200,7 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Shadow of the Goblin", 87, Rarity.RARE, mage.cards.s.ShadowOfTheGoblin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shock", 88, Rarity.COMMON, mage.cards.s.Shock.class));
         cards.add(new SetCardInfo("Shocker, Unshakable", 89, Rarity.UNCOMMON, mage.cards.s.ShockerUnshakable.class));
+        cards.add(new SetCardInfo("Shriek, Treblemaker", 144, Rarity.UNCOMMON, mage.cards.s.ShriekTreblemaker.class));
         cards.add(new SetCardInfo("Silver Sable, Mercenary Leader", 13, Rarity.UNCOMMON, mage.cards.s.SilverSableMercenaryLeader.class));
         cards.add(new SetCardInfo("Sinister Hideout", 184, Rarity.COMMON, mage.cards.s.SinisterHideout.class));
         cards.add(new SetCardInfo("Skyward Spider", 146, Rarity.COMMON, mage.cards.s.SkywardSpider.class));
