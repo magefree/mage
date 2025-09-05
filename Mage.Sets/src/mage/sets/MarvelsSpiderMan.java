@@ -228,6 +228,7 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Spider-Man 2099", 205, Rarity.RARE, mage.cards.s.SpiderMan2099.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Spider-Man 2099", 216, Rarity.RARE, mage.cards.s.SpiderMan2099.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Spider-Man India", 151, Rarity.UNCOMMON, mage.cards.s.SpiderManIndia.class));
+        cards.add(new SetCardInfo("Spider-Man No More", 45, Rarity.COMMON, mage.cards.s.SpiderManNoMore.class));
         cards.add(new SetCardInfo("Spider-Man Noir", 204, Rarity.UNCOMMON, mage.cards.s.SpiderManNoir.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Spider-Man Noir", 67, Rarity.UNCOMMON, mage.cards.s.SpiderManNoir.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Spider-Man, Brooklyn Visionary", 115, Rarity.COMMON, mage.cards.s.SpiderManBrooklynVisionary.class));
