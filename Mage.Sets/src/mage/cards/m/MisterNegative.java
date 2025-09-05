@@ -38,9 +38,10 @@ public final class MisterNegative extends CardImpl {
         // Lifelink
         this.addAbility(LifelinkAbility.getInstance());
 
-        // When Mr. Negative enters, you may exchange your life total with target opponent. If you lose life this way, draw that many cards.
+        // Darkforce Inversion — When Mister Negative enters, you may exchange your life total with target opponent. If you lose life this way, draw that many cards.
         Ability ability = new EntersBattlefieldTriggeredAbility(new MisterNegativeEffect(), true);
         ability.addTarget(new TargetOpponent());
+        ability.withFlavorWord("Darkforce Inversion");
         this.addAbility(ability);
     }
 

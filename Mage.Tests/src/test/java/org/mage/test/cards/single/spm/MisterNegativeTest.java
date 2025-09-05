@@ -11,11 +11,11 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class MisterNegativeTest extends CardTestPlayerBase {
 
     /*
-    Misterr Negative
+    Mister Negative
     {5}{W}{B}
     Legendary Creature - Human Villain
     Vigilance, lifelink
-    When Misterr Negative enters, you may exchange your life total with target opponent. If you lose life this way, draw that many cards.
+    When Mister Negative enters, you may exchange your life total with target opponent. If you lose life this way, draw that many cards.
     5/5
     */
     private static final String misterNegative = "Mister Negative";
