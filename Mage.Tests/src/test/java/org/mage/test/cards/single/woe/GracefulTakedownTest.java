@@ -4,6 +4,7 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Assert;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -38,7 +39,8 @@ public class GracefulTakedownTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, takedown);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, takedown);
-        addTarget(playerA, cub);
+        addTarget(playerA, TestPlayer.TARGET_SKIP); // enchanted
+        addTarget(playerA, cub); // one other
         addTarget(playerA, ancient);
 
         setStopAt(1, PhaseStep.END_COMBAT);
@@ -62,7 +64,8 @@ public class GracefulTakedownTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, strength, piker, true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, takedown);
-        addTarget(playerA, cub + "^" + piker);
+        addTarget(playerA, piker); // enchanted
+        addTarget(playerA, cub); // one other
         addTarget(playerA, ancient);
 
         setStopAt(1, PhaseStep.END_COMBAT);
