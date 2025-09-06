@@ -350,8 +350,6 @@ public interface Permanent extends Card, Controllable {
      * Removes this permanent from combat
      *
      * @param game
-     * @param withEvent true if removed from combat by an effect (default)
-     *                  false if removed because it left the battlefield
      * @return true if permanent was attacking or blocking
      */
     boolean removeFromCombat(Game game);
@@ -492,4 +490,6 @@ public interface Permanent extends Card, Controllable {
         this.getPower().setBoostedValue(this.getToughness().getValue());
         this.getToughness().setBoostedValue(power);
     }
+
+    Permanent saveImmutableCopy(Game game);
 }
