@@ -6,6 +6,8 @@ import mage.constants.SetType;
 
 /**
  * https://scryfall.com/sets/mar
+ * 
+ * @author resech
  */
 public class MarvelUniverse extends ExpansionSet {
 
