@@ -52,15 +52,13 @@ public class TargetsDamageTargetsEffect extends OneShotEffect {
 
         List<Permanent> damagingPermanents = new ArrayList<>();
         List<Permanent> receivingPermanents = new ArrayList<>();
-        if (damageTarget.isLegal(source, game)) {
-            for (UUID id : damageTarget.getTargets()) {
-                Permanent permanent = game.getPermanent(id);
-                if (permanent != null) {
-                    damagingPermanents.add(permanent);
-                }
+        for (UUID id : damageTarget.getTargets()) {
+            Permanent permanent = game.getPermanent(id);
+            if (permanent != null) {
+                damagingPermanents.add(permanent);
             }
         }
-        if (additionalDamageTarget != null && additionalDamageTarget.isLegal(source, game)) {
+        if (additionalDamageTarget != null) {
             for (UUID id : additionalDamageTarget.getTargets()) {
                 Permanent permanent = game.getPermanent(id);
                 if (permanent != null) {
@@ -68,12 +66,10 @@ public class TargetsDamageTargetsEffect extends OneShotEffect {
                 }
             }
         }
-        if (destTarget.isLegal(source, game)) {
-            for (UUID id : destTarget.getTargets()) {
-                Permanent permanent = game.getPermanent(id);
-                if (permanent != null) {
-                    receivingPermanents.add(permanent);
-                }
+        for (UUID id : destTarget.getTargets()) {
+            Permanent permanent = game.getPermanent(id);
+            if (permanent != null) {
+                receivingPermanents.add(permanent);
             }
         }
 
