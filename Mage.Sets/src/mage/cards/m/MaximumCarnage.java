@@ -2,7 +2,6 @@ package mage.cards.m;
 
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SagaAbility;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.DamagePlayersEffect;
@@ -11,7 +10,6 @@ import mage.abilities.effects.mana.AddManaToManaPoolSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterOpponentsCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -19,14 +17,13 @@ import mage.game.permanent.Permanent;
 import java.util.UUID;
 
 /**
- *
  * @author Jmlundeen
  */
 public final class MaximumCarnage extends CardImpl {
 
     public MaximumCarnage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}");
-        
+
         this.subtype.add(SubType.SAGA);
 
         // (As this Saga enters step and after your draw step, add a lore counter. Sacrifice after III.)
@@ -39,9 +36,11 @@ public final class MaximumCarnage extends CardImpl {
 
         // II -- Add {R}{R}{R}.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_II, new AddManaToManaPoolSourceControllerEffect(new Mana(ManaType.RED, 3)));
-        
+
         // III -- This Saga deals 5 damage to each opponent.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III, new DamagePlayersEffect(5, TargetController.OPPONENT));
+
+        this.addAbility(sagaAbility);
     }
 
     private MaximumCarnage(final MaximumCarnage card) {
@@ -53,6 +52,7 @@ public final class MaximumCarnage extends CardImpl {
         return new MaximumCarnage(this);
     }
 }
+
 class MaximumCarnageEffect extends RestrictionEffect {
 
     MaximumCarnageEffect() {

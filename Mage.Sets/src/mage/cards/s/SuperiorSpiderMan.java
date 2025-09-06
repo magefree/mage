@@ -56,7 +56,7 @@ class SuperiorSpiderManCopyEffect extends OneShotEffect {
     SuperiorSpiderManCopyEffect() {
         super(Outcome.Copy);
         this.staticText = "as a copy of any creature card in a graveyard, except his name is Superior Spider-Man " +
-                "and he’s a 4/4 Spider Human Hero in addition to his other types. When you do, exile that card.";
+                "and he's a 4/4 Spider Human Hero in addition to his other types. When you do, exile that card.";
     }
 
     private SuperiorSpiderManCopyEffect(final SuperiorSpiderManCopyEffect effect) {
