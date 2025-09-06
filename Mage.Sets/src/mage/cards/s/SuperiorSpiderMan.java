@@ -4,8 +4,10 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopyEffect;
+import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -17,6 +19,7 @@ import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
+import mage.target.targetpointer.FixedTarget;
 import mage.util.functions.CopyApplier;
 
 import java.util.UUID;
@@ -79,7 +82,12 @@ class SuperiorSpiderManCopyEffect extends OneShotEffect {
                     applier.apply(game, newBluePrint, source, source.getSourceId());
                     CopyEffect copyEffect = new CopyEffect(Duration.Custom, newBluePrint, source.getSourceId());
                     game.addEffect(copyEffect, source);
-                    copyFromCard.moveToExile(null, "", source, game);
+
+                    ReflexiveTriggeredAbility triggeredAbility = new ReflexiveTriggeredAbility(
+                            new ExileTargetEffect().setTargetPointer(new FixedTarget(copyFromCard.getId())),
+                            false
+                    );
+                    game.fireReflexiveTriggeredAbility(triggeredAbility, source);
                 }
             }
             return true;
