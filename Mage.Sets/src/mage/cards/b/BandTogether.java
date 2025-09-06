@@ -23,7 +23,7 @@ public final class BandTogether extends CardImpl {
 
     static {
         filter.add(new AnotherTargetPredicate(1));
-        filter2.add(new AnotherTargetPredicate(2));
+        filter2.add(new AnotherTargetPredicate(3));
     }
 
     public BandTogether(UUID ownerId, CardSetInfo setInfo) {
