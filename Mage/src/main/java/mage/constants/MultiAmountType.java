@@ -15,6 +15,7 @@ public class MultiAmountType {
 
     public static final MultiAmountType P1P1 = new MultiAmountType("Add +1/+1 counters", "Distribute +1/+1 counters among creatures");
     public static final MultiAmountType COUNTERS = new MultiAmountType("Choose counters", "Move counters");
+    public static final MultiAmountType REMOVE_COUNTERS = new MultiAmountType("Choose counters", "Remove counters");
     public static final MultiAmountType CHEAT_LANDS = new MultiAmountType("Choose lands", "Add lands to your battlefield", true);
 
     private final String title;

@@ -53,7 +53,7 @@ public final class GwenStacy extends ModalDoubleFacedCard {
         // Remove two counters from Ghost-Spider: Exile the top card of your library. You may play that card this turn.
         this.getRightHalfCard().addAbility(new SimpleActivatedAbility(
                 new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn),
-                new RemoveCountersSourceCost(CounterType.P1P1.createInstance(2))));
+                new RemoveCountersSourceCost(2)));
     }
 
     private GwenStacy(final GwenStacy card) {

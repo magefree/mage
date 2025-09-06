@@ -1,21 +1,14 @@
 package mage.cards.h;
 
-import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.effects.common.RemoveUpToAmountCountersEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.CounterAnyPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -42,7 +35,7 @@ public final class HeartlessAct extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filterWithoutCounters));
 
         // • Remove up to three counters from target creature.
-        Mode mode = new Mode(new HeartlessActEffect());
+        Mode mode = new Mode(new RemoveUpToAmountCountersEffect(3));
         mode.addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addMode(mode);
     }
@@ -54,56 +47,5 @@ public final class HeartlessAct extends CardImpl {
     @Override
     public HeartlessAct copy() {
         return new HeartlessAct(this);
-    }
-}
-
-class HeartlessActEffect extends OneShotEffect {
-
-    HeartlessActEffect() {
-        super(Outcome.AIDontUseIt);
-        staticText = "Remove up to three counters from target creature";
-    }
-
-    private HeartlessActEffect(final HeartlessActEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public HeartlessActEffect copy() {
-        return new HeartlessActEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (permanent != null) {
-            int toRemove = 3;
-            int removed = 0;
-            String[] counterNames = permanent.getCounters(game).keySet().toArray(new String[0]);
-            for (String counterName : counterNames) {
-                if (controller.chooseUse(Outcome.Neutral, "Remove " + counterName + " counters?", source, game)) {
-                    if (permanent.getCounters(game).get(counterName).getCount() == 1 || (toRemove - removed == 1)) {
-                        permanent.removeCounters(counterName, 1, source, game);
-                        removed++;
-                    } else {
-                        int amount = controller.getAmount(1, Math.min(permanent.getCounters(game).get(counterName).getCount(), toRemove - removed), "How many?", source, game);
-                        if (amount > 0) {
-                            removed += amount;
-                            permanent.removeCounters(counterName, amount, source, game);
-                        }
-                    }
-                }
-                if (removed >= toRemove) {
-                    break;
-                }
-            }
-            game.addEffect(new BoostSourceEffect(removed, 0, Duration.EndOfTurn), source);
-            return true;
-        }
-        return true;
     }
 }

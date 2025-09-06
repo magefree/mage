@@ -3,19 +3,15 @@ package mage.abilities.costs.common;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
+import mage.constants.MultiAmountType;
 import mage.constants.Outcome;
 import mage.counters.Counter;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.util.RandomUtil;
+import mage.util.CardUtil;
 
-import java.util.Iterator;
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -29,6 +25,12 @@ public class RemoveCountersSourceCost extends CostImpl {
         this.amount = 1;
         this.name = "";
         this.text = "remove a counter from {this}";
+    }
+
+    public RemoveCountersSourceCost(int amount) {
+        this.amount = amount;
+        this.name = "";
+        this.text = "remove " + CardUtil.numberToText(amount) + " counters from {this}";
     }
 
     public RemoveCountersSourceCost(Counter counter) {
@@ -56,8 +58,8 @@ public class RemoveCountersSourceCost extends CostImpl {
                     .getCounters(game)
                     .values()
                     .stream()
-                    .map(Counter::getCount)
-                    .anyMatch(i -> i >= amount);
+                    .mapToInt(Counter::getCount)
+                    .sum() >= amount;
         } else {
             // specific counter
             return permanent.getCounters(game).getCount(name) >= amount;
@@ -71,36 +73,22 @@ public class RemoveCountersSourceCost extends CostImpl {
         if (player == null || permanent == null) {
             return paid;
         }
-        String toRemove;
         if (name.isEmpty()) {
-            Set<String> toChoose = new LinkedHashSet<>(permanent.getCounters(game).keySet());
-            switch (toChoose.size()) {
-                case 0:
-                    return paid;
-                case 1:
-                    toRemove = RandomUtil.randomFromCollection(toChoose);
-                    break;
-                case 2:
-                    Iterator<String> iterator = toChoose.iterator();
-                    String choice1 = iterator.next();
-                    String choice2 = iterator.next();
-                    toRemove = player.chooseUse(
-                            Outcome.UnboostCreature, "Choose a type of counter to remove",
-                            null, choice1, choice2, source, game
-                    ) ? choice1 : choice2;
-                    break;
-                default:
-                    Choice choice = new ChoiceImpl(true);
-                    choice.setChoices(toChoose);
-                    choice.setMessage("Choose a type of counter to remove");
-                    player.choose(Outcome.UnboostCreature, choice, game);
-                    toRemove = choice.getChoice();
+            List<String> toChoose = new ArrayList<>(permanent.getCounters(game).keySet());
+            if (toChoose.isEmpty()) {
+                return paid;
+            } else {
+                List<Integer> counterList = player.getMultiAmount(Outcome.UnboostCreature, toChoose, 0, amount, amount, MultiAmountType.REMOVE_COUNTERS, game);
+                for (int i = 0; i < toChoose.size(); i++) {
+                    int amountToRemove = counterList.get(i);
+                    if (amountToRemove > 0) {
+                        permanent.removeCounters(toChoose.get(i), amountToRemove, source, game);
+                    }
+                }
+                paid = true;
             }
-        } else {
-            toRemove = name;
-        }
-        if (permanent.getCounters(game).getCount(toRemove) >= amount) {
-            permanent.removeCounters(toRemove, amount, source, game);
+        } else if (permanent.getCounters(game).getCount(name) >= amount){
+            permanent.removeCounters(name, amount, source, game);
             this.paid = true;
         }
         return paid;
