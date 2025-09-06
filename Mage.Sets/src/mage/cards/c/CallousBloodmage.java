@@ -40,7 +40,7 @@ public final class CallousBloodmage extends CardImpl {
         ability.addMode(mode);
 
         // • Exile target player's graveyard.
-        mode = new Mode(new ExileGraveyardAllTargetPlayerEffect().setText("exile target player's graveyard"));
+        mode = new Mode(new ExileGraveyardAllTargetPlayerEffect());
         mode.addTarget(new TargetPlayer());
         ability.addMode(mode);
         this.addAbility(ability);

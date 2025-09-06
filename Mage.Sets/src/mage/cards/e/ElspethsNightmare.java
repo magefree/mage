@@ -58,8 +58,7 @@ public final class ElspethsNightmare extends CardImpl {
         // III - Exile target opponent's graveyard.
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_III, SagaChapter.CHAPTER_III,
-                new ExileGraveyardAllTargetPlayerEffect()
-                        .setText("exile target opponent's graveyard"),
+                new ExileGraveyardAllTargetPlayerEffect(),
                 new TargetOpponent()
         );
         this.addAbility(sagaAbility);
