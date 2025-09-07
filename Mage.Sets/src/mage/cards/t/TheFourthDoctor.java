@@ -107,7 +107,7 @@ class TheFourthDoctorPlayFromTopEffect extends PlayFromTopOfLibraryEffect {
         Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         
         return controller != null
-			    && watcher != null
+		        && watcher != null
                 && !watcher.isAbilityUsed(
                         controller.getId(), 
                         new MageObjectReference(sourcePermanent, game)
