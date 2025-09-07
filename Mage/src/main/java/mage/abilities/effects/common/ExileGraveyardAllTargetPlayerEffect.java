@@ -3,12 +3,15 @@ package mage.abilities.effects.common;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -25,7 +28,6 @@ public class ExileGraveyardAllTargetPlayerEffect extends OneShotEffect {
     public ExileGraveyardAllTargetPlayerEffect(boolean toUniqueExile) {
         super(Outcome.Exile);
         this.toUniqueExile = toUniqueExile;
-//        staticText = "exile target player's graveyard";
     }
 
     private ExileGraveyardAllTargetPlayerEffect(final ExileGraveyardAllTargetPlayerEffect effect) {
@@ -44,20 +46,20 @@ public class ExileGraveyardAllTargetPlayerEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        boolean result = false;
+        Set<Card> cardsToExile = new HashSet<>();
+
         for (UUID playerId : this.getTargetPointer().getTargets(game, source)) {
             Player targetPlayer = game.getPlayer(playerId);
             if (targetPlayer == null) {
                 continue;
             }
-            result |= toUniqueExile ?
-                    controller.moveCardsToExile(
-                            targetPlayer.getGraveyard().getCards(game), source, game, true,
-                            CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source)
-                    ) : controller.moveCards(targetPlayer.getGraveyard(), Zone.EXILED, source, game);
-
+            cardsToExile.addAll(targetPlayer.getGraveyard().getCards(game));
         }
-        return result;
+        return toUniqueExile ?
+                controller.moveCardsToExile(
+                        cardsToExile, source, game, true,
+                        CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source)
+                ) : controller.moveCards(cardsToExile, Zone.EXILED, source, game);
     }
 
     @Override
