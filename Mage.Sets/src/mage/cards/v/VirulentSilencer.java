@@ -38,7 +38,7 @@ public final class VirulentSilencer extends CardImpl {
         // Whenever a nontoken artifact creature you control deals combat damage to a player, that player gets two poison counters.
         this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(
                 new AddPoisonCounterTargetEffect(2), filter,
-                false, SetTargetPointer.PLAYER, true
+                false, SetTargetPointer.PLAYER, true, true
         ));
     }
 
