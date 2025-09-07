@@ -81,6 +81,6 @@ public class RemoveUpToAmountCountersEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return "remove up to " + CardUtil.numberToText(this.amount.toString()) + " counters from " + getTargetPointer().describeTargets(mode.getTargets(), "target permanent");
+        return "remove up to " + CardUtil.numberToText(this.amount.toString()) + " counters from " + getTargetPointer().describeTargets(mode.getTargets(), "that permanent");
     }
 }
