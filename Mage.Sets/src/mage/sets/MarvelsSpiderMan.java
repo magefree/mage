@@ -273,6 +273,8 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("The Clone Saga", 219, Rarity.RARE, mage.cards.t.TheCloneSaga.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Clone Saga", 28, Rarity.RARE, mage.cards.t.TheCloneSaga.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Spot's Portal", 68, Rarity.UNCOMMON, mage.cards.t.TheSpotsPortal.class));
+        cards.add(new SetCardInfo("The Spot, Living Portal", 153, Rarity.RARE, mage.cards.t.TheSpotLivingPortal.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Spot, Living Portal", 231, Rarity.RARE, mage.cards.t.TheSpotLivingPortal.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thwip!", 20, Rarity.COMMON, mage.cards.t.Thwip.class));
         cards.add(new SetCardInfo("Tombstone, Career Criminal", 70, Rarity.UNCOMMON, mage.cards.t.TombstoneCareerCriminal.class));
         cards.add(new SetCardInfo("Ultimate Green Goblin", 157, Rarity.RARE, mage.cards.u.UltimateGreenGoblin.class, NON_FULL_USE_VARIOUS));
