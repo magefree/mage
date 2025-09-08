@@ -125,7 +125,7 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Mary Jane Watson", 134, Rarity.RARE, mage.cards.m.MaryJaneWatson.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mary Jane Watson", 229, Rarity.RARE, mage.cards.m.MaryJaneWatson.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Masked Meower", 82, Rarity.COMMON, mage.cards.m.MaskedMeower.class));
-        cards.add(new SetCardInfo("Maximum Carnage", 225, Rarity.RARE, mage.cards.m.MaximumCarnage.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Maximum Carnage", 225, Rarity.RARE, mage.cards.m.MaximumCarnage.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Maximum Carnage", 83, Rarity.RARE, mage.cards.m.MaximumCarnage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mechanical Mobster", 168, Rarity.COMMON, mage.cards.m.MechanicalMobster.class));
         cards.add(new SetCardInfo("Merciless Enforcers", 58, Rarity.COMMON, mage.cards.m.MercilessEnforcers.class));
@@ -271,7 +271,7 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Symbiote Spider-Man", 217, Rarity.RARE, mage.cards.s.SymbioteSpiderMan.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Taxi Driver", 97, Rarity.COMMON, mage.cards.t.TaxiDriver.class));
         cards.add(new SetCardInfo("Terrific Team-Up", 120, Rarity.UNCOMMON, mage.cards.t.TerrificTeamUp.class));
-        cards.add(new SetCardInfo("The Clone Saga", 219, Rarity.RARE, mage.cards.t.TheCloneSaga.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Clone Saga", 219, Rarity.RARE, mage.cards.t.TheCloneSaga.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("The Clone Saga", 28, Rarity.RARE, mage.cards.t.TheCloneSaga.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Death of Gwen Stacy", 223, Rarity.RARE, mage.cards.t.TheDeathOfGwenStacy.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("The Death of Gwen Stacy", 54, Rarity.RARE, mage.cards.t.TheDeathOfGwenStacy.class, NON_FULL_USE_VARIOUS));
