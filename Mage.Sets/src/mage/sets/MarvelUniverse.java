@@ -18,7 +18,7 @@ public class MarvelUniverse extends ExpansionSet {
     }
 
     private MarvelUniverse() {
-        super("Marvel Universe", "MAR", ExpansionSet.buildDate(2025, 9, 26), SetType.EXPANSION);
+        super("Marvel Universe", "MAR", ExpansionSet.buildDate(2025, 9, 26), SetType.SUPPLEMENTAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
