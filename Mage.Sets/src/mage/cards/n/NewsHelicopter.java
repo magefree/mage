@@ -8,7 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.game.permanent.token.CitizenGreenWhiteToken;
+import mage.game.permanent.token.HumanCitizenToken;
 
 import java.util.UUID;
 
@@ -28,7 +28,7 @@ public final class NewsHelicopter extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When this creature enters, create a 1/1 green and white Human Citizen creature token.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new CitizenGreenWhiteToken())));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new HumanCitizenToken())));
     }
 
     private NewsHelicopter(final NewsHelicopter card) {

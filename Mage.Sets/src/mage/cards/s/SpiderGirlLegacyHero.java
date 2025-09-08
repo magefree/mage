@@ -14,7 +14,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.game.permanent.token.CitizenGreenWhiteToken;
+import mage.game.permanent.token.HumanCitizenToken;
 
 import java.util.UUID;
 
@@ -40,7 +40,7 @@ public final class SpiderGirlLegacyHero extends CardImpl {
         )));
 
         // When Spider-Girl leaves the battlefield, create a 1/1 green and white Human Citizen creature token.
-        this.addAbility(new LeavesBattlefieldTriggeredAbility(new CreateTokenEffect(new CitizenGreenWhiteToken())));
+        this.addAbility(new LeavesBattlefieldTriggeredAbility(new CreateTokenEffect(new HumanCitizenToken())));
     }
 
     private SpiderGirlLegacyHero(final SpiderGirlLegacyHero card) {
