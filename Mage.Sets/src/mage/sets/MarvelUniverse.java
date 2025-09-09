@@ -46,8 +46,7 @@ public class MarvelUniverse extends ExpansionSet {
         cards.add(new SetCardInfo("Path to Exile", 4, Rarity.MYTHIC, mage.cards.p.PathToExile.class));
         cards.add(new SetCardInfo("Ponder", 13, Rarity.MYTHIC, mage.cards.p.Ponder.class));
         cards.add(new SetCardInfo("Reanimate", 20, Rarity.MYTHIC, mage.cards.r.Reanimate.class));
-        cards.add(new SetCardInfo("Relentless Assault", 25, Rarity.MYTHIC, mage.cards.r.RelentlessAssault.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Relentless Assault", 9999, Rarity.MYTHIC, mage.cards.r.RelentlessAssault.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Relentless Assault", 25, Rarity.MYTHIC, mage.cards.r.RelentlessAssault.class));
         cards.add(new SetCardInfo("Reprieve", 5, Rarity.MYTHIC, mage.cards.r.Reprieve.class));
         cards.add(new SetCardInfo("Rest in Peace", 6, Rarity.MYTHIC, mage.cards.r.RestInPeace.class));
         cards.add(new SetCardInfo("Rite of Replication", 14, Rarity.MYTHIC, mage.cards.r.RiteOfReplication.class));
