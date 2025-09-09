@@ -1,6 +1,5 @@
 package mage.cards;
 
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.constants.*;
 import mage.game.Game;
@@ -112,17 +111,6 @@ public class ModalDoubleFacedCardHalfImpl extends CardImpl implements ModalDoubl
     @Override
     public ModalDoubleFacedCard getParentCard() {
         return this.parentCard;
-    }
-
-    @Override
-    public void setPT(int power, int toughness) {
-        this.setPT(new MageInt(power), new MageInt(toughness));
-    }
-
-    @Override
-    public void setPT(MageInt power, MageInt toughness) {
-        this.power = power;
-        this.toughness = toughness;
     }
 
     @Override

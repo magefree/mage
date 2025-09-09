@@ -1214,6 +1214,16 @@ public class Spell extends StackObjectImpl implements Card {
     }
 
     @Override
+    public void setPT(int power, int toughness) {
+        throw new UnsupportedOperationException("Not supported.");
+    }
+
+    @Override
+    public void setPT(MageInt power, MageInt toughness) {
+        throw new UnsupportedOperationException("Not supported.");
+    }
+
+    @Override
     public boolean cantBeAttachedBy(MageObject attachment, Ability source, Game game, boolean silentMode) {
         throw new UnsupportedOperationException("Not supported.");
     }
