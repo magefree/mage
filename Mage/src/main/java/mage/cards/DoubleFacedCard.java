@@ -267,8 +267,9 @@ public abstract class DoubleFacedCard extends CardImpl implements CardWithHalves
         // default abilities added on card creation from card type and can't be skipped
 
         // skip cast spell
-        if (ability instanceof SpellAbility && ((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.MODAL) {
-            return true;
+        if (ability instanceof SpellAbility) {
+            SpellAbilityType type = ((SpellAbility) ability).getSpellAbilityType();
+            return type == SpellAbilityType.MODAL || type == SpellAbilityType.TRANSFORMED;
         }
 
         // skip play land
