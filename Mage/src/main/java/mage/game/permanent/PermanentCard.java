@@ -46,7 +46,7 @@ public class PermanentCard extends PermanentImpl {
         // if you use it in test code or for permanent's copy effects then call CardUtil.getDefaultCardSideForBattlefield for default side
         // it's a basic check and still allows to create permanent from instant or sorcery
         boolean goodForBattlefield = true;
-        if (card instanceof ModalDoubleFacedCard) {
+        if (card instanceof DoubleFacedCard) {
             goodForBattlefield = false;
         } else if (card instanceof SplitCard) {
             // fused spells allowed (it uses main card)

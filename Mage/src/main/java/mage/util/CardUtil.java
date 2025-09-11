@@ -1261,8 +1261,8 @@ public final class CardUtil {
             permCard = card;
         } else if (card instanceof CardWithSpellOption) {
             permCard = card;
-        } else if (card instanceof ModalDoubleFacedCard) {
-            permCard = ((ModalDoubleFacedCard) card).getLeftHalfCard();
+        } else if (card instanceof DoubleFacedCard) {
+            permCard = ((DoubleFacedCard) card).getLeftHalfCard();
         } else {
             permCard = card;
         }

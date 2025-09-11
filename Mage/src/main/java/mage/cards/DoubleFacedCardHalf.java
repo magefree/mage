@@ -9,16 +9,16 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * @author JayDi85
+ * @author JayDi85 - originally from ModalDoubleFaceCardHalf
  */
-public class ModalDoubleFacedCardHalfImpl extends CardImpl implements ModalDoubleFacedCardHalf {
+public abstract class DoubleFacedCardHalf extends CardImpl implements SubCard<DoubleFacedCard> {
 
-    ModalDoubleFacedCard parentCard;
+    protected DoubleFacedCard parentCard;
 
-    public ModalDoubleFacedCardHalfImpl(
+    public DoubleFacedCardHalf(
             UUID ownerId, CardSetInfo setInfo,
             SuperType[] cardSuperTypes, CardType[] cardTypes, SubType[] cardSubTypes,
-            String costs, ModalDoubleFacedCard parentCard, SpellAbilityType spellAbilityType
+            String costs, DoubleFacedCard parentCard, SpellAbilityType spellAbilityType
     ) {
         super(ownerId, setInfo, cardTypes, costs, spellAbilityType);
         this.supertype.addAll(Arrays.asList(cardSuperTypes));
@@ -26,7 +26,7 @@ public class ModalDoubleFacedCardHalfImpl extends CardImpl implements ModalDoubl
         this.parentCard = parentCard;
     }
 
-    protected ModalDoubleFacedCardHalfImpl(final ModalDoubleFacedCardHalfImpl card) {
+    protected DoubleFacedCardHalf(final DoubleFacedCardHalf card) {
         super(card);
         this.parentCard = card.parentCard;
     }
@@ -64,18 +64,19 @@ public class ModalDoubleFacedCardHalfImpl extends CardImpl implements ModalDoubl
     }
 
     @Override
-    public ModalDoubleFacedCard getMainCard() {
+    public Card getMainCard() {
         return parentCard;
     }
 
     @Override
     public void setZone(Zone zone, Game game) {
-        // see ModalDoubleFacedCard.checkGoodZones for details
+        // see DoubleFacedCard.checkGoodZones for details
         game.setZone(parentCard.getId(), zone);
         game.setZone(this.getId(), zone);
 
         // find another side to sync
-        ModalDoubleFacedCardHalf otherSide;
+        Card otherSide;
+
         if (!parentCard.getLeftHalfCard().getId().equals(this.getId())) {
             otherSide = parentCard.getLeftHalfCard();
         } else if (!parentCard.getRightHalfCard().getId().equals(this.getId())) {
@@ -95,22 +96,17 @@ public class ModalDoubleFacedCardHalfImpl extends CardImpl implements ModalDoubl
                 break;
         }
 
-        ModalDoubleFacedCard.checkGoodZones(game, parentCard);
+        DoubleFacedCard.checkGoodZones(game, parentCard);
     }
 
     @Override
-    public ModalDoubleFacedCardHalfImpl copy() {
-        return new ModalDoubleFacedCardHalfImpl(this);
-    }
-
-    @Override
-    public void setParentCard(ModalDoubleFacedCard card) {
+    public void setParentCard(DoubleFacedCard card) {
         this.parentCard = card;
     }
 
     @Override
-    public ModalDoubleFacedCard getParentCard() {
-        return this.parentCard;
+    public DoubleFacedCard getParentCard() {
+        return parentCard;
     }
 
     @Override
