@@ -164,6 +164,11 @@ public class Commander extends CommandObjectImpl {
     }
 
     @Override
+    public boolean hasName(String name) {
+        return sourceObject.hasName(name);
+    }
+
+    @Override
     public List<CardType> getCardType(Game game) {
         return sourceObject.getCardType(game);
     }
