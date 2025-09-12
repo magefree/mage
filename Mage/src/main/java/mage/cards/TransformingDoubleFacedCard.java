@@ -33,12 +33,11 @@ public abstract class TransformingDoubleFacedCard extends DoubleFacedCard {
         leftHalfCard = new TransformingDoubleFacedCardHalf(
                 this.getOwnerId(), setInfo.copy(),
                 superTypesLeft, typesLeft, subTypesLeft, costsLeft,
-                this, SpellAbilityType.BASE
+                this, SpellAbilityType.TRANSFORMED_LEFT
         );
         rightHalfCard = new TransformingDoubleFacedCardHalf(
                 this.getOwnerId(), new CardSetInfo(secondSideName, setInfo),
-                superTypesRight, typesRight, subTypesRight, colorRight,
-                costsLeft, this
+                superTypesRight, typesRight, subTypesRight, colorRight, this
         );
     }
 

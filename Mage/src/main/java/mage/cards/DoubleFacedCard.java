@@ -269,7 +269,7 @@ public abstract class DoubleFacedCard extends CardImpl implements CardWithHalves
         // skip cast spell
         if (ability instanceof SpellAbility) {
             SpellAbilityType type = ((SpellAbility) ability).getSpellAbilityType();
-            return type == SpellAbilityType.MODAL || type == SpellAbilityType.TRANSFORMED;
+            return type == SpellAbilityType.MODAL || type == SpellAbilityType.TRANSFORMED || type == SpellAbilityType.TRANSFORMED_RIGHT;
         }
 
         // skip play land

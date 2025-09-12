@@ -426,13 +426,19 @@ public class CardView extends SimpleCardView {
                 fullCardName = card.getName(); // split card contains full name as normal
                 this.manaCostLeftStr = splitCard.getLeftHalfCard().getManaCostSymbols();
                 this.manaCostRightStr = splitCard.getRightHalfCard().getManaCostSymbols();
-            } else if (card instanceof DoubleFacedCard) {
+            } else if (card instanceof ModalDoubleFacedCard) {
                 this.isDoubleFacedCard = true;
                 DoubleFacedCard mainCard = ((DoubleFacedCard) card);
                 fullCardName = mainCard.getLeftHalfCard().getName() + MockCard.MODAL_DOUBLE_FACES_NAME_SEPARATOR + mainCard.getRightHalfCard().getName();
                 this.manaCostLeftStr = mainCard.getLeftHalfCard().getManaCostSymbols();
                 this.manaCostRightStr = mainCard.getRightHalfCard().getManaCostSymbols();
-            } else if (card instanceof CardWithSpellOption) {
+            } else if (card instanceof TransformingDoubleFacedCard) {
+                this.isDoubleFacedCard = true;
+                DoubleFacedCard mainCard = ((DoubleFacedCard) card);
+                fullCardName = mainCard.getLeftHalfCard().getName() + MockCard.MODAL_DOUBLE_FACES_NAME_SEPARATOR + mainCard.getRightHalfCard().getName();
+                this.manaCostLeftStr = mainCard.getLeftHalfCard().getManaCostSymbols();
+                this.manaCostRightStr = new ArrayList<>();
+            }  else if (card instanceof CardWithSpellOption) {
                 this.isSplitCard = true;
                 CardWithSpellOption mainCard = ((CardWithSpellOption) card);
                 leftSplitName = mainCard.getName();

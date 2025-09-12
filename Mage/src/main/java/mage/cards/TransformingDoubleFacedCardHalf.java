@@ -25,9 +25,8 @@ public class TransformingDoubleFacedCardHalf extends DoubleFacedCardHalf {
 
     public TransformingDoubleFacedCardHalf(
             UUID ownerId, CardSetInfo setInfo,
-            SuperType[] superTypesRight, CardType[] typesRight, SubType[] subTypesRight, String colorRight,
-            String costsLeft, TransformingDoubleFacedCard parentCard) {
-        super(ownerId, setInfo, superTypesRight, typesRight, subTypesRight, costsLeft, parentCard, SpellAbilityType.TRANSFORMED);
+            SuperType[] superTypesRight, CardType[] typesRight, SubType[] subTypesRight, String colorRight, TransformingDoubleFacedCard parentCard) {
+        super(ownerId, setInfo, superTypesRight, typesRight, subTypesRight, "", parentCard, SpellAbilityType.TRANSFORMED_RIGHT);
         this.getColor().setColor(new ObjectColor(colorRight));
     }
 
