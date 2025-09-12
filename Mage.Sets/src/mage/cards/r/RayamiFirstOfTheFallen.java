@@ -74,7 +74,7 @@ class RayamiFirstOfTheFallenEffect extends ContinuousEffectImpl {
             return false;
         }
         game.getExile()
-                .getAllCards(game)
+                .getCardsInRange(game, sourcePermanent.getControllerId())
                 .stream()
                 .filter(card1 -> card1.isCreature(game))
                 .filter(card -> card.getCounters(game).getCount(CounterType.BLOOD) > 0)

@@ -128,7 +128,7 @@ class CelestialDawnToWhiteEffect extends ContinuousEffectImpl {
                 }
             }
             // Exile
-            for (Card card : game.getExile().getAllCardsByRange(game, controller.getId())) {
+            for (Card card : game.getExile().getCardsInRange(game, controller.getId())) {
                 if (card.isOwnedBy(controller.getId())) {
                     setColor(card.getColor(game), game);
                 }

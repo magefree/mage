@@ -124,7 +124,7 @@ class RavenloftAdventurerLifeEffect extends OneShotEffect {
         }
         int count = game
                 .getExile()
-                .getAllCards(game, player.getId())
+                .getCardsOwned(game, player.getId())
                 .stream()
                 .filter(card -> card.getCounters(game).containsKey(CounterType.HIT))
                 .mapToInt(x -> 1)

@@ -85,30 +85,26 @@ class FalkenrathGorgerEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Map<UUID, MadnessAbility> usedMadnessAbilities = new HashMap<>();
-            // hand
-            for (Card card : controller.getHand().getCards(filter, game)) {
-                addMadnessToCard(game, card, usedMadnessAbilities);
-            }
-            // graveyard
-            for (Card card : controller.getGraveyard().getCards(filter, game)) {
-                addMadnessToCard(game, card, usedMadnessAbilities);
-            }
-            // Exile
-            for (Card card : game.getExile().getAllCards(game)) {
-                if (filter.match(card, controller.getId(), source, game)) {
-                    if (card.isOwnedBy(controller.getId())) {
-                        addMadnessToCard(game, card, usedMadnessAbilities);
-                    }
-                }
-            }
-            madnessAbilities.clear();
-            madnessAbilities.putAll(usedMadnessAbilities);
-            return true;
+        if (controller == null) {
+            return false;
         }
+        Map<UUID, MadnessAbility> usedMadnessAbilities = new HashMap<>();
+        // hand
+        for (Card card : controller.getHand().getCards(filter, game)) {
+            addMadnessToCard(game, card, usedMadnessAbilities);
+        }
+        // graveyard
+        for (Card card : controller.getGraveyard().getCards(filter, game)) {
+            addMadnessToCard(game, card, usedMadnessAbilities);
+        }
+        // Exile
+        for (Card card : game.getExile().getCardsOwned(filter, controller.getId(), source, game)) {
+            addMadnessToCard(game, card, usedMadnessAbilities);
+        }
+        madnessAbilities.clear();
+        madnessAbilities.putAll(usedMadnessAbilities);
+        return true;
 
-        return false;
     }
 
     private void addMadnessToCard(Game game, Card card, Map<UUID, MadnessAbility> usedMadnessAbilities) {

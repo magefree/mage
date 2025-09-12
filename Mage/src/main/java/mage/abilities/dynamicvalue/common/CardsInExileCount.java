@@ -74,7 +74,7 @@ public enum CardsInExileCount implements DynamicValue {
         return playerIds.stream()
                 .map(game::getPlayer)
                 .filter(Objects::nonNull)
-                .map(player -> game.getExile().getAllCards(game, player.getId()))
+                .map(player -> game.getExile().getCardsOwned(game, player.getId()))
                 .flatMap(Collection::stream)
                 .filter(Objects::nonNull);
     }

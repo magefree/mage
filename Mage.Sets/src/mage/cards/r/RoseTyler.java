@@ -85,7 +85,7 @@ enum RoseTylerValue implements DynamicValue {
                 .count(filter.getPermanentFilter(), sourceAbility.getControllerId(), sourceAbility, game)
                 + game
                 .getExile()
-                .getAllCards(game, sourceAbility.getControllerId())
+                .getCardsOwned(game, sourceAbility.getControllerId())
                 .stream()
                 .filter(card -> card.isOwnedBy(sourceAbility.getControllerId()))
                 .mapToInt(card -> filter.getCardFilter().match(card, game) ? 1 : 0)
