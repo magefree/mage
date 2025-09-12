@@ -25,7 +25,7 @@ public class TillerEngineTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, land);
 
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, land);
-        setChoice(playerA, "Whenever a land enters"); // order triggers
+        setChoice(playerA, "Whenever a land you control enters"); // order triggers
         setModeChoice(playerA, "1");
 
         setStrictChooseMode(true);
@@ -45,7 +45,7 @@ public class TillerEngineTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, land);
 
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, land);
-        setChoice(playerA, "Whenever a land enters"); // order triggers
+        setChoice(playerA, "Whenever a land you control enters"); // order triggers
         setModeChoice(playerA, "2");
         addTarget(playerA, centaur);
 

@@ -7,6 +7,7 @@ import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -25,6 +26,8 @@ public class GreatestAmongPermanentsValue implements DynamicValue {
             = new GreatestAmongPermanentsValue(Quality.Power, StaticFilters.FILTER_CONTROLLED_CREATURES);
     public static final GreatestAmongPermanentsValue POWER_OTHER_CONTROLLED_CREATURES
             = new GreatestAmongPermanentsValue(Quality.Power, StaticFilters.FILTER_OTHER_CONTROLLED_CREATURES);
+    public static final GreatestAmongPermanentsValue POWER_ALL_CREATURES
+            = new GreatestAmongPermanentsValue(Quality.Power, new FilterCreaturePermanent("creatures on the battlefield"));
     public static final GreatestAmongPermanentsValue TOUGHNESS_CONTROLLED_CREATURES
             = new GreatestAmongPermanentsValue(Quality.Toughness, StaticFilters.FILTER_CONTROLLED_CREATURES);
     public static final GreatestAmongPermanentsValue TOUGHNESS_OTHER_CONTROLLED_CREATURES

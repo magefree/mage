@@ -24,6 +24,7 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
     protected boolean independentEffect;
     protected String targetObjectName;
     protected boolean doesntRemoveItself = false;
+    protected boolean useQuotes = false;
 
     public GainAbilityAttachedEffect(Ability ability, AttachmentType attachmentType) {
         this(ability, attachmentType, Duration.WhileOnBattlefield);
@@ -68,6 +69,7 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
         this.independentEffect = effect.independentEffect;
         this.targetObjectName = effect.targetObjectName;
         this.doesntRemoveItself = effect.doesntRemoveItself;
+        this.useQuotes = effect.useQuotes;
     }
 
     @Override
@@ -130,20 +132,27 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
         return this;
     }
 
+    public GainAbilityAttachedEffect withQuotes(boolean useQuotes) {
+        this.useQuotes = useQuotes;
+        return this;
+    }
+
     @Override
     public String getText(Mode mode) {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
         StringBuilder sb = new StringBuilder();
-        sb.append(attachmentType.verb().toLowerCase());
-        sb.append(" " + targetObjectName + " ");
+        if (attachmentType != null) {
+            sb.append(attachmentType.verb().toLowerCase());
+            sb.append(" " + targetObjectName + " ");
+        }
         if (duration == Duration.WhileOnBattlefield) {
             sb.append("has ");
         } else {
             sb.append("gains ");
         }
-        boolean quotes = ability instanceof SimpleActivatedAbility
+        boolean quotes = useQuotes || ability instanceof SimpleActivatedAbility
                 || ability instanceof TriggeredAbility
                 || ability instanceof LoyaltyAbility
                 || ability instanceof ManaAbility
@@ -151,7 +160,7 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
         if (quotes) {
             sb.append('"');
         }
-        sb.append(CardUtil.stripReminderText(ability.getRule("This " + targetObjectName)));
+        sb.append(CardUtil.stripReminderText(ability.getRule("this " + targetObjectName)));
         if (quotes) {
             sb.append('"');
         }

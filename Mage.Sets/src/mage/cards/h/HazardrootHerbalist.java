@@ -2,7 +2,7 @@ package mage.cards.h;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.AttacksCreatureYouControlTriggeredAbility;
+import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.TargetObjectMatchesFilterCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -35,7 +35,7 @@ public final class HazardrootHerbalist extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever you attack, target creature you control gets +1/+0 until end of turn. If that creature is a token, it also gains deathtouch until end of turn.
-        Ability ability = new AttacksCreatureYouControlTriggeredAbility(new BoostTargetEffect(1, 0));
+        Ability ability = new AttacksWithCreaturesTriggeredAbility(new BoostTargetEffect(1, 0), 1);
         ability.addEffect(new ConditionalOneShotEffect(
                 new AddContinuousEffectToGame(new GainAbilityTargetEffect(DeathtouchAbility.getInstance())),
                 condition, "if that creature is a token, it also gains deathtouch until end of turn"

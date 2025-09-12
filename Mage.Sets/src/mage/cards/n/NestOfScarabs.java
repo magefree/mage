@@ -1,12 +1,13 @@
 package mage.cards.n;
 
-import mage.abilities.common.PutCounterOnCreatureTriggeredAbility;
+import mage.abilities.common.PutCounterOnPermanentTriggeredAbility;
 import mage.abilities.dynamicvalue.common.EffectKeyValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.NestOfScarabsBlackInsectToken;
 
 import java.util.UUID;
@@ -20,8 +21,10 @@ public final class NestOfScarabs extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
 
         // Whenever you put one or more -1/-1 counters on a creature, create that many 1/1 black Insect creature tokens.
-        this.addAbility(new PutCounterOnCreatureTriggeredAbility(new CreateTokenEffect(new NestOfScarabsBlackInsectToken(), new EffectKeyValue("countersAdded"))
-                .setText("create that many 1/1 black Insect creature tokens"), CounterType.M1M1.createInstance()));
+        this.addAbility(new PutCounterOnPermanentTriggeredAbility(
+                new CreateTokenEffect(new NestOfScarabsBlackInsectToken(),
+                        new EffectKeyValue("countersAdded", "that many")),
+                CounterType.M1M1, StaticFilters.FILTER_PERMANENT_CREATURE));
     }
 
     private NestOfScarabs(final NestOfScarabs card) {

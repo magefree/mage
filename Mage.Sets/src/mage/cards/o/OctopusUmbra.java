@@ -48,7 +48,7 @@ public final class OctopusUmbra extends CardImpl {
 
         // Enchanted creature has base power and toughness 8/8 and has "Whenever this creature attacks, you may tap target creature with power 8 or less."
         Ability abilityToAdd = new AttacksTriggeredAbility(new TapTargetEffect(), true);
-        abilityToAdd.addTarget(new TargetCreaturePermanent(filter));
+        abilityToAdd.addTarget(new TargetPermanent(filter));
         ability = new SimpleStaticAbility(
                 new SetBasePowerToughnessAttachedEffect(8, 8, AttachmentType.AURA)
         );

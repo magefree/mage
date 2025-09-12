@@ -1,27 +1,26 @@
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class PitKeeper extends CardImpl {
+
+    private static final Condition condition = new CardsInControllerGraveyardCondition(4, StaticFilters.FILTER_CARD_CREATURES);
 
     public PitKeeper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
@@ -31,12 +30,9 @@ public final class PitKeeper extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Pit Keeper enters the battlefield, if you have four or more creature cards in your graveyard, you may return target creature card from your graveyard to your hand.
-        TriggeredAbility triggeredAbility = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), true);
-        triggeredAbility.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                triggeredAbility,
-                new CreatureCardsInControllerGraveyardCondition(4),
-                "When {this} enters, if you have four or more creature cards in your graveyard, you may return target creature card from your graveyard to your hand."));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), true).withInterveningIf(condition);
+        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
+        this.addAbility(ability);
     }
 
     private PitKeeper(final PitKeeper card) {
@@ -46,23 +42,5 @@ public final class PitKeeper extends CardImpl {
     @Override
     public PitKeeper copy() {
         return new PitKeeper(this);
-    }
-}
-
-class CreatureCardsInControllerGraveyardCondition implements Condition {
-
-    private int value;
-
-    public CreatureCardsInControllerGraveyardCondition(int value) {
-        this.value = value;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player p = game.getPlayer(source.getControllerId());
-        if (p != null && p.getGraveyard().count(StaticFilters.FILTER_CARD_CREATURE, game) >= value) {
-            return true;
-        }
-        return false;
     }
 }

@@ -27,13 +27,13 @@ public class WandOfVertebraeTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, wandOfVertebrae);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
         addCard(Zone.GRAVEYARD, playerA, lavaCoil);
-
-        setStrictChooseMode(true);
+        addCard(Zone.GRAVEYARD, playerA, "Grizzly Bears", 10);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}, {T}");
         addTarget(playerA, lavaCoil);
         addTarget(playerA, TestPlayer.TARGET_SKIP); // must choose 1 of 5
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
 

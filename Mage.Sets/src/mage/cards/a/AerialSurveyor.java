@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.common.LandsYouControlHint;
@@ -14,10 +13,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterBasicLandCard;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.permanent.DefendingPlayerControlsSourceAttackingPredicate;
 import mage.game.Controllable;
@@ -33,8 +30,6 @@ import java.util.stream.Collectors;
  */
 public final class AerialSurveyor extends CardImpl {
 
-    private static final FilterCard filter = new FilterBasicLandCard(SubType.PLAINS);
-
     public AerialSurveyor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}{W}");
 
@@ -46,13 +41,10 @@ public final class AerialSurveyor extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever Aerial Surveyor attacks, if defending player controls more lands than you, search your library for a basic Plains card, put it onto the battlefield tapped, then shuffle.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new AttacksTriggeredAbility(
-                        new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), true)
-                ), AerialSurveyorCondition.instance, "Whenever {this} attacks, if defending player " +
-                "controls more lands than you, search your library for a basic Plains card, " +
-                "put it onto the battlefield tapped, then shuffle."
-        ).addHint(LandsYouControlHint.instance).addHint(AerialSurveyorHint.instance));
+        this.addAbility(new AttacksTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_PLAINS), true))
+                .withInterveningIf(AerialSurveyorCondition.instance)
+                .addHint(LandsYouControlHint.instance)
+                .addHint(AerialSurveyorHint.instance));
 
         // Crew 2
         this.addAbility(new CrewAbility(2));
@@ -84,6 +76,11 @@ enum AerialSurveyorCondition implements Condition {
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND,
                 source.getControllerId(), source, game
         );
+    }
+
+    @Override
+    public String toString() {
+        return "defending player controls more lands than you";
     }
 }
 

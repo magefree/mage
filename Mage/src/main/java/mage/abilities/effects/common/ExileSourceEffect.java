@@ -1,6 +1,5 @@
 package mage.abilities.effects.common;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -59,7 +58,7 @@ public class ExileSourceEffect extends OneShotEffect {
         UUID exileZoneId = null;
         String exileZoneName = "";
         if (toUniqueExileZone) {
-            exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+            exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getStackMomentSourceZCC());
             exileZoneName = card.getName();
         }
         return controller.moveCardsToExile(card, source, game, true, exileZoneId, exileZoneName);

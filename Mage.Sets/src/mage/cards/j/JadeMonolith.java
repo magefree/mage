@@ -1,7 +1,6 @@
 
 package mage.cards.j;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -12,8 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.filter.FilterObject;
+import mage.filter.FilterSource;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
@@ -23,14 +21,15 @@ import mage.players.Player;
 import mage.target.TargetSource;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Quercitron
  */
 public final class JadeMonolith extends CardImpl {
 
     public JadeMonolith(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // {1}: The next time a source of your choice would deal damage to target creature this turn, that source deals that damage to you instead.
         Ability ability = new SimpleActivatedAbility(new JadeMonolithRedirectionEffect(), new GenericManaCost(1));
@@ -51,13 +50,13 @@ public final class JadeMonolith extends CardImpl {
 class JadeMonolithRedirectionEffect extends ReplacementEffectImpl {
 
     private final TargetSource targetSource;
-    
+
     public JadeMonolithRedirectionEffect() {
         super(Duration.OneUse, Outcome.RedirectDamage);
         this.staticText = "The next time a source of your choice would deal damage to target creature this turn, that source deals that damage to you instead";
-        this.targetSource = new TargetSource(new FilterObject("source of your choice"));
+        this.targetSource = new TargetSource(new FilterSource("source of your choice"));
     }
-    
+
     private JadeMonolithRedirectionEffect(final JadeMonolithRedirectionEffect effect) {
         super(effect);
         this.targetSource = effect.targetSource.copy();
@@ -96,11 +95,11 @@ class JadeMonolithRedirectionEffect extends ReplacementEffectImpl {
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == EventType.DAMAGE_PERMANENT;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return event.getSourceId().equals(targetSource.getFirstTarget())
                 && event.getTargetId().equals(source.getFirstTarget());
     }
-    
+
 }

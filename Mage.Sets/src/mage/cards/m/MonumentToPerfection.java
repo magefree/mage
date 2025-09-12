@@ -56,7 +56,6 @@ public final class MonumentToPerfection extends CardImpl {
 
         // {3}: Monument to Perfection becomes a 9/9 Phyrexian Construct artifact creature, loses all abilities, and gains indestructible and toxic 9. Activate only if there are nine or more lands with different names among the basic, Sphere, and Locus lands you control.
         this.addAbility(new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD,
                 new BecomesCreatureSourceEffect(new CreatureToken(
                         9, 9, "9/9 Phyrexian Construct artifact creature, " +
                         "loses all abilities, and gains indestructible and toxic 9", SubType.PHYREXIAN, SubType.CONSTRUCT

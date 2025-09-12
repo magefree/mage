@@ -13,7 +13,10 @@ import mage.abilities.hint.common.CovenHint;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.AbilityWord;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.game.permanent.token.HumanToken;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -37,8 +40,8 @@ public final class DawnhartMentor extends CardImpl {
 
         // Coven — {5}{G}: Target creature you control gets +3/+3 and gains trample until end of turn. Activate only if you control three or more creatures with different powers.
         Ability ability = new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD, new BoostTargetEffect(3, 3)
-                .setText("target creature you control gets +3/+3"),
+                new BoostTargetEffect(3, 3)
+                        .setText("target creature you control gets +3/+3"),
                 new ManaCostsImpl<>("{5}{G}"), CovenCondition.instance
         );
         ability.addEffect(new GainAbilityTargetEffect(

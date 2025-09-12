@@ -84,7 +84,7 @@ class ShurikenEffect extends OneShotEffect {
             return true;
         }
         game.addEffect(new GainControlTargetEffect(
-                Duration.Custom, true, attached.getControllerId()
+                Duration.Custom, true, targetedPermanent.getControllerId()
         ).setTargetPointer(new FixedTarget(equipment, game)), source);
         return true;
     }

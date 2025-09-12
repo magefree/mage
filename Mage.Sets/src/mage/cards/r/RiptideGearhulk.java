@@ -13,7 +13,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.common.TargetNonlandPermanent;
-import mage.target.targetadjustment.ForEachOpponentTargetsAdjuster;
+import mage.target.targetadjustment.ForEachPlayerTargetsAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 
 /**
@@ -41,7 +41,7 @@ public final class RiptideGearhulk extends CardImpl {
                 .setTargetPointer(new EachTargetPointer());
         Ability ability = new EntersBattlefieldTriggeredAbility(effect);
         ability.addTarget(new TargetNonlandPermanent(0, 1));
-        ability.setTargetAdjuster(new ForEachOpponentTargetsAdjuster());
+        ability.setTargetAdjuster(new ForEachPlayerTargetsAdjuster(false, true));
         this.addAbility(ability);
     }
 

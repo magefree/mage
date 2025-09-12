@@ -21,6 +21,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.stack.Spell;
+import mage.game.stack.StackObject;
 import mage.players.Player;
 
 import java.util.UUID;
@@ -94,18 +95,22 @@ class SoulfireGrandMasterCastFromHandReplacementEffect extends ReplacementEffect
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Spell spell = (Spell) game.getStack().getFirst();
-        if (!spell.isCopy() && !spell.isCountered()) {
-            Card sourceCard = game.getCard(spellId);
-            if (sourceCard != null && Zone.STACK.equals(game.getState().getZone(spellId))) {
-                Player player = game.getPlayer(sourceCard.getOwnerId());
-                if (player != null) {
-                    player.moveCards(sourceCard, Zone.HAND, source, game);
-                    discard();
-                    return true;
+        StackObject stackObject = game.getStack().getFirstOrNull();
+        if (stackObject instanceof Spell) {
+            Spell spell = (Spell) stackObject;
+            if (!spell.isCopy() && !spell.isCountered()) {
+                Card sourceCard = game.getCard(spellId);
+                if (sourceCard != null && Zone.STACK.equals(game.getState().getZone(spellId))) {
+                    Player player = game.getPlayer(sourceCard.getOwnerId());
+                    if (player != null) {
+                        player.moveCards(sourceCard, Zone.HAND, source, game);
+                        discard();
+                        return true;
+                    }
                 }
             }
         }
+
         return false;
     }
 
@@ -134,8 +139,8 @@ class SoulfireGrandMasterCastFromHandReplacementEffect extends ReplacementEffect
             if (zEvent.getFromZone() == Zone.STACK
                     && zEvent.getToZone() == Zone.GRAVEYARD
                     && event.getTargetId().equals(spellId)) {
-                if (game.getStack().getFirst() instanceof Spell) {
-                    Card cardOfSpell = ((Spell) game.getStack().getFirst()).getCard();
+                if (game.getStack().getFirstOrNull() instanceof Spell) {
+                    Card cardOfSpell = ((Spell) game.getStack().getFirstOrNull()).getCard();
                     return cardOfSpell.getMainCard().getId().equals(spellId);
                 }
             }

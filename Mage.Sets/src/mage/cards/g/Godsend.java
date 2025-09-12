@@ -23,6 +23,7 @@ import mage.game.combat.CombatGroup;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FirstTargetPointer;
 import mage.target.targetpointer.FixedTarget;
@@ -117,7 +118,7 @@ class GodsendTriggeredAbility extends TriggeredAbilityImpl {
                             uuidPredicates.add(new PermanentIdPredicate(creatureId));
                         }
                         filter.add(Predicates.or(uuidPredicates));
-                        this.getTargets().add(new TargetCreaturePermanent(filter));
+                        this.getTargets().add(new TargetPermanent(filter));
                     }
                     return true;
                 }
@@ -167,7 +168,7 @@ class GodsendRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
 
     GodsendRuleModifyingEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "Your opponents can't cast cards with the same name as cards exiled with {this}";
+        staticText = "Your opponents can't cast spells with the same name as a card exiled with {this}";
     }
 
     private GodsendRuleModifyingEffect(final GodsendRuleModifyingEffect effect) {

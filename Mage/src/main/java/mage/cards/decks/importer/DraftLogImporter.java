@@ -29,9 +29,9 @@ public class DraftLogImporter extends PlainTextDeckImporter {
         Matcher pickMatcher = PICK_PATTERN.matcher(line);
         if (pickMatcher.matches()) {
             String name = pickMatcher.group(1);
-            CardInfo card = getCardLookup().lookupCardInfo(name, currentSet).orElse(null);
-            if (card != null) {
-                deckList.getCards().add(new DeckCardInfo(card.getName(), card.getCardNumber(), card.getSetCode()));
+            CardInfo cardInfo = getCardLookup().lookupCardInfo(name, currentSet, null);
+            if (cardInfo != null) {
+                deckList.getCards().add(new DeckCardInfo(cardInfo.getName(), cardInfo.getCardNumber(), cardInfo.getSetCode()));
             } else {
                 sbMessage.append("couldn't find: \"").append(name).append("\"\n");
             }

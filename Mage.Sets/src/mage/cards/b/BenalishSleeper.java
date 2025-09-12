@@ -3,7 +3,6 @@ package mage.cards.b;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.SacrificeAllEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
@@ -32,10 +31,7 @@ public final class BenalishSleeper extends CardImpl {
         this.addAbility(new KickerAbility("{B}"));
 
         // When Benalish Sleeper enters the battlefield, if it was kicked, each player sacrifices a creature.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldTriggeredAbility(
-                new SacrificeAllEffect(StaticFilters.FILTER_PERMANENT_CREATURE)
-        ), KickedCondition.ONCE, "When {this} enters, " +
-                "if it was kicked, each player sacrifices a creature."));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeAllEffect(StaticFilters.FILTER_PERMANENT_CREATURE)).withInterveningIf(KickedCondition.ONCE));
     }
 
     private BenalishSleeper(final BenalishSleeper card) {

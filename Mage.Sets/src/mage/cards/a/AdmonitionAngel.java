@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
@@ -20,13 +19,15 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.TargetPermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author jeffwadsworth
  */
 public final class AdmonitionAngel extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("nonland permanent other than Admonition Angel");
+    private static final FilterPermanent filter = new FilterPermanent("nonland permanent other than {this}");
 
     static {
         filter.add(AnotherPredicate.instance);

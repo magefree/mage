@@ -6,7 +6,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.MayCastTargetCardEffect;
@@ -60,12 +59,7 @@ public final class SmirkingSpelljacker extends CardImpl {
         this.addAbility(ability);
 
         // Whenever Smirking Spelljacker attacks, if a card is exiled with it, you may cast the exiled card without paying its mana cost.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new AttacksTriggeredAbility(new SmirkingSpelljackerEffect()),
-                SmirkingSpelljackerCondition.instance,
-                "Whenever {this} attacks, if a card is exiled with it, "
-                        + "you may cast the exiled card without paying its mana cost."
-        ));
+        this.addAbility(new AttacksTriggeredAbility(new SmirkingSpelljackerEffect()).withInterveningIf(SmirkingSpelljackerCondition.instance));
     }
 
     private SmirkingSpelljacker(final SmirkingSpelljacker card) {
@@ -90,7 +84,7 @@ enum SmirkingSpelljackerCondition implements Condition {
 
     @Override
     public String toString() {
-        return "if a card is exiled with it";
+        return "a card is exiled with it";
     }
 }
 

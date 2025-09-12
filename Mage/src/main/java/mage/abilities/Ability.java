@@ -504,8 +504,24 @@ public interface Ability extends Controllable, Serializable {
     MageObject getSourceObject(Game game);
 
     void setSourceObjectZoneChangeCounter(int zoneChangeCounter);
+    /**
+     * Initializes the internally stored Source Object ZCC value
+     * to be equal to the source object's current ZCC.
+     * <p>
+     * If the source is an entering permanent, then
+     * the ZCC is set as if the permanent had already entered the battlefield.
+     *
+     * @param game
+     * @param force Update only occurs if stored ZCC is zero or if force is true.
+     */
+    void initSourceObjectZoneChangeCounter(Game game, boolean force);
 
-    int getSourceObjectZoneChangeCounter();
+    /**
+     * Returns the internally stored Source Object ZCC value, which is set at the time this ability was put on the stack.
+     * For static abilities or trigger conditions, you probably want to use
+     * game.getState().getZoneChangeCounter or input.getObject().getZoneChangeCounter(game) instead
+     */
+    int getStackMomentSourceZCC();
 
     /**
      * Finds the source object (Permanent, StackObject, Card, etc.) as long as its zcc has not changed, otherwise null

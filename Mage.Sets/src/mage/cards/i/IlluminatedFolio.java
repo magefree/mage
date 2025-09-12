@@ -1,7 +1,5 @@
 package mage.cards.i;
 
-import mage.MageItem;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RevealTargetFromHandCost;
@@ -19,9 +17,9 @@ import mage.game.Game;
 import mage.target.common.TargetCardInHand;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -67,51 +65,8 @@ class IlluminatedFolioTarget extends TargetCardInHand {
     }
 
     @Override
-    public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
-        return super.canChoose(sourceControllerId, source, game)
-                && !possibleTargets(sourceControllerId, source, game).isEmpty();
-    }
-
-    @Override
-    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
-        Set<UUID> possibleTargets = super.possibleTargets(sourceControllerId, source, game);
-        if (this.getTargets().size() == 1) {
-            Card card = game.getCard(this.getTargets().get(0));
-            possibleTargets.removeIf(
-                    uuid -> !game
-                            .getCard(uuid)
-                            .getColor(game)
-                            .shares(card.getColor(game))
-            );
-            return possibleTargets;
-        }
-        if (possibleTargets.size() < 2) {
-            possibleTargets.clear();
-            return possibleTargets;
-        }
-        Set<Card> allTargets = possibleTargets
-                .stream()
-                .map(game::getCard)
-                .collect(Collectors.toSet());
-        possibleTargets.clear();
-        for (ObjectColor color : ObjectColor.getAllColors()) {
-            Set<Card> inColor = allTargets
-                    .stream()
-                    .filter(card -> card.getColor(game).shares(color))
-                    .collect(Collectors.toSet());
-            if (inColor.size() > 1) {
-                inColor.stream().map(MageItem::getId).forEach(possibleTargets::add);
-            }
-            if (possibleTargets.size() == allTargets.size()) {
-                break;
-            }
-        }
-        return possibleTargets;
-    }
-
-    @Override
-    public boolean canTarget(UUID id, Game game) {
-        if (!super.canTarget(id, game)) {
+    public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
+        if (!super.canTarget(playerId, id, source, game)) {
             return false;
         }
         List<UUID> targetList = this.getTargets();
@@ -123,7 +78,15 @@ class IlluminatedFolioTarget extends TargetCardInHand {
                 && targetList
                 .stream()
                 .map(game::getCard)
+                .filter(Objects::nonNull)
                 .anyMatch(c -> c.getColor(game).shares(card.getColor(game)));
+    }
+
+    @Override
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
+        Set<UUID> possibleTargets = super.possibleTargets(sourceControllerId, source, game);
+        possibleTargets.removeIf(uuid -> !this.canTarget(sourceControllerId, uuid, source, game));
+        return possibleTargets;
     }
 
     @Override

@@ -14,6 +14,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
@@ -23,6 +24,7 @@ import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.XTargetsCountAdjuster;
 
@@ -34,7 +36,7 @@ import java.util.UUID;
  */
 public final class IllithidHarvester extends AdventureCard {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped nontoken creatures");
+    private static final FilterPermanent filter = new FilterCreaturePermanent("tapped nontoken creatures");
 
     static {
         filter.add(TappedPredicate.TAPPED);
@@ -50,7 +52,7 @@ public final class IllithidHarvester extends AdventureCard {
         // Ceremorphosis — When Illithid Harvester enters the battlefield, turn any number
         // of target tapped nontoken creatures face down. They're 2/2 Horror creatures.
         Ability ability = new EntersBattlefieldTriggeredAbility(new IllithidHarvesterEffect());
-        ability.addTarget(new TargetCreaturePermanent(0, Integer.MAX_VALUE, filter, false));
+        ability.addTarget(new TargetPermanent(0, Integer.MAX_VALUE, filter));
         this.addAbility(ability.withFlavorWord("Ceremorphosis"));
 
         // Plant Tadpoles

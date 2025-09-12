@@ -57,6 +57,12 @@ class AlpineMoonEffect extends ContinuousEffectImpl {
         this.staticText = "lands your opponents control with the chosen name "
                 + "lose all land types and abilities, "
                 + "and they gain \"{T}: Add one mana of any color.\"";
+        addDependedToType(DependencyType.BecomeMountain);
+        addDependedToType(DependencyType.BecomeForest);
+        addDependedToType(DependencyType.BecomeIsland);
+        addDependedToType(DependencyType.BecomeSwamp);
+        addDependedToType(DependencyType.BecomePlains);
+        addDependedToType(DependencyType.BecomeNonbasicLand);
     }
 
     private AlpineMoonEffect(final AlpineMoonEffect effect) {
@@ -84,9 +90,6 @@ class AlpineMoonEffect extends ContinuousEffectImpl {
         for (Permanent land : game.getBattlefield().getActivePermanents(filter2, source.getControllerId(), game)) {
             switch (layer) {
                 case TypeChangingEffects_4:
-                    // 305.7 Note that this doesn't remove any abilities that were granted to the land by other effects
-                    // So the ability removing has to be done before Layer 6
-                    land.removeAllAbilities(source.getSourceId(), game);
                     land.removeAllSubTypes(game, SubTypeSet.NonBasicLandType);
                     break;
                 case AbilityAddingRemovingEffects_6:

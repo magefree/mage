@@ -13,10 +13,9 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
-import mage.filter.FilterSpell;
-import mage.filter.common.FilterHistoricCard;
-import mage.filter.common.FilterHistoricSpell;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.HistoricPredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
@@ -26,10 +25,10 @@ import java.util.UUID;
  */
 public final class ElenaTurkRecruit extends CardImpl {
 
-    private static final FilterCard filter = new FilterHistoricCard("non-Assassin historic card from your graveyard");
-    private static final FilterSpell filter2 = new FilterHistoricSpell();
+    private static final FilterCard filter = new FilterCard("non-Assassin historic card from your graveyard");
 
     static {
+        filter.add(HistoricPredicate.instance);
         filter.add(Predicates.not(SubType.ASSASSIN.getPredicate()));
     }
 
@@ -49,7 +48,7 @@ public final class ElenaTurkRecruit extends CardImpl {
 
         // Whenever you cast a historic spell, put a +1/+1 counter on Elena.
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter2, false
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), StaticFilters.FILTER_SPELL_HISTORIC, false
         ));
     }
 

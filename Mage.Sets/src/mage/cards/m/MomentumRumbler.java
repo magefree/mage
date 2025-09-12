@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
@@ -33,20 +32,15 @@ public final class MomentumRumbler extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever Momentum Rumbler attacks, if it doesn't have first strike, put a first strike counter on it.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new AttacksTriggeredAbility(new AddCountersSourceEffect(
-                        CounterType.FIRST_STRIKE.createInstance()
-                ), false), MomentumRumblerCondition.FALSE, "Whenever {this} attacks, " +
-                "if it doesn't have first strike, put a first strike counter on it."
-        ));
+        this.addAbility(new AttacksTriggeredAbility(
+                new AddCountersSourceEffect(CounterType.FIRST_STRIKE.createInstance())
+                        .setText("put a first strike counter on it"), false
+        ).withInterveningIf(MomentumRumblerCondition.FALSE));
 
         // Whenever Momentum Rumbler attacks, if it has first strike, it gains double strike until end of turn.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new AttacksTriggeredAbility(new GainAbilitySourceEffect(
-                        DoubleStrikeAbility.getInstance(), Duration.EndOfTurn
-                ), false), MomentumRumblerCondition.TRUE, "Whenever {this} attacks, " +
-                "if it has first strike, it gains double strike until end of turn."
-        ));
+        this.addAbility(new AttacksTriggeredAbility(new GainAbilitySourceEffect(
+                DoubleStrikeAbility.getInstance(), Duration.EndOfTurn
+        ).setText("it gains double strike until end of turn")).withInterveningIf(MomentumRumblerCondition.TRUE));
     }
 
     private MomentumRumbler(final MomentumRumbler card) {
@@ -76,5 +70,10 @@ enum MomentumRumblerCondition implements Condition {
             return false;
         }
         return hasAbility == permanent.hasAbility(FirstStrikeAbility.getInstance(), game);
+    }
+
+    @Override
+    public String toString() {
+        return "it " + (hasAbility ? "has" : "doesn't have") + " first strike";
     }
 }

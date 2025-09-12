@@ -15,6 +15,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterBlockingCreature;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -34,7 +35,7 @@ public final class NahirisMachinations extends CardImpl {
 
         // {1}{R}: Nahiri's Machinations deals 1 damage to target blocking creature.
         ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new ManaCostsImpl<>("{1}{R}"));
-        ability.addTarget(new TargetCreaturePermanent(new FilterBlockingCreature("blocking creature")));
+        ability.addTarget(new TargetPermanent(new FilterBlockingCreature("blocking creature")));
         this.addAbility(ability);
     }
 

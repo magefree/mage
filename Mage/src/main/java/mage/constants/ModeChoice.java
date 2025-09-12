@@ -18,7 +18,7 @@ public enum ModeChoice {
     SULTAI("Sultai"),
 
     MIRRAN("Mirran"),
-    PHYREXIAN("Phyrexian "),
+    PHYREXIAN("Phyrexian"),
 
     ODD("odd"),
     EVEN("even"),

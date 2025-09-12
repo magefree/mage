@@ -3,7 +3,6 @@ package mage.cards.c;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.condition.common.ThresholdCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
@@ -31,11 +30,8 @@ public final class CryptFeaster extends CardImpl {
         this.addAbility(new MenaceAbility());
 
         // Threshold -- Whenever this creature attacks, if there are seven or more cards in your graveyard, this creature gets +2/+0 until end of turn.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new AttacksTriggeredAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn)),
-                ThresholdCondition.instance, "Whenever this creature attacks, if there are seven " +
-                "or more cards in your graveyard, this creature gets +2/+0 until end of turn."
-        ).setAbilityWord(AbilityWord.THRESHOLD));
+        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn))
+                .withInterveningIf(ThresholdCondition.instance).setAbilityWord(AbilityWord.THRESHOLD));
     }
 
     private CryptFeaster(final CryptFeaster card) {

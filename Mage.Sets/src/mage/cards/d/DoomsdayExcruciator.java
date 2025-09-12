@@ -2,18 +2,20 @@ package mage.cards.d;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CastFromEverywhereSourceCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -35,16 +37,10 @@ public final class DoomsdayExcruciator extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Doomsday Excruciator enters, if it was cast, each player exiles all but the bottom six cards of their library face down.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new DoomsdayExcruciatorEffect()),
-                CastFromEverywhereSourceCondition.instance, "When {this} enters, if it was cast, " +
-                "each player exiles all but the bottom six cards of their library face down."
-        ));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DoomsdayExcruciatorEffect()).withInterveningIf(CastFromEverywhereSourceCondition.instance));
 
         // At the beginning of your upkeep, draw a card.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new DrawCardSourceControllerEffect(1)
-        ));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DrawCardSourceControllerEffect(1)));
     }
 
     private DoomsdayExcruciator(final DoomsdayExcruciator card) {
@@ -61,6 +57,7 @@ class DoomsdayExcruciatorEffect extends OneShotEffect {
 
     DoomsdayExcruciatorEffect() {
         super(Outcome.Benefit);
+        staticText = "each player exiles all but the bottom six cards of their library face down";
     }
 
     private DoomsdayExcruciatorEffect(final DoomsdayExcruciatorEffect effect) {

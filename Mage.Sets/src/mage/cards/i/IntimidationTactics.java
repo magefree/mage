@@ -7,6 +7,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
+import mage.target.common.TargetOpponent;
 
 import java.util.UUID;
 
@@ -20,6 +21,7 @@ public final class IntimidationTactics extends CardImpl {
 
         // Target opponent reveals their hand. You choose an artifact or creature card from it. Exile that card.
         this.getSpellAbility().addEffect(new ExileCardYouChooseTargetOpponentEffect(StaticFilters.FILTER_CARD_ARTIFACT_OR_CREATURE));
+        this.getSpellAbility().addTarget(new TargetOpponent());
 
         // Cycling {3}
         this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{3}")));

@@ -46,7 +46,7 @@ public final class RumorMonger extends CardImpl {
 
         // <i>Bounty</i> &mdash; Whenever a creature an opponent controls with a bounty counter on it dies, you may move a bounty counter from one target creature to another target creatute.
         ability = new BountyAbility(new MoveCounterTargetsEffect(CounterType.BOUNTY), true);
-        ability.addTarget(new TargetCreaturePermanent().withChooseHint("to remove a counter from"));
+        ability.addTarget(new TargetCreaturePermanent().withChooseHint("to remove a counter from").setTargetTag(1));
         ability.addTarget(new TargetPermanent(filter).setTargetTag(2).withChooseHint("to move a counter to"));
         this.addAbility(ability);
     }

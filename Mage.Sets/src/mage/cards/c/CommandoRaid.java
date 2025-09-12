@@ -12,7 +12,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.DamagedPlayerControlsTargetAdjuster;
+import mage.target.targetadjustment.ThatPlayerControlsTargetAdjuster;
 
 import java.util.UUID;
 
@@ -29,7 +29,7 @@ public final class CommandoRaid extends CardImpl {
         effect.setText("have it deal damage equal to its power to target creature that player controls.");
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(effect, true, true);
         ability.addTarget(new TargetCreaturePermanent());
-        ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
+        ability.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster());
 
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(
                 ability, Duration.EndOfTurn,

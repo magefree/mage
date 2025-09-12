@@ -1,17 +1,16 @@
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.constants.Outcome;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -21,6 +20,8 @@ import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.ManaUtil;
 import mage.watchers.common.SpellsCastWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -94,7 +95,7 @@ class EsperSentinelTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever an opponent casts their first noncreature spell each turn, draw a card unless that player pays {X}, where X is Esper Sentinel's power.";
+        return "Whenever an opponent casts their first noncreature spell each turn, draw a card unless that player pays {X}, where X is {this}'s power.";
     }
 }
 

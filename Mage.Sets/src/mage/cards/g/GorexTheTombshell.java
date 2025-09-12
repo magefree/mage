@@ -135,11 +135,11 @@ class GorexTheTombshellReturnEffect extends OneShotEffect {
         // relative zcc depends on object zone (battlefield for attacks trigger, graveyard for dies)
         // so try both zcc offsets to find zone
         ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(
-                game, source.getSourceId(), source.getSourceObjectZoneChangeCounter() - 1
+                game, source.getSourceId(), source.getStackMomentSourceZCC() - 1
         ));
         if (exileZone == null || exileZone.isEmpty()) {
             exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(
-                    game, source.getSourceId(), source.getSourceObjectZoneChangeCounter() - 2
+                    game, source.getSourceId(), source.getStackMomentSourceZCC() - 2
             ));
             if (exileZone == null || exileZone.isEmpty()) {
                 return false;

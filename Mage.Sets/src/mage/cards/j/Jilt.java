@@ -10,6 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.other.AnotherTargetPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.ConditionalTargetAdjuster;
 import mage.target.targetpointer.SecondTargetPointer;
@@ -41,7 +42,7 @@ public final class Jilt extends CardImpl {
                 .setTargetPointer(new SecondTargetPointer()));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent().setTargetTag(1).withChooseHint("to return to hand"));
         this.getSpellAbility().setTargetAdjuster(new ConditionalTargetAdjuster(KickedCondition.ONCE, true,
-                new TargetCreaturePermanent(filter).setTargetTag(2).withChooseHint("to deal 2 damage")));
+                new TargetPermanent(filter).setTargetTag(2).withChooseHint("to deal 2 damage")));
     }
 
     private Jilt(final Jilt card) {

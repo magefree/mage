@@ -12,7 +12,10 @@ import mage.abilities.hint.Hint;
 import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.ComparisonType;
+import mage.constants.TargetController;
+import mage.constants.TimingRule;
 
 import java.util.UUID;
 
@@ -22,7 +25,7 @@ import java.util.UUID;
 public final class TempleOfTheDead extends CardImpl {
 
     private static final Condition condition = new CardsInHandCondition(ComparisonType.FEWER_THAN, 2, TargetController.ANY);
-    private static final Hint hint = new ConditionHint(condition, "a player has one or fewer cards in hand");
+    private static final Hint hint = new ConditionHint(condition);
 
     public TempleOfTheDead(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
@@ -35,15 +38,10 @@ public final class TempleOfTheDead extends CardImpl {
 
         // {2}{B}, {T}: Transform Temple of the Dead. Activate only if a player has one or fewer cards in hand and only as a sorcery.
         Ability ability = new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD,
-                new TransformSourceEffect(),
-                new ManaCostsImpl<>("{2}{B}"),
-                condition,
-                TimingRule.SORCERY
-        );
+                new TransformSourceEffect(), new ManaCostsImpl<>("{2}{B}"), condition
+        ).setTiming(TimingRule.SORCERY);
         ability.addCost(new TapSourceCost());
-        ability.addHint(hint);
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(hint));
     }
 
     private TempleOfTheDead(final TempleOfTheDead card) {

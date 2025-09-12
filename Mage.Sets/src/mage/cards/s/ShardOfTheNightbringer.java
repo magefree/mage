@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CastFromEverywhereSourceCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -34,12 +33,8 @@ public final class ShardOfTheNightbringer extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Drain Life -- When Shard of the Nightbringer enters the battlefield, if you cast it, target opponent loses half their life, rounded up. You gain life equal to the life lost this way.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new ShardOfTheNightbringerEffect()),
-                CastFromEverywhereSourceCondition.instance, "When {this} enters, " +
-                "if you cast it, target opponent loses half their life, rounded up. " +
-                "You gain life equal to the life lost this way."
-        );
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ShardOfTheNightbringerEffect())
+                .withInterveningIf(CastFromEverywhereSourceCondition.instance);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability.withFlavorWord("Drain Life"));
     }
@@ -58,6 +53,7 @@ class ShardOfTheNightbringerEffect extends OneShotEffect {
 
     ShardOfTheNightbringerEffect() {
         super(Outcome.Benefit);
+        staticText = "target opponent loses half their life, rounded up. You gain life equal to the life lost this way";
     }
 
     private ShardOfTheNightbringerEffect(final ShardOfTheNightbringerEffect effect) {

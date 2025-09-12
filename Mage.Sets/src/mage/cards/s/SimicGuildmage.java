@@ -57,7 +57,7 @@ public final class SimicGuildmage extends CardImpl {
 
         // {1}{G}: Move a +1/+1 counter from target creature onto another target creature with the same controller.
         Ability countersAbility = new SimpleActivatedAbility(new MoveCounterTargetsEffect(CounterType.P1P1), new ManaCostsImpl<>("{1}{G}"));
-        countersAbility.addTarget(new TargetCreaturePermanent().withChooseHint("to remove a counter from"));
+        countersAbility.addTarget(new TargetCreaturePermanent().withChooseHint("to remove a counter from").setTargetTag(1));
         countersAbility.addTarget(new TargetPermanent(filter).withChooseHint("to move a counter to").setTargetTag(2));
         this.addAbility(countersAbility);
 
@@ -136,7 +136,7 @@ class MoveAuraEffect extends OneShotEffect {
         }
         FilterPermanent filter = new FilterPermanent(
                 "permanent" + Optional
-                        .ofNullable(aura)
+                        .of(aura)
                         .map(Permanent::getAttachedTo)
                         .map(game::getControllerId)
                         .map(game::getPlayer)
@@ -153,7 +153,7 @@ class MoveAuraEffect extends OneShotEffect {
         target.withNotTarget(true);
         controller.choose(outcome, target, source, game);
         return Optional
-                .ofNullable(target)
+                .of(target)
                 .map(TargetImpl::getFirstTarget)
                 .map(game::getPermanent)
                 .map(permanent -> permanent.addAttachment(aura.getId(), source, game))

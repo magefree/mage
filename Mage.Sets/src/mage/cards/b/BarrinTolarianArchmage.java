@@ -2,12 +2,11 @@ package mage.cards.b;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -16,7 +15,7 @@ import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
-import mage.target.common.TargetCreatureOrPlaneswalker;
+import mage.target.TargetPermanent;
 import mage.watchers.Watcher;
 
 import java.util.HashSet;
@@ -46,16 +45,12 @@ public final class BarrinTolarianArchmage extends CardImpl {
 
         // When Barrin, Tolarian Archmage enters the battlefield, return up to one other target creature or planeswalker to its owner's hand.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect());
-        ability.addTarget(new TargetCreatureOrPlaneswalker(0, 1, filter, false));
+        ability.addTarget(new TargetPermanent(0, 1, filter));
         this.addAbility(ability);
 
         // At the beginning of your end step, if a permanent was put into your hand from the battlefield this turn, draw a card.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfEndStepTriggeredAbility(
-                        new DrawCardSourceControllerEffect(1)
-                ), BarrinTolarianArchmageCondition.instance, "At the beginning of your end step, " +
-                "if a permanent was put into your hand from the battlefield this turn, draw a card."
-        ), new BarrinTolarianArchmageWatcher());
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new DrawCardSourceControllerEffect(1))
+                .withInterveningIf(BarrinTolarianArchmageCondition.instance), new BarrinTolarianArchmageWatcher());
     }
 
     private BarrinTolarianArchmage(final BarrinTolarianArchmage card) {
@@ -75,6 +70,11 @@ enum BarrinTolarianArchmageCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         BarrinTolarianArchmageWatcher watcher = game.getState().getWatcher(BarrinTolarianArchmageWatcher.class);
         return watcher != null && watcher.checkPlayer(source.getControllerId());
+    }
+
+    @Override
+    public String toString() {
+        return "a permanent was put into your hand from the battlefield this turn";
     }
 }
 

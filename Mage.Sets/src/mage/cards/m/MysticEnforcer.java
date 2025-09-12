@@ -39,7 +39,7 @@ public final class MysticEnforcer extends CardImpl {
         // Threshold - As long as seven or more cards are in your graveyard, Mystic Enforcer gets +3/+3 and has flying.
         Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(3, 3, Duration.WhileOnBattlefield), ThresholdCondition.instance,
-                " as long as seven or more cards are in your graveyard, {this} gets +3/+3"
+                "as long as seven or more cards are in your graveyard, {this} gets +3/+3"
         ));
         ability.addEffect(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(FlyingAbility.getInstance()),

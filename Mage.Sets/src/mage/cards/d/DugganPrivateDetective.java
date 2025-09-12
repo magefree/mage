@@ -17,9 +17,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_ANOTHER_TARGET_CREATURE;
 
 /**
  * @author Cguy7777
@@ -49,7 +52,7 @@ public final class DugganPrivateDetective extends CardImpl {
                 new ManaCostsImpl<>("{1}{G}"),
                 TimingRule.INSTANT);
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE));
+        ability.addTarget(new TargetPermanent(FILTER_ANOTHER_TARGET_CREATURE));
         ability.withFlavorWord("The Most Important Punch in History");
         this.addAbility(ability);
     }

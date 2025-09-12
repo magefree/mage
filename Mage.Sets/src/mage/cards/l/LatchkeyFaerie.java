@@ -3,7 +3,6 @@ package mage.cards.l;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.ProwlCostWasPaidCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.hint.common.ProwlCostWasPaidHint;
 import mage.abilities.keyword.FlyingAbility;
@@ -35,11 +34,8 @@ public final class LatchkeyFaerie extends CardImpl {
         this.addAbility(new ProwlAbility("{2}{U}"));
 
         // When Latchkey Faerie enters the battlefield, if its prowl cost was paid, draw a card.
-        EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1), false);
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, ProwlCostWasPaidCondition.instance,
-                "When {this} enters, if its prowl cost was paid, draw a card.")
-                .addHint(ProwlCostWasPaidHint.instance));
-
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1), false)
+                .withInterveningIf(ProwlCostWasPaidCondition.instance).addHint(ProwlCostWasPaidHint.instance));
     }
 
     private LatchkeyFaerie(final LatchkeyFaerie card) {

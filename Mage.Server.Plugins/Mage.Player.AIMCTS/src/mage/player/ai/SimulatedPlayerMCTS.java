@@ -121,7 +121,7 @@ public final class SimulatedPlayerMCTS extends MCTSPlayer {
                 }
             }
             if (ability.isUsesStack()) {
-                game.getStack().push(new StackAbility(ability, playerId));
+                game.getStack().push(game, new StackAbility(ability, playerId));
                 if (ability.activate(game, false)) {
                     game.fireEvent(new GameEvent(GameEvent.EventType.TRIGGERED_ABILITY, ability.getId(), ability, ability.getControllerId()));
                     actionCount++;
@@ -187,8 +187,8 @@ public final class SimulatedPlayerMCTS extends MCTSPlayer {
         abort = true;
     }
 
-    protected boolean chooseRandom(Target target, Game game) {
-        Set<UUID> possibleTargets = target.possibleTargets(playerId, game);
+    private boolean chooseRandom(Target target, Ability source, Game game) {
+        Set<UUID> possibleTargets = target.possibleTargets(playerId, source, game);
         if (possibleTargets.isEmpty()) {
             return false;
         }
@@ -233,7 +233,7 @@ public final class SimulatedPlayerMCTS extends MCTSPlayer {
     @Override
     public boolean choose(Outcome outcome, Target target, Ability source, Game game) {
         if (this.isHuman()) {
-            return chooseRandom(target, game);
+            return chooseRandom(target, source, game);
         }
         return super.choose(outcome, target, source, game);
     }
@@ -241,7 +241,7 @@ public final class SimulatedPlayerMCTS extends MCTSPlayer {
     @Override
     public boolean choose(Outcome outcome, Target target, Ability source, Game game, Map<String, Serializable> options) {
         if (this.isHuman()) {
-            return chooseRandom(target, game);
+            return chooseRandom(target, source, game);
         }
         return super.choose(outcome, target, source, game, options);
     }
@@ -252,7 +252,7 @@ public final class SimulatedPlayerMCTS extends MCTSPlayer {
             if (cards.isEmpty()) {
                 return false;
             }
-            Set<UUID> possibleTargets = target.possibleTargets(playerId, cards, source, game);
+            Set<UUID> possibleTargets = target.possibleTargets(playerId, source, game, cards);
             if (possibleTargets.isEmpty()) {
                 return false;
             }
@@ -288,6 +288,16 @@ public final class SimulatedPlayerMCTS extends MCTSPlayer {
 
     @Override
     public boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Ability source, Game game) {
+
+        // nothing to choose
+        target.prepareAmount(source, game);
+        if (target.getAmountRemaining() <= 0) {
+            return false;
+        }
+        if (target.getMaxNumberOfTargets() == 0 && target.getMinNumberOfTargets() == 0) {
+            return false;
+        }
+
         Set<UUID> possibleTargets = target.possibleTargets(playerId, source, game);
         if (possibleTargets.isEmpty()) {
             return !target.isRequired(source);

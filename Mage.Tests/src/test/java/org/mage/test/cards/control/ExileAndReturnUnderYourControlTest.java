@@ -183,12 +183,13 @@ public class ExileAndReturnUnderYourControlTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Villainous Wealth", playerB);
         setChoice(playerA, "X=3");
 
+        // first card
         setChoice(playerA, "Mox Emerald");
         setChoice(playerA, "Yes");
-
+        // second card
         setChoice(playerA, "Mox Sapphire");
         setChoice(playerA, "Yes");
-
+        // last card
         // Quicken is auto-chosen since it's the last of the 3 cards. Only need to say Yes to casting for free.
         setChoice(playerA, "Yes");
 

@@ -31,6 +31,6 @@ public enum SourceAttackingPlayerWithMostLifeCondition implements Condition {
 
     @Override
     public String toString() {
-        return "{this} is attacking the player with the most life or tied for most life";
+        return "it's attacking the player with the most life or tied for most life";
     }
 }

@@ -18,6 +18,7 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -46,7 +47,7 @@ public final class MadAuntie extends CardImpl {
 
         // {T}: Regenerate another target Goblin.
         Ability ability = new SimpleActivatedAbility(new RegenerateTargetEffect(), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter1));
+        ability.addTarget(new TargetPermanent(filter1));
         this.addAbility(ability);
     }
 

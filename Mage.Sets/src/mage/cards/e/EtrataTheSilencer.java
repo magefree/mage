@@ -18,7 +18,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.DamagedPlayerControlsTargetAdjuster;
+import mage.target.targetadjustment.ThatPlayerControlsTargetAdjuster;
 
 import java.util.UUID;
 
@@ -44,7 +44,7 @@ public final class EtrataTheSilencer extends CardImpl {
         // Whenever Etrata deals combat damage to a player, exile target creature that player controls and put a hit counter on that card. That player loses the game if they own three or more exiled card with hit counters on them. Etrata's owner shuffles Etrata into their library.
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new EtrataTheSilencerEffect(), false, true);
         ability.addTarget(new TargetPermanent(filter));
-        ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
+        ability.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster());
 
         this.addAbility(ability);
     }
@@ -96,8 +96,8 @@ class EtrataTheSilencerEffect extends OneShotEffect {
         if (card != null) {
             card.addCounters(CounterType.HIT.createInstance(), source.getControllerId(), source, game);
         }
-        int cardsFound = game.getExile().getAllCards(game).stream()
-                .filter(c -> c.getOwnerId().equals(player.getId()))
+        int cardsFound = game.getExile().getCardsOwned(game, player.getId())
+                .stream()
                 .filter(c -> c.getCounters(game).getCount(CounterType.HIT) > 0)
                 .mapToInt(x -> 1)
                 .sum();

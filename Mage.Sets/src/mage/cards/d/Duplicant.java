@@ -16,6 +16,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.List;
@@ -41,7 +42,7 @@ public final class Duplicant extends CardImpl {
 
         // Imprint - When Duplicant enters the battlefield, you may exile target nontoken creature.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DuplicantExileTargetEffect(), true);
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         ability.setAbilityWord(AbilityWord.IMPRINT);
         this.addAbility(ability);
         // As long as the exiled card is a creature card, Duplicant has that card's power, toughness, and creature types. It's still a Shapeshifter.
@@ -94,7 +95,7 @@ class DuplicantContinuousEffect extends ContinuousEffectImpl {
 
     DuplicantContinuousEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
-        staticText = "As long as a card exiled with {this} is a creature card, {this} has the power, toughness, and creature types of the last creature card exiled with {this}. It's still a Shapeshifter.";
+        staticText = "As long as a card exiled with {this} is a creature card, {this} has the power, toughness, and creature types of the last creature card exiled with it. It's still a Shapeshifter.";
     }
 
     private DuplicantContinuousEffect(final DuplicantContinuousEffect effect) {

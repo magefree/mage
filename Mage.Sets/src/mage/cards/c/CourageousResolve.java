@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import mage.MageObject;
@@ -15,9 +14,7 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -46,9 +43,9 @@ public final class CourageousResolve extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).setText("Draw a card. <i>(It can't be blocked, targeted, dealt damage, enchanted, or equipped by anything controlled by those players.)</i>"));
 
 
-        //Fateful hour — If you have 5 or less life, you can't lose life this turn, you can't lose the game this turn,
+        // Fateful hour — If you have 5 or less life, you can't lose life this turn, you can't lose the game this turn,
         // and your opponents can't win the game this turn.
-        this.getSpellAbility().addEffect(new ConditionalContinuousEffect(new CantLoseLifeEffect(), FatefulHourCondition.instance, "<br><i>Fateful hour</i> &mdash; If you have 5 or less life, you can't lose life this turn"));
+        this.getSpellAbility().addEffect(new ConditionalContinuousEffect(new CourageousResolveCantLoseLifeEffect(), FatefulHourCondition.instance, "<br><i>Fateful hour</i> &mdash; If you have 5 or less life, you can't lose life this turn"));
         this.getSpellAbility().addEffect(new ConditionalContinuousRuleModifyingEffect(new CourageousResolveWinLoseEffect(), FatefulHourCondition.instance));
 
 
@@ -132,19 +129,19 @@ class CourageousResolveProtectionAbility extends ProtectionAbility {
     }
 }
 
-class CantLoseLifeEffect extends ContinuousEffectImpl {
+class CourageousResolveCantLoseLifeEffect extends ContinuousEffectImpl {
 
-    public CantLoseLifeEffect() {
-        super(Duration.EndOfTurn, Outcome.Benefit);
+    CourageousResolveCantLoseLifeEffect() {
+        super(Duration.EndOfTurn, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
     }
 
-    protected CantLoseLifeEffect(final CantLoseLifeEffect effect) {
+    protected CourageousResolveCantLoseLifeEffect(final CourageousResolveCantLoseLifeEffect effect) {
         super(effect);
     }
 
     @Override
-    public CantLoseLifeEffect copy() {
-        return new CantLoseLifeEffect(this);
+    public CourageousResolveCantLoseLifeEffect copy() {
+        return new CourageousResolveCantLoseLifeEffect(this);
     }
 
     @Override
@@ -154,7 +151,7 @@ class CantLoseLifeEffect extends ContinuousEffectImpl {
             player.setCanLoseLife(false);
             return true;
         }
-        return true;
+        return false;
     }
 }
 

@@ -41,11 +41,12 @@ public final class EverythingamajigC extends CardImpl {
 
         // Disrupting Scepter
         // 3, {T}: Target player discards a card. Activate this ability only during your turn.
-        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(1), new GenericManaCost(3), MyTurnCondition.instance);
+        Ability ability = new ActivateIfConditionActivatedAbility(
+                new DiscardTargetEffect(1), new GenericManaCost(3), MyTurnCondition.instance
+        );
         ability.addTarget(new TargetPlayer());
         ability.addCost(new TapSourceCost());
-        ability.addHint(MyTurnHint.instance);
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(MyTurnHint.instance));
 
         // Chimeric Staff
         // X: Everythingamajig becomes an X/X Construct artifact creature until end of turn.

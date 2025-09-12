@@ -1,11 +1,8 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
@@ -16,8 +13,9 @@ import mage.constants.SuperType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class SlinnVodaTheRisingDeep extends CardImpl {
@@ -25,14 +23,11 @@ public final class SlinnVodaTheRisingDeep extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
-        filter.add(Predicates.not(
-                Predicates.or(
-                        SubType.KRAKEN.getPredicate(),
-                        SubType.LEVIATHAN.getPredicate(),
-                        SubType.OCTOPUS.getPredicate(),
-                        SubType.MERFOLK.getPredicate(),
-                        SubType.SERPENT.getPredicate())
-        ));
+        filter.add(Predicates.not(SubType.MERFOLK.getPredicate()));
+        filter.add(Predicates.not(SubType.KRAKEN.getPredicate()));
+        filter.add(Predicates.not(SubType.LEVIATHAN.getPredicate()));
+        filter.add(Predicates.not(SubType.OCTOPUS.getPredicate()));
+        filter.add(Predicates.not(SubType.SERPENT.getPredicate()));
     }
 
     public SlinnVodaTheRisingDeep(UUID ownerId, CardSetInfo setInfo) {
@@ -47,13 +42,11 @@ public final class SlinnVodaTheRisingDeep extends CardImpl {
         this.addAbility(new KickerAbility("{1}{U}"));
 
         // When Slinn Voda, the Rising Deep enters the battlefield, if it was kicked, return all creatures to their owners' hands except for Merfolk, Krakens, Leviathans, Octopuses, and Serpents.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new ReturnToHandFromBattlefieldAllEffect(filter)),
-                KickedCondition.ONCE,
-                "when {this} enters, if it was kicked, "
-                + "return all creatures to their owners' hands except for "
-                + "Merfolk, Krakens, Leviathans, Octopuses, and Serpents."
-        ));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new ReturnToHandFromBattlefieldAllEffect(filter)
+                        .setText("return all creatures to their owners' hands except for " +
+                                "Merfolk, Krakens, Leviathans, Octopuses, and Serpents")
+        ).withInterveningIf(KickedCondition.ONCE));
     }
 
     private SlinnVodaTheRisingDeep(final SlinnVodaTheRisingDeep card) {

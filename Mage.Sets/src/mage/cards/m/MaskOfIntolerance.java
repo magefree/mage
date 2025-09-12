@@ -1,17 +1,14 @@
 package mage.cards.m;
 
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.condition.IntCompareCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.hint.common.DomainHint;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ComparisonType;
 import mage.constants.TargetController;
 import mage.game.Game;
 
@@ -22,16 +19,13 @@ import java.util.UUID;
  */
 public final class MaskOfIntolerance extends CardImpl {
 
-    private static final Condition condition = new MaskOfIntoleranceCondition();
-
     public MaskOfIntolerance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // At the beginning of each player's upkeep, if there are four or more basic land types among lands that player controls, Mask of Intolerance deals 3 damage to that player.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new BeginningOfUpkeepTriggeredAbility(
-                TargetController.ANY, new DamageTargetEffect(3), false
-        ), condition, "At the beginning of each player's upkeep, if there are four or more basic land types " +
-                "among lands that player controls, {this} deals 3 damage to that player.").addHint(DomainHint.instance));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
+                TargetController.EACH_PLAYER, new DamageTargetEffect(3, true, "that player"), false
+        ).withInterveningIf(MaskOfIntoleranceCondition.instance).addHint(DomainHint.instance));
     }
 
     private MaskOfIntolerance(final MaskOfIntolerance card) {
@@ -44,14 +38,16 @@ public final class MaskOfIntolerance extends CardImpl {
     }
 }
 
-class MaskOfIntoleranceCondition extends IntCompareCondition {
+enum MaskOfIntoleranceCondition implements Condition {
+    instance;
 
-    public MaskOfIntoleranceCondition() {
-        super(ComparisonType.MORE_THAN, 3);
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return DomainValue.ACTIVE.calculate(game, source, null) >= 4;
     }
 
     @Override
-    protected int getInputValue(Game game, Ability source) {
-        return DomainValue.ACTIVE.calculate(game, source, null);
+    public String toString() {
+        return "there are four or more basic land types among lands that player controls";
     }
 }

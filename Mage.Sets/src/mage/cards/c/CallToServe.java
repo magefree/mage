@@ -17,6 +17,8 @@ import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK;
+
 /**
  *
  * @author Loki
@@ -28,7 +30,7 @@ public final class CallToServe extends CardImpl {
         this.subtype.add(SubType.AURA);
 
         // Enchant nonblack creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK);
+        TargetPermanent auraTarget = new TargetPermanent(FILTER_PERMANENT_CREATURE_NON_BLACK);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget);

@@ -21,7 +21,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.PreventDamageEvent;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.DamagedPlayerControlsTargetAdjuster;
+import mage.target.targetadjustment.ThatPlayerControlsTargetAdjuster;
 
 import java.util.UUID;
 
@@ -57,7 +57,7 @@ public final class QuestingBeast extends CardImpl {
         // Whenever Questing Beast deals combat damage to an opponent, it deals that much damage to target planeswalker that player controls.
         Ability ability = new DealsDamageToOpponentTriggeredAbility(new DamageTargetEffect(SavedDamageValue.MUCH), false, true, true);
         ability.addTarget(new TargetPermanent(filter));
-        ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
+        ability.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster());
         this.addAbility(ability);
     }
 

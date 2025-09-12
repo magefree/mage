@@ -1,40 +1,31 @@
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldThisOrAnotherTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutOntoBattlefieldTappedRestInHandEffect;
-import mage.cards.OmenCard;
-import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.OmenCard;
 import mage.constants.CardType;
-import mage.constants.SuperType;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterBasicLandCard;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterBasicCard;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.target.Target;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.UUID;
+
 /**
- *
  * @author Jmlundeen
  */
 public final class BloomvineRegent extends OmenCard {
 
-    private static final FilterCard filter = new FilterCard("basic Forest cards");
-
-    static {
-        filter.add(SubType.FOREST.getPredicate());
-        filter.add(SuperType.BASIC.getPredicate());
-    }
+    private static final FilterCard filter = new FilterBasicCard(SubType.FOREST, "basic Forest cards");
 
     public BloomvineRegent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{3}{G}{G}", "Claim Territory", "{2}{G}");
-        
+
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);

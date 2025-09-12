@@ -1,16 +1,15 @@
 package mage.cards.p;
 
 import mage.MageInt;
-import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.hint.ConditionHint;
 import mage.abilities.hint.Hint;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -28,7 +27,7 @@ import java.util.UUID;
  */
 public final class PacksongPup extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledPermanent();
+    private static final FilterPermanent filter = new FilterControlledPermanent("you control another Wolf or Werewolf");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -39,7 +38,7 @@ public final class PacksongPup extends CardImpl {
     }
 
     private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
-    private static final Hint hint = new ConditionHint(condition, "You control another Wolf or Werewolf");
+    private static final Hint hint = new ConditionHint(condition);
 
     public PacksongPup(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
@@ -49,15 +48,14 @@ public final class PacksongPup extends CardImpl {
         this.toughness = new MageInt(1);
 
         // At the beginning of combat on your turn, if you control another Wolf or Werewolf, put a +1/+1 counter on Packsong Pup.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfCombatTriggeredAbility(
-                        new AddCountersSourceEffect(CounterType.P1P1.createInstance())
-                ), condition, "At the beginning of combat on your turn," +
-                " if you control another Wolf or Werewolf, put a +1/+1 counter on {this}"
-        ).addHint(hint));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance())
+        ).withInterveningIf(condition).addHint(hint));
 
         // When Packsong Pup dies, you gain life equal to its power.
-        this.addAbility(new DiesSourceTriggeredAbility(new GainLifeEffect(SourcePermanentPowerValue.NOT_NEGATIVE).setText("you gain life equal to its power")));
+        this.addAbility(new DiesSourceTriggeredAbility(
+                new GainLifeEffect(SourcePermanentPowerValue.NOT_NEGATIVE).setText("you gain life equal to its power")
+        ));
     }
 
     private PacksongPup(final PacksongPup card) {

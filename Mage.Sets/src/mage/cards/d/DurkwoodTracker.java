@@ -70,7 +70,7 @@ class DurkwoodTrackerEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent == null
                 || permanent.getZoneChangeCounter(game)
-                != source.getSourceObjectZoneChangeCounter()) {
+                != source.getStackMomentSourceZCC()) {
             return false;
         }
         Permanent targeted = game.getPermanent(source.getFirstTarget());

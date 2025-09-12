@@ -2,17 +2,16 @@ package mage.cards.c;
 
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.WatcherScope;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -59,7 +58,7 @@ public final class ChurningReservoir extends CardImpl {
 
         // {2}, {T}: Create a 1/1 red Phyrexian Goblin creature token. Activate only if an oil counter was removed from a permanent you controlled this turn or a permanent with an oil counter on it was put into a graveyard this turn.
         ability = new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD, new CreateTokenEffect(new PhyrexianGoblinToken()),
+                new CreateTokenEffect(new PhyrexianGoblinToken()),
                 new GenericManaCost(2), ChurningReservoirCondition.instance
         );
         ability.addCost(new TapSourceCost());

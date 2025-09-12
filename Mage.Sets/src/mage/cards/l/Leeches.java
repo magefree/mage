@@ -40,7 +40,7 @@ class LeechesEffect extends OneShotEffect {
 
     LeechesEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Target player loses all poison counters. Leeches deals that much damage to that player";
+        this.staticText = "Target player loses all poison counters. {this} deals that much damage to that player";
     }
 
     private LeechesEffect(final LeechesEffect effect) {

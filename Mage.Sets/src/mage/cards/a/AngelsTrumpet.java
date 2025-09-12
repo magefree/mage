@@ -2,14 +2,17 @@ package mage.cards.a;
 
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.VigilanceAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -47,7 +50,7 @@ class AngelsTrumpetTapEffect extends OneShotEffect {
 
     AngelsTrumpetTapEffect() {
         super(Outcome.Tap);
-        this.staticText = "tap all untapped creatures that player controls that didn't attack this turn. Angel's Trumpet deals damage to the player equal to the number of creatures tapped this way";
+        this.staticText = "tap all untapped creatures that player controls that didn't attack this turn. {this} deals damage to the player equal to the number of creatures tapped this way";
     }
 
     private AngelsTrumpetTapEffect(final AngelsTrumpetTapEffect effect) {

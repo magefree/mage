@@ -63,7 +63,7 @@ public final class KaitoBaneOfNightmares extends CardImpl {
 
         // 0: Surveil 2. Then draw a card for each opponent who lost life this turn.
         Ability ability = new LoyaltyAbility(new SurveilEffect(2), 0);
-        ability.addEffect(new DrawCardSourceControllerEffect(KaitoBaneOfNightmaresCount.instance));
+        ability.addEffect(new DrawCardSourceControllerEffect(KaitoBaneOfNightmaresCount.instance).concatBy("Then"));
         this.addAbility(ability);
 
         // -2: Tap target creature. Put two stun counters on it.

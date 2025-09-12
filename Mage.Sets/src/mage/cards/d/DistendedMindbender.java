@@ -66,7 +66,7 @@ class DistendedMindbenderEffect extends OneShotEffect {
     public DistendedMindbenderEffect() {
         super(Outcome.Discard);
         this.staticText = "target opponent reveals their hand. " +
-                "You choose from it a nonland card with mana value 3 or less and a card with mana value 4 or greater." +
+                "You choose from it a nonland card with mana value 3 or less and a card with mana value 4 or greater. " +
                 "That player discards those cards.";
     }
 
@@ -90,10 +90,10 @@ class DistendedMindbenderEffect extends OneShotEffect {
         TargetCard targetThreeOrLess = new TargetCard(1, Zone.HAND, filterThreeOrLess);
         TargetCard targetFourOrGreater = new TargetCard(1, Zone.HAND, filterFourOrGreater);
         Cards toDiscard = new CardsImpl();
-        if (controller.chooseTarget(Outcome.Benefit, opponent.getHand(), targetThreeOrLess, source, game)) {
+        if (controller.choose(Outcome.Benefit, opponent.getHand(), targetThreeOrLess, source, game)) {
             toDiscard.addAll(targetThreeOrLess.getTargets());
         }
-        if (controller.chooseTarget(Outcome.Benefit, opponent.getHand(), targetFourOrGreater, source, game)) {
+        if (controller.choose(Outcome.Benefit, opponent.getHand(), targetFourOrGreater, source, game)) {
             toDiscard.addAll(targetFourOrGreater.getTargets());
         }
         opponent.discard(toDiscard, false, source, game);

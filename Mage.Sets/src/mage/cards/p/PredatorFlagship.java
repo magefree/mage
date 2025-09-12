@@ -1,7 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -14,25 +13,19 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class PredatorFlagship extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
-
-        static {
-            filter.add(new AbilityPredicate(FlyingAbility.class));
-        }
-
     public PredatorFlagship(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
         this.supertype.add(SuperType.LEGENDARY);
 
         // {2}: Target creature gains flying until end of turn.
@@ -43,8 +36,8 @@ public final class PredatorFlagship extends CardImpl {
         // {5}, {T}: Destroy target creature with flying.
         ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new ManaCostsImpl<>("{5}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
-        this.addAbility(ability);    
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_FLYING));
+        this.addAbility(ability);
     }
 
     private PredatorFlagship(final PredatorFlagship card) {

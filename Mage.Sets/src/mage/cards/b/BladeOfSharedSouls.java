@@ -20,6 +20,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -67,14 +68,11 @@ enum BladeOfSharedSoulsPredicate implements ObjectSourcePlayerPredicate<Permanen
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
-        return input.getSource()
-                .getEffects()
-                .stream()
-                .map(effect -> effect.getValue("attachedPermanent"))
-                .filter(Permanent.class::isInstance)
-                .map(Permanent.class::cast)
-                .noneMatch(permanent -> input.getObject().getId().equals(permanent.getId())
-                        && input.getObject().getZoneChangeCounter(game) == permanent.getZoneChangeCounter(game));
+        return !CardUtil
+                .getEffectValueFromAbility(input.getSource(), "attachedPermanent", Permanent.class)
+                .filter(permanent -> input.getObject().getId().equals(permanent.getId())
+                        && input.getObject().getZoneChangeCounter(game) == permanent.getZoneChangeCounter(game))
+                .isPresent();
     }
 }
 

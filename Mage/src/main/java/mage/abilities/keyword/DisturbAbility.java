@@ -1,8 +1,12 @@
 package mage.abilities.keyword;
 
+import mage.abilities.Ability;
+import mage.abilities.common.PutIntoGraveFromAnywhereSourceAbility;
 import mage.abilities.common.SpellTransformedAbility;
+import mage.abilities.effects.common.ExileSourceEffect;
 import mage.cards.Card;
-import mage.constants.*;
+import mage.constants.SpellAbilityCastMode;
+import mage.constants.Zone;
 import mage.game.Game;
 
 import java.util.UUID;
@@ -21,6 +25,7 @@ import java.util.UUID;
  * @author notgreat, weirddan455, JayDi85
  */
 public class DisturbAbility extends SpellTransformedAbility {
+
     public DisturbAbility(Card card, String manaCost) {
         super(card, manaCost);
 
@@ -57,5 +62,9 @@ public class DisturbAbility extends SpellTransformedAbility {
     public String getRule() {
         return "Disturb " + this.manaCost
                 + " <i>(You may cast this card transformed from your graveyard for its disturb cost.)</i>";
+    }
+
+    public static Ability makeBackAbility() {
+        return new PutIntoGraveFromAnywhereSourceAbility(new ExileSourceEffect().setText("exile it instead"));
     }
 }

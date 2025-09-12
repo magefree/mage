@@ -92,14 +92,14 @@ public final class Conspiracy extends CardImpl {
                 }
             }
             // in Exile
-            for (Card card : game.getState().getExile().getAllCards(game)) {
-                if (card.isOwnedBy(controller.getId()) && card.isCreature(game)) {
+            for (Card card : game.getState().getExile().getCardsOwned(game, controller.getId())) {
+                if (card.isCreature(game)) {
                     setCreatureSubtype(card, subType, game);
                 }
             }
             // in Library (e.g. for Mystical Teachings)
             for (Card card : controller.getLibrary().getCards(game)) {
-                if (card.isOwnedBy(controller.getId()) && card.isCreature(game)) {
+                if (card.isCreature(game)) {
                     setCreatureSubtype(card, subType, game);
                 }
             }

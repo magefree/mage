@@ -23,7 +23,7 @@ public final class MooglesValor extends CardImpl {
 
         // For each creature you control, create a 1/2 white Moogle creature token with lifelink. Then creatures you control gain indestructible until end of turn.
         this.getSpellAbility().addEffect(new CreateTokenEffect(
-                new MoogleToken(), CreaturesYouControlCount.instance
+                new MoogleToken(), CreaturesYouControlCount.PLURAL
         ).setText("for each creature you control, create a 1/2 white Moogle creature token with lifelink"));
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(
                 IndestructibleAbility.getInstance(), Duration.EndOfTurn,

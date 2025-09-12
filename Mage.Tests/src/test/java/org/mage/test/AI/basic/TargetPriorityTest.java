@@ -21,52 +21,81 @@ import org.mage.test.serverside.base.CardTestPlayerBaseAI;
 public class TargetPriorityTest extends CardTestPlayerBaseAI {
 
     // TODO: enable _target_ tests after computerPlayer.chooseTarget will be reworks like chooseTargetAmount
+
     @Test
-    @Ignore
-    public void test_target_PriorityKillByBigPT() {
+    public void test_Target_PriorityDamageToGoodOpponent() {
         addCard(Zone.HAND, playerA, "Lightning Bolt");
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
         //
         addCard(Zone.BATTLEFIELD, playerB, "Memnite", 3); // 1/1
         addCard(Zone.BATTLEFIELD, playerB, "Balduvian Bears", 3); // 2/2
-        addCard(Zone.BATTLEFIELD, playerB, "Ashcoat Bear", 3); // 2/2 with ability
-        addCard(Zone.BATTLEFIELD, playerB, "Golden Bear", 3); // 4/3
-        addCard(Zone.BATTLEFIELD, playerB, "Battering Sliver", 3); // 4/4 with ability
+        addCard(Zone.BATTLEFIELD, playerA, "Ashcoat Bear", 3); // 2/2 with ability
 
+        // AI must make damage to opponent
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt");
 
+        setStrictChooseMode(false);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
+        assertLife(playerA, 20);
+        assertLife(playerB, 20 - 3);
+    }
+
+    @Test
+    public void test_Target_PriorityDamageToBadLowestCreature() {
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        //
+        // You have shroud.
+        addCard(Zone.BATTLEFIELD, playerB, "Ivory Mask", 1);
+        //
+        addCard(Zone.BATTLEFIELD, playerA, "Balduvian Bears", 3); // 2/2
+        addCard(Zone.BATTLEFIELD, playerA, "Memnite", 3); // 1/1
+        addCard(Zone.BATTLEFIELD, playerA, "Ashcoat Bear", 3); // 2/2 with ability
+
+        // AI can't target opponent so target own lowest creature
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt");
+
+        setStrictChooseMode(false);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+        assertPermanentCount(playerA, "Memnite", 3 - 1);
+    }
+
+    @Test
+    public void test_Target_PriorityDamageToBiggestCreature() {
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        //
+        // You have shroud.
+        addCard(Zone.BATTLEFIELD, playerA, "Ivory Mask", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Ivory Mask", 1);
+        //
+        addCard(Zone.BATTLEFIELD, playerB, "Memnite", 3); // 1/1
+        addCard(Zone.BATTLEFIELD, playerB, "Balduvian Bears", 3); // 2/2
+        addCard(Zone.BATTLEFIELD, playerB, "Ashcoat Bear", 3); // 2/2 with ability
+        addCard(Zone.BATTLEFIELD, playerB, "Golden Bear", 3); // 4/3
+        //addCard(Zone.BATTLEFIELD, playerB, "Battering Sliver", 3); // 4/4 with ability TODO: add after AI will simulation simple choices too
+
+        // AI must choose biggest creature to kill from opponent - 4/3
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        showBattlefield("as", 1, PhaseStep.PRECOMBAT_MAIN, playerB);
+
+        setStrictChooseMode(false);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
         assertPermanentCount(playerB, "Memnite", 3);
         assertPermanentCount(playerB, "Balduvian Bears", 3);
         assertPermanentCount(playerB, "Ashcoat Bear", 3);
         assertPermanentCount(playerB, "Golden Bear", 3 - 1);
-        assertPermanentCount(playerB, "Battering Sliver", 3);
-    }
-
-    @Test
-    @Ignore
-    public void test_target_PriorityByKillByLowPT() {
-        addCard(Zone.HAND, playerA, "Lightning Bolt");
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
-        //
-        addCard(Zone.BATTLEFIELD, playerB, "Memnite", 3); // 1/1
-        //addCard(Zone.BATTLEFIELD, playerB, "Balduvian Bears", 3); // 2/2
-        //addCard(Zone.BATTLEFIELD, playerB, "Ashcoat Bear", 3); // 2/2 with ability
-        //addCard(Zone.BATTLEFIELD, playerB, "Golden Bear", 3); // 4/3
-        addCard(Zone.BATTLEFIELD, playerB, "Battering Sliver", 3); // 4/4 with ability
-
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt");
-
-        setStopAt(1, PhaseStep.BEGIN_COMBAT);
-        execute();
-
-        assertPermanentCount(playerB, "Memnite", 3 - 1);
-        //assertPermanentCount(playerB, "Balduvian Bears", 3);
-        //assertPermanentCount(playerB, "Ashcoat Bear", 3);
-        //assertPermanentCount(playerB, "Golden Bear", 3);
-        assertPermanentCount(playerB, "Battering Sliver", 3);
     }
 
     @Test
@@ -153,7 +182,7 @@ public class TargetPriorityTest extends CardTestPlayerBaseAI {
 
     // TARGET AMOUNT
     @Test
-    public void test_targetAmount_PriorityKillByBigPT() {
+    public void test_TargetAmount_PriorityKillByBigPT() {
         addCard(Zone.HAND, playerA, "Flames of the Firebrand"); // damage 3
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
         //
@@ -176,7 +205,7 @@ public class TargetPriorityTest extends CardTestPlayerBaseAI {
     }
 
     @Test
-    public void test_targetAmount_PriorityByKillByLowPT() {
+    public void test_TargetAmount_PriorityByKillByLowPT() {
         addCard(Zone.HAND, playerA, "Flames of the Firebrand"); // damage 3
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
         //
@@ -199,7 +228,7 @@ public class TargetPriorityTest extends CardTestPlayerBaseAI {
     }
 
     @Test
-    public void test_targetAmount_PriorityKillByExtraPoints() {
+    public void test_TargetAmount_PriorityKillByExtraPoints() {
         addCard(Zone.HAND, playerA, "Flames of the Firebrand"); // damage 3
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
         //
@@ -222,7 +251,7 @@ public class TargetPriorityTest extends CardTestPlayerBaseAI {
     }
 
     @Test
-    public void test_targetAmount_NormalCase() {
+    public void test_TargetAmount_NormalCase() {
         Ability ability = new SimpleActivatedAbility(Zone.ALL, new DamageMultiEffect(), new ManaCostsImpl<>("{R}"));
         ability.addTarget(new TargetCreaturePermanentAmount(3, 0, 3));
         addCustomCardWithAbility("damage 3", playerA, ability);
@@ -247,7 +276,7 @@ public class TargetPriorityTest extends CardTestPlayerBaseAI {
     }
 
     @Test
-    public void test_targetAmount_BadCase() {
+    public void test_TargetAmount_BadCase() {
         // choose targets as enters battlefield (e.g. can't be canceled)
         SpellAbility spell = new SpellAbility(new ManaCostsImpl<>("{R}"), "damage 3", Zone.HAND);
         Ability ability = new EntersBattlefieldTriggeredAbility(new DamageMultiEffect());
@@ -263,14 +292,12 @@ public class TargetPriorityTest extends CardTestPlayerBaseAI {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "damage 3");
 
-        // must damage x3 Balduvian Bears by -1 to keep alive
-        checkDamage("pt after", 1, PhaseStep.BEGIN_COMBAT, playerA, "Balduvian Bears", 1);
-        // showBattlefield("after", 1, PhaseStep.BEGIN_COMBAT, playerA);
+        // up to target is optional, so AI must choose nothing due only bad targets
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertPermanentCount(playerA, "damage 3", 1);
-
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
         assertPermanentCount(playerA, "Memnite", 3);
         assertPermanentCount(playerA, "Balduvian Bears", 3);
         assertPermanentCount(playerA, "Ashcoat Bear", 3);
@@ -280,7 +307,7 @@ public class TargetPriorityTest extends CardTestPlayerBaseAI {
 
     @Test
     @Ignore // do not enable it in production, only for devs
-    public void test_targetAmount_Performance() {
+    public void test_TargetAmount_Performance() {
         int cardsMultiplier = 3;
 
         Ability ability = new SimpleActivatedAbility(Zone.ALL, new DamageMultiEffect(), new ManaCostsImpl<>("{R}"));

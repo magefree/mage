@@ -237,9 +237,9 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Poison-Blade Mentor", 288, Rarity.UNCOMMON, mage.cards.p.PoisonBladeMentor.class));
         cards.add(new SetCardInfo("Propaganda", 195, Rarity.UNCOMMON, mage.cards.p.Propaganda.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Propaganda", 85, Rarity.UNCOMMON, mage.cards.p.Propaganda.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Ratonhnhake:ton", 150, Rarity.RARE, mage.cards.r.Ratonhnhaketon.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Ratonhnhake:ton", 244, Rarity.RARE, mage.cards.r.Ratonhnhaketon.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Ratonhnhake:ton", 62, Rarity.RARE, mage.cards.r.Ratonhnhakton.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ratonhnhaketon", 150, Rarity.RARE, mage.cards.r.Ratonhnhaketon.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ratonhnhaketon", 244, Rarity.RARE, mage.cards.r.Ratonhnhaketon.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ratonhnhaketon", 62, Rarity.RARE, mage.cards.r.Ratonhnhaketon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Raven Clan War-Axe", 297, Rarity.RARE, mage.cards.r.RavenClanWarAxe.class));
         cards.add(new SetCardInfo("Reconnaissance", 179, Rarity.UNCOMMON, mage.cards.r.Reconnaissance.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Reconnaissance", 82, Rarity.UNCOMMON, mage.cards.r.Reconnaissance.class, NON_FULL_USE_VARIOUS));

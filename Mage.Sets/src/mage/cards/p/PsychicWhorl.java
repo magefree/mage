@@ -32,7 +32,7 @@ public final class PsychicWhorl extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new SurveilEffect(2), condition,
-                "then if you control a Rat, surveil 2"
+                "Then if you control a Rat, surveil 2"
         ));
         this.getSpellAbility().addHint(hint);
     }

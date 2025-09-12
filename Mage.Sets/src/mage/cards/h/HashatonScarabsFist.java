@@ -83,7 +83,7 @@ class HashatonScarabsFistEffect extends OneShotEffect {
 
     HashatonScarabsFistEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "create a tapped token that`s a copy of that card, except it`s a 4/4 black Zombie";
+        this.staticText = "create a tapped token that's a copy of that card, except it's a 4/4 black Zombie";
     }
 
     private HashatonScarabsFistEffect(OneShotEffect effect) {

@@ -4,6 +4,9 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.PutCards;
@@ -26,6 +29,7 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
     protected boolean revealPickedCards;
     protected boolean optional;
     protected boolean upTo;
+    protected Effect otherwiseEffect = null;
 
     public LookLibraryAndPickControllerEffect(int numberOfCards, int numberToPick,
                                               PutCards putPickedCards, PutCards putLookedCards) {
@@ -87,11 +91,17 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
         this.revealPickedCards = effect.revealPickedCards;
         this.optional = effect.optional;
         this.upTo = effect.upTo;
+        this.otherwiseEffect = effect.otherwiseEffect != null ? effect.otherwiseEffect.copy() : null;
     }
 
     @Override
     public LookLibraryAndPickControllerEffect copy() {
         return new LookLibraryAndPickControllerEffect(this);
+    }
+
+    public LookLibraryAndPickControllerEffect withOtherwiseEffect(Effect otherwiseEffect) {
+        this.otherwiseEffect = otherwiseEffect;
+        return this;
     }
 
     @Override
@@ -120,6 +130,15 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
     protected boolean actionWithPickedCards(Game game, Ability source, Player player, Cards pickedCards, Cards otherCards) {
         boolean result = putPickedCards.moveCards(player, pickedCards, source, game);
         result |= putLookedCards.moveCards(player, otherCards, source, game);
+        if (!pickedCards.isEmpty() || otherwiseEffect == null) {
+            return result;
+        }
+        game.processAction();
+        if (otherwiseEffect instanceof OneShotEffect) {
+            otherwiseEffect.apply(game, source);
+        } else if (otherwiseEffect instanceof ContinuousEffect) {
+            game.addEffect((ContinuousEffect) otherwiseEffect, source);
+        }
         return result;
     }
 
@@ -196,6 +215,12 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
             sb.append("back ");
         }
         sb.append(putLookedCards.getMessage(false, plural));
+        if (otherwiseEffect != null) {
+            sb.append(". If you didn't put a card ");
+            sb.append(putPickedCards.getMessage(false, false));
+            sb.append(" this way, ");
+            sb.append(otherwiseEffect.getText(mode));
+        }
 
         // get text frame from super class and inject action text
         return setText(mode, sb.toString());

@@ -87,7 +87,7 @@ class HenzieToolboxTorreGainBlitzEffect extends ContinuousEffectImpl {
         controller.getLibrary().getCards(game).stream()
                 .filter(c -> filter.match(c, game))
                 .forEach(cardsToGainBlitz::add);
-        game.getExile().getAllCardsByRange(game, controller.getId()).stream()
+        game.getExile().getCardsInRange(game, controller.getId()).stream()
                 .filter(c -> filter.match(c, game))
                 .forEach(cardsToGainBlitz::add);
         game.getCommanderCardsFromCommandZone(controller, CommanderCardType.ANY)

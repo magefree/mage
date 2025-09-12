@@ -1,7 +1,5 @@
 package mage.cards.t;
 
-import java.util.UUID;
-
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
@@ -20,6 +18,8 @@ import mage.constants.CardType;
 import mage.constants.ManaType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -44,8 +44,7 @@ public final class TabletOfCompleation extends CardImpl {
 
         // {1}, {T}: Draw a card. Activate only if Tablet of Compleation has five or more oil counters on it.
         Ability ability = new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1),
-                new GenericManaCost(1), condition2
+                new DrawCardSourceControllerEffect(1), new GenericManaCost(1), condition2
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

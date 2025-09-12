@@ -83,7 +83,7 @@ class TheWanderingEmperorEffect extends AsThoughEffectImpl {
 
     TheWanderingEmperorEffect() {
         super(AsThoughEffectType.ACTIVATE_AS_INSTANT, Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "as long as {this} entered the battlefield this turn, " +
+        staticText = "as long as {this} entered this turn, " +
                 "you may activate her loyalty abilities any time you could cast an instant";
     }
 

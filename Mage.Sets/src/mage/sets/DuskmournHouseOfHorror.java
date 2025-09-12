@@ -142,6 +142,8 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Get Out", 60, Rarity.UNCOMMON, mage.cards.g.GetOut.class));
         cards.add(new SetCardInfo("Ghost Vacuum", 248, Rarity.RARE, mage.cards.g.GhostVacuum.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ghost Vacuum", 326, Rarity.RARE, mage.cards.g.GhostVacuum.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ghostly Dancers", 13, Rarity.RARE, mage.cards.g.GhostlyDancers.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ghostly Dancers", 302, Rarity.RARE, mage.cards.g.GhostlyDancers.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Give In to Violence", 101, Rarity.COMMON, mage.cards.g.GiveInToViolence.class));
         cards.add(new SetCardInfo("Glimmer Seeker", 14, Rarity.UNCOMMON, mage.cards.g.GlimmerSeeker.class));
         cards.add(new SetCardInfo("Glimmerburst", 62, Rarity.COMMON, mage.cards.g.Glimmerburst.class));
@@ -214,6 +216,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Meathook Massacre II", 311, Rarity.MYTHIC, mage.cards.m.MeathookMassacreII.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Miasma Demon", 109, Rarity.UNCOMMON, mage.cards.m.MiasmaDemon.class));
         cards.add(new SetCardInfo("Midnight Mayhem", 222, Rarity.UNCOMMON, mage.cards.m.MidnightMayhem.class));
+        cards.add(new SetCardInfo("Monstrous Emergence", 191, Rarity.COMMON, mage.cards.m.MonstrousEmergence.class));
         cards.add(new SetCardInfo("Most Valuable Slayer", 144, Rarity.COMMON, mage.cards.m.MostValuableSlayer.class));
         cards.add(new SetCardInfo("Mountain", 275, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 283, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
@@ -278,6 +281,9 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Razorkin Needlehead", 153, Rarity.RARE, mage.cards.r.RazorkinNeedlehead.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Razorkin Needlehead", 347, Rarity.RARE, mage.cards.r.RazorkinNeedlehead.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Razortrap Gorge", 267, Rarity.COMMON, mage.cards.r.RazortrapGorge.class));
+        cards.add(new SetCardInfo("Reluctant Role Model", 26, Rarity.RARE, mage.cards.r.ReluctantRoleModel.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Reluctant Role Model", 289, Rarity.RARE, mage.cards.r.ReluctantRoleModel.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Reluctant Role Model", 303, Rarity.RARE, mage.cards.r.ReluctantRoleModel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Resurrected Cultist", 115, Rarity.COMMON, mage.cards.r.ResurrectedCultist.class));
         cards.add(new SetCardInfo("Rip, Spawn Hunter", 228, Rarity.RARE, mage.cards.r.RipSpawnHunter.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rip, Spawn Hunter", 362, Rarity.RARE, mage.cards.r.RipSpawnHunter.class, NON_FULL_USE_VARIOUS));
@@ -347,6 +353,8 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Tyvar, the Pummeler", 353, Rarity.MYTHIC, mage.cards.t.TyvarThePummeler.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tyvar, the Pummeler", 408, Rarity.MYTHIC, mage.cards.t.TyvarThePummeler.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Unable to Scream", 78, Rarity.COMMON, mage.cards.u.UnableToScream.class));
+        cards.add(new SetCardInfo("Undead Sprinter", 237, Rarity.RARE, mage.cards.u.UndeadSprinter.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Undead Sprinter", 350, Rarity.RARE, mage.cards.u.UndeadSprinter.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Under the Skin", 203, Rarity.UNCOMMON, mage.cards.u.UnderTheSkin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Under the Skin", 323, Rarity.UNCOMMON, mage.cards.u.UnderTheSkin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Unidentified Hovership", 305, Rarity.RARE, mage.cards.u.UnidentifiedHovership.class, NON_FULL_USE_VARIOUS));
@@ -366,7 +374,9 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Valgavoth's Lair", 327, Rarity.RARE, mage.cards.v.ValgavothsLair.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Valgavoth's Onslaught", 204, Rarity.RARE, mage.cards.v.ValgavothsOnslaught.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Valgavoth's Onslaught", 324, Rarity.RARE, mage.cards.v.ValgavothsOnslaught.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Valgavoth, Terror Eater", 120, Rarity.MYTHIC, mage.cards.v.ValgavothTerrorEater.class));
+        cards.add(new SetCardInfo("Valgavoth, Terror Eater", 120, Rarity.MYTHIC, mage.cards.v.ValgavothTerrorEater.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Valgavoth, Terror Eater", 352, Rarity.MYTHIC, mage.cards.v.ValgavothTerrorEater.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Valgavoth, Terror Eater", 407, Rarity.MYTHIC, mage.cards.v.ValgavothTerrorEater.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vanish from Sight", 82, Rarity.COMMON, mage.cards.v.VanishFromSight.class));
         cards.add(new SetCardInfo("Vengeful Possession", 162, Rarity.UNCOMMON, mage.cards.v.VengefulPossession.class));
         cards.add(new SetCardInfo("Veteran Survivor", 40, Rarity.UNCOMMON, mage.cards.v.VeteranSurvivor.class));

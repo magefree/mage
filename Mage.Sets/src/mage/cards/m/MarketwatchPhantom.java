@@ -1,7 +1,7 @@
 package mage.cards.m;
 
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -23,7 +23,7 @@ import java.util.UUID;
 public final class MarketwatchPhantom extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterControlledCreaturePermanent("another creature with power 2 or less");
+            = new FilterControlledCreaturePermanent("another creature you control with power 2 or less");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -39,7 +39,7 @@ public final class MarketwatchPhantom extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever another creature with power 2 or less you control enters, Marketwatch Phantom gains flying until end of turn.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(
                 new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), filter
         ));
     }

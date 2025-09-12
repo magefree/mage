@@ -5,7 +5,6 @@ import mage.abilities.effects.Effect;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 
 /**
  * @author TheElk801
@@ -41,10 +40,6 @@ public class TransformIntoSourceTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (!event.getTargetId().equals(this.getSourceId())) {
-            return false;
-        }
-        Permanent permanent = getSourcePermanentIfItStillExists(game);
-        return permanent != null && permanent.isTransformed();
+        return event.getTargetId().equals(this.getSourceId());
     }
 }

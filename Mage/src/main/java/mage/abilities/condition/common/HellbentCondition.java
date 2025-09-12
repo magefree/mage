@@ -16,6 +16,6 @@ public enum HellbentCondition implements Condition {
 
     @Override
     public String toString() {
-        return "if you have no cards in hand";
+        return "you have no cards in hand";
     }
 }

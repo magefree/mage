@@ -11,6 +11,7 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.card.FaceDownPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.AshiokNightmareMuseToken;
@@ -20,8 +21,6 @@ import mage.target.common.TargetNonlandPermanent;
 import mage.util.CardUtil;
 
 import java.util.UUID;
-import mage.filter.predicate.card.FaceDownPredicate;
-import mage.filter.predicate.card.OwnerIdPredicate;
 
 /**
  * @author TheElk801
@@ -96,6 +95,10 @@ class AshiokNightmareMuseBounceEffect extends OneShotEffect {
 class AshiokNightmareMuseCastEffect extends OneShotEffect {
 
     private static final FilterCard filter = new FilterCard("face-up cards your opponents own from exile");
+    static {
+        filter.add(TargetController.OPPONENT.getOwnerPredicate());
+        filter.add(Predicates.not(FaceDownPredicate.instance));
+    }
 
     AshiokNightmareMuseCastEffect() {
         super(Outcome.Benefit);
@@ -117,11 +120,10 @@ class AshiokNightmareMuseCastEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        // card is owned by an opponent and is face up
-        filter.add(Predicates.not(new OwnerIdPredicate(controller.getId())));
-        filter.add(Predicates.not(FaceDownPredicate.instance));
         CardUtil.castMultipleWithAttributeForFree(
-                controller, source, game, new CardsImpl(game.getExile().getCards(filter, game)),
+                controller, source, game, new CardsImpl(
+                        game.getExile().getCardsInRange(filter, controller.getId(), source, game)
+                ),
                 StaticFilters.FILTER_CARD, 3
         );
         return true;

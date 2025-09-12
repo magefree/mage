@@ -1,21 +1,23 @@
-
 package mage.cards.s;
 
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.continuous.DontLoseByZeroOrLessLifeEffect;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.ComparisonType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
@@ -27,13 +29,14 @@ import mage.target.common.TargetOpponent;
 import java.util.UUID;
 
 /**
- *
  * @author L_J
  */
 public final class SoulEcho extends CardImpl {
 
+    private static final Condition condition = new SourceHasCounterCondition(CounterType.ECHO, ComparisonType.EQUAL_TO, 0);
+
     public SoulEcho(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{X}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{X}{W}{W}");
 
         // Soul Echo enters the battlefield with X echo counters on it.
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.ECHO.createInstance())));
@@ -43,8 +46,12 @@ public final class SoulEcho extends CardImpl {
 
         // At the beginning of your upkeep, sacrifice Soul Echo if there are no echo counters on it. 
         // Otherwise, target opponent may choose that for each 1 damage that would be dealt to you until your next upkeep, you remove an echo counter from Soul Echo instead.
-        Effect effect = new ConditionalOneShotEffect(new SacrificeSourceEffect(), new SoulEchoOpponentsChoiceEffect(), new SourceHasCounterCondition(CounterType.ECHO, 0, 0), "sacrifice {this} if there are no echo counters on it. Otherwise, target opponent may choose that for each 1 damage that would be dealt to you until your next upkeep, you remove an echo counter from {this} instead");
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(effect);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new ConditionalOneShotEffect(
+                new SacrificeSourceEffect(), new SoulEchoOpponentsChoiceEffect(),
+                condition, "sacrifice {this} if there are no echo counters on it. " +
+                "Otherwise, target opponent may choose that for each 1 damage that would be " +
+                "dealt to you until your next upkeep, you remove an echo counter from {this} instead"
+        ));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }
@@ -64,7 +71,7 @@ class SoulEchoOpponentsChoiceEffect extends OneShotEffect {
     SoulEchoOpponentsChoiceEffect() {
         super(Outcome.PreventDamage);
         staticText = "target opponent may choose that for each 1 damage that would be dealt to you " +
-            "until your next upkeep, you remove an echo counter from {this} instead";
+                "until your next upkeep, you remove an echo counter from {this} instead";
     }
 
     private SoulEchoOpponentsChoiceEffect(final SoulEchoOpponentsChoiceEffect effect) {

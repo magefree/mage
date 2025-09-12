@@ -42,7 +42,7 @@ public class CircleOfProtectionTest extends CardTestPlayerBase {
         execute();
 
         assertDamageReceived(playerA, "Caelorna, Coral Tyrant", 2); // no prevent
-        assertLife(playerB, 20);
+        assertLife(playerA, 20);
         assertTappedCount("Plains", true, 1);
     }
 

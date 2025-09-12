@@ -73,7 +73,7 @@ class VincentsLimitBreakEffect extends OneShotEffect {
 
     VincentsLimitBreakEffect(int power, int toughness) {
         super(Outcome.Benefit);
-        staticText = power + "/" + toughness;
+        staticText = power + "/" + toughness + '.';
         this.power = power;
         this.toughness = toughness;
     }

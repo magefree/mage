@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import mage.MageInt;
@@ -16,7 +15,8 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterHistoricCard;
+import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.HistoricPredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -28,6 +28,11 @@ import java.util.UUID;
  * @author LevelX2
  */
 public final class RonaDiscipleOfGix extends CardImpl {
+
+    private static final FilterCard filter = new FilterCard("historic card from your graveyard");
+    static {
+        filter.add(HistoricPredicate.instance);
+    }
 
     public RonaDiscipleOfGix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{B}");
@@ -45,7 +50,7 @@ public final class RonaDiscipleOfGix extends CardImpl {
                         .setText("exile target historic card from your graveyard. <i>(Artifacts, legendaries, and Sagas are historic.)</i>"),
                 true
         );
-        ability.addTarget(new TargetCardInYourGraveyard(new FilterHistoricCard("historic card from your graveyard")));
+        ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
 
         // You may cast nonland cards exiled with Rona.

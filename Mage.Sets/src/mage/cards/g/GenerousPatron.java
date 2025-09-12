@@ -1,16 +1,14 @@
 package mage.cards.g;
 
 import mage.MageInt;
+import mage.abilities.common.PutCounterOnPermanentTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.SupportAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.abilities.common.PutCounterOnCreatureTriggeredAbility;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -18,13 +16,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class GenerousPatron extends CardImpl {
-
-    private static final FilterPermanent filter
-            = new FilterCreaturePermanent("creature you don't control");
-
-    static {
-        filter.add(TargetController.NOT_YOU.getControllerPredicate());
-    }
 
     public GenerousPatron(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
@@ -38,7 +29,8 @@ public final class GenerousPatron extends CardImpl {
         this.addAbility(new SupportAbility(this, 2));
 
         // Whenever you put one or more counters on a creature you don't control, draw a card.
-        this.addAbility(new PutCounterOnCreatureTriggeredAbility(new DrawCardSourceControllerEffect(1), filter));
+        this.addAbility(new PutCounterOnPermanentTriggeredAbility(new DrawCardSourceControllerEffect(1),
+                null, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
     }
 
     private GenerousPatron(final GenerousPatron card) {

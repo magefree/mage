@@ -9,10 +9,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.token.AngelToken;
 import mage.players.Player;
@@ -65,7 +62,7 @@ class GeistOfSaintTraftEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         
         if (controller != null && effect.apply(game, source)) {
-            effect.exileTokensCreatedAtEndOfCombat(game, source);
+            effect.removeTokensCreatedAt(game, source, true, PhaseStep.END_COMBAT, TargetController.ANY);
             return true;
         }
         return false;

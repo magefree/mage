@@ -10,6 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -33,7 +34,7 @@ public final class Parch extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         Mode mode = new Mode(new DamageTargetEffect(4));
-        mode.addTarget(new TargetCreaturePermanent(filter));
+        mode.addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addMode(mode);
     }
 

@@ -1,7 +1,6 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.dynamicvalue.IntPlusDynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInAllGraveyardsCount;
 import mage.abilities.effects.Effect;
@@ -14,8 +13,9 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class FeastOfFlesh extends CardImpl {
@@ -27,14 +27,14 @@ public final class FeastOfFlesh extends CardImpl {
     }
 
     public FeastOfFlesh(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}");
 
         // Feast of Flesh deals X damage to target creature and you gain X life, where X is 1 plus the number of cards named Feast of Flesh in all graveyards.
         IntPlusDynamicValue value = new IntPlusDynamicValue(1, new CardsInAllGraveyardsCount(filter));
         Effect effect1 = new DamageTargetEffect(value);
-        effect1.setText("Feast of Flesh deals X damage to target creature");
+        effect1.setText("{this} deals X damage to target creature");
         Effect effect2 = new GainLifeEffect(value);
-        effect2.setText("and you gain X life, where X is 1 plus the number of cards named {this} in all graveyards");
+        effect2.setText("and you gain X life, where X is 1 plus the number of cards named Feast of Flesh in all graveyards");
         this.getSpellAbility().addEffect(effect1);
         this.getSpellAbility().addEffect(effect2);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

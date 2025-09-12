@@ -82,7 +82,7 @@ class MiragePhalanxEffect extends OneShotEffect {
         // Create the token(s)
         tokenCopyEffect.apply(game, source);
         // Exile it at the end of combat
-        tokenCopyEffect.exileTokensCreatedAtEndOfCombat(game, source);
+        tokenCopyEffect.removeTokensCreatedAt(game, source, true, PhaseStep.END_COMBAT, TargetController.ANY);
 
         return !tokenCopyEffect.getAddedPermanents().isEmpty();
     }

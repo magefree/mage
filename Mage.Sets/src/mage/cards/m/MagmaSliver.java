@@ -20,7 +20,10 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.Target;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import static mage.constants.SubType.SLIVER;
 
 /**
  *
@@ -42,8 +45,7 @@ public final class MagmaSliver extends CardImpl {
                         StaticFilters.FILTER_PERMANENT_ALL_SLIVERS),
                         StaticValue.get(0), Duration.EndOfTurn),
                 new TapSourceCost());
-        Target target = new TargetCreaturePermanent(
-                new FilterCreaturePermanent(SubType.SLIVER, "Sliver creature"));
+        Target target = new TargetPermanent(new FilterCreaturePermanent(SLIVER, "Sliver creature"));
         ability.addTarget(target);
         Effect effect = new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield,
                 StaticFilters.FILTER_PERMANENT_ALL_SLIVERS);

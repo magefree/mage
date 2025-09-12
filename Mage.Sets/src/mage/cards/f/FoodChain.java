@@ -15,12 +15,11 @@ import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetControlledPermanent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,9 +34,10 @@ public final class FoodChain extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
 
         // Exile a creature you control: Add X mana of any one color, where X is the exiled creature's converted mana cost plus one. Spend this mana only to cast creature spells.
-        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new FoodChainManaEffect(),
-                new ExileTargetCost(new TargetControlledCreaturePermanent(StaticFilters.FILTER_CONTROLLED_A_CREATURE)));
-        this.addAbility(ability);
+        this.addAbility(new SimpleManaAbility(
+                new FoodChainManaEffect(),
+                new ExileTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_A_CREATURE))
+        ));
     }
 
     private FoodChain(final FoodChain card) {

@@ -106,4 +106,80 @@ public class CommanderDeckValidationTest extends MageTestPlayerBase {
         deckTester.validate(
                 "Commanders with the 'Choose a Background' ability should be able to have a background as an additional commander");
     }
+
+    @Test()
+    public void testDoctorsCompanion() {
+        DeckTester deckTester = new DeckTester(new Commander());
+        deckTester.addMaindeck("Plains", 98);
+
+        deckTester.addSideboard("The First Doctor", 1);
+        deckTester.addSideboard("Barbara Wright", 1);
+
+        deckTester.validate("You can have two commanders if one is a Time Lord Doctor and the other has 'Doctor's companion'");
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testDoctorsCompanion2() {
+        DeckTester deckTester = new DeckTester(new Commander());
+        deckTester.addMaindeck("Plains", 98);
+
+        deckTester.addSideboard("The First Doctor", 1);
+        deckTester.addSideboard("Isamaru, Hound of Konda", 1);
+
+        deckTester.validate("You can't have two commanders if one is a Time Lord Doctor and the other doesn't have 'Doctor's companion'");
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testDoctorsCompanion3() {
+        DeckTester deckTester = new DeckTester(new Commander());
+        deckTester.addMaindeck("Plains", 98);
+
+        deckTester.addSideboard("Mistform Ultimus", 1);
+        deckTester.addSideboard("Barbara Wright", 1);
+
+        deckTester.validate(
+                "You can't have two commanders if one has 'Doctor's companion' " +
+                        "but the other has additional creature types in addition to being a Time Lord Doctor"
+        );
+    }
+
+    @Test()
+    public void testVehicles1() {
+        DeckTester deckTester = new DeckTester(new Commander());
+        deckTester.addMaindeck("Plains", 99);
+
+        deckTester.addSideboard("Parhelion II", 1);
+
+        deckTester.validate("Legendary Vehicles should be able to be a commander");
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testVehicles2() {
+        DeckTester deckTester = new DeckTester(new Commander());
+        deckTester.addMaindeck("Plains", 99);
+
+        deckTester.addSideboard("Dragonfly Suit", 1);
+
+        deckTester.validate("Nonlegendary Vehicles should not be able to be a commander");
+    }
+
+    @Test()
+    public void testSpacecraft1() {
+        DeckTester deckTester = new DeckTester(new Commander());
+        deckTester.addMaindeck("Plains", 99);
+
+        deckTester.addSideboard("The Seriema", 1);
+
+        deckTester.validate("Legendary Spacecraft should be able to be a commander if they can become a creature");
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testSpacecraft2() {
+        DeckTester deckTester = new DeckTester(new Commander());
+        deckTester.addMaindeck("Wastes", 99);
+
+        deckTester.addSideboard("The Eternity Elevator", 1);
+
+        deckTester.validate("Legendary Spacecraft should not be able to be a commander if they can't become a creature");
+    }
 }

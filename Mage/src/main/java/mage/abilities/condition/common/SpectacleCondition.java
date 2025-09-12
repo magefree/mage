@@ -1,4 +1,3 @@
-
 package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
@@ -11,11 +10,15 @@ import mage.util.CardUtil;
  * @author TheElk801
  */
 public enum SpectacleCondition implements Condition {
-
     instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
         return CardUtil.checkSourceCostsTagExists(game, source, SpectacleAbility.SPECTACLE_ACTIVATION_VALUE_KEY);
+    }
+
+    @Override
+    public String toString() {
+        return "its spectacle cost was paid";
     }
 }

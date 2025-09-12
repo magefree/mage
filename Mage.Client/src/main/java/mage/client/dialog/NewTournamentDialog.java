@@ -43,6 +43,8 @@ public class NewTournamentDialog extends MageDialog {
     // it's ok to have 4 players at the screen, 6 is fine for big screens too
     private static final int MAX_WORKABLE_PLAYERS_PER_GAME = 6;
 
+    private static final String CUBE_FROM_DECK_NAME = "Cube From Deck";
+
     // temp settings on loading players list
     private final List<PlayerType> prefPlayerTypes = new ArrayList<>();
     private final List<Integer> prefPlayerSkills = new ArrayList<>();
@@ -712,6 +714,21 @@ public class NewTournamentDialog extends MageDialog {
             }
         }
 
+        // cube from deck uses weird choose logic from combobox select, so players can forget or cancel it
+        if (tournamentType.isDraft()
+                && tOptions.getLimitedOptions().getDraftCubeName() != null
+                && tOptions.getLimitedOptions().getDraftCubeName().contains(CUBE_FROM_DECK_NAME)) {
+            if (tOptions.getLimitedOptions().getCubeFromDeck() == null || tOptions.getLimitedOptions().getCubeFromDeck().getCards().isEmpty()) {
+                JOptionPane.showMessageDialog(
+                        MageFrame.getDesktop(),
+                        "Found empty cube. You must choose Cube From Deck again and select existing deck file.",
+                        "Warning",
+                        JOptionPane.WARNING_MESSAGE
+                );
+                return;
+            }
+        }
+
         // save last settings
         onSaveSettings(0, tOptions);
 
@@ -826,7 +843,7 @@ public class NewTournamentDialog extends MageDialog {
 
     private void cbDraftCubeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDraftCubeActionPerformed
         cubeFromDeckFilename = "";
-        if (cbDraftCube.getSelectedItem().toString().equals("Cube From Deck")) {
+        if (cbDraftCube.getSelectedItem().toString().startsWith(CUBE_FROM_DECK_NAME)) {
             cubeFromDeckFilename = playerLoadDeck();
         }
     }//GEN-LAST:event_cbDraftCubeActionPerformed

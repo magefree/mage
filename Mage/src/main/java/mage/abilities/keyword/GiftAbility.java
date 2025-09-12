@@ -6,7 +6,6 @@ import mage.abilities.StaticAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.GiftWasPromisedCondition;
 import mage.abilities.costs.*;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.constants.GiftType;
@@ -53,11 +52,10 @@ public class GiftAbility extends StaticAbility implements OptionalAdditionalSour
         this.rule = additionalCost.getName() + ' ' + additionalCost.getReminderText();
         this.setRuleAtTheTop(true);
         if (card.isPermanent()) {
-            this.addSubAbility(new ConditionalInterveningIfTriggeredAbility(
-                    new EntersBattlefieldTriggeredAbility(new PromiseGiftEffect(giftType)),
-                    GiftWasPromisedCondition.TRUE, "When this permanent enters, " +
-                    "if the gift was promised, they " + giftType.getDescription() + '.'
-            ).setRuleVisible(false));
+            this.addSubAbility(new EntersBattlefieldTriggeredAbility(new PromiseGiftEffect(giftType))
+                    .setTriggerPhrase("When this permanent enters, ")
+                    .withInterveningIf(GiftWasPromisedCondition.TRUE)
+                    .setRuleVisible(false));
         } else {
             card.getSpellAbility().addEffect(new PromiseGiftEffect(giftType));
         }
@@ -154,6 +152,7 @@ class PromiseGiftEffect extends OneShotEffect {
     PromiseGiftEffect(GiftType giftType) {
         super(Outcome.Benefit);
         this.giftType = giftType;
+        staticText = "they " + giftType.getDescription();
     }
 
     private PromiseGiftEffect(final PromiseGiftEffect effect) {

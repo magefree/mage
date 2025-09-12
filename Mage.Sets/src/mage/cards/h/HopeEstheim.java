@@ -11,6 +11,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
+import mage.watchers.common.PlayerGainedLifeWatcher;
 
 import java.util.UUID;
 
@@ -34,7 +35,7 @@ public final class HopeEstheim extends CardImpl {
         // At the beginning of your end step, each opponent mills X cards, where X is the amount of life you gained this turn.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new MillCardsEachPlayerEffect(
                 ControllerGainedLifeCount.instance, TargetController.OPPONENT
-        )));
+        )), new PlayerGainedLifeWatcher());
     }
 
     private HopeEstheim(final HopeEstheim card) {

@@ -1,24 +1,26 @@
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
+import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
+import mage.constants.PhaseStep;
+import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
-import mage.target.targetpointer.FixedTarget;
+import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -121,37 +123,34 @@ public class CreateTokenEffect extends OneShotEffect {
         return lastAddedTokenIds;
     }
 
-    public void sacrificeTokensCreatedAtNextEndStep(Game game, Ability source) {
-        for (UUID tokenId : this.getLastAddedTokenIds()) {
-            Permanent tokenPermanent = game.getPermanent(tokenId);
-            if (tokenPermanent != null) {
-                SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect();
-                sacrificeEffect.setTargetPointer(new FixedTarget(tokenPermanent, game));
-                game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect), source);
-            }
-        }
-    }
-
     public void exileTokensCreatedAtNextEndStep(Game game, Ability source) {
-        for (UUID tokenId : this.getLastAddedTokenIds()) {
-            Permanent tokenPermanent = game.getPermanent(tokenId);
-            if (tokenPermanent != null) {
-                ExileTargetEffect exileEffect = new ExileTargetEffect(null, "", Zone.BATTLEFIELD);
-                exileEffect.setTargetPointer(new FixedTarget(tokenPermanent, game));
-                game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect), source);
-            }
-        }
+        removeTokensCreatedAt(game, source, true, PhaseStep.END_TURN, TargetController.ANY);
     }
 
-    public void exileTokensCreatedAtEndOfCombat(Game game, Ability source) {
-        for (UUID tokenId : this.getLastAddedTokenIds()) {
-            Permanent tokenPermanent = game.getPermanent(tokenId);
-            if (tokenPermanent != null) {
-                ExileTargetEffect exileEffect = new ExileTargetEffect(null, "", Zone.BATTLEFIELD);
-                exileEffect.setTargetPointer(new FixedTarget(tokenPermanent, game));
-                game.addDelayedTriggeredAbility(new AtTheEndOfCombatDelayedTriggeredAbility(exileEffect), source);
-            }
+    public void removeTokensCreatedAt(Game game, Ability source, boolean exile, PhaseStep phaseStep, TargetController targetController) {
+        List<Permanent> permanents = this.getLastAddedTokenIds()
+                .stream()
+                .map(game::getPermanent)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+        Effect effect = exile
+                ? new ExileTargetEffect(null, "", Zone.BATTLEFIELD).setText("exile those tokens")
+                : new SacrificeTargetEffect("sacrifice those tokens", source.getControllerId());
+        effect.setTargetPointer(new FixedTargets(permanents, game));
+
+        DelayedTriggeredAbility exileAbility;
+        switch (phaseStep) {
+            case END_TURN:
+                exileAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect, targetController);
+                break;
+            case END_COMBAT:
+                exileAbility = new AtTheEndOfCombatDelayedTriggeredAbility(effect);
+                break;
+            default:
+                throw new UnsupportedOperationException("Unsupported PhaseStep in CreateTokenEffect::removeTokensCreatedAt");
         }
+
+        game.addDelayedTriggeredAbility(exileAbility, source);
     }
 
     /**

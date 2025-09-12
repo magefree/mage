@@ -1,18 +1,15 @@
-
 package mage.cards.q;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.BecomesMonarchSourceEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.hint.common.MonarchHint;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.HasteAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -21,8 +18,9 @@ import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.permanent.token.QueenMarchesaAssassinToken;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class QueenMarchesa extends CardImpl {
@@ -38,16 +36,16 @@ public final class QueenMarchesa extends CardImpl {
 
         // Deathtouch
         this.addAbility(DeathtouchAbility.getInstance());
+
         // Haste
+
         this.addAbility(HasteAbility.getInstance());
         // When Queen Marchesa enters the battlefield, you become the monarch.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesMonarchSourceEffect()).addHint(MonarchHint.instance));
 
         // At the beginning of your upkeep, if an opponent is the monarch, create a 1/1 black Assassin creature token with deathtouch and haste.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new QueenMarchesaAssassinToken())),
-                OpponentIsMonarchCondition.instance,
-                "At the beginning of your upkeep, if an opponent is the monarch, create a 1/1 black Assassin creature token with deathtouch and haste."));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new QueenMarchesaAssassinToken()))
+                .withInterveningIf(QueenMarchesaCondition.instance));
     }
 
     private QueenMarchesa(final QueenMarchesa card) {
@@ -60,9 +58,8 @@ public final class QueenMarchesa extends CardImpl {
     }
 }
 
-enum OpponentIsMonarchCondition implements Condition {
-
-   instance;
+enum QueenMarchesaCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

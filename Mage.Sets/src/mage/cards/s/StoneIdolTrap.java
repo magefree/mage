@@ -104,7 +104,7 @@ class StoneIdolTrapEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         CreateTokenEffect effect = new CreateTokenEffect(new StoneIdolToken());
         if (effect.apply(game, source)) {
-            effect.exileTokensCreatedAtNextEndStep(game, source);
+            effect.removeTokensCreatedAt(game, source, false, PhaseStep.END_TURN, TargetController.YOU);
             return true;
         }
         return false;

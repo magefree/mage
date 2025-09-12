@@ -1,23 +1,21 @@
 package mage.cards.j;
 
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
-import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.effects.common.TargetPlayerGainControlSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
@@ -40,8 +38,7 @@ public final class JinxedChoker extends CardImpl {
         this.addAbility(endStepAbility);
 
         // At the beginning of your upkeep, Jinxed Choker deals damage to you equal to the number of charge counters on it.
-        Ability upkeepAbility = new OnEventTriggeredAbility(GameEvent.EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new DamageControllerEffect(new JinxedChokerDynamicValue()), false);
-        this.addAbility(upkeepAbility);
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DamageControllerEffect(new CountersSourceCount(CounterType.CHARGE))));
 
         // {3}: Put a charge counter on Jinxed Choker or remove one from it.
         Ability ability = new SimpleActivatedAbility(new JinxedChokerCounterEffect(), new ManaCostsImpl<>("{3}"));
@@ -83,35 +80,6 @@ class JinxedChokerAddCounterEffect extends OneShotEffect {
     }
 }
 
-
-class JinxedChokerDynamicValue implements DynamicValue {
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        Permanent permanent = game.getPermanent(sourceAbility.getSourceId());
-
-        int count = 0;
-        if (permanent != null) {
-            count = permanent.getCounters(game).getCount(CounterType.CHARGE);
-        }
-        return count;
-    }
-
-    @Override
-    public JinxedChokerDynamicValue copy() {
-        return new JinxedChokerDynamicValue();
-    }
-
-    @Override
-    public String getMessage() {
-        return "charge counter on it";
-    }
-
-    @Override
-    public String toString() {
-        return "1";
-    }
-}
 
 class JinxedChokerCounterEffect extends OneShotEffect {
 

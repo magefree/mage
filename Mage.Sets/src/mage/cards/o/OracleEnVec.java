@@ -13,7 +13,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.hint.common.MyTurnHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -46,9 +45,10 @@ public final class OracleEnVec extends CardImpl {
         // {T}: Target opponent chooses any number of creatures they control. During that player’s next turn, the chosen
         // creatures attack if able, and other creatures can’t attack. At the beginning of that turn’s end step,
         // destroy each of the chosen creatures that didn’t attack this turn. Activate this ability only during your turn.
-        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new OracleEnVecEffect(), new TapSourceCost(), MyTurnCondition.instance);
+        Ability ability = new ActivateIfConditionActivatedAbility(
+                new OracleEnVecEffect(), new TapSourceCost(), MyTurnCondition.instance
+        );
         ability.addTarget(new TargetOpponent());
-        ability.addHint(MyTurnHint.instance);
         this.addAbility(ability);
     }
 
@@ -83,25 +83,27 @@ class OracleEnVecEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player opponent = game.getPlayer(this.getTargetPointer().getFirst(game, source));
-        if (opponent != null) {
-            Target target = new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, new FilterControlledCreaturePermanent(), true);
-            if (target.choose(Outcome.Neutral, opponent.getId(), source.getSourceId(), source, game)) {
-                for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), opponent.getId(), source, game)) {
-                    if (target.getTargets().contains(permanent.getId())) {
-                        RequirementEffect effect = new OracleEnVecMustAttackRequirementEffect();
-                        effect.setTargetPointer(new FixedTarget(permanent, game));
-                        game.addEffect(effect, source);
-                    } else {
-                        RestrictionEffect effect = new OracleEnVecCantAttackRestrictionEffect();
-                        effect.setTargetPointer(new FixedTarget(permanent, game));
-                        game.addEffect(effect, source);
-                    }
-                }
-                game.addDelayedTriggeredAbility(new OracleEnVecDelayedTriggeredAbility(game.getTurnNum(), target.getTargets()), source);
-                return true;
+        if (opponent == null) {
+            return false;
+        }
+        Target target = new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE);
+        target.withNotTarget(true);
+        if (!target.choose(Outcome.Neutral, opponent.getId(), source.getSourceId(), source, game)) {
+            return false;
+        }
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), opponent.getId(), source, game)) {
+            if (target.getTargets().contains(permanent.getId())) {
+                RequirementEffect effect = new OracleEnVecMustAttackRequirementEffect();
+                effect.setTargetPointer(new FixedTarget(permanent, game));
+                game.addEffect(effect, source);
+            } else {
+                RestrictionEffect effect = new OracleEnVecCantAttackRestrictionEffect();
+                effect.setTargetPointer(new FixedTarget(permanent, game));
+                game.addEffect(effect, source);
             }
         }
-        return false;
+        game.addDelayedTriggeredAbility(new OracleEnVecDelayedTriggeredAbility(game.getTurnNum(), target.getTargets()), source);
+        return true;
     }
 }
 

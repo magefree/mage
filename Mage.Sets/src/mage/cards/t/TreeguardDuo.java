@@ -35,7 +35,7 @@ public final class TreeguardDuo extends CardImpl {
                         .setText("until end of turn, target creature you control gains vigilance")
         );
         ability.addEffect(new BoostTargetEffect(
-                CreaturesYouControlCount.instance, CreaturesYouControlCount.instance
+                CreaturesYouControlCount.PLURAL, CreaturesYouControlCount.PLURAL
         ).setText("and gets +X/+X, where X is the number of creatures you control"));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability.addHint(CreaturesYouControlHint.instance));

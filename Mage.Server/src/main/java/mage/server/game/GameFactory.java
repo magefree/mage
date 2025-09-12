@@ -51,7 +51,7 @@ public enum GameFactory {
     }
 
     public void addGameType(String name, MatchType matchType, Class game) {
-        if (game != null) {
+        if (matchType != null && game != null) {
             this.games.put(name, game);
             this.gameTypes.put(name, matchType);
             this.gameTypeViews.add(new GameTypeView(matchType));

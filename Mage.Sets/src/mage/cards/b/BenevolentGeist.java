@@ -1,10 +1,9 @@
 package mage.cards.b;
 
 import mage.MageInt;
-import mage.abilities.common.PutIntoGraveFromAnywhereSourceAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CantBeCounteredControlledEffect;
-import mage.abilities.effects.common.ExileSourceEffect;
+import mage.abilities.keyword.DisturbAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -35,11 +34,11 @@ public final class BenevolentGeist extends CardImpl {
 
         // Noncreature spells you control can't be countered.
         this.addAbility(new SimpleStaticAbility(new CantBeCounteredControlledEffect(
-                StaticFilters.FILTER_SPELLS_NON_CREATURE, null, Duration.WhileOnBattlefield
+                StaticFilters.FILTER_SPELLS_NON_CREATURE, Duration.WhileOnBattlefield
         )));
 
         // If Benevolent Geist would be put into a graveyard from anywhere, exile it instead.
-        this.addAbility(new PutIntoGraveFromAnywhereSourceAbility(new ExileSourceEffect().setText("exile it instead")));
+        this.addAbility(DisturbAbility.makeBackAbility());
     }
 
     private BenevolentGeist(final BenevolentGeist card) {

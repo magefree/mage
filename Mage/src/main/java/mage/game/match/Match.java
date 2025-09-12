@@ -10,7 +10,7 @@ import mage.game.GameException;
 import mage.game.GameInfo;
 import mage.game.events.Listener;
 import mage.game.events.TableEvent;
-import mage.game.result.ResultProtos.MatchProto;
+import mage.game.result.ResultProtos.MatchProto; // on unknown package error must run and auto-generate proto classes by "mvn install -DskipTests"
 import mage.players.Player;
 
 /**

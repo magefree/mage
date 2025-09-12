@@ -3,7 +3,6 @@ package mage.cards.b;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.combat.CantBlockTargetEffect;
@@ -72,15 +71,15 @@ class BallistaWielderEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent == null) {
-            Player player = game.getPlayer(source.getFirstTarget());
+            Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
             return player != null && player.damage(1, source, game) > 0;
         }
-        if (permanent.damage(1, source, game) > 0) {
-            game.addEffect(new CantBlockTargetEffect(Duration.EndOfTurn), source);
-            return true;
+        if (permanent.damage(1, source, game) <= 0) {
+            return false;
         }
-        return false;
+        game.addEffect(new CantBlockTargetEffect(Duration.EndOfTurn), source);
+        return true;
     }
 }

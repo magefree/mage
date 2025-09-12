@@ -16,6 +16,7 @@ import mage.filter.predicate.mageobject.*;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -319,6 +320,7 @@ public class PrototypeTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, epiphany);
         setModeChoice(playerA, "3"); // Return target nonland permanent to its owner's hand.
         setModeChoice(playerA, "4"); // Create a token that's a copy of target creature you control.
+        setModeChoice(playerA, TestPlayer.MODE_SKIP);
         addTarget(playerA, automaton);
         addTarget(playerA, automaton);
 
@@ -340,6 +342,7 @@ public class PrototypeTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, epiphany);
         setModeChoice(playerA, "3"); // Return target nonland permanent to its owner's hand.
         setModeChoice(playerA, "4"); // Create a token that's a copy of target creature you control.
+        setModeChoice(playerA, TestPlayer.MODE_SKIP);
         addTarget(playerA, automaton);
         addTarget(playerA, automaton);
 

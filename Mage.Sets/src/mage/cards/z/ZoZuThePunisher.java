@@ -1,7 +1,6 @@
 
 package mage.cards.z;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -17,6 +16,8 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -82,6 +83,6 @@ class ZoZuThePunisherAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a land enters the battlefield, Zo-Zu the Punisher deals 2 damage to that land's controller.";
+        return "Whenever a land enters the battlefield, {this} deals 2 damage to that land's controller.";
     }
 }

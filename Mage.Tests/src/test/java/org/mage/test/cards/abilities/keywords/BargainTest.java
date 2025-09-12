@@ -337,4 +337,20 @@ public class BargainTest extends CardTestPlayerBase {
         assertLife(playerA, 20 + 3);
         assertTappedCount("Forest", true, 7);
     }
+
+    @Test
+    public void testCantBargainWithRestriction() {
+        setStrictChooseMode(true);
+        // Players can’t pay life or sacrifice nonland permanents to cast spells or activate abilities.
+        addCard(Zone.BATTLEFIELD, playerB, "Yasharn, Implacable Earth");
+        addCard(Zone.HAND, playerA, glutton);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 5);
+        addCard(Zone.BATTLEFIELD, playerA, relic);
+
+        checkPlayableAbility("restricted by Yasharn", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Hamlet Glutton", false);
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+    }
 }

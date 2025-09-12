@@ -13,6 +13,7 @@ import mage.cards.decks.importer.DeckImporter;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.cards.repository.CardScanner;
+import mage.collectors.DataCollectorServices;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.Filter;
@@ -30,6 +31,7 @@ import mage.players.ManaPool;
 import mage.players.Player;
 import mage.server.game.GameSessionPlayer;
 import mage.util.CardUtil;
+import mage.util.DebugUtil;
 import mage.util.ThreadUtils;
 import mage.utils.SystemUtil;
 import mage.view.GameView;
@@ -243,6 +245,11 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         }
 
         ThreadUtils.ensureRunInGameThread();
+
+        DataCollectorServices.init(
+                true,
+                DebugUtil.TESTS_DATA_COLLECTORS_ENABLE_SAVE_GAME_HISTORY
+        );
 
         // check stop command
         int maxTurn = 1;
@@ -1699,6 +1706,11 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     private void assertAllCommandsUsed() throws AssertionError {
         for (Player player : currentGame.getPlayers().values()) {
             TestPlayer testPlayer = (TestPlayer) player;
+
+            if (testPlayer.isSkipAllNextChooseCommands()) {
+                Assert.fail(testPlayer.getName() + " used skip next choose commands, but game do not call any choose dialog after it. Skip must be removed after debug.");
+            }
+
             assertActionsMustBeEmpty(testPlayer);
             assertChoicesCount(testPlayer, 0);
             assertTargetsCount(testPlayer, 0);
@@ -2001,7 +2013,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param step
      * @param player
      * @param cardName
-     * @param targetName for modes you can add "mode=3" before target name;
+     * @param targetName for non default mode you can add target by "mode=3target_name" style;
      *                   multiple targets can be separated by ^;
      *                   no target marks as TestPlayer.NO_TARGET;
      *                   warning, do not support cards with target adjusters - use addTarget instead
@@ -2308,6 +2320,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      *               spell mode can be used only once like Demonic Pact, the
      *               value has to be set to the number of the remaining modes
      *               (e.g. if only 2 are left the number need to be 1 or 2).
+     *               If you need to partly select then use TestPlayer.MODE_SKIP
      */
     public void setModeChoice(TestPlayer player, String choice) {
         player.addModeChoice(choice);
@@ -2430,6 +2443,26 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     protected void skipInitShuffling() {
         gameOptions.skipInitShuffling = true;
+    }
+
+    /**
+     * Debug only: skip all choose commands after that command.
+     * <p>
+     * Alternative to comment/uncomment all test commands:
+     * - insert skip before first choice command;
+     * - run test and look at error message about miss choice;
+     * - make sure test use correct choice;
+     * - move skip command to next test's choice and repeat;
+     */
+    protected void skipAllNextChooseCommands() {
+        playerA.skipAllNextChooseCommands();
+        playerB.skipAllNextChooseCommands();
+        if (playerC != null) {
+            playerC.skipAllNextChooseCommands();
+        }
+        if (playerD != null) {
+            playerD.skipAllNextChooseCommands();
+        }
     }
 
     public void assertDamageReceived(Player player, String cardName, int expected) {

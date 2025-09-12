@@ -1,7 +1,5 @@
-
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -18,14 +16,15 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward
  */
 public final class WithengarUnbound extends CardImpl {
 
     public WithengarUnbound(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEMON);
         this.color.setBlack(true);
@@ -39,9 +38,9 @@ public final class WithengarUnbound extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(IntimidateAbility.getInstance());
         this.addAbility(TrampleAbility.getInstance());
+
         // Whenever a player loses the game, put thirteen +1/+1 counters on Withengar Unbound.
         this.addAbility(new WithengarUnboundTriggeredAbility());
-
     }
 
     private WithengarUnbound(final WithengarUnbound card) {
@@ -56,8 +55,9 @@ public final class WithengarUnbound extends CardImpl {
 
 class WithengarUnboundTriggeredAbility extends TriggeredAbilityImpl {
 
-    public WithengarUnboundTriggeredAbility() {
+    WithengarUnboundTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(13)), false);
+        setTriggerPhrase("Whenever a player loses the game, ");
     }
 
     private WithengarUnboundTriggeredAbility(final WithengarUnboundTriggeredAbility ability) {
@@ -77,10 +77,5 @@ class WithengarUnboundTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return true;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a player loses the game, put thirteen +1/+1 counters on Withengar Unbound.";
     }
 }

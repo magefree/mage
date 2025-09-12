@@ -5,7 +5,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.MenaceAbility;
@@ -26,7 +25,7 @@ import java.util.UUID;
  */
 public final class FearOfTheDark extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent(SubType.GLIMMER, "");
+    private static final FilterPermanent filter = new FilterCreaturePermanent(SubType.GLIMMER, "defending player controls no Glimmer creatures");
 
     static {
         filter.add(DefendingPlayerControlsSourceAttackingPredicate.instance);
@@ -44,12 +43,12 @@ public final class FearOfTheDark extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Whenever Fear of the Dark attacks, if defending player controls no Glimmer creatures, it gains menace and deathtouch until end of turn.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new AttacksTriggeredAbility(new GainAbilitySourceEffect(new MenaceAbility(), Duration.EndOfTurn)),
-                condition, "Whenever {this} attacks, if defending player controls no Glimmer " +
-                "creatures, it gains menace and deathtouch until end of turn."
-        );
-        ability.addEffect(new GainAbilitySourceEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn));
+        Ability ability = new AttacksTriggeredAbility(new GainAbilitySourceEffect(
+                new MenaceAbility(), Duration.EndOfTurn
+        ).setText("it gains menace")).withInterveningIf(condition);
+        ability.addEffect(new GainAbilitySourceEffect(
+                DeathtouchAbility.getInstance(), Duration.EndOfTurn
+        ).setText("and deathtouch until end of turn"));
         this.addAbility(ability);
     }
 

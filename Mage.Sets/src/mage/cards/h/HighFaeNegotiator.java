@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.BargainedCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.keyword.BargainAbility;
@@ -36,12 +35,9 @@ public final class HighFaeNegotiator extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When High Fae Negotiator enters the battlefield, if it was bargained, each opponent loses 3 life and you gain 3 life.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new LoseLifeOpponentsEffect(3)),
-                BargainedCondition.instance, "When {this} enters, " +
-                "if it was bargained, each opponent loses 3 life and you gain 3 life."
-        );
-        ability.addEffect(new GainLifeEffect(3));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new LoseLifeOpponentsEffect(3))
+                .withInterveningIf(BargainedCondition.instance);
+        ability.addEffect(new GainLifeEffect(3).concatBy("and"));
         this.addAbility(ability);
     }
 

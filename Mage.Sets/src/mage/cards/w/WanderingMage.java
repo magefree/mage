@@ -1,13 +1,11 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.CostImpl;
 import mage.abilities.costs.common.PayLifeCost;
+import mage.abilities.costs.common.PutCountersTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.cards.CardImpl;
@@ -15,16 +13,14 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.target.Target;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetPlayerOrPlaneswalker;
+
+import java.util.UUID;
 
 /**
  *
@@ -58,17 +54,14 @@ public final class WanderingMage extends CardImpl {
         // {U}: Prevent the next 1 damage that would be dealt to target Cleric or Wizard creature this turn.
         ability = new SimpleActivatedAbility(
                 new PreventDamageToTargetEffect(Duration.EndOfTurn, 1), new ManaCostsImpl<>("{U}"));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
         // {B}, Put a -1/-1 counter on a creature you control: Prevent the next 2 damage that would be dealt to target player this turn.
         ability = new SimpleActivatedAbility(
                 new PreventDamageToTargetEffect(Duration.EndOfTurn, 2), new ManaCostsImpl<>("{B}"));
-        ability.addCost(new WanderingMageCost());
+        ability.addCost(new PutCountersTargetCost(CounterType.M1M1.createInstance()));
         ability.addTarget(new TargetPlayerOrPlaneswalker());
-        Target target = new TargetControlledCreaturePermanent();
-        target.withNotTarget(true);
-        ability.addTarget(target);
         this.addAbility(ability);
     }
 
@@ -79,36 +72,5 @@ public final class WanderingMage extends CardImpl {
     @Override
     public WanderingMage copy() {
         return new WanderingMage(this);
-    }
-}
-
-class WanderingMageCost extends CostImpl {
-
-    public WanderingMageCost() {
-        this.text = "Put a -1/-1 counter on a creature you control";
-    }
-
-    private WanderingMageCost(final WanderingMageCost cost) {
-        super(cost);
-    }
-
-    @Override
-    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
-        Permanent permanent = game.getPermanent(ability.getTargets().get(1).getFirstTarget());
-        if (permanent != null) {
-            permanent.addCounters(CounterType.M1M1.createInstance(), controllerId, ability, game);
-            this.paid = true;
-        }
-        return paid;
-    }
-
-    @Override
-    public WanderingMageCost copy() {
-        return new WanderingMageCost(this);
     }
 }

@@ -6,24 +6,26 @@ import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.abilities.effects.OneShotNonTargetEffect;
+import mage.abilities.effects.common.AddContinuousEffectToGame;
+import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
-import mage.constants.*;
-import mage.filter.FilterCard;
-import mage.game.ExileZone;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInExile;
 import mage.target.common.TargetCardInHand;
+import mage.target.targetadjustment.TargetAdjuster;
 import mage.util.CardUtil;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -40,10 +42,12 @@ public final class MuseVessel extends CardImpl {
         tapAbility.addCost(new ManaCostsImpl<>("{3}"));
         tapAbility.addTarget(new TargetPlayer());
         this.addAbility(tapAbility);
-
         // {1}: Choose a card exiled with Muse Vessel. You may play that card this turn.
-        SimpleActivatedAbility playAbility = new SimpleActivatedAbility(new MuseVesselMayPlayExiledEffect(), new ManaCostsImpl<>("{1}"));
-        playAbility.addTarget(new TargetCardInMuseVesselExile());
+        SimpleActivatedAbility playAbility = new SimpleActivatedAbility(new OneShotNonTargetEffect(
+                new AddContinuousEffectToGame(new PlayFromNotOwnHandZoneTargetEffect(Zone.EXILED, Duration.EndOfTurn))
+                        .setText("Choose a card exiled with {this}. You may play that card this turn."),
+                new TargetCardInExile(StaticFilters.FILTER_CARD), MuseVesselAdjuster.instance
+        ), new ManaCostsImpl<>("{1}"));
         this.addAbility(playAbility);
     }
 
@@ -80,8 +84,8 @@ class MuseVesselExileEffect extends OneShotEffect {
         }
         TargetCardInHand target = new TargetCardInHand();
         if (target.canChoose(player.getId(), source, game)
-                && target.chooseTarget(Outcome.Exile, player.getId(), source, game)) {
-            UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+                && target.choose(Outcome.Exile, player.getId(), source, game)) {
+            UUID exileId = CardUtil.getExileZoneId(game, source);
             return player.moveCardsToExile(new CardsImpl(target.getTargets()).getCards(game), source, game, true, exileId, sourceObject.getIdName());
         }
         return false;
@@ -94,92 +98,14 @@ class MuseVesselExileEffect extends OneShotEffect {
 
 }
 
-class MuseVesselMayPlayExiledEffect extends AsThoughEffectImpl {
-
-    MuseVesselMayPlayExiledEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
-        this.staticText = "Choose a card exiled with {this}. You may play that card this turn";
-    }
-
-    private MuseVesselMayPlayExiledEffect(final MuseVesselMayPlayExiledEffect effect) {
-        super(effect);
-    }
+enum MuseVesselAdjuster implements TargetAdjuster {
+    instance;
 
     @Override
-    public MuseVesselMayPlayExiledEffect copy() {
-        return new MuseVesselMayPlayExiledEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        return affectedControllerId.equals(source.getControllerId())
-                && getTargetPointer().getTargets(game, source).contains(objectId);
-    }
-
-}
-
-// TODO: cleanup. there should be no need for custom Target there.
-class TargetCardInMuseVesselExile extends TargetCardInExile {
-
-    public TargetCardInMuseVesselExile() {
-        super(new FilterCard("card exiled with Muse Vessel"));
-    }
-
-    private TargetCardInMuseVesselExile(final TargetCardInMuseVesselExile target) {
-        super(target);
-    }
-
-    @Override
-    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
-        Set<UUID> possibleTargets = new HashSet<>();
-        Card sourceCard = game.getCard(source.getSourceId());
-        if (sourceCard != null) {
-            UUID exileId = CardUtil.getCardExileZoneId(game, source.getSourceId());
-            ExileZone exile = game.getExile().getExileZone(exileId);
-            if (exile != null && !exile.isEmpty()) {
-                possibleTargets.addAll(exile);
-            }
-        }
-        return possibleTargets;
-    }
-
-    @Override
-    public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
-        Card sourceCard = game.getCard(source.getSourceId());
-        if (sourceCard != null) {
-            UUID exileId = CardUtil.getCardExileZoneId(game, source.getSourceId());
-            ExileZone exile = game.getExile().getExileZone(exileId);
-            if (exile != null && !exile.isEmpty()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean canTarget(UUID id, Ability source, Game game) {
-        Card card = game.getCard(id);
-        if (card != null && game.getState().getZone(card.getId()) == Zone.EXILED) {
-            ExileZone exile = null;
-            Card sourceCard = game.getCard(source.getSourceId());
-            if (sourceCard != null) {
-                UUID exileId = CardUtil.getCardExileZoneId(game, source);
-                exile = game.getExile().getExileZone(exileId);
-            }
-            if (exile != null && exile.contains(id)) {
-                return filter.match(card, source.getControllerId(), game);
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public TargetCardInMuseVesselExile copy() {
-        return new TargetCardInMuseVesselExile(this);
+    public void adjustTargets(Ability ability, Game game) {
+        ability.getTargets().clear();
+        ability.addTarget(
+                new TargetCardInExile(StaticFilters.FILTER_CARD, CardUtil.getCardExileZoneId(game, ability.getSourceId()))
+                        .withNotTarget(true));
     }
 }

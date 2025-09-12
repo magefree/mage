@@ -61,7 +61,7 @@ public class ShadowsOverInnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Brain in a Jar", 247, Rarity.UNCOMMON, mage.cards.b.BrainInAJar.class));
         cards.add(new SetCardInfo("Briarbridge Patrol", 187, Rarity.COMMON, mage.cards.b.BriarbridgePatrol.class));
         cards.add(new SetCardInfo("Brisela, Voice of Nightmares", "17b", Rarity.MYTHIC, mage.cards.b.BriselaVoiceOfNightmares.class));
-        cards.add(new SetCardInfo("Bruna, the Fading Light", "17a", Rarity.RARE, mage.cards.b.BrunaTheFadingLight.class));
+        cards.add(new SetCardInfo("Bruna, the Fading Light", 17, Rarity.RARE, mage.cards.b.BrunaTheFadingLight.class));
         cards.add(new SetCardInfo("Burn from Within", 147, Rarity.RARE, mage.cards.b.BurnFromWithin.class));
         cards.add(new SetCardInfo("Bygone Bishop", 18, Rarity.RARE, mage.cards.b.BygoneBishop.class));
         cards.add(new SetCardInfo("Byway Courier", 188, Rarity.COMMON, mage.cards.b.BywayCourier.class));
@@ -158,7 +158,7 @@ public class ShadowsOverInnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Goldnight Castigator", 160, Rarity.MYTHIC, mage.cards.g.GoldnightCastigator.class));
         cards.add(new SetCardInfo("Graf Harvest", 114, Rarity.UNCOMMON, mage.cards.g.GrafHarvest.class));
         cards.add(new SetCardInfo("Graf Mole", 197, Rarity.UNCOMMON, mage.cards.g.GrafMole.class));
-        cards.add(new SetCardInfo("Graf Rats", "115a", Rarity.COMMON, mage.cards.g.GrafRats.class));
+        cards.add(new SetCardInfo("Graf Rats", 115, Rarity.COMMON, mage.cards.g.GrafRats.class));
         cards.add(new SetCardInfo("Grapple with the Past", 198, Rarity.COMMON, mage.cards.g.GrappleWithThePast.class));
         cards.add(new SetCardInfo("Grim Flayer", 234, Rarity.RARE, mage.cards.g.GrimFlayer.class));
         cards.add(new SetCardInfo("Grotesque Mutation", 116, Rarity.COMMON, mage.cards.g.GrotesqueMutation.class));
@@ -167,7 +167,7 @@ public class ShadowsOverInnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Guardian of Pilgrims", 32, Rarity.COMMON, mage.cards.g.GuardianOfPilgrims.class));
         cards.add(new SetCardInfo("Hamlet Captain", 200, Rarity.UNCOMMON, mage.cards.h.HamletCaptain.class));
         cards.add(new SetCardInfo("Hanweir Battlements", 271, Rarity.RARE, mage.cards.h.HanweirBattlements.class));
-        cards.add(new SetCardInfo("Hanweir Garrison", "161a", Rarity.RARE, mage.cards.h.HanweirGarrison.class));
+        cards.add(new SetCardInfo("Hanweir Garrison", 161, Rarity.RARE, mage.cards.h.HanweirGarrison.class));
         cards.add(new SetCardInfo("Hanweir, the Writhing Township", "161b", Rarity.RARE, mage.cards.h.HanweirTheWrithingTownship.class));
         cards.add(new SetCardInfo("Harvest Hand", 252, Rarity.UNCOMMON, mage.cards.h.HarvestHand.class));
         cards.add(new SetCardInfo("Haunted Dead", 117, Rarity.UNCOMMON, mage.cards.h.HauntedDead.class));

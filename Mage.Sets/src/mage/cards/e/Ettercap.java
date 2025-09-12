@@ -2,15 +2,12 @@ package mage.cards.e;
 
 import mage.MageInt;
 import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.AdventureCard;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -19,12 +16,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class Ettercap extends AdventureCard {
-
-    private static final FilterPermanent filter = new FilterCreaturePermanent("creature with flying");
-
-    static {
-        filter.add(new AbilityPredicate(FlyingAbility.class));
-    }
 
     public Ettercap(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.INSTANT}, "{4}{G}", "Web Shot", "{2}{G}");
@@ -40,7 +31,7 @@ public final class Ettercap extends AdventureCard {
         // Web Shot
         // Destroy target creature with flying.
         this.getSpellCard().getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellCard().getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellCard().getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_FLYING));
 
         this.finalizeAdventure();
     }

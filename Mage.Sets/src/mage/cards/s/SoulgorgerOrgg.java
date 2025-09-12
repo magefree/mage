@@ -74,7 +74,7 @@ class SoulgorgerOrggLoseLifeEffect extends OneShotEffect {
             if (player.getLife() > 1) {
                 lifeValue = player.getLife() - 1;
             }
-            game.getState().setValue(source.getSourceId().toString() + source.getControllerId().toString() + source.getSourceObjectZoneChangeCounter() + "_lifeValue", lifeValue);
+            game.getState().setValue(source.getSourceId().toString() + source.getControllerId().toString() + source.getStackMomentSourceZCC() + "_lifeValue", lifeValue);
             if (lifeValue > 0) {
                 player.loseLife(lifeValue, game, source, false);
             }
@@ -88,7 +88,7 @@ class SoulgorgerOrggGainLifeEffect extends OneShotEffect {
 
     SoulgorgerOrggGainLifeEffect() {
         super(Outcome.GainLife);
-        staticText = "you gain life equal to the life you lost when it entered the battlefield";
+        staticText = "you gain life equal to the life you lost when it entered";
     }
 
     private SoulgorgerOrggGainLifeEffect(final SoulgorgerOrggGainLifeEffect effect) {
@@ -103,7 +103,7 @@ class SoulgorgerOrggGainLifeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Object obj = game.getState().getValue(source.getSourceId().toString() + source.getControllerId().toString() + (source.getSourceObjectZoneChangeCounter() - 1) + "_lifeValue");
+        Object obj = game.getState().getValue(source.getSourceId().toString() + source.getControllerId().toString() + (source.getStackMomentSourceZCC() - 1) + "_lifeValue");
         if (!(obj instanceof Integer)) {
             return false;
         }

@@ -19,6 +19,7 @@ import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
+import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.target.TargetSpell;
 import mage.target.common.TargetCreaturePermanent;
@@ -46,7 +47,7 @@ public final class DimirCharm extends CardImpl {
 
         //or destroy target creature with power 2 or less
         Mode mode1 = new Mode(new DestroyTargetEffect());
-        mode1.addTarget(new TargetCreaturePermanent(filterCreature));
+        mode1.addTarget(new TargetPermanent(filterCreature));
         this.getSpellAbility().addMode(mode1);
 
         //or look at the top three cards of target player's library, then put one back and the rest into that player's graveyard

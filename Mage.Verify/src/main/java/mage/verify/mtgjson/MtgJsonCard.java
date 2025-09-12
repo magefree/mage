@@ -42,6 +42,9 @@ public final class MtgJsonCard {
     public boolean isFullArt;
     public String frameVersion;
     public List<String> printings; // set codes with that card
+    public boolean isFunny;
+    public List<String> promoTypes;
+    public boolean isTextless;
 
     @Override
     public String toString() {

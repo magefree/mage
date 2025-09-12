@@ -1,6 +1,5 @@
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -10,15 +9,15 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetLandPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class Helldozer extends CardImpl {
@@ -55,7 +54,7 @@ class HelldozerEffect extends OneShotEffect {
 
     HelldozerEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "Destroy target land. If that land was nonbasic, untap Helldozer";
+        this.staticText = "Destroy target land. If that land was nonbasic, untap {this}";
     }
 
     private HelldozerEffect(final HelldozerEffect effect) {

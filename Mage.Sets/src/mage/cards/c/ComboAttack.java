@@ -1,30 +1,30 @@
 package mage.cards.c;
 
-import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.TargetsDamageTargetsEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterTeamCreaturePermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class ComboAttack extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterTeamCreaturePermanent("creatures your team controls");
 
     public ComboAttack(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");
 
         // Two target creatures your team controls each deal damage equal to their power to target creature.
-        this.getSpellAbility().addEffect(new ComboAttackEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(2, 2, new FilterTeamCreaturePermanent(), false));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(1));
+        this.getSpellAbility().addEffect(new TargetsDamageTargetsEffect(true));
+        this.getSpellAbility().addTarget(new TargetPermanent(2, filter).setTargetTag(1));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent().setTargetTag(3));
     }
 
     private ComboAttack(final ComboAttack card) {
@@ -34,42 +34,5 @@ public final class ComboAttack extends CardImpl {
     @Override
     public ComboAttack copy() {
         return new ComboAttack(this);
-    }
-}
-
-class ComboAttackEffect extends OneShotEffect {
-
-    ComboAttackEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "Two target creatures your team controls each deal damage equal to their power to target creature";
-    }
-
-    private ComboAttackEffect(final ComboAttackEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ComboAttackEffect copy() {
-        return new ComboAttackEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        if (source.getTargets().size() < 2 || source.getTargets().get(0).getTargets().size() < 2) {
-            return false;
-        }
-        Permanent permanent1 = game.getPermanent(source.getTargets().get(0).getTargets().get(0));
-        Permanent permanent2 = game.getPermanent(source.getTargets().get(0).getTargets().get(1));
-        Permanent permanent3 = game.getPermanent(source.getTargets().get(1).getFirstTarget());
-        if (permanent3 == null) {
-            return false;
-        }
-        if (permanent1 != null) {
-            permanent3.damage(permanent1.getPower().getValue(), permanent1.getId(), source, game, false, true);
-        }
-        if (permanent2 != null) {
-            permanent3.damage(permanent2.getPower().getValue(), permanent2.getId(), source, game, false, true);
-        }
-        return true;
     }
 }

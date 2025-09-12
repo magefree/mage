@@ -1,6 +1,5 @@
 package mage.cards.f;
 
-import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.PreventDamageByTargetEffect;
@@ -14,6 +13,8 @@ import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.ConditionalTargetAdjuster;
 
 import java.util.UUID;
+
+import static mage.abilities.condition.common.KickedCondition.ONCE;
 
 /**
  * @author LoneFox
@@ -33,8 +34,7 @@ public final class FallingTimber extends CardImpl {
                 "prevent all combat damage another target creature would deal this turn.");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().setTargetAdjuster(new ConditionalTargetAdjuster(KickedCondition.ONCE,
-                new TargetCreaturePermanent(2)));
+        this.getSpellAbility().setTargetAdjuster(new ConditionalTargetAdjuster(ONCE, new TargetCreaturePermanent(2)));
     }
 
     private FallingTimber(final FallingTimber card) {

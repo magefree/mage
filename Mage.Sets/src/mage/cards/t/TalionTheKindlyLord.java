@@ -75,7 +75,7 @@ enum TalionTheKindlyLordPredicate implements ObjectSourcePlayerPredicate<StackOb
     public boolean apply(ObjectSourcePlayer<StackObject> input, Game game) {
         Object obj = game.getState().getValue(
                 "chosenNumber_" + input.getSource().getSourceId()
-                        + '_' + input.getSource().getSourceObjectZoneChangeCounter()
+                        + '_' + input.getObject().getZoneChangeCounter(game)
         );
         if (obj == null) {
             return false;
@@ -111,7 +111,7 @@ class TalionTheKindlyLordEffect extends OneShotEffect {
         }
         int numberChoice = controller.getAmount(1, 10, "Choose a number.", source, game);
         game.getState().setValue("chosenNumber_" + source.getSourceId()
-                + '_' + source.getSourceObjectZoneChangeCounter(), numberChoice);
+                + '_' + source.getStackMomentSourceZCC(), numberChoice);
         Permanent permanent = game.getPermanentEntering(source.getSourceId());
         if (permanent != null) {
             permanent.addInfo("chosen players", "<font color = 'blue'>Chosen Number: " + numberChoice + "</font>", game);

@@ -1,17 +1,18 @@
 package mage.cards.p;
 
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.PlayLandOrCastSpellTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.token.ThopterColorlessToken;
 
 import java.util.UUID;
@@ -38,7 +39,9 @@ public final class PiaNalaarConsulOfRevival extends CardImpl {
         )));
 
         // Whenever you play a land from exile or cast a spell from exile, create a 1/1 colorless Thopter artifact creature token with flying.
-        this.addAbility(new PiaNalaarConsulOfRevivalTriggeredAbility());
+        this.addAbility(new PlayLandOrCastSpellTriggeredAbility(
+                new CreateTokenEffect(new ThopterColorlessToken()), true, false
+        ));
     }
 
     private PiaNalaarConsulOfRevival(final PiaNalaarConsulOfRevival card) {
@@ -48,33 +51,5 @@ public final class PiaNalaarConsulOfRevival extends CardImpl {
     @Override
     public PiaNalaarConsulOfRevival copy() {
         return new PiaNalaarConsulOfRevival(this);
-    }
-}
-
-class PiaNalaarConsulOfRevivalTriggeredAbility extends TriggeredAbilityImpl {
-
-    PiaNalaarConsulOfRevivalTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new CreateTokenEffect(new ThopterColorlessToken()));
-        setTriggerPhrase("Whenever you play a land from exile or cast a spell from exile, ");
-    }
-
-    private PiaNalaarConsulOfRevivalTriggeredAbility(final PiaNalaarConsulOfRevivalTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public PiaNalaarConsulOfRevivalTriggeredAbility copy() {
-        return new PiaNalaarConsulOfRevivalTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.LAND_PLAYED
-                || event.getType() == GameEvent.EventType.SPELL_CAST;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return isControlledBy(event.getPlayerId()) && event.getZone() == Zone.EXILED;
     }
 }

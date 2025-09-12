@@ -89,11 +89,6 @@ public final class ManaSymbols {
     public static void loadImages() {
         logger.info("Symbols: loading...");
 
-        // TODO: delete files rename jpg->gif (it was for backward compatibility for one of the old version?)
-        renameSymbols(getResourceSymbolsPath(ResourceSymbolSize.SMALL));
-        renameSymbols(getResourceSymbolsPath(ResourceSymbolSize.MEDIUM));
-        renameSymbols(getResourceSymbolsPath(ResourceSymbolSize.LARGE));
-        //renameSymbols(getSymbolsPath(ResourceSymbolSize.SVG)); // not need
         // TODO: remove medium sets files to "medium" folder like symbols above?
 
         // prepare svg's css settings
@@ -145,9 +140,9 @@ public final class ManaSymbols {
             Map<Rarity, Image> rarityImages = new EnumMap<>(Rarity.class);
             setImages.put(set, rarityImages);
 
-            // load medium size
+            // load large size
             for (Rarity rarityCode : codes) {
-                File file = new File(getResourceSetsPath(ResourceSetSize.MEDIUM) + set + '-' + rarityCode.getCode() + ".jpg");
+                File file = new File(getResourceSetsPath(ResourceSetSize.LARGE) + set + '-' + rarityCode.getCode() + ".png");
                 try {
                     Image image = UI.getImageIcon(file.getAbsolutePath()).getImage();
                     int width = image.getWidth(null);
@@ -167,7 +162,7 @@ public final class ManaSymbols {
 
             // generate small size
             try {
-                File file = new File(getResourceSetsPath(ResourceSetSize.MEDIUM));
+                File file = new File(getResourceSetsPath(ResourceSetSize.LARGE));
                 if (!file.exists()) {
                     file.mkdirs();
                 }
@@ -175,11 +170,11 @@ public final class ManaSymbols {
                 for (Rarity code : codes) {
                     File newFile = new File(pathRoot + '-' + code + ".png");
                     if (!(MageFrame.isSkipSmallSymbolGenerationForExisting() && newFile.exists())) {// skip if option enabled and file already exists
-                        file = new File(getResourceSetsPath(ResourceSetSize.MEDIUM) + set + '-' + code + ".png");
+                        file = new File(getResourceSetsPath(ResourceSetSize.LARGE) + set + '-' + code + ".png");
                         if (file.exists()) {
                             continue;
                         }
-                        file = new File(getResourceSetsPath(ResourceSetSize.MEDIUM) + set + '-' + code + ".jpg");
+                        file = new File(getResourceSetsPath(ResourceSetSize.LARGE) + set + '-' + code + ".png");
                         Image image = UI.getImageIcon(file.getAbsolutePath()).getImage();
                         try {
                             int width = image.getWidth(null);
@@ -239,7 +234,7 @@ public final class ManaSymbols {
         }
     }
 
-    private static File getSymbolFileNameAsGIF(String symbol, int size) {
+    private static File getSymbolFileNameAsPNG(String symbol, int size) {
 
         ResourceSymbolSize needSize = null;
         if (size <= 15) {
@@ -250,15 +245,15 @@ public final class ManaSymbols {
             needSize = ResourceSymbolSize.LARGE;
         }
 
-        return new File(getResourceSymbolsPath(needSize) + symbol + ".gif");
+        return new File(getResourceSymbolsPath(needSize) + symbol + ".png");
     }
 
-    private static BufferedImage loadSymbolAsGIF(String symbol, int resizeToWidth, int resizeToHeight) {
-        File file = getSymbolFileNameAsGIF(symbol, resizeToWidth);
-        return loadSymbolAsGIF(file, resizeToWidth, resizeToHeight);
+    private static BufferedImage loadSymbolAsPNG(String symbol, int resizeToWidth, int resizeToHeight) {
+        File file = getSymbolFileNameAsPNG(symbol, resizeToWidth);
+        return loadSymbolAsPNG(file, resizeToWidth, resizeToHeight);
     }
 
-    private static BufferedImage loadSymbolAsGIF(File sourceFile, int resizeToWidth, int resizeToHeight) {
+    private static BufferedImage loadSymbolAsPNG(File sourceFile, int resizeToWidth, int resizeToHeight) {
 
         BufferedImage image = null;
 
@@ -315,9 +310,9 @@ public final class ManaSymbols {
 
             // gif (if svg fails)
             if (image == null) {
-                file = getSymbolFileNameAsGIF(symbol, size);
+                file = getSymbolFileNameAsPNG(symbol, size);
                 if (file.exists()) {
-                    image = loadSymbolAsGIF(file, size, size);
+                    image = loadSymbolAsPNG(file, size, size);
                 }
             }
             if (image == null) {
@@ -350,29 +345,6 @@ public final class ManaSymbols {
 
         manaImages.put(size, sizedSymbols);
         return errorInfo.isEmpty();
-    }
-
-    private static void renameSymbols(String path) {
-        File file = new File(path);
-        if (!file.exists()) {
-            return;
-        }
-
-        final PathMatcher matcher = FileSystems.getDefault().getPathMatcher("glob:**/*.jpg");
-        try {
-            Files.walkFileTree(Paths.get(path), new SimpleFileVisitor<Path>() {
-                @Override
-                public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-                    if (matcher.matches(file)) {
-                        Path gifPath = file.resolveSibling(file.getFileName().toString().replaceAll("\\.jpg$", ".gif"));
-                        Files.move(file, gifPath, StandardCopyOption.REPLACE_EXISTING);
-                    }
-                    return FileVisitResult.CONTINUE;
-                }
-            });
-        } catch (IOException e) {
-            logger.error("Couldn't rename mana symbols on " + path, e);
-        }
     }
 
     private static String getResourceSymbolsPath(ResourceSymbolSize needSize) {
@@ -420,8 +392,8 @@ public final class ManaSymbols {
             case SMALL:
                 path = path + Constants.RESOURCE_SET_FOLDER_SMALL;
                 break;
-            case MEDIUM:
-                path = path + Constants.RESOURCE_SET_FOLDER_MEDIUM;
+            case LARGE:
+                path = path + Constants.RESOURCE_SET_FOLDER_LARGE;
                 break;
             case SVG:
                 path = path + Constants.RESOURCE_SET_FOLDER_SVG;

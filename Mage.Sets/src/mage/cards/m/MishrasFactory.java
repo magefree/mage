@@ -13,6 +13,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.custom.CreatureToken;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -46,7 +47,7 @@ public final class MishrasFactory extends CardImpl {
         SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new BoostTargetEffect(1, 1, Duration.EndOfTurn), new TapSourceCost()
         );
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

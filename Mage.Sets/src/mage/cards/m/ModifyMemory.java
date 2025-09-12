@@ -14,7 +14,7 @@ import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.targetpointer.EachTargetPointer;
 
 import java.util.Collection;
@@ -67,7 +67,7 @@ enum ModifyMemoryCondition implements Condition {
     }
 }
 
-class ModifyMemoryTarget extends TargetCreaturePermanent {
+class ModifyMemoryTarget extends TargetPermanent {
 
     private static final FilterCreaturePermanent filter
             = new FilterCreaturePermanent("creatures controlled by different players");
@@ -86,8 +86,8 @@ class ModifyMemoryTarget extends TargetCreaturePermanent {
     }
 
     @Override
-    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
-        if (!super.canTarget(controllerId, id, source, game)) {
+    public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
+        if (!super.canTarget(playerId, id, source, game)) {
             return false;
         }
         Permanent creature = game.getPermanent(id);

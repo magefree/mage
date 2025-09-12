@@ -78,7 +78,7 @@ class DayOfTheDragonsEntersEffect extends OneShotEffect {
             Set<Card> toExile = new HashSet<>();
             toExile.addAll(game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game));
             if (!toExile.isEmpty()) {
-                UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+                UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getStackMomentSourceZCC());
                 controller.moveCardsToExile(toExile, source, game, true, exileId, sourceObject.getIdName());
                 DragonToken2 token = new DragonToken2();
                 token.putOntoBattlefield(toExile.size(), game, source, source.getControllerId());
@@ -110,7 +110,7 @@ class DayOfTheDragonsLeavesEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null) {
-            int zoneChangeCounter = source.getSourceObjectZoneChangeCounter();
+            int zoneChangeCounter = source.getStackMomentSourceZCC();
             if (zoneChangeCounter > 0 && !(sourceObject instanceof PermanentToken)) {
                 zoneChangeCounter--;
             }

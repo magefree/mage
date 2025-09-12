@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.common.BecomesMonarchSourceControllerTriggeredAbility;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.condition.common.MonarchIsNotSetCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.BecomesMonarchTargetEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.hint.common.MonarchHint;
@@ -48,15 +47,13 @@ public final class StarscreamSeekerLeader extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Whenever Starscream deals combat damage to a player, if there is no monarch, that player becomes the monarch.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-            new DealsCombatDamageToAPlayerTriggeredAbility(new BecomesMonarchTargetEffect(), false, true),
-            MonarchIsNotSetCondition.instance,
-            "Whenever {this} deals combat damage to a player, if there is no monarch, that player becomes the monarch."
-        ).addHint(MonarchHint.instance));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
+                new BecomesMonarchTargetEffect().setText("that player becomes the monarch"), false, true
+        ).withInterveningIf(MonarchIsNotSetCondition.instance).addHint(MonarchHint.instance));
 
         // Whenever you become the monarch, convert Starscream.
         this.addAbility(new BecomesMonarchSourceControllerTriggeredAbility(
-            new TransformSourceEffect().setText("convert {this}")
+                new TransformSourceEffect().setText("convert {this}")
         ));
     }
 

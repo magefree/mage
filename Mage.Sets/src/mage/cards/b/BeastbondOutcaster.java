@@ -3,7 +3,6 @@ package mage.cards.b;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.FerociousCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.hint.common.FerociousHint;
 import mage.abilities.keyword.PlotAbility;
@@ -28,11 +27,8 @@ public final class BeastbondOutcaster extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Beastbond Outcaster enters the battlefield, if you control a creature with power 4 or greater, draw a card.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)),
-                FerociousCondition.instance, "When {this} enters, " +
-                "if you control a creature with power 4 or greater, draw a card."
-        ).addHint(FerociousHint.instance));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1))
+                .withInterveningIf(FerociousCondition.instance).addHint(FerociousHint.instance));
 
         // Plot {1}{G}
         this.addAbility(new PlotAbility("{1}{G}"));

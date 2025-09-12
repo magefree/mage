@@ -69,7 +69,7 @@ class LethalSchemeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         HashSet<MageObjectReference> convokingCreatures = CardUtil.getSourceCostsTag(game, source,
-                ConvokeAbility.convokingCreaturesKey, new HashSet<>(0));
+                ConvokeAbility.convokingCreaturesKey, new HashSet<>());
         Set<AbstractMap.SimpleEntry<UUID, Permanent>> playerPermanentsPairs =
                 convokingCreatures
                         .stream()

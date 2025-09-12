@@ -14,11 +14,14 @@ import mage.filter.predicate.permanent.ModifiedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.SecondTargetPointer;
 
 import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL;
 
 /**
  * @author Susucr
@@ -32,7 +35,7 @@ public final class SignatureSlam extends CardImpl {
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
         this.getSpellAbility().addEffect(new SignatureSlamEffect().setTargetPointer(new SecondTargetPointer()));
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
+        this.getSpellAbility().addTarget(new TargetPermanent(FILTER_CREATURE_YOU_DONT_CONTROL));
     }
 
     private SignatureSlam(final SignatureSlam card) {

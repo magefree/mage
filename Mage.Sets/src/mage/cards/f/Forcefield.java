@@ -1,6 +1,5 @@
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -13,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.UnblockedPredicate;
 import mage.game.Game;
@@ -21,11 +19,12 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author emerald000
  */
 public final class Forcefield extends CardImpl {
@@ -74,7 +73,7 @@ class ForcefieldEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
-            Target target = new TargetCreaturePermanent(1, 1, filter, true);
+            Target target = new TargetPermanent(1, 1, filter, true);
             if (controller.choose(Outcome.PreventDamage, target, source, game)) {
                 Permanent creature = game.getPermanent(target.getFirstTarget());
                 if (creature != null) {

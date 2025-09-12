@@ -6,21 +6,15 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.ExileGraveyardAllTargetPlayerEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
 import mage.target.TargetPlayer;
 
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -35,7 +29,7 @@ public final class StonespeakerCrystal extends CardImpl {
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(2), new TapSourceCost()));
 
         // {2}, {T}, Sacrifice Stonespeaker Crystal: Exile any number of target players' graveyards. Draw a card.
-        Ability ability = new SimpleActivatedAbility(new StonespeakerCrystalEffect(), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new ExileGraveyardAllTargetPlayerEffect(), new GenericManaCost(2));
         ability.addEffect(new DrawCardSourceControllerEffect(1));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
@@ -50,40 +44,5 @@ public final class StonespeakerCrystal extends CardImpl {
     @Override
     public StonespeakerCrystal copy() {
         return new StonespeakerCrystal(this);
-    }
-}
-
-class StonespeakerCrystalEffect extends OneShotEffect {
-
-    StonespeakerCrystalEffect() {
-        super(Outcome.Benefit);
-        staticText = "exile any number of target players' graveyards";
-    }
-
-    private StonespeakerCrystalEffect(final StonespeakerCrystalEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public StonespeakerCrystalEffect copy() {
-        return new StonespeakerCrystalEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-        Cards cards = new CardsImpl();
-        this.getTargetPointer()
-                .getTargets(game, source)
-                .stream()
-                .map(game::getPlayer)
-                .filter(Objects::nonNull)
-                .map(Player::getGraveyard)
-                .forEach(cards::addAll);
-        controller.moveCards(cards, Zone.EXILED, source, game);
-        return true;
     }
 }

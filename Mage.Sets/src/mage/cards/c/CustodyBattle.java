@@ -131,7 +131,7 @@ class CustodyBattleUnlessPaysEffect extends OneShotEffect {
                     return true;
                 }
             }
-            if (source.getSourceObjectZoneChangeCounter() == game.getState().getZoneChangeCounter(source.getSourceId())
+            if (source.getStackMomentSourceZCC() == game.getState().getZoneChangeCounter(source.getSourceId())
                     && game.getState().getZone(source.getSourceId()) == Zone.BATTLEFIELD) {
                 ContinuousEffect effect = new GiveControlEffect();
                 effect.setTargetPointer(new FixedTarget(source.getFirstTarget(), game));

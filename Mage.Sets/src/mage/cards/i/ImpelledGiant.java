@@ -1,6 +1,5 @@
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -17,23 +16,23 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class ImpelledGiant extends CardImpl {
 
-    static final private FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("an untapped red creature you control other than Impelled Giant");
+    static final private FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("an untapped red creature you control other than {this}");
 
     static {
         filter.add(TappedPredicate.UNTAPPED);
@@ -73,7 +72,7 @@ class ImpelledGiantCost extends CostImpl {
 
     public ImpelledGiantCost(TargetControlledPermanent target) {
         this.target = target;
-        this.text = "Tap an untapped red creature you control other than Impelled Giant";
+        this.text = "Tap an untapped red creature you control other than {this}";
     }
 
     private ImpelledGiantCost(final ImpelledGiantCost cost) {
@@ -100,7 +99,7 @@ class ImpelledGiantCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return target.canChoose(controllerId, source, game);
+        return target.canChooseOrAlreadyChosen(controllerId, source, game);
     }
 
     @Override

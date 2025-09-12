@@ -8,7 +8,6 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.OpponentsLostLifeCondition;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.mana.BasicManaEffect;
 import mage.cards.CardImpl;
@@ -32,14 +31,9 @@ public final class FlamecacheGecko extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Flamecache Gecko enters, if an opponent lost life this turn, add {B}{R}.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(
-                        new BasicManaEffect(new Mana(
-                                0, 0, 1, 1, 0, 0, 0, 0
-                        ))
-                ), OpponentsLostLifeCondition.instance, "When {this} enters, " +
-                "if an opponent lost life this turn, add {B}{R}."
-        ));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new BasicManaEffect(new Mana(0, 0, 1, 1, 0, 0, 0, 0))
+        ).withInterveningIf(OpponentsLostLifeCondition.instance));
 
         // {1}{R}, Discard a card: Draw a card.
         Ability ability = new SimpleActivatedAbility(

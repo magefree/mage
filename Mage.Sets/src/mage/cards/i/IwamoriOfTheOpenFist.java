@@ -1,32 +1,27 @@
-
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.*;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetCardInHand;
+import mage.target.TargetCard;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class IwamoriOfTheOpenFist extends CardImpl {
 
     public IwamoriOfTheOpenFist(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.MONK);
@@ -80,15 +75,11 @@ class IwamoriOfTheOpenFistEffect extends OneShotEffect {
             Cards cards = new CardsImpl();
             for (UUID playerId : game.getOpponents(controller.getId())) {
                 Player opponent = game.getPlayer(playerId);
-                Target target = new TargetCardInHand(filter);
-                if (opponent != null && target.canChoose(opponent.getId(), source, game)) {
-                    if (opponent.chooseUse(Outcome.PutCreatureInPlay, "Put a legendary creature card from your hand onto the battlefield?", source, game)) {
-                        if (target.chooseTarget(Outcome.PutCreatureInPlay, opponent.getId(), source, game)) {
-                            Card card = game.getCard(target.getFirstTarget());
-                            if (card != null) {
-                                cards.add(card);
-                            }
-                        }
+                Target target = new TargetCard(0, 1, Zone.HAND, filter).withChooseHint("put from hand to battlefield");
+                if (target.choose(Outcome.PutCreatureInPlay, opponent.getId(), source, game)) {
+                    Card card = game.getCard(target.getFirstTarget());
+                    if (card != null) {
+                        cards.add(card);
                     }
                 }
             }

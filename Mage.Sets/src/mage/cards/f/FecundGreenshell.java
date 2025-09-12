@@ -1,7 +1,5 @@
 package mage.cards.f;
 
-import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldThisOrAnotherTriggeredAbility;
@@ -11,24 +9,27 @@ import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.hint.common.LandsYouControlHint;
-import mage.cards.Card;
-import mage.constants.*;
 import mage.abilities.keyword.ReachAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
+import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ToughnessGreaterThanPowerPredicate;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  * @author Cguy7777
  */
 public final class FecundGreenshell extends CardImpl {
 
-    private static final FilterCreaturePermanent filter
-            = new FilterCreaturePermanent("creature you control with toughness greater than its power");
+    private static final FilterPermanent filter
+            = new FilterControlledCreaturePermanent("creature you control with toughness greater than its power");
 
     static {
         filter.add(ToughnessGreaterThanPowerPredicate.instance);
@@ -59,7 +60,7 @@ public final class FecundGreenshell extends CardImpl {
         // Whenever Fecund Greenshell or another creature you control with toughness greater than its power enters,
         // look at the top card of your library. If it's a land card, you may put it onto the battlefield tapped. Otherwise, put it into your hand.
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
-                new FecundGreenshellEffect(), filter, false, true));
+                new FecundGreenshellEffect(), filter, false, false));
     }
 
     private FecundGreenshell(final FecundGreenshell card) {

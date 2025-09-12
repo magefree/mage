@@ -3,15 +3,13 @@ package mage.cards.e;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
-import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -25,16 +23,17 @@ import mage.watchers.Watcher;
 import java.util.*;
 
 /**
- *
  * @author Susucr
  */
 public final class EowynShieldmaiden extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent(SubType.HUMAN, "Humans");
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(
+            new FilterPermanent(SubType.HUMAN, ""), ComparisonType.MORE_THAN, 5
+    );
 
     public EowynShieldmaiden(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{R}{W}");
-        
+
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.KNIGHT);
@@ -48,27 +47,14 @@ public final class EowynShieldmaiden extends CardImpl {
         // if another Human entered the battlefield under your control this turn,
         // create two 2/2 red Human Knight creature tokens with trample and haste.
         // Then if you control six or more Humans, draw a card.
-
-        TriggeredAbility triggeredAbility = new BeginningOfCombatTriggeredAbility(
-            Zone.BATTLEFIELD,
-                TargetController.YOU, new CreateTokenEffect(new HumanKnightToken(), 2),
-                false
-        );
-        triggeredAbility.addEffect(new ConditionalOneShotEffect(
-            new DrawCardSourceControllerEffect(1),
-            new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 5)
+        Ability ability = new BeginningOfCombatTriggeredAbility(
+                TargetController.YOU, new CreateTokenEffect(new HumanKnightToken(), 2), false
+        ).withInterveningIf(EowynShieldmaidenCondition.instance);
+        ability.addEffect(new ConditionalOneShotEffect(
+                new DrawCardSourceControllerEffect(1), condition,
+                "Then if you control six or more Humans, draw a card"
         ));
-
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-            triggeredAbility,
-            EowynShieldmaidenCondition.instance,
-            "At the beginning of combat on your turn, "
-            + "if another Human entered the battlefield "
-            + "under your control this turn, create two "
-            + "2/2 red Human Knight creature tokens with "
-            + "trample and haste. "
-            + "Then if you control six or more Humans, draw a card."
-        ), new EowynShieldmaidenWatcher());
+        this.addAbility(ability, new EowynShieldmaidenWatcher());
     }
 
     private EowynShieldmaiden(final EowynShieldmaiden card) {
@@ -88,10 +74,15 @@ enum EowynShieldmaidenCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         EowynShieldmaidenWatcher watcher = game.getState().getWatcher(EowynShieldmaidenWatcher.class);
         return watcher != null
-            && watcher.hasPlayerHadAnotherHumanEnterThisTurn(
+                && watcher.hasPlayerHadAnotherHumanEnterThisTurn(
                 game,
                 source.getSourcePermanentOrLKI(game),
                 source.getControllerId());
+    }
+
+    @Override
+    public String toString() {
+        return "another Human entered the battlefield under your control this turn";
     }
 }
 
@@ -137,11 +128,11 @@ class EowynShieldmaidenWatcher extends Watcher {
         // we do use MageObjectReference for when eowyn is entering the battlefield
         //    multiple time in the same turn (flickered for instance)
         MageObjectReference sourceMOR = sourcePermanent == null ? null
-            : new MageObjectReference(sourcePermanent.getId(), game);
+                : new MageObjectReference(sourcePermanent.getId(), game);
 
         Set<MageObjectReference> setForThePlayer = this.humanEnterings.getOrDefault(playerId, new HashSet<>());
         return setForThePlayer.stream().anyMatch(
-            humanMOR -> !(humanMOR.equals(sourceMOR))
+                humanMOR -> !(humanMOR.equals(sourceMOR))
         );
     }
 }

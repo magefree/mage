@@ -16,13 +16,12 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreatureOrPlaneswalker;
 
 import java.util.UUID;
 
 /**
- *
  * @author htrajan
  */
 public final class ClosingStatement extends CardImpl {
@@ -44,11 +43,9 @@ public final class ClosingStatement extends CardImpl {
         this.addAbility(ability);
 
         // Destroy target creature or planeswalker you don't control. Put a +1/+1 counter on up to one target creature you control.
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker(1, 1, filter, false));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter).setTargetTag(1));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        Target target = new TargetControlledCreaturePermanent(0, 1);
-        target.setTargetTag(2);
-        this.getSpellAbility().addTarget(target);
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(0, 1).setTargetTag(2));
         this.getSpellAbility().addEffect(new ClosingStatementEffect());
     }
 
@@ -85,9 +82,9 @@ class ClosingStatementEffect extends OneShotEffect {
             return false;
         }
         Target target = source.getTargets().stream()
-            .filter(t -> t.getTargetTag() == 2)
-            .findFirst()
-            .orElseThrow(() -> new IllegalStateException("Expected to find target with tag 2 but none exists"));
+                .filter(t -> t.getTargetTag() == 2)
+                .findFirst()
+                .orElseThrow(() -> new IllegalStateException("Expected to find target with tag 2 but none exists"));
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         if (permanent != null) {
             return permanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);

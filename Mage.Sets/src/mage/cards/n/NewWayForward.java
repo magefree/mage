@@ -12,7 +12,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.target.TargetSource;
+import mage.target.Target;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
@@ -47,12 +47,12 @@ public final class NewWayForward extends CardImpl {
 enum NewWayForwardPreventionApplier implements PreventNextDamageFromChosenSourceEffect.ApplierOnPrevention {
     instance;
 
-    public boolean apply(PreventionEffectData data, TargetSource targetSource, GameEvent event, Ability source, Game game) {
+    public boolean apply(PreventionEffectData data, Target target, GameEvent event, Ability source, Game game) {
         if (data == null || data.getPreventedDamage() <= 0) {
             return false;
         }
         int prevented = data.getPreventedDamage();
-        UUID objectControllerId = game.getControllerId(targetSource.getFirstTarget());
+        UUID objectControllerId = game.getControllerId(target.getFirstTarget());
         ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
                 new DamageTargetEffect(prevented)
                         .setTargetPointer(new FixedTarget(objectControllerId)),

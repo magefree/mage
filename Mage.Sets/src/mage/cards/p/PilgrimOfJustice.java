@@ -13,7 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.filter.FilterObject;
+import mage.filter.FilterSource;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
 import java.util.UUID;
@@ -23,7 +23,7 @@ import java.util.UUID;
  */
 public final class PilgrimOfJustice extends CardImpl {
 
-    private static final FilterObject filter = new FilterObject("red source");
+    private static final FilterSource filter = new FilterSource("red source");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.RED));

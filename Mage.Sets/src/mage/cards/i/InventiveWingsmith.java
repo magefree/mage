@@ -1,15 +1,16 @@
 package mage.cards.i;
 
 import mage.MageInt;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.CompoundCondition;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.HaventCastSpellFromHandThisTurnCondition;
 import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
@@ -24,7 +25,7 @@ public final class InventiveWingsmith extends CardImpl {
     private static final Condition condition = new CompoundCondition(
             "if you haven't cast a spell from your hand this turn and {this} doesn't have a flying counter on it",
             HaventCastSpellFromHandThisTurnCondition.instance,
-            new SourceHasCounterCondition(CounterType.FLYING, 0, 0)
+            new SourceHasCounterCondition(CounterType.FLYING, ComparisonType.EQUAL_TO, 0)
     );
 
     public InventiveWingsmith(UUID ownerId, CardSetInfo setInfo) {

@@ -16,7 +16,9 @@ import java.util.Set;
 
 public enum CardsInControllerHandCount implements DynamicValue {
 
+
     ANY(StaticFilters.FILTER_CARD_CARDS),
+    ANY_SINGULAR(StaticFilters.FILTER_CARD),
     CREATURES(StaticFilters.FILTER_CARD_CREATURES),
     LANDS(StaticFilters.FILTER_CARD_LANDS);
 

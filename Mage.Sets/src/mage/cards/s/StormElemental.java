@@ -14,12 +14,11 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandCard;
-import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -27,12 +26,6 @@ import java.util.UUID;
  * @author LevelX2 & L_J
  */
 public final class StormElemental extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
-
-    static {
-        filter.add(new AbilityPredicate(FlyingAbility.class));
-    }
 
     public StormElemental(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}");
@@ -46,7 +39,7 @@ public final class StormElemental extends CardImpl {
         // {U}, Exile the top card of your library: Tap target creature with flying.
         Ability ability = new SimpleActivatedAbility(new TapTargetEffect(), new ManaCostsImpl<>("{U}"));
         ability.addCost(new ExileTopCardLibraryCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_FLYING));
         this.addAbility(ability);
 
         // {U}, Exile the top card of your library: If the exiled card is a snow land, Storm Elemental gets +1/+1 until end of turn.

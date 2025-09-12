@@ -1,12 +1,9 @@
-
 package mage.cards.c;
 
 import mage.MageInt;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.condition.common.LastTimeCounterRemovedCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.CreateTokenCopySourceEffect;
-import mage.abilities.effects.Effect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VanishingAbility;
 import mage.cards.CardImpl;
@@ -34,11 +31,10 @@ public final class Chronozoa extends CardImpl {
         this.addAbility(new VanishingAbility(3));
 
         // When Chronozoa dies, if it had no time counters on it, create two tokens that are copies of it.
-        Effect effect = new CreateTokenCopySourceEffect(2);
-        effect.setText("create two tokens that are copies of it");
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new DiesSourceTriggeredAbility(effect, false),
-                LastTimeCounterRemovedCondition.instance,
-                "When {this} dies, if it had no time counters on it, create two tokens that are copies of it."));
+        this.addAbility(new DiesSourceTriggeredAbility(
+                new CreateTokenCopySourceEffect(2)
+                        .setText("create two tokens that are copies of it"), false
+        ).withInterveningIf(LastTimeCounterRemovedCondition.instance));
     }
 
     private Chronozoa(final Chronozoa card) {

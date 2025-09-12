@@ -17,6 +17,7 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -39,7 +40,7 @@ public final class BreakThroughTheLine extends CardImpl {
         Effect effect = new CantBeBlockedTargetEffect(Duration.EndOfTurn);
         effect.setText("and can't be blocked this turn");
         ability.addEffect(effect);
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
         
     }

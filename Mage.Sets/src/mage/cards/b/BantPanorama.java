@@ -1,7 +1,5 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -11,10 +9,14 @@ import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  * @author North
@@ -24,7 +26,6 @@ public final class BantPanorama extends CardImpl {
     private static final FilterCard filter = new FilterCard("a basic Forest, Plains, or Island card");
 
     static {
-        filter.add(CardType.LAND.getPredicate());
         filter.add(SuperType.BASIC.getPredicate());
         filter.add(Predicates.or(
                 SubType.FOREST.getPredicate(),

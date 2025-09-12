@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.AsTurnedFaceUpEffect;
@@ -13,16 +12,18 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopyEffect;
 import mage.abilities.effects.common.CopyPermanentEffect;
 import mage.abilities.keyword.MorphAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.util.functions.CopyApplier;
 
 import java.util.UUID;
@@ -104,11 +105,7 @@ class VesuvanShapeshifterEffect extends OneShotEffect {
 
         Permanent copyToCreature = game.getPermanent(source.getSourceId());
         if (copyToCreature != null) {
-            FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
-            filter.add(AnotherPredicate.instance);
-
-            TargetCreaturePermanent target = new TargetCreaturePermanent(0, 1, filter, true);
-
+            TargetPermanent target = new TargetPermanent(0, 1, StaticFilters.FILTER_ANOTHER_CREATURE, true);
             if (controller != null && controller.chooseTarget(Outcome.BecomeCreature, target, source, game) && !target.getTargets().isEmpty()) {
                 Permanent copyFromCreature = game.getPermanentOrLKIBattlefield(target.getFirstTarget());
                 if (copyFromCreature != null) {

@@ -1,22 +1,20 @@
 package mage.cards.k;
 
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.AttacksPlayerWithCreaturesTriggeredAbility;
 import mage.abilities.effects.common.*;
 import mage.abilities.effects.common.combat.GoadTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.players.Player;
 import mage.target.TargetPermanent;
+import mage.target.targetadjustment.ThatPlayerControlsTargetAdjuster;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.Set;
@@ -26,6 +24,7 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class KarazikarTheEyeTyrant extends CardImpl {
+    FilterPermanent filter = new FilterCreaturePermanent("creature that player controls");
 
     public KarazikarTheEyeTyrant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{R}");
@@ -36,7 +35,11 @@ public final class KarazikarTheEyeTyrant extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Whenever you attack a player, tap target creature that player controls and goad it.
-        this.addAbility(new KarazikarTheEyeTyrantFirstTriggeredAbility());
+        Ability ability = new AttacksPlayerWithCreaturesTriggeredAbility(new TapTargetEffect(), SetTargetPointer.PLAYER);
+        ability.addEffect(new GoadTargetEffect().setText("goad it. " + GoadTargetEffect.goadReminderText).concatBy("and"));
+        ability.addTarget(new TargetPermanent(filter));
+        ability.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster());
+        this.addAbility(ability);
 
         // Whenever an opponent attacks another one of your opponents, you and the attacking player each draw a card and lose 1 life.
         this.addAbility(new KarazikarTheEyeTyrantSecondTriggeredAbility());
@@ -49,49 +52,6 @@ public final class KarazikarTheEyeTyrant extends CardImpl {
     @Override
     public KarazikarTheEyeTyrant copy() {
         return new KarazikarTheEyeTyrant(this);
-    }
-}
-
-class KarazikarTheEyeTyrantFirstTriggeredAbility extends TriggeredAbilityImpl {
-
-    KarazikarTheEyeTyrantFirstTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new TapTargetEffect(), false);
-        this.addEffect(new GoadTargetEffect());
-    }
-
-    private KarazikarTheEyeTyrantFirstTriggeredAbility(final KarazikarTheEyeTyrantFirstTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public KarazikarTheEyeTyrantFirstTriggeredAbility copy() {
-        return new KarazikarTheEyeTyrantFirstTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DEFENDER_ATTACKED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (!isControlledBy(event.getPlayerId())) {
-            return false;
-        }
-        Player player = game.getPlayer(event.getTargetId());
-        if (player == null) {
-            return false;
-        }
-        FilterPermanent filter = new FilterCreaturePermanent("creature controlled by " + player.getName());
-        filter.add(new ControllerIdPredicate(player.getId()));
-        this.getTargets().clear();
-        this.addTarget(new TargetPermanent(filter));
-        return true;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you attack a player, tap target creature that player controls and goad it.";
     }
 }
 

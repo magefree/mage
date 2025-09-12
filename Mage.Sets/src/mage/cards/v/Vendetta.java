@@ -12,7 +12,10 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK;
 
 /**
  *
@@ -24,7 +27,7 @@ public final class Vendetta extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");
 
         // Destroy target nonblack creature. It can't be regenerated. You lose life equal to that creature's toughness.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK));
+        this.getSpellAbility().addTarget(new TargetPermanent(FILTER_PERMANENT_CREATURE_NON_BLACK));
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
         this.getSpellAbility().addEffect(new VendettaEffect());
     }

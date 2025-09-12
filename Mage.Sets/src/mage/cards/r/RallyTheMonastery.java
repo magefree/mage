@@ -1,7 +1,5 @@
 package mage.cards.r;
 
-import java.util.UUID;
-
 import mage.abilities.Mode;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CastAnotherSpellThisTurnCondition;
@@ -14,12 +12,13 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Zone;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.permanent.token.MonasteryMentorToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  * @author balazskristof
@@ -44,16 +43,16 @@ public final class RallyTheMonastery extends CardImpl {
         // Choose one —
         this.getSpellAbility().getModes().setMinModes(1);
         this.getSpellAbility().getModes().setMaxModes(1);
+
         // • Create two 1/1 white Monk creature tokens with prowess.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new MonasteryMentorToken(), 2));
+
         // • Up to two target creatures you control each get +2/+2 until end of turn.
-        Mode mode = new Mode(new BoostTargetEffect(2, 2));
-        mode.addTarget(new TargetControlledCreaturePermanent(0, 2, StaticFilters.FILTER_CONTROLLED_CREATURES, false));
-        this.getSpellAbility().getModes().addMode(mode);
+        this.getSpellAbility().getModes().addMode(new Mode(new BoostTargetEffect(2, 2))
+                .addTarget(new TargetControlledCreaturePermanent(0, 2)));
+
         // • Destroy target creature with power 4 or greater.
-        Mode mode2 = new Mode(new DestroyTargetEffect());
-        mode2.addTarget(new TargetPermanent(filter));
-        this.getSpellAbility().getModes().addMode(mode2);
+        this.getSpellAbility().getModes().addMode(new Mode(new DestroyTargetEffect()).addTarget(new TargetPermanent(filter)));
     }
 
     private RallyTheMonastery(final RallyTheMonastery card) {
@@ -65,4 +64,3 @@ public final class RallyTheMonastery extends CardImpl {
         return new RallyTheMonastery(this);
     }
 }
-

@@ -1,27 +1,23 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.dynamicvalue.common.EffectKeyValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.ThatPlayerControlsTargetAdjuster;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -52,8 +48,9 @@ public final class SatyrFiredancer extends CardImpl {
 class SatyrFiredancerTriggeredAbility extends TriggeredAbilityImpl {
 
     SatyrFiredancerTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new SatyrFiredancerDamageEffect(), false);
-        this.setTargetAdjuster(SatyrFiredancerAdjuster.instance);
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(new EffectKeyValue("damage", "that much")), false);
+        this.addTarget(new TargetCreaturePermanent().withTargetName("target creature that player controls"));
+        this.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster());
         setTriggerPhrase("Whenever an instant or sorcery spell you control deals damage to an opponent, ");
     }
 
@@ -93,50 +90,5 @@ class SatyrFiredancerTriggeredAbility extends TriggeredAbilityImpl {
             effect.setValue("damage", event.getAmount());
         }
         return true;
-    }
-}
-
-class SatyrFiredancerDamageEffect extends OneShotEffect {
-
-    SatyrFiredancerDamageEffect() {
-        super(Outcome.Damage);
-        this.staticText = "{this} deals that much damage to target creature that player controls";
-    }
-
-    private SatyrFiredancerDamageEffect(final SatyrFiredancerDamageEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SatyrFiredancerDamageEffect copy() {
-        return new SatyrFiredancerDamageEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent targetCreature = game.getPermanent(source.getFirstTarget());
-        Player controller = game.getPlayer(source.getControllerId());
-        if (targetCreature != null && controller != null) {
-            int damage = (Integer) this.getValue("damage");
-            if (damage > 0) {
-                targetCreature.damage(damage, source.getSourceId(), source, game, false, true);
-            }
-            return true;
-        }
-        return false;
-    }
-}
-
-enum SatyrFiredancerAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        Player opponent = game.getPlayer(ability.getEffects().get(0).getTargetPointer().getFirst(game, ability));
-        if (opponent != null) {
-            FilterCreaturePermanent filter = new FilterCreaturePermanent("creature controlled by " + opponent.getLogName());
-            filter.add(new ControllerIdPredicate(opponent.getId()));
-            ability.getTargets().add(new TargetCreaturePermanent(filter));
-        }
     }
 }

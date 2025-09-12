@@ -6,6 +6,7 @@ import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CompletedDungeonCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.effects.OneShotNonTargetEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.effects.keyword.VentureIntoTheDungeonEffect;
 import mage.abilities.hint.common.CurrentDungeonHint;
@@ -50,11 +51,11 @@ public final class BarrowinOfClanUndurr extends CardImpl {
 
         // Whenever Barrowin of Clan Undurr attacks, return up to one creature card with mana value 3 or less from your graveyard to the battlefield if you've completed a dungeon.
         Ability ability = new AttacksTriggeredAbility(new ConditionalOneShotEffect(
-                new ReturnFromGraveyardToBattlefieldTargetEffect(),
-                CompletedDungeonCondition.instance, "return up to one creature card " +
-                "with mana value 3 or less from your graveyard to the battlefield if you've completed a dungeon"
-        ));
-        ability.addTarget(new TargetCardInYourGraveyard(0, 1, filter, true));
+                new OneShotNonTargetEffect(new ReturnFromGraveyardToBattlefieldTargetEffect()
+                        .setText("return up to one creature card with mana value 3 or less from your graveyard to the battlefield"),
+                    new TargetCardInYourGraveyard(0, 1, filter, true)),
+                CompletedDungeonCondition.instance
+        ).withConditionTextAtEnd(true));
         this.addAbility(ability.addHint(CompletedDungeonCondition.getHint()), new CompletedDungeonWatcher());
     }
 

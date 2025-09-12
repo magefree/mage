@@ -1,34 +1,34 @@
-
 package mage.cards.e;
 
-import java.util.UUID;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.WinGameSourceControllerEffect;
-import mage.abilities.hint.ValueHint;
+import mage.abilities.hint.common.CreaturesYouControlHint;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
-import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
 public final class EpicStruggle extends CardImpl {
 
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(
+            new FilterControlledCreaturePermanent("you control twenty or more creatures"),
+            ComparisonType.MORE_THAN, 19
+    );
+
     public EpicStruggle(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
 
         // At the beginning of your upkeep, if you control twenty or more creatures, you win the game.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect()),
-                new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_CONTROLLED_CREATURE, ComparisonType.MORE_THAN, 19),
-                "At the beginning of your upkeep, if you control twenty or more creatures, you win the game."
-        ).addHint(new ValueHint("Creatures you control", new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_CREATURE))));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect())
+                .withInterveningIf(condition).addHint(CreaturesYouControlHint.instance));
     }
 
     private EpicStruggle(final EpicStruggle card) {

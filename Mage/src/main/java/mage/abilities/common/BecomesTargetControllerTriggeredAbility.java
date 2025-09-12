@@ -3,15 +3,14 @@ package mage.abilities.common;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.SetTargetPointer;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterStackObject;
-import mage.game.events.GameEvent;
-import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 import mage.target.targetpointer.FixedTarget;
-import mage.util.CardUtil;
 
 /**
  * @author xenohedron
@@ -63,7 +62,7 @@ public class BecomesTargetControllerTriggeredAbility extends TriggeredAbilityImp
                 return false;
             }
         }
-        StackObject targetingObject = CardUtil.findTargetingStackObject(this.getId().toString(), event, game);
+        StackObject targetingObject = game.findTargetingStackObject(this.getId().toString(), event);
         if (targetingObject == null || !filterStack.match(targetingObject, getControllerId(), this, game)) {
             return false;
         }

@@ -16,6 +16,7 @@ import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.permanent.token.Soldier22Token;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -46,7 +47,7 @@ public final class RilingDawnbreaker extends OmenCard {
 
         // At the beginning of combat on your turn, another target creature you control gets +1/+0 until end of turn.
         Ability ability = new BeginningOfCombatTriggeredAbility(new BoostTargetEffect(1, 0));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
         // Signaling Roar

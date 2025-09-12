@@ -4,13 +4,8 @@ import mage.abilities.keyword.HasteAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.game.permanent.Permanent;
-import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
-
-import static junit.framework.TestCase.assertEquals;
-import static org.junit.Assert.fail;
 
 /**
  * @author Susucr
@@ -131,7 +126,7 @@ public class RapidAugmenterTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ephemerate", true);
         addTarget(playerA, "Memnite");
-        setChoice(playerA, "Whenever another creature you control you control enters"); // order triggers (doesnt matter the order but a choice must be made)
+        setChoice(playerA, "Whenever another creature you control enters"); // order triggers (doesnt matter the order but a choice must be made)
 
         attack(1, playerA, rapidAugmenter, playerB);
         // Rapid Augmenter can't be blocked, Alpine Watchdog wont take damage

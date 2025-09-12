@@ -31,7 +31,7 @@ public final class AjaniWiseCounselor extends CardImpl {
         this.setStartingLoyalty(5);
 
         // +2: You gain 1 life for each creature you control.
-        this.addAbility(new LoyaltyAbility(new GainLifeEffect(CreaturesYouControlCount.instance)
+        this.addAbility(new LoyaltyAbility(new GainLifeEffect(CreaturesYouControlCount.PLURAL)
                 .setText("you gain 1 life for each creature you control"), 2));
 
         // −3: Creatures you control get +2/+2 until end of turn.

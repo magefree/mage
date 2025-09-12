@@ -31,7 +31,7 @@ public final class RiftstonePortal extends CardImpl {
         // As long as Riftstone Portal is in your graveyard, lands you control have "{T}: Add {G} or {W}."
         ContinuousEffect effect = new GainAbilityControlledEffect(new GreenManaAbility(),
                 Duration.WhileOnBattlefield, new FilterControlledLandPermanent());
-        effect.setText("As long as Riftstone Portal is in your graveyard, lands you control have \"{T}: Add {G} or {W}.\"");
+        effect.setText("As long as this card is in your graveyard, lands you control have \"{T}: Add {G} or {W}.\"");
         Ability ability = new SimpleStaticAbility(Zone.GRAVEYARD, effect);
         effect = new GainAbilityControlledEffect(new WhiteManaAbility(),
                 Duration.WhileOnBattlefield, new FilterControlledLandPermanent());

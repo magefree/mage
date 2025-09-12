@@ -11,6 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
@@ -82,7 +83,7 @@ class RevealingEyeEffect extends OneShotEffect {
         if (opponent.getHand().count(StaticFilters.FILTER_CARD_NON_LAND, game) < 1) {
             return true;
         }
-        TargetCard target = new TargetCardInHand(0, 1, StaticFilters.FILTER_CARD_NON_LAND);
+        TargetCard target = new TargetCard(0, 1, Zone.HAND, StaticFilters.FILTER_CARD_NON_LAND);
         controller.choose(outcome, opponent.getHand(), target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card == null) {

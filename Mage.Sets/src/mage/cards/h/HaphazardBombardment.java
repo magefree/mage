@@ -1,14 +1,12 @@
 package mage.cards.h;
 
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.IndestructibleAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -25,11 +23,25 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.util.RandomUtil;
 
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
 /**
- *
  * @author LevelX2
  */
 public final class HaphazardBombardment extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterPermanent("if two or more permanents you don't control have an aim counter on them");
+
+    static {
+        filter.add(TargetController.NOT_YOU.getControllerPredicate());
+        filter.add(CounterType.AIM.getPredicate());
+    }
+
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1);
 
     public HaphazardBombardment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{5}{R}");
@@ -38,12 +50,7 @@ public final class HaphazardBombardment extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new HaphazardBombardmentEffect(), false));
 
         // At the beginning of your end step, if two or more permanents you don't control have an aim counter on them, destroy one of those permanents at random.
-        FilterPermanent filter = new FilterPermanent("if two or more permanents you don't control have an aim counter on them");
-        filter.add(TargetController.NOT_YOU.getControllerPredicate());
-        filter.add(CounterType.AIM.getPredicate());
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new BeginningOfEndStepTriggeredAbility(new HaphazardBombardmentEndOfTurnEffect()),
-                new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1, false),
-                "At the beginning of your end step, if two or more permanents you don't control have an aim counter on them, destroy one of those permanents at random"));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new HaphazardBombardmentEndOfTurnEffect()).withInterveningIf(condition));
     }
 
     private HaphazardBombardment(final HaphazardBombardment card) {
@@ -57,6 +64,13 @@ public final class HaphazardBombardment extends CardImpl {
 }
 
 class HaphazardBombardmentEffect extends OneShotEffect {
+
+    private static final FilterPermanent filter = new FilterPermanent("nonenchantment permanents you don't control");
+
+    static {
+        filter.add(Predicates.not(CardType.ENCHANTMENT.getPredicate()));
+        filter.add(TargetController.NOT_YOU.getControllerPredicate());
+    }
 
     HaphazardBombardmentEffect() {
         super(Outcome.Benefit);
@@ -75,33 +89,42 @@ class HaphazardBombardmentEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            FilterPermanent filter = new FilterPermanent("nonenchantment permanents you don't control");
-            filter.add(Predicates.not(CardType.ENCHANTMENT.getPredicate()));
-            filter.add(TargetController.OPPONENT.getControllerPredicate());
-            List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game);
-            if (permanents.size() > 4) {
-                permanents.clear();
-                TargetPermanent target = new TargetPermanent(4, 4, filter, true);
-                controller.chooseTarget(outcome, target, source, game);
-                for (UUID targetId : target.getTargets()) {
-                    Permanent permanent = game.getPermanent(targetId);
-                    if (permanent != null) {
-                        permanents.add(permanent);
-                    }
-                }
-            }
-            for (Permanent permanent : permanents) {
-                permanent.addCounters(CounterType.AIM.createInstance(), source.getControllerId(), source, game);
-            }
-            return true;
-
+        if (controller == null) {
+            return false;
         }
-        return false;
+        List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game);
+        if (permanents.size() > 4) {
+            permanents.clear();
+            TargetPermanent target = new TargetPermanent(4, 4, filter, true);
+            controller.chooseTarget(outcome, target, source, game);
+            permanents.addAll(
+                    target.getTargets()
+                            .stream()
+                            .map(game::getPermanent)
+                            .filter(Objects::nonNull)
+                            .collect(Collectors.toList())
+            );
+        }
+        for (Permanent permanent : permanents) {
+            permanent.addCounters(CounterType.AIM.createInstance(), source.getControllerId(), source, game);
+        }
+        return true;
+
     }
 }
 
 class HaphazardBombardmentEndOfTurnEffect extends OneShotEffect {
+
+    private static final FilterPermanent filter = new FilterPermanent();
+
+    static {
+        filter.add(TargetController.NOT_YOU.getControllerPredicate());
+        filter.add(CounterType.AIM.getPredicate());
+        // 4/27/2018 	If one or more of the permanents with aim counters on them have indestructible,
+        // select the permanent destroyed at random from among the permanents with aim counters
+        // that don't have indestructible.
+        filter.add(Predicates.not(new AbilityPredicate(IndestructibleAbility.class)));
+    }
 
     HaphazardBombardmentEndOfTurnEffect() {
         super(Outcome.Benefit);
@@ -119,21 +142,12 @@ class HaphazardBombardmentEndOfTurnEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-
-        // 4/27/2018 	If one or more of the permanents with aim counters on them have indestructible,
-        // select the permanent destroyed at random from among the permanents with aim counters
-        // that don't have indestructible.
-        FilterPermanent filter = new FilterPermanent("if two or more permanents you don't control have an aim counter on them");
-        filter.add(TargetController.NOT_YOU.getControllerPredicate());
-        filter.add(CounterType.AIM.getPredicate());
-        filter.add(Predicates.not(new AbilityPredicate(IndestructibleAbility.class)));
-        List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game);
-        if (!permanents.isEmpty()) {
-            Permanent permanent = permanents.get(RandomUtil.nextInt(permanents.size()));
-            if (permanent != null) {
-                permanent.destroy(source, game, false);
-            }
-        }
-        return true;
+        return Optional.ofNullable(
+                        game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)
+                )
+                .filter(p -> !p.isEmpty())
+                .map(RandomUtil::randomFromCollection)
+                .filter(permanent -> permanent.destroy(source, game))
+                .isPresent();
     }
 }

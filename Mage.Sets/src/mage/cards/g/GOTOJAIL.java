@@ -13,16 +13,17 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.util.CardUtil;
 
 import java.util.List;
 import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE;
 
 /**
  * @author spjspj
@@ -34,7 +35,7 @@ public final class GOTOJAIL extends CardImpl {
 
         // When GO TO JAIL enters the battlefield, exile target creature an opponent controls until GO TO JAIL leaves the battlefield.
         Ability ability = new EntersBattlefieldTriggeredAbility(new GoToJailExileEffect());
-        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
+        ability.addTarget(new TargetPermanent(FILTER_OPPONENTS_PERMANENT_CREATURE));
         this.addAbility(ability);
 
         // At the beginning of the upkeep of the exiled card's owner, that player rolls two six-sided dice. If they roll doubles, sacrifice GO TO JAIL.
@@ -79,7 +80,7 @@ class GoToJailExileEffect extends OneShotEffect {
             if (controller != null) {
                 game.getState().setValue(permanent.getId() + ChooseOpponentEffect.VALUE_KEY, controller.getId());
                 new ExileTargetEffect(
-                        CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()), permanent.getIdName()
+                        CardUtil.getExileZoneId(game, source.getSourceId(), source.getStackMomentSourceZCC()), permanent.getIdName()
                 ).apply(game, source);
                 game.addDelayedTriggeredAbility(new OnLeaveReturnExiledAbility(), source);
                 return true;

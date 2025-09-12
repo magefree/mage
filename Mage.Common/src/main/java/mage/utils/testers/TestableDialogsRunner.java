@@ -8,8 +8,7 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -31,7 +30,7 @@ import java.util.stream.Collectors;
  * [x] choosePile
  * [x] announceX
  * [x] getAmount
- * [ ] getMultiAmountWithIndividualConstraints // TODO: implement
+ * [x] getMultiAmountWithIndividualConstraints
  * <p>
  * Support of priority dialogs (can be called by game engine, some can be implemented in theory):
  * --- priority
@@ -55,7 +54,7 @@ import java.util.stream.Collectors;
  */
 public class TestableDialogsRunner {
 
-    private final List<TestableDialog> dialogs = new ArrayList<>();
+    private final Map<Integer, TestableDialog> dialogs = new LinkedHashMap<>();
 
     static final int LAST_SELECTED_GROUP_ID = 997;
     static final int LAST_SELECTED_DIALOG_ID = 998;
@@ -75,15 +74,18 @@ public class TestableDialogsRunner {
         ChooseAmountTestableDialog.register(this);
         AnnounceXTestableDialog.register(this);
         GetAmountTestableDialog.register(this);
+        GetMultiAmountTestableDialog.register(this);
     }
 
     void registerDialog(TestableDialog dialog) {
-        this.dialogs.add(dialog);
+        Integer regNumber = this.dialogs.size() + 1;
+        dialog.setRegNumber(regNumber);
+        this.dialogs.put(regNumber, dialog);
     }
 
     public void selectAndShowTestableDialog(Player player, Ability source, Game game, Player opponent) {
         // select group or fast links
-        List<String> groups = this.dialogs.stream()
+        List<String> groups = this.dialogs.values().stream()
                 .map(TestableDialog::getGroup)
                 .distinct()
                 .sorted()
@@ -115,10 +117,8 @@ public class TestableDialogsRunner {
             choice = prepareSelectDialogChoice(needGroup);
             player.choose(Outcome.Benefit, choice, game);
             if (choice.getChoiceKey() != null) {
-                int needIndex = Integer.parseInt(choice.getChoiceKey());
-                if (needIndex < this.dialogs.size()) {
-                    needDialog = this.dialogs.get(needIndex);
-                }
+                int needRegNumber = Integer.parseInt(choice.getChoiceKey());
+                needDialog = this.dialogs.getOrDefault(needRegNumber, null);
             }
         }
         if (needDialog == null) {
@@ -128,8 +128,9 @@ public class TestableDialogsRunner {
         // all fine, can show it and finish
         lastSelectedGroup = needGroup;
         lastSelectedDialog = needDialog;
-        List<String> resInfo = needDialog.showDialog(player, source, game, opponent);
-        needDialog.showResult(player, game, String.join("<br>", resInfo));
+        needDialog.prepare();
+        needDialog.showDialog(player, source, game, opponent);
+        needDialog.showResult(player, game);
     }
 
     private Choice prepareSelectGroupChoice(List<String> groups) {
@@ -138,15 +139,20 @@ public class TestableDialogsRunner {
         Choice choice = new ChoiceImpl(false);
         choice.setMessage("Choose dialogs group to run");
 
+        // use min reg number for groups
+        Map<String, Integer> groupNumber = new HashMap<>();
+        this.dialogs.values().forEach(dialog -> {
+            groupNumber.put(dialog.getGroup(), Math.min(groupNumber.getOrDefault(dialog.getGroup(), Integer.MAX_VALUE), dialog.getRegNumber()));
+        });
+
         // main groups
-        int recNumber = 0;
         for (int i = 0; i < groups.size(); i++) {
-            recNumber++;
             String group = groups.get(i);
+            Integer groupMinNumber = groupNumber.getOrDefault(group, 0);
             choice.withItem(
                     String.valueOf(i),
-                    String.format("%02d. %s", recNumber, group),
-                    recNumber,
+                    String.format("%02d. %s", groupMinNumber, group),
+                    groupMinNumber,
                     ChoiceHintType.TEXT,
                     String.join("<br>", group)
             );
@@ -180,23 +186,24 @@ public class TestableDialogsRunner {
     private Choice prepareSelectDialogChoice(String needGroup) {
         Choice choice = new ChoiceImpl(false);
         choice.setMessage("Choose game dialog to run from " + needGroup);
-        int recNumber = 0;
-        for (int i = 0; i < this.dialogs.size(); i++) {
-            TestableDialog dialog = this.dialogs.get(i);
+        for (TestableDialog dialog : this.dialogs.values()) {
             if (!dialog.getGroup().equals(needGroup)) {
                 continue;
             }
-            recNumber++;
             String info = String.format("%s - %s - %s", dialog.getGroup(), dialog.getName(), dialog.getDescription());
             choice.withItem(
-                    String.valueOf(i),
-                    String.format("%02d. %s", recNumber, info),
-                    recNumber,
+                    String.valueOf(dialog.getRegNumber()),
+                    String.format("%02d. %s", dialog.getRegNumber(), info),
+                    dialog.getRegNumber(),
                     ChoiceHintType.TEXT,
                     String.join("<br>", info)
             );
         }
         return choice;
+    }
+
+    public Collection<TestableDialog> getDialogs() {
+        return this.dialogs.values();
     }
 }
 

@@ -71,6 +71,10 @@ public class ConditionalTargetAdjuster implements TargetAdjuster {
             blueprintTarget = ability.getTargets().get(0).copy();
         }
     }
+    @Override
+    public void clearDefaultTargets() {
+        blueprintTarget = null;
+    }
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

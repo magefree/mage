@@ -50,13 +50,9 @@ public abstract class TargetObject extends TargetImpl {
     /**
      * Warning, don't use with non card objects here like commanders/emblems/etc. If you want it then
      * override canTarget in your own target.
-     *
-     * @param id
-     * @param game
-     * @return
      */
     @Override
-    public boolean canTarget(UUID id, Game game) {
+    public boolean canTarget(UUID id, Ability source, Game game) {
         MageObject object = game.getObject(id);
         return object != null
                 && zone != null && zone.match(game.getState().getZone(id))
@@ -64,13 +60,7 @@ public abstract class TargetObject extends TargetImpl {
     }
 
     @Override
-    public boolean canTarget(UUID id, Ability source, Game game) {
-        return canTarget(id, game);
-    }
-
-    @Override
     public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
         return canTarget(id, source, game);
     }
-
 }

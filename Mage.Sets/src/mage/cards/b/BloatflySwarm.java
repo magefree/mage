@@ -59,7 +59,8 @@ class BloatflySwarmPreventionEffect extends PreventDamageAndRemoveCountersEffect
 
     BloatflySwarmPreventionEffect() {
         super(true, true, true);
-        staticText += ", then give each player a rad counter for each +1/+1 counter removed this way";
+        staticText = "If damage would be dealt to {this} while it has a +1/+1 counter on it, prevent that damage, remove that many +1/+1 counters from it, " +
+                "then give each player a rad counter for each +1/+1 counter removed this way";
     }
 
     private BloatflySwarmPreventionEffect(final BloatflySwarmPreventionEffect effect) {

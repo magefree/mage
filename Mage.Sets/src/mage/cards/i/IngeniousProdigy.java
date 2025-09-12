@@ -1,16 +1,15 @@
 package mage.cards.i;
 
 import mage.MageInt;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.abilities.keyword.SkulkAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -41,15 +40,10 @@ public final class IngeniousProdigy extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.P1P1.createInstance())));
 
         // At the beginning of your upkeep, if Ingenious Prodigy has one or more +1/+1 counters on it, you may remove a +1/+1 counter from it. If you do, draw a card.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(
-                        new DoIfCostPaid(
-                                new DrawCardSourceControllerEffect(1),
-                                new RemoveCountersSourceCost(CounterType.P1P1.createInstance())
-                        ), false
-                ), condition, "At the beginning of your upkeep, if {this} has one or more " +
-                "+1/+1 counters on it, you may remove a +1/+1 counter from it. If you do, draw a card."
-        ));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DoIfCostPaid(
+                new DrawCardSourceControllerEffect(1),
+                new RemoveCountersSourceCost(CounterType.P1P1.createInstance()).setText("remove a +1/+1 counter from it")
+        )).withInterveningIf(condition));
     }
 
     private IngeniousProdigy(final IngeniousProdigy card) {

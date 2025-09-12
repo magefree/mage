@@ -8,9 +8,11 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.TargetCard;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetOpponent;
 import mage.util.CardUtil;
@@ -65,9 +67,7 @@ class ExtractBrainEffect extends OneShotEffect {
         if (controller == null || opponent == null || opponent.getHand().isEmpty() || xValue < 1) {
             return false;
         }
-        TargetCardInHand target = new TargetCardInHand(
-                Math.min(opponent.getHand().size(), xValue), StaticFilters.FILTER_CARD
-        );
+        TargetCard target = new TargetCard(Math.min(opponent.getHand().size(), xValue), Integer.MAX_VALUE, Zone.HAND, StaticFilters.FILTER_CARD);
         opponent.choose(Outcome.Detriment, opponent.getHand(), target, source, game);
         Cards cards = new CardsImpl(target.getTargets());
         controller.lookAtCards(source, null, cards, game);

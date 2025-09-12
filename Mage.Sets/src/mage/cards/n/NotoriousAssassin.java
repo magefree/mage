@@ -14,7 +14,10 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK;
 
 /**
  *
@@ -34,7 +37,7 @@ public final class NotoriousAssassin extends CardImpl {
         Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(true), new ManaCostsImpl<>("{2}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
-        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK));
+        ability.addTarget(new TargetPermanent(FILTER_PERMANENT_CREATURE_NON_BLACK));
         this.addAbility(ability);
     }
 

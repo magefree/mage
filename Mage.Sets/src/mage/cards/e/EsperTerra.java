@@ -119,7 +119,7 @@ class EsperTerraEffect extends OneShotEffect {
                     .filter(amount -> amount > 0)
                     .ifPresent(amount -> token.addCounters(CounterType.LORE.createInstance(amount), source, game));
         }
-        effect.sacrificeTokensCreatedAtNextEndStep(game, source);
+        effect.removeTokensCreatedAt(game, source, false, PhaseStep.END_TURN, TargetController.YOU);
         return true;
     }
 }

@@ -18,17 +18,13 @@ import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.ExileZone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
 import mage.util.functions.CopyTokenFunction;
 
-import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -92,15 +88,9 @@ class PhantomSteedEffect extends OneShotEffect {
             Token token = CopyTokenFunction.createTokenCopy(card, game);
             token.addSubType(SubType.ILLUSION);
             token.putOntoBattlefield(1, game, source, source.getControllerId(), true, true);
-            List<Permanent> permanents = token
-                    .getLastAddedTokenIds()
-                    .stream()
-                    .map(game::getPermanent)
-                    .filter(Objects::nonNull)
-                    .collect(Collectors.toList());
             game.addDelayedTriggeredAbility(new AtTheEndOfCombatDelayedTriggeredAbility(
                     new ExileTargetEffect("Sacrifice that token at end of combat")
-                            .setTargetPointer(new FixedTargets(permanents, game))
+                            .setTargetPointer(new FixedTargets(token, game))
             ), source);
         }
         return true;

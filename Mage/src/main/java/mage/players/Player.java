@@ -20,7 +20,6 @@ import mage.designations.Designation;
 import mage.designations.DesignationType;
 import mage.filter.FilterCard;
 import mage.filter.FilterMana;
-import mage.filter.FilterPermanent;
 import mage.game.*;
 import mage.game.draft.Draft;
 import mage.game.events.GameEvent;
@@ -37,10 +36,7 @@ import mage.util.Copyable;
 import mage.util.MultiAmountMessage;
 
 import java.io.Serializable;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -57,16 +53,13 @@ import java.util.stream.Collectors;
 public interface Player extends MageItem, Copyable<Player> {
 
     /**
-     * Enum used to indicate what each player is allowed to spend life on.
-     * By default it is set to `allAbilities`, but can be changed by effects.
-     * E.g. Angel of Jubilation sets it to `nonSpellnonActivatedAbilities`,
-     * and Karn's Sylex sets it to `onlyManaAbilities`.
-     * <p>
-     * <p>
-     * Default is PayLifeCostLevel.allAbilities.
+     * Enum used to indicate what each player is not allowed to spend life on.
+     * By default a player has no restrictions, but can be changed by effects.
+     * E.g. Angel of Jubilation adds `CAST_SPELLS` and 'ACTIVATE_ABILITIES',
+     * and Karn's Sylex adds `CAST_SPELLS` and 'ACTIVATE_NON_MANA_ABILITIES'.
      */
-    enum PayLifeCostLevel {
-        allAbilities, nonSpellnonActivatedAbilities, onlyManaAbilities, none
+    enum PayLifeCostRestriction {
+        CAST_SPELLS, ACTIVATE_NON_MANA_ABILITIES, ACTIVATE_MANA_ABILITIES
     }
 
     /**
@@ -79,7 +72,13 @@ public interface Player extends MageItem, Copyable<Player> {
      */
     boolean isHuman();
 
-    boolean isTestsMode();
+    boolean isTestMode();
+
+    void setTestMode(boolean value);
+
+    boolean isFastFailInTestMode();
+
+    void setFastFailInTestMode(boolean value);
 
     /**
      * Current player is AI. Use it in card's code and all other places.
@@ -171,14 +170,14 @@ public interface Player extends MageItem, Copyable<Player> {
     boolean isCanGainLife();
 
     /**
-     * Is the player allowed to pay life for casting spells or activate activated abilities
+     * Adds a {@link PayLifeCostRestriction} to the set of restrictions.
      *
-     * @param payLifeCostLevel
+     * @param payLifeCostRestriction
      */
 
-    void setPayLifeCostLevel(PayLifeCostLevel payLifeCostLevel);
+    void addPayLifeCostRestriction(PayLifeCostRestriction payLifeCostRestriction);
 
-    PayLifeCostLevel getPayLifeCostLevel();
+    EnumSet<PayLifeCostRestriction> getPayLifeCostRestrictions();
 
     /**
      * Can the player pay life to cast or activate the given ability
@@ -187,10 +186,6 @@ public interface Player extends MageItem, Copyable<Player> {
      * @return
      */
     boolean canPayLifeCost(Ability Ability);
-
-    void setCanPaySacrificeCostFilter(FilterPermanent filter);
-
-    FilterPermanent getSacrificeCostFilter();
 
     boolean canPaySacrificeCost(Permanent permanent, Ability source, UUID controllerId, Game game);
 
@@ -388,7 +383,7 @@ public interface Player extends MageItem, Copyable<Player> {
      *
      * @param value
      */
-    void setGameUnderYourControl(boolean value);
+    void setGameUnderYourControl(Game game, boolean value);
 
     /**
      * Return player's turn control to prev player
@@ -396,9 +391,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param value
      * @param fullRestore return turn control to own
      */
-    void setGameUnderYourControl(boolean value, boolean fullRestore);
-
-    void setTestMode(boolean value);
+    void setGameUnderYourControl(Game game, boolean value, boolean fullRestore);
 
     void setAllowBadMoves(boolean allowBadMoves);
 
@@ -784,12 +777,18 @@ public interface Player extends MageItem, Copyable<Player> {
      * @return List of integers with size equal to messages.size().  The sum of the integers is equal to max.
      */
     default List<Integer> getMultiAmount(Outcome outcome, List<String> messages, int optionMin, int totalMin, int totalMax, MultiAmountType type, Game game) {
+        // do not override it
+
+        // runtime check: make sure all default values are valid
+        // TODO: add default check inside getMultiAmountWithIndividualConstraints
         if (optionMin > totalMax || optionMin * messages.size() > totalMin) {
             throw new IllegalArgumentException(String.format("Wrong code usage: getMultiAmount found bad option min/max values: %d/%d", optionMin, totalMax));
         }
+
         List<MultiAmountMessage> constraints = messages.stream()
                 .map(s -> new MultiAmountMessage(s, optionMin, totalMax))
                 .collect(Collectors.toList());
+
         return getMultiAmountWithIndividualConstraints(outcome, constraints, totalMin, totalMax, type, game);
     }
 
@@ -810,6 +809,9 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void construct(Tournament tournament, Deck deck);
 
+    /**
+     * Draft related: pick next card from a booster
+     */
     void pickCard(List<Card> cards, Deck deck, Draft draft);
 
     // TODO: add result, process it in AI code (if something put creature to attack then it can broke current AI logic)
@@ -1218,10 +1220,6 @@ public interface Player extends MageItem, Copyable<Player> {
 
     /**
      * Only used for test player for pre-setting targets
-     *
-     * @param ability
-     * @param game
-     * @return
      */
     boolean addTargets(Ability ability, Game game);
 

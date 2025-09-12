@@ -7,18 +7,18 @@ import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.AfterBlockersAreDeclaredCondition;
 import mage.abilities.condition.common.IsPhaseCondition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.BecomeBlockedTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TurnPhase;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.filter.predicate.permanent.BlockedPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -50,10 +50,8 @@ public final class TrapRunner extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {T}: Target unblocked attacking creature becomes blocked. Activate this ability only during combat after blockers are declared.
-        Ability ability = new ConditionalActivatedAbility(
-                Zone.BATTLEFIELD, new BecomeBlockedTargetEffect(), new TapSourceCost(), condition
-        );
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        Ability ability = new ActivateIfConditionActivatedAbility(new BecomeBlockedTargetEffect(), new TapSourceCost(), condition);
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

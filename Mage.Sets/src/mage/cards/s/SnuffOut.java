@@ -10,9 +10,12 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandPermanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK;
 
 /**
  *
@@ -36,7 +39,7 @@ public final class SnuffOut extends CardImpl {
         // 
         // Destroy target nonblack creature. It can't be regenerated.
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK));
+        this.getSpellAbility().addTarget(new TargetPermanent(FILTER_PERMANENT_CREATURE_NON_BLACK));
     }
 
     private SnuffOut(final SnuffOut card) {

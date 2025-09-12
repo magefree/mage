@@ -1,7 +1,5 @@
 package mage.cards.k;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
@@ -15,10 +13,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.counters.CounterType;
-import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Construct2Token;
@@ -27,19 +23,12 @@ import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class KaylasCommand extends CardImpl {
-
-    private static final FilterCard filter
-            = new FilterCard("a basic Plains card");
-
-    static {
-        filter.add(SubType.PLAINS.getPredicate());
-        filter.add(SuperType.BASIC.getPredicate());
-    }
 
     public KaylasCommand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{W}{W}");
@@ -55,7 +44,7 @@ public final class KaylasCommand extends CardImpl {
         this.getSpellAbility().addMode(new Mode(new KaylasCommandCounterEffect()));
 
         // * Search your library for a basic Plains card, reveal it, put it into your hand, then shuffle.
-        this.getSpellAbility().addMode(new Mode(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true)));
+        this.getSpellAbility().addMode(new Mode(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_PLAINS), true)));
 
         // * You gain 2 life and scry 2.
         Mode mode = new Mode(new GainLifeEffect(2));

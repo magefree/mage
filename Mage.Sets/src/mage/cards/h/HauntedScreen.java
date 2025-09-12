@@ -46,7 +46,8 @@ public final class HauntedScreen extends CardImpl {
         );
         ability.addEffect(new BecomesCreatureSourceEffect(new CreatureToken(
                 0, 0, "0/0 Spirit creature", SubType.SPIRIT
-        ), CardType.ARTIFACT, Duration.Custom).withKeepCreatureSubtypes(true));
+        ), CardType.ARTIFACT, Duration.Custom).withKeepCreatureSubtypes(true)
+                .setText("It becomes a 0/0 Spirit creature in addition to its other types"));
         this.addAbility(ability);
     }
 

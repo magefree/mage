@@ -6,7 +6,7 @@ import mage.abilities.dynamicvalue.common.GateYouControlCount;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
-import mage.abilities.hint.common.GateYouControlHint;
+import mage.abilities.hint.common.GatesYouControlHint;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.MenaceAbility;
 import mage.abilities.keyword.VigilanceAbility;
@@ -36,7 +36,7 @@ public final class GlaiveOfTheGuildpact extends CardImpl {
         ability.addEffect(new GainAbilityAttachedEffect(
                 new MenaceAbility(), AttachmentType.EQUIPMENT
         ).setText("and menace. <i>(A creature with menace can't be blocked except by two or more creatures.)</i>"));
-        ability.addHint(GateYouControlHint.instance);
+        ability.addHint(GatesYouControlHint.instance);
         this.addAbility(ability);
 
         // Equip {3}

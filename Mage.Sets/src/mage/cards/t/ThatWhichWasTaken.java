@@ -1,7 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -16,11 +15,12 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 
 
@@ -29,7 +29,7 @@ import mage.target.TargetPermanent;
  */
 public final class ThatWhichWasTaken extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("permanent other than That Which Was Taken");
+    private static final FilterPermanent filter = new FilterPermanent("permanent other than {this}");
 
     private static final FilterPermanent filterIndestructible = new FilterPermanent("Each permanent with a divinity counter on it");
 

@@ -1,10 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.PreventionEffectImpl;
@@ -14,24 +10,28 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.filter.FilterSource;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
-import mage.filter.FilterObject;
 import mage.players.Player;
 import mage.target.TargetSource;
 import mage.util.CardUtil;
 
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class DesperateGambit extends CardImpl {
 
     public DesperateGambit(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");
 
         // Choose a source you control and flip a coin. If you win the flip, the next time that source would deal damage this turn, it deals double that damage instead. If you lose the flip, the next time it would deal damage this turn, prevent that damage.
         this.getSpellAbility().addEffect(new DesperateGambitEffect());
@@ -48,7 +48,7 @@ public final class DesperateGambit extends CardImpl {
 }
 
 class DesperateGambitEffect extends PreventionEffectImpl {
-    
+
     private final TargetSource target;
     private boolean wonFlip;
 
@@ -122,10 +122,14 @@ class DesperateGambitEffect extends PreventionEffectImpl {
     }
 }
 
+/**
+ * TODO: should not be needed with the proper {@link FilterSource}.
+ *       make sure it works properly with 108.4a if you do
+ */
 class TargetControlledSource extends TargetSource {
 
     public TargetControlledSource() {
-        super(1, 1, new FilterObject("source you control"));
+        super(1, 1, new FilterSource("source you control"));
     }
 
     private TargetControlledSource(final TargetControlledSource target) {
@@ -133,57 +137,20 @@ class TargetControlledSource extends TargetSource {
     }
 
     @Override
-    public boolean canChoose(UUID sourceControllerId, Game game) {
-        int count = 0;
-        for (StackObject stackObject: game.getStack()) {
-            if (game.getState().getPlayersInRange(sourceControllerId, game).contains(stackObject.getControllerId()) 
-                && Objects.equals(stackObject.getControllerId(), sourceControllerId)) {
-                count++;
-                if (count >= this.minNumberOfTargets) {
-                    return true;
-                }
-            }
-        }
-        for (Permanent permanent: game.getBattlefield().getActivePermanents(sourceControllerId, game)) {
-            if (Objects.equals(permanent.getControllerId(), sourceControllerId)) {
-                count++;
-                if (count >= this.minNumberOfTargets) {
-                    return true;
-                }
-            }
-        }
-        for (Player player : game.getPlayers().values()) {
-            if (Objects.equals(player, game.getPlayer(sourceControllerId))) {
-                for (Card card : player.getGraveyard().getCards(game)) {
-                    count++;
-                    if (count >= this.minNumberOfTargets) {
-                        return true;
-                    }
-                }
-                // 108.4a If anything asks for the controller of a card that doesn't have one (because it's not a permanent or spell), use its owner instead.
-                for (Card card : game.getExile().getAllCards(game)) {
-                    if (Objects.equals(card.getOwnerId(), sourceControllerId)) {
-                        count++;
-                        if (count >= this.minNumberOfTargets) {
-                            return true;
-                        }
-                    }
-                }
-            }
-        }
-        return false;
+    public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
+        return canChooseFromPossibleTargets(sourceControllerId, source, game);
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
-        for (StackObject stackObject: game.getStack()) {
-            if (game.getState().getPlayersInRange(sourceControllerId, game).contains(stackObject.getControllerId()) 
-                && Objects.equals(stackObject.getControllerId(), sourceControllerId)) {
+        for (StackObject stackObject : game.getStack()) {
+            if (game.getState().getPlayersInRange(sourceControllerId, game).contains(stackObject.getControllerId())
+                    && Objects.equals(stackObject.getControllerId(), sourceControllerId)) {
                 possibleTargets.add(stackObject.getId());
             }
         }
-        for (Permanent permanent: game.getBattlefield().getActivePermanents(sourceControllerId, game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(sourceControllerId, game)) {
             if (Objects.equals(permanent.getControllerId(), sourceControllerId)) {
                 possibleTargets.add(permanent.getId());
             }
@@ -194,14 +161,14 @@ class TargetControlledSource extends TargetSource {
                     possibleTargets.add(card.getId());
                 }
                 // 108.4a If anything asks for the controller of a card that doesn't have one (because it's not a permanent or spell), use its owner instead.
-                for (Card card : game.getExile().getAllCards(game)) {
+                for (Card card : game.getExile().getCardsInRange(game, sourceControllerId)) {
                     if (Objects.equals(card.getOwnerId(), sourceControllerId)) {
                         possibleTargets.add(card.getId());
                     }
                 }
             }
         }
-        return possibleTargets;
+        return keepValidPossibleTargets(possibleTargets, sourceControllerId, source, game);
     }
 
     @Override

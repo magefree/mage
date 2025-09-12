@@ -20,7 +20,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterNoncreatureCard;
+import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.watchers.common.SpellsCastWatcher;
 
@@ -31,7 +31,10 @@ import java.util.UUID;
  */
 public final class LyseHext extends CardImpl {
 
-    private static final FilterCard filter = new FilterNoncreatureCard("noncreature spells");
+    private static final FilterCard filter = new FilterCard("noncreature spells");
+    static {
+        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
+    }
 
     public LyseHext(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}");

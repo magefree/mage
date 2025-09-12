@@ -1,23 +1,18 @@
-
 package mage.cards.t;
 
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.CompoundCondition;
 import mage.abilities.condition.Condition;
-import mage.abilities.condition.InvertCondition;
-import mage.abilities.condition.common.AttachedCondition;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.SacrificeEquippedEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
@@ -25,10 +20,9 @@ import mage.game.permanent.Permanent;
 import mage.watchers.Watcher;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
-import mage.target.common.TargetControlledCreaturePermanent;
-
 
 /**
  * @author Quercitron
@@ -43,17 +37,12 @@ public final class ThirstingAxe extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(4, 0)));
 
         // At the beginning of your end step, if equipped creature didn't deal combat damage to a creature this turn, sacrifice it.
-        TriggeredAbility ability = new BeginningOfEndStepTriggeredAbility(new SacrificeEquippedEffect());
-        Condition condition = new CompoundCondition(
-                AttachedCondition.instance,
-                new InvertCondition(new EquippedDealtCombatDamageToCreatureCondition()));
-        String triggeredAbilityText = "At the beginning of your end step, if equipped creature " +
-                "didn't deal combat damage to a creature this turn, sacrifice it.";
-        ConditionalInterveningIfTriggeredAbility sacrificeTriggeredAbility = new ConditionalInterveningIfTriggeredAbility(ability, condition, triggeredAbilityText);
-        this.addAbility(sacrificeTriggeredAbility, new CombatDamageToCreatureWatcher());
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(
+                new SacrificeEquippedEffect().setText("sacrifice it")
+        ).withInterveningIf(ThirstingAxeCondition.instance), new ThirstingAxeWatcher());
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), new TargetControlledCreaturePermanent(), false));
+        this.addAbility(new EquipAbility(2));
     }
 
     private ThirstingAxe(final ThirstingAxe card) {
@@ -66,43 +55,42 @@ public final class ThirstingAxe extends CardImpl {
     }
 }
 
-class EquippedDealtCombatDamageToCreatureCondition implements Condition {
+enum ThirstingAxeCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent equipment = game.getPermanent(source.getSourceId());
-        if (equipment != null && equipment.getAttachedTo() != null) {
-            CombatDamageToCreatureWatcher watcher =
-                    game.getState().getWatcher(CombatDamageToCreatureWatcher.class);
-            return watcher != null && watcher.dealtDamage(equipment.getAttachedTo(), equipment.getAttachedToZoneChangeCounter(), game);
-        }
-        return false;
+        return Optional
+                .ofNullable(source.getSourcePermanentOrLKI(game))
+                .map(Permanent::getAttachedTo)
+                .filter(uuid -> ThirstingAxeWatcher.checkCreature(uuid, game))
+                .isPresent();
     }
 
+    @Override
+    public String toString() {
+        return "equipped creature didn't deal combat damage to a creature this turn";
+    }
 }
 
-class CombatDamageToCreatureWatcher extends Watcher {
+class ThirstingAxeWatcher extends Watcher {
 
     // which objects dealt combat damage to creature during the turn
-    private final Set<MageObjectReference> dealtCombatDamageToCreature;
+    private final Set<MageObjectReference> dealtCombatDamageToCreature = new HashSet<>();
 
-    public CombatDamageToCreatureWatcher() {
+    public ThirstingAxeWatcher() {
         super(WatcherScope.GAME);
-        dealtCombatDamageToCreature = new HashSet<>();
     }
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() != GameEvent.EventType.DAMAGED_PERMANENT
-                || !((DamagedEvent) event).isCombatDamage()) {
+        if (event.getType() != GameEvent.EventType.DAMAGED_PERMANENT || !((DamagedEvent) event).isCombatDamage()) {
             return;
         }
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent == null || !permanent.isCreature(game)) {
-            return;
+        if (permanent != null && permanent.isCreature(game)) {
+            dealtCombatDamageToCreature.add(new MageObjectReference(event.getSourceId(), game));
         }
-        MageObjectReference damageSource = new MageObjectReference(event.getSourceId(), game);
-        dealtCombatDamageToCreature.add(damageSource);
     }
 
     @Override
@@ -111,9 +99,12 @@ class CombatDamageToCreatureWatcher extends Watcher {
         dealtCombatDamageToCreature.clear();
     }
 
-    public boolean dealtDamage(UUID objectId, int zoneChangeCounter, Game game) {
-        MageObjectReference reference = new MageObjectReference(objectId, zoneChangeCounter, game);
-        return dealtCombatDamageToCreature.contains(reference);
+    static boolean checkCreature(UUID permanentId, Game game) {
+        return game
+                .getState()
+                .getWatcher(ThirstingAxeWatcher.class)
+                .dealtCombatDamageToCreature
+                .stream()
+                .anyMatch(mor -> mor.refersTo(permanentId, game));
     }
-
 }

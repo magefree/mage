@@ -1,7 +1,6 @@
 
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -15,6 +14,9 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.Target;
 import mage.target.TargetPermanent;
+import mage.target.targetadjustment.DefineByTriggerTargetAdjuster;
+
+import java.util.UUID;
 
 /**
  *
@@ -24,7 +26,6 @@ public final class KarmicJustice extends CardImpl {
 
     public KarmicJustice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");
-
 
         // Whenever a spell or ability an opponent controls destroys a noncreature permanent you control, you may destroy target permanent that opponent controls.
         this.addAbility(new KarmicJusticeTriggeredAbility());
@@ -45,8 +46,9 @@ class KarmicJusticeTriggeredAbility extends TriggeredAbilityImpl {
     KarmicJusticeTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect(), true);
         this.setLeavesTheBattlefieldTrigger(true);
+        this.setTargetAdjuster(DefineByTriggerTargetAdjuster.instance);
     }
-    
+
     private KarmicJusticeTriggeredAbility(final KarmicJusticeTriggeredAbility ability) {
         super(ability);
     }

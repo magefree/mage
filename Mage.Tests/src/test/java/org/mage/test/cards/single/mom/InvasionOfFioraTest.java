@@ -1,6 +1,7 @@
 package org.mage.test.cards.single.mom;
 
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 import mage.constants.PhaseStep;
@@ -47,6 +48,7 @@ public class InvasionOfFioraTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, invasion);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 1);
         setModeChoice(playerA, "1");
+        setModeChoice(playerA, TestPlayer.MODE_SKIP);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 1);
 
         checkPermanentCount("Battle on battlefield", 1, PhaseStep.PRECOMBAT_MAIN, playerA, invasion, 1);

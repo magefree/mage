@@ -36,7 +36,7 @@ public final class BalthierAndFran extends CardImpl {
             = new FilterCreaturePermanent(SubType.VEHICLE, "a Vehicle crewed by {this} this turn");
 
     static {
-        filter.add(BalthierAndFranPredicate.instance);
+        filter2.add(BalthierAndFranPredicate.instance);
     }
 
     public BalthierAndFran(UUID ownerId, CardSetInfo setInfo) {

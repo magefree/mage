@@ -1,7 +1,6 @@
 
 package mage.abilities.costs.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
@@ -9,6 +8,8 @@ import mage.cards.CardsImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -27,7 +28,7 @@ public class PutSourceOnBottomOwnerLibraryCost extends CostImpl {
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Player player = game.getPlayer(controllerId);
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (player != null && sourcePermanent != null) {
             paid = true;
             player.putCardsOnBottomOfLibrary(new CardsImpl(sourcePermanent), game, ability, false);
@@ -37,7 +38,7 @@ public class PutSourceOnBottomOwnerLibraryCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return game.getPermanent(source.getSourceId()) != null;
+        return game.getPermanentOrLKIBattlefield(source.getSourceId()) != null;
     }
 
     @Override

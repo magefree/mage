@@ -54,4 +54,32 @@ public class ThePrincessTakesFlightTest extends CardTestPlayerBase {
         assertExileCount(playerB, "Memnite", 0);
         assertPermanentCount(playerB, "Memnite", 1);
     }
+    @Ignore // TODO: goal of #11619 is to fix this nicely
+    @Test
+    public void testFlicker() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
+        addCard(Zone.HAND, playerA, flight);
+        addCard(Zone.HAND, playerA, "Flicker of Fate");
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears");
+        addCard(Zone.BATTLEFIELD, playerA, "Memnite");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, flight);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 1); //Saga resolves, Bear exile on stack
+        addTarget(playerA, "Grizzly Bears");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flicker of Fate", flight);
+        addTarget(playerA, "Memnite");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 2); //Flicker resolves, Memnite exile resolves
+        checkExileCount("Memnite exiled first", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Memnite", 1);
+        checkExileCount("Bear not yet exiled", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grizzly Bears", 0);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN); //Bear exile resolves
+        checkExileCount("Bear exiled", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grizzly Bears", 1);
+
+        setStrictChooseMode(true);
+        setStopAt(5, PhaseStep.END_TURN);
+        execute();
+
+        assertExileCount(playerA, "Grizzly Bears", 1); //Bear stays exiled
+        assertPermanentCount(playerA, "Memnite", 1);
+        assertGraveyardCount(playerA, flight, 1);
+    }
 }

@@ -104,7 +104,7 @@ class RexCyberhoundContinuousEffect extends ContinuousEffectImpl {
         filter.add(CounterType.BRAIN.getPredicate());
     }
 
-    public RexCyberhoundContinuousEffect() {
+    RexCyberhoundContinuousEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         staticText = "{this} has all activated abilities of all cards in exile with brain counters on them";
         addDependencyType(DependencyType.AddingAbility);
@@ -125,11 +125,10 @@ class RexCyberhoundContinuousEffect extends ContinuousEffectImpl {
         if (perm == null) {
             return false;
         }
-        for (Card card : game.getExile().getCards(filter, game)) {
+        for (Card card : game.getExile().getCardsInRange(filter, source.getControllerId(), source, game)) {
             for (Ability ability : card.getAbilities(game)) {
                 if (ability.isActivatedAbility()) {
                     ActivatedAbility copyAbility = (ActivatedAbility) ability.copy();
-                    copyAbility.setMaxActivationsPerTurn(1);
                     perm.addAbility(copyAbility, source.getSourceId(), game, true);
                 }
             }

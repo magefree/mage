@@ -3,7 +3,6 @@ package mage.cards.b;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.OpponentsLostLifeCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
 import mage.abilities.hint.common.OpponentsLostLifeHint;
 import mage.abilities.keyword.FlyingAbility;
@@ -32,11 +31,8 @@ public final class BloodtitheCollector extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When this creature enters, if an opponent lost life this turn, each opponent discards a card.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new DiscardEachPlayerEffect(TargetController.OPPONENT)),
-                OpponentsLostLifeCondition.instance, "When this creature enters, " +
-                "if an opponent lost life this turn, each opponent discards a card."
-        ).addHint(OpponentsLostLifeHint.instance));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DiscardEachPlayerEffect(TargetController.OPPONENT))
+                .withInterveningIf(OpponentsLostLifeCondition.instance).addHint(OpponentsLostLifeHint.instance));
     }
 
     private BloodtitheCollector(final BloodtitheCollector card) {

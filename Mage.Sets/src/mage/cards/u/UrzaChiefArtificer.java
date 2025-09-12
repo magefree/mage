@@ -1,15 +1,12 @@
 package mage.cards.u;
 
 import mage.MageInt;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.AffinityEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.abilities.hint.Hint;
-import mage.abilities.hint.ValueHint;
+import mage.abilities.keyword.AffinityAbility;
 import mage.abilities.keyword.MenaceAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -31,10 +28,6 @@ public final class UrzaChiefArtificer extends CardImpl {
         filter.add(CardType.ARTIFACT.getPredicate());
     }
 
-    private static final Hint hint = new ValueHint(
-            "Artifact creatures you control", new PermanentsOnBattlefieldCount(filter)
-    );
-
     public UrzaChiefArtificer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{U}{B}");
 
@@ -45,7 +38,7 @@ public final class UrzaChiefArtificer extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Affinity for artifact creatures
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new AffinityEffect(filter)).addHint(hint));
+        this.addAbility(new AffinityAbility(AffinityType.ARTIFACT_CREATURES));
 
         // Artifact creatures you control have menace.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
@@ -53,9 +46,7 @@ public final class UrzaChiefArtificer extends CardImpl {
         ));
 
         // At the beginning of your end step, create a 0/0 colorless Construct artifact creature token with "This creature gets +1/+1 for each artifact you control."
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new CreateTokenEffect(new KarnConstructToken())
-        ));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new CreateTokenEffect(new KarnConstructToken())));
     }
 
     private UrzaChiefArtificer(final UrzaChiefArtificer card) {

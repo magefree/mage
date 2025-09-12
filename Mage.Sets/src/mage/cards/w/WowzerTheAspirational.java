@@ -5,13 +5,10 @@ import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.condition.CompoundCondition;
 import mage.abilities.condition.Condition;
-import mage.abilities.condition.IntCompareCondition;
 import mage.abilities.condition.common.CitysBlessingCondition;
 import mage.abilities.condition.common.HaveInitiativeCondition;
 import mage.abilities.condition.common.MonarchIsSourceControllerCondition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.dynamicvalue.common.CountersControllerCount;
 import mage.abilities.effects.common.WinGameSourceControllerEffect;
 import mage.abilities.hint.ConditionHint;
 import mage.abilities.hint.Hint;
@@ -21,13 +18,14 @@ import mage.abilities.hint.common.MonarchHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
+import mage.game.Controllable;
 import mage.game.Game;
 
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -35,7 +33,7 @@ import java.util.UUID;
  */
 public class WowzerTheAspirational extends CardImpl {
 
-    private static final Condition energyCondition = new WowzerTheAspirationalCondition();
+    private static final Condition energyCondition = WowzerTheAspirationalCondition.instance;
     private static final Condition bloodCondition
             = new PermanentsOnTheBattlefieldCondition(new FilterControlledPermanent(SubType.BLOOD));
     private static final Condition clueCondition
@@ -50,6 +48,8 @@ public class WowzerTheAspirational extends CardImpl {
             = new PermanentsOnTheBattlefieldCondition(new FilterControlledPermanent(SubType.TREASURE));
 
     private static final Condition winCondition = new CompoundCondition(
+            "you have an {E}, control a Blood, a Clue, a Food, a Map, a Powerstone, and a Treasure, " +
+                    "are the monarch, and have the city's blessing and the initiative",
             energyCondition,
             bloodCondition,
             clueCondition,
@@ -59,7 +59,8 @@ public class WowzerTheAspirational extends CardImpl {
             treasureCondition,
             MonarchIsSourceControllerCondition.instance,
             CitysBlessingCondition.instance,
-            HaveInitiativeCondition.instance);
+            HaveInitiativeCondition.instance
+    );
 
     private static final Hint energyHint = new ConditionHint(energyCondition, "You have an {E}");
     private static final Hint bloodHint = new ConditionHint(bloodCondition, "You control a Blood");
@@ -83,13 +84,9 @@ public class WowzerTheAspirational extends CardImpl {
         // Whenever Wowzer, the Aspirational attacks,
         // if you have an {E}, control a Blood, a Clue, a Food, a Map, a Powerstone, and a Treasure,
         // are the monarch, and have the city's blessing and the initiative, you win the game.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new AttacksTriggeredAbility(new WinGameSourceControllerEffect()),
-                winCondition,
-                "Whenever {this} attacks, " +
-                        "if you have an {E}, control a Blood, a Clue, a Food, a Map, a Powerstone, and a Treasure, " +
-                        "are the monarch, and have the city's blessing and the initiative, you win the game."
-        ).addHint(energyHint)
+        this.addAbility(new AttacksTriggeredAbility(new WinGameSourceControllerEffect())
+                .withInterveningIf(winCondition)
+                .addHint(energyHint)
                 .addHint(bloodHint)
                 .addHint(clueHint)
                 .addHint(foodHint)
@@ -111,14 +108,16 @@ public class WowzerTheAspirational extends CardImpl {
     }
 }
 
-class WowzerTheAspirationalCondition extends IntCompareCondition {
-
-    WowzerTheAspirationalCondition() {
-        super(ComparisonType.MORE_THAN, 0);
-    }
+enum WowzerTheAspirationalCondition implements Condition {
+    instance;
 
     @Override
-    protected int getInputValue(Game game, Ability source) {
-        return new CountersControllerCount(CounterType.ENERGY).calculate(game, source, null);
+    public boolean apply(Game game, Ability source) {
+        return Optional
+                .of(source)
+                .map(Controllable::getControllerId)
+                .map(game::getPlayer)
+                .filter(player -> player.getCountersCount(CounterType.ENERGY) > 0)
+                .isPresent();
     }
 }

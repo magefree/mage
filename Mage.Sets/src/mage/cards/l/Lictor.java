@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
@@ -12,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.game.Game;
-import mage.game.permanent.token.TyranidToken;
 import mage.game.permanent.token.TyranidWarriorToken;
 import mage.watchers.common.CreatureEnteredControllerWatcher;
 
@@ -34,12 +32,8 @@ public final class Lictor extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
 
         // Pheromone Trail -- When Lictor enters the battlefield, if a creature entered the battlefield under an opponent's control this turn, create a 3/3 green Tyranid Warrior creature token with trample.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new TyranidWarriorToken())),
-                LictorCondition.instance, "When {this} enters, " +
-                "if a creature entered the battlefield under an opponent's control this turn, " +
-                "create a 3/3 green Tyranid Warrior creature token with trample."
-        ).withFlavorWord("Pheromone Trail"), new CreatureEnteredControllerWatcher());
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new TyranidWarriorToken()))
+                .withInterveningIf(LictorCondition.instance).withFlavorWord("Pheromone Trail"), new CreatureEnteredControllerWatcher());
     }
 
     private Lictor(final Lictor card) {
@@ -61,5 +55,10 @@ enum LictorCondition implements Condition {
                 .getOpponents(source.getControllerId())
                 .stream()
                 .anyMatch(uuid -> CreatureEnteredControllerWatcher.enteredCreatureForPlayer(uuid, game));
+    }
+
+    @Override
+    public String toString() {
+        return "a creature entered the battlefield under an opponent's control this turn";
     }
 }

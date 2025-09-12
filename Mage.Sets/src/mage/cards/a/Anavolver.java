@@ -2,7 +2,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -19,8 +18,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.counters.CounterType;
+
+import java.util.UUID;
 
 /**
  * @author Loki
@@ -49,9 +49,9 @@ public final class Anavolver extends CardImpl {
 
         // If Anavolver was kicked with its {B} kicker, it enters with a +1/+1 counter on it and with "Pay 3 life: Regenerate Anavolver."
         EntersBattlefieldAbility ability2 = new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance(1),false), new KickedCostCondition("{B}"),
-                "If {this} was kicked with its {B} kicker, it enters with a +1/+1 counter on it and with \"Pay 3 life: Regenerate Anavolver.\"",
-                "{this} enters with a +1/+1 counter on it and with \"Pay 3 life: Regenerate Anavolver.\"");
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(1), false), new KickedCostCondition("{B}"),
+                "If {this} was kicked with its {B} kicker, it enters with a +1/+1 counter on it and with \"Pay 3 life: Regenerate {this}.\"",
+                "{this} enters with a +1/+1 counter on it and with \"Pay 3 life: Regenerate {this}.\"");
         ((EntersBattlefieldEffect)ability2.getEffects().get(0)).addEffect(new GainAbilitySourceEffect(new SimpleActivatedAbility(new RegenerateSourceEffect(), new PayLifeCost(3)), Duration.WhileOnBattlefield));
         this.addAbility(ability2);
     }

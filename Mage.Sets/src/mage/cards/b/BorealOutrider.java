@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -35,14 +34,10 @@ public final class BorealOutrider extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever you cast a creature spell, if {S} of any of that spell's color was spent to cast it, that creature enters the battlefield with an additional +1/+1 counter on it.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new SpellCastControllerTriggeredAbility(
-                        new BorealOutriderEffect(), StaticFilters.FILTER_SPELL_A_CREATURE,
-                        false, SetTargetPointer.SPELL
-                ), BorealOutriderCondition.instance, "Whenever you cast a creature spell, " +
-                "if {S} of any of that spell's colors was spent to cast it, that creature " +
-                "enters the battlefield with an additional +1/+1 counter on it."
-        ));
+        this.addAbility(new SpellCastControllerTriggeredAbility(
+                new BorealOutriderEffect(), StaticFilters.FILTER_SPELL_A_CREATURE,
+                false, SetTargetPointer.SPELL
+        ).withInterveningIf(BorealOutriderCondition.instance));
     }
 
     private BorealOutrider(final BorealOutrider card) {
@@ -63,12 +58,18 @@ enum BorealOutriderCondition implements Condition {
         Spell spell = (Spell) source.getEffects().get(0).getValue("spellCast");
         return spell != null && ManaPaidSourceWatcher.checkSnowColor(spell, game);
     }
+
+    @Override
+    public String toString() {
+        return "{S} of any of that spell's colors was spent to cast it";
+    }
 }
 
 class BorealOutriderEffect extends ReplacementEffectImpl {
 
     BorealOutriderEffect() {
         super(Duration.EndOfStep, Outcome.BoostCreature);
+        staticText = "that creature enters with an additional +1/+1 counter on it";
     }
 
     private BorealOutriderEffect(BorealOutriderEffect effect) {

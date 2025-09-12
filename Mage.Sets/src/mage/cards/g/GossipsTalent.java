@@ -1,7 +1,10 @@
 package mage.cards.g;
 
 import mage.abilities.Ability;
-import mage.abilities.common.*;
+import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
+import mage.abilities.common.DealsDamageToAPlayerAllTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.ExileThenReturnTargetEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
 import mage.abilities.effects.common.continuous.GainClassAbilitySourceEffect;
@@ -10,7 +13,10 @@ import mage.abilities.keyword.ClassLevelAbility;
 import mage.abilities.keyword.ClassReminderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.ComparisonType;
+import mage.constants.SetTargetPointer;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterAttackingCreature;
@@ -24,7 +30,7 @@ import java.util.UUID;
  */
 public final class GossipsTalent extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterAttackingCreature("attacking creature with power 3 or less can't be blocked this turn");
+    private static final FilterPermanent filter = new FilterAttackingCreature("attacking creature with power 3 or less");
 
     static {
         filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 4));
@@ -59,7 +65,7 @@ public final class GossipsTalent extends CardImpl {
                 new DealsDamageToAPlayerAllTriggeredAbility(
                         new ExileThenReturnTargetEffect(false, false)
                                 .setText("exile it, then return it to the battlefield under its owner's control"),
-                        StaticFilters.FILTER_PERMANENT_CREATURE, true, SetTargetPointer.PERMANENT, true
+                        StaticFilters.FILTER_CONTROLLED_CREATURE, true, SetTargetPointer.PERMANENT, true
                 ), 3
         )));
     }

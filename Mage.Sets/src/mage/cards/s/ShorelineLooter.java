@@ -40,7 +40,7 @@ public final class ShorelineLooter extends CardImpl {
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new DrawCardSourceControllerEffect(1));
         ability.addEffect(new ConditionalOneShotEffect(
                 new DiscardControllerEffect(1), condition,
-                "then discard a card unless seven or more cards are in your graveyard"
+                "Then discard a card unless seven or more cards are in your graveyard"
         ));
         this.addAbility(ability.setAbilityWord(AbilityWord.THRESHOLD));
     }

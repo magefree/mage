@@ -85,7 +85,7 @@ class ReapIntellectEffect extends OneShotEffect {
             int xCost = Math.min(CardUtil.getSourceCostsTag(game, source, "X", 0), targetPlayer.getHand().size());
             TargetCard target = new TargetCard(0, xCost, Zone.HAND, filterNonLands);
             target.withNotTarget(true);
-            controller.chooseTarget(Outcome.Benefit, targetPlayer.getHand(), target, source, game);
+            controller.choose(Outcome.Benefit, targetPlayer.getHand(), target, source, game);
             for (UUID cardId : target.getTargets()) {
                 Card chosenCard = game.getCard(cardId);
                 if (chosenCard != null) {

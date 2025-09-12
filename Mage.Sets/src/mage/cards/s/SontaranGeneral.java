@@ -13,7 +13,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.ForEachOpponentTargetsAdjuster;
+import mage.target.targetadjustment.ForEachPlayerTargetsAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 
 import java.util.UUID;
@@ -44,7 +44,7 @@ public final class SontaranGeneral extends CardImpl {
         ability.addEffect(new CantBlockTargetEffect(Duration.EndOfTurn).setTargetPointer(new EachTargetPointer())
                 .setText("Those creatures can't block this turn."));
         ability.addTarget(new TargetCreaturePermanent(0, 1));
-        ability.setTargetAdjuster(new ForEachOpponentTargetsAdjuster());
+        ability.setTargetAdjuster(new ForEachPlayerTargetsAdjuster(false, true));
         this.addAbility(ability);
     }
 

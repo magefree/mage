@@ -30,7 +30,7 @@ public enum CastAnotherSpellThisTurnCondition implements Condition {
         return spells != null && spells
                 .stream()
                 .filter(Objects::nonNull)
-                .anyMatch(spell -> !spell.getSourceId().equals(source.getSourceId()) || spell.getZoneChangeCounter(game) != source.getSourceObjectZoneChangeCounter());
+                .anyMatch(spell -> !spell.getSourceId().equals(source.getSourceId()) || spell.getZoneChangeCounter(game) != source.getStackMomentSourceZCC());
     }
 
     public Hint getHint() {

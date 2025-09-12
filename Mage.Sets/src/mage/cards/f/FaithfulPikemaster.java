@@ -37,7 +37,7 @@ public final class FaithfulPikemaster extends CardImpl {
         // As long as it's your turn, Faithful Pikemaster has first strike.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield),
-                MyTurnCondition.instance, "during your turn, {this} has first strike."
+                MyTurnCondition.instance, "as long as it's your turn, {this} has first strike."
         )).addHint(MyTurnHint.instance));
     }
 

@@ -1,29 +1,21 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.target.common.TargetCreaturePermanent;
+import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class Thunderbolt extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
-
-    static {
-        filter.add(new AbilityPredicate(FlyingAbility.class));
-    }
 
     public Thunderbolt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}");
@@ -32,7 +24,7 @@ public final class Thunderbolt extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
         this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
         Mode mode = new Mode(new DamageTargetEffect(4));
-        mode.addTarget(new TargetCreaturePermanent(filter));
+        mode.addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_FLYING));
         this.getSpellAbility().addMode(mode);
     }
 

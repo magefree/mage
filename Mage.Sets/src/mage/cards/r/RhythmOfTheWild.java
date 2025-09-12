@@ -46,7 +46,7 @@ public final class RhythmOfTheWild extends CardImpl {
 
         // Creature spells you control can't be countered.
         this.addAbility(new SimpleStaticAbility(new CantBeCounteredControlledEffect(
-                filter, null, Duration.WhileOnBattlefield
+                filter, Duration.WhileOnBattlefield
         )));
 
         // Nontoken creatures you control have riot.

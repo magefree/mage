@@ -20,6 +20,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -56,7 +57,7 @@ public final class ArahboRoarOfTheWorld extends CardImpl {
                 TargetController.YOU, new BoostTargetEffect(3, 3, Duration.EndOfTurn),
                 false).withInterveningIf(
                 SourceOnBattlefieldOrCommandZoneCondition.instance);
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         ability.setAbilityWord(AbilityWord.EMINENCE);
         this.addAbility(ability);
 

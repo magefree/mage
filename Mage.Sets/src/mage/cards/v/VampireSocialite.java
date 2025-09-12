@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.OpponentsLostLifeCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.decorator.ConditionalReplacementEffect;
 import mage.abilities.effects.common.EntersWithCountersControlledEffect;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
@@ -43,11 +42,9 @@ public final class VampireSocialite extends CardImpl {
         this.addAbility(new MenaceAbility());
 
         // When Vampire Socialite enters the battlefield, if an opponent lost life this turn, put a +1/+1 counter on each other Vampire you control.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter)),
-                OpponentsLostLifeCondition.instance,
-                "When {this} enters, if an opponent lost life this turn, put a +1/+1 counter on each other Vampire you control."
-        ));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter)
+        ).withInterveningIf(OpponentsLostLifeCondition.instance));
 
         // As long as an opponent lost life this turn, each other Vampire you control enters the battlefield with an additional +1/+1 counter on it.
         this.addAbility(new SimpleStaticAbility(new ConditionalReplacementEffect(
@@ -55,7 +52,7 @@ public final class VampireSocialite extends CardImpl {
                         filter, CounterType.P1P1.createInstance(), true
                 ), OpponentsLostLifeCondition.instance
         ).setText("as long as an opponent lost life this turn, " +
-                "each other Vampire you control enters the battlefield with an additional +1/+1 counter on it")));
+                "each other Vampire you control enters with an additional +1/+1 counter on it")));
     }
 
     private VampireSocialite(final VampireSocialite card) {

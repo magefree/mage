@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.hint.common.GateYouControlHint;
+import mage.abilities.hint.common.GatesYouControlHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -39,7 +39,7 @@ public final class ArchwayAngel extends CardImpl {
 
         // When Archway Angel enters the battlefield, you gain 2 life for each Gate you control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter, 2)));
-        ability.addHint(GateYouControlHint.instance);
+        ability.addHint(GatesYouControlHint.instance);
         this.addAbility(ability);
     }
 

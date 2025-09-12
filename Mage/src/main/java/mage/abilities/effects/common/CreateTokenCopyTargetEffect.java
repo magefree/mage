@@ -176,8 +176,8 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         }
 
         // can target card or permanent
-        Card copyFrom;
-        CopyApplier applier = new EmptyCopyApplier();
+        Card copyFrom = null;
+        CopyApplier applier = null;
         if (permanent != null) {
             // handle copies of copies
             Permanent copyFromPermanent = permanent;
@@ -196,9 +196,17 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
                     }
                 }
             }
+            // check if permanent was copying, but copy effect is no longer active
+            if (applier == null) {
+                if (permanent.isCopy() && permanent.getCopyFrom() instanceof Permanent) {
+                    copyFromPermanent = (Permanent) permanent.getCopyFrom();
+                }
+                applier = new EmptyCopyApplier();
+            }
             copyFrom = copyFromPermanent;
         } else {
             copyFrom = game.getCard(getTargetPointer().getFirst(game, source));
+            applier = new EmptyCopyApplier();
         }
 
         if (copyFrom == null) {
@@ -406,41 +414,29 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
     }
 
     public void sacrificeTokensCreatedAtNextEndStep(Game game, Ability source) {
-        this.removeTokensCreatedAtEndOf(game, source, PhaseStep.END_TURN, false);
+        this.removeTokensCreatedAt(game, source, false, PhaseStep.END_TURN, TargetController.ANY);
     }
 
     public void exileTokensCreatedAtNextEndStep(Game game, Ability source) {
-        this.removeTokensCreatedAtEndOf(game, source, PhaseStep.END_TURN, true);
+        this.removeTokensCreatedAt(game, source, true, PhaseStep.END_TURN, TargetController.ANY);
     }
 
-    public void sacrificeTokensCreatedAtEndOfCombat(Game game, Ability source) {
-        this.removeTokensCreatedAtEndOf(game, source, PhaseStep.END_COMBAT, false);
-    }
-
-    public void exileTokensCreatedAtEndOfCombat(Game game, Ability source) {
-        this.removeTokensCreatedAtEndOf(game, source, PhaseStep.END_COMBAT, true);
-    }
-
-    private void removeTokensCreatedAtEndOf(Game game, Ability source, PhaseStep phaseStepToExileCards, boolean exile) {
-        Effect effect;
-        if (exile) {
-            effect = new ExileTargetEffect(null, "", Zone.BATTLEFIELD).setText("exile the token copies");
-        } else {
-            effect = new SacrificeTargetEffect("sacrifice the token copies", source.getControllerId());
-        }
+    public void removeTokensCreatedAt(Game game, Ability source, boolean exile, PhaseStep phaseStep, TargetController targetController) {
+        Effect effect = exile
+                ? new ExileTargetEffect(null, "", Zone.BATTLEFIELD).setText("exile the token copies")
+                : new SacrificeTargetEffect("sacrifice the token copies", source.getControllerId());
         effect.setTargetPointer(new FixedTargets(new ArrayList<>(addedTokenPermanents), game));
 
         DelayedTriggeredAbility exileAbility;
-
-        switch (phaseStepToExileCards) {
+        switch (phaseStep) {
             case END_TURN:
-                exileAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
+                exileAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect, targetController);
                 break;
             case END_COMBAT:
                 exileAbility = new AtTheEndOfCombatDelayedTriggeredAbility(effect);
                 break;
             default:
-                return;
+                throw new UnsupportedOperationException("Unsupported PhaseStep in CreateTokenCopyTargetEffect::removeTokensCreatedAt");
         }
 
         game.addDelayedTriggeredAbility(exileAbility, source);

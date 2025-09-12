@@ -1,33 +1,34 @@
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.*;
+import mage.abilities.Ability;
+import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.PartnerWithAbility;
-import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author NinthWorld
  */
 public final class HanSoloScrumrat extends CardImpl {
 
     public HanSoloScrumrat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        
+
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ROGUE);
@@ -38,11 +39,13 @@ public final class HanSoloScrumrat extends CardImpl {
         this.addAbility(new PartnerWithAbility("Chewbacca, the Beast"));
 
         // R: Han Solo, Scrumrat gains first strike until end of turn.
-        this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{R}")));
+        this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(
+                FirstStrikeAbility.getInstance(), Duration.EndOfTurn
+        ), new ManaCostsImpl<>("{R}")));
 
         // Whenever Han Solo, Scrumrat deals damage during your turn, put a +1/+1 counter on another target creature you control.
         Ability ability = new HanSoloScrumratTriggeredAbility();
-        ability.addTarget(new TargetControlledCreaturePermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
         this.addAbility(ability);
     }
 
@@ -75,7 +78,7 @@ class HanSoloScrumratTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT
-                || event.getType() ==  GameEvent.EventType.DAMAGED_PLAYER;
+                || event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
     }
 
     @Override

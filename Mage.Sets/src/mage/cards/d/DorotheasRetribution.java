@@ -2,14 +2,13 @@ package mage.cards.d;
 
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.common.PutIntoGraveFromAnywhereSourceAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.ExileSourceEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
+import mage.abilities.keyword.DisturbAbility;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -43,8 +42,7 @@ public final class DorotheasRetribution extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget);
-        this.addAbility(ability);
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted creature has "Whenever this creature attacks, create a 4/4 white Spirit creature token with flying that's tapped and attacking. Sacrifice that token at end of combat."
         this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(
@@ -54,7 +52,7 @@ public final class DorotheasRetribution extends CardImpl {
         )));
 
         // If Dorothea's Retribution would be put into a graveyard from anywhere, exile it instead.
-        this.addAbility(new PutIntoGraveFromAnywhereSourceAbility(new ExileSourceEffect().setText("exile it instead")));
+        this.addAbility(DisturbAbility.makeBackAbility());
     }
 
     private DorotheasRetribution(final DorotheasRetribution card) {
@@ -91,7 +89,7 @@ class DorotheasRetributionEffect extends OneShotEffect {
         game.addDelayedTriggeredAbility(new AtTheEndOfCombatDelayedTriggeredAbility(
                 new SacrificeTargetEffect()
                         .setTargetPointer(new FixedTargets(token, game))
-                        .setText("sacrifce that token")
+                        .setText("sacrifice that token")
         ), source);
         return true;
     }

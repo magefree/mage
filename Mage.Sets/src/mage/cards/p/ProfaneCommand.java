@@ -21,6 +21,7 @@ import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
+import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetCreaturePermanent;
@@ -37,13 +38,12 @@ public final class ProfaneCommand extends CardImpl {
     public ProfaneCommand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{B}{B}");
 
-
-        DynamicValue xValue = GetXValue.instance;
         // Choose two -
         this.getSpellAbility().getModes().setMinModes(2);
         this.getSpellAbility().getModes().setMaxModes(2);
+
         // * Target player loses X life.
-        this.getSpellAbility().addEffect(new LoseLifeTargetEffect(xValue));
+        this.getSpellAbility().addEffect(new LoseLifeTargetEffect(GetXValue.instance));
         this.getSpellAbility().addTarget(new TargetPlayer());
 
         // * Return target creature card with converted mana cost X or less from your graveyard to the battlefield.
@@ -52,15 +52,13 @@ public final class ProfaneCommand extends CardImpl {
         this.getSpellAbility().addMode(mode);
 
         // * Target creature gets -X/-X until end of turn.
-        DynamicValue minusValue = new SignInversionDynamicValue(xValue);
+        DynamicValue minusValue = new SignInversionDynamicValue(GetXValue.instance);
         mode = new Mode(new BoostTargetEffect(minusValue, minusValue, Duration.EndOfTurn));
         mode.addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addMode(mode);
 
         // * Up to X target creatures gain fear until end of turn.
-        Effect effect = new GainAbilityTargetEffect(FearAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("Up to X target creatures gain fear until end of turn");
-        mode = new Mode(effect);
+        mode = new Mode(new GainAbilityTargetEffect(FearAbility.getInstance(), Duration.EndOfTurn).setText("Up to X target creatures gain fear until end of turn"));
         mode.addTarget(new TargetCreaturePermanent(0, 1));
         this.getSpellAbility().addMode(mode);
 
@@ -95,7 +93,7 @@ enum ProfaneCommandAdjuster implements TargetAdjuster {
             if (effect instanceof GainAbilityTargetEffect) {
                 mode.getTargets().clear();
                 FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures gain fear until end of turn");
-                mode.addTarget(new TargetCreaturePermanent(0, xValue, filter, false));
+                mode.addTarget(new TargetPermanent(0, xValue, filter));
             }
         }
     }

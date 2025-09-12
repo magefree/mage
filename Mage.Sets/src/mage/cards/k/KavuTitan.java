@@ -1,7 +1,5 @@
-
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -13,18 +11,19 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 
+import java.util.UUID;
+
 /**
- *
  * @author Backfir3
  */
 public final class KavuTitan extends CardImpl {
 
     public KavuTitan(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.subtype.add(SubType.KAVU);
 
         this.power = new MageInt(2);
@@ -32,10 +31,12 @@ public final class KavuTitan extends CardImpl {
 
         // Kicker {2}{G}
         this.addAbility(new KickerAbility("{2}{G}"));
+
         // If Kavu Titan was kicked, it enters with three +1/+1 counters on it and with trample.
-        Ability ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(3)),
-                KickedCondition.ONCE,
-                "If Kavu Titan was kicked, it enters with three +1/+1 counters on it and with trample.", "");
+        Ability ability = new EntersBattlefieldAbility(
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(3)), KickedCondition.ONCE,
+                "If {this} was kicked, it enters with three +1/+1 counters on it and with trample.", ""
+        );
         ability.addEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield));
         this.addAbility(ability);
     }

@@ -62,8 +62,8 @@ class BottleCapBlastEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID target = getTargetPointer().getFirst(game, source);
-        Player player = game.getPlayer(target);
+        UUID targetId = getTargetPointer().getFirst(game, source);
+        Player player = game.getPlayer(targetId);
         if (player != null) {
             player.damage(5, source, game);
             return true;
@@ -72,11 +72,10 @@ class BottleCapBlastEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        int lethal = Math.min(permanent.getLethalDamage(source.getSourceId(), game), 5);
-        permanent.damage(5, source.getSourceId(), source, game);
-        if (lethal < 5) {
+        int excess = permanent.damageWithExcess(5, source, game);
+        if (excess > 0) {
             new TreasureToken().putOntoBattlefield(
-                    5 - lethal, game, source, source.getControllerId(), true, false
+                    excess, game, source, source.getControllerId(), true, false
             );
         }
         return true;

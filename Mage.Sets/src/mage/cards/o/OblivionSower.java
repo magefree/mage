@@ -1,7 +1,5 @@
-
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -12,18 +10,19 @@ import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterLandCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.card.FaceDownPredicate;
-import mage.filter.predicate.card.OwnerIdPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
+
+import java.util.UUID;
 
 /**
  *
@@ -56,6 +55,11 @@ public final class OblivionSower extends CardImpl {
 
 class OblivionSowerEffect extends OneShotEffect {
 
+    private static final FilterCard filter = new FilterLandCard();
+    static {
+        filter.add(Predicates.not(FaceDownPredicate.instance));
+    }
+
     OblivionSowerEffect() {
         super(Outcome.PutLandInPlay);
         this.staticText = ", then you may put any number of land cards that player owns from exile onto the battlefield under your control";
@@ -78,25 +82,21 @@ class OblivionSowerEffect extends OneShotEffect {
          */
         Player controller = game.getPlayer(source.getControllerId());
         Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if (controller != null && targetPlayer != null) {
-            FilterLandCard filter = new FilterLandCard();
-            filter.add(new OwnerIdPredicate(targetPlayer.getId()));
-            filter.add(Predicates.not(FaceDownPredicate.instance));
-            Cards exiledCards = new CardsImpl();
-            exiledCards.addAllCards(game.getExile().getAllCards(game));
-            Cards exiledLands = new CardsImpl();
-            exiledLands.addAllCards(exiledCards.getCards(filter, controller.getId(), source, game));
-            if (!exiledLands.isEmpty() && controller.chooseUse(outcome, "Put lands into play?", source, game)) {
-                FilterCard filterToPlay = new FilterCard("land"
-                        + (exiledLands.size() > 1 ? "s" : "") + " from exile owned by "
-                        + targetPlayer.getName() + " to put into play under your control");
-                TargetCard targetCards = new TargetCard(0, exiledLands.size(), Zone.EXILED, filterToPlay);
-                if (controller.chooseTarget(outcome, exiledLands, targetCards, source, game)) {
-                    controller.moveCards(new CardsImpl(targetCards.getTargets()), Zone.BATTLEFIELD, source, game);
-                }
-            }
-            return true;
+        if (controller == null || targetPlayer == null) {
+            return false;
         }
-        return false;
+        Cards exiledLands = new CardsImpl(game.getExile()
+                .getCardsOwned(filter, targetPlayer.getId(), source, game)
+        );
+        if (!exiledLands.isEmpty() && controller.chooseUse(outcome, "Put lands into play?", source, game)) {
+            FilterCard filterToPlay = new FilterCard("land"
+                    + (exiledLands.size() > 1 ? "s" : "") + " from exile owned by "
+                    + targetPlayer.getName() + " to put into play under your control");
+            TargetCard targetCards = new TargetCard(0, exiledLands.size(), Zone.EXILED, filterToPlay);
+            if (controller.chooseTarget(outcome, exiledLands, targetCards, source, game)) {
+                controller.moveCards(new CardsImpl(targetCards.getTargets()), Zone.BATTLEFIELD, source, game);
+            }
+        }
+        return true;
     }
 }

@@ -44,7 +44,7 @@ public final class SkyfireKirin extends CardImpl {
         // Whenever you cast a Spirit or Arcane spell, you may gain control of target creature with that spell's converted mana cost until end of turn.
         Ability ability = new SpellCastControllerTriggeredAbility(
                 new SkyfireKirinEffect(),
-                StaticFilters.FILTER_SPIRIT_OR_ARCANE_CARD,
+                StaticFilters.FILTER_SPELL_SPIRIT_OR_ARCANE,
                 true, SetTargetPointer.SPELL
         );
         ability.addTarget(new TargetCreaturePermanent());

@@ -21,11 +21,11 @@ public final class HarshSustenance extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}{B}");
 
         // Harsh Sustenance deals X damage to any target and you gain X life, where X is the number of creatures you control.
-        Effect effect = new DamageTargetEffect(CreaturesYouControlCount.instance);
+        Effect effect = new DamageTargetEffect(CreaturesYouControlCount.PLURAL);
         effect.setText("{this} deals X damage to any target");
         getSpellAbility().addEffect(effect);
         getSpellAbility().addTarget(new TargetAnyTarget());
-        effect = new GainLifeEffect(CreaturesYouControlCount.instance);
+        effect = new GainLifeEffect(CreaturesYouControlCount.PLURAL);
         effect.setText("and you gain X life, where X is the number of creatures you control");
         getSpellAbility().addEffect(effect);
         getSpellAbility().addHint(CreaturesYouControlHint.instance);

@@ -216,17 +216,9 @@ public final class GamePanel extends javax.swing.JPanel {
             });
         }
 
-        public List<UUID> getPossibleTargets() {
-            if (options != null && options.containsKey("possibleTargets")) {
-                return (List<UUID>) options.get("possibleTargets");
-            } else {
-                return Collections.emptyList();
-            }
-        }
-
         public Set<UUID> getChosenTargets() {
             if (options != null && options.containsKey("chosenTargets")) {
-                return new HashSet<>((List<UUID>) options.get("chosenTargets"));
+                return (Set<UUID>) options.get("chosenTargets");
             } else {
                 return Collections.emptySet();
             }

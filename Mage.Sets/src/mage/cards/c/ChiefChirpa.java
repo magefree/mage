@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -19,13 +17,14 @@ import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.permanent.token.EwokToken;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author Styxo
  */
 public final class ChiefChirpa extends CardImpl {
@@ -42,7 +41,7 @@ public final class ChiefChirpa extends CardImpl {
     }
 
     public ChiefChirpa(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{G}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{G}{W}");
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.EWOK);
         this.subtype.add(SubType.WARRIOR);
@@ -54,7 +53,7 @@ public final class ChiefChirpa extends CardImpl {
 
         // Whenever a green creature you control dies, you may put a +1/+1 counter on another target Ewok creature you control.
         Ability ability = new DiesCreatureTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), true, diedFilter);
-        ability.addTarget(new TargetControlledCreaturePermanent(ewokFilter));
+        ability.addTarget(new TargetPermanent(ewokFilter));
         this.addAbility(ability);
 
         // When Chief Chirpa become monstrous, create three 1/1 green Ewok creature tokens.

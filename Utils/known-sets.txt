@@ -18,6 +18,8 @@ Arena League|ArenaLeague|
 Asia Pacific Land Program|AsiaPacificLandProgram|
 Assassin's Creed|AssassinsCreed|
 Avacyn Restored|AvacynRestored|
+Avatar: The Last Airbender|AvatarTheLastAirbender|
+Avatar: The Last Airbender Eternal|AvatarTheLastAirbenderEternal|
 Battlebond|Battlebond|
 Battle for Zendikar|BattleForZendikar|
 Betrayers of Kamigawa|BetrayersOfKamigawa|
@@ -86,6 +88,8 @@ Duel Decks: Zendikar vs. Eldrazi|DuelDecksZendikarVsEldrazi|
 Duels of the Planeswalkers|DuelsOfThePlaneswalkers|
 Duskmourn: House of Horror|DuskmournHouseOfHorror|
 Duskmourn: House of Horror Commander|DuskmournHouseOfHorrorCommander|
+Edge of Eternities|EdgeOfEternities|
+Edge of Eternities Commander|EdgeOfEternitiesCommander|
 Eighth Edition|EighthEdition|
 Eldritch Moon|EldritchMoon|
 Eternal Masters|EternalMasters|
@@ -173,6 +177,7 @@ Magic Origins|MagicOrigins|
 Magic Player Rewards|MagicPlayerRewards|
 Magic: The Gathering-Commander|Commander|
 Magic: The Gathering-Conspiracy|Conspiracy|
+Marvel's Spider-Man|MarvelsSpiderMan|
 Marvel's Spider-Man Eternal|MarvelsSpiderManEternal|
 Masterpiece Series|MasterpieceSeries|
 Masterpiece Series Amonkhet|MasterpieceSeriesAmonkhet|

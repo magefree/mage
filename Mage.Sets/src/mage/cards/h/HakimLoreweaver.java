@@ -6,7 +6,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -53,11 +53,8 @@ public final class HakimLoreweaver extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {U}{U}: Return target Aura card from your graveyard to the battlefield attached to Hakim, Loreweaver. Activate this ability only during your upkeep and only if Hakim isn't enchanted.
-        Ability ability = new ConditionalActivatedAbility(
-                Zone.BATTLEFIELD,
-                new HakimLoreweaverEffect(),
-                new ManaCostsImpl<>("{U}{U}"),
-                HakimLoreweaverCondition.instance
+        Ability ability = new ActivateIfConditionActivatedAbility(
+                new HakimLoreweaverEffect(), new ManaCostsImpl<>("{U}{U}"), HakimLoreweaverCondition.instance
         );
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);

@@ -2,7 +2,10 @@ package mage.cards.w;
 
 import mage.MageInt;
 import mage.MageObjectReference;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.Condition;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.CascadeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -11,14 +14,12 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
+import mage.players.Player;
 import mage.watchers.Watcher;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
-import mage.abilities.effects.ContinuousEffectImpl;
-import mage.players.Player;
 
 /**
  * @author TheElk801
@@ -35,7 +36,7 @@ public final class WildMagicSorcerer extends CardImpl {
 
         // The first spell you cast from exile each turn has cascade.
         this.addAbility(new SimpleStaticAbility(
-                new WildMagicSorcererGainCascadeFirstSpellCastFromExileEffect()),
+                        new WildMagicSorcererGainCascadeFirstSpellCastFromExileEffect()),
                 new WildMagicSorcererWatcher());
     }
 
@@ -96,12 +97,10 @@ enum FirstSpellCastFromExileEachTurnCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (game.getStack().isEmpty()) {
-            return false;
-        }
         WildMagicSorcererWatcher watcher = game.getState().getWatcher(WildMagicSorcererWatcher.class);
-        StackObject so = game.getStack().getFirst();
-        return watcher != null
+        StackObject so = game.getStack().getFirstOrNull();
+        return so != null
+                && watcher != null
                 && WildMagicSorcererWatcher.checkSpell(so, game);
     }
 }

@@ -55,14 +55,13 @@ class LacerateFleshEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent == null) {
             return false;
         }
-        int lethal = Math.min(permanent.getLethalDamage(source.getSourceId(), game), 4);
-        permanent.damage(4, source.getSourceId(), source, game);
-        if (lethal < 4) {
-            new BloodToken().putOntoBattlefield(4 - lethal, game, source);
+        int excess = permanent.damageWithExcess(4, source, game);
+        if (excess > 0) {
+            new BloodToken().putOntoBattlefield(excess, game, source);
         }
         return true;
     }

@@ -159,7 +159,7 @@ public class RemoveCounterCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return target.canChoose(controllerId, source, game);
+        return target.canChooseOrAlreadyChosen(controllerId, source, game);
     }
 
     private String setText() {

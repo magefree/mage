@@ -20,6 +20,7 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterAttackingOrBlockingCreature;
 import mage.game.Game;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -59,7 +60,7 @@ public final class CattiBrieOfMithralHall extends CardImpl {
         // {1}, Remove all +1/+1 counters from Catti-brie: It deals X damage to target attacking or blocking creature an opponent controls, where X is the number of counters removed this way.
         Ability damageAbility = new SimpleActivatedAbility(
                 new DamageTargetEffect(CattiBrieRemovedCounterValue.instance).setText("it deals X damage to target attacking or blocking creature an opponent controls, where X is the number of counters removed this way"), new ManaCostsImpl<>("{1}"));
-        damageAbility.addTarget(new TargetCreaturePermanent(filter));
+        damageAbility.addTarget(new TargetPermanent(filter));
         damageAbility.addCost(new RemoveAllCountersSourceCost(CounterType.P1P1));
 
         this.addAbility(damageAbility);

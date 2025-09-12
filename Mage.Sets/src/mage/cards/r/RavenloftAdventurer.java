@@ -6,7 +6,6 @@ import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CompletedDungeonCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.TakeTheInitiativeEffect;
@@ -46,12 +45,9 @@ public final class RavenloftAdventurer extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new RavenloftAdventurerReplacementEffect()));
 
         // Whenever Ravenloft Adventurer attacks, if you've completed a dungeon, defending player loses 1 life for each card they own in exile with a hit counter on it.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new AttacksTriggeredAbility(
-                        new RavenloftAdventurerLifeEffect(), false, "", SetTargetPointer.PLAYER
-                ), CompletedDungeonCondition.instance, "Whenever {this} attacks, if you've completed a dungeon, " +
-                "defending player loses 1 life for each card they own in exile with a hit counter on it."
-        ).addHint(CompletedDungeonCondition.getHint()), new CompletedDungeonWatcher());
+        this.addAbility(new AttacksTriggeredAbility(
+                new RavenloftAdventurerLifeEffect(), false, "", SetTargetPointer.PLAYER
+        ).withInterveningIf(CompletedDungeonCondition.instance).addHint(CompletedDungeonCondition.getHint()), new CompletedDungeonWatcher());
     }
 
     private RavenloftAdventurer(final RavenloftAdventurer card) {
@@ -108,6 +104,7 @@ class RavenloftAdventurerLifeEffect extends OneShotEffect {
 
     RavenloftAdventurerLifeEffect() {
         super(Outcome.Benefit);
+        staticText = "defending player loses 1 life for each card they own in exile with a hit counter on it";
     }
 
     private RavenloftAdventurerLifeEffect(final RavenloftAdventurerLifeEffect effect) {
@@ -127,7 +124,7 @@ class RavenloftAdventurerLifeEffect extends OneShotEffect {
         }
         int count = game
                 .getExile()
-                .getAllCards(game, player.getId())
+                .getCardsOwned(game, player.getId())
                 .stream()
                 .filter(card -> card.getCounters(game).containsKey(CounterType.HIT))
                 .mapToInt(x -> 1)

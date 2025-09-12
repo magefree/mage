@@ -1,17 +1,19 @@
 package mage.cards.v;
 
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.LandfallAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -34,13 +36,8 @@ public final class ValakutExploration extends CardImpl {
         this.addAbility(new LandfallAbility(new ValakutExplorationExileEffect()));
 
         // At the beginning of your end step, if there are cards exiled with Valakut Exploration, put them into their owner's graveyard, then Valakut Exploration deals that much damage to each opponent.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfEndStepTriggeredAbility(
-                        new ValakutExplorationDamageEffect()
-                ), ValakutExplorationCondition.instance, "At the beginning of your end step, " +
-                "if there are cards exiled with {this}, put them into their owner's graveyard, " +
-                "then {this} deals that much damage to each opponent."
-        ));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new ValakutExplorationDamageEffect())
+                .withInterveningIf(ValakutExplorationCondition.instance));
     }
 
     private ValakutExploration(final ValakutExploration card) {
@@ -62,6 +59,11 @@ enum ValakutExplorationCondition implements Condition {
                 game, source.getSourceId(), game.getState().getZoneChangeCounter(source.getSourceId())
         ));
         return exileZone != null && !exileZone.isEmpty();
+    }
+
+    @Override
+    public String toString() {
+        return "there are cards exiled with {this}";
     }
 }
 
@@ -95,7 +97,7 @@ class ValakutExplorationExileEffect extends OneShotEffect {
         }
         controller.moveCardsToExile(
                 card, source, game, true, CardUtil.getExileZoneId(
-                        game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()
+                        game, source.getSourceId(), source.getStackMomentSourceZCC()
                 ), sourcePermanent.getIdName()
         );
         ContinuousEffect effect = new PlayFromNotOwnHandZoneTargetEffect(Duration.EndOfGame);
@@ -109,6 +111,7 @@ class ValakutExplorationDamageEffect extends OneShotEffect {
 
     ValakutExplorationDamageEffect() {
         super(Outcome.Benefit);
+        staticText = "put them into their owner's graveyard, then {this} deals that much damage to each opponent";
     }
 
     private ValakutExplorationDamageEffect(final ValakutExplorationDamageEffect effect) {
@@ -127,7 +130,7 @@ class ValakutExplorationDamageEffect extends OneShotEffect {
             return false;
         }
         ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(
-                game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()
+                game, source.getSourceId(), source.getStackMomentSourceZCC()
         ));
         if (exileZone == null) {
             return false;

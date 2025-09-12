@@ -12,10 +12,13 @@ import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL;
 
 /**
  * @author North
@@ -35,7 +38,7 @@ public final class Helvault extends CardImpl {
         // {7}, {T}: Exile target creature you don't control.
         ability = new SimpleActivatedAbility(new ExileTargetForSourceEffect(), new GenericManaCost(7));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
+        ability.addTarget(new TargetPermanent(FILTER_CREATURE_YOU_DONT_CONTROL));
         this.addAbility(ability);
 
         // When Helvault is put into a graveyard from the battlefield, return all cards exiled with it to the battlefield under their owners' control.

@@ -19,7 +19,7 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInOpponentsGraveyard;
-import mage.target.targetadjustment.ForEachOpponentTargetsAdjuster;
+import mage.target.targetadjustment.ForEachPlayerTargetsAdjuster;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -45,7 +45,7 @@ public final class SepulchralPrimordial extends CardImpl {
         // target creature card from that player's graveyard onto the battlefield under your control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new SepulchralPrimordialEffect(), false);
         ability.addTarget(new TargetCardInOpponentsGraveyard(0, 1, filter));
-        ability.setTargetAdjuster(new ForEachOpponentTargetsAdjuster(true));
+        ability.setTargetAdjuster(new ForEachPlayerTargetsAdjuster(true, true));
         this.addAbility(ability);
     }
 
@@ -62,7 +62,7 @@ public final class SepulchralPrimordial extends CardImpl {
 class SepulchralPrimordialEffect extends OneShotEffect {
 
     SepulchralPrimordialEffect() {
-        super(Outcome.PutCreatureInPlay);
+        super(Outcome.GainControl);
         this.staticText = "for each opponent, you may put up to one target creature card from that player's graveyard onto the battlefield under your control";
     }
 

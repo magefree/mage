@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
@@ -13,17 +11,17 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class CaoCaoLordOfWei extends CardImpl {
 
     public CaoCaoLordOfWei(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
@@ -32,9 +30,11 @@ public final class CaoCaoLordOfWei extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {tap}: Target opponent discards two cards. Activate this ability only during your turn, before attackers are declared.
-        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(2), new TapSourceCost(), MyTurnBeforeAttackersDeclaredCondition.instance);
+        Ability ability = new ActivateIfConditionActivatedAbility(
+                new DiscardTargetEffect(2), new TapSourceCost(), MyTurnBeforeAttackersDeclaredCondition.instance
+        );
         ability.addTarget(new TargetOpponent());
-        this.addAbility(ability);        
+        this.addAbility(ability);
     }
 
     private CaoCaoLordOfWei(final CaoCaoLordOfWei card) {

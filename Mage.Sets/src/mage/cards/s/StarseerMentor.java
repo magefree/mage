@@ -2,16 +2,15 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.YouGainedOrLostLifeCondition;
 import mage.abilities.costs.OrCost;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DoUnlessTargetPlayerOrTargetsControllerPaysEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -42,24 +41,19 @@ public final class StarseerMentor extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // At the beginning of your end step, if you gained or lost life this turn, target opponent loses 3 life unless they sacrifice a nonland permanent or discard a card.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfEndStepTriggeredAbility(
-                        new DoUnlessTargetPlayerOrTargetsControllerPaysEffect(
-                                new LoseLifeTargetEffect(3),
-                                new OrCost(
-                                        "sacrifice a nonland permanent or discard a card",
-                                        new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_NON_LAND),
-                                        new DiscardCardCost()
-                                ),
-                                "Sacrifice a nonland permanent or discard a card to prevent losing 3 life?"
-                        )
-                ), YouGainedOrLostLifeCondition.instance, "At the beginning of your end step, if you gained or lost life this turn, "
-                + "target opponent loses 3 life unless they sacrifice a nonland permanent or discard a card."
-        );
+        Ability ability = new BeginningOfEndStepTriggeredAbility(
+                new DoUnlessTargetPlayerOrTargetsControllerPaysEffect(
+                        new LoseLifeTargetEffect(3),
+                        new OrCost(
+                                "sacrifice a nonland permanent or discard a card",
+                                new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_NON_LAND),
+                                new DiscardCardCost()
+                        ),
+                        "Sacrifice a nonland permanent or discard a card to prevent losing 3 life?"
+                ).setText("target opponent loses 3 life unless they sacrifice a nonland permanent of their choice or discard a card")
+        ).withInterveningIf(YouGainedOrLostLifeCondition.instance);
         ability.addTarget(new TargetOpponent());
-        ability.addWatcher(new PlayerGainedLifeWatcher());
-        ability.addHint(YouGainedOrLostLifeCondition.getHint());
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(YouGainedOrLostLifeCondition.getHint()), new PlayerGainedLifeWatcher());
     }
 
     private StarseerMentor(final StarseerMentor card) {

@@ -3,7 +3,6 @@ package mage.cards.c;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CastFromEverywhereSourceCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.continuous.NextSpellCastHasAbilityEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.StormAbility;
@@ -35,12 +34,9 @@ public final class CracklingSpellslinger extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
 
         // When Crackling Spellslinger enters the battlefield, if you cast it, the next instant or sorcery spell you cast this turn has storm.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new NextSpellCastHasAbilityEffect(new StormAbility(), filter)),
-                CastFromEverywhereSourceCondition.instance,
-                "When {this} enters, if you cast it, "
-                        + "the next instant or sorcery spell you cast this turn has storm"
-        ));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new NextSpellCastHasAbilityEffect(new StormAbility(), filter)
+        ).withInterveningIf(CastFromEverywhereSourceCondition.instance));
     }
 
     private CracklingSpellslinger(final CracklingSpellslinger card) {

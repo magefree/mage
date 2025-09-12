@@ -14,8 +14,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.filter.FilterSpell;
-import mage.filter.common.FilterHistoricSpell;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.stack.Spell;
 
@@ -27,8 +26,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class JamieMcCrimmon extends CardImpl {
-
-    private static final FilterSpell filter = new FilterHistoricSpell();
 
     public JamieMcCrimmon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
@@ -45,7 +42,7 @@ public final class JamieMcCrimmon extends CardImpl {
         // Whenever you cast a historic spell, Jamie McCrimmon gets +X/+X until end of turn, where X is that spell's mana value.
         this.addAbility(new SpellCastControllerTriggeredAbility(new BoostSourceEffect(
                 JamieMcCrimmonValue.instance, JamieMcCrimmonValue.instance, Duration.EndOfTurn
-        ), filter, false));
+        ), StaticFilters.FILTER_SPELL_HISTORIC, false));
 
         // Doctor's companion
         this.addAbility(DoctorsCompanionAbility.getInstance());

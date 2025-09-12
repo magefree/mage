@@ -1,6 +1,5 @@
 package mage.cards.b;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.keyword.TheRingTemptsYouEffect;
@@ -8,19 +7,20 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
-import mage.filter.predicate.permanent.PermanentIdPredicate;
+import mage.filter.common.FilterOpponentsCreaturePermanent;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 
+import java.util.Set;
 import java.util.UUID;
 
 /**
+ * TODO: combine with Mutiny
+ *
  * @author Susucr
  */
 public final class BreakingOfTheFellowship extends CardImpl {
@@ -30,8 +30,8 @@ public final class BreakingOfTheFellowship extends CardImpl {
 
         // Target creature an opponent controls deals damage equal to its power to another target creature that player controls.
         this.getSpellAbility().addEffect(new BreakingOfTheFellowshipEffect());
-        this.getSpellAbility().addTarget(new BreakingOfTheFellowshipFirstTarget(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("another target creature that player controls")));
+        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
+        this.getSpellAbility().addTarget(new BreakingOfTheFellowshipSecondTarget());
 
         // The Ring tempts you.
         this.getSpellAbility().addEffect(new TheRingTemptsYouEffect());
@@ -75,74 +75,45 @@ class BreakingOfTheFellowshipEffect extends OneShotEffect {
         }
         return true;
     }
-
 }
 
-class BreakingOfTheFellowshipFirstTarget extends TargetCreaturePermanent {
+class BreakingOfTheFellowshipSecondTarget extends TargetPermanent {
 
-    public BreakingOfTheFellowshipFirstTarget(FilterCreaturePermanent filter) {
-        super(1, 1, filter, false);
+    public BreakingOfTheFellowshipSecondTarget() {
+        super(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE);
     }
 
-    private BreakingOfTheFellowshipFirstTarget(final BreakingOfTheFellowshipFirstTarget target) {
+    private BreakingOfTheFellowshipSecondTarget(final BreakingOfTheFellowshipSecondTarget target) {
         super(target);
     }
 
     @Override
-    public void addTarget(UUID id, Ability source, Game game, boolean skipEvent) {
-        super.addTarget(id, source, game, skipEvent);
-        // Update the second target
-        UUID firstController = game.getControllerId(id);
-        if (firstController != null && source.getTargets().size() > 1) {
-            Player controllingPlayer = game.getPlayer(firstController);
-            TargetCreaturePermanent targetCreaturePermanent = (TargetCreaturePermanent) source.getTargets().get(1);
-            // Set a new filter to the second target with the needed restrictions
-            FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature that player " + controllingPlayer.getName() + " controls");
-            filter.add(new ControllerIdPredicate(firstController));
-            filter.add(Predicates.not(new PermanentIdPredicate(id)));
-            targetCreaturePermanent.replaceFilter(filter);
-        }
-    }
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
+        Set<UUID> possibleTargets = super.possibleTargets(sourceControllerId, source, game);
 
-    @Override
-    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
-        if (super.canTarget(controllerId, id, source, game)) {
-            // can only target, if the controller has at least two targetable creatures
-            UUID controllingPlayerId = game.getControllerId(id);
-            int possibleTargets = 0;
-            MageObject sourceObject = game.getObject(source.getId());
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, controllingPlayerId, game)) {
-                if (permanent.canBeTargetedBy(sourceObject, controllerId, source, game)) {
-                    possibleTargets++;
-                }
+        Permanent firstTarget = game.getPermanent(source.getFirstTarget());
+        if (firstTarget == null) {
+            // playable or first target not yet selected
+            // use all
+            if (possibleTargets.size() == 1) {
+                // workaround to make 1 target invalid
+                possibleTargets.clear();
             }
-            return possibleTargets > 1;
+        } else {
+            // real
+            // filter by same player
+            possibleTargets.removeIf(id -> {
+                Permanent permanent = game.getPermanent(id);
+                return permanent == null || !permanent.isControlledBy(firstTarget.getControllerId());
+            });
         }
-        return false;
+        possibleTargets.removeIf(id -> firstTarget != null && firstTarget.getId().equals(id));
+
+        return possibleTargets;
     }
 
     @Override
-    public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
-        if (super.canChoose(sourceControllerId, source, game)) {
-            UUID controllingPlayerId = game.getControllerId(source.getSourceId());
-            for (UUID playerId : game.getOpponents(controllingPlayerId)) {
-                int possibleTargets = 0;
-                MageObject sourceObject = game.getObject(source);
-                for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, playerId, game)) {
-                    if (permanent.canBeTargetedBy(sourceObject, controllingPlayerId, source, game)) {
-                        possibleTargets++;
-                    }
-                }
-                if (possibleTargets > 1) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public BreakingOfTheFellowshipFirstTarget copy() {
-        return new BreakingOfTheFellowshipFirstTarget(this);
+    public BreakingOfTheFellowshipSecondTarget copy() {
+        return new BreakingOfTheFellowshipSecondTarget(this);
     }
 }

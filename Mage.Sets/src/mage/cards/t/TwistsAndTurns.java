@@ -4,8 +4,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.keyword.ExploreTargetEffect;
@@ -17,6 +17,7 @@ import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.game.events.ExploreEvent;
 import mage.game.events.GameEvent;
@@ -28,6 +29,11 @@ import java.util.UUID;
  * @author xenohedron
  */
 public final class TwistsAndTurns extends CardImpl {
+
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(
+            new FilterControlledLandPermanent("you control seven or more lands"),
+            ComparisonType.MORE_THAN, 6, true
+    );
 
     public TwistsAndTurns(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}");
@@ -43,12 +49,9 @@ public final class TwistsAndTurns extends CardImpl {
 
         // When a land you control enters, if you control seven or more lands, transform Twists and Turns.
         this.addAbility(new TransformAbility());
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldControlledTriggeredAbility(new TransformSourceEffect(), StaticFilters.FILTER_LAND),
-                new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_LANDS, ComparisonType.MORE_THAN, 6, true),
-                "When a land you control enters, if you control seven or more lands, transform {this}."
-        ));
-
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
+                new TransformSourceEffect(), StaticFilters.FILTER_LAND
+        ).withInterveningIf(condition).setTriggerPhrase("When a land you control enters, "));
     }
 
     private TwistsAndTurns(final TwistsAndTurns card) {
@@ -89,7 +92,7 @@ class TwistsAndTurnsReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        ExploreEvent exploreEvent = (ExploreEvent)event;
+        ExploreEvent exploreEvent = (ExploreEvent) event;
         exploreEvent.addScry();
         return false;
     }

@@ -38,7 +38,7 @@ public final class FearOfSleepParalysis extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Eerie -- Whenever Fear of Sleep Paralysis or another enchantment you control enters and whenever you fully unlock a Room, tap up to one target creature and put a stun counter on it.
-        Ability ability = new  EerieAbility(new TapTargetEffect());
+        Ability ability = new  EerieAbility(new TapTargetEffect()).setTriggerPhrase("Whenever this creature or another enchantment you control enters and whenever you fully unlock a Room, ");
         ability.addEffect(new AddCountersTargetEffect(CounterType.STUN.createInstance()).setText("and put a stun counter on it"));
         ability.addTarget(new TargetCreaturePermanent(0, 1));
         this.addAbility(ability);

@@ -1,7 +1,5 @@
 package mage.cards.m;
 
-import java.util.UUID;
-
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.ObjectColor;
@@ -15,8 +13,11 @@ import mage.abilities.effects.PreventionEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.filter.FilterObject;
+import mage.constants.AbilityWord;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.filter.FilterSource;
 import mage.filter.predicate.mageobject.SharesColorPredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -27,15 +28,16 @@ import mage.target.TargetSource;
 import mage.target.common.TargetCardInGraveyard;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author noahg
  */
 public final class MournersShield extends CardImpl {
 
     public MournersShield(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
-        
+
 
         // Imprint - When Mourner's Shield enters the battlefield, you may exile target card from a graveyard.
         Ability ability = new EntersBattlefieldTriggeredAbility(new MournersShieldImprintEffect(), true);
@@ -81,7 +83,7 @@ class MournersShieldImprintEffect extends OneShotEffect {
         if (controller != null) {
             Card card = game.getCard(this.getTargetPointer().getFirst(game, source));
             if (card != null) {
-                controller.moveCardsToExile(card, source, game, true, CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()), source.getSourceObject(game).getIdName());
+                controller.moveCardsToExile(card, source, game, true, CardUtil.getExileZoneId(game, source.getSourceId(), source.getStackMomentSourceZCC()), source.getSourceObject(game).getIdName());
                 Permanent sourcePermanent = game.getPermanent(source.getSourceId());
                 if (sourcePermanent != null) {
                     sourcePermanent.imprint(this.getTargetPointer().getFirst(game, source), game);
@@ -93,6 +95,10 @@ class MournersShieldImprintEffect extends OneShotEffect {
     }
 }
 
+/**
+ * TODO: custom effect should not be needed with the properly set up {@link FilterSource}
+ *       and {@link mage.abilities.effects.common.PreventDamageByChosenSourceEffect}
+ */
 class MournersShieldEffect extends PreventionEffectImpl {
 
     private TargetSource target;
@@ -131,17 +137,17 @@ class MournersShieldEffect extends PreventionEffectImpl {
             noneExiled = true;
             return;
         }
-        for (UUID imprinted : sourceObject.getImprinted()){
-            if (imprinted != null && exileZone.contains(imprinted)){
+        for (UUID imprinted : sourceObject.getImprinted()) {
+            if (imprinted != null && exileZone.contains(imprinted)) {
                 Card card = game.getCard(imprinted);
                 if (card != null) {
                     colorsAmongImprinted = colorsAmongImprinted.union(card.getColor(game));
                 }
             }
         }
-        FilterObject filterObject = new FilterObject("a source of your choice that shares a color with the exiled card");
-        filterObject.add(new SharesColorPredicate(colorsAmongImprinted));
-        this.target = new TargetSource(filterObject);
+        FilterSource filterSource = new FilterSource("a source of your choice that shares a color with the exiled card");
+        filterSource.add(new SharesColorPredicate(colorsAmongImprinted));
+        this.target = new TargetSource(filterSource);
         this.target.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
         if (target.getFirstTarget() != null) {
             mageObjectReference = new MageObjectReference(target.getFirstTarget(), game);
@@ -152,7 +158,7 @@ class MournersShieldEffect extends PreventionEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (noneExiled || mageObjectReference == null){
+        if (noneExiled || mageObjectReference == null) {
             return false;
         }
         if (super.applies(event, source, game)) {

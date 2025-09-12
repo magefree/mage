@@ -1,7 +1,7 @@
 package mage.cards.v;
 
-import mage.MageInt;
 import mage.abilities.StateTriggeredAbility;
+import mage.abilities.condition.common.SourceIsEnchantmentCondition;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -11,9 +11,11 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.players.Player;
 
+import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -41,9 +43,14 @@ public final class VeiledCrocodile extends CardImpl {
 class VeiledCrocodileStateTriggeredAbility extends StateTriggeredAbility {
 
     public VeiledCrocodileStateTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new VeilCrocodileToken(), null, Duration.Custom));
-        this.withRuleTextReplacement(false);
-        setTriggerPhrase("When a player has no cards in hand, if {this} is an enchantment, ");
+        super(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(
+                new CreatureToken(
+                        4, 4, "4/4 Crocodile creature", SubType.CROCODILE
+                ), null, Duration.Custom
+        ));
+        this.withInterveningIf(SourceIsEnchantmentCondition.instance);
+        this.withRuleTextReplacement(true);
+        this.setTriggerPhrase("When a player has no cards in hand, ");
     }
 
     private VeiledCrocodileStateTriggeredAbility(final VeiledCrocodileStateTriggeredAbility ability) {
@@ -57,41 +64,13 @@ class VeiledCrocodileStateTriggeredAbility extends StateTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        for (UUID playerId : game.getState().getPlayersInRange(controllerId, game)) {
-            Player player = game.getPlayer(playerId);
-            if (player != null
-                    && player.getHand().isEmpty()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean checkInterveningIfClause(Game game) {
-        if (getSourcePermanentIfItStillExists(game) != null) {
-            return getSourcePermanentIfItStillExists(game).isEnchantment(game);
-        }
-        return false;
-    }
-
-}
-
-class VeilCrocodileToken extends TokenImpl {
-
-    public VeilCrocodileToken() {
-        super("Crocodile", "4/4 Crocodile creature");
-        cardType.add(CardType.CREATURE);
-        subtype.add(SubType.CROCODILE);
-        power = new MageInt(4);
-        toughness = new MageInt(4);
-    }
-
-    private VeilCrocodileToken(final VeilCrocodileToken token) {
-        super(token);
-    }
-
-    public VeilCrocodileToken copy() {
-        return new VeilCrocodileToken(this);
+        return game
+                .getState()
+                .getPlayersInRange(getControllerId(), game)
+                .stream()
+                .map(game::getPlayer)
+                .filter(Objects::nonNull)
+                .map(Player::getHand)
+                .anyMatch(Set::isEmpty);
     }
 }

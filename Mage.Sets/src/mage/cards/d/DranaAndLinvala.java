@@ -162,12 +162,10 @@ class DranaAndLinvalaManaEffect extends AsThoughEffectImpl implements AsThoughMa
         return CardUtil
                 .getMainCardId(game, objectId)
                 .equals(source.getSourceId())
-                && affectedAbility
-                .getEffects()
-                .stream()
-                .map(effect -> effect.getValue("dranaLinvalaFlag"))
-                .filter(Boolean.class::isInstance)
-                .anyMatch(Boolean.class::cast)
+                && CardUtil
+                .getEffectValueFromAbility(
+                        affectedAbility, "dranaLinvalaFlag", Boolean.class
+                ).orElse(false)
                 && source.isControlledBy(playerId);
     }
 

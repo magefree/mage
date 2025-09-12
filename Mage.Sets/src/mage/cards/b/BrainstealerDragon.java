@@ -2,10 +2,10 @@ package mage.cards.b;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.*;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
@@ -23,8 +23,7 @@ import java.util.UUID;
  */
 public final class BrainstealerDragon extends CardImpl {
 
-    private static final FilterPermanent filter
-            = new FilterNonlandPermanent("a nonland permanent an opponent owns");
+    private static final FilterPermanent filter = new FilterNonlandPermanent();
 
     static {
         filter.add(TargetController.OPPONENT.getOwnerPredicate());
@@ -42,15 +41,12 @@ public final class BrainstealerDragon extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // At the beginning of your end step, exile the top card of each opponent's library. You may play those cards for as long as they remain exiled. If you cast a spell this way, you may spend mana as though it were mana of any color to cast it.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new BrainstealerDragonExileEffect()
-        ));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new BrainstealerDragonExileEffect()));
 
         // Whenever a nonland permanent an opponent owns you control enters, they lose life equal to its mana value.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
-                Zone.BATTLEFIELD, new BrainstealerDragonLifeEffect(), filter,
-                false, SetTargetPointer.PERMANENT
-        ));
+                Zone.BATTLEFIELD, new BrainstealerDragonLifeEffect(), filter, false, SetTargetPointer.PERMANENT
+        ).setTriggerPhrase("Whenever a nonland permanent an opponent owns enters the battlefield under your control, "));
     }
 
     private BrainstealerDragon(final BrainstealerDragon card) {

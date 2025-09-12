@@ -4,6 +4,7 @@ package org.mage.test.cards.modal;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -25,7 +26,7 @@ public class OneOrBothTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Subtle Strike", "Pillarfield Ox");
         setModeChoice(playerA, "1");
-        setModeChoice(playerA, null);
+        setModeChoice(playerA, TestPlayer.MODE_SKIP);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -47,7 +48,7 @@ public class OneOrBothTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Subtle Strike", "Pillarfield Ox");
         setModeChoice(playerA, "2");
-        setModeChoice(playerA, null);
+        setModeChoice(playerA, TestPlayer.MODE_SKIP);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

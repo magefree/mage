@@ -2,18 +2,20 @@ package mage.cards.j;
 
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -29,14 +31,16 @@ import java.util.UUID;
  */
 public final class JeweledAmulet extends CardImpl {
 
-    private static final String rule = "{1}, {T}: Put a charge counter on {this}. Note the type of mana spent to pay this activation cost. Activate only if there are no charge counters on {this}.";
+    private static final Condition condition = new SourceHasCounterCondition(CounterType.CHARGE, ComparisonType.EQUAL_TO, 0);
 
     public JeweledAmulet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{0}");
 
         // {1}, {tap}: Put a charge counter on Jeweled Amulet. Note the type of mana spent to pay this activation cost. Activate this ability only if there are no charge counters on Jeweled Amulet.
-        ConditionalActivatedAbility ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new JeweledAmuletAddCounterEffect(), new ManaCostsImpl<>("{1}"), new SourceHasCounterCondition(CounterType.CHARGE, 0, 0), rule);
-        ability.addEffect(new AddCountersSourceEffect(CounterType.CHARGE.createInstance(), true));
+        Ability ability = new ActivateIfConditionActivatedAbility(
+                new AddCountersSourceEffect(CounterType.CHARGE.createInstance(), true), new GenericManaCost(1), condition
+        );
+        ability.addEffect(new JeweledAmuletAddCounterEffect());
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
@@ -44,7 +48,6 @@ public final class JeweledAmulet extends CardImpl {
         Ability ability2 = new SimpleManaAbility(Zone.BATTLEFIELD, new JeweledAmuletAddManaEffect(), new TapSourceCost());
         ability2.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));
         this.addAbility(ability2);
-
     }
 
     private JeweledAmulet(final JeweledAmulet card) {
@@ -63,7 +66,7 @@ class JeweledAmuletAddCounterEffect extends OneShotEffect {
 
     public JeweledAmuletAddCounterEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Note the type of mana spent to pay this activation cost. Activate only if there are no charge counters on {this}";
+        this.staticText = "Note the type of mana spent to pay this activation cost";
     }
 
     private JeweledAmuletAddCounterEffect(final JeweledAmuletAddCounterEffect effect) {

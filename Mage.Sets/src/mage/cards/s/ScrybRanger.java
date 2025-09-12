@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -15,13 +13,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Plopman
  */
 public final class ScrybRanger extends CardImpl {
@@ -42,12 +40,17 @@ public final class ScrybRanger extends CardImpl {
 
         // Flash
         this.addAbility(FlashAbility.getInstance());
+
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+
         // protection from blue
         this.addAbility(ProtectionAbility.from(ObjectColor.BLUE));
+
         // Return a Forest you control to its owner's hand: Untap target creature. Activate this ability only once each turn.
-        Ability ability = new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(filterForest)));
+        Ability ability = new LimitedTimesPerTurnActivatedAbility(
+                new UntapTargetEffect(), new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(filterForest))
+        );
         ability.addTarget(new TargetCreaturePermanent(1));
         this.addAbility(ability);
     }

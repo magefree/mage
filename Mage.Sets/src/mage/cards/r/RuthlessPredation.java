@@ -11,8 +11,11 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.StaticFilters;
 import mage.target.Target;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import static mage.filter.StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL;
 
 /**
  *
@@ -33,7 +36,7 @@ public final class RuthlessPredation extends CardImpl {
                 "<i>(Each deals damage equal to its power to the other.)</i>");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        Target target = new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL);
+        Target target = new TargetPermanent(FILTER_CREATURE_YOU_DONT_CONTROL);
         this.getSpellAbility().addTarget(target);
     }
 

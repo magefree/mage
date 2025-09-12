@@ -2,7 +2,6 @@ package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.Condition;
@@ -13,9 +12,11 @@ import mage.abilities.effects.common.LoseGameSourceControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.counters.CounterType;
@@ -33,7 +34,7 @@ import java.util.UUID;
  */
 public final class ArchfiendOfTheDross extends CardImpl {
 
-    private static final Condition condition = new SourceHasCounterCondition(CounterType.OIL, 0, 0);
+    private static final Condition condition = new SourceHasCounterCondition(CounterType.OIL, ComparisonType.EQUAL_TO, 0);
 
     public ArchfiendOfTheDross(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");

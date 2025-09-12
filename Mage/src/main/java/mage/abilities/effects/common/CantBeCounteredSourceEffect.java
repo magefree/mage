@@ -9,7 +9,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 
@@ -34,7 +33,7 @@ public class CantBeCounteredSourceEffect extends ContinuousRuleModifyingEffectIm
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        StackObject stackObject = game.getStack().getStackObject(event.getTargetId());
+        StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
         MageObject sourceObject = game.getObject(source);
         if (stackObject != null && sourceObject != null) {
             return sourceObject.getLogName() + " can't be countered by " + stackObject.getName();

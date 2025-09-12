@@ -33,7 +33,7 @@ public final class NetherSpirit extends CardImpl {
 
         // At the beginning of your upkeep, if Nether Spirit is the only creature card in your graveyard, you may return Nether Spirit to the battlefield.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.GRAVEYARD,
-                TargetController.YOU, new ReturnSourceFromGraveyardToBattlefieldEffect().setText("return {this} to the battlefield"),
+                TargetController.YOU, new ReturnSourceFromGraveyardToBattlefieldEffect().setText("return this card to the battlefield"),
                 true).withInterveningIf(NetherSpiritCondition.instance));
     }
 
@@ -60,6 +60,6 @@ enum NetherSpiritCondition implements Condition {
 
     @Override
     public String toString() {
-        return "{this} is the only creature card in your graveyard";
+        return "this card is the only creature card in your graveyard";
     }
 }

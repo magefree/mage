@@ -6,7 +6,6 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CastFromHandSourcePermanentCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CopySpellForEachItCouldTargetEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
@@ -52,13 +51,8 @@ public final class RadiantPerformer extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
 
         // When Radiant Performer enters the battlefield, if you cast it from your hand, choose target spell or ability that targets only a single permanent or player. Copy that spell or ability for each other permanent or player the spell or ability could target. Each copy targets a different one of those permanents and players.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new RadiantPerformerEffect()),
-                CastFromHandSourcePermanentCondition.instance, "When {this} enters, " +
-                "if you cast it from your hand, choose target spell or ability that targets only " +
-                "a single permanent or player. Copy that spell or ability for each other permanent or player " +
-                "the spell or ability could target. Each copy targets a different one of those permanents and players."
-        );
+        Ability ability = new EntersBattlefieldTriggeredAbility(new RadiantPerformerEffect())
+                .withInterveningIf(CastFromHandSourcePermanentCondition.instance);
         ability.addTarget(new TargetStackObject(filter));
         this.addAbility(ability, new CastFromHandWatcher());
     }
@@ -98,6 +92,7 @@ class RadiantPerformerEffect extends CopySpellForEachItCouldTargetEffect {
 
     RadiantPerformerEffect() {
         super();
+        staticText = "choose target spell or ability that targets only a single permanent or player. Copy that spell or ability for each other permanent or player the spell or ability could target. Each copy targets a different one of those permanents and players";
     }
 
     private RadiantPerformerEffect(final RadiantPerformerEffect effect) {

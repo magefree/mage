@@ -20,6 +20,7 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.Target;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -51,7 +52,7 @@ public final class EldraziObligator extends CardImpl {
         // When you cast Eldrazi Obligator, you may pay {1}{C}. If you do, gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.
         Ability ability = new CastSourceTriggeredAbility(costPaidEffect);
 
-        Target target = new TargetCreaturePermanent(new FilterCreaturePermanent());
+        Target target = new TargetPermanent(new FilterCreaturePermanent());
         ability.addTarget(target);
         this.addAbility(ability);
     }

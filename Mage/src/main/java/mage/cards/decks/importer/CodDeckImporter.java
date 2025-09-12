@@ -66,14 +66,13 @@ public class CodDeckImporter extends XmlDeckImporter {
     private static Function<Node, Stream<DeckCardInfo>> toDeckCardInfo(CardLookup lookup, StringBuilder errors) {
         return node -> {
             String name = node.getAttributes().getNamedItem("name").getNodeValue().trim();
-            Optional<CardInfo> cardInfo = lookup.lookupCardInfo(name);
-            if (cardInfo.isPresent()) {
-                CardInfo info = cardInfo.get();
+            CardInfo cardInfo = lookup.lookupCardInfo(name);
+            if (cardInfo != null) {
                 int amount = getQuantityFromNode(node);
-                DeckCardInfo.makeSureCardAmountFine(amount, info.getName());
+                DeckCardInfo.makeSureCardAmountFine(amount, cardInfo.getName());
                 return Collections.nCopies(
                         amount,
-                        new DeckCardInfo(info.getName(), info.getCardNumber(), info.getSetCode())
+                        new DeckCardInfo(cardInfo.getName(), cardInfo.getCardNumber(), cardInfo.getSetCode())
                 ).stream();
             } else {
                 errors.append("Could not find card: '").append(name).append("'\n");

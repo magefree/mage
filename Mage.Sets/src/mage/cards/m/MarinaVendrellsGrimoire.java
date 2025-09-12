@@ -7,7 +7,6 @@ import mage.abilities.common.LoseLifeTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CastFromEverywhereSourceCondition;
 import mage.abilities.condition.common.HellbentCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.dynamicvalue.common.SavedGainedLifeValue;
 import mage.abilities.dynamicvalue.common.SavedLifeLossValue;
@@ -35,10 +34,8 @@ public final class MarinaVendrellsGrimoire extends CardImpl {
         this.supertype.add(SuperType.LEGENDARY);
 
         // When Marina Vendrell's Grimoire enters, if you cast it, draw five cards.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(5)),
-                CastFromEverywhereSourceCondition.instance, "When {this} enters, if you cast it, draw five cards."
-        ));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(5))
+                .withInterveningIf(CastFromEverywhereSourceCondition.instance));
 
         // You have no maximum hand size and don't lose the game for having 0 or less life.
         Ability ability = new SimpleStaticAbility(new MaximumHandSizeControllerEffect(

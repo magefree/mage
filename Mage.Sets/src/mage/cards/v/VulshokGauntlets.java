@@ -36,7 +36,7 @@ public final class VulshokGauntlets extends CardImpl {
         effect.setText("Equipped creature gets +4/+2");
         Ability ability = new SimpleStaticAbility(effect);
         effect = new VulshokGauntletsEffect();
-        effect.setText("and has doesn't untap during its controller's untap step");
+        effect.setText("and doesn't untap during its controller's untap step");
         ability.addEffect(effect);
         this.addAbility(ability);
         

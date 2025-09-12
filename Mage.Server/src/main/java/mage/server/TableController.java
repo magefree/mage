@@ -72,7 +72,7 @@ public class TableController {
         }
         this.table = new Table(roomId, options.getGameType(), options.getName(), controllerName, DeckValidatorFactory.instance.createDeckValidator(options.getDeckType()),
                 options.getPlayerTypes(), new TableRecorderImpl(managerFactory.userManager()), match, options.getBannedUsers(), options.isPlaneChase());
-        this.chatId = managerFactory.chatManager().createChatSession("Match Table " + table.getId());
+        this.chatId = managerFactory.chatManager().createTableChatSession(table);
         init();
     }
 
@@ -94,7 +94,7 @@ public class TableController {
         }
         table = new Table(roomId, options.getTournamentType(), options.getName(), controllerName, DeckValidatorFactory.instance.createDeckValidator(options.getMatchOptions().getDeckType()),
                 options.getPlayerTypes(), new TableRecorderImpl(managerFactory.userManager()), tournament, options.getMatchOptions().getBannedUsers(), options.isPlaneChase());
-        chatId = managerFactory.chatManager().createChatSession("Tourney table " + table.getId());
+        chatId = managerFactory.chatManager().createTableChatSession(table);
     }
 
     private void init() {

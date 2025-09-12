@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.common.AttacksOrBlocksTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -23,7 +22,7 @@ import java.util.UUID;
  */
 public final class WildwoodTracker extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent();
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("you control another non-Human creature");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -41,12 +40,9 @@ public final class WildwoodTracker extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Wildwood Tracker attacks or blocks, if you control another non-Human creature, Wildwood Tracker gets +1/+1 until end of turn.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new AttacksOrBlocksTriggeredAbility(
-                        new BoostSourceEffect(1, 1, Duration.EndOfTurn), false
-                ), condition, "Whenever {this} attacks or blocks, if you control another non-Human creature, " +
-                "{this} gets +1/+1 until end of turn."
-        ));
+        this.addAbility(new AttacksOrBlocksTriggeredAbility(
+                new BoostSourceEffect(1, 1, Duration.EndOfTurn), false
+        ).withInterveningIf(condition));
     }
 
     private WildwoodTracker(final WildwoodTracker card) {

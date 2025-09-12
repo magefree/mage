@@ -1,13 +1,11 @@
 package mage.verify;
 
 import com.google.common.base.CharMatcher;
+import com.google.gson.Gson;
 import mage.MageObject;
 import mage.Mana;
 import mage.ObjectColor;
-import mage.abilities.Ability;
-import mage.abilities.AbilityImpl;
-import mage.abilities.Mode;
-import mage.abilities.TriggeredAbility;
+import mage.abilities.*;
 import mage.abilities.common.*;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
@@ -15,6 +13,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
 import mage.abilities.effects.common.FightTargetsEffect;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.counter.ProliferateEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.hint.common.CitysBlessingHint;
@@ -24,30 +23,40 @@ import mage.abilities.hint.common.MonarchHint;
 import mage.abilities.keyword.*;
 import mage.cards.*;
 import mage.cards.decks.CardNameUtil;
+import mage.cards.decks.Deck;
+import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.importer.DeckImporter;
 import mage.cards.repository.*;
 import mage.choices.Choice;
+import mage.client.remote.XmageURLConnection;
 import mage.constants.*;
 import mage.filter.Filter;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
+import mage.game.FakeGame;
 import mage.game.Game;
 import mage.game.command.Dungeon;
+import mage.game.command.Emblem;
 import mage.game.command.Plane;
+import mage.game.command.emblems.EmblemOfCard;
 import mage.game.draft.DraftCube;
 import mage.game.permanent.token.Token;
 import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.custom.CreatureToken;
 import mage.game.permanent.token.custom.XmageToken;
 import mage.sets.TherosBeyondDeath;
+import mage.target.Target;
 import mage.target.targetpointer.TargetPointer;
+import mage.tournament.cubes.CubeFromDeck;
 import mage.util.CardUtil;
 import mage.utils.SystemUtil;
 import mage.verify.mtgjson.MtgJsonCard;
 import mage.verify.mtgjson.MtgJsonService;
 import mage.verify.mtgjson.MtgJsonSet;
+import mage.verify.mtgjson.SpellBookCardsPage;
 import mage.watchers.Watcher;
+import net.java.truevfs.access.TFile;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Ignore;
@@ -55,10 +64,14 @@ import org.junit.Test;
 import org.mage.plugins.card.dl.sources.ScryfallImageSupportCards;
 import org.reflections.Reflections;
 
+import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -71,9 +84,21 @@ public class VerifyCardDataTest {
 
     private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
-    private static final String FULL_ABILITIES_CHECK_SET_CODES = "FIN"; // check ability text due mtgjson, can use multiple sets like MAT;CMD or * for all
-    private static final boolean CHECK_ONLY_ABILITIES_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
+    private static String FULL_ABILITIES_CHECK_SET_CODES = ""; // check ability text due mtgjson, can use multiple sets like MAT;CMD or * for all
+    private static boolean CHECK_ONLY_ABILITIES_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
     private static final boolean CHECK_COPYABLE_FIELDS = true; // disable for better verify test performance
+
+    // for automated local testing support
+    static {
+        String val = System.getProperty("xmage.tests.verifyCheckSetCodes");
+        if (val != null) {
+            FULL_ABILITIES_CHECK_SET_CODES = val;
+        }
+        val = System.getProperty("xmage.tests.verifyCheckOnlyText");
+        if (val != null) {
+            CHECK_ONLY_ABILITIES_TEXT = Boolean.parseBoolean(val);
+        }
+    }
 
     private static final boolean AUTO_FIX_SAMPLE_DECKS = false; // debug only: auto-fix sample decks by test_checkSampleDecks test run
 
@@ -133,7 +158,6 @@ public class VerifyCardDataTest {
 
         // color
         // skipListAddName(SKIP_LIST_COLOR, set, cardName);
-        skipListAddName(SKIP_LIST_COLOR, "FIN", "Summon: Alexander");
 
         // cost
         // skipListAddName(SKIP_LIST_COST, set, cardName);
@@ -146,12 +170,14 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_TYPE, "UNH", "Old Fogey"); // uses summon word as a joke card
         skipListAddName(SKIP_LIST_TYPE, "UND", "Old Fogey");
         skipListAddName(SKIP_LIST_TYPE, "UST", "capital offense"); // uses "instant" instead "Instant" as a joke card
+        skipListAddName(SKIP_LIST_TYPE, "SPM", "Superior Foes of Spider-Man"); // temporary
 
         // subtype
         // skipListAddName(SKIP_LIST_SUBTYPE, set, cardName);
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Miss Demeanor"); // uses multiple types as a joke card: Lady, of, Proper, Etiquette
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Elvish Impersonators"); // subtype is "Elves" pun
         skipListAddName(SKIP_LIST_SUBTYPE, "UND", "Elvish Impersonators");
+        skipListAddName(SKIP_LIST_SUBTYPE, "SPM", "Superior Foes of Spider-Man"); // temporary
 
         // number
         // skipListAddName(SKIP_LIST_NUMBER, set, cardName);
@@ -159,6 +185,7 @@ public class VerifyCardDataTest {
         // rarity
         // skipListAddName(SKIP_LIST_RARITY, set, cardName);
         skipListAddName(SKIP_LIST_RARITY, "CMR", "The Prismatic Piper"); // Collation is not yet set up for CMR https://www.lethe.xyz/mtg/collation/cmr.html
+        skipListAddName(SKIP_LIST_RARITY, "SPM", "Gwenom, Remorseless"); // temporary
 
         // missing abilities
         // skipListAddName(SKIP_LIST_MISSING_ABILITIES, set, cardName);
@@ -673,32 +700,6 @@ public class VerifyCardDataTest {
 //                String code = MtgJsonService.xMageToMtgJsonCodes.getOrDefault(set.getCode(), set.getCode()) + " - " + jsonCard.getNameAsFull() + " - " + jsonCard.number;
 //                foundedJsonCards.add(code);
 //
-//                // CHECK: only lands can use full art in current version;
-//                // Another cards must be in text render mode as normal, example: https://scryfall.com/card/sld/76/athreos-god-of-passage
-//                // TODO: add support textless cards like https://scryfall.com/card/sch/12/thalia-and-the-gitrog-monster
-//                boolean isLand = card.getRarity().equals(Rarity.LAND);
-//                if (card.isFullArt() && !isLand) {
-//                    errorsList.add("Error: only lands can use full art setting: "
-//                            + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
-//                }
-//
-//                // CHECK: must use full art setting
-//                if (jsonCard.isFullArt && isLand && !card.isFullArt()) {
-//                    errorsList.add("Error: card must use full art setting: "
-//                            + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
-//                }
-//
-//                // CHECK: must not use full art setting
-//                if (!jsonCard.isFullArt && card.isFullArt()) {
-//                    errorsList.add("Error: card must NOT use full art setting: "
-//                            + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
-//                }
-
-                // CHECK: must use retro frame setting
-                if ((jsonCard.frameVersion.equals("1993") || jsonCard.frameVersion.equals("1997")) && !card.isRetroFrame()) {
-                    errorsList.add("Error: card must use retro art setting: "
-                            + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
-                }
             }
         }
 
@@ -736,6 +737,63 @@ public class VerifyCardDataTest {
         }
 
         printMessages(warningsList);
+        printMessages(errorsList);
+        if (errorsList.size() > 0) {
+            Assert.fail("Found wrong cards data in sets, errors: " + errorsList.size());
+        }
+    }
+
+    @Test
+    @Ignore
+    public void test_checkWrongFullArtAndRetro() {
+        Collection<String> errorsList = new ArrayList<>();
+        Collection<ExpansionSet> xmageSets = Sets.getInstance().values();
+
+        // CHECK: wrong card numbers
+        for (ExpansionSet set : xmageSets) {
+            if (skipListHaveName(SKIP_LIST_WRONG_CARD_NUMBERS, set.getCode())) {
+                continue;
+            }
+
+            for (ExpansionSet.SetCardInfo card : set.getSetCardInfo()) {
+                MtgJsonCard jsonCard = MtgJsonService.cardFromSet(set.getCode(), card.getName(), card.getCardNumber());
+                if (jsonCard == null) {
+                    continue;
+                }
+
+                // CHECK: poster promoType and/or textless must use full art setting
+                if (((jsonCard.promoTypes != null && jsonCard.promoTypes.contains("poster")) || jsonCard.isTextless) && !card.isFullArt()) {
+                    errorsList.add("Error: card must use full art setting: "
+                            + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
+                }
+
+                // CHECK: full art lands must use full art setting
+                boolean isLand = card.getRarity().equals(Rarity.LAND);
+                if (isLand && jsonCard.isFullArt && !card.isFullArt()) {
+                    errorsList.add("Error: card must use full art lands setting: "
+                            + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
+                }
+
+                // CHECK: non-full art lands must not use full art setting
+                if (isLand && !jsonCard.isFullArt && card.isFullArt()) {
+                    errorsList.add("Error: card must NOT use full art lands setting: "
+                            + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
+                }
+
+                // CHECK: must use retro frame setting
+                if ((jsonCard.frameVersion.equals("1993") || jsonCard.frameVersion.equals("1997")) && !card.isRetroFrame()) {
+                    errorsList.add("Error: card must use retro art setting: "
+                            + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
+                }
+
+                // CHECK: must not use retro frame setting
+                if ((!(jsonCard.frameVersion.equals("1993") || jsonCard.frameVersion.equals("1997"))) && card.isRetroFrame()) {
+                    errorsList.add("Error: card must NOT use retro art setting: "
+                            + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
+                }
+            }
+        }
+
         printMessages(errorsList);
         if (errorsList.size() > 0) {
             Assert.fail("Found wrong cards data in sets, errors: " + errorsList.size());
@@ -896,6 +954,27 @@ public class VerifyCardDataTest {
         }
     }
 
+    private static final Set<String> ignoreBoosterSets = new HashSet<>();
+
+    static {
+        // temporary, TODO: remove after set release and mtgjson get info
+        ignoreBoosterSets.add("Edge of Eternities");
+        // jumpstart, TODO: must implement from JumpstartPoolGenerator, see #13264
+        ignoreBoosterSets.add("Jumpstart");
+        ignoreBoosterSets.add("Jumpstart 2022");
+        ignoreBoosterSets.add("Foundations Jumpstart");
+        ignoreBoosterSets.add("Ravnica: Clue Edition");
+        // joke or un-sets, low implemented cards
+        ignoreBoosterSets.add("Unglued");
+        ignoreBoosterSets.add("Unhinged");
+        ignoreBoosterSets.add("Unstable");
+        ignoreBoosterSets.add("Unfinity");
+        // other
+        ignoreBoosterSets.add("Secret Lair Drop"); // cards shop
+        ignoreBoosterSets.add("Zendikar Rising Expeditions"); // box toppers
+        ignoreBoosterSets.add("March of the Machine: The Aftermath"); // epilogue boosters aren't for draft
+    }
+
     @Test
     public void test_checkMissingSetData() {
         Collection<String> errorsList = new ArrayList<>();
@@ -1046,24 +1125,6 @@ public class VerifyCardDataTest {
         }
 
         // CHECK: miss booster settings
-        Set<String> ignoreBoosterSets = new HashSet<>();
-        // temporary, TODO: remove after set release and mtgjson get info
-        ignoreBoosterSets.add("Final Fantasy");
-        // jumpstart, TODO: must implement from JumpstartPoolGenerator, see #13264
-        ignoreBoosterSets.add("Jumpstart");
-        ignoreBoosterSets.add("Jumpstart 2022");
-        ignoreBoosterSets.add("Foundations Jumpstart");
-        ignoreBoosterSets.add("Ravnica: Clue Edition");
-        // joke or un-sets, low implemented cards
-        ignoreBoosterSets.add("Unglued");
-        ignoreBoosterSets.add("Unhinged");
-        ignoreBoosterSets.add("Unstable");
-        ignoreBoosterSets.add("Unfinity");
-        // other
-        ignoreBoosterSets.add("Secret Lair Drop"); // cards shop
-        ignoreBoosterSets.add("Zendikar Rising Expeditions"); // box toppers
-        ignoreBoosterSets.add("March of the Machine: The Aftermath"); // epilogue boosters aren't for draft
-
         // make sure mtgjson has booster data
         boolean hasBoostersInfo = MtgJsonService.sets().values().stream().anyMatch(s -> s.booster != null && !s.booster.isEmpty());
         for (ExpansionSet set : sets) {
@@ -1094,6 +1155,7 @@ public class VerifyCardDataTest {
         Set<String> implementedSets = sets.stream().map(ExpansionSet::getCode).collect(Collectors.toSet());
         MtgJsonService.sets().values().forEach(jsonSet -> {
             if (jsonSet.booster != null && !jsonSet.booster.isEmpty() && !implementedSets.contains(jsonSet.code)) {
+                // how-to fix: it's miss promo sets with boosters, so just add/generate it in most use cases
                 errorsList.add(String.format("Error: missing set implementation (important for draft format) - %s - %s - boosters: %s",
                         jsonSet.code,
                         jsonSet.name,
@@ -1671,10 +1733,123 @@ public class VerifyCardDataTest {
         }
     }
 
+    @Test
+    // TODO: add same images verify for tokens/dungeons and other
+    // TODO: add same verify for Speed and other new command objects
+    public void test_checkMissingEmblemsData() {
+        Collection<String> errorsList = new ArrayList<>();
+
+        // prepare DBs
+        CardScanner.scan();
+
+        Reflections reflections = new Reflections("mage.");
+        Set<Class<? extends Emblem>> emblemClassesList = reflections.getSubTypesOf(Emblem.class).stream()
+                .filter(c -> !c.equals(EmblemOfCard.class)) // ignore emblem card
+                .collect(Collectors.toSet());
+
+        // 1. correct class name
+        for (Class<? extends Emblem> emblemClass : emblemClassesList) {
+            if (!emblemClass.getName().endsWith("Emblem")) {
+                String className = extractShortClass(emblemClass);
+                errorsList.add("Error: emblem class must ends with Emblem: " + className + " from " + emblemClass.getName());
+            }
+        }
+
+        // 2. correct package
+        for (Class<? extends Emblem> emblemClass : emblemClassesList) {
+            String fullClass = emblemClass.getName();
+            if (!fullClass.startsWith("mage.game.command.emblems.")) {
+                String className = extractShortClass(emblemClass);
+                errorsList.add("Error: emblem must be stored in mage.game.command.emblems package: " + className + " from " + emblemClass.getName());
+            }
+        }
+
+        // 3. correct constructor
+        MageObject fakeObject = CardRepository.instance.findCard("Forest").createCard();
+        for (Class<? extends Emblem> emblemClass : emblemClassesList) {
+            String className = extractShortClass(emblemClass);
+            Emblem emblem;
+            try {
+                emblem = (Emblem) createNewObject(emblemClass);
+
+                // 4. correct tokens-database (image)
+                try {
+                    emblem.setSourceObjectAndInitImage(fakeObject);
+                } catch (Throwable e) {
+                    e.printStackTrace();
+                    errorsList.add("Error: can't setup emblem's image data - make sure tokens-database.txt has it: " + className + " from " + emblemClass.getName());
+                }
+            } catch (Throwable e) {
+                e.printStackTrace();
+                errorsList.add("Error: can't create emblem with default constructor: " + className + " from " + emblemClass.getName());
+            }
+        }
+
+        printMessages(errorsList);
+        if (errorsList.size() > 0) {
+            Assert.fail("Found emblem errors: " + errorsList.size());
+        }
+    }
+
+    @Test
+    @Ignore
+    // experimental test to find potentially fail conditions with NPE see https://github.com/magefree/mage/issues/13752
+    public void test_checkBadConditions() {
+        // all conditions in AsThoughEffect must be compatible with empty source param (e.g. must be able to use inside ConditionalAsThoughEffect)
+        // see AsThoughEffectType.needAffectedAbility ?
+        // 370+ failed conditions
+        Collection<String> errorsList = new ArrayList<>();
+        Game fakeGame = new FakeGame();
+        Ability fakeAbility = new SimpleStaticAbility(new InfoEffect("fake"));
+
+        // TODO: add classes support (see example with tokens and default constructor)?
+        Reflections reflections = new Reflections("mage.");
+        Set<Class<?>> conditionEnums = reflections.getSubTypesOf(Condition.class)
+                .stream()
+                .filter(Class::isEnum)
+                .sorted(Comparator.comparing(Class::toString))
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+        for (Class<?> enumClass : conditionEnums) {
+            for (Object enumItem : enumClass.getEnumConstants()) {
+                // miss watcher will fail in both use cases, but miss ability only one
+                String errorOnAbility = "";
+                try {
+                    ((Condition) enumItem).apply(fakeGame, fakeAbility);
+                } catch (Exception e) {
+                    errorOnAbility = Arrays.stream(e.getStackTrace())
+                            .map(StackTraceElement::toString)
+                            .limit(5)
+                            .collect(Collectors.joining("\n"));
+                }
+
+                String errorOnEmptyAbility = "";
+                try {
+                    ((Condition) enumItem).apply(fakeGame, null);
+                } catch (Exception e) {
+                    errorOnEmptyAbility = Arrays.stream(e.getStackTrace())
+                            .map(StackTraceElement::toString)
+                            .limit(5)
+                            .collect(Collectors.joining("\n"));
+                }
+
+                if (errorOnAbility.isEmpty() && !errorOnEmptyAbility.isEmpty()) {
+                    System.out.println();
+                    System.out.println("bad condition " + enumClass.getName() + "\n" + errorOnEmptyAbility);
+                    errorsList.add("Error: condition must support empty and non-empty source params: " + enumClass.getName());
+                }
+            }
+        }
+
+        printMessages(errorsList);
+        if (!errorsList.isEmpty()) {
+            Assert.fail("Found conditions errors: " + errorsList.size());
+        }
+    }
+
     private void check(Card card, int cardIndex) {
         MtgJsonCard ref = MtgJsonService.cardFromSet(card.getExpansionSetCode(), card.getName(), card.getCardNumber());
         if (ref != null) {
-            if (card instanceof SpellOptionCard && ref.layout.equals("reversible_card")) {
+            if ((card instanceof CardWithSpellOption || card instanceof SpellOptionCard) && ref.layout.equals("reversible_card")) {
                 // TODO: Remove when MtgJson updated
                 // workaround for reversible omen cards e.g. Bloomvine Regent // Claim Territory // Bloomvine Regent
                 // both sides have main card info
@@ -1974,7 +2149,13 @@ public class VerifyCardDataTest {
         expected.removeIf(subtypesToIgnore::contains);
 
         for (SubType subType : card.getSubtype()) {
-            if (!subType.isCustomSet() && !subType.canGain(card)) {
+            if (subType.isCustomSet()) {
+                if (!ref.isFunny) {
+                    fail(card, "subtypes", "subtype " + subType + " is marked as \"custom\" but is in an official set");
+                }
+                continue;
+            }
+            if (!subType.canGain(card)) {
                 String cardTypeString = card
                         .getCardType()
                         .stream()
@@ -2001,6 +2182,73 @@ public class VerifyCardDataTest {
         if (!eqSet(card.getSuperType().stream().map(s -> s.toString()).collect(Collectors.toList()), expected)) {
             fail(card, "supertypes", card.getSuperType() + " != " + expected);
         }
+    }
+
+    // There are many cards that use the word "target" or "targets" in reference to spells/abilities that target rather than actually themselves having a target.
+    // Examples include Wall of Shadows, Psychic Battle, Coalition Honor Guard, Aboleth Spawn, Akroan Crusader, Grip of Chaos, and many more
+    Pattern singularTargetRegexPattern = Pattern.compile("\\b(?<!(can|the|that|could|each|single|its|new|spell's) )target\\b");
+    Pattern pluralTargetsRegexPattern = Pattern.compile("\\b(?<!(new|the|that|copy|choosing|it|more|spell|or|changing|legal|has) )targets\\b");
+
+    // Note that the check includes reminder text, so any keyword ability with reminder text always included in the card text doesn't need to be added
+    // FIN added equip abilities with flavor words, allow for those. There are also cards that affect equip costs or equip abilities, exclude those
+    // Technically Enchant should be in this list, but that's added to the SpellAbility in XMage
+    Pattern targetKeywordRegexPattern = Pattern.compile("^((.*— )?equip(?! cost| abilit)|bestow|partner with|modular|backup)\\b", Pattern.MULTILINE);
+
+    // Checks for targeted reflexive or delayed triggered abilities, ones that only can trigger as a result of another ability
+    // and thus have their "when" located after a previous statement (detected by a period or comma followed by a space) instead of the start.
+    // Some reflexive triggers (Cemetery Desecrator, Tranquil Frillback) have a modal decision before the word target, need to check across multiple lines of text for those (and . doesn't match newlines)
+    // Many delayed triggers only get caught by the recursiveTargetAbilityCheck, if we want to improve that check to be an "and" instead of the current "or", we'll need to add them here
+    Pattern indirectTriggerTargetRegexPattern = Pattern.compile("([.,] when)(.|—\\n)+target");
+
+    // Check if the word "target" is inside a quoted ability being granted or of a token (or is using GiveScavengeContinuousEffect)
+    // A quoted ability always has a space before the opening quote and never before the closing one, so we can use that to ensure we're only checking inside
+    Pattern quotedTargetRegexPattern = Pattern.compile(" \"[^\"]*target|has scavenge");
+
+    // This check looks inside the abilities' effects to try to find a target that's not part of the main ability
+    // Examples include reflexive triggers (Ahn-Crop Crasher), delayed triggers (Feral Encounter), ability granting (Acidic Sliver), or tokens with abilities (Dance with Devils)
+    // Ideally the indirect/quoted text check and this check would always return the same result, but that would require both better regexes for checking and a lot of card changes
+    boolean recursiveTargetObjectCheck(Object obj, int depth) {
+        if (depth < 0) {
+            return false;
+        }
+        if (obj instanceof Effect) {
+            return recursiveTargetEffectCheck((Effect) obj, depth - 1);
+        }
+        if (obj instanceof Ability) {
+            return recursiveTargetAbilityCheck((Ability) obj, depth - 1);
+        }
+        if (obj instanceof Token) {
+            return ((Token) obj).getAbilities().stream().anyMatch(ability -> recursiveTargetAbilityCheck(ability, depth - 1));
+        }
+        if (obj instanceof Collection) {
+            return ((Collection) obj).stream().anyMatch(x -> recursiveTargetObjectCheck(x, depth - 1));
+        }
+        return false;
+    }
+
+    boolean recursiveTargetEffectCheck(Effect effect, int depth) {
+        if (depth < 0) {
+            return false;
+        }
+        return Arrays.stream(effect.getClass().getDeclaredFields())
+                .anyMatch(f -> {
+                    f.setAccessible(true);
+                    try {
+                        return recursiveTargetObjectCheck(f.get(effect), depth); // Intentionally not decreasing depth here
+                    } catch (IllegalAccessException ex) {
+                        throw new RuntimeException(ex); // Should never happen due to setAccessible
+                    }
+                });
+    }
+
+    boolean recursiveTargetAbilityCheck(Ability ability, int depth) {
+        if (depth < 0) {
+            return false;
+        }
+        Collection<Mode> modes = ability.getModes().values();
+        return modes.stream().flatMap(mode -> mode.getTargets().stream()).anyMatch(target -> !target.isNotTarget())
+                || ability.getTargetAdjuster() != null
+                || modes.stream().flatMap(mode -> mode.getEffects().stream()).anyMatch(effect -> recursiveTargetEffectCheck(effect, depth - 1));
     }
 
     private void checkMissingAbilities(Card card, MtgJsonCard ref) {
@@ -2130,7 +2378,11 @@ public class VerifyCardDataTest {
 
 
                 // search and check dies related abilities
-                String rules = triggeredAbility.getRule();
+                // remove reminder text
+                String rules = triggeredAbility
+                        .getRule()
+                        .replaceAll("(?i) <i>\\(.+\\)</i>", "")
+                        .replaceAll("(?i) \\(.+\\)", "");
                 if (ignoredAbilities.stream().anyMatch(rules::contains)) {
                     continue;
                 }
@@ -2166,57 +2418,51 @@ public class VerifyCardDataTest {
             }
         }
 
+
         // special check: wrong targeted ability
-        // possible fixes:
-        //  * on "must set withNotTarget(true)":
-        //    - check card's ability constructors and fix missing withNotTarget(true) param/field
-        //    - it's can be a keyword action (only mtg rules contains a target word), so add it to the targetedKeywords
-        // * on "must be targeted":
-        //    - TODO: enable and research checkMissTargeted - too much errors with it (is it possible to use that checks?)
-        boolean checkMissNonTargeted = true; // must set withNotTarget(true)
-        boolean checkMissTargeted = false; // must be targeted
-        List<String> targetedKeywords = Arrays.asList(
-                "target",
-                "enchant",
-                "equip",
-                "backup",
-                "modular",
-                "partner"
-        );
-        // xmage card can contain rules text from both sides, so must search ref card for all sides too
-        String additionalName;
-        if (card instanceof CardWithSpellOption) {
-            // adventure/omen cards
-            additionalName = ((CardWithSpellOption) card).getSpellCard().getName();
-        } else if (card.isTransformable() && !card.isNightCard()) {
-            additionalName = card.getSecondCardFace().getName();
-        } else {
-            additionalName = null;
-        }
-        if (additionalName != null) {
-            MtgJsonCard additionalRef = MtgJsonService.cardFromSet(card.getExpansionSetCode(), additionalName, card.getCardNumber());
-            if (additionalRef == null) {
-                // how-to fix: add new card type processing for an additionalName searching above
-                fail(card, "abilities", "can't find second side info for target check");
-            } else {
-                if (additionalRef.text != null && !additionalRef.text.isEmpty()) {
-                    refLowerText += "\r\n" + additionalRef.text.toLowerCase(Locale.ENGLISH);
+        // Checks that no ability targets use withNotTarget (use OneShotNonTargetEffect if it's a choose effect)
+        // Checks that, if the text contains the word target, the ability does have a target.
+        // - In cases involving a target in a reflexive trigger or token or other complex situation, it assumes that it's fine
+        // - There are two versions of this complexity check, either can trigger: one on card text, one that uses Java reflection to inspect the ability's effects.
+        String[] excludedCards = {"Lodestone Bauble", // Needs to choose a player before targets are selected
+                "Blink", // Current XMage code does not correctly support non-consecutive chapter effects, duplicates effects as a workaround
+                "Artifact Ward"}; // This card is just implemented wrong, but would need significant work to fix
+        if (Arrays.stream(excludedCards).noneMatch(x -> x.equals(ref.name))) {
+            for (Ability ability : card.getAbilities()) {
+                boolean foundNotTarget = ability.getModes().values().stream()
+                        .flatMap(mode -> mode.getTargets().stream()).anyMatch(Target::isNotTarget);
+                if (foundNotTarget) {
+                    fail(card, "abilities", "notTarget should not be used as ability target, should be inside ability effect");
+                }
+                String abilityText = ability.getRule().toLowerCase(Locale.ENGLISH);
+                boolean needTargetedAbility = singularTargetRegexPattern.matcher(abilityText).find() || pluralTargetsRegexPattern.matcher(abilityText).find() || targetKeywordRegexPattern.matcher(abilityText).find();
+                boolean recursiveAbilityText = indirectTriggerTargetRegexPattern.matcher(abilityText).find() || quotedTargetRegexPattern.matcher(abilityText).find();
+
+                boolean foundTargetedAbility = recursiveTargetAbilityCheck(ability, 0);
+                boolean recursiveAbility = recursiveTargetAbilityCheck(ability, 4);
+
+                if (needTargetedAbility && !(foundTargetedAbility || recursiveAbilityText || recursiveAbility)
+                        && card.getAbilities().stream().noneMatch(x -> x instanceof LevelUpAbility)) { // Targeting Level Up abilities' text is put in the power-toughness setting effect
+                    fail(card, "abilities", "wrong target settings (must be targeted, but is not):" + ability.getClass().getSimpleName());
+                }
+                if (!needTargetedAbility && foundTargetedAbility
+                        && !(ability instanceof SpellAbility && abilityText.equals("") && card.getSubtype().contains(SubType.AURA)) // Auras' SpellAbility targets, not the EnchantAbility
+                        && !(ability instanceof SpellAbility && (recursiveTargetAbilityCheck(card.getSpellAbility(), 0))) // SurgeAbility is a modified copy of the main SpellAbility, so it targets
+                        && !(ability instanceof SpellTransformedAbility)) { // DisturbAbility targets if the backside aura targets
+                    fail(card, "abilities", "wrong target settings (targeted ability found but no target in text):" + ability.getClass().getSimpleName());
                 }
             }
-        }
-
-        boolean needTargetedAbility = targetedKeywords.stream().anyMatch(refLowerText::contains);
-        boolean foundTargetedAbility = card.getAbilities()
-                .stream()
-                .map(Ability::getTargets)
-                .flatMap(Collection::stream)
-                .anyMatch(target -> !target.isNotTarget());
-        boolean foundProblem = needTargetedAbility != foundTargetedAbility;
-        if (checkMissTargeted && needTargetedAbility && foundProblem) {
-            fail(card, "abilities", "wrong target settings (must be targeted, but it not)");
-        }
-        if (checkMissNonTargeted && !needTargetedAbility && foundProblem) {
-            fail(card, "abilities", "wrong target settings (must set withNotTarget(true), but it not)");
+            // Also check that the reference text and the final ability text have the same number of "target"
+            String preparedRefText = refLowerText.replaceAll("\\([^)]+\\)", ""); // Remove reminder text
+            int refTargetCount = (preparedRefText.length() - preparedRefText.replace("target", "").length());
+            String preparedRuleText = cardLowerText.replaceAll("\\([^)]+\\)", "");
+            if (!ref.subtypes.contains("Adventure") && !ref.subtypes.contains("Omen")) {
+                preparedRuleText = preparedRuleText.replaceAll("^(adventure|omen).*", "");
+            }
+            int cardTargetCount = (preparedRuleText.length() - preparedRuleText.replace("target", "").length());
+            if (refTargetCount != cardTargetCount) {
+                fail(card, "abilities", "target count text discrepancy: " + (refTargetCount / 6) + " in reference but " + (cardTargetCount / 6) + " in card.");
+            }
         }
 
         // special check: missing or wrong ability/effect rules hint
@@ -2276,6 +2522,19 @@ public class VerifyCardDataTest {
             }
         });
 
+        // special check: target tags must be used for all targets and starts with 1
+        card.getAbilities().stream().filter(a -> a.getTargets().size() >= 2).forEach(a -> {
+            Set<Integer> tags = a.getTargets().stream().map(Target::getTargetTag).collect(Collectors.toSet());
+            if (tags.size() == 1 && tags.stream().findFirst().get().equals(0)) {
+                // no tags usage
+                return;
+            }
+            if (tags.size() != a.getTargets().size() || (tags.size() > 1 && tags.contains(0))) {
+                // how-to fix: make sure each target has it's own target tag like 1 and 2 (don't use 0 because it's default)
+                fail(card, "abilities", "wrong target tags: miss tag in one of the targets, current list: " + tags);
+            }
+        });
+
         // spells have only 1 ability
         if (card.isInstantOrSorcery()) {
             return;
@@ -2324,6 +2583,7 @@ public class VerifyCardDataTest {
     private static final List<SubType> selfRefNamedSubtypes = Arrays.asList(
             SubType.EQUIPMENT,
             SubType.VEHICLE,
+            SubType.SPACECRAFT,
             SubType.AURA,
             SubType.CLASS,
             SubType.SAGA,
@@ -2901,6 +3161,11 @@ public class VerifyCardDataTest {
             return;
         }
 
+        // Spacecraft are ignored as they shouldn't have a printed power/toughness but they do in the data
+        if (ref.subtypes.contains("Spacecraft")) {
+            return;
+        }
+
         if (!eqPT(card.getPower().toString(), ref.power) || !eqPT(card.getToughness().toString(), ref.toughness)) {
             String pt = card.getPower() + "/" + card.getToughness();
             String expected = ref.power + '/' + ref.toughness;
@@ -3090,7 +3355,7 @@ public class VerifyCardDataTest {
     }
 
     @Test
-    public void test_checkCardsInCubes() {
+    public void test_checkCardsInCubes() throws Exception {
         Reflections reflections = new Reflections("mage.tournament.cubes.");
         Set<Class<? extends DraftCube>> cubesList = reflections.getSubTypesOf(DraftCube.class);
         Assert.assertFalse("Can't find any cubes", cubesList.isEmpty());
@@ -3103,7 +3368,24 @@ public class VerifyCardDataTest {
                 continue;
             }
 
-            DraftCube cube = (DraftCube) createNewObject(cubeClass);
+            // cube from deck must use real deck to check complete
+            DraftCube cube;
+            if (cubeClass.isAssignableFrom(CubeFromDeck.class)) {
+                DeckCardLists deckCardLists = new DeckCardLists();
+                deckCardLists.setCards(Arrays.asList(
+                        new DeckCardInfo("Adanto Vanguard", "1", "XLN"),
+                        new DeckCardInfo("Boneyard Parley", "94", "XLN"),
+                        new DeckCardInfo("Forest", "276", "XLN")
+                ));
+                Deck deck = Deck.load(deckCardLists, true);
+                Constructor<?> con = cubeClass.getConstructor(Deck.class);
+                cube = (DraftCube) con.newInstance(deck);
+                Assert.assertFalse(deckCardLists.getCards().isEmpty());
+                Assert.assertEquals("deck must be loaded to cube", cube.getCubeCards().size(), deckCardLists.getCards().size());
+                Assert.assertTrue("cube's name must contains cards count", cube.getName().contains(deckCardLists.getCards().size() + " cards"));
+            } else {
+                cube = (DraftCube) createNewObject(cubeClass);
+            }
             if (cube.getCubeCards().isEmpty()) {
                 errorsList.add("Error: broken cube, empty cards list: " + cube.getClass().getCanonicalName());
             }
@@ -3220,5 +3502,80 @@ public class VerifyCardDataTest {
                         + sorted.stream().map(cn -> "cn%3A" + cn).collect(Collectors.joining("+or+"))
                         + "%29&order=set&as=grid&unique=cards"
         );
+    }
+
+    /**
+     * Helper test to download infinite combos data and prepare it to use in Commander Brackets score system
+     * <p>
+     * How-to use: run it before each main release and upload updated files to github
+     */
+    @Ignore
+    @Test
+    public void downloadAndPrepareCommanderBracketsData() {
+        // download data
+        // load data by pages, max limit = 100, no needs to setup it, ~2000 combos or 20 pages
+        String nextUrl = "https://backend.commanderspellbook.com/variants?format=json&group_by_combo=true&ordering=created&q=cards%3D2+result%3Ainfinite";
+        SpellBookCardsPage page;
+        int pageNumber = 0;
+        List<String> allCombos = new ArrayList<>();
+        while (nextUrl != null && !nextUrl.isEmpty()) {
+            pageNumber++;
+            System.out.println("downloading page " + pageNumber);
+            String res = XmageURLConnection.downloadText(nextUrl);
+            page = new Gson().fromJson(res, SpellBookCardsPage.class);
+            if (page == null || page.results == null) {
+                System.out.println("ERROR, unknown data format: " + res.substring(0, 10) + "...");
+                return;
+            }
+            page.results.forEach(combo -> {
+                if (combo.uses.isEmpty()) {
+                    System.out.println("wrong combo uses: " + combo.uses);
+                    return;
+                }
+                // Stella Lee, Wild Card - can generate infinite combo by itself, so allow 1 card
+                String card1 = combo.uses.get(0).card.name;
+                String card2 = combo.uses.size() == 1 ? card1 : combo.uses.get(1).card.name;
+                if (card1 != null && card2 != null) {
+                    allCombos.add(String.format("%s@%s", card1, card2));
+                }
+            });
+
+            nextUrl = page.next;
+        }
+
+        // save results (run from Mage.Verify)
+        File destFile = new TFile("..\\Mage\\src\\main\\resources\\brackets\\infinite-combos.txt");
+        if (!destFile.exists()) {
+            System.out.println("Can't find dest file " + destFile);
+            return;
+        }
+
+        List<String> infiniteCombosRes;
+        try {
+            infiniteCombosRes = Files.readAllLines(destFile.toPath(), StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            System.out.println("Can't read file " + destFile + " " + e);
+            return;
+        }
+
+        // replace all cards data, but keep comments
+        infiniteCombosRes.removeIf(s -> !s.startsWith("#")
+                || s.startsWith("# Source")
+                || s.startsWith("# Updated")
+                || s.startsWith("# Found")
+        );
+        infiniteCombosRes.add(String.format("# Source: %s", "https://commanderspellbook.com"));
+        infiniteCombosRes.add(String.format("# Updated: %s", LocalDate.now().format(DateTimeFormatter.ISO_DATE)));
+        infiniteCombosRes.add(String.format("# Found: %d", allCombos.size()));
+        infiniteCombosRes.addAll(allCombos); // do not sort, all new combos will be added to the end due spell book default order
+
+        try {
+            Files.write(destFile.toPath(), infiniteCombosRes, StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            System.out.println("Can't write file " + destFile + " " + e);
+            return;
+        }
+
+        System.out.println(String.format("ALL DONE, found and write %d combos", allCombos.size()));
     }
 }

@@ -1,8 +1,7 @@
 package mage.cards.g;
 
 import mage.MageInt;
-import mage.abilities.common.PutIntoGraveFromAnywhereSourceAbility;
-import mage.abilities.effects.common.ExileSourceEffect;
+import mage.abilities.keyword.DisturbAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
@@ -29,7 +28,7 @@ public final class GenerousSoul extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // If Generous Soul would be put into a graveyard from anywhere, exile it instead.
-        this.addAbility(new PutIntoGraveFromAnywhereSourceAbility(new ExileSourceEffect().setText("exile it instead")));
+        this.addAbility(DisturbAbility.makeBackAbility());
     }
 
     private GenerousSoul(final GenerousSoul card) {

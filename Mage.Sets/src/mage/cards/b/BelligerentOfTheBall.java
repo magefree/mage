@@ -2,12 +2,11 @@ package mage.cards.b;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.common.CelebrationCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.MenaceAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
@@ -32,16 +31,10 @@ public final class BelligerentOfTheBall extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Celebration -- At the beginning of combat on your turn, if two or more nonland permanents entered the battlefield under your control this turn, target creature you control gets +1/+0 and gains menace until end of turn.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfCombatTriggeredAbility(
-                        new BoostTargetEffect(1, 0)
-                ),
-                CelebrationCondition.instance, "At the beginning of combat on your turn, if two or more nonland "
-                + "permanents entered the battlefield under your control this turn, target creature you control "
-                + "gets +1/+0 and gains menace until end of turn."
-                + " <i>(It can't be blocked except by two or more creatures.)</i>"
-        );
-        ability.addEffect(new GainAbilityTargetEffect(new MenaceAbility(false)));
+        Ability ability = new BeginningOfCombatTriggeredAbility(new BoostTargetEffect(1, 0)
+                .setText("target creature you control gets +1/+0")).withInterveningIf(CelebrationCondition.instance);
+        ability.addEffect(new GainAbilityTargetEffect(new MenaceAbility(false))
+                .setText("and gains menace until end of turn"));
         ability.addTarget(new TargetControlledCreaturePermanent());
         ability.setAbilityWord(AbilityWord.CELEBRATION);
         ability.addHint(CelebrationCondition.getHint());

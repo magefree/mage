@@ -1,7 +1,9 @@
 package mage.target.common;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.cards.Card;
+import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
@@ -53,7 +55,7 @@ public class TargetCardInHand extends TargetCard {
 
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
-        return this.canTarget(source.getControllerId(), id, source, game);
+        return this.canTarget(source == null ? null : source.getControllerId(), id, source, game);
     }
 
     @Override
@@ -61,30 +63,16 @@ public class TargetCardInHand extends TargetCard {
         Set<UUID> possibleTargets = new HashSet<>();
         Player player = game.getPlayer(sourceControllerId);
         if (player != null) {
-            for (Card card : player.getHand().getCards(filter, sourceControllerId, source, game)) {
-                if (source == null || source.getSourceId() == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, source.getSourceId(), sourceControllerId))) {
-                    possibleTargets.add(card.getId());
-                }
-            }
-        }
-        return possibleTargets;
+            player.getHand().getCards(filter, sourceControllerId, source, game).stream()
+                    .map(MageObject::getId)
+                    .forEach(possibleTargets::add);
+        };
+        return keepValidPossibleTargets(possibleTargets, sourceControllerId, source, game);
     }
 
     @Override
     public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
-        int possibleTargets = 0;
-        Player player = game.getPlayer(sourceControllerId);
-        if (player != null) {
-            for (Card card : player.getHand().getCards(filter, sourceControllerId, source, game)) {
-                if (source == null || source.getSourceId() == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, source.getSourceId(), sourceControllerId))) {
-                    possibleTargets++;
-                    if (possibleTargets >= this.minNumberOfTargets) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
+        return canChooseFromPossibleTargets(sourceControllerId, source, game);
     }
 
     @Override

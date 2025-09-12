@@ -23,6 +23,8 @@ import java.util.UUID;
  */
 public final class AccursedWitch extends CardImpl {
 
+    private static final FilterCard filter = new FilterCard("spells");
+
     public AccursedWitch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.subtype.add(SubType.HUMAN);
@@ -34,7 +36,7 @@ public final class AccursedWitch extends CardImpl {
 
         // Spells your opponents cast that target Accursed Witch cost {1} less to cast.
         this.addAbility(new SimpleStaticAbility(
-                new SpellsCostModificationThatTargetSourceEffect(-1, new FilterCard("Spells"), TargetController.OPPONENT))
+                new SpellsCostModificationThatTargetSourceEffect(-1, filter, TargetController.OPPONENT))
         );
 
         // When Accursed Witch dies, return it to the battlefield transformed under your control attached to target opponent.

@@ -20,7 +20,7 @@ public enum ConvokedSourceCount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return CardUtil.getSourceCostsTag(game, sourceAbility, ConvokeAbility.convokingCreaturesKey, new HashSet<>(0)).size();
+        return CardUtil.getSourceCostsTag(game, sourceAbility, ConvokeAbility.convokingCreaturesKey, new HashSet<>()).size();
     }
 
     @Override

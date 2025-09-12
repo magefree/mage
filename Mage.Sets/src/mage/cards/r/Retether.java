@@ -87,7 +87,7 @@ class RetetherEffect extends OneShotEffect {
                                 for (Ability ability : aura.getAbilities()) {
                                     if (ability instanceof SpellAbility) {
                                         for (Target abilityTarget : ability.getTargets()) {
-                                            if (abilityTarget.possibleTargets(controller.getId(), game).contains(permanent.getId())) {
+                                            if (abilityTarget.possibleTargets(controller.getId(), source, game).contains(permanent.getId())) {
                                                 target = abilityTarget.copy();
                                                 break auraLegalitySearch;
                                             }

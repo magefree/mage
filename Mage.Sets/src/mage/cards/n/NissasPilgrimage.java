@@ -1,7 +1,6 @@
 
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.abilities.condition.common.SpellMasteryCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutOntoBattlefieldTappedRestInHandEffect;
@@ -9,22 +8,18 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.filter.FilterCard;
+import mage.filter.common.FilterBasicCard;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class NissasPilgrimage extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("basic Forest cards");
-
-    static {
-        filter.add(SuperType.BASIC.getPredicate());
-        filter.add(SubType.FOREST.getPredicate());
-    }
+    private static final FilterCard filter = new FilterBasicCard(SubType.FOREST, "basic Forest cards");
 
     public NissasPilgrimage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");

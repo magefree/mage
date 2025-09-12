@@ -47,7 +47,7 @@ public final class SharpshooterElf extends CardImpl {
 
         // Sharpshooter Elf's power is equal to the number of creatures you control.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SetBasePowerSourceEffect(CreaturesYouControlCount.instance)
+                Zone.ALL, new SetBasePowerSourceEffect(CreaturesYouControlCount.PLURAL)
         ));
 
         // When Sharpshooter Elf enters the battlefield, it deals damage equal to its power to target creature with flying an opponent controls.

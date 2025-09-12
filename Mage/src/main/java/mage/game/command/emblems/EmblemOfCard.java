@@ -29,11 +29,11 @@ public final class EmblemOfCard extends Emblem {
             String setCode,
             String infoTypeForError
     ) {
-        int cardNumberInt = CardUtil.parseCardNumberAsInt(cardNumber);
+        int intCardNumber = CardUtil.parseCardNumberAsInt(cardNumber);
         List<CardInfo> found = CardRepository.instance.findCards(new CardCriteria()
                 .name(cardName)
-                .minCardNumber(cardNumberInt)
-                .maxCardNumber(cardNumberInt)
+                .minCardNumber(intCardNumber)
+                .maxCardNumber(intCardNumber)
                 .setCodes(setCode));
         return found.stream()
                 .filter(ci -> ci.getCardNumber().equals(cardNumber))

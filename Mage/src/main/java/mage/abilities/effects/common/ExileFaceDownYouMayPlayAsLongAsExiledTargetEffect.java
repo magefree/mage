@@ -73,7 +73,7 @@ public class ExileFaceDownYouMayPlayAsLongAsExiledTargetEffect extends OneShotEf
             return false;
         }
         // move card to exile
-        UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+        UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getStackMomentSourceZCC());
         MageObject sourceObject = source.getSourceObject(game);
         String exileName = sourceObject == null ? "" : sourceObject.getIdName();
         for (Card card : cards.getCards(game)) {

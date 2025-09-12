@@ -47,7 +47,6 @@ public final class ChandraRoaringFlame extends CardImpl {
 
         //-7: Chandra, Roaring Flame deals 6 damage to each opponent.  Each player dealt damage this way gets an emblem with "At the beginning of your upkeep, this emblem deals 3 damage to you."
         this.addAbility(new LoyaltyAbility(new ChandraRoaringFlameEmblemEffect(), -7));
-
     }
 
     private ChandraRoaringFlame(final ChandraRoaringFlame card) {
@@ -79,19 +78,18 @@ class ChandraRoaringFlameEmblemEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            List<Player> opponentsEmblem = new ArrayList<>();
-            for (UUID playerId : game.getOpponents(controller.getId())) {
-                Player opponent = game.getPlayer(playerId);
-                if (opponent != null) {
-                    if (opponent.damage(6, source.getSourceId(), source, game) > 0) {
-                        opponentsEmblem.add(opponent);
-                    }
-                }
+        if (controller == null) {
+            return false;
+        }
+        List<Player> opponentsEmblem = new ArrayList<>();
+        for (UUID playerId : game.getOpponents(controller.getId())) {
+            Player opponent = game.getPlayer(playerId);
+            if (opponent != null && opponent.damage(6, source, game) > 0) {
+                opponentsEmblem.add(opponent);
             }
-            for (Player opponent : opponentsEmblem) {
-                game.addEmblem(new ChandraRoaringFlameEmblem(), source.getSourceObject(game), opponent.getId());
-            }
+        }
+        for (Player opponent : opponentsEmblem) {
+            game.addEmblem(new ChandraRoaringFlameEmblem(), source.getSourceObject(game), opponent.getId());
         }
         return false;
     }

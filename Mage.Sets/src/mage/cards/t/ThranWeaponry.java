@@ -1,7 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SkipUntapOptionalAbility;
@@ -13,9 +12,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -52,7 +52,7 @@ class ThranWeaponryEffect extends BoostAllEffect{
 
     public ThranWeaponryEffect() {
         super(2, 2, Duration.WhileOnBattlefield);
-        staticText = "All creatures get +2/+2 for as long as Thran Weaponry remains tapped";
+        staticText = "All creatures get +2/+2 for as long as {this} remains tapped";
     }
 
     private ThranWeaponryEffect(final ThranWeaponryEffect effect) {

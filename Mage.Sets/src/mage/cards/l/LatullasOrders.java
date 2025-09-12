@@ -15,7 +15,7 @@ import mage.constants.SubType;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.DamagedPlayerControlsTargetAdjuster;
+import mage.target.targetadjustment.ThatPlayerControlsTargetAdjuster;
 
 import java.util.UUID;
 
@@ -45,7 +45,7 @@ public final class LatullasOrders extends CardImpl {
                 new DestroyTargetEffect(), "enchanted creature", true, true
         ).setTriggerPhrase("Whenever enchanted creature deals combat damage to defending player, ");
         ability.addTarget(new TargetPermanent(filter));
-        ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
+        ability.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster());
         this.addAbility(ability);
     }
 

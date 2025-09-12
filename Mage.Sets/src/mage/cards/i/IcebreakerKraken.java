@@ -4,22 +4,18 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.ReturnToHandChosenControlledPermanentCost;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.AffinityEffect;
 import mage.abilities.effects.common.DontUntapInPlayersNextUntapStepAllEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
-import mage.abilities.hint.Hint;
-import mage.abilities.hint.ValueHint;
+import mage.abilities.keyword.AffinityAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AffinityType;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -39,8 +35,6 @@ public final class IcebreakerKraken extends CardImpl {
         filter.add(SuperType.SNOW.getPredicate());
     }
 
-    private static final Hint hint = new ValueHint("Snow lands you control", new PermanentsOnBattlefieldCount(filter));
-
     public IcebreakerKraken(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{10}{U}{U}");
 
@@ -49,8 +43,8 @@ public final class IcebreakerKraken extends CardImpl {
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
 
-        // This spell costs {1} less to cast for each snow land you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new AffinityEffect(filter)).addHint(hint));
+        // Affinity for snow lands
+        this.addAbility(new AffinityAbility(AffinityType.SNOW_LANDS));
 
         // When Icebreaker Kraken enters the battlefield, artifacts and creatures target opponent controls don't untap during that player's next untap step.
         Effect effect = new DontUntapInPlayersNextUntapStepAllEffect(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE);

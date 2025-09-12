@@ -1,5 +1,3 @@
-
-
 package mage.server.tournament;
 
 import mage.cards.Sets;
@@ -15,7 +13,6 @@ import java.lang.reflect.Constructor;
 import java.util.*;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public enum TournamentFactory {
@@ -27,7 +24,6 @@ public enum TournamentFactory {
     private final List<TournamentTypeView> tournamentTypeViews = new ArrayList<>();
 
 
-
     public Tournament createTournament(String tournamentType, TournamentOptions options) {
 
         Tournament tournament;
@@ -37,8 +33,8 @@ public enum TournamentFactory {
             // transfer set information, create short info string for included sets
             tournament.setTournamentType(tournamentTypes.get(tournamentType));
             if (tournament.getTournamentType().isLimited()) {
-                Map<String,Integer> setInfo = new LinkedHashMap<>();
-                for (String setCode: options.getLimitedOptions().getSetCodes()) {
+                Map<String, Integer> setInfo = new LinkedHashMap<>();
+                for (String setCode : options.getLimitedOptions().getSetCodes()) {
                     tournament.getSets().add(Sets.findSet(setCode));
                     int count = setInfo.getOrDefault(setCode, 0);
                     setInfo.put(setCode, count + 1);
@@ -52,25 +48,31 @@ public enum TournamentFactory {
                     } else {
                         draftCube = CubeFactory.instance.createDraftCube(tournament.getOptions().getLimitedOptions().getDraftCubeName());
                     }
-                    tournament.getOptions().getLimitedOptions().setDraftCube(draftCube);
-                    tournament.setBoosterInfo(tournament.getOptions().getLimitedOptions().getDraftCubeName());
+                    String boosterInfo = "";
+                    if (draftCube != null) {
+                        // make sure all loaded (will raise error on empty cards list)
+                        draftCube.validateData();
+                        tournament.getOptions().getLimitedOptions().setDraftCube(draftCube);
+                        boosterInfo = draftCube.getName();
+                    }
+                    tournament.setBoosterInfo(boosterInfo);
                 } else if (tournament.getTournamentType().isRandom()) {
-                    StringBuilder rv = new StringBuilder( "Chaos Draft using sets: ");
-                    for (Map.Entry<String, Integer> entry: setInfo.entrySet()){
+                    StringBuilder rv = new StringBuilder("Chaos Draft using sets: ");
+                    for (Map.Entry<String, Integer> entry : setInfo.entrySet()) {
                         rv.append(entry.getKey());
                         rv.append(';');
                     }
                     tournament.setBoosterInfo(rv.toString());
                 } else if (tournament.getTournamentType().isReshuffled()) {
-                    StringBuilder rv = new StringBuilder( "Chaos Reshuffled Draft using sets: ");
-                    for (Map.Entry<String, Integer> entry: setInfo.entrySet()){
+                    StringBuilder rv = new StringBuilder("Chaos Reshuffled Draft using sets: ");
+                    for (Map.Entry<String, Integer> entry : setInfo.entrySet()) {
                         rv.append(entry.getKey());
                         rv.append(';');
                     }
                     tournament.setBoosterInfo(rv.toString());
                 } else {
                     StringBuilder sb = new StringBuilder();
-                    for (Map.Entry<String,Integer> entry:setInfo.entrySet()) {
+                    for (Map.Entry<String, Integer> entry : setInfo.entrySet()) {
                         sb.append(entry.getValue().toString()).append('x').append(entry.getKey()).append(' ');
                     }
                     tournament.setBoosterInfo(sb.toString());
@@ -78,12 +80,9 @@ public enum TournamentFactory {
             } else {
                 tournament.setBoosterInfo("");
             }
-
-        } catch (Exception ex) {
-            logger.fatal("TournamentFactory error ", ex);
-            return null;
+        } catch (Exception e) {
+            throw new IllegalStateException("Can't create new tourney: " + e, e);
         }
-        logger.debug("Tournament created: " + tournamentType + ' ' + tournament.getId());
 
         return tournament;
     }
@@ -94,7 +93,7 @@ public enum TournamentFactory {
 
 
     public void addTournamentType(String name, TournamentType tournamentType, Class tournament) {
-        if (tournament != null) {
+        if (tournamentType != null && tournament != null) {
             this.tournaments.put(name, tournament);
             this.tournamentTypes.put(name, tournamentType);
             this.tournamentTypeViews.add(new TournamentTypeView(tournamentType));

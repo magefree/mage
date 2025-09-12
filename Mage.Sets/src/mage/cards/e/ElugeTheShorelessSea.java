@@ -118,7 +118,7 @@ class ElugeTheShorelessSeaEffect extends BecomesBasicLandTargetEffect {
 
     ElugeTheShorelessSeaEffect() {
         super(Duration.Custom, false, false, SubType.ISLAND);
-        staticText = "It's an land is an Island in addition to its other types for as long as it has a flood counter on it";
+        staticText = "It's an Island in addition to its other types for as long as it has a flood counter on it";
     }
 
     private ElugeTheShorelessSeaEffect(final ElugeTheShorelessSeaEffect effect) {

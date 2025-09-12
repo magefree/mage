@@ -16,4 +16,9 @@ public enum LandfallCondition implements Condition {
         LandfallWatcher watcher = game.getState().getWatcher(LandfallWatcher.class);
         return watcher != null && watcher.landPlayed(source.getControllerId());
     }
+
+    @Override
+    public String toString() {
+        return "you had a land enter the battlefield under your control this turn";
+    }
 }

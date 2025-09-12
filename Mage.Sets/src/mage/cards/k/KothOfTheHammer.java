@@ -41,7 +41,7 @@ public final class KothOfTheHammer extends CardImpl {
 
         // +1: Untap target Mountain. It becomes a 4/4 red Elemental creature until end of turn. It's still a land.
         Ability ability = new LoyaltyAbility(new UntapTargetEffect(), 1);
-        ability.addEffect(new BecomesCreatureTargetEffect(new KothOfTheHammerToken(), false, true, Duration.EndOfTurn));
+        ability.addEffect(new BecomesCreatureTargetEffect(new KothOfTheHammerToken(), false, true, Duration.EndOfTurn).withTargetDescription("It"));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
@@ -65,7 +65,7 @@ public final class KothOfTheHammer extends CardImpl {
 class KothOfTheHammerToken extends TokenImpl {
 
     public KothOfTheHammerToken() {
-        super("Elemental", "4/4 red Elemental");
+        super("Elemental", "4/4 red Elemental creature");
         this.cardType.add(CardType.CREATURE);
         this.subtype.add(SubType.ELEMENTAL);
 

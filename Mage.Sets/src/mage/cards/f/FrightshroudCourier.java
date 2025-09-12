@@ -20,6 +20,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -49,7 +50,7 @@ public final class FrightshroudCourier extends CardImpl {
         ability.addEffect(new ConditionalContinuousEffect(new GainAbilityTargetEffect(FearAbility.getInstance(),
             Duration.Custom), SourceTappedCondition.TAPPED,"and has fear for as long as {this} remains tapped"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

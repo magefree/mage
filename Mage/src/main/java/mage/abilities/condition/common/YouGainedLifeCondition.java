@@ -32,6 +32,6 @@ public class YouGainedLifeCondition extends IntCompareCondition {
 
     @Override
     public String toString() {
-        return "if you gained " + (value == 0 ? "" : (value + 1) + " or more ") + "life this turn";
+        return "you gained " + (value == 0 ? "" : (value + 1) + " or more ") + "life this turn";
     }
 }

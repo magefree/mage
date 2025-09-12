@@ -68,7 +68,7 @@ class LifecraftEngineAddSubTypeAllEffect extends ContinuousEffectImpl {
     public LifecraftEngineAddSubTypeAllEffect() {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
 
-        staticText = "Vehicle creatures you control are the chosen type in addition to their other types.";
+        staticText = "Vehicle creatures you control are the chosen creature type in addition to their other types.";
     }
 
     private LifecraftEngineAddSubTypeAllEffect(final LifecraftEngineAddSubTypeAllEffect effect) {

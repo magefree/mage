@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import mage.abilities.Ability;
@@ -18,11 +17,11 @@ import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
-import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
- *
  * @author spjspj
  */
 public final class AuramancersGuise extends CardImpl {
@@ -36,16 +35,16 @@ public final class AuramancersGuise extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget);
-        this.addAbility(ability);
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted creature gets +2/+2 for each Aura attached to it and has vigilance.
-        DynamicValue ptBoost = new EnchantedCreatureAurasCount();
-        BoostEnchantedEffect effect = new BoostEnchantedEffect(ptBoost, ptBoost, Duration.WhileOnBattlefield);
-        effect.setText("Enchanted creature gets +2/+2 for each Aura attached to it");
-        SimpleStaticAbility ability2 = new SimpleStaticAbility(effect);
-        ability2.addEffect(new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.AURA).setText("and has vigilance"));
-        this.addAbility(ability2);
+        Ability ability = new SimpleStaticAbility(new BoostEnchantedEffect(
+                AuramancersGuiseValue.instance, AuramancersGuiseValue.instance, Duration.WhileOnBattlefield
+        ));
+        ability.addEffect(new GainAbilityAttachedEffect(
+                VigilanceAbility.getInstance(), AttachmentType.AURA
+        ).setText("and has vigilance"));
+        this.addAbility(ability);
     }
 
     private AuramancersGuise(final AuramancersGuise card) {
@@ -58,48 +57,40 @@ public final class AuramancersGuise extends CardImpl {
     }
 }
 
-class EnchantedCreatureAurasCount implements DynamicValue {
-
-    public EnchantedCreatureAurasCount() {
-    }
-
-    private EnchantedCreatureAurasCount(final EnchantedCreatureAurasCount dynamicValue) {
-    }
+enum AuramancersGuiseValue implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        int count = 0;
-        Permanent aura = game.getPermanent(sourceAbility.getSourceId());
-        if (aura != null) {
-            Permanent permanent = game.getPermanent(aura.getAttachedTo());
-            if (permanent != null) {
-                List<UUID> attachments = permanent.getAttachments();
-                for (UUID attachmentId : attachments) {
-                    Permanent attached = game.getPermanent(attachmentId);
-                    if (attached != null && attached.hasSubtype(SubType.AURA, game)) {
-                        count++;
-                    }
-
-                }
-                return 2 * count;
-            }
-        }
-        return count;
+        Permanent permanent = Optional
+                .ofNullable(sourceAbility.getSourcePermanentIfItStillExists(game))
+                .map(Permanent::getAttachedTo)
+                .map(game::getPermanent)
+                .orElse(null);
+        return permanent != null
+                ? 2 * permanent
+                .getAttachments()
+                .stream()
+                .map(game::getPermanent)
+                .filter(Objects::nonNull)
+                .filter(p -> p.hasSubtype(SubType.AURA, game))
+                .mapToInt(x -> 1)
+                .sum()
+                : 0;
     }
 
     @Override
-    public EnchantedCreatureAurasCount copy() {
-        return new EnchantedCreatureAurasCount(this);
-    }
-
-    @Override
-    public String toString() {
-        return "1";
+    public AuramancersGuiseValue copy() {
+        return this;
     }
 
     @Override
     public String getMessage() {
-        return "of its auras";
+        return "for each Aura attached to it";
     }
 
+    @Override
+    public String toString() {
+        return "2";
+    }
 }

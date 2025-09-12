@@ -27,4 +27,9 @@ public enum RevealedOrControlledDragonCondition implements Condition {
                 = game.getState().getWatcher(DragonOnTheBattlefieldWhileSpellWasCastWatcher.class);
         return watcher != null && watcher.checkCondition(source, game);
     }
+
+    @Override
+    public String toString() {
+        return "you revealed a Dragon card or controlled a Dragon as you cast this spell";
+    }
 }

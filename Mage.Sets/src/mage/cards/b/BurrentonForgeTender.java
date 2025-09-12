@@ -11,7 +11,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterObject;
+import mage.filter.FilterSource;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
 import java.util.UUID;
@@ -21,10 +21,10 @@ import java.util.UUID;
  */
 public final class BurrentonForgeTender extends CardImpl {
 
-    private static final FilterObject filterObject = new FilterObject("a red");
+    private static final FilterSource filter = new FilterSource("a red source");
 
     static {
-        filterObject.add(new ColorPredicate(ObjectColor.RED));
+        filter.add(new ColorPredicate(ObjectColor.RED));
     }
 
     public BurrentonForgeTender(UUID ownerId, CardSetInfo setInfo) {
@@ -38,7 +38,7 @@ public final class BurrentonForgeTender extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.RED));
 
         // Sacrifice Burrenton Forge-Tender: Prevent all damage a red source of your choice would deal this turn.
-        this.addAbility(new SimpleActivatedAbility(new PreventDamageByChosenSourceEffect(filterObject), new SacrificeSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new PreventDamageByChosenSourceEffect(filter), new SacrificeSourceCost()));
 
     }
 

@@ -61,7 +61,7 @@ class MogisGodOfSlaughterEffect extends OneShotEffect {
 
     MogisGodOfSlaughterEffect() {
         super(Outcome.Damage);
-        staticText = "{this} deals 2 damage to that player unless they sacrifice a creature";
+        staticText = "{this} deals 2 damage to that player unless they sacrifice a creature of their choice";
     }
 
     private MogisGodOfSlaughterEffect(final MogisGodOfSlaughterEffect effect) {

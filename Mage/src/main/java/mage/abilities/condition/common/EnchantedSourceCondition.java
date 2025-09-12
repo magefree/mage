@@ -1,17 +1,17 @@
 
 package mage.abilities.condition.common;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author North
  */
 public class EnchantedSourceCondition implements Condition {
@@ -51,6 +51,6 @@ public class EnchantedSourceCondition implements Condition {
 
     @Override
     public String toString() {
-        return "enchanted";
+        return "{this} is enchanted" + (numberOfEnchantments > 1 ? " by " + CardUtil.numberToText(numberOfEnchantments) + " or more Auras" : "");
     }
 }

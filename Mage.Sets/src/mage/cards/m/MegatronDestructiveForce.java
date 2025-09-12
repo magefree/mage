@@ -79,7 +79,7 @@ class MegatronDestructiveForceEffect extends OneShotEffect {
             return false;
         }
         TargetSacrifice target = new TargetSacrifice(
-            0, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_ARTIFACT
+                0, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_ARTIFACT
         );
         player.choose(outcome, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
@@ -93,7 +93,7 @@ class MegatronDestructiveForceEffect extends OneShotEffect {
         }
 
         ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
-            new MegatronDestructiveForceReflexiveEffect(manaValue), false
+                new MegatronDestructiveForceReflexiveEffect(manaValue), false
         );
         ability.addHint(new StaticHint("Sacrificed artifact mana value: " + manaValue));
         ability.addTarget(new TargetCreaturePermanent());
@@ -109,8 +109,8 @@ class MegatronDestructiveForceReflexiveEffect extends OneShotEffect {
     MegatronDestructiveForceReflexiveEffect(int value) {
         super(Outcome.Damage);
         staticText = "{this} deals damage equal to the sacrificed artifact's mana value to target " +
-            "creature. If excess damage would be dealt to that creature this way, instead that damage " +
-            "is dealt to that creature's controller and you convert {this}.";
+                "creature. If excess damage would be dealt to that creature this way, instead that damage " +
+                "is dealt to that creature's controller and you convert {this}.";
         this.value = value;
     }
 
@@ -126,36 +126,22 @@ class MegatronDestructiveForceReflexiveEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent sourcePermanent = source.getSourcePermanentOrLKI(game);
-        if (sourcePermanent == null) {
-            return false;
-        }
-
         if (value < 1) {
             return false;
         }
-
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent == null) {
             return false;
         }
-
-        int lethal = permanent.getLethalDamage(source.getSourceId(), game);
-        int excess = value - lethal;
-        if (excess <= 0) {
-            // no excess damage.
-            permanent.damage(value, source.getSourceId(), source, game);
+        int excess = permanent.damageWithExcess(value, source, game);
+        if (excess < 1) {
             return true;
         }
-
-        // excess damage. dealing excess to controller's instead. And convert Megatron.
-        permanent.damage(lethal, source.getSourceId(), source, game);
         Player player = game.getPlayer(permanent.getControllerId());
         if (player != null) {
             player.damage(excess, source, game);
         }
         new TransformSourceEffect().apply(game, source);
-
         return true;
     }
 }

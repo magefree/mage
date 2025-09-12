@@ -7,9 +7,12 @@ import mage.abilities.Ability;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.filter.FilterObject;
+import mage.filter.FilterPermanent;
+import mage.filter.FilterSource;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.target.Target;
+import mage.target.TargetPermanent;
 import mage.target.TargetSource;
 
 /**
@@ -18,25 +21,30 @@ import mage.target.TargetSource;
 
 public class PreventDamageByChosenSourceEffect extends PreventionEffectImpl {
 
-    private TargetSource target;
+    private Target target;
     private MageObjectReference mageObjectReference;
 
     public PreventDamageByChosenSourceEffect() {
-        this(new FilterObject("a source"));
+        this(new FilterSource("a source"));
     }
 
-    public PreventDamageByChosenSourceEffect(FilterObject filterObject) {
-        this(filterObject, false);
+    public PreventDamageByChosenSourceEffect(FilterSource filterSource) {
+        this(filterSource, false);
     }
 
-    public PreventDamageByChosenSourceEffect(FilterObject filterObject, boolean onlyCombat) {
+    public PreventDamageByChosenSourceEffect(FilterSource filterSource, boolean onlyCombat) {
+        this(new TargetSource(filterSource), filterSource.getMessage(), onlyCombat);
+    }
+
+    public PreventDamageByChosenSourceEffect(FilterPermanent filterPermanent, boolean onlyCombat) {
+        this(new TargetPermanent(filterPermanent), filterPermanent.getMessage(), onlyCombat);
+    }
+
+    private PreventDamageByChosenSourceEffect(Target target, String filterMessage, boolean onlyCombat) {
         super(Duration.EndOfTurn, Integer.MAX_VALUE, onlyCombat);
-        if (!filterObject.getMessage().endsWith("source")) {
-            filterObject.setMessage(filterObject.getMessage() + " source");
-        }
-        this.target = new TargetSource(filterObject);
+        this.target = target;
         staticText = "Prevent all" + (onlyCombat ? " combat" : "")
-                + " damage " + filterObject.getMessage() + " of your choice would deal this turn";
+                + " damage " + filterMessage + " of your choice would deal this turn";
     }
 
     protected PreventDamageByChosenSourceEffect(final PreventDamageByChosenSourceEffect effect) {

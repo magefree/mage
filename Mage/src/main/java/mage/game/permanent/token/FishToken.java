@@ -11,14 +11,14 @@ import mage.constants.SubType;
 public final class FishToken extends TokenImpl {
 
     public FishToken() {
-        super("Fish Token", "1/1 blue Fish creature token with \"This creature can't be blocked.\"");
+        super("Fish Token", "1/1 blue Fish creature token with \"This token can't be blocked.\"");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.FISH);
         color.setBlue(true);
         power = new MageInt(1);
         toughness = new MageInt(1);
 
-        addAbility(new CantBeBlockedSourceAbility("this creature can't be blocked"));
+        addAbility(new CantBeBlockedSourceAbility("this token can't be blocked"));
     }
 
     private FishToken(final FishToken token) {

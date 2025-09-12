@@ -2,24 +2,16 @@ package mage.cards.r;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.AttackedThisTurnSourceCondition;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.AffinityEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.hint.Hint;
-import mage.abilities.hint.ValueHint;
+import mage.abilities.keyword.AffinityAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.common.FilterControlledPermanent;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.HumanSoldierToken;
@@ -32,9 +24,6 @@ import java.util.UUID;
  */
 public final class RidersOfTheMark extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.HUMAN, "Humans");
-    private static final Hint hint = new ValueHint("Humans you control", new PermanentsOnBattlefieldCount(filter));
-
     public RidersOfTheMark(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{R}");
 
@@ -43,8 +32,8 @@ public final class RidersOfTheMark extends CardImpl {
         this.power = new MageInt(7);
         this.toughness = new MageInt(4);
 
-        // This spell costs {1} less to cast for each Human you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new AffinityEffect(filter)).setRuleAtTheTop(true).addHint(hint));
+        // Affinity for Humans
+        this.addAbility(new AffinityAbility(AffinityType.HUMANS));
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());

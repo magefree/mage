@@ -1,15 +1,10 @@
-
 package mage.cards.f;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -21,6 +16,10 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.watchers.Watcher;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * @author spjspj
@@ -34,11 +33,10 @@ public final class FairgroundsTrumpeter extends CardImpl {
         this.toughness = new MageInt(2);
 
         // At the beginning of each end step, if a +1/+1 counter was put on a permanent under your control this turn, put a +1/+1 counter on Fairgrounds Trumpeter.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new BeginningOfEndStepTriggeredAbility(
-                        TargetController.ANY, new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                        false), FairgroundsTrumpeterCondition.instance,
-                        "At the beginning of each end step, if a +1/+1 counter was put on a permanent under your control this turn, put a +1/+1 counter on {this}."),
-                new FairgroundsTrumpeterWatcher());
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(
+                TargetController.ANY, new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
+                false, FairgroundsTrumpeterCondition.instance
+        ), new FairgroundsTrumpeterWatcher());
     }
 
     private FairgroundsTrumpeter(final FairgroundsTrumpeter card) {
@@ -52,7 +50,6 @@ public final class FairgroundsTrumpeter extends CardImpl {
 }
 
 enum FairgroundsTrumpeterCondition implements Condition {
-
     instance;
 
     @Override
@@ -63,7 +60,7 @@ enum FairgroundsTrumpeterCondition implements Condition {
 
     @Override
     public String toString() {
-        return "if a +1/+1 counter was put on a permanent under your control this turn";
+        return "a +1/+1 counter was put on a permanent under your control this turn";
     }
 
 }
@@ -97,5 +94,4 @@ class FairgroundsTrumpeterWatcher extends Watcher {
     public boolean p1p1AddedToPermanent(UUID playerId) {
         return players.contains(playerId);
     }
-
 }

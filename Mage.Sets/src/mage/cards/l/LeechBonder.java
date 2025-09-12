@@ -46,7 +46,7 @@ public final class LeechBonder extends CardImpl {
         // {U}, {untap}: Move a counter from target creature onto another target creature.
         Ability ability = new SimpleActivatedAbility(new MoveCounterTargetsEffect(), new ManaCostsImpl<>("{U}"));
         ability.addCost(new UntapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent().withChooseHint("to remove a counter from"));
+        ability.addTarget(new TargetCreaturePermanent().withChooseHint("to remove a counter from").setTargetTag(1));
         ability.addTarget(new TargetPermanent(filter).withChooseHint("to move a counter to").setTargetTag(2));
         this.addAbility(ability);
     }

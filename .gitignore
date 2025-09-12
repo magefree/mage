@@ -12,6 +12,7 @@ syntax: glob
 *.log.*
 */gamelogs
 */gamelogsJson
+*/gamesHistory
 
 # Mage.Client
 Mage.Client/plugins/images

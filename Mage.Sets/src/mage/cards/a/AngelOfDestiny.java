@@ -3,13 +3,12 @@ package mage.cards.a;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.DealsDamageToAPlayerAllTriggeredAbility;
 import mage.abilities.condition.common.MoreThanStartingLifeTotalCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -47,13 +46,8 @@ public final class AngelOfDestiny extends CardImpl {
         ));
 
         // At the beginning of your end step, if you have at least 15 life more than your starting life total, each player Angel of Destiny attacked this turn loses the game.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfEndStepTriggeredAbility(
-                        new AngelOfDestinyLoseEffect()
-                ), MoreThanStartingLifeTotalCondition.FIFTEEN, "At the beginning of your end step, " +
-                "if you have at least 15 life more than your starting life total, " +
-                "each player {this} attacked this turn loses the game."
-        ), new AngelOfDestinyWatcher());
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new AngelOfDestinyLoseEffect())
+                .withInterveningIf(MoreThanStartingLifeTotalCondition.FIFTEEN), new AngelOfDestinyWatcher());
     }
 
     private AngelOfDestiny(final AngelOfDestiny card) {
@@ -101,6 +95,7 @@ class AngelOfDestinyLoseEffect extends OneShotEffect {
 
     AngelOfDestinyLoseEffect() {
         super(Outcome.Benefit);
+        staticText = "each player {this} attacked this turn loses the game";
     }
 
     private AngelOfDestinyLoseEffect(final AngelOfDestinyLoseEffect effect) {
@@ -119,7 +114,7 @@ class AngelOfDestinyLoseEffect extends OneShotEffect {
             return false;
         }
         Set<UUID> playerSet = watcher.getPlayers(new MageObjectReference(
-                source.getSourceId(), source.getSourceObjectZoneChangeCounter(), game
+                source.getSourceId(), source.getStackMomentSourceZCC(), game
         ));
         if (playerSet == null) {
             return false;

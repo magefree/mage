@@ -118,8 +118,8 @@ class AminatouUltimateEffect extends OneShotEffect {
 
     AminatouUltimateEffect() {
         super(Outcome.Benefit);
-        staticText = "Choose left or right. Each player gains control of all nonland permanents other than Aminatou,"
-                + " the Fateshifter controlled by the next player in the chosen direction.";
+        staticText = "Choose left or right. Each player gains control of all nonland permanents other than {this}"
+                + " controlled by the next player in the chosen direction.";
     }
 
     private AminatouUltimateEffect(final AminatouUltimateEffect effect) {

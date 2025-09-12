@@ -2,14 +2,13 @@ package mage.cards.w;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.YouGainedLifeCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.common.ControllerGainedLifeCount;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.effects.common.SacrificeOpponentsEffect;
 import mage.abilities.keyword.DeathtouchAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -40,15 +39,10 @@ public final class WitchOfTheMoors extends CardImpl {
 
         // At the beginning of your end step, if you gained life this turn, each opponent sacrifices a 
         // creature and you return up to one target creature card from your graveyard to your hand.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfEndStepTriggeredAbility(new SacrificeOpponentsEffect(
-                        StaticFilters.FILTER_PERMANENT_A_CREATURE
-                )),
-                condition, "At the beginning of your end step, if you gained life this turn, "
-                + "each opponent sacrifices a creature and you return up to one target creature card "
-                + "from your graveyard to your hand."
-        );
-        ability.addEffect(new ReturnFromGraveyardToHandTargetEffect());
+        Ability ability = new BeginningOfEndStepTriggeredAbility(
+                new SacrificeOpponentsEffect(StaticFilters.FILTER_PERMANENT_A_CREATURE)
+        ).withInterveningIf(condition);
+        ability.addEffect(new ReturnFromGraveyardToHandTargetEffect().concatBy("and you"));
         ability.addTarget(new TargetCardInYourGraveyard(
                 0, 1, StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD
         ));

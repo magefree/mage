@@ -37,7 +37,7 @@ public final class HoardersOverflow extends CardImpl {
         // {1}{R}, Sacrifice Hoarder's Overflow: Discard your hand, then draw cards equal to the number of stash counters on Hoarder's Overflow.
         Ability ability = new SimpleActivatedAbility(new DiscardHandControllerEffect(), new ManaCostsImpl<>("{1}{R}"));
         ability.addCost(new SacrificeSourceCost());
-        ability.addEffect(new DrawCardSourceControllerEffect(new CountersSourceCount(CounterType.STASH)).concatBy(", then"));
+        ability.addEffect(new DrawCardSourceControllerEffect(new CountersSourceCount(CounterType.STASH)).setText(", then draw cards equal to the number of stash counters on {this}"));
         this.addAbility(ability);
     }
 

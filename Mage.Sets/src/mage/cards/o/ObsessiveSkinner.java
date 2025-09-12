@@ -1,22 +1,22 @@
 package mage.cards.o;
 
-import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.DeliriumCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  * @author fireshoes
@@ -37,14 +37,11 @@ public final class ObsessiveSkinner extends CardImpl {
 
         // <i>Delirium</i> &mdash; At the beginning of each opponent's upkeep, if there are four or more card types among cards in your graveyard,
         // put a +1/+1 counter on target creature.
-        ability = new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(TargetController.OPPONENT, new AddCountersTargetEffect(CounterType.P1P1.createInstance()), false),
-                DeliriumCondition.instance,
-                "<i>Delirium</i> &mdash; At the beginning of each opponent's upkeep, if there are four or more card types among cards in your graveyard, "
-                        + "put a +1/+1 counter on target creature.");
+        ability = new BeginningOfUpkeepTriggeredAbility(
+                TargetController.OPPONENT, new AddCountersTargetEffect(CounterType.P1P1.createInstance()), false
+        ).withInterveningIf(DeliriumCondition.instance);
         ability.addTarget(new TargetCreaturePermanent());
-        ability.addHint(CardTypesInGraveyardCount.YOU.getHint());
-        this.addAbility(ability);
+        this.addAbility(ability.setAbilityWord(AbilityWord.DELIRIUM).addHint(CardTypesInGraveyardCount.YOU.getHint()));
     }
 
     private ObsessiveSkinner(final ObsessiveSkinner card) {

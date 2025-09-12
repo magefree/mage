@@ -16,7 +16,8 @@ public class EntersBattlefieldAttachToTarget extends EntersBattlefieldTriggeredA
     }
 
     public EntersBattlefieldAttachToTarget(FilterPermanent filter) {
-        super(new AttachEffect(Outcome.BoostCreature, "attach it to target " + filter.getMessage()));
+        super(new AttachEffect(Outcome.BoostCreature, "attach {this} to target " + filter.getMessage()));
+        this.withRuleTextReplacement(true); // default "it" but a few exceptions
         this.addTarget(new TargetPermanent(filter));
     }
 

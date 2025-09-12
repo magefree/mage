@@ -127,10 +127,8 @@ enum KianneDeanOfSubstanceValue implements DynamicValue {
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         return game
                 .getExile()
-                .getAllCards(game)
+                .getCardsOwned(game, sourceAbility.getControllerId())
                 .stream()
-                .filter(Objects::nonNull)
-                .filter(card -> card.isOwnedBy(sourceAbility.getControllerId()))
                 .filter(card -> card.getCounters(game).containsKey(CounterType.STUDY))
                 .map(MageObject::getManaValue)
                 .distinct()
@@ -155,10 +153,8 @@ enum KianneDeanOfSubstanceHint implements Hint {
     @Override
     public String getText(Game game, Ability ability) {
         List<String> values = game.getExile()
-                .getAllCards(game)
+                .getCardsOwned(game, ability.getControllerId())
                 .stream()
-                .filter(Objects::nonNull)
-                .filter(card -> card.isOwnedBy(ability.getControllerId()))
                 .filter(card -> card.getCounters(game).containsKey(CounterType.STUDY))
                 .mapToInt(MageObject::getManaValue)
                 .distinct()
@@ -166,7 +162,7 @@ enum KianneDeanOfSubstanceHint implements Hint {
                 .mapToObj(String::valueOf)
                 .collect(Collectors.toList());
         return "Mana values of cards exiled with study counters: " + values.size()
-                + (values.size() > 0 ? " (" + String.join(", ", values) + ')' : "");
+                + (values.isEmpty() ? "" : " (" + String.join(", ", values) + ')');
     }
 
     @Override

@@ -121,7 +121,7 @@ class TheToymakersTrapEffect extends OneShotEffect {
     }
 
     private static List<String> getOrSetValue(Game game, Ability source) {
-        String key = "chosenNumbers_" + source.getControllerId() + '_' + source.getSourceObjectZoneChangeCounter();
+        String key = "chosenNumbers_" + source.getControllerId() + '_' + source.getStackMomentSourceZCC();
         List<String> list = (List<String>) game.getState().getValue(key);
         if (list != null) {
             return list;

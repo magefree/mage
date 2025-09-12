@@ -19,6 +19,7 @@ import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -51,7 +52,7 @@ public final class EarthshakerKhenra extends CardImpl {
                         .setText("target creature with power less than or equal " +
                                 "to {this}'s power can't block this turn")
         );
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
         // Eternalize {4}{R}{R}

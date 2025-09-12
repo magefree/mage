@@ -1,7 +1,5 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -10,10 +8,11 @@ import mage.constants.CardType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author Quercitron
  */
 public final class TidalSurge extends CardImpl {
@@ -23,14 +22,13 @@ public final class TidalSurge extends CardImpl {
     static {
         filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
     }
-    
-    public TidalSurge(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}");
 
+    public TidalSurge(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{U}");
 
         // Tap up to three target creatures without flying.
         this.getSpellAbility().addEffect(new TapTargetEffect("tap up to three target creatures without flying"));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 3, filter, false));
+        this.getSpellAbility().addTarget(new TargetPermanent(0, 3, filter));
     }
 
     private TidalSurge(final TidalSurge card) {

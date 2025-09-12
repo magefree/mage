@@ -1,5 +1,6 @@
 package mage.game.command.emblems;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AttacksCreatureYouControlTriggeredAbility;
@@ -40,11 +41,21 @@ public final class TheRingEmblem extends Emblem {
         filter.add(TheRingEmblemPredicate.instance);
     }
 
+    public TheRingEmblem() {
+        this((UUID) null); // require for verify test
+    }
+
     public TheRingEmblem(UUID controllerId) {
         super("The Ring");
         this.setControllerId(controllerId);
 
         // ring don't have source, so image can be initialized immediately
+        setSourceObjectAndInitImage(null);
+    }
+
+    @Override
+    public void setSourceObjectAndInitImage(MageObject sourceObject) {
+        this.sourceObject = sourceObject;
         TokenInfo foundInfo = TokenRepository.instance.findPreferredTokenInfoForXmage(TokenRepository.XMAGE_IMAGE_NAME_THE_RING, null);
         if (foundInfo != null) {
             this.setExpansionSetCode(foundInfo.getSetCode());

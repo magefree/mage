@@ -272,9 +272,7 @@ public abstract class AbilityImpl implements Ability {
         game.applyEffects();
 
         MageObject sourceObject = getSourceObject(game);
-        if (getSourceObjectZoneChangeCounter() == 0) {
-            setSourceObjectZoneChangeCounter(game.getState().getZoneChangeCounter(getSourceId()));
-        }
+        initSourceObjectZoneChangeCounter(game, false);
         setSourcePermanentTransformCount(game);
 
         // if ability can be cast for no mana, clear the mana costs now, because additional mana costs must be paid.
@@ -378,8 +376,8 @@ public abstract class AbilityImpl implements Ability {
 
         // unit tests only: it allows to add targets/choices by two ways:
         // 1. From cast/activate command params (process it here)
-        // 2. From single addTarget/setChoice, it's a preffered method for tests (process it in normal choose dialogs like human player)
-        if (controller.isTestsMode()) {
+        // 2. From single addTarget/setChoice, it's a preferred method for tests (process it in normal choose dialogs like human player)
+        if (controller.isTestMode()) {
             if (!controller.addTargets(this, game)) {
                 return false;
             }
@@ -1228,11 +1226,8 @@ public abstract class AbilityImpl implements Ability {
         for (Mode mode : modes.values()) {
             boolean validTargets = true;
             for (Target target : mode.getTargets()) {
-                UUID abilityControllerId = controllerId;
-                if (target.getTargetController() != null) {
-                    abilityControllerId = target.getTargetController();
-                }
-                if (!target.canChoose(abilityControllerId, ability, game)) {
+                UUID abilityControllerId = target.getAffectedAbilityControllerId(controllerId);
+                if (!target.canChooseOrAlreadyChosen(abilityControllerId, ability, game)) {
                     validTargets = false;
                     break;
                 }
@@ -1663,8 +1658,8 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public MageObject getSourceObjectIfItStillExists(Game game) {
-        if (getSourceObjectZoneChangeCounter() == 0
-                || getSourceObjectZoneChangeCounter() == game.getState().getZoneChangeCounter(getSourceId())) {
+        if (getStackMomentSourceZCC() == 0
+                || getStackMomentSourceZCC() == getCurrentSourceObjectZoneChangeCounter(game)) {
             // exists or lki from battlefield
             return game.getObject(getSourceId());
         }
@@ -1693,7 +1688,7 @@ public abstract class AbilityImpl implements Ability {
     public Permanent getSourcePermanentOrLKI(Game game) {
         Permanent permanent = getSourcePermanentIfItStillExists(game);
         if (permanent == null) {
-            permanent = (Permanent) game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD, getSourceObjectZoneChangeCounter());
+            permanent = (Permanent) game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD, getStackMomentSourceZCC());
         }
         return permanent;
     }
@@ -1704,7 +1699,28 @@ public abstract class AbilityImpl implements Ability {
     }
 
     @Override
-    public int getSourceObjectZoneChangeCounter() {
+    public void initSourceObjectZoneChangeCounter(Game game, boolean force) {
+        if (!(this instanceof MageSingleton) && (force || sourceObjectZoneChangeCounter == 0 )) {
+            setSourceObjectZoneChangeCounter(getCurrentSourceObjectZoneChangeCounter(game));
+        }
+    }
+
+    private int getCurrentSourceObjectZoneChangeCounter(Game game){
+        int zcc = game.getState().getZoneChangeCounter(getSourceId());
+        // TODO: Enable this, #13710
+        /*if (game.getPermanentEntering(getSourceId()) != null){
+            // If the triggered ability triggered while the permanent is entering the battlefield
+            // then add 1 zcc so that it triggers as if the permanent was already on the battlefield
+            // So "Enters with counters" causes "Whenever counters are placed" to trigger with battlefield zcc
+            // Particularly relevant for Sagas, which always involve both
+            // Note that this does NOT apply to "As ~ ETB" effects, those still use the stack zcc
+            zcc += 1;
+        }*/
+        return zcc;
+    }
+
+    @Override
+    public int getStackMomentSourceZCC() {
         return sourceObjectZoneChangeCounter;
     }
 
@@ -1749,6 +1765,10 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public AbilityImpl setTargetAdjuster(TargetAdjuster targetAdjuster) {
+        if (targetAdjuster == null) {
+            this.targetAdjuster = null;
+            return this;
+        }
         if (targetAdjuster instanceof GenericTargetAdjuster && this.getTargets().isEmpty()) {
             throw new IllegalStateException("Target adjuster being added but no targets are set!");
         }

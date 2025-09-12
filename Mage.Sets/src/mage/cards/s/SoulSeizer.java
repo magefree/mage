@@ -2,7 +2,8 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.TriggeredAbility;
+import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TransformAbility;
@@ -11,15 +12,11 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.events.DamagedPlayerEvent;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
+import mage.target.targetadjustment.ThatPlayerControlsTargetAdjuster;
 
 import java.util.UUID;
 
@@ -41,7 +38,11 @@ public final class SoulSeizer extends CardImpl {
 
         // When Soul Seizer deals combat damage to a player, you may transform it. If you do, attach it to target creature that player controls.
         this.addAbility(new TransformAbility());
-        this.addAbility(new SoulSeizerTriggeredAbility());
+        TriggeredAbility ability = new DealsCombatDamageToAPlayerTriggeredAbility(new SoulSeizerEffect(), true, true);
+        ability.setTriggerPhrase("When {this} deals combat damage to a player, ");
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_CREATURE));
+        ability.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster());
+        this.addAbility(ability);
     }
 
     private SoulSeizer(final SoulSeizer card) {
@@ -54,53 +55,11 @@ public final class SoulSeizer extends CardImpl {
     }
 }
 
-class SoulSeizerTriggeredAbility extends TriggeredAbilityImpl {
-
-    public SoulSeizerTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new SoulSeizerEffect(), true);
-    }
-
-    private SoulSeizerTriggeredAbility(final SoulSeizerTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public SoulSeizerTriggeredAbility copy() {
-        return new SoulSeizerTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
-        if (damageEvent.isCombatDamage() && event.getSourceId().equals(this.getSourceId())) {
-            Player opponent = game.getPlayer(event.getPlayerId());
-            if (opponent != null) {
-                FilterCreaturePermanent filter = new FilterCreaturePermanent("creature " + opponent.getLogName() + " controls");
-                filter.add(new ControllerIdPredicate(opponent.getId()));
-
-                this.getTargets().clear();
-                this.addTarget(new TargetCreaturePermanent(filter));
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "When {this} deals combat damage to a player, you may transform it. If you do, attach it to target creature that player controls";
-    }
-}
-
 class SoulSeizerEffect extends OneShotEffect {
 
     SoulSeizerEffect() {
         super(Outcome.GainControl);
+        this.staticText = "you may transform it. If you do, attach it to target creature that player controls";
     }
 
     private SoulSeizerEffect(final SoulSeizerEffect effect) {
@@ -109,12 +68,12 @@ class SoulSeizerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent == null || !permanent.transform(source, game)) {
             return false;
         }
         Permanent attachTo = game.getPermanent(getTargetPointer().getFirst(game, source));
-        return attachTo != null && attachTo.addAttachment(source.getSourceId(), source, game);
+        return attachTo != null && attachTo.addAttachment(permanent.getId(), source, game);
     }
 
     @Override

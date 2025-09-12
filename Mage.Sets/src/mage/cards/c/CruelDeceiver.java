@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -15,13 +14,11 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.LookLibraryControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.cards.*;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -57,7 +54,7 @@ class CruelDeceiverEffect extends OneShotEffect {
 
     CruelDeceiverEffect() {
         super(Outcome.AddAbility);
-        this.staticText = "Reveal the top card of your library. If it's a land card, {this} gains \"Whenever Cruel Deceiver deals damage to a creature, destroy that creature\" until end of turn";
+        this.staticText = "Reveal the top card of your library. If it's a land card, {this} gains \"Whenever {this} deals damage to a creature, destroy that creature\" until end of turn";
     }
 
     private CruelDeceiverEffect(final CruelDeceiverEffect effect) {

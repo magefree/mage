@@ -1,23 +1,25 @@
 package mage.cards.p;
 
 import mage.MageInt;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.TransformAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.SubType;
+import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.ZombieDecayedToken;
 
 import java.util.UUID;
@@ -27,11 +29,15 @@ import java.util.UUID;
  */
 public final class PoppetStitcher extends CardImpl {
 
-    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(
-            StaticFilters.FILTER_CREATURE_TOKEN, ComparisonType.MORE_THAN, 2
-    );
+    private static final FilterPermanent filter = new FilterControlledPermanent("you control three or more creature tokens");
+
+    static {
+        filter.add(TokenPredicate.TRUE);
+    }
+
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 2);
     private static final Hint hint = new ValueHint(
-            "Creature tokens you control", new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CREATURE_TOKEN)
+            "Creature tokens you control", new PermanentsOnBattlefieldCount(filter)
     );
 
     public PoppetStitcher(UUID ownerId, CardSetInfo setInfo) {
@@ -52,12 +58,8 @@ public final class PoppetStitcher extends CardImpl {
 
         // At the beginning of your upkeep, if you control three or more creature tokens, you may transform Poppet Sticher.
         this.addAbility(new TransformAbility());
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(
-                        new TransformSourceEffect(), true
-                ), condition, "At the beginning of your upkeep, " +
-                "if you control three or more creature tokens, you may transform {this}."
-        ).addHint(hint));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(), true)
+                .withInterveningIf(condition).addHint(hint));
     }
 
     private PoppetStitcher(final PoppetStitcher card) {

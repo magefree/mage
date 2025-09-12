@@ -45,6 +45,7 @@ class EncroachingMycosynthEffect extends ContinuousEffectImpl {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
         staticText = "Nonland permanents you control are artifacts in addition to their other types. " +
                 "The same is true for permanent spells you control and nonland permanent cards you own that aren't on the battlefield";
+        this.dependendToTypes.add(DependencyType.BecomeNonbasicLand);
         this.dependencyTypes.add(DependencyType.ArtifactAddingRemoving); // March of the Machines
     }
 
@@ -79,7 +80,7 @@ class EncroachingMycosynthEffect extends ContinuousEffectImpl {
             }
         }
         // in Exile
-        for (Card card : game.getState().getExile().getAllCards(game, source.getControllerId())) {
+        for (Card card : game.getState().getExile().getCardsOwned(game, source.getControllerId())) {
             if (card.isPermanent(game) && !card.isLand(game) && !card.isArtifact(game)) {
                 card.addCardType(game, CardType.ARTIFACT);
             }

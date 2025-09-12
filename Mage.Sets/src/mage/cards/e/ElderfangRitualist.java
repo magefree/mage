@@ -1,29 +1,28 @@
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterBySubtypeCard;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class ElderfangRitualist extends CardImpl {
 
-    private static final FilterCard filter = new FilterBySubtypeCard(SubType.ELF);
+    private static final FilterCard filter = new FilterCard(SubType.ELF, "another target Elf card from your graveyard");
+
     static {
         filter.add(AnotherPredicate.instance);
-        filter.setMessage("another target Elf card from your graveyard");
     }
 
     public ElderfangRitualist(UUID ownerId, CardSetInfo setInfo) {

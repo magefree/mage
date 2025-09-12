@@ -46,7 +46,7 @@ public class TargetCardInCommandZone extends TargetCard {
 
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
-        return this.canTarget(source.getControllerId(), id, source, game);
+        return this.canTarget(source == null ? null : source.getControllerId(), id, source, game);
     }
 
     @Override
@@ -59,30 +59,13 @@ public class TargetCardInCommandZone extends TargetCard {
 
         Cards cards = new CardsImpl(game.getCommanderCardsFromCommandZone(player, CommanderCardType.ANY));
         for (Card card : cards.getCards(filter, sourceControllerId, source, game)) {
-            if (source == null || source.getSourceId() == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, source.getSourceId(), sourceControllerId))) {
-                possibleTargets.add(card.getId());
-            }
+            possibleTargets.add(card.getId());
         }
-        return possibleTargets;
+        return keepValidPossibleTargets(possibleTargets, sourceControllerId, source, game);
     }
 
     @Override
     public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
-        Player player = game.getPlayer(sourceControllerId);
-        if (player == null) {
-            return false;
-        }
-
-        int possibletargets = 0;
-        Cards cards = new CardsImpl(game.getCommanderCardsFromCommandZone(player, CommanderCardType.ANY));
-        for (Card card : cards.getCards(filter, sourceControllerId, source, game)) {
-            if (source == null || source.getSourceId() == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, source.getSourceId(), sourceControllerId))) {
-                possibletargets++;
-                if (possibletargets >= this.minNumberOfTargets) {
-                    return true;
-                }
-            }
-        }
-        return false;
+        return canChooseFromPossibleTargets(sourceControllerId, source, game);
     }
 }

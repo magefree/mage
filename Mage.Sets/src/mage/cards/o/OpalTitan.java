@@ -3,10 +3,8 @@ package mage.cards.o;
 import mage.MageObjectReference;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
-import mage.abilities.condition.common.SourceMatchesFilterCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.condition.common.SourceIsEnchantmentCondition;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
@@ -28,11 +26,11 @@ public final class OpalTitan extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
 
         // When an opponent casts a creature spell, if Opal Titan is an enchantment, Opal Titan becomes a 4/4 Giant creature with protection from each of that spell's colors.
-        TriggeredAbility ability = new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD, new OpalTitanBecomesCreatureEffect(),
-                StaticFilters.FILTER_SPELL_A_CREATURE, false, SetTargetPointer.SPELL);
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new SourceMatchesFilterCondition(StaticFilters.FILTER_PERMANENT_ENCHANTMENT),
-                "When an opponent casts a creature spell, if Opal Titan is an enchantment, Opal Titan becomes a 4/4 Giant creature with protection from each of that spell's colors."));
-
+        this.addAbility(new SpellCastOpponentTriggeredAbility(
+                Zone.BATTLEFIELD, new OpalTitanBecomesCreatureEffect(),
+                StaticFilters.FILTER_SPELL_A_CREATURE, false, SetTargetPointer.SPELL
+        ).withInterveningIf(SourceIsEnchantmentCondition.instance)
+                .setTriggerPhrase("When an opponent casts a creature spell, "));
     }
 
     private OpalTitan(final OpalTitan card) {
@@ -49,7 +47,7 @@ class OpalTitanBecomesCreatureEffect extends ContinuousEffectImpl {
 
     OpalTitanBecomesCreatureEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BecomeCreature);
-        staticText = "{this} becomes a 4/4 Giant creature with protection from each of that spell's colors.";
+        staticText = "it becomes a 4/4 Giant creature with protection from each of that spell's colors.";
         this.addDependencyType(DependencyType.BecomeCreature);
     }
 
@@ -117,5 +115,4 @@ class OpalTitanBecomesCreatureEffect extends ContinuousEffectImpl {
                 || layer == Layer.AbilityAddingRemovingEffects_6
                 || layer == Layer.TypeChangingEffects_4;
     }
-
 }

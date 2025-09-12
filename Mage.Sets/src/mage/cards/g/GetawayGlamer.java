@@ -15,6 +15,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.List;
@@ -41,7 +42,7 @@ public final class GetawayGlamer extends CardImpl {
         // + {1} -- Exile target nontoken creature. Return it to the battlefield under its owner's control at the beginning of the next end step.
         this.getSpellAbility().addEffect(new ExileReturnBattlefieldNextEndStepTargetEffect().withTextThatCard(false));
         this.getSpellAbility().addTarget(
-                new TargetCreaturePermanent(filter).withChooseHint("to exile")
+                new TargetPermanent(filter).withChooseHint("to exile")
         );
         this.getSpellAbility().withFirstModeCost(new GenericManaCost(1));
 

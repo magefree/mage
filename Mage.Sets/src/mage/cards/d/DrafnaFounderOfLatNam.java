@@ -16,7 +16,6 @@ import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterArtifactSpell;
 import mage.target.TargetPermanent;
 import mage.target.TargetSpell;
 
@@ -27,9 +26,10 @@ import java.util.UUID;
  */
 public final class DrafnaFounderOfLatNam extends CardImpl {
 
-    private static final FilterSpell filter = new FilterArtifactSpell("artifact spell you control");
+    private static final FilterSpell filter = new FilterSpell("artifact spell you control");
 
     static {
+        filter.add(CardType.ARTIFACT.getPredicate());
         filter.add(TargetController.YOU.getControllerPredicate());
     }
 

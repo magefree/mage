@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.OpponentsLostLifeCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -25,8 +24,9 @@ import java.util.UUID;
  */
 public final class VoldarenAmbusher extends CardImpl {
 
-    private static final DynamicValue xValue
-            = new PermanentsOnBattlefieldCount(new FilterControlledPermanent(SubType.VAMPIRE));
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(
+            new FilterControlledPermanent(SubType.VAMPIRE, "Vampires you control"), null
+    );
     private static final Hint hint = new ValueHint("Vampires you control", xValue);
 
     public VoldarenAmbusher(UUID ownerId, CardSetInfo setInfo) {
@@ -38,12 +38,8 @@ public final class VoldarenAmbusher extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Voldaren Ambusher enters the battlefield, if an opponent lost life this turn, it deals X damage to up to one target creature or planeswalker, where X is the number of Vampires you control.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(xValue)),
-                OpponentsLostLifeCondition.instance, "When {this} enters, " +
-                "if an opponent lost life this turn, it deals X damage to up to one target " +
-                "creature or planeswalker, where X is the number of Vampires you control."
-        );
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(xValue, "it"))
+                .withInterveningIf(OpponentsLostLifeCondition.instance);
         ability.addTarget(new TargetCreatureOrPlaneswalker(0, 1));
         this.addAbility(ability.addHint(OpponentsLostLifeHint.instance).addHint(hint));
     }

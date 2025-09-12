@@ -130,7 +130,7 @@ public class SerraParagonTest extends CardTestPlayerBase {
     public void testAetherworksMarvel() {
         setStrictChooseMode(true);
 
-        // Whenever a permanent you control is put into a graveyard from the battlefield, you get {E}
+        // Whenever a permanent you control is put into a graveyard, you get {E}
         addCard(Zone.BATTLEFIELD, playerA, "Aetherworks Marvel");
         addCard(Zone.BATTLEFIELD, playerA, paragon);
         addCard(Zone.GRAVEYARD, playerA, "Chromatic Star");
@@ -140,7 +140,7 @@ public class SerraParagonTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Chromatic Star", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Creeping Corrosion", true);
         setChoice(playerA, "When this permanent is put into a graveyard from the battlefield, exile it and you gain 2 life."); // stack triggers
-        setChoice(playerA, "Whenever a permanent you control is put into a graveyard from the battlefield, you get {E}", 2); // stack triggers
+        setChoice(playerA, "Whenever a permanent you control is put into a graveyard, you get {E}", 2); // stack triggers
         // Last trigger is: "When {this} is put into a graveyard from the battlefield, draw a card." from Chromatic Star
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         runCode("energy counter is 2", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> checkEnergyCount(info, player, 2));

@@ -44,7 +44,6 @@ import mage.game.permanent.PermanentMeld;
 import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.players.PlayerList;
 import mage.target.Target;
@@ -85,7 +84,7 @@ public final class CardUtil {
     public static final SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss.SSS");
 
     private static final List<String> costWords = Arrays.asList(
-            "put", "return", "exile", "discard", "sacrifice", "remove", "tap", "reveal", "pay", "collect"
+            "put", "return", "exile", "discard", "mill", "sacrifice", "remove", "tap", "reveal", "pay", "have", "collect", "forage"
     );
 
     // search set code in commands like "set_code-card_name"
@@ -616,7 +615,7 @@ public final class CardUtil {
     }
 
     public static UUID getExileZoneId(Game game, Ability source, int offset) {
-        return getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter() + offset);
+        return getExileZoneId(game, source.getSourceId(), source.getStackMomentSourceZCC() + offset);
     }
 
     public static UUID getExileZoneId(Game game, UUID objectId, int zoneChangeCounter) {
@@ -759,7 +758,7 @@ public final class CardUtil {
             MageObject sourceObject = game.getObject(source);
             if (sourceObject != null) {
                 title = sourceObject.getIdName()
-                        + " [" + source.getSourceObjectZoneChangeCounter() + "]"
+                        + " [" + source.getStackMomentSourceZCC() + "]"
                         + (textSuffix == null ? "" : " " + textSuffix);
             } else {
                 title = textSuffix == null ? "" : textSuffix;
@@ -980,7 +979,7 @@ public final class CardUtil {
         }
         if (!targetPlayerGets) {
             sb.append(add ? " on " : " from ");
-            if (description.contains("up to")) {
+            if (description.contains("up to") && !description.contains("up to one")) {
                 sb.append("each of ");
             }
             sb.append(description);
@@ -1131,49 +1130,6 @@ public final class CardUtil {
         }
 
         return res;
-    }
-
-    /**
-     * For finding the spell or ability on the stack for "becomes the target" triggers.
-     * Also ensures that spells/abilities that target the same object twice only trigger each "becomes the target" ability once.
-     * If this is the first attempt at triggering for a given ability targeting a given object,
-     * this method records that in the game state for later checks by this same method, to not return the same object again.
-     *
-     * @param checkingReference must be unique for each usage (this.getId().toString() of the TriggeredAbility, or this.getKey() of the watcher)
-     * @param event             the GameEvent.EventType.TARGETED from checkTrigger() or watch()
-     * @param game              the Game from checkTrigger() or watch()
-     * @return the StackObject which targeted the source, or null if already used or not found
-     */
-    public static StackObject findTargetingStackObject(String checkingReference, GameEvent event, Game game) {
-        // In case of multiple simultaneous triggered abilities from the same source,
-        // need to get the actual one that targeted, see #8026, #8378, rulings for Battle Mammoth
-        // In case of copied triggered abilities, need to trigger on each independently, see #13498
-        // Also avoids triggering on cancelled selections, see #8802
-        String stateKey = "targetedMap" + checkingReference;
-        Map<UUID, Set<UUID>> targetMap = (Map<UUID, Set<UUID>>) game.getState().getValue(stateKey);
-        // targetMap: key - targetId; value - Set of stackObject Ids
-        if (targetMap == null) {
-            targetMap = new HashMap<>();
-        } else {
-            targetMap = new HashMap<>(targetMap); // must have new object reference if saved back to game state
-        }
-        Set<UUID> targetingObjects = targetMap.computeIfAbsent(event.getTargetId(), k -> new HashSet<>());
-        for (StackObject stackObject : game.getStack()) {
-            Ability stackAbility = stackObject.getStackAbility();
-            if (stackAbility == null || !stackAbility.getSourceId().equals(event.getSourceId())) {
-                continue;
-            }
-            if (CardUtil.getAllSelectedTargets(stackAbility, game).contains(event.getTargetId())) {
-                if (!targetingObjects.add(stackObject.getId())) {
-                    continue; // The trigger/watcher already recorded that target of the stack object, check for another
-                }
-                // Otherwise, store this combination of trigger/watcher + target + stack object
-                targetMap.put(event.getTargetId(), targetingObjects);
-                game.getState().setValue(stateKey, targetMap);
-                return stackObject;
-            }
-        }
-        return null;
     }
 
     /**
@@ -1434,7 +1390,7 @@ public final class CardUtil {
      * @param playerUnderControl
      */
     public static void takeControlUnderPlayerEnd(Game game, Ability source, Player controller, Player playerUnderControl) {
-        playerUnderControl.setGameUnderYourControl(true, false);
+        playerUnderControl.setGameUnderYourControl(game, true, false);
         if (!playerUnderControl.getTurnControlledBy().equals(controller.getId())) {
             game.informPlayers(controller.getLogName() + " return control of the turn to " + playerUnderControl.getLogName() + CardUtil.getSourceLogName(game, source));
             controller.getPlayersUnderYourControl().remove(playerUnderControl.getId());
@@ -1600,7 +1556,7 @@ public final class CardUtil {
         return result;
     }
 
-    private static boolean checkForPlayable(Cards cards, FilterCard filter, Ability source, Player player, Game game, SpellCastTracker spellCastTracker, boolean playLand) {
+    private static boolean cardsHasCastableParts(Cards cards, FilterCard filter, Ability source, Player player, Game game, SpellCastTracker spellCastTracker, boolean playLand) {
         return cards
                 .getCards(game)
                 .stream()
@@ -1624,18 +1580,39 @@ public final class CardUtil {
             CardUtil.castSpellWithAttributesForFree(player, source, game, cards, filter);
             return;
         }
-        int spellsCast = 0;
+        int castCount = 0;
+        int maxCastCount = Integer.min(cards.size(), maxSpells);
         cards.removeZone(Zone.STACK, game);
-        while (player.canRespond() && spellsCast < maxSpells && !cards.isEmpty()) {
-            if (CardUtil.castSpellWithAttributesForFree(player, source, game, cards, filter, spellCastTracker, playLand)) {
-                spellsCast++;
-                cards.removeZone(Zone.STACK, game);
-            } else if (!checkForPlayable(
-                    cards, filter, source, player, game, spellCastTracker, playLand
-            ) || !player.chooseUse(
-                    Outcome.PlayForFree, "Continue casting spells?", source, game
-            )) {
+        if (!cardsHasCastableParts(cards, filter, source, player, game, spellCastTracker, playLand)) {
+            return;
+        }
+
+        while (player.canRespond()) {
+            boolean wasCast = CardUtil.castSpellWithAttributesForFree(player, source, game, cards, filter, spellCastTracker, playLand);
+
+            // nothing to cast
+            cards.removeZone(Zone.STACK, game);
+            if (cards.isEmpty() || !cardsHasCastableParts(cards, filter, source, player, game, spellCastTracker, playLand)) {
                 break;
+            }
+
+            if (wasCast) {
+                // no more tries to cast
+                castCount++;
+                if (castCount >= maxCastCount) {
+                    break;
+                }
+            } else {
+                // player want to cancel
+                if (player.isComputer()) {
+                    // AI can't choose good spell, so stop
+                    break;
+                } else {
+                    // Human can choose wrong spell part, so allow to continue
+                    if (!player.chooseUse(Outcome.PlayForFree, "Continue casting spells?", source, game)) {
+                        break;
+                    }
+                }
             }
         }
     }
@@ -1774,8 +1751,9 @@ public final class CardUtil {
             // Waiting on actual ruling of Ashiok, Wicked Manipulator.
             return true;
         }
-        if (player.loseLife(lifeToPay, game, source, false) >= lifeToPay) {
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LIFE_PAID, player.getId(), source, player.getId(), lifeToPay));
+        int lostLife = player.loseLife(lifeToPay, game, source, false);
+        if (lostLife > 0) {
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LIFE_PAID, player.getId(), source, player.getId(), lostLife));
             return true;
         }
 
@@ -1834,7 +1812,7 @@ public final class CardUtil {
      */
     public static int getActualSourceObjectZoneChangeCounter(Game game, Ability source) {
         // current object zcc, find from source object (it can be permanent or spell on stack)
-        int zcc = source.getSourceObjectZoneChangeCounter();
+        int zcc = source.getStackMomentSourceZCC();
         if (zcc == 0) {
             // if ability is not activated yet then use current object's zcc (example: triggered etb ability checking the kicker conditional)
             zcc = game.getState().getZoneChangeCounter(source.getSourceId());

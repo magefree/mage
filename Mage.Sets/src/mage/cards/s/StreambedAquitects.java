@@ -14,6 +14,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetLandPermanent;
 
@@ -41,7 +42,7 @@ public final class StreambedAquitects extends CardImpl {
         ability.addEffect(new GainAbilityTargetEffect(
                 new IslandwalkAbility(false), Duration.EndOfTurn
         ).setText("and gains islandwalk until end of turn"));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
         // {tap}: Target land becomes an Island until end of turn.

@@ -13,6 +13,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -42,7 +43,7 @@ public final class BessieTheDoctorsRoadster extends CardImpl {
 
         // Whenever Bessie attacks, another target legendary creature can't be blocked this turn.
         Ability ability = new AttacksTriggeredAbility(new CantBeBlockedTargetEffect());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
         // Crew 2

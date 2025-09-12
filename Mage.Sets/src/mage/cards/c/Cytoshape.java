@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -15,35 +13,22 @@ import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.util.functions.EmptyCopyApplier;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class Cytoshape extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonlegendary creature");
-
-    static {
-        filter.add(Predicates.not(SuperType.LEGENDARY.getPredicate()));
-    }
 
     public Cytoshape(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}{U}");
 
         // Choose a nonlegendary creature on the battlefield. Target creature becomes a copy of that creature until end of turn.
         this.getSpellAbility().addEffect(new CytoshapeEffect());
-        Target target = new TargetCreaturePermanent(1, 1, filter, true);
-        target.setTargetTag(1);
-        this.getSpellAbility().addTarget(target);
-
-        FilterCreaturePermanent filter2 = new FilterCreaturePermanent("target creature that will become a copy of that chosen creature");
-        target = new TargetCreaturePermanent(filter2);
-        target.setTargetTag(2);
-        this.getSpellAbility().addTarget(target);
-
+        this.getSpellAbility().addTarget(new TargetPermanent().withChooseHint("to become a copy"));
     }
 
     private Cytoshape(final Cytoshape card) {
@@ -58,9 +43,16 @@ public final class Cytoshape extends CardImpl {
 
 class CytoshapeEffect extends OneShotEffect {
 
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonlegendary creature");
+
+    static {
+        filter.add(Predicates.not(SuperType.LEGENDARY.getPredicate()));
+    }
+
     CytoshapeEffect() {
         super(Outcome.Copy);
-        this.staticText = "Choose a nonlegendary creature on the battlefield. Target creature becomes a copy of that creature until end of turn.";
+        this.staticText = "Choose a nonlegendary creature on the battlefield. " +
+                "Target creature becomes a copy of that creature until end of turn.";
     }
 
     private CytoshapeEffect(final CytoshapeEffect effect) {
@@ -74,9 +66,11 @@ class CytoshapeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability ability) {
-        Permanent copyFrom = game.getPermanent(getTargetPointer().getFirst(game, ability));
+        Target target = new TargetPermanent(1, 1, filter, true);
+        target.choose(Outcome.Copy, ability.getControllerId(), ability, game);
+        Permanent copyFrom = game.getPermanent(target.getFirstTarget());
         if (copyFrom != null) {
-            Permanent copyTo = game.getPermanentOrLKIBattlefield(ability.getTargets().get(1).getFirstTarget());
+            Permanent copyTo = game.getPermanentOrLKIBattlefield(ability.getTargets().get(0).getFirstTarget());
             if (copyTo != null) {
                 game.copyPermanent(Duration.EndOfTurn, copyFrom, copyTo.getId(), ability, new EmptyCopyApplier());
             }

@@ -1,7 +1,5 @@
 package mage.cards.a;
 
-import java.util.UUID;
-
 import mage.abilities.common.AttacksAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -9,35 +7,35 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
-import mage.abilities.hint.Hint;
-import mage.abilities.hint.ValueHint;
+import mage.abilities.hint.common.ArtifactYouControlHint;
 import mage.abilities.keyword.EquipAbility;
-import mage.constants.Outcome;
-import mage.constants.PutCards;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.PutCards;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author sobiech
  */
 public final class AdaptiveOmnitool extends CardImpl {
+
     private final static DynamicValue artifactYouControlCount = new PermanentsOnBattlefieldCount(new FilterControlledArtifactPermanent());
-    private final static Hint hint = new ValueHint("Artifacts you control", artifactYouControlCount);
 
     public AdaptiveOmnitool(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
-        
+
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +1/+1 for each artifact you control.
         this.addAbility(
-                new SimpleStaticAbility(new BoostEquippedEffect(artifactYouControlCount, artifactYouControlCount)).addHint(hint)
+                new SimpleStaticAbility(new BoostEquippedEffect(artifactYouControlCount, artifactYouControlCount)).addHint(ArtifactYouControlHint.instance)
         );
 
         // Whenever equipped creature attacks, look at the top six cards of your library. You may reveal an artifact card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.

@@ -2,9 +2,8 @@ package mage.cards.d;
 
 import mage.MageInt;
 import mage.abilities.common.PutCardIntoGraveFromAnywhereAllTriggeredAbility;
-import mage.abilities.common.PutIntoGraveFromAnywhereSourceAbility;
-import mage.abilities.effects.common.ExileSourceEffect;
 import mage.abilities.effects.keyword.InvestigateEffect;
+import mage.abilities.keyword.DisturbAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -43,7 +42,7 @@ public final class DennickPiousApparition extends CardImpl {
         ).setTriggersLimitEachTurn(1).setTriggerPhrase("Whenever one or more creature cards are put into graveyards from anywhere, "));
 
         // If Dennick, Pious Apparition would be put into a graveyard from anywhere, exile it instead.
-        this.addAbility(new PutIntoGraveFromAnywhereSourceAbility(new ExileSourceEffect().setText("exile it instead")));
+        this.addAbility(DisturbAbility.makeBackAbility());
     }
 
     private DennickPiousApparition(final DennickPiousApparition card) {

@@ -1,25 +1,28 @@
 
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.mana.AddManaToManaPoolTargetControllerEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
+import mage.game.Game;
+import mage.players.Player;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -48,10 +51,9 @@ public final class Valleymaker extends CardImpl {
         this.addAbility(ability);
         
         // {tap}, Sacrifice a Forest: Choose a player. That player adds {G}{G}{G}.
-        Ability ability2 = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaToManaPoolTargetControllerEffect(Mana.GreenMana(3), "chosen player")
-                .setText("choose a player. That player adds {G}{G}{G}"), new TapSourceCost());
+        Ability ability2 = new SimpleManaAbility(Zone.BATTLEFIELD, new ValleymakerManaEffect()
+                .setText("That player adds {G}{G}{G}"), new TapSourceCost());
         ability2.addCost(new SacrificeTargetCost(filter2));
-        ability2.addTarget(new TargetPlayer(1, 1, true));
         this.addAbility(ability2);
     }
 
@@ -62,5 +64,39 @@ public final class Valleymaker extends CardImpl {
     @Override
     public Valleymaker copy() {
         return new Valleymaker(this);
+    }
+}
+
+//Based on Spectral Searchlight
+class ValleymakerManaEffect extends ManaEffect {
+
+    ValleymakerManaEffect() {
+        super();
+        this.staticText = "Choose a player. That player adds {G}{G}{G}.";
+    }
+
+    private ValleymakerManaEffect(final ValleymakerManaEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public Player getPlayer(Game game, Ability source) {
+        if (!game.inCheckPlayableState()) {
+            TargetPlayer target = new TargetPlayer(1, 1, true);
+            if (target.choose(Outcome.PutManaInPool, source.getControllerId(), source, game)) {
+                return game.getPlayer(target.getFirstTarget());
+            }
+        }
+        return game.getPlayer(source.getControllerId()); // Count as controller's potential mana for card playability
+    }
+
+    @Override
+    public Mana produceMana(Game game, Ability source) {
+        return Mana.GreenMana(3);
+    }
+
+    @Override
+    public ValleymakerManaEffect copy() {
+        return new ValleymakerManaEffect(this);
     }
 }

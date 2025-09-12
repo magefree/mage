@@ -67,7 +67,7 @@ public class JaceTest extends CardTestPlayerBase {
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertGraveyardCount(playerA, "Pillarfield Ox", 1);
+        assertGraveyardCount(playerA, "Pillarfield Ox", 1); // must discard a creature and keep land card
         assertExileCount("Jace, Vryn's Prodigy", 0);
         assertPermanentCount(playerA, "Jace, Telepath Unbound", 1);
     }

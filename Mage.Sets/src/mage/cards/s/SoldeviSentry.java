@@ -32,7 +32,7 @@ public final class SoldeviSentry extends CardImpl {
                         new DrawCardTargetEffect(1, true),
                         false
                 ), true)
-                        .setText("Choose target opponent. Regenerate Soldevi Sentry. "
+                        .setText("Choose target opponent. Regenerate {this}. "
                                 + "When it regenerates this way, that player may draw a card"),
                 new GenericManaCost(1)
         );

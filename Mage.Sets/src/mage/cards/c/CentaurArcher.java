@@ -1,36 +1,27 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.target.common.TargetCreaturePermanent;
+import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author anonymous
  */
 public final class CentaurArcher extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
-
-    static {
-        filter.add(new AbilityPredicate(FlyingAbility.class));
-    }
-    
     public CentaurArcher(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{G}");
         this.subtype.add(SubType.CENTAUR);
         this.subtype.add(SubType.ARCHER);
 
@@ -39,7 +30,7 @@ public final class CentaurArcher extends CardImpl {
 
         // {tap}: Centaur Archer deals 1 damage to target creature with flying.
         Ability activatedAbility = new SimpleActivatedAbility(new DamageTargetEffect(1), new TapSourceCost());
-        activatedAbility.addTarget(new TargetCreaturePermanent(filter));
+        activatedAbility.addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_FLYING));
         this.addAbility(activatedAbility);
     }
 

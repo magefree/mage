@@ -103,7 +103,7 @@ class ReturnExiledPermanentsEffect extends OneShotEffect {
     }
 
     private ExileZone getExileIfPossible(final Game game, final Ability source) {
-        UUID exileZone = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+        UUID exileZone = CardUtil.getExileZoneId(game, source.getSourceId(), source.getStackMomentSourceZCC());
 
         if (exileZone != null) {
             ExileZone exile = game.getExile().getExileZone(exileZone);

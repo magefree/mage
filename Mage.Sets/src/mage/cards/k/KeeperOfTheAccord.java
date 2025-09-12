@@ -2,18 +2,15 @@ package mage.cards.k;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.constants.TargetController;
-import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -27,13 +24,6 @@ import java.util.UUID;
  */
 public final class KeeperOfTheAccord extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("basic Plains card");
-
-    static {
-        filter.add(SuperType.BASIC.getPredicate());
-        filter.add(SubType.PLAINS.getPredicate());
-    }
-
     public KeeperOfTheAccord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
 
@@ -43,22 +33,14 @@ public final class KeeperOfTheAccord extends CardImpl {
         this.toughness = new MageInt(4);
 
         // At the beginning of each opponent's end step, if that player controls more creatures than you, create a 1/1 white Soldier creature token.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfEndStepTriggeredAbility(
-                        TargetController.OPPONENT, new CreateTokenEffect(new SoldierToken()), false
-                ), KeeperOfTheAccordCondition.CREATURES, "At the beginning of each opponent's end step, " +
-                "if that player controls more creatures than you, create a 1/1 white Soldier creature token."
-        ));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(
+                TargetController.OPPONENT, new CreateTokenEffect(new SoldierToken()), false
+        ).withInterveningIf(KeeperOfTheAccordCondition.CREATURES));
 
         // At the beginning of each opponent's end step, if that player controls more lands than you, you may search your library for a basic Plains card, put it onto the battlefield tapped, then shuffle your library.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfEndStepTriggeredAbility(TargetController.OPPONENT, new SearchLibraryPutInPlayEffect(
-                        new TargetCardInLibrary(filter), true
-                ), true),
-                KeeperOfTheAccordCondition.LANDS, "At the beginning of each opponent's end step, " +
-                "if that player controls more lands than you, you may search your library for a basic Plains card, " +
-                "put it onto the battlefield tapped, then shuffle."
-        ));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(
+                TargetController.OPPONENT, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_PLAINS), true), true
+        ).withInterveningIf(KeeperOfTheAccordCondition.LANDS));
     }
 
     private KeeperOfTheAccord(final KeeperOfTheAccord card) {
@@ -73,8 +55,8 @@ public final class KeeperOfTheAccord extends CardImpl {
 
 enum KeeperOfTheAccordCondition implements Condition {
 
-    CREATURES(StaticFilters.FILTER_PERMANENT_CREATURE),
-    LANDS(StaticFilters.FILTER_LAND);
+    CREATURES(StaticFilters.FILTER_PERMANENT_CREATURES),
+    LANDS(StaticFilters.FILTER_LANDS);
 
     private final FilterPermanent filter;
 
@@ -86,5 +68,10 @@ enum KeeperOfTheAccordCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         return game.getBattlefield().countAll(filter, source.getControllerId(), game)
                 < game.getBattlefield().countAll(filter, game.getActivePlayerId(), game);
+    }
+
+    @Override
+    public String toString() {
+        return "that player controls more " + filter.getMessage() + " than you";
     }
 }

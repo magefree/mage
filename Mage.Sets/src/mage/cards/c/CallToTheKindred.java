@@ -1,10 +1,10 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
-import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -13,7 +13,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.SharesCreatureTypePredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -41,7 +40,7 @@ public final class CallToTheKindred extends CardImpl {
         // At the beginning of your upkeep, you may look at the top five cards of your library.
         // If you do, you may put a creature card that shares a creature type with enchanted creature from among them onto the battlefield,
         // then you put the rest of those cards on the bottom of your library in any order.
-        this.addAbility(new OnEventTriggeredAbility(GameEvent.EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new CallToTheKindredEffect(), true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CallToTheKindredEffect(), true));
     }
 
     private CallToTheKindred(final CallToTheKindred card) {

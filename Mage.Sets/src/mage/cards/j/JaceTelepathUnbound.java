@@ -2,7 +2,6 @@ package mage.cards.j;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.MayCastTargetCardEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -35,9 +34,9 @@ public final class JaceTelepathUnbound extends CardImpl {
         this.setStartingLoyalty(5);
 
         // +1: Up to one target creature gets -2/-0 until your next turn.
-        Effect effect = new BoostTargetEffect(-2, 0, Duration.UntilYourNextTurn);
-        effect.setText("Up to one target creature gets -2/-0 until your next turn");
-        Ability ability = new LoyaltyAbility(effect, 1);
+        Ability ability = new LoyaltyAbility(new BoostTargetEffect(
+                -2, 0, Duration.UntilYourNextTurn
+        ).setText("Up to one target creature gets -2/-0 until your next turn"), 1);
         ability.addTarget(new TargetCreaturePermanent(0, 1));
         this.addAbility(ability);
 

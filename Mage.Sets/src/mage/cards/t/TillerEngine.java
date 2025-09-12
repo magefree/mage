@@ -11,6 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
+import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
@@ -25,7 +26,7 @@ import java.util.UUID;
  */
 public final class TillerEngine extends CardImpl {
 
-    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent();
+    private static final FilterPermanent filter = new FilterControlledLandPermanent();
 
     static {
         filter.add(TappedPredicate.TAPPED);
@@ -40,7 +41,7 @@ public final class TillerEngine extends CardImpl {
         // Whenever a land enters the battlefield tapped and under your control, choose one —
         // • Untap that land.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(new TillerEngineUntapEffect(), filter)
-                .setTriggerPhrase("Whenever a land enters the battlefield tapped and under your control, ");
+                .setTriggerPhrase("Whenever a land you control enters tapped, ");
 
         // • Tap target nonland permanent an opponent controls.
         Mode mode = new Mode(new TapTargetEffect());

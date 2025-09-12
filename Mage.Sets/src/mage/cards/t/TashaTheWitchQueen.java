@@ -18,7 +18,7 @@ import mage.game.Game;
 import mage.game.permanent.token.Demon33Token;
 import mage.players.Player;
 import mage.target.common.TargetCardInOpponentsGraveyard;
-import mage.target.targetadjustment.ForEachOpponentTargetsAdjuster;
+import mage.target.targetadjustment.ForEachPlayerTargetsAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 import mage.util.CardUtil;
 
@@ -50,7 +50,7 @@ public final class TashaTheWitchQueen extends CardImpl {
         Ability ability = new LoyaltyAbility(new DrawCardSourceControllerEffect(1), 1);
         ability.addEffect(new TashaTheWitchQueenExileEffect());
         ability.addTarget(new TargetCardInOpponentsGraveyard(0, 1, filterCard));
-        ability.setTargetAdjuster(new ForEachOpponentTargetsAdjuster(true));
+        ability.setTargetAdjuster(new ForEachPlayerTargetsAdjuster(true, true));
         this.addAbility(ability);
 
         // −3: You may cast a spell from among cards in exile with page counters on them without paying its mana cost.
@@ -132,7 +132,7 @@ class TashaTheWitchQueenCastEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        Cards cards = new CardsImpl(game.getExile().getCards(filter, game));
+        Cards cards = new CardsImpl(game.getExile().getCardsInRange(filter, source.getControllerId(), source, game));
         return !cards.isEmpty() && CardUtil.castSpellWithAttributesForFree(player, source, game, cards, StaticFilters.FILTER_CARD);
     }
 }

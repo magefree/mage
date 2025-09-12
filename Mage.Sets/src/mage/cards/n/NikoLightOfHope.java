@@ -1,9 +1,7 @@
 package mage.cards.n;
 
-import java.util.UUID;
-
-import mage.abilities.Ability;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
@@ -14,9 +12,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
 import mage.cards.Card;
-import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -25,17 +23,18 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.ShardToken;
 import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.functions.EmptyCopyApplier;
 
+import java.util.UUID;
+
 /**
- *
  * @author Grath
  */
 public final class NikoLightOfHope extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("nonlegendary creature you control");
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("nonlegendary creature you control");
 
     static {
         filter.add(Predicates.not(SuperType.LEGENDARY.getPredicate()));
@@ -43,7 +42,7 @@ public final class NikoLightOfHope extends CardImpl {
 
     public NikoLightOfHope(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{U}");
-        
+
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
@@ -56,7 +55,7 @@ public final class NikoLightOfHope extends CardImpl {
         // {2}, {T}: Exile target nonlegendary creature you control. Shards you control become copies of it until the beginning of the next end step. Return it to the battlefield under its owner's control at the beginning of the next end step.
         Ability ability = new SimpleActivatedAbility(new NikoLightOfHopeEffect(), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetControlledCreaturePermanent(1, 1, filter, false));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 
@@ -74,7 +73,7 @@ class NikoLightOfHopeEffect extends OneShotEffect {
 
     NikoLightOfHopeEffect() {
         super(Outcome.Benefit);
-        staticText = "Exile target nonlegendary creature you control. Shards you control become copies of it until the beginning of the next end step. Return it to the battlefield under its owner's control at the beginning of the next end step.";
+        staticText = "Exile target nonlegendary creature you control. Shards you control become copies of it until the next end step. Return it to the battlefield under its owner's control at the beginning of the next end step.";
     }
 
     private NikoLightOfHopeEffect(final NikoLightOfHopeEffect effect) {
@@ -90,26 +89,27 @@ class NikoLightOfHopeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (permanent != null && controller != null) {
-            if (permanent.moveToExile(source.getSourceId(), "Niko, Light of Hope", source, game)) {
-                FilterPermanent filter = new FilterPermanent("shards");
-                filter.add(SubType.SHARD.getPredicate());
-                for (Permanent copyTo : game.getBattlefield().getAllActivePermanents(filter, controller.getId(), game)) {
-                    game.copyPermanent(Duration.UntilNextEndStep, permanent, copyTo.getId(), source, new EmptyCopyApplier());
-                }
-                ExileZone exile = game.getExile().getExileZone(source.getSourceId());
-                if (exile != null && !exile.isEmpty()) {
-                    Card card = game.getCard(permanent.getId());
-                    if (card != null) {
-                        Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false);
-                        effect.setTargetPointer(new FixedTarget(card.getId()));
-                        game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect), source);
-                    }
-                }
-                return true;
-            }
+        if (permanent == null || controller == null
+                || !permanent.moveToExile(source.getSourceId(), "Niko, Light of Hope", source, game)) {
+            return false;
         }
-        return false;
+        FilterPermanent filter = new FilterPermanent("shards");
+        filter.add(SubType.SHARD.getPredicate());
+        for (Permanent copyTo : game.getBattlefield().getAllActivePermanents(filter, controller.getId(), game)) {
+            game.copyPermanent(Duration.UntilNextEndStep, permanent, copyTo.getId(), source, new EmptyCopyApplier());
+        }
+        ExileZone exile = game.getExile().getExileZone(source.getSourceId());
+        if (exile == null || exile.isEmpty()) {
+            return true;
+        }
+        Card card = game.getCard(permanent.getId());
+        if (card == null) {
+            return true;
+        }
+        Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false);
+        effect.setTargetPointer(new FixedTarget(card.getId()));
+        game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect), source);
+        return true;
     }
 
 }

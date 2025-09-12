@@ -150,7 +150,7 @@ class RalLeylineProdigyMinusEightEffect extends OneShotEffect {
             return false;
         }
         Set<Card> cards = player.getLibrary().getTopCards(game, 8);
-        UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+        UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getStackMomentSourceZCC());
         player.moveCardsToExile(cards, source, game, true, exileId, sourceObject.getIdName());
         for (Card card : cards) {
             if (game.getState().getZone(card.getId()) == Zone.EXILED) {

@@ -73,7 +73,7 @@ class AuratouchedMageEffect extends OneShotEffect {
                     Card aura = game.getCard(target.getFirstTarget());
                     Permanent auratouchedMage = source.getSourcePermanentIfItStillExists(game);
                     if (aura != null && auratouchedMage != null
-                            && game.getState().getZoneChangeCounter(source.getSourceId()) == source.getSourceObjectZoneChangeCounter()) {
+                            && game.getState().getZoneChangeCounter(source.getSourceId()) == source.getStackMomentSourceZCC()) {
                         game.getState().setValue("attachTo:" + aura.getId(), auratouchedMage);
                         if (controller.moveCards(aura, Zone.BATTLEFIELD, source, game)) {
                             auratouchedMage.addAttachment(aura.getId(), source, game);

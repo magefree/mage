@@ -19,8 +19,11 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
+
+import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK;
 
 /**
  *
@@ -37,7 +40,7 @@ public final class GarzasAssassin extends CardImpl {
 
         // Sacrifice Garza's Assassin: Destroy target nonblack creature.
         Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new SacrificeSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK));
+        ability.addTarget(new TargetPermanent(FILTER_PERMANENT_CREATURE_NON_BLACK));
         this.addAbility(ability);
 
         // Recover—Pay half your life, rounded up.

@@ -20,7 +20,6 @@ import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterBySubtypeCard;
 import mage.filter.predicate.Predicates;
 import mage.target.common.TargetCardInLibrary;
 
@@ -37,9 +36,9 @@ public final class CharitableLevy extends CardImpl {
         filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
     }
 
-    private static final Condition condition = new SourceHasCounterCondition(CounterType.COLLECTION, 3, Integer.MAX_VALUE);
+    private static final Condition condition = new SourceHasCounterCondition(CounterType.COLLECTION, 3);
 
-    private static final FilterCard filterPlains = new FilterBySubtypeCard(SubType.PLAINS);
+    private static final FilterCard filterPlains = new FilterCard(SubType.PLAINS);
 
     public CharitableLevy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");

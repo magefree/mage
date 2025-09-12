@@ -11,7 +11,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -38,7 +38,7 @@ public final class BlazingHope extends CardImpl {
     }
 }
 
-class BlazingHopeTarget extends TargetCreaturePermanent {
+class BlazingHopeTarget extends TargetPermanent {
 
     public BlazingHopeTarget() {
         super(new FilterCreaturePermanent("creature with power greater than or equal to your life total"));
@@ -49,18 +49,18 @@ class BlazingHopeTarget extends TargetCreaturePermanent {
     }
 
     @Override
-    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
+    public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
         Permanent permanent = game.getPermanent(id);
         if (permanent != null) {
             if (!isNotTarget()) {
-                if (!permanent.canBeTargetedBy(game.getObject(source.getId()), controllerId, source, game)
-                        || !permanent.canBeTargetedBy(game.getObject(source), controllerId, source, game)) {
+                if (!permanent.canBeTargetedBy(game.getObject(source.getId()), playerId, source, game)
+                        || !permanent.canBeTargetedBy(game.getObject(source), playerId, source, game)) {
                     return false;
                 }
             }
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null && permanent.getPower().getValue() >= controller.getLife()) {
-                return filter.match(permanent, controllerId, source, game);
+                return filter.match(permanent, playerId, source, game);
             }
         }
         return false;

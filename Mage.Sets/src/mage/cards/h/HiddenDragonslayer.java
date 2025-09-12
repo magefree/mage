@@ -17,6 +17,7 @@ import mage.constants.ComparisonType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -47,7 +48,7 @@ public final class HiddenDragonslayer extends CardImpl {
 
         // When Hidden Dragonslayer is turned face up, destroy target creature with power 4 or greater an opponent controls.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new DestroyTargetEffect(), false, false);
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

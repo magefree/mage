@@ -15,7 +15,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
-import mage.target.TargetSource;
+import mage.target.Target;
 
 import java.util.Set;
 import java.util.UUID;
@@ -53,7 +53,7 @@ public final class BoneMask extends CardImpl {
 enum BoneMaskEffectPreventionApplier implements PreventNextDamageFromChosenSourceEffect.ApplierOnPrevention {
     instance;
 
-    public boolean apply(PreventionEffectData data, TargetSource targetSource, GameEvent event, Ability source, Game game) {
+    public boolean apply(PreventionEffectData data, Target target, GameEvent event, Ability source, Game game) {
         if (data == null || data.getPreventedDamage() <= 0) {
             return false;
         }

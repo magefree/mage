@@ -63,7 +63,7 @@ class ShyftEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Effect effect = new BecomesColorOrColorsTargetEffect(Duration.Custom);
-        effect.setTargetPointer(new FixedTarget(source.getSourceId(), source.getSourceObjectZoneChangeCounter()));
+        effect.setTargetPointer(new FixedTarget(source.getSourceId(), source.getStackMomentSourceZCC()));
         return effect.apply(game, source);
     }
 }

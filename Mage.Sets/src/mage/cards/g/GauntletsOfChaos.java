@@ -69,9 +69,10 @@ class GauntletsOfChaosFirstTarget extends TargetControlledPermanent {
     }
 
     @Override
-    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
-        if (super.canTarget(controllerId, id, source, game)) {
-            Set<CardType> cardTypes = getOpponentPermanentCardTypes(source.getSourceId(), controllerId, game);
+    public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
+        Set<CardType> cardTypes = getOpponentPermanentCardTypes(playerId, game);
+
+        if (super.canTarget(playerId, id, source, game)) {
             Permanent permanent = game.getPermanent(id);
             for (CardType type : permanent.getCardType(game)) {
                 if (cardTypes.contains(type)) {
@@ -84,23 +85,21 @@ class GauntletsOfChaosFirstTarget extends TargetControlledPermanent {
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
-        // get all cardtypes from opponents permanents 
-        Set<CardType> cardTypes = getOpponentPermanentCardTypes(source.getSourceId(), sourceControllerId, game);
+        Set<CardType> cardTypes = getOpponentPermanentCardTypes(sourceControllerId, game);
+
         Set<UUID> possibleTargets = new HashSet<>();
         MageObject targetSource = game.getObject(source);
         if (targetSource != null) {
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
-                if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, source, game)) {
-                    for (CardType type : permanent.getCardType(game)) {
-                        if (cardTypes.contains(type)) {
-                            possibleTargets.add(permanent.getId());
-                            break;
-                        }
+                for (CardType type : permanent.getCardType(game)) {
+                    if (cardTypes.contains(type)) {
+                        possibleTargets.add(permanent.getId());
+                        break;
                     }
                 }
             }
         }
-        return possibleTargets;
+        return keepValidPossibleTargets(possibleTargets, sourceControllerId, source, game);
     }
 
     @Override
@@ -108,7 +107,7 @@ class GauntletsOfChaosFirstTarget extends TargetControlledPermanent {
         return new GauntletsOfChaosFirstTarget(this);
     }
 
-    private EnumSet<CardType> getOpponentPermanentCardTypes(UUID sourceId, UUID sourceControllerId, Game game) {
+    private EnumSet<CardType> getOpponentPermanentCardTypes(UUID sourceControllerId, Game game) {
         Player controller = game.getPlayer(sourceControllerId);
         EnumSet<CardType> cardTypes = EnumSet.noneOf(CardType.class);
         if (controller != null) {
@@ -125,8 +124,6 @@ class GauntletsOfChaosFirstTarget extends TargetControlledPermanent {
 
 class GauntletsOfChaosSecondTarget extends TargetPermanent {
 
-    private Permanent firstTarget = null;
-
     public GauntletsOfChaosSecondTarget() {
         super();
         this.filter = this.filter.copy();
@@ -136,44 +133,46 @@ class GauntletsOfChaosSecondTarget extends TargetPermanent {
 
     private GauntletsOfChaosSecondTarget(final GauntletsOfChaosSecondTarget target) {
         super(target);
-        this.firstTarget = target.firstTarget;
     }
 
 
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
-        if (super.canTarget(id, source, game)) {
-            Permanent target1 = game.getPermanent(source.getFirstTarget());
-            Permanent opponentPermanent = game.getPermanent(id);
-            if (target1 != null && opponentPermanent != null) {
-                return target1.shareTypes(opponentPermanent, game);
-            }
+        Permanent ownPermanent = game.getPermanent(source.getFirstTarget());
+        Permanent possiblePermanent = game.getPermanent(id);
+        if (ownPermanent == null || possiblePermanent == null) {
+            return false;
         }
-        return false;
+        return super.canTarget(id, source, game) && ownPermanent.shareTypes(possiblePermanent, game);
     }
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
-        if (firstTarget != null) {
-            MageObject targetSource = game.getObject(source);
-            if (targetSource != null) {
-                for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
-                    if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, source, game)) {
-                        if (permanent.shareTypes(firstTarget, game)) {
-                            possibleTargets.add(permanent.getId());
-                        }
-                    }
+
+        Permanent ownPermanent = game.getPermanent(source.getFirstTarget());
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
+            if (ownPermanent == null) {
+                // playable or first target not yet selected
+                // use all
+                possibleTargets.add(permanent.getId());
+            } else {
+                // real
+                // filter by shared type
+                if (permanent.shareTypes(ownPermanent, game)) {
+                    possibleTargets.add(permanent.getId());
                 }
             }
         }
-        return possibleTargets;
+        possibleTargets.removeIf(id -> ownPermanent != null && ownPermanent.getId().equals(id));
+
+        return keepValidPossibleTargets(possibleTargets, sourceControllerId, source, game);
     }
 
     @Override
     public boolean chooseTarget(Outcome outcome, UUID playerId, Ability source, Game game) {
-        firstTarget = game.getPermanent(source.getFirstTarget());
-        return super.chooseTarget(Outcome.Damage, playerId, source, game);
+        // AI hint with better outcome
+        return super.chooseTarget(Outcome.GainControl, playerId, source, game);
     }
 
     @Override

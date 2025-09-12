@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
@@ -14,6 +13,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.common.FilterLandCard;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -31,7 +32,7 @@ public final class DrownInFilth extends CardImpl {
         effect.setText("Choose target creature. Mill four cards");
         this.getSpellAbility().addEffect(effect);
         DynamicValue landCards = new SignInversionDynamicValue(new CardsInControllerGraveyardCount(new FilterLandCard()));
-        this.getSpellAbility().addEffect(new BoostTargetEffect(landCards, landCards, Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(landCards, landCards, Duration.EndOfTurn).withTargetDescription(", then that creature"));
     }
 
     private DrownInFilth(final DrownInFilth card) {

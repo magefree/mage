@@ -12,15 +12,14 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandCard;
-import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.targetadjustment.ForEachOpponentTargetsAdjuster;
+import mage.target.targetadjustment.ForEachPlayerTargetsAdjuster;
 
 import java.util.UUID;
 
@@ -29,11 +28,6 @@ import java.util.UUID;
  */
 public final class SylvanPrimordial extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("noncreature permanent");
-
-    static {
-        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
-    }
     public SylvanPrimordial(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
         this.subtype.add(SubType.AVATAR);
@@ -46,8 +40,8 @@ public final class SylvanPrimordial extends CardImpl {
 
         // When Sylvan Primordial enters the battlefield, for each opponent, destroy target noncreature permanent that player controls. For each permanent destroyed this way, search your library for a Forest card and put that card onto the battlefield tapped. Then shuffle your library.
         Ability ability = new EntersBattlefieldTriggeredAbility(new SylvanPrimordialEffect(), false);
-        ability.addTarget(new TargetPermanent(filter));
-        ability.setTargetAdjuster(new ForEachOpponentTargetsAdjuster());
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_NON_CREATURE));
+        ability.setTargetAdjuster(new ForEachPlayerTargetsAdjuster(false, true));
         this.addAbility(ability);
     }
 

@@ -73,6 +73,8 @@
 |Generate|EMBLEM:MD1|Emblem Elspeth|||ElspethKnightErrantEmblem|
 |Generate|EMBLEM:SWS|Emblem Obi-Wan Kenobi|||ObiWanKenobiEmblem|
 |Generate|EMBLEM:SWS|Emblem Luke Skywalker|||LukeSkywalkerEmblem|
+|Generate|EMBLEM:SWS|Emblem Yoda|||YodaEmblem|
+|Generate|EMBLEM:SWS|Emblem Aurra Sing|||AurraSingBaneOfJediEmblem|
 |Generate|EMBLEM:RIX|Emblem Huatli|||HuatliRadiantChampionEmblem|
 |Generate|EMBLEM:RNA|Emblem Domri|||DomriChaosBringerEmblem|
 |Generate|EMBLEM:WAR|Emblem Nissa|||NissaWhoShakesTheWorldEmblem|
@@ -145,6 +147,8 @@
 |Generate|EMBLEM:INR|Emblem Tamiyo|||TamiyoFieldResearcherEmblem|
 |Generate|EMBLEM:INR|Emblem Wrenn|||WrennAndSevenEmblem|
 |Generate|EMBLEM:DFT|Emblem Chandra|||ChandraSparkHunterEmblem|
+|Generate|EMBLEM:FIN|Emblem Sephiroth|||SephirothOneWingedAngelEmblem|
+|Generate|EMBLEM:EOE|Emblem Tezzeret|||TezzeretCruelCaptainEmblem|
 
 
 # ALL PLANES
@@ -529,6 +533,9 @@
 
 # DGM
 |Generate|TOK:DGM|Elemental|||VoiceOfResurgenceToken|
+
+# DIS
+|Generate|TOK:DIS|Elemental|||ResearchDevelopmentToken|
 
 # DKA
 |Generate|TOK:DKA|Human|||HumanToken|
@@ -1136,6 +1143,9 @@
 |Generate|TOK:ELD|Rat|||RatToken|
 |Generate|TOK:ELD|Wolf|||GarrukCursedHuntsmanToken|
 
+# UND
+|Generate|TOK:UND|Goblin|||GoblinToken|
+
 # THB
 |Generate|TOK:THB|Elemental|||PurphorossInterventionToken|
 |Generate|TOK:THB|Goat|||GoatToken|
@@ -1520,12 +1530,19 @@
 |Generate|TOK:SLD|Food|3||FoodToken|
 |Generate|TOK:SLD|Food|4||FoodToken|
 |Generate|TOK:SLD|Food|5||FoodToken|
+|Generate|TOK:SLD|Food|6||FoodToken|
 |Generate|TOK:SLD|Goblin|||GoblinToken|
 |Generate|TOK:SLD|Hydra|||ZaxaraTheExemplaryHydraToken|
 |Generate|TOK:SLD|Icingdeath, Frost Tongue|||IcingdeathFrostTongueToken|
 |Generate|TOK:SLD|Marit Lage|||MaritLageToken|
-|Generate|TOK:SLD|Mechtitan|||MechtitanToken|
+|Generate|TOK:SLD|Mechtitan|1||MechtitanToken|
+|Generate|TOK:SLD|Mechtitan|2||MechtitanToken|
+|Generate|TOK:SLD|Myr|||MyrToken|
 |Generate|TOK:SLD|Saproling|||SaprolingToken|
+|Generate|TOK:SLD|Shapeshifter|1||ShapeshifterBlueToken|
+|Generate|TOK:SLD|Shapeshifter|2||ShapeshifterBlueToken|
+|Generate|TOK:SLD|Shapeshifter|3||ShapeshifterBlueToken|
+|Generate|TOK:SLD|Shapeshifter|4||ShapeshifterBlueToken|
 |Generate|TOK:SLD|Shrine|||ShrineToken|
 |Generate|TOK:SLD|Spirit|1||SpiritWhiteToken|
 |Generate|TOK:SLD|Spirit|2||SpiritToken|
@@ -1534,6 +1551,8 @@
 |Generate|TOK:SLD|Treasure|2||TreasureToken|
 |Generate|TOK:SLD|Treasure|3||TreasureToken|
 |Generate|TOK:SLD|Treasure|4||TreasureToken|
+|Generate|TOK:SLD|Treasure|5||TreasureToken|
+|Generate|TOK:SLD|Treasure|6||TreasureToken|
 |Generate|TOK:SLD|Walker|1||WalkerToken|
 |Generate|TOK:SLD|Walker|2||WalkerToken|
 |Generate|TOK:SLD|Walker|3||WalkerToken|
@@ -1920,6 +1939,12 @@
 |Generate|TOK:40K|Tyranid Gargoyle|||TyranidGargoyleToken|
 |Generate|TOK:40K|Tyranid Warrior|||TyranidWarriorToken|
 
+# UNF
+|Generate|TOK:UNF|Clown Robot|1||ClownRobotToken|
+|Generate|TOK:UNF|Clown Robot|2||ClownRobotToken|
+|Generate|TOK:UNF|Storm Crow|||StormCrowToken|
+|Generate|TOK:UNF|Squirrel|||SquirrelToken|
+
 # BRO
 |Generate|TOK:BRO|Bear|||BearToken|
 |Generate|TOK:BRO|Construct|1||KarnConstructToken|
@@ -2214,26 +2239,20 @@
 |Generate|TOK:WOE|Young Hero|||YoungHeroRoleToken|
 
 # WOC
-|Generate|TOK:WOC|Cat|1||CatToken2|
-|Generate|TOK:WOC|Cat|2||CatToken|
-|Generate|TOK:WOC|Elephant|||ElephantToken|
 |Generate|TOK:WOC|Faerie|||FaerieToken|
 |Generate|TOK:WOC|Faerie Rogue|1||FaerieRogueToken|
 |Generate|TOK:WOC|Faerie Rogue|2||OonaQueenFaerieRogueToken|
-|Generate|TOK:WOC|Human Monk|||HumanMonkToken|
 |Generate|TOK:WOC|Human Soldier|||HumanSoldierToken|
 |Generate|TOK:WOC|Monster|||MonsterRoleToken|
-|Generate|TOK:WOC|Ox|||OxToken|
 |Generate|TOK:WOC|Pegasus|||PegasusToken2|
 |Generate|TOK:WOC|Pirate|||NettlingNuisancePirateToken|
 |Generate|TOK:WOC|Royal|||RoyalRoleToken|
 |Generate|TOK:WOC|Saproling|||SaprolingToken|
-|Generate|TOK:WOC|Sorcerer|||SorcererRoleToken|
-|Generate|TOK:WOC|Spirit|||WhiteBlackSpiritToken|
 |Generate|TOK:WOC|Virtuous|||VirtuousRoleToken|
 
 # WHO
 |Generate|TOK:WHO|Alien|||AlienToken|
+|Generate|TOK:WHO|Alien Angel|||AlienAngelToken|
 |Generate|TOK:WHO|Alien Insect|||AlienInsectToken|
 |Generate|TOK:WHO|Alien Rhino|||AlienRhinoToken|
 |Generate|TOK:WHO|Alien Salamander|||AlienSalamanderToken|
@@ -2253,6 +2272,7 @@
 |Generate|TOK:WHO|Human|2||TheEleventhHourToken|
 |Generate|TOK:WHO|Human Noble|||TheGirlInTheFireplaceHumanNobleToken|
 |Generate|TOK:WHO|Mark of the Rani|||MarkOfTheRaniToken|
+|Generate|TOK:WHO|Mutant|||Mutant33DeathtouchToken|
 |Generate|TOK:WHO|Soldier|||SoldierToken|
 |Generate|TOK:WHO|Treasure|1||TreasureToken|
 |Generate|TOK:WHO|Treasure|2||TreasureToken|
@@ -2269,7 +2289,7 @@
 |Generate|TOK:PIP|Human Knight|||ThePrydwenSteelFlagshipHumanKnightToken|
 |Generate|TOK:PIP|Human Soldier|||HumanSoldierToken|
 |Generate|TOK:PIP|Junk|||JunkToken|
-|Generate|TOK:PIP|Robot|||RobotToken|
+|Generate|TOK:PIP|Robot|||Robot33Token|
 |Generate|TOK:PIP|Settlement|||SettlementToken|
 |Generate|TOK:PIP|Soldier|1||SoldierTokenWithHaste|
 |Generate|TOK:PIP|Soldier|2||SoldierToken|
@@ -2735,7 +2755,8 @@
 |Generate|TOK:TDC|Gold|||GoldToken|
 |Generate|TOK:TDC|Human|||HumanToken|
 |Generate|TOK:TDC|Inkling|||InklingToken|
-|Generate|TOK:TDC|Insect|||InsectToken|
+|Generate|TOK:TDC|Insect|1||InsectToken|
+|Generate|TOK:TDC|Insect|2||InsectDeathToken|
 |Generate|TOK:TDC|Karox Bladewing|||KaroxBladewingToken|
 |Generate|TOK:TDC|Myr|||MyrToken|
 |Generate|TOK:TDC|Plant|||PlantToken|
@@ -2747,6 +2768,7 @@
 |Generate|TOK:TDC|Spider|||SpiderToken|
 |Generate|TOK:TDC|Spirit|||SpiritWhiteToken|
 |Generate|TOK:TDC|Thopter|||ThopterColorlessToken|
+|Generate|TOK:TDC|Wall|||Wall13Token|
 
 # ACR
 |Generate|TOK:ACR|Assassin|||AssassinMenaceToken|
@@ -2763,17 +2785,99 @@
 |Generate|TOK:DSK|Everywhere|||EverywhereToken|
 |Generate|TOK:DSK|Glimmer|||GlimmerToken|
 |Generate|TOK:DSK|Gremlin|||Gremlin11Token|
+|Generate|TOK:DSK|Horror|||HorrorEnchantmentCreatureToken|
 |Generate|TOK:DSK|Insect|1||InsectBlackGreenFlyingToken|
 |Generate|TOK:DSK|Insect|2||InsectWhiteToken|
 |Generate|TOK:DSK|Primo, the Indivisible|||PrimoTheIndivisibleToken|
 |Generate|TOK:DSK|Shard|||ShardToken|
 |Generate|TOK:DSK|Spider|||Spider22Token|
-|Generate|TOK:DSK|Spirit|||SpiritBlueToken|
+|Generate|TOK:DSK|Spirit|1||Spirit31Token|
+|Generate|TOK:DSK|Spirit|2||SpiritBlueToken|
 |Generate|TOK:DSK|Treasure|||TreasureToken|
 
 # FIN
 |Generate|TOK:FIN|Food|||FoodToken|
-|Generate|TOK:FIN|Hero|||HeroToken|
+|Generate|TOK:FIN|Hero|1||HeroToken|
+|Generate|TOK:FIN|Hero|2||HeroToken|
+|Generate|TOK:FIN|Hero|3||HeroToken|
+|Generate|TOK:FIN|Hero|4||HeroToken|
+|Generate|TOK:FIN|Hero|5||HeroToken|
+|Generate|TOK:FIN|Hero|6||HeroToken|
+|Generate|TOK:FIN|Hero|7||HeroToken|
+|Generate|TOK:FIN|Hero|8||HeroToken|
+|Generate|TOK:FIN|Hero|9||HeroToken|
+|Generate|TOK:FIN|Hero|10||HeroToken|
+|Generate|TOK:FIN|Hero|11||HeroToken|
+|Generate|TOK:FIN|Hero|12||HeroToken|
+|Generate|TOK:FIN|Hero|13||HeroToken|
+|Generate|TOK:FIN|Hero|14||HeroToken|
+|Generate|TOK:FIN|Hero|15||HeroToken|
+|Generate|TOK:FIN|Hero|16||HeroToken|
+|Generate|TOK:FIN|Knight|||WaylayToken|
+|Generate|TOK:FIN|Moogle|1||MoogleToken|
+|Generate|TOK:FIN|Moogle|2||MoogleToken|
+|Generate|TOK:FIN|Robot|||RobotBlueToken|
+|Generate|TOK:FIN|Horror|||Horror3Token|
+|Generate|TOK:FIN|Wizard|1||BlackWizardToken|
+|Generate|TOK:FIN|Wizard|2||BlackWizardToken|
+|Generate|TOK:FIN|Wizard|3||BlackWizardToken|
+|Generate|TOK:FIN|Bird|1||ChocoboToken|
+|Generate|TOK:FIN|Bird|2||ChocoboToken|
+|Generate|TOK:FIN|Frog|||FrogGreenToken|
+|Generate|TOK:FIN|Angelo|||AngeloToken|
+|Generate|TOK:FIN|Darkstar|||DarkstarToken|
+|Generate|TOK:FIN|Elemental|||ElementalAllColorsToken|
+|Generate|TOK:FIN|Treasure|1||TreasureToken|
+|Generate|TOK:FIN|Treasure|2||TreasureToken|
+
+# FIC
+|Generate|TOK:FIC|Human Soldier|||HumanSoldierToken|
+|Generate|TOK:FIC|Soldier|||SoldierToken|
+|Generate|TOK:FIC|Spirit|||SpiritWhiteToken|
+|Generate|TOK:FIC|Bird|||BirdVigilanceToken|
+|Generate|TOK:FIC|Squid|||SquidToken|
+|Generate|TOK:FIC|Zombie|||ZombieToken|
+|Generate|TOK:FIC|Rebel|||RebelRedToken|
+|Generate|TOK:FIC|The Blackjack|||TheBlackjackToken|
+|Generate|TOK:FIC|Clue|||ClueArtifactToken|
+
+#EOE
+|Generate|TOK:EOE|Drone|||DroneToken2|
+|Generate|TOK:EOE|Human Soldier|||HumanSoldierToken|
+|Generate|TOK:EOE|Lander|1||LanderToken|
+|Generate|TOK:EOE|Lander|2||LanderToken|
+|Generate|TOK:EOE|Lander|3||LanderToken|
+|Generate|TOK:EOE|Lander|4||LanderToken|
+|Generate|TOK:EOE|Lander|5||LanderToken|
+|Generate|TOK:EOE|Munitions|||MunitionsToken|
+|Generate|TOK:EOE|Robot|||RobotToken|
+|Generate|TOK:EOE|Sliver|||SliverToken|
+
+#EOC
+|Generate|TOK:EOC|Beast|1||BeastToken|
+|Generate|TOK:EOC|Beast|2||BeastToken2|
+|Generate|TOK:EOC|Bird|||SwanSongBirdToken|
+|Generate|TOK:EOC|Clue|||ClueArtifactToken|
+|Generate|TOK:EOC|Elemental|1||TitaniaProtectorOfArgothElementalToken|
+|Generate|TOK:EOC|Elemental|2||OmnathElementalToken|
+|Generate|TOK:EOC|Gnome|||GnomeToken|
+|Generate|TOK:EOC|Golem|1||GolemToken|
+|Generate|TOK:EOC|Golem|2||HammerOfPurphorosGolemToken|
+|Generate|TOK:EOC|Golem|3||TitanForgeGolemToken|
+|Generate|TOK:EOC|Incubator|||IncubatorToken|
+|Generate|TOK:EOC|Insect|||XiraBlackInsectToken|
+|Generate|TOK:EOC|Pest|||Pest11GainLifeToken|
+|Generate|TOK:EOC|Phyrexian|||Phyrexian00Token|
+|Generate|TOK:EOC|Shapeshifter|||ShapeshifterDeathtouchToken|
+|Generate|TOK:EOC|Thopter|||ThopterColorlessToken|
+
+#SPM
+|Generate|TOK:SPM|Food|||FoodToken|
+|Generate|TOK:SPM|Human|||HumanCitizenToken|
+|Generate|TOK:SPM|Illusion|||IllusionVillainToken|
+|Generate|TOK:SPM|Robot|||RobotFlyingToken|
+|Generate|TOK:SPM|Spider|||Spider21Token|
+|Generate|TOK:SPM|Treasure|||TreasureToken|
 
 # JVC
 |Generate|TOK:JVC|Elemental Shaman|||ElementalShamanToken|
@@ -2785,6 +2889,7 @@
 # UGL
 |Generate|TOK:UGL|Goblin|||GoblinToken|
 |Generate|TOK:UGL|Pegasus|||PegasusToken|
+|Generate|TOK:UGL|Rabid Sheep|||RabidSheepToken|
 |Generate|TOK:UGL|Soldier|||SoldierToken|
 |Generate|TOK:UGL|Squirrel|||SquirrelToken|
 |Generate|TOK:UGL|Zombie|||ZombieToken|
@@ -2846,3 +2951,9 @@
 
 # PL23
 |Generate|TOK:PL23|Food|||FoodToken|
+
+# PL24
+|Generate|TOK:PL24|Dragon|||DragonToken|
+
+# PL25
+|Generate|TOK:PL25|Snake|||SnakeToken|

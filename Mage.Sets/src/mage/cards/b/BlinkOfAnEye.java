@@ -1,7 +1,4 @@
-
 package mage.cards.b;
-
-import java.util.UUID;
 
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -13,8 +10,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.common.TargetNonlandPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author JRHerlehy
  */
 public final class BlinkOfAnEye extends CardImpl {
@@ -26,10 +24,12 @@ public final class BlinkOfAnEye extends CardImpl {
         this.addAbility(new KickerAbility("{1}{U}"));
 
         // Return target nonland permanent to its owner's hand. If this spell was kicked, draw a card.
-        this.getSpellAbility().addTarget(new TargetNonlandPermanent());
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new DrawCardSourceControllerEffect(1), KickedCondition.ONCE,
-                                                                      "If this spell was kicked, draw a card"));
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
+                new DrawCardSourceControllerEffect(1),
+                KickedCondition.ONCE, "if this spell was kicked, draw a card"
+        ));
+        this.getSpellAbility().addTarget(new TargetNonlandPermanent());
     }
 
     private BlinkOfAnEye(final BlinkOfAnEye card) {

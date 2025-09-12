@@ -8,6 +8,7 @@ import mage.game.permanent.Permanent;
 import mage.watchers.common.SaddledMountWatcher;
 import org.junit.Assert;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -90,6 +91,7 @@ public class SaddleTest extends CardTestPlayerBase {
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Saddle");
         setChoice(playerA, bear); // to saddle cost
+        setChoice(playerA, TestPlayer.CHOICE_SKIP);
 
         attack(1, playerA, possum, playerB);
         setChoice(playerA, bear); // to return
@@ -116,6 +118,7 @@ public class SaddleTest extends CardTestPlayerBase {
         // turn 1 - saddle x2 and trigger on attack
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Saddle");
         setChoice(playerA, bear + "^" + lion);
+        setChoice(playerA, TestPlayer.CHOICE_SKIP);
 
         attack(1, playerA, possum, playerB);
         setChoice(playerA, elf); // to return (try to choose a wrong creature, so game must not allow to choose it)

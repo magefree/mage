@@ -13,7 +13,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetSource;
+import mage.target.Target;
 
 import java.util.UUID;
 
@@ -77,11 +77,11 @@ enum ShadowbanePreventionApplier implements PreventNextDamageFromChosenSourceEff
         return "If damage from a black source is prevented this way, you gain that much life";
     }
 
-    public boolean apply(PreventionEffectData data, TargetSource targetSource, GameEvent event, Ability source, Game game) {
+    public boolean apply(PreventionEffectData data, Target target, GameEvent event, Ability source, Game game) {
         if (data == null || data.getPreventedDamage() <= 0) {
             return false;
         }
-        MageObject sourceObject = game.getObject(targetSource.getFirstTarget());
+        MageObject sourceObject = game.getObject(target.getFirstTarget());
         if (!sourceObject.getColor(game).isBlack()) {
             return false;
         }

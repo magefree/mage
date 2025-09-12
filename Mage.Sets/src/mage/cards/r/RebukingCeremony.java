@@ -18,7 +18,7 @@ public final class RebukingCeremony extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}{G}");
 
         // Put two target artifacts on top of their owners' libraries.
-        getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));
+        getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true, "put two target artifacts on top of their owners' libraries"));
         getSpellAbility().addTarget(new TargetArtifactPermanent(2));
     }
 

@@ -58,7 +58,7 @@ enum EverythingComesToDustPredicate implements ObjectSourcePlayerPredicate<Perma
         if (!p.isCreature(game)){
             return false;
         }
-        HashSet<MageObjectReference> set = CardUtil.getSourceCostsTag(game, input.getSource(), ConvokeAbility.convokingCreaturesKey, new HashSet<>(0));
+        HashSet<MageObjectReference> set = CardUtil.getSourceCostsTag(game, input.getSource(), ConvokeAbility.convokingCreaturesKey, new HashSet<>());
         for (MageObjectReference mor : set){
             Permanent convoked = game.getPermanentOrLKIBattlefield(mor);
             if (convoked.shareCreatureTypes(game, p)){

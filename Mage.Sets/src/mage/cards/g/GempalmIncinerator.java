@@ -37,7 +37,8 @@ public final class GempalmIncinerator extends CardImpl {
         // Cycling {1}{R}
         this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{1}{R}")));
         // When you cycle Gempalm Incinerator, you may have it deal X damage to target creature, where X is the number of Goblins on the battlefield.
-        Ability ability = new CycleTriggeredAbility(new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter)),true);
+        Ability ability = new CycleTriggeredAbility(new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter))
+                .setText("you may have it deal X damage to target creature, where X is the number of Goblins on the battlefield"),true);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

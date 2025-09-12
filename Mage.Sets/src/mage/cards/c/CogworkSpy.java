@@ -28,7 +28,7 @@ public final class CogworkSpy extends CardImpl {
 
         // TODO: Draft specific abilities not implemented
         // Reveal Cogwork Spy as you draft it. You may look at the next card drafted from this booster pack.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("Reveal Cogwork Spy as you draft it. "
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("Reveal {this} as you draft it. "
                 + "You may look at the next card drafted from this booster pack - not implemented.")));
 
         // Flying

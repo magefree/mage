@@ -1,33 +1,31 @@
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.constants.ComparisonType;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
-import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class AscendantPackleader extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("a permanent with mana value 4 or greater");
-    private static final FilterSpell filter2 = new FilterSpell("a spell with mana value 4 or greater");
 
     static {
         filter.add(new ManaValuePredicate(ComparisonType.MORE_THAN, 3));
-        filter2.add(new ManaValuePredicate(ComparisonType.MORE_THAN, 3));
     }
 
     public AscendantPackleader(UUID ownerId, CardSetInfo setInfo) {
@@ -48,8 +46,7 @@ public final class AscendantPackleader extends CardImpl {
         // Whenever you cast a spell with mana value 4 or greater, put a +1/+1 counter on Ascendant Packleader.
         this.addAbility(new SpellCastControllerTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                filter2,
-                false
+                StaticFilters.FILTER_SPELL_MV_4_OR_GREATER, false
         ));
     }
 

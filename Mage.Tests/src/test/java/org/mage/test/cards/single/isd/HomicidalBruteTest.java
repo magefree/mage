@@ -84,4 +84,34 @@ public class HomicidalBruteTest extends CardTestPlayerBase {
         assertTapped("Homicidal Brute", true);
     }
 
+    @Test
+    public void testCardBlinkNotTransform() {
+        addCard(Zone.BATTLEFIELD, playerA, "Civilized Scholar");
+        addCard(Zone.HAND, playerA, "Sejiri Merfolk");
+        addCard(Zone.HAND, playerA, "Moonmist"); // transform all
+        addCard(Zone.HAND, playerA, "Cloudshift"); // blink
+        addCard(Zone.BATTLEFIELD, playerA, "Savannah", 3);
+
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Draw a card, then discard a card.");
+        setChoice(playerA, "Sejiri Merfolk"); // discard creature
+
+        attack(3, playerA, "Homicidal Brute", playerB);
+        castSpell(3, PhaseStep.COMBAT_DAMAGE, playerA, "Cloudshift", "Homicidal Brute");
+        castSpell(3, PhaseStep.END_COMBAT, playerA, "Moonmist");
+
+        checkPermanentTapped("after transform", 3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Homicidal Brute", false, 1);
+
+        setStrictChooseMode(true);
+        setStopAt(4, PhaseStep.UPKEEP);
+        execute();
+
+        assertGraveyardCount(playerA, "Cloudshift", 1);
+        assertGraveyardCount(playerA, "Moonmist", 1);
+        assertLife(playerA, 20);
+        assertLife(playerB, 15);
+        assertPermanentCount(playerA, "Civilized Scholar", 1);
+        assertPermanentCount(playerA, "Homicidal Brute", 0);
+        assertTapped("Civilized Scholar", true);
+    }
+
 }

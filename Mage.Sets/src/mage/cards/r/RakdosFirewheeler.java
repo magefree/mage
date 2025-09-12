@@ -9,7 +9,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
 import mage.target.common.TargetCreatureOrPlaneswalker;
 import mage.target.common.TargetOpponent;
 
@@ -34,7 +33,7 @@ public final class RakdosFirewheeler extends CardImpl {
         effect.setText("it deals 2 damage to target opponent and 2 damage to up to one target creature or planeswalker");
         Ability ability = new EntersBattlefieldTriggeredAbility(effect, false);
         ability.addTarget(new TargetOpponent());
-        ability.addTarget(new TargetCreatureOrPlaneswalker(0, 1, new FilterCreatureOrPlaneswalkerPermanent(), false));
+        ability.addTarget(new TargetCreatureOrPlaneswalker(0, 1));
         this.addAbility(ability);
     }
 

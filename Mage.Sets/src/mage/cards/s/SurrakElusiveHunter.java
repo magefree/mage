@@ -16,7 +16,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -90,7 +89,7 @@ class SurrakElusiveHunterTriggeredAbility extends TriggeredAbilityImpl {
         if (!checkTargeted(event.getTargetId(), game)) {
             return false;
         }
-        StackObject targetingObject = CardUtil.findTargetingStackObject(this.getId().toString(), event, game);
+        StackObject targetingObject = game.findTargetingStackObject(this.getId().toString(), event);
         return targetingObject != null && game.getOpponents(getControllerId()).contains(targetingObject.getControllerId());
     }
 }
