@@ -93,7 +93,7 @@ public class NextSpellCastHasAbilityEffect extends ContinuousEffectImpl {
             discard(); // only one use
             return false;
         }
-        for (Card card : game.getExile().getAllCardsByRange(game, playerId)) {
+        for (Card card : game.getExile().getCardsInRange(game, playerId)) {
             if (filter.match(card, playerId, source, game)) {
                 game.getState().addOtherAbility(card, ability);
             }

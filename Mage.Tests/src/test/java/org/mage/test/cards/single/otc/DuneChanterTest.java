@@ -66,7 +66,7 @@ public class DuneChanterTest extends CardTestPlayerBase {
     private static void checkExile(String info, Player player, Game game, int count) {
         int amount = game
                 .getExile()
-                .getAllCards(game, player.getId())
+                .getCardsOwned(game, player.getId())
                 .stream()
                 .filter(c -> c.getSubtype(game).contains(SubType.DESERT))
                 .mapToInt(k -> 1)

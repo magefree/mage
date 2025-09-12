@@ -44,7 +44,7 @@ public class GainAbilityControlledSpellsEffect extends ContinuousEffectImpl {
             return false;
         }
 
-        for (Card card : game.getExile().getAllCardsByRange(game, source.getControllerId())) {
+        for (Card card : game.getExile().getCardsInRange(game, source.getControllerId())) {
             if (filter.match(card, player.getId(), source, game)) {
                 game.getState().addOtherAbility(card, ability);
             }

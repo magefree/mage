@@ -87,7 +87,7 @@ class SlimeAgainstHumanityEffect extends OneShotEffect {
         int exileCount = game
                 .getState()
                 .getExile()
-                .getAllCards(game, source.getControllerId())
+                .getCardsOwned(game, source.getControllerId())
                 .stream()
                 .filter(card -> filter.match(card, game))
                 .mapToInt(x -> 1)

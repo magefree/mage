@@ -62,7 +62,7 @@ enum SeizeTheStormValue implements DynamicValue {
         return player.getGraveyard().count(
                 StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY, game
         ) + game.getExile()
-                .getAllCards(game, sourceAbility.getControllerId())
+                .getCardsOwned(game, sourceAbility.getControllerId())
                 .stream()
                 .filter(card -> card.getAbilities(game).containsClass(FlashbackAbility.class))
                 .mapToInt(x -> 1).sum();

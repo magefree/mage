@@ -66,19 +66,23 @@ public class Exile implements Serializable, Copyable<Exile> {
         return allCards.stream().filter(card -> filter.match(card, game)).collect(Collectors.toList());
     }
 
-    @Deprecated // TODO: must use related request due game range like getAllCardsByRange
+    /**
+     * Returns all cards in exile. Use only for test framework.
+     * For card effects, instead use a method that checks owner or range of influence.
+     */
+    @Deprecated
     public List<Card> getAllCards(Game game) {
-        return getAllCards(game, null);
+        return getCardsOwned(game, null);
     }
 
     /**
-     * Return exiled cards owned by a specific player. Use it in effects to find all cards in range.
+     * Returns all cards in exile owned by the specified player
      */
-    public List<Card> getAllCards(Game game, UUID fromPlayerId) {
+    public List<Card> getCardsOwned(Game game, UUID ownerId) {
         List<Card> res = new ArrayList<>();
         for (ExileZone exile : exileZones.values()) {
             for (Card card : exile.getCards(game)) {
-                if (fromPlayerId == null || card.isOwnedBy(fromPlayerId)) {
+                if (ownerId == null || card.isOwnedBy(ownerId)) {
                     res.add(card);
                 }
             }
@@ -86,10 +90,13 @@ public class Exile implements Serializable, Copyable<Exile> {
         return res;
     }
 
-    public List<Card> getAllCardsByRange(Game game, UUID controllerId) {
+    /**
+     * Returns all cards in exile in range of the specified player
+     */
+    public List<Card> getCardsInRange(Game game, UUID controllerId) {
         List<Card> res = new ArrayList<>();
         for (UUID playerId : game.getState().getPlayersInRange(controllerId, game)) {
-            res.addAll(getAllCards(game, playerId));
+            res.addAll(getCardsOwned(game, playerId));
         }
         return res;
     }
