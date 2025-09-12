@@ -1,5 +1,6 @@
 package mage.game;
 
+import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.filter.FilterCard;
 import mage.util.Copyable;
@@ -61,6 +62,11 @@ public class Exile implements Serializable, Copyable<Exile> {
         return null;
     }
 
+    /**
+     * Returns all cards in exile matching the filter. Use only for test framework.
+     * For card effects, instead use a method that checks owner or range of influence.
+     */
+    @Deprecated
     public List<Card> getCards(FilterCard filter, Game game) {
         List<Card> allCards = getAllCards(game);
         return allCards.stream().filter(card -> filter.match(card, game)).collect(Collectors.toList());
@@ -91,6 +97,16 @@ public class Exile implements Serializable, Copyable<Exile> {
     }
 
     /**
+     * Returns all cards in exile matching the filter, owned by the specified player
+     */
+    public Set<Card> getCardsOwned(FilterCard filter, UUID playerId, Ability source, Game game) {
+        return getCardsOwned(game, playerId)
+                .stream()
+                .filter(card -> filter.match(card, playerId, source, game))
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+    }
+
+    /**
      * Returns all cards in exile in range of the specified player
      */
     public List<Card> getCardsInRange(Game game, UUID controllerId) {
@@ -99,6 +115,16 @@ public class Exile implements Serializable, Copyable<Exile> {
             res.addAll(getCardsOwned(game, playerId));
         }
         return res;
+    }
+
+    /**
+     * Returns all cards in exile matching the filter, in range of the specified player
+     */
+    public Set<Card> getCardsInRange(FilterCard filter, UUID playerId, Ability source, Game game) {
+        return getCardsInRange(game, playerId)
+                .stream()
+                .filter(card -> filter.match(card, playerId, source, game))
+                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
     public boolean removeCard(Card card) {

@@ -3,7 +3,6 @@ package mage.abilities.dynamicvalue.common;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
-import mage.cards.Card;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
@@ -17,18 +16,11 @@ public enum InstantSorceryExileGraveyardCount implements DynamicValue {
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         Player player = game.getPlayer(sourceAbility.getControllerId());
-        if (player != null) {
-            int exileCount = 0;
-            for (Card exiledCard : game.getExile().getAllCards(game)) {
-                if (exiledCard.getOwnerId().equals(player.getId()) && exiledCard.isInstantOrSorcery(game)) {
-                    exileCount++;
-                }
-            }
-            return player.getGraveyard().count(
-                    StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY, game
-            ) + exileCount;
+        if (player == null) {
+            return 0;
         }
-        return 0;
+        return game.getExile().getCardsOwned(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY, player.getId(), sourceAbility, game).size()
+                + player.getGraveyard().count(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY, player.getId(), sourceAbility, game);
     }
 
     @Override
