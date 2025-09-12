@@ -20,6 +20,7 @@ import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
@@ -54,7 +55,7 @@ public final class SummonBrynhildr extends CardImpl {
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_II, SagaChapter.CHAPTER_III, ability -> {
             ability.addEffect(new CreateDelayedTriggeredAbilityEffect(
                     new CastNextSpellDelayedTriggeredAbility(
-                            new SummonBrynhildrHasteEffect(), StaticFilters.FILTER_SPELL_A_CREATURE
+                            new SummonBrynhildrHasteEffect(), StaticFilters.FILTER_SPELL_A_CREATURE, true
                     )
             ));
             ability.withFlavorWord("Gestalt Mode");
@@ -141,12 +142,11 @@ class SummonBrynhildrWatcher extends Watcher {
                 || !CounterType.STUN.getName().equals(event.getData())) {
             return;
         }
-        Optional.ofNullable(event)
-                .map(GameEvent::getTargetId)
-                .map(game::getPermanent)
-                .ifPresent(permanent -> map.computeIfAbsent(
-                        new MageObjectReference(permanent, game), x -> new HashSet<>()
-                ).add(event.getPlayerId()));
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        if (permanent != null) {
+            map.computeIfAbsent(new MageObjectReference(permanent, game), x -> new HashSet<>())
+                    .add(event.getPlayerId());
+        }
     }
 
     @Override
@@ -160,7 +160,7 @@ class SummonBrynhildrWatcher extends Watcher {
                 .getWatcher(SummonBrynhildrWatcher.class)
                 .map
                 .getOrDefault(new MageObjectReference(
-                        source.getSourceId(), source.getSourceObjectZoneChangeCounter(), game
+                        source.getSourceId(), source.getStackMomentSourceZCC(), game
                 ), Collections.emptySet())
                 .contains(source.getControllerId());
     }

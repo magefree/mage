@@ -7,6 +7,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.stack.StackObject;
+import mage.util.CardUtil;
 import mage.util.functions.StackObjectCopyApplier;
 
 /**
@@ -96,8 +97,10 @@ public class CopyTargetStackObjectEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return "copy " +
-                getTargetPointer().describeTargets(mode.getTargets(), objectName) +
-                (chooseTargets ? ". You may choose new targets for the copy" : "");
+        String amountText = (amount == 1) ? "" : ((amount == 2) ? " twice" : " " + CardUtil.numberToText(amount) + " times");
+        String chooseText = chooseTargets ? ". You may choose new targets for the cop" + ((amount == 1) ? "y" : "ies") : "";
+        return "copy "
+                + getTargetPointer().describeTargets(mode.getTargets(), objectName)
+                + amountText + chooseText;
     }
 }

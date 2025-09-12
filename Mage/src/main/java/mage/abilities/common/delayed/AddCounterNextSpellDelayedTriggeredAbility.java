@@ -28,7 +28,7 @@ public class AddCounterNextSpellDelayedTriggeredAbility extends CastNextSpellDel
     }
 
     public AddCounterNextSpellDelayedTriggeredAbility(int amount, FilterSpell filter) {
-        super(new AddCounterNextSpellEffect(amount), filter, null, false);
+        super(new AddCounterNextSpellEffect(amount), filter, false);
     }
 
     private AddCounterNextSpellDelayedTriggeredAbility(final AddCounterNextSpellDelayedTriggeredAbility ability) {

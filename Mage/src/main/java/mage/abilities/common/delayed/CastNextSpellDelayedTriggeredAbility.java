@@ -15,25 +15,18 @@ import mage.target.targetpointer.FixedTarget;
 public class CastNextSpellDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     private final FilterSpell filter;
-    private final String rule;
     private final boolean setTargetPointer;
 
-    public CastNextSpellDelayedTriggeredAbility(Effect effect, FilterSpell filter) {
-        this(effect, filter, null, false);
-    }
-
-    public CastNextSpellDelayedTriggeredAbility(Effect effect, FilterSpell filter, String rule, boolean setTargetPointer) {
+    public CastNextSpellDelayedTriggeredAbility(Effect effect, FilterSpell filter, boolean setTargetPointer) {
         super(effect, Duration.EndOfTurn, true, false);
         this.filter = filter;
         this.setTriggerPhrase("When you next cast " + filter.getMessage() + " this turn, ");
-        this.rule = rule;
         this.setTargetPointer = setTargetPointer;
     }
 
     protected CastNextSpellDelayedTriggeredAbility(final CastNextSpellDelayedTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
-        this.rule = ability.rule;
         this.setTargetPointer = ability.setTargetPointer;
     }
 
@@ -63,11 +56,4 @@ public class CastNextSpellDelayedTriggeredAbility extends DelayedTriggeredAbilit
         return true;
     }
 
-    @Override
-    public String getRule() {
-        if (rule != null && !rule.isEmpty()) {
-            return rule;
-        }
-        return super.getRule();
-    }
 }

@@ -1,6 +1,5 @@
 package mage.abilities.common.delayed;
 
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
@@ -15,11 +14,11 @@ public class CopyNextSpellDelayedTriggeredAbility extends CastNextSpellDelayedTr
     }
 
     public CopyNextSpellDelayedTriggeredAbility(FilterSpell filter) {
-        this(filter, new CopyTargetStackObjectEffect(true), null);
+        this(filter, 1);
     }
 
-    public CopyNextSpellDelayedTriggeredAbility(FilterSpell filter, Effect effect, String rule) {
-        super(effect, filter, rule, true);
+    public CopyNextSpellDelayedTriggeredAbility(FilterSpell filter, int amount) {
+        super(new CopyTargetStackObjectEffect(false, true, true, amount, null), filter, true);
     }
 
     protected CopyNextSpellDelayedTriggeredAbility(final CopyNextSpellDelayedTriggeredAbility ability) {
