@@ -6,6 +6,8 @@ import mage.abilities.Ability;
 import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
 import mage.abilities.keyword.PrototypeAbility;
 import mage.cards.Card;
+import mage.cards.DoubleFacedCard;
+import mage.cards.DoubleFacedCardHalf;
 import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.game.Game;
@@ -94,6 +96,10 @@ public class CopyTokenFunction {
             if (sourceObj.isTransformable()) {
                 copyToToken(target.getBackFace(), sourceObj.getSecondCardFace(), game);
                 CardUtil.copySetAndCardNumber(target.getBackFace(), sourceObj.getSecondCardFace());
+            } else if (sourceObj instanceof DoubleFacedCardHalf && target.isEntersTransformed()) {
+                // double faced card
+                copyToToken(target.getBackFace(), ((DoubleFacedCardHalf) sourceObj).getOtherSide(), game);
+                CardUtil.copySetAndCardNumber(target.getBackFace(), ((DoubleFacedCardHalf) sourceObj).getOtherSide());
             }
 
             // apply prototyped status
@@ -121,8 +127,14 @@ public class CopyTokenFunction {
                 // must create back face??
                 throw new IllegalStateException("Wrong code usage: back face must be non null: " + target.getName() + " - " + target.getClass().getSimpleName());
             }
-            copyToToken(target.getBackFace(), source.getSecondCardFace(), game);
-            CardUtil.copySetAndCardNumber(target.getBackFace(), source.getSecondCardFace());
+            Card secondFace;
+            if (source instanceof DoubleFacedCard) {
+                secondFace = ((DoubleFacedCard) source).getRightHalfCard();
+            } else {
+                secondFace = source.getSecondCardFace();
+            }
+            copyToToken(target.getBackFace(), secondFace, game);
+            CardUtil.copySetAndCardNumber(target.getBackFace(), secondFace);
         }
     }
 

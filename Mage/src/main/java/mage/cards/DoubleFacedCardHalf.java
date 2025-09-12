@@ -3,6 +3,7 @@ package mage.cards;
 import mage.abilities.Ability;
 import mage.constants.*;
 import mage.game.Game;
+import mage.game.events.ZoneChangeEvent;
 
 import java.util.Arrays;
 import java.util.List;
@@ -69,21 +70,18 @@ public abstract class DoubleFacedCardHalf extends CardImpl implements SubCard<Do
     }
 
     @Override
+    public void updateZoneChangeCounter(Game game, ZoneChangeEvent event) {
+        parentCard.updateZoneChangeCounter(game, event);
+    }
+
+    @Override
     public void setZone(Zone zone, Game game) {
         // see DoubleFacedCard.checkGoodZones for details
         game.setZone(parentCard.getId(), zone);
         game.setZone(this.getId(), zone);
 
         // find another side to sync
-        Card otherSide;
-
-        if (!parentCard.getLeftHalfCard().getId().equals(this.getId())) {
-            otherSide = parentCard.getLeftHalfCard();
-        } else if (!parentCard.getRightHalfCard().getId().equals(this.getId())) {
-            otherSide = parentCard.getRightHalfCard();
-        } else {
-            throw new IllegalStateException("Wrong code usage: MDF halves must use different ids");
-        }
+        Card otherSide = getOtherSide();
 
         switch (zone) {
             case STACK:
@@ -97,6 +95,28 @@ public abstract class DoubleFacedCardHalf extends CardImpl implements SubCard<Do
         }
 
         DoubleFacedCard.checkGoodZones(game, parentCard);
+    }
+
+    public Card getOtherSide() {
+        Card otherSide;
+        if (!parentCard.getLeftHalfCard().getId().equals(this.getId())) {
+            otherSide = parentCard.getLeftHalfCard();
+        } else if (!parentCard.getRightHalfCard().getId().equals(this.getId())) {
+            otherSide = parentCard.getRightHalfCard();
+        } else {
+            throw new IllegalStateException("Wrong code usage: MDF halves must use different ids");
+        }
+        return otherSide;
+    }
+
+    public boolean isBackSide() {
+        if (parentCard.getLeftHalfCard().getId().equals(this.getId())) {
+            return false;
+        } else if (parentCard.getRightHalfCard().getId().equals(this.getId())) {
+            return true;
+        } else {
+            throw new IllegalStateException("Wrong code usage: MDF halves must use different ids");
+        }
     }
 
     @Override

@@ -64,9 +64,24 @@ public class PermanentCard extends PermanentImpl {
             throw new IllegalArgumentException("Wrong code usage: can't create permanent card from split or mdf: " + card.getName());
         }
 
-        this.card = card;
+        // if two permanent sides, set front and second side
+        if (card instanceof DoubleFacedCardHalf && card.isPermanent() && ((DoubleFacedCardHalf) card).getOtherSide().isPermanent()) {
+            if (((DoubleFacedCardHalf) card).isBackSide()) {
+                secondSideCard = card;
+                this.card = ((DoubleFacedCardHalf) card).getOtherSide();
+                this.transformed = true;
+                init(secondSideCard, game);
+            } else {
+                secondSideCard = ((DoubleFacedCardHalf) card).getOtherSide();
+                this.card = card;
+                init(card, game);
+            }
+        } else {
+            this.card = card;
+            init(card, game);
+        }
+
         this.zoneChangeCounter = card.getZoneChangeCounter(game); // local value already set to the raised number
-        init(card, game);
     }
 
     private void init(Card card, Game game) {
@@ -85,7 +100,8 @@ public class PermanentCard extends PermanentImpl {
         }
 
         // if transformed on ETB
-        if (card.isTransformable()) {
+        // TODO: remove after tdfc rework
+        if (card.isTransformable() && !(card instanceof DoubleFacedCardHalf)) {
             if (game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + getId()) != null
                     || NightboundAbility.checkCard(this, game)) {
                 game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + getId(), null);
@@ -105,7 +121,11 @@ public class PermanentCard extends PermanentImpl {
     public void reset(Game game) {
         // when the permanent is reset, copy all original values from the card
         // must copy card each reset so that the original values don't get modified
-        copyFromCard(card, game);
+        if (transformed && secondSideCard != null && getCard() instanceof DoubleFacedCardHalf) {
+            copyFromCard(secondSideCard, game);
+        } else {
+            copyFromCard(card, game);
+        }
         power.resetToBaseValue();
         toughness.resetToBaseValue();
         super.reset(game);

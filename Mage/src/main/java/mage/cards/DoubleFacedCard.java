@@ -172,8 +172,8 @@ public abstract class DoubleFacedCard extends CardImpl implements CardWithHalves
             return;
         }
         super.updateZoneChangeCounter(game, event);
-        leftHalfCard.updateZoneChangeCounter(game, event);
-        rightHalfCard.updateZoneChangeCounter(game, event);
+        game.getState().updateZoneChangeCounter(leftHalfCard.getId());
+        game.getState().updateZoneChangeCounter(rightHalfCard.getId());
     }
 
     @Override

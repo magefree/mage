@@ -662,7 +662,9 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         // If a spell or ability instructs a player to transform a permanent that
         // isn’t represented by a transforming token or a transforming double-faced
         // card, nothing happens.
-        return this.secondSideCardClazz != null || this.nightCard;
+        return this.secondSideCardClazz != null || this.nightCard || this.secondSideCard != null || this instanceof TransformingDoubleFacedCard
+                || (this instanceof ModalDoubleFacedCard && ((ModalDoubleFacedCard) this).getLeftHalfCard().isPermanent()
+                && ((ModalDoubleFacedCard) this).getRightHalfCard().isPermanent());
     }
 
     @Override

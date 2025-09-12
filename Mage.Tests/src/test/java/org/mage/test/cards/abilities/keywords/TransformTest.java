@@ -1,11 +1,18 @@
 package org.mage.test.cards.abilities.keywords;
 
+import mage.ObjectColor;
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentToken;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * @author LevelX2
@@ -542,5 +549,28 @@ public class TransformTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Dress Down", 1);
         assertPermanentCount(playerA, "Huntmaster of the Fells", 1);
         assertPermanentCount(playerA, 6+1+1);
+    }
+
+    @Test
+    public void testTokenCopyTransformed() {
+        String hookHauntDrifter = "Hook-Haunt Drifter";
+        addCard(Zone.GRAVEYARD, playerA, "Baithook Angler");
+        addCard(Zone.BATTLEFIELD, playerA, "Breeding Pool", 5);
+        addCard(Zone.HAND, playerA, "Croaking Counterpart");
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Hook-Haunt Drifter using Disturb");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Croaking Counterpart", hookHauntDrifter);
+
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        for (Permanent token : currentGame.getBattlefield().getActivePermanents(playerA.getId(), currentGame)) {
+            if (!(token instanceof PermanentToken)) {
+                continue;
+            }
+            assertTrue(token.getSubtype(currentGame).contains(SubType.FROG));
+            assertEquals(ObjectColor.GREEN, token.getColor(currentGame));
+        }
     }
 }

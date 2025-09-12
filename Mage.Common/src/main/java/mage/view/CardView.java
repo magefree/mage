@@ -115,7 +115,7 @@ public class CardView extends SimpleCardView {
     protected List<String> rightSplitRules;
     protected String rightSplitTypeLine;
 
-    protected boolean isModalDoubleFacedCard;
+    protected boolean isDoubleFacedCard;
 
     protected ArtRect artRect = ArtRect.NORMAL;
 
@@ -237,7 +237,7 @@ public class CardView extends SimpleCardView {
         this.rightSplitRules = cardView.rightSplitRules == null ? null : new ArrayList<>(cardView.rightSplitRules);
         this.rightSplitTypeLine = cardView.rightSplitTypeLine;
 
-        this.isModalDoubleFacedCard = cardView.isModalDoubleFacedCard;
+        this.isDoubleFacedCard = cardView.isDoubleFacedCard;
 
         this.artRect = cardView.artRect;
         this.targets = cardView.targets == null ? null : new ArrayList<>(cardView.targets);
@@ -426,9 +426,9 @@ public class CardView extends SimpleCardView {
                 fullCardName = card.getName(); // split card contains full name as normal
                 this.manaCostLeftStr = splitCard.getLeftHalfCard().getManaCostSymbols();
                 this.manaCostRightStr = splitCard.getRightHalfCard().getManaCostSymbols();
-            } else if (card instanceof ModalDoubleFacedCard) {
-                this.isModalDoubleFacedCard = true;
-                ModalDoubleFacedCard mainCard = ((ModalDoubleFacedCard) card);
+            } else if (card instanceof DoubleFacedCard) {
+                this.isDoubleFacedCard = true;
+                DoubleFacedCard mainCard = ((DoubleFacedCard) card);
                 fullCardName = mainCard.getLeftHalfCard().getName() + MockCard.MODAL_DOUBLE_FACES_NAME_SEPARATOR + mainCard.getRightHalfCard().getName();
                 this.manaCostLeftStr = mainCard.getLeftHalfCard().getManaCostSymbols();
                 this.manaCostRightStr = mainCard.getRightHalfCard().getManaCostSymbols();
@@ -530,6 +530,7 @@ public class CardView extends SimpleCardView {
 
             this.extraDeckCard = card.isExtraDeckCard();
 
+            // TODO: can probably remove this after tdfc rework
             // transformable, double faces cards
             this.transformable = card.isTransformable();
 
@@ -544,11 +545,11 @@ public class CardView extends SimpleCardView {
                 this.alternateName = card.getFlipCardName();
             }
 
-            if (card instanceof ModalDoubleFacedCard) {
+            if (card instanceof DoubleFacedCard) {
                 this.transformable = true; // enable GUI day/night button
-                ModalDoubleFacedCard mdfCard = (ModalDoubleFacedCard) card;
-                this.secondCardFace = new CardView(mdfCard.getRightHalfCard(), game);
-                this.alternateName = mdfCard.getRightHalfCard().getName();
+                DoubleFacedCard doubleFacedCard = (DoubleFacedCard) card;
+                this.secondCardFace = new CardView(doubleFacedCard.getRightHalfCard(), game);
+                this.alternateName = doubleFacedCard.getRightHalfCard().getName();
             }
 
             Card meldsToCard = card.getMeldsToCard();

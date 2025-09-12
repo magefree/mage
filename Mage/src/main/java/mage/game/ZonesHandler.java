@@ -91,9 +91,14 @@ public final class ZonesHandler {
                 Card card = game.getCard(info.event.getTargetId());
                 if (card instanceof DoubleFacedCard || card instanceof DoubleFacedCardHalf) {
                     boolean forceToMainSide = false;
+                    // TODO: move transform key or have some other identifier after tdfc rework
+                    Boolean enterTransformed = (Boolean) game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId());
+                    if (enterTransformed == null) {
+                        enterTransformed = false;
+                    }
 
                     // if effect put half mdf card to battlefield then it must be the main side only (example: return targeted half card to battle)
-                    if (card instanceof DoubleFacedCardHalf && !source.getAbilityType().isPlayCardAbility()) {
+                    if (card instanceof DoubleFacedCardHalf && !source.getAbilityType().isPlayCardAbility() && !enterTransformed) {
                         forceToMainSide = true;
                     }
 
@@ -347,8 +352,9 @@ public final class ZonesHandler {
              * that isn't a transforming double-faced card onto the battlefield transformed or converted, that card stays in
              * its current zone.
              */
+            // TODO: remove after tdfc rework
             boolean wantToTransform = Boolean.TRUE.equals(game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId()));
-            if (wantToTransform) {
+            if (wantToTransform && !(card instanceof DoubleFacedCardHalf)) {
                 isGoodToMove = card.isTransformable() && card.getSecondCardFace().isPermanent(game);
             } else {
                 isGoodToMove = card.isPermanent(game);
@@ -378,7 +384,7 @@ public final class ZonesHandler {
                 Permanent permanent;
                 if (card instanceof MeldCard) {
                     permanent = new PermanentMeld(card, event.getPlayerId(), game);
-                } else if (card instanceof ModalDoubleFacedCard) {
+                } else if (card instanceof DoubleFacedCard) {
                     // main mdf card must be processed before that call (e.g. only halves can be moved to battlefield)
                     throw new IllegalStateException("Unexpected trying of move mdf card to battlefield instead half");
                 } else if (card instanceof Permanent) {
