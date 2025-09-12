@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.delayed.CopyNextSpellDelayedTriggeredAbility;
+import mage.abilities.common.delayed.CastNextSpellDelayedTriggeredAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.CommanderCastFromCommandZoneValue;
@@ -49,15 +49,9 @@ public final class ThunderclapDrake extends CardImpl {
 
         // {2}{U}, Sacrifice Thunderclap Drake: When you cast your next instant or sorcery spell this turn, copy it for each time you've cast your commander from the command zone this game. You may choose new targets for the copies.
         Ability ability = new SimpleActivatedAbility(
-                new CreateDelayedTriggeredAbilityEffect(
-                        new CopyNextSpellDelayedTriggeredAbility(
-                                StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY,
-                                new ThunderclapDrakeEffect(),
-                                "When you next cast an instant or sorcery spell this turn, "
-                                        + "copy it for each time you've cast your commander from the command zone this game. "
-                                        + "You may choose new targets for the copies."
-                        )
-                ),
+                new CreateDelayedTriggeredAbilityEffect(new CastNextSpellDelayedTriggeredAbility(
+                        new ThunderclapDrakeEffect(), StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY, true
+                )),
                 new ManaCostsImpl<>("{2}{U}")
         );
         ability.addCost(new SacrificeSourceCost());
