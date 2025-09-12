@@ -2102,4 +2102,5 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         }
         return successfullyMoved;
     }
+
 }
