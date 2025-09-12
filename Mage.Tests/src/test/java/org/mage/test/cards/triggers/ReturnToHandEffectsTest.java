@@ -450,20 +450,19 @@ public class ReturnToHandEffectsTest extends CardTestPlayerBase {
         runCode("3: check zcc", 1, PhaseStep.BEGIN_COMBAT, playerA,
                 (String info, Player player, Game game) -> checkZCCNormalPermanent(info, player, game, "Carrion Feeder", 5, 5));
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Coat with Venom", "Carrion Feeder", true);
-        runCode("4: check graveyard zcc", 1, PhaseStep.BEGIN_COMBAT, playerA,
-                (String info, Player player, Game game) -> checkZCCCardInGraveyard(info, player, game, "Carrion Feeder", 6));
+        runCode("4: check hand zcc", 1, PhaseStep.BEGIN_COMBAT, playerA,
+                (String info, Player player, Game game) -> checkZCCNormalCardInHand(info, player, game, "Carrion Feeder", 7));
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        // Vigor tries to return the Carrion Feeder card with zcc 4, so 6 doesn't return.
 
         assertGraveyardCount(playerA, "Disfigure", 1);
         assertGraveyardCount(playerA, "Demonic Vigor", 1);
         assertGraveyardCount(playerA, "Makeshift Mannequin", 1);
-        assertGraveyardCount(playerA, "Carrion Feeder", 1);
+        assertGraveyardCount(playerA, "Carrion Feeder", 0);
         assertPermanentCount(playerA, "Carrion Feeder", 0);
-        assertHandCount(playerA, "Carrion Feeder", 0);
+        assertHandCount(playerA, "Carrion Feeder", 1);
     }
 
 }

@@ -18,7 +18,7 @@ import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.Card;
 import mage.cards.CardsImpl;
-import mage.cards.ModalDoubleFacedCard;
+import mage.cards.DoubleFacedCard;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
@@ -177,10 +177,10 @@ public class SuspendAbility extends SpecialAction {
      * or added by Jhoira of the Ghitu
      */
     public static void addSuspendTemporaryToCard(Card card, Ability source, Game game) {
-        if (card instanceof ModalDoubleFacedCard) {
+        if (card instanceof DoubleFacedCard) {
             // Need to ensure the suspend ability gets put on the left side card
             // since counters get added to this card.
-            card = ((ModalDoubleFacedCard) card).getLeftHalfCard();
+            card = ((DoubleFacedCard) card).getLeftHalfCard();
         }
         SuspendAbility ability = new SuspendAbility(0, null, card, false);
         ability.setSourceId(card.getId());

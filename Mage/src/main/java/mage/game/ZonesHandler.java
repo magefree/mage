@@ -103,7 +103,7 @@ public final class ZonesHandler {
                     }
 
                     // if effect put mdf card to battlefield then it must be main side only
-                    if (card instanceof ModalDoubleFacedCard) {
+                    if (card instanceof DoubleFacedCard) {
                         forceToMainSide = true;
                     }
 

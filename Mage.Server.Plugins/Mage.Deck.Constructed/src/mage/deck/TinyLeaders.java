@@ -206,9 +206,9 @@ public class TinyLeaders extends Constructed {
         if (card instanceof SplitCard) {
             costs.add(((SplitCard) card).getLeftHalfCard().getManaValue());
             costs.add(((SplitCard) card).getRightHalfCard().getManaValue());
-        } else if (card instanceof ModalDoubleFacedCard) {
-            costs.add(((ModalDoubleFacedCard) card).getLeftHalfCard().getManaValue());
-            costs.add(((ModalDoubleFacedCard) card).getRightHalfCard().getManaValue());
+        } else if (card instanceof DoubleFacedCard) {
+            costs.add(((DoubleFacedCard) card).getLeftHalfCard().getManaValue());
+            costs.add(((DoubleFacedCard) card).getRightHalfCard().getManaValue());
         } else {
             costs.add(card.getManaValue());
         }

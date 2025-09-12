@@ -21,7 +21,7 @@ public class CardUtilTest extends CardTestPlayerBase {
     // MDFC where both sides should be playable
     private static final String birgi = "Birgi, God of Storytelling"; // {2}{R}, frontside of Harnfel
     private static final String harnfel = "Harnfel, Horn of Bounty"; // {4}{R}, backside of Birgi
-
+    private static final String tamiyo = "Tamiyo, Inquisitive Student"; // {U}, TDFC
     /**
      * Test that it will for trigger for discarding a MDFC but will only let you cast the nonland side.
      */
@@ -121,5 +121,28 @@ public class CardUtilTest extends CardTestPlayerBase {
         Assert.assertEquals("12345", CardUtil.substring(str, 7, ending));
         Assert.assertEquals("12345", CardUtil.substring(str, 8, ending));
         Assert.assertEquals("12345", CardUtil.substring(str, 9, ending));
+    }
+
+    /**
+     * Test that it will for trigger for discarding a MDFC but will only let you cast the nonland side.
+     */
+    @Test
+    public void cantPlayTDFC() {
+        addCard(Zone.HAND, playerA, changeOfFortune);
+        addCard(Zone.HAND, playerA, tamiyo);
+
+        addCard(Zone.BATTLEFIELD, playerA, oskar);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 10);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
+
+        skipInitShuffling();
+        setStrictChooseMode(true);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, changeOfFortune);
+        setChoice(playerA, "Yes");
+
+        setStopAt(1, PhaseStep.DECLARE_ATTACKERS);
+        execute();
+        assertPermanentCount(playerA, tamiyo, 1);
     }
 }
