@@ -110,9 +110,9 @@ public class CardInfo {
     @DatabaseField
     protected String spellOptionCardName;
     @DatabaseField
-    protected boolean modalDoubleFacedCard;
+    protected boolean doubleFacedCard;
     @DatabaseField
-    protected String modalDoubleFacedSecondSideName;
+    protected String doubleFacedSecondSideName;
     @DatabaseField
     protected String meldsToCardName;
     @DatabaseField
@@ -162,9 +162,9 @@ public class CardInfo {
             this.spellOptionCardName = ((CardWithSpellOption) card).getSpellCard().getName();
         }
 
-        if (card instanceof ModalDoubleFacedCard) {
-            this.modalDoubleFacedCard = true;
-            this.modalDoubleFacedSecondSideName = ((ModalDoubleFacedCard) card).getRightHalfCard().getName();
+        if (card instanceof DoubleFacedCard) {
+            this.doubleFacedCard = true;
+            this.doubleFacedSecondSideName = ((DoubleFacedCard) card).getRightHalfCard().getName();
         }
 
         if (card.getFrameStyle() != null) {
@@ -483,12 +483,12 @@ public class CardInfo {
         return spellOptionCardName;
     }
 
-    public boolean isModalDoubleFacedCard() {
-        return modalDoubleFacedCard;
+    public boolean isDoubleFacedCard() {
+        return doubleFacedCard;
     }
 
-    public String getModalDoubleFacedSecondSideName() {
-        return modalDoubleFacedSecondSideName;
+    public String getDoubleFacedSecondSideName() {
+        return doubleFacedSecondSideName;
     }
 
     @Override

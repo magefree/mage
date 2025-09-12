@@ -56,6 +56,7 @@ import mage.game.mulligan.Mulligan;
 import mage.game.permanent.Battlefield;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
+import mage.game.permanent.PermanentToken;
 import mage.game.stack.Spell;
 import mage.game.stack.SpellStack;
 import mage.game.stack.StackAbility;
@@ -341,13 +342,13 @@ public abstract class GameImpl implements Game {
                 Card rightCard = ((SplitCard) card).getRightHalfCard();
                 rightCard.setOwnerId(ownerId);
                 addCardToState(rightCard);
-            } else if (card instanceof ModalDoubleFacedCard) {
+            } else if (card instanceof DoubleFacedCard) {
                 // left
-                Card leftCard = ((ModalDoubleFacedCard) card).getLeftHalfCard();
+                Card leftCard = ((DoubleFacedCard) card).getLeftHalfCard();
                 leftCard.setOwnerId(ownerId);
                 addCardToState(leftCard);
                 // right
-                Card rightCard = ((ModalDoubleFacedCard) card).getRightHalfCard();
+                Card rightCard = ((DoubleFacedCard) card).getRightHalfCard();
                 rightCard.setOwnerId(ownerId);
                 addCardToState(rightCard);
             } else if (card instanceof CardWithSpellOption) {
@@ -2118,7 +2119,9 @@ public abstract class GameImpl implements Game {
                 BecomesFaceDownCreatureEffect.makeFaceDownObject(this, null, newBluePrint, faceDownType, null);
             }
             newBluePrint.assignNewId();
-            if (copyFromPermanent.isTransformed()) {
+            // TODO: should be able to remove after tdfc rework
+            if (copyFromPermanent.isTransformed() && (copyFromPermanent instanceof PermanentToken || ((copyFromPermanent instanceof PermanentCard) &&
+                    !(((PermanentCard) copyFromPermanent).getCard() instanceof DoubleFacedCardHalf)))) {
                 TransformAbility.transformPermanent(newBluePrint, this, source);
             }
             if (copyFromPermanent.isPrototyped()) {
@@ -3823,7 +3826,7 @@ public abstract class GameImpl implements Game {
             loadCards(ownerId, hand);
             loadCards(ownerId, battlefield
                     .stream()
-                    .map(PutToBattlefieldInfo::getCard)
+                    .map(PutToBattlefieldInfo::getMainCard)
                     .collect(Collectors.toList())
             );
             loadCards(ownerId, graveyard);
