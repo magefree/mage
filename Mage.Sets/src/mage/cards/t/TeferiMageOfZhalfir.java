@@ -87,14 +87,14 @@ class TeferiMageOfZhalfirAddFlashEffect extends ContinuousEffectImpl {
                 }
             }
             // in Exile
-            for (Card card : game.getState().getExile().getAllCards(game)) {
-                if (card.isOwnedBy(controller.getId()) && card.isCreature(game)) {
+            for (Card card : game.getState().getExile().getCardsOwned(game, controller.getId())) {
+                if (card.isCreature(game)) {
                     game.getState().addOtherAbility(card, FlashAbility.getInstance());
                 }
             }
             // in Library (e.g. for Mystical Teachings)
             for (Card card : controller.getLibrary().getCards(game)) {
-                if (card.isOwnedBy(controller.getId()) && card.isCreature(game)) {
+                if (card.isCreature(game)) {
                     game.getState().addOtherAbility(card, FlashAbility.getInstance());
                 }
             }

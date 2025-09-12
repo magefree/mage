@@ -77,13 +77,8 @@ enum HuskbursterSwarmValue implements DynamicValue {
         }
         return game
                 .getExile()
-                .getAllCards(game)
-                .stream()
-                .filter(card -> card.isCreature(game))
-                .map(Ownerable::getOwnerId)
-                .filter(sourceAbility::isControlledBy)
-                .mapToInt(x -> 1)
-                .sum()
+                .getCardsOwned(StaticFilters.FILTER_CARD_CREATURE, player.getId(), sourceAbility, game)
+                .size()
                 + player
                 .getGraveyard()
                 .count(StaticFilters.FILTER_CARD_CREATURE, game);
