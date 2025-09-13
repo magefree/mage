@@ -56,7 +56,7 @@ public final class TheFourthDoctor extends CardImpl {
                                 null,
                                 true
                         ))
-                        .withFlavorWord("Would You Like A…?"),
+                        .withFlavorWord("Would You Like A...?"),
                 new TheFourthDoctorWatcher()
         );
         this.addAbility(new TheFourthDoctorTriggeredAbility());

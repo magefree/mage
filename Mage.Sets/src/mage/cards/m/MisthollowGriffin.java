@@ -46,7 +46,7 @@ class MisthollowGriffinPlayEffect extends AsThoughEffectImpl {
 
     MisthollowGriffinPlayEffect() {
         super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
-        staticText = "You may cast {this} from exile";
+        staticText = "You may cast this card from exile";
     }
 
     private MisthollowGriffinPlayEffect(final MisthollowGriffinPlayEffect effect) {

@@ -69,7 +69,7 @@ class RadiantGraceEffect extends OneShotEffect {
 
     RadiantGraceEffect() {
         super(Outcome.Benefit);
-        staticText = "return {this} to the battlefield transformed under your control attached to target opponent";
+        staticText = "return this card to the battlefield transformed under your control attached to target opponent";
     }
 
     private RadiantGraceEffect(final RadiantGraceEffect effect) {

@@ -10,7 +10,7 @@ import mage.filter.StaticFilters;
 public class CopyNextSpellDelayedTriggeredAbility extends CastNextSpellDelayedTriggeredAbility {
 
     public CopyNextSpellDelayedTriggeredAbility() {
-        this(StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY);
+        this(StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY);
     }
 
     public CopyNextSpellDelayedTriggeredAbility(FilterSpell filter) {
