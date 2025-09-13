@@ -124,16 +124,16 @@ public class CardUtilTest extends CardTestPlayerBase {
     }
 
     /**
-     * Test that it will for trigger for discarding a MDFC but will only let you cast the nonland side.
+     * Test that it will for trigger for discarding a TDFC but will only let you cast the front side.
      */
     @Test
-    public void cantPlayTDFC() {
+    public void cantPlayTDFCBackSide() {
         addCard(Zone.HAND, playerA, changeOfFortune);
         addCard(Zone.HAND, playerA, tamiyo);
 
         addCard(Zone.BATTLEFIELD, playerA, oskar);
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 10);
-        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
 
         skipInitShuffling();
         setStrictChooseMode(true);
@@ -141,7 +141,7 @@ public class CardUtilTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, changeOfFortune);
         setChoice(playerA, "Yes");
 
-        setStopAt(1, PhaseStep.DECLARE_ATTACKERS);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
         assertPermanentCount(playerA, tamiyo, 1);
     }

@@ -60,6 +60,7 @@ public class SpellTransformedAbility extends SpellAbility {
     protected SpellTransformedAbility(final SpellTransformedAbility ability) {
         super(ability);
         this.manaCost = ability.manaCost;
+        this.ignoreTransformEffect = ability.ignoreTransformEffect;
     }
 
     @Override

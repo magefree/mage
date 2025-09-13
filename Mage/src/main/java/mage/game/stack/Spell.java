@@ -2,11 +2,11 @@ package mage.game.stack;
 
 import mage.*;
 import mage.abilities.*;
+import mage.abilities.common.SpellTransformedAbility;
 import mage.abilities.costs.mana.ActivationManaAbilityStep;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.keyword.BestowAbility;
-import mage.abilities.keyword.DisturbAbility;
 import mage.abilities.keyword.PrototypeAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.*;
@@ -105,8 +105,9 @@ public class Spell extends StackObjectImpl implements Card {
         this.ability.setControllerId(controllerId);
 
         // 712.8c TDFC spell "Its mana value is calculated using the mana cost of its front face"
-        if(ability instanceof DisturbAbility && manaCost.isEmpty()) {
-            this.manaCost = ability.getManaCosts().copy();
+        if(ability instanceof SpellTransformedAbility && manaCost.isEmpty()) {
+            this.manaCost = card.getMainCard().getManaCost().copy();
+            this.ability.setSourceId(affectedCard.getId()); // Maybe wrong? Permanent has incorrect id otherwise
         }
         if (ability.getSpellAbilityCastMode().isFaceDown()) {
             // TODO: need research:
