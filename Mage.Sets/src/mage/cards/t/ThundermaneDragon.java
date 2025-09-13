@@ -1,7 +1,5 @@
 package mage.cards.t;
 
-import java.util.UUID;
-
 import mage.MageIdentifier;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -11,18 +9,23 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continuous.LookAtTopCardOfLibraryAnyTimeEffect;
 import mage.abilities.effects.common.continuous.PlayFromTopOfLibraryEffect;
-import mage.abilities.keyword.HasteAbility;
-import mage.constants.*;
 import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.ComparisonType;
+import mage.constants.SubType;
+import mage.constants.WatcherScope;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.ManaValuePredicate;
+import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.Watcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -33,7 +36,7 @@ public final class ThundermaneDragon extends CardImpl {
     private static final FilterCreatureCard filter = new FilterCreatureCard("cast creature spells with power 4 or greater");
 
     static {
-        filter.add(new ManaValuePredicate(ComparisonType.OR_GREATER, 4));
+        filter.add(new PowerPredicate(ComparisonType.OR_GREATER, 4));
     }
 
     public ThundermaneDragon(UUID ownerId, CardSetInfo setInfo) {
