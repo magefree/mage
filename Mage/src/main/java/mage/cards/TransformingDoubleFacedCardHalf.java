@@ -1,10 +1,9 @@
 package mage.cards;
 
 import mage.ObjectColor;
-import mage.constants.CardType;
-import mage.constants.SpellAbilityType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.abilities.SpellAbility;
+import mage.constants.*;
+import mage.game.Game;
 
 import java.util.UUID;
 
@@ -28,6 +27,19 @@ public class TransformingDoubleFacedCardHalf extends DoubleFacedCardHalf {
             SuperType[] superTypesRight, CardType[] typesRight, SubType[] subTypesRight, String colorRight, TransformingDoubleFacedCard parentCard) {
         super(ownerId, setInfo, superTypesRight, typesRight, subTypesRight, "", parentCard, SpellAbilityType.TRANSFORMED_RIGHT);
         this.getColor().setColor(new ObjectColor(colorRight));
+    }
+
+    @Override
+    public boolean cast(Game game, Zone fromZone, SpellAbility ability, UUID controllerId) {
+        if (ability.getSpellAbilityCastMode() == SpellAbilityCastMode.DISTURB && !isBackSide()) {
+            return getOtherSide().cast(game, fromZone, ability, controllerId);
+        }
+        return super.cast(game, fromZone, ability, controllerId);
+    }
+
+    @Override
+    public boolean isTransformable() {
+        return true;
     }
 
     @Override

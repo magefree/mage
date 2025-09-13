@@ -23,6 +23,11 @@ public class ModalDoubleFacedCardHalf extends DoubleFacedCardHalf {
     }
 
     @Override
+    public boolean isTransformable() {
+        return getOtherSide().isPermanent();
+    }
+
+    @Override
     public ModalDoubleFacedCardHalf copy() {
         return new ModalDoubleFacedCardHalf(this);
     }

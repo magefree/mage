@@ -5,9 +5,7 @@ import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
 import mage.abilities.keyword.PrototypeAbility;
-import mage.cards.Card;
-import mage.cards.DoubleFacedCard;
-import mage.cards.DoubleFacedCardHalf;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.game.Game;
@@ -93,10 +91,10 @@ public class CopyTokenFunction {
             copyToToken(target, sourceObj, game);
             CardUtil.copySetAndCardNumber(target, sourceObj);
             // second side
-            if (sourceObj.isTransformable()) {
+            if (sourceObj.isTransformable() && !(sourceObj instanceof DoubleFacedCardHalf)) {
                 copyToToken(target.getBackFace(), sourceObj.getSecondCardFace(), game);
                 CardUtil.copySetAndCardNumber(target.getBackFace(), sourceObj.getSecondCardFace());
-            } else if (sourceObj instanceof DoubleFacedCardHalf && target.isEntersTransformed()) {
+            } else if (sourceObj.isTransformable() && sourceObj instanceof DoubleFacedCardHalf) {
                 // double faced card
                 copyToToken(target.getBackFace(), ((DoubleFacedCardHalf) sourceObj).getOtherSide(), game);
                 CardUtil.copySetAndCardNumber(target.getBackFace(), ((DoubleFacedCardHalf) sourceObj).getOtherSide());
@@ -110,6 +108,58 @@ public class CopyTokenFunction {
                         ((PrototypeAbility) ability).prototypePermanent(target, game);
                     }
                 }
+            }
+            return;
+        }
+
+        // from transformed spell
+        if (source instanceof TransformingDoubleFacedCardHalf) {
+            TransformingDoubleFacedCardHalf sourceCard = (TransformingDoubleFacedCardHalf) source;
+            Card frontSide;
+            Card backSide;
+            if (sourceCard.isBackSide()) {
+                target.setEntersTransformed(true);
+                frontSide = sourceCard.getOtherSide();
+                backSide = sourceCard;
+            } else {
+                frontSide = sourceCard;
+                backSide = sourceCard.getOtherSide();
+            }
+            // main side
+            copyToToken(target, frontSide, game);
+            target.setCopySourceCard(sourceCard);
+            CardUtil.copySetAndCardNumber(target, frontSide);
+            // second side
+            copyToToken(target.getBackFace(), backSide, game);
+            CardUtil.copySetAndCardNumber(target, backSide);
+            return;
+        }
+
+        // from mdfc spell
+        if (source instanceof ModalDoubleFacedCardHalf) {
+            ModalDoubleFacedCardHalf sourceCard = (ModalDoubleFacedCardHalf) source;
+            Card frontSide;
+            Card backSide = null;
+            if (sourceCard.isTransformable()) {
+                if (sourceCard.isBackSide()) {
+                    target.setEntersTransformed(true);
+                    frontSide = sourceCard.getOtherSide();
+                    backSide = sourceCard;
+                } else {
+                    frontSide = sourceCard;
+                    backSide = sourceCard.getOtherSide();
+                }
+            } else {
+                frontSide = sourceCard;
+            }
+            // main side
+            copyToToken(target, frontSide, game);
+            target.setCopySourceCard(sourceCard);
+            CardUtil.copySetAndCardNumber(target, frontSide);
+            // second side
+            if (backSide != null) {
+                copyToToken(target.getBackFace(), backSide, game);
+                CardUtil.copySetAndCardNumber(target, backSide);
             }
             return;
         }

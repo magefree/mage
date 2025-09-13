@@ -324,7 +324,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Homestead Courage", 24, Rarity.COMMON, mage.cards.h.HomesteadCourage.class));
         cards.add(new SetCardInfo("Honeymoon Hearse", 427, Rarity.UNCOMMON, mage.cards.h.HoneymoonHearse.class));
         cards.add(new SetCardInfo("Honored Heirloom", 524, Rarity.COMMON, mage.cards.h.HonoredHeirloom.class));
-        cards.add(new SetCardInfo("Hook-Haunt Drifter", 42, Rarity.COMMON, mage.cards.h.HookHauntDrifter.class));
         cards.add(new SetCardInfo("Hookhand Mariner", 470, Rarity.COMMON, mage.cards.h.HookhandMariner.class));
         cards.add(new SetCardInfo("Hopeful Initiate", 287, Rarity.RARE, mage.cards.h.HopefulInitiate.class));
         cards.add(new SetCardInfo("Hostile Hostel", 264, Rarity.MYTHIC, mage.cards.h.HostileHostel.class));

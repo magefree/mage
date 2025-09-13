@@ -62,6 +62,11 @@ public abstract class ModalDoubleFacedCard extends DoubleFacedCard {
     }
 
     @Override
+    public boolean isTransformable() {
+        return this.getLeftHalfCard().isPermanent() && this.getRightHalfCard().isPermanent();
+    }
+
+    @Override
     public ModalDoubleFacedCardHalf getLeftHalfCard() {
         return (ModalDoubleFacedCardHalf) leftHalfCard;
     }

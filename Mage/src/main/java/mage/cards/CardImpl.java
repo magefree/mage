@@ -127,6 +127,11 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         nightCard = card.nightCard;
         secondSideCardClazz = card.secondSideCardClazz;
         secondSideCard = null; // will be set on first getSecondCardFace call if card has one
+        // TODO: temporary until cards tdfc cards are converted
+        //  can do normal copy after
+        if (card.secondSideCard instanceof DoubleFacedCardHalf) {
+            secondSideCard = card.secondSideCard.copy();
+        }
         if (card.secondSideCard instanceof MockableCard) {
             // workaround to support gui's mock cards
             secondSideCard = card.secondSideCard.copy();
@@ -662,9 +667,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         // If a spell or ability instructs a player to transform a permanent that
         // isn’t represented by a transforming token or a transforming double-faced
         // card, nothing happens.
-        return this.secondSideCardClazz != null || this.nightCard || this.secondSideCard != null || this instanceof TransformingDoubleFacedCard
-                || (this instanceof ModalDoubleFacedCard && ((ModalDoubleFacedCard) this).getLeftHalfCard().isPermanent()
-                && ((ModalDoubleFacedCard) this).getRightHalfCard().isPermanent());
+        return this.secondSideCardClazz != null || this.nightCard || this.secondSideCard != null;
     }
 
     @Override

@@ -269,11 +269,15 @@ public abstract class DoubleFacedCard extends CardImpl implements CardWithHalves
         // skip cast spell
         if (ability instanceof SpellAbility) {
             SpellAbilityType type = ((SpellAbility) ability).getSpellAbilityType();
-            return type == SpellAbilityType.MODAL || type == SpellAbilityType.TRANSFORMED || type == SpellAbilityType.TRANSFORMED_RIGHT;
+            return type == SpellAbilityType.MODAL || type == SpellAbilityType.TRANSFORMED;
         }
 
         // skip play land
         return ability instanceof PlayLandAbility;
+    }
+
+    private boolean isIgnoreTransformSpellAbility(Ability ability) {
+        return ability instanceof SpellAbility && ((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.TRANSFORMED_RIGHT;
     }
 
     private Abilities<Ability> getInnerAbilities(Game game, boolean showLeftSide, boolean showRightSide) {
@@ -290,7 +294,12 @@ public abstract class DoubleFacedCard extends CardImpl implements CardWithHalves
             allAbilites.addAll(leftHalfCard.getAbilities(game));
         }
         if (showRightSide) {
-            allAbilites.addAll(rightHalfCard.getAbilities(game));
+            for (Ability ability: rightHalfCard.getAbilities(game)) {
+                if (isIgnoreTransformSpellAbility(ability)) {
+                    continue;
+                }
+                allAbilites.add(ability);
+            }
         }
 
         return allAbilites;
@@ -311,7 +320,12 @@ public abstract class DoubleFacedCard extends CardImpl implements CardWithHalves
         }
 
         if (showRightSide) {
-            allAbilites.addAll(rightHalfCard.getAbilities());
+            for (Ability ability: rightHalfCard.getAbilities()) {
+                if (isIgnoreTransformSpellAbility(ability)) {
+                    continue;
+                }
+                allAbilites.add(ability);
+            }
         }
 
         return allAbilites;

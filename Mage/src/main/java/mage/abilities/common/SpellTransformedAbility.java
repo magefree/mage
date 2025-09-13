@@ -7,6 +7,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.stack.Spell;
@@ -20,6 +21,7 @@ import java.util.UUID;
 public class SpellTransformedAbility extends SpellAbility {
 
     protected final String manaCost; //This variable is only used for rules text
+    private boolean ignoreTransformEffect; // TODO: temporary while converting tdfc
 
     public SpellTransformedAbility(Card card, String manaCost) {
         super(card.getSecondFaceSpellAbility());
@@ -35,7 +37,11 @@ public class SpellTransformedAbility extends SpellAbility {
         this.clearManaCosts();
         this.clearManaCostsToPay();
         this.addCost(new ManaCostsImpl<>(manaCost));
-        this.addSubAbility(new TransformAbility());
+        if (!(card instanceof TransformingDoubleFacedCard)) {
+            this.addSubAbility(new TransformAbility());
+        } else {
+            ignoreTransformEffect = true;
+        }
     }
 
     public SpellTransformedAbility(final SpellAbility ability) {
@@ -65,6 +71,9 @@ public class SpellTransformedAbility extends SpellAbility {
     public boolean activate(Game game, Set<MageIdentifier> allowedIdentifiers, boolean noMana) {
         if (super.activate(game, allowedIdentifiers, noMana)) {
             game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + getSourceId(), Boolean.TRUE);
+            if (ignoreTransformEffect) {
+                return true;
+            }
             // TODO: must be removed after transform cards (one side) migrated to MDF engine (multiple sides)
             TransformedEffect effect = new TransformedEffect();
             game.addEffect(effect, this);

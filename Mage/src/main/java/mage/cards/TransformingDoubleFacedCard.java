@@ -39,6 +39,7 @@ public abstract class TransformingDoubleFacedCard extends DoubleFacedCard {
                 this.getOwnerId(), new CardSetInfo(secondSideName, setInfo),
                 superTypesRight, typesRight, subTypesRight, colorRight, this
         );
+        this.secondSideCard = rightHalfCard;
     }
 
     public TransformingDoubleFacedCard(final TransformingDoubleFacedCard card) {

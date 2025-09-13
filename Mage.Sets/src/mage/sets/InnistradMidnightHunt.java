@@ -248,7 +248,6 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Heirloom Mirror", 105, Rarity.UNCOMMON, mage.cards.h.HeirloomMirror.class));
         cards.add(new SetCardInfo("Hobbling Zombie", 106, Rarity.COMMON, mage.cards.h.HobblingZombie.class));
         cards.add(new SetCardInfo("Homestead Courage", 24, Rarity.COMMON, mage.cards.h.HomesteadCourage.class));
-        cards.add(new SetCardInfo("Hook-Haunt Drifter", 42, Rarity.COMMON, mage.cards.h.HookHauntDrifter.class));
         cards.add(new SetCardInfo("Hostile Hostel", 264, Rarity.MYTHIC, mage.cards.h.HostileHostel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hostile Hostel", 379, Rarity.MYTHIC, mage.cards.h.HostileHostel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hound Tamer", 187, Rarity.UNCOMMON, mage.cards.h.HoundTamer.class, NON_FULL_USE_VARIOUS));
