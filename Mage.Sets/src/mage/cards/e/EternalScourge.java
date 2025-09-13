@@ -32,7 +32,7 @@ public final class EternalScourge extends CardImpl {
 
         // When Eternal Scourge becomes the target of a spell or ability an opponent controls, exile Eternal Scourge.
         this.addAbility(new BecomesTargetSourceTriggeredAbility(new ExileSourceEffect(),
-                StaticFilters.FILTER_SPELL_OR_ABILITY_OPPONENTS));
+                StaticFilters.FILTER_SPELL_OR_ABILITY_OPPONENTS).withRuleTextReplacement(false));
     }
 
     private EternalScourge(final EternalScourge card) {

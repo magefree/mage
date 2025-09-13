@@ -72,6 +72,6 @@ enum PermafrostTrapCondition implements Condition {
 
     @Override
     public String toString() {
-        return "If an opponent had a green creature enter the battlefield under their control this turn";
+        return "an opponent had a green creature enter the battlefield under their control this turn";
     }
 }

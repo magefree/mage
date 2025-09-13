@@ -68,6 +68,6 @@ enum BalothCageTrapCondition implements Condition {
 
     @Override
     public String toString() {
-        return "If an opponent had an artifact enter the battlefield under their control this turn";
+        return "an opponent had an artifact enter the battlefield under their control this turn";
     }
 }

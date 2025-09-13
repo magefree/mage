@@ -42,7 +42,7 @@ public final class SummonGFCerberus extends CardImpl {
         // III -- Triple -- When you next cast an instant or sorcery spell this turn, copy it twice. You may choose new targets for the copies.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III, ability -> {
             ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new CopyNextSpellDelayedTriggeredAbility(
-                    StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY, 2
+                    StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, 2
             )));
             ability.withFlavorWord("Triple");
         });

@@ -38,7 +38,8 @@ public final class UnderworldCerberus extends CardImpl {
 
         // When Underworld Cerberus dies, exile it and each player returns all creature cards from their graveyard to their hand.
         Ability ability = new DiesSourceTriggeredAbility(new ExileSourceEffect());
-        ability.addEffect(new ReturnToHandFromGraveyardAllEffect(new FilterCreatureCard("creature cards")));
+        ability.addEffect(new ReturnToHandFromGraveyardAllEffect(new FilterCreatureCard("creature cards"))
+                .concatBy("and"));
         this.addAbility(ability);
     }
 

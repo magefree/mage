@@ -78,6 +78,6 @@ enum LavaballTrapCondition implements Condition {
 
     @Override
     public String toString() {
-        return "If an opponent had two or more lands enter the battlefield under their control this turn";
+        return "an opponent had two or more lands enter the battlefield under their control this turn";
     }
 }

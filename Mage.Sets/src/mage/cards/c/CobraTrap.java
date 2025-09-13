@@ -60,7 +60,7 @@ enum CobraTrapCondition implements Condition {
 
     @Override
     public String toString() {
-        return "If a noncreature permanent under your control was destroyed this turn by a spell or ability an opponent controlled";
+        return "a noncreature permanent under your control was destroyed this turn by a spell or ability an opponent controlled";
     }
 
 }
