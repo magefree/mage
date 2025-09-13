@@ -35,7 +35,7 @@ public final class ThranPowerSuit extends CardImpl {
         filter.add(AttachedToAttachedPredicate.instance);
     }
 
-    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter, 2);
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter, 1);
 
     public ThranPowerSuit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
