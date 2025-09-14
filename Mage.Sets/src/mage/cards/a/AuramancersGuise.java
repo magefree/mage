@@ -3,7 +3,7 @@ package mage.cards.a;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
@@ -12,19 +12,25 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.permanent.AttachedToAttachedPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
-import java.util.Objects;
-import java.util.Optional;
 import java.util.UUID;
 
 /**
  * @author spjspj
  */
 public final class AuramancersGuise extends CardImpl {
+    private static final FilterPermanent filter = new FilterPermanent("Aura attached to it");
+
+    static {
+        filter.add(SubType.AURA.getPredicate());
+        filter.add(AttachedToAttachedPredicate.instance);
+    }
+
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter, 2);
 
     public AuramancersGuise(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");
@@ -39,7 +45,7 @@ public final class AuramancersGuise extends CardImpl {
 
         // Enchanted creature gets +2/+2 for each Aura attached to it and has vigilance.
         Ability ability = new SimpleStaticAbility(new BoostEnchantedEffect(
-                AuramancersGuiseValue.instance, AuramancersGuiseValue.instance, Duration.WhileOnBattlefield
+                xValue, xValue, Duration.WhileOnBattlefield
         ));
         ability.addEffect(new GainAbilityAttachedEffect(
                 VigilanceAbility.getInstance(), AttachmentType.AURA
@@ -57,40 +63,3 @@ public final class AuramancersGuise extends CardImpl {
     }
 }
 
-enum AuramancersGuiseValue implements DynamicValue {
-    instance;
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        Permanent permanent = Optional
-                .ofNullable(sourceAbility.getSourcePermanentIfItStillExists(game))
-                .map(Permanent::getAttachedTo)
-                .map(game::getPermanent)
-                .orElse(null);
-        return permanent != null
-                ? 2 * permanent
-                .getAttachments()
-                .stream()
-                .map(game::getPermanent)
-                .filter(Objects::nonNull)
-                .filter(p -> p.hasSubtype(SubType.AURA, game))
-                .mapToInt(x -> 1)
-                .sum()
-                : 0;
-    }
-
-    @Override
-    public AuramancersGuiseValue copy() {
-        return this;
-    }
-
-    @Override
-    public String getMessage() {
-        return "for each Aura attached to it";
-    }
-
-    @Override
-    public String toString() {
-        return "2";
-    }
-}
