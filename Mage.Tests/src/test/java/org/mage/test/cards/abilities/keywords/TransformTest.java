@@ -1,6 +1,7 @@
 package org.mage.test.cards.abilities.keywords;
 
 import mage.ObjectColor;
+import mage.abilities.common.WerewolfFrontTriggeredAbility;
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.SubType;
@@ -145,6 +146,7 @@ public class TransformTest extends CardTestPlayerBase {
      */
     @Test
     public void testCultOfTheWaxingMoon() {
+        setStrictChooseMode(true);
         // Whenever a permanent you control transforms into a non-Human creature, put a 2/2 green Wolf creature token onto the battlefield.
         addCard(Zone.BATTLEFIELD, playerA, "Cult of the Waxing Moon");
         // {1}{G} - Human Werewolf
@@ -158,6 +160,7 @@ public class TransformTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Cult of the Waxing Moon", 1);
         assertPermanentCount(playerA, "Timber Shredder", 1); // Night-side card of Hinterland Logger, Werewolf (non-human)
         assertPermanentCount(playerA, "Wolf Token", 1); // wolf token created
+        assertAbilityCount(playerA, "Timber Shredder", WerewolfFrontTriggeredAbility.class, 0); // no front face ability
     }
 
     /**

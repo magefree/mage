@@ -313,7 +313,6 @@ public class ShadowsOverInnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Thornhide Wolves", 218, Rarity.COMMON, mage.cards.t.ThornhideWolves.class));
         cards.add(new SetCardInfo("Thraben Foulbloods", 135, Rarity.COMMON, mage.cards.t.ThrabenFoulbloods.class));
         cards.add(new SetCardInfo("Thraben Inspector", 51, Rarity.COMMON, mage.cards.t.ThrabenInspector.class));
-        cards.add(new SetCardInfo("Timber Shredder", 201, Rarity.COMMON, mage.cards.t.TimberShredder.class));
         cards.add(new SetCardInfo("Tireless Tracker", 219, Rarity.RARE, mage.cards.t.TirelessTracker.class));
         cards.add(new SetCardInfo("Topplegeist", 52, Rarity.UNCOMMON, mage.cards.t.Topplegeist.class));
         cards.add(new SetCardInfo("Tormenting Voice", 181, Rarity.COMMON, mage.cards.t.TormentingVoice.class));

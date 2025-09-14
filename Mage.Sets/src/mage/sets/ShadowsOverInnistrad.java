@@ -331,7 +331,6 @@ public final class ShadowsOverInnistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Thraben Gargoyle", 266, Rarity.UNCOMMON, mage.cards.t.ThrabenGargoyle.class));
         cards.add(new SetCardInfo("Thraben Inspector", 44, Rarity.COMMON, mage.cards.t.ThrabenInspector.class));
         cards.add(new SetCardInfo("Throttle", 138, Rarity.COMMON, mage.cards.t.Throttle.class));
-        cards.add(new SetCardInfo("Timber Shredder", 210, Rarity.COMMON, mage.cards.t.TimberShredder.class));
         cards.add(new SetCardInfo("Tireless Tracker", 233, Rarity.RARE, mage.cards.t.TirelessTracker.class));
         cards.add(new SetCardInfo("To the Slaughter", 139, Rarity.RARE, mage.cards.t.ToTheSlaughter.class));
         cards.add(new SetCardInfo("Tooth Collector", 140, Rarity.UNCOMMON, mage.cards.t.ToothCollector.class));
