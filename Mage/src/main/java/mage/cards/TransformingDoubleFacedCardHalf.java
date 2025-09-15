@@ -38,11 +38,6 @@ public class TransformingDoubleFacedCardHalf extends DoubleFacedCardHalf {
     }
 
     @Override
-    public boolean isTransformable() {
-        return true;
-    }
-
-    @Override
     public TransformingDoubleFacedCardHalf copy() {
         return new TransformingDoubleFacedCardHalf(this);
     }

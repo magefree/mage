@@ -501,7 +501,6 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Kozilek, the Great Distortion", 493, Rarity.MYTHIC, mage.cards.k.KozilekTheGreatDistortion.class));
         cards.add(new SetCardInfo("Primeval Titan", 494, Rarity.MYTHIC, mage.cards.p.PrimevalTitan.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Huntmaster of the Fells", 495, Rarity.MYTHIC, mage.cards.h.HuntmasterOfTheFells.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Ravager of the Fells", 495, Rarity.MYTHIC, mage.cards.r.RavagerOfTheFells.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Platinum Angel", 496, Rarity.RARE, mage.cards.p.PlatinumAngel.class));
         cards.add(new SetCardInfo("Brimaz, King of Oreskos", 497, Rarity.MYTHIC, mage.cards.b.BrimazKingOfOreskos.class));
         cards.add(new SetCardInfo("Arcanis the Omnipotent", 498, Rarity.RARE, mage.cards.a.ArcanisTheOmnipotent.class));
@@ -700,7 +699,6 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Dakkon Blackblade", 698, Rarity.RARE, mage.cards.d.DakkonBlackblade.class));
         cards.add(new SetCardInfo("Olivia, Mobilized for War", 699, Rarity.MYTHIC, mage.cards.o.OliviaMobilizedForWar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Huntmaster of the Fells", 700, Rarity.MYTHIC, mage.cards.h.HuntmasterOfTheFells.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Ravager of the Fells", 700, Rarity.MYTHIC, mage.cards.r.RavagerOfTheFells.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Elspeth, Knight-Errant", 701, Rarity.MYTHIC, mage.cards.e.ElspethKnightErrant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wastes", 704, Rarity.RARE, mage.cards.w.Wastes.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Wastes", 705, Rarity.RARE, mage.cards.w.Wastes.class, FULL_ART_BFZ_VARIOUS));
@@ -1046,7 +1044,6 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Eldrazi Temple", 1154, Rarity.RARE, mage.cards.e.EldraziTemple.class));
         cards.add(new SetCardInfo("Esika, God of the Tree", 1155, Rarity.MYTHIC, mage.cards.e.EsikaGodOfTheTree.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Archangel Avacyn", 1156, Rarity.MYTHIC, mage.cards.a.ArchangelAvacyn.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Avacyn, the Purifier", 1156, Rarity.MYTHIC, mage.cards.a.AvacynThePurifier.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloodline Keeper", 1157, Rarity.RARE, mage.cards.b.BloodlineKeeper.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lord of Lineage", 1157, Rarity.RARE, mage.cards.l.LordOfLineage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nicol Bolas, the Ravager", 1158, Rarity.MYTHIC, mage.cards.n.NicolBolasTheRavager.class, NON_FULL_USE_VARIOUS));
@@ -1103,7 +1100,6 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Inkmoth Nexus", 1207, Rarity.RARE, mage.cards.i.InkmothNexus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Esika, God of the Tree", 1208, Rarity.MYTHIC, mage.cards.e.EsikaGodOfTheTree.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Archangel Avacyn", 1209, Rarity.MYTHIC, mage.cards.a.ArchangelAvacyn.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Avacyn, the Purifier", 1209, Rarity.MYTHIC, mage.cards.a.AvacynThePurifier.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloodline Keeper", 1210, Rarity.RARE, mage.cards.b.BloodlineKeeper.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lord of Lineage", 1210, Rarity.RARE, mage.cards.l.LordOfLineage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nicol Bolas, the Ravager", 1211, Rarity.MYTHIC, mage.cards.n.NicolBolasTheRavager.class, NON_FULL_USE_VARIOUS));

@@ -44,7 +44,6 @@ public class ShadowsOverInnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Assembled Alphas", 141, Rarity.RARE, mage.cards.a.AssembledAlphas.class));
         cards.add(new SetCardInfo("Aurora of Emrakul", 248, Rarity.UNCOMMON, mage.cards.a.AuroraOfEmrakul.class));
         cards.add(new SetCardInfo("Avacyn's Judgment", 142, Rarity.RARE, mage.cards.a.AvacynsJudgment.class));
-        cards.add(new SetCardInfo("Avacyn, the Purifier", 13, Rarity.MYTHIC, mage.cards.a.AvacynThePurifier.class));
         cards.add(new SetCardInfo("Awoken Horror", 95, Rarity.RARE, mage.cards.a.AwokenHorror.class));
         cards.add(new SetCardInfo("Bearer of Overwhelming Truths", 59, Rarity.UNCOMMON, mage.cards.b.BearerOfOverwhelmingTruths.class));
         cards.add(new SetCardInfo("Bedlam Reveler", 143, Rarity.RARE, mage.cards.b.BedlamReveler.class));
@@ -244,7 +243,6 @@ public class ShadowsOverInnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Ormendahl, Profane Prince", 275, Rarity.RARE, mage.cards.o.OrmendahlProfanePrince.class));
         cards.add(new SetCardInfo("Pack Guardian", 208, Rarity.UNCOMMON, mage.cards.p.PackGuardian.class));
         cards.add(new SetCardInfo("Permeating Mass", 209, Rarity.RARE, mage.cards.p.PermeatingMass.class));
-        cards.add(new SetCardInfo("Persistent Nightmare", 90, Rarity.MYTHIC, mage.cards.p.PersistentNightmare.class));
         cards.add(new SetCardInfo("Pick the Brain", 129, Rarity.UNCOMMON, mage.cards.p.PickTheBrain.class));
         cards.add(new SetCardInfo("Pieces of the Puzzle", 85, Rarity.UNCOMMON, mage.cards.p.PiecesOfThePuzzle.class));
         cards.add(new SetCardInfo("Plains", 277, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));

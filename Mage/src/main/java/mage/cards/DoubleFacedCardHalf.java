@@ -50,6 +50,11 @@ public abstract class DoubleFacedCardHalf extends CardImpl implements SubCard<Do
     }
 
     @Override
+    public boolean isTransformable() {
+        return getOtherSide().isPermanent();
+    }
+
+    @Override
     public boolean moveToZone(Zone toZone, Ability source, Game game, boolean flag, List<UUID> appliedEffects) {
         return parentCard.moveToZone(toZone, source, game, flag, appliedEffects);
     }

@@ -261,7 +261,7 @@ public class TransformTest extends CardTestPlayerBase {
      * Trespasser.
      */
     @Test
-    public void testTransformCopyrnansformed() {
+    public void testTransformCopyTransformed() {
         // Skulk (This creature can't be blocked by creatures with greater power.)
         // When Uninvited Geist deals combat damage to a player, transform it.
         addCard(Zone.BATTLEFIELD, playerA, "Uninvited Geist"); // Creature 2/2 {2}{U}
@@ -282,7 +282,7 @@ public class TransformTest extends CardTestPlayerBase {
         setStopAt(3, PhaseStep.COMBAT_DAMAGE);
         execute();
 
-        assertLife(playerB, 15);
+        assertLife(playerB, 20 - 2 - 3);
 
         assertPermanentCount(playerB, "Mirror Mockery", 1);
         assertPermanentCount(playerA, "Unimpeded Trespasser", 1);

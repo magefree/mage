@@ -108,7 +108,7 @@ public final class ZonesHandler {
                     }
 
                     if (forceToMainSide) {
-                        info.event.setTargetId(((ModalDoubleFacedCard) card.getMainCard()).getLeftHalfCard().getId());
+                        info.event.setTargetId(((DoubleFacedCard) card.getMainCard()).getLeftHalfCard().getId());
                     }
                 }
             }

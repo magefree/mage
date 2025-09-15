@@ -112,32 +112,9 @@ public class CopyTokenFunction {
             return;
         }
 
-        // from transformed spell
-        if (source instanceof TransformingDoubleFacedCardHalf) {
-            TransformingDoubleFacedCardHalf sourceCard = (TransformingDoubleFacedCardHalf) source;
-            Card frontSide;
-            Card backSide;
-            if (sourceCard.isBackSide()) {
-                target.setEntersTransformed(true);
-                frontSide = sourceCard.getOtherSide();
-                backSide = sourceCard;
-            } else {
-                frontSide = sourceCard;
-                backSide = sourceCard.getOtherSide();
-            }
-            // main side
-            copyToToken(target, frontSide, game);
-            target.setCopySourceCard(sourceCard);
-            CardUtil.copySetAndCardNumber(target, frontSide);
-            // second side
-            copyToToken(target.getBackFace(), backSide, game);
-            CardUtil.copySetAndCardNumber(target, backSide);
-            return;
-        }
-
-        // from mdfc spell
-        if (source instanceof ModalDoubleFacedCardHalf) {
-            ModalDoubleFacedCardHalf sourceCard = (ModalDoubleFacedCardHalf) source;
+        // from double faced card spell
+        if (source instanceof DoubleFacedCardHalf) {
+            DoubleFacedCardHalf sourceCard = (DoubleFacedCardHalf) source;
             Card frontSide;
             Card backSide = null;
             if (sourceCard.isTransformable()) {

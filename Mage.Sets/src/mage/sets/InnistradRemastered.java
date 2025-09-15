@@ -62,8 +62,6 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Aurora of Emrakul", 472, Rarity.UNCOMMON, mage.cards.a.AuroraOfEmrakul.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Avacyn, Angel of Hope", 477, Rarity.MYTHIC, mage.cards.a.AvacynAngelOfHope.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Avacyn, Angel of Hope", 482, Rarity.MYTHIC, mage.cards.a.AvacynAngelOfHope.class, FULL_ART_USE_VARIOUS));
-        cards.add(new SetCardInfo("Avacyn, the Purifier", 11, Rarity.MYTHIC, mage.cards.a.AvacynThePurifier.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Avacyn, the Purifier", 449, Rarity.MYTHIC, mage.cards.a.AvacynThePurifier.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Avacynian Priest", 12, Rarity.COMMON, mage.cards.a.AvacynianPriest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Avacynian Priest", 334, Rarity.COMMON, mage.cards.a.AvacynianPriest.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Awoken Demon", 107, Rarity.COMMON, mage.cards.a.AwokenDemon.class, NON_FULL_USE_VARIOUS));
@@ -417,9 +415,6 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 289, Rarity.LAND, mage.cards.basiclands.Plains.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Rally the Peasants", 347, Rarity.UNCOMMON, mage.cards.r.RallyThePeasants.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Rally the Peasants", 37, Rarity.UNCOMMON, mage.cards.r.RallyThePeasants.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Ravager of the Fells", 241, Rarity.RARE, mage.cards.r.RavagerOfTheFells.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Ravager of the Fells", 325, Rarity.RARE, mage.cards.r.RavagerOfTheFells.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Ravager of the Fells", 470, Rarity.RARE, mage.cards.r.RavagerOfTheFells.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Reckless Scholar", 81, Rarity.COMMON, mage.cards.r.RecklessScholar.class));
         cards.add(new SetCardInfo("Reforge the Soul", 167, Rarity.RARE, mage.cards.r.ReforgeTheSoul.class));
         cards.add(new SetCardInfo("Restless Bloodseeker", 128, Rarity.UNCOMMON, mage.cards.r.RestlessBloodseeker.class, NON_FULL_USE_VARIOUS));
