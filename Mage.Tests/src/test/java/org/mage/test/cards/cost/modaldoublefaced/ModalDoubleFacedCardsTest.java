@@ -918,6 +918,7 @@ public class ModalDoubleFacedCardsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
 
         // cast mdf card
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}", 2);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hakka, Whispering Raven");
         // prepare copy of spell
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Double Major", "Hakka, Whispering Raven", "Hakka, Whispering Raven");
