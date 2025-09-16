@@ -48,7 +48,7 @@ public final class CyclonusTheSaboteur extends CardImpl {
 
         // Whenever Cyclonus deals combat damage to a player, it connives.
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(
-            new ConniveSourceEffect("he"),
+            new ConniveSourceEffect("it"),
              false,
               true
             );

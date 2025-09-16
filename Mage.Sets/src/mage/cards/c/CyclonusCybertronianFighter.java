@@ -3,15 +3,18 @@ package mage.cards.c;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.effects.common.AdditionalBeginningPhaseEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.LivingMetalAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
+import mage.constants.TurnPhase;
+import mage.game.Game;
+import mage.game.turn.TurnMod;
 
 import java.util.UUID;
 
@@ -38,14 +41,11 @@ public final class CyclonusCybertronianFighter extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever Cyclonus deals combat damage to a player, convert it.
-        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(
-            new TransformSourceEffect(),
-             false,
-              true
-            );
         // If you do, there is an additional beginning phase after this phase.
-        ability.addEffect(new AdditionalBeginningPhaseEffect(1));
-
+        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(
+            new CyclonusCybertronianFighterEffect(),
+             false
+            );
         this.addAbility(ability);
     }
 
@@ -56,5 +56,32 @@ public final class CyclonusCybertronianFighter extends CardImpl {
     @Override
     public CyclonusCybertronianFighter copy() {
         return new CyclonusCybertronianFighter(this);
+    }
+}
+
+class CyclonusCybertronianFighterEffect extends TransformSourceEffect {
+
+    CyclonusCybertronianFighterEffect() {
+        super();
+        staticText = "transform it. If you do, there is an additional beginning phase after this phase";
+    }
+
+    private CyclonusCybertronianFighterEffect(final CyclonusCybertronianFighterEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public CyclonusCybertronianFighterEffect copy() {
+        return new CyclonusCybertronianFighterEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        if (!super.apply(game, source)) {
+            return false;
+        }
+        TurnMod beginning = new TurnMod(game.getState().getActivePlayerId()).withExtraPhase(TurnPhase.BEGINNING);
+        game.getState().getTurnMods().add(beginning);
+        return true;
     }
 }
