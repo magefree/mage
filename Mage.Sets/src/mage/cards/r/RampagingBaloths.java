@@ -26,7 +26,7 @@ public final class RampagingBaloths extends CardImpl {
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
         this.addAbility(TrampleAbility.getInstance());
-        this.addAbility(new LandfallAbility(new CreateTokenEffect(new BeastToken2()), true));
+        this.addAbility(new LandfallAbility(new CreateTokenEffect(new BeastToken2()), false));
     }
 
     private RampagingBaloths(final RampagingBaloths card) {

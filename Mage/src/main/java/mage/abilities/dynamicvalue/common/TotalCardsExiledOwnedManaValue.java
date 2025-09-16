@@ -26,7 +26,7 @@ public enum TotalCardsExiledOwnedManaValue implements DynamicValue {
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int totalCMC = 0;
-        List<Card> cards = game.getExile().getAllCards(
+        List<Card> cards = game.getExile().getCardsOwned(
                 game,
                 sourceAbility.getControllerId()
         );

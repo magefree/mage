@@ -89,6 +89,6 @@ enum RuneflareTrapCondition implements Condition {
 
     @Override
     public String toString() {
-        return "If an opponent drew three or more cards this turn";
+        return "an opponent drew three or more cards this turn";
     }
 }

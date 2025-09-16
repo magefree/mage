@@ -107,7 +107,7 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Bramble Wurm", 187, Rarity.COMMON, mage.cards.b.BrambleWurm.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bramble Wurm", 407, Rarity.COMMON, mage.cards.b.BrambleWurm.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Brisela, Voice of Nightmares", "14b", Rarity.MYTHIC, mage.cards.b.BriselaVoiceOfNightmares.class));
-        cards.add(new SetCardInfo("Bruna, the Fading Light", "14a", Rarity.RARE, mage.cards.b.BrunaTheFadingLight.class));
+        cards.add(new SetCardInfo("Bruna, the Fading Light", 14, Rarity.RARE, mage.cards.b.BrunaTheFadingLight.class));
         cards.add(new SetCardInfo("Burning Vengeance", 147, Rarity.UNCOMMON, mage.cards.b.BurningVengeance.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Burning Vengeance", 397, Rarity.UNCOMMON, mage.cards.b.BurningVengeance.class,RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Butcher Ghoul", 373, Rarity.COMMON, mage.cards.b.ButcherGhoul.class, RETRO_ART_USE_VARIOUS));
@@ -272,7 +272,7 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Hamlet Captain", 201, Rarity.UNCOMMON, mage.cards.h.HamletCaptain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hamlet Captain", 413, Rarity.UNCOMMON, mage.cards.h.HamletCaptain.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Hanweir Battlements", 279, Rarity.RARE, mage.cards.h.HanweirBattlements.class));
-        cards.add(new SetCardInfo("Hanweir Garrison", "157a", Rarity.RARE, mage.cards.h.HanweirGarrison.class));
+        cards.add(new SetCardInfo("Hanweir Garrison", 157, Rarity.RARE, mage.cards.h.HanweirGarrison.class));
         cards.add(new SetCardInfo("Hanweir Watchkeep", 158, Rarity.COMMON, mage.cards.h.HanweirWatchkeep.class));
         cards.add(new SetCardInfo("Hanweir, the Writhing Township", "157b", Rarity.RARE, mage.cards.h.HanweirTheWrithingTownship.class));
         cards.add(new SetCardInfo("Harvest Hand", 265, Rarity.COMMON, mage.cards.h.HarvestHand.class));

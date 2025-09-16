@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import java.util.UUID;
@@ -34,7 +33,9 @@ public final class Blight extends CardImpl {
         this.addAbility(ability);
 
         // When enchanted land becomes tapped, destroy it.
-        this.addAbility(new BecomesTappedAttachedTriggeredAbility(new DestroyAttachedToEffect("it"), "enchanted land"));
+        this.addAbility(new BecomesTappedAttachedTriggeredAbility(
+                new DestroyAttachedToEffect("it"), "enchanted land"
+        ).setTriggerPhrase("When enchanted land becomes tapped, "));
     }
 
     private Blight(final Blight card) {

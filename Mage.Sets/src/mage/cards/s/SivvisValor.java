@@ -31,7 +31,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class SivvisValor extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("If you control a Plains");
+    private static final FilterPermanent filter = new FilterPermanent("you control a Plains");
     private static final FilterControlledCreaturePermanent filterCreature = new FilterControlledCreaturePermanent("untapped creature you control");
 
     static {

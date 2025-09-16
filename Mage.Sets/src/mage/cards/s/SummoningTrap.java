@@ -63,7 +63,7 @@ enum SummoningTrapCondition implements Condition {
 
     @Override
     public String toString() {
-        return "If a creature spell you cast this turn was countered by a spell or ability an opponent controlled";
+        return "a creature spell you cast this turn was countered by a spell or ability an opponent controlled";
     }
 }
 

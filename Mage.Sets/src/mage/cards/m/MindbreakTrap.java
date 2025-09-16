@@ -65,7 +65,7 @@ enum MindbreakTrapCondition implements Condition {
 
     @Override
     public String toString() {
-        return "If an opponent cast three or more spells this turn";
+        return "an opponent cast three or more spells this turn";
     }
 
 }

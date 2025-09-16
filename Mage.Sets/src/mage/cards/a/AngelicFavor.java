@@ -28,7 +28,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public final class AngelicFavor extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("If you control a Plains");
+    private static final FilterPermanent filter = new FilterPermanent("you control a Plains");
 
     static {
         filter.add(SubType.PLAINS.getPredicate());

@@ -77,7 +77,7 @@ enum RefractionTrapCondition implements Condition {
 
     @Override
     public String toString() {
-        return "If an opponent cast a red instant or sorcery spell this turn";
+        return "an opponent cast a red instant or sorcery spell this turn";
     }
 }
 
