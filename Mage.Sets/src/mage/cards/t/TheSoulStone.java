@@ -58,9 +58,10 @@ public final class TheSoulStone extends CardImpl {
                 .withFlavorWord("∞");
         soulStoneAbility.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
-                new GainAbilitySourceEffect(soulStoneAbility).setText(soulStoneAbility.getRule()),
+                new GainAbilitySourceEffect(soulStoneAbility),
                 SourceHarnessedCondition.instance,
-                ""))
+                "")
+                .setText(""))
         );
     }
 
