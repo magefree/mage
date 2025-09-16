@@ -32,6 +32,7 @@ import mage.game.command.Dungeon;
 import mage.game.command.Emblem;
 import mage.game.command.Plane;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
@@ -538,12 +539,19 @@ public class CardView extends SimpleCardView {
 
             // TODO: can probably remove this after tdfc rework
             // transformable, double faces cards
-            this.transformable = card.isTransformable();
+            if (!(sourceCard.getMainCard() instanceof DoubleFacedCard)) {
+                this.transformable = card.isTransformable();
 
-            Card secondSideCard = card.getSecondCardFace();
-            if (secondSideCard != null) {
+                Card secondSideCard = card.getSecondCardFace();
+                if (secondSideCard != null) {
+                    this.secondCardFace = new CardView(secondSideCard, game);
+                    this.alternateName = secondCardFace.getName();
+                }
+            } else if (card instanceof PermanentCard && card.isTransformable()) {
+                this.transformable = card.isTransformable();
+                Card secondSideCard = (Card) ((PermanentCard) card).getOtherFace();
                 this.secondCardFace = new CardView(secondSideCard, game);
-                this.alternateName = secondCardFace.getName();
+                this.alternateName = secondSideCard.getName();
             }
 
             this.flipCard = card.isFlipCard();
