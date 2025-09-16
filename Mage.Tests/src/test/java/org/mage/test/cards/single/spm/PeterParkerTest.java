@@ -154,6 +154,9 @@ public class PeterParkerTest extends CardTestPlayerBase {
         assertHandCount(playerA, balduvianBears, 1);
     }
 
+    /**
+     * test that MDFC doesn't have static ability from one side after transforming
+     */
     @Test
     public void testTransformLosesWebSlinging() {
         setStrictChooseMode(true);
@@ -196,7 +199,7 @@ public class PeterParkerTest extends CardTestPlayerBase {
     }
 
     /**
-     *
+     * test showing if a transformed MDFC gets re-cast, it won't trigger effects from the other face
      */
     @Test
     public void testTransformCastSecondSideDoesntTriggerFront() {
