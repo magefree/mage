@@ -1,9 +1,16 @@
 package org.mage.test.cards.single.spm;
 
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
+import mage.cards.Card;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.assertTrue;
 
 /**
  *
@@ -57,6 +64,8 @@ public class TheSoulStoneTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, bearCub, 1);
         assertExileCount(playerA, bearCub, 1);
+        // doesn't have ability if blinked
+        assertAbilityCount(playerA, theSoulStone, BeginningOfUpkeepTriggeredAbility.class, 1);
     }
 
     @Test
@@ -79,6 +88,34 @@ public class TheSoulStoneTest extends CardTestPlayerBase {
         execute();
 
         assertExileCount(playerA, bearCub, 1);
+        assertPermanentCount(playerA, bearCub, 0);
         assertGraveyardCount(playerA, bearCub, 1);
+        // doesn't have ability if blinked
+        assertAbilityCount(playerA, theSoulStone, BeginningOfUpkeepTriggeredAbility.class, 0);
+    }
+
+    @Test
+    public void testSoulStoneHasNoInfinityAbility() {
+        setStrictChooseMode(true);
+        removeAllCardsFromLibrary(playerA);
+
+        addCard(Zone.HAND, playerA, theSoulStone);
+        addCard(Zone.LIBRARY, playerA, theSoulStone);
+        addCard(Zone.GRAVEYARD, playerA, theSoulStone);
+        addCard(Zone.EXILED, playerA, theSoulStone);
+
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        List<Card> cards = new ArrayList<>(getHandCards(playerA));
+        cards.addAll(getLibraryCards(playerA));
+        cards.addAll(getGraveCards(playerA));
+        cards.addAll(getExiledCards(playerA));
+
+        cards.forEach(card -> {
+            if (card.getName().equals(theSoulStone)) {
+                assertTrue("Should not have Infinity ability", !card.getAbilities(currentGame).containsClass(BeginningOfUpkeepTriggeredAbility.class));
+            }
+        });
     }
 }

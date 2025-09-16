@@ -72,7 +72,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected boolean monstrous;
     protected boolean renowned;
     protected boolean suspected;
-    protected boolean harnessed;
+    protected boolean harnessed = false;
     protected boolean manifested = false;
     protected boolean cloaked = false;
     protected boolean morphed = false;
@@ -2011,16 +2011,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         return this.harnessed;
     }
 
-    private static final String harnessedInfoKey = "IS_HARNESSED";
-
     @Override
     public void setHarnessed(Game game, boolean value) {
         this.harnessed = value;
-        if (this.harnessed) {
-            addInfo(harnessedInfoKey, CardUtil.addToolTipMarkTags("Harnessed"), game);
-        } else {
-            addInfo(harnessedInfoKey, null, game);
-        }
     }
 
     @Override
