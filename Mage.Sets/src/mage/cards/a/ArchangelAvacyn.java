@@ -14,9 +14,11 @@ import mage.abilities.keyword.*;
 import mage.cards.CardSetInfo;
 import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.*;
+import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 
 import java.util.UUID;
 
@@ -25,11 +27,13 @@ import java.util.UUID;
  */
 public final class ArchangelAvacyn extends TransformingDoubleFacedCard {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a non-Angel creature you control");
+    private static final FilterCreaturePermanent nonAngelFilter = new FilterCreaturePermanent("a non-Angel creature you control");
+    private static final FilterPermanent otherCreatureFilter = new FilterCreaturePermanent("other creature");
 
     static {
-        filter.add(Predicates.not(SubType.ANGEL.getPredicate()));
-        filter.add(TargetController.YOU.getControllerPredicate());
+        otherCreatureFilter.add(AnotherPredicate.instance);
+        nonAngelFilter.add(Predicates.not(SubType.ANGEL.getPredicate()));
+        nonAngelFilter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public ArchangelAvacyn(UUID ownerId, CardSetInfo setInfo) {
@@ -39,6 +43,7 @@ public final class ArchangelAvacyn extends TransformingDoubleFacedCard {
                 new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.ANGEL}, "R");
 
         this.getLeftHalfCard().setPT(4, 4);
+        this.getRightHalfCard().setPT(6, 5);
 
         // Flash
         this.addAbility(FlashAbility.getInstance());
@@ -56,11 +61,10 @@ public final class ArchangelAvacyn extends TransformingDoubleFacedCard {
         ), false));
 
         // When a non-Angel creature you control dies, transform Archangel Avacyn at the beginning of the next upkeep.
-        this.getLeftHalfCard().addAbility(new TransformAbility());
         this.getLeftHalfCard().addAbility(new DiesCreatureTriggeredAbility(
                 new CreateDelayedTriggeredAbilityEffect(
                         new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new TransformSourceEffect())
-                ).setText("transform {this} at the beginning of the next upkeep"), false, filter
+                ).setText("transform {this} at the beginning of the next upkeep"), false, nonAngelFilter
         ).setTriggerPhrase("When a non-Angel creature you control dies, "));
 
         // Avacyn, the Purifier
@@ -70,7 +74,7 @@ public final class ArchangelAvacyn extends TransformingDoubleFacedCard {
 
         // When this creature transforms into Avacyn, the Purifier, it deals 3 damage to each other creature and each opponent.
         Ability ability = new TransformIntoSourceTriggeredAbility(
-                new DamageAllEffect(3, "it", filter)
+                new DamageAllEffect(3, "it", otherCreatureFilter)
         );
         ability.addEffect(new DamagePlayersEffect(3, TargetController.OPPONENT).setText("and each opponent"));
         this.getRightHalfCard().addAbility(ability);
