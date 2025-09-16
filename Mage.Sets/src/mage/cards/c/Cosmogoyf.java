@@ -56,7 +56,7 @@ enum CosmogoyfValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return game.getState().getExile().getAllCards(game, sourceAbility.getControllerId()).size();
+        return game.getState().getExile().getCardsOwned(game, sourceAbility.getControllerId()).size();
     }
 
     @Override

@@ -28,7 +28,7 @@ public final class BlasphemousEdict extends CardImpl {
 
         // You may pay {B} rather than pay this spell's mana cost if there are thirteen or more creatures on the battlefield.
         Ability ability = new AlternativeCostSourceAbility(new ManaCostsImpl<>("{B}"), new PermanentsOnTheBattlefieldCondition(
-                new FilterCreaturePermanent("If there are thirteen or more creatures on the battlefield"),
+                new FilterCreaturePermanent("there are thirteen or more creatures on the battlefield"),
                 ComparisonType.OR_GREATER,
                 13,
                 false

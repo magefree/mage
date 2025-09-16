@@ -52,7 +52,7 @@ public class TargetCardInExile extends TargetCard {
         Set<UUID> possibleTargets = new HashSet<>();
 
         if (zoneId == null) { // no specific exile zone
-            for (Card card : game.getExile().getAllCardsByRange(game, sourceControllerId)) {
+            for (Card card : game.getExile().getCardsInRange(game, sourceControllerId)) {
                 if (filter.match(card, sourceControllerId, source, game)) {
                     possibleTargets.add(card.getId());
                 }

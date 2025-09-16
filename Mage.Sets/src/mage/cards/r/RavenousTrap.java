@@ -63,6 +63,6 @@ enum RavenousTrapCondition implements Condition {
 
     @Override
     public String toString() {
-        return "If an opponent had three or more cards put into their graveyard from anywhere this turn";
+        return "an opponent had three or more cards put into their graveyard from anywhere this turn";
     }
 }

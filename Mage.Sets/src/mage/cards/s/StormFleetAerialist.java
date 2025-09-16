@@ -35,7 +35,7 @@ public final class StormFleetAerialist extends CardImpl {
         // Raid - Storm Fleet Aerialist enters the battlefield with a +1/+1 counter on it if you attacked this turn.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1), false),
                         RaidCondition.instance,
-                        "<i>Raid</i> &mdash; {this} enters with a +1/+1 counter on it if you attacked this turn.",
+                        "{this} enters with a +1/+1 counter on it if you attacked this turn.",
                         "{this} enters with a +1/+1 counter")
                         .setAbilityWord(AbilityWord.RAID)
                         .addHint(RaidHint.instance),

@@ -23,7 +23,6 @@ import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.players.Player;
 
-import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -69,7 +68,6 @@ enum SailorsBaneValue implements DynamicValue {
     private static final FilterCard filter = new FilterCard();
 
     static {
-        filter.add(TargetController.YOU.getOwnerPredicate());
         filter.add(Predicates.or(
                 CardType.INSTANT.getPredicate(),
                 CardType.SORCERY.getPredicate(),
@@ -79,15 +77,12 @@ enum SailorsBaneValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return Optional
-                .ofNullable(game.getPlayer(sourceAbility.getControllerId()))
-                .map(Player::getGraveyard)
-                .map(graveyard -> graveyard.count(filter, game))
-                .orElse(0)
-                + game
-                .getExile()
-                .getCards(filter, game)
-                .size();
+        Player player = game.getPlayer(sourceAbility.getControllerId());
+        if (player == null) {
+            return 0;
+        }
+        return game.getExile().getCardsOwned(filter, player.getId(), sourceAbility, game).size()
+                + player.getGraveyard().count(filter, player.getId(), sourceAbility, game);
     }
 
     @Override
@@ -100,7 +95,7 @@ enum SailorsBaneValue implements DynamicValue {
         return "";
     }
 
-    private static final boolean checkAdventure(Card input, Game game) {
+    private static boolean checkAdventure(Card input, Game game) {
         return input instanceof AdventureCard;
     }
 }

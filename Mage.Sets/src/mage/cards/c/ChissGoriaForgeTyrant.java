@@ -164,7 +164,7 @@ class ChissGoriaForgeTyrantAffinityEffect extends ContinuousEffectImpl {
             return false;
         }
 
-        for (Card card : game.getExile().getAllCardsByRange(game, source.getControllerId())) {
+        for (Card card : game.getExile().getCardsInRange(game, source.getControllerId())) {
             if (morSet.contains(new MageObjectReference(card, game)) && card.isArtifact(game)) {
                 game.getState().addOtherAbility(card, new AffinityForArtifactsAbility());
             }

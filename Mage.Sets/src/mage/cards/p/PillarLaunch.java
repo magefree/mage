@@ -21,7 +21,7 @@ public final class PillarLaunch extends CardImpl {
 
         // Target creature gets +2/+2 and gains reach until end of turn. Untap it.
         this.getSpellAbility().addEffect(new BoostTargetEffect(2, 2).setText("target creature gets +2/+2"));
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(ReachAbility.getInstance()).setText("and gain reach until end of turn"));
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(ReachAbility.getInstance()).setText("and gains reach until end of turn"));
         this.getSpellAbility().addEffect(new UntapTargetEffect("Untap it"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }

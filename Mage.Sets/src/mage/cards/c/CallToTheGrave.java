@@ -9,6 +9,7 @@ import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
@@ -28,7 +29,7 @@ public final class CallToTheGrave extends CardImpl {
     }
 
     private static final Condition condition = new PermanentsOnTheBattlefieldCondition(
-            new FilterCreaturePermanent("no creatures are on the battlefield"), false
+            new FilterCreaturePermanent("no creatures are on the battlefield"), ComparisonType.EQUAL_TO, 0, false
     );
 
     public CallToTheGrave(UUID ownerId, CardSetInfo setInfo) {

@@ -95,7 +95,7 @@ enum OpponentSearchesLibCondition implements Condition {
 
     @Override
     public String toString() {
-        return "If an opponent searched their library this turn";
+        return "an opponent searched their library this turn";
     }
 
 }

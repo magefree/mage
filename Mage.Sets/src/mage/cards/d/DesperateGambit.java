@@ -161,7 +161,7 @@ class TargetControlledSource extends TargetSource {
                     possibleTargets.add(card.getId());
                 }
                 // 108.4a If anything asks for the controller of a card that doesn't have one (because it's not a permanent or spell), use its owner instead.
-                for (Card card : game.getExile().getAllCards(game)) {
+                for (Card card : game.getExile().getCardsInRange(game, sourceControllerId)) {
                     if (Objects.equals(card.getOwnerId(), sourceControllerId)) {
                         possibleTargets.add(card.getId());
                     }

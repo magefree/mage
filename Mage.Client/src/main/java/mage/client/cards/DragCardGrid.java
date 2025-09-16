@@ -575,7 +575,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
     // Constants
     private static final int DEFAULT_COUNT_LABEL_HEIGHT = 40; // can contain 1 or 2 lines
-    public static final int GRID_PADDING = 20;
+    public static final int GRID_PADDING = 12;
 
     private static final ImageIcon INSERT_ROW_ICON = new ImageIcon(DragCardGrid.class.getClassLoader().getResource("editor_insert_row.png"));
     private static final ImageIcon INSERT_COL_ICON = new ImageIcon(DragCardGrid.class.getClassLoader().getResource("editor_insert_col.png"));

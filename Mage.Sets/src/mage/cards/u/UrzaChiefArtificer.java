@@ -24,6 +24,10 @@ public final class UrzaChiefArtificer extends CardImpl {
     private static final FilterControlledPermanent filter
             = new FilterControlledCreaturePermanent("artifact creatures");
 
+    static {
+        filter.add(CardType.ARTIFACT.getPredicate());
+    }
+
     public UrzaChiefArtificer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{U}{B}");
 

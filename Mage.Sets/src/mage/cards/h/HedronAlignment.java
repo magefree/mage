@@ -2,12 +2,12 @@ package mage.cards.h;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.keyword.HexproofAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
@@ -15,7 +15,6 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
@@ -93,9 +92,7 @@ class HedronAlignmentEffect extends OneShotEffect {
             if (controller.getGraveyard().getCards(filterCard, controller.getId(), source, game).isEmpty()) {
                 return true;
             }
-            Cards cardsToCheck = new CardsImpl();
-            cardsToCheck.addAllCards(game.getExile().getAllCards(game));
-            if (cardsToCheck.count(filterCard, controller.getId(), source, game) == 0) {
+            if (game.getExile().getCardsOwned(filterCard, controller.getId(), source, game).isEmpty()) {
                 return true;
             }
             controller.won(game);

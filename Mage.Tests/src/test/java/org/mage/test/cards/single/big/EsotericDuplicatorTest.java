@@ -19,15 +19,23 @@ public class EsotericDuplicatorTest extends CardTestPlayerBase {
      */
     private static final String esotericDuplicator = "Esoteric Duplicator";
 
+    /*
+    Sculpting Steel
+    {3}
+    Artifact
+    You may have Sculpting Steel enter the battlefield as a copy of any artifact on the battlefield.
+    */
+    private static final String sculptingSteel = "Sculpting Steel";
+
     @Test
     public void testEsotericDuplicator() {
         setStrictChooseMode(true);
 
         addCard(Zone.BATTLEFIELD, playerB, esotericDuplicator);
-        addCard(Zone.HAND, playerA, "Sculpting Steel");
+        addCard(Zone.HAND, playerA, sculptingSteel);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 7);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sculpting Steel");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, sculptingSteel);
         setChoice(playerA, true);
         setChoice(playerA, esotericDuplicator);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);

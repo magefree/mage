@@ -97,7 +97,7 @@ class FlamewarBrashVeteranEffect extends OneShotEffect {
         }
         Set<Card> cards = game
                 .getExile()
-                .getAllCards(game, source.getControllerId())
+                .getCardsOwned(game, source.getControllerId())
                 .stream()
                 .filter(card -> card.getCounters(game).containsKey(CounterType.INTEL))
                 .collect(Collectors.toSet());

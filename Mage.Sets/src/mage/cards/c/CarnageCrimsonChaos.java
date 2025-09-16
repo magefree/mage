@@ -73,7 +73,7 @@ public final class CarnageCrimsonChaos extends CardImpl {
 
 class CarnageCrimsonChaosReturnEffect extends OneShotEffect {
 
-    public CarnageCrimsonChaosReturnEffect() {
+    CarnageCrimsonChaosReturnEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "return target creature card with mana value 3 or less from your graveyard to the battlefield. It gains \"This creature attacks each combat if able\" and \"When this creature deals combat damage to a player, sacrifice it.\"";
     }

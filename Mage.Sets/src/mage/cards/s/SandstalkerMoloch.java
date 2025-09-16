@@ -92,6 +92,7 @@ class SandstalkerMolochWatcher extends Watcher {
     @Override
     public void reset() {
         super.reset();
+        players.clear();
     }
 
     static boolean checkPlayer(Game game, Ability source) {

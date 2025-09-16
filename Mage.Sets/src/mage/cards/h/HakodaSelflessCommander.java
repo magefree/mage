@@ -27,7 +27,7 @@ import java.util.UUID;
  */
 public final class HakodaSelflessCommander extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard(SubType.ALLY, "Ally spells");
+    private static final FilterCard filter = new FilterCard(SubType.ALLY, "cast Ally spells");
 
     public HakodaSelflessCommander(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");

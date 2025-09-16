@@ -131,12 +131,7 @@ class KayaOrzhovUsurperDamageEffect extends OneShotEffect {
         if (controller == null || player == null) {
             return false;
         }
-        int count = 0;
-        for (Card card : game.getExile().getAllCards(game)) {
-            if (card != null && card.getOwnerId().equals(player.getId())) {
-                count += 1;
-            }
-        }
+        int count = game.getExile().getCardsOwned(game, player.getId()).size();
         player.damage(count, source.getSourceId(), source, game);
         controller.gainLife(count, game, source);
         return true;

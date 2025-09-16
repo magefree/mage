@@ -10,7 +10,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.filter.FilterStackObject;
-import mage.target.common.TargetTriggeredAbility;
+import mage.filter.predicate.Predicate;
+import mage.game.Game;
+import mage.game.stack.StackObject;
+import mage.target.TargetStackObject;
 
 import java.util.UUID;
 
@@ -22,6 +25,7 @@ public final class StrionicResonator extends CardImpl {
     private static final FilterStackObject filter = new FilterStackObject("triggered ability you control");
 
     static {
+        filter.add(StrionicResonatorPredicate.instance);
         filter.add(TargetController.YOU.getControllerPredicate());
     }
 
@@ -31,7 +35,7 @@ public final class StrionicResonator extends CardImpl {
         // {2}, {T}: Copy target triggered ability you control. You may choose new targets for the copy.
         Ability ability = new SimpleActivatedAbility(new CopyTargetStackObjectEffect(), new ManaCostsImpl<>("{2}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetTriggeredAbility(filter));
+        ability.addTarget(new TargetStackObject(filter));
         this.addAbility(ability);
     }
 
@@ -42,5 +46,14 @@ public final class StrionicResonator extends CardImpl {
     @Override
     public StrionicResonator copy() {
         return new StrionicResonator(this);
+    }
+}
+
+enum StrionicResonatorPredicate implements Predicate<StackObject> {
+    instance;
+
+    @Override
+    public boolean apply(StackObject input, Game game) {
+        return input instanceof Ability && ((Ability) input).isTriggeredAbility();
     }
 }

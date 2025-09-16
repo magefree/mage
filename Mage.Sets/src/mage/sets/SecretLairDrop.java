@@ -234,7 +234,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Kroxa, Titan of Death's Hunger", 225, Rarity.MYTHIC, mage.cards.k.KroxaTitanOfDeathsHunger.class));
         cards.add(new SetCardInfo("Path to Exile", 226, Rarity.RARE, mage.cards.p.PathToExile.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Well of Lost Dreams", 227, Rarity.RARE, mage.cards.w.WellOfLostDreams.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Frantic Search", 228, Rarity.RARE, mage.cards.f.FranticSearch.class));
+        cards.add(new SetCardInfo("Frantic Search", 228, Rarity.RARE, mage.cards.f.FranticSearch.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Intruder Alarm", 229, Rarity.RARE, mage.cards.i.IntruderAlarm.class));
         cards.add(new SetCardInfo("Shelldock Isle", 230, Rarity.RARE, mage.cards.s.ShelldockIsle.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gravecrawler", 231, Rarity.RARE, mage.cards.g.Gravecrawler.class));
@@ -315,7 +315,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Unbreakable Formation", 310, Rarity.RARE, mage.cards.u.UnbreakableFormation.class));
         cards.add(new SetCardInfo("Whir of Invention", 311, Rarity.RARE, mage.cards.w.WhirOfInvention.class));
         cards.add(new SetCardInfo("Hero's Downfall", 312, Rarity.RARE, mage.cards.h.HerosDownfall.class));
-        cards.add(new SetCardInfo("Impact Tremors", 313, Rarity.RARE, mage.cards.i.ImpactTremors.class));
+        cards.add(new SetCardInfo("Impact Tremors", 313, Rarity.RARE, mage.cards.i.ImpactTremors.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Primal Vigor", 314, Rarity.RARE, mage.cards.p.PrimalVigor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Commander's Sphere", 315, Rarity.RARE, mage.cards.c.CommandersSphere.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fleet Swallower", 316, Rarity.RARE, mage.cards.f.FleetSwallower.class));
@@ -335,7 +335,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Aether Gust", 330, Rarity.RARE, mage.cards.a.AetherGust.class));
         cards.add(new SetCardInfo("Counterspell", 331, Rarity.RARE, mage.cards.c.Counterspell.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fabricate", 332, Rarity.RARE, mage.cards.f.Fabricate.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Fact or Fiction", 333, Rarity.RARE, mage.cards.f.FactOrFiction.class));
+        cards.add(new SetCardInfo("Fact or Fiction", 333, Rarity.RARE, mage.cards.f.FactOrFiction.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mystical Tutor", 334, Rarity.RARE, mage.cards.m.MysticalTutor.class));
         cards.add(new SetCardInfo("Arvinox, the Mind Flail", 340, Rarity.MYTHIC, mage.cards.a.ArvinoxTheMindFlail.class));
         cards.add(new SetCardInfo("Sophina, Spearsage Deserter", 341, Rarity.RARE, mage.cards.s.SophinaSpearsageDeserter.class));
@@ -1971,6 +1971,11 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Zulaport Cutthroat", 1982, Rarity.RARE, mage.cards.z.ZulaportCutthroat.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aggravated Assault", 1983, Rarity.RARE, mage.cards.a.AggravatedAssault.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Desperate Ritual", 1984, Rarity.RARE, mage.cards.d.DesperateRitual.class));
+        cards.add(new SetCardInfo("Fact or Fiction", 1995, Rarity.RARE, mage.cards.f.FactOrFiction.class, FULL_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Frantic Search", 1996, Rarity.RARE, mage.cards.f.FranticSearch.class, FULL_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Scheming Symmetry", 1997, Rarity.RARE, mage.cards.s.SchemingSymmetry.class, FULL_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Blasphemous Act", 1998, Rarity.RARE, mage.cards.b.BlasphemousAct.class, FULL_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Impact Tremors", 1999, Rarity.RARE, mage.cards.i.ImpactTremors.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Agent of Treachery", 2005, Rarity.RARE, mage.cards.a.AgentOfTreachery.class));
         cards.add(new SetCardInfo("Priest of Forgotten Gods", 2006, Rarity.RARE, mage.cards.p.PriestOfForgottenGods.class));
         cards.add(new SetCardInfo("Treasonous Ogre", 2007, Rarity.RARE, mage.cards.t.TreasonousOgre.class));

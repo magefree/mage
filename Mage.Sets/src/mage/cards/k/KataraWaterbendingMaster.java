@@ -44,7 +44,7 @@ public final class KataraWaterbendingMaster extends CardImpl {
 
         // Whenever Katara attacks, you may draw a card for each experience counter you have. If you do, discard a card.
         Ability ability = new AttacksTriggeredAbility(new DrawCardSourceControllerEffect(xValue)
-                .setText("draw a card for each experience counter you have"));
+                .setText("draw a card for each experience counter you have"), true);
         ability.addEffect(new DiscardControllerEffect(1).concatBy("If you do,"));
         this.addAbility(ability);
     }

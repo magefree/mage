@@ -30,7 +30,7 @@ public class WhileSearchingPlayFromLibraryAbility extends StaticAbility implemen
 
     @Override
     public String getRule() {
-        return "While you're searching your library, you may cast {this} from your library.";
+        return "While you're searching your library, you may cast this card from your library.";
     }
 
     @Override

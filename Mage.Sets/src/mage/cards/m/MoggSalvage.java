@@ -33,7 +33,7 @@ public final class MoggSalvage extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
 
         // If an opponent controls an Island and you control a Mountain, you may cast this spell without paying its mana cost.
-        Condition condition = new CompoundCondition("If an opponent controls an Island and you control a Mountain",
+        Condition condition = new CompoundCondition("an opponent controls an Island and you control a Mountain",
                 new OpponentControlsPermanentCondition(filterIsland),
                 new PermanentsOnTheBattlefieldCondition(filterMountain));
         this.addAbility(new AlternativeCostSourceAbility(null, condition));

@@ -107,7 +107,7 @@ class EverythingIsColorlessEffect extends ContinuousEffectImpl {
             }
 
             // exile
-            affectedCards.addAll(game.getExile().getAllCardsByRange(game, controller.getId()));
+            affectedCards.addAll(game.getExile().getCardsInRange(game, controller.getId()));
 
 
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {

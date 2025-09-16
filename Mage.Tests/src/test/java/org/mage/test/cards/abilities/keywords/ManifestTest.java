@@ -147,7 +147,7 @@ public class ManifestTest extends CardTestPlayerBase {
         runCode("after blink", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
             if (cardAfterBlink == null) {
                 Assert.assertEquals("after blink card must keep in exile",
-                        1, currentGame.getExile().getAllCardsByRange(currentGame, playerA.getId()).size());
+                        1, currentGame.getExile().getCardsInRange(currentGame, playerA.getId()).size());
             } else {
                 String realPermanentName = currentGame.getBattlefield().getAllPermanents()
                         .stream()

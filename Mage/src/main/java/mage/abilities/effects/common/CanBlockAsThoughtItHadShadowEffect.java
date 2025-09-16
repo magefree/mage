@@ -13,7 +13,7 @@ public class CanBlockAsThoughtItHadShadowEffect extends AsThoughEffectImpl {
 
     public CanBlockAsThoughtItHadShadowEffect(Duration duration) {
         super(AsThoughEffectType.BLOCK_SHADOW, duration, Outcome.Benefit);
-        staticText = "{this} can block creatures with shadow as though {this} had shadow";
+        staticText = "{this} can block creatures with shadow as though it had shadow";
     }
 
     protected CanBlockAsThoughtItHadShadowEffect(final CanBlockAsThoughtItHadShadowEffect effect) {

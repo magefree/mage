@@ -99,7 +99,7 @@ public class WishEffect extends OneShotEffect {
             return false;
         }
         Cards cards = controller.getSideboard();
-        List<Card> exile = game.getExile().getAllCards(game);
+        List<Card> exile = game.getExile().getCardsOwned(game, controller.getId());
         boolean noTargets = cards.isEmpty() && (!alsoFromExile || exile.isEmpty());
         if (noTargets) {
             game.informPlayer(controller, "You have no cards outside the game" + (alsoFromExile ? " or in exile" : "") + '.');

@@ -77,7 +77,7 @@ public class EntersBattlefieldAbility extends StaticAbility {
     @Override
     public String getRule() {
         if (abilityRule != null && !abilityRule.isEmpty()) {
-            return abilityRule;
+            return addRulePrefix(abilityRule);
         }
         String superRule = super.getRule();
         String rule = (optional ? "you may have " : "") + "{this} enter" + (optional ? "" : "s")

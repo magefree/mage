@@ -115,7 +115,7 @@ class ZethiArcaneBlademasterCastEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        Cards cards = new CardsImpl(game.getExile().getAllCards(game, source.getControllerId()));
+        Cards cards = new CardsImpl(game.getExile().getCardsOwned(game, source.getControllerId()));
         cards.removeIf(uuid -> !game.getCard(uuid).getCounters(game).containsKey(CounterType.KICK));
         if (cards.isEmpty()) {
             return false;

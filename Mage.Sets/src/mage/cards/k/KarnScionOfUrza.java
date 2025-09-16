@@ -18,10 +18,8 @@ import mage.target.TargetCard;
 import mage.target.common.TargetCardInExile;
 import mage.target.common.TargetOpponent;
 
-import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author spjspj
@@ -150,13 +148,7 @@ class KarnMinus1Effect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        Cards cards = new CardsImpl(game
-                .getExile()
-                .getCards(filter, game)
-                .stream()
-                .filter(Objects::nonNull)
-                .filter(card -> card.isOwnedBy(source.getControllerId()))
-                .collect(Collectors.toList()));
+        Cards cards = new CardsImpl(game.getExile().getCardsOwned(filter, controller.getId(), source, game));
         Card card;
         switch (cards.size()) {
             case 0:
@@ -173,6 +165,6 @@ class KarnMinus1Effect extends OneShotEffect {
         if (card == null) {
             return false;
         }
-        return card != null && controller.moveCards(card, Zone.HAND, source, game);
+        return controller.moveCards(card, Zone.HAND, source, game);
     }
 }
