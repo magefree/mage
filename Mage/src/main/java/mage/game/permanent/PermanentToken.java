@@ -159,4 +159,13 @@ public class PermanentToken extends PermanentImpl {
     public MageObject getOtherFace() {
         return this.transformed ? token : this.token.getBackFace();
     }
+
+    @Override
+    protected void initOtherFace(Game game) {
+        if (transformed) {
+            copyFromToken(token.getBackFace(), game, false);
+        } else {
+            copyFromToken(token, game, false);
+        }
+    }
 }

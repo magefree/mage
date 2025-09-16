@@ -43,6 +43,7 @@ public abstract class ModalDoubleFacedCard extends DoubleFacedCard {
                 superTypesRight, typesRight, subTypesRight, costsRight,
                 this, SpellAbilityType.MODAL_RIGHT
         );
+        this.secondSideCard = rightHalfCard;
     }
 
     public ModalDoubleFacedCard(final ModalDoubleFacedCard card) {

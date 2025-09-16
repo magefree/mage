@@ -698,11 +698,14 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 + CardUtil.getSourceLogName(game, source, this.getId()));
         this.setTransformed(!this.transformed);
         this.transformCount++;
+        initOtherFace(game);
         game.applyEffects(); // not process action - no firing of simultaneous events yet
         this.replaceEvent(EventType.TRANSFORMING, game);
         game.addSimultaneousEvent(GameEvent.getEvent(EventType.TRANSFORMED, this.getId(), this.getControllerId()));
         return true;
     }
+
+    protected abstract void initOtherFace(Game game);
 
     @Override
     public int getTransformCount() {

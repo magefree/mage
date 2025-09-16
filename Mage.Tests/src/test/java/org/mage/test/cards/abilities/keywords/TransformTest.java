@@ -194,6 +194,30 @@ public class TransformTest extends CardTestPlayerBase {
     }
 
     @Test
+    public void testPersistentNightmareTrigger() {
+        // Target opponent puts the top thirteen cards of their library into their graveyard.
+        // {3}{U}{U}: Put Startled Awake from your graveyard onto the battlefield transformed. Activate this ability only any time you could cast a sorcery.
+        addCard(Zone.HAND, playerA, "Startled Awake"); // SORCERY {2}{U}{U}"
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 9);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Startled Awake", playerB);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}{U}{U}");
+
+        attack(3, playerA, "Persistent Nightmare");
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.COMBAT_DAMAGE);
+        execute();
+
+        assertGraveyardCount(playerB, 13);
+        assertGraveyardCount(playerA, "Startled Awake", 0);
+        assertPermanentCount(playerA, "Persistent Nightmare", 0); // Night-side card of Startled Awake
+        assertHandCount(playerA, "Startled Awake", 1);
+    }
+
+    @Test
     public void testStartledAwakeMoonmist() {
         addCard(Zone.HAND, playerA, "Startled Awake");
         addCard(Zone.HAND, playerA, "Moonmist");

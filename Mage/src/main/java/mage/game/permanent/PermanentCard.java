@@ -3,12 +3,14 @@ package mage.game.permanent;
 import mage.MageObject;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
+import mage.abilities.StaticAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.keyword.NightboundAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.*;
 import mage.constants.SpellAbilityType;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
@@ -68,11 +70,11 @@ public class PermanentCard extends PermanentImpl {
         if (card instanceof DoubleFacedCardHalf && card.isPermanent() && ((DoubleFacedCardHalf) card).getOtherSide().isPermanent()) {
             if (((DoubleFacedCardHalf) card).isBackSide()) {
                 secondSideCard = card;
-                this.card = ((DoubleFacedCardHalf) card).getOtherSide();
+                this.card = ((DoubleFacedCardHalf) card).getOtherSide().copy();
                 this.transformed = true;
                 init(secondSideCard, game);
             } else {
-                secondSideCard = ((DoubleFacedCardHalf) card).getOtherSide();
+                secondSideCard = ((DoubleFacedCardHalf) card).getOtherSide().copy();
                 this.card = card;
                 init(card, game);
             }
@@ -89,7 +91,7 @@ public class PermanentCard extends PermanentImpl {
         toughness = card.getToughness().copy();
         startingLoyalty = card.getStartingLoyalty();
         startingDefense = card.getStartingDefense();
-        copyFromCard(card, game);
+        copyFromCard(card, game, false);
         // if temporary added abilities to the spell/card exist, you need to add it to the permanent derived from that card
         Abilities<Ability> otherAbilities = game.getState().getAllOtherAbilities(card.getId());
         if (otherAbilities != null) {
@@ -102,9 +104,9 @@ public class PermanentCard extends PermanentImpl {
         // if transformed on ETB
         // TODO: remove after tdfc rework
         if (card.isTransformable() && !(card instanceof DoubleFacedCardHalf)) {
-            if (game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + getId()) != null
+            if (game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId()) != null
                     || NightboundAbility.checkCard(this, game)) {
-                game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + getId(), null);
+                game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId(), null);
                 TransformAbility.transformPermanent(this, game, null);
             }
         }
@@ -122,18 +124,33 @@ public class PermanentCard extends PermanentImpl {
         // when the permanent is reset, copy all original values from the card
         // must copy card each reset so that the original values don't get modified
         if (transformed && secondSideCard != null && getCard() instanceof DoubleFacedCardHalf) {
-            copyFromCard(secondSideCard, game);
+            copyFromCard(secondSideCard, game, true);
         } else {
-            copyFromCard(card, game);
+            copyFromCard(card, game, true);
         }
         power.resetToBaseValue();
         toughness.resetToBaseValue();
         super.reset(game);
     }
 
-    protected void copyFromCard(final Card card, final Game game) {
+    @Override
+    protected void initOtherFace(Game game) {
+        if (!(secondSideCard instanceof DoubleFacedCardHalf)) {
+            return;
+        }
+        if (transformed) {
+            copyFromCard(secondSideCard, game, false);
+        } else {
+            copyFromCard(card, game, false);
+        }
+    }
+
+    protected void copyFromCard(final Card card, final Game game, boolean reset) {
         // TODO: must research - is it copy all fields or something miss
         this.name = card.getName();
+        if (!reset) {
+            this.abilities.setSourceId(null);
+        }
         this.abilities.clear();
         if (this.faceDown) {
             for (Ability ability : card.getAbilities()) {
@@ -145,6 +162,16 @@ public class PermanentCard extends PermanentImpl {
             // copy only own abilities; all dynamic added abilities must be added in the parent call
             this.abilities = card.getAbilities().copy();
             this.spellAbility = null; // will be set on first getSpellAbility call if card has one.
+            if (!reset) {
+                for (Ability ability : this.getAbilities()) {
+                    if (ability instanceof StaticAbility && ability.getZone().equals(Zone.BATTLEFIELD) && !ability.getSourceId().equals(getId())) {
+                        // for continuous effects not on the card used to create the permanent, change the id
+                        ability.newId();
+                        ability.getSubAbilities().clear();
+                    }
+                    game.getState().addAbility(ability, null, this);
+                }
+            }
         }
         this.abilities.setControllerId(this.controllerId);
         this.abilities.setSourceId(objectId);
@@ -157,6 +184,8 @@ public class PermanentCard extends PermanentImpl {
         if (card instanceof PermanentCard) {
             this.maxLevelCounters = ((PermanentCard) card).maxLevelCounters;
         }
+        this.power = card.getPower().copy();
+        this.toughness = card.getToughness().copy();
         this.subtype.copyFrom(card.getSubtype());
         this.supertype.clear();
         this.supertype.addAll(card.getSuperType());
@@ -168,7 +197,7 @@ public class PermanentCard extends PermanentImpl {
         this.setImageFileName(card.getImageFileName());
         this.setImageNumber(card.getImageNumber());
 
-        if (card.getSecondCardFace() != null) {
+        if (card.getSecondCardFace() != null && !(card instanceof DoubleFacedCardHalf)) {
             this.secondSideCardClazz = card.getSecondCardFace().getClass();
         }
         if (card.getMeldsToCard() != null) {

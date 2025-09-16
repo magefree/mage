@@ -67,7 +67,7 @@ public class MockCard extends CardImpl implements MockableCard {
 
         this.nightCard = card.isNightCard();
 
-        if (card.getSecondSideName() != null && !card.getSecondSideName().isEmpty()) {
+        if (card.getSecondSideName() != null && !card.getSecondSideName().isEmpty() && !card.isDoubleFacedCard()) {
             this.secondSideCard = new MockCard(CardRepository.instance.findCardWithPreferredSetAndNumber(card.getSecondSideName(), card.getSetCode(), card.getCardNumber()));
         }
 
