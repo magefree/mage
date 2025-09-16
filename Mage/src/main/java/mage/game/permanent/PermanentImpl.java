@@ -101,6 +101,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected boolean deathtouched;
     protected boolean solved = false;
 
+    protected boolean wasUnlockedOnCast = false;
+    protected boolean leftHalfUnlocked = false;
+    protected boolean rightHalfUnlocked = false;
     protected Map<String, List<UUID>> connectedCards = new HashMap<>();
     protected Set<MageObjectReference> dealtDamageByThisTurn;
     protected UUID attachedTo;
@@ -189,6 +192,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
         this.morphed = permanent.morphed;
         this.disguised = permanent.disguised;
+        this.leftHalfUnlocked = permanent.leftHalfUnlocked;
+        this.rightHalfUnlocked = permanent.rightHalfUnlocked;
+        this.wasUnlockedOnCast = permanent.wasUnlockedOnCast;
         this.manifested = permanent.manifested;
         this.cloaked = permanent.cloaked;
         this.createOrder = permanent.createOrder;
@@ -2101,5 +2107,97 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             detachAllAttachments(game);
         }
         return successfullyMoved;
+    }
+
+    @Override
+    public boolean roomWasUnlockedOnCast() {
+        return wasUnlockedOnCast;
+    }
+
+    @Override
+    public boolean roomLeftDoorUnlocked() {
+        return leftHalfUnlocked;
+    }
+
+    @Override
+    public boolean roomRightDoorUnlocked() {
+        return rightHalfUnlocked;
+    }
+
+    @Override
+    public boolean roomUnlockOnCast(Game game) {
+        if (this.wasUnlockedOnCast) {
+            return false;
+        }
+        this.wasUnlockedOnCast = true;
+        return true;
+    }
+
+    @Override
+    public boolean roomUnlockLeftDoor(Game game, Ability source) {
+        if (this.leftHalfUnlocked) {
+            return false;
+        }
+
+        // Check if action can be prevented
+        GameEvent event = new GameEvent(GameEvent.EventType.ROOM_UNLOCK_LEFT_DOOR, getId(),
+                source, source.getControllerId());
+        if (game.replaceEvent(event)) {
+            return false;
+        }
+
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            game.informPlayers(controller.getLogName() + " unlocked the left door of " + this.getLogName() +
+                    CardUtil.getSourceLogName(game, source));
+        }
+
+        this.leftHalfUnlocked = true;
+
+        // Fire generic door unlock event
+        game.fireEvent(new GameEvent(GameEvent.EventType.ROOM_UNLOCK_DOOR, getId(), source, source.getControllerId()));
+
+        // Fire specific left door event
+        game.fireEvent(new GameEvent(GameEvent.EventType.ROOM_UNLOCK_LEFT_DOOR, getId(), source, source.getControllerId()));
+
+        // Check for fully unlocked trigger
+        if (this.rightHalfUnlocked) {
+            game.fireEvent(new GameEvent(EventType.ROOM_UNLOCK_FULLY, getId(), source, source.getControllerId()));
+        }
+
+        return true;
+    }
+
+    @Override
+    public boolean roomUnlockRightDoor(Game game, Ability source) {
+        if (this.rightHalfUnlocked) {
+            return false;
+        }
+
+        GameEvent event = new GameEvent(GameEvent.EventType.ROOM_UNLOCK_RIGHT_DOOR, getId(),
+                source, source.getControllerId());
+        if (game.replaceEvent(event)) {
+            return false;
+        }
+
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            game.informPlayers(controller.getLogName() + " unlocked the right door of " + this.getLogName() +
+                    CardUtil.getSourceLogName(game, source));
+        }
+
+        this.rightHalfUnlocked = true;
+
+        // Fire generic door unlock event
+        game.fireEvent(new GameEvent(GameEvent.EventType.ROOM_UNLOCK_DOOR, getId(), source, source.getControllerId()));
+
+        // Fire specific right door event
+        game.fireEvent(new GameEvent(GameEvent.EventType.ROOM_UNLOCK_RIGHT_DOOR, getId(), source, source.getControllerId()));
+
+        if (this.leftHalfUnlocked) {
+            game.fireEvent(new GameEvent(EventType.ROOM_UNLOCK_FULLY, getId(), source, source.getControllerId()));
+        }
+
+        return true;
     }
 }
