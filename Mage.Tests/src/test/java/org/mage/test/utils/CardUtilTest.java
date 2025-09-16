@@ -138,8 +138,10 @@ public class CardUtilTest extends CardTestPlayerBase {
         skipInitShuffling();
         setStrictChooseMode(true);
 
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}", 4);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, changeOfFortune);
         setChoice(playerA, "Yes");
+        // only option is to cast front side, so auto chosen
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
