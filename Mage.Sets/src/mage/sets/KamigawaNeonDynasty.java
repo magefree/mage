@@ -312,7 +312,6 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Light-Paws, Emperor's Voice", 25, Rarity.RARE, mage.cards.l.LightPawsEmperorsVoice.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Light-Paws, Emperor's Voice", 367, Rarity.RARE, mage.cards.l.LightPawsEmperorsVoice.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Light-Paws, Emperor's Voice", 439, Rarity.RARE, mage.cards.l.LightPawsEmperorsVoice.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Likeness of the Seeker", 172, Rarity.UNCOMMON, mage.cards.l.LikenessOfTheSeeker.class));
         cards.add(new SetCardInfo("Lion Sash", 26, Rarity.RARE, mage.cards.l.LionSash.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lion Sash", 368, Rarity.RARE, mage.cards.l.LionSash.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lion Sash", 440, Rarity.RARE, mage.cards.l.LionSash.class, NON_FULL_USE_VARIOUS));
