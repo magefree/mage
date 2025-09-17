@@ -4956,7 +4956,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     // its owner's graveyard instead of entering the battlefield. If the Aura is a token, it isn't created.
                     if (card.hasSubtype(SubType.AURA, game) && !(source instanceof BestowAbility)) {
                         SpellAbility auraSpellAbility;
-                        if (source instanceof SpellAbility && card.getAbilities(game).contains(source)) {
+                        if (source instanceof SpellAbility && fromZone == Zone.STACK) {
                             // cast aura - use source ability
                             auraSpellAbility = (SpellAbility) source;
                         } else {

@@ -20,7 +20,6 @@ import mage.game.MageObjectAttribute;
 import mage.game.events.CopiedStackObjectEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentCard;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -341,7 +340,7 @@ public class Spell extends StackObjectImpl implements Card {
                     // before put to play:
                     // Must be removed first time, after that will be removed by continous effect
                     // Otherwise effects like evolve trigger from creature comes into play event
-                    card.removeCardType(CardType.CREATURE);
+                    card.removeCardType(game, CardType.CREATURE);
                     card.addSubType(game, SubType.AURA);
                 }
                 UUID permId;
@@ -367,13 +366,11 @@ public class Spell extends StackObjectImpl implements Card {
                         // card will be copied during putOntoBattlefield, so the card of CardPermanent has to be changed
                         // TODO: Find a better way to prevent bestow creatures from being effected by creature affecting abilities
                         Permanent permanent = game.getPermanent(permId);
-                        if (permanent instanceof PermanentCard) {
-                            // after put to play:
-                            // restore removed stats (see "before put to play" above)
-                            permanent.setSpellAbility(ability); // otherwise spell ability without bestow will be set
-                            card.addCardType(CardType.CREATURE);
-                            card.getSubtype().remove(SubType.AURA);
-                        }
+                        // after put to play:
+                        // restore removed stats (see "before put to play" above)
+                        permanent.setSpellAbility(ability); // otherwise spell ability without bestow will be set
+                        card.addCardType(game, CardType.CREATURE);
+                        card.removeSubType(game, SubType.AURA);
                     }
                     if (isCopy()) {
                         Permanent token = game.getPermanent(permId);
@@ -393,6 +390,7 @@ public class Spell extends StackObjectImpl implements Card {
                 }
                 if (bestow) {
                     card.addCardType(game, CardType.CREATURE);
+                    card.removeSubType(game, SubType.AURA);
                 }
                 return false;
             }
@@ -402,11 +400,9 @@ public class Spell extends StackObjectImpl implements Card {
                 game.storePermanentCostsTags(mor, getSpellAbility());
                 if (controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null)) {
                     Permanent permanent = game.getPermanent(card.getId());
-                    if (permanent instanceof PermanentCard) {
-                        ((PermanentCard) permanent).getCard().addCardType(game, CardType.CREATURE);
-                        ((PermanentCard) permanent).getCard().removeSubType(game, SubType.AURA);
-                        return true;
-                    }
+                    permanent.addCardType(game, CardType.CREATURE);
+                    permanent.removeSubType(game, SubType.AURA);
+                    return true;
                 }
                 return false;
             } else {
