@@ -2012,7 +2012,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public void setHarnessed(Game game, boolean value) {
+    public void setHarnessed(boolean value) {
         this.harnessed = value;
     }
 
