@@ -1,5 +1,6 @@
 package org.mage.test.cards.abilities.keywords;
 
+import mage.constants.EmptyNames;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Assert;
@@ -226,7 +227,7 @@ public class CascadeTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
 
         // When the spell is cast, you cascade, but the only spell you could find is "Breaking // Entering",
-        // but it can't be cast since the mana cost for a spliot it's mana cost of the card is the sum of both halves (8 here)
+        // but it can't be cast since the mana cost for a split is the sum of both halves (8 here)
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ardent Plea");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -235,5 +236,24 @@ public class CascadeTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Ardent Plea", 1);
         assertGraveyardCount(playerA, "Breaking // Entering", 0);
         assertLibraryCount(playerA, "Breaking // Entering", 1);
+    }
+
+    @Test
+    public void testFaceDownSpell() {
+        // Face down spell should have mana value of 0 and not allow casting.
+        setStrictChooseMode(true);
+
+        addCard(Zone.HAND, playerA, "Den Protector");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Maelstrom Nexus");
+        addCard(Zone.LIBRARY, playerA, "Think Twice");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Den Protector using Morph");
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
+        // Think Twice should still remain in library.
+        assertLibraryCount(playerA, "Think Twice", 1);
     }
 }
