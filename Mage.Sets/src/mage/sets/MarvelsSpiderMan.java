@@ -275,6 +275,9 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("The Clone Saga", 28, Rarity.RARE, mage.cards.t.TheCloneSaga.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Death of Gwen Stacy", 223, Rarity.RARE, mage.cards.t.TheDeathOfGwenStacy.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("The Death of Gwen Stacy", 54, Rarity.RARE, mage.cards.t.TheDeathOfGwenStacy.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Soul Stone", 242, Rarity.MYTHIC, mage.cards.t.TheSoulStone.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Soul Stone", 243, Rarity.MYTHIC, mage.cards.t.TheSoulStone.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Soul Stone", 66, Rarity.MYTHIC, mage.cards.t.TheSoulStone.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Spot's Portal", 68, Rarity.UNCOMMON, mage.cards.t.TheSpotsPortal.class));
         cards.add(new SetCardInfo("The Spot, Living Portal", 153, Rarity.RARE, mage.cards.t.TheSpotLivingPortal.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Spot, Living Portal", 231, Rarity.RARE, mage.cards.t.TheSpotLivingPortal.class, NON_FULL_USE_VARIOUS));
