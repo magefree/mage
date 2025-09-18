@@ -5,7 +5,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.LivingMetalAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
