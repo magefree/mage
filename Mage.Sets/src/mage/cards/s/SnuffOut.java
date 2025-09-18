@@ -8,10 +8,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandPermanent;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
@@ -23,7 +21,7 @@ import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK;
  */
 public final class SnuffOut extends CardImpl {
 
-    private static final FilterLandPermanent filterSwamp = new FilterLandPermanent("If you control a Swamp");
+    private static final FilterLandPermanent filterSwamp = new FilterLandPermanent("you control a Swamp");
 
     static {
         filterSwamp.add(SubType.SWAMP.getPredicate());

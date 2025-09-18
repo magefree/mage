@@ -27,9 +27,9 @@ public final class AlabornZealot extends CardImpl {
 
         // When Alaborn Zealot blocks a creature, destroy that creature and Alaborn Zealot.
         TriggeredAbility ability = new BlocksCreatureTriggeredAbility(
-                new DestroyTargetEffect().setText("destroy that creature")
+                new DestroyTargetEffect().setText("destroy both")
         );
-        ability.addEffect(new DestroySourceEffect().setText("and {this}"));
+        ability.addEffect(new DestroySourceEffect().setText(" creatures"));
         ability.setTriggerPhrase("When {this} blocks a creature, ");
         this.addAbility(ability);
     }

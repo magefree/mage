@@ -11,10 +11,7 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.token.RagavanToken;
 import mage.players.Player;
@@ -70,7 +67,7 @@ class KariZevSkyshipRaiderEffect extends OneShotEffect {
         CreateTokenEffect effect = new CreateTokenEffect(new RagavanToken(), 1, true, true);
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && effect.apply(game, source)) {
-            effect.exileTokensCreatedAtEndOfCombat(game, source);
+            effect.removeTokensCreatedAt(game, source, true, PhaseStep.END_COMBAT, TargetController.ANY);
             return true;
         }
         return false;

@@ -32,7 +32,7 @@ import java.util.UUID;
  */
 public final class NemesisTrap extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("If a white creature is attacking");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a white creature is attacking");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.WHITE));

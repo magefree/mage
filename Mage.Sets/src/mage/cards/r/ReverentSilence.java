@@ -19,7 +19,7 @@ import mage.filter.common.FilterEnchantmentPermanent;
  */
 public final class ReverentSilence extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("If you control a Forest");
+    private static final FilterPermanent filter = new FilterPermanent("you control a Forest");
     
     static {
         filter.add(SubType.FOREST.getPredicate());

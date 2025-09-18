@@ -64,6 +64,6 @@ enum NeedlebiteTrapCondition implements Condition {
 
     @Override
     public String toString() {
-        return "If an opponent gained life this turn";
+        return "an opponent gained life this turn";
     }
 }

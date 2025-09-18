@@ -116,7 +116,7 @@ enum UlamogTheDefilerValue implements DynamicValue {
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         return game.getExile()
-                .getAllCardsByRange(game, sourceAbility.getControllerId())
+                .getCardsInRange(game, sourceAbility.getControllerId())
                 .stream()
                 .mapToInt(Card::getManaValue)
                 .max()

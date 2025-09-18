@@ -115,7 +115,7 @@ public class TargetSource extends TargetObject {
                 }
             }
         }
-        for (Card card : game.getExile().getAllCards(game)) {
+        for (Card card : game.getExile().getCardsInRange(game, sourceControllerId)) {
             if (filter.match(card, sourceControllerId, source, game)) {
                 possibleTargets.add(card.getId());
             }

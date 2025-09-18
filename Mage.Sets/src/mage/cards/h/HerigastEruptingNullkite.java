@@ -87,7 +87,7 @@ class HerigastEruptingNullkiteEffect extends ContinuousEffectImpl {
         controller.getLibrary().getCards(game).stream()
                 .filter(c -> StaticFilters.FILTER_CARD_CREATURE.match(c, game))
                 .forEach(cardsToGainEmerge::add);
-        game.getExile().getAllCardsByRange(game, controller.getId()).stream()
+        game.getExile().getCardsInRange(game, controller.getId()).stream()
                 .filter(c -> StaticFilters.FILTER_CARD_CREATURE.match(c, game))
                 .forEach(cardsToGainEmerge::add);
         game.getCommanderCardsFromCommandZone(controller, CommanderCardType.ANY)

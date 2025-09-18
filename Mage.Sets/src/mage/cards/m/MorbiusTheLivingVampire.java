@@ -11,10 +11,7 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.PutCards;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.constants.*;
 
 import java.util.UUID;
 
@@ -44,7 +41,7 @@ public final class MorbiusTheLivingVampire extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // {U}{B}, Exile this card from your graveyard: Look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.
-        Ability ability = new SimpleActivatedAbility(new LookLibraryAndPickControllerEffect(3, 1, PutCards.HAND, PutCards.BOTTOM_ANY),
+        Ability ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new LookLibraryAndPickControllerEffect(3, 1, PutCards.HAND, PutCards.BOTTOM_ANY),
                 new ManaCostsImpl<>("{U}{B}"));
         ability.addCost(new ExileSourceFromGraveCost());
         this.addAbility(ability);

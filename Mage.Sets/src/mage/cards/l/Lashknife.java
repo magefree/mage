@@ -31,7 +31,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public final class Lashknife extends CardImpl {
 
-    private static final FilterControlledPermanent plainsFilter = new FilterControlledPermanent("If you control a Plains");
+    private static final FilterControlledPermanent plainsFilter = new FilterControlledPermanent("you control a Plains");
     private static final FilterControlledCreaturePermanent creatureFilter = new FilterControlledCreaturePermanent("an untapped creature you control");
 
     static {

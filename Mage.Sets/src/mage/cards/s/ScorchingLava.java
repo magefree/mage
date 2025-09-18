@@ -31,7 +31,7 @@ public final class ScorchingLava extends CardImpl {
         // that creature can't be regenerated this turn and if it would die this turn, exile it instead.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellAbility().addEffect(new ConditionalContinuousRuleModifyingEffect(
-                new CantRegenerateTargetEffect(Duration.EndOfTurn, "If {this} was kicked, that creature"),
+                new CantRegenerateTargetEffect(Duration.EndOfTurn, "If this spell was kicked, that creature"),
                 new LockedInCondition(KickedCondition.ONCE)));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new ExileTargetIfDiesEffect(),

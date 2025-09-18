@@ -18,12 +18,12 @@ import mage.cards.Cards;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
+import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
-import mage.game.GameState;
 import mage.game.permanent.token.Token;
 import mage.target.TargetCard;
 import mage.target.TargetPermanent;
@@ -100,12 +100,7 @@ class MarduSiegebreakerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Cards cards = Optional
-                .ofNullable(game)
-                .map(Game::getState)
-                .map(GameState::getExile)
-                .map(exile -> exile.getExileZone(CardUtil.getExileZoneId(game, source)))
-                .orElse(null);
+        Cards cards = game.getState().getExile().getExileZone(CardUtil.getExileZoneId(game, source));
         if (cards == null) {
             return false;
         }
@@ -138,7 +133,7 @@ class MarduSiegebreakerEffect extends OneShotEffect {
                     .forEach(addedTokens::add);
         }
         game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
-                new SacrificeTargetEffect().setTargetPointer(new FixedTargets(addedTokens))
+                new SacrificeTargetEffect().setTargetPointer(new FixedTargets(addedTokens)), TargetController.YOU
         ), source);
         return true;
     }

@@ -106,7 +106,7 @@ class AmazingSpiderManEffect extends ContinuousEffectImpl {
         controller.getLibrary().getCards(game).stream()
                 .filter(c -> filter.match(c, game))
                 .forEach(cardsToGainAbility::add);
-        game.getExile().getAllCardsByRange(game, controller.getId()).stream()
+        game.getExile().getCardsInRange(game, controller.getId()).stream()
                 .filter(c -> filter.match(c, game))
                 .forEach(cardsToGainAbility::add);
         game.getCommanderCardsFromCommandZone(controller, CommanderCardType.ANY).stream()

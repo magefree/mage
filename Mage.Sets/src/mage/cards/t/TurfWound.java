@@ -46,7 +46,7 @@ class TurfWoundEffect extends ContinuousRuleModifyingEffectImpl {
 
     TurfWoundEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment);
-        staticText = "Target player can't play land cards this turn";
+        staticText = "Target player can't play lands this turn";
     }
 
     private TurfWoundEffect(final TurfWoundEffect effect) {
@@ -74,10 +74,7 @@ class TurfWoundEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getPlayerId().equals(source.getFirstTarget())) {
-            return true;
-        }
-        return false;
+        return event.getPlayerId().equals(source.getFirstTarget());
     }
 
 }

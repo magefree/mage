@@ -169,7 +169,7 @@ class WarpExileEffect extends OneShotEffect {
         player.moveCardsToExile(
                 permanent, source, game, true,
                 CardUtil.getExileZoneId(WarpAbility.makeWarpString(player.getId()), game),
-                "Warped by " + player.getLogName()
+                "Warped by " + player.getName()
         );
         CardUtil.makeCardPlayable(
                 game, source, permanent.getMainCard(), true,

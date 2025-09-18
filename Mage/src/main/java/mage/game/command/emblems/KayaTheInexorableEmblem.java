@@ -48,7 +48,6 @@ public class KayaTheInexorableEmblem extends Emblem {
 
 class KayaTheInexorableEmblemEffect extends OneShotEffect {
 
-    private static final FilterCard filter = new FilterOwnedCard();
     private static final FilterCard filter2 = new FilterCard();
     private static final Set<String> choices = new LinkedHashSet<>();
 
@@ -94,7 +93,7 @@ class KayaTheInexorableEmblemEffect extends OneShotEffect {
                 cards.addAll(player.getGraveyard());
                 break;
             case "Exile":
-                cards.addAllCards(game.getExile().getCards(filter, game));
+                cards.addAllCards(game.getExile().getCardsOwned(game, player.getId()));
                 break;
         }
         return CardUtil.castSpellWithAttributesForFree(player, source, game, cards, filter2);

@@ -13,7 +13,7 @@ import mage.constants.CardType;
 public final class BananaToken extends TokenImpl {
 
     public BananaToken() {
-        super("Banana", "colorless artifact token named Banana with \"{T}, Sacrifice this artifact: Add {R} or {G}. You gain 2 life.\"");
+        super("Banana", "colorless artifact token named Banana with \"{T}, Sacrifice this token: Add {R} or {G}. You gain 2 life.\"");
         cardType.add(CardType.ARTIFACT);
 
         // {T}, Sacrifice this artifact: Add {R} or {G}. You gain 2 life.
@@ -22,7 +22,7 @@ public final class BananaToken extends TokenImpl {
         ability.addEffect(new GainLifeEffect(2));
         this.addAbility(ability);
         ability = new GreenManaAbility();
-        ability.addCost(new SacrificeSourceCost().setText("sacrifice this artifact"));
+        ability.addCost(new SacrificeSourceCost().setText("sacrifice this token"));
         ability.addEffect(new GainLifeEffect(2));
         this.addAbility(ability);
     }

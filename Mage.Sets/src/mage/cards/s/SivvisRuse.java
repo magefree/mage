@@ -33,7 +33,7 @@ public final class SivvisRuse extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{W}{W}");
 
         // If an opponent controls a Mountain and you control a Plains, you may cast this spell without paying its mana cost.
-        Condition condition = new CompoundCondition("If an opponent controls a Mountain and you control a Plains",
+        Condition condition = new CompoundCondition("an opponent controls a Mountain and you control a Plains",
                 new OpponentControlsPermanentCondition(filterMountain),
                 new PermanentsOnTheBattlefieldCondition(filterPlains));
         this.addAbility(new AlternativeCostSourceAbility(null, condition));

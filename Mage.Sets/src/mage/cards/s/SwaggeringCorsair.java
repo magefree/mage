@@ -32,7 +32,7 @@ public final class SwaggeringCorsair extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(
                         new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)),
                         RaidCondition.instance,
-                        "<i>Raid</i> &mdash; {this} enters with a +1/+1 counter on it if you attacked this turn.", "")
+                        "{this} enters with a +1/+1 counter on it if you attacked this turn.", "")
                         .setAbilityWord(AbilityWord.RAID)
                         .addHint(RaidHint.instance),
                 new PlayerAttackedWatcher());

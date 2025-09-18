@@ -59,7 +59,7 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("Fire Lord Sozin", 117, Rarity.MYTHIC, mage.cards.f.FireLordSozin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fire Lord Sozin", 356, Rarity.MYTHIC, mage.cards.f.FireLordSozin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fire Lord Zuko", 221, Rarity.RARE, mage.cards.f.FireLordZuko.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Fire Lord Zuko", 360, Rarity.RARE, mage.cards.f.FireLordZuko.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Fire Lord Zuko", 360, Rarity.RARE, mage.cards.f.FireLordZuko.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Fire Nation Attacks", 133, Rarity.UNCOMMON, mage.cards.f.FireNationAttacks.class));
         cards.add(new SetCardInfo("Fire Nation Engineer", 99, Rarity.UNCOMMON, mage.cards.f.FireNationEngineer.class));
         cards.add(new SetCardInfo("Fire Sages", 136, Rarity.UNCOMMON, mage.cards.f.FireSages.class));
@@ -87,7 +87,7 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("Katara, Water Tribe's Hope", 351, Rarity.RARE, mage.cards.k.KataraWaterTribesHope.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Katara, the Fearless", 230, Rarity.RARE, mage.cards.k.KataraTheFearless.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Katara, the Fearless", 350, Rarity.RARE, mage.cards.k.KataraTheFearless.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Katara, the Fearless", 361, Rarity.RARE, mage.cards.k.KataraTheFearless.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Katara, the Fearless", 361, Rarity.RARE, mage.cards.k.KataraTheFearless.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Lightning Strike", 146, Rarity.COMMON, mage.cards.l.LightningStrike.class));
         cards.add(new SetCardInfo("Long Feng, Grand Secretariat", 233, Rarity.UNCOMMON, mage.cards.l.LongFengGrandSecretariat.class));
         cards.add(new SetCardInfo("Master Pakku", 63, Rarity.UNCOMMON, mage.cards.m.MasterPakku.class));
@@ -130,7 +130,7 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("Toph, the Blind Bandit", 198, Rarity.UNCOMMON, mage.cards.t.TophTheBlindBandit.class));
         cards.add(new SetCardInfo("Toph, the First Metalbender", 247, Rarity.RARE, mage.cards.t.TophTheFirstMetalbender.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Toph, the First Metalbender", 353, Rarity.RARE, mage.cards.t.TophTheFirstMetalbender.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Toph, the First Metalbender", 362, Rarity.RARE, mage.cards.t.TophTheFirstMetalbender.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Toph, the First Metalbender", 362, Rarity.RARE, mage.cards.t.TophTheFirstMetalbender.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Turtle-Duck", 200, Rarity.COMMON, mage.cards.t.TurtleDuck.class));
         cards.add(new SetCardInfo("Vindictive Warden", 249, Rarity.COMMON, mage.cards.v.VindictiveWarden.class));
         cards.add(new SetCardInfo("Waterbending Lesson", 80, Rarity.COMMON, mage.cards.w.WaterbendingLesson.class));

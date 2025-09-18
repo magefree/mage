@@ -60,7 +60,7 @@ class FavorOfTheMightyEffect extends ContinuousEffectImpl {
 
     FavorOfTheMightyEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-        this.staticText = "Each creature with the highest mana value has protection from all colors.";
+        this.staticText = "Each creature with the greatest mana value has protection from each color.";
     }
 
     private FavorOfTheMightyEffect(final FavorOfTheMightyEffect effect) {

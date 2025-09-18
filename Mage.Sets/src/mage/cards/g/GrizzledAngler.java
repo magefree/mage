@@ -48,6 +48,7 @@ public final class GrizzledAngler extends CardImpl {
                 new TransformSourceEffect(), condition,
                 "Then if there is a colorless creature card in your graveyard, transform {this}"
         ));
+        this.addAbility(ability);
     }
 
     private GrizzledAngler(final GrizzledAngler card) {

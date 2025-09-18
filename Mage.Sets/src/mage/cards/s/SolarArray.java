@@ -1,7 +1,7 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
-import mage.abilities.common.delayed.CopyNextSpellDelayedTriggeredAbility;
+import mage.abilities.common.delayed.CastNextSpellDelayedTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.keyword.SunburstAbility;
@@ -26,9 +26,8 @@ public final class SolarArray extends CardImpl {
 
         // {T}: Add one mana of any color. When you next cast an artifact spell this turn, that spell gains sunburst.
         AnyColorManaAbility ability = new AnyColorManaAbility();
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new CopyNextSpellDelayedTriggeredAbility(
-                StaticFilters.FILTER_SPELL_AN_ARTIFACT, new SolarArrayEffect(),
-                "When you next cast an artifact spell this turn, that spell gains sunburst."
+        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new CastNextSpellDelayedTriggeredAbility(
+                new SolarArrayEffect(), StaticFilters.FILTER_SPELL_AN_ARTIFACT, true
         )));
         ability.setUndoPossible(false);
         this.addAbility(ability);

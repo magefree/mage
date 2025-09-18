@@ -76,6 +76,6 @@ enum RicochetTrapCondition implements Condition {
 
     @Override
     public String toString() {
-        return "If an opponent cast a blue spell this turn";
+        return "an opponent cast a blue spell this turn";
     }
 }

@@ -12,7 +12,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterArtifactCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.token.NalaarAetherjetToken;
 import mage.game.permanent.token.Token;
@@ -25,7 +26,7 @@ import java.util.UUID;
  */
 public final class PiaNalaarChiefMechanic extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("artifact creatures you control");
+    private static final FilterPermanent filter = new FilterArtifactCreaturePermanent("artifact creatures you control");
 
     static {
         filter.add(TargetController.YOU.getControllerPredicate());

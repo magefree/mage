@@ -59,7 +59,7 @@ enum HowlingGalefangCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         return game
                 .getExile()
-                .getAllCards(game, source.getControllerId())
+                .getCardsOwned(game, source.getControllerId())
                 .stream()
                 .anyMatch(AdventureCard.class::isInstance);
     }

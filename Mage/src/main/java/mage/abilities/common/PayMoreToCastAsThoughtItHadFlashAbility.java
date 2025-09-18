@@ -59,9 +59,9 @@ public class PayMoreToCastAsThoughtItHadFlashAbility extends SpellAbility {
             return rule;
         }
         if (costsToAdd instanceof ManaCosts) {
-            return "You may cast {this} as though it had flash if you pay " + costsToAdd.getText() + " more to cast it. <i>(You may cast it any time you could cast an instant.)</i>";
+            return "You may cast this spell as though it had flash if you pay " + costsToAdd.getText() + " more to cast it. <i>(You may cast it any time you could cast an instant.)</i>";
         } else {
-            return "You may cast {this} as though it had flash by " + costsToAdd.getText() + " in addition to paying its other costs.";
+            return "You may cast this spell as though it had flash by " + costsToAdd.getText() + " in addition to paying its other costs.";
         }
     }
 

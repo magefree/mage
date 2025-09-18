@@ -53,6 +53,6 @@ enum LethargyTrapCondition implements Condition {
 
     @Override
     public String toString() {
-        return "If three or more creatures are attacking";
+        return "three or more creatures are attacking";
     }
 }
