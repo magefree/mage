@@ -2670,10 +2670,9 @@ public abstract class GameImpl implements Game {
                             Permanent attachedTo = getPermanent(perm.getAttachedTo());
                             if (attachedTo == null || !attachedTo.getAttachments().contains(perm.getId())) {
                                 // handle bestow unattachment
-                                Card card = this.getCard(perm.getId());
-                                if (card != null && card.isCreature(this)) {
+                                if (perm.getAbilities().stream().anyMatch(x -> x instanceof BestowAbility)) {
                                     UUID wasAttachedTo = perm.getAttachedTo();
-                                    perm.attachTo(null, null, this);
+                                    perm.unattach(this);
                                     fireEvent(new UnattachedEvent(wasAttachedTo, perm.getId(), perm, null));
                                 } else if (movePermanentToGraveyardWithInfo(perm)) {
                                     somethingHappened = true;
@@ -2683,11 +2682,9 @@ public abstract class GameImpl implements Game {
                                 if (auraFilter instanceof FilterPermanent) {
                                     if (!((FilterPermanent) auraFilter).match(attachedTo, perm.getControllerId(), perm.getSpellAbility(), this)
                                             || attachedTo.cantBeAttachedBy(perm, null, this, true)) {
-                                        Card card = this.getCard(perm.getId());
-                                        if (card != null && card.isCreature(this)) {
+                                        if (perm.getAbilities().stream().anyMatch(x -> x instanceof BestowAbility)) {
                                             UUID wasAttachedTo = perm.getAttachedTo();
-                                            perm.attachTo(null, null, this);
-                                            BestowAbility.becomeCreature(perm, this);
+                                            perm.unattach(this);
                                             fireEvent(new UnattachedEvent(wasAttachedTo, perm.getId(), perm, null));
                                         } else if (movePermanentToGraveyardWithInfo(perm)) {
                                             somethingHappened = true;
@@ -2695,11 +2692,9 @@ public abstract class GameImpl implements Game {
                                     }
                                 } else if (!auraFilter.match(attachedTo, this) || attachedTo.cantBeAttachedBy(perm, null, this, true)) {
                                     // handle bestow unattachment
-                                    Card card = this.getCard(perm.getId());
-                                    if (card != null && card.isCreature(this)) {
+                                    if (perm.getAbilities().stream().anyMatch(x -> x instanceof BestowAbility)) {
                                         UUID wasAttachedTo = perm.getAttachedTo();
-                                        perm.attachTo(null, null, this);
-                                        BestowAbility.becomeCreature(perm, this);
+                                        perm.unattach(this);
                                         fireEvent(new UnattachedEvent(wasAttachedTo, perm.getId(), perm, null));
                                     } else if (movePermanentToGraveyardWithInfo(perm)) {
                                         somethingHappened = true;
