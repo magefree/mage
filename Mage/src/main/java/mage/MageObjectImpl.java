@@ -320,7 +320,7 @@ public abstract class MageObjectImpl implements MageObject {
 
     @Override
     public boolean hasSubtype(SubType value, Game game) {
-        if (value == null) {
+        if (value == null || !value.canGain(game, this)) {
             return false;
         }
         return value.getSubTypeSet() == SubTypeSet.CreatureType && isAllCreatureTypes(game)

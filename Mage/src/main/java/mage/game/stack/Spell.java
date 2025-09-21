@@ -369,8 +369,8 @@ public class Spell extends StackObjectImpl implements Card {
                         // after put to play:
                         // restore removed stats (see "before put to play" above)
                         permanent.setSpellAbility(ability); // otherwise spell ability without bestow will be set
-                        card.addCardType(game, CardType.CREATURE);
-                        card.removeSubType(game, SubType.AURA);
+                        permanent.removeCardType(game, CardType.CREATURE);
+                        permanent.addSubType(game, SubType.AURA);
                     }
                     if (isCopy()) {
                         Permanent token = game.getPermanent(permId);
@@ -388,23 +388,13 @@ public class Spell extends StackObjectImpl implements Card {
                     }
                     return ability.resolve(game);
                 }
-                if (bestow) {
-                    card.addCardType(game, CardType.CREATURE);
-                    card.removeSubType(game, SubType.AURA);
-                }
                 return false;
             }
             // Aura has no legal target and its a bestow enchantment -> Add it to battlefield as creature
             if (SpellAbilityCastMode.BESTOW.equals(this.getSpellAbility().getSpellAbilityCastMode())) {
                 MageObjectReference mor = new MageObjectReference(getSpellAbility());
                 game.storePermanentCostsTags(mor, getSpellAbility());
-                if (controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null)) {
-                    Permanent permanent = game.getPermanent(card.getId());
-                    permanent.addCardType(game, CardType.CREATURE);
-                    permanent.removeSubType(game, SubType.AURA);
-                    return true;
-                }
-                return false;
+                return controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null);
             } else {
                 //20091005 - 608.2b
                 if (!game.isSimulation()) {
@@ -597,7 +587,7 @@ public class Spell extends StackObjectImpl implements Card {
     @Override
     public SubTypes getSubtype(Game game) {
         if (SpellAbilityCastMode.BESTOW.equals(this.getSpellAbility().getSpellAbilityCastMode())) {
-            SubTypes subtypes = card.getSubtype(game);
+            SubTypes subtypes = card.getSubtype(game).copy();
             if (!subtypes.contains(SubType.AURA)) { // do it only once
                 subtypes.add(SubType.AURA);
             }
@@ -609,13 +599,11 @@ public class Spell extends StackObjectImpl implements Card {
     @Override
     public boolean hasSubtype(SubType subtype, Game game) {
         if (SpellAbilityCastMode.BESTOW.equals(this.getSpellAbility().getSpellAbilityCastMode())) { // workaround for Bestow (don't like it)
-            SubTypes subtypes = card.getSubtype(game);
+            SubTypes subtypes = card.getSubtype(game).copy();
             if (!subtypes.contains(SubType.AURA)) { // do it only once
                 subtypes.add(SubType.AURA);
             }
-            if (subtypes.contains(subtype)) {
-                return true;
-            }
+            return subtypes.contains(subtype) && subtype.canGain(game, this);
         }
         return card.hasSubtype(subtype, game);
     }

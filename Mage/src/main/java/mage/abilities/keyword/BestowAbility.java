@@ -155,9 +155,6 @@ class BestowTypeEffect extends ContinuousEffectImpl {
         if (game.getPermanent(permanent.getAttachedTo()) != null){
             permanent.removeCardType(game, CardType.CREATURE);
             permanent.addSubType(game, SubType.AURA);
-        } else {
-            permanent.removeSubType(game, SubType.AURA);
-            permanent.unattach(game);
         }
         return true;
     }
