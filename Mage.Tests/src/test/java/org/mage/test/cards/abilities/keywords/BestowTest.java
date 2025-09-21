@@ -6,6 +6,7 @@ import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.permanent.Permanent;
@@ -86,6 +87,7 @@ public class BestowTest extends CardTestPlayerBase {
         assertSubtype("Hopeful Eidolon", SubType.AURA);
         assertType("Hopeful Eidolon", CardType.ENCHANTMENT, true);
         assertType("Hopeful Eidolon", CardType.CREATURE, false);
+        assertNotSubtype("Hopeful Eidolon", SubType.SPIRIT);
     }
 
     /**
@@ -610,5 +612,28 @@ public class BestowTest extends CardTestPlayerBase {
             Assert.assertEquals("Is 1 power", 1, p.getPower().getValue());
             Assert.assertEquals("Is 1 toughness", 1, p.getToughness().getValue());
         }
+    }
+
+    @Test
+    public void testBestowSubtype() {
+        addCard(Zone.HAND, playerA, "Hopeful Eidolon", 2); // Spirit when cast as creature, not when cast as aura
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Waxmane Baku"); // May add a counter on casting a spirit spell
+        addCard(Zone.BATTLEFIELD, playerA, "Drogskol Cavalry"); // +2 life whenever another spirit enters
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hopeful Eidolon using bestow", "Waxmane Baku");
+        checkPermanentCounters("Not a Spirit, no KI counters", 1, PhaseStep.BEGIN_COMBAT, playerA, "Waxmane Baku", CounterType.KI, 0);
+        checkLife("Not a Spirit, no lifegain", 1, PhaseStep.BEGIN_COMBAT, playerA, 20);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Hopeful Eidolon");
+        setChoice(playerA, true);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Hopeful Eidolon", 2);
+        assertPowerToughness(playerA, "Waxmane Baku", 3, 3);
+        assertCounterCount(playerA, "Waxmane Baku", CounterType.KI, 1);
+        assertLife(playerA, 22);
     }
 }
