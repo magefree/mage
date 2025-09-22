@@ -22,7 +22,7 @@ import java.util.UUID;
 public final class Pyrohemia extends CardImpl {
 
     private static final Condition condition = new PermanentsOnTheBattlefieldCondition(
-            new FilterCreaturePermanent("no creatures are on the battlefield"), ComparisonType.EQUAL_TO, 0
+            new FilterCreaturePermanent("no creatures are on the battlefield"), ComparisonType.EQUAL_TO, 0, false
     );
 
     public Pyrohemia(UUID ownerId, CardSetInfo setInfo) {

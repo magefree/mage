@@ -1,7 +1,6 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
-import mage.cards.s.SilkWebWeaver;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
@@ -24,6 +23,8 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         super("Marvel's Spider-Man", "SPM", ExpansionSet.buildDate(2025, 9, 26), SetType.EXPANSION);
         this.blockName = "Marvel's Spider-Man"; // for sorting in GUI
         this.hasBasicLands = true;
+
+        this.enablePlayBooster(Integer.MAX_VALUE);
 
         cards.add(new SetCardInfo("Agent Venom", 255, Rarity.RARE, mage.cards.a.AgentVenom.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Agent Venom", 49, Rarity.RARE, mage.cards.a.AgentVenom.class, NON_FULL_USE_VARIOUS));
@@ -74,7 +75,7 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Ezekiel Sims, Spider-Totem", 100, Rarity.UNCOMMON, mage.cards.e.EzekielSimsSpiderTotem.class));
         cards.add(new SetCardInfo("Flash Thompson, Spider-Fan", 7, Rarity.UNCOMMON, mage.cards.f.FlashThompsonSpiderFan.class));
         cards.add(new SetCardInfo("Flying Octobot", 31, Rarity.UNCOMMON, mage.cards.f.FlyingOctobot.class));
-        cards.add(new SetCardInfo("Forest", 193, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 193, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", 198, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Friendly Neighborhood", 246, Rarity.RARE, mage.cards.f.FriendlyNeighborhood.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Friendly Neighborhood", 8, Rarity.RARE, mage.cards.f.FriendlyNeighborhood.class, NON_FULL_USE_VARIOUS));
@@ -140,7 +141,7 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Morbius the Living Vampire", 137, Rarity.UNCOMMON, mage.cards.m.MorbiusTheLivingVampire.class));
         cards.add(new SetCardInfo("Morlun, Devourer of Spiders", 257, Rarity.RARE, mage.cards.m.MorlunDevourerOfSpiders.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Morlun, Devourer of Spiders", 59, Rarity.RARE, mage.cards.m.MorlunDevourerOfSpiders.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Mountain", 192, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 192, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 197, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Multiversal Passage", 180, Rarity.RARE, mage.cards.m.MultiversalPassage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Multiversal Passage", 206, Rarity.RARE, mage.cards.m.MultiversalPassage.class, NON_FULL_USE_VARIOUS));
@@ -165,7 +166,7 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Peter Parker's Camera", 171, Rarity.RARE, mage.cards.p.PeterParkersCamera.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Peter Parker's Camera", 280, Rarity.RARE, mage.cards.p.PeterParkersCamera.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Pictures of Spider-Man", 109, Rarity.UNCOMMON, mage.cards.p.PicturesOfSpiderMan.class));
-        cards.add(new SetCardInfo("Plains", 189, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 189, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Plains", 194, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Prison Break", 61, Rarity.UNCOMMON, mage.cards.p.PrisonBreak.class));
         cards.add(new SetCardInfo("Professional Wrestler", 110, Rarity.COMMON, mage.cards.p.ProfessionalWrestler.class));
@@ -202,8 +203,8 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Shock", 88, Rarity.COMMON, mage.cards.s.Shock.class));
         cards.add(new SetCardInfo("Shocker, Unshakable", 89, Rarity.UNCOMMON, mage.cards.s.ShockerUnshakable.class));
         cards.add(new SetCardInfo("Shriek, Treblemaker", 144, Rarity.UNCOMMON, mage.cards.s.ShriekTreblemaker.class));
-        cards.add(new SetCardInfo("Silk, Web Weaver", 145, Rarity.RARE, SilkWebWeaver.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Silk, Web Weaver", 215, Rarity.RARE, SilkWebWeaver.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Silk, Web Weaver", 145, Rarity.RARE, mage.cards.s.SilkWebWeaver.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Silk, Web Weaver", 215, Rarity.RARE, mage.cards.s.SilkWebWeaver.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Silver Sable, Mercenary Leader", 13, Rarity.UNCOMMON, mage.cards.s.SilverSableMercenaryLeader.class));
         cards.add(new SetCardInfo("Sinister Hideout", 184, Rarity.COMMON, mage.cards.s.SinisterHideout.class));
         cards.add(new SetCardInfo("Skyward Spider", 146, Rarity.COMMON, mage.cards.s.SkywardSpider.class));
@@ -264,7 +265,7 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("Superior Spider-Man", 155, Rarity.RARE, mage.cards.s.SuperiorSpiderMan.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Superior Spider-Man", 275, Rarity.RARE, mage.cards.s.SuperiorSpiderMan.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Supportive Parents", 119, Rarity.UNCOMMON, mage.cards.s.SupportiveParents.class));
-        cards.add(new SetCardInfo("Swamp", 191, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 191, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 196, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swarm, Being of Bees", 69, Rarity.COMMON, mage.cards.s.SwarmBeingOfBees.class));
         cards.add(new SetCardInfo("Symbiote Spider-Man", 156, Rarity.RARE, mage.cards.s.SymbioteSpiderMan.class, NON_FULL_USE_VARIOUS));
@@ -275,6 +276,9 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("The Clone Saga", 28, Rarity.RARE, mage.cards.t.TheCloneSaga.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Death of Gwen Stacy", 223, Rarity.RARE, mage.cards.t.TheDeathOfGwenStacy.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("The Death of Gwen Stacy", 54, Rarity.RARE, mage.cards.t.TheDeathOfGwenStacy.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Soul Stone", 242, Rarity.MYTHIC, mage.cards.t.TheSoulStone.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Soul Stone", 243, Rarity.MYTHIC, mage.cards.t.TheSoulStone.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Soul Stone", 66, Rarity.MYTHIC, mage.cards.t.TheSoulStone.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Spot's Portal", 68, Rarity.UNCOMMON, mage.cards.t.TheSpotsPortal.class));
         cards.add(new SetCardInfo("The Spot, Living Portal", 153, Rarity.RARE, mage.cards.t.TheSpotLivingPortal.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Spot, Living Portal", 231, Rarity.RARE, mage.cards.t.TheSpotLivingPortal.class, NON_FULL_USE_VARIOUS));

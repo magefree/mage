@@ -4,6 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.OneShotNonTargetEffect;
 import mage.abilities.effects.common.ChooseCardTypeEffect;
 import mage.abilities.effects.common.LookAtTargetPlayerHandEffect;
 import mage.abilities.effects.common.cost.SpellsCostIncreasingAllEffect;
@@ -45,14 +46,14 @@ public final class ArachnePsionicWeaver extends CardImpl {
         // Web-slinging {W}
         this.addAbility(new WebSlingingAbility(this, "{W}"));
 
-        // As Arachne enters, look at target opponent's hand, then choose a noncreature card type.
+        // As Arachne enters, look at an opponent’s hand, then choose a card type other than creature.
         List<CardType> types = Arrays.stream(CardType.values()).filter(cardType -> cardType != CardType.CREATURE)
                 .collect(Collectors.toList());
-        Ability ability = new AsEntersBattlefieldAbility(new LookAtTargetPlayerHandEffect());
+        Ability ability = new AsEntersBattlefieldAbility(new OneShotNonTargetEffect(
+                new LookAtTargetPlayerHandEffect().setText("look at an opponent's hand"), new TargetOpponent()));
         ability.addEffect(new ChooseCardTypeEffect(Outcome.Benefit, types)
-                .setText("choose a noncreature card type")
+                .setText("choose a card type other than creature")
                 .concatBy(", then"));
-        ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
 
         // Spells of the chosen type cost {1} more to cast.
