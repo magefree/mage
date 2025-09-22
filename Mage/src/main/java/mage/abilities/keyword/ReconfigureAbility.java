@@ -135,6 +135,7 @@ class ReconfigureTypeEffect extends ContinuousEffectImpl {
             return false;
         }
         permanent.removeCardType(game, CardType.CREATURE);
+        permanent.removeAllCreatureTypes(game);
         return true;
     }
 }

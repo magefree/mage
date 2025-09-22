@@ -127,6 +127,7 @@ public class BestowAbility extends SpellAbility {
             }
             card.addSubType(SubType.AURA);
             card.removeCardType(CardType.CREATURE);
+            card.removeAllCreatureTypes();
         }
     }
 }
@@ -155,6 +156,7 @@ class BestowTypeEffect extends ContinuousEffectImpl {
         if (game.getPermanent(permanent.getAttachedTo()) != null){
             permanent.removeCardType(game, CardType.CREATURE);
             permanent.addSubType(game, SubType.AURA);
+            permanent.removeAllCreatureTypes(game);
         }
         return true;
     }

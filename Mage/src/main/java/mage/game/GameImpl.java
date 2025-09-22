@@ -2557,6 +2557,11 @@ public abstract class GameImpl implements Game {
         Map<UUID, Map<UUID, Set<Permanent>>> roleMap = new HashMap<>();
         List<FilterCreaturePermanent> usePowerInsteadOfToughnessForDamageLethalityFilters = getState().getActivePowerInsteadOfToughnessForDamageLethalityFilters();
         for (Permanent perm : getBattlefield().getAllActivePermanents()) {
+            for (SubType s : perm.getSubtype(this)){
+                if (!s.canGain(this, perm)){
+                    throw new IllegalStateException("Object " + perm.getIdName() + " has subtype " + s + ", a " + s.getSubTypeSet() + " but types are " + perm.getCardType(this));
+                }
+            }
             if (perm.isCreature(this)) {
                 //20091005 - 704.5f
                 if (perm.getToughness().getValue() <= 0) {

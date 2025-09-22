@@ -5,7 +5,6 @@ import mage.abilities.*;
 import mage.abilities.costs.mana.ActivationManaAbilityStep;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.keyword.BestowAbility;
 import mage.abilities.keyword.PrototypeAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.*;
@@ -342,6 +341,7 @@ public class Spell extends StackObjectImpl implements Card {
                     // Otherwise effects like evolve trigger from creature comes into play event
                     card.removeCardType(game, CardType.CREATURE);
                     card.addSubType(game, SubType.AURA);
+                    card.removeAllSubTypes(game, SubTypeSet.CreatureType);
                 }
                 UUID permId;
                 boolean flag;
@@ -363,14 +363,11 @@ public class Spell extends StackObjectImpl implements Card {
                 }
                 if (flag) {
                     if (bestow) {
-                        // card will be copied during putOntoBattlefield, so the card of CardPermanent has to be changed
-                        // TODO: Find a better way to prevent bestow creatures from being effected by creature affecting abilities
                         Permanent permanent = game.getPermanent(permId);
-                        // after put to play:
-                        // restore removed stats (see "before put to play" above)
                         permanent.setSpellAbility(ability); // otherwise spell ability without bestow will be set
-                        permanent.removeCardType(game, CardType.CREATURE);
+                        permanent.removeCardType(game, CardType.CREATURE); // Fix for Blood Moon problem https://github.com/magefree/mage/issues/4202, usually applied by BestowTypeEffect
                         permanent.addSubType(game, SubType.AURA);
+                        permanent.removeAllSubTypes(game, SubTypeSet.CreatureType);
                     }
                     if (isCopy()) {
                         Permanent token = game.getPermanent(permId);
@@ -378,7 +375,7 @@ public class Spell extends StackObjectImpl implements Card {
                             return false;
                         }
                         for (Ability ability2 : token.getAbilities()) {
-                            if (!bestow || ability2 instanceof BestowAbility) {
+                            if (ability2 instanceof SpellAbility && ability2.getTargets().size() == 1) {
                                 ability2.getTargets().get(0).add(ability.getFirstTarget(), game);
                                 ability2.getEffects().get(0).apply(game, ability2);
                                 return ability2.resolve(game);
@@ -571,10 +568,8 @@ public class Spell extends StackObjectImpl implements Card {
             return cardTypes;
         }
         if (SpellAbilityCastMode.BESTOW.equals(this.getSpellAbility().getSpellAbilityCastMode())) {
-            List<CardType> cardTypes = new ArrayList<>();
-            cardTypes.addAll(card.getCardType(game));
-            cardTypes.remove(CardType.CREATURE);
-            return cardTypes;
+            Card modifiedCard = this.getSpellAbility().getSpellAbilityCastMode().getTypeModifiedCardObjectCopy(card, this.getSpellAbility(), game);
+            return modifiedCard.getCardType(game);
         }
         return card.getCardType(game);
     }
@@ -587,23 +582,17 @@ public class Spell extends StackObjectImpl implements Card {
     @Override
     public SubTypes getSubtype(Game game) {
         if (SpellAbilityCastMode.BESTOW.equals(this.getSpellAbility().getSpellAbilityCastMode())) {
-            SubTypes subtypes = card.getSubtype(game).copy();
-            if (!subtypes.contains(SubType.AURA)) { // do it only once
-                subtypes.add(SubType.AURA);
-            }
-            return subtypes;
+            Card modifiedCard = this.getSpellAbility().getSpellAbilityCastMode().getTypeModifiedCardObjectCopy(card, this.getSpellAbility(), game);
+            return modifiedCard.getSubtype();
         }
         return card.getSubtype(game);
     }
 
     @Override
     public boolean hasSubtype(SubType subtype, Game game) {
-        if (SpellAbilityCastMode.BESTOW.equals(this.getSpellAbility().getSpellAbilityCastMode())) { // workaround for Bestow (don't like it)
-            SubTypes subtypes = card.getSubtype(game).copy();
-            if (!subtypes.contains(SubType.AURA)) { // do it only once
-                subtypes.add(SubType.AURA);
-            }
-            return subtypes.contains(subtype) && subtype.canGain(game, this);
+        if (SpellAbilityCastMode.BESTOW.equals(this.getSpellAbility().getSpellAbilityCastMode())) {
+            Card modifiedCard = this.getSpellAbility().getSpellAbilityCastMode().getTypeModifiedCardObjectCopy(card, this.getSpellAbility(), game);
+            return modifiedCard.hasSubtype(subtype, game);
         }
         return card.hasSubtype(subtype, game);
     }
