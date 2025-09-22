@@ -76,8 +76,7 @@ public class TheSoulStoneTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, bearCub);
         addCard(Zone.GRAVEYARD, playerA, bearCub);
         addCard(Zone.HAND, playerA, teferisTimeTwist);
-        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 7);
-        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Underground Sea", 11);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{6}{B}, {T}");
         setChoice(playerA, bearCub);
