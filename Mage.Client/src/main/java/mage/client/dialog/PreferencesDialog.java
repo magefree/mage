@@ -3512,7 +3512,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
             dialog.txtImageFolderPath.setText(path);
             updateCache(KEY_CARD_IMAGES_PATH, path);
         }
-        load(prefs, dialog.cbSaveToZipFiles, KEY_CARD_IMAGES_SAVE_TO_ZIP, "true");
+        load(prefs, dialog.cbSaveToZipFiles, KEY_CARD_IMAGES_SAVE_TO_ZIP, "true", "false");
         dialog.cbPreferredImageLanguage.setSelectedItem(MageFrame.getPreferences().get(KEY_CARD_IMAGES_PREF_LANGUAGE, CardLanguage.ENGLISH.getCode()));
 
         // rendering settings
@@ -3702,7 +3702,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }
 
     public static boolean isSaveImagesToZip() {
-        return PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_SAVE_TO_ZIP, "true").equals("true");
+        return PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_SAVE_TO_ZIP, "false").equals("true");
     }
 
     private static void load(Preferences prefs, JCheckBox checkBox, String propName, String yesValue) {
