@@ -14,6 +14,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -102,6 +104,14 @@ class WarsTollAttackRestrictionEffect extends RestrictionEffect {
                 return false;
             }
         }
+        return true;
+    }
+
+    @Override
+    public boolean updateForcedAttackersAfter(int numberAttackers, Permanent attackingCreature, Ability source, Game game, Map<UUID, Set<UUID>> creaturesForcedToAttack) {
+        if (numberAttackers == 0) return true;
+        Set<UUID> opponents = game.getOpponents(attackingCreature.getControllerId());
+        creaturesForcedToAttack.put(attackingCreature.getId(), opponents);
         return true;
     }
 
