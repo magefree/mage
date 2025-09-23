@@ -636,4 +636,30 @@ public class BestowTest extends CardTestPlayerBase {
         assertCounterCount(playerA, "Waxmane Baku", CounterType.KI, 1);
         assertLife(playerA, 22);
     }
+
+    @Test
+    public void testBestowSBATiming() {
+        addCard(Zone.HAND, playerA, "Hopeful Eidolon", 2); // +1/+1
+        addCard(Zone.HAND, playerA, "Pyroclasm", 2); // 2 damage
+        addCard(Zone.BATTLEFIELD, playerA, "Plateau", 10);
+        addCard(Zone.BATTLEFIELD, playerA, "Crusader of Odric");
+        addCard(Zone.BATTLEFIELD, playerA, "Memnite");
+        addCard(Zone.BATTLEFIELD, playerA, "Eager Cadet");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hopeful Eidolon using bestow", "Memnite", true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hopeful Eidolon using bestow", "Eager Cadet");
+        checkPT("Memnite P/T", 1, PhaseStep.BEGIN_COMBAT, playerA, "Memnite", 2, 2);
+        checkPT("Eager Cadet P/T", 1, PhaseStep.BEGIN_COMBAT, playerA, "Eager Cadet", 2, 2);
+        checkPT("Crusader P/T", 1, PhaseStep.BEGIN_COMBAT, playerA, "Crusader of Odric", 3, 3);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Pyroclasm");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Hopeful Eidolon", 2);
+        assertPermanentCount(playerA, "Crusader of Odric", 1);
+        assertDamageReceived(playerA, "Crusader of Odric", 2);
+        assertGraveyardCount(playerA, 3);
+    }
 }
