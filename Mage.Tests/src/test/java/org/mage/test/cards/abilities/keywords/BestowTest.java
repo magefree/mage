@@ -128,14 +128,14 @@ public class BestowTest extends CardTestPlayerBase {
     @Test
     public void bestowEnchantmentBecomesCreature() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
-        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
+        addCard(Zone.BATTLEFIELD, playerA, "Safehold Elite"); // 2/2 creature + Persist to return as a 1/1
         addCard(Zone.HAND, playerA, "Hopeful Eidolon");
 
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
         addCard(Zone.HAND, playerB, "Lightning Bolt");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hopeful Eidolon using bestow", "Silvercoat Lion");
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", "Silvercoat Lion");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hopeful Eidolon using bestow", "Safehold Elite");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", "Safehold Elite");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -144,10 +144,12 @@ public class BestowTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
         assertLife(playerB, 20);
 
-        assertPermanentCount(playerA, "Silvercoat Lion", 0);
+        assertPermanentCount(playerA, "Safehold Elite", 1);
+        assertPowerToughness(playerA, "Safehold Elite", 1, 1);
         assertPermanentCount(playerA, "Hopeful Eidolon", 1);
         assertPowerToughness(playerA, "Hopeful Eidolon", 1, 1);
         assertType("Hopeful Eidolon", CardType.CREATURE, true);
+        assertSubtype("Hopeful Eidolon", SubType.SPIRIT);
         assertType("Hopeful Eidolon", CardType.ENCHANTMENT, true);
         assertNotSubtype("Hopeful Eidolon", SubType.AURA);
     }
