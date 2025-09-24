@@ -2,6 +2,7 @@ package mage.cards.y;
 
 import mage.MageInt;
 import mage.MageObjectReference;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -121,7 +122,7 @@ class YedoraGraveGardenerContinuousEffect extends ContinuousEffectImpl {
         target.removeAllSubTypes(game);
         target.addCardType(game, CardType.LAND);
         target.addSubType(game, SubType.FOREST);
-        target.removeAllAbilities(source.getSourceId(), game);
+        target.getColor(game).setColor(ObjectColor.COLORLESS);
         target.addAbility(new GreenManaAbility(), source.getSourceId(), game);
         return true;
     }
