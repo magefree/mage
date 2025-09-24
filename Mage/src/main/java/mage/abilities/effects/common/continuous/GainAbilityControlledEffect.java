@@ -79,7 +79,7 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         if (getAffectedObjectsSet()) {
             for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext(); ) { // filter may not be used again, because object can have changed filter relevant attributes but still geets boost
-                Permanent perm = it.next().getPermanentOrLKIBattlefield(game); //LKI is neccessary for "dies triggered abilities" to work given to permanets  (e.g. Showstopper)
+                Permanent perm = it.next().getPermanent(game);
                 if (perm != null) {
                     for (Ability abilityToAdd : ability) {
                         perm.addAbility(abilityToAdd, source.getSourceId(), game);
