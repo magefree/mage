@@ -141,7 +141,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Vendilion Clique", 118, Rarity.MYTHIC, mage.cards.v.VendilionClique.class));
         cards.add(new SetCardInfo("Swamp", 119, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Sower of Temptation", 120, Rarity.RARE, mage.cards.s.SowerOfTemptation.class));
-        cards.add(new SetCardInfo("Damnation", 121, Rarity.RARE, mage.cards.d.Damnation.class));
+        cards.add(new SetCardInfo("Damnation", 121, Rarity.RARE, mage.cards.d.Damnation.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Enchanted Evening", 122, Rarity.RARE, mage.cards.e.EnchantedEvening.class));
         cards.add(new SetCardInfo("Hallowed Fountain", 123, Rarity.RARE, mage.cards.h.HallowedFountain.class));
         cards.add(new SetCardInfo("Watery Grave", 124, Rarity.RARE, mage.cards.w.WateryGrave.class));
@@ -1063,7 +1063,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Kess, Dissident Mage", 1167, Rarity.MYTHIC, mage.cards.k.KessDissidentMage.class));
         cards.add(new SetCardInfo("Field Marshal", 1168, Rarity.RARE, mage.cards.f.FieldMarshal.class));
         cards.add(new SetCardInfo("Temporal Manipulation", 1169, Rarity.MYTHIC, mage.cards.t.TemporalManipulation.class));
-        cards.add(new SetCardInfo("Dark Ritual", 1170, Rarity.RARE, mage.cards.d.DarkRitual.class));
+        cards.add(new SetCardInfo("Dark Ritual", 1170, Rarity.RARE, mage.cards.d.DarkRitual.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Midnight Reaper", 1171, Rarity.RARE, mage.cards.m.MidnightReaper.class));
         cards.add(new SetCardInfo("Seize the Day", 1172, Rarity.RARE, mage.cards.s.SeizeTheDay.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Faeburrow Elder", 1173, Rarity.RARE, mage.cards.f.FaeburrowElder.class));
@@ -1685,7 +1685,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Dismember", 1674, Rarity.RARE, mage.cards.d.Dismember.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Birds of Paradise", 1675, Rarity.RARE, mage.cards.b.BirdsOfParadise.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Birds of Paradise", "1675b", Rarity.RARE, mage.cards.b.BirdsOfParadise.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Three Visits", 1676, Rarity.RARE, mage.cards.t.ThreeVisits.class));
+        cards.add(new SetCardInfo("Three Visits", 1676, Rarity.RARE, mage.cards.t.ThreeVisits.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Door to Nothingness", 1678, Rarity.RARE, mage.cards.d.DoorToNothingness.class));
         cards.add(new SetCardInfo("Ashnod's Altar", 1679, Rarity.RARE, mage.cards.a.AshnodsAltar.class));
         cards.add(new SetCardInfo("Dark Depths", 1680, Rarity.MYTHIC, mage.cards.d.DarkDepths.class));
