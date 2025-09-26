@@ -2,6 +2,7 @@ package org.mage.test.cards.abilities.keywords;
 
 import mage.MageObject;
 import mage.ObjectColor;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.HasteAbility;
@@ -9,6 +10,7 @@ import mage.cards.Card;
 import mage.constants.ComparisonType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicate;
@@ -61,14 +63,22 @@ public class PrototypeTest extends CardTestPlayerBase {
     }
 
     private void makeTester(Predicate<? super MageObject>... predicates) {
-        FilterSpell filter = new FilterSpell();
+        FilterSpell filterA = new FilterSpell();
+        FilterPermanent filterB = new FilterPermanent();
         for (Predicate<? super MageObject> predicate : predicates) {
-            filter.add(predicate);
+            filterA.add(predicate);
+            filterB.add(predicate);
         }
         addCustomCardWithAbility(
                 "tester", playerA,
                 new SpellCastControllerTriggeredAbility(
-                        new GainLifeEffect(1), filter, false
+                        new GainLifeEffect(1), filterA, false
+                )
+        );
+        addCustomCardWithAbility(
+                "tester", playerB,
+                new EntersBattlefieldAllTriggeredAbility(
+                        new GainLifeEffect(1), filterB, false
                 )
         );
     }
@@ -159,6 +169,7 @@ public class PrototypeTest extends CardTestPlayerBase {
         execute();
 
         assertLife(playerA, 20 + 1);
+        assertLife(playerB, 20 + 1);
     }
 
     @Test
@@ -174,6 +185,7 @@ public class PrototypeTest extends CardTestPlayerBase {
         execute();
 
         assertLife(playerA, 20 + 1);
+        assertLife(playerB, 20 + 1);
     }
 
     @Test
@@ -192,6 +204,7 @@ public class PrototypeTest extends CardTestPlayerBase {
         execute();
 
         assertLife(playerA, 20 + 1);
+        assertLife(playerB, 20 + 1);
     }
 
     @Test
@@ -210,6 +223,7 @@ public class PrototypeTest extends CardTestPlayerBase {
         execute();
 
         assertLife(playerA, 20 + 1);
+        assertLife(playerB, 20 + 1);
     }
 
     @Test
@@ -225,6 +239,7 @@ public class PrototypeTest extends CardTestPlayerBase {
         execute();
 
         assertLife(playerA, 20 + 1);
+        assertLife(playerB, 20 + 1);
     }
 
     @Test
@@ -240,6 +255,7 @@ public class PrototypeTest extends CardTestPlayerBase {
         execute();
 
         assertLife(playerA, 20 + 1);
+        assertLife(playerB, 20 + 1);
     }
 
     @Test
