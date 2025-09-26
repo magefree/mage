@@ -12,6 +12,7 @@ import mage.cards.Card;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
@@ -129,6 +130,11 @@ public class BestowAbility extends SpellAbility {
             card.addSubType(SubType.AURA);
             card.removeCardType(CardType.CREATURE);
             card.removeAllCreatureTypes();
+            if (card instanceof Spell) {
+                ((Spell) card).addAbilityForCopy(new EnchantAbility(new TargetCreaturePermanent()));
+            } else {
+                card.addAbility(new EnchantAbility(new TargetCreaturePermanent()));
+            }
         }
     }
     public static void becomeAura(Game game, MageObject object) {
@@ -137,6 +143,15 @@ public class BestowAbility extends SpellAbility {
             object.addSubType(game, SubType.AURA);
             object.removeCardType(game, CardType.CREATURE);
             object.removeAllCreatureTypes(game);
+            if (object instanceof Permanent) {
+                ((Permanent) object).addAbility(new EnchantAbility(new TargetCreaturePermanent()), object.getId(), game);
+            } else if (object instanceof Spell) {
+                game.getState().addOtherAbility(((Spell) object).getCard(), new EnchantAbility(new TargetCreaturePermanent()));
+            } else if (object instanceof Card) {
+                game.getState().addOtherAbility((Card) object, new EnchantAbility(new TargetCreaturePermanent()));
+            } else {
+                throw new IllegalArgumentException("Bestow temporary becomeAura called on non-Permanent non-Spell object: " + object.getClass().getName());
+            }
         }
     }
 }

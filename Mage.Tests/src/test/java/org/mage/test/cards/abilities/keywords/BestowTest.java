@@ -561,6 +561,24 @@ public class BestowTest extends CardTestPlayerBase {
         assertType("Nylea's Emissary", CardType.ENCHANTMENT, SubType.AURA);
     }
 
+    @Test
+    public void testCastBestowFlashRootwaterShaman() {
+        addCard(Zone.HAND, playerA, "Nylea's Emissary"); // +3/+3, only an aura if cast with bestow
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 6);
+        addCard(Zone.BATTLEFIELD, playerA, "Rootwater Shaman"); //aura spells with enchant creature have flash
+        addCard(Zone.BATTLEFIELD, playerA, "Memnite", 1); // 1/1
+
+        castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Nylea's Emissary using bestow", "Memnite");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Nylea's Emissary", 1);
+        assertPowerToughness(playerA, "Memnite", 4, 4);
+        assertType("Nylea's Emissary", CardType.CREATURE, false);
+        assertType("Nylea's Emissary", CardType.ENCHANTMENT, SubType.AURA);
+    }
 
     /**
      * Tests that copied bestow works correctly both on the stack and battlefield, including with the creature removed
@@ -664,4 +682,5 @@ public class BestowTest extends CardTestPlayerBase {
         assertDamageReceived(playerA, "Crusader of Odric", 2);
         assertGraveyardCount(playerA, 3);
     }
+
 }
