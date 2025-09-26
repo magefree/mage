@@ -33,6 +33,7 @@ public class MediaAndCollaborationPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Cast Down", "2019-1", Rarity.UNCOMMON, mage.cards.c.CastDown.class));
         cards.add(new SetCardInfo("Chandra's Outrage", "2010-3", Rarity.COMMON, mage.cards.c.ChandrasOutrage.class));
         cards.add(new SetCardInfo("Chandra's Spitfire", "2010-4", Rarity.UNCOMMON, mage.cards.c.ChandrasSpitfire.class));
+        cards.add(new SetCardInfo("Chrome Host Seedshark", "2025-20", Rarity.RARE, mage.cards.c.ChromeHostSeedshark.class));
         cards.add(new SetCardInfo("Cloud, Planet's Champion", "2025-13", Rarity.MYTHIC, mage.cards.c.CloudPlanetsChampion.class));
         cards.add(new SetCardInfo("Counterspell", "2021-1", Rarity.RARE, mage.cards.c.Counterspell.class));
         cards.add(new SetCardInfo("Crop Rotation", "2020-7", Rarity.RARE, mage.cards.c.CropRotation.class));
@@ -58,6 +59,7 @@ public class MediaAndCollaborationPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Jace Beleren", "2009-1", Rarity.MYTHIC, mage.cards.j.JaceBeleren.class));
         cards.add(new SetCardInfo("Jace, Memory Adept", "2024-2", Rarity.MYTHIC, mage.cards.j.JaceMemoryAdept.class));
         cards.add(new SetCardInfo("Jamuraan Lion", "1996-3", Rarity.COMMON, mage.cards.j.JamuraanLion.class, RETRO_ART));
+        cards.add(new SetCardInfo("Kaalia of the Vast", "2025-19", Rarity.MYTHIC, mage.cards.k.KaaliaOfTheVast.class));
         cards.add(new SetCardInfo("Kuldotha Phoenix", "2010-5", Rarity.RARE, mage.cards.k.KuldothaPhoenix.class));
         cards.add(new SetCardInfo("Lava Coil", "2019-4", Rarity.UNCOMMON, mage.cards.l.LavaCoil.class));
         cards.add(new SetCardInfo("Lightning Hounds", "2000-1", Rarity.COMMON, mage.cards.l.LightningHounds.class, RETRO_ART));
