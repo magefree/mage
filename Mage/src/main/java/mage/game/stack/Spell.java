@@ -5,6 +5,7 @@ import mage.abilities.*;
 import mage.abilities.costs.mana.ActivationManaAbilityStep;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.keyword.BestowAbility;
 import mage.abilities.keyword.PrototypeAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.*;
@@ -339,9 +340,7 @@ public class Spell extends StackObjectImpl implements Card {
                     // before put to play:
                     // Must be removed first time, after that will be removed by continous effect
                     // Otherwise effects like evolve trigger from creature comes into play event
-                    card.removeCardType(game, CardType.CREATURE);
-                    card.addSubType(game, SubType.AURA);
-                    card.removeAllSubTypes(game, SubTypeSet.CreatureType);
+                    BestowAbility.becomeAura(game, card);
                 }
                 UUID permId;
                 boolean permanentCreated;
@@ -367,9 +366,7 @@ public class Spell extends StackObjectImpl implements Card {
                         permanent.setSpellAbility(ability); // otherwise spell ability without bestow will be set
                         // The continuous effect that makes the permanent an aura doesn't apply until after the permanent has already entered,
                         // so it must be modified manually here first. Same root cause as the Blood Moon problem https://github.com/magefree/mage/issues/4202
-                        permanent.removeCardType(game, CardType.CREATURE);
-                        permanent.addSubType(game, SubType.AURA);
-                        permanent.removeAllSubTypes(game, SubTypeSet.CreatureType);
+                        BestowAbility.becomeAura(game, permanent);
                     }
                     if (isCopy()) {
                         Permanent token = game.getPermanent(permId);

@@ -1,5 +1,6 @@
 package mage.abilities.keyword;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -123,11 +124,19 @@ public class BestowAbility extends SpellAbility {
         // permanently changes to the object, only use on copies
         if (card != null) {
             if (!card.getCardType().contains(CardType.ENCHANTMENT)) {
-                throw new IllegalStateException("Bestow becomeAura called on non-enchantment card");
+                throw new IllegalStateException("Bestow perpetual becomeAura called on non-enchantment card");
             }
             card.addSubType(SubType.AURA);
             card.removeCardType(CardType.CREATURE);
             card.removeAllCreatureTypes();
+        }
+    }
+    public static void becomeAura(Game game, MageObject object) {
+        // temporary changes only
+        if (object != null && object.getCardType(game).contains(CardType.ENCHANTMENT)) {
+            object.addSubType(game, SubType.AURA);
+            object.removeCardType(game, CardType.CREATURE);
+            object.removeAllCreatureTypes(game);
         }
     }
 }
@@ -154,9 +163,7 @@ class BestowTypeEffect extends ContinuousEffectImpl {
             return false;
         }
         if (game.getPermanent(permanent.getAttachedTo()) != null){
-            permanent.removeCardType(game, CardType.CREATURE);
-            permanent.addSubType(game, SubType.AURA);
-            permanent.removeAllCreatureTypes(game);
+            BestowAbility.becomeAura(game, permanent);
         }
         return true;
     }
