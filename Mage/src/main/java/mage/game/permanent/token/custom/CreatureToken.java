@@ -73,6 +73,11 @@ public final class CreatureToken extends TokenImpl {
         return this;
     }
 
+    public CreatureToken withAllCreatureTypes(boolean allCreatureTypes) {
+        this.subtype.setIsAllCreatureTypes(allCreatureTypes);
+        return this;
+    }
+
     private CreatureToken(final CreatureToken token) {
         super(token);
     }

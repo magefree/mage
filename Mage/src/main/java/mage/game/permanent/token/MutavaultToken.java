@@ -1,24 +1,21 @@
-package mage.cards.m;
+package mage.game.permanent.token;
 
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.abilities.mana.ColorlessManaAbility;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.game.permanent.token.custom.CreatureToken;
 
-import java.util.UUID;
-
 /**
- * @author jonubuu
+ * @author TheElk801
  */
-public final class Mutavault extends CardImpl {
+public final class MutavaultToken extends TokenImpl {
 
-    public Mutavault(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
+    public MutavaultToken() {
+        super("Mutavault", "Mutavault token");
+        cardType.add(CardType.LAND);
 
         // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
@@ -31,12 +28,11 @@ public final class Mutavault extends CardImpl {
         ), new GenericManaCost(1)));
     }
 
-    private Mutavault(final Mutavault card) {
-        super(card);
+    private MutavaultToken(final MutavaultToken token) {
+        super(token);
     }
 
-    @Override
-    public Mutavault copy() {
-        return new Mutavault(this);
+    public MutavaultToken copy() {
+        return new MutavaultToken(this);
     }
 }
