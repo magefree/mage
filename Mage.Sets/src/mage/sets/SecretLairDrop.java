@@ -2060,10 +2060,14 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Sylvan Safekeeper", 2109, Rarity.RARE, mage.cards.s.SylvanSafekeeper.class));
         cards.add(new SetCardInfo("Crucible of Worlds", 2110, Rarity.MYTHIC, mage.cards.c.CrucibleOfWorlds.class));
         cards.add(new SetCardInfo("Zuran Orb", 2111, Rarity.RARE, mage.cards.z.ZuranOrb.class));
+        cards.add(new SetCardInfo("Jaws, Relentless Predator", 2175, Rarity.MYTHIC, mage.cards.j.JawsRelentlessPredator.class));
         cards.add(new SetCardInfo("Greensleeves, Maro-Sorcerer", 2193, Rarity.MYTHIC, mage.cards.g.GreensleevesMaroSorcerer.class));
         cards.add(new SetCardInfo("Polyraptor", 2194, Rarity.MYTHIC, mage.cards.p.Polyraptor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Academy Manufactor", 2195, Rarity.RARE, mage.cards.a.AcademyManufactor.class));
         cards.add(new SetCardInfo("Wurmcoil Engine", 2196, Rarity.MYTHIC, mage.cards.w.WurmcoilEngine.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Joel, Resolute Survivor", 2198, Rarity.MYTHIC, mage.cards.j.JoelResoluteSurvivor.class));
+        cards.add(new SetCardInfo("Ellie, Vengeful Hunter", 2203, Rarity.MYTHIC, mage.cards.e.EllieVengefulHunter.class));
+        cards.add(new SetCardInfo("Atreus, Impulsive Son", 2212, Rarity.MYTHIC, mage.cards.a.AtreusImpulsiveSon.class));
         cards.add(new SetCardInfo("Feed the Swarm", 7001, Rarity.RARE, mage.cards.f.FeedTheSwarm.class));
         cards.add(new SetCardInfo("Forge Anew", 7002, Rarity.RARE, mage.cards.f.ForgeAnew.class));
         cards.add(new SetCardInfo("Silence", 7003, Rarity.RARE, mage.cards.s.Silence.class, NON_FULL_USE_VARIOUS));
