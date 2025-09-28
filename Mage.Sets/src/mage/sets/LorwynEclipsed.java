@@ -16,9 +16,9 @@ public final class LorwynEclipsed extends ExpansionSet {
     }
 
     private LorwynEclipsed() {
-        super("Lorwyn Eclipsed", "TLA", ExpansionSet.buildDate(2026, 1, 23), SetType.EXPANSION);
+        super("Lorwyn Eclipsed", "ECL", ExpansionSet.buildDate(2026, 1, 23), SetType.EXPANSION);
         this.blockName = "Lorwyn Eclipsed"; // for sorting in GUI
-        this.hasBasicLands = true;
+        this.hasBasicLands = false; // temporary
 
         cards.add(new SetCardInfo("Bitterbloom Bearer", 310, Rarity.MYTHIC, mage.cards.b.BitterbloomBearer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bitterbloom Bearer", 352, Rarity.MYTHIC, mage.cards.b.BitterbloomBearer.class, NON_FULL_USE_VARIOUS));
