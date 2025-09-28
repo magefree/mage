@@ -139,6 +139,7 @@ Iconic Masters|IMA|
 Ikoria: Lair of Behemoths|IKO|
 Invasion|INV|
 Innistrad|ISD|
+Lorwyn Eclipsed|ECL|
 The Lost Caverns of Ixalan|LCI|
 The Lost Caverns of Ixalan Commander|LCC|
 Innistrad: Midnight Hunt|MID|

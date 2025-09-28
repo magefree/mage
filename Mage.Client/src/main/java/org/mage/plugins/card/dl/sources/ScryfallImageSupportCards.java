@@ -613,6 +613,7 @@ public class ScryfallImageSupportCards {
             add("SPE"); // Marvel's Spider-Man Eternal
             add("TLA"); // Avatar: The Last Airbender
             add("TLE"); // Avatar: The Last Airbender Eternal
+            add("ECL"); // Lorwyn Eclipsed
 
             // Custom sets using Scryfall images - must provide a direct link for each card in directDownloadLinks
             add("CALC"); // Custom Alchemized versions of existing cards
