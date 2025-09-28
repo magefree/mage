@@ -9,29 +9,29 @@ import java.io.ObjectStreamException;
 /**
  * @author LevelX2
  */
-public class PartnerFatherAndSonAbility extends StaticAbility implements MageSingleton {
+public class PartnerSurvivorsAbility extends StaticAbility implements MageSingleton {
 
-    private static final PartnerFatherAndSonAbility instance = new PartnerFatherAndSonAbility();
+    private static final PartnerSurvivorsAbility instance = new PartnerSurvivorsAbility();
 
     private Object readResolve() throws ObjectStreamException {
         return instance;
     }
 
-    public static PartnerFatherAndSonAbility getInstance() {
+    public static PartnerSurvivorsAbility getInstance() {
         return instance;
     }
 
-    private PartnerFatherAndSonAbility() {
+    private PartnerSurvivorsAbility() {
         super(Zone.BATTLEFIELD, null);
     }
 
     @Override
     public String getRule() {
-        return "Partner&mdash;Father & son <i>(You can have two commanders if both have this ability.)</i>";
+        return "Partner&mdash;Survivors <i>(You can have two commanders if both have this ability.)</i>";
     }
 
     @Override
-    public PartnerFatherAndSonAbility copy() {
+    public PartnerSurvivorsAbility copy() {
         return instance;
     }
 
