@@ -1127,12 +1127,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
         int actualCount = 0;
         for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents()) {
-            if (permanent instanceof PermanentToken) {
-                if (permanent.getControllerId().equals(player.getId())) {
-                    if (isObjectHaveTargetNameOrAlias(player, permanent, tokenName)) {
-                        actualCount++;
-                    }
-                }
+            if (permanent instanceof PermanentToken
+                    && permanent.getControllerId().equals(player.getId())
+                    && isObjectHaveTargetNameOrAlias(player, permanent, tokenName)) {
+                actualCount++;
             }
         }
         Assert.assertEquals("(Battlefield) Tokens counts for " + player.getName() + " are not equal (" + tokenName + ')', count, actualCount);
