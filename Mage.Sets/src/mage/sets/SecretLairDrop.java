@@ -2070,6 +2070,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Ellie, Vengeful Hunter", 2203, Rarity.MYTHIC, mage.cards.e.EllieVengefulHunter.class));
         cards.add(new SetCardInfo("Kratos, God of War", 2207, Rarity.MYTHIC, mage.cards.k.KratosGodOfWar.class));
         cards.add(new SetCardInfo("Atreus, Impulsive Son", 2212, Rarity.MYTHIC, mage.cards.a.AtreusImpulsiveSon.class));
+        cards.add(new SetCardInfo("Aloy, Savior of Meridian", 2221, Rarity.MYTHIC, mage.cards.a.AloySaviorOfMeridian.class));
         cards.add(new SetCardInfo("Feed the Swarm", 7001, Rarity.RARE, mage.cards.f.FeedTheSwarm.class));
         cards.add(new SetCardInfo("Forge Anew", 7002, Rarity.RARE, mage.cards.f.ForgeAnew.class));
         cards.add(new SetCardInfo("Silence", 7003, Rarity.RARE, mage.cards.s.Silence.class, NON_FULL_USE_VARIOUS));
