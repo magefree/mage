@@ -2066,6 +2066,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Academy Manufactor", 2195, Rarity.RARE, mage.cards.a.AcademyManufactor.class));
         cards.add(new SetCardInfo("Wurmcoil Engine", 2196, Rarity.MYTHIC, mage.cards.w.WurmcoilEngine.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Joel, Resolute Survivor", 2198, Rarity.MYTHIC, mage.cards.j.JoelResoluteSurvivor.class));
+        cards.add(new SetCardInfo("Abby, Merciless Soldier", 2202, Rarity.MYTHIC, mage.cards.a.AbbyMercilessSoldier.class));
         cards.add(new SetCardInfo("Ellie, Vengeful Hunter", 2203, Rarity.MYTHIC, mage.cards.e.EllieVengefulHunter.class));
         cards.add(new SetCardInfo("Kratos, God of War", 2207, Rarity.MYTHIC, mage.cards.k.KratosGodOfWar.class));
         cards.add(new SetCardInfo("Atreus, Impulsive Son", 2212, Rarity.MYTHIC, mage.cards.a.AtreusImpulsiveSon.class));
