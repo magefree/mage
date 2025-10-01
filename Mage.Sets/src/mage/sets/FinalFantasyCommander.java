@@ -165,6 +165,7 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Fight Rigging", 303, Rarity.RARE, mage.cards.f.FightRigging.class));
         cards.add(new SetCardInfo("Final Judgment", 243, Rarity.MYTHIC, mage.cards.f.FinalJudgment.class));
         cards.add(new SetCardInfo("Fire-Lit Thicket", 392, Rarity.RARE, mage.cards.f.FireLitThicket.class));
+        cards.add(new SetCardInfo("Flash Photography", 463, Rarity.RARE, mage.cards.f.FlashPhotography.class));
         cards.add(new SetCardInfo("Flayer of the Hatebound", 293, Rarity.RARE, mage.cards.f.FlayerOfTheHatebound.class));
         cards.add(new SetCardInfo("Flooded Grove", 393, Rarity.RARE, mage.cards.f.FloodedGrove.class));
         cards.add(new SetCardInfo("Foreboding Ruins", 394, Rarity.RARE, mage.cards.f.ForebodingRuins.class));
