@@ -416,6 +416,7 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Thancred Waters", 139, Rarity.RARE, mage.cards.t.ThancredWaters.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thancred Waters", 31, Rarity.RARE, mage.cards.t.ThancredWaters.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Destined Black Mage", 447, Rarity.RARE, mage.cards.t.TheDestinedBlackMage.class));
+        cards.add(new SetCardInfo("The Destined Thief", 446, Rarity.RARE, mage.cards.t.TheDestinedThief.class));
         cards.add(new SetCardInfo("The Destined Warrior", 443, Rarity.RARE, mage.cards.t.TheDestinedWarrior.class));
         cards.add(new SetCardInfo("The Destined White Mage", 444, Rarity.RARE, mage.cards.t.TheDestinedWhiteMage.class));
         cards.add(new SetCardInfo("The Falcon, Airship Restored", 116, Rarity.RARE, mage.cards.t.TheFalconAirshipRestored.class, NON_FULL_USE_VARIOUS));
