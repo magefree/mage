@@ -25,6 +25,12 @@ public class SecretLairDrop extends ExpansionSet {
         // so it must be split to two different cards (one card for one side, another card for another side),
         // also must add second side to directDownloadLinks in scryfall
 
+        // workaround to fix compilation error: java: code too large
+        addPart1(); // 1-1000
+        addPart2(); // 1001+
+    }
+
+    private void addPart1() {
         cards.add(new SetCardInfo("Counterspell", "99999SCTLR", Rarity.RARE, mage.cards.c.Counterspell.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Viscera Seer", "99999VS", Rarity.COMMON, mage.cards.v.VisceraSeer.class)); // workaround until "VS" supported as card number
         cards.add(new SetCardInfo("Snow-Covered Plains", 1, Rarity.LAND, mage.cards.s.SnowCoveredPlains.class, NON_FULL_USE_VARIOUS));
@@ -896,6 +902,9 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Arcane Signet", 908, Rarity.RARE, mage.cards.a.ArcaneSignet.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gilded Lotus", 909, Rarity.RARE, mage.cards.g.GildedLotus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sol Ring", 910, Rarity.RARE, mage.cards.s.SolRing.class, NON_FULL_USE_VARIOUS));
+    }
+
+    private void addPart2() {
         cards.add(new SetCardInfo("Elspeth, Knight-Errant", 1001, Rarity.MYTHIC, mage.cards.e.ElspethKnightErrant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Patron Wizard", 1002, Rarity.RARE, mage.cards.p.PatronWizard.class));
         cards.add(new SetCardInfo("Berserk", 1003, Rarity.MYTHIC, mage.cards.b.Berserk.class, NON_FULL_USE_VARIOUS));
