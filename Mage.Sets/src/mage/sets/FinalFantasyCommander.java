@@ -413,6 +413,7 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Terra, Herald of Hope", 4, Rarity.MYTHIC, mage.cards.t.TerraHeraldOfHope.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thancred Waters", 139, Rarity.RARE, mage.cards.t.ThancredWaters.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thancred Waters", 31, Rarity.RARE, mage.cards.t.ThancredWaters.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Destined Warrior", 443, Rarity.RARE, mage.cards.t.TheDestinedWarrior.class));
         cards.add(new SetCardInfo("The Falcon, Airship Restored", 116, Rarity.RARE, mage.cards.t.TheFalconAirshipRestored.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Falcon, Airship Restored", 45, Rarity.RARE, mage.cards.t.TheFalconAirshipRestored.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Warring Triad", 193, Rarity.RARE, mage.cards.t.TheWarringTriad.class, NON_FULL_USE_VARIOUS));
