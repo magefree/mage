@@ -17,7 +17,7 @@ public final class FinalFantasyCommander extends ExpansionSet {
 
     private FinalFantasyCommander() {
         super("Final Fantasy Commander", "FIC", ExpansionSet.buildDate(2025, 6, 13), SetType.SUPPLEMENTAL);
-        this.hasBasicLands = false;
+        this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Aerith, Last Ancient", 163, Rarity.RARE, mage.cards.a.AerithLastAncient.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aerith, Last Ancient", 471, Rarity.RARE, mage.cards.a.AerithLastAncient.class, NON_FULL_USE_VARIOUS));
