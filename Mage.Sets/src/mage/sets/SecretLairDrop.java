@@ -1041,7 +1041,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 1133, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", 1134, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Abundant Growth", 1135, Rarity.RARE, mage.cards.a.AbundantGrowth.class, FULL_ART_USE_VARIOUS));
-        cards.add(new SetCardInfo("Mycoloth", 1136, Rarity.RARE, mage.cards.m.Mycoloth.class, FULL_ART));
+        cards.add(new SetCardInfo("Mycoloth", 1136, Rarity.RARE, mage.cards.m.Mycoloth.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Ghave, Guru of Spores", 1137, Rarity.MYTHIC, mage.cards.g.GhaveGuruOfSpores.class, FULL_ART));
         cards.add(new SetCardInfo("Slimefoot, the Stowaway", 1138, Rarity.RARE, mage.cards.s.SlimefootTheStowaway.class, FULL_ART));
         cards.add(new SetCardInfo("Elspeth, Sun's Champion", 1140, Rarity.MYTHIC, mage.cards.e.ElspethSunsChampion.class));
