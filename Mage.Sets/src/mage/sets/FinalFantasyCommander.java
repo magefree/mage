@@ -322,6 +322,7 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Sacred Peaks", 418, Rarity.COMMON, mage.cards.s.SacredPeaks.class));
         cards.add(new SetCardInfo("Scavenger Grounds", 419, Rarity.RARE, mage.cards.s.ScavengerGrounds.class));
         cards.add(new SetCardInfo("Scholar of New Horizons", 252, Rarity.RARE, mage.cards.s.ScholarOfNewHorizons.class));
+        cards.add(new SetCardInfo("Search for Dagger", 459, Rarity.RARE, mage.cards.s.SearchForDagger.class));
         cards.add(new SetCardInfo("Seaside Citadel", 420, Rarity.UNCOMMON, mage.cards.s.SeasideCitadel.class));
         cards.add(new SetCardInfo("Secret Rendezvous", 217, Rarity.UNCOMMON, mage.cards.s.SecretRendezvous.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Secret Rendezvous", 218, Rarity.UNCOMMON, mage.cards.s.SecretRendezvous.class, NON_FULL_USE_VARIOUS));
