@@ -164,6 +164,7 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Fandaniel, Telophoroi Ascian", 46, Rarity.RARE, mage.cards.f.FandanielTelophoroiAscian.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Farewell", 242, Rarity.RARE, mage.cards.f.Farewell.class));
         cards.add(new SetCardInfo("Farseek", 302, Rarity.COMMON, mage.cards.f.Farseek.class));
+        cards.add(new SetCardInfo("Fated Clash", 449, Rarity.RARE, mage.cards.f.FatedClash.class));
         cards.add(new SetCardInfo("Fathom Mage", 325, Rarity.RARE, mage.cards.f.FathomMage.class));
         cards.add(new SetCardInfo("Fetid Heath", 391, Rarity.RARE, mage.cards.f.FetidHeath.class));
         cards.add(new SetCardInfo("Fight Rigging", 303, Rarity.RARE, mage.cards.f.FightRigging.class));
