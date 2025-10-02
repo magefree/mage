@@ -76,6 +76,7 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Bugenhagen, Wise Elder", 66, Rarity.RARE, mage.cards.b.BugenhagenWiseElder.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cait Sith, Fortune Teller", 151, Rarity.RARE, mage.cards.c.CaitSithFortuneTeller.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cait Sith, Fortune Teller", 54, Rarity.RARE, mage.cards.c.CaitSithFortuneTeller.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Campsite Cuisine", 464, Rarity.RARE, mage.cards.c.CampsiteCuisine.class));
         cards.add(new SetCardInfo("Canopy Vista", 378, Rarity.RARE, mage.cards.c.CanopyVista.class));
         cards.add(new SetCardInfo("Celes, Rune Knight", 1, Rarity.MYTHIC, mage.cards.c.CelesRuneKnight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Celes, Rune Knight", 167, Rarity.MYTHIC, mage.cards.c.CelesRuneKnight.class, NON_FULL_USE_VARIOUS));
