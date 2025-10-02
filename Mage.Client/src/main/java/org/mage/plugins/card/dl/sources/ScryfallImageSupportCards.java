@@ -535,7 +535,7 @@ public class ScryfallImageSupportCards {
             add("SCD"); // Starter Commander Decks
             add("PW23"); // Wizards Play Network 2023
             add("P23"); // Judge Gift Cards 2023
-            add("SLC"); // Secret Lair 30th Anniversary Countdown Kit
+            add("SLC"); // Secret Lair Countdown
             add("DMR"); // Dominaria Remastered
             add("ONE"); // Phyrexia: All Will Be One
             add("ONC"); // Phyrexia: All Will Be One Commander
