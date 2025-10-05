@@ -34,6 +34,7 @@ public class MediaAndCollaborationPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Chandra's Outrage", "2010-3", Rarity.COMMON, mage.cards.c.ChandrasOutrage.class));
         cards.add(new SetCardInfo("Chandra's Spitfire", "2010-4", Rarity.UNCOMMON, mage.cards.c.ChandrasSpitfire.class));
         cards.add(new SetCardInfo("Chrome Host Seedshark", "2025-20", Rarity.RARE, mage.cards.c.ChromeHostSeedshark.class));
+        cards.add(new SetCardInfo("Cloud, Midgar Mercenary", "2025-21", Rarity.MYTHIC, mage.cards.c.CloudMidgarMercenary.class));
         cards.add(new SetCardInfo("Cloud, Planet's Champion", "2025-13", Rarity.MYTHIC, mage.cards.c.CloudPlanetsChampion.class));
         cards.add(new SetCardInfo("Counterspell", "2021-1", Rarity.RARE, mage.cards.c.Counterspell.class));
         cards.add(new SetCardInfo("Crop Rotation", "2020-7", Rarity.RARE, mage.cards.c.CropRotation.class));
