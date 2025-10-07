@@ -817,10 +817,13 @@ public class ScryfallImageSupportTokens {
 
             // SLD
             put("SLD/Angel", "https://api.scryfall.com/cards/sld/1340?format=image");
+            put("SLD/Blood", "https://api.scryfall.com/cards/sld/2180?format=image");
             put("SLD/Cat/1", "https://api.scryfall.com/cards/sld/1517?format=image");
             put("SLD/Cat/2", "https://api.scryfall.com/cards/sld/27?format=image");
             put("SLD/Cat/3", "https://api.scryfall.com/cards/sld/28?format=image");
             put("SLD/Clue", "https://api.scryfall.com/cards/sld/348/en?format=image");
+            put("SLD/Cordyceps Infected/1", "https://api.scryfall.com/cards/sld/2201?format=image");
+            put("SLD/Cordyceps Infected/2", "https://api.scryfall.com/cards/sld/2206?format=image");
             put("SLD/Dog", "https://api.scryfall.com/cards/sld/1516?format=image");
             put("SLD/Egg", "https://api.scryfall.com/cards/sld/1398?format=image");
             put("SLD/Faerie Rogue/1", "https://api.scryfall.com/cards/sld/13/en?format=image");
