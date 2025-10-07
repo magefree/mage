@@ -468,6 +468,7 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Vincent, Vengeful Atoner", 64, Rarity.RARE, mage.cards.v.VincentVengefulAtoner.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vindicate", 330, Rarity.RARE, mage.cards.v.Vindicate.class));
         cards.add(new SetCardInfo("Vineglimmer Snarl", 440, Rarity.RARE, mage.cards.v.VineglimmerSnarl.class));
+        cards.add(new SetCardInfo("Vivi's Persistence", 458, Rarity.RARE, mage.cards.v.VivisPersistence.class));
         cards.add(new SetCardInfo("Void Rend", 331, Rarity.RARE, mage.cards.v.VoidRend.class));
         cards.add(new SetCardInfo("Wakka, Devoted Guardian", 190, Rarity.RARE, mage.cards.w.WakkaDevotedGuardian.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wakka, Devoted Guardian", 477, Rarity.RARE, mage.cards.w.WakkaDevotedGuardian.class, NON_FULL_USE_VARIOUS));
