@@ -333,6 +333,7 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Secret Rendezvous", 218, Rarity.UNCOMMON, mage.cards.s.SecretRendezvous.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Secret Rendezvous", 219, Rarity.UNCOMMON, mage.cards.s.SecretRendezvous.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Secret Rendezvous", 253, Rarity.UNCOMMON, mage.cards.s.SecretRendezvous.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Seifer, Balamb Rival", 451, Rarity.RARE, mage.cards.s.SeiferBalambRival.class));
         cards.add(new SetCardInfo("Sephiroth, Fallen Hero", 182, Rarity.RARE, mage.cards.s.SephirothFallenHero.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sephiroth, Fallen Hero", 92, Rarity.RARE, mage.cards.s.SephirothFallenHero.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sepulchral Primordial", 284, Rarity.RARE, mage.cards.s.SepulchralPrimordial.class));
