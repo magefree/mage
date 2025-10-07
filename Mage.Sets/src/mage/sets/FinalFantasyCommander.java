@@ -258,6 +258,7 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Maester Seymour", 160, Rarity.RARE, mage.cards.m.MaesterSeymour.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Maester Seymour", 68, Rarity.RARE, mage.cards.m.MaesterSeymour.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mask of Memory", 350, Rarity.UNCOMMON, mage.cards.m.MaskOfMemory.class));
+        cards.add(new SetCardInfo("Mega Flare", 456, Rarity.RARE, mage.cards.m.MegaFlare.class));
         cards.add(new SetCardInfo("Meteor Golem", 351, Rarity.UNCOMMON, mage.cards.m.MeteorGolem.class));
         cards.add(new SetCardInfo("Millikin", 352, Rarity.UNCOMMON, mage.cards.m.Millikin.class));
         cards.add(new SetCardInfo("Mind Stone", 353, Rarity.UNCOMMON, mage.cards.m.MindStone.class));
