@@ -18,7 +18,7 @@ import mage.filter.FilterPermanent;
  */
 public final class SkyshroudCutter extends CardImpl {
     
-    private static final FilterPermanent filter = new FilterPermanent("If you control a Forest");
+    private static final FilterPermanent filter = new FilterPermanent("you control a Forest");
     
     static {
         filter.add(SubType.FOREST.getPredicate());

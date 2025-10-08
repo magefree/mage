@@ -83,7 +83,7 @@ class DustOfMomentsEffect extends OneShotEffect {
                 permanent.addCounters(CounterType.TIME.createInstance(2), source, game);
             }
         }
-        for (Card card : game.getExile().getCards(filter.getCardFilter(), game)) {
+        for (Card card : game.getExile().getCardsInRange(filter.getCardFilter(), source.getControllerId(), source, game)) {
             if (remove) {
                 card.removeCounters(CounterType.TIME.createInstance(2), source, game);
             } else {

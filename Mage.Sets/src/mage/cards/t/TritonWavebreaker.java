@@ -42,7 +42,7 @@ public final class TritonWavebreaker extends CardImpl {
         // As long as Triton Wavebreaker is a creature, it has prowess.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(new ProwessAbility(), Duration.WhileOnBattlefield),
-                condition, "as long as {this} is a creature, it has prowess"
+                condition, "as long as this permanent is a creature, it has prowess"
         )));
 
         // Enchanted creature gets +1/+1 and has prowess.

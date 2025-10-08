@@ -39,7 +39,7 @@ public final class KyrenLegate extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // If an opponent controls a Plains and you control a Mountain, you may cast this spell without paying its mana cost.
-        Condition condition = new CompoundCondition("If an opponent controls a Plains and you control a Mountain",
+        Condition condition = new CompoundCondition("an opponent controls a Plains and you control a Mountain",
                 new OpponentControlsPermanentCondition(filterPlains),
                 new PermanentsOnTheBattlefieldCondition(filterMountain));
         this.addAbility(new AlternativeCostSourceAbility(null, condition));

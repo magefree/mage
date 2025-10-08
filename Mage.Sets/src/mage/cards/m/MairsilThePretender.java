@@ -135,14 +135,12 @@ class MairsilThePretenderGainAbilitiesEffect extends ContinuousEffectImpl {
         if (perm == null) {
             return false;
         }
-        for (Card card : game.getExile().getAllCards(game)) {
-            if (filter.match(card, game) && Objects.equals(card.getOwnerId(), perm.getControllerId())) {
-                for (Ability ability : card.getAbilities(game)) {
-                    if (ability.isActivatedAbility()) {
-                        ActivatedAbility copyAbility = (ActivatedAbility) ability.copy();
-                        copyAbility.setMaxActivationsPerTurn(1);
-                        perm.addAbility(copyAbility, source.getSourceId(), game, true);
-                    }
+        for (Card card : game.getExile().getCardsOwned(filter, perm.getControllerId(), source, game)) {
+            for (Ability ability : card.getAbilities(game)) {
+                if (ability.isActivatedAbility()) {
+                    ActivatedAbility copyAbility = (ActivatedAbility) ability.copy();
+                    copyAbility.setMaxActivationsPerTurn(1);
+                    perm.addAbility(copyAbility, source.getSourceId(), game, true);
                 }
             }
         }

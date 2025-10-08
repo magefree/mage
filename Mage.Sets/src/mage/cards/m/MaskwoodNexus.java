@@ -96,7 +96,7 @@ class MaskwoodNexusEffect extends ContinuousEffectImpl {
                 .forEach(affectedCards::add);
 
         // in Exile
-        game.getState().getExile().getAllCards(game, controller.getId()).stream()
+        game.getState().getExile().getCardsOwned(game, controller.getId()).stream()
                 .filter(card -> card.isOwnedBy(controller.getId()))
                 .forEach(affectedCards::add);
 

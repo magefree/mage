@@ -6,14 +6,13 @@ import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
 import mage.cards.Card;
 import mage.constants.*;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
@@ -90,9 +89,9 @@ public class BestowAbility extends SpellAbility {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.addTarget(auraTarget);
         this.addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new SimpleStaticAbility(new BestowEntersBattlefieldEffect());
+        Ability ability = new SimpleStaticAbility(new BestowTypeEffect());
         ability.setRuleVisible(false);
-        addSubAbility(ability);
+        this.addSubAbility(ability);
     }
 
     protected BestowAbility(final BestowAbility ability) {
@@ -122,70 +121,65 @@ public class BestowAbility extends SpellAbility {
         sb.append(" <i>(If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)</i>");
         return sb.toString();
     }
-
-    public static void becomeCreature(Permanent permanent, Game game) {
-        // permanently changes to the object
-        if (permanent != null) {
-            MageObject basicObject = permanent.getBasicMageObject();
-            if (basicObject != null) {
-                game.checkStateAndTriggered();  // Bug #8157
-                basicObject.getSubtype().remove(SubType.AURA);
-                basicObject.addCardType(CardType.CREATURE);
-            }
-            permanent.getSubtype().remove(SubType.AURA);
-            permanent.addCardType(CardType.CREATURE);
-        }
-    }
-
     public static void becomeAura(Card card) {
-        // permanently changes to the object
+        // permanently changes to the object, only use on copies
         if (card != null) {
+            if (!card.getCardType().contains(CardType.ENCHANTMENT)) {
+                throw new IllegalStateException("Bestow perpetual becomeAura called on non-enchantment card");
+            }
             card.addSubType(SubType.AURA);
             card.removeCardType(CardType.CREATURE);
-            card.addCardType(CardType.ENCHANTMENT);
+            card.removeAllCreatureTypes();
+            if (card instanceof Spell) {
+                ((Spell) card).addAbilityForCopy(new EnchantAbility(new TargetCreaturePermanent()));
+            } else {
+                card.addAbility(new EnchantAbility(new TargetCreaturePermanent()));
+            }
+        }
+    }
+    public static void becomeAura(Game game, MageObject object) {
+        // temporary changes only
+        if (object != null && object.getCardType(game).contains(CardType.ENCHANTMENT)) {
+            object.addSubType(game, SubType.AURA);
+            object.removeCardType(game, CardType.CREATURE);
+            object.removeAllCreatureTypes(game);
+            if (object instanceof Permanent) {
+                ((Permanent) object).addAbility(new EnchantAbility(new TargetCreaturePermanent()), object.getId(), game);
+            } else if (object instanceof Spell) {
+                game.getState().addOtherAbility(((Spell) object).getCard(), new EnchantAbility(new TargetCreaturePermanent()));
+            } else if (object instanceof Card) {
+                game.getState().addOtherAbility((Card) object, new EnchantAbility(new TargetCreaturePermanent()));
+            } else {
+                throw new IllegalArgumentException("Bestow temporary becomeAura called on non-Permanent non-Spell object: " + object.getClass().getName());
+            }
         }
     }
 }
 
-class BestowEntersBattlefieldEffect extends ReplacementEffectImpl {
+class BestowTypeEffect extends ContinuousEffectImpl {
 
-    public BestowEntersBattlefieldEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Neutral);
+    BestowTypeEffect() {
+        super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
     }
 
-    protected BestowEntersBattlefieldEffect(final BestowEntersBattlefieldEffect effect) {
+    private BestowTypeEffect(final BestowTypeEffect effect) {
         super(effect);
     }
 
     @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return EventType.ENTERS_THE_BATTLEFIELD_SELF == event.getType();
+    public BestowTypeEffect copy() {
+        return new BestowTypeEffect(this);
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getTargetId().equals(source.getSourceId());
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent bestowPermanent = game.getPermanentEntering(source.getSourceId());
-        if (bestowPermanent == null || !bestowPermanent.hasSubtype(SubType.AURA, game)) {
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        if (permanent == null) {
             return false;
         }
-
-        // change types permanently
-        MageObject basicObject = bestowPermanent.getBasicMageObject();
-        if (basicObject != null && !basicObject.getSubtype().contains(SubType.AURA)) {
-            basicObject.addSubType(SubType.AURA);
-            basicObject.removeCardType(CardType.CREATURE);
+        if (game.getPermanent(permanent.getAttachedTo()) != null){
+            BestowAbility.becomeAura(game, permanent);
         }
-        return false;
+        return true;
     }
-
-    @Override
-    public BestowEntersBattlefieldEffect copy() {
-        return new BestowEntersBattlefieldEffect(this);
-    }
-
 }

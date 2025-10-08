@@ -125,7 +125,7 @@ class LivioOathswornSentinelReturnEffect extends OneShotEffect {
         }
         Set<Card> cards = game
                 .getExile()
-                .getAllCards(game)
+                .getCardsInRange(game, player.getId())
                 .stream()
                 .filter(Objects::nonNull)
                 .filter(card -> card.getCounters(game).containsKey(CounterType.AEGIS))

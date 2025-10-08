@@ -80,7 +80,7 @@ class EncroachingMycosynthEffect extends ContinuousEffectImpl {
             }
         }
         // in Exile
-        for (Card card : game.getState().getExile().getAllCards(game, source.getControllerId())) {
+        for (Card card : game.getState().getExile().getCardsOwned(game, source.getControllerId())) {
             if (card.isPermanent(game) && !card.isLand(game) && !card.isArtifact(game)) {
                 card.addCardType(game, CardType.ARTIFACT);
             }

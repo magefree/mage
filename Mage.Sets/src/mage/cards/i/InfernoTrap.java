@@ -63,7 +63,7 @@ enum InfernoTrapCondition implements Condition {
 
     @Override
     public String toString() {
-        return "If you've been dealt damage by two or more creatures this turn";
+        return "you've been dealt damage by two or more creatures this turn";
     }
 }
 

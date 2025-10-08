@@ -8,8 +8,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.util.CardUtil;
 
-import java.util.Locale;
-
 /**
  * @author TheElk801
  */

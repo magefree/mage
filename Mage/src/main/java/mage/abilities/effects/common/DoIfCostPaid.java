@@ -19,6 +19,7 @@ public class DoIfCostPaid extends OneShotEffect {
 
     protected final Effects executingEffects;
     protected final Effects otherwiseEffects;
+    protected String otherwiseText = "If you don't";
     protected final Cost cost;
     private final String chooseUseText;
     private final boolean optional;
@@ -76,6 +77,11 @@ public class DoIfCostPaid extends OneShotEffect {
 
     public DoIfCostPaid addOtherwiseEffect(Effect effect) {
         otherwiseEffects.add(effect);
+        return this;
+    }
+
+    public DoIfCostPaid setOtherwiseText(String otherwiseText) {
+        this.otherwiseText = otherwiseText;
         return this;
     }
 
@@ -178,7 +184,7 @@ public class DoIfCostPaid extends OneShotEffect {
         return (optional ? "you may " : "")
                 + CardUtil.addCostVerb(cost.getText()) + "."
                 + (!executingEffects.isEmpty() ? " If you do, " + executingEffects.getText(mode) : "")
-                + (!otherwiseEffects.isEmpty() ? " If you don't, " + otherwiseEffects.getText(mode) : "");
+                + (!otherwiseEffects.isEmpty() ? " " + otherwiseText + ", " + otherwiseEffects.getText(mode) : "");
     }
 
     @Override

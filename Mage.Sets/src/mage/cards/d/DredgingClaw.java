@@ -82,6 +82,6 @@ class DredgingClawTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a creature enters the battlefield from your graveyard, you may attach {this} to it.";
+        return "Whenever a creature enters from your graveyard, you may attach {this} to it.";
     }
 }

@@ -44,7 +44,7 @@ public final class SpectrumSentinel extends CardImpl {
 
         // Whenever a nonbasic land enters the battlefield under an opponent's control, you gain 1 life.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(new GainLifeEffect(1), filter2)
-                .setTriggerPhrase("Whenever a nonbasic land enters the battlefield under an opponent's control, "));
+                .setTriggerPhrase("Whenever a nonbasic land an opponent controls enters, "));
     }
 
     private SpectrumSentinel(final SpectrumSentinel card) {

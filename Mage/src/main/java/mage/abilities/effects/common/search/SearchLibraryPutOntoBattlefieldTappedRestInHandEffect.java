@@ -26,7 +26,7 @@ public class SearchLibraryPutOntoBattlefieldTappedRestInHandEffect extends Searc
         super(target, Outcome.PutLandInPlay);
         staticText = "search your library for " + target.getDescription() +
                 ", reveal those cards, put " + CardUtil.numberToText(numToBattlefield) + " onto the battlefield tapped and the other into your hand, then shuffle";
-        this.filter = new FilterCard((numToBattlefield > 1 ? "cards" : "card") + "to put on the battlefield tapped");
+        this.filter = new FilterCard((numToBattlefield > 1 ? "cards" : "card") + " to put on the battlefield tapped");
         this.numToBattlefield = numToBattlefield;
     }
 

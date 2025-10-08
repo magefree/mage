@@ -86,6 +86,7 @@ public enum CounterType {
     FELLOWSHIP("fellowship"),
     FETCH("fetch"),
     FILIBUSTER("filibuster"),
+    FILM("film"),
     FINALITY("finality"),
     FIRE("fire"),
     FIRST_STRIKE("first strike"),

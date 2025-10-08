@@ -30,7 +30,7 @@ public final class ProteanRaider extends CardImpl {
 
         // <i>Raid</i> &mdash; If you attacked with a creature this turn, you may have Protean Raider enter the battlefield as a copy of any creature on the battlefield.
         Ability ability = new EntersBattlefieldAbility(new CopyPermanentEffect(), true, RaidCondition.instance,
-                "<i>Raid</i> &mdash; If you attacked this turn, you may have {this} enter the battlefield as a copy of any creature on the battlefield.", "");
+                "If you attacked this turn, you may have {this} enter the battlefield as a copy of any creature on the battlefield.", "");
         ability.setAbilityWord(AbilityWord.RAID);
         ability.addHint(RaidHint.instance);
         this.addAbility(ability, new PlayerAttackedWatcher());

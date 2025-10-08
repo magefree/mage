@@ -52,6 +52,6 @@ enum ArrowVolleyTrapCondition implements Condition {
 
     @Override
     public String toString() {
-        return "If four or more creatures are attacking";
+        return "four or more creatures are attacking";
     }
 }

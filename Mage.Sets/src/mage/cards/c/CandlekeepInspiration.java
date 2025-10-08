@@ -65,7 +65,7 @@ enum CandlekeepInspirationValue implements DynamicValue {
                         .getCards(game)
                         .stream(),
                 game.getExile()
-                        .getAllCards(game, sourceAbility.getControllerId())
+                        .getCardsOwned(game, sourceAbility.getControllerId())
                         .stream()
         )
                 .filter(Objects::nonNull)

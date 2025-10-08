@@ -48,8 +48,8 @@ public final class EvolvedSpinoderm extends CardImpl {
 
         // Evolved Spinoderm has trample as long as it was two or fewer oil counters on it, Otherwise, it has hexproof.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
-                new GainAbilitySourceEffect(HexproofAbility.getInstance()),
                 new GainAbilitySourceEffect(TrampleAbility.getInstance()),
+                new GainAbilitySourceEffect(HexproofAbility.getInstance()),
                 condition1, "{this} has trample as long as it has two " +
                 "or fewer oil counters on it. Otherwise, it has hexproof"
         )));

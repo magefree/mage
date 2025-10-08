@@ -72,6 +72,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected boolean monstrous;
     protected boolean renowned;
     protected boolean suspected;
+    protected boolean harnessed = false;
     protected boolean manifested = false;
     protected boolean cloaked = false;
     protected boolean morphed = false;
@@ -179,6 +180,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.monstrous = permanent.monstrous;
         this.renowned = permanent.renowned;
         this.suspected = permanent.suspected;
+        this.harnessed = permanent.harnessed;
         this.ringBearerFlag = permanent.ringBearerFlag;
         this.classLevel = permanent.classLevel;
         this.goadingPlayers.addAll(permanent.goadingPlayers);
@@ -1543,7 +1545,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public boolean canBlock(UUID attackerId, Game game) {
-        if (tapped && game.getState().getContinuousEffects().asThough(this.getId(), AsThoughEffectType.BLOCK_TAPPED, null, this.getControllerId(), game).isEmpty() || isBattle(game) || isSuspected()) {
+        if (tapped && game.getState().getContinuousEffects().asThough(this.getId(), AsThoughEffectType.BLOCK_TAPPED, null, this.getControllerId(), game).isEmpty() || isBattle(game) || !isCreature(game) || isSuspected()) {
             return false;
         }
         Permanent attacker = game.getPermanent(attackerId);
@@ -2011,6 +2013,16 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
+    public boolean isHarnessed() {
+        return this.harnessed;
+    }
+
+    @Override
+    public void setHarnessed(boolean value) {
+        this.harnessed = value;
+    }
+
+    @Override
     public boolean fight(Permanent fightTarget, Ability source, Game game) {
         return this.fight(fightTarget, source, game, true);
     }
@@ -2055,24 +2067,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         return color;
     }
 
-    //20180810 - 701.3d
-    //If an object leaves the zone it's in, all attached permanents become unattached
-    //note that this code doesn't actually detach anything, and is a bit of a bandaid
-    public void detachAllAttachments(Game game) {
-        for (UUID attachmentId : getAttachments()) {
-            Permanent attachment = game.getPermanent(attachmentId);
-            Card attachmentCard = game.getCard(attachmentId);
-            if (attachment != null && attachmentCard != null) {
-                //make bestow cards and licids into creatures
-                //aura test to stop bludgeon brawl shenanigans from using this code
-                //consider adding code to handle that case?
-                if (attachment.hasSubtype(SubType.AURA, game) && attachmentCard.isCreature(game)) {
-                    BestowAbility.becomeCreature(attachment, game);
-                }
-            }
-        }
-    }
-
     @Override
     public boolean moveToZone(Zone toZone, Ability source, Game game, boolean flag, List<UUID> appliedEffects) {
         Zone fromZone = game.getState().getZone(objectId);
@@ -2085,12 +2079,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             } else {
                 zoneChangeInfo = new ZoneChangeInfo(event);
             }
-            boolean successfullyMoved = ZonesHandler.moveCard(zoneChangeInfo, game, source);
-            //20180810 - 701.3d
-            if (successfullyMoved) {
-                detachAllAttachments(game);
-            }
-            return successfullyMoved;
+            return ZonesHandler.moveCard(zoneChangeInfo, game, source);
         }
         return false;
     }
@@ -2101,12 +2090,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         ZoneChangeEvent event = new ZoneChangeEvent(this, source, ownerId, fromZone, Zone.EXILED, appliedEffects);
         ZoneChangeInfo.Exile zcInfo = new ZoneChangeInfo.Exile(event, exileId, name);
 
-        boolean successfullyMoved = ZonesHandler.moveCard(zcInfo, game, source);
-        //20180810 - 701.3d
-        if (successfullyMoved) {
-            detachAllAttachments(game);
-        }
-        return successfullyMoved;
+        return ZonesHandler.moveCard(zcInfo, game, source);
     }
 
     @Override

@@ -6,11 +6,10 @@ import mage.abilities.keyword.ReplicateAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterSpell;
 import mage.filter.FilterStackObject;
 import mage.filter.predicate.Predicate;
-import mage.filter.predicate.mageobject.ColorlessPredicate;
 import mage.game.Game;
+import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.target.TargetStackObject;
 
@@ -30,7 +29,6 @@ public final class ConsignToMemory extends CardImpl {
 
     public ConsignToMemory(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
-
 
         // Replicate {1}
         this.addAbility(new ReplicateAbility("{1}"));
@@ -53,18 +51,11 @@ public final class ConsignToMemory extends CardImpl {
 enum ConsignToMemoryPredicate implements Predicate<StackObject> {
     instance;
 
-    private static final FilterSpell filterSpell = new FilterSpell("colorless spell");
-
-    static {
-        filterSpell.add(ColorlessPredicate.instance);
-    }
-
     @Override
     public boolean apply(StackObject input, Game game) {
-        if (input instanceof Ability) {
-            Ability ability = (Ability) input;
-            return ability.getAbilityType().isTriggeredAbility();
+        if (input instanceof Spell) {
+            return input.getColor(game).isColorless();
         }
-        return filterSpell.match(input, game);
+        return input instanceof Ability && ((Ability) input).isTriggeredAbility();
     }
 }

@@ -39,7 +39,7 @@ public final class SaprazzanLegate extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // If an opponent controls a Mountain and you control an Island, you may cast this spell without paying its mana cost.
-        Condition condition = new CompoundCondition("If an opponent controls a Mountain and you control an Island",
+        Condition condition = new CompoundCondition("an opponent controls a Mountain and you control an Island",
                 new OpponentControlsPermanentCondition(filterMountain),
                 new PermanentsOnTheBattlefieldCondition(filterIsland));
         this.addAbility(new AlternativeCostSourceAbility(null, condition));

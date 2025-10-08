@@ -25,6 +25,7 @@ public final class FinalFantasy extends ExpansionSet {
 
         cards.add(new SetCardInfo("A Realm Reborn", 196, Rarity.RARE, mage.cards.a.ARealmReborn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("A Realm Reborn", 344, Rarity.RARE, mage.cards.a.ARealmReborn.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("A Realm Reborn", 566, Rarity.RARE, mage.cards.a.ARealmReborn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Absolute Virtue", 212, Rarity.MYTHIC, mage.cards.a.AbsoluteVirtue.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Absolute Virtue", 476, Rarity.MYTHIC, mage.cards.a.AbsoluteVirtue.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Adelbert Steiner", 3, Rarity.UNCOMMON, mage.cards.a.AdelbertSteiner.class, NON_FULL_USE_VARIOUS));
@@ -107,6 +108,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Chaos, the Endless", 486, Rarity.UNCOMMON, mage.cards.c.ChaosTheEndless.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Choco, Seeker of Paradise", 215, Rarity.RARE, mage.cards.c.ChocoSeekerOfParadise.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Choco, Seeker of Paradise", 479, Rarity.RARE, mage.cards.c.ChocoSeekerOfParadise.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Choco, Seeker of Paradise", 569, Rarity.RARE, mage.cards.c.ChocoSeekerOfParadise.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Choco-Comet", 132, Rarity.UNCOMMON, mage.cards.c.ChocoComet.class));
         cards.add(new SetCardInfo("Chocobo Kick", 178, Rarity.COMMON, mage.cards.c.ChocoboKick.class));
         cards.add(new SetCardInfo("Chocobo Racetrack", 179, Rarity.UNCOMMON, mage.cards.c.ChocoboRacetrack.class));
@@ -142,6 +144,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Cloud, Midgar Mercenary", 375, Rarity.MYTHIC, mage.cards.c.CloudMidgarMercenary.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cloud, Midgar Mercenary", 427, Rarity.MYTHIC, mage.cards.c.CloudMidgarMercenary.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cloud, Midgar Mercenary", 520, Rarity.MYTHIC, mage.cards.c.CloudMidgarMercenary.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Cloud, Midgar Mercenary", 564, Rarity.MYTHIC, mage.cards.c.CloudMidgarMercenary.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cloud, Planet's Champion", 482, Rarity.MYTHIC, mage.cards.c.CloudPlanetsChampion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cloud, Planet's Champion", 552, Rarity.MYTHIC, mage.cards.c.CloudPlanetsChampion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cloudbound Moogle", 11, Rarity.COMMON, mage.cards.c.CloudboundMoogle.class));
@@ -503,6 +506,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Stiltzkin, Moogle Merchant", 327, Rarity.RARE, mage.cards.s.StiltzkinMoogleMerchant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stiltzkin, Moogle Merchant", 34, Rarity.RARE, mage.cards.s.StiltzkinMoogleMerchant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stiltzkin, Moogle Merchant", 433, Rarity.RARE, mage.cards.s.StiltzkinMoogleMerchant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Stiltzkin, Moogle Merchant", 565, Rarity.RARE, mage.cards.s.StiltzkinMoogleMerchant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stolen Uniform", 332, Rarity.UNCOMMON, mage.cards.s.StolenUniform.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stolen Uniform", 75, Rarity.UNCOMMON, mage.cards.s.StolenUniform.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stuck in Summoner's Sanctum", 76, Rarity.COMMON, mage.cards.s.StuckInSummonersSanctum.class));
@@ -512,6 +516,8 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Summon: Anima", 364, Rarity.UNCOMMON, mage.cards.s.SummonAnima.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Bahamut", 1, Rarity.MYTHIC, mage.cards.s.SummonBahamut.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Bahamut", 356, Rarity.MYTHIC, mage.cards.s.SummonBahamut.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Summon: Brynhildr", 160, Rarity.RARE, mage.cards.s.SummonBrynhildr.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Summon: Brynhildr", 366, Rarity.RARE, mage.cards.s.SummonBrynhildr.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Choco/Mog", 35, Rarity.COMMON, mage.cards.s.SummonChocoMog.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Choco/Mog", 358, Rarity.COMMON, mage.cards.s.SummonChocoMog.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Esper Maduin", 185, Rarity.RARE, mage.cards.s.SummonEsperMaduin.class, NON_FULL_USE_VARIOUS));
@@ -586,6 +592,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Tifa Lockhart", 391, Rarity.RARE, mage.cards.t.TifaLockhart.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tifa Lockhart", 473, Rarity.RARE, mage.cards.t.TifaLockhart.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tifa Lockhart", 536, Rarity.RARE, mage.cards.t.TifaLockhart.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Tifa Lockhart", 567, Rarity.RARE, mage.cards.t.TifaLockhart.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tifa's Limit Break", 207, Rarity.UNCOMMON, mage.cards.t.TifasLimitBreak.class));
         cards.add(new SetCardInfo("Tonberry", 122, Rarity.UNCOMMON, mage.cards.t.Tonberry.class));
         cards.add(new SetCardInfo("Torgal, A Fine Hound", 208, Rarity.UNCOMMON, mage.cards.t.TorgalAFineHound.class, NON_FULL_USE_VARIOUS));
@@ -605,6 +612,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Traveling Chocobo", 210, Rarity.MYTHIC, mage.cards.t.TravelingChocobo.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Traveling Chocobo", 406, Rarity.MYTHIC, mage.cards.t.TravelingChocobo.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Traveling Chocobo", 551, Rarity.MYTHIC, mage.cards.t.TravelingChocobo.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Traveling Chocobo", 568, Rarity.MYTHIC, mage.cards.t.TravelingChocobo.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Treno, Dark City", 290, Rarity.COMMON, mage.cards.t.TrenoDarkCity.class));
         cards.add(new SetCardInfo("Triple Triad", 166, Rarity.RARE, mage.cards.t.TripleTriad.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Triple Triad", 340, Rarity.RARE, mage.cards.t.TripleTriad.class, NON_FULL_USE_VARIOUS));
@@ -646,6 +654,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Vivi Ornitier", 248, Rarity.MYTHIC, mage.cards.v.ViviOrnitier.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vivi Ornitier", 321, Rarity.MYTHIC, mage.cards.v.ViviOrnitier.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vivi Ornitier", 514, Rarity.MYTHIC, mage.cards.v.ViviOrnitier.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vivi Ornitier", 570, Rarity.MYTHIC, mage.cards.v.ViviOrnitier.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Warrior's Sword", 169, Rarity.COMMON, mage.cards.w.WarriorsSword.class));
         cards.add(new SetCardInfo("Wastes", 309, Rarity.COMMON, mage.cards.w.Wastes.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Weapons Vendor", 40, Rarity.COMMON, mage.cards.w.WeaponsVendor.class));
@@ -667,6 +676,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Yuna, Hope of Spira", 404, Rarity.MYTHIC, mage.cards.y.YunaHopeOfSpira.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Yuna, Hope of Spira", 517, Rarity.MYTHIC, mage.cards.y.YunaHopeOfSpira.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Yuna, Hope of Spira", 549, Rarity.MYTHIC, mage.cards.y.YunaHopeOfSpira.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Yuna, Hope of Spira", 571, Rarity.MYTHIC, mage.cards.y.YunaHopeOfSpira.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Zack Fair", 435, Rarity.UNCOMMON, mage.cards.z.ZackFair.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Zack Fair", 45, Rarity.UNCOMMON, mage.cards.z.ZackFair.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Zack Fair", 580, Rarity.UNCOMMON, mage.cards.z.ZackFair.class, NON_FULL_USE_VARIOUS));

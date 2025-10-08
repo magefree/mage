@@ -83,14 +83,15 @@ public class PeterParkerTest extends CardTestPlayerBase {
                 new ManaCostsImpl<>("")
         ));
 
-        addCard(Zone.BATTLEFIELD, playerA, peterParker);
+        addCard(Zone.HAND, playerA, peterParker);
         addCard(Zone.BATTLEFIELD, playerA, chainerNightmareAdept);
         addCard(Zone.BATTLEFIELD, playerA, balduvianBears,2);
         addCard(Zone.HAND, playerA, adelbertSteiner, 2);
         addCard(Zone.GRAVEYARD, playerA, absoluteVirtue);
-        addCard(Zone.BATTLEFIELD, playerA, "Tropical Island", 6);
-        addCard(Zone.BATTLEFIELD, playerA, "Tundra", 6);
+        addCard(Zone.BATTLEFIELD, playerA, "Tropical Island", 8);
+        addCard(Zone.BATTLEFIELD, playerA, "Tundra", 8);
 
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Amazing Spider-Man", true);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "tap all"); // tap bears, addCard command isn't working to set tapped
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 

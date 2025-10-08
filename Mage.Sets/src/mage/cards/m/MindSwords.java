@@ -1,9 +1,5 @@
-
 package mage.cards.m;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
@@ -24,7 +20,10 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInHand;
-import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  *
@@ -32,7 +31,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public final class MindSwords extends CardImpl {
 
-    private static final FilterLandPermanent filterSwamp = new FilterLandPermanent("If you control a Swamp");
+    private static final FilterLandPermanent filterSwamp = new FilterLandPermanent("you control a Swamp");
 
     static {
         filterSwamp.add(SubType.SWAMP.getPredicate());

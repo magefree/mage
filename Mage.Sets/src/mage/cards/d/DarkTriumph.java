@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import mage.abilities.condition.Condition;
@@ -13,7 +12,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
 
@@ -23,7 +21,7 @@ import java.util.UUID;
 public final class DarkTriumph extends CardImpl {
 
     private static final Condition condition = new PermanentsOnTheBattlefieldCondition(
-            new FilterPermanent(SubType.SWAMP, "If you control a Swamp")
+            new FilterPermanent(SubType.SWAMP, "you control a Swamp")
     );
 
     public DarkTriumph(UUID ownerId, CardSetInfo setInfo) {

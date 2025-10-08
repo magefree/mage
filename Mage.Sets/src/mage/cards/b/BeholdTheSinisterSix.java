@@ -69,7 +69,7 @@ class BeholdTheSinisterSixTarget extends TargetCardInYourGraveyard {
                 .filter(Objects::nonNull)
                 .collect(Collectors.toSet());
         Card card = game.getCard(id);
-        return card != null && !names.contains(card.getName());
+        return card != null && (this.getTargets().contains(id) || !names.contains(card.getName()));
     }
 
 

@@ -2818,6 +2818,14 @@ public class ScryfallImageSupportTokens {
             put("EOC/Shapeshifter", "https://api.scryfall.com/cards/teoc/2/en?format=image");
             put("EOC/Thopter", "https://api.scryfall.com/cards/teoc/16/en?format=image");
 
+            // SPM
+            put("SPM/Food", "https://api.scryfall.com/cards/tspm/5?format=image");
+            put("SPM/Human", "https://api.scryfall.com/cards/tspm/4?format=image");
+            put("SPM/Illusion", "https://api.scryfall.com/cards/tspm/2?format=image");
+            put("SPM/Robot", "https://api.scryfall.com/cards/tspm/6?format=image");
+            put("SPM/Spider", "https://api.scryfall.com/cards/tspm/3?format=image");
+            put("SPM/Treasure", "https://api.scryfall.com/cards/tspm/7?format=image");
+
             // JVC
             put("JVC/Elemental Shaman", "https://api.scryfall.com/cards/tjvc/4?format=image");
 

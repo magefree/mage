@@ -71,6 +71,6 @@ enum SlingbowTrapCondition implements Condition {
 
     @Override
     public String toString() {
-        return "If a black creature with flying is attacking";
+        return "a black creature with flying is attacking";
     }
 }

@@ -30,15 +30,18 @@ public class SecretLairShowdown extends ExpansionSet {
         cards.add(new SetCardInfo("Expressive Iteration", 13, Rarity.RARE, mage.cards.e.ExpressiveIteration.class));
         cards.add(new SetCardInfo("Fatal Push", 3, Rarity.RARE, mage.cards.f.FatalPush.class));
         cards.add(new SetCardInfo("Fauna Shaman", 41, Rarity.RARE, mage.cards.f.FaunaShaman.class));
+        cards.add(new SetCardInfo("Flowerfoot Swordmaster", 46, Rarity.RARE, mage.cards.f.FlowerfootSwordmaster.class));
         cards.add(new SetCardInfo("Force of Despair", 29, Rarity.RARE, mage.cards.f.ForceOfDespair.class, FULL_ART));
         cards.add(new SetCardInfo("Garruk Wildspeaker", 42, Rarity.MYTHIC, mage.cards.g.GarrukWildspeaker.class));
         cards.add(new SetCardInfo("Goblin Guide", 23, Rarity.RARE, mage.cards.g.GoblinGuide.class));
+        cards.add(new SetCardInfo("Innkeeper's Talent", 45, Rarity.RARE, mage.cards.i.InnkeepersTalent.class, FULL_ART));
         cards.add(new SetCardInfo("Island", 32, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Karn Liberated", 36, Rarity.MYTHIC, mage.cards.k.KarnLiberated.class));
         cards.add(new SetCardInfo("Laughing Jasper Flint", 44, Rarity.RARE, mage.cards.l.LaughingJasperFlint.class));
         cards.add(new SetCardInfo("Lightning Bolt", 21, Rarity.RARE, mage.cards.l.LightningBolt.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lightning Bolt", 37, Rarity.RARE, mage.cards.l.LightningBolt.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Living End", 30, Rarity.MYTHIC, mage.cards.l.LivingEnd.class));
+        cards.add(new SetCardInfo("Manifold Mouse", 47, Rarity.RARE, mage.cards.m.ManifoldMouse.class));
         cards.add(new SetCardInfo("Mayhem Devil", 28, Rarity.RARE, mage.cards.m.MayhemDevil.class));
         cards.add(new SetCardInfo("Mountain", 34, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Murktide Regent", 17, Rarity.MYTHIC, mage.cards.m.MurktideRegent.class));

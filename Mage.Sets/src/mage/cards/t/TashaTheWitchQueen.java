@@ -132,7 +132,7 @@ class TashaTheWitchQueenCastEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        Cards cards = new CardsImpl(game.getExile().getCards(filter, game));
+        Cards cards = new CardsImpl(game.getExile().getCardsInRange(filter, source.getControllerId(), source, game));
         return !cards.isEmpty() && CardUtil.castSpellWithAttributesForFree(player, source, game, cards, StaticFilters.FILTER_CARD);
     }
 }

@@ -38,6 +38,7 @@ public enum MageIdentifier {
     CoramTheUndertakerWatcher,
     ThundermanDragonWatcher,
     LockeTreasureHunterWatcher,
+    TheFourthDoctorWatcher,
 
     // ----------------------------//
     //       alternate casts       //
@@ -87,7 +88,8 @@ public enum MageIdentifier {
     ValgavothTerrorEaterAlternateCast,
     LightstallInquisitorAlternateCast,
     UndeadSprinterAlternateCast,
-    GwenomRemorselessAlternateCast;
+    GwenomRemorselessAlternateCast,
+    AlienSymbiosisAlternateCast;
 
     /**
      * Additional text if there is need to differentiate two very similar effects

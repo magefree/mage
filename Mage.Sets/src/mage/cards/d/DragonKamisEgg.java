@@ -79,7 +79,7 @@ class DragonKamisEggEffect extends OneShotEffect {
         }
         Cards cards = new CardsImpl();
         game.getExile()
-                .getAllCards(game, player.getId())
+                .getCardsOwned(game, player.getId())
                 .stream()
                 .filter(Objects::nonNull)
                 .filter(card -> card.getCounters(game).containsKey(CounterType.HATCHLING))

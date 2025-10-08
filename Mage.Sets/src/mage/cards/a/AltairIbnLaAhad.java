@@ -117,7 +117,7 @@ class AltairIbnLaAhadTokenEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Set<Card> cards = game
                 .getExile()
-                .getAllCards(game, source.getControllerId())
+                .getCardsOwned(game, source.getControllerId())
                 .stream()
                 .filter(card -> card.getCounters(game).containsKey(CounterType.MEMORY))
                 .filter(card -> card.isCreature(game))

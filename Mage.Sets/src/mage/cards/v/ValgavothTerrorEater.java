@@ -52,7 +52,7 @@ public final class ValgavothTerrorEater extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // Ward--Sacrifice three nonland permanents.
-        this.addAbility(new WardAbility(new SacrificeTargetCost(3, StaticFilters.FILTER_PERMANENTS_NON_LAND)));
+        this.addAbility(new WardAbility(new SacrificeTargetCost(3, StaticFilters.FILTER_PERMANENTS_NON_LAND), false));
 
         // If a card you didn't control would be put into an opponent's graveyard from anywhere, exile it instead.
         this.addAbility(new SimpleStaticAbility(new ValgavothTerrorEaterReplacementEffect()));

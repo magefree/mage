@@ -79,7 +79,7 @@ public class ChoiceCreatureType extends ChoiceImpl {
             });
 
             // exile
-            game.getExile().getAllCards(game, playerId).forEach(card -> {
+            game.getExile().getCardsOwned(game, playerId).forEach(card -> {
                 list.addAll(card.getSubtype(game).stream().map(SubType::toString).collect(Collectors.toList()));
             });
         });

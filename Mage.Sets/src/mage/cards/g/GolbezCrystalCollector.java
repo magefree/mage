@@ -81,7 +81,7 @@ enum GolbezCrystalCollectorValue implements DynamicValue {
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         return Optional
                 .ofNullable(effect.getTargetPointer().getFirst(game, sourceAbility))
-                .map(game::getPermanent)
+                .map(game::getCard)
                 .map(MageObject::getPower)
                 .map(MageInt::getValue)
                 .orElse(0);

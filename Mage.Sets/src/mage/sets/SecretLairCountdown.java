@@ -7,16 +7,16 @@ import mage.constants.SetType;
 /**
  * https://scryfall.com/sets/slc
  */
-public class SecretLair30thAnniversaryCountdownKit extends ExpansionSet {
+public class SecretLairCountdown extends ExpansionSet {
 
-    private static final SecretLair30thAnniversaryCountdownKit instance = new SecretLair30thAnniversaryCountdownKit();
+    private static final SecretLairCountdown instance = new SecretLairCountdown();
 
-    public static SecretLair30thAnniversaryCountdownKit getInstance() {
+    public static SecretLairCountdown getInstance() {
         return instance;
     }
 
-    private SecretLair30thAnniversaryCountdownKit() {
-        super("Secret Lair 30th Anniversary Countdown Kit", "SLC", ExpansionSet.buildDate(2022, 11, 1), SetType.PROMOTIONAL);
+    private SecretLairCountdown() {
+        super("Secret Lair Countdown", "SLC", ExpansionSet.buildDate(2022, 11, 1), SetType.PROMOTIONAL);
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Arclight Phoenix", 2018, Rarity.MYTHIC, mage.cards.a.ArclightPhoenix.class));

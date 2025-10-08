@@ -134,7 +134,7 @@ public class TargetCard extends TargetObject {
     protected static Set<UUID> getAllPossibleTargetInExile(Game game, Player player, UUID sourceControllerId, Ability source, FilterCard filter, boolean isNotTarget) {
         Set<UUID> possibleTargets = new HashSet<>();
         UUID sourceId = source != null ? source.getSourceId() : null;
-        for (Card card : game.getExile().getAllCardsByRange(game, sourceControllerId)) {
+        for (Card card : game.getExile().getCardsInRange(game, sourceControllerId)) {
             if (filter.match(card, sourceControllerId, source, game)) {
                 possibleTargets.add(card.getId());
             }

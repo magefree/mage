@@ -2,7 +2,7 @@ package mage.cards.t;
 
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.SagaAbility;
-import mage.abilities.common.delayed.CopyNextSpellDelayedTriggeredAbility;
+import mage.abilities.common.delayed.CastNextSpellDelayedTriggeredAbility;
 import mage.abilities.effects.common.ChooseACardNameEffect;
 import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
@@ -43,10 +43,10 @@ public final class TheCloneSaga extends CardImpl {
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, new SurveilEffect(3));
 
         // II -- When you next cast a creature spell this turn, copy it, except the copy isn't legendary.
-        DelayedTriggeredAbility ability = new CopyNextSpellDelayedTriggeredAbility(
-                StaticFilters.FILTER_SPELL_A_CREATURE,
-                new CopyTargetStackObjectEffect(false, false, false, 1, new RemoveTypeCopyApplier(SuperType.LEGENDARY)),
-                "When you next cast a creature spell this turn, copy it, except the copy isn't legendary"
+        DelayedTriggeredAbility ability = new CastNextSpellDelayedTriggeredAbility(
+                new CopyTargetStackObjectEffect(false, true, false, 1, new RemoveTypeCopyApplier(SuperType.LEGENDARY))
+                        .setText("copy it, except the copy isn't legendary"),
+                StaticFilters.FILTER_SPELL_A_CREATURE, true
         );
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_II, new CreateDelayedTriggeredAbilityEffect(ability));
 

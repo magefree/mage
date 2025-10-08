@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.mage</groupId>
         <artifactId>mage-root</artifactId>
-        <version>1.4.57</version>
+        <version>1.4.58</version>
     </parent>
 
     <artifactId>mage-client</artifactId>
@@ -133,7 +133,7 @@
         <dependency>
             <groupId>org.apache.xmlgraphics</groupId>
             <artifactId>batik-transcoder</artifactId>
-            <version>1.17</version>
+            <version>1.19</version>
         </dependency>
         <!-- svg support END -->
 

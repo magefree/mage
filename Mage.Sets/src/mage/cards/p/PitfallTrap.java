@@ -63,6 +63,6 @@ enum PitfallTrapCondition implements Condition {
 
     @Override
     public String toString() {
-        return "If exactly one creature is attacking";
+        return "exactly one creature is attacking";
     }
 }

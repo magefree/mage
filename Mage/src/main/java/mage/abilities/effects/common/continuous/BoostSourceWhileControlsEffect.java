@@ -29,8 +29,7 @@ public class BoostSourceWhileControlsEffect extends WhileConditionContinuousEffe
         staticText = "{this} gets "
                 + CardUtil.getBoostCountAsStr(power, toughness)
                 + " as long as you control "
-                + (filterDescription.startsWith("an ") ? "" : "a ")
-                + filterDescription;
+                + CardUtil.addArticle(filterDescription);
     }
 
     protected BoostSourceWhileControlsEffect(final BoostSourceWhileControlsEffect effect) {

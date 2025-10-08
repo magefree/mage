@@ -7,6 +7,8 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.constants.Outcome;
+import mage.constants.PhaseStep;
+import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.token.RedWarriorToken;
 import mage.util.CardUtil;
@@ -34,7 +36,6 @@ public class MobilizeAbility extends AttacksTriggeredAbility {
     }
 
     private static String makeText(DynamicValue amount) {
-        StringBuilder sb = new StringBuilder();
         String message;
         String numToText;
         boolean plural;
@@ -77,7 +78,7 @@ class MobilizeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         CreateTokenEffect effect = new CreateTokenEffect(new RedWarriorToken(), this.count, true, true);
         effect.apply(game, source);
-        effect.sacrificeTokensCreatedAtNextEndStep(game, source);
+        effect.removeTokensCreatedAt(game, source, false, PhaseStep.END_TURN, TargetController.ANY);
         return true;
     }
 }

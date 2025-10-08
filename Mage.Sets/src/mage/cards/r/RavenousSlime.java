@@ -68,8 +68,7 @@ class RavenousSlimeEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourceCreature = game.getPermanent(source.getSourceId());
-        if (controller == null || sourceCreature == null) {
+        if (controller == null) {
             return false;
         }
         if (((ZoneChangeEvent) event).getFromZone() != Zone.BATTLEFIELD) {
@@ -81,9 +80,8 @@ class RavenousSlimeEffect extends ReplacementEffectImpl {
         }
         int power = permanent.getPower().getValue();
         controller.moveCards(permanent, Zone.EXILED, source, game);
-        return new AddCountersSourceEffect(
-                CounterType.P1P1.createInstance(power)
-        ).apply(game, source);
+        new AddCountersSourceEffect(CounterType.P1P1.createInstance(power)).apply(game, source);
+        return true;
     }
 
     @Override
