@@ -39,10 +39,13 @@ public final class KratosGodOfWar extends CardImpl {
         this.addAbility(DoubleStrikeAbility.getInstance());
 
         // All creatures have haste.
-        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
-                HasteAbility.getInstance(), Duration.WhileControlled,
-                StaticFilters.FILTER_PERMANENT_CREATURE
-        ).setText("all creatures have haste")));
+        this.addAbility(
+                new SimpleStaticAbility(
+                        new GainAbilityAllEffect(
+                            HasteAbility.getInstance(), Duration.WhileOnBattlefield,
+                            StaticFilters.FILTER_PERMANENT_ALL_CREATURES
+                            ).setText("all creatures have haste")
+                ));
 
         // At the beginning of each player's end step, Kratos deals damage to that player equal to the number of creatures that player controls that didn't attack this turn.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
