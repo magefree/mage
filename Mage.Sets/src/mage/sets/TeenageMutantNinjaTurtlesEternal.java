@@ -16,7 +16,7 @@ public final class TeenageMutantNinjaTurtlesEternal extends ExpansionSet {
     }
 
     private TeenageMutantNinjaTurtlesEternal() {
-        super("Teenage Mutant Ninja Turtles Commander", "TMC", ExpansionSet.buildDate(2026, 3, 6), SetType.EXPANSION);
+        super("Teenage Mutant Ninja Turtles Eternal", "TMC", ExpansionSet.buildDate(2026, 3, 6), SetType.EXPANSION);
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Dark Ritual", 131, Rarity.MYTHIC, mage.cards.d.DarkRitual.class));
