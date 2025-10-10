@@ -8,8 +8,7 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.RoomUnlockAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.UnlockThisDoorTriggeredAbility;
-import mage.abilities.condition.common.RoomLeftHalfLockedCondition;
-import mage.abilities.condition.common.RoomRightHalfLockedCondition;
+import mage.abilities.condition.common.RoomHalfLockedCondition;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -76,14 +75,14 @@ public abstract class RoomCard extends SplitCard {
         if (leftAbility != null && !(leftAbility instanceof UnlockThisDoorTriggeredAbility)) {
             Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                     new LoseAbilitySourceEffect(leftAbility, Duration.WhileOnBattlefield),
-                    RoomLeftHalfLockedCondition.instance, "")).setRuleVisible(false);
+                    RoomHalfLockedCondition.LEFT, "")).setRuleVisible(false);
             this.addAbility(ability);
         }
 
         if (rightAbility != null && !(rightAbility instanceof UnlockThisDoorTriggeredAbility)) {
             Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                     new LoseAbilitySourceEffect(rightAbility, Duration.WhileOnBattlefield),
-                    RoomRightHalfLockedCondition.instance, "")).setRuleVisible(false);
+                    RoomHalfLockedCondition.RIGHT, "")).setRuleVisible(false);
             this.addAbility(ability);
         }
 

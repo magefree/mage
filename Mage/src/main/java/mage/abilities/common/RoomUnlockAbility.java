@@ -2,8 +2,7 @@ package mage.abilities.common;
 
 import mage.abilities.Ability;
 import mage.abilities.SpecialAction;
-import mage.abilities.condition.common.RoomLeftHalfLockedCondition;
-import mage.abilities.condition.common.RoomRightHalfLockedCondition;
+import mage.abilities.condition.common.RoomHalfLockedCondition;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
@@ -32,9 +31,9 @@ public class RoomUnlockAbility extends SpecialAction {
 
         // only works if the relevant half is *locked*
         if (isLeftHalf) {
-            this.setCondition(RoomLeftHalfLockedCondition.instance);
+            this.setCondition(RoomHalfLockedCondition.LEFT);
         } else {
-            this.setCondition(RoomRightHalfLockedCondition.instance);
+            this.setCondition(RoomHalfLockedCondition.RIGHT);
         }
 
         // Adds the effect to pay + unlock the half
