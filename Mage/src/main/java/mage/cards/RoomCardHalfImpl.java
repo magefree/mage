@@ -55,8 +55,6 @@ public class RoomCardHalfImpl extends SplitCardHalfImpl implements RoomCardHalf 
             game.setZone(splitCardParent.getRightHalfCard().getId(), Zone.OUTSIDE);
             return;
         }
-        game.setZone(splitCardParent.getId(), zone);
-        game.setZone(splitCardParent.getLeftHalfCard().getId(), zone);
-        game.setZone(splitCardParent.getRightHalfCard().getId(), zone);
+        super.setZone(zone, game);
     }
 }
