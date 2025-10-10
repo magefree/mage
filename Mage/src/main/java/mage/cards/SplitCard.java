@@ -36,6 +36,15 @@ public abstract class SplitCard extends CardImpl implements CardWithHalves {
         rightHalfCard = new SplitCardHalfImpl(this.getOwnerId(), new CardSetInfo(names[1], setInfo.getExpansionSetCode(), setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo()), typesRight, costsRight, this, SpellAbilityType.SPLIT_RIGHT);
     }
 
+    // Params reordered as we need the same arguments as the parent constructor, with slightly different behaviour.
+    // Currently only used for rooms, because they are the only current split card with a shared type line.
+    protected SplitCard(UUID ownerId, CardSetInfo setInfo, String costsLeft, String costsRight, SpellAbilityType spellAbilityType, CardType[] singleTypeLine) {
+        super(ownerId, setInfo, singleTypeLine, costsLeft + costsRight, spellAbilityType);
+        String[] names = setInfo.getName().split(" // ");
+        leftHalfCard = new SplitCardHalfImpl(this.getOwnerId(), new CardSetInfo(names[0], setInfo.getExpansionSetCode(), setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo()), singleTypeLine, costsLeft, this, SpellAbilityType.SPLIT_LEFT);
+        rightHalfCard = new SplitCardHalfImpl(this.getOwnerId(), new CardSetInfo(names[1], setInfo.getExpansionSetCode(), setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo()), singleTypeLine, costsRight, this, SpellAbilityType.SPLIT_RIGHT);
+    }
+
     protected SplitCard(SplitCard card) {
         super(card);
         // make sure all parts created and parent ref added
@@ -120,7 +129,7 @@ public abstract class SplitCard extends CardImpl implements CardWithHalves {
         getLeftHalfCard().updateZoneChangeCounter(game, event);
         getRightHalfCard().updateZoneChangeCounter(game, event);
     }
-
+    
     @Override
     public boolean cast(Game game, Zone fromZone, SpellAbility ability, UUID controllerId) {
         switch (ability.getSpellAbilityType()) {
@@ -143,7 +152,8 @@ public abstract class SplitCard extends CardImpl implements CardWithHalves {
             // TODO: why it here, for GUI's cleanup in card texts? Maybe it can be removed, see mdf cards
             if (ability instanceof SpellAbility
                     && (((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.SPLIT
-                    || ((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.SPLIT_AFTERMATH)) {
+                            || ((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.SPLIT_AFTERMATH
+                        )) {
                 continue;
             }
             allAbilites.add(ability);
