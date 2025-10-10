@@ -64,6 +64,7 @@ public enum SubType {
     JUNK("Junk", SubTypeSet.ArtifactType),
     LANDER("Lander", SubTypeSet.ArtifactType),
     MAP("Map", SubTypeSet.ArtifactType),
+    MUTAGEN("Mutagen", SubTypeSet.ArtifactType),
     POWERSTONE("Powerstone", SubTypeSet.ArtifactType),
     SPACECRAFT("Spacecraft", SubTypeSet.ArtifactType),
     TREASURE("Treasure", SubTypeSet.ArtifactType),
