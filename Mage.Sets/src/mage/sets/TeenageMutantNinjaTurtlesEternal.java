@@ -20,5 +20,6 @@ public final class TeenageMutantNinjaTurtlesEternal extends ExpansionSet {
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Dark Ritual", 131, Rarity.MYTHIC, mage.cards.d.DarkRitual.class));
+        cards.add(new SetCardInfo("Leonardo, the Balance", 1, Rarity.MYTHIC, mage.cards.l.LeonardoTheBalance.class));
     }
 }
