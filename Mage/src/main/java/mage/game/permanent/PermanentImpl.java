@@ -102,7 +102,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected boolean deathtouched;
     protected boolean solved = false;
 
-    protected boolean wasUnlockedOnCast = false;
+    protected boolean roomWasUnlockedOnCast = false;
     protected boolean leftHalfUnlocked = false;
     protected boolean rightHalfUnlocked = false;
     protected Map<String, List<UUID>> connectedCards = new HashMap<>();
@@ -196,7 +196,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.disguised = permanent.disguised;
         this.leftHalfUnlocked = permanent.leftHalfUnlocked;
         this.rightHalfUnlocked = permanent.rightHalfUnlocked;
-        this.wasUnlockedOnCast = permanent.wasUnlockedOnCast;
+        this.roomWasUnlockedOnCast = permanent.roomWasUnlockedOnCast;
         this.manifested = permanent.manifested;
         this.cloaked = permanent.cloaked;
         this.createOrder = permanent.createOrder;
@@ -2095,7 +2095,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public boolean roomWasUnlockedOnCast() {
-        return wasUnlockedOnCast;
+        return roomWasUnlockedOnCast;
     }
 
     @Override
@@ -2110,10 +2110,10 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public boolean roomUnlockOnCast(Game game) {
-        if (this.wasUnlockedOnCast) {
+        if (this.roomWasUnlockedOnCast) {
             return false;
         }
-        this.wasUnlockedOnCast = true;
+        this.roomWasUnlockedOnCast = true;
         return true;
     }
 
