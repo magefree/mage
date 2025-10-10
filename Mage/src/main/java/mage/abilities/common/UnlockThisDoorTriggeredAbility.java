@@ -7,7 +7,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 
 /**
- * Delayed triggered ability for "when you unlock this door" effects
+ * Triggered ability for "when you unlock this door" effects
  * 
  * @author oscscull
  */

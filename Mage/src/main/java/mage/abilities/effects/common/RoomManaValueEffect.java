@@ -13,7 +13,7 @@ import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentCard; // Ensure this import is present
+import mage.game.permanent.PermanentCard;
 import mage.Mana;
 
 /**
