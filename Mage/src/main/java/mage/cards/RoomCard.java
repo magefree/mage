@@ -33,7 +33,7 @@ public abstract class RoomCard extends SplitCard {
 
     protected RoomCard(UUID ownerId, CardSetInfo setInfo, CardType[] types, String costsLeft,
             String costsRight, SpellAbilityType spellAbilityType) {
-        super(ownerId, setInfo, types, costsLeft, costsRight, spellAbilityType, true);
+        super(ownerId, setInfo, costsLeft, costsRight, spellAbilityType, types);
 
         String[] names = setInfo.getName().split(" // ");
 
