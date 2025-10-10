@@ -762,19 +762,19 @@ public class VerifyCardDataTest {
                 }
 
                 // CHECK: full art lands must use full art setting
-                // Continue on match
+                // CHECK: non-full art lands must not use full art setting
+                // CHECK: if full art land is using full art setting, don't perform retro or poster tests
                 boolean isLand = card.getRarity().equals(Rarity.LAND);
                 if (isLand && jsonCard.isFullArt && !card.isFullArt()) {
                     errorsList.add("Error: card must use full art lands setting: "
                             + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
                     continue;
-                }
-
-                // CHECK: non-full art lands must not use full art setting
-                // Continue on match
-                if (isLand && !jsonCard.isFullArt && card.isFullArt()) {
+                } else if (isLand && !jsonCard.isFullArt && card.isFullArt()) {
                     errorsList.add("Error: card must NOT use full art lands setting: "
                             + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
+                    continue;
+                } else if (isLand && jsonCard.isFullArt && card.isFullArt()) {
+                    // Land full art is correct, skip other tests
                     continue;
                 }
 
