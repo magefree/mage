@@ -10,14 +10,10 @@ import mage.abilities.dynamicvalue.common.CountersControllerCount;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.discard.DiscardControllerEffect;
-import mage.abilities.keyword.PartnerFatherAndSonAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.TargetController;
+import mage.constants.*;
 import mage.counters.CounterType;
 
 import java.util.UUID;
@@ -50,7 +46,7 @@ public final class AtreusImpulsiveSon extends CardImpl {
         this.addAbility(ability);
 
         // Partner--Father & son
-        this.addAbility(PartnerFatherAndSonAbility.getInstance());
+        this.addAbility(PartnerVariantType.FATHER_AND_SON.makeAbility());
     }
 
     private AtreusImpulsiveSon(final AtreusImpulsiveSon card) {

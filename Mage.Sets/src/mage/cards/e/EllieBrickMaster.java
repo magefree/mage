@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.PartnerSurvivorsAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -34,7 +33,7 @@ public final class EllieBrickMaster extends CardImpl {
         this.addAbility(new EllieBrickMasterTriggeredAbility());
 
         // Partner--Survivors
-        this.addAbility(PartnerSurvivorsAbility.getInstance());
+        this.addAbility(PartnerVariantType.SURVIVORS.makeAbility());
     }
 
     private EllieBrickMaster(final EllieBrickMaster card) {

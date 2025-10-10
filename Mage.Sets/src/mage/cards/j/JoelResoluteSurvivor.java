@@ -6,10 +6,10 @@ import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.MenaceAbility;
-import mage.abilities.keyword.PartnerSurvivorsAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.PartnerVariantType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
@@ -43,7 +43,7 @@ public final class JoelResoluteSurvivor extends CardImpl {
         this.addAbility(ability);
 
         // Partner--Survivors
-        this.addAbility(PartnerSurvivorsAbility.getInstance());
+        this.addAbility(PartnerVariantType.SURVIVORS.makeAbility());
     }
 
     private JoelResoluteSurvivor(final JoelResoluteSurvivor card) {

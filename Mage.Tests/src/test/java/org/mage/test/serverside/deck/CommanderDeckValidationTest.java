@@ -143,6 +143,28 @@ public class CommanderDeckValidationTest extends MageTestPlayerBase {
         );
     }
 
+    @Test
+    public void testPartnerVariants() {
+        DeckTester deckTester = new DeckTester(new Commander());
+        deckTester.addMaindeck("Swamp", 98);
+
+        deckTester.addSideboard("Ellie, Vengeful Hunter", 1);
+        deckTester.addSideboard("Joel, Resolute Survivor", 1);
+
+        deckTester.validate("You can have two commanders if they both have the same Partner variant");
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testPartnerVariants2() {
+        DeckTester deckTester = new DeckTester(new Commander());
+        deckTester.addMaindeck("Mountain", 98);
+
+        deckTester.addSideboard("Ellie, Vengeful Hunter", 1);
+        deckTester.addSideboard("Atreus, Impulsive Son", 1);
+
+        deckTester.validate("You can't have two commanders if they don't have the same Partner variant");
+    }
+
     @Test()
     public void testVehicles1() {
         DeckTester deckTester = new DeckTester(new Commander());
