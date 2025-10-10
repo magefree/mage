@@ -761,22 +761,26 @@ public class VerifyCardDataTest {
                     continue;
                 }
 
-                // CHECK: poster promoType and/or textless must use full art setting
-                if (((jsonCard.promoTypes != null && jsonCard.promoTypes.contains("poster")) || jsonCard.isTextless) && !card.isFullArt()) {
-                    errorsList.add("Error: card must use full art setting: "
-                            + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
-                }
-
                 // CHECK: full art lands must use full art setting
+                // Continue on match
                 boolean isLand = card.getRarity().equals(Rarity.LAND);
                 if (isLand && jsonCard.isFullArt && !card.isFullArt()) {
                     errorsList.add("Error: card must use full art lands setting: "
                             + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
+                    continue;
                 }
 
                 // CHECK: non-full art lands must not use full art setting
+                // Continue on match
                 if (isLand && !jsonCard.isFullArt && card.isFullArt()) {
                     errorsList.add("Error: card must NOT use full art lands setting: "
+                            + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
+                    continue;
+                }
+
+                // CHECK: poster promoType and/or textless must use full art setting
+                if (((jsonCard.promoTypes != null && jsonCard.promoTypes.contains("poster")) || jsonCard.isTextless) && !card.isFullArt()) {
+                    errorsList.add("Error: card must use full art setting: "
                             + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
                 }
 
