@@ -616,6 +616,7 @@ public class ScryfallImageSupportCards {
             add("TLE"); // Avatar: The Last Airbender Eternal
             add("ECL"); // Lorwyn Eclipsed
             add("TMT"); // Teenage Mutant Ninja Turtles
+            add("TMC"); // Teenage Mutant Ninja Turtles Eternal
 
             // Custom sets using Scryfall images - must provide a direct link for each card in directDownloadLinks
             add("CALC"); // Custom Alchemized versions of existing cards
