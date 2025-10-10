@@ -128,7 +128,7 @@ public abstract class RoomCard extends SplitCard {
             game.setZone(getRightHalfCard().getId(), Zone.OUTSIDE);
             return;
         }
-        
+
         game.setZone(getLeftHalfCard().getId(), zone);
         game.setZone(getRightHalfCard().getId(), zone);
     }
@@ -181,12 +181,9 @@ class RoomEnterUnlockEffect extends OneShotEffect {
 
         SpellAbilityType lastCastHalf = roomCard.getLastCastHalf();
 
-        if (lastCastHalf == SpellAbilityType.SPLIT_LEFT) {
+        if (lastCastHalf == SpellAbilityType.SPLIT_LEFT || lastCastHalf == SpellAbilityType.SPLIT_RIGHT) {
             roomCard.setLastCastHalf(null);
-            return permanent.roomUnlockLeftDoor(game, source);
-        } else if (lastCastHalf == SpellAbilityType.SPLIT_RIGHT) {
-            roomCard.setLastCastHalf(null);
-            return permanent.roomUnlockRightDoor(game, source);
+            return permanent.roomUnlockDoor(game, source, lastCastHalf == SpellAbilityType.SPLIT_LEFT);
         }
 
         return true;

@@ -11,12 +11,13 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-
 /**
  * @author oscscull
- * Special action for Room cards to unlock a locked half by paying its mana
- * cost.
- * This ability is only present if the corresponding half is currently locked.
+ *         Special action for Room cards to unlock a locked half by paying its
+ *         mana
+ *         cost.
+ *         This ability is only present if the corresponding half is currently
+ *         locked.
  */
 public class RoomUnlockAbility extends SpecialAction {
 
@@ -103,10 +104,6 @@ class RoomUnlockHalfEffect extends OneShotEffect {
             return false;
         }
 
-        if (isLeftHalf) {
-            return permanent.roomUnlockLeftDoor(game, source);
-        } else {
-            return permanent.roomUnlockRightDoor(game, source);
-        }
+        return permanent.roomUnlockDoor(game, source, isLeftHalf);
     }
 }

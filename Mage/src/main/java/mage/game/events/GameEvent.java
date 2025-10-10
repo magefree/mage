@@ -701,7 +701,6 @@ public class GameEvent implements Serializable {
         WATERBENDED,
         /* room door effects
          */
-        ROOM_UNLOCK_DOOR,
         ROOM_UNLOCK_LEFT_DOOR,
         ROOM_UNLOCK_RIGHT_DOOR,
         ROOM_UNLOCK_FULLY,
