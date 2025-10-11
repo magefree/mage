@@ -120,6 +120,11 @@ public abstract class MageObjectImpl implements MageObject {
     }
 
     @Override
+    public boolean hasName(String name) {
+        return Objects.equals(name, this.name);
+    }
+
+    @Override
     public List<CardType> getCardType(Game game) {
         if (game != null) {
             // dynamic
