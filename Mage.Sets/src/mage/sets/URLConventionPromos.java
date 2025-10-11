@@ -31,7 +31,7 @@ public class URLConventionPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Shepherd of the Lost", "34*", Rarity.UNCOMMON, mage.cards.s.ShepherdOfTheLost.class));
         cards.add(new SetCardInfo("Sokka, Bold Boomeranger", "2025-4", Rarity.RARE, mage.cards.s.SokkaBoldBoomeranger.class));
         cards.add(new SetCardInfo("Stealer of Secrets", 7, Rarity.RARE, mage.cards.s.StealerOfSecrets.class));
-        cards.add(new SetCardInfo("Steward of Valeron", 1, Rarity.RARE, mage.cards.s.StewardOfValeron.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Steward of Valeron", 1, Rarity.RARE, mage.cards.s.StewardOfValeron.class));
         cards.add(new SetCardInfo("Unbreakable Formation", "2025-5", Rarity.RARE, mage.cards.u.UnbreakableFormation.class));
      }
 }
