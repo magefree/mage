@@ -43,7 +43,7 @@ public final class KratosGodOfWar extends CardImpl {
                 new SimpleStaticAbility(
                         new GainAbilityAllEffect(
                             HasteAbility.getInstance(), Duration.WhileOnBattlefield,
-                            StaticFilters.FILTER_PERMANENT_ALL_CREATURES
+                            StaticFilters.FILTER_PERMANENT_CREATURES
                             ).setText("all creatures have haste")
                 ));
 
@@ -92,7 +92,7 @@ class KratosGodOfWarEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        int count = game.getBattlefield().count(filter, source.getControllerId(), source, game);
+        int count = game.getBattlefield().count(filter, game.getActivePlayerId(), source, game);
         return count > 0 && player.damage(count, source, game) > 0;
     }
 }
