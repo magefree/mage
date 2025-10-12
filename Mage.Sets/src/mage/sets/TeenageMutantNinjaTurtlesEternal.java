@@ -22,6 +22,7 @@ public final class TeenageMutantNinjaTurtlesEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Dark Ritual", 131, Rarity.MYTHIC, mage.cards.d.DarkRitual.class));
         cards.add(new SetCardInfo("Donatello, Rad Scientist", 109, Rarity.MYTHIC, mage.cards.d.DonatelloRadScientist.class));
         cards.add(new SetCardInfo("Donatello, the Brains", 2, Rarity.MYTHIC, mage.cards.d.DonatelloTheBrains.class));
+        cards.add(new SetCardInfo("Heroes in a Half Shell", 6, Rarity.MYTHIC, mage.cards.h.HeroesInAHalfShell.class));
         cards.add(new SetCardInfo("Leonardo, Worldly Warrior", 101, Rarity.MYTHIC, mage.cards.l.LeonardoWorldlyWarrior.class));
         cards.add(new SetCardInfo("Leonardo, the Balance", 1, Rarity.MYTHIC, mage.cards.l.LeonardoTheBalance.class));
         cards.add(new SetCardInfo("Michelangelo, the Heart", 5, Rarity.MYTHIC, mage.cards.m.MichelangeloTheHeart.class));
