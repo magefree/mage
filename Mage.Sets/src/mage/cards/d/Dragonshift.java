@@ -1,11 +1,8 @@
 package mage.cards.d;
 
-import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.BecomesCreatureAllEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
-import mage.abilities.effects.common.continuous.LoseAllAbilitiesAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.OverloadAbility;
 import mage.cards.CardImpl;
@@ -39,18 +36,9 @@ public final class Dragonshift extends CardImpl {
                 true, false, Duration.EndOfTurn)
                 .withDurationRuleAtStart(true);
         effect.setText("Until end of turn, target creature you control becomes a blue and red Dragon with base power and toughness 4/4, loses all abilities, and gains flying.");
-        this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-
         // Overload {3}{U}{U}{R}{R}
-        Ability ability = new OverloadAbility(this, new LoseAllAbilitiesAllEffect(new FilterControlledCreaturePermanent(""), Duration.EndOfTurn), new ManaCostsImpl<>("{3}{U}{U}{R}{R}"));
-        ability.addEffect(new BecomesCreatureAllEffect(
-                new CreatureToken(4, 4, "blue and red Dragon with base power and toughness 4/4 and with flying")
-                        .withColor("UR")
-                        .withSubType(SubType.DRAGON)
-                        .withAbility(FlyingAbility.getInstance()),
-                null, filter, Duration.EndOfTurn, true, false, true));
-        this.addAbility(ability);
+        OverloadAbility.ImplementOverloadAbility(this, new ManaCostsImpl<>("{2}{U}"),
+                new TargetControlledCreaturePermanent(), effect);
     }
 
     private Dragonshift(final Dragonshift card) {
