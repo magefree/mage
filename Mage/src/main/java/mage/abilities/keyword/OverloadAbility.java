@@ -43,8 +43,8 @@ public class OverloadAbility extends SpellAbility {
         card.getSpellAbility().addTarget(target.copy());
         Ability overload = new OverloadAbility(card, costs);
         for (Effect effect : effects) {
-            card.getSpellAbility().addEffect(effect);
-            OverloadedEffect overloadEffect = new OverloadedEffect(effect, target);
+            card.getSpellAbility().addEffect(effect.copy());
+            OverloadedEffect overloadEffect = new OverloadedEffect(effect, target.copy());
             overloadEffect.setText(effect.getText(card.getSpellAbility().getModes().getMode())
                     .replace("target", "each"));
             overload.addEffect(overloadEffect);
