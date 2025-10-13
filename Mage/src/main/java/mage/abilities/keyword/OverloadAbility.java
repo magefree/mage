@@ -4,6 +4,7 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -109,7 +110,12 @@ class OverloadedEffect extends OneShotEffect {
                 target.possibleTargets(source.getControllerId(), source, game)
                         .stream().map(id -> new MageObjectReference(id, game))
                         .collect(Collectors.toSet())));
-        return innerEffect.apply(game, source);
+        if (innerEffect instanceof OneShotEffect) {
+            return innerEffect.apply(game, source);
+        } else {
+            game.addEffect((ContinuousEffect) innerEffect, source);
+            return true;
+        }
     }
 
     @Override
