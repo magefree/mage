@@ -1,11 +1,20 @@
 package mage.abilities.keyword;
 
+import mage.MageObjectReference;
+import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
 import mage.constants.TimingRule;
+import mage.game.Game;
+import mage.target.Target;
+import mage.target.targetpointer.FixedTargets;
+
+import java.util.stream.Collectors;
 
 /**
  * 702.94. Overload
@@ -30,6 +39,26 @@ import mage.constants.TimingRule;
  */
 public class OverloadAbility extends SpellAbility {
 
+    public static void ImplementOverloadAbility(Card card, ManaCosts costs, Target target, Effect... effects) {
+        card.getSpellAbility().addTarget(target.copy());
+        Ability overload = new OverloadAbility(card, costs);
+        for (Effect effect : effects) {
+            card.getSpellAbility().addEffect(effect);
+            OverloadedEffect overloadEffect = new OverloadedEffect(effect, target);
+            overloadEffect.setText(effect.getText(card.getSpellAbility().getModes().getMode())
+                    .replace("target", "each"));
+            overload.addEffect(overloadEffect);
+        }
+        card.addAbility(overload);
+    }
+
+    public OverloadAbility(Card card, ManaCosts costs) {
+        super(costs, card.getName() + " with overload");
+        this.spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
+        this.timing = (card.isSorcery(null) ? TimingRule.SORCERY : TimingRule.INSTANT);
+    }
+
+    //TODO: Remove once all Overload cards have been converted
     public OverloadAbility(Card card, Effect effect, ManaCosts costs) {
         super(costs, card.getName() + " with overload");
         this.spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
@@ -56,4 +85,35 @@ public class OverloadAbility extends SpellAbility {
         return "Overload " + getManaCostsToPay().getText() + " <i>(You may cast this spell for its overload cost. If you do, change its text by replacing all instances of \"target\" with \"each.\")</i>";
     }
 
+}
+
+class OverloadedEffect extends OneShotEffect {
+    Effect innerEffect;
+    Target target;
+
+    public OverloadedEffect(Effect innerEffect, Target target) {
+        super(Outcome.Benefit);
+        this.innerEffect = innerEffect;
+        this.target = target.withNotTarget(true);
+    }
+
+    protected OverloadedEffect(final OverloadedEffect effect) {
+        super(effect);
+        this.innerEffect = effect.innerEffect;
+        this.target = effect.target;
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        innerEffect.setTargetPointer(new FixedTargets(
+                target.possibleTargets(source.getControllerId(), source, game)
+                        .stream().map(id -> new MageObjectReference(id, game))
+                        .collect(Collectors.toSet())));
+        return innerEffect.apply(game, source);
+    }
+
+    @Override
+    public OverloadedEffect copy() {
+        return new OverloadedEffect(this);
+    }
 }
