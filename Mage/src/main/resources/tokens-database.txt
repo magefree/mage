@@ -2884,6 +2884,9 @@
 |Generate|TOK:SPM|Spider|||Spider21Token|
 |Generate|TOK:SPM|Treasure|||TreasureToken|
 
+#TMT
+|Generate|TOK:TMT|Mutagen|||MutagenToken|
+
 # JVC
 |Generate|TOK:JVC|Elemental Shaman|||ElementalShamanToken|
 
