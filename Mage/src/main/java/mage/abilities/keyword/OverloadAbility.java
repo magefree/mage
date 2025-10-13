@@ -100,8 +100,8 @@ class OverloadedEffect extends OneShotEffect {
 
     protected OverloadedEffect(final OverloadedEffect effect) {
         super(effect);
-        this.innerEffect = effect.innerEffect;
-        this.target = effect.target;
+        this.innerEffect = effect.innerEffect.copy();
+        this.target = effect.target.copy();
     }
 
     @Override
