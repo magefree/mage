@@ -37,7 +37,7 @@ public final class Dragonshift extends CardImpl {
                 .withDurationRuleAtStart(true);
         effect.setText("Until end of turn, target creature you control becomes a blue and red Dragon with base power and toughness 4/4, loses all abilities, and gains flying.");
         // Overload {3}{U}{U}{R}{R}
-        OverloadAbility.ImplementOverloadAbility(this, new ManaCostsImpl<>("{2}{U}"),
+        OverloadAbility.ImplementOverloadAbility(this, new ManaCostsImpl<>("{3}{U}{U}{R}{R}"),
                 new TargetControlledCreaturePermanent(), effect);
     }
 
