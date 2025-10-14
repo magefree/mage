@@ -56,7 +56,7 @@ public final class SurgicalSuiteHospitalRoom extends RoomCard {
         );
         right.addTarget(new TargetAttackingCreature());
 
-        this.AddRoomAbilities(left, right);
+        this.addRoomAbilities(left, right);
     }
 
     private SurgicalSuiteHospitalRoom(final SurgicalSuiteHospitalRoom card) {

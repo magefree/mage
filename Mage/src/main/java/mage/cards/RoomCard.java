@@ -59,7 +59,7 @@ public abstract class RoomCard extends SplitCard {
         this.lastCastHalf = lastCastHalf;
     }
 
-    protected void AddRoomAbilities(Ability leftAbility, Ability rightAbility) {
+    protected void addRoomAbilities(Ability leftAbility, Ability rightAbility) {
         getLeftHalfCard().addAbility(leftAbility);
         getRightHalfCard().addAbility(rightAbility);
         this.addAbility(leftAbility.copy());

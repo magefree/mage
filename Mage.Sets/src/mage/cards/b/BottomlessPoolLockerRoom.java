@@ -39,7 +39,7 @@ public final class BottomlessPoolLockerRoom extends RoomCard {
                 StaticFilters.FILTER_CONTROLLED_A_CREATURE,
                 false, SetTargetPointer.PLAYER, true, true, TargetController.OPPONENT);
 
-        this.AddRoomAbilities(left, right);
+        this.addRoomAbilities(left, right);
     }
 
     private BottomlessPoolLockerRoom(final BottomlessPoolLockerRoom card) {
