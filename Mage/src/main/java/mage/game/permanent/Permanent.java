@@ -476,9 +476,9 @@ public interface Permanent extends Card, Controllable {
 
     boolean roomWasUnlockedOnCast();
     
-    boolean roomLeftDoorUnlocked();
+    boolean leftDoorUnlocked();
 
-    boolean roomRightDoorUnlocked();
+    boolean rightDoorUnlocked();
 
     boolean roomUnlockOnCast(Game game);
 

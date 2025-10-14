@@ -2188,12 +2188,12 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public boolean roomLeftDoorUnlocked() {
+    public boolean leftDoorUnlocked() {
         return leftHalfUnlocked;
     }
 
     @Override
-    public boolean roomRightDoorUnlocked() {
+    public boolean rightDoorUnlocked() {
         return rightHalfUnlocked;
     }
 

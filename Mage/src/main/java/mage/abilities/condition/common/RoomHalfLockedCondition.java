@@ -32,6 +32,6 @@ public class RoomHalfLockedCondition implements Condition {
         }
 
         // Return true if the specified half is NOT unlocked
-        return checkLeft ? !permanent.roomLeftDoorUnlocked() : !permanent.roomRightDoorUnlocked();
+        return checkLeft ? !permanent.leftDoorUnlocked() : !permanent.rightDoorUnlocked();
     }
 }

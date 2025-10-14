@@ -67,8 +67,8 @@ public class RoomNameEffect extends ContinuousEffectImpl {
         }
 
         SplitCard roomCard = (SplitCard) roomCardBlueprint;
-        boolean isLeftUnlocked = permanent.roomLeftDoorUnlocked();
-        boolean isRightUnlocked = permanent.roomRightDoorUnlocked();
+        boolean isLeftUnlocked = permanent.leftDoorUnlocked();
+        boolean isRightUnlocked = permanent.rightDoorUnlocked();
         String newName = "";
 
         if (isLeftUnlocked && roomCard.getLeftHalfCard() != null) {
