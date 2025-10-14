@@ -9,14 +9,14 @@ import mage.game.permanent.Permanent;
  * @author oscscull
  * Checks if a Permanent's specified half is LOCKED (i.e., NOT unlocked).
  */
-public class RoomHalfLockedCondition implements Condition {
+public enum RoomHalfLockedCondition implements Condition {
     
-    public static final RoomHalfLockedCondition LEFT = new RoomHalfLockedCondition(true);
-    public static final RoomHalfLockedCondition RIGHT = new RoomHalfLockedCondition(false);
+    LEFT(true),
+    RIGHT(false);
     
     private final boolean checkLeft;
 
-    private RoomHalfLockedCondition(boolean checkLeft) {
+    RoomHalfLockedCondition(boolean checkLeft) {
         this.checkLeft = checkLeft;
     }
 
