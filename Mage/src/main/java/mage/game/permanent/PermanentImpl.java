@@ -2230,7 +2230,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         }
 
         // Fire door unlock event
-        GameEvent event = new GameEvent(GameEvent.EventType.UNLOCK_DOOR, getId(), source, source.getControllerId());
+        GameEvent event = new GameEvent(GameEvent.EventType.DOOR_UNLOCKED, getId(), source, source.getControllerId());
         event.setFlag(isLeftDoor);
         game.fireEvent(event);
 
