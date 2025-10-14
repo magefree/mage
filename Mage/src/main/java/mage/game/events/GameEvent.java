@@ -703,7 +703,7 @@ public class GameEvent implements Serializable {
          */
         ROOM_UNLOCK_LEFT_DOOR,
         ROOM_UNLOCK_RIGHT_DOOR,
-        ROOM_UNLOCKED_FULLY,
+        ROOM_FULLY_UNLOCKED,
         // custom events - must store some unique data to track
         CUSTOM_EVENT;
 
