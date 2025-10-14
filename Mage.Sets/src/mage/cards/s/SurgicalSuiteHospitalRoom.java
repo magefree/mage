@@ -45,12 +45,13 @@ public final class SurgicalSuiteHospitalRoom extends RoomCard {
                 "{1}{W}", "{3}{W}", SpellAbilityType.SPLIT);
         this.subtype.add(SubType.ROOM);
 
-        // Left half ability
+        // Left half ability - "When you unlock this door, return target creature card with mana value 3 or
+        // less from your graveyard to the battlefield."
         UnlockThisDoorTriggeredAbility left = new UnlockThisDoorTriggeredAbility(
                 new ReturnFromGraveyardToBattlefieldTargetEffect(), false, true);
         left.addTarget(new TargetCardInYourGraveyard(filter));
 
-        // Right half ability
+        // Right half ability - "Whenever you attack, put a +1/+1 counter on target attacking creature."
         AttacksWithCreaturesTriggeredAbility right = new AttacksWithCreaturesTriggeredAbility(
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance()), 1
         );
