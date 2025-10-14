@@ -89,9 +89,6 @@ class RoomUnlockHalfEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-        if (permanent == null) {
-            permanent = game.getPermanent(source.getSourceId());
-        }
 
         if (permanent == null) {
             return false;
