@@ -792,7 +792,8 @@ public class RoomCardTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Bottomless Pool // Locker Room", 1);
     }
 
-    // Test converting one permanent into one room, then another (the room halves should STAY UNLOCKED on the appropriate side!)
+    // Test converting one permanent into one room, then another (the room halves
+    // should STAY UNLOCKED on the appropriate side!)
     @Test
     public void testUnlockingPermanentMakeCopyOfOtherRoom() {
         skipInitShuffling();
@@ -826,7 +827,6 @@ public class RoomCardTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{4}{U}: Unlock the right half.");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
-
         // Cast Surgical Suite (unlocked left half only)
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Surgical Suite");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
@@ -839,7 +839,7 @@ public class RoomCardTest extends CardTestPlayerBase {
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}: {this} becomes a copy");
         addTarget(playerA, "Surgical Suite");
-        
+
         attack(3, playerA, "Memnite");
         addTarget(playerA, "Memnite");
         setStopAt(3, PhaseStep.END_TURN);
@@ -855,5 +855,50 @@ public class RoomCardTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Hospital Room", 1);
         // Memnite got a buff
         assertPowerToughness(playerA, "Memnite", 2, 2);
+    }
+
+    @Test
+    public void testSakashimaCopiesRoomCard() {
+        skipInitShuffling();
+        // Bottomless Pool {U} When you unlock this door, return up to one target
+        // creature to its owner's hand.
+        // Locker Room {4}{U} Whenever one or more creatures you control deal combat
+        // damage to a player, draw a card.
+
+        // Sakashima the Impostor {2}{U}{U}
+        // Legendary Creature — Human Rogue
+        // You may have Sakashima the Impostor enter the battlefield as a copy of any
+        // creature on the battlefield,
+        // except its name is Sakashima the Impostor, it's legendary in addition to its
+        // other types,
+        // and it has "{2}{U}{U}: Return Sakashima the Impostor to its owner's hand at
+        // the beginning of the next end step."
+
+        addCard(Zone.HAND, playerA, "Bottomless Pool // Locker Room");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 10);
+
+        addCard(Zone.HAND, playerB, "Sakashima the Impostor");
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 10);
+
+        // Cast Bottomless Pool (unlocked left half only)
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bottomless Pool");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        addTarget(playerA, TestPlayer.TARGET_SKIP);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // Cast Sakashima copying the room
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Sakashima the Impostor");
+        setChoice(playerB, "Yes"); // Choose to copy
+        waitStackResolved(2, PhaseStep.PRECOMBAT_MAIN);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{4}{U}: Unlock the right half.");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        setStopAt(2, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        // Verify Sakashima entered and is copying the room
+        assertPermanentCount(playerB, "Sakashima the Impostor", 1);
     }
 }
