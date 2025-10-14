@@ -1,8 +1,8 @@
 package mage.game.command;
 
-import mage.game.permanent.token.TokenImpl;
 import mage.util.GameLog;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -112,5 +112,10 @@ public abstract class CommandObjectImpl implements CommandObject {
     @Override
     public String getLogName() {
         return GameLog.getColoredObjectIdName(this);
+    }
+
+    @Override
+    public boolean hasName(String name) {
+        return Objects.equals(name, this.name);
     }
 }

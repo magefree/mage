@@ -63,6 +63,8 @@ public interface MageObject extends MageItem, Serializable, Copyable<MageObject>
 
     void setName(String name);
 
+    boolean hasName(String name);
+
     default List<CardType> getCardType() {
         return getCardType(null);
     }
