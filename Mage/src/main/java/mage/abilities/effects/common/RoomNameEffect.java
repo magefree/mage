@@ -15,13 +15,15 @@ import mage.game.permanent.PermanentCard;
 
 /**
  * @author oscscull
- * Continuous effect that sets the name of a Room permanent based on its
- * unlocked halves.
- * Functions as a characteristic-defining ability.
- * Rule 709.5: "As long as this permanent doesn’t have the ‘left half unlocked’
- * designation,
- * it doesn’t have the name... of this object’s left half” and vice versa for
- * the right half.
+ *         Continuous effect that sets the name of a Room permanent based on its
+ *         unlocked halves.
+ *         Functions as a characteristic-defining ability.
+ *         Rule 709.5: "As long as this permanent doesn’t have the ‘left half
+ *         unlocked’
+ *         designation,
+ *         it doesn’t have the name... of this object’s left half” and vice
+ *         versa for
+ *         the right half.
  */
 public class RoomNameEffect extends ContinuousEffectImpl {
 
@@ -66,15 +68,13 @@ public class RoomNameEffect extends ContinuousEffectImpl {
         }
 
         SplitCard roomCard = (SplitCard) roomCardBlueprint;
-        boolean isLeftUnlocked = permanent.leftDoorUnlocked();
-        boolean isRightUnlocked = permanent.rightDoorUnlocked();
         String newName = "";
 
-        if (isLeftUnlocked && roomCard.getLeftHalfCard() != null) {
+        if (permanent.leftDoorUnlocked() && roomCard.getLeftHalfCard() != null) {
             newName += roomCard.getLeftHalfCard().getName();
         }
 
-        if (isRightUnlocked && roomCard.getRightHalfCard() != null) {
+        if (permanent.rightDoorUnlocked() && roomCard.getRightHalfCard() != null) {
             if (!newName.isEmpty()) {
                 newName += " // "; // Split card name separator
             }
