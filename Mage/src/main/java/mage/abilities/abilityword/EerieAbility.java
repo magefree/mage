@@ -41,7 +41,7 @@ public class EerieAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD
-                || event.getType() == GameEvent.EventType.ROOM_UNLOCK_FULLY;
+                || event.getType() == GameEvent.EventType.ROOM_UNLOCKED_FULLY;
     }
 
     @Override
@@ -54,7 +54,7 @@ public class EerieAbility extends TriggeredAbilityImpl {
             return permanent != null && permanent.isEnchantment(game);
         }
 
-        if (event.getType() == GameEvent.EventType.ROOM_UNLOCK_FULLY) {
+        if (event.getType() == GameEvent.EventType.ROOM_UNLOCKED_FULLY) {
             return isControlledBy(event.getPlayerId());
         }
         return false;

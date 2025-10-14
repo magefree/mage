@@ -2154,7 +2154,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
         // Check for fully unlocked trigger
         if (otherDoorUnlocked) {
-            game.fireEvent(new GameEvent(EventType.ROOM_UNLOCK_FULLY, getId(), source, source.getControllerId()));
+            game.fireEvent(new GameEvent(EventType.ROOM_UNLOCKED_FULLY, getId(), source, source.getControllerId()));
         }
 
         return true;
