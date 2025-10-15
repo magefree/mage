@@ -474,15 +474,15 @@ public interface Permanent extends Card, Controllable {
 
     void setHarnessed(boolean value);
 
-    boolean roomWasUnlockedOnCast();
+    boolean wasRoomUnlockedOnCast();
     
-    boolean leftDoorUnlocked();
+    boolean isLeftDoorUnlocked();
 
-    boolean rightDoorUnlocked();
+    boolean isRightDoorUnlocked();
 
-    boolean roomUnlockOnCast(Game game);
+    boolean unlockRoomOnCast(Game game);
 
-    boolean roomUnlockDoor(Game game, Ability source, boolean isLeftDoor);
+    boolean unlockDoor(Game game, Ability source, boolean isLeftDoor);
     
     @Override
     Permanent copy();

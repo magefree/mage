@@ -29,6 +29,6 @@ public enum RoomHalfLockedCondition implements Condition {
         }
 
         // Return true if the specified half is NOT unlocked
-        return checkLeft ? !permanent.leftDoorUnlocked() : !permanent.rightDoorUnlocked();
+        return checkLeft ? !permanent.isLeftDoorUnlocked() : !permanent.isRightDoorUnlocked();
     }
 }

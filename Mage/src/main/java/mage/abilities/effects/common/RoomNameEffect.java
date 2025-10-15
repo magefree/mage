@@ -70,11 +70,11 @@ public class RoomNameEffect extends ContinuousEffectImpl {
         SplitCard roomCard = (SplitCard) roomCardBlueprint;
         String newName = "";
 
-        if (permanent.leftDoorUnlocked() && roomCard.getLeftHalfCard() != null) {
+        if (permanent.isLeftDoorUnlocked() && roomCard.getLeftHalfCard() != null) {
             newName += roomCard.getLeftHalfCard().getName();
         }
 
-        if (permanent.rightDoorUnlocked() && roomCard.getRightHalfCard() != null) {
+        if (permanent.isRightDoorUnlocked() && roomCard.getRightHalfCard() != null) {
             if (!newName.isEmpty()) {
                 newName += " // "; // Split card name separator
             }

@@ -157,11 +157,11 @@ class RoomEnterUnlockEffect extends OneShotEffect {
             return false;
         }
 
-        if (permanent.roomWasUnlockedOnCast()) {
+        if (permanent.wasRoomUnlockedOnCast()) {
             return false;
         }
 
-        permanent.roomUnlockOnCast(game);
+        permanent.unlockRoomOnCast(game);
         RoomCard roomCard = null;
         // Get the parent card to access the lastCastHalf variable
         if (permanent instanceof PermanentToken) {
@@ -183,7 +183,7 @@ class RoomEnterUnlockEffect extends OneShotEffect {
 
         if (lastCastHalf == SpellAbilityType.SPLIT_LEFT || lastCastHalf == SpellAbilityType.SPLIT_RIGHT) {
             roomCard.setLastCastHalf(null);
-            return permanent.roomUnlockDoor(game, source, lastCastHalf == SpellAbilityType.SPLIT_LEFT);
+            return permanent.unlockDoor(game, source, lastCastHalf == SpellAbilityType.SPLIT_LEFT);
         }
 
         return true;

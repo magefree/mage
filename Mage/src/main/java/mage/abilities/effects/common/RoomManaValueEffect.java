@@ -94,7 +94,7 @@ public class RoomManaValueEffect extends ContinuousEffectImpl {
         Mana totalManaCost = new Mana();
 
         // Add the mana from the left half's cost to our total Mana object
-        boolean isLeftUnlocked = permanent.leftDoorUnlocked();
+        boolean isLeftUnlocked = permanent.isLeftDoorUnlocked();
         if (isLeftUnlocked) {
             ManaCosts leftHalfManaCost = null;
             if (roomCard.getLeftHalfCard() != null && roomCard.getLeftHalfCard().getSpellAbility() != null) {
@@ -106,7 +106,7 @@ public class RoomManaValueEffect extends ContinuousEffectImpl {
         }
 
         // Add the mana from the right half's cost to our total Mana object
-        boolean isRightUnlocked = permanent.rightDoorUnlocked();
+        boolean isRightUnlocked = permanent.isRightDoorUnlocked();
         if (isRightUnlocked) {
             ManaCosts rightHalfManaCost = null;
             if (roomCard.getRightHalfCard() != null && roomCard.getRightHalfCard().getSpellAbility() != null) {

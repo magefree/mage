@@ -2094,22 +2094,22 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public boolean roomWasUnlockedOnCast() {
+    public boolean wasRoomUnlockedOnCast() {
         return roomWasUnlockedOnCast;
     }
 
     @Override
-    public boolean leftDoorUnlocked() {
+    public boolean isLeftDoorUnlocked() {
         return leftHalfUnlocked;
     }
 
     @Override
-    public boolean rightDoorUnlocked() {
+    public boolean isRightDoorUnlocked() {
         return rightHalfUnlocked;
     }
 
     @Override
-    public boolean roomUnlockOnCast(Game game) {
+    public boolean unlockRoomOnCast(Game game) {
         if (this.roomWasUnlockedOnCast) {
             return false;
         }
@@ -2118,7 +2118,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public boolean roomUnlockDoor(Game game, Ability source, boolean isLeftDoor) {
+    public boolean unlockDoor(Game game, Ability source, boolean isLeftDoor) {
         // Check if already unlocked
         boolean thisDoorUnlocked = isLeftDoor ? leftHalfUnlocked : rightHalfUnlocked;
         if (thisDoorUnlocked) {
