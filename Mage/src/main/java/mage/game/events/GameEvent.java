@@ -699,9 +699,18 @@ public class GameEvent implements Serializable {
         AIRBENDED,
         FIREBENDED,
         WATERBENDED,
-        /* room door effects
+        /* A room permanent has a door unlocked.
+         targetId   the room permanent
+         sourceId   the unlock ability
+         playerId   the room permanent's controller
+         flag       true = left door unlocked false = right door unlocked
          */
         DOOR_UNLOCKED,
+        /* A room permanent has a door unlocked.
+         targetId   the room permanent
+         sourceId   the unlock ability
+         playerId   the room permanent's controller
+         */
         ROOM_FULLY_UNLOCKED,
         // custom events - must store some unique data to track
         CUSTOM_EVENT;
