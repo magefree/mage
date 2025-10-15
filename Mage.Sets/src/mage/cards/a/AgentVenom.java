@@ -45,7 +45,7 @@ public final class AgentVenom extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever another nontoken creature you control dies, you draw a card and lose 1 life.
         Ability ability = new DiesCreatureTriggeredAbility(
