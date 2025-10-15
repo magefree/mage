@@ -12,8 +12,7 @@ import mage.abilities.condition.common.RoomHalfLockedCondition;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.RoomManaValueEffect;
-import mage.abilities.effects.common.RoomNameEffect;
+import mage.abilities.effects.common.RoomCharacteristicsEffect;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -196,8 +195,7 @@ class RoomAbility extends SimpleStaticAbility {
         super(Zone.ALL, null);
         this.setRuleVisible(true);
         this.setRuleAtTheTop(true);
-        this.addEffect(new RoomManaValueEffect());
-        this.addEffect(new RoomNameEffect());
+        this.addEffect(new RoomCharacteristicsEffect());
     }
 
     protected RoomAbility(final RoomAbility ability) {

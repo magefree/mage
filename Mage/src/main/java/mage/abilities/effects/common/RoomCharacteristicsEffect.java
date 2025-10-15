@@ -1,6 +1,7 @@
 package mage.abilities.effects.common;
 
 import mage.MageObject;
+import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -14,50 +15,40 @@ import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
-import mage.Mana;
 
 /**
  * @author oscscull
- * Continuous effect that sets the mv of a Room permanent based on its unlocked
- * halves.
+ * Continuous effect that sets the name and mana value of a Room permanent based
+ * on its unlocked halves.
  * 
- * 604.3. Some static abilities are characteristic-defining abilities.
- * A characteristic-defining ability conveys information about an object’s
- * characteristics
- * that would normally be found elsewhere on that object
- * (such as in its mana cost, type line, or power/toughness box).
- * Characteristic-defining abilities can add to or override information found
- * elsewhere on that object.
- * Characteristic-defining abilities function in all zones. They also function
- * outside the game and before the game begins.
- *
+ * Functions as a characteristic-defining ability.
  * 709.5. Some split cards are permanent cards with a single shared type line.
  * A shared type line on such an object represents two static abilities that
  * function on the battlefield.
- * These are “As long as this permanent doesn’t have the ‘left half unlocked’
- * designation, it doesn’t have the name, mana cost, or rules text of this
- * object’s left half”
- * and “As long as this permanent doesn’t have the ‘right half unlocked’
- * designation, it doesn’t have the name, mana cost, or rules text of this
- * object’s right half.”
+ * These are "As long as this permanent doesn't have the 'left half unlocked'
+ * designation, it doesn't have the name, mana cost, or rules text of this
+ * object's left half"
+ * and "As long as this permanent doesn't have the 'right half unlocked'
+ * designation, it doesn't have the name, mana cost, or rules text of this
+ * object's right half."
  * These abilities, as well as which half of that permanent a characteristic is
- * in, are part of that object’s copiable values.
+ * in, are part of that object's copiable values.
  */
-public class RoomManaValueEffect extends ContinuousEffectImpl {
+public class RoomCharacteristicsEffect extends ContinuousEffectImpl {
 
-    public RoomManaValueEffect() {
+    public RoomCharacteristicsEffect() {
         super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.CharacteristicDefining_7a,
                 Outcome.Neutral);
         staticText = "";
     }
 
-    private RoomManaValueEffect(final RoomManaValueEffect effect) {
+    private RoomCharacteristicsEffect(final RoomCharacteristicsEffect effect) {
         super(effect);
     }
 
     @Override
-    public RoomManaValueEffect copy() {
-        return new RoomManaValueEffect(this);
+    public RoomCharacteristicsEffect copy() {
+        return new RoomCharacteristicsEffect(this);
     }
 
     @Override
@@ -90,11 +81,29 @@ public class RoomManaValueEffect extends ContinuousEffectImpl {
 
         SplitCard roomCard = (SplitCard) roomCardBlueprint;
 
+        // Set the name based on unlocked halves
+        String newName = "";
+
+        boolean isLeftUnlocked = permanent.isLeftDoorUnlocked();
+        if (isLeftUnlocked && roomCard.getLeftHalfCard() != null) {
+            newName += roomCard.getLeftHalfCard().getName();
+        }
+
+        boolean isRightUnlocked = permanent.isRightDoorUnlocked();
+        if (isRightUnlocked && roomCard.getRightHalfCard() != null) {
+            if (!newName.isEmpty()) {
+                newName += " // "; // Split card name separator
+            }
+            newName += roomCard.getRightHalfCard().getName();
+        }
+
+        permanent.setName(newName);
+
+        // Set the mana value based on unlocked halves
         // Create a new Mana object to accumulate the costs
         Mana totalManaCost = new Mana();
 
         // Add the mana from the left half's cost to our total Mana object
-        boolean isLeftUnlocked = permanent.isLeftDoorUnlocked();
         if (isLeftUnlocked) {
             ManaCosts leftHalfManaCost = null;
             if (roomCard.getLeftHalfCard() != null && roomCard.getLeftHalfCard().getSpellAbility() != null) {
@@ -106,7 +115,6 @@ public class RoomManaValueEffect extends ContinuousEffectImpl {
         }
 
         // Add the mana from the right half's cost to our total Mana object
-        boolean isRightUnlocked = permanent.isRightDoorUnlocked();
         if (isRightUnlocked) {
             ManaCosts rightHalfManaCost = null;
             if (roomCard.getRightHalfCard() != null && roomCard.getRightHalfCard().getSpellAbility() != null) {
