@@ -28,13 +28,12 @@ public class UnlockThisDoorTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DOOR_UNLOCKED
-                && event.getFlag() == isLeftHalf;
+        return event.getType() == GameEvent.EventType.DOOR_UNLOCKED;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getTargetId().equals(getSourceId());
+        return event.getTargetId().equals(getSourceId()) && event.getFlag() == isLeftHalf;
     }
 
     @Override
