@@ -129,7 +129,7 @@ public abstract class SplitCard extends CardImpl implements CardWithHalves {
         getLeftHalfCard().updateZoneChangeCounter(game, event);
         getRightHalfCard().updateZoneChangeCounter(game, event);
     }
-    
+
     @Override
     public boolean cast(Game game, Zone fromZone, SpellAbility ability, UUID controllerId) {
         switch (ability.getSpellAbilityType()) {
@@ -152,8 +152,7 @@ public abstract class SplitCard extends CardImpl implements CardWithHalves {
             // TODO: why it here, for GUI's cleanup in card texts? Maybe it can be removed, see mdf cards
             if (ability instanceof SpellAbility
                     && (((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.SPLIT
-                            || ((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.SPLIT_AFTERMATH
-                        )) {
+                    || ((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.SPLIT_AFTERMATH)) {
                 continue;
             }
             allAbilites.add(ability);
