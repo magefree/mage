@@ -203,11 +203,12 @@ public final class ZonesHandler {
                         cardsToUpdate.get(Zone.OUTSIDE).add(roomCard.getLeftHalfCard());
                         cardsToUpdate.get(Zone.OUTSIDE).add(roomCard.getRightHalfCard());
                         break;
-                        default:
+                    default:
                         // move all parts
                         cardsToUpdate.get(toZone).add(roomCard.getLeftHalfCard());
                         cardsToUpdate.get(toZone).add(roomCard.getRightHalfCard());
-                        // If we aren't casting onto the stack or etb'ing, we need to clear this state (countered, memory lapsed etc)
+                        // If we aren't casting onto the stack or etb'ing, we need to clear this state
+                        // (countered, memory lapsed etc)
                         // This prevents the state persisting for a put into play effect later
                         roomCard.setLastCastHalf(null);
                         break;
