@@ -43,6 +43,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Blazemire Verge", 329, Rarity.RARE, mage.cards.b.BlazemireVerge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bleeding Woods", 257, Rarity.COMMON, mage.cards.b.BleedingWoods.class));
         cards.add(new SetCardInfo("Boilerbilges Ripper", 127, Rarity.COMMON, mage.cards.b.BoilerbilgesRipper.class));
+        cards.add(new SetCardInfo("Bottomless Pool // Locker Room", 43, Rarity.UNCOMMON, mage.cards.b.BottomlessPoolLockerRoom.class));
         cards.add(new SetCardInfo("Break Down the Door", 170, Rarity.UNCOMMON, mage.cards.b.BreakDownTheDoor.class));
         cards.add(new SetCardInfo("Broodspinner", 211, Rarity.UNCOMMON, mage.cards.b.Broodspinner.class));
         cards.add(new SetCardInfo("Cackling Slasher", 85, Rarity.COMMON, mage.cards.c.CacklingSlasher.class));
@@ -318,6 +319,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Stay Hidden, Stay Silent", 291, Rarity.UNCOMMON, mage.cards.s.StayHiddenStaySilent.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stay Hidden, Stay Silent", 74, Rarity.UNCOMMON, mage.cards.s.StayHiddenStaySilent.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Strangled Cemetery", 268, Rarity.COMMON, mage.cards.s.StrangledCemetery.class));
+        cards.add(new SetCardInfo("Surgical Suite // Hospital Room", 34, Rarity.UNCOMMON, mage.cards.s.SurgicalSuiteHospitalRoom.class));
         cards.add(new SetCardInfo("Swamp", 274, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 281, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 282, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));

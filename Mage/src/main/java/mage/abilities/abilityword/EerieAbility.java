@@ -9,7 +9,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
 /**
- * TODO: This only triggers off of enchantments entering as the room mechanic hasn't been implemented yet
  *
  * @author TheElk801
  */
@@ -41,15 +40,23 @@ public class EerieAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
+        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD
+                || event.getType() == GameEvent.EventType.ROOM_FULLY_UNLOCKED;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (!isControlledBy(event.getPlayerId())) {
-            return false;
+        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
+            if (!isControlledBy(event.getPlayerId())) {
+                return false;
+            }
+            Permanent permanent = game.getPermanent(event.getTargetId());
+            return permanent != null && permanent.isEnchantment(game);
         }
-        Permanent permanent = game.getPermanent(event.getTargetId());
-        return permanent != null && permanent.isEnchantment(game);
+
+        if (event.getType() == GameEvent.EventType.ROOM_FULLY_UNLOCKED) {
+            return isControlledBy(event.getPlayerId());
+        }
+        return false;
     }
 }
