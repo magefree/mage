@@ -21,6 +21,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 
+import java.util.LinkedList;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
@@ -102,17 +103,19 @@ class GlamerSpinnersEffect extends OneShotEffect {
         if (!game.getBattlefield().contains(filter, source.getControllerId(), source, game, 1)) {
             return false;
         }
+        Player player = game.getPlayer(source.getControllerId());
+        if (player == null) {
+            return false;
+        }
         TargetPermanent target = new TargetPermanent(filter);
         target.withNotTarget(true);
-        Optional.ofNullable(source)
-                .map(Controllable::getControllerId)
-                .map(game::getPlayer)
-                .ifPresent(player -> player.choose(outcome, target, source, game));
+        player.choose(Outcome.AIDontUseIt, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         if (permanent == null) {
             return false;
         }
-        for (UUID attachmentId : targetPermanent.getAttachments()) {
+        // new list to avoid concurrent modification
+        for (UUID attachmentId : new LinkedList<>(targetPermanent.getAttachments())) {
             permanent.addAttachment(attachmentId, source, game);
         }
         return true;
