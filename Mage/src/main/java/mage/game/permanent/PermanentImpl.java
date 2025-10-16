@@ -2086,4 +2086,5 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
         return ZonesHandler.moveCard(zcInfo, game, source);
     }
+
 }
