@@ -387,6 +387,8 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Victor, Valgavoth's Seneschal", 364, Rarity.RARE, mage.cards.v.VictorValgavothsSeneschal.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vile Mutilator", 122, Rarity.UNCOMMON, mage.cards.v.VileMutilator.class));
         cards.add(new SetCardInfo("Violent Urge", 164, Rarity.UNCOMMON, mage.cards.v.ViolentUrge.class));
+        cards.add(new SetCardInfo("Walk-In Closet // Forgotten Cellar", 205, Rarity.MYTHIC, mage.cards.w.WalkInClosetForgottenCellar.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Walk-In Closet // Forgotten Cellar", 341, Rarity.MYTHIC, mage.cards.w.WalkInClosetForgottenCellar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Waltz of Rage", 165, Rarity.RARE, mage.cards.w.WaltzOfRage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Waltz of Rage", 318, Rarity.RARE, mage.cards.w.WaltzOfRage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wary Watchdog", 206, Rarity.COMMON, mage.cards.w.WaryWatchdog.class));
