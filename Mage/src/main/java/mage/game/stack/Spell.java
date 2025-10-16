@@ -541,7 +541,7 @@ public class Spell extends StackObjectImpl implements Card {
     @Override
     public String getLogName() {
         if (faceDown) {
-            return "face down spell";
+            return GameLog.getNeutralObjectIdName("face down spell", getId());
         }
         return GameLog.getColoredObjectIdName(card);
     }
