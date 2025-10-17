@@ -2546,6 +2546,7 @@ public class ScryfallImageSupportTokens {
 
             // DSK
             put("DSK/Beast", "https://api.scryfall.com/cards/tdsk/3?format=image");
+            put("DSK/Demon", "https://api.scryfall.com/cards/tdsk/9?format=image");
             put("DSK/Emblem Kaito", "https://api.scryfall.com/cards/tdsk/17/en?format=image");
             put("DSK/Everywhere", "https://api.scryfall.com/cards/tdsk/16?format=image");
             put("DSK/Glimmer", "https://api.scryfall.com/cards/tdsk/4?format=image");
