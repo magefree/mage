@@ -140,6 +140,8 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Frantic Strength", 179, Rarity.COMMON, mage.cards.f.FranticStrength.class));
         cards.add(new SetCardInfo("Friendly Ghost", 12, Rarity.COMMON, mage.cards.f.FriendlyGhost.class));
         cards.add(new SetCardInfo("Friendly Teddy", 247, Rarity.COMMON, mage.cards.f.FriendlyTeddy.class));
+        cards.add(new SetCardInfo("Funeral Room // Awakening Hall", 100, Rarity.MYTHIC, mage.cards.f.FuneralRoomAwakeningHall.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Funeral Room // Awakening Hall", 338, Rarity.MYTHIC, mage.cards.f.FuneralRoomAwakeningHall.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Get Out", 60, Rarity.UNCOMMON, mage.cards.g.GetOut.class));
         cards.add(new SetCardInfo("Ghost Vacuum", 248, Rarity.RARE, mage.cards.g.GhostVacuum.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ghost Vacuum", 326, Rarity.RARE, mage.cards.g.GhostVacuum.class, NON_FULL_USE_VARIOUS));
