@@ -70,6 +70,8 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Cynical Loner", 89, Rarity.UNCOMMON, mage.cards.c.CynicalLoner.class));
         cards.add(new SetCardInfo("Daggermaw Megalodon", 48, Rarity.COMMON, mage.cards.d.DaggermawMegalodon.class));
         cards.add(new SetCardInfo("Dashing Bloodsucker", 90, Rarity.UNCOMMON, mage.cards.d.DashingBloodsucker.class));
+        cards.add(new SetCardInfo("Dazzling Theater // Prop Room", 3, Rarity.RARE, mage.cards.d.DazzlingTheaterPropRoom.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Dazzling Theater // Prop Room", 334, Rarity.RARE, mage.cards.d.DazzlingTheaterPropRoom.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Defiant Survivor", 175, Rarity.UNCOMMON, mage.cards.d.DefiantSurvivor.class));
         cards.add(new SetCardInfo("Demonic Counsel", 310, Rarity.RARE, mage.cards.d.DemonicCounsel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Demonic Counsel", 92, Rarity.RARE, mage.cards.d.DemonicCounsel.class, NON_FULL_USE_VARIOUS));
