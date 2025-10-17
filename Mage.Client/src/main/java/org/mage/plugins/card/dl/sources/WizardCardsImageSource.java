@@ -640,7 +640,7 @@ public enum WizardCardsImageSource implements CardImageSource {
 
     private String normalizeName(String name) {
         //Split card
-        if (name.contains("//")) {
+        if (name.contains(" // ")) {
             if (name.indexOf('(') > 0) {
                 name = name.substring(0, name.indexOf('(') - 1);
             }
