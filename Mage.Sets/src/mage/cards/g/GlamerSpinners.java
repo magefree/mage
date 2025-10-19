@@ -82,11 +82,11 @@ class GlamerSpinnersEffect extends OneShotEffect {
         Permanent targetPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (targetPermanent == null
                 || targetPermanent
-                .getAttachments()
-                .stream()
-                .map(game::getPermanent)
-                .filter(Objects::nonNull)
-                .noneMatch(p -> p.hasSubtype(SubType.AURA, game))) {
+                        .getAttachments()
+                        .stream()
+                        .map(game::getPermanent)
+                        .filter(Objects::nonNull)
+                        .noneMatch(p -> p.hasSubtype(SubType.AURA, game))) {
             return false;
         }
         FilterPermanent filter = new FilterPermanent(
@@ -95,7 +95,7 @@ class GlamerSpinnersEffect extends OneShotEffect {
                         .map(Controllable::getControllerId)
                         .map(game::getPlayer)
                         .map(Player::getName)
-                        .map(s -> " controlled by" + s)
+                        .map(s -> " controlled by " + s)
                         .orElse("")
         );
         filter.add(new ControllerIdPredicate(targetPermanent.getControllerId()));
@@ -116,7 +116,10 @@ class GlamerSpinnersEffect extends OneShotEffect {
         }
         // new list to avoid concurrent modification
         for (UUID attachmentId : new LinkedList<>(targetPermanent.getAttachments())) {
-            permanent.addAttachment(attachmentId, source, game);
+            Permanent attachment = game.getPermanent(attachmentId);
+            if (attachment != null && attachment.hasSubtype(SubType.AURA, game)) {
+                permanent.addAttachment(attachmentId, source, game);
+            }
         }
         return true;
     }
