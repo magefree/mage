@@ -1715,6 +1715,7 @@ public abstract class AbilityImpl implements Ability {
             // So "Enters with counters" causes "Whenever counters are placed" to trigger with battlefield zcc
             // Particularly relevant for Sagas, which always involve both
             // Note that this does NOT apply to "As ~ ETB" effects, those still use the stack zcc
+            // TODO: JayDi doesn't like this solution, consider finding another one.
             zcc += 1;
             // However, tokens don't change their zcc upon entering the battlefield, so don't add for them
         }
