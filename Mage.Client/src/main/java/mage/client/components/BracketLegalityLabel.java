@@ -39,10 +39,9 @@ public class BracketLegalityLabel extends LegalityLabel {
     private static final Logger logger = Logger.getLogger(BracketLegalityLabel.class);
 
     private static final String GROUP_GAME_CHANGES = "Game Changers";
-    private static final String GROUP_INFINITE_COMBOS = "Infinite Combos";
+    private static final String GROUP_INFINITE_COMBOS = "Early-game 2-Card Combos";
     private static final String GROUP_MASS_LAND_DESTRUCTION = "Mass Land Destruction";
     private static final String GROUP_EXTRA_TURN = "Extra Turns";
-    private static final String GROUP_TUTORS = "Tutors";
 
     private static final Map<String, List<Integer>> MAX_GROUP_LIMITS = new LinkedHashMap<>();
 
@@ -78,8 +77,6 @@ public class BracketLegalityLabel extends LegalityLabel {
                 Arrays.asList(0, 0, 0, 0, 99, 99));
         MAX_GROUP_LIMITS.put(GROUP_EXTRA_TURN,
                 Arrays.asList(0, 0, 0, 3, 99, 99));
-        MAX_GROUP_LIMITS.put(GROUP_TUTORS,
-                Arrays.asList(0, 3, 3, 99, 99, 99));
     }
 
     private static final String RESOURCE_INFINITE_COMBOS = "brackets/infinite-combos.txt";
@@ -92,7 +89,6 @@ public class BracketLegalityLabel extends LegalityLabel {
     private final List<String> foundInfiniteCombos = new ArrayList<>();
     private final List<String> foundMassLandDestruction = new ArrayList<>();
     private final List<String> foundExtraTurn = new ArrayList<>();
-    private final List<String> foundTutors = new ArrayList<>();
 
     private final List<String> badCards = new ArrayList<>();
     private final List<String> fullGameChanges = new ArrayList<>();
@@ -125,9 +121,6 @@ public class BracketLegalityLabel extends LegalityLabel {
         }
         if (this.foundExtraTurn.size() > getMaxCardsLimit(GROUP_EXTRA_TURN)) {
             this.badCards.addAll(this.foundExtraTurn);
-        }
-        if (this.foundTutors.size() > getMaxCardsLimit(GROUP_TUTORS)) {
-            this.badCards.addAll(this.foundTutors);
         }
     }
 
@@ -165,7 +158,6 @@ public class BracketLegalityLabel extends LegalityLabel {
         groups.put(GROUP_INFINITE_COMBOS + getStats(GROUP_INFINITE_COMBOS), this.foundInfiniteCombos);
         groups.put(GROUP_MASS_LAND_DESTRUCTION + getStats(GROUP_MASS_LAND_DESTRUCTION), this.foundMassLandDestruction);
         groups.put(GROUP_EXTRA_TURN + getStats(GROUP_EXTRA_TURN), this.foundExtraTurn);
-        groups.put(GROUP_TUTORS + getStats(GROUP_TUTORS), this.foundTutors);
         groups.forEach((group, cards) -> {
             showInfo.add("<br>");
             showInfo.add("<span style='font-weight:bold;font-size: " + infoFontTextSize + "px;'>" + group + "</span>");
@@ -199,9 +191,6 @@ public class BracketLegalityLabel extends LegalityLabel {
             case GROUP_EXTRA_TURN:
                 currentAmount = this.foundExtraTurn.size();
                 break;
-            case GROUP_TUTORS:
-                currentAmount = this.foundTutors.size();
-                break;
             default:
                 throw new IllegalArgumentException("Unknown group " + groupName);
         }
@@ -222,7 +211,6 @@ public class BracketLegalityLabel extends LegalityLabel {
         collectInfiniteCombos(deck);
         collectMassLandDestruction(deck);
         collectExtraTurn(deck);
-        collectTutors(deck);
     }
 
     private void collectGameChangers(Deck deck) {
@@ -244,12 +232,9 @@ public class BracketLegalityLabel extends LegalityLabel {
                     "Consecrated Sphinx",
                     "Crop Rotation",
                     "Cyclonic Rift",
-                    "Deflecting Swat",
                     "Enlightened Tutor",
-                    "Expropriate",
                     "Field of the Dead",
                     "Fierce Guardianship",
-                    "Food Chain",
                     "Force of Will",
                     "Gaea's Cradle",
                     "Gamble",
@@ -261,8 +246,6 @@ public class BracketLegalityLabel extends LegalityLabel {
                     "Imperial Seal",
                     "Intuition",
                     "Jeska's Will",
-                    "Jin-Gitaxias, Core Augur",
-                    "Kinnan, Bonder Prodigy",
                     "Lion's Eye Diamond",
                     "Mana Vault",
                     "Mishra's Workshop",
@@ -280,18 +263,13 @@ public class BracketLegalityLabel extends LegalityLabel {
                     "Serra's Sanctum",
                     "Smothering Tithe",
                     "Survival of the Fittest",
-                    "Sway of the Stars",
                     "Teferi's Protection",
                     "Tergrid, God of Fright",
                     "Thassa's Oracle",
                     "The One Ring",
                     "The Tabernacle at Pendrell Vale",
                     "Underworld Breach",
-                    "Urza, Lord High Artificer",
                     "Vampiric Tutor",
-                    "Vorinclex, Voice of Hunger",
-                    "Yuriko, the Tiger's Shadow",
-                    "Winota, Joiner of Forces",
                     "Worldly Tutor"
             ));
         }
@@ -391,19 +369,6 @@ public class BracketLegalityLabel extends LegalityLabel {
                 .map(Card::getName)
                 .sorted()
                 .forEach(this.foundExtraTurn::add);
-    }
-
-    private void collectTutors(Deck deck) {
-        // edh power level uses search for land and non-land card, but bracket need only non-land cards searching
-        this.foundTutors.clear();
-        Stream.concat(deck.getCards().stream(), deck.getSideboard().stream())
-                .filter(card -> card.getRules().stream()
-                        .map(s -> s.toLowerCase(Locale.ENGLISH))
-                        .anyMatch(s -> s.contains("search your library") && !isTextContainsLandCard(s))
-                )
-                .map(Card::getName)
-                .sorted()
-                .forEach(this.foundTutors::add);
     }
 
     private boolean isTextContainsLandCard(String lowerText) {
