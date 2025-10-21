@@ -1,0 +1,1 @@
+<content of Java source files for shared module>
