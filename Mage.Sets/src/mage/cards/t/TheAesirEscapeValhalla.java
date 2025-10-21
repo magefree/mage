@@ -83,7 +83,7 @@ class TheAesirEscapeValhallaOneEffect extends OneShotEffect {
         controller.choose(outcome, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card != null) {
-            UUID exileId = CardUtil.getExileZoneId(game, source, 1);
+            UUID exileId = CardUtil.getExileZoneId(game, source);
             MageObject sourceObject = source.getSourceObject(game);
             String exileName = sourceObject != null ? sourceObject.getName() : "";
             controller.moveCardsToExile(card, source, game, false, exileId, exileName);
