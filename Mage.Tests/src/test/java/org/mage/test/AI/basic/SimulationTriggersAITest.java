@@ -52,19 +52,28 @@ public class SimulationTriggersAITest extends CardTestPlayerBaseWithAIHelps {
     public void test_DeepglowSkate_PerformanceOnTooManyChoices() {
         // bug: game freeze with 100% CPU usage
         // https://github.com/magefree/mage/issues/9438
-        int cardsCount = 2; // 2+ cards will generate too much target options for simulations
-        int boostMultiplier = (int) Math.pow(2, cardsCount);
+        int quantity = 6;
+        String[] cardNames = {
+                "Island", "Plains", "Swamp", "Mountain",
+                "Runeclaw Bear", "Absolute Law", "Gilded Lotus", "Alpha Myr"
+        };
 
         // When Deepglow Skate enters the battlefield, double the number of each kind of counter on any number
         // of target permanents.
-        addCard(Zone.HAND, playerA, "Deepglow Skate", cardsCount); // {4}{U}
-        addCard(Zone.BATTLEFIELD, playerA, "Island", 5 * cardsCount);
-        //
+        addCard(Zone.HAND, playerA, "Deepglow Skate", 1); // {4}{U}
+        // Bloat the battlefield with permanents (possible targets)
+        for (String card : cardNames) {
+            addCard(Zone.BATTLEFIELD, playerA, card, quantity);
+            addCard(Zone.BATTLEFIELD, playerB, card, quantity);
+            addCard(Zone.BATTLEFIELD, playerC, card, quantity);
+            addCard(Zone.BATTLEFIELD, playerD, card, quantity);
+        }
+
         addCard(Zone.BATTLEFIELD, playerA, "Ajani, Adversary of Tyrants", 1); // x4 loyalty
         addCard(Zone.BATTLEFIELD, playerA, "Ajani, Caller of the Pride", 1); // x4 loyalty
         addCard(Zone.BATTLEFIELD, playerB, "Ajani Goldmane", 1); // x4 loyalty
         addCard(Zone.BATTLEFIELD, playerB, "Ajani, Inspiring Leader", 1); // x5 loyalty
-        //
+
         // Players can't activate planeswalkers' loyalty abilities.
         addCard(Zone.BATTLEFIELD, playerA, "The Immortal Sun", 1); // disable planeswalkers usage by AI
 
@@ -75,9 +84,9 @@ public class SimulationTriggersAITest extends CardTestPlayerBaseWithAIHelps {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertPermanentCount(playerA, "Deepglow Skate", cardsCount);
-        assertCounterCount(playerA, "Ajani, Adversary of Tyrants", CounterType.LOYALTY, 4 * boostMultiplier);
-        assertCounterCount(playerA, "Ajani, Caller of the Pride", CounterType.LOYALTY, 4 * boostMultiplier);
+        assertPermanentCount(playerA, "Deepglow Skate", 1);
+        assertCounterCount(playerA, "Ajani, Adversary of Tyrants", CounterType.LOYALTY, 4 * 2);
+        assertCounterCount(playerA, "Ajani, Caller of the Pride", CounterType.LOYALTY, 4 * 2);
         assertCounterCount(playerB, "Ajani Goldmane", CounterType.LOYALTY, 4);
         assertCounterCount(playerB, "Ajani, Inspiring Leader", CounterType.LOYALTY, 5);
     }
