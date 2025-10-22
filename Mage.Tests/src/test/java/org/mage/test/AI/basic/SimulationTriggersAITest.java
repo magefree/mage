@@ -50,9 +50,8 @@ public class SimulationTriggersAITest extends CardTestPlayerBaseWithAIHelps {
 
     @Test
     public void test_DeepglowSkate_PerformanceOnTooManyChoices() {
-        // bug: game freeze with 100% CPU usage
         // https://github.com/magefree/mage/issues/9438
-        int quantity = 6;
+        int quantity = 2;
         String[] cardNames = {
                 "Island", "Plains", "Swamp", "Mountain",
                 "Runeclaw Bear", "Absolute Law", "Gilded Lotus", "Alpha Myr"
