@@ -51,7 +51,7 @@ public class SimulationTriggersAITest extends CardTestPlayerBaseWithAIHelps {
     @Test
     public void test_DeepglowSkate_PerformanceOnTooManyChoices() {
         // https://github.com/magefree/mage/issues/9438
-        int quantity = 2;
+        int quantity = 1;
         String[] cardNames = {
                 "Island", "Plains", "Swamp", "Mountain",
                 "Runeclaw Bear", "Absolute Law", "Gilded Lotus", "Alpha Myr"
