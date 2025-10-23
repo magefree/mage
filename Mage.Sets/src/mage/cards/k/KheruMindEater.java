@@ -1,31 +1,29 @@
 
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continuous.LookAtCardsExiledWithThisEffect;
+import mage.abilities.effects.common.continuous.MayPlayCardsExiledWithThisEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInHand;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -47,8 +45,8 @@ public final class KheruMindEater extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new KheruMindEaterExileEffect(), false, true));
 
         // You may look at and play cards exiled with Kheru Mind-Eater.
-        this.addAbility(new SimpleStaticAbility(new KheruMindEaterEffect()));
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new KheruMindEaterLookAtCardEffect()));
+        this.addAbility(new SimpleStaticAbility(new MayPlayCardsExiledWithThisEffect()));
+        this.addAbility(new SimpleStaticAbility(new LookAtCardsExiledWithThisEffect()));
     }
 
     private KheruMindEater(final KheruMindEater card) {
@@ -75,16 +73,14 @@ class KheruMindEaterExileEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
+        Player controller = game.getPlayer(source.getControllerId());
         if (player != null && !player.getHand().isEmpty()) {
             Target target = new TargetCardInHand(1, new FilterCard());
             target.chooseTarget(Outcome.Exile, player.getId(), source, game);
             Card card = game.getCard(target.getFirstTarget());
             MageObject sourceObject = game.getObject(source);
             if (card != null && sourceObject != null) {
-                if (player.moveCardsToExile(card, source, game, false, CardUtil.getCardExileZoneId(game, source), sourceObject.getIdName())) {
-                    card.setFaceDown(true, game);
-                }
-                return true;
+                return CardUtil.moveCardsToExileFaceDown(game, source, controller, card, true);
             }
         }
         return false;
@@ -94,76 +90,4 @@ class KheruMindEaterExileEffect extends OneShotEffect {
     public KheruMindEaterExileEffect copy() {
         return new KheruMindEaterExileEffect(this);
     }
-}
-
-class KheruMindEaterEffect extends AsThoughEffectImpl {
-
-    KheruMindEaterEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
-        staticText = "You may play cards exiled with {this}";
-    }
-
-    private KheruMindEaterEffect(final KheruMindEaterEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public KheruMindEaterEffect copy() {
-        return new KheruMindEaterEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        Card card = game.getCard(objectId);
-        if (affectedControllerId.equals(source.getControllerId()) && card != null && game.getState().getZone(card.getId()) == Zone.EXILED) {
-            ExileZone exileZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
-            return exileZone != null && exileZone.contains(card.getId());
-        }
-        return false;
-    }
-}
-
-class KheruMindEaterLookAtCardEffect extends AsThoughEffectImpl {
-
-    KheruMindEaterLookAtCardEffect() {
-        super(AsThoughEffectType.LOOK_AT_FACE_DOWN, Duration.EndOfGame, Outcome.Benefit);
-        staticText = "You may look at cards exiled with {this}";
-    }
-
-    private KheruMindEaterLookAtCardEffect(final KheruMindEaterLookAtCardEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public KheruMindEaterLookAtCardEffect copy() {
-        return new KheruMindEaterLookAtCardEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (affectedControllerId.equals(source.getControllerId())) {
-            Card card = game.getCard(objectId);
-            if (card != null) {
-                MageObject sourceObject = game.getObject(source);
-                if (sourceObject == null) {
-                    return false;
-                }
-                UUID exileId = CardUtil.getCardExileZoneId(game, source);
-                ExileZone exile = game.getExile().getExileZone(exileId);
-                return exile != null && exile.contains(objectId);
-            }
-        }
-        return false;
-    }
-
 }

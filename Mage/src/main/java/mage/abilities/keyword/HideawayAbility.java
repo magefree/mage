@@ -3,13 +3,14 @@ package mage.abilities.keyword;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.AsThoughEffectImpl;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.*;
 import mage.filter.FilterCard;
+import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
@@ -100,13 +101,12 @@ class HideawayExileEffect extends OneShotEffect {
         controller.choose(Outcome.Detriment, cards, target, source, game);
         Card card = cards.get(target.getFirstTarget(), game);
         if (card != null) {
-            controller.moveCardsToExile(
-                    card, source, game, false,
-                    CardUtil.getExileZoneId(game, source),
-                    "Hideaway (" + CardUtil.getSourceName(game, source) + ')'
-            );
+            CardUtil.moveCardsToExileFaceDown(
+                    game, source, controller, card,
+                    CardUtil.getCardExileZoneId(game, source),
+                    "Hideaway (" + CardUtil.getSourceName(game, source) + ")",
+                    false);
             game.addEffect(new HideawayLookAtFaceDownCardEffect().setTargetPointer(new FixedTarget(card, game)), source);
-            card.setFaceDown(true, game);
         }
         cards.retainZone(Zone.LIBRARY, game);
         controller.putCardsOnBottomOfLibrary(cards, game, source, false);
@@ -114,19 +114,14 @@ class HideawayExileEffect extends OneShotEffect {
     }
 }
 
-class HideawayLookAtFaceDownCardEffect extends AsThoughEffectImpl {
+class HideawayLookAtFaceDownCardEffect extends ContinuousEffectImpl {
 
     HideawayLookAtFaceDownCardEffect() {
-        super(AsThoughEffectType.LOOK_AT_FACE_DOWN, Duration.EndOfGame, Outcome.Benefit);
+        super(Duration.EndOfGame, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
     }
 
     private HideawayLookAtFaceDownCardEffect(final HideawayLookAtFaceDownCardEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -135,9 +130,16 @@ class HideawayLookAtFaceDownCardEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        return Objects.equals(objectId, getTargetPointer().getFirst(game, source))
-                && HideawayWatcher.check(affectedControllerId, source, game);
+    public boolean apply(Game game, Ability source) {
+        UUID controllerId = game.getPlayer(source.getControllerId()).getId();
+        UUID cardId = getTargetPointer().getFirst(game, source);
+        ExileZone exile = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
+        if (cardId == null || exile == null) {
+            this.discard();
+            return false;
+        }
+        exile.letPlayerSeeCards(controllerId, game.getCard(cardId));
+        return HideawayWatcher.check(controllerId, source, game);
     }
 }
 
