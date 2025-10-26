@@ -1223,8 +1223,8 @@ public class Spell extends StackObjectImpl implements Card {
     }
 
     @Override
-    public void looseAllAbilities(Game game) {
-        throw new UnsupportedOperationException("Spells should not loose all abilities. Check if this operation is correct.");
+    public void loseAllAbilities(Game game) {
+        throw new UnsupportedOperationException("Spells should not lose all abilities. Check if this operation is correct.");
     }
 
     @Override
