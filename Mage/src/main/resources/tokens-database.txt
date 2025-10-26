@@ -1515,10 +1515,13 @@
 
 # SLD
 |Generate|TOK:SLD|Angel|||AngelToken|
+|Generate|TOK:SLD|Blood|||BloodToken|
 |Generate|TOK:SLD|Cat|1||GreenCatToken|
 |Generate|TOK:SLD|Cat|2||CatToken2|
 |Generate|TOK:SLD|Cat|3||CatToken2|
 |Generate|TOK:SLD|Clue|||ClueArtifactToken|
+|Generate|TOK:SLD|Cordyceps Infected|1||CordycepsInfectedToken|
+|Generate|TOK:SLD|Cordyceps Infected|2||CordycepsInfectedToken|
 |Generate|TOK:SLD|Dog|||WhiteDogToken|
 |Generate|TOK:SLD|Egg|||AtlaPalaniToken|
 |Generate|TOK:SLD|Faerie Rogue|1||FaerieRogueToken|
