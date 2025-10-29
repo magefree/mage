@@ -5,7 +5,7 @@ import mage.abilities.common.BecomesTappedSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
-import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.decorator.ConditionalCostModificationEffect;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
@@ -45,7 +45,7 @@ public final class GranGran extends CardImpl {
         this.addAbility(new BecomesTappedSourceTriggeredAbility(new DrawDiscardControllerEffect(1, 1)));
 
         // Noncreature spells you cast cost {1} less to cast as long as there are three or more Lesson cards in your graveyard.
-        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
+        this.addAbility(new SimpleStaticAbility(new ConditionalCostModificationEffect(
                 new SpellsCostReductionControllerEffect(StaticFilters.FILTER_CARD_NON_CREATURE, 1),
                 condition, "noncreature spells you cast cost {1} less to cast as long as " +
                 "there are three or more Lesson cards in your graveyard"
