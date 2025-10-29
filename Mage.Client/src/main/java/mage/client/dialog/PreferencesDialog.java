@@ -2155,6 +2155,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
             }
         });
 
+        txtBackgroundImagePath.setToolTipText("The selected image will be used as the background picture. Requires client restart to see changes.");
+
         btnBrowseBackgroundImage.setText("Browse...");
         btnBrowseBackgroundImage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2254,14 +2256,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         panelCardImages.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Card images"));
 
-        cbUseDefaultImageFolder.setText("Use default location to save images");
+        cbUseDefaultImageFolder.setText("Use default location to save card images");
         cbUseDefaultImageFolder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbUseDefaultImageFolderActionPerformed(evt);
             }
         });
-
-        txtImageFolderPath.setToolTipText("The selected image will be used as background picture. You have to restart MAGE to view a changed background image.");
 
         btnBrowseImageLocation.setText("Browse...");
         btnBrowseImageLocation.addActionListener(new java.awt.event.ActionListener() {
