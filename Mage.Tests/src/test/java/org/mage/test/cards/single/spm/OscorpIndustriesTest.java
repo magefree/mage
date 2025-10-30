@@ -41,12 +41,64 @@ public class OscorpIndustriesTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Draw");
         setChoice(playerA, oscorpIndustries);
 
-        playLand(1, PhaseStep.POSTCOMBAT_MAIN, playerA, oscorpIndustries + " with Mayhem");
+        playLand(1, PhaseStep.POSTCOMBAT_MAIN, playerA, oscorpIndustries);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerA, 20 - 2);
         assertPermanentCount(playerA, oscorpIndustries, 1);
+    }
+
+    @Test
+    public void testOscorpIndustriesNoMayhem() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.HAND, playerA, oscorpIndustries);
+        addCard(Zone.BATTLEFIELD, playerA, thoughtCourier);
+
+        playLand(1, PhaseStep.POSTCOMBAT_MAIN, playerA, oscorpIndustries);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerA, 20);
+        assertPermanentCount(playerA, oscorpIndustries, 1);
+    }
+
+    @Test
+    public void testCantPlayWithoutDiscard() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.GRAVEYARD, playerA, oscorpIndustries);
+
+        checkPlayableAbility("Can't play without discard", 1, PhaseStep.PRECOMBAT_MAIN, playerA,
+                "Play " + oscorpIndustries, false);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerA, 20);
+        assertPermanentCount(playerA, oscorpIndustries, 0);
+    }
+
+    @Test
+    public void testOscorpIndustriesNextTurn() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.HAND, playerA, oscorpIndustries);
+        addCard(Zone.BATTLEFIELD, playerA, thoughtCourier);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Draw");
+        setChoice(playerA, oscorpIndustries);
+
+        checkPlayableAbility("Can't play without discard", 3, PhaseStep.PRECOMBAT_MAIN, playerA,
+                "Play " + oscorpIndustries, false);
+
+        setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertLife(playerA, 20);
+        assertPermanentCount(playerA, oscorpIndustries, 0);
     }
 }
