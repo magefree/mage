@@ -51,6 +51,7 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("Buzzard-Wasp Colony", 88, Rarity.UNCOMMON, mage.cards.b.BuzzardWaspColony.class));
         cards.add(new SetCardInfo("Cat-Gator", 91, Rarity.UNCOMMON, mage.cards.c.CatGator.class));
         cards.add(new SetCardInfo("Cat-Owl", 212, Rarity.COMMON, mage.cards.c.CatOwl.class));
+        cards.add(new SetCardInfo("Compassionate Healer", 13, Rarity.COMMON, mage.cards.c.CompassionateHealer.class));
         cards.add(new SetCardInfo("Corrupt Court Official", 92, Rarity.COMMON, mage.cards.c.CorruptCourtOfficial.class));
         cards.add(new SetCardInfo("Cunning Maneuver", 130, Rarity.COMMON, mage.cards.c.CunningManeuver.class));
         cards.add(new SetCardInfo("Cycle of Renewal", 170, Rarity.COMMON, mage.cards.c.CycleOfRenewal.class));
