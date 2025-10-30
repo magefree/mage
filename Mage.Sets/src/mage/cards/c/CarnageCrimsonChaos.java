@@ -35,6 +35,7 @@ public final class CarnageCrimsonChaos extends CardImpl {
     private static final FilterCard filter = new FilterCard("creature card with mana value 3 or less");
 
     static {
+        filter.add(CardType.CREATURE.getPredicate());
         filter.add(new ManaValuePredicate(ComparisonType.OR_LESS, 3));
     }
 
