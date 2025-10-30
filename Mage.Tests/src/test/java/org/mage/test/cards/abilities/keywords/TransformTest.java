@@ -870,5 +870,6 @@ public class TransformTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, likenessOfTheSeeker, 1);
         assertPowerToughness(playerA, likenessOfTheSeeker, 3, 3);
         assertAbilityCount(playerA, likenessOfTheSeeker, SagaAbility.class, 0); // does not have saga ability
+        assertLife(playerA, 20 + 3);
     }
 }

@@ -30,16 +30,16 @@ public final class AzusasManyJourneys extends TransformingDoubleFacedCard {
         this.getRightHalfCard().setPT(3, 3);
 
         // (As this Saga enters and after your draw step, add a lore counter.)
-        SagaAbility sagaAbility = new SagaAbility(this);
+        SagaAbility sagaAbility = new SagaAbility(this.getLeftHalfCard());
 
         // I — You may play an additional land this turn.
-        sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, new PlayAdditionalLandsControllerEffect(1, Duration.EndOfTurn));
+        sagaAbility.addChapterEffect(this.getLeftHalfCard(), SagaChapter.CHAPTER_I, new PlayAdditionalLandsControllerEffect(1, Duration.EndOfTurn));
 
         // II — You gain 3 life.
-        sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_II, new GainLifeEffect(3));
+        sagaAbility.addChapterEffect(this.getLeftHalfCard(), SagaChapter.CHAPTER_II, new GainLifeEffect(3));
 
         // III — Exile this Saga, then return it to the battlefield transformed under your control.
-        sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III, new ExileSagaAndReturnTransformedEffect());
+        sagaAbility.addChapterEffect(this.getLeftHalfCard(), SagaChapter.CHAPTER_III, new ExileSagaAndReturnTransformedEffect());
 
         this.getLeftHalfCard().addAbility(sagaAbility);
 
