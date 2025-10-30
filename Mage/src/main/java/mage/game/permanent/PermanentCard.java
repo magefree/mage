@@ -52,7 +52,8 @@ public class PermanentCard extends PermanentImpl {
             goodForBattlefield = false;
         } else if (card instanceof SplitCard) {
             // fused spells allowed (it uses main card)
-            if (card.getSpellAbility() != null && !card.getSpellAbility().getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED)) {
+            // room spells allowed (it uses main card)
+            if (card.getSpellAbility() != null && !card.getSpellAbility().getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED) && !(card instanceof RoomCard)) {
                 goodForBattlefield = false;
             }
         }

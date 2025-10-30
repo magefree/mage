@@ -46,7 +46,7 @@ public final class LizardConnorssCurse extends CardImpl {
         CreatureToken token = new CreatureToken(4, 4, "green Lizard creature with base power and toughness 4/4", SubType.LIZARD)
                 .withColor("G");
         Ability ability = new EntersBattlefieldTriggeredAbility(
-                new BecomesCreatureTargetEffect(token, true, false, Duration.WhileOnBattlefield)
+                new BecomesCreatureTargetEffect(token, true, false, Duration.Custom)
         );
         ability.addTarget(new TargetPermanent(0, 1, filter));
         ability.withFlavorWord("Lizard Formula");

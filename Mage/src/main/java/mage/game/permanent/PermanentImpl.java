@@ -72,6 +72,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected boolean monstrous;
     protected boolean renowned;
     protected boolean suspected;
+    protected boolean harnessed = false;
     protected boolean manifested = false;
     protected boolean cloaked = false;
     protected boolean morphed = false;
@@ -101,6 +102,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected boolean deathtouched;
     protected boolean solved = false;
 
+    protected boolean roomWasUnlockedOnCast = false;
+    protected boolean leftHalfUnlocked = false;
+    protected boolean rightHalfUnlocked = false;
     protected Map<String, List<UUID>> connectedCards = new HashMap<>();
     protected Set<MageObjectReference> dealtDamageByThisTurn;
     protected UUID attachedTo;
@@ -176,6 +180,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.monstrous = permanent.monstrous;
         this.renowned = permanent.renowned;
         this.suspected = permanent.suspected;
+        this.harnessed = permanent.harnessed;
         this.ringBearerFlag = permanent.ringBearerFlag;
         this.classLevel = permanent.classLevel;
         this.goadingPlayers.addAll(permanent.goadingPlayers);
@@ -189,6 +194,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
         this.morphed = permanent.morphed;
         this.disguised = permanent.disguised;
+        this.leftHalfUnlocked = permanent.leftHalfUnlocked;
+        this.rightHalfUnlocked = permanent.rightHalfUnlocked;
+        this.roomWasUnlockedOnCast = permanent.roomWasUnlockedOnCast;
         this.manifested = permanent.manifested;
         this.cloaked = permanent.cloaked;
         this.createOrder = permanent.createOrder;
@@ -2008,6 +2016,16 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
+    public boolean isHarnessed() {
+        return this.harnessed;
+    }
+
+    @Override
+    public void setHarnessed(boolean value) {
+        this.harnessed = value;
+    }
+
+    @Override
     public boolean fight(Permanent fightTarget, Ability source, Game game) {
         return this.fight(fightTarget, source, game, true);
     }
@@ -2052,24 +2070,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         return color;
     }
 
-    //20180810 - 701.3d
-    //If an object leaves the zone it's in, all attached permanents become unattached
-    //note that this code doesn't actually detach anything, and is a bit of a bandaid
-    public void detachAllAttachments(Game game) {
-        for (UUID attachmentId : getAttachments()) {
-            Permanent attachment = game.getPermanent(attachmentId);
-            Card attachmentCard = game.getCard(attachmentId);
-            if (attachment != null && attachmentCard != null) {
-                //make bestow cards and licids into creatures
-                //aura test to stop bludgeon brawl shenanigans from using this code
-                //consider adding code to handle that case?
-                if (attachment.hasSubtype(SubType.AURA, game) && attachmentCard.isCreature(game)) {
-                    BestowAbility.becomeCreature(attachment, game);
-                }
-            }
-        }
-    }
-
     @Override
     public boolean moveToZone(Zone toZone, Ability source, Game game, boolean flag, List<UUID> appliedEffects) {
         Zone fromZone = game.getState().getZone(objectId);
@@ -2082,12 +2082,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             } else {
                 zoneChangeInfo = new ZoneChangeInfo(event);
             }
-            boolean successfullyMoved = ZonesHandler.moveCard(zoneChangeInfo, game, source);
-            //20180810 - 701.3d
-            if (successfullyMoved) {
-                detachAllAttachments(game);
-            }
-            return successfullyMoved;
+            return ZonesHandler.moveCard(zoneChangeInfo, game, source);
         }
         return false;
     }
@@ -2098,11 +2093,67 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         ZoneChangeEvent event = new ZoneChangeEvent(this, source, ownerId, fromZone, Zone.EXILED, appliedEffects);
         ZoneChangeInfo.Exile zcInfo = new ZoneChangeInfo.Exile(event, exileId, name);
 
-        boolean successfullyMoved = ZonesHandler.moveCard(zcInfo, game, source);
-        //20180810 - 701.3d
-        if (successfullyMoved) {
-            detachAllAttachments(game);
+        return ZonesHandler.moveCard(zcInfo, game, source);
+    }
+
+    @Override
+    public boolean wasRoomUnlockedOnCast() {
+        return roomWasUnlockedOnCast;
+    }
+
+    @Override
+    public boolean isLeftDoorUnlocked() {
+        return leftHalfUnlocked;
+    }
+
+    @Override
+    public boolean isRightDoorUnlocked() {
+        return rightHalfUnlocked;
+    }
+
+    @Override
+    public boolean unlockRoomOnCast(Game game) {
+        if (this.roomWasUnlockedOnCast) {
+            return false;
         }
-        return successfullyMoved;
+        this.roomWasUnlockedOnCast = true;
+        return true;
+    }
+
+    @Override
+    public boolean unlockDoor(Game game, Ability source, boolean isLeftDoor) {
+        // Check if already unlocked
+        boolean thisDoorUnlocked = isLeftDoor ? leftHalfUnlocked : rightHalfUnlocked;
+        if (thisDoorUnlocked) {
+            return false;
+        }
+
+        // Log the unlock
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            String doorSide = isLeftDoor ? "left" : "right";
+            game.informPlayers(controller.getLogName() + " unlocked the " + doorSide + " door of "
+                    + getLogName() + CardUtil.getSourceLogName(game, source));
+        }
+
+        // Update unlock state
+        if (isLeftDoor) {
+            leftHalfUnlocked = true;
+        } else {
+            rightHalfUnlocked = true;
+        }
+
+        // Fire door unlock event
+        GameEvent event = new GameEvent(GameEvent.EventType.DOOR_UNLOCKED, getId(), source, source.getControllerId());
+        event.setFlag(isLeftDoor);
+        game.fireEvent(event);
+
+        // Check if room is now fully unlocked
+        boolean otherDoorUnlocked = isLeftDoor ? rightHalfUnlocked : leftHalfUnlocked;
+        if (otherDoorUnlocked) {
+            game.fireEvent(new GameEvent(EventType.ROOM_FULLY_UNLOCKED, getId(), source, source.getControllerId()));
+        }
+
+        return true;
     }
 }

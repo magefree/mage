@@ -42,6 +42,7 @@ public class ArachnePsionicWeaverTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Plains");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, arachnePsionicWeaver);
+        setChoice(playerA, playerB.getName());
         setChoice(playerA, CardType.ARTIFACT.toString());
 
         checkPlayableAbility("Player A can't cast Tormod's", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast " + tormodsCrypt, false);

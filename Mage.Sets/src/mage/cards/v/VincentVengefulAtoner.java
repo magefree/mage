@@ -5,13 +5,14 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageToOpponentTriggeredAbility;
 import mage.abilities.common.OneOrMoreCombatDamagePlayerTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.condition.Condition;
+import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.effects.common.DamageEachOtherOpponentThatMuchEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
@@ -42,9 +43,10 @@ public final class VincentVengefulAtoner extends CardImpl {
         ));
 
         // Chaos -- Whenever Vincent deals combat damage to an opponent, it deals that much damage to each other opponent if Vincent's power is 7 or greater.
-        this.addAbility(new DealsDamageToOpponentTriggeredAbility(
-                new VincentVengefulAtonerEffect(), false, true, true
-        ).withFlavorWord("Chaos"));
+        this.addAbility(new DealsDamageToOpponentTriggeredAbility(new ConditionalOneShotEffect(
+                new DamageEachOtherOpponentThatMuchEffect(), VincentVengefulAtonerCondition.instance,
+                "it deals that much damage to each other opponent if {this}'s power is 7 or greater"
+        ), false, true, true).withFlavorWord("Chaos"));
     }
 
     private VincentVengefulAtoner(final VincentVengefulAtoner card) {
@@ -57,42 +59,16 @@ public final class VincentVengefulAtoner extends CardImpl {
     }
 }
 
-class VincentVengefulAtonerEffect extends OneShotEffect {
-
-    VincentVengefulAtonerEffect() {
-        super(Outcome.Benefit);
-        staticText = "it deals that much damage to each other opponent if {this}'s power is 7 or greater";
-    }
-
-    private VincentVengefulAtonerEffect(final VincentVengefulAtonerEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public VincentVengefulAtonerEffect copy() {
-        return new VincentVengefulAtonerEffect(this);
-    }
+enum VincentVengefulAtonerCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (Optional
+        return Optional
                 .ofNullable(source.getSourcePermanentOrLKI(game))
                 .map(MageObject::getPower)
                 .map(MageInt::getValue)
-                .orElse(0) < 7) {
-            return false;
-        }
-        int amount = (Integer) getValue("damage");
-        if (amount < 1) {
-            return false;
-        }
-        UUID targetId = getTargetPointer().getFirst(game, source);
-        for (UUID opponentId : game.getOpponents(source.getControllerId())) {
-            Optional.ofNullable(opponentId)
-                    .filter(uuid -> !uuid.equals(targetId))
-                    .map(game::getPlayer)
-                    .map(player -> player.damage(amount, source, game));
-        }
-        return true;
+                .filter(x -> x >= 7)
+                .isPresent();
     }
 }

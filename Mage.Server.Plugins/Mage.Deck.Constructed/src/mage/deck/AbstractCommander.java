@@ -27,6 +27,7 @@ public abstract class AbstractCommander extends Constructed {
 
     private static List<CommanderValidator> validators = Arrays.asList(
             PartnerValidator.instance,
+            PartnerVariantValidator.instance,
             FriendsForeverValidator.instance,
             PartnerWithValidator.instance,
             ChooseABackgroundValidator.instance,

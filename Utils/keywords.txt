@@ -126,6 +126,7 @@ Shroud|instance|
 Soulbond|new|
 Soulshift|number|
 Skulk|new|
+Sneak|card, manaString|
 Spectacle|card, cost|
 Spree|card|
 Squad|cost|

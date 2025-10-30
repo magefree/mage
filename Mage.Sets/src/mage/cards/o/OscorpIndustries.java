@@ -20,7 +20,7 @@ import java.util.UUID;
 public final class OscorpIndustries extends CardImpl {
 
     public OscorpIndustries(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, null);
         
 
         // This land enters tapped.
@@ -35,7 +35,7 @@ public final class OscorpIndustries extends CardImpl {
         this.addAbility(new RedManaAbility());
 
         // Mayhem
-        this.addAbility(new MayhemLandAbility(this));
+        this.addAbility(new MayhemLandAbility());
 
     }
 

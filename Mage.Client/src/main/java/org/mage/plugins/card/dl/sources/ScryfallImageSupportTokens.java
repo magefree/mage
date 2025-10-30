@@ -2546,6 +2546,7 @@ public class ScryfallImageSupportTokens {
 
             // DSK
             put("DSK/Beast", "https://api.scryfall.com/cards/tdsk/3?format=image");
+            put("DSK/Demon", "https://api.scryfall.com/cards/tdsk/9?format=image");
             put("DSK/Emblem Kaito", "https://api.scryfall.com/cards/tdsk/17/en?format=image");
             put("DSK/Everywhere", "https://api.scryfall.com/cards/tdsk/16?format=image");
             put("DSK/Glimmer", "https://api.scryfall.com/cards/tdsk/4?format=image");
@@ -2558,6 +2559,7 @@ public class ScryfallImageSupportTokens {
             put("DSK/Spider", "https://api.scryfall.com/cards/tdsk/12?format=image");
             put("DSK/Spirit/1", "https://api.scryfall.com/cards/tdsk/6?format=image");
             put("DSK/Spirit/2", "https://api.scryfall.com/cards/tdsk/8?format=image");
+            put("DSK/Toy", "https://api.scryfall.com/cards/tdsk/7?format=image");
             put("DSK/Treasure", "https://api.scryfall.com/cards/tdsk/15?format=image");
 
             // DSC

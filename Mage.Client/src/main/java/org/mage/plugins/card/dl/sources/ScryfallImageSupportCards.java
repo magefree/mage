@@ -535,7 +535,7 @@ public class ScryfallImageSupportCards {
             add("SCD"); // Starter Commander Decks
             add("PW23"); // Wizards Play Network 2023
             add("P23"); // Judge Gift Cards 2023
-            add("SLC"); // Secret Lair 30th Anniversary Countdown Kit
+            add("SLC"); // Secret Lair Countdown
             add("DMR"); // Dominaria Remastered
             add("ONE"); // Phyrexia: All Will Be One
             add("ONC"); // Phyrexia: All Will Be One Commander
@@ -611,8 +611,12 @@ public class ScryfallImageSupportCards {
             add("EOS"); // Edge of Eternities: Stellar Sights
             add("SPM"); // Marvel's Spider-Man
             add("SPE"); // Marvel's Spider-Man Eternal
+            add("MAR"); // Marvel Universe
             add("TLA"); // Avatar: The Last Airbender
             add("TLE"); // Avatar: The Last Airbender Eternal
+            add("ECL"); // Lorwyn Eclipsed
+            add("TMT"); // Teenage Mutant Ninja Turtles
+            add("TMC"); // Teenage Mutant Ninja Turtles Eternal
 
             // Custom sets using Scryfall images - must provide a direct link for each card in directDownloadLinks
             add("CALC"); // Custom Alchemized versions of existing cards

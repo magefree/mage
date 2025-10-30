@@ -25,6 +25,12 @@ public class SecretLairDrop extends ExpansionSet {
         // so it must be split to two different cards (one card for one side, another card for another side),
         // also must add second side to directDownloadLinks in scryfall
 
+        // workaround to fix compilation error: java: code too large
+        addPart1(); // 1-1000
+        addPart2(); // 1001+
+    }
+
+    private void addPart1() {
         cards.add(new SetCardInfo("Counterspell", "99999SCTLR", Rarity.RARE, mage.cards.c.Counterspell.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Viscera Seer", "99999VS", Rarity.COMMON, mage.cards.v.VisceraSeer.class)); // workaround until "VS" supported as card number
         cards.add(new SetCardInfo("Snow-Covered Plains", 1, Rarity.LAND, mage.cards.s.SnowCoveredPlains.class, NON_FULL_USE_VARIOUS));
@@ -35,7 +41,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Bloodghast", 6, Rarity.RARE, mage.cards.b.Bloodghast.class));
         cards.add(new SetCardInfo("Golgari Thug", 7, Rarity.RARE, mage.cards.g.GolgariThug.class));
         cards.add(new SetCardInfo("Life from the Loam", 8, Rarity.RARE, mage.cards.l.LifeFromTheLoam.class));
-        cards.add(new SetCardInfo("Reaper King", 9, Rarity.MYTHIC, mage.cards.r.ReaperKing.class));
+        cards.add(new SetCardInfo("Reaper King", 9, Rarity.MYTHIC, mage.cards.r.ReaperKing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sliver Overlord", 10, Rarity.MYTHIC, mage.cards.s.SliverOverlord.class));
         cards.add(new SetCardInfo("The Ur-Dragon", 11, Rarity.MYTHIC, mage.cards.t.TheUrDragon.class));
         cards.add(new SetCardInfo("Bitterblossom", 12, Rarity.MYTHIC, mage.cards.b.Bitterblossom.class, NON_FULL_USE_VARIOUS));
@@ -90,7 +96,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 67, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Heliod, God of the Sun", 68, Rarity.MYTHIC, mage.cards.h.HeliodGodOfTheSun.class));
         cards.add(new SetCardInfo("Karametra, God of Harvests", 69, Rarity.MYTHIC, mage.cards.k.KarametraGodOfHarvests.class));
-        cards.add(new SetCardInfo("Iroas, God of Victory", 70, Rarity.MYTHIC, mage.cards.i.IroasGodOfVictory.class));
+        cards.add(new SetCardInfo("Iroas, God of Victory", 70, Rarity.MYTHIC, mage.cards.i.IroasGodOfVictory.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thassa, God of the Sea", 71, Rarity.MYTHIC, mage.cards.t.ThassaGodOfTheSea.class));
         cards.add(new SetCardInfo("Ephara, God of the Polis", 72, Rarity.MYTHIC, mage.cards.e.EpharaGodOfThePolis.class));
         cards.add(new SetCardInfo("Kruphix, God of Horizons", 73, Rarity.MYTHIC, mage.cards.k.KruphixGodOfHorizons.class));
@@ -134,14 +140,14 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Opt", 111, Rarity.RARE, mage.cards.o.Opt.class));
         cards.add(new SetCardInfo("Fatal Push", 112, Rarity.RARE, mage.cards.f.FatalPush.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Anger of the Gods", 113, Rarity.RARE, mage.cards.a.AngerOfTheGods.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Explore", 114, Rarity.RARE, mage.cards.e.Explore.class));
-        cards.add(new SetCardInfo("Glen Elendra Archmage", 115, Rarity.RARE, mage.cards.g.GlenElendraArchmage.class));
+        cards.add(new SetCardInfo("Explore", 114, Rarity.RARE, mage.cards.e.Explore.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Glen Elendra Archmage", 115, Rarity.RARE, mage.cards.g.GlenElendraArchmage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mistbind Clique", 116, Rarity.RARE, mage.cards.m.MistbindClique.class));
         cards.add(new SetCardInfo("Spellstutter Sprite", 117, Rarity.RARE, mage.cards.s.SpellstutterSprite.class));
         cards.add(new SetCardInfo("Vendilion Clique", 118, Rarity.MYTHIC, mage.cards.v.VendilionClique.class));
         cards.add(new SetCardInfo("Swamp", 119, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Sower of Temptation", 120, Rarity.RARE, mage.cards.s.SowerOfTemptation.class));
-        cards.add(new SetCardInfo("Damnation", 121, Rarity.RARE, mage.cards.d.Damnation.class));
+        cards.add(new SetCardInfo("Damnation", 121, Rarity.RARE, mage.cards.d.Damnation.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Enchanted Evening", 122, Rarity.RARE, mage.cards.e.EnchantedEvening.class));
         cards.add(new SetCardInfo("Hallowed Fountain", 123, Rarity.RARE, mage.cards.h.HallowedFountain.class));
         cards.add(new SetCardInfo("Watery Grave", 124, Rarity.RARE, mage.cards.w.WateryGrave.class));
@@ -209,7 +215,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Squirrel Wrangler", 198, Rarity.RARE, mage.cards.s.SquirrelWrangler.class));
         cards.add(new SetCardInfo("Swarmyard", 199, Rarity.RARE, mage.cards.s.Swarmyard.class));
         cards.add(new SetCardInfo("Arcane Signet", 201, Rarity.RARE, mage.cards.a.ArcaneSignet.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Chromatic Lantern", 202, Rarity.RARE, mage.cards.c.ChromaticLantern.class));
+        cards.add(new SetCardInfo("Chromatic Lantern", 202, Rarity.RARE, mage.cards.c.ChromaticLantern.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Commander's Sphere", 203, Rarity.RARE, mage.cards.c.CommandersSphere.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Darksteel Ingot", 204, Rarity.RARE, mage.cards.d.DarksteelIngot.class));
         cards.add(new SetCardInfo("Gilded Lotus", 205, Rarity.RARE, mage.cards.g.GildedLotus.class, NON_FULL_USE_VARIOUS));
@@ -221,7 +227,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Sheoldred, Whispering One", 211, Rarity.MYTHIC, mage.cards.s.SheoldredWhisperingOne.class));
         cards.add(new SetCardInfo("Urabrask the Hidden", 212, Rarity.MYTHIC, mage.cards.u.UrabraskTheHidden.class));
         cards.add(new SetCardInfo("Vorinclex, Voice of Hunger", 213, Rarity.MYTHIC, mage.cards.v.VorinclexVoiceOfHunger.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Heliod, Sun-Crowned", 214, Rarity.MYTHIC, mage.cards.h.HeliodSunCrowned.class));
+        cards.add(new SetCardInfo("Heliod, Sun-Crowned", 214, Rarity.MYTHIC, mage.cards.h.HeliodSunCrowned.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Goblin Rabblemaster", 215, Rarity.RARE, mage.cards.g.GoblinRabblemaster.class));
         cards.add(new SetCardInfo("Monastery Swiftspear", 216, Rarity.RARE, mage.cards.m.MonasterySwiftspear.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Boros Charm", 217, Rarity.RARE, mage.cards.b.BorosCharm.class, NON_FULL_USE_VARIOUS));
@@ -229,7 +235,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Frost Titan", 220, Rarity.MYTHIC, mage.cards.f.FrostTitan.class));
         cards.add(new SetCardInfo("Primeval Titan", 221, Rarity.MYTHIC, mage.cards.p.PrimevalTitan.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Uro, Titan of Nature's Wrath", 222, Rarity.MYTHIC, mage.cards.u.UroTitanOfNaturesWrath.class));
-        cards.add(new SetCardInfo("Grave Titan", 223, Rarity.MYTHIC, mage.cards.g.GraveTitan.class));
+        cards.add(new SetCardInfo("Grave Titan", 223, Rarity.MYTHIC, mage.cards.g.GraveTitan.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Inferno Titan", 224, Rarity.MYTHIC, mage.cards.i.InfernoTitan.class));
         cards.add(new SetCardInfo("Kroxa, Titan of Death's Hunger", 225, Rarity.MYTHIC, mage.cards.k.KroxaTitanOfDeathsHunger.class));
         cards.add(new SetCardInfo("Path to Exile", 226, Rarity.RARE, mage.cards.p.PathToExile.class, NON_FULL_USE_VARIOUS));
@@ -710,7 +716,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Tireless Tracker", 711, Rarity.RARE, mage.cards.t.TirelessTracker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swords to Plowshares", 713, Rarity.RARE, mage.cards.s.SwordsToPlowshares.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Merfolk of the Pearl Trident", 714, Rarity.RARE, mage.cards.m.MerfolkOfThePearlTrident.class));
-        cards.add(new SetCardInfo("Lord of the Pit", 715, Rarity.RARE, mage.cards.l.LordOfThePit.class));
+        cards.add(new SetCardInfo("Lord of the Pit", 715, Rarity.RARE, mage.cards.l.LordOfThePit.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shivan Dragon", 716, Rarity.RARE, mage.cards.s.ShivanDragon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Giant Growth", 717, Rarity.RARE, mage.cards.g.GiantGrowth.class));
         cards.add(new SetCardInfo("Maro", 718, Rarity.RARE, mage.cards.m.Maro.class, NON_FULL_USE_VARIOUS));
@@ -790,7 +796,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Command Tower", 792, Rarity.RARE, mage.cards.c.CommandTower.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nine Lives", 793, Rarity.RARE, mage.cards.n.NineLives.class));
         cards.add(new SetCardInfo("Yoshimaru, Ever Faithful", 794, Rarity.MYTHIC, mage.cards.y.YoshimaruEverFaithful.class));
-        cards.add(new SetCardInfo("Wastes", "795*", Rarity.RARE, mage.cards.w.Wastes.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Wastes", "795*", Rarity.RARE, mage.cards.w.Wastes.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mana Vault", "796*", Rarity.MYTHIC, mage.cards.m.ManaVault.class));
         cards.add(new SetCardInfo("Seraph Sanctuary", 797, Rarity.RARE, mage.cards.s.SeraphSanctuary.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Coveted Jewel", 799, Rarity.RARE, mage.cards.c.CovetedJewel.class));
@@ -811,6 +817,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Seven Dwarves", 815, Rarity.RARE, mage.cards.s.SevenDwarves.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Seven Dwarves", 816, Rarity.RARE, mage.cards.s.SevenDwarves.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Seven Dwarves", 817, Rarity.RARE, mage.cards.s.SevenDwarves.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Seven Dwarves", 818, Rarity.RARE, mage.cards.s.SevenDwarves.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arcane Signet", 820, Rarity.RARE, mage.cards.a.ArcaneSignet.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arcane Signet", "820*", Rarity.RARE, mage.cards.a.ArcaneSignet.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Echo of Eons", 821, Rarity.RARE, mage.cards.e.EchoOfEons.class, RETRO_ART));
@@ -850,7 +857,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Havengul Lich", 859, Rarity.MYTHIC, mage.cards.h.HavengulLich.class, RETRO_ART));
         cards.add(new SetCardInfo("Nekusar, the Mindrazer", 860, Rarity.MYTHIC, mage.cards.n.NekusarTheMindrazer.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Varina, Lich Queen", 861, Rarity.MYTHIC, mage.cards.v.VarinaLichQueen.class, RETRO_ART_USE_VARIOUS));
-        cards.add(new SetCardInfo("Wilhelt, the Rotcleaver", 862, Rarity.MYTHIC, mage.cards.w.WilheltTheRotcleaver.class, RETRO_ART));
+        cards.add(new SetCardInfo("Wilhelt, the Rotcleaver", 862, Rarity.MYTHIC, mage.cards.w.WilheltTheRotcleaver.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Masterwork of Ingenuity", 863, Rarity.RARE, mage.cards.m.MasterworkOfIngenuity.class));
         cards.add(new SetCardInfo("Sculpting Steel", 864, Rarity.RARE, mage.cards.s.SculptingSteel.class));
         cards.add(new SetCardInfo("Unnatural Growth", 865, Rarity.RARE, mage.cards.u.UnnaturalGrowth.class));
@@ -875,6 +882,11 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Young Wolf", 885, Rarity.RARE, mage.cards.y.YoungWolf.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Solve the Equation", 886, Rarity.RARE, mage.cards.s.SolveTheEquation.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Enduring Ideal", 887, Rarity.RARE, mage.cards.e.EnduringIdeal.class));
+        cards.add(new SetCardInfo("Plains", 888, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Island", 889, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 890, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 891, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 892, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Changeling Outcast", 894, Rarity.RARE, mage.cards.c.ChangelingOutcast.class));
         cards.add(new SetCardInfo("Helpful Hunter", 895, Rarity.RARE, mage.cards.h.HelpfulHunter.class));
         cards.add(new SetCardInfo("Spirited Companion", 896, Rarity.RARE, mage.cards.s.SpiritedCompanion.class));
@@ -888,6 +900,9 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Arcane Signet", 908, Rarity.RARE, mage.cards.a.ArcaneSignet.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gilded Lotus", 909, Rarity.RARE, mage.cards.g.GildedLotus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sol Ring", 910, Rarity.RARE, mage.cards.s.SolRing.class, NON_FULL_USE_VARIOUS));
+    }
+
+    private void addPart2() {
         cards.add(new SetCardInfo("Elspeth, Knight-Errant", 1001, Rarity.MYTHIC, mage.cards.e.ElspethKnightErrant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Patron Wizard", 1002, Rarity.RARE, mage.cards.p.PatronWizard.class));
         cards.add(new SetCardInfo("Berserk", 1003, Rarity.MYTHIC, mage.cards.b.Berserk.class, NON_FULL_USE_VARIOUS));
@@ -1024,7 +1039,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 1133, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", 1134, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Abundant Growth", 1135, Rarity.RARE, mage.cards.a.AbundantGrowth.class, FULL_ART_USE_VARIOUS));
-        cards.add(new SetCardInfo("Mycoloth", 1136, Rarity.RARE, mage.cards.m.Mycoloth.class, FULL_ART));
+        cards.add(new SetCardInfo("Mycoloth", 1136, Rarity.RARE, mage.cards.m.Mycoloth.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Ghave, Guru of Spores", 1137, Rarity.MYTHIC, mage.cards.g.GhaveGuruOfSpores.class, FULL_ART));
         cards.add(new SetCardInfo("Slimefoot, the Stowaway", 1138, Rarity.RARE, mage.cards.s.SlimefootTheStowaway.class, FULL_ART));
         cards.add(new SetCardInfo("Elspeth, Sun's Champion", 1140, Rarity.MYTHIC, mage.cards.e.ElspethSunsChampion.class));
@@ -1060,7 +1075,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Kess, Dissident Mage", 1167, Rarity.MYTHIC, mage.cards.k.KessDissidentMage.class));
         cards.add(new SetCardInfo("Field Marshal", 1168, Rarity.RARE, mage.cards.f.FieldMarshal.class));
         cards.add(new SetCardInfo("Temporal Manipulation", 1169, Rarity.MYTHIC, mage.cards.t.TemporalManipulation.class));
-        cards.add(new SetCardInfo("Dark Ritual", 1170, Rarity.RARE, mage.cards.d.DarkRitual.class));
+        cards.add(new SetCardInfo("Dark Ritual", 1170, Rarity.RARE, mage.cards.d.DarkRitual.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Midnight Reaper", 1171, Rarity.RARE, mage.cards.m.MidnightReaper.class));
         cards.add(new SetCardInfo("Seize the Day", 1172, Rarity.RARE, mage.cards.s.SeizeTheDay.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Faeburrow Elder", 1173, Rarity.RARE, mage.cards.f.FaeburrowElder.class));
@@ -1340,7 +1355,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Venser, the Sojourner", 1423, Rarity.MYTHIC, mage.cards.v.VenserTheSojourner.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Venser, the Sojourner", "1423*", Rarity.MYTHIC, mage.cards.v.VenserTheSojourner.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Oppression", 1424, Rarity.RARE, mage.cards.o.Oppression.class));
-        cards.add(new SetCardInfo("Abrade", 1425, Rarity.RARE, mage.cards.a.Abrade.class));
+        cards.add(new SetCardInfo("Abrade", 1425, Rarity.RARE, mage.cards.a.Abrade.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mass Hysteria", 1426, Rarity.RARE, mage.cards.m.MassHysteria.class));
         cards.add(new SetCardInfo("Terminate", 1427, Rarity.RARE, mage.cards.t.Terminate.class));
         cards.add(new SetCardInfo("Thalia, Heretic Cathar", 1428, Rarity.RARE, mage.cards.t.ThaliaHereticCathar.class));
@@ -1515,7 +1530,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Simian Spirit Guide", "1548*", Rarity.RARE, mage.cards.s.SimianSpiritGuide.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Prince of Thralls", 1549, Rarity.MYTHIC, mage.cards.p.PrinceOfThralls.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Prince of Thralls", "1549*", Rarity.MYTHIC, mage.cards.p.PrinceOfThralls.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Sun Titan", 1550, Rarity.RARE, mage.cards.s.SunTitan.class));
+        cards.add(new SetCardInfo("Sun Titan", 1550, Rarity.MYTHIC, mage.cards.s.SunTitan.class));
         cards.add(new SetCardInfo("Breeches, Eager Pillager", 1551, Rarity.RARE, mage.cards.b.BreechesEagerPillager.class));
         cards.add(new SetCardInfo("Deflecting Swat", 1552, Rarity.RARE, mage.cards.d.DeflectingSwat.class));
         cards.add(new SetCardInfo("Llanowar Elves", 1553, Rarity.RARE, mage.cards.l.LlanowarElves.class, NON_FULL_USE_VARIOUS));
@@ -1665,7 +1680,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Chaotic Goo", 1658, Rarity.RARE, mage.cards.c.ChaoticGoo.class, RETRO_ART));
         cards.add(new SetCardInfo("Kiki-Jiki, Mirror Breaker", 1659, Rarity.MYTHIC, mage.cards.k.KikiJikiMirrorBreaker.class, RETRO_ART));
         cards.add(new SetCardInfo("Meteor Golem", 1660, Rarity.RARE, mage.cards.m.MeteorGolem.class, RETRO_ART_USE_VARIOUS));
-        cards.add(new SetCardInfo("Wurmcoil Engine", 1661, Rarity.MYTHIC, mage.cards.w.WurmcoilEngine.class, RETRO_ART));
+        cards.add(new SetCardInfo("Wurmcoil Engine", 1661, Rarity.MYTHIC, mage.cards.w.WurmcoilEngine.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Lightning Greaves", 1662, Rarity.RARE, mage.cards.l.LightningGreaves.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Skullclamp", 1663, Rarity.RARE, mage.cards.s.Skullclamp.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Sol Ring", 1664, Rarity.RARE, mage.cards.s.SolRing.class, RETRO_ART_USE_VARIOUS));
@@ -1681,7 +1696,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Dismember", 1674, Rarity.RARE, mage.cards.d.Dismember.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Birds of Paradise", 1675, Rarity.RARE, mage.cards.b.BirdsOfParadise.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Birds of Paradise", "1675b", Rarity.RARE, mage.cards.b.BirdsOfParadise.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Three Visits", 1676, Rarity.RARE, mage.cards.t.ThreeVisits.class));
+        cards.add(new SetCardInfo("Three Visits", 1676, Rarity.RARE, mage.cards.t.ThreeVisits.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Door to Nothingness", 1678, Rarity.RARE, mage.cards.d.DoorToNothingness.class));
         cards.add(new SetCardInfo("Ashnod's Altar", 1679, Rarity.RARE, mage.cards.a.AshnodsAltar.class));
         cards.add(new SetCardInfo("Dark Depths", 1680, Rarity.MYTHIC, mage.cards.d.DarkDepths.class));
@@ -1716,7 +1731,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Elves of Deep Shadow", 1710, Rarity.RARE, mage.cards.e.ElvesOfDeepShadow.class));
         cards.add(new SetCardInfo("Good-Fortune Unicorn", 1711, Rarity.RARE, mage.cards.g.GoodFortuneUnicorn.class));
         cards.add(new SetCardInfo("Coat of Arms", 1712, Rarity.RARE, mage.cards.c.CoatOfArms.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Dictate of Erebos", 1713, Rarity.RARE, mage.cards.d.DictateOfErebos.class));
+        cards.add(new SetCardInfo("Dictate of Erebos", 1713, Rarity.RARE, mage.cards.d.DictateOfErebos.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fecundity", 1714, Rarity.RARE, mage.cards.f.Fecundity.class));
         cards.add(new SetCardInfo("Mayhem Devil", 1715, Rarity.RARE, mage.cards.m.MayhemDevil.class));
         cards.add(new SetCardInfo("Moldervine Reclamation", 1716, Rarity.RARE, mage.cards.m.MoldervineReclamation.class));
@@ -1724,7 +1739,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Back to Basics", 1718, Rarity.RARE, mage.cards.b.BackToBasics.class));
         cards.add(new SetCardInfo("Preordain", 1719, Rarity.RARE, mage.cards.p.Preordain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sphinx of the Second Sun", 1720, Rarity.MYTHIC, mage.cards.s.SphinxOfTheSecondSun.class));
-        cards.add(new SetCardInfo("Teferi's Ageless Insight", 1721, Rarity.RARE, mage.cards.t.TeferisAgelessInsight.class));
+        cards.add(new SetCardInfo("Teferi's Ageless Insight", 1721, Rarity.RARE, mage.cards.t.TeferisAgelessInsight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Witch of the Moors", 1722, Rarity.RARE, mage.cards.w.WitchOfTheMoors.class));
         cards.add(new SetCardInfo("Bear Umbra", 1723, Rarity.RARE, mage.cards.b.BearUmbra.class));
         cards.add(new SetCardInfo("Realmwalker", 1724, Rarity.RARE, mage.cards.r.Realmwalker.class));
@@ -1775,7 +1790,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Unlicensed Hearse", 1772, Rarity.RARE, mage.cards.u.UnlicensedHearse.class));
         cards.add(new SetCardInfo("The Mimeoplasm", 1773, Rarity.RARE, mage.cards.t.TheMimeoplasm.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Trickbind", 1774, Rarity.RARE, mage.cards.t.Trickbind.class));
-        cards.add(new SetCardInfo("Windfall", 1775, Rarity.RARE, mage.cards.w.Windfall.class));
+        cards.add(new SetCardInfo("Windfall", 1775, Rarity.RARE, mage.cards.w.Windfall.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Incarnation Technique", 1776, Rarity.RARE, mage.cards.i.IncarnationTechnique.class));
         cards.add(new SetCardInfo("Pernicious Deed", 1777, Rarity.RARE, mage.cards.p.PerniciousDeed.class));
         cards.add(new SetCardInfo("Fell the Mighty", 1778, Rarity.RARE, mage.cards.f.FellTheMighty.class));
@@ -1843,12 +1858,16 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Liliana's Contract", 1844, Rarity.RARE, mage.cards.l.LilianasContract.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shiny Impetus", 1845, Rarity.UNCOMMON, mage.cards.s.ShinyImpetus.class));
         cards.add(new SetCardInfo("Fertile Ground", 1846, Rarity.COMMON, mage.cards.f.FertileGround.class));
-        cards.add(new SetCardInfo("Lignify", 1847, Rarity.COMMON, mage.cards.l.Lignify.class));
+        cards.add(new SetCardInfo("Lignify", 1847, Rarity.COMMON, mage.cards.l.Lignify.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mayael's Aria", 1848, Rarity.RARE, mage.cards.m.MayaelsAria.class));
         cards.add(new SetCardInfo("Trace of Abundance", 1849, Rarity.COMMON, mage.cards.t.TraceOfAbundance.class));
         cards.add(new SetCardInfo("Crib Swap", 1850, Rarity.UNCOMMON, mage.cards.c.CribSwap.class));
         cards.add(new SetCardInfo("Homeward Path", 1851, Rarity.RARE, mage.cards.h.HomewardPath.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Go-Shintai of Life's Origin", 1853, Rarity.MYTHIC, mage.cards.g.GoShintaiOfLifesOrigin.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Armageddon", 1854, Rarity.MYTHIC, mage.cards.a.Armageddon.class));
+        cards.add(new SetCardInfo("Northern Paladin", 1855, Rarity.RARE, mage.cards.n.NorthernPaladin.class));
+        cards.add(new SetCardInfo("Demonic Tutor", 1856, Rarity.MYTHIC, mage.cards.d.DemonicTutor.class));
+        cards.add(new SetCardInfo("Lord of the Pit", 1857, Rarity.RARE, mage.cards.l.LordOfThePit.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Day of Judgment", 1858, Rarity.RARE, mage.cards.d.DayOfJudgment.class));
         cards.add(new SetCardInfo("Temporal Extortion", 1859, Rarity.RARE, mage.cards.t.TemporalExtortion.class));
         cards.add(new SetCardInfo("Toxic Deluge", 1860, Rarity.RARE, mage.cards.t.ToxicDeluge.class));
@@ -1933,6 +1952,16 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 1942, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", 1943, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Morophon, the Boundless", 1944, Rarity.MYTHIC, mage.cards.m.MorophonTheBoundless.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 1945, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Island", 1946, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 1947, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 1948, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 1949, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 1950, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Island", 1951, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 1952, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 1953, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 1954, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Big Score", 1955, Rarity.RARE, mage.cards.b.BigScore.class));
         cards.add(new SetCardInfo("Final Fortune", 1956, Rarity.RARE, mage.cards.f.FinalFortune.class));
         cards.add(new SetCardInfo("Heat Shimmer", 1957, Rarity.RARE, mage.cards.h.HeatShimmer.class));
@@ -1967,11 +1996,26 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Zulaport Cutthroat", 1982, Rarity.RARE, mage.cards.z.ZulaportCutthroat.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aggravated Assault", 1983, Rarity.RARE, mage.cards.a.AggravatedAssault.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Desperate Ritual", 1984, Rarity.RARE, mage.cards.d.DesperateRitual.class));
+        cards.add(new SetCardInfo("Deadly Dispute", 1985, Rarity.RARE, mage.cards.d.DeadlyDispute.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Go for the Throat", 1986, Rarity.RARE, mage.cards.g.GoForTheThroat.class));
+        cards.add(new SetCardInfo("Lightning Greaves", 1987, Rarity.RARE, mage.cards.l.LightningGreaves.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sol Ring", 1988, Rarity.RARE, mage.cards.s.SolRing.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Command Tower", 1989, Rarity.RARE, mage.cards.c.CommandTower.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ephemerate", 1990, Rarity.RARE, mage.cards.e.Ephemerate.class));
+        cards.add(new SetCardInfo("Three Visits", 1991, Rarity.RARE, mage.cards.t.ThreeVisits.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lightning Greaves", 1992, Rarity.RARE, mage.cards.l.LightningGreaves.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sol Ring", 1993, Rarity.RARE, mage.cards.s.SolRing.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Command Tower", 1994, Rarity.RARE, mage.cards.c.CommandTower.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fact or Fiction", 1995, Rarity.RARE, mage.cards.f.FactOrFiction.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Frantic Search", 1996, Rarity.RARE, mage.cards.f.FranticSearch.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Scheming Symmetry", 1997, Rarity.RARE, mage.cards.s.SchemingSymmetry.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Blasphemous Act", 1998, Rarity.RARE, mage.cards.b.BlasphemousAct.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Impact Tremors", 1999, Rarity.RARE, mage.cards.i.ImpactTremors.class, FULL_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Damnation", 2000, Rarity.RARE, mage.cards.d.Damnation.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Dark Ritual", 2001, Rarity.RARE, mage.cards.d.DarkRitual.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Peer into the Abyss", 2002, Rarity.RARE, mage.cards.p.PeerIntoTheAbyss.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Surgical Extraction", 2003, Rarity.RARE, mage.cards.s.SurgicalExtraction.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Tendrils of Agony", 2004, Rarity.RARE, mage.cards.t.TendrilsOfAgony.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Agent of Treachery", 2005, Rarity.RARE, mage.cards.a.AgentOfTreachery.class));
         cards.add(new SetCardInfo("Priest of Forgotten Gods", 2006, Rarity.RARE, mage.cards.p.PriestOfForgottenGods.class));
         cards.add(new SetCardInfo("Treasonous Ogre", 2007, Rarity.RARE, mage.cards.t.TreasonousOgre.class));
@@ -1982,6 +2026,11 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Harrow", 2016, Rarity.RARE, mage.cards.h.Harrow.class));
         cards.add(new SetCardInfo("World Shaper", 2017, Rarity.RARE, mage.cards.w.WorldShaper.class));
         cards.add(new SetCardInfo("Horn of Greed", 2018, Rarity.RARE, mage.cards.h.HornOfGreed.class));
+        cards.add(new SetCardInfo("Damnation", 2019, Rarity.RARE, mage.cards.d.Damnation.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Dark Ritual", 2020, Rarity.RARE, mage.cards.d.DarkRitual.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Peer into the Abyss", 2021, Rarity.RARE, mage.cards.p.PeerIntoTheAbyss.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Surgical Extraction", 2022, Rarity.RARE, mage.cards.s.SurgicalExtraction.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Tendrils of Agony", 2023, Rarity.RARE, mage.cards.t.TendrilsOfAgony.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Goblin Bombardment", 2024, Rarity.RARE, mage.cards.g.GoblinBombardment.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Orcish Lumberjack", 2025, Rarity.RARE, mage.cards.o.OrcishLumberjack.class));
         cards.add(new SetCardInfo("Constant Mists", 2026, Rarity.RARE, mage.cards.c.ConstantMists.class));
@@ -2056,6 +2105,113 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Sylvan Safekeeper", 2109, Rarity.RARE, mage.cards.s.SylvanSafekeeper.class));
         cards.add(new SetCardInfo("Crucible of Worlds", 2110, Rarity.MYTHIC, mage.cards.c.CrucibleOfWorlds.class));
         cards.add(new SetCardInfo("Zuran Orb", 2111, Rarity.RARE, mage.cards.z.ZuranOrb.class));
+        cards.add(new SetCardInfo("Dandan", 2138, Rarity.RARE, mage.cards.d.Dandan.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Dandan", 2139, Rarity.RARE, mage.cards.d.Dandan.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Accumulated Knowledge", 2140, Rarity.RARE, mage.cards.a.AccumulatedKnowledge.class));
+        cards.add(new SetCardInfo("Memory Lapse", 2142, Rarity.RARE, mage.cards.m.MemoryLapse.class));
+        cards.add(new SetCardInfo("Mystic Sanctuary", 2143, Rarity.RARE, mage.cards.m.MysticSanctuary.class));
+        cards.add(new SetCardInfo("Island", 2144, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Island", 2145, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Island", 2146, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Island", 2147, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Brainstorm", 2148, Rarity.COMMON, mage.cards.b.Brainstorm.class, RETRO_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Capture of Jingzhou", 2149, Rarity.MYTHIC, mage.cards.c.CaptureOfJingzhou.class, RETRO_ART));
+        cards.add(new SetCardInfo("Chart a Course", 2150, Rarity.UNCOMMON, mage.cards.c.ChartACourse.class, RETRO_ART));
+        cards.add(new SetCardInfo("Control Magic", 2151, Rarity.UNCOMMON, mage.cards.c.ControlMagic.class, RETRO_ART));
+        cards.add(new SetCardInfo("Day's Undoing", 2153, Rarity.RARE, mage.cards.d.DaysUndoing.class, RETRO_ART));
+        cards.add(new SetCardInfo("Mental Note", 2154, Rarity.COMMON, mage.cards.m.MentalNote.class, RETRO_ART));
+        cards.add(new SetCardInfo("Metamorphose", 2155, Rarity.UNCOMMON, mage.cards.m.Metamorphose.class, RETRO_ART));
+        cards.add(new SetCardInfo("Predict", 2156, Rarity.UNCOMMON, mage.cards.p.Predict.class, RETRO_ART));
+        cards.add(new SetCardInfo("Telling Time", 2157, Rarity.UNCOMMON, mage.cards.t.TellingTime.class, RETRO_ART));
+        cards.add(new SetCardInfo("Unsubstantiate", 2158, Rarity.UNCOMMON, mage.cards.u.Unsubstantiate.class, RETRO_ART));
+        cards.add(new SetCardInfo("Halimar Depths", 2159, Rarity.COMMON, mage.cards.h.HalimarDepths.class, RETRO_ART));
+        cards.add(new SetCardInfo("Haunted Fengraf", 2160, Rarity.COMMON, mage.cards.h.HauntedFengraf.class, RETRO_ART));
+        cards.add(new SetCardInfo("Lonely Sandbar", 2161, Rarity.COMMON, mage.cards.l.LonelySandbar.class, RETRO_ART));
+        cards.add(new SetCardInfo("Remote Isle", 2162, Rarity.COMMON, mage.cards.r.RemoteIsle.class, RETRO_ART));
+        cards.add(new SetCardInfo("The Surgical Bay", 2163, Rarity.COMMON, mage.cards.t.TheSurgicalBay.class, RETRO_ART));
+        cards.add(new SetCardInfo("Svyelunite Temple", 2164, Rarity.UNCOMMON, mage.cards.s.SvyeluniteTemple.class, RETRO_ART));
+        cards.add(new SetCardInfo("Heliod, Sun-Crowned", 2165, Rarity.MYTHIC, mage.cards.h.HeliodSunCrowned.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Steelshaper's Gift", 2166, Rarity.RARE, mage.cards.s.SteelshapersGift.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swords to Plowshares", 2167, Rarity.RARE, mage.cards.s.SwordsToPlowshares.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Baral, Chief of Compliance", 2168, Rarity.RARE, mage.cards.b.BaralChiefOfCompliance.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Garruk Relentless", 2169, Rarity.MYTHIC, mage.cards.g.GarrukRelentless.class));
+        cards.add(new SetCardInfo("Garruk, the Veil-Cursed", 2169, Rarity.MYTHIC, mage.cards.g.GarrukTheVeilCursed.class));
+        cards.add(new SetCardInfo("Reaper King", 2170, Rarity.RARE, mage.cards.r.ReaperKing.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Glen Elendra Archmage", 2171, Rarity.RARE, mage.cards.g.GlenElendraArchmage.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Guardian Project", 2172, Rarity.MYTHIC, mage.cards.g.GuardianProject.class));
+        cards.add(new SetCardInfo("Roon of the Hidden Realm", 2173, Rarity.RARE, mage.cards.r.RoonOfTheHiddenRealm.class));
+        cards.add(new SetCardInfo("Soulherder", 2174, Rarity.RARE, mage.cards.s.Soulherder.class));
+        cards.add(new SetCardInfo("Jaws, Relentless Predator", 2175, Rarity.MYTHIC, mage.cards.j.JawsRelentlessPredator.class));
+        cards.add(new SetCardInfo("Descent into Avernus", 2176, Rarity.RARE, mage.cards.d.DescentIntoAvernus.class));
+        cards.add(new SetCardInfo("Reckless Endeavor", 2177, Rarity.RARE, mage.cards.r.RecklessEndeavor.class));
+        cards.add(new SetCardInfo("Sneak Attack", 2178, Rarity.MYTHIC, mage.cards.s.SneakAttack.class));
+        cards.add(new SetCardInfo("Abrade", 2179, Rarity.RARE, mage.cards.a.Abrade.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Bruvac the Grandiloquent", 2181, Rarity.MYTHIC, mage.cards.b.BruvacTheGrandiloquent.class));
+        cards.add(new SetCardInfo("Windfall", 2182, Rarity.RARE, mage.cards.w.Windfall.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Captain N'ghathrod", 2183, Rarity.MYTHIC, mage.cards.c.CaptainNghathrod.class));
+        cards.add(new SetCardInfo("Nekusar, the Mindrazer", 2184, Rarity.RARE, mage.cards.n.NekusarTheMindrazer.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Iron Maiden", 2185, Rarity.RARE, mage.cards.i.IronMaiden.class));
+        cards.add(new SetCardInfo("Mindcrank", 2186, Rarity.RARE, mage.cards.m.Mindcrank.class));
+        cards.add(new SetCardInfo("Lethal Scheme", 2187, Rarity.RARE, mage.cards.l.LethalScheme.class));
+        cards.add(new SetCardInfo("Grave Titan", 2188, Rarity.MYTHIC, mage.cards.g.GraveTitan.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Animate Dead", 2189, Rarity.RARE, mage.cards.a.AnimateDead.class));
+        cards.add(new SetCardInfo("Temporal Trespass", 2190, Rarity.MYTHIC, mage.cards.t.TemporalTrespass.class));
+        cards.add(new SetCardInfo("Unearth", 2191, Rarity.RARE, mage.cards.u.Unearth.class));
+        cards.add(new SetCardInfo("Lignify", 2192, Rarity.RARE, mage.cards.l.Lignify.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Greensleeves, Maro-Sorcerer", 2193, Rarity.MYTHIC, mage.cards.g.GreensleevesMaroSorcerer.class));
+        cards.add(new SetCardInfo("Polyraptor", 2194, Rarity.MYTHIC, mage.cards.p.Polyraptor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Academy Manufactor", 2195, Rarity.RARE, mage.cards.a.AcademyManufactor.class));
+        cards.add(new SetCardInfo("Wurmcoil Engine", 2196, Rarity.MYTHIC, mage.cards.w.WurmcoilEngine.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ellie, Brick Master", 2197, Rarity.MYTHIC, mage.cards.e.EllieBrickMaster.class));
+        cards.add(new SetCardInfo("Joel, Resolute Survivor", 2198, Rarity.MYTHIC, mage.cards.j.JoelResoluteSurvivor.class));
+        cards.add(new SetCardInfo("Cabal Ritual", 2199, Rarity.RARE, mage.cards.c.CabalRitual.class));
+        cards.add(new SetCardInfo("Haunted One", 2200, Rarity.MYTHIC, mage.cards.h.HauntedOne.class));
+        cards.add(new SetCardInfo("Abby, Merciless Soldier", 2202, Rarity.MYTHIC, mage.cards.a.AbbyMercilessSoldier.class));
+        cards.add(new SetCardInfo("Ellie, Vengeful Hunter", 2203, Rarity.MYTHIC, mage.cards.e.EllieVengefulHunter.class));
+        cards.add(new SetCardInfo("Dictate of Erebos", 2204, Rarity.RARE, mage.cards.d.DictateOfErebos.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mycoloth", 2205, Rarity.RARE, mage.cards.m.Mycoloth.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kratos, God of War", 2207, Rarity.MYTHIC, mage.cards.k.KratosGodOfWar.class));
+        cards.add(new SetCardInfo("World at War", 2208, Rarity.RARE, mage.cards.w.WorldAtWar.class));
+        cards.add(new SetCardInfo("Rite of Flame", 2209, Rarity.RARE, mage.cards.r.RiteOfFlame.class));
+        cards.add(new SetCardInfo("Sulfuric Vortex", 2210, Rarity.RARE, mage.cards.s.SulfuricVortex.class));
+        cards.add(new SetCardInfo("Pyrohemia", 2211, Rarity.RARE, mage.cards.p.Pyrohemia.class));
+        cards.add(new SetCardInfo("Atreus, Impulsive Son", 2212, Rarity.MYTHIC, mage.cards.a.AtreusImpulsiveSon.class));
+        cards.add(new SetCardInfo("Teferi's Ageless Insight", 2214, Rarity.RARE, mage.cards.t.TeferisAgelessInsight.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Teferi's Ageless Insight", "2214b", Rarity.RARE, mage.cards.t.TeferisAgelessInsight.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Iroas, God of Victory", 2215, Rarity.MYTHIC, mage.cards.i.IroasGodOfVictory.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Midnight Clock", 2217, Rarity.RARE, mage.cards.m.MidnightClock.class));
+        cards.add(new SetCardInfo("Whip of Erebos", 2218, Rarity.RARE, mage.cards.w.WhipOfErebos.class));
+        cards.add(new SetCardInfo("Chain Reaction", 2219, Rarity.RARE, mage.cards.c.ChainReaction.class));
+        cards.add(new SetCardInfo("Passionate Archaeologist", 2220, Rarity.MYTHIC, mage.cards.p.PassionateArchaeologist.class));
+        cards.add(new SetCardInfo("Aloy, Savior of Meridian", 2221, Rarity.MYTHIC, mage.cards.a.AloySaviorOfMeridian.class));
+        cards.add(new SetCardInfo("Farseek", 2222, Rarity.RARE, mage.cards.f.Farseek.class));
+        cards.add(new SetCardInfo("Blightsteel Colossus", 2223, Rarity.MYTHIC, mage.cards.b.BlightsteelColossus.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Tarrian's Soulcleaver", 2224, Rarity.RARE, mage.cards.t.TarriansSoulcleaver.class));
+        cards.add(new SetCardInfo("Meteor Golem", 2225, Rarity.RARE, mage.cards.m.MeteorGolem.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Path to Exile", 2227, Rarity.RARE, mage.cards.p.PathToExile.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Borne Upon a Wind", 2228, Rarity.RARE, mage.cards.b.BorneUponAWind.class));
+        cards.add(new SetCardInfo("Ghostly Flicker", 2229, Rarity.RARE, mage.cards.g.GhostlyFlicker.class));
+        cards.add(new SetCardInfo("Eiganjo Castle", 2230, Rarity.RARE, mage.cards.e.EiganjoCastle.class));
+        cards.add(new SetCardInfo("Vito, Thorn of the Dusk Rose", 2282, Rarity.RARE, mage.cards.v.VitoThornOfTheDuskRose.class));
+        cards.add(new SetCardInfo("Satoru Umezawa", 2283, Rarity.RARE, mage.cards.s.SatoruUmezawa.class));
+        cards.add(new SetCardInfo("Voja, Jaws of the Conclave", 2284, Rarity.MYTHIC, mage.cards.v.VojaJawsOfTheConclave.class));
+        cards.add(new SetCardInfo("Wilhelt, the Rotcleaver", 2285, Rarity.MYTHIC, mage.cards.w.WilheltTheRotcleaver.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Liberator, Urza's Battlethopter", 2286, Rarity.RARE, mage.cards.l.LiberatorUrzasBattlethopter.class));
+        cards.add(new SetCardInfo("Distant Melody", 2311, Rarity.RARE, mage.cards.d.DistantMelody.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Explore", 2312, Rarity.RARE, mage.cards.e.Explore.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Inspiring Call", 2313, Rarity.RARE, mage.cards.i.InspiringCall.class));
+        cards.add(new SetCardInfo("Chromatic Lantern", 2314, Rarity.RARE, mage.cards.c.ChromaticLantern.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sol Ring", 2315, Rarity.RARE, mage.cards.s.SolRing.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sphere of Safety", 2316, Rarity.RARE, mage.cards.s.SphereOfSafety.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Miscast", 2317, Rarity.RARE, mage.cards.m.Miscast.class));
+        cards.add(new SetCardInfo("Phyrexian Arena", 2318, Rarity.RARE, mage.cards.p.PhyrexianArena.class));
+        cards.add(new SetCardInfo("Tormenting Voice", 2319, Rarity.RARE, mage.cards.t.TormentingVoice.class));
+        cards.add(new SetCardInfo("Tamiyo's Safekeeping", 2320, Rarity.RARE, mage.cards.t.TamiyosSafekeeping.class));
+        cards.add(new SetCardInfo("Hullbreaker Horror", 2321, Rarity.RARE, mage.cards.h.HullbreakerHorror.class));
+        cards.add(new SetCardInfo("Maddening Cacophony", 2322, Rarity.RARE, mage.cards.m.MaddeningCacophony.class));
+        cards.add(new SetCardInfo("Serum Visions", 2323, Rarity.RARE, mage.cards.s.SerumVisions.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Umbris, Fear Manifest", 2324, Rarity.MYTHIC, mage.cards.u.UmbrisFearManifest.class));
+        cards.add(new SetCardInfo("Spellskite", 2325, Rarity.RARE, mage.cards.s.Spellskite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Feed the Swarm", 7001, Rarity.RARE, mage.cards.f.FeedTheSwarm.class));
         cards.add(new SetCardInfo("Forge Anew", 7002, Rarity.RARE, mage.cards.f.ForgeAnew.class));
         cards.add(new SetCardInfo("Silence", 7003, Rarity.RARE, mage.cards.s.Silence.class, NON_FULL_USE_VARIOUS));
@@ -2084,6 +2240,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Lotus Petal", 7035, Rarity.MYTHIC, mage.cards.l.LotusPetal.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lotus Petal", 7036, Rarity.MYTHIC, mage.cards.l.LotusPetal.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lotus Petal", 7037, Rarity.MYTHIC, mage.cards.l.LotusPetal.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vision Charm", 7040, Rarity.RARE, mage.cards.v.VisionCharm.class));
         cards.add(new SetCardInfo("Jace, the Mind Sculptor", 8001, Rarity.MYTHIC, mage.cards.j.JaceTheMindSculptor.class));
         cards.add(new SetCardInfo("Doom Blade", 9990, Rarity.RARE, mage.cards.d.DoomBlade.class));
         cards.add(new SetCardInfo("Massacre", 9991, Rarity.RARE, mage.cards.m.Massacre.class));

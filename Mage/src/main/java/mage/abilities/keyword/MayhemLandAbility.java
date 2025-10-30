@@ -1,23 +1,22 @@
 package mage.abilities.keyword;
 
-import mage.MageIdentifier;
-import mage.abilities.PlayLandAbility;
-import mage.cards.Card;
-import mage.constants.Zone;
+import mage.abilities.Ability;
+import mage.abilities.StaticAbility;
+import mage.abilities.effects.AsThoughEffect;
+import mage.abilities.effects.AsThoughEffectImpl;
+import mage.constants.*;
 import mage.game.Game;
 
-import java.util.Set;
 import java.util.UUID;
 
-public  class MayhemLandAbility extends PlayLandAbility {
+public  class MayhemLandAbility extends StaticAbility {
 
         private final String rule;
 
-        public MayhemLandAbility(Card card) {
-            super(card.getName());
-            this.zone = Zone.GRAVEYARD;
+        public MayhemLandAbility() {
+            super(AbilityType.STATIC, Zone.GRAVEYARD);
             this.newId();
-            this.name += " with Mayhem";
+            this.addEffect(new MayhemPlayEffect());
             this.addWatcher(new MayhemWatcher());
             this.setRuleAtTheTop(true);
             this.rule = "Mayhem " +
@@ -31,24 +30,6 @@ public  class MayhemLandAbility extends PlayLandAbility {
         }
 
         @Override
-        public ActivationStatus canActivate(UUID playerId, Game game) {
-            if (!Zone.GRAVEYARD.match(game.getState().getZone(getSourceId()))
-                    || !MayhemWatcher.checkCard(getSourceId(), game)) {
-                return ActivationStatus.getFalse();
-            }
-            return super.canActivate(playerId, game);
-        }
-
-        @Override
-        public boolean activate(Game game, Set<MageIdentifier> allowedIdentifiers, boolean noMana) {
-            if (!super.activate(game, allowedIdentifiers, noMana)) {
-                return false;
-            }
-            this.setCostsTag(MayhemAbility.MAYHEM_ACTIVATION_VALUE_KEY, null);
-            return true;
-        }
-
-        @Override
         public MayhemLandAbility copy() {
             return new MayhemLandAbility(this);
         }
@@ -57,4 +38,31 @@ public  class MayhemLandAbility extends PlayLandAbility {
         public String getRule() {
             return rule;
         }
+}
+
+class MayhemPlayEffect extends AsThoughEffectImpl {
+
+    public MayhemPlayEffect() {
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileInGraveyard, Outcome.Neutral);
     }
+
+    public MayhemPlayEffect(final MayhemPlayEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
+        return Zone.GRAVEYARD.match(game.getState().getZone(sourceId))
+                && MayhemWatcher.checkCard(sourceId, game);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
+
+    @Override
+    public AsThoughEffect copy() {
+        return new MayhemPlayEffect(this);
+    }
+}

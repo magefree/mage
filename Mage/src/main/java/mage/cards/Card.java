@@ -157,7 +157,7 @@ public interface Card extends MageObject, Ownerable {
 
     void addAbility(Ability ability);
 
-    void looseAllAbilities(Game game);
+    void loseAllAbilities(Game game);
 
     boolean addCounters(Counter counter, Ability source, Game game);
 

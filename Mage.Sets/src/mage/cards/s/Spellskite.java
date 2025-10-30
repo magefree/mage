@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -14,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
@@ -76,8 +74,7 @@ class SpellskiteEffect extends OneShotEffect {
                 Spell spell = (Spell) stackObject;
                 sourceAbility = spell.getSpellAbility();
             } else if (stackObject instanceof StackAbility) {
-                StackAbility stackAbility = (StackAbility) stackObject;
-                sourceAbility = stackAbility;
+                sourceAbility = (StackAbility) stackObject;
             } else {
                 return false;
             }
@@ -86,7 +83,6 @@ class SpellskiteEffect extends OneShotEffect {
                 targets.addAll(mode.getTargets());
             }
 
-            boolean twoTimesTarget = false;
             if (targets.size() == 1 && targets.get(0).getTargets().size() == 1) {
                 Target target = targets.get(0);
                 if (target.getFirstTarget().equals(source.getSourceId())) {
@@ -134,10 +130,9 @@ class SpellskiteEffect extends OneShotEffect {
             }
             if (oldTargetName != null) {
                 game.informPlayers(sourceObject.getLogName() + ": Changed target of " + stackObject.getLogName() + " from " + oldTargetName + " to " + sourceObject.getLogName());
-            } else if (twoTimesTarget) {
-                game.informPlayers(sourceObject.getLogName() + ": Target not changed to " + sourceObject.getLogName() + " because its not valid to target it twice for " + stackObject.getLogName());
-            } else {
-                game.informPlayers(sourceObject.getLogName() + ": Target not changed to " + sourceObject.getLogName() + " because its no valid target for " + stackObject.getLogName());
+            }
+            else {
+                game.informPlayers(sourceObject.getLogName() + ": Target not changed to " + sourceObject.getLogName() + " because it's not a valid target for " + stackObject.getLogName());
             }
             return true;
         }

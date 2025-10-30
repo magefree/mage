@@ -30,7 +30,7 @@ public class StrongTheBrutishThespian extends CardImpl {
         this.toughness = new MageInt(7);
 
         // Ward {2}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}"), false));
 
         // Enrage - Whenever Strong is dealt damage, you get three rad counters and put three +1/+1 counters on Strong.
         Ability enrageAbility = new DealtDamageToSourceTriggeredAbility(new AddCountersPlayersEffect(CounterType.RAD.createInstance(3), TargetController.YOU), false, true);

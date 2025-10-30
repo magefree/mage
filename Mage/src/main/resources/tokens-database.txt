@@ -2782,6 +2782,7 @@
 
 # DSK
 |Generate|TOK:DSK|Beast|||BeastieToken|
+|Generate|TOK:DSK|Demon|||Demon66Token|
 |Generate|TOK:DSK|Everywhere|||EverywhereToken|
 |Generate|TOK:DSK|Glimmer|||GlimmerToken|
 |Generate|TOK:DSK|Gremlin|||Gremlin11Token|
@@ -2793,6 +2794,7 @@
 |Generate|TOK:DSK|Spider|||Spider22Token|
 |Generate|TOK:DSK|Spirit|1||Spirit31Token|
 |Generate|TOK:DSK|Spirit|2||SpiritBlueToken|
+|Generate|TOK:DSK|Toy|||ToyToken|
 |Generate|TOK:DSK|Treasure|||TreasureToken|
 
 # FIN

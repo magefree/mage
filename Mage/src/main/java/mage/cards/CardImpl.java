@@ -303,7 +303,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     @Override
-    public void looseAllAbilities(Game game) {
+    public void loseAllAbilities(Game game) {
         CardState cardState = game.getState().getCardState(this.getId());
         cardState.setLostAllAbilities(true);
         cardState.getAbilities().clear();
