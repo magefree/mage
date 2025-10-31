@@ -130,6 +130,7 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Thriving Heath", 262, Rarity.COMMON, mage.cards.t.ThrivingHeath.class));
         cards.add(new SetCardInfo("Thriving Isle", 263, Rarity.COMMON, mage.cards.t.ThrivingIsle.class));
         cards.add(new SetCardInfo("Thriving Moor", 264, Rarity.COMMON, mage.cards.t.ThrivingMoor.class));
+        cards.add(new SetCardInfo("Toph, Earthbending Master", 145, Rarity.MYTHIC, mage.cards.t.TophEarthbendingMaster.class));
         cards.add(new SetCardInfo("Tundra Wall", 220, Rarity.COMMON, mage.cards.t.TundraWall.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tundra Wall", 275, Rarity.COMMON, mage.cards.t.TundraWall.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Turtle-Seals", 226, Rarity.COMMON, mage.cards.t.TurtleSeals.class));
