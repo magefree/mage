@@ -40,6 +40,7 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Arcane Signet", 315, Rarity.RARE, mage.cards.a.ArcaneSignet.class));
         cards.add(new SetCardInfo("Avatar Kyoshi, Earthbender", 130, Rarity.MYTHIC, mage.cards.a.AvatarKyoshiEarthbender.class));
         cards.add(new SetCardInfo("Bribery", 10, Rarity.MYTHIC, mage.cards.b.Bribery.class));
+        cards.add(new SetCardInfo("Brought Back", 1, Rarity.MYTHIC, mage.cards.b.BroughtBack.class));
         cards.add(new SetCardInfo("Bumi, Eclectic Earthbender", 248, Rarity.RARE, mage.cards.b.BumiEclecticEarthbender.class));
         cards.add(new SetCardInfo("Capital Guard", 234, Rarity.COMMON, mage.cards.c.CapitalGuard.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Capital Guard", 277, Rarity.COMMON, mage.cards.c.CapitalGuard.class, NON_FULL_USE_VARIOUS));
@@ -84,6 +85,7 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Loyal Fire Sage", 242, Rarity.UNCOMMON, mage.cards.l.LoyalFireSage.class));
         cards.add(new SetCardInfo("Match the Odds", 253, Rarity.UNCOMMON, mage.cards.m.MatchTheOdds.class));
         cards.add(new SetCardInfo("Mechanical Glider", 256, Rarity.COMMON, mage.cards.m.MechanicalGlider.class));
+        cards.add(new SetCardInfo("Mirrorwing Dragon", 33, Rarity.MYTHIC, mage.cards.m.MirrorwingDragon.class));
         cards.add(new SetCardInfo("Momo, Rambunctious Rascal", 217, Rarity.UNCOMMON, mage.cards.m.MomoRambunctiousRascal.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Momo, Rambunctious Rascal", 270, Rarity.UNCOMMON, mage.cards.m.MomoRambunctiousRascal.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 289, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
@@ -104,9 +106,12 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 302, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 303, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 304, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Prosperity", 17, Rarity.MYTHIC, mage.cards.p.Prosperity.class));
         cards.add(new SetCardInfo("Purple Pentapus", 233, Rarity.COMMON, mage.cards.p.PurplePentapus.class));
         cards.add(new SetCardInfo("Razor Rings", 272, Rarity.COMMON, mage.cards.r.RazorRings.class));
         cards.add(new SetCardInfo("Release to Memory", 5, Rarity.MYTHIC, mage.cards.r.ReleaseToMemory.class));
+        cards.add(new SetCardInfo("Rhys the Redeemed", 52, Rarity.MYTHIC, mage.cards.r.RhysTheRedeemed.class));
+        cards.add(new SetCardInfo("Rites of Flourishing", 45, Rarity.MYTHIC, mage.cards.r.RitesOfFlourishing.class));
         cards.add(new SetCardInfo("Roku's Mastery", 243, Rarity.UNCOMMON, mage.cards.r.RokusMastery.class));
         cards.add(new SetCardInfo("Run Amok", 258, Rarity.COMMON, mage.cards.r.RunAmok.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Run Amok", 284, Rarity.COMMON, mage.cards.r.RunAmok.class, NON_FULL_USE_VARIOUS));
