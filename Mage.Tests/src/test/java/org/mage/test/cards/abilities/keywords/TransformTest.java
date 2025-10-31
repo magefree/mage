@@ -277,6 +277,14 @@ public class TransformTest extends CardTestPlayerBase {
     */
     private static final String croakingCounterpart = "Croaking Counterpart";
 
+    /*
+   Abnormal Endurance
+   {1}{B}
+   Instant
+   Until end of turn, target creature gets +2/+0 and gains "When this creature dies, return it to the battlefield tapped under its owner's control."
+   */
+    private static final String abnormalEndurance = "Abnormal Endurance";
+
     @Test
     public void NissaVastwoodSeerTest() {
 
@@ -530,6 +538,25 @@ public class TransformTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Lambholt Butcher", 1);
 
         assertPermanentCount(playerB, "Lambholt Pacifist", 1);
+    }
+
+    @Test
+    public void testDisturbExile() {
+        addCard(Zone.GRAVEYARD, playerA, baithookAngler);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain");
+        addCard(Zone.HAND, playerB, lightningBolt);
+
+        // Disturb {1}{U}
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, hookHauntDrifter + " using Disturb");
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, lightningBolt, hookHauntDrifter);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, hookHauntDrifter, 0);
+        assertExileCount(playerA, baithookAngler, 1);
     }
 
     /**
@@ -871,5 +898,30 @@ public class TransformTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, likenessOfTheSeeker, 3, 3);
         assertAbilityCount(playerA, likenessOfTheSeeker, SagaAbility.class, 0); // does not have saga ability
         assertLife(playerA, 20 + 3);
+    }
+
+    /**
+     * testing if a double faced card gains a death trigger, it still works correctly
+     */
+    @Test
+    public void testDiesTrigger() {
+        addCard(Zone.BATTLEFIELD, playerA, baithookAngler);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+        addCard(Zone.HAND, playerA, abnormalEndurance);
+
+        addCard(Zone.HAND, playerB, lightningBolt);
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain");
+
+        castSpell(1, PhaseStep.BEGIN_COMBAT, playerB, lightningBolt, baithookAngler);
+        castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, abnormalEndurance, baithookAngler, lightningBolt);
+
+        setStopAt(1, PhaseStep.DECLARE_ATTACKERS);
+        execute();
+
+        assertGraveyardCount(playerA, baithookAngler, 0);
+        assertGraveyardCount(playerB, lightningBolt, 1);
+
+        assertPermanentCount(playerA, baithookAngler, 1);
+        assertTrue(getPermanent(baithookAngler, playerA).isTapped());
     }
 }

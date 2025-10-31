@@ -670,9 +670,9 @@ public class GameState implements Serializable, Copyable<GameState> {
         for (Player player : players.values()) {
             player.reset();
         }
+        this.reset();
         battlefield.reset(game);
         combat.reset(game);
-        this.reset();
         effects.apply(game);
         combat.checkForRemoveFromCombat(game);
     }

@@ -1,16 +1,15 @@
 package mage.game.permanent;
 
 import mage.MageObject;
+import mage.ObjectColor;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
-import mage.abilities.StaticAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.keyword.NightboundAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.*;
 import mage.constants.SpellAbilityType;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
@@ -32,6 +31,8 @@ public class PermanentCard extends PermanentImpl {
 
     protected int maxLevelCounters;
     protected int zoneChangeCounter;
+    protected ObjectColor originalColor;
+    protected ObjectColor originalFrameColor;
 
     public PermanentCard(Card card, UUID controllerId, Game game) {
         super(card.getId(), card.getOwnerId(), controllerId, card.getName()); // card id
@@ -118,6 +119,8 @@ public class PermanentCard extends PermanentImpl {
         this.card = permanent.card.copy();
         this.maxLevelCounters = permanent.maxLevelCounters;
         this.zoneChangeCounter = permanent.zoneChangeCounter;
+        this.originalColor = permanent.originalColor.copy();
+        this.originalFrameColor = permanent.originalFrameColor.copy();
     }
 
     @Override
@@ -146,12 +149,9 @@ public class PermanentCard extends PermanentImpl {
         }
     }
 
-    protected void copyFromCard(final Card card, final Game game, boolean reset) {
+    protected void copyFromCard(final Card card, final Game game, boolean isReset) {
         // TODO: must research - is it copy all fields or something miss
         this.name = card.getName();
-        if (!reset) {
-            this.abilities.setSourceId(null);
-        }
         this.abilities.clear();
         if (this.faceDown) {
             for (Ability ability : card.getAbilities()) {
@@ -159,27 +159,30 @@ public class PermanentCard extends PermanentImpl {
                     this.abilities.add(ability.copy());
                 }
             }
+        } else if (card.getId() != this.getId()) {
+            // if different id, abilities need to be added to game state for continuous/triggers
+            for (Ability ability : card.getAbilities()) {
+              this.addAbility(ability, card.getId(), game, true);
+            }
         } else {
             // copy only own abilities; all dynamic added abilities must be added in the parent call
             this.abilities = card.getAbilities().copy();
             this.spellAbility = null; // will be set on first getSpellAbility call if card has one.
-            if (!reset) {
-                for (Ability ability : this.getAbilities()) {
-                    if (ability instanceof StaticAbility && ability.getZone().equals(Zone.BATTLEFIELD) && !ability.getSourceId().equals(getId())) {
-                        // for continuous effects not on the card used to create the permanent, change the id
-                        ability.newId();
-                        ability.getSubAbilities().clear();
-                    }
-                    game.getState().addAbility(ability, null, this);
-                }
-            }
         }
         this.abilities.setControllerId(this.controllerId);
         this.abilities.setSourceId(objectId);
         this.cardType.clear();
         this.cardType.addAll(card.getCardType());
-        this.color = card.getColor(game).copy();
-        this.frameColor = card.getFrameColor(game).copy();
+        if (!isReset) {
+            // save color from game state on first creation
+            this.color = card.getColor(game).copy();
+            this.frameColor = card.getFrameColor(game).copy();
+            this.originalColor = card.getColor(game).copy();
+            this.originalFrameColor = card.getFrameColor(game).copy();
+        } else {
+            this.color = originalColor.copy();
+            this.frameColor = originalFrameColor.copy();
+        }
         this.frameStyle = card.getFrameStyle();
         this.manaCost = card.getManaCost().copy();
         if (card instanceof PermanentCard) {
