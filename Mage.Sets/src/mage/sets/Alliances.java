@@ -158,7 +158,7 @@ public final class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Royal Herbalist", "15a", Rarity.COMMON, mage.cards.r.RoyalHerbalist.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Royal Herbalist", "15b", Rarity.COMMON, mage.cards.r.RoyalHerbalist.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Scarab of the Unseen", 128, Rarity.UNCOMMON, mage.cards.s.ScarabOfTheUnseen.class, RETRO_ART));
-        cards.add(new SetCardInfo("Scars of the Veteran", 149, Rarity.UNCOMMON, mage.cards.s.ScarsOfTheVeteran.class));
+        cards.add(new SetCardInfo("Scars of the Veteran", 16, Rarity.UNCOMMON, mage.cards.s.ScarsOfTheVeteran.class));
         cards.add(new SetCardInfo("School of the Unseen", 141, Rarity.UNCOMMON, mage.cards.s.SchoolOfTheUnseen.class, RETRO_ART));
         cards.add(new SetCardInfo("Seasoned Tactician", 17, Rarity.UNCOMMON, mage.cards.s.SeasonedTactician.class, RETRO_ART));
         cards.add(new SetCardInfo("Sheltered Valley", 142, Rarity.RARE, mage.cards.s.ShelteredValley.class, RETRO_ART));
