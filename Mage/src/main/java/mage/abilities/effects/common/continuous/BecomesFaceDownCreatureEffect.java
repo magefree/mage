@@ -264,7 +264,7 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
         for (Ability ability : object.getAbilities()) {
 
             // keep gained abilities from other sources, removes only own (card text)
-            if (card != null && !card.getAbilities().contains(ability)) {
+            if (card != null && !card.getAbilities().contains(ability) && !object.isCopy()) {
                 continue;
             }
 
