@@ -643,8 +643,8 @@ public final class ManaUtil {
             secondSide = ((SplitCard) card).getRightHalfCard();
         } else if (card instanceof CardWithSpellOption) {
             secondSide = ((CardWithSpellOption) card).getSpellCard();
-        } else if (card instanceof ModalDoubleFacedCard) {
-            secondSide = ((ModalDoubleFacedCard) card).getRightHalfCard();
+        } else if (card instanceof DoubleFacedCard) {
+            secondSide = ((DoubleFacedCard) card).getRightHalfCard();
         } else {
             secondSide = card.getSecondCardFace();
         }

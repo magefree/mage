@@ -32,7 +32,6 @@ public class ShadowsOverInnistradPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Arlinn, Embraced by the Moon", "243s", Rarity.MYTHIC, mage.cards.a.ArlinnEmbracedByTheMoon.class));
         cards.add(new SetCardInfo("Asylum Visitor", "99s", Rarity.RARE, mage.cards.a.AsylumVisitor.class));
         cards.add(new SetCardInfo("Avacyn's Judgment", "145s", Rarity.RARE, mage.cards.a.AvacynsJudgment.class));
-        cards.add(new SetCardInfo("Avacyn, the Purifier", "5s", Rarity.MYTHIC, mage.cards.a.AvacynThePurifier.class));
         cards.add(new SetCardInfo("Awoken Horror", "92s", Rarity.RARE, mage.cards.a.AwokenHorror.class));
         cards.add(new SetCardInfo("Behold the Beyond", "101s", Rarity.MYTHIC, mage.cards.b.BeholdTheBeyond.class));
         cards.add(new SetCardInfo("Brain in a Jar", "252s", Rarity.RARE, mage.cards.b.BrainInAJar.class));
@@ -86,7 +85,6 @@ public class ShadowsOverInnistradPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Odric, Lunarch Marshal", "31s", Rarity.RARE, mage.cards.o.OdricLunarchMarshal.class));
         cards.add(new SetCardInfo("Olivia, Mobilized for War", "248s", Rarity.MYTHIC, mage.cards.o.OliviaMobilizedForWar.class));
         cards.add(new SetCardInfo("Ormendahl, Profane Prince", "281s", Rarity.RARE, mage.cards.o.OrmendahlProfanePrince.class));
-        cards.add(new SetCardInfo("Persistent Nightmare", "88s", Rarity.MYTHIC, mage.cards.p.PersistentNightmare.class));
         cards.add(new SetCardInfo("Port Town", "278s", Rarity.RARE, mage.cards.p.PortTown.class));
         cards.add(new SetCardInfo("Prized Amalgam", "249s", Rarity.RARE, mage.cards.p.PrizedAmalgam.class));
         cards.add(new SetCardInfo("Rattlechains", "81s", Rarity.RARE, mage.cards.r.Rattlechains.class));

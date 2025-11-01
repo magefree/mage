@@ -1,11 +1,8 @@
 package mage.sets;
 
-import mage.cards.Card;
 import mage.cards.ExpansionSet;
-import mage.cards.repository.CardInfo;
 import mage.constants.Rarity;
 import mage.constants.SetType;
-import mage.util.RandomUtil;
 import mage.collation.BoosterCollator;
 import mage.collation.BoosterStructure;
 import mage.collation.CardRun;
@@ -77,7 +74,6 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Belligerent Yearling", 133, Rarity.UNCOMMON, mage.cards.b.BelligerentYearling.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Belligerent Yearling", 320, Rarity.UNCOMMON, mage.cards.b.BelligerentYearling.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bitter Triumph", 91, Rarity.UNCOMMON, mage.cards.b.BitterTriumph.class));
-        cards.add(new SetCardInfo("Bladewheel Chariot", 36, Rarity.UNCOMMON, mage.cards.b.BladewheelChariot.class));
         cards.add(new SetCardInfo("Bloodletter of Aclazotz", 336, Rarity.MYTHIC, mage.cards.b.BloodletterOfAclazotz.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloodletter of Aclazotz", 92, Rarity.MYTHIC, mage.cards.b.BloodletterOfAclazotz.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloodthorn Flail", 93, Rarity.UNCOMMON, mage.cards.b.BloodthornFlail.class));

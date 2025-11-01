@@ -79,7 +79,6 @@ public class ShadowsOfThePast extends ExpansionSet {
         cards.add(new SetCardInfo("Mystic Retrieval", 20, Rarity.UNCOMMON, mage.cards.m.MysticRetrieval.class));
         cards.add(new SetCardInfo("Past in Flames", 43, Rarity.MYTHIC, mage.cards.p.PastInFlames.class));
         cards.add(new SetCardInfo("Rally the Peasants", 10, Rarity.UNCOMMON, mage.cards.r.RallyThePeasants.class));
-        cards.add(new SetCardInfo("Ravager of the Fells", 64, Rarity.MYTHIC, mage.cards.r.RavagerOfTheFells.class));
         cards.add(new SetCardInfo("Requiem Angel", 11, Rarity.RARE, mage.cards.r.RequiemAngel.class));
         cards.add(new SetCardInfo("Seance", 12, Rarity.UNCOMMON, mage.cards.s.Seance.class));
         cards.add(new SetCardInfo("Selhoff Occultist", 21, Rarity.COMMON, mage.cards.s.SelhoffOccultist.class));

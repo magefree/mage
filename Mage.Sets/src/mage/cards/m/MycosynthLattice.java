@@ -134,10 +134,10 @@ class EverythingIsColorlessEffect extends ContinuousEffectImpl {
             affectedCards.forEach(card -> {
                 game.getState().getCreateMageObjectAttribute(card, game).getColor().setColor(colorless);
 
-                // mdf cards
-                if (card instanceof ModalDoubleFacedCard) {
-                    ModalDoubleFacedCardHalf leftHalfCard = ((ModalDoubleFacedCard) card).getLeftHalfCard();
-                    ModalDoubleFacedCardHalf rightHalfCard = ((ModalDoubleFacedCard) card).getRightHalfCard();
+                // df cards
+                if (card instanceof DoubleFacedCard) {
+                    DoubleFacedCardHalf leftHalfCard = ((DoubleFacedCard) card).getLeftHalfCard();
+                    DoubleFacedCardHalf rightHalfCard = ((DoubleFacedCard) card).getRightHalfCard();
                     game.getState().getCreateMageObjectAttribute(leftHalfCard, game).getColor().setColor(colorless);
                     game.getState().getCreateMageObjectAttribute(rightHalfCard, game).getColor().setColor(colorless);
                 }
@@ -151,6 +151,7 @@ class EverythingIsColorlessEffect extends ContinuousEffectImpl {
                 }
 
                 // double faces cards
+                // TODO: can remove after tdfc rework
                 if (card.getSecondCardFace() != null) {
                     game.getState().getCreateMageObjectAttribute(card, game).getColor().setColor(colorless);
                 }

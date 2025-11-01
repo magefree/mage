@@ -5,8 +5,8 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.keyword.ChangelingAbility;
-import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
+import mage.cards.RoomCard;
 import mage.constants.EmptyNames;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
@@ -30,13 +30,13 @@ public class PermanentToken extends PermanentImpl {
         this.token = token.copy();
         this.token.getAbilities().newOriginalId(); // neccessary if token has ability like DevourAbility()
         this.token.getAbilities().setSourceId(objectId);
-        this.power = new MageInt(token.getPower().getModifiedBaseValue());
-        this.toughness = new MageInt(token.getToughness().getModifiedBaseValue());
-        this.copyFromToken(this.token, game, false); // needed to have at this time (e.g. for subtypes for entersTheBattlefield replacement effects)
 
         // if transformed on ETB
         if (this.token.isEntersTransformed()) {
-            TransformAbility.transformPermanent(this, game, null);
+            this.setTransformed(true);
+            this.copyFromToken(this.token.getBackFace(), game, false);
+        } else {
+            this.copyFromToken(this.token, game, false); // needed to have at this time (e.g. for subtypes for entersTheBattlefield replacement effects)
         }
 
         // token's ZCC must be synced with original token to keep abilities settings
@@ -53,7 +53,11 @@ public class PermanentToken extends PermanentImpl {
 
     @Override
     public void reset(Game game) {
-        copyFromToken(token, game, true);
+        if (this.isTransformed()) {
+            copyFromToken(token.getBackFace(), game, true);
+        } else {
+            copyFromToken(token, game, true);
+        }
         super.reset(game);
         // Because the P/T objects have there own base value for reset we have to take it from there instead of from the basic token object
         this.power.resetToBaseValue();
@@ -110,8 +114,12 @@ public class PermanentToken extends PermanentImpl {
         if (this.abilities.containsClass(ChangelingAbility.class)) {
             this.subtype.setIsAllCreatureTypes(true);
         }
-
+        this.power = new MageInt(token.getPower().getModifiedBaseValue());
+        this.toughness = new MageInt(token.getToughness().getModifiedBaseValue());
         CardUtil.copySetAndCardNumber(this, token);
+        if (token.getCopySourceCard() instanceof RoomCard) {
+            RoomCard.setRoomCharacteristics(this, game);
+        }
     }
 
     @Override
@@ -160,5 +168,14 @@ public class PermanentToken extends PermanentImpl {
     @Override
     public MageObject getOtherFace() {
         return this.transformed ? token : this.token.getBackFace();
+    }
+
+    @Override
+    protected void initOtherFace(Game game) {
+        if (transformed) {
+            copyFromToken(token.getBackFace(), game, false);
+        } else {
+            copyFromToken(token, game, false);
+        }
     }
 }

@@ -89,21 +89,31 @@ public final class ZonesHandler {
             ZoneChangeInfo info = itr.next();
             if (info.event.getToZone().equals(Zone.BATTLEFIELD)) {
                 Card card = game.getCard(info.event.getTargetId());
-                if (card instanceof ModalDoubleFacedCard || card instanceof ModalDoubleFacedCardHalf) {
+                if (card instanceof DoubleFacedCard || card instanceof DoubleFacedCardHalf) {
                     boolean forceToMainSide = false;
+                    // TODO: move transform key or have some other identifier after tdfc rework
+                    Boolean enterTransformed = (Boolean) game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId());
+                    if (enterTransformed == null) {
+                        enterTransformed = false;
+                    }
 
                     // if effect put half mdf card to battlefield then it must be the main side only (example: return targeted half card to battle)
-                    if (card instanceof ModalDoubleFacedCardHalf && !source.getAbilityType().isPlayCardAbility()) {
+                    if (card instanceof DoubleFacedCardHalf && !source.getAbilityType().isPlayCardAbility() && !enterTransformed) {
                         forceToMainSide = true;
                     }
 
                     // if effect put mdf card to battlefield then it must be main side only
-                    if (card instanceof ModalDoubleFacedCard) {
+                    if (card instanceof DoubleFacedCard) {
                         forceToMainSide = true;
                     }
 
                     if (forceToMainSide) {
-                        info.event.setTargetId(((ModalDoubleFacedCard) card.getMainCard()).getLeftHalfCard().getId());
+                        info.event.setTargetId(((DoubleFacedCard) card.getMainCard()).getLeftHalfCard().getId());
+                    }
+
+                    // if left half is being moved, but entering transformed, change to transformed side
+                    if (enterTransformed && card instanceof DoubleFacedCardHalf && !((DoubleFacedCardHalf) card).isBackSide()) {
+                        info.event.setTargetId(((DoubleFacedCardHalf) card).getOtherSide().getId());
                     }
                 }
             }
@@ -154,10 +164,10 @@ public final class ZonesHandler {
                 // meld/group cards must be independent (use can choose order)
                 cardsToMove = ((MeldCard) targetCard).getHalves();
                 cardsToUpdate.get(toZone).addAll(cardsToMove);
-            } else if (targetCard instanceof ModalDoubleFacedCard
-                    || targetCard instanceof ModalDoubleFacedCardHalf) {
+            } else if (targetCard instanceof DoubleFacedCard
+                    || targetCard instanceof DoubleFacedCardHalf) {
                 // mdf cards must be moved as single object, but each half must be updated separately
-                ModalDoubleFacedCard mdfCard = (ModalDoubleFacedCard) targetCard.getMainCard();
+                DoubleFacedCard mdfCard = (DoubleFacedCard) targetCard.getMainCard();
                 cardsToMove = new CardsImpl(mdfCard);
                 cardsToUpdate.get(toZone).add(mdfCard);
                 // example: cast left side
@@ -296,7 +306,7 @@ public final class ZonesHandler {
         } else {
             game.setZone(event.getTargetId(), event.getToZone());
         }
-        
+
         // update zone in other parts (meld cards, mdf half cards)
         cardsToUpdate.entrySet().forEach(entry -> {
             for (Card card : entry.getValue().getCards(game)) {
@@ -373,8 +383,9 @@ public final class ZonesHandler {
              * that isn't a transforming double-faced card onto the battlefield transformed or converted, that card stays in
              * its current zone.
              */
+            // TODO: remove after tdfc rework
             boolean wantToTransform = Boolean.TRUE.equals(game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId()));
-            if (wantToTransform) {
+            if (wantToTransform && !(card instanceof DoubleFacedCardHalf)) {
                 isGoodToMove = card.isTransformable() && card.getSecondCardFace().isPermanent(game);
             } else {
                 isGoodToMove = card.isPermanent(game);
@@ -407,8 +418,7 @@ public final class ZonesHandler {
                 } else if (card instanceof RoomCardHalf) {
                     // Only the main room card can etb
                     permanent = new PermanentCard(card.getMainCard(), event.getPlayerId(), game);
-                }
-                else if (card instanceof ModalDoubleFacedCard) {
+                } else if (card instanceof DoubleFacedCard) {
                     // main mdf card must be processed before that call (e.g. only halves can be moved to battlefield)
                     throw new IllegalStateException("Unexpected trying of move mdf card to battlefield instead half");
                 } else if (card instanceof Permanent) {
