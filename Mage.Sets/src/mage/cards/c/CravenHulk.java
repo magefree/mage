@@ -23,7 +23,7 @@ public final class CravenHulk extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Craven Hulk can't block alone.
-        this.addAbility(CantBlockAloneAbility.getInstance());
+        this.addAbility(new CantBlockAloneAbility());
     }
 
     private CravenHulk(final CravenHulk card) {

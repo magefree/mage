@@ -24,7 +24,7 @@ public final class MoggFlunkies extends CardImpl {
 
         // Mogg Flunkies can't attack or block alone.
         this.addAbility(new CantAttackAloneAbility());
-        this.addAbility(CantBlockAloneAbility.getInstance());
+        this.addAbility(new CantBlockAloneAbility());
     }
 
     private MoggFlunkies(final MoggFlunkies card) {

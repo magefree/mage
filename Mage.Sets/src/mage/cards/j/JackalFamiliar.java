@@ -24,7 +24,7 @@ public final class JackalFamiliar extends CardImpl {
 
         // Jackal Familiar can't attack or block alone.
         this.addAbility(new CantAttackAloneAbility());
-        this.addAbility(CantBlockAloneAbility.getInstance());
+        this.addAbility(new CantBlockAloneAbility());
     }
 
     private JackalFamiliar(final JackalFamiliar card) {
