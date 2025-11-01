@@ -2037,7 +2037,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      *                          multiple targets can be seperated by ^;
      *                          no target marks as TestPlayer.NO_TARGET;
      *                          warning, do not support cards with target adjusters - use addTarget instead
-     * @param waitStackResolved if true, wait for stack to resolve
+     * @param waitStackResolved if true, wait for stack to resolve before continuing
      */
     public void castSpell(int turnNum, PhaseStep step, TestPlayer player, String cardName, String targetName, boolean waitStackResolved) {
         castSpell(turnNum, step, player, cardName, targetName);

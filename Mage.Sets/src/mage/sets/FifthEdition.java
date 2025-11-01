@@ -367,6 +367,7 @@ public final class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Rod of Ruin", 396, Rarity.UNCOMMON, mage.cards.r.RodOfRuin.class, RETRO_ART));
         cards.add(new SetCardInfo("Ruins of Trokair", 422, Rarity.UNCOMMON, mage.cards.r.RuinsOfTrokair.class, RETRO_ART));
         cards.add(new SetCardInfo("Sabretooth Tiger", 264, Rarity.COMMON, mage.cards.s.SabretoothTiger.class, RETRO_ART));
+        cards.add(new SetCardInfo("Sacred Boon", 57, Rarity.UNCOMMON, mage.cards.s.SacredBoon.class, RETRO_ART));
         cards.add(new SetCardInfo("Samite Healer", 58, Rarity.COMMON, mage.cards.s.SamiteHealer.class, RETRO_ART));
         cards.add(new SetCardInfo("Sand Silos", 423, Rarity.RARE, mage.cards.s.SandSilos.class, RETRO_ART));
         cards.add(new SetCardInfo("Scaled Wurm", 322, Rarity.COMMON, mage.cards.s.ScaledWurm.class, RETRO_ART));
