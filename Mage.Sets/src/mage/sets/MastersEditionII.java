@@ -177,6 +177,7 @@ public final class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Orc General", 137, Rarity.UNCOMMON, mage.cards.o.OrcGeneral.class, RETRO_ART));
         cards.add(new SetCardInfo("Orcish Cannoneers", 138, Rarity.UNCOMMON, mage.cards.o.OrcishCannoneers.class, RETRO_ART));
         cards.add(new SetCardInfo("Orcish Captain", 139, Rarity.UNCOMMON, mage.cards.o.OrcishCaptain.class, RETRO_ART));
+        cards.add(new SetCardInfo("Orcish Farmer", 141, Rarity.COMMON, mage.cards.o.OrcishFarmer.class));
         cards.add(new SetCardInfo("Orcish Lumberjack", 142, Rarity.COMMON, mage.cards.o.OrcishLumberjack.class, RETRO_ART));
         cards.add(new SetCardInfo("Orcish Squatters", 143, Rarity.RARE, mage.cards.o.OrcishSquatters.class, RETRO_ART));
         cards.add(new SetCardInfo("Orcish Veteran", 144, Rarity.COMMON, mage.cards.o.OrcishVeteran.class, RETRO_ART));
