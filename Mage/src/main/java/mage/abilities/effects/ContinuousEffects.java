@@ -108,6 +108,9 @@ public class ContinuousEffects implements Serializable {
         return requirementEffects;
     }
 
+    public List<ReplacementEffect> getReplacementEffects() {
+        return replacementEffects;
+    }
     public List<RestrictionEffect> getRestrictionEffects() {
         return restrictionEffects;
     }

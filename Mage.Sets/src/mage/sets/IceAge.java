@@ -219,6 +219,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Krovikan Vampire", 141, Rarity.UNCOMMON, mage.cards.k.KrovikanVampire.class, RETRO_ART));
         cards.add(new SetCardInfo("Land Cap", 357, Rarity.RARE, mage.cards.l.LandCap.class, RETRO_ART));
         cards.add(new SetCardInfo("Lapis Lazuli Talisman", 327, Rarity.UNCOMMON, mage.cards.l.LapisLazuliTalisman.class, RETRO_ART));
+        cards.add(new SetCardInfo("Lava Burst", 198, Rarity.COMMON, mage.cards.l.LavaBurst.class));
         cards.add(new SetCardInfo("Lava Tubes", 358, Rarity.RARE, mage.cards.l.LavaTubes.class, RETRO_ART));
         cards.add(new SetCardInfo("Legions of Lim-Dul", 142, Rarity.COMMON, mage.cards.l.LegionsOfLimDul.class, RETRO_ART));
         cards.add(new SetCardInfo("Leshrac's Rite", 143, Rarity.UNCOMMON, mage.cards.l.LeshracsRite.class, RETRO_ART));
