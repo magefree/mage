@@ -164,7 +164,8 @@ public class PermanentCard extends PermanentImpl {
             for (Ability ability : card.getAbilities()) {
               this.addAbility(ability, card.getId(), game, true);
             }
-        } else {
+        } else if (!(card instanceof RoomCard)){
+            // room abilities handled separately at the end
             // copy only own abilities; all dynamic added abilities must be added in the parent call
             this.abilities = card.getAbilities().copy();
             this.spellAbility = null; // will be set on first getSpellAbility call if card has one.
@@ -210,6 +211,10 @@ public class PermanentCard extends PermanentImpl {
         this.nightCard = card.isNightCard();
         this.flipCard = card.isFlipCard();
         this.flipCardName = card.getFlipCardName();
+        // Rooms set characteristics at the end so nothing gets overwritten
+        if (card instanceof RoomCard) {
+            RoomCard.setRoomCharacteristics(this, game);
+        }
     }
 
     @Override

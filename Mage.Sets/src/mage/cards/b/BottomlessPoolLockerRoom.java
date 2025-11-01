@@ -1,20 +1,16 @@
 package mage.cards.b;
 
-import java.util.UUID;
-
 import mage.abilities.common.DealsDamageToAPlayerAllTriggeredAbility;
 import mage.abilities.common.UnlockThisDoorTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardSetInfo;
 import mage.cards.RoomCard;
-import mage.constants.CardType;
-import mage.constants.SetTargetPointer;
-import mage.constants.SpellAbilityType;
-import mage.constants.SubType;
-import mage.constants.TargetController;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  * @author oscscull
@@ -38,14 +34,14 @@ public final class BottomlessPoolLockerRoom extends RoomCard {
         UnlockThisDoorTriggeredAbility left = new UnlockThisDoorTriggeredAbility(
                 new ReturnToHandTargetEffect(), false, true);
         left.addTarget(new TargetCreaturePermanent(0, 1));
+        this.getLeftHalfCard().addAbility(left);
 
         // Right half ability - "Whenever one or more creatures you control deal combat damage to a player, draw a card."
         DealsDamageToAPlayerAllTriggeredAbility right = new DealsDamageToAPlayerAllTriggeredAbility(
                 new DrawCardSourceControllerEffect(1),
                 StaticFilters.FILTER_CONTROLLED_A_CREATURE,
                 false, SetTargetPointer.PLAYER, true, true, TargetController.OPPONENT);
-
-        this.addRoomAbilities(left, right);
+        this.getRightHalfCard().addAbility(right);
     }
 
     private BottomlessPoolLockerRoom(final BottomlessPoolLockerRoom card) {

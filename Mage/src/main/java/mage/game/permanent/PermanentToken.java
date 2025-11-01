@@ -6,6 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.keyword.ChangelingAbility;
 import mage.cards.Card;
+import mage.cards.RoomCard;
 import mage.constants.EmptyNames;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
@@ -116,6 +117,9 @@ public class PermanentToken extends PermanentImpl {
         this.power = new MageInt(token.getPower().getModifiedBaseValue());
         this.toughness = new MageInt(token.getToughness().getModifiedBaseValue());
         CardUtil.copySetAndCardNumber(this, token);
+        if (token.getCopySourceCard() instanceof RoomCard) {
+            RoomCard.setRoomCharacteristics(this, game);
+        }
     }
 
     @Override

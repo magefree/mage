@@ -2102,6 +2102,12 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
+    public void resetLockedStatus() {
+        leftHalfUnlocked = false;
+        rightHalfUnlocked = false;
+    }
+
+    @Override
     public boolean isLeftDoorUnlocked() {
         return leftHalfUnlocked;
     }
@@ -2142,6 +2148,10 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         } else {
             rightHalfUnlocked = true;
         }
+
+        // Update intrinsic stats/abilities from unlocking
+        // not process action, don't want to process simultaneous events here
+        game.applyEffects();
 
         // Fire door unlock event
         GameEvent event = new GameEvent(GameEvent.EventType.DOOR_UNLOCKED, getId(), source, source.getControllerId());

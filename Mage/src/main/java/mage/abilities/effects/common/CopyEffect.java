@@ -5,6 +5,7 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
+import mage.cards.RoomCard;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -96,6 +97,14 @@ public class CopyEffect extends ContinuousEffectImpl {
     }
 
     protected boolean copyToPermanent(Permanent permanent, Game game, Ability source) {
+        if (copyFromObject instanceof Permanent && ((Permanent) copyFromObject).getMainCard() instanceof RoomCard) {
+            // Update blueprint based on copying permanent's locked status
+            Permanent blueprint = (Permanent) copyFromObject;
+            RoomCard.setRoomCharacteristics(blueprint, (RoomCard) blueprint.getMainCard(), game, permanent.isLeftDoorUnlocked(), permanent.isRightDoorUnlocked());
+            if (applier != null) {
+                applier.apply(game, blueprint, source, permanent.getId());
+            }
+        }
         if (copyFromObject.getCopyFrom() != null) {
             // copy from temp blueprints (they are already copies)
             permanent.setCopy(true, copyFromObject.getCopyFrom());

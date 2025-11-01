@@ -1,18 +1,183 @@
 package org.mage.test.cards.cost.splitcards;
 
-import mage.constants.CardType;
-import mage.constants.EmptyNames;
-import mage.constants.PhaseStep;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
+import mage.view.CardView;
+import mage.view.GameView;
+import mage.view.PlayerView;
 import org.junit.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * @author oscscull
  */
 public class RoomCardTest extends CardTestPlayerBase {
+
+    /*
+    Bottomless Pool // Locker Room
+    {U}
+    Enchantment - Room
+    When you unlock this door, return up to one target creature to its owner's hand.
+    (You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)
+    <strong>Locker Room</strong>
+    {4}{U}
+    <strong>Enchantment -- Room</strong>
+    Whenever one or more creatures you control deal combat damage to a player, draw a card.
+    (You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)
+    */
+    private static final String bottomlessPoolLockerRoom = "Bottomless Pool // Locker Room";
+    private static final String bottomlessPool = "Bottomless Pool";
+    public static final String lockerRoom = "Locker Room";
+
+
+    @Test
+    public void testCardViewLeftHalf() {
+        setStrictChooseMode(true);
+        addCard(Zone.HAND, playerA, bottomlessPoolLockerRoom);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, bottomlessPool, true);
+        addTarget(playerA, TestPlayer.TARGET_SKIP);
+
+        runCode("print card view", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            GameView gameView = getGameView(playerA);
+            PlayerView playerView = gameView.getPlayers().stream().findFirst().orElse(null);
+            assertNotNull(playerView, "Player view must be found");
+            CardView cardView = playerView.getBattlefield().values()
+                    .stream()
+                    .filter(pv -> pv.getName().equals(bottomlessPool))
+                    .findFirst()
+                    .orElse(null);
+            assertNotNull(cardView, "Locker Room card view must be found on battlefield");
+            // permanent should have 3 abilities
+            // unlock ability + unlock trigger from right half + info
+            assertEquals(3, cardView.getRules().size(), "Locker Room must have 3 rules, has: " + cardView.getRules().size());
+            assertEquals("{U}", cardView.getManaCostStr(), "Mana cost must be from left half");
+            StringBuilder sb = new StringBuilder("\n" + cardView.getName());
+            sb.append("\n - Types: ").append(cardView.getCardTypes());
+            sb.append("\n - Subtypes: ").append(cardView.getSubTypes());
+            sb.append("\n - Mana Cost: ").append(cardView.getManaCostStr());
+            sb.append("\n - Abilities: ");
+            cardView.getRules().forEach(rule -> sb.append("\n   * ").append(rule));
+            logger.info(sb.toString());
+        });
+
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+    }
+
+    @Test
+    public void testCardViewRightHalf() {
+        setStrictChooseMode(true);
+        addCard(Zone.HAND, playerA, bottomlessPoolLockerRoom);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, lockerRoom, true);
+
+        runCode("print card view", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            GameView gameView = getGameView(playerA);
+            PlayerView playerView = gameView.getPlayers().stream().findFirst().orElse(null);
+            assertNotNull(playerView, "Player view must be found");
+            CardView cardView = playerView.getBattlefield().values()
+                    .stream()
+                    .filter(pv -> pv.getName().equals(lockerRoom))
+                    .findFirst()
+                    .orElse(null);
+            assertNotNull(cardView, "Locker Room card view must be found on battlefield");
+            // permanent should have 3 abilities
+            // unlock ability + unlock trigger from left half + info
+            assertEquals(3, cardView.getRules().size(), "Locker Room must have 3 rules, has: " + cardView.getRules().size());
+            assertEquals("{4}{U}", cardView.getManaCostStr(), "Mana cost must be from right half");
+            StringBuilder sb = new StringBuilder("\n" + cardView.getName());
+            sb.append("\n - Types: ").append(cardView.getCardTypes());
+            sb.append("\n - Subtypes: ").append(cardView.getSubTypes());
+            sb.append("\n - Mana Cost: ").append(cardView.getManaCostStr());
+            sb.append("\n - Abilities: ");
+            cardView.getRules().forEach(rule -> sb.append("\n   * ").append(rule));
+            logger.info(sb.toString());
+        });
+
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+    }
+
+    @Test
+    public void testCardViewBothHalves() {
+        setStrictChooseMode(true);
+        addCard(Zone.HAND, playerA, bottomlessPoolLockerRoom);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, bottomlessPool, true);
+        addTarget(playerA, TestPlayer.TARGET_SKIP);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{4}{U}: Unlock the right half.");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        runCode("print card view", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            GameView gameView = getGameView(playerA);
+            PlayerView playerView = gameView.getPlayers().stream().findFirst().orElse(null);
+            assertNotNull(playerView, "Player view must be found");
+            CardView cardView = playerView.getBattlefield().values()
+                    .stream()
+                    .filter(pv -> pv.getName().equals(bottomlessPoolLockerRoom))
+                    .findFirst()
+                    .orElse(null);
+            assertNotNull(cardView, "Locker Room card view must be found on battlefield");
+            // permanent should have 3 abilities
+            // 1 ability from both halves
+            // no unlock abilities
+            // 1 info
+            assertEquals(3, cardView.getRules().size(), "Locker Room must have 3 rules, has: " + cardView.getRules().size());
+            assertEquals("{4}{U}{U}", cardView.getManaCostStr(), "Mana cost must be combined from both halves");
+            StringBuilder sb = new StringBuilder("\n" + cardView.getName());
+            sb.append("\n - Types: ").append(cardView.getCardTypes());
+            sb.append("\n - Subtypes: ").append(cardView.getSubTypes());
+            sb.append("\n - Mana Cost: ").append(cardView.getManaCostStr());
+            sb.append("\n - Abilities: ");
+            cardView.getRules().forEach(rule -> sb.append("\n   * ").append(rule));
+            logger.info(sb.toString());
+        });
+
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+    }
+
+    @Test
+    public void testCardViewFullyLocked() {
+        setStrictChooseMode(true);
+        addCard(Zone.BATTLEFIELD, playerA, bottomlessPoolLockerRoom);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
+
+        runCode("print card view", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            GameView gameView = getGameView(playerA);
+            PlayerView playerView = gameView.getPlayers().stream().findFirst().orElse(null);
+            assertNotNull(playerView, "Player view must be found");
+            CardView cardView = playerView.getBattlefield().values()
+                    .stream()
+                    .filter(pv -> pv.getName().isEmpty())
+                    .findFirst()
+                    .orElse(null);
+            assertNotNull(cardView, "Locked room card view must be found on battlefield");
+            // permanent should have 3 abilities
+            // 1 info
+            // two unlock abilities
+            assertEquals(3, cardView.getRules().size(), "Locked room must have 3 rules, has: " + cardView.getRules().size());
+            assertEquals("", cardView.getManaCostStr(), "Mana cost must be empty");
+            StringBuilder sb = new StringBuilder("\n" + cardView.getName());
+            sb.append("\n - Types: ").append(cardView.getCardTypes());
+            sb.append("\n - Subtypes: ").append(cardView.getSubTypes());
+            sb.append("\n - Mana Cost: ").append(cardView.getManaCostStr());
+            sb.append("\n - Abilities: ");
+            cardView.getRules().forEach(rule -> sb.append("\n   * ").append(rule));
+            logger.info(sb.toString());
+        });
+
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+    }
 
     // Bottomless pool is cast. It unlocks, and the trigger to return a creature
     // should bounce one of two grizzly bears.
@@ -23,13 +188,13 @@ public class RoomCardTest extends CardTestPlayerBase {
         // creature to its owner’s hand.
         // Locker Room {4}{U} Whenever one or more creatures you control deal combat
         // damage to a player, draw a card.
-        addCard(Zone.HAND, playerA, "Bottomless Pool // Locker Room");
+        addCard(Zone.HAND, playerA, bottomlessPoolLockerRoom);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears", 2);
 
         checkPlayableAbility("playerA can cast Bottomless Pool", 1, PhaseStep.PRECOMBAT_MAIN, playerA,
                 "Cast Bottomless Pool", true);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bottomless Pool");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, bottomlessPool);
 
         // Target one of playerB's "Grizzly Bears" with the return effect.
         addTarget(playerA, "Grizzly Bears");
@@ -43,11 +208,11 @@ public class RoomCardTest extends CardTestPlayerBase {
         // Verify that one "Grizzly Bears" has been returned to playerB's hand.
         assertHandCount(playerB, "Grizzly Bears", 1);
         // Verify that "Bottomless Pool" is on playerA's battlefield.
-        assertPermanentCount(playerA, "Bottomless Pool", 1);
+        assertPermanentCount(playerA, bottomlessPool, 1);
         // Verify that "Bottomless Pool" is an Enchantment.
-        assertType("Bottomless Pool", CardType.ENCHANTMENT, true);
+        assertType(bottomlessPool, CardType.ENCHANTMENT, true);
         // Verify that "Bottomless Pool" has the Room subtype.
-        assertSubtype("Bottomless Pool", SubType.ROOM);
+        assertSubtype(bottomlessPool, SubType.ROOM);
     }
 
     // Locker room is cast. It enters, and gives a coastal piracy effect that
@@ -59,7 +224,7 @@ public class RoomCardTest extends CardTestPlayerBase {
         // creature to its owner’s hand.
         // Locker Room {4}{U} Whenever one or more creatures you control deal combat
         // damage to a player, draw a card.
-        addCard(Zone.HAND, playerA, "Bottomless Pool // Locker Room");
+        addCard(Zone.HAND, playerA, bottomlessPoolLockerRoom);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
 
         // Cards to be drawn
@@ -68,7 +233,7 @@ public class RoomCardTest extends CardTestPlayerBase {
         // 2 attackers
         addCard(Zone.BATTLEFIELD, playerA, "Memnite", 2);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Locker Room");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, lockerRoom);
         attack(1, playerA, "Memnite");
         attack(1, playerA, "Memnite");
         // After combat damage, Memnites dealt combat damage to playerB (1 damage * 2).
@@ -83,9 +248,9 @@ public class RoomCardTest extends CardTestPlayerBase {
 
         // Assertions after the first execute() (Locker Room and creatures are on
         // battlefield, combat resolved):
-        assertPermanentCount(playerA, "Locker Room", 1);
-        assertType("Locker Room", CardType.ENCHANTMENT, true);
-        assertSubtype("Locker Room", SubType.ROOM);
+        assertPermanentCount(playerA, lockerRoom, 1);
+        assertType(lockerRoom, CardType.ENCHANTMENT, true);
+        assertSubtype(lockerRoom, SubType.ROOM);
         assertPermanentCount(playerA, "Memnite", 2);
 
         setStrictChooseMode(true);
@@ -102,13 +267,13 @@ public class RoomCardTest extends CardTestPlayerBase {
         // creature to its owner’s hand.
         // Locker Room {4}{U} Whenever one or more creatures you control deal combat
         // damage to a player, draw a card.
-        addCard(Zone.HAND, playerA, "Bottomless Pool // Locker Room");
+        addCard(Zone.HAND, playerA, bottomlessPoolLockerRoom);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
 
         // 2 creatures owned by player A
         addCard(Zone.BATTLEFIELD, playerA, "Memnite", 2);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Locker Room");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, lockerRoom);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         checkPlayableAbility("playerA can unlock Bottomless Pool", 1, PhaseStep.PRECOMBAT_MAIN, playerA,
                 "{U}: Unlock the left half.", true);
@@ -125,12 +290,12 @@ public class RoomCardTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Memnite", 1);
         // Verify that one "Memnite" has been returned to playerA's hand.
         assertHandCount(playerA, "Memnite", 1);
-        // Verify that "Bottomless Pool // Locker Room" is on playerA's battlefield.
-        assertPermanentCount(playerA, "Bottomless Pool // Locker Room", 1);
-        // Verify that "Bottomless Pool // Locker Room" is an Enchantment.
-        assertType("Bottomless Pool // Locker Room", CardType.ENCHANTMENT, true);
-        // Verify that "Bottomless Pool // Locker Room" has the Room subtype.
-        assertSubtype("Bottomless Pool // Locker Room", SubType.ROOM);
+        // Verify that bottomlessPoolLockerRoom is on playerA's battlefield.
+        assertPermanentCount(playerA, bottomlessPoolLockerRoom, 1);
+        // Verify that bottomlessPoolLockerRoom is an Enchantment.
+        assertType(bottomlessPoolLockerRoom, CardType.ENCHANTMENT, true);
+        // Verify that bottomlessPoolLockerRoom has the Room subtype.
+        assertSubtype(bottomlessPoolLockerRoom, SubType.ROOM);
     }
 
     @Test
@@ -140,7 +305,7 @@ public class RoomCardTest extends CardTestPlayerBase {
         // creature to its owner’s hand.
         // Locker Room {4}{U} Whenever one or more creatures you control deal combat
         // damage to a player, draw a card.
-        addCard(Zone.HAND, playerA, "Bottomless Pool // Locker Room");
+        addCard(Zone.HAND, playerA, bottomlessPoolLockerRoom);
         addCard(Zone.HAND, playerA, "Felidar Guardian");
         addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
@@ -148,7 +313,7 @@ public class RoomCardTest extends CardTestPlayerBase {
         // creatures owned by player A
         addCard(Zone.BATTLEFIELD, playerA, "Memnite", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bottomless Pool");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, bottomlessPool);
         // resolve spell cast
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         // unlock and trigger bounce on Memnite
@@ -160,7 +325,7 @@ public class RoomCardTest extends CardTestPlayerBase {
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         // etb and flicker on Bottomless Pool
         setChoice(playerA, "Yes");
-        addTarget(playerA, "Bottomless Pool");
+        addTarget(playerA, bottomlessPool);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         setStopAt(1, PhaseStep.END_TURN);
 
@@ -187,7 +352,7 @@ public class RoomCardTest extends CardTestPlayerBase {
         // creature to its owner’s hand.
         // Locker Room {4}{U} Whenever one or more creatures you control deal combat
         // damage to a player, draw a card.
-        addCard(Zone.HAND, playerA, "Bottomless Pool // Locker Room");
+        addCard(Zone.HAND, playerA, bottomlessPoolLockerRoom);
         addCard(Zone.HAND, playerA, "Felidar Guardian");
         addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
@@ -196,7 +361,7 @@ public class RoomCardTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Memnite", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Black Knight", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bottomless Pool");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, bottomlessPool);
         // resolve spell cast
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         // unlock and trigger bounce on Memnite
@@ -208,7 +373,7 @@ public class RoomCardTest extends CardTestPlayerBase {
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         // etb and flicker on Bottomless Pool
         setChoice(playerA, "Yes");
-        addTarget(playerA, "Bottomless Pool");
+        addTarget(playerA, bottomlessPool);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         // can unlock again
         checkPlayableAbility("playerA can unlock Bottomless Pool", 1, PhaseStep.PRECOMBAT_MAIN, playerA,
@@ -228,7 +393,7 @@ public class RoomCardTest extends CardTestPlayerBase {
         // Verify that one "Black Knight" has been returned to playerA's hand.
         assertHandCount(playerA, "Black Knight", 1);
         // Verify that "Bottomless Pool" is on playerA's battlefield.
-        assertPermanentCount(playerA, "Bottomless Pool", 1);
+        assertPermanentCount(playerA, bottomlessPool, 1);
         // Verify that "Felidar Guardian" is on playerA's battlefield.
         assertPermanentCount(playerA, "Felidar Guardian", 1);
     }
@@ -240,11 +405,11 @@ public class RoomCardTest extends CardTestPlayerBase {
         // creature to its owner’s hand.
         // Locker Room {4}{U} Whenever one or more creatures you control deal combat
         // damage to a player, draw a card.
-        addCard(Zone.HAND, playerA, "Bottomless Pool // Locker Room");
+        addCard(Zone.HAND, playerA, bottomlessPoolLockerRoom);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
         addCard(Zone.BATTLEFIELD, playerA, "Erratic Apparition", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bottomless Pool");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, bottomlessPool);
         // resolve spell cast
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         setChoice(playerA, "When you unlock"); // x2 triggers
@@ -262,8 +427,8 @@ public class RoomCardTest extends CardTestPlayerBase {
         execute();
 
         // Assertions:
-        // Verify that "Bottomless Pool // Locker Room" is on playerA's battlefield.
-        assertPermanentCount(playerA, "Bottomless Pool // Locker Room", 1);
+        // Verify that bottomlessPoolLockerRoom is on playerA's battlefield.
+        assertPermanentCount(playerA, bottomlessPoolLockerRoom, 1);
         // Verify that "Erratic Apparition" is on playerA's battlefield.
         assertPermanentCount(playerA, "Erratic Apparition", 1);
         // Verify that "Erratic Apparition" has been pumped twice (etb + fully unlock)
@@ -277,17 +442,17 @@ public class RoomCardTest extends CardTestPlayerBase {
         // creature to its owner’s hand.
         // Locker Room {4}{U} Whenever one or more creatures you control deal combat
         // damage to a player, draw a card.
-        addCard(Zone.HAND, playerA, "Bottomless Pool // Locker Room");
+        addCard(Zone.HAND, playerA, bottomlessPoolLockerRoom);
         addCard(Zone.HAND, playerA, "See Double");
         addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
         addCard(Zone.BATTLEFIELD, playerA, "Memnite", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Ornithopter", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bottomless Pool");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, bottomlessPool);
         // Copy spell on the stack
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "See Double");
         setModeChoice(playerA, "1");
-        addTarget(playerA, "Bottomless Pool");
+        addTarget(playerA, bottomlessPool);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 3);
         addTarget(playerA, "Memnite");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
@@ -303,7 +468,7 @@ public class RoomCardTest extends CardTestPlayerBase {
         // Verify that one "Ornithopter" has been returned to playerA's hand.
         assertHandCount(playerA, "Ornithopter", 1);
         // Verify that 2 "Bottomless Pool" are on playerA's battlefield.
-        assertPermanentCount(playerA, "Bottomless Pool", 2);
+        assertPermanentCount(playerA, bottomlessPool, 2);
     }
 
     @Test
@@ -313,13 +478,13 @@ public class RoomCardTest extends CardTestPlayerBase {
         // creature to its owner's hand.
         // Locker Room {4}{U} Whenever one or more creatures you control deal combat
         // damage to a player, draw a card.
-        addCard(Zone.HAND, playerA, "Bottomless Pool // Locker Room");
+        addCard(Zone.HAND, playerA, bottomlessPoolLockerRoom);
         addCard(Zone.HAND, playerA, "Clever Impersonator");
         addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
         addCard(Zone.BATTLEFIELD, playerA, "Memnite", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Ornithopter", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bottomless Pool");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, bottomlessPool);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         addTarget(playerA, "Memnite");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
@@ -327,7 +492,7 @@ public class RoomCardTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Clever Impersonator");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         setChoice(playerA, "Yes");
-        setChoice(playerA, "Bottomless Pool");
+        setChoice(playerA, bottomlessPool);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA,
@@ -347,7 +512,7 @@ public class RoomCardTest extends CardTestPlayerBase {
         assertHandCount(playerA, "Ornithopter", 1);
         // Verify that the original "Bottomless Pool" is on playerA's battlefield, and a
         // clone.
-        assertPermanentCount(playerA, "Bottomless Pool", 2);
+        assertPermanentCount(playerA, bottomlessPool, 2);
     }
 
     @Test
@@ -366,11 +531,11 @@ public class RoomCardTest extends CardTestPlayerBase {
         // {U}{U}, Sacrifice this creature: Counter target spell with the same name as a
         // card exiled with this creature.
 
-        addCard(Zone.HAND, playerA, "Bottomless Pool // Locker Room");
+        addCard(Zone.HAND, playerA, bottomlessPoolLockerRoom);
         addCard(Zone.HAND, playerA, "Twiddle");
         addCard(Zone.BATTLEFIELD, playerA, "Mindreaver", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
-        addCard(Zone.LIBRARY, playerA, "Bottomless Pool // Locker Room", 1);
+        addCard(Zone.LIBRARY, playerA, bottomlessPoolLockerRoom, 1);
         addCard(Zone.LIBRARY, playerA, "Plains", 2);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Twiddle");
@@ -384,10 +549,10 @@ public class RoomCardTest extends CardTestPlayerBase {
         addTarget(playerA, playerA);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bottomless Pool");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, bottomlessPool);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA,
                 "{U}{U}, Sacrifice {this}:");
-        addTarget(playerA, "Bottomless Pool");
+        addTarget(playerA, bottomlessPool);
 
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
@@ -424,7 +589,7 @@ public class RoomCardTest extends CardTestPlayerBase {
         // Target creature and all other creatures with the same name as that creature
         // get -3/-3 until end of turn.
 
-        addCard(Zone.HAND, playerA, "Bottomless Pool // Locker Room", 4);
+        addCard(Zone.HAND, playerA, bottomlessPoolLockerRoom, 4);
         addCard(Zone.HAND, playerA, "Cackling Counterpart");
         addCard(Zone.HAND, playerA, "Bile Blight");
         addCard(Zone.BATTLEFIELD, playerA, "Underground Sea", 17);
@@ -432,17 +597,17 @@ public class RoomCardTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Opalescence");
 
         // Cast Bottomless Pool (unlocked left half)
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bottomless Pool");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, bottomlessPool);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         addTarget(playerA, TestPlayer.TARGET_SKIP);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         // Cast Locker Room (unlocked right half)
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Locker Room");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, lockerRoom);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         // Cast Bottomless Pool then unlock Locker Room (both halves unlocked)
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bottomless Pool");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, bottomlessPool);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         addTarget(playerA, TestPlayer.TARGET_SKIP);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
@@ -451,7 +616,7 @@ public class RoomCardTest extends CardTestPlayerBase {
 
         // Create a fully locked room using Cackling Counterpart
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cackling Counterpart");
-        addTarget(playerA, "Bottomless Pool // Locker Room");
+        addTarget(playerA, bottomlessPoolLockerRoom);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         // Cast Bile Blight targeting the fully locked room
@@ -468,21 +633,21 @@ public class RoomCardTest extends CardTestPlayerBase {
         // then -2/-2 after Bile Blight (dies)
         assertPermanentCount(playerA, EmptyNames.FULLY_LOCKED_ROOM.getTestCommand(), 0);
         // Token, so nothing should be in grave
-        assertGraveyardCount(playerA, "Bottomless Pool // Locker Room", 0);
+        assertGraveyardCount(playerA, bottomlessPoolLockerRoom, 0);
 
         // Other rooms should NOT be affected by Bile Blight since they have different
         // names
         // Bottomless Pool: 1/1 base + 1/1 from anthem = 2/2
-        assertPowerToughness(playerA, "Bottomless Pool", 2, 2);
+        assertPowerToughness(playerA, bottomlessPool, 2, 2);
         // Locker Room: 5/5 base + 1/1 from anthem = 6/6
-        assertPowerToughness(playerA, "Locker Room", 6, 6);
+        assertPowerToughness(playerA, lockerRoom, 6, 6);
         // Bottomless Pool // Locker Room: 6/6 base + 1/1 from anthem = 7/7
-        assertPowerToughness(playerA, "Bottomless Pool // Locker Room", 7, 7);
+        assertPowerToughness(playerA, bottomlessPoolLockerRoom, 7, 7);
 
         // Verify remaining rooms are still on battlefield
-        assertPermanentCount(playerA, "Bottomless Pool", 1);
-        assertPermanentCount(playerA, "Locker Room", 1);
-        assertPermanentCount(playerA, "Bottomless Pool // Locker Room", 1);
+        assertPermanentCount(playerA, bottomlessPool, 1);
+        assertPermanentCount(playerA, lockerRoom, 1);
+        assertPermanentCount(playerA, bottomlessPoolLockerRoom, 1);
     }
 
     @Test
@@ -515,7 +680,7 @@ public class RoomCardTest extends CardTestPlayerBase {
         // Target creature and all other creatures with the same name as that creature
         // get -3/-3 until end of turn.
 
-        addCard(Zone.HAND, playerA, "Bottomless Pool // Locker Room", 4);
+        addCard(Zone.HAND, playerA, bottomlessPoolLockerRoom, 4);
         addCard(Zone.HAND, playerA, "Cackling Counterpart");
         addCard(Zone.HAND, playerA, "Bile Blight");
         addCard(Zone.BATTLEFIELD, playerA, "Underground Sea", 17);
@@ -523,17 +688,17 @@ public class RoomCardTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Opalescence");
 
         // Cast Bottomless Pool (unlocked left half)
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bottomless Pool");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, bottomlessPool);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         addTarget(playerA, TestPlayer.TARGET_SKIP);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         // Cast Locker Room (unlocked right half)
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Locker Room");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, lockerRoom);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         // Cast Bottomless Pool then unlock Locker Room (both halves unlocked)
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bottomless Pool");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, bottomlessPool);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         addTarget(playerA, TestPlayer.TARGET_SKIP);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
@@ -542,12 +707,12 @@ public class RoomCardTest extends CardTestPlayerBase {
 
         // Create a fully locked room using Cackling Counterpart
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cackling Counterpart");
-        addTarget(playerA, "Bottomless Pool // Locker Room");
+        addTarget(playerA, bottomlessPoolLockerRoom);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         // Cast Bile Blight targeting the half locked room
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bile Blight");
-        addTarget(playerA, "Locker Room");
+        addTarget(playerA, lockerRoom);
 
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
@@ -559,21 +724,21 @@ public class RoomCardTest extends CardTestPlayerBase {
         // since they share the "Locker Room" name component
 
         // Locker Room: 5/5 base + 1/1 from anthem - 3/3 from Bile Blight = 3/3
-        assertPowerToughness(playerA, "Locker Room", 3, 3);
+        assertPowerToughness(playerA, lockerRoom, 3, 3);
         // Bottomless Pool // Locker Room: 6/6 base + 1/1 from anthem - 3/3 from Bile
         // Blight = 4/4
-        assertPowerToughness(playerA, "Bottomless Pool // Locker Room", 4, 4);
+        assertPowerToughness(playerA, bottomlessPoolLockerRoom, 4, 4);
 
         // Other rooms should NOT be affected
         // Bottomless Pool: 1/1 base + 1/1 from anthem = 2/2 (unaffected)
-        assertPowerToughness(playerA, "Bottomless Pool", 2, 2);
+        assertPowerToughness(playerA, bottomlessPool, 2, 2);
         // Fully locked room: 0/0 base + 1/1 from anthem = 1/1 (unaffected)
         assertPowerToughness(playerA, EmptyNames.FULLY_LOCKED_ROOM.getTestCommand(), 1, 1);
 
         // Verify all rooms are still on battlefield
-        assertPermanentCount(playerA, "Bottomless Pool", 1);
-        assertPermanentCount(playerA, "Locker Room", 1);
-        assertPermanentCount(playerA, "Bottomless Pool // Locker Room", 1);
+        assertPermanentCount(playerA, bottomlessPool, 1);
+        assertPermanentCount(playerA, lockerRoom, 1);
+        assertPermanentCount(playerA, bottomlessPoolLockerRoom, 1);
         assertPermanentCount(playerA, EmptyNames.FULLY_LOCKED_ROOM.getTestCommand(), 1);
     }
 
@@ -607,7 +772,7 @@ public class RoomCardTest extends CardTestPlayerBase {
         // Target creature and all other creatures with the same name as that creature
         // get -3/-3 until end of turn.
 
-        addCard(Zone.HAND, playerA, "Bottomless Pool // Locker Room", 4);
+        addCard(Zone.HAND, playerA, bottomlessPoolLockerRoom, 4);
         addCard(Zone.HAND, playerA, "Cackling Counterpart");
         addCard(Zone.HAND, playerA, "Bile Blight");
         addCard(Zone.BATTLEFIELD, playerA, "Underground Sea", 17);
@@ -615,17 +780,17 @@ public class RoomCardTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Opalescence");
 
         // Cast Bottomless Pool (unlocked left half)
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bottomless Pool");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, bottomlessPool);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         addTarget(playerA, TestPlayer.TARGET_SKIP);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         // Cast Locker Room (unlocked right half)
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Locker Room");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, lockerRoom);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         // Cast Bottomless Pool then unlock Locker Room (both halves unlocked)
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bottomless Pool");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, bottomlessPool);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         addTarget(playerA, TestPlayer.TARGET_SKIP);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
@@ -634,12 +799,12 @@ public class RoomCardTest extends CardTestPlayerBase {
 
         // Create a fully locked room using Cackling Counterpart
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cackling Counterpart");
-        addTarget(playerA, "Bottomless Pool // Locker Room");
+        addTarget(playerA, bottomlessPoolLockerRoom);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         // Cast Bile Blight targeting the fully locked room
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bile Blight");
-        addTarget(playerA, "Bottomless Pool // Locker Room");
+        addTarget(playerA, bottomlessPoolLockerRoom);
 
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
@@ -647,27 +812,27 @@ public class RoomCardTest extends CardTestPlayerBase {
 
         // Assertions:
         // All rooms except the fully locked room should be affected by Bile Blight
-        // since they all share name components with "Bottomless Pool // Locker Room"
+        // since they all share name components with bottomlessPoolLockerRoom
 
         // Bottomless Pool: 1/1 base + 1/1 from anthem - 3/3 from Bile Blight = -1/-1
         // (dies)
-        assertPermanentCount(playerA, "Bottomless Pool", 0);
-        assertGraveyardCount(playerA, "Bottomless Pool // Locker Room", 1);
+        assertPermanentCount(playerA, bottomlessPool, 0);
+        assertGraveyardCount(playerA, bottomlessPoolLockerRoom, 1);
 
         // Locker Room: 5/5 base + 1/1 from anthem - 3/3 from Bile Blight = 3/3
-        assertPowerToughness(playerA, "Locker Room", 3, 3);
+        assertPowerToughness(playerA, lockerRoom, 3, 3);
 
         // Bottomless Pool // Locker Room: 6/6 base + 1/1 from anthem - 3/3 from Bile
         // Blight = 4/4
-        assertPowerToughness(playerA, "Bottomless Pool // Locker Room", 4, 4);
+        assertPowerToughness(playerA, bottomlessPoolLockerRoom, 4, 4);
 
         // Fully locked room should NOT be affected (different name)
         // Fully locked room: 0/0 base + 1/1 from anthem = 1/1 (unaffected)
         assertPowerToughness(playerA, EmptyNames.FULLY_LOCKED_ROOM.getTestCommand(), 1, 1);
 
         // Verify remaining rooms are still on battlefield
-        assertPermanentCount(playerA, "Locker Room", 1);
-        assertPermanentCount(playerA, "Bottomless Pool // Locker Room", 1);
+        assertPermanentCount(playerA, lockerRoom, 1);
+        assertPermanentCount(playerA, bottomlessPoolLockerRoom, 1);
         assertPermanentCount(playerA, EmptyNames.FULLY_LOCKED_ROOM.getTestCommand(), 1);
     }
 
@@ -678,7 +843,7 @@ public class RoomCardTest extends CardTestPlayerBase {
         // creature to its owner's hand.
         // Locker Room {4}{U} Whenever one or more creatures you control deal combat
         // damage to a player, draw a card.
-        addCard(Zone.HAND, playerA, "Bottomless Pool // Locker Room");
+        addCard(Zone.HAND, playerA, bottomlessPoolLockerRoom);
         addCard(Zone.HAND, playerA, "Counterspell");
         addCard(Zone.HAND, playerA, "Campus Renovation");
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
@@ -689,16 +854,16 @@ public class RoomCardTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears", 1);
 
         // Cast Bottomless Pool
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bottomless Pool");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, bottomlessPool);
 
         // Counter it while on stack
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Counterspell");
-        addTarget(playerA, "Bottomless Pool");
+        addTarget(playerA, bottomlessPool);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         // Use Campus Renovation to return it from graveyard
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Campus Renovation");
-        addTarget(playerA, "Bottomless Pool // Locker Room");
+        addTarget(playerA, bottomlessPoolLockerRoom);
 
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
@@ -749,26 +914,26 @@ public class RoomCardTest extends CardTestPlayerBase {
         // As Pithing Needle enters, choose a card name.
         // Activated abilities of sources with the chosen name can't be activated.
 
-        addCard(Zone.HAND, playerA, "Bottomless Pool // Locker Room");
+        addCard(Zone.HAND, playerA, bottomlessPoolLockerRoom);
         addCard(Zone.HAND, playerA, "Pithing Needle");
         addCard(Zone.BATTLEFIELD, playerA, "Opalescence");
         addCard(Zone.BATTLEFIELD, playerA, "Diviner's Wand");
         addCard(Zone.BATTLEFIELD, playerA, "Island", 20);
 
         // Cast Bottomless Pool (unlocked left half only)
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bottomless Pool");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, bottomlessPool);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         addTarget(playerA, TestPlayer.TARGET_SKIP);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         // Equip Diviner's Wand
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {3}");
-        addTarget(playerA, "Bottomless Pool");
+        addTarget(playerA, bottomlessPool);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         // Cast Pithing Needle naming the locked side
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pithing Needle");
-        setChoice(playerA, "Locker Room");
+        setChoice(playerA, lockerRoom);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         // Validate that the room can activate the gained ability
@@ -789,7 +954,7 @@ public class RoomCardTest extends CardTestPlayerBase {
         execute();
 
         // Verify the room is now fully unlocked
-        assertPermanentCount(playerA, "Bottomless Pool // Locker Room", 1);
+        assertPermanentCount(playerA, bottomlessPoolLockerRoom, 1);
     }
 
     // Test converting one permanent into one room, then another (the room halves
@@ -813,14 +978,14 @@ public class RoomCardTest extends CardTestPlayerBase {
         // or
         // land until end of turn.
 
-        addCard(Zone.HAND, playerA, "Bottomless Pool // Locker Room");
+        addCard(Zone.HAND, playerA, bottomlessPoolLockerRoom);
         addCard(Zone.HAND, playerA, "Surgical Suite // Hospital Room");
         addCard(Zone.BATTLEFIELD, playerA, "Mirage Mirror");
         addCard(Zone.BATTLEFIELD, playerA, "Tundra", 20);
         addCard(Zone.BATTLEFIELD, playerA, "Memnite", 1);
 
         // Cast Bottomless Pool (unlocked left half only)
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bottomless Pool");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, bottomlessPool);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         addTarget(playerA, TestPlayer.TARGET_SKIP);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
@@ -832,7 +997,7 @@ public class RoomCardTest extends CardTestPlayerBase {
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}: {this} becomes a copy");
-        addTarget(playerA, "Bottomless Pool // Locker Room");
+        addTarget(playerA, bottomlessPoolLockerRoom);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{4}{U}: Unlock the right half.");
 
@@ -848,7 +1013,7 @@ public class RoomCardTest extends CardTestPlayerBase {
         execute();
 
         // Verify unlocked Bottomless pool
-        assertPermanentCount(playerA, "Bottomless Pool // Locker Room", 1);
+        assertPermanentCount(playerA, bottomlessPoolLockerRoom, 1);
         // Verify unlocked Surgical Suite
         assertPermanentCount(playerA, "Surgical Suite", 1);
         // Verify mirage mirror is Hospital Room
@@ -873,32 +1038,33 @@ public class RoomCardTest extends CardTestPlayerBase {
         // other types,
         // and it has "{2}{U}{U}: Return Sakashima the Impostor to its owner's hand at
         // the beginning of the next end step."
+        String sakashimaTheImpostor = "Sakashima the Impostor";
 
-        addCard(Zone.HAND, playerA, "Bottomless Pool // Locker Room");
+        addCard(Zone.HAND, playerA, bottomlessPoolLockerRoom);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 10);
+        addCard(Zone.BATTLEFIELD, playerA, "Opalescence");
+        addCard(Zone.HAND, playerA, sakashimaTheImpostor);
 
-        addCard(Zone.HAND, playerB, "Sakashima the Impostor");
-        addCard(Zone.BATTLEFIELD, playerB, "Island", 10);
 
         // Cast Bottomless Pool (unlocked left half only)
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bottomless Pool");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, bottomlessPool);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         addTarget(playerA, TestPlayer.TARGET_SKIP);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         // Cast Sakashima copying the room
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Sakashima the Impostor");
-        setChoice(playerB, "Yes"); // Choose to copy
-        waitStackResolved(2, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, sakashimaTheImpostor);
+        setChoice(playerA, "Yes"); // Choose to copy
+        setChoice(playerA, bottomlessPool);
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{4}{U}: Unlock the right half.");
-        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-
-        setStopAt(2, PhaseStep.END_TURN);
+        setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
 
-        // Verify Sakashima entered and is copying the room
-        assertPermanentCount(playerB, "Sakashima the Impostor", 1);
+        // Verify Sakashima dies to state-based actions
+        // copies room and because sakashima has no unlocked designations, its mana value is 0
+        // opalescence makes it a 0/0 and it dies
+        assertPermanentCount(playerA, sakashimaTheImpostor, 0);
+        assertGraveyardCount(playerA, sakashimaTheImpostor, 1);
     }
 }

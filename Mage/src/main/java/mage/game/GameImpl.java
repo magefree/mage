@@ -2107,6 +2107,7 @@ public abstract class GameImpl implements Game {
             newBluePrint = copyFromPermanent.copy();
 
             // reset to original characteristics
+            newBluePrint.resetLockedStatus(); // reset locked status so room characteristics are correct
             newBluePrint.reset(this);
 
             // workaround to find real copyable characteristics of transformed/facedown/etc permanents
