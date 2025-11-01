@@ -1700,7 +1700,7 @@ public class TablesPanel extends javax.swing.JPanel {
             MatchOptions options = new MatchOptions(gameName, gameType, multiPlayer);
             options.getPlayerTypes().add(PlayerType.HUMAN);
             options.getPlayerTypes().add(aiType);
-            for (int i=2 ; i < numPlayers ; i++) {
+            for (int i = 2; i < numPlayers; i++) {
                 options.getPlayerTypes().add(aiType);
             }
             options.setDeckType("Variant Magic - Freeform Commander");
@@ -1719,9 +1719,9 @@ public class TablesPanel extends javax.swing.JPanel {
             table = SessionHandler.createTable(roomId, options);
 
             SessionHandler.joinTable(roomId, table.getTableId(), "Human", PlayerType.HUMAN, 1, testDeck, "");
-            SessionHandler.joinTable(roomId, table.getTableId(), "Computer", aiType, 1, testDeck, "");
-            for (int i=2 ; i < numPlayers ; i++) {
-                SessionHandler.joinTable(roomId, table.getTableId(), "Computer" + i, aiType, 1, testDeck, "");
+            SessionHandler.joinTable(roomId, table.getTableId(), "Computer" + (multiPlayer ? " 2" : ""), aiType, 1, testDeck, "");
+            for (int i = 2; i < numPlayers; i++) {
+                SessionHandler.joinTable(roomId, table.getTableId(), "Computer " + (i + 1), aiType, 1, testDeck, "");
             }
             SessionHandler.startMatch(roomId, table.getTableId());
         } catch (HeadlessException ex) {
