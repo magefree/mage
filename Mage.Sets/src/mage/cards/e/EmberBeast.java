@@ -25,7 +25,7 @@ public final class EmberBeast extends CardImpl {
 
         // Ember Beast can't attack or block alone.
         this.addAbility(new CantAttackAloneAbility());
-        this.addAbility(CantBlockAloneAbility.getInstance());
+        this.addAbility(new CantBlockAloneAbility());
     }
 
     private EmberBeast(final EmberBeast card) {

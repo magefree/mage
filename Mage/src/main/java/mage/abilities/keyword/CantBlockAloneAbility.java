@@ -2,39 +2,26 @@
 
 package mage.abilities.keyword;
 
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.combat.CantBlockAloneSourceEffect;
 import mage.constants.Zone;
-import mage.abilities.MageSingleton;
-import mage.abilities.StaticAbility;
-
-import java.io.ObjectStreamException;
 
 /**
- * @author magenoxx_at_googlemail.com
+ * @author notgreat
  */
-public class CantBlockAloneAbility extends StaticAbility implements MageSingleton {
+public class CantBlockAloneAbility extends SimpleStaticAbility {
 
-    private static final CantBlockAloneAbility instance = new CantBlockAloneAbility();
-
-    private Object readResolve() throws ObjectStreamException {
-        return instance;
+    public CantBlockAloneAbility() {
+        super(Zone.BATTLEFIELD, new CantBlockAloneSourceEffect());
     }
 
-    public static CantBlockAloneAbility getInstance() {
-        return instance;
-    }
-
-    private CantBlockAloneAbility() {
-        super(Zone.BATTLEFIELD, null);
-    }
-
-    @Override
-    public String getRule() {
-        return "{this} can't block alone.";
+    private CantBlockAloneAbility(CantBlockAloneAbility ability) {
+        super(ability);
     }
 
     @Override
     public CantBlockAloneAbility copy() {
-        return instance;
+        return new CantBlockAloneAbility(this);
     }
 
 }

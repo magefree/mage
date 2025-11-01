@@ -28,7 +28,7 @@ public final class LoyalPegasus extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // Loyal Pegasus can't attack or block alone.
         this.addAbility(new CantAttackAloneAbility());
-        this.addAbility(CantBlockAloneAbility.getInstance());
+        this.addAbility(new CantBlockAloneAbility());
     }
 
     private LoyalPegasus(final LoyalPegasus card) {

@@ -29,7 +29,7 @@ public final class WojekBodyguard extends CardImpl {
 
         // Wojek Bodyguard can't attack or block alone.
         this.addAbility(new CantAttackAloneAbility());
-        this.addAbility(CantBlockAloneAbility.getInstance());
+        this.addAbility(new CantBlockAloneAbility());
     }
 
     private WojekBodyguard(final WojekBodyguard card) {

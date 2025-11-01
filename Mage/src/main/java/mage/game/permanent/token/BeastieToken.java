@@ -20,7 +20,7 @@ public final class BeastieToken extends TokenImpl {
         toughness = new MageInt(4);
 
         this.addAbility(new CantAttackAloneAbility());
-        this.addAbility(CantBlockAloneAbility.getInstance());
+        this.addAbility(new CantBlockAloneAbility());
     }
 
     private BeastieToken(final BeastieToken token) {

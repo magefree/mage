@@ -1,14 +1,15 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.CantAttackAloneAbility;
 import mage.abilities.keyword.CantBlockAloneAbility;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -25,7 +26,7 @@ public final class BondedHorncrest extends CardImpl {
 
         // Bonded Horncrest can't attack or block alone.
         this.addAbility(new CantAttackAloneAbility());
-        this.addAbility(CantBlockAloneAbility.getInstance());
+        this.addAbility(new CantBlockAloneAbility());
     }
 
     private BondedHorncrest(final BondedHorncrest card) {
