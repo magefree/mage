@@ -130,8 +130,6 @@ public abstract class GameImpl implements Game {
     // For checking "becomes the target" triggers accurately. Cleared on short living LKI reset
     protected Map<String, Map<UUID, Set<UUID>>> targetedMap = new HashMap<>();
 
-    // Permanents entering the Battlefield while handling replacement effects before they are added to the battlefield
-    protected Map<UUID, Permanent> permanentsEntering = new HashMap<>();
     // used to set the counters a permanent adds the battlefield (if no replacement effect is used e.g. Persist)
     protected Map<UUID, Counters> enterWithCounters = new HashMap<>();
 
@@ -215,7 +213,6 @@ public abstract class GameImpl implements Game {
         this.lkiShortLiving = CardUtil.deepCopyObject(game.lkiShortLiving);
         this.targetedMap = CardUtil.deepCopyObject(game.targetedMap);
 
-        this.permanentsEntering = CardUtil.deepCopyObject(game.permanentsEntering);
         this.enterWithCounters = CardUtil.deepCopyObject(game.enterWithCounters);
 
         this.state = game.state.copy();
@@ -765,12 +762,12 @@ public abstract class GameImpl implements Game {
 
     @Override
     public Permanent getPermanentEntering(UUID permanentId) {
-        return permanentsEntering.get(permanentId);
+        return state.getBattlefield().getPermanentsEntering().get(permanentId);
     }
 
     @Override
     public Map<UUID, Permanent> getPermanentsEntering() {
-        return permanentsEntering;
+        return state.getBattlefield().getPermanentsEntering();
     }
 
     @Override
