@@ -205,7 +205,9 @@ public final class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Royal Decree", 31, Rarity.RARE, mage.cards.r.RoyalDecree.class, RETRO_ART));
         cards.add(new SetCardInfo("Royal Trooper", 32, Rarity.COMMON, mage.cards.r.RoyalTrooper.class, RETRO_ART));
         cards.add(new SetCardInfo("Ruins of Trokair", 234, Rarity.UNCOMMON, mage.cards.r.RuinsOfTrokair.class, RETRO_ART));
+        cards.add(new SetCardInfo("Sacred Boon", 33, Rarity.UNCOMMON, mage.cards.s.SacredBoon.class, RETRO_ART));
         cards.add(new SetCardInfo("Savannah", 235, Rarity.RARE, mage.cards.s.Savannah.class, new CardGraphicInfo(FrameStyle.LEA_ORIGINAL_DUAL_LAND_ART_BASIC, false)));
+        cards.add(new SetCardInfo("Scars of the Veteran", 34, Rarity.RARE, mage.cards.s.ScarsOfTheVeteran.class, RETRO_ART));
         cards.add(new SetCardInfo("Screeching Drake", 63, Rarity.COMMON, mage.cards.s.ScreechingDrake.class, RETRO_ART));
         cards.add(new SetCardInfo("Sea Drake", 64, Rarity.RARE, mage.cards.s.SeaDrake.class, RETRO_ART));
         cards.add(new SetCardInfo("Sea Spirit", 65, Rarity.UNCOMMON, mage.cards.s.SeaSpirit.class, RETRO_ART));
