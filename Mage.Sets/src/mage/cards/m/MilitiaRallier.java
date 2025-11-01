@@ -3,8 +3,9 @@ package mage.cards.m;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.UntapTargetEffect;
-import mage.abilities.keyword.CantAttackAloneAbility;
+import mage.abilities.effects.common.combat.CantAttackAloneSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -27,7 +28,7 @@ public final class MilitiaRallier extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Militia Rallier can't attack alone.
-        this.addAbility(new CantAttackAloneAbility());
+        this.addAbility(new SimpleStaticAbility(new CantAttackAloneSourceEffect()));
 
         // Whenever Militia Rallier attacks, untap target creature.
         Ability ability = new AttacksTriggeredAbility(new UntapTargetEffect());

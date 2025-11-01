@@ -317,6 +317,7 @@ public final class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Obelisk of Undoing", 392, Rarity.RARE, mage.cards.o.ObeliskOfUndoing.class, RETRO_ART));
         cards.add(new SetCardInfo("Orcish Artillery", 253, Rarity.UNCOMMON, mage.cards.o.OrcishArtillery.class, RETRO_ART));
         cards.add(new SetCardInfo("Orcish Captain", 254, Rarity.UNCOMMON, mage.cards.o.OrcishCaptain.class, RETRO_ART));
+        cards.add(new SetCardInfo("Orcish Conscripts", 255, Rarity.COMMON, mage.cards.o.OrcishConscripts.class, RETRO_ART));
         cards.add(new SetCardInfo("Orcish Farmer", 256, Rarity.COMMON, mage.cards.o.OrcishFarmer.class, RETRO_ART));
         cards.add(new SetCardInfo("Orcish Oriflamme", 257, Rarity.UNCOMMON, mage.cards.o.OrcishOriflamme.class, RETRO_ART));
         cards.add(new SetCardInfo("Orcish Squatters", 258, Rarity.RARE, mage.cards.o.OrcishSquatters.class, RETRO_ART));
