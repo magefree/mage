@@ -248,6 +248,10 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         return startingControllerId;
     }
 
+    protected int getEffectStartingOnTurn() {
+        return effectStartingOnTurn;
+    }
+
     @Override
     public void setStartingControllerAndTurnNum(Game game, UUID startingController, UUID activePlayerId) {
         this.startingControllerId = startingController;
