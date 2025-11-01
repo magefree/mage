@@ -104,7 +104,7 @@ class PutIntoGraveFromAnywhereEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         UUID cardId = CardUtil.getMainCardId(game, source.getSourceId()); // for split cards
         if (((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD
-                && event.getTargetId().equals(cardId)) {
+                && (event.getTargetId().equals(cardId) || event.getTargetId().equals(source.getSourceId()))) {
             return condition == null || condition.apply(game, source);
         }
         return false;
