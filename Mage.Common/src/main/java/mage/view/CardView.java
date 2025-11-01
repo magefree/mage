@@ -27,6 +27,7 @@ import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.designations.Designation;
 import mage.filter.FilterMana;
+import mage.game.ControllableOrOwnerable;
 import mage.game.Game;
 import mage.game.command.Dungeon;
 import mage.game.command.Emblem;
@@ -764,7 +765,11 @@ public class CardView extends SimpleCardView {
                         String info;
                         MageObject targetObject = game.getObject(t);
                         if (targetObject != null) {
-                            info = targetObject.getIdName();
+                            Player player = null;
+                            if (targetObject instanceof ControllableOrOwnerable) {
+                                player = game.getPlayer(((ControllableOrOwnerable) targetObject).getControllerOrOwnerId());
+                            }
+                            info = (player == null ? "" : player.getName() + ": ") + targetObject.getIdName();
                         } else {
                             Player targetPlayer = game.getPlayer(t);
                             if (targetPlayer != null) {
