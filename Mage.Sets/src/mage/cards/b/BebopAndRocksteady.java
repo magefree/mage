@@ -32,7 +32,7 @@ public final class BebopAndRocksteady extends CardImpl {
         // Whenever Bebop & Rocksteady attacks or blocks, sacrifice a permanent unless you discard a card.
         this.addAbility(new AttacksOrBlocksTriggeredAbility(new DoIfCostPaid(
                 null, new SacrificeControllerEffect(StaticFilters.FILTER_PERMANENT, 1, null),
-                new DiscardCardCost(), false), false
+                new DiscardCardCost(), true), false
         ));
     }
 
