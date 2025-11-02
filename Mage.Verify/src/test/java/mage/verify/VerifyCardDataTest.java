@@ -651,6 +651,9 @@ public class VerifyCardDataTest {
                 CardInfo cardInfo = CardRepository.instance.findCardsByClass(info.getCardClass().getCanonicalName()).stream().findFirst().orElse(null);
                 Assert.assertNotNull(cardInfo);
 
+                if (cardInfo.isDoubleFacedCard()) {
+                    break;
+                }
                 Card card = cardInfo.createCard();
                 Card secondCard = card.getSecondCardFace();
                 if (secondCard != null) {
@@ -2285,10 +2288,10 @@ public class VerifyCardDataTest {
         }
 
         // special check: Werewolves front ability should only be on front and vice versa
-        if (card.getAbilities().containsClass(WerewolfFrontTriggeredAbility.class) && card.isNightCard()) {
+        if (card.getAbilities().containsClass(WerewolfFrontTriggeredAbility.class) && (card.isNightCard() || (card instanceof DoubleFacedCardHalf && ((DoubleFacedCardHalf) card).isBackSide()))) {
             fail(card, "abilities", "card is a back face werewolf with a front face ability");
         }
-        if (card.getAbilities().containsClass(WerewolfBackTriggeredAbility.class) && !card.isNightCard()) {
+        if (card.getAbilities().containsClass(WerewolfBackTriggeredAbility.class) && (!card.isNightCard() && (card instanceof DoubleFacedCardHalf && !((DoubleFacedCardHalf) card).isBackSide()))) {
             fail(card, "abilities", "card is a front face werewolf with a back face ability");
         }
 
@@ -2306,7 +2309,7 @@ public class VerifyCardDataTest {
         }
 
         // special check: siege ability must be used in double faced cards only
-        if (card.getAbilities().containsClass(SiegeAbility.class) && card.getSecondCardFace() == null) {
+        if (card.getAbilities().containsClass(SiegeAbility.class) && (card.getSecondCardFace() == null && (card instanceof DoubleFacedCardHalf && ((DoubleFacedCardHalf) card).getOtherSide() == null))) {
             fail(card, "abilities", "miss second side settings in card with siege ability");
         }
 

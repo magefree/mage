@@ -73,6 +73,7 @@ public interface Card extends MageObject, Ownerable {
 
     SpellAbility getSecondFaceSpellAbility();
 
+    //TODO: remove after tdfc rework
     boolean isNightCard();
 
     default boolean meldsWith(Card card) {
