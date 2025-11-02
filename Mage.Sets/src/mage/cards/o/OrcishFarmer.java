@@ -47,7 +47,7 @@ public final class OrcishFarmer extends CardImpl {
 
 class OrcishFarmerEffect extends BecomesBasicLandTargetEffect {
 
-    public OrcishFarmerEffect() {
+    OrcishFarmerEffect() {
         super(Duration.Custom, SubType.SWAMP);
         setText("Target land becomes a Swamp until its controller's next untap step");
     }

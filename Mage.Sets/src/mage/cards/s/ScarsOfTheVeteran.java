@@ -47,7 +47,7 @@ public final class ScarsOfTheVeteran extends CardImpl {
         this.addAbility(new AlternativeCostSourceAbility(new ExileFromHandCost(new TargetCardInHand(filter))));
 
         // Prevent the next 7 damage that would be dealt to any target this turn. If it’s a creature, put a +0/+1 counter on it for each 1 damage prevented this way at the beginning of the next end step.
-        this.getSpellAbility().addEffect(new SacredBoonPreventDamageTargetEffect(Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new ScarsOfTheVeteranPreventDamageTargetEffect(Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
@@ -65,9 +65,9 @@ class ScarsOfTheVeteranPreventDamageTargetEffect extends PreventionEffectImpl {
 
     private int amount = 7;
 
-    public ScarsOfTheVeteranPreventDamageTargetEffect(Duration duration) {
+    ScarsOfTheVeteranPreventDamageTargetEffect(Duration duration) {
         super(duration);
-        staticText = "Prevent the next 7 damage that would be dealt to any target this turn. If it’s a creature, put a +0/+1 counter on it for each 1 damage prevented this way at the beginning of the next end step.";
+        staticText = "Prevent the next 7 damage that would be dealt to any target this turn. If it's a creature, put a +0/+1 counter on it for each 1 damage prevented this way at the beginning of the next end step.";
     }
 
     private ScarsOfTheVeteranPreventDamageTargetEffect(final ScarsOfTheVeteranPreventDamageTargetEffect effect) {

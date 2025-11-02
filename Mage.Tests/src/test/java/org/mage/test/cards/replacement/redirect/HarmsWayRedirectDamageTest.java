@@ -132,4 +132,32 @@ public class HarmsWayRedirectDamageTest extends CardTestPlayerBase {
         assertLife(playerB, 20);
     }
 
+    /**
+     * Tests redirection doesn't happen vs. Lava Burst on creature, does on player
+     */
+    @Test
+    public void testNoRedirectLavaBurst() {
+        addCard(Zone.HAND, playerB, "Harm's Way", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
+        addCard(Zone.HAND, playerA, "Lava Burst", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 9);
+        addCard(Zone.BATTLEFIELD, playerB, "Aegis Turtle");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lava Burst", "Aegis Turtle");
+        setChoice(playerA, "X=4");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Harm's Way", playerA);
+        setChoice(playerB, "Lava Burst");
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lava Burst", playerB);
+        setChoice(playerA, "X=3");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Harm's Way", playerA);
+        setChoice(playerB, "Lava Burst");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertLife(playerA, 18);
+        assertLife(playerB, 19);
+        assertDamageReceived(playerB, "Aegis Turtle", 4);
+
+    }
 }

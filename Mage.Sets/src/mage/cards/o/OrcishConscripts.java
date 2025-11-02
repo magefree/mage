@@ -47,7 +47,7 @@ public final class OrcishConscripts extends CardImpl {
 class OrcishConscriptsAttackEffect extends RestrictionEffect {
 
     private static final FilterBlockingCreature filter = new FilterBlockingCreature("Blocking creatures");
-    public OrcishConscriptsAttackEffect() {
+    OrcishConscriptsAttackEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "{this} can't attack unless at least two other creatures block";
     }

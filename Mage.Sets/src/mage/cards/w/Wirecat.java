@@ -42,7 +42,7 @@ public final class Wirecat extends CardImpl {
 
 class WirecatEffect extends RestrictionEffect {
 
-    public WirecatEffect() {
+    WirecatEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "{this} can't attack or block if an enchantment is on the battlefield";
     }

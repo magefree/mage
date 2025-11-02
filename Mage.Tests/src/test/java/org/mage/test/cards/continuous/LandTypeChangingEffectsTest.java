@@ -266,4 +266,29 @@ public class LandTypeChangingEffectsTest extends CardTestPlayerBase {
         assertType(urborgtoy, CardType.LAND, SubType.ISLAND);
         assertType("Mountain", CardType.LAND, SubType.ISLAND);
     }
+    @Test
+    public void testOrcishFarmer() {
+        // {T}: Target land becomes a Swamp until its controller's next untap step
+        addCard(Zone.BATTLEFIELD, playerA, "Orcish Farmer", 2);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Plains");
+        addCard(Zone.BATTLEFIELD, playerB, "Reliquary Tower");
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Target", "Plains");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Target", "Reliquary Tower");
+        checkSubType("Plains is Swamp on same turn", 1, PhaseStep.END_TURN, playerA, "Plains", SubType.SWAMP, true);
+        checkSubType("Plains is no longer Plains on same turn", 1, PhaseStep.END_TURN, playerA, "Plains", SubType.PLAINS, false);
+        checkSubType("Reliquary Tower is Swamp on same turn", 1, PhaseStep.END_TURN, playerB, "Reliquary Tower", SubType.SWAMP, true);
+
+        checkSubType("Plains is Swamp on next turn", 2, PhaseStep.UPKEEP, playerA, "Plains", SubType.SWAMP, true);
+        checkSubType("Plains is no longer Plains on next turn", 2, PhaseStep.UPKEEP, playerA, "Plains", SubType.PLAINS, false);
+        checkSubType("Reliquary Tower no longer Swamp on next turn", 2, PhaseStep.UPKEEP, playerB, "Reliquary Tower", SubType.SWAMP, false);
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.UPKEEP);
+        execute();
+
+        assertNotSubtype("Plains", SubType.SWAMP);
+        assertSubtype("Plains", SubType.PLAINS);
+    }
 }

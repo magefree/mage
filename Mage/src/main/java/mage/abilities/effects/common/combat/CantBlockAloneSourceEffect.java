@@ -35,7 +35,6 @@ public class CantBlockAloneSourceEffect extends RestrictionEffect {
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         if (permanent.getId().equals(source.getSourceId())) {
-            game.debugMessage(permanent.getIdName()+" sees "+game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game).size()+" blocking");
             return game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game).size() <= 1;
         }
         return false;

@@ -49,7 +49,7 @@ class SacredBoonPreventDamageTargetEffect extends PreventionEffectImpl {
 
     private int amount = 3;
 
-    public SacredBoonPreventDamageTargetEffect(Duration duration) {
+    SacredBoonPreventDamageTargetEffect(Duration duration) {
         super(duration);
         staticText = "Prevent the next 3 damage that would be dealt to target creature this turn. At the beginning of the next end step, put a +0/+1 counter on that creature for each 1 damage prevented this way.";
     }
