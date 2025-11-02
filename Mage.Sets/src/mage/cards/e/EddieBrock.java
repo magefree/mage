@@ -47,7 +47,7 @@ public final class EddieBrock extends ModalDoubleFacedCard {
                 "Venom, Lethal Protector",
                 new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.SYMBIOTE, SubType.HERO, SubType.VILLAIN}, "{3}{B}{R}{G}"
         );
-        this.getLeftHalfCard().setPT(5, 5);
+        this.getLeftHalfCard().setPT(3, 3);
         this.getRightHalfCard().setPT(5, 5);
 
         // When Eddie Brock enters, return target creature card with mana value 1 or less from your graveyard to the battlefield.
