@@ -131,6 +131,8 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("Lightning Strike", 146, Rarity.COMMON, mage.cards.l.LightningStrike.class));
         cards.add(new SetCardInfo("Long Feng, Grand Secretariat", 233, Rarity.UNCOMMON, mage.cards.l.LongFengGrandSecretariat.class));
         cards.add(new SetCardInfo("Mai, Jaded Edge", 147, Rarity.UNCOMMON, mage.cards.m.MaiJadedEdge.class));
+        cards.add(new SetCardInfo("Mai, Scornful Striker", 109, Rarity.RARE, mage.cards.m.MaiScornfulStriker.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mai, Scornful Striker", 374, Rarity.RARE, mage.cards.m.MaiScornfulStriker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Master Pakku", 63, Rarity.UNCOMMON, mage.cards.m.MasterPakku.class));
         cards.add(new SetCardInfo("Master Piandao", 28, Rarity.UNCOMMON, mage.cards.m.MasterPiandao.class));
         cards.add(new SetCardInfo("Meditation Pools", 272, Rarity.COMMON, mage.cards.m.MeditationPools.class));
