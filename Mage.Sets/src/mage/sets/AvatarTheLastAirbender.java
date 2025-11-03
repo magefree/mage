@@ -138,6 +138,7 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 285, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 290, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 295, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("North Pole Gates", 274, Rarity.COMMON, mage.cards.n.NorthPoleGates.class));
         cards.add(new SetCardInfo("North Pole Patrol", 65, Rarity.UNCOMMON, mage.cards.n.NorthPolePatrol.class));
         cards.add(new SetCardInfo("Northern Air Temple", 111, Rarity.UNCOMMON, mage.cards.n.NorthernAirTemple.class));
         cards.add(new SetCardInfo("Octopus Form", 66, Rarity.COMMON, mage.cards.o.OctopusForm.class));
