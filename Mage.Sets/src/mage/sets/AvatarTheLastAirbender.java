@@ -178,6 +178,7 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("Seismic Sense", 195, Rarity.UNCOMMON, mage.cards.s.SeismicSense.class));
         cards.add(new SetCardInfo("Serpent of the Pass", 70, Rarity.UNCOMMON, mage.cards.s.SerpentOfThePass.class));
         cards.add(new SetCardInfo("Serpent's Pass", 279, Rarity.COMMON, mage.cards.s.SerpentsPass.class));
+        cards.add(new SetCardInfo("Shared Roots", 196, Rarity.UNCOMMON, mage.cards.s.SharedRoots.class));
         cards.add(new SetCardInfo("Sokka's Haiku", 71, Rarity.UNCOMMON, mage.cards.s.SokkasHaiku.class));
         cards.add(new SetCardInfo("Sokka, Bold Boomeranger", 240, Rarity.RARE, mage.cards.s.SokkaBoldBoomeranger.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sokka, Bold Boomeranger", 383, Rarity.RARE, mage.cards.s.SokkaBoldBoomeranger.class, NON_FULL_USE_VARIOUS));
