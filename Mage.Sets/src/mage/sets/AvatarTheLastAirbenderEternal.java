@@ -40,11 +40,14 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Arcane Signet", 315, Rarity.RARE, mage.cards.a.ArcaneSignet.class));
         cards.add(new SetCardInfo("Avatar Kyoshi, Earthbender", 130, Rarity.MYTHIC, mage.cards.a.AvatarKyoshiEarthbender.class));
         cards.add(new SetCardInfo("Blasphemous Act", 26, Rarity.MYTHIC, mage.cards.b.BlasphemousAct.class));
+        cards.add(new SetCardInfo("Bloodchief Ascension", 23, Rarity.MYTHIC, mage.cards.b.BloodchiefAscension.class));
         cards.add(new SetCardInfo("Bribery", 10, Rarity.MYTHIC, mage.cards.b.Bribery.class));
         cards.add(new SetCardInfo("Brought Back", 1, Rarity.MYTHIC, mage.cards.b.BroughtBack.class));
         cards.add(new SetCardInfo("Bumi, Eclectic Earthbender", 248, Rarity.RARE, mage.cards.b.BumiEclecticEarthbender.class));
         cards.add(new SetCardInfo("Capital Guard", 234, Rarity.COMMON, mage.cards.c.CapitalGuard.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Capital Guard", 277, Rarity.COMMON, mage.cards.c.CapitalGuard.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Clone Legion", 12, Rarity.MYTHIC, mage.cards.c.CloneLegion.class));
+        cards.add(new SetCardInfo("Clone", 11, Rarity.MYTHIC, mage.cards.c.Clone.class));
         cards.add(new SetCardInfo("Cruel Tutor", 24, Rarity.MYTHIC, mage.cards.c.CruelTutor.class));
         cards.add(new SetCardInfo("Dark Depths", 56, Rarity.MYTHIC, mage.cards.d.DarkDepths.class));
         cards.add(new SetCardInfo("Deny Entry", 222, Rarity.COMMON, mage.cards.d.DenyEntry.class));
@@ -72,8 +75,10 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Force of Negation", 13, Rarity.MYTHIC, mage.cards.f.ForceOfNegation.class));
         cards.add(new SetCardInfo("Frog-Squirrels", 251, Rarity.COMMON, mage.cards.f.FrogSquirrels.class));
         cards.add(new SetCardInfo("Gilacorn", 231, Rarity.COMMON, mage.cards.g.Gilacorn.class));
+        cards.add(new SetCardInfo("Heartbeat of Spring", 42, Rarity.MYTHIC, mage.cards.h.HeartbeatOfSpring.class));
         cards.add(new SetCardInfo("Heroic Intervention", 43, Rarity.MYTHIC, mage.cards.h.HeroicIntervention.class));
         cards.add(new SetCardInfo("Hippo-Cows", 252, Rarity.COMMON, mage.cards.h.HippoCows.class));
+        cards.add(new SetCardInfo("Imprisoned in the Moon", 14, Rarity.MYTHIC, mage.cards.i.ImprisonedInTheMoon.class));
         cards.add(new SetCardInfo("Iroh, Firebending Instructor", 240, Rarity.UNCOMMON, mage.cards.i.IrohFirebendingInstructor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Iroh, Firebending Instructor", 282, Rarity.UNCOMMON, mage.cards.i.IrohFirebendingInstructor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Katara, Heroic Healer", 215, Rarity.UNCOMMON, mage.cards.k.KataraHeroicHealer.class, NON_FULL_USE_VARIOUS));
@@ -113,6 +118,7 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Purple Pentapus", 233, Rarity.COMMON, mage.cards.p.PurplePentapus.class));
         cards.add(new SetCardInfo("Razor Rings", 272, Rarity.COMMON, mage.cards.r.RazorRings.class));
         cards.add(new SetCardInfo("Release to Memory", 5, Rarity.MYTHIC, mage.cards.r.ReleaseToMemory.class));
+        cards.add(new SetCardInfo("Return of the Wildspeaker", 44, Rarity.MYTHIC, mage.cards.r.ReturnOfTheWildspeaker.class));
         cards.add(new SetCardInfo("Rhys the Redeemed", 52, Rarity.MYTHIC, mage.cards.r.RhysTheRedeemed.class));
         cards.add(new SetCardInfo("Rites of Flourishing", 45, Rarity.MYTHIC, mage.cards.r.RitesOfFlourishing.class));
         cards.add(new SetCardInfo("Roku's Mastery", 243, Rarity.UNCOMMON, mage.cards.r.RokusMastery.class));
@@ -127,6 +133,7 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Standstill", 19, Rarity.MYTHIC, mage.cards.s.Standstill.class));
         cards.add(new SetCardInfo("Sundial of the Infinite", 55, Rarity.MYTHIC, mage.cards.s.SundialOfTheInfinite.class));
         cards.add(new SetCardInfo("Swiftfoot Boots", 317, Rarity.RARE, mage.cards.s.SwiftfootBoots.class));
+        cards.add(new SetCardInfo("Teferi's Protection", 7, Rarity.MYTHIC, mage.cards.t.TeferisProtection.class));
         cards.add(new SetCardInfo("The Cabbage Merchant", 134, Rarity.RARE, mage.cards.t.TheCabbageMerchant.class));
         cards.add(new SetCardInfo("The Great Henge", 41, Rarity.MYTHIC, mage.cards.t.TheGreatHenge.class));
         cards.add(new SetCardInfo("The Terror of Serpent's Pass", 225, Rarity.RARE, mage.cards.t.TheTerrorOfSerpentsPass.class));
