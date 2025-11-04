@@ -1225,7 +1225,8 @@ public class VerifyCardDataTest {
                         cardInfo.getCardNumber(), cardInfo.getRarity(), cardInfo.getGraphicInfo()));
                 Assert.assertNotNull(card);
 
-                if (card.getSecondCardFace() != null) {
+                //TODO: do we need this check after tdfc rework?
+                if (card.getSecondCardFace() != null && !(card instanceof DoubleFacedCard)) {
                     containsDoubleSideCards = true;
                 }
 
