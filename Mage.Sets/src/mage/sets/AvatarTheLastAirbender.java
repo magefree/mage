@@ -206,6 +206,7 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("The Mechanist, Aerial Artisan", 64, Rarity.RARE, mage.cards.t.TheMechanistAerialArtisan.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Rise of Sozin", 117, Rarity.MYTHIC, mage.cards.t.TheRiseOfSozin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Rise of Sozin", 356, Rarity.MYTHIC, mage.cards.t.TheRiseOfSozin.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Spirit Oasis", 72, Rarity.UNCOMMON, mage.cards.t.TheSpiritOasis.class));
         cards.add(new SetCardInfo("The Unagi of Kyoshi Island", 319, Rarity.RARE, mage.cards.t.TheUnagiOfKyoshiIsland.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Unagi of Kyoshi Island", 77, Rarity.RARE, mage.cards.t.TheUnagiOfKyoshiIsland.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tiger-Dillo", 155, Rarity.UNCOMMON, mage.cards.t.TigerDillo.class));
