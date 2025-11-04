@@ -35,6 +35,7 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("Abandon Attachments", 205, Rarity.COMMON, mage.cards.a.AbandonAttachments.class));
         cards.add(new SetCardInfo("Airbending Lesson", 8, Rarity.COMMON, mage.cards.a.AirbendingLesson.class));
         cards.add(new SetCardInfo("Airship Engine Room", 265, Rarity.COMMON, mage.cards.a.AirshipEngineRoom.class));
+        cards.add(new SetCardInfo("Appa, Loyal Sky Bison", 9, Rarity.UNCOMMON, mage.cards.a.AppaLoyalSkyBison.class));
         cards.add(new SetCardInfo("Appa, Steadfast Guardian", 10, Rarity.MYTHIC, mage.cards.a.AppaSteadfastGuardian.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Appa, Steadfast Guardian", 316, Rarity.MYTHIC, mage.cards.a.AppaSteadfastGuardian.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Avatar Aang", 207, Rarity.MYTHIC, mage.cards.a.AvatarAang.class, NON_FULL_USE_VARIOUS));
