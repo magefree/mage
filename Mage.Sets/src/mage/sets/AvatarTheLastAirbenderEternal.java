@@ -39,6 +39,8 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Appa, Aang's Companion", 268, Rarity.UNCOMMON, mage.cards.a.AppaAangsCompanion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arcane Signet", 315, Rarity.RARE, mage.cards.a.ArcaneSignet.class));
         cards.add(new SetCardInfo("Avatar Kyoshi, Earthbender", 130, Rarity.MYTHIC, mage.cards.a.AvatarKyoshiEarthbender.class));
+        cards.add(new SetCardInfo("Beastmaster Ascension", 39, Rarity.MYTHIC, mage.cards.b.BeastmasterAscension.class));
+        cards.add(new SetCardInfo("Beastmaster's Magemark", 9999, Rarity.MYTHIC, mage.cards.b.BeastmastersMagemark.class));
         cards.add(new SetCardInfo("Blasphemous Act", 26, Rarity.MYTHIC, mage.cards.b.BlasphemousAct.class));
         cards.add(new SetCardInfo("Bloodchief Ascension", 23, Rarity.MYTHIC, mage.cards.b.BloodchiefAscension.class));
         cards.add(new SetCardInfo("Bribery", 10, Rarity.MYTHIC, mage.cards.b.Bribery.class));
@@ -46,6 +48,7 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Bumi, Eclectic Earthbender", 248, Rarity.RARE, mage.cards.b.BumiEclecticEarthbender.class));
         cards.add(new SetCardInfo("Capital Guard", 234, Rarity.COMMON, mage.cards.c.CapitalGuard.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Capital Guard", 277, Rarity.COMMON, mage.cards.c.CapitalGuard.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Cityscape Leveler", 53, Rarity.MYTHIC, mage.cards.c.CityscapeLeveler.class));
         cards.add(new SetCardInfo("Clone Legion", 12, Rarity.MYTHIC, mage.cards.c.CloneLegion.class));
         cards.add(new SetCardInfo("Clone", 11, Rarity.MYTHIC, mage.cards.c.Clone.class));
         cards.add(new SetCardInfo("Cruel Tutor", 24, Rarity.MYTHIC, mage.cards.c.CruelTutor.class));
@@ -59,6 +62,7 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Eel-Hounds", 250, Rarity.UNCOMMON, mage.cards.e.EelHounds.class));
         cards.add(new SetCardInfo("Eladamri's Call", 48, Rarity.MYTHIC, mage.cards.e.EladamrisCall.class));
         cards.add(new SetCardInfo("Elephant-Rat", 228, Rarity.COMMON, mage.cards.e.ElephantRat.class));
+        cards.add(new SetCardInfo("Empty City Ruse", 3, Rarity.MYTHIC, mage.cards.e.EmptyCityRuse.class));
         cards.add(new SetCardInfo("Explore", 259, Rarity.COMMON, mage.cards.e.Explore.class));
         cards.add(new SetCardInfo("Explosive Shot", 236, Rarity.COMMON, mage.cards.e.ExplosiveShot.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Explosive Shot", 279, Rarity.COMMON, mage.cards.e.ExplosiveShot.class, NON_FULL_USE_VARIOUS));
@@ -84,6 +88,7 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Katara, Heroic Healer", 215, Rarity.UNCOMMON, mage.cards.k.KataraHeroicHealer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Katara, Heroic Healer", 269, Rarity.UNCOMMON, mage.cards.k.KataraHeroicHealer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Katara, Waterbending Master", 93, Rarity.MYTHIC, mage.cards.k.KataraWaterbendingMaster.class));
+        cards.add(new SetCardInfo("Koma, Cosmos Serpent", 51, Rarity.MYTHIC, mage.cards.k.KomaCosmosSerpent.class));
         cards.add(new SetCardInfo("Komodo Rhino", 241, Rarity.COMMON, mage.cards.k.KomodoRhino.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Komodo Rhino", 283, Rarity.COMMON, mage.cards.k.KomodoRhino.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kyoshi Warrior Guard", 216, Rarity.COMMON, mage.cards.k.KyoshiWarriorGuard.class));
@@ -118,13 +123,17 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Purple Pentapus", 233, Rarity.COMMON, mage.cards.p.PurplePentapus.class));
         cards.add(new SetCardInfo("Razor Rings", 272, Rarity.COMMON, mage.cards.r.RazorRings.class));
         cards.add(new SetCardInfo("Release to Memory", 5, Rarity.MYTHIC, mage.cards.r.ReleaseToMemory.class));
+        cards.add(new SetCardInfo("Rending Volley", 34, Rarity.MYTHIC, mage.cards.r.RendingVolley.class));
         cards.add(new SetCardInfo("Return of the Wildspeaker", 44, Rarity.MYTHIC, mage.cards.r.ReturnOfTheWildspeaker.class));
         cards.add(new SetCardInfo("Rhys the Redeemed", 52, Rarity.MYTHIC, mage.cards.r.RhysTheRedeemed.class));
         cards.add(new SetCardInfo("Rites of Flourishing", 45, Rarity.MYTHIC, mage.cards.r.RitesOfFlourishing.class));
         cards.add(new SetCardInfo("Roku's Mastery", 243, Rarity.UNCOMMON, mage.cards.r.RokusMastery.class));
         cards.add(new SetCardInfo("Run Amok", 258, Rarity.COMMON, mage.cards.r.RunAmok.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Run Amok", 284, Rarity.COMMON, mage.cards.r.RunAmok.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Scout's Warning", 6, Rarity.MYTHIC, mage.cards.s.ScoutsWarning.class));
+        cards.add(new SetCardInfo("Searing Blood", 35, Rarity.MYTHIC, mage.cards.s.SearingBlood.class));
         cards.add(new SetCardInfo("Seismic Tutelage", 254, Rarity.RARE, mage.cards.s.SeismicTutelage.class));
+        cards.add(new SetCardInfo("Shattering Spree", 36, Rarity.MYTHIC, mage.cards.s.ShatteringSpree.class));
         cards.add(new SetCardInfo("Sledding Otter-Penguin", 218, Rarity.COMMON, mage.cards.s.SleddingOtterPenguin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sledding Otter-Penguin", 273, Rarity.COMMON, mage.cards.s.SleddingOtterPenguin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sokka, Wolf Cove's Protector", 219, Rarity.UNCOMMON, mage.cards.s.SokkaWolfCovesProtector.class, NON_FULL_USE_VARIOUS));
