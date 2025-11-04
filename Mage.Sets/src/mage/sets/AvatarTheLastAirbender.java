@@ -82,6 +82,8 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("Earth Rumble Wrestlers", 218, Rarity.COMMON, mage.cards.e.EarthRumbleWrestlers.class));
         cards.add(new SetCardInfo("Earth Rumble", 174, Rarity.UNCOMMON, mage.cards.e.EarthRumble.class));
         cards.add(new SetCardInfo("Earth Village Ruffians", 219, Rarity.COMMON, mage.cards.e.EarthVillageRuffians.class));
+        cards.add(new SetCardInfo("Earthbender Ascension", 175, Rarity.RARE, mage.cards.e.EarthbenderAscension.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Earthbender Ascension", 307, Rarity.RARE, mage.cards.e.EarthbenderAscension.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Earthbending Lesson", 176, Rarity.COMMON, mage.cards.e.EarthbendingLesson.class));
         cards.add(new SetCardInfo("Enter the Avatar State", 18, Rarity.UNCOMMON, mage.cards.e.EnterTheAvatarState.class));
         cards.add(new SetCardInfo("Epic Downfall", 96, Rarity.UNCOMMON, mage.cards.e.EpicDownfall.class));
