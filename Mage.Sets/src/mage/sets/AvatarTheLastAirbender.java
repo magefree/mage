@@ -53,6 +53,7 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("Beetle-Headed Merchants", 86, Rarity.COMMON, mage.cards.b.BeetleHeadedMerchants.class));
         cards.add(new SetCardInfo("Bender's Waterskin", 255, Rarity.COMMON, mage.cards.b.BendersWaterskin.class));
         cards.add(new SetCardInfo("Boiling Rock Prison", 267, Rarity.COMMON, mage.cards.b.BoilingRockPrison.class));
+        cards.add(new SetCardInfo("Boomerang Basics", 46, Rarity.UNCOMMON, mage.cards.b.BoomerangBasics.class));
         cards.add(new SetCardInfo("Bumi Bash", 125, Rarity.COMMON, mage.cards.b.BumiBash.class));
         cards.add(new SetCardInfo("Bumi, Unleashed", 211, Rarity.MYTHIC, mage.cards.b.BumiUnleashed.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bumi, Unleashed", 348, Rarity.MYTHIC, mage.cards.b.BumiUnleashed.class, NON_FULL_USE_VARIOUS));
