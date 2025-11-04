@@ -91,6 +91,8 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("Fire Nation Attacks", 299, Rarity.UNCOMMON, mage.cards.f.FireNationAttacks.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fire Nation Cadets", 134, Rarity.COMMON, mage.cards.f.FireNationCadets.class));
         cards.add(new SetCardInfo("Fire Nation Engineer", 99, Rarity.UNCOMMON, mage.cards.f.FireNationEngineer.class));
+        cards.add(new SetCardInfo("Fire Nation Palace", 268, Rarity.RARE, mage.cards.f.FireNationPalace.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Fire Nation Palace", 389, Rarity.RARE, mage.cards.f.FireNationPalace.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fire Nation Warship", 256, Rarity.UNCOMMON, mage.cards.f.FireNationWarship.class));
         cards.add(new SetCardInfo("Fire Sages", 136, Rarity.UNCOMMON, mage.cards.f.FireSages.class));
         cards.add(new SetCardInfo("Firebending Student", 139, Rarity.RARE, mage.cards.f.FirebendingStudent.class, NON_FULL_USE_VARIOUS));
