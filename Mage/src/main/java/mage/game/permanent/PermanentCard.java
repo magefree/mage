@@ -4,6 +4,7 @@ import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
+import mage.abilities.common.RoomAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.keyword.NightboundAbility;
@@ -164,8 +165,7 @@ public class PermanentCard extends PermanentImpl {
             for (Ability ability : card.getAbilities()) {
               this.addAbility(ability, card.getId(), game, true);
             }
-        } else if (!(card instanceof RoomCard)){
-            // room abilities handled separately at the end
+        } else {
             // copy only own abilities; all dynamic added abilities must be added in the parent call
             this.abilities = card.getAbilities().copy();
             this.spellAbility = null; // will be set on first getSpellAbility call if card has one.
@@ -214,6 +214,18 @@ public class PermanentCard extends PermanentImpl {
         // Rooms set characteristics at the end so nothing gets overwritten
         if (card instanceof RoomCard) {
             RoomCard.setRoomCharacteristics(this, game);
+            if (!isReset) {
+                RoomAbility roomAbility = null;
+                for (Ability ability : this.abilities) {
+                    if (ability instanceof RoomAbility) {
+                        roomAbility = (RoomAbility) ability;
+                        break;
+                    }
+                }
+                if (roomAbility != null) {
+                    roomAbility.applyCharacteristics(game, this);
+                }
+            }
         }
     }
 

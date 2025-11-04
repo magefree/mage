@@ -2,10 +2,11 @@ package mage.abilities.effects.common;
 
 import mage.MageObject;
 import mage.MageObjectReference;
+import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
-import mage.cards.RoomCard;
+import mage.abilities.common.RoomAbility;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -64,6 +65,16 @@ public class CopyEffect extends ContinuousEffectImpl {
             permanent = game.getPermanentEntering(copyToObjectId);
             if (permanent != null) {
                 copyToPermanent(permanent, game, source);
+                // Apply Room characteristics since effects aren't applied to entering permanents yet
+                if (permanent.hasSubtype(SubType.ROOM, game)) {
+                    Abilities<Ability> abilities = permanent.getAbilities();
+                    for (Ability ability : abilities) {
+                        if (ability instanceof RoomAbility) {
+                            ((RoomAbility) ability).applyCharacteristics(game, permanent);
+                            break;
+                        }
+                    }
+                }
                 // set reference to the permanent later on the battlefield so we have to add already one (if no token) to the zone change counter
                 int ZCCDiff = 1;
                 if (permanent instanceof PermanentToken) {
@@ -97,14 +108,6 @@ public class CopyEffect extends ContinuousEffectImpl {
     }
 
     protected boolean copyToPermanent(Permanent permanent, Game game, Ability source) {
-        if (copyFromObject instanceof Permanent && ((Permanent) copyFromObject).getMainCard() instanceof RoomCard) {
-            // Update blueprint based on copying permanent's locked status
-            Permanent blueprint = (Permanent) copyFromObject;
-            RoomCard.setRoomCharacteristics(blueprint, (RoomCard) blueprint.getMainCard(), game, permanent.isLeftDoorUnlocked(), permanent.isRightDoorUnlocked());
-            if (applier != null) {
-                applier.apply(game, blueprint, source, permanent.getId());
-            }
-        }
         if (copyFromObject.getCopyFrom() != null) {
             // copy from temp blueprints (they are already copies)
             permanent.setCopy(true, copyFromObject.getCopyFrom());

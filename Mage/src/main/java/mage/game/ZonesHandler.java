@@ -110,11 +110,6 @@ public final class ZonesHandler {
                     if (forceToMainSide) {
                         info.event.setTargetId(((DoubleFacedCard) card.getMainCard()).getLeftHalfCard().getId());
                     }
-
-                    // if left half is being moved, but entering transformed, change to transformed side
-                    if (enterTransformed && card instanceof DoubleFacedCardHalf && !((DoubleFacedCardHalf) card).isBackSide()) {
-                        info.event.setTargetId(((DoubleFacedCardHalf) card).getOtherSide().getId());
-                    }
                 }
             }
         }

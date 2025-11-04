@@ -1,18 +1,15 @@
 package mage.cards;
 
-import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.common.RoomUnlockAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.ManaCost;
-import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.common.RoomAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.RoomCharacteristicsEffect;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SpellAbilityType;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
@@ -94,54 +91,9 @@ public abstract class RoomCard extends SplitCard {
 
     // Static method for setting room characteristics on permanents
     public static void setRoomCharacteristics(Permanent permanent, RoomCard roomCard, Game game, boolean isLeftUnlocked, boolean isRightUnlocked) {
+        permanent.setName(roomCard.name);
 
-        // Set the name based on unlocked halves
-        String newName = "";
-
-        if (isLeftUnlocked && roomCard.getLeftHalfCard() != null) {
-            newName += roomCard.getLeftHalfCard().getName();
-        }
-
-        if (isRightUnlocked && roomCard.getRightHalfCard() != null) {
-            if (!newName.isEmpty()) {
-                newName += " // "; // Split card name separator
-            }
-            newName += roomCard.getRightHalfCard().getName();
-        }
-
-        permanent.setName(newName);
-
-        // Set the mana value based on unlocked halves
-        // Create a new Mana object to accumulate the costs
-        Mana totalManaCost = new Mana();
-
-        // Add the mana from the left half's cost to our total Mana object
-        if (isLeftUnlocked) {
-            if (roomCard.getLeftHalfCard() != null && roomCard.getLeftHalfCard().getSpellAbility() != null) {
-                ManaCosts<ManaCost> leftHalfManaCost = roomCard.getLeftHalfCard().getSpellAbility().getManaCosts();
-                totalManaCost.add(leftHalfManaCost.getMana());
-            }
-        }
-
-        // Add the mana from the right half's cost to our total Mana object
-        if (isRightUnlocked) {
-            if (roomCard.getRightHalfCard() != null && roomCard.getRightHalfCard().getSpellAbility() != null) {
-                ManaCosts<ManaCost> rightHalfManaCost = roomCard.getRightHalfCard().getSpellAbility().getManaCosts();
-                totalManaCost.add(rightHalfManaCost.getMana());
-            }
-        }
-
-        String newManaCostString = totalManaCost.toString();
-        ManaCostsImpl<ManaCost> newManaCosts;
-
-        // If both halves are locked or total 0, it's 0mv.
-        if (newManaCostString.isEmpty() || totalManaCost.count() == 0) {
-            newManaCosts = new ManaCostsImpl<>("");
-        } else {
-            newManaCosts = new ManaCostsImpl<>(newManaCostString);
-        }
-
-        permanent.setManaCost(newManaCosts);
+        permanent.setManaCost(roomCard.getManaCost());
 
         // Set color indicator based on unlocked halves
         ObjectColor newColor = new ObjectColor();
@@ -151,36 +103,17 @@ public abstract class RoomCard extends SplitCard {
         if (isRightUnlocked && roomCard.getRightHalfCard() != null) {
             newColor.addColor(roomCard.getRightHalfCard().getColor());
         }
-        permanent.getColor().setColor(newColor);
+        permanent.getColor().setColor(roomCard.getColor());
 
-        permanent.getAbilities().clear();
-
-        // Add abilities from the main card
-        for (Ability ability : roomCard.getAbilities()) {
-            permanent.addAbility(ability, null, null, true);
+        // Get abilities from each half
+        Abilities<Ability> leftAbilities = roomCard.getLeftHalfCard().getAbilities();
+        for (Ability ability : leftAbilities) {
+            permanent.addAbility(ability, roomCard.getLeftHalfCard().getId(), game, true);
         }
 
-        // Get abilities from unlocked halves and give unlock abilities for locked halves
-        if (isLeftUnlocked && roomCard.getLeftHalfCard() != null) {
-            Abilities<Ability> leftAbilities = roomCard.getLeftHalfCard().getAbilities();
-            for (Ability ability : leftAbilities) {
-                permanent.addAbility(ability, roomCard.getLeftHalfCard().getId(), game, true);
-            }
-        } else {
-            // Add the Special Action to unlock doors.
-            // These will ONLY be active if the corresponding half is LOCKED!
-            RoomUnlockAbility leftUnlockAbility = new RoomUnlockAbility(roomCard.getLeftHalfCard().getManaCost(), true);
-            permanent.addAbility(leftUnlockAbility, roomCard.getLeftHalfCard().getId(), game);
-        }
-
-        if (isRightUnlocked && roomCard.getRightHalfCard() != null) {
-            Abilities<Ability> rightAbilities = roomCard.getRightHalfCard().getAbilities();
-            for (Ability ability : rightAbilities) {
-                permanent.addAbility(ability, roomCard.getRightHalfCard().getId(), game,true);
-            }
-        } else {
-            RoomUnlockAbility rightUnlockAbility = new RoomUnlockAbility(roomCard.getRightHalfCard().getManaCost(), false);
-            permanent.addAbility(rightUnlockAbility, roomCard.getRightHalfCard().getId(), game);
+        Abilities<Ability> rightAbilities = roomCard.getRightHalfCard().getAbilities();
+        for (Ability ability : rightAbilities) {
+            permanent.addAbility(ability, roomCard.getRightHalfCard().getId(), game,true);
         }
     }
 }
@@ -241,27 +174,3 @@ class RoomEnterUnlockEffect extends OneShotEffect {
     }
 }
 
-// For the overall Room card flavor text and mana value effect.
-class RoomAbility extends SimpleStaticAbility {
-    public RoomAbility() {
-        super(Zone.ALL, null);
-        this.setRuleVisible(true);
-        this.setRuleAtTheTop(true);
-        this.addEffect(new RoomCharacteristicsEffect());
-    }
-
-    protected RoomAbility(final RoomAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public String getRule() {
-        return "<i>(You may cast either half. That door unlocks on the battlefield. " +
-                "As a sorcery, you may pay the mana cost of a locked door to unlock it.)</i>";
-    }
-
-    @Override
-    public RoomAbility copy() {
-        return new RoomAbility(this);
-    }
-}

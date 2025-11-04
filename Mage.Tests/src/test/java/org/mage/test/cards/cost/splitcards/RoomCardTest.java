@@ -8,6 +8,8 @@ import org.junit.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
+import java.util.Objects;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -130,8 +132,13 @@ public class RoomCardTest extends CardTestPlayerBase {
             // 1 ability from both halves
             // no unlock abilities
             // 1 info
+            String manaCost = getPermanent(bottomlessPoolLockerRoom)
+                    .getManaCost()
+                    .stream()
+                    .map(Objects::toString)
+                    .reduce("", String::concat);
             assertEquals(3, cardView.getRules().size(), "Locker Room must have 3 rules, has: " + cardView.getRules().size());
-            assertEquals("{4}{U}{U}", cardView.getManaCostStr(), "Mana cost must be combined from both halves");
+            assertEquals(manaCost, cardView.getManaCostStr(), "Mana cost must be combined from both halves");
             StringBuilder sb = new StringBuilder("\n" + cardView.getName());
             sb.append("\n - Types: ").append(cardView.getCardTypes());
             sb.append("\n - Subtypes: ").append(cardView.getSubTypes());

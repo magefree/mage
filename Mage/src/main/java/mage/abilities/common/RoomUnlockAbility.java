@@ -60,6 +60,10 @@ public class RoomUnlockAbility extends SpecialAction {
         sb.append(isLeftHalf ? "left" : "right").append(" half is locked.)</i>");
         return sb.toString();
     }
+
+    public boolean isLeftHalf() {
+        return isLeftHalf;
+    }
 }
 
 /**
