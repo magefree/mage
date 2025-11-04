@@ -66,6 +66,8 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("Cruel Administrator", 213, Rarity.UNCOMMON, mage.cards.c.CruelAdministrator.class));
         cards.add(new SetCardInfo("Cunning Maneuver", 130, Rarity.COMMON, mage.cards.c.CunningManeuver.class));
         cards.add(new SetCardInfo("Cycle of Renewal", 170, Rarity.COMMON, mage.cards.c.CycleOfRenewal.class));
+        cards.add(new SetCardInfo("Dai Li Agents", 214, Rarity.UNCOMMON, mage.cards.d.DaiLiAgents.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Dai Li Agents", 306, Rarity.UNCOMMON, mage.cards.d.DaiLiAgents.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dai Li Indoctrination", 93, Rarity.COMMON, mage.cards.d.DaiLiIndoctrination.class));
         cards.add(new SetCardInfo("Deadly Precision", 95, Rarity.COMMON, mage.cards.d.DeadlyPrecision.class));
         cards.add(new SetCardInfo("Deserter's Disciple", 131, Rarity.COMMON, mage.cards.d.DesertersDisciple.class));
