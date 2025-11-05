@@ -191,6 +191,7 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("Planetarium of Wan Shi Tong", 385, Rarity.MYTHIC, mage.cards.p.PlanetariumOfWanShiTong.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Platypus-Bear", 236, Rarity.COMMON, mage.cards.p.PlatypusBear.class));
         cards.add(new SetCardInfo("Pretending Poxbearers", 237, Rarity.COMMON, mage.cards.p.PretendingPoxbearers.class));
+        cards.add(new SetCardInfo("Professor Zei, Anthropologist", 238, Rarity.UNCOMMON, mage.cards.p.ProfessorZeiAnthropologist.class));
         cards.add(new SetCardInfo("Rabaroo Troop", 32, Rarity.COMMON, mage.cards.r.RabarooTroop.class));
         cards.add(new SetCardInfo("Ran and Shaw", 150, Rarity.RARE, mage.cards.r.RanAndShaw.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ran and Shaw", 325, Rarity.RARE, mage.cards.r.RanAndShaw.class, NON_FULL_USE_VARIOUS));
