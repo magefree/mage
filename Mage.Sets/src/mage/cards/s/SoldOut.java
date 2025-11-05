@@ -11,6 +11,7 @@ import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.ClueArtifactToken;
+import mage.target.common.TargetCreaturePermanent;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -25,6 +26,7 @@ public final class SoldOut extends CardImpl {
 
         // Exile target creature. If it was dealt damage this turn, create a Clue token.
         this.getSpellAbility().addEffect(new SoldOutEffect());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     private SoldOut(final SoldOut card) {
