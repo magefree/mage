@@ -133,6 +133,7 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("Hog-Monkey", 104, Rarity.COMMON, mage.cards.h.HogMonkey.class));
         cards.add(new SetCardInfo("How to Start a Riot", 140, Rarity.COMMON, mage.cards.h.HowToStartARiot.class));
         cards.add(new SetCardInfo("Iguana Parrot", 56, Rarity.COMMON, mage.cards.i.IguanaParrot.class));
+        cards.add(new SetCardInfo("Invasion Reinforcements", 24, Rarity.UNCOMMON, mage.cards.i.InvasionReinforcements.class));
         cards.add(new SetCardInfo("Invasion Submersible", 57, Rarity.UNCOMMON, mage.cards.i.InvasionSubmersible.class));
         cards.add(new SetCardInfo("Invasion Tactics", 183, Rarity.UNCOMMON, mage.cards.i.InvasionTactics.class));
         cards.add(new SetCardInfo("Iroh's Demonstration", 141, Rarity.UNCOMMON, mage.cards.i.IrohsDemonstration.class));
