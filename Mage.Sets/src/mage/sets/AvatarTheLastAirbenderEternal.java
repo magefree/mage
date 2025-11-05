@@ -95,6 +95,7 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Katara, Heroic Healer", 215, Rarity.UNCOMMON, mage.cards.k.KataraHeroicHealer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Katara, Heroic Healer", 269, Rarity.UNCOMMON, mage.cards.k.KataraHeroicHealer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Katara, Waterbending Master", 93, Rarity.MYTHIC, mage.cards.k.KataraWaterbendingMaster.class));
+        cards.add(new SetCardInfo("Kindly Customer", 79, Rarity.COMMON, mage.cards.k.KindlyCustomer.class));
         cards.add(new SetCardInfo("Koma, Cosmos Serpent", 51, Rarity.MYTHIC, mage.cards.k.KomaCosmosSerpent.class));
         cards.add(new SetCardInfo("Komodo Rhino", 241, Rarity.COMMON, mage.cards.k.KomodoRhino.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Komodo Rhino", 283, Rarity.COMMON, mage.cards.k.KomodoRhino.class, NON_FULL_USE_VARIOUS));
