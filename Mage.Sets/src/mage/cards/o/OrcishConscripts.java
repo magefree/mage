@@ -49,7 +49,7 @@ class OrcishConscriptsAttackEffect extends RestrictionEffect {
     private static final FilterBlockingCreature filter = new FilterBlockingCreature("Blocking creatures");
     OrcishConscriptsAttackEffect() {
         super(Duration.WhileOnBattlefield);
-        staticText = "{this} can't attack unless at least two other creatures block";
+        staticText = "{this} can't attack unless at least two other creatures attack";
     }
 
     private OrcishConscriptsAttackEffect(final OrcishConscriptsAttackEffect effect) {

@@ -154,7 +154,7 @@ public final class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Krovikan Sorcerer", 51, Rarity.COMMON, mage.cards.k.KrovikanSorcerer.class, RETRO_ART));
         cards.add(new SetCardInfo("Krovikan Vampire", 102, Rarity.UNCOMMON, mage.cards.k.KrovikanVampire.class, RETRO_ART));
         cards.add(new SetCardInfo("Lat-Nam's Legacy", 52, Rarity.COMMON, mage.cards.l.LatNamsLegacy.class, RETRO_ART));
-        cards.add(new SetCardInfo("Lava Burst", 134, Rarity.UNCOMMON, mage.cards.l.LavaBurst.class));
+        cards.add(new SetCardInfo("Lava Burst", 134, Rarity.UNCOMMON, mage.cards.l.LavaBurst.class, RETRO_ART));
         cards.add(new SetCardInfo("Leaping Lizard", 171, Rarity.COMMON, mage.cards.l.LeapingLizard.class, RETRO_ART));
         cards.add(new SetCardInfo("Lim-Dul's High Guard", 103, Rarity.UNCOMMON, mage.cards.l.LimDulsHighGuard.class, RETRO_ART));
         cards.add(new SetCardInfo("Lodestone Bauble", 213, Rarity.RARE, mage.cards.l.LodestoneBauble.class, RETRO_ART));
@@ -178,8 +178,8 @@ public final class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Orc General", 137, Rarity.UNCOMMON, mage.cards.o.OrcGeneral.class, RETRO_ART));
         cards.add(new SetCardInfo("Orcish Cannoneers", 138, Rarity.UNCOMMON, mage.cards.o.OrcishCannoneers.class, RETRO_ART));
         cards.add(new SetCardInfo("Orcish Captain", 139, Rarity.UNCOMMON, mage.cards.o.OrcishCaptain.class, RETRO_ART));
-        cards.add(new SetCardInfo("Orcish Conscripts", 140, Rarity.COMMON, mage.cards.o.OrcishConscripts.class));
-        cards.add(new SetCardInfo("Orcish Farmer", 141, Rarity.COMMON, mage.cards.o.OrcishFarmer.class));
+        cards.add(new SetCardInfo("Orcish Conscripts", 140, Rarity.COMMON, mage.cards.o.OrcishConscripts.class, RETRO_ART));
+        cards.add(new SetCardInfo("Orcish Farmer", 141, Rarity.COMMON, mage.cards.o.OrcishFarmer.class, RETRO_ART));
         cards.add(new SetCardInfo("Orcish Lumberjack", 142, Rarity.COMMON, mage.cards.o.OrcishLumberjack.class, RETRO_ART));
         cards.add(new SetCardInfo("Orcish Squatters", 143, Rarity.RARE, mage.cards.o.OrcishSquatters.class, RETRO_ART));
         cards.add(new SetCardInfo("Orcish Veteran", 144, Rarity.COMMON, mage.cards.o.OrcishVeteran.class, RETRO_ART));
@@ -208,9 +208,9 @@ public final class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Royal Decree", 31, Rarity.RARE, mage.cards.r.RoyalDecree.class, RETRO_ART));
         cards.add(new SetCardInfo("Royal Trooper", 32, Rarity.COMMON, mage.cards.r.RoyalTrooper.class, RETRO_ART));
         cards.add(new SetCardInfo("Ruins of Trokair", 234, Rarity.UNCOMMON, mage.cards.r.RuinsOfTrokair.class, RETRO_ART));
-        cards.add(new SetCardInfo("Sacred Boon", 33, Rarity.UNCOMMON, mage.cards.s.SacredBoon.class));
+        cards.add(new SetCardInfo("Sacred Boon", 33, Rarity.UNCOMMON, mage.cards.s.SacredBoon.class, RETRO_ART));
         cards.add(new SetCardInfo("Savannah", 235, Rarity.RARE, mage.cards.s.Savannah.class, new CardGraphicInfo(FrameStyle.LEA_ORIGINAL_DUAL_LAND_ART_BASIC, false)));
-        cards.add(new SetCardInfo("Scars of the Veteran", 34, Rarity.RARE, mage.cards.s.ScarsOfTheVeteran.class));
+        cards.add(new SetCardInfo("Scars of the Veteran", 34, Rarity.RARE, mage.cards.s.ScarsOfTheVeteran.class, RETRO_ART));
         cards.add(new SetCardInfo("Screeching Drake", 63, Rarity.COMMON, mage.cards.s.ScreechingDrake.class, RETRO_ART));
         cards.add(new SetCardInfo("Sea Drake", 64, Rarity.RARE, mage.cards.s.SeaDrake.class, RETRO_ART));
         cards.add(new SetCardInfo("Sea Spirit", 65, Rarity.UNCOMMON, mage.cards.s.SeaSpirit.class, RETRO_ART));
