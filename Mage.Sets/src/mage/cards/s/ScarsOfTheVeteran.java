@@ -6,6 +6,7 @@ import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.common.ExileFromHandCost;
+import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
@@ -16,10 +17,7 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterOwnedCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
-import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.PreventDamageEvent;
-import mage.game.events.PreventedDamageEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetCardInHand;
@@ -63,16 +61,13 @@ public final class ScarsOfTheVeteran extends CardImpl {
 
 class ScarsOfTheVeteranPreventDamageTargetEffect extends PreventionEffectImpl {
 
-    private int amount = 7;
-
     ScarsOfTheVeteranPreventDamageTargetEffect(Duration duration) {
-        super(duration);
+        super(duration, 7, false);
         staticText = "Prevent the next 7 damage that would be dealt to any target this turn. If it's a creature, put a +0/+1 counter on it for each 1 damage prevented this way at the beginning of the next end step.";
     }
 
     private ScarsOfTheVeteranPreventDamageTargetEffect(final ScarsOfTheVeteranPreventDamageTargetEffect effect) {
         super(effect);
-        this.amount = effect.amount;
     }
 
     @Override
@@ -82,34 +77,16 @@ class ScarsOfTheVeteranPreventDamageTargetEffect extends PreventionEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        GameEvent preventEvent = new PreventDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), event.getAmount(), ((DamageEvent) event).isCombatDamage());
-        if (!game.replaceEvent(preventEvent)) {
-            int prevented = 0;
-            if (event.getAmount() >= this.amount) {
-                int damage = amount;
-                event.setAmount(event.getAmount() - amount);
-                this.used = true;
-                game.fireEvent(new PreventedDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), damage));
-                prevented = damage;
-            } else {
-                int damage = event.getAmount();
-                event.setAmount(0);
-                amount -= damage;
-                game.fireEvent(new PreventedDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), damage));
-                prevented = damage;
+        PreventionEffectData preventionEffectData = preventDamageAction(event, source, game);
+        if (preventionEffectData.getPreventedDamage() > 0) {
+            Permanent targetPermanent = game.getPermanent(source.getTargets().getFirstTarget());
+            if (targetPermanent != null) {
+                DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
+                        new AddCountersTargetEffect(CounterType.P0P1.createInstance(preventionEffectData.getPreventedDamage()))
+                                .setTargetPointer(new FixedTarget(targetPermanent, game)));
+                game.addDelayedTriggeredAbility(delayedAbility, source);
             }
-
-            // add counters at end step
-            if (prevented > 0) {
-                Permanent targetPermanent = game.getPermanent(source.getTargets().getFirstTarget());
-                if (targetPermanent != null && targetPermanent.isCreature(game)) {
-                    DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
-                            new AddCountersTargetEffect(CounterType.P0P1.createInstance(prevented))
-                                    .setTargetPointer(new FixedTarget(targetPermanent, game)));
-                    game.addDelayedTriggeredAbility(delayedAbility, source);
-                    game.informPlayers("Scars Of The Veteran: Prevented " + prevented + " damage ");
-                }
-            }
+            return false;
         }
         return false;
     }
