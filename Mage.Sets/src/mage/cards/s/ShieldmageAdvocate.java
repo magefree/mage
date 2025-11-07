@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -13,16 +12,17 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.TargetSource;
-import mage.target.common.TargetCardInOpponentsGraveyard;
 import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCardInOpponentsGraveyard;
 import mage.target.targetpointer.SecondTargetPointer;
+
+import java.util.UUID;
 
 /**
  *
@@ -84,12 +84,6 @@ class ShieldmageAdvocateEffect extends PreventionEffectImpl {
     public void init(Ability source, Game game) {
         super.init(source, game);
         this.targetSource.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        preventDamageAction(event, source, game);
-        return false;
     }
 
     @Override

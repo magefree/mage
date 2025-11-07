@@ -1,25 +1,26 @@
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.PreventionEffectImpl;
-import mage.cards.Card;
-import mage.constants.*;
-import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.VigilanceAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.DamagePermanentEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -129,7 +130,7 @@ class WeepingAngelDamageEffect extends PreventionEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        game.preventDamage(event, source, game, Integer.MAX_VALUE);
+        preventDamageAction(event, source, game);
         Card card = game.getPermanent(event.getTargetId());
         if (card == null) {
             return false;

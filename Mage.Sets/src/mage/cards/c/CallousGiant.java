@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -9,11 +8,12 @@ import mage.abilities.effects.PreventionEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+
+import java.util.UUID;
 
 /**
  *
@@ -63,7 +63,6 @@ class CallousGiantEffect extends PreventionEffectImpl {
         if(event.getAmount() <= 3)
         {
             preventDamageAction(event, source, game);
-            return true;
         }
         return false;
     }

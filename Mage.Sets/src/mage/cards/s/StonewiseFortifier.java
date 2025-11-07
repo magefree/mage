@@ -1,7 +1,6 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -11,12 +10,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.PreventDamageEvent;
-import mage.game.events.PreventedDamageEvent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -64,25 +59,6 @@ class StonewiseFortifierPreventAllDamageToEffect extends PreventionEffectImpl {
     @Override
     public StonewiseFortifierPreventAllDamageToEffect copy() {
         return new StonewiseFortifierPreventAllDamageToEffect(this);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        GameEvent preventEvent = new PreventDamageEvent(event.getTargetId(), event.getSourceId(), source, source.getControllerId(), event.getAmount(), ((DamageEvent) event).isCombatDamage());
-        if (!game.replaceEvent(preventEvent)) {
-            int preventedDamage = event.getAmount();
-            MageObject damageSource = game.getObject(event.getSourceId());
-            MageObject preventionSource = game.getObject(source);
-            if (damageSource != null && preventionSource != null) {
-                String message = " damage from " +
-                        damageSource.getName() + " prevented " +
-                        '(' + preventionSource + ')';
-                game.informPlayers(message);
-            }
-            event.setAmount(0);
-            game.fireEvent(new PreventedDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), preventedDamage));
-        }
-        return false;
     }
 
     @Override

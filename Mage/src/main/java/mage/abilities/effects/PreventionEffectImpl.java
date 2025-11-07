@@ -97,7 +97,7 @@ public abstract class PreventionEffectImpl extends ReplacementEffectImpl impleme
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getFlag() && (!onlyCombat || ((DamageEvent) event).isCombatDamage());
+        return !used && event.getFlag() && (!onlyCombat || ((DamageEvent) event).isCombatDamage());
     }
 
 }

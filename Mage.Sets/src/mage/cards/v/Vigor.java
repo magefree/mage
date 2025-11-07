@@ -4,18 +4,18 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.PutIntoGraveFromAnywhereSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.PreventionEffectData;
+import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.effects.common.ShuffleIntoLibrarySourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.game.Game;
-import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.PreventDamageEvent;
-import mage.game.events.PreventedDamageEvent;
 import mage.game.permanent.Permanent;
 
 import java.util.UUID;
@@ -37,7 +37,7 @@ public final class Vigor extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // If damage would be dealt to a creature you control other than Vigor, prevent that damage. Put a +1/+1 counter on that creature for each 1 damage prevented this way.
-        this.addAbility(new SimpleStaticAbility(new VigorReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new VigorEffect()));
 
         // When Vigor is put into a graveyard from anywhere, shuffle it into its owner's library.
         this.addAbility(new PutIntoGraveFromAnywhereSourceTriggeredAbility(new ShuffleIntoLibrarySourceEffect()));
@@ -53,36 +53,34 @@ public final class Vigor extends CardImpl {
     }
 }
 
-class VigorReplacementEffect extends ReplacementEffectImpl {
+class VigorEffect extends PreventionEffectImpl {
 
-    VigorReplacementEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
+    VigorEffect() {
+        super(Duration.WhileOnBattlefield);
         staticText = "if damage would be dealt to another creature you control, prevent that damage. Put a +1/+1 counter on that creature for each 1 damage prevented this way";
+
     }
 
-    private VigorReplacementEffect(final VigorReplacementEffect effect) {
+    private VigorEffect(final VigorEffect effect) {
         super(effect);
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        GameEvent preventEvent = new PreventDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), event.getAmount(), ((DamageEvent) event).isCombatDamage());
-        if (!game.replaceEvent(preventEvent)) {
-            int preventedDamage = event.getAmount();
-            event.setAmount(0);
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null) {
-                permanent.addCounters(CounterType.P1P1.createInstance(preventedDamage), source.getControllerId(), source, game);
-            }
-            game.fireEvent(new PreventedDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), preventedDamage));
-            return true;
-        }
-        return false;
+    public VigorEffect copy() {
+        return new VigorEffect(this);
     }
 
     @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGE_PERMANENT;
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        PreventionEffectData preventionEffectData = preventDamageAction(event, source, game);
+        if (preventionEffectData.getPreventedDamage() > 0) {
+            Permanent permanent = game.getPermanent(event.getTargetId());
+            if (permanent != null) {
+                permanent.addCounters(CounterType.P1P1.createInstance(preventionEffectData.getPreventedDamage()), source.getControllerId(), source, game);
+            }
+            return false;
+        }
+        return false;
     }
 
     @Override
@@ -94,8 +92,4 @@ class VigorReplacementEffect extends ReplacementEffectImpl {
                 && !event.getTargetId().equals(source.getSourceId());
     }
 
-    @Override
-    public VigorReplacementEffect copy() {
-        return new VigorReplacementEffect(this);
-    }
 }
