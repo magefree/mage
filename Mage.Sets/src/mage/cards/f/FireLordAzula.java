@@ -11,6 +11,8 @@ import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.StaticFilters;
+import mage.game.Game;
+import mage.game.events.GameEvent;
 
 import java.util.UUID;
 
@@ -32,10 +34,7 @@ public final class FireLordAzula extends CardImpl {
         this.addAbility(new FirebendingAbility(2));
 
         // Whenever you cast a spell while Fire Lord Azula is attacking, copy that spell. You may choose new targets for the copy.
-        this.addAbility(new SpellCastControllerTriggeredAbility(
-                new CopyStackObjectEffect("that spell"),
-                StaticFilters.FILTER_SPELL_A, false, SetTargetPointer.SPELL
-        ));
+        this.addAbility(new FireLordAzulaAbility());
     }
 
     private FireLordAzula(final FireLordAzula card) {
@@ -46,4 +45,17 @@ public final class FireLordAzula extends CardImpl {
     public FireLordAzula copy() {
         return new FireLordAzula(this);
     }
+}
+
+class FireLordAzulaAbility extends SpellCastControllerTriggeredAbility {
+
+    public FireLordAzulaAbility() {
+        super(new CopyStackObjectEffect("that spell"), StaticFilters.FILTER_SPELL_A, false, SetTargetPointer.SPELL);
+        setTriggerPhrase("Whenever you cast a spell while Fire Lord Azula is attacking, ");
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        return game.getCombat().getAttackers().contains(getSourceId()) && super.checkTrigger(event, game);
+   }
 }
