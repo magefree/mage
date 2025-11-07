@@ -15,8 +15,8 @@ import (
 // Manager manages users
 type Manager interface {
 	Register(ctx context.Context, username, password, email string) error
-	Authenticate(ctx context.Context, username, password string) (*User, error)
-	GetByName(ctx context.Context, username string) (*User, error)
+	Authenticate(ctx context.Context, username, password string) (*repository.User, error)
+	GetByName(ctx context.Context, username string) (*repository.User, error)
 	UserConnect(ctx context.Context, username, sessionID string)
 	UserDisconnect(ctx context.Context, sessionID string)
 	GetConnectedUsers() []string
@@ -80,7 +80,7 @@ func (m *manager) Register(ctx context.Context, username, password, email string
 	}
 
 	// Create user
-	u := &User{
+	u := &repository.User{
 		Name:     username,
 		Password: passwordHash,
 		Email:    email,
@@ -92,7 +92,7 @@ func (m *manager) Register(ctx context.Context, username, password, email string
 	}
 
 	// Create user stats
-	stats := &UserStats{
+	stats := &repository.UserStats{
 		UserName:        username,
 		Rating:          1500.0,
 		RatingDeviation: 350.0,
@@ -113,7 +113,7 @@ func (m *manager) Register(ctx context.Context, username, password, email string
 }
 
 // Authenticate authenticates a user
-func (m *manager) Authenticate(ctx context.Context, username, password string) (*User, error) {
+func (m *manager) Authenticate(ctx context.Context, username, password string) (*repository.User, error) {
 	// Get user from database
 	u, err := m.repo.GetByName(ctx, username)
 	if err != nil {
@@ -139,7 +139,7 @@ func (m *manager) Authenticate(ctx context.Context, username, password string) (
 }
 
 // GetByName retrieves a user by username
-func (m *manager) GetByName(ctx context.Context, username string) (*User, error) {
+func (m *manager) GetByName(ctx context.Context, username string) (*repository.User, error) {
 	return m.repo.GetByName(ctx, username)
 }
 

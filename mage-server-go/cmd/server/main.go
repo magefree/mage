@@ -11,10 +11,15 @@ import (
 	"github.com/magefree/mage-server-go/internal/auth"
 	"github.com/magefree/mage-server-go/internal/chat"
 	"github.com/magefree/mage-server-go/internal/config"
+	"github.com/magefree/mage-server-go/internal/draft"
+	"github.com/magefree/mage-server-go/internal/game"
+	"github.com/magefree/mage-server-go/internal/mail"
 	_ "github.com/magefree/mage-server-go/internal/plugin" // Import to register game types
 	"github.com/magefree/mage-server-go/internal/repository"
 	"github.com/magefree/mage-server-go/internal/room"
 	"github.com/magefree/mage-server-go/internal/session"
+	"github.com/magefree/mage-server-go/internal/table"
+	"github.com/magefree/mage-server-go/internal/tournament"
 	"github.com/magefree/mage-server-go/internal/user"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
@@ -103,17 +108,43 @@ func main() {
 	chatMgr := chat.NewManager(logger)
 	logger.Info("chat manager initialized")
 
-	// TODO: Initialize table manager
-	// tableMgr := table.NewManager(logger)
+	// Initialize table manager
+	tableMgr := table.NewManager(logger)
+	logger.Info("table manager initialized")
 
-	// TODO: Initialize game manager
-	// gameMgr := game.NewManager(logger)
+	// Initialize game manager
+	gameMgr := game.NewManager(logger)
+	logger.Info("game manager initialized")
 
-	// TODO: Initialize tournament manager
-	// tournamentMgr := tournament.NewManager(logger)
+	// Initialize tournament manager
+	tournamentMgr := tournament.NewManager(logger)
+	logger.Info("tournament manager initialized")
 
-	// TODO: Initialize draft manager
-	// draftMgr := draft.NewManager(logger)
+	// Initialize draft manager
+	draftMgr := draft.NewManager(logger)
+	logger.Info("draft manager initialized")
+
+	// Initialize email client
+	mailClient, err := mail.NewClient(cfg.Mail, logger)
+	if err != nil {
+		logger.Warn("failed to initialize email client", zap.Error(err))
+		mailClient = nil
+	} else {
+		logger.Info("email client initialized", zap.String("provider", cfg.Mail.Provider))
+	}
+
+	// Initialize card repository
+	cardRepo := repository.NewCardRepository(db, logger)
+	logger.Info("card repository initialized")
+
+	// Keep references to prevent unused variable errors
+	_ = chatMgr
+	_ = tableMgr
+	_ = gameMgr
+	_ = tournamentMgr
+	_ = draftMgr
+	_ = mailClient
+	_ = cardRepo
 
 	// NOTE: gRPC server initialization requires generated protobuf code
 	// Run 'make proto' to generate the required .pb.go files

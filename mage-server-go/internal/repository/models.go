@@ -1,4 +1,4 @@
-package user
+package repository
 
 import (
 	"time"
@@ -31,23 +31,4 @@ func (u *User) IsChatLocked() bool {
 		return false
 	}
 	return time.Now().Before(*u.ChatLockEndTime)
-}
-
-// UserStats represents user statistics
-type UserStats struct {
-	ID              int64
-	UserName        string
-	Matches         int
-	Tournaments     int
-	TourneysWon     int
-	TourneysSecond  int
-	Wins            int
-	Losses          int
-	Draws           int
-	QuitRatio       float64
-	Rating          float64
-	RatingDeviation float64
-	Volatility      float64
-	CreatedAt       time.Time
-	UpdatedAt       time.Time
 }

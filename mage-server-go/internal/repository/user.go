@@ -5,7 +5,6 @@ import (
 	"fmt"
 
 	"github.com/jackc/pgx/v5"
-	"github.com/magefree/mage-server-go/internal/user"
 )
 
 // UserRepository handles user database operations
@@ -19,7 +18,7 @@ func NewUserRepository(db *DB) *UserRepository {
 }
 
 // Create creates a new user
-func (r *UserRepository) Create(ctx context.Context, u *user.User) error {
+func (r *UserRepository) Create(ctx context.Context, u *User) error {
 	query := `
 		INSERT INTO authorized_users (name, password, email, active)
 		VALUES ($1, $2, $3, $4)
@@ -36,7 +35,7 @@ func (r *UserRepository) Create(ctx context.Context, u *user.User) error {
 }
 
 // GetByName retrieves a user by username
-func (r *UserRepository) GetByName(ctx context.Context, name string) (*user.User, error) {
+func (r *UserRepository) GetByName(ctx context.Context, name string) (*User, error) {
 	query := `
 		SELECT id, name, password, email, active, created_at, updated_at,
 		       lock_end_time, chat_lock_end_time
@@ -44,7 +43,7 @@ func (r *UserRepository) GetByName(ctx context.Context, name string) (*user.User
 		WHERE name = $1
 	`
 
-	u := &user.User{}
+	u := &User{}
 	err := r.db.Pool.QueryRow(ctx, query, name).Scan(
 		&u.ID, &u.Name, &u.Password, &u.Email, &u.Active,
 		&u.CreatedAt, &u.UpdatedAt, &u.LockEndTime, &u.ChatLockEndTime,
@@ -60,7 +59,7 @@ func (r *UserRepository) GetByName(ctx context.Context, name string) (*user.User
 }
 
 // GetByEmail retrieves a user by email
-func (r *UserRepository) GetByEmail(ctx context.Context, email string) (*user.User, error) {
+func (r *UserRepository) GetByEmail(ctx context.Context, email string) (*User, error) {
 	query := `
 		SELECT id, name, password, email, active, created_at, updated_at,
 		       lock_end_time, chat_lock_end_time
@@ -68,7 +67,7 @@ func (r *UserRepository) GetByEmail(ctx context.Context, email string) (*user.Us
 		WHERE email = $1
 	`
 
-	u := &user.User{}
+	u := &User{}
 	err := r.db.Pool.QueryRow(ctx, query, email).Scan(
 		&u.ID, &u.Name, &u.Password, &u.Email, &u.Active,
 		&u.CreatedAt, &u.UpdatedAt, &u.LockEndTime, &u.ChatLockEndTime,
@@ -84,7 +83,7 @@ func (r *UserRepository) GetByEmail(ctx context.Context, email string) (*user.Us
 }
 
 // Update updates a user
-func (r *UserRepository) Update(ctx context.Context, u *user.User) error {
+func (r *UserRepository) Update(ctx context.Context, u *User) error {
 	query := `
 		UPDATE authorized_users
 		SET password = $1, email = $2, active = $3,
@@ -131,7 +130,7 @@ func (r *UserRepository) Exists(ctx context.Context, name string) (bool, error) 
 }
 
 // GetAll retrieves all users
-func (r *UserRepository) GetAll(ctx context.Context) ([]*user.User, error) {
+func (r *UserRepository) GetAll(ctx context.Context) ([]*User, error) {
 	query := `
 		SELECT id, name, password, email, active, created_at, updated_at,
 		       lock_end_time, chat_lock_end_time
@@ -145,9 +144,9 @@ func (r *UserRepository) GetAll(ctx context.Context) ([]*user.User, error) {
 	}
 	defer rows.Close()
 
-	users := make([]*user.User, 0)
+	users := make([]*User, 0)
 	for rows.Next() {
-		u := &user.User{}
+		u := &User{}
 		err := rows.Scan(
 			&u.ID, &u.Name, &u.Password, &u.Email, &u.Active,
 			&u.CreatedAt, &u.UpdatedAt, &u.LockEndTime, &u.ChatLockEndTime,

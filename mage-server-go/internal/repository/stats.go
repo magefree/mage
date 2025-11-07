@@ -3,10 +3,29 @@ package repository
 import (
 	"context"
 	"fmt"
+	"time"
 
 	"github.com/jackc/pgx/v5"
-	"github.com/magefree/mage-server-go/internal/user"
 )
+
+// UserStats represents user statistics
+type UserStats struct {
+	ID              int64
+	UserName        string
+	Matches         int
+	Tournaments     int
+	TourneysWon     int
+	TourneysSecond  int
+	Wins            int
+	Losses          int
+	Draws           int
+	QuitRatio       float64
+	Rating          float64
+	RatingDeviation float64
+	Volatility      float64
+	CreatedAt       time.Time
+	UpdatedAt       time.Time
+}
 
 // StatsRepository handles user statistics database operations
 type StatsRepository struct {
@@ -19,7 +38,7 @@ func NewStatsRepository(db *DB) *StatsRepository {
 }
 
 // Create creates user stats entry
-func (r *StatsRepository) Create(ctx context.Context, stats *user.UserStats) error {
+func (r *StatsRepository) Create(ctx context.Context, stats *UserStats) error {
 	query := `
 		INSERT INTO user_stats (user_name, matches, tournaments, tourneys_won, tourneys_second,
 		                        wins, losses, draws, quit_ratio, rating, rating_deviation, volatility)
@@ -41,7 +60,7 @@ func (r *StatsRepository) Create(ctx context.Context, stats *user.UserStats) err
 }
 
 // GetByUserName retrieves user stats by username
-func (r *StatsRepository) GetByUserName(ctx context.Context, userName string) (*user.UserStats, error) {
+func (r *StatsRepository) GetByUserName(ctx context.Context, userName string) (*UserStats, error) {
 	query := `
 		SELECT id, user_name, matches, tournaments, tourneys_won, tourneys_second,
 		       wins, losses, draws, quit_ratio, rating, rating_deviation, volatility,
@@ -50,7 +69,7 @@ func (r *StatsRepository) GetByUserName(ctx context.Context, userName string) (*
 		WHERE user_name = $1
 	`
 
-	stats := &user.UserStats{}
+	stats := &UserStats{}
 	err := r.db.Pool.QueryRow(ctx, query, userName).Scan(
 		&stats.ID, &stats.UserName, &stats.Matches, &stats.Tournaments,
 		&stats.TourneysWon, &stats.TourneysSecond, &stats.Wins, &stats.Losses, &stats.Draws,
@@ -69,7 +88,7 @@ func (r *StatsRepository) GetByUserName(ctx context.Context, userName string) (*
 }
 
 // Update updates user stats
-func (r *StatsRepository) Update(ctx context.Context, stats *user.UserStats) error {
+func (r *StatsRepository) Update(ctx context.Context, stats *UserStats) error {
 	query := `
 		UPDATE user_stats
 		SET matches = $1, tournaments = $2, tourneys_won = $3, tourneys_second = $4,
@@ -93,7 +112,7 @@ func (r *StatsRepository) Update(ctx context.Context, stats *user.UserStats) err
 }
 
 // GetTopRated retrieves top N users by rating
-func (r *StatsRepository) GetTopRated(ctx context.Context, limit int) ([]*user.UserStats, error) {
+func (r *StatsRepository) GetTopRated(ctx context.Context, limit int) ([]*UserStats, error) {
 	query := `
 		SELECT id, user_name, matches, tournaments, tourneys_won, tourneys_second,
 		       wins, losses, draws, quit_ratio, rating, rating_deviation, volatility,
@@ -109,9 +128,9 @@ func (r *StatsRepository) GetTopRated(ctx context.Context, limit int) ([]*user.U
 	}
 	defer rows.Close()
 
-	statsList := make([]*user.UserStats, 0)
+	statsList := make([]*UserStats, 0)
 	for rows.Next() {
-		stats := &user.UserStats{}
+		stats := &UserStats{}
 		err := rows.Scan(
 			&stats.ID, &stats.UserName, &stats.Matches, &stats.Tournaments,
 			&stats.TourneysWon, &stats.TourneysSecond, &stats.Wins, &stats.Losses, &stats.Draws,

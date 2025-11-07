@@ -2,7 +2,6 @@ package server
 
 import (
 	"context"
-	"fmt"
 	"time"
 
 	"github.com/magefree/mage-server-go/internal/session"
@@ -213,6 +212,6 @@ func ErrorHandler(err error) error {
 		return status.Errorf(codes.PermissionDenied, "permission denied")
 	default:
 		// Generic internal error
-		return status.Errorf(codes.Internal, fmt.Sprintf("internal error: %v", err))
+		return status.Errorf(codes.Internal, "internal error: %v", err)
 	}
 }
