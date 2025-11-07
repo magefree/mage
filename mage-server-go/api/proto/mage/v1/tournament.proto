@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+package mage.v1;
+
+option go_package = "github.com/magefree/mage-server-go/pkg/proto/mage/v1";
+
+import "mage/v1/models.proto";
+
+// Tournament Messages
+
+message TournamentJoinRequest {
+  string session_id = 1;
+  string tournament_id = 2;
+}
+
+message TournamentJoinResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message TournamentStartRequest {
+  string session_id = 1;
+  string room_id = 2;
+  string tournament_id = 3;
+}
+
+message TournamentStartResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message TournamentQuitRequest {
+  string session_id = 1;
+  string tournament_id = 2;
+}
+
+message TournamentQuitResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message TournamentFindByIdRequest {
+  string session_id = 1;
+  string tournament_id = 2;
+}
+
+message TournamentFindByIdResponse {
+  TournamentView tournament = 1;
+}

@@ -1,0 +1,106 @@
+# MAGE Server Configuration Example
+# Copy this file to config.yaml and customize for your deployment
+
+server:
+  name: "mage-server"
+
+  # gRPC server configuration
+  grpc:
+    address: "0.0.0.0:17171"  # Address to bind gRPC server
+    max_concurrent_streams: 1000  # Maximum concurrent gRPC streams
+    max_connection_age: 1h  # Maximum time a connection can be alive
+
+  # WebSocket server configuration (for server-to-client push events)
+  websocket:
+    address: "0.0.0.0:17179"  # Address to bind WebSocket server
+    ping_interval: 30s  # Interval between ping messages
+    pong_timeout: 10s  # Timeout waiting for pong response
+
+  # Session management
+  max_sessions: 10000  # Maximum number of concurrent sessions
+  lease_period: 5s  # Session lease period (clients must ping within this time)
+  max_idle_seconds: 300  # Maximum time a session can be idle before cleanup
+
+  # Game execution
+  max_game_threads: 10  # Maximum concurrent game execution threads
+
+database:
+  host: "localhost"
+  port: 5432
+  database: "mage"
+  user: "mage"
+  password: "changeme"  # Use environment variable in production: ${DB_PASSWORD}
+  sslmode: "disable"  # Use "require" in production
+  max_open_conns: 25  # Maximum number of open connections
+  max_idle_conns: 5  # Maximum number of idle connections
+  conn_max_lifetime: 5m  # Maximum connection lifetime
+
+validation:
+  username:
+    min_length: 3
+    max_length: 14
+    pattern: "^[a-z0-9_]+$"  # Only lowercase letters, numbers, underscores
+  password:
+    min_length: 8
+    max_length: 100
+
+auth:
+  mode: "optional"  # "optional" allows anonymous play, "required" needs registration
+  require_email: false  # Require email for registration
+  password_reset_token_ttl: 1h  # Password reset token expiry
+
+mail:
+  provider: ""  # "smtp" or "mailgun" (leave empty to disable email)
+  smtp:
+    host: "smtp.example.com"
+    port: 587
+    user: "noreply@example.com"
+    password: "changeme"
+    from: "noreply@example.com"
+  mailgun:
+    domain: "mg.example.com"
+    api_key: "key-changeme"
+    from: "noreply@example.com"
+
+logging:
+  level: "info"  # debug, info, warn, error
+  format: "json"  # json or console
+  output: "stdout"
+
+cache:
+  cards:
+    enabled: true  # Enable card caching
+    ttl: 24h  # Cache entry time-to-live
+    max_size: 100000  # Maximum number of cached cards
+
+plugins:
+  # Enabled game types (all compiled into binary)
+  game_types:
+    - TwoPlayerDuel
+    - FreeForAll
+    - CommanderFreeForAll
+    - CommanderDuel
+    - Brawl
+    - BrawlDuel
+    - CanadianHighlander
+    - MomirBasic
+    - Oathbreaker
+    - PennyDreadfulCommander
+    - TinyLeaders
+
+  # Enabled tournament types
+  tournament_types:
+    - Constructed
+    - BoosterDraft
+    - Sealed
+
+  # Enabled player types
+  player_types:
+    - Human
+    - ComputerMAX
+    - ComputerDraft
+
+metrics:
+  enabled: true  # Enable Prometheus metrics
+  port: 9090  # Metrics HTTP server port
+  path: "/metrics"  # Metrics endpoint path

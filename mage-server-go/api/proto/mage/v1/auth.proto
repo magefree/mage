@@ -1,0 +1,121 @@
+syntax = "proto3";
+
+package mage.v1;
+
+option go_package = "github.com/magefree/mage-server-go/pkg/proto/mage/v1";
+
+import "mage/v1/models.proto";
+
+// Authentication and Connection Messages
+
+message ConnectUserRequest {
+  string user_name = 1;
+  string password = 2;
+  string session_id = 3;
+  string client_version = 4;
+  string user_id_str = 5;
+  string restore_session_id = 6;
+}
+
+message ConnectUserResponse {
+  bool success = 1;
+  string error = 2;
+  string session_id = 3;
+  string user_id = 4;
+}
+
+message ConnectAdminRequest {
+  string password = 1;
+  string session_id = 2;
+}
+
+message ConnectAdminResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message ConnectSetUserDataRequest {
+  string session_id = 1;
+  int32 avatar_id = 2;
+  bool show_absolute_abilities = 3;
+  bool allow_requests_from_friends = 4;
+  bool confirm_empty_mana_pool = 5;
+  string user_group = 6;
+  repeated string user_skip_priority_steps = 7;
+  string flags_name = 8;
+  int32 ask_move_to_grave_order = 9;
+}
+
+message ConnectSetUserDataResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message AuthRegisterRequest {
+  string user_name = 1;
+  string password = 2;
+  string email = 3;
+}
+
+message AuthRegisterResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message AuthSendTokenToEmailRequest {
+  string email = 1;
+}
+
+message AuthSendTokenToEmailResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message AuthResetPasswordRequest {
+  string email = 1;
+  string token = 2;
+  string new_password = 3;
+}
+
+message AuthResetPasswordResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message PingRequest {
+  string session_id = 1;
+}
+
+message PingResponse {
+  bool success = 1;
+}
+
+message GetServerStateRequest {
+  string session_id = 1;
+}
+
+message GetServerStateResponse {
+  ServerState server_state = 1;
+}
+
+message ServerGetPromotionMessagesRequest {
+  string session_id = 1;
+}
+
+message ServerGetPromotionMessagesResponse {
+  repeated string messages = 1;
+}
+
+message ServerAddFeedbackMessageRequest {
+  string session_id = 1;
+  string user_name = 2;
+  string title = 3;
+  string message = 4;
+  string feedback_type = 5;
+  string email = 6;
+}
+
+message ServerAddFeedbackMessageResponse {
+  bool success = 1;
+  string error = 2;
+}

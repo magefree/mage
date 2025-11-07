@@ -1,0 +1,211 @@
+syntax = "proto3">
+
+package mage.v1;
+
+option go_package = "github.com/magefree/mage-server-go/pkg/proto/mage/v1";
+
+import "mage/v1/models.proto";
+
+// Game Execution Messages
+
+message GameJoinRequest {
+  string session_id = 1;
+  string game_id = 2;
+}
+
+message GameJoinResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message GameWatchStartRequest {
+  string session_id = 1;
+  string game_id = 2;
+}
+
+message GameWatchStartResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message GameWatchStopRequest {
+  string session_id = 1;
+  string game_id = 2;
+}
+
+message GameWatchStopResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message GameGetViewRequest {
+  string session_id = 1;
+  string game_id = 2;
+  string player_id = 3;
+}
+
+message GameGetViewResponse {
+  GameView game = 1;
+}
+
+message SendPlayerUUIDRequest {
+  string session_id = 1;
+  string game_id = 2;
+  string uuid = 3;
+}
+
+message SendPlayerUUIDResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message SendPlayerStringRequest {
+  string session_id = 1;
+  string game_id = 2;
+  string data = 3;
+}
+
+message SendPlayerStringResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message SendPlayerBooleanRequest {
+  string session_id = 1;
+  string game_id = 2;
+  bool data = 3;
+}
+
+message SendPlayerBooleanResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message SendPlayerIntegerRequest {
+  string session_id = 1;
+  string game_id = 2;
+  int32 data = 3;
+}
+
+message SendPlayerIntegerResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message SendPlayerManaTypeRequest {
+  string session_id = 1;
+  string game_id = 2;
+  string mana_type = 3;
+  string mana_type_str = 4;
+}
+
+message SendPlayerManaTypeResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message SendPlayerActionRequest {
+  string session_id = 1;
+  string game_id = 2;
+  PlayerAction action = 3;
+}
+
+enum PlayerAction {
+  PLAYER_ACTION_UNSPECIFIED = 0;
+  PASS = 1;
+  PASS_TURN = 2;
+  UNDO = 3;
+  CONCEDE = 4;
+  PASS_UNTIL_END_OF_TURN = 5;
+  PASS_UNTIL_NEXT_TURN = 6;
+  PASS_UNTIL_STACK_RESOLVED = 7;
+  PASS_UNTIL_MY_NEXT_TURN = 8;
+}
+
+message SendPlayerActionResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message MatchStartRequest {
+  string session_id = 1;
+  string table_id = 2;
+}
+
+message MatchStartResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message MatchQuitRequest {
+  string session_id = 1;
+  string game_id = 2;
+}
+
+message MatchQuitResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+// Replay Messages
+
+message ReplayInitRequest {
+  string session_id = 1;
+  string game_id = 2;
+}
+
+message ReplayInitResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message ReplayStartRequest {
+  string session_id = 1;
+  string game_id = 2;
+}
+
+message ReplayStartResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message ReplayStopRequest {
+  string session_id = 1;
+  string game_id = 2;
+}
+
+message ReplayStopResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message ReplayNextRequest {
+  string session_id = 1;
+  string game_id = 2;
+}
+
+message ReplayNextResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message ReplayPreviousRequest {
+  string session_id = 1;
+  string game_id = 2;
+}
+
+message ReplayPreviousResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message ReplaySkipForwardRequest {
+  string session_id = 1;
+  string game_id = 2;
+  int32 steps = 3;
+}
+
+message ReplaySkipForwardResponse {
+  bool success = 1;
+  string error = 2;
+}

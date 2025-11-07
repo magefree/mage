@@ -1,0 +1,294 @@
+syntax = "proto3";
+
+package mage.v1;
+
+option go_package = "github.com/magefree/mage-server-go/pkg/proto/mage/v1";
+
+import "google/protobuf/any.proto";
+import "mage/v1/models.proto";
+
+// ServerEvent represents all server-to-client push messages via WebSocket
+// This mirrors Java's ClientCallback system
+message ServerEvent {
+  string session_id = 1;
+  string object_id = 2;  // UUID as string (table, game, tournament, etc.)
+  CallbackMethod method = 3;
+  google.protobuf.Any data = 4;  // Polymorphic payload
+  int32 message_id = 5;
+  bool compressed = 6;
+}
+
+// CallbackMethod enumerates all possible server callbacks
+enum CallbackMethod {
+  CALLBACK_METHOD_UNSPECIFIED = 0;
+
+  // Chat and Messages
+  CHATMESSAGE = 1;
+  SHOW_USERMESSAGE = 2;
+  SERVER_MESSAGE = 3;
+
+  // Table Events
+  JOINED_TABLE = 10;
+  TABLE_WAITING = 11;
+
+  // Tournament Events
+  START_TOURNAMENT = 20;
+  TOURNAMENT_INIT = 21;
+  TOURNAMENT_UPDATE = 22;
+  TOURNAMENT_OVER = 23;
+
+  // Draft and Sideboard Events
+  START_DRAFT = 30;
+  SIDEBOARD = 31;
+  CONSTRUCT = 32;
+  DRAFT_OVER = 33;
+  DRAFT_INIT = 34;
+  DRAFT_PICK = 35;
+  DRAFT_UPDATE = 36;
+
+  // Watch Events
+  SHOW_TOURNAMENT = 40;
+  WATCHGAME = 41;
+
+  // Deck View Events
+  VIEW_LIMITED_DECK = 50;
+  VIEW_SIDEBOARD = 51;
+
+  // User Interaction Events
+  USER_REQUEST_DIALOG = 60;
+  GAME_REDRAW_GUI = 61;
+
+  // Game Events
+  START_GAME = 70;
+  GAME_INIT = 71;
+  GAME_UPDATE_AND_INFORM = 72;
+  GAME_INFORM_PERSONAL = 73;
+  GAME_ERROR = 74;
+  GAME_UPDATE = 75;
+  GAME_TARGET = 76;
+  GAME_CHOOSE_ABILITY = 77;
+  GAME_CHOOSE_PILE = 78;
+  GAME_CHOOSE_CHOICE = 79;
+  GAME_ASK = 80;
+  GAME_SELECT = 81;
+  GAME_PLAY_MANA = 82;
+  GAME_PLAY_XMANA = 83;
+  GAME_GET_AMOUNT = 84;
+  GAME_GET_MULTI_AMOUNT = 85;
+  GAME_OVER = 86;
+  END_GAME_INFO = 87;
+
+  // Replay Events
+  REPLAY_GAME = 90;
+  REPLAY_INIT = 91;
+  REPLAY_UPDATE = 92;
+  REPLAY_DONE = 93;
+}
+
+// Specific callback data payloads
+
+message ChatMessageData {
+  ChatMessage message = 1;
+  string chat_id = 2;
+}
+
+message UserMessageData {
+  string title = 1;
+  string message = 2;
+}
+
+message ServerMessageData {
+  string message = 1;
+  bool is_error = 2;
+}
+
+message JoinedTableData {
+  string table_id = 1;
+  string room_id = 2;
+  bool is_tournament = 3;
+}
+
+message TournamentInitData {
+  TournamentView tournament = 1;
+}
+
+message TournamentUpdateData {
+  TournamentView tournament = 1;
+}
+
+message TournamentOverData {
+  TournamentView tournament = 1;
+}
+
+message StartDraftData {
+  string draft_id = 1;
+}
+
+message DraftInitData {
+  DraftPickView draft_pick = 1;
+}
+
+message DraftPickData {
+  DraftPickView draft_pick = 1;
+}
+
+message DraftUpdateData {
+  DraftPickView draft_pick = 1;
+}
+
+message SideboardData {
+  string deck_name = 1;
+  repeated CardView deck = 2;
+  repeated CardView sideboard = 3;
+  int32 remaining_time = 4;
+}
+
+message ConstructData {
+  string deck_name = 1;
+  repeated CardView cards = 2;
+  int32 remaining_time = 3;
+}
+
+message WatchGameData {
+  string game_id = 1;
+}
+
+message ShowTournamentData {
+  string tournament_id = 1;
+}
+
+message ViewLimitedDeckData {
+  repeated CardView deck = 1;
+  repeated CardView sideboard = 2;
+}
+
+message UserRequestDialogData {
+  string title = 1;
+  string message = 2;
+  repeated string options = 3;
+}
+
+message StartGameData {
+  string game_id = 1;
+  repeated string player_names = 2;
+}
+
+message GameInitData {
+  GameView game = 1;
+}
+
+message GameUpdateData {
+  GameView game = 1;
+}
+
+message GameUpdateAndInformData {
+  GameView game = 1;
+  string message = 2;
+}
+
+message GameInformPersonalData {
+  string message = 1;
+}
+
+message GameErrorData {
+  string error = 1;
+}
+
+message GameTargetData {
+  string message = 1;
+  repeated CardView targets = 2;
+  bool required = 3;
+  map<string, string> options = 4;
+}
+
+message GameChooseAbilityData {
+  string message = 1;
+  repeated AbilityView abilities = 2;
+}
+
+message GameChoosePileData {
+  string message = 1;
+  repeated PileView piles = 2;
+}
+
+message PileView {
+  string name = 1;
+  repeated CardView cards = 2;
+}
+
+message GameChoiceData {
+  string message = 1;
+  repeated string choices = 2;
+}
+
+message GameAskData {
+  string message = 1;
+  bool yes_no = 2;
+}
+
+message GameSelectData {
+  string message = 1;
+  map<string, string> options = 2;
+}
+
+message GamePlayManaData {
+  string message = 1;
+  repeated ManaOption mana_options = 2;
+}
+
+message ManaOption {
+  string color = 1;
+  int32 amount = 2;
+}
+
+message GamePlayXManaData {
+  string message = 1;
+  int32 available = 2;
+}
+
+message GameGetAmountData {
+  string message = 1;
+  int32 min = 2;
+  int32 max = 3;
+}
+
+message GameGetMultiAmountData {
+  string message = 1;
+  repeated AmountRange amounts = 2;
+}
+
+message AmountRange {
+  string label = 1;
+  int32 min = 2;
+  int32 max = 3;
+}
+
+message GameOverData {
+  string winner = 1;
+  repeated PlayerResult results = 2;
+}
+
+message PlayerResult {
+  string player_name = 1;
+  int32 wins = 2;
+  int32 losses = 3;
+  bool quit = 4;
+}
+
+message EndGameInfoData {
+  string game_id = 1;
+  repeated PlayerResult results = 2;
+}
+
+message ReplayInitData {
+  string game_id = 1;
+  GameView game = 2;
+}
+
+message ReplayUpdateData {
+  GameView game = 1;
+}
+
+message ReplayDoneData {
+  string game_id = 1;
+}

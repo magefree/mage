@@ -1,0 +1,318 @@
+syntax = "proto3";
+
+package mage.v1;
+
+option go_package = "github.com/magefree/mage-server-go/pkg/proto/mage/v1";
+
+import "google/protobuf/timestamp.proto";
+
+// Common data models shared across all services
+
+// TableView represents a game table in the lobby
+message TableView {
+  string table_id = 1;
+  string game_type = 2;
+  string table_name = 3;
+  string controller_name = 4;
+  string table_state_text = 5;
+  int32 num_seats = 6;
+  repeated SeatView seats = 7;
+  MatchOptions match_options = 8;
+  google.protobuf.Timestamp create_time = 9;
+  bool is_tournament = 10;
+  string tournament_id = 11;
+  DeckValidator deck_validator = 12;
+  string password = 13;
+  bool spec_tatorship_allowed = 14;
+}
+
+// SeatView represents a player seat at a table
+message SeatView {
+  int32 seat_number = 1;
+  string player_name = 2;
+  string player_type = 3;
+  bool locked = 4;
+}
+
+// MatchOptions defines match configuration
+message MatchOptions {
+  string name = 1;
+  string game_type = 2;
+  string deck_type = 3;
+  bool limited = 4;
+  int32 wins_needed = 5;
+  int32 free_mulligans = 6;
+  MatchTimeLimit time_limit = 7;
+  int32 priority_time = 8;
+  bool rated = 9;
+  repeated string banlist = 10;
+  string skill_level = 11;
+  bool range_of_influence = 12;
+  bool planeChase = 13;
+  bool rollback_turns_allowed = 14;
+  int32 embed_deck_in_saved_game = 15;
+}
+
+// MatchTimeLimit defines time limits for matches
+message MatchTimeLimit {
+  int32 minutes = 1;
+}
+
+// DeckValidator specifies deck validation rules
+message DeckValidator {
+  string name = 1;
+  int32 min_deck_size = 2;
+  int32 max_deck_size = 3;
+  bool singleton = 4;
+  repeated string legal_sets = 5;
+  repeated string banned_cards = 6;
+  repeated string restricted_cards = 7;
+}
+
+// GameView represents the current game state
+message GameView {
+  string game_id = 1;
+  string state = 2;
+  repeated PlayerView players = 3;
+  string active_player_id = 4;
+  string priority_player_id = 5;
+  int32 turn = 6;
+  string phase = 7;
+  string step = 8;
+  repeated GameMessage messages = 9;
+  repeated CardView battlefield = 10;
+  repeated CardView stack = 11;
+  repeated CardView exile = 12;
+  repeated CardView command = 13;
+  repeated RevealedView revealed = 14;
+  repeated LookedAtView looked_at = 15;
+  CombatView combat = 16;
+  bool special = 17;
+  google.protobuf.Timestamp start_time = 18;
+}
+
+// PlayerView represents a player's state
+message PlayerView {
+  string player_id = 1;
+  string name = 2;
+  int32 life = 3;
+  int32 poison = 4;
+  int32 energy = 5;
+  int32 library_count = 6;
+  int32 hand_count = 7;
+  repeated CardView hand = 8;
+  repeated CardView graveyard = 9;
+  ManaPoolView mana_pool = 10;
+  bool has_priority = 11;
+  bool passed = 12;
+  int32 state_ordinal = 13;
+  bool lost = 14;
+  bool left = 15;
+  int32 wins = 16;
+}
+
+// CardView represents a card
+message CardView {
+  string id = 1;
+  string name = 2;
+  string display_name = 3;
+  string mana_cost = 4;
+  string type = 5;
+  string sub_types = 6;
+  string super_types = 7;
+  string color = 8;
+  string power = 9;
+  string toughness = 10;
+  string loyalty = 11;
+  int32 card_number = 12;
+  string expansion_set_code = 13;
+  string rarity = 14;
+  string rules_text = 15;
+  repeated AbilityView abilities = 16;
+  bool tapped = 17;
+  bool flipped = 18;
+  bool transformed = 19;
+  bool face_down = 20;
+  int32 zone = 21;
+  string controller_id = 22;
+  string owner_id = 23;
+  repeated CounterView counters = 24;
+  repeated string attached_to = 25;
+}
+
+// AbilityView represents a card ability
+message AbilityView {
+  string id = 1;
+  string text = 2;
+  string rule = 3;
+}
+
+// CounterView represents a counter on a card
+message CounterView {
+  string name = 1;
+  int32 count = 2;
+}
+
+// ManaPoolView represents a player's mana pool
+message ManaPoolView {
+  int32 white = 1;
+  int32 blue = 2;
+  int32 black = 3;
+  int32 red = 4;
+  int32 green = 5;
+  int32 colorless = 6;
+}
+
+// GameMessage represents a message in the game log
+message GameMessage {
+  int32 id = 1;
+  string text = 2;
+  string color = 3;
+  google.protobuf.Timestamp time = 4;
+}
+
+// CombatView represents combat state
+message CombatView {
+  string attacking_player_id = 1;
+  repeated CombatGroupView groups = 2;
+}
+
+// CombatGroupView represents a combat group
+message CombatGroupView {
+  repeated string attackers = 1;
+  repeated string blockers = 2;
+  string defending_player_id = 3;
+}
+
+// RevealedView represents revealed cards
+message RevealedView {
+  string name = 1;
+  repeated CardView cards = 2;
+}
+
+// LookedAtView represents looked at cards
+message LookedAtView {
+  string name = 1;
+  repeated CardView cards = 2;
+}
+
+// TournamentView represents a tournament
+message TournamentView {
+  string tournament_id = 1;
+  string tournament_name = 2;
+  string tournament_type = 3;
+  string state = 4;
+  int32 num_players = 5;
+  int32 num_rounds = 6;
+  int32 current_round = 7;
+  repeated TournamentPlayerView players = 8;
+  repeated RoundView rounds = 9;
+  google.protobuf.Timestamp start_time = 10;
+  google.protobuf.Timestamp end_time = 11;
+}
+
+// TournamentPlayerView represents a tournament participant
+message TournamentPlayerView {
+  string player_name = 1;
+  int32 points = 2;
+  int32 wins = 3;
+  int32 losses = 4;
+  int32 draws = 5;
+  bool eliminated = 6;
+  bool quit = 7;
+  string state = 8;
+}
+
+// RoundView represents a tournament round
+message RoundView {
+  int32 round_number = 1;
+  repeated PairingView pairings = 2;
+  string state = 3;
+}
+
+// PairingView represents a match pairing
+message PairingView {
+  string player1 = 1;
+  string player2 = 2;
+  string table_id = 3;
+  int32 player1_wins = 4;
+  int32 player2_wins = 5;
+}
+
+// DraftPickView represents a draft pick state
+message DraftPickView {
+  string draft_id = 1;
+  repeated CardView booster = 2;
+  repeated CardView picks = 3;
+  int32 pick_number = 4;
+  int32 booster_number = 5;
+  string message = 6;
+}
+
+// UserView represents user information
+message UserView {
+  string user_name = 1;
+  string state = 2;
+  string match_history = 3;
+  string tournament_history = 4;
+  UserStatsView stats = 5;
+  google.protobuf.Timestamp connected_at = 6;
+  bool admin = 7;
+}
+
+// UserStatsView represents user statistics
+message UserStatsView {
+  int32 matches = 1;
+  int32 tournaments = 2;
+  int32 wins = 3;
+  int32 losses = 4;
+  double rating = 5;
+  int32 tourneys_won = 6;
+  int32 tourneys_second = 7;
+  double quit_ratio = 8;
+}
+
+// ChatMessage represents a chat message
+message ChatMessage {
+  string user_name = 1;
+  string message = 2;
+  google.protobuf.Timestamp time = 3;
+  MessageColor color = 4;
+  MessageType message_type = 5;
+}
+
+enum MessageColor {
+  MESSAGE_COLOR_UNSPECIFIED = 0;
+  BLACK = 1;
+  GREEN = 2;
+  ORANGE = 3;
+  BLUE = 4;
+  RED = 5;
+  YELLOW = 6;
+}
+
+enum MessageType {
+  MESSAGE_TYPE_UNSPECIFIED = 0;
+  TALK = 1;
+  WHISPER = 2;
+  STATUS = 3;
+  USER_INFO = 4;
+}
+
+// ServerState represents server information
+message ServerState {
+  int32 active_players = 1;
+  int32 active_games = 2;
+  int32 active_tournaments = 3;
+  int32 active_tables = 4;
+  int32 number_of_threads = 5;
+  string server_version = 6;
+  google.protobuf.Timestamp server_time = 7;
+}
+
+// MatchQueueView represents a match queue entry
+message MatchQueueView {
+  string match_name = 1;
+  MatchOptions match_options = 2;
+  int32 players_waiting = 3;
+}

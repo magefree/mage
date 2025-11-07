@@ -1,0 +1,76 @@
+syntax = "proto3";
+
+package mage.v1;
+
+option go_package = "github.com/magefree/mage-server-go/pkg/proto/mage/v1";
+
+import "mage/v1/models.proto";
+
+// Chat Messages
+
+message ChatJoinRequest {
+  string session_id = 1;
+  string chat_id = 2;
+}
+
+message ChatJoinResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message ChatLeaveRequest {
+  string session_id = 1;
+  string chat_id = 2;
+}
+
+message ChatLeaveResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message ChatSendMessageRequest {
+  string session_id = 1;
+  string chat_id = 2;
+  string message = 3;
+}
+
+message ChatSendMessageResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message ChatFindByTableRequest {
+  string session_id = 1;
+  string table_id = 2;
+}
+
+message ChatFindByTableResponse {
+  string chat_id = 1;
+}
+
+message ChatFindByGameRequest {
+  string session_id = 1;
+  string game_id = 2;
+}
+
+message ChatFindByGameResponse {
+  string chat_id = 1;
+}
+
+message ChatFindByTournamentRequest {
+  string session_id = 1;
+  string tournament_id = 2;
+}
+
+message ChatFindByTournamentResponse {
+  string chat_id = 1;
+}
+
+message ChatFindByRoomRequest {
+  string session_id = 1;
+  string room_id = 2;
+}
+
+message ChatFindByRoomResponse {
+  string chat_id = 1;
+}

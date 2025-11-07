@@ -1,0 +1,33 @@
+# Development Configuration Overrides
+# Use this configuration for local development
+
+server:
+  max_sessions: 100
+  max_game_threads: 5
+
+database:
+  host: "localhost"
+  port: 5432
+  database: "mage_dev"
+  user: "mage"
+  password: "mage"
+  sslmode: "disable"
+
+auth:
+  mode: "optional"
+  require_email: false
+
+mail:
+  provider: ""  # Disable email in development
+
+logging:
+  level: "debug"
+  format: "console"
+
+cache:
+  cards:
+    max_size: 10000
+
+metrics:
+  enabled: true
+  port: 9090

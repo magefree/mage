@@ -1,0 +1,250 @@
+syntax = "proto3";
+
+package mage.v1;
+
+option go_package = "github.com/magefree/mage-server-go/pkg/proto/mage/v1";
+
+import "mage/v1/auth.proto";
+import "mage/v1/room.proto";
+import "mage/v1/table.proto";
+import "mage/v1/game.proto";
+import "mage/v1/tournament.proto";
+import "mage/v1/draft.proto";
+import "mage/v1/chat.proto";
+import "mage/v1/admin.proto";
+
+// MageServer is the main gRPC service for MAGE
+// Maps all 60+ RPC methods from the Java MageServer interface
+service MageServer {
+  // ==================== Authentication & Connection (6 methods) ====================
+
+  // Register a new user account
+  rpc AuthRegister(AuthRegisterRequest) returns (AuthRegisterResponse);
+
+  // Send password reset token to email
+  rpc AuthSendTokenToEmail(AuthSendTokenToEmailRequest) returns (AuthSendTokenToEmailResponse);
+
+  // Reset password using token
+  rpc AuthResetPassword(AuthResetPasswordRequest) returns (AuthResetPasswordResponse);
+
+  // Connect a user to the server
+  rpc ConnectUser(ConnectUserRequest) returns (ConnectUserResponse);
+
+  // Connect an admin user
+  rpc ConnectAdmin(ConnectAdminRequest) returns (ConnectAdminResponse);
+
+  // Set user preferences and data
+  rpc ConnectSetUserData(ConnectSetUserDataRequest) returns (ConnectSetUserDataResponse);
+
+  // Ping to keep session alive (lease renewal)
+  rpc Ping(PingRequest) returns (PingResponse);
+
+  // ==================== Server Info (3 methods) ====================
+
+  // Get server state (active games, users, etc.)
+  rpc GetServerState(GetServerStateRequest) returns (GetServerStateResponse);
+
+  // Get server promotion messages
+  rpc ServerGetPromotionMessages(ServerGetPromotionMessagesRequest) returns (ServerGetPromotionMessagesResponse);
+
+  // Submit feedback message
+  rpc ServerAddFeedbackMessage(ServerAddFeedbackMessageRequest) returns (ServerAddFeedbackMessageResponse);
+
+  // ==================== Room/Lobby (5 methods) ====================
+
+  // Get main room/lobby ID
+  rpc ServerGetMainRoomId(ServerGetMainRoomIdRequest) returns (ServerGetMainRoomIdResponse);
+
+  // Get users in a room
+  rpc RoomGetUsers(RoomGetUsersRequest) returns (RoomGetUsersResponse);
+
+  // Get finished matches in a room
+  rpc RoomGetFinishedMatches(RoomGetFinishedMatchesRequest) returns (RoomGetFinishedMatchesResponse);
+
+  // Get all tables in a room
+  rpc RoomGetAllTables(RoomGetAllTablesRequest) returns (RoomGetAllTablesResponse);
+
+  // Get specific table by ID
+  rpc RoomGetTableById(RoomGetTableByIdRequest) returns (RoomGetTableByIdResponse);
+
+  // ==================== Table Management (10 methods) ====================
+
+  // Create a new game table
+  rpc RoomCreateTable(RoomCreateTableRequest) returns (RoomCreateTableResponse);
+
+  // Create a new tournament
+  rpc RoomCreateTournament(RoomCreateTournamentRequest) returns (RoomCreateTournamentResponse);
+
+  // Join a table
+  rpc RoomJoinTable(RoomJoinTableRequest) returns (RoomJoinTableResponse);
+
+  // Join a tournament
+  rpc RoomJoinTournament(RoomJoinTournamentRequest) returns (RoomJoinTournamentResponse);
+
+  // Leave a table or tournament
+  rpc RoomLeaveTableOrTournament(RoomLeaveTableOrTournamentRequest) returns (RoomLeaveTableOrTournamentResponse);
+
+  // Watch a table
+  rpc RoomWatchTable(RoomWatchTableRequest) returns (RoomWatchTableResponse);
+
+  // Watch a tournament
+  rpc RoomWatchTournament(RoomWatchTournamentRequest) returns (RoomWatchTournamentResponse);
+
+  // Swap seats at a table
+  rpc TableSwapSeats(TableSwapSeatsRequest) returns (TableSwapSeatsResponse);
+
+  // Remove a table
+  rpc TableRemove(TableRemoveRequest) returns (TableRemoveResponse);
+
+  // Check if user is table owner
+  rpc TableIsOwner(TableIsOwnerRequest) returns (TableIsOwnerResponse);
+
+  // ==================== Deck Management (2 methods) ====================
+
+  // Submit deck for a table/tournament
+  rpc DeckSubmit(DeckSubmitRequest) returns (DeckSubmitResponse);
+
+  // Save deck to database
+  rpc DeckSave(DeckSaveRequest) returns (DeckSaveResponse);
+
+  // ==================== Game Execution (12 methods) ====================
+
+  // Join a game as a player
+  rpc GameJoin(GameJoinRequest) returns (GameJoinResponse);
+
+  // Start watching a game
+  rpc GameWatchStart(GameWatchStartRequest) returns (GameWatchStartResponse);
+
+  // Stop watching a game
+  rpc GameWatchStop(GameWatchStopRequest) returns (GameWatchStopResponse);
+
+  // Get current game view
+  rpc GameGetView(GameGetViewRequest) returns (GameGetViewResponse);
+
+  // Send UUID selection (card/permanent/spell)
+  rpc SendPlayerUUID(SendPlayerUUIDRequest) returns (SendPlayerUUIDResponse);
+
+  // Send string data
+  rpc SendPlayerString(SendPlayerStringRequest) returns (SendPlayerStringResponse);
+
+  // Send boolean choice
+  rpc SendPlayerBoolean(SendPlayerBooleanRequest) returns (SendPlayerBooleanResponse);
+
+  // Send integer value
+  rpc SendPlayerInteger(SendPlayerIntegerRequest) returns (SendPlayerIntegerResponse);
+
+  // Send mana type selection
+  rpc SendPlayerManaType(SendPlayerManaTypeRequest) returns (SendPlayerManaTypeResponse);
+
+  // Send player action (pass, undo, concede, etc.)
+  rpc SendPlayerAction(SendPlayerActionRequest) returns (SendPlayerActionResponse);
+
+  // Start a match
+  rpc MatchStart(MatchStartRequest) returns (MatchStartResponse);
+
+  // Quit a match
+  rpc MatchQuit(MatchQuitRequest) returns (MatchQuitResponse);
+
+  // ==================== Draft (6 methods) ====================
+
+  // Join a draft
+  rpc DraftJoin(DraftJoinRequest) returns (DraftJoinResponse);
+
+  // Pick a card from booster
+  rpc SendDraftCardPick(SendDraftCardPickRequest) returns (SendDraftCardPickResponse);
+
+  // Mark a card (for tracking)
+  rpc SendDraftCardMark(SendDraftCardMarkRequest) returns (SendDraftCardMarkResponse);
+
+  // Notify booster is loaded
+  rpc DraftSetBoosterLoaded(DraftSetBoosterLoadedRequest) returns (DraftSetBoosterLoadedResponse);
+
+  // Quit a draft
+  rpc DraftQuit(DraftQuitRequest) returns (DraftQuitResponse);
+
+  // ==================== Tournament (4 methods) ====================
+
+  // Join a tournament
+  rpc TournamentJoin(TournamentJoinRequest) returns (TournamentJoinResponse);
+
+  // Start a tournament (owner only)
+  rpc TournamentStart(TournamentStartRequest) returns (TournamentStartResponse);
+
+  // Quit a tournament
+  rpc TournamentQuit(TournamentQuitRequest) returns (TournamentQuitResponse);
+
+  // Find tournament by ID
+  rpc TournamentFindById(TournamentFindByIdRequest) returns (TournamentFindByIdResponse);
+
+  // ==================== Chat (7 methods) ====================
+
+  // Join a chat room
+  rpc ChatJoin(ChatJoinRequest) returns (ChatJoinResponse);
+
+  // Leave a chat room
+  rpc ChatLeave(ChatLeaveRequest) returns (ChatLeaveResponse);
+
+  // Send chat message
+  rpc ChatSendMessage(ChatSendMessageRequest) returns (ChatSendMessageResponse);
+
+  // Find chat by table
+  rpc ChatFindByTable(ChatFindByTableRequest) returns (ChatFindByTableResponse);
+
+  // Find chat by game
+  rpc ChatFindByGame(ChatFindByGameRequest) returns (ChatFindByGameResponse);
+
+  // Find chat by tournament
+  rpc ChatFindByTournament(ChatFindByTournamentRequest) returns (ChatFindByTournamentResponse);
+
+  // Find chat by room
+  rpc ChatFindByRoom(ChatFindByRoomRequest) returns (ChatFindByRoomResponse);
+
+  // ==================== Replay (6 methods) ====================
+
+  // Initialize replay
+  rpc ReplayInit(ReplayInitRequest) returns (ReplayInitResponse);
+
+  // Start replay playback
+  rpc ReplayStart(ReplayStartRequest) returns (ReplayStartResponse);
+
+  // Stop replay playback
+  rpc ReplayStop(ReplayStopRequest) returns (ReplayStopResponse);
+
+  // Move to next replay step
+  rpc ReplayNext(ReplayNextRequest) returns (ReplayNextResponse);
+
+  // Move to previous replay step
+  rpc ReplayPrevious(ReplayPreviousRequest) returns (ReplayPreviousResponse);
+
+  // Skip forward N steps
+  rpc ReplaySkipForward(ReplaySkipForwardRequest) returns (ReplaySkipForwardResponse);
+
+  // ==================== Admin (9 methods) ====================
+
+  // Get all users (admin only)
+  rpc AdminGetUsers(AdminGetUsersRequest) returns (AdminGetUsersResponse);
+
+  // Disconnect a user
+  rpc AdminDisconnectUser(AdminDisconnectUserRequest) returns (AdminDisconnectUserResponse);
+
+  // Mute a user
+  rpc AdminMuteUser(AdminMuteUserRequest) returns (AdminMuteUserResponse);
+
+  // Lock a user account
+  rpc AdminLockUser(AdminLockUserRequest) returns (AdminLockUserResponse);
+
+  // Activate a user account
+  rpc AdminActivateUser(AdminActivateUserRequest) returns (AdminActivateUserResponse);
+
+  // Toggle user activation status
+  rpc AdminToggleActivateUser(AdminToggleActivateUserRequest) returns (AdminToggleActivateUserResponse);
+
+  // End a user session
+  rpc AdminEndUserSession(AdminEndUserSessionRequest) returns (AdminEndUserSessionResponse);
+
+  // Remove a table (admin only)
+  rpc AdminTableRemove(AdminTableRemoveRequest) returns (AdminTableRemoveResponse);
+
+  // Send broadcast message to all users
+  rpc AdminSendBroadcastMessage(AdminSendBroadcastMessageRequest) returns (AdminSendBroadcastMessageResponse);
+}

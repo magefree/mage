@@ -1,0 +1,65 @@
+syntax = "proto3";
+
+package mage.v1;
+
+option go_package = "github.com/magefree/mage-server-go/pkg/proto/mage/v1";
+
+import "mage/v1/models.proto";
+
+// Room and Lobby Messages
+
+message ServerGetMainRoomIdRequest {
+  string session_id = 1;
+}
+
+message ServerGetMainRoomIdResponse {
+  string room_id = 1;
+}
+
+message RoomGetUsersRequest {
+  string session_id = 1;
+  string room_id = 2;
+}
+
+message RoomGetUsersResponse {
+  repeated UserView users = 1;
+}
+
+message RoomGetFinishedMatchesRequest {
+  string session_id = 1;
+  string room_id = 2;
+}
+
+message RoomGetFinishedMatchesResponse {
+  repeated MatchView finished_matches = 1;
+}
+
+message MatchView {
+  string game_type = 1;
+  string deck_type = 2;
+  repeated string players = 3;
+  string winner = 4;
+  int32 duration_minutes = 5;
+  google.protobuf.Timestamp end_time = 6;
+  bool is_tournament = 7;
+  string table_name = 8;
+}
+
+message RoomGetAllTablesRequest {
+  string session_id = 1;
+  string room_id = 2;
+}
+
+message RoomGetAllTablesResponse {
+  repeated TableView tables = 1;
+}
+
+message RoomGetTableByIdRequest {
+  string session_id = 1;
+  string room_id = 2;
+  string table_id = 3;
+}
+
+message RoomGetTableByIdResponse {
+  TableView table = 1;
+}

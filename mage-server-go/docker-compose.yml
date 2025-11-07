@@ -1,0 +1,100 @@
+version: '3.8'
+
+services:
+  # PostgreSQL database
+  postgres:
+    image: postgres:15-alpine
+    container_name: mage-postgres
+    environment:
+      POSTGRES_DB: mage
+      POSTGRES_USER: mage
+      POSTGRES_PASSWORD: mage
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./migrations:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mage"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - mage-network
+
+  # MAGE Go server
+  mage-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mage-server
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      # Override config via environment variables
+      DB_PASSWORD: mage
+    ports:
+      - "17171:17171"  # gRPC
+      - "17179:17179"  # WebSocket
+      - "9090:9090"    # Metrics
+    volumes:
+      - ./config/config.yaml:/app/config/config.yaml:ro
+    networks:
+      - mage-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:9090/metrics"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # Prometheus (optional - for metrics collection)
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: mage-prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    ports:
+      - "9091:9090"
+    networks:
+      - mage-network
+    profiles:
+      - monitoring
+
+  # Grafana (optional - for metrics visualization)
+  grafana:
+    image: grafana/grafana:latest
+    container_name: mage-grafana
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: admin
+      GF_USERS_ALLOW_SIGN_UP: false
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./monitoring/grafana/dashboards:/etc/grafana/provisioning/dashboards:ro
+      - ./monitoring/grafana/datasources:/etc/grafana/provisioning/datasources:ro
+    ports:
+      - "3000:3000"
+    networks:
+      - mage-network
+    profiles:
+      - monitoring
+
+volumes:
+  postgres-data:
+    driver: local
+  prometheus-data:
+    driver: local
+  grafana-data:
+    driver: local
+
+networks:
+  mage-network:
+    driver: bridge

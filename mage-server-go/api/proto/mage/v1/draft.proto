@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package mage.v1;
+
+option go_package = "github.com/magefree/mage-server-go/pkg/proto/mage/v1";
+
+import "mage/v1/models.proto";
+
+// Draft Messages
+
+message DraftJoinRequest {
+  string session_id = 1;
+  string draft_id = 2;
+}
+
+message DraftJoinResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message SendDraftCardPickRequest {
+  string session_id = 1;
+  string draft_id = 2;
+  string card_id = 3;
+  repeated string hidden_cards = 4;
+}
+
+message SendDraftCardPickResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message SendDraftCardMarkRequest {
+  string session_id = 1;
+  string draft_id = 2;
+  string card_id = 3;
+}
+
+message SendDraftCardMarkResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message DraftSetBoosterLoadedRequest {
+  string session_id = 1;
+  string draft_id = 2;
+}
+
+message DraftSetBoosterLoadedResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message DraftQuitRequest {
+  string session_id = 1;
+  string draft_id = 2;
+}
+
+message DraftQuitResponse {
+  bool success = 1;
+  string error = 2;
+}

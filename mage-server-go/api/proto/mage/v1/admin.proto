@@ -1,0 +1,100 @@
+syntax = "proto3";
+
+package mage.v1;
+
+option go_package = "github.com/magefree/mage-server-go/pkg/proto/mage/v1";
+
+import "mage/v1/models.proto";
+
+// Admin Messages
+
+message AdminGetUsersRequest {
+  string session_id = 1;
+}
+
+message AdminGetUsersResponse {
+  repeated UserView users = 1;
+}
+
+message AdminDisconnectUserRequest {
+  string session_id = 1;
+  string user_name = 2;
+}
+
+message AdminDisconnectUserResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message AdminMuteUserRequest {
+  string session_id = 1;
+  string user_name = 2;
+  int64 duration_minutes = 3;
+}
+
+message AdminMuteUserResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message AdminLockUserRequest {
+  string session_id = 1;
+  string user_name = 2;
+  int64 duration_minutes = 3;
+  string reason = 4;
+}
+
+message AdminLockUserResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message AdminActivateUserRequest {
+  string session_id = 1;
+  string user_name = 2;
+}
+
+message AdminActivateUserResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message AdminToggleActivateUserRequest {
+  string session_id = 1;
+  string user_name = 2;
+}
+
+message AdminToggleActivateUserResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message AdminEndUserSessionRequest {
+  string session_id = 1;
+  string user_name = 2;
+}
+
+message AdminEndUserSessionResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message AdminTableRemoveRequest {
+  string session_id = 1;
+  string table_id = 2;
+}
+
+message AdminTableRemoveResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message AdminSendBroadcastMessageRequest {
+  string session_id = 1;
+  string message = 2;
+}
+
+message AdminSendBroadcastMessageResponse {
+  bool success = 1;
+  string error = 2;
+}

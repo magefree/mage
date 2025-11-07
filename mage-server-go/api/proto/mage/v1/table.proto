@@ -1,0 +1,174 @@
+syntax = "proto3";
+
+package mage.v1;
+
+option go_package = "github.com/magefree/mage-server-go/pkg/proto/mage/v1";
+
+import "mage/v1/models.proto";
+
+// Table Management Messages
+
+message RoomCreateTableRequest {
+  string session_id = 1;
+  string room_id = 2;
+  MatchOptions match_options = 3;
+}
+
+message RoomCreateTableResponse {
+  bool success = 1;
+  string error = 2;
+  string table_id = 3;
+}
+
+message RoomCreateTournamentRequest {
+  string session_id = 1;
+  string room_id = 2;
+  TournamentOptions tournament_options = 3;
+}
+
+message TournamentOptions {
+  string name = 1;
+  string tournament_type = 2;
+  int32 num_wins = 3;
+  int32 constructed_deck_size = 4;
+  int32 draft_cube_id = 5;
+  int32 limited_packs = 6;
+  int32 num_rounds = 7;
+  int32 free_mulligans = 8;
+  string draft_timing = 9;
+  bool rated = 10;
+  int32 quit_ratio = 11;
+  int32 minimum_rating = 12;
+  repeated string sets = 13;
+}
+
+message RoomCreateTournamentResponse {
+  bool success = 1;
+  string error = 2;
+  string tournament_id = 3;
+}
+
+message RoomJoinTableRequest {
+  string session_id = 1;
+  string room_id = 2;
+  string table_id = 3;
+  string player_name = 4;
+  string player_type = 5;
+  int32 skill_level = 6;
+  string deck_list = 7;
+  string password = 8;
+}
+
+message RoomJoinTableResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message RoomJoinTournamentRequest {
+  string session_id = 1;
+  string room_id = 2;
+  string tournament_id = 3;
+  string player_name = 4;
+  string player_type = 5;
+  int32 skill_level = 6;
+  string deck_list = 7;
+}
+
+message RoomJoinTournamentResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message RoomLeaveTableOrTournamentRequest {
+  string session_id = 1;
+  string room_id = 2;
+  string table_id = 3;
+}
+
+message RoomLeaveTableOrTournamentResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message RoomWatchTableRequest {
+  string session_id = 1;
+  string room_id = 2;
+  string table_id = 3;
+}
+
+message RoomWatchTableResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message RoomWatchTournamentRequest {
+  string session_id = 1;
+  string room_id = 2;
+  string tournament_id = 3;
+}
+
+message RoomWatchTournamentResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message TableSwapSeatsRequest {
+  string session_id = 1;
+  string room_id = 2;
+  string table_id = 3;
+  int32 seat_num1 = 4;
+  int32 seat_num2 = 5;
+}
+
+message TableSwapSeatsResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message TableRemoveRequest {
+  string session_id = 1;
+  string room_id = 2;
+  string table_id = 3;
+}
+
+message TableRemoveResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message TableIsOwnerRequest {
+  string session_id = 1;
+  string room_id = 2;
+  string table_id = 3;
+}
+
+message TableIsOwnerResponse {
+  bool is_owner = 1;
+}
+
+message DeckSubmitRequest {
+  string session_id = 1;
+  string table_id = 2;
+  DeckCardLists deck = 3;
+}
+
+message DeckCardLists {
+  repeated string main_deck = 1;
+  repeated string sideboard = 2;
+}
+
+message DeckSubmitResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message DeckSaveRequest {
+  string session_id = 1;
+  string deck_name = 2;
+  DeckCardLists deck = 3;
+}
+
+message DeckSaveResponse {
+  bool success = 1;
+  string error = 2;
+}
