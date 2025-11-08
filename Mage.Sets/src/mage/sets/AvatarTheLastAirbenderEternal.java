@@ -115,6 +115,7 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Inspiring Call", 168, Rarity.UNCOMMON, mage.cards.i.InspiringCall.class));
         cards.add(new SetCardInfo("Insurrection", 31, Rarity.MYTHIC, mage.cards.i.Insurrection.class));
         cards.add(new SetCardInfo("Intruder Alarm", 15, Rarity.MYTHIC, mage.cards.i.IntruderAlarm.class));
+        cards.add(new SetCardInfo("Iroh, Dragon of the West", 119, Rarity.RARE, mage.cards.i.IrohDragonOfTheWest.class));
         cards.add(new SetCardInfo("Iroh, Firebending Instructor", 240, Rarity.UNCOMMON, mage.cards.i.IrohFirebendingInstructor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Iroh, Firebending Instructor", 282, Rarity.UNCOMMON, mage.cards.i.IrohFirebendingInstructor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Katara, Heroic Healer", 215, Rarity.UNCOMMON, mage.cards.k.KataraHeroicHealer.class, NON_FULL_USE_VARIOUS));
