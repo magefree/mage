@@ -33,6 +33,8 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("Aang, Master of Elements", 363, Rarity.MYTHIC, mage.cards.a.AangMasterOfElements.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aang, the Last Airbender", 4, Rarity.UNCOMMON, mage.cards.a.AangTheLastAirbender.class));
         cards.add(new SetCardInfo("Abandon Attachments", 205, Rarity.COMMON, mage.cards.a.AbandonAttachments.class));
+        cards.add(new SetCardInfo("Abandoned Air Temple", 263, Rarity.RARE, mage.cards.a.AbandonedAirTemple.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Abandoned Air Temple", 386, Rarity.RARE, mage.cards.a.AbandonedAirTemple.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Airbender Ascension", 364, Rarity.RARE, mage.cards.a.AirbenderAscension.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Airbender Ascension", 6, Rarity.RARE, mage.cards.a.AirbenderAscension.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Airbender's Reversal", 7, Rarity.UNCOMMON, mage.cards.a.AirbendersReversal.class));
