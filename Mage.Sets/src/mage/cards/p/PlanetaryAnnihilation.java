@@ -66,6 +66,7 @@ class PlanetaryAnnihilationEffect extends OneShotEffect {
             if (player == null || game.getBattlefield().count(
                     StaticFilters.FILTER_CONTROLLED_PERMANENT_LANDS, playerId, source, game
             ) <= 6) {
+                toSave.addAll(game.getBattlefield().getActivePermanents(StaticFilters.FILTER_CONTROLLED_PERMANENT_LANDS, playerId, game));
                 continue;
             }
             TargetPermanent target = new TargetPermanent(
