@@ -217,6 +217,7 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Zuko's Offense", 288, Rarity.COMMON, mage.cards.z.ZukosOffense.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Zuko, Avatar Hunter", 246, Rarity.RARE, mage.cards.z.ZukoAvatarHunter.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Zuko, Avatar Hunter", 287, Rarity.RARE, mage.cards.z.ZukoAvatarHunter.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Zuko, Firebending Master", 127, Rarity.MYTHIC, mage.cards.z.ZukoFirebendingMaster.class));
 
         cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName()));
     }
