@@ -121,20 +121,22 @@ class HurkylMasterWizardTarget extends TargetCardInLibrary {
     }
 
     @Override
-    public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
-        if (!super.canTarget(playerId, id, source, game)) {
-            return false;
-        }
-        Card card = game.getCard(id);
-        if (card == null) {
-            return false;
-        }
-        if (this.getTargets().isEmpty()) {
-            return true;
-        }
-        Cards cards = new CardsImpl(this.getTargets());
-        cards.add(card);
-        return cardTypeAssigner.getRoleCount(cards, game) >= cards.size();
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
+        Set<UUID> possibleTargets = super.possibleTargets(sourceControllerId, source, game);
+
+        // only valid roles
+        Cards existingTargets = new CardsImpl(this.getTargets());
+        possibleTargets.removeIf(id -> {
+            Card card = game.getCard(id);
+            if (card == null) {
+                return true;
+            }
+            Cards newTargets = existingTargets.copy();
+            newTargets.add(card);
+            return cardTypeAssigner.hasSharedRoles(newTargets, game);
+        });
+
+        return possibleTargets;
     }
 }
 

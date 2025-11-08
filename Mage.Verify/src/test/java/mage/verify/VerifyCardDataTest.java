@@ -1945,7 +1945,7 @@ public class VerifyCardDataTest {
 
     // "copy" fails means that the copy constructor are not correct inside a card.
     // To fix those, try to find the class that did trigger the copy failure, and check
-    // that copy() exists, a copy constructor exists, and the copy constructor is right.
+    // that copy() exists, a copy constructor exists, and the copy constructor is right. 
     private void checkCardCanBeCopied(Card card1) {
         Card card2;
         try {

@@ -59,6 +59,13 @@ public abstract class RoleAssignment<T> implements Serializable {
         return getRoleCount(cards.getCards(game), game);
     }
 
+    /**
+     * 2+ targets shared same role, e.g. two cards with same card type - use it to filter possible targets
+     */
+    public boolean hasSharedRoles(Cards cards, Game game) {
+        return getRoleCount(cards.getCards(game), game) < cards.size();
+    }
+
     public int getRoleCount(Set<? extends Card> cards, Game game) {
         Map<UUID, Set<T>> attributeMap = new HashMap<>();
         cards.forEach(card -> attributeMap.put(card.getId(), this.makeSet(card, game)));
