@@ -293,6 +293,7 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("Wandering Musicians", 250, Rarity.COMMON, mage.cards.w.WanderingMusicians.class));
         cards.add(new SetCardInfo("War Balloon", 159, Rarity.UNCOMMON, mage.cards.w.WarBalloon.class));
         cards.add(new SetCardInfo("Water Tribe Captain", 41, Rarity.COMMON, mage.cards.w.WaterTribeCaptain.class));
+        cards.add(new SetCardInfo("Water Tribe Rallier", 42, Rarity.UNCOMMON, mage.cards.w.WaterTribeRallier.class));
         cards.add(new SetCardInfo("Waterbending Lesson", 80, Rarity.COMMON, mage.cards.w.WaterbendingLesson.class));
         cards.add(new SetCardInfo("Watery Grasp", 82, Rarity.COMMON, mage.cards.w.WateryGrasp.class));
         cards.add(new SetCardInfo("White Lotus Reinforcements", 251, Rarity.UNCOMMON, mage.cards.w.WhiteLotusReinforcements.class));
