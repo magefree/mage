@@ -43,7 +43,7 @@ public final class SandmanShiftingScoundrel extends CardImpl {
         this.addAbility(new DauntAbility());
 
         // {3}{G}{G}: Return this card and target land card from your graveyard to the battlefield tapped.
-        Ability ability = new SimpleActivatedAbility(
+        Ability ability = new SimpleActivatedAbility(Zone.GRAVEYARD,
                 new ReturnSourceFromGraveyardToBattlefieldEffect(true)
                         .setText("return this card"),
                 new ManaCostsImpl<>("{3}{G}{G}")
