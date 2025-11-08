@@ -29,8 +29,8 @@ import java.util.UUID;
  */
 public final class KothOfTheHammer extends CardImpl {
 
-    static final FilterPermanent filter = new FilterPermanent(SubType.MOUNTAIN, "Mountain");
-    static final FilterPermanent filterCount = new FilterControlledPermanent("Mountain you control");
+    private static final FilterPermanent filter = new FilterPermanent(SubType.MOUNTAIN, "Mountain");
+    private static final FilterPermanent filterCount = new FilterControlledPermanent(SubType.MOUNTAIN, "Mountain you control");
 
     public KothOfTheHammer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{R}");
