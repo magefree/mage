@@ -19,6 +19,7 @@ public class SecretLairCountdown extends ExpansionSet {
         super("Secret Lair Countdown", "SLC", ExpansionSet.buildDate(2022, 11, 1), SetType.PROMOTIONAL);
         this.hasBasicLands = false;
 
+        cards.add(new SetCardInfo("Alhammarret's Archive", 27, Rarity.MYTHIC, mage.cards.a.AlhammarretsArchive.class, FULL_ART));
         cards.add(new SetCardInfo("Altar of the Brood", 1, Rarity.RARE, mage.cards.a.AltarOfTheBrood.class));
         cards.add(new SetCardInfo("Arclight Phoenix", 2018, Rarity.MYTHIC, mage.cards.a.ArclightPhoenix.class));
         cards.add(new SetCardInfo("Birthing Pod", 2011, Rarity.RARE, mage.cards.b.BirthingPod.class));
