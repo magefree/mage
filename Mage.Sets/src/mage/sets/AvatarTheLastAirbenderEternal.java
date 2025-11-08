@@ -41,6 +41,7 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Arcane Signet", 315, Rarity.RARE, mage.cards.a.ArcaneSignet.class));
         cards.add(new SetCardInfo("Avatar Kyoshi, Earthbender", 130, Rarity.MYTHIC, mage.cards.a.AvatarKyoshiEarthbender.class));
         cards.add(new SetCardInfo("Avatar Roku, Firebender", 112, Rarity.MYTHIC, mage.cards.a.AvatarRokuFirebender.class));
+        cards.add(new SetCardInfo("Azula, Ruthless Firebender", 101, Rarity.MYTHIC, mage.cards.a.AzulaRuthlessFirebender.class));
         cards.add(new SetCardInfo("Bastion of Remembrance", 160, Rarity.UNCOMMON, mage.cards.b.BastionOfRemembrance.class));
         cards.add(new SetCardInfo("Beastmaster Ascension", 39, Rarity.MYTHIC, mage.cards.b.BeastmasterAscension.class));
         cards.add(new SetCardInfo("Beastmaster's Magemark", 9999, Rarity.MYTHIC, mage.cards.b.BeastmastersMagemark.class));
