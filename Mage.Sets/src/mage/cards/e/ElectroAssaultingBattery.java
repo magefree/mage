@@ -13,6 +13,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -42,7 +43,8 @@ public final class ElectroAssaultingBattery extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new YouDontLoseManaEffect(ManaType.RED)));
 
         // Whenever you cast an instant or sorcery spell, add {R}.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new AddManaToManaPoolSourceControllerEffect(Mana.RedMana(1)), false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new AddManaToManaPoolSourceControllerEffect(Mana.RedMana(1)),
+                StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, false));
 
         // When Electro leaves the battlefield, you may pay x. When you do, he deals X damage to target player.
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new ElectroAssaultingBatteryEffect()));

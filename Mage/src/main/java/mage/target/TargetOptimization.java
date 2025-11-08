@@ -26,54 +26,19 @@ public class TargetOptimization {
 
     // for up to or any amount - limit max game sims to analyse
     // (it's useless to calc all possible combinations on too much targets)
-    static public int AI_MAX_POSSIBLE_TARGETS_TO_CHOOSE = 7;
+    static public int AI_MAX_POSSIBLE_TARGETS_TO_CHOOSE = 18;
 
     public static void optimizePossibleTargets(Ability source, Game game, Set<UUID> possibleTargets, int maxPossibleTargetsToSimulate) {
         // remove duplicated/same creatures
         // example: distribute 3 damage between 10+ same tokens
         // example: target x1 from x10 forests - it's useless to recalc each forest
 
-        if (possibleTargets.size() < maxPossibleTargetsToSimulate) {
+        if (possibleTargets.size() <= maxPossibleTargetsToSimulate) {
             return;
         }
 
         // split targets by groups
-        Map<UUID, String> targetGroups = new HashMap<>();
-        possibleTargets.forEach(id -> {
-            String groupKey = "";
-
-            // player
-            Player player = game.getPlayer(id);
-            if (player != null) {
-                groupKey = getTargetGroupKeyAsPlayer(player);
-            }
-
-            // game object
-            MageObject object = game.getObject(id);
-            if (object != null) {
-                groupKey = object.getName();
-                if (object instanceof Permanent) {
-                    groupKey += getTargetGroupKeyAsPermanent(game, (Permanent) object);
-                } else if (object instanceof Card) {
-                    groupKey += getTargetGroupKeyAsCard(game, (Card) object);
-                } else {
-                    groupKey += getTargetGroupKeyAsOther(game, object);
-                }
-            }
-
-            // unknown - use all
-            if (groupKey.isEmpty()) {
-                groupKey = id.toString();
-            }
-
-            targetGroups.put(id, groupKey);
-        });
-
-        Map<String, List<UUID>> groups = new HashMap<>();
-        targetGroups.forEach((id, groupKey) -> {
-            groups.computeIfAbsent(groupKey, k -> new ArrayList<>());
-            groups.get(groupKey).add(id);
-        });
+        Map<String, ArrayList<UUID>> targetGroups = createGroups(game, possibleTargets, maxPossibleTargetsToSimulate, false);
 
         // optimize logic:
         // - use one target from each target group all the time
@@ -81,7 +46,7 @@ public class TargetOptimization {
 
         // use one target per group
         Set<UUID> newPossibleTargets = new HashSet<>();
-        groups.forEach((groupKey, groupTargets) -> {
+        targetGroups.forEach((groupKey, groupTargets) -> {
             UUID targetId = RandomUtil.randomFromCollection(groupTargets);
             if (targetId != null) {
                 newPossibleTargets.add(targetId);
@@ -91,13 +56,13 @@ public class TargetOptimization {
 
         // use random target until fill condition
         while (newPossibleTargets.size() < maxPossibleTargetsToSimulate) {
-            String groupKey = RandomUtil.randomFromCollection(groups.keySet());
+            String groupKey = RandomUtil.randomFromCollection(targetGroups.keySet());
             if (groupKey == null) {
                 break;
             }
-            List<UUID> groupTargets = groups.getOrDefault(groupKey, null);
+            List<UUID> groupTargets = targetGroups.getOrDefault(groupKey, null);
             if (groupTargets == null || groupTargets.isEmpty()) {
-                groups.remove(groupKey);
+                targetGroups.remove(groupKey);
                 continue;
             }
             UUID targetId = RandomUtil.randomFromCollection(groupTargets);
@@ -112,6 +77,49 @@ public class TargetOptimization {
         possibleTargets.addAll(newPossibleTargets);
     }
 
+    private static Map<String, ArrayList<UUID>> createGroups(Game game, Set<UUID> possibleTargets, int maxPossibleTargetsToSimulate, boolean isLoose) {
+        Map<String, ArrayList<UUID>> targetGroups = new HashMap<>();
+
+        possibleTargets.forEach(id -> {
+            String groupKey = "";
+
+            // player
+            Player player = game.getPlayer(id);
+            if (player != null) {
+                groupKey = getTargetGroupKeyAsPlayer(player);
+            }
+
+            // game object
+            MageObject object = game.getObject(id);
+            if (object != null) {
+                groupKey = object.getName();
+                if (object instanceof Permanent) {
+                    groupKey += getTargetGroupKeyAsPermanent(game, (Permanent) object, isLoose);
+                } else if (object instanceof Card) {
+                    groupKey += getTargetGroupKeyAsCard(game, (Card) object, isLoose);
+                } else {
+                    groupKey += getTargetGroupKeyAsOther(game, object);
+                }
+            }
+
+            // unknown - use all
+            if (groupKey.isEmpty()) {
+                groupKey = id.toString();
+            }
+
+            targetGroups.computeIfAbsent(groupKey, k -> new ArrayList<>()).add(id);
+        });
+
+        if (targetGroups.size() > maxPossibleTargetsToSimulate && !isLoose) {
+            // If too many possible target groups, regroup with less specific characteristics
+            return createGroups(game, possibleTargets, maxPossibleTargetsToSimulate, true);
+        }
+
+        // Return appropriate target groups or, if still too many possible targets after loose grouping,
+        // allow optimizePossibleTargets (defined above) to choose random targets within limit
+        return targetGroups;
+    }
+
     private static String getTargetGroupKeyAsPlayer(Player player) {
         // use all
         return String.join(";", Arrays.asList(
@@ -120,38 +128,57 @@ public class TargetOptimization {
         ));
     }
 
-    private static String getTargetGroupKeyAsPermanent(Game game, Permanent permanent) {
+    private static String getTargetGroupKeyAsPermanent(Game game, Permanent permanent, boolean isLoose) {
         // split by name and stats
         // TODO: rework and combine with PermanentEvaluator (to use battlefield score)
 
         // try to use short text/hash for lesser data on debug
-        return String.join(";", Arrays.asList(
-                permanent.getName(),
-                String.valueOf(permanent.getControllerId().hashCode()),
-                String.valueOf(permanent.getOwnerId().hashCode()),
-                String.valueOf(permanent.isTapped()),
-                String.valueOf(permanent.getPower().getValue()),
-                String.valueOf(permanent.getToughness().getValue()),
-                String.valueOf(permanent.getDamage()),
-                String.valueOf(permanent.getCardType(game).toString().hashCode()),
-                String.valueOf(permanent.getSubtype(game).toString().hashCode()),
-                String.valueOf(permanent.getCounters(game).getTotalCount()),
-                String.valueOf(permanent.getAbilities(game).size()),
-                String.valueOf(permanent.getRules(game).toString().hashCode())
-        ));
+        if (!isLoose) {
+            return String.join(";", Arrays.asList(
+                    permanent.getName(),
+                    String.valueOf(permanent.getControllerId().hashCode()),
+                    String.valueOf(permanent.getOwnerId().hashCode()),
+                    String.valueOf(permanent.isTapped()),
+                    String.valueOf(permanent.getPower().getValue()),
+                    String.valueOf(permanent.getToughness().getValue()),
+                    String.valueOf(permanent.getDamage()),
+                    String.valueOf(permanent.getCardType(game).toString().hashCode()),
+                    String.valueOf(permanent.getSubtype(game).toString().hashCode()),
+                    String.valueOf(permanent.getCounters(game).getTotalCount()),
+                    String.valueOf(permanent.getAbilities(game).size()),
+                    String.valueOf(permanent.getRules(game).toString().hashCode())
+            ));
+        }
+        else {
+            return String.join(";", Arrays.asList(
+                    String.valueOf(permanent.getControllerId().hashCode()),
+                    String.valueOf(permanent.getPower().getValue()),
+                    String.valueOf(permanent.getToughness().getValue()),
+                    String.valueOf(permanent.getDamage()),
+                    String.valueOf(permanent.getCardType(game).toString().hashCode())
+            ));
+        }
     }
 
-    private static String getTargetGroupKeyAsCard(Game game, Card card) {
+    private static String getTargetGroupKeyAsCard(Game game, Card card, boolean isLoose) {
         // split by name and stats
-        return String.join(";", Arrays.asList(
-                card.getName(),
-                String.valueOf(card.getOwnerId().hashCode()),
-                String.valueOf(card.getCardType(game).toString().hashCode()),
-                String.valueOf(card.getSubtype(game).toString().hashCode()),
-                String.valueOf(card.getCounters(game).getTotalCount()),
-                String.valueOf(card.getAbilities(game).size()),
-                String.valueOf(card.getRules(game).toString().hashCode())
-        ));
+        if (!isLoose) {
+            return String.join(";", Arrays.asList(
+                    card.getName(),
+                    String.valueOf(card.getOwnerId().hashCode()),
+                    String.valueOf(card.getCardType(game).toString().hashCode()),
+                    String.valueOf(card.getSubtype(game).toString().hashCode()),
+                    String.valueOf(card.getCounters(game).getTotalCount()),
+                    String.valueOf(card.getAbilities(game).size()),
+                    String.valueOf(card.getRules(game).toString().hashCode())
+            ));
+        }
+        else {
+            return String.join(";", Arrays.asList(
+                    String.valueOf(card.getOwnerId().hashCode()),
+                    String.valueOf(card.getCardType(game).toString().hashCode())
+            ));
+        }
     }
 
     private static String getTargetGroupKeyAsOther(Game game, MageObject item) {

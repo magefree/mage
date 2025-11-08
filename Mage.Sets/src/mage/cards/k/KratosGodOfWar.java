@@ -39,10 +39,13 @@ public final class KratosGodOfWar extends CardImpl {
         this.addAbility(DoubleStrikeAbility.getInstance());
 
         // All creatures have haste.
-        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
-                HasteAbility.getInstance(), Duration.WhileControlled,
-                StaticFilters.FILTER_PERMANENT_CREATURE
-        ).setText("all creatures have haste")));
+        this.addAbility(
+                new SimpleStaticAbility(
+                        new GainAbilityAllEffect(
+                            HasteAbility.getInstance(), Duration.WhileOnBattlefield,
+                            StaticFilters.FILTER_PERMANENT_CREATURES
+                            ).setText("all creatures have haste")
+                ));
 
         // At the beginning of each player's end step, Kratos deals damage to that player equal to the number of creatures that player controls that didn't attack this turn.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
@@ -89,7 +92,7 @@ class KratosGodOfWarEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        int count = game.getBattlefield().count(filter, source.getControllerId(), source, game);
+        int count = game.getBattlefield().count(filter, game.getActivePlayerId(), source, game);
         return count > 0 && player.damage(count, source, game) > 0;
     }
 }

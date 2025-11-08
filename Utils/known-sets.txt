@@ -259,6 +259,8 @@ Stronghold|Stronghold|
 Super Series|SuperSeries|
 Tarkir: Dragonstorm|TarkirDragonstorm|
 Tarkir: Dragonstorm Commander|TarkirDragonstormCommander|
+Teenage Mutant Ninja Turtles|TeenageMutantNinjaTurtles|
+Teenage Mutant Ninja Turtles Eternal|TeenageMutantNinjaTurtlesEternal|
 Tempest|Tempest|
 Tempest Remastered|TempestRemastered|
 Tenth Edition|TenthEdition|

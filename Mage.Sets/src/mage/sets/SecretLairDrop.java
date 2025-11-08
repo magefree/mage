@@ -897,6 +897,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Deadeye Navigator", 902, Rarity.RARE, mage.cards.d.DeadeyeNavigator.class));
         cards.add(new SetCardInfo("The Locust God", 903, Rarity.MYTHIC, mage.cards.t.TheLocustGod.class, FULL_ART));
         cards.add(new SetCardInfo("The Scorpion God", 904, Rarity.MYTHIC, mage.cards.t.TheScorpionGod.class));
+        cards.add(new SetCardInfo("Cryptic Command", 905, Rarity.RARE, mage.cards.c.CrypticCommand.class, FULL_ART));
         cards.add(new SetCardInfo("Ignoble Hierarch", 906, Rarity.RARE, mage.cards.i.IgnobleHierarch.class, FULL_ART));
         cards.add(new SetCardInfo("Seedborn Muse", 907, Rarity.RARE, mage.cards.s.SeedbornMuse.class));
         cards.add(new SetCardInfo("Arcane Signet", 908, Rarity.RARE, mage.cards.a.ArcaneSignet.class, NON_FULL_USE_VARIOUS));

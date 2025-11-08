@@ -20,6 +20,7 @@ sub toCamelCase {
     my $string = $_[0];
     $string =~ s/\b([\w']+)\b/ucfirst($1)/ge;
     $string =~ s/[-,\s\':.!\/]//g;
+    $string =~ s/\&/And/g;
     $string;
 }
 

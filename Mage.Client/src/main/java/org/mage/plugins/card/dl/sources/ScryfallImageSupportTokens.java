@@ -817,10 +817,13 @@ public class ScryfallImageSupportTokens {
 
             // SLD
             put("SLD/Angel", "https://api.scryfall.com/cards/sld/1340?format=image");
+            put("SLD/Blood", "https://api.scryfall.com/cards/sld/2180?format=image");
             put("SLD/Cat/1", "https://api.scryfall.com/cards/sld/1517?format=image");
             put("SLD/Cat/2", "https://api.scryfall.com/cards/sld/27?format=image");
             put("SLD/Cat/3", "https://api.scryfall.com/cards/sld/28?format=image");
             put("SLD/Clue", "https://api.scryfall.com/cards/sld/348/en?format=image");
+            put("SLD/Cordyceps Infected/1", "https://api.scryfall.com/cards/sld/2201?format=image");
+            put("SLD/Cordyceps Infected/2", "https://api.scryfall.com/cards/sld/2206?format=image");
             put("SLD/Dog", "https://api.scryfall.com/cards/sld/1516?format=image");
             put("SLD/Egg", "https://api.scryfall.com/cards/sld/1398?format=image");
             put("SLD/Faerie Rogue/1", "https://api.scryfall.com/cards/sld/13/en?format=image");
@@ -2546,6 +2549,7 @@ public class ScryfallImageSupportTokens {
 
             // DSK
             put("DSK/Beast", "https://api.scryfall.com/cards/tdsk/3?format=image");
+            put("DSK/Demon", "https://api.scryfall.com/cards/tdsk/9?format=image");
             put("DSK/Emblem Kaito", "https://api.scryfall.com/cards/tdsk/17/en?format=image");
             put("DSK/Everywhere", "https://api.scryfall.com/cards/tdsk/16?format=image");
             put("DSK/Glimmer", "https://api.scryfall.com/cards/tdsk/4?format=image");
@@ -2558,6 +2562,7 @@ public class ScryfallImageSupportTokens {
             put("DSK/Spider", "https://api.scryfall.com/cards/tdsk/12?format=image");
             put("DSK/Spirit/1", "https://api.scryfall.com/cards/tdsk/6?format=image");
             put("DSK/Spirit/2", "https://api.scryfall.com/cards/tdsk/8?format=image");
+            put("DSK/Toy", "https://api.scryfall.com/cards/tdsk/7?format=image");
             put("DSK/Treasure", "https://api.scryfall.com/cards/tdsk/15?format=image");
 
             // DSC

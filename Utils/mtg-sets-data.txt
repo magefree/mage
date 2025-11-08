@@ -257,6 +257,8 @@ Special Guests|SPG|
 Super Series|SUS|
 Tarkir: Dragonstorm|TDM|
 Tarkir: Dragonstorm Commander|TDC|
+Teenage Mutant Ninja Turtles|TMT|
+Teenage Mutant Ninja Turtles Eternal|TMC|
 Theros|THS|
 Theros Beyond Death|THB|
 The Brothers' War|BRO|

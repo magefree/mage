@@ -64,6 +64,7 @@ public enum SubType {
     JUNK("Junk", SubTypeSet.ArtifactType),
     LANDER("Lander", SubTypeSet.ArtifactType),
     MAP("Map", SubTypeSet.ArtifactType),
+    MUTAGEN("Mutagen", SubTypeSet.ArtifactType),
     POWERSTONE("Powerstone", SubTypeSet.ArtifactType),
     SPACECRAFT("Spacecraft", SubTypeSet.ArtifactType),
     TREASURE("Treasure", SubTypeSet.ArtifactType),
@@ -332,6 +333,7 @@ public enum SubType {
     PINCHER("Pincher", SubTypeSet.CreatureType),
     PIRATE("Pirate", SubTypeSet.CreatureType),
     PLANT("Plant", SubTypeSet.CreatureType),
+    PLATYPUS("Platypus", SubTypeSet.CreatureType),
     PORCUPINE("Porcupine", SubTypeSet.CreatureType),
     POSSUM("Possum", SubTypeSet.CreatureType),
     PRAETOR("Praetor", SubTypeSet.CreatureType),
@@ -431,6 +433,7 @@ public enum SubType {
     // U
     UGNAUGHT("Ugnaught", SubTypeSet.CreatureType, true),
     UNICORN("Unicorn", SubTypeSet.CreatureType),
+    UTROM("Utrom", SubTypeSet.CreatureType),
     // V
     VAMPIRE("Vampire", SubTypeSet.CreatureType),
     VARMINT("Varmint", SubTypeSet.CreatureType),

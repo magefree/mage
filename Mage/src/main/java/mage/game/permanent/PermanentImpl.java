@@ -102,6 +102,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected boolean deathtouched;
     protected boolean solved = false;
 
+    protected boolean roomWasUnlockedOnCast = false;
+    protected boolean leftHalfUnlocked = false;
+    protected boolean rightHalfUnlocked = false;
     protected Map<String, List<UUID>> connectedCards = new HashMap<>();
     protected Set<MageObjectReference> dealtDamageByThisTurn;
     protected UUID attachedTo;
@@ -191,6 +194,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
         this.morphed = permanent.morphed;
         this.disguised = permanent.disguised;
+        this.leftHalfUnlocked = permanent.leftHalfUnlocked;
+        this.rightHalfUnlocked = permanent.rightHalfUnlocked;
+        this.roomWasUnlockedOnCast = permanent.roomWasUnlockedOnCast;
         this.manifested = permanent.manifested;
         this.cloaked = permanent.cloaked;
         this.createOrder = permanent.createOrder;
@@ -2085,5 +2091,66 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         ZoneChangeInfo.Exile zcInfo = new ZoneChangeInfo.Exile(event, exileId, name);
 
         return ZonesHandler.moveCard(zcInfo, game, source);
+    }
+
+    @Override
+    public boolean wasRoomUnlockedOnCast() {
+        return roomWasUnlockedOnCast;
+    }
+
+    @Override
+    public boolean isLeftDoorUnlocked() {
+        return leftHalfUnlocked;
+    }
+
+    @Override
+    public boolean isRightDoorUnlocked() {
+        return rightHalfUnlocked;
+    }
+
+    @Override
+    public boolean unlockRoomOnCast(Game game) {
+        if (this.roomWasUnlockedOnCast) {
+            return false;
+        }
+        this.roomWasUnlockedOnCast = true;
+        return true;
+    }
+
+    @Override
+    public boolean unlockDoor(Game game, Ability source, boolean isLeftDoor) {
+        // Check if already unlocked
+        boolean thisDoorUnlocked = isLeftDoor ? leftHalfUnlocked : rightHalfUnlocked;
+        if (thisDoorUnlocked) {
+            return false;
+        }
+
+        // Log the unlock
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            String doorSide = isLeftDoor ? "left" : "right";
+            game.informPlayers(controller.getLogName() + " unlocked the " + doorSide + " door of "
+                    + getLogName() + CardUtil.getSourceLogName(game, source));
+        }
+
+        // Update unlock state
+        if (isLeftDoor) {
+            leftHalfUnlocked = true;
+        } else {
+            rightHalfUnlocked = true;
+        }
+
+        // Fire door unlock event
+        GameEvent event = new GameEvent(GameEvent.EventType.DOOR_UNLOCKED, getId(), source, source.getControllerId());
+        event.setFlag(isLeftDoor);
+        game.fireEvent(event);
+
+        // Check if room is now fully unlocked
+        boolean otherDoorUnlocked = isLeftDoor ? rightHalfUnlocked : leftHalfUnlocked;
+        if (otherDoorUnlocked) {
+            game.fireEvent(new GameEvent(EventType.ROOM_FULLY_UNLOCKED, getId(), source, source.getControllerId()));
+        }
+
+        return true;
     }
 }

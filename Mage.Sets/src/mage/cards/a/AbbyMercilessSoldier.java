@@ -6,10 +6,10 @@ import mage.abilities.dynamicvalue.common.ManaSpentToCastCount;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.EntersBattlefieldUnderControlOfOpponentOfChoiceEffect;
-import mage.abilities.keyword.PartnerSurvivorsAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.PartnerVariantType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.permanent.token.CordycepsInfectedToken;
@@ -41,7 +41,7 @@ public final class AbbyMercilessSoldier extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldUnderControlOfOpponentOfChoiceEffect()));
 
         // Partner--Survivors
-        this.addAbility(PartnerSurvivorsAbility.getInstance());
+        this.addAbility(PartnerVariantType.SURVIVORS.makeAbility());
     }
 
     private AbbyMercilessSoldier(final AbbyMercilessSoldier card) {

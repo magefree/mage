@@ -1,8 +1,10 @@
 package org.mage.test.cards.single.spm;
 
+import mage.constants.ManaType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -39,6 +41,16 @@ public class ElectroAssaultingBatteryTest extends CardTestPlayerBase {
     */
     private static final String lightningBolt = "Lightning Bolt";
 
+    /*
+    Final Showdown
+    {W}
+    Instant
+    Spree
+    + {1} -- All creatures lose all abilities until end of turn.
+    + {1} -- Choose a creature you control. It gains indestructible until end of turn.
+    + {3}{W}{W} -- Destroy all creatures.
+    */
+    private static final String finalShowdown = "Final Showdown";
 
     @Test
     public void testElectroAssaultingBattery() {
@@ -61,5 +73,35 @@ public class ElectroAssaultingBatteryTest extends CardTestPlayerBase {
         execute();
 
         assertLife(playerB, 20 - 4);
+    }
+
+    @Test
+    public void testElectroAssaultingBatteryFinalShowdown() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerA, electroAssaultingBattery);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 7);
+        addCard(Zone.HAND, playerB, finalShowdown);
+        addCard(Zone.HAND, playerA, lightningBolt);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, lightningBolt, playerB);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, true);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, finalShowdown);
+        setModeChoice(playerB, "1");
+        setModeChoice(playerB, "3");
+        setModeChoice(playerB, TestPlayer.MODE_SKIP);
+
+        checkManaPool("Should have 1 red mana", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "R", 1);
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, lightningBolt, 1);
+        assertGraveyardCount(playerB, finalShowdown, 1);
+        assertGraveyardCount(playerA, electroAssaultingBattery, 1);
+
+        assertManaPool(playerA, ManaType.RED, 0); // Electro's ability is gone
     }
 }

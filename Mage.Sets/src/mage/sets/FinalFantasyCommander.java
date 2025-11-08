@@ -170,6 +170,7 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Fight Rigging", 303, Rarity.RARE, mage.cards.f.FightRigging.class));
         cards.add(new SetCardInfo("Final Judgment", 243, Rarity.MYTHIC, mage.cards.f.FinalJudgment.class));
         cards.add(new SetCardInfo("Fire-Lit Thicket", 392, Rarity.RARE, mage.cards.f.FireLitThicket.class));
+        cards.add(new SetCardInfo("Fishing Gear", 461, Rarity.RARE, mage.cards.f.FishingGear.class));
         cards.add(new SetCardInfo("Flash Photography", 463, Rarity.RARE, mage.cards.f.FlashPhotography.class));
         cards.add(new SetCardInfo("Flayer of the Hatebound", 293, Rarity.RARE, mage.cards.f.FlayerOfTheHatebound.class));
         cards.add(new SetCardInfo("Flooded Grove", 393, Rarity.RARE, mage.cards.f.FloodedGrove.class));
@@ -257,6 +258,7 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Maester Seymour", 160, Rarity.RARE, mage.cards.m.MaesterSeymour.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Maester Seymour", 68, Rarity.RARE, mage.cards.m.MaesterSeymour.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mask of Memory", 350, Rarity.UNCOMMON, mage.cards.m.MaskOfMemory.class));
+        cards.add(new SetCardInfo("Mega Flare", 456, Rarity.RARE, mage.cards.m.MegaFlare.class));
         cards.add(new SetCardInfo("Meteor Golem", 351, Rarity.UNCOMMON, mage.cards.m.MeteorGolem.class));
         cards.add(new SetCardInfo("Millikin", 352, Rarity.UNCOMMON, mage.cards.m.Millikin.class));
         cards.add(new SetCardInfo("Mind Stone", 353, Rarity.UNCOMMON, mage.cards.m.MindStone.class));
@@ -332,6 +334,7 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Secret Rendezvous", 218, Rarity.UNCOMMON, mage.cards.s.SecretRendezvous.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Secret Rendezvous", 219, Rarity.UNCOMMON, mage.cards.s.SecretRendezvous.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Secret Rendezvous", 253, Rarity.UNCOMMON, mage.cards.s.SecretRendezvous.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Seifer, Balamb Rival", 451, Rarity.RARE, mage.cards.s.SeiferBalambRival.class));
         cards.add(new SetCardInfo("Sephiroth, Fallen Hero", 182, Rarity.RARE, mage.cards.s.SephirothFallenHero.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sephiroth, Fallen Hero", 92, Rarity.RARE, mage.cards.s.SephirothFallenHero.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sepulchral Primordial", 284, Rarity.RARE, mage.cards.s.SepulchralPrimordial.class));
@@ -466,6 +469,7 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Vincent, Vengeful Atoner", 64, Rarity.RARE, mage.cards.v.VincentVengefulAtoner.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vindicate", 330, Rarity.RARE, mage.cards.v.Vindicate.class));
         cards.add(new SetCardInfo("Vineglimmer Snarl", 440, Rarity.RARE, mage.cards.v.VineglimmerSnarl.class));
+        cards.add(new SetCardInfo("Vivi's Persistence", 458, Rarity.RARE, mage.cards.v.VivisPersistence.class));
         cards.add(new SetCardInfo("Void Rend", 331, Rarity.RARE, mage.cards.v.VoidRend.class));
         cards.add(new SetCardInfo("Wakka, Devoted Guardian", 190, Rarity.RARE, mage.cards.w.WakkaDevotedGuardian.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wakka, Devoted Guardian", 477, Rarity.RARE, mage.cards.w.WakkaDevotedGuardian.class, NON_FULL_USE_VARIOUS));

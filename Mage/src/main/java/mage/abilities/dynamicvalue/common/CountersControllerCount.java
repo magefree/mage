@@ -48,6 +48,6 @@ public class CountersControllerCount implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return (counterType != null ? counterType.toString() + ' ' : "") + "counter on {this}'s controller";
+        return "the number of " + counterType.getName() + " counters you have";
     }
 }

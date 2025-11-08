@@ -1515,10 +1515,13 @@
 
 # SLD
 |Generate|TOK:SLD|Angel|||AngelToken|
+|Generate|TOK:SLD|Blood|||BloodToken|
 |Generate|TOK:SLD|Cat|1||GreenCatToken|
 |Generate|TOK:SLD|Cat|2||CatToken2|
 |Generate|TOK:SLD|Cat|3||CatToken2|
 |Generate|TOK:SLD|Clue|||ClueArtifactToken|
+|Generate|TOK:SLD|Cordyceps Infected|1||CordycepsInfectedToken|
+|Generate|TOK:SLD|Cordyceps Infected|2||CordycepsInfectedToken|
 |Generate|TOK:SLD|Dog|||WhiteDogToken|
 |Generate|TOK:SLD|Egg|||AtlaPalaniToken|
 |Generate|TOK:SLD|Faerie Rogue|1||FaerieRogueToken|
@@ -2782,6 +2785,7 @@
 
 # DSK
 |Generate|TOK:DSK|Beast|||BeastieToken|
+|Generate|TOK:DSK|Demon|||Demon66Token|
 |Generate|TOK:DSK|Everywhere|||EverywhereToken|
 |Generate|TOK:DSK|Glimmer|||GlimmerToken|
 |Generate|TOK:DSK|Gremlin|||Gremlin11Token|
@@ -2793,6 +2797,7 @@
 |Generate|TOK:DSK|Spider|||Spider22Token|
 |Generate|TOK:DSK|Spirit|1||Spirit31Token|
 |Generate|TOK:DSK|Spirit|2||SpiritBlueToken|
+|Generate|TOK:DSK|Toy|||ToyToken|
 |Generate|TOK:DSK|Treasure|||TreasureToken|
 
 # FIN

@@ -4,6 +4,8 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.Mode;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
@@ -25,9 +27,13 @@ import mage.util.CardUtil;
  */
 public class EarthbendTargetEffect extends OneShotEffect {
 
-    private final int amount;
+    private final DynamicValue amount;
 
     public EarthbendTargetEffect(int amount) {
+        this(StaticValue.get(amount));
+    }
+
+    public EarthbendTargetEffect(DynamicValue amount) {
         super(Outcome.Benefit);
         this.amount = amount;
     }
@@ -53,11 +59,12 @@ public class EarthbendTargetEffect extends OneShotEffect {
                         .withAbility(HasteAbility.getInstance()),
                 false, true, Duration.Custom
         ), source);
-        permanent.addCounters(CounterType.P1P1.createInstance(amount), source, game);
+        int value = amount.calculate(game, source, this);
+        permanent.addCounters(CounterType.P1P1.createInstance(value), source, game);
         game.addDelayedTriggeredAbility(new EarthbendingDelayedTriggeredAbility(permanent, game), source);
         game.fireEvent(GameEvent.getEvent(
                 GameEvent.EventType.EARTHBENDED, permanent.getId(),
-                source, source.getControllerId(), amount
+                source, source.getControllerId(), value
         ));
         return true;
     }
@@ -67,10 +74,21 @@ public class EarthbendTargetEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return "earthbend " + amount + ". <i>(Target land you control becomes a 0/0 creature " +
-                "with haste that's still a land. Put " + CardUtil.numberToText(amount, "a") +
-                " +1/+1 counter" + (amount > 1 ? "s" : "") + " on it. " +
-                "When it dies or is exiled, return it to the battlefield tapped.)</i>";
+        StringBuilder sb = new StringBuilder("earthbend ");
+        sb.append(amount);
+        if (!(amount instanceof StaticValue)) {
+            sb.append(", where X is ");
+            sb.append(amount.getMessage());
+        }
+        sb.append(". <i>(Target land you control becomes a 0/0 creature with haste that's still a land. Put ");
+        String value = amount instanceof StaticValue
+                ? CardUtil.numberToText(((StaticValue) amount).getValue(), "a")
+                : amount.toString();
+        sb.append(value);
+        sb.append(" +1/+1 counter");
+        sb.append(("a".equals(value) ? "" : "s"));
+        sb.append(" on it. When it dies or is exiled, return it to the battlefield tapped.)</i>");
+        return sb.toString();
     }
 }
 

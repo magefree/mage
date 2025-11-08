@@ -42,6 +42,7 @@ public class ManaPool implements Serializable {
     // empty mana pool effects
     private final Set<ManaType> doNotEmptyManaTypes = new HashSet<>(); // keep some colors
     private boolean manaBecomesBlack = false; // replace all pool by black
+    private boolean manaBecomesRed = false; // replace all pool by red
     private boolean manaBecomesColorless = false; // replace all pool by colorless
 
     private static final class ConditionalManaInfo {
@@ -76,6 +77,7 @@ public class ManaPool implements Serializable {
         }
         this.doNotEmptyManaTypes.addAll(pool.doNotEmptyManaTypes);
         this.manaBecomesBlack = pool.manaBecomesBlack;
+        this.manaBecomesRed = pool.manaBecomesRed;
         this.manaBecomesColorless = pool.manaBecomesColorless;
     }
 
@@ -236,6 +238,7 @@ public class ManaPool implements Serializable {
     public void clearEmptyManaPoolRules() {
         doNotEmptyManaTypes.clear();
         this.manaBecomesBlack = false;
+        this.manaBecomesRed = false;
         this.manaBecomesColorless = false;
     }
 
@@ -245,6 +248,10 @@ public class ManaPool implements Serializable {
 
     public void setManaBecomesBlack(boolean manaBecomesBlack) {
         this.manaBecomesBlack = manaBecomesBlack;
+    }
+
+    public void setManaBecomesRed(boolean manaBecomesRed) {
+        this.manaBecomesRed = manaBecomesRed;
     }
 
     public void setManaBecomesColorless(boolean manaBecomesColorless) {
@@ -265,6 +272,9 @@ public class ManaPool implements Serializable {
                     continue;
                 }
                 if (manaBecomesBlack) {
+                    continue;
+                }
+                if (manaBecomesRed) {
                     continue;
                 }
                 if (manaBecomesColorless) {
@@ -315,10 +325,18 @@ public class ManaPool implements Serializable {
                     return 0;
                 }
         }
+
+        // TODO: This should be reimplemented as replacement effects instead, so you can choose which applies.
         if (manaBecomesBlack) {
             int amount = toEmpty.get(manaType);
             toEmpty.clear(manaType);
             toEmpty.add(ManaType.BLACK, amount);
+            return 0;
+        }
+        if (manaBecomesRed) {
+            int amount = toEmpty.get(manaType);
+            toEmpty.clear(manaType);
+            toEmpty.add(ManaType.RED, amount);
             return 0;
         }
         if (manaBecomesColorless) {
