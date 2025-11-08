@@ -59,7 +59,7 @@ public class SecretLairCountdown extends ExpansionSet {
         cards.add(new SetCardInfo("Ponder", 2007, Rarity.RARE, mage.cards.p.Ponder.class));
         cards.add(new SetCardInfo("Questing Beast", 17, Rarity.MYTHIC, mage.cards.q.QuestingBeast.class));
         cards.add(new SetCardInfo("Retrofitter Foundry", 18, Rarity.RARE, mage.cards.r.RetrofitterFoundry.class));
-        cards.add(new SetCardInfo("Shark Typhoon", 2020, Rarity.RARE, mage.cards.s.SharkTyphoon.class));
+        cards.add(new SetCardInfo("Shark Typhoon", 2020, Rarity.RARE, mage.cards.s.SharkTyphoon.class, FULL_ART));
         cards.add(new SetCardInfo("Shivan Dragon", 1993, Rarity.RARE, mage.cards.s.ShivanDragon.class));
         cards.add(new SetCardInfo("Siege Rhino", 2014, Rarity.RARE, mage.cards.s.SiegeRhino.class));
         cards.add(new SetCardInfo("Smokestack", 1998, Rarity.RARE, mage.cards.s.Smokestack.class));
