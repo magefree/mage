@@ -903,6 +903,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Arcane Signet", 908, Rarity.RARE, mage.cards.a.ArcaneSignet.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gilded Lotus", 909, Rarity.RARE, mage.cards.g.GildedLotus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sol Ring", 910, Rarity.RARE, mage.cards.s.SolRing.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Path of Ancestry", 914, Rarity.RARE, mage.cards.p.PathOfAncestry.class, NON_FULL_USE_VARIOUS));
     }
 
     private void addPart2() {
@@ -2202,6 +2203,30 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Voja, Jaws of the Conclave", 2284, Rarity.MYTHIC, mage.cards.v.VojaJawsOfTheConclave.class));
         cards.add(new SetCardInfo("Wilhelt, the Rotcleaver", 2285, Rarity.MYTHIC, mage.cards.w.WilheltTheRotcleaver.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Liberator, Urza's Battlethopter", 2286, Rarity.RARE, mage.cards.l.LiberatorUrzasBattlethopter.class));
+        cards.add(new SetCardInfo("Torment of Hailfire", 2287, Rarity.RARE, mage.cards.t.TormentOfHailfire.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Blood Moon", 2288, Rarity.RARE, mage.cards.b.BloodMoon.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lightning Bolt", 2289, Rarity.RARE, mage.cards.l.LightningBolt.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Dramatic Entrance", 2290, Rarity.RARE, mage.cards.d.DramaticEntrance.class));
+        cards.add(new SetCardInfo("Serra Ascendant", 2291, Rarity.RARE, mage.cards.s.SerraAscendant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ponder", 2292, Rarity.RARE, mage.cards.p.Ponder.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Cryptolith Rite", 2293, Rarity.RARE, mage.cards.c.CryptolithRite.class));
+        cards.add(new SetCardInfo("Kodama's Reach", 2294, Rarity.RARE, mage.cards.k.KodamasReach.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Chain of Vapor", 2295, Rarity.RARE, mage.cards.c.ChainOfVapor.class));
+        cards.add(new SetCardInfo("Meltdown", 2296, Rarity.RARE, mage.cards.m.Meltdown.class));
+        cards.add(new SetCardInfo("Nature's Claim", 2297, Rarity.RARE, mage.cards.n.NaturesClaim.class));
+        cards.add(new SetCardInfo("Anguished Unmaking", 2298, Rarity.RARE, mage.cards.a.AnguishedUnmaking.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Putrefy", 2299, Rarity.RARE, mage.cards.p.Putrefy.class));
+        cards.add(new SetCardInfo("Silence", 2300, Rarity.RARE, mage.cards.s.Silence.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Preordain", 2301, Rarity.COMMON, mage.cards.p.Preordain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Painful Truths", 2302, Rarity.RARE, mage.cards.p.PainfulTruths.class));
+        cards.add(new SetCardInfo("Past in Flames", 2303, Rarity.MYTHIC, mage.cards.p.PastInFlames.class));
+        cards.add(new SetCardInfo("Force of Vigor", 2304, Rarity.RARE, mage.cards.f.ForceOfVigor.class));
+        cards.add(new SetCardInfo("Expressive Iteration", 2305, Rarity.RARE, mage.cards.e.ExpressiveIteration.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Phantasmal Image", 2306, Rarity.RARE, mage.cards.p.PhantasmalImage.class));
+        cards.add(new SetCardInfo("Braid of Fire", 2307, Rarity.RARE, mage.cards.b.BraidOfFire.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Cursed Mirror", 2308, Rarity.RARE, mage.cards.c.CursedMirror.class));
+        cards.add(new SetCardInfo("Mask of Memory", 2309, Rarity.RARE, mage.cards.m.MaskOfMemory.class));
+        cards.add(new SetCardInfo("Thespian's Stage", 2310, Rarity.RARE, mage.cards.t.ThespiansStage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Distant Melody", 2311, Rarity.RARE, mage.cards.d.DistantMelody.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Explore", 2312, Rarity.RARE, mage.cards.e.Explore.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Inspiring Call", 2313, Rarity.RARE, mage.cards.i.InspiringCall.class));
