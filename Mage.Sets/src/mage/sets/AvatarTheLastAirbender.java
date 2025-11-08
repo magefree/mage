@@ -244,6 +244,8 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("Sokka, Tenacious Tactician", 352, Rarity.RARE, mage.cards.s.SokkaTenaciousTactician.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sold Out", 119, Rarity.COMMON, mage.cards.s.SoldOut.class));
         cards.add(new SetCardInfo("Solstice Revelations", 153, Rarity.UNCOMMON, mage.cards.s.SolsticeRevelations.class));
+        cards.add(new SetCardInfo("South Pole Voyager", 35, Rarity.RARE, mage.cards.s.SouthPoleVoyager.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("South Pole Voyager", 367, Rarity.RARE, mage.cards.s.SouthPoleVoyager.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Southern Air Temple", 36, Rarity.UNCOMMON, mage.cards.s.SouthernAirTemple.class));
         cards.add(new SetCardInfo("Sozin's Comet", 154, Rarity.MYTHIC, mage.cards.s.SozinsComet.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sozin's Comet", 309, Rarity.MYTHIC, mage.cards.s.SozinsComet.class, NON_FULL_USE_VARIOUS));
