@@ -2831,6 +2831,9 @@ public class ScryfallImageSupportTokens {
             put("SPM/Spider", "https://api.scryfall.com/cards/tspm/3?format=image");
             put("SPM/Treasure", "https://api.scryfall.com/cards/tspm/7?format=image");
 
+            // TMT
+            put("TMT/Mutagen", "https://api.scryfall.com/cards/ttmt/9?format=image");
+
             // JVC
             put("JVC/Elemental Shaman", "https://api.scryfall.com/cards/tjvc/4?format=image");
 
