@@ -42,7 +42,7 @@ public final class AzulaRuthlessFirebender extends CardImpl {
         this.addAbility(new FirebendingAbility(1));
 
         // Whenever Azula attacks, you may discard a card. Then you get an experience counter for each player who discarded a card this turn.
-        Ability ability = new AttacksTriggeredAbility(new OptionalOneShotEffect(new DiscardControllerEffect(1), "You may discard a card"));
+        Ability ability = new AttacksTriggeredAbility(new OptionalOneShotEffect(new DiscardControllerEffect(1)));
         ability.addEffect(new AddCountersPlayersEffect(CounterType.EXPERIENCE.createInstance(), AzulaRuthlessFirebenderValue.instance, TargetController.YOU).setText("Then you get an experience counter for each player who discarded a card this turn."));
         this.addAbility(ability, new DiscardedCardWatcher());
 
