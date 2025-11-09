@@ -242,6 +242,8 @@ func (d *Draft) PassBoosters() error {
 		// Check if draft is done
 		if d.CurrentPack > d.NumPacks {
 			d.State = DraftStateFinished
+			now := time.Now()
+			d.EndTime = &now
 		}
 	}
 

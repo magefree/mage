@@ -138,6 +138,8 @@ func main() {
 	logger.Info("card repository initialized")
 
 	// Keep references to prevent unused variable errors
+	_ = userMgr
+	_ = tokenStore
 	_ = chatMgr
 	_ = tableMgr
 	_ = gameMgr
