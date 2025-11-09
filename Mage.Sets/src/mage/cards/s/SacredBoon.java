@@ -77,10 +77,7 @@ class SacredBoonPreventDamageTargetEffect extends PreventionEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!this.used && super.applies(event, source, game)) {
-            return source.getTargets().getFirstTarget().equals(event.getTargetId());
-        }
-        return false;
+        return super.applies(event, source, game) && source.getTargets().getFirstTarget().equals(event.getTargetId());
     }
 
 }
