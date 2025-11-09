@@ -8,6 +8,8 @@ import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.filter.StaticFilters;
+import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
 
@@ -29,6 +31,7 @@ public final class ZukosConviction extends CardImpl {
                 KickedCondition.ONCE, "return target creature card from your graveyard to your hand. " +
                 "If this spell was kicked, instead put that card onto the battlefield tapped"
         ));
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
     }
 
     private ZukosConviction(final ZukosConviction card) {
