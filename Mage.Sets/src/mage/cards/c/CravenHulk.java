@@ -1,7 +1,8 @@
 package mage.cards.c;
 
 import mage.MageInt;
-import mage.abilities.keyword.CantBlockAloneAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.combat.CantBlockAloneSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -23,7 +24,7 @@ public final class CravenHulk extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Craven Hulk can't block alone.
-        this.addAbility(new CantBlockAloneAbility());
+        this.addAbility(new SimpleStaticAbility(new CantBlockAloneSourceEffect()));
     }
 
     private CravenHulk(final CravenHulk card) {

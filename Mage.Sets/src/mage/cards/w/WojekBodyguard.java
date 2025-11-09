@@ -1,14 +1,14 @@
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.keyword.CantAttackAloneAbility;
-import mage.abilities.keyword.CantBlockAloneAbility;
-import mage.constants.SubType;
+import mage.abilities.keyword.CantAttackOrBlockAloneAbility;
 import mage.abilities.keyword.MentorAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -28,8 +28,7 @@ public final class WojekBodyguard extends CardImpl {
         this.addAbility(new MentorAbility());
 
         // Wojek Bodyguard can't attack or block alone.
-        this.addAbility(new CantAttackAloneAbility());
-        this.addAbility(new CantBlockAloneAbility());
+        this.addAbility(new CantAttackOrBlockAloneAbility());
     }
 
     private WojekBodyguard(final WojekBodyguard card) {

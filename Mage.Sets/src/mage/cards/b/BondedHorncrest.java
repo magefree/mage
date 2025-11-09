@@ -2,8 +2,7 @@
 package mage.cards.b;
 
 import mage.MageInt;
-import mage.abilities.keyword.CantAttackAloneAbility;
-import mage.abilities.keyword.CantBlockAloneAbility;
+import mage.abilities.keyword.CantAttackOrBlockAloneAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -25,8 +24,7 @@ public final class BondedHorncrest extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Bonded Horncrest can't attack or block alone.
-        this.addAbility(new CantAttackAloneAbility());
-        this.addAbility(new CantBlockAloneAbility());
+        this.addAbility(new CantAttackOrBlockAloneAbility());
     }
 
     private BondedHorncrest(final BondedHorncrest card) {

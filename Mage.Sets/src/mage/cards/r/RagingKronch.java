@@ -1,7 +1,8 @@
 package mage.cards.r;
 
 import mage.MageInt;
-import mage.abilities.keyword.CantAttackAloneAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.combat.CantAttackAloneSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -22,7 +23,7 @@ public final class RagingKronch extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Raging Kronch can't attack alone.
-        this.addAbility(new CantAttackAloneAbility());
+        this.addAbility(new SimpleStaticAbility(new CantAttackAloneSourceEffect()));
     }
 
     private RagingKronch(final RagingKronch card) {
