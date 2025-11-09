@@ -18,6 +18,10 @@ public class OptionalOneShotEffect extends OneShotEffect {
 
     private final Effects effects = new Effects();
 
+    public OptionalOneShotEffect(OneShotEffect effect) {
+        this(effect, null);
+    }
+
     public OptionalOneShotEffect(OneShotEffect effect, String text) {
         super(effect.getOutcome());
         if (effect != null) {
@@ -38,7 +42,11 @@ public class OptionalOneShotEffect extends OneShotEffect {
             return true;
         }
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null && player.chooseUse(outcome, staticText, source, game)) {
+        String chooseText = staticText;
+        if (chooseText == null || chooseText.isEmpty()) {
+            chooseText = getText(new Mode(effects.get(0)));
+        }
+        if (player != null && player.chooseUse(outcome, chooseText, source, game)) {
             effects.setTargetPointer(this.getTargetPointer().copy());
             effects.forEach(effect -> effect.apply(game, source));
             return true;
@@ -67,7 +75,7 @@ public class OptionalOneShotEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return "you may " + CardUtil.getTextWithFirstCharLowerCase(effects.getText(mode));
+        return "You may " + CardUtil.getTextWithFirstCharLowerCase(effects.getText(mode));
     }
 
     @Override
