@@ -30,6 +30,7 @@ public class HarmsWayRedirectDamageTest extends CardTestPlayerBase {
         setChoice(playerB, "Lightning Bolt");
 
         setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
         execute();
 
         assertGraveyardCount(playerA, "Lightning Bolt", 1);
@@ -57,6 +58,7 @@ public class HarmsWayRedirectDamageTest extends CardTestPlayerBase {
         setChoice(playerA, "Craw Wurm");
 
         setStopAt(2, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
         execute();
 
         // only 4 combat damage
@@ -91,6 +93,7 @@ public class HarmsWayRedirectDamageTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", "Magma Phoenix");
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        setStrictChooseMode(true);
         execute();
 
         assertLife(playerA, 19); // 3 damage from dying Phoenix -> 2 redirected to playerB so playerA gets only 1 damage
@@ -122,6 +125,7 @@ public class HarmsWayRedirectDamageTest extends CardTestPlayerBase {
         setChoice(playerB, "Wild Slash");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        setStrictChooseMode(true);
         execute();
 
         assertGraveyardCount(playerA, "Wild Slash", 1);
@@ -154,6 +158,7 @@ public class HarmsWayRedirectDamageTest extends CardTestPlayerBase {
         setChoice(playerB, "Lava Burst");
 
         setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
         execute();
         assertLife(playerA, 18);
         assertLife(playerB, 19);

@@ -67,7 +67,7 @@ class OrcishFarmerEffect extends BecomesBasicLandTargetEffect {
             discard();
             return false;
         }
-        if (effectStartingOnTurn != game.getTurnNum()
+        if (getEffectStartingOnTurn() != game.getTurnNum()
                 && game.isActivePlayer(p.getControllerId())
                 && game.getStep().getType() == PhaseStep.UNTAP) {
             discard();

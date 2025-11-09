@@ -55,13 +55,13 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     protected boolean characterDefining = false;
 
     // until your next turn or until end of your next turn
-    protected UUID startingControllerId; // player to check for turn duration (can't different with real controller ability)
-    protected boolean startingTurnWasActive; // effect started during related players turn and related players turn was already active
-    protected int effectStartingOnTurn = 0; // turn the effect started
-    protected int effectStartingEndStep = 0;
-    protected int nextTurnNumber = Integer.MAX_VALUE; // effect is waiting for a step during your next turn, we store it if found.
+    private UUID startingControllerId; // player to check for turn duration (can't different with real controller ability)
+    private boolean startingTurnWasActive; // effect started during related players turn and related players turn was already active
+    private int effectStartingOnTurn = 0; // turn the effect started
+    private int effectStartingEndStep = 0;
+    private int nextTurnNumber = Integer.MAX_VALUE; // effect is waiting for a step during your next turn, we store it if found.
     // set to the turn number on your next turn.
-    protected int effectStartingStepNum = 0; // Some continuous are waiting for the next step of a kind.
+    private int effectStartingStepNum = 0; // Some continuous are waiting for the next step of a kind.
     // Avoid miscancelling if the start step is of that kind.
 
     protected ContinuousEffectImpl(Duration duration, Outcome outcome) {
@@ -246,6 +246,10 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     @Override
     public UUID getStartingController() {
         return startingControllerId;
+    }
+
+    protected int getEffectStartingOnTurn() {
+        return effectStartingOnTurn;
     }
 
     @Override
