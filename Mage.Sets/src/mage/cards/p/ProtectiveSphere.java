@@ -1,9 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -22,6 +19,10 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetSource;
 import mage.util.CardUtil;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -90,11 +91,6 @@ class ProtectiveSphereEffect extends PreventionEffectImpl {
                             + source.getManaCostsToPay().getUsedManaToPay()), game);
         }
         this.target.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
     }
 
     @Override

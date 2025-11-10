@@ -9,12 +9,12 @@ import mage.abilities.hint.common.CreaturesYouControlHint;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
-import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.PreventDamageEvent;
-import mage.game.events.PreventedDamageEvent;
 import mage.game.permanent.Permanent;
 
 import java.util.UUID;
@@ -50,7 +50,7 @@ public final class ShieldOfTheAvatar extends CardImpl {
 class ShieldOfTheAvatarPreventionEffect extends PreventionEffectImpl {
 
     ShieldOfTheAvatarPreventionEffect() {
-        super(Duration.WhileOnBattlefield);
+        super(Duration.WhileOnBattlefield, 0, false, false);
         this.staticText = "If a source would deal damage to equipped creature, prevent X of that damage, where X is the number of creatures you control.";
     }
 
@@ -65,26 +65,8 @@ class ShieldOfTheAvatarPreventionEffect extends PreventionEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        boolean result = false;
-        Permanent equipment = game.getPermanent(source.getSourceId());
-        if (equipment != null && equipment.getAttachedTo() != null) {
-            int numberOfCreaturesControlled = CreaturesYouControlCount.PLURAL.calculate(game, source, this);
-            int toPrevent = Math.min(numberOfCreaturesControlled, event.getAmount());
-            GameEvent preventEvent = new PreventDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), toPrevent, ((DamageEvent) event).isCombatDamage());
-            if (!game.replaceEvent(preventEvent)) {
-                if (event.getAmount() >= toPrevent) {
-                    event.setAmount(event.getAmount() - toPrevent);
-                } else {
-                    event.setAmount(0);
-                    result = true;
-                }
-                if (toPrevent > 0) {
-                    game.informPlayers("Shield of the Avatar " + "prevented " + toPrevent + " damage to " + game.getPermanent(equipment.getAttachedTo()).getName());
-                    game.fireEvent(new PreventedDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), toPrevent));
-                }
-            }
-        }
-        return result;
+        amountToPrevent = CreaturesYouControlCount.PLURAL.calculate(game, source, this);
+        return super.replaceEvent(event, source, game);
     }
 
     @Override
