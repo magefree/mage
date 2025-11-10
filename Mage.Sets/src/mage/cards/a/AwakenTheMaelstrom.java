@@ -16,7 +16,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanentAmount;
 import mage.target.common.TargetPermanentAmount;
 import mage.target.targetpointer.SecondTargetPointer;
@@ -97,7 +97,7 @@ class AwakenTheMaelstromEffect extends OneShotEffect {
     }
 
     private void makeToken(Player player, Game game, Ability source) {
-        TargetPermanent target = new TargetControlledCreaturePermanent();
+        TargetPermanent target = new TargetControlledPermanent();
         target.withNotTarget(true);
         target.withChooseHint("to copy");
         if (!target.canChoose(player.getId(), source, game)) {
