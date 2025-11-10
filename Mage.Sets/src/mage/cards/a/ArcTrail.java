@@ -29,8 +29,10 @@ public final class ArcTrail extends CardImpl {
 
         // Arc Trail deals 2 damage to any target and 1 damage to another target
         this.getSpellAbility().addEffect(new DamageTargetAndTargetEffect(2, 1));
-        this.getSpellAbility().addTarget(new TargetPermanentOrPlayer(filter1).setTargetTag(1));
-        this.getSpellAbility().addTarget(new TargetPermanentOrPlayer(filter2).setTargetTag(2));
+        this.getSpellAbility().addTarget(new TargetPermanentOrPlayer(filter1)
+                .withChooseHint("to deal 2 damage").setTargetTag(1));
+        this.getSpellAbility().addTarget(new TargetPermanentOrPlayer(filter2)
+                .withChooseHint("to deal 1 damage").setTargetTag(2));
     }
 
     private ArcTrail(final ArcTrail card) {

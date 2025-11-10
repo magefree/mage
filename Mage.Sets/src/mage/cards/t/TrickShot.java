@@ -1,6 +1,6 @@
 package mage.cards.t;
 
-import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.DamageTargetAndTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -9,7 +9,6 @@ import mage.filter.predicate.other.AnotherTargetPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetpointer.SecondTargetPointer;
 
 import java.util.UUID;
 
@@ -31,12 +30,7 @@ public final class TrickShot extends CardImpl {
         // Trick Shot deals 6 damage to target creature and 2 damage to up to one other target creature token.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent().setTargetTag(1));
         this.getSpellAbility().addTarget(new TargetPermanent(0, 1, filter).setTargetTag(2));
-        this.getSpellAbility().addEffect(new DamageTargetEffect(6, true, "", true));
-        this.getSpellAbility().addEffect(
-                new DamageTargetEffect(2, true, "", true)
-                        .setTargetPointer(new SecondTargetPointer())
-                        .setText("and 2 damage to up to one other target creature token")
-        );
+        this.getSpellAbility().addEffect(new DamageTargetAndTargetEffect(6, 2));
     }
 
     private TrickShot(final TrickShot card) {

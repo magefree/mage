@@ -5,6 +5,7 @@ import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -17,6 +18,13 @@ public class DamageTargetAndAllControlledEffect extends OneShotEffect {
     private final int firstAmount;
     private final int secondAmount;
     private final FilterPermanent filter;
+
+    /**
+     * Deals simultaneous damage to the target and to each creature the target controls
+     */
+    public DamageTargetAndAllControlledEffect(int amount) {
+        this(amount, amount, StaticFilters.FILTER_PERMANENT_CREATURE);
+    }
 
     /**
      * Deals simultaneous damage to the target and to each creature the target controls
@@ -54,7 +62,7 @@ public class DamageTargetAndAllControlledEffect extends OneShotEffect {
         Player controller = game.getPlayerOrPlaneswalkerController(getTargetPointer().getFirst(game, source));
         if (controller != null) {
             for (Permanent perm : game.getBattlefield().getAllActivePermanents(filter, controller.getId(), game)) {
-                perm.damage(secondAmount, source.getSourceId(), source, game, false, true);
+                perm.damage(secondAmount, source.getSourceId(), source, game);
             }
         }
         return true;
@@ -65,9 +73,11 @@ public class DamageTargetAndAllControlledEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return "{this} deals " + firstAmount + "damage to " +
-                getTargetPointer().describeTargets(mode.getTargets(), "that creature") +
+        String description = getTargetPointer().describeTargets(mode.getTargets(), "that player");
+        return "{this} deals " + firstAmount + "damage to " + description +
                 " and " + secondAmount + " damage to each " + filter.getMessage() +
-                " that player or that planeswalker's controller controls";
+                " that player" +
+                (description.contains("planeswalker") ? " or that planeswalker's controller" : "") +
+                " controls";
     }
 }

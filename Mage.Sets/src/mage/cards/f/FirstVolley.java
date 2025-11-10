@@ -1,9 +1,6 @@
-
 package mage.cards.f;
 
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.DamageTargetControllerEffect;
-import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.DamageTargetAndTargetControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -23,10 +20,7 @@ public final class FirstVolley extends CardImpl {
         this.subtype.add(SubType.ARCANE);
 
         // First Volley deals 1 damage to target creature and 1 damage to that creature's controller.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(1));
-        Effect effect = new DamageTargetControllerEffect(1);
-        effect.setText("and 1 damage to that creature's controller");
-        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addEffect(new DamageTargetAndTargetControllerEffect(1, 1));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
     }

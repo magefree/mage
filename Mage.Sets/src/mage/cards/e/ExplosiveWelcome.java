@@ -1,8 +1,7 @@
 package mage.cards.e;
 
 import mage.Mana;
-import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.DamageTargetAndTargetEffect;
 import mage.abilities.effects.mana.BasicManaEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -11,10 +10,8 @@ import mage.constants.ManaType;
 import mage.filter.common.FilterAnyTarget;
 import mage.filter.common.FilterPermanentOrPlayer;
 import mage.filter.predicate.other.AnotherTargetPredicate;
-import mage.target.Target;
 import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetPermanentOrPlayer;
-import mage.target.targetpointer.SecondTargetPointer;
 
 import java.util.UUID;
 
@@ -34,19 +31,12 @@ public final class ExplosiveWelcome extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{7}{R}");
 
         // Explosive Welcome deals 5 damage to any target and 3 damage to any other target. Add {R}{R}{R}.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(StaticValue.get(5), true, "", true));
-        this.getSpellAbility().addEffect(
-                new DamageTargetEffect(StaticValue.get(3), true, "", true)
-                        .setTargetPointer(new SecondTargetPointer())
-                        .setText("and 3 damage to any other target.")
-        );
+        this.getSpellAbility().addEffect(new DamageTargetAndTargetEffect(5, 3));
         this.getSpellAbility().addEffect(new BasicManaEffect(new Mana(ManaType.RED, 3)));
-        Target target = new TargetAnyTarget();
-        target.setTargetTag(1);
-        this.getSpellAbility().addTarget(target);
-        target = new TargetPermanentOrPlayer(filter);
-        target.setTargetTag(2);
-        this.getSpellAbility().addTarget(target);
+        this.getSpellAbility().addTarget(new TargetAnyTarget()
+                .withChooseHint("to deal 5 damage").setTargetTag(1));
+        this.getSpellAbility().addTarget(new TargetPermanentOrPlayer(filter)
+                .withChooseHint("to deal 3 damage").setTargetTag(2));
     }
 
     private ExplosiveWelcome(final ExplosiveWelcome card) {

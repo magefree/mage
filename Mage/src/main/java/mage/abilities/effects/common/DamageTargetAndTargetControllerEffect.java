@@ -44,7 +44,10 @@ public class DamageTargetAndTargetControllerEffect extends OneShotEffect {
             Permanent permanent = game.getPermanent(targetId);
             if (permanent != null) {
                 permanent.damage(firstAmount, source.getSourceId(), source, game);
-                Player player = game.getPlayer(permanent.getControllerId());
+            }
+            Permanent lki = game.getPermanentOrLKIBattlefield(targetId);
+            if (lki != null) {
+                Player player = game.getPlayer(lki.getControllerId());
                 if (player != null) {
                     player.damage(secondAmount, source.getSourceId(), source, game);
                 }
@@ -58,8 +61,9 @@ public class DamageTargetAndTargetControllerEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return "{this} deals " + firstAmount + "damage to " +
-                getTargetPointer().describeTargets(mode.getTargets(), "that creature") +
-                " and " + secondAmount + "damage to that creature's controller";
+        String description = getTargetPointer().describeTargets(mode.getTargets(), "that creature");
+        return "{this} deals " + firstAmount + "damage to " + description +
+                " and " + secondAmount + "damage to that " +
+                (description.contains(" or ") ? "permanent's" : "creature's") + " controller";
     }
 }
