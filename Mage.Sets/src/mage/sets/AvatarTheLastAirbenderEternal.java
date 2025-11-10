@@ -95,7 +95,7 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Fabled Passage", 57, Rarity.MYTHIC, mage.cards.f.FabledPassage.class));
         cards.add(new SetCardInfo("Feed the Swarm", 257, Rarity.COMMON, mage.cards.f.FeedTheSwarm.class));
         cards.add(new SetCardInfo("Fervor", 29, Rarity.MYTHIC, mage.cards.f.Fervor.class));
-        cards.add(new SetCardInfo("Fevered Visions", 49, Rarity.RARE, mage.cards.f.FeveredVisions.class));
+        cards.add(new SetCardInfo("Fevered Visions", 49, Rarity.MYTHIC, mage.cards.f.FeveredVisions.class));
         cards.add(new SetCardInfo("Fierce Guardianship", 307, Rarity.RARE, mage.cards.f.FierceGuardianship.class));
         cards.add(new SetCardInfo("Fiery Confluence", 165, Rarity.RARE, mage.cards.f.FieryConfluence.class));
         cards.add(new SetCardInfo("Fire Nation Ambushers", 229, Rarity.COMMON, mage.cards.f.FireNationAmbushers.class));
@@ -125,7 +125,7 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Iroh, Dragon of the West", 194, Rarity.RARE, mage.cards.i.IrohDragonOfTheWest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Iroh, Firebending Instructor", 240, Rarity.UNCOMMON, mage.cards.i.IrohFirebendingInstructor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Iroh, Firebending Instructor", 282, Rarity.UNCOMMON, mage.cards.i.IrohFirebendingInstructor.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Join the Dance", 50, Rarity.UNCOMMON, mage.cards.j.JoinTheDance.class));
+        cards.add(new SetCardInfo("Join the Dance", 50, Rarity.MYTHIC, mage.cards.j.JoinTheDance.class));
         cards.add(new SetCardInfo("Katara, Heroic Healer", 215, Rarity.UNCOMMON, mage.cards.k.KataraHeroicHealer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Katara, Heroic Healer", 269, Rarity.UNCOMMON, mage.cards.k.KataraHeroicHealer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Katara, Waterbending Master", 180, Rarity.MYTHIC, mage.cards.k.KataraWaterbendingMaster.class, NON_FULL_USE_VARIOUS));
