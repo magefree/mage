@@ -4,7 +4,6 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.game.Game;
@@ -24,7 +23,6 @@ public class DamageTargetEffect extends OneShotEffect {
     protected DynamicValue amount;
     protected boolean preventable;
     protected String targetDescription;
-    protected boolean useOnlyTargetPointer; // TODO: investigate why do we ignore targetPointer by default??
     protected String sourceName = "{this}";
 
     public DamageTargetEffect(int amount) {
@@ -42,10 +40,6 @@ public class DamageTargetEffect extends OneShotEffect {
 
     public DamageTargetEffect(int amount, boolean preventable, String targetDescription) {
         this(StaticValue.get(amount), preventable, targetDescription);
-    }
-
-    public DamageTargetEffect(int amount, boolean preventable, String targetDescription, boolean useOnlyTargetPointer) {
-        this(StaticValue.get(amount), preventable, targetDescription, useOnlyTargetPointer);
     }
 
     public DamageTargetEffect(int amount, boolean preventable, String targetDescription, String whoDealDamageName) {
@@ -67,15 +61,10 @@ public class DamageTargetEffect extends OneShotEffect {
     }
 
     public DamageTargetEffect(DynamicValue amount, boolean preventable, String targetDescription) {
-        this(amount, preventable, targetDescription, false);
-    }
-
-    public DamageTargetEffect(DynamicValue amount, boolean preventable, String targetDescription, boolean useOnlyTargetPointer) {
         super(Outcome.Damage);
         this.amount = amount;
         this.preventable = preventable;
         this.targetDescription = targetDescription;
-        this.useOnlyTargetPointer = useOnlyTargetPointer;
     }
 
     public int getAmount() {
@@ -95,18 +84,12 @@ public class DamageTargetEffect extends OneShotEffect {
         this.amount = effect.amount.copy();
         this.preventable = effect.preventable;
         this.targetDescription = effect.targetDescription;
-        this.useOnlyTargetPointer = effect.useOnlyTargetPointer;
         this.sourceName = effect.sourceName;
     }
 
+    @Override
     public DamageTargetEffect withTargetDescription(String targetDescription) {
         this.targetDescription = targetDescription;
-        return this;
-    }
-
-    // TODO: this should most likely be refactored to not be needed and always use target pointer.
-    public Effect setUseOnlyTargetPointer(boolean useOnlyTargetPointer) {
-        this.useOnlyTargetPointer = useOnlyTargetPointer;
         return this;
     }
 
@@ -117,21 +100,6 @@ public class DamageTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (!useOnlyTargetPointer && source.getTargets().size() > 1) {
-            for (Target target : source.getTargets()) {
-                for (UUID targetId : target.getTargets()) {
-                    Permanent permanent = game.getPermanent(targetId);
-                    if (permanent != null) {
-                        permanent.damage(amount.calculate(game, source, this), source.getSourceId(), source, game, false, preventable);
-                    }
-                    Player player = game.getPlayer(targetId);
-                    if (player != null) {
-                        player.damage(amount.calculate(game, source, this), source.getSourceId(), source, game, false, preventable);
-                    }
-                }
-            }
-            return true;
-        }
         for (UUID targetId : this.getTargetPointer().getTargets(game, source)) {
             Permanent permanent = game.getPermanent(targetId);
             if (permanent != null) {
@@ -154,7 +122,7 @@ public class DamageTargetEffect extends OneShotEffect {
         StringBuilder sb = new StringBuilder();
         String message = amount.getMessage();
         sb.append(this.sourceName).append(" deals ");
-        if (message.isEmpty() || !message.equals("1")) {
+        if (!message.equals("1")) {
             sb.append(amount);
         }
         if (!sb.toString().endsWith(" ")) {

@@ -1,4 +1,3 @@
-
 package mage.cards.i;
 
 import java.util.HashMap;
@@ -50,8 +49,8 @@ public final class IchneumonDruid extends CardImpl {
 
 class IchneumonDruidAbility extends TriggeredAbilityImpl {
 
-    public IchneumonDruidAbility() {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(StaticValue.get(4), false, "that player", true));
+    IchneumonDruidAbility() {
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(StaticValue.get(4), false, "that player"));
     }
 
     private IchneumonDruidAbility(final IchneumonDruidAbility ability) {
@@ -95,7 +94,7 @@ class IchneumonDruidWatcher extends Watcher {
 
     private final Map<UUID, Integer> playerInstantCount = new HashMap<>();
 
-    public IchneumonDruidWatcher() {
+    IchneumonDruidWatcher() {
         super(WatcherScope.GAME);
     }
 

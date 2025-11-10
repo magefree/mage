@@ -23,7 +23,7 @@ public final class JeskaiRevelation extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellAbility().addTarget(new TargetSpellOrPermanent());
         this.getSpellAbility().addEffect(new DamageTargetEffect(
-                4, true, "any target", true
+                4, true, "any target"
         ).setTargetPointer(new SecondTargetPointer()));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addEffect(new CreateTokenEffect(new MonasteryMentorToken(), 2));
