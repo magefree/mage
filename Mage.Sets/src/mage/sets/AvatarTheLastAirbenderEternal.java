@@ -133,6 +133,7 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Hippo-Cows", 252, Rarity.COMMON, mage.cards.h.HippoCows.class));
         cards.add(new SetCardInfo("Humble Defector", 30, Rarity.MYTHIC, mage.cards.h.HumbleDefector.class));
         cards.add(new SetCardInfo("Imprisoned in the Moon", 14, Rarity.MYTHIC, mage.cards.i.ImprisonedInTheMoon.class));
+        cards.add(new SetCardInfo("Inspired Insurgent", 77, Rarity.COMMON, mage.cards.i.InspiredInsurgent.class));
         cards.add(new SetCardInfo("Inspiring Call", 168, Rarity.UNCOMMON, mage.cards.i.InspiringCall.class));
         cards.add(new SetCardInfo("Insurrection", 31, Rarity.MYTHIC, mage.cards.i.Insurrection.class));
         cards.add(new SetCardInfo("Intruder Alarm", 15, Rarity.MYTHIC, mage.cards.i.IntruderAlarm.class));
