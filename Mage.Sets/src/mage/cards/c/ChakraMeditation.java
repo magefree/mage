@@ -7,6 +7,7 @@ import mage.abilities.condition.common.LessonsInGraveCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
+import mage.abilities.effects.common.discard.DiscardControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -34,8 +35,9 @@ public final class ChakraMeditation extends CardImpl {
                 StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, false
         );
         ability.addEffect(new ConditionalOneShotEffect(
-                null, LessonsInGraveCondition.THREE, "Then discard a card " +
-                "unless there are three or more Lesson cards in your graveyard"));
+                null, new DiscardControllerEffect(1), LessonsInGraveCondition.THREE,
+                "Then discard a card unless there are three or more Lesson cards in your graveyard"
+        ));
         this.addAbility(ability);
     }
 
