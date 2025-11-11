@@ -62,6 +62,7 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("Beetle-Headed Merchants", 86, Rarity.COMMON, mage.cards.b.BeetleHeadedMerchants.class));
         cards.add(new SetCardInfo("Bender's Waterskin", 255, Rarity.COMMON, mage.cards.b.BendersWaterskin.class));
         cards.add(new SetCardInfo("Benevolent River Spirit", 45, Rarity.UNCOMMON, mage.cards.b.BenevolentRiverSpirit.class));
+        cards.add(new SetCardInfo("Bitter Work", 210, Rarity.UNCOMMON, mage.cards.b.BitterWork.class));
         cards.add(new SetCardInfo("Boar-q-pine", 124, Rarity.COMMON, mage.cards.b.BoarQPine.class));
         cards.add(new SetCardInfo("Boiling Rock Prison", 267, Rarity.COMMON, mage.cards.b.BoilingRockPrison.class));
         cards.add(new SetCardInfo("Boiling Rock Rioter", 372, Rarity.RARE, mage.cards.b.BoilingRockRioter.class, NON_FULL_USE_VARIOUS));
