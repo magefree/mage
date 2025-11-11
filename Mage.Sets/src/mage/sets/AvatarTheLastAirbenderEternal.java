@@ -78,6 +78,7 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Dark Deal", 161, Rarity.UNCOMMON, mage.cards.d.DarkDeal.class));
         cards.add(new SetCardInfo("Dark Depths", 56, Rarity.MYTHIC, mage.cards.d.DarkDepths.class));
         cards.add(new SetCardInfo("Deadly Rollick", 309, Rarity.RARE, mage.cards.d.DeadlyRollick.class));
+        cards.add(new SetCardInfo("Deer-Dog", 114, Rarity.COMMON, mage.cards.d.DeerDog.class));
         cards.add(new SetCardInfo("Deflecting Swat", 311, Rarity.RARE, mage.cards.d.DeflectingSwat.class));
         cards.add(new SetCardInfo("Deny Entry", 222, Rarity.COMMON, mage.cards.d.DenyEntry.class));
         cards.add(new SetCardInfo("Descendants' Path", 167, Rarity.RARE, mage.cards.d.DescendantsPath.class));
