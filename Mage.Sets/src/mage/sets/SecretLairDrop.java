@@ -2182,6 +2182,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Sulfuric Vortex", 2210, Rarity.RARE, mage.cards.s.SulfuricVortex.class));
         cards.add(new SetCardInfo("Pyrohemia", 2211, Rarity.RARE, mage.cards.p.Pyrohemia.class));
         cards.add(new SetCardInfo("Atreus, Impulsive Son", 2212, Rarity.MYTHIC, mage.cards.a.AtreusImpulsiveSon.class));
+        cards.add(new SetCardInfo("Kratos, Stoic Father", 2213, Rarity.MYTHIC, mage.cards.k.KratosStoicFather.class));
         cards.add(new SetCardInfo("Teferi's Ageless Insight", 2214, Rarity.RARE, mage.cards.t.TeferisAgelessInsight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Teferi's Ageless Insight", "2214b", Rarity.RARE, mage.cards.t.TeferisAgelessInsight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Iroas, God of Victory", 2215, Rarity.MYTHIC, mage.cards.i.IroasGodOfVictory.class, NON_FULL_USE_VARIOUS));
