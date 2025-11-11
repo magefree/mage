@@ -35,6 +35,7 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("Abandon Attachments", 205, Rarity.COMMON, mage.cards.a.AbandonAttachments.class));
         cards.add(new SetCardInfo("Abandoned Air Temple", 263, Rarity.RARE, mage.cards.a.AbandonedAirTemple.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Abandoned Air Temple", 386, Rarity.RARE, mage.cards.a.AbandonedAirTemple.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Accumulate Wisdom", 44, Rarity.UNCOMMON, mage.cards.a.AccumulateWisdom.class));
         cards.add(new SetCardInfo("Agna Qel'a", 264, Rarity.RARE, mage.cards.a.AgnaQela.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Agna Qel'a", 387, Rarity.RARE, mage.cards.a.AgnaQela.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Air Nomad Legacy", 206, Rarity.UNCOMMON, mage.cards.a.AirNomadLegacy.class));

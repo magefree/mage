@@ -38,7 +38,7 @@ public final class ChakraMeditation extends CardImpl {
                 null, new DiscardControllerEffect(1), LessonsInGraveCondition.THREE,
                 "Then discard a card unless there are three or more Lesson cards in your graveyard"
         ));
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(LessonsInGraveCondition.getHint()));
     }
 
     private ChakraMeditation(final ChakraMeditation card) {
