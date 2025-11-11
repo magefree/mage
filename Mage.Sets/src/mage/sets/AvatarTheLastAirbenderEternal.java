@@ -243,6 +243,8 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Toucan-Puffin", 88, Rarity.COMMON, mage.cards.t.ToucanPuffin.class));
         cards.add(new SetCardInfo("Training Grounds", 20, Rarity.MYTHIC, mage.cards.t.TrainingGrounds.class));
         cards.add(new SetCardInfo("Treetop Village", 60, Rarity.MYTHIC, mage.cards.t.TreetopVillage.class));
+        cards.add(new SetCardInfo("Tui and La, Moon and Ocean", 181, Rarity.RARE, mage.cards.t.TuiAndLaMoonAndOcean.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Tui and La, Moon and Ocean", 96, Rarity.RARE, mage.cards.t.TuiAndLaMoonAndOcean.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tundra Wall", 220, Rarity.COMMON, mage.cards.t.TundraWall.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tundra Wall", 275, Rarity.COMMON, mage.cards.t.TundraWall.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Turtle-Seals", 226, Rarity.COMMON, mage.cards.t.TurtleSeals.class));
