@@ -206,6 +206,7 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Run Amok", 284, Rarity.COMMON, mage.cards.r.RunAmok.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ruthless Waterbender", 110, Rarity.UNCOMMON, mage.cards.r.RuthlessWaterbender.class));
         cards.add(new SetCardInfo("Sakashima of a Thousand Faces", 18, Rarity.MYTHIC, mage.cards.s.SakashimaOfAThousandFaces.class));
+        cards.add(new SetCardInfo("Scarring Memories", 111, Rarity.UNCOMMON, mage.cards.s.ScarringMemories.class));
         cards.add(new SetCardInfo("Scout's Warning", 6, Rarity.MYTHIC, mage.cards.s.ScoutsWarning.class));
         cards.add(new SetCardInfo("Searing Blood", 35, Rarity.MYTHIC, mage.cards.s.SearingBlood.class));
         cards.add(new SetCardInfo("Seismic Tutelage", 254, Rarity.RARE, mage.cards.s.SeismicTutelage.class));
