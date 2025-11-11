@@ -212,6 +212,8 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Shattering Spree", 36, Rarity.MYTHIC, mage.cards.s.ShatteringSpree.class));
         cards.add(new SetCardInfo("Sledding Otter-Penguin", 218, Rarity.COMMON, mage.cards.s.SleddingOtterPenguin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sledding Otter-Penguin", 273, Rarity.COMMON, mage.cards.s.SleddingOtterPenguin.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Smellerbee, Rebel Fighter", 125, Rarity.RARE, mage.cards.s.SmellerbeeRebelFighter.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Smellerbee, Rebel Fighter", 198, Rarity.RARE, mage.cards.s.SmellerbeeRebelFighter.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sokka's Sword Training", 84, Rarity.COMMON, mage.cards.s.SokkasSwordTraining.class));
         cards.add(new SetCardInfo("Sokka, Wolf Cove's Protector", 219, Rarity.UNCOMMON, mage.cards.s.SokkaWolfCovesProtector.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sokka, Wolf Cove's Protector", 274, Rarity.UNCOMMON, mage.cards.s.SokkaWolfCovesProtector.class, NON_FULL_USE_VARIOUS));
