@@ -2832,6 +2832,25 @@ public class ScryfallImageSupportTokens {
             put("SPM/Treasure", "https://api.scryfall.com/cards/tspm/7?format=image");
 
             // TLA
+            put("TLA/Ally/1", "https://api.scryfall.com/cards/ttla/4/?format=image");
+            put("TLA/Ally/2", "https://api.scryfall.com/cards/ttla/5/?format=image");
+            put("TLA/Ally/3", "https://api.scryfall.com/cards/ttla/6/?format=image");
+            put("TLA/Ally/4", "https://api.scryfall.com/cards/ttla/7/?format=image");
+            put("TLA/Ally/5", "https://api.scryfall.com/cards/ttla/8/?format=image");
+            put("TLA/Ballistic Boulder", "https://api.scryfall.com/cards/ttla/13/?format=image");
+            put("TLA/Bear", "https://api.scryfall.com/cards/ttla/12/?format=image");
+            put("TLA/Clue/1", "https://api.scryfall.com/cards/ttla/14/?format=image");
+            put("TLA/Clue/2", "https://api.scryfall.com/cards/ttla/15/?format=image");
+            put("TLA/Clue/3", "https://api.scryfall.com/cards/ttla/16/?format=image");
+            put("TLA/Clue/4", "https://api.scryfall.com/cards/ttla/17/?format=image");
+            put("TLA/Clue/5", "https://api.scryfall.com/cards/ttla/18/?format=image");
+            put("TLA/Food/1", "https://api.scryfall.com/cards/ttla/19/?format=image");
+            put("TLA/Food/2", "https://api.scryfall.com/cards/ttla/20/?format=image");
+            put("TLA/Food/3", "https://api.scryfall.com/cards/ttla/21/?format=image");
+            put("TLA/Monk", "https://api.scryfall.com/cards/ttla/10/?format=image");
+            put("TLA/Soldier", "https://api.scryfall.com/cards/ttla/11/?format=image");
+            put("TLA/Spirit", "https://api.scryfall.com/cards/ttla/3/?format=image");
+            put("TLA/Treasure", "https://api.scryfall.com/cards/ttla/22?format=image");
 
             // TLE
             put("TLE/Marit Lage", "https://api.scryfall.com/cards/ttle/1/?format=image");
