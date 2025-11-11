@@ -72,6 +72,8 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Cracked Earth Technique", 135, Rarity.UNCOMMON, mage.cards.c.CrackedEarthTechnique.class));
         cards.add(new SetCardInfo("Creeping Crystal Coating", 136, Rarity.UNCOMMON, mage.cards.c.CreepingCrystalCoating.class));
         cards.add(new SetCardInfo("Cruel Tutor", 24, Rarity.MYTHIC, mage.cards.c.CruelTutor.class));
+        cards.add(new SetCardInfo("Crystalline Armor", 137, Rarity.RARE, mage.cards.c.CrystallineArmor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Crystalline Armor", 204, Rarity.RARE, mage.cards.c.CrystallineArmor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dark Deal", 161, Rarity.UNCOMMON, mage.cards.d.DarkDeal.class));
         cards.add(new SetCardInfo("Dark Depths", 56, Rarity.MYTHIC, mage.cards.d.DarkDepths.class));
         cards.add(new SetCardInfo("Deadly Rollick", 309, Rarity.RARE, mage.cards.d.DeadlyRollick.class));
