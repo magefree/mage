@@ -61,6 +61,8 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Capital Guard", 277, Rarity.COMMON, mage.cards.c.CapitalGuard.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Captain Sisay", 47, Rarity.MYTHIC, mage.cards.c.CaptainSisay.class));
         cards.add(new SetCardInfo("Cathartic Reunion", 164, Rarity.COMMON, mage.cards.c.CatharticReunion.class));
+        cards.add(new SetCardInfo("Chakra Meditation", 179, Rarity.RARE, mage.cards.c.ChakraMeditation.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Chakra Meditation", 91, Rarity.RARE, mage.cards.c.ChakraMeditation.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cityscape Leveler", 53, Rarity.MYTHIC, mage.cards.c.CityscapeLeveler.class));
         cards.add(new SetCardInfo("Clone Legion", 12, Rarity.MYTHIC, mage.cards.c.CloneLegion.class));
         cards.add(new SetCardInfo("Clone", 11, Rarity.MYTHIC, mage.cards.c.Clone.class));
