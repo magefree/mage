@@ -91,6 +91,7 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Drannith Magistrate", 2, Rarity.MYTHIC, mage.cards.d.DrannithMagistrate.class));
         cards.add(new SetCardInfo("Duelist's Heritage", 153, Rarity.RARE, mage.cards.d.DuelistsHeritage.class));
         cards.add(new SetCardInfo("Earthbending Student", 249, Rarity.UNCOMMON, mage.cards.e.EarthbendingStudent.class));
+        cards.add(new SetCardInfo("Earthshape", 67, Rarity.RARE, mage.cards.e.Earthshape.class));
         cards.add(new SetCardInfo("Eel-Hounds", 250, Rarity.UNCOMMON, mage.cards.e.EelHounds.class));
         cards.add(new SetCardInfo("Eladamri's Call", 48, Rarity.MYTHIC, mage.cards.e.EladamrisCall.class));
         cards.add(new SetCardInfo("Elemental Bond", 40, Rarity.MYTHIC, mage.cards.e.ElementalBond.class));

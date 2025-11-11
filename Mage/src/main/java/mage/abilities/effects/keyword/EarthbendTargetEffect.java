@@ -54,19 +54,23 @@ public class EarthbendTargetEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
+        int value = amount.calculate(game, source, this);
+        doEarthBend(permanent, value, game, source);
+        return true;
+    }
+
+    public static void doEarthBend(Permanent permanent, int value, Game game, Ability source) {
         game.addEffect(new BecomesCreatureTargetEffect(
                 new CreatureToken(0, 0)
                         .withAbility(HasteAbility.getInstance()),
                 false, true, Duration.Custom
         ), source);
-        int value = amount.calculate(game, source, this);
         permanent.addCounters(CounterType.P1P1.createInstance(value), source, game);
         game.addDelayedTriggeredAbility(new EarthbendingDelayedTriggeredAbility(permanent, game), source);
         game.fireEvent(GameEvent.getEvent(
                 GameEvent.EventType.EARTHBENDED, permanent.getId(),
                 source, source.getControllerId(), value
         ));
-        return true;
     }
 
     @Override
