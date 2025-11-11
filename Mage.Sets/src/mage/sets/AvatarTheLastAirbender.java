@@ -172,6 +172,7 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("Jeong Jeong's Deserters", 25, Rarity.COMMON, mage.cards.j.JeongJeongsDeserters.class));
         cards.add(new SetCardInfo("Jeong Jeong, the Deserter", 142, Rarity.UNCOMMON, mage.cards.j.JeongJeongTheDeserter.class));
         cards.add(new SetCardInfo("Jet's Brainwashing", 143, Rarity.UNCOMMON, mage.cards.j.JetsBrainwashing.class));
+        cards.add(new SetCardInfo("Jet, Freedom Fighter", 229, Rarity.UNCOMMON, mage.cards.j.JetFreedomFighter.class));
         cards.add(new SetCardInfo("Joo Dee, One of Many", 105, Rarity.UNCOMMON, mage.cards.j.JooDeeOneOfMany.class));
         cards.add(new SetCardInfo("June, Bounty Hunter", 106, Rarity.UNCOMMON, mage.cards.j.JuneBountyHunter.class));
         cards.add(new SetCardInfo("Katara, Bending Prodigy", 59, Rarity.UNCOMMON, mage.cards.k.KataraBendingProdigy.class));
