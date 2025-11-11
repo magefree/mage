@@ -2,7 +2,7 @@ package mage.cards.i;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.DamageTargetAndTargetEffect;
 import mage.abilities.effects.common.continuous.DamageCantBePreventedEffect;
 import mage.abilities.keyword.AftermathAbility;
 import mage.cards.CardSetInfo;
@@ -15,7 +15,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetPlayerOrPlaneswalker;
-import mage.target.targetpointer.EachTargetPointer;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -40,7 +39,7 @@ public final class InsultInjury extends SplitCard {
         getRightHalfCard().addAbility(new AftermathAbility().setRuleAtTheTop(true));
         getRightHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
         getRightHalfCard().getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
-        getRightHalfCard().getSpellAbility().addEffect(new DamageTargetEffect(2).setTargetPointer(new EachTargetPointer()));
+        getRightHalfCard().getSpellAbility().addEffect(new DamageTargetAndTargetEffect(2, 2));
     }
 
     private InsultInjury(final InsultInjury card) {
