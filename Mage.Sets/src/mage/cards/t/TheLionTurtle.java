@@ -3,13 +3,9 @@ package mage.cards.t;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
-import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
+import mage.abilities.condition.common.LessonsInGraveCondition;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.combat.CantAttackBlockUnlessConditionSourceEffect;
-import mage.abilities.hint.Hint;
-import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.ReachAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.mana.AnyColorManaAbility;
@@ -18,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.filter.FilterCard;
 
 import java.util.UUID;
 
@@ -26,13 +21,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class TheLionTurtle extends CardImpl {
-
-    private static final Condition condition = new CardsInControllerGraveyardCondition(
-            3, new FilterCard(SubType.LESSON, "Lesson cards")
-    );
-    private static final Hint hint = new ValueHint(
-            "Lesson cards in your graveyard", new CardsInControllerGraveyardCount(new FilterCard(SubType.LESSON))
-    );
 
     public TheLionTurtle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{U}");
@@ -54,7 +42,8 @@ public final class TheLionTurtle extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(3)));
 
         // The Lion-Turtle can't attack or block unless there are three or more Lesson cards in your graveyard.
-        this.addAbility(new SimpleStaticAbility(new CantAttackBlockUnlessConditionSourceEffect(condition)).addHint(hint));
+        this.addAbility(new SimpleStaticAbility(new CantAttackBlockUnlessConditionSourceEffect(LessonsInGraveCondition.THREE))
+                .addHint(LessonsInGraveCondition.getHint()));
 
         // {T}: Add one mana of any color.
         this.addAbility(new AnyColorManaAbility());

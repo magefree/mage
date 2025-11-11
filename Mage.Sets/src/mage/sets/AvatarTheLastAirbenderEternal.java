@@ -28,6 +28,7 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
 
         cards.add(new SetCardInfo("Aang's Defense", 211, Rarity.COMMON, mage.cards.a.AangsDefense.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aang's Defense", 266, Rarity.COMMON, mage.cards.a.AangsDefense.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Aang, A Lot to Learn", 146, Rarity.UNCOMMON, mage.cards.a.AangALotToLearn.class));
         cards.add(new SetCardInfo("Aang, Air Nomad", 210, Rarity.RARE, mage.cards.a.AangAirNomad.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aang, Air Nomad", 265, Rarity.RARE, mage.cards.a.AangAirNomad.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aang, Airbending Master", 171, Rarity.MYTHIC, mage.cards.a.AangAirbendingMaster.class, NON_FULL_USE_VARIOUS));
