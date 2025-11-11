@@ -40,8 +40,8 @@ public class DamageTargetAndTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        source.getTargets().getByTag(1).getTargets().forEach(uuid -> damageTarget(uuid, firstAmount, source, game));
-        source.getTargets().getByTag(2).getTargets().forEach(uuid -> damageTarget(uuid, secondAmount, source, game));
+        source.getTargets().getTargetsByTag(1).forEach(uuid -> damageTarget(uuid, firstAmount, source, game));
+        source.getTargets().getTargetsByTag(2).forEach(uuid -> damageTarget(uuid, secondAmount, source, game));
         return true;
     }
 
@@ -59,6 +59,10 @@ public class DamageTargetAndTargetEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
+        // verify check that target tags are properly setup
+        if (mode.getTargets().getByTag(1) == null || mode.getTargets().getByTag(2) == null) {
+            throw new IllegalArgumentException("Wrong code usage: need to add tags to targets");
+        }
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
