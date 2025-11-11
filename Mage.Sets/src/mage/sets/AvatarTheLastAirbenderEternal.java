@@ -184,6 +184,7 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Overwhelming Victory", 123, Rarity.RARE, mage.cards.o.OverwhelmingVictory.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Overwhelming Victory", 196, Rarity.RARE, mage.cards.o.OverwhelmingVictory.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Path to Redemption", 271, Rarity.COMMON, mage.cards.p.PathToRedemption.class));
+        cards.add(new SetCardInfo("Pipsqueak, Rebel Strongarm", 82, Rarity.UNCOMMON, mage.cards.p.PipsqueakRebelStrongarm.class));
         cards.add(new SetCardInfo("Plains", 297, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 298, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 299, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
