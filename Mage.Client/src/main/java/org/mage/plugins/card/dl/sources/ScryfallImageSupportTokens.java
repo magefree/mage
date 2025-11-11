@@ -2831,6 +2831,12 @@ public class ScryfallImageSupportTokens {
             put("SPM/Spider", "https://api.scryfall.com/cards/tspm/3?format=image");
             put("SPM/Treasure", "https://api.scryfall.com/cards/tspm/7?format=image");
 
+            // TLA
+
+            // TLE
+            put("TLE/Marit Lage", "https://api.scryfall.com/cards/ttle/1/?format=image");
+            put("TLE/Soldier", "https://api.scryfall.com/cards/ttle/2?format=image");
+
             // TMT
             put("TMT/Mutagen", "https://api.scryfall.com/cards/ttmt/9?format=image");
 

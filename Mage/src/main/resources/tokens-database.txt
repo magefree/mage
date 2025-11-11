@@ -2884,6 +2884,12 @@
 |Generate|TOK:SPM|Spider|||Spider21Token|
 |Generate|TOK:SPM|Treasure|||TreasureToken|
 
+#TLA
+
+#TLE
+|Generate|TOK:TLE|Marit Lage|||MaritLageToken|
+|Generate|TOK:TLE|Soldier|||SoldierRedToken|
+
 #TMT
 |Generate|TOK:TMT|Mutagen|||MutagenToken|
 
