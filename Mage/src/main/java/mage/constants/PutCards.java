@@ -6,7 +6,11 @@ import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
+
+import java.util.Set;
 
 /**
  * @author awjackson
@@ -17,6 +21,7 @@ public enum PutCards {
     GRAVEYARD(Outcome.Discard, Zone.GRAVEYARD, "into your graveyard"),
     BATTLEFIELD(Outcome.PutCardInPlay, Zone.BATTLEFIELD, "onto the battlefield"),
     BATTLEFIELD_TAPPED(Outcome.PutCardInPlay, Zone.BATTLEFIELD, "onto the battlefield tapped"),
+    BATTLEFIELD_TAPPED_ATTACKING(Outcome.PutCardInPlay, Zone.BATTLEFIELD, "onto the battlefield tapped and attacking"),
     BATTLEFIELD_TRANSFORMED(Outcome.PutCardInPlay, Zone.BATTLEFIELD, "onto the battlefield transformed"),
     EXILED(Outcome.Exile, Zone.EXILED, "into exile"), // may need special case code to generate correct text
     TOP_OR_BOTTOM(Outcome.Benefit, Zone.LIBRARY, "on the top or bottom of your library"),
@@ -75,6 +80,15 @@ public enum PutCards {
                 return player.putCardsOnBottomOfLibrary(new CardsImpl(card), game, source, false);
             case BATTLEFIELD_TAPPED:
                 return player.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
+            case BATTLEFIELD_TAPPED_ATTACKING:
+                if (player.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null)) {
+                    Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
+                    if (permanent != null) {
+                        game.getCombat().addAttackingCreature(permanent.getId(), game);
+                    }
+                    return true;
+                }
+                return false;
             case SHUFFLE:
                 return player.shuffleCardsToLibrary(card, game, source);
             case BATTLEFIELD_TRANSFORMED:
@@ -101,6 +115,18 @@ public enum PutCards {
                 return player.putCardsOnBottomOfLibrary(cards, game, source, false);
             case BATTLEFIELD_TAPPED:
                 return player.moveCards(cards.getCards(game), Zone.BATTLEFIELD, source, game, true, false, false, null);
+            case BATTLEFIELD_TAPPED_ATTACKING:
+                Set<Card> cardSet = cards.getCards(game);
+                if (player.moveCards(cardSet, Zone.BATTLEFIELD, source, game, true, false, false, null)) {
+                    for (Card card : cardSet) {
+                        Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
+                        if (permanent != null) {
+                            game.getCombat().addAttackingCreature(permanent.getId(), game);
+                        }
+                    }
+                    return true;
+                }
+                return false;
             case SHUFFLE:
                 return player.shuffleCardsToLibrary(cards, game, source);
             case BATTLEFIELD_TRANSFORMED:
