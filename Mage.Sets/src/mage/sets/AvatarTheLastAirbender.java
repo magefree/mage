@@ -86,6 +86,8 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("Dai Li Agents", 214, Rarity.UNCOMMON, mage.cards.d.DaiLiAgents.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dai Li Agents", 306, Rarity.UNCOMMON, mage.cards.d.DaiLiAgents.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dai Li Indoctrination", 93, Rarity.COMMON, mage.cards.d.DaiLiIndoctrination.class));
+        cards.add(new SetCardInfo("Day of Black Sun", 373, Rarity.RARE, mage.cards.d.DayOfBlackSun.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Day of Black Sun", 94, Rarity.RARE, mage.cards.d.DayOfBlackSun.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Deadly Precision", 95, Rarity.COMMON, mage.cards.d.DeadlyPrecision.class));
         cards.add(new SetCardInfo("Deserter's Disciple", 131, Rarity.COMMON, mage.cards.d.DesertersDisciple.class));
         cards.add(new SetCardInfo("Diligent Zookeeper", 171, Rarity.RARE, mage.cards.d.DiligentZookeeper.class, NON_FULL_USE_VARIOUS));
