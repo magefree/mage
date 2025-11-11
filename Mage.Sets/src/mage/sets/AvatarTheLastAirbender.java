@@ -223,6 +223,8 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("Ran and Shaw", 325, Rarity.RARE, mage.cards.r.RanAndShaw.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Raucous Audience", 190, Rarity.COMMON, mage.cards.r.RaucousAudience.class));
         cards.add(new SetCardInfo("Razor Rings", 33, Rarity.COMMON, mage.cards.r.RazorRings.class));
+        cards.add(new SetCardInfo("Realm of Koh", 276, Rarity.RARE, mage.cards.r.RealmOfKoh.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Realm of Koh", 391, Rarity.RARE, mage.cards.r.RealmOfKoh.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rebellious Captives", 191, Rarity.COMMON, mage.cards.r.RebelliousCaptives.class));
         cards.add(new SetCardInfo("Redirect Lightning", 151, Rarity.RARE, mage.cards.r.RedirectLightning.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Redirect Lightning", 343, Rarity.RARE, mage.cards.r.RedirectLightning.class, NON_FULL_USE_VARIOUS));
