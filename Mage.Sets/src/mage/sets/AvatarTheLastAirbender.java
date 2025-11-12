@@ -66,6 +66,8 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("Badgermole", 166, Rarity.COMMON, mage.cards.b.Badgermole.class));
         cards.add(new SetCardInfo("Barrels of Blasting Jelly", 254, Rarity.COMMON, mage.cards.b.BarrelsOfBlastingJelly.class));
         cards.add(new SetCardInfo("Beetle-Headed Merchants", 86, Rarity.COMMON, mage.cards.b.BeetleHeadedMerchants.class));
+        cards.add(new SetCardInfo("Beifong's Bounty Hunters", 209, Rarity.RARE, mage.cards.b.BeifongsBountyHunters.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Beifong's Bounty Hunters", 379, Rarity.RARE, mage.cards.b.BeifongsBountyHunters.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bender's Waterskin", 255, Rarity.COMMON, mage.cards.b.BendersWaterskin.class));
         cards.add(new SetCardInfo("Benevolent River Spirit", 45, Rarity.UNCOMMON, mage.cards.b.BenevolentRiverSpirit.class));
         cards.add(new SetCardInfo("Bitter Work", 210, Rarity.UNCOMMON, mage.cards.b.BitterWork.class));
