@@ -193,6 +193,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         if (AbilityType.STATIC != source.getAbilityType()) {
             if (layer != null) {
                 switch (layer) {
+                    case TransformCharacteristics_0:
                     case CopyEffects_1:
                     case ControlChangingEffects_2:
                     case TextChangingEffects_3:
@@ -202,7 +203,8 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
                     case PTChangingEffects_7:
                         this.affectedObjectsSet = true;
                 }
-            } else if (hasLayer(Layer.CopyEffects_1)
+            } else if (hasLayer(Layer.TransformCharacteristics_0)
+                    || hasLayer(Layer.CopyEffects_1)
                     || hasLayer(Layer.ControlChangingEffects_2)
                     || hasLayer(Layer.TextChangingEffects_3)
                     || hasLayer(Layer.TypeChangingEffects_4)
