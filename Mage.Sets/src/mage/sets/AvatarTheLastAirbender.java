@@ -152,6 +152,7 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("Flopsie, Bumi's Buddy", 179, Rarity.UNCOMMON, mage.cards.f.FlopsieBumisBuddy.class));
         cards.add(new SetCardInfo("Foggy Bottom Swamp", 269, Rarity.COMMON, mage.cards.f.FoggyBottomSwamp.class));
         cards.add(new SetCardInfo("Foggy Swamp Hunters", 101, Rarity.COMMON, mage.cards.f.FoggySwampHunters.class));
+        cards.add(new SetCardInfo("Foggy Swamp Spirit Keeper", 222, Rarity.UNCOMMON, mage.cards.f.FoggySwampSpiritKeeper.class));
         cards.add(new SetCardInfo("Foggy Swamp Vinebender", 180, Rarity.COMMON, mage.cards.f.FoggySwampVinebender.class));
         cards.add(new SetCardInfo("Forecasting Fortune Teller", 51, Rarity.COMMON, mage.cards.f.ForecastingFortuneTeller.class));
         cards.add(new SetCardInfo("Forest", 286, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
