@@ -10,8 +10,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -19,12 +18,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class SuperShredder extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterPermanent("another permanent");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public SuperShredder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
@@ -41,7 +34,7 @@ public final class SuperShredder extends CardImpl {
 
         // Whenever another permanent leaves the battlefield, put a +1/+1 counter on Super Shredder.
         this.addAbility(new LeavesBattlefieldAllTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), StaticFilters.FILTER_ANOTHER_PERMANENT
         ));
     }
 

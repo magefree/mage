@@ -1,8 +1,9 @@
-package mage.cards.g;
+package mage.cards.p;
 
 import mage.MageInt;
 import mage.abilities.common.SacrificePermanentTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -15,28 +16,31 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class GixianInfiltrator extends CardImpl {
+public final class PiratePeddlers extends CardImpl {
 
-    public GixianInfiltrator(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
+    public PiratePeddlers(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
 
-        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.PIRATE);
         this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
+        this.toughness = new MageInt(2);
 
-        // Whenever you sacrifice another permanent, put a +1/+1 counter on Gixian Infiltrator.
+        // Deathtouch
+        this.addAbility(DeathtouchAbility.getInstance());
+
+        // Whenever you sacrifice another permanent, put a +1/+1 counter on this creature.
         this.addAbility(new SacrificePermanentTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()), StaticFilters.FILTER_ANOTHER_PERMANENT
         ));
     }
 
-    private GixianInfiltrator(final GixianInfiltrator card) {
+    private PiratePeddlers(final PiratePeddlers card) {
         super(card);
     }
 
     @Override
-    public GixianInfiltrator copy() {
-        return new GixianInfiltrator(this);
+    public PiratePeddlers copy() {
+        return new PiratePeddlers(this);
     }
 }

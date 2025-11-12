@@ -237,6 +237,7 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("Ozai, the Phoenix King", 335, Rarity.MYTHIC, mage.cards.o.OzaiThePhoenixKing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Path to Redemption", 31, Rarity.COMMON, mage.cards.p.PathToRedemption.class));
         cards.add(new SetCardInfo("Pillar Launch", 189, Rarity.COMMON, mage.cards.p.PillarLaunch.class));
+        cards.add(new SetCardInfo("Pirate Peddlers", 115, Rarity.COMMON, mage.cards.p.PiratePeddlers.class));
         cards.add(new SetCardInfo("Plains", 282, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 287, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Plains", 292, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
