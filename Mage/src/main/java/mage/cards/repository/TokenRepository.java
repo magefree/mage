@@ -321,7 +321,7 @@ public enum TokenRepository {
         // support only 1 image: https://scryfall.com/card/tmkm/21/a-mysterious-creature
         // https://scryfall.com/search?q=oracleid%3A6481a124-6859-4f02-9fd3-b1302528dd2e+include%3Aextras&unique=art&as=grid&order=released
         res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_CLOAK, 1, "https://api.scryfall.com/cards/tmkm/21/en?format=image"));
-        res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_CLOAK, 1, "https://api.scryfall.com/cards/tacr/8/en?format=image"));
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_CLOAK, 2, "https://api.scryfall.com/cards/tacr/8/en?format=image"));
 
 
         // Foretell
