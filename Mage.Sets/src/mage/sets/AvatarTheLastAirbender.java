@@ -28,9 +28,15 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("Aang's Iceberg", 336, Rarity.RARE, mage.cards.a.AangsIceberg.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aang's Iceberg", 5, Rarity.RARE, mage.cards.a.AangsIceberg.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aang's Journey", 1, Rarity.COMMON, mage.cards.a.AangsJourney.class));
+        cards.add(new SetCardInfo("Aang, Destined Savior", 203, Rarity.RARE, mage.cards.a.AangDestinedSavior.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Aang, Destined Savior", 304, Rarity.RARE, mage.cards.a.AangDestinedSavior.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Aang, Destined Savior", 346, Rarity.RARE, mage.cards.a.AangDestinedSavior.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aang, Master of Elements", 207, Rarity.MYTHIC, mage.cards.a.AangMasterOfElements.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aang, Master of Elements", 308, Rarity.MYTHIC, mage.cards.a.AangMasterOfElements.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aang, Master of Elements", 363, Rarity.MYTHIC, mage.cards.a.AangMasterOfElements.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Aang, at the Crossroads", 203, Rarity.RARE, mage.cards.a.AangAtTheCrossroads.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Aang, at the Crossroads", 304, Rarity.RARE, mage.cards.a.AangAtTheCrossroads.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Aang, at the Crossroads", 346, Rarity.RARE, mage.cards.a.AangAtTheCrossroads.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aang, the Last Airbender", 4, Rarity.UNCOMMON, mage.cards.a.AangTheLastAirbender.class));
         cards.add(new SetCardInfo("Abandon Attachments", 205, Rarity.COMMON, mage.cards.a.AbandonAttachments.class));
         cards.add(new SetCardInfo("Abandoned Air Temple", 263, Rarity.RARE, mage.cards.a.AbandonedAirTemple.class, NON_FULL_USE_VARIOUS));
