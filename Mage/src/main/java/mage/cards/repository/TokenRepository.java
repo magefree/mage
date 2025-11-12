@@ -1,13 +1,22 @@
 package mage.cards.repository;
 
-import mage.util.RandomUtil;
-import org.apache.log4j.Logger;
-
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Random;
+import java.util.UUID;
 import java.util.stream.Collectors;
+
+import org.apache.log4j.Logger;
+
+import mage.util.RandomUtil;
 
 /**
  * @author JayDi85
@@ -258,6 +267,7 @@ public enum TokenRepository {
 
         // Copy
         // https://scryfall.com/search?q=include%3Aextras+unique%3Aprints+type%3Atoken+copy&unique=cards&as=grid&order=name
+        // https://scryfall.com/search?q=oracleid%3A88c78601-87f0-45e7-b2e0-e7ffcfb1cb70+include%3Aextras&unique=art&as=grid&order=released
         res.add(createXmageToken(XMAGE_IMAGE_NAME_COPY, 1, "https://api.scryfall.com/cards/tclb/19/en?format=image"));
         res.add(createXmageToken(XMAGE_IMAGE_NAME_COPY, 2, "https://api.scryfall.com/cards/tsnc/1/en?format=image"));
         res.add(createXmageToken(XMAGE_IMAGE_NAME_COPY, 3, "https://api.scryfall.com/cards/tvow/19/en?format=image"));
@@ -277,57 +287,67 @@ public enum TokenRepository {
 
         // City's Blessing
         // https://scryfall.com/search?q=type%3Atoken+include%3Aextras+unique%3Aprints+City%27s+Blessing+&unique=cards&as=grid&order=name
-        // https://scryfall.com/search?as=grid&order=released&q=oracleid%3A73d60ab9-1c38-4592-a5b5-ab84788bcc84+include%3Aextras&unique=prints
+        // https://scryfall.com/search?q=oracleid%3A73d60ab9-1c38-4592-a5b5-ab84788bcc84+include%3Aextras&unique=art&as=grid&order=released
         res.add(createXmageToken(XMAGE_IMAGE_NAME_CITY_BLESSING, 1, "https://api.scryfall.com/cards/f18/2/en?format=image"));
         res.add(createXmageToken(XMAGE_IMAGE_NAME_CITY_BLESSING, 2, "https://api.scryfall.com/cards/tlcc/17/en?format=image"));
         res.add(createXmageToken(XMAGE_IMAGE_NAME_CITY_BLESSING, 3, "https://api.scryfall.com/cards/tmkc/28/en?format=image"));
 
         // Day // Night
         // https://scryfall.com/search?q=include%3Aextras+unique%3Aprints+%22Day+%2F%2F+Night%22&unique=cards&as=grid&order=name
+        // https://scryfall.com/search?q=oracleid%3A84142407-ba98-497d-bbc8-39176aa67c02+include%3Aextras&unique=art&as=grid&order=released
         res.add(createXmageToken(XMAGE_IMAGE_NAME_DAY, 1, "https://api.scryfall.com/cards/tvow/21/en?format=image&face=front"));
         res.add(createXmageToken(XMAGE_IMAGE_NAME_NIGHT, 1, "https://api.scryfall.com/cards/tvow/21/en?format=image&face=back"));
 
         // Manifest
         // https://scryfall.com/search?q=Manifest+include%3Aextras+unique%3Aprints&unique=cards&as=grid&order=name
-        res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_MANIFEST, 1, "https://api.scryfall.com/cards/tc19/28/en?format=image"));
-        res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_MANIFEST, 2, "https://api.scryfall.com/cards/tc18/1/en?format=image"));
-        res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_MANIFEST, 3, "https://api.scryfall.com/cards/tfrf/4/en?format=image"));
-        res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_MANIFEST, 4, "https://api.scryfall.com/cards/tncc/3/en?format=image"));
-        res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_MANIFEST, 5, "https://api.scryfall.com/cards/tdsk/18/en?format=image"));
+        // https://scryfall.com/search?q=oracleid%3Af4f184ef-f456-47d8-9012-095629a5ea4d+include%3Aextras&unique=art&as=grid&order=released
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_MANIFEST, 1, "https://api.scryfall.com/cards/tfrf/4/en?format=image"));
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_MANIFEST, 2, "https://api.scryfall.com/cards/tncc/3/en?format=image"));
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_MANIFEST, 3, "https://api.scryfall.com/cards/tdsk/18/en?format=image"));
 
         // Morph and Megamorph
         // https://scryfall.com/search?q=Morph+unique%3Aprints+otag%3Aassistant-cards&unique=cards&as=grid&order=name
+        // https://scryfall.com/search?q=oracleid%3A8f92f8d7-ec89-426f-86dc-fbc259eb5559+include%3Aextras&unique=art&as=grid&order=released
         res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_MORPH, 1, "https://api.scryfall.com/cards/tktk/11/en?format=image"));
         res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_MORPH, 2, "https://api.scryfall.com/cards/ta25/15/en?format=image"));
-        res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_MORPH, 3, "https://api.scryfall.com/cards/tc19/27/en?format=image"));
 
         // Disguise
         // support only 1 image: https://scryfall.com/card/tmkm/21/a-mysterious-creature
+        // https://scryfall.com/search?q=oracleid%3A6481a124-6859-4f02-9fd3-b1302528dd2e+include%3Aextras&unique=art&as=grid&order=released
         res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_DISGUISE, 1, "https://api.scryfall.com/cards/tmkm/21/en?format=image"));
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_DISGUISE, 2, "https://api.scryfall.com/cards/tacr/8/en?format=image"));
 
         // Cloak
         // support only 1 image: https://scryfall.com/card/tmkm/21/a-mysterious-creature
+        // https://scryfall.com/search?q=oracleid%3A6481a124-6859-4f02-9fd3-b1302528dd2e+include%3Aextras&unique=art&as=grid&order=released
         res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_CLOAK, 1, "https://api.scryfall.com/cards/tmkm/21/en?format=image"));
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_CLOAK, 1, "https://api.scryfall.com/cards/tacr/8/en?format=image"));
+
 
         // Foretell
         // https://scryfall.com/search?q=Foretell+unique%3Aprints+otag%3Aassistant-cards&unique=cards&as=grid&order=name
+        // https://scryfall.com/search?q=oracleid%3Aef221d59-b8d5-4e85-a7ec-dc1cbc3ac969+include%3Aextras&unique=art&as=grid&order=released
         res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_FORETELL, 1, "https://api.scryfall.com/cards/tkhm/23/en?format=image"));
         res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_FORETELL, 2, "https://api.scryfall.com/cards/tfic/10/en?format=image"));
 
         // The Monarch
         // https://scryfall.com/search?q=Monarch+unique%3Aprints+otag%3Aassistant-cards&unique=cards&as=grid&order=name
-        res.add(createXmageToken(XMAGE_IMAGE_NAME_THE_MONARCH, 1, "https://api.scryfall.com/cards/tonc/22/en?format=image"));
+        // https://scryfall.com/search?q=oracleid%3A7c934091-1bc7-4458-acef-fdac62ec3df1+include%3Aextras&unique=art&as=grid&order=released
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_THE_MONARCH, 1, "https://api.scryfall.com/cards/tcmr/14/en?format=image"));
         res.add(createXmageToken(XMAGE_IMAGE_NAME_THE_MONARCH, 2, "https://api.scryfall.com/cards/tcn2/1/en?format=image"));
         res.add(createXmageToken(XMAGE_IMAGE_NAME_THE_MONARCH, 3, "https://api.scryfall.com/cards/tltc/15/en?format=image"));
         res.add(createXmageToken(XMAGE_IMAGE_NAME_THE_MONARCH, 4, "https://api.scryfall.com/cards/tfic/11/en?format=image"));
 
         // Radiation (for trigger)
+        // https://scryfall.com/search?q=oracleid%3A7926aa44-a2f1-416a-a4b7-1a6991c15879+include%3Aextras&unique=art&as=grid&order=released
         res.add(createXmageToken(XMAGE_IMAGE_NAME_RADIATION, 1, "https://api.scryfall.com/cards/tpip/22/en?format=image"));
 
         // The Ring
+        // https://scryfall.com/search?q=oracleid%3A98737456-ac2a-420d-aa0e-778ba3a22cec+include%3Aextras&unique=art&as=grid&order=released
         res.add(createXmageToken(XMAGE_IMAGE_NAME_THE_RING, 1, "https://api.scryfall.com/cards/tltr/H13/en?format=image"));
 
         // Speed
+        // https://scryfall.com/search?q=oracleid%3Aa0ddfd98-17ca-4327-b4db-8188af39f0f8+include%3Aextras&unique=art&as=grid&order=released
         res.add(createXmageToken(XMAGE_IMAGE_NAME_SPEED, 1, "https://api.scryfall.com/cards/tdft/14/en?format=image&&face=back"));
 
         // Helper emblem (for global card hints)
