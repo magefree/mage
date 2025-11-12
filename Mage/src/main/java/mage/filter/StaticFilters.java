@@ -902,6 +902,13 @@ public final class StaticFilters {
         FILTER_CONTROLLED_SAMURAI_OR_WARRIOR.setLockedFilter(true);
     }
 
+    public static final FilterControlledPermanent FILTER_ANOTHER_CONTROLLED_SHRINE = new FilterControlledPermanent(SubType.SHRINE, "another Shrine you control");
+
+    static {
+        FILTER_ANOTHER_CONTROLLED_SHRINE.add(AnotherPredicate.instance);
+        FILTER_ANOTHER_CONTROLLED_SHRINE.setLockedFilter(true);
+    }
+
     public static final FilterPlaneswalkerPermanent FILTER_PERMANENT_PLANESWALKER = new FilterPlaneswalkerPermanent();
 
     static {

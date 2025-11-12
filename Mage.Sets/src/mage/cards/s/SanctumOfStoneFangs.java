@@ -1,46 +1,34 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfFirstMainTriggeredAbility;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.dynamicvalue.common.ShrinesYouControlCount;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
-import mage.abilities.hint.ValueHint;
+import mage.abilities.triggers.BeginningOfFirstMainTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledPermanent;
 
 import java.util.UUID;
 
 /**
- *
  * @author htrajan
  */
 public final class SanctumOfStoneFangs extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledPermanent("");
-    private static final PermanentsOnBattlefieldCount xValue = new PermanentsOnBattlefieldCount(filter, null);
-
-    static {
-        filter.add(SubType.SHRINE.getPredicate());
-    }
-
     public SanctumOfStoneFangs(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
-        
+
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SHRINE);
 
         // At the beginning of your precombat main phase, each opponent loses X life and you gain X life, where X is the number of Shrines you control.
         Ability ability = new BeginningOfFirstMainTriggeredAbility(
-                new LoseLifeOpponentsEffect(xValue).setText("each opponent loses X life")
-        )
-                .addHint(new ValueHint("Shrines you control", xValue));
-        ability.addEffect(new GainLifeEffect(xValue).setText("and you gain X life, where X is the number of Shrines you control"));
+                new LoseLifeOpponentsEffect(ShrinesYouControlCount.WHERE_X).setText("each opponent loses X life")
+        ).addHint(ShrinesYouControlCount.getHint());
+        ability.addEffect(new GainLifeEffect(ShrinesYouControlCount.WHERE_X).setText("and you gain X life, where X is the number of Shrines you control"));
         this.addAbility(ability);
     }
 
