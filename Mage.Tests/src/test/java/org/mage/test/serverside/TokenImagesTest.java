@@ -747,7 +747,7 @@ public class TokenImagesTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), faceDownAmount);
-        assert_FaceDownMorphImageNumber(Arrays.asList(1, 2, 3));
+        assert_FaceDownMorphImageNumber(Arrays.asList(1, 2));
     }
 
     @Test // it's ok for fail in very rare random
@@ -766,7 +766,7 @@ public class TokenImagesTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), faceDownAmount);
-        assert_FaceDownMorphImageNumber(Arrays.asList(1, 2, 3));
+        assert_FaceDownMorphImageNumber(Arrays.asList(1, 2));
     }
 
     @Test
