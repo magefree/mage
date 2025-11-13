@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -27,7 +26,7 @@ public final class Simulacrum extends CardImpl {
         // You gain life equal to the damage dealt to you this turn. Simulacrum deals damage to target creature you control equal to the damage dealt to you this turn.
         this.getSpellAbility().addEffect(new GainLifeEffect(new SimulacrumAmount(), "You gain life equal to the damage dealt to you this turn."));
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        Effect effect = new DamageTargetEffect(new SimulacrumAmount(), true, "target creature you control", true);
+        Effect effect = new DamageTargetEffect(new SimulacrumAmount(), true, "target creature you control");
         effect.setText(" {this} deals damage to target creature you control equal to the damage dealt to you this turn.");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addWatcher(new AmountOfDamageAPlayerReceivedThisTurnWatcher());

@@ -4,8 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.DamageControllerEffect;
-import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.DamageTargetAndYouEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -26,8 +25,9 @@ public final class GoblinArtillery extends CardImpl {
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
-        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(2), new TapSourceCost());
-        ability.addEffect(new DamageControllerEffect(3).setText("and 3 damage to you"));
+
+        // {T}: This creature deals 2 damage to any target and 3 damage to you.
+        Ability ability = new SimpleActivatedAbility(new DamageTargetAndYouEffect(2, 3), new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

@@ -6,8 +6,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.common.DamageTargetControllerEffect;
-import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.DamageTargetAndTargetControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
@@ -42,8 +41,7 @@ public final class ShockerUnshakable extends CardImpl {
         )));
 
         // Vibro-Shock Gauntlets -- When Shocker enters, he deals 2 damage to target creature and 2 damage to that creature's controller.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(2, "he"));
-        ability.addEffect(new DamageTargetControllerEffect(2).setText("and 2 damage to that creature's controller"));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetAndTargetControllerEffect(2, 2));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability.withFlavorWord("Vibro-Shock Gauntlets"));
     }

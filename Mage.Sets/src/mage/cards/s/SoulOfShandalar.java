@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import mage.MageInt;
@@ -93,7 +92,7 @@ class SoulOfShandalarEffect extends OneShotEffect {
 
 class SoulOfShandalarTarget extends TargetPermanent {
 
-    public SoulOfShandalarTarget() {
+    SoulOfShandalarTarget() {
         super(0, 1, new FilterCreaturePermanent("creature that the targeted player or planeswalker's controller controls"));
     }
 

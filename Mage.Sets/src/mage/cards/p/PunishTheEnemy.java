@@ -1,14 +1,13 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
-import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.DamageTargetAndTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetPlayerOrPlaneswalker;
+
+import java.util.UUID;
 
 /**
  *
@@ -20,11 +19,9 @@ public final class PunishTheEnemy extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{R}");
 
         // Punish the Enemy deals 3 damage to target player and 3 damage to target creature.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(3, true, "target player or planeswalker and 3 damage to target creature"));
-        Target target = new TargetPlayerOrPlaneswalker();
-        this.getSpellAbility().addTarget(target);
-        target = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(target);
+        this.getSpellAbility().addEffect(new DamageTargetAndTargetEffect(3, 3));
+        this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker().setTargetTag(1));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent().setTargetTag(2));
     }
 
     private PunishTheEnemy(final PunishTheEnemy card) {

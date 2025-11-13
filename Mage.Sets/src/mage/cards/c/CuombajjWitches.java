@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import mage.MageInt;
@@ -12,13 +11,13 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetOpponent;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetpointer.EachTargetPointer;
 
 import java.util.UUID;
 
@@ -35,7 +34,7 @@ public final class CuombajjWitches extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {T}: Cuombajj Witches deals 1 damage to any target and 1 damage to any target of an opponent's choice.
-        Effect effect = new DamageTargetEffect(1);
+        Effect effect = new DamageTargetEffect(1).setTargetPointer(new EachTargetPointer());
         effect.setText("{this} deals 1 damage to any target and 1 damage to any target of an opponent's choice");
         Ability ability = new SimpleActivatedAbility(effect, new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());

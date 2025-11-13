@@ -3,7 +3,7 @@ package mage.cards.i;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SiegeAbility;
-import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.DamageTargetAndTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -14,7 +14,6 @@ import mage.filter.common.FilterPermanentOrPlayer;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetPermanentOrPlayer;
-import mage.target.targetpointer.SecondTargetPointer;
 
 import java.util.UUID;
 
@@ -43,19 +42,9 @@ public final class InvasionOfRegatha extends CardImpl {
         this.addAbility(new SiegeAbility());
 
         // When Invasion of Regatha enters the battlefield, it deals 4 damage to another target battle or opponent and 1 damage to up to one target creature.
-        Ability ability = new EntersBattlefieldTriggeredAbility(
-                new DamageTargetEffect(
-                        4, true,
-                        "another target battle or opponent", "it"
-
-                ).setUseOnlyTargetPointer(true)
-        );
-        ability.addTarget(new TargetPermanentOrPlayer(filter));
-        ability.addEffect(new DamageTargetEffect(1)
-                .setUseOnlyTargetPointer(true)
-                .setTargetPointer(new SecondTargetPointer())
-                .setText("and 1 damage to up to one target creature"));
-        ability.addTarget(new TargetCreaturePermanent(0, 1));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetAndTargetEffect(4, 1));
+        ability.addTarget(new TargetPermanentOrPlayer(filter).setTargetTag(1));
+        ability.addTarget(new TargetCreaturePermanent(0, 1).setTargetTag(2));
         this.addAbility(ability);
     }
 

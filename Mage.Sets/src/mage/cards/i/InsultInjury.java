@@ -1,8 +1,8 @@
 package mage.cards.i;
 
 import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.DamageTargetAndTargetEffect;
 import mage.abilities.effects.common.continuous.DamageCantBePreventedEffect;
 import mage.abilities.keyword.AftermathAbility;
 import mage.cards.CardSetInfo;
@@ -13,8 +13,6 @@ import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 import mage.util.CardUtil;
@@ -39,9 +37,9 @@ public final class InsultInjury extends SplitCard {
         // Injury
         // Injury deals 2 damage to target creature and 2 damage to target player.
         getRightHalfCard().addAbility(new AftermathAbility().setRuleAtTheTop(true));
-        getRightHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
-        getRightHalfCard().getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
-        getRightHalfCard().getSpellAbility().addEffect(new InjuryEffect());
+        getRightHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent().setTargetTag(1));
+        getRightHalfCard().getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker().setTargetTag(2));
+        getRightHalfCard().getSpellAbility().addEffect(new DamageTargetAndTargetEffect(2, 2));
     }
 
     private InsultInjury(final InsultInjury card) {
@@ -85,38 +83,5 @@ class InsultDoubleDamageEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         event.setAmount(CardUtil.overflowMultiply(event.getAmount(), 2));
         return false;
-    }
-}
-
-class InjuryEffect extends OneShotEffect {
-
-    InjuryEffect() {
-        super(Outcome.Damage);
-        this.staticText = "{this} deals 2 damage to target creature and 2 damage to target player or planeswalker";
-    }
-
-    private InjuryEffect(final InjuryEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getTargets().get(0).getFirstTarget());
-        Player player = game.getPlayer(source.getTargets().get(1).getFirstTarget());
-
-        if (permanent != null) {
-            permanent.damage(2, source.getSourceId(), source, game, false, true);
-        }
-
-        if (player != null) {
-            player.damage(2, source.getSourceId(), source, game);
-        }
-
-        return true;
-    }
-
-    @Override
-    public InjuryEffect copy() {
-        return new InjuryEffect(this);
     }
 }

@@ -73,7 +73,7 @@ public final class FlamescrollCelebrant extends ModalDoubleFacedCard {
 class FlamescrollCelebrantTriggeredAbility extends TriggeredAbilityImpl {
 
     FlamescrollCelebrantTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(StaticValue.get(1), true, "that player", true));
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(StaticValue.get(1), true, "that player"));
     }
 
     private FlamescrollCelebrantTriggeredAbility(final FlamescrollCelebrantTriggeredAbility ability) {

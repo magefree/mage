@@ -1,0 +1,77 @@
+package mage.abilities.effects.common;
+
+import mage.abilities.Ability;
+import mage.abilities.Mode;
+import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
+
+import java.util.UUID;
+
+/**
+ * @author xenohedron
+ */
+public class DamageTargetAndYouEffect extends OneShotEffect {
+
+    private final int firstAmount;
+    private final int secondAmount;
+
+    /**
+     * Deals simultaneous damage to the target and the controller of the source
+     */
+    public DamageTargetAndYouEffect(int amount) {
+        this(amount, amount);
+    }
+
+    /**
+     * Deals simultaneous damage to the target and the controller of the source
+     */
+    public DamageTargetAndYouEffect(int firstAmount, int secondAmount) {
+        super(Outcome.Damage);
+        this.firstAmount = firstAmount;
+        this.secondAmount = secondAmount;
+    }
+
+    protected DamageTargetAndYouEffect(final DamageTargetAndYouEffect effect) {
+        super(effect);
+        this.firstAmount = effect.firstAmount;
+        this.secondAmount = effect.secondAmount;
+    }
+
+    @Override
+    public DamageTargetAndYouEffect copy() {
+        return new DamageTargetAndYouEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        for (UUID targetId : this.getTargetPointer().getTargets(game, source)) {
+            Permanent permanent = game.getPermanent(targetId);
+            if (permanent != null) {
+                permanent.damage(firstAmount, source.getSourceId(), source, game);
+            } else {
+                Player player = game.getPlayer(targetId);
+                if (player != null) {
+                    player.damage(firstAmount, source.getSourceId(), source, game);
+                }
+            }
+        }
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            controller.damage(secondAmount, source.getSourceId(), source, game);
+        }
+        return true;
+    }
+
+    @Override
+    public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
+        return "{this} deals " + firstAmount + "damage to " +
+                getTargetPointer().describeTargets(mode.getTargets(), "that creature") +
+                " and " + secondAmount + "damage to you";
+    }
+}

@@ -67,7 +67,7 @@ public final class ImmolationShaman extends CardImpl {
 class ImmolationShamanTriggeredAbility extends TriggeredAbilityImpl {
 
     ImmolationShamanTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(StaticValue.get(1), true, "that player", true));
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(StaticValue.get(1), true, "that player"));
         setTriggerPhrase("Whenever an opponent activates an ability of an artifact, creature, or land that isn't a mana ability, ");
     }
 
