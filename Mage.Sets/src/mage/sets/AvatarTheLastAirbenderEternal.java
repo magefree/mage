@@ -37,6 +37,7 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Aardvark Sloth", 267, Rarity.COMMON, mage.cards.a.AardvarkSloth.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Acrobatic Leap", 151, Rarity.COMMON, mage.cards.a.AcrobaticLeap.class));
         cards.add(new SetCardInfo("Agent of Treachery", 9, Rarity.MYTHIC, mage.cards.a.AgentOfTreachery.class));
+        cards.add(new SetCardInfo("Air Nomad Student", 75, Rarity.UNCOMMON, mage.cards.a.AirNomadStudent.class));
         cards.add(new SetCardInfo("Allied Teamwork", 213, Rarity.RARE, mage.cards.a.AlliedTeamwork.class));
         cards.add(new SetCardInfo("Appa, Aang's Companion", 214, Rarity.UNCOMMON, mage.cards.a.AppaAangsCompanion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Appa, Aang's Companion", 268, Rarity.UNCOMMON, mage.cards.a.AppaAangsCompanion.class, NON_FULL_USE_VARIOUS));
