@@ -116,6 +116,7 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("Dragonfly Swarm", 215, Rarity.UNCOMMON, mage.cards.d.DragonflySwarm.class));
         cards.add(new SetCardInfo("Earth King's Lieutenant", 217, Rarity.RARE, mage.cards.e.EarthKingsLieutenant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Earth King's Lieutenant", 380, Rarity.RARE, mage.cards.e.EarthKingsLieutenant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Earth Kingdom General", 173, Rarity.UNCOMMON, mage.cards.e.EarthKingdomGeneral.class));
         cards.add(new SetCardInfo("Earth Kingdom Jailer", 16, Rarity.UNCOMMON, mage.cards.e.EarthKingdomJailer.class));
         cards.add(new SetCardInfo("Earth Kingdom Protectors", 17, Rarity.UNCOMMON, mage.cards.e.EarthKingdomProtectors.class));
         cards.add(new SetCardInfo("Earth Kingdom Soldier", 216, Rarity.COMMON, mage.cards.e.EarthKingdomSoldier.class));
