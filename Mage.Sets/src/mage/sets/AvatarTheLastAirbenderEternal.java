@@ -52,6 +52,8 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Baboon Spirit", 89, Rarity.RARE, mage.cards.b.BaboonSpirit.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bastion of Remembrance", 160, Rarity.UNCOMMON, mage.cards.b.BastionOfRemembrance.class));
         cards.add(new SetCardInfo("Beastmaster Ascension", 39, Rarity.MYTHIC, mage.cards.b.BeastmasterAscension.class));
+        cards.add(new SetCardInfo("Bison Whistle", 131, Rarity.RARE, mage.cards.b.BisonWhistle.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Bison Whistle", 202, Rarity.RARE, mage.cards.b.BisonWhistle.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Black Sun's Zenith", 22, Rarity.MYTHIC, mage.cards.b.BlackSunsZenith.class));
         cards.add(new SetCardInfo("Blasphemous Act", 26, Rarity.MYTHIC, mage.cards.b.BlasphemousAct.class));
         cards.add(new SetCardInfo("Bloodchief Ascension", 23, Rarity.MYTHIC, mage.cards.b.BloodchiefAscension.class));
