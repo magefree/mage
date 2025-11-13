@@ -58,6 +58,7 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Blasphemous Act", 26, Rarity.MYTHIC, mage.cards.b.BlasphemousAct.class));
         cards.add(new SetCardInfo("Bloodchief Ascension", 23, Rarity.MYTHIC, mage.cards.b.BloodchiefAscension.class));
         cards.add(new SetCardInfo("Bolt Bend", 163, Rarity.UNCOMMON, mage.cards.b.BoltBend.class));
+        cards.add(new SetCardInfo("Bosco, Just a Bear", 132, Rarity.UNCOMMON, mage.cards.b.BoscoJustABear.class));
         cards.add(new SetCardInfo("Brainstorm", 155, Rarity.COMMON, mage.cards.b.Brainstorm.class));
         cards.add(new SetCardInfo("Bribery", 10, Rarity.MYTHIC, mage.cards.b.Bribery.class));
         cards.add(new SetCardInfo("Brought Back", 1, Rarity.MYTHIC, mage.cards.b.BroughtBack.class));
