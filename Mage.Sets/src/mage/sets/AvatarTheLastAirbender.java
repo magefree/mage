@@ -25,6 +25,10 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         this.rotationSet = true;
         this.hasBasicLands = true;
 
+        cards.add(new SetCardInfo("Aang and La, Ocean's Fury", 204, Rarity.RARE, mage.cards.a.AangAndLaOceansFury.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Aang and La, Ocean's Fury", 298, Rarity.RARE, mage.cards.a.AangAndLaOceansFury.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Aang and La, Ocean's Fury", 347, Rarity.RARE, mage.cards.a.AangAndLaOceansFury.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Aang and La, Ocean's Fury", 359, Rarity.RARE, mage.cards.a.AangAndLaOceansFury.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aang's Iceberg", 336, Rarity.RARE, mage.cards.a.AangsIceberg.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aang's Iceberg", 5, Rarity.RARE, mage.cards.a.AangsIceberg.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aang's Journey", 1, Rarity.COMMON, mage.cards.a.AangsJourney.class));
@@ -34,6 +38,10 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("Aang, Master of Elements", 207, Rarity.MYTHIC, mage.cards.a.AangMasterOfElements.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aang, Master of Elements", 308, Rarity.MYTHIC, mage.cards.a.AangMasterOfElements.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aang, Master of Elements", 363, Rarity.MYTHIC, mage.cards.a.AangMasterOfElements.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Aang, Swift Savior", 204, Rarity.RARE, mage.cards.a.AangSwiftSavior.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Aang, Swift Savior", 298, Rarity.RARE, mage.cards.a.AangSwiftSavior.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Aang, Swift Savior", 347, Rarity.RARE, mage.cards.a.AangSwiftSavior.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Aang, Swift Savior", 359, Rarity.RARE, mage.cards.a.AangSwiftSavior.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aang, at the Crossroads", 203, Rarity.RARE, mage.cards.a.AangAtTheCrossroads.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aang, at the Crossroads", 304, Rarity.RARE, mage.cards.a.AangAtTheCrossroads.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aang, at the Crossroads", 346, Rarity.RARE, mage.cards.a.AangAtTheCrossroads.class, NON_FULL_USE_VARIOUS));
