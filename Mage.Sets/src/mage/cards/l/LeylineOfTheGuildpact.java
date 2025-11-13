@@ -30,7 +30,7 @@ public final class LeylineOfTheGuildpact extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new LeylineOfTheGuildpactEffect()));
 
         // Lands you control are every basic land type in addition to their other types.
-        this.addAbility(new SimpleStaticAbility(new BecomesAllBasicsControlledEffect()));
+        this.addAbility(new SimpleStaticAbility(new BecomesAllBasicsControlledEffect(Duration.WhileOnBattlefield)));
     }
 
     private LeylineOfTheGuildpact(final LeylineOfTheGuildpact card) {

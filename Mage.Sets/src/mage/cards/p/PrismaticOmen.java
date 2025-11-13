@@ -5,6 +5,7 @@ import mage.abilities.effects.common.continuous.BecomesAllBasicsControlledEffect
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 
 import java.util.UUID;
 
@@ -17,7 +18,7 @@ public final class PrismaticOmen extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
 
         // Lands you control are every basic land type in addition to their other types.
-        this.addAbility(new SimpleStaticAbility(new BecomesAllBasicsControlledEffect()));
+        this.addAbility(new SimpleStaticAbility(new BecomesAllBasicsControlledEffect(Duration.WhileOnBattlefield)));
     }
 
     private PrismaticOmen(final PrismaticOmen card) {
