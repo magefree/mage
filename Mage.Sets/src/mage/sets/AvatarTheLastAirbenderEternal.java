@@ -269,6 +269,7 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Thriving Moor", 264, Rarity.COMMON, mage.cards.t.ThrivingMoor.class));
         cards.add(new SetCardInfo("Toph, Earthbending Master", 145, Rarity.MYTHIC, mage.cards.t.TophEarthbendingMaster.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Toph, Earthbending Master", 209, Rarity.MYTHIC, mage.cards.t.TophEarthbendingMaster.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Toph, Greatest Earthbender", 70, Rarity.RARE, mage.cards.t.TophGreatestEarthbender.class));
         cards.add(new SetCardInfo("Toucan-Puffin", 88, Rarity.COMMON, mage.cards.t.ToucanPuffin.class));
         cards.add(new SetCardInfo("Training Grounds", 20, Rarity.MYTHIC, mage.cards.t.TrainingGrounds.class));
         cards.add(new SetCardInfo("Treetop Village", 60, Rarity.MYTHIC, mage.cards.t.TreetopVillage.class));
