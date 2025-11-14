@@ -2897,6 +2897,7 @@
 |Generate|TOK:TLA|Clue|3||ClueArtifactToken|
 |Generate|TOK:TLA|Clue|4||ClueArtifactToken|
 |Generate|TOK:TLA|Clue|5||ClueArtifactToken|
+|Generate|TOK:TLA|Dragon|||DragonFirebendingToken|
 |Generate|TOK:TLA|Food|1||FoodToken|
 |Generate|TOK:TLA|Food|2||FoodToken|
 |Generate|TOK:TLA|Food|3||FoodToken|

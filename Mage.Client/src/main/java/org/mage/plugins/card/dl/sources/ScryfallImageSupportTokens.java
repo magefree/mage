@@ -1,9 +1,9 @@
 package org.mage.plugins.card.dl.sources;
 
+import mage.cards.repository.TokenRepository;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import mage.cards.repository.TokenRepository;
 
 /**
  * @author JayDi85
@@ -2224,7 +2224,7 @@ public class ScryfallImageSupportTokens {
             put("WHO/Treasure/2", "https://api.scryfall.com/cards/twho/29?format=image");
             put("WHO/Treasure/3", "https://api.scryfall.com/cards/twho/30?format=image");
             put("WHO/Treasure/4", "https://api.scryfall.com/cards/twho/31?format=image");
-            put("WHO/Warrior", "https://api.scryfall.com/cards/twho/9?format=image");            
+            put("WHO/Warrior", "https://api.scryfall.com/cards/twho/9?format=image");
 
             // 8ED
             put("8ED/Bird", "https://api.scryfall.com/cards/p03/7/en?format=image");
@@ -2401,7 +2401,7 @@ public class ScryfallImageSupportTokens {
             put("OTP/Human Warrior", "https://api.scryfall.com/cards/totp/3/en?format=image");
             put("OTP/Pest", "https://api.scryfall.com/cards/totp/4/en?format=image");
 
-             // SCD
+            // SCD
             put("SCD/Beast", "https://api.scryfall.com/cards/tscd/19/en?format=image");
             put("SCD/Bird", "https://api.scryfall.com/cards/tscd/2/en?format=image");
             put("SCD/Cat", "https://api.scryfall.com/cards/tscd/3/en?format=image");
@@ -2743,7 +2743,7 @@ public class ScryfallImageSupportTokens {
             put("ACR/Treasure", "https://api.scryfall.com/cards/tacr/6?format=image");
 
             // DD2
-            put("DD2/Elemental Shaman", "https://api.scryfall.com/cards/tdd2/1?format=image");            
+            put("DD2/Elemental Shaman", "https://api.scryfall.com/cards/tdd2/1?format=image");
 
             // FIN
             put("FIN/Hero/1", "https://api.scryfall.com/cards/tfin/2/en?format=image");
@@ -2844,6 +2844,7 @@ public class ScryfallImageSupportTokens {
             put("TLA/Clue/3", "https://api.scryfall.com/cards/ttla/16/?format=image");
             put("TLA/Clue/4", "https://api.scryfall.com/cards/ttla/17/?format=image");
             put("TLA/Clue/5", "https://api.scryfall.com/cards/ttla/18/?format=image");
+            put("TLA/Dragon", "https://api.scryfall.com/cards/ttla/9/?format=image");
             put("TLA/Food/1", "https://api.scryfall.com/cards/ttla/19/?format=image");
             put("TLA/Food/2", "https://api.scryfall.com/cards/ttla/20/?format=image");
             put("TLA/Food/3", "https://api.scryfall.com/cards/ttla/21/?format=image");
