@@ -132,6 +132,8 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("Earthbending Lesson", 176, Rarity.COMMON, mage.cards.e.EarthbendingLesson.class));
         cards.add(new SetCardInfo("Earthen Ally", 177, Rarity.RARE, mage.cards.e.EarthenAlly.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Earthen Ally", 377, Rarity.RARE, mage.cards.e.EarthenAlly.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Elemental Teachings", 178, Rarity.RARE, mage.cards.e.ElementalTeachings.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Elemental Teachings", 378, Rarity.RARE, mage.cards.e.ElementalTeachings.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ember Island Production", 48, Rarity.UNCOMMON, mage.cards.e.EmberIslandProduction.class));
         cards.add(new SetCardInfo("Energybending", 2, Rarity.UNCOMMON, mage.cards.e.Energybending.class));
         cards.add(new SetCardInfo("Enter the Avatar State", 18, Rarity.UNCOMMON, mage.cards.e.EnterTheAvatarState.class));
