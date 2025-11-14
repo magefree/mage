@@ -138,6 +138,7 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Freedom Fighter Recruit", 118, Rarity.COMMON, mage.cards.f.FreedomFighterRecruit.class));
         cards.add(new SetCardInfo("Frog-Squirrels", 251, Rarity.COMMON, mage.cards.f.FrogSquirrels.class));
         cards.add(new SetCardInfo("Gamble", 312, Rarity.RARE, mage.cards.g.Gamble.class));
+        cards.add(new SetCardInfo("Giant Fly", 107, Rarity.COMMON, mage.cards.g.GiantFly.class));
         cards.add(new SetCardInfo("Gilacorn", 231, Rarity.COMMON, mage.cards.g.Gilacorn.class));
         cards.add(new SetCardInfo("Heartbeat of Spring", 42, Rarity.MYTHIC, mage.cards.h.HeartbeatOfSpring.class));
         cards.add(new SetCardInfo("Heroic Intervention", 43, Rarity.MYTHIC, mage.cards.h.HeroicIntervention.class));
