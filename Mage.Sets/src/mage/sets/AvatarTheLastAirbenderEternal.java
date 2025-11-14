@@ -64,6 +64,7 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Brainstorm", 155, Rarity.COMMON, mage.cards.b.Brainstorm.class));
         cards.add(new SetCardInfo("Bribery", 10, Rarity.MYTHIC, mage.cards.b.Bribery.class));
         cards.add(new SetCardInfo("Brought Back", 1, Rarity.MYTHIC, mage.cards.b.BroughtBack.class));
+        cards.add(new SetCardInfo("Bumi's Feast Lecture", 133, Rarity.UNCOMMON, mage.cards.b.BumisFeastLecture.class));
         cards.add(new SetCardInfo("Bumi, Eclectic Earthbender", 248, Rarity.RARE, mage.cards.b.BumiEclecticEarthbender.class));
         cards.add(new SetCardInfo("Capital Guard", 234, Rarity.COMMON, mage.cards.c.CapitalGuard.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Capital Guard", 277, Rarity.COMMON, mage.cards.c.CapitalGuard.class, NON_FULL_USE_VARIOUS));
