@@ -104,6 +104,7 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Eel-Hounds", 250, Rarity.UNCOMMON, mage.cards.e.EelHounds.class));
         cards.add(new SetCardInfo("Eladamri's Call", 48, Rarity.MYTHIC, mage.cards.e.EladamrisCall.class));
         cards.add(new SetCardInfo("Elemental Bond", 40, Rarity.MYTHIC, mage.cards.e.ElementalBond.class));
+        cards.add(new SetCardInfo("Elephant-Mandrill", 138, Rarity.UNCOMMON, mage.cards.e.ElephantMandrill.class));
         cards.add(new SetCardInfo("Elephant-Rat", 228, Rarity.COMMON, mage.cards.e.ElephantRat.class));
         cards.add(new SetCardInfo("Empty City Ruse", 3, Rarity.MYTHIC, mage.cards.e.EmptyCityRuse.class));
         cards.add(new SetCardInfo("Enlightened Tutor", 305, Rarity.RARE, mage.cards.e.EnlightenedTutor.class));
