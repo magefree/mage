@@ -176,6 +176,8 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Lo and Li, Royal Advisors", 108, Rarity.RARE, mage.cards.l.LoAndLiRoyalAdvisors.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lo and Li, Royal Advisors", 189, Rarity.RARE, mage.cards.l.LoAndLiRoyalAdvisors.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Longshot, Rebel Bowman", 120, Rarity.UNCOMMON, mage.cards.l.LongshotRebelBowman.class));
+        cards.add(new SetCardInfo("Lost in Memories", 121, Rarity.RARE, mage.cards.l.LostInMemories.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lost in Memories", 195, Rarity.RARE, mage.cards.l.LostInMemories.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lost in the Spirit World", 224, Rarity.UNCOMMON, mage.cards.l.LostInTheSpiritWorld.class));
         cards.add(new SetCardInfo("Loyal Fire Sage", 242, Rarity.UNCOMMON, mage.cards.l.LoyalFireSage.class));
         cards.add(new SetCardInfo("Mai and Zuko", 68, Rarity.RARE, mage.cards.m.MaiAndZuko.class));
