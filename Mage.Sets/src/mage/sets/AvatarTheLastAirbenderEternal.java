@@ -42,6 +42,7 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Allied Teamwork", 213, Rarity.RARE, mage.cards.a.AlliedTeamwork.class));
         cards.add(new SetCardInfo("Appa, Aang's Companion", 214, Rarity.UNCOMMON, mage.cards.a.AppaAangsCompanion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Appa, Aang's Companion", 268, Rarity.UNCOMMON, mage.cards.a.AppaAangsCompanion.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Appa, the Vigilant", 62, Rarity.RARE, mage.cards.a.AppaTheVigilant.class));
         cards.add(new SetCardInfo("Arcane Signet", 315, Rarity.RARE, mage.cards.a.ArcaneSignet.class));
         cards.add(new SetCardInfo("Avatar Kyoshi, Earthbender", 130, Rarity.MYTHIC, mage.cards.a.AvatarKyoshiEarthbender.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Avatar Kyoshi, Earthbender", 201, Rarity.MYTHIC, mage.cards.a.AvatarKyoshiEarthbender.class, NON_FULL_USE_VARIOUS));
