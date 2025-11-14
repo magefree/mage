@@ -168,6 +168,7 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Koma, Cosmos Serpent", 51, Rarity.MYTHIC, mage.cards.k.KomaCosmosSerpent.class));
         cards.add(new SetCardInfo("Komodo Rhino", 241, Rarity.COMMON, mage.cards.k.KomodoRhino.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Komodo Rhino", 283, Rarity.COMMON, mage.cards.k.KomodoRhino.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kyoshi Warrior Exemplars", 140, Rarity.UNCOMMON, mage.cards.k.KyoshiWarriorExemplars.class));
         cards.add(new SetCardInfo("Kyoshi Warrior Guard", 216, Rarity.COMMON, mage.cards.k.KyoshiWarriorGuard.class));
         cards.add(new SetCardInfo("Lightning Bolt", 32, Rarity.MYTHIC, mage.cards.l.LightningBolt.class));
         cards.add(new SetCardInfo("Lion Vulture", 232, Rarity.RARE, mage.cards.l.LionVulture.class));
