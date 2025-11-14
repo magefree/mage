@@ -182,6 +182,8 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Loyal Fire Sage", 242, Rarity.UNCOMMON, mage.cards.l.LoyalFireSage.class));
         cards.add(new SetCardInfo("Mai and Zuko", 68, Rarity.RARE, mage.cards.m.MaiAndZuko.class));
         cards.add(new SetCardInfo("Many Partings", 169, Rarity.COMMON, mage.cards.m.ManyPartings.class));
+        cards.add(new SetCardInfo("Master's Guidance", 141, Rarity.RARE, mage.cards.m.MastersGuidance.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Master's Guidance", 206, Rarity.RARE, mage.cards.m.MastersGuidance.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Match the Odds", 253, Rarity.UNCOMMON, mage.cards.m.MatchTheOdds.class));
         cards.add(new SetCardInfo("Mechanical Glider", 256, Rarity.COMMON, mage.cards.m.MechanicalGlider.class));
         cards.add(new SetCardInfo("Meteorite", 54, Rarity.MYTHIC, mage.cards.m.Meteorite.class));
