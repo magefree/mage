@@ -26,6 +26,7 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         this.rotationSet = true;
         this.hasBasicLands = true;
 
+        cards.add(new SetCardInfo("Aang and Katara", 69, Rarity.RARE, mage.cards.a.AangAndKatara.class));
         cards.add(new SetCardInfo("Aang's Defense", 211, Rarity.COMMON, mage.cards.a.AangsDefense.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aang's Defense", 266, Rarity.COMMON, mage.cards.a.AangsDefense.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aang, A Lot to Learn", 146, Rarity.UNCOMMON, mage.cards.a.AangALotToLearn.class));
