@@ -203,6 +203,7 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 296, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mystic Remora", 16, Rarity.MYTHIC, mage.cards.m.MysticRemora.class));
         cards.add(new SetCardInfo("Mystical Tutor", 308, Rarity.RARE, mage.cards.m.MysticalTutor.class));
+        cards.add(new SetCardInfo("Nightmares and Daydreams", 94, Rarity.RARE, mage.cards.n.NightmaresAndDaydreams.class));
         cards.add(new SetCardInfo("Noxious Gearhulk", 25, Rarity.MYTHIC, mage.cards.n.NoxiousGearhulk.class));
         cards.add(new SetCardInfo("Obscuring Haze", 313, Rarity.RARE, mage.cards.o.ObscuringHaze.class));
         cards.add(new SetCardInfo("Overwhelming Victory", 123, Rarity.RARE, mage.cards.o.OverwhelmingVictory.class, NON_FULL_USE_VARIOUS));
