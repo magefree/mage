@@ -66,6 +66,8 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("Avatar Aang", 308, Rarity.MYTHIC, mage.cards.a.AvatarAang.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Avatar Aang", 363, Rarity.MYTHIC, mage.cards.a.AvatarAang.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Avatar Enthusiasts", 11, Rarity.COMMON, mage.cards.a.AvatarEnthusiasts.class));
+        cards.add(new SetCardInfo("Avatar Kuruk", 355, Rarity.MYTHIC, mage.cards.a.AvatarKuruk.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Avatar Kuruk", 61, Rarity.MYTHIC, mage.cards.a.AvatarKuruk.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Avatar's Wrath", 12, Rarity.RARE, mage.cards.a.AvatarsWrath.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Avatar's Wrath", 365, Rarity.RARE, mage.cards.a.AvatarsWrath.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Azula Always Lies", 84, Rarity.COMMON, mage.cards.a.AzulaAlwaysLies.class));
@@ -311,6 +313,8 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("Teo, Spirited Glider", 74, Rarity.UNCOMMON, mage.cards.t.TeoSpiritedGlider.class));
         cards.add(new SetCardInfo("The Boulder, Ready to Rumble", 168, Rarity.UNCOMMON, mage.cards.t.TheBoulderReadyToRumble.class));
         cards.add(new SetCardInfo("The Cave of Two Lovers", 126, Rarity.UNCOMMON, mage.cards.t.TheCaveOfTwoLovers.class));
+        cards.add(new SetCardInfo("The Legend of Kuruk", 355, Rarity.MYTHIC, mage.cards.t.TheLegendOfKuruk.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Legend of Kuruk", 61, Rarity.MYTHIC, mage.cards.t.TheLegendOfKuruk.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Lion-Turtle", 232, Rarity.RARE, mage.cards.t.TheLionTurtle.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Lion-Turtle", 328, Rarity.RARE, mage.cards.t.TheLionTurtle.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Mechanist, Aerial Artisan", 369, Rarity.RARE, mage.cards.t.TheMechanistAerialArtisan.class, NON_FULL_USE_VARIOUS));
