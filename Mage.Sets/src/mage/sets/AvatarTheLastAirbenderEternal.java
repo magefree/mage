@@ -135,6 +135,7 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Founding of Omashu", 116, Rarity.UNCOMMON, mage.cards.f.FoundingOfOmashu.class));
         cards.add(new SetCardInfo("Frantic Confrontation", 117, Rarity.UNCOMMON, mage.cards.f.FranticConfrontation.class));
         cards.add(new SetCardInfo("Frantic Search", 159, Rarity.COMMON, mage.cards.f.FranticSearch.class));
+        cards.add(new SetCardInfo("Freedom Fighter Recruit", 118, Rarity.COMMON, mage.cards.f.FreedomFighterRecruit.class));
         cards.add(new SetCardInfo("Frog-Squirrels", 251, Rarity.COMMON, mage.cards.f.FrogSquirrels.class));
         cards.add(new SetCardInfo("Gamble", 312, Rarity.RARE, mage.cards.g.Gamble.class));
         cards.add(new SetCardInfo("Gilacorn", 231, Rarity.COMMON, mage.cards.g.Gilacorn.class));
