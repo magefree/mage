@@ -170,6 +170,8 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Lightning Bolt", 32, Rarity.MYTHIC, mage.cards.l.LightningBolt.class));
         cards.add(new SetCardInfo("Lion Vulture", 232, Rarity.RARE, mage.cards.l.LionVulture.class));
         cards.add(new SetCardInfo("Lita, Mechanical Engineer", 4, Rarity.MYTHIC, mage.cards.l.LitaMechanicalEngineer.class));
+        cards.add(new SetCardInfo("Lo and Li, Royal Advisors", 108, Rarity.RARE, mage.cards.l.LoAndLiRoyalAdvisors.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lo and Li, Royal Advisors", 189, Rarity.RARE, mage.cards.l.LoAndLiRoyalAdvisors.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Longshot, Rebel Bowman", 120, Rarity.UNCOMMON, mage.cards.l.LongshotRebelBowman.class));
         cards.add(new SetCardInfo("Lost in the Spirit World", 224, Rarity.UNCOMMON, mage.cards.l.LostInTheSpiritWorld.class));
         cards.add(new SetCardInfo("Loyal Fire Sage", 242, Rarity.UNCOMMON, mage.cards.l.LoyalFireSage.class));
