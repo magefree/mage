@@ -191,6 +191,8 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Moku, Meandering Drummer", 122, Rarity.UNCOMMON, mage.cards.m.MokuMeanderingDrummer.class));
         cards.add(new SetCardInfo("Momo, Rambunctious Rascal", 217, Rarity.UNCOMMON, mage.cards.m.MomoRambunctiousRascal.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Momo, Rambunctious Rascal", 270, Rarity.UNCOMMON, mage.cards.m.MomoRambunctiousRascal.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Monk Gyatso", 173, Rarity.RARE, mage.cards.m.MonkGyatso.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Monk Gyatso", 81, Rarity.RARE, mage.cards.m.MonkGyatso.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 289, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 290, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 291, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
