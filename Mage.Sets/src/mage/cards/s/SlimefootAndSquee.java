@@ -58,7 +58,7 @@ public final class SlimefootAndSquee extends CardImpl {
         ability.addCost(new SacrificeTargetCost(filter));
         ability.addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect()
                 .setText("and up to one other target creature card from your graveyard to the battlefield"));
-        ability.addTarget(new TargetCardInYourGraveyard(filter2));
+        ability.addTarget(new TargetCardInYourGraveyard(0, 1, filter2));
         this.addAbility(ability);
     }
 
