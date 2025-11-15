@@ -421,8 +421,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Sigarda's Summons", 36, Rarity.RARE, mage.cards.s.SigardasSummons.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sigarda's Summons", 404, Rarity.RARE, mage.cards.s.SigardasSummons.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sigardian Paladin", 247, Rarity.UNCOMMON, mage.cards.s.SigardianPaladin.class));
-        cards.add(new SetCardInfo("Sinner's Judgment", 12, Rarity.MYTHIC, mage.cards.s.SinnersJudgment.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Sinner's Judgment", 348, Rarity.MYTHIC, mage.cards.s.SinnersJudgment.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Skulking Killer", 130, Rarity.UNCOMMON, mage.cards.s.SkulkingKiller.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Skulking Killer", 296, Rarity.UNCOMMON, mage.cards.s.SkulkingKiller.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Skull Skaab", 248, Rarity.UNCOMMON, mage.cards.s.SkullSkaab.class));

@@ -1,25 +1,25 @@
 package mage.cards;
 
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.constants.*;
 import mage.game.Game;
+import mage.game.events.ZoneChangeEvent;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
 /**
- * @author JayDi85
+ * @author JayDi85 - originally from ModalDoubleFaceCardHalf
  */
-public class ModalDoubleFacedCardHalfImpl extends CardImpl implements ModalDoubleFacedCardHalf {
+public abstract class DoubleFacedCardHalf extends CardImpl implements SubCard<DoubleFacedCard> {
 
-    ModalDoubleFacedCard parentCard;
+    protected DoubleFacedCard parentCard;
 
-    public ModalDoubleFacedCardHalfImpl(
+    public DoubleFacedCardHalf(
             UUID ownerId, CardSetInfo setInfo,
             SuperType[] cardSuperTypes, CardType[] cardTypes, SubType[] cardSubTypes,
-            String costs, ModalDoubleFacedCard parentCard, SpellAbilityType spellAbilityType
+            String costs, DoubleFacedCard parentCard, SpellAbilityType spellAbilityType
     ) {
         super(ownerId, setInfo, cardTypes, costs, spellAbilityType);
         this.supertype.addAll(Arrays.asList(cardSuperTypes));
@@ -27,7 +27,7 @@ public class ModalDoubleFacedCardHalfImpl extends CardImpl implements ModalDoubl
         this.parentCard = parentCard;
     }
 
-    protected ModalDoubleFacedCardHalfImpl(final ModalDoubleFacedCardHalfImpl card) {
+    protected DoubleFacedCardHalf(final DoubleFacedCardHalf card) {
         super(card);
         this.parentCard = card.parentCard;
     }
@@ -50,6 +50,11 @@ public class ModalDoubleFacedCardHalfImpl extends CardImpl implements ModalDoubl
     }
 
     @Override
+    public boolean isTransformable() {
+        return getOtherSide().isPermanent();
+    }
+
+    @Override
     public boolean moveToZone(Zone toZone, Ability source, Game game, boolean flag, List<UUID> appliedEffects) {
         return parentCard.moveToZone(toZone, source, game, flag, appliedEffects);
     }
@@ -65,25 +70,23 @@ public class ModalDoubleFacedCardHalfImpl extends CardImpl implements ModalDoubl
     }
 
     @Override
-    public ModalDoubleFacedCard getMainCard() {
+    public Card getMainCard() {
         return parentCard;
     }
 
     @Override
+    public void updateZoneChangeCounter(Game game, ZoneChangeEvent event) {
+        parentCard.updateZoneChangeCounter(game, event);
+    }
+
+    @Override
     public void setZone(Zone zone, Game game) {
-        // see ModalDoubleFacedCard.checkGoodZones for details
+        // see DoubleFacedCard.checkGoodZones for details
         game.setZone(parentCard.getId(), zone);
         game.setZone(this.getId(), zone);
 
         // find another side to sync
-        ModalDoubleFacedCardHalf otherSide;
-        if (!parentCard.getLeftHalfCard().getId().equals(this.getId())) {
-            otherSide = parentCard.getLeftHalfCard();
-        } else if (!parentCard.getRightHalfCard().getId().equals(this.getId())) {
-            otherSide = parentCard.getRightHalfCard();
-        } else {
-            throw new IllegalStateException("Wrong code usage: MDF halves must use different ids");
-        }
+        Card otherSide = getOtherSide();
 
         switch (zone) {
             case STACK:
@@ -96,33 +99,39 @@ public class ModalDoubleFacedCardHalfImpl extends CardImpl implements ModalDoubl
                 break;
         }
 
-        ModalDoubleFacedCard.checkGoodZones(game, parentCard);
+        DoubleFacedCard.checkGoodZones(game, parentCard);
+    }
+
+    public Card getOtherSide() {
+        Card otherSide;
+        if (!parentCard.getLeftHalfCard().getId().equals(this.getId())) {
+            otherSide = parentCard.getLeftHalfCard();
+        } else if (!parentCard.getRightHalfCard().getId().equals(this.getId())) {
+            otherSide = parentCard.getRightHalfCard();
+        } else {
+            throw new IllegalStateException("Wrong code usage: MDF halves must use different ids");
+        }
+        return otherSide;
+    }
+
+    public boolean isBackSide() {
+        if (parentCard.getLeftHalfCard().getId().equals(this.getId())) {
+            return false;
+        } else if (parentCard.getRightHalfCard().getId().equals(this.getId())) {
+            return true;
+        } else {
+            throw new IllegalStateException("Wrong code usage: MDF halves must use different ids");
+        }
     }
 
     @Override
-    public ModalDoubleFacedCardHalfImpl copy() {
-        return new ModalDoubleFacedCardHalfImpl(this);
-    }
-
-    @Override
-    public void setParentCard(ModalDoubleFacedCard card) {
+    public void setParentCard(DoubleFacedCard card) {
         this.parentCard = card;
     }
 
     @Override
-    public ModalDoubleFacedCard getParentCard() {
-        return this.parentCard;
-    }
-
-    @Override
-    public void setPT(int power, int toughness) {
-        this.setPT(new MageInt(power), new MageInt(toughness));
-    }
-
-    @Override
-    public void setPT(MageInt power, MageInt toughness) {
-        this.power = power;
-        this.toughness = toughness;
+    public DoubleFacedCard getParentCard() {
+        return parentCard;
     }
 
     @Override

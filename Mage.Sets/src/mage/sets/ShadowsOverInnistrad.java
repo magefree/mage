@@ -55,7 +55,6 @@ public final class ShadowsOverInnistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Asylum Visitor", 99, Rarity.RARE, mage.cards.a.AsylumVisitor.class));
         cards.add(new SetCardInfo("Autumnal Gloom", 194, Rarity.UNCOMMON, mage.cards.a.AutumnalGloom.class));
         cards.add(new SetCardInfo("Avacyn's Judgment", 145, Rarity.RARE, mage.cards.a.AvacynsJudgment.class));
-        cards.add(new SetCardInfo("Avacyn, the Purifier", 5, Rarity.MYTHIC, mage.cards.a.AvacynThePurifier.class));
         cards.add(new SetCardInfo("Avacynian Missionaries", 6, Rarity.UNCOMMON, mage.cards.a.AvacynianMissionaries.class));
         cards.add(new SetCardInfo("Awoken Horror", 92, Rarity.RARE, mage.cards.a.AwokenHorror.class));
         cards.add(new SetCardInfo("Bearer of Overwhelming Truths", 54, Rarity.UNCOMMON, mage.cards.b.BearerOfOverwhelmingTruths.class));
@@ -195,7 +194,6 @@ public final class ShadowsOverInnistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Kessig Forgemaster", 169, Rarity.UNCOMMON, mage.cards.k.KessigForgemaster.class));
         cards.add(new SetCardInfo("Kindly Stranger", 119, Rarity.UNCOMMON, mage.cards.k.KindlyStranger.class));
         cards.add(new SetCardInfo("Krallenhorde Howler", 203, Rarity.UNCOMMON, mage.cards.k.KrallenhordeHowler.class));
-        cards.add(new SetCardInfo("Lambholt Butcher", 215, Rarity.UNCOMMON, mage.cards.l.LambholtButcher.class));
         cards.add(new SetCardInfo("Lambholt Pacifist", 215, Rarity.UNCOMMON, mage.cards.l.LambholtPacifist.class));
         cards.add(new SetCardInfo("Lamplighter of Selhoff", 72, Rarity.COMMON, mage.cards.l.LamplighterOfSelhoff.class));
         cards.add(new SetCardInfo("Lightning Axe", 170, Rarity.UNCOMMON, mage.cards.l.LightningAxe.class));
@@ -245,7 +243,6 @@ public final class ShadowsOverInnistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Pale Rider of Trostad", 128, Rarity.UNCOMMON, mage.cards.p.PaleRiderOfTrostad.class));
         cards.add(new SetCardInfo("Paranoid Parish-Blade", 33, Rarity.UNCOMMON, mage.cards.p.ParanoidParishBlade.class));
         cards.add(new SetCardInfo("Perfected Form", 49, Rarity.UNCOMMON, mage.cards.p.PerfectedForm.class));
-        cards.add(new SetCardInfo("Persistent Nightmare", 88, Rarity.MYTHIC, mage.cards.p.PersistentNightmare.class));
         cards.add(new SetCardInfo("Pick the Brain", 129, Rarity.UNCOMMON, mage.cards.p.PickTheBrain.class));
         cards.add(new SetCardInfo("Pieces of the Puzzle", 78, Rarity.COMMON, mage.cards.p.PiecesOfThePuzzle.class));
         cards.add(new SetCardInfo("Pious Evangel", 34, Rarity.UNCOMMON, mage.cards.p.PiousEvangel.class));
@@ -331,7 +328,6 @@ public final class ShadowsOverInnistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Thraben Gargoyle", 266, Rarity.UNCOMMON, mage.cards.t.ThrabenGargoyle.class));
         cards.add(new SetCardInfo("Thraben Inspector", 44, Rarity.COMMON, mage.cards.t.ThrabenInspector.class));
         cards.add(new SetCardInfo("Throttle", 138, Rarity.COMMON, mage.cards.t.Throttle.class));
-        cards.add(new SetCardInfo("Timber Shredder", 210, Rarity.COMMON, mage.cards.t.TimberShredder.class));
         cards.add(new SetCardInfo("Tireless Tracker", 233, Rarity.RARE, mage.cards.t.TirelessTracker.class));
         cards.add(new SetCardInfo("To the Slaughter", 139, Rarity.RARE, mage.cards.t.ToTheSlaughter.class));
         cards.add(new SetCardInfo("Tooth Collector", 140, Rarity.UNCOMMON, mage.cards.t.ToothCollector.class));
@@ -347,7 +343,6 @@ public final class ShadowsOverInnistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Ulvenwald Hydra", 235, Rarity.MYTHIC, mage.cards.u.UlvenwaldHydra.class));
         cards.add(new SetCardInfo("Ulvenwald Mysteries", 236, Rarity.UNCOMMON, mage.cards.u.UlvenwaldMysteries.class));
         cards.add(new SetCardInfo("Uncaged Fury", 188, Rarity.COMMON, mage.cards.u.UncagedFury.class));
-        cards.add(new SetCardInfo("Unimpeded Trespasser", 94, Rarity.UNCOMMON, mage.cards.u.UnimpededTrespasser.class));
         cards.add(new SetCardInfo("Uninvited Geist", 94, Rarity.UNCOMMON, mage.cards.u.UninvitedGeist.class));
         cards.add(new SetCardInfo("Unruly Mob", 47, Rarity.COMMON, mage.cards.u.UnrulyMob.class));
         cards.add(new SetCardInfo("Vampire Noble", 143, Rarity.COMMON, mage.cards.v.VampireNoble.class));

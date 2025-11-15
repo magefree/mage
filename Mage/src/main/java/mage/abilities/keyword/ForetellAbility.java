@@ -300,6 +300,7 @@ class ForetellAddCostEffect extends ContinuousEffectImpl {
             if (game.getState().getZone(mainCardId) == Zone.EXILED) {
                 String foretellCost = (String) game.getState().getValue(mainCardId.toString() + "Foretell Cost");
                 String foretellSplitCost = (String) game.getState().getValue(mainCardId.toString() + "Foretell Split Cost");
+                // TODO: clean this up
                 if (card instanceof SplitCard) {
                     if (foretellCost != null) {
                         SplitCardHalf leftHalfCard = ((SplitCard) card).getLeftHalfCard();
@@ -363,6 +364,14 @@ class ForetellAddCostEffect extends ContinuousEffectImpl {
                         ability.setAbilityName(spellCard.getName());
                         game.getState().addOtherAbility(spellCard, ability);
                     }
+                } else if (card instanceof TransformingDoubleFacedCard && foretellCost != null) {
+                    Card frontCard = ((TransformingDoubleFacedCard) card).getLeftHalfCard();
+                    ForetellCostAbility ability = new ForetellCostAbility(foretellCost);
+                    ability.setSourceId(frontCard.getId());
+                    ability.setControllerId(source.getControllerId());
+                    ability.setSpellAbilityType(frontCard.getSpellAbility().getSpellAbilityType());
+                    ability.setAbilityName(frontCard.getName());
+                    game.getState().addOtherAbility(frontCard, ability);
                 } else if (foretellCost != null) {
                     ForetellCostAbility ability = new ForetellCostAbility(foretellCost);
                     ability.setSourceId(card.getId());

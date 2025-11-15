@@ -11,6 +11,9 @@ public enum SpellAbilityType {
     SPLIT_FUSED("Split SpellAbility"),
     SPLIT_LEFT("LeftSplit SpellAbility"),
     SPLIT_RIGHT("RightSplit SpellAbility"),
+    TRANSFORMED("Transformed SpellAbility"),
+    TRANSFORMED_LEFT("TransformFront SpellAbility"),
+    TRANSFORMED_RIGHT("TransformBack SpellAbility"),
     MODAL("Modal SpellAbility"), // used for modal double faces cards
     MODAL_LEFT("LeftModal SpellAbility"),
     MODAL_RIGHT("RightModal SpellAbility"),
