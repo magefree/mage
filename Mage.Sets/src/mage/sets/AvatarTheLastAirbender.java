@@ -72,6 +72,8 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("Avatar Kyoshi", 358, Rarity.MYTHIC, mage.cards.a.AvatarKyoshi.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Avatar Roku", 145, Rarity.MYTHIC, mage.cards.a.AvatarRoku.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Avatar Roku", 357, Rarity.MYTHIC, mage.cards.a.AvatarRoku.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Avatar Yangchen", 27, Rarity.MYTHIC, mage.cards.a.AvatarYangchen.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Avatar Yangchen", 354, Rarity.MYTHIC, mage.cards.a.AvatarYangchen.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Avatar's Wrath", 12, Rarity.RARE, mage.cards.a.AvatarsWrath.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Avatar's Wrath", 365, Rarity.RARE, mage.cards.a.AvatarsWrath.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Azula Always Lies", 84, Rarity.COMMON, mage.cards.a.AzulaAlwaysLies.class));
@@ -339,6 +341,8 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("The Legend of Kyoshi", 358, Rarity.MYTHIC, mage.cards.t.TheLegendOfKyoshi.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Legend of Roku", 145, Rarity.MYTHIC, mage.cards.t.TheLegendOfRoku.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Legend of Roku", 357, Rarity.MYTHIC, mage.cards.t.TheLegendOfRoku.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Legend of Yangchen", 27, Rarity.MYTHIC, mage.cards.t.TheLegendOfYangchen.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Legend of Yangchen", 354, Rarity.MYTHIC, mage.cards.t.TheLegendOfYangchen.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Lion-Turtle", 232, Rarity.RARE, mage.cards.t.TheLionTurtle.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Lion-Turtle", 328, Rarity.RARE, mage.cards.t.TheLionTurtle.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Mechanist, Aerial Artisan", 369, Rarity.RARE, mage.cards.t.TheMechanistAerialArtisan.class, NON_FULL_USE_VARIOUS));
