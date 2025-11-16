@@ -327,6 +327,7 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 289, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 294, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Swampsnare Trap", 120, Rarity.COMMON, mage.cards.s.SwampsnareTrap.class));
+        cards.add(new SetCardInfo("Team Avatar", 38, Rarity.UNCOMMON, mage.cards.t.TeamAvatar.class));
         cards.add(new SetCardInfo("Teo, Spirited Glider", 74, Rarity.UNCOMMON, mage.cards.t.TeoSpiritedGlider.class));
         cards.add(new SetCardInfo("The Boulder, Ready to Rumble", 168, Rarity.UNCOMMON, mage.cards.t.TheBoulderReadyToRumble.class));
         cards.add(new SetCardInfo("The Cave of Two Lovers", 126, Rarity.UNCOMMON, mage.cards.t.TheCaveOfTwoLovers.class));
