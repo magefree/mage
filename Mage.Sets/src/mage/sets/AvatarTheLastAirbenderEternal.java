@@ -263,6 +263,7 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("The Art of Tea", 129, Rarity.COMMON, mage.cards.t.TheArtOfTea.class));
         cards.add(new SetCardInfo("The Cabbage Merchant", 134, Rarity.RARE, mage.cards.t.TheCabbageMerchant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Cabbage Merchant", 203, Rarity.RARE, mage.cards.t.TheCabbageMerchant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Duke, Rebel Sentry", 76, Rarity.UNCOMMON, mage.cards.t.TheDukeRebelSentry.class));
         cards.add(new SetCardInfo("The Great Henge", 41, Rarity.MYTHIC, mage.cards.t.TheGreatHenge.class));
         cards.add(new SetCardInfo("The Terror of Serpent's Pass", 225, Rarity.RARE, mage.cards.t.TheTerrorOfSerpentsPass.class));
         cards.add(new SetCardInfo("Three Dreams", 8, Rarity.MYTHIC, mage.cards.t.ThreeDreams.class));
