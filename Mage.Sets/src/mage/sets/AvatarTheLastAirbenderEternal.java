@@ -222,6 +222,8 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Prosperity", 17, Rarity.MYTHIC, mage.cards.p.Prosperity.class));
         cards.add(new SetCardInfo("Purple Pentapus", 233, Rarity.COMMON, mage.cards.p.PurplePentapus.class));
         cards.add(new SetCardInfo("Razor Rings", 272, Rarity.COMMON, mage.cards.r.RazorRings.class));
+        cards.add(new SetCardInfo("Reckless Blaze", 124, Rarity.RARE, mage.cards.r.RecklessBlaze.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Reckless Blaze", 197, Rarity.RARE, mage.cards.r.RecklessBlaze.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Release to Memory", 5, Rarity.MYTHIC, mage.cards.r.ReleaseToMemory.class));
         cards.add(new SetCardInfo("Rending Volley", 34, Rarity.MYTHIC, mage.cards.r.RendingVolley.class));
         cards.add(new SetCardInfo("Return of the Wildspeaker", 44, Rarity.MYTHIC, mage.cards.r.ReturnOfTheWildspeaker.class));
