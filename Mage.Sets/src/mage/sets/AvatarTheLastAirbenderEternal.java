@@ -287,6 +287,7 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Tundra Wall", 275, Rarity.COMMON, mage.cards.t.TundraWall.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Turtle-Seals", 226, Rarity.COMMON, mage.cards.t.TurtleSeals.class));
         cards.add(new SetCardInfo("Unagi's Spray", 97, Rarity.COMMON, mage.cards.u.UnagisSpray.class));
+        cards.add(new SetCardInfo("Uncle's Musings", 73, Rarity.RARE, mage.cards.u.UnclesMusings.class));
         cards.add(new SetCardInfo("Valakut, the Molten Pinnacle", 61, Rarity.MYTHIC, mage.cards.v.ValakutTheMoltenPinnacle.class));
         cards.add(new SetCardInfo("Valorous Stance", 154, Rarity.UNCOMMON, mage.cards.v.ValorousStance.class));
         cards.add(new SetCardInfo("Visions of Beyond", 21, Rarity.MYTHIC, mage.cards.v.VisionsOfBeyond.class));
