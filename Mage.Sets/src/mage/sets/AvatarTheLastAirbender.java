@@ -296,6 +296,7 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("Rocky Rebuke", 193, Rarity.COMMON, mage.cards.r.RockyRebuke.class));
         cards.add(new SetCardInfo("Rough Rhino Cavalry", 152, Rarity.COMMON, mage.cards.r.RoughRhinoCavalry.class));
         cards.add(new SetCardInfo("Rowdy Snowballers", 68, Rarity.COMMON, mage.cards.r.RowdySnowballers.class));
+        cards.add(new SetCardInfo("Ruinous Waterbending", 118, Rarity.UNCOMMON, mage.cards.r.RuinousWaterbending.class));
         cards.add(new SetCardInfo("Rumble Arena", 277, Rarity.COMMON, mage.cards.r.RumbleArena.class));
         cards.add(new SetCardInfo("Saber-Tooth Moose-Lion", 194, Rarity.COMMON, mage.cards.s.SaberToothMooseLion.class));
         cards.add(new SetCardInfo("Sandbenders' Storm", 34, Rarity.COMMON, mage.cards.s.SandbendersStorm.class));
