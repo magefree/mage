@@ -381,6 +381,8 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("Wan Shi Tong, Librarian", 78, Rarity.MYTHIC, mage.cards.w.WanShiTongLibrarian.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wandering Musicians", 250, Rarity.COMMON, mage.cards.w.WanderingMusicians.class));
         cards.add(new SetCardInfo("War Balloon", 159, Rarity.UNCOMMON, mage.cards.w.WarBalloon.class));
+        cards.add(new SetCardInfo("Wartime Protestors", 160, Rarity.RARE, mage.cards.w.WartimeProtestors.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Wartime Protestors", 375, Rarity.RARE, mage.cards.w.WartimeProtestors.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Water Tribe Captain", 41, Rarity.COMMON, mage.cards.w.WaterTribeCaptain.class));
         cards.add(new SetCardInfo("Water Tribe Rallier", 42, Rarity.UNCOMMON, mage.cards.w.WaterTribeRallier.class));
         cards.add(new SetCardInfo("Waterbender Ascension", 310, Rarity.RARE, mage.cards.w.WaterbenderAscension.class, NON_FULL_USE_VARIOUS));
