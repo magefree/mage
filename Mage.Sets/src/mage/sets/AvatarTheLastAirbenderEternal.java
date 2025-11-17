@@ -247,6 +247,8 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Sokka and Suki", 71, Rarity.RARE, mage.cards.s.SokkaAndSuki.class));
         cards.add(new SetCardInfo("Sokka's Charge", 66, Rarity.RARE, mage.cards.s.SokkasCharge.class));
         cards.add(new SetCardInfo("Sokka's Sword Training", 84, Rarity.COMMON, mage.cards.s.SokkasSwordTraining.class));
+        cards.add(new SetCardInfo("Sokka, Swordmaster", 174, Rarity.MYTHIC, mage.cards.s.SokkaSwordmaster.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sokka, Swordmaster", 83, Rarity.MYTHIC, mage.cards.s.SokkaSwordmaster.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sokka, Wolf Cove's Protector", 219, Rarity.UNCOMMON, mage.cards.s.SokkaWolfCovesProtector.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sokka, Wolf Cove's Protector", 274, Rarity.UNCOMMON, mage.cards.s.SokkaWolfCovesProtector.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sol Ring", 316, Rarity.RARE, mage.cards.s.SolRing.class));
