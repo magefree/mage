@@ -92,6 +92,7 @@ public final class Conspiracy extends ExpansionSet {
         cards.add(new SetCardInfo("Gnarlid Pack", 166, Rarity.COMMON, mage.cards.g.GnarlidPack.class));
         cards.add(new SetCardInfo("Grenzo, Dungeon Warden", 47, Rarity.RARE, mage.cards.g.GrenzoDungeonWarden.class));
         cards.add(new SetCardInfo("Grenzo's Cutthroat", 32, Rarity.COMMON, mage.cards.g.GrenzosCutthroat.class));
+        cards.add(new SetCardInfo("Grenzo's Rebuttal", 33, Rarity.RARE, mage.cards.g.GrenzosRebuttal.class));
         cards.add(new SetCardInfo("Grixis Illusionist", 99, Rarity.COMMON, mage.cards.g.GrixisIllusionist.class));
         cards.add(new SetCardInfo("Grudge Keeper", 28, Rarity.COMMON, mage.cards.g.GrudgeKeeper.class));
         cards.add(new SetCardInfo("Guardian Zendikon", 71, Rarity.COMMON, mage.cards.g.GuardianZendikon.class));
