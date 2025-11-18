@@ -77,6 +77,8 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("Avatar's Wrath", 12, Rarity.RARE, mage.cards.a.AvatarsWrath.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Avatar's Wrath", 365, Rarity.RARE, mage.cards.a.AvatarsWrath.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Azula Always Lies", 84, Rarity.COMMON, mage.cards.a.AzulaAlwaysLies.class));
+        cards.add(new SetCardInfo("Azula, Cunning Usurper", 208, Rarity.RARE, mage.cards.a.AzulaCunningUsurper.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Azula, Cunning Usurper", 303, Rarity.RARE, mage.cards.a.AzulaCunningUsurper.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Azula, On the Hunt", 85, Rarity.UNCOMMON, mage.cards.a.AzulaOnTheHunt.class));
         cards.add(new SetCardInfo("Ba Sing Se", 266, Rarity.RARE, mage.cards.b.BaSingSe.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ba Sing Se", 388, Rarity.RARE, mage.cards.b.BaSingSe.class, NON_FULL_USE_VARIOUS));
