@@ -14,6 +14,7 @@ public class CardDownloadData {
     private String set;
     private final String collectorId;
     private final Integer imageNumber;
+    private boolean isCommon;
     private boolean isToken;
     private boolean isSecondSide;
     private boolean isFlippedSide;
@@ -39,6 +40,7 @@ public class CardDownloadData {
         this.isFlippedSide = card.isFlippedSide;
         this.isSplitCard = card.isSplitCard;
         this.isUsesVariousArt = card.isUsesVariousArt;
+        this.isCommon = card.isCommon;
     }
 
     @Override
@@ -169,5 +171,13 @@ public class CardDownloadData {
 
     public void setFlippedSide(boolean flippedSide) {
         this.isFlippedSide = flippedSide;
+    }
+
+    public boolean isCommon() {
+        return isCommon;
+    }
+
+    public void setCommon(boolean common) {
+        this.isCommon = common;
     }
 }
