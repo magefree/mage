@@ -266,6 +266,8 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Swiftfoot Boots", 317, Rarity.RARE, mage.cards.s.SwiftfootBoots.class));
         cards.add(new SetCardInfo("Tarnished Citadel", 59, Rarity.MYTHIC, mage.cards.t.TarnishedCitadel.class));
         cards.add(new SetCardInfo("Taunting Challenge", 46, Rarity.MYTHIC, mage.cards.t.TauntingChallenge.class));
+        cards.add(new SetCardInfo("Tectonic Split", 144, Rarity.RARE, mage.cards.t.TectonicSplit.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Tectonic Split", 208, Rarity.RARE, mage.cards.t.TectonicSplit.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Teferi's Protection", 7, Rarity.MYTHIC, mage.cards.t.TeferisProtection.class));
         cards.add(new SetCardInfo("The Art of Tea", 129, Rarity.COMMON, mage.cards.t.TheArtOfTea.class));
         cards.add(new SetCardInfo("The Blue Spirit", 178, Rarity.RARE, mage.cards.t.TheBlueSpirit.class, NON_FULL_USE_VARIOUS));
