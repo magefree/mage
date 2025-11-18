@@ -20,10 +20,10 @@ import java.util.UUID;
  */
 public class DamageTargetEffect extends OneShotEffect {
 
-    protected DynamicValue amount;
-    protected boolean preventable;
-    protected String targetDescription;
-    protected String sourceName = "{this}";
+    private final DynamicValue amount;
+    private final boolean preventable;
+    private String targetDescription;
+    private String sourceName = "{this}";
 
     public DamageTargetEffect(int amount) {
         this(StaticValue.get(amount), true);
@@ -65,18 +65,6 @@ public class DamageTargetEffect extends OneShotEffect {
         this.amount = amount;
         this.preventable = preventable;
         this.targetDescription = targetDescription;
-    }
-
-    public int getAmount() {
-        if (amount instanceof StaticValue) {
-            return amount.calculate(null, null, this);
-        } else {
-            return 0;
-        }
-    }
-
-    public void setAmount(DynamicValue amount) {
-        this.amount = amount;
     }
 
     protected DamageTargetEffect(final DamageTargetEffect effect) {
