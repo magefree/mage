@@ -41,7 +41,7 @@ public final class AvatarKyoshiEarthbender extends CardImpl {
         )));
 
         // At the beginning of combat on your turn, earthbend 8, then untap that land.
-        Ability ability = new BeginningOfCombatTriggeredAbility(new EarthbendTargetEffect(8));
+        Ability ability = new BeginningOfCombatTriggeredAbility(new EarthbendTargetEffect(8, false));
         ability.addEffect(new UntapTargetEffect().setText(", then untap that land"));
         ability.addTarget(new TargetControlledLandPermanent());
         this.addAbility(ability);

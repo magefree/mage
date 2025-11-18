@@ -11,7 +11,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -21,16 +23,11 @@ public class RemoveCountersSourceCost extends CostImpl {
     private final int amount;
     private final String name;
 
-    public RemoveCountersSourceCost() {
-        this.amount = 1;
-        this.name = "";
-        this.text = "remove a counter from {this}";
-    }
-
     public RemoveCountersSourceCost(int amount) {
         this.amount = amount;
         this.name = "";
-        this.text = "remove " + CardUtil.numberToText(amount) + " counters from {this}";
+        this.text = "remove " + CardUtil.numberToText(amount, "a") +
+                " counter" + (amount > 1 ? "s" : "") + " from {this}";
     }
 
     public RemoveCountersSourceCost(Counter counter) {
@@ -87,7 +84,7 @@ public class RemoveCountersSourceCost extends CostImpl {
                 }
                 paid = true;
             }
-        } else if (permanent.getCounters(game).getCount(name) >= amount){
+        } else if (permanent.getCounters(game).getCount(name) >= amount) {
             permanent.removeCounters(name, amount, source, game);
             this.paid = true;
         }

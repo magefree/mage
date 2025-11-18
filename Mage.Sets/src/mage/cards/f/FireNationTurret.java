@@ -44,6 +44,7 @@ public final class FireNationTurret extends CardImpl {
         ability = new SimpleActivatedAbility(
                 new DamageTargetEffect(50, "it"),
                 new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(50))
+                        .setText("remove fifty charge counters from {this}")
         );
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

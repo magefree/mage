@@ -42,7 +42,7 @@ public final class BeifongsBountyHunters extends CardImpl {
 
         // Whenever a nonland creature you control dies, earthbend X, where X is that creature's power.
         Ability ability = new DiesCreatureTriggeredAbility(
-                new EarthbendTargetEffect(BeifongsBountyHuntersValue.instance), false, filter
+                new EarthbendTargetEffect(BeifongsBountyHuntersValue.instance, true), false, filter
         );
         ability.addTarget(new TargetControlledLandPermanent());
         this.addAbility(ability);

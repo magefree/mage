@@ -44,7 +44,7 @@ public final class TheLegendOfKyoshi extends CardImpl {
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_II,
                 new Effects(
-                        new EarthbendTargetEffect(CardsInControllerHandCount.ANY)
+                        new EarthbendTargetEffect(CardsInControllerHandCount.ANY, true)
                                 .setText("earthbend X, where X is the number of cards in your hand"),
                         new AddCardSubTypeTargetEffect(SubType.ISLAND, Duration.Custom)
                                 .setText("That land becomes an Island in addition to its other types")

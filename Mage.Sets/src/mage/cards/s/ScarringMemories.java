@@ -41,7 +41,7 @@ public final class ScarringMemories extends CardImpl {
 
         // You may cast this spell as though it had flash if you control an attacking legendary creature.
         this.addAbility(new CastAsThoughItHadFlashIfConditionAbility(
-                condition, "you may cast this spell as though it had flash if you control an attacking legendary creature"
+                condition, "you may cast this spell as though it had flash if you control an attacking legendary creature."
         ));
 
         // Target opponent sacrifices a creature of their choice, discards a card, and loses 3 life.

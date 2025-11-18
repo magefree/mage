@@ -47,7 +47,7 @@ public final class BaboonSpirit extends CardImpl {
 
         // {3}{U}: Exile another target creature you control. Return it to the battlefield under its owner's control at the beginning of the next end step.
         Ability ability = new SimpleActivatedAbility(
-                new ExileReturnBattlefieldNextEndStepTargetEffect(), new ManaCostsImpl<>("{3}{U}")
+                new ExileReturnBattlefieldNextEndStepTargetEffect().withTextThatCard(false), new ManaCostsImpl<>("{3}{U}")
         );
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
         this.addAbility(ability);

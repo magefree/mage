@@ -28,19 +28,26 @@ import mage.util.CardUtil;
 public class EarthbendTargetEffect extends OneShotEffect {
 
     private final DynamicValue amount;
+    private final boolean withReminderText;
 
     public EarthbendTargetEffect(int amount) {
-        this(StaticValue.get(amount));
+        this(amount, true);
     }
 
-    public EarthbendTargetEffect(DynamicValue amount) {
+    public EarthbendTargetEffect(int amount, boolean withReminderText) {
+        this(StaticValue.get(amount), withReminderText);
+    }
+
+    public EarthbendTargetEffect(DynamicValue amount, boolean withReminderText) {
         super(Outcome.Benefit);
         this.amount = amount;
+        this.withReminderText = withReminderText;
     }
 
     private EarthbendTargetEffect(final EarthbendTargetEffect effect) {
         super(effect);
         this.amount = effect.amount;
+        this.withReminderText = effect.withReminderText;
     }
 
     @Override
@@ -84,6 +91,9 @@ public class EarthbendTargetEffect extends OneShotEffect {
         } else {
             sb.append("X, where X is ");
             sb.append(amount.getMessage());
+        }
+        if (!withReminderText) {
+            return sb.toString();
         }
         sb.append(". <i>(Target land you control becomes a 0/0 creature with haste that's still a land. Put ");
         String value = amount instanceof StaticValue
