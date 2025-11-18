@@ -24,7 +24,8 @@ public final class IrohsDemonstration extends CardImpl {
 
         // Choose one --
         // * Iroh's Demonstration deals 1 damage to each creature your opponents control.
-        this.getSpellAbility().addEffect(new DamageAllEffect(1, StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
+        this.getSpellAbility().addEffect(new DamageAllEffect(1, StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE)
+                .setText("{this} deals 1 damage to each creature your opponents control"));
 
         // * Iroh's Demonstration deals 4 damage to target creature.
         this.getSpellAbility().addMode(new Mode(new DamageTargetEffect(4)).addTarget(new TargetCreaturePermanent()));

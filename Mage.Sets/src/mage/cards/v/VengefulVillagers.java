@@ -36,7 +36,7 @@ public final class VengefulVillagers extends CardImpl {
                 new AddCountersTargetEffect(CounterType.STUN.createInstance())
                         .setText("put a stun counter on the chosen creature"),
                 new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE)
-        ));
+        ).concatBy(", then"));
         ability.addTarget(new TargetOpponentsCreaturePermanent());
         this.addAbility(ability);
     }

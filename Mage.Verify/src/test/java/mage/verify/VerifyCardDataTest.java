@@ -304,7 +304,8 @@ public class VerifyCardDataTest {
      */
     private static boolean evergreenCheck(String s) {
         return evergreenKeywords.contains(s) || s.startsWith("protection from") || s.startsWith("hexproof from")
-                || s.startsWith("ward ") || s.startsWith("rampage ") || s.startsWith("annihilator");
+                || s.startsWith("ward ") || s.startsWith("rampage ") || s.startsWith("annihilator")
+                || s.matches("^firebending \\d");
     }
 
     private static <T> boolean eqSet(Collection<T> a, Collection<T> b) {

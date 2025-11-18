@@ -26,7 +26,7 @@ import java.util.UUID;
  */
 public final class TheBoulderReadyToRumble extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("creatures you control with power 4 or greater");
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("the number of creatures you control with power 4 or greater");
 
     static {
         filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 3));

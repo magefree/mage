@@ -37,13 +37,15 @@ public final class TheLegendOfKyoshi extends CardImpl {
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_I,
                 new DrawCardSourceControllerEffect(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES)
+                        .setText("draw cards equal to the greatest power among creatures you control")
         );
 
         // II -- Earthbend X, where X is the number of cards in your hand. That land becomes an Island in addition to its other types.
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_II,
                 new Effects(
-                        new EarthbendTargetEffect(CardsInControllerHandCount.ANY),
+                        new EarthbendTargetEffect(CardsInControllerHandCount.ANY)
+                                .setText("earthbend X, where X is the number of cards in your hand"),
                         new AddCardSubTypeTargetEffect(SubType.ISLAND, Duration.Custom)
                                 .setText("That land becomes an Island in addition to its other types")
                 ), new TargetControlledLandPermanent()

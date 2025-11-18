@@ -46,7 +46,7 @@ public final class AangAndLaOceansFury extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Whenever Aang and La attack, put a +1/+1 counter on each tapped creature you control.
-        this.addAbility(new AttacksTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter)));
+        this.addAbility(new AttacksTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter)).setTriggerPhrase("Whenever {this} attack, "));
     }
 
     private AangAndLaOceansFury(final AangAndLaOceansFury card) {

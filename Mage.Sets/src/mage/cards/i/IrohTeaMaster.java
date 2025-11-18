@@ -49,7 +49,7 @@ public final class IrohTeaMaster extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new FoodToken())));
 
         // At the beginning of combat on your turn, you may have target opponent gain control of target permanent you control. When you do, create a 1/1 white Ally creature token. Put a +1/+1 counter on that token for each permanent you own that your opponents control.
-        Ability ability = new BeginningOfCombatTriggeredAbility(new IrohTeaMasterControlEffect());
+        Ability ability = new BeginningOfCombatTriggeredAbility(new IrohTeaMasterControlEffect(), true);
         ability.addTarget(new TargetOpponent());
         ability.addTarget(new TargetControlledPermanent());
         this.addAbility(ability.addHint(IrohTeaMasterTokenEffect.getHint()));

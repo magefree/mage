@@ -79,9 +79,10 @@ public class EarthbendTargetEffect extends OneShotEffect {
             return staticText;
         }
         StringBuilder sb = new StringBuilder("earthbend ");
-        sb.append(amount);
-        if (!(amount instanceof StaticValue)) {
-            sb.append(", where X is ");
+        if (amount instanceof StaticValue) {
+            sb.append(amount);
+        } else {
+            sb.append("X, where X is ");
             sb.append(amount.getMessage());
         }
         sb.append(". <i>(Target land you control becomes a 0/0 creature with haste that's still a land. Put ");

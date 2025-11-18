@@ -22,7 +22,7 @@ public final class SozinsComet extends CardImpl {
         // Each creature you control gains firebending 5 until end of turn.
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(
                 new FirebendingAbility(5), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE
-        ));
+        ).setText("each creature you control gains firebending 5 until end of turn"));
 
         // Foretell {2}{R}
         this.addAbility(new ForetellAbility(this, "{2}{R}"));

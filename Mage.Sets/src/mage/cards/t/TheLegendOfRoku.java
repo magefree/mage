@@ -1,10 +1,9 @@
 package mage.cards.t;
 
-import mage.Mana;
 import mage.abilities.common.SagaAbility;
 import mage.abilities.effects.common.ExileSagaAndReturnTransformedEffect;
 import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
-import mage.abilities.effects.mana.BasicManaEffect;
+import mage.abilities.effects.mana.AddManaOfAnyColorEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -36,7 +35,7 @@ public final class TheLegendOfRoku extends CardImpl {
         );
 
         // II -- Add one mana of any color.
-        sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_II, new BasicManaEffect(Mana.AnyMana(1)));
+        sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_II, new AddManaOfAnyColorEffect(1));
 
         // III -- Exile this Saga, then return it to the battlefield transformed under your control.
         this.addAbility(new TransformAbility());

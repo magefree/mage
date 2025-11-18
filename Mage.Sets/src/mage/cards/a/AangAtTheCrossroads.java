@@ -53,7 +53,8 @@ public final class AangAtTheCrossroads extends CardImpl {
         this.addAbility(new TransformAbility());
         this.addAbility(new LeavesBattlefieldAllTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(
                 new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new TransformSourceEffect())
-        ).setText("transform {this} at the beginning of the next upkeep"), StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL));
+        ).setText("transform {this} at the beginning of the next upkeep"), StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL)
+                .setTriggerPhrase("When another creature you control leaves the battlefield, "));
     }
 
     private AangAtTheCrossroads(final AangAtTheCrossroads card) {

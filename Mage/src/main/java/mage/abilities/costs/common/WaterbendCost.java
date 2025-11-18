@@ -2,7 +2,7 @@ package mage.abilities.costs.common;
 
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.costs.CostImpl;
 import mage.game.Game;
 
 import java.util.UUID;
@@ -12,14 +12,14 @@ import java.util.UUID;
  *
  * @author TheElk801
  */
-public class WaterbendCost extends ManaCostsImpl {
+public class WaterbendCost extends CostImpl {
 
     public WaterbendCost(int amount) {
         this("{" + amount + '}');
     }
 
     public WaterbendCost(String mana) {
-        super("");
+        super();
         this.text = "waterbend " + mana;
     }
 

@@ -60,7 +60,7 @@ class BumiKingOfThreeTrialsTriggeredAbility extends EntersBattlefieldTriggeredAb
     private static final DynamicValue xValue = new CardsInControllerGraveyardCount(new FilterCard(SubType.LESSON));
 
     BumiKingOfThreeTrialsTriggeredAbility() {
-        super(new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
+        super(new AddCountersSourceEffect(CounterType.P1P1.createInstance(3)));
         this.getModes().setChooseText("choose up to X, where X is the number of Lesson cards in your graveyard &mdash;");
         this.getModes().setMinModes(0);
         this.addMode(new Mode(new ScryTargetEffect(3)).addTarget(new TargetPlayer()));

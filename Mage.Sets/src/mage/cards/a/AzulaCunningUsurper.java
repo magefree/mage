@@ -47,7 +47,7 @@ public final class AzulaCunningUsurper extends CardImpl {
         this.addAbility(ability);
 
         // During your turn, you may cast cards exiled with Azula and you may cast them as though they had flash. Mana of any type can be spent to cast those spells.
-        ability = new SimpleStaticAbility(new AzulaCunningUsurperFlashEffect());
+        ability = new SimpleStaticAbility(new AzulaCunningUsurperCastEffect());
         ability.addEffect(new AzulaCunningUsurperFlashEffect());
         ability.addEffect(new AzulaCunningUsurperManaEffect());
         this.addAbility(ability);

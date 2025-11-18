@@ -23,7 +23,7 @@ import java.util.UUID;
  */
 public final class EarthKingdomGeneral extends CardImpl {
 
-    private static final DynamicValue xValue = new EffectKeyValue("countersAdded", "that many");
+    private static final DynamicValue xValue = new EffectKeyValue("countersAdded", "that much");
 
     public EarthKingdomGeneral(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");

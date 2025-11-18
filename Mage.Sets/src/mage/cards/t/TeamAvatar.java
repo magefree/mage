@@ -35,7 +35,8 @@ public final class TeamAvatar extends CardImpl {
         // {2}{W}, Discard this card: It deals damage equal to the number of creatures you control to target creature.
         Ability ability = new SimpleActivatedAbility(
                 Zone.HAND,
-                new DamageTargetEffect(CreaturesYouControlCount.PLURAL, "it"),
+                new DamageTargetEffect(CreaturesYouControlCount.PLURAL)
+                        .setText("it deals damage equal to the number of creatures you control to target creature"),
                 new ManaCostsImpl<>("{2}{W}")
         );
         ability.addCost(new DiscardSourceCost());

@@ -39,7 +39,7 @@ public final class Badgermole extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
                 TrampleAbility.getInstance(), Duration.WhileOnBattlefield,
                 StaticFilters.FILTER_CONTROLLED_CREATURES_P1P1
-        )));
+        ).setText("creatures you control with +1/+1 counters on them have trample")));
     }
 
     private Badgermole(final Badgermole card) {

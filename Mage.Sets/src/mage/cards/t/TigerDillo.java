@@ -24,7 +24,7 @@ import java.util.UUID;
  */
 public final class TigerDillo extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent();
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("you control another creature with power 4 or greater");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -32,9 +32,7 @@ public final class TigerDillo extends CardImpl {
     }
 
     private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
-    private static final Hint hint = new ConditionHint(
-            condition, "You control another creature with power 4 or greature"
-    );
+    private static final Hint hint = new ConditionHint(condition);
 
     public TigerDillo(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
