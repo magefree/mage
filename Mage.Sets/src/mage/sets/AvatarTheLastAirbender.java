@@ -377,6 +377,8 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("Turtle-Duck", 200, Rarity.COMMON, mage.cards.t.TurtleDuck.class));
         cards.add(new SetCardInfo("Twin Blades", 157, Rarity.UNCOMMON, mage.cards.t.TwinBlades.class));
         cards.add(new SetCardInfo("Ty Lee, Artful Acrobat", 158, Rarity.UNCOMMON, mage.cards.t.TyLeeArtfulAcrobat.class));
+        cards.add(new SetCardInfo("Ty Lee, Chi Blocker", 371, Rarity.RARE, mage.cards.t.TyLeeChiBlocker.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ty Lee, Chi Blocker", 76, Rarity.RARE, mage.cards.t.TyLeeChiBlocker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Uncle Iroh", 248, Rarity.UNCOMMON, mage.cards.u.UncleIroh.class));
         cards.add(new SetCardInfo("United Front", 331, Rarity.MYTHIC, mage.cards.u.UnitedFront.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("United Front", 39, Rarity.MYTHIC, mage.cards.u.UnitedFront.class, NON_FULL_USE_VARIOUS));
