@@ -365,6 +365,8 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("Tiger-Seal", 318, Rarity.RARE, mage.cards.t.TigerSeal.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tiger-Seal", 75, Rarity.RARE, mage.cards.t.TigerSeal.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tolls of War", 245, Rarity.UNCOMMON, mage.cards.t.TollsOfWar.class));
+        cards.add(new SetCardInfo("Toph, Hardheaded Teacher", 246, Rarity.RARE, mage.cards.t.TophHardheadedTeacher.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Toph, Hardheaded Teacher", 384, Rarity.RARE, mage.cards.t.TophHardheadedTeacher.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Toph, the Blind Bandit", 198, Rarity.UNCOMMON, mage.cards.t.TophTheBlindBandit.class));
         cards.add(new SetCardInfo("Toph, the First Metalbender", 247, Rarity.RARE, mage.cards.t.TophTheFirstMetalbender.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Toph, the First Metalbender", 353, Rarity.RARE, mage.cards.t.TophTheFirstMetalbender.class, NON_FULL_USE_VARIOUS));
