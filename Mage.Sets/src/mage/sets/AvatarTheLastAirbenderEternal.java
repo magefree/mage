@@ -260,6 +260,7 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Sokka, Wolf Cove's Protector", 274, Rarity.UNCOMMON, mage.cards.s.SokkaWolfCovesProtector.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sol Ring", 316, Rarity.RARE, mage.cards.s.SolRing.class));
         cards.add(new SetCardInfo("Solid Ground", 142, Rarity.UNCOMMON, mage.cards.s.SolidGround.class));
+        cards.add(new SetCardInfo("Stand United", 149, Rarity.COMMON, mage.cards.s.StandUnited.class));
         cards.add(new SetCardInfo("Standstill", 19, Rarity.MYTHIC, mage.cards.s.Standstill.class));
         cards.add(new SetCardInfo("Suki, Kyoshi Captain", 175, Rarity.RARE, mage.cards.s.SukiKyoshiCaptain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Suki, Kyoshi Captain", 85, Rarity.RARE, mage.cards.s.SukiKyoshiCaptain.class, NON_FULL_USE_VARIOUS));
