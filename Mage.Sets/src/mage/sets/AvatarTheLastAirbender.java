@@ -376,6 +376,7 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("Toph, the First Metalbender", 362, Rarity.RARE, mage.cards.t.TophTheFirstMetalbender.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Treetop Freedom Fighters", 156, Rarity.COMMON, mage.cards.t.TreetopFreedomFighters.class));
         cards.add(new SetCardInfo("True Ancestry", 199, Rarity.UNCOMMON, mage.cards.t.TrueAncestry.class));
+        cards.add(new SetCardInfo("Trusty Boomerang", 260, Rarity.UNCOMMON, mage.cards.t.TrustyBoomerang.class));
         cards.add(new SetCardInfo("Tundra Tank", 121, Rarity.UNCOMMON, mage.cards.t.TundraTank.class));
         cards.add(new SetCardInfo("Turtle-Duck", 200, Rarity.COMMON, mage.cards.t.TurtleDuck.class));
         cards.add(new SetCardInfo("Twin Blades", 157, Rarity.UNCOMMON, mage.cards.t.TwinBlades.class));
