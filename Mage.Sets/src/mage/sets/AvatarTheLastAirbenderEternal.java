@@ -165,6 +165,7 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Jet, Rebel Leader", 172, Rarity.RARE, mage.cards.j.JetRebelLeader.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jet, Rebel Leader", 78, Rarity.RARE, mage.cards.j.JetRebelLeader.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Join the Dance", 50, Rarity.MYTHIC, mage.cards.j.JoinTheDance.class));
+        cards.add(new SetCardInfo("Katara's Reversal", 63, Rarity.RARE, mage.cards.k.KatarasReversal.class));
         cards.add(new SetCardInfo("Katara, Heroic Healer", 215, Rarity.UNCOMMON, mage.cards.k.KataraHeroicHealer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Katara, Heroic Healer", 269, Rarity.UNCOMMON, mage.cards.k.KataraHeroicHealer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Katara, Seeking Revenge", 148, Rarity.UNCOMMON, mage.cards.k.KataraSeekingRevenge.class));
