@@ -2,8 +2,7 @@ package mage.cards.d;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.BatchTriggeredAbility;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.PutIntoGraveFromAnywhereSourceTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
@@ -12,15 +11,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeBatchEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.target.common.TargetCardInGraveyard;
 
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -37,7 +30,9 @@ public final class DutifulKnowledgeSeeker extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever one or more cards are put into a library from anywhere, put a +1/+1 counter on this creature.
-        this.addAbility(new DutifulKnowledgeSeekerTriggeredAbility());
+        this.addAbility(new PutIntoGraveFromAnywhereSourceTriggeredAbility(
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance())
+        ));
 
         // {3}: Put target card from a graveyard on the bottom of its owner's library.
         Ability ability = new SimpleActivatedAbility(new PutOnLibraryTargetEffect(false), new GenericManaCost(3));
@@ -52,42 +47,5 @@ public final class DutifulKnowledgeSeeker extends CardImpl {
     @Override
     public DutifulKnowledgeSeeker copy() {
         return new DutifulKnowledgeSeeker(this);
-    }
-}
-
-class DutifulKnowledgeSeekerTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<ZoneChangeEvent> {
-
-    DutifulKnowledgeSeekerTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
-        this.setTriggerPhrase("Whenever one or more cards are put into a library from anywhere, ");
-    }
-
-    private DutifulKnowledgeSeekerTriggeredAbility(final DutifulKnowledgeSeekerTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public DutifulKnowledgeSeekerTriggeredAbility copy() {
-        return new DutifulKnowledgeSeekerTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE_BATCH;
-    }
-
-    @Override
-    public boolean checkEvent(ZoneChangeEvent event, Game game) {
-        return Zone.LIBRARY.match(event.getToZone());
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return this
-                .getFilteredEvents((ZoneChangeBatchEvent) event, game)
-                .stream()
-                .map(GameEvent::getTargetId)
-                .map(game::getCard)
-                .anyMatch(Objects::nonNull);
     }
 }

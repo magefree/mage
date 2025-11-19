@@ -304,6 +304,8 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Valorous Stance", 154, Rarity.UNCOMMON, mage.cards.v.ValorousStance.class));
         cards.add(new SetCardInfo("Visions of Beyond", 21, Rarity.MYTHIC, mage.cards.v.VisionsOfBeyond.class));
         cards.add(new SetCardInfo("Volcanic Torrent", 37, Rarity.MYTHIC, mage.cards.v.VolcanicTorrent.class));
+        cards.add(new SetCardInfo("Wan Shi Tong, All-Knowing", 182, Rarity.MYTHIC, mage.cards.w.WanShiTongAllKnowing.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Wan Shi Tong, All-Knowing", 98, Rarity.MYTHIC, mage.cards.w.WanShiTongAllKnowing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Warship Scout", 244, Rarity.COMMON, mage.cards.w.WarshipScout.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Warship Scout", 285, Rarity.COMMON, mage.cards.w.WarshipScout.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Warstorm Surge", 38, Rarity.MYTHIC, mage.cards.w.WarstormSurge.class));
