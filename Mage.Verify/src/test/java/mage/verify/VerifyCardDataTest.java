@@ -2195,7 +2195,7 @@ public class VerifyCardDataTest {
     // Note that the check includes reminder text, so any keyword ability with reminder text always included in the card text doesn't need to be added
     // FIN added equip abilities with flavor words, allow for those. There are also cards that affect equip costs or equip abilities, exclude those
     // Technically Enchant should be in this list, but that's added to the SpellAbility in XMage
-    Pattern targetKeywordRegexPattern = Pattern.compile("^((.*— )?equip(?! cost| abilit)|bestow|partner with|modular|backup)\\b", Pattern.MULTILINE);
+    Pattern targetKeywordRegexPattern = Pattern.compile("^((.*— )?equip(?! cost| abilit)|bestow|partner with|modular|backup|earthbend)\\b", Pattern.MULTILINE);
 
     // Checks for targeted reflexive or delayed triggered abilities, ones that only can trigger as a result of another ability
     // and thus have their "when" located after a previous statement (detected by a period or comma followed by a space) instead of the start.
