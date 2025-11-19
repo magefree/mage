@@ -3,9 +3,12 @@ package org.mage.test.cards.copy;
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.game.permanent.Permanent;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  *
@@ -84,5 +87,23 @@ public class CopyCreatureCardToTokenImplTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Alpha Myr", 1);
         assertPermanentCount(playerA, "Thrashing Brontodon", 1);
         assertType("Thrashing Brontodon", CardType.ARTIFACT, true);
+    }
+
+    @Test
+    public void testTokenCopyTransformedHasSecondFaceWithModifications() {
+        setStrictChooseMode(true);
+
+        String hookHauntDrifter = "Hook-Haunt Drifter";
+        addCard(Zone.GRAVEYARD, playerA, "Baithook Angler");
+        addCard(Zone.BATTLEFIELD, playerB, "Faerie Artisans", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Breeding Pool", 5);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Hook-Haunt Drifter using Disturb");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        Permanent token = getPermanent(hookHauntDrifter, playerB);
+        assertTrue(token.getCardType(currentGame).contains(CardType.ARTIFACT));
     }
 }

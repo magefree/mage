@@ -12,12 +12,11 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
+ * Special action for Room cards to unlock a locked half by paying its
+ * mana cost.
+ * This ability is only present if the corresponding half is currently
+ * locked.
  * @author oscscull
- *         Special action for Room cards to unlock a locked half by paying its
- *         mana
- *         cost.
- *         This ability is only present if the corresponding half is currently
- *         locked.
  */
 public class RoomUnlockAbility extends SpecialAction {
 
@@ -60,6 +59,10 @@ public class RoomUnlockAbility extends SpecialAction {
         sb.append(" <i>(Activate only as a sorcery, and only if the ");
         sb.append(isLeftHalf ? "left" : "right").append(" half is locked.)</i>");
         return sb.toString();
+    }
+
+    public boolean isLeftHalf() {
+        return isLeftHalf;
     }
 }
 

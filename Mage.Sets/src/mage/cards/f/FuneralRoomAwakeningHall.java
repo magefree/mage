@@ -30,13 +30,13 @@ public final class FuneralRoomAwakeningHall extends RoomCard {
                 StaticFilters.FILTER_CONTROLLED_A_CREATURE
         );
         left.addEffect(new GainLifeEffect(1).concatBy("and"));
+        this.getLeftHalfCard().addAbility(left);
 
         // Awakening Hall: When you unlock this door, return all creature cards from your graveyard to the battlefield.
         Ability right = new UnlockThisDoorTriggeredAbility(
                 new ReturnFromYourGraveyardToBattlefieldAllEffect(StaticFilters.FILTER_CARD_CREATURES), false, false
         );
-
-        this.addRoomAbilities(left, right);
+        this.getRightHalfCard().addAbility(right);
     }
 
     private FuneralRoomAwakeningHall(final FuneralRoomAwakeningHall card) {

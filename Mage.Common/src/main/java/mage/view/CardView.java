@@ -33,6 +33,7 @@ import mage.game.command.Dungeon;
 import mage.game.command.Emblem;
 import mage.game.command.Plane;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
@@ -116,7 +117,7 @@ public class CardView extends SimpleCardView {
     protected List<String> rightSplitRules;
     protected String rightSplitTypeLine;
 
-    protected boolean isModalDoubleFacedCard;
+    protected boolean isDoubleFacedCard;
 
     protected ArtRect artRect = ArtRect.NORMAL;
 
@@ -238,7 +239,7 @@ public class CardView extends SimpleCardView {
         this.rightSplitRules = cardView.rightSplitRules == null ? null : new ArrayList<>(cardView.rightSplitRules);
         this.rightSplitTypeLine = cardView.rightSplitTypeLine;
 
-        this.isModalDoubleFacedCard = cardView.isModalDoubleFacedCard;
+        this.isDoubleFacedCard = cardView.isDoubleFacedCard;
 
         this.artRect = cardView.artRect;
         this.targets = cardView.targets == null ? null : new ArrayList<>(cardView.targets);
@@ -428,12 +429,18 @@ public class CardView extends SimpleCardView {
                 this.manaCostLeftStr = splitCard.getLeftHalfCard().getManaCostSymbols();
                 this.manaCostRightStr = splitCard.getRightHalfCard().getManaCostSymbols();
             } else if (card instanceof ModalDoubleFacedCard) {
-                this.isModalDoubleFacedCard = true;
-                ModalDoubleFacedCard mainCard = ((ModalDoubleFacedCard) card);
+                this.isDoubleFacedCard = true;
+                DoubleFacedCard mainCard = ((DoubleFacedCard) card);
                 fullCardName = mainCard.getLeftHalfCard().getName() + MockCard.MODAL_DOUBLE_FACES_NAME_SEPARATOR + mainCard.getRightHalfCard().getName();
                 this.manaCostLeftStr = mainCard.getLeftHalfCard().getManaCostSymbols();
                 this.manaCostRightStr = mainCard.getRightHalfCard().getManaCostSymbols();
-            } else if (card instanceof CardWithSpellOption) {
+            } else if (card instanceof TransformingDoubleFacedCard) {
+                this.isDoubleFacedCard = true;
+                DoubleFacedCard mainCard = ((DoubleFacedCard) card);
+                fullCardName = mainCard.getLeftHalfCard().getName() + MockCard.MODAL_DOUBLE_FACES_NAME_SEPARATOR + mainCard.getRightHalfCard().getName();
+                this.manaCostLeftStr = mainCard.getLeftHalfCard().getManaCostSymbols();
+                this.manaCostRightStr = new ArrayList<>();
+            }  else if (card instanceof CardWithSpellOption) {
                 this.isSplitCard = true;
                 CardWithSpellOption mainCard = ((CardWithSpellOption) card);
                 leftSplitName = mainCard.getName();
@@ -531,13 +538,21 @@ public class CardView extends SimpleCardView {
 
             this.extraDeckCard = card.isExtraDeckCard();
 
+            // TODO: can probably remove this after tdfc rework
             // transformable, double faces cards
-            this.transformable = card.isTransformable();
+            if (!(sourceCard.getMainCard() instanceof DoubleFacedCard)) {
+                this.transformable = card.isTransformable();
 
-            Card secondSideCard = card.getSecondCardFace();
-            if (secondSideCard != null) {
+                Card secondSideCard = card.getSecondCardFace();
+                if (secondSideCard != null) {
+                    this.secondCardFace = new CardView(secondSideCard, game);
+                    this.alternateName = secondCardFace.getName();
+                }
+            } else if (card instanceof PermanentCard && card.isTransformable()) {
+                this.transformable = card.isTransformable();
+                Card secondSideCard = (Card) ((PermanentCard) card).getOtherFace();
                 this.secondCardFace = new CardView(secondSideCard, game);
-                this.alternateName = secondCardFace.getName();
+                this.alternateName = secondSideCard.getName();
             }
 
             this.flipCard = card.isFlipCard();
@@ -545,11 +560,11 @@ public class CardView extends SimpleCardView {
                 this.alternateName = card.getFlipCardName();
             }
 
-            if (card instanceof ModalDoubleFacedCard) {
+            if (card instanceof DoubleFacedCard) {
                 this.transformable = true; // enable GUI day/night button
-                ModalDoubleFacedCard mdfCard = (ModalDoubleFacedCard) card;
-                this.secondCardFace = new CardView(mdfCard.getRightHalfCard(), game);
-                this.alternateName = mdfCard.getRightHalfCard().getName();
+                DoubleFacedCard doubleFacedCard = (DoubleFacedCard) card;
+                this.secondCardFace = new CardView(doubleFacedCard.getRightHalfCard(), game);
+                this.alternateName = doubleFacedCard.getRightHalfCard().getName();
             }
 
             Card meldsToCard = card.getMeldsToCard();

@@ -482,9 +482,6 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Tamiyo, Inquisitive Student", 242, Rarity.MYTHIC, mage.cards.t.TamiyoInquisitiveStudent.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tamiyo, Inquisitive Student", 443, Rarity.MYTHIC, mage.cards.t.TamiyoInquisitiveStudent.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tamiyo, Inquisitive Student", 469, Rarity.MYTHIC, mage.cards.t.TamiyoInquisitiveStudent.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Tamiyo, Seasoned Scholar", 242, Rarity.MYTHIC, mage.cards.t.TamiyoSeasonedScholar.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Tamiyo, Seasoned Scholar", 443, Rarity.MYTHIC, mage.cards.t.TamiyoSeasonedScholar.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Tamiyo, Seasoned Scholar", 469, Rarity.MYTHIC, mage.cards.t.TamiyoSeasonedScholar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Temperamental Oozewagg", 172, Rarity.COMMON, mage.cards.t.TemperamentalOozewagg.class));
         cards.add(new SetCardInfo("Tempest Harvester", 73, Rarity.COMMON, mage.cards.t.TempestHarvester.class));
         cards.add(new SetCardInfo("Territory Culler", 173, Rarity.UNCOMMON, mage.cards.t.TerritoryCuller.class));

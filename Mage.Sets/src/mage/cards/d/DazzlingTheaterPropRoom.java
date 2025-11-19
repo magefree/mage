@@ -35,11 +35,11 @@ public final class DazzlingTheaterPropRoom extends RoomCard {
 
         // Dazzling Theater: Creature spells you cast have convoke.
         Ability left = new SimpleStaticAbility(new GainAbilityControlledSpellsEffect(new ConvokeAbility(), filter));
+        this.getLeftHalfCard().addAbility(left);
 
         // Prop Room: Untap each creature you control during each other player's untap step.
         Ability right = new SimpleStaticAbility(new UntapAllDuringEachOtherPlayersUntapStepEffect(StaticFilters.FILTER_CONTROLLED_CREATURES));
-
-        this.addRoomAbilities(left, right);
+        this.getRightHalfCard().addAbility(right);
     }
 
     private DazzlingTheaterPropRoom(final DazzlingTheaterPropRoom card) {

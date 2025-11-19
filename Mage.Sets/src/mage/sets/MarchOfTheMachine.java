@@ -69,7 +69,6 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Baral and Kari Zev", 218, Rarity.RARE, mage.cards.b.BaralAndKariZev.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Baral and Kari Zev", 302, Rarity.RARE, mage.cards.b.BaralAndKariZev.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Beamtown Beatstick", 131, Rarity.COMMON, mage.cards.b.BeamtownBeatstick.class));
-        cards.add(new SetCardInfo("Belenon War Anthem", 20, Rarity.UNCOMMON, mage.cards.b.BelenonWarAnthem.class));
         cards.add(new SetCardInfo("Belligerent Regisaur", 191, Rarity.RARE, mage.cards.b.BelligerentRegisaur.class));
         cards.add(new SetCardInfo("Bladed Battle-Fan", 91, Rarity.COMMON, mage.cards.b.BladedBattleFan.class));
         cards.add(new SetCardInfo("Blighted Burgeoning", 177, Rarity.COMMON, mage.cards.b.BlightedBurgeoning.class));

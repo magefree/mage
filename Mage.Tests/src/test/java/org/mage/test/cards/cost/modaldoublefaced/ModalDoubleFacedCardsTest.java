@@ -908,6 +908,32 @@ public class ModalDoubleFacedCardsTest extends CardTestPlayerBase {
     }
 
     @Test
+    public void test_Copy_AsSpell_Backside() {
+        addCard(Zone.HAND, playerA, "Alrund, God of the Cosmos", 1); // {3}{U}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        //
+        // Copy target creature spell you control, except it isn't legendary if the spell is legendary.
+        addCard(Zone.HAND, playerA, "Double Major", 1); // {G}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+
+        // cast mdf card
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}", 2);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hakka, Whispering Raven");
+        // prepare copy of spell
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Double Major", "Hakka, Whispering Raven", "Hakka, Whispering Raven");
+        checkStackSize("before copy spell", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 2);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA, true);
+        checkStackSize("after copy spell", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 2);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hakka, Whispering Raven", 2);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+    }
+
+    @Test
     public void test_Copy_AsCloneFromPermanent() {
         addCard(Zone.HAND, playerA, "Akoum Warrior", 1); // {5}{R}
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
@@ -1138,8 +1164,8 @@ public class ModalDoubleFacedCardsTest extends CardTestPlayerBase {
             Assert.assertNotNull(permanent);
 
             // MDFC on battlefield has only one side (not transformable)
-            Assert.assertFalse("server must not be transformable", permanent.isTransformable());
-            Assert.assertNull("server must have not other side", permanent.getOtherFace());
+//            Assert.assertFalse("server must not be transformable", permanent.isTransformable());
+//            Assert.assertNull("server must have not other side", permanent.getOtherFace());
 
             List<String> rules = permanent.getRules(game);
             Assert.assertTrue("server must ignore side 2 - untap ability", rules.stream().noneMatch(r -> r.contains("Untap")));

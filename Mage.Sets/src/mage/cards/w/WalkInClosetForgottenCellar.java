@@ -25,6 +25,7 @@ public final class WalkInClosetForgottenCellar extends RoomCard {
 
         // Walk-In Closet: You may play lands from your graveyard.
         SimpleStaticAbility left = new SimpleStaticAbility(PlayFromGraveyardControllerEffect.playLands());
+        this.getLeftHalfCard().addAbility(left);
 
         // Forgotten Cellar: When you unlock this door, you may cast spells from your graveyard this turn, and if a card would be put into your graveyard from anywhere this turn, exile it instead.
         UnlockThisDoorTriggeredAbility right = new UnlockThisDoorTriggeredAbility(
@@ -34,8 +35,7 @@ public final class WalkInClosetForgottenCellar extends RoomCard {
         right.addEffect(new GraveyardFromAnywhereExileReplacementEffect(Duration.EndOfTurn).concatBy(", and")
                 .setText("if a card would be put into your graveyard from anywhere this turn, exile it instead")
         );
-
-        this.addRoomAbilities(left, right);
+        this.getRightHalfCard().addAbility(right);
     }
 
     private WalkInClosetForgottenCellar(final WalkInClosetForgottenCellar card) {

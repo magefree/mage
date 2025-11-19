@@ -23,7 +23,7 @@ public class EntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     public EntersBattlefieldTriggeredAbility(Effect effect, boolean optional) {
-        super(Zone.ALL, effect, optional); // Zone.All because a creature with trigger can be put into play and be sacrificed during the resolution of an effect (discard Obstinate Baloth with Smallpox)
+        super(Zone.BATTLEFIELD, effect, optional); // Zone.All doesn't appear to be necessary anymore (discard Obstinate Baloth with Smallpox still works)
         this.withRuleTextReplacement(true); // default true to replace "{this}" with "it" or "this creature"
 
         // warning, it's impossible to add text auto-replacement for creatures here (When this creature enters),

@@ -9,6 +9,7 @@ import mage.abilities.costs.common.ExileSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.cards.TransformingDoubleFacedCardHalf;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;

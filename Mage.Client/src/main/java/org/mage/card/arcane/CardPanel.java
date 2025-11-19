@@ -940,8 +940,13 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
     private void setGameCardSides(CardView gameCard) {
         if (this.cardSideMain == null) {
             // new card
-            this.cardSideMain = gameCard;
-            this.cardSideOther = gameCard.getSecondCardFace();
+            if (gameCard instanceof PermanentView) {
+                this.cardSideMain = gameCard;
+                this.cardSideOther = gameCard.isTransformed() ? ((PermanentView) gameCard).getOriginal() : gameCard.getSecondCardFace();
+            } else {
+                this.cardSideMain = gameCard;
+                this.cardSideOther = gameCard.getSecondCardFace();
+            }
         } else {
             // updated card
             if (this.cardSideMain.getName().equals(gameCard.getName())) {

@@ -1,10 +1,10 @@
 package mage.cards.h;
 
-import mage.MageInt;
+import mage.abilities.common.WerewolfBackTriggeredAbility;
 import mage.abilities.common.WerewolfFrontTriggeredAbility;
-import mage.abilities.keyword.TransformAbility;
-import mage.cards.CardImpl;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
@@ -13,20 +13,30 @@ import java.util.UUID;
 /**
  * @author fireshoes
  */
-public final class HinterlandLogger extends CardImpl {
+public final class HinterlandLogger extends TransformingDoubleFacedCard {
 
     public HinterlandLogger(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.WEREWOLF);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.WEREWOLF}, "{1}{G}",
+                "Timber Shredder",
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.WEREWOLF}, "G");
 
-        this.secondSideCardClazz = mage.cards.t.TimberShredder.class;
+        this.getLeftHalfCard().setPT(2, 1);
+        this.getRightHalfCard().setPT(4, 2);
 
         // At the beginning of each upkeep, if no spells were cast last turn, transform Hinterland Logger.
-        this.addAbility(new TransformAbility());
-        this.addAbility(new WerewolfFrontTriggeredAbility());
+//        this.getLeftHalfCard().addAbility(new TransformAbility());
+        this.getLeftHalfCard().addAbility(new WerewolfFrontTriggeredAbility());
+
+        // Timber Shredder
+
+        // Trample
+        this.getRightHalfCard().addAbility(TrampleAbility.getInstance());
+
+        // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Timber Shredder.
+        this.getRightHalfCard().addAbility(new WerewolfBackTriggeredAbility());
+
+
     }
 
     private HinterlandLogger(final HinterlandLogger card) {
