@@ -2,7 +2,7 @@ package mage.cards.d;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.PutIntoGraveFromAnywhereSourceTriggeredAbility;
+import mage.abilities.common.PutIntoLibraryOneOrMoreTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
@@ -30,7 +30,7 @@ public final class DutifulKnowledgeSeeker extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever one or more cards are put into a library from anywhere, put a +1/+1 counter on this creature.
-        this.addAbility(new PutIntoGraveFromAnywhereSourceTriggeredAbility(
+        this.addAbility(new PutIntoLibraryOneOrMoreTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance())
         ));
 
