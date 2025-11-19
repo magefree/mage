@@ -70,8 +70,8 @@ public class DamageTargetAndYouEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return "{this} deals " + firstAmount + "damage to " +
+        return "{this} deals " + firstAmount + " damage to " +
                 getTargetPointer().describeTargets(mode.getTargets(), "that creature") +
-                " and " + secondAmount + "damage to you";
+                " and " + secondAmount + " damage to you";
     }
 }

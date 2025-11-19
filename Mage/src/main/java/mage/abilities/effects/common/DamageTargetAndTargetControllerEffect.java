@@ -62,8 +62,8 @@ public class DamageTargetAndTargetControllerEffect extends OneShotEffect {
             return staticText;
         }
         String description = getTargetPointer().describeTargets(mode.getTargets(), "that creature");
-        return "{this} deals " + firstAmount + "damage to " + description +
-                " and " + secondAmount + "damage to that " +
+        return "{this} deals " + firstAmount + " damage to " + description +
+                " and " + secondAmount + " damage to that " +
                 (description.contains(" or ") ? "permanent's" : "creature's") + " controller";
     }
 }
