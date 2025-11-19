@@ -220,6 +220,8 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 288, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Island", 293, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("It'll Quench Ya!", 58, Rarity.COMMON, mage.cards.i.ItllQuenchYa.class));
+        cards.add(new SetCardInfo("Jasmine Dragon Tea Shop", 270, Rarity.RARE, mage.cards.j.JasmineDragonTeaShop.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Jasmine Dragon Tea Shop", 390, Rarity.RARE, mage.cards.j.JasmineDragonTeaShop.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jeong Jeong's Deserters", 25, Rarity.COMMON, mage.cards.j.JeongJeongsDeserters.class));
         cards.add(new SetCardInfo("Jeong Jeong, the Deserter", 142, Rarity.UNCOMMON, mage.cards.j.JeongJeongTheDeserter.class));
         cards.add(new SetCardInfo("Jet's Brainwashing", 143, Rarity.UNCOMMON, mage.cards.j.JetsBrainwashing.class));
