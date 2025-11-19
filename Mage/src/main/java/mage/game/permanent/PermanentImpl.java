@@ -2024,16 +2024,17 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public boolean fight(Permanent fightTarget, Ability source, Game game) {
-        return this.fight(fightTarget, source, game, true);
+        this.fightWithExcess(fightTarget, source, game, true);
+        return true;
     }
 
     @Override
-    public boolean fight(Permanent fightTarget, Ability source, Game game, boolean batchTrigger) {
+    public int fightWithExcess(Permanent fightTarget, Ability source, Game game, boolean batchTrigger) {
         // double fight events for each creature
         game.fireEvent(GameEvent.getEvent(GameEvent.EventType.FIGHTED_PERMANENT, fightTarget.getId(), source, source.getControllerId()));
         game.fireEvent(GameEvent.getEvent(GameEvent.EventType.FIGHTED_PERMANENT, getId(), source, source.getControllerId()));
         damage(fightTarget.getPower().getValue(), fightTarget.getId(), source, game);
-        fightTarget.damage(getPower().getValue(), getId(), source, game);
+        int excess = fightTarget.damageWithExcess(getPower().getValue(), getId(), source, game);
 
         if (batchTrigger) {
             Set<MageObjectReference> morSet = new HashSet<>();
@@ -2044,7 +2045,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.BATCH_FIGHT, getId(), source, source.getControllerId(), data, 0));
         }
 
-        return true;
+        return excess;
     }
 
     @Override

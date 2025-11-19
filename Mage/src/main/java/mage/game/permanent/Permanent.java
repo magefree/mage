@@ -223,7 +223,10 @@ public interface Permanent extends Card, Controllable {
 
     boolean fight(Permanent fightTarget, Ability source, Game game);
 
-    boolean fight(Permanent fightTarget, Ability source, Game game, boolean batchTrigger);
+    /**
+     * Resolves a fight and returns the amount of excess damage dealt to fightTarget
+     */
+    int fightWithExcess(Permanent fightTarget, Ability source, Game game, boolean batchTrigger);
 
     boolean entersBattlefield(Ability source, Game game, Zone fromZone, boolean fireEvent);
 
@@ -475,7 +478,7 @@ public interface Permanent extends Card, Controllable {
     void setHarnessed(boolean value);
 
     boolean wasRoomUnlockedOnCast();
-    
+
     boolean isLeftDoorUnlocked();
 
     boolean isRightDoorUnlocked();
@@ -483,7 +486,7 @@ public interface Permanent extends Card, Controllable {
     boolean unlockRoomOnCast(Game game);
 
     boolean unlockDoor(Game game, Ability source, boolean isLeftDoor);
-    
+
     @Override
     Permanent copy();
 

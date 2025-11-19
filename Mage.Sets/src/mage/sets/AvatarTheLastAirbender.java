@@ -347,6 +347,8 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("The Earth King", 344, Rarity.RARE, mage.cards.t.TheEarthKing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Fire Nation Drill", 321, Rarity.RARE, mage.cards.t.TheFireNationDrill.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Fire Nation Drill", 98, Rarity.RARE, mage.cards.t.TheFireNationDrill.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Last Agni Kai", 144, Rarity.RARE, mage.cards.t.TheLastAgniKai.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Last Agni Kai", 314, Rarity.RARE, mage.cards.t.TheLastAgniKai.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Legend of Kuruk", 355, Rarity.MYTHIC, mage.cards.t.TheLegendOfKuruk.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Legend of Kuruk", 61, Rarity.MYTHIC, mage.cards.t.TheLegendOfKuruk.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Legend of Kyoshi", 186, Rarity.MYTHIC, mage.cards.t.TheLegendOfKyoshi.class, NON_FULL_USE_VARIOUS));
