@@ -116,6 +116,8 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Explosive Shot", 236, Rarity.COMMON, mage.cards.e.ExplosiveShot.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Explosive Shot", 279, Rarity.COMMON, mage.cards.e.ExplosiveShot.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fabled Passage", 57, Rarity.MYTHIC, mage.cards.f.FabledPassage.class));
+        cards.add(new SetCardInfo("Fang, Roku's Companion", 115, Rarity.RARE, mage.cards.f.FangRokusCompanion.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Fang, Roku's Companion", 193, Rarity.RARE, mage.cards.f.FangRokusCompanion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Feed the Swarm", 257, Rarity.COMMON, mage.cards.f.FeedTheSwarm.class));
         cards.add(new SetCardInfo("Fervor", 29, Rarity.MYTHIC, mage.cards.f.Fervor.class));
         cards.add(new SetCardInfo("Fevered Visions", 49, Rarity.MYTHIC, mage.cards.f.FeveredVisions.class));
