@@ -74,9 +74,9 @@ public class DamageTargetAndAllControlledEffect extends OneShotEffect {
             return staticText;
         }
         String description = getTargetPointer().describeTargets(mode.getTargets(), "that player");
-        return "{this} deals " + firstAmount + " damage to " + description +
-                " and " + secondAmount + " damage to each " + filter.getMessage() +
-                " that player" +
+        return "{this} deals " + firstAmount + " damage to " + description + " and " +
+                ((firstAmount == secondAmount) ? "each " : secondAmount + " damage to each ")
+                + filter.getMessage() + " that player" +
                 (description.contains("planeswalker") ? " or that planeswalker's controller" : "") +
                 " controls";
     }

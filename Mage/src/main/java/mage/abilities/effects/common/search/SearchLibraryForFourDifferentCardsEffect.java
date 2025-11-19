@@ -34,7 +34,7 @@ public class SearchLibraryForFourDifferentCardsEffect extends OneShotEffect {
         staticText = "search your library for up to four " + filter +
                 " with different names and reveal them. " + (useTargetPointer ? "Target" : "An") +
                 " opponent chooses two of those cards. Put the chosen cards into your graveyard and the rest " +
-                putCards.getMessage(false, false) + ", then shuffle";
+                putCards.getMessage(false, false) + ". Then shuffle";
     }
 
     private SearchLibraryForFourDifferentCardsEffect(final SearchLibraryForFourDifferentCardsEffect effect) {

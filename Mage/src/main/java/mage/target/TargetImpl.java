@@ -141,6 +141,7 @@ public abstract class TargetImpl implements Target {
                 addTargetWord = false;
             } else if (targetName.endsWith("any target")
                     || targetName.endsWith("any other target")
+                    || targetName.endsWith("another target")
                     || targetName.endsWith("targets")) {
                 addTargetWord = false;
             }

@@ -20,7 +20,7 @@ import java.util.UUID;
  */
 public final class ExplosiveWelcome extends CardImpl {
 
-    private static final FilterPermanentOrPlayer filter = new FilterAnyTarget();
+    private static final FilterPermanentOrPlayer filter = new FilterAnyTarget("any other target");
 
     static {
         filter.getPermanentFilter().add(new AnotherTargetPredicate(2));

@@ -23,7 +23,7 @@ import java.util.UUID;
 public final class InvasionOfRegatha extends CardImpl {
 
     private static final FilterPermanentOrPlayer filter = new FilterPermanentOrPlayer(
-            "another target permanent or player",
+            "another target battle or opponent",
             new FilterBattlePermanent(), new FilterOpponent()
     );
 

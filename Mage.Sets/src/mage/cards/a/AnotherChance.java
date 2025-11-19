@@ -26,7 +26,7 @@ public final class AnotherChance extends CardImpl {
         // You may mill two cards. Then return up to two creature cards from your graveyard to your hand.
         this.getSpellAbility().addEffect(new AnotherChanceMillEffect());
         this.getSpellAbility().addEffect(new OneShotNonTargetEffect(new ReturnFromGraveyardToHandTargetEffect().setText("Then return up to two creature cards from your graveyard to your hand."),
-                new TargetCardInYourGraveyard(0, 2, StaticFilters.FILTER_CARD_CREATURES_YOUR_GRAVEYARD, true)).withTargetDescription("up to two creature cards").concatBy("Then "));
+                new TargetCardInYourGraveyard(0, 2, StaticFilters.FILTER_CARD_CREATURES_YOUR_GRAVEYARD, true)).withTargetDescription("up to two creature cards"));
     }
 
     private AnotherChance(final AnotherChance card) {
