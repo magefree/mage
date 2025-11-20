@@ -267,6 +267,7 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Sunbaked Canyon", 58, Rarity.MYTHIC, mage.cards.s.SunbakedCanyon.class));
         cards.add(new SetCardInfo("Sundial of the Infinite", 55, Rarity.MYTHIC, mage.cards.s.SundialOfTheInfinite.class));
         cards.add(new SetCardInfo("Suspicious Bookcase", 170, Rarity.UNCOMMON, mage.cards.s.SuspiciousBookcase.class));
+        cards.add(new SetCardInfo("Swampbenders", 65, Rarity.RARE, mage.cards.s.Swampbenders.class));
         cards.add(new SetCardInfo("Swiftfoot Boots", 317, Rarity.RARE, mage.cards.s.SwiftfootBoots.class));
         cards.add(new SetCardInfo("Tarnished Citadel", 59, Rarity.MYTHIC, mage.cards.t.TarnishedCitadel.class));
         cards.add(new SetCardInfo("Taunting Challenge", 46, Rarity.MYTHIC, mage.cards.t.TauntingChallenge.class));
