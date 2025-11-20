@@ -93,6 +93,8 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Deflecting Swat", 311, Rarity.RARE, mage.cards.d.DeflectingSwat.class));
         cards.add(new SetCardInfo("Deny Entry", 222, Rarity.COMMON, mage.cards.d.DenyEntry.class));
         cards.add(new SetCardInfo("Descendants' Path", 167, Rarity.RARE, mage.cards.d.DescendantsPath.class));
+        cards.add(new SetCardInfo("Desperate Plea", 103, Rarity.RARE, mage.cards.d.DesperatePlea.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Desperate Plea", 185, Rarity.RARE, mage.cards.d.DesperatePlea.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Diaochan, Artful Beauty", 27, Rarity.MYTHIC, mage.cards.d.DiaochanArtfulBeauty.class));
         cards.add(new SetCardInfo("Diresight", 162, Rarity.COMMON, mage.cards.d.Diresight.class));
         cards.add(new SetCardInfo("Dockside Extortionist", 28, Rarity.MYTHIC, mage.cards.d.DocksideExtortionist.class));
