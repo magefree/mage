@@ -26,6 +26,7 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         this.hasBasicLands = true;
 
         this.enablePlayBooster(Integer.MAX_VALUE);
+        this.numBoosterDoubleFaced = -1;
 
         cards.add(new SetCardInfo("Aang and La, Ocean's Fury", 204, Rarity.RARE, mage.cards.a.AangAndLaOceansFury.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aang and La, Ocean's Fury", 298, Rarity.RARE, mage.cards.a.AangAndLaOceansFury.class, NON_FULL_USE_VARIOUS));
