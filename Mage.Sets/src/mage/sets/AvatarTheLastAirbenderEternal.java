@@ -269,6 +269,8 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Suspicious Bookcase", 170, Rarity.UNCOMMON, mage.cards.s.SuspiciousBookcase.class));
         cards.add(new SetCardInfo("Swampbenders", 65, Rarity.RARE, mage.cards.s.Swampbenders.class));
         cards.add(new SetCardInfo("Swiftfoot Boots", 317, Rarity.RARE, mage.cards.s.SwiftfootBoots.class));
+        cards.add(new SetCardInfo("Tale of Momo", 176, Rarity.RARE, mage.cards.t.TaleOfMomo.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Tale of Momo", 86, Rarity.RARE, mage.cards.t.TaleOfMomo.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tarnished Citadel", 59, Rarity.MYTHIC, mage.cards.t.TarnishedCitadel.class));
         cards.add(new SetCardInfo("Taunting Challenge", 46, Rarity.MYTHIC, mage.cards.t.TauntingChallenge.class));
         cards.add(new SetCardInfo("Tectonic Split", 144, Rarity.RARE, mage.cards.t.TectonicSplit.class, NON_FULL_USE_VARIOUS));
