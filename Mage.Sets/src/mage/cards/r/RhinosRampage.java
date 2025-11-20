@@ -19,6 +19,7 @@ import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetOpponentsCreaturePermanent;
+import mage.target.targetpointer.EachTargetPointer;
 
 import java.util.List;
 import java.util.Objects;
@@ -63,6 +64,7 @@ class RhinosRampageEffect extends OneShotEffect {
         super(Outcome.BoostCreature);
         staticText = "it fights target creature an opponent controls. When excess damage is dealt to the creature " +
                 "an opponent controls this way, destroy up to one target noncreature artifact with mana value 3 or less.";
+        this.setTargetPointer(new EachTargetPointer());
     }
 
     protected RhinosRampageEffect(final RhinosRampageEffect effect) {
