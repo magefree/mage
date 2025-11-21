@@ -72,6 +72,8 @@ public class EarthbendTargetEffect extends OneShotEffect {
                         .withAbility(HasteAbility.getInstance()),
                 false, true, Duration.Custom
         ), source);
+        // Make the land into a creature before putting counters on, for the purposes of counter doublers that only apply to creatures.
+        game.processAction();
         permanent.addCounters(CounterType.P1P1.createInstance(value), source, game);
         game.addDelayedTriggeredAbility(new EarthbendingDelayedTriggeredAbility(permanent, game), source);
         game.fireEvent(GameEvent.getEvent(
