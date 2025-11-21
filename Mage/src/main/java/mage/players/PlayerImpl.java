@@ -4954,7 +4954,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     // 303.4g. If an Aura is entering the battlefield and there is no legal object or player for it to enchant,
                     // the Aura remains in its current zone, unless that zone is the stack. In that case, the Aura is put into
                     // its owner's graveyard instead of entering the battlefield. If the Aura is a token, it isn't created.
-                    if (card.hasSubtype(SubType.AURA, game) && !(source instanceof BestowAbility)) {
+                    if (card.hasSubtype(SubType.AURA, game) && !(source instanceof BestowAbility) && !((source instanceof SpellAbility) && ((SpellAbility)source).getSpellAbilityCastMode().equals(SpellAbilityCastMode.BESTOW))) {
                         SpellAbility auraSpellAbility;
                         if (source instanceof SpellAbility && card.getAbilities(game).contains(source)) {
                             // cast aura - use source ability
