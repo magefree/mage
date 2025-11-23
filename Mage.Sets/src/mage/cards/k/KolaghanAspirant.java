@@ -24,7 +24,7 @@ public final class KolaghanAspirant extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Kolaghan Aspirant becomes blocked by a creature, Kolaghan Aspirant deals 1 damage to that creature.
-        this.addAbility(new BecomesBlockedByCreatureTriggeredAbility(new DamageTargetEffect(1, true, "that creature"), false));
+        this.addAbility(new BecomesBlockedByCreatureTriggeredAbility(new DamageTargetEffect(1).withTargetDescription("that creature"), false));
     }
 
     private KolaghanAspirant(final KolaghanAspirant card) {

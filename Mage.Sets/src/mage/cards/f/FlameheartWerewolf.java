@@ -27,7 +27,7 @@ public final class FlameheartWerewolf extends CardImpl {
         this.nightCard = true;
 
         // Whenever Flameheart Werewolf blocks or becomes blocked by a creature, Flameheart Werewolf deals 2 damage to that creature.
-        this.addAbility(new BlocksOrBlockedByCreatureSourceTriggeredAbility(new DamageTargetEffect(2, true, "that creature")));
+        this.addAbility(new BlocksOrBlockedByCreatureSourceTriggeredAbility(new DamageTargetEffect(2).withTargetDescription("that creature")));
 
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Flameheart Werewolf.
         this.addAbility(new WerewolfBackTriggeredAbility());

@@ -42,7 +42,7 @@ class SpellshockTriggeredAbility extends TriggeredAbilityImpl {
 
 
     public SpellshockTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(2, true, "that player"));
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(2).withTargetDescription("that player"));
     }
 
 

@@ -9,8 +9,6 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.Target;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -21,63 +19,37 @@ import java.util.UUID;
 public class DamageTargetEffect extends OneShotEffect {
 
     private final DynamicValue amount;
-    private final boolean preventable;
-    private String targetDescription;
+    private boolean preventable = true;
     private String sourceName = "{this}";
 
     public DamageTargetEffect(int amount) {
-        this(StaticValue.get(amount), true);
+        this(StaticValue.get(amount));
     }
 
     public DamageTargetEffect(int amount, String whoDealDamageName) {
-        this(StaticValue.get(amount), true);
-        this.sourceName = whoDealDamageName;
-    }
-
-    public DamageTargetEffect(int amount, boolean preventable) {
-        this(StaticValue.get(amount), preventable);
-    }
-
-    public DamageTargetEffect(int amount, boolean preventable, String targetDescription) {
-        this(StaticValue.get(amount), preventable, targetDescription);
-    }
-
-    public DamageTargetEffect(int amount, boolean preventable, String targetDescription, String whoDealDamageName) {
-        this(StaticValue.get(amount), preventable, targetDescription);
+        this(amount);
         this.sourceName = whoDealDamageName;
     }
 
     public DamageTargetEffect(DynamicValue amount) {
-        this(amount, true);
+        super(Outcome.Damage);
+        this.amount = amount;
     }
 
     public DamageTargetEffect(DynamicValue amount, String whoDealDamageName) {
-        this(amount, true);
+        this(amount);
         this.sourceName = whoDealDamageName;
-    }
-
-    public DamageTargetEffect(DynamicValue amount, boolean preventable) {
-        this(amount, preventable, "");
-    }
-
-    public DamageTargetEffect(DynamicValue amount, boolean preventable, String targetDescription) {
-        super(Outcome.Damage);
-        this.amount = amount;
-        this.preventable = preventable;
-        this.targetDescription = targetDescription;
     }
 
     protected DamageTargetEffect(final DamageTargetEffect effect) {
         super(effect);
         this.amount = effect.amount.copy();
         this.preventable = effect.preventable;
-        this.targetDescription = effect.targetDescription;
         this.sourceName = effect.sourceName;
     }
 
-    @Override
-    public DamageTargetEffect withTargetDescription(String targetDescription) {
-        this.targetDescription = targetDescription;
+    public DamageTargetEffect withCantBePrevented() {
+        this.preventable = false;
         return this;
     }
 
@@ -117,39 +89,11 @@ public class DamageTargetEffect extends OneShotEffect {
             sb.append(' ');
         }
         sb.append("damage to ");
-        if (!targetDescription.isEmpty()) {
-            sb.append(targetDescription);
-        } else {
-            if (!mode.getTargets().isEmpty()) {
-                Target firstTarget = mode.getTargets().get(0);
-                String targetName = firstTarget.getTargetName();
-                if (targetName.contains("any")) {
-                    sb.append(targetName);
-                } else {
-                    if (firstTarget.getMinNumberOfTargets() == 0) {
-                        int maxTargets = firstTarget.getMaxNumberOfTargets();
-                        switch (maxTargets) {
-                            case Integer.MAX_VALUE:
-                                sb.append("any number of ");
-                                break;
-                            case 1:
-                                sb.append("up to one ");
-                                break;
-                            default:
-                                sb.append("each of up to ");
-                                sb.append(CardUtil.numberToText(maxTargets));
-                                sb.append(' ');
-                        }
-                    }
-                    if (!targetName.contains("target ")) {
-                        sb.append("target ");
-                    }
-                    sb.append(targetName);
-                }
-            } else {
-                sb.append("that target");
-            }
+        String targetDescription = getTargetPointer().describeTargets(mode.getTargets(), "that target");
+        if (targetDescription.startsWith("up to") && !targetDescription.startsWith("up to one")) {
+            sb.append("each of ");
         }
+        sb.append(targetDescription);
         if (!message.isEmpty()) {
             if (message.equals("1")) {
                 sb.append(" equal to the number of ");

@@ -1,11 +1,7 @@
 package mage.cards.i;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
@@ -19,6 +15,10 @@ import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.Watcher;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  *
@@ -50,7 +50,8 @@ public final class IchneumonDruid extends CardImpl {
 class IchneumonDruidAbility extends TriggeredAbilityImpl {
 
     IchneumonDruidAbility() {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(StaticValue.get(4), false, "that player"));
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(4).withTargetDescription("that player"));
+        setTriggerPhrase("Whenever an opponent casts an instant spell other than the first instant spell that player casts each turn, ");
     }
 
     private IchneumonDruidAbility(final IchneumonDruidAbility ability) {
@@ -84,10 +85,6 @@ class IchneumonDruidAbility extends TriggeredAbilityImpl {
         return false;
     }
 
-    @Override
-    public String getRule() {
-        return "Whenever an opponent casts an instant spell other than the first instant spell that player casts each turn, {this} deals 4 damage to that player.";
-    }
 }
 
 class IchneumonDruidWatcher extends Watcher {
