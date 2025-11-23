@@ -43,8 +43,9 @@ public final class RampagingFerocidon extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new CantGainLifeAllEffect()));
 
         // Whenever another creature enters the battlefield, Rampaging Ferocidon deals 1 damage to that creature's controller.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(
-                Zone.BATTLEFIELD, new DamageTargetEffect(1, true, "that creature's controller"), filter, false, SetTargetPointer.PLAYER));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD,
+                new DamageTargetEffect(1).withTargetDescription("that creature's controller"),
+                filter, false, SetTargetPointer.PLAYER));
     }
 
     private RampagingFerocidon(final RampagingFerocidon card) {

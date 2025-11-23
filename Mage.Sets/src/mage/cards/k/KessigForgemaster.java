@@ -27,7 +27,7 @@ public final class KessigForgemaster extends CardImpl {
         this.secondSideCardClazz = mage.cards.f.FlameheartWerewolf.class;
 
         // Whenever Kessig Forgemaster blocks or becomes blocked by a creature, Kessig Forgemaster deals 1 damage to that creature.
-        this.addAbility(new BlocksOrBlockedByCreatureSourceTriggeredAbility(new DamageTargetEffect(1, true, "that creature")));
+        this.addAbility(new BlocksOrBlockedByCreatureSourceTriggeredAbility(new DamageTargetEffect(1).withTargetDescription("that creature")));
 
         // At the beginning of each upkeep, if no spells were cast last turn, transform Kessig Forgemaster.
         this.addAbility(new TransformAbility());

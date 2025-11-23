@@ -32,7 +32,7 @@ public final class TovolarsMagehunter extends CardImpl {
 
         // Whenever an opponent casts a spell, Tovolar's Magehunter deals 2 damage to that player.
         this.addAbility(new SpellCastOpponentTriggeredAbility(
-                Zone.BATTLEFIELD, new DamageTargetEffect(2, true, "that player"),
+                Zone.BATTLEFIELD, new DamageTargetEffect(2).withTargetDescription("that player"),
                 StaticFilters.FILTER_SPELL_A, false, SetTargetPointer.PLAYER
         ));
 

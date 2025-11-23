@@ -30,7 +30,7 @@ public final class Overabundance extends CardImpl {
         ));
 
         this.addAbility(new TapForManaAllTriggeredAbility(
-                new DamageTargetEffect(1, true, "that player"),
+                new DamageTargetEffect(1).withTargetDescription("that player"),
                 new FilterLandPermanent("a player taps a land"),
                 SetTargetPointer.PLAYER
         ));

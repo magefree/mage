@@ -41,7 +41,7 @@ public final class AdrenalineJockey extends CardImpl {
 
         // Whenever a player casts a spell, if it's not their turn, this creature deals 4 damage to them.
         this.addAbility(new SpellCastAllTriggeredAbility(
-                new DamageTargetEffect(4, true, "them"),
+                new DamageTargetEffect(4).withTargetDescription("them"),
                 filter, false, SetTargetPointer.PLAYER
         ));
 

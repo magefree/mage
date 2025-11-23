@@ -51,8 +51,11 @@ public final class BoobyTrap extends CardImpl {
 
 class BoobyTrapTriggeredAbility extends TriggeredAbilityImpl {
 
-    public BoobyTrapTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DoIfCostPaid(new DamageTargetEffect(10, true, "that player"), new SacrificeSourceCost(), "", false), false);
+    BoobyTrapTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new DoIfCostPaid(
+                new DamageTargetEffect(10).withTargetDescription("that player"),
+                new SacrificeSourceCost(), "", false
+        ), false);
     }
 
     private BoobyTrapTriggeredAbility(final BoobyTrapTriggeredAbility ability) {
