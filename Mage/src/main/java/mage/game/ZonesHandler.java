@@ -477,7 +477,7 @@ public final class ZonesHandler {
             if (event.getToZone() == Zone.BATTLEFIELD && event.getTarget() != null) {
                 event.getTarget().updateZoneChangeCounter(game, event);
             } else if (!(card instanceof Permanent)) {
-                card.updateZoneChangeCounter(game, event);
+                card.getMainCard().updateZoneChangeCounter(game, event);
             }
         }
         return success;

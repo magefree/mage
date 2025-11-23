@@ -237,7 +237,7 @@ public class PermanentCard extends PermanentImpl {
     @Override
     public void updateZoneChangeCounter(Game game, ZoneChangeEvent event) {
         // TODO: wtf, permanent must not change ZCC at all, is it buggy here?!
-        card.updateZoneChangeCounter(game, event);
+        card.getMainCard().updateZoneChangeCounter(game, event);
         zoneChangeCounter = card.getZoneChangeCounter(game);
     }
 
