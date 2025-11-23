@@ -960,13 +960,12 @@ public class VerifyCardDataTest {
     private static final Set<String> ignoreBoosterSets = new HashSet<>();
 
     static {
-        // temporary, TODO: remove after set release and mtgjson get info
-        ignoreBoosterSets.add("Edge of Eternities");
-        // jumpstart, TODO: must implement from JumpstartPoolGenerator, see #13264
+        // jumpstart, TODO: implement from JumpstartPoolGenerator, see #13264
         ignoreBoosterSets.add("Jumpstart");
         ignoreBoosterSets.add("Jumpstart 2022");
         ignoreBoosterSets.add("Foundations Jumpstart");
         ignoreBoosterSets.add("Ravnica: Clue Edition");
+        ignoreBoosterSets.add("Avatar: The Last Airbender Eternal");
         // joke or un-sets, low implemented cards
         ignoreBoosterSets.add("Unglued");
         ignoreBoosterSets.add("Unhinged");
