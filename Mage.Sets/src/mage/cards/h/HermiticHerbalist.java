@@ -38,7 +38,7 @@ public final class HermiticHerbalist extends CardImpl {
 
         // {T}: Add two mana in any combination of colors. Spend this mana only to cast Lesson spells.
         this.addAbility(new ConditionalAnyColorManaAbility(
-                new TapSourceCost(), 1, new ConditionalSpellManaBuilder(filter), false
+                new TapSourceCost(), 2, new ConditionalSpellManaBuilder(filter), false
         ));
     }
 
