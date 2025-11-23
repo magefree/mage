@@ -2638,13 +2638,13 @@ public class VerifyCardDataTest {
         if (mageObject.isCreature(game)) {
             return "this creature";
         }
-        if (mageObject.isLand(game)) {
-            return "this land";
-        }
         for (SubType subType : selfRefNamedSubtypes) {
             if (mageObject.hasSubtype(subType, game)) {
                 return "this " + subType.getDescription();
             }
+        }
+        if (mageObject.isLand(game)) {
+            return "this land";
         }
         if (mageObject.isBattle(game)) {
             return "this battle";

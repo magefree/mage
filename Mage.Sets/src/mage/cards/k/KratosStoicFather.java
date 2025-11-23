@@ -48,7 +48,7 @@ public final class KratosStoicFather extends CardImpl {
         // At the beginning of your end step, put a number of +1/+1 counters on target creature equal to the number of experience counters you have.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance(), xValue)
-                        .setText(" put a number of +1/+1 counters on target creature " +
+                        .setText("put a number of +1/+1 counters on target creature " +
                                 "equal to the number of experience counters you have")
         );
         ability.addTarget(new TargetCreaturePermanent());

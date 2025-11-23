@@ -41,9 +41,6 @@ public final class ShorikaiGenesisEngine extends CardImpl {
 
         // Crew 8
         this.addAbility(new CrewAbility(8));
-
-        // Shorikai, Genesis Engine can be your commander.
-        this.addAbility(CanBeYourCommanderAbility.getInstance());
     }
 
     private ShorikaiGenesisEngine(final ShorikaiGenesisEngine card) {

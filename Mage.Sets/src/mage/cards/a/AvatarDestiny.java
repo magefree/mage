@@ -71,7 +71,8 @@ class AvatarDestinyEffect extends OneShotEffect {
 
     AvatarDestinyEffect() {
         super(Outcome.Benefit);
-        staticText = "";
+        staticText = "mill cards equal to its power. Return this card to its owner's hand and up to one " +
+                "creature card milled this way to the battlefield under your control";
     }
 
     private AvatarDestinyEffect(final AvatarDestinyEffect effect) {
@@ -95,6 +96,7 @@ class AvatarDestinyEffect extends OneShotEffect {
                 .map(MageInt::getValue)
                 .orElse(0);
         Cards cards = player.millCards(count, source, game);
+        game.processAction();
         new ReturnToHandSourceEffect(false, true).apply(game, source);
         TargetCard target = new TargetCard(0, 1, Zone.ALL, StaticFilters.FILTER_CARD_CREATURE);
         target.withNotTarget(true);
