@@ -72,7 +72,7 @@ class TheDestinedThiefTriggeredAbility extends TriggeredAbilityImpl implements B
                 new DrawDiscardControllerEffect(1, 1),
                 FullPartyCondition.instance, "draw a card, then discard a card. " +
                 "If you have a full party, instead draw three cards"
-        ), true);
+        ), false);
         setTriggerPhrase("Whenever one or more creatures you control deal combat damage to one or more players, ");
     }
 
