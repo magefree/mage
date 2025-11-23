@@ -2,6 +2,7 @@ package mage.cards.f;
 
 import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
+import mage.abilities.condition.common.SourceAttackingCondition;
 import mage.abilities.effects.common.CopyStackObjectEffect;
 import mage.abilities.keyword.FirebendingAbility;
 import mage.cards.CardImpl;
@@ -35,7 +36,7 @@ public final class FireLordAzula extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(
                 new CopyStackObjectEffect("that spell"),
                 StaticFilters.FILTER_SPELL_A, false, SetTargetPointer.SPELL
-        ));
+        ).withTriggerCondition(SourceAttackingCondition.instance));
     }
 
     private FireLordAzula(final FireLordAzula card) {

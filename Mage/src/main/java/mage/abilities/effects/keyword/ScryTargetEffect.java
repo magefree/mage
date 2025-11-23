@@ -8,7 +8,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -57,7 +56,7 @@ public class ScryTargetEffect extends OneShotEffect {
         }
         StringBuilder sb = new StringBuilder(getTargetPointer().describeTargets(mode.getTargets(), "that player"));
         sb.append(" scries ");
-        sb.append(CardUtil.numberToText(amount.toString()));
+        sb.append(amount.toString());
         return sb.toString();
     }
 }

@@ -1,18 +1,20 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.PreventionEffectImpl;
+import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -38,10 +40,10 @@ public final class CrumblingSanctuary extends CardImpl {
     }
 }
 
-class CrumblingSanctuaryEffect extends PreventionEffectImpl {
+class CrumblingSanctuaryEffect extends ReplacementEffectImpl {
 
     CrumblingSanctuaryEffect() {
-        super(Duration.WhileOnBattlefield, Integer.MAX_VALUE, false, false);
+        super(Duration.WhileOnBattlefield, Outcome.PreventDamage);
         staticText = "If damage would be dealt to a player, that player exiles that many cards from the top of their library instead.";
     }
 
@@ -59,16 +61,18 @@ class CrumblingSanctuaryEffect extends PreventionEffectImpl {
         int amount = event.getAmount();
         Player player = game.getPlayer(event.getTargetId());
         if(player != null) {
-            preventDamageAction(event, source, game);
             player.moveCards(player.getLibrary().getTopCards(game, amount), Zone.EXILED, source, game);
-            return true;
         }
-        return false;
+        return true;
+    }
+
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DAMAGE_PLAYER;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return super.applies(event, source, game) && (game.getPlayer(event.getTargetId()) != null);
+        return true;
     }
-
 }

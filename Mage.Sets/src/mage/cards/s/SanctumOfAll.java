@@ -1,22 +1,15 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.dynamicvalue.common.ShrinesYouControlCount;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.search.SearchLibraryGraveyardPutOntoBattlefieldEffect;
-import mage.abilities.hint.ValueHint;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.filter.FilterCard;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -24,18 +17,13 @@ import mage.game.permanent.Permanent;
 import java.util.UUID;
 
 /**
- *
  * @author htrajan
  */
 public final class SanctumOfAll extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledPermanent();
     private static final FilterCard filterCard = new FilterCard("Shrine card");
 
-    static final PermanentsOnBattlefieldCount count = new PermanentsOnBattlefieldCount(filter);
-
     static {
-        filter.add(SubType.SHRINE.getPredicate());
         filterCard.add(SubType.SHRINE.getPredicate());
     }
 
@@ -49,7 +37,7 @@ public final class SanctumOfAll extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SearchLibraryGraveyardPutOntoBattlefieldEffect(filterCard), true));
 
         // If an ability of another Shrine you control triggers while you control six or more Shrines, that ability triggers an additional time.
-        this.addAbility(new SimpleStaticAbility(new SanctumOfAllTriggerEffect()).addHint(new ValueHint("Shrines you control", count)));
+        this.addAbility(new SimpleStaticAbility(new SanctumOfAllTriggerEffect()).addHint(ShrinesYouControlCount.getHint()));
     }
 
     private SanctumOfAll(final SanctumOfAll card) {
@@ -94,7 +82,7 @@ class SanctumOfAllTriggerEffect extends ReplacementEffectImpl {
         // Only triggers of the controller of Sanctum of All
         if (source.isControlledBy(event.getPlayerId())) {
             // Only trigger while you control six or more Shrines
-            int numShrines = SanctumOfAll.count.calculate(game, source, this);
+            int numShrines = ShrinesYouControlCount.FOR_EACH.calculate(game, source, this);
             if (numShrines >= 6) {
                 // Only for triggers of other Shrines
                 Permanent permanent = game.getPermanent(event.getSourceId());

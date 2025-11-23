@@ -84,7 +84,7 @@ public final class CardUtil {
     public static final SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss.SSS");
 
     private static final List<String> costWords = Arrays.asList(
-            "put", "return", "exile", "discard", "mill", "sacrifice", "remove", "tap", "reveal", "pay", "have", "collect", "forage"
+            "put", "return", "exile", "discard", "mill", "sacrifice", "remove", "tap", "reveal", "pay", "have", "collect", "forage", "transform"
     );
 
     // search set code in commands like "set_code-card_name"
@@ -979,7 +979,7 @@ public final class CardUtil {
         }
         if (!targetPlayerGets) {
             sb.append(add ? " on " : " from ");
-            if (description.contains("up to") && !description.contains("up to one")) {
+            if (description.contains("any number") || description.contains("up to") && !description.contains("up to one")) {
                 sb.append("each of ");
             }
             sb.append(description);

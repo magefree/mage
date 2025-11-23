@@ -14,7 +14,6 @@ import mage.util.CardUtil;
 public class ReflexiveTriggeredAbility extends DelayedTriggeredAbility {
 
     private final String text;
-    private final Condition condition;
 
     public ReflexiveTriggeredAbility(Effect effect, boolean optional) {
         this(effect, optional, null);
@@ -27,13 +26,14 @@ public class ReflexiveTriggeredAbility extends DelayedTriggeredAbility {
     public ReflexiveTriggeredAbility(Effect effect, boolean optional, String text, Condition condition) {
         super(effect, Duration.EndOfTurn, true, optional);
         this.text = text;
-        this.condition = condition;
+        if (condition != null) {
+            this.withInterveningIf(condition);
+        }
     }
 
     protected ReflexiveTriggeredAbility(final ReflexiveTriggeredAbility ability) {
         super(ability);
         this.text = ability.text;
-        this.condition = ability.condition;
     }
 
     @Override
@@ -53,11 +53,6 @@ public class ReflexiveTriggeredAbility extends DelayedTriggeredAbility {
             return super.getRule();
         }
         return CardUtil.getTextWithFirstCharUpperCase(text) + '.';
-    }
-
-    @Override
-    public boolean checkInterveningIfClause(Game game) {
-        return condition == null || condition.apply(game, this);
     }
 
     @Override

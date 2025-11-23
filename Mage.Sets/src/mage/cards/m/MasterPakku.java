@@ -3,11 +3,10 @@ package mage.cards.m;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesTappedSourceTriggeredAbility;
+import mage.abilities.condition.common.LessonsInGraveCondition;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.common.MillCardsTargetEffect;
-import mage.abilities.hint.Hint;
-import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.ProwessAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -25,7 +24,6 @@ import java.util.UUID;
 public final class MasterPakku extends CardImpl {
 
     private static final DynamicValue xValue = new CardsInControllerGraveyardCount(new FilterCard(SubType.LESSON, "Lesson cards"), null);
-    private static final Hint hint = new ValueHint("Lesson cards in your graveyard", xValue);
 
     public MasterPakku(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
@@ -43,7 +41,7 @@ public final class MasterPakku extends CardImpl {
         // Whenever Master Pakku becomes tapped, target player mills X cards, where X is the number of Lesson cards in your graveyard.
         Ability ability = new BecomesTappedSourceTriggeredAbility(new MillCardsTargetEffect(xValue));
         ability.addTarget(new TargetPlayer());
-        this.addAbility(ability.addHint(hint));
+        this.addAbility(ability.addHint(LessonsInGraveCondition.getHint()));
     }
 
     private MasterPakku(final MasterPakku card) {

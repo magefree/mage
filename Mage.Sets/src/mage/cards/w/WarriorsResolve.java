@@ -40,7 +40,7 @@ public final class WarriorsResolve extends CardImpl {
 
         // Creatures you control have training.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
-                new TrainingAbility(), Duration.WhileControlled, StaticFilters.FILTER_PERMANENT_CREATURES
+                new TrainingAbility(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES
         )));
 
         // At the beginning of your end step, if you control a creature with a +1/+1 counter on it that attacked this turn, draw a card.

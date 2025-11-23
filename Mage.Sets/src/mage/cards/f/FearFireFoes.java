@@ -34,7 +34,6 @@ public final class FearFireFoes extends CardImpl {
         this.getSpellAbility().addEffect(new DamageCantBePreventedEffect(
                 Duration.EndOfTurn
         ));
-        this.getSpellAbility().addEffect(new DamageTargetEffect(GetXValue.instance));
         this.getSpellAbility().addEffect(new FearFireFoesEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
@@ -53,7 +52,8 @@ class FearFireFoesEffect extends OneShotEffect {
 
     FearFireFoesEffect() {
         super(Outcome.Benefit);
-        staticText = "and 1 damage to each other creature with the same controller";
+        staticText = "{this} deals X damage to target creature " +
+                "and 1 damage to each other creature with the same controller";
     }
 
     private FearFireFoesEffect(final FearFireFoesEffect effect) {
@@ -67,6 +67,7 @@ class FearFireFoesEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        new DamageTargetEffect(GetXValue.instance).apply(game, source);
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent == null) {
             return false;

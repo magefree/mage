@@ -22,9 +22,7 @@ public final class JeskaiRevelation extends CardImpl {
         // Return target spell or permanent to its owner's hand. Jeskai Revelation deals 4 damage to any target. Create two 1/1 white Monk creature tokens with prowess. Draw two cards. You gain 4 life.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellAbility().addTarget(new TargetSpellOrPermanent());
-        this.getSpellAbility().addEffect(new DamageTargetEffect(
-                4, true, "any target", true
-        ).setTargetPointer(new SecondTargetPointer()));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(4).setTargetPointer(new SecondTargetPointer()));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addEffect(new CreateTokenEffect(new MonasteryMentorToken(), 2));
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));

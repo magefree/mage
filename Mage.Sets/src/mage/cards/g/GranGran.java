@@ -3,20 +3,15 @@ package mage.cards.g;
 import mage.MageInt;
 import mage.abilities.common.BecomesTappedSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
+import mage.abilities.condition.common.LessonsInGraveCondition;
 import mage.abilities.decorator.ConditionalCostModificationEffect;
-import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
-import mage.abilities.hint.Hint;
-import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 
 import java.util.UUID;
@@ -25,11 +20,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class GranGran extends CardImpl {
-
-    private static final Condition condition = new CardsInControllerGraveyardCondition(3, new FilterCard(SubType.LESSON));
-    private static final Hint hint = new ValueHint(
-            "Lesson cards in your graveyard", new CardsInControllerGraveyardCount(new FilterCard(SubType.LESSON))
-    );
 
     public GranGran(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}");
@@ -47,9 +37,9 @@ public final class GranGran extends CardImpl {
         // Noncreature spells you cast cost {1} less to cast as long as there are three or more Lesson cards in your graveyard.
         this.addAbility(new SimpleStaticAbility(new ConditionalCostModificationEffect(
                 new SpellsCostReductionControllerEffect(StaticFilters.FILTER_CARD_NON_CREATURE, 1),
-                condition, "noncreature spells you cast cost {1} less to cast as long as " +
+                LessonsInGraveCondition.THREE, "noncreature spells you cast cost {1} less to cast as long as " +
                 "there are three or more Lesson cards in your graveyard"
-        )).addHint(hint));
+        )).addHint(LessonsInGraveCondition.getHint()));
     }
 
     private GranGran(final GranGran card) {

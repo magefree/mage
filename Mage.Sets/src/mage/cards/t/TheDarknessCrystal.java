@@ -23,6 +23,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 import mage.target.common.TargetCardInExile;
 import mage.util.CardUtil;
@@ -139,6 +140,7 @@ class TheDarknessCrystalExileEffect extends ReplacementEffectImpl {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         return zEvent.isDiesEvent()
                 && zEvent.getTarget().isCreature(game)
+                && !(zEvent.getTarget() instanceof PermanentToken)
                 && game.getOpponents(source.getControllerId()).contains(zEvent.getTarget().getControllerId());
     }
 

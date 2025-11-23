@@ -54,6 +54,7 @@ public class GainLifeEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
+        // TODO: this text generation probably needs reworking
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }

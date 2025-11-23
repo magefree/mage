@@ -1,4 +1,3 @@
-
 package mage.cards.k;
 
 import java.util.UUID;
@@ -17,7 +16,6 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -56,7 +54,7 @@ class KederektParasiteTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     KederektParasiteTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(1, true, "opponent"), true);
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(1), true);
     }
 
     private KederektParasiteTriggeredAbility(final KederektParasiteTriggeredAbility ability) {

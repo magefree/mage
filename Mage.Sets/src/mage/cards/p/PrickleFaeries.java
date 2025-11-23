@@ -34,7 +34,7 @@ public final class PrickleFaeries extends CardImpl {
         // At the beginning of each opponent's upkeep, if that player has two or fewer cards in hand, Prickle Faeries deals 2 damage to them.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 Zone.BATTLEFIELD, TargetController.OPPONENT,
-                new DamageTargetEffect(2, true, "them"), false
+                new DamageTargetEffect(2).withTargetDescription("them"), false
         ).withInterveningIf(condition));
     }
 

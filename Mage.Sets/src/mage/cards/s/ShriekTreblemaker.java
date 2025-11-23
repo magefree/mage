@@ -41,7 +41,7 @@ public final class ShriekTreblemaker extends CardImpl {
         // Sonic Blast -- Whenever a creature an opponent controls dies, Shriek deals 1 damage to that player.
         this.addAbility(new DiesCreatureTriggeredAbility(
                 Zone.BATTLEFIELD,
-                new DamageTargetEffect(1, true, "that player"),
+                new DamageTargetEffect(1).withTargetDescription("that player"),
                 false,
                 StaticFilters.FILTER_OPPONENTS_PERMANENT_A_CREATURE,
                 SetTargetPointer.PLAYER)

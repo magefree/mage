@@ -65,7 +65,7 @@ public final class AvalancheOfSector7 extends CardImpl {
 class AvalancheOfSector7TriggeredAbility extends TriggeredAbilityImpl {
 
     AvalancheOfSector7TriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(1, true, "that player", true));
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(1).withTargetDescription("that player"));
         setTriggerPhrase("Whenever an opponent activates an ability of an artifact they control, ");
     }
 

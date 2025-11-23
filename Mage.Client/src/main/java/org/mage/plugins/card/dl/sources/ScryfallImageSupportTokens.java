@@ -1,9 +1,9 @@
 package org.mage.plugins.card.dl.sources;
 
+import mage.cards.repository.TokenRepository;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import mage.cards.repository.TokenRepository;
 
 /**
  * @author JayDi85
@@ -817,10 +817,13 @@ public class ScryfallImageSupportTokens {
 
             // SLD
             put("SLD/Angel", "https://api.scryfall.com/cards/sld/1340?format=image");
+            put("SLD/Blood", "https://api.scryfall.com/cards/sld/2180?format=image");
             put("SLD/Cat/1", "https://api.scryfall.com/cards/sld/1517?format=image");
             put("SLD/Cat/2", "https://api.scryfall.com/cards/sld/27?format=image");
             put("SLD/Cat/3", "https://api.scryfall.com/cards/sld/28?format=image");
             put("SLD/Clue", "https://api.scryfall.com/cards/sld/348/en?format=image");
+            put("SLD/Cordyceps Infected/1", "https://api.scryfall.com/cards/sld/2201?format=image");
+            put("SLD/Cordyceps Infected/2", "https://api.scryfall.com/cards/sld/2206?format=image");
             put("SLD/Dog", "https://api.scryfall.com/cards/sld/1516?format=image");
             put("SLD/Egg", "https://api.scryfall.com/cards/sld/1398?format=image");
             put("SLD/Faerie Rogue/1", "https://api.scryfall.com/cards/sld/13/en?format=image");
@@ -2221,7 +2224,7 @@ public class ScryfallImageSupportTokens {
             put("WHO/Treasure/2", "https://api.scryfall.com/cards/twho/29?format=image");
             put("WHO/Treasure/3", "https://api.scryfall.com/cards/twho/30?format=image");
             put("WHO/Treasure/4", "https://api.scryfall.com/cards/twho/31?format=image");
-            put("WHO/Warrior", "https://api.scryfall.com/cards/twho/9?format=image");            
+            put("WHO/Warrior", "https://api.scryfall.com/cards/twho/9?format=image");
 
             // 8ED
             put("8ED/Bird", "https://api.scryfall.com/cards/p03/7/en?format=image");
@@ -2398,7 +2401,7 @@ public class ScryfallImageSupportTokens {
             put("OTP/Human Warrior", "https://api.scryfall.com/cards/totp/3/en?format=image");
             put("OTP/Pest", "https://api.scryfall.com/cards/totp/4/en?format=image");
 
-             // SCD
+            // SCD
             put("SCD/Beast", "https://api.scryfall.com/cards/tscd/19/en?format=image");
             put("SCD/Bird", "https://api.scryfall.com/cards/tscd/2/en?format=image");
             put("SCD/Cat", "https://api.scryfall.com/cards/tscd/3/en?format=image");
@@ -2740,7 +2743,7 @@ public class ScryfallImageSupportTokens {
             put("ACR/Treasure", "https://api.scryfall.com/cards/tacr/6?format=image");
 
             // DD2
-            put("DD2/Elemental Shaman", "https://api.scryfall.com/cards/tdd2/1?format=image");            
+            put("DD2/Elemental Shaman", "https://api.scryfall.com/cards/tdd2/1?format=image");
 
             // FIN
             put("FIN/Hero/1", "https://api.scryfall.com/cards/tfin/2/en?format=image");
@@ -2827,6 +2830,35 @@ public class ScryfallImageSupportTokens {
             put("SPM/Robot", "https://api.scryfall.com/cards/tspm/6?format=image");
             put("SPM/Spider", "https://api.scryfall.com/cards/tspm/3?format=image");
             put("SPM/Treasure", "https://api.scryfall.com/cards/tspm/7?format=image");
+
+            // TLA
+            put("TLA/Ally/1", "https://api.scryfall.com/cards/ttla/4/?format=image");
+            put("TLA/Ally/2", "https://api.scryfall.com/cards/ttla/5/?format=image");
+            put("TLA/Ally/3", "https://api.scryfall.com/cards/ttla/6/?format=image");
+            put("TLA/Ally/4", "https://api.scryfall.com/cards/ttla/7/?format=image");
+            put("TLA/Ally/5", "https://api.scryfall.com/cards/ttla/8/?format=image");
+            put("TLA/Ballistic Boulder", "https://api.scryfall.com/cards/ttla/13/?format=image");
+            put("TLA/Bear", "https://api.scryfall.com/cards/ttla/12/?format=image");
+            put("TLA/Clue/1", "https://api.scryfall.com/cards/ttla/14/?format=image");
+            put("TLA/Clue/2", "https://api.scryfall.com/cards/ttla/15/?format=image");
+            put("TLA/Clue/3", "https://api.scryfall.com/cards/ttla/16/?format=image");
+            put("TLA/Clue/4", "https://api.scryfall.com/cards/ttla/17/?format=image");
+            put("TLA/Clue/5", "https://api.scryfall.com/cards/ttla/18/?format=image");
+            put("TLA/Dragon", "https://api.scryfall.com/cards/ttla/9/?format=image");
+            put("TLA/Food/1", "https://api.scryfall.com/cards/ttla/19/?format=image");
+            put("TLA/Food/2", "https://api.scryfall.com/cards/ttla/20/?format=image");
+            put("TLA/Food/3", "https://api.scryfall.com/cards/ttla/21/?format=image");
+            put("TLA/Monk", "https://api.scryfall.com/cards/ttla/10/?format=image");
+            put("TLA/Soldier", "https://api.scryfall.com/cards/ttla/11/?format=image");
+            put("TLA/Spirit", "https://api.scryfall.com/cards/ttla/3/?format=image");
+            put("TLA/Treasure", "https://api.scryfall.com/cards/ttla/22?format=image");
+
+            // TLE
+            put("TLE/Marit Lage", "https://api.scryfall.com/cards/ttle/1/?format=image");
+            put("TLE/Soldier", "https://api.scryfall.com/cards/ttle/2?format=image");
+
+            // TMT
+            put("TMT/Mutagen", "https://api.scryfall.com/cards/ttmt/9?format=image");
 
             // JVC
             put("JVC/Elemental Shaman", "https://api.scryfall.com/cards/tjvc/4?format=image");

@@ -48,7 +48,7 @@ public final class Emptiness extends CardImpl {
         this.addAbility(ability);
 
         // When this creature enters, if {B}{B} was spent to cast it, put three -1/-1 counters on up to one target creature.
-        ability = new EntersBattlefieldTriggeredAbility(new AddCountersTargetEffect(CounterType.M1M1.createInstance(2)))
+        ability = new EntersBattlefieldTriggeredAbility(new AddCountersTargetEffect(CounterType.M1M1.createInstance(3)))
                 .withInterveningIf(TwoOfManaColorSpentCondition.BLACK);
         ability.addTarget(new TargetCreaturePermanent(0, 1));
         this.addAbility(ability);

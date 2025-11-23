@@ -13,8 +13,7 @@ import mage.abilities.keyword.InspiredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -25,12 +24,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class ImmovableRod extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterPermanent("another permanent");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public ImmovableRod(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{W}");
@@ -46,7 +39,7 @@ public final class ImmovableRod extends CardImpl {
         Ability ability = new SimpleActivatedAbility(new ImmovableRodAbilityEffect(), new ManaCostsImpl<>("{3}{W}"));
         ability.addEffect(new ImmovableRodAttackBlockTargetEffect());
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_PERMANENT));
         this.addAbility(ability);
     }
 

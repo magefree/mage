@@ -59,7 +59,7 @@ class MisterNegativeEffect extends OneShotEffect {
 
     MisterNegativeEffect() {
         super(Outcome.Neutral);
-        staticText = "When {this} enters, you may exchange your life total with target opponent. If you lose life this way, draw that many cards.";
+        staticText = "you may exchange life totals with target opponent. If you lose life this way, draw that many cards.";
     }
 
     protected MisterNegativeEffect(final MisterNegativeEffect effect) {
@@ -82,6 +82,7 @@ class MisterNegativeEffect extends OneShotEffect {
         controller.exchangeLife(player, source, game);
         int lifeChange = startingLife - controller.getLife();
         if (lifeChange > 0) {
+            game.processAction();
             controller.drawCards(lifeChange, source, game);
         }
         return true;

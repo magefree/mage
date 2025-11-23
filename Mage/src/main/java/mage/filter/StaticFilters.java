@@ -601,6 +601,13 @@ public final class StaticFilters {
         FILTER_OPPONENTS_PERMANENT_ARTIFACT_OR_CREATURE.setLockedFilter(true);
     }
 
+    public static final FilterPermanent FILTER_ANOTHER_PERMANENT = new FilterPermanent("another permanent");
+
+    static {
+        FILTER_ANOTHER_PERMANENT.add(AnotherPredicate.instance);
+        FILTER_ANOTHER_PERMANENT.setLockedFilter(true);
+    }
+
     public static final FilterCreaturePermanent FILTER_ANOTHER_CREATURE = new FilterCreaturePermanent("another creature");
 
     static {
@@ -900,6 +907,13 @@ public final class StaticFilters {
                 SubType.WARRIOR.getPredicate()
         ));
         FILTER_CONTROLLED_SAMURAI_OR_WARRIOR.setLockedFilter(true);
+    }
+
+    public static final FilterControlledPermanent FILTER_ANOTHER_CONTROLLED_SHRINE = new FilterControlledPermanent(SubType.SHRINE, "another Shrine you control");
+
+    static {
+        FILTER_ANOTHER_CONTROLLED_SHRINE.add(AnotherPredicate.instance);
+        FILTER_ANOTHER_CONTROLLED_SHRINE.setLockedFilter(true);
     }
 
     public static final FilterPlaneswalkerPermanent FILTER_PERMANENT_PLANESWALKER = new FilterPlaneswalkerPermanent();

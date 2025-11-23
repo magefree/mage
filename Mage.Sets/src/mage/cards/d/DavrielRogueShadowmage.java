@@ -31,9 +31,7 @@ public final class DavrielRogueShadowmage extends CardImpl {
         // At the beginning of each opponent's upkeep, if that player has one or fewer cards in hand, Davriel, Rogue Shadowmage deals 2 damage to them.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 TargetController.OPPONENT,
-                new DamageTargetEffect(
-                        2, true, "them", "{this}"
-                ), false
+                new DamageTargetEffect(2).withTargetDescription("them"), false
         ).withInterveningIf(condition));
 
         // -1: Target player discards a card.

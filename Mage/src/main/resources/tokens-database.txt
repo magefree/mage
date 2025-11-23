@@ -1515,10 +1515,13 @@
 
 # SLD
 |Generate|TOK:SLD|Angel|||AngelToken|
+|Generate|TOK:SLD|Blood|||BloodToken|
 |Generate|TOK:SLD|Cat|1||GreenCatToken|
 |Generate|TOK:SLD|Cat|2||CatToken2|
 |Generate|TOK:SLD|Cat|3||CatToken2|
 |Generate|TOK:SLD|Clue|||ClueArtifactToken|
+|Generate|TOK:SLD|Cordyceps Infected|1||CordycepsInfectedToken|
+|Generate|TOK:SLD|Cordyceps Infected|2||CordycepsInfectedToken|
 |Generate|TOK:SLD|Dog|||WhiteDogToken|
 |Generate|TOK:SLD|Egg|||AtlaPalaniToken|
 |Generate|TOK:SLD|Faerie Rogue|1||FaerieRogueToken|
@@ -2880,6 +2883,35 @@
 |Generate|TOK:SPM|Robot|||RobotFlyingToken|
 |Generate|TOK:SPM|Spider|||Spider21Token|
 |Generate|TOK:SPM|Treasure|||TreasureToken|
+
+#TLA
+|Generate|TOK:TLA|Ally|1||AllyToken|
+|Generate|TOK:TLA|Ally|2||AllyToken|
+|Generate|TOK:TLA|Ally|3||AllyToken|
+|Generate|TOK:TLA|Ally|4||AllyToken|
+|Generate|TOK:TLA|Ally|5||AllyToken|
+|Generate|TOK:TLA|Ballistic Boulder|||BallisticBoulder|
+|Generate|TOK:TLA|Bear|||BearsCompanionBearToken|
+|Generate|TOK:TLA|Clue|1||ClueArtifactToken|
+|Generate|TOK:TLA|Clue|2||ClueArtifactToken|
+|Generate|TOK:TLA|Clue|3||ClueArtifactToken|
+|Generate|TOK:TLA|Clue|4||ClueArtifactToken|
+|Generate|TOK:TLA|Clue|5||ClueArtifactToken|
+|Generate|TOK:TLA|Dragon|||DragonFirebendingToken|
+|Generate|TOK:TLA|Food|1||FoodToken|
+|Generate|TOK:TLA|Food|2||FoodToken|
+|Generate|TOK:TLA|Food|3||FoodToken|
+|Generate|TOK:TLA|Monk|||MonkRedToken|
+|Generate|TOK:TLA|Soldier|||SoldierFirebendingToken|
+|Generate|TOK:TLA|Spirit|||SpiritWorldToken|
+|Generate|TOK:TLA|Treasure|||TreasureToken|
+
+#TLE
+|Generate|TOK:TLE|Marit Lage|||MaritLageToken|
+|Generate|TOK:TLE|Soldier|||SoldierRedToken|
+
+#TMT
+|Generate|TOK:TMT|Mutagen|||MutagenToken|
 
 # JVC
 |Generate|TOK:JVC|Elemental Shaman|||ElementalShamanToken|

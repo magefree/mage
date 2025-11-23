@@ -17,11 +17,11 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -47,18 +47,21 @@ public class AirbendTargetEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Set<Permanent> permanents = this
+        if (player == null) {
+            return false;
+        }
+        Set<Card> objects = this
                 .getTargetPointer()
                 .getTargets(game, source)
                 .stream()
-                .map(game::getPermanent)
+                .map(uuid -> Optional.ofNullable((Card) game.getPermanent(uuid)).orElseGet(() -> game.getSpell(uuid)))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toSet());
-        if (player == null || permanents.isEmpty()) {
+        if (objects.isEmpty()) {
             return false;
         }
-        player.moveCards(permanents, Zone.EXILED, source, game);
-        Cards cards = new CardsImpl(permanents);
+        player.moveCards(objects, Zone.EXILED, source, game);
+        Cards cards = new CardsImpl(objects);
         cards.retainZone(Zone.EXILED, game);
         for (Card card : cards.getCards(game)) {
             game.addEffect(new AirbendingCastEffect(card, game), source);

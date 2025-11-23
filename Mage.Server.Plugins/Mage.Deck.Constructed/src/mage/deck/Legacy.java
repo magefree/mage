@@ -32,6 +32,7 @@ public class Legacy extends Constructed {
         banned.add("Dig Through Time");
         banned.add("Dreadhorde Arcanist");
         banned.add("Earthcraft");
+        banned.add("Entomb");
         banned.add("Fastbond");
         banned.add("Flash");
         banned.add("Frantic Search");
@@ -56,6 +57,7 @@ public class Legacy extends Constructed {
         banned.add("Mox Ruby");
         banned.add("Mox Sapphire");
         banned.add("Mystical Tutor");
+        banned.add("Nadu, Winged Wisdom");
         banned.add("Necropotence");
         banned.add("Oath of Druids");
         banned.add("Oko, Thief of Crowns");

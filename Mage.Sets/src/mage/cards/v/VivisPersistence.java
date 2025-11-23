@@ -21,7 +21,7 @@ import java.util.UUID;
  */
 public final class VivisPersistence extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("you commander");
+    private static final FilterPermanent filter = new FilterPermanent("your commander");
 
     static {
         filter.add(TargetController.YOU.getOwnerPredicate());

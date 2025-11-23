@@ -33,7 +33,7 @@ public final class FatedClash extends CardImpl {
         // You may cast this spell as though it had flash if a creature is attacking and a creature is blocking.
         this.addAbility(new CastAsThoughItHadFlashIfConditionAbility(
                 condition, "you may cast this spell as though it had flash " +
-                "if a creature is attacking and a creature is blocking"
+                "if a creature is attacking and a creature is blocking."
         ));
 
         // Target creature you control and target creature an opponent controls each gain indestructible until end of turn. Then destroy all creatures.

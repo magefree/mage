@@ -17,7 +17,7 @@ public final class JaggedLightning extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
 
         // Jagged Lightning deals 3 damage to each of two target creatures.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(3, true, "each of two target creatures"));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(3).withTargetDescription("each of two target creatures"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(2));
     }
 

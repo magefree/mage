@@ -75,7 +75,6 @@ class StormwildCapridorEffect extends PreventionEffectImpl {
             if (permanent != null) {
                 permanent.addCounters(CounterType.P1P1.createInstance(preventionEffectData.getPreventedDamage()), source.getControllerId(), source, game);
             }
-            return true;
         }
         return false;
     }

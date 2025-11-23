@@ -3,16 +3,12 @@ package mage.cards.d;
 import mage.MageInt;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.CompoundCondition;
-import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
+import mage.abilities.condition.common.LessonsInGraveCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.SetBasePowerSourceEffect;
-import mage.abilities.hint.ConditionHint;
-import mage.abilities.hint.Hint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.WardAbility;
 import mage.cards.CardImpl;
@@ -38,11 +34,6 @@ public final class DragonflySwarm extends CardImpl {
     }
 
     private static final DynamicValue xValue = new CardsInControllerGraveyardCount(filter);
-    private static final Condition condition = new CompoundCondition(
-            "there's a Lesson card in your graveyard",
-            new CardsInControllerGraveyardCondition(1, new FilterCard(SubType.LESSON))
-    );
-    private static final Hint hint = new ConditionHint(condition);
 
     public DragonflySwarm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{R}");
@@ -63,7 +54,7 @@ public final class DragonflySwarm extends CardImpl {
 
         // When this creature dies, if there's a Lesson card in your graveyard, draw a card.
         this.addAbility(new DiesSourceTriggeredAbility(new DrawCardSourceControllerEffect(1))
-                .withInterveningIf(condition).addHint(hint));
+                .withInterveningIf(LessonsInGraveCondition.ONE).addHint(LessonsInGraveCondition.getHint()));
     }
 
     private DragonflySwarm(final DragonflySwarm card) {

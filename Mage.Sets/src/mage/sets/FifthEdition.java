@@ -317,6 +317,8 @@ public final class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Obelisk of Undoing", 392, Rarity.RARE, mage.cards.o.ObeliskOfUndoing.class, RETRO_ART));
         cards.add(new SetCardInfo("Orcish Artillery", 253, Rarity.UNCOMMON, mage.cards.o.OrcishArtillery.class, RETRO_ART));
         cards.add(new SetCardInfo("Orcish Captain", 254, Rarity.UNCOMMON, mage.cards.o.OrcishCaptain.class, RETRO_ART));
+        cards.add(new SetCardInfo("Orcish Conscripts", 255, Rarity.COMMON, mage.cards.o.OrcishConscripts.class, RETRO_ART));
+        cards.add(new SetCardInfo("Orcish Farmer", 256, Rarity.COMMON, mage.cards.o.OrcishFarmer.class, RETRO_ART));
         cards.add(new SetCardInfo("Orcish Oriflamme", 257, Rarity.UNCOMMON, mage.cards.o.OrcishOriflamme.class, RETRO_ART));
         cards.add(new SetCardInfo("Orcish Squatters", 258, Rarity.RARE, mage.cards.o.OrcishSquatters.class, RETRO_ART));
         cards.add(new SetCardInfo("Order of the Sacred Torch", 48, Rarity.RARE, mage.cards.o.OrderOfTheSacredTorch.class, RETRO_ART));
@@ -367,6 +369,7 @@ public final class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Rod of Ruin", 396, Rarity.UNCOMMON, mage.cards.r.RodOfRuin.class, RETRO_ART));
         cards.add(new SetCardInfo("Ruins of Trokair", 422, Rarity.UNCOMMON, mage.cards.r.RuinsOfTrokair.class, RETRO_ART));
         cards.add(new SetCardInfo("Sabretooth Tiger", 264, Rarity.COMMON, mage.cards.s.SabretoothTiger.class, RETRO_ART));
+        cards.add(new SetCardInfo("Sacred Boon", 57, Rarity.UNCOMMON, mage.cards.s.SacredBoon.class, RETRO_ART));
         cards.add(new SetCardInfo("Samite Healer", 58, Rarity.COMMON, mage.cards.s.SamiteHealer.class, RETRO_ART));
         cards.add(new SetCardInfo("Sand Silos", 423, Rarity.RARE, mage.cards.s.SandSilos.class, RETRO_ART));
         cards.add(new SetCardInfo("Scaled Wurm", 322, Rarity.COMMON, mage.cards.s.ScaledWurm.class, RETRO_ART));

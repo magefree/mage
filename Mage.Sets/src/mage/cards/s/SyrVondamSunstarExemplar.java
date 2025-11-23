@@ -105,7 +105,7 @@ class SyrVondamSunstarExemplarFirstTriggeredAbility extends TriggeredAbilityImpl
 class SyrVondamSunstarExemplarSecondTriggeredAbility extends TriggeredAbilityImpl {
 
     SyrVondamSunstarExemplarSecondTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DestroyTargetEffect());
+        super(Zone.ALL, new DestroyTargetEffect());
         this.addTarget(new TargetNonlandPermanent(0, 1));
         this.setTriggerPhrase("When {this} dies or is put into exile while its power is 4 or greater, ");
         this.setLeavesTheBattlefieldTrigger(true);

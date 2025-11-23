@@ -10,9 +10,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterEnchantmentCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.EnchantedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -28,11 +28,9 @@ import java.util.UUID;
 public final class EstridTheMasked extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent();
-    private static final FilterPermanent filter2 = new FilterPermanent("another permanent");
 
     static {
         filter.add(EnchantedPredicate.instance);
-        filter2.add(AnotherPredicate.instance);
     }
 
     public EstridTheMasked(UUID ownerId, CardSetInfo setInfo) {
@@ -51,7 +49,7 @@ public final class EstridTheMasked extends CardImpl {
         Ability ability = new LoyaltyAbility(
                 new EstridTheMaskedTokenEffect(), -1
         );
-        ability.addTarget(new TargetPermanent(filter2));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_PERMANENT));
         this.addAbility(ability);
 
         // -7: Put the top seven cards of your library into your graveyard. Return all non-Aura enchantment cards from your graveyard to the battlefield, then do the same for Aura cards.

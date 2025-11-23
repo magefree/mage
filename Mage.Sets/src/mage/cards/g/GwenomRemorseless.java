@@ -46,7 +46,7 @@ public final class GwenomRemorseless extends CardImpl {
 
         // Whenever Gwenom attacks, until end of turn you may look at the top card of your library any time and you may play cards from the top of your library. If you cast a spell this way, pay life equal to its mana value rather than pay its mana cost.
         ContinuousEffect libraryAnyTimeEffect = new LookAtTopCardOfLibraryAnyTimeEffect(Duration.EndOfTurn);
-        libraryAnyTimeEffect.setText("until end of turn you may look at the top card of your library any time");
+        libraryAnyTimeEffect.setText("until end of turn, you may look at the top card of your library any time");
         libraryAnyTimeEffect.concatBy(" ");
         AsThoughEffectImpl playCardEffect = new GwenomRemorselessPlayTopCardEffect();
         playCardEffect.concatBy("and");

@@ -264,6 +264,8 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Oath of Lim-Dul", 156, Rarity.RARE, mage.cards.o.OathOfLimDul.class, RETRO_ART));
         cards.add(new SetCardInfo("Onyx Talisman", 331, Rarity.UNCOMMON, mage.cards.o.OnyxTalisman.class, RETRO_ART));
         cards.add(new SetCardInfo("Orcish Cannoneers", 205, Rarity.UNCOMMON, mage.cards.o.OrcishCannoneers.class, RETRO_ART));
+        cards.add(new SetCardInfo("Orcish Conscripts", 206, Rarity.COMMON, mage.cards.o.OrcishConscripts.class, RETRO_ART));
+        cards.add(new SetCardInfo("Orcish Farmer", 207, Rarity.COMMON, mage.cards.o.OrcishFarmer.class, RETRO_ART));
         cards.add(new SetCardInfo("Orcish Healer", 208, Rarity.UNCOMMON, mage.cards.o.OrcishHealer.class, RETRO_ART));
         cards.add(new SetCardInfo("Orcish Librarian", 209, Rarity.RARE, mage.cards.o.OrcishLibrarian.class, RETRO_ART));
         cards.add(new SetCardInfo("Orcish Lumberjack", 210, Rarity.COMMON, mage.cards.o.OrcishLumberjack.class, RETRO_ART));
@@ -300,6 +302,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("River Delta", 359, Rarity.RARE, mage.cards.r.RiverDelta.class, RETRO_ART));
         cards.add(new SetCardInfo("Runed Arch", 334, Rarity.RARE, mage.cards.r.RunedArch.class, RETRO_ART));
         cards.add(new SetCardInfo("Sabretooth Tiger", 215, Rarity.COMMON, mage.cards.s.SabretoothTiger.class, RETRO_ART));
+        cards.add(new SetCardInfo("Sacred Boon", 50, Rarity.UNCOMMON, mage.cards.s.SacredBoon.class, RETRO_ART));
         cards.add(new SetCardInfo("Scaled Wurm", 262, Rarity.COMMON, mage.cards.s.ScaledWurm.class, RETRO_ART));
         cards.add(new SetCardInfo("Sea Spirit", 95, Rarity.UNCOMMON, mage.cards.s.SeaSpirit.class, RETRO_ART));
         cards.add(new SetCardInfo("Seizures", 159, Rarity.COMMON, mage.cards.s.Seizures.class, RETRO_ART));

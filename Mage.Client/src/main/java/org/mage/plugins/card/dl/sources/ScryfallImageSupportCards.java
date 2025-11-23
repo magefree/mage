@@ -611,6 +611,7 @@ public class ScryfallImageSupportCards {
             add("EOS"); // Edge of Eternities: Stellar Sights
             add("SPM"); // Marvel's Spider-Man
             add("SPE"); // Marvel's Spider-Man Eternal
+            add("LMAR"); // Marvel Legends Series Inserts
             add("MAR"); // Marvel Universe
             add("TLA"); // Avatar: The Last Airbender
             add("TLE"); // Avatar: The Last Airbender Eternal
@@ -717,6 +718,7 @@ public class ScryfallImageSupportCards {
             put("SLD/Sol Ring/1512b", "https://api.scryfall.com/cards/sld/1512/en?format=image&face=back");
             put("SLD/Steely Resolve/1326b", "https://api.scryfall.com/cards/sld/1326/en?format=image&face=back");
             put("SLD/Stitch in Time/382b", "https://api.scryfall.com/cards/sld/382/en?format=image&face=back");
+            put("SLD/Teferi's Ageless Insight/2214b", "https://api.scryfall.com/cards/sld/2214/en?format=image&face=back");
             put("SLD/Terror/750b", "https://api.scryfall.com/cards/sld/750/en?format=image&face=back");
             put("SLD/Tuvasa the Sunlit/1328b", "https://api.scryfall.com/cards/sld/1328/en?format=image&face=back");
             put("SLD/Ulamog, the Ceaseless Hunger/1122b", "https://api.scryfall.com/cards/sld/1122/en?format=image&face=back");

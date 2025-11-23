@@ -58,8 +58,8 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
     private final boolean tapped;
     private Permanent savedPermanent = null;
     private int startingLoyalty = -1;
-    private final int tokenPower;
-    private final int tokenToughness;
+    private int tokenPower;
+    private int tokenToughness;
     private boolean useLKI = false;
     private PermanentModifier permanentModifier = null;
 
@@ -393,6 +393,16 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
 
     public CreateTokenCopyTargetEffect setNumber(int number) {
         this.number = number;
+        return this;
+    }
+
+    public CreateTokenCopyTargetEffect setPower(int tokenPower) {
+        this.tokenPower = tokenPower;
+        return this;
+    }
+
+    public CreateTokenCopyTargetEffect setToughness(int tokenToughness) {
+        this.tokenToughness = tokenToughness;
         return this;
     }
 
