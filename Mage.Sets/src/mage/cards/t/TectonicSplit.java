@@ -42,7 +42,7 @@ public final class TectonicSplit extends CardImpl {
         // Lands you control have "{T}: Add three mana of any one color."
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
                 new SimpleManaAbility(new AddManaOfAnyColorEffect(3), new TapSourceCost()),
-                Duration.WhileControlled, StaticFilters.FILTER_LANDS
+                Duration.WhileOnBattlefield, StaticFilters.FILTER_LANDS
         )));
     }
 
