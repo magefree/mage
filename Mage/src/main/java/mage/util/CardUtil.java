@@ -1683,7 +1683,6 @@ public final class CardUtil {
 
             // allow just the front face
             game.getState().setValue("PlayFromNotOwnHandZone" + frontFace.getId(), Boolean.TRUE);
-            game.getState().setValue("PlayFromNotOwnHandZone" + backFace.getId(), Boolean.FALSE);
         }
 
         // handle adventure cards
