@@ -12,7 +12,6 @@ import mage.abilities.effects.CreateTokenCopySourceEffect;
 import mage.abilities.effects.common.continuous.AddCardTypeSourceEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
-import mage.abilities.hint.common.PermanentsSacrificedThisTurnHint;
 import mage.abilities.keyword.CrewAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
@@ -59,7 +58,7 @@ public final class PhoenixFleetAirship extends CardImpl {
         // At the beginning of your end step, if you sacrificed a permanent this turn, create a token that's a copy of this Vehicle.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new CreateTokenCopySourceEffect())
                 .withInterveningIf(PhoenixFleetAirshipCondition.instance)
-                .addHint(PermanentsSacrificedThisTurnHint.instance), new PermanentsSacrificedWatcher());
+                .addHint(PermanentsSacrificedThisTurnCount.YOU.getHint()), new PermanentsSacrificedWatcher());
 
         // As long as you control eight or more permanents named Phoenix Fleet Airship, this Vehicle is an artifact creature.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
@@ -87,7 +86,7 @@ enum PhoenixFleetAirshipCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return PermanentsSacrificedThisTurnCount.instance.calculate(game, source, null) > 0;
+        return PermanentsSacrificedThisTurnCount.YOU.calculate(game, source, null) > 0;
     }
 
     @Override
