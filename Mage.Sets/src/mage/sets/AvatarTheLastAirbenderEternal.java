@@ -316,6 +316,8 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Warship Scout", 285, Rarity.COMMON, mage.cards.w.WarshipScout.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Warstorm Surge", 38, Rarity.MYTHIC, mage.cards.w.WarstormSurge.class));
         cards.add(new SetCardInfo("Water Whip", 227, Rarity.RARE, mage.cards.w.WaterWhip.class));
+        cards.add(new SetCardInfo("Waterbender's Restoration", 183, Rarity.RARE, mage.cards.w.WaterbendersRestoration.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Waterbender's Restoration", 99, Rarity.RARE, mage.cards.w.WaterbendersRestoration.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Whirlwind Technique", 100, Rarity.UNCOMMON, mage.cards.w.WhirlwindTechnique.class));
         cards.add(new SetCardInfo("Wolf Cove Villager", 221, Rarity.COMMON, mage.cards.w.WolfCoveVillager.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wolf Cove Villager", 276, Rarity.COMMON, mage.cards.w.WolfCoveVillager.class, NON_FULL_USE_VARIOUS));
