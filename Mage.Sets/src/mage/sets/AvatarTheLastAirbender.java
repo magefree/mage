@@ -313,6 +313,8 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("Ruinous Waterbending", 118, Rarity.UNCOMMON, mage.cards.r.RuinousWaterbending.class));
         cards.add(new SetCardInfo("Rumble Arena", 277, Rarity.COMMON, mage.cards.r.RumbleArena.class));
         cards.add(new SetCardInfo("Saber-Tooth Moose-Lion", 194, Rarity.COMMON, mage.cards.s.SaberToothMooseLion.class));
+        cards.add(new SetCardInfo("Sandbender Scavengers", 239, Rarity.RARE, mage.cards.s.SandbenderScavengers.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sandbender Scavengers", 382, Rarity.RARE, mage.cards.s.SandbenderScavengers.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sandbenders' Storm", 34, Rarity.COMMON, mage.cards.s.SandbendersStorm.class));
         cards.add(new SetCardInfo("Secret Tunnel", 278, Rarity.RARE, mage.cards.s.SecretTunnel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Secret Tunnel", 392, Rarity.RARE, mage.cards.s.SecretTunnel.class, NON_FULL_USE_VARIOUS));
