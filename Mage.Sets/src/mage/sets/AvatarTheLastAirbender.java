@@ -426,6 +426,8 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("Zhao, the Moon Slayer", 376, Rarity.RARE, mage.cards.z.ZhaoTheMoonSlayer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Zuko's Conviction", 123, Rarity.UNCOMMON, mage.cards.z.ZukosConviction.class));
         cards.add(new SetCardInfo("Zuko's Exile", 3, Rarity.COMMON, mage.cards.z.ZukosExile.class));
+        cards.add(new SetCardInfo("Zuko, Conflicted", 253, Rarity.RARE, mage.cards.z.ZukoConflicted.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Zuko, Conflicted", 302, Rarity.RARE, mage.cards.z.ZukoConflicted.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Zuko, Exiled Prince", 163, Rarity.UNCOMMON, mage.cards.z.ZukoExiledPrince.class));
 
         cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName()));
