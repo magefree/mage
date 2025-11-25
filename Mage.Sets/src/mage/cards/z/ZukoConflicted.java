@@ -42,6 +42,7 @@ public final class ZukoConflicted extends CardImpl {
         Ability ability = new BeginningOfFirstMainTriggeredAbility(new DrawCardSourceControllerEffect(1).setText("draw"));
         ability.addEffect(new LoseLifeSourceControllerEffect(2).setText(" a card"));
         ability.getModes().setChooseText("choose one that hasn't been chosen and you lose 2 life &mdash;");
+        ability.getModes().setLimitUsageByOnce(false);
 
         // * Put a +1/+1 counter on Zuko.
         ability.addMode(new Mode(new AddCountersSourceEffect(CounterType.P1P1.createInstance()).setText("put a +1/+1 counter"))
