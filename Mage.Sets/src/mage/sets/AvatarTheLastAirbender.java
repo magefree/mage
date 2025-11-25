@@ -116,6 +116,8 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("Combustion Technique", 301, Rarity.UNCOMMON, mage.cards.c.CombustionTechnique.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Compassionate Healer", 13, Rarity.COMMON, mage.cards.c.CompassionateHealer.class));
         cards.add(new SetCardInfo("Corrupt Court Official", 92, Rarity.COMMON, mage.cards.c.CorruptCourtOfficial.class));
+        cards.add(new SetCardInfo("Crashing Wave", 300, Rarity.UNCOMMON, mage.cards.c.CrashingWave.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Crashing Wave", 47, Rarity.UNCOMMON, mage.cards.c.CrashingWave.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Crescent Island Temple", 129, Rarity.UNCOMMON, mage.cards.c.CrescentIslandTemple.class));
         cards.add(new SetCardInfo("Cruel Administrator", 213, Rarity.UNCOMMON, mage.cards.c.CruelAdministrator.class));
         cards.add(new SetCardInfo("Cunning Maneuver", 130, Rarity.COMMON, mage.cards.c.CunningManeuver.class));
