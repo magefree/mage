@@ -37,7 +37,7 @@ public final class SokkaAndSuki extends CardImpl {
 
         // Whenever Sokka and Suki or another Ally you control enters, attach up to one target Equipment you control to that creature.
         Ability ability = new EntersBattlefieldThisOrAnotherTriggeredAbility(
-                new SokkaAndSukiEffect(), filter, false, SetTargetPointer.PERMANENT, true
+                new SokkaAndSukiEffect(), filter, false, true
         );
         ability.addTarget(new TargetPermanent(
                 0, 1, StaticFilters.FILTER_CONTROLLED_PERMANENT_EQUIPMENT
