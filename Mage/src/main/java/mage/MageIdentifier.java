@@ -62,6 +62,7 @@ public enum MageIdentifier {
     DemilichAlternateCast,
     DemonicEmbraceAlternateCast,
     FalcoSparaPactweaverAlternateCast,
+    FireLordOzaiAlternateCast,
     HelbruteAlternateCast,
     IntoThePitAlternateCast,
     MaestrosAscendencyAlternateCast,

@@ -125,6 +125,8 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Fevered Visions", 49, Rarity.MYTHIC, mage.cards.f.FeveredVisions.class));
         cards.add(new SetCardInfo("Fierce Guardianship", 307, Rarity.RARE, mage.cards.f.FierceGuardianship.class));
         cards.add(new SetCardInfo("Fiery Confluence", 165, Rarity.RARE, mage.cards.f.FieryConfluence.class));
+        cards.add(new SetCardInfo("Fire Lord Ozai", 104, Rarity.MYTHIC, mage.cards.f.FireLordOzai.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Fire Lord Ozai", 186, Rarity.MYTHIC, mage.cards.f.FireLordOzai.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fire Nation Ambushers", 229, Rarity.COMMON, mage.cards.f.FireNationAmbushers.class));
         cards.add(new SetCardInfo("Fire Nation Archers", 237, Rarity.RARE, mage.cards.f.FireNationArchers.class));
         cards.add(new SetCardInfo("Fire Nation Occupation", 105, Rarity.RARE, mage.cards.f.FireNationOccupation.class, NON_FULL_USE_VARIOUS));
