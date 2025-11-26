@@ -16,7 +16,7 @@ public class SecretLairPromo extends ExpansionSet {
     }
 
     private SecretLairPromo() {
-        super("Secret Lair Showdown", "SLP", ExpansionSet.buildDate(2023, 2, 17), SetType.PROMOTIONAL);
+        super("Secret Lair Promo", "SLP", ExpansionSet.buildDate(2023, 2, 17), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = true;
 		
