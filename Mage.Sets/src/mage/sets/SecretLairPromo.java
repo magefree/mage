@@ -7,15 +7,15 @@ import mage.constants.SetType;
 /**
  * https://scryfall.com/sets/slp
  */
-public class SecretLairShowdown extends ExpansionSet {
+public class SecretLairPromo extends ExpansionSet {
 
-    private static final SecretLairShowdown instance = new SecretLairShowdown();
+    private static final SecretLairPromo instance = new SecretLairPromo();
 
-    public static SecretLairShowdown getInstance() {
+    public static SecretLairPromo getInstance() {
         return instance;
     }
 
-    private SecretLairShowdown() {
+    private SecretLairPromo() {
         super("Secret Lair Showdown", "SLP", ExpansionSet.buildDate(2023, 2, 17), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = true;
@@ -32,6 +32,7 @@ public class SecretLairShowdown extends ExpansionSet {
         cards.add(new SetCardInfo("Fauna Shaman", 41, Rarity.RARE, mage.cards.f.FaunaShaman.class));
         cards.add(new SetCardInfo("Flowerfoot Swordmaster", 46, Rarity.RARE, mage.cards.f.FlowerfootSwordmaster.class));
         cards.add(new SetCardInfo("Force of Despair", 29, Rarity.RARE, mage.cards.f.ForceOfDespair.class, FULL_ART));
+        cards.add(new SetCardInfo("Forest", 35, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Garruk Wildspeaker", 42, Rarity.MYTHIC, mage.cards.g.GarrukWildspeaker.class));
         cards.add(new SetCardInfo("Goblin Guide", 23, Rarity.RARE, mage.cards.g.GoblinGuide.class));
         cards.add(new SetCardInfo("Innkeeper's Talent", 45, Rarity.RARE, mage.cards.i.InnkeepersTalent.class, FULL_ART));

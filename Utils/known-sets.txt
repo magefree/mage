@@ -242,7 +242,7 @@ Sega Dreamcast Cards|SegaDreamcastCards|
 Scars of Mirrodin|ScarsOfMirrodin|
 Scourge|Scourge|
 Secret Lair Drop|SecretLairDrop|
-Secret Lair Showdown|SecretLairShowdown|
+Secret Lair Promo|SecretLairPromo|
 Seventh Edition|SeventhEdition|
 Shadowmoor|Shadowmoor|
 Shadows over Innistrad|ShadowsOverInnistrad|
