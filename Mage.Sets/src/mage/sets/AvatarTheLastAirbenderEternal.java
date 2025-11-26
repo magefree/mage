@@ -131,6 +131,8 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Fire Nation Archers", 237, Rarity.RARE, mage.cards.f.FireNationArchers.class));
         cards.add(new SetCardInfo("Fire Nation Occupation", 105, Rarity.RARE, mage.cards.f.FireNationOccupation.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fire Nation Occupation", 187, Rarity.RARE, mage.cards.f.FireNationOccupation.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Fire Nation Salvagers", 106, Rarity.RARE, mage.cards.f.FireNationSalvagers.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Fire Nation Salvagers", 188, Rarity.RARE, mage.cards.f.FireNationSalvagers.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fire Nation Sentinels", 230, Rarity.RARE, mage.cards.f.FireNationSentinels.class));
         cards.add(new SetCardInfo("Fire Nation Soldier", 238, Rarity.COMMON, mage.cards.f.FireNationSoldier.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fire Nation Soldier", 280, Rarity.COMMON, mage.cards.f.FireNationSoldier.class, NON_FULL_USE_VARIOUS));
