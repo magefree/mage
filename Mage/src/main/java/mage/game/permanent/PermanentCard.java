@@ -112,6 +112,14 @@ public class PermanentCard extends PermanentImpl {
         super.reset(game);
     }
 
+    @Override
+    public ImmutablePermanentCard saveImmutableCopy(Game game) {
+        return new ImmutablePermanentCard(this,
+                game.getState().getMageObjectAttribute(getId()),
+                game.getState().getCardState(getId())
+        );
+    }
+
     protected void copyFromCard(final Card card, final Game game) {
         // TODO: must research - is it copy all fields or something miss
         this.name = card.getName();

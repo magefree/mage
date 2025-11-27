@@ -73,6 +73,7 @@ import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.util.*;
 import mage.util.functions.CopyApplier;
+import mage.util.immutableWrappers.ImmutablePermanent;
 import mage.watchers.Watcher;
 import mage.watchers.common.*;
 import org.apache.log4j.Logger;
@@ -2106,7 +2107,11 @@ public abstract class GameImpl implements Game {
 
         // if it was no copy of copy take the target itself
         if (newBluePrint == null) {
-            newBluePrint = copyFromPermanent.copy();
+            if (copyFromPermanent instanceof ImmutablePermanent) {
+                newBluePrint = ((ImmutablePermanent) copyFromPermanent).getResetPermanent(this);
+            } else {
+                newBluePrint = copyFromPermanent.copy();
+            }
 
             // reset to original characteristics
             newBluePrint.reset(this);
@@ -3673,8 +3678,12 @@ public abstract class GameImpl implements Game {
     public void rememberLKI(Zone zone, MageObject object) {
         UUID objectId = object.getId();
         if (object instanceof Permanent || object instanceof StackObject) {
-            MageObject copy = object.copy();
-
+            MageObject copy;
+            if (object instanceof Permanent) {
+                copy = ((Permanent) object).saveImmutableCopy(this);
+            } else {
+                copy = object.copy();
+            }
             Map<UUID, MageObject> lkiMap = lki.computeIfAbsent(zone, k -> new HashMap<>());
             lkiMap.put(objectId, copy);
 
