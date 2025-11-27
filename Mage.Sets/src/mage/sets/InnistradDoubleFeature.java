@@ -56,9 +56,7 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Awoken Demon", 100, Rarity.COMMON, mage.cards.a.AwokenDemon.class));
         cards.add(new SetCardInfo("Baithook Angler", 42, Rarity.COMMON, mage.cards.b.BaithookAngler.class));
         cards.add(new SetCardInfo("Ballista Watcher", 410, Rarity.UNCOMMON, mage.cards.b.BallistaWatcher.class));
-        cards.add(new SetCardInfo("Ballista Wielder", 410, Rarity.UNCOMMON, mage.cards.b.BallistaWielder.class));
         cards.add(new SetCardInfo("Baneblade Scoundrel", 85, Rarity.UNCOMMON, mage.cards.b.BanebladeScoundrel.class));
-        cards.add(new SetCardInfo("Baneclaw Marauder", 85, Rarity.UNCOMMON, mage.cards.b.BaneclawMarauder.class));
         cards.add(new SetCardInfo("Bat Whisperer", 86, Rarity.COMMON, mage.cards.b.BatWhisperer.class));
         cards.add(new SetCardInfo("Belligerent Guest", 411, Rarity.COMMON, mage.cards.b.BelligerentGuest.class));
         cards.add(new SetCardInfo("Beloved Beggar", 3, Rarity.UNCOMMON, mage.cards.b.BelovedBeggar.class));
@@ -66,7 +64,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Bereaved Survivor", 4, Rarity.UNCOMMON, mage.cards.b.BereavedSurvivor.class));
         cards.add(new SetCardInfo("Binding Geist", 315, Rarity.COMMON, mage.cards.b.BindingGeist.class));
         cards.add(new SetCardInfo("Biolume Egg", 316, Rarity.UNCOMMON, mage.cards.b.BiolumeEgg.class));
-        cards.add(new SetCardInfo("Biolume Serpent", 316, Rarity.UNCOMMON, mage.cards.b.BiolumeSerpent.class));
         cards.add(new SetCardInfo("Bird Admirer", 169, Rarity.COMMON, mage.cards.b.BirdAdmirer.class));
         cards.add(new SetCardInfo("Bladebrand", 87, Rarity.COMMON, mage.cards.b.Bladebrand.class));
         cards.add(new SetCardInfo("Bladestitched Skaab", 212, Rarity.UNCOMMON, mage.cards.b.BladestitchedSkaab.class));
@@ -81,7 +78,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Bloodcrazed Socialite", 363, Rarity.COMMON, mage.cards.b.BloodcrazedSocialite.class));
         cards.add(new SetCardInfo("Bloodline Culling", 89, Rarity.RARE, mage.cards.b.BloodlineCulling.class));
         cards.add(new SetCardInfo("Bloodsoaked Reveler", 395, Rarity.UNCOMMON, mage.cards.b.BloodsoakedReveler.class));
-        cards.add(new SetCardInfo("Bloodsworn Knight", 364, Rarity.UNCOMMON, mage.cards.b.BloodswornKnight.class));
         cards.add(new SetCardInfo("Bloodsworn Squire", 364, Rarity.UNCOMMON, mage.cards.b.BloodswornSquire.class));
         cards.add(new SetCardInfo("Bloodthirsty Adversary", 129, Rarity.MYTHIC, mage.cards.b.BloodthirstyAdversary.class));
         cards.add(new SetCardInfo("Bloodtithe Collector", 90, Rarity.UNCOMMON, mage.cards.b.BloodtitheCollector.class));
@@ -99,7 +95,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Bride's Gown", 271, Rarity.UNCOMMON, mage.cards.b.BridesGown.class));
         cards.add(new SetCardInfo("Brimstone Vandal", 130, Rarity.COMMON, mage.cards.b.BrimstoneVandal.class));
         cards.add(new SetCardInfo("Brine Comber", 500, Rarity.UNCOMMON, mage.cards.b.BrineComber.class));
-        cards.add(new SetCardInfo("Brinebound Gift", 500, Rarity.UNCOMMON, mage.cards.b.BrineboundGift.class));
         cards.add(new SetCardInfo("Brood Weaver", 173, Rarity.UNCOMMON, mage.cards.b.BroodWeaver.class));
         cards.add(new SetCardInfo("Brutal Cathar", 7, Rarity.RARE, mage.cards.b.BrutalCathar.class));
         cards.add(new SetCardInfo("Burly Breaker", 174, Rarity.UNCOMMON, mage.cards.b.BurlyBreaker.class));
@@ -166,7 +161,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Curse of Shaken Faith", 134, Rarity.RARE, mage.cards.c.CurseOfShakenFaith.class));
         cards.add(new SetCardInfo("Curse of Silence", 15, Rarity.RARE, mage.cards.c.CurseOfSilence.class));
         cards.add(new SetCardInfo("Curse of Surveillance", 46, Rarity.RARE, mage.cards.c.CurseOfSurveillance.class));
-        cards.add(new SetCardInfo("Dauntless Avenger", 4, Rarity.UNCOMMON, mage.cards.d.DauntlessAvenger.class));
         cards.add(new SetCardInfo("Dawnhart Disciple", 463, Rarity.COMMON, mage.cards.d.DawnhartDisciple.class));
         cards.add(new SetCardInfo("Dawnhart Geist", 275, Rarity.UNCOMMON, mage.cards.d.DawnhartGeist.class));
         cards.add(new SetCardInfo("Dawnhart Mentor", 179, Rarity.UNCOMMON, mage.cards.d.DawnhartMentor.class));
@@ -191,7 +185,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Dig Up", 464, Rarity.RARE, mage.cards.d.DigUp.class));
         cards.add(new SetCardInfo("Dire-Strain Anarchist", 448, Rarity.MYTHIC, mage.cards.d.DireStrainAnarchist.class));
         cards.add(new SetCardInfo("Dire-Strain Brawler", 203, Rarity.COMMON, mage.cards.d.DireStrainBrawler.class));
-        cards.add(new SetCardInfo("Dire-Strain Demolisher", 174, Rarity.UNCOMMON, mage.cards.d.DireStrainDemolisher.class));
         cards.add(new SetCardInfo("Dire-Strain Rampage", 219, Rarity.RARE, mage.cards.d.DireStrainRampage.class));
         cards.add(new SetCardInfo("Diregraf Horde", 96, Rarity.COMMON, mage.cards.d.DiregrafHorde.class));
         cards.add(new SetCardInfo("Diregraf Rebirth", 220, Rarity.UNCOMMON, mage.cards.d.DiregrafRebirth.class));
@@ -275,7 +268,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Geistflame Reservoir", 142, Rarity.RARE, mage.cards.g.GeistflameReservoir.class));
         cards.add(new SetCardInfo("Geistlight Snare", 327, Rarity.UNCOMMON, mage.cards.g.GeistlightSnare.class));
         cards.add(new SetCardInfo("Geistwave", 56, Rarity.COMMON, mage.cards.g.Geistwave.class));
-        cards.add(new SetCardInfo("Generous Soul", 3, Rarity.UNCOMMON, mage.cards.g.GenerousSoul.class));
         cards.add(new SetCardInfo("Geralf, Visionary Stitcher", 328, Rarity.RARE, mage.cards.g.GeralfVisionaryStitcher.class));
         cards.add(new SetCardInfo("Ghastly Mimicry", 335, Rarity.RARE, mage.cards.g.GhastlyMimicry.class));
         cards.add(new SetCardInfo("Ghostly Castigator", 45, Rarity.UNCOMMON, mage.cards.g.GhostlyCastigator.class));
@@ -398,7 +390,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Mischievous Catgeist", 336, Rarity.UNCOMMON, mage.cards.m.MischievousCatgeist.class));
         cards.add(new SetCardInfo("Moldgraf Millipede", 476, Rarity.COMMON, mage.cards.m.MoldgrafMillipede.class));
         cards.add(new SetCardInfo("Moonlit Ambusher", 479, Rarity.UNCOMMON, mage.cards.m.MoonlitAmbusher.class));
-        cards.add(new SetCardInfo("Moonrage Brute", 7, Rarity.RARE, mage.cards.m.MoonrageBrute.class));
         cards.add(new SetCardInfo("Moonrager's Slash", 148, Rarity.COMMON, mage.cards.m.MoonragersSlash.class));
         cards.add(new SetCardInfo("Moonsilver Key", 255, Rarity.UNCOMMON, mage.cards.m.MoonsilverKey.class));
         cards.add(new SetCardInfo("Moonveil Regent", 149, Rarity.MYTHIC, mage.cards.m.MoonveilRegent.class));
@@ -535,7 +526,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Soul-Guide Gryff", 35, Rarity.COMMON, mage.cards.s.SoulGuideGryff.class));
         cards.add(new SetCardInfo("Soulcipher Board", 346, Rarity.UNCOMMON, mage.cards.s.SoulcipherBoard.class));
         cards.add(new SetCardInfo("Spectral Adversary", 77, Rarity.MYTHIC, mage.cards.s.SpectralAdversary.class));
-        cards.add(new SetCardInfo("Spectral Binding", 315, Rarity.COMMON, mage.cards.s.SpectralBinding.class));
         cards.add(new SetCardInfo("Spellrune Howler", 160, Rarity.UNCOMMON, mage.cards.s.SpellruneHowler.class));
         cards.add(new SetCardInfo("Spellrune Painter", 160, Rarity.UNCOMMON, mage.cards.s.SpellrunePainter.class));
         cards.add(new SetCardInfo("Spiked Ripsaw", 487, Rarity.UNCOMMON, mage.cards.s.SpikedRipsaw.class));
@@ -641,7 +631,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Whispering Wizard", 355, Rarity.UNCOMMON, mage.cards.w.WhisperingWizard.class));
         cards.add(new SetCardInfo("Wildsong Howler", 472, Rarity.RARE, mage.cards.w.WildsongHowler.class));
         cards.add(new SetCardInfo("Willow Geist", 207, Rarity.RARE, mage.cards.w.WillowGeist.class));
-        cards.add(new SetCardInfo("Wing Shredder", 169, Rarity.COMMON, mage.cards.w.WingShredder.class));
         cards.add(new SetCardInfo("Winged Portent", 356, Rarity.RARE, mage.cards.w.WingedPortent.class));
         cards.add(new SetCardInfo("Winterthorn Blessing", 251, Rarity.UNCOMMON, mage.cards.w.WinterthornBlessing.class));
         cards.add(new SetCardInfo("Witch's Web", 494, Rarity.COMMON, mage.cards.w.WitchsWeb.class));

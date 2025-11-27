@@ -1,11 +1,11 @@
 package mage.cards.b;
 
-import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.DayboundAbility;
+import mage.abilities.keyword.NightboundAbility;
 import mage.abilities.keyword.WardAbility;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
@@ -14,22 +14,31 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class BurlyBreaker extends CardImpl {
+public final class BurlyBreaker extends TransformingDoubleFacedCard {
 
     public BurlyBreaker(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.WEREWOLF}, "{3}{G}{G}",
+                "Dire-Strain Demolisher",
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.WEREWOLF}, "G");
 
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.WEREWOLF);
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(5);
-        this.secondSideCardClazz = mage.cards.d.DireStrainDemolisher.class;
+        // Burly Breaker
+        this.getLeftHalfCard().setPT(6, 5);
 
         // Ward {1}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{1}")));
+        this.getLeftHalfCard().addAbility(new WardAbility(new ManaCostsImpl<>("{1}")));
 
         // Daybound
-        this.addAbility(new DayboundAbility());
+        this.getLeftHalfCard().addAbility(new DayboundAbility());
+
+        // Dire-Strain Demolisher
+        this.getRightHalfCard().setPT(8, 7);
+
+        // Ward {3}
+        this.getRightHalfCard().addAbility(new WardAbility(new ManaCostsImpl<>("{3}")));
+
+        // Nightbound
+        this.getRightHalfCard().addAbility(new NightboundAbility());
     }
 
     private BurlyBreaker(final BurlyBreaker card) {

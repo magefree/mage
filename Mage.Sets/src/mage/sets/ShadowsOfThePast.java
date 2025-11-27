@@ -71,7 +71,6 @@ public class ShadowsOfThePast extends ExpansionSet {
         cards.add(new SetCardInfo("Invisible Stalker", 17, Rarity.UNCOMMON, mage.cards.i.InvisibleStalker.class));
         cards.add(new SetCardInfo("Kruin Outlaw", 42, Rarity.RARE, mage.cards.k.KruinOutlaw.class));
         cards.add(new SetCardInfo("Lingering Souls", 9, Rarity.UNCOMMON, mage.cards.l.LingeringSouls.class));
-        cards.add(new SetCardInfo("Lord of Lineage", 27, Rarity.MYTHIC, mage.cards.l.LordOfLineage.class));
         cards.add(new SetCardInfo("Mayor of Avabruck", 53, Rarity.RARE, mage.cards.m.MayorOfAvabruck.class));
         cards.add(new SetCardInfo("Mist Raven", 18, Rarity.COMMON, mage.cards.m.MistRaven.class));
         cards.add(new SetCardInfo("Moonmist", 54, Rarity.COMMON, mage.cards.m.Moonmist.class));

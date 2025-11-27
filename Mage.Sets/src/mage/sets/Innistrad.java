@@ -178,7 +178,6 @@ public final class Innistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Laboratory Maniac", 61, Rarity.RARE, mage.cards.l.LaboratoryManiac.class));
         cards.add(new SetCardInfo("Lantern Spirit", 62, Rarity.UNCOMMON, mage.cards.l.LanternSpirit.class));
         cards.add(new SetCardInfo("Liliana of the Veil", 105, Rarity.MYTHIC, mage.cards.l.LilianaOfTheVeil.class));
-        cards.add(new SetCardInfo("Lord of Lineage", 90, Rarity.RARE, mage.cards.l.LordOfLineage.class));
         cards.add(new SetCardInfo("Lost in the Mist", 63, Rarity.COMMON, mage.cards.l.LostInTheMist.class));
         cards.add(new SetCardInfo("Ludevic's Abomination", 64, Rarity.RARE, mage.cards.l.LudevicsAbomination.class));
         cards.add(new SetCardInfo("Ludevic's Test Subject", 64, Rarity.RARE, mage.cards.l.LudevicsTestSubject.class));

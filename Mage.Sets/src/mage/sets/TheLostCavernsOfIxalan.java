@@ -82,8 +82,6 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Brackish Blunder", 46, Rarity.COMMON, mage.cards.b.BrackishBlunder.class));
         cards.add(new SetCardInfo("Braided Net", 360, Rarity.RARE, mage.cards.b.BraidedNet.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Braided Net", 47, Rarity.RARE, mage.cards.b.BraidedNet.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Braided Quipu", 360, Rarity.RARE, mage.cards.b.BraidedQuipu.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Braided Quipu", 47, Rarity.RARE, mage.cards.b.BraidedQuipu.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Brass's Tunnel-Grinder", 135, Rarity.RARE, mage.cards.b.BrasssTunnelGrinder.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Brass's Tunnel-Grinder", 373, Rarity.RARE, mage.cards.b.BrasssTunnelGrinder.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Brazen Blademaster", 136, Rarity.COMMON, mage.cards.b.BrazenBlademaster.class));
@@ -422,8 +420,6 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Tarrian's Soulcleaver", 264, Rarity.RARE, mage.cards.t.TarriansSoulcleaver.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tarrian's Soulcleaver", 389, Rarity.RARE, mage.cards.t.TarriansSoulcleaver.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tectonic Hazard", 169, Rarity.COMMON, mage.cards.t.TectonicHazard.class));
-        cards.add(new SetCardInfo("Tecutlan, the Searing Rift", 135, Rarity.RARE, mage.cards.t.TecutlanTheSearingRift.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Tecutlan, the Searing Rift", 373, Rarity.RARE, mage.cards.t.TecutlanTheSearingRift.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Temple of Civilization", 26, Rarity.MYTHIC, mage.cards.t.TempleOfCivilization.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Temple of Civilization", 314, Rarity.MYTHIC, mage.cards.t.TempleOfCivilization.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Temple of Cultivation", 204, Rarity.MYTHIC, mage.cards.t.TempleOfCultivation.class, NON_FULL_USE_VARIOUS));

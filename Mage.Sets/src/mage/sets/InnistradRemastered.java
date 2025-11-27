@@ -71,8 +71,6 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Bedlam Reveler", 312, Rarity.RARE, mage.cards.b.BedlamReveler.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Biolume Egg", 455, Rarity.UNCOMMON, mage.cards.b.BiolumeEgg.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Biolume Egg", 54, Rarity.UNCOMMON, mage.cards.b.BiolumeEgg.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Biolume Serpent", 455, Rarity.UNCOMMON, mage.cards.b.BiolumeSerpent.class, RETRO_ART_USE_VARIOUS));
-        cards.add(new SetCardInfo("Biolume Serpent", 54, Rarity.UNCOMMON, mage.cards.b.BiolumeSerpent.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bladestitched Skaab", 231, Rarity.UNCOMMON, mage.cards.b.BladestitchedSkaab.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bladestitched Skaab", 426, Rarity.UNCOMMON, mage.cards.b.BladestitchedSkaab.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Blazing Torch", 254, Rarity.COMMON, mage.cards.b.BlazingTorch.class));
@@ -336,9 +334,6 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Lightning Mauler", 399, Rarity.UNCOMMON, mage.cards.l.LightningMauler.class,RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Liliana of the Veil", 475, Rarity.MYTHIC, mage.cards.l.LilianaOfTheVeil.class, RETRO_ART));
         cards.add(new SetCardInfo("Lingering Souls", 30, Rarity.UNCOMMON, mage.cards.l.LingeringSouls.class));
-        cards.add(new SetCardInfo("Lord of Lineage", 327, Rarity.MYTHIC, mage.cards.l.LordOfLineage.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Lord of Lineage", 461, Rarity.MYTHIC, mage.cards.l.LordOfLineage.class, RETRO_ART_USE_VARIOUS));
-        cards.add(new SetCardInfo("Lord of Lineage", 98, Rarity.MYTHIC, mage.cards.l.LordOfLineage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lumberknot", 206, Rarity.UNCOMMON, mage.cards.l.Lumberknot.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lumberknot", 414, Rarity.UNCOMMON, mage.cards.l.Lumberknot.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Luminous Phantom", 32, Rarity.COMMON, mage.cards.l.LuminousPhantom.class, NON_FULL_USE_VARIOUS));

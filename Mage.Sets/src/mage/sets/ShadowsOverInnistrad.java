@@ -222,7 +222,6 @@ public final class ShadowsOverInnistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Nahiri's Machinations", 28, Rarity.UNCOMMON, mage.cards.n.NahirisMachinations.class));
         cards.add(new SetCardInfo("Nahiri, the Harbinger", 247, Rarity.MYTHIC, mage.cards.n.NahiriTheHarbinger.class));
         cards.add(new SetCardInfo("Nearheath Chaplain", 29, Rarity.UNCOMMON, mage.cards.n.NearheathChaplain.class));
-        cards.add(new SetCardInfo("Neck Breaker", 147, Rarity.UNCOMMON, mage.cards.n.NeckBreaker.class));
         cards.add(new SetCardInfo("Neglected Heirloom", 260, Rarity.UNCOMMON, mage.cards.n.NeglectedHeirloom.class));
         cards.add(new SetCardInfo("Nephalia Moondrakes", 75, Rarity.RARE, mage.cards.n.NephaliaMoondrakes.class));
         cards.add(new SetCardInfo("Niblis of Dusk", 76, Rarity.COMMON, mage.cards.n.NiblisOfDusk.class));

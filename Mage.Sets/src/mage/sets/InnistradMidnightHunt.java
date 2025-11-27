@@ -61,8 +61,6 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Baithook Angler", 42, Rarity.COMMON, mage.cards.b.BaithookAngler.class));
         cards.add(new SetCardInfo("Baneblade Scoundrel", 289, Rarity.UNCOMMON, mage.cards.b.BanebladeScoundrel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Baneblade Scoundrel", 85, Rarity.UNCOMMON, mage.cards.b.BanebladeScoundrel.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Baneclaw Marauder", 289, Rarity.UNCOMMON, mage.cards.b.BaneclawMarauder.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Baneclaw Marauder", 85, Rarity.UNCOMMON, mage.cards.b.BaneclawMarauder.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bat Whisperer", 86, Rarity.COMMON, mage.cards.b.BatWhisperer.class));
         cards.add(new SetCardInfo("Beloved Beggar", 3, Rarity.UNCOMMON, mage.cards.b.BelovedBeggar.class));
         cards.add(new SetCardInfo("Benevolent Geist", 336, Rarity.RARE, mage.cards.b.BenevolentGeist.class, NON_FULL_USE_VARIOUS));
@@ -135,7 +133,6 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Curse of Silence", 326, Rarity.RARE, mage.cards.c.CurseOfSilence.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Curse of Surveillance", 334, Rarity.RARE, mage.cards.c.CurseOfSurveillance.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Curse of Surveillance", 46, Rarity.RARE, mage.cards.c.CurseOfSurveillance.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Dauntless Avenger", 4, Rarity.UNCOMMON, mage.cards.d.DauntlessAvenger.class));
         cards.add(new SetCardInfo("Dawnhart Mentor", 179, Rarity.UNCOMMON, mage.cards.d.DawnhartMentor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dawnhart Mentor", 300, Rarity.UNCOMMON, mage.cards.d.DawnhartMentor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dawnhart Rejuvenator", 180, Rarity.COMMON, mage.cards.d.DawnhartRejuvenator.class, NON_FULL_USE_VARIOUS));
@@ -158,8 +155,6 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Devoted Grafkeeper", 218, Rarity.UNCOMMON, mage.cards.d.DevotedGrafkeeper.class));
         cards.add(new SetCardInfo("Dire-Strain Brawler", 203, Rarity.COMMON, mage.cards.d.DireStrainBrawler.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dire-Strain Brawler", 305, Rarity.COMMON, mage.cards.d.DireStrainBrawler.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Dire-Strain Demolisher", 174, Rarity.UNCOMMON, mage.cards.d.DireStrainDemolisher.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Dire-Strain Demolisher", 299, Rarity.UNCOMMON, mage.cards.d.DireStrainDemolisher.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dire-Strain Rampage", 219, Rarity.RARE, mage.cards.d.DireStrainRampage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dire-Strain Rampage", 370, Rarity.RARE, mage.cards.d.DireStrainRampage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Diregraf Horde", 96, Rarity.COMMON, mage.cards.d.DiregrafHorde.class));
@@ -217,7 +212,6 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Geistflame Reservoir", 142, Rarity.RARE, mage.cards.g.GeistflameReservoir.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Geistflame Reservoir", 355, Rarity.RARE, mage.cards.g.GeistflameReservoir.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Geistwave", 56, Rarity.COMMON, mage.cards.g.Geistwave.class));
-        cards.add(new SetCardInfo("Generous Soul", 3, Rarity.UNCOMMON, mage.cards.g.GenerousSoul.class));
         cards.add(new SetCardInfo("Ghostly Castigator", 45, Rarity.UNCOMMON, mage.cards.g.GhostlyCastigator.class));
         cards.add(new SetCardInfo("Ghoulcaller's Harvest", 225, Rarity.RARE, mage.cards.g.GhoulcallersHarvest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ghoulcaller's Harvest", 372, Rarity.RARE, mage.cards.g.GhoulcallersHarvest.class, NON_FULL_USE_VARIOUS));
@@ -299,8 +293,6 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Memory Deluge", 337, Rarity.RARE, mage.cards.m.MemoryDeluge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Memory Deluge", 62, Rarity.RARE, mage.cards.m.MemoryDeluge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Might of the Old Ways", 189, Rarity.COMMON, mage.cards.m.MightOfTheOldWays.class));
-        cards.add(new SetCardInfo("Moonrage Brute", 286, Rarity.RARE, mage.cards.m.MoonrageBrute.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Moonrage Brute", 7, Rarity.RARE, mage.cards.m.MoonrageBrute.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Moonrager's Slash", 148, Rarity.COMMON, mage.cards.m.MoonragersSlash.class));
         cards.add(new SetCardInfo("Moonsilver Key", 255, Rarity.UNCOMMON, mage.cards.m.MoonsilverKey.class));
         cards.add(new SetCardInfo("Moonveil Regent", 149, Rarity.MYTHIC, mage.cards.m.MoonveilRegent.class, NON_FULL_USE_VARIOUS));
@@ -497,8 +489,6 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Wake to Slaughter", 376, Rarity.RARE, mage.cards.w.WakeToSlaughter.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Willow Geist", 207, Rarity.RARE, mage.cards.w.WillowGeist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Willow Geist", 366, Rarity.RARE, mage.cards.w.WillowGeist.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Wing Shredder", 169, Rarity.COMMON, mage.cards.w.WingShredder.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Wing Shredder", 298, Rarity.COMMON, mage.cards.w.WingShredder.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Winterthorn Blessing", 251, Rarity.UNCOMMON, mage.cards.w.WinterthornBlessing.class));
         cards.add(new SetCardInfo("Wrenn and Seven", 208, Rarity.MYTHIC, mage.cards.w.WrennAndSeven.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wrenn and Seven", 278, Rarity.MYTHIC, mage.cards.w.WrennAndSeven.class, NON_FULL_USE_VARIOUS));

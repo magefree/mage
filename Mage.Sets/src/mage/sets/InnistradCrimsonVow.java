@@ -60,12 +60,10 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Avabruck Caretaker", 187, Rarity.MYTHIC, mage.cards.a.AvabruckCaretaker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Avabruck Caretaker", 384, Rarity.MYTHIC, mage.cards.a.AvabruckCaretaker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ballista Watcher", 143, Rarity.UNCOMMON, mage.cards.b.BallistaWatcher.class));
-        cards.add(new SetCardInfo("Ballista Wielder", 143, Rarity.UNCOMMON, mage.cards.b.BallistaWielder.class));
         cards.add(new SetCardInfo("Belligerent Guest", 144, Rarity.COMMON, mage.cards.b.BelligerentGuest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Belligerent Guest", 301, Rarity.COMMON, mage.cards.b.BelligerentGuest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Binding Geist", 48, Rarity.COMMON, mage.cards.b.BindingGeist.class));
         cards.add(new SetCardInfo("Biolume Egg", 49, Rarity.UNCOMMON, mage.cards.b.BiolumeEgg.class));
-        cards.add(new SetCardInfo("Biolume Serpent", 49, Rarity.UNCOMMON, mage.cards.b.BiolumeSerpent.class));
         cards.add(new SetCardInfo("Bleed Dry", 94, Rarity.COMMON, mage.cards.b.BleedDry.class));
         cards.add(new SetCardInfo("Blood Fountain", 95, Rarity.COMMON, mage.cards.b.BloodFountain.class));
         cards.add(new SetCardInfo("Blood Hypnotist", 145, Rarity.UNCOMMON, mage.cards.b.BloodHypnotist.class, NON_FULL_USE_VARIOUS));
@@ -80,8 +78,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Bloodcrazed Socialite", 96, Rarity.COMMON, mage.cards.b.BloodcrazedSocialite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloodsoaked Reveler", 128, Rarity.UNCOMMON, mage.cards.b.BloodsoakedReveler.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloodsoaked Reveler", 295, Rarity.UNCOMMON, mage.cards.b.BloodsoakedReveler.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Bloodsworn Knight", 289, Rarity.UNCOMMON, mage.cards.b.BloodswornKnight.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Bloodsworn Knight", 97, Rarity.UNCOMMON, mage.cards.b.BloodswornKnight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloodsworn Squire", 289, Rarity.UNCOMMON, mage.cards.b.BloodswornSquire.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloodsworn Squire", 97, Rarity.UNCOMMON, mage.cards.b.BloodswornSquire.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloodtithe Harvester", 232, Rarity.UNCOMMON, mage.cards.b.BloodtitheHarvester.class, NON_FULL_USE_VARIOUS));
@@ -95,7 +91,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Bramble Wurm", 189, Rarity.UNCOMMON, mage.cards.b.BrambleWurm.class));
         cards.add(new SetCardInfo("Bride's Gown", 4, Rarity.UNCOMMON, mage.cards.b.BridesGown.class));
         cards.add(new SetCardInfo("Brine Comber", 233, Rarity.UNCOMMON, mage.cards.b.BrineComber.class));
-        cards.add(new SetCardInfo("Brinebound Gift", 233, Rarity.UNCOMMON, mage.cards.b.BrineboundGift.class));
         cards.add(new SetCardInfo("By Invitation Only", 346, Rarity.RARE, mage.cards.b.ByInvitationOnly.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("By Invitation Only", 5, Rarity.RARE, mage.cards.b.ByInvitationOnly.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cackling Culprit", 28, Rarity.UNCOMMON, mage.cards.c.CacklingCulprit.class));
@@ -427,7 +422,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Sorin the Mirthless", 297, Rarity.MYTHIC, mage.cards.s.SorinTheMirthless.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sorin the Mirthless", 337, Rarity.MYTHIC, mage.cards.s.SorinTheMirthless.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Soulcipher Board", 79, Rarity.UNCOMMON, mage.cards.s.SoulcipherBoard.class));
-        cards.add(new SetCardInfo("Spectral Binding", 48, Rarity.COMMON, mage.cards.s.SpectralBinding.class));
         cards.add(new SetCardInfo("Spiked Ripsaw", 220, Rarity.UNCOMMON, mage.cards.s.SpikedRipsaw.class));
         cards.add(new SetCardInfo("Splendid Reclamation", 221, Rarity.RARE, mage.cards.s.SplendidReclamation.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Splendid Reclamation", 393, Rarity.RARE, mage.cards.s.SplendidReclamation.class, NON_FULL_USE_VARIOUS));

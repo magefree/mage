@@ -60,8 +60,6 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Bahamut, Warden of Light", 376, Rarity.RARE, mage.cards.b.BahamutWardenOfLight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bahamut, Warden of Light", 428, Rarity.RARE, mage.cards.b.BahamutWardenOfLight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bahamut, Warden of Light", 521, Rarity.RARE, mage.cards.b.BahamutWardenOfLight.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Balamb Garden, Airborne", 272, Rarity.RARE, mage.cards.b.BalambGardenAirborne.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Balamb Garden, Airborne", 354, Rarity.RARE, mage.cards.b.BalambGardenAirborne.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Balamb Garden, SeeD Academy", 272, Rarity.RARE, mage.cards.b.BalambGardenSeeDAcademy.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Balamb Garden, SeeD Academy", 354, Rarity.RARE, mage.cards.b.BalambGardenSeeDAcademy.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Balamb T-Rexaur", 173, Rarity.COMMON, mage.cards.b.BalambTRexaur.class));
