@@ -43,14 +43,12 @@ public final class ShadowsOverInnistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Alms of the Vein", 98, Rarity.COMMON, mage.cards.a.AlmsOfTheVein.class));
         cards.add(new SetCardInfo("Altered Ego", 241, Rarity.RARE, mage.cards.a.AlteredEgo.class));
         cards.add(new SetCardInfo("Always Watching", 1, Rarity.RARE, mage.cards.a.AlwaysWatching.class));
-        cards.add(new SetCardInfo("Ancient of the Equinox", 194, Rarity.UNCOMMON, mage.cards.a.AncientOfTheEquinox.class));
         cards.add(new SetCardInfo("Angel of Deliverance", 2, Rarity.RARE, mage.cards.a.AngelOfDeliverance.class));
         cards.add(new SetCardInfo("Angelic Purge", 3, Rarity.COMMON, mage.cards.a.AngelicPurge.class));
         cards.add(new SetCardInfo("Anguished Unmaking", 242, Rarity.RARE, mage.cards.a.AnguishedUnmaking.class));
         cards.add(new SetCardInfo("Apothecary Geist", 4, Rarity.COMMON, mage.cards.a.ApothecaryGeist.class));
         cards.add(new SetCardInfo("Archangel Avacyn", 5, Rarity.MYTHIC, mage.cards.a.ArchangelAvacyn.class));
         cards.add(new SetCardInfo("Arlinn Kord", 243, Rarity.MYTHIC, mage.cards.a.ArlinnKord.class));
-        cards.add(new SetCardInfo("Arlinn, Embraced by the Moon", 243, Rarity.MYTHIC, mage.cards.a.ArlinnEmbracedByTheMoon.class));
         cards.add(new SetCardInfo("Ashmouth Blade", 260, Rarity.UNCOMMON, mage.cards.a.AshmouthBlade.class));
         cards.add(new SetCardInfo("Asylum Visitor", 99, Rarity.RARE, mage.cards.a.AsylumVisitor.class));
         cards.add(new SetCardInfo("Autumnal Gloom", 194, Rarity.UNCOMMON, mage.cards.a.AutumnalGloom.class));
@@ -175,7 +173,6 @@ public final class ShadowsOverInnistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Incorrigible Youths", 166, Rarity.UNCOMMON, mage.cards.i.IncorrigibleYouths.class));
         cards.add(new SetCardInfo("Indulgent Aristocrat", 118, Rarity.UNCOMMON, mage.cards.i.IndulgentAristocrat.class));
         cards.add(new SetCardInfo("Inexorable Blob", 212, Rarity.RARE, mage.cards.i.InexorableBlob.class));
-        cards.add(new SetCardInfo("Infectious Curse", 97, Rarity.UNCOMMON, mage.cards.i.InfectiousCurse.class));
         cards.add(new SetCardInfo("Inner Struggle", 167, Rarity.UNCOMMON, mage.cards.i.InnerStruggle.class));
         cards.add(new SetCardInfo("Inquisitor's Ox", 24, Rarity.COMMON, mage.cards.i.InquisitorsOx.class));
         cards.add(new SetCardInfo("Insidious Mist", 108, Rarity.RARE, mage.cards.i.InsidiousMist.class));
@@ -200,7 +197,6 @@ public final class ShadowsOverInnistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Liliana's Indignation", 120, Rarity.UNCOMMON, mage.cards.l.LilianasIndignation.class));
         cards.add(new SetCardInfo("Loam Dryad", 216, Rarity.COMMON, mage.cards.l.LoamDryad.class));
         cards.add(new SetCardInfo("Lone Wolf of the Natterknolls", 209, Rarity.UNCOMMON, mage.cards.l.LoneWolfOfTheNatterknolls.class));
-        cards.add(new SetCardInfo("Lunarch Inquisitors", 6, Rarity.UNCOMMON, mage.cards.l.LunarchInquisitors.class));
         cards.add(new SetCardInfo("Macabre Waltz", 121, Rarity.COMMON, mage.cards.m.MacabreWaltz.class));
         cards.add(new SetCardInfo("Mad Prophet", 171, Rarity.UNCOMMON, mage.cards.m.MadProphet.class));
         cards.add(new SetCardInfo("Magmatic Chasm", 172, Rarity.COMMON, mage.cards.m.MagmaticChasm.class));
@@ -242,7 +238,6 @@ public final class ShadowsOverInnistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Pack Guardian", 221, Rarity.UNCOMMON, mage.cards.p.PackGuardian.class));
         cards.add(new SetCardInfo("Pale Rider of Trostad", 128, Rarity.UNCOMMON, mage.cards.p.PaleRiderOfTrostad.class));
         cards.add(new SetCardInfo("Paranoid Parish-Blade", 33, Rarity.UNCOMMON, mage.cards.p.ParanoidParishBlade.class));
-        cards.add(new SetCardInfo("Perfected Form", 49, Rarity.UNCOMMON, mage.cards.p.PerfectedForm.class));
         cards.add(new SetCardInfo("Pick the Brain", 129, Rarity.UNCOMMON, mage.cards.p.PickTheBrain.class));
         cards.add(new SetCardInfo("Pieces of the Puzzle", 78, Rarity.COMMON, mage.cards.p.PiecesOfThePuzzle.class));
         cards.add(new SetCardInfo("Pious Evangel", 34, Rarity.UNCOMMON, mage.cards.p.PiousEvangel.class));

@@ -1,12 +1,12 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
-import mage.constants.Rarity;
-import mage.constants.SetType;
 import mage.collation.BoosterCollator;
 import mage.collation.BoosterStructure;
 import mage.collation.CardRun;
 import mage.collation.RarityConfiguration;
+import mage.constants.Rarity;
+import mage.constants.SetType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -432,8 +432,6 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Temple of Cyclical Time", 67, Rarity.MYTHIC, mage.cards.t.TempleOfCyclicalTime.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Temple of Power", 158, Rarity.MYTHIC, mage.cards.t.TempleOfPower.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Temple of Power", 317, Rarity.MYTHIC, mage.cards.t.TempleOfPower.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Temple of the Dead", 316, Rarity.MYTHIC, mage.cards.t.TempleOfTheDead.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Temple of the Dead", 88, Rarity.MYTHIC, mage.cards.t.TempleOfTheDead.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tendril of the Mycotyrant", 215, Rarity.UNCOMMON, mage.cards.t.TendrilOfTheMycotyrant.class));
         cards.add(new SetCardInfo("Terror Tide", 127, Rarity.RARE, mage.cards.t.TerrorTide.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Terror Tide", 372, Rarity.RARE, mage.cards.t.TerrorTide.class, NON_FULL_USE_VARIOUS));

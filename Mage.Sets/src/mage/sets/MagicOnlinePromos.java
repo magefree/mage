@@ -4,9 +4,6 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * https://scryfall.com/sets/prm
  */
@@ -159,7 +156,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Argivian Archaeologist", 219, Rarity.RARE, mage.cards.a.ArgivianArchaeologist.class, RETRO_ART));
         cards.add(new SetCardInfo("Argothian Enchantress", 36104, Rarity.RARE, mage.cards.a.ArgothianEnchantress.class, RETRO_ART));
         cards.add(new SetCardInfo("Arid Mesa", 91405, Rarity.RARE, mage.cards.a.AridMesa.class));
-        cards.add(new SetCardInfo("Arlinn, the Moon's Fury", 94060, Rarity.MYTHIC, mage.cards.a.ArlinnTheMoonsFury.class));
         cards.add(new SetCardInfo("Arlinn, the Pack's Hope", 94060, Rarity.MYTHIC, mage.cards.a.ArlinnThePacksHope.class));
         cards.add(new SetCardInfo("Arlinn, Voice of the Pack", 72239, Rarity.UNCOMMON, mage.cards.a.ArlinnVoiceOfThePack.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arlinn, Voice of the Pack", 77973, Rarity.UNCOMMON, mage.cards.a.ArlinnVoiceOfThePack.class, NON_FULL_USE_VARIOUS));
@@ -1233,7 +1229,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Hoard Hauler", 99747, Rarity.RARE, mage.cards.h.HoardHauler.class));
         cards.add(new SetCardInfo("Hobgoblin Bandit Lord", 92734, Rarity.RARE, mage.cards.h.HobgoblinBanditLord.class));
         cards.add(new SetCardInfo("Hofri Ghostforge", 90278, Rarity.MYTHIC, mage.cards.h.HofriGhostforge.class));
-        cards.add(new SetCardInfo("Hollowhenge Huntmaster", 95433, Rarity.MYTHIC, mage.cards.h.HollowhengeHuntmaster.class));
         cards.add(new SetCardInfo("Hollowhenge Overlord", 95419, Rarity.RARE, mage.cards.h.HollowhengeOverlord.class));
         cards.add(new SetCardInfo("Honor of the Pure", 43554, Rarity.RARE, mage.cards.h.HonorOfThePure.class));
         cards.add(new SetCardInfo("Honored Hierarch", 57598, Rarity.RARE, mage.cards.h.HonoredHierarch.class));

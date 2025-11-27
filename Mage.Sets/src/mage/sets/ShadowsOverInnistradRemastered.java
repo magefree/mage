@@ -39,7 +39,6 @@ public class ShadowsOverInnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Apothecary Geist", 12, Rarity.COMMON, mage.cards.a.ApothecaryGeist.class));
         cards.add(new SetCardInfo("Archangel Avacyn", 13, Rarity.MYTHIC, mage.cards.a.ArchangelAvacyn.class));
         cards.add(new SetCardInfo("Arlinn Kord", 230, Rarity.MYTHIC, mage.cards.a.ArlinnKord.class));
-        cards.add(new SetCardInfo("Arlinn, Embraced by the Moon", 230, Rarity.MYTHIC, mage.cards.a.ArlinnEmbracedByTheMoon.class));
         cards.add(new SetCardInfo("Ashmouth Blade", 256, Rarity.UNCOMMON, mage.cards.a.AshmouthBlade.class));
         cards.add(new SetCardInfo("Assembled Alphas", 141, Rarity.RARE, mage.cards.a.AssembledAlphas.class));
         cards.add(new SetCardInfo("Aurora of Emrakul", 248, Rarity.UNCOMMON, mage.cards.a.AuroraOfEmrakul.class));
@@ -182,7 +181,6 @@ public class ShadowsOverInnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Incendiary Flow", 163, Rarity.COMMON, mage.cards.i.IncendiaryFlow.class));
         cards.add(new SetCardInfo("Incited Rabble", 53, Rarity.UNCOMMON, mage.cards.i.IncitedRabble.class));
         cards.add(new SetCardInfo("Indulgent Aristocrat", 118, Rarity.UNCOMMON, mage.cards.i.IndulgentAristocrat.class));
-        cards.add(new SetCardInfo("Infectious Curse", 97, Rarity.UNCOMMON, mage.cards.i.InfectiousCurse.class));
         cards.add(new SetCardInfo("Ingenious Skaab", 75, Rarity.COMMON, mage.cards.i.IngeniousSkaab.class));
         cards.add(new SetCardInfo("Insatiable Gorgers", 164, Rarity.COMMON, mage.cards.i.InsatiableGorgers.class));
         cards.add(new SetCardInfo("Insolent Neonate", 165, Rarity.COMMON, mage.cards.i.InsolentNeonate.class));

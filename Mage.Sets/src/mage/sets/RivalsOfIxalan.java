@@ -182,7 +182,6 @@ public final class RivalsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Riverwise Augur", 48, Rarity.UNCOMMON, mage.cards.r.RiverwiseAugur.class));
         cards.add(new SetCardInfo("Sadistic Skymarcher", 85, Rarity.UNCOMMON, mage.cards.s.SadisticSkymarcher.class));
         cards.add(new SetCardInfo("Sailor of Means", 49, Rarity.COMMON, mage.cards.s.SailorOfMeans.class));
-        cards.add(new SetCardInfo("Sanctum of the Sun", 176, Rarity.MYTHIC, mage.cards.s.SanctumOfTheSun.class));
         cards.add(new SetCardInfo("Sanguine Glorifier", 20, Rarity.COMMON, mage.cards.s.SanguineGlorifier.class));
         cards.add(new SetCardInfo("Sea Legs", 50, Rarity.COMMON, mage.cards.s.SeaLegs.class));
         cards.add(new SetCardInfo("Seafloor Oracle", 51, Rarity.RARE, mage.cards.s.SeafloorOracle.class));

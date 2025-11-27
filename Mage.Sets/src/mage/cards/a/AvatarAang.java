@@ -1,50 +1,80 @@
 package mage.cards.a;
 
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.CostImpl;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.TransformSourceEffect;
+import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.common.*;
+import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FirebendingAbility;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.CardImpl;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
+import mage.cards.Card;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.*;
+import mage.counters.CounterType;
+import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.watchers.Watcher;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
 /**
  * @author TheElk801
  */
-public final class AvatarAang extends CardImpl {
+public final class AvatarAang extends TransformingDoubleFacedCard {
+
+    private static final FilterCard filter = new FilterCard("spells");
 
     public AvatarAang(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{G}{W}{U}");
+        super(ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.AVATAR, SubType.ALLY}, "{R}{G}{W}{U}",
+                "Aang, Master of Elements",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.AVATAR, SubType.ALLY}, "");
 
-        this.supertype.add(SuperType.LEGENDARY);
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.AVATAR);
-        this.subtype.add(SubType.ALLY);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
-
-        this.secondSideCardClazz = mage.cards.a.AangMasterOfElements.class;
+        this.getLeftHalfCard().setPT(4, 4);
+        this.getRightHalfCard().setPT(6, 6);
 
         // Flying
-        this.addAbility(FlyingAbility.getInstance());
+        this.getLeftHalfCard().addAbility(FlyingAbility.getInstance());
 
         // Firebending 2
-        this.addAbility(new FirebendingAbility(2));
+        this.getLeftHalfCard().addAbility(new FirebendingAbility(2));
 
         // Whenever you waterbend, earthbend, firebend, or airbend, draw a card. Then if you've done all four this turn, transform Avatar Aang.
-        this.addAbility(new AvatarAangTriggeredAbility());
+        this.getLeftHalfCard().addAbility(new AvatarAangTriggeredAbility());
+
+        // Aang, Master of Elements
+        // Flying
+        this.getRightHalfCard().addAbility(FlyingAbility.getInstance());
+
+        // Spells you cast cost {W}{U}{B}{R}{G} less to cast.
+        this.getRightHalfCard().addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(
+                filter, new ManaCostsImpl<>("{W}{U}{B}{R}{G}"), StaticValue.get(1), true
+        )));
+
+        // At the beginning of each upkeep, you may transform Aang, Master of Elements. If you do, you gain 4 life, draw four cards, put four +1/+1 counters on him, and he deals 4 damage to each opponent.
+        this.getRightHalfCard().addAbility(new BeginningOfUpkeepTriggeredAbility(
+                TargetController.ANY,
+                new DoIfCostPaid(new GainLifeEffect(4), new AangMasterOfElementsCost())
+                        .addEffect(new DrawCardSourceControllerEffect(4).concatBy(","))
+                        .addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(4))
+                                .setText(", put four +1/+1 counters on him"))
+                        .addEffect(new DamagePlayersEffect(4, TargetController.OPPONENT)
+                                .setText(", and he deals 4 damage to each opponent")),
+                false
+        ));
     }
 
     private AvatarAang(final AvatarAang card) {
@@ -152,5 +182,39 @@ class AvatarAangWatcher extends Watcher {
 
     static boolean checkPlayer(Game game, Ability source) {
         return game.getState().getWatcher(AvatarAangWatcher.class).checkPlayer(source.getControllerId());
+    }
+}
+
+class AangMasterOfElementsCost extends CostImpl {
+
+    AangMasterOfElementsCost() {
+        super();
+        text = "transform {this}";
+    }
+
+    private AangMasterOfElementsCost(final AangMasterOfElementsCost cost) {
+        super(cost);
+    }
+
+    @Override
+    public AangMasterOfElementsCost copy() {
+        return new AangMasterOfElementsCost(this);
+    }
+
+    @Override
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
+        return Optional
+                .ofNullable(source.getSourcePermanentIfItStillExists(game))
+                .filter(Card::isTransformable)
+                .isPresent();
+    }
+
+    @Override
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
+        paid = Optional
+                .ofNullable(source.getSourcePermanentIfItStillExists(game))
+                .filter(permanent -> permanent.transform(source, game))
+                .isPresent();
+        return paid;
     }
 }

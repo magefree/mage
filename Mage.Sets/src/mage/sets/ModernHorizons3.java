@@ -41,9 +41,6 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Aether Spike", 50, Rarity.COMMON, mage.cards.a.AetherSpike.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aether Spike", 398, Rarity.COMMON, mage.cards.a.AetherSpike.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Ajani Fells the Godsire", 19, Rarity.UNCOMMON, mage.cards.a.AjaniFellsTheGodsire.class));
-        cards.add(new SetCardInfo("Ajani, Nacatl Avenger", 237, Rarity.MYTHIC, mage.cards.a.AjaniNacatlAvenger.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Ajani, Nacatl Avenger", 442, Rarity.MYTHIC, mage.cards.a.AjaniNacatlAvenger.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Ajani, Nacatl Avenger", 468, Rarity.MYTHIC, mage.cards.a.AjaniNacatlAvenger.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ajani, Nacatl Pariah", 237, Rarity.MYTHIC, mage.cards.a.AjaniNacatlPariah.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ajani, Nacatl Pariah", 442, Rarity.MYTHIC, mage.cards.a.AjaniNacatlPariah.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ajani, Nacatl Pariah", 468, Rarity.MYTHIC, mage.cards.a.AjaniNacatlPariah.class, NON_FULL_USE_VARIOUS));

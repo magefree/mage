@@ -2,15 +2,15 @@ package mage.sets;
 
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
-import mage.constants.Rarity;
-import mage.constants.SetType;
-import mage.util.RandomUtil;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardRepository;
 import mage.collation.BoosterCollator;
 import mage.collation.BoosterStructure;
 import mage.collation.CardRun;
 import mage.collation.RarityConfiguration;
+import mage.constants.Rarity;
+import mage.constants.SetType;
+import mage.util.RandomUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,8 +62,6 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Awaken the Maelstrom", 230, Rarity.RARE, mage.cards.a.AwakenTheMaelstrom.class));
         cards.add(new SetCardInfo("Awakened Skyclave", 194, Rarity.UNCOMMON, mage.cards.a.AwakenedSkyclave.class));
         cards.add(new SetCardInfo("Axgard Artisan", 332, Rarity.UNCOMMON, mage.cards.a.AxgardArtisan.class));
-        cards.add(new SetCardInfo("Ayara, Furnace Queen", 296, Rarity.RARE, mage.cards.a.AyaraFurnaceQueen.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Ayara, Furnace Queen", 90, Rarity.RARE, mage.cards.a.AyaraFurnaceQueen.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ayara, Widow of the Realm", 296, Rarity.RARE, mage.cards.a.AyaraWidowOfTheRealm.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ayara, Widow of the Realm", 90, Rarity.RARE, mage.cards.a.AyaraWidowOfTheRealm.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Baral and Kari Zev", 218, Rarity.RARE, mage.cards.b.BaralAndKariZev.class, NON_FULL_USE_VARIOUS));
@@ -178,7 +176,6 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Ghalta and Mavren", 307, Rarity.RARE, mage.cards.g.GhaltaAndMavren.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ghalta and Mavren", 386, Rarity.RARE, mage.cards.g.GhaltaAndMavren.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gift of Compleation", 106, Rarity.UNCOMMON, mage.cards.g.GiftOfCompleation.class));
-        cards.add(new SetCardInfo("Gitaxian Mindstinger", 88, Rarity.COMMON, mage.cards.g.GitaxianMindstinger.class));
         cards.add(new SetCardInfo("Gitaxian Spellstalker", 151, Rarity.UNCOMMON, mage.cards.g.GitaxianSpellstalker.class));
         cards.add(new SetCardInfo("Glissa, Herald of Predation", 226, Rarity.RARE, mage.cards.g.GlissaHeraldOfPredation.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Glissa, Herald of Predation", 308, Rarity.RARE, mage.cards.g.GlissaHeraldOfPredation.class, NON_FULL_USE_VARIOUS));

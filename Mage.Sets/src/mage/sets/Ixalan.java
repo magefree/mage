@@ -299,7 +299,6 @@ public final class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Swashbuckling", 167, Rarity.COMMON, mage.cards.s.Swashbuckling.class));
         cards.add(new SetCardInfo("Sword-Point Diplomacy", 126, Rarity.RARE, mage.cards.s.SwordPointDiplomacy.class));
         cards.add(new SetCardInfo("Tempest Caller", 86, Rarity.UNCOMMON, mage.cards.t.TempestCaller.class));
-        cards.add(new SetCardInfo("Temple of Aclazotz", 90, Rarity.RARE, mage.cards.t.TempleOfAclazotz.class));
         cards.add(new SetCardInfo("Territorial Hammerskull", 41, Rarity.COMMON, mage.cards.t.TerritorialHammerskull.class));
         cards.add(new SetCardInfo("Thaumatic Compass", 249, Rarity.RARE, mage.cards.t.ThaumaticCompass.class));
         cards.add(new SetCardInfo("Thrash of Raptors", 168, Rarity.COMMON, mage.cards.t.ThrashOfRaptors.class));

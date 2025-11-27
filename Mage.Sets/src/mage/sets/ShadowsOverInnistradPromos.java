@@ -29,7 +29,6 @@ public class ShadowsOverInnistradPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Anguished Unmaking", 242, Rarity.RARE, mage.cards.a.AnguishedUnmaking.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Archangel Avacyn", "5s", Rarity.MYTHIC, mage.cards.a.ArchangelAvacyn.class));
         cards.add(new SetCardInfo("Arlinn Kord", "243s", Rarity.MYTHIC, mage.cards.a.ArlinnKord.class));
-        cards.add(new SetCardInfo("Arlinn, Embraced by the Moon", "243s", Rarity.MYTHIC, mage.cards.a.ArlinnEmbracedByTheMoon.class));
         cards.add(new SetCardInfo("Asylum Visitor", "99s", Rarity.RARE, mage.cards.a.AsylumVisitor.class));
         cards.add(new SetCardInfo("Avacyn's Judgment", "145s", Rarity.RARE, mage.cards.a.AvacynsJudgment.class));
         cards.add(new SetCardInfo("Awoken Horror", "92s", Rarity.RARE, mage.cards.a.AwokenHorror.class));

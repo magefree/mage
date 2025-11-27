@@ -128,7 +128,6 @@ public class IxalanPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Sunpetal Grove", "257s", Rarity.RARE, mage.cards.s.SunpetalGrove.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sword-Point Diplomacy", "126p", Rarity.RARE, mage.cards.s.SwordPointDiplomacy.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sword-Point Diplomacy", "126s", Rarity.RARE, mage.cards.s.SwordPointDiplomacy.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Temple of Aclazotz", "90s", Rarity.RARE, mage.cards.t.TempleOfAclazotz.class));
         cards.add(new SetCardInfo("Thaumatic Compass", "249s", Rarity.RARE, mage.cards.t.ThaumaticCompass.class));
         cards.add(new SetCardInfo("Tilonalli's Skinshifter", "170s", Rarity.RARE, mage.cards.t.TilonallisSkinshifter.class));
         cards.add(new SetCardInfo("Tishana, Voice of Thunder", "230s", Rarity.MYTHIC, mage.cards.t.TishanaVoiceOfThunder.class));

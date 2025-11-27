@@ -1609,7 +1609,6 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Scrying Sheets", 1606, Rarity.RARE, mage.cards.s.ScryingSheets.class));
         cards.add(new SetCardInfo("Thespian's Stage", 1607, Rarity.RARE, mage.cards.t.ThespiansStage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Avabruck Caretaker", 1608, Rarity.MYTHIC, mage.cards.a.AvabruckCaretaker.class));
-        cards.add(new SetCardInfo("Hollowhenge Huntmaster", 1608, Rarity.MYTHIC, mage.cards.h.HollowhengeHuntmaster.class));
         cards.add(new SetCardInfo("Beastmaster Ascension", 1609, Rarity.RARE, mage.cards.b.BeastmasterAscension.class));
         cards.add(new SetCardInfo("Howl of the Night Pack", 1610, Rarity.RARE, mage.cards.h.HowlOfTheNightPack.class));
         cards.add(new SetCardInfo("Second Harvest", 1611, Rarity.RARE, mage.cards.s.SecondHarvest.class));

@@ -1,16 +1,23 @@
 package mage.cards.a;
 
-import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.DiesSourceTriggeredAbility;
+import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.CardsInHandCondition;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.TransformSourceEffect;
+import mage.abilities.hint.ConditionHint;
+import mage.abilities.hint.Hint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.TransformAbility;
+import mage.abilities.mana.BlackManaAbility;
 import mage.cards.*;
 import mage.constants.*;
 import mage.filter.StaticFilters;
@@ -28,33 +35,43 @@ import java.util.UUID;
 /**
  * @author Susucr
  */
-public final class AclazotzDeepestBetrayal extends CardImpl {
+public final class AclazotzDeepestBetrayal extends TransformingDoubleFacedCard {
+    private static final Condition condition = new CardsInHandCondition(ComparisonType.FEWER_THAN, 2, TargetController.ANY);
+    private static final Hint hint = new ConditionHint(condition);
 
     public AclazotzDeepestBetrayal(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
-        this.secondSideCardClazz = mage.cards.t.TempleOfTheDead.class;
+        super(ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.BAT, SubType.GOD}, "{3}{B}{B}",
+                "Temple of the Dead",
+                new SuperType[]{}, new CardType[]{CardType.LAND}, new SubType[]{}, "");
 
-        this.supertype.add(SuperType.LEGENDARY);
-        this.subtype.add(SubType.BAT);
-        this.subtype.add(SubType.GOD);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
+        this.getLeftHalfCard().setPT(4, 4);
 
         // Flying
-        this.addAbility(FlyingAbility.getInstance());
+        this.getLeftHalfCard().addAbility(FlyingAbility.getInstance());
 
         // Lifelink
-        this.addAbility(LifelinkAbility.getInstance());
+        this.getLeftHalfCard().addAbility(LifelinkAbility.getInstance());
 
         // Whenever Aclazotz attacks, each opponent discards a card. For each opponent who can't, you draw a card.
-        this.addAbility(new AttacksTriggeredAbility(new AclazotzDeepestBetrayalEffect()));
+        this.getLeftHalfCard().addAbility(new AttacksTriggeredAbility(new AclazotzDeepestBetrayalEffect()));
 
         // Whenever an opponent discards a land card, create a 1/1 black Bat creature token with flying.
-        this.addAbility(new AclazotzDeepestBetrayalTriggeredAbility());
+        this.getLeftHalfCard().addAbility(new AclazotzDeepestBetrayalTriggeredAbility());
 
         // When Aclazotz dies, return it to the battlefield tapped and transformed under its owner's control.
-        this.addAbility(new TransformAbility());
-        this.addAbility(new DiesSourceTriggeredAbility(new AclazotzDeepestBetrayalTransformEffect()));
+        this.getLeftHalfCard().addAbility(new DiesSourceTriggeredAbility(new AclazotzDeepestBetrayalTransformEffect()));
+
+        // Temple of the Dead
+        // {T}: Add {B}.
+        this.getRightHalfCard().addAbility(new BlackManaAbility());
+
+        // {2}{B}, {T}: Transform Temple of the Dead. Activate only if a player has one or fewer cards in hand and only as a sorcery.
+        Ability ability = new ActivateIfConditionActivatedAbility(
+                new TransformSourceEffect(), new ManaCostsImpl<>("{2}{B}"), condition
+        ).setTiming(TimingRule.SORCERY);
+        ability.addCost(new TapSourceCost());
+        this.getRightHalfCard().addAbility(ability.addHint(hint));
     }
 
     private AclazotzDeepestBetrayal(final AclazotzDeepestBetrayal card) {

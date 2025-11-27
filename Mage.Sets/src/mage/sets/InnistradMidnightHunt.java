@@ -42,7 +42,6 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Abandon the Post", 127, Rarity.COMMON, mage.cards.a.AbandonThePost.class));
         cards.add(new SetCardInfo("Adeline, Resplendent Cathar", 1, Rarity.RARE, mage.cards.a.AdelineResplendentCathar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Adeline, Resplendent Cathar", 312, Rarity.RARE, mage.cards.a.AdelineResplendentCathar.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Ambitious Farmhand", 2, Rarity.UNCOMMON, mage.cards.a.AmbitiousFarmhand.class));
         cards.add(new SetCardInfo("Angelfire Ignition", 209, Rarity.RARE, mage.cards.a.AngelfireIgnition.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Angelfire Ignition", 367, Rarity.RARE, mage.cards.a.AngelfireIgnition.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Angelic Enforcer", 17, Rarity.MYTHIC, mage.cards.a.AngelicEnforcer.class, NON_FULL_USE_VARIOUS));
@@ -50,9 +49,6 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Arcane Infusion", 210, Rarity.UNCOMMON, mage.cards.a.ArcaneInfusion.class));
         cards.add(new SetCardInfo("Archive Haunt", 68, Rarity.UNCOMMON, mage.cards.a.ArchiveHaunt.class));
         cards.add(new SetCardInfo("Ardent Elementalist", 128, Rarity.COMMON, mage.cards.a.ArdentElementalist.class));
-        cards.add(new SetCardInfo("Arlinn, the Moon's Fury", 211, Rarity.MYTHIC, mage.cards.a.ArlinnTheMoonsFury.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Arlinn, the Moon's Fury", 279, Rarity.MYTHIC, mage.cards.a.ArlinnTheMoonsFury.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Arlinn, the Moon's Fury", 307, Rarity.MYTHIC, mage.cards.a.ArlinnTheMoonsFury.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arlinn, the Pack's Hope", 211, Rarity.MYTHIC, mage.cards.a.ArlinnThePacksHope.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arlinn, the Pack's Hope", 279, Rarity.MYTHIC, mage.cards.a.ArlinnThePacksHope.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arlinn, the Pack's Hope", 307, Rarity.MYTHIC, mage.cards.a.ArlinnThePacksHope.class, NON_FULL_USE_VARIOUS));
@@ -386,7 +382,6 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Seafaring Werewolf", 288, Rarity.RARE, mage.cards.s.SeafaringWerewolf.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Seafaring Werewolf", 80, Rarity.RARE, mage.cards.s.SeafaringWerewolf.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Search Party Captain", 32, Rarity.COMMON, mage.cards.s.SearchPartyCaptain.class));
-        cards.add(new SetCardInfo("Seasoned Cathar", 2, Rarity.UNCOMMON, mage.cards.s.SeasonedCathar.class));
         cards.add(new SetCardInfo("Secrets of the Key", 73, Rarity.COMMON, mage.cards.s.SecretsOfTheKey.class));
         cards.add(new SetCardInfo("Seize the Storm", 158, Rarity.UNCOMMON, mage.cards.s.SeizeTheStorm.class));
         cards.add(new SetCardInfo("Shadowbeast Sighting", 198, Rarity.COMMON, mage.cards.s.ShadowbeastSighting.class));

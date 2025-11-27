@@ -201,7 +201,6 @@ public final class DarkAscension extends ExpansionSet {
         cards.add(new SetCardInfo("Vorapede", 131, Rarity.MYTHIC, mage.cards.v.Vorapede.class));
         cards.add(new SetCardInfo("Wakedancer", 79, Rarity.UNCOMMON, mage.cards.w.Wakedancer.class));
         cards.add(new SetCardInfo("Warden of the Wall", 153, Rarity.UNCOMMON, mage.cards.w.WardenOfTheWall.class));
-        cards.add(new SetCardInfo("Werewolf Ransacker", 81, Rarity.UNCOMMON, mage.cards.w.WerewolfRansacker.class));
         cards.add(new SetCardInfo("Wild Hunger", 132, Rarity.COMMON, mage.cards.w.WildHunger.class));
         cards.add(new SetCardInfo("Withengar Unbound", 147, Rarity.MYTHIC, mage.cards.w.WithengarUnbound.class));
         cards.add(new SetCardInfo("Wolfbitten Captive", 133, Rarity.RARE, mage.cards.w.WolfbittenCaptive.class));

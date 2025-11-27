@@ -25,7 +25,6 @@ public final class HinterlandLogger extends TransformingDoubleFacedCard {
         this.getRightHalfCard().setPT(4, 2);
 
         // At the beginning of each upkeep, if no spells were cast last turn, transform Hinterland Logger.
-//        this.getLeftHalfCard().addAbility(new TransformAbility());
         this.getLeftHalfCard().addAbility(new WerewolfFrontTriggeredAbility());
 
         // Timber Shredder
