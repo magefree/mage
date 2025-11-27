@@ -3,6 +3,8 @@ package mage.cards.t;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.AttacksAllTriggeredAbility;
+import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.common.DrawNthCardTriggeredAbility;
 import mage.abilities.common.delayed.UntilYourNextTurnDelayedTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerLibraryCount;
@@ -11,16 +13,13 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.*;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.effects.keyword.InvestigateEffect;
 import mage.abilities.effects.mana.AddManaOfAnyColorEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
+import mage.cards.CardSetInfo;
 import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.*;
-import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.common.DrawNthCardTriggeredAbility;
-import mage.abilities.effects.keyword.InvestigateEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.TransformAbility;
-import mage.cards.CardSetInfo;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.command.emblems.TamiyoSeasonedScholarEmblem;
@@ -51,7 +50,6 @@ public final class TamiyoInquisitiveStudent extends TransformingDoubleFacedCard 
         this.getLeftHalfCard().addAbility(new AttacksTriggeredAbility(new InvestigateEffect()));
 
         // When you draw your third card in a turn, exile Tamiyo, then return her to the battlefield transformed under her owner's control.
-        this.getLeftHalfCard().addAbility(new TransformAbility());
         this.getLeftHalfCard().addAbility(new DrawNthCardTriggeredAbility(
                 new ExileAndReturnSourceEffect(PutCards.BATTLEFIELD_TRANSFORMED, Pronoun.SHE),
                 false, 3
