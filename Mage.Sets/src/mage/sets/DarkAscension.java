@@ -4,7 +4,6 @@ package mage.sets;
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.cards.repository.CardInfo;
-import mage.cards.repository.CardRepository;
 import mage.collation.BoosterCollator;
 import mage.collation.BoosterStructure;
 import mage.collation.CardRun;
@@ -155,7 +154,6 @@ public final class DarkAscension extends ExpansionSet {
         cards.add(new SetCardInfo("Niblis of the Urn", 16, Rarity.UNCOMMON, mage.cards.n.NiblisOfTheUrn.class));
         cards.add(new SetCardInfo("Predator Ooze", 124, Rarity.RARE, mage.cards.p.PredatorOoze.class));
         cards.add(new SetCardInfo("Pyreheart Wolf", 101, Rarity.UNCOMMON, mage.cards.p.PyreheartWolf.class));
-        cards.add(new SetCardInfo("Ravager of the Fells", 140, Rarity.MYTHIC, mage.cards.r.RavagerOfTheFells.class));
         cards.add(new SetCardInfo("Ravenous Demon", 71, Rarity.RARE, mage.cards.r.RavenousDemon.class));
         cards.add(new SetCardInfo("Ray of Revelation", 17, Rarity.COMMON, mage.cards.r.RayOfRevelation.class));
         cards.add(new SetCardInfo("Reap the Seagraf", 72, Rarity.COMMON, mage.cards.r.ReapTheSeagraf.class));

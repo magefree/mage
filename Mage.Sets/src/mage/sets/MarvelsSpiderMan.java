@@ -4,15 +4,11 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * @author TheElk801
  */
 public final class MarvelsSpiderMan extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Eddie Brock", "Gwen Stacy", "Miles Morales", "Norman Osborn", "Peter Parker");
     private static final MarvelsSpiderMan instance = new MarvelsSpiderMan();
 
     public static MarvelsSpiderMan getInstance() {
@@ -310,7 +306,5 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         cards.add(new SetCardInfo("With Great Power...", 24, Rarity.RARE, mage.cards.w.WithGreatPower.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("With Great Power...", 248, Rarity.RARE, mage.cards.w.WithGreatPower.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wraith, Vicious Vigilante", 160, Rarity.UNCOMMON, mage.cards.w.WraithViciousVigilante.class));
-
-        cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName()));
     }
 }

@@ -60,7 +60,7 @@ public final class MilesMorales extends ModalDoubleFacedCard {
         // When Miles Morales enters, put a +1/+1 counter on each of up to two target creatures.
         Ability ability = new EntersBattlefieldTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
         ability.addTarget(new TargetCreaturePermanent(0, 2));
-        this.addAbility(ability);
+        this.getLeftHalfCard().addAbility(ability);
 
         // {3}{R}{G}{W}: Transform Miles Morales. Activate only as a sorcery.
         this.getLeftHalfCard().addAbility(new ActivateAsSorceryActivatedAbility(

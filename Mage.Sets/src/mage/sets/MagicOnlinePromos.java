@@ -2458,7 +2458,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Simic Signet", 62391, Rarity.COMMON, mage.cards.s.SimicSignet.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sin Collector", 50112, Rarity.UNCOMMON, mage.cards.s.SinCollector.class));
         cards.add(new SetCardInfo("Sinkhole", 43566, Rarity.RARE, mage.cards.s.Sinkhole.class));
-        cards.add(new SetCardInfo("Sinner's Judgment", 95279, Rarity.MYTHIC, mage.cards.s.SinnersJudgment.class));
         cards.add(new SetCardInfo("Siphon Insight", 94066, Rarity.RARE, mage.cards.s.SiphonInsight.class));
         cards.add(new SetCardInfo("Sisay, Weatherlight Captain", 91211, Rarity.RARE, mage.cards.s.SisayWeatherlightCaptain.class, RETRO_ART));
         cards.add(new SetCardInfo("Skarrg Goliath", 47989, Rarity.RARE, mage.cards.s.SkarrgGoliath.class));

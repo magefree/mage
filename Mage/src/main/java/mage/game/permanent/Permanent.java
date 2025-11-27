@@ -479,6 +479,13 @@ public interface Permanent extends Card, Controllable {
 
     boolean wasRoomUnlockedOnCast();
 
+    /**
+     * used to reset the locked status of a room. Only used when copying a room
+     * or creating a token copy of a room permanent. Could most likely be removed
+     * after a designation class added.
+     */
+    void resetLockedStatus();
+
     boolean isLeftDoorUnlocked();
 
     boolean isRightDoorUnlocked();

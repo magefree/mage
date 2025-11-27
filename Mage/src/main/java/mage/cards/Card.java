@@ -1,5 +1,6 @@
 package mage.cards;
 
+import mage.MageInt;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Abilities;
@@ -72,6 +73,7 @@ public interface Card extends MageObject, Ownerable {
 
     SpellAbility getSecondFaceSpellAbility();
 
+    //TODO: remove after tdfc rework
     boolean isNightCard();
 
     default boolean meldsWith(Card card) {
@@ -249,6 +251,10 @@ public interface Card extends MageObject, Ownerable {
     FilterMana getColorIdentity();
 
     List<UUID> getAttachments();
+
+    void setPT(int power, int toughness);
+
+    void setPT(MageInt power, MageInt toughness);
 
     /**
      * @param attachment can be any object: card, permanent, token

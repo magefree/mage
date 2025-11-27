@@ -5,7 +5,7 @@ import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
 import mage.abilities.keyword.PrototypeAbility;
-import mage.cards.Card;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.game.Game;
@@ -91,9 +91,13 @@ public class CopyTokenFunction {
             copyToToken(target, sourceObj, game);
             CardUtil.copySetAndCardNumber(target, sourceObj);
             // second side
-            if (sourceObj.isTransformable()) {
+            if (sourceObj.isTransformable() && !(sourceObj instanceof DoubleFacedCardHalf)) {
                 copyToToken(target.getBackFace(), sourceObj.getSecondCardFace(), game);
                 CardUtil.copySetAndCardNumber(target.getBackFace(), sourceObj.getSecondCardFace());
+            } else if (sourceObj.isTransformable() && sourceObj instanceof DoubleFacedCardHalf) {
+                // double faced card
+                copyToToken(target.getBackFace(), ((DoubleFacedCardHalf) sourceObj).getOtherSide(), game);
+                CardUtil.copySetAndCardNumber(target.getBackFace(), ((DoubleFacedCardHalf) sourceObj).getOtherSide());
             }
 
             // apply prototyped status
@@ -104,6 +108,35 @@ public class CopyTokenFunction {
                         ((PrototypeAbility) ability).prototypePermanent(target, game);
                     }
                 }
+            }
+            return;
+        }
+
+        // from double faced card spell
+        if (source instanceof DoubleFacedCardHalf) {
+            DoubleFacedCardHalf sourceCard = (DoubleFacedCardHalf) source;
+            Card frontSide;
+            Card backSide = null;
+            if (sourceCard.isTransformable()) {
+                if (sourceCard.isBackSide()) {
+                    target.setEntersTransformed(true);
+                    frontSide = sourceCard.getOtherSide();
+                    backSide = sourceCard;
+                } else {
+                    frontSide = sourceCard;
+                    backSide = sourceCard.getOtherSide();
+                }
+            } else {
+                frontSide = sourceCard;
+            }
+            // main side
+            copyToToken(target, frontSide, game);
+            target.setCopySourceCard(sourceCard);
+            CardUtil.copySetAndCardNumber(target, frontSide);
+            // second side
+            if (backSide != null) {
+                copyToToken(target.getBackFace(), backSide, game);
+                CardUtil.copySetAndCardNumber(target, backSide);
             }
             return;
         }
@@ -121,8 +154,14 @@ public class CopyTokenFunction {
                 // must create back face??
                 throw new IllegalStateException("Wrong code usage: back face must be non null: " + target.getName() + " - " + target.getClass().getSimpleName());
             }
-            copyToToken(target.getBackFace(), source.getSecondCardFace(), game);
-            CardUtil.copySetAndCardNumber(target.getBackFace(), source.getSecondCardFace());
+            Card secondFace;
+            if (source instanceof DoubleFacedCard) {
+                secondFace = ((DoubleFacedCard) source).getRightHalfCard();
+            } else {
+                secondFace = source.getSecondCardFace();
+            }
+            copyToToken(target.getBackFace(), secondFace, game);
+            CardUtil.copySetAndCardNumber(target.getBackFace(), secondFace);
         }
     }
 

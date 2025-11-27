@@ -1261,8 +1261,8 @@ public final class CardUtil {
             permCard = card;
         } else if (card instanceof CardWithSpellOption) {
             permCard = card;
-        } else if (card instanceof ModalDoubleFacedCard) {
-            permCard = ((ModalDoubleFacedCard) card).getLeftHalfCard();
+        } else if (card instanceof DoubleFacedCard) {
+            permCard = ((DoubleFacedCard) card).getLeftHalfCard();
         } else {
             permCard = card;
         }
@@ -1294,8 +1294,8 @@ public final class CardUtil {
         // it's ok to return one name only cause NamePredicate can find same card by first name
         if (card instanceof SplitCard) {
             return ((SplitCard) card).getLeftHalfCard().getName();
-        } else if (card instanceof ModalDoubleFacedCard) {
-            return ((ModalDoubleFacedCard) card).getLeftHalfCard().getName();
+        } else if (card instanceof DoubleFacedCard) {
+            return ((DoubleFacedCard) card).getLeftHalfCard().getName();
         } else {
             return card.getName();
         }
@@ -1669,6 +1669,22 @@ public final class CardUtil {
             game.getState().setValue("PlayFromNotOwnHandZone" + rightHalfCard.getId(), Boolean.TRUE);
         }
 
+        // handle TDFC
+        if (card instanceof TransformingDoubleFacedCard) {
+            TransformingDoubleFacedCardHalf frontFace = ((TransformingDoubleFacedCard) card).getLeftHalfCard();
+            TransformingDoubleFacedCardHalf backFace = ((TransformingDoubleFacedCard) card).getRightHalfCard();
+
+            if (manaCost != null) {
+                // get additional cost if any
+                Costs<Cost> additionalCostsMDFCLeft = frontFace.getSpellAbility().getCosts();
+                // set alternative cost and any additional cost
+                player.setCastSourceIdWithAlternateMana(frontFace.getId(), manaCost, additionalCostsMDFCLeft, MageIdentifier.Default);
+            }
+
+            // allow just the front face
+            game.getState().setValue("PlayFromNotOwnHandZone" + frontFace.getId(), Boolean.TRUE);
+        }
+
         // handle adventure cards
         if (card instanceof CardWithSpellOption) {
             Card creatureCard = card.getMainCard();
@@ -1706,9 +1722,9 @@ public final class CardUtil {
             game.getState().setValue("PlayFromNotOwnHandZone" + leftHalfCard.getId(), null);
             game.getState().setValue("PlayFromNotOwnHandZone" + rightHalfCard.getId(), null);
         }
-        if (card instanceof ModalDoubleFacedCard) {
-            ModalDoubleFacedCardHalf leftHalfCard = ((ModalDoubleFacedCard) card).getLeftHalfCard();
-            ModalDoubleFacedCardHalf rightHalfCard = ((ModalDoubleFacedCard) card).getRightHalfCard();
+        if (card instanceof DoubleFacedCard) {
+            DoubleFacedCardHalf leftHalfCard = ((DoubleFacedCard) card).getLeftHalfCard();
+            DoubleFacedCardHalf rightHalfCard = ((DoubleFacedCard) card).getRightHalfCard();
             game.getState().setValue("PlayFromNotOwnHandZone" + leftHalfCard.getId(), null);
             game.getState().setValue("PlayFromNotOwnHandZone" + rightHalfCard.getId(), null);
         }
@@ -2100,8 +2116,8 @@ public final class CardUtil {
             res.add(mainCard);
             res.add(mainCard.getLeftHalfCard());
             res.add(mainCard.getRightHalfCard());
-        } else if (object instanceof ModalDoubleFacedCard || object instanceof ModalDoubleFacedCardHalf) {
-            ModalDoubleFacedCard mainCard = (ModalDoubleFacedCard) ((Card) object).getMainCard();
+        } else if (object instanceof DoubleFacedCard || object instanceof DoubleFacedCardHalf) {
+            DoubleFacedCard mainCard = (DoubleFacedCard) ((Card) object).getMainCard();
             res.add(mainCard);
             res.add(mainCard.getLeftHalfCard());
             res.add(mainCard.getRightHalfCard());

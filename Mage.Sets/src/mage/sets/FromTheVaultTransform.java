@@ -21,7 +21,6 @@ public final class FromTheVaultTransform extends ExpansionSet {
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Archangel Avacyn", 1, Rarity.MYTHIC, mage.cards.a.ArchangelAvacyn.class));
-        cards.add(new SetCardInfo("Avacyn, the Purifier", 1, Rarity.MYTHIC, mage.cards.a.AvacynThePurifier.class));
         cards.add(new SetCardInfo("Arguel's Blood Fast", 2, Rarity.MYTHIC, mage.cards.a.ArguelsBloodFast.class));
         cards.add(new SetCardInfo("Temple of Aclazotz", 2, Rarity.MYTHIC, mage.cards.t.TempleOfAclazotz.class));
         cards.add(new SetCardInfo("Arlinn Kord", 3, Rarity.MYTHIC, mage.cards.a.ArlinnKord.class));
@@ -40,7 +39,6 @@ public final class FromTheVaultTransform extends ExpansionSet {
         cards.add(new SetCardInfo("Garruk, the Veil-Cursed", 9, Rarity.MYTHIC, mage.cards.g.GarrukTheVeilCursed.class));
         cards.add(new SetCardInfo("Gisela, the Broken Blade", 10, Rarity.MYTHIC, mage.cards.g.GiselaTheBrokenBlade.class));
         cards.add(new SetCardInfo("Huntmaster of the Fells", 11, Rarity.MYTHIC, mage.cards.h.HuntmasterOfTheFells.class));
-        cards.add(new SetCardInfo("Ravager of the Fells", 11, Rarity.MYTHIC, mage.cards.r.RavagerOfTheFells.class));
         cards.add(new SetCardInfo("Jace, Vryn's Prodigy", 12, Rarity.MYTHIC, mage.cards.j.JaceVrynsProdigy.class));
         cards.add(new SetCardInfo("Jace, Telepath Unbound", 12, Rarity.MYTHIC, mage.cards.j.JaceTelepathUnbound.class));
         cards.add(new SetCardInfo("Kytheon, Hero of Akros", 13, Rarity.MYTHIC, mage.cards.k.KytheonHeroOfAkros.class));

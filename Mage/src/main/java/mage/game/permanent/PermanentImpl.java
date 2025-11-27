@@ -17,6 +17,7 @@ import mage.abilities.hint.HintUtils;
 import mage.abilities.keyword.*;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.abilities.common.RoomAbility;
 import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.CounterType;
@@ -706,11 +707,14 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 + CardUtil.getSourceLogName(game, source, this.getId()));
         this.setTransformed(!this.transformed);
         this.transformCount++;
+        initOtherFace(game);
         game.applyEffects(); // not process action - no firing of simultaneous events yet
         this.replaceEvent(EventType.TRANSFORMING, game);
         game.addSimultaneousEvent(GameEvent.getEvent(EventType.TRANSFORMED, this.getId(), this.getControllerId()));
         return true;
     }
+
+    protected abstract void initOtherFace(Game game);
 
     @Override
     public int getTransformCount() {
@@ -2100,6 +2104,12 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
+    public void resetLockedStatus() {
+        leftHalfUnlocked = false;
+        rightHalfUnlocked = false;
+    }
+
+    @Override
     public boolean isLeftDoorUnlocked() {
         return leftHalfUnlocked;
     }
@@ -2141,15 +2151,27 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             rightHalfUnlocked = true;
         }
 
-        // Fire door unlock event
+        // Update intrinsic stats/abilities from unlocking
+        // find the RoomCharacteristicsEffect applied by this permanent's ability
+        Abilities<Ability> abilities = this.getAbilities(game);
+        for (Ability ability : abilities) {
+            if (ability instanceof RoomAbility) {
+                ((RoomAbility) ability).restoreUnlockedStats(game, this);
+                break;
+            }
+        }
+
+        // Create door unlock event
         GameEvent event = new GameEvent(GameEvent.EventType.DOOR_UNLOCKED, getId(), source, source.getControllerId());
         event.setFlag(isLeftDoor);
-        game.fireEvent(event);
 
         // Check if room is now fully unlocked
         boolean otherDoorUnlocked = isLeftDoor ? rightHalfUnlocked : leftHalfUnlocked;
         if (otherDoorUnlocked) {
-            game.fireEvent(new GameEvent(EventType.ROOM_FULLY_UNLOCKED, getId(), source, source.getControllerId()));
+            game.addSimultaneousEvent(event);
+            game.addSimultaneousEvent(new GameEvent(EventType.ROOM_FULLY_UNLOCKED, getId(), source, source.getControllerId()));
+        } else {
+            game.fireEvent(event);
         }
 
         return true;
