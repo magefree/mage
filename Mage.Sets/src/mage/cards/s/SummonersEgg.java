@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
@@ -17,6 +16,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -72,9 +73,8 @@ class SummonersEggImprintEffect extends OneShotEffect {
                         && controller.choose(Outcome.Benefit, controller.getHand(), target, source, game)) {
                     Card card = controller.getHand().get(target.getFirstTarget(), game);
                     if (card != null) {
-                        card.setFaceDown(true, game);
-                        controller.moveCardsToExile(card, source, game, false, source.getSourceId(), sourcePermanent.getIdName() + " (Imprint)");
-                        card.setFaceDown(true, game);
+                        CardUtil.moveCardsToExileFaceDown(game, source, controller, card,
+                                source.getSourceId(), sourcePermanent.getIdName() + " (Imprint)", false);
                         sourcePermanent.imprint(card.getId(), game);
                         sourcePermanent.addInfo("imprint", CardUtil.addToolTipMarkTags("[Imprinted card]"), game);
                     }

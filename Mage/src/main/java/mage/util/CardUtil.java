@@ -33,6 +33,7 @@ import mage.filter.predicate.card.OwnerIdPredicate;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.CardState;
+import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.GameState;
 import mage.game.command.Commander;
@@ -2335,6 +2336,56 @@ public final class CardUtil {
         Effect effect = new AddCountersTargetEffect(counter);
         effect.setTargetPointer(new FixedTarget(card.getMainCard(), game));
         effect.apply(game, source);
+        return true;
+    }
+
+    /**
+     * Move a card to exile face down and let the controller look at it
+     * @param game
+     * @param source
+     * @param controller
+     * @param card
+     * @return true if card was moved to exile
+     */
+
+    public static boolean moveCardsToExileFaceDown(Game game, Ability source, Player controller, Card card, boolean canLookAtCard) {
+        UUID exileId = getExileZoneId(game, source);
+        String exileName = getSourceName(game, source);
+        return moveCardsToExileFaceDown(game, source, controller, new HashSet<>(Collections.singleton(card)), exileId, exileName, canLookAtCard);
+    }
+
+    public static boolean moveCardsToExileFaceDown(Game game, Ability source, Player controller, Card card, UUID exileId, String exileName, boolean canLookAtCard) {
+        return moveCardsToExileFaceDown(game, source, controller, new HashSet<>(Collections.singleton(card)), exileId, exileName, canLookAtCard);
+    }
+
+    public static boolean moveCardsToExileFaceDown(Game game, Ability source, Player controller, Set<Card> cards, boolean canLookAtCard) {
+        UUID zoneId = getExileZoneId(game, source);
+        String zoneName = getSourceName(game, source);
+        return moveCardsToExileFaceDown(game, source, controller, cards, zoneId, zoneName, canLookAtCard);
+    }
+    /**
+     * Move multiple cards to exile face down and optionally let the controller look at it
+     *
+     * @param game
+     * @param source        ability that exiles the card
+     * @param controller    player moving the card
+     * @param cards         cards to exile
+     * @param zoneId        zone to exile the card to
+     * @param zoneName      name of the zone to exile the card to
+     * @param canLookAtCard if the controller can look at the card
+     * @return true if card was moved to exile
+     */
+    public static boolean moveCardsToExileFaceDown(Game game, Ability source, Player controller, Set<Card> cards, UUID zoneId, String zoneName, boolean canLookAtCard) {
+        if (!controller.moveCardsToExile(cards, source, game, false, zoneId, zoneName)) {
+            return false;
+        }
+        ExileZone exile = game.getExile().getExileZone(zoneId);
+        cards.forEach(card -> {
+            card.setFaceDown(true, game);
+            if (canLookAtCard) {
+                exile.letPlayerSeeCards(controller.getId(), card);
+            }
+        });
         return true;
     }
 

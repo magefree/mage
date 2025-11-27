@@ -2,11 +2,10 @@
 
 package mage.view;
 
-import java.util.UUID;
 import mage.cards.Card;
 import mage.game.ExileZone;
 import mage.game.Game;
-import mage.util.CardUtil;
+import java.util.UUID;
 
 /**
  *
@@ -22,7 +21,7 @@ public class ExileView extends CardsView {
         this.name = exileZone.getName();
         this.id = exileZone.getId();
         for (Card card: exileZone.getCards(game)) {
-            this.put(card.getId(), new CardView(card, game, CardUtil.canShowAsControlled(card, createdForPlayerId)));
+            this.put(card.getId(), new CardView(card, game, exileZone.isPlayerAllowedToSeeCard(createdForPlayerId, card)));
         }
     }
 

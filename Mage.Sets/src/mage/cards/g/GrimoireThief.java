@@ -156,6 +156,7 @@ class GrimoireThiefLookEffect extends AsThoughEffectImpl {
                                 if (!exileZones.contains(exileZone.getId())) {
                                     return false;
                                 }
+                                exileZone.letPlayerSeeCards(controller.getId(), card);
                             }
                         }
                         return true;
