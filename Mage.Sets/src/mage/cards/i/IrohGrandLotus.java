@@ -13,6 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterInstantOrSorceryCard;
+import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -58,6 +59,10 @@ class IrohGrandLotusEffect extends ContinuousEffectImpl {
     private static final FilterCard filterNonLesson = new FilterInstantOrSorceryCard();
     private static final FilterCard filterLesson = new FilterCard(SubType.LESSON);
     private final boolean isLesson;
+
+    static {
+        filterNonLesson.add(Predicates.not(SubType.LESSON.getPredicate()));
+    }
 
     IrohGrandLotusEffect(boolean isLesson) {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
