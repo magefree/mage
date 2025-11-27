@@ -329,7 +329,8 @@ public class VerifyCardDataTest {
         checkWrongAbilitiesTextStart();
 
         int cardIndex = 0;
-        for (Card card : CardScanner.getAllCards()) {
+        List<Card> allCards = CardScanner.getAllCards(true, true, false);
+        for (Card card : allCards) {
             cardIndex++;
             if (card instanceof CardWithHalves) {
                 check(((CardWithHalves) card).getLeftHalfCard(), cardIndex);
@@ -346,7 +347,7 @@ public class VerifyCardDataTest {
 
         printMessages(outputMessages);
         if (failed > 0) {
-            Assert.fail(String.format("found %d errors in %d cards verify (see errors list above)", failed, CardScanner.getAllCards().size()));
+            Assert.fail(String.format("found %d errors in %d cards verify (see errors list above)", failed, allCards.size()));
         }
     }
 
@@ -2289,6 +2290,20 @@ public class VerifyCardDataTest {
         // special check: backup ability should be set up correctly
         if (card.getAbilities().containsClass(BackupAbility.class) && CardUtil.castStream(card.getAbilities().stream(), BackupAbility.class).noneMatch(BackupAbility::hasAbilities)) {
             fail(card, "abilities", "card has backup but is missing this.addAbility(backupAbility)");
+        }
+
+        // special check: DFC main card should not have abilities
+        if (card instanceof DoubleFacedCardHalf && !card.getMainCard().getInitAbilities().isEmpty()) {
+            fail(card, "abilities", "transforming double-faced card should not have abilities on the main card");
+        }
+
+        // TODO: remove after transform ability removed
+        // special check: new DFC implementation should not have transform ability
+        if (card instanceof DoubleFacedCardHalf && card.getAbilities().containsClass(TransformAbility.class)
+                && !card.getAbilities().containsClass(DayboundAbility.class)
+                && !card.getAbilities().containsClass(CraftAbility.class)
+                && !card.getAbilities().containsClass(SiegeAbility.class)) {
+            fail(card, "abilities", "new transforming double-faced card should not have transform ability");
         }
 
         // special check: Werewolves front ability should only be on front and vice versa

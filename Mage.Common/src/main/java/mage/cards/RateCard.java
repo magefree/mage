@@ -61,7 +61,7 @@ public final class RateCard {
     public static void bootstrapCardsAndRatings() {
         // preload cards and ratings
         log.info("Loading cards and rating...");
-        List<Card> cards = CardScanner.getAllCards(false);
+        List<Card> cards = CardScanner.getAllCards(false, true, true);
         for (Card card : cards) {
             RateCard.rateCard(card, null);
         }
