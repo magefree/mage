@@ -2788,8 +2788,12 @@ public class VerifyCardDataTest {
                 // format to print main card then spell card
                 card.getInitAbilities().getRules().forEach(this::printAbilityText);
                 ((CardWithSpellOption) card).getSpellCard().getAbilities().getRules().forEach(r -> printAbilityText(r.replace("&mdash; ", "\n")));
-            } else if (card instanceof SplitCard || card instanceof ModalDoubleFacedCard) {
-                card.getAbilities().getRules().forEach(this::printAbilityText);
+            } else if (card instanceof SplitCard || card instanceof DoubleFacedCard) {
+                // format to print each side separately
+                System.out.println("=== " + ((CardWithHalves) card).getLeftHalfCard().getName() + " ===");
+                ((CardWithHalves) card).getLeftHalfCard().getAbilities().getRules().forEach(this::printAbilityText);
+                System.out.println("=== " + ((CardWithHalves) card).getRightHalfCard().getName() + " ===");
+                ((CardWithHalves) card).getRightHalfCard().getAbilities().getRules().forEach(this::printAbilityText);
             } else {
                 card.getRules().forEach(this::printAbilityText);
             }
@@ -2797,9 +2801,17 @@ public class VerifyCardDataTest {
             // ref card
             System.out.println();
             MtgJsonCard refMain = MtgJsonService.card(card.getName());
-            MtgJsonCard refSpell = null;
+            Card cardMain = card;
+            MtgJsonCard refTwo = null;
+            Card cardTwo = null;
             if (card instanceof CardWithSpellOption) {
-                refSpell = MtgJsonService.card(((CardWithSpellOption) card).getSpellCard().getName());
+                refTwo = MtgJsonService.card(((CardWithSpellOption) card).getSpellCard().getName());
+                cardTwo = ((CardWithSpellOption) card).getSpellCard();
+            } else if (card instanceof CardWithHalves) {
+                refMain = MtgJsonService.card(((CardWithHalves) card).getLeftHalfCard().getName());
+                cardMain = ((CardWithHalves) card).getLeftHalfCard();
+                refTwo = MtgJsonService.card(((CardWithHalves) card).getRightHalfCard().getName());
+                cardTwo = ((CardWithHalves) card).getRightHalfCard();
             }
             if (refMain == null) {
                 refMain = MtgJsonService.cardByClassName(foundClassName);
@@ -2807,9 +2819,9 @@ public class VerifyCardDataTest {
             if (refMain != null) {
                 System.out.println("ref: " + refMain.getNameAsFace() + " " + refMain.manaCost);
                 System.out.println(refMain.text);
-                if (refSpell != null) {
-                    System.out.println(refSpell.getNameAsFace() + " " + refSpell.manaCost);
-                    System.out.println(refSpell.text);
+                if (refTwo != null) {
+                    System.out.println("ref: " + refTwo.getNameAsFace() + " " + refTwo.manaCost);
+                    System.out.println(refTwo.text);
                 }
             } else {
                 System.out.println("WARNING, can't find mtgjson ref for " + card.getName());
@@ -2817,9 +2829,10 @@ public class VerifyCardDataTest {
 
             // additional check to simulate diff in rules
             if (refMain != null) {
-                checkWrongAbilitiesText(card, refMain, 0, true);
-            } else if (refSpell != null) {
-                checkWrongAbilitiesText(((CardWithSpellOption) card).getSpellCard(), refSpell, 0, true);
+                checkWrongAbilitiesText(cardMain, refMain, 0, true);
+            }
+            if (refTwo != null) {
+                checkWrongAbilitiesText(cardTwo, refTwo, 0, true);
             }
         });
     }
