@@ -234,6 +234,8 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("Katara, the Fearless", 350, Rarity.RARE, mage.cards.k.KataraTheFearless.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Katara, the Fearless", 361, Rarity.RARE, mage.cards.k.KataraTheFearless.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Knowledge Seeker", 60, Rarity.UNCOMMON, mage.cards.k.KnowledgeSeeker.class));
+        cards.add(new SetCardInfo("Koh, the Face Stealer", 107, Rarity.MYTHIC, mage.cards.k.KohTheFaceStealer.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Koh, the Face Stealer", 322, Rarity.MYTHIC, mage.cards.k.KohTheFaceStealer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kyoshi Battle Fan", 257, Rarity.COMMON, mage.cards.k.KyoshiBattleFan.class));
         cards.add(new SetCardInfo("Kyoshi Island Plaza", 184, Rarity.UNCOMMON, mage.cards.k.KyoshiIslandPlaza.class));
         cards.add(new SetCardInfo("Kyoshi Village", 271, Rarity.COMMON, mage.cards.k.KyoshiVillage.class));
