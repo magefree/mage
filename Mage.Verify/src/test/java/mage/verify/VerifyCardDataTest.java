@@ -329,7 +329,7 @@ public class VerifyCardDataTest {
         checkWrongAbilitiesTextStart();
 
         int cardIndex = 0;
-        List<Card> allCards = CardScanner.getAllCards(true, true, false);
+        List<Card> allCards = CardScanner.getAllCards();
         for (Card card : allCards) {
             cardIndex++;
             if (card instanceof CardWithHalves) {

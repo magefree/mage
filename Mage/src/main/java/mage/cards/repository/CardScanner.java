@@ -3,7 +3,10 @@ package mage.cards.repository;
 import mage.cards.*;
 import org.apache.log4j.Logger;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * @author North
@@ -80,28 +83,17 @@ public final class CardScanner {
     }
 
     public static List<Card> getAllCards() {
-        return getAllCards(true, true, true);
+        return getAllCards(true);
     }
 
-    public static List<Card> getAllCards(boolean ignoreCustomSets, boolean uniqueByName, boolean uniqueBySet) {
-        Set<String> uniqueCardNames = new HashSet<>();
+    public static List<Card> getAllCards(boolean ignoreCustomSets) {
         Collection<ExpansionSet> sets = Sets.getInstance().values();
         List<Card> cards = new ArrayList<>();
         for (ExpansionSet set : sets) {
             if (ignoreCustomSets && set.getSetType().isCustomSet()) {
                 continue;
             }
-            if (uniqueBySet) {
-                uniqueCardNames.clear();
-            }
             for (ExpansionSet.SetCardInfo setInfo : set.getSetCardInfo()) {
-                if (uniqueByName) {
-                    String cardName = setInfo.getName();
-                    if (uniqueCardNames.contains(cardName)) {
-                        continue;
-                    }
-                    uniqueCardNames.add(cardName);
-                }
                 cards.add(CardImpl.createCard(setInfo.getCardClass(), new CardSetInfo(setInfo.getName(), set.getCode(),
                         setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo())));
             }
