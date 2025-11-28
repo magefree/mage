@@ -1,45 +1,54 @@
 package mage.cards.d;
 
-import java.util.UUID;
-
-import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.WerewolfBackTriggeredAbility;
 import mage.abilities.common.WerewolfFrontTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.keyword.TransformAbility;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.PutCards;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
 
+import java.util.UUID;
+
 /**
  * @author fireshoes
  */
-public final class DuskwatchRecruiter extends CardImpl {
+public final class DuskwatchRecruiter extends TransformingDoubleFacedCard {
 
     public DuskwatchRecruiter(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.WARRIOR);
-        this.subtype.add(SubType.WEREWOLF);
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.WARRIOR, SubType.WEREWOLF}, "{1}{G}",
+                "Krallenhorde Howler",
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.WEREWOLF}, "G");
 
-        this.secondSideCardClazz = mage.cards.k.KrallenhordeHowler.class;
+        // Duskwatch Recruiter
+        this.getLeftHalfCard().setPT(2, 2);
 
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-        // {2}{G}: Look at the top three cards of your library. You may reveal a creature card from among them and put it into your hand.
-        // Put the rest on the bottom of your library in any order.
-        this.addAbility(new SimpleActivatedAbility(
+        // {2}{G}: Look at the top three cards of your library. You may reveal a creature card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
+        Ability ability = new SimpleActivatedAbility(
                 new LookLibraryAndPickControllerEffect(3, 1, StaticFilters.FILTER_CARD_CREATURE_A, PutCards.HAND, PutCards.BOTTOM_ANY),
-                new ManaCostsImpl<>("{2}{G}")));
+                new ManaCostsImpl<>("{2}{G}")
+        );
+        this.getLeftHalfCard().addAbility(ability);
 
         // At the beginning of each upkeep, if no spells were cast last turn, transform Duskwatch Recruiter.
-        this.addAbility(new TransformAbility());
-        this.addAbility(new WerewolfFrontTriggeredAbility());
+        this.getLeftHalfCard().addAbility(new WerewolfFrontTriggeredAbility());
+
+        // Krallenhorde Howler
+        this.getRightHalfCard().setPT(3, 3);
+
+        // Creature spells you cast cost {1} less to cast.
+        this.getRightHalfCard().addAbility(new mage.abilities.common.SimpleStaticAbility(
+                new mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect(new mage.filter.common.FilterCreatureCard("creature spells"), 1)
+        ));
+
+        // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Krallenhorde Howler.
+        this.getRightHalfCard().addAbility(new WerewolfBackTriggeredAbility());
     }
 
     private DuskwatchRecruiter(final DuskwatchRecruiter card) {

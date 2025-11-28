@@ -163,7 +163,6 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Demonic Taskmaster", 377, Rarity.UNCOMMON, mage.cards.d.DemonicTaskmaster.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Demonmail Hauberk", 261, Rarity.UNCOMMON, mage.cards.d.DemonmailHauberk.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Demonmail Hauberk", 442, Rarity.UNCOMMON, mage.cards.d.DemonmailHauberk.class, RETRO_ART_USE_VARIOUS));
-        cards.add(new SetCardInfo("Depraved Harvester", 105, Rarity.COMMON, mage.cards.d.DepravedHarvester.class));
         cards.add(new SetCardInfo("Deranged Assistant", 61, Rarity.COMMON, mage.cards.d.DerangedAssistant.class));
         cards.add(new SetCardInfo("Deserted Beach", 276, Rarity.RARE, mage.cards.d.DesertedBeach.class));
         cards.add(new SetCardInfo("Desperate Farmer", 105, Rarity.COMMON, mage.cards.d.DesperateFarmer.class));
@@ -295,8 +294,6 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Infernal Grasp", 119, Rarity.UNCOMMON, mage.cards.i.InfernalGrasp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Infernal Grasp", 310, Rarity.UNCOMMON, mage.cards.i.InfernalGrasp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Infernal Grasp", 385, Rarity.UNCOMMON, mage.cards.i.InfernalGrasp.class,RETRO_ART_USE_VARIOUS));
-        cards.add(new SetCardInfo("Insectile Aberration", 457, Rarity.COMMON, mage.cards.i.InsectileAberration.class, RETRO_ART_USE_VARIOUS));
-        cards.add(new SetCardInfo("Insectile Aberration", 60, Rarity.COMMON, mage.cards.i.InsectileAberration.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Inspiring Captain", 28, Rarity.COMMON, mage.cards.i.InspiringCaptain.class));
         cards.add(new SetCardInfo("Intangible Virtue", 29, Rarity.UNCOMMON, mage.cards.i.IntangibleVirtue.class));
         cards.add(new SetCardInfo("Intrepid Provisioner", 205, Rarity.COMMON, mage.cards.i.IntrepidProvisioner.class));
@@ -310,9 +307,6 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Join the Dance", 432, Rarity.UNCOMMON, mage.cards.j.JoinTheDance.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Killing Wave", 121, Rarity.UNCOMMON, mage.cards.k.KillingWave.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Killing Wave", 386, Rarity.UNCOMMON, mage.cards.k.KillingWave.class,RETRO_ART_USE_VARIOUS));
-        cards.add(new SetCardInfo("Krallenhorde Howler", 193, Rarity.UNCOMMON, mage.cards.k.KrallenhordeHowler.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Krallenhorde Howler", 323, Rarity.UNCOMMON, mage.cards.k.KrallenhordeHowler.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Krallenhorde Howler", 467, Rarity.UNCOMMON, mage.cards.k.KrallenhordeHowler.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Kruin Outlaw", 161, Rarity.RARE, mage.cards.k.KruinOutlaw.class));
         cards.add(new SetCardInfo("Laboratory Maniac", 304, Rarity.UNCOMMON, mage.cards.l.LaboratoryManiac.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Laboratory Maniac", 359, Rarity.UNCOMMON, mage.cards.l.LaboratoryManiac.class, RETRO_ART_USE_VARIOUS));

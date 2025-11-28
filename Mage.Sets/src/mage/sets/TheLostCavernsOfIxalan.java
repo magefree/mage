@@ -149,8 +149,6 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Didact Echo", 53, Rarity.COMMON, mage.cards.d.DidactEcho.class));
         cards.add(new SetCardInfo("Digsite Conservator", 252, Rarity.UNCOMMON, mage.cards.d.DigsiteConservator.class));
         cards.add(new SetCardInfo("Dinotomaton", 144, Rarity.COMMON, mage.cards.d.Dinotomaton.class));
-        cards.add(new SetCardInfo("Dire Blunderbuss", 145, Rarity.RARE, mage.cards.d.DireBlunderbuss.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Dire Blunderbuss", 374, Rarity.RARE, mage.cards.d.DireBlunderbuss.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dire Flail", 145, Rarity.RARE, mage.cards.d.DireFlail.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dire Flail", 374, Rarity.RARE, mage.cards.d.DireFlail.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Disruptor Wanderglyph", 253, Rarity.COMMON, mage.cards.d.DisruptorWanderglyph.class));
@@ -180,7 +178,6 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Frilled Cave-Wurm", 57, Rarity.COMMON, mage.cards.f.FrilledCaveWurm.class));
         cards.add(new SetCardInfo("Fungal Fortitude", 106, Rarity.COMMON, mage.cards.f.FungalFortitude.class));
         cards.add(new SetCardInfo("Gargantuan Leech", 107, Rarity.UNCOMMON, mage.cards.g.GargantuanLeech.class));
-        cards.add(new SetCardInfo("Geode Grotto", 146, Rarity.UNCOMMON, mage.cards.g.GeodeGrotto.class));
         cards.add(new SetCardInfo("Geological Appraiser", 150, Rarity.UNCOMMON, mage.cards.g.GeologicalAppraiser.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Geological Appraiser", 407, Rarity.UNCOMMON, mage.cards.g.GeologicalAppraiser.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Get Lost", 14, Rarity.RARE, mage.cards.g.GetLost.class, NON_FULL_USE_VARIOUS));

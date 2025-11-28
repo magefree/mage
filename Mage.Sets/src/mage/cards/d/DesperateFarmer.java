@@ -1,12 +1,10 @@
 package mage.cards.d;
 
-import mage.MageInt;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.LifelinkAbility;
-import mage.abilities.keyword.TransformAbility;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
@@ -16,26 +14,30 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class DesperateFarmer extends CardImpl {
+public final class DesperateFarmer extends TransformingDoubleFacedCard {
 
     public DesperateFarmer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.PEASANT}, "{2}{B}",
+                "Depraved Harvester",
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.KNIGHT}, "B");
 
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.PEASANT);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-        this.secondSideCardClazz = mage.cards.d.DepravedHarvester.class;
+        // Desperate Farmer
+        this.getLeftHalfCard().setPT(2, 2);
 
         // Lifelink
-        this.addAbility(LifelinkAbility.getInstance());
+        this.getLeftHalfCard().addAbility(LifelinkAbility.getInstance());
 
         // When another creature you control dies, transform Desperate Farmer.
-        this.addAbility(new TransformAbility());
-        this.addAbility(new DiesCreatureTriggeredAbility(
-                new TransformSourceEffect(), false,
-                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE
+        this.getLeftHalfCard().addAbility(new DiesCreatureTriggeredAbility(
+                new TransformSourceEffect(), false, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE
         ).setTriggerPhrase("When another creature you control dies, "));
+
+        // Depraved Harvester
+        this.getRightHalfCard().setPT(4, 3);
+
+        // Lifelink
+        this.getRightHalfCard().addAbility(LifelinkAbility.getInstance());
     }
 
     private DesperateFarmer(final DesperateFarmer card) {

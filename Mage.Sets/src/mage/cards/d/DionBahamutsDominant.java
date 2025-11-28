@@ -1,6 +1,5 @@
 package mage.cards.d;
 
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -14,10 +13,10 @@ import mage.abilities.effects.common.ExileAndReturnSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.TransformAbility;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.*;
+import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.game.permanent.token.WaylayToken;
 
@@ -26,20 +25,18 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class DionBahamutsDominant extends CardImpl {
+public final class DionBahamutsDominant extends TransformingDoubleFacedCard {
 
     private static final FilterPermanent filter = new FilterPermanent(SubType.KNIGHT, "");
 
     public DionBahamutsDominant(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
+        super(ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.NOBLE, SubType.KNIGHT}, "{3}{W}",
+                "Bahamut, Warden of Light",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, new SubType[]{SubType.SAGA, SubType.DRAGON}, "W");
 
-        this.supertype.add(SuperType.LEGENDARY);
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.NOBLE);
-        this.subtype.add(SubType.KNIGHT);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-        this.secondSideCardClazz = mage.cards.b.BahamutWardenOfLight.class;
+        // Dion, Bahamut's Dominant
+        this.getLeftHalfCard().setPT(3, 3);
 
         // Dragonfire Dive -- During your turn, Dion and other Knights you control have flying.
         Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
@@ -50,18 +47,47 @@ public final class DionBahamutsDominant extends CardImpl {
                 new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, filter),
                 MyTurnCondition.instance, "and other Knights you control have flying"
         ));
-        this.addAbility(ability.withFlavorWord("Dragonfire Dive"));
+        this.getLeftHalfCard().addAbility(ability.withFlavorWord("Dragonfire Dive"));
 
         // When Dion enters, create a 2/2 white Knight creature token.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new WaylayToken())));
+        this.getLeftHalfCard().addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new WaylayToken())));
 
         // {4}{W}{W}, {T}: Exile Dion, then return it to the battlefield transformed under its owner's control. Activate only as a sorcery.
-        this.addAbility(new TransformAbility());
-        ability = new ActivateAsSorceryActivatedAbility(
+        Ability ability2 = new ActivateAsSorceryActivatedAbility(
                 new ExileAndReturnSourceEffect(PutCards.BATTLEFIELD_TRANSFORMED), new ManaCostsImpl<>("{4}{W}{W}")
         );
-        ability.addCost(new TapSourceCost());
-        this.addAbility(ability);
+        ability2.addCost(new TapSourceCost());
+        this.getLeftHalfCard().addAbility(ability2);
+
+        // Bahamut, Warden of Light
+        this.getRightHalfCard().setPT(5, 5);
+
+        // (As this Saga enters and after your draw step, add a lore counter.)
+        mage.abilities.common.SagaAbility sagaAbility = new mage.abilities.common.SagaAbility(this.getRightHalfCard());
+
+        // I, II -- Wings of Light -- Put a +1/+1 counter on each other creature you control. Those creatures gain flying until end of turn.
+        sagaAbility.addChapterEffect(this.getRightHalfCard(), SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_II, ability3 -> {
+            ability3.addEffect(new mage.abilities.effects.common.counter.AddCountersAllEffect(
+                    CounterType.P1P1.createInstance(), mage.filter.StaticFilters.FILTER_OTHER_CONTROLLED_CREATURE
+            ));
+            ability3.addEffect(new mage.abilities.effects.common.continuous.GainAbilityControlledEffect(
+                    FlyingAbility.getInstance(), Duration.EndOfTurn,
+                    mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE
+            ).setText("Those creatures gain flying until end of turn"));
+            ability3.withFlavorWord("Wings of Light");
+        });
+
+        // III -- Gigaflare -- Destroy target permanent. Exile Bahamut, then return it to the battlefield.
+        sagaAbility.addChapterEffect(this.getRightHalfCard(), SagaChapter.CHAPTER_III, ability4 -> {
+            ability4.addEffect(new mage.abilities.effects.common.DestroyTargetEffect());
+            ability4.addEffect(new mage.abilities.effects.common.ExileSourceAndReturnFaceUpEffect());
+            ability4.addTarget(new mage.target.TargetPermanent());
+            ability4.withFlavorWord("Gigaflare");
+        });
+        this.getRightHalfCard().addAbility(sagaAbility);
+
+        // Flying
+        this.getRightHalfCard().addAbility(FlyingAbility.getInstance());
     }
 
     private DionBahamutsDominant(final DionBahamutsDominant card) {

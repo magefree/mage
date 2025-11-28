@@ -158,7 +158,6 @@ public final class Innistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Hysterical Blindness", 59, Rarity.COMMON, mage.cards.h.HystericalBlindness.class));
         cards.add(new SetCardInfo("Infernal Plunge", 148, Rarity.COMMON, mage.cards.i.InfernalPlunge.class));
         cards.add(new SetCardInfo("Inquisitor's Flail", 227, Rarity.UNCOMMON, mage.cards.i.InquisitorsFlail.class));
-        cards.add(new SetCardInfo("Insectile Aberration", 51, Rarity.COMMON, mage.cards.i.InsectileAberration.class));
         cards.add(new SetCardInfo("Instigator Gang", 149, Rarity.RARE, mage.cards.i.InstigatorGang.class));
         cards.add(new SetCardInfo("Intangible Virtue", 19, Rarity.UNCOMMON, mage.cards.i.IntangibleVirtue.class));
         cards.add(new SetCardInfo("Into the Maw of Hell", 150, Rarity.UNCOMMON, mage.cards.i.IntoTheMawOfHell.class));
@@ -215,7 +214,6 @@ public final class Innistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Night Revelers", 153, Rarity.COMMON, mage.cards.n.NightRevelers.class));
         cards.add(new SetCardInfo("Night Terrors", 111, Rarity.COMMON, mage.cards.n.NightTerrors.class));
         cards.add(new SetCardInfo("Nightbird's Clutches", 154, Rarity.COMMON, mage.cards.n.NightbirdsClutches.class));
-        cards.add(new SetCardInfo("Nightfall Predator", 176, Rarity.RARE, mage.cards.n.NightfallPredator.class));
         cards.add(new SetCardInfo("Olivia Voldaren", 215, Rarity.MYTHIC, mage.cards.o.OliviaVoldaren.class));
         cards.add(new SetCardInfo("One-Eyed Scarecrow", 230, Rarity.COMMON, mage.cards.o.OneEyedScarecrow.class));
         cards.add(new SetCardInfo("Orchard Spirit", 198, Rarity.COMMON, mage.cards.o.OrchardSpirit.class));

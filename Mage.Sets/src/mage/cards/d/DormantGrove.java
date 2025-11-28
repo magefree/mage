@@ -1,47 +1,58 @@
 package mage.cards.d;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
-import mage.abilities.keyword.TransformAbility;
-import mage.cards.CardImpl;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author weirddan455
  */
-public final class DormantGrove extends CardImpl {
+public final class DormantGrove extends TransformingDoubleFacedCard {
 
     public DormantGrove(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.ENCHANTMENT}, new SubType[]{}, "{3}{G}",
+                "Gnarled Grovestrider",
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.TREEFOLK}, "G");
 
-        this.secondSideCardClazz = mage.cards.g.GnarledGrovestrider.class;
-
+        // Dormant Grove
         // At the beginning of combat on your turn, put a +1/+1 counter on target creature you control.
         // Then if that creature has toughness 6 or greater, transform Dormant Grove.
-        this.addAbility(new TransformAbility());
-
-        Ability ability = new BeginningOfCombatTriggeredAbility(
-                new AddCountersTargetEffect(CounterType.P1P1.createInstance())
-        );
+        Ability ability = new BeginningOfCombatTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
         ability.addEffect(new ConditionalOneShotEffect(
                 new TransformSourceEffect(),
                 DormatGroveCondition.instance,
                 "Then if that creature has toughness 6 or greater, transform {this}"
         ));
         ability.addTarget(new TargetControlledCreaturePermanent());
-        this.addAbility(ability);
+        this.getLeftHalfCard().addAbility(ability);
+
+        // Gnarled Grovestrider
+        this.getRightHalfCard().setPT(3, 6);
+
+        // Vigilance
+        this.getRightHalfCard().addAbility(mage.abilities.keyword.VigilanceAbility.getInstance());
+
+        // Other creatures you control have vigilance.
+        this.getRightHalfCard().addAbility(new mage.abilities.common.SimpleStaticAbility(new mage.abilities.effects.common.continuous.GainAbilityControlledEffect(
+                mage.abilities.keyword.VigilanceAbility.getInstance(), Duration.WhileOnBattlefield,
+                mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES, true
+        )));
     }
 
     private DormantGrove(final DormantGrove card) {

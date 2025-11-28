@@ -724,7 +724,6 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Thought-Knot Seer", 720, Rarity.RARE, mage.cards.t.ThoughtKnotSeer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Diabolic Tutor", 721, Rarity.RARE, mage.cards.d.DiabolicTutor.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Delver of Secrets", 722, Rarity.RARE, mage.cards.d.DelverOfSecrets.class));
-        cards.add(new SetCardInfo("Insectile Aberration", 722, Rarity.RARE, mage.cards.i.InsectileAberration.class));
         cards.add(new SetCardInfo("Brainstorm", 723, Rarity.RARE, mage.cards.b.Brainstorm.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lightning Strike", 724, Rarity.RARE, mage.cards.l.LightningStrike.class));
         cards.add(new SetCardInfo("Fleshbag Marauder", 725, Rarity.RARE, mage.cards.f.FleshbagMarauder.class, NON_FULL_USE_VARIOUS));

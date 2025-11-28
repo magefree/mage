@@ -81,7 +81,6 @@ public class IxalanPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Kopala, Warden of Waves", "61p", Rarity.RARE, mage.cards.k.KopalaWardenOfWaves.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kopala, Warden of Waves", "61s", Rarity.RARE, mage.cards.k.KopalaWardenOfWaves.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Legion's Landing", "22s", Rarity.RARE, mage.cards.l.LegionsLanding.class));
-        cards.add(new SetCardInfo("Lost Vale", "235s", Rarity.RARE, mage.cards.l.LostVale.class));
         cards.add(new SetCardInfo("Mavren Fein, Dusk Apostle", "24p", Rarity.RARE, mage.cards.m.MavrenFeinDuskApostle.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mavren Fein, Dusk Apostle", "24s", Rarity.RARE, mage.cards.m.MavrenFeinDuskApostle.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Old-Growth Dryads", "199s", Rarity.RARE, mage.cards.o.OldGrowthDryads.class));

@@ -55,7 +55,6 @@ public final class ShadowsOverInnistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Avacyn's Judgment", 145, Rarity.RARE, mage.cards.a.AvacynsJudgment.class));
         cards.add(new SetCardInfo("Avacynian Missionaries", 6, Rarity.UNCOMMON, mage.cards.a.AvacynianMissionaries.class));
         cards.add(new SetCardInfo("Awoken Horror", 92, Rarity.RARE, mage.cards.a.AwokenHorror.class));
-        cards.add(new SetCardInfo("Bearer of Overwhelming Truths", 54, Rarity.UNCOMMON, mage.cards.b.BearerOfOverwhelmingTruths.class));
         cards.add(new SetCardInfo("Behind the Scenes", 100, Rarity.UNCOMMON, mage.cards.b.BehindTheScenes.class));
         cards.add(new SetCardInfo("Behold the Beyond", 101, Rarity.MYTHIC, mage.cards.b.BeholdTheBeyond.class));
         cards.add(new SetCardInfo("Biting Rain", 102, Rarity.UNCOMMON, mage.cards.b.BitingRain.class));
@@ -189,7 +188,6 @@ public final class ShadowsOverInnistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Kessig Dire Swine", 214, Rarity.COMMON, mage.cards.k.KessigDireSwine.class));
         cards.add(new SetCardInfo("Kessig Forgemaster", 169, Rarity.UNCOMMON, mage.cards.k.KessigForgemaster.class));
         cards.add(new SetCardInfo("Kindly Stranger", 119, Rarity.UNCOMMON, mage.cards.k.KindlyStranger.class));
-        cards.add(new SetCardInfo("Krallenhorde Howler", 203, Rarity.UNCOMMON, mage.cards.k.KrallenhordeHowler.class));
         cards.add(new SetCardInfo("Lambholt Pacifist", 215, Rarity.UNCOMMON, mage.cards.l.LambholtPacifist.class));
         cards.add(new SetCardInfo("Lamplighter of Selhoff", 72, Rarity.COMMON, mage.cards.l.LamplighterOfSelhoff.class));
         cards.add(new SetCardInfo("Lightning Axe", 170, Rarity.UNCOMMON, mage.cards.l.LightningAxe.class));

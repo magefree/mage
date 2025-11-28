@@ -43,7 +43,6 @@ public class ShadowsOverInnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Assembled Alphas", 141, Rarity.RARE, mage.cards.a.AssembledAlphas.class));
         cards.add(new SetCardInfo("Avacyn's Judgment", 142, Rarity.RARE, mage.cards.a.AvacynsJudgment.class));
         cards.add(new SetCardInfo("Awoken Horror", 95, Rarity.RARE, mage.cards.a.AwokenHorror.class));
-        cards.add(new SetCardInfo("Bearer of Overwhelming Truths", 59, Rarity.UNCOMMON, mage.cards.b.BearerOfOverwhelmingTruths.class));
         cards.add(new SetCardInfo("Bedlam Reveler", 143, Rarity.RARE, mage.cards.b.BedlamReveler.class));
         cards.add(new SetCardInfo("Biting Rain", 99, Rarity.UNCOMMON, mage.cards.b.BitingRain.class));
         cards.add(new SetCardInfo("Blessed Alliance", 14, Rarity.UNCOMMON, mage.cards.b.BlessedAlliance.class));
@@ -193,7 +192,6 @@ public class ShadowsOverInnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Jace's Scrutiny", 78, Rarity.COMMON, mage.cards.j.JacesScrutiny.class));
         cards.add(new SetCardInfo("Jace, Unraveler of Secrets", 77, Rarity.MYTHIC, mage.cards.j.JaceUnravelerOfSecrets.class));
         cards.add(new SetCardInfo("Kindly Stranger", 107, Rarity.UNCOMMON, mage.cards.k.KindlyStranger.class));
-        cards.add(new SetCardInfo("Krallenhorde Howler", 194, Rarity.UNCOMMON, mage.cards.k.KrallenhordeHowler.class));
         cards.add(new SetCardInfo("Laboratory Brute", 79, Rarity.COMMON, mage.cards.l.LaboratoryBrute.class));
         cards.add(new SetCardInfo("Lightning Axe", 166, Rarity.UNCOMMON, mage.cards.l.LightningAxe.class));
         cards.add(new SetCardInfo("Liliana's Elite", 120, Rarity.COMMON, mage.cards.l.LilianasElite.class));
