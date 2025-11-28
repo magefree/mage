@@ -62,7 +62,6 @@ public final class ShadowsOverInnistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Bloodmad Vampire", 146, Rarity.COMMON, mage.cards.b.BloodmadVampire.class));
         cards.add(new SetCardInfo("Bound by Moonsilver", 7, Rarity.UNCOMMON, mage.cards.b.BoundByMoonsilver.class));
         cards.add(new SetCardInfo("Brain in a Jar", 252, Rarity.RARE, mage.cards.b.BrainInAJar.class));
-        cards.add(new SetCardInfo("Branded Howler", 149, Rarity.COMMON, mage.cards.b.BrandedHowler.class));
         cards.add(new SetCardInfo("Breakneck Rider", 147, Rarity.UNCOMMON, mage.cards.b.BreakneckRider.class));
         cards.add(new SetCardInfo("Briarbridge Patrol", 195, Rarity.UNCOMMON, mage.cards.b.BriarbridgePatrol.class));
         cards.add(new SetCardInfo("Broken Concentration", 50, Rarity.UNCOMMON, mage.cards.b.BrokenConcentration.class));

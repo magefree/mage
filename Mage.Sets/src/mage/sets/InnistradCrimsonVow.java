@@ -95,7 +95,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("By Invitation Only", 5, Rarity.RARE, mage.cards.b.ByInvitationOnly.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cackling Culprit", 28, Rarity.UNCOMMON, mage.cards.c.CacklingCulprit.class));
         cards.add(new SetCardInfo("Cartographer's Survey", 190, Rarity.UNCOMMON, mage.cards.c.CartographersSurvey.class));
-        cards.add(new SetCardInfo("Catapult Captain", 99, Rarity.UNCOMMON, mage.cards.c.CatapultCaptain.class));
         cards.add(new SetCardInfo("Catapult Fodder", 99, Rarity.UNCOMMON, mage.cards.c.CatapultFodder.class));
         cards.add(new SetCardInfo("Catlike Curiosity", 69, Rarity.UNCOMMON, mage.cards.c.CatlikeCuriosity.class));
         cards.add(new SetCardInfo("Cemetery Desecrator", 100, Rarity.MYTHIC, mage.cards.c.CemeteryDesecrator.class, NON_FULL_USE_VARIOUS));
@@ -384,8 +383,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Restless Bloodseeker", 128, Rarity.UNCOMMON, mage.cards.r.RestlessBloodseeker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Restless Bloodseeker", 295, Rarity.UNCOMMON, mage.cards.r.RestlessBloodseeker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Retrieve", 215, Rarity.UNCOMMON, mage.cards.r.Retrieve.class));
-        cards.add(new SetCardInfo("Revealing Eye", 101, Rarity.RARE, mage.cards.r.RevealingEye.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Revealing Eye", 367, Rarity.RARE, mage.cards.r.RevealingEye.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Riphook Raider", 203, Rarity.COMMON, mage.cards.r.RiphookRaider.class));
         cards.add(new SetCardInfo("Rot-Tide Gargantua", 129, Rarity.COMMON, mage.cards.r.RotTideGargantua.class));
         cards.add(new SetCardInfo("Runebound Wolf", 176, Rarity.UNCOMMON, mage.cards.r.RuneboundWolf.class));
@@ -395,7 +392,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Rural Recruit", 216, Rarity.COMMON, mage.cards.r.RuralRecruit.class));
         cards.add(new SetCardInfo("Sanctify", 33, Rarity.COMMON, mage.cards.s.Sanctify.class));
         cards.add(new SetCardInfo("Sanguine Statuette", 177, Rarity.UNCOMMON, mage.cards.s.SanguineStatuette.class));
-        cards.add(new SetCardInfo("Savage Packmate", 234, Rarity.UNCOMMON, mage.cards.s.SavagePackmate.class));
         cards.add(new SetCardInfo("Savior of Ollenbock", 330, Rarity.MYTHIC, mage.cards.s.SaviorOfOllenbock.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Savior of Ollenbock", 34, Rarity.MYTHIC, mage.cards.s.SaviorOfOllenbock.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Savior of Ollenbock", 352, Rarity.MYTHIC, mage.cards.s.SaviorOfOllenbock.class, NON_FULL_USE_VARIOUS));

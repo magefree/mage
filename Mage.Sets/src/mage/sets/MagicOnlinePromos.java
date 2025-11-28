@@ -1526,7 +1526,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Leaf-Crowned Visionary", 103462, Rarity.RARE, mage.cards.l.LeafCrownedVisionary.class));
         cards.add(new SetCardInfo("Leatherback Baloth", 43576, Rarity.UNCOMMON, mage.cards.l.LeatherbackBaloth.class));
         cards.add(new SetCardInfo("Ledger Shredder", 99733, Rarity.RARE, mage.cards.l.LedgerShredder.class));
-        cards.add(new SetCardInfo("Leeching Lurker", 93988, Rarity.RARE, mage.cards.l.LeechingLurker.class));
         cards.add(new SetCardInfo("Legion Angel", 83754, Rarity.RARE, mage.cards.l.LegionAngel.class));
         cards.add(new SetCardInfo("Legions to Ashes", 105784, Rarity.RARE, mage.cards.l.LegionsToAshes.class));
         cards.add(new SetCardInfo("Leinore, Autumn Sovereign", 94054, Rarity.MYTHIC, mage.cards.l.LeinoreAutumnSovereign.class));
@@ -2219,7 +2218,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Retaliator Griffin", 43546, Rarity.RARE, mage.cards.r.RetaliatorGriffin.class));
         cards.add(new SetCardInfo("Retriever Phoenix", 90094, Rarity.RARE, mage.cards.r.RetrieverPhoenix.class));
         cards.add(new SetCardInfo("Return to Dust", 86104, Rarity.UNCOMMON, mage.cards.r.ReturnToDust.class));
-        cards.add(new SetCardInfo("Revealing Eye", 95351, Rarity.RARE, mage.cards.r.RevealingEye.class));
         cards.add(new SetCardInfo("Revenant", 32192, Rarity.RARE, mage.cards.r.Revenant.class, RETRO_ART));
         cards.add(new SetCardInfo("Reverse Engineer", 64995, Rarity.UNCOMMON, mage.cards.r.ReverseEngineer.class));
         cards.add(new SetCardInfo("Revival Experiment", 90220, Rarity.RARE, mage.cards.r.RevivalExperiment.class));

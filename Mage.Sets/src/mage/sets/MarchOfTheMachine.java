@@ -103,7 +103,6 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("City on Fire", 363, Rarity.RARE, mage.cards.c.CityOnFire.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Collective Nightmare", 95, Rarity.UNCOMMON, mage.cards.c.CollectiveNightmare.class));
         cards.add(new SetCardInfo("Coming In Hot", 136, Rarity.COMMON, mage.cards.c.ComingInHot.class));
-        cards.add(new SetCardInfo("Compleated Conjurer", 49, Rarity.UNCOMMON, mage.cards.c.CompleatedConjurer.class));
         cards.add(new SetCardInfo("Compleated Huntmaster", 96, Rarity.UNCOMMON, mage.cards.c.CompleatedHuntmaster.class));
         cards.add(new SetCardInfo("Complete the Circuit", 351, Rarity.RARE, mage.cards.c.CompleteTheCircuit.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Complete the Circuit", 52, Rarity.RARE, mage.cards.c.CompleteTheCircuit.class, NON_FULL_USE_VARIOUS));

@@ -98,10 +98,6 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Cecil, Dark Knight", 445, Rarity.RARE, mage.cards.c.CecilDarkKnight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cecil, Dark Knight", 525, Rarity.RARE, mage.cards.c.CecilDarkKnight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cecil, Dark Knight", 91, Rarity.RARE, mage.cards.c.CecilDarkKnight.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Cecil, Redeemed Paladin", 380, Rarity.RARE, mage.cards.c.CecilRedeemedPaladin.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Cecil, Redeemed Paladin", 445, Rarity.RARE, mage.cards.c.CecilRedeemedPaladin.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Cecil, Redeemed Paladin", 525, Rarity.RARE, mage.cards.c.CecilRedeemedPaladin.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Cecil, Redeemed Paladin", 91, Rarity.RARE, mage.cards.c.CecilRedeemedPaladin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chaos, the Endless", 221, Rarity.UNCOMMON, mage.cards.c.ChaosTheEndless.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chaos, the Endless", 486, Rarity.UNCOMMON, mage.cards.c.ChaosTheEndless.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Choco, Seeker of Paradise", 215, Rarity.RARE, mage.cards.c.ChocoSeekerOfParadise.class, NON_FULL_USE_VARIOUS));
@@ -266,11 +262,6 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Hydaelyn, the Mothercrystal", 434, Rarity.RARE, mage.cards.h.HydaelynTheMothercrystal.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ice Flan", 55, Rarity.COMMON, mage.cards.i.IceFlan.class));
         cards.add(new SetCardInfo("Ice Magic", 56, Rarity.COMMON, mage.cards.i.IceMagic.class));
-        cards.add(new SetCardInfo("Ifrit, Warden of Inferno", 133, Rarity.MYTHIC, mage.cards.i.IfritWardenOfInferno.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Ifrit, Warden of Inferno", 318, Rarity.MYTHIC, mage.cards.i.IfritWardenOfInferno.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Ifrit, Warden of Inferno", 385, Rarity.MYTHIC, mage.cards.i.IfritWardenOfInferno.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Ifrit, Warden of Inferno", 458, Rarity.MYTHIC, mage.cards.i.IfritWardenOfInferno.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Ifrit, Warden of Inferno", 530, Rarity.MYTHIC, mage.cards.i.IfritWardenOfInferno.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ignis Scientia", 227, Rarity.UNCOMMON, mage.cards.i.IgnisScientia.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ignis Scientia", 492, Rarity.UNCOMMON, mage.cards.i.IgnisScientia.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Il Mheg Pixie", 57, Rarity.UNCOMMON, mage.cards.i.IlMhegPixie.class));
@@ -508,8 +499,6 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Stolen Uniform", 332, Rarity.UNCOMMON, mage.cards.s.StolenUniform.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stolen Uniform", 75, Rarity.UNCOMMON, mage.cards.s.StolenUniform.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stuck in Summoner's Sanctum", 76, Rarity.COMMON, mage.cards.s.StuckInSummonersSanctum.class));
-        cards.add(new SetCardInfo("Summon: Alexander", 13, Rarity.UNCOMMON, mage.cards.s.SummonAlexander.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Summon: Alexander", 357, Rarity.UNCOMMON, mage.cards.s.SummonAlexander.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Anima", 120, Rarity.UNCOMMON, mage.cards.s.SummonAnima.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Anima", 364, Rarity.UNCOMMON, mage.cards.s.SummonAnima.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Bahamut", 1, Rarity.MYTHIC, mage.cards.s.SummonBahamut.class, NON_FULL_USE_VARIOUS));

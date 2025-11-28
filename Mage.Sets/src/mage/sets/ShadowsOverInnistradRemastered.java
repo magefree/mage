@@ -41,7 +41,6 @@ public class ShadowsOverInnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Arlinn Kord", 230, Rarity.MYTHIC, mage.cards.a.ArlinnKord.class));
         cards.add(new SetCardInfo("Ashmouth Blade", 256, Rarity.UNCOMMON, mage.cards.a.AshmouthBlade.class));
         cards.add(new SetCardInfo("Assembled Alphas", 141, Rarity.RARE, mage.cards.a.AssembledAlphas.class));
-        cards.add(new SetCardInfo("Aurora of Emrakul", 248, Rarity.UNCOMMON, mage.cards.a.AuroraOfEmrakul.class));
         cards.add(new SetCardInfo("Avacyn's Judgment", 142, Rarity.RARE, mage.cards.a.AvacynsJudgment.class));
         cards.add(new SetCardInfo("Awoken Horror", 95, Rarity.RARE, mage.cards.a.AwokenHorror.class));
         cards.add(new SetCardInfo("Bearer of Overwhelming Truths", 59, Rarity.UNCOMMON, mage.cards.b.BearerOfOverwhelmingTruths.class));
@@ -72,7 +71,6 @@ public class ShadowsOverInnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Collective Defiance", 148, Rarity.RARE, mage.cards.c.CollectiveDefiance.class));
         cards.add(new SetCardInfo("Collective Effort", 19, Rarity.RARE, mage.cards.c.CollectiveEffort.class));
         cards.add(new SetCardInfo("Compelling Deterrence", 55, Rarity.UNCOMMON, mage.cards.c.CompellingDeterrence.class));
-        cards.add(new SetCardInfo("Conduit of Emrakul", 149, Rarity.COMMON, mage.cards.c.ConduitOfEmrakul.class));
         cards.add(new SetCardInfo("Conduit of Storms", 149, Rarity.COMMON, mage.cards.c.ConduitOfStorms.class));
         cards.add(new SetCardInfo("Confirm Suspicions", 56, Rarity.RARE, mage.cards.c.ConfirmSuspicions.class));
         cards.add(new SetCardInfo("Confront the Unknown", 190, Rarity.COMMON, mage.cards.c.ConfrontTheUnknown.class));

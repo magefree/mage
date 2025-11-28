@@ -74,7 +74,6 @@ public final class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Cobbled Wings", 233, Rarity.COMMON, mage.cards.c.CobbledWings.class));
         cards.add(new SetCardInfo("Colossal Dreadmaw", 180, Rarity.COMMON, mage.cards.c.ColossalDreadmaw.class));
         cards.add(new SetCardInfo("Commune with Dinosaurs", 181, Rarity.COMMON, mage.cards.c.CommuneWithDinosaurs.class));
-        cards.add(new SetCardInfo("Conqueror's Foothold", 234, Rarity.RARE, mage.cards.c.ConquerorsFoothold.class));
         cards.add(new SetCardInfo("Conqueror's Galleon", 234, Rarity.RARE, mage.cards.c.ConquerorsGalleon.class));
         cards.add(new SetCardInfo("Contract Killing", 95, Rarity.COMMON, mage.cards.c.ContractKilling.class));
         cards.add(new SetCardInfo("Costly Plunder", 96, Rarity.COMMON, mage.cards.c.CostlyPlunder.class));

@@ -56,7 +56,6 @@ public final class DarkAscension extends ExpansionSet {
         cards.add(new SetCardInfo("Burden of Guilt", 4, Rarity.COMMON, mage.cards.b.BurdenOfGuilt.class));
         cards.add(new SetCardInfo("Burning Oil", 84, Rarity.UNCOMMON, mage.cards.b.BurningOil.class));
         cards.add(new SetCardInfo("Call to the Kindred", 30, Rarity.RARE, mage.cards.c.CallToTheKindred.class));
-        cards.add(new SetCardInfo("Chalice of Death", 146, Rarity.UNCOMMON, mage.cards.c.ChaliceOfDeath.class));
         cards.add(new SetCardInfo("Chalice of Life", 146, Rarity.UNCOMMON, mage.cards.c.ChaliceOfLife.class));
         cards.add(new SetCardInfo("Chant of the Skifsang", 31, Rarity.COMMON, mage.cards.c.ChantOfTheSkifsang.class));
         cards.add(new SetCardInfo("Chill of Foreboding", 32, Rarity.UNCOMMON, mage.cards.c.ChillOfForeboding.class));
@@ -139,7 +138,6 @@ public final class DarkAscension extends ExpansionSet {
         cards.add(new SetCardInfo("Lost in the Woods", 123, Rarity.RARE, mage.cards.l.LostInTheWoods.class));
         cards.add(new SetCardInfo("Loyal Cathar", 13, Rarity.COMMON, mage.cards.l.LoyalCathar.class));
         cards.add(new SetCardInfo("Markov Blademaster", 96, Rarity.RARE, mage.cards.m.MarkovBlademaster.class));
-        cards.add(new SetCardInfo("Markov's Servant", 55, Rarity.COMMON, mage.cards.m.MarkovsServant.class));
         cards.add(new SetCardInfo("Markov Warlord", 97, Rarity.UNCOMMON, mage.cards.m.MarkovWarlord.class));
         cards.add(new SetCardInfo("Midnight Guard", 14, Rarity.COMMON, mage.cards.m.MidnightGuard.class));
         cards.add(new SetCardInfo("Mikaeus, the Unhallowed", 70, Rarity.MYTHIC, mage.cards.m.MikaeusTheUnhallowed.class));

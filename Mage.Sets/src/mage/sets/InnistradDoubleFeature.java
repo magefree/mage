@@ -107,7 +107,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Candlelit Cavalry", 175, Rarity.COMMON, mage.cards.c.CandlelitCavalry.class));
         cards.add(new SetCardInfo("Candletrap", 9, Rarity.COMMON, mage.cards.c.Candletrap.class));
         cards.add(new SetCardInfo("Cartographer's Survey", 457, Rarity.UNCOMMON, mage.cards.c.CartographersSurvey.class));
-        cards.add(new SetCardInfo("Catapult Captain", 366, Rarity.UNCOMMON, mage.cards.c.CatapultCaptain.class));
         cards.add(new SetCardInfo("Catapult Fodder", 366, Rarity.UNCOMMON, mage.cards.c.CatapultFodder.class));
         cards.add(new SetCardInfo("Cathar Commando", 10, Rarity.COMMON, mage.cards.c.CatharCommando.class));
         cards.add(new SetCardInfo("Cathar's Call", 11, Rarity.UNCOMMON, mage.cards.c.CatharsCall.class));
@@ -123,7 +122,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Champion of the Perished", 91, Rarity.RARE, mage.cards.c.ChampionOfThePerished.class));
         cards.add(new SetCardInfo("Chandra, Dressed to Kill", 416, Rarity.MYTHIC, mage.cards.c.ChandraDressedToKill.class));
         cards.add(new SetCardInfo("Change of Fortune", 417, Rarity.RARE, mage.cards.c.ChangeOfFortune.class));
-        cards.add(new SetCardInfo("Chapel Shieldgeist", 13, Rarity.UNCOMMON, mage.cards.c.ChapelShieldgeist.class));
         cards.add(new SetCardInfo("Chaplain of Alms", 13, Rarity.UNCOMMON, mage.cards.c.ChaplainOfAlms.class));
         cards.add(new SetCardInfo("Child of the Pack", 501, Rarity.UNCOMMON, mage.cards.c.ChildOfThePack.class));
         cards.add(new SetCardInfo("Chill of the Grave", 318, Rarity.COMMON, mage.cards.c.ChillOfTheGrave.class));
@@ -145,7 +143,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Courier Bat", 369, Rarity.COMMON, mage.cards.c.CourierBat.class));
         cards.add(new SetCardInfo("Covert Cutpurse", 92, Rarity.UNCOMMON, mage.cards.c.CovertCutpurse.class));
         cards.add(new SetCardInfo("Covetous Castaway", 45, Rarity.UNCOMMON, mage.cards.c.CovetousCastaway.class));
-        cards.add(new SetCardInfo("Covetous Geist", 92, Rarity.UNCOMMON, mage.cards.c.CovetousGeist.class));
         cards.add(new SetCardInfo("Cradle of Safety", 321, Rarity.COMMON, mage.cards.c.CradleOfSafety.class));
         cards.add(new SetCardInfo("Crawl from the Cellar", 93, Rarity.COMMON, mage.cards.c.CrawlFromTheCellar.class));
         cards.add(new SetCardInfo("Crawling Infestation", 460, Rarity.UNCOMMON, mage.cards.c.CrawlingInfestation.class));
@@ -270,7 +267,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Geistwave", 56, Rarity.COMMON, mage.cards.g.Geistwave.class));
         cards.add(new SetCardInfo("Geralf, Visionary Stitcher", 328, Rarity.RARE, mage.cards.g.GeralfVisionaryStitcher.class));
         cards.add(new SetCardInfo("Ghastly Mimicry", 335, Rarity.RARE, mage.cards.g.GhastlyMimicry.class));
-        cards.add(new SetCardInfo("Ghostly Castigator", 45, Rarity.UNCOMMON, mage.cards.g.GhostlyCastigator.class));
         cards.add(new SetCardInfo("Ghoulcaller's Harvest", 225, Rarity.RARE, mage.cards.g.GhoulcallersHarvest.class));
         cards.add(new SetCardInfo("Ghoulish Procession", 102, Rarity.UNCOMMON, mage.cards.g.GhoulishProcession.class));
         cards.add(new SetCardInfo("Gift of Fangs", 380, Rarity.COMMON, mage.cards.g.GiftOfFangs.class));
@@ -359,7 +355,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Lantern of the Lost", 526, Rarity.UNCOMMON, mage.cards.l.LanternOfTheLost.class));
         cards.add(new SetCardInfo("Lanterns' Lift", 333, Rarity.COMMON, mage.cards.l.LanternsLift.class));
         cards.add(new SetCardInfo("Larder Zombie", 58, Rarity.COMMON, mage.cards.l.LarderZombie.class));
-        cards.add(new SetCardInfo("Leeching Lurker", 94, Rarity.RARE, mage.cards.l.LeechingLurker.class));
         cards.add(new SetCardInfo("Lier, Disciple of the Drowned", 59, Rarity.MYTHIC, mage.cards.l.LierDiscipleOfTheDrowned.class));
         cards.add(new SetCardInfo("Liesa, Forgotten Archangel", 232, Rarity.RARE, mage.cards.l.LiesaForgottenArchangel.class));
         cards.add(new SetCardInfo("Light Up the Night", 146, Rarity.RARE, mage.cards.l.LightUpTheNight.class));
@@ -467,7 +462,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Restless Bloodseeker", 395, Rarity.UNCOMMON, mage.cards.r.RestlessBloodseeker.class));
         cards.add(new SetCardInfo("Retrieve", 482, Rarity.UNCOMMON, mage.cards.r.Retrieve.class));
         cards.add(new SetCardInfo("Return to Nature", 195, Rarity.COMMON, mage.cards.r.ReturnToNature.class));
-        cards.add(new SetCardInfo("Revealing Eye", 368, Rarity.RARE, mage.cards.r.RevealingEye.class));
         cards.add(new SetCardInfo("Revenge of the Drowned", 72, Rarity.COMMON, mage.cards.r.RevengeOfTheDrowned.class));
         cards.add(new SetCardInfo("Riphook Raider", 470, Rarity.COMMON, mage.cards.r.RiphookRaider.class));
         cards.add(new SetCardInfo("Rise of the Ants", 196, Rarity.UNCOMMON, mage.cards.r.RiseOfTheAnts.class));
@@ -486,7 +480,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Sanctify", 300, Rarity.COMMON, mage.cards.s.Sanctify.class));
         cards.add(new SetCardInfo("Sanguine Statuette", 444, Rarity.UNCOMMON, mage.cards.s.SanguineStatuette.class));
         cards.add(new SetCardInfo("Saryth, the Viper's Fang", 197, Rarity.RARE, mage.cards.s.SarythTheVipersFang.class));
-        cards.add(new SetCardInfo("Savage Packmate", 501, Rarity.UNCOMMON, mage.cards.s.SavagePackmate.class));
         cards.add(new SetCardInfo("Savior of Ollenbock", 301, Rarity.MYTHIC, mage.cards.s.SaviorOfOllenbock.class));
         cards.add(new SetCardInfo("Sawblade Slinger", 484, Rarity.UNCOMMON, mage.cards.s.SawbladeSlinger.class));
         cards.add(new SetCardInfo("Scattered Thoughts", 341, Rarity.COMMON, mage.cards.s.ScatteredThoughts.class));

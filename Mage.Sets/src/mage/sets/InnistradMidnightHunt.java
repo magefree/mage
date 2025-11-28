@@ -104,7 +104,6 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Champion of the Perished", 344, Rarity.RARE, mage.cards.c.ChampionOfThePerished.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Champion of the Perished", 385, Rarity.RARE, mage.cards.c.ChampionOfThePerished.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Champion of the Perished", 91, Rarity.RARE, mage.cards.c.ChampionOfThePerished.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Chapel Shieldgeist", 13, Rarity.UNCOMMON, mage.cards.c.ChapelShieldgeist.class));
         cards.add(new SetCardInfo("Chaplain of Alms", 13, Rarity.UNCOMMON, mage.cards.c.ChaplainOfAlms.class));
         cards.add(new SetCardInfo("Chilling Chronicle", 63, Rarity.UNCOMMON, mage.cards.c.ChillingChronicle.class));
         cards.add(new SetCardInfo("Clarion Cathars", 14, Rarity.COMMON, mage.cards.c.ClarionCathars.class));
@@ -118,7 +117,6 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Corpse Cobble", 214, Rarity.UNCOMMON, mage.cards.c.CorpseCobble.class));
         cards.add(new SetCardInfo("Covert Cutpurse", 92, Rarity.UNCOMMON, mage.cards.c.CovertCutpurse.class));
         cards.add(new SetCardInfo("Covetous Castaway", 45, Rarity.UNCOMMON, mage.cards.c.CovetousCastaway.class));
-        cards.add(new SetCardInfo("Covetous Geist", 92, Rarity.UNCOMMON, mage.cards.c.CovetousGeist.class));
         cards.add(new SetCardInfo("Crawl from the Cellar", 93, Rarity.COMMON, mage.cards.c.CrawlFromTheCellar.class));
         cards.add(new SetCardInfo("Creeping Inn", 264, Rarity.MYTHIC, mage.cards.c.CreepingInn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Creeping Inn", 379, Rarity.MYTHIC, mage.cards.c.CreepingInn.class, NON_FULL_USE_VARIOUS));
@@ -212,7 +210,6 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Geistflame Reservoir", 142, Rarity.RARE, mage.cards.g.GeistflameReservoir.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Geistflame Reservoir", 355, Rarity.RARE, mage.cards.g.GeistflameReservoir.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Geistwave", 56, Rarity.COMMON, mage.cards.g.Geistwave.class));
-        cards.add(new SetCardInfo("Ghostly Castigator", 45, Rarity.UNCOMMON, mage.cards.g.GhostlyCastigator.class));
         cards.add(new SetCardInfo("Ghoulcaller's Harvest", 225, Rarity.RARE, mage.cards.g.GhoulcallersHarvest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ghoulcaller's Harvest", 372, Rarity.RARE, mage.cards.g.GhoulcallersHarvest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ghoulish Procession", 102, Rarity.UNCOMMON, mage.cards.g.GhoulishProcession.class));
@@ -267,8 +264,6 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Kessig Naturalist", 310, Rarity.UNCOMMON, mage.cards.k.KessigNaturalist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lambholt Harrier", 145, Rarity.COMMON, mage.cards.l.LambholtHarrier.class));
         cards.add(new SetCardInfo("Larder Zombie", 58, Rarity.COMMON, mage.cards.l.LarderZombie.class));
-        cards.add(new SetCardInfo("Leeching Lurker", 345, Rarity.RARE, mage.cards.l.LeechingLurker.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Leeching Lurker", 94, Rarity.RARE, mage.cards.l.LeechingLurker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lier, Disciple of the Drowned", 313, Rarity.MYTHIC, mage.cards.l.LierDiscipleOfTheDrowned.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lier, Disciple of the Drowned", 59, Rarity.MYTHIC, mage.cards.l.LierDiscipleOfTheDrowned.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Liesa, Forgotten Archangel", 232, Rarity.RARE, mage.cards.l.LiesaForgottenArchangel.class, NON_FULL_USE_VARIOUS));

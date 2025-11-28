@@ -27,7 +27,6 @@ public final class FromTheVaultTransform extends ExpansionSet {
         cards.add(new SetCardInfo("Bruna, the Fading Light", 5, Rarity.MYTHIC, mage.cards.b.BrunaTheFadingLight.class));
         cards.add(new SetCardInfo("Brisela, Voice of Nightmares", "5b", Rarity.MYTHIC, mage.cards.b.BriselaVoiceOfNightmares.class));
         cards.add(new SetCardInfo("Chandra, Fire of Kaladesh", 6, Rarity.MYTHIC, mage.cards.c.ChandraFireOfKaladesh.class));
-        cards.add(new SetCardInfo("Chandra, Roaring Flame", 6, Rarity.MYTHIC, mage.cards.c.ChandraRoaringFlame.class));
         cards.add(new SetCardInfo("Delver of Secrets", 7, Rarity.MYTHIC, mage.cards.d.DelverOfSecrets.class));
         cards.add(new SetCardInfo("Insectile Aberration", 7, Rarity.MYTHIC, mage.cards.i.InsectileAberration.class));
         cards.add(new SetCardInfo("Elbrus, the Binding Blade", 8, Rarity.MYTHIC, mage.cards.e.ElbrusTheBindingBlade.class));

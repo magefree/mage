@@ -153,7 +153,6 @@ public final class Innistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Heretic's Punishment", 147, Rarity.RARE, mage.cards.h.HereticsPunishment.class));
         cards.add(new SetCardInfo("Hinterland Harbor", 241, Rarity.RARE, mage.cards.h.HinterlandHarbor.class));
         cards.add(new SetCardInfo("Hollowhenge Scavenger", 188, Rarity.UNCOMMON, mage.cards.h.HollowhengeScavenger.class));
-        cards.add(new SetCardInfo("Homicidal Brute", 47, Rarity.UNCOMMON, mage.cards.h.HomicidalBrute.class));
         cards.add(new SetCardInfo("Howlpack Alpha", 193, Rarity.RARE, mage.cards.h.HowlpackAlpha.class));
         cards.add(new SetCardInfo("Howlpack of Estwald", 209, Rarity.COMMON, mage.cards.h.HowlpackOfEstwald.class));
         cards.add(new SetCardInfo("Hysterical Blindness", 59, Rarity.COMMON, mage.cards.h.HystericalBlindness.class));
@@ -299,7 +298,6 @@ public final class Innistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Unbreathing Horde", 121, Rarity.RARE, mage.cards.u.UnbreathingHorde.class));
         cards.add(new SetCardInfo("Unburial Rites", 122, Rarity.UNCOMMON, mage.cards.u.UnburialRites.class));
         cards.add(new SetCardInfo("Undead Alchemist", 84, Rarity.RARE, mage.cards.u.UndeadAlchemist.class));
-        cards.add(new SetCardInfo("Unholy Fiend", 8, Rarity.UNCOMMON, mage.cards.u.UnholyFiend.class));
         cards.add(new SetCardInfo("Unruly Mob", 39, Rarity.COMMON, mage.cards.u.UnrulyMob.class));
         cards.add(new SetCardInfo("Urgent Exorcism", 40, Rarity.COMMON, mage.cards.u.UrgentExorcism.class));
         cards.add(new SetCardInfo("Vampire Interloper", 123, Rarity.COMMON, mage.cards.v.VampireInterloper.class));

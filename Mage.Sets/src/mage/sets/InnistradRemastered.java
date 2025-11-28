@@ -54,8 +54,6 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Ashmouth Blade", 473, Rarity.UNCOMMON, mage.cards.a.AshmouthBlade.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Asylum Visitor", 371, Rarity.UNCOMMON, mage.cards.a.AsylumVisitor.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Asylum Visitor", 96, Rarity.UNCOMMON, mage.cards.a.AsylumVisitor.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Aurora of Emrakul", 260, Rarity.UNCOMMON, mage.cards.a.AuroraOfEmrakul.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Aurora of Emrakul", 472, Rarity.UNCOMMON, mage.cards.a.AuroraOfEmrakul.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Avacyn, Angel of Hope", 477, Rarity.MYTHIC, mage.cards.a.AvacynAngelOfHope.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Avacyn, Angel of Hope", 482, Rarity.MYTHIC, mage.cards.a.AvacynAngelOfHope.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Avacynian Priest", 12, Rarity.COMMON, mage.cards.a.AvacynianPriest.class, NON_FULL_USE_VARIOUS));
@@ -117,8 +115,6 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Cathars' Crusade", 17, Rarity.RARE, mage.cards.c.CatharsCrusade.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cathars' Crusade", 337, Rarity.RARE, mage.cards.c.CatharsCrusade.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Cathars' Crusade", 483, Rarity.RARE, mage.cards.c.CatharsCrusade.class, FULL_ART_USE_VARIOUS));
-        cards.add(new SetCardInfo("Chalice of Death", 257, Rarity.UNCOMMON, mage.cards.c.ChaliceOfDeath.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Chalice of Death", 471, Rarity.UNCOMMON, mage.cards.c.ChaliceOfDeath.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Chalice of Life", 257, Rarity.UNCOMMON, mage.cards.c.ChaliceOfLife.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chalice of Life", 471, Rarity.UNCOMMON, mage.cards.c.ChaliceOfLife.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Chandra, Dressed to Kill", 148, Rarity.MYTHIC, mage.cards.c.ChandraDressedToKill.class));
@@ -133,7 +129,6 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Collective Brutality", 375, Rarity.RARE, mage.cards.c.CollectiveBrutality.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Collective Defiance", 149, Rarity.RARE, mage.cards.c.CollectiveDefiance.class));
         cards.add(new SetCardInfo("Compelling Deterrence", 57, Rarity.UNCOMMON, mage.cards.c.CompellingDeterrence.class));
-        cards.add(new SetCardInfo("Conduit of Emrakul", 150, Rarity.COMMON, mage.cards.c.ConduitOfEmrakul.class));
         cards.add(new SetCardInfo("Conduit of Storms", 150, Rarity.COMMON, mage.cards.c.ConduitOfStorms.class));
         cards.add(new SetCardInfo("Conjurer's Closet", 259, Rarity.RARE, mage.cards.c.ConjurersCloset.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Conjurer's Closet", 321, Rarity.RARE, mage.cards.c.ConjurersCloset.class, NON_FULL_USE_VARIOUS));
@@ -232,8 +227,6 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Geistcatcher's Rig", 264, Rarity.UNCOMMON, mage.cards.g.GeistcatchersRig.class));
         cards.add(new SetCardInfo("Geistlight Snare", 356, Rarity.UNCOMMON, mage.cards.g.GeistlightSnare.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Geistlight Snare", 66, Rarity.UNCOMMON, mage.cards.g.GeistlightSnare.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Ghostly Castigator", 456, Rarity.UNCOMMON, mage.cards.g.GhostlyCastigator.class, RETRO_ART_USE_VARIOUS));
-        cards.add(new SetCardInfo("Ghostly Castigator", 58, Rarity.UNCOMMON, mage.cards.g.GhostlyCastigator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ghoulish Procession", 110, Rarity.UNCOMMON, mage.cards.g.GhoulishProcession.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ghoulish Procession", 378, Rarity.UNCOMMON, mage.cards.g.GhoulishProcession.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Ghoultree", 198, Rarity.UNCOMMON, mage.cards.g.Ghoultree.class, NON_FULL_USE_VARIOUS));

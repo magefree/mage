@@ -72,7 +72,6 @@ public final class MagicOrigins extends ExpansionSet {
         cards.add(new SetCardInfo("Caves of Koilos", 245, Rarity.RARE, mage.cards.c.CavesOfKoilos.class));
         cards.add(new SetCardInfo("Celestial Flare", 8, Rarity.COMMON, mage.cards.c.CelestialFlare.class));
         cards.add(new SetCardInfo("Chandra, Fire of Kaladesh", 135, Rarity.MYTHIC, mage.cards.c.ChandraFireOfKaladesh.class));
-        cards.add(new SetCardInfo("Chandra, Roaring Flame", 135, Rarity.MYTHIC, mage.cards.c.ChandraRoaringFlame.class));
         cards.add(new SetCardInfo("Chandra's Fury", 136, Rarity.COMMON, mage.cards.c.ChandrasFury.class));
         cards.add(new SetCardInfo("Chandra's Ignition", 137, Rarity.RARE, mage.cards.c.ChandrasIgnition.class));
         cards.add(new SetCardInfo("Charging Griffin", 9, Rarity.COMMON, mage.cards.c.ChargingGriffin.class));

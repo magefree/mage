@@ -25,7 +25,6 @@ public class MagicOriginsPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Alhammarret, High Arbiter", "43s", Rarity.RARE, mage.cards.a.AlhammarretHighArbiter.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chandra's Ignition", "137s", Rarity.RARE, mage.cards.c.ChandrasIgnition.class));
         cards.add(new SetCardInfo("Chandra, Fire of Kaladesh", "135s", Rarity.MYTHIC, mage.cards.c.ChandraFireOfKaladesh.class));
-        cards.add(new SetCardInfo("Chandra, Roaring Flame", "135s", Rarity.MYTHIC, mage.cards.c.ChandraRoaringFlame.class));
         cards.add(new SetCardInfo("Conclave Naturalists", 171, Rarity.UNCOMMON, mage.cards.c.ConclaveNaturalists.class));
         cards.add(new SetCardInfo("Dark Petition", "90s", Rarity.RARE, mage.cards.d.DarkPetition.class));
         cards.add(new SetCardInfo("Despoiler of Souls", "93s", Rarity.RARE, mage.cards.d.DespoilerOfSouls.class));
