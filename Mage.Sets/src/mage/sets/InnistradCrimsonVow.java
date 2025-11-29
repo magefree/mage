@@ -169,9 +169,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Drogskol Infantry", 10, Rarity.COMMON, mage.cards.d.DrogskolInfantry.class));
         cards.add(new SetCardInfo("Dying to Serve", 109, Rarity.RARE, mage.cards.d.DyingToServe.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dying to Serve", 370, Rarity.RARE, mage.cards.d.DyingToServe.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Edgar Markov's Coffin", 236, Rarity.RARE, mage.cards.e.EdgarMarkovsCoffin.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Edgar Markov's Coffin", 311, Rarity.RARE, mage.cards.e.EdgarMarkovsCoffin.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Edgar Markov's Coffin", 341, Rarity.RARE, mage.cards.e.EdgarMarkovsCoffin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Edgar's Awakening", 110, Rarity.UNCOMMON, mage.cards.e.EdgarsAwakening.class));
         cards.add(new SetCardInfo("Edgar, Charmed Groom", 236, Rarity.RARE, mage.cards.e.EdgarCharmedGroom.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Edgar, Charmed Groom", 311, Rarity.RARE, mage.cards.e.EdgarCharmedGroom.class, NON_FULL_USE_VARIOUS));

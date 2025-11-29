@@ -39,8 +39,6 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Formidable Speaker", 366, Rarity.RARE, mage.cards.f.FormidableSpeaker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hallowed Fountain", 265, Rarity.RARE, mage.cards.h.HallowedFountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hallowed Fountain", 347, Rarity.RARE, mage.cards.h.HallowedFountain.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Isilu, Carrier of Twilight", 13, Rarity.MYTHIC, mage.cards.i.IsiluCarrierOfTwilight.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Isilu, Carrier of Twilight", 286, Rarity.MYTHIC, mage.cards.i.IsiluCarrierOfTwilight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Morningtide's Light", 27, Rarity.MYTHIC, mage.cards.m.MorningtidesLight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Morningtide's Light", 301, Rarity.MYTHIC, mage.cards.m.MorningtidesLight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mutable Explorer", 186, Rarity.RARE, mage.cards.m.MutableExplorer.class, NON_FULL_USE_VARIOUS));

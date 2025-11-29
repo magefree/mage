@@ -106,7 +106,6 @@ public final class EldritchMoon extends ExpansionSet {
         cards.add(new SetCardInfo("Enlightened Maniac", 58, Rarity.COMMON, mage.cards.e.EnlightenedManiac.class));
         cards.add(new SetCardInfo("Erupting Dreadwolf", 142, Rarity.UNCOMMON, mage.cards.e.EruptingDreadwolf.class));
         cards.add(new SetCardInfo("Eternal Scourge", 7, Rarity.RARE, mage.cards.e.EternalScourge.class));
-        cards.add(new SetCardInfo("Extricator of Flesh", 23, Rarity.UNCOMMON, mage.cards.e.ExtricatorOfFlesh.class));
         cards.add(new SetCardInfo("Extricator of Sin", 23, Rarity.UNCOMMON, mage.cards.e.ExtricatorOfSin.class));
         cards.add(new SetCardInfo("Exultant Cultist", 59, Rarity.COMMON, mage.cards.e.ExultantCultist.class));
         cards.add(new SetCardInfo("Faith Unbroken", 24, Rarity.UNCOMMON, mage.cards.f.FaithUnbroken.class));

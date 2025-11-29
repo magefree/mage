@@ -58,8 +58,6 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Avacyn, Angel of Hope", 482, Rarity.MYTHIC, mage.cards.a.AvacynAngelOfHope.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Avacynian Priest", 12, Rarity.COMMON, mage.cards.a.AvacynianPriest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Avacynian Priest", 334, Rarity.COMMON, mage.cards.a.AvacynianPriest.class, RETRO_ART_USE_VARIOUS));
-        cards.add(new SetCardInfo("Awoken Demon", 107, Rarity.COMMON, mage.cards.a.AwokenDemon.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Awoken Demon", 462, Rarity.COMMON, mage.cards.a.AwokenDemon.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Awoken Horror", 460, Rarity.RARE, mage.cards.a.AwokenHorror.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Awoken Horror", 91, Rarity.RARE, mage.cards.a.AwokenHorror.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Balefire Dragon", 479, Rarity.MYTHIC, mage.cards.b.BalefireDragon.class, RETRO_ART));

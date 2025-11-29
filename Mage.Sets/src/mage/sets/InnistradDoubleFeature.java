@@ -38,7 +38,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Ancestral Anger", 409, Rarity.COMMON, mage.cards.a.AncestralAnger.class));
         cards.add(new SetCardInfo("Ancient Lumberknot", 497, Rarity.UNCOMMON, mage.cards.a.AncientLumberknot.class));
         cards.add(new SetCardInfo("Angelfire Ignition", 209, Rarity.RARE, mage.cards.a.AngelfireIgnition.class));
-        cards.add(new SetCardInfo("Angelic Enforcer", 17, Rarity.MYTHIC, mage.cards.a.AngelicEnforcer.class));
         cards.add(new SetCardInfo("Angelic Quartermaster", 269, Rarity.UNCOMMON, mage.cards.a.AngelicQuartermaster.class));
         cards.add(new SetCardInfo("Anje, Maid of Dishonor", 498, Rarity.RARE, mage.cards.a.AnjeMaidOfDishonor.class));
         cards.add(new SetCardInfo("Apprentice Sharpshooter", 452, Rarity.COMMON, mage.cards.a.ApprenticeSharpshooter.class));
@@ -53,7 +52,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Ashmouth Dragon", 159, Rarity.RARE, mage.cards.a.AshmouthDragon.class));
         cards.add(new SetCardInfo("Augur of Autumn", 168, Rarity.RARE, mage.cards.a.AugurOfAutumn.class));
         cards.add(new SetCardInfo("Avabruck Caretaker", 454, Rarity.MYTHIC, mage.cards.a.AvabruckCaretaker.class));
-        cards.add(new SetCardInfo("Awoken Demon", 100, Rarity.COMMON, mage.cards.a.AwokenDemon.class));
         cards.add(new SetCardInfo("Baithook Angler", 42, Rarity.COMMON, mage.cards.b.BaithookAngler.class));
         cards.add(new SetCardInfo("Ballista Watcher", 410, Rarity.UNCOMMON, mage.cards.b.BallistaWatcher.class));
         cards.add(new SetCardInfo("Baneblade Scoundrel", 85, Rarity.UNCOMMON, mage.cards.b.BanebladeScoundrel.class));
@@ -205,7 +203,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Eaten Alive", 99, Rarity.COMMON, mage.cards.e.EatenAlive.class));
         cards.add(new SetCardInfo("Eccentric Farmer", 185, Rarity.COMMON, mage.cards.e.EccentricFarmer.class));
         cards.add(new SetCardInfo("Ecstatic Awakener", 100, Rarity.COMMON, mage.cards.e.EcstaticAwakener.class));
-        cards.add(new SetCardInfo("Edgar Markov's Coffin", 503, Rarity.RARE, mage.cards.e.EdgarMarkovsCoffin.class));
         cards.add(new SetCardInfo("Edgar's Awakening", 377, Rarity.UNCOMMON, mage.cards.e.EdgarsAwakening.class));
         cards.add(new SetCardInfo("Edgar, Charmed Groom", 503, Rarity.RARE, mage.cards.e.EdgarCharmedGroom.class));
         cards.add(new SetCardInfo("Electric Revelation", 135, Rarity.COMMON, mage.cards.e.ElectricRevelation.class));

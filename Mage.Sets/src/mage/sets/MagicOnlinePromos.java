@@ -100,7 +100,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Angel of Suffering", 99767, Rarity.MYTHIC, mage.cards.a.AngelOfSuffering.class));
         cards.add(new SetCardInfo("Angel of the Ruins", 90002, Rarity.RARE, mage.cards.a.AngelOfTheRuins.class));
         cards.add(new SetCardInfo("Angelfire Ignition", 94080, Rarity.RARE, mage.cards.a.AngelfireIgnition.class));
-        cards.add(new SetCardInfo("Angelic Enforcer", 93888, Rarity.MYTHIC, mage.cards.a.AngelicEnforcer.class));
         cards.add(new SetCardInfo("Angelic Sleuth", 99921, Rarity.RARE, mage.cards.a.AngelicSleuth.class));
         cards.add(new SetCardInfo("Anger of the Gods", 102265, Rarity.RARE, mage.cards.a.AngerOfTheGods.class));
         cards.add(new SetCardInfo("Angrath, Captain of Chaos", 72237, Rarity.UNCOMMON, mage.cards.a.AngrathCaptainOfChaos.class, NON_FULL_USE_VARIOUS));
@@ -1315,7 +1314,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Inscription of Abundance", 83728, Rarity.RARE, mage.cards.i.InscriptionOfAbundance.class));
         cards.add(new SetCardInfo("Inscription of Insight", 83802, Rarity.RARE, mage.cards.i.InscriptionOfInsight.class));
         cards.add(new SetCardInfo("Inscription of Ruin", 83798, Rarity.RARE, mage.cards.i.InscriptionOfRuin.class));
-        cards.add(new SetCardInfo("Insidious Mist", 60472, Rarity.RARE, mage.cards.i.InsidiousMist.class));
         cards.add(new SetCardInfo("Inspired Idea", 95307, Rarity.RARE, mage.cards.i.InspiredIdea.class));
         cards.add(new SetCardInfo("Inspired Ultimatum", 80899, Rarity.RARE, mage.cards.i.InspiredUltimatum.class));
         cards.add(new SetCardInfo("Inspiring Refrain", 90034, Rarity.RARE, mage.cards.i.InspiringRefrain.class));

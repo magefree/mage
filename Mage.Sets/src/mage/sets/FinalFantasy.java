@@ -242,10 +242,6 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Gran Pulse Ochu", 189, Rarity.COMMON, mage.cards.g.GranPulseOchu.class));
         cards.add(new SetCardInfo("Guadosalam, Farplane Gateway", 281, Rarity.COMMON, mage.cards.g.GuadosalamFarplaneGateway.class));
         cards.add(new SetCardInfo("Gysahl Greens", 190, Rarity.COMMON, mage.cards.g.GysahlGreens.class));
-        cards.add(new SetCardInfo("Hades, Sorcerer of Eld", 218, Rarity.MYTHIC, mage.cards.h.HadesSorcererOfEld.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Hades, Sorcerer of Eld", 394, Rarity.MYTHIC, mage.cards.h.HadesSorcererOfEld.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Hades, Sorcerer of Eld", 483, Rarity.MYTHIC, mage.cards.h.HadesSorcererOfEld.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Hades, Sorcerer of Eld", 539, Rarity.MYTHIC, mage.cards.h.HadesSorcererOfEld.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Haste Magic", 140, Rarity.COMMON, mage.cards.h.HasteMagic.class));
         cards.add(new SetCardInfo("Hecteyes", 103, Rarity.COMMON, mage.cards.h.Hecteyes.class));
         cards.add(new SetCardInfo("Hill Gigas", 141, Rarity.COMMON, mage.cards.h.HillGigas.class));
@@ -352,8 +348,6 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 575, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mysidian Elder", 145, Rarity.COMMON, mage.cards.m.MysidianElder.class));
         cards.add(new SetCardInfo("Namazu Trader", 107, Rarity.COMMON, mage.cards.n.NamazuTrader.class));
-        cards.add(new SetCardInfo("Neo Exdeath, Dimension's End", 220, Rarity.UNCOMMON, mage.cards.n.NeoExdeathDimensionsEnd.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Neo Exdeath, Dimension's End", 485, Rarity.UNCOMMON, mage.cards.n.NeoExdeathDimensionsEnd.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nibelheim Aflame", 146, Rarity.MYTHIC, mage.cards.n.NibelheimAflame.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nibelheim Aflame", 339, Rarity.MYTHIC, mage.cards.n.NibelheimAflame.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ninja's Blades", 108, Rarity.RARE, mage.cards.n.NinjasBlades.class));
@@ -503,8 +497,6 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Summon: Brynhildr", 366, Rarity.RARE, mage.cards.s.SummonBrynhildr.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Choco/Mog", 35, Rarity.COMMON, mage.cards.s.SummonChocoMog.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Choco/Mog", 358, Rarity.COMMON, mage.cards.s.SummonChocoMog.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Summon: Esper Maduin", 185, Rarity.RARE, mage.cards.s.SummonEsperMaduin.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Summon: Esper Maduin", 370, Rarity.RARE, mage.cards.s.SummonEsperMaduin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Esper Ramuh", 161, Rarity.UNCOMMON, mage.cards.s.SummonEsperRamuh.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Esper Ramuh", 367, Rarity.UNCOMMON, mage.cards.s.SummonEsperRamuh.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Fat Chocobo", 202, Rarity.COMMON, mage.cards.s.SummonFatChocobo.class, NON_FULL_USE_VARIOUS));

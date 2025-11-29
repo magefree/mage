@@ -31,7 +31,6 @@ public final class TheLostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Amulet of Vigor", 103, Rarity.RARE, mage.cards.a.AmuletOfVigor.class));
         cards.add(new SetCardInfo("Angrath's Marauders", 215, Rarity.RARE, mage.cards.a.AngrathsMarauders.class));
         cards.add(new SetCardInfo("Apex Altisaur", 232, Rarity.RARE, mage.cards.a.ApexAltisaur.class));
-        cards.add(new SetCardInfo("Apex Observatory", 15, Rarity.MYTHIC, mage.cards.a.ApexObservatory.class));
         cards.add(new SetCardInfo("Arcane Signet", 104, Rarity.UNCOMMON, mage.cards.a.ArcaneSignet.class));
         cards.add(new SetCardInfo("Arch of Orazca", 319, Rarity.RARE, mage.cards.a.ArchOfOrazca.class));
         cards.add(new SetCardInfo("Archaeomancer's Map", 101, Rarity.RARE, mage.cards.a.ArchaeomancersMap.class));

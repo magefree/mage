@@ -146,8 +146,6 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Essence of Orthodoxy", 376, Rarity.RARE, mage.cards.e.EssenceOfOrthodoxy.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Etali, Primal Conqueror", 137, Rarity.RARE, mage.cards.e.EtaliPrimalConqueror.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Etali, Primal Conqueror", 298, Rarity.RARE, mage.cards.e.EtaliPrimalConqueror.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Etali, Primal Sickness", 137, Rarity.RARE, mage.cards.e.EtaliPrimalSickness.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Etali, Primal Sickness", 298, Rarity.RARE, mage.cards.e.EtaliPrimalSickness.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Etched Familiar", 101, Rarity.COMMON, mage.cards.e.EtchedFamiliar.class));
         cards.add(new SetCardInfo("Etched Host Doombringer", 102, Rarity.COMMON, mage.cards.e.EtchedHostDoombringer.class));
         cards.add(new SetCardInfo("Expedition Lookout", 56, Rarity.COMMON, mage.cards.e.ExpeditionLookout.class));
@@ -427,9 +425,6 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Terror of Towashi", 378, Rarity.RARE, mage.cards.t.TerrorOfTowashi.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thalia and The Gitrog Monster", 255, Rarity.MYTHIC, mage.cards.t.ThaliaAndTheGitrogMonster.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thalia and The Gitrog Monster", 316, Rarity.MYTHIC, mage.cards.t.ThaliaAndTheGitrogMonster.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("The Argent Etchings", 12, Rarity.MYTHIC, mage.cards.t.TheArgentEtchings.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("The Argent Etchings", 292, Rarity.MYTHIC, mage.cards.t.TheArgentEtchings.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("The Argent Etchings", 338, Rarity.MYTHIC, mage.cards.t.TheArgentEtchings.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Broken Sky", 241, Rarity.RARE, mage.cards.t.TheBrokenSky.class));
         cards.add(new SetCardInfo("The Grand Evolution", 213, Rarity.MYTHIC, mage.cards.t.TheGrandEvolution.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Grand Evolution", 301, Rarity.MYTHIC, mage.cards.t.TheGrandEvolution.class, NON_FULL_USE_VARIOUS));

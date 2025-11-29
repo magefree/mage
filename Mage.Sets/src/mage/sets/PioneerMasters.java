@@ -142,7 +142,6 @@ public class PioneerMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Expedite", 374, Rarity.COMMON, mage.cards.e.Expedite.class));
         cards.add(new SetCardInfo("Experiment One", 173, Rarity.UNCOMMON, mage.cards.e.ExperimentOne.class));
         cards.add(new SetCardInfo("Exquisite Firecraft", 133, Rarity.RARE, mage.cards.e.ExquisiteFirecraft.class));
-        cards.add(new SetCardInfo("Extricator of Flesh", 12, Rarity.UNCOMMON, mage.cards.e.ExtricatorOfFlesh.class));
         cards.add(new SetCardInfo("Extricator of Sin", 12, Rarity.UNCOMMON, mage.cards.e.ExtricatorOfSin.class));
         cards.add(new SetCardInfo("Fall of the Hammer", 134, Rarity.COMMON, mage.cards.f.FallOfTheHammer.class));
         cards.add(new SetCardInfo("Fallaji Archaeologist", 55, Rarity.COMMON, mage.cards.f.FallajiArchaeologist.class));

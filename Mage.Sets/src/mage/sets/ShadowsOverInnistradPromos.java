@@ -71,8 +71,6 @@ public class ShadowsOverInnistradPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Harness the Storm", "163s", Rarity.RARE, mage.cards.h.HarnessTheStorm.class));
         cards.add(new SetCardInfo("Incorrigible Youths", 166, Rarity.UNCOMMON, mage.cards.i.IncorrigibleYouths.class));
         cards.add(new SetCardInfo("Inexorable Blob", "212s", Rarity.RARE, mage.cards.i.InexorableBlob.class));
-        cards.add(new SetCardInfo("Insidious Mist", "108s", Rarity.RARE, mage.cards.i.InsidiousMist.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Insidious Mist", 108, Rarity.RARE, mage.cards.i.InsidiousMist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Invocation of Saint Traft", "246s", Rarity.RARE, mage.cards.i.InvocationOfSaintTraft.class));
         cards.add(new SetCardInfo("Jace, Unraveler of Secrets", "69s", Rarity.MYTHIC, mage.cards.j.JaceUnravelerOfSecrets.class));
         cards.add(new SetCardInfo("Markov Dreadknight", "122s", Rarity.RARE, mage.cards.m.MarkovDreadknight.class, NON_FULL_USE_VARIOUS));

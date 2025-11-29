@@ -44,8 +44,6 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Adeline, Resplendent Cathar", 312, Rarity.RARE, mage.cards.a.AdelineResplendentCathar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Angelfire Ignition", 209, Rarity.RARE, mage.cards.a.AngelfireIgnition.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Angelfire Ignition", 367, Rarity.RARE, mage.cards.a.AngelfireIgnition.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Angelic Enforcer", 17, Rarity.MYTHIC, mage.cards.a.AngelicEnforcer.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Angelic Enforcer", 327, Rarity.MYTHIC, mage.cards.a.AngelicEnforcer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arcane Infusion", 210, Rarity.UNCOMMON, mage.cards.a.ArcaneInfusion.class));
         cards.add(new SetCardInfo("Archive Haunt", 68, Rarity.UNCOMMON, mage.cards.a.ArchiveHaunt.class));
         cards.add(new SetCardInfo("Ardent Elementalist", 128, Rarity.COMMON, mage.cards.a.ArdentElementalist.class));
@@ -57,7 +55,6 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Ashmouth Dragon", 358, Rarity.RARE, mage.cards.a.AshmouthDragon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Augur of Autumn", 168, Rarity.RARE, mage.cards.a.AugurOfAutumn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Augur of Autumn", 360, Rarity.RARE, mage.cards.a.AugurOfAutumn.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Awoken Demon", 100, Rarity.COMMON, mage.cards.a.AwokenDemon.class));
         cards.add(new SetCardInfo("Baithook Angler", 42, Rarity.COMMON, mage.cards.b.BaithookAngler.class));
         cards.add(new SetCardInfo("Baneblade Scoundrel", 289, Rarity.UNCOMMON, mage.cards.b.BanebladeScoundrel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Baneblade Scoundrel", 85, Rarity.UNCOMMON, mage.cards.b.BanebladeScoundrel.class, NON_FULL_USE_VARIOUS));

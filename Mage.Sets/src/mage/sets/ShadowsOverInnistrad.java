@@ -173,7 +173,6 @@ public final class ShadowsOverInnistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Inexorable Blob", 212, Rarity.RARE, mage.cards.i.InexorableBlob.class));
         cards.add(new SetCardInfo("Inner Struggle", 167, Rarity.UNCOMMON, mage.cards.i.InnerStruggle.class));
         cards.add(new SetCardInfo("Inquisitor's Ox", 24, Rarity.COMMON, mage.cards.i.InquisitorsOx.class));
-        cards.add(new SetCardInfo("Insidious Mist", 108, Rarity.RARE, mage.cards.i.InsidiousMist.class));
         cards.add(new SetCardInfo("Insolent Neonate", 168, Rarity.COMMON, mage.cards.i.InsolentNeonate.class));
         cards.add(new SetCardInfo("Inspiring Captain", 25, Rarity.COMMON, mage.cards.i.InspiringCaptain.class));
         cards.add(new SetCardInfo("Intrepid Provisioner", 213, Rarity.COMMON, mage.cards.i.IntrepidProvisioner.class));
