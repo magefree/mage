@@ -162,7 +162,6 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Eccentric Farmer", 185, Rarity.COMMON, mage.cards.e.EccentricFarmer.class));
         cards.add(new SetCardInfo("Ecstatic Awakener", 100, Rarity.COMMON, mage.cards.e.EcstaticAwakener.class));
         cards.add(new SetCardInfo("Electric Revelation", 135, Rarity.COMMON, mage.cards.e.ElectricRevelation.class));
-        cards.add(new SetCardInfo("Embodiment of Flame", 141, Rarity.UNCOMMON, mage.cards.e.EmbodimentOfFlame.class));
         cards.add(new SetCardInfo("Enduring Angel", 17, Rarity.MYTHIC, mage.cards.e.EnduringAngel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Enduring Angel", 327, Rarity.MYTHIC, mage.cards.e.EnduringAngel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Evolving Wilds", 261, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
@@ -175,8 +174,6 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Famished Foragers", 138, Rarity.COMMON, mage.cards.f.FamishedForagers.class));
         cards.add(new SetCardInfo("Fangblade Brigand", 139, Rarity.UNCOMMON, mage.cards.f.FangbladeBrigand.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fangblade Brigand", 292, Rarity.UNCOMMON, mage.cards.f.FangbladeBrigand.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Fangblade Eviscerator", 139, Rarity.UNCOMMON, mage.cards.f.FangbladeEviscerator.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Fangblade Eviscerator", 292, Rarity.UNCOMMON, mage.cards.f.FangbladeEviscerator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fateful Absence", 18, Rarity.RARE, mage.cards.f.FatefulAbsence.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fateful Absence", 328, Rarity.RARE, mage.cards.f.FatefulAbsence.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Festival Crasher", 140, Rarity.COMMON, mage.cards.f.FestivalCrasher.class));

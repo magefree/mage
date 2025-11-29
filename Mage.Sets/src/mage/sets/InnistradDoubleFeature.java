@@ -207,7 +207,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Edgar's Awakening", 377, Rarity.UNCOMMON, mage.cards.e.EdgarsAwakening.class));
         cards.add(new SetCardInfo("Edgar, Charmed Groom", 503, Rarity.RARE, mage.cards.e.EdgarCharmedGroom.class));
         cards.add(new SetCardInfo("Electric Revelation", 135, Rarity.COMMON, mage.cards.e.ElectricRevelation.class));
-        cards.add(new SetCardInfo("Embodiment of Flame", 141, Rarity.UNCOMMON, mage.cards.e.EmbodimentOfFlame.class));
         cards.add(new SetCardInfo("End the Festivities", 422, Rarity.COMMON, mage.cards.e.EndTheFestivities.class));
         cards.add(new SetCardInfo("Endless Ranks of the Dead", 535, Rarity.RARE, mage.cards.e.EndlessRanksOfTheDead.class));
         cards.add(new SetCardInfo("Enduring Angel", 17, Rarity.MYTHIC, mage.cards.e.EnduringAngel.class));
@@ -225,11 +224,9 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Falkenrath Pit Fighter", 137, Rarity.RARE, mage.cards.f.FalkenrathPitFighter.class));
         cards.add(new SetCardInfo("Famished Foragers", 138, Rarity.COMMON, mage.cards.f.FamishedForagers.class));
         cards.add(new SetCardInfo("Fangblade Brigand", 139, Rarity.UNCOMMON, mage.cards.f.FangbladeBrigand.class));
-        cards.add(new SetCardInfo("Fangblade Eviscerator", 139, Rarity.UNCOMMON, mage.cards.f.FangbladeEviscerator.class));
         cards.add(new SetCardInfo("Fateful Absence", 18, Rarity.RARE, mage.cards.f.FatefulAbsence.class));
         cards.add(new SetCardInfo("Fear of Death", 326, Rarity.COMMON, mage.cards.f.FearOfDeath.class));
         cards.add(new SetCardInfo("Fearful Villager", 424, Rarity.COMMON, mage.cards.f.FearfulVillager.class));
-        cards.add(new SetCardInfo("Fearsome Werewolf", 424, Rarity.COMMON, mage.cards.f.FearsomeWerewolf.class));
         cards.add(new SetCardInfo("Fell Stinger", 379, Rarity.UNCOMMON, mage.cards.f.FellStinger.class));
         cards.add(new SetCardInfo("Festival Crasher", 140, Rarity.COMMON, mage.cards.f.FestivalCrasher.class));
         cards.add(new SetCardInfo("Field of Ruin", 262, Rarity.UNCOMMON, mage.cards.f.FieldOfRuin.class));

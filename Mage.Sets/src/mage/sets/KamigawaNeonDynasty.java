@@ -419,9 +419,6 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Reckoner Bankbuster", 499, Rarity.RARE, mage.cards.r.ReckonerBankbuster.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Reckoner Shakedown", 119, Rarity.COMMON, mage.cards.r.ReckonerShakedown.class));
         cards.add(new SetCardInfo("Reckoner's Bargain", 120, Rarity.COMMON, mage.cards.r.ReckonersBargain.class));
-        cards.add(new SetCardInfo("Reflection of Kiki-Jiki", 141, Rarity.RARE, mage.cards.r.ReflectionOfKikiJiki.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Reflection of Kiki-Jiki", 357, Rarity.RARE, mage.cards.r.ReflectionOfKikiJiki.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Reflection of Kiki-Jiki", 465, Rarity.RARE, mage.cards.r.ReflectionOfKikiJiki.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Regent's Authority", 32, Rarity.COMMON, mage.cards.r.RegentsAuthority.class));
         cards.add(new SetCardInfo("Reinforced Ronin", 158, Rarity.UNCOMMON, mage.cards.r.ReinforcedRonin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Reinforced Ronin", 323, Rarity.UNCOMMON, mage.cards.r.ReinforcedRonin.class, NON_FULL_USE_VARIOUS));

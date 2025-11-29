@@ -188,7 +188,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Falkenrath Forebear", 334, Rarity.RARE, mage.cards.f.FalkenrathForebear.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fear of Death", 59, Rarity.COMMON, mage.cards.f.FearOfDeath.class));
         cards.add(new SetCardInfo("Fearful Villager", 157, Rarity.COMMON, mage.cards.f.FearfulVillager.class));
-        cards.add(new SetCardInfo("Fearsome Werewolf", 157, Rarity.COMMON, mage.cards.f.FearsomeWerewolf.class));
         cards.add(new SetCardInfo("Fell Stinger", 112, Rarity.UNCOMMON, mage.cards.f.FellStinger.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fell Stinger", 406, Rarity.UNCOMMON, mage.cards.f.FellStinger.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fierce Retribution", 13, Rarity.COMMON, mage.cards.f.FierceRetribution.class));

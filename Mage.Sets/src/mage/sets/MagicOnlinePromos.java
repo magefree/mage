@@ -2179,7 +2179,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Red Dragon", 92754, Rarity.UNCOMMON, mage.cards.r.RedDragon.class));
         cards.add(new SetCardInfo("Red Elemental Blast", 43610, Rarity.UNCOMMON, mage.cards.r.RedElementalBlast.class));
         cards.add(new SetCardInfo("Reflecting Pool", 62487, Rarity.RARE, mage.cards.r.ReflectingPool.class));
-        cards.add(new SetCardInfo("Reflection of Kiki-Jiki", 98009, Rarity.RARE, mage.cards.r.ReflectionOfKikiJiki.class));
         cards.add(new SetCardInfo("Reflections of Littjara", 88252, Rarity.RARE, mage.cards.r.ReflectionsOfLittjara.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Reflections of Littjara", 88254, Rarity.RARE, mage.cards.r.ReflectionsOfLittjara.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Regal Leosaur", 80967, Rarity.UNCOMMON, mage.cards.r.RegalLeosaur.class));
