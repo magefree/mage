@@ -119,7 +119,6 @@ public final class DarkAscension extends ExpansionSet {
         cards.add(new SetCardInfo("Helvault", 151, Rarity.MYTHIC, mage.cards.h.Helvault.class));
         cards.add(new SetCardInfo("Highborn Ghoul", 68, Rarity.COMMON, mage.cards.h.HighbornGhoul.class));
         cards.add(new SetCardInfo("Hinterland Hermit", 94, Rarity.COMMON, mage.cards.h.HinterlandHermit.class));
-        cards.add(new SetCardInfo("Hinterland Scourge", 94, Rarity.COMMON, mage.cards.h.HinterlandScourge.class));
         cards.add(new SetCardInfo("Hollowhenge Beast", 118, Rarity.COMMON, mage.cards.h.HollowhengeBeast.class));
         cards.add(new SetCardInfo("Hollowhenge Spirit", 10, Rarity.UNCOMMON, mage.cards.h.HollowhengeSpirit.class));
         cards.add(new SetCardInfo("Hunger of the Howlpack", 119, Rarity.COMMON, mage.cards.h.HungerOfTheHowlpack.class));

@@ -156,7 +156,6 @@ public final class ShadowsOverInnistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Harvest Hand", 256, Rarity.UNCOMMON, mage.cards.h.HarvestHand.class));
         cards.add(new SetCardInfo("Haunted Cloak", 257, Rarity.UNCOMMON, mage.cards.h.HauntedCloak.class));
         cards.add(new SetCardInfo("Heir of Falkenrath", 116, Rarity.UNCOMMON, mage.cards.h.HeirOfFalkenrath.class));
-        cards.add(new SetCardInfo("Heir to the Night", 116, Rarity.UNCOMMON, mage.cards.h.HeirToTheNight.class));
         cards.add(new SetCardInfo("Hermit of the Natterknolls", 209, Rarity.UNCOMMON, mage.cards.h.HermitOfTheNatterknolls.class));
         cards.add(new SetCardInfo("Highland Lake", 277, Rarity.UNCOMMON, mage.cards.h.HighlandLake.class));
         cards.add(new SetCardInfo("Hinterland Logger", 210, Rarity.COMMON, mage.cards.h.HinterlandLogger.class));
@@ -191,7 +190,6 @@ public final class ShadowsOverInnistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Lightning Axe", 170, Rarity.UNCOMMON, mage.cards.l.LightningAxe.class));
         cards.add(new SetCardInfo("Liliana's Indignation", 120, Rarity.UNCOMMON, mage.cards.l.LilianasIndignation.class));
         cards.add(new SetCardInfo("Loam Dryad", 216, Rarity.COMMON, mage.cards.l.LoamDryad.class));
-        cards.add(new SetCardInfo("Lone Wolf of the Natterknolls", 209, Rarity.UNCOMMON, mage.cards.l.LoneWolfOfTheNatterknolls.class));
         cards.add(new SetCardInfo("Macabre Waltz", 121, Rarity.COMMON, mage.cards.m.MacabreWaltz.class));
         cards.add(new SetCardInfo("Mad Prophet", 171, Rarity.UNCOMMON, mage.cards.m.MadProphet.class));
         cards.add(new SetCardInfo("Magmatic Chasm", 172, Rarity.COMMON, mage.cards.m.MagmaticChasm.class));
@@ -262,7 +260,6 @@ public final class ShadowsOverInnistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Sanguinary Mage", 178, Rarity.COMMON, mage.cards.s.SanguinaryMage.class));
         cards.add(new SetCardInfo("Sanitarium Skeleton", 133, Rarity.COMMON, mage.cards.s.SanitariumSkeleton.class));
         cards.add(new SetCardInfo("Scourge Wolf", 179, Rarity.RARE, mage.cards.s.ScourgeWolf.class));
-        cards.add(new SetCardInfo("Scrounged Scythe", 256, Rarity.UNCOMMON, mage.cards.s.ScroungedScythe.class));
         cards.add(new SetCardInfo("Seagraf Skaab", 84, Rarity.COMMON, mage.cards.s.SeagrafSkaab.class));
         cards.add(new SetCardInfo("Seasons Past", 226, Rarity.MYTHIC, mage.cards.s.SeasonsPast.class));
         cards.add(new SetCardInfo("Second Harvest", 227, Rarity.RARE, mage.cards.s.SecondHarvest.class));
@@ -350,7 +347,6 @@ public final class ShadowsOverInnistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Welcome to the Fold", 96, Rarity.RARE, mage.cards.w.WelcomeToTheFold.class));
         cards.add(new SetCardInfo("Werewolf of Ancient Hunger", 225, Rarity.RARE, mage.cards.w.WerewolfOfAncientHunger.class));
         cards.add(new SetCardInfo("Westvale Abbey", 281, Rarity.RARE, mage.cards.w.WestvaleAbbey.class));
-        cards.add(new SetCardInfo("Westvale Cult Leader", 21, Rarity.RARE, mage.cards.w.WestvaleCultLeader.class));
         cards.add(new SetCardInfo("Wicker Witch", 268, Rarity.COMMON, mage.cards.w.WickerWitch.class));
         cards.add(new SetCardInfo("Wild-Field Scarecrow", 269, Rarity.UNCOMMON, mage.cards.w.WildFieldScarecrow.class));
         cards.add(new SetCardInfo("Wolf of Devil's Breach", 192, Rarity.MYTHIC, mage.cards.w.WolfOfDevilsBreach.class));

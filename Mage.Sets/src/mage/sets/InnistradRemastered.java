@@ -63,7 +63,6 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Awoken Horror", 460, Rarity.RARE, mage.cards.a.AwokenHorror.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Awoken Horror", 91, Rarity.RARE, mage.cards.a.AwokenHorror.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Balefire Dragon", 479, Rarity.MYTHIC, mage.cards.b.BalefireDragon.class, RETRO_ART));
-        cards.add(new SetCardInfo("Bane of Hanweir", 158, Rarity.COMMON, mage.cards.b.BaneOfHanweir.class));
         cards.add(new SetCardInfo("Battleground Geist", 53, Rarity.COMMON, mage.cards.b.BattlegroundGeist.class));
         cards.add(new SetCardInfo("Bedlam Reveler", 142, Rarity.RARE, mage.cards.b.BedlamReveler.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bedlam Reveler", 312, Rarity.RARE, mage.cards.b.BedlamReveler.class, NON_FULL_USE_VARIOUS));
@@ -404,7 +403,6 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Savage Alliance", 169, Rarity.UNCOMMON, mage.cards.s.SavageAlliance.class));
         cards.add(new SetCardInfo("Scorned Villager", 212, Rarity.COMMON, mage.cards.s.ScornedVillager.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Scorned Villager", 468, Rarity.COMMON, mage.cards.s.ScornedVillager.class, RETRO_ART_USE_VARIOUS));
-        cards.add(new SetCardInfo("Scrounged Scythe", 265, Rarity.COMMON, mage.cards.s.ScroungedScythe.class));
         cards.add(new SetCardInfo("Second Harvest", 213, Rarity.RARE, mage.cards.s.SecondHarvest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Second Harvest", 417, Rarity.RARE, mage.cards.s.SecondHarvest.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Seize the Storm", 170, Rarity.COMMON, mage.cards.s.SeizeTheStorm.class, NON_FULL_USE_VARIOUS));

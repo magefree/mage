@@ -571,9 +571,6 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Upriser Renegade", 170, Rarity.UNCOMMON, mage.cards.u.UpriserRenegade.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Upriser Renegade", 324, Rarity.UNCOMMON, mage.cards.u.UpriserRenegade.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vector Glider", 66, Rarity.COMMON, mage.cards.v.VectorGlider.class));
-        cards.add(new SetCardInfo("Vessel of the All-Consuming", 221, Rarity.MYTHIC, mage.cards.v.VesselOfTheAllConsuming.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Vessel of the All-Consuming", 361, Rarity.MYTHIC, mage.cards.v.VesselOfTheAllConsuming.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Vessel of the All-Consuming", 486, Rarity.MYTHIC, mage.cards.v.VesselOfTheAllConsuming.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Virus Beetle", 128, Rarity.COMMON, mage.cards.v.VirusBeetle.class));
         cards.add(new SetCardInfo("Voltage Surge", 171, Rarity.COMMON, mage.cards.v.VoltageSurge.class));
         cards.add(new SetCardInfo("Walking Skyscraper", 263, Rarity.UNCOMMON, mage.cards.w.WalkingSkyscraper.class));

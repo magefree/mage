@@ -1,10 +1,10 @@
 package mage.cards.h;
 
-import mage.MageInt;
 import mage.abilities.keyword.DayboundAbility;
+import mage.abilities.keyword.NightboundAbility;
 import mage.abilities.keyword.TrampleAbility;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
@@ -13,22 +13,32 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class HarvesttideInfiltrator extends CardImpl {
+public final class HarvesttideInfiltrator extends TransformingDoubleFacedCard {
 
     public HarvesttideInfiltrator(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.WEREWOLF}, "{2}{R}",
+                "Harvesttide Assailant",
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.WEREWOLF}, "R"
+        );
 
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.WEREWOLF);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(2);
-        this.secondSideCardClazz = mage.cards.h.HarvesttideAssailant.class;
+        // Harvesttide Infiltrator
+        this.getLeftHalfCard().setPT(3, 2);
 
         // Trample
-        this.addAbility(TrampleAbility.getInstance());
+        this.getLeftHalfCard().addAbility(TrampleAbility.getInstance());
 
         // Daybound
-        this.addAbility(new DayboundAbility());
+        this.getLeftHalfCard().addAbility(new DayboundAbility());
+
+        // Harvesttide Assailant
+        this.getRightHalfCard().setPT(4, 4);
+
+        // Trample
+        this.getRightHalfCard().addAbility(TrampleAbility.getInstance());
+
+        // Nightbound
+        this.getRightHalfCard().addAbility(new NightboundAbility());
     }
 
     private HarvesttideInfiltrator(final HarvesttideInfiltrator card) {

@@ -116,8 +116,6 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Covert Cutpurse", 92, Rarity.UNCOMMON, mage.cards.c.CovertCutpurse.class));
         cards.add(new SetCardInfo("Covetous Castaway", 45, Rarity.UNCOMMON, mage.cards.c.CovetousCastaway.class));
         cards.add(new SetCardInfo("Crawl from the Cellar", 93, Rarity.COMMON, mage.cards.c.CrawlFromTheCellar.class));
-        cards.add(new SetCardInfo("Creeping Inn", 264, Rarity.MYTHIC, mage.cards.c.CreepingInn.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Creeping Inn", 379, Rarity.MYTHIC, mage.cards.c.CreepingInn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Croaking Counterpart", 215, Rarity.RARE, mage.cards.c.CroakingCounterpart.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Croaking Counterpart", 369, Rarity.RARE, mage.cards.c.CroakingCounterpart.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Crossroads Candleguide", 253, Rarity.COMMON, mage.cards.c.CrossroadsCandleguide.class));
@@ -213,8 +211,6 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Grizzly Ghoul", 226, Rarity.UNCOMMON, mage.cards.g.GrizzlyGhoul.class));
         cards.add(new SetCardInfo("Hallowed Respite", 227, Rarity.RARE, mage.cards.h.HallowedRespite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hallowed Respite", 373, Rarity.RARE, mage.cards.h.HallowedRespite.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Harvesttide Assailant", 143, Rarity.COMMON, mage.cards.h.HarvesttideAssailant.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Harvesttide Assailant", 293, Rarity.COMMON, mage.cards.h.HarvesttideAssailant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Harvesttide Infiltrator", 143, Rarity.COMMON, mage.cards.h.HarvesttideInfiltrator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Harvesttide Infiltrator", 293, Rarity.COMMON, mage.cards.h.HarvesttideInfiltrator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Harvesttide Sentry", 186, Rarity.COMMON, mage.cards.h.HarvesttideSentry.class));
@@ -233,7 +229,6 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Immolation", 144, Rarity.COMMON, mage.cards.i.Immolation.class));
         cards.add(new SetCardInfo("Infernal Grasp", 107, Rarity.UNCOMMON, mage.cards.i.InfernalGrasp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Infernal Grasp", 389, Rarity.UNCOMMON, mage.cards.i.InfernalGrasp.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Inherited Fiend", 105, Rarity.UNCOMMON, mage.cards.i.InheritedFiend.class));
         cards.add(new SetCardInfo("Intrepid Adversary", 25, Rarity.MYTHIC, mage.cards.i.IntrepidAdversary.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Intrepid Adversary", 329, Rarity.MYTHIC, mage.cards.i.IntrepidAdversary.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 270, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
@@ -452,8 +447,6 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Unnatural Growth", 365, Rarity.RARE, mage.cards.u.UnnaturalGrowth.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Unnatural Moonrise", 247, Rarity.UNCOMMON, mage.cards.u.UnnaturalMoonrise.class));
         cards.add(new SetCardInfo("Unruly Mob", 40, Rarity.COMMON, mage.cards.u.UnrulyMob.class));
-        cards.add(new SetCardInfo("Untamed Pup", 187, Rarity.UNCOMMON, mage.cards.u.UntamedPup.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Untamed Pup", 302, Rarity.UNCOMMON, mage.cards.u.UntamedPup.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vadrik, Astral Archmage", 248, Rarity.RARE, mage.cards.v.VadrikAstralArchmage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vadrik, Astral Archmage", 325, Rarity.RARE, mage.cards.v.VadrikAstralArchmage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vampire Interloper", 125, Rarity.COMMON, mage.cards.v.VampireInterloper.class));

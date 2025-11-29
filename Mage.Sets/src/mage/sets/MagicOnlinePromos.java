@@ -534,7 +534,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Crash the Party", 99839, Rarity.RARE, mage.cards.c.CrashTheParty.class));
         cards.add(new SetCardInfo("Crawling Barrens", 83732, Rarity.RARE, mage.cards.c.CrawlingBarrens.class));
         cards.add(new SetCardInfo("Creative Technique", 90122, Rarity.RARE, mage.cards.c.CreativeTechnique.class));
-        cards.add(new SetCardInfo("Creeping Inn", 94088, Rarity.MYTHIC, mage.cards.c.CreepingInn.class));
         cards.add(new SetCardInfo("Creeping Mold", 32525, Rarity.UNCOMMON, mage.cards.c.CreepingMold.class, RETRO_ART));
         cards.add(new SetCardInfo("Creepy Puppeteer", 95365, Rarity.RARE, mage.cards.c.CreepyPuppeteer.class));
         cards.add(new SetCardInfo("Crippling Fear", 88286, Rarity.RARE, mage.cards.c.CripplingFear.class));
@@ -2978,7 +2977,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Verazol, the Split Current", 83820, Rarity.RARE, mage.cards.v.VerazolTheSplitCurrent.class));
         cards.add(new SetCardInfo("Verdant Catacombs", 91403, Rarity.RARE, mage.cards.v.VerdantCatacombs.class));
         cards.add(new SetCardInfo("Verdant Mastery", 90138, Rarity.RARE, mage.cards.v.VerdantMastery.class));
-        cards.add(new SetCardInfo("Vessel of the All-Consuming", 98105, Rarity.MYTHIC, mage.cards.v.VesselOfTheAllConsuming.class));
         cards.add(new SetCardInfo("Vesuvan Duplimancy", 103402, Rarity.MYTHIC, mage.cards.v.VesuvanDuplimancy.class));
         cards.add(new SetCardInfo("Vexing Shusher", 32533, Rarity.RARE, mage.cards.v.VexingShusher.class));
         cards.add(new SetCardInfo("Veyran, Voice of Duality", 90282, Rarity.MYTHIC, mage.cards.v.VeyranVoiceOfDuality.class));
@@ -3061,7 +3059,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Wild-Magic Sorcerer", 92752, Rarity.RARE, mage.cards.w.WildMagicSorcerer.class));
         cards.add(new SetCardInfo("Wildcall", 55749, Rarity.RARE, mage.cards.w.Wildcall.class));
         cards.add(new SetCardInfo("Wildfire Eternal", 64989, Rarity.RARE, mage.cards.w.WildfireEternal.class));
-        cards.add(new SetCardInfo("Wildsong Howler", 95425, Rarity.RARE, mage.cards.w.WildsongHowler.class));
         cards.add(new SetCardInfo("Willbender", 36258, Rarity.UNCOMMON, mage.cards.w.Willbender.class));
         cards.add(new SetCardInfo("Willow Geist", 94024, Rarity.RARE, mage.cards.w.WillowGeist.class));
         cards.add(new SetCardInfo("Willowdusk, Essence Seer", 90288, Rarity.MYTHIC, mage.cards.w.WillowduskEssenceSeer.class));

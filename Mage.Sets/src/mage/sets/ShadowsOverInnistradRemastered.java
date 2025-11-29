@@ -259,7 +259,6 @@ public class ShadowsOverInnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Sage of Ancient Lore", 211, Rarity.RARE, mage.cards.s.SageOfAncientLore.class));
         cards.add(new SetCardInfo("Sanitarium Skeleton", 133, Rarity.COMMON, mage.cards.s.SanitariumSkeleton.class));
         cards.add(new SetCardInfo("Scourge Wolf", 175, Rarity.UNCOMMON, mage.cards.s.ScourgeWolf.class));
-        cards.add(new SetCardInfo("Scrounged Scythe", 252, Rarity.UNCOMMON, mage.cards.s.ScroungedScythe.class));
         cards.add(new SetCardInfo("Seasons Past", 212, Rarity.MYTHIC, mage.cards.s.SeasonsPast.class));
         cards.add(new SetCardInfo("Second Harvest", 213, Rarity.RARE, mage.cards.s.SecondHarvest.class));
         cards.add(new SetCardInfo("Selfless Spirit", 42, Rarity.RARE, mage.cards.s.SelflessSpirit.class));

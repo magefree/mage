@@ -113,7 +113,6 @@ public class RivalsOfIxalanPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Warkite Marauder", "60s", Rarity.RARE, mage.cards.w.WarkiteMarauder.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wayward Swordtooth", "150p", Rarity.RARE, mage.cards.w.WaywardSwordtooth.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wayward Swordtooth", "150s", Rarity.RARE, mage.cards.w.WaywardSwordtooth.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Winged Temple of Orazca", "158s", Rarity.RARE, mage.cards.w.WingedTempleOfOrazca.class));
         cards.add(new SetCardInfo("World Shaper", "151p", Rarity.RARE, mage.cards.w.WorldShaper.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("World Shaper", "151s", Rarity.RARE, mage.cards.w.WorldShaper.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Zacama, Primal Calamity", "174p", Rarity.MYTHIC, mage.cards.z.ZacamaPrimalCalamity.class, NON_FULL_USE_VARIOUS));

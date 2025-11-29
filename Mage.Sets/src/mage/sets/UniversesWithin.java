@@ -37,7 +37,6 @@ public final class UniversesWithin extends ExpansionSet {
         cards.add(new SetCardInfo("Hansk, Slayer Zealot", 22, Rarity.MYTHIC, mage.cards.h.HanskSlayerZealot.class));
         cards.add(new SetCardInfo("Hargilde, Kindly Runechanter", 5, Rarity.RARE, mage.cards.h.HargildeKindlyRunechanter.class));
         cards.add(new SetCardInfo("Havengul Laboratory", 9, Rarity.RARE, mage.cards.h.HavengulLaboratory.class));
-        cards.add(new SetCardInfo("Havengul Mystery", 9, Rarity.RARE, mage.cards.h.HavengulMystery.class));
         cards.add(new SetCardInfo("Immard, the Stormcleaver", 14, Rarity.RARE, mage.cards.i.ImmardTheStormcleaver.class));
         cards.add(new SetCardInfo("Jurin, Leading the Charge", 27, Rarity.RARE, mage.cards.j.JurinLeadingTheCharge.class));
         cards.add(new SetCardInfo("Maarika, Brutal Gladiator", 15, Rarity.RARE, mage.cards.m.MaarikaBrutalGladiator.class));

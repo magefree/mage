@@ -616,7 +616,6 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Rogue's Passage", 607, Rarity.RARE, mage.cards.r.RoguesPassage.class));
         cards.add(new SetCardInfo("Darksteel Citadel", 608, Rarity.RARE, mage.cards.d.DarksteelCitadel.class));
         cards.add(new SetCardInfo("Havengul Laboratory", 609, Rarity.RARE, mage.cards.h.HavengulLaboratory.class));
-        cards.add(new SetCardInfo("Havengul Mystery", 609, Rarity.RARE, mage.cards.h.HavengulMystery.class));
         cards.add(new SetCardInfo("Bonescythe Sliver", 610, Rarity.RARE, mage.cards.b.BonescytheSliver.class));
         cards.add(new SetCardInfo("Constricting Sliver", 611, Rarity.RARE, mage.cards.c.ConstrictingSliver.class));
         cards.add(new SetCardInfo("Essence Sliver", 612, Rarity.RARE, mage.cards.e.EssenceSliver.class));

@@ -1,20 +1,19 @@
 package mage.cards.h;
 
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.CantBeCounteredSourceAbility;
+import mage.abilities.common.TransformsOrEntersTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.keyword.DayboundAbility;
+import mage.abilities.keyword.NightboundAbility;
 import mage.cards.Card;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.cards.TransformingDoubleFacedCard;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -28,29 +27,43 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class HowlpackPiper extends CardImpl {
+public final class HowlpackPiper extends TransformingDoubleFacedCard {
 
     public HowlpackPiper(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.WEREWOLF}, "{3}{G}",
+                "Wildsong Howler",
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.WEREWOLF}, "G"
+        );
 
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.WEREWOLF);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-        this.secondSideCardClazz = mage.cards.w.WildsongHowler.class;
+        // Howlpack Piper
+        this.getLeftHalfCard().setPT(2, 2);
 
         // This spell can't be countered.
-        this.addAbility(new CantBeCounteredSourceAbility());
+        this.getLeftHalfCard().addAbility(new CantBeCounteredSourceAbility());
 
         // {1}{G}, {T}: You may put a creature card from your hand onto the battlefield. If it's a Wolf or Werewolf, untap Howlpack Piper. Activate only as a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(
                 new HowlpackPiperEffect(), new ManaCostsImpl<>("{1}{G}")
         );
         ability.addCost(new TapSourceCost());
-        this.addAbility(ability);
+        this.getLeftHalfCard().addAbility(ability);
 
         // Daybound
-        this.addAbility(new DayboundAbility());
+        this.getLeftHalfCard().addAbility(new DayboundAbility());
+
+        // Wildsong Howler
+        this.getRightHalfCard().setPT(4, 4);
+
+        // Whenever this creature enters the battlefield or transforms into Wildsong Howler, look at the top six cards of your library.
+        // You may reveal a creature card from among them and put it into your hand.
+        // Put the rest on the bottom of your library in a random order.
+        this.getRightHalfCard().addAbility(new TransformsOrEntersTriggeredAbility(
+                new LookLibraryAndPickControllerEffect(6, 1, StaticFilters.FILTER_CARD_CREATURE_A, PutCards.HAND, PutCards.BOTTOM_RANDOM),
+                false));
+
+        // Nightbound
+        this.getRightHalfCard().addAbility(new NightboundAbility());
     }
 
     private HowlpackPiper(final HowlpackPiper card) {

@@ -48,7 +48,6 @@ public final class Innistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Avacynian Priest", 4, Rarity.COMMON, mage.cards.a.AvacynianPriest.class));
         cards.add(new SetCardInfo("Back from the Brink", 44, Rarity.RARE, mage.cards.b.BackFromTheBrink.class));
         cards.add(new SetCardInfo("Balefire Dragon", 129, Rarity.MYTHIC, mage.cards.b.BalefireDragon.class));
-        cards.add(new SetCardInfo("Bane of Hanweir", 145, Rarity.UNCOMMON, mage.cards.b.BaneOfHanweir.class));
         cards.add(new SetCardInfo("Battleground Geist", 45, Rarity.UNCOMMON, mage.cards.b.BattlegroundGeist.class));
         cards.add(new SetCardInfo("Bitterheart Witch", 88, Rarity.UNCOMMON, mage.cards.b.BitterheartWitch.class));
         cards.add(new SetCardInfo("Blasphemous Act", 130, Rarity.RARE, mage.cards.b.BlasphemousAct.class));
