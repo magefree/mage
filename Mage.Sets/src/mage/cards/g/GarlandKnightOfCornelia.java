@@ -1,16 +1,18 @@
 package mage.cards.g;
 
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.PutOnLibrarySourceEffect;
 import mage.abilities.effects.keyword.SurveilEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -22,29 +24,38 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class GarlandKnightOfCornelia extends CardImpl {
+public final class GarlandKnightOfCornelia extends TransformingDoubleFacedCard {
 
     public GarlandKnightOfCornelia(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{R}");
+        super(ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.KNIGHT}, "{B}{R}",
+                "Chaos, the Endless",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.DEMON}, "BR"
+        );
 
-        this.secondSideCardClazz = mage.cards.c.ChaosTheEndless.class;
-
-        this.supertype.add(SuperType.LEGENDARY);
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.KNIGHT);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(2);
+        // Garland, Knight of Cornelia
+        this.getLeftHalfCard().setPT(3, 2);
 
         // Whenever you cast a noncreature spell, surveil 1.
-        this.addAbility(new SpellCastControllerTriggeredAbility(
+        this.getLeftHalfCard().addAbility(new SpellCastControllerTriggeredAbility(
                 new SurveilEffect(1), StaticFilters.FILTER_SPELL_A_NON_CREATURE, false
         ));
 
         // {3}{B}{B}{R}{R}: Return this card from your graveyard to the battlefield transformed. Activate only as a sorcery.
-        this.addAbility(new TransformAbility());
-        this.addAbility(new ActivateAsSorceryActivatedAbility(
+        this.getLeftHalfCard().addAbility(new ActivateAsSorceryActivatedAbility(
                 Zone.GRAVEYARD, new GarlandKnightOfCorneliaEffect(), new ManaCostsImpl<>("{3}{B}{B}{R}{R}")
         ));
+
+        // Chaos, the Endless
+        this.getRightHalfCard().setPT(5, 5);
+
+        // Flying
+        this.getRightHalfCard().addAbility(FlyingAbility.getInstance());
+
+        // When Chaos dies, put it on the bottom of its owner's library.
+        this.getRightHalfCard().addAbility(new DiesSourceTriggeredAbility(new PutOnLibrarySourceEffect(
+                false, "put it on the bottom of its owner's library"
+        ), false));
     }
 
     private GarlandKnightOfCornelia(final GarlandKnightOfCornelia card) {

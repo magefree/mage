@@ -263,7 +263,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Gluttonous Guest", 381, Rarity.COMMON, mage.cards.g.GluttonousGuest.class));
         cards.add(new SetCardInfo("Graf Reaver", 382, Rarity.RARE, mage.cards.g.GrafReaver.class));
         cards.add(new SetCardInfo("Grafted Identity", 57, Rarity.RARE, mage.cards.g.GraftedIdentity.class));
-        cards.add(new SetCardInfo("Graveyard Glutton", 104, Rarity.RARE, mage.cards.g.GraveyardGlutton.class));
         cards.add(new SetCardInfo("Graveyard Trespasser", 104, Rarity.RARE, mage.cards.g.GraveyardTrespasser.class));
         cards.add(new SetCardInfo("Grisly Ritual", 383, Rarity.COMMON, mage.cards.g.GrislyRitual.class));
         cards.add(new SetCardInfo("Grizzly Ghoul", 226, Rarity.UNCOMMON, mage.cards.g.GrizzlyGhoul.class));
@@ -271,7 +270,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Groom's Finery", 384, Rarity.UNCOMMON, mage.cards.g.GroomsFinery.class));
         cards.add(new SetCardInfo("Gryff Rider", 282, Rarity.COMMON, mage.cards.g.GryffRider.class));
         cards.add(new SetCardInfo("Gryffwing Cavalry", 283, Rarity.UNCOMMON, mage.cards.g.GryffwingCavalry.class));
-        cards.add(new SetCardInfo("Gutter Shortcut", 329, Rarity.UNCOMMON, mage.cards.g.GutterShortcut.class));
         cards.add(new SetCardInfo("Gutter Skulker", 329, Rarity.UNCOMMON, mage.cards.g.GutterSkulker.class));
         cards.add(new SetCardInfo("Halana and Alena, Partners", 506, Rarity.RARE, mage.cards.h.HalanaAndAlenaPartners.class));
         cards.add(new SetCardInfo("Hallowed Haunting", 284, Rarity.MYTHIC, mage.cards.h.HallowedHaunting.class));

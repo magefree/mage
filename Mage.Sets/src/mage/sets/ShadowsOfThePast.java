@@ -54,7 +54,6 @@ public class ShadowsOfThePast extends ExpansionSet {
         cards.add(new SetCardInfo("Forge Devil", 41, Rarity.COMMON, mage.cards.f.ForgeDevil.class));
         cards.add(new SetCardInfo("Galvanic Juggernaut", 72, Rarity.UNCOMMON, mage.cards.g.GalvanicJuggernaut.class));
         cards.add(new SetCardInfo("Garruk Relentless", 49, Rarity.MYTHIC, mage.cards.g.GarrukRelentless.class));
-        cards.add(new SetCardInfo("Garruk, the Veil-Cursed", 49, Rarity.MYTHIC, mage.cards.g.GarrukTheVeilCursed.class));
         cards.add(new SetCardInfo("Geist of Saint Traft", 62, Rarity.MYTHIC, mage.cards.g.GeistOfSaintTraft.class));
         cards.add(new SetCardInfo("Ghoulraiser", 30, Rarity.COMMON, mage.cards.g.Ghoulraiser.class));
         cards.add(new SetCardInfo("Gnaw to the Bone", 50, Rarity.COMMON, mage.cards.g.GnawToTheBone.class));

@@ -208,8 +208,6 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Gisa, Glorious Resurrector", 314, Rarity.RARE, mage.cards.g.GisaGloriousResurrector.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Grafted Identity", 335, Rarity.RARE, mage.cards.g.GraftedIdentity.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Grafted Identity", 57, Rarity.RARE, mage.cards.g.GraftedIdentity.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Graveyard Glutton", 104, Rarity.RARE, mage.cards.g.GraveyardGlutton.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Graveyard Glutton", 290, Rarity.RARE, mage.cards.g.GraveyardGlutton.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Graveyard Trespasser", 104, Rarity.RARE, mage.cards.g.GraveyardTrespasser.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Graveyard Trespasser", 290, Rarity.RARE, mage.cards.g.GraveyardTrespasser.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Grizzly Ghoul", 226, Rarity.UNCOMMON, mage.cards.g.GrizzlyGhoul.class));

@@ -220,7 +220,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Groom's Finery", 117, Rarity.UNCOMMON, mage.cards.g.GroomsFinery.class));
         cards.add(new SetCardInfo("Gryff Rider", 15, Rarity.COMMON, mage.cards.g.GryffRider.class));
         cards.add(new SetCardInfo("Gryffwing Cavalry", 16, Rarity.UNCOMMON, mage.cards.g.GryffwingCavalry.class));
-        cards.add(new SetCardInfo("Gutter Shortcut", 62, Rarity.UNCOMMON, mage.cards.g.GutterShortcut.class));
         cards.add(new SetCardInfo("Gutter Skulker", 62, Rarity.UNCOMMON, mage.cards.g.GutterSkulker.class));
         cards.add(new SetCardInfo("Halana and Alena, Partners", 239, Rarity.RARE, mage.cards.h.HalanaAndAlenaPartners.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Halana and Alena, Partners", 325, Rarity.RARE, mage.cards.h.HalanaAndAlenaPartners.class, NON_FULL_USE_VARIOUS));

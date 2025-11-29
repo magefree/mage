@@ -133,7 +133,6 @@ public final class EldritchMoon extends ExpansionSet {
         cards.add(new SetCardInfo("Graf Rats", 91, Rarity.COMMON, mage.cards.g.GrafRats.class));
         cards.add(new SetCardInfo("Grapple with the Past", 160, Rarity.COMMON, mage.cards.g.GrappleWithThePast.class));
         cards.add(new SetCardInfo("Grim Flayer", 184, Rarity.MYTHIC, mage.cards.g.GrimFlayer.class));
-        cards.add(new SetCardInfo("Grisly Anglerfish", 63, Rarity.UNCOMMON, mage.cards.g.GrislyAnglerfish.class));
         cards.add(new SetCardInfo("Grizzled Angler", 63, Rarity.UNCOMMON, mage.cards.g.GrizzledAngler.class));
         cards.add(new SetCardInfo("Guardian of Pilgrims", 30, Rarity.COMMON, mage.cards.g.GuardianOfPilgrims.class));
         cards.add(new SetCardInfo("Hamlet Captain", 161, Rarity.UNCOMMON, mage.cards.h.HamletCaptain.class));

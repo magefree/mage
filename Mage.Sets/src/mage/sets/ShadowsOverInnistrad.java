@@ -136,7 +136,6 @@ public final class ShadowsOverInnistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Furtive Homunculus", 64, Rarity.COMMON, mage.cards.f.FurtiveHomunculus.class));
         cards.add(new SetCardInfo("Game Trail", 276, Rarity.RARE, mage.cards.g.GameTrail.class));
         cards.add(new SetCardInfo("Gatstaf Arsonists", 158, Rarity.COMMON, mage.cards.g.GatstafArsonists.class));
-        cards.add(new SetCardInfo("Gatstaf Ravagers", 158, Rarity.COMMON, mage.cards.g.GatstafRavagers.class));
         cards.add(new SetCardInfo("Geier Reach Bandit", 159, Rarity.RARE, mage.cards.g.GeierReachBandit.class));
         cards.add(new SetCardInfo("Geistblast", 160, Rarity.UNCOMMON, mage.cards.g.Geistblast.class));
         cards.add(new SetCardInfo("Geralf's Masterpiece", 65, Rarity.MYTHIC, mage.cards.g.GeralfsMasterpiece.class));
@@ -342,7 +341,6 @@ public final class ShadowsOverInnistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Vessel of Paramnesia", 95, Rarity.COMMON, mage.cards.v.VesselOfParamnesia.class));
         cards.add(new SetCardInfo("Vessel of Volatility", 189, Rarity.COMMON, mage.cards.v.VesselOfVolatility.class));
         cards.add(new SetCardInfo("Veteran Cathar", 238, Rarity.UNCOMMON, mage.cards.v.VeteranCathar.class));
-        cards.add(new SetCardInfo("Vildin-Pack Alpha", 159, Rarity.RARE, mage.cards.v.VildinPackAlpha.class));
         cards.add(new SetCardInfo("Village Messenger", 190, Rarity.UNCOMMON, mage.cards.v.VillageMessenger.class));
         cards.add(new SetCardInfo("Voldaren Duelist", 191, Rarity.COMMON, mage.cards.v.VoldarenDuelist.class));
         cards.add(new SetCardInfo("Warped Landscape", 280, Rarity.COMMON, mage.cards.w.WarpedLandscape.class));

@@ -2133,7 +2133,6 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Swords to Plowshares", 2167, Rarity.RARE, mage.cards.s.SwordsToPlowshares.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Baral, Chief of Compliance", 2168, Rarity.RARE, mage.cards.b.BaralChiefOfCompliance.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Garruk Relentless", 2169, Rarity.MYTHIC, mage.cards.g.GarrukRelentless.class));
-        cards.add(new SetCardInfo("Garruk, the Veil-Cursed", 2169, Rarity.MYTHIC, mage.cards.g.GarrukTheVeilCursed.class));
         cards.add(new SetCardInfo("Reaper King", 2170, Rarity.RARE, mage.cards.r.ReaperKing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Glen Elendra Archmage", 2171, Rarity.RARE, mage.cards.g.GlenElendraArchmage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Guardian Project", 2172, Rarity.MYTHIC, mage.cards.g.GuardianProject.class));

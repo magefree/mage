@@ -218,7 +218,6 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Galvanic Juggernaut", 263, Rarity.UNCOMMON, mage.cards.g.GalvanicJuggernaut.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Galvanic Juggernaut", 443, Rarity.UNCOMMON, mage.cards.g.GalvanicJuggernaut.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Garruk Relentless", 197, Rarity.MYTHIC, mage.cards.g.GarrukRelentless.class));
-        cards.add(new SetCardInfo("Garruk, the Veil-Cursed", 197, Rarity.MYTHIC, mage.cards.g.GarrukTheVeilCursed.class));
         cards.add(new SetCardInfo("Gather the Townsfolk", 23, Rarity.COMMON, mage.cards.g.GatherTheTownsfolk.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gather the Townsfolk", 341, Rarity.COMMON, mage.cards.g.GatherTheTownsfolk.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Geier Reach Bandit", 156, Rarity.UNCOMMON, mage.cards.g.GeierReachBandit.class, NON_FULL_USE_VARIOUS));
@@ -244,8 +243,6 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Griselbrand", 115, Rarity.MYTHIC, mage.cards.g.Griselbrand.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Griselbrand", 381, Rarity.MYTHIC, mage.cards.g.Griselbrand.class,RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Griselbrand", 485, Rarity.MYTHIC, mage.cards.g.Griselbrand.class, FULL_ART_USE_VARIOUS));
-        cards.add(new SetCardInfo("Grisly Anglerfish", 458, Rarity.UNCOMMON, mage.cards.g.GrislyAnglerfish.class, RETRO_ART_USE_VARIOUS));
-        cards.add(new SetCardInfo("Grisly Anglerfish", 67, Rarity.UNCOMMON, mage.cards.g.GrislyAnglerfish.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Grizzled Angler", 458, Rarity.UNCOMMON, mage.cards.g.GrizzledAngler.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Grizzled Angler", 67, Rarity.UNCOMMON, mage.cards.g.GrizzledAngler.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Grizzly Ghoul", 240, Rarity.UNCOMMON, mage.cards.g.GrizzlyGhoul.class));
@@ -521,8 +518,6 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Vanquish the Horde", 49, Rarity.RARE, mage.cards.v.VanquishTheHorde.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vexing Devil", 178, Rarity.RARE, mage.cards.v.VexingDevil.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vexing Devil", 313, Rarity.RARE, mage.cards.v.VexingDevil.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Vildin-Pack Alpha", 156, Rarity.UNCOMMON, mage.cards.v.VildinPackAlpha.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Vildin-Pack Alpha", 464, Rarity.UNCOMMON, mage.cards.v.VildinPackAlpha.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Vilespawn Spider", 251, Rarity.UNCOMMON, mage.cards.v.VilespawnSpider.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vilespawn Spider", 436, Rarity.UNCOMMON, mage.cards.v.VilespawnSpider.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Village Messenger", 179, Rarity.COMMON, mage.cards.v.VillageMessenger.class, NON_FULL_USE_VARIOUS));

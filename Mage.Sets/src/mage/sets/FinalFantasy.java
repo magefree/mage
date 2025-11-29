@@ -94,8 +94,6 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Cecil, Dark Knight", 445, Rarity.RARE, mage.cards.c.CecilDarkKnight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cecil, Dark Knight", 525, Rarity.RARE, mage.cards.c.CecilDarkKnight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cecil, Dark Knight", 91, Rarity.RARE, mage.cards.c.CecilDarkKnight.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Chaos, the Endless", 221, Rarity.UNCOMMON, mage.cards.c.ChaosTheEndless.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Chaos, the Endless", 486, Rarity.UNCOMMON, mage.cards.c.ChaosTheEndless.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Choco, Seeker of Paradise", 215, Rarity.RARE, mage.cards.c.ChocoSeekerOfParadise.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Choco, Seeker of Paradise", 479, Rarity.RARE, mage.cards.c.ChocoSeekerOfParadise.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Choco, Seeker of Paradise", 569, Rarity.RARE, mage.cards.c.ChocoSeekerOfParadise.class, NON_FULL_USE_VARIOUS));

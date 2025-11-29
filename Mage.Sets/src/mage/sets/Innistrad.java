@@ -124,8 +124,6 @@ public final class Innistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Gallows Warden", 16, Rarity.UNCOMMON, mage.cards.g.GallowsWarden.class));
         cards.add(new SetCardInfo("Galvanic Juggernaut", 222, Rarity.UNCOMMON, mage.cards.g.GalvanicJuggernaut.class));
         cards.add(new SetCardInfo("Garruk Relentless", 181, Rarity.MYTHIC, mage.cards.g.GarrukRelentless.class));
-        cards.add(new SetCardInfo("Garruk, the Veil-Cursed", 181, Rarity.MYTHIC, mage.cards.g.GarrukTheVeilCursed.class));
-        cards.add(new SetCardInfo("Gatstaf Howler", 182, Rarity.UNCOMMON, mage.cards.g.GatstafHowler.class));
         cards.add(new SetCardInfo("Gatstaf Shepherd", 182, Rarity.UNCOMMON, mage.cards.g.GatstafShepherd.class));
         cards.add(new SetCardInfo("Gavony Township", 239, Rarity.RARE, mage.cards.g.GavonyTownship.class));
         cards.add(new SetCardInfo("Geist of Saint Traft", 213, Rarity.MYTHIC, mage.cards.g.GeistOfSaintTraft.class));
@@ -171,7 +169,6 @@ public final class Innistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Kessig Wolf Run", 243, Rarity.RARE, mage.cards.k.KessigWolfRun.class));
         cards.add(new SetCardInfo("Kessig Wolf", 151, Rarity.COMMON, mage.cards.k.KessigWolf.class));
         cards.add(new SetCardInfo("Kindercatch", 190, Rarity.COMMON, mage.cards.k.Kindercatch.class));
-        cards.add(new SetCardInfo("Krallenhorde Wantons", 185, Rarity.COMMON, mage.cards.k.KrallenhordeWantons.class));
         cards.add(new SetCardInfo("Kruin Outlaw", 152, Rarity.RARE, mage.cards.k.KruinOutlaw.class));
         cards.add(new SetCardInfo("Laboratory Maniac", 61, Rarity.RARE, mage.cards.l.LaboratoryManiac.class));
         cards.add(new SetCardInfo("Lantern Spirit", 62, Rarity.UNCOMMON, mage.cards.l.LanternSpirit.class));

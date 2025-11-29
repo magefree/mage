@@ -157,7 +157,6 @@ public final class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 265, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 266, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 267, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Itlimoc, Cradle of the Sun", 191, Rarity.RARE, mage.cards.i.ItlimocCradleOfTheSun.class));
         cards.add(new SetCardInfo("Ixalan's Binding", 17, Rarity.UNCOMMON, mage.cards.i.IxalansBinding.class));
         cards.add(new SetCardInfo("Ixalli's Diviner", 192, Rarity.COMMON, mage.cards.i.IxallisDiviner.class));
         cards.add(new SetCardInfo("Ixalli's Keeper", 193, Rarity.COMMON, mage.cards.i.IxallisKeeper.class));

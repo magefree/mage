@@ -110,7 +110,6 @@ public final class RivalsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Goblin Trailblazer", 105, Rarity.COMMON, mage.cards.g.GoblinTrailblazer.class));
         cards.add(new SetCardInfo("Golden Demise", 73, Rarity.UNCOMMON, mage.cards.g.GoldenDemise.class));
         cards.add(new SetCardInfo("Golden Guardian", 179, Rarity.RARE, mage.cards.g.GoldenGuardian.class));
-        cards.add(new SetCardInfo("Gold-Forge Garrison", 179, Rarity.RARE, mage.cards.g.GoldForgeGarrison.class));
         cards.add(new SetCardInfo("Grasping Scoundrel", 74, Rarity.COMMON, mage.cards.g.GraspingScoundrel.class));
         cards.add(new SetCardInfo("Gruesome Fate", 75, Rarity.COMMON, mage.cards.g.GruesomeFate.class));
         cards.add(new SetCardInfo("Hadana's Climb", 158, Rarity.RARE, mage.cards.h.HadanasClimb.class));

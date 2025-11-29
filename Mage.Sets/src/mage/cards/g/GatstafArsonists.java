@@ -1,32 +1,42 @@
 package mage.cards.g;
 
-import java.util.UUID;
-import mage.MageInt;
+import mage.abilities.common.WerewolfBackTriggeredAbility;
 import mage.abilities.common.WerewolfFrontTriggeredAbility;
-import mage.abilities.keyword.TransformAbility;
-import mage.cards.CardImpl;
+import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.SuperType;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
-public final class GatstafArsonists extends CardImpl {
+public final class GatstafArsonists extends TransformingDoubleFacedCard {
 
     public GatstafArsonists(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.WEREWOLF);
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(4);
+        super(ownerId, setInfo,
+                new SuperType[]{}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.WEREWOLF}, "{4}{R}",
+                "Gatstaf Ravagers",
+                new SuperType[]{}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.WEREWOLF}, "R"
+        );
 
-        this.secondSideCardClazz = mage.cards.g.GatstafRavagers.class;
+        // Gatstaf Arsonists
+        this.getLeftHalfCard().setPT(5, 4);
 
         // At the beginning of each upkeep, if no spells were cast last turn, transform Gatstaf Arsonists.
-        this.addAbility(new TransformAbility());
-        this.addAbility(new WerewolfFrontTriggeredAbility());
+        this.getLeftHalfCard().addAbility(new WerewolfFrontTriggeredAbility());
+
+        // Gatstaf Ravagers
+        this.getRightHalfCard().setPT(6, 5);
+
+        // Menace
+        this.getRightHalfCard().addAbility(new MenaceAbility());
+
+        // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Gatstaf Ravagers.
+        this.getRightHalfCard().addAbility(new WerewolfBackTriggeredAbility());
     }
 
     private GatstafArsonists(final GatstafArsonists card) {
