@@ -30,7 +30,7 @@ public final class BugenhagenWiseElder extends CardImpl {
             = new FilterControlledCreaturePermanent("you control a creature with power 7 or greater");
 
     static {
-        filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 7));
+        filter.add(new PowerPredicate(ComparisonType.OR_GREATER, 7));
     }
 
     private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
