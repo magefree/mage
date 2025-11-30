@@ -155,7 +155,6 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Deadly Allure", 103, Rarity.UNCOMMON, mage.cards.d.DeadlyAllure.class));
         cards.add(new SetCardInfo("Deathcap Glade", 275, Rarity.RARE, mage.cards.d.DeathcapGlade.class));
         cards.add(new SetCardInfo("Decimator of the Provinces", 2, Rarity.RARE, mage.cards.d.DecimatorOfTheProvinces.class));
-        cards.add(new SetCardInfo("Deluge of the Dead", 120, Rarity.RARE, mage.cards.d.DelugeOfTheDead.class));
         cards.add(new SetCardInfo("Delver of Secrets", 457, Rarity.COMMON, mage.cards.d.DelverOfSecrets.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Delver of Secrets", 60, Rarity.COMMON, mage.cards.d.DelverOfSecrets.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Demonic Taskmaster", 104, Rarity.UNCOMMON, mage.cards.d.DemonicTaskmaster.class, NON_FULL_USE_VARIOUS));

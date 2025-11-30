@@ -217,7 +217,6 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Hulking Raptor", 327, Rarity.RARE, mage.cards.h.HulkingRaptor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hunter's Blowgun", 255, Rarity.COMMON, mage.cards.h.HuntersBlowgun.class));
         cards.add(new SetCardInfo("Hurl into History", 59, Rarity.UNCOMMON, mage.cards.h.HurlIntoHistory.class));
-        cards.add(new SetCardInfo("Iceberg Titan", 60, Rarity.COMMON, mage.cards.i.IcebergTitan.class));
         cards.add(new SetCardInfo("Idol of the Deep King", 155, Rarity.COMMON, mage.cards.i.IdolOfTheDeepKing.class));
         cards.add(new SetCardInfo("In the Presence of Ages", 192, Rarity.COMMON, mage.cards.i.InThePresenceOfAges.class));
         cards.add(new SetCardInfo("Inti, Seneschal of the Sun", 156, Rarity.RARE, mage.cards.i.IntiSeneschalOfTheSun.class, NON_FULL_USE_VARIOUS));
@@ -378,7 +377,6 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Souls of the Lost", 369, Rarity.RARE, mage.cards.s.SoulsOfTheLost.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sovereign Okinec Ahau", 240, Rarity.MYTHIC, mage.cards.s.SovereignOkinecAhau.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sovereign Okinec Ahau", 309, Rarity.MYTHIC, mage.cards.s.SovereignOkinecAhau.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Sovereign's Macuahuitl", 155, Rarity.COMMON, mage.cards.s.SovereignsMacuahuitl.class));
         cards.add(new SetCardInfo("Spelunking", 213, Rarity.UNCOMMON, mage.cards.s.Spelunking.class));
         cards.add(new SetCardInfo("Spring-Loaded Sawblades", 36, Rarity.UNCOMMON, mage.cards.s.SpringLoadedSawblades.class));
         cards.add(new SetCardInfo("Spyglass Siren", 405, Rarity.UNCOMMON, mage.cards.s.SpyglassSiren.class, NON_FULL_USE_VARIOUS));

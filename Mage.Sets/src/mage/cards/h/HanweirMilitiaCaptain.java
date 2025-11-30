@@ -1,7 +1,9 @@
 package mage.cards.h;
 
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.dynamicvalue.common.CreaturesYouControlCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
@@ -45,8 +47,8 @@ public final class HanweirMilitiaCaptain extends TransformingDoubleFacedCard {
 
         // Westvale Cult Leader
         // Westvale Cult Leader's power and toughness are each equal to the number of creatures you control.
-        this.getRightHalfCard().addAbility(new mage.abilities.common.SimpleStaticAbility(Zone.ALL,
-                new SetBasePowerToughnessSourceEffect(mage.abilities.dynamicvalue.common.CreaturesYouControlCount.PLURAL))
+        this.getRightHalfCard().addAbility(new SimpleStaticAbility(Zone.ALL,
+                new SetBasePowerToughnessSourceEffect(CreaturesYouControlCount.PLURAL))
                 .addHint(CreaturesYouControlHint.instance));
 
         // At the beginning of your end step, create a 1/1 white and black Human Cleric creature token.

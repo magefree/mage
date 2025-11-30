@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SagaAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ExileAndReturnSourceEffect;
@@ -67,7 +68,7 @@ public final class HuatliPoetOfUnity extends TransformingDoubleFacedCard {
         sagaAbility.addChapterEffect(this.getRightHalfCard(), SagaChapter.CHAPTER_I, new CreateTokenEffect(new DinosaurVanillaToken(), 2));
 
         // II -- {this} gains "Creatures you control have '{T}: Add {R}, {G}, or {W}.'"
-        Ability gainedAbility = new mage.abilities.common.SimpleStaticAbility(new GainAbilityControlledEffect(
+        Ability gainedAbility = new SimpleStaticAbility(new GainAbilityControlledEffect(
                 new RedManaAbility(), Duration.WhileOnBattlefield, StaticFilters.FILTER_CONTROLLED_CREATURES, false
         ).setText("Creatures you control have '{T}: Add {R}"));
         gainedAbility.addEffect(new GainAbilityControlledEffect(

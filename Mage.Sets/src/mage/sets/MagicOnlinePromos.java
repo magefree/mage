@@ -1240,7 +1240,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Hostile Negotiations", 105712, Rarity.RARE, mage.cards.h.HostileNegotiations.class));
         cards.add(new SetCardInfo("Howling Moon", 95417, Rarity.RARE, mage.cards.h.HowlingMoon.class));
         cards.add(new SetCardInfo("Howlpack Alpha", 42866, Rarity.RARE, mage.cards.h.HowlpackAlpha.class));
-        cards.add(new SetCardInfo("Howlpack Avenger", 95389, Rarity.RARE, mage.cards.h.HowlpackAvenger.class));
         cards.add(new SetCardInfo("Howlpack Piper", 95425, Rarity.RARE, mage.cards.h.HowlpackPiper.class));
         cards.add(new SetCardInfo("Huatli, the Sun's Heart", 72241, Rarity.UNCOMMON, mage.cards.h.HuatliTheSunsHeart.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Huatli, the Sun's Heart", 77975, Rarity.UNCOMMON, mage.cards.h.HuatliTheSunsHeart.class, NON_FULL_USE_VARIOUS));
@@ -1560,7 +1559,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Lion Sash", 97887, Rarity.RARE, mage.cards.l.LionSash.class));
         cards.add(new SetCardInfo("Lion's Eye Diamond", 51936, Rarity.RARE, mage.cards.l.LionsEyeDiamond.class));
         cards.add(new SetCardInfo("Lithoform Engine", 83722, Rarity.MYTHIC, mage.cards.l.LithoformEngine.class));
-        cards.add(new SetCardInfo("Living Breakthrough", 97937, Rarity.RARE, mage.cards.l.LivingBreakthrough.class));
         cards.add(new SetCardInfo("Living Death", 36042, Rarity.RARE, mage.cards.l.LivingDeath.class, RETRO_ART));
         cards.add(new SetCardInfo("Living Wish", 35068, Rarity.RARE, mage.cards.l.LivingWish.class));
         cards.add(new SetCardInfo("Livio, Oathsworn Sentinel", 86348, Rarity.RARE, mage.cards.l.LivioOathswornSentinel.class));

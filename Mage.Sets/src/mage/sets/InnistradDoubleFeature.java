@@ -296,7 +296,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Hound Tamer", 187, Rarity.UNCOMMON, mage.cards.h.HoundTamer.class));
         cards.add(new SetCardInfo("Howl of the Hunt", 188, Rarity.COMMON, mage.cards.h.HowlOfTheHunt.class));
         cards.add(new SetCardInfo("Howling Moon", 471, Rarity.RARE, mage.cards.h.HowlingMoon.class));
-        cards.add(new SetCardInfo("Howlpack Avenger", 429, Rarity.RARE, mage.cards.h.HowlpackAvenger.class));
         cards.add(new SetCardInfo("Howlpack Piper", 472, Rarity.RARE, mage.cards.h.HowlpackPiper.class));
         cards.add(new SetCardInfo("Hullbreaker Horror", 330, Rarity.RARE, mage.cards.h.HullbreakerHorror.class));
         cards.add(new SetCardInfo("Hungry for More", 228, Rarity.UNCOMMON, mage.cards.h.HungryForMore.class));
@@ -305,7 +304,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Immolation", 144, Rarity.COMMON, mage.cards.i.Immolation.class));
         cards.add(new SetCardInfo("Infernal Grasp", 107, Rarity.UNCOMMON, mage.cards.i.InfernalGrasp.class));
         cards.add(new SetCardInfo("Infestation Expert", 473, Rarity.UNCOMMON, mage.cards.i.InfestationExpert.class));
-        cards.add(new SetCardInfo("Infested Werewolf", 473, Rarity.UNCOMMON, mage.cards.i.InfestedWerewolf.class));
         cards.add(new SetCardInfo("Innocent Traveler", 388, Rarity.UNCOMMON, mage.cards.i.InnocentTraveler.class));
         cards.add(new SetCardInfo("Inspired Idea", 331, Rarity.RARE, mage.cards.i.InspiredIdea.class));
         cards.add(new SetCardInfo("Into the Night", 430, Rarity.UNCOMMON, mage.cards.i.IntoTheNight.class));
@@ -350,7 +348,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Lunarch Veteran", 27, Rarity.COMMON, mage.cards.l.LunarchVeteran.class));
         cards.add(new SetCardInfo("Magma Pummeler", 436, Rarity.UNCOMMON, mage.cards.m.MagmaPummeler.class));
         cards.add(new SetCardInfo("Malevolent Hermit", 61, Rarity.RARE, mage.cards.m.MalevolentHermit.class));
-        cards.add(new SetCardInfo("Malicious Invader", 388, Rarity.UNCOMMON, mage.cards.m.MaliciousInvader.class));
         cards.add(new SetCardInfo("Manaform Hellkite", 437, Rarity.MYTHIC, mage.cards.m.ManaformHellkite.class));
         cards.add(new SetCardInfo("Markov Purifier", 508, Rarity.UNCOMMON, mage.cards.m.MarkovPurifier.class));
         cards.add(new SetCardInfo("Markov Retribution", 438, Rarity.UNCOMMON, mage.cards.m.MarkovRetribution.class));

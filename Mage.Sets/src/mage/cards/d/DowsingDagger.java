@@ -3,10 +3,15 @@ package mage.cards.d;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageToAPlayerAttachedTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CreateTokenTargetEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
+import mage.abilities.effects.mana.AddManaOfAnyColorEffect;
 import mage.abilities.keyword.EquipAbility;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardSetInfo;
 import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
@@ -35,17 +40,17 @@ public final class DowsingDagger extends TransformingDoubleFacedCard {
         this.getLeftHalfCard().addAbility(ability);
 
         // Equipped creature gets +2/+1.
-        this.getLeftHalfCard().addAbility(new mage.abilities.common.SimpleStaticAbility(new BoostEquippedEffect(2, 1)));
+        this.getLeftHalfCard().addAbility(new SimpleStaticAbility(new BoostEquippedEffect(2, 1)));
 
         // Whenever equipped creature deals combat damage to a player, you may transform Dowsing Dagger.
         this.getLeftHalfCard().addAbility(new DealsDamageToAPlayerAttachedTriggeredAbility(new TransformSourceEffect(), "equipped", true));
 
         // Equip 2
-        this.getLeftHalfCard().addAbility(new EquipAbility(Outcome.AddAbility, new mage.abilities.costs.mana.GenericManaCost(2), false));
+        this.getLeftHalfCard().addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), false));
 
         // Lost Vale
         // T: Add three mana of any one color.
-        this.getRightHalfCard().addAbility(new mage.abilities.mana.SimpleManaAbility(new mage.abilities.effects.mana.AddManaOfAnyColorEffect(3), new mage.abilities.costs.common.TapSourceCost()));
+        this.getRightHalfCard().addAbility(new SimpleManaAbility(new AddManaOfAnyColorEffect(3), new TapSourceCost()));
     }
 
     private DowsingDagger(final DowsingDagger card) {

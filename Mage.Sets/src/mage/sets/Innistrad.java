@@ -303,7 +303,6 @@ public final class Innistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Villagers of Estwald", 209, Rarity.COMMON, mage.cards.v.VillagersOfEstwald.class));
         cards.add(new SetCardInfo("Voiceless Spirit", 42, Rarity.COMMON, mage.cards.v.VoicelessSpirit.class));
         cards.add(new SetCardInfo("Walking Corpse", 126, Rarity.COMMON, mage.cards.w.WalkingCorpse.class));
-        cards.add(new SetCardInfo("Wildblood Pack", 149, Rarity.RARE, mage.cards.w.WildbloodPack.class));
         cards.add(new SetCardInfo("Witchbane Orb", 236, Rarity.RARE, mage.cards.w.WitchbaneOrb.class));
         cards.add(new SetCardInfo("Wooden Stake", 237, Rarity.COMMON, mage.cards.w.WoodenStake.class));
         cards.add(new SetCardInfo("Woodland Cemetery", 249, Rarity.RARE, mage.cards.w.WoodlandCemetery.class));

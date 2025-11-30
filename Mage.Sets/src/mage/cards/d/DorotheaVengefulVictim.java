@@ -1,11 +1,15 @@
 package mage.cards.d;
 
+import mage.abilities.Ability;
 import mage.abilities.common.AttacksOrBlocksTriggeredAbility;
+import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
+import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.DisturbAbility;
 import mage.abilities.keyword.EnchantAbility;
@@ -13,8 +17,12 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardSetInfo;
 import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.*;
+import mage.game.Game;
+import mage.game.permanent.token.DorotheasRetributionSpiritToken;
+import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetpointer.FixedTargets;
 
 import java.util.UUID;
 
@@ -54,7 +62,7 @@ public final class DorotheaVengefulVictim extends TransformingDoubleFacedCard {
 
         // Enchanted creature has "Whenever this creature attacks, create a 4/4 white Spirit creature token with flying that's tapped and attacking. Sacrifice that token at end of combat."
         this.getRightHalfCard().addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(
-                new mage.abilities.common.AttacksTriggeredAbility(new DorotheasRetributionEffect()).setTriggerPhrase("Whenever this creature attacks, "),
+                new AttacksTriggeredAbility(new DorotheasRetributionEffect()).setTriggerPhrase("Whenever this creature attacks, "),
                 AttachmentType.AURA
         )));
 
@@ -72,7 +80,7 @@ public final class DorotheaVengefulVictim extends TransformingDoubleFacedCard {
     }
 }
 
-class DorotheasRetributionEffect extends mage.abilities.effects.OneShotEffect {
+class DorotheasRetributionEffect extends OneShotEffect {
 
     DorotheasRetributionEffect() {
         super(Outcome.Benefit);
@@ -89,12 +97,12 @@ class DorotheasRetributionEffect extends mage.abilities.effects.OneShotEffect {
     }
 
     @Override
-    public boolean apply(mage.game.Game game, mage.abilities.Ability source) {
-        mage.game.permanent.token.Token token = new mage.game.permanent.token.DorotheasRetributionSpiritToken();
+    public boolean apply(Game game, Ability source) {
+        Token token = new DorotheasRetributionSpiritToken();
         token.putOntoBattlefield(1, game, source, source.getControllerId(), true, true);
         game.addDelayedTriggeredAbility(new AtTheEndOfCombatDelayedTriggeredAbility(
-                new mage.abilities.effects.common.SacrificeTargetEffect()
-                        .setTargetPointer(new mage.target.targetpointer.FixedTargets(token, game))
+                new SacrificeTargetEffect()
+                        .setTargetPointer(new FixedTargets(token, game))
                         .setText("sacrifice that token")
         ), source);
         return true;

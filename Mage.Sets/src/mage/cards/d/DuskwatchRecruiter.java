@@ -2,16 +2,19 @@ package mage.cards.d;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.WerewolfBackTriggeredAbility;
 import mage.abilities.common.WerewolfFrontTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.cards.CardSetInfo;
 import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.PutCards;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterCreatureCard;
 
 import java.util.UUID;
 
@@ -43,8 +46,8 @@ public final class DuskwatchRecruiter extends TransformingDoubleFacedCard {
         this.getRightHalfCard().setPT(3, 3);
 
         // Creature spells you cast cost {1} less to cast.
-        this.getRightHalfCard().addAbility(new mage.abilities.common.SimpleStaticAbility(
-                new mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect(new mage.filter.common.FilterCreatureCard("creature spells"), 1)
+        this.getRightHalfCard().addAbility(new SimpleStaticAbility(
+                new SpellsCostReductionControllerEffect(new FilterCreatureCard("creature spells"), 1)
         ));
 
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Krallenhorde Howler.

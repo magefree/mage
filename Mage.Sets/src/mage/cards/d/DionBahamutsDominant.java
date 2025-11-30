@@ -3,22 +3,28 @@ package mage.cards.d;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.SagaAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.ExileAndReturnSourceEffect;
+import mage.abilities.effects.common.ExileSourceAndReturnFaceUpEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardSetInfo;
 import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.WaylayToken;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -63,25 +69,25 @@ public final class DionBahamutsDominant extends TransformingDoubleFacedCard {
         this.getRightHalfCard().setPT(5, 5);
 
         // (As this Saga enters and after your draw step, add a lore counter.)
-        mage.abilities.common.SagaAbility sagaAbility = new mage.abilities.common.SagaAbility(this.getRightHalfCard());
+        SagaAbility sagaAbility = new SagaAbility(this.getRightHalfCard());
 
         // I, II -- Wings of Light -- Put a +1/+1 counter on each other creature you control. Those creatures gain flying until end of turn.
         sagaAbility.addChapterEffect(this.getRightHalfCard(), SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_II, ability3 -> {
-            ability3.addEffect(new mage.abilities.effects.common.counter.AddCountersAllEffect(
-                    CounterType.P1P1.createInstance(), mage.filter.StaticFilters.FILTER_OTHER_CONTROLLED_CREATURE
+            ability3.addEffect(new AddCountersAllEffect(
+                    CounterType.P1P1.createInstance(), StaticFilters.FILTER_OTHER_CONTROLLED_CREATURE
             ));
-            ability3.addEffect(new mage.abilities.effects.common.continuous.GainAbilityControlledEffect(
+            ability3.addEffect(new GainAbilityControlledEffect(
                     FlyingAbility.getInstance(), Duration.EndOfTurn,
-                    mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE
+                    StaticFilters.FILTER_CONTROLLED_CREATURE
             ).setText("Those creatures gain flying until end of turn"));
             ability3.withFlavorWord("Wings of Light");
         });
 
         // III -- Gigaflare -- Destroy target permanent. Exile Bahamut, then return it to the battlefield.
         sagaAbility.addChapterEffect(this.getRightHalfCard(), SagaChapter.CHAPTER_III, ability4 -> {
-            ability4.addEffect(new mage.abilities.effects.common.DestroyTargetEffect());
-            ability4.addEffect(new mage.abilities.effects.common.ExileSourceAndReturnFaceUpEffect());
-            ability4.addTarget(new mage.target.TargetPermanent());
+            ability4.addEffect(new DestroyTargetEffect());
+            ability4.addEffect(new ExileSourceAndReturnFaceUpEffect());
+            ability4.addTarget(new TargetPermanent());
             ability4.withFlavorWord("Gigaflare");
         });
         this.getRightHalfCard().addAbility(sagaAbility);

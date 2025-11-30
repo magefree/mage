@@ -8,6 +8,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.MenaceAbility;
+import mage.cards.Card;
 import mage.cards.CardSetInfo;
 import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
@@ -15,6 +16,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
+import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
@@ -83,7 +85,7 @@ class RevealingEyeEffect extends OneShotEffect {
     }
 
     @Override
-    public boolean apply(mage.game.Game game, Ability source) {
+    public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player opponent = game.getPlayer(source.getFirstTarget());
         if (controller == null || opponent == null) {
@@ -95,7 +97,7 @@ class RevealingEyeEffect extends OneShotEffect {
         }
         TargetCard target = new TargetCard(0, 1, Zone.HAND, StaticFilters.FILTER_CARD_NON_LAND);
         controller.choose(outcome, opponent.getHand(), target, source, game);
-        mage.cards.Card card = game.getCard(target.getFirstTarget());
+        Card card = game.getCard(target.getFirstTarget());
         if (card == null) {
             return true;
         }

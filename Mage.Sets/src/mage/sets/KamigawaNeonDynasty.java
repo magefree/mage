@@ -312,9 +312,6 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Lion Sash", 26, Rarity.RARE, mage.cards.l.LionSash.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lion Sash", 368, Rarity.RARE, mage.cards.l.LionSash.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lion Sash", 440, Rarity.RARE, mage.cards.l.LionSash.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Living Breakthrough", 355, Rarity.RARE, mage.cards.l.LivingBreakthrough.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Living Breakthrough", 443, Rarity.RARE, mage.cards.l.LivingBreakthrough.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Living Breakthrough", 57, Rarity.RARE, mage.cards.l.LivingBreakthrough.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lizard Blades", 153, Rarity.RARE, mage.cards.l.LizardBlades.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lizard Blades", 385, Rarity.RARE, mage.cards.l.LizardBlades.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lizard Blades", 468, Rarity.RARE, mage.cards.l.LizardBlades.class, NON_FULL_USE_VARIOUS));

@@ -1,10 +1,13 @@
 package mage.cards.d;
 
 import mage.abilities.Ability;
+import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.SacrificeCost;
 import mage.abilities.costs.UseAttachedCost;
+import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.DamageWithPowerFromSourceToAnotherTargetEffect;
 import mage.abilities.effects.common.DoWhenCostPaid;
@@ -116,7 +119,7 @@ class DireBlunderbussGainAbilityEffect extends ContinuousEffectImpl {
                 new DamageWithPowerFromSourceToAnotherTargetEffect("this creature"), false
         );
         reflexive.addTarget(new TargetCreaturePermanent());
-        Ability grant = new mage.abilities.common.AttacksTriggeredAbility(
+        Ability grant = new AttacksTriggeredAbility(
                 new DoWhenCostPaid(
                         reflexive, new DireBlunderbussSacrificeCost(source, game),
                         "Sacrifice an artifact other than the equipment?"
@@ -129,7 +132,7 @@ class DireBlunderbussGainAbilityEffect extends ContinuousEffectImpl {
 
 class DireBlunderbussSacrificeCost extends UseAttachedCost implements SacrificeCost {
 
-    private final mage.abilities.costs.common.SacrificeTargetCost sacrificeCost;
+    private final SacrificeTargetCost sacrificeCost;
     private final mage.MageObjectReference mageObjectReference;
 
     DireBlunderbussSacrificeCost(Ability source, Game game) {
@@ -137,7 +140,7 @@ class DireBlunderbussSacrificeCost extends UseAttachedCost implements SacrificeC
         this.mageObjectReference = new mage.MageObjectReference(source.getSourceObject(game), game);
         FilterControlledArtifactPermanent filter = new FilterControlledArtifactPermanent();
         filter.add(Predicates.not(new MageObjectReferencePredicate(this.mageObjectReference)));
-        this.sacrificeCost = new mage.abilities.costs.common.SacrificeTargetCost(filter);
+        this.sacrificeCost = new SacrificeTargetCost(filter);
     }
 
     private DireBlunderbussSacrificeCost(final DireBlunderbussSacrificeCost cost) {
@@ -152,7 +155,7 @@ class DireBlunderbussSacrificeCost extends UseAttachedCost implements SacrificeC
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, mage.abilities.costs.Cost costToPay) {
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Permanent equipment = game.getPermanent(source.getSourceId());
         if (equipment == null) {
             return paid;

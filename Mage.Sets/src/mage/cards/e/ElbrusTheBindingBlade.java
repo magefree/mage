@@ -7,6 +7,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.IntimidateAbility;
@@ -98,7 +99,7 @@ class ElbrusTheBindingBladeEffect extends OneShotEffect {
 class WithengarUnboundTriggeredAbility extends TriggeredAbilityImpl {
 
     WithengarUnboundTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new mage.abilities.effects.common.counter.AddCountersSourceEffect(CounterType.P1P1.createInstance(13)), false);
+        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(13)), false);
         setTriggerPhrase("Whenever a player loses the game, ");
     }
 

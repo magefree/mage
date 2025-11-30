@@ -1,13 +1,20 @@
 package mage.cards.i;
 
-import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.OpponentControlsPermanentCondition;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.TransformAbility;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.hint.ConditionHint;
+import mage.abilities.hint.Hint;
+import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
@@ -22,19 +29,36 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class InnocentTraveler extends CardImpl {
+public final class InnocentTraveler extends TransformingDoubleFacedCard {
+
+    private static final FilterPermanent humanFilter = new FilterPermanent(SubType.HUMAN, "an opponent controls a Human");
+    private static final Condition condition = new OpponentControlsPermanentCondition(humanFilter);
+    private static final Hint hint = new ConditionHint(condition, "An opponent controls a Human");
 
     public InnocentTraveler(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN}, "{2}{B}{B}",
+                "Malicious Invader",
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.VAMPIRE}, "B"
+        );
 
-        this.subtype.add(SubType.HUMAN);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(3);
-        this.secondSideCardClazz = mage.cards.m.MaliciousInvader.class;
+        // Innocent Traveler
+        this.getLeftHalfCard().setPT(1, 3);
 
         // At the beginning of your upkeep, any opponent may sacrifice a creature. If no one does, transform Innocent Traveler.
-        this.addAbility(new TransformAbility());
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new InnocentTravelerEffect()));
+        this.getLeftHalfCard().addAbility(new BeginningOfUpkeepTriggeredAbility(new InnocentTravelerEffect()));
+
+        // Malicious Invader
+        this.getRightHalfCard().setPT(3, 3);
+
+        // Flying
+        this.getRightHalfCard().addAbility(FlyingAbility.getInstance());
+
+        // Malicious Invader gets +2/+0 as long as an opponent controls a Human.
+        this.getRightHalfCard().addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
+                new BoostSourceEffect(2, 0, Duration.WhileOnBattlefield),
+                condition, "{this} gets +2/+0 as long as an opponent controls a Human"
+        )).addHint(hint));
     }
 
     private InnocentTraveler(final InnocentTraveler card) {

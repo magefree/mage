@@ -1,15 +1,21 @@
 package mage.cards.d;
 
 import mage.abilities.Ability;
+import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.EntersBattlefieldThisOrAnotherTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.dynamicvalue.common.ArtifactYouControlCount;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.hint.common.ArtifactYouControlHint;
 import mage.abilities.keyword.HasteAbility;
+import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardSetInfo;
 import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
@@ -17,6 +23,7 @@ import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
@@ -52,16 +59,16 @@ public final class DowsingDevice extends TransformingDoubleFacedCard {
 
         // Geode Grotto
         // {T}: Add {R}.
-        this.getRightHalfCard().addAbility(new mage.abilities.mana.RedManaAbility());
+        this.getRightHalfCard().addAbility(new RedManaAbility());
 
         // {2}{R}, {T}: Until end of turn, target creature gains haste and gets +X/+0, where X is the number of artifacts you control. Activate only as a sorcery.
-        Ability ability2 = new mage.abilities.common.ActivateAsSorceryActivatedAbility(new GainAbilityTargetEffect(HasteAbility.getInstance())
-                .setText("Until end of turn, target creature gains haste"), new mage.abilities.costs.mana.ManaCostsImpl<>("{2}{R}"));
-        ability2.addCost(new mage.abilities.costs.common.TapSourceCost());
-        ability2.addEffect(new mage.abilities.effects.common.continuous.BoostTargetEffect(
-                mage.abilities.dynamicvalue.common.ArtifactYouControlCount.instance, mage.abilities.dynamicvalue.common.StaticValue.get(0)
+        Ability ability2 = new ActivateAsSorceryActivatedAbility(new GainAbilityTargetEffect(HasteAbility.getInstance())
+                .setText("Until end of turn, target creature gains haste"), new ManaCostsImpl<>("{2}{R}"));
+        ability2.addCost(new TapSourceCost());
+        ability2.addEffect(new BoostTargetEffect(
+                ArtifactYouControlCount.instance, StaticValue.get(0)
         ).setText("and gets +X/+0, where X is the number of artifacts you control"));
-        ability2.addTarget(new mage.target.common.TargetCreaturePermanent());
+        ability2.addTarget(new TargetCreaturePermanent());
         this.getRightHalfCard().addAbility(ability2.addHint(ArtifactYouControlHint.instance));
     }
 

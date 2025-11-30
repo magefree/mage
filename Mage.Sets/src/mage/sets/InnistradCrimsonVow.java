@@ -247,8 +247,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Hopeful Initiate", 350, Rarity.RARE, mage.cards.h.HopefulInitiate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Howling Moon", 204, Rarity.RARE, mage.cards.h.HowlingMoon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Howling Moon", 391, Rarity.RARE, mage.cards.h.HowlingMoon.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Howlpack Avenger", 162, Rarity.RARE, mage.cards.h.HowlpackAvenger.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Howlpack Avenger", 378, Rarity.RARE, mage.cards.h.HowlpackAvenger.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Howlpack Piper", 205, Rarity.RARE, mage.cards.h.HowlpackPiper.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Howlpack Piper", 392, Rarity.RARE, mage.cards.h.HowlpackPiper.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hullbreaker Horror", 359, Rarity.RARE, mage.cards.h.HullbreakerHorror.class, NON_FULL_USE_VARIOUS));
@@ -257,7 +255,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Ill-Tempered Loner", 162, Rarity.RARE, mage.cards.i.IllTemperedLoner.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ill-Tempered Loner", 378, Rarity.RARE, mage.cards.i.IllTemperedLoner.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Infestation Expert", 206, Rarity.UNCOMMON, mage.cards.i.InfestationExpert.class));
-        cards.add(new SetCardInfo("Infested Werewolf", 206, Rarity.UNCOMMON, mage.cards.i.InfestedWerewolf.class));
         cards.add(new SetCardInfo("Innocent Traveler", 121, Rarity.UNCOMMON, mage.cards.i.InnocentTraveler.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Innocent Traveler", 294, Rarity.UNCOMMON, mage.cards.i.InnocentTraveler.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Innocent Traveler", 336, Rarity.UNCOMMON, mage.cards.i.InnocentTraveler.class, NON_FULL_USE_VARIOUS));
@@ -299,9 +296,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Lightning Wolf", 168, Rarity.COMMON, mage.cards.l.LightningWolf.class));
         cards.add(new SetCardInfo("Lunar Rejection", 67, Rarity.UNCOMMON, mage.cards.l.LunarRejection.class));
         cards.add(new SetCardInfo("Magma Pummeler", 169, Rarity.UNCOMMON, mage.cards.m.MagmaPummeler.class));
-        cards.add(new SetCardInfo("Malicious Invader", 121, Rarity.UNCOMMON, mage.cards.m.MaliciousInvader.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Malicious Invader", 294, Rarity.UNCOMMON, mage.cards.m.MaliciousInvader.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Malicious Invader", 336, Rarity.UNCOMMON, mage.cards.m.MaliciousInvader.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Manaform Hellkite", 170, Rarity.MYTHIC, mage.cards.m.ManaformHellkite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Manaform Hellkite", 380, Rarity.MYTHIC, mage.cards.m.ManaformHellkite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Markov Purifier", 241, Rarity.UNCOMMON, mage.cards.m.MarkovPurifier.class, NON_FULL_USE_VARIOUS));

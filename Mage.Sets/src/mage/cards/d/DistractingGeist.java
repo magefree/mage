@@ -2,7 +2,10 @@ package mage.cards.d;
 
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.TapTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.DisturbAbility;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardSetInfo;
@@ -50,7 +53,7 @@ public final class DistractingGeist extends TransformingDoubleFacedCard {
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getRightHalfCard().getSpellAbility().addTarget(auraTarget);
-        this.getRightHalfCard().getSpellAbility().addEffect(new mage.abilities.effects.common.AttachEffect(Outcome.BoostCreature));
+        this.getRightHalfCard().getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         this.getRightHalfCard().addAbility(new EnchantAbility(auraTarget));
 
         // Disturb {4}{W}
@@ -60,7 +63,7 @@ public final class DistractingGeist extends TransformingDoubleFacedCard {
         // Enchanted creature has "Whenever this creature attacks, tap target creature defending player controls."
         Ability ability2 = new AttacksTriggeredAbility(new TapTargetEffect()).setTriggerPhrase("Whenever this creature attacks, ");
         ability2.addTarget(new TargetPermanent(filter));
-        this.getRightHalfCard().addAbility(new mage.abilities.common.SimpleStaticAbility(new mage.abilities.effects.common.continuous.GainAbilityAttachedEffect(ability2, AttachmentType.AURA)));
+        this.getRightHalfCard().addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(ability2, AttachmentType.AURA)));
 
         // If Clever Distracting would be put into a graveyard from anywhere, exile it instead.
         this.getRightHalfCard().addAbility(DisturbAbility.makeBackAbility());

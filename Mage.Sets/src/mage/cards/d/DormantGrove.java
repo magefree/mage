@@ -1,10 +1,13 @@
 package mage.cards.d;
 
 import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
+import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
+import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardSetInfo;
 import mage.cards.TransformingDoubleFacedCard;
@@ -12,6 +15,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -46,12 +50,12 @@ public final class DormantGrove extends TransformingDoubleFacedCard {
         this.getRightHalfCard().setPT(3, 6);
 
         // Vigilance
-        this.getRightHalfCard().addAbility(mage.abilities.keyword.VigilanceAbility.getInstance());
+        this.getRightHalfCard().addAbility(VigilanceAbility.getInstance());
 
         // Other creatures you control have vigilance.
-        this.getRightHalfCard().addAbility(new mage.abilities.common.SimpleStaticAbility(new mage.abilities.effects.common.continuous.GainAbilityControlledEffect(
-                mage.abilities.keyword.VigilanceAbility.getInstance(), Duration.WhileOnBattlefield,
-                mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES, true
+        this.getRightHalfCard().addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
+                VigilanceAbility.getInstance(), Duration.WhileOnBattlefield,
+                StaticFilters.FILTER_PERMANENT_CREATURES, true
         )));
     }
 
