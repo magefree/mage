@@ -6,6 +6,7 @@ import mage.deck.Limited;
 import mage.deck.Modern;
 import mage.deck.Legacy;
 import mage.deck.Standard;
+import mage.deck.Vintage;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.MageTestPlayerBase;
@@ -20,8 +21,16 @@ import static org.mage.test.serverside.deck.DeckValidationUtil.testDeckValid;
 public class DeckValidatorTest extends MageTestPlayerBase {
 
     @Test
-    public void testGleemoxBanned() {
+    public void testGleemoxBannedInLegacy() {
         DeckTester deckTester = new DeckTester(new Legacy());
+        deckTester.addMaindeck("Gleemox", 1);
+        deckTester.addMaindeck("Island", 59);
+        deckTester.validate("Gleemox is banned.", false);
+    }
+
+    @Test
+    public void testGleemoxBannedInVintage() {
+        DeckTester deckTester = new DeckTester(new Vintage());
         deckTester.addMaindeck("Gleemox", 1);
         deckTester.addMaindeck("Island", 59);
         deckTester.validate("Gleemox is banned.", false);
