@@ -40,8 +40,6 @@ public final class DorotheaVengefulVictim extends TransformingDoubleFacedCard {
                 new AtTheEndOfCombatDelayedTriggeredAbility(new SacrificeSourceEffect())
         ).setText("sacrifice it at end of combat"), false));
 
-        // Disturb {1}{W}{U}
-        this.getLeftHalfCard().addAbility(new DisturbAbility(this, "{1}{W}{U}"));
 
         // Dorothea's Retribution
         // Enchant creature
@@ -49,6 +47,10 @@ public final class DorotheaVengefulVictim extends TransformingDoubleFacedCard {
         this.getRightHalfCard().getSpellAbility().addTarget(auraTarget);
         this.getRightHalfCard().getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         this.getRightHalfCard().addAbility(new EnchantAbility(auraTarget));
+
+        // Disturb {1}{W}{U}
+        // needs to be added after right half has spell ability target set
+        this.getLeftHalfCard().addAbility(new DisturbAbility(this, "{1}{W}{U}"));
 
         // Enchanted creature has "Whenever this creature attacks, create a 4/4 white Spirit creature token with flying that's tapped and attacking. Sacrifice that token at end of combat."
         this.getRightHalfCard().addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(

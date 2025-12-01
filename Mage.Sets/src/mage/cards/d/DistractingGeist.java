@@ -44,8 +44,6 @@ public final class DistractingGeist extends TransformingDoubleFacedCard {
         ability.addTarget(new TargetPermanent(filter));
         this.getLeftHalfCard().addAbility(ability);
 
-        // Disturb {4}{W}
-        this.getLeftHalfCard().addAbility(new DisturbAbility(this, "{4}{W}"));
 
         // Clever Distraction
 
@@ -54,6 +52,10 @@ public final class DistractingGeist extends TransformingDoubleFacedCard {
         this.getRightHalfCard().getSpellAbility().addTarget(auraTarget);
         this.getRightHalfCard().getSpellAbility().addEffect(new mage.abilities.effects.common.AttachEffect(Outcome.BoostCreature));
         this.getRightHalfCard().addAbility(new EnchantAbility(auraTarget));
+
+        // Disturb {4}{W}
+        // needs to be added after right half has spell ability target set
+        this.getLeftHalfCard().addAbility(new DisturbAbility(this, "{4}{W}"));
 
         // Enchanted creature has "Whenever this creature attacks, tap target creature defending player controls."
         Ability ability2 = new AttacksTriggeredAbility(new TapTargetEffect()).setTriggerPhrase("Whenever this creature attacks, ");
