@@ -35,6 +35,8 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Alchemist's Greeting", 140, Rarity.COMMON, mage.cards.a.AlchemistsGreeting.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Alchemist's Greeting", 393, Rarity.COMMON, mage.cards.a.AlchemistsGreeting.class,RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Altered Ego", 228, Rarity.RARE, mage.cards.a.AlteredEgo.class));
+        cards.add(new SetCardInfo("Ambitious Farmhand", 448, Rarity.UNCOMMON, mage.cards.a.AmbitiousFarmhand.class, RETRO_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ambitious Farmhand", 8, Rarity.UNCOMMON, mage.cards.a.AmbitiousFarmhand.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ambush Viper", 186, Rarity.COMMON, mage.cards.a.AmbushViper.class));
         cards.add(new SetCardInfo("Ancestral Anger", 141, Rarity.COMMON, mage.cards.a.AncestralAnger.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ancestral Anger", 394, Rarity.COMMON, mage.cards.a.AncestralAnger.class,RETRO_ART_USE_VARIOUS));

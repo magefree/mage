@@ -34,6 +34,7 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Alchemist's Gambit", 407, Rarity.RARE, mage.cards.a.AlchemistsGambit.class));
         cards.add(new SetCardInfo("Alchemist's Retrieval", 314, Rarity.COMMON, mage.cards.a.AlchemistsRetrieval.class));
         cards.add(new SetCardInfo("Alluring Suitor", 408, Rarity.UNCOMMON, mage.cards.a.AlluringSuitor.class));
+        cards.add(new SetCardInfo("Ambitious Farmhand", 2, Rarity.UNCOMMON, mage.cards.a.AmbitiousFarmhand.class));
         cards.add(new SetCardInfo("Ancestor's Embrace", 289, Rarity.COMMON, mage.cards.a.AncestorsEmbrace.class));
         cards.add(new SetCardInfo("Ancestral Anger", 409, Rarity.COMMON, mage.cards.a.AncestralAnger.class));
         cards.add(new SetCardInfo("Ancient Lumberknot", 497, Rarity.UNCOMMON, mage.cards.a.AncientLumberknot.class));
