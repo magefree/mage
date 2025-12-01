@@ -232,7 +232,6 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Itzquinth, Firstborn of Gishath", 331, Rarity.UNCOMMON, mage.cards.i.ItzquinthFirstbornOfGishath.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ixalli's Lorekeeper", 194, Rarity.UNCOMMON, mage.cards.i.IxallisLorekeeper.class));
         cards.add(new SetCardInfo("Jade Seedstones", 195, Rarity.UNCOMMON, mage.cards.j.JadeSeedstones.class));
-        cards.add(new SetCardInfo("Jadeheart Attendant", 195, Rarity.UNCOMMON, mage.cards.j.JadeheartAttendant.class));
         cards.add(new SetCardInfo("Jadelight Spelunker", 196, Rarity.RARE, mage.cards.j.JadelightSpelunker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jadelight Spelunker", 382, Rarity.RARE, mage.cards.j.JadelightSpelunker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jadelight Spelunker", 403, Rarity.RARE, mage.cards.j.JadelightSpelunker.class, NON_FULL_USE_VARIOUS));
@@ -556,15 +555,15 @@ class TheLostCavernsOfIxalanCollator implements BoosterCollator {
     // 1.3875 B uncommons (111 / 80)
     // 1.3875 C uncommons (111 / 80)
     private final RarityConfiguration uncommonRuns = new RarityConfiguration(
-            BCC, BCC, BCC, BCC, BCC, BCC, BCC, BCC, BCC, BCC, 
-            BCC, BCC, BCC, BCC, BCC, BCC, BCC, BCC, BCC, BCC, 
-            BCC, BCC, BCC, BCC, BCC, BCC, BCC, BCC, BCC, BCC, 
-            BCC, 
-            BBC, BBC, BBC, BBC, BBC, BBC, BBC, BBC, BBC, BBC, 
-            BBC, BBC, BBC, BBC, BBC, BBC, BBC, BBC, BBC, BBC, 
-            BBC, BBC, BBC, BBC, BBC, BBC, BBC, BBC, BBC, BBC, 
+            BCC, BCC, BCC, BCC, BCC, BCC, BCC, BCC, BCC, BCC,
+            BCC, BCC, BCC, BCC, BCC, BCC, BCC, BCC, BCC, BCC,
+            BCC, BCC, BCC, BCC, BCC, BCC, BCC, BCC, BCC, BCC,
+            BCC,
+            BBC, BBC, BBC, BBC, BBC, BBC, BBC, BBC, BBC, BBC,
+            BBC, BBC, BBC, BBC, BBC, BBC, BBC, BBC, BBC, BBC,
+            BBC, BBC, BBC, BBC, BBC, BBC, BBC, BBC, BBC, BBC,
             BBC,
-            ABC, ABC, ABC, ABC, ABC, ABC, ABC, ABC, ABC, ABC, 
+            ABC, ABC, ABC, ABC, ABC, ABC, ABC, ABC, ABC, ABC,
             ABC, ABC, ABC, ABC, ABC, ABC, ABC, ABC
     );
 

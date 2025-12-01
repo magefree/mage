@@ -205,7 +205,6 @@ public class PioneerMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Izzet Guildgate", 267, Rarity.COMMON, mage.cards.i.IzzetGuildgate.class));
         cards.add(new SetCardInfo("Jace, Architect of Thought", 329, Rarity.MYTHIC, mage.cards.j.JaceArchitectOfThought.class));
         cards.add(new SetCardInfo("Jace, Memory Adept", 330, Rarity.MYTHIC, mage.cards.j.JaceMemoryAdept.class));
-        cards.add(new SetCardInfo("Jace, Telepath Unbound", 60, Rarity.MYTHIC, mage.cards.j.JaceTelepathUnbound.class));
         cards.add(new SetCardInfo("Jace, Vryn's Prodigy", 60, Rarity.MYTHIC, mage.cards.j.JaceVrynsProdigy.class));
         cards.add(new SetCardInfo("Jarad's Orders", 390, Rarity.RARE, mage.cards.j.JaradsOrders.class));
         cards.add(new SetCardInfo("Jhessian Thief", 61, Rarity.UNCOMMON, mage.cards.j.JhessianThief.class));

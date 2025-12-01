@@ -164,7 +164,6 @@ public final class MagicOrigins extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 259, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 260, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jace's Sanctum", 61, Rarity.RARE, mage.cards.j.JacesSanctum.class));
-        cards.add(new SetCardInfo("Jace, Telepath Unbound", 60, Rarity.MYTHIC, mage.cards.j.JaceTelepathUnbound.class));
         cards.add(new SetCardInfo("Jace, Vryn's Prodigy", 60, Rarity.MYTHIC, mage.cards.j.JaceVrynsProdigy.class));
         cards.add(new SetCardInfo("Jayemdae Tome", 231, Rarity.UNCOMMON, mage.cards.j.JayemdaeTome.class));
         cards.add(new SetCardInfo("Jhessian Thief", 62, Rarity.UNCOMMON, mage.cards.j.JhessianThief.class));

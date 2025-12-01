@@ -394,9 +394,6 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("The Grand Evolution", 213, Rarity.MYTHIC, mage.cards.t.TheGrandEvolution.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Grand Evolution", 301, Rarity.MYTHIC, mage.cards.t.TheGrandEvolution.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Grand Evolution", 342, Rarity.MYTHIC, mage.cards.t.TheGrandEvolution.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("The Great Synthesis", 294, Rarity.MYTHIC, mage.cards.t.TheGreatSynthesis.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("The Great Synthesis", 339, Rarity.MYTHIC, mage.cards.t.TheGreatSynthesis.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("The Great Synthesis", 65, Rarity.MYTHIC, mage.cards.t.TheGreatSynthesis.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Great Work", 169, Rarity.MYTHIC, mage.cards.t.TheGreatWork.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Great Work", 299, Rarity.MYTHIC, mage.cards.t.TheGreatWork.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Great Work", 341, Rarity.MYTHIC, mage.cards.t.TheGreatWork.class, NON_FULL_USE_VARIOUS));
@@ -478,10 +475,10 @@ public final class MarchOfTheMachine extends ExpansionSet {
                 .forEach(cardInfo -> inBoosterMap.put("MUL_" + cardInfo.getCardNumber(), cardInfo));
     }
 
-   @Override
-   public BoosterCollator createCollator() {
-       return new MarchOfTheMachineCollator();
-   }
+    @Override
+    public BoosterCollator createCollator() {
+        return new MarchOfTheMachineCollator();
+    }
 }
 
 // Booster collation info from https://www.lethe.xyz/mtg/collation/mom.html
@@ -557,7 +554,7 @@ class MarchOfTheMachineCollator implements BoosterCollator {
             AABBBCCC, AABBBCCC, AABBBCCC, AABBBCCC, AABBBCCC,
             AABBBCCC, AABBBCCC, AABBBCCC, AABBBCCC, AABBBCCC,
             AABBBCCC, AABBBCCC, AABBBCCC, AABBBCCC, AABBBCCC,
-            AABBBCCC, AABBBCCC, AABBBCCC, AABBBCCC, 
+            AABBBCCC, AABBBCCC, AABBBCCC, AABBBCCC,
             AAABBCCC, AAABBCCC, AAABBCCC, AAABBCCC, AAABBCCC,
             AAABBCCC, AAABBCCC,
             AAABBBCC, AAABBBCC, AAABBBCC, AAABBBCC, AAABBBCC,
@@ -574,7 +571,7 @@ class MarchOfTheMachineCollator implements BoosterCollator {
     private final RarityConfiguration uncommonRuns = new RarityConfiguration(
             RuUUU, RuUUU, RuUUU, RuUUU, RuUUU, RuUUU, RuUUU, RuUUU, RuUUU, RuUUU,
             RuUUU, RuUUU, RuUUU, RuUUU, RuUUU, RuUUU, RuUUU, RuUUU, RuUUU, RuUUU,
-            RuUUU, RuUUU, RuUUU, RuUUU, RuUUU, RuUUU, RuUUU, 
+            RuUUU, RuUUU, RuUUU, RuUUU, RuUUU, RuUUU, RuUUU,
             URUUU, URUUU, URUUU, URUUU, URUUU, URUUU, URUUU, URUUU, URUUU, URUUU,
             URUUU, URUUU, URUUU, URUUU, URUUU,
             UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU,

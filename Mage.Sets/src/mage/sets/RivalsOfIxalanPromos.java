@@ -25,7 +25,6 @@ public class RivalsOfIxalanPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Angrath, the Flame-Chained", "152s", Rarity.MYTHIC, mage.cards.a.AngrathTheFlameChained.class));
         cards.add(new SetCardInfo("Arch of Orazca", "185p", Rarity.RARE, mage.cards.a.ArchOfOrazca.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arch of Orazca", "185s", Rarity.RARE, mage.cards.a.ArchOfOrazca.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Atzal, Cave of Eternity", "160s", Rarity.RARE, mage.cards.a.AtzalCaveOfEternity.class));
         cards.add(new SetCardInfo("Awakened Amalgam", "175s", Rarity.RARE, mage.cards.a.AwakenedAmalgam.class));
         cards.add(new SetCardInfo("Azor's Gateway", "176s", Rarity.MYTHIC, mage.cards.a.AzorsGateway.class));
         cards.add(new SetCardInfo("Azor, the Lawbringer", "154s", Rarity.MYTHIC, mage.cards.a.AzorTheLawbringer.class));

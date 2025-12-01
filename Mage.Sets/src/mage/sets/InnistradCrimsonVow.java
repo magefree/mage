@@ -227,9 +227,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Hallowed Haunting", 349, Rarity.MYTHIC, mage.cards.h.HallowedHaunting.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hamlet Vanguard", 201, Rarity.RARE, mage.cards.h.HamletVanguard.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hamlet Vanguard", 389, Rarity.RARE, mage.cards.h.HamletVanguard.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Hauken's Insight", 320, Rarity.MYTHIC, mage.cards.h.HaukensInsight.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Hauken's Insight", 332, Rarity.MYTHIC, mage.cards.h.HaukensInsight.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Hauken's Insight", 65, Rarity.MYTHIC, mage.cards.h.HaukensInsight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Headless Rider", 118, Rarity.RARE, mage.cards.h.HeadlessRider.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Headless Rider", 372, Rarity.RARE, mage.cards.h.HeadlessRider.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Henrika Domnathi", 119, Rarity.MYTHIC, mage.cards.h.HenrikaDomnathi.class, NON_FULL_USE_VARIOUS));

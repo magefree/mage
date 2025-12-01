@@ -55,9 +55,7 @@ public final class HowlpackPiper extends TransformingDoubleFacedCard {
         // Wildsong Howler
         this.getRightHalfCard().setPT(4, 4);
 
-        // Whenever this creature enters the battlefield or transforms into Wildsong Howler, look at the top six cards of your library.
-        // You may reveal a creature card from among them and put it into your hand.
-        // Put the rest on the bottom of your library in a random order.
+        // Whenever this creature enters the battlefield or transforms into Wildsong Howler, look at the top six cards of your library. You may reveal a creature card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
         this.getRightHalfCard().addAbility(new TransformsOrEntersTriggeredAbility(
                 new LookLibraryAndPickControllerEffect(6, 1, StaticFilters.FILTER_CARD_CREATURE_A, PutCards.HAND, PutCards.BOTTOM_RANDOM),
                 false));

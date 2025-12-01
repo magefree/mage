@@ -420,9 +420,6 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Reinforced Ronin", 158, Rarity.UNCOMMON, mage.cards.r.ReinforcedRonin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Reinforced Ronin", 323, Rarity.UNCOMMON, mage.cards.r.ReinforcedRonin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Reito Sentinel", 256, Rarity.UNCOMMON, mage.cards.r.ReitoSentinel.class));
-        cards.add(new SetCardInfo("Remnant of the Rising Star", 194, Rarity.MYTHIC, mage.cards.r.RemnantOfTheRisingStar.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Remnant of the Rising Star", 359, Rarity.MYTHIC, mage.cards.r.RemnantOfTheRisingStar.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Remnant of the Rising Star", 475, Rarity.MYTHIC, mage.cards.r.RemnantOfTheRisingStar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Repel the Vile", 33, Rarity.COMMON, mage.cards.r.RepelTheVile.class));
         cards.add(new SetCardInfo("Replication Specialist", 76, Rarity.UNCOMMON, mage.cards.r.ReplicationSpecialist.class));
         cards.add(new SetCardInfo("Return to Action", 121, Rarity.COMMON, mage.cards.r.ReturnToAction.class));

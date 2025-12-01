@@ -3,6 +3,7 @@ package mage.cards.i;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SiegeAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -54,7 +55,7 @@ public final class InvasionOfAmonkhet extends TransformingDoubleFacedCard {
         this.getRightHalfCard().setPT(4, 4);
 
         // You may have Lazotep Convert enter the battlefield as a copy of any creature card in a graveyard, except it's a 4/4 black Zombie in addition to its other types.
-        this.getRightHalfCard().addAbility(new mage.abilities.common.EntersBattlefieldAbility(new LazotepConvertCopyEffect(), true));
+        this.getRightHalfCard().addAbility(new EntersBattlefieldAbility(new LazotepConvertCopyEffect(), true));
     }
 
     private InvasionOfAmonkhet(final InvasionOfAmonkhet card) {

@@ -43,7 +43,6 @@ public class MagicOriginsPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Hixus, Prison Warden", 19, Rarity.RARE, mage.cards.h.HixusPrisonWarden.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hixus, Prison Warden", "19s", Rarity.RARE, mage.cards.h.HixusPrisonWarden.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Honored Hierarch", "182s", Rarity.RARE, mage.cards.h.HonoredHierarch.class));
-        cards.add(new SetCardInfo("Jace, Telepath Unbound", "60s", Rarity.MYTHIC, mage.cards.j.JaceTelepathUnbound.class));
         cards.add(new SetCardInfo("Jace, Vryn's Prodigy", "60s", Rarity.MYTHIC, mage.cards.j.JaceVrynsProdigy.class));
         cards.add(new SetCardInfo("Knight of the White Orchid", "21s", Rarity.RARE, mage.cards.k.KnightOfTheWhiteOrchid.class));
         cards.add(new SetCardInfo("Kothophed, Soul Hoarder", 104, Rarity.RARE, mage.cards.k.KothophedSoulHoarder.class, NON_FULL_USE_VARIOUS));
@@ -73,5 +72,5 @@ public class MagicOriginsPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Tragic Arrogance", "38s", Rarity.RARE, mage.cards.t.TragicArrogance.class));
         cards.add(new SetCardInfo("Vryn Wingmare", "40s", Rarity.RARE, mage.cards.v.VrynWingmare.class));
         cards.add(new SetCardInfo("Willbreaker", "84s", Rarity.RARE, mage.cards.w.Willbreaker.class));
-     }
+    }
 }

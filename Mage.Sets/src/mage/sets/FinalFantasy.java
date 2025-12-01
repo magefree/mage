@@ -81,9 +81,6 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Blazing Bomb", 130, Rarity.COMMON, mage.cards.b.BlazingBomb.class));
         cards.add(new SetCardInfo("Blitzball Shot", 176, Rarity.COMMON, mage.cards.b.BlitzballShot.class));
         cards.add(new SetCardInfo("Blitzball", 254, Rarity.COMMON, mage.cards.b.Blitzball.class));
-        cards.add(new SetCardInfo("Braska's Final Aeon", 104, Rarity.RARE, mage.cards.b.BraskasFinalAeon.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Braska's Final Aeon", 363, Rarity.RARE, mage.cards.b.BraskasFinalAeon.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Braska's Final Aeon", 448, Rarity.RARE, mage.cards.b.BraskasFinalAeon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Buster Sword", 255, Rarity.MYTHIC, mage.cards.b.BusterSword.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Buster Sword", 351, Rarity.MYTHIC, mage.cards.b.BusterSword.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cactuar", 177, Rarity.UNCOMMON, mage.cards.c.Cactuar.class));
@@ -362,10 +359,6 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Phantom Train", 110, Rarity.UNCOMMON, mage.cards.p.PhantomTrain.class));
         cards.add(new SetCardInfo("Phoenix Down", 29, Rarity.UNCOMMON, mage.cards.p.PhoenixDown.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Phoenix Down", 578, Rarity.UNCOMMON, mage.cards.p.PhoenixDown.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Phoenix, Warden of Fire", 229, Rarity.RARE, mage.cards.p.PhoenixWardenOfFire.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Phoenix, Warden of Fire", 397, Rarity.RARE, mage.cards.p.PhoenixWardenOfFire.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Phoenix, Warden of Fire", 494, Rarity.RARE, mage.cards.p.PhoenixWardenOfFire.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Phoenix, Warden of Fire", 542, Rarity.RARE, mage.cards.p.PhoenixWardenOfFire.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 294, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Plains", 295, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Plains", 296, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
@@ -457,10 +450,6 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Shinryu, Transcendent Rival", 384, Rarity.RARE, mage.cards.s.ShinryuTranscendentRival.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shinryu, Transcendent Rival", 455, Rarity.RARE, mage.cards.s.ShinryuTranscendentRival.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shinryu, Transcendent Rival", 529, Rarity.RARE, mage.cards.s.ShinryuTranscendentRival.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Shiva, Warden of Ice", 378, Rarity.RARE, mage.cards.s.ShivaWardenOfIce.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Shiva, Warden of Ice", 438, Rarity.RARE, mage.cards.s.ShivaWardenOfIce.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Shiva, Warden of Ice", 523, Rarity.RARE, mage.cards.s.ShivaWardenOfIce.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Shiva, Warden of Ice", 58, Rarity.RARE, mage.cards.s.ShivaWardenOfIce.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sidequest: Card Collection", 73, Rarity.UNCOMMON, mage.cards.s.SidequestCardCollection.class));
         cards.add(new SetCardInfo("Sidequest: Catch a Fish", 31, Rarity.UNCOMMON, mage.cards.s.SidequestCatchAFish.class));
         cards.add(new SetCardInfo("Sidequest: Hunt the Mark", 119, Rarity.UNCOMMON, mage.cards.s.SidequestHuntTheMark.class, NON_FULL_USE_VARIOUS));
