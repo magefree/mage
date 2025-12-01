@@ -21,7 +21,6 @@ public class SanDiegoComicCon2015 extends ExpansionSet {
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Chandra, Fire of Kaladesh", 135, Rarity.MYTHIC, mage.cards.c.ChandraFireOfKaladesh.class));
-        cards.add(new SetCardInfo("Gideon, Battle-Forged", 23, Rarity.MYTHIC, mage.cards.g.GideonBattleForged.class));
         cards.add(new SetCardInfo("Jace, Vryn's Prodigy", 60, Rarity.MYTHIC, mage.cards.j.JaceVrynsProdigy.class));
         cards.add(new SetCardInfo("Kytheon, Hero of Akros", 23, Rarity.MYTHIC, mage.cards.k.KytheonHeroOfAkros.class));
         cards.add(new SetCardInfo("Liliana, Defiant Necromancer", 106, Rarity.MYTHIC, mage.cards.l.LilianaDefiantNecromancer.class));

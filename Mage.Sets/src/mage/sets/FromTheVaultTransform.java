@@ -33,7 +33,6 @@ public final class FromTheVaultTransform extends ExpansionSet {
         cards.add(new SetCardInfo("Huntmaster of the Fells", 11, Rarity.MYTHIC, mage.cards.h.HuntmasterOfTheFells.class));
         cards.add(new SetCardInfo("Jace, Vryn's Prodigy", 12, Rarity.MYTHIC, mage.cards.j.JaceVrynsProdigy.class));
         cards.add(new SetCardInfo("Kytheon, Hero of Akros", 13, Rarity.MYTHIC, mage.cards.k.KytheonHeroOfAkros.class));
-        cards.add(new SetCardInfo("Gideon, Battle-Forged", 13, Rarity.MYTHIC, mage.cards.g.GideonBattleForged.class));
         cards.add(new SetCardInfo("Liliana, Heretical Healer", 14, Rarity.MYTHIC, mage.cards.l.LilianaHereticalHealer.class));
         cards.add(new SetCardInfo("Liliana, Defiant Necromancer", 14, Rarity.MYTHIC, mage.cards.l.LilianaDefiantNecromancer.class));
         cards.add(new SetCardInfo("Nissa, Vastwood Seer", 15, Rarity.MYTHIC, mage.cards.n.NissaVastwoodSeer.class));

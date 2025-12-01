@@ -46,7 +46,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Alchemist's Retrieval", 47, Rarity.COMMON, mage.cards.a.AlchemistsRetrieval.class));
         cards.add(new SetCardInfo("Alluring Suitor", 141, Rarity.UNCOMMON, mage.cards.a.AlluringSuitor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Alluring Suitor", 300, Rarity.UNCOMMON, mage.cards.a.AlluringSuitor.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Ancestor's Embrace", 22, Rarity.COMMON, mage.cards.a.AncestorsEmbrace.class));
         cards.add(new SetCardInfo("Ancestral Anger", 142, Rarity.COMMON, mage.cards.a.AncestralAnger.class));
         cards.add(new SetCardInfo("Ancient Lumberknot", 230, Rarity.UNCOMMON, mage.cards.a.AncientLumberknot.class));
         cards.add(new SetCardInfo("Angelic Quartermaster", 2, Rarity.UNCOMMON, mage.cards.a.AngelicQuartermaster.class));
@@ -268,8 +267,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Jacob Hauken, Inspector", 320, Rarity.MYTHIC, mage.cards.j.JacobHaukenInspector.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jacob Hauken, Inspector", 332, Rarity.MYTHIC, mage.cards.j.JacobHaukenInspector.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jacob Hauken, Inspector", 65, Rarity.MYTHIC, mage.cards.j.JacobHaukenInspector.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Katilda's Rising Dawn", 21, Rarity.RARE, mage.cards.k.KatildasRisingDawn.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Katilda's Rising Dawn", 317, Rarity.RARE, mage.cards.k.KatildasRisingDawn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Katilda, Dawnhart Martyr", 21, Rarity.RARE, mage.cards.k.KatildaDawnhartMartyr.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Katilda, Dawnhart Martyr", 317, Rarity.RARE, mage.cards.k.KatildaDawnhartMartyr.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kaya, Geist Hunter", 240, Rarity.MYTHIC, mage.cards.k.KayaGeistHunter.class, NON_FULL_USE_VARIOUS));

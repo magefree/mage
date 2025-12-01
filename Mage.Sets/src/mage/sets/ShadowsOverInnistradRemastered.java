@@ -88,7 +88,6 @@ public class ShadowsOverInnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Deathcap Cultivator", 193, Rarity.UNCOMMON, mage.cards.d.DeathcapCultivator.class));
         cards.add(new SetCardInfo("Decimator of the Provinces", 2, Rarity.MYTHIC, mage.cards.d.DecimatorOfTheProvinces.class));
         cards.add(new SetCardInfo("Declaration in Stone", 23, Rarity.RARE, mage.cards.d.DeclarationInStone.class));
-        cards.add(new SetCardInfo("Demon-Possessed Witch", 107, Rarity.UNCOMMON, mage.cards.d.DemonPossessedWitch.class));
         cards.add(new SetCardInfo("Deny Existence", 60, Rarity.COMMON, mage.cards.d.DenyExistence.class));
         cards.add(new SetCardInfo("Deranged Whelp", 150, Rarity.COMMON, mage.cards.d.DerangedWhelp.class));
         cards.add(new SetCardInfo("Descend upon the Sinful", 24, Rarity.MYTHIC, mage.cards.d.DescendUponTheSinful.class));

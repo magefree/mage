@@ -35,7 +35,6 @@ public class MagicOriginsPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Exquisite Firecraft", "143s", Rarity.RARE, mage.cards.e.ExquisiteFirecraft.class));
         cards.add(new SetCardInfo("Gaea's Revenge", "177s", Rarity.RARE, mage.cards.g.GaeasRevenge.class));
         cards.add(new SetCardInfo("Gideon's Phalanx", "14s", Rarity.RARE, mage.cards.g.GideonsPhalanx.class));
-        cards.add(new SetCardInfo("Gideon, Battle-Forged", "23s", Rarity.MYTHIC, mage.cards.g.GideonBattleForged.class));
         cards.add(new SetCardInfo("Gilt-Leaf Winnower", "99s", Rarity.RARE, mage.cards.g.GiltLeafWinnower.class));
         cards.add(new SetCardInfo("Goblin Piledriver", "151s", Rarity.RARE, mage.cards.g.GoblinPiledriver.class));
         cards.add(new SetCardInfo("Graveblade Marauder", "101s", Rarity.RARE, mage.cards.g.GravebladeMarauder.class));

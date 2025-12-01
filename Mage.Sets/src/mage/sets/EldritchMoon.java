@@ -202,7 +202,6 @@ public final class EldritchMoon extends ExpansionSet {
         cards.add(new SetCardInfo("Shrill Howler", 168, Rarity.UNCOMMON, mage.cards.s.ShrillHowler.class));
         cards.add(new SetCardInfo("Sigarda's Aid", 41, Rarity.RARE, mage.cards.s.SigardasAid.class));
         cards.add(new SetCardInfo("Sigardian Priest", 42, Rarity.COMMON, mage.cards.s.SigardianPriest.class));
-        cards.add(new SetCardInfo("Sinuous Predator", 163, Rarity.UNCOMMON, mage.cards.s.SinuousPredator.class));
         cards.add(new SetCardInfo("Skirsdag Supplicant", 104, Rarity.COMMON, mage.cards.s.SkirsdagSupplicant.class));
         cards.add(new SetCardInfo("Slayer's Cleaver", 198, Rarity.UNCOMMON, mage.cards.s.SlayersCleaver.class));
         cards.add(new SetCardInfo("Smoldering Werewolf", 142, Rarity.UNCOMMON, mage.cards.s.SmolderingWerewolf.class));

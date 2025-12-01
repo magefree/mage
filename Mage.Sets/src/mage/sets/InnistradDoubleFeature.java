@@ -35,7 +35,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Alchemist's Retrieval", 314, Rarity.COMMON, mage.cards.a.AlchemistsRetrieval.class));
         cards.add(new SetCardInfo("Alluring Suitor", 408, Rarity.UNCOMMON, mage.cards.a.AlluringSuitor.class));
         cards.add(new SetCardInfo("Ambitious Farmhand", 2, Rarity.UNCOMMON, mage.cards.a.AmbitiousFarmhand.class));
-        cards.add(new SetCardInfo("Ancestor's Embrace", 289, Rarity.COMMON, mage.cards.a.AncestorsEmbrace.class));
         cards.add(new SetCardInfo("Ancestral Anger", 409, Rarity.COMMON, mage.cards.a.AncestralAnger.class));
         cards.add(new SetCardInfo("Ancient Lumberknot", 497, Rarity.UNCOMMON, mage.cards.a.AncientLumberknot.class));
         cards.add(new SetCardInfo("Angelfire Ignition", 209, Rarity.RARE, mage.cards.a.AngelfireIgnition.class));
@@ -313,7 +312,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Jadar, Ghoulcaller of Nephalia", 108, Rarity.RARE, mage.cards.j.JadarGhoulcallerOfNephalia.class));
         cards.add(new SetCardInfo("Jerren, Corrupted Bishop", 109, Rarity.MYTHIC, mage.cards.j.JerrenCorruptedBishop.class));
         cards.add(new SetCardInfo("Join the Dance", 229, Rarity.UNCOMMON, mage.cards.j.JoinTheDance.class));
-        cards.add(new SetCardInfo("Katilda's Rising Dawn", 288, Rarity.RARE, mage.cards.k.KatildasRisingDawn.class));
         cards.add(new SetCardInfo("Katilda, Dawnhart Martyr", 288, Rarity.RARE, mage.cards.k.KatildaDawnhartMartyr.class));
         cards.add(new SetCardInfo("Katilda, Dawnhart Prime", 230, Rarity.RARE, mage.cards.k.KatildaDawnhartPrime.class));
         cards.add(new SetCardInfo("Kaya, Geist Hunter", 507, Rarity.MYTHIC, mage.cards.k.KayaGeistHunter.class));
@@ -338,7 +336,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Lightning Wolf", 435, Rarity.COMMON, mage.cards.l.LightningWolf.class));
         cards.add(new SetCardInfo("Locked in the Cemetery", 60, Rarity.COMMON, mage.cards.l.LockedInTheCemetery.class));
         cards.add(new SetCardInfo("Lord of the Forsaken", 110, Rarity.MYTHIC, mage.cards.l.LordOfTheForsaken.class));
-        cards.add(new SetCardInfo("Lord of the Ulvenwald", 231, Rarity.UNCOMMON, mage.cards.l.LordOfTheUlvenwald.class));
         cards.add(new SetCardInfo("Loyal Gryff", 26, Rarity.UNCOMMON, mage.cards.l.LoyalGryff.class));
         cards.add(new SetCardInfo("Ludevic, Necrogenius", 233, Rarity.RARE, mage.cards.l.LudevicNecrogenius.class));
         cards.add(new SetCardInfo("Luminous Phantom", 27, Rarity.COMMON, mage.cards.l.LuminousPhantom.class));

@@ -166,7 +166,6 @@ public class PioneerMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Ghor-Clan Rampager", 226, Rarity.UNCOMMON, mage.cards.g.GhorClanRampager.class));
         cards.add(new SetCardInfo("Ghostblade Eidolon", 13, Rarity.COMMON, mage.cards.g.GhostbladeEidolon.class));
         cards.add(new SetCardInfo("Gideon, Ally of Zendikar", 14, Rarity.MYTHIC, mage.cards.g.GideonAllyOfZendikar.class));
-        cards.add(new SetCardInfo("Gideon, Battle-Forged", 23, Rarity.MYTHIC, mage.cards.g.GideonBattleForged.class));
         cards.add(new SetCardInfo("Gift of Orzhova", 307, Rarity.UNCOMMON, mage.cards.g.GiftOfOrzhova.class));
         cards.add(new SetCardInfo("Give // Take", 389, Rarity.UNCOMMON, mage.cards.g.GiveTake.class));
         cards.add(new SetCardInfo("Gladecover Scout", 175, Rarity.COMMON, mage.cards.g.GladecoverScout.class));

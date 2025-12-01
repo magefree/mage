@@ -89,7 +89,6 @@ public final class ShadowsOverInnistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Dead Weight", 106, Rarity.COMMON, mage.cards.d.DeadWeight.class));
         cards.add(new SetCardInfo("Deathcap Cultivator", 202, Rarity.RARE, mage.cards.d.DeathcapCultivator.class));
         cards.add(new SetCardInfo("Declaration in Stone", 12, Rarity.RARE, mage.cards.d.DeclarationInStone.class));
-        cards.add(new SetCardInfo("Demon-Possessed Witch", 119, Rarity.UNCOMMON, mage.cards.d.DemonPossessedWitch.class));
         cards.add(new SetCardInfo("Deny Existence", 55, Rarity.COMMON, mage.cards.d.DenyExistence.class));
         cards.add(new SetCardInfo("Descend upon the Sinful", 13, Rarity.MYTHIC, mage.cards.d.DescendUponTheSinful.class));
         cards.add(new SetCardInfo("Devils' Playground", 151, Rarity.RARE, mage.cards.d.DevilsPlayground.class));
@@ -121,7 +120,6 @@ public final class ShadowsOverInnistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Fevered Visions", 244, Rarity.RARE, mage.cards.f.FeveredVisions.class));
         cards.add(new SetCardInfo("Fiery Temper", 156, Rarity.COMMON, mage.cards.f.FieryTemper.class));
         cards.add(new SetCardInfo("Flameblade Angel", 157, Rarity.RARE, mage.cards.f.FlamebladeAngel.class));
-        cards.add(new SetCardInfo("Flameheart Werewolf", 169, Rarity.UNCOMMON, mage.cards.f.FlameheartWerewolf.class));
         cards.add(new SetCardInfo("Fleeting Memories", 62, Rarity.UNCOMMON, mage.cards.f.FleetingMemories.class));
         cards.add(new SetCardInfo("Foreboding Ruins", 272, Rarity.RARE, mage.cards.f.ForebodingRuins.class));
         cards.add(new SetCardInfo("Forest", 295, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));

@@ -90,7 +90,6 @@ public class ShadowsOfThePast extends ExpansionSet {
         cards.add(new SetCardInfo("Spider Spawning", 56, Rarity.UNCOMMON, mage.cards.s.SpiderSpawning.class));
         cards.add(new SetCardInfo("Stitcher's Apprentice", 24, Rarity.COMMON, mage.cards.s.StitchersApprentice.class));
         cards.add(new SetCardInfo("Stromkirk Captain", 67, Rarity.UNCOMMON, mage.cards.s.StromkirkCaptain.class));
-        cards.add(new SetCardInfo("Terror of Kruin Pass", 42, Rarity.RARE, mage.cards.t.TerrorOfKruinPass.class));
         cards.add(new SetCardInfo("Tragic Slip", 35, Rarity.COMMON, mage.cards.t.TragicSlip.class));
         cards.add(new SetCardInfo("Traitorous Blood", 45, Rarity.COMMON, mage.cards.t.TraitorousBlood.class));
         cards.add(new SetCardInfo("Travel Preparations", 57, Rarity.COMMON, mage.cards.t.TravelPreparations.class));

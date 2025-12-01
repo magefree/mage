@@ -132,7 +132,6 @@ public final class MagicOrigins extends ExpansionSet {
         cards.add(new SetCardInfo("Gather the Pack", 178, Rarity.UNCOMMON, mage.cards.g.GatherThePack.class));
         cards.add(new SetCardInfo("Ghirapur Aether Grid", 148, Rarity.UNCOMMON, mage.cards.g.GhirapurAetherGrid.class));
         cards.add(new SetCardInfo("Ghirapur Gearcrafter", 149, Rarity.COMMON, mage.cards.g.GhirapurGearcrafter.class));
-        cards.add(new SetCardInfo("Gideon, Battle-Forged", 23, Rarity.MYTHIC, mage.cards.g.GideonBattleForged.class));
         cards.add(new SetCardInfo("Gideon's Phalanx", 14, Rarity.RARE, mage.cards.g.GideonsPhalanx.class));
         cards.add(new SetCardInfo("Gilt-Leaf Winnower", 99, Rarity.RARE, mage.cards.g.GiltLeafWinnower.class));
         cards.add(new SetCardInfo("Gnarlroot Trapper", 100, Rarity.UNCOMMON, mage.cards.g.GnarlrootTrapper.class));

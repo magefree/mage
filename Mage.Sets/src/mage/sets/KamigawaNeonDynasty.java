@@ -144,7 +144,6 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Enthusiastic Mechanaut", 509, Rarity.UNCOMMON, mage.cards.e.EnthusiasticMechanaut.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Era of Enlightenment", 11, Rarity.COMMON, mage.cards.e.EraOfEnlightenment.class));
         cards.add(new SetCardInfo("Essence Capture", 52, Rarity.UNCOMMON, mage.cards.e.EssenceCapture.class));
-        cards.add(new SetCardInfo("Etching of Kumano", 152, Rarity.UNCOMMON, mage.cards.e.EtchingOfKumano.class));
         cards.add(new SetCardInfo("Experimental Synthesizer", 138, Rarity.COMMON, mage.cards.e.ExperimentalSynthesizer.class));
         cards.add(new SetCardInfo("Explosive Entry", 139, Rarity.COMMON, mage.cards.e.ExplosiveEntry.class));
         cards.add(new SetCardInfo("Explosive Singularity", 140, Rarity.MYTHIC, mage.cards.e.ExplosiveSingularity.class, NON_FULL_USE_VARIOUS));

@@ -274,7 +274,6 @@ public final class Innistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 256, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 257, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 258, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Terror of Kruin Pass", 152, Rarity.RARE, mage.cards.t.TerrorOfKruinPass.class));
         cards.add(new SetCardInfo("Think Twice", 83, Rarity.COMMON, mage.cards.t.ThinkTwice.class));
         cards.add(new SetCardInfo("Thraben Militia", 38, Rarity.COMMON, mage.cards.t.ThrabenMilitia.class));
         cards.add(new SetCardInfo("Thraben Purebloods", 37, Rarity.COMMON, mage.cards.t.ThrabenPurebloods.class));

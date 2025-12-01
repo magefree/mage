@@ -291,11 +291,6 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Kefka, Court Mage", 398, Rarity.MYTHIC, mage.cards.k.KefkaCourtMage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kefka, Court Mage", 496, Rarity.MYTHIC, mage.cards.k.KefkaCourtMage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kefka, Court Mage", 543, Rarity.MYTHIC, mage.cards.k.KefkaCourtMage.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Kefka, Ruler of Ruin", 231, Rarity.MYTHIC, mage.cards.k.KefkaRulerOfRuin.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Kefka, Ruler of Ruin", 322, Rarity.MYTHIC, mage.cards.k.KefkaRulerOfRuin.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Kefka, Ruler of Ruin", 398, Rarity.MYTHIC, mage.cards.k.KefkaRulerOfRuin.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Kefka, Ruler of Ruin", 496, Rarity.MYTHIC, mage.cards.k.KefkaRulerOfRuin.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Kefka, Ruler of Ruin", 543, Rarity.MYTHIC, mage.cards.k.KefkaRulerOfRuin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kuja, Genome Sorcerer", 232, Rarity.RARE, mage.cards.k.KujaGenomeSorcerer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kuja, Genome Sorcerer", 399, Rarity.RARE, mage.cards.k.KujaGenomeSorcerer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kuja, Genome Sorcerer", 497, Rarity.RARE, mage.cards.k.KujaGenomeSorcerer.class, NON_FULL_USE_VARIOUS));
@@ -561,10 +556,6 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Torgal, A Fine Hound", 345, Rarity.UNCOMMON, mage.cards.t.TorgalAFineHound.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Torgal, A Fine Hound", 474, Rarity.UNCOMMON, mage.cards.t.TorgalAFineHound.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Town Greeter", 209, Rarity.COMMON, mage.cards.t.TownGreeter.class));
-        cards.add(new SetCardInfo("Trance Kuja, Fate Defied", 232, Rarity.RARE, mage.cards.t.TranceKujaFateDefied.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Trance Kuja, Fate Defied", 399, Rarity.RARE, mage.cards.t.TranceKujaFateDefied.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Trance Kuja, Fate Defied", 497, Rarity.RARE, mage.cards.t.TranceKujaFateDefied.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Trance Kuja, Fate Defied", 544, Rarity.RARE, mage.cards.t.TranceKujaFateDefied.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Travel the Overworld", 82, Rarity.UNCOMMON, mage.cards.t.TravelTheOverworld.class));
         cards.add(new SetCardInfo("Traveling Chocobo", "551a", Rarity.MYTHIC, mage.cards.t.TravelingChocobo.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Traveling Chocobo", "551b", Rarity.MYTHIC, mage.cards.t.TravelingChocobo.class, NON_FULL_USE_VARIOUS));

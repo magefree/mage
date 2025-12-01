@@ -256,8 +256,6 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Locked in the Cemetery", 60, Rarity.COMMON, mage.cards.l.LockedInTheCemetery.class));
         cards.add(new SetCardInfo("Lord of the Forsaken", 110, Rarity.MYTHIC, mage.cards.l.LordOfTheForsaken.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lord of the Forsaken", 346, Rarity.MYTHIC, mage.cards.l.LordOfTheForsaken.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Lord of the Ulvenwald", 231, Rarity.UNCOMMON, mage.cards.l.LordOfTheUlvenwald.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Lord of the Ulvenwald", 310, Rarity.UNCOMMON, mage.cards.l.LordOfTheUlvenwald.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Loyal Gryff", 26, Rarity.UNCOMMON, mage.cards.l.LoyalGryff.class));
         cards.add(new SetCardInfo("Ludevic, Necrogenius", 233, Rarity.RARE, mage.cards.l.LudevicNecrogenius.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ludevic, Necrogenius", 320, Rarity.RARE, mage.cards.l.LudevicNecrogenius.class, NON_FULL_USE_VARIOUS));

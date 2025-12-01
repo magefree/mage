@@ -1,36 +1,39 @@
-
 package mage.cards.k;
 
-import java.util.UUID;
-
-import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.TransformSourceEffect;
-import mage.abilities.keyword.TransformAbility;
-import mage.cards.CardImpl;
+import mage.abilities.effects.common.combat.CantBeBlockedByMoreThanOneSourceEffect;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  * @author fireshoes
  */
-public final class KessigProwler extends CardImpl {
+public final class KessigProwler extends TransformingDoubleFacedCard {
 
     public KessigProwler(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");
-        this.subtype.add(SubType.WEREWOLF);
-        this.subtype.add(SubType.HORROR);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.WEREWOLF, SubType.HORROR}, "{G}",
+                "Sinuous Predator",
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.ELDRAZI, SubType.WEREWOLF}, "");
 
-        this.secondSideCardClazz = mage.cards.s.SinuousPredator.class;
+        // Kessig Prowler
+        this.getLeftHalfCard().setPT(2, 1);
 
         // {4}{G}: Transform Kessig Prowler.
-        this.addAbility(new TransformAbility());
-        this.addAbility(new SimpleActivatedAbility(new TransformSourceEffect(), new ManaCostsImpl<>("{4}{G}")));
+        this.getLeftHalfCard().addAbility(new SimpleActivatedAbility(new TransformSourceEffect(), new ManaCostsImpl<>("{4}{G}")));
+
+        // Sinuous Predator
+        this.getRightHalfCard().setPT(4, 4);
+
+        // Sinuous Predator can't be blocked by more than one creature.
+        this.getRightHalfCard().addAbility(new SimpleStaticAbility(new CantBeBlockedByMoreThanOneSourceEffect()));
     }
 
     private KessigProwler(final KessigProwler card) {
