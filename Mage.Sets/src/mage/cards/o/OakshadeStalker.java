@@ -1,11 +1,11 @@
 package mage.cards.o;
 
-import mage.MageInt;
 import mage.abilities.common.PayMoreToCastAsThoughtItHadFlashAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.DayboundAbility;
-import mage.cards.CardImpl;
+import mage.abilities.keyword.NightboundAbility;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
@@ -14,23 +14,28 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class OakshadeStalker extends CardImpl {
+public final class OakshadeStalker extends TransformingDoubleFacedCard {
 
     public OakshadeStalker(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.RANGER, SubType.WEREWOLF}, "{2}{G}",
+                "Moonlit Ambusher",
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.WEREWOLF}, "G");
 
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.RANGER);
-        this.subtype.add(SubType.WEREWOLF);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-        this.secondSideCardClazz = mage.cards.m.MoonlitAmbusher.class;
+        // Oakshade Stalker
+        this.getLeftHalfCard().setPT(3, 3);
 
         // You may cast this spell as though it had flash if you pay {2} more to cast it.
-        this.addAbility(new PayMoreToCastAsThoughtItHadFlashAbility(this, new ManaCostsImpl<>("{2}")));
+        this.getLeftHalfCard().addAbility(new PayMoreToCastAsThoughtItHadFlashAbility(this.getLeftHalfCard(), new ManaCostsImpl<>("{2}")));
 
         // Daybound
-        this.addAbility(new DayboundAbility());
+        this.getLeftHalfCard().addAbility(new DayboundAbility());
+
+        // Moonlit Ambusher
+        this.getRightHalfCard().setPT(6, 3);
+
+        // Nightbound
+        this.getRightHalfCard().addAbility(new NightboundAbility());
     }
 
     private OakshadeStalker(final OakshadeStalker card) {

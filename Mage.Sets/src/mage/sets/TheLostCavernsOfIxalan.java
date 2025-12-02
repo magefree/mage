@@ -292,7 +292,6 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Oltec Cloud Guard", 28, Rarity.COMMON, mage.cards.o.OltecCloudGuard.class));
         cards.add(new SetCardInfo("Orazca Puzzle-Door", 68, Rarity.COMMON, mage.cards.o.OrazcaPuzzleDoor.class));
         cards.add(new SetCardInfo("Oteclan Landmark", 29, Rarity.COMMON, mage.cards.o.OteclanLandmark.class));
-        cards.add(new SetCardInfo("Oteclan Levitator", 29, Rarity.COMMON, mage.cards.o.OteclanLevitator.class));
         cards.add(new SetCardInfo("Out of Air", 69, Rarity.COMMON, mage.cards.o.OutOfAir.class));
         cards.add(new SetCardInfo("Over the Edge", 205, Rarity.COMMON, mage.cards.o.OverTheEdge.class));
         cards.add(new SetCardInfo("Palani's Hatcher", 237, Rarity.RARE, mage.cards.p.PalanisHatcher.class, NON_FULL_USE_VARIOUS));
@@ -404,14 +403,6 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Tarrian's Soulcleaver", 264, Rarity.RARE, mage.cards.t.TarriansSoulcleaver.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tarrian's Soulcleaver", 389, Rarity.RARE, mage.cards.t.TarriansSoulcleaver.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tectonic Hazard", 169, Rarity.COMMON, mage.cards.t.TectonicHazard.class));
-        cards.add(new SetCardInfo("Temple of Civilization", 26, Rarity.MYTHIC, mage.cards.t.TempleOfCivilization.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Temple of Civilization", 314, Rarity.MYTHIC, mage.cards.t.TempleOfCivilization.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Temple of Cultivation", 204, Rarity.MYTHIC, mage.cards.t.TempleOfCultivation.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Temple of Cultivation", 318, Rarity.MYTHIC, mage.cards.t.TempleOfCultivation.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Temple of Cyclical Time", 315, Rarity.MYTHIC, mage.cards.t.TempleOfCyclicalTime.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Temple of Cyclical Time", 67, Rarity.MYTHIC, mage.cards.t.TempleOfCyclicalTime.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Temple of Power", 158, Rarity.MYTHIC, mage.cards.t.TempleOfPower.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Temple of Power", 317, Rarity.MYTHIC, mage.cards.t.TempleOfPower.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tendril of the Mycotyrant", 215, Rarity.UNCOMMON, mage.cards.t.TendrilOfTheMycotyrant.class));
         cards.add(new SetCardInfo("Terror Tide", 127, Rarity.RARE, mage.cards.t.TerrorTide.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Terror Tide", 372, Rarity.RARE, mage.cards.t.TerrorTide.class, NON_FULL_USE_VARIOUS));

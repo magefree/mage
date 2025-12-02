@@ -284,7 +284,6 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Omnath, Locus of All", 387, Rarity.RARE, mage.cards.o.OmnathLocusOfAll.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Onakke Javelineer", 156, Rarity.COMMON, mage.cards.o.OnakkeJavelineer.class));
         cards.add(new SetCardInfo("Oracle of Tragedy", 71, Rarity.UNCOMMON, mage.cards.o.OracleOfTragedy.class));
-        cards.add(new SetCardInfo("Order of the Alabaster Host", 72, Rarity.COMMON, mage.cards.o.OrderOfTheAlabasterHost.class));
         cards.add(new SetCardInfo("Order of the Mirror", 72, Rarity.COMMON, mage.cards.o.OrderOfTheMirror.class));
         cards.add(new SetCardInfo("Orthion, Hero of Lavabrink", 334, Rarity.RARE, mage.cards.o.OrthionHeroOfLavabrink.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Orthion, Hero of Lavabrink", 379, Rarity.RARE, mage.cards.o.OrthionHeroOfLavabrink.class, NON_FULL_USE_VARIOUS));

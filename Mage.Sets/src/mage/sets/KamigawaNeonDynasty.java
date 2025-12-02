@@ -374,7 +374,6 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Nezumi Bladeblesser", 318, Rarity.COMMON, mage.cards.n.NezumiBladeblesser.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nezumi Prowler", 116, Rarity.UNCOMMON, mage.cards.n.NezumiProwler.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nezumi Prowler", 344, Rarity.UNCOMMON, mage.cards.n.NezumiProwler.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Nezumi Road Captain", 117, Rarity.COMMON, mage.cards.n.NezumiRoadCaptain.class));
         cards.add(new SetCardInfo("Ninja's Kunai", 252, Rarity.COMMON, mage.cards.n.NinjasKunai.class));
         cards.add(new SetCardInfo("Norika Yamazaki, the Poet", 31, Rarity.UNCOMMON, mage.cards.n.NorikaYamazakiThePoet.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Norika Yamazaki, the Poet", 311, Rarity.UNCOMMON, mage.cards.n.NorikaYamazakiThePoet.class, NON_FULL_USE_VARIOUS));

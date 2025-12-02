@@ -1,48 +1,64 @@
 package mage.cards.o;
 
-import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.Condition;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.abilities.keyword.VigilanceAbility;
+import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.Card;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.CreateTokenEvent;
 import mage.game.events.GameEvent;
 import mage.players.Player;
+import mage.watchers.common.PlayerAttackedWatcher;
 
 import java.util.UUID;
 
 /**
  * @author Susucr
  */
-public final class OjerTaqDeepestFoundation extends CardImpl {
+public final class OjerTaqDeepestFoundation extends TransformingDoubleFacedCard {
 
     public OjerTaqDeepestFoundation(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
-        this.secondSideCardClazz = mage.cards.t.TempleOfCivilization.class;
+        super(ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.GOD}, "{4}{W}{W}",
+                "Temple of Civilization",
+                new SuperType[]{}, new CardType[]{CardType.LAND}, new SubType[]{}, "");
 
-        this.supertype.add(SuperType.LEGENDARY);
-        this.subtype.add(SubType.GOD);
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(6);
+        // Ojer Taq, Deepest Foundation
+        this.getLeftHalfCard().setPT(6, 6);
 
         // Vigilance
-        this.addAbility(VigilanceAbility.getInstance());
+        this.getLeftHalfCard().addAbility(VigilanceAbility.getInstance());
 
         // If one or more creature tokens would be created under your control, three times that many of those tokens are created instead.
-        this.addAbility(new SimpleStaticAbility(new OjerTaqDeepestFoundationTriplingEffect()));
+        this.getLeftHalfCard().addAbility(new SimpleStaticAbility(new OjerTaqDeepestFoundationTriplingEffect()));
 
         // When Ojer Taq dies, return it to the battlefield tapped and transformed under its owner's control.
-        this.addAbility(new TransformAbility());
-        this.addAbility(new DiesSourceTriggeredAbility(new OjerTaqDeepestFoundationTransformEffect()));
+        this.getLeftHalfCard().addAbility(new DiesSourceTriggeredAbility(new OjerTaqDeepestFoundationTransformEffect()));
+
+        // Temple of Civilization
+        // {T}: Add {W}.
+        this.getRightHalfCard().addAbility(new WhiteManaAbility());
+
+        // {2}{W}, {T}: Transform Temple of Civilization. Activate only if you attacked with three or more creatures this turn and only as a sorcery.
+        Ability ability = new ActivateIfConditionActivatedAbility(
+                new TransformSourceEffect(), new ManaCostsImpl<>("{2}{W}"), TempleOfCivilizationCondition.instance
+        ).setTiming(TimingRule.SORCERY);
+        ability.addCost(new TapSourceCost());
+        ability.addWatcher(new PlayerAttackedWatcher());
+        this.getRightHalfCard().addAbility(ability);
     }
 
     private OjerTaqDeepestFoundation(final OjerTaqDeepestFoundation card) {
@@ -122,5 +138,20 @@ class OjerTaqDeepestFoundationTriplingEffect extends ReplacementEffectImpl {
             ((CreateTokenEvent) event).multiplyTokens(3, token -> token.isCreature(game));
         }
         return false;
+    }
+}
+
+enum TempleOfCivilizationCondition implements Condition {
+    instance;
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        PlayerAttackedWatcher watcher = game.getState().getWatcher(PlayerAttackedWatcher.class);
+        return watcher != null && watcher.getNumberOfAttackersCurrentTurn(source.getControllerId()) >= 3;
+    }
+
+    @Override
+    public String toString() {
+        return "you attacked with three or more creatures this turn";
     }
 }

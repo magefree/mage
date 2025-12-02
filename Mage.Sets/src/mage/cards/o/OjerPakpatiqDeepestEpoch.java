@@ -1,18 +1,25 @@
 package mage.cards.o;
 
-import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
+import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.SourceHasCounterCondition;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.TransformSourceEffect;
+import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ReboundAbility;
 import mage.abilities.keyword.TransformAbility;
+import mage.abilities.mana.BlueManaAbility;
 import mage.cards.Card;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
+import mage.cards.n.NarsetTranscendent;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.counters.Counters;
@@ -26,35 +33,48 @@ import java.util.UUID;
 /**
  * @author Susucr
  */
-public final class OjerPakpatiqDeepestEpoch extends CardImpl {
+public final class OjerPakpatiqDeepestEpoch extends TransformingDoubleFacedCard {
 
     private static final FilterSpell filter = new FilterSpell("an instant spell");
+    private static final Condition condition = new SourceHasCounterCondition(CounterType.TIME, ComparisonType.EQUAL_TO, 0);
 
     static {
         filter.add(CardType.INSTANT.getPredicate());
     }
 
     public OjerPakpatiqDeepestEpoch(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
-        this.secondSideCardClazz = mage.cards.t.TempleOfCyclicalTime.class;
+        super(ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.GOD}, "{2}{U}{U}",
+                "Temple of Cyclical Time",
+                new SuperType[]{}, new CardType[]{CardType.LAND}, new SubType[]{}, "");
 
-        this.supertype.add(SuperType.LEGENDARY);
-        this.subtype.add(SubType.GOD);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(3);
+        // Ojer Pakpatiq, Deepest Epoch
+        this.getLeftHalfCard().setPT(4, 3);
 
         // Flying
-        this.addAbility(FlyingAbility.getInstance());
+        this.getLeftHalfCard().addAbility(FlyingAbility.getInstance());
 
         // Whenever you cast an instant spell from your hand, it gains rebound.
-        this.addAbility(new SpellCastControllerTriggeredAbility(
+        this.getLeftHalfCard().addAbility(new SpellCastControllerTriggeredAbility(
                 Zone.BATTLEFIELD, new OjerPakpatiqDeepestEpochGainReboundEffect(), filter,
                 false, SetTargetPointer.SPELL, Zone.HAND
         ));
 
         // When Ojer Pakpatiq dies, return it to the battlefield tapped and transformed under its owner's control with three time counters on it.
-        this.addAbility(new TransformAbility());
-        this.addAbility(new DiesSourceTriggeredAbility(new OjerPakpatiqDeepestEpochTrigger()));
+        this.getLeftHalfCard().addAbility(new DiesSourceTriggeredAbility(new OjerPakpatiqDeepestEpochTrigger()));
+
+        // Temple of Cyclical Time
+        // {T}: Add {U}. Remove a time counter from Temple of Cyclical Time.
+        Ability ability = new BlueManaAbility();
+        ability.addEffect(new RemoveCounterSourceEffect(CounterType.TIME.createInstance()));
+        this.getRightHalfCard().addAbility(ability);
+
+        // {2}{U}, {T}: Transform Temple of Cyclical Time. Activate only if it has no time counters on it and only as a sorcery.
+        ability = new ActivateIfConditionActivatedAbility(
+                new TransformSourceEffect(), new ManaCostsImpl<>("{2}{U}"), condition
+        ).setTiming(TimingRule.SORCERY);
+        ability.addCost(new TapSourceCost());
+        this.getRightHalfCard().addAbility(ability);
     }
 
     private OjerPakpatiqDeepestEpoch(final OjerPakpatiqDeepestEpoch card) {
@@ -68,7 +88,7 @@ public final class OjerPakpatiqDeepestEpoch extends CardImpl {
 }
 
 /**
- * Inspired by {@link mage.cards.n.NarsetTranscendent}
+ * Inspired by {@link NarsetTranscendent}
  */
 class OjerPakpatiqDeepestEpochGainReboundEffect extends ContinuousEffectImpl {
 

@@ -1,50 +1,74 @@
 package mage.cards.o;
 
-import mage.MageInt;
+
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.Condition;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.TransformSourceEffect;
+import mage.abilities.hint.Hint;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.TransformAbility;
+import mage.abilities.mana.RedManaAbility;
 import mage.cards.Card;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.*;
 import mage.game.Controllable;
 import mage.game.Game;
+import mage.game.command.CommandObject;
 import mage.game.events.DamageEvent;
+import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.game.stack.StackObject;
 import mage.players.Player;
+import mage.watchers.Watcher;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 /**
  * @author Susucr
  */
-public final class OjerAxonilDeepestMight extends CardImpl {
+public final class OjerAxonilDeepestMight extends TransformingDoubleFacedCard {
 
     public OjerAxonilDeepestMight(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
-        this.secondSideCardClazz = mage.cards.t.TempleOfPower.class;
+        super(ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.GOD}, "{2}{R}{R}",
+                "Temple of Power",
+                new SuperType[]{}, new CardType[]{CardType.LAND}, new SubType[]{}, "");
 
-        this.supertype.add(SuperType.LEGENDARY);
-        this.subtype.add(SubType.GOD);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
+        // Ojer Axonil, Deepest Might
+        this.getLeftHalfCard().setPT(4, 4);
 
         // Trample
-        this.addAbility(TrampleAbility.getInstance());
+        this.getLeftHalfCard().addAbility(TrampleAbility.getInstance());
 
         // If a red source you control would deal an amount of noncombat damage less than Ojer Axonil's power to an opponent, that source deals damage equal to Ojer Axonil's power instead.
-        this.addAbility(new SimpleStaticAbility(new OjerAxonilDeepestMightReplacementEffect()));
+        this.getLeftHalfCard().addAbility(new SimpleStaticAbility(new OjerAxonilDeepestMightReplacementEffect()));
 
         // When Ojer Axonil dies, return it to the battlefield tapped and transformed under its owner's control.
-        this.addAbility(new TransformAbility());
-        this.addAbility(new DiesSourceTriggeredAbility(new OjerAxonilDeepestMightTransformEffect()));
+        this.getLeftHalfCard().addAbility(new DiesSourceTriggeredAbility(new OjerAxonilDeepestMightTransformEffect()));
+
+        // Temple of Power
+        // {T}: Add {R}.
+        this.getRightHalfCard().addAbility(new RedManaAbility());
+
+        // {2}{R}, {T}: Transform Temple of Power. Activate only if red sources you controlled dealt 4 or more noncombat damage this turn and only as a sorcery.
+        Ability ability = new ActivateIfConditionActivatedAbility(
+                new TransformSourceEffect(), new ManaCostsImpl<>("{2}{R}"), TempleOfPowerCondition.instance
+        ).setTiming(TimingRule.SORCERY);
+        ability.addCost(new TapSourceCost());
+        ability.addWatcher(new TempleOfPowerWatcher());
+        this.getRightHalfCard().addAbility(ability.addHint(TempleOfPowerHint.instance));
     }
 
     private OjerAxonilDeepestMight(final OjerAxonilDeepestMight card) {
@@ -153,5 +177,102 @@ class OjerAxonilDeepestMightReplacementEffect extends ReplacementEffectImpl {
                 && !dmgEvent.isCombatDamage()
                 && event.getAmount() > 0
                 && event.getAmount() < ojer.getPower().getValue();
+    }
+}
+
+enum TempleOfPowerCondition implements Condition {
+    instance;
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        TempleOfPowerWatcher watcher = game.getState().getWatcher(TempleOfPowerWatcher.class);
+        return watcher != null
+                && 4 <= watcher.damageForPlayer(source.getControllerId());
+    }
+
+    @Override
+    public String toString() {
+        return "red sources you controlled dealt 4 or more noncombat damage this turn";
+    }
+}
+
+enum TempleOfPowerHint implements Hint {
+    instance;
+
+    @Override
+    public String getText(Game game, Ability ability) {
+        TempleOfPowerWatcher watcher = game.getState().getWatcher(TempleOfPowerWatcher.class);
+        if (watcher == null) {
+            return "";
+        }
+
+        return "Non-combat damage from red source: "
+                + watcher.damageForPlayer(ability.getControllerId());
+    }
+
+    @Override
+    public TempleOfPowerHint copy() {
+        return instance;
+    }
+}
+
+class TempleOfPowerWatcher extends Watcher {
+
+    // player -> total non combat damage from red source controlled by that player dealt this turn.
+    private final Map<UUID, Integer> damageMap = new HashMap<>();
+
+    public TempleOfPowerWatcher() {
+        super(WatcherScope.GAME);
+    }
+
+    @Override
+    public void watch(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER
+                || event.getType() == GameEvent.EventType.DAMAGED_PERMANENT) {
+            DamagedEvent dmgEvent = (DamagedEvent) event;
+
+            // watch only non combat damage events.
+            if (dmgEvent == null || dmgEvent.isCombatDamage()) {
+                return;
+            }
+
+            MageObject sourceObject;
+            UUID sourceControllerId = null;
+            Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
+            if (sourcePermanent != null) {
+                // source is a permanent.
+                sourceObject = sourcePermanent;
+                sourceControllerId = sourcePermanent.getControllerId();
+            } else {
+                sourceObject = game.getSpellOrLKIStack(event.getSourceId());
+                if (sourceObject != null) {
+                    // source is a spell.
+                    sourceControllerId = ((StackObject) sourceObject).getControllerId();
+                } else {
+                    sourceObject = game.getObject(event.getSourceId());
+                    if (sourceObject instanceof CommandObject) {
+                        // source is a Command Object. For instance Emblem
+                        sourceControllerId = ((CommandObject) sourceObject).getControllerId();
+                    }
+                }
+            }
+
+            // watch only red sources dealing damage
+            if (sourceObject == null || sourceControllerId == null || !sourceObject.getColor().isRed()) {
+                return;
+            }
+
+            damageMap.compute(sourceControllerId, (k, i) -> (i == null ? 0 : i) + event.getAmount());
+        }
+    }
+
+    @Override
+    public void reset() {
+        damageMap.clear();
+        super.reset();
+    }
+
+    int damageForPlayer(UUID playerId) {
+        return damageMap.getOrDefault(playerId, 0);
     }
 }
