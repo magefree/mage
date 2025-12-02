@@ -63,7 +63,6 @@ public class ShadowsOfThePast extends ExpansionSet {
         cards.add(new SetCardInfo("Havengul Lich", 63, Rarity.MYTHIC, mage.cards.h.HavengulLich.class));
         cards.add(new SetCardInfo("Havengul Runebinder", 16, Rarity.RARE, mage.cards.h.HavengulRunebinder.class));
         cards.add(new SetCardInfo("Hollowhenge Scavenger", 52, Rarity.COMMON, mage.cards.h.HollowhengeScavenger.class));
-        cards.add(new SetCardInfo("Howlpack Alpha", 53, Rarity.RARE, mage.cards.h.HowlpackAlpha.class));
         cards.add(new SetCardInfo("Huntmaster of the Fells", 64, Rarity.MYTHIC, mage.cards.h.HuntmasterOfTheFells.class));
         cards.add(new SetCardInfo("Immerwolf", 65, Rarity.UNCOMMON, mage.cards.i.Immerwolf.class));
         cards.add(new SetCardInfo("Increasing Ambition", 32, Rarity.RARE, mage.cards.i.IncreasingAmbition.class));

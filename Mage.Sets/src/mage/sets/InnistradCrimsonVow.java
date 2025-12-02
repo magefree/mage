@@ -95,7 +95,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Cackling Culprit", 28, Rarity.UNCOMMON, mage.cards.c.CacklingCulprit.class));
         cards.add(new SetCardInfo("Cartographer's Survey", 190, Rarity.UNCOMMON, mage.cards.c.CartographersSurvey.class));
         cards.add(new SetCardInfo("Catapult Fodder", 99, Rarity.UNCOMMON, mage.cards.c.CatapultFodder.class));
-        cards.add(new SetCardInfo("Catlike Curiosity", 69, Rarity.UNCOMMON, mage.cards.c.CatlikeCuriosity.class));
         cards.add(new SetCardInfo("Cemetery Desecrator", 100, Rarity.MYTHIC, mage.cards.c.CemeteryDesecrator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cemetery Desecrator", 366, Rarity.MYTHIC, mage.cards.c.CemeteryDesecrator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cemetery Gatekeeper", 148, Rarity.MYTHIC, mage.cards.c.CemeteryGatekeeper.class, NON_FULL_USE_VARIOUS));
@@ -204,8 +203,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Geistlight Snare", 60, Rarity.UNCOMMON, mage.cards.g.GeistlightSnare.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Geralf, Visionary Stitcher", 319, Rarity.RARE, mage.cards.g.GeralfVisionaryStitcher.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Geralf, Visionary Stitcher", 61, Rarity.RARE, mage.cards.g.GeralfVisionaryStitcher.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Ghastly Mimicry", 361, Rarity.RARE, mage.cards.g.GhastlyMimicry.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Ghastly Mimicry", 68, Rarity.RARE, mage.cards.g.GhastlyMimicry.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gift of Fangs", 113, Rarity.COMMON, mage.cards.g.GiftOfFangs.class));
         cards.add(new SetCardInfo("Glorious Sunrise", 200, Rarity.RARE, mage.cards.g.GloriousSunrise.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Glorious Sunrise", 388, Rarity.RARE, mage.cards.g.GloriousSunrise.class, NON_FULL_USE_VARIOUS));

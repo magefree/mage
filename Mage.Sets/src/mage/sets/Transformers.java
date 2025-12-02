@@ -25,7 +25,6 @@ public final class Transformers extends ExpansionSet {
         cards.add(new SetCardInfo("Flamewar, Brash Veteran", 10, Rarity.MYTHIC, mage.cards.f.FlamewarBrashVeteran.class));
         cards.add(new SetCardInfo("Goldbug, Humanity's Ally", 11, Rarity.MYTHIC, mage.cards.g.GoldbugHumanitysAlly.class));
         cards.add(new SetCardInfo("Jetfire, Ingenious Scientist", 3, Rarity.MYTHIC, mage.cards.j.JetfireIngeniousScientist.class));
-        cards.add(new SetCardInfo("Megatron, Destructive Force", 12, Rarity.MYTHIC, mage.cards.m.MegatronDestructiveForce.class));
         cards.add(new SetCardInfo("Megatron, Tyrant", 12, Rarity.MYTHIC, mage.cards.m.MegatronTyrant.class));
         cards.add(new SetCardInfo("Optimus Prime, Hero", 13, Rarity.MYTHIC, mage.cards.o.OptimusPrimeHero.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Optimus Prime, Hero", 27, Rarity.MYTHIC, mage.cards.o.OptimusPrimeHero.class, NON_FULL_USE_VARIOUS));

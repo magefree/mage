@@ -261,7 +261,6 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Marauding Brinefang", 64, Rarity.COMMON, mage.cards.m.MaraudingBrinefang.class));
         cards.add(new SetCardInfo("Market Gnome", 22, Rarity.UNCOMMON, mage.cards.m.MarketGnome.class));
         cards.add(new SetCardInfo("Master's Guide-Mural", 233, Rarity.UNCOMMON, mage.cards.m.MastersGuideMural.class));
-        cards.add(new SetCardInfo("Master's Manufactory", 233, Rarity.UNCOMMON, mage.cards.m.MastersManufactory.class));
         cards.add(new SetCardInfo("Mastercraft Raptor", 164, Rarity.UNCOMMON, mage.cards.m.MastercraftRaptor.class));
         cards.add(new SetCardInfo("Matzalantli, the Great Door", 256, Rarity.RARE, mage.cards.m.MatzalantliTheGreatDoor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Matzalantli, the Great Door", 387, Rarity.RARE, mage.cards.m.MatzalantliTheGreatDoor.class, NON_FULL_USE_VARIOUS));
@@ -420,8 +419,6 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("The Ancient One", 319, Rarity.MYTHIC, mage.cards.t.TheAncientOne.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Belligerent", 225, Rarity.RARE, mage.cards.t.TheBelligerent.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Belligerent", 384, Rarity.RARE, mage.cards.t.TheBelligerent.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("The Core", 256, Rarity.RARE, mage.cards.t.TheCore.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("The Core", 387, Rarity.RARE, mage.cards.t.TheCore.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Enigma Jewel", 362, Rarity.MYTHIC, mage.cards.t.TheEnigmaJewel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Enigma Jewel", 55, Rarity.MYTHIC, mage.cards.t.TheEnigmaJewel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Everflowing Well", 363, Rarity.RARE, mage.cards.t.TheEverflowingWell.class, NON_FULL_USE_VARIOUS));

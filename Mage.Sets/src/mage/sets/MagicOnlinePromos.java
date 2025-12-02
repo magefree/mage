@@ -249,7 +249,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Beledros Witherbloom", 90318, Rarity.MYTHIC, mage.cards.b.BeledrosWitherbloom.class));
         cards.add(new SetCardInfo("Bell Borca, Spectral Sergeant", 86308, Rarity.RARE, mage.cards.b.BellBorcaSpectralSergeant.class));
         cards.add(new SetCardInfo("Bellowing Mauler", 99853, Rarity.RARE, mage.cards.b.BellowingMauler.class));
-        cards.add(new SetCardInfo("Benevolent Geist", 93950, Rarity.RARE, mage.cards.b.BenevolentGeist.class));
         cards.add(new SetCardInfo("Bennie Bracks, Zoologist", 99815, Rarity.MYTHIC, mage.cards.b.BennieBracksZoologist.class));
         cards.add(new SetCardInfo("Bident of Thassa", 50114, Rarity.RARE, mage.cards.b.BidentOfThassa.class));
         cards.add(new SetCardInfo("Bile Blight", 53838, Rarity.UNCOMMON, mage.cards.b.BileBlight.class));
@@ -1039,7 +1038,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Getaway Car", 99727, Rarity.RARE, mage.cards.g.GetawayCar.class));
         cards.add(new SetCardInfo("Geyadrone Dihada", 91329, Rarity.MYTHIC, mage.cards.g.GeyadroneDihada.class));
         cards.add(new SetCardInfo("Ghalta, Primal Hunger", 66896, Rarity.RARE, mage.cards.g.GhaltaPrimalHunger.class));
-        cards.add(new SetCardInfo("Ghastly Mimicry", 95313, Rarity.RARE, mage.cards.g.GhastlyMimicry.class));
         cards.add(new SetCardInfo("Ghen, Arcanum Weaver", 86340, Rarity.RARE, mage.cards.g.GhenArcanumWeaver.class));
         cards.add(new SetCardInfo("Ghor-Clan Rampager", 50110, Rarity.UNCOMMON, mage.cards.g.GhorClanRampager.class));
         cards.add(new SetCardInfo("Ghost of Ramirez DePietro", 86286, Rarity.UNCOMMON, mage.cards.g.GhostOfRamirezDePietro.class));
@@ -1239,7 +1237,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Hostile Hostel", 94088, Rarity.MYTHIC, mage.cards.h.HostileHostel.class));
         cards.add(new SetCardInfo("Hostile Negotiations", 105712, Rarity.RARE, mage.cards.h.HostileNegotiations.class));
         cards.add(new SetCardInfo("Howling Moon", 95417, Rarity.RARE, mage.cards.h.HowlingMoon.class));
-        cards.add(new SetCardInfo("Howlpack Alpha", 42866, Rarity.RARE, mage.cards.h.HowlpackAlpha.class));
         cards.add(new SetCardInfo("Howlpack Piper", 95425, Rarity.RARE, mage.cards.h.HowlpackPiper.class));
         cards.add(new SetCardInfo("Huatli, the Sun's Heart", 72241, Rarity.UNCOMMON, mage.cards.h.HuatliTheSunsHeart.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Huatli, the Sun's Heart", 77975, Rarity.UNCOMMON, mage.cards.h.HuatliTheSunsHeart.class, NON_FULL_USE_VARIOUS));
@@ -2845,7 +2842,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Torrent Sculptor", 90248, Rarity.RARE, mage.cards.t.TorrentSculptor.class));
         cards.add(new SetCardInfo("Toski, Bearer of Secrets", 88340, Rarity.RARE, mage.cards.t.ToskiBearerOfSecrets.class));
         cards.add(new SetCardInfo("Tourach, Dread Cantor", 91253, Rarity.MYTHIC, mage.cards.t.TourachDreadCantor.class));
-        cards.add(new SetCardInfo("Tovolar's Magehunter", 43507, Rarity.RARE, mage.cards.t.TovolarsMagehunter.class));
         cards.add(new SetCardInfo("Toxic Deluge", 82832, Rarity.RARE, mage.cards.t.ToxicDeluge.class));
         cards.add(new SetCardInfo("Tradewind Rider", 36048, Rarity.RARE, mage.cards.t.TradewindRider.class, RETRO_ART));
         cards.add(new SetCardInfo("Training Center", 85954, Rarity.RARE, mage.cards.t.TrainingCenter.class));

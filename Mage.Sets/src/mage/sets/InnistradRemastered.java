@@ -270,7 +270,6 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Hopeful Initiate", 343, Rarity.RARE, mage.cards.h.HopefulInitiate.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Howling Chorus", 214, Rarity.UNCOMMON, mage.cards.h.HowlingChorus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Howling Chorus", 469, Rarity.UNCOMMON, mage.cards.h.HowlingChorus.class, RETRO_ART_USE_VARIOUS));
-        cards.add(new SetCardInfo("Howlpack Alpha", 207, Rarity.RARE, mage.cards.h.HowlpackAlpha.class));
         cards.add(new SetCardInfo("Howlpack of Estwald", 224, Rarity.COMMON, mage.cards.h.HowlpackOfEstwald.class));
         cards.add(new SetCardInfo("Howlpack Resurgence", 204, Rarity.UNCOMMON, mage.cards.h.HowlpackResurgence.class));
         cards.add(new SetCardInfo("Hullbreaker Horror", 303, Rarity.RARE, mage.cards.h.HullbreakerHorror.class, NON_FULL_USE_VARIOUS));

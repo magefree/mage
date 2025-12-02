@@ -150,7 +150,6 @@ public final class Innistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Heretic's Punishment", 147, Rarity.RARE, mage.cards.h.HereticsPunishment.class));
         cards.add(new SetCardInfo("Hinterland Harbor", 241, Rarity.RARE, mage.cards.h.HinterlandHarbor.class));
         cards.add(new SetCardInfo("Hollowhenge Scavenger", 188, Rarity.UNCOMMON, mage.cards.h.HollowhengeScavenger.class));
-        cards.add(new SetCardInfo("Howlpack Alpha", 193, Rarity.RARE, mage.cards.h.HowlpackAlpha.class));
         cards.add(new SetCardInfo("Howlpack of Estwald", 209, Rarity.COMMON, mage.cards.h.HowlpackOfEstwald.class));
         cards.add(new SetCardInfo("Hysterical Blindness", 59, Rarity.COMMON, mage.cards.h.HystericalBlindness.class));
         cards.add(new SetCardInfo("Infernal Plunge", 148, Rarity.COMMON, mage.cards.i.InfernalPlunge.class));

@@ -58,7 +58,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Bat Whisperer", 86, Rarity.COMMON, mage.cards.b.BatWhisperer.class));
         cards.add(new SetCardInfo("Belligerent Guest", 411, Rarity.COMMON, mage.cards.b.BelligerentGuest.class));
         cards.add(new SetCardInfo("Beloved Beggar", 3, Rarity.UNCOMMON, mage.cards.b.BelovedBeggar.class));
-        cards.add(new SetCardInfo("Benevolent Geist", 61, Rarity.RARE, mage.cards.b.BenevolentGeist.class));
         cards.add(new SetCardInfo("Bereaved Survivor", 4, Rarity.UNCOMMON, mage.cards.b.BereavedSurvivor.class));
         cards.add(new SetCardInfo("Binding Geist", 315, Rarity.COMMON, mage.cards.b.BindingGeist.class));
         cards.add(new SetCardInfo("Biolume Egg", 316, Rarity.UNCOMMON, mage.cards.b.BiolumeEgg.class));
@@ -109,7 +108,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Cathar Commando", 10, Rarity.COMMON, mage.cards.c.CatharCommando.class));
         cards.add(new SetCardInfo("Cathar's Call", 11, Rarity.UNCOMMON, mage.cards.c.CatharsCall.class));
         cards.add(new SetCardInfo("Cathartic Pyre", 133, Rarity.UNCOMMON, mage.cards.c.CatharticPyre.class));
-        cards.add(new SetCardInfo("Catlike Curiosity", 336, Rarity.UNCOMMON, mage.cards.c.CatlikeCuriosity.class));
         cards.add(new SetCardInfo("Celestus Sanctifier", 12, Rarity.COMMON, mage.cards.c.CelestusSanctifier.class));
         cards.add(new SetCardInfo("Cemetery Desecrator", 367, Rarity.MYTHIC, mage.cards.c.CemeteryDesecrator.class));
         cards.add(new SetCardInfo("Cemetery Gatekeeper", 415, Rarity.MYTHIC, mage.cards.c.CemeteryGatekeeper.class));
@@ -123,7 +121,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Chaplain of Alms", 13, Rarity.UNCOMMON, mage.cards.c.ChaplainOfAlms.class));
         cards.add(new SetCardInfo("Child of the Pack", 501, Rarity.UNCOMMON, mage.cards.c.ChildOfThePack.class));
         cards.add(new SetCardInfo("Chill of the Grave", 318, Rarity.COMMON, mage.cards.c.ChillOfTheGrave.class));
-        cards.add(new SetCardInfo("Chilling Chronicle", 63, Rarity.UNCOMMON, mage.cards.c.ChillingChronicle.class));
         cards.add(new SetCardInfo("Cipherbound Spirit", 346, Rarity.UNCOMMON, mage.cards.c.CipherboundSpirit.class));
         cards.add(new SetCardInfo("Circle of Confinement", 274, Rarity.UNCOMMON, mage.cards.c.CircleOfConfinement.class));
         cards.add(new SetCardInfo("Clarion Cathars", 14, Rarity.COMMON, mage.cards.c.ClarionCathars.class));
@@ -252,7 +249,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Geistlight Snare", 327, Rarity.UNCOMMON, mage.cards.g.GeistlightSnare.class));
         cards.add(new SetCardInfo("Geistwave", 56, Rarity.COMMON, mage.cards.g.Geistwave.class));
         cards.add(new SetCardInfo("Geralf, Visionary Stitcher", 328, Rarity.RARE, mage.cards.g.GeralfVisionaryStitcher.class));
-        cards.add(new SetCardInfo("Ghastly Mimicry", 335, Rarity.RARE, mage.cards.g.GhastlyMimicry.class));
         cards.add(new SetCardInfo("Ghoulcaller's Harvest", 225, Rarity.RARE, mage.cards.g.GhoulcallersHarvest.class));
         cards.add(new SetCardInfo("Ghoulish Procession", 102, Rarity.UNCOMMON, mage.cards.g.GhoulishProcession.class));
         cards.add(new SetCardInfo("Gift of Fangs", 380, Rarity.COMMON, mage.cards.g.GiftOfFangs.class));
@@ -360,12 +356,10 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Moonveil Regent", 149, Rarity.MYTHIC, mage.cards.m.MoonveilRegent.class));
         cards.add(new SetCardInfo("Morbid Opportunist", 113, Rarity.UNCOMMON, mage.cards.m.MorbidOpportunist.class));
         cards.add(new SetCardInfo("Morkrut Behemoth", 114, Rarity.COMMON, mage.cards.m.MorkrutBehemoth.class));
-        cards.add(new SetCardInfo("Morning Apparition", 28, Rarity.COMMON, mage.cards.m.MorningApparition.class));
         cards.add(new SetCardInfo("Mounted Dreadknight", 150, Rarity.COMMON, mage.cards.m.MountedDreadknight.class));
         cards.add(new SetCardInfo("Mourning Patrol", 28, Rarity.COMMON, mage.cards.m.MourningPatrol.class));
         cards.add(new SetCardInfo("Mulch", 477, Rarity.COMMON, mage.cards.m.Mulch.class));
         cards.add(new SetCardInfo("Mysterious Tome", 63, Rarity.UNCOMMON, mage.cards.m.MysteriousTome.class));
-        cards.add(new SetCardInfo("Mystic Monstrosity", 256, Rarity.UNCOMMON, mage.cards.m.MysticMonstrosity.class));
         cards.add(new SetCardInfo("Mystic Skull", 256, Rarity.UNCOMMON, mage.cards.m.MysticSkull.class));
         cards.add(new SetCardInfo("Nature's Embrace", 478, Rarity.COMMON, mage.cards.n.NaturesEmbrace.class));
         cards.add(new SetCardInfo("Nebelgast Beguiler", 292, Rarity.COMMON, mage.cards.n.NebelgastBeguiler.class));

@@ -183,7 +183,6 @@ public final class DarkAscension extends ExpansionSet {
         cards.add(new SetCardInfo("Thraben Doomsayer", 25, Rarity.RARE, mage.cards.t.ThrabenDoomsayer.class));
         cards.add(new SetCardInfo("Thraben Heretic", 26, Rarity.UNCOMMON, mage.cards.t.ThrabenHeretic.class));
         cards.add(new SetCardInfo("Torch Fiend", 106, Rarity.COMMON, mage.cards.t.TorchFiend.class));
-        cards.add(new SetCardInfo("Tovolar's Magehunter", 98, Rarity.RARE, mage.cards.t.TovolarsMagehunter.class));
         cards.add(new SetCardInfo("Tower Geist", 53, Rarity.UNCOMMON, mage.cards.t.TowerGeist.class));
         cards.add(new SetCardInfo("Tracker's Instincts", 128, Rarity.UNCOMMON, mage.cards.t.TrackersInstincts.class));
         cards.add(new SetCardInfo("Tragic Slip", 76, Rarity.COMMON, mage.cards.t.TragicSlip.class));
