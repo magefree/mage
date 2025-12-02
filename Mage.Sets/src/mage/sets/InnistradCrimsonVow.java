@@ -281,12 +281,10 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Lacerate Flesh", 166, Rarity.COMMON, mage.cards.l.LacerateFlesh.class));
         cards.add(new SetCardInfo("Laid to Rest", 207, Rarity.UNCOMMON, mage.cards.l.LaidToRest.class));
         cards.add(new SetCardInfo("Lambholt Raconteur", 167, Rarity.UNCOMMON, mage.cards.l.LambholtRaconteur.class));
-        cards.add(new SetCardInfo("Lambholt Ravager", 167, Rarity.UNCOMMON, mage.cards.l.LambholtRavager.class));
         cards.add(new SetCardInfo("Lantern Bearer", 66, Rarity.COMMON, mage.cards.l.LanternBearer.class));
         cards.add(new SetCardInfo("Lantern Flare", 23, Rarity.RARE, mage.cards.l.LanternFlare.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lantern Flare", 351, Rarity.RARE, mage.cards.l.LanternFlare.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lantern of the Lost", 259, Rarity.UNCOMMON, mage.cards.l.LanternOfTheLost.class));
-        cards.add(new SetCardInfo("Lanterns' Lift", 66, Rarity.COMMON, mage.cards.l.LanternsLift.class));
         cards.add(new SetCardInfo("Lightning Wolf", 168, Rarity.COMMON, mage.cards.l.LightningWolf.class));
         cards.add(new SetCardInfo("Lunar Rejection", 67, Rarity.UNCOMMON, mage.cards.l.LunarRejection.class));
         cards.add(new SetCardInfo("Magma Pummeler", 169, Rarity.UNCOMMON, mage.cards.m.MagmaPummeler.class));

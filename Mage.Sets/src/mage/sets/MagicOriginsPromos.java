@@ -50,7 +50,6 @@ public class MagicOriginsPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Kytheon, Hero of Akros", "23s", Rarity.MYTHIC, mage.cards.k.KytheonHeroOfAkros.class));
         cards.add(new SetCardInfo("Languish", 105, Rarity.RARE, mage.cards.l.Languish.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Languish", "105s", Rarity.RARE, mage.cards.l.Languish.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Liliana, Defiant Necromancer", "106s", Rarity.MYTHIC, mage.cards.l.LilianaDefiantNecromancer.class));
         cards.add(new SetCardInfo("Liliana, Heretical Healer", "106s", Rarity.MYTHIC, mage.cards.l.LilianaHereticalHealer.class));
         cards.add(new SetCardInfo("Managorger Hydra", "186s", Rarity.RARE, mage.cards.m.ManagorgerHydra.class));
         cards.add(new SetCardInfo("Mizzium Meddler", 64, Rarity.RARE, mage.cards.m.MizziumMeddler.class, NON_FULL_USE_VARIOUS));

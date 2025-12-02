@@ -229,7 +229,6 @@ public class PioneerMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Lifebane Zombie", 95, Rarity.RARE, mage.cards.l.LifebaneZombie.class));
         cards.add(new SetCardInfo("Liliana of the Dark Realms", 334, Rarity.MYTHIC, mage.cards.l.LilianaOfTheDarkRealms.class));
         cards.add(new SetCardInfo("Liliana Vess", 335, Rarity.MYTHIC, mage.cards.l.LilianaVess.class));
-        cards.add(new SetCardInfo("Liliana, Defiant Necromancer", 96, Rarity.MYTHIC, mage.cards.l.LilianaDefiantNecromancer.class));
         cards.add(new SetCardInfo("Liliana, Heretical Healer", 96, Rarity.MYTHIC, mage.cards.l.LilianaHereticalHealer.class));
         cards.add(new SetCardInfo("Limits of Solidarity", 375, Rarity.UNCOMMON, mage.cards.l.LimitsOfSolidarity.class));
         cards.add(new SetCardInfo("Linvala, the Preserver", 25, Rarity.RARE, mage.cards.l.LinvalaThePreserver.class));

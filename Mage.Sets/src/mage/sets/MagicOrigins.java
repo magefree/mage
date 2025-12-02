@@ -177,7 +177,6 @@ public final class MagicOrigins extends ExpansionSet {
         cards.add(new SetCardInfo("Languish", 105, Rarity.RARE, mage.cards.l.Languish.class));
         cards.add(new SetCardInfo("Leaf Gilder", 184, Rarity.COMMON, mage.cards.l.LeafGilder.class));
         cards.add(new SetCardInfo("Lightning Javelin", 153, Rarity.COMMON, mage.cards.l.LightningJavelin.class));
-        cards.add(new SetCardInfo("Liliana, Defiant Necromancer", 106, Rarity.MYTHIC, mage.cards.l.LilianaDefiantNecromancer.class));
         cards.add(new SetCardInfo("Liliana, Heretical Healer", 106, Rarity.MYTHIC, mage.cards.l.LilianaHereticalHealer.class));
         cards.add(new SetCardInfo("Llanowar Empath", 185, Rarity.COMMON, mage.cards.l.LlanowarEmpath.class));
         cards.add(new SetCardInfo("Llanowar Wastes", 248, Rarity.RARE, mage.cards.l.LlanowarWastes.class));

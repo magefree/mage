@@ -336,7 +336,6 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Mechtitan Core", 249, Rarity.RARE, mage.cards.m.MechtitanCore.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mechtitan Core", 402, Rarity.RARE, mage.cards.m.MechtitanCore.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mechtitan Core", 497, Rarity.RARE, mage.cards.m.MechtitanCore.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Memory of Toshiro", 108, Rarity.UNCOMMON, mage.cards.m.MemoryOfToshiro.class));
         cards.add(new SetCardInfo("Michiko's Reign of Truth", 29, Rarity.UNCOMMON, mage.cards.m.MichikosReignOfTruth.class));
         cards.add(new SetCardInfo("Mindlink Mech", 373, Rarity.RARE, mage.cards.m.MindlinkMech.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mindlink Mech", 448, Rarity.RARE, mage.cards.m.MindlinkMech.class, NON_FULL_USE_VARIOUS));

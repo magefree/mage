@@ -1,4 +1,3 @@
-
 package mage.sets;
 
 import mage.cards.Card;
@@ -168,7 +167,6 @@ public final class DarkAscension extends ExpansionSet {
         cards.add(new SetCardInfo("Shriekgeist", 49, Rarity.COMMON, mage.cards.s.Shriekgeist.class));
         cards.add(new SetCardInfo("Sightless Ghoul", 73, Rarity.COMMON, mage.cards.s.SightlessGhoul.class));
         cards.add(new SetCardInfo("Silverclaw Griffin", 21, Rarity.COMMON, mage.cards.s.SilverclawGriffin.class));
-        cards.add(new SetCardInfo("Silverpelt Werewolf", 122, Rarity.UNCOMMON, mage.cards.s.SilverpeltWerewolf.class));
         cards.add(new SetCardInfo("Skillful Lunge", 22, Rarity.COMMON, mage.cards.s.SkillfulLunge.class));
         cards.add(new SetCardInfo("Skirsdag Flayer", 74, Rarity.UNCOMMON, mage.cards.s.SkirsdagFlayer.class));
         cards.add(new SetCardInfo("Somberwald Dryad", 126, Rarity.COMMON, mage.cards.s.SomberwaldDryad.class));
@@ -191,7 +189,6 @@ public final class DarkAscension extends ExpansionSet {
         cards.add(new SetCardInfo("Tragic Slip", 76, Rarity.COMMON, mage.cards.t.TragicSlip.class));
         cards.add(new SetCardInfo("Ulvenwald Bear", 129, Rarity.COMMON, mage.cards.u.UlvenwaldBear.class));
         cards.add(new SetCardInfo("Undying Evil", 77, Rarity.COMMON, mage.cards.u.UndyingEvil.class));
-        cards.add(new SetCardInfo("Unhallowed Cathar", 13, Rarity.COMMON, mage.cards.u.UnhallowedCathar.class));
         cards.add(new SetCardInfo("Vault of the Archangel", 158, Rarity.RARE, mage.cards.v.VaultOfTheArchangel.class));
         cards.add(new SetCardInfo("Vengeful Vampire", 78, Rarity.UNCOMMON, mage.cards.v.VengefulVampire.class));
         cards.add(new SetCardInfo("Village Survivors", 130, Rarity.UNCOMMON, mage.cards.v.VillageSurvivors.class));
@@ -244,8 +241,8 @@ class DarkAscensionCollator implements BoosterCollator {
     private final CardRun land = new CardRun(false, "ISD_250", "ISD_251", "ISD_252", "ISD_253", "ISD_254", "ISD_255", "ISD_256", "ISD_257", "ISD_258", "ISD_259", "ISD_260", "ISD_261", "ISD_262", "ISD_263", "ISD_264");
 
     private final BoosterStructure AAAAABBBB = new BoosterStructure(
-        commonA, commonA, commonA, commonA, commonA,
-        commonB, commonB, commonB, commonB
+            commonA, commonA, commonA, commonA, commonA,
+            commonB, commonB, commonB, commonB
     );
     private final BoosterStructure AAB = new BoosterStructure(uncommonA, uncommonA, uncommonB);
     private final BoosterStructure ABB = new BoosterStructure(uncommonA, uncommonB, uncommonB);

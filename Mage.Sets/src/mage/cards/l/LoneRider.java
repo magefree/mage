@@ -1,16 +1,16 @@
 package mage.cards.l;
 
-import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.YouGainedLifeCondition;
 import mage.abilities.dynamicvalue.common.ControllerGainedLifeCount;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.LifelinkAbility;
-import mage.abilities.keyword.TransformAbility;
+import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.SubType;
@@ -22,30 +22,46 @@ import java.util.UUID;
 /**
  * @author fireshoes
  */
-public final class LoneRider extends CardImpl {
+public final class LoneRider extends TransformingDoubleFacedCard {
 
     private static final Condition condition = new YouGainedLifeCondition(ComparisonType.MORE_THAN, 2);
 
     public LoneRider(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.KNIGHT);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.KNIGHT}, "{1}{W}",
+                "It That Rides as One",
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.ELDRAZI, SubType.HORROR}, ""
+        );
 
-        this.secondSideCardClazz = mage.cards.i.ItThatRidesAsOne.class;
+        // Lone Rider
+        this.getLeftHalfCard().setPT(1, 1);
 
         // First strike
-        this.addAbility(FirstStrikeAbility.getInstance());
+        this.getLeftHalfCard().addAbility(FirstStrikeAbility.getInstance());
 
         // Lifelink
-        this.addAbility(LifelinkAbility.getInstance());
+        this.getLeftHalfCard().addAbility(LifelinkAbility.getInstance());
 
         // At the beginning of the end step, if you gained 3 or more life this turn, transform Lone Rider.
-        this.addAbility(new TransformAbility());
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                TargetController.NEXT, new TransformSourceEffect(), false
-        ).withInterveningIf(condition).addHint(ControllerGainedLifeCount.getHint()), new PlayerGainedLifeWatcher());
+        Ability ability = new BeginningOfEndStepTriggeredAbility(
+                TargetController.NEXT, new TransformSourceEffect(), false)
+                .withInterveningIf(condition)
+                .addHint(ControllerGainedLifeCount.getHint()
+                );
+        ability.addWatcher(new PlayerGainedLifeWatcher());
+        this.getLeftHalfCard().addAbility(ability);
+
+        // It That Rides as One
+        this.getRightHalfCard().setPT(4, 4);
+
+        // First strike
+        this.getRightHalfCard().addAbility(FirstStrikeAbility.getInstance());
+
+        // Trample
+        this.getRightHalfCard().addAbility(TrampleAbility.getInstance());
+
+        // Lifelink
+        this.getRightHalfCard().addAbility(LifelinkAbility.getInstance());
     }
 
     private LoneRider(final LoneRider card) {

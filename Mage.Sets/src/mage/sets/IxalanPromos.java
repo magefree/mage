@@ -20,7 +20,6 @@ public class IxalanPromos extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
-        cards.add(new SetCardInfo("Adanto, the First Fort", "22s", Rarity.RARE, mage.cards.a.AdantoTheFirstFort.class));
         cards.add(new SetCardInfo("Admiral Beckett Brass", "217s", Rarity.MYTHIC, mage.cards.a.AdmiralBeckettBrass.class));
         cards.add(new SetCardInfo("Angrath's Marauders", "132s", Rarity.RARE, mage.cards.a.AngrathsMarauders.class));
         cards.add(new SetCardInfo("Arcane Adaptation", "46p", Rarity.RARE, mage.cards.a.ArcaneAdaptation.class, NON_FULL_USE_VARIOUS));
@@ -146,5 +145,5 @@ public class IxalanPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Wakening Sun's Avatar", "44s", Rarity.MYTHIC, mage.cards.w.WakeningSunsAvatar.class));
         cards.add(new SetCardInfo("Waker of the Wilds", "215s", Rarity.RARE, mage.cards.w.WakerOfTheWilds.class));
         cards.add(new SetCardInfo("Walk the Plank", 130, Rarity.UNCOMMON, mage.cards.w.WalkThePlank.class));
-     }
+    }
 }

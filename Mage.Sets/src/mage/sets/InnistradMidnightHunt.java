@@ -259,7 +259,6 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Loyal Gryff", 26, Rarity.UNCOMMON, mage.cards.l.LoyalGryff.class));
         cards.add(new SetCardInfo("Ludevic, Necrogenius", 233, Rarity.RARE, mage.cards.l.LudevicNecrogenius.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ludevic, Necrogenius", 320, Rarity.RARE, mage.cards.l.LudevicNecrogenius.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Luminous Phantom", 27, Rarity.COMMON, mage.cards.l.LuminousPhantom.class));
         cards.add(new SetCardInfo("Lunar Frenzy", 147, Rarity.UNCOMMON, mage.cards.l.LunarFrenzy.class));
         cards.add(new SetCardInfo("Lunarch Veteran", 27, Rarity.COMMON, mage.cards.l.LunarchVeteran.class));
         cards.add(new SetCardInfo("Malevolent Hermit", 336, Rarity.RARE, mage.cards.m.MalevolentHermit.class, NON_FULL_USE_VARIOUS));
@@ -291,8 +290,6 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Novice Occultist", 117, Rarity.COMMON, mage.cards.n.NoviceOccultist.class));
         cards.add(new SetCardInfo("Obsessive Astronomer", 152, Rarity.UNCOMMON, mage.cards.o.ObsessiveAstronomer.class));
         cards.add(new SetCardInfo("Odric's Outrider", 29, Rarity.UNCOMMON, mage.cards.o.OdricsOutrider.class));
-        cards.add(new SetCardInfo("Olag, Ludevic's Hubris", 233, Rarity.RARE, mage.cards.o.OlagLudevicsHubris.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Olag, Ludevic's Hubris", 320, Rarity.RARE, mage.cards.o.OlagLudevicsHubris.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Old Stickfingers", 234, Rarity.RARE, mage.cards.o.OldStickfingers.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Old Stickfingers", 321, Rarity.RARE, mage.cards.o.OldStickfingers.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Olivia's Midnight Ambush", 118, Rarity.COMMON, mage.cards.o.OliviasMidnightAmbush.class));

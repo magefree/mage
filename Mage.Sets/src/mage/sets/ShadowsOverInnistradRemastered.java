@@ -186,7 +186,6 @@ public class ShadowsOverInnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 280, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 281, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 282, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("It That Rides as One", 36, Rarity.UNCOMMON, mage.cards.i.ItThatRidesAsOne.class));
         cards.add(new SetCardInfo("Jace's Scrutiny", 78, Rarity.COMMON, mage.cards.j.JacesScrutiny.class));
         cards.add(new SetCardInfo("Jace, Unraveler of Secrets", 77, Rarity.MYTHIC, mage.cards.j.JaceUnravelerOfSecrets.class));
         cards.add(new SetCardInfo("Kindly Stranger", 107, Rarity.UNCOMMON, mage.cards.k.KindlyStranger.class));

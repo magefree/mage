@@ -1,10 +1,7 @@
-
 package mage.cards.l;
 
-import java.util.UUID;
-
-import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.CantBlockAbility;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
@@ -12,8 +9,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.Card;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -22,26 +19,31 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
-/**
- * @author BetaSteward
- */
-public final class LoyalCathar extends CardImpl {
+import java.util.UUID;
+
+public final class LoyalCathar extends TransformingDoubleFacedCard {
 
     public LoyalCathar(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{W}");
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.SOLDIER);
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.SOLDIER}, "{W}{W}",
+                "Unhallowed Cathar",
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.ZOMBIE, SubType.SOLDIER}, "B"
+        );
 
-        this.secondSideCardClazz = mage.cards.u.UnhallowedCathar.class;
+        // Loyal Cathar
+        this.getLeftHalfCard().setPT(2, 2);
 
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-        this.addAbility(VigilanceAbility.getInstance());
+        // Vigilance
+        this.getLeftHalfCard().addAbility(VigilanceAbility.getInstance());
 
         // When Loyal Cathar dies, return it to the battlefield transformed under your control at the beginning of the next end step.
-        this.addAbility(new TransformAbility());
-        this.addAbility(new DiesSourceTriggeredAbility(new LoyalCatharEffect()));
+        this.getLeftHalfCard().addAbility(new DiesSourceTriggeredAbility(new LoyalCatharEffect()));
+
+        // Unhallowed Cathar
+        this.getRightHalfCard().setPT(2, 1);
+
+        // Unhallowed Cathar can't block.
+        this.getRightHalfCard().addAbility(new CantBlockAbility());
     }
 
     private LoyalCathar(final LoyalCathar card) {

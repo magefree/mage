@@ -1591,7 +1591,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Loyal Retainers", 47973, Rarity.UNCOMMON, mage.cards.l.LoyalRetainers.class));
         cards.add(new SetCardInfo("Loyal Warhound", 92630, Rarity.RARE, mage.cards.l.LoyalWarhound.class));
         cards.add(new SetCardInfo("Lu Bu, Master-at-Arms", 36130, Rarity.RARE, mage.cards.l.LuBuMasterAtArms.class, RETRO_ART));
-        cards.add(new SetCardInfo("Ludevic's Abomination", 42874, Rarity.RARE, mage.cards.l.LudevicsAbomination.class));
         cards.add(new SetCardInfo("Ludevic's Test Subject", 42874, Rarity.RARE, mage.cards.l.LudevicsTestSubject.class));
         cards.add(new SetCardInfo("Ludevic, Necro-Alchemist", 86166, Rarity.MYTHIC, mage.cards.l.LudevicNecroAlchemist.class));
         cards.add(new SetCardInfo("Lukka, Coppercoat Outcast", 80801, Rarity.MYTHIC, mage.cards.l.LukkaCoppercoatOutcast.class));

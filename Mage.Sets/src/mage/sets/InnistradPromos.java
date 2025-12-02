@@ -24,7 +24,6 @@ public class InnistradPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Diregraf Ghoul", 97, Rarity.UNCOMMON, mage.cards.d.DiregrafGhoul.class));
         cards.add(new SetCardInfo("Elite Inquisitor", 13, Rarity.RARE, mage.cards.e.EliteInquisitor.class));
         cards.add(new SetCardInfo("Howlpack Alpha", "193*", Rarity.RARE, mage.cards.h.HowlpackAlpha.class));
-        cards.add(new SetCardInfo("Ludevic's Abomination", "64*", Rarity.RARE, mage.cards.l.LudevicsAbomination.class));
         cards.add(new SetCardInfo("Ludevic's Test Subject", "64*", Rarity.RARE, mage.cards.l.LudevicsTestSubject.class));
         cards.add(new SetCardInfo("Mayor of Avabruck", "193*", Rarity.RARE, mage.cards.m.MayorOfAvabruck.class));
 

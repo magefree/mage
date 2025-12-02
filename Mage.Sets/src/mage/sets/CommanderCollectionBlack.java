@@ -22,7 +22,6 @@ public final class CommanderCollectionBlack extends ExpansionSet {
 
         cards.add(new SetCardInfo("Command Tower", 8, Rarity.RARE, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Ghoulcaller Gisa", 2, Rarity.MYTHIC, mage.cards.g.GhoulcallerGisa.class));
-        cards.add(new SetCardInfo("Liliana, Defiant Necromancer", 1, Rarity.MYTHIC, mage.cards.l.LilianaDefiantNecromancer.class));
         cards.add(new SetCardInfo("Liliana, Heretical Healer", 1, Rarity.MYTHIC, mage.cards.l.LilianaHereticalHealer.class));
         cards.add(new SetCardInfo("Ophiomancer", 3, Rarity.RARE, mage.cards.o.Ophiomancer.class));
         cards.add(new SetCardInfo("Phyrexian Arena", 4, Rarity.RARE, mage.cards.p.PhyrexianArena.class));

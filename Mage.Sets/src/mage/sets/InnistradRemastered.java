@@ -307,7 +307,6 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Laboratory Maniac", 359, Rarity.UNCOMMON, mage.cards.l.LaboratoryManiac.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Laboratory Maniac", 71, Rarity.UNCOMMON, mage.cards.l.LaboratoryManiac.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lantern Bearer", 72, Rarity.COMMON, mage.cards.l.LanternBearer.class));
-        cards.add(new SetCardInfo("Lanterns' Lift", 72, Rarity.COMMON, mage.cards.l.LanternsLift.class));
         cards.add(new SetCardInfo("Liesa, Forgotten Archangel", 243, Rarity.RARE, mage.cards.l.LiesaForgottenArchangel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Liesa, Forgotten Archangel", 433, Rarity.RARE, mage.cards.l.LiesaForgottenArchangel.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Lightning Axe", 162, Rarity.UNCOMMON, mage.cards.l.LightningAxe.class, NON_FULL_USE_VARIOUS));
@@ -318,8 +317,6 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Lingering Souls", 30, Rarity.UNCOMMON, mage.cards.l.LingeringSouls.class));
         cards.add(new SetCardInfo("Lumberknot", 206, Rarity.UNCOMMON, mage.cards.l.Lumberknot.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lumberknot", 414, Rarity.UNCOMMON, mage.cards.l.Lumberknot.class, RETRO_ART_USE_VARIOUS));
-        cards.add(new SetCardInfo("Luminous Phantom", 32, Rarity.COMMON, mage.cards.l.LuminousPhantom.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Luminous Phantom", 450, Rarity.COMMON, mage.cards.l.LuminousPhantom.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Lunarch Mantle", 31, Rarity.COMMON, mage.cards.l.LunarchMantle.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lunarch Mantle", 344, Rarity.COMMON, mage.cards.l.LunarchMantle.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Lunarch Veteran", 32, Rarity.COMMON, mage.cards.l.LunarchVeteran.class, NON_FULL_USE_VARIOUS));
