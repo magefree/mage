@@ -307,8 +307,6 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Play with Fire", 154, Rarity.UNCOMMON, mage.cards.p.PlayWithFire.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Play with Fire", 390, Rarity.UNCOMMON, mage.cards.p.PlayWithFire.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plummet", 193, Rarity.COMMON, mage.cards.p.Plummet.class));
-        cards.add(new SetCardInfo("Poppet Factory", 339, Rarity.MYTHIC, mage.cards.p.PoppetFactory.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Poppet Factory", 71, Rarity.MYTHIC, mage.cards.p.PoppetFactory.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Poppet Stitcher", 339, Rarity.MYTHIC, mage.cards.p.PoppetStitcher.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Poppet Stitcher", 71, Rarity.MYTHIC, mage.cards.p.PoppetStitcher.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Primal Adversary", 194, Rarity.MYTHIC, mage.cards.p.PrimalAdversary.class, NON_FULL_USE_VARIOUS));

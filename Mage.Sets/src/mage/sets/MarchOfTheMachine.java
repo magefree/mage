@@ -164,7 +164,6 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Glistening Dawn", 187, Rarity.RARE, mage.cards.g.GlisteningDawn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Glistening Dawn", 371, Rarity.RARE, mage.cards.g.GlisteningDawn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Glistening Deluge", 107, Rarity.UNCOMMON, mage.cards.g.GlisteningDeluge.class));
-        cards.add(new SetCardInfo("Glistening Goremonger", 157, Rarity.COMMON, mage.cards.g.GlisteningGoremonger.class));
         cards.add(new SetCardInfo("Gloomfang Mauler", 108, Rarity.COMMON, mage.cards.g.GloomfangMauler.class));
         cards.add(new SetCardInfo("Gnottvold Hermit", 188, Rarity.UNCOMMON, mage.cards.g.GnottvoldHermit.class));
         cards.add(new SetCardInfo("Golden-Scale Aeronaut", 15, Rarity.COMMON, mage.cards.g.GoldenScaleAeronaut.class));
@@ -303,8 +302,6 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 283, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Polukranos Reborn", 200, Rarity.RARE, mage.cards.p.PolukranosReborn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Polukranos Reborn", 300, Rarity.RARE, mage.cards.p.PolukranosReborn.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Polukranos, Engine of Ruin", 200, Rarity.RARE, mage.cards.p.PolukranosEngineOfRuin.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Polukranos, Engine of Ruin", 300, Rarity.RARE, mage.cards.p.PolukranosEngineOfRuin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Portent Tracker", 201, Rarity.COMMON, mage.cards.p.PortentTracker.class));
         cards.add(new SetCardInfo("Preening Champion", 73, Rarity.COMMON, mage.cards.p.PreeningChampion.class));
         cards.add(new SetCardInfo("Progenitor Exarch", 32, Rarity.RARE, mage.cards.p.ProgenitorExarch.class, NON_FULL_USE_VARIOUS));

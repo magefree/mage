@@ -2043,7 +2043,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Pollywog Symbiote", 80931, Rarity.UNCOMMON, mage.cards.p.PollywogSymbiote.class));
         cards.add(new SetCardInfo("Polukranos, Unchained", 79931, Rarity.MYTHIC, mage.cards.p.PolukranosUnchained.class));
         cards.add(new SetCardInfo("Ponder", 35118, Rarity.COMMON, mage.cards.p.Ponder.class, FULL_ART));
-        cards.add(new SetCardInfo("Poppet Factory", 93918, Rarity.MYTHIC, mage.cards.p.PoppetFactory.class));
         cards.add(new SetCardInfo("Poppet Stitcher", 93918, Rarity.MYTHIC, mage.cards.p.PoppetStitcher.class));
         cards.add(new SetCardInfo("Porcuparrot", 80965, Rarity.UNCOMMON, mage.cards.p.Porcuparrot.class));
         cards.add(new SetCardInfo("Port Razer", 86068, Rarity.MYTHIC, mage.cards.p.PortRazer.class));

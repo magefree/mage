@@ -63,7 +63,6 @@ public class RivalsOfIxalanPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Kumena, Tyrant of Orazca", "162s", Rarity.MYTHIC, mage.cards.k.KumenaTyrantOfOrazca.class));
         cards.add(new SetCardInfo("Mastermind's Acquisition", "77p", Rarity.RARE, mage.cards.m.MastermindsAcquisition.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mastermind's Acquisition", "77s", Rarity.RARE, mage.cards.m.MastermindsAcquisition.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Metzali, Tower of Triumph", "165s", Rarity.RARE, mage.cards.m.MetzaliTowerOfTriumph.class));
         cards.add(new SetCardInfo("Nezahal, Primal Tide", "45p", Rarity.RARE, mage.cards.n.NezahalPrimalTide.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nezahal, Primal Tide", "45s", Rarity.RARE, mage.cards.n.NezahalPrimalTide.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Paladin of Atonement", "16s", Rarity.RARE, mage.cards.p.PaladinOfAtonement.class));
@@ -101,7 +100,6 @@ public class RivalsOfIxalanPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Tilonalli's Summoner", "121p", Rarity.RARE, mage.cards.t.TilonallisSummoner.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tilonalli's Summoner", "121s", Rarity.RARE, mage.cards.t.TilonallisSummoner.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Timestream Navigator", "59s", Rarity.MYTHIC, mage.cards.t.TimestreamNavigator.class));
-        cards.add(new SetCardInfo("Tomb of the Dusk Rose", "166s", Rarity.RARE, mage.cards.t.TombOfTheDuskRose.class));
         cards.add(new SetCardInfo("Tomb Robber", "87s", Rarity.RARE, mage.cards.t.TombRobber.class));
         cards.add(new SetCardInfo("Trapjaw Tyrant", "29s", Rarity.MYTHIC, mage.cards.t.TrapjawTyrant.class));
         cards.add(new SetCardInfo("Twilight Prophet", "88s", Rarity.MYTHIC, mage.cards.t.TwilightProphet.class));
