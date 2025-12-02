@@ -181,7 +181,6 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Heliod, the Radiant Dawn", 17, Rarity.RARE, mage.cards.h.HeliodTheRadiantDawn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Heliod, the Radiant Dawn", 293, Rarity.RARE, mage.cards.h.HeliodTheRadiantDawn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Herbology Instructor", 189, Rarity.UNCOMMON, mage.cards.h.HerbologyInstructor.class));
-        cards.add(new SetCardInfo("Hideous Fleshwheeler", 119, Rarity.UNCOMMON, mage.cards.h.HideousFleshwheeler.class));
         cards.add(new SetCardInfo("Hidetsugu and Kairi", 228, Rarity.RARE, mage.cards.h.HidetsuguAndKairi.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hidetsugu and Kairi", 309, Rarity.RARE, mage.cards.h.HidetsuguAndKairi.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hoarding Broodlord", 110, Rarity.RARE, mage.cards.h.HoardingBroodlord.class, NON_FULL_USE_VARIOUS));

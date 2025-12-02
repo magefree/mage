@@ -52,8 +52,6 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Archghoul of Thraben", 95, Rarity.UNCOMMON, mage.cards.a.ArchghoulOfThraben.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arlinn Kord", 230, Rarity.MYTHIC, mage.cards.a.ArlinnKord.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arlinn Kord", 324, Rarity.MYTHIC, mage.cards.a.ArlinnKord.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Ashmouth Blade", 269, Rarity.UNCOMMON, mage.cards.a.AshmouthBlade.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Ashmouth Blade", 473, Rarity.UNCOMMON, mage.cards.a.AshmouthBlade.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Asylum Visitor", 371, Rarity.UNCOMMON, mage.cards.a.AsylumVisitor.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Asylum Visitor", 96, Rarity.UNCOMMON, mage.cards.a.AsylumVisitor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Avacyn, Angel of Hope", 477, Rarity.MYTHIC, mage.cards.a.AvacynAngelOfHope.class, RETRO_ART_USE_VARIOUS));

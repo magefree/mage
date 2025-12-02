@@ -206,7 +206,6 @@ public final class MagicOrigins extends ExpansionSet {
         cards.add(new SetCardInfo("Negate", 65, Rarity.COMMON, mage.cards.n.Negate.class));
         cards.add(new SetCardInfo("Nightmare", 282, Rarity.RARE, mage.cards.n.Nightmare.class));
         cards.add(new SetCardInfo("Nightsnare", 111, Rarity.COMMON, mage.cards.n.Nightsnare.class));
-        cards.add(new SetCardInfo("Nissa, Sage Animist", 189, Rarity.MYTHIC, mage.cards.n.NissaSageAnimist.class));
         cards.add(new SetCardInfo("Nissa's Pilgrimage", 190, Rarity.COMMON, mage.cards.n.NissasPilgrimage.class));
         cards.add(new SetCardInfo("Nissa's Revelation", 191, Rarity.RARE, mage.cards.n.NissasRevelation.class));
         cards.add(new SetCardInfo("Nissa, Vastwood Seer", 189, Rarity.MYTHIC, mage.cards.n.NissaVastwoodSeer.class));

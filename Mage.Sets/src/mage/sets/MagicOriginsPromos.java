@@ -55,7 +55,6 @@ public class MagicOriginsPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Mizzium Meddler", 64, Rarity.RARE, mage.cards.m.MizziumMeddler.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mizzium Meddler", "64s", Rarity.RARE, mage.cards.m.MizziumMeddler.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nissa's Revelation", "191s", Rarity.RARE, mage.cards.n.NissasRevelation.class));
-        cards.add(new SetCardInfo("Nissa, Sage Animist", "189s", Rarity.MYTHIC, mage.cards.n.NissaSageAnimist.class));
         cards.add(new SetCardInfo("Nissa, Vastwood Seer", "189s", Rarity.MYTHIC, mage.cards.n.NissaVastwoodSeer.class));
         cards.add(new SetCardInfo("Outland Colossus", "193s", Rarity.RARE, mage.cards.o.OutlandColossus.class));
         cards.add(new SetCardInfo("Pia and Kiran Nalaar", 157, Rarity.RARE, mage.cards.p.PiaAndKiranNalaar.class, NON_FULL_USE_VARIOUS));

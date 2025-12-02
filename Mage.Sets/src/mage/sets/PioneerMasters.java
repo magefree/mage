@@ -262,7 +262,6 @@ public class PioneerMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Nightveil Specter", 314, Rarity.UNCOMMON, mage.cards.n.NightveilSpecter.class));
         cards.add(new SetCardInfo("Nimbus Naiad", 67, Rarity.COMMON, mage.cards.n.NimbusNaiad.class));
         cards.add(new SetCardInfo("Nissa's Pilgrimage", 348, Rarity.UNCOMMON, mage.cards.n.NissasPilgrimage.class));
-        cards.add(new SetCardInfo("Nissa, Sage Animist", 187, Rarity.MYTHIC, mage.cards.n.NissaSageAnimist.class));
         cards.add(new SetCardInfo("Nissa, Vastwood Seer", 187, Rarity.MYTHIC, mage.cards.n.NissaVastwoodSeer.class));
         cards.add(new SetCardInfo("Nissa, Voice of Zendikar", 188, Rarity.MYTHIC, mage.cards.n.NissaVoiceOfZendikar.class));
         cards.add(new SetCardInfo("Nivix Cyclops", 234, Rarity.COMMON, mage.cards.n.NivixCyclops.class));
