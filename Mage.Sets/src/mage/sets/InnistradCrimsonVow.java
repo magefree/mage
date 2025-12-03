@@ -75,8 +75,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Bloodbat Summoner", 338, Rarity.RARE, mage.cards.b.BloodbatSummoner.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloodcrazed Socialite", 288, Rarity.COMMON, mage.cards.b.BloodcrazedSocialite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloodcrazed Socialite", 96, Rarity.COMMON, mage.cards.b.BloodcrazedSocialite.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Bloodsoaked Reveler", 128, Rarity.UNCOMMON, mage.cards.b.BloodsoakedReveler.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Bloodsoaked Reveler", 295, Rarity.UNCOMMON, mage.cards.b.BloodsoakedReveler.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloodsworn Squire", 289, Rarity.UNCOMMON, mage.cards.b.BloodswornSquire.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloodsworn Squire", 97, Rarity.UNCOMMON, mage.cards.b.BloodswornSquire.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloodtithe Harvester", 232, Rarity.UNCOMMON, mage.cards.b.BloodtitheHarvester.class, NON_FULL_USE_VARIOUS));
@@ -271,9 +269,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Kessig Wolfrider", 165, Rarity.RARE, mage.cards.k.KessigWolfrider.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kessig Wolfrider", 379, Rarity.RARE, mage.cards.k.KessigWolfrider.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kindly Ancestor", 22, Rarity.COMMON, mage.cards.k.KindlyAncestor.class));
-        cards.add(new SetCardInfo("Krothuss, Lord of the Deep", 246, Rarity.RARE, mage.cards.k.KrothussLordOfTheDeep.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Krothuss, Lord of the Deep", 316, Rarity.RARE, mage.cards.k.KrothussLordOfTheDeep.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Krothuss, Lord of the Deep", 327, Rarity.RARE, mage.cards.k.KrothussLordOfTheDeep.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lacerate Flesh", 166, Rarity.COMMON, mage.cards.l.LacerateFlesh.class));
         cards.add(new SetCardInfo("Laid to Rest", 207, Rarity.UNCOMMON, mage.cards.l.LaidToRest.class));
         cards.add(new SetCardInfo("Lambholt Raconteur", 167, Rarity.UNCOMMON, mage.cards.l.LambholtRaconteur.class));
@@ -309,7 +304,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Necroduality", 70, Rarity.MYTHIC, mage.cards.n.Necroduality.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nurturing Presence", 26, Rarity.COMMON, mage.cards.n.NurturingPresence.class));
         cards.add(new SetCardInfo("Oakshade Stalker", 212, Rarity.UNCOMMON, mage.cards.o.OakshadeStalker.class));
-        cards.add(new SetCardInfo("Odious Witch", 127, Rarity.COMMON, mage.cards.o.OdiousWitch.class));
         cards.add(new SetCardInfo("Odric, Blood-Cursed", 243, Rarity.RARE, mage.cards.o.OdricBloodCursed.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Odric, Blood-Cursed", 314, Rarity.RARE, mage.cards.o.OdricBloodCursed.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Old Rutstein", 244, Rarity.RARE, mage.cards.o.OldRutstein.class, NON_FULL_USE_VARIOUS));
@@ -339,7 +333,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Pointed Discussion", 126, Rarity.COMMON, mage.cards.p.PointedDiscussion.class));
         cards.add(new SetCardInfo("Pyre Spawn", 173, Rarity.COMMON, mage.cards.p.PyreSpawn.class));
         cards.add(new SetCardInfo("Radiant Grace", 31, Rarity.UNCOMMON, mage.cards.r.RadiantGrace.class));
-        cards.add(new SetCardInfo("Radiant Restraints", 31, Rarity.UNCOMMON, mage.cards.r.RadiantRestraints.class));
         cards.add(new SetCardInfo("Ragged Recluse", 127, Rarity.COMMON, mage.cards.r.RaggedRecluse.class));
         cards.add(new SetCardInfo("Reckless Impulse", 174, Rarity.COMMON, mage.cards.r.RecklessImpulse.class));
         cards.add(new SetCardInfo("Reclusive Taxidermist", 214, Rarity.UNCOMMON, mage.cards.r.ReclusiveTaxidermist.class, NON_FULL_USE_VARIOUS));

@@ -185,7 +185,6 @@ public final class Innistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Mayor of Avabruck", 193, Rarity.RARE, mage.cards.m.MayorOfAvabruck.class));
         cards.add(new SetCardInfo("Memory's Journey", 66, Rarity.UNCOMMON, mage.cards.m.MemorysJourney.class));
         cards.add(new SetCardInfo("Mentor of the Meek", 21, Rarity.RARE, mage.cards.m.MentorOfTheMeek.class));
-        cards.add(new SetCardInfo("Merciless Predator", 159, Rarity.UNCOMMON, mage.cards.m.MercilessPredator.class));
         cards.add(new SetCardInfo("Midnight Haunting", 22, Rarity.UNCOMMON, mage.cards.m.MidnightHaunting.class));
         cards.add(new SetCardInfo("Mikaeus, the Lunarch", 23, Rarity.MYTHIC, mage.cards.m.MikaeusTheLunarch.class));
         cards.add(new SetCardInfo("Mindshrieker", 67, Rarity.RARE, mage.cards.m.Mindshrieker.class));

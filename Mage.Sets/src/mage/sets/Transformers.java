@@ -29,7 +29,6 @@ public final class Transformers extends ExpansionSet {
         cards.add(new SetCardInfo("Optimus Prime, Hero", 13, Rarity.MYTHIC, mage.cards.o.OptimusPrimeHero.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Optimus Prime, Hero", 27, Rarity.MYTHIC, mage.cards.o.OptimusPrimeHero.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ratchet, Field Medic", 2, Rarity.MYTHIC, mage.cards.r.RatchetFieldMedic.class));
-        cards.add(new SetCardInfo("Ratchet, Rescue Racer", 2, Rarity.MYTHIC, mage.cards.r.RatchetRescueRacer.class));
         cards.add(new SetCardInfo("Slicer, High-Speed Antagonist", 6, Rarity.MYTHIC, mage.cards.s.SlicerHighSpeedAntagonist.class));
         cards.add(new SetCardInfo("Slicer, Hired Muscle", 6, Rarity.MYTHIC, mage.cards.s.SlicerHiredMuscle.class));
         cards.add(new SetCardInfo("Starscream, Power Hungry", 5, Rarity.MYTHIC, mage.cards.s.StarscreamPowerHungry.class));

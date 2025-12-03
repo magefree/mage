@@ -42,7 +42,6 @@ public final class DarkAscension extends ExpansionSet {
         cards.add(new SetCardInfo("Alpha Brawl", 82, Rarity.RARE, mage.cards.a.AlphaBrawl.class));
         cards.add(new SetCardInfo("Altar of the Lost", 144, Rarity.UNCOMMON, mage.cards.a.AltarOfTheLost.class));
         cards.add(new SetCardInfo("Archangel's Light", 1, Rarity.MYTHIC, mage.cards.a.ArchangelsLight.class));
-        cards.add(new SetCardInfo("Archdemon of Greed", 71, Rarity.RARE, mage.cards.a.ArchdemonOfGreed.class));
         cards.add(new SetCardInfo("Artful Dodge", 27, Rarity.COMMON, mage.cards.a.ArtfulDodge.class));
         cards.add(new SetCardInfo("Avacyn's Collar", 145, Rarity.UNCOMMON, mage.cards.a.AvacynsCollar.class));
         cards.add(new SetCardInfo("Bar the Door", 2, Rarity.COMMON, mage.cards.b.BarTheDoor.class));

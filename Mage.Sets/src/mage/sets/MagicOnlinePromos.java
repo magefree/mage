@@ -135,7 +135,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Arcbound Ravager", 72888, Rarity.RARE, mage.cards.a.ArcboundRavager.class));
         cards.add(new SetCardInfo("Archaeomancer's Map", 90008, Rarity.RARE, mage.cards.a.ArchaeomancersMap.class));
         cards.add(new SetCardInfo("Archangel of Wrath", 103392, Rarity.RARE, mage.cards.a.ArchangelOfWrath.class));
-        cards.add(new SetCardInfo("Archdemon of Greed", 43503, Rarity.RARE, mage.cards.a.ArchdemonOfGreed.class));
         cards.add(new SetCardInfo("Archelos, Lagoon Mystic", 86334, Rarity.RARE, mage.cards.a.ArchelosLagoonMystic.class));
         cards.add(new SetCardInfo("Archfiend of Depravity", 55711, Rarity.RARE, mage.cards.a.ArchfiendOfDepravity.class));
         cards.add(new SetCardInfo("Archfiend of Ifnir", 64422, Rarity.RARE, mage.cards.a.ArchfiendOfIfnir.class));

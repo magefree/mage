@@ -81,8 +81,6 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Bloodline Keeper", 461, Rarity.MYTHIC, mage.cards.b.BloodlineKeeper.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloodline Keeper", 98, Rarity.MYTHIC, mage.cards.b.BloodlineKeeper.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloodmad Vampire", 145, Rarity.COMMON, mage.cards.b.BloodmadVampire.class));
-        cards.add(new SetCardInfo("Bloodsoaked Reveler", 128, Rarity.UNCOMMON, mage.cards.b.BloodsoakedReveler.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Bloodsoaked Reveler", 463, Rarity.UNCOMMON, mage.cards.b.BloodsoakedReveler.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloodtithe Harvester", 233, Rarity.UNCOMMON, mage.cards.b.BloodtitheHarvester.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloodtithe Harvester", 427, Rarity.UNCOMMON, mage.cards.b.BloodtitheHarvester.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Boarded Window", 255, Rarity.UNCOMMON, mage.cards.b.BoardedWindow.class, NON_FULL_USE_VARIOUS));

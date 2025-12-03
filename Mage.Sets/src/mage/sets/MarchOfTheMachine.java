@@ -326,8 +326,6 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Render Inert", 123, Rarity.UNCOMMON, mage.cards.r.RenderInert.class));
         cards.add(new SetCardInfo("Rona, Herald of Invasion", 295, Rarity.RARE, mage.cards.r.RonaHeraldOfInvasion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rona, Herald of Invasion", 75, Rarity.RARE, mage.cards.r.RonaHeraldOfInvasion.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Rona, Tolarian Obliterator", 295, Rarity.RARE, mage.cards.r.RonaTolarianObliterator.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Rona, Tolarian Obliterator", 75, Rarity.RARE, mage.cards.r.RonaTolarianObliterator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rugged Highlands", 271, Rarity.COMMON, mage.cards.r.RuggedHighlands.class));
         cards.add(new SetCardInfo("Ruins Recluse", 336, Rarity.UNCOMMON, mage.cards.r.RuinsRecluse.class));
         cards.add(new SetCardInfo("Saiba Cryptomancer", 76, Rarity.COMMON, mage.cards.s.SaibaCryptomancer.class));
