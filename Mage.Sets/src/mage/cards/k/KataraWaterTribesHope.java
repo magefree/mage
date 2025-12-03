@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.MyTurnCondition;
-import mage.abilities.costs.common.WaterbendCost;
+import mage.abilities.costs.common.WaterbendXCost;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -49,7 +49,7 @@ public final class KataraWaterTribesHope extends CardImpl {
         Ability ability = new ActivateIfConditionActivatedAbility(new SetBasePowerToughnessAllEffect(
                 GetXValue.instance, GetXValue.instance, Duration.EndOfTurn,
                 StaticFilters.FILTER_CONTROLLED_CREATURES
-        ), new WaterbendCost("{X}"), MyTurnCondition.instance);
+        ), new WaterbendXCost(), MyTurnCondition.instance);
         ability.addEffect(new InfoEffect("X can't be 0"));
         CardUtil.castStream(ability.getCosts(), VariableManaCost.class).forEach(cost -> cost.setMinX(1));
         this.addAbility(ability);

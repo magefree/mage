@@ -477,6 +477,17 @@ public final class StaticFilters {
         FILTER_CONTROLLED_PERMANENT_ARTIFACT_OR_CREATURE.setLockedFilter(true);
     }
 
+    public static final FilterControlledPermanent FILTER_CONTROLLED_UNTAPPED_ARTIFACT_OR_CREATURE = new FilterControlledPermanent("untapped artifact or creature you control");
+
+    static {
+        FILTER_CONTROLLED_UNTAPPED_ARTIFACT_OR_CREATURE.add(TappedPredicate.UNTAPPED);
+        FILTER_CONTROLLED_UNTAPPED_ARTIFACT_OR_CREATURE.add(Predicates.or(
+                CardType.ARTIFACT.getPredicate(),
+                CardType.CREATURE.getPredicate()
+        ));
+        FILTER_CONTROLLED_UNTAPPED_ARTIFACT_OR_CREATURE.setLockedFilter(true);
+    }
+
     public static final FilterControlledPermanent FILTER_CONTROLLED_ARTIFACT_OR_OTHER_CREATURE = new FilterControlledPermanent("another creature or an artifact");
 
     static {

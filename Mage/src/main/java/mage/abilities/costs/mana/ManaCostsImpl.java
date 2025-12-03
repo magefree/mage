@@ -5,20 +5,27 @@ import mage.abilities.Ability;
 import mage.abilities.AbilityImpl;
 import mage.abilities.costs.*;
 import mage.abilities.costs.common.PayLifeCost;
+import mage.abilities.costs.common.WaterbendCost;
 import mage.abilities.mana.ManaOptions;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.ManaType;
 import mage.constants.Outcome;
 import mage.filter.Filter;
+import mage.filter.StaticFilters;
 import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.players.ManaPool;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.Targets;
+import mage.target.common.TargetControlledPermanent;
 import mage.util.CardUtil;
 import mage.util.ManaUtil;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 /**
  * @param <T>
@@ -162,6 +169,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
         if (payingPlayer != null) {
             int bookmark = game.bookmarkState();
             handlePhyrexianManaCosts(ability, payingPlayer, source, game);
+            handleWaterbendingCosts(ability, payingPlayer, source, game);
             if (pay(ability, game, source, payingPlayerId, false, null)) {
                 game.removeBookmark(bookmark);
                 return true;
@@ -193,6 +201,33 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
         }
 
         tempCosts.pay(source, game, source, payingPlayer.getId(), false, null);
+    }
+
+    private void handleWaterbendingCosts(Ability abilityToPay, Player payingPlayer, Ability source, Game game) {
+        int total = CardUtil
+                .castStream(this, WaterbendCost.class)
+                .mapToInt(WaterbendCost::manaValue)
+                .sum();
+        if (total < 1) {
+            return;
+        }
+        TargetPermanent target = new TargetControlledPermanent(
+                0, total, StaticFilters.FILTER_CONTROLLED_UNTAPPED_ARTIFACT_OR_CREATURE, true
+        );
+        target.withChooseHint("to tap for waterbending");
+        payingPlayer.choose(Outcome.Tap, target, source, game);
+        Set<Permanent> permanents = target
+                .getTargets()
+                .stream()
+                .map(game::getPermanent)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toSet());
+        for (Permanent permanent : permanents) {
+            permanent.tap(source, game);
+        }
+        this.removeIf(WaterbendCost.class::isInstance);
+        this.add(new GenericManaCost(total - permanents.size()));
+        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.WATERBENDED, source.getSourceId(), source, payingPlayer.getId(), total));
     }
 
     @Override

@@ -7,10 +7,8 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.*;
 import mage.abilities.costs.common.PayLifeCost;
-import mage.abilities.costs.mana.ManaCost;
-import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.costs.mana.VariableManaCost;
+import mage.abilities.costs.common.WaterbendCost;
+import mage.abilities.costs.mana.*;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
@@ -25,6 +23,7 @@ import mage.choices.ChoiceHintType;
 import mage.choices.ChoiceImpl;
 import mage.constants.*;
 import mage.filter.FilterMana;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.command.Dungeon;
 import mage.game.command.Emblem;
@@ -39,8 +38,10 @@ import mage.game.stack.StackAbility;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetCard;
+import mage.target.TargetPermanent;
 import mage.target.Targets;
 import mage.target.common.TargetCardInLibrary;
+import mage.target.common.TargetControlledPermanent;
 import mage.target.targetadjustment.GenericTargetAdjuster;
 import mage.target.targetadjustment.TargetAdjuster;
 import mage.util.CardUtil;
@@ -50,6 +51,7 @@ import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -349,6 +351,7 @@ public abstract class AbilityImpl implements Ability {
         // Phyrexian mana symbols, the player announces whether they intend to pay 2
         // life or the corresponding colored mana cost for each of those symbols.
         AbilityImpl.handlePhyrexianCosts(game, this, this, this.getManaCostsToPay());
+        AbilityImpl.handleWaterbendingCosts(game, this, this, this.getManaCostsToPay());
 
         // 20241022 - 601.2b
         // Not yet included in 601.2b but this is where it will be
@@ -685,6 +688,38 @@ public abstract class AbilityImpl implements Ability {
                 manaCostsToPay.incrPhyrexianPaid(); // mark it as real phyrexian pay, e.g. for planeswalkers with Compleated ability
             }
         }
+    }
+
+    public static void handleWaterbendingCosts(Game game, Ability source, Ability abilityToPay, ManaCosts manaCostsToPay) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return;
+        }
+
+        int total = CardUtil
+                .castStream(manaCostsToPay, WaterbendCost.class)
+                .mapToInt(WaterbendCost::manaValue)
+                .sum();
+        if (total < 1) {
+            return;
+        }
+        TargetPermanent target = new TargetControlledPermanent(
+                0, total, StaticFilters.FILTER_CONTROLLED_UNTAPPED_ARTIFACT_OR_CREATURE, true
+        );
+        target.withChooseHint("to tap for waterbending");
+        controller.choose(Outcome.Tap, target, source, game);
+        Set<Permanent> permanents = target
+                .getTargets()
+                .stream()
+                .map(game::getPermanent)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toSet());
+        for (Permanent permanent : permanents) {
+            permanent.tap(source, game);
+        }
+        manaCostsToPay.removeIf(WaterbendCost.class::isInstance);
+        abilityToPay.addCost(new GenericManaCost(total - permanents.size()));
+        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.WATERBENDED, source.getSourceId(), source, controller.getId(), total));
     }
 
     /**
@@ -1701,15 +1736,15 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public void initSourceObjectZoneChangeCounter(Game game, boolean force) {
-        if (!(this instanceof MageSingleton) && (force || sourceObjectZoneChangeCounter == 0 )) {
+        if (!(this instanceof MageSingleton) && (force || sourceObjectZoneChangeCounter == 0)) {
             setSourceObjectZoneChangeCounter(getCurrentSourceObjectZoneChangeCounter(game));
         }
     }
 
-    private int getCurrentSourceObjectZoneChangeCounter(Game game){
+    private int getCurrentSourceObjectZoneChangeCounter(Game game) {
         int zcc = game.getState().getZoneChangeCounter(getSourceId());
         Permanent p = game.getPermanentEntering(getSourceId());
-        if (p != null && !(p instanceof PermanentToken)){
+        if (p != null && !(p instanceof PermanentToken)) {
             // If the triggered ability triggered while the permanent is entering the battlefield
             // then add 1 zcc so that it triggers as if the permanent was already on the battlefield
             // So "Enters with counters" causes "Whenever counters are placed" to trigger with battlefield zcc

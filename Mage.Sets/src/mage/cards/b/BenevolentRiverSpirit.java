@@ -2,8 +2,10 @@ package mage.cards.b;
 
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.WaterbendCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.WardAbility;
@@ -11,6 +13,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.Zone;
 
 import java.util.UUID;
 
@@ -28,6 +31,9 @@ public final class BenevolentRiverSpirit extends CardImpl {
 
         // As an additional cost to cast this spell, waterbend {5}.
         this.getSpellAbility().addCost(new WaterbendCost(5));
+        this.addAbility(new SimpleStaticAbility(
+                Zone.ALL, new InfoEffect("as an additional cost to cast this spell, waterbend {5}")
+        ));
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());

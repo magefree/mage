@@ -4,15 +4,10 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * @author TheElk801
  */
 public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
-
-    private static final List<String> unfinished = Arrays.asList("Katara, Seeking Revenge", "Ruthless Waterbender", "Waterbender's Restoration", "Water Whip");
 
     private static final AvatarTheLastAirbenderEternal instance = new AvatarTheLastAirbenderEternal();
 
@@ -342,7 +337,5 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Zuko, Firebending Master", 127, Rarity.MYTHIC, mage.cards.z.ZukoFirebendingMaster.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Zuko, Firebending Master", 200, Rarity.MYTHIC, mage.cards.z.ZukoFirebendingMaster.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Zuko, Seeking Honor", 150, Rarity.UNCOMMON, mage.cards.z.ZukoSeekingHonor.class));
-
-        cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName()));
     }
 }

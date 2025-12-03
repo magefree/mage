@@ -1,7 +1,7 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
-import mage.abilities.costs.common.WaterbendCost;
+import mage.abilities.costs.common.WaterbendXCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
@@ -30,7 +30,7 @@ public final class CrashingWave extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{U}{U}");
 
         // As an additional cost to cast this spell, waterbend {X}.
-        this.getSpellAbility().addCost(new WaterbendCost("{X}"));
+        this.getSpellAbility().addCost(new WaterbendXCost());
 
         // Tap up to X target creatures, then distribute three stun counters among tapped creatures your opponents control.
         this.getSpellAbility().addEffect(new TapTargetEffect("tap up to X target creatures"));

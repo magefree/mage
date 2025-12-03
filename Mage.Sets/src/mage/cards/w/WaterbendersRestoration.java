@@ -1,6 +1,6 @@
 package mage.cards.w;
 
-import mage.abilities.costs.common.WaterbendCost;
+import mage.abilities.costs.common.WaterbendXCost;
 import mage.abilities.effects.common.ExileReturnBattlefieldNextEndStepTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -22,7 +22,7 @@ public final class WaterbendersRestoration extends CardImpl {
         this.subtype.add(SubType.LESSON);
 
         // As an additional cost to cast this spell, waterbend {X}.
-        this.getSpellAbility().addCost(new WaterbendCost("{X}"));
+        this.getSpellAbility().addCost(new WaterbendXCost());
 
         // Exile X target creatures you control. Return those cards to the battlefield under their owner's control at the beginning of the next end step.
         this.getSpellAbility().addEffect(new ExileReturnBattlefieldNextEndStepTargetEffect()
