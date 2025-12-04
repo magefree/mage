@@ -9,7 +9,6 @@ import mage.abilities.costs.common.ExileSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
-import mage.cards.TransformingDoubleFacedCardHalf;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
@@ -122,7 +121,8 @@ class CraftCost extends CostImpl {
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Card sourceCard = game.getCard(source.getSourceId());
+        if (player == null || sourceCard == null) {
             paid = false;
             return paid;
         }
@@ -143,7 +143,7 @@ class CraftCost extends CostImpl {
                 .collect(Collectors.toSet());
         player.moveCardsToExile(
                 cards, source, game, true,
-                CardUtil.getExileZoneId(game, source),
+                CardUtil.getExileZoneId(game, sourceCard.getMainCard().getId(), sourceCard.getMainCard().getZoneChangeCounter(game)),
                 CardUtil.getSourceName(game, source)
         );
         paid = true;
