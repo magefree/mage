@@ -391,6 +391,7 @@ public enum SubType {
     SNAKE("Snake", SubTypeSet.CreatureType),
     SOLDIER("Soldier", SubTypeSet.CreatureType),
     SOLTARI("Soltari", SubTypeSet.CreatureType),
+    SORCERER("Sorcerer", SubTypeSet.CreatureType),
     SPAWN("Spawn", SubTypeSet.CreatureType),
     SPECTER("Specter", SubTypeSet.CreatureType),
     SPELLSHAPER("Spellshaper", SubTypeSet.CreatureType),

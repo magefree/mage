@@ -22,6 +22,8 @@ public final class LorwynEclipsed extends ExpansionSet {
 
         cards.add(new SetCardInfo("Ashling's Command", 205, Rarity.RARE, mage.cards.a.AshlingsCommand.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ashling's Command", 330, Rarity.RARE, mage.cards.a.AshlingsCommand.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ashling, Rekindled", 124, Rarity.RARE, mage.cards.a.AshlingRekindled.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ashling, Rekindled", 290, Rarity.RARE, mage.cards.a.AshlingRekindled.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bitterbloom Bearer", 310, Rarity.MYTHIC, mage.cards.b.BitterbloomBearer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bitterbloom Bearer", 352, Rarity.MYTHIC, mage.cards.b.BitterbloomBearer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bitterbloom Bearer", 88, Rarity.MYTHIC, mage.cards.b.BitterbloomBearer.class, NON_FULL_USE_VARIOUS));
