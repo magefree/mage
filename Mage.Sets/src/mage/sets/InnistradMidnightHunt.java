@@ -51,8 +51,6 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Arlinn, the Pack's Hope", 279, Rarity.MYTHIC, mage.cards.a.ArlinnThePacksHope.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arlinn, the Pack's Hope", 307, Rarity.MYTHIC, mage.cards.a.ArlinnThePacksHope.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arrogant Outlaw", 84, Rarity.COMMON, mage.cards.a.ArrogantOutlaw.class));
-        cards.add(new SetCardInfo("Ashmouth Dragon", 159, Rarity.RARE, mage.cards.a.AshmouthDragon.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Ashmouth Dragon", 358, Rarity.RARE, mage.cards.a.AshmouthDragon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Augur of Autumn", 168, Rarity.RARE, mage.cards.a.AugurOfAutumn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Augur of Autumn", 360, Rarity.RARE, mage.cards.a.AugurOfAutumn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Baithook Angler", 42, Rarity.COMMON, mage.cards.b.BaithookAngler.class));
@@ -332,8 +330,6 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Sacred Fire", 239, Rarity.UNCOMMON, mage.cards.s.SacredFire.class));
         cards.add(new SetCardInfo("Saryth, the Viper's Fang", 197, Rarity.RARE, mage.cards.s.SarythTheVipersFang.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Saryth, the Viper's Fang", 304, Rarity.RARE, mage.cards.s.SarythTheVipersFang.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Seafaring Werewolf", 288, Rarity.RARE, mage.cards.s.SeafaringWerewolf.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Seafaring Werewolf", 80, Rarity.RARE, mage.cards.s.SeafaringWerewolf.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Search Party Captain", 32, Rarity.COMMON, mage.cards.s.SearchPartyCaptain.class));
         cards.add(new SetCardInfo("Secrets of the Key", 73, Rarity.COMMON, mage.cards.s.SecretsOfTheKey.class));
         cards.add(new SetCardInfo("Seize the Storm", 158, Rarity.UNCOMMON, mage.cards.s.SeizeTheStorm.class));
@@ -366,12 +362,8 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Soul-Guide Gryff", 35, Rarity.COMMON, mage.cards.s.SoulGuideGryff.class));
         cards.add(new SetCardInfo("Spectral Adversary", 341, Rarity.MYTHIC, mage.cards.s.SpectralAdversary.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Spectral Adversary", 77, Rarity.MYTHIC, mage.cards.s.SpectralAdversary.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Spellrune Howler", 160, Rarity.UNCOMMON, mage.cards.s.SpellruneHowler.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Spellrune Howler", 295, Rarity.UNCOMMON, mage.cards.s.SpellruneHowler.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Spellrune Painter", 160, Rarity.UNCOMMON, mage.cards.s.SpellrunePainter.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Spellrune Painter", 295, Rarity.UNCOMMON, mage.cards.s.SpellrunePainter.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Stalking Predator", 120, Rarity.COMMON, mage.cards.s.StalkingPredator.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Stalking Predator", 291, Rarity.COMMON, mage.cards.s.StalkingPredator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Startle", 78, Rarity.COMMON, mage.cards.s.Startle.class));
         cards.add(new SetCardInfo("Stolen Vitality", 161, Rarity.COMMON, mage.cards.s.StolenVitality.class));
         cards.add(new SetCardInfo("Storm Skreelix", 243, Rarity.UNCOMMON, mage.cards.s.StormSkreelix.class));

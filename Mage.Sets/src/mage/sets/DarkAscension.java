@@ -96,7 +96,6 @@ public final class DarkAscension extends ExpansionSet {
         cards.add(new SetCardInfo("Gavony Ironwright", 9, Rarity.UNCOMMON, mage.cards.g.GavonyIronwright.class));
         cards.add(new SetCardInfo("Geralf's Messenger", 63, Rarity.RARE, mage.cards.g.GeralfsMessenger.class));
         cards.add(new SetCardInfo("Geralf's Mindcrusher", 37, Rarity.RARE, mage.cards.g.GeralfsMindcrusher.class));
-        cards.add(new SetCardInfo("Ghastly Haunting", 50, Rarity.UNCOMMON, mage.cards.g.GhastlyHaunting.class));
         cards.add(new SetCardInfo("Ghoultree", 115, Rarity.RARE, mage.cards.g.Ghoultree.class));
         cards.add(new SetCardInfo("Grafdigger's Cage", 149, Rarity.RARE, mage.cards.g.GrafdiggersCage.class));
         cards.add(new SetCardInfo("Gravecrawler", 64, Rarity.RARE, mage.cards.g.Gravecrawler.class));
@@ -139,7 +138,6 @@ public final class DarkAscension extends ExpansionSet {
         cards.add(new SetCardInfo("Midnight Guard", 14, Rarity.COMMON, mage.cards.m.MidnightGuard.class));
         cards.add(new SetCardInfo("Mikaeus, the Unhallowed", 70, Rarity.MYTHIC, mage.cards.m.MikaeusTheUnhallowed.class));
         cards.add(new SetCardInfo("Mondronen Shaman", 98, Rarity.RARE, mage.cards.m.MondronenShaman.class));
-        cards.add(new SetCardInfo("Moonscarred Werewolf", 125, Rarity.COMMON, mage.cards.m.MoonscarredWerewolf.class));
         cards.add(new SetCardInfo("Moonveil Dragon", 99, Rarity.MYTHIC, mage.cards.m.MoonveilDragon.class));
         cards.add(new SetCardInfo("Mystic Retrieval", 42, Rarity.UNCOMMON, mage.cards.m.MysticRetrieval.class));
         cards.add(new SetCardInfo("Nearheath Stalker", 100, Rarity.COMMON, mage.cards.n.NearheathStalker.class));

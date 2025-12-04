@@ -104,7 +104,6 @@ public final class EldritchMoon extends ExpansionSet {
         cards.add(new SetCardInfo("Emrakul's Influence", 157, Rarity.UNCOMMON, mage.cards.e.EmrakulsInfluence.class));
         cards.add(new SetCardInfo("Emrakul, the Promised End", 6, Rarity.MYTHIC, mage.cards.e.EmrakulThePromisedEnd.class));
         cards.add(new SetCardInfo("Enlightened Maniac", 58, Rarity.COMMON, mage.cards.e.EnlightenedManiac.class));
-        cards.add(new SetCardInfo("Erupting Dreadwolf", 142, Rarity.UNCOMMON, mage.cards.e.EruptingDreadwolf.class));
         cards.add(new SetCardInfo("Eternal Scourge", 7, Rarity.RARE, mage.cards.e.EternalScourge.class));
         cards.add(new SetCardInfo("Extricator of Sin", 23, Rarity.UNCOMMON, mage.cards.e.ExtricatorOfSin.class));
         cards.add(new SetCardInfo("Exultant Cultist", 59, Rarity.COMMON, mage.cards.e.ExultantCultist.class));
@@ -142,7 +141,6 @@ public final class EldritchMoon extends ExpansionSet {
         cards.add(new SetCardInfo("Harmless Offering", 131, Rarity.RARE, mage.cards.h.HarmlessOffering.class));
         cards.add(new SetCardInfo("Haunted Dead", 92, Rarity.UNCOMMON, mage.cards.h.HauntedDead.class));
         cards.add(new SetCardInfo("Heron's Grace Champion", 185, Rarity.RARE, mage.cards.h.HeronsGraceChampion.class));
-        cards.add(new SetCardInfo("Howling Chorus", 168, Rarity.UNCOMMON, mage.cards.h.HowlingChorus.class));
         cards.add(new SetCardInfo("Identity Thief", 64, Rarity.RARE, mage.cards.i.IdentityThief.class));
         cards.add(new SetCardInfo("Impetuous Devils", 132, Rarity.RARE, mage.cards.i.ImpetuousDevils.class));
         cards.add(new SetCardInfo("Imprisoned in the Moon", 65, Rarity.RARE, mage.cards.i.ImprisonedInTheMoon.class));

@@ -48,7 +48,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Arm the Cathars", 270, Rarity.UNCOMMON, mage.cards.a.ArmTheCathars.class));
         cards.add(new SetCardInfo("Arrogant Outlaw", 84, Rarity.COMMON, mage.cards.a.ArrogantOutlaw.class));
         cards.add(new SetCardInfo("Ascendant Packleader", 453, Rarity.RARE, mage.cards.a.AscendantPackleader.class));
-        cards.add(new SetCardInfo("Ashmouth Dragon", 159, Rarity.RARE, mage.cards.a.AshmouthDragon.class));
         cards.add(new SetCardInfo("Augur of Autumn", 168, Rarity.RARE, mage.cards.a.AugurOfAutumn.class));
         cards.add(new SetCardInfo("Avabruck Caretaker", 454, Rarity.MYTHIC, mage.cards.a.AvabruckCaretaker.class));
         cards.add(new SetCardInfo("Baithook Angler", 42, Rarity.COMMON, mage.cards.b.BaithookAngler.class));
@@ -118,7 +117,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Chaplain of Alms", 13, Rarity.UNCOMMON, mage.cards.c.ChaplainOfAlms.class));
         cards.add(new SetCardInfo("Child of the Pack", 501, Rarity.UNCOMMON, mage.cards.c.ChildOfThePack.class));
         cards.add(new SetCardInfo("Chill of the Grave", 318, Rarity.COMMON, mage.cards.c.ChillOfTheGrave.class));
-        cards.add(new SetCardInfo("Cipherbound Spirit", 346, Rarity.UNCOMMON, mage.cards.c.CipherboundSpirit.class));
         cards.add(new SetCardInfo("Circle of Confinement", 274, Rarity.UNCOMMON, mage.cards.c.CircleOfConfinement.class));
         cards.add(new SetCardInfo("Clarion Cathars", 14, Rarity.COMMON, mage.cards.c.ClarionCathars.class));
         cards.add(new SetCardInfo("Clear Shot", 176, Rarity.UNCOMMON, mage.cards.c.ClearShot.class));
@@ -436,7 +434,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Sawblade Slinger", 484, Rarity.UNCOMMON, mage.cards.s.SawbladeSlinger.class));
         cards.add(new SetCardInfo("Scattered Thoughts", 341, Rarity.COMMON, mage.cards.s.ScatteredThoughts.class));
         cards.add(new SetCardInfo("Screaming Swarm", 342, Rarity.UNCOMMON, mage.cards.s.ScreamingSwarm.class));
-        cards.add(new SetCardInfo("Seafaring Werewolf", 80, Rarity.RARE, mage.cards.s.SeafaringWerewolf.class));
         cards.add(new SetCardInfo("Search Party Captain", 32, Rarity.COMMON, mage.cards.s.SearchPartyCaptain.class));
         cards.add(new SetCardInfo("Secrets of the Key", 73, Rarity.COMMON, mage.cards.s.SecretsOfTheKey.class));
         cards.add(new SetCardInfo("Seize the Storm", 158, Rarity.UNCOMMON, mage.cards.s.SeizeTheStorm.class));
@@ -471,13 +468,11 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Soul-Guide Gryff", 35, Rarity.COMMON, mage.cards.s.SoulGuideGryff.class));
         cards.add(new SetCardInfo("Soulcipher Board", 346, Rarity.UNCOMMON, mage.cards.s.SoulcipherBoard.class));
         cards.add(new SetCardInfo("Spectral Adversary", 77, Rarity.MYTHIC, mage.cards.s.SpectralAdversary.class));
-        cards.add(new SetCardInfo("Spellrune Howler", 160, Rarity.UNCOMMON, mage.cards.s.SpellruneHowler.class));
         cards.add(new SetCardInfo("Spellrune Painter", 160, Rarity.UNCOMMON, mage.cards.s.SpellrunePainter.class));
         cards.add(new SetCardInfo("Spiked Ripsaw", 487, Rarity.UNCOMMON, mage.cards.s.SpikedRipsaw.class));
         cards.add(new SetCardInfo("Splendid Reclamation", 488, Rarity.RARE, mage.cards.s.SplendidReclamation.class));
         cards.add(new SetCardInfo("Spore Crawler", 489, Rarity.COMMON, mage.cards.s.SporeCrawler.class));
         cards.add(new SetCardInfo("Sporeback Wolf", 490, Rarity.COMMON, mage.cards.s.SporebackWolf.class));
-        cards.add(new SetCardInfo("Stalking Predator", 120, Rarity.COMMON, mage.cards.s.StalkingPredator.class));
         cards.add(new SetCardInfo("Startle", 78, Rarity.COMMON, mage.cards.s.Startle.class));
         cards.add(new SetCardInfo("Steelclad Spirit", 347, Rarity.COMMON, mage.cards.s.SteelcladSpirit.class));
         cards.add(new SetCardInfo("Stensia Uprising", 445, Rarity.RARE, mage.cards.s.StensiaUprising.class));

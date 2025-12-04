@@ -103,7 +103,6 @@ public class RivalsOfIxalanPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Tomb Robber", "87s", Rarity.RARE, mage.cards.t.TombRobber.class));
         cards.add(new SetCardInfo("Trapjaw Tyrant", "29s", Rarity.MYTHIC, mage.cards.t.TrapjawTyrant.class));
         cards.add(new SetCardInfo("Twilight Prophet", "88s", Rarity.MYTHIC, mage.cards.t.TwilightProphet.class));
-        cards.add(new SetCardInfo("Vault of Catlacan", "173s", Rarity.RARE, mage.cards.v.VaultOfCatlacan.class));
         cards.add(new SetCardInfo("Vona's Hunger", "90p", Rarity.RARE, mage.cards.v.VonasHunger.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vona's Hunger", "90s", Rarity.RARE, mage.cards.v.VonasHunger.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Warkite Marauder", "60p", Rarity.RARE, mage.cards.w.WarkiteMarauder.class, NON_FULL_USE_VARIOUS));

@@ -259,7 +259,6 @@ public final class Innistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Spider Spawning", 203, Rarity.UNCOMMON, mage.cards.s.SpiderSpawning.class));
         cards.add(new SetCardInfo("Spidery Grasp", 204, Rarity.COMMON, mage.cards.s.SpideryGrasp.class));
         cards.add(new SetCardInfo("Splinterfright", 205, Rarity.RARE, mage.cards.s.Splinterfright.class));
-        cards.add(new SetCardInfo("Stalking Vampire", 114, Rarity.UNCOMMON, mage.cards.s.StalkingVampire.class));
         cards.add(new SetCardInfo("Stensia Bloodhall", 247, Rarity.RARE, mage.cards.s.StensiaBloodhall.class));
         cards.add(new SetCardInfo("Stitched Drake", 80, Rarity.COMMON, mage.cards.s.StitchedDrake.class));
         cards.add(new SetCardInfo("Stitcher's Apprentice", 81, Rarity.COMMON, mage.cards.s.StitchersApprentice.class));

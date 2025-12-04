@@ -110,7 +110,6 @@ public class ShadowsOverInnistradPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Triskaidekaphobia", "141s", Rarity.RARE, mage.cards.t.Triskaidekaphobia.class));
         cards.add(new SetCardInfo("Ulvenwald Hydra", "235s", Rarity.MYTHIC, mage.cards.u.UlvenwaldHydra.class));
         cards.add(new SetCardInfo("Welcome to the Fold", "96s", Rarity.RARE, mage.cards.w.WelcomeToTheFold.class));
-        cards.add(new SetCardInfo("Werewolf of Ancient Hunger", "225s", Rarity.RARE, mage.cards.w.WerewolfOfAncientHunger.class));
         cards.add(new SetCardInfo("Westvale Abbey", "281s", Rarity.RARE, mage.cards.w.WestvaleAbbey.class));
         cards.add(new SetCardInfo("Wolf of Devil's Breach", "192s", Rarity.MYTHIC, mage.cards.w.WolfOfDevilsBreach.class));
     }

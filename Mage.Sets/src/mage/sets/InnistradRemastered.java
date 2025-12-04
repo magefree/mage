@@ -114,8 +114,6 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Chalice of Life", 471, Rarity.UNCOMMON, mage.cards.c.ChaliceOfLife.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Chandra, Dressed to Kill", 148, Rarity.MYTHIC, mage.cards.c.ChandraDressedToKill.class));
         cards.add(new SetCardInfo("Chittering Host", "123b", Rarity.COMMON, mage.cards.c.ChitteringHost.class));
-        cards.add(new SetCardInfo("Cipherbound Spirit", 459, Rarity.UNCOMMON, mage.cards.c.CipherboundSpirit.class, RETRO_ART_USE_VARIOUS));
-        cards.add(new SetCardInfo("Cipherbound Spirit", 85, Rarity.UNCOMMON, mage.cards.c.CipherboundSpirit.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Clear Shot", 188, Rarity.UNCOMMON, mage.cards.c.ClearShot.class));
         cards.add(new SetCardInfo("Cobbled Lancer", 56, Rarity.UNCOMMON, mage.cards.c.CobbledLancer.class));
         cards.add(new SetCardInfo("Cobbled Wings", 258, Rarity.COMMON, mage.cards.c.CobbledWings.class));
@@ -185,8 +183,6 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Emrakul, the Promised End", 481, Rarity.MYTHIC, mage.cards.e.EmrakulThePromisedEnd.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Emrakul, the Promised End", 5, Rarity.MYTHIC, mage.cards.e.EmrakulThePromisedEnd.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Epitaph Golem", 262, Rarity.COMMON, mage.cards.e.EpitaphGolem.class));
-        cards.add(new SetCardInfo("Erupting Dreadwolf", 171, Rarity.UNCOMMON, mage.cards.e.EruptingDreadwolf.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Erupting Dreadwolf", 465, Rarity.UNCOMMON, mage.cards.e.EruptingDreadwolf.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Essence Flux", 354, Rarity.COMMON, mage.cards.e.EssenceFlux.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Essence Flux", 64, Rarity.COMMON, mage.cards.e.EssenceFlux.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Evolving Wilds", 278, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
@@ -264,8 +260,6 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Honeymoon Hearse", 159, Rarity.UNCOMMON, mage.cards.h.HoneymoonHearse.class));
         cards.add(new SetCardInfo("Hopeful Initiate", 27, Rarity.RARE, mage.cards.h.HopefulInitiate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hopeful Initiate", 343, Rarity.RARE, mage.cards.h.HopefulInitiate.class, RETRO_ART_USE_VARIOUS));
-        cards.add(new SetCardInfo("Howling Chorus", 214, Rarity.UNCOMMON, mage.cards.h.HowlingChorus.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Howling Chorus", 469, Rarity.UNCOMMON, mage.cards.h.HowlingChorus.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Howlpack of Estwald", 224, Rarity.COMMON, mage.cards.h.HowlpackOfEstwald.class));
         cards.add(new SetCardInfo("Howlpack Resurgence", 204, Rarity.UNCOMMON, mage.cards.h.HowlpackResurgence.class));
         cards.add(new SetCardInfo("Hullbreaker Horror", 303, Rarity.RARE, mage.cards.h.HullbreakerHorror.class, NON_FULL_USE_VARIOUS));
@@ -342,8 +336,6 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Moonlight Hunt", 209, Rarity.UNCOMMON, mage.cards.m.MoonlightHunt.class));
         cards.add(new SetCardInfo("Moonrise Intruder", 179, Rarity.COMMON, mage.cards.m.MoonriseIntruder.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Moonrise Intruder", 466, Rarity.COMMON, mage.cards.m.MoonriseIntruder.class, RETRO_ART_USE_VARIOUS));
-        cards.add(new SetCardInfo("Moonscarred Werewolf", 212, Rarity.COMMON, mage.cards.m.MoonscarredWerewolf.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Moonscarred Werewolf", 468, Rarity.COMMON, mage.cards.m.MoonscarredWerewolf.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Morbid Opportunist", 124, Rarity.UNCOMMON, mage.cards.m.MorbidOpportunist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Morbid Opportunist", 388, Rarity.UNCOMMON, mage.cards.m.MorbidOpportunist.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Morkrut Banshee", 125, Rarity.UNCOMMON, mage.cards.m.MorkrutBanshee.class));

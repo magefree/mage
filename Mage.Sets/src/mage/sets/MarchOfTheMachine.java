@@ -153,7 +153,6 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Furnace Gremlin", 139, Rarity.UNCOMMON, mage.cards.f.FurnaceGremlin.class));
         cards.add(new SetCardInfo("Furnace Host Charger", 140, Rarity.COMMON, mage.cards.f.FurnaceHostCharger.class));
         cards.add(new SetCardInfo("Furnace Reins", 141, Rarity.UNCOMMON, mage.cards.f.FurnaceReins.class));
-        cards.add(new SetCardInfo("Furnace-Blessed Conqueror", 38, Rarity.UNCOMMON, mage.cards.f.FurnaceBlessedConqueror.class));
         cards.add(new SetCardInfo("Furtive Analyst", 59, Rarity.COMMON, mage.cards.f.FurtiveAnalyst.class));
         cards.add(new SetCardInfo("Ghalta and Mavren", 225, Rarity.RARE, mage.cards.g.GhaltaAndMavren.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ghalta and Mavren", 307, Rarity.RARE, mage.cards.g.GhaltaAndMavren.class, NON_FULL_USE_VARIOUS));
@@ -344,7 +343,6 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Seedpod Caretaker", 325, Rarity.UNCOMMON, mage.cards.s.SeedpodCaretaker.class));
         cards.add(new SetCardInfo("Seer of Stolen Sight", 330, Rarity.UNCOMMON, mage.cards.s.SeerOfStolenSight.class));
         cards.add(new SetCardInfo("Seraph of New Capenna", 36, Rarity.UNCOMMON, mage.cards.s.SeraphOfNewCapenna.class));
-        cards.add(new SetCardInfo("Seraph of New Phyrexia", 36, Rarity.UNCOMMON, mage.cards.s.SeraphOfNewPhyrexia.class));
         cards.add(new SetCardInfo("Serpent-Blade Assailant", 205, Rarity.COMMON, mage.cards.s.SerpentBladeAssailant.class));
         cards.add(new SetCardInfo("Shatter the Source", 164, Rarity.COMMON, mage.cards.s.ShatterTheSource.class));
         cards.add(new SetCardInfo("Sheoldred", 125, Rarity.MYTHIC, mage.cards.s.Sheoldred.class, NON_FULL_USE_VARIOUS));
@@ -354,7 +352,6 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Sigiled Sentinel", 37, Rarity.COMMON, mage.cards.s.SigiledSentinel.class));
         cards.add(new SetCardInfo("Skittering Surveyor", 264, Rarity.COMMON, mage.cards.s.SkitteringSurveyor.class));
         cards.add(new SetCardInfo("Skyclave Aerialist", 78, Rarity.UNCOMMON, mage.cards.s.SkyclaveAerialist.class));
-        cards.add(new SetCardInfo("Skyclave Invader", 78, Rarity.UNCOMMON, mage.cards.s.SkyclaveInvader.class));
         cards.add(new SetCardInfo("Stasis Field", 79, Rarity.COMMON, mage.cards.s.StasisField.class));
         cards.add(new SetCardInfo("Stoke the Flames", 166, Rarity.UNCOMMON, mage.cards.s.StokeTheFlames.class));
         cards.add(new SetCardInfo("Storm the Seedcore", 206, Rarity.UNCOMMON, mage.cards.s.StormTheSeedcore.class));
@@ -389,9 +386,6 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("The Great Work", 169, Rarity.MYTHIC, mage.cards.t.TheGreatWork.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Great Work", 299, Rarity.MYTHIC, mage.cards.t.TheGreatWork.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Great Work", 341, Rarity.MYTHIC, mage.cards.t.TheGreatWork.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("The True Scriptures", 125, Rarity.MYTHIC, mage.cards.t.TheTrueScriptures.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("The True Scriptures", 297, Rarity.MYTHIC, mage.cards.t.TheTrueScriptures.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("The True Scriptures", 340, Rarity.MYTHIC, mage.cards.t.TheTrueScriptures.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thornwood Falls", 274, Rarity.COMMON, mage.cards.t.ThornwoodFalls.class));
         cards.add(new SetCardInfo("Thrashing Frontliner", 167, Rarity.COMMON, mage.cards.t.ThrashingFrontliner.class));
         cards.add(new SetCardInfo("Thunderhead Squadron", 81, Rarity.COMMON, mage.cards.t.ThunderheadSquadron.class));

@@ -167,7 +167,6 @@ public class ShadowsOverInnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Highland Lake", 272, Rarity.UNCOMMON, mage.cards.h.HighlandLake.class));
         cards.add(new SetCardInfo("Hinterland Logger", 201, Rarity.COMMON, mage.cards.h.HinterlandLogger.class));
         cards.add(new SetCardInfo("Hope Against Hope", 33, Rarity.UNCOMMON, mage.cards.h.HopeAgainstHope.class));
-        cards.add(new SetCardInfo("Howling Chorus", 214, Rarity.UNCOMMON, mage.cards.h.HowlingChorus.class));
         cards.add(new SetCardInfo("Howlpack Resurgence", 202, Rarity.UNCOMMON, mage.cards.h.HowlpackResurgence.class));
         cards.add(new SetCardInfo("Howlpack Wolf", 162, Rarity.COMMON, mage.cards.h.HowlpackWolf.class));
         cards.add(new SetCardInfo("Humble the Brute", 34, Rarity.UNCOMMON, mage.cards.h.HumbleTheBrute.class));
@@ -323,7 +322,6 @@ public class ShadowsOverInnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Voracious Reader", 58, Rarity.UNCOMMON, mage.cards.v.VoraciousReader.class));
         cards.add(new SetCardInfo("Weirded Vampire", 139, Rarity.COMMON, mage.cards.w.WeirdedVampire.class));
         cards.add(new SetCardInfo("Weirding Wood", 226, Rarity.COMMON, mage.cards.w.WeirdingWood.class));
-        cards.add(new SetCardInfo("Werewolf of Ancient Hunger", 211, Rarity.RARE, mage.cards.w.WerewolfOfAncientHunger.class));
         cards.add(new SetCardInfo("Westvale Abbey", 275, Rarity.RARE, mage.cards.w.WestvaleAbbey.class));
         cards.add(new SetCardInfo("Wharf Infiltrator", 96, Rarity.RARE, mage.cards.w.WharfInfiltrator.class));
         cards.add(new SetCardInfo("Wild-Field Scarecrow", 263, Rarity.COMMON, mage.cards.w.WildFieldScarecrow.class));

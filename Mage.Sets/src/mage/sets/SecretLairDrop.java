@@ -1461,7 +1461,6 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Time Stop", "1500*", Rarity.RARE, mage.cards.t.TimeStop.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Lara Croft, Tomb Raider", 1501, Rarity.MYTHIC, mage.cards.l.LaraCroftTombRaider.class));
         cards.add(new SetCardInfo("Search for Azcanta", 1502, Rarity.RARE, mage.cards.s.SearchForAzcanta.class));
-        cards.add(new SetCardInfo("Azcanta, the Sunken Ruin", 1502, Rarity.RARE, mage.cards.a.AzcantaTheSunkenRuin.class));
         cards.add(new SetCardInfo("Anger of the Gods", 1503, Rarity.RARE, mage.cards.a.AngerOfTheGods.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bow of Nylea", 1504, Rarity.RARE, mage.cards.b.BowOfNylea.class));
         cards.add(new SetCardInfo("Shadowspear", 1505, Rarity.RARE, mage.cards.s.Shadowspear.class));

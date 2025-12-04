@@ -174,7 +174,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Ashiok, Dream Render", 72259, Rarity.UNCOMMON, mage.cards.a.AshiokDreamRender.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ashiok, Dream Render", 77993, Rarity.UNCOMMON, mage.cards.a.AshiokDreamRender.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ashiok, Nightmare Muse", 79847, Rarity.MYTHIC, mage.cards.a.AshiokNightmareMuse.class));
-        cards.add(new SetCardInfo("Ashmouth Dragon", 94012, Rarity.RARE, mage.cards.a.AshmouthDragon.class));
         cards.add(new SetCardInfo("Ashnod the Uncaring", 105806, Rarity.MYTHIC, mage.cards.a.AshnodTheUncaring.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ashnod the Uncaring", 105808, Rarity.MYTHIC, mage.cards.a.AshnodTheUncaring.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Ashnod, Flesh Mechanist", 105688, Rarity.RARE, mage.cards.a.AshnodFleshMechanist.class));

@@ -261,7 +261,6 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Marauding Brinefang", 64, Rarity.COMMON, mage.cards.m.MaraudingBrinefang.class));
         cards.add(new SetCardInfo("Market Gnome", 22, Rarity.UNCOMMON, mage.cards.m.MarketGnome.class));
         cards.add(new SetCardInfo("Master's Guide-Mural", 233, Rarity.UNCOMMON, mage.cards.m.MastersGuideMural.class));
-        cards.add(new SetCardInfo("Mastercraft Raptor", 164, Rarity.UNCOMMON, mage.cards.m.MastercraftRaptor.class));
         cards.add(new SetCardInfo("Matzalantli, the Great Door", 256, Rarity.RARE, mage.cards.m.MatzalantliTheGreatDoor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Matzalantli, the Great Door", 387, Rarity.RARE, mage.cards.m.MatzalantliTheGreatDoor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mephitic Draught", 112, Rarity.COMMON, mage.cards.m.MephiticDraught.class));
@@ -387,7 +386,6 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Stinging Cave Crawler", 124, Rarity.UNCOMMON, mage.cards.s.StingingCaveCrawler.class));
         cards.add(new SetCardInfo("Subterranean Schooner", 365, Rarity.RARE, mage.cards.s.SubterraneanSchooner.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Subterranean Schooner", 80, Rarity.RARE, mage.cards.s.SubterraneanSchooner.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Sunbird Effigy", 262, Rarity.UNCOMMON, mage.cards.s.SunbirdEffigy.class));
         cards.add(new SetCardInfo("Sunbird Standard", 262, Rarity.UNCOMMON, mage.cards.s.SunbirdStandard.class));
         cards.add(new SetCardInfo("Sunfire Torch", 167, Rarity.COMMON, mage.cards.s.SunfireTorch.class));
         cards.add(new SetCardInfo("Sunken Citadel", 285, Rarity.RARE, mage.cards.s.SunkenCitadel.class, NON_FULL_USE_VARIOUS));

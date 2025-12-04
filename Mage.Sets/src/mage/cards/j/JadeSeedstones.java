@@ -8,6 +8,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.counter.DistributeCountersEffect;
 import mage.abilities.keyword.CraftAbility;
+import mage.cards.Card;
 import mage.cards.CardSetInfo;
 import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
@@ -66,9 +67,15 @@ enum JadeheartAttendantValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        Card sourceCard = game.getCard(sourceAbility.getSourceId());
+        if (sourceCard == null) {
+            return 0;
+        }
         ExileZone exileZone = game
                 .getExile()
-                .getExileZone(CardUtil.getExileZoneId(game, sourceAbility, -2));
+                .getExileZone(CardUtil.getExileZoneId(game,
+                        sourceCard.getMainCard().getMainCard().getId(),
+                        sourceCard.getMainCard().getZoneChangeCounter(game) - 1));
         return exileZone != null
                 ? exileZone
                 .getCards(game)

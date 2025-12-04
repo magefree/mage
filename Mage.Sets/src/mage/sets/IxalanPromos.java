@@ -28,7 +28,6 @@ public class IxalanPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Ashes of the Abhorrent", "2p", Rarity.RARE, mage.cards.a.AshesOfTheAbhorrent.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ashes of the Abhorrent", "2s", Rarity.RARE, mage.cards.a.AshesOfTheAbhorrent.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Axis of Mortality", "3s", Rarity.MYTHIC, mage.cards.a.AxisOfMortality.class));
-        cards.add(new SetCardInfo("Azcanta, the Sunken Ruin", "74s", Rarity.RARE, mage.cards.a.AzcantaTheSunkenRuin.class));
         cards.add(new SetCardInfo("Bishop of Rebirth", 5, Rarity.RARE, mage.cards.b.BishopOfRebirth.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bishop of Rebirth", "5s", Rarity.RARE, mage.cards.b.BishopOfRebirth.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloodcrazed Paladin", "93s", Rarity.RARE, mage.cards.b.BloodcrazedPaladin.class));

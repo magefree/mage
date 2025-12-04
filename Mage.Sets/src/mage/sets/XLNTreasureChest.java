@@ -21,7 +21,6 @@ public class XLNTreasureChest extends ExpansionSet {
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Arguel's Blood Fast", 90, Rarity.RARE, mage.cards.a.ArguelsBloodFast.class));
-        cards.add(new SetCardInfo("Azcanta, the Sunken Ruin", 74, Rarity.RARE, mage.cards.a.AzcantaTheSunkenRuin.class));
         cards.add(new SetCardInfo("Conqueror's Galleon", 234, Rarity.RARE, mage.cards.c.ConquerorsGalleon.class));
         cards.add(new SetCardInfo("Dowsing Dagger", 235, Rarity.RARE, mage.cards.d.DowsingDagger.class));
         cards.add(new SetCardInfo("Growing Rites of Itlimoc", 191, Rarity.RARE, mage.cards.g.GrowingRitesOfItlimoc.class));

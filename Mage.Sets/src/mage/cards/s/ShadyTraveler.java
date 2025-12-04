@@ -1,10 +1,10 @@
 package mage.cards.s;
 
-import mage.MageInt;
 import mage.abilities.keyword.DayboundAbility;
 import mage.abilities.keyword.MenaceAbility;
-import mage.cards.CardImpl;
+import mage.abilities.keyword.NightboundAbility;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
@@ -13,22 +13,32 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class ShadyTraveler extends CardImpl {
+public final class ShadyTraveler extends TransformingDoubleFacedCard {
 
     public ShadyTraveler(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.WEREWOLF}, "{2}{B}",
+                "Stalking Predator",
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.WEREWOLF}, "B"
+        );
 
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.WEREWOLF);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(3);
-        this.secondSideCardClazz = mage.cards.s.StalkingPredator.class;
+        // Shady Traveler
+        this.getLeftHalfCard().setPT(2, 3);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.getLeftHalfCard().addAbility(new MenaceAbility());
 
         // Daybound
-        this.addAbility(new DayboundAbility());
+        this.getLeftHalfCard().addAbility(new DayboundAbility());
+
+        // Stalking Predator
+        this.getRightHalfCard().setPT(4, 4);
+
+        // Menace
+        this.getRightHalfCard().addAbility(new MenaceAbility());
+
+        // Nightbound
+        this.getRightHalfCard().addAbility(new NightboundAbility());
     }
 
     private ShadyTraveler(final ShadyTraveler card) {

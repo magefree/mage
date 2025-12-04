@@ -74,7 +74,6 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Battle Menu", 9, Rarity.UNCOMMON, mage.cards.b.BattleMenu.class));
         cards.add(new SetCardInfo("Beatrix, Loyal General", 426, Rarity.RARE, mage.cards.b.BeatrixLoyalGeneral.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Beatrix, Loyal General", 554, Rarity.RARE, mage.cards.b.BeatrixLoyalGeneral.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Black Chocobo", 201, Rarity.UNCOMMON, mage.cards.b.BlackChocobo.class));
         cards.add(new SetCardInfo("Black Mage's Rod", 90, Rarity.COMMON, mage.cards.b.BlackMagesRod.class));
         cards.add(new SetCardInfo("Black Waltz No. 3", 214, Rarity.UNCOMMON, mage.cards.b.BlackWaltzNo3.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Black Waltz No. 3", 478, Rarity.UNCOMMON, mage.cards.b.BlackWaltzNo3.class, NON_FULL_USE_VARIOUS));
@@ -137,14 +136,11 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Coliseum Behemoth", 181, Rarity.UNCOMMON, mage.cards.c.ColiseumBehemoth.class));
         cards.add(new SetCardInfo("Combat Tutorial", 48, Rarity.COMMON, mage.cards.c.CombatTutorial.class));
         cards.add(new SetCardInfo("Commune with Beavers", 182, Rarity.COMMON, mage.cards.c.CommuneWithBeavers.class));
-        cards.add(new SetCardInfo("Cooking Campsite", 31, Rarity.UNCOMMON, mage.cards.c.CookingCampsite.class));
         cards.add(new SetCardInfo("Coral Sword", 134, Rarity.UNCOMMON, mage.cards.c.CoralSword.class));
         cards.add(new SetCardInfo("Cornered by Black Mages", 93, Rarity.COMMON, mage.cards.c.CorneredByBlackMages.class));
         cards.add(new SetCardInfo("Crossroads Village", 276, Rarity.COMMON, mage.cards.c.CrossroadsVillage.class));
         cards.add(new SetCardInfo("Crystal Fragments", 13, Rarity.UNCOMMON, mage.cards.c.CrystalFragments.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Crystal Fragments", 357, Rarity.UNCOMMON, mage.cards.c.CrystalFragments.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Crystallized Serah", 240, Rarity.RARE, mage.cards.c.CrystallizedSerah.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Crystallized Serah", 506, Rarity.RARE, mage.cards.c.CrystallizedSerah.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dark Confidant", 334, Rarity.MYTHIC, mage.cards.d.DarkConfidant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dark Confidant", 94, Rarity.MYTHIC, mage.cards.d.DarkConfidant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dark Knight's Greatsword", 95, Rarity.UNCOMMON, mage.cards.d.DarkKnightsGreatsword.class));
@@ -316,7 +312,6 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Machinist's Arsenal", 23, Rarity.RARE, mage.cards.m.MachinistsArsenal.class));
         cards.add(new SetCardInfo("Magic Damper", 61, Rarity.COMMON, mage.cards.m.MagicDamper.class));
         cards.add(new SetCardInfo("Magic Pot", 263, Rarity.COMMON, mage.cards.m.MagicPot.class));
-        cards.add(new SetCardInfo("Magicked Card", 73, Rarity.UNCOMMON, mage.cards.m.MagickedCard.class));
         cards.add(new SetCardInfo("Magitek Armor", 24, Rarity.UNCOMMON, mage.cards.m.MagitekArmor.class));
         cards.add(new SetCardInfo("Magitek Infantry", 25, Rarity.COMMON, mage.cards.m.MagitekInfantry.class));
         cards.add(new SetCardInfo("Magitek Scythe", 562, Rarity.RARE, mage.cards.m.MagitekScythe.class));
@@ -425,11 +420,6 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Sephiroth, Fabled SOLDIER", 382, Rarity.MYTHIC, mage.cards.s.SephirothFabledSOLDIER.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sephiroth, Fabled SOLDIER", 451, Rarity.MYTHIC, mage.cards.s.SephirothFabledSOLDIER.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sephiroth, Fabled SOLDIER", 527, Rarity.MYTHIC, mage.cards.s.SephirothFabledSOLDIER.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Sephiroth, One-Winged Angel", 115, Rarity.MYTHIC, mage.cards.s.SephirothOneWingedAngel.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Sephiroth, One-Winged Angel", 317, Rarity.MYTHIC, mage.cards.s.SephirothOneWingedAngel.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Sephiroth, One-Winged Angel", 382, Rarity.MYTHIC, mage.cards.s.SephirothOneWingedAngel.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Sephiroth, One-Winged Angel", 451, Rarity.MYTHIC, mage.cards.s.SephirothOneWingedAngel.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Sephiroth, One-Winged Angel", 527, Rarity.MYTHIC, mage.cards.s.SephirothOneWingedAngel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sephiroth, Planet's Heir", 505, Rarity.MYTHIC, mage.cards.s.SephirothPlanetsHeir.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sephiroth, Planet's Heir", 553, Rarity.MYTHIC, mage.cards.s.SephirothPlanetsHeir.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Serah Farron", 240, Rarity.RARE, mage.cards.s.SerahFarron.class, NON_FULL_USE_VARIOUS));
@@ -615,15 +605,12 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("White Auracite", 579, Rarity.COMMON, mage.cards.w.WhiteAuracite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("White Mage's Staff", 42, Rarity.COMMON, mage.cards.w.WhiteMagesStaff.class));
         cards.add(new SetCardInfo("Windurst, Federation Center", 292, Rarity.COMMON, mage.cards.w.WindurstFederationCenter.class));
-        cards.add(new SetCardInfo("World Champion, Celestial Weapon", 158, Rarity.UNCOMMON, mage.cards.w.WorldChampionCelestialWeapon.class));
         cards.add(new SetCardInfo("World Map", 270, Rarity.COMMON, mage.cards.w.WorldMap.class));
         cards.add(new SetCardInfo("Xande, Dark Mage", 516, Rarity.RARE, mage.cards.x.XandeDarkMage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Xande, Dark Mage", 561, Rarity.RARE, mage.cards.x.XandeDarkMage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Y'shtola Rhul", 443, Rarity.MYTHIC, mage.cards.y.YshtolaRhul.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Y'shtola Rhul", 577, Rarity.MYTHIC, mage.cards.y.YshtolaRhul.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Y'shtola Rhul", 86, Rarity.MYTHIC, mage.cards.y.YshtolaRhul.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Yiazmat, Ultimate Mark", 119, Rarity.UNCOMMON, mage.cards.y.YiazmatUltimateMark.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Yiazmat, Ultimate Mark", 453, Rarity.UNCOMMON, mage.cards.y.YiazmatUltimateMark.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("You're Not Alone", 44, Rarity.COMMON, mage.cards.y.YoureNotAlone.class));
         cards.add(new SetCardInfo("Yuna, Hope of Spira", 250, Rarity.MYTHIC, mage.cards.y.YunaHopeOfSpira.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Yuna, Hope of Spira", 404, Rarity.MYTHIC, mage.cards.y.YunaHopeOfSpira.class, NON_FULL_USE_VARIOUS));

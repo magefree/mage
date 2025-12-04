@@ -229,7 +229,6 @@ public final class RivalsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Twilight Prophet", 88, Rarity.MYTHIC, mage.cards.t.TwilightProphet.class));
         cards.add(new SetCardInfo("Vampire Champion", 198, Rarity.COMMON, mage.cards.v.VampireChampion.class));
         cards.add(new SetCardInfo("Vampire Revenant", 89, Rarity.COMMON, mage.cards.v.VampireRevenant.class));
-        cards.add(new SetCardInfo("Vault of Catlacan", 173, Rarity.RARE, mage.cards.v.VaultOfCatlacan.class));
         cards.add(new SetCardInfo("Vona's Hunger", 90, Rarity.RARE, mage.cards.v.VonasHunger.class));
         cards.add(new SetCardInfo("Voracious Vampire", 91, Rarity.COMMON, mage.cards.v.VoraciousVampire.class));
         cards.add(new SetCardInfo("Vraska, Scheming Gorgon", 197, Rarity.MYTHIC, mage.cards.v.VraskaSchemingGorgon.class));
