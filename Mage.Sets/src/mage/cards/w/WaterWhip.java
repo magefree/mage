@@ -28,7 +28,7 @@ public final class WaterWhip extends CardImpl {
         this.getSpellAbility().addCost(new WaterbendCost(5));
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL, new InfoEffect("as an additional cost to cast this spell, waterbend {5}")
-        ));
+        ).setRuleAtTheTop(true));
 
         // Return up to two target creatures to their owners' hands. Draw two cards.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());

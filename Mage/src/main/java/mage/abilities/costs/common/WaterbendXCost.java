@@ -1,22 +1,23 @@
 package mage.abilities.costs.common;
 
-import mage.abilities.Ability;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.CostImpl;
-import mage.game.Game;
-
-import java.util.UUID;
+import mage.abilities.costs.VariableCostType;
+import mage.abilities.costs.mana.VariableManaCost;
 
 /**
- * TODO: Implement properly
+ * Used for Waterbend {X} costs, otherwise use {@link WaterbendCost}
+ * If using as an additional cost for a spell, add an ability with an InfoEffect for proper text generation (see WaterbendersRestoration)
  *
  * @author TheElk801
  */
-public class WaterbendXCost extends CostImpl {
+public class WaterbendXCost extends VariableManaCost {
 
     public WaterbendXCost() {
-        super();
-        this.text = "waterbend {X}";
+        this(0);
+    }
+
+    public WaterbendXCost(int minX) {
+        super(VariableCostType.NORMAL);
+        this.setMinX(minX);
     }
 
     private WaterbendXCost(final WaterbendXCost cost) {
@@ -29,12 +30,7 @@ public class WaterbendXCost extends CostImpl {
     }
 
     @Override
-    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return false;
-    }
-
-    @Override
-    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
-        return false;
+    public String getText() {
+        return "waterbend {X}";
     }
 }

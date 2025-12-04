@@ -12,6 +12,9 @@ import mage.abilities.costs.mana.GenericManaCost;
  * (usually because the waterbend cost itself is an additional cost), the alternate method to pay for mana
  * described in rule 701.67a may be used only to pay for the amount of generic mana in the waterbend cost,
  * even if the total cost to cast that spell or activate that ability includes other generic mana components.
+ * <p>
+ * If you need Waterbend {X} then use {@link WaterbendXCost}
+ * If using as an additional cost for a spell, add an ability with an InfoEffect for proper text generation (see WaterWhip)
  *
  * @author TheElk801
  */

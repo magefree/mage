@@ -1,11 +1,12 @@
 package mage.cards.f;
 
 import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
-import mage.abilities.costs.common.WaterbendCost;
 import mage.abilities.costs.common.WaterbendXCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.cards.*;
 import mage.constants.CardType;
@@ -35,6 +36,9 @@ public final class FoggySwampVisions extends CardImpl {
 
         // As an additional cost to cast this spell, waterbend {X}.
         this.getSpellAbility().addCost(new WaterbendXCost());
+        this.addAbility(new SimpleStaticAbility(
+                Zone.ALL, new InfoEffect("as an additional cost to cast this spell, waterbend {X}")
+        ).setRuleAtTheTop(true));
 
         // Exile X target creature cards from graveyards. For each creature card exiled this way, create a token that's a copy of it. At the beginning of your next end step, sacrifice those tokens.
         this.getSpellAbility().addEffect(new FoggySwampVisionsEffect());

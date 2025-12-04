@@ -33,7 +33,7 @@ public final class BenevolentRiverSpirit extends CardImpl {
         this.getSpellAbility().addCost(new WaterbendCost(5));
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL, new InfoEffect("as an additional cost to cast this spell, waterbend {5}")
-        ));
+        ).setRuleAtTheTop(true));
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());

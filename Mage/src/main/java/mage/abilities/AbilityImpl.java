@@ -8,6 +8,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.costs.*;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.common.WaterbendCost;
+import mage.abilities.costs.common.WaterbendXCost;
 import mage.abilities.costs.mana.*;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
@@ -814,54 +815,59 @@ public abstract class AbilityImpl implements Ability {
                 }
             }
         }
-        if (variableManaCost != null) {
-            if (!variableManaCost.isPaid()) { // should only happen for human players
-                int xValue;
-                if (!noMana || variableManaCost.getCostType().canUseAnnounceOnFreeCast()) {
-                    if (variableManaCost.wasAnnounced()) {
-                        // announce by rules
-                        xValue = variableManaCost.getAmount();
-                    } else {
-                        // announce by player
-                        xValue = controller.announceX(variableManaCost.getMinX(), variableManaCost.getMaxX(),
-                                "Announce the value for " + variableManaCost.getText(), game, this, true);
-                    }
-
-                    int amountMana = xValue * variableManaCost.getXInstancesCount();
-                    StringBuilder manaString = threadLocalBuilder.get();
-                    if (variableManaCost.getFilter() == null || variableManaCost.getFilter().isGeneric()) {
-                        manaString.append('{').append(amountMana).append('}');
-                    } else {
-                        String manaSymbol = null;
-                        if (variableManaCost.getFilter().isBlack()) {
-                            if (variableManaCost.getFilter().isRed()) {
-                                manaSymbol = "B/R";
-                            } else {
-                                manaSymbol = "B";
-                            }
-                        } else if (variableManaCost.getFilter().isRed()) {
-                            manaSymbol = "R";
-                        } else if (variableManaCost.getFilter().isBlue()) {
-                            manaSymbol = "U";
-                        } else if (variableManaCost.getFilter().isGreen()) {
-                            manaSymbol = "G";
-                        } else if (variableManaCost.getFilter().isWhite()) {
-                            manaSymbol = "W";
-                        }
-                        if (manaSymbol == null) {
-                            throw new UnsupportedOperationException("ManaFilter is not supported: " + this);
-                        }
-                        for (int i = 0; i < amountMana; i++) {
-                            manaString.append('{').append(manaSymbol).append('}');
-                        }
-                    }
-                    addManaCostsToPay(new ManaCostsImpl<>(manaString.toString()));
-                    getManaCostsToPay().setX(xValue, amountMana);
-                    setCostsTag("X", xValue);
-                }
-                variableManaCost.setPaid();
-            }
+        if (variableManaCost == null) {
+            return variableManaCost;
         }
+        if (variableManaCost.isPaid()) {
+            return variableManaCost;
+        } // should only happen for human players
+        int xValue;
+        if (!noMana || variableManaCost.getCostType().canUseAnnounceOnFreeCast()) {
+            if (variableManaCost.wasAnnounced()) {
+                // announce by rules
+                xValue = variableManaCost.getAmount();
+            } else {
+                // announce by player
+                xValue = controller.announceX(variableManaCost.getMinX(), variableManaCost.getMaxX(),
+                        "Announce the value for " + variableManaCost.getText(), game, this, true);
+            }
+
+            int amountMana = xValue * variableManaCost.getXInstancesCount();
+            StringBuilder manaString = threadLocalBuilder.get();
+            if (!(variableManaCost instanceof WaterbendXCost)) {
+                if (variableManaCost.getFilter() == null || variableManaCost.getFilter().isGeneric()) {
+                    manaString.append('{').append(amountMana).append('}');
+                } else {
+                    String manaSymbol;
+                    if (variableManaCost.getFilter().isBlack()) {
+                        if (variableManaCost.getFilter().isRed()) {
+                            manaSymbol = "B/R";
+                        } else {
+                            manaSymbol = "B";
+                        }
+                    } else if (variableManaCost.getFilter().isRed()) {
+                        manaSymbol = "R";
+                    } else if (variableManaCost.getFilter().isBlue()) {
+                        manaSymbol = "U";
+                    } else if (variableManaCost.getFilter().isGreen()) {
+                        manaSymbol = "G";
+                    } else if (variableManaCost.getFilter().isWhite()) {
+                        manaSymbol = "W";
+                    } else {
+                        throw new UnsupportedOperationException("ManaFilter is not supported: " + this);
+                    }
+                    for (int i = 0; i < amountMana; i++) {
+                        manaString.append('{').append(manaSymbol).append('}');
+                    }
+                }
+                addManaCostsToPay(new ManaCostsImpl<>(manaString.toString()));
+            } else {
+                addManaCostsToPay(new WaterbendCost(amountMana));
+            }
+            getManaCostsToPay().setX(xValue, amountMana);
+            setCostsTag("X", xValue);
+        }
+        variableManaCost.setPaid();
 
         return variableManaCost;
     }
