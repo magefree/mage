@@ -5,8 +5,6 @@ import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.DoubleFacedCardHalf;
 import mage.constants.Outcome;
 import mage.constants.Pronoun;
 import mage.constants.PutCards;
@@ -76,15 +74,7 @@ public class ExileAndReturnSourceEffect extends OneShotEffect {
                 returnUnderYourControl ? controller : game.getPlayer(permanent.getOwnerId()),
                 permanent.getMainCard(), source, game, "card"
         );
-        Permanent newPermanent = game.getPermanent(permanent.getId());
-        if (newPermanent == null) {
-            // check if permanent returned with a new face (e.g., transform)
-            Card card = game.getCard(permanent.getId());
-            if (card instanceof DoubleFacedCardHalf) {
-                newPermanent = game.getPermanent(((DoubleFacedCardHalf) card).getOtherSide().getId());
-            }
-        }
-        if (additionalEffect == null || newPermanent == null) {
+        if (additionalEffect == null || !game.getState().getZone(permanent.getMainCard().getId()).equals(Zone.BATTLEFIELD)) {
             return true;
         }
         if (additionalEffect instanceof ContinuousEffect) {
