@@ -198,10 +198,6 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Gaelicat", 22, Rarity.COMMON, mage.cards.g.Gaelicat.class));
         cards.add(new SetCardInfo("Gaius van Baelsar", 102, Rarity.UNCOMMON, mage.cards.g.GaiusVanBaelsar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gaius van Baelsar", 447, Rarity.UNCOMMON, mage.cards.g.GaiusVanBaelsar.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Galian Beast", 125, Rarity.RARE, mage.cards.g.GalianBeast.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Galian Beast", 383, Rarity.RARE, mage.cards.g.GalianBeast.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Galian Beast", 454, Rarity.RARE, mage.cards.g.GalianBeast.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Galian Beast", 528, Rarity.RARE, mage.cards.g.GalianBeast.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Galuf's Final Act", 186, Rarity.UNCOMMON, mage.cards.g.GalufsFinalAct.class));
         cards.add(new SetCardInfo("Garland, Knight of Cornelia", 221, Rarity.UNCOMMON, mage.cards.g.GarlandKnightOfCornelia.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Garland, Knight of Cornelia", 486, Rarity.UNCOMMON, mage.cards.g.GarlandKnightOfCornelia.class, NON_FULL_USE_VARIOUS));
@@ -237,9 +233,6 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Hope Estheim", 396, Rarity.RARE, mage.cards.h.HopeEstheim.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hope Estheim", 491, Rarity.RARE, mage.cards.h.HopeEstheim.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hope Estheim", 541, Rarity.RARE, mage.cards.h.HopeEstheim.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Hydaelyn, the Mothercrystal", 329, Rarity.RARE, mage.cards.h.HydaelynTheMothercrystal.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Hydaelyn, the Mothercrystal", 39, Rarity.RARE, mage.cards.h.HydaelynTheMothercrystal.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Hydaelyn, the Mothercrystal", 434, Rarity.RARE, mage.cards.h.HydaelynTheMothercrystal.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ice Flan", 55, Rarity.COMMON, mage.cards.i.IceFlan.class));
         cards.add(new SetCardInfo("Ice Magic", 56, Rarity.COMMON, mage.cards.i.IceMagic.class));
         cards.add(new SetCardInfo("Ignis Scientia", 227, Rarity.UNCOMMON, mage.cards.i.IgnisScientia.class, NON_FULL_USE_VARIOUS));

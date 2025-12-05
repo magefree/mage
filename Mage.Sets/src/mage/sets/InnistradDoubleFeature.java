@@ -69,7 +69,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Blood Pact", 88, Rarity.COMMON, mage.cards.b.BloodPact.class));
         cards.add(new SetCardInfo("Blood Petal Celebrant", 413, Rarity.COMMON, mage.cards.b.BloodPetalCelebrant.class));
         cards.add(new SetCardInfo("Blood Servitor", 519, Rarity.COMMON, mage.cards.b.BloodServitor.class));
-        cards.add(new SetCardInfo("Bloodbat Summoner", 404, Rarity.RARE, mage.cards.b.BloodbatSummoner.class));
         cards.add(new SetCardInfo("Bloodcrazed Socialite", 363, Rarity.COMMON, mage.cards.b.BloodcrazedSocialite.class));
         cards.add(new SetCardInfo("Bloodline Culling", 89, Rarity.RARE, mage.cards.b.BloodlineCulling.class));
         cards.add(new SetCardInfo("Bloodsworn Squire", 364, Rarity.UNCOMMON, mage.cards.b.BloodswornSquire.class));
@@ -164,7 +163,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Devious Cover-Up", 48, Rarity.COMMON, mage.cards.d.DeviousCoverUp.class));
         cards.add(new SetCardInfo("Devoted Grafkeeper", 218, Rarity.UNCOMMON, mage.cards.d.DevotedGrafkeeper.class));
         cards.add(new SetCardInfo("Dig Up", 464, Rarity.RARE, mage.cards.d.DigUp.class));
-        cards.add(new SetCardInfo("Dire-Strain Anarchist", 448, Rarity.MYTHIC, mage.cards.d.DireStrainAnarchist.class));
         cards.add(new SetCardInfo("Dire-Strain Rampage", 219, Rarity.RARE, mage.cards.d.DireStrainRampage.class));
         cards.add(new SetCardInfo("Diregraf Horde", 96, Rarity.COMMON, mage.cards.d.DiregrafHorde.class));
         cards.add(new SetCardInfo("Diregraf Rebirth", 220, Rarity.UNCOMMON, mage.cards.d.DiregrafRebirth.class));
@@ -482,7 +480,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Stormcarved Coast", 532, Rarity.RARE, mage.cards.s.StormcarvedCoast.class));
         cards.add(new SetCardInfo("Stormchaser Drake", 349, Rarity.UNCOMMON, mage.cards.s.StormchaserDrake.class));
         cards.add(new SetCardInfo("Stormrider Spirit", 79, Rarity.COMMON, mage.cards.s.StormriderSpirit.class));
-        cards.add(new SetCardInfo("Strangling Grasp", 126, Rarity.UNCOMMON, mage.cards.s.StranglingGrasp.class));
         cards.add(new SetCardInfo("Stromkirk Bloodthief", 123, Rarity.UNCOMMON, mage.cards.s.StromkirkBloodthief.class));
         cards.add(new SetCardInfo("Stuffed Bear", 259, Rarity.COMMON, mage.cards.s.StuffedBear.class));
         cards.add(new SetCardInfo("Sundown Pass", 533, Rarity.RARE, mage.cards.s.SundownPass.class));
@@ -536,7 +533,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Vanquish the Horde", 41, Rarity.RARE, mage.cards.v.VanquishTheHorde.class));
         cards.add(new SetCardInfo("Vengeful Strangler", 126, Rarity.UNCOMMON, mage.cards.v.VengefulStrangler.class));
         cards.add(new SetCardInfo("Vilespawn Spider", 517, Rarity.UNCOMMON, mage.cards.v.VilespawnSpider.class));
-        cards.add(new SetCardInfo("Village Reavers", 165, Rarity.UNCOMMON, mage.cards.v.VillageReavers.class));
         cards.add(new SetCardInfo("Village Watch", 165, Rarity.UNCOMMON, mage.cards.v.VillageWatch.class));
         cards.add(new SetCardInfo("Vivisection", 83, Rarity.UNCOMMON, mage.cards.v.Vivisection.class));
         cards.add(new SetCardInfo("Voice of the Blessed", 311, Rarity.RARE, mage.cards.v.VoiceOfTheBlessed.class));
@@ -546,7 +542,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Voldaren Epicure", 449, Rarity.COMMON, mage.cards.v.VoldarenEpicure.class));
         cards.add(new SetCardInfo("Voldaren Estate", 534, Rarity.RARE, mage.cards.v.VoldarenEstate.class));
         cards.add(new SetCardInfo("Voldaren Stinger", 167, Rarity.COMMON, mage.cards.v.VoldarenStinger.class));
-        cards.add(new SetCardInfo("Volt-Charged Berserker", 450, Rarity.UNCOMMON, mage.cards.v.VoltChargedBerserker.class));
         cards.add(new SetCardInfo("Voltaic Visionary", 450, Rarity.UNCOMMON, mage.cards.v.VoltaicVisionary.class));
         cards.add(new SetCardInfo("Wake to Slaughter", 250, Rarity.RARE, mage.cards.w.WakeToSlaughter.class));
         cards.add(new SetCardInfo("Wandering Mind", 518, Rarity.UNCOMMON, mage.cards.w.WanderingMind.class));

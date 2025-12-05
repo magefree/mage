@@ -269,7 +269,6 @@ public final class Ixalan extends ExpansionSet {
         cards.add(new SetCardInfo("Spell Pierce", 81, Rarity.COMMON, mage.cards.s.SpellPierce.class));
         cards.add(new SetCardInfo("Spell Swindle", 82, Rarity.RARE, mage.cards.s.SpellSwindle.class));
         cards.add(new SetCardInfo("Spike-Tailed Ceratops", 209, Rarity.COMMON, mage.cards.s.SpikeTailedCeratops.class));
-        cards.add(new SetCardInfo("Spitfire Bastion", 173, Rarity.RARE, mage.cards.s.SpitfireBastion.class));
         cards.add(new SetCardInfo("Spreading Rot", 125, Rarity.COMMON, mage.cards.s.SpreadingRot.class));
         cards.add(new SetCardInfo("Star of Extinction", 161, Rarity.MYTHIC, mage.cards.s.StarOfExtinction.class));
         cards.add(new SetCardInfo("Steadfast Armasaur", 39, Rarity.UNCOMMON, mage.cards.s.SteadfastArmasaur.class));

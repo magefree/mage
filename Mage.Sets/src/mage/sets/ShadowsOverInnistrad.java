@@ -198,7 +198,6 @@ public final class ShadowsOverInnistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Mindwrack Demon", 124, Rarity.MYTHIC, mage.cards.m.MindwrackDemon.class));
         cards.add(new SetCardInfo("Moldgraf Scavenger", 218, Rarity.COMMON, mage.cards.m.MoldgrafScavenger.class));
         cards.add(new SetCardInfo("Moonlight Hunt", 219, Rarity.UNCOMMON, mage.cards.m.MoonlightHunt.class));
-        cards.add(new SetCardInfo("Moonrise Intruder", 190, Rarity.UNCOMMON, mage.cards.m.MoonriseIntruder.class));
         cards.add(new SetCardInfo("Moorland Drifter", 27, Rarity.COMMON, mage.cards.m.MoorlandDrifter.class));
         cards.add(new SetCardInfo("Morkrut Necropod", 125, Rarity.UNCOMMON, mage.cards.m.MorkrutNecropod.class));
         cards.add(new SetCardInfo("Mountain", 292, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));

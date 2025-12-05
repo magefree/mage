@@ -659,7 +659,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Dimir Guildmage", 32579, Rarity.UNCOMMON, mage.cards.d.DimirGuildmage.class));
         cards.add(new SetCardInfo("Dimir Signet", 46924, Rarity.UNCOMMON, mage.cards.d.DimirSignet.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dimir Signet", 62435, Rarity.COMMON, mage.cards.d.DimirSignet.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Dire-Strain Anarchist", 95397, Rarity.MYTHIC, mage.cards.d.DireStrainAnarchist.class));
         cards.add(new SetCardInfo("Dire-Strain Rampage", 94070, Rarity.RARE, mage.cards.d.DireStrainRampage.class));
         cards.add(new SetCardInfo("Diregraf Ghoul", 42882, Rarity.UNCOMMON, mage.cards.d.DiregrafGhoul.class));
         cards.add(new SetCardInfo("Dirge Bat", 80935, Rarity.RARE, mage.cards.d.DirgeBat.class, NON_FULL_USE_VARIOUS));

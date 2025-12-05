@@ -70,9 +70,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Blood Petal Celebrant", 146, Rarity.COMMON, mage.cards.b.BloodPetalCelebrant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Blood Petal Celebrant", 303, Rarity.COMMON, mage.cards.b.BloodPetalCelebrant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Blood Servitor", 252, Rarity.COMMON, mage.cards.b.BloodServitor.class));
-        cards.add(new SetCardInfo("Bloodbat Summoner", 137, Rarity.RARE, mage.cards.b.BloodbatSummoner.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Bloodbat Summoner", 298, Rarity.RARE, mage.cards.b.BloodbatSummoner.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Bloodbat Summoner", 338, Rarity.RARE, mage.cards.b.BloodbatSummoner.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloodcrazed Socialite", 288, Rarity.COMMON, mage.cards.b.BloodcrazedSocialite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloodcrazed Socialite", 96, Rarity.COMMON, mage.cards.b.BloodcrazedSocialite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloodsworn Squire", 289, Rarity.UNCOMMON, mage.cards.b.BloodswornSquire.class, NON_FULL_USE_VARIOUS));
@@ -138,8 +135,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Desperate Farmer", 104, Rarity.COMMON, mage.cards.d.DesperateFarmer.class));
         cards.add(new SetCardInfo("Dig Up", 197, Rarity.RARE, mage.cards.d.DigUp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dig Up", 387, Rarity.RARE, mage.cards.d.DigUp.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Dire-Strain Anarchist", 181, Rarity.MYTHIC, mage.cards.d.DireStrainAnarchist.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Dire-Strain Anarchist", 382, Rarity.MYTHIC, mage.cards.d.DireStrainAnarchist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Diregraf Scavenger", 105, Rarity.COMMON, mage.cards.d.DiregrafScavenger.class));
         cards.add(new SetCardInfo("Distracting Geist", 9, Rarity.UNCOMMON, mage.cards.d.DistractingGeist.class));
         cards.add(new SetCardInfo("Diver Skaab", 56, Rarity.UNCOMMON, mage.cards.d.DiverSkaab.class));
@@ -436,7 +431,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Voldaren Estate", 267, Rarity.RARE, mage.cards.v.VoldarenEstate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Voldaren Estate", 397, Rarity.RARE, mage.cards.v.VoldarenEstate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Voldaren Estate", 403, Rarity.RARE, mage.cards.v.VoldarenEstate.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Volt-Charged Berserker", 183, Rarity.UNCOMMON, mage.cards.v.VoltChargedBerserker.class));
         cards.add(new SetCardInfo("Voltaic Visionary", 183, Rarity.UNCOMMON, mage.cards.v.VoltaicVisionary.class));
         cards.add(new SetCardInfo("Wandering Mind", 251, Rarity.UNCOMMON, mage.cards.w.WanderingMind.class));
         cards.add(new SetCardInfo("Wanderlight Spirit", 86, Rarity.COMMON, mage.cards.w.WanderlightSpirit.class));

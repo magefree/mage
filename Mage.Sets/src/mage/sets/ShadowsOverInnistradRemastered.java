@@ -25,7 +25,6 @@ public class ShadowsOverInnistradRemastered extends ExpansionSet {
         // TODO: implement special slot with x1 card from SIS - Shadows of the Past
         //  https://mtg.fandom.com/wiki/Shadows_over_Innistrad_Remastered/Shadows_of_the_Past
 
-        cards.add(new SetCardInfo("Abolisher of Bloodlines", 138, Rarity.RARE, mage.cards.a.AbolisherOfBloodlines.class));
         cards.add(new SetCardInfo("Abundant Maw", 1, Rarity.UNCOMMON, mage.cards.a.AbundantMaw.class));
         cards.add(new SetCardInfo("Accursed Witch", 97, Rarity.UNCOMMON, mage.cards.a.AccursedWitch.class));
         cards.add(new SetCardInfo("Advanced Stitchwing", 54, Rarity.UNCOMMON, mage.cards.a.AdvancedStitchwing.class));
@@ -207,7 +206,6 @@ public class ShadowsOverInnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Mirrorwing Dragon", 170, Rarity.MYTHIC, mage.cards.m.MirrorwingDragon.class));
         cards.add(new SetCardInfo("Mockery of Nature", 8, Rarity.UNCOMMON, mage.cards.m.MockeryOfNature.class));
         cards.add(new SetCardInfo("Moonlight Hunt", 205, Rarity.COMMON, mage.cards.m.MoonlightHunt.class));
-        cards.add(new SetCardInfo("Moonrise Intruder", 184, Rarity.UNCOMMON, mage.cards.m.MoonriseIntruder.class));
         cards.add(new SetCardInfo("Morkrut Necropod", 125, Rarity.COMMON, mage.cards.m.MorkrutNecropod.class));
         cards.add(new SetCardInfo("Mountain", 286, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 287, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
