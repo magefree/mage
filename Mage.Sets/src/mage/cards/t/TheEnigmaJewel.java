@@ -114,9 +114,8 @@ class LocusOfEnlightenmentEffect extends ContinuousEffectImpl {
         }
         ExileZone exileZone = game
                 .getExile()
-                .getExileZone(CardUtil.getExileZoneId(
-                        game, permanent.getId(), permanent.getZoneChangeCounter(game) - 2
-                ));
+                .getExileZone(CardUtil.getExileZoneId(game, permanent.getMainCard().getId(),
+                        permanent.getMainCard().getZoneChangeCounter(game) - 1));
         if (exileZone == null) {
             return false;
         }
