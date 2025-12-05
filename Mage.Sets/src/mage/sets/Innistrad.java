@@ -222,7 +222,6 @@ public final class Innistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Rage Thrower", 157, Rarity.UNCOMMON, mage.cards.r.RageThrower.class));
         cards.add(new SetCardInfo("Rakish Heir", 158, Rarity.UNCOMMON, mage.cards.r.RakishHeir.class));
         cards.add(new SetCardInfo("Rally the Peasants", 28, Rarity.UNCOMMON, mage.cards.r.RallyThePeasants.class));
-        cards.add(new SetCardInfo("Rampaging Werewolf", 165, Rarity.COMMON, mage.cards.r.RampagingWerewolf.class));
         cards.add(new SetCardInfo("Ranger's Guile", 201, Rarity.COMMON, mage.cards.r.RangersGuile.class));
         cards.add(new SetCardInfo("Reaper from the Abyss", 112, Rarity.MYTHIC, mage.cards.r.ReaperFromTheAbyss.class));
         cards.add(new SetCardInfo("Rebuke", 29, Rarity.COMMON, mage.cards.r.Rebuke.class));
@@ -271,7 +270,6 @@ public final class Innistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 257, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 258, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Think Twice", 83, Rarity.COMMON, mage.cards.t.ThinkTwice.class));
-        cards.add(new SetCardInfo("Thraben Militia", 38, Rarity.COMMON, mage.cards.t.ThrabenMilitia.class));
         cards.add(new SetCardInfo("Thraben Purebloods", 37, Rarity.COMMON, mage.cards.t.ThrabenPurebloods.class));
         cards.add(new SetCardInfo("Thraben Sentry", 38, Rarity.COMMON, mage.cards.t.ThrabenSentry.class));
         cards.add(new SetCardInfo("Tormented Pariah", 165, Rarity.COMMON, mage.cards.t.TormentedPariah.class));

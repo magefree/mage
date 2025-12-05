@@ -53,7 +53,6 @@ public final class ShadowsOverInnistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Autumnal Gloom", 194, Rarity.UNCOMMON, mage.cards.a.AutumnalGloom.class));
         cards.add(new SetCardInfo("Avacyn's Judgment", 145, Rarity.RARE, mage.cards.a.AvacynsJudgment.class));
         cards.add(new SetCardInfo("Avacynian Missionaries", 6, Rarity.UNCOMMON, mage.cards.a.AvacynianMissionaries.class));
-        cards.add(new SetCardInfo("Awoken Horror", 92, Rarity.RARE, mage.cards.a.AwokenHorror.class));
         cards.add(new SetCardInfo("Behind the Scenes", 100, Rarity.UNCOMMON, mage.cards.b.BehindTheScenes.class));
         cards.add(new SetCardInfo("Behold the Beyond", 101, Rarity.MYTHIC, mage.cards.b.BeholdTheBeyond.class));
         cards.add(new SetCardInfo("Biting Rain", 102, Rarity.UNCOMMON, mage.cards.b.BitingRain.class));
@@ -162,7 +161,6 @@ public final class ShadowsOverInnistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Howlpack Wolf", 164, Rarity.COMMON, mage.cards.h.HowlpackWolf.class));
         cards.add(new SetCardInfo("Hulking Devil", 165, Rarity.COMMON, mage.cards.h.HulkingDevil.class));
         cards.add(new SetCardInfo("Humble the Brute", 23, Rarity.UNCOMMON, mage.cards.h.HumbleTheBrute.class));
-        cards.add(new SetCardInfo("Incited Rabble", 46, Rarity.UNCOMMON, mage.cards.i.IncitedRabble.class));
         cards.add(new SetCardInfo("Incorrigible Youths", 166, Rarity.UNCOMMON, mage.cards.i.IncorrigibleYouths.class));
         cards.add(new SetCardInfo("Indulgent Aristocrat", 118, Rarity.UNCOMMON, mage.cards.i.IndulgentAristocrat.class));
         cards.add(new SetCardInfo("Inexorable Blob", 212, Rarity.RARE, mage.cards.i.InexorableBlob.class));
@@ -286,7 +284,6 @@ public final class ShadowsOverInnistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Stitchwing Skaab", 90, Rarity.UNCOMMON, mage.cards.s.StitchwingSkaab.class));
         cards.add(new SetCardInfo("Stoic Builder", 231, Rarity.COMMON, mage.cards.s.StoicBuilder.class));
         cards.add(new SetCardInfo("Stone Quarry", 279, Rarity.UNCOMMON, mage.cards.s.StoneQuarry.class));
-        cards.add(new SetCardInfo("Stonewing Antagonizer", 266, Rarity.UNCOMMON, mage.cards.s.StonewingAntagonizer.class));
         cards.add(new SetCardInfo("Stormrider Spirit", 91, Rarity.COMMON, mage.cards.s.StormriderSpirit.class));
         cards.add(new SetCardInfo("Strength of Arms", 40, Rarity.COMMON, mage.cards.s.StrengthOfArms.class));
         cards.add(new SetCardInfo("Stromkirk Mentor", 137, Rarity.COMMON, mage.cards.s.StromkirkMentor.class));

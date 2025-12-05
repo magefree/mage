@@ -1,18 +1,22 @@
 package mage.cards.t;
 
 import mage.abilities.Ability;
+import mage.abilities.common.CastSecondSpellTriggeredAbility;
 import mage.abilities.common.SagaAbility;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.ExileSagaAndReturnTransformedEffect;
-import mage.abilities.keyword.TransformAbility;
-import mage.cards.CardImpl;
+import mage.abilities.effects.keyword.AirbendTargetEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
@@ -29,23 +33,31 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class TheLegendOfYangchen extends CardImpl {
+public final class TheLegendOfYangchen extends TransformingDoubleFacedCard {
+
+    private static final FilterPermanent filter = new FilterNonlandPermanent("other target nonland permanent");
+
+    static {
+        filter.add(AnotherPredicate.instance);
+    }
 
     public TheLegendOfYangchen(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{W}");
+        super(ownerId, setInfo,
+                new SuperType[]{}, new CardType[]{CardType.ENCHANTMENT}, new SubType[]{SubType.SAGA}, "{3}{W}{W}",
+                "Avatar Yangchen",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.AVATAR}, ""
+        );
 
-        this.subtype.add(SubType.SAGA);
-        this.secondSideCardClazz = mage.cards.a.AvatarYangchen.class;
-
+        // The Legend of Yangchen
         // (As this Saga enters and after your draw step, add a lore counter.)
-        SagaAbility sagaAbility = new SagaAbility(this);
+        SagaAbility sagaAbility = new SagaAbility(this.getLeftHalfCard());
 
         // I -- Starting with you, each player chooses up to one permanent with mana value 3 or greater from among permanents your opponents control. Exile those permanents.
-        sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, new TheLegendOfYangchenEffect());
+        sagaAbility.addChapterEffect(this.getLeftHalfCard(), SagaChapter.CHAPTER_I, new TheLegendOfYangchenEffect());
 
         // II -- You may have target opponent draw three cards. If you do, draw three cards.
         sagaAbility.addChapterEffect(
-                this, SagaChapter.CHAPTER_II, SagaChapter.CHAPTER_II,
+                this.getLeftHalfCard(), SagaChapter.CHAPTER_II, SagaChapter.CHAPTER_II,
                 new Effects(
                         new DrawCardTargetEffect(3).setText("have target opponent draw three cards. If you do"),
                         new DrawCardSourceControllerEffect(3).concatBy(",")
@@ -53,9 +65,19 @@ public final class TheLegendOfYangchen extends CardImpl {
         );
 
         // III -- Exile this Saga, then return it to the battlefield transformed under your control.
-        this.addAbility(new TransformAbility());
-        sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III, new ExileSagaAndReturnTransformedEffect());
-        this.addAbility(sagaAbility);
+        sagaAbility.addChapterEffect(this.getLeftHalfCard(), SagaChapter.CHAPTER_III, new ExileSagaAndReturnTransformedEffect());
+        this.getLeftHalfCard().addAbility(sagaAbility);
+
+        // Avatar Yangchen
+        this.getRightHalfCard().setPT(4, 5);
+
+        // Flying
+        this.getRightHalfCard().addAbility(FlyingAbility.getInstance());
+
+        // Whenever you cast your second spell each turn, airbend up to one other target nonland permanent.
+        Ability ability = new CastSecondSpellTriggeredAbility(new AirbendTargetEffect());
+        ability.addTarget(new TargetPermanent(0, 1, filter));
+        this.getRightHalfCard().addAbility(ability);
     }
 
     private TheLegendOfYangchen(final TheLegendOfYangchen card) {

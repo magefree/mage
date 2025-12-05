@@ -1606,7 +1606,6 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Howl of the Night Pack", 1610, Rarity.RARE, mage.cards.h.HowlOfTheNightPack.class));
         cards.add(new SetCardInfo("Second Harvest", 1611, Rarity.RARE, mage.cards.s.SecondHarvest.class));
         cards.add(new SetCardInfo("Tovolar, Dire Overlord", 1612, Rarity.RARE, mage.cards.t.TovolarDireOverlord.class));
-        cards.add(new SetCardInfo("Tovolar, the Midnight Scourge", 1612, Rarity.RARE, mage.cards.t.TovolarTheMidnightScourge.class));
         cards.add(new SetCardInfo("Brash Taunter", 1614, Rarity.RARE, mage.cards.b.BrashTaunter.class));
         cards.add(new SetCardInfo("Goblin Chieftain", 1615, Rarity.RARE, mage.cards.g.GoblinChieftain.class));
         cards.add(new SetCardInfo("Goblin Ringleader", 1616, Rarity.RARE, mage.cards.g.GoblinRingleader.class));

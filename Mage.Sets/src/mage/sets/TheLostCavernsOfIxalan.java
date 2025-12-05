@@ -62,8 +62,6 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Another Chance", 90, Rarity.COMMON, mage.cards.a.AnotherChance.class));
         cards.add(new SetCardInfo("Armored Kincaller", 174, Rarity.COMMON, mage.cards.a.ArmoredKincaller.class));
         cards.add(new SetCardInfo("Attentive Sunscribe", 4, Rarity.COMMON, mage.cards.a.AttentiveSunscribe.class));
-        cards.add(new SetCardInfo("Barracks of the Thousand", 357, Rarity.RARE, mage.cards.b.BarracksOfTheThousand.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Barracks of the Thousand", 39, Rarity.RARE, mage.cards.b.BarracksOfTheThousand.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bartolome del Presidio", 224, Rarity.UNCOMMON, mage.cards.b.BartolomeDelPresidio.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bartolome del Presidio", 301, Rarity.UNCOMMON, mage.cards.b.BartolomeDelPresidio.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bartolome del Presidio", 409, Rarity.UNCOMMON, mage.cards.b.BartolomeDelPresidio.class, NON_FULL_USE_VARIOUS));
@@ -123,7 +121,6 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Colossadactyl", 180, Rarity.UNCOMMON, mage.cards.c.Colossadactyl.class));
         cards.add(new SetCardInfo("Compass Gnome", 250, Rarity.COMMON, mage.cards.c.CompassGnome.class));
         cards.add(new SetCardInfo("Confounding Riddle", 50, Rarity.UNCOMMON, mage.cards.c.ConfoundingRiddle.class));
-        cards.add(new SetCardInfo("Consuming Sepulcher", 128, Rarity.COMMON, mage.cards.c.ConsumingSepulcher.class));
         cards.add(new SetCardInfo("Contested Game Ball", 251, Rarity.UNCOMMON, mage.cards.c.ContestedGameBall.class));
         cards.add(new SetCardInfo("Corpses of the Lost", 366, Rarity.RARE, mage.cards.c.CorpsesOfTheLost.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Corpses of the Lost", 98, Rarity.RARE, mage.cards.c.CorpsesOfTheLost.class, NON_FULL_USE_VARIOUS));
@@ -245,8 +242,6 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Kutzil's Flanker", 355, Rarity.RARE, mage.cards.k.KutzilsFlanker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kutzil, Malamet Exemplar", 232, Rarity.UNCOMMON, mage.cards.k.KutzilMalametExemplar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kutzil, Malamet Exemplar", 304, Rarity.UNCOMMON, mage.cards.k.KutzilMalametExemplar.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Locus of Enlightenment", 362, Rarity.MYTHIC, mage.cards.l.LocusOfEnlightenment.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Locus of Enlightenment", 55, Rarity.MYTHIC, mage.cards.l.LocusOfEnlightenment.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lodestone Needle", 62, Rarity.UNCOMMON, mage.cards.l.LodestoneNeedle.class));
         cards.add(new SetCardInfo("Magmatic Galleon", 157, Rarity.RARE, mage.cards.m.MagmaticGalleon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Magmatic Galleon", 376, Rarity.RARE, mage.cards.m.MagmaticGalleon.class, NON_FULL_USE_VARIOUS));
@@ -274,7 +269,6 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 290, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_UST_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 399, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 400, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Mycoid Maze", 217, Rarity.UNCOMMON, mage.cards.m.MycoidMaze.class));
         cards.add(new SetCardInfo("Nicanzil, Current Conductor", 236, Rarity.UNCOMMON, mage.cards.n.NicanzilCurrentConductor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nicanzil, Current Conductor", 306, Rarity.UNCOMMON, mage.cards.n.NicanzilCurrentConductor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nurturing Bristleback", 203, Rarity.COMMON, mage.cards.n.NurturingBristleback.class));
@@ -412,18 +406,12 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("The Enigma Jewel", 55, Rarity.MYTHIC, mage.cards.t.TheEnigmaJewel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Everflowing Well", 363, Rarity.RARE, mage.cards.t.TheEverflowingWell.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Everflowing Well", 56, Rarity.RARE, mage.cards.t.TheEverflowingWell.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("The Grim Captain", 266, Rarity.RARE, mage.cards.t.TheGrimCaptain.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("The Grim Captain", 313, Rarity.RARE, mage.cards.t.TheGrimCaptain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Millennium Calendar", 257, Rarity.MYTHIC, mage.cards.t.TheMillenniumCalendar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Millennium Calendar", 388, Rarity.MYTHIC, mage.cards.t.TheMillenniumCalendar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Mycotyrant", 235, Rarity.MYTHIC, mage.cards.t.TheMycotyrant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Mycotyrant", 305, Rarity.MYTHIC, mage.cards.t.TheMycotyrant.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("The Myriad Pools", 363, Rarity.RARE, mage.cards.t.TheMyriadPools.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("The Myriad Pools", 56, Rarity.RARE, mage.cards.t.TheMyriadPools.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Skullspore Nexus", 212, Rarity.MYTHIC, mage.cards.t.TheSkullsporeNexus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Skullspore Nexus", 340, Rarity.MYTHIC, mage.cards.t.TheSkullsporeNexus.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("The Tomb of Aclazotz", 126, Rarity.RARE, mage.cards.t.TheTombOfAclazotz.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("The Tomb of Aclazotz", 371, Rarity.RARE, mage.cards.t.TheTombOfAclazotz.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thousand Moons Crackshot", 37, Rarity.COMMON, mage.cards.t.ThousandMoonsCrackshot.class));
         cards.add(new SetCardInfo("Thousand Moons Infantry", 38, Rarity.COMMON, mage.cards.t.ThousandMoonsInfantry.class));
         cards.add(new SetCardInfo("Thousand Moons Smithy", 357, Rarity.RARE, mage.cards.t.ThousandMoonsSmithy.class, NON_FULL_USE_VARIOUS));
@@ -438,8 +426,6 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         cards.add(new SetCardInfo("Tishana's Tidebinder", 335, Rarity.RARE, mage.cards.t.TishanasTidebinder.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tishana's Tidebinder", 81, Rarity.RARE, mage.cards.t.TishanasTidebinder.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tithing Blade", 128, Rarity.COMMON, mage.cards.t.TithingBlade.class));
-        cards.add(new SetCardInfo("Treasure Cove", 267, Rarity.RARE, mage.cards.t.TreasureCove.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Treasure Cove", 391, Rarity.RARE, mage.cards.t.TreasureCove.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Treasure Map", 267, Rarity.RARE, mage.cards.t.TreasureMap.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Treasure Map", 391, Rarity.RARE, mage.cards.t.TreasureMap.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Triumphant Chomp", 170, Rarity.UNCOMMON, mage.cards.t.TriumphantChomp.class));

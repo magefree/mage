@@ -169,9 +169,6 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Emet-Selch, Unsundered", 539, Rarity.MYTHIC, mage.cards.e.EmetSelchUnsundered.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Esper Origins", 185, Rarity.RARE, mage.cards.e.EsperOrigins.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Esper Origins", 370, Rarity.RARE, mage.cards.e.EsperOrigins.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Esper Terra", 245, Rarity.MYTHIC, mage.cards.e.EsperTerra.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Esper Terra", 323, Rarity.MYTHIC, mage.cards.e.EsperTerra.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Esper Terra", 511, Rarity.MYTHIC, mage.cards.e.EsperTerra.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ether", 53, Rarity.UNCOMMON, mage.cards.e.Ether.class));
         cards.add(new SetCardInfo("Evil Reawakened", 98, Rarity.UNCOMMON, mage.cards.e.EvilReawakened.class));
         cards.add(new SetCardInfo("Excalibur II", 257, Rarity.RARE, mage.cards.e.ExcaliburII.class, NON_FULL_USE_VARIOUS));
@@ -516,8 +513,6 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("The Fire Crystal", 135, Rarity.RARE, mage.cards.t.TheFireCrystal.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Fire Crystal", 337, Rarity.RARE, mage.cards.t.TheFireCrystal.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Gold Saucer", 279, Rarity.UNCOMMON, mage.cards.t.TheGoldSaucer.class));
-        cards.add(new SetCardInfo("The Lord Master of Hell", 219, Rarity.UNCOMMON, mage.cards.t.TheLordMasterOfHell.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("The Lord Master of Hell", 484, Rarity.UNCOMMON, mage.cards.t.TheLordMasterOfHell.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Lunar Whale", 60, Rarity.RARE, mage.cards.t.TheLunarWhale.class));
         cards.add(new SetCardInfo("The Masamune", 264, Rarity.RARE, mage.cards.t.TheMasamune.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Masamune", 353, Rarity.RARE, mage.cards.t.TheMasamune.class, NON_FULL_USE_VARIOUS));

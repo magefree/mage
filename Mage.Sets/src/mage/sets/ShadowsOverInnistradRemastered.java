@@ -41,7 +41,6 @@ public class ShadowsOverInnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Arlinn Kord", 230, Rarity.MYTHIC, mage.cards.a.ArlinnKord.class));
         cards.add(new SetCardInfo("Assembled Alphas", 141, Rarity.RARE, mage.cards.a.AssembledAlphas.class));
         cards.add(new SetCardInfo("Avacyn's Judgment", 142, Rarity.RARE, mage.cards.a.AvacynsJudgment.class));
-        cards.add(new SetCardInfo("Awoken Horror", 95, Rarity.RARE, mage.cards.a.AwokenHorror.class));
         cards.add(new SetCardInfo("Bedlam Reveler", 143, Rarity.RARE, mage.cards.b.BedlamReveler.class));
         cards.add(new SetCardInfo("Biting Rain", 99, Rarity.UNCOMMON, mage.cards.b.BitingRain.class));
         cards.add(new SetCardInfo("Blessed Alliance", 14, Rarity.UNCOMMON, mage.cards.b.BlessedAlliance.class));
@@ -172,7 +171,6 @@ public class ShadowsOverInnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Humble the Brute", 34, Rarity.UNCOMMON, mage.cards.h.HumbleTheBrute.class));
         cards.add(new SetCardInfo("Imprisoned in the Moon", 74, Rarity.COMMON, mage.cards.i.ImprisonedInTheMoon.class));
         cards.add(new SetCardInfo("Incendiary Flow", 163, Rarity.COMMON, mage.cards.i.IncendiaryFlow.class));
-        cards.add(new SetCardInfo("Incited Rabble", 53, Rarity.UNCOMMON, mage.cards.i.IncitedRabble.class));
         cards.add(new SetCardInfo("Indulgent Aristocrat", 118, Rarity.UNCOMMON, mage.cards.i.IndulgentAristocrat.class));
         cards.add(new SetCardInfo("Ingenious Skaab", 75, Rarity.COMMON, mage.cards.i.IngeniousSkaab.class));
         cards.add(new SetCardInfo("Insatiable Gorgers", 164, Rarity.COMMON, mage.cards.i.InsatiableGorgers.class));

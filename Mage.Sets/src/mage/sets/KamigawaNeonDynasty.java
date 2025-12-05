@@ -48,13 +48,9 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Ambitious Assault", 133, Rarity.COMMON, mage.cards.a.AmbitiousAssault.class));
         cards.add(new SetCardInfo("Ancestral Katana", 1, Rarity.COMMON, mage.cards.a.AncestralKatana.class));
         cards.add(new SetCardInfo("Anchor to Reality", 45, Rarity.UNCOMMON, mage.cards.a.AnchorToReality.class));
-        cards.add(new SetCardInfo("Animus of Night's Reach", 109, Rarity.UNCOMMON, mage.cards.a.AnimusOfNightsReach.class));
         cards.add(new SetCardInfo("Ao, the Dawn Sky", 2, Rarity.MYTHIC, mage.cards.a.AoTheDawnSky.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ao, the Dawn Sky", 406, Rarity.MYTHIC, mage.cards.a.AoTheDawnSky.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ao, the Dawn Sky", 433, Rarity.MYTHIC, mage.cards.a.AoTheDawnSky.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Architect of Restoration", 34, Rarity.RARE, mage.cards.a.ArchitectOfRestoration.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Architect of Restoration", 354, Rarity.RARE, mage.cards.a.ArchitectOfRestoration.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Architect of Restoration", 442, Rarity.RARE, mage.cards.a.ArchitectOfRestoration.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Armguard Familiar", 46, Rarity.COMMON, mage.cards.a.ArmguardFamiliar.class));
         cards.add(new SetCardInfo("Asari Captain", 215, Rarity.UNCOMMON, mage.cards.a.AsariCaptain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Asari Captain", 327, Rarity.UNCOMMON, mage.cards.a.AsariCaptain.class, NON_FULL_USE_VARIOUS));
@@ -118,18 +114,12 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Dokuchi Shadow-Walker", 94, Rarity.COMMON, mage.cards.d.DokuchiShadowWalker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dokuchi Silencer", 340, Rarity.UNCOMMON, mage.cards.d.DokuchiSilencer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dokuchi Silencer", 95, Rarity.UNCOMMON, mage.cards.d.DokuchiSilencer.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Dragon-Kami's Egg", 181, Rarity.RARE, mage.cards.d.DragonKamisEgg.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Dragon-Kami's Egg", 358, Rarity.RARE, mage.cards.d.DragonKamisEgg.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Dragon-Kami's Egg", 473, Rarity.RARE, mage.cards.d.DragonKamisEgg.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dragonfly Suit", 9, Rarity.COMMON, mage.cards.d.DragonflySuit.class));
         cards.add(new SetCardInfo("Dragonspark Reactor", 137, Rarity.UNCOMMON, mage.cards.d.DragonsparkReactor.class));
         cards.add(new SetCardInfo("Dramatist's Puppet", 244, Rarity.COMMON, mage.cards.d.DramatistsPuppet.class));
         cards.add(new SetCardInfo("Eater of Virtue", 245, Rarity.RARE, mage.cards.e.EaterOfVirtue.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Eater of Virtue", 401, Rarity.RARE, mage.cards.e.EaterOfVirtue.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Eater of Virtue", 496, Rarity.RARE, mage.cards.e.EaterOfVirtue.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Echo of Death's Wail", 124, Rarity.RARE, mage.cards.e.EchoOfDeathsWail.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Echo of Death's Wail", 356, Rarity.RARE, mage.cards.e.EchoOfDeathsWail.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Echo of Death's Wail", 462, Rarity.RARE, mage.cards.e.EchoOfDeathsWail.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ecologist's Terrarium", 246, Rarity.COMMON, mage.cards.e.EcologistsTerrarium.class));
         cards.add(new SetCardInfo("Eiganjo Exemplar", 10, Rarity.COMMON, mage.cards.e.EiganjoExemplar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Eiganjo Exemplar", 309, Rarity.COMMON, mage.cards.e.EiganjoExemplar.class, NON_FULL_USE_VARIOUS));
@@ -166,7 +156,6 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 292, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 301, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_UST_VARIOUS));
         cards.add(new SetCardInfo("Forest", 302, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_UST_VARIOUS));
-        cards.add(new SetCardInfo("Fragment of Konda", 12, Rarity.UNCOMMON, mage.cards.f.FragmentOfKonda.class));
         cards.add(new SetCardInfo("Futurist Operative", 333, Rarity.UNCOMMON, mage.cards.f.FuturistOperative.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Futurist Operative", 53, Rarity.UNCOMMON, mage.cards.f.FuturistOperative.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Futurist Sentinel", 54, Rarity.COMMON, mage.cards.f.FuturistSentinel.class));
@@ -283,9 +272,6 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Kappa Tech-Wrecker", 198, Rarity.UNCOMMON, mage.cards.k.KappaTechWrecker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kappa Tech-Wrecker", 348, Rarity.UNCOMMON, mage.cards.k.KappaTechWrecker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kindled Fury", 151, Rarity.COMMON, mage.cards.k.KindledFury.class));
-        cards.add(new SetCardInfo("Kirin-Touched Orochi", 212, Rarity.RARE, mage.cards.k.KirinTouchedOrochi.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Kirin-Touched Orochi", 360, Rarity.RARE, mage.cards.k.KirinTouchedOrochi.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Kirin-Touched Orochi", 482, Rarity.RARE, mage.cards.k.KirinTouchedOrochi.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kitsune Ace", 22, Rarity.COMMON, mage.cards.k.KitsuneAce.class));
         cards.add(new SetCardInfo("Kodama of the West Tree", 199, Rarity.MYTHIC, mage.cards.k.KodamaOfTheWestTree.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kodama of the West Tree", 392, Rarity.MYTHIC, mage.cards.k.KodamaOfTheWestTree.class, NON_FULL_USE_VARIOUS));
@@ -362,7 +348,6 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Mukotai Soulripper", 113, Rarity.RARE, mage.cards.m.MukotaiSoulripper.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mukotai Soulripper", 381, Rarity.RARE, mage.cards.m.MukotaiSoulripper.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mukotai Soulripper", 458, Rarity.RARE, mage.cards.m.MukotaiSoulripper.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Nameless Conqueror", 162, Rarity.COMMON, mage.cards.n.NamelessConqueror.class));
         cards.add(new SetCardInfo("Naomi, Pillar of Order", 229, Rarity.UNCOMMON, mage.cards.n.NaomiPillarOfOrder.class));
         cards.add(new SetCardInfo("Nashi, Moon Sage's Scion", 114, Rarity.MYTHIC, mage.cards.n.NashiMoonSagesScion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nashi, Moon Sage's Scion", 343, Rarity.MYTHIC, mage.cards.n.NashiMoonSagesScion.class, NON_FULL_USE_VARIOUS));
@@ -377,9 +362,6 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Ninja's Kunai", 252, Rarity.COMMON, mage.cards.n.NinjasKunai.class));
         cards.add(new SetCardInfo("Norika Yamazaki, the Poet", 31, Rarity.UNCOMMON, mage.cards.n.NorikaYamazakiThePoet.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Norika Yamazaki, the Poet", 311, Rarity.UNCOMMON, mage.cards.n.NorikaYamazakiThePoet.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("O-Kagachi Made Manifest", 227, Rarity.MYTHIC, mage.cards.o.OKagachiMadeManifest.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("O-Kagachi Made Manifest", 362, Rarity.MYTHIC, mage.cards.o.OKagachiMadeManifest.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("O-Kagachi Made Manifest", 489, Rarity.MYTHIC, mage.cards.o.OKagachiMadeManifest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ogre-Head Helm", 155, Rarity.RARE, mage.cards.o.OgreHeadHelm.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ogre-Head Helm", 387, Rarity.RARE, mage.cards.o.OgreHeadHelm.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ogre-Head Helm", 470, Rarity.RARE, mage.cards.o.OgreHeadHelm.class, NON_FULL_USE_VARIOUS));
@@ -448,7 +430,6 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Seismic Wave", 161, Rarity.UNCOMMON, mage.cards.s.SeismicWave.class));
         cards.add(new SetCardInfo("Selfless Samurai", 312, Rarity.UNCOMMON, mage.cards.s.SelflessSamurai.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Selfless Samurai", 35, Rarity.UNCOMMON, mage.cards.s.SelflessSamurai.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Seshiro's Living Legacy", 210, Rarity.COMMON, mage.cards.s.SeshirosLivingLegacy.class));
         cards.add(new SetCardInfo("Seven-Tail Mentor", 313, Rarity.COMMON, mage.cards.s.SevenTailMentor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Seven-Tail Mentor", 36, Rarity.COMMON, mage.cards.s.SevenTailMentor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shigeki, Jukai Visionary", 206, Rarity.RARE, mage.cards.s.ShigekiJukaiVisionary.class, NON_FULL_USE_VARIOUS));
@@ -560,7 +541,6 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Unstoppable Ogre", 169, Rarity.COMMON, mage.cards.u.UnstoppableOgre.class));
         cards.add(new SetCardInfo("Upriser Renegade", 170, Rarity.UNCOMMON, mage.cards.u.UpriserRenegade.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Upriser Renegade", 324, Rarity.UNCOMMON, mage.cards.u.UpriserRenegade.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Vector Glider", 66, Rarity.COMMON, mage.cards.v.VectorGlider.class));
         cards.add(new SetCardInfo("Virus Beetle", 128, Rarity.COMMON, mage.cards.v.VirusBeetle.class));
         cards.add(new SetCardInfo("Voltage Surge", 171, Rarity.COMMON, mage.cards.v.VoltageSurge.class));
         cards.add(new SetCardInfo("Walking Skyscraper", 263, Rarity.UNCOMMON, mage.cards.w.WalkingSkyscraper.class));

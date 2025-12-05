@@ -58,8 +58,6 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Avacyn, Angel of Hope", 482, Rarity.MYTHIC, mage.cards.a.AvacynAngelOfHope.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Avacynian Priest", 12, Rarity.COMMON, mage.cards.a.AvacynianPriest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Avacynian Priest", 334, Rarity.COMMON, mage.cards.a.AvacynianPriest.class, RETRO_ART_USE_VARIOUS));
-        cards.add(new SetCardInfo("Awoken Horror", 460, Rarity.RARE, mage.cards.a.AwokenHorror.class, RETRO_ART_USE_VARIOUS));
-        cards.add(new SetCardInfo("Awoken Horror", 91, Rarity.RARE, mage.cards.a.AwokenHorror.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Balefire Dragon", 479, Rarity.MYTHIC, mage.cards.b.BalefireDragon.class, RETRO_ART));
         cards.add(new SetCardInfo("Battleground Geist", 53, Rarity.COMMON, mage.cards.b.BattlegroundGeist.class));
         cards.add(new SetCardInfo("Bedlam Reveler", 142, Rarity.RARE, mage.cards.b.BedlamReveler.class, NON_FULL_USE_VARIOUS));
@@ -271,8 +269,6 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Huntmaster of the Fells", 470, Rarity.RARE, mage.cards.h.HuntmasterOfTheFells.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Imprisoned in the Moon", 358, Rarity.COMMON, mage.cards.i.ImprisonedInTheMoon.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Imprisoned in the Moon", 69, Rarity.COMMON, mage.cards.i.ImprisonedInTheMoon.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Incited Rabble", 451, Rarity.UNCOMMON, mage.cards.i.IncitedRabble.class, RETRO_ART_USE_VARIOUS));
-        cards.add(new SetCardInfo("Incited Rabble", 46, Rarity.UNCOMMON, mage.cards.i.IncitedRabble.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Indulgent Aristocrat", 118, Rarity.UNCOMMON, mage.cards.i.IndulgentAristocrat.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Indulgent Aristocrat", 384, Rarity.UNCOMMON, mage.cards.i.IndulgentAristocrat.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Infernal Grasp", 119, Rarity.UNCOMMON, mage.cards.i.InfernalGrasp.class, NON_FULL_USE_VARIOUS));
@@ -485,8 +481,6 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Triskaidekaphobia", 391, Rarity.UNCOMMON, mage.cards.t.Triskaidekaphobia.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Twinblade Geist", 452, Rarity.UNCOMMON, mage.cards.t.TwinbladeGeist.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Twinblade Geist", 47, Rarity.UNCOMMON, mage.cards.t.TwinbladeGeist.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Twinblade Invocation", 452, Rarity.UNCOMMON, mage.cards.t.TwinbladeInvocation.class, RETRO_ART_USE_VARIOUS));
-        cards.add(new SetCardInfo("Twinblade Invocation", 47, Rarity.UNCOMMON, mage.cards.t.TwinbladeInvocation.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ulrich's Kindred", 176, Rarity.UNCOMMON, mage.cards.u.UlrichsKindred.class));
         cards.add(new SetCardInfo("Ulvenwald Mysteries", 222, Rarity.UNCOMMON, mage.cards.u.UlvenwaldMysteries.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ulvenwald Mysteries", 423, Rarity.UNCOMMON, mage.cards.u.UlvenwaldMysteries.class, RETRO_ART_USE_VARIOUS));

@@ -137,8 +137,6 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Deserted Beach", 281, Rarity.RARE, mage.cards.d.DesertedBeach.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Devious Cover-Up", 48, Rarity.COMMON, mage.cards.d.DeviousCoverUp.class));
         cards.add(new SetCardInfo("Devoted Grafkeeper", 218, Rarity.UNCOMMON, mage.cards.d.DevotedGrafkeeper.class));
-        cards.add(new SetCardInfo("Dire-Strain Brawler", 203, Rarity.COMMON, mage.cards.d.DireStrainBrawler.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Dire-Strain Brawler", 305, Rarity.COMMON, mage.cards.d.DireStrainBrawler.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dire-Strain Rampage", 219, Rarity.RARE, mage.cards.d.DireStrainRampage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dire-Strain Rampage", 370, Rarity.RARE, mage.cards.d.DireStrainRampage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Diregraf Horde", 96, Rarity.COMMON, mage.cards.d.DiregrafHorde.class));
@@ -390,8 +388,6 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Tapping at the Window", 201, Rarity.COMMON, mage.cards.t.TappingAtTheWindow.class));
         cards.add(new SetCardInfo("Tavern Ruffian", 163, Rarity.COMMON, mage.cards.t.TavernRuffian.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tavern Ruffian", 296, Rarity.COMMON, mage.cards.t.TavernRuffian.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Tavern Smasher", 163, Rarity.COMMON, mage.cards.t.TavernSmasher.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Tavern Smasher", 296, Rarity.COMMON, mage.cards.t.TavernSmasher.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Teferi, Who Slows the Sunset", 245, Rarity.MYTHIC, mage.cards.t.TeferiWhoSlowsTheSunset.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Teferi, Who Slows the Sunset", 280, Rarity.MYTHIC, mage.cards.t.TeferiWhoSlowsTheSunset.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Celestus", 252, Rarity.RARE, mage.cards.t.TheCelestus.class, NON_FULL_USE_VARIOUS));
@@ -405,12 +401,8 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Tireless Hauler", 305, Rarity.COMMON, mage.cards.t.TirelessHauler.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tovolar's Huntmaster", 204, Rarity.RARE, mage.cards.t.TovolarsHuntmaster.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tovolar's Huntmaster", 306, Rarity.RARE, mage.cards.t.TovolarsHuntmaster.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Tovolar's Packleader", 204, Rarity.RARE, mage.cards.t.TovolarsPackleader.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Tovolar's Packleader", 306, Rarity.RARE, mage.cards.t.TovolarsPackleader.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tovolar, Dire Overlord", 246, Rarity.RARE, mage.cards.t.TovolarDireOverlord.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tovolar, Dire Overlord", 311, Rarity.RARE, mage.cards.t.TovolarDireOverlord.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Tovolar, the Midnight Scourge", 246, Rarity.RARE, mage.cards.t.TovolarTheMidnightScourge.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Tovolar, the Midnight Scourge", 311, Rarity.RARE, mage.cards.t.TovolarTheMidnightScourge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Triskaidekaphile", 342, Rarity.RARE, mage.cards.t.Triskaidekaphile.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Triskaidekaphile", 386, Rarity.RARE, mage.cards.t.Triskaidekaphile.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Triskaidekaphile", 81, Rarity.RARE, mage.cards.t.Triskaidekaphile.class, NON_FULL_USE_VARIOUS));

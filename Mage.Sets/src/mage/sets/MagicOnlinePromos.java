@@ -139,7 +139,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Archfiend of Depravity", 55711, Rarity.RARE, mage.cards.a.ArchfiendOfDepravity.class));
         cards.add(new SetCardInfo("Archfiend of Ifnir", 64422, Rarity.RARE, mage.cards.a.ArchfiendOfIfnir.class));
         cards.add(new SetCardInfo("Archipelagore", 81005, Rarity.UNCOMMON, mage.cards.a.Archipelagore.class));
-        cards.add(new SetCardInfo("Architect of Restoration", 97897, Rarity.RARE, mage.cards.a.ArchitectOfRestoration.class));
         cards.add(new SetCardInfo("Archmage Emeritus", 90016, Rarity.RARE, mage.cards.a.ArchmageEmeritus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Archmage Emeritus", 90018, Rarity.RARE, mage.cards.a.ArchmageEmeritus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Archmage's Charm", 91233, Rarity.RARE, mage.cards.a.ArchmagesCharm.class, RETRO_ART));
@@ -705,7 +704,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Dragon Broodmother", 32553, Rarity.MYTHIC, mage.cards.d.DragonBroodmother.class));
         cards.add(new SetCardInfo("Dragon Fodder", 55898, Rarity.COMMON, mage.cards.d.DragonFodder.class));
         cards.add(new SetCardInfo("Dragon Throne of Tarkir", 54565, Rarity.RARE, mage.cards.d.DragonThroneOfTarkir.class));
-        cards.add(new SetCardInfo("Dragon-Kami's Egg", 98051, Rarity.RARE, mage.cards.d.DragonKamisEgg.class));
         cards.add(new SetCardInfo("Dragonkin Berserker", 88310, Rarity.RARE, mage.cards.d.DragonkinBerserker.class));
         cards.add(new SetCardInfo("Dragonlord Dromoka", 102319, Rarity.MYTHIC, mage.cards.d.DragonlordDromoka.class));
         cards.add(new SetCardInfo("Dragonlord's Servant", 55884, Rarity.UNCOMMON, mage.cards.d.DragonlordsServant.class));
@@ -751,7 +749,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Eater of Hope", 51918, Rarity.RARE, mage.cards.e.EaterOfHope.class));
         cards.add(new SetCardInfo("Eater of Virtue", 98111, Rarity.RARE, mage.cards.e.EaterOfVirtue.class));
         cards.add(new SetCardInfo("Ebondeath, Dracolich", 92692, Rarity.MYTHIC, mage.cards.e.EbondeathDracolich.class));
-        cards.add(new SetCardInfo("Echo of Death's Wail", 97969, Rarity.RARE, mage.cards.e.EchoOfDeathsWail.class));
         cards.add(new SetCardInfo("Echo of Eons", 95469, Rarity.RARE, mage.cards.e.EchoOfEons.class));
         cards.add(new SetCardInfo("Ecological Appreciation", 90166, Rarity.MYTHIC, mage.cards.e.EcologicalAppreciation.class));
         cards.add(new SetCardInfo("Eerie Ultimatum", 80895, Rarity.RARE, mage.cards.e.EerieUltimatum.class));
@@ -1456,7 +1453,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Kiora, Behemoth Beckoner", 78027, Rarity.UNCOMMON, mage.cards.k.KioraBehemothBeckoner.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kiora, the Crashing Wave", 59651, Rarity.MYTHIC, mage.cards.k.KioraTheCrashingWave.class));
         cards.add(new SetCardInfo("Kird Ape", 31383, Rarity.UNCOMMON, mage.cards.k.KirdApe.class));
-        cards.add(new SetCardInfo("Kirin-Touched Orochi", 98047, Rarity.RARE, mage.cards.k.KirinTouchedOrochi.class));
         cards.add(new SetCardInfo("Kitchen Finks", 36166, Rarity.UNCOMMON, mage.cards.k.KitchenFinks.class));
         cards.add(new SetCardInfo("Kiyomaro, First to Stand", 32015, Rarity.RARE, mage.cards.k.KiyomaroFirstToStand.class));
         cards.add(new SetCardInfo("Kjeldoran Outpost", 23952, Rarity.RARE, mage.cards.k.KjeldoranOutpost.class, RETRO_ART_USE_VARIOUS));
@@ -1891,7 +1887,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Nymris, Oona's Trickster", 86342, Rarity.RARE, mage.cards.n.NymrisOonasTrickster.class));
         cards.add(new SetCardInfo("Nyx Lotus", 79917, Rarity.RARE, mage.cards.n.NyxLotus.class));
         cards.add(new SetCardInfo("Nyxbloom Ancient", 79965, Rarity.MYTHIC, mage.cards.n.NyxbloomAncient.class));
-        cards.add(new SetCardInfo("O-Kagachi Made Manifest", 98101, Rarity.MYTHIC, mage.cards.o.OKagachiMadeManifest.class));
         cards.add(new SetCardInfo("Oakhame Ranger", 78738, Rarity.UNCOMMON, mage.cards.o.OakhameRanger.class));
         cards.add(new SetCardInfo("Oath of Druids", 36092, Rarity.RARE, mage.cards.o.OathOfDruids.class, RETRO_ART));
         cards.add(new SetCardInfo("Ob Nixilis Reignited", 62509, Rarity.MYTHIC, mage.cards.o.ObNixilisReignited.class));

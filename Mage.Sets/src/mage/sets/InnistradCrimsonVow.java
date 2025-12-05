@@ -411,7 +411,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Toxrill, the Corrosive", 321, Rarity.MYTHIC, mage.cards.t.ToxrillTheCorrosive.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Traveling Minister", 39, Rarity.COMMON, mage.cards.t.TravelingMinister.class));
         cards.add(new SetCardInfo("Twinblade Geist", 40, Rarity.UNCOMMON, mage.cards.t.TwinbladeGeist.class));
-        cards.add(new SetCardInfo("Twinblade Invocation", 40, Rarity.UNCOMMON, mage.cards.t.TwinbladeInvocation.class));
         cards.add(new SetCardInfo("Ulvenwald Behemoth", 225, Rarity.RARE, mage.cards.u.UlvenwaldBehemoth.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ulvenwald Behemoth", 394, Rarity.RARE, mage.cards.u.UlvenwaldBehemoth.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ulvenwald Oddity", 225, Rarity.RARE, mage.cards.u.UlvenwaldOddity.class, NON_FULL_USE_VARIOUS));
