@@ -281,7 +281,6 @@ public final class Innistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Tribute to Hunger", 119, Rarity.UNCOMMON, mage.cards.t.TributeToHunger.class));
         cards.add(new SetCardInfo("Typhoid Rats", 120, Rarity.COMMON, mage.cards.t.TyphoidRats.class));
         cards.add(new SetCardInfo("Ulvenwald Mystics", 208, Rarity.UNCOMMON, mage.cards.u.UlvenwaldMystics.class));
-        cards.add(new SetCardInfo("Ulvenwald Primordials", 208, Rarity.UNCOMMON, mage.cards.u.UlvenwaldPrimordials.class));
         cards.add(new SetCardInfo("Unbreathing Horde", 121, Rarity.RARE, mage.cards.u.UnbreathingHorde.class));
         cards.add(new SetCardInfo("Unburial Rites", 122, Rarity.UNCOMMON, mage.cards.u.UnburialRites.class));
         cards.add(new SetCardInfo("Undead Alchemist", 84, Rarity.RARE, mage.cards.u.UndeadAlchemist.class));

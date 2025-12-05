@@ -88,7 +88,6 @@ public class EldritchMoonPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Thalia, Heretic Cathar", 46, Rarity.RARE, mage.cards.t.ThaliaHereticCathar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thalia, Heretic Cathar", "46s", Rarity.RARE, mage.cards.t.ThaliaHereticCathar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tree of Perdition", "109s", Rarity.MYTHIC, mage.cards.t.TreeOfPerdition.class));
-        cards.add(new SetCardInfo("Ulrich, Uncontested Alpha", "191s", Rarity.MYTHIC, mage.cards.u.UlrichUncontestedAlpha.class));
         cards.add(new SetCardInfo("Ulrich of the Krallenhorde", "191s", Rarity.MYTHIC, mage.cards.u.UlrichOfTheKrallenhorde.class));
         cards.add(new SetCardInfo("Ulvenwald Observer", 176, Rarity.RARE, mage.cards.u.UlvenwaldObserver.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ulvenwald Observer", "176s", Rarity.RARE, mage.cards.u.UlvenwaldObserver.class, NON_FULL_USE_VARIOUS));

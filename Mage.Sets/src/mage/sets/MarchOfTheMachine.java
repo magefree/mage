@@ -382,9 +382,6 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("The Grand Evolution", 213, Rarity.MYTHIC, mage.cards.t.TheGrandEvolution.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Grand Evolution", 301, Rarity.MYTHIC, mage.cards.t.TheGrandEvolution.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Grand Evolution", 342, Rarity.MYTHIC, mage.cards.t.TheGrandEvolution.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("The Great Work", 169, Rarity.MYTHIC, mage.cards.t.TheGreatWork.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("The Great Work", 299, Rarity.MYTHIC, mage.cards.t.TheGreatWork.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("The Great Work", 341, Rarity.MYTHIC, mage.cards.t.TheGreatWork.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thornwood Falls", 274, Rarity.COMMON, mage.cards.t.ThornwoodFalls.class));
         cards.add(new SetCardInfo("Thrashing Frontliner", 167, Rarity.COMMON, mage.cards.t.ThrashingFrontliner.class));
         cards.add(new SetCardInfo("Thunderhead Squadron", 81, Rarity.COMMON, mage.cards.t.ThunderheadSquadron.class));

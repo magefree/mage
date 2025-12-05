@@ -235,8 +235,6 @@ public final class EldritchMoon extends ExpansionSet {
         cards.add(new SetCardInfo("Tree of Perdition", 109, Rarity.MYTHIC, mage.cards.t.TreeOfPerdition.class));
         cards.add(new SetCardInfo("Turn Aside", 78, Rarity.COMMON, mage.cards.t.TurnAside.class));
         cards.add(new SetCardInfo("Ulrich of the Krallenhorde", 191, Rarity.MYTHIC, mage.cards.u.UlrichOfTheKrallenhorde.class));
-        cards.add(new SetCardInfo("Ulrich, Uncontested Alpha", 191, Rarity.MYTHIC, mage.cards.u.UlrichUncontestedAlpha.class));
-        cards.add(new SetCardInfo("Ulvenwald Abomination", 175, Rarity.COMMON, mage.cards.u.UlvenwaldAbomination.class));
         cards.add(new SetCardInfo("Ulvenwald Captive", 175, Rarity.COMMON, mage.cards.u.UlvenwaldCaptive.class));
         cards.add(new SetCardInfo("Ulvenwald Observer", 176, Rarity.RARE, mage.cards.u.UlvenwaldObserver.class));
         cards.add(new SetCardInfo("Unsubstantiate", 79, Rarity.UNCOMMON, mage.cards.u.Unsubstantiate.class));

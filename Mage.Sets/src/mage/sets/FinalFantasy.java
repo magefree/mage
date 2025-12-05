@@ -560,8 +560,6 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Ultima, Origin of Oblivion", 2, Rarity.RARE, mage.cards.u.UltimaOriginOfOblivion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ultima, Origin of Oblivion", 324, Rarity.RARE, mage.cards.u.UltimaOriginOfOblivion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ultima, Origin of Oblivion", 421, Rarity.RARE, mage.cards.u.UltimaOriginOfOblivion.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Ultimecia, Omnipotent", 247, Rarity.UNCOMMON, mage.cards.u.UltimeciaOmnipotent.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Ultimecia, Omnipotent", 513, Rarity.UNCOMMON, mage.cards.u.UltimeciaOmnipotent.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ultimecia, Temporal Threat", 441, Rarity.RARE, mage.cards.u.UltimeciaTemporalThreat.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ultimecia, Temporal Threat", 556, Rarity.RARE, mage.cards.u.UltimeciaTemporalThreat.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ultimecia, Time Sorceress", 247, Rarity.UNCOMMON, mage.cards.u.UltimeciaTimeSorceress.class, NON_FULL_USE_VARIOUS));

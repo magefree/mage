@@ -2890,7 +2890,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Uktabi Orangutan", 36016, Rarity.UNCOMMON, mage.cards.u.UktabiOrangutan.class, RETRO_ART));
         cards.add(new SetCardInfo("Ulamog, the Infinite Gyre", 102345, Rarity.MYTHIC, mage.cards.u.UlamogTheInfiniteGyre.class));
         cards.add(new SetCardInfo("Ultimate Price", 58269, Rarity.UNCOMMON, mage.cards.u.UltimatePrice.class));
-        cards.add(new SetCardInfo("Ulvenwald Behemoth", 95421, Rarity.RARE, mage.cards.u.UlvenwaldBehemoth.class));
         cards.add(new SetCardInfo("Ulvenwald Observer", 61553, Rarity.RARE, mage.cards.u.UlvenwaldObserver.class));
         cards.add(new SetCardInfo("Ulvenwald Oddity", 95421, Rarity.RARE, mage.cards.u.UlvenwaldOddity.class));
         cards.add(new SetCardInfo("Umezawa's Jitte", 36210, Rarity.RARE, mage.cards.u.UmezawasJitte.class));

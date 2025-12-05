@@ -31,7 +31,6 @@ public final class Transformers extends ExpansionSet {
         cards.add(new SetCardInfo("Ratchet, Field Medic", 2, Rarity.MYTHIC, mage.cards.r.RatchetFieldMedic.class));
         cards.add(new SetCardInfo("Slicer, Hired Muscle", 6, Rarity.MYTHIC, mage.cards.s.SlicerHiredMuscle.class));
         cards.add(new SetCardInfo("Starscream, Power Hungry", 5, Rarity.MYTHIC, mage.cards.s.StarscreamPowerHungry.class));
-        cards.add(new SetCardInfo("Ultra Magnus, Armored Carrier", 15, Rarity.MYTHIC, mage.cards.u.UltraMagnusArmoredCarrier.class));
         cards.add(new SetCardInfo("Ultra Magnus, Tactician", 15, Rarity.MYTHIC, mage.cards.u.UltraMagnusTactician.class));
     }
 }

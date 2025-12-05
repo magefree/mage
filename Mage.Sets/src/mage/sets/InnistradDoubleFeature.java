@@ -517,7 +517,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Triskaidekaphile", 81, Rarity.RARE, mage.cards.t.Triskaidekaphile.class));
         cards.add(new SetCardInfo("Turn the Earth", 205, Rarity.UNCOMMON, mage.cards.t.TurnTheEarth.class));
         cards.add(new SetCardInfo("Twinblade Geist", 307, Rarity.UNCOMMON, mage.cards.t.TwinbladeGeist.class));
-        cards.add(new SetCardInfo("Ulvenwald Behemoth", 492, Rarity.RARE, mage.cards.u.UlvenwaldBehemoth.class));
         cards.add(new SetCardInfo("Ulvenwald Oddity", 492, Rarity.RARE, mage.cards.u.UlvenwaldOddity.class));
         cards.add(new SetCardInfo("Unblinking Observer", 82, Rarity.COMMON, mage.cards.u.UnblinkingObserver.class));
         cards.add(new SetCardInfo("Undead Butler", 400, Rarity.UNCOMMON, mage.cards.u.UndeadButler.class));

@@ -307,8 +307,6 @@ public class ShadowsOverInnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("True-Faith Censer", 262, Rarity.COMMON, mage.cards.t.TrueFaithCenser.class));
         cards.add(new SetCardInfo("Ulrich of the Krallenhorde", 246, Rarity.RARE, mage.cards.u.UlrichOfTheKrallenhorde.class));
         cards.add(new SetCardInfo("Ulrich's Kindred", 182, Rarity.UNCOMMON, mage.cards.u.UlrichsKindred.class));
-        cards.add(new SetCardInfo("Ulrich, Uncontested Alpha", 246, Rarity.RARE, mage.cards.u.UlrichUncontestedAlpha.class));
-        cards.add(new SetCardInfo("Ulvenwald Abomination", 221, Rarity.COMMON, mage.cards.u.UlvenwaldAbomination.class));
         cards.add(new SetCardInfo("Ulvenwald Captive", 221, Rarity.COMMON, mage.cards.u.UlvenwaldCaptive.class));
         cards.add(new SetCardInfo("Ulvenwald Hydra", 222, Rarity.RARE, mage.cards.u.UlvenwaldHydra.class));
         cards.add(new SetCardInfo("Ulvenwald Mysteries", 223, Rarity.UNCOMMON, mage.cards.u.UlvenwaldMysteries.class));
