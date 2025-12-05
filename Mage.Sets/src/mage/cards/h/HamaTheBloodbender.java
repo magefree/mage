@@ -3,10 +3,10 @@ package mage.cards.h;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.Costs;
-import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.WaterbendCost;
+import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.MillCardsTargetEffect;
@@ -20,6 +20,7 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInGraveyard;
+import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
@@ -42,6 +43,7 @@ public final class HamaTheBloodbender extends CardImpl {
         // When Hama enters, target opponent mills three cards. Exile up to one noncreature, nonland card from that player's graveyard. For as long as you control Hama, you may cast the exiled card during your turn by waterbending {X} rather than paying its mana cost, where X is its mana value.
         Ability ability = new EntersBattlefieldTriggeredAbility(new MillCardsTargetEffect(3));
         ability.addEffect(new HamaTheBloodbenderExileEffect());
+        ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }
 
@@ -143,10 +145,9 @@ class HamaTheBloodbenderCastEffect extends AsThoughEffectImpl {
         if (player == null) {
             return false;
         }
-        Costs<Cost> newCosts = new CostsImpl<>();
-        newCosts.add(new WaterbendCost(card.getManaValue()));
-        newCosts.addAll(card.getSpellAbility().getCosts());
-        player.setCastSourceIdWithAlternateMana(card.getId(), null, newCosts);
+        ManaCosts<ManaCost> manaCosts = new ManaCostsImpl<>("{0}");
+        manaCosts.add(new WaterbendCost(card.getManaValue()));
+        player.setCastSourceIdWithAlternateMana(card.getId(), manaCosts, card.getSpellAbility().getCosts());
         return true;
     }
 }
