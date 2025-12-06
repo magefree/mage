@@ -421,10 +421,6 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Shantotto, Tactician Magician", 507, Rarity.UNCOMMON, mage.cards.s.ShantottoTacticianMagician.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sharlayan, Nation of Scholars", 288, Rarity.COMMON, mage.cards.s.SharlayanNationOfScholars.class));
         cards.add(new SetCardInfo("Shinra Reinforcements", 118, Rarity.COMMON, mage.cards.s.ShinraReinforcements.class));
-        cards.add(new SetCardInfo("Shinryu, Transcendent Rival", 127, Rarity.RARE, mage.cards.s.ShinryuTranscendentRival.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Shinryu, Transcendent Rival", 384, Rarity.RARE, mage.cards.s.ShinryuTranscendentRival.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Shinryu, Transcendent Rival", 455, Rarity.RARE, mage.cards.s.ShinryuTranscendentRival.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Shinryu, Transcendent Rival", 529, Rarity.RARE, mage.cards.s.ShinryuTranscendentRival.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sidequest: Card Collection", 73, Rarity.UNCOMMON, mage.cards.s.SidequestCardCollection.class));
         cards.add(new SetCardInfo("Sidequest: Catch a Fish", 31, Rarity.UNCOMMON, mage.cards.s.SidequestCatchAFish.class));
         cards.add(new SetCardInfo("Sidequest: Hunt the Mark", 119, Rarity.UNCOMMON, mage.cards.s.SidequestHuntTheMark.class, NON_FULL_USE_VARIOUS));
