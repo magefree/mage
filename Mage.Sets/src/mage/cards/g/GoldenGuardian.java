@@ -11,7 +11,6 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.FightTargetSourceEffect;
 import mage.abilities.effects.mana.AddManaOfAnyColorEffect;
 import mage.abilities.keyword.DefenderAbility;
-import mage.abilities.keyword.TransformAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.Card;
 import mage.cards.CardSetInfo;
@@ -120,7 +119,7 @@ class GoldenGuardianReturnTransformedEffect extends OneShotEffect {
         if (controller == null || game.getState().getZone(source.getSourceId()) != Zone.GRAVEYARD) {
             return false;
         }
-        game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
+        game.getState().setValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
         Card card = game.getCard(source.getSourceId());
         return card != null && controller.moveCards(card, Zone.BATTLEFIELD, source, game);
     }

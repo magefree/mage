@@ -5,10 +5,10 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -88,7 +88,7 @@ class ContainmentPriestReplacementEffect extends ReplacementEffectImpl {
         if (((ZoneChangeEvent) event).getToZone() == Zone.BATTLEFIELD) {
             Card card = game.getCard(event.getTargetId());
             if (card != null) {
-                Object entersTransformed = game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + event.getTargetId());
+                Object entersTransformed = game.getState().getValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + event.getTargetId());
                 if (entersTransformed instanceof Boolean && (Boolean) entersTransformed && card.getSecondCardFace() != null) {
                     card = card.getSecondCardFace();
                 }

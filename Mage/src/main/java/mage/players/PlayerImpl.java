@@ -4110,7 +4110,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             TransformingDoubleFacedCard mainCard = (TransformingDoubleFacedCard) object;
             getPlayableFromObjectSingle(game, fromZone, mainCard.getLeftHalfCard(), mainCard.getLeftHalfCard().getAbilities(game), availableMana, output);
             getPlayableFromObjectSingle(game, fromZone, mainCard, mainCard.getSharedAbilities(game), availableMana, output);
-        }  else if (object instanceof CardWithSpellOption) {
+        } else if (object instanceof CardWithSpellOption) {
             // adventure must use different card characteristics for different spells (main or adventure)
             CardWithSpellOption cardWithSpellOption = (CardWithSpellOption) object;
             getPlayableFromObjectSingle(game, fromZone, cardWithSpellOption.getSpellCard(), cardWithSpellOption.getSpellCard().getAbilities(game), availableMana, output);
@@ -4951,16 +4951,6 @@ public abstract class PlayerImpl implements Player, Serializable {
                 List<ZoneChangeInfo> infoList = new ArrayList<>();
                 for (Card card : cards) {
                     fromZone = game.getState().getZone(card.getId());
-
-                    // 712.14a. If a spell or ability puts a transforming double-faced card onto the battlefield "transformed"
-                    // or "converted," it enters the battlefield with its back face up. If a player is instructed to put a card
-                    // that isn't a transforming double-faced card onto the battlefield transformed or converted, that card stays in
-                    // its current zone.
-                    // TODO: can probably remove/change after tdfc rework, should only be sending transformed side
-                    Boolean enterTransformed = (Boolean) game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId());
-                    if (enterTransformed != null && enterTransformed && !card.isTransformable() && !(card instanceof TransformingDoubleFacedCardHalf)) {
-                        continue;
-                    }
 
                     // 303.4g. If an Aura is entering the battlefield and there is no legal object or player for it to enchant,
                     // the Aura remains in its current zone, unless that zone is the stack. In that case, the Aura is put into
