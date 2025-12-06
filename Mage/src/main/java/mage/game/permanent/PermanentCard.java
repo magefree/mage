@@ -7,8 +7,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.RoomAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.keyword.NightboundAbility;
-import mage.abilities.keyword.TransformAbility;
 import mage.cards.*;
 import mage.constants.SpellAbilityType;
 import mage.game.Game;
@@ -103,16 +101,6 @@ public class PermanentCard extends PermanentImpl {
         if (card instanceof LevelerCard) {
             maxLevelCounters = ((LevelerCard) card).getMaxLevelCounters();
         }
-
-        // if transformed on ETB
-        // TODO: remove after tdfc rework
-        if (card.isTransformable() && !(card instanceof DoubleFacedCardHalf)) {
-            if (game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId()) != null
-                    || NightboundAbility.checkCard(this, game)) {
-                game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId(), null);
-                TransformAbility.transformPermanent(this, game, null);
-            }
-        }
     }
 
     protected PermanentCard(final PermanentCard permanent) {
@@ -163,7 +151,7 @@ public class PermanentCard extends PermanentImpl {
         } else if (card.getId() != this.getId()) {
             // if different id, abilities need to be added to game state for continuous/triggers
             for (Ability ability : card.getAbilities()) {
-              this.addAbility(ability, card.getId(), game, true);
+                this.addAbility(ability, card.getId(), game, true);
             }
         } else {
             // copy only own abilities; all dynamic added abilities must be added in the parent call
@@ -202,9 +190,6 @@ public class PermanentCard extends PermanentImpl {
         this.setImageFileName(card.getImageFileName());
         this.setImageNumber(card.getImageNumber());
 
-        if (card.getSecondCardFace() != null && !(card instanceof DoubleFacedCardHalf)) {
-            this.secondSideCardClazz = card.getSecondCardFace().getClass();
-        }
         if (card.getMeldsToCard() != null) {
             this.meldsToClazz = card.getMeldsToCard().getClass();
         }
@@ -249,7 +234,7 @@ public class PermanentCard extends PermanentImpl {
 
     @Override
     public boolean turnFaceUp(Ability source, Game game, UUID playerId) {
-        if (!this.getBasicMageObject().isPermanent()){
+        if (!this.getBasicMageObject().isPermanent()) {
             // 701.34g. If a manifested permanent that's represented by an instant or sorcery card would turn face up,
             //   its controller reveals it and leaves it face down. Abilities that trigger whenever a permanent
             //   is turned face up won't trigger.

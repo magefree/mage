@@ -56,7 +56,6 @@ import mage.game.mulligan.Mulligan;
 import mage.game.permanent.Battlefield;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
-import mage.game.permanent.PermanentToken;
 import mage.game.stack.Spell;
 import mage.game.stack.SpellStack;
 import mage.game.stack.StackAbility;
@@ -2117,11 +2116,6 @@ public abstract class GameImpl implements Game {
                 BecomesFaceDownCreatureEffect.makeFaceDownObject(this, null, newBluePrint, faceDownType, null);
             }
             newBluePrint.assignNewId();
-            // TODO: should be able to remove after tdfc rework
-            if (copyFromPermanent.isTransformed() && (copyFromPermanent instanceof PermanentToken || ((copyFromPermanent instanceof PermanentCard) &&
-                    !(((PermanentCard) copyFromPermanent).getCard() instanceof DoubleFacedCardHalf)))) {
-                TransformAbility.transformPermanent(newBluePrint, this, source);
-            }
             if (copyFromPermanent.isPrototyped()) {
                 Abilities<Ability> abilities = copyFromPermanent.getAbilities();
                 for (Ability ability : abilities) {
