@@ -119,7 +119,6 @@ public class ShadowsOverInnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Field Creeper", 251, Rarity.COMMON, mage.cards.f.FieldCreeper.class));
         cards.add(new SetCardInfo("Fiend Binder", 29, Rarity.COMMON, mage.cards.f.FiendBinder.class));
         cards.add(new SetCardInfo("Fiery Temper", 154, Rarity.UNCOMMON, mage.cards.f.FieryTemper.class));
-        cards.add(new SetCardInfo("Final Iteration", 61, Rarity.RARE, mage.cards.f.FinalIteration.class));
         cards.add(new SetCardInfo("Flameblade Angel", 155, Rarity.RARE, mage.cards.f.FlamebladeAngel.class));
         cards.add(new SetCardInfo("Fleeting Memories", 69, Rarity.UNCOMMON, mage.cards.f.FleetingMemories.class));
         cards.add(new SetCardInfo("Fogwalker", 70, Rarity.COMMON, mage.cards.f.Fogwalker.class));

@@ -110,7 +110,6 @@ public final class EldritchMoon extends ExpansionSet {
         cards.add(new SetCardInfo("Falkenrath Reaver", 127, Rarity.COMMON, mage.cards.f.FalkenrathReaver.class));
         cards.add(new SetCardInfo("Field Creeper", 195, Rarity.COMMON, mage.cards.f.FieldCreeper.class));
         cards.add(new SetCardInfo("Fiend Binder", 26, Rarity.COMMON, mage.cards.f.FiendBinder.class));
-        cards.add(new SetCardInfo("Final Iteration", 56, Rarity.RARE, mage.cards.f.FinalIteration.class));
         cards.add(new SetCardInfo("Fogwalker", 60, Rarity.COMMON, mage.cards.f.Fogwalker.class));
         cards.add(new SetCardInfo("Fortune's Favor", 61, Rarity.UNCOMMON, mage.cards.f.FortunesFavor.class));
         cards.add(new SetCardInfo("Foul Emissary", 158, Rarity.UNCOMMON, mage.cards.f.FoulEmissary.class));

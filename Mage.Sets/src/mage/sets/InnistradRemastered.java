@@ -192,7 +192,6 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Fiend Hunter", 22, Rarity.UNCOMMON, mage.cards.f.FiendHunter.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fiend Hunter", 340, Rarity.UNCOMMON, mage.cards.f.FiendHunter.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Fiery Temper", 154, Rarity.UNCOMMON, mage.cards.f.FieryTemper.class));
-        cards.add(new SetCardInfo("Final Iteration", 62, Rarity.RARE, mage.cards.f.FinalIteration.class));
         cards.add(new SetCardInfo("Fleshtaker", 235, Rarity.UNCOMMON, mage.cards.f.Fleshtaker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fleshtaker", 429, Rarity.UNCOMMON, mage.cards.f.Fleshtaker.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Forbidden Alchemy", 355, Rarity.UNCOMMON, mage.cards.f.ForbiddenAlchemy.class, RETRO_ART_USE_VARIOUS));

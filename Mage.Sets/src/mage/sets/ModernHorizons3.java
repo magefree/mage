@@ -213,9 +213,6 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Gravedig", 96, Rarity.COMMON, mage.cards.g.Gravedig.class));
         cards.add(new SetCardInfo("Grim Servant", 97, Rarity.UNCOMMON, mage.cards.g.GrimServant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Grim Servant", 409, Rarity.UNCOMMON, mage.cards.g.GrimServant.class, RETRO_ART_USE_VARIOUS));
-        cards.add(new SetCardInfo("Grist, the Plague Swarm", 251, Rarity.MYTHIC, mage.cards.g.GristThePlagueSwarm.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Grist, the Plague Swarm", 446, Rarity.MYTHIC, mage.cards.g.GristThePlagueSwarm.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Grist, the Plague Swarm", 472, Rarity.MYTHIC, mage.cards.g.GristThePlagueSwarm.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Grist, Voracious Larva", 251, Rarity.MYTHIC, mage.cards.g.GristVoraciousLarva.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Grist, Voracious Larva", 446, Rarity.MYTHIC, mage.cards.g.GristVoraciousLarva.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Grist, Voracious Larva", 472, Rarity.MYTHIC, mage.cards.g.GristVoraciousLarva.class, NON_FULL_USE_VARIOUS));
@@ -381,9 +378,6 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Pyretic Rebirth", 200, Rarity.UNCOMMON, mage.cards.p.PyreticRebirth.class));
         cards.add(new SetCardInfo("Quest for the Necropolis", 104, Rarity.UNCOMMON, mage.cards.q.QuestForTheNecropolis.class));
         cards.add(new SetCardInfo("Ral and the Implicit Maze", 132, Rarity.UNCOMMON, mage.cards.r.RalAndTheImplicitMaze.class));
-        cards.add(new SetCardInfo("Ral, Leyline Prodigy", 247, Rarity.MYTHIC, mage.cards.r.RalLeylineProdigy.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Ral, Leyline Prodigy", 445, Rarity.MYTHIC, mage.cards.r.RalLeylineProdigy.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Ral, Leyline Prodigy", 471, Rarity.MYTHIC, mage.cards.r.RalLeylineProdigy.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ral, Monsoon Mage", 247, Rarity.MYTHIC, mage.cards.r.RalMonsoonMage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ral, Monsoon Mage", 445, Rarity.MYTHIC, mage.cards.r.RalMonsoonMage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ral, Monsoon Mage", 471, Rarity.MYTHIC, mage.cards.r.RalMonsoonMage.class, NON_FULL_USE_VARIOUS));
@@ -452,9 +446,6 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Sorin of House Markov", 245, Rarity.MYTHIC, mage.cards.s.SorinOfHouseMarkov.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sorin of House Markov", 444, Rarity.MYTHIC, mage.cards.s.SorinOfHouseMarkov.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sorin of House Markov", 470, Rarity.MYTHIC, mage.cards.s.SorinOfHouseMarkov.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Sorin, Ravenous Neonate", 245, Rarity.MYTHIC, mage.cards.s.SorinRavenousNeonate.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Sorin, Ravenous Neonate", 444, Rarity.MYTHIC, mage.cards.s.SorinRavenousNeonate.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Sorin, Ravenous Neonate", 470, Rarity.MYTHIC, mage.cards.s.SorinRavenousNeonate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sowing Mycospawn", 170, Rarity.RARE, mage.cards.s.SowingMycospawn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sowing Mycospawn", 340, Rarity.RARE, mage.cards.s.SowingMycospawn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Spawn-Gang Commander", 140, Rarity.UNCOMMON, mage.cards.s.SpawnGangCommander.class));

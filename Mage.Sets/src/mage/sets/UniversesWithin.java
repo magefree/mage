@@ -26,7 +26,6 @@ public final class UniversesWithin extends ExpansionSet {
         cards.add(new SetCardInfo("Bohn, Beguiling Balladeer", 30, Rarity.RARE, mage.cards.b.BohnBeguilingBalladeer.class));
         cards.add(new SetCardInfo("Bjorna, Nightfall Alchemist", 2, Rarity.RARE, mage.cards.b.BjornaNightfallAlchemist.class));
         cards.add(new SetCardInfo("Casal, Lurkwood Pathfinder", 29, Rarity.RARE, mage.cards.c.CasalLurkwoodPathfinder.class));
-        cards.add(new SetCardInfo("Casal, Pathbreaker Owlbear", 29, Rarity.RARE, mage.cards.c.CasalPathbreakerOwlbear.class));
         cards.add(new SetCardInfo("Cecily, Haunted Mage", 3, Rarity.RARE, mage.cards.c.CecilyHauntedMage.class));
         cards.add(new SetCardInfo("Elmar, Ulvenwald Informant", 4, Rarity.RARE, mage.cards.e.ElmarUlvenwaldInformant.class));
         cards.add(new SetCardInfo("Enkira, Hostile Scavenger", 20, Rarity.MYTHIC, mage.cards.e.EnkiraHostileScavenger.class));

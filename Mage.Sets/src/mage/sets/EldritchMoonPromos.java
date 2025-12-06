@@ -41,7 +41,6 @@ public class EldritchMoonPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Emrakul's Evangel", "156s", Rarity.RARE, mage.cards.e.EmrakulsEvangel.class));
         cards.add(new SetCardInfo("Emrakul, the Promised End", "6s", Rarity.MYTHIC, mage.cards.e.EmrakulThePromisedEnd.class));
         cards.add(new SetCardInfo("Eternal Scourge", "7s", Rarity.RARE, mage.cards.e.EternalScourge.class));
-        cards.add(new SetCardInfo("Final Iteration", "56s", Rarity.RARE, mage.cards.f.FinalIteration.class));
         cards.add(new SetCardInfo("Geier Reach Sanitarium", "203s", Rarity.RARE, mage.cards.g.GeierReachSanitarium.class));
         cards.add(new SetCardInfo("Gisa and Geralf", "183s", Rarity.MYTHIC, mage.cards.g.GisaAndGeralf.class));
         cards.add(new SetCardInfo("Gisela, the Broken Blade", "28s", Rarity.MYTHIC, mage.cards.g.GiselaTheBrokenBlade.class));
