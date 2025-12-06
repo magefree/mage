@@ -20,6 +20,7 @@ public class Vintage extends Constructed {
         // All attractions & sticker cards are banned. (to add if/when implemented)
         // this also includes the mtgo replacement "Name Sticker" Goblin.
         banned.add("\"Name Sticker\" Goblin");
+        banned.add("Gleemox");
 
         restricted.add("Ancestral Recall");
         restricted.add("Balance");
