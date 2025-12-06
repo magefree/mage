@@ -1,10 +1,11 @@
 package mage.cards.w;
 
-import mage.MageInt;
+import mage.abilities.common.AttacksEachCombatStaticAbility;
 import mage.abilities.keyword.DayboundAbility;
 import mage.abilities.keyword.DefenderAbility;
-import mage.cards.CardImpl;
+import mage.abilities.keyword.NightboundAbility;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
@@ -13,23 +14,32 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class WearyPrisoner extends CardImpl {
+public final class WearyPrisoner extends TransformingDoubleFacedCard {
 
     public WearyPrisoner(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.WEREWOLF}, "{3}{R}",
+                "Wrathful Jailbreaker",
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.WEREWOLF}, "R"
+        );
 
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.WEREWOLF);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(6);
-
-        this.secondSideCardClazz = mage.cards.w.WrathfulJailbreaker.class;
+        // Weary Prisoner
+        this.getLeftHalfCard().setPT(2, 6);
 
         // Defender
-        this.addAbility(DefenderAbility.getInstance());
+        this.getLeftHalfCard().addAbility(DefenderAbility.getInstance());
 
         // Daybound
-        this.addAbility(new DayboundAbility());
+        this.getLeftHalfCard().addAbility(new DayboundAbility());
+
+        // Wrathful Jailbreaker
+        this.getRightHalfCard().setPT(6, 6);
+
+        // Wrathful Jailbreaker attacks each combat if able.
+        this.getRightHalfCard().addAbility(new AttacksEachCombatStaticAbility());
+
+        // Nightbound
+        this.getRightHalfCard().addAbility(new NightboundAbility());
     }
 
     private WearyPrisoner(final WearyPrisoner card) {

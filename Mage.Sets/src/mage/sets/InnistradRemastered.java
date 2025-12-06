@@ -352,8 +352,6 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Olivia Voldaren", 246, Rarity.MYTHIC, mage.cards.o.OliviaVoldaren.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Olivia Voldaren", 490, Rarity.MYTHIC, mage.cards.o.OliviaVoldaren.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Olivia's Dragoon", 127, Rarity.COMMON, mage.cards.o.OliviasDragoon.class));
-        cards.add(new SetCardInfo("Ormendahl, Profane Prince", 287, Rarity.RARE, mage.cards.o.OrmendahlProfanePrince.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Ormendahl, Profane Prince", 474, Rarity.RARE, mage.cards.o.OrmendahlProfanePrince.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Overcharged Amalgam", 80, Rarity.RARE, mage.cards.o.OverchargedAmalgam.class));
         cards.add(new SetCardInfo("Overgrown Farmland", 281, Rarity.RARE, mage.cards.o.OvergrownFarmland.class));
         cards.add(new SetCardInfo("Pack Guardian", 211, Rarity.UNCOMMON, mage.cards.p.PackGuardian.class, NON_FULL_USE_VARIOUS));
@@ -505,8 +503,6 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Wandering Mind", 437, Rarity.UNCOMMON, mage.cards.w.WanderingMind.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Wedding Announcement", 453, Rarity.RARE, mage.cards.w.WeddingAnnouncement.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Wedding Announcement", 51, Rarity.RARE, mage.cards.w.WeddingAnnouncement.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Wedding Festivity", 453, Rarity.RARE, mage.cards.w.WeddingFestivity.class, RETRO_ART_USE_VARIOUS));
-        cards.add(new SetCardInfo("Wedding Festivity", 51, Rarity.RARE, mage.cards.w.WeddingFestivity.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Westvale Abbey", 287, Rarity.RARE, mage.cards.w.WestvaleAbbey.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Westvale Abbey", 474, Rarity.RARE, mage.cards.w.WestvaleAbbey.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Wild Hunger", 225, Rarity.UNCOMMON, mage.cards.w.WildHunger.class, NON_FULL_USE_VARIOUS));

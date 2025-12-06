@@ -219,7 +219,6 @@ public final class ShadowsOverInnistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Olivia, Mobilized for War", 248, Rarity.MYTHIC, mage.cards.o.OliviaMobilizedForWar.class));
         cards.add(new SetCardInfo("Ongoing Investigation", 77, Rarity.UNCOMMON, mage.cards.o.OngoingInvestigation.class));
         cards.add(new SetCardInfo("Open the Armory", 32, Rarity.UNCOMMON, mage.cards.o.OpenTheArmory.class));
-        cards.add(new SetCardInfo("Ormendahl, Profane Prince", 281, Rarity.RARE, mage.cards.o.OrmendahlProfanePrince.class));
         cards.add(new SetCardInfo("Pack Guardian", 221, Rarity.UNCOMMON, mage.cards.p.PackGuardian.class));
         cards.add(new SetCardInfo("Pale Rider of Trostad", 128, Rarity.UNCOMMON, mage.cards.p.PaleRiderOfTrostad.class));
         cards.add(new SetCardInfo("Paranoid Parish-Blade", 33, Rarity.UNCOMMON, mage.cards.p.ParanoidParishBlade.class));

@@ -225,7 +225,6 @@ public class ShadowsOverInnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Olivia's Dragoon", 128, Rarity.COMMON, mage.cards.o.OliviasDragoon.class));
         cards.add(new SetCardInfo("Olivia, Mobilized for War", 239, Rarity.MYTHIC, mage.cards.o.OliviaMobilizedForWar.class));
         cards.add(new SetCardInfo("Ongoing Investigation", 84, Rarity.UNCOMMON, mage.cards.o.OngoingInvestigation.class));
-        cards.add(new SetCardInfo("Ormendahl, Profane Prince", 275, Rarity.RARE, mage.cards.o.OrmendahlProfanePrince.class));
         cards.add(new SetCardInfo("Pack Guardian", 208, Rarity.UNCOMMON, mage.cards.p.PackGuardian.class));
         cards.add(new SetCardInfo("Permeating Mass", 209, Rarity.RARE, mage.cards.p.PermeatingMass.class));
         cards.add(new SetCardInfo("Pick the Brain", 129, Rarity.UNCOMMON, mage.cards.p.PickTheBrain.class));

@@ -1062,7 +1062,6 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Bloodline Keeper", 1157, Rarity.RARE, mage.cards.b.BloodlineKeeper.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nicol Bolas, the Ravager", 1158, Rarity.MYTHIC, mage.cards.n.NicolBolasTheRavager.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Westvale Abbey", 1159, Rarity.RARE, mage.cards.w.WestvaleAbbey.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Ormendahl, Profane Prince", 1159, Rarity.RARE, mage.cards.o.OrmendahlProfanePrince.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Emrakul, the Promised End", 1160, Rarity.MYTHIC, mage.cards.e.EmrakulThePromisedEnd.class));
         cards.add(new SetCardInfo("Serra Angel", 1161, Rarity.RARE, mage.cards.s.SerraAngel.class));
         cards.add(new SetCardInfo("Brainstorm", 1162, Rarity.RARE, mage.cards.b.Brainstorm.class, NON_FULL_USE_VARIOUS));
@@ -1116,7 +1115,6 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Bloodline Keeper", 1210, Rarity.RARE, mage.cards.b.BloodlineKeeper.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nicol Bolas, the Ravager", 1211, Rarity.MYTHIC, mage.cards.n.NicolBolasTheRavager.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Westvale Abbey", 1212, Rarity.RARE, mage.cards.w.WestvaleAbbey.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Ormendahl, Profane Prince", 1212, Rarity.RARE, mage.cards.o.OrmendahlProfanePrince.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Phyrexian Unlife", 1213, Rarity.RARE, mage.cards.p.PhyrexianUnlife.class));
         cards.add(new SetCardInfo("Phyrexian Crusader", 1214, Rarity.RARE, mage.cards.p.PhyrexianCrusader.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plague Engineer", 1215, Rarity.RARE, mage.cards.p.PlagueEngineer.class));

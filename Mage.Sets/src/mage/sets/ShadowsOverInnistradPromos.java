@@ -80,7 +80,6 @@ public class ShadowsOverInnistradPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Nephalia Moondrakes", 75, Rarity.RARE, mage.cards.n.NephaliaMoondrakes.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Odric, Lunarch Marshal", "31s", Rarity.RARE, mage.cards.o.OdricLunarchMarshal.class));
         cards.add(new SetCardInfo("Olivia, Mobilized for War", "248s", Rarity.MYTHIC, mage.cards.o.OliviaMobilizedForWar.class));
-        cards.add(new SetCardInfo("Ormendahl, Profane Prince", "281s", Rarity.RARE, mage.cards.o.OrmendahlProfanePrince.class));
         cards.add(new SetCardInfo("Port Town", "278s", Rarity.RARE, mage.cards.p.PortTown.class));
         cards.add(new SetCardInfo("Prized Amalgam", "249s", Rarity.RARE, mage.cards.p.PrizedAmalgam.class));
         cards.add(new SetCardInfo("Rattlechains", "81s", Rarity.RARE, mage.cards.r.Rattlechains.class));

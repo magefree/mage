@@ -79,7 +79,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Bloodvial Purveyor", 290, Rarity.RARE, mage.cards.b.BloodvialPurveyor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloodvial Purveyor", 98, Rarity.RARE, mage.cards.b.BloodvialPurveyor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloody Betrayal", 147, Rarity.COMMON, mage.cards.b.BloodyBetrayal.class));
-        cards.add(new SetCardInfo("Blossom-Clad Werewolf", 226, Rarity.COMMON, mage.cards.b.BlossomCladWerewolf.class));
         cards.add(new SetCardInfo("Boarded Window", 253, Rarity.UNCOMMON, mage.cards.b.BoardedWindow.class));
         cards.add(new SetCardInfo("Bramble Armor", 188, Rarity.COMMON, mage.cards.b.BrambleArmor.class));
         cards.add(new SetCardInfo("Bramble Wurm", 189, Rarity.UNCOMMON, mage.cards.b.BrambleWurm.class));
@@ -439,9 +438,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Weaver of Blossoms", 226, Rarity.COMMON, mage.cards.w.WeaverOfBlossoms.class));
         cards.add(new SetCardInfo("Wedding Announcement", 355, Rarity.RARE, mage.cards.w.WeddingAnnouncement.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wedding Announcement", 45, Rarity.RARE, mage.cards.w.WeddingAnnouncement.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Wedding Crasher", 229, Rarity.UNCOMMON, mage.cards.w.WeddingCrasher.class));
-        cards.add(new SetCardInfo("Wedding Festivity", 355, Rarity.RARE, mage.cards.w.WeddingFestivity.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Wedding Festivity", 45, Rarity.RARE, mage.cards.w.WeddingFestivity.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wedding Invitation", 260, Rarity.COMMON, mage.cards.w.WeddingInvitation.class));
         cards.add(new SetCardInfo("Wedding Security", 138, Rarity.UNCOMMON, mage.cards.w.WeddingSecurity.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wedding Security", 299, Rarity.UNCOMMON, mage.cards.w.WeddingSecurity.class, NON_FULL_USE_VARIOUS));
@@ -454,7 +450,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Witness the Future", 90, Rarity.UNCOMMON, mage.cards.w.WitnessTheFuture.class));
         cards.add(new SetCardInfo("Wolf Strike", 228, Rarity.COMMON, mage.cards.w.WolfStrike.class));
         cards.add(new SetCardInfo("Wolfkin Outcast", 229, Rarity.UNCOMMON, mage.cards.w.WolfkinOutcast.class));
-        cards.add(new SetCardInfo("Wrathful Jailbreaker", 184, Rarity.COMMON, mage.cards.w.WrathfulJailbreaker.class));
         cards.add(new SetCardInfo("Wretched Throng", 91, Rarity.COMMON, mage.cards.w.WretchedThrong.class));
     }
 

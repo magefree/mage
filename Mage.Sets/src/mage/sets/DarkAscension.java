@@ -128,7 +128,6 @@ public final class DarkAscension extends ExpansionSet {
         cards.add(new SetCardInfo("Increasing Vengeance", 95, Rarity.RARE, mage.cards.i.IncreasingVengeance.class));
         cards.add(new SetCardInfo("Jar of Eyeballs", 152, Rarity.RARE, mage.cards.j.JarOfEyeballs.class));
         cards.add(new SetCardInfo("Kessig Recluse", 121, Rarity.COMMON, mage.cards.k.KessigRecluse.class));
-        cards.add(new SetCardInfo("Krallenhorde Killer", 133, Rarity.RARE, mage.cards.k.KrallenhordeKiller.class));
         cards.add(new SetCardInfo("Lambholt Elder", 122, Rarity.UNCOMMON, mage.cards.l.LambholtElder.class));
         cards.add(new SetCardInfo("Lingering Souls", 12, Rarity.UNCOMMON, mage.cards.l.LingeringSouls.class));
         cards.add(new SetCardInfo("Lost in the Woods", 123, Rarity.RARE, mage.cards.l.LostInTheWoods.class));
