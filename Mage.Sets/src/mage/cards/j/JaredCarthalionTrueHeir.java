@@ -34,8 +34,7 @@ public final class JaredCarthalionTrueHeir extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Jared Carthalion, True Heir enters the battlefield, target opponent becomes the monarch. You can't become the monarch this turn.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new BecomesMonarchTargetEffect()
-                .setText("target opponent becomes the monarch"));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new BecomesMonarchTargetEffect());
         ability.addEffect(new JaredCarthalionTrueHeirMonarchEffect());
         ability.addTarget(new TargetOpponent());
         ability.addHint(MonarchHint.instance);
