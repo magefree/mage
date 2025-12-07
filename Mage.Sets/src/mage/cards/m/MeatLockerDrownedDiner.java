@@ -16,6 +16,7 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class MeatLockerDrownedDiner extends RoomCard {
+
     public MeatLockerDrownedDiner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, "{2}{U}", "{3}{U}{U}");
 

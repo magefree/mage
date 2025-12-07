@@ -18,10 +18,10 @@ import mage.target.common.TargetCardInYourGraveyard;
 import java.util.UUID;
 
 /**
- *
  * @author oscscull
  */
 public final class SurgicalSuiteHospitalRoom extends RoomCard {
+
     private static final FilterCard filter = new FilterCreatureCard(
             "creature card with mana value 3 or less from your graveyard");
 

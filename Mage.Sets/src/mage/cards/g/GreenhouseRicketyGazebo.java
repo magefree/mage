@@ -18,6 +18,7 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class GreenhouseRicketyGazebo extends RoomCard {
+
     public GreenhouseRicketyGazebo(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, "{2}{G}", "{3}{G}");
 

@@ -17,6 +17,7 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class DefiledCryptCadaverLab extends RoomCard {
+
     public DefiledCryptCadaverLab(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, "{3}{B}", "{B}");
 

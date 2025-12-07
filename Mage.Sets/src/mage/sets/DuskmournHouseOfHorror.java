@@ -76,6 +76,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Defiled Crypt // Cadaver Lab", 91, Rarity.UNCOMMON, mage.cards.d.DefiledCryptCadaverLab.class));
         cards.add(new SetCardInfo("Demonic Counsel", 310, Rarity.RARE, mage.cards.d.DemonicCounsel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Demonic Counsel", 92, Rarity.RARE, mage.cards.d.DemonicCounsel.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Derelict Attic // Widow's Walk", 93, Rarity.COMMON, mage.cards.d.DerelictAtticWidowsWalk.class));
         cards.add(new SetCardInfo("Dissection Tools", 245, Rarity.RARE, mage.cards.d.DissectionTools.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dissection Tools", 385, Rarity.RARE, mage.cards.d.DissectionTools.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Disturbing Mirth", 212, Rarity.UNCOMMON, mage.cards.d.DisturbingMirth.class));

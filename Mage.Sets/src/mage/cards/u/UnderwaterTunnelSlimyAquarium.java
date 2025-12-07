@@ -13,6 +13,7 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class UnderwaterTunnelSlimyAquarium extends RoomCard {
+
     public UnderwaterTunnelSlimyAquarium(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, "{U}", "{3}{U}");
 

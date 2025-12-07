@@ -16,6 +16,7 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class GlassworksShatteredYard extends RoomCard {
+
     public GlassworksShatteredYard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, "{2}{R}", "{4}{R}");
 

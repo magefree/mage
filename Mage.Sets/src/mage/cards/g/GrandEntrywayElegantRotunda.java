@@ -16,6 +16,7 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class GrandEntrywayElegantRotunda extends RoomCard {
+
     public GrandEntrywayElegantRotunda(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, "{1}{W}", "{2}{W}");
 

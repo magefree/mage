@@ -15,6 +15,7 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class MolderingGymWeightRoom extends RoomCard {
+
     public MolderingGymWeightRoom(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, "{2}{G}", "{5}{G}");
 

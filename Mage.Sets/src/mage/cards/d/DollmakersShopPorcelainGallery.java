@@ -9,7 +9,9 @@ import mage.abilities.effects.common.continuous.SetBasePowerToughnessAllEffect;
 import mage.abilities.hint.ValueHint;
 import mage.cards.CardSetInfo;
 import mage.cards.RoomCard;
-import mage.constants.*;
+import mage.constants.Duration;
+import mage.constants.SetTargetPointer;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -44,7 +46,7 @@ public final class DollmakersShopPorcelainGallery extends RoomCard {
         this.getRightHalfCard().addAbility(right);
     }
 
-    private DollmakersShopPorcelainGallery (final DollmakersShopPorcelainGallery card) {
+    private DollmakersShopPorcelainGallery(final DollmakersShopPorcelainGallery card) {
         super(card);
     }
 
