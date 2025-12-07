@@ -307,6 +307,8 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Rip, Spawn Hunter", 362, Rarity.RARE, mage.cards.r.RipSpawnHunter.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ripchain Razorkin", 154, Rarity.COMMON, mage.cards.r.RipchainRazorkin.class));
         cards.add(new SetCardInfo("Rite of the Moth", 229, Rarity.UNCOMMON, mage.cards.r.RiteOfTheMoth.class));
+        cards.add(new SetCardInfo("Roaring Furnace // Steaming Sauna", 343, Rarity.RARE, mage.cards.r.RoaringFurnaceSteamingSauna.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Roaring Furnace // Steaming Sauna", 230, Rarity.RARE, mage.cards.r.RoaringFurnaceSteamingSauna.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rootwise Survivor", 196, Rarity.UNCOMMON, mage.cards.r.RootwiseSurvivor.class));
         cards.add(new SetCardInfo("Savior of the Small", 27, Rarity.UNCOMMON, mage.cards.s.SaviorOfTheSmall.class));
         cards.add(new SetCardInfo("Saw", 254, Rarity.UNCOMMON, mage.cards.s.Saw.class));
