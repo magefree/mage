@@ -79,8 +79,8 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Dissection Tools", 385, Rarity.RARE, mage.cards.d.DissectionTools.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Disturbing Mirth", 212, Rarity.UNCOMMON, mage.cards.d.DisturbingMirth.class));
         cards.add(new SetCardInfo("Diversion Specialist", 132, Rarity.UNCOMMON, mage.cards.d.DiversionSpecialist.class));
-        cards.add(new SetCardInfo("Dollmaker's Shop // Porcelain Gallery", 4, Rarity.MYTHIC, mage.cards.d.DollmakersShopPorcelainGallery.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dollmaker's Shop // Porcelain Gallery", 335, Rarity.MYTHIC, mage.cards.d.DollmakersShopPorcelainGallery.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Dollmaker's Shop // Porcelain Gallery", 4, Rarity.MYTHIC, mage.cards.d.DollmakersShopPorcelainGallery.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Don't Make a Sound", 49, Rarity.COMMON, mage.cards.d.DontMakeASound.class));
         cards.add(new SetCardInfo("Doomsday Excruciator", 346, Rarity.RARE, mage.cards.d.DoomsdayExcruciator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Doomsday Excruciator", 94, Rarity.RARE, mage.cards.d.DoomsdayExcruciator.class, NON_FULL_USE_VARIOUS));
@@ -158,8 +158,8 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Gloomlake Verge", 260, Rarity.RARE, mage.cards.g.GloomlakeVerge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gloomlake Verge", 331, Rarity.RARE, mage.cards.g.GloomlakeVerge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Grab the Prize", 138, Rarity.COMMON, mage.cards.g.GrabThePrize.class));
-        cards.add(new SetCardInfo("Grand Entryway // Elegant Rotunda", 287, Rarity.COMMON, mage.cards.g.GrandEntrywayElegantRotunda.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Grand Entryway // Elegant Rotunda", 15, Rarity.COMMON, mage.cards.g.GrandEntrywayElegantRotunda.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Grand Entryway // Elegant Rotunda", 287, Rarity.COMMON, mage.cards.g.GrandEntrywayElegantRotunda.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Grasping Longneck", 180, Rarity.COMMON, mage.cards.g.GraspingLongneck.class));
         cards.add(new SetCardInfo("Greenhouse // Rickety Gazebo", 181, Rarity.UNCOMMON, mage.cards.g.GreenhouseRicketyGazebo.class));
         cards.add(new SetCardInfo("Gremlin Tamer", 215, Rarity.UNCOMMON, mage.cards.g.GremlinTamer.class));
