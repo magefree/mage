@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.cards.RoomCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.SpellAbilityType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
@@ -35,7 +34,7 @@ public final class UnholyAnnexRitualChamber extends RoomCard {
     }
 
     public UnholyAnnexRitualChamber(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}", "{3}{B}{B}", SpellAbilityType.SPLIT);
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}", "{3}{B}{B}");
         this.subtype.add(SubType.ROOM);
 
         // Unholy Annex: At the beginning of your end step, draw a card. If you control a Demon, each opponent loses 2 life and you gain 2 life. Otherwise, you lose 2 life.

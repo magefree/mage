@@ -158,6 +158,8 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Gloomlake Verge", 260, Rarity.RARE, mage.cards.g.GloomlakeVerge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gloomlake Verge", 331, Rarity.RARE, mage.cards.g.GloomlakeVerge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Grab the Prize", 138, Rarity.COMMON, mage.cards.g.GrabThePrize.class));
+        cards.add(new SetCardInfo("Grand Entryway // Elegant Rotunda", 287, Rarity.COMMON, mage.cards.g.GrandEntrywayElegantRotunda.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Grand Entryway // Elegant Rotunda", 15, Rarity.COMMON, mage.cards.g.GrandEntrywayElegantRotunda.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Grasping Longneck", 180, Rarity.COMMON, mage.cards.g.GraspingLongneck.class));
         cards.add(new SetCardInfo("Gremlin Tamer", 215, Rarity.UNCOMMON, mage.cards.g.GremlinTamer.class));
         cards.add(new SetCardInfo("Grievous Wound", 102, Rarity.RARE, mage.cards.g.GrievousWound.class, NON_FULL_USE_VARIOUS));

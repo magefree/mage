@@ -8,7 +8,6 @@ import mage.cards.CardSetInfo;
 import mage.cards.RoomCard;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
-import mage.constants.SpellAbilityType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
@@ -42,7 +41,7 @@ public final class SurgicalSuiteHospitalRoom extends RoomCard {
         // Whenever you attack, put a +1/+1 counter on target attacking creature.
         super(ownerId, setInfo,
                 new CardType[] { CardType.ENCHANTMENT },
-                "{1}{W}", "{3}{W}", SpellAbilityType.SPLIT);
+                "{1}{W}", "{3}{W}");
         this.subtype.add(SubType.ROOM);
 
         // Left half ability - "When you unlock this door, return target creature card with mana value 3 or less from your graveyard to the battlefield."

@@ -29,7 +29,7 @@ public final class DollmakersShopPorcelainGallery extends RoomCard {
     }
 
     public DollmakersShopPorcelainGallery(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}", "{4}{W}{W}", SpellAbilityType.SPLIT);
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}", "{4}{W}{W}");
         this.subtype.add(SubType.ROOM);
 
         // Dollmaker's Shop: Whenever one or more non-Toy creatures you control attack a player, create a 1/1 white Toy artifact creature token.

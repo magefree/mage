@@ -9,7 +9,6 @@ import mage.abilities.effects.common.ReturnFromYourGraveyardToBattlefieldAllEffe
 import mage.cards.CardSetInfo;
 import mage.cards.RoomCard;
 import mage.constants.CardType;
-import mage.constants.SpellAbilityType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
 
@@ -21,7 +20,7 @@ import java.util.UUID;
 public final class FuneralRoomAwakeningHall extends RoomCard {
 
     public FuneralRoomAwakeningHall(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}", "{6}{B}{B}", SpellAbilityType.SPLIT);
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}", "{6}{B}{B}");
         this.subtype.add(SubType.ROOM);
 
         // Funeral Room: Whenever a creature you control dies, each opponent loses 1 life and you gain 1 life.
