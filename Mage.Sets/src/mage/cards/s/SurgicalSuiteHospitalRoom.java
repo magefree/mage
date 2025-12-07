@@ -6,7 +6,6 @@ import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffec
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardSetInfo;
 import mage.cards.RoomCard;
-import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
@@ -40,7 +39,6 @@ public final class SurgicalSuiteHospitalRoom extends RoomCard {
         // Enchantment -- Room
         // Whenever you attack, put a +1/+1 counter on target attacking creature.
         super(ownerId, setInfo,
-                new CardType[] { CardType.ENCHANTMENT },
                 "{1}{W}", "{3}{W}");
         this.subtype.add(SubType.ROOM);
 

@@ -13,7 +13,7 @@ import mage.constants.SpellAbilityType;
  */
 public final class [=$className=] extends RoomCard {
     public [=$className=](UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{[=$type=]}, "[=$manaCost=]", "??");
+        super(ownerId, setInfo, "[=$manaCost=]");
 [= if ($power || $power eq 0) {
     $OUT .= "\n        this.power = new MageInt($power);";
     $OUT .= "\n        this.toughness = new MageInt($toughness);";} =][=$abilities=]

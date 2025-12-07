@@ -6,7 +6,6 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardSetInfo;
 import mage.cards.RoomCard;
-import mage.constants.CardType;
 import mage.counters.CounterType;
 import mage.game.permanent.token.GlimmerToken;
 import mage.target.common.TargetCreaturePermanent;
@@ -18,7 +17,7 @@ import java.util.UUID;
  */
 public final class GrandEntrywayElegantRotunda extends RoomCard {
     public GrandEntrywayElegantRotunda(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}", "{2}{W}");
+        super(ownerId, setInfo, "{1}{W}", "{2}{W}");
 
         // Grand Entryway
         // When you unlock this door, create a 1/1 white Glimmer enchantment creature token.

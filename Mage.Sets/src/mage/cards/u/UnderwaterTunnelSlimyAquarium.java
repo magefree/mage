@@ -7,7 +7,6 @@ import mage.abilities.effects.keyword.ManifestDreadEffect;
 import mage.abilities.effects.keyword.SurveilEffect;
 import mage.cards.CardSetInfo;
 import mage.cards.RoomCard;
-import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -21,7 +20,7 @@ import java.util.UUID;
  */
 public final class UnderwaterTunnelSlimyAquarium extends RoomCard {
     public UnderwaterTunnelSlimyAquarium(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}", "{3}{U}");
+        super(ownerId, setInfo, "{U}", "{3}{U}");
 
         // Underwater Tunnel
         // When you unlock this door, surveil 2.

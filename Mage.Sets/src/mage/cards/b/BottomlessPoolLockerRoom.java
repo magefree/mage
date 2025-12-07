@@ -26,7 +26,6 @@ public final class BottomlessPoolLockerRoom extends RoomCard {
         // Enchantment -- Room
         // Whenever one or more creatures you control deal combat damage to a player, draw a card.
         super(ownerId, setInfo,
-                new CardType[] { CardType.ENCHANTMENT },
                 "{U}", "{4}{U}");
         this.subtype.add(SubType.ROOM);
 

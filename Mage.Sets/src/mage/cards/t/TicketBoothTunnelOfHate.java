@@ -8,7 +8,6 @@ import mage.abilities.effects.keyword.ManifestDreadEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardSetInfo;
 import mage.cards.RoomCard;
-import mage.constants.CardType;
 import mage.target.common.TargetAttackingCreature;
 
 import java.util.UUID;
@@ -18,7 +17,7 @@ import java.util.UUID;
  */
 public final class TicketBoothTunnelOfHate extends RoomCard {
     public TicketBoothTunnelOfHate(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}", "{4}{R}{R}");
+        super(ownerId, setInfo, "{2}{R}", "{4}{R}{R}");
 
         // Ticket Booth
         // When you unlock this door, manifest dread.

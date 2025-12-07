@@ -29,7 +29,7 @@ public final class DazzlingTheaterPropRoom extends RoomCard {
     }
 
     public DazzlingTheaterPropRoom(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}", "{2}{W}");
+        super(ownerId, setInfo, "{3}{W}", "{2}{W}");
         this.subtype.add(SubType.ROOM);
 
         // Dazzling Theater: Creature spells you cast have convoke.
