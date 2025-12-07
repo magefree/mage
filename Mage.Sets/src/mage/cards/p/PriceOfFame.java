@@ -20,7 +20,7 @@ import java.util.UUID;
  */
 public final class PriceOfFame extends CardImpl {
 
-    private static final Condition condition = new SourceTargetsPermanentCondition(StaticFilters.FILTER_CONTROLLED_CREATURE_LEGENDARY);
+    private static final Condition condition = new SourceTargetsPermanentCondition(StaticFilters.FILTER_CREATURE_LEGENDARY);
 
     public PriceOfFame(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{B}");
