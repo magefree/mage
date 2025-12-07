@@ -88,6 +88,7 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Champions from Beyond", 11, Rarity.RARE, mage.cards.c.ChampionsFromBeyond.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chaos Warp", 291, Rarity.RARE, mage.cards.c.ChaosWarp.class));
         cards.add(new SetCardInfo("Chasm Skulker", 262, Rarity.RARE, mage.cards.c.ChasmSkulker.class));
+        cards.add(new SetCardInfo("Chocobo Camp", 462, Rarity.RARE, mage.cards.c.ChocoboCamp.class));
         cards.add(new SetCardInfo("Chocobo Knights", 102, Rarity.RARE, mage.cards.c.ChocoboKnights.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chocobo Knights", 12, Rarity.RARE, mage.cards.c.ChocoboKnights.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Choked Estuary", 379, Rarity.RARE, mage.cards.c.ChokedEstuary.class));
