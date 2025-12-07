@@ -222,6 +222,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Marina Vendrell's Grimoire", 64, Rarity.RARE, mage.cards.m.MarinaVendrellsGrimoire.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Marvin, Murderous Mimic", 253, Rarity.RARE, mage.cards.m.MarvinMurderousMimic.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Marvin, Murderous Mimic", 367, Rarity.RARE, mage.cards.m.MarvinMurderousMimic.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Meat Locker // Drowned Diner", 65, Rarity.COMMON, mage.cards.m.MeatLockerDrownedDiner.class));
         cards.add(new SetCardInfo("Meathook Massacre II", 108, Rarity.MYTHIC, mage.cards.m.MeathookMassacreII.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Meathook Massacre II", 293, Rarity.MYTHIC, mage.cards.m.MeathookMassacreII.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Meathook Massacre II", 311, Rarity.MYTHIC, mage.cards.m.MeathookMassacreII.class, NON_FULL_USE_VARIOUS));
