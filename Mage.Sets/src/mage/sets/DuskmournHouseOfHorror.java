@@ -350,6 +350,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Thornspire Verge", 270, Rarity.RARE, mage.cards.t.ThornspireVerge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thornspire Verge", 333, Rarity.RARE, mage.cards.t.ThornspireVerge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Threats Around Every Corner", 200, Rarity.UNCOMMON, mage.cards.t.ThreatsAroundEveryCorner.class));
+        cards.add(new SetCardInfo("Ticket Booth // Tunnel of Hate", 158, Rarity.COMMON, mage.cards.t.TicketBoothTunnelOfHate.class));
         cards.add(new SetCardInfo("Toby, Beastie Befriender", 35, Rarity.RARE, mage.cards.t.TobyBeastieBefriender.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Toby, Beastie Befriender", 356, Rarity.RARE, mage.cards.t.TobyBeastieBefriender.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Trapped in the Screen", 36, Rarity.COMMON, mage.cards.t.TrappedInTheScreen.class));
