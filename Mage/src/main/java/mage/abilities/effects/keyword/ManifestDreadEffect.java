@@ -7,6 +7,7 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.counters.Counter;
 import mage.game.Game;
 import mage.game.events.ManifestedDreadEvent;
 import mage.game.permanent.Permanent;
@@ -14,18 +15,28 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.Optional;
+
 /**
  * @author TheElk801
  */
 public class ManifestDreadEffect extends OneShotEffect {
 
+    private final Counter counter;
+
     public ManifestDreadEffect() {
+        this((Counter) null);
+    }
+
+    public ManifestDreadEffect(Counter counter) {
         super(Outcome.Benefit);
-        staticText = "manifest dread";
+        this.counter = counter;
+        staticText = "manifest dread" + (counter != null ? ", then put " + counter.getDescription() + " on that creature" : "");
     }
 
     private ManifestDreadEffect(final ManifestDreadEffect effect) {
         super(effect);
+        this.counter = Optional.ofNullable(effect.counter).map(Counter::copy).orElse(null);
     }
 
     @Override
@@ -36,7 +47,17 @@ public class ManifestDreadEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        return player != null && doManifestDread(player, source, game) != null;
+        if (player == null) {
+            return false;
+        }
+        Permanent permanent = doManifestDread(player, source, game);
+        if (permanent == null) {
+            return false;
+        }
+        if (counter != null) {
+            permanent.addCounters(counter, source, game);
+        }
+        return true;
     }
 
     public static Permanent doManifestDread(Player player, Ability source, Game game) {
