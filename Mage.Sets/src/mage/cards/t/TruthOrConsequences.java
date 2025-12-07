@@ -1,6 +1,5 @@
 package mage.cards.t;
 
-import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -66,9 +65,7 @@ class TruthOrConsequencesEffect extends OneShotEffect {
         TwoChoiceVote vote = new TwoChoiceVote("Truth (draw card)", "Consequences (deal damage)", Outcome.DrawCard, true);
         vote.doVotes(source, game);
         player.drawCards(vote.getVoteCount(true), source, game);
-        Optional.of(player)
-                .map(MageItem::getId)
-                .map(game::getOpponents)
+        Optional.of(game.getOpponents(player.getId(), true))
                 .map(RandomUtil::randomFromCollection)
                 .map(game::getPlayer)
                 .ifPresent(opponent -> {
