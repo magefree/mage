@@ -275,6 +275,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Overlord of the Mistmoors", 370, Rarity.MYTHIC, mage.cards.o.OverlordOfTheMistmoors.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Overlord of the Mistmoors", 387, Rarity.MYTHIC, mage.cards.o.OverlordOfTheMistmoors.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Overlord of the Mistmoors", 397, Rarity.MYTHIC, mage.cards.o.OverlordOfTheMistmoors.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Painter's Studio // Defaced Gallery", 147, Rarity.UNCOMMON, mage.cards.p.PaintersStudioDefacedGallery.class));
         cards.add(new SetCardInfo("Paranormal Analyst", 69, Rarity.UNCOMMON, mage.cards.p.ParanormalAnalyst.class));
         cards.add(new SetCardInfo("Patched Plaything", 24, Rarity.UNCOMMON, mage.cards.p.PatchedPlaything.class));
         cards.add(new SetCardInfo("Patchwork Beastie", 195, Rarity.UNCOMMON, mage.cards.p.PatchworkBeastie.class));
