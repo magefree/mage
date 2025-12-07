@@ -99,7 +99,7 @@ public class SpellTransformedAbility extends SpellAbility {
 class TransformedEffect extends ContinuousEffectImpl {
 
     public TransformedEffect() {
-        super(Duration.WhileOnStack, Layer.CopyEffects_1, SubLayer.CopyEffects_1a, Outcome.BecomeCreature);
+        super(Duration.WhileOnStack, Layer.TransformCharacteristics_0, SubLayer.NA, Outcome.BecomeCreature);
         staticText = "";
     }
 
