@@ -9,6 +9,7 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.BecomesMonarchTargetEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
+import mage.abilities.hint.common.MonarchHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -51,7 +52,7 @@ public final class GarlandRoyalKidnapper extends CardImpl {
         // When Garland enters, target opponent becomes the monarch.
         Ability ability = new EntersBattlefieldTriggeredAbility(new BecomesMonarchTargetEffect());
         ability.addTarget(new TargetOpponent());
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(MonarchHint.instance));
 
         // Whenever an opponent becomes the monarch, gain control of target creature that player controls for as long as they're the monarch.
         this.addAbility(new GarlandRoyalKidnapperTriggeredAbility());
