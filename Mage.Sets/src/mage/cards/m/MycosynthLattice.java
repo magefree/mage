@@ -149,12 +149,6 @@ class EverythingIsColorlessEffect extends ContinuousEffectImpl {
                     game.getState().getCreateMageObjectAttribute(leftHalfCard, game).getColor().setColor(colorless);
                     game.getState().getCreateMageObjectAttribute(rightHalfCard, game).getColor().setColor(colorless);
                 }
-
-                // double faces cards
-                // TODO: can remove after tdfc rework
-                if (card.getSecondCardFace() != null) {
-                    game.getState().getCreateMageObjectAttribute(card, game).getColor().setColor(colorless);
-                }
             });
             return true;
         }
