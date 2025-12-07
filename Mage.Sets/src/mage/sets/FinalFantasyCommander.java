@@ -367,6 +367,7 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Sphere Grid", 123, Rarity.RARE, mage.cards.s.SphereGrid.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sphere Grid", 70, Rarity.RARE, mage.cards.s.SphereGrid.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Spire of Industry", 426, Rarity.RARE, mage.cards.s.SpireOfIndustry.class));
+        cards.add(new SetCardInfo("Squall, Gunblade Duelist", 453, Rarity.RARE, mage.cards.s.SquallGunbladeDuelist.class));
         cards.add(new SetCardInfo("Stitch Together", 286, Rarity.UNCOMMON, mage.cards.s.StitchTogether.class));
         cards.add(new SetCardInfo("Stitcher's Supplier", 287, Rarity.UNCOMMON, mage.cards.s.StitchersSupplier.class));
         cards.add(new SetCardInfo("Strago and Relm", 155, Rarity.RARE, mage.cards.s.StragoAndRelm.class, NON_FULL_USE_VARIOUS));
