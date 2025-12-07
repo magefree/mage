@@ -1,5 +1,6 @@
 package mage.cards.t;
 
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -10,8 +11,9 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.common.TargetOpponent;
+import mage.util.RandomUtil;
 
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -64,10 +66,15 @@ class TruthOrConsequencesEffect extends OneShotEffect {
         TwoChoiceVote vote = new TwoChoiceVote("Truth (draw card)", "Consequences (deal damage)", Outcome.DrawCard, true);
         vote.doVotes(source, game);
         player.drawCards(vote.getVoteCount(true), source, game);
-        TargetOpponent target = new TargetOpponent(true);
-        target.setRandom(true);
-        target.choose(outcome, source.getControllerId(), source.getSourceId(), source, game);
-        Player opponent = game.getPlayer(target.getFirstTarget());
-        return opponent == null || opponent.damage(3 * vote.getVoteCount(false), source, game) > 0;
+        Optional.of(player)
+                .map(MageItem::getId)
+                .map(game::getOpponents)
+                .map(RandomUtil::randomFromCollection)
+                .map(game::getPlayer)
+                .ifPresent(opponent -> {
+                    game.informPlayers(opponent.getLogName() + " has been chosen at random.");
+                    opponent.damage(3 * vote.getVoteCount(false), source, game);
+                });
+        return true;
     }
 }
