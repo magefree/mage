@@ -274,6 +274,7 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Nature's Lore", 311, Rarity.COMMON, mage.cards.n.NaturesLore.class));
         cards.add(new SetCardInfo("Nesting Grounds", 408, Rarity.UNCOMMON, mage.cards.n.NestingGrounds.class));
         cards.add(new SetCardInfo("Night's Whisper", 280, Rarity.COMMON, mage.cards.n.NightsWhisper.class));
+        cards.add(new SetCardInfo("Noctis, Heir Apparent", 460, Rarity.RARE, mage.cards.n.NoctisHeirApparent.class));
         cards.add(new SetCardInfo("Nomad Outpost", 409, Rarity.UNCOMMON, mage.cards.n.NomadOutpost.class));
         cards.add(new SetCardInfo("O'aka, Traveling Merchant", 144, Rarity.RARE, mage.cards.o.OakaTravelingMerchant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("O'aka, Traveling Merchant", 39, Rarity.RARE, mage.cards.o.OakaTravelingMerchant.class, NON_FULL_USE_VARIOUS));
