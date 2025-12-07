@@ -1228,11 +1228,6 @@ public class VerifyCardDataTest {
                         cardInfo.getCardNumber(), cardInfo.getRarity(), cardInfo.getGraphicInfo()));
                 Assert.assertNotNull(card);
 
-                //TODO: do we need this check after tdfc rework?
-                if (card.getSecondCardFace() != null && !(card instanceof DoubleFacedCard)) {
-                    containsDoubleSideCards = true;
-                }
-
                 // CHECK: all planeswalkers must be legendary
                 if (card.isPlaneswalker() && !card.isLegendary()) {
                     errorsList.add("Error: planeswalker must have legendary type: " + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
