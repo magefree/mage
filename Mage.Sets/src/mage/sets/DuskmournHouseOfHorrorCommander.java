@@ -114,6 +114,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Evolving Wilds", 274, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Exhume", 370, Rarity.MYTHIC, mage.cards.e.Exhume.class));
         cards.add(new SetCardInfo("Exotic Orchard", 275, Rarity.RARE, mage.cards.e.ExoticOrchard.class));
+        cards.add(new SetCardInfo("Experimental Lab // Staff Room", 33, Rarity.RARE, mage.cards.e.ExperimentalLabStaffRoom.class));
         cards.add(new SetCardInfo("Explosive Vegetation", 177, Rarity.UNCOMMON, mage.cards.e.ExplosiveVegetation.class));
         cards.add(new SetCardInfo("Extravagant Replication", 117, Rarity.RARE, mage.cards.e.ExtravagantReplication.class));
         cards.add(new SetCardInfo("Ezuri's Predation", 178, Rarity.RARE, mage.cards.e.EzurisPredation.class));

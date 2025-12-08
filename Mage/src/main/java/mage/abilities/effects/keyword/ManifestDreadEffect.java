@@ -14,29 +14,32 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
+import mage.util.CardUtil;
 
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
  */
 public class ManifestDreadEffect extends OneShotEffect {
 
-    private final Counter counter;
+    private final List<Counter> counters = new ArrayList<>();
 
-    public ManifestDreadEffect() {
-        this((Counter) null);
-    }
-
-    public ManifestDreadEffect(Counter counter) {
+    public ManifestDreadEffect(Counter... counters) {
         super(Outcome.Benefit);
-        this.counter = counter;
-        staticText = "manifest dread" + (counter != null ? ", then put " + counter.getDescription() + " on that creature" : "");
+        for (Counter counter : counters) {
+            this.counters.add(counter);
+        }
+        staticText = this.makeText();
     }
 
     private ManifestDreadEffect(final ManifestDreadEffect effect) {
         super(effect);
-        this.counter = Optional.ofNullable(effect.counter).map(Counter::copy).orElse(null);
+        for (Counter counter : effect.counters) {
+            this.counters.add(counter.copy());
+        }
     }
 
     @Override
@@ -52,9 +55,9 @@ public class ManifestDreadEffect extends OneShotEffect {
         }
         Permanent permanent = doManifestDread(player, source, game);
         if (permanent == null) {
-            return false;
+            return true;
         }
-        if (counter != null) {
+        for (Counter counter : counters) {
             permanent.addCounters(counter, source, game);
         }
         return true;
@@ -90,5 +93,16 @@ public class ManifestDreadEffect extends OneShotEffect {
         cards.retainZone(Zone.GRAVEYARD, game);
         game.fireEvent(new ManifestedDreadEvent(permanent, source, player.getId(), cards, game));
         return permanent;
+    }
+
+    private String makeText() {
+        StringBuilder sb = new StringBuilder("manifest dread");
+        if (this.counters.isEmpty()) {
+            return sb.toString();
+        }
+        sb.append(", then put ");
+        sb.append(CardUtil.concatWithAnd(counters.stream().map(Counter::getDescription).collect(Collectors.toList())));
+        sb.append(" on that creature");
+        return sb.toString();
     }
 }
