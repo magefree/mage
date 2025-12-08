@@ -295,6 +295,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Pyroclasm", 149, Rarity.UNCOMMON, mage.cards.p.Pyroclasm.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Pyroclasm", 413, Rarity.UNCOMMON, mage.cards.p.Pyroclasm.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ragged Playmate", 150, Rarity.COMMON, mage.cards.r.RaggedPlaymate.class));
+        cards.add(new SetCardInfo("Rampaging Soulrager", 151, Rarity.COMMON, mage.cards.r.RampagingSoulrager.class));
         cards.add(new SetCardInfo("Raucous Carnival", 266, Rarity.COMMON, mage.cards.r.RaucousCarnival.class));
         cards.add(new SetCardInfo("Razorkin Hordecaller", 152, Rarity.UNCOMMON, mage.cards.r.RazorkinHordecaller.class));
         cards.add(new SetCardInfo("Razorkin Needlehead", 153, Rarity.RARE, mage.cards.r.RazorkinNeedlehead.class, NON_FULL_USE_VARIOUS));
