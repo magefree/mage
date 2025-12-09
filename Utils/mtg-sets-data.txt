@@ -179,6 +179,7 @@ Magic: The Gathering-Commander|CMD|
 Magic: The Gathering-Conspiracy|CNS|
 Media Inserts|MBP|
 Marvel Super Heroes|MSH|
+Marvel Super Heroes Commander|MSC|
 Marvel's Spider-Man|SPM|
 Marvel's Spider-Man Eternal|SPE|
 March of the Machine|MOM|

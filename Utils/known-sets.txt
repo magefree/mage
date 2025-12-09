@@ -192,6 +192,7 @@ March of the Machine|MarchOfTheMachine|
 March of the Machine Commander|MarchOfTheMachineCommander|
 March of the Machine: The Aftermath|MarchOfTheMachineTheAftermath|
 Marvel Super Heroes|MarvelSuperHeroes|
+Marvel Super Heroes Commander|MarvelSuperHeroesCommander|
 Mercadian Masques|MercadianMasques|
 Mirage|Mirage|
 Mirrodin|Mirrodin|
