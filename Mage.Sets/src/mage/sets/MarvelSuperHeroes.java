@@ -1,6 +1,7 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
@@ -18,5 +19,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         super("Marvel Super Heroes", "MSH", ExpansionSet.buildDate(2026, 6, 26), SetType.EXPANSION);
         this.blockName = "Marvel Super Heroes"; // for sorting in GUI
         this.hasBasicLands = false; // temporary
+
+        cards.add(new SetCardInfo("Quicksilver, Brash Blur", 148, Rarity.RARE, mage.cards.q.QuicksilverBrashBlur.class));
     }
 }
