@@ -191,6 +191,7 @@ Media Inserts|MediaInserts|
 March of the Machine|MarchOfTheMachine|
 March of the Machine Commander|MarchOfTheMachineCommander|
 March of the Machine: The Aftermath|MarchOfTheMachineTheAftermath|
+Marvel Super Heroes|MarvelSuperHeroes|
 Mercadian Masques|MercadianMasques|
 Mirage|Mirage|
 Mirrodin|Mirrodin|

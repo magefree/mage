@@ -618,6 +618,7 @@ public class ScryfallImageSupportCards {
             add("ECL"); // Lorwyn Eclipsed
             add("TMT"); // Teenage Mutant Ninja Turtles
             add("TMC"); // Teenage Mutant Ninja Turtles Eternal
+            add("MSH"); // Marvel Super Heroes
 
             // Custom sets using Scryfall images - must provide a direct link for each card in directDownloadLinks
             add("CALC"); // Custom Alchemized versions of existing cards
