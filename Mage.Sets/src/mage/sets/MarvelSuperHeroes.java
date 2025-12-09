@@ -20,6 +20,8 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         this.blockName = "Marvel Super Heroes"; // for sorting in GUI
         this.hasBasicLands = false; // temporary
 
+        cards.add(new SetCardInfo("Captain America, Super-Soldier", 387, Rarity.MYTHIC, mage.cards.c.CaptainAmericaSuperSoldier.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Captain America, Super-Soldier", 9, Rarity.MYTHIC, mage.cards.c.CaptainAmericaSuperSoldier.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Moon Girl and Devil Dinosaur", 223, Rarity.RARE, mage.cards.m.MoonGirlAndDevilDinosaur.class));
         cards.add(new SetCardInfo("Quicksilver, Brash Blur", 148, Rarity.RARE, mage.cards.q.QuicksilverBrashBlur.class));
         cards.add(new SetCardInfo("Super-Skrull", 115, Rarity.RARE, mage.cards.s.SuperSkrull.class));
