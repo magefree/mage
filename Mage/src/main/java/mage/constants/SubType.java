@@ -382,6 +382,7 @@ public enum SubType {
     SIREN("Siren", SubTypeSet.CreatureType),
     SITH("Sith", SubTypeSet.CreatureType),
     SKELETON("Skeleton", SubTypeSet.CreatureType),
+    SKRULL("Skrull", SubTypeSet.CreatureType),
     SKUNK("Skunk", SubTypeSet.CreatureType),
     SLITH("Slith", SubTypeSet.CreatureType),
     SLIVER("Sliver", SubTypeSet.CreatureType),

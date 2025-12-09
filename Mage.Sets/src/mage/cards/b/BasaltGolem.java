@@ -19,7 +19,7 @@ import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.WallToken;
+import mage.game.permanent.token.BasaltGolemToken;
 import mage.players.Player;
 
 /**
@@ -30,7 +30,7 @@ public final class BasaltGolem extends CardImpl {
 
     public BasaltGolem(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
-        
+
         this.subtype.add(SubType.GOLEM);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
@@ -83,6 +83,6 @@ class BasaltGolemEffect extends OneShotEffect {
         if (!creature.sacrifice(source, game))
             return false;
 
-        return new WallToken().putOntoBattlefield(1, game, source, player.getId());
+        return new BasaltGolemToken().putOntoBattlefield(1, game, source, player.getId());
     }
 }
