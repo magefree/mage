@@ -193,6 +193,7 @@ public enum SubType {
     FUNGUS("Fungus", SubTypeSet.CreatureType),
     // G
     GAMER("Gamer", SubTypeSet.CreatureType),
+    GAMMA("Gamma", SubTypeSet.CreatureType),
     GAMORREAN("Gamorrean", SubTypeSet.CreatureType, true), // Star Wars
     GAND("Gand", SubTypeSet.CreatureType, true), // Star Wars
     GARGOYLE("Gargoyle", SubTypeSet.CreatureType),
