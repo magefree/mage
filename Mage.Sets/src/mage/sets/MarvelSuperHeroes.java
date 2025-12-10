@@ -28,6 +28,8 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Doctor Doom", 394, Rarity.MYTHIC, mage.cards.d.DoctorDoom.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Doctor Doom", 95, Rarity.MYTHIC, mage.cards.d.DoctorDoom.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Moon Girl and Devil Dinosaur", 223, Rarity.RARE, mage.cards.m.MoonGirlAndDevilDinosaur.class));
+        cards.add(new SetCardInfo("Namor the Sub-Mariner", 391, Rarity.MYTHIC, mage.cards.n.NamorTheSubMariner.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Namor the Sub-Mariner", 69, Rarity.MYTHIC, mage.cards.n.NamorTheSubMariner.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Quicksilver, Brash Blur", 148, Rarity.RARE, mage.cards.q.QuicksilverBrashBlur.class));
         cards.add(new SetCardInfo("Super-Skrull", 115, Rarity.RARE, mage.cards.s.SuperSkrull.class));
         cards.add(new SetCardInfo("The Coming of Galactus", 212, Rarity.MYTHIC, mage.cards.t.TheComingOfGalactus.class, NON_FULL_USE_VARIOUS));
