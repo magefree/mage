@@ -45,6 +45,7 @@ public enum SubType {
     CASE("Case", SubTypeSet.EnchantmentType),
     CLASS("Class", SubTypeSet.EnchantmentType),
     CURSE("Curse", SubTypeSet.EnchantmentType),
+    PLAN("Plan", SubTypeSet.EnchantmentType),
     ROLE("Role", SubTypeSet.EnchantmentType),
     ROOM("Room", SubTypeSet.EnchantmentType),
     RUNE("Rune", SubTypeSet.EnchantmentType),
