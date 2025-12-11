@@ -18,6 +18,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.permanent.token.WallColorlessReachToken;
+import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
@@ -45,6 +46,7 @@ public final class InvisibleWoman extends CardImpl {
                 new BoostTargetEffect(CreaturesYouControlCount.SINGULAR, StaticValue.get(0)), false
         );
         ability.addEffect(new CantBeBlockedTargetEffect().setText("and can't be blocked this turn"));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(new AttacksWithCreaturesTriggeredAbility(new DoWhenCostPaid(
                 ability, new ManaCostsImpl<>("{R}{G}{W}{U}"), "Pay {R}{G}{W}{U}?"
         ), 1));
