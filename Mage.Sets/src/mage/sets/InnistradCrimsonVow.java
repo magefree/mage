@@ -187,7 +187,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 277, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", 402, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 412, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
-        cards.add(new SetCardInfo("Forsaken Thresher", 256, Rarity.UNCOMMON, mage.cards.f.ForsakenThresher.class));
         cards.add(new SetCardInfo("Frenzied Devils", 159, Rarity.UNCOMMON, mage.cards.f.FrenziedDevils.class));
         cards.add(new SetCardInfo("Geistlight Snare", 405, Rarity.UNCOMMON, mage.cards.g.GeistlightSnare.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Geistlight Snare", 60, Rarity.UNCOMMON, mage.cards.g.GeistlightSnare.class, NON_FULL_USE_VARIOUS));

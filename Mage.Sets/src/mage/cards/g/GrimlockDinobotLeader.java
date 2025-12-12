@@ -7,7 +7,6 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.TrampleAbility;
-import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardSetInfo;
 import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
@@ -16,8 +15,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.filter.predicate.permanent.TransformedPredicate;
+import mage.filter.predicate.permanent.TransformablePredicate;
 
 import java.util.UUID;
 
@@ -27,18 +25,13 @@ import java.util.UUID;
 public final class GrimlockDinobotLeader extends TransformingDoubleFacedCard {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Dinosaurs and Vehicles you control");
+    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Transformers creatures");
     static {
         filter.add(Predicates.<MageObject>or(
                 SubType.DINOSAUR.getPredicate(),
                 SubType.VEHICLE.getPredicate())
         );
-    }
-
-    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Transformers creatures");
-    static {
-        filter2.add(Predicates.not(SubType.DINOSAUR.getPredicate()));
-        filter2.add(Predicates.not(SubType.VEHICLE.getPredicate()));
-        filter2.add(Predicates.or(new AbilityPredicate(TransformAbility.class), TransformedPredicate.instance));
+        filter2.add(TransformablePredicate.instance);
     }
 
     public GrimlockDinobotLeader(UUID ownerId, CardSetInfo setInfo) {

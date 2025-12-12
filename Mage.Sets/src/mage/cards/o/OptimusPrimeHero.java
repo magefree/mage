@@ -4,16 +4,15 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
-import mage.abilities.effects.common.TransformSourceEffect;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.keyword.LivingMetalAbility;
-import mage.abilities.keyword.TrampleAbility;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.TransformSourceEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.keyword.BolsterEffect;
+import mage.abilities.keyword.LivingMetalAbility;
 import mage.abilities.keyword.MoreThanMeetsTheEyeAbility;
-import mage.abilities.keyword.TransformAbility;
+import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.Card;
 import mage.cards.CardSetInfo;
 import mage.cards.TransformingDoubleFacedCard;
@@ -106,7 +105,7 @@ class OptimusPrimeHeroEffect extends OneShotEffect {
         if (backSide == null) {
             return true;
         }
-        game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + backSide.getId(), true);
+        game.getState().setValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + backSide.getId(), true);
         controller.moveCards(backSide, Zone.BATTLEFIELD, source, game);
         return true;
     }

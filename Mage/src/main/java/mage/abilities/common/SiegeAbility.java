@@ -5,9 +5,9 @@ import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
-import mage.constants.*;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -21,7 +21,6 @@ public class SiegeAbility extends StaticAbility {
 
     public SiegeAbility() {
         super(Zone.ALL, null);
-        this.addSubAbility(new TransformAbility());
         this.addSubAbility(new SiegeDefeatedTriggeredAbility());
     }
 

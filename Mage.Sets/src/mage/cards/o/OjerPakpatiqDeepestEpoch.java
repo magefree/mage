@@ -14,7 +14,6 @@ import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ReboundAbility;
-import mage.abilities.keyword.TransformAbility;
 import mage.abilities.mana.BlueManaAbility;
 import mage.cards.Card;
 import mage.cards.CardSetInfo;
@@ -167,7 +166,7 @@ class OjerPakpatiqDeepestEpochTrigger extends OneShotEffect {
         if (controller == null || card == null) {
             return false;
         }
-        game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
+        game.getState().setValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
         game.setEnterWithCounters(card.getId(), new Counters().addCounter(CounterType.TIME.createInstance(3)));
         controller.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, true, null);
         return true;

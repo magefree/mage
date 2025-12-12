@@ -9,6 +9,7 @@ import mage.abilities.costs.common.ExileSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
@@ -59,7 +60,6 @@ public class CraftAbility extends ActivatedAbilityImpl {
         super(Zone.BATTLEFIELD, new CraftEffect(), new ManaCostsImpl<>(manaString));
         this.addCost(new ExileSourceCost());
         this.addCost(new CraftCost(target));
-        this.addSubAbility(new TransformAbility());
         this.timing = TimingRule.SORCERY;
         this.manaString = manaString;
         this.description = description;
@@ -173,7 +173,7 @@ class CraftEffect extends OneShotEffect {
         if (player == null || card == null || card.getZoneChangeCounter(game) != source.getStackMomentSourceZCC() + 1) {
             return false;
         }
-        game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
+        game.getState().setValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
         player.moveCards(card, Zone.BATTLEFIELD, source, game);
         return true;
     }

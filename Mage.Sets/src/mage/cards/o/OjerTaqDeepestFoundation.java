@@ -10,7 +10,6 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.TransformSourceEffect;
-import mage.abilities.keyword.TransformAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.Card;
@@ -94,7 +93,7 @@ class OjerTaqDeepestFoundationTransformEffect extends OneShotEffect {
         if (controller == null || card == null) {
             return false;
         }
-        game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
+        game.getState().setValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
         controller.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, true, null);
         return true;
     }

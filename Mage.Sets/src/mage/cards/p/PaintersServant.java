@@ -122,12 +122,6 @@ class PaintersServantEffect extends ContinuousEffectImpl {
                     game.getState().getCreateMageObjectAttribute(leftHalfCard, game).getColor().addColor(color);
                     game.getState().getCreateMageObjectAttribute(rightHalfCard, game).getColor().addColor(color);
                 }
-
-                // double faces cards
-                // TODO: can remove after tdfc rework
-                if (card.getSecondCardFace() != null) {
-                    game.getState().getCreateMageObjectAttribute(card.getSecondCardFace(), game).getColor().addColor(color);
-                }
             });
             return true;
         }
