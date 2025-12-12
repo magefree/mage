@@ -16,11 +16,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
-import mage.filter.FilterStackObject;
-import mage.filter.predicate.Predicate;
-import mage.game.Game;
-import mage.game.stack.StackObject;
+import mage.filter.StaticFilters;
 import mage.target.TargetStackObject;
 
 import java.util.UUID;
@@ -29,13 +25,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class MisterFantastic extends CardImpl {
-
-    private static final FilterStackObject filter = new FilterStackObject("triggered ability you control");
-
-    static {
-        filter.add(MisterFantasticPredicate.instance);
-        filter.add(TargetController.YOU.getControllerPredicate());
-    }
 
     public MisterFantastic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
@@ -63,7 +52,7 @@ public final class MisterFantastic extends CardImpl {
                 .setText("copy target triggered ability you control twice"), new ManaCostsImpl<>("{R}{G}{W}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new CopyTargetStackObjectEffect().setText("You may choose new targets for the copies."));
-        ability.addTarget(new TargetStackObject(filter));
+        ability.addTarget(new TargetStackObject(StaticFilters.FILTER_CONTROLLED_TRIGGERED_ABILITY));
         this.addAbility(ability);
     }
 
@@ -74,14 +63,5 @@ public final class MisterFantastic extends CardImpl {
     @Override
     public MisterFantastic copy() {
         return new MisterFantastic(this);
-    }
-}
-
-enum MisterFantasticPredicate implements Predicate<StackObject> {
-    instance;
-
-    @Override
-    public boolean apply(StackObject input, Game game) {
-        return input instanceof Ability && ((Ability) input).isTriggeredAbility();
     }
 }

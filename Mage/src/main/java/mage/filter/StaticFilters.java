@@ -8,6 +8,7 @@ import mage.filter.common.*;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.*;
 import mage.filter.predicate.other.AnotherTargetPredicate;
+import mage.filter.predicate.other.TriggeredAbilityPredicate;
 import mage.filter.predicate.permanent.*;
 
 /**
@@ -976,6 +977,14 @@ public final class StaticFilters {
 
     static {
         FILTER_SPELL_OR_ABILITY_A.setLockedFilter(true);
+    }
+
+    public static final FilterStackObject FILTER_CONTROLLED_TRIGGERED_ABILITY = new FilterStackObject("triggered ability you control");
+
+    static {
+        FILTER_CONTROLLED_TRIGGERED_ABILITY.add(TriggeredAbilityPredicate.instance);
+        FILTER_CONTROLLED_TRIGGERED_ABILITY.add(TargetController.YOU.getControllerPredicate());
+        FILTER_CONTROLLED_TRIGGERED_ABILITY.setLockedFilter(true);
     }
 
     public static final FilterCreatureSpell FILTER_SPELL_A_CREATURE = new FilterCreatureSpell("a creature spell");
