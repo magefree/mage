@@ -49,8 +49,8 @@ import org.apache.log4j.Logger;
 
 import java.awt.*;
 import java.io.Serializable;
-import java.util.List;
 import java.util.*;
+import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.stream.Collectors;
 
@@ -2334,9 +2334,7 @@ public class HumanPlayer extends PlayerImpl {
         // force to show ability picker for double faces cards in hand/commander/exile and other zones
         Card mainCard = game.getCard(CardUtil.getMainCardId(game, ability.getSourceId()));
         if (mainCard != null && !Zone.BATTLEFIELD.equals(game.getState().getZone(mainCard.getId()))) {
-            if (mainCard instanceof SplitCard
-                    || mainCard instanceof CardWithSpellOption
-                    || mainCard instanceof ModalDoubleFacedCard) {
+            if (mainCard instanceof CardWithParts || mainCard instanceof CardWithSpellOption) {
                 return false;
             }
         }

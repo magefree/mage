@@ -7,8 +7,7 @@ import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectsList;
 import mage.cards.Card;
-import mage.cards.DoubleFacedCard;
-import mage.cards.DoubleFacedCardHalf;
+import mage.cards.CardWithParts;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.importer.DeckImporter;
@@ -775,8 +774,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         if (gameZone == Zone.BATTLEFIELD) {
             for (int i = 0; i < count; i++) {
                 Card newCard = cardInfo.createCard();
-                if (newCard instanceof DoubleFacedCard) {
-                    DoubleFacedCardHalf rightHalf = ((DoubleFacedCard) newCard).getRightHalfCard();
+                if (newCard instanceof CardWithParts) {
+                    Card rightHalf = ((CardWithParts) newCard).getRightHalfCard();
                     if (rightHalf.getName().equals(cardName) && rightHalf.isPermanent()) {
                         newCard = rightHalf;
                     }

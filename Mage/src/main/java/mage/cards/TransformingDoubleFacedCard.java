@@ -6,7 +6,7 @@ import mage.game.Game;
 
 import java.util.UUID;
 
-public abstract class TransformingDoubleFacedCard extends DoubleFacedCard {
+public abstract class TransformingDoubleFacedCard extends DoubleFacedCard<TransformingDoubleFacedCardHalf, TransformingDoubleFacedCard> {
 
     // this state value controls if a permanent enters the battlefield already transformed
     public static final String VALUE_KEY_ENTER_TRANSFORMED = "EnterTransformed";
@@ -51,19 +51,9 @@ public abstract class TransformingDoubleFacedCard extends DoubleFacedCard {
 
     @Override
     public boolean cast(Game game, Zone fromZone, SpellAbility ability, UUID controllerId) {
-        if (ability.getSpellAbilityType() == SpellAbilityType.BASE) {
+        if (ability.getSpellAbilityType() == SpellAbilityType.TRANSFORMED) {
             return this.leftHalfCard.cast(game, fromZone, ability, controllerId);
         }
         return super.cast(game, fromZone, ability, controllerId);
-    }
-
-    @Override
-    public TransformingDoubleFacedCardHalf getLeftHalfCard() {
-        return (TransformingDoubleFacedCardHalf) leftHalfCard;
-    }
-
-    @Override
-    public TransformingDoubleFacedCardHalf getRightHalfCard() {
-        return (TransformingDoubleFacedCardHalf) rightHalfCard;
     }
 }

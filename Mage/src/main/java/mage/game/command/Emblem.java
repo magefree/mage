@@ -58,6 +58,11 @@ public abstract class Emblem extends CommandObjectImpl {
         return frameStyle;
     }
 
+    @Override
+    public void setFrameStyle(FrameStyle frameStyle) {
+        this.frameStyle = frameStyle;
+    }
+
     public void setSourceObjectAndInitImage(MageObject sourceObject) {
         this.sourceObject = sourceObject;
 

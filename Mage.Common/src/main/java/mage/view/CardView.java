@@ -428,19 +428,13 @@ public class CardView extends SimpleCardView {
                 fullCardName = card.getName(); // split card contains full name as normal
                 this.manaCostLeftStr = splitCard.getLeftHalfCard().getManaCostSymbols();
                 this.manaCostRightStr = splitCard.getRightHalfCard().getManaCostSymbols();
-            } else if (card instanceof ModalDoubleFacedCard) {
+            } else if (card instanceof CardWithParts) {
                 this.isDoubleFacedCard = true;
-                DoubleFacedCard mainCard = ((DoubleFacedCard) card);
+                CardWithParts mainCard = ((CardWithParts) card);
                 fullCardName = mainCard.getLeftHalfCard().getName() + MockCard.MODAL_DOUBLE_FACES_NAME_SEPARATOR + mainCard.getRightHalfCard().getName();
                 this.manaCostLeftStr = mainCard.getLeftHalfCard().getManaCostSymbols();
                 this.manaCostRightStr = mainCard.getRightHalfCard().getManaCostSymbols();
-            } else if (card instanceof TransformingDoubleFacedCard) {
-                this.isDoubleFacedCard = true;
-                DoubleFacedCard mainCard = ((DoubleFacedCard) card);
-                fullCardName = mainCard.getLeftHalfCard().getName() + MockCard.MODAL_DOUBLE_FACES_NAME_SEPARATOR + mainCard.getRightHalfCard().getName();
-                this.manaCostLeftStr = mainCard.getLeftHalfCard().getManaCostSymbols();
-                this.manaCostRightStr = new ArrayList<>();
-            }  else if (card instanceof CardWithSpellOption) {
+            } else if (card instanceof CardWithSpellOption) {
                 this.isSplitCard = true;
                 CardWithSpellOption mainCard = ((CardWithSpellOption) card);
                 leftSplitName = mainCard.getName();
@@ -552,7 +546,7 @@ public class CardView extends SimpleCardView {
 
             if (card instanceof DoubleFacedCard) {
                 this.transformable = true; // enable GUI day/night button
-                DoubleFacedCard doubleFacedCard = (DoubleFacedCard) card;
+                DoubleFacedCard<?, ?> doubleFacedCard = (DoubleFacedCard<?, ?>) card;
                 this.secondCardFace = new CardView(doubleFacedCard.getRightHalfCard(), game);
                 this.alternateName = doubleFacedCard.getRightHalfCard().getName();
             }

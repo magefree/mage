@@ -340,9 +340,9 @@ public class VerifyCardDataTest {
                 System.out.printf("verify cards checking: %d of %d%n", cardIndex, allCards.size());
             }
             cardIndex++;
-            if (card instanceof CardWithHalves) {
-                check(((CardWithHalves) card).getLeftHalfCard(), cardIndex);
-                check(((CardWithHalves) card).getRightHalfCard(), cardIndex);
+            if (card instanceof CardWithParts) {
+                check(((CardWithParts) card).getLeftHalfCard(), cardIndex);
+                check(((CardWithParts) card).getRightHalfCard(), cardIndex);
             } else if (card instanceof CardWithSpellOption) {
                 check(card, cardIndex);
                 check(((CardWithSpellOption) card).getSpellCard(), cardIndex);
@@ -2383,10 +2383,10 @@ public class VerifyCardDataTest {
         }
 
         // special check: Werewolves front ability should only be on front and vice versa
-        if (card.getAbilities().containsClass(WerewolfFrontTriggeredAbility.class) && (card instanceof DoubleFacedCardHalf && ((DoubleFacedCardHalf) card).isBackSide())) {
+        if (card.getAbilities().containsClass(WerewolfFrontTriggeredAbility.class) && (card instanceof DoubleFacedCardHalf && ((DoubleFacedCardHalf<?>) card).isBackSide())) {
             fail(card, "abilities", "card is a back face werewolf with a front face ability");
         }
-        if (card.getAbilities().containsClass(WerewolfBackTriggeredAbility.class) && (card instanceof DoubleFacedCardHalf && !((DoubleFacedCardHalf) card).isBackSide())) {
+        if (card.getAbilities().containsClass(WerewolfBackTriggeredAbility.class) && (card instanceof DoubleFacedCardHalf && !((DoubleFacedCardHalf<?>) card).isBackSide())) {
             fail(card, "abilities", "card is a front face werewolf with a back face ability");
         }
 
@@ -2396,7 +2396,7 @@ public class VerifyCardDataTest {
         }
 
         // special check: siege ability must be used in double faced cards only
-        if (card.getAbilities().containsClass(SiegeAbility.class) && (card.getSecondCardFace() == null && (card instanceof DoubleFacedCardHalf && ((DoubleFacedCardHalf) card).getOtherSide() == null))) {
+        if (card.getAbilities().containsClass(SiegeAbility.class) && (card.getSecondCardFace() == null && (card instanceof DoubleFacedCardHalf && ((DoubleFacedCardHalf<?>) card).getOtherSide() == null))) {
             fail(card, "abilities", "miss second side settings in card with siege ability");
         }
 
@@ -2868,12 +2868,12 @@ public class VerifyCardDataTest {
                 // format to print main card then spell card
                 card.getInitAbilities().getRules().forEach(this::printAbilityText);
                 ((CardWithSpellOption) card).getSpellCard().getAbilities().getRules().forEach(r -> printAbilityText(r.replace("&mdash; ", "\n")));
-            } else if (card instanceof SplitCard || card instanceof DoubleFacedCard) {
+            } else if (card instanceof CardWithParts) {
                 // format to print each side separately
-                System.out.println("=== " + ((CardWithHalves) card).getLeftHalfCard().getName() + " ===");
-                ((CardWithHalves) card).getLeftHalfCard().getAbilities().getRules().forEach(this::printAbilityText);
-                System.out.println("=== " + ((CardWithHalves) card).getRightHalfCard().getName() + " ===");
-                ((CardWithHalves) card).getRightHalfCard().getAbilities().getRules().forEach(this::printAbilityText);
+                System.out.println("=== " + ((CardWithParts) card).getLeftHalfCard().getName() + " ===");
+                ((CardWithParts) card).getLeftHalfCard().getAbilities().getRules().forEach(this::printAbilityText);
+                System.out.println("=== " + ((CardWithParts) card).getRightHalfCard().getName() + " ===");
+                ((CardWithParts) card).getRightHalfCard().getAbilities().getRules().forEach(this::printAbilityText);
             } else {
                 card.getRules().forEach(this::printAbilityText);
             }
@@ -2887,11 +2887,11 @@ public class VerifyCardDataTest {
             if (card instanceof CardWithSpellOption) {
                 refTwo = MtgJsonService.card(((CardWithSpellOption) card).getSpellCard().getName());
                 cardTwo = ((CardWithSpellOption) card).getSpellCard();
-            } else if (card instanceof CardWithHalves) {
-                refMain = MtgJsonService.card(((CardWithHalves) card).getLeftHalfCard().getName());
-                cardMain = ((CardWithHalves) card).getLeftHalfCard();
-                refTwo = MtgJsonService.card(((CardWithHalves) card).getRightHalfCard().getName());
-                cardTwo = ((CardWithHalves) card).getRightHalfCard();
+            } else if (card instanceof CardWithParts) {
+                refMain = MtgJsonService.card(((CardWithParts) card).getLeftHalfCard().getName());
+                cardMain = ((CardWithParts) card).getLeftHalfCard();
+                refTwo = MtgJsonService.card(((CardWithParts) card).getRightHalfCard().getName());
+                cardTwo = ((CardWithParts) card).getRightHalfCard();
             }
             if (refMain == null) {
                 refMain = MtgJsonService.cardByClassName(foundClassName);

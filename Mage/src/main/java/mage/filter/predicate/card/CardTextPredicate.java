@@ -1,9 +1,9 @@
 package mage.filter.predicate.card;
 
 import mage.cards.Card;
+import mage.cards.CardWithParts;
 import mage.cards.CardWithSpellOption;
 import mage.cards.ModalDoubleFacedCard;
-import mage.cards.SplitCard;
 import mage.cards.mock.MockCard;
 import mage.constants.SubType;
 import mage.constants.SuperType;
@@ -85,13 +85,9 @@ public class CardTextPredicate implements Predicate<Card> {
         // rules: need all tokens
         if (inRules) {
             List<String> fullRules = new ArrayList<>(input.getRules(game));
-            if (input instanceof SplitCard) {
-                fullRules.addAll(((SplitCard) input).getLeftHalfCard().getRules(game));
-                fullRules.addAll(((SplitCard) input).getRightHalfCard().getRules(game));
-            }
-            if (input instanceof ModalDoubleFacedCard) {
-                fullRules.addAll(((ModalDoubleFacedCard) input).getLeftHalfCard().getRules(game));
-                fullRules.addAll(((ModalDoubleFacedCard) input).getRightHalfCard().getRules(game));
+            if (input instanceof CardWithParts) {
+                fullRules.addAll(((CardWithParts) input).getLeftHalfCard().getRules(game));
+                fullRules.addAll(((CardWithParts) input).getRightHalfCard().getRules(game));
             }
             if (input instanceof CardWithSpellOption) {
                 fullRules.addAll(((CardWithSpellOption) input).getSpellCard().getRules(game));

@@ -2,13 +2,16 @@ package mage.cards.p;
 
 import mage.ApprovingObject;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.VariableCostType;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.*;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterInstantOrSorceryCard;
@@ -124,17 +127,9 @@ class PanopticMirrorCastEffect extends OneShotEffect {
                 && controller != null) {
             CardsImpl cards = new CardsImpl();
             for (UUID uuid : PanopticMirror.getImprinted()) {
-                Card card = game.getCard(uuid);
+                Card card = game.getCard(uuid).getMainCard();
                 if (card != null) {
-                    if (card instanceof SplitCard) {
-                        cards.add(((SplitCard) card).getLeftHalfCard());
-                        cards.add(((SplitCard) card).getRightHalfCard());
-                    } else if (card instanceof ModalDoubleFacedCard) {
-                        cards.add(((ModalDoubleFacedCard) card).getLeftHalfCard());
-                        cards.add(((ModalDoubleFacedCard) card).getRightHalfCard());
-                    } else {
-                        cards.add(card);
-                    }
+                    cards.add(card);
                 }
             }
             Card cardToCopy;

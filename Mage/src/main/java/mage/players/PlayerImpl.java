@@ -1808,6 +1808,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 .stream()
                 .filter(SpellAbility.class::isInstance)
                 .map(SpellAbility.class::cast)
+                .filter(sa -> sa.getSpellAbilityType().canCast())
                 .collect(Collectors.toList())) {
             switch (spellAbility.getSpellAbilityType()) {
                 case BASE_ALTERNATE:
@@ -1832,6 +1833,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                         useable.put(spellAbility.getId(), spellAbility);
                     }
                 case SPLIT:
+                    assert object instanceof SplitCard;
                     if (((SplitCard) object).getLeftHalfCard().getSpellAbility().canChooseTarget(game, playerId)) {
                         useable.put(
                                 ((SplitCard) object).getLeftHalfCard().getSpellAbility().getId(),
@@ -1846,6 +1848,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     }
                     return useable;
                 case SPLIT_AFTERMATH:
+                    assert object instanceof SplitCard;
                     if (zone == Zone.GRAVEYARD) {
                         if (((SplitCard) object).getRightHalfCard().getSpellAbility().canChooseTarget(game, playerId)) {
                             useable.put(((SplitCard) object).getRightHalfCard().getSpellAbility().getId(),
@@ -4151,19 +4154,10 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
 
         // BASIC abilities
-        if (object instanceof SplitCard) {
-            SplitCard mainCard = (SplitCard) object;
+        if (object instanceof CardWithParts) {
+            CardWithParts mainCard = (CardWithParts) object;
             getPlayableFromObjectSingle(game, fromZone, mainCard.getLeftHalfCard(), mainCard.getLeftHalfCard().getAbilities(game), availableMana, output);
             getPlayableFromObjectSingle(game, fromZone, mainCard.getRightHalfCard(), mainCard.getRightHalfCard().getAbilities(game), availableMana, output);
-            getPlayableFromObjectSingle(game, fromZone, mainCard, mainCard.getSharedAbilities(game), availableMana, output);
-        } else if (object instanceof ModalDoubleFacedCard) {
-            ModalDoubleFacedCard mainCard = (ModalDoubleFacedCard) object;
-            getPlayableFromObjectSingle(game, fromZone, mainCard.getLeftHalfCard(), mainCard.getLeftHalfCard().getAbilities(game), availableMana, output);
-            getPlayableFromObjectSingle(game, fromZone, mainCard.getRightHalfCard(), mainCard.getRightHalfCard().getAbilities(game), availableMana, output);
-            getPlayableFromObjectSingle(game, fromZone, mainCard, mainCard.getSharedAbilities(game), availableMana, output);
-        } else if (object instanceof TransformingDoubleFacedCard) {
-            TransformingDoubleFacedCard mainCard = (TransformingDoubleFacedCard) object;
-            getPlayableFromObjectSingle(game, fromZone, mainCard.getLeftHalfCard(), mainCard.getLeftHalfCard().getAbilities(game), availableMana, output);
             getPlayableFromObjectSingle(game, fromZone, mainCard, mainCard.getSharedAbilities(game), availableMana, output);
         } else if (object instanceof CardWithSpellOption) {
             // adventure must use different card characteristics for different spells (main or adventure)
@@ -4316,9 +4310,8 @@ public abstract class PlayerImpl implements Player, Serializable {
                         boolean isPlaySpell = (ability instanceof SpellAbility);
                         boolean isPlayLand = (ability instanceof PlayLandAbility);
 
-                        // ignore backside of TDFC
-                        // TODO: maybe better way to ignore
-                        if (isPlaySpell && ((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.TRANSFORMED_RIGHT) {
+                        // ignore spell abilities for card faces that aren't castable normally
+                        if (isPlaySpell && !((SpellAbility) ability).getSpellAbilityType().canCast()) {
                             continue;
                         }
 

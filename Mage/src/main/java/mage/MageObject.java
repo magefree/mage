@@ -126,6 +126,8 @@ public interface MageObject extends MageItem, Serializable, Copyable<MageObject>
 
     FrameStyle getFrameStyle();
 
+    void setFrameStyle(FrameStyle frameStyle);
+
     ManaCosts<ManaCost> getManaCost();
 
     void setManaCost(ManaCosts<ManaCost> costs);

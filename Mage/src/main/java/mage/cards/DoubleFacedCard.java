@@ -1,9 +1,11 @@
 package mage.cards;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.ObjectColor;
-import mage.abilities.*;
+import mage.abilities.Abilities;
+import mage.abilities.AbilitiesImpl;
+import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.constants.*;
@@ -11,7 +13,6 @@ import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.game.Game;
 import mage.game.GameState;
-import mage.game.events.ZoneChangeEvent;
 import mage.util.CardUtil;
 import mage.util.SubTypes;
 
@@ -20,98 +21,44 @@ import java.util.UUID;
 
 /**
  * @author JayDi85 - originally from ModalDoubleFaceCard
+ * @param <P> the type of the card halves
+ * @param <C> the self-referential type for the concrete card class
  */
-public abstract class DoubleFacedCard extends CardImpl implements CardWithHalves {
-
-    protected DoubleFacedCardHalf leftHalfCard; // main card in all zone
-    protected DoubleFacedCardHalf rightHalfCard; // second side card, can be only in stack and battlefield zones
+public abstract class DoubleFacedCard<P extends DoubleFacedCardHalf<C>, C extends DoubleFacedCard<P, C>> extends CardWithPartsImpl<P, C> {
 
     protected DoubleFacedCard(UUID ownerId, CardSetInfo setInfo, CardType[] cardTypes, String costs, SpellAbilityType spellAbilityType) {
         super(ownerId, setInfo, cardTypes, costs, spellAbilityType);
     }
 
-    public DoubleFacedCard(DoubleFacedCard card) {
+    @Override
+    public Card getDefaultCardSide() {
+        return getLeftHalfCard();
+    }
+
+    public DoubleFacedCard(DoubleFacedCard<P, C> card) {
         super(card);
-        // make sure all parts created and parent ref added
-        this.leftHalfCard = (DoubleFacedCardHalf) card.getLeftHalfCard().copy();
-        leftHalfCard.setParentCard(this);
-        this.rightHalfCard = (DoubleFacedCardHalf) card.getRightHalfCard().copy();
-        rightHalfCard.setParentCard(this);
-    }
-
-    public abstract DoubleFacedCardHalf getLeftHalfCard();
-
-    public abstract DoubleFacedCardHalf getRightHalfCard();
-
-    public void setParts(DoubleFacedCardHalf leftHalfCard, DoubleFacedCardHalf rightHalfCard) {
-        // for card copy only - set new parts
-        this.leftHalfCard = leftHalfCard;
-        leftHalfCard.setParentCard(this);
-        this.rightHalfCard = rightHalfCard;
-        rightHalfCard.setParentCard(this);
     }
 
     @Override
-    public void assignNewId() {
-        super.assignNewId();
-        leftHalfCard.assignNewId();
-        rightHalfCard.assignNewId();
-    }
-
-    @Override
-    public void setCopy(boolean isCopy, MageObject copiedFrom) {
-        super.setCopy(isCopy, copiedFrom);
-        leftHalfCard.setCopy(isCopy, copiedFrom);
-        rightHalfCard.setCopy(isCopy, copiedFrom);
-    }
-
-    private void setSideZones(Zone mainZone, Game game) {
-        switch (mainZone) {
+    protected void updatePartZones(Zone zone, Game game) {
+        switch (zone) {
             case BATTLEFIELD:
             case STACK:
                 throw new IllegalArgumentException("Wrong code usage: you must put to battlefield/stack only real side card (half), not main");
             default:
-                game.setZone(leftHalfCard.getId(), mainZone);
-                game.setZone(rightHalfCard.getId(), mainZone);
+                game.setZone(leftHalfCard.getId(), zone);
+                game.setZone(rightHalfCard.getId(), zone);
                 break;
         }
-        checkGoodZones(game, this);
+        checkGoodZones(game);
     }
 
     @Override
-    public boolean moveToZone(Zone toZone, Ability source, Game game, boolean flag, List<UUID> appliedEffects) {
-        if (super.moveToZone(toZone, source, game, flag, appliedEffects)) {
-            Zone currentZone = game.getState().getZone(getId());
-            setSideZones(currentZone, game);
-            return true;
-        }
-        return false;
-    }
+    public void checkGoodZones(Game game) {
+        Card leftPart = this.getLeftHalfCard();
+        Card rightPart = this.getRightHalfCard();
 
-    @Override
-    public void setZone(Zone zone, Game game) {
-        super.setZone(zone, game);
-        setSideZones(zone, game);
-    }
-
-    @Override
-    public boolean moveToExile(UUID exileId, String name, Ability source, Game game, List<UUID> appliedEffects) {
-        if (super.moveToExile(exileId, name, source, game, appliedEffects)) {
-            Zone currentZone = game.getState().getZone(getId());
-            setSideZones(currentZone, game);
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * Runtime check for good zones and other MDF data
-     */
-    public static void checkGoodZones(Game game, DoubleFacedCard card) {
-        Card leftPart = card.getLeftHalfCard();
-        Card rightPart = card.getRightHalfCard();
-
-        Zone zoneMain = game.getState().getZone(card.getId());
+        Zone zoneMain = game.getState().getZone(this.getId());
         Zone zoneLeft = game.getState().getZone(leftPart.getId());
         Zone zoneRight = game.getState().getZone(rightPart.getId());
 
@@ -148,29 +95,13 @@ public abstract class DoubleFacedCard extends CardImpl implements CardWithHalves
         }
 
         if (zoneLeft != needZoneLeft || zoneRight != needZoneRight) {
-            throw new IllegalStateException("Wrong code usage: MDF card uses wrong zones - " + card
+            throw new IllegalStateException("Wrong code usage: MDF card uses wrong zones - " + this
                     + "\r\n" + String.format("* main zone: %s", zoneMain)
                     + "\r\n" + String.format("* left side: need %s, actual %s", needZoneLeft, zoneLeft)
                     + "\r\n" + String.format("* right side: need %s, actual %s", needZoneRight, zoneRight));
         }
     }
 
-    @Override
-    public boolean removeFromZone(Game game, Zone fromZone, Ability source) {
-        // zone contains only one main card
-        return super.removeFromZone(game, fromZone, source);
-    }
-
-    @Override
-    public void updateZoneChangeCounter(Game game, ZoneChangeEvent event) {
-        if (isCopy()) { // same as meld cards
-            super.updateZoneChangeCounter(game, event);
-            return;
-        }
-        super.updateZoneChangeCounter(game, event);
-        game.getState().updateZoneChangeCounter(leftHalfCard.getId());
-        game.getState().updateZoneChangeCounter(rightHalfCard.getId());
-    }
 
     @Override
     public Counters getCounters(Game game) {
@@ -179,26 +110,26 @@ public abstract class DoubleFacedCard extends CardImpl implements CardWithHalves
 
     @Override
     public Counters getCounters(GameState state) {
-        return state.getCardState(leftHalfCard.getId()).getCounters();
+        return state.getCardState(getLeftHalfCard().getId()).getCounters();
     }
 
     @Override
     public boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game, List<UUID> appliedEffects, boolean isEffect, int maxCounters) {
-        return leftHalfCard.addCounters(counter, playerAddingCounters, source, game, appliedEffects, isEffect, maxCounters);
+        return getLeftHalfCard().addCounters(counter, playerAddingCounters, source, game, appliedEffects, isEffect, maxCounters);
     }
 
     @Override
     public void removeCounters(String counterName, int amount, Ability source, Game game) {
-        leftHalfCard.removeCounters(counterName, amount, source, game);
+        getLeftHalfCard().removeCounters(counterName, amount, source, game);
     }
 
     @Override
     public boolean cast(Game game, Zone fromZone, SpellAbility ability, UUID controllerId) {
-        if (this.leftHalfCard.getSpellAbility() != null) {
-            this.leftHalfCard.getSpellAbility().setControllerId(controllerId);
+        if (this.getLeftHalfCard().getSpellAbility() != null) {
+            this.getLeftHalfCard().getSpellAbility().setControllerId(controllerId);
         }
-        if (this.rightHalfCard.getSpellAbility() != null) {
-            this.rightHalfCard.getSpellAbility().setControllerId(controllerId);
+        if (this.getRightHalfCard().getSpellAbility() != null) {
+            this.getRightHalfCard().getSpellAbility().setControllerId(controllerId);
         }
         return super.cast(game, fromZone, ability, controllerId);
     }
@@ -206,125 +137,31 @@ public abstract class DoubleFacedCard extends CardImpl implements CardWithHalves
 
     @Override
     public List<SuperType> getSuperType(Game game) {
-        // CardImpl's constructor can call some code on init, so you must check left/right before
-        // it's a bad workaround
-        return leftHalfCard != null ? leftHalfCard.getSuperType(game) : supertype;
+        // rules: While a double-faced card isn't on the stack or battlefield, consider only the characteristics of its front face.
+        return getLeftHalfCard().getSuperType(game);
     }
 
     @Override
     public List<CardType> getCardType(Game game) {
-        // CardImpl's constructor can call some code on init, so you must check left/right before
-        // it's a bad workaround
-        return leftHalfCard != null ? leftHalfCard.getCardType(game) : cardType;
-    }
-
-    @Override
-    public SubTypes getSubtype() {
-        // rules: While a double-faced card isn’t on the stack or battlefield, consider only the characteristics of its front face.
-        // CardImpl's constructor can call some code on init, so you must check left/right before
-        return leftHalfCard != null ? leftHalfCard.getSubtype() : subtype;
+        // rules: While a double-faced card isn't on the stack or battlefield, consider only the characteristics of its front face.
+        return getLeftHalfCard().getCardType(game);
     }
 
     @Override
     public SubTypes getSubtype(Game game) {
-        // rules: While a double-faced card isn’t on the stack or battlefield, consider only the characteristics of its front face.
-        // CardImpl's constructor can call some code on init, so you must check left/right before
-        return leftHalfCard != null ? leftHalfCard.getSubtype(game) : subtype;
+        // rules: While a double-faced card isn't on the stack or battlefield, consider only the characteristics of its front face.
+        return getLeftHalfCard().getSubtype(game);
     }
 
     @Override
     public boolean hasSubtype(SubType subtype, Game game) {
-        return leftHalfCard.hasSubtype(subtype, game);
+        return getLeftHalfCard().hasSubtype(subtype, game);
     }
 
     @Override
-    public Abilities<Ability> getAbilities() {
-        return getInnerAbilities(true, true);
-    }
-
-    @Override
-    public Abilities<Ability> getInitAbilities() {
-        // must init only parent related abilities, spell card must be init separately
-        return getInnerAbilities(false, false);
-    }
-
     public Abilities<Ability> getSharedAbilities(Game game) {
         // no shared abilities for mdf cards (e.g. must be left or right only)
         return new AbilitiesImpl<>();
-    }
-
-    @Override
-    public Abilities<Ability> getAbilities(Game game) {
-        return getInnerAbilities(game, true, true);
-    }
-
-    private boolean isIgnoreDefaultAbility(Ability ability) {
-        // ignore default play/spell ability from main card (only halves are actual)
-        // default abilities added on card creation from card type and can't be skipped
-
-        // skip cast spell
-        if (ability instanceof SpellAbility) {
-            SpellAbilityType type = ((SpellAbility) ability).getSpellAbilityType();
-            return type == SpellAbilityType.MODAL || type == SpellAbilityType.TRANSFORMED;
-        }
-
-        // skip play land
-        return ability instanceof PlayLandAbility;
-    }
-
-    private boolean isIgnoreTransformSpellAbility(Ability ability) {
-        return ability instanceof SpellAbility && ((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.TRANSFORMED_RIGHT;
-    }
-
-    private Abilities<Ability> getInnerAbilities(Game game, boolean showLeftSide, boolean showRightSide) {
-        Abilities<Ability> allAbilites = new AbilitiesImpl<>();
-
-        for (Ability ability : super.getAbilities(game)) {
-            if (isIgnoreDefaultAbility(ability)) {
-                continue;
-            }
-            allAbilites.add(ability);
-        }
-
-        if (showLeftSide) {
-            allAbilites.addAll(leftHalfCard.getAbilities(game));
-        }
-        if (showRightSide) {
-            for (Ability ability: rightHalfCard.getAbilities(game)) {
-                if (isIgnoreTransformSpellAbility(ability)) {
-                    continue;
-                }
-                allAbilites.add(ability);
-            }
-        }
-
-        return allAbilites;
-    }
-
-    private Abilities<Ability> getInnerAbilities(boolean showLeftSide, boolean showRightSide) {
-        Abilities<Ability> allAbilites = new AbilitiesImpl<>();
-
-        for (Ability ability : super.getAbilities()) {
-            if (isIgnoreDefaultAbility(ability)) {
-                continue;
-            }
-            allAbilites.add(ability);
-        }
-
-        if (showLeftSide) {
-            allAbilites.addAll(leftHalfCard.getAbilities());
-        }
-
-        if (showRightSide) {
-            for (Ability ability: rightHalfCard.getAbilities()) {
-                if (isIgnoreTransformSpellAbility(ability)) {
-                    continue;
-                }
-                allAbilites.add(ability);
-            }
-        }
-
-        return allAbilites;
     }
 
     @Override
@@ -357,32 +194,22 @@ public abstract class DoubleFacedCard extends CardImpl implements CardWithHalves
 
     @Override
     public ObjectColor getColor() {
-        return leftHalfCard.getColor();
+        return getLeftHalfCard().getColor();
     }
 
     @Override
     public ObjectColor getColor(Game game) {
-        return leftHalfCard.getColor(game);
+        return getLeftHalfCard().getColor(game);
     }
 
     @Override
     public ObjectColor getFrameColor(Game game) {
-        return leftHalfCard.getFrameColor(game);
-    }
-
-    @Override
-    public void setOwnerId(UUID ownerId) {
-        super.setOwnerId(ownerId);
-        abilities.setControllerId(ownerId);
-        leftHalfCard.getAbilities().setControllerId(ownerId);
-        leftHalfCard.setOwnerId(ownerId);
-        rightHalfCard.getAbilities().setControllerId(ownerId);
-        rightHalfCard.setOwnerId(ownerId);
+        return getLeftHalfCard().getFrameColor(game);
     }
 
     @Override
     public ManaCosts<ManaCost> getManaCost() {
-        return leftHalfCard.getManaCost();
+        return getLeftHalfCard().getManaCost();
     }
 
     @Override
@@ -394,16 +221,16 @@ public abstract class DoubleFacedCard extends CardImpl implements CardWithHalves
         // mana cost of a transforming double-faced card is determined.
 
         // on stack or battlefield it must be half card with own cost
-        return leftHalfCard.getManaValue();
+        return getLeftHalfCard().getManaValue();
     }
 
     @Override
     public MageInt getPower() {
-        return leftHalfCard.getPower();
+        return getLeftHalfCard().getPower();
     }
 
     @Override
     public MageInt getToughness() {
-        return leftHalfCard.getToughness();
+        return getLeftHalfCard().getToughness();
     }
 }

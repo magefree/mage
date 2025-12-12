@@ -8,7 +8,10 @@ import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.ChooseColorEffect;
-import mage.cards.*;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.CardWithParts;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -107,20 +110,12 @@ class PaintersServantEffect extends ContinuousEffectImpl {
             affectedCards.forEach(card -> {
                 game.getState().getCreateMageObjectAttribute(card, game).getColor().addColor(color);
 
-                // df cards
-                if (card instanceof DoubleFacedCard) {
-                    DoubleFacedCardHalf leftHalfCard = ((DoubleFacedCard) card).getLeftHalfCard();
-                    DoubleFacedCardHalf rightHalfCard = ((DoubleFacedCard) card).getRightHalfCard();
-                    game.getState().getCreateMageObjectAttribute(leftHalfCard, game).getColor().addColor(color);
-                    game.getState().getCreateMageObjectAttribute(rightHalfCard, game).getColor().addColor(color);
-                }
-
-                // split cards
-                if (card instanceof SplitCard) {
-                    SplitCardHalf leftHalfCard = ((SplitCard) card).getLeftHalfCard();
-                    SplitCardHalf rightHalfCard = ((SplitCard) card).getRightHalfCard();
-                    game.getState().getCreateMageObjectAttribute(leftHalfCard, game).getColor().addColor(color);
-                    game.getState().getCreateMageObjectAttribute(rightHalfCard, game).getColor().addColor(color);
+                // card with parts
+                if (card instanceof CardWithParts) {
+                    Card leftHalfCard = ((CardWithParts) card).getLeftHalfCard();
+                    Card rightHalfCard = ((CardWithParts) card).getRightHalfCard();
+                    game.getState().getCreateMageObjectAttribute(leftHalfCard, game).getColor().setColor(color);
+                    game.getState().getCreateMageObjectAttribute(rightHalfCard, game).getColor().setColor(color);
                 }
             });
             return true;

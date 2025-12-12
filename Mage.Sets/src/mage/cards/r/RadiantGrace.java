@@ -110,7 +110,7 @@ class RadiantGraceEffect extends OneShotEffect {
             return false;
         }
 
-        DoubleFacedCardHalf card = (DoubleFacedCardHalf) game.getCard(source.getSourceId());
+        DoubleFacedCardHalf<?> card = (DoubleFacedCardHalf<?>) game.getCard(source.getSourceId());
         if (card == null) {
             return false;
         }

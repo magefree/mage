@@ -67,15 +67,15 @@ public class PermanentCard extends PermanentImpl {
             throw new IllegalArgumentException("Wrong code usage: can't create permanent card from split or mdf: " + card.getName());
         }
 
-        // if two permanent sides, set front and second side
-        if (card instanceof DoubleFacedCardHalf && card.isPermanent() && ((DoubleFacedCardHalf) card).getOtherSide().isPermanent()) {
-            if (((DoubleFacedCardHalf) card).isBackSide()) {
+        // if two permanent sides, and not meld, set front and second side
+        if (card instanceof DoubleFacedCardHalf && card.isPermanent() && ((DoubleFacedCardHalf<?>) card).getOtherSide().isPermanent()) {
+            if (((DoubleFacedCardHalf<?>) card).isBackSide()) {
                 secondSideCard = card;
-                this.card = ((DoubleFacedCardHalf) card).getOtherSide().copy();
+                this.card = ((DoubleFacedCardHalf<?>) card).getOtherSide().copy();
                 this.transformed = true;
                 init(secondSideCard, game);
             } else {
-                secondSideCard = ((DoubleFacedCardHalf) card).getOtherSide().copy();
+                secondSideCard = ((DoubleFacedCardHalf<?>) card).getOtherSide().copy();
                 this.card = card;
                 init(card, game);
             }
@@ -269,11 +269,14 @@ public class PermanentCard extends PermanentImpl {
 
     @Override
     public int getManaValue() {
+        // 712.8e. While a nonmodal double-faced permanent has its back face up, it has only the characteristics of its back face.
+        // However, its mana value is calculated using the mana cost of its front face.
+        // If a permanent is copying the back face of a nonmodal double-faced permanent
+        // (even if the object representing that copy is itself a double-faced permanent), the mana value of that permanent is 0. See rule 202.3b.
+        if (isCopy() && copyFrom instanceof DoubleFacedCardHalf && ((DoubleFacedCardHalf<?>) copyFrom).isBackSide()) {
+            return copyFrom instanceof ModalDoubleFacedCardHalf ? super.getManaValue() : 0;
+        }
         if (isTransformed()) {
-            // 711.4b While a double-faced permanent's back face is up, it has only the characteristics of its back face.
-            // However, its converted mana cost is calculated using the mana cost of its front face. This is a change from previous rules.
-            // If a permanent is copying the back face of a double-faced card (even if the card representing that copy
-            // is itself a double-faced card), the converted mana cost of that permanent is 0.
             return getCard().getManaValue();
         }
         if (faceDown) { // game not neccessary

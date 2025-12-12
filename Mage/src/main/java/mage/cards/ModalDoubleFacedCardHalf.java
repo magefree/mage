@@ -7,7 +7,7 @@ import mage.constants.SuperType;
 
 import java.util.UUID;
 
-public class ModalDoubleFacedCardHalf extends DoubleFacedCardHalf {
+public class ModalDoubleFacedCardHalf extends DoubleFacedCardHalf<ModalDoubleFacedCard> {
 
     public ModalDoubleFacedCardHalf(
             UUID ownerId, CardSetInfo setInfo,
@@ -19,16 +19,10 @@ public class ModalDoubleFacedCardHalf extends DoubleFacedCardHalf {
 
     protected ModalDoubleFacedCardHalf(final ModalDoubleFacedCardHalf card) {
         super(card);
-        this.parentCard = card.parentCard;
     }
 
     @Override
     public ModalDoubleFacedCardHalf copy() {
         return new ModalDoubleFacedCardHalf(this);
-    }
-
-    @Override
-    public ModalDoubleFacedCard getParentCard() {
-        return (ModalDoubleFacedCard) parentCard;
     }
 }

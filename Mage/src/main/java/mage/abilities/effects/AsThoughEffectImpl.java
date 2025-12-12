@@ -3,7 +3,9 @@ package mage.abilities.effects;
 import mage.MageIdentifier;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
-import mage.cards.*;
+import mage.cards.Card;
+import mage.cards.CardWithParts;
+import mage.cards.CardWithSpellOption;
 import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
@@ -84,19 +86,13 @@ public abstract class AsThoughEffectImpl extends ContinuousEffectImpl implements
             return false;
         }
         if (!card.isLand(game)) {
-            if (card instanceof SplitCard) {
-                Card leftCard = ((SplitCard) card).getLeftHalfCard();
-                player.setCastSourceIdWithAlternateMana(leftCard.getId(), null, leftCard.getSpellAbility().getCosts(), identifier);
-                Card rightCard = ((SplitCard) card).getRightHalfCard();
-                player.setCastSourceIdWithAlternateMana(rightCard.getId(), null, rightCard.getSpellAbility().getCosts(), identifier);
-            } else if (card instanceof DoubleFacedCard) {
-                Card leftCard = ((DoubleFacedCard) card).getLeftHalfCard();
-                Card rightCard = ((DoubleFacedCard) card).getRightHalfCard();
-                // some MDFC's are land.  IE: sea gate restoration
-                if (!leftCard.isLand(game)) {
+            if (card instanceof CardWithParts) {
+                Card leftCard = ((CardWithParts) card).getLeftHalfCard();
+                if (leftCard.getSpellAbility() != null && leftCard.getSpellAbility().getSpellAbilityType().canCast()) {
                     player.setCastSourceIdWithAlternateMana(leftCard.getId(), null, leftCard.getSpellAbility().getCosts(), identifier);
                 }
-                if (!rightCard.isLand(game)) {
+                Card rightCard = ((CardWithParts) card).getRightHalfCard();
+                if (rightCard.getSpellAbility() != null && rightCard.getSpellAbility().getSpellAbilityType().canCast()) {
                     player.setCastSourceIdWithAlternateMana(rightCard.getId(), null, rightCard.getSpellAbility().getCosts(), identifier);
                 }
             } else if (card instanceof CardWithSpellOption) {

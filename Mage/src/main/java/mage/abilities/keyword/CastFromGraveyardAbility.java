@@ -7,8 +7,7 @@ import mage.abilities.costs.Costs;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
-import mage.cards.ModalDoubleFacedCard;
-import mage.cards.SplitCard;
+import mage.cards.CardWithParts;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -63,17 +62,11 @@ public abstract class CastFromGraveyardAbility extends SpellAbility {
         }
         // CastFromGraveyard can never cast a split card by Fuse, because Fuse only works from hand
         // https://tappedout.net/mtg-questions/snapcaster-mage-and-flashback-on-a-fuse-card-one-or-both-halves-legal-targets/
-        if (card instanceof SplitCard) {
-            if (((SplitCard) card).getLeftHalfCard().getName().equals(abilityName)) {
-                return ((SplitCard) card).getLeftHalfCard().getSpellAbility().canActivate(playerId, game);
-            } else if (((SplitCard) card).getRightHalfCard().getName().equals(abilityName)) {
-                return ((SplitCard) card).getRightHalfCard().getSpellAbility().canActivate(playerId, game);
-            }
-        } else if (card instanceof ModalDoubleFacedCard) {
-            if (((ModalDoubleFacedCard) card).getLeftHalfCard().getName().equals(abilityName)) {
-                return ((ModalDoubleFacedCard) card).getLeftHalfCard().getSpellAbility().canActivate(playerId, game);
-            } else if (((ModalDoubleFacedCard) card).getRightHalfCard().getName().equals(abilityName)) {
-                return ((ModalDoubleFacedCard) card).getRightHalfCard().getSpellAbility().canActivate(playerId, game);
+        if (card instanceof CardWithParts) {
+            if (((CardWithParts) card).getLeftHalfCard().getName().equals(abilityName)) {
+                return ((CardWithParts) card).getLeftHalfCard().getSpellAbility().canActivate(playerId, game);
+            } else if (((CardWithParts) card).getRightHalfCard().getName().equals(abilityName)) {
+                return ((CardWithParts) card).getRightHalfCard().getSpellAbility().canActivate(playerId, game);
             }
         }
         return card.getSpellAbility().canActivate(playerId, game);
@@ -86,19 +79,11 @@ public abstract class CastFromGraveyardAbility extends SpellAbility {
             return spellAbilityToResolve;
         }
         SpellAbility spellAbilityCopy;
-        if (card instanceof SplitCard) {
-            if (((SplitCard) card).getLeftHalfCard().getName().equals(abilityName)) {
-                spellAbilityCopy = ((SplitCard) card).getLeftHalfCard().getSpellAbility().copy();
-            } else if (((SplitCard) card).getRightHalfCard().getName().equals(abilityName)) {
-                spellAbilityCopy = ((SplitCard) card).getRightHalfCard().getSpellAbility().copy();
-            } else {
-                spellAbilityCopy = null;
-            }
-        } else if (card instanceof ModalDoubleFacedCard) {
-            if (((ModalDoubleFacedCard) card).getLeftHalfCard().getName().equals(abilityName)) {
-                spellAbilityCopy = ((ModalDoubleFacedCard) card).getLeftHalfCard().getSpellAbility().copy();
-            } else if (((ModalDoubleFacedCard) card).getRightHalfCard().getName().equals(abilityName)) {
-                spellAbilityCopy = ((ModalDoubleFacedCard) card).getRightHalfCard().getSpellAbility().copy();
+        if (card instanceof CardWithParts) {
+            if (((CardWithParts) card).getLeftHalfCard().getName().equals(abilityName)) {
+                spellAbilityCopy = ((CardWithParts) card).getLeftHalfCard().getSpellAbility().copy();
+            } else if (((CardWithParts) card).getRightHalfCard().getName().equals(abilityName)) {
+                spellAbilityCopy = ((CardWithParts) card).getRightHalfCard().getSpellAbility().copy();
             } else {
                 spellAbilityCopy = null;
             }

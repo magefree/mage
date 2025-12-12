@@ -7,6 +7,7 @@ import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.cards.FrameStyle;
 import mage.choices.Choice;
 import mage.choices.ChoiceHintType;
 import mage.choices.ChoiceImpl;
@@ -473,6 +474,11 @@ public abstract class StackObjectImpl implements StackObject {
         }
 
         return null;
+    }
+
+    @Override
+    public void setFrameStyle(FrameStyle frameStyle) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override

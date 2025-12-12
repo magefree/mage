@@ -13,7 +13,9 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.mana.*;
-import mage.cards.*;
+import mage.cards.Card;
+import mage.cards.CardWithParts;
+import mage.cards.CardWithSpellOption;
 import mage.choices.Choice;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.ManaType;
@@ -638,15 +640,11 @@ public final class ManaUtil {
     }
 
     public static FilterMana getColorIdentity(Card card) {
-        Card secondSide;
-        if (card instanceof SplitCard) {
-            secondSide = ((SplitCard) card).getRightHalfCard();
+        Card secondSide = null;
+        if (card instanceof CardWithParts) {
+            secondSide = ((CardWithParts) card).getRightHalfCard();
         } else if (card instanceof CardWithSpellOption) {
             secondSide = ((CardWithSpellOption) card).getSpellCard();
-        } else if (card instanceof DoubleFacedCard) {
-            secondSide = ((DoubleFacedCard) card).getRightHalfCard();
-        } else {
-            secondSide = card.getSecondCardFace();
         }
         return getColorIdentity(card.getColor(), String.join("", card.getManaCostSymbols()), card.getRules(), secondSide);
     }

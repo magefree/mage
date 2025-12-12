@@ -559,11 +559,11 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                         allCardsUrls.add(url);
                     }
                     if (card.isDoubleFacedCard()) {
-                        if (card.getDoubleFacedSecondSideName() == null || card.getDoubleFacedSecondSideName().trim().isEmpty()) {
+                        if (card.getSecondSideName() == null || card.getSecondSideName().trim().isEmpty()) {
                             throw new IllegalStateException("MDF card can't have empty name.");
                         }
                         CardDownloadData cardDownloadData = new CardDownloadData(
-                                card.getDoubleFacedSecondSideName(),
+                                card.getSecondSideName(),
                                 card.getSetCode(),
                                 card.getCardNumber(),
                                 card.usesVariousArt(),

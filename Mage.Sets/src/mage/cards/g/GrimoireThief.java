@@ -21,7 +21,6 @@ import mage.target.common.TargetOpponent;
 import mage.util.CardUtil;
 
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 import java.util.UUID;
 
@@ -197,21 +196,9 @@ class GrimoireThiefCounterspellEffect extends OneShotEffect {
             }
             // then counter any with the same name as the card exiled with Grimoire Thief
             for (Card card : cards.getCards(game)) {
-                for (Iterator<StackObject> iterator = game.getStack().iterator(); iterator.hasNext(); ) {
-                    StackObject stackObject = iterator.next();
-                    MageObject mageObject = game.getObject(card.getId());
-                    String name1;
-                    String name2;
-                    if (mageObject instanceof SplitCard) {
-                        name1 = ((SplitCard) mageObject).getLeftHalfCard().getName();
-                        name2 = ((SplitCard) mageObject).getRightHalfCard().getName();
-                    } else {
-                        // modal double faces cards, adventure cards -- all have one name in non stack/battlefield zone
-                        name1 = mageObject.getName();
-                        name2 = name1;
-                    }
+                for (StackObject stackObject : game.getStack()) {
 
-                    if (CardUtil.haveSameNames(stackObject, name1, game) || CardUtil.haveSameNames(stackObject, name2, game)) {
+                    if (CardUtil.haveSameNames(stackObject, card.getMainCard().getName(), game)) {
                         Spell spell = (Spell) stackObject;
                         game.getStack().counter(stackObject.getId(), source, game);
                         game.informPlayers(sourceObject.getLogName() + ": spell " + spell.getIdName() + " was countered.");

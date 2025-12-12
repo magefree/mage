@@ -1264,12 +1264,10 @@ public final class CardUtil {
 
         // must choose left side all time
         Card permCard;
-        if (card instanceof SplitCard) {
-            permCard = card;
+        if (card instanceof CardWithParts) {
+            permCard = ((CardWithParts) card).getDefaultCardSide();
         } else if (card instanceof CardWithSpellOption) {
             permCard = card;
-        } else if (card instanceof DoubleFacedCard) {
-            permCard = ((DoubleFacedCard) card).getLeftHalfCard();
         } else {
             permCard = card;
         }
@@ -1315,10 +1313,8 @@ public final class CardUtil {
      */
     public static String getCardNameForSameNameSearch(Card card) {
         // it's ok to return one name only cause NamePredicate can find same card by first name
-        if (card instanceof SplitCard) {
-            return ((SplitCard) card).getLeftHalfCard().getName();
-        } else if (card instanceof DoubleFacedCard) {
-            return ((DoubleFacedCard) card).getLeftHalfCard().getName();
+        if (card instanceof CardWithParts) {
+            return ((CardWithParts) card).getLeftHalfCard().getName();
         } else {
             return card.getName();
         }
@@ -1479,16 +1475,16 @@ public final class CardUtil {
         if (cardToCast == null) {
             return cards;
         }
-        if (cardToCast instanceof CardWithHalves) {
-            cards.add(((CardWithHalves) cardToCast).getLeftHalfCard());
-            cards.add(((CardWithHalves) cardToCast).getRightHalfCard());
+        if (cardToCast instanceof CardWithParts) {
+            cards.add(((CardWithParts) cardToCast).getLeftHalfCard());
+            cards.add(((CardWithParts) cardToCast).getRightHalfCard());
         } else if (cardToCast instanceof CardWithSpellOption) {
             cards.add(cardToCast);
             cards.add(((CardWithSpellOption) cardToCast).getSpellCard());
         } else {
             cards.add(cardToCast);
         }
-        cards.removeIf(Objects::isNull);
+        cards.removeIf(card -> Objects.isNull(card) || card.getSpellAbility() == null || !card.getSpellAbility().getSpellAbilityType().canCast());
         if (!playLand || !player.canPlayLand() || !game.isActivePlayer(playerId)) {
             cards.removeIf(card -> card.isLand(game));
         }
@@ -1549,7 +1545,7 @@ public final class CardUtil {
                 .stream()
                 .map(MageObject::getLogName)
                 .collect(Collectors.joining(" or "));
-        if (partsToCast.size() < 1
+        if (partsToCast.isEmpty()
                 || !player.chooseUse(
                 Outcome.PlayForFree, "Cast spell without paying its mana cost (" + partsInfo + ")?", source, game
         )) {
@@ -1654,61 +1650,32 @@ public final class CardUtil {
     }
 
     public static boolean castSingle(Player player, Ability source, Game game, Card card, boolean noMana, ManaCostsImpl<ManaCost> manaCost) {
-        // handle split-cards
-        if (card instanceof SplitCard) {
-            SplitCardHalf leftHalfCard = ((SplitCard) card).getLeftHalfCard();
-            SplitCardHalf rightHalfCard = ((SplitCard) card).getRightHalfCard();
+        // handle cards with multiple parts
+        if (card instanceof CardWithParts) {
+            Card leftHalfCard = ((CardWithParts) card).getLeftHalfCard();
+            Card rightHalfCard = ((CardWithParts) card).getRightHalfCard();
+            boolean canCastLeft = leftHalfCard.getSpellAbility() != null &&  leftHalfCard.getSpellAbility().getSpellAbilityType().canCast();
+            boolean canCastRight = rightHalfCard.getSpellAbility() != null && rightHalfCard.getSpellAbility().getSpellAbilityType().canCast();
             if (manaCost != null) {
                 // get additional cost if any
-                Costs<Cost> additionalCostsLeft = leftHalfCard.getSpellAbility().getCosts();
-                Costs<Cost> additionalCostsRight = rightHalfCard.getSpellAbility().getCosts();
-                // set alternative cost and any additional cost
-                player.setCastSourceIdWithAlternateMana(leftHalfCard.getId(), manaCost, additionalCostsLeft, MageIdentifier.Default);
-                player.setCastSourceIdWithAlternateMana(rightHalfCard.getId(), manaCost, additionalCostsRight, MageIdentifier.Default);
-            }
-            // allow the card to be cast
-            game.getState().setValue("PlayFromNotOwnHandZone" + leftHalfCard.getId(), Boolean.TRUE);
-            game.getState().setValue("PlayFromNotOwnHandZone" + rightHalfCard.getId(), Boolean.TRUE);
-        }
-
-        // handle MDFC
-        if (card instanceof ModalDoubleFacedCard) {
-            ModalDoubleFacedCardHalf leftHalfCard = ((ModalDoubleFacedCard) card).getLeftHalfCard();
-            ModalDoubleFacedCardHalf rightHalfCard = ((ModalDoubleFacedCard) card).getRightHalfCard();
-            if (manaCost != null) {
-                // some MDFC cards are lands.  IE: sea gate restoration
-                if (!leftHalfCard.isLand(game)) {
-                    // get additional cost if any
-                    Costs<Cost> additionalCostsMDFCLeft = leftHalfCard.getSpellAbility().getCosts();
+                if (canCastLeft) {
+                    Costs<Cost> additionalCostsLeft = leftHalfCard.getSpellAbility().getCosts();
                     // set alternative cost and any additional cost
-                    player.setCastSourceIdWithAlternateMana(leftHalfCard.getId(), manaCost, additionalCostsMDFCLeft, MageIdentifier.Default);
+                    player.setCastSourceIdWithAlternateMana(leftHalfCard.getId(), manaCost, additionalCostsLeft, MageIdentifier.Default);
                 }
-                if (!rightHalfCard.isLand(game)) {
-                    // get additional cost if any
-                    Costs<Cost> additionalCostsMDFCRight = rightHalfCard.getSpellAbility().getCosts();
+                if (canCastRight) {
+                    Costs<Cost> additionalCostsRight = rightHalfCard.getSpellAbility().getCosts();
                     // set alternative cost and any additional cost
-                    player.setCastSourceIdWithAlternateMana(rightHalfCard.getId(), manaCost, additionalCostsMDFCRight, MageIdentifier.Default);
+                    player.setCastSourceIdWithAlternateMana(rightHalfCard.getId(), manaCost, additionalCostsRight, MageIdentifier.Default);
                 }
             }
             // allow the card to be cast
-            game.getState().setValue("PlayFromNotOwnHandZone" + leftHalfCard.getId(), Boolean.TRUE);
-            game.getState().setValue("PlayFromNotOwnHandZone" + rightHalfCard.getId(), Boolean.TRUE);
-        }
-
-        // handle TDFC
-        if (card instanceof TransformingDoubleFacedCard) {
-            TransformingDoubleFacedCardHalf frontFace = ((TransformingDoubleFacedCard) card).getLeftHalfCard();
-            TransformingDoubleFacedCardHalf backFace = ((TransformingDoubleFacedCard) card).getRightHalfCard();
-
-            if (manaCost != null) {
-                // get additional cost if any
-                Costs<Cost> additionalCostsMDFCLeft = frontFace.getSpellAbility().getCosts();
-                // set alternative cost and any additional cost
-                player.setCastSourceIdWithAlternateMana(frontFace.getId(), manaCost, additionalCostsMDFCLeft, MageIdentifier.Default);
+            if (canCastLeft) {
+                game.getState().setValue("PlayFromNotOwnHandZone" + leftHalfCard.getId(), Boolean.TRUE);
             }
-
-            // allow just the front face
-            game.getState().setValue("PlayFromNotOwnHandZone" + frontFace.getId(), Boolean.TRUE);
+            if (canCastRight) {
+                game.getState().setValue("PlayFromNotOwnHandZone" + rightHalfCard.getId(), Boolean.TRUE);
+            }
         }
 
         // handle adventure cards
@@ -1742,15 +1709,9 @@ public final class CardUtil {
                 game, noMana, new ApprovingObject(source, game));
 
         // turn off effect after cast on every possible card-face
-        if (card instanceof SplitCard) {
-            SplitCardHalf leftHalfCard = ((SplitCard) card).getLeftHalfCard();
-            SplitCardHalf rightHalfCard = ((SplitCard) card).getRightHalfCard();
-            game.getState().setValue("PlayFromNotOwnHandZone" + leftHalfCard.getId(), null);
-            game.getState().setValue("PlayFromNotOwnHandZone" + rightHalfCard.getId(), null);
-        }
-        if (card instanceof DoubleFacedCard) {
-            DoubleFacedCardHalf leftHalfCard = ((DoubleFacedCard) card).getLeftHalfCard();
-            DoubleFacedCardHalf rightHalfCard = ((DoubleFacedCard) card).getRightHalfCard();
+        if (card instanceof CardWithParts) {
+            Card leftHalfCard = ((CardWithParts) card).getLeftHalfCard();
+            Card rightHalfCard = ((CardWithParts) card).getRightHalfCard();
             game.getState().setValue("PlayFromNotOwnHandZone" + leftHalfCard.getId(), null);
             game.getState().setValue("PlayFromNotOwnHandZone" + rightHalfCard.getId(), null);
         }
@@ -2137,13 +2098,8 @@ public final class CardUtil {
             return res;
         }
 
-        if (object instanceof SplitCard || object instanceof SplitCardHalf) {
-            SplitCard mainCard = (SplitCard) ((Card) object).getMainCard();
-            res.add(mainCard);
-            res.add(mainCard.getLeftHalfCard());
-            res.add(mainCard.getRightHalfCard());
-        } else if (object instanceof DoubleFacedCard || object instanceof DoubleFacedCardHalf) {
-            DoubleFacedCard mainCard = (DoubleFacedCard) ((Card) object).getMainCard();
+        if (object instanceof CardWithParts || object instanceof CardPart) {
+            CardWithParts mainCard = (CardWithParts) ((Card) object).getMainCard();
             res.add(mainCard);
             res.add(mainCard.getLeftHalfCard());
             res.add(mainCard.getRightHalfCard());

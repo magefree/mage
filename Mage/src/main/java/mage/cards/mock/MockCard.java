@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.cards.CardImpl;
-import mage.cards.DoubleFacedCard;
+import mage.cards.CardWithParts;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.util.CardUtil;
@@ -35,7 +35,6 @@ public class MockCard extends CardImpl implements MockableCard {
     protected List<String> manaCostRightStr;
     protected List<String> manaCostStr;
     protected String spellOptionName; // adventure/omen spell name
-    protected boolean isDoubleFacedCard;
     protected int manaValue;
 
     public MockCard(CardInfo card) {
@@ -72,14 +71,13 @@ public class MockCard extends CardImpl implements MockableCard {
         }
 
         if (card.isCardWithSpellOption()) {
-            this.spellOptionName = card.getSpellOptionCardName();
+            this.spellOptionName = card.getSecondSideName();
         }
 
         if (card.isDoubleFacedCard()) {
-            DoubleFacedCard mdfCard = (DoubleFacedCard) card.createCard();
+            CardWithParts mdfCard = (CardWithParts) card.createCard();
             CardInfo mdfSecondSide = new CardInfo(mdfCard.getRightHalfCard());
             this.secondSideCard = new MockCard(mdfSecondSide);
-            this.isDoubleFacedCard = true;
         }
 
         this.startingLoyalty = CardUtil.convertLoyaltyOrDefense(card.getStartingLoyalty());
@@ -102,7 +100,6 @@ public class MockCard extends CardImpl implements MockableCard {
         this.manaCostRightStr = new ArrayList<>(card.manaCostRightStr);
         this.manaCostStr = new ArrayList<>(card.manaCostStr);
         this.spellOptionName = card.spellOptionName;
-        this.isDoubleFacedCard = card.isDoubleFacedCard;
         this.manaValue = card.manaValue;
     }
 
@@ -157,7 +154,7 @@ public class MockCard extends CardImpl implements MockableCard {
 
         if (spellOptionName != null) {
             return getName() + CARD_WITH_SPELL_OPTION_NAME_SEPARATOR + spellOptionName;
-        } else if (isDoubleFacedCard) {
+        } else if (getSecondCardFace() != null) {
             return getName() + MODAL_DOUBLE_FACES_NAME_SEPARATOR + this.getSecondCardFace().getName();
         } else {
             return getName();
@@ -176,11 +173,5 @@ public class MockCard extends CardImpl implements MockableCard {
 
     private Ability textAbilityFromString(final String text) {
         return new MockAbility(text);
-    }
-
-    @Override
-    public boolean isTransformable() {
-        // must enable toggle mode in deck editor (switch between card sides);
-        return super.isTransformable() || this.isDoubleFacedCard || this.secondSideCard != null;
     }
 }

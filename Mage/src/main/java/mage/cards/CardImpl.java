@@ -69,13 +69,14 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         this.cardType.addAll(Arrays.asList(cardTypes));
         this.manaCost.load(costs);
         setDefaultColor();
-        if (this.isLand()) {
+        // check if CardWithParts, because the main card doesn't have card parts created yet
+        if (!(this instanceof CardWithParts) && this.isLand()) {
             Ability ability = new PlayLandAbility(name);
             ability.setSourceId(this.getId());
             abilities.add(ability);
         } else {
             SpellAbility ability = new SpellAbility(manaCost, name, Zone.HAND, spellAbilityType);
-            if (!this.isInstant()) {
+            if (!(this instanceof CardWithParts) && !this.isInstant()) {
                 ability.setTiming(TimingRule.SORCERY);
             }
             ability.setSourceId(this.getId());
@@ -517,22 +518,12 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                         stackObject = game.getStack().getSpell(this.getId(), false);
                     }
 
-                    // handle half of Split Cards on stack
-                    if (stackObject == null && (this instanceof SplitCard)) {
-                        stackObject = game.getStack().getSpell(((SplitCard) this).getLeftHalfCard().getId(), false);
+                    // handle half of multi part cards on stack
+                    if (stackObject == null && (this instanceof CardWithParts)) {
+                        stackObject = game.getStack().getSpell(((CardWithParts) this).getLeftHalfCard().getId(), false);
                         if (stackObject == null) {
-                            stackObject = game.getStack().getSpell(((SplitCard) this).getRightHalfCard().getId(),
+                            stackObject = game.getStack().getSpell(((CardWithParts) this).getRightHalfCard().getId(),
                                     false);
-                        }
-                    }
-
-                    // handle half of Double Faces Cards on stack
-                    if (stackObject == null && (this instanceof DoubleFacedCard)) {
-                        stackObject = game.getStack().getSpell(((DoubleFacedCard) this).getLeftHalfCard().getId(),
-                                false);
-                        if (stackObject == null) {
-                            stackObject = game.getStack()
-                                    .getSpell(((DoubleFacedCard) this).getRightHalfCard().getId(), false);
                         }
                     }
 

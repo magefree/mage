@@ -2,7 +2,7 @@ package mage.watchers.common;
 
 import mage.MageObject;
 import mage.cards.Card;
-import mage.cards.DoubleFacedCard;
+import mage.cards.CardWithParts;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
@@ -64,8 +64,8 @@ public class CommanderInfoWatcher extends Watcher {
         MageObject rightObject = null;
         if (object == null) {
             object = game.getCard(sourceId);
-            if (object instanceof DoubleFacedCard) {
-                DoubleFacedCard cardObject = (DoubleFacedCard)object;
+            if (object instanceof CardWithParts) {
+                CardWithParts cardObject = (CardWithParts)object;
                 leftObject = game.getPermanent(cardObject.getLeftHalfCard().getId());
                 rightObject = game.getPermanent(cardObject.getRightHalfCard().getId());
             }

@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardSetInfo;
@@ -10,7 +9,8 @@ import mage.constants.SpellAbilityType;
 import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 import mage.target.TargetSpell;
-import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK;
 

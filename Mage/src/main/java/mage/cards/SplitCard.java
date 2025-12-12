@@ -1,15 +1,12 @@
 package mage.cards;
 
-import mage.MageObject;
 import mage.abilities.Abilities;
-import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.constants.CardType;
 import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.ZoneChangeEvent;
 import mage.util.CardUtil;
 
 import java.util.List;
@@ -18,12 +15,9 @@ import java.util.UUID;
 /**
  * @author LevelX2
  */
-public abstract class SplitCard extends CardImpl implements CardWithHalves {
+public abstract class SplitCard extends CardWithPartsImpl<SplitCardHalf, SplitCard> {
 
     public static final String FUSE_RULE = "Fuse <i>(You may cast one or both halves of this card from your hand.)</i>";
-
-    protected Card leftHalfCard;
-    protected Card rightHalfCard;
 
     protected SplitCard(UUID ownerId, CardSetInfo setInfo, CardType[] cardTypes, String costsLeft, String costsRight, SpellAbilityType spellAbilityType) {
         this(ownerId, setInfo, cardTypes, cardTypes, costsLeft, costsRight, spellAbilityType);
@@ -47,87 +41,6 @@ public abstract class SplitCard extends CardImpl implements CardWithHalves {
 
     protected SplitCard(SplitCard card) {
         super(card);
-        // make sure all parts created and parent ref added
-        this.leftHalfCard = card.getLeftHalfCard().copy();
-        ((SplitCardHalf) leftHalfCard).setParentCard(this);
-        this.rightHalfCard = card.rightHalfCard.copy();
-        ((SplitCardHalf) rightHalfCard).setParentCard(this);
-    }
-
-    public void setParts(SplitCardHalf leftHalfCard, SplitCardHalf rightHalfCard) {
-        // for card copy only - set new parts
-        this.leftHalfCard = leftHalfCard;
-        leftHalfCard.setParentCard(this);
-        this.rightHalfCard = rightHalfCard;
-        rightHalfCard.setParentCard(this);
-    }
-
-    public SplitCardHalf getLeftHalfCard() {
-        return (SplitCardHalf) leftHalfCard;
-    }
-
-    public SplitCardHalf getRightHalfCard() {
-        return (SplitCardHalf) rightHalfCard;
-    }
-
-    @Override
-    public void assignNewId() {
-        super.assignNewId();
-        leftHalfCard.assignNewId();
-        rightHalfCard.assignNewId();
-    }
-
-    @Override
-    public void setCopy(boolean isCopy, MageObject copiedFrom) {
-        super.setCopy(isCopy, copiedFrom);
-        leftHalfCard.setCopy(isCopy, copiedFrom);
-        rightHalfCard.setCopy(isCopy, copiedFrom);
-    }
-
-    @Override
-    public boolean moveToZone(Zone toZone, Ability source, Game game, boolean flag, List<UUID> appliedEffects) {
-        if (super.moveToZone(toZone, source, game, flag, appliedEffects)) {
-            Zone currentZone = game.getState().getZone(getId());
-            game.getState().setZone(getLeftHalfCard().getId(), currentZone);
-            game.getState().setZone(getRightHalfCard().getId(), currentZone);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public void setZone(Zone zone, Game game) {
-        super.setZone(zone, game);
-        game.setZone(getLeftHalfCard().getId(), zone);
-        game.setZone(getRightHalfCard().getId(), zone);
-    }
-
-    @Override
-    public boolean moveToExile(UUID exileId, String name, Ability source, Game game, List<UUID> appliedEffects) {
-        if (super.moveToExile(exileId, name, source, game, appliedEffects)) {
-            Zone currentZone = game.getState().getZone(getId());
-            game.getState().setZone(getLeftHalfCard().getId(), currentZone);
-            game.getState().setZone(getRightHalfCard().getId(), currentZone);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean removeFromZone(Game game, Zone fromZone, Ability source) {
-        // zone contains only one main card
-        return super.removeFromZone(game, fromZone, source);
-    }
-
-    @Override
-    public void updateZoneChangeCounter(Game game, ZoneChangeEvent event) {
-        if (isCopy()) { // same as meld cards
-            super.updateZoneChangeCounter(game, event);
-            return;
-        }
-        super.updateZoneChangeCounter(game, event);
-        getLeftHalfCard().updateZoneChangeCounter(game, event);
-        getRightHalfCard().updateZoneChangeCounter(game, event);
     }
 
     @Override
@@ -142,57 +55,6 @@ public abstract class SplitCard extends CardImpl implements CardWithHalves {
                 this.getRightHalfCard().getSpellAbility().setControllerId(controllerId);
                 return super.cast(game, fromZone, ability, controllerId);
         }
-    }
-
-    @Override
-    public Abilities<Ability> getAbilities() {
-        Abilities<Ability> allAbilites = new AbilitiesImpl<>();
-        for (Ability ability : super.getAbilities()) {
-            // ignore split abilities
-            // TODO: why it here, for GUI's cleanup in card texts? Maybe it can be removed, see mdf cards
-            if (ability instanceof SpellAbility
-                    && (((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.SPLIT
-                    || ((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.SPLIT_AFTERMATH)) {
-                continue;
-            }
-            allAbilites.add(ability);
-        }
-        allAbilites.addAll(leftHalfCard.getAbilities());
-        allAbilites.addAll(rightHalfCard.getAbilities());
-        return allAbilites;
-    }
-
-    @Override
-    public Abilities<Ability> getInitAbilities() {
-        // must init only full split card aiblities like fuse, parts must be init separately
-        return super.getAbilities();
-    }
-
-    /**
-     * Currently only gets the fuse SpellAbility if there is one, but generally
-     * gets any abilities on a split card as a whole, and not on either half
-     * individually.
-     */
-    public Abilities<Ability> getSharedAbilities(Game game) {
-        return super.getAbilities(game);
-    }
-
-    @Override
-    public Abilities<Ability> getAbilities(Game game) {
-        Abilities<Ability> allAbilites = new AbilitiesImpl<>();
-        for (Ability ability : super.getAbilities(game)) {
-            // ignore split abilities
-            // TODO: why it here, for GUI's cleanup in card texts? Maybe it can be removed, see mdf cards
-            if (ability instanceof SpellAbility
-                    && (((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.SPLIT
-                    || ((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.SPLIT_AFTERMATH)) {
-                continue;
-            }
-            allAbilites.add(ability);
-        }
-        allAbilites.addAll(leftHalfCard.getAbilities(game));
-        allAbilites.addAll(rightHalfCard.getAbilities(game));
-        return allAbilites;
     }
 
     @Override
@@ -224,15 +86,6 @@ public abstract class SplitCard extends CardImpl implements CardWithHalves {
         return res;
     }
 
-    @Override
-    public void setOwnerId(UUID ownerId) {
-        super.setOwnerId(ownerId);
-        abilities.setControllerId(ownerId);
-        leftHalfCard.getAbilities().setControllerId(ownerId);
-        leftHalfCard.setOwnerId(ownerId);
-        rightHalfCard.getAbilities().setControllerId(ownerId);
-        rightHalfCard.setOwnerId(ownerId);
-    }
 
     @Override
     public int getManaValue() {

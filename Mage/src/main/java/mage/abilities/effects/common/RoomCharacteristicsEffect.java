@@ -11,7 +11,7 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
-import mage.cards.SplitCard;
+import mage.cards.RoomCard;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
@@ -72,11 +72,11 @@ public class RoomCharacteristicsEffect extends ContinuousEffectImpl {
     public boolean removeCharacteristics(Game game, Permanent permanent) {
         Card roomCardBlueprint = getCard(permanent);
 
-        if (!(roomCardBlueprint instanceof SplitCard)) {
+        if (!(roomCardBlueprint instanceof RoomCard)) {
             return false;
         }
 
-        SplitCard roomCard = (SplitCard) roomCardBlueprint;
+        RoomCard roomCard = (RoomCard) roomCardBlueprint;
 
         // Remove the name based on unlocked halves
         String newName = permanent.getName();
@@ -140,7 +140,7 @@ public class RoomCharacteristicsEffect extends ContinuousEffectImpl {
                     if (!removedLeftAbilities.contains(ability)) {
                         removedLeftAbilities.add(ability);
                     }
-                    permanent.removeAbility(ability, null, game);
+                    permanent.removeAbility(ability, permanent.getId(), game);
                     continue;
                 }
             }
@@ -149,7 +149,7 @@ public class RoomCharacteristicsEffect extends ContinuousEffectImpl {
                     if (!removedRightAbilities.contains(ability)) {
                         removedRightAbilities.add(ability);
                     }
-                    permanent.removeAbility(ability, null, game);
+                    permanent.removeAbility(ability, permanent.getId(), game);
                 }
             }
         }
@@ -187,28 +187,27 @@ public class RoomCharacteristicsEffect extends ContinuousEffectImpl {
 
     public void restoreUnlockedStats(Game game, Permanent permanent) {
         // remove unlock abilities
+        UUID sourceId = permanent.getId();
         for (Ability ability : permanent.getAbilities(game)) {
             if (ability instanceof RoomUnlockAbility) {
                 if (((RoomUnlockAbility) ability).isLeftHalf() && permanent.isLeftDoorUnlocked()) {
-                    permanent.removeAbility(ability, null, game);
+                    permanent.removeAbility(ability, sourceId, game);
                 } else if (!((RoomUnlockAbility) ability).isLeftHalf() && permanent.isRightDoorUnlocked()) {
-                    permanent.removeAbility(ability, null, game);
+                    permanent.removeAbility(ability, sourceId, game);
                 }
             }
         }
         // restore removed abilities
         // copies need abilities to be added back to game state for triggers
-        SplitCard roomCard = (SplitCard) getCard(permanent);
-        UUID sourceId = permanent.isCopy() ? permanent.getId() : null;
-        Game gameParam = permanent.isCopy() ? game : null;
+        RoomCard roomCard = (RoomCard) getCard(permanent);
         if (permanent.isLeftDoorUnlocked()) {
             for (Ability ability : roomCard.getLeftHalfCard().getAbilities()) {
-                permanent.addAbility(ability, sourceId, gameParam, true);
+                permanent.addAbility(ability, sourceId, game, true);
             }
         }
         if (permanent.isRightDoorUnlocked()) {
             for (Ability ability : roomCard.getRightHalfCard().getAbilities()) {
-                permanent.addAbility(ability, sourceId, gameParam, true);
+                permanent.addAbility(ability, sourceId, game, true);
             }
         }
     }

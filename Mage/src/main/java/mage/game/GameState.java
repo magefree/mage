@@ -1621,32 +1621,19 @@ public class GameState implements Serializable, Copyable<GameState> {
         copiedParts.add(copiedCard);
 
         // other parts
-        if (copiedCard instanceof SplitCard) {
+        if (copiedCard instanceof CardWithParts) {
             // left
-            SplitCardHalf leftOriginal = ((SplitCard) copiedCard).getLeftHalfCard();
-            SplitCardHalf leftCopied = leftOriginal.copy();
+            SubCard<?> leftOriginal = ((CardWithPartsImpl<?, ?>) copiedCard).getLeftHalfCard();
+            SubCard<?> leftCopied =  leftOriginal.copy();
             prepareCardForCopy(leftOriginal, leftCopied, newController);
             copiedParts.add(leftCopied);
             // right
-            SplitCardHalf rightOriginal = ((SplitCard) copiedCard).getRightHalfCard();
-            SplitCardHalf rightCopied = rightOriginal.copy();
+            SubCard<?> rightOriginal = ((CardWithPartsImpl<?, ?>) copiedCard).getRightHalfCard();
+            SubCard<?> rightCopied = rightOriginal.copy();
             prepareCardForCopy(rightOriginal, rightCopied, newController);
             copiedParts.add(rightCopied);
             // sync parts
-            ((SplitCard) copiedCard).setParts(leftCopied, rightCopied);
-        } else if (copiedCard instanceof DoubleFacedCard) {
-            // left
-            DoubleFacedCardHalf leftOriginal = ((DoubleFacedCard) copiedCard).getLeftHalfCard();
-            DoubleFacedCardHalf leftCopied = (DoubleFacedCardHalf) leftOriginal.copy();
-            prepareCardForCopy(leftOriginal, leftCopied, newController);
-            copiedParts.add(leftCopied);
-            // right
-            DoubleFacedCardHalf rightOriginal = ((DoubleFacedCard) copiedCard).getRightHalfCard();
-            DoubleFacedCardHalf rightCopied = (DoubleFacedCardHalf) rightOriginal.copy();
-            prepareCardForCopy(rightOriginal, rightCopied, newController);
-            copiedParts.add(rightCopied);
-            // sync parts
-            ((DoubleFacedCard) copiedCard).setParts(leftCopied, rightCopied);
+            ((CardWithPartsImpl<?, ?>) copiedCard).setParts(leftCopied, rightCopied);
         } else if (copiedCard instanceof CardWithSpellOption) {
             // right
             SpellOptionCard rightOriginal = ((CardWithSpellOption) copiedCard).getSpellCard();

@@ -1,22 +1,18 @@
 package mage.cards.d;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacedCard;
-import mage.cards.SplitCard;
 import mage.constants.CardType;
-import mage.constants.SpellAbilityType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
-import mage.game.stack.Spell;
+import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -59,30 +55,15 @@ public final class DoubleHeader extends CardImpl {
     }
 }
 
-class DoubleHeaderPredicate implements Predicate<MageObject> {
+class DoubleHeaderPredicate implements Predicate<Permanent> {
 
     public DoubleHeaderPredicate() {
     }
 
     @Override
-    public boolean apply(MageObject input, Game game) {
+    public boolean apply(Permanent input, Game game) {
         String name = input.getName();
-        if (input instanceof SplitCard) {
-            return hasTwoWords(((SplitCard) input).getLeftHalfCard().getName()) || hasTwoWords(((SplitCard) input).getRightHalfCard().getName());
-        } else if (input instanceof ModalDoubleFacedCard) {
-            return hasTwoWords(((ModalDoubleFacedCard) input).getLeftHalfCard().getName()) || hasTwoWords(((ModalDoubleFacedCard) input).getRightHalfCard().getName());
-        } else if (input instanceof Spell && ((Spell) input).getSpellAbility().getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED) {
-            SplitCard card = (SplitCard) ((Spell) input).getCard();
-            return hasTwoWords(card.getLeftHalfCard().getName()) || hasTwoWords(card.getRightHalfCard().getName());
-        } else {
-            if (name.contains(" // ")) {
-                String leftName = name.substring(0, name.indexOf(" // "));
-                String rightName = name.substring(name.indexOf(" // ") + 4);
-                return hasTwoWords(leftName) || hasTwoWords(rightName);
-            } else {
-                return hasTwoWords(name);
-            }
-        }
+        return hasTwoWords(name);
     }
 
     private boolean hasTwoWords(String str) {

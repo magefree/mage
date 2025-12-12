@@ -175,7 +175,7 @@ class EvelynTheCovetousManaEffect extends AsThoughEffectImpl implements AsThough
         }
         CardState cardState;
         if (card instanceof DoubleFacedCard) {
-            cardState = game.getLastKnownInformationCard(((DoubleFacedCard) card).getLeftHalfCard().getId(), Zone.EXILED);
+            cardState = game.getLastKnownInformationCard(((DoubleFacedCard<?, ?>) card).getLeftHalfCard().getId(), Zone.EXILED);
         } else {
             cardState = game.getLastKnownInformationCard(card.getId(), Zone.EXILED);
         }

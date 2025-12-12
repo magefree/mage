@@ -16,6 +16,7 @@ import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.keyword.WardAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardWithParts;
 import mage.cards.DoubleFacedCard;
 import mage.cards.repository.TokenInfo;
 import mage.cards.repository.TokenRepository;
@@ -377,7 +378,7 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
 
         if (card instanceof DoubleFacedCard) {
             // only MDFC uses independent card sides on 2024
-            return ((DoubleFacedCard) card).getLeftHalfCard();
+            return ((CardWithParts) card).getLeftHalfCard();
         } else {
             return card;
         }

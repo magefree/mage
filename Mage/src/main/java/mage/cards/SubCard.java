@@ -1,8 +1,16 @@
 package mage.cards;
 
-public interface SubCard<T extends Card> extends Card {
+/**
+ * Interface for card parts that reference a parent card.
+ *
+ * @param <P> the type of the parent card
+ */
+public interface SubCard<P extends Card> extends Card {
 
-    void setParentCard(T card);
+    void setParentCard(P card);
 
-    T getParentCard();
+    P getParentCard();
+
+    @Override
+    SubCard<P> copy();
 }
