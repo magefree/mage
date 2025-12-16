@@ -32,6 +32,7 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Blood Crypt", 349, Rarity.RARE, mage.cards.b.BloodCrypt.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Deceit", 212, Rarity.MYTHIC, mage.cards.d.Deceit.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Deceit", 293, Rarity.MYTHIC, mage.cards.d.Deceit.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Dose of Dawnglow", 100, Rarity.UNCOMMON, mage.cards.d.DoseOfDawnglow.class));
         cards.add(new SetCardInfo("Eirdu, Carrier of Dawn", 13, Rarity.MYTHIC, mage.cards.e.EirduCarrierOfDawn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Eirdu, Carrier of Dawn", 286, Rarity.MYTHIC, mage.cards.e.EirduCarrierOfDawn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Emptiness", 222, Rarity.MYTHIC, mage.cards.e.Emptiness.class, NON_FULL_USE_VARIOUS));

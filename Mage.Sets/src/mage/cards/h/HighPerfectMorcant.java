@@ -7,23 +7,19 @@ import mage.abilities.common.EntersBattlefieldThisOrAnotherTriggeredAbility;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.ProliferateEffect;
+import mage.abilities.effects.keyword.BlightControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
 
-import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -87,24 +83,9 @@ class HighPerfectMorcantEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        // TODO: this will likely be refactored when we learn more about this mechanic
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
             Player opponent = game.getPlayer(opponentId);
-            if (opponent == null || !game.getBattlefield().contains(
-                    StaticFilters.FILTER_CONTROLLED_CREATURE, opponentId, source, game, 1
-            )) {
-                continue;
-            }
-            TargetPermanent target = new TargetControlledCreaturePermanent();
-            target.withNotTarget(true);
-            target.withChooseHint("to put a -1/-1 counter on");
-            opponent.choose(outcome, target, source, game);
-            Optional.ofNullable(target)
-                    .map(TargetPermanent::getFirstTarget)
-                    .map(game::getPermanent)
-                    .ifPresent(permanent -> permanent.addCounters(
-                            CounterType.M1M1.createInstance(), opponentId, source, game
-                    ));
+            BlightControllerEffect.doBlight(opponent, 1, game, source);
         }
         return true;
     }
