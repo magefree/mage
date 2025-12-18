@@ -30,7 +30,7 @@ public final class TheLegendOfKuruk extends TransformingDoubleFacedCard {
         super(ownerId, setInfo,
                 new SuperType[]{}, new CardType[]{CardType.ENCHANTMENT}, new SubType[]{SubType.SAGA}, "{2}{U}{U}",
                 "Avatar Kuruk",
-                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.AVATAR}, "U"
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.AVATAR}, ""
         );
 
         // The Legend of Kuruk
