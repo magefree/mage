@@ -1,5 +1,6 @@
 package mage.abilities.costs.common;
 
+import mage.Mana;
 import mage.abilities.costs.mana.GenericManaCost;
 
 /**
@@ -22,6 +23,9 @@ public class WaterbendCost extends GenericManaCost {
 
     public WaterbendCost(int amount) {
         super(amount);
+        for (int i = 0; i < amount; i++) {
+            options.add(Mana.ColorlessMana(i));
+        }
     }
 
     private WaterbendCost(final WaterbendCost cost) {
