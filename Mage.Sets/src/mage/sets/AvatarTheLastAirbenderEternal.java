@@ -39,10 +39,6 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Appa, Aang's Companion", 268, Rarity.UNCOMMON, mage.cards.a.AppaAangsCompanion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Appa, the Vigilant", 62, Rarity.RARE, mage.cards.a.AppaTheVigilant.class));
         cards.add(new SetCardInfo("Arcane Signet", 315, Rarity.RARE, mage.cards.a.ArcaneSignet.class));
-        cards.add(new SetCardInfo("Avatar Kyoshi, Earthbender", 130, Rarity.MYTHIC, mage.cards.a.AvatarKyoshiEarthbender.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Avatar Kyoshi, Earthbender", 201, Rarity.MYTHIC, mage.cards.a.AvatarKyoshiEarthbender.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Avatar Roku, Firebender", 112, Rarity.MYTHIC, mage.cards.a.AvatarRokuFirebender.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Avatar Roku, Firebender", 191, Rarity.MYTHIC, mage.cards.a.AvatarRokuFirebender.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Azula, Ruthless Firebender", 101, Rarity.MYTHIC, mage.cards.a.AzulaRuthlessFirebender.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Azula, Ruthless Firebender", 184, Rarity.MYTHIC, mage.cards.a.AzulaRuthlessFirebender.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Baboon Spirit", 177, Rarity.RARE, mage.cards.b.BaboonSpirit.class, NON_FULL_USE_VARIOUS));

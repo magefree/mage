@@ -117,7 +117,7 @@ enum WretchedBonemassDynamicValue implements DynamicValue {
         ExileZone exileZone = game
                 .getExile()
                 .getExileZone(CardUtil.getExileZoneId(
-                        game, permanent.getId(), permanent.getZoneChangeCounter(game) - 2
+                        game, permanent.getMainCard().getId(), permanent.getZoneChangeCounter(game) - 1
                 ));
         if (exileZone == null) {
             return 0;
@@ -167,7 +167,7 @@ class WretchedBonemassGainAbilityEffect extends ContinuousEffectImpl {
             ExileZone exileZone = game
                     .getExile()
                     .getExileZone(CardUtil.getExileZoneId(
-                            game, wretchedBonemass.getId(), wretchedBonemass.getZoneChangeCounter(game) - 2
+                            game, wretchedBonemass.getMainCard().getId(), wretchedBonemass.getZoneChangeCounter(game) - 1
                     ));
             if (exileZone != null
                     && !exileZone.isEmpty()) {

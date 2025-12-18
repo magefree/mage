@@ -70,9 +70,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Blood Petal Celebrant", 146, Rarity.COMMON, mage.cards.b.BloodPetalCelebrant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Blood Petal Celebrant", 303, Rarity.COMMON, mage.cards.b.BloodPetalCelebrant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Blood Servitor", 252, Rarity.COMMON, mage.cards.b.BloodServitor.class));
-        cards.add(new SetCardInfo("Bloodbat Summoner", 137, Rarity.RARE, mage.cards.b.BloodbatSummoner.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Bloodbat Summoner", 298, Rarity.RARE, mage.cards.b.BloodbatSummoner.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Bloodbat Summoner", 338, Rarity.RARE, mage.cards.b.BloodbatSummoner.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloodcrazed Socialite", 288, Rarity.COMMON, mage.cards.b.BloodcrazedSocialite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloodcrazed Socialite", 96, Rarity.COMMON, mage.cards.b.BloodcrazedSocialite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloodsworn Squire", 289, Rarity.UNCOMMON, mage.cards.b.BloodswornSquire.class, NON_FULL_USE_VARIOUS));
@@ -82,7 +79,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Bloodvial Purveyor", 290, Rarity.RARE, mage.cards.b.BloodvialPurveyor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloodvial Purveyor", 98, Rarity.RARE, mage.cards.b.BloodvialPurveyor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloody Betrayal", 147, Rarity.COMMON, mage.cards.b.BloodyBetrayal.class));
-        cards.add(new SetCardInfo("Blossom-Clad Werewolf", 226, Rarity.COMMON, mage.cards.b.BlossomCladWerewolf.class));
         cards.add(new SetCardInfo("Boarded Window", 253, Rarity.UNCOMMON, mage.cards.b.BoardedWindow.class));
         cards.add(new SetCardInfo("Bramble Armor", 188, Rarity.COMMON, mage.cards.b.BrambleArmor.class));
         cards.add(new SetCardInfo("Bramble Wurm", 189, Rarity.UNCOMMON, mage.cards.b.BrambleWurm.class));
@@ -109,7 +105,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Change of Fortune", 375, Rarity.RARE, mage.cards.c.ChangeOfFortune.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Child of the Pack", 234, Rarity.UNCOMMON, mage.cards.c.ChildOfThePack.class));
         cards.add(new SetCardInfo("Chill of the Grave", 51, Rarity.COMMON, mage.cards.c.ChillOfTheGrave.class));
-        cards.add(new SetCardInfo("Cipherbound Spirit", 79, Rarity.UNCOMMON, mage.cards.c.CipherboundSpirit.class));
         cards.add(new SetCardInfo("Circle of Confinement", 329, Rarity.UNCOMMON, mage.cards.c.CircleOfConfinement.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Circle of Confinement", 7, Rarity.UNCOMMON, mage.cards.c.CircleOfConfinement.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cloaked Cadet", 192, Rarity.UNCOMMON, mage.cards.c.CloakedCadet.class));
@@ -139,8 +134,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Desperate Farmer", 104, Rarity.COMMON, mage.cards.d.DesperateFarmer.class));
         cards.add(new SetCardInfo("Dig Up", 197, Rarity.RARE, mage.cards.d.DigUp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dig Up", 387, Rarity.RARE, mage.cards.d.DigUp.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Dire-Strain Anarchist", 181, Rarity.MYTHIC, mage.cards.d.DireStrainAnarchist.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Dire-Strain Anarchist", 382, Rarity.MYTHIC, mage.cards.d.DireStrainAnarchist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Diregraf Scavenger", 105, Rarity.COMMON, mage.cards.d.DiregrafScavenger.class));
         cards.add(new SetCardInfo("Distracting Geist", 9, Rarity.UNCOMMON, mage.cards.d.DistractingGeist.class));
         cards.add(new SetCardInfo("Diver Skaab", 56, Rarity.UNCOMMON, mage.cards.d.DiverSkaab.class));
@@ -412,9 +405,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Toxrill, the Corrosive", 321, Rarity.MYTHIC, mage.cards.t.ToxrillTheCorrosive.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Traveling Minister", 39, Rarity.COMMON, mage.cards.t.TravelingMinister.class));
         cards.add(new SetCardInfo("Twinblade Geist", 40, Rarity.UNCOMMON, mage.cards.t.TwinbladeGeist.class));
-        cards.add(new SetCardInfo("Twinblade Invocation", 40, Rarity.UNCOMMON, mage.cards.t.TwinbladeInvocation.class));
-        cards.add(new SetCardInfo("Ulvenwald Behemoth", 225, Rarity.RARE, mage.cards.u.UlvenwaldBehemoth.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Ulvenwald Behemoth", 394, Rarity.RARE, mage.cards.u.UlvenwaldBehemoth.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ulvenwald Oddity", 225, Rarity.RARE, mage.cards.u.UlvenwaldOddity.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ulvenwald Oddity", 394, Rarity.RARE, mage.cards.u.UlvenwaldOddity.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Undead Butler", 133, Rarity.UNCOMMON, mage.cards.u.UndeadButler.class));
@@ -440,7 +430,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Voldaren Estate", 267, Rarity.RARE, mage.cards.v.VoldarenEstate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Voldaren Estate", 397, Rarity.RARE, mage.cards.v.VoldarenEstate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Voldaren Estate", 403, Rarity.RARE, mage.cards.v.VoldarenEstate.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Volt-Charged Berserker", 183, Rarity.UNCOMMON, mage.cards.v.VoltChargedBerserker.class));
         cards.add(new SetCardInfo("Voltaic Visionary", 183, Rarity.UNCOMMON, mage.cards.v.VoltaicVisionary.class));
         cards.add(new SetCardInfo("Wandering Mind", 251, Rarity.UNCOMMON, mage.cards.w.WanderingMind.class));
         cards.add(new SetCardInfo("Wanderlight Spirit", 86, Rarity.COMMON, mage.cards.w.WanderlightSpirit.class));
@@ -449,9 +438,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Weaver of Blossoms", 226, Rarity.COMMON, mage.cards.w.WeaverOfBlossoms.class));
         cards.add(new SetCardInfo("Wedding Announcement", 355, Rarity.RARE, mage.cards.w.WeddingAnnouncement.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wedding Announcement", 45, Rarity.RARE, mage.cards.w.WeddingAnnouncement.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Wedding Crasher", 229, Rarity.UNCOMMON, mage.cards.w.WeddingCrasher.class));
-        cards.add(new SetCardInfo("Wedding Festivity", 355, Rarity.RARE, mage.cards.w.WeddingFestivity.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Wedding Festivity", 45, Rarity.RARE, mage.cards.w.WeddingFestivity.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wedding Invitation", 260, Rarity.COMMON, mage.cards.w.WeddingInvitation.class));
         cards.add(new SetCardInfo("Wedding Security", 138, Rarity.UNCOMMON, mage.cards.w.WeddingSecurity.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wedding Security", 299, Rarity.UNCOMMON, mage.cards.w.WeddingSecurity.class, NON_FULL_USE_VARIOUS));
@@ -464,7 +450,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Witness the Future", 90, Rarity.UNCOMMON, mage.cards.w.WitnessTheFuture.class));
         cards.add(new SetCardInfo("Wolf Strike", 228, Rarity.COMMON, mage.cards.w.WolfStrike.class));
         cards.add(new SetCardInfo("Wolfkin Outcast", 229, Rarity.UNCOMMON, mage.cards.w.WolfkinOutcast.class));
-        cards.add(new SetCardInfo("Wrathful Jailbreaker", 184, Rarity.COMMON, mage.cards.w.WrathfulJailbreaker.class));
         cards.add(new SetCardInfo("Wretched Throng", 91, Rarity.COMMON, mage.cards.w.WretchedThrong.class));
     }
 

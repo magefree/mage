@@ -28,7 +28,6 @@ public class IxalanPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Ashes of the Abhorrent", "2p", Rarity.RARE, mage.cards.a.AshesOfTheAbhorrent.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ashes of the Abhorrent", "2s", Rarity.RARE, mage.cards.a.AshesOfTheAbhorrent.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Axis of Mortality", "3s", Rarity.MYTHIC, mage.cards.a.AxisOfMortality.class));
-        cards.add(new SetCardInfo("Azcanta, the Sunken Ruin", "74s", Rarity.RARE, mage.cards.a.AzcantaTheSunkenRuin.class));
         cards.add(new SetCardInfo("Bishop of Rebirth", 5, Rarity.RARE, mage.cards.b.BishopOfRebirth.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bishop of Rebirth", "5s", Rarity.RARE, mage.cards.b.BishopOfRebirth.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloodcrazed Paladin", "93s", Rarity.RARE, mage.cards.b.BloodcrazedPaladin.class));
@@ -113,8 +112,6 @@ public class IxalanPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Sorcerous Spyglass", "248s", Rarity.RARE, mage.cards.s.SorcerousSpyglass.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Spell Swindle", "82p", Rarity.RARE, mage.cards.s.SpellSwindle.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Spell Swindle", "82s", Rarity.RARE, mage.cards.s.SpellSwindle.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Spires of Orazca", "249s", Rarity.RARE, mage.cards.s.SpiresOfOrazca.class));
-        cards.add(new SetCardInfo("Spitfire Bastion", "173s", Rarity.RARE, mage.cards.s.SpitfireBastion.class));
         cards.add(new SetCardInfo("Star of Extinction", "161p", Rarity.MYTHIC, mage.cards.s.StarOfExtinction.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Star of Extinction", "161s", Rarity.MYTHIC, mage.cards.s.StarOfExtinction.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sunbird's Invocation", "165p", Rarity.RARE, mage.cards.s.SunbirdsInvocation.class, NON_FULL_USE_VARIOUS));
@@ -128,7 +125,6 @@ public class IxalanPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Tishana, Voice of Thunder", "230s", Rarity.MYTHIC, mage.cards.t.TishanaVoiceOfThunder.class));
         cards.add(new SetCardInfo("Tocatli Honor Guard", "42p", Rarity.RARE, mage.cards.t.TocatliHonorGuard.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tocatli Honor Guard", "42s", Rarity.RARE, mage.cards.t.TocatliHonorGuard.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Treasure Cove", "250s", Rarity.RARE, mage.cards.t.TreasureCove.class));
         cards.add(new SetCardInfo("Treasure Map", "250s", Rarity.RARE, mage.cards.t.TreasureMap.class));
         cards.add(new SetCardInfo("Unclaimed Territory", 258, Rarity.UNCOMMON, mage.cards.u.UnclaimedTerritory.class));
         cards.add(new SetCardInfo("Vance's Blasting Cannons", "173s", Rarity.RARE, mage.cards.v.VancesBlastingCannons.class));

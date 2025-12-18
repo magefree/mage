@@ -9,7 +9,9 @@ import mage.abilities.effects.common.continuous.SetBasePowerToughnessAllEffect;
 import mage.abilities.hint.ValueHint;
 import mage.cards.CardSetInfo;
 import mage.cards.RoomCard;
-import mage.constants.*;
+import mage.constants.Duration;
+import mage.constants.SetTargetPointer;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -29,7 +31,7 @@ public final class DollmakersShopPorcelainGallery extends RoomCard {
     }
 
     public DollmakersShopPorcelainGallery(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}", "{4}{W}{W}", SpellAbilityType.SPLIT);
+        super(ownerId, setInfo, "{1}{W}", "{4}{W}{W}");
         this.subtype.add(SubType.ROOM);
 
         // Dollmaker's Shop: Whenever one or more non-Toy creatures you control attack a player, create a 1/1 white Toy artifact creature token.
@@ -44,7 +46,7 @@ public final class DollmakersShopPorcelainGallery extends RoomCard {
         this.getRightHalfCard().addAbility(right);
     }
 
-    private DollmakersShopPorcelainGallery (final DollmakersShopPorcelainGallery card) {
+    private DollmakersShopPorcelainGallery(final DollmakersShopPorcelainGallery card) {
         super(card);
     }
 

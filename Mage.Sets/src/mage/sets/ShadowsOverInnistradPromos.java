@@ -31,7 +31,6 @@ public class ShadowsOverInnistradPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Arlinn Kord", "243s", Rarity.MYTHIC, mage.cards.a.ArlinnKord.class));
         cards.add(new SetCardInfo("Asylum Visitor", "99s", Rarity.RARE, mage.cards.a.AsylumVisitor.class));
         cards.add(new SetCardInfo("Avacyn's Judgment", "145s", Rarity.RARE, mage.cards.a.AvacynsJudgment.class));
-        cards.add(new SetCardInfo("Awoken Horror", "92s", Rarity.RARE, mage.cards.a.AwokenHorror.class));
         cards.add(new SetCardInfo("Behold the Beyond", "101s", Rarity.MYTHIC, mage.cards.b.BeholdTheBeyond.class));
         cards.add(new SetCardInfo("Brain in a Jar", "252s", Rarity.RARE, mage.cards.b.BrainInAJar.class));
         cards.add(new SetCardInfo("Burn from Within", "148s", Rarity.RARE, mage.cards.b.BurnFromWithin.class));
@@ -81,7 +80,6 @@ public class ShadowsOverInnistradPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Nephalia Moondrakes", 75, Rarity.RARE, mage.cards.n.NephaliaMoondrakes.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Odric, Lunarch Marshal", "31s", Rarity.RARE, mage.cards.o.OdricLunarchMarshal.class));
         cards.add(new SetCardInfo("Olivia, Mobilized for War", "248s", Rarity.MYTHIC, mage.cards.o.OliviaMobilizedForWar.class));
-        cards.add(new SetCardInfo("Ormendahl, Profane Prince", "281s", Rarity.RARE, mage.cards.o.OrmendahlProfanePrince.class));
         cards.add(new SetCardInfo("Port Town", "278s", Rarity.RARE, mage.cards.p.PortTown.class));
         cards.add(new SetCardInfo("Prized Amalgam", "249s", Rarity.RARE, mage.cards.p.PrizedAmalgam.class));
         cards.add(new SetCardInfo("Rattlechains", "81s", Rarity.RARE, mage.cards.r.Rattlechains.class));
@@ -110,7 +108,6 @@ public class ShadowsOverInnistradPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Triskaidekaphobia", "141s", Rarity.RARE, mage.cards.t.Triskaidekaphobia.class));
         cards.add(new SetCardInfo("Ulvenwald Hydra", "235s", Rarity.MYTHIC, mage.cards.u.UlvenwaldHydra.class));
         cards.add(new SetCardInfo("Welcome to the Fold", "96s", Rarity.RARE, mage.cards.w.WelcomeToTheFold.class));
-        cards.add(new SetCardInfo("Werewolf of Ancient Hunger", "225s", Rarity.RARE, mage.cards.w.WerewolfOfAncientHunger.class));
         cards.add(new SetCardInfo("Westvale Abbey", "281s", Rarity.RARE, mage.cards.w.WestvaleAbbey.class));
         cards.add(new SetCardInfo("Wolf of Devil's Breach", "192s", Rarity.MYTHIC, mage.cards.w.WolfOfDevilsBreach.class));
     }

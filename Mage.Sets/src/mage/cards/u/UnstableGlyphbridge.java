@@ -2,42 +2,73 @@ package mage.cards.u;
 
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.condition.common.CastFromEverywhereSourceCondition;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.keyword.CraftAbility;
-import mage.cards.CardImpl;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.constants.Outcome;
+import mage.cards.TransformingDoubleFacedCard;
+import mage.constants.*;
+import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
+import mage.watchers.common.PlayersAttackedThisTurnWatcher;
 
 import java.util.UUID;
 
 /**
  * @author notgreat
  */
-public final class UnstableGlyphbridge extends CardImpl {
+public final class UnstableGlyphbridge extends TransformingDoubleFacedCard {
+
+    private static final FilterSpell filter = new FilterSpell("a spell during their turn");
+
+    static {
+        filter.add(TargetController.ACTIVE.getControllerPredicate());
+    }
 
     public UnstableGlyphbridge(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}{W}{W}");
-        this.secondSideCardClazz = mage.cards.s.SandswirlWanderglyph.class;
+        super(ownerId, setInfo,
+                new CardType[]{CardType.ARTIFACT}, new SubType[]{}, "{3}{W}{W}",
+                "Sandswirl Wanderglyph",
+                new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, new SubType[]{SubType.GOLEM}, "W"
+        );
 
+        // Unstable Glyphbridge
         // When Unstable Glyphbridge enters the battlefield, if you cast it, for each player, choose a creature with power 2 or less that player controls. Then destroy all creatures except creatures chosen this way.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new UnstableGlyphbridgeEffect())
+        this.getLeftHalfCard().addAbility(new EntersBattlefieldTriggeredAbility(new UnstableGlyphbridgeEffect())
                 .withInterveningIf(CastFromEverywhereSourceCondition.instance));
 
         // Craft with artifact {3}{W}{W}
-        this.addAbility(new CraftAbility("{3}{W}{W}"));
+        this.getLeftHalfCard().addAbility(new CraftAbility("{3}{W}{W}"));
+
+        // Sandswirl Wanderglyph
+        this.getRightHalfCard().setPT(5, 3);
+
+        // Flying
+        this.getRightHalfCard().addAbility(FlyingAbility.getInstance());
+
+        // Whenever an opponent casts a spell during their turn, they can't attack you or planeswalkers you control this turn.
+        this.getRightHalfCard().addAbility(new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD,
+                new CantAttackSourcePlayerOrPlaneswalkerThisTurnEffect(), filter, false, SetTargetPointer.PLAYER));
+
+        // Each opponent who attacked you or a planeswalker you control this turn can't cast spells.
+        Ability ability = new SimpleStaticAbility(new SandswirlWanderglyphCantCastEffect());
+        ability.addWatcher(new PlayersAttackedThisTurnWatcher());
+        this.getRightHalfCard().addAbility(ability);
     }
 
     private UnstableGlyphbridge(final UnstableGlyphbridge card) {
@@ -95,5 +126,70 @@ class UnstableGlyphbridgeEffect extends OneShotEffect {
             }
         }
         return true;
+    }
+}
+
+class SandswirlWanderglyphCantCastEffect extends ContinuousRuleModifyingEffectImpl {
+
+    SandswirlWanderglyphCantCastEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
+        staticText = "Each opponent who attacked you or a planeswalker you control this turn can't cast spells";
+    }
+
+    private SandswirlWanderglyphCantCastEffect(final SandswirlWanderglyphCantCastEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public SandswirlWanderglyphCantCastEffect copy() {
+        return new SandswirlWanderglyphCantCastEffect(this);
+    }
+
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.CAST_SPELL;
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (game.isActivePlayer(event.getPlayerId()) && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
+            PlayersAttackedThisTurnWatcher watcher = game.getState().getWatcher(PlayersAttackedThisTurnWatcher.class);
+            return watcher != null && watcher.hasPlayerAttackedPlayerOrControlledPlaneswalker(event.getPlayerId(), source.getControllerId());
+        }
+        return false;
+    }
+
+}
+
+class CantAttackSourcePlayerOrPlaneswalkerThisTurnEffect extends RestrictionEffect {
+    CantAttackSourcePlayerOrPlaneswalkerThisTurnEffect() {
+        super(Duration.EndOfTurn);
+        staticText = "they can't attack you or planeswalkers you control this turn";
+    }
+
+    private CantAttackSourcePlayerOrPlaneswalkerThisTurnEffect(final CantAttackSourcePlayerOrPlaneswalkerThisTurnEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public CantAttackSourcePlayerOrPlaneswalkerThisTurnEffect copy() {
+        return new CantAttackSourcePlayerOrPlaneswalkerThisTurnEffect(this);
+    }
+
+    @Override
+    public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game, boolean canUseChooseDialogs) {
+        if (game.getPlayer(defenderId) != null) {
+            return !(source.getControllerId().equals(defenderId));
+        }
+        Permanent defender = game.getPermanent(defenderId);
+        if (defender != null && defender.isPlaneswalker()) {
+            return !(source.getControllerId().equals(defender.getControllerId()));
+        }
+        return true;
+    }
+
+    @Override
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        return permanent.getControllerId().equals(getTargetPointer().getFirst(game, source));
     }
 }

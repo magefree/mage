@@ -8,9 +8,9 @@ import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.keyword.HasteAbility;
-import mage.abilities.keyword.TransformAbility;
-import mage.cards.CardImpl;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SagaChapter;
@@ -22,20 +22,22 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class TheShatteredStatesEra extends CardImpl {
+public final class TheShatteredStatesEra extends TransformingDoubleFacedCard {
 
     public TheShatteredStatesEra(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.ENCHANTMENT}, new SubType[]{SubType.SAGA}, "{4}{R}",
+                "Nameless Conqueror",
+                new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.SAMURAI}, "R"
+        );
 
-        this.subtype.add(SubType.SAGA);
-        this.secondSideCardClazz = mage.cards.n.NamelessConqueror.class;
-
+        // The Shattered States Era
         // (As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)
-        SagaAbility sagaAbility = new SagaAbility(this);
+        SagaAbility sagaAbility = new SagaAbility(this.getLeftHalfCard());
 
         // I — Gain control of target creature until end of turn. Untap it. It gains haste until end of turn.
         sagaAbility.addChapterEffect(
-                this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_I,
+                this.getLeftHalfCard(), SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_I,
                 new Effects(
                         new GainControlTargetEffect(Duration.EndOfTurn),
                         new UntapTargetEffect().setText("Untap it."),
@@ -47,19 +49,27 @@ public final class TheShatteredStatesEra extends CardImpl {
 
         // II — Creatures you control get +1/+0 until end of turn.
         sagaAbility.addChapterEffect(
-                this, SagaChapter.CHAPTER_II, new BoostControlledEffect(
+                this.getLeftHalfCard(), SagaChapter.CHAPTER_II, new BoostControlledEffect(
                         1, 0, Duration.EndOfTurn
                 )
         );
 
         // III — Exile this Saga, then return it to the battlefield transformed under your control.
-        this.addAbility(new TransformAbility());
         sagaAbility.addChapterEffect(
-                this, SagaChapter.CHAPTER_III,
+                this.getLeftHalfCard(), SagaChapter.CHAPTER_III,
                 new ExileSagaAndReturnTransformedEffect()
         );
 
-        this.addAbility(sagaAbility);
+        this.getLeftHalfCard().addAbility(sagaAbility);
+
+        // Nameless Conqueror
+        this.getRightHalfCard().setPT(3, 3);
+
+        // Trample
+        this.getRightHalfCard().addAbility(TrampleAbility.getInstance());
+
+        // Haste
+        this.getRightHalfCard().addAbility(HasteAbility.getInstance());
     }
 
     private TheShatteredStatesEra(final TheShatteredStatesEra card) {

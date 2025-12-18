@@ -2,14 +2,15 @@ package mage.cards.e;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.Condition;
+import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.TapSourceEffect;
-import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.CraftAbility;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.Card;
@@ -27,6 +28,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInGraveyardBattlefieldOrStack;
 import mage.util.CardUtil;
+import mage.watchers.common.SpellsCastWatcher;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -149,7 +151,10 @@ class ChooseCardTypeEffect extends OneShotEffect {
             if (permanent == null) {
                 return false;
             }
-            ExileZone exileZone = game.getState().getExile().getExileZone(CardUtil.getExileZoneId(game, source, game.getState().getZoneChangeCounter(mageObject.getId()) - 1));
+            ExileZone exileZone = game.getState()
+                    .getExile()
+                    .getExileZone(CardUtil
+                            .getExileZoneId(game, permanent.getMainCard().getId(), permanent.getMainCard().getZoneChangeCounter(game)));
             if (exileZone == null) {
                 return false;
             }
@@ -232,17 +237,51 @@ class ApexObservatoryEffect extends OneShotEffect {
     }
 }
 
-class ApexObservatoryCastWithoutManaEffect extends CostModificationEffectImpl {
+class ApexObservatoryCastWithoutManaEffect extends ContinuousEffectImpl {
 
+    class ApexObservatoryCondition implements Condition {
+        private final int spellCastCount;
+
+        private ApexObservatoryCondition(int spellCastCount) {
+            this.spellCastCount = spellCastCount;
+        }
+
+        @Override
+        public boolean apply(Game game, Ability source) {
+            SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
+            if (watcher != null) {
+                return watcher.getSpellsCastThisTurn(playerId).size() == spellCastCount;
+            }
+            return false;
+        }
+    }
+
+    private final FilterCard filter;
     private final String chosenCardType;
     private final UUID playerId;
-    private boolean used = false;
+    private int spellCastCount;
+    private AlternativeCostSourceAbility alternativeCostSourceAbility;
 
     ApexObservatoryCastWithoutManaEffect(String chosenCardType, UUID playerId) {
-        super(Duration.EndOfTurn, Outcome.Benefit, CostModificationType.SET_COST);
+        super(Duration.EndOfTurn, Layer.RulesEffects, SubLayer.NA, Outcome.PlayForFree);
         this.chosenCardType = chosenCardType;
         this.playerId = playerId;
+        this.filter = new FilterCard("spell of the chosen type");
+        filter.add(CardType.fromString(chosenCardType).getPredicate());
         staticText = "The next spell you cast this turn of the chosen type can be cast without paying its mana cost";
+    }
+
+    @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
+        if (watcher != null) {
+            spellCastCount = watcher.getSpellsCastThisTurn(playerId).size();
+            Condition condition = new ApexObservatoryCondition(spellCastCount);
+            alternativeCostSourceAbility = new AlternativeCostSourceAbility(
+                    null, condition, null, filter, true
+            );
+        }
     }
 
     private ApexObservatoryCastWithoutManaEffect(final ApexObservatoryCastWithoutManaEffect effect) {
@@ -250,43 +289,20 @@ class ApexObservatoryCastWithoutManaEffect extends CostModificationEffectImpl {
         this.chosenCardType = effect.chosenCardType;
         this.playerId = effect.playerId;
         this.used = effect.used;
+        this.spellCastCount = effect.spellCastCount;
+        this.filter = effect.filter;
+        this.alternativeCostSourceAbility = effect.alternativeCostSourceAbility;
     }
 
     @Override
-    public boolean apply(Game game, Ability source, Ability abilityToModify) {
+    public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(playerId);
-        if (controller != null) {
-            MageObject spell = abilityToModify.getSourceObject(game);
-            if (spell != null && !game.isSimulation()) {
-                String message = "Cast " + spell.getIdName() + " without paying its mana cost?";
-                if (controller.chooseUse(Outcome.Benefit, message, source, game)) {
-                    abilityToModify.getManaCostsToPay().clear();
-                    used = true;
-                }
-            }
+        if (controller == null) {
+            return false;
         }
+        alternativeCostSourceAbility.setSourceId(source.getSourceId());
+        controller.getAlternativeSourceCosts().add(alternativeCostSourceAbility);
         return true;
-    }
-
-    @Override
-    public boolean isInactive(Ability source, Game game) {
-        return used || super.isInactive(source, game);
-    }
-
-    @Override
-    public boolean applies(Ability ability, Ability source, Game game) {
-        if (used) {
-            return false;
-        }
-        if (!ability.isControlledBy(playerId)) {
-            return false;
-        }
-        if (!(ability instanceof SpellAbility)) {
-            return false;
-        }
-        MageObject object = game.getObject(ability.getSourceId());
-        return object != null && object.getCardType(game).stream()
-                .anyMatch(cardType -> cardType.toString().equals(chosenCardType));
     }
 
     @Override

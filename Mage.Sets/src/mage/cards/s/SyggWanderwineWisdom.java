@@ -1,8 +1,8 @@
 package mage.cards.s;
 
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerOrPlaneswalkerTriggeredAbility;
+import mage.abilities.common.TransformIntoSourceTriggeredAbility;
 import mage.abilities.common.TransformsOrEntersTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DoIfCostPaid;
@@ -10,14 +10,18 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.CantBeBlockedSourceAbility;
-import mage.abilities.keyword.TransformAbility;
+import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.triggers.BeginningOfFirstMainTriggeredAbility;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
+import mage.filter.FilterCard;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorlessPredicate;
+import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -25,20 +29,26 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class SyggWanderwineWisdom extends CardImpl {
+public final class SyggWanderwineWisdom extends TransformingDoubleFacedCard {
+
+    private static final FilterCard filter = new FilterCard("each color");
+
+    static {
+        filter.add(Predicates.not(ColorlessPredicate.instance));
+    }
 
     public SyggWanderwineWisdom(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
+        super(ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.MERFOLK, SubType.WIZARD}, "{1}{U}",
+                "Sygg, Wanderbrine Shield",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.MERFOLK, SubType.ROGUE}, "W"
+        );
 
-        this.supertype.add(SuperType.LEGENDARY);
-        this.subtype.add(SubType.MERFOLK);
-        this.subtype.add(SubType.WIZARD);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-        this.secondSideCardClazz = mage.cards.s.SyggWanderbrineShield.class;
+        // Sygg, Wanderwine Wisdom
+        this.getLeftHalfCard().setPT(2, 2);
 
         // Sygg can't be blocked.
-        this.addAbility(new CantBeBlockedSourceAbility());
+        this.getLeftHalfCard().addAbility(new CantBeBlockedSourceAbility());
 
         // Whenever this creature enters or transforms into Sygg, Wanderwine Wisdom, target creature gains "Whenever this creature deals combat damage to a player or planeswalker, draw a card" until end of turn.
         Ability ability = new TransformsOrEntersTriggeredAbility(new GainAbilityTargetEffect(
@@ -47,12 +57,27 @@ public final class SyggWanderwineWisdom extends CardImpl {
                 ), Duration.EndOfTurn
         ), false);
         ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+        this.getLeftHalfCard().addAbility(ability);
 
         // At the beginning of your first main phase, you may pay {W}. If you do, transform Sygg.
-        this.addAbility(new TransformAbility());
-        this.addAbility(new BeginningOfFirstMainTriggeredAbility(
+        this.getLeftHalfCard().addAbility(new BeginningOfFirstMainTriggeredAbility(
                 new DoIfCostPaid(new TransformSourceEffect(), new ManaCostsImpl<>("{W}"))
+        ));
+
+        // Sygg, Wanderbrine Shield
+        this.getRightHalfCard().setPT(2, 2);
+
+        // Sygg can't be blocked.
+        this.getRightHalfCard().addAbility(new CantBeBlockedSourceAbility());
+
+        // Whenever this creature transforms into Sygg, Wanderbrine Shield, target creature you control gains protection from each color until your next turn.
+        Ability ability2 = new TransformIntoSourceTriggeredAbility(new GainAbilityTargetEffect(new ProtectionAbility(filter), Duration.UntilYourNextTurn));
+        ability2.addTarget(new TargetControlledCreaturePermanent());
+        this.getRightHalfCard().addAbility(ability2);
+
+        // At the beginning of your first main phase, you may pay {U}. If you do, transform Sygg.
+        this.getRightHalfCard().addAbility(new BeginningOfFirstMainTriggeredAbility(
+                new DoIfCostPaid(new TransformSourceEffect(), new ManaCostsImpl<>("{U}"))
         ));
     }
 

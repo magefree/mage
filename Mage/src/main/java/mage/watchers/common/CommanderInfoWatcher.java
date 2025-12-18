@@ -5,6 +5,8 @@ import java.util.Map;
 import java.util.UUID;
 import mage.MageObject;
 import mage.cards.Card;
+import mage.cards.DoubleFacedCard;
+import mage.cards.DoubleFacedCardHalf;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
@@ -36,7 +38,12 @@ public class CommanderInfoWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (checkCommanderDamage && event.getType() == GameEvent.EventType.DAMAGED_PLAYER && event instanceof DamagedPlayerEvent) {
-            if (sourceId.equals(event.getSourceId())) {
+            Card sourceCard = game.getCard(event.getSourceId());
+            if (sourceCard == null) {
+                return;
+            }
+            sourceCard = sourceCard.getMainCard();
+            if (sourceId.equals(sourceCard.getId())) {
                 DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
                 if (damageEvent.isCombatDamage()) {
                     UUID playerUUID = event.getTargetId();
@@ -44,7 +51,7 @@ public class CommanderInfoWatcher extends Watcher {
                     damage += damageEvent.getAmount();
                     damageToPlayer.put(playerUUID, damage);
                     Player player = game.getPlayer(playerUUID);
-                    MageObject commander = game.getObject(sourceId);
+                    MageObject commander = game.getObject(event.getSourceId());
                     if (player != null && commander != null) {
                         if (!game.isSimulation()) {
                             game.informPlayers(commander.getLogName() + " did " + damage + " combat damage to " + player.getLogName() + " during the game.");
@@ -62,8 +69,15 @@ public class CommanderInfoWatcher extends Watcher {
 
     public void addCardInfoToCommander(Game game) {
         MageObject object = game.getPermanent(sourceId);
+        MageObject leftObject = null;
+        MageObject rightObject = null;
         if (object == null) {
             object = game.getCard(sourceId);
+            if (object instanceof DoubleFacedCard) {
+                DoubleFacedCard cardObject = (DoubleFacedCard)object;
+                leftObject = game.getPermanent(cardObject.getLeftHalfCard().getId());
+                rightObject = game.getPermanent(cardObject.getRightHalfCard().getId());
+            }
         }
         if (object != null) {
             StringBuilder sb = new StringBuilder();
@@ -74,6 +88,12 @@ public class CommanderInfoWatcher extends Watcher {
                 sb.append(' ').append(playsCount).append(playsCount == 1 ? " time" : " times").append(" played from the command zone.");
             }
             this.addInfoToObject(object, "Commander", sb.toString(), game);
+            if (leftObject != null) {
+                this.addInfoToObject(leftObject, "Commander", sb.toString(), game);
+            }
+            if (rightObject != null) {
+                this.addInfoToObject(rightObject, "Commander", sb.toString(), game);
+            }
 
             if (checkCommanderDamage) {
                 for (Map.Entry<UUID, Integer> entry : damageToPlayer.entrySet()) {
@@ -81,6 +101,14 @@ public class CommanderInfoWatcher extends Watcher {
                     sb.append("<b>").append(commanderTypeName).append("</b> did ").append(entry.getValue()).append(" combat damage to player ").append(damagedPlayer.getLogName()).append('.');
                     this.addInfoToObject(object, "Commander" + entry.getKey(),
                             "<b>" + commanderTypeName + "</b> did " + entry.getValue() + " combat damage to player " + damagedPlayer.getLogName() + '.', game);
+                    if (leftObject != null) {
+                        this.addInfoToObject(leftObject, "Commander" + entry.getKey(),
+                                "<b>" + commanderTypeName + "</b> did " + entry.getValue() + " combat damage to player " + damagedPlayer.getLogName() + '.', game);
+                    }
+                    if (rightObject != null) {
+                        this.addInfoToObject(object, "Commander" + entry.getKey(),
+                                "<b>" + commanderTypeName + "</b> did " + entry.getValue() + " combat damage to player " + damagedPlayer.getLogName() + '.', game);
+                    }
                 }
             }
         }

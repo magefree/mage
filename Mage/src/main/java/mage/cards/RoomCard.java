@@ -22,20 +22,17 @@ import java.util.UUID;
 public abstract class RoomCard extends SplitCard {
     private SpellAbilityType lastCastHalf = null;
 
-    protected RoomCard(UUID ownerId, CardSetInfo setInfo, CardType[] types, String costsLeft,
-            String costsRight, SpellAbilityType spellAbilityType) {
-        super(ownerId, setInfo, costsLeft, costsRight, spellAbilityType, types);
+    protected RoomCard(UUID ownerId, CardSetInfo setInfo, String costsLeft, String costsRight) {
+        super(ownerId, setInfo, costsLeft, costsRight, SpellAbilityType.SPLIT, new CardType[]{CardType.ENCHANTMENT});
 
         String[] names = setInfo.getName().split(" // ");
 
         leftHalfCard = new RoomCardHalfImpl(
-                this.getOwnerId(), new CardSetInfo(names[0], setInfo.getExpansionSetCode(), setInfo.getCardNumber(),
-                        setInfo.getRarity(), setInfo.getGraphicInfo()),
-                types, costsLeft, this, SpellAbilityType.SPLIT_LEFT);
+                new CardSetInfo(names[0], setInfo), costsLeft, this, SpellAbilityType.SPLIT_LEFT
+        );
         rightHalfCard = new RoomCardHalfImpl(
-                this.getOwnerId(), new CardSetInfo(names[1], setInfo.getExpansionSetCode(), setInfo.getCardNumber(),
-                        setInfo.getRarity(), setInfo.getGraphicInfo()),
-                types, costsRight, this, SpellAbilityType.SPLIT_RIGHT);
+                new CardSetInfo(names[1], setInfo), costsRight, this, SpellAbilityType.SPLIT_RIGHT
+        );
 
         // Add the one-shot effect to unlock a door on cast -> ETB
         Ability entersAbility = new EntersBattlefieldAbility(new RoomEnterUnlockEffect());
@@ -113,7 +110,7 @@ public abstract class RoomCard extends SplitCard {
 
         Abilities<Ability> rightAbilities = roomCard.getRightHalfCard().getAbilities();
         for (Ability ability : rightAbilities) {
-            permanent.addAbility(ability, roomCard.getRightHalfCard().getId(), game,true);
+            permanent.addAbility(ability, roomCard.getRightHalfCard().getId(), game, true);
         }
     }
 }
@@ -173,4 +170,3 @@ class RoomEnterUnlockEffect extends OneShotEffect {
         return true;
     }
 }
-
