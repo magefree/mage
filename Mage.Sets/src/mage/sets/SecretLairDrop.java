@@ -2178,6 +2178,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Blightsteel Colossus", 2223, Rarity.MYTHIC, mage.cards.b.BlightsteelColossus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tarrian's Soulcleaver", 2224, Rarity.RARE, mage.cards.t.TarriansSoulcleaver.class));
         cards.add(new SetCardInfo("Meteor Golem", 2225, Rarity.RARE, mage.cards.m.MeteorGolem.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Jin Sakai, Ghost of Tsushima", 2226, Rarity.MYTHIC, mage.cards.j.JinSakaiGhostOfTsushima.class));
         cards.add(new SetCardInfo("Path to Exile", 2227, Rarity.RARE, mage.cards.p.PathToExile.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Borne Upon a Wind", 2228, Rarity.RARE, mage.cards.b.BorneUponAWind.class));
         cards.add(new SetCardInfo("Ghostly Flicker", 2229, Rarity.RARE, mage.cards.g.GhostlyFlicker.class));
