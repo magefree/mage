@@ -6,9 +6,10 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.dynamicvalue.common.ColorsAmongControlledPermanentsCount;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.AsThoughManaEffect;
-import mage.abilities.effects.common.DrawCardForEachColorAmongControlledPermanentsEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -19,14 +20,13 @@ import mage.players.ManaPoolItem;
 import java.util.UUID;
 
 /**
- *
  * @author htrajan
  */
 public final class ChromaticOrrery extends CardImpl {
 
     public ChromaticOrrery(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{7}");
-        
+
         this.supertype.add(SuperType.LEGENDARY);
 
         // You may spend mana as though it were mana of any color.
@@ -36,9 +36,9 @@ public final class ChromaticOrrery extends CardImpl {
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(5), new TapSourceCost()));
 
         // {5}, {T}: Draw a card for each color among permanents you control.
-        Ability ability = new SimpleActivatedAbility(new DrawCardForEachColorAmongControlledPermanentsEffect(), new GenericManaCost(5));
+        Ability ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(ColorsAmongControlledPermanentsCount.ALL_PERMANENTS), new GenericManaCost(5));
         ability.addCost(new TapSourceCost());
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(ColorsAmongControlledPermanentsCount.ALL_PERMANENTS.getHint()));
     }
 
     private ChromaticOrrery(final ChromaticOrrery card) {

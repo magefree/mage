@@ -1,13 +1,11 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
+import mage.abilities.dynamicvalue.common.ColorsAmongControlledPermanentsCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
@@ -15,7 +13,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
@@ -40,10 +37,10 @@ public final class SisayWeatherlightCaptain extends CardImpl {
 
         // Sisay, Weatherlight Captain gets +1/+1 for each color among other legendary permanents you control.
         this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(
-                SisayWeatherlightCaptainValue.instance,
-                SisayWeatherlightCaptainValue.instance,
+                ColorsAmongControlledPermanentsCount.OTHER_LEGENDARY,
+                ColorsAmongControlledPermanentsCount.OTHER_LEGENDARY,
                 Duration.WhileOnBattlefield
-        )));
+        )).addHint(ColorsAmongControlledPermanentsCount.OTHER_LEGENDARY.getHint()));
 
         // {W}{U}{B}{R}{G}: Search your library for a legendary permanent card with converted mana cost less than Sisay's power, put that card onto the battlefield, then shuffle your library.
         this.addAbility(new SimpleActivatedAbility(
@@ -59,38 +56,6 @@ public final class SisayWeatherlightCaptain extends CardImpl {
     @Override
     public SisayWeatherlightCaptain copy() {
         return new SisayWeatherlightCaptain(this);
-    }
-}
-
-enum SisayWeatherlightCaptainValue implements DynamicValue {
-    instance;
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        ObjectColor color = new ObjectColor();
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(
-                StaticFilters.FILTER_PERMANENT_LEGENDARY, sourceAbility.getControllerId(), game
-        )) {
-            if (permanent != null && !permanent.getId().equals(sourceAbility.getSourceId())) {
-                color.addColor(permanent.getColor(game));
-            }
-        }
-        return color.getColorCount();
-    }
-
-    @Override
-    public DynamicValue copy() {
-        return instance;
-    }
-
-    @Override
-    public String getMessage() {
-        return "color among other legendary permanents you control";
-    }
-
-    @Override
-    public String toString() {
-        return "1";
     }
 }
 
