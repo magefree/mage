@@ -1453,6 +1453,9 @@ public final class CardUtil {
     public static List<Card> getCastableComponents(Card cardToCast, FilterCard filter, Ability source, Player player, Game game, SpellCastTracker spellCastTracker, boolean playLand) {
         UUID playerId = player.getId();
         List<Card> cards = new ArrayList<>();
+        if (cardToCast == null) {
+            return cards;
+        }
         if (cardToCast instanceof CardWithHalves) {
             cards.add(((CardWithHalves) cardToCast).getLeftHalfCard());
             cards.add(((CardWithHalves) cardToCast).getRightHalfCard());

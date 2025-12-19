@@ -2169,6 +2169,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Teferi's Ageless Insight", 2214, Rarity.RARE, mage.cards.t.TeferisAgelessInsight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Teferi's Ageless Insight", "2214b", Rarity.RARE, mage.cards.t.TeferisAgelessInsight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Iroas, God of Victory", 2215, Rarity.MYTHIC, mage.cards.i.IroasGodOfVictory.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Nathan Drake, Treasure Hunter", 2216, Rarity.MYTHIC, mage.cards.n.NathanDrakeTreasureHunter.class));
         cards.add(new SetCardInfo("Midnight Clock", 2217, Rarity.RARE, mage.cards.m.MidnightClock.class));
         cards.add(new SetCardInfo("Whip of Erebos", 2218, Rarity.RARE, mage.cards.w.WhipOfErebos.class));
         cards.add(new SetCardInfo("Chain Reaction", 2219, Rarity.RARE, mage.cards.c.ChainReaction.class));
