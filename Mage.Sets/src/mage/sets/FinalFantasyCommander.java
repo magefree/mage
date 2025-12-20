@@ -86,6 +86,7 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Champion's Helm", 337, Rarity.RARE, mage.cards.c.ChampionsHelm.class));
         cards.add(new SetCardInfo("Champions from Beyond", 101, Rarity.RARE, mage.cards.c.ChampionsFromBeyond.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Champions from Beyond", 11, Rarity.RARE, mage.cards.c.ChampionsFromBeyond.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Chaos Shrine's Black Crystal", 445, Rarity.RARE, mage.cards.c.ChaosShrinesBlackCrystal.class));
         cards.add(new SetCardInfo("Chaos Warp", 291, Rarity.RARE, mage.cards.c.ChaosWarp.class));
         cards.add(new SetCardInfo("Chasm Skulker", 262, Rarity.RARE, mage.cards.c.ChasmSkulker.class));
         cards.add(new SetCardInfo("Chocobo Camp", 462, Rarity.RARE, mage.cards.c.ChocoboCamp.class));
