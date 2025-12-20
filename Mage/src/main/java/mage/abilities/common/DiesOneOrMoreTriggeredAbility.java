@@ -5,23 +5,34 @@ import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeBatchEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
+import mage.target.targetpointer.FixedTargets;
+
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * @author Susucr
  */
 public class DiesOneOrMoreTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<ZoneChangeEvent> {
 
-    private final FilterCreaturePermanent filter;
+    private final FilterPermanent filter;
+    private final boolean setTargetPointer;
 
-    public DiesOneOrMoreTriggeredAbility(Effect effect, FilterCreaturePermanent filter, boolean optional) {
+    public DiesOneOrMoreTriggeredAbility(Effect effect, FilterPermanent filter, boolean optional) {
+        this(effect, filter, optional, false);
+    }
+
+    public DiesOneOrMoreTriggeredAbility(Effect effect, FilterPermanent filter, boolean optional, boolean setTargetPointer) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.filter = filter;
+        this.setTargetPointer = setTargetPointer;
         this.setTriggerPhrase("Whenever one or more " + filter.getMessage() + " die, ");
         setLeavesTheBattlefieldTrigger(true);
     }
@@ -29,6 +40,7 @@ public class DiesOneOrMoreTriggeredAbility extends TriggeredAbilityImpl implemen
     private DiesOneOrMoreTriggeredAbility(final DiesOneOrMoreTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
+        this.setTargetPointer = ability.setTargetPointer;
     }
 
     @Override
@@ -52,7 +64,21 @@ public class DiesOneOrMoreTriggeredAbility extends TriggeredAbilityImpl implemen
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return !getFilteredEvents((ZoneChangeBatchEvent) event, game).isEmpty();
+        List<ZoneChangeEvent> events = getFilteredEvents((ZoneChangeBatchEvent) event, game);
+        if (events.isEmpty()) {
+            return false;
+        }
+        if (setTargetPointer) {
+            this.getAllEffects().setTargetPointer(new FixedTargets(
+                    events.stream()
+                            .map(GameEvent::getTargetId)
+                            .map(game::getCard)
+                            .filter(Objects::nonNull)
+                            .collect(Collectors.toSet()),
+                    game
+            ));
+        }
+        return true;
     }
 
     @Override
