@@ -5,8 +5,8 @@ import java.io.IOException;
 import javax.swing.*;
 
 import mage.cards.decks.DeckFileFilter;
-import mage.client.MageFrame;
 import mage.client.deck.generator.DeckGenerator;
+import mage.client.preference.MagePreferences;
 import mage.client.util.ClientDefaultSettings;
 
 /**
@@ -22,31 +22,48 @@ public class NewPlayerPanel extends javax.swing.JPanel {
         fcSelectDeck = new JFileChooser();
         fcSelectDeck.setAcceptAllFileFilterUsed(false);
         fcSelectDeck.addChoosableFileFilter(new DeckFileFilter("dck", "XMage's deck files (*.dck)"));
-        this.txtPlayerDeck.setText("");
-        this.txtPlayerName.setText(ClientDefaultSettings.computerName);
+        cbPlayerDeck.setEditable(true);;
+        txtPlayerName.setText(ClientDefaultSettings.computerName);
+
+        loadRecentDeckFiles();
+
+        // If the user selection changes, move the last selected item to the
+        // front of the list.
+        cbPlayerDeck.addActionListener(event -> {
+            try {
+                String selection = cbPlayerDeck.getSelectedItem().toString();
+                MagePreferences.putRecentDeckFile(selection);
+            } catch (NullPointerException ex) { /* Ignore */ }
+        });
+    }
+
+    public void loadRecentDeckFiles() {
+        cbPlayerDeck.removeAllItems();
+        for (String filename : MagePreferences.getRecentDeckFiles()) {
+            cbPlayerDeck.addItem(filename);
+        }
+        cbPlayerDeck.setSelectedIndex(0);
     }
 
     public void setPlayerName(String playerName) {
-        this.txtPlayerName.setText(playerName);
-        this.txtPlayerName.setEditable(false);
-        this.txtPlayerName.setEnabled(false);
+        txtPlayerName.setText(playerName);
+        txtPlayerName.setEditable(false);
+        txtPlayerName.setEnabled(false);
     }
     
-    protected void playerLoadDeck() {
-        String lastFolder = MageFrame.getPreferences().get("lastDeckFolder", "");
-        if (!lastFolder.isEmpty()) {
-            fcSelectDeck.setCurrentDirectory(new File(lastFolder));
-        }
+    protected void playerLoadDeck()
+    {
+        File currentFile = new File(cbPlayerDeck.getEditor().getItem().toString());
+        fcSelectDeck.setCurrentDirectory(currentFile);
+
         int ret = fcSelectDeck.showDialog(this, "Select Deck");
         if (ret == JFileChooser.APPROVE_OPTION) {
             File file = fcSelectDeck.getSelectedFile();
-            this.txtPlayerDeck.setText(file.getPath());
             try {
-                MageFrame.getPreferences().put("lastDeckFolder", file.getCanonicalPath());
-            } catch (IOException ex) {
-            }
+                MagePreferences.putRecentDeckFile(file.getCanonicalPath());
+                loadRecentDeckFiles();
+            } catch (IOException ex) { /* Ignore */ }
         }
-        fcSelectDeck.setSelectedFile(null);
     }
 
     protected void generateDeck() {
@@ -54,23 +71,23 @@ public class NewPlayerPanel extends javax.swing.JPanel {
         if (path == null) {
             return;
         }
-        this.txtPlayerDeck.setText(path);
+        cbPlayerDeck.getEditor().setItem(path);
     }
 
     public String getPlayerName() {
-        return this.txtPlayerName.getText();
+        return txtPlayerName.getText();
     }
 
     public String getDeckFile() {
-        return this.txtPlayerDeck.getText();
+        return cbPlayerDeck.getEditor().getItem().toString();
     }
 
-    public void setDeckFile(String deckFile) {
-        this.txtPlayerDeck.setText(deckFile);
+    public void setDeckFile(String filename) {
+        cbPlayerDeck.getEditor().setItem(filename);
     }
 
     public void setSkillLevel(int level) {
-        this.spnLevel.setValue(level);
+        spnLevel.setValue(level);
     }
 
     public int getSkillLevel() {
@@ -78,15 +95,15 @@ public class NewPlayerPanel extends javax.swing.JPanel {
     }
 
     public void showLevel(boolean show) {
-        this.spnLevel.setVisible(show);
-        this.lblLevel.setVisible(show);
+        spnLevel.setVisible(show);
+        lblLevel.setVisible(show);
     }
 
     public void showDeckElements(boolean show) {
-        this.lblPlayerDeck.setVisible(show);
-        this.txtPlayerDeck.setVisible(show);
-        this.btnGenerate.setVisible(show);
-        this.btnPlayerDeck.setVisible(show);
+        lblPlayerDeck.setVisible(show);
+        cbPlayerDeck.setVisible(show);
+        btnGenerate.setVisible(show);
+        btnPlayerDeck.setVisible(show);
     }
 
     /**
@@ -101,7 +118,7 @@ public class NewPlayerPanel extends javax.swing.JPanel {
         lblPlayerName = new javax.swing.JLabel();
         txtPlayerName = new javax.swing.JTextField();
         lblPlayerDeck = new javax.swing.JLabel();
-        txtPlayerDeck = new javax.swing.JTextField();
+        cbPlayerDeck = new javax.swing.JComboBox<String>();
         btnPlayerDeck = new javax.swing.JButton();
         btnGenerate = new javax.swing.JButton();
         lblLevel = new javax.swing.JLabel();
@@ -134,7 +151,7 @@ public class NewPlayerPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtPlayerName, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
-                    .addComponent(txtPlayerDeck, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE))
+                    .addComponent(cbPlayerDeck, javax.swing.GroupLayout.DEFAULT_SIZE, 310, javax.swing.GroupLayout.DEFAULT_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
@@ -158,7 +175,7 @@ public class NewPlayerPanel extends javax.swing.JPanel {
                 .addGap(3, 3, 3)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPlayerDeck)
-                    .addComponent(txtPlayerDeck, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbPlayerDeck, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPlayerDeck, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnGenerate, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
@@ -179,7 +196,7 @@ public class NewPlayerPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblPlayerDeck;
     private javax.swing.JLabel lblPlayerName;
     private javax.swing.JSpinner spnLevel;
-    private javax.swing.JTextField txtPlayerDeck;
+    private javax.swing.JComboBox<String> cbPlayerDeck;
     private javax.swing.JTextField txtPlayerName;
     // End of variables declaration//GEN-END:variables
 

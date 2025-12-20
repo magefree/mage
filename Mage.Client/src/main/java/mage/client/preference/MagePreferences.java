@@ -4,10 +4,11 @@ import com.google.common.collect.Sets;
 import mage.client.MageFrame;
 import mage.client.util.ClientDefaultSettings;
 
-import java.util.Date;
-import java.util.Set;
+import java.io.File;
+import java.util.*;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
+import java.util.stream.Collectors;
 
 // TODO: Move all preference related logic from MageFrame and PreferencesDialog to this class.
 public final class MagePreferences {
@@ -180,5 +181,31 @@ public final class MagePreferences {
 
     public static String getLastServerPassword() {
         return lastServerPassword.isEmpty() ? getPassword(getLastServerAddress()) : lastServerPassword;
+    }
+
+    public static List<String> getRecentDeckFiles() {
+        int limit = prefs().getInt("recentDeckFilesLimit", 5);
+        if (limit <= 0)
+            return new ArrayList<>();
+
+        return Arrays.stream(prefs().get("recentDeckFiles", "").split(";")).filter(filename -> {
+            File file = new File(filename);
+            return file.canRead();
+        }).limit(limit).collect(Collectors.toList());
+    }
+
+    public static void putRecentDeckFile(String filename) {
+        if (filename.isEmpty())
+            return;
+
+        File file = new File(filename);
+        if (!file.canRead())
+            return;
+
+        List<String> current = new ArrayList<>(getRecentDeckFiles());
+        current.removeIf(filename::equals);
+        current.add(0, filename);
+
+        prefs().put("recentDeckFiles", String.join(";", current));
     }
 }
