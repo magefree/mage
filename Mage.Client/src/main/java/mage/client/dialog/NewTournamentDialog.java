@@ -97,8 +97,9 @@ public class NewTournamentDialog extends MageDialog {
         this.roomId = roomId;
         if (!lastSessionId.equals(SessionHandler.getSessionId())) {
             lastSessionId = SessionHandler.getSessionId();
-            this.player1Panel.setPlayerName(SessionHandler.getUserName());
-            this.player1Panel.showLevel(false); // no computer
+            player1Panel.setPlayerName(SessionHandler.getUserName());
+            player1Panel.showLevel(false); // no computer
+            player1Panel.loadRecentDeckFiles();
             cbTournamentType.setModel(new DefaultComboBoxModel(SessionHandler.getTournamentTypes().toArray()));
 
             cbGameType.setModel(new DefaultComboBoxModel(SessionHandler.getTournamentGameTypes().toArray()));

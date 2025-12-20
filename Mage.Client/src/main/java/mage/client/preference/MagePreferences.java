@@ -182,30 +182,4 @@ public final class MagePreferences {
     public static String getLastServerPassword() {
         return lastServerPassword.isEmpty() ? getPassword(getLastServerAddress()) : lastServerPassword;
     }
-
-    public static List<String> getRecentDeckFiles() {
-        int limit = prefs().getInt("recentDeckFilesLimit", 5);
-        if (limit <= 0)
-            return new ArrayList<>();
-
-        return Arrays.stream(prefs().get("recentDeckFiles", "").split(";")).filter(filename -> {
-            File file = new File(filename);
-            return file.canRead();
-        }).limit(limit).collect(Collectors.toList());
-    }
-
-    public static void putRecentDeckFile(String filename) {
-        if (filename.isEmpty())
-            return;
-
-        File file = new File(filename);
-        if (!file.canRead())
-            return;
-
-        List<String> current = new ArrayList<>(getRecentDeckFiles());
-        current.removeIf(filename::equals);
-        current.add(0, filename);
-
-        prefs().put("recentDeckFiles", String.join(";", current));
-    }
 }
