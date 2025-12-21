@@ -1,13 +1,16 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
-import mage.abilities.costs.common.WaterbendCost;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.common.WaterbendXCost;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterOpponentsCreaturePermanent;
@@ -30,7 +33,10 @@ public final class CrashingWave extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{U}{U}");
 
         // As an additional cost to cast this spell, waterbend {X}.
-        this.getSpellAbility().addCost(new WaterbendCost("{X}"));
+        this.getSpellAbility().addCost(new WaterbendXCost());
+        this.addAbility(new SimpleStaticAbility(
+                Zone.ALL, new InfoEffect("as an additional cost to cast this spell, waterbend {X}")
+        ).setRuleAtTheTop(true));
 
         // Tap up to X target creatures, then distribute three stun counters among tapped creatures your opponents control.
         this.getSpellAbility().addEffect(new TapTargetEffect("tap up to X target creatures"));
@@ -79,7 +85,7 @@ class CrashingWaveEffect extends OneShotEffect {
         }
         TargetPermanentAmount target = new TargetPermanentAmount(3, 1, filter);
         target.withNotTarget(true);
-        player.chooseTarget(outcome, target, source, game);
+        target.chooseTarget(outcome, player.getId(), source, game);
         for (UUID targetId : target.getTargets()) {
             Optional.ofNullable(targetId)
                     .map(game::getPermanent)

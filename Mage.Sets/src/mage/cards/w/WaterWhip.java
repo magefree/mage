@@ -1,12 +1,15 @@
 package mage.cards.w;
 
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.WaterbendCost;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -23,6 +26,9 @@ public final class WaterWhip extends CardImpl {
 
         // As an additional cost to cast this spell, waterbend {5}.
         this.getSpellAbility().addCost(new WaterbendCost(5));
+        this.addAbility(new SimpleStaticAbility(
+                Zone.ALL, new InfoEffect("as an additional cost to cast this spell, waterbend {5}")
+        ).setRuleAtTheTop(true));
 
         // Return up to two target creatures to their owners' hands. Draw two cards.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
