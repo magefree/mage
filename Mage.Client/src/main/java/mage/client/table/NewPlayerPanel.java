@@ -1,162 +1,30 @@
 package mage.client.table;
 
 import java.awt.*;
-import java.awt.event.ItemEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.prefs.Preferences;
-import java.util.stream.Collectors;
 import javax.swing.*;
 
-import mage.cards.decks.DeckFileFilter;
-import mage.client.MageFrame;
 import mage.client.deck.generator.DeckGenerator;
-import mage.client.dialog.PreferencesDialog;
 import mage.client.util.ClientDefaultSettings;
+import mage.client.util.RecentDecklistUtil;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class NewPlayerPanel extends javax.swing.JPanel {
-
-    private final JFileChooser fcSelectDeck;
+    private final RecentDecklistUtil recentDecklistUtil;
 
     public NewPlayerPanel() {
         initComponents();
-        fcSelectDeck = new JFileChooser();
-        fcSelectDeck.setAcceptAllFileFilterUsed(false);
-        fcSelectDeck.addChoosableFileFilter(new DeckFileFilter("dck", "XMage's deck files (*.dck)"));
         txtPlayerName.setText(ClientDefaultSettings.computerName);
-        cbPlayerDeck.setEditable(true);
-
-        // We set some arbitrary width to prevent the combobox from growing
-        // very wide for long paths.
-        cbPlayerDeck.setPrototypeDisplayValue("xxxxxxxxxxxxxx");
-
-        // Set up tooltips for combobox items so very long paths don't get truncated.
-        cbPlayerDeck.setRenderer(new DefaultListCellRenderer() {
-            @Override
-            public Component getListCellRendererComponent(JList<?> list,
-                                                          Object value,
-                                                          int index,
-                                                          boolean isSelected,
-                                                          boolean cellHasFocus) {
-                Component c = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-                if (value != null) {
-                    if (c instanceof JComponent) {
-                        ((JComponent) c).setToolTipText(value.toString());
-                    }
-                }
-
-                return c;
-            }
-        });
-
-        // Add a context menu to the combobox that allows clearing the list
-        // of recent decks.
-        JPopupMenu deckContextMenu = new JPopupMenu();
-        JMenuItem clearItem = new JMenuItem("Clear recent decks");
-        clearItem.addActionListener(event -> {
-            clearRecentDeckFiles();
-        });
-        deckContextMenu.add(clearItem);
-
-        cbPlayerDeck.getEditor().getEditorComponent().addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) { showContext(e); }
-            @Override
-            public void mouseReleased(MouseEvent e) { showContext(e); }
-
-            public void showContext(MouseEvent event) {
-                if (event.isPopupTrigger()) {
-                    deckContextMenu.show(event.getComponent(), event.getX(), event.getY());
-                }
-            }
-        });
-
-        // If the user selection changes, move the last selected item to the
-        // front of the list.
-        cbPlayerDeck.addItemListener(event -> {
-            if (event.getStateChange() == ItemEvent.SELECTED) {
-                Object selection = event.getItem();
-                if (selection != null) {
-                    putRecentDeckFile(selection.toString());
-                }
-            }
-        });
-
-        loadRecentDeckFiles();
-    }
-
-    /**
-     * Clears the list of recent deck files and removes all items from the combobox
-     */
-    private void clearRecentDeckFiles() {
-        Preferences prefs = MageFrame.getPreferences();
-        prefs.put(PreferencesDialog.KEY_RECENT_DECKLIST_FILES, "");
-        cbPlayerDeck.removeAllItems();
-    }
-
-    /**
-     * Get the list of recently used deck filenames.
-     * Only filenames that point to readable files are returned.
-     *
-     * @return A list of filenames
-     */
-    private List<String> getRecentDeckFiles() {
-        Preferences prefs = MageFrame.getPreferences();
-
-        int limit = prefs.getInt(PreferencesDialog.KEY_MAX_RECENT_DECKLIST_FLIES, 10);
-        if (limit <= 0) {
-            return new ArrayList<>();
-        } else {
-            return Arrays.stream(prefs.get(PreferencesDialog.KEY_RECENT_DECKLIST_FILES, "").split(";"))
-                    .limit(limit)
-                    .filter(filename -> {
-                        File file = new File(filename);
-                        return file.canRead();
-                    })
-                    .collect(Collectors.toList());
-        }
-    }
-
-    /**
-     * Put a filename to the list of recent decks.
-     *
-     * @param filename Filename of the deck to add
-     */
-    private void putRecentDeckFile(String filename) {
-        if (filename == null || filename.isEmpty() || filename.contains(";"))
-            return;
-
-        File file = new File(filename);
-        if (!file.canRead())
-            return;
-
-        List<String> current = new ArrayList<>(getRecentDeckFiles());
-        current.removeIf(filename::equals);
-        current.add(0, filename);
-
-        Preferences prefs = MageFrame.getPreferences();
-        prefs.put(PreferencesDialog.KEY_RECENT_DECKLIST_FILES, String.join(";", current));
+        recentDecklistUtil = new RecentDecklistUtil(cbPlayerDeck);
     }
 
     /**
      * Fill the combobox with the recent n filenames.
      */
     public void loadRecentDeckFiles() {
-        cbPlayerDeck.removeAllItems();
-        for (String filename : getRecentDeckFiles())
-            cbPlayerDeck.addItem(filename);
-
-        if (cbPlayerDeck.getItemCount() > 0)
-            cbPlayerDeck.setSelectedIndex(0);
+        recentDecklistUtil.update();
     }
 
     public void setPlayerName(String playerName) {
@@ -169,32 +37,11 @@ public class NewPlayerPanel extends javax.swing.JPanel {
      * Called when the user presses the [...] button to select a deck file.
      */
     protected void playerLoadDeck() {
-        Object item = cbPlayerDeck.getEditor().getItem();
-        if (item != null) {
-            File currentFile = new File(item.toString());
-            fcSelectDeck.setCurrentDirectory(currentFile);
-        }
-
-        int ret = fcSelectDeck.showDialog(this, "Select Deck");
-        if (ret == JFileChooser.APPROVE_OPTION) {
-            File file = fcSelectDeck.getSelectedFile();
-
-            try {
-                putRecentDeckFile(file.getCanonicalPath());
-                loadRecentDeckFiles();
-            } catch (IOException ignore) {
-            }
-        }
+        recentDecklistUtil.chooseFile();
     }
 
     protected void generateDeck() {
-        String path = DeckGenerator.generateDeck();
-        if (path == null) {
-            return;
-        }
-
-        putRecentDeckFile(path);
-        loadRecentDeckFiles();
+        recentDecklistUtil.setFile(DeckGenerator.generateDeck());
     }
 
     public String getPlayerName() {
@@ -202,16 +49,11 @@ public class NewPlayerPanel extends javax.swing.JPanel {
     }
 
     public String getDeckFile() {
-        Object item = cbPlayerDeck.getEditor().getItem();
-        if (item != null) {
-            return item.toString();
-        }
-        return "";
+        return recentDecklistUtil.getFile();
     }
 
     public void setDeckFile(String filename) {
-        putRecentDeckFile(filename);
-        loadRecentDeckFiles();
+        recentDecklistUtil.setFile(filename);
     }
 
     public void setSkillLevel(int level) {
@@ -219,7 +61,7 @@ public class NewPlayerPanel extends javax.swing.JPanel {
     }
 
     public int getSkillLevel() {
-        return (Integer) spnLevel.getValue();
+        return (Integer)spnLevel.getValue();
     }
 
     public void showLevel(boolean show) {

@@ -18,6 +18,7 @@ import mage.client.MageFrame;
 import mage.client.SessionHandler;
 import mage.client.table.TournamentPlayerPanel;
 import mage.client.util.IgnoreList;
+import mage.client.util.RecentDecklistUtil;
 import mage.client.util.gui.FastSearchUtil;
 import mage.constants.*;
 import mage.game.GameException;
@@ -810,7 +811,7 @@ public class NewTournamentDialog extends MageDialog {
             fcSelectDeck.setAcceptAllFileFilterUsed(false);
             fcSelectDeck.addChoosableFileFilter(new DeckFileFilter("dck", "XMage's deck files (*.dck)"));
         }
-        String lastFolder = MageFrame.getPreferences().get("lastDeckFolder", "");
+        String lastFolder = RecentDecklistUtil.getRecentDecklistDir();
         if (!lastFolder.isEmpty()) {
             fcSelectDeck.setCurrentDirectory(new File(lastFolder));
         }
@@ -830,7 +831,7 @@ public class NewTournamentDialog extends MageDialog {
             fcJumpstartSelectDeck.setAcceptAllFileFilterUsed(false);
             fcJumpstartSelectDeck.addChoosableFileFilter(new DeckFileFilter("txt", "Jumpstart Packs (*.txt)"));
         }
-        String lastFolder = MageFrame.getPreferences().get("lastDeckFolder", "");
+        String lastFolder = RecentDecklistUtil.getRecentDecklistDir();
         if (!lastFolder.isEmpty()) {
             fcJumpstartSelectDeck.setCurrentDirectory(new File(lastFolder));
         }
