@@ -44,7 +44,7 @@ public class PermanentsSacrificedWatcher extends Watcher {
     }
 
     public List<Permanent> getThisTurnSacrificedPermanents(UUID playerId) {
-        return sacrificedPermanents.getOrDefault(playerId, new ArrayList<>());
+        return sacrificedPermanents.getOrDefault(playerId, Collections.emptyList());
     }
 
     public int getThisTurnSacrificedPermanents() {
