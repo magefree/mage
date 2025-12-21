@@ -39,8 +39,7 @@ public class WaterbendTest extends CardTestPlayerBase {
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "waterbend");
         setChoice(playerA, waterbender);
-        setChoice(playerA, relic);
-        setChoice(playerA, relic);
+        setChoice(playerA, relic, 2);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -72,19 +71,19 @@ public class WaterbendTest extends CardTestPlayerBase {
     @Test
     public void testX() {
         addCard(Zone.BATTLEFIELD, playerA, "Island");
-        addCard(Zone.BATTLEFIELD, playerA, relic);
+        addCard(Zone.BATTLEFIELD, playerA, relic, 2);
         addCard(Zone.BATTLEFIELD, playerA, katara);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "waterbend");
-        setChoice(playerA, "X=3");
-        setChoice(playerA, relic);
+        setChoice(playerA, "X=4");
+        setChoice(playerA, relic, 2);
         setChoice(playerA, katara);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertPowerToughness(playerA, katara, 3, 3);
+        assertPowerToughness(playerA, katara, 4, 4);
         assertTapped(relic, true);
         assertTapped(katara, true);
         assertTapped("Island", true);
@@ -100,9 +99,7 @@ public class WaterbendTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, spirit);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, spirit);
-        setChoice(playerA, relic);
-        setChoice(playerA, relic);
-        setChoice(playerA, relic);
+        setChoice(playerA, relic, 3);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
