@@ -170,14 +170,14 @@ class AvatarAangWatcher extends Watcher {
         earthSet.clear();
         airSet.clear();
         fireSet.clear();
-        earthSet.clear();
+        waterSet.clear();
     }
 
     private boolean checkPlayer(UUID playerId) {
         return earthSet.contains(playerId)
                 && airSet.contains(playerId)
                 && fireSet.contains(playerId)
-                && earthSet.contains(playerId);
+                && waterSet.contains(playerId);
     }
 
     static boolean checkPlayer(Game game, Ability source) {
