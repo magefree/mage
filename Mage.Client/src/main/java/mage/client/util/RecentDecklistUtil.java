@@ -1,15 +1,9 @@
 package mage.client.util;
 
-import mage.cards.decks.DeckFileFilter;
 import mage.client.MageFrame;
 import mage.client.dialog.PreferencesDialog;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -17,144 +11,6 @@ import java.util.prefs.Preferences;
 import java.util.stream.Collectors;
 
 public class RecentDecklistUtil {
-    static private final String CLEAR_ITEM = "Clear list";
-
-    private boolean inUpdate = false;
-    final private JComboBox<String> control;
-
-    /**
-     * Construct a new utility to manage a JComboBox for choosing a decklist,
-     * either by selecting a file or by choosing a recent selection.
-     *
-     * @param control The combobox to use
-     */
-    public RecentDecklistUtil(JComboBox<String> control) {
-        this.control = control;
-        initControl();
-    }
-
-    /**
-     * Setup the combobox control
-     */
-    private void initControl() {
-        control.setEditable(true);
-
-        // We set some arbitrary width to prevent the combobox from growing
-        // very wide for long paths.
-        control.setPrototypeDisplayValue("xxxxxxxxxxxxxx");
-
-        control.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent event) {
-                if (!inUpdate) {
-                    if (event.getStateChange() == ItemEvent.SELECTED) {
-                        Object selection = event.getItem();
-                        if (selection == CLEAR_ITEM) {
-                            clear();
-                        } else if (selection != null) {
-                            putRecentDecklistFiles(selection.toString());
-                            update();
-                        }
-                    }
-                }
-            }
-        });
-
-        // Set up tooltips for combobox items so very long paths don't get truncated.
-        control.setRenderer(new DefaultListCellRenderer() {
-            @Override
-            public Component getListCellRendererComponent(JList<?> list,
-                                                          Object value,
-                                                          int index,
-                                                          boolean isSelected,
-                                                          boolean cellHasFocus) {
-                JLabel c = (JLabel)super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-                if (value != null) {
-                    c.setToolTipText(value.toString());
-                }
-
-                return c;
-            }
-        });
-    }
-
-    /**
-     * Clear all recent files.
-     */
-    public void clear() {
-        clearRecentDecklistFiles();
-        update();
-    }
-
-    /**
-     * Update the control.
-     */
-    public void update() {
-        try {
-            inUpdate = true;
-            control.removeAllItems();
-
-            List<String> files = getRecentDecklistFiles();
-            for (String filename : files)
-                control.addItem(filename);
-
-            if (!files.isEmpty())
-                control.addItem(CLEAR_ITEM);
-
-            if (control.getItemCount() > 0)
-                control.setSelectedIndex(0);
-        } finally {
-             inUpdate = false;
-        }
-    }
-
-    /**
-     * Sets the current file to the filename given.
-     * Also adds that file to the recent list.
-     *
-     * @param filename The filename to add
-     */
-    public void setFile(String filename) {
-        putRecentDecklistFiles(filename);
-        update();
-    }
-
-    /**
-     * @return The currently entered/selected filename
-     */
-    public String getFile() {
-        Object selection = control.getEditor().getItem();
-        if (selection != null)
-            return selection.toString();
-        return "";
-    }
-
-    /**
-     * Let the user select a file on their system by presenting
-     * a file chooser.
-     */
-    public void chooseFile() {
-        JFileChooser chooser = new JFileChooser();
-        chooser.setAcceptAllFileFilterUsed(false);
-        chooser.addChoosableFileFilter(new DeckFileFilter("dck", "XMage's deck files (*.dck)"));
-
-        Object item = control.getEditor().getItem();
-        if (item != null) {
-            File currentFile = new File(item.toString());
-            chooser.setCurrentDirectory(currentFile);
-        }
-
-        int ret = chooser.showDialog(control, "Select Deck");
-        if (ret == JFileChooser.APPROVE_OPTION) {
-            File file = chooser.getSelectedFile();
-            try {
-                putRecentDecklistFiles(file.getCanonicalPath());
-                update();
-            } catch (IOException ignore) {
-            }
-        }
-    }
-
     /**
      * @return The most recent decklist directory
      */

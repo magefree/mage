@@ -3,28 +3,26 @@ package mage.client.table;
 import java.awt.*;
 import javax.swing.*;
 
+import mage.client.components.DecklistChooser;
 import mage.client.deck.generator.DeckGenerator;
 import mage.client.util.ClientDefaultSettings;
-import mage.client.util.RecentDecklistUtil;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class NewPlayerPanel extends javax.swing.JPanel {
-    private final RecentDecklistUtil recentDecklistUtil;
 
     public NewPlayerPanel() {
         initComponents();
         txtPlayerName.setText(ClientDefaultSettings.computerName);
-        recentDecklistUtil = new RecentDecklistUtil(cbPlayerDeck);
     }
 
     /**
      * Fill the combobox with the recent n filenames.
      */
     public void loadRecentDeckFiles() {
-        recentDecklistUtil.update();
+        decklist.update();
     }
 
     public void setPlayerName(String playerName) {
@@ -33,15 +31,8 @@ public class NewPlayerPanel extends javax.swing.JPanel {
         txtPlayerName.setEnabled(false);
     }
 
-    /**
-     * Called when the user presses the [...] button to select a deck file.
-     */
-    protected void playerLoadDeck() {
-        recentDecklistUtil.chooseFile();
-    }
-
     protected void generateDeck() {
-        recentDecklistUtil.setFile(DeckGenerator.generateDeck());
+        decklist.setFile(DeckGenerator.generateDeck());
     }
 
     public String getPlayerName() {
@@ -49,11 +40,11 @@ public class NewPlayerPanel extends javax.swing.JPanel {
     }
 
     public String getDeckFile() {
-        return recentDecklistUtil.getFile();
+        return decklist.getFile();
     }
 
     public void setDeckFile(String filename) {
-        recentDecklistUtil.setFile(filename);
+        decklist.setFile(filename);
     }
 
     public void setSkillLevel(int level) {
@@ -71,9 +62,8 @@ public class NewPlayerPanel extends javax.swing.JPanel {
 
     public void showDeckElements(boolean show) {
         lblPlayerDeck.setVisible(show);
-        cbPlayerDeck.setVisible(show);
+        decklist.setVisible(show);
         btnGenerate.setVisible(show);
-        btnPlayerDeck.setVisible(show);
     }
 
     /**
@@ -88,8 +78,7 @@ public class NewPlayerPanel extends javax.swing.JPanel {
         lblPlayerName = new javax.swing.JLabel();
         txtPlayerName = new javax.swing.JTextField();
         lblPlayerDeck = new javax.swing.JLabel();
-        cbPlayerDeck = new javax.swing.JComboBox<>();
-        btnPlayerDeck = new javax.swing.JButton();
+        decklist = new DecklistChooser();
         btnGenerate = new javax.swing.JButton();
         lblLevel = new javax.swing.JLabel();
         spnLevel = new javax.swing.JSpinner();
@@ -97,9 +86,6 @@ public class NewPlayerPanel extends javax.swing.JPanel {
         lblPlayerName.setText("Name:");
 
         lblPlayerDeck.setText("Deck:");
-
-        btnPlayerDeck.setText("...");
-        btnPlayerDeck.addActionListener(evt -> btnPlayerDeckActionPerformed(evt));
 
         btnGenerate.setText("Generate");
         btnGenerate.addActionListener(evt -> btnGenerateActionPerformed(evt));
@@ -121,11 +107,10 @@ public class NewPlayerPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtPlayerName, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
-                    .addComponent(cbPlayerDeck, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE))
+                    .addComponent(decklist, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnPlayerDeck, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnGenerate, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -145,15 +130,10 @@ public class NewPlayerPanel extends javax.swing.JPanel {
                 .addGap(3, 3, 3)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPlayerDeck)
-                    .addComponent(cbPlayerDeck, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPlayerDeck, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGenerate, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(decklist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGenerate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnPlayerDeckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayerDeckActionPerformed
-        playerLoadDeck();
-}//GEN-LAST:event_btnPlayerDeckActionPerformed
 
     private void btnGenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerateActionPerformed
         generateDeck();
@@ -161,12 +141,11 @@ public class NewPlayerPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGenerate;
-    private javax.swing.JButton btnPlayerDeck;
+    private DecklistChooser decklist;
     private javax.swing.JLabel lblLevel;
     private javax.swing.JLabel lblPlayerDeck;
     private javax.swing.JLabel lblPlayerName;
     private javax.swing.JSpinner spnLevel;
-    private javax.swing.JComboBox<String> cbPlayerDeck;
     private javax.swing.JTextField txtPlayerName;
     // End of variables declaration//GEN-END:variables
 
