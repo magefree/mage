@@ -219,6 +219,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Persistent Constrictor", 52, Rarity.RARE, mage.cards.p.PersistentConstrictor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Phenomenon Investigators", 38, Rarity.RARE, mage.cards.p.PhenomenonInvestigators.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Phenomenon Investigators", 65, Rarity.RARE, mage.cards.p.PhenomenonInvestigators.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Polluted Cistern // Dim Oubliette", 23, Rarity.RARE, mage.cards.p.PollutedCisternDimOubliette.class));
         cards.add(new SetCardInfo("Ponder", 73, Rarity.COMMON, mage.cards.p.Ponder.class));
         cards.add(new SetCardInfo("Portent", 74, Rarity.COMMON, mage.cards.p.Portent.class));
         cards.add(new SetCardInfo("Primordial Mist", 123, Rarity.RARE, mage.cards.p.PrimordialMist.class));
