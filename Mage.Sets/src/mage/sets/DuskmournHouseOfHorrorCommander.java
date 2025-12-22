@@ -252,6 +252,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Scute Swarm", 197, Rarity.RARE, mage.cards.s.ScuteSwarm.class));
         cards.add(new SetCardInfo("Seance Board", 40, Rarity.RARE, mage.cards.s.SeanceBoard.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Seance Board", 67, Rarity.RARE, mage.cards.s.SeanceBoard.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Secret Arcade // Dusty Parlor", 10, Rarity.RARE, mage.cards.s.SecretArcadeDustyParlor.class));
         cards.add(new SetCardInfo("Shadowblood Ridge", 296, Rarity.RARE, mage.cards.s.ShadowbloodRidge.class));
         cards.add(new SetCardInfo("Shark Typhoon", 127, Rarity.RARE, mage.cards.s.SharkTyphoon.class));
         cards.add(new SetCardInfo("Shigeki, Jukai Visionary", 198, Rarity.RARE, mage.cards.s.ShigekiJukaiVisionary.class));
