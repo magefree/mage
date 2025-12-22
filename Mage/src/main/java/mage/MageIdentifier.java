@@ -65,6 +65,7 @@ public enum MageIdentifier {
     FireLordOzaiAlternateCast,
     HelbruteAlternateCast,
     IntoThePitAlternateCast,
+    LeonardoSewerSamuraiAlternateCast,
     MaestrosAscendencyAlternateCast,
     NashiMoonSagesScionAlternateCast,
     NoctisPrinceOfLucisAlternateCast,
