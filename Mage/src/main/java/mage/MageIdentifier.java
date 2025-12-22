@@ -39,6 +39,7 @@ public enum MageIdentifier {
     ThundermanDragonWatcher,
     LockeTreasureHunterWatcher,
     TheFourthDoctorWatcher,
+    AccessMazeWatcher,
 
     // ----------------------------//
     //       alternate casts       //

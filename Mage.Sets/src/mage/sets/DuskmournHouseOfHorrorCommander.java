@@ -78,6 +78,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Convert to Slime", 37, Rarity.RARE, mage.cards.c.ConvertToSlime.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Convert to Slime", 64, Rarity.RARE, mage.cards.c.ConvertToSlime.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Counterspell", 114, Rarity.UNCOMMON, mage.cards.c.Counterspell.class));
+        cards.add(new SetCardInfo("Cramped Vents // Access Maze", 17, Rarity.RARE, mage.cards.c.CrampedVentsAccessMaze.class));
         cards.add(new SetCardInfo("Crawling Sensation", 173, Rarity.UNCOMMON, mage.cards.c.CrawlingSensation.class));
         cards.add(new SetCardInfo("Crypt Ghast", 368, Rarity.MYTHIC, mage.cards.c.CryptGhast.class));
         cards.add(new SetCardInfo("Culling Ritual", 85, Rarity.RARE, mage.cards.c.CullingRitual.class));
