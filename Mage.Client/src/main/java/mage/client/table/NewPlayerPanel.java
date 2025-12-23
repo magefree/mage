@@ -63,7 +63,6 @@ public class NewPlayerPanel extends javax.swing.JPanel {
     public void showDeckElements(boolean show) {
         lblPlayerDeck.setVisible(show);
         decklist.setVisible(show);
-        btnGenerate.setVisible(show);
     }
 
     /**
@@ -79,16 +78,12 @@ public class NewPlayerPanel extends javax.swing.JPanel {
         txtPlayerName = new javax.swing.JTextField();
         lblPlayerDeck = new javax.swing.JLabel();
         decklist = new DecklistChooser();
-        btnGenerate = new javax.swing.JButton();
         lblLevel = new javax.swing.JLabel();
         spnLevel = new javax.swing.JSpinner();
 
         lblPlayerName.setText("Name:");
 
         lblPlayerDeck.setText("Deck:");
-
-        btnGenerate.setText("Generate");
-        btnGenerate.addActionListener(evt -> btnGenerateActionPerformed(evt));
 
         lblLevel.setText("Skill:");
 
@@ -111,9 +106,6 @@ public class NewPlayerPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnGenerate, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(lblLevel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(spnLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -130,17 +122,11 @@ public class NewPlayerPanel extends javax.swing.JPanel {
                 .addGap(3, 3, 3)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPlayerDeck)
-                    .addComponent(decklist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGenerate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(decklist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnGenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerateActionPerformed
-        generateDeck();
-    }//GEN-LAST:event_btnGenerateActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnGenerate;
     private DecklistChooser decklist;
     private javax.swing.JLabel lblLevel;
     private javax.swing.JLabel lblPlayerDeck;

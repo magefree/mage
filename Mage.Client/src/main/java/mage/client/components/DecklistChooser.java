@@ -1,6 +1,7 @@
 package mage.client.components;
 
 import mage.cards.decks.DeckFileFilter;
+import mage.client.deck.generator.DeckGenerator;
 import mage.client.util.RecentDecklistUtil;
 
 import javax.swing.*;
@@ -16,12 +17,16 @@ public class DecklistChooser extends JPanel
     private final String CLEAR_ITEM = "Clear recent decks";
 
     private final JButton chooseButton;
+    private final JButton generateButton;
     private final JComboBox<String> decklistCombobox;
     private boolean inUpdate = false;
 
     public DecklistChooser() {
         chooseButton = new JButton("...");
         chooseButton.setToolTipText("Select deck file...");
+
+        generateButton = new JButton("Generate");
+        generateButton.setToolTipText("Generate a new deck...");
 
         decklistCombobox = new JComboBox<>();
 
@@ -31,6 +36,7 @@ public class DecklistChooser extends JPanel
 
     private void setupControls() {
         chooseButton.addActionListener(e -> chooseFile());
+        generateButton.addActionListener(e -> generateDeck());
 
         decklistCombobox.setEditable(true);
 
@@ -85,6 +91,9 @@ public class DecklistChooser extends JPanel
         gbc.weightx = 0;
         gbc.fill = GridBagConstraints.NONE;
         add(chooseButton, gbc);
+
+        gbc.gridx = 2;
+        add(generateButton, gbc);
     }
 
     /**
@@ -161,6 +170,17 @@ public class DecklistChooser extends JPanel
                 update();
             } catch (IOException ignore) {
             }
+        }
+    }
+
+    /**
+     * Generate a new deck using the “Generate Deck” dialog.
+     */
+    private void generateDeck() {
+        String filename = DeckGenerator.generateDeck();
+        if (filename != null) {
+            RecentDecklistUtil.putRecentDecklistFiles(filename);
+            update();
         }
     }
 }
