@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
+import java.util.prefs.Preferences;
 
 /**
  * Deck import: text deck, compatible with MTGO and many other apps/services
@@ -21,6 +22,7 @@ public class TxtDeckImporter extends PlainTextDeckImporter {
     private static final String[] SET_VALUES = new String[]{"lands", "creatures", "planeswalkers", "other spells", "sideboard cards",
             "Instant", "Land", "Enchantment", "Artifact", "Sorcery", "Planeswalker", "Creature"};
     private static final Set<String> IGNORE_NAMES = new HashSet<>(Arrays.asList(SET_VALUES));
+    private static final String KEY_FAVORITE_CARD_PREFIX = "favoriteCard";
 
     private boolean sideboard = false;
     private boolean switchSideboardByEmptyLine = true; // all cards after first empty line will be sideboard (like mtgo format)
@@ -129,6 +131,16 @@ public class TxtDeckImporter extends PlainTextDeckImporter {
         wasCardLines = true;
 
         CardInfo cardInfo = CardRepository.instance.findPreferredCoreExpansionCard(lineName);
+
+        if (prefs != null) {
+            String favSetAndNumber = prefs.get(KEY_FAVORITE_CARD_PREFIX + '/' + lineName, "");
+            if (favSetAndNumber != null && !favSetAndNumber.equals("")) {
+                String favoriteSet = favSetAndNumber.split("##")[0];
+                String favoriteNumber = favSetAndNumber.split("##")[1];
+                cardInfo = CardRepository.instance.findCard(favoriteSet, favoriteNumber);
+            }
+        }
+
         if (cardInfo == null) {
             sbMessage.append("Could not find card: '").append(lineName).append("' at line ").append(lineCount).append('\n');
         } else {
