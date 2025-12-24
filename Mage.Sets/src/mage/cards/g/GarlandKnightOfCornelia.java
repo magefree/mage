@@ -9,7 +9,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PutOnLibrarySourceEffect;
 import mage.abilities.effects.keyword.SurveilEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
 import mage.cards.CardSetInfo;
 import mage.cards.TransformingDoubleFacedCard;
@@ -95,7 +94,7 @@ class GarlandKnightOfCorneliaEffect extends OneShotEffect {
         if (player == null || card == null) {
             return false;
         }
-        game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId(), Boolean.TRUE);
+        game.getState().setValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + card.getId(), Boolean.TRUE);
         return player.moveCards(card, Zone.BATTLEFIELD, source, game);
     }
 }

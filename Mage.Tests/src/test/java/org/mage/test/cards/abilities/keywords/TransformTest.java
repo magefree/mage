@@ -859,7 +859,7 @@ public class TransformTest extends CardTestPlayerBase {
         assertLife(playerB, 20);
         assertGraveyardCount(playerA, dressDown, 1);
         assertPermanentCount(playerA, huntmasterOfTheFells, 1);
-        assertPermanentCount(playerA, 6+1+1);
+        assertPermanentCount(playerA, 6 + 1 + 1);
     }
 
     @Test
@@ -923,5 +923,33 @@ public class TransformTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, baithookAngler, 1);
         assertTrue(getPermanent(baithookAngler, playerA).isTapped());
+    }
+
+    /**
+     * Test that copying a TDFC will not leave and return transformed
+     */
+    @Test
+    public void testCloneCantReturnTransformed() {
+        addCard(Zone.BATTLEFIELD, playerA, azusasManyJourneys);
+        addCard(Zone.HAND, playerA, "Clever Impersonator@impersonator");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
+
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Clever Impersonator");
+        setChoice(playerA, true); // Choose to copy
+        setChoice(playerA, azusasManyJourneys);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        addCounters(1, PhaseStep.PRECOMBAT_MAIN, playerA, "@impersonator", CounterType.LORE, 2);
+        setChoice(playerA, "II"); // order triggers
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, azusasManyJourneys, 1);
+        assertPermanentCount(playerA, likenessOfTheSeeker, 0);
+        assertPermanentCount(playerA, "Clever Impersonator", 0);
+        assertExileCount(playerA, "Clever Impersonator", 1);
     }
 }

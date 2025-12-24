@@ -4952,16 +4952,6 @@ public abstract class PlayerImpl implements Player, Serializable {
                 for (Card card : cards) {
                     fromZone = game.getState().getZone(card.getId());
 
-                    // 712.14a. If a spell or ability puts a transforming double-faced card onto the battlefield "transformed"
-                    // or "converted," it enters the battlefield with its back face up. If a player is instructed to put a card
-                    // that isn't a transforming double-faced card onto the battlefield transformed or converted, that card stays in
-                    // its current zone.
-                    // TODO: can probably remove/change after tdfc rework, should only be sending transformed side
-                    Boolean enterTransformed = (Boolean) game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId());
-                    if (enterTransformed != null && enterTransformed && !card.isTransformable() && !(card instanceof TransformingDoubleFacedCardHalf)) {
-                        continue;
-                    }
-
                     // 303.4g. If an Aura is entering the battlefield and there is no legal object or player for it to enchant,
                     // the Aura remains in its current zone, unless that zone is the stack. In that case, the Aura is put into
                     // its owner's graveyard instead of entering the battlefield. If the Aura is a token, it isn't created.

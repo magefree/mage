@@ -311,7 +311,6 @@ public class ShadowsOverInnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Veteran Cathar", 225, Rarity.UNCOMMON, mage.cards.v.VeteranCathar.class));
         cards.add(new SetCardInfo("Village Messenger", 184, Rarity.UNCOMMON, mage.cards.v.VillageMessenger.class));
         cards.add(new SetCardInfo("Voldaren Pariah", 138, Rarity.RARE, mage.cards.v.VoldarenPariah.class));
-        cards.add(new SetCardInfo("Voracious Reader", 58, Rarity.UNCOMMON, mage.cards.v.VoraciousReader.class));
         cards.add(new SetCardInfo("Weirded Vampire", 139, Rarity.COMMON, mage.cards.w.WeirdedVampire.class));
         cards.add(new SetCardInfo("Weirding Wood", 226, Rarity.COMMON, mage.cards.w.WeirdingWood.class));
         cards.add(new SetCardInfo("Westvale Abbey", 275, Rarity.RARE, mage.cards.w.WestvaleAbbey.class));

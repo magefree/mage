@@ -13,7 +13,6 @@ import mage.abilities.effects.keyword.SurveilEffect;
 import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.keyword.TrampleAbility;
-import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
@@ -115,7 +114,7 @@ class EsperOriginsEffect extends OneShotEffect {
         Card card = spell.getMainCard();
         player.moveCards(card, Zone.EXILED, source, game);
         game.setEnterWithCounters(card.getId(), new Counters(CounterType.FINALITY.createInstance()));
-        game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId(), Boolean.TRUE);
+        game.getState().setValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + card.getId(), Boolean.TRUE);
         player.moveCards(
                 card, Zone.BATTLEFIELD, source, game, false,
                 false, true, null
