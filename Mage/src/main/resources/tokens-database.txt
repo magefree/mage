@@ -17,7 +17,7 @@
 # - download images must be setup in ScryfallImageSupportTokens
 
 # Schema:
-# Current defines 5 columns:
+# Currently defines 5 columns:
 # - 1. Type and set. In "TYPE:SETCODE" format
 #   - Valid values for TYPE include: EMBLEM, PLANE, DUNGEON, TOK
 #   - SETCODE maps to MTG set codes

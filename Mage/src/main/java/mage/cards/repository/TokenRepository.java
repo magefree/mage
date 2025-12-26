@@ -142,7 +142,7 @@ public enum TokenRepository {
 
                     // token class name (uses for images search for render)
                     String tokenClassName = "";
-                    if (params.size() > 6 && !params.get(5).isEmpty()) {
+                    if (!params.get(5).isEmpty()) {
                         tokenClassName = params.get(5);
                     }
                     if (tokenClassName.isEmpty()) {
