@@ -17,15 +17,14 @@
 # - download images must be setup in ScryfallImageSupportTokens
 
 # Schema:
-# Current defines 6 columns:
-# - 1. Generate. TODO to remove
-# - 2. Type and set. In "TYPE:SETCODE" format
+# Current defines 5 columns:
+# - 1. Type and set. In "TYPE:SETCODE" format
 #   - Valid values for TYPE include: EMBLEM, PLANE, DUNGEON, TOK
 #   - SETCODE maps to MTG set codes
-# - 3. Token Name
-# - 4. Image Number. Used if one set contains multiple tokens with same name. Nullable.
-# - 5. Image Filename. Appears deprecated. Nullable. https://github.com/muz/mage/commit/24bd4315c624780dbbc3d005bab4f7779e14994a
-# - 6. Token Class Name. Used for image search for rendering.
+# - 2. Token Name
+# - 3. Image Number. Used if one set contains multiple tokens with same name. Nullable.
+# - 4. Image Filename. Appears deprecated. Nullable. https://github.com/muz/mage/commit/24bd4315c624780dbbc3d005bab4f7779e14994a
+# - 5. Token Class Name. Used for image search for rendering.
 
 |EMBLEM:BFZ|Emblem Gideon|||GideonAllyOfZendikarEmblem|
 |EMBLEM:BFZ|Emblem Kiora|||KioraMasterOfTheDepthsEmblem|
