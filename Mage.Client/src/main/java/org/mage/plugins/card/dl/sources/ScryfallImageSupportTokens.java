@@ -2889,12 +2889,12 @@ public class ScryfallImageSupportTokens {
             put("REX/Treasure", "https://api.scryfall.com/cards/trex/2?format=image");
 
             // UGL
-            put("UGL/Goblin", "https://api.scryfall.com/cards/tugl/4?format=image");
-            put("UGL/Pegasus", "https://api.scryfall.com/cards/tugl/1?format=image");
-            put("UGL/Rabid Sheep", "https://api.scryfall.com/cards/tugl/5?format=image");
-            put("UGL/Soldier", "https://api.scryfall.com/cards/tugl/2?format=image");
-            put("UGL/Squirrel", "https://api.scryfall.com/cards/tugl/6?format=image");
-            put("UGL/Zombie", "https://api.scryfall.com/cards/tugl/3?format=image");
+            put("UGL/Goblin", "https://api.scryfall.com/cards/tugl/92?format=image");
+            put("UGL/Pegasus", "https://api.scryfall.com/cards/tugl/89?format=image");
+            put("UGL/Rabid Sheep", "https://api.scryfall.com/cards/tugl/93?format=image");
+            put("UGL/Soldier", "https://api.scryfall.com/cards/tugl/90?format=image");
+            put("UGL/Squirrel", "https://api.scryfall.com/cards/tugl/94?format=image");
+            put("UGL/Zombie", "https://api.scryfall.com/cards/tugl/91?format=image");
 
             // UST
             put("UST/Angel", "https://api.scryfall.com/cards/tust/1?format=image");
