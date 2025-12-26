@@ -129,27 +129,21 @@ public enum TokenRepository {
                     List<String> params = Arrays.stream(line.split("\\|", -1))
                             .map(String::trim)
                             .collect(Collectors.toList());
-                    if (params.size() != 6) {
-                        // Current database schema uses 6 columns for all entries, so explicitly expect that many params
+                    if (params.size() != 7) { // Schema specifies 5 columns. Split provides 2 extra values from trailing and leading |
                         errorsList.add("Tokens database: wrong params count: " + line);
-                        continue;
-                    }
-                    if (!params.get(1).toLowerCase(Locale.ENGLISH).equals("generate")) {
-                        // TODO: remove "generate" from db
-                        errorsList.add("Tokens database: miss generate param: " + line);
                         continue;
                     }
 
                     // image number (uses if one set contains multiple tokens with same name)
                     int imageNumber = 0;
-                    if (!params.get(4).isEmpty()) {
-                        imageNumber = Integer.parseInt(params.get(4));
+                    if (!params.get(3).isEmpty()) {
+                        imageNumber = Integer.parseInt(params.get(3));
                     }
 
                     // token class name (uses for images search for render)
                     String tokenClassName = "";
-                    if (params.size() > 7 && !params.get(6).isEmpty()) {
-                        tokenClassName = params.get(6);
+                    if (params.size() > 6 && !params.get(5).isEmpty()) {
+                        tokenClassName = params.get(5);
                     }
                     if (tokenClassName.isEmpty()) {
                         errorsList.add("Tokens database: miss class name: " + line);
@@ -157,8 +151,8 @@ public enum TokenRepository {
                     }
 
                     // object type
-                    String objectType = params.get(2);
-                    String tokenName = params.get(3);
+                    String objectType = params.get(1);
+                    String tokenName = params.get(2);
                     String setCode = "";
                     TokenType tokenType = null;
 
