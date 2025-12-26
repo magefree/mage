@@ -15,6 +15,18 @@
 # - all names must be different in one set
 # - xmage do not support various arts for the emblems (e.g. must be one emblem's image per set)
 # - download images must be setup in ScryfallImageSupportTokens
+
+# Schema:
+# Current defines 6 columns:
+# - 1. Generate. TODO to remove
+# - 2. Type and set. In "TYPE:SETCODE" format
+#   - Valid values for TYPE include: EMBLEM, PLANE, DUNGEON, TOK
+#   - SETCODE maps to MTG set codes
+# - 3. Token Name
+# - 4. Image Number. Used if one set contains multiple tokens with same name. Nullable.
+# - 5. Image Filename. Appears deprecated. Nullable. https://github.com/muz/mage/commit/24bd4315c624780dbbc3d005bab4f7779e14994a
+# - 6. Token Class Name. Used for image search for rendering.
+
 |Generate|EMBLEM:BFZ|Emblem Gideon|||GideonAllyOfZendikarEmblem|
 |Generate|EMBLEM:BFZ|Emblem Kiora|||KioraMasterOfTheDepthsEmblem|
 |Generate|EMBLEM:BFZ|Emblem Nixilis|||ObNixilisReignitedEmblem|

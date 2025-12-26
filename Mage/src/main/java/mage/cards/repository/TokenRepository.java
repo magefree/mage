@@ -129,7 +129,8 @@ public enum TokenRepository {
                     List<String> params = Arrays.stream(line.split("\\|", -1))
                             .map(String::trim)
                             .collect(Collectors.toList());
-                    if (params.size() < 5) {
+                    if (params.size() != 6) {
+                        // Current database schema uses 6 columns for all entries, so explicitly expect that many params
                         errorsList.add("Tokens database: wrong params count: " + line);
                         continue;
                     }
