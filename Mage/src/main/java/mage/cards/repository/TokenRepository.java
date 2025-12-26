@@ -134,27 +134,23 @@ public enum TokenRepository {
                         continue;
                     }
 
+                    String objectType = params.get(1);
+                    String tokenName = params.get(2);
+                    String tokenClassName = params.get(5); // token class name (uses for images search for render)
+
                     // image number (uses if one set contains multiple tokens with same name)
                     int imageNumber = 0;
                     if (!params.get(3).isEmpty()) {
                         imageNumber = Integer.parseInt(params.get(3));
                     }
 
-                    // token class name (uses for images search for render)
-                    String tokenClassName = "";
-                    if (!params.get(5).isEmpty()) {
-                        tokenClassName = params.get(5);
-                    }
                     if (tokenClassName.isEmpty()) {
                         errorsList.add("Tokens database: miss class name: " + line);
                         continue;
                     }
 
-                    // object type
-                    String objectType = params.get(1);
-                    String tokenName = params.get(2);
-                    String setCode = "";
                     TokenType tokenType = null;
+                    String setCode = "";
 
                     // type - token
                     if (objectType.startsWith("TOK:")) {
