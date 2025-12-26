@@ -144,23 +144,31 @@ public enum TokenRepository {
                         imageNumber = Integer.parseInt(params.get(3));
                     }
 
+                    if (objectType.isEmpty() || !objectType.matches("(?:DUNGEON|EMBLEM|PLANE|TOK):[A-Z0-9]{3,4}")) {
+                        errorsList.add("Tokens database: invalid object type declaration: " + line);
+                        continue;
+                    }
+
+                    if (tokenName.isEmpty()) {
+                        errorsList.add("Tokens database: missing token name: " + line);
+                        continue;
+                    }
+
                     if (tokenClassName.isEmpty()) {
                         errorsList.add("Tokens database: miss class name: " + line);
                         continue;
                     }
 
-                    TokenType tokenType = null;
-                    String setCode = "";
+                    String[] typeAndSet = objectType.split(":");
 
-                    // type - token
-                    if (objectType.startsWith("TOK:")) {
-                        setCode = objectType.substring("TOK:".length());
+                    TokenType tokenType = null;
+                    String setCode = typeAndSet[1];
+
+                    if (typeAndSet[0].equals("TOK")) {
                         tokenType = TokenType.TOKEN;
                     }
 
-                    // type - emblem
-                    if (objectType.startsWith("EMBLEM:")) {
-                        setCode = objectType.substring("EMBLEM:".length());
+                    if (typeAndSet[0].equals("EMBLEM")) {
                         tokenType = TokenType.EMBLEM;
                         if (!tokenName.startsWith("Emblem ")) {
                             errorsList.add("Tokens database: emblem's name must start with [Emblem ...] word: " + line);
@@ -172,9 +180,7 @@ public enum TokenRepository {
                         }
                     }
 
-                    // type - plane
-                    if (objectType.startsWith("PLANE:")) {
-                        setCode = objectType.substring("PLANE:".length());
+                    if (typeAndSet[0].equals("PLANE")) {
                         tokenType = TokenType.PLANE;
                         if (!tokenName.startsWith("Plane - ")) {
                             errorsList.add("Tokens database: plane's name must start with [Plane - ...] word: " + line);
@@ -186,20 +192,12 @@ public enum TokenRepository {
                         }
                     }
 
-                    // type - dungeon
-                    if (objectType.startsWith("DUNGEON:")) {
-                        setCode = objectType.substring("DUNGEON:".length());
+                    if (typeAndSet[0].equals("DUNGEON")) {
                         tokenType = TokenType.DUNGEON;
                         if (!tokenClassName.endsWith("Dungeon")) {
                             errorsList.add("Tokens database: dungeon's class name must ends with [...Dungeon] word: " + line);
                             continue;
                         }
-                    }
-
-                    // type - unknown
-                    if (tokenType == null) {
-                        errorsList.add("Tokens database: unknown line format: " + line);
-                        continue;
                     }
 
                     // OK
