@@ -16,7 +16,7 @@ public enum SubType {
     OMEN("Omen", SubTypeSet.SpellType),
     TRAP("Trap", SubTypeSet.SpellType),
 
-    // Battle subtypes
+    // 205.3q Battles have a unique subtype, called a battle type. That battle type is Siege.
     SIEGE("Siege", SubTypeSet.BattleType),
 
     // 205.3i: Lands have their own unique set of subtypes; these subtypes are called land types.
@@ -470,7 +470,7 @@ public enum SubType {
     ZABRAK("Zabrak", SubTypeSet.CreatureType, true), // Star Wars
     ZOMBIE("Zombie", SubTypeSet.CreatureType),
     ZUBERA("Zubera", SubTypeSet.CreatureType),
-    // Planeswalker
+    // 205.3j Planeswalkers have their own unique set of subtypes
     AJANI("Ajani", SubTypeSet.PlaneswalkerType),
     AMINATOU("Aminatou", SubTypeSet.PlaneswalkerType),
     ANGRATH("Angrath", SubTypeSet.PlaneswalkerType),
