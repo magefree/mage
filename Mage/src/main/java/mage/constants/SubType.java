@@ -8,7 +8,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public enum SubType {
-
     //205.3k Instants and sorceries share their lists of subtypes; these subtypes are called spell types.
     ADVENTURE("Adventure", SubTypeSet.SpellType),
     ARCANE("Arcane", SubTypeSet.SpellType),
@@ -38,6 +37,7 @@ public enum SubType {
     POWER_PLANT("Power-Plant", SubTypeSet.NonBasicLandType),
     TOWER("Tower", SubTypeSet.NonBasicLandType),
     TOWN("Town", SubTypeSet.NonBasicLandType),
+
     // 205.3h Enchantments have their own unique set of subtypes; these subtypes are called enchantment types.
     AURA("Aura", SubTypeSet.EnchantmentType),
     BACKGROUND("Background", SubTypeSet.EnchantmentType),
@@ -52,6 +52,7 @@ public enum SubType {
     SAGA("Saga", SubTypeSet.EnchantmentType),
     SHARD("Shard", SubTypeSet.EnchantmentType),
     SHRINE("Shrine", SubTypeSet.EnchantmentType),
+
     // 205.3g: Artifacts have their own unique set of subtypes; these subtypes are called artifact types.
     ATTRACTION("Attraction", SubTypeSet.ArtifactType),
     BLOOD("Blood", SubTypeSet.ArtifactType),
@@ -73,6 +74,7 @@ public enum SubType {
     STONE("Stone", SubTypeSet.ArtifactType),
     TREASURE("Treasure", SubTypeSet.ArtifactType),
     VEHICLE("Vehicle", SubTypeSet.ArtifactType),
+
     // 205.3m : Creatures and kindreds share their lists of subtypes; these subtypes are called creature types.
     // A
     ADVISOR("Advisor", SubTypeSet.CreatureType),
@@ -470,6 +472,7 @@ public enum SubType {
     ZABRAK("Zabrak", SubTypeSet.CreatureType, true), // Star Wars
     ZOMBIE("Zombie", SubTypeSet.CreatureType),
     ZUBERA("Zubera", SubTypeSet.CreatureType),
+
     // 205.3j Planeswalkers have their own unique set of subtypes
     AJANI("Ajani", SubTypeSet.PlaneswalkerType),
     AMINATOU("Aminatou", SubTypeSet.PlaneswalkerType),
