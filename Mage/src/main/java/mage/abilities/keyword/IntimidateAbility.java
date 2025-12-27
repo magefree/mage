@@ -27,7 +27,7 @@ public class IntimidateAbility extends EvasionAbility implements MageSingleton {
         return instance;
     }
 
-    private IntimidateAbility() {
+    private IntimidateAbility() { 
         this.addEffect(new IntimidateEffect());
     }
 
