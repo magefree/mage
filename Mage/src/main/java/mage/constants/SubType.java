@@ -53,6 +53,7 @@ public enum SubType {
     SHARD("Shard", SubTypeSet.EnchantmentType),
     SHRINE("Shrine", SubTypeSet.EnchantmentType),
     // 205.3g: Artifacts have their own unique set of subtypes; these subtypes are called artifact types.
+    ATTRACTION("Attraction", SubTypeSet.ArtifactType),
     BLOOD("Blood", SubTypeSet.ArtifactType),
     BOBBLEHEAD("Bobblehead", SubTypeSet.ArtifactType),
     CLUE("Clue", SubTypeSet.ArtifactType),
@@ -62,12 +63,14 @@ public enum SubType {
     FORTIFICATION("Fortification", SubTypeSet.ArtifactType),
     GOLD("Gold", SubTypeSet.ArtifactType),
     INCUBATOR("Incubator", SubTypeSet.ArtifactType),
+    INFINITY("Infinity", SubTypeSet.ArtifactType),
     JUNK("Junk", SubTypeSet.ArtifactType),
     LANDER("Lander", SubTypeSet.ArtifactType),
     MAP("Map", SubTypeSet.ArtifactType),
     MUTAGEN("Mutagen", SubTypeSet.ArtifactType),
     POWERSTONE("Powerstone", SubTypeSet.ArtifactType),
     SPACECRAFT("Spacecraft", SubTypeSet.ArtifactType),
+    STONE("Stone", SubTypeSet.ArtifactType),
     TREASURE("Treasure", SubTypeSet.ArtifactType),
     VEHICLE("Vehicle", SubTypeSet.ArtifactType),
     // 205.3m : Creatures and kindreds share their lists of subtypes; these subtypes are called creature types.
@@ -238,7 +241,6 @@ public enum SubType {
     ILLUSION("Illusion", SubTypeSet.CreatureType),
     IMP("Imp", SubTypeSet.CreatureType),
     INCARNATION("Incarnation", SubTypeSet.CreatureType),
-    INFINITY("Infinity", SubTypeSet.ArtifactType),
     INKLING("Inkling", SubTypeSet.CreatureType),
     INQUISITOR("Inquisitor", SubTypeSet.CreatureType),
     INSECT("Insect", SubTypeSet.CreatureType),
@@ -410,7 +412,6 @@ public enum SubType {
     SQUIRREL("Squirrel", SubTypeSet.CreatureType),
     STARFISH("Starfish", SubTypeSet.CreatureType),
     STARSHIP("Starship", SubTypeSet.CreatureType, true), // Star Wars
-    STONE("Stone", SubTypeSet.ArtifactType),
     SULLUSTAN("Sullustan", SubTypeSet.CreatureType, true), // Star Wars
     SURRAKAR("Surrakar", SubTypeSet.CreatureType),
     SURVIVOR("Survivor", SubTypeSet.CreatureType),
