@@ -129,14 +129,14 @@ public enum TokenRepository {
                     List<String> params = Arrays.stream(line.split("\\|", -1))
                             .map(String::trim)
                             .collect(Collectors.toList());
-                    if (params.size() != 7) { // Schema specifies 5 columns. Split provides 2 extra values from trailing and leading |
+                    if (params.size() != 6) { // Schema specifies 4 columns. Split provides 2 extra values from trailing and leading |
                         errorsList.add("Tokens database: wrong params count: " + line);
                         continue;
                     }
 
                     String objectType = params.get(1);
                     String tokenName = params.get(2);
-                    String tokenClassName = params.get(5); // token class name (uses for images search for render)
+                    String tokenClassName = params.get(4); // token class name (uses for images search for render)
 
                     // image number (uses if one set contains multiple tokens with same name)
                     int imageNumber = 0;
