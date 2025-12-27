@@ -8,7 +8,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public enum SubType {
-
     //205.3k Instants and sorceries share their lists of subtypes; these subtypes are called spell types.
     ADVENTURE("Adventure", SubTypeSet.SpellType),
     ARCANE("Arcane", SubTypeSet.SpellType),
@@ -16,7 +15,7 @@ public enum SubType {
     OMEN("Omen", SubTypeSet.SpellType),
     TRAP("Trap", SubTypeSet.SpellType),
 
-    // Battle subtypes
+    // 205.3q Battles have a unique subtype, called a battle type. That battle type is Siege.
     SIEGE("Siege", SubTypeSet.BattleType),
 
     // 205.3i: Lands have their own unique set of subtypes; these subtypes are called land types.
@@ -31,13 +30,14 @@ public enum SubType {
     GATE("Gate", SubTypeSet.NonBasicLandType),
     LAIR("Lair", SubTypeSet.NonBasicLandType),
     LOCUS("Locus", SubTypeSet.NonBasicLandType),
-    PLANET("Planet", SubTypeSet.NonBasicLandType),
-    SPHERE("Sphere", SubTypeSet.NonBasicLandType),
-    URZAS("Urza's", SubTypeSet.NonBasicLandType),
     MINE("Mine", SubTypeSet.NonBasicLandType),
+    PLANET("Planet", SubTypeSet.NonBasicLandType),
     POWER_PLANT("Power-Plant", SubTypeSet.NonBasicLandType),
+    SPHERE("Sphere", SubTypeSet.NonBasicLandType),
     TOWER("Tower", SubTypeSet.NonBasicLandType),
     TOWN("Town", SubTypeSet.NonBasicLandType),
+    URZAS("Urza's", SubTypeSet.NonBasicLandType),
+
     // 205.3h Enchantments have their own unique set of subtypes; these subtypes are called enchantment types.
     AURA("Aura", SubTypeSet.EnchantmentType),
     BACKGROUND("Background", SubTypeSet.EnchantmentType),
@@ -52,7 +52,9 @@ public enum SubType {
     SAGA("Saga", SubTypeSet.EnchantmentType),
     SHARD("Shard", SubTypeSet.EnchantmentType),
     SHRINE("Shrine", SubTypeSet.EnchantmentType),
+
     // 205.3g: Artifacts have their own unique set of subtypes; these subtypes are called artifact types.
+    ATTRACTION("Attraction", SubTypeSet.ArtifactType),
     BLOOD("Blood", SubTypeSet.ArtifactType),
     BOBBLEHEAD("Bobblehead", SubTypeSet.ArtifactType),
     CLUE("Clue", SubTypeSet.ArtifactType),
@@ -62,14 +64,17 @@ public enum SubType {
     FORTIFICATION("Fortification", SubTypeSet.ArtifactType),
     GOLD("Gold", SubTypeSet.ArtifactType),
     INCUBATOR("Incubator", SubTypeSet.ArtifactType),
+    INFINITY("Infinity", SubTypeSet.ArtifactType),
     JUNK("Junk", SubTypeSet.ArtifactType),
     LANDER("Lander", SubTypeSet.ArtifactType),
     MAP("Map", SubTypeSet.ArtifactType),
     MUTAGEN("Mutagen", SubTypeSet.ArtifactType),
     POWERSTONE("Powerstone", SubTypeSet.ArtifactType),
     SPACECRAFT("Spacecraft", SubTypeSet.ArtifactType),
+    STONE("Stone", SubTypeSet.ArtifactType),
     TREASURE("Treasure", SubTypeSet.ArtifactType),
     VEHICLE("Vehicle", SubTypeSet.ArtifactType),
+
     // 205.3m : Creatures and kindreds share their lists of subtypes; these subtypes are called creature types.
     // A
     ADVISOR("Advisor", SubTypeSet.CreatureType),
@@ -129,6 +134,7 @@ public enum SubType {
     CAT("Cat", SubTypeSet.CreatureType),
     CENTAUR("Centaur", SubTypeSet.CreatureType),
     CEREAN("Cerean", SubTypeSet.CreatureType, true), // Star Wars
+    CHILD("Child", SubTypeSet.CreatureType),
     CHIMERA("Chimera", SubTypeSet.CreatureType),
     CHISS("Chiss", SubTypeSet.CreatureType, true),
     CITIZEN("Citizen", SubTypeSet.CreatureType),
@@ -237,7 +243,6 @@ public enum SubType {
     ILLUSION("Illusion", SubTypeSet.CreatureType),
     IMP("Imp", SubTypeSet.CreatureType),
     INCARNATION("Incarnation", SubTypeSet.CreatureType),
-    INFINITY("Infinity", SubTypeSet.ArtifactType),
     INKLING("Inkling", SubTypeSet.CreatureType),
     INQUISITOR("Inquisitor", SubTypeSet.CreatureType),
     INSECT("Insect", SubTypeSet.CreatureType),
@@ -344,8 +349,8 @@ public enum SubType {
     PROCESSOR("Processor", SubTypeSet.CreatureType),
     PUREBLOOD("Pureblood", SubTypeSet.CreatureType, true),
     // Q
-    QUARREN("Quarren", SubTypeSet.CreatureType, true), // Star Wars
     QU("Qu", SubTypeSet.CreatureType),
+    QUARREN("Quarren", SubTypeSet.CreatureType, true), // Star Wars
     // R
     RABBIT("Rabbit", SubTypeSet.CreatureType),
     RACCOON("Raccoon", SubTypeSet.CreatureType),
@@ -372,9 +377,9 @@ public enum SubType {
     SCORPION("Scorpion", SubTypeSet.CreatureType),
     SCOUT("Scout", SubTypeSet.CreatureType),
     SCULPTURE("Sculpture", SubTypeSet.CreatureType),
+    SEAL("Seal", SubTypeSet.CreatureType),
     SERF("Serf", SubTypeSet.CreatureType),
     SERPENT("Serpent", SubTypeSet.CreatureType),
-    SEAL("Seal", SubTypeSet.CreatureType),
     SERVO("Servo", SubTypeSet.CreatureType),
     SHADE("Shade", SubTypeSet.CreatureType),
     SHAMAN("Shaman", SubTypeSet.CreatureType),
@@ -409,7 +414,6 @@ public enum SubType {
     SQUIRREL("Squirrel", SubTypeSet.CreatureType),
     STARFISH("Starfish", SubTypeSet.CreatureType),
     STARSHIP("Starship", SubTypeSet.CreatureType, true), // Star Wars
-    STONE("Stone", SubTypeSet.ArtifactType),
     SULLUSTAN("Sullustan", SubTypeSet.CreatureType, true), // Star Wars
     SURRAKAR("Surrakar", SubTypeSet.CreatureType),
     SURVIVOR("Survivor", SubTypeSet.CreatureType),
@@ -468,7 +472,8 @@ public enum SubType {
     ZABRAK("Zabrak", SubTypeSet.CreatureType, true), // Star Wars
     ZOMBIE("Zombie", SubTypeSet.CreatureType),
     ZUBERA("Zubera", SubTypeSet.CreatureType),
-    // Planeswalker
+
+    // 205.3j Planeswalkers have their own unique set of subtypes
     AJANI("Ajani", SubTypeSet.PlaneswalkerType),
     AMINATOU("Aminatou", SubTypeSet.PlaneswalkerType),
     ANGRATH("Angrath", SubTypeSet.PlaneswalkerType),
