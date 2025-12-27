@@ -30,13 +30,13 @@ public enum SubType {
     GATE("Gate", SubTypeSet.NonBasicLandType),
     LAIR("Lair", SubTypeSet.NonBasicLandType),
     LOCUS("Locus", SubTypeSet.NonBasicLandType),
-    PLANET("Planet", SubTypeSet.NonBasicLandType),
-    SPHERE("Sphere", SubTypeSet.NonBasicLandType),
-    URZAS("Urza's", SubTypeSet.NonBasicLandType),
     MINE("Mine", SubTypeSet.NonBasicLandType),
+    PLANET("Planet", SubTypeSet.NonBasicLandType),
     POWER_PLANT("Power-Plant", SubTypeSet.NonBasicLandType),
+    SPHERE("Sphere", SubTypeSet.NonBasicLandType),
     TOWER("Tower", SubTypeSet.NonBasicLandType),
     TOWN("Town", SubTypeSet.NonBasicLandType),
+    URZAS("Urza's", SubTypeSet.NonBasicLandType),
 
     // 205.3h Enchantments have their own unique set of subtypes; these subtypes are called enchantment types.
     AURA("Aura", SubTypeSet.EnchantmentType),
@@ -134,8 +134,8 @@ public enum SubType {
     CAT("Cat", SubTypeSet.CreatureType),
     CENTAUR("Centaur", SubTypeSet.CreatureType),
     CEREAN("Cerean", SubTypeSet.CreatureType, true), // Star Wars
-    CHIMERA("Chimera", SubTypeSet.CreatureType),
     CHILD("Child", SubTypeSet.CreatureType),
+    CHIMERA("Chimera", SubTypeSet.CreatureType),
     CHISS("Chiss", SubTypeSet.CreatureType, true),
     CITIZEN("Citizen", SubTypeSet.CreatureType),
     CLAMFOLK("Clamfolk", SubTypeSet.CreatureType, true), // Unglued
@@ -349,8 +349,8 @@ public enum SubType {
     PROCESSOR("Processor", SubTypeSet.CreatureType),
     PUREBLOOD("Pureblood", SubTypeSet.CreatureType, true),
     // Q
-    QUARREN("Quarren", SubTypeSet.CreatureType, true), // Star Wars
     QU("Qu", SubTypeSet.CreatureType),
+    QUARREN("Quarren", SubTypeSet.CreatureType, true), // Star Wars
     // R
     RABBIT("Rabbit", SubTypeSet.CreatureType),
     RACCOON("Raccoon", SubTypeSet.CreatureType),
@@ -377,9 +377,9 @@ public enum SubType {
     SCORPION("Scorpion", SubTypeSet.CreatureType),
     SCOUT("Scout", SubTypeSet.CreatureType),
     SCULPTURE("Sculpture", SubTypeSet.CreatureType),
+    SEAL("Seal", SubTypeSet.CreatureType),
     SERF("Serf", SubTypeSet.CreatureType),
     SERPENT("Serpent", SubTypeSet.CreatureType),
-    SEAL("Seal", SubTypeSet.CreatureType),
     SERVO("Servo", SubTypeSet.CreatureType),
     SHADE("Shade", SubTypeSet.CreatureType),
     SHAMAN("Shaman", SubTypeSet.CreatureType),
