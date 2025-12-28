@@ -59,8 +59,8 @@ public final class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Ajani's Comrade", 187, Rarity.UNCOMMON, mage.cards.a.AjanisComrade.class));
         cards.add(new SetCardInfo("Ajani, Valiant Protector", 185, Rarity.MYTHIC, mage.cards.a.AjaniValiantProtector.class));
         cards.add(new SetCardInfo("Alley Evasion", 6, Rarity.COMMON, mage.cards.a.AlleyEvasion.class));
-        cards.add(new SetCardInfo("Alley Strangler", "52+", Rarity.COMMON, mage.cards.a.AlleyStrangler.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Alley Strangler", 52, Rarity.COMMON, mage.cards.a.AlleyStrangler.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Alley Strangler", "52+", Rarity.COMMON, mage.cards.a.AlleyStrangler.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Audacious Infiltrator", 7, Rarity.COMMON, mage.cards.a.AudaciousInfiltrator.class));
         cards.add(new SetCardInfo("Augmenting Automaton", 143, Rarity.COMMON, mage.cards.a.AugmentingAutomaton.class));
         cards.add(new SetCardInfo("Baral's Expertise", 29, Rarity.RARE, mage.cards.b.BaralsExpertise.class));
@@ -83,8 +83,8 @@ public final class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Daredevil Dragster", 149, Rarity.UNCOMMON, mage.cards.d.DaredevilDragster.class));
         cards.add(new SetCardInfo("Daring Demolition", 55, Rarity.COMMON, mage.cards.d.DaringDemolition.class));
         cards.add(new SetCardInfo("Dark Intimations", 128, Rarity.RARE, mage.cards.d.DarkIntimations.class));
-        cards.add(new SetCardInfo("Dawnfeather Eagle", "14+", Rarity.COMMON, mage.cards.d.DawnfeatherEagle.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dawnfeather Eagle", 14, Rarity.COMMON, mage.cards.d.DawnfeatherEagle.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Dawnfeather Eagle", "14+", Rarity.COMMON, mage.cards.d.DawnfeatherEagle.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Deadeye Harpooner", 15, Rarity.UNCOMMON, mage.cards.d.DeadeyeHarpooner.class));
         cards.add(new SetCardInfo("Decommission", 16, Rarity.COMMON, mage.cards.d.Decommission.class));
         cards.add(new SetCardInfo("Defiant Salvager", 56, Rarity.COMMON, mage.cards.d.DefiantSalvager.class));
@@ -232,8 +232,8 @@ public final class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Whir of Invention", 49, Rarity.RARE, mage.cards.w.WhirOfInvention.class));
         cards.add(new SetCardInfo("Wind-Kin Raiders", 50, Rarity.UNCOMMON, mage.cards.w.WindKinRaiders.class));
         cards.add(new SetCardInfo("Winding Constrictor", 140, Rarity.UNCOMMON, mage.cards.w.WindingConstrictor.class));
-        cards.add(new SetCardInfo("Wrangle", "101+", Rarity.COMMON, mage.cards.w.Wrangle.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wrangle", 101, Rarity.COMMON, mage.cards.w.Wrangle.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Wrangle", "101+", Rarity.COMMON, mage.cards.w.Wrangle.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Yahenni's Expertise", 75, Rarity.RARE, mage.cards.y.YahennisExpertise.class));
         cards.add(new SetCardInfo("Yahenni, Undying Partisan", 74, Rarity.RARE, mage.cards.y.YahenniUndyingPartisan.class));
     }
