@@ -109,8 +109,8 @@ public final class AlaraReborn extends ExpansionSet {
         cards.add(new SetCardInfo("Madrush Cyclops", 119, Rarity.RARE, mage.cards.m.MadrushCyclops.class));
         cards.add(new SetCardInfo("Maelstrom Nexus", 130, Rarity.MYTHIC, mage.cards.m.MaelstromNexus.class));
         cards.add(new SetCardInfo("Maelstrom Pulse", 92, Rarity.RARE, mage.cards.m.MaelstromPulse.class));
-        cards.add(new SetCardInfo("Magefire Wings", 88, Rarity.COMMON, mage.cards.m.MagefireWings.class));
         cards.add(new SetCardInfo("Mage Slayer", 57, Rarity.UNCOMMON, mage.cards.m.MageSlayer.class));
+        cards.add(new SetCardInfo("Magefire Wings", 88, Rarity.COMMON, mage.cards.m.MagefireWings.class));
         cards.add(new SetCardInfo("Marisi's Twinclaws", 140, Rarity.UNCOMMON, mage.cards.m.MarisisTwinclaws.class));
         cards.add(new SetCardInfo("Marrow Chomper", 93, Rarity.UNCOMMON, mage.cards.m.MarrowChomper.class));
         cards.add(new SetCardInfo("Mask of Riddles", 25, Rarity.UNCOMMON, mage.cards.m.MaskOfRiddles.class));
@@ -143,8 +143,8 @@ public final class AlaraReborn extends ExpansionSet {
         cards.add(new SetCardInfo("Sewn-Eye Drake", 135, Rarity.COMMON, mage.cards.s.SewnEyeDrake.class));
         cards.add(new SetCardInfo("Shield of the Righteous", 11, Rarity.UNCOMMON, mage.cards.s.ShieldOfTheRighteous.class));
         cards.add(new SetCardInfo("Sigil Captain", 77, Rarity.UNCOMMON, mage.cards.s.SigilCaptain.class));
-        cards.add(new SetCardInfo("Sigiled Behemoth", 79, Rarity.COMMON, mage.cards.s.SigiledBehemoth.class));
         cards.add(new SetCardInfo("Sigil of the Nayan Gods", 78, Rarity.COMMON, mage.cards.s.SigilOfTheNayanGods.class));
+        cards.add(new SetCardInfo("Sigiled Behemoth", 79, Rarity.COMMON, mage.cards.s.SigiledBehemoth.class));
         cards.add(new SetCardInfo("Singe-Mind Ogre", 45, Rarity.COMMON, mage.cards.s.SingeMindOgre.class));
         cards.add(new SetCardInfo("Skyclaw Thrash", 89, Rarity.UNCOMMON, mage.cards.s.SkyclawThrash.class));
         cards.add(new SetCardInfo("Slave of Bolas", 136, Rarity.UNCOMMON, mage.cards.s.SlaveOfBolas.class));
