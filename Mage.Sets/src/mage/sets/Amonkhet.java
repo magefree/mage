@@ -62,9 +62,9 @@ public final class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Bloodlust Inciter", 120, Rarity.COMMON, mage.cards.b.BloodlustInciter.class));
         cards.add(new SetCardInfo("Bloodrage Brawler", 121, Rarity.UNCOMMON, mage.cards.b.BloodrageBrawler.class));
         cards.add(new SetCardInfo("Bone Picker", 81, Rarity.UNCOMMON, mage.cards.b.BonePicker.class));
-        cards.add(new SetCardInfo("Bounty of the Luxa", 196, Rarity.RARE, mage.cards.b.BountyOfTheLuxa.class));
-        cards.add(new SetCardInfo("Bontu's Monument", 225, Rarity.UNCOMMON, mage.cards.b.BontusMonument.class));
         cards.add(new SetCardInfo("Bontu the Glorified", 82, Rarity.MYTHIC, mage.cards.b.BontuTheGlorified.class));
+        cards.add(new SetCardInfo("Bontu's Monument", 225, Rarity.UNCOMMON, mage.cards.b.BontusMonument.class));
+        cards.add(new SetCardInfo("Bounty of the Luxa", 196, Rarity.RARE, mage.cards.b.BountyOfTheLuxa.class));
         cards.add(new SetCardInfo("Brute Strength", 122, Rarity.COMMON, mage.cards.b.BruteStrength.class));
         cards.add(new SetCardInfo("By Force", 123, Rarity.UNCOMMON, mage.cards.b.ByForce.class));
         cards.add(new SetCardInfo("Cancel", 44, Rarity.COMMON, mage.cards.c.Cancel.class));
@@ -89,8 +89,8 @@ public final class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Consuming Fervor", 126, Rarity.UNCOMMON, mage.cards.c.ConsumingFervor.class));
         cards.add(new SetCardInfo("Cradle of the Accursed", 241, Rarity.COMMON, mage.cards.c.CradleOfTheAccursed.class));
         cards.add(new SetCardInfo("Crocodile of the Crossing", 162, Rarity.UNCOMMON, mage.cards.c.CrocodileOfTheCrossing.class));
-        cards.add(new SetCardInfo("Cryptic Serpent", 48, Rarity.UNCOMMON, mage.cards.c.CrypticSerpent.class));
         cards.add(new SetCardInfo("Cruel Reality", 84, Rarity.MYTHIC, mage.cards.c.CruelReality.class));
+        cards.add(new SetCardInfo("Cryptic Serpent", 48, Rarity.UNCOMMON, mage.cards.c.CrypticSerpent.class));
         cards.add(new SetCardInfo("Curator of Mysteries", 49, Rarity.RARE, mage.cards.c.CuratorOfMysteries.class));
         cards.add(new SetCardInfo("Cursed Minotaur", 85, Rarity.COMMON, mage.cards.c.CursedMinotaur.class));
         cards.add(new SetCardInfo("Cut // Ribbons", 223, Rarity.RARE, mage.cards.c.CutRibbons.class));
@@ -229,7 +229,6 @@ public final class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Pathmaker Initiate", 146, Rarity.COMMON, mage.cards.p.PathmakerInitiate.class));
         cards.add(new SetCardInfo("Pitiless Vizier", 103, Rarity.COMMON, mage.cards.p.PitilessVizier.class));
         cards.add(new SetCardInfo("Plague Belcher", 104, Rarity.RARE, mage.cards.p.PlagueBelcher.class));
-        cards.add(new SetCardInfo("Pyramid of the Pantheon", 235, Rarity.RARE, mage.cards.p.PyramidOfThePantheon.class));
         cards.add(new SetCardInfo("Plains", 250, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Plains", 255, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 256, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
@@ -240,14 +239,15 @@ public final class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Prowling Serpopard", 180, Rarity.RARE, mage.cards.p.ProwlingSerpopard.class));
         cards.add(new SetCardInfo("Pull from Tomorrow", 65, Rarity.RARE, mage.cards.p.PullFromTomorrow.class));
         cards.add(new SetCardInfo("Pursue Glory", 147, Rarity.COMMON, mage.cards.p.PursueGlory.class));
+        cards.add(new SetCardInfo("Pyramid of the Pantheon", 235, Rarity.RARE, mage.cards.p.PyramidOfThePantheon.class));
         cards.add(new SetCardInfo("Quarry Hauler", 181, Rarity.COMMON, mage.cards.q.QuarryHauler.class));
         cards.add(new SetCardInfo("Rags // Riches", 222, Rarity.RARE, mage.cards.r.RagsRiches.class));
         cards.add(new SetCardInfo("Reduce // Rubble", 216, Rarity.UNCOMMON, mage.cards.r.ReduceRubble.class));
         cards.add(new SetCardInfo("Regal Caracal", 24, Rarity.RARE, mage.cards.r.RegalCaracal.class));
         cards.add(new SetCardInfo("Renewed Faith", 25, Rarity.UNCOMMON, mage.cards.r.RenewedFaith.class));
         cards.add(new SetCardInfo("Rhet-Crop Spearmaster", 26, Rarity.COMMON, mage.cards.r.RhetCropSpearmaster.class));
-        cards.add(new SetCardInfo("Rhonas's Monument", 236, Rarity.UNCOMMON, mage.cards.r.RhonassMonument.class));
         cards.add(new SetCardInfo("Rhonas the Indomitable", 182, Rarity.MYTHIC, mage.cards.r.RhonasTheIndomitable.class));
+        cards.add(new SetCardInfo("Rhonas's Monument", 236, Rarity.UNCOMMON, mage.cards.r.RhonassMonument.class));
         cards.add(new SetCardInfo("River Serpent", 66, Rarity.COMMON, mage.cards.r.RiverSerpent.class));
         cards.add(new SetCardInfo("Ruthless Sniper", 105, Rarity.UNCOMMON, mage.cards.r.RuthlessSniper.class));
         cards.add(new SetCardInfo("Sacred Cat", 27, Rarity.COMMON, mage.cards.s.SacredCat.class));
@@ -313,8 +313,8 @@ public final class Amonkhet extends ExpansionSet {
         cards.add(new SetCardInfo("Vizier of Deferment", 37, Rarity.UNCOMMON, mage.cards.v.VizierOfDeferment.class));
         cards.add(new SetCardInfo("Vizier of Many Faces", 74, Rarity.RARE, mage.cards.v.VizierOfManyFaces.class));
         cards.add(new SetCardInfo("Vizier of Remedies", 38, Rarity.UNCOMMON, mage.cards.v.VizierOfRemedies.class));
-        cards.add(new SetCardInfo("Vizier of Tumbling Sands", 75, Rarity.UNCOMMON, mage.cards.v.VizierOfTumblingSands.class));
         cards.add(new SetCardInfo("Vizier of the Menagerie", 192, Rarity.MYTHIC, mage.cards.v.VizierOfTheMenagerie.class));
+        cards.add(new SetCardInfo("Vizier of Tumbling Sands", 75, Rarity.UNCOMMON, mage.cards.v.VizierOfTumblingSands.class));
         cards.add(new SetCardInfo("Wander in Death", 115, Rarity.COMMON, mage.cards.w.WanderInDeath.class));
         cards.add(new SetCardInfo("Warfire Javelineer", 155, Rarity.UNCOMMON, mage.cards.w.WarfireJavelineer.class));
         cards.add(new SetCardInfo("Wasteland Scorpion", 116, Rarity.COMMON, mage.cards.w.WastelandScorpion.class));
