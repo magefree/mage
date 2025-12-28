@@ -17,7 +17,7 @@ public class AmonkhetRemastered extends ExpansionSet {
 
     private AmonkhetRemastered() {
         super("Amonkhet Remastered", "AKR", ExpansionSet.buildDate(2020, 8, 13), SetType.MAGIC_ARENA);
-        this.enableArenaBooster(338); // #339 Regal Caracal is top-boxer, not in booster
+        this.enableArenaBooster(338); // #339 Regal Caracal is box topper, not in booster
 
         cards.add(new SetCardInfo("Abandoned Sarcophagus", 268, Rarity.RARE, mage.cards.a.AbandonedSarcophagus.class));
         cards.add(new SetCardInfo("Abrade", 136, Rarity.UNCOMMON, mage.cards.a.Abrade.class));
