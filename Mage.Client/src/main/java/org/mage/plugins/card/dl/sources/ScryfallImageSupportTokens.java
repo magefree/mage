@@ -2037,6 +2037,7 @@ public class ScryfallImageSupportTokens {
             put("MOC/Vampire Knight", "https://api.scryfall.com/cards/tmoc/20/en?format=image");
             put("MOC/Warrior", "https://api.scryfall.com/cards/tmoc/10/en?format=image");
             put("MOC/Zombie Knight", "https://api.scryfall.com/cards/tmoc/21/en?format=image");
+            put("MOC/Jund", "https://api.scryfall.com/cards/moc/148/en?format=image");
 
             // ODY
             put("ODY/Bear", "https://api.scryfall.com/cards/mpr/7/en?format=image");

@@ -195,7 +195,7 @@
 #|Generate|PLANE:TODO|Plane - Inys Haen|||InysHaenPlane|
 #|Generate|PLANE:TODO|Plane - Isle of Vesuva|||IsleOfVesuvaPlane|
 #|Generate|PLANE:TODO|Plane - Izzet Steam Maze|||IzzetSteamMazePlane|
-#|Generate|PLANE:TODO|Plane - Jund|||JundPlane|
+|Generate|PLANE:MOC|Plane - Jund|||JundPlane|
 #|Generate|PLANE:TODO|Plane - Kerblam! Warehouse|||KerblamWarehousePlane|
 #|Generate|PLANE:TODO|Plane - Kessig|||KessigPlane|
 #|Generate|PLANE:TODO|Plane - Ketria|||KetriaPlane|
