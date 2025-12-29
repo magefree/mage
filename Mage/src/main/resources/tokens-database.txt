@@ -157,24 +157,142 @@
 |Generate|PLANE:PCA|Plane - Academy at Tolaria West|||AcademyAtTolariaWestPlane|
 |Generate|PLANE:PCA|Plane - Agyrem|||AgyremPlane|
 |Generate|PLANE:PCA|Plane - Akoum|||AkoumPlane|
+#|Generate|PLANE:TODO|Plane - Amy's Home|||AmysHomePlane|
+#|Generate|PLANE:TODO|Plane - Antarctic Research Base|||AntarcticResearchBasePlane|
+#|Generate|PLANE:TODO|Plane - Aplan Mortarium|||AplanMortariumPlane|
+#|Generate|PLANE:TODO|Plane - Aretopolis|||AretopolisPlane|
 |Generate|PLANE:PCA|Plane - Astral Arena|||AstralArenaPlane|
+#|Generate|PLANE:TODO|Plane - Bad Wolf Bay|||BadWolfBayPlane|
 |Generate|PLANE:PCA|Plane - Bant|||BantPlane|
+#|Generate|PLANE:TODO|Plane - Besieged Viking Village|||BesiegedVikingVillagePlane|
+#|Generate|PLANE:TODO|Plane - Bloodhill Bastion|||BloodhillBastionPlane|
+#|Generate|PLANE:TODO|Plane - Bowie Base One|||BowieBaseOnePlane|
+#|Generate|PLANE:TODO|Plane - Celestine Reef|||CelestineReefPlane|
+#|Generate|PLANE:TODO|Plane - City of the Daleks|||CityOfTheDaleksPlane|
+#|Generate|PLANE:TODO|Plane - Cliffside Market|||CliffsideMarketPlane|
+#|Generate|PLANE:TODO|Plane - Coal Hill School|||CoalHillSchoolPlane|
+#|Generate|PLANE:TODO|Plane - Dalek Intensive Care|||DalekIntensiveCarePlane|
 |Generate|PLANE:PCA|Plane - Edge of Malacol|||EdgeOfMalacolPlane|
+#|Generate|PLANE:TODO|Plane - Eloren Wilds|||ElorenWildsPlane|
+#|Generate|PLANE:TODO|Plane - Enigma Ridges|||EnigmaRidgesPlane|
+#|Generate|PLANE:TODO|Plane - Esper|||EsperPlane|
 |Generate|PLANE:PCA|Plane - Feeding Grounds|||FeedingGroundsPlane|
 |Generate|PLANE:PCA|Plane - Fields of Summer|||FieldsOfSummerPlane|
+#|Generate|PLANE:TODO|Plane - Furnace Layer|||FurnaceLayerPlane|
+#|Generate|PLANE:TODO|Plane - Gardens of Tranquil Repose|||GardensOfTranquilReposePlane|
+#|Generate|PLANE:TODO|Plane - Gavony|||GavonyPlane|
+#|Generate|PLANE:TODO|Plane - Ghirapur|||GhirapurPlane|
+#|Generate|PLANE:TODO|Plane - Glen Elendra|||GlenElendraPlane|
+#|Generate|PLANE:TODO|Plane - Glimmervoid Basin|||GlimmervoidBasinPlane|
+#|Generate|PLANE:TODO|Plane - Goldmeadow|||GoldmeadowPlane|
+#|Generate|PLANE:TODO|Plane - Grand Ossuary|||GrandOssuaryPlane|
+#|Generate|PLANE:TODO|Plane - Grixis|||GrixisPlane|
+#|Generate|PLANE:TODO|Plane - Grove of the Dreampods|||GroveOfTheDreampodsPlane|
 |Generate|PLANE:PCA|Plane - Hedron Fields of Agadeem|||HedronFieldsOfAgadeemPlane|
+#|Generate|PLANE:TODO|Plane - Horizon Boughs|||HorizonBoughsPlane|
+#|Generate|PLANE:TODO|Plane - Hotel of Fears|||HotelOfFearsPlane|
+#|Generate|PLANE:TODO|Plane - Immersturm|||ImmersturmPlane|
+#|Generate|PLANE:TODO|Plane - Inys Haen|||InysHaenPlane|
+#|Generate|PLANE:TODO|Plane - Isle of Vesuva|||IsleOfVesuvaPlane|
+#|Generate|PLANE:TODO|Plane - Izzet Steam Maze|||IzzetSteamMazePlane|
+#|Generate|PLANE:TODO|Plane - Jund|||JundPlane|
+#|Generate|PLANE:TODO|Plane - Kerblam! Warehouse|||KerblamWarehousePlane|
+#|Generate|PLANE:TODO|Plane - Kessig|||KessigPlane|
+#|Generate|PLANE:TODO|Plane - Ketria|||KetriaPlane|
+#|Generate|PLANE:TODO|Plane - Kharasha Foothills|||KharashaFoothillsPlane|
+#|Generate|PLANE:TODO|Plane - Kilnspire District|||KilnspireDistrictPlane|
+#|Generate|PLANE:TODO|Plane - Krosa|||KrosaPlane|
+#|Generate|PLANE:TODO|Plane - Lair of the Ashen Idol|||LairOfTheAshenIdolPlane|
+#|Generate|PLANE:TODO|Plane - Lake Silencio|||LakeSilencioPlane|
 |Generate|PLANE:PCA|Plane - Lethe Lake|||LetheLakePlane|
+#|Generate|PLANE:TODO|Plane - Littjara|||LittjaraPlane|
+#|Generate|PLANE:TODO|Plane - Llanowar|||LlanowarPlane|
+#|Generate|PLANE:TODO|Plane - Megaflora Jungle|||MegafloraJunglePlane|
+#|Generate|PLANE:TODO|Plane - Minamo|||MinamoPlane|
+#|Generate|PLANE:TODO|Plane - Mirrored Depths|||MirroredDepthsPlane|
+#|Generate|PLANE:TODO|Plane - Mondassian Colony Ship|||MondassianColonyShipPlane|
+#|Generate|PLANE:TODO|Plane - Mount Keralia|||MountKeraliaPlane|
+#|Generate|PLANE:TODO|Plane - Murasa|||MurasaPlane|
+#|Generate|PLANE:TODO|Plane - Naar Isle|||NaarIslePlane|
+#|Generate|PLANE:TODO|Plane - Naktamun|||NaktamunPlane|
 |Generate|PLANE:PCA|Plane - Naya|||NayaPlane|
+#|Generate|PLANE:TODO|Plane - Nephalia|||NephaliaPlane|
+#|Generate|PLANE:TODO|Plane - New Argive|||NewArgivePlane|
+#|Generate|PLANE:TODO|Plane - New New York|||NewNewYorkPlane|
+#|Generate|PLANE:TODO|Plane - Norn's Dominion|||NornsDominionPlane|
+#|Generate|PLANE:TODO|Plane - Norn's Seedcore|||NornsSeedcorePlane|
+#|Generate|PLANE:TODO|Plane - North Pole Research Base|||NorthPoleResearchBasePlane|
+#|Generate|PLANE:TODO|Plane - Nyx|||NyxPlane|
+#|Generate|PLANE:TODO|Plane - Onakke Catacomb|||OnakkeCatacombPlane|
+#|Generate|PLANE:TODO|Plane - Ood Sphere|||OodSpherePlane|
+#|Generate|PLANE:TODO|Plane - Orochi Colony|||OrochiColonyPlane|
+#|Generate|PLANE:TODO|Plane - Orzhova|||OrzhovaPlane|
+#|Generate|PLANE:TODO|Plane - Otaria|||OtariaPlane|
+#|Generate|PLANE:TODO|Plane - Paliano|||PalianoPlane|
 |Generate|PLANE:PCA|Plane - Panopticon|||PanopticonPlane|
+#|Generate|PLANE:TODO|Plane - Pompeii|||PompeiiPlane|
+#|Generate|PLANE:TODO|Plane - Pools of Becoming|||PoolsOfBecomingPlane|
+#|Generate|PLANE:TODO|Plane - Prahv|||PrahvPlane|
+#|Generate|PLANE:TODO|Plane - Prime Minister's Cabinet Room|||PrimeMinistersCabinetRoomPlane|
+#|Generate|PLANE:TODO|Plane - Quicksilver Sea|||QuicksilverSeaPlane|
+#|Generate|PLANE:TODO|Plane - Raven's Run|||RavensRunPlane|
+#|Generate|PLANE:TODO|Plane - Riptide Island|||RiptideIslandPlane|
+#|Generate|PLANE:TODO|Plane - Sanctum of Serra|||SanctumOfSerraPlane|
+#|Generate|PLANE:TODO|Plane - Sea of Sand|||SeaOfSandPlane|
+#|Generate|PLANE:TODO|Plane - Selesnya Loft Gardens|||SelesnyaLoftGardensPlane|
+#|Generate|PLANE:TODO|Plane - Shiv|||ShivPlane|
+#|Generate|PLANE:TODO|Plane - Singing Towers of Darillium|||SingingTowersOfDarilliumPlane|
+#|Generate|PLANE:TODO|Plane - Skybreen|||SkybreenPlane|
+#|Generate|PLANE:TODO|Plane - Sokenzan|||SokenzanPlane|
+#|Generate|PLANE:TODO|Plane - Spectrox Mines|||SpectroxMinesPlane|
+#|Generate|PLANE:TODO|Plane - Stairs to Infinity|||StairsToInfinityPlane|
+#|Generate|PLANE:TODO|Plane - Stensia|||StensiaPlane|
+#|Generate|PLANE:TODO|Plane - Stormcage Containment Facility|||StormcageContainmentFacilityPlane|
+#|Generate|PLANE:TODO|Plane - Strixhaven|||StrixhavenPlane|
+#|Generate|PLANE:TODO|Plane - Stronghold Furnace|||StrongholdFurnacePlane|
+#|Generate|PLANE:TODO|Plane - Takenuma|||TakenumaPlane|
+#|Generate|PLANE:TODO|Plane - Talon Gates|||TalonGatesPlane|
+#|Generate|PLANE:TODO|Plane - TARDIS Bay|||TARDISBayPlane|
 |Generate|PLANE:PCA|Plane - Tazeem|||TazeemPlane|
+#|Generate|PLANE:TODO|Plane - Tember City|||TemberCityPlane|
+#|Generate|PLANE:TODO|Plane - Temple of Atropos|||TempleOfAtroposPlane|
+#|Generate|PLANE:TODO|Plane - Ten Wizards Mountain|||TenWizardsMountainPlane|
+#|Generate|PLANE:TODO|Plane - The Aether Flues|||TheAetherFluesPlane|
+#|Generate|PLANE:TODO|Plane - The Caldaia|||TheCaldaiaPlane|
+#|Generate|PLANE:TODO|Plane - The Cave of Skulls|||TheCaveOfSkullsPlane|
+#|Generate|PLANE:TODO|Plane - The Cheetah Planet|||TheCheetahPlanetPlane|
 |Generate|PLANE:PCA|Plane - The Dark Barony|||TheDarkBaronyPlane|
+#|Generate|PLANE:TODO|Plane - The Dining Car|||TheDiningCarPlane|
+#|Generate|PLANE:TODO|Plane - The Doctor's Childhood Barn|||TheDoctorsChildhoodBarnPlane|
+#|Generate|PLANE:TODO|Plane - The Doctor's Tomb|||TheDoctorsTombPlane|
+#|Generate|PLANE:TODO|Plane - The Drum, Mining Facility|||TheDrumMiningFacilityPlane|
 |Generate|PLANE:PCA|Plane - The Eon Fog|||TheEonFogPlane|
+#|Generate|PLANE:TODO|Plane - The Fertile Lands of Saulvinia|||TheFertileLandsofSaulviniaPlane|
+#|Generate|PLANE:TODO|Plane - The Fourth Sphere|||TheFourthSpherePlane|
+#|Generate|PLANE:TODO|Plane - The Golden City of Orazca|||TheGoldenCityofOrazcaPlane|
+#|Generate|PLANE:TODO|Plane - The Great Aerie|||TheGreatAeriePlane|
 |Generate|PLANE:PCA|Plane - The Great Forest|||TheGreatForestPlane|
+#|Generate|PLANE:TODO|Plane - The Hippodrome|||TheHippodromePlane|
+#|Generate|PLANE:TODO|Plane - The Lux Foundation Library|||TheLuxFoundationLibraryPlane|
+#|Generate|PLANE:TODO|Plane - The Maelstrom|||TheMaelstromPlane|
+#|Generate|PLANE:TODO|Plane - The Matrix of Time|||TheMatrixOfTimePlane|
+#|Generate|PLANE:TODO|Plane - The Moonbase|||TheMoonbasePlane|
+#|Generate|PLANE:TODO|Plane - The Pit|||ThePitPlane|
+#|Generate|PLANE:TODO|Plane - The Pyramid of Mars|||ThePyramidOfMarsPlane|
+#|Generate|PLANE:TODO|Plane - The Western Cloud|||TheWesternCloudPlane|
+#|Generate|PLANE:TODO|Plane - The Wilds|||TheWildsPlane|
 |Generate|PLANE:PCA|Plane - The Zephyr Maze|||TheZephyrMazePlane|
+#|Generate|PLANE:TODO|Plane - Towashi|||TowashiPlane|
 |Generate|PLANE:PCA|Plane - Trail of the Mage-Rings|||TrailOfTheMageRingsPlane|
 |Generate|PLANE:PCA|Plane - Truga Jungle|||TrugaJunglePlane|
 |Generate|PLANE:PCA|Plane - Turri Island|||TurriIslandPlane|
+#|Generate|PLANE:TODO|Plane - Two Streams Facility|||TwoStreamsFacilityPlane|
 |Generate|PLANE:PCA|Plane - Undercity Reaches|||UndercityReachesPlane|
+#|Generate|PLANE:TODO|Plane - UNIT Headquarters|||UNITHeadquartersPlane|
+#|Generate|PLANE:TODO|Plane - Unyaro|||UnyaroPlane|
+#|Generate|PLANE:TODO|Plane - Valor's Reach|||ValorsReachPlane|
+#|Generate|PLANE:TODO|Plane - Velis Vel|||VelisVelPlane|
+#|Generate|PLANE:TODO|Plane - Windriddle Palaces|||WindriddlePalacesPlane|
 
 # ALL DUNGEONS
 # Usage hints:
