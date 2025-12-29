@@ -170,11 +170,11 @@
 |Generate|PLANE:PCA|Plane - The Dark Barony|||TheDarkBaronyPlane|
 |Generate|PLANE:PCA|Plane - The Eon Fog|||TheEonFogPlane|
 |Generate|PLANE:PCA|Plane - The Great Forest|||TheGreatForestPlane|
+|Generate|PLANE:PCA|Plane - The Zephyr Maze|||TheZephyrMazePlane|
+|Generate|PLANE:PCA|Plane - Trail of the Mage-Rings|||TrailOfTheMageRingsPlane|
 |Generate|PLANE:PCA|Plane - Truga Jungle|||TrugaJunglePlane|
 |Generate|PLANE:PCA|Plane - Turri Island|||TurriIslandPlane|
 |Generate|PLANE:PCA|Plane - Undercity Reaches|||UndercityReachesPlane|
-|Generate|PLANE:PCA|Plane - The Zephyr Maze|||TheZephyrMazePlane|
-|Generate|PLANE:PCA|Plane - Trail of the Mage-Rings|||TrailOfTheMageRingsPlane|
 
 # ALL DUNGEONS
 # Usage hints:
