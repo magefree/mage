@@ -1,7 +1,5 @@
 package mage.sets;
 
-import mage.ObjectColor;
-import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
