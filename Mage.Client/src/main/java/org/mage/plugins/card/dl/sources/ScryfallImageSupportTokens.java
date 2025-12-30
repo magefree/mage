@@ -2693,9 +2693,10 @@ public class ScryfallImageSupportTokens {
             put("TDM/Reliquary Dragon", "https://api.scryfall.com/cards/ttdm/15/en?format=image");
             put("TDM/Soldier/1", "https://api.scryfall.com/cards/ttdm/4/en?format=image");
             put("TDM/Soldier/2", "https://api.scryfall.com/cards/ttdm/5/en?format=image");
-            put("TDM/Spirit/1", "https://api.scryfall.com/cards/ttdm/9/en?format=image");
-            put("TDM/Spirit/2", "https://api.scryfall.com/cards/ttdm/6/en?format=image");
-            // TODO: 2/2 and 3/3 Spirit tokens (no relevant cards revealed, token not implemented)
+            put("TDM/Spirit/1", "https://api.scryfall.com/cards/ttdm/9/en?format=image"); // */*
+            put("TDM/Spirit/2", "https://api.scryfall.com/cards/ttdm/6/en?format=image"); // 1/1
+            put("TDM/Spirit/3", "https://api.scryfall.com/cards/ttdm/7/en?format=image"); // 2/2
+            put("TDM/Spirit/4", "https://api.scryfall.com/cards/ttdm/8/en?format=image"); // 3/3
             put("TDM/Treasure", "https://api.scryfall.com/cards/ttdm/16/en?format=image");
             put("TDM/Warrior", "https://api.scryfall.com/cards/ttdm/13/en?format=image");
             put("TDM/Zombie Druid", "https://api.scryfall.com/cards/ttdm/10/en?format=image");

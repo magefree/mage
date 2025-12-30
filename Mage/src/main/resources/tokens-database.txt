@@ -2733,8 +2733,8 @@
 |Generate|TOK:TDM|Soldier|2||Soldier22Token|
 |Generate|TOK:TDM|Spirit|1||SpiritXXToken|
 |Generate|TOK:TDM|Spirit|2||NoFlyingSpiritWhite11Token|
-# TODO: 2/2 Spirit (no relevant cards revealed, token not implemented)
-# TODO: 3/3 Spirit (no relevant cards revealed, token not implemented)
+|Generate|TOK:TDM|Spirit|3||NoFlyingSpiritWhite22Token|
+|Generate|TOK:TDM|Spirit|4||NoFlyingSpiritWhite33Token|
 |Generate|TOK:TDM|Treasure|||TreasureToken|
 |Generate|TOK:TDM|Warrior|||RedWarriorToken|
 |Generate|TOK:TDM|Zombie Druid|||ZombieDruidToken|
