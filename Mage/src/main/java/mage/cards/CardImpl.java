@@ -41,7 +41,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     protected UUID ownerId;
     protected Rarity rarity;
-    protected Class<? extends Card> secondSideCardClazz;
     protected Class<? extends Card> meldsWithClazz;
     protected Class<? extends MeldCard> meldsToClazz;
     protected MeldCard meldsToCard;
@@ -121,19 +120,8 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         ownerId = card.ownerId;
         rarity = card.rarity;
 
-        // TODO: wtf, do not copy card sides cause it must be re-created each time (see details in getSecondCardFace)
-        //  must be reworked to normal copy and workable transform without such magic
-
         nightCard = card.nightCard;
-        secondSideCardClazz = card.secondSideCardClazz;
-        secondSideCard = null; // will be set on first getSecondCardFace call if card has one
-        // TODO: temporary until cards tdfc cards are converted
-        //  can do normal copy after
-        if (card.secondSideCard instanceof DoubleFacedCardHalf) {
-            secondSideCard = card.secondSideCard.copy();
-        }
-        if (card.secondSideCard instanceof MockableCard) {
-            // workaround to support gui's mock cards
+        if (card.secondSideCard != null) {
             secondSideCard = card.secondSideCard.copy();
         }
 
@@ -667,27 +655,11 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         // If a spell or ability instructs a player to transform a permanent that
         // isn’t represented by a transforming token or a transforming double-faced
         // card, nothing happens.
-        return this.secondSideCardClazz != null || this.nightCard || this.secondSideCard != null;
+        return this.secondSideCard != null;
     }
 
     @Override
     public final Card getSecondCardFace() {
-        // init card side on first call
-        if (secondSideCardClazz == null && secondSideCard == null) {
-            return null;
-        }
-
-        if (secondSideCard == null) {
-            secondSideCard = initSecondSideCard(secondSideCardClazz);
-            if (secondSideCard != null && secondSideCard.getSpellAbility() != null) {
-                // TODO: wtf, why it set cast mode here?! Transform tests fails without it
-                //  must be reworked without that magic, also see CardImpl'constructor for copy code
-                secondSideCard.getSpellAbility().setSourceId(this.getId());
-                secondSideCard.getSpellAbility().setSpellAbilityType(SpellAbilityType.BASE_ALTERNATE);
-                secondSideCard.getSpellAbility().setSpellAbilityCastMode(SpellAbilityCastMode.TRANSFORMED);
-            }
-        }
-
         return secondSideCard;
     }
 

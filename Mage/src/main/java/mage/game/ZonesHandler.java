@@ -1,7 +1,6 @@
 package mage.game;
 
 import mage.abilities.Ability;
-import mage.abilities.keyword.TransformAbility;
 import mage.cards.*;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -91,8 +90,7 @@ public final class ZonesHandler {
                 Card card = game.getCard(info.event.getTargetId());
                 if (card instanceof DoubleFacedCard || card instanceof DoubleFacedCardHalf) {
                     boolean forceToMainSide = false;
-                    // TODO: move transform key or have some other identifier after tdfc rework
-                    Boolean enterTransformed = (Boolean) game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId());
+                    Boolean enterTransformed = (Boolean) game.getState().getValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + card.getId());
                     if (enterTransformed == null) {
                         enterTransformed = false;
                     }
@@ -296,7 +294,7 @@ public final class ZonesHandler {
                     game.getPermanentsEntering().remove(permanent.getId());
                     break;
                 default:
-                    throw new UnsupportedOperationException("to Zone " + toZone.toString() + " not supported yet");
+                    throw new UnsupportedOperationException("to Zone " + toZone + " not supported yet");
             }
         }
 
@@ -376,15 +374,13 @@ public final class ZonesHandler {
             isGoodToMove = true;
         } else if (event.getToZone().equals(Zone.BATTLEFIELD)) {
             // non-permanents can't move to battlefield
-            // TODO: possible bug with Nightbound, search all usage of getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED and insert additional check Ability.checkCard
+            // TODO: possible bug with Nightbound, search all usage of getValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED and insert additional check Ability.checkCard
             /*
-             * 712.14a. If a spell or ability puts a transforming double-faced card onto the battlefield "transformed"
-             * or "converted," it enters the battlefield with its back face up. If a player is instructed to put a card
-             * that isn't a transforming double-faced card onto the battlefield transformed or converted, that card stays in
-             * its current zone.
+             * 712.14a. If a spell or ability puts a double-faced card onto the battlefield "transformed" or "converted,"
+             * it enters the battlefield with its back face up. If a player is instructed to put a card that isn't a double-faced card
+             * onto the battlefield transformed or converted, that card stays in its current zone.
              */
-            // TODO: remove after tdfc rework
-            boolean wantToTransform = Boolean.TRUE.equals(game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId()));
+            boolean wantToTransform = Boolean.TRUE.equals(game.getState().getValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + card.getId()));
             if (wantToTransform && !(card instanceof DoubleFacedCardHalf)) {
                 isGoodToMove = card.isTransformable() && card.getSecondCardFace().isPermanent(game);
             } else {
