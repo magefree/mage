@@ -13,7 +13,6 @@ import mage.constants.Layer;
 import mage.constants.ManaType;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.ManaPool;
 import mage.players.Player;

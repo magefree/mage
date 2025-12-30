@@ -17,7 +17,6 @@ import mage.filter.common.FilterControlledEnchantmentPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterEnchantmentCard;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 

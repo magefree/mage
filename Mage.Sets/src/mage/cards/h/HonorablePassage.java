@@ -2,7 +2,6 @@ package mage.cards.h;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.common.PreventNextDamageFromChosenSourceToTargetEffect;
 import mage.cards.CardImpl;

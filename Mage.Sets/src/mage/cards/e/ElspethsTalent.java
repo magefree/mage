@@ -22,7 +22,6 @@ import mage.game.stack.StackObject;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetPlaneswalkerPermanent;
 
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 

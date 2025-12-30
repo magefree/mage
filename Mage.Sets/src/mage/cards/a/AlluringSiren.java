@@ -11,9 +11,7 @@ import mage.abilities.effects.common.combat.AttacksIfAbleTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 import static mage.filter.StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE;
 

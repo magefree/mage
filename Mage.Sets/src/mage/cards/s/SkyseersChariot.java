@@ -8,7 +8,6 @@ import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.ChooseACardNameEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
-import mage.abilities.effects.common.cost.SpellsCostIncreasingAllEffect;
 import mage.constants.*;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.CrewAbility;

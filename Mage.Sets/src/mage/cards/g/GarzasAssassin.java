@@ -14,13 +14,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
 
 import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK;

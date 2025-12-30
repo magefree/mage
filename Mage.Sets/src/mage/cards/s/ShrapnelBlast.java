@@ -8,7 +8,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterControlledArtifactPermanent;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetAnyTarget;
 
 /**

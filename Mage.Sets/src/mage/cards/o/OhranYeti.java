@@ -14,10 +14,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *

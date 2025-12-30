@@ -17,7 +17,6 @@ import mage.abilities.keyword.IndestructibleAbility;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ChosenSubtypePredicate;

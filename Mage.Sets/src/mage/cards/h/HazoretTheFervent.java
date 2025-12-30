@@ -20,7 +20,6 @@ import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 
 /**
  *

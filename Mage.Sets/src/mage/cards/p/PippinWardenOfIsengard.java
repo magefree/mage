@@ -21,7 +21,6 @@ import mage.constants.SuperType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.FoodToken;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 

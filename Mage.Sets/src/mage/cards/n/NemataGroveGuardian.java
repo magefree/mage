@@ -14,7 +14,6 @@ import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.SaprolingToken;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *

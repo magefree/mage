@@ -11,10 +11,8 @@ import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetCreaturePermanent;
 
 import static mage.filter.StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL;
 

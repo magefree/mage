@@ -29,7 +29,6 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetControlledPermanent;
 import mage.util.CardUtil;
 
 import java.util.Collection;

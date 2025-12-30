@@ -15,7 +15,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetOpponent;
 
 import java.util.UUID;

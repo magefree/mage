@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.FoodToken;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *

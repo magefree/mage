@@ -17,7 +17,6 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterPermanentOrSuspendedCard;
 import mage.game.Game;

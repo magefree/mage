@@ -16,7 +16,6 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.WatcherScope;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicate;

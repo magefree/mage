@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.ColoredManaSymbol;
-import mage.constants.Zone;
 import mage.game.permanent.token.FaerieToken;
 import mage.target.Target;
 import mage.target.common.TargetOpponent;

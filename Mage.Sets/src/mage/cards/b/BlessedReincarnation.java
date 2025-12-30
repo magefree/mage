@@ -9,13 +9,11 @@ import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Library;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 import static mage.filter.StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE;
 

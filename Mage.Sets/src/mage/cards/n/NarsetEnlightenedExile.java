@@ -21,7 +21,6 @@ import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.target.common.TargetCardInGraveyard;
 
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 

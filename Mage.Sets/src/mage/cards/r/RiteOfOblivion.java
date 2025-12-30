@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetNonlandPermanent;
 
 import java.util.UUID;

@@ -17,7 +17,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.permanent.token.KnightToken;
 import mage.target.common.TargetControlledCreaturePermanent;
 

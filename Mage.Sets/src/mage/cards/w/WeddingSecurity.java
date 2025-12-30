@@ -13,7 +13,6 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 

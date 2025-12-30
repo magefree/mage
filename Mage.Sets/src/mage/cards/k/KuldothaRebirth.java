@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.GoblinToken;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *

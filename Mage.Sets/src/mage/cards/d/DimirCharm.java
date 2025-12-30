@@ -22,7 +22,6 @@ import mage.target.TargetCard;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.target.TargetSpell;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *

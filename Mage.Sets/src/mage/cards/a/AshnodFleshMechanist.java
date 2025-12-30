@@ -19,7 +19,6 @@ import mage.filter.StaticFilters;
 import mage.game.permanent.token.AshnodZombieToken;
 import mage.game.permanent.token.PowerstoneToken;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 

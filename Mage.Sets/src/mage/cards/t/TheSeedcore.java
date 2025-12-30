@@ -21,7 +21,6 @@ import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
 import mage.game.Game;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 

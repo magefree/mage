@@ -15,7 +15,6 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterAttackingCreature;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.watchers.common.AttackedThisTurnWatcher;
 import java.util.UUID;
 
 /**

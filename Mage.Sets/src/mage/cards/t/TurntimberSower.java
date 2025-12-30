@@ -22,7 +22,6 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeGroupEvent;
 import mage.game.permanent.token.PlantToken;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 

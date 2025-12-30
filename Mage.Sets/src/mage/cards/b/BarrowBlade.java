@@ -2,7 +2,6 @@ package mage.cards.b;
 
 import java.util.UUID;
 
-import mage.abilities.common.BlocksOrBlockedAttachedTriggeredAbility;
 import mage.abilities.common.BlocksOrBlockedByCreatureAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;

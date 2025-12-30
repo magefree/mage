@@ -11,7 +11,6 @@ import mage.constants.CardType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.TargetSpell;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *

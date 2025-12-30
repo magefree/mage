@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.GoblinToken;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 

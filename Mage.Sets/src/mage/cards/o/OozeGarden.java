@@ -22,7 +22,6 @@ import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *

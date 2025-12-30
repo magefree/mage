@@ -12,7 +12,6 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *

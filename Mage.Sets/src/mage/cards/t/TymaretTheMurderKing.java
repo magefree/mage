@@ -17,7 +17,6 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.filter.StaticFilters;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**

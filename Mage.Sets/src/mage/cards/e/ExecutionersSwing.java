@@ -1,17 +1,12 @@
 package mage.cards.e;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
-import mage.MageObject;
-import mage.abilities.Ability;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;

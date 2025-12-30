@@ -19,7 +19,6 @@ import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetOpponent;
-import mage.target.targetpointer.FirstTargetPointer;
 import mage.target.targetpointer.SecondTargetPointer;
 import mage.watchers.common.AbilityResolvedWatcher;
 

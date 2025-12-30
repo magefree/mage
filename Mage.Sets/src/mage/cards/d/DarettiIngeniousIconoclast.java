@@ -16,7 +16,6 @@ import mage.filter.StaticFilters;
 import mage.game.permanent.token.DarettiConstructToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInGraveyardBattlefieldOrStack;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 

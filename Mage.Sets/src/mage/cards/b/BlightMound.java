@@ -12,12 +12,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AttackingPredicate;
-import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.Pest11GainLifeToken;
 
 import java.util.UUID;

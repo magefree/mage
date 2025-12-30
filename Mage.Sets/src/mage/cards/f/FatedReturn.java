@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInGraveyard;
 
 import java.util.UUID;

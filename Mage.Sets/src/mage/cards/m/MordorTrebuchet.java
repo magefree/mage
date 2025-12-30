@@ -1,15 +1,11 @@
 package mage.cards.m;
 
-import java.util.Objects;
-import java.util.Optional;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
-import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -17,12 +13,10 @@ import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.token.BallisticBoulder;
-import mage.game.permanent.token.PhyrexianHorrorRedToken;
 import mage.game.permanent.token.Token;
 import mage.target.targetpointer.FixedTargets;
 

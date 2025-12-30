@@ -16,8 +16,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.target.common.TargetControlledPermanent;
-import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
 

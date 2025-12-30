@@ -17,7 +17,6 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetOpponentOrPlaneswalker;
 
 import java.util.UUID;

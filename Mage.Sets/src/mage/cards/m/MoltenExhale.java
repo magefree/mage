@@ -2,9 +2,6 @@ package mage.cards.m;
 
 import mage.abilities.Ability;
 import mage.abilities.common.PayMoreToCastAsThoughtItHadFlashAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.CostImpl;
-import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.BeholdDragonCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;

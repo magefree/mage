@@ -6,7 +6,6 @@ import mage.abilities.costs.VariableCostImpl;
 import mage.abilities.costs.VariableCostType;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.costs.common.DiscardXTargetCost;
-import mage.abilities.costs.costadjusters.DiscardXCardsCostAdjuster;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.SacrificeAllEffect;

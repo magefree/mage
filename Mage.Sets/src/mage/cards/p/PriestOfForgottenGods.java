@@ -21,7 +21,6 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.filter.StaticFilters;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  * @author TheElk801

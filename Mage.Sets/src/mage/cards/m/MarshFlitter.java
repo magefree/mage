@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.GoblinRogueToken;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 

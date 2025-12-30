@@ -15,8 +15,6 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.WarriorVigilantToken;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *

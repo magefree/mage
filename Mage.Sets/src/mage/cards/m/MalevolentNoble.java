@@ -16,7 +16,6 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 

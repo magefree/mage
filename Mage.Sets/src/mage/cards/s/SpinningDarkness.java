@@ -18,12 +18,10 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK;
 

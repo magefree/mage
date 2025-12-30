@@ -14,13 +14,10 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetLandPermanent;
 import mage.target.common.TargetSacrifice;
 
 /**

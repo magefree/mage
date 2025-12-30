@@ -1,6 +1,5 @@
 package mage.cards.a;
 
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.OrCost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -9,7 +8,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreatureOrPlaneswalker;
 
 import java.util.UUID;

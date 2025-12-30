@@ -18,7 +18,6 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.SpiritWhiteToken;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 

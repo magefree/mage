@@ -20,7 +20,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.DefineByTriggerTargetAdjuster;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;

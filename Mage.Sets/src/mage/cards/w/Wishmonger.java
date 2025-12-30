@@ -22,7 +22,6 @@ import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.FilterObject;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;

@@ -18,7 +18,6 @@ import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 import java.util.List;
 import java.util.UUID;

@@ -18,7 +18,6 @@ import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.card.PutIntoGraveFromBattlefieldThisTurnPredicate;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.CardsPutIntoGraveyardWatcher;
 

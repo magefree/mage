@@ -2,7 +2,6 @@ package mage.cards.s;
 
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
-import mage.abilities.effects.common.DrawDiscardTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;

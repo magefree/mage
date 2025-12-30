@@ -18,12 +18,9 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.game.permanent.token.ThopterColorlessToken;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import static mage.filter.StaticFilters.FILTER_PERMANENT_ARTIFACT_CREATURE;

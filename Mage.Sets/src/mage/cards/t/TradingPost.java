@@ -15,12 +15,10 @@ import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.GoatToken;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCardInHand;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 

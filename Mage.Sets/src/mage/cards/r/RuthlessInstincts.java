@@ -19,7 +19,6 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.target.Target;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *

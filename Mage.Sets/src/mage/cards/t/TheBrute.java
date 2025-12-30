@@ -15,7 +15,6 @@ import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
 
 /**

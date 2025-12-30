@@ -15,7 +15,6 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.RhinoWarriorToken;
 import mage.players.Player;
 import mage.target.TargetCard;
-import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetSacrifice;
 

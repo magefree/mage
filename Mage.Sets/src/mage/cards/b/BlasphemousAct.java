@@ -2,13 +2,10 @@
 package mage.cards.b;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DamageAllEffect;
-import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
@@ -17,9 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.game.Game;
-import mage.players.Player;
-import mage.util.CardUtil;
 
 /**
  * @author nantuko

@@ -22,7 +22,6 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 

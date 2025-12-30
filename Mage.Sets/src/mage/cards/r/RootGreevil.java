@@ -15,7 +15,6 @@ import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;

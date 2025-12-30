@@ -21,7 +21,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
-import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetSacrifice;
 import mage.target.targetpointer.FixedTarget;

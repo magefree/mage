@@ -11,8 +11,6 @@ import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK;
 

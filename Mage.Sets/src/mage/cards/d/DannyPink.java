@@ -2,7 +2,6 @@ package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.keyword.MentorAbility;
 import mage.abilities.common.SimpleStaticAbility;

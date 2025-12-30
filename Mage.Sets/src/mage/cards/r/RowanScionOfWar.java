@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.util.CardUtil;
-import mage.watchers.common.PlayerLostLifeWatcher;
 
 import java.util.UUID;
 

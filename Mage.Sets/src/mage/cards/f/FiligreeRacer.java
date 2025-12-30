@@ -1,21 +1,15 @@
 package mage.cards.f;
 
-import java.util.Objects;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
-import mage.abilities.costs.SacrificeCost;
 import mage.abilities.costs.common.PayEnergyCost;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DoWhenCostPaid;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
-import mage.abilities.keyword.EscapeAbility;
-import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.keyword.JumpStartAbility;
 import mage.cards.Card;
 import mage.constants.*;
@@ -25,7 +19,6 @@ import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
-import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**

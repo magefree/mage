@@ -8,7 +8,6 @@ import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.XManaValueTargetAdjuster;
 
 import java.util.UUID;

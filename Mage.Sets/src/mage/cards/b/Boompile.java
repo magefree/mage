@@ -9,7 +9,6 @@ import mage.abilities.effects.common.FlipCoinEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.filter.common.FilterNonlandPermanent;
 
 /**

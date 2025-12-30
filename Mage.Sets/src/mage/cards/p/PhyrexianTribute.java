@@ -10,8 +10,6 @@ import mage.constants.CardType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetArtifactPermanent;
-import mage.target.common.TargetControlledPermanent;
-import mage.target.common.TargetSacrifice;
 
 /**
  *

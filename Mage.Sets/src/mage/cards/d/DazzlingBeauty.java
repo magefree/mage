@@ -14,7 +14,6 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.filter.predicate.permanent.BlockedPredicate;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 

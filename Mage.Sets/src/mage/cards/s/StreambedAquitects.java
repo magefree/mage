@@ -15,7 +15,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetLandPermanent;
 
 import java.util.UUID;

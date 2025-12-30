@@ -15,7 +15,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.StaticFilters;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 
 import java.util.UUID;

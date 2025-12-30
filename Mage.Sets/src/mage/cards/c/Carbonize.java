@@ -15,7 +15,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetAnyTarget;
 import mage.target.targetpointer.FixedTarget;
-import mage.watchers.common.DamagedByWatcher;
 
 import java.util.UUID;
 

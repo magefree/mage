@@ -23,7 +23,6 @@ import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.BlockingOrBlockedWatcher;
 
 import java.util.UUID;

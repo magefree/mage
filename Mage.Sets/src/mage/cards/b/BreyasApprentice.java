@@ -20,7 +20,6 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.token.ThopterColorlessToken;
 import mage.players.Player;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 

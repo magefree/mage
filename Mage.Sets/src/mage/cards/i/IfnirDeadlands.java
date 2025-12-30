@@ -18,7 +18,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 
 /**

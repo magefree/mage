@@ -15,7 +15,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreatureCard;
 import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
 

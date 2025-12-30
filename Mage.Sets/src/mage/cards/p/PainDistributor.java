@@ -21,7 +21,6 @@ import mage.game.permanent.token.TreasureToken;
 import mage.game.stack.StackObject;
 import mage.watchers.common.SpellsCastWatcher;
 
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 

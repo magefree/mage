@@ -10,7 +10,6 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.BearToken;
 import mage.target.common.TargetCardInYourGraveyard;

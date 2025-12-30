@@ -3,7 +3,6 @@ package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.keyword.DelveAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;

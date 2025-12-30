@@ -19,7 +19,6 @@ import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.permanent.token.TreasureToken;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *

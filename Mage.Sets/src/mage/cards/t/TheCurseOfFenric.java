@@ -22,7 +22,6 @@ import mage.game.permanent.token.Token;
 import mage.game.permanent.token.TokenImpl;
 import mage.target.Target;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.ForEachPlayerTargetsAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 

@@ -22,7 +22,6 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
 
 import static mage.filter.StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL;

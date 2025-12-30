@@ -21,7 +21,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.BloodToken;
 import mage.game.permanent.token.EdgarMarkovsCoffinVampireToken;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 

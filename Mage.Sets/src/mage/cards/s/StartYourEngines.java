@@ -2,16 +2,12 @@
 package mage.cards.s;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.VehiclesBecomeArtifactCreatureEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *

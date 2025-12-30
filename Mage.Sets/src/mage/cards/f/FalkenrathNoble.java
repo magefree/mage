@@ -2,7 +2,6 @@ package mage.cards.f;
 
 import mage.MageInt;
 import mage.MageObject;
-import mage.abilities.AbilityImpl;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;

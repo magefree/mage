@@ -15,7 +15,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SetTargetPointer;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.EnchantedPredicate;

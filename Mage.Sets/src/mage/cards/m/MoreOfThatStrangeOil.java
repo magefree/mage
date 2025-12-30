@@ -1,6 +1,5 @@
 package mage.cards.m;
 
-import mage.MageObject;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.counter.ProliferateEffect;
@@ -9,12 +8,8 @@ import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
-import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
-import mage.target.TargetPermanent;
 import mage.target.TargetSpell;
 
 import java.util.UUID;

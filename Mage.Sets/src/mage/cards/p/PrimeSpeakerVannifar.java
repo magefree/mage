@@ -18,7 +18,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
 

@@ -17,7 +17,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.IzoniInsectToken;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *

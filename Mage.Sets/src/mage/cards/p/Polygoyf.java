@@ -3,7 +3,6 @@ package mage.cards.p;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessPlusOneSourceEffect;
 import mage.constants.SubType;

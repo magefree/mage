@@ -15,7 +15,6 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 
 /**
  *

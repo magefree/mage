@@ -11,8 +11,6 @@ import mage.constants.CardType;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetControlledPermanent;
-import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
 

@@ -21,7 +21,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *

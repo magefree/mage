@@ -7,7 +7,6 @@ import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
@@ -16,7 +15,6 @@ import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetControlledPermanent;
 
-import java.util.Objects;
 import java.util.UUID;
 
 /**

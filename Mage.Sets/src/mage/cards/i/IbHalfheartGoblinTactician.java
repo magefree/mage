@@ -21,7 +21,6 @@ import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.GoblinToken;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *

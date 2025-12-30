@@ -12,8 +12,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.FoodToken;
-import mage.target.common.TargetControlledPermanent;
-import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
 

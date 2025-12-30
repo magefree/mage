@@ -23,7 +23,6 @@ import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.BlockingOrBlockedBySourcePredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
 

@@ -16,7 +16,6 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.FoodToken;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.Collection;
 import java.util.UUID;

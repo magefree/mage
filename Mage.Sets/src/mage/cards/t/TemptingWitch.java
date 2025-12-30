@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.FoodToken;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 

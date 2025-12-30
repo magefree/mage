@@ -2,8 +2,6 @@ package mage.cards.m;
 
 import mage.Mana;
 import mage.abilities.hint.ConditionHint;
-import mage.abilities.hint.ConditionTrueHint;
-import mage.abilities.hint.ValueConditionHint;
 import mage.abilities.triggers.BeginningOfDrawTriggeredAbility;
 import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;

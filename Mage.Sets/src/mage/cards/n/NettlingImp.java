@@ -20,7 +20,6 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.ControlledFromStartOfControllerTurnPredicate;
 import mage.game.Game;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;

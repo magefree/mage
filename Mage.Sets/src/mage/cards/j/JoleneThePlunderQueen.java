@@ -21,7 +21,6 @@ import mage.game.Game;
 import mage.game.combat.Combat;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.TreasureToken;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.Set;

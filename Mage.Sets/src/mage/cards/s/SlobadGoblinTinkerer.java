@@ -15,7 +15,6 @@ import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 

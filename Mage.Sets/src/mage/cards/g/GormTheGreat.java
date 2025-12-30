@@ -8,7 +8,6 @@ import mage.abilities.effects.common.combat.MustBeBlockedByAtLeastOneSourceEffec
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.abilities.keyword.PartnerWithAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;

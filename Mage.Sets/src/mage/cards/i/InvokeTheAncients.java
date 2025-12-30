@@ -16,7 +16,6 @@ import mage.game.permanent.token.Token;
 import mage.players.Player;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @author TheElk801

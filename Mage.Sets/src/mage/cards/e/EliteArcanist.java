@@ -5,7 +5,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.CostAdjuster;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.costadjusters.ImprintedManaValueXCostAdjuster;
 import mage.abilities.costs.mana.ManaCostsImpl;

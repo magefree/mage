@@ -13,10 +13,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.KithkinSoldierToken;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 

@@ -20,7 +20,6 @@ import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.target.Target;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *

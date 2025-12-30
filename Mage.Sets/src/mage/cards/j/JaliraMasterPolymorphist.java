@@ -16,7 +16,6 @@ import mage.constants.SuperType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
 

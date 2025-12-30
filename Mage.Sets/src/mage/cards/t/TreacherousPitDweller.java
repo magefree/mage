@@ -1,7 +1,6 @@
 package mage.cards.t;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldFromGraveyardTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;

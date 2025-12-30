@@ -10,7 +10,6 @@ import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
 

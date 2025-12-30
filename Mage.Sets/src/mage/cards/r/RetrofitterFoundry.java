@@ -11,12 +11,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.Construct4Token;
 import mage.game.permanent.token.ServoToken;
 import mage.game.permanent.token.ThopterColorlessToken;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 

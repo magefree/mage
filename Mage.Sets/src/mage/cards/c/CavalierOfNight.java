@@ -20,7 +20,6 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 
 import java.util.UUID;

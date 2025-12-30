@@ -23,7 +23,6 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.Objects;
 import java.util.UUID;

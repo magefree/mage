@@ -18,7 +18,6 @@ import mage.filter.predicate.mageobject.ToughnessPredicate;
 import mage.game.permanent.token.EldraziScionToken;
 import mage.target.TargetPermanent;
 import mage.target.TargetSpell;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *

@@ -8,7 +8,6 @@ import mage.abilities.effects.keyword.BolsterEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
 
 /**
  *

@@ -16,7 +16,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *

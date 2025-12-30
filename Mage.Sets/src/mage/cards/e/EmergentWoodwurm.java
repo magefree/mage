@@ -18,7 +18,6 @@ import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 

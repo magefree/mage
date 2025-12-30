@@ -21,7 +21,6 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetCardInOpponentsGraveyard;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 

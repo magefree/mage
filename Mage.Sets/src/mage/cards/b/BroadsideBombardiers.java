@@ -16,7 +16,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetAnyTarget;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  * @author jam736

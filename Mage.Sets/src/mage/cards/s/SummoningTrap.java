@@ -14,8 +14,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
-import mage.players.Player;
-import mage.target.TargetCard;
 import mage.watchers.Watcher;
 
 import java.util.HashSet;

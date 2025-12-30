@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.target.common.TargetAttackingCreature;
 import mage.target.common.TargetCardInASingleGraveyard;

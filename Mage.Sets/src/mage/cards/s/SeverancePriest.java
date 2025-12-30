@@ -19,7 +19,6 @@ import mage.game.Game;
 import mage.game.permanent.token.SpiritXXToken;
 import mage.players.Player;
 import mage.target.TargetCard;
-import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetOpponent;
 import mage.util.CardUtil;
 

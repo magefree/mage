@@ -13,7 +13,6 @@ import mage.game.Game;
 import mage.game.permanent.token.WhiteBlackSpiritToken;
 import mage.players.Player;
 import mage.target.TargetCard;
-import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetOpponent;
 
 import java.util.UUID;

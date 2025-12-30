@@ -22,7 +22,6 @@ import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.util.CardUtil;
 
-import java.util.Objects;
 import java.util.UUID;
 
 /**

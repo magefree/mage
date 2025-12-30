@@ -14,7 +14,6 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetAnyTarget;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 

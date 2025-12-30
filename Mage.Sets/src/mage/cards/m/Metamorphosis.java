@@ -16,7 +16,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *

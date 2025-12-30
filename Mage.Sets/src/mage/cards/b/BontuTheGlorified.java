@@ -24,7 +24,6 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetControlledPermanent;
 import mage.watchers.common.CreaturesDiedWatcher;
 
 import java.util.UUID;

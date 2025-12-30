@@ -15,7 +15,6 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
 import mage.util.functions.EmptyCopyApplier;
 
 import java.util.UUID;

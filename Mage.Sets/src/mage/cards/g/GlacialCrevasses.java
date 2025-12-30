@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *

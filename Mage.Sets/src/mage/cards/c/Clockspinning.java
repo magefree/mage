@@ -19,7 +19,6 @@ import mage.players.Player;
 import mage.target.common.TargetPermanentOrSuspendedCard;
 import mage.target.targetpointer.FixedTarget;
 
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;

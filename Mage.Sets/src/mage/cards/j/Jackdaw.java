@@ -4,9 +4,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.costs.common.DiscardHandCost;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.ArtifactYouControlCount;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.hint.common.ArtifactYouControlHint;
@@ -16,8 +14,6 @@ import mage.abilities.keyword.CrewAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledPermanent;
 
 /**
  * @author grimreap124

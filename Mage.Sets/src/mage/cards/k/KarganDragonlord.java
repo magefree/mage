@@ -19,7 +19,6 @@ import mage.cards.LevelerCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.Zone;
 
 /**
  *

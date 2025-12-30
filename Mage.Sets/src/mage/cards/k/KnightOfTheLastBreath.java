@@ -16,7 +16,6 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.WhiteBlackSpiritToken;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 

@@ -22,7 +22,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetEnchantmentPermanent;
 
 import java.util.UUID;

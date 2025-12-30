@@ -8,7 +8,6 @@ import mage.abilities.keyword.BuybackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.target.TargetSpell;
 import mage.target.common.TargetCardInHand;

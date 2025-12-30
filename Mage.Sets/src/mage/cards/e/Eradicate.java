@@ -5,9 +5,7 @@ import mage.abilities.effects.common.ExileTargetAndSearchGraveyardHandLibraryEff
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK;
 

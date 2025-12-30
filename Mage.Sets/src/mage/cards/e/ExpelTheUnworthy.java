@@ -1,7 +1,6 @@
 package mage.cards.e;
 
 import mage.abilities.Ability;
-import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.InfoEffect;

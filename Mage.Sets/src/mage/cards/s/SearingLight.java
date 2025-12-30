@@ -10,7 +10,6 @@ import mage.constants.ComparisonType;
 import mage.filter.common.FilterAttackingOrBlockingCreature;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *

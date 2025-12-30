@@ -18,7 +18,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.other.AnotherTargetPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 

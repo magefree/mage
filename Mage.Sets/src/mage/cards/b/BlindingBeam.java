@@ -17,7 +17,6 @@ import mage.constants.PhaseStep;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.turn.Step;
 import mage.players.Player;

@@ -1,15 +1,10 @@
 package mage.cards.e;
 
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LookLibraryControllerEffect;
 import mage.abilities.effects.common.counter.ProliferateEffect;
 import mage.cards.*;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.PutCards;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;

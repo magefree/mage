@@ -25,13 +25,11 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
-import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.target.common.TargetLandPermanent;
-import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
 /**

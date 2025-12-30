@@ -18,7 +18,6 @@ import mage.game.events.CreateTokenEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.FoodToken;
 import mage.game.permanent.token.Token;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *

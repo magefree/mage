@@ -22,7 +22,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.DependencyType;
 import mage.constants.Duration;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 

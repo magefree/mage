@@ -4,12 +4,9 @@ import java.util.UUID;
 
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SacrificeSourceTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.CompositeCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.ControllerSpeedCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;

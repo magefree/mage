@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.ComparisonType;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterEnchantmentPermanent;
 
 import java.util.UUID;

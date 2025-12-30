@@ -10,7 +10,6 @@ import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.stack.StackObject;

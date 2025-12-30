@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;

@@ -19,7 +19,6 @@ import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
-import mage.watchers.common.AttackedThisTurnWatcher;
 
 /**
  *

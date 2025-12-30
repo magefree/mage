@@ -4,11 +4,8 @@ import java.util.UUID;
 
 import mage.abilities.Mode;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.ExileThenReturnTargetEffect;
-import mage.abilities.effects.common.PhaseOutTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.abilities.effects.common.counter.ProliferateEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;

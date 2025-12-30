@@ -1,7 +1,6 @@
 package mage.cards.m;
 
 import mage.MageInt;
-import mage.abilities.Ability; // not sure about this line - think it is not needed
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;

@@ -16,7 +16,6 @@ import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.other.DamagedPlayerThisTurnPredicate;
-import mage.target.Target;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;

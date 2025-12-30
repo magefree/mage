@@ -16,7 +16,6 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.BatchEvent;
 import mage.game.events.DamagedEvent;
@@ -26,7 +25,6 @@ import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
 
 import java.util.UUID;

@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.token.CamaridToken;
 import mage.game.permanent.token.CitizenToken;

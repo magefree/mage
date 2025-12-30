@@ -22,7 +22,6 @@ import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.command.emblems.VraskaGolgariQueenEmblem;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *

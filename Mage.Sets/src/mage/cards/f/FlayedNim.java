@@ -1,7 +1,6 @@
 package mage.cards.f;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToACreatureTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;

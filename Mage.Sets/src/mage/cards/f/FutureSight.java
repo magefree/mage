@@ -6,7 +6,6 @@ import mage.abilities.effects.common.continuous.PlayWithTheTopCardRevealedEffect
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
 
 import java.util.UUID;
 

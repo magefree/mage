@@ -8,7 +8,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.Pest11GainLifeToken;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 

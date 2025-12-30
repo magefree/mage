@@ -18,7 +18,6 @@ import mage.game.permanent.token.SaprolingToken;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 

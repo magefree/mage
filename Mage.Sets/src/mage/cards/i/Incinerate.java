@@ -12,7 +12,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.target.common.TargetAnyTarget;
 import mage.watchers.common.DamagedByWatcher;
 

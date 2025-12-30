@@ -23,7 +23,6 @@ import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *

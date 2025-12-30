@@ -23,7 +23,6 @@ import mage.game.Game;
 import mage.target.common.TargetCardInGraveyard;
 import mage.util.CardUtil;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;

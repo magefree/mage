@@ -10,7 +10,6 @@ import mage.constants.SpellAbilityType;
 import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 import mage.target.TargetSpell;
-import mage.target.common.TargetCreaturePermanent;
 
 import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK;
 

@@ -17,7 +17,6 @@ import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.RatToken;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 

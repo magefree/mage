@@ -12,7 +12,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.BlockedPredicate;
 import mage.game.Game;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.XTargetsCountAdjuster;
 
 import java.util.UUID;

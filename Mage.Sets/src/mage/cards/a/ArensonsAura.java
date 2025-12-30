@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.TargetSpell;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetEnchantmentPermanent;
 
 /**

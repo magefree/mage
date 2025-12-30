@@ -2,18 +2,13 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.CreaturesYouControlCount;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.cost.SpellCostReductionForEachSourceEffect;
-import mage.abilities.hint.common.CreaturesYouControlHint;
 import mage.abilities.keyword.AffinityAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AffinityType;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 
 import java.util.UUID;
 

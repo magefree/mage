@@ -22,7 +22,6 @@ import mage.players.Player;
 import mage.players.PlayerList;
 import mage.target.Target;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**

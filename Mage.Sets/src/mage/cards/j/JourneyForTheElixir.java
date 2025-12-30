@@ -14,7 +14,6 @@ import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
-import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.Objects;
 import java.util.Set;

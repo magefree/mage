@@ -8,7 +8,6 @@ import mage.constants.CardType;
 import mage.constants.RoleType;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetpointer.FirstTargetPointer;
 import mage.target.targetpointer.SecondTargetPointer;
 
 import java.util.UUID;

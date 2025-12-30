@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.StaticFilters;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *

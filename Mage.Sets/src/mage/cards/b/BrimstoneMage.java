@@ -17,7 +17,6 @@ import mage.cards.CardSetInfo;
 import mage.cards.LevelerCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.target.common.TargetAnyTarget;
 
 /**

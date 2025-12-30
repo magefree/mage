@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.Zone;
 import mage.filter.FilterPlayer;
 import mage.filter.common.FilterBlockingCreature;
 import mage.filter.common.FilterCreaturePermanent;
@@ -21,7 +20,6 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.PlayerLostLifeWatcher;
 
 /**

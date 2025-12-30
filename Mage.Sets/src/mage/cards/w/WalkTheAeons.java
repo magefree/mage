@@ -9,7 +9,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 

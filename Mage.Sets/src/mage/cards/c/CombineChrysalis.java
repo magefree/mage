@@ -17,7 +17,6 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.BeastToken2;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 

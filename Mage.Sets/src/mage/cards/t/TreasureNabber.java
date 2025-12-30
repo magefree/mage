@@ -12,9 +12,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.TappedForManaEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
-import mage.target.targetpointer.FixedTargets;
 
-import java.util.List;
 import java.util.UUID;
 
 /**

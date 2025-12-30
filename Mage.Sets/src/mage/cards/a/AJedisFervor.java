@@ -13,7 +13,6 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
-import mage.target.TargetPermanent;
 import mage.target.common.TargetSacrifice;
 import mage.watchers.common.SpellsCastWatcher;
 

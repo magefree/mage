@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.EndOfCombatTriggeredAbility;
 import mage.abilities.effects.Effect;

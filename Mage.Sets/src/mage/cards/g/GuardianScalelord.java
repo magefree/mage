@@ -20,7 +20,6 @@ import mage.filter.predicate.mageobject.PermanentPredicate;
 import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
 
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 

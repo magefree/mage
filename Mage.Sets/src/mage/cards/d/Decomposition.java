@@ -17,7 +17,6 @@ import mage.target.TargetPermanent;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  * @author Cguy7777

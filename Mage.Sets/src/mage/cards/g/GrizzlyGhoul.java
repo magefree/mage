@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.watchers.common.CreaturesDiedWatcher;
 
 import java.util.UUID;
 

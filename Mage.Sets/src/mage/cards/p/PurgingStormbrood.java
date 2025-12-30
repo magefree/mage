@@ -11,12 +11,9 @@ import mage.abilities.effects.common.counter.RemoveAllCountersPermanentTargetEff
 import mage.abilities.keyword.HexproofAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.OmenCard;
-import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.WardAbility;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.common.TargetCreaturePermanent;

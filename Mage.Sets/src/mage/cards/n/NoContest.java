@@ -1,22 +1,15 @@
 package mage.cards.n;
 
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.FightTargetsEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.watchers.common.BlockedAttackerWatcher;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -18,7 +18,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SubLayer;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterMana;
 import mage.filter.FilterSpell;

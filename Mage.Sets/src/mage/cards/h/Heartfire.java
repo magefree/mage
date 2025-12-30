@@ -8,7 +8,6 @@ import mage.constants.CardType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.target.common.TargetAnyTarget;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 

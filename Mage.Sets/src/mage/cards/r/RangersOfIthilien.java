@@ -20,7 +20,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 

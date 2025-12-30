@@ -15,7 +15,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED;
 

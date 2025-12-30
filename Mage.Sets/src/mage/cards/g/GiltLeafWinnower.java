@@ -17,7 +17,6 @@ import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *

@@ -15,10 +15,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.FoodToken;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 

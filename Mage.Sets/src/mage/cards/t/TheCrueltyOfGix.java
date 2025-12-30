@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCardInLibrary;

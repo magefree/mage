@@ -1,7 +1,6 @@
 package mage.cards.s;
 
 import java.util.*;
-import java.util.stream.Collectors;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
@@ -23,7 +22,6 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)

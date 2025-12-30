@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.counters.CounterType;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.common.FilterInstantOrSorcerySpell;
@@ -19,7 +18,6 @@ import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.target.TargetSpell;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 

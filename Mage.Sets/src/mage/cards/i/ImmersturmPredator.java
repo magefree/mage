@@ -19,7 +19,6 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInGraveyard;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 

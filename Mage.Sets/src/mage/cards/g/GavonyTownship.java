@@ -10,7 +10,6 @@ import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 

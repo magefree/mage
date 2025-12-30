@@ -19,7 +19,6 @@ import mage.game.permanent.token.CatWarrior21Token;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 

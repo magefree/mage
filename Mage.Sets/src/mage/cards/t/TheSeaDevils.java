@@ -22,7 +22,6 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.AlienSalamanderToken;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.GameLog;
 

@@ -14,7 +14,6 @@ import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.ColoredManaSymbol;
-import mage.constants.Zone;
 
 /**
  *

@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.AttackingCreatureCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.keyword.ConniveSourceEffect;

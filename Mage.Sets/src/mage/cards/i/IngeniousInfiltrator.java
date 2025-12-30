@@ -2,7 +2,6 @@ package mage.cards.i;
 
 import mage.MageInt;
 import mage.abilities.common.DealsDamageToAPlayerAllTriggeredAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.NinjutsuAbility;
 import mage.cards.CardImpl;

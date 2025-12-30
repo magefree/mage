@@ -11,7 +11,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterAttackingCreature;
-import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.mageobject.SharesCreatureTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;

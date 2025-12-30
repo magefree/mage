@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *

@@ -19,7 +19,6 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.game.permanent.token.SaprolingToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;

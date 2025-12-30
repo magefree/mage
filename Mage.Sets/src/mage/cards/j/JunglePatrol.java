@@ -22,7 +22,6 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.WoodToken;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *

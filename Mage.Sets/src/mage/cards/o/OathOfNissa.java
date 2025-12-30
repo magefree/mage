@@ -14,7 +14,6 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.players.ManaPoolItem;
-import mage.players.Player;
 import mage.util.CardUtil;
 
 import java.util.UUID;

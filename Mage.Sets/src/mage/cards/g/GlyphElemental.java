@@ -3,7 +3,6 @@ package mage.cards.g;
 import java.util.UUID;
 import mage.MageInt;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.abilities.common.LandfallAbility;
 import mage.abilities.common.SimpleStaticAbility;

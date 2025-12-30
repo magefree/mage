@@ -21,7 +21,6 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterAttackingOrBlockingCreature;
 import mage.game.Game;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 

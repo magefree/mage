@@ -13,7 +13,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 

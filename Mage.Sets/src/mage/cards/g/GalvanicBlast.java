@@ -6,7 +6,6 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.hint.common.MetalcraftHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.target.common.TargetAnyTarget;
 

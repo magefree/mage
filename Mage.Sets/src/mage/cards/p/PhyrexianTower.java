@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *

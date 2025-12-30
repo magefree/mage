@@ -10,7 +10,6 @@ import mage.cards.ModalDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.target.common.TargetAnyTarget;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
 

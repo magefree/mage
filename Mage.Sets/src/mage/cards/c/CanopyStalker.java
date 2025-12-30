@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.watchers.common.CreaturesDiedWatcher;
 
 import java.util.UUID;
 import mage.constants.Duration;

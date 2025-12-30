@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
