@@ -18,6 +18,7 @@ public final class MagePreferences {
     private static final String KEY_PASSWORD = "password";
     private static final String KEY_EMAIL = "email";
     private static final String KEY_AUTO_CONNECT = "autoConnect";
+    private static final String KEY_FAVORITE_CARD_PREFIX = "favoriteCard";
     private static final String NODE_KEY_IGNORE_LIST = "ignoreListString";
     private static final String NODE_KEY_RESTORE_SESSIONS_LIST = "restoreSessionsListString";
 
@@ -113,6 +114,26 @@ public final class MagePreferences {
 
     public static void setAutoConnect(boolean autoConnect) {
         prefs().putBoolean(KEY_AUTO_CONNECT, autoConnect);
+    }
+
+    public static String getFavoriteCardNumber(String cardName) {
+        String setAndNumber = prefs().get(prefixedKey(KEY_FAVORITE_CARD_PREFIX, cardName), "");
+        if (setAndNumber != null && !setAndNumber.equals("")) {
+            return setAndNumber.split("##")[1];
+        }
+        return "";
+    }
+
+    public static String getFavoriteCardSet(String cardName) {
+        String setAndNumber = prefs().get(prefixedKey(KEY_FAVORITE_CARD_PREFIX, cardName), "");
+        if (setAndNumber != null && !setAndNumber.equals("")) {
+            return setAndNumber.split("##")[0];
+        }
+        return "";
+    }
+
+    public static void setFavoriteCard(String cardName, String cardNumber, String setCode) {
+        prefs().put(prefixedKey(KEY_FAVORITE_CARD_PREFIX, cardName), setCode + "##" + cardNumber);
     }
 
     public static void addIgnoredUser(String serverAddress, String username) {
