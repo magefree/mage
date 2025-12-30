@@ -8,9 +8,9 @@ import mage.constants.SubType;
 /**
  * @author spjspj
  */
-public final class AnotherSpiritToken extends TokenImpl {
+public final class Spirit33Token extends TokenImpl {
 
-    public AnotherSpiritToken() {
+    public Spirit33Token() {
         super("Spirit Token", "3/3 white Spirit creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
@@ -21,11 +21,11 @@ public final class AnotherSpiritToken extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    private AnotherSpiritToken(final AnotherSpiritToken token) {
+    private Spirit33Token(final Spirit33Token token) {
         super(token);
     }
 
-    public AnotherSpiritToken copy() {
-        return new AnotherSpiritToken(this);
+    public Spirit33Token copy() {
+        return new Spirit33Token(this);
     }
 }
