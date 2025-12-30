@@ -1439,7 +1439,7 @@
 |Generate|TOK:VOC|Bat|||BatToken|
 |Generate|TOK:VOC|Clue|||ClueArtifactToken|
 |Generate|TOK:VOC|Spirit|1||SpiritToken|
-|Generate|TOK:VOC|Spirit|2||AnotherSpiritToken|
+|Generate|TOK:VOC|Spirit|2||Spirit33Token|
 |Generate|TOK:VOC|Thopter|||ThopterColorlessToken|
 
 # VOW
