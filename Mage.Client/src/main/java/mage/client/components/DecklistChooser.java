@@ -69,31 +69,22 @@ public class DecklistChooser extends JPanel
                                                           int index,
                                                           boolean isSelected,
                                                           boolean cellHasFocus) {
-                JLabel c = (JLabel)super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-                if (value != null) {
-                    c.setToolTipText(value.toString());
-                }
+            JLabel c = (JLabel)super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+            if (value != null) {
+                c.setToolTipText(value.toString());
+            }
 
-                return c;
+            return c;
             }
         });
 
-        setLayout(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
+        setLayout(new BorderLayout());
+        add(decklistCombobox, BorderLayout.CENTER);
 
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.weightx = 1;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        add(decklistCombobox, gbc);
-
-        gbc.gridx = 1;
-        gbc.weightx = 0;
-        gbc.fill = GridBagConstraints.NONE;
-        add(chooseButton, gbc);
-
-        gbc.gridx = 2;
-        add(generateButton, gbc);
+        JPanel rightPanel = new JPanel(new BorderLayout());
+        rightPanel.add(chooseButton, BorderLayout.WEST);
+        rightPanel.add(generateButton, BorderLayout.EAST);
+        add(rightPanel, BorderLayout.EAST);
     }
 
     /**
