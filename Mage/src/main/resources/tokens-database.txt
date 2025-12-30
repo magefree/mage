@@ -2732,7 +2732,7 @@
 |Generate|TOK:TDM|Soldier|1||SoldierToken|
 |Generate|TOK:TDM|Soldier|2||Soldier22Token|
 |Generate|TOK:TDM|Spirit|1||SpiritXXToken|
-|Generate|TOK:TDM|Spirit|2||NoFlyingSpiritWhiteToken|
+|Generate|TOK:TDM|Spirit|2||NoFlyingSpiritWhite11Token|
 # TODO: 2/2 Spirit (no relevant cards revealed, token not implemented)
 # TODO: 3/3 Spirit (no relevant cards revealed, token not implemented)
 |Generate|TOK:TDM|Treasure|||TreasureToken|
