@@ -248,6 +248,7 @@ public final class JumpstartHistoricHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Phantom Ninja", 230, Rarity.COMMON, mage.cards.p.PhantomNinja.class));
         cards.add(new SetCardInfo("Ponder", 782, Rarity.COMMON, mage.cards.p.Ponder.class));
         cards.add(new SetCardInfo("Pondering Mage", 231, Rarity.COMMON, mage.cards.p.PonderingMage.class));
+        cards.add(new SetCardInfo("Pool of Vigorous Growth", 28, Rarity.RARE, mage.cards.p.PoolOfVigorousGrowth.class));
         cards.add(new SetCardInfo("Predatory Sliver", 619, Rarity.COMMON, mage.cards.p.PredatorySliver.class));
         cards.add(new SetCardInfo("Prey's Vengeance", 620, Rarity.COMMON, mage.cards.p.PreysVengeance.class));
         cards.add(new SetCardInfo("Priest of Fell Rites", 707, Rarity.RARE, mage.cards.p.PriestOfFellRites.class));
