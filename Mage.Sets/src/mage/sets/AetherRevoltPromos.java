@@ -49,7 +49,8 @@ public class AetherRevoltPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Inspiring Statuary", "160s", Rarity.RARE, mage.cards.i.InspiringStatuary.class));
         cards.add(new SetCardInfo("Kari Zev's Expertise", "88s", Rarity.RARE, mage.cards.k.KariZevsExpertise.class));
         cards.add(new SetCardInfo("Kari Zev, Skyship Raider", "87s", Rarity.RARE, mage.cards.k.KariZevSkyshipRaider.class));
-        cards.add(new SetCardInfo("Lifecrafter's Bestiary", "162s", Rarity.RARE, mage.cards.l.LifecraftersBestiary.class));
+        cards.add(new SetCardInfo("Lifecrafter's Bestiary", "162p", Rarity.RARE, mage.cards.l.LifecraftersBestiary.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lifecrafter's Bestiary", "162s", Rarity.RARE, mage.cards.l.LifecraftersBestiary.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lightning Runner", "90s", Rarity.MYTHIC, mage.cards.l.LightningRunner.class));
         cards.add(new SetCardInfo("Mechanized Production", "38s", Rarity.MYTHIC, mage.cards.m.MechanizedProduction.class));
         cards.add(new SetCardInfo("Merchant's Dockhand", "163s", Rarity.RARE, mage.cards.m.MerchantsDockhand.class));
@@ -59,7 +60,8 @@ public class AetherRevoltPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Paradox Engine", "169s", Rarity.MYTHIC, mage.cards.p.ParadoxEngine.class));
         cards.add(new SetCardInfo("Peacewalker Colossus", "170s", Rarity.RARE, mage.cards.p.PeacewalkerColossus.class));
         cards.add(new SetCardInfo("Pia's Revolution", "91s", Rarity.RARE, mage.cards.p.PiasRevolution.class));
-        cards.add(new SetCardInfo("Planar Bridge", "171s", Rarity.MYTHIC, mage.cards.p.PlanarBridge.class));
+        cards.add(new SetCardInfo("Planar Bridge", "171p", Rarity.MYTHIC, mage.cards.p.PlanarBridge.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Planar Bridge", "171s", Rarity.MYTHIC, mage.cards.p.PlanarBridge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Quicksmith Rebel", 93, Rarity.RARE, mage.cards.q.QuicksmithRebel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Quicksmith Rebel", "93s", Rarity.RARE, mage.cards.q.QuicksmithRebel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Quicksmith Spy", "41s", Rarity.RARE, mage.cards.q.QuicksmithSpy.class));
@@ -72,13 +74,16 @@ public class AetherRevoltPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Solemn Recruit", "22s", Rarity.RARE, mage.cards.s.SolemnRecruit.class));
         cards.add(new SetCardInfo("Spire of Industry", "184s", Rarity.RARE, mage.cards.s.SpireOfIndustry.class));
         cards.add(new SetCardInfo("Sram's Expertise", "24s", Rarity.RARE, mage.cards.s.SramsExpertise.class));
-        cards.add(new SetCardInfo("Sram, Senior Edificer", "23s", Rarity.RARE, mage.cards.s.SramSeniorEdificer.class));
+        cards.add(new SetCardInfo("Sram, Senior Edificer", "23p", Rarity.RARE, mage.cards.s.SramSeniorEdificer.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sram, Senior Edificer", "23s", Rarity.RARE, mage.cards.s.SramSeniorEdificer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tezzeret the Schemer", "137s", Rarity.MYTHIC, mage.cards.t.TezzeretTheSchemer.class));
         cards.add(new SetCardInfo("Trophy Mage", 48, Rarity.UNCOMMON, mage.cards.t.TrophyMage.class));
         cards.add(new SetCardInfo("Walking Ballista", "181s", Rarity.RARE, mage.cards.w.WalkingBallista.class));
-        cards.add(new SetCardInfo("Whir of Invention", "49s", Rarity.RARE, mage.cards.w.WhirOfInvention.class));
+        cards.add(new SetCardInfo("Whir of Invention", "49p", Rarity.RARE, mage.cards.w.WhirOfInvention.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Whir of Invention", "49s", Rarity.RARE, mage.cards.w.WhirOfInvention.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Yahenni's Expertise", 75, Rarity.RARE, mage.cards.y.YahennisExpertise.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Yahenni's Expertise", "75s", Rarity.RARE, mage.cards.y.YahennisExpertise.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Yahenni, Undying Partisan", "74s", Rarity.RARE, mage.cards.y.YahenniUndyingPartisan.class));
+        cards.add(new SetCardInfo("Yahenni, Undying Partisan", "74p", Rarity.RARE, mage.cards.y.YahenniUndyingPartisan.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Yahenni, Undying Partisan", "74s", Rarity.RARE, mage.cards.y.YahenniUndyingPartisan.class, NON_FULL_USE_VARIOUS));
      }
 }

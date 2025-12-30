@@ -23,8 +23,8 @@ public class AmonkhetPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Angel of Sanctions", "1s", Rarity.MYTHIC, mage.cards.a.AngelOfSanctions.class));
         cards.add(new SetCardInfo("Anointed Procession", "2s", Rarity.RARE, mage.cards.a.AnointedProcession.class));
         cards.add(new SetCardInfo("Approach of the Second Sun", "4s", Rarity.RARE, mage.cards.a.ApproachOfTheSecondSun.class));
-        cards.add(new SetCardInfo("Archfiend of Ifnir", "78s", Rarity.RARE, mage.cards.a.ArchfiendOfIfnir.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Archfiend of Ifnir", 78, Rarity.RARE, mage.cards.a.ArchfiendOfIfnir.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Archfiend of Ifnir", "78s", Rarity.RARE, mage.cards.a.ArchfiendOfIfnir.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("As Foretold", "42s", Rarity.MYTHIC, mage.cards.a.AsForetold.class));
         cards.add(new SetCardInfo("Aven Mindcensor", "5p", Rarity.RARE, mage.cards.a.AvenMindcensor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aven Mindcensor", "5s", Rarity.RARE, mage.cards.a.AvenMindcensor.class, NON_FULL_USE_VARIOUS));
@@ -50,8 +50,8 @@ public class AmonkhetPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Gideon's Intervention", "15s", Rarity.RARE, mage.cards.g.GideonsIntervention.class));
         cards.add(new SetCardInfo("Glorious End", "133s", Rarity.MYTHIC, mage.cards.g.GloriousEnd.class));
         cards.add(new SetCardInfo("Glory-Bound Initiate", "16s", Rarity.RARE, mage.cards.g.GloryBoundInitiate.class));
-        cards.add(new SetCardInfo("Glorybringer", "134s", Rarity.RARE, mage.cards.g.Glorybringer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Glorybringer", 134, Rarity.RARE, mage.cards.g.Glorybringer.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Glorybringer", "134s", Rarity.RARE, mage.cards.g.Glorybringer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Glyph Keeper", "55s", Rarity.RARE, mage.cards.g.GlyphKeeper.class));
         cards.add(new SetCardInfo("Hapatra, Vizier of Poisons", "199s", Rarity.RARE, mage.cards.h.HapatraVizierOfPoisons.class));
         cards.add(new SetCardInfo("Harsh Mentor", "135s", Rarity.RARE, mage.cards.h.HarshMentor.class));
@@ -73,8 +73,8 @@ public class AmonkhetPromos extends ExpansionSet {
         cards.add(new SetCardInfo("New Perspectives", "63s", Rarity.RARE, mage.cards.n.NewPerspectives.class));
         cards.add(new SetCardInfo("Nissa, Steward of Elements", "204s", Rarity.MYTHIC, mage.cards.n.NissaStewardOfElements.class));
         cards.add(new SetCardInfo("Oketra the True", "21s", Rarity.MYTHIC, mage.cards.o.OketraTheTrue.class));
-        cards.add(new SetCardInfo("Oracle's Vault", "234s", Rarity.RARE, mage.cards.o.OraclesVault.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Oracle's Vault", 234, Rarity.RARE, mage.cards.o.OraclesVault.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Oracle's Vault", "234s", Rarity.RARE, mage.cards.o.OraclesVault.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plague Belcher", "104s", Rarity.RARE, mage.cards.p.PlagueBelcher.class));
         cards.add(new SetCardInfo("Prepare // Fight", "220s", Rarity.RARE, mage.cards.p.PrepareFight.class));
         cards.add(new SetCardInfo("Prowling Serpopard", "180s", Rarity.RARE, mage.cards.p.ProwlingSerpopard.class));
