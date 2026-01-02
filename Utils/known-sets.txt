@@ -167,7 +167,7 @@ Tales of Middle-earth Commander|TalesOfMiddleEarthCommander|
 Lorwyn|Lorwyn|
 Lorwyn Eclipsed|LorwynEclipsed|
 The Lost Caverns of Ixalan|TheLostCavernsOfIxalan|
-The Lost Caverns of Ixalan Commander|LostCavernsOfIxalanCommander|
+The Lost Caverns of Ixalan Commander|TheLostCavernsOfIxalanCommander|
 Magic 2010|Magic2010|
 Magic 2011|Magic2011|
 Magic 2012|Magic2012|
