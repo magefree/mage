@@ -757,8 +757,8 @@ public class ScryfallImageSource implements CardImageSource {
 
     @Override
     public float getAverageSizeKb() {
-        // June 2024: MH3 set - 46450 Kb / 332 = 140 Kb
-        return 140f;
+        // Jan 2026: 90354 images, average of 201.1 Kb
+        return 201f;
     }
 
     @Override
