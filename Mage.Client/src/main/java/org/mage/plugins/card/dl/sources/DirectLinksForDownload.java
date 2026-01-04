@@ -24,7 +24,7 @@ public class DirectLinksForDownload implements Iterable<DownloadJob> {
     public static final String cardbackFilename = "cardback.jpg";
 
     static {
-        directLinks.put(cardbackFilename, "https://upload.wikimedia.org/wikipedia/en/a/aa/Magic_the_gathering-card_back.jpg");
+        directLinks.put(cardbackFilename, "https://backs.scryfall.io/large/0/a/0aeebaf5-8c7d-4636-9e82-8c27447861f7.jpg");
     }
 
     private final File outDir;

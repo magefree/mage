@@ -253,8 +253,8 @@ public enum TokenRepository {
         ArrayList<TokenInfo> res = new ArrayList<>();
 
         // Backface
-        // TODO: can't find backface's api url so use direct link from third party site instead (must be replaced to scryfall someday)
-        res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_MANUAL, 1, "https://upload.wikimedia.org/wikipedia/en/a/aa/Magic_the_gathering-card_back.jpg"));
+        // Can't find backface via the API, so use direct image link
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_MANUAL, 1, "https://backs.scryfall.io/large/0/a/0aeebaf5-8c7d-4636-9e82-8c27447861f7.jpg"));
 
         // Copy
         // https://scryfall.com/search?q=include%3Aextras+unique%3Aprints+type%3Atoken+copy&unique=cards&as=grid&order=name
@@ -332,7 +332,7 @@ public enum TokenRepository {
 
         // Helper emblem (for global card hints)
         // use backface for it
-        res.add(createXmageToken(XMAGE_IMAGE_NAME_HELPER_EMBLEM, 1, "https://upload.wikimedia.org/wikipedia/en/a/aa/Magic_the_gathering-card_back.jpg"));
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_HELPER_EMBLEM, 1, "https://backs.scryfall.io/large/0/a/0aeebaf5-8c7d-4636-9e82-8c27447861f7.jpg"));
 
         return res;
     }
