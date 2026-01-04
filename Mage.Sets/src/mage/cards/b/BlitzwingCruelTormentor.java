@@ -1,5 +1,7 @@
 package mage.cards.b;
 
+import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -13,15 +15,17 @@ import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardSetInfo;
 import mage.cards.TransformingDoubleFacedCard;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
 import mage.util.RandomUtil;
 import mage.watchers.common.PlayerLostLifeWatcher;
-
-import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -31,7 +35,7 @@ public final class BlitzwingCruelTormentor extends TransformingDoubleFacedCard {
     public BlitzwingCruelTormentor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,
                 new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, new SubType[]{SubType.ROBOT}, "{5}{B}",
-                "Blitzwing Adaptive Assailant",
+                "Blitzwing, Adaptive Assailant",
                 new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.ARTIFACT}, new SubType[]{SubType.VEHICLE}, "B");
 
 
