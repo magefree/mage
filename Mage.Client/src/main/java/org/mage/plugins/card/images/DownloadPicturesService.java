@@ -200,7 +200,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         reloadLanguagesForSelectedSource();
 
         // DOWNLOAD THREADS
-        uiDialog.getDownloadThreadsCombo().setModel(new DefaultComboBoxModel<>(new String[]{"10", "9", "8", "7", "6", "5", "4", "3", "2", "1"}));
+        uiDialog.getDownloadThreadsCombo().setModel(new DefaultComboBoxModel<>(new String[]{"100", "75", "50", "40", "30", "20", "15", "10", "5", "1"}));
         uiDialog.getDownloadThreadsCombo().setSelectedItem(String.valueOf(DEFAULT_DOWNLOAD_THREADS));
 
         // REDOWNLOAD
