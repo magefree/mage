@@ -46,7 +46,7 @@ public final class MaskedVandal extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(
                 new DoIfCostPaid(new ExileTargetEffect(), new ExileFromGraveCost(
                         new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_A)
-                ))
+                ).withSourceExileZone(false))
         );
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

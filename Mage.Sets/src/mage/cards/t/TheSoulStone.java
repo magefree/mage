@@ -45,7 +45,9 @@ public final class TheSoulStone extends CardImpl {
         // {6}{B}, {T}, Exile a creature you control: Harness The Soul Stone.
         Ability ability = new SimpleActivatedAbility(new HarnessSourceEffect(), new ManaCostsImpl<>("{6}{B}"));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new ExileTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_A_CREATURE)));
+        ability.addCost(new ExileTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_A_CREATURE))
+                .withSourceExileZone(false)
+        );
         this.addAbility(ability);
 
         // ∞ -- At the beginning of your upkeep, return target creature card from your graveyard to the battlefield.
