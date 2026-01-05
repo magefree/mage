@@ -2,7 +2,6 @@ package mage.cards.n;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.ExileAllEffect;
@@ -21,7 +20,6 @@ import mage.target.Target;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetOpponent;
 import mage.target.common.TargetPermanentOrPlayer;
-import mage.target.targetpointer.FixedTarget;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -170,9 +168,9 @@ class NicolBolasGodPharaohPlusTwoEffect extends OneShotEffect {
             if (card.isLand(game)) {
                 continue;
             }
-            ContinuousEffect effect = new PlayFromNotOwnHandZoneTargetEffect(Zone.EXILED, TargetController.YOU, Duration.EndOfTurn, true);
-            effect.setTargetPointer(new FixedTarget(card, game));
-            game.addEffect(effect, source);
+            PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(
+                    game, source, card, TargetController.YOU, Duration.EndOfTurn, true, false, true
+            );
             break;
         } while (library.hasCards());
         return true;
