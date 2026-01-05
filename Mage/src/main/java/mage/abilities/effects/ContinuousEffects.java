@@ -968,7 +968,19 @@ public class ContinuousEffects implements Serializable {
         removeInactiveEffects(game);
         List<ContinuousEffect> activeLayerEffects = getLayeredEffects(game); // main call
 
-        List<ContinuousEffect> layer = filterLayeredEffects(activeLayerEffects, Layer.CopyEffects_1);
+        List<ContinuousEffect> layer = filterLayeredEffects(activeLayerEffects, Layer.TransformCharacteristics_0);
+        for (ContinuousEffect effect : layer) {
+            Set<Ability> abilities = layeredEffects.getAbility(effect.getId());
+            for (Ability ability : abilities) {
+                effect.apply(Layer.TransformCharacteristics_0, SubLayer.NA, ability, game);
+            }
+        }
+        // Reload layerEffect if transform characteristics were applied
+        if (!layer.isEmpty()) {
+            activeLayerEffects = getLayeredEffects(game, "layer_0");
+        }
+
+        layer = filterLayeredEffects(activeLayerEffects, Layer.CopyEffects_1);
         for (ContinuousEffect effect : layer) {
             Set<Ability> abilities = layeredEffects.getAbility(effect.getId());
             for (Ability ability : abilities) {
