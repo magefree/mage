@@ -162,10 +162,10 @@ class NicolBolasGodPharaohPlusTwoEffect extends OneShotEffect {
             if (card == null) {
                 break;
             }
-            if (!opponent.moveCards(card, Zone.EXILED, source, game)) {
-                break;
-            }
             if (card.isLand(game)) {
+                if (!opponent.moveCards(card, Zone.EXILED, source, game)) {
+                    break;
+                }
                 continue;
             }
             PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(
