@@ -103,6 +103,7 @@ public final class LorwynEclipsedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Lamentation", 30, Rarity.RARE, mage.cards.l.Lamentation.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Liliana, Death Wielder", 78, Rarity.MYTHIC, mage.cards.l.LilianaDeathWielder.class));
         cards.add(new SetCardInfo("Maelstrom Wanderer", 127, Rarity.RARE, mage.cards.m.MaelstromWanderer.class));
+        cards.add(new SetCardInfo("Mass of Mysteries", 3, Rarity.MYTHIC, mage.cards.m.MassOfMysteries.class));
         cards.add(new SetCardInfo("Massacre Girl, Known Killer", 79, Rarity.MYTHIC, mage.cards.m.MassacreGirlKnownKiller.class));
         cards.add(new SetCardInfo("Midnight Banshee", 80, Rarity.RARE, mage.cards.m.MidnightBanshee.class));
         cards.add(new SetCardInfo("Muldrotha, the Gravetide", 128, Rarity.MYTHIC, mage.cards.m.MuldrothaTheGravetide.class));
