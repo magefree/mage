@@ -10,19 +10,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 
 /**
  *
  * @author muz
  */
 public final class VirulentEmissary extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public VirulentEmissary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
@@ -36,7 +30,7 @@ public final class VirulentEmissary extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
 
         // Whenever another creature you control enters, you gain 1 life.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new GainLifeEffect(1), filter));
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new GainLifeEffect(1), StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL));
     }
 
     private VirulentEmissary(final VirulentEmissary card) {

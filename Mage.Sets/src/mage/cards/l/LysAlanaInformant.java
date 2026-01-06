@@ -3,7 +3,6 @@ package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldOrDiesSourceTriggeredAbility;
 import mage.abilities.effects.keyword.SurveilEffect;
 import mage.cards.CardImpl;
@@ -26,8 +25,7 @@ public final class LysAlanaInformant extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When this creature enters or dies, surveil 1.
-        Ability ability = new EntersBattlefieldOrDiesSourceTriggeredAbility(new SurveilEffect(1), false);
-        this.addAbility(ability);
+        this.addAbility(new EntersBattlefieldOrDiesSourceTriggeredAbility(new SurveilEffect(1), false));
     }
 
     private LysAlanaInformant(final LysAlanaInformant card) {
