@@ -2911,7 +2911,11 @@
 |Generate|TOK:TLE|Soldier|||SoldierRedToken|
 
 # ECL
+|Generate|TOK:ECL|Shapeshifter|||ShapeshifterColorlessToken|
 |Generate|TOK:ECL|Goblin|||BlackAndRedGoblinToken|
+|Generate|TOK:ECL|Treasure|||TreasureToken|
+
+# ECC
 
 #TMT
 |Generate|TOK:TMT|Mutagen|||MutagenToken|
