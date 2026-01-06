@@ -2910,6 +2910,9 @@
 |Generate|TOK:TLE|Marit Lage|||MaritLageToken|
 |Generate|TOK:TLE|Soldier|||SoldierRedToken|
 
+# ECL
+|Generate|TOK:ECL|Goblin|||BlackAndRedGoblinToken|
+
 #TMT
 |Generate|TOK:TMT|Mutagen|||MutagenToken|
 
