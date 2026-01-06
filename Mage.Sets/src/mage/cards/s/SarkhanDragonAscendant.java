@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.costs.common.BeholdDragonCost;
+import mage.abilities.costs.common.BeholdCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.continuous.AddCardSubTypeSourceEffect;
@@ -13,10 +13,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -42,7 +39,7 @@ public final class SarkhanDragonAscendant extends CardImpl {
 
         // When Sarkhan enters, you may behold a Dragon. If you do, create a Treasure token.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new DoIfCostPaid(new CreateTokenEffect(new TreasureToken()), new BeholdDragonCost())
+                new DoIfCostPaid(new CreateTokenEffect(new TreasureToken()), new BeholdCost(BeholdType.DRAGON))
         ));
 
         // Whenever a Dragon you control enters, put a +1/+1 counter on Sarkhan. Until end of turn, Sarkhan becomes a Dragon in addition to its other types and gains flying.
