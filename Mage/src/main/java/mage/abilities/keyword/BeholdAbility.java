@@ -18,7 +18,7 @@ public class BeholdAbility extends StaticAbility implements OptionalAdditionalSo
 
     private static final String promptString = "Behold ";
     private static final String keywordText = "As an additional cost to cast this spell, you may behold ";
-    private static final String reminderText = "Choose % you control or reveal % card from your hand.";
+    private static final String reminderText = "Choose $$$ you control or reveal $$$ card from your hand.";
     private final String rule;
 
     public static final String BEHOLD_ACTIVATION_VALUE_KEY = "beholdActivation";
@@ -28,7 +28,7 @@ public class BeholdAbility extends StaticAbility implements OptionalAdditionalSo
     public static OptionalAdditionalCost makeCost(BeholdType beholdType) {
         OptionalAdditionalCost cost = new OptionalAdditionalCostImpl(
                 keywordText + beholdType.getDescription(),
-                String.format(reminderText, beholdType.getDescription()),
+                reminderText.replace("$$$", beholdType.getDescription()),
                 new BeholdCost(beholdType)
         );
         cost.setRepeatable(false);
