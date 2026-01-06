@@ -112,5 +112,6 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Vinebred Brawler", 201, Rarity.UNCOMMON, mage.cards.v.VinebredBrawler.class));
         cards.add(new SetCardInfo("Virulent Emissary", 202, Rarity.UNCOMMON, mage.cards.v.VirulentEmissary.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Virulent Emissary", 406, Rarity.UNCOMMON, mage.cards.v.VirulentEmissary.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Voracious Tome-Skimmer", 250, Rarity.UNCOMMON, mage.cards.v.VoraciousTomeSkimmer.class));
     }
 }
