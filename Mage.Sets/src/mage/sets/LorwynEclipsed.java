@@ -90,6 +90,7 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Temple Garden", 268, Rarity.RARE, mage.cards.t.TempleGarden.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Temple Garden", 351, Rarity.RARE, mage.cards.t.TempleGarden.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Unexpected Assistance", 80, Rarity.COMMON, mage.cards.u.UnexpectedAssistance.class));
+        cards.add(new SetCardInfo("Vinebred Brawler", 201, Rarity.UNCOMMON, mage.cards.v.VinebredBrawler.class));
         cards.add(new SetCardInfo("Virulent Emissary", 202, Rarity.UNCOMMON, mage.cards.v.VirulentEmissary.class));
 
         // cards.add(new SetCardInfo("Abigale, Eloquent First-Year", 204, Rarity.RARE, mage.cards.a.AbigaleEloquentFirstYear.class));
@@ -132,7 +133,6 @@ public final class LorwynEclipsed extends ExpansionSet {
         // cards.add(new SetCardInfo("Tend the Sprigs", 197, Rarity.COMMON, mage.cards.t.TendTheSprigs.class));
         // cards.add(new SetCardInfo("Trystan, Callous Cultivator", 199, Rarity.RARE, mage.cards.t.TrystanCallousCultivator.class));
         // cards.add(new SetCardInfo("Vibrance", 249, Rarity.MYTHIC, mage.cards.v.Vibrance.class));
-        // cards.add(new SetCardInfo("Vinebred Brawler", 201, Rarity.UNCOMMON, mage.cards.v.VinebredBrawler.class));
         // cards.add(new SetCardInfo("Voracious Tome-Skimmer", 250, Rarity.UNCOMMON, mage.cards.v.VoraciousTomeSkimmer.class));
         // cards.add(new SetCardInfo("Wanderwine Farewell", 83, Rarity.UNCOMMON, mage.cards.w.WanderwineFarewell.class));
         // cards.add(new SetCardInfo("Winnowing", 43, Rarity.RARE, mage.cards.w.Winnowing.class));
