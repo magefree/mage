@@ -39,6 +39,7 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Dream Seizer", 101, Rarity.COMMON, mage.cards.d.DreamSeizer.class));
         cards.add(new SetCardInfo("Eirdu, Carrier of Dawn", 13, Rarity.MYTHIC, mage.cards.e.EirduCarrierOfDawn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Eirdu, Carrier of Dawn", 286, Rarity.MYTHIC, mage.cards.e.EirduCarrierOfDawn.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Elder Auntie", 133, Rarity.COMMON, mage.cards.e.ElderAuntie.class));
         cards.add(new SetCardInfo("Emptiness", 222, Rarity.MYTHIC, mage.cards.e.Emptiness.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Emptiness", 294, Rarity.MYTHIC, mage.cards.e.Emptiness.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Figure of Fable", 224, Rarity.RARE, mage.cards.f.FigureOfFable.class, NON_FULL_USE_VARIOUS));
@@ -106,7 +107,6 @@ public final class LorwynEclipsed extends ExpansionSet {
         // cards.add(new SetCardInfo("Dawnhand Dissident", 98, Rarity.RARE, mage.cards.d.DawnhandDissident.class));
         // cards.add(new SetCardInfo("Deepway Navigator", 214, Rarity.RARE, mage.cards.d.DeepwayNavigator.class));
         // cards.add(new SetCardInfo("Disruptor of Currents", 47, Rarity.RARE, mage.cards.d.DisruptorOfCurrents.class));
-        // cards.add(new SetCardInfo("Elder Auntie", 133, Rarity.COMMON, mage.cards.e.ElderAuntie.class));
         // cards.add(new SetCardInfo("Explosive Prodigy", 136, Rarity.UNCOMMON, mage.cards.e.ExplosiveProdigy.class));
         // cards.add(new SetCardInfo("Flock Impostor", 16, Rarity.UNCOMMON, mage.cards.f.FlockImpostor.class));
         // cards.add(new SetCardInfo("Glen Elendra's Answer", 52, Rarity.MYTHIC, mage.cards.g.GlenElendrasAnswer.class));
