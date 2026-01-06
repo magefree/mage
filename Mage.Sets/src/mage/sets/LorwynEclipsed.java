@@ -18,7 +18,7 @@ public final class LorwynEclipsed extends ExpansionSet {
     private LorwynEclipsed() {
         super("Lorwyn Eclipsed", "ECL", ExpansionSet.buildDate(2026, 1, 23), SetType.EXPANSION);
         this.blockName = "Lorwyn Eclipsed"; // for sorting in GUI
-        this.hasBasicLands = false; // temporary
+        this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Appeal to Eirdu", 5, Rarity.COMMON, mage.cards.a.AppealToEirdu.class));
         cards.add(new SetCardInfo("Ashling's Command", 205, Rarity.RARE, mage.cards.a.AshlingsCommand.class, NON_FULL_USE_VARIOUS));
