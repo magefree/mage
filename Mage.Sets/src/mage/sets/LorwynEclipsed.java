@@ -41,6 +41,8 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Boggart Mischief", 92, Rarity.UNCOMMON, mage.cards.b.BoggartMischief.class));
         cards.add(new SetCardInfo("Champion of the Clachan", 353, Rarity.RARE, mage.cards.c.ChampionOfTheClachan.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Champion of the Clachan", 9, Rarity.RARE, mage.cards.c.ChampionOfTheClachan.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Champion of the Weird", 360, Rarity.RARE, mage.cards.c.ChampionOfTheWeird.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Champion of the Weird", 95, Rarity.RARE, mage.cards.c.ChampionOfTheWeird.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Champions of the Perfect", 171, Rarity.RARE, mage.cards.c.ChampionsOfThePerfect.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Champions of the Perfect", 365, Rarity.RARE, mage.cards.c.ChampionsOfThePerfect.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chomping Changeling", 172, Rarity.UNCOMMON, mage.cards.c.ChompingChangeling.class));

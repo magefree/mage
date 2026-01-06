@@ -5,7 +5,6 @@ import mage.abilities.costs.common.BlightCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.players.Player;
 
 /**
  * @author TheElk801
@@ -32,7 +31,6 @@ public class BlightControllerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        return BlightCost.doBlight(player, amount, game, source) != null;
+        return BlightCost.doBlight(game.getPlayer(source.getControllerId()), amount, game, source) != null;
     }
 }
