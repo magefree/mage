@@ -166,6 +166,7 @@ The Lord of the Rings: Tales of Middle-earth|TheLordOfTheRingsTalesOfMiddleEarth
 Tales of Middle-earth Commander|TalesOfMiddleEarthCommander|
 Lorwyn|Lorwyn|
 Lorwyn Eclipsed|LorwynEclipsed|
+Lorwyn Eclipsed Commander|LorwynEclipsedCommander|
 The Lost Caverns of Ixalan|TheLostCavernsOfIxalan|
 The Lost Caverns of Ixalan Commander|LostCavernsOfIxalanCommander|
 Magic 2010|Magic2010|

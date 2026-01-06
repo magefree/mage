@@ -616,6 +616,7 @@ public class ScryfallImageSupportCards {
             add("TLA"); // Avatar: The Last Airbender
             add("TLE"); // Avatar: The Last Airbender Eternal
             add("ECL"); // Lorwyn Eclipsed
+            add("ECC"); // Lorwyn Eclipsed Commander
             add("TMT"); // Teenage Mutant Ninja Turtles
             add("TMC"); // Teenage Mutant Ninja Turtles Eternal
             add("MSH"); // Marvel Super Heroes
