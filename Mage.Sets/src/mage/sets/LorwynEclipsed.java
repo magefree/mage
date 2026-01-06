@@ -32,6 +32,7 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Blood Crypt", 349, Rarity.RARE, mage.cards.b.BloodCrypt.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloom Tender", 166, Rarity.MYTHIC, mage.cards.b.BloomTender.class));
         cards.add(new SetCardInfo("Blossoming Defense", 167, Rarity.UNCOMMON, mage.cards.b.BlossomingDefense.class));
+        cards.add(new SetCardInfo("Crossroads Watcher", 173, Rarity.COMMON, mage.cards.c.CrossroadsWatcher.class));
         cards.add(new SetCardInfo("Deceit", 212, Rarity.MYTHIC, mage.cards.d.Deceit.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Deceit", 293, Rarity.MYTHIC, mage.cards.d.Deceit.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dose of Dawnglow", 100, Rarity.UNCOMMON, mage.cards.d.DoseOfDawnglow.class));
@@ -97,7 +98,6 @@ public final class LorwynEclipsed extends ExpansionSet {
         // cards.add(new SetCardInfo("Champions of the Perfect", 171, Rarity.RARE, mage.cards.c.ChampionsOfThePerfect.class));
         // cards.add(new SetCardInfo("Chomping Changeling", 172, Rarity.UNCOMMON, mage.cards.c.ChompingChangeling.class));
         // cards.add(new SetCardInfo("Chronicle of Victory", 253, Rarity.MYTHIC, mage.cards.c.ChronicleOfVictory.class));
-        // cards.add(new SetCardInfo("Crossroads Watcher", 173, Rarity.COMMON, mage.cards.c.CrossroadsWatcher.class));
         // cards.add(new SetCardInfo("Curious Colossus", 12, Rarity.MYTHIC, mage.cards.c.CuriousColossus.class));
         // cards.add(new SetCardInfo("Dawn-Blessed Pennant", 254, Rarity.UNCOMMON, mage.cards.d.DawnBlessedPennant.class));
         // cards.add(new SetCardInfo("Dawnhand Dissident", 98, Rarity.RARE, mage.cards.d.DawnhandDissident.class));
