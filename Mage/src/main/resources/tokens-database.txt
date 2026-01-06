@@ -2917,6 +2917,18 @@
 
 # ECC
 
+# ECC
+|Generate|TOK:ECC|Elemental|1||WhiteElementalToken|
+|Generate|TOK:ECC|Elemental|2||OmnathElementalToken|
+|Generate|TOK:ECC|Elemental|3||VoiceOfResurgenceToken|
+|Generate|TOK:ECC|Elf Warrior|||ElfWarriorToken|
+|Generate|TOK:ECC|Plant|||PlantToken|
+|Generate|TOK:ECC|Rhino Warrior|||RhinoWarriorToken|
+|Generate|TOK:ECC|Saproling|||SaprolingToken|
+|Generate|TOK:ECC|Scarecrow|||ScarecrowToken|
+|Generate|TOK:ECC|Snake|||DeathtouchSnakeToken|
+|Generate|TOK:ECC|Zombie|||ZombieToken|
+
 #TMT
 |Generate|TOK:TMT|Mutagen|||MutagenToken|
 
