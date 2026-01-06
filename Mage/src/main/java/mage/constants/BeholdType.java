@@ -22,6 +22,7 @@ import java.util.UUID;
 public enum BeholdType {
     DRAGON(SubType.DRAGON),
     ELF(SubType.ELF),
+    KITHKIN(SubType.KITHKIN),
     MERFOLK(SubType.MERFOLK);
 
     private final FilterPermanent filterPermanent;
