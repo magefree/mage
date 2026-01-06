@@ -88,6 +88,7 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Sanar, Innovative First-Year", 378, Rarity.RARE, mage.cards.s.SanarInnovativeFirstYear.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sear", 154, Rarity.UNCOMMON, mage.cards.s.Sear.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sear", 405, Rarity.UNCOMMON, mage.cards.s.Sear.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Shinestriker", 68, Rarity.UNCOMMON, mage.cards.s.Shinestriker.class));
         cards.add(new SetCardInfo("Silvergill Mentor", 403, Rarity.UNCOMMON, mage.cards.s.SilvergillMentor.class));
         cards.add(new SetCardInfo("Spell Snare", 71, Rarity.UNCOMMON, mage.cards.s.SpellSnare.class));
         cards.add(new SetCardInfo("Steam Vents", "348b", Rarity.RARE, mage.cards.s.SteamVents.class, NON_FULL_USE_VARIOUS));
