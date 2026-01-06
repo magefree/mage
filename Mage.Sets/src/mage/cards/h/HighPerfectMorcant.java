@@ -4,10 +4,10 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.EntersBattlefieldThisOrAnotherTriggeredAbility;
+import mage.abilities.costs.common.BlightCost;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.ProliferateEffect;
-import mage.abilities.effects.keyword.BlightControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -85,7 +85,7 @@ class HighPerfectMorcantEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
             Player opponent = game.getPlayer(opponentId);
-            BlightControllerEffect.doBlight(opponent, 1, game, source);
+            BlightCost.doBlight(opponent, 1, game, source);
         }
         return true;
     }
