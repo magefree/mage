@@ -22,7 +22,7 @@ public final class Personify extends CardImpl {
         // Exile target creature you control, then return that card to the battlefield under its owner's control. Create a 1/1 colorless Shapeshifter creature token with changeling.
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addEffect(new ExileThenReturnTargetEffect(false, true));
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new ShapeshifterColorlessToken());
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new ShapeshifterColorlessToken()));
     }
 
     private Personify(final Personify card) {
