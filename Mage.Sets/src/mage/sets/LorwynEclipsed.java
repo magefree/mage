@@ -139,5 +139,6 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Voracious Tome-Skimmer", 250, Rarity.UNCOMMON, mage.cards.v.VoraciousTomeSkimmer.class));
         cards.add(new SetCardInfo("Wanderbrine Preacher", 41, Rarity.COMMON, mage.cards.w.WanderbrinePreacher.class));
         cards.add(new SetCardInfo("Wanderwine Distracter", 82, Rarity.COMMON, mage.cards.w.WanderwineDistracter.class));
+        cards.add(new SetCardInfo("Warren Torchmaster", 163, Rarity.UNCOMMON, mage.cards.w.WarrenTorchmaster.class));
     }
 }
