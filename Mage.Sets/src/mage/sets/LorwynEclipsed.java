@@ -155,6 +155,7 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Temple Garden", 268, Rarity.RARE, mage.cards.t.TempleGarden.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Temple Garden", 351, Rarity.RARE, mage.cards.t.TempleGarden.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Temporal Cleansing", 78, Rarity.COMMON, mage.cards.t.TemporalCleansing.class));
+        cards.add(new SetCardInfo("Tend the Sprigs", 197, Rarity.COMMON, mage.cards.t.TendTheSprigs.class));
         cards.add(new SetCardInfo("Thoughtweft Lieutenant", 246, Rarity.UNCOMMON, mage.cards.t.ThoughtweftLieutenant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thoughtweft Lieutenant", 343, Rarity.UNCOMMON, mage.cards.t.ThoughtweftLieutenant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tweeze", 162, Rarity.COMMON, mage.cards.t.Tweeze.class));
