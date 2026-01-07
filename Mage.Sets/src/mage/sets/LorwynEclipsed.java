@@ -60,6 +60,8 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Deceit", 293, Rarity.MYTHIC, mage.cards.d.Deceit.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Disruptor of Currents", 303, Rarity.RARE, mage.cards.d.DisruptorOfCurrents.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Disruptor of Currents", 47, Rarity.RARE, mage.cards.d.DisruptorOfCurrents.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Doran, Besieged by Time", 215, Rarity.RARE, mage.cards.d.DoranBesiegedByTime.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Doran, Besieged by Time", 334, Rarity.RARE, mage.cards.d.DoranBesiegedByTime.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dose of Dawnglow", 100, Rarity.UNCOMMON, mage.cards.d.DoseOfDawnglow.class));
         cards.add(new SetCardInfo("Dream Seizer", 101, Rarity.COMMON, mage.cards.d.DreamSeizer.class));
         cards.add(new SetCardInfo("Eclipsed Flamekin", 219, Rarity.UNCOMMON, mage.cards.e.EclipsedFlamekin.class, NON_FULL_USE_VARIOUS));
