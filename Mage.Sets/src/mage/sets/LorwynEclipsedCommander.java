@@ -137,6 +137,8 @@ public final class LorwynEclipsedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Shatter the Sky", 66, Rarity.RARE, mage.cards.s.ShatterTheSky.class));
         cards.add(new SetCardInfo("Sheltered Thicket", 167, Rarity.RARE, mage.cards.s.ShelteredThicket.class));
         cards.add(new SetCardInfo("Shriekmaw", 85, Rarity.UNCOMMON, mage.cards.s.Shriekmaw.class));
+        cards.add(new SetCardInfo("Sinister Gnarlbark", 12, Rarity.RARE, mage.cards.s.SinisterGnarlbark.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sinister Gnarlbark", 32, Rarity.RARE, mage.cards.s.SinisterGnarlbark.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Skinrender", 86, Rarity.UNCOMMON, mage.cards.s.Skinrender.class));
         cards.add(new SetCardInfo("Slithermuse", 69, Rarity.RARE, mage.cards.s.Slithermuse.class));
         cards.add(new SetCardInfo("Smokebraider", 96, Rarity.COMMON, mage.cards.s.Smokebraider.class));
