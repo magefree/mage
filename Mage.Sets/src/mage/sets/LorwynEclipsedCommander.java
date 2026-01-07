@@ -95,6 +95,8 @@ public final class LorwynEclipsedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Kindred Summons", 112, Rarity.RARE, mage.cards.k.KindredSummons.class));
         cards.add(new SetCardInfo("Kodama's Reach", 113, Rarity.COMMON, mage.cards.k.KodamasReach.class));
         cards.add(new SetCardInfo("Kulrath Knight", 126, Rarity.UNCOMMON, mage.cards.k.KulrathKnight.class));
+        cards.add(new SetCardInfo("Lamentation", 10, Rarity.RARE, mage.cards.l.Lamentation.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lamentation", 30, Rarity.RARE, mage.cards.l.Lamentation.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Liliana, Death Wielder", 78, Rarity.MYTHIC, mage.cards.l.LilianaDeathWielder.class));
         cards.add(new SetCardInfo("Maelstrom Wanderer", 127, Rarity.RARE, mage.cards.m.MaelstromWanderer.class));
         cards.add(new SetCardInfo("Massacre Girl, Known Killer", 79, Rarity.MYTHIC, mage.cards.m.MassacreGirlKnownKiller.class));
