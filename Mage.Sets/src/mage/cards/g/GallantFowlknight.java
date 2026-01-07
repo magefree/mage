@@ -21,6 +21,8 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public final class GallantFowlknight extends CardImpl {
 
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.KITHKIN, "Kithkin creatures");
+
     public GallantFowlknight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
 
@@ -33,7 +35,7 @@ public final class GallantFowlknight extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(new BoostControlledEffect(1, 0, Duration.EndOfTurn));
         ability.addEffect(new GainAbilityControlledEffect(
             FirstStrikeAbility.getInstance(), Duration.EndOfTurn,
-            new FilterCreaturePermanent(SubType.KITHKIN, "Kithkin creatures")
+            filter
         ).setText("Kithkin creatures you control also gain first strike until end of turn"));
         this.addAbility(ability);
     }
