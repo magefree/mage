@@ -89,6 +89,8 @@ public final class LorwynEclipsedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Infernal Grasp", 77, Rarity.UNCOMMON, mage.cards.i.InfernalGrasp.class));
         cards.add(new SetCardInfo("Ingot Chewer", 95, Rarity.COMMON, mage.cards.i.IngotChewer.class));
         cards.add(new SetCardInfo("Jegantha, the Wellspring", 125, Rarity.RARE, mage.cards.j.JeganthaTheWellspring.class));
+        cards.add(new SetCardInfo("Jubilation", 17, Rarity.RARE, mage.cards.j.Jubilation.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Jubilation", 37, Rarity.RARE, mage.cards.j.Jubilation.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jungle Shrine", 154, Rarity.UNCOMMON, mage.cards.j.JungleShrine.class));
         cards.add(new SetCardInfo("Kindred Summons", 112, Rarity.RARE, mage.cards.k.KindredSummons.class));
         cards.add(new SetCardInfo("Kodama's Reach", 113, Rarity.COMMON, mage.cards.k.KodamasReach.class));
