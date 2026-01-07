@@ -98,6 +98,8 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Overgrown Tomb", 266, Rarity.RARE, mage.cards.o.OvergrownTomb.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Overgrown Tomb", 350, Rarity.RARE, mage.cards.o.OvergrownTomb.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Perfect Intimidation", 115, Rarity.UNCOMMON, mage.cards.p.PerfectIntimidation.class));
+        cards.add(new SetCardInfo("Personify", 28, Rarity.UNCOMMON, mage.cards.p.Personify.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Personify", 402, Rarity.UNCOMMON, mage.cards.p.Personify.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 269, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 274, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 279, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
