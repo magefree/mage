@@ -129,6 +129,7 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Thoughtweft Lieutenant", 246, Rarity.UNCOMMON, mage.cards.t.ThoughtweftLieutenant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thoughtweft Lieutenant", 343, Rarity.UNCOMMON, mage.cards.t.ThoughtweftLieutenant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Unexpected Assistance", 80, Rarity.COMMON, mage.cards.u.UnexpectedAssistance.class));
+        cards.add(new SetCardInfo("Unwelcome Sprite", 81, Rarity.UNCOMMON, mage.cards.u.UnwelcomeSprite.class));
         cards.add(new SetCardInfo("Vibrance", 249, Rarity.MYTHIC, mage.cards.v.Vibrance.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vibrance", 295, Rarity.MYTHIC, mage.cards.v.Vibrance.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vinebred Brawler", 201, Rarity.UNCOMMON, mage.cards.v.VinebredBrawler.class));
