@@ -118,6 +118,8 @@ public final class LorwynEclipsedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Puppeteer Clique", 84, Rarity.RARE, mage.cards.p.PuppeteerClique.class));
         cards.add(new SetCardInfo("Putrefy", 131, Rarity.UNCOMMON, mage.cards.p.Putrefy.class));
         cards.add(new SetCardInfo("Raging Ravine", 160, Rarity.RARE, mage.cards.r.RagingRavine.class));
+        cards.add(new SetCardInfo("Rain-Slicked Copse", 23, Rarity.RARE, mage.cards.r.RainSlickedCopse.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Rain-Slicked Copse", 43, Rarity.RARE, mage.cards.r.RainSlickedCopse.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rakdos Carnarium", 161, Rarity.UNCOMMON, mage.cards.r.RakdosCarnarium.class));
         cards.add(new SetCardInfo("Reality Shift", 68, Rarity.UNCOMMON, mage.cards.r.RealityShift.class));
         cards.add(new SetCardInfo("Realmwalker", 114, Rarity.RARE, mage.cards.r.Realmwalker.class));
