@@ -84,6 +84,8 @@ public final class LorwynEclipsedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Horde of Notions", 124, Rarity.RARE, mage.cards.h.HordeOfNotions.class));
         cards.add(new SetCardInfo("Ifnir Deadlands", 153, Rarity.UNCOMMON, mage.cards.i.IfnirDeadlands.class));
         cards.add(new SetCardInfo("Ignoble Hierarch", 52, Rarity.RARE, mage.cards.i.IgnobleHierarch.class));
+        cards.add(new SetCardInfo("Impulsivity", 13, Rarity.RARE, mage.cards.i.Impulsivity.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Impulsivity", 33, Rarity.RARE, mage.cards.i.Impulsivity.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Incandescent Soulstoke", 94, Rarity.UNCOMMON, mage.cards.i.IncandescentSoulstoke.class));
         cards.add(new SetCardInfo("Incremental Blight", 76, Rarity.UNCOMMON, mage.cards.i.IncrementalBlight.class));
         cards.add(new SetCardInfo("Infernal Grasp", 77, Rarity.UNCOMMON, mage.cards.i.InfernalGrasp.class));
