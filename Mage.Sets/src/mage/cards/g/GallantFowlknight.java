@@ -30,9 +30,7 @@ public final class GallantFowlknight extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When this creature enters, creatures you control get +1/+0 until end of turn. Kithkin creatures you control also gain first strike until end of turn.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new BoostControlledEffect(
-            1, 0, Duration.EndOfTurn
-        ).setText("creatures you control get +1/+0 until end of turn."));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new BoostControlledEffect(1, 0, Duration.EndOfTurn));
         ability.addEffect(new GainAbilityControlledEffect(
             FirstStrikeAbility.getInstance(), Duration.EndOfTurn,
             new FilterCreaturePermanent(SubType.KITHKIN, "Kithkin creatures")
