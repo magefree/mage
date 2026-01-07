@@ -141,6 +141,8 @@ public final class LorwynEclipsedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Slithermuse", 69, Rarity.RARE, mage.cards.s.Slithermuse.class));
         cards.add(new SetCardInfo("Smokebraider", 96, Rarity.COMMON, mage.cards.s.Smokebraider.class));
         cards.add(new SetCardInfo("Smoldering Marsh", 168, Rarity.RARE, mage.cards.s.SmolderingMarsh.class));
+        cards.add(new SetCardInfo("Sodden Verdure", 24, Rarity.RARE, mage.cards.s.SoddenVerdure.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sodden Verdure", 44, Rarity.RARE, mage.cards.s.SoddenVerdure.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sol Ring", 57, Rarity.UNCOMMON, mage.cards.s.SolRing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sol Ring", 58, Rarity.UNCOMMON, mage.cards.s.SolRing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Soul Snuffers", 87, Rarity.UNCOMMON, mage.cards.s.SoulSnuffers.class));
