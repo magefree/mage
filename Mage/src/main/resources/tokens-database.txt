@@ -319,7 +319,7 @@
 |Generate|TOK:C15|Lightning Rager|||LightningRagerToken|
 |Generate|TOK:C15|Phyrexian Germ|||PhyrexianGermToken|
 |Generate|TOK:C15|Saproling|||SaprolingToken|
-|Generate|TOK:C15|Shapeshifter|||CribSwapShapeshifterWhiteToken|
+|Generate|TOK:C15|Shapeshifter|||ShapeshifterColorlessToken|
 |Generate|TOK:C15|Snake|1||SnakeToken|
 |Generate|TOK:C15|Snake|2||PatagiaViperSnakeToken|
 |Generate|TOK:C15|Spider|||SpiderToken|
@@ -381,7 +381,7 @@
 |Generate|TOK:C18|Phyrexian Myr|||BrudicladTelchorMyrToken|
 |Generate|TOK:C18|Plant|||PlantToken|
 |Generate|TOK:C18|Servo|||ServoToken|
-|Generate|TOK:C18|Shapeshifter|||CribSwapShapeshifterWhiteToken|
+|Generate|TOK:C18|Shapeshifter|||ShapeshifterColorlessToken|
 |Generate|TOK:C18|Soldier|||SoldierToken|
 |Generate|TOK:C18|Survivor|||SurvivorToken|
 |Generate|TOK:C18|Thopter|1||ThopterColorlessToken|
@@ -698,7 +698,7 @@
 |Generate|TOK:LRW|Goblin Rogue|||GoblinRogueToken|
 |Generate|TOK:LRW|Kithkin Soldier|||KithkinSoldierToken|
 |Generate|TOK:LRW|Merfolk Wizard|||MerfolkWizardToken|
-|Generate|TOK:LRW|Shapeshifter|||CribSwapShapeshifterWhiteToken|
+|Generate|TOK:LRW|Shapeshifter|||ShapeshifterColorlessToken|
 |Generate|TOK:LRW|Wolf|||WolfToken|
 
 # M10
@@ -1589,7 +1589,7 @@
 |Generate|TOK:2XM|Plant|||PlantToken|
 |Generate|TOK:2XM|Saproling|||SaprolingToken|
 |Generate|TOK:2XM|Servo|||ServoToken|
-|Generate|TOK:2XM|Shapeshifter|||CribSwapShapeshifterWhiteToken|
+|Generate|TOK:2XM|Shapeshifter|||ShapeshifterColorlessToken|
 |Generate|TOK:2XM|Soldier|||SoldierToken|
 |Generate|TOK:2XM|Squirrel|||SquirrelToken|
 |Generate|TOK:2XM|Thopter|1||ThopterColorlessToken|
@@ -1688,7 +1688,7 @@
 |Generate|TOK:CM2|Phyrexian Wurm|1||WurmWithDeathtouchToken|
 |Generate|TOK:CM2|Phyrexian Wurm|2||WurmWithLifelinkToken|
 |Generate|TOK:CM2|Saproling|||SaprolingToken|
-|Generate|TOK:CM2|Shapeshifter|||CribSwapShapeshifterWhiteToken|
+|Generate|TOK:CM2|Shapeshifter|||ShapeshifterColorlessToken|
 |Generate|TOK:CM2|Spirit|||SpiritWhiteToken|
 |Generate|TOK:CM2|Triskelavite|||TriskelaviteToken|
 |Generate|TOK:CM2|Tuktuk the Returned|||TuktukTheReturnedToken|
@@ -1828,7 +1828,7 @@
 |Generate|TOK:CLB|Rabbit|||RabbitToken|
 |Generate|TOK:CLB|Saproling|||SaprolingToken|
 |Generate|TOK:CLB|Satyr|||XenagosSatyrToken|
-|Generate|TOK:CLB|Shapeshifter|1||CribSwapShapeshifterWhiteToken|
+|Generate|TOK:CLB|Shapeshifter|1||ShapeshifterColorlessToken|
 |Generate|TOK:CLB|Shapeshifter|2||ShapeshifterToken|
 |Generate|TOK:CLB|Shapeshifter|3||Shapeshifter32Token|
 |Generate|TOK:CLB|Shapeshifter|4||ShapeshifterBlueToken|
@@ -2557,7 +2557,7 @@
 |Generate|TOK:M3C|Phyrexian Myr|||BrudicladTelchorMyrToken|
 |Generate|TOK:M3C|Sand Warrior|||SandWarriorToken|
 |Generate|TOK:M3C|Saproling|||SaprolingToken|
-|Generate|TOK:M3C|Shapeshifter|1||CribSwapShapeshifterWhiteToken|
+|Generate|TOK:M3C|Shapeshifter|1||ShapeshifterColorlessToken|
 |Generate|TOK:M3C|Shapeshifter|2||ShapeshifterBlueToken|
 |Generate|TOK:M3C|Spirit|||UginTheIneffableToken|
 |Generate|TOK:M3C|Tarmogoyf|||TarmogoyfToken|

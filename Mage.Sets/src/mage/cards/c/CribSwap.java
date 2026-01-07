@@ -8,7 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.game.permanent.token.CribSwapShapeshifterWhiteToken;
+import mage.game.permanent.token.ShapeshifterColorlessToken;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -26,7 +26,7 @@ public final class CribSwap extends CardImpl {
         this.addAbility(new ChangelingAbility());
         // Exile target creature. Its controller creates a 1/1 colorless Shapeshifter creature token with changeling.
         this.getSpellAbility().addEffect(new ExileTargetEffect());
-        this.getSpellAbility().addEffect(new CreateTokenControllerTargetEffect(new CribSwapShapeshifterWhiteToken()));
+        this.getSpellAbility().addEffect(new CreateTokenControllerTargetEffect(new ShapeshifterColorlessToken()));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
     }

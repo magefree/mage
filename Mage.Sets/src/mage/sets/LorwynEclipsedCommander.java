@@ -28,6 +28,8 @@ public final class LorwynEclipsedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Auntie Ool, Cursewretch", 2, Rarity.MYTHIC, mage.cards.a.AuntieOolCursewretch.class));
         cards.add(new SetCardInfo("Avenger of Zendikar", 98, Rarity.MYTHIC, mage.cards.a.AvengerOfZendikar.class));
         cards.add(new SetCardInfo("Bane of Progress", 99, Rarity.RARE, mage.cards.b.BaneOfProgress.class));
+        cards.add(new SetCardInfo("Belonging", 25, Rarity.RARE, mage.cards.b.Belonging.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Belonging", 5, Rarity.RARE, mage.cards.b.Belonging.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Binding the Old Gods", 120, Rarity.UNCOMMON, mage.cards.b.BindingTheOldGods.class));
         cards.add(new SetCardInfo("Black Sun's Zenith", 71, Rarity.RARE, mage.cards.b.BlackSunsZenith.class));
         cards.add(new SetCardInfo("Blasphemous Act", 89, Rarity.RARE, mage.cards.b.BlasphemousAct.class));
