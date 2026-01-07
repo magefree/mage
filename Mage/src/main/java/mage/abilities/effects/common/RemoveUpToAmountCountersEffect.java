@@ -2,8 +2,6 @@ package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.MultiAmountType;
 import mage.constants.Outcome;
@@ -14,17 +12,13 @@ import mage.util.CardUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class RemoveUpToAmountCountersEffect extends OneShotEffect {
 
-    final DynamicValue amount;
+    private final int amount;
 
     public RemoveUpToAmountCountersEffect(int amount) {
-        super(Outcome.Neutral);
-        this.amount = StaticValue.get(amount);
-    }
-
-    public RemoveUpToAmountCountersEffect(DynamicValue amount) {
         super(Outcome.Neutral);
         this.amount = amount;
     }
@@ -41,39 +35,57 @@ public class RemoveUpToAmountCountersEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-        int max = this.amount.calculate(game, source, this);
-        // from permanent
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (permanent != null) {
-            List<String> toChoose = new ArrayList<>(permanent.getCounters(game).keySet());
-            List<Integer> counterList = controller.getMultiAmount(Outcome.UnboostCreature, toChoose, 0, 0, max, MultiAmountType.REMOVE_COUNTERS, game);
-            for (int i = 0; i < toChoose.size(); i++) {
-                int amountToRemove = counterList.get(i);
-                if (amountToRemove > 0) {
-                    permanent.removeCounters(toChoose.get(i), amountToRemove, source, game);
-                }
-            }
-            return true;
-        }
+        return doRemoval(
+                amount,
+                getTargetPointer().getFirst(game, source),
+                game.getPlayer(source.getControllerId()),
+                game, source
+        ) > 0;
+    }
 
-        // from player
-        Player player = game.getPlayer(source.getFirstTarget());
-        if (player != null) {
-            List<String> toChoose = new ArrayList<>(player.getCountersAsCopy().keySet());
-            List<Integer> counterList = controller.getMultiAmount(Outcome.Neutral, toChoose, 0, 0, max, MultiAmountType.REMOVE_COUNTERS, game);
-            for (int i = 0; i < toChoose.size(); i++) {
-                int amountToRemove = counterList.get(i);
-                if (amountToRemove > 0) {
-                    player.loseCounters(toChoose.get(i), amountToRemove, source, game);
-                }
-            }
-            return true;
+    private static List<String> getCounters(Permanent permanent, Player player, Game game) {
+        if (permanent != null) {
+            return new ArrayList<>(permanent.getCounters(game).keySet());
         }
-        return false;
+        if (player != null) {
+            return new ArrayList<>(player.getCountersAsCopy().keySet());
+        }
+        return new ArrayList<>();
+    }
+
+    private static int removeCounters(Permanent permanent, Player player, String counterName, int amountToRemove, Game game, Ability source) {
+        if (permanent != null) {
+            return permanent.removeCounters(counterName, amountToRemove, source, game, false);
+        }
+        if (player != null) {
+            // TODO: currently doesn't return how many counters are removed for a player
+            player.loseCounters(counterName, amountToRemove, source, game);
+        }
+        return 0;
+    }
+
+    public static int doRemoval(int amount, UUID targetId, Player controller, Game game, Ability source) {
+        Permanent permanent = game.getPermanent(targetId);
+        Player player = game.getPlayer(targetId);
+        if (controller == null || (permanent == null && player == null) || amount < 1) {
+            return 0;
+        }
+        List<String> toChoose = getCounters(permanent, player, game);
+        if (toChoose.isEmpty()) {
+            return 0;
+        }
+        List<Integer> counterList = controller.getMultiAmount(
+                Outcome.UnboostCreature, toChoose, 0, 0,
+                amount, MultiAmountType.REMOVE_COUNTERS, game
+        );
+        int total = 0;
+        for (int i = 0; i < toChoose.size(); i++) {
+            int amountToRemove = counterList.get(i);
+            if (amountToRemove > 0) {
+                total += removeCounters(permanent, player, toChoose.get(i), amountToRemove, game, source);
+            }
+        }
+        return total;
     }
 
     @Override
@@ -81,6 +93,13 @@ public class RemoveUpToAmountCountersEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return "remove up to " + CardUtil.numberToText(this.amount.toString()) + " counters from " + getTargetPointer().describeTargets(mode.getTargets(), "that permanent");
+        StringBuilder sb = new StringBuilder("remove ");
+        if (amount < Integer.MAX_VALUE) {
+            sb.append("up to ");
+        }
+        sb.append(CardUtil.numberToText(amount));
+        sb.append(" counters from ");
+        sb.append(getTargetPointer().describeTargets(mode.getTargets(), "that permanent"));
+        return sb.toString();
     }
 }
