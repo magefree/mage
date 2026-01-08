@@ -105,6 +105,7 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Gangly Stompling", 226, Rarity.COMMON, mage.cards.g.GanglyStompling.class));
         cards.add(new SetCardInfo("Glamer Gifter", 49, Rarity.UNCOMMON, mage.cards.g.GlamerGifter.class));
         cards.add(new SetCardInfo("Glister Bairn", 227, Rarity.UNCOMMON, mage.cards.g.GlisterBairn.class));
+        cards.add(new SetCardInfo("Gnarlbark Elm", 103, Rarity.UNCOMMON, mage.cards.g.GnarlbarkElm.class));
         cards.add(new SetCardInfo("Goatnap", 142, Rarity.UNCOMMON, mage.cards.g.Goatnap.class));
         cards.add(new SetCardInfo("Graveshifter", 104, Rarity.UNCOMMON, mage.cards.g.Graveshifter.class));
         cards.add(new SetCardInfo("Great Forest Druid", 178, Rarity.COMMON, mage.cards.g.GreatForestDruid.class));
