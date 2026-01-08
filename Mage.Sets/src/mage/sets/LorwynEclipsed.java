@@ -126,6 +126,7 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Kirol, Attentive First-Year", 231, Rarity.RARE, mage.cards.k.KirolAttentiveFirstYear.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kirol, Attentive First-Year", 374, Rarity.RARE, mage.cards.k.KirolAttentiveFirstYear.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kulrath Mystic", 56, Rarity.COMMON, mage.cards.k.KulrathMystic.class));
+        cards.add(new SetCardInfo("Lasting Tarfire", 149, Rarity.UNCOMMON, mage.cards.l.LastingTarfire.class));
         cards.add(new SetCardInfo("Lavaleaper", 150, Rarity.RARE, mage.cards.l.Lavaleaper.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lavaleaper", 318, Rarity.RARE, mage.cards.l.Lavaleaper.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Liminal Hold", 24, Rarity.COMMON, mage.cards.l.LiminalHold.class));
