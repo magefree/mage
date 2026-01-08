@@ -111,6 +111,8 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Liminal Hold", 24, Rarity.COMMON, mage.cards.l.LiminalHold.class));
         cards.add(new SetCardInfo("Lys Alana Informant", 181, Rarity.COMMON, mage.cards.l.LysAlanaInformant.class));
         cards.add(new SetCardInfo("Midnight Tilling", 182, Rarity.COMMON, mage.cards.m.MidnightTilling.class));
+        cards.add(new SetCardInfo("Mirrorform", 308, Rarity.MYTHIC, mage.cards.m.Mirrorform.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mirrorform", 59, Rarity.MYTHIC, mage.cards.m.Mirrorform.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Moonglove Extractor", 109, Rarity.COMMON, mage.cards.m.MoongloveExtractor.class));
         cards.add(new SetCardInfo("Morningtide's Light", 27, Rarity.MYTHIC, mage.cards.m.MorningtidesLight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Morningtide's Light", 301, Rarity.MYTHIC, mage.cards.m.MorningtidesLight.class, NON_FULL_USE_VARIOUS));
