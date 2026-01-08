@@ -202,6 +202,7 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Swat Away", 75, Rarity.UNCOMMON, mage.cards.s.SwatAway.class));
         cards.add(new SetCardInfo("Sygg, Wanderwine Wisdom", 288, Rarity.RARE, mage.cards.s.SyggWanderwineWisdom.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sygg, Wanderwine Wisdom", 76, Rarity.RARE, mage.cards.s.SyggWanderwineWisdom.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Tanufel Rimespeaker", 77, Rarity.UNCOMMON, mage.cards.t.TanufelRimespeaker.class));
         cards.add(new SetCardInfo("Temple Garden", "351b", Rarity.RARE, mage.cards.t.TempleGarden.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Temple Garden", 268, Rarity.RARE, mage.cards.t.TempleGarden.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Temple Garden", 351, Rarity.RARE, mage.cards.t.TempleGarden.class, NON_FULL_USE_VARIOUS));
