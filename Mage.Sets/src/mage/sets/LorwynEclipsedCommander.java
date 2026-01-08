@@ -167,6 +167,8 @@ public final class LorwynEclipsedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Unclaimed Territory", 175, Rarity.UNCOMMON, mage.cards.u.UnclaimedTerritory.class));
         cards.add(new SetCardInfo("Vernal Fen", 63, Rarity.RARE, mage.cards.v.VernalFen.class));
         cards.add(new SetCardInfo("Vernal Sovereign", 135, Rarity.RARE, mage.cards.v.VernalSovereign.class));
+        cards.add(new SetCardInfo("Village Pillagers", 14, Rarity.RARE, mage.cards.v.VillagePillagers.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Village Pillagers", 34, Rarity.RARE, mage.cards.v.VillagePillagers.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vraska, Betrayal's Sting", 88, Rarity.MYTHIC, mage.cards.v.VraskaBetrayalsSting.class));
         cards.add(new SetCardInfo("Wickerbough Elder", 118, Rarity.COMMON, mage.cards.w.WickerboughElder.class));
         cards.add(new SetCardInfo("Woodland Cemetery", 176, Rarity.RARE, mage.cards.w.WoodlandCemetery.class));
