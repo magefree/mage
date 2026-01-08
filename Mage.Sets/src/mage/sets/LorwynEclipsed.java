@@ -50,6 +50,8 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Boggart Mischief", 92, Rarity.UNCOMMON, mage.cards.b.BoggartMischief.class));
         cards.add(new SetCardInfo("Boldwyr Aggressor", 125, Rarity.UNCOMMON, mage.cards.b.BoldwyrAggressor.class));
         cards.add(new SetCardInfo("Boneclub Berserker", 126, Rarity.COMMON, mage.cards.b.BoneclubBerserker.class));
+        cards.add(new SetCardInfo("Brigid's Command", 208, Rarity.RARE, mage.cards.b.BrigidsCommand.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Brigid's Command", 332, Rarity.RARE, mage.cards.b.BrigidsCommand.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bristlebane Battler", 168, Rarity.RARE, mage.cards.b.BristlebaneBattler.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bristlebane Battler", 325, Rarity.RARE, mage.cards.b.BristlebaneBattler.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Burdened Stoneback", 8, Rarity.UNCOMMON, mage.cards.b.BurdenedStoneback.class));
