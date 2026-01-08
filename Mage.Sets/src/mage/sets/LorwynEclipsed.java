@@ -35,6 +35,10 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Blood Crypt", "349b", Rarity.RARE, mage.cards.b.BloodCrypt.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Blood Crypt", 262, Rarity.RARE, mage.cards.b.BloodCrypt.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Blood Crypt", 349, Rarity.RARE, mage.cards.b.BloodCrypt.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Bloodline Bidding", 359, Rarity.RARE, mage.cards.b.BloodlineBidding.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Bloodline Bidding", 385, Rarity.MYTHIC, mage.cards.b.BloodlineBidding.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Bloodline Bidding", 395, Rarity.MYTHIC, mage.cards.b.BloodlineBidding.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Bloodline Bidding", 91, Rarity.RARE, mage.cards.b.BloodlineBidding.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloom Tender", 166, Rarity.MYTHIC, mage.cards.b.BloomTender.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloom Tender", 324, Rarity.MYTHIC, mage.cards.b.BloomTender.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloom Tender", 390, Rarity.MYTHIC, mage.cards.b.BloomTender.class, NON_FULL_USE_VARIOUS));
