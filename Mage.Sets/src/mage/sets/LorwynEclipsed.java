@@ -144,6 +144,7 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 282, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mutable Explorer", 186, Rarity.RARE, mage.cards.m.MutableExplorer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mutable Explorer", 327, Rarity.RARE, mage.cards.m.MutableExplorer.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Noggle Robber", 237, Rarity.UNCOMMON, mage.cards.n.NoggleRobber.class));
         cards.add(new SetCardInfo("Overgrown Tomb", "350b", Rarity.RARE, mage.cards.o.OvergrownTomb.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Overgrown Tomb", 266, Rarity.RARE, mage.cards.o.OvergrownTomb.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Overgrown Tomb", 350, Rarity.RARE, mage.cards.o.OvergrownTomb.class, NON_FULL_USE_VARIOUS));
