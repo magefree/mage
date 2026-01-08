@@ -1,16 +1,14 @@
-package mage.cards.m;
+package mage.cards.p;
 
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.FightEnchantedTargetEffect;
-import mage.abilities.effects.common.combat.CantBeBlockedByMoreThanOneAttachedEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -23,10 +21,10 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class MeltstridersResolve extends CardImpl {
+public final class PitilessFists extends CardImpl {
 
-    public MeltstridersResolve(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}");
+    public PitilessFists(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
 
         this.subtype.add(SubType.AURA);
 
@@ -41,19 +39,16 @@ public final class MeltstridersResolve extends CardImpl {
         ability.addTarget(new TargetOpponentsCreaturePermanent(0, 1));
         this.addAbility(ability);
 
-        // Enchanted creature gets +0/+2 and can't be blocked by more than one creature.
-        ability = new SimpleStaticAbility(new BoostEnchantedEffect(0, 2));
-        ability.addEffect(new CantBeBlockedByMoreThanOneAttachedEffect(AttachmentType.AURA)
-                .setText("and can't be blocked by more than one creature"));
-        this.addAbility(ability);
+        // Enchanted creature gets +2/+2.
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(2, 2)));
     }
 
-    private MeltstridersResolve(final MeltstridersResolve card) {
+    private PitilessFists(final PitilessFists card) {
         super(card);
     }
 
     @Override
-    public MeltstridersResolve copy() {
-        return new MeltstridersResolve(this);
+    public PitilessFists copy() {
+        return new PitilessFists(this);
     }
 }

@@ -177,6 +177,7 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Personify", 28, Rarity.UNCOMMON, mage.cards.p.Personify.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Personify", 402, Rarity.UNCOMMON, mage.cards.p.Personify.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Pestered Wellguard", 63, Rarity.UNCOMMON, mage.cards.p.PesteredWellguard.class));
+        cards.add(new SetCardInfo("Pitiless Fists", 187, Rarity.UNCOMMON, mage.cards.p.PitilessFists.class));
         cards.add(new SetCardInfo("Plains", 269, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 274, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 279, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));

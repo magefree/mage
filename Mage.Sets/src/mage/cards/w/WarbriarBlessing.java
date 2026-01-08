@@ -3,8 +3,8 @@ package mage.cards.w;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.FightEnchantedTargetEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
@@ -13,8 +13,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -37,7 +35,7 @@ public final class WarbriarBlessing extends CardImpl {
         this.addAbility(ability);
 
         // When Warbriar Blessing enters the battlefield, enchanted creature fights up to one target creature you don't control.
-        ability = new EntersBattlefieldTriggeredAbility(new WarbriarBlessingEffect());
+        ability = new EntersBattlefieldTriggeredAbility(new FightEnchantedTargetEffect());
         ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL, false));
         this.addAbility(ability);
 
@@ -52,37 +50,5 @@ public final class WarbriarBlessing extends CardImpl {
     @Override
     public WarbriarBlessing copy() {
         return new WarbriarBlessing(this);
-    }
-}
-
-class WarbriarBlessingEffect extends OneShotEffect {
-
-    WarbriarBlessingEffect() {
-        super(Outcome.Benefit);
-        staticText = "enchanted creature fights up to one target creature you don't control. " +
-                "<i>(Each deals damage equal to its power to the other.)</i>";
-    }
-
-    private WarbriarBlessingEffect(final WarbriarBlessingEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public WarbriarBlessingEffect copy() {
-        return new WarbriarBlessingEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-        Permanent opponentsPermanent = game.getPermanent(source.getFirstTarget());
-        if (permanent == null || opponentsPermanent == null) {
-            return false;
-        }
-        Permanent attach = game.getPermanent(permanent.getAttachedTo());
-        if (attach == null) {
-            return false;
-        }
-        return attach.fight(opponentsPermanent, source, game);
     }
 }
