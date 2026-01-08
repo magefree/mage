@@ -173,6 +173,8 @@ public final class LorwynEclipsedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Village Pillagers", 34, Rarity.RARE, mage.cards.v.VillagePillagers.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vraska, Betrayal's Sting", 88, Rarity.MYTHIC, mage.cards.v.VraskaBetrayalsSting.class));
         cards.add(new SetCardInfo("Wickerbough Elder", 118, Rarity.COMMON, mage.cards.w.WickerboughElder.class));
+        cards.add(new SetCardInfo("Wickersmith's Tools", 21, Rarity.RARE, mage.cards.w.WickersmithsTools.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Wickersmith's Tools", 41, Rarity.RARE, mage.cards.w.WickersmithsTools.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Woodland Cemetery", 176, Rarity.RARE, mage.cards.w.WoodlandCemetery.class));
         cards.add(new SetCardInfo("Yarok, the Desecrated", 136, Rarity.MYTHIC, mage.cards.y.YarokTheDesecrated.class));
     }
