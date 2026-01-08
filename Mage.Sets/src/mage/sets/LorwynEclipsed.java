@@ -142,6 +142,7 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Meek Attack", 319, Rarity.MYTHIC, mage.cards.m.MeekAttack.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Meek Attack", 388, Rarity.MYTHIC, mage.cards.m.MeekAttack.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Meek Attack", 398, Rarity.MYTHIC, mage.cards.m.MeekAttack.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Merrow Skyswimmer", 234, Rarity.COMMON, mage.cards.m.MerrowSkyswimmer.class));
         cards.add(new SetCardInfo("Midnight Tilling", 182, Rarity.COMMON, mage.cards.m.MidnightTilling.class));
         cards.add(new SetCardInfo("Mirrorform", 308, Rarity.MYTHIC, mage.cards.m.Mirrorform.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mirrorform", 59, Rarity.MYTHIC, mage.cards.m.Mirrorform.class, NON_FULL_USE_VARIOUS));
