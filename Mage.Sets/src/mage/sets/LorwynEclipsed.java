@@ -156,6 +156,7 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 274, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 279, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Prideful Feastling", 238, Rarity.COMMON, mage.cards.p.PridefulFeastling.class));
+        cards.add(new SetCardInfo("Requiting Hex", 116, Rarity.UNCOMMON, mage.cards.r.RequitingHex.class));
         cards.add(new SetCardInfo("Rhys, the Evermore", 32, Rarity.RARE, mage.cards.r.RhysTheEvermore.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rhys, the Evermore", 354, Rarity.RARE, mage.cards.r.RhysTheEvermore.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rooftop Percher", 2, Rarity.COMMON, mage.cards.r.RooftopPercher.class));
