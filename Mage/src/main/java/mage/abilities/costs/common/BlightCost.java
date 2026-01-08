@@ -39,6 +39,10 @@ public class BlightCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
+        return canBlight(controllerId, game, source);
+    }
+
+    public static boolean canBlight(UUID controllerId, Game game, Ability source) {
         return game
                 .getBattlefield()
                 .contains(StaticFilters.FILTER_CONTROLLED_CREATURE, controllerId, source, game, 1);
