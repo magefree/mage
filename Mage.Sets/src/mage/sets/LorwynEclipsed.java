@@ -98,6 +98,7 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Glamer Gifter", 49, Rarity.UNCOMMON, mage.cards.g.GlamerGifter.class));
         cards.add(new SetCardInfo("Glister Bairn", 227, Rarity.UNCOMMON, mage.cards.g.GlisterBairn.class));
         cards.add(new SetCardInfo("Goatnap", 142, Rarity.UNCOMMON, mage.cards.g.Goatnap.class));
+        cards.add(new SetCardInfo("Graveshifter", 104, Rarity.UNCOMMON, mage.cards.g.Graveshifter.class));
         cards.add(new SetCardInfo("Great Forest Druid", 178, Rarity.COMMON, mage.cards.g.GreatForestDruid.class));
         cards.add(new SetCardInfo("Gristle Glutton", 144, Rarity.COMMON, mage.cards.g.GristleGlutton.class));
         cards.add(new SetCardInfo("Grub, Storied Matriarch", 105, Rarity.RARE, mage.cards.g.GrubStoriedMatriarch.class, NON_FULL_USE_VARIOUS));
@@ -147,6 +148,7 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 282, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mutable Explorer", 186, Rarity.RARE, mage.cards.m.MutableExplorer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mutable Explorer", 327, Rarity.RARE, mage.cards.m.MutableExplorer.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Nameless Inversion", 113, Rarity.UNCOMMON, mage.cards.n.NamelessInversion.class));
         cards.add(new SetCardInfo("Noggle Robber", 237, Rarity.UNCOMMON, mage.cards.n.NoggleRobber.class));
         cards.add(new SetCardInfo("Overgrown Tomb", "350b", Rarity.RARE, mage.cards.o.OvergrownTomb.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Overgrown Tomb", 266, Rarity.RARE, mage.cards.o.OvergrownTomb.class, NON_FULL_USE_VARIOUS));
