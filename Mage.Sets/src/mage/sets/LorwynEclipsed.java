@@ -51,6 +51,7 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Bristlebane Battler", 168, Rarity.RARE, mage.cards.b.BristlebaneBattler.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bristlebane Battler", 325, Rarity.RARE, mage.cards.b.BristlebaneBattler.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Burdened Stoneback", 8, Rarity.UNCOMMON, mage.cards.b.BurdenedStoneback.class));
+        cards.add(new SetCardInfo("Burning Curiosity", 129, Rarity.COMMON, mage.cards.b.BurningCuriosity.class));
         cards.add(new SetCardInfo("Champion of the Clachan", 353, Rarity.RARE, mage.cards.c.ChampionOfTheClachan.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Champion of the Clachan", 9, Rarity.RARE, mage.cards.c.ChampionOfTheClachan.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Champion of the Weird", 360, Rarity.RARE, mage.cards.c.ChampionOfTheWeird.class, NON_FULL_USE_VARIOUS));
