@@ -98,8 +98,8 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Flamekin Gildweaver", 140, Rarity.COMMON, mage.cards.f.FlamekinGildweaver.class));
         cards.add(new SetCardInfo("Flock Impostor", 16, Rarity.UNCOMMON, mage.cards.f.FlockImpostor.class));
         cards.add(new SetCardInfo("Forest", 273, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Forest", 278, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Forest", 283, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 278, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 283, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Formidable Speaker", 176, Rarity.RARE, mage.cards.f.FormidableSpeaker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Formidable Speaker", 366, Rarity.RARE, mage.cards.f.FormidableSpeaker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gallant Fowlknight", 17, Rarity.COMMON, mage.cards.g.GallantFowlknight.class));
@@ -134,8 +134,8 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Iron-Shield Elf", 108, Rarity.UNCOMMON, mage.cards.i.IronShieldElf.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Iron-Shield Elf", 404, Rarity.UNCOMMON, mage.cards.i.IronShieldElf.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 270, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Island", 275, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Island", 280, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 275, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Island", 280, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Kinsbaile Aspirant", 21, Rarity.UNCOMMON, mage.cards.k.KinsbaileAspirant.class));
         cards.add(new SetCardInfo("Kirol, Attentive First-Year", 231, Rarity.RARE, mage.cards.k.KirolAttentiveFirstYear.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kirol, Attentive First-Year", 374, Rarity.RARE, mage.cards.k.KirolAttentiveFirstYear.class, NON_FULL_USE_VARIOUS));
@@ -163,8 +163,8 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Morningtide's Light", 27, Rarity.MYTHIC, mage.cards.m.MorningtidesLight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Morningtide's Light", 301, Rarity.MYTHIC, mage.cards.m.MorningtidesLight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 272, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Mountain", 277, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Mountain", 282, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 277, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 282, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mudbutton Cursetosser", 112, Rarity.UNCOMMON, mage.cards.m.MudbuttonCursetosser.class));
         cards.add(new SetCardInfo("Mutable Explorer", 186, Rarity.RARE, mage.cards.m.MutableExplorer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mutable Explorer", 327, Rarity.RARE, mage.cards.m.MutableExplorer.class, NON_FULL_USE_VARIOUS));
@@ -179,8 +179,8 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Pestered Wellguard", 63, Rarity.UNCOMMON, mage.cards.p.PesteredWellguard.class));
         cards.add(new SetCardInfo("Pitiless Fists", 187, Rarity.UNCOMMON, mage.cards.p.PitilessFists.class));
         cards.add(new SetCardInfo("Plains", 269, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Plains", 274, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Plains", 279, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 274, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 279, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Prideful Feastling", 238, Rarity.COMMON, mage.cards.p.PridefulFeastling.class));
         cards.add(new SetCardInfo("Puca's Eye", 259, Rarity.UNCOMMON, mage.cards.p.PucasEye.class));
         cards.add(new SetCardInfo("Requiting Hex", 116, Rarity.UNCOMMON, mage.cards.r.RequitingHex.class));
@@ -214,8 +214,8 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Sun-Dappled Celebrant", 37, Rarity.COMMON, mage.cards.s.SunDappledCelebrant.class));
         cards.add(new SetCardInfo("Surly Farrier", 196, Rarity.COMMON, mage.cards.s.SurlyFarrier.class));
         cards.add(new SetCardInfo("Swamp", 271, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Swamp", 276, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Swamp", 281, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 276, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 281, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Swat Away", 75, Rarity.UNCOMMON, mage.cards.s.SwatAway.class));
         cards.add(new SetCardInfo("Sygg, Wanderwine Wisdom", 288, Rarity.RARE, mage.cards.s.SyggWanderwineWisdom.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sygg, Wanderwine Wisdom", 76, Rarity.RARE, mage.cards.s.SyggWanderwineWisdom.class, NON_FULL_USE_VARIOUS));
