@@ -2846,7 +2846,7 @@
 |Generate|TOK:FIC|The Blackjack|||TheBlackjackToken|
 |Generate|TOK:FIC|Clue|||ClueArtifactToken|
 
-#EOE
+# EOE
 |Generate|TOK:EOE|Drone|||DroneToken2|
 |Generate|TOK:EOE|Human Soldier|||HumanSoldierToken|
 |Generate|TOK:EOE|Lander|1||LanderToken|
@@ -2858,7 +2858,7 @@
 |Generate|TOK:EOE|Robot|||RobotToken|
 |Generate|TOK:EOE|Sliver|||SliverToken|
 
-#EOC
+# EOC
 |Generate|TOK:EOC|Beast|1||BeastToken|
 |Generate|TOK:EOC|Beast|2||BeastToken2|
 |Generate|TOK:EOC|Bird|||SwanSongBirdToken|
@@ -2876,7 +2876,7 @@
 |Generate|TOK:EOC|Shapeshifter|||ShapeshifterDeathtouchToken|
 |Generate|TOK:EOC|Thopter|||ThopterColorlessToken|
 
-#SPM
+# SPM
 |Generate|TOK:SPM|Food|||FoodToken|
 |Generate|TOK:SPM|Human|||HumanCitizenToken|
 |Generate|TOK:SPM|Illusion|||IllusionVillainToken|
@@ -2884,7 +2884,7 @@
 |Generate|TOK:SPM|Spider|||Spider21Token|
 |Generate|TOK:SPM|Treasure|||TreasureToken|
 
-#TLA
+# TLA
 |Generate|TOK:TLA|Ally|1||AllyToken|
 |Generate|TOK:TLA|Ally|2||AllyToken|
 |Generate|TOK:TLA|Ally|3||AllyToken|
@@ -2906,7 +2906,7 @@
 |Generate|TOK:TLA|Spirit|||SpiritWorldToken|
 |Generate|TOK:TLA|Treasure|||TreasureToken|
 
-#TLE
+# TLE
 |Generate|TOK:TLE|Marit Lage|||MaritLageToken|
 |Generate|TOK:TLE|Soldier|||SoldierRedToken|
 
@@ -2924,8 +2924,6 @@
 |Generate|TOK:ECL|Worm|||BlackGreenWormToken|
 
 # ECC
-
-# ECC
 |Generate|TOK:ECC|Elemental|1||WhiteElementalToken|
 |Generate|TOK:ECC|Elemental|2||OmnathElementalToken|
 |Generate|TOK:ECC|Elemental|3||VoiceOfResurgenceToken|
@@ -2937,7 +2935,7 @@
 |Generate|TOK:ECC|Snake|||DeathtouchSnakeToken|
 |Generate|TOK:ECC|Zombie|||ZombieToken|
 
-#TMT
+# TMT
 |Generate|TOK:TMT|Mutagen|||MutagenToken|
 
 # JVC
