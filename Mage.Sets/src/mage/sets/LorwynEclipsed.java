@@ -82,6 +82,8 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Dawnhand Eulogist", 99, Rarity.COMMON, mage.cards.d.DawnhandEulogist.class));
         cards.add(new SetCardInfo("Deceit", 212, Rarity.MYTHIC, mage.cards.d.Deceit.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Deceit", 293, Rarity.MYTHIC, mage.cards.d.Deceit.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Deepchannel Duelist", 213, Rarity.UNCOMMON, mage.cards.d.DeepchannelDuelist.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Deepchannel Duelist", 333, Rarity.UNCOMMON, mage.cards.d.DeepchannelDuelist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Disruptor of Currents", 303, Rarity.RARE, mage.cards.d.DisruptorOfCurrents.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Disruptor of Currents", 47, Rarity.RARE, mage.cards.d.DisruptorOfCurrents.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Doran, Besieged by Time", 215, Rarity.RARE, mage.cards.d.DoranBesiegedByTime.class, NON_FULL_USE_VARIOUS));
