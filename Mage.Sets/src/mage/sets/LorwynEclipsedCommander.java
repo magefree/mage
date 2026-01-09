@@ -77,6 +77,8 @@ public final class LorwynEclipsedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Glissa Sunslayer", 122, Rarity.RARE, mage.cards.g.GlissaSunslayer.class));
         cards.add(new SetCardInfo("Golgari Rot Farm", 151, Rarity.UNCOMMON, mage.cards.g.GolgariRotFarm.class));
         cards.add(new SetCardInfo("Grave Titan", 74, Rarity.MYTHIC, mage.cards.g.GraveTitan.class));
+        cards.add(new SetCardInfo("Grave Venerations", 29, Rarity.RARE, mage.cards.g.GraveVenerations.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Grave Venerations", 9, Rarity.RARE, mage.cards.g.GraveVenerations.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Greenwarden of Murasa", 110, Rarity.MYTHIC, mage.cards.g.GreenwardenOfMurasa.class));
         cards.add(new SetCardInfo("Grim Poppet", 142, Rarity.RARE, mage.cards.g.GrimPoppet.class));
         cards.add(new SetCardInfo("Gruul Turf", 152, Rarity.UNCOMMON, mage.cards.g.GruulTurf.class));
