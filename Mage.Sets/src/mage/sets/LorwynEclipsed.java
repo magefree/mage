@@ -55,6 +55,7 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Boggart Cursecrafter", 206, Rarity.UNCOMMON, mage.cards.b.BoggartCursecrafter.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Boggart Cursecrafter", 331, Rarity.UNCOMMON, mage.cards.b.BoggartCursecrafter.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Boggart Mischief", 92, Rarity.UNCOMMON, mage.cards.b.BoggartMischief.class));
+        cards.add(new SetCardInfo("Boggart Prankster", 93, Rarity.COMMON, mage.cards.b.BoggartPrankster.class));
         cards.add(new SetCardInfo("Bogslither's Embrace", 94, Rarity.COMMON, mage.cards.b.BogslithersEmbrace.class));
         cards.add(new SetCardInfo("Boldwyr Aggressor", 125, Rarity.UNCOMMON, mage.cards.b.BoldwyrAggressor.class));
         cards.add(new SetCardInfo("Boneclub Berserker", 126, Rarity.COMMON, mage.cards.b.BoneclubBerserker.class));
