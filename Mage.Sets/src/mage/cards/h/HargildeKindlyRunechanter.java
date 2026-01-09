@@ -7,12 +7,12 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.keyword.FriendsForeverAbility;
 import mage.abilities.mana.ConditionalColorlessManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.PartnerVariantType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.Game;
@@ -38,7 +38,7 @@ public final class HargildeKindlyRunechanter extends CardImpl {
         ));
 
         // Friends forever
-        this.addAbility(FriendsForeverAbility.getInstance());
+        this.addAbility(PartnerVariantType.FRIENDS_FOREVER.makeAbility());
     }
 
     private HargildeKindlyRunechanter(final HargildeKindlyRunechanter card) {

@@ -5,11 +5,11 @@ import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.keyword.InvestigateEffect;
-import mage.abilities.keyword.FriendsForeverAbility;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.PartnerVariantType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
@@ -48,7 +48,7 @@ public final class SophinaSpearsageDeserter extends CardImpl {
                 .setText("investigate once for each nontoken attacking creature")));
 
         // Friends forever
-        this.addAbility(FriendsForeverAbility.getInstance());
+        this.addAbility(PartnerVariantType.FRIENDS_FOREVER.makeAbility());
     }
 
     private SophinaSpearsageDeserter(final SophinaSpearsageDeserter card) {
