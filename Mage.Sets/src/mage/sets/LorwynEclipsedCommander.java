@@ -105,6 +105,7 @@ public final class LorwynEclipsedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Lamentation", 30, Rarity.RARE, mage.cards.l.Lamentation.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Liliana, Death Wielder", 78, Rarity.MYTHIC, mage.cards.l.LilianaDeathWielder.class));
         cards.add(new SetCardInfo("Maelstrom Wanderer", 127, Rarity.RARE, mage.cards.m.MaelstromWanderer.class));
+        cards.add(new SetCardInfo("Mass of Mysteries", 3, Rarity.MYTHIC, mage.cards.m.MassOfMysteries.class));
         cards.add(new SetCardInfo("Massacre Girl, Known Killer", 79, Rarity.MYTHIC, mage.cards.m.MassacreGirlKnownKiller.class));
         cards.add(new SetCardInfo("Midnight Banshee", 80, Rarity.RARE, mage.cards.m.MidnightBanshee.class));
         cards.add(new SetCardInfo("Muldrotha, the Gravetide", 128, Rarity.MYTHIC, mage.cards.m.MuldrothaTheGravetide.class));
@@ -154,6 +155,7 @@ public final class LorwynEclipsedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Sol Ring", 57, Rarity.UNCOMMON, mage.cards.s.SolRing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sol Ring", 58, Rarity.UNCOMMON, mage.cards.s.SolRing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Soul Snuffers", 87, Rarity.UNCOMMON, mage.cards.s.SoulSnuffers.class));
+        cards.add(new SetCardInfo("Springleaf Parade", 19, Rarity.RARE, mage.cards.s.SpringleafParade.class));
         cards.add(new SetCardInfo("Terminate", 134, Rarity.COMMON, mage.cards.t.Terminate.class));
         cards.add(new SetCardInfo("Terramorphic Expanse", 169, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class));
         cards.add(new SetCardInfo("The Reaper, King No More", 4, Rarity.MYTHIC, mage.cards.t.TheReaperKingNoMore.class));
@@ -173,6 +175,8 @@ public final class LorwynEclipsedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Village Pillagers", 34, Rarity.RARE, mage.cards.v.VillagePillagers.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vraska, Betrayal's Sting", 88, Rarity.MYTHIC, mage.cards.v.VraskaBetrayalsSting.class));
         cards.add(new SetCardInfo("Wickerbough Elder", 118, Rarity.COMMON, mage.cards.w.WickerboughElder.class));
+        cards.add(new SetCardInfo("Wickersmith's Tools", 21, Rarity.RARE, mage.cards.w.WickersmithsTools.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Wickersmith's Tools", 41, Rarity.RARE, mage.cards.w.WickersmithsTools.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Woodland Cemetery", 176, Rarity.RARE, mage.cards.w.WoodlandCemetery.class));
         cards.add(new SetCardInfo("Yarok, the Desecrated", 136, Rarity.MYTHIC, mage.cards.y.YarokTheDesecrated.class));
     }

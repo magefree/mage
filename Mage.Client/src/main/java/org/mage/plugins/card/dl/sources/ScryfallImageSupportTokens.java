@@ -2857,6 +2857,21 @@ public class ScryfallImageSupportTokens {
             put("TLE/Marit Lage", "https://api.scryfall.com/cards/ttle/1/?format=image");
             put("TLE/Soldier", "https://api.scryfall.com/cards/ttle/2?format=image");
 
+            // ECL
+            put("ECL/Shapeshifter", "https://api.scryfall.com/cards/tecl/1/?format=image");
+            
+            // ECC
+            put("ECC/Elemental/1", "https://api.scryfall.com/cards/tecc/2?format=image");
+            put("ECC/Elemental/2", "https://api.scryfall.com/cards/tecc/9?format=image");
+            put("ECC/Elemental/3", "https://api.scryfall.com/cards/tecc/10?format=image");
+            put("ECC/Elf Warrior", "https://api.scryfall.com/cards/tecc/4?format=image");
+            put("ECC/Plant", "https://api.scryfall.com/cards/tecc/5?format=image");
+            put("ECC/Rhino Warrior", "https://api.scryfall.com/cards/tecc/6?format=image");
+            put("ECC/Saproling", "https://api.scryfall.com/cards/tecc/7?format=image");
+            put("ECC/Scarecrow", "https://api.scryfall.com/cards/tecc/11?format=image");
+            put("ECC/Snake", "https://api.scryfall.com/cards/tecc/8?format=image");
+            put("ECC/Zombie", "https://api.scryfall.com/cards/tecc/3?format=image");
+
             // TMT
             put("TMT/Mutagen", "https://api.scryfall.com/cards/ttmt/9?format=image");
 
