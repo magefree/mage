@@ -10,7 +10,7 @@ import mage.constants.SubType;
 public final class ScarecrowToken extends TokenImpl {
 
     public ScarecrowToken() {
-        super("Scarecrow", "2/2 colorless Scarecrow artifact creature token named Scarecrow");
+        super("Scarecrow Token", "2/2 colorless Scarecrow artifact creature token");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         this.subtype.add(SubType.SCARECROW);
