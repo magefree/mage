@@ -264,6 +264,7 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Wanderbrine Preacher", 41, Rarity.COMMON, mage.cards.w.WanderbrinePreacher.class));
         cards.add(new SetCardInfo("Wanderwine Distracter", 82, Rarity.COMMON, mage.cards.w.WanderwineDistracter.class));
         cards.add(new SetCardInfo("Warren Torchmaster", 163, Rarity.UNCOMMON, mage.cards.w.WarrenTorchmaster.class));
+        cards.add(new SetCardInfo("Wary Farmer", 251, Rarity.COMMON, mage.cards.w.WaryFarmer.class));
         cards.add(new SetCardInfo("Wild Unraveling", 84, Rarity.COMMON, mage.cards.w.WildUnraveling.class));
         cards.add(new SetCardInfo("Wistfulness", 252, Rarity.MYTHIC, mage.cards.w.Wistfulness.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wistfulness", 296, Rarity.MYTHIC, mage.cards.w.Wistfulness.class, NON_FULL_USE_VARIOUS));
