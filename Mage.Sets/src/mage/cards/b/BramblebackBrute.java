@@ -11,6 +11,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
@@ -37,7 +38,7 @@ public final class BramblebackBrute extends CardImpl {
         ));
 
         // {1}{R}, Remove a counter from this creature: Target creature can't block this turn. Activate only as a sorcery.
-        Ability ability = new ActivateAsSorceryActivatedAbility(new CantBlockTargetEffect(), new ManaCostsImpl<>("{1}{R}"));
+        Ability ability = new ActivateAsSorceryActivatedAbility(new CantBlockTargetEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{1}{R}"));
         ability.addCost(new RemoveCountersSourceCost(1));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
