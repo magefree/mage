@@ -7,25 +7,19 @@ import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.meta.OrTriggeredAbility;
 import mage.constants.SubType;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.ManaValuePredicate;
+import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ComparisonType;
 
 /**
  *
  * @author muz
  */
 public final class FlaringCinder extends CardImpl {
-
-    private static final FilterSpell filter = new FilterSpell("a spell with mana value 4 or greater");
-
-    static {
-        filter.add(new ManaValuePredicate(ComparisonType.OR_GREATER, 4));
-    }
 
     public FlaringCinder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U/R}{U/R}");
@@ -36,13 +30,13 @@ public final class FlaringCinder extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When this creature enters and whenever you cast a spell with mana value 4 or greater, you may discard a card. If you do, draw a card.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new DoIfCostPaid(
-                new DrawCardSourceControllerEffect(1), new DiscardCardCost()
-        )));
-        this.addAbility(new SpellCastControllerTriggeredAbility(
+        this.addAbility(new OrTriggeredAbility(
+            Zone.BATTLEFIELD,
             new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new DiscardCardCost()),
-            filter,
-            true
+            false,
+            "When this creature enters and whenever you cast a spell with mana value 4 or greater, ",
+            new EntersBattlefieldTriggeredAbility(null),
+            new SpellCastControllerTriggeredAbility(null, StaticFilters.FILTER_SPELL_MV_4_OR_GREATER, true)
         ));
     }
 
