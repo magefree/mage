@@ -2911,9 +2911,17 @@
 |Generate|TOK:TLE|Soldier|||SoldierRedToken|
 
 # ECL
-|Generate|TOK:ECL|Shapeshifter|||ShapeshifterColorlessToken|
+|Generate|TOK:ECL|Elf|||BlackGreenElfToken|
+|Generate|TOK:ECL|Elk|||ElkToken|
+|Generate|TOK:ECL|Faerie|||FaerieBlueBlackToken|
 |Generate|TOK:ECL|Goblin|||BlackAndRedGoblinToken|
+|Generate|TOK:ECL|Kithkin|||KithkinGreenWhiteToken|
+|Generate|TOK:ECL|Merfolk|||MerfolkWhiteBlueToken|
+|Generate|TOK:ECL|Mutavault|||MutavaultToken|
+|Generate|TOK:ECL|Shapeshifter|||ShapeshifterColorlessToken|
 |Generate|TOK:ECL|Treasure|||TreasureToken|
+|Generate|TOK:ECL|Treefolk|||TreefolkReachToken|
+|Generate|TOK:ECL|Worm|||BlackGreenWormToken|
 
 # ECC
 

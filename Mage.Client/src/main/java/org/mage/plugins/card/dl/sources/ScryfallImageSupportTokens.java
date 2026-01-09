@@ -40,7 +40,7 @@ public class ScryfallImageSupportTokens {
 
             // RIX
             // TODO: this should be readded when condition tokens are implemented
-            // put("RIX/City's Blessing", "https://api.scryfall.com/cards/trix/6/en?format=image"); 
+            // put("RIX/City's Blessing", "https://api.scryfall.com/cards/trix/6/en?format=image");
             put("RIX/Elemental/1", "https://api.scryfall.com/cards/trix/1/en?format=image");
             put("RIX/Elemental/2", "https://api.scryfall.com/cards/trix/2/en?format=image");
             put("RIX/Golem", "https://api.scryfall.com/cards/trix/4/en?format=image");
@@ -2859,7 +2859,17 @@ public class ScryfallImageSupportTokens {
 
             // ECL
             put("ECL/Shapeshifter", "https://api.scryfall.com/cards/tecl/1/?format=image");
-            
+            put("ECL/Elk", "https://api.scryfall.com/cards/tecl/2/?format=image");
+            put("ECL/Treefolk", "https://api.scryfall.com/cards/tecl/3/?format=image");
+            put("ECL/Elf", "https://api.scryfall.com/cards/tecl/4/?format=image");
+            put("ECL/Faerie", "https://api.scryfall.com/cards/tecl/5/?format=image");
+            put("ECL/Goblin", "https://api.scryfall.com/cards/tecl/6/?format=image");
+            put("ECL/Kithkin", "https://api.scryfall.com/cards/tecl/7/?format=image");
+            put("ECL/Merfolk", "https://api.scryfall.com/cards/tecl/8/?format=image");
+            put("ECL/Worm", "https://api.scryfall.com/cards/tecl/9/?format=image");
+            put("ECL/Treasure", "https://api.scryfall.com/cards/tecl/10/?format=image");
+            put("ECL/Mutavault", "https://api.scryfall.com/cards/tecl/11/?format=image");
+
             // ECC
             put("ECC/Elemental/1", "https://api.scryfall.com/cards/tecc/2?format=image");
             put("ECC/Elemental/2", "https://api.scryfall.com/cards/tecc/9?format=image");
