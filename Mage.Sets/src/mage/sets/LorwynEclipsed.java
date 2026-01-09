@@ -35,6 +35,7 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Bitterbloom Bearer", 310, Rarity.MYTHIC, mage.cards.b.BitterbloomBearer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bitterbloom Bearer", 352, Rarity.MYTHIC, mage.cards.b.BitterbloomBearer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bitterbloom Bearer", 88, Rarity.MYTHIC, mage.cards.b.BitterbloomBearer.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Blight Rot", 89, Rarity.COMMON, mage.cards.b.BlightRot.class));
         cards.add(new SetCardInfo("Blighted Blackthorn", 90, Rarity.COMMON, mage.cards.b.BlightedBlackthorn.class));
         cards.add(new SetCardInfo("Blood Crypt", "349b", Rarity.RARE, mage.cards.b.BloodCrypt.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Blood Crypt", 262, Rarity.RARE, mage.cards.b.BloodCrypt.class, NON_FULL_USE_VARIOUS));
