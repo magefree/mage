@@ -256,6 +256,7 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Slumbering Walker", 35, Rarity.RARE, mage.cards.s.SlumberingWalker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sourbread Auntie", 158, Rarity.UNCOMMON, mage.cards.s.SourbreadAuntie.class));
         cards.add(new SetCardInfo("Spell Snare", 71, Rarity.UNCOMMON, mage.cards.s.SpellSnare.class));
+        cards.add(new SetCardInfo("Spiral into Solitude", 36, Rarity.COMMON, mage.cards.s.SpiralIntoSolitude.class));
         cards.add(new SetCardInfo("Springleaf Drum", 260, Rarity.UNCOMMON, mage.cards.s.SpringleafDrum.class));
         cards.add(new SetCardInfo("Squawkroaster", 160, Rarity.UNCOMMON, mage.cards.s.Squawkroaster.class));
         cards.add(new SetCardInfo("Stalactite Dagger", 261, Rarity.COMMON, mage.cards.s.StalactiteDagger.class));
