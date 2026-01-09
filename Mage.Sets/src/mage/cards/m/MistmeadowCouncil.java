@@ -10,6 +10,7 @@ import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
 import mage.abilities.hint.ConditionHint;
+import mage.abilities.hint.Hint;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
@@ -23,11 +24,10 @@ import mage.constants.CardType;
  */
 public final class MistmeadowCouncil extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("you control a Kithkin");
-
-    static {
-        filter.add(SubType.KITHKIN.getPredicate());
-    }
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(
+        new FilterControlledPermanent(SubType.KITHKIN, "you control a Kithkin")
+    );
+    private static final Hint hint = new ConditionHint(condition, "You control a Kithkin");
 
     public MistmeadowCouncil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");
@@ -38,10 +38,9 @@ public final class MistmeadowCouncil extends CardImpl {
         this.toughness = new MageInt(3);
 
         // This spell costs {1} less to cast if you control a Kithkin.
-        Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
         Ability ability = new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(1, condition));
         ability.setRuleAtTheTop(true);
-        ability.addHint(new ConditionHint(condition, "You control a Kithkin"));
+        ability.addHint(hint);
         this.addAbility(ability);
 
         // When this creature enters, draw a card.
