@@ -211,6 +211,7 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Rhys, the Evermore", 354, Rarity.RARE, mage.cards.r.RhysTheEvermore.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rooftop Percher", 2, Rarity.COMMON, mage.cards.r.RooftopPercher.class));
         cards.add(new SetCardInfo("Run Away Together", 67, Rarity.COMMON, mage.cards.r.RunAwayTogether.class));
+        cards.add(new SetCardInfo("Safewright Cavalry", 191, Rarity.COMMON, mage.cards.s.SafewrightCavalry.class));
         cards.add(new SetCardInfo("Sanar, Innovative First-Year", 241, Rarity.RARE, mage.cards.s.SanarInnovativeFirstYear.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sanar, Innovative First-Year", 378, Rarity.RARE, mage.cards.s.SanarInnovativeFirstYear.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sapling Nursery", 192, Rarity.RARE, mage.cards.s.SaplingNursery.class, NON_FULL_USE_VARIOUS));
