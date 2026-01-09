@@ -279,6 +279,7 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Thoughtweft Imbuer", 38, Rarity.UNCOMMON, mage.cards.t.ThoughtweftImbuer.class));
         cards.add(new SetCardInfo("Thoughtweft Lieutenant", 246, Rarity.UNCOMMON, mage.cards.t.ThoughtweftLieutenant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thoughtweft Lieutenant", 343, Rarity.UNCOMMON, mage.cards.t.ThoughtweftLieutenant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Timid Shieldbearer", 39, Rarity.COMMON, mage.cards.t.TimidShieldbearer.class));
         cards.add(new SetCardInfo("Tributary Vaulter", 40, Rarity.COMMON, mage.cards.t.TributaryVaulter.class));
         cards.add(new SetCardInfo("Trystan, Callous Cultivator", 199, Rarity.RARE, mage.cards.t.TrystanCallousCultivator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Trystan, Callous Cultivator", 291, Rarity.RARE, mage.cards.t.TrystanCallousCultivator.class, NON_FULL_USE_VARIOUS));
