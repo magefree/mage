@@ -24,6 +24,7 @@ public final class MultaniMaroSorcerer extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELEMENTAL);
+        this.subtype.add(SubType.SORCERER);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);

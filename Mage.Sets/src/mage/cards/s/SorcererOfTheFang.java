@@ -24,6 +24,7 @@ public final class SorcererOfTheFang extends CardImpl {
 
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
+        this.subtype.add(SubType.SORCERER);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 

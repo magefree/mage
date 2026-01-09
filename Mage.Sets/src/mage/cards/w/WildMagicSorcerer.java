@@ -31,6 +31,7 @@ public final class WildMagicSorcerer extends CardImpl {
 
         this.subtype.add(SubType.ORC);
         this.subtype.add(SubType.SHAMAN);
+        this.subtype.add(SubType.SORCERER);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 

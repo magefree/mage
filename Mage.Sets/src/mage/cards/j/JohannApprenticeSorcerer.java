@@ -30,6 +30,7 @@ public final class JohannApprenticeSorcerer extends CardImpl {
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
+        this.subtype.add(SubType.SORCERER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(5);
 

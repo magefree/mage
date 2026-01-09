@@ -26,6 +26,7 @@ public final class SilumgarSorcerer extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
+        this.subtype.add(SubType.SORCERER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

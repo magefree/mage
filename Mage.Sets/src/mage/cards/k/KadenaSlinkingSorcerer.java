@@ -45,6 +45,7 @@ public final class KadenaSlinkingSorcerer extends CardImpl {
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SNAKE);
         this.subtype.add(SubType.WIZARD);
+        this.subtype.add(SubType.SORCERER);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
