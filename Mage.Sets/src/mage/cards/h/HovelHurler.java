@@ -15,6 +15,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -24,7 +26,7 @@ import java.util.UUID;
 public final class HovelHurler extends CardImpl {
 
     public HovelHurler(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R/W}{R/W}");
 
         this.subtype.add(SubType.GIANT);
         this.subtype.add(SubType.WARRIOR);
@@ -46,6 +48,7 @@ public final class HovelHurler extends CardImpl {
         ability.addCost(new RemoveCountersSourceCost(1));
         ability.addEffect(new GainAbilityTargetEffect(FlyingAbility.getInstance())
                 .setText("and gains flying until end of turn"));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
         this.addAbility(ability);
     }
 

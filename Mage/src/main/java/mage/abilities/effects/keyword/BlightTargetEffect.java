@@ -17,7 +17,6 @@ public class BlightTargetEffect extends OneShotEffect {
     public BlightTargetEffect(int amount) {
         super(Outcome.Detriment);
         this.amount = amount;
-        staticText = "blight " + amount;
     }
 
     private BlightTargetEffect(final BlightTargetEffect effect) {

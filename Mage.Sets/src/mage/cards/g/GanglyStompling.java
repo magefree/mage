@@ -16,7 +16,7 @@ import java.util.UUID;
 public final class GanglyStompling extends CardImpl {
 
     public GanglyStompling(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R/G}");
 
         this.subtype.add(SubType.SHAPESHIFTER);
         this.power = new MageInt(4);

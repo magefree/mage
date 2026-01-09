@@ -18,7 +18,7 @@ import java.util.UUID;
 public final class ChaosSpewer extends CardImpl {
 
     public ChaosSpewer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B/R}");
 
         this.subtype.add(SubType.GOBLIN);
         this.subtype.add(SubType.WARLOCK);

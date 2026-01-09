@@ -14,9 +14,9 @@ import java.util.UUID;
 public final class Sear extends CardImpl {
 
     public Sear(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}");
 
-        // Excavation Explosion deals 4 damage to target creature or planeswalker.
+        // Sear deals 4 damage to target creature or planeswalker.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker());
     }
