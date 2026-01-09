@@ -259,6 +259,7 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Steam Vents", 267, Rarity.RARE, mage.cards.s.SteamVents.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Steam Vents", 348, Rarity.RARE, mage.cards.s.SteamVents.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sting-Slinger", 161, Rarity.UNCOMMON, mage.cards.s.StingSlinger.class));
+        cards.add(new SetCardInfo("Stoic Grove-Guide", 243, Rarity.COMMON, mage.cards.s.StoicGroveGuide.class));
         cards.add(new SetCardInfo("Stratosoarer", 72, Rarity.COMMON, mage.cards.s.Stratosoarer.class));
         cards.add(new SetCardInfo("Summit Sentinel", 73, Rarity.COMMON, mage.cards.s.SummitSentinel.class));
         cards.add(new SetCardInfo("Sun-Dappled Celebrant", 37, Rarity.COMMON, mage.cards.s.SunDappledCelebrant.class));
