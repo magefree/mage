@@ -167,6 +167,7 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 270, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 275, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Island", 280, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Keep Out", 19, Rarity.COMMON, mage.cards.k.KeepOut.class));
         cards.add(new SetCardInfo("Kinsbaile Aspirant", 21, Rarity.UNCOMMON, mage.cards.k.KinsbaileAspirant.class));
         cards.add(new SetCardInfo("Kinscaer Sentry", 22, Rarity.RARE, mage.cards.k.KinscaerSentry.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kinscaer Sentry", 300, Rarity.RARE, mage.cards.k.KinscaerSentry.class, NON_FULL_USE_VARIOUS));
