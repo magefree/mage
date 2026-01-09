@@ -110,6 +110,7 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Enraged Flamecaster", 135, Rarity.COMMON, mage.cards.e.EnragedFlamecaster.class));
         cards.add(new SetCardInfo("Evolving Wilds", 264, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Explosive Prodigy", 136, Rarity.UNCOMMON, mage.cards.e.ExplosiveProdigy.class));
+        cards.add(new SetCardInfo("Feisty Spikeling", 223, Rarity.COMMON, mage.cards.f.FeistySpikeling.class));
         cards.add(new SetCardInfo("Figure of Fable", 224, Rarity.RARE, mage.cards.f.FigureOfFable.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Figure of Fable", 372, Rarity.RARE, mage.cards.f.FigureOfFable.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Flame-Chain Mauler", 138, Rarity.COMMON, mage.cards.f.FlameChainMauler.class));
