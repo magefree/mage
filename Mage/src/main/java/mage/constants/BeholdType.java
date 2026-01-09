@@ -22,6 +22,7 @@ import java.util.UUID;
 public enum BeholdType {
     DRAGON(SubType.DRAGON),
     GOBLIN(SubType.GOBLIN),
+    ELEMENTAL(SubType.ELEMENTAL),
     ELF(SubType.ELF),
     KITHKIN(SubType.KITHKIN),
     MERFOLK(SubType.MERFOLK);
