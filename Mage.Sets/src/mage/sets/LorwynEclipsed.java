@@ -33,6 +33,7 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Assert Perfection", 164, Rarity.COMMON, mage.cards.a.AssertPerfection.class));
         cards.add(new SetCardInfo("Aurora Awakener", 165, Rarity.MYTHIC, mage.cards.a.AuroraAwakener.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aurora Awakener", 323, Rarity.MYTHIC, mage.cards.a.AuroraAwakener.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Barbed Bloodletter", 86, Rarity.COMMON, mage.cards.b.BarbedBloodletter.class));
         cards.add(new SetCardInfo("Bile-Vial Boggart", 87, Rarity.COMMON, mage.cards.b.BileVialBoggart.class));
         cards.add(new SetCardInfo("Bitterbloom Bearer", 310, Rarity.MYTHIC, mage.cards.b.BitterbloomBearer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bitterbloom Bearer", 352, Rarity.MYTHIC, mage.cards.b.BitterbloomBearer.class, NON_FULL_USE_VARIOUS));
