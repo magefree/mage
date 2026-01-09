@@ -6,8 +6,10 @@ import mage.abilities.dynamicvalue.common.ColorsAmongControlledPermanentsCount;
 import mage.abilities.dynamicvalue.common.CreaturesYouControlCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.hint.common.DomainHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.game.permanent.token.OmnathElementalToken;
 
@@ -27,6 +29,8 @@ public final class ElementalSpectacle extends CardImpl {
         ));
         this.getSpellAbility().addEffect(new GainLifeEffect(CreaturesYouControlCount.PLURAL)
             .setText(", then you gain life equal to the number of creatures you control"));
+        this.getSpellAbility().setAbilityWord(AbilityWord.VIVID);
+        this.getSpellAbility().addHint(ColorsAmongControlledPermanentsCount.ALL_PERMANENTS.getHint());
     }
 
     private ElementalSpectacle(final ElementalSpectacle card) {
