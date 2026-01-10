@@ -192,6 +192,7 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Lofty Dreams", 58, Rarity.UNCOMMON, mage.cards.l.LoftyDreams.class));
         cards.add(new SetCardInfo("Luminollusk", 179, Rarity.UNCOMMON, mage.cards.l.Luminollusk.class));
         cards.add(new SetCardInfo("Lys Alana Informant", 181, Rarity.COMMON, mage.cards.l.LysAlanaInformant.class));
+        cards.add(new SetCardInfo("Meanders Guide", 25, Rarity.UNCOMMON, mage.cards.m.MeandersGuide.class));
         cards.add(new SetCardInfo("Meek Attack", 151, Rarity.MYTHIC, mage.cards.m.MeekAttack.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Meek Attack", 319, Rarity.MYTHIC, mage.cards.m.MeekAttack.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Meek Attack", 388, Rarity.MYTHIC, mage.cards.m.MeekAttack.class, NON_FULL_USE_VARIOUS));
