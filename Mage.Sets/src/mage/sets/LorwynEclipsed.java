@@ -24,6 +24,8 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Abigale, Eloquent First-Year", 368, Rarity.RARE, mage.cards.a.AbigaleEloquentFirstYear.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Adept Watershaper", 297, Rarity.RARE, mage.cards.a.AdeptWatershaper.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Adept Watershaper", 3, Rarity.RARE, mage.cards.a.AdeptWatershaper.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ajani, Outland Chaperone", 284, Rarity.MYTHIC, mage.cards.a.AjaniOutlandChaperone.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ajani, Outland Chaperone", 4, Rarity.MYTHIC, mage.cards.a.AjaniOutlandChaperone.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Appeal to Eirdu", 5, Rarity.COMMON, mage.cards.a.AppealToEirdu.class));
         cards.add(new SetCardInfo("Aquitect's Defenses", 44, Rarity.COMMON, mage.cards.a.AquitectsDefenses.class));
         cards.add(new SetCardInfo("Ashling's Command", 205, Rarity.RARE, mage.cards.a.AshlingsCommand.class, NON_FULL_USE_VARIOUS));
