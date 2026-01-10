@@ -170,6 +170,7 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("High Perfect Morcant", 229, Rarity.RARE, mage.cards.h.HighPerfectMorcant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("High Perfect Morcant", 373, Rarity.RARE, mage.cards.h.HighPerfectMorcant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hovel Hurler", 230, Rarity.UNCOMMON, mage.cards.h.HovelHurler.class));
+        cards.add(new SetCardInfo("Illusion Spinners", 55, Rarity.UNCOMMON, mage.cards.i.IllusionSpinners.class));
         cards.add(new SetCardInfo("Impolite Entrance", 146, Rarity.UNCOMMON, mage.cards.i.ImpoliteEntrance.class));
         cards.add(new SetCardInfo("Iron-Shield Elf", 108, Rarity.UNCOMMON, mage.cards.i.IronShieldElf.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Iron-Shield Elf", 404, Rarity.UNCOMMON, mage.cards.i.IronShieldElf.class, NON_FULL_USE_VARIOUS));
