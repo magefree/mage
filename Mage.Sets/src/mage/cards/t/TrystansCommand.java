@@ -63,7 +63,10 @@ public final class TrystansCommand extends CardImpl {
         this.getSpellAbility().addMode(new Mode(new DestroyTargetEffect()).addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_CREATURE_OR_ENCHANTMENT)));
 
         // * Creatures target player controls get +3/+3 until end of turn. Untap them.
-        this.getSpellAbility().addMode(new Mode(new TrystansCommandEffect()).addTarget(new TargetPlayer()));
+        Mode mode = new Mode(new TrystansCommandEffect());
+        mode.addEffect(new TrystansCommandUntapEffect());
+        mode.addTarget(new TargetPlayer());
+        this.getSpellAbility().addMode(mode);
     }
 
     private TrystansCommand(final TrystansCommand card) {
