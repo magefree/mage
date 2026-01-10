@@ -1,28 +1,25 @@
 package mage.cards.t;
 
-import java.util.Iterator;
-import java.util.List;
 import java.util.UUID;
 
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
+import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.SubLayer;
 import mage.constants.SubType;
+import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -37,6 +34,11 @@ import mage.target.common.TargetCardInYourGraveyard;
 public final class TrystansCommand extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledPermanent(SubType.ELF);
+    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creatures target player controls");
+
+    static {
+        filter2.add(TargetController.SOURCE_TARGETS.getControllerPredicate());
+    }
 
     public TrystansCommand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.KINDRED, CardType.SORCERY}, "{4}{B}{G}");
@@ -63,7 +65,7 @@ public final class TrystansCommand extends CardImpl {
         this.getSpellAbility().addMode(new Mode(new DestroyTargetEffect()).addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_CREATURE_OR_ENCHANTMENT)));
 
         // * Creatures target player controls get +3/+3 until end of turn. Untap them.
-        Mode mode = new Mode(new TrystansCommandEffect());
+        Mode mode = new Mode(new BoostAllEffect(3, 3, Duration.EndOfTurn, filter2, false));
         mode.addEffect(new TrystansCommandUntapEffect());
         mode.addTarget(new TargetPlayer());
         this.getSpellAbility().addMode(mode);
@@ -76,48 +78,6 @@ public final class TrystansCommand extends CardImpl {
     @Override
     public TrystansCommand copy() {
         return new TrystansCommand(this);
-    }
-}
-
-class TrystansCommandEffect extends ContinuousEffectImpl {
-
-    TrystansCommandEffect() {
-        super(Duration.EndOfTurn, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
-        staticText = "creatures target player controls get +3/+3 until end of turn";
-    }
-
-    private TrystansCommandEffect(final TrystansCommandEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public TrystansCommandEffect copy() {
-        return new TrystansCommandEffect(this);
-    }
-
-    @Override
-    public void init(Ability source, Game game) {
-        super.init(source, game);
-        if (getAffectedObjectsSet()) {
-            List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getFirstTarget(), game);
-            for (Permanent creature : creatures) {
-                affectedObjectList.add(new MageObjectReference(creature, game));
-            }
-        }
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext(); ) {
-            Permanent permanent = it.next().getPermanent(game);
-            if (permanent != null) {
-                permanent.addPower(3);
-                permanent.addToughness(3);
-            } else {
-                it.remove();
-            }
-        }
-        return true;
     }
 }
 
