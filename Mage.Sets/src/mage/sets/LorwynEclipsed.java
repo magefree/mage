@@ -235,6 +235,7 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Prismatic Undercurrents", 189, Rarity.UNCOMMON, mage.cards.p.PrismaticUndercurrents.class));
         cards.add(new SetCardInfo("Protective Response", 29, Rarity.UNCOMMON, mage.cards.p.ProtectiveResponse.class));
         cards.add(new SetCardInfo("Puca's Eye", 259, Rarity.UNCOMMON, mage.cards.p.PucasEye.class));
+        cards.add(new SetCardInfo("Pummeler for Hire", 190, Rarity.UNCOMMON, mage.cards.p.PummelerForHire.class));
         cards.add(new SetCardInfo("Reckless Ransacking", 152, Rarity.COMMON, mage.cards.r.RecklessRansacking.class));
         cards.add(new SetCardInfo("Reluctant Dounguard", 31, Rarity.COMMON, mage.cards.r.ReluctantDounguard.class));
         cards.add(new SetCardInfo("Requiting Hex", 116, Rarity.UNCOMMON, mage.cards.r.RequitingHex.class));
