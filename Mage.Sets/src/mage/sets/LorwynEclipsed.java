@@ -68,6 +68,7 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Brigid's Command", 332, Rarity.RARE, mage.cards.b.BrigidsCommand.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bristlebane Battler", 168, Rarity.RARE, mage.cards.b.BristlebaneBattler.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bristlebane Battler", 325, Rarity.RARE, mage.cards.b.BristlebaneBattler.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Bristlebane Outrider", 169, Rarity.UNCOMMON, mage.cards.b.BristlebaneOutrider.class));
         cards.add(new SetCardInfo("Burdened Stoneback", 8, Rarity.UNCOMMON, mage.cards.b.BurdenedStoneback.class));
         cards.add(new SetCardInfo("Burning Curiosity", 129, Rarity.COMMON, mage.cards.b.BurningCuriosity.class));
         cards.add(new SetCardInfo("Catharsis", 209, Rarity.MYTHIC, mage.cards.c.Catharsis.class, NON_FULL_USE_VARIOUS));
