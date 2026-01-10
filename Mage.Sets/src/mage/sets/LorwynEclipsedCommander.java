@@ -59,6 +59,8 @@ public final class LorwynEclipsedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Dread Tiller", 20, Rarity.RARE, mage.cards.d.DreadTiller.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dread Tiller", 40, Rarity.RARE, mage.cards.d.DreadTiller.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dusk Urchins", 73, Rarity.RARE, mage.cards.d.DuskUrchins.class));
+        cards.add(new SetCardInfo("Elemental Spectacle", 15, Rarity.RARE, mage.cards.e.ElementalSpectacle.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Elemental Spectacle", 35, Rarity.RARE, mage.cards.e.ElementalSpectacle.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Endurance", 51, Rarity.MYTHIC, mage.cards.e.Endurance.class));
         cards.add(new SetCardInfo("Everlasting Torment", 121, Rarity.RARE, mage.cards.e.EverlastingTorment.class));
         cards.add(new SetCardInfo("Evolution Sage", 105, Rarity.UNCOMMON, mage.cards.e.EvolutionSage.class));
