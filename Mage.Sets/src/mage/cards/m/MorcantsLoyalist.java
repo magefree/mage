@@ -10,6 +10,7 @@ import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -25,6 +26,9 @@ public final class MorcantsLoyalist extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.ELF, "Elves");
     private static final FilterCard filter2 = new FilterCard(SubType.ELF, "another target Elf card from your graveyard");
 
+    static {
+        filter2.add(AnotherPredicate.instance);
+    }
 
     public MorcantsLoyalist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{G}");
