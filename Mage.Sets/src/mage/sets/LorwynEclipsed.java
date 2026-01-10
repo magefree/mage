@@ -253,6 +253,10 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Scuzzback Scrounger", 320, Rarity.RARE, mage.cards.s.ScuzzbackScrounger.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sear", 154, Rarity.UNCOMMON, mage.cards.s.Sear.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sear", 405, Rarity.UNCOMMON, mage.cards.s.Sear.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Selfless Safewright", 193, Rarity.RARE, mage.cards.s.SelflessSafewright.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Selfless Safewright", 367, Rarity.RARE, mage.cards.s.SelflessSafewright.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Selfless Safewright", 391, Rarity.MYTHIC, mage.cards.s.SelflessSafewright.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Selfless Safewright", 401, Rarity.MYTHIC, mage.cards.s.SelflessSafewright.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shimmercreep", 120, Rarity.UNCOMMON, mage.cards.s.Shimmercreep.class));
         cards.add(new SetCardInfo("Shinestriker", 68, Rarity.UNCOMMON, mage.cards.s.Shinestriker.class));
         cards.add(new SetCardInfo("Shore Lurker", 34, Rarity.COMMON, mage.cards.s.ShoreLurker.class));
