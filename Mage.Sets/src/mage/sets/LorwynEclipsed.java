@@ -249,6 +249,7 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Sapling Nursery", 192, Rarity.RARE, mage.cards.s.SaplingNursery.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sapling Nursery", 328, Rarity.RARE, mage.cards.s.SaplingNursery.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Scarblade Scout", 118, Rarity.COMMON, mage.cards.s.ScarbladeScout.class));
+        cards.add(new SetCardInfo("Scarblade's Malice", 119, Rarity.COMMON, mage.cards.s.ScarbladesMalice.class));
         cards.add(new SetCardInfo("Scuzzback Scrounger", 153, Rarity.RARE, mage.cards.s.ScuzzbackScrounger.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Scuzzback Scrounger", 320, Rarity.RARE, mage.cards.s.ScuzzbackScrounger.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sear", 154, Rarity.UNCOMMON, mage.cards.s.Sear.class, NON_FULL_USE_VARIOUS));
