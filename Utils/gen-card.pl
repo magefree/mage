@@ -90,7 +90,7 @@ $raritiesConversion{'Special'} = 'SPECIAL';
 $raritiesConversion{'Bonus'} = 'BONUS';
 
 # Get card name
-my $cardName = $ARGV[0];
+my $cardName = join ' ', @ARGV;
 if (!$cardName) {
     print 'Enter a card name: ';
     $cardName = <STDIN>;
