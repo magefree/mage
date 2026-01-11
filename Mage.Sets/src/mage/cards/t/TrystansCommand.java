@@ -99,7 +99,7 @@ class TrystansCommandUntapEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(source.getControllerId());
+        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (targetPlayer != null) {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, targetPlayer.getId(), game)) {
                 permanent.untap(game);
