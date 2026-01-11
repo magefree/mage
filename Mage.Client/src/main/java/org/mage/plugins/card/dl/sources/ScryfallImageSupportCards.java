@@ -742,11 +742,7 @@ public class ScryfallImageSupportCards {
             put("MB1/Prophetic Bolt", "https://api.scryfall.com/cards/plst/C15-231/");
 
             // LTR - 0 number for tokens only
-            // Scryfall has a bug, for some reason this link doesn't work with ?format=image even though it works with ?format=json
-            // and ?format=text. Base url fails because language is qya and not en and alternate url fails because of this bug
-            // TODO: This should be reverted when Scryfall fixes the bug 
-            // put("LTR/The One Ring/001", "https://api.scryfall.com/cards/ltr/0/");
-            put("LTR/The One Ring/001", "https://api.scryfall.com/cards/ltr/0/qya?format=image");
+            put("LTR/The One Ring/001", "https://api.scryfall.com/cards/ltr/0/");
 
             // REX - double faced lands (xmage uses two diff lands for it)
             put("REX/Command Tower/26b", "https://api.scryfall.com/cards/rex/26/en?format=image&face=back");
@@ -763,6 +759,11 @@ public class ScryfallImageSupportCards {
             put("TDM/Marang River Regent/378b", "https://api.scryfall.com/cards/tdm/378/en?format=image&face=back");
             put("TDM/Scavenger Regent/379b", "https://api.scryfall.com/cards/tdm/379/en?format=image&face=back");
             put("TDM/Ugin, Eye of the Storms/382b", "https://api.scryfall.com/cards/tdm/382/en?format=image&face=back");
+
+            // EMN - double faced cards
+            put("EMN/Bruna, The Fading Light/15a", "https://api.scryfall.com/cards/emn/15/");
+            put("EMN/Hanweir Garrison/130a", "https://api.scryfall.com/cards/emn/130/");
+            put("EMN/Midnight Scavengers/96a", "https://api.scryfall.com/cards/emn/96/");
 
         }
     };

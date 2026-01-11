@@ -91,7 +91,7 @@ public class MediaAndCollaborationPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Ultimecia, Temporal Threat", "2025-11", Rarity.RARE, mage.cards.u.UltimeciaTemporalThreat.class));
         cards.add(new SetCardInfo("Usher of the Fallen", "2022-3", Rarity.RARE, mage.cards.u.UsherOfTheFallen.class));
         cards.add(new SetCardInfo("Voltaic Key", "2020-1", Rarity.RARE, mage.cards.v.VoltaicKey.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Voltaic Key", "2024-6", Rarity.RARE, mage.cards.v.VoltaicKey.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Voltaic Key", "2025-4", Rarity.RARE, mage.cards.v.VoltaicKey.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Warmonger", "1999-2", Rarity.UNCOMMON, mage.cards.w.Warmonger.class, RETRO_ART));
         cards.add(new SetCardInfo("Wild Growth", "2022-2", Rarity.RARE, mage.cards.w.WildGrowth.class));
         cards.add(new SetCardInfo("Winged Boots", "2023-7", Rarity.RARE, mage.cards.w.WingedBoots.class));
