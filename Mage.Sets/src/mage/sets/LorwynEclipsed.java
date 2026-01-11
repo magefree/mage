@@ -306,6 +306,8 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Stratosoarer", 72, Rarity.COMMON, mage.cards.s.Stratosoarer.class));
         cards.add(new SetCardInfo("Summit Sentinel", 73, Rarity.COMMON, mage.cards.s.SummitSentinel.class));
         cards.add(new SetCardInfo("Sun-Dappled Celebrant", 37, Rarity.COMMON, mage.cards.s.SunDappledCelebrant.class));
+        cards.add(new SetCardInfo("Sunderflock", 309, Rarity.RARE, mage.cards.s.Sunderflock.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sunderflock", 74, Rarity.RARE, mage.cards.s.Sunderflock.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Surly Farrier", 196, Rarity.COMMON, mage.cards.s.SurlyFarrier.class));
         cards.add(new SetCardInfo("Swamp", 271, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 276, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
