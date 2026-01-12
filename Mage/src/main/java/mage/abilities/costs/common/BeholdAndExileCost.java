@@ -36,7 +36,7 @@ public class BeholdAndExileCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return beholdType.canBehold(controllerId, game, source);
+        return beholdType.canBehold(controllerId, 1, game, source);
     }
 
     @Override
@@ -46,7 +46,7 @@ public class BeholdAndExileCost extends CostImpl {
             paid = false;
             return paid;
         }
-        Card card = beholdType.doBehold(player, game, source);
+        Card card = beholdType.beholdOne(player, game, source);
         if (card == null) {
             paid = false;
             return paid;
