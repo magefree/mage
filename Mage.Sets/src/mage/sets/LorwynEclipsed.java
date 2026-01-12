@@ -270,6 +270,7 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Requiting Hex", 116, Rarity.UNCOMMON, mage.cards.r.RequitingHex.class));
         cards.add(new SetCardInfo("Rhys, the Evermore", 32, Rarity.RARE, mage.cards.r.RhysTheEvermore.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rhys, the Evermore", 354, Rarity.RARE, mage.cards.r.RhysTheEvermore.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Rime Chill", 64, Rarity.UNCOMMON, mage.cards.r.RimeChill.class));
         cards.add(new SetCardInfo("Rimefire Torque", 358, Rarity.RARE, mage.cards.r.RimefireTorque.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rimefire Torque", 65, Rarity.RARE, mage.cards.r.RimefireTorque.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rimekin Recluse", 66, Rarity.UNCOMMON, mage.cards.r.RimekinRecluse.class));
