@@ -226,6 +226,8 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Morcant's Loyalist", 341, Rarity.UNCOMMON, mage.cards.m.MorcantsLoyalist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Morningtide's Light", 27, Rarity.MYTHIC, mage.cards.m.MorningtidesLight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Morningtide's Light", 301, Rarity.MYTHIC, mage.cards.m.MorningtidesLight.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mornsong Aria", 111, Rarity.RARE, mage.cards.m.MornsongAria.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mornsong Aria", 361, Rarity.RARE, mage.cards.m.MornsongAria.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 272, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 277, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 282, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
