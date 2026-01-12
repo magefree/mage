@@ -108,6 +108,8 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Doran, Besieged by Time", 215, Rarity.RARE, mage.cards.d.DoranBesiegedByTime.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Doran, Besieged by Time", 334, Rarity.RARE, mage.cards.d.DoranBesiegedByTime.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dose of Dawnglow", 100, Rarity.UNCOMMON, mage.cards.d.DoseOfDawnglow.class));
+        cards.add(new SetCardInfo("Dream Harvest", 216, Rarity.RARE, mage.cards.d.DreamHarvest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Dream Harvest", 371, Rarity.RARE, mage.cards.d.DreamHarvest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dream Seizer", 101, Rarity.COMMON, mage.cards.d.DreamSeizer.class));
         cards.add(new SetCardInfo("Dundoolin Weaver", 175, Rarity.UNCOMMON, mage.cards.d.DundoolinWeaver.class));
         cards.add(new SetCardInfo("Eclipsed Boggart", 217, Rarity.UNCOMMON, mage.cards.e.EclipsedBoggart.class, NON_FULL_USE_VARIOUS));
