@@ -301,6 +301,7 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Shadow Urchin", 242, Rarity.RARE, mage.cards.s.ShadowUrchin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shadow Urchin", 379, Rarity.RARE, mage.cards.s.ShadowUrchin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shimmercreep", 120, Rarity.UNCOMMON, mage.cards.s.Shimmercreep.class));
+        cards.add(new SetCardInfo("Shimmerwilds Growth", 194, Rarity.UNCOMMON, mage.cards.s.ShimmerwildsGrowth.class));
         cards.add(new SetCardInfo("Shinestriker", 68, Rarity.UNCOMMON, mage.cards.s.Shinestriker.class));
         cards.add(new SetCardInfo("Shore Lurker", 34, Rarity.COMMON, mage.cards.s.ShoreLurker.class));
         cards.add(new SetCardInfo("Silvergill Mentor", 403, Rarity.UNCOMMON, mage.cards.s.SilvergillMentor.class, NON_FULL_USE_VARIOUS));
