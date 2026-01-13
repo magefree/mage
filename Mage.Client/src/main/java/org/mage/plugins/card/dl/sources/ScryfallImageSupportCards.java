@@ -764,6 +764,13 @@ public class ScryfallImageSupportCards {
             put("TDM/Scavenger Regent/379b", "https://api.scryfall.com/cards/tdm/379/en?format=image&face=back");
             put("TDM/Ugin, Eye of the Storms/382b", "https://api.scryfall.com/cards/tdm/382/en?format=image&face=back");
 
+            // ECL - double faced lands
+            put("ECL/Blood Crypt/349b", "https://api.scryfall.com/cards/ecl/349/en?format=image&face=back");
+            put("ECL/Hallowed Fountain/347b", "https://api.scryfall.com/cards/ecl/347/en?format=image&face=back");
+            put("ECL/Overgrown Tomb/350b", "https://api.scryfall.com/cards/ecl/350/en?format=image&face=back");
+            put("ECL/Steam Vents/348b", "https://api.scryfall.com/cards/ecl/348/en?format=image&face=back");
+            put("ECL/Temple Garden/351b", "https://api.scryfall.com/cards/ecl/351/en?format=image&face=back");
+
         }
     };
 
