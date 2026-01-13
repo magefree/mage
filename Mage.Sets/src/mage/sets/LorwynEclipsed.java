@@ -230,6 +230,10 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Moon-Vigil Adherents", 184, Rarity.UNCOMMON, mage.cards.m.MoonVigilAdherents.class));
         cards.add(new SetCardInfo("Moonglove Extractor", 109, Rarity.COMMON, mage.cards.m.MoongloveExtractor.class));
         cards.add(new SetCardInfo("Moonlit Lamenter", 26, Rarity.UNCOMMON, mage.cards.m.MoonlitLamenter.class));
+        cards.add(new SetCardInfo("Moonshadow", 110, Rarity.MYTHIC, mage.cards.m.Moonshadow.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Moonshadow", 313, Rarity.MYTHIC, mage.cards.m.Moonshadow.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Moonshadow", 386, Rarity.MYTHIC, mage.cards.m.Moonshadow.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Moonshadow", 396, Rarity.MYTHIC, mage.cards.m.Moonshadow.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Morcant's Eyes", 185, Rarity.UNCOMMON, mage.cards.m.MorcantsEyes.class));
         cards.add(new SetCardInfo("Morcant's Loyalist", 236, Rarity.UNCOMMON, mage.cards.m.MorcantsLoyalist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Morcant's Loyalist", 341, Rarity.UNCOMMON, mage.cards.m.MorcantsLoyalist.class, NON_FULL_USE_VARIOUS));
