@@ -18,6 +18,7 @@ import java.nio.file.AccessDeniedException;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.*;
+import java.util.function.Consumer;
 
 import static org.mage.plugins.card.utils.CardImageUtils.getImagesDir;
 
@@ -48,6 +49,9 @@ public class OnDemandImageDownloader {
 
     // Minimum file size to consider download successful
     private static final int MIN_FILE_SIZE_OF_GOOD_IMAGE = 1024 * 6;
+
+    // Listeners notified when an image is downloaded
+    private final Set<Consumer<CardDownloadData>> downloadListeners = ConcurrentHashMap.newKeySet();
 
     private OnDemandImageDownloader() {
         executor = Executors.newSingleThreadExecutor(
@@ -198,7 +202,16 @@ public class OnDemandImageDownloader {
                         destFile.getParentFile().mkdirs();
                     }
                     fileTempImage.cp_rp(destFile);
-                    logger.info("Downloaded: " + card.getName() + " (" + card.getSet() + ")");
+                    logger.debug("Downloaded: " + card.getName() + " (" + card.getSet() + ")");
+
+                    // Invalidate cache so next access reloads from disk
+                    logger.debug("Invalidating cache for: " + card.getName() + " [" + card.getSet() + "/" + card.getCollectorId() + "]");
+                    ImageCache.invalidateCard(card.getName(), card.getSet(), card.getCollectorId());
+
+                    // Notify listeners that image is available
+                    logger.debug("Notifying " + downloadListeners.size() + " listeners for: " + card.getName());
+                    notifyListeners(card);
+
                     return true;
                 } else {
                     logger.debug("Downloaded file too small for: " + card.getName());
@@ -228,5 +241,40 @@ public class OnDemandImageDownloader {
      */
     public void clearTracking() {
         queuedOrDownloaded.clear();
+    }
+
+    /**
+     * Register a listener to be notified when an image is downloaded.
+     * The listener receives the CardDownloadData of the downloaded card.
+     *
+     * @param listener the listener to add
+     */
+    public void addDownloadListener(Consumer<CardDownloadData> listener) {
+        downloadListeners.add(listener);
+    }
+
+    /**
+     * Remove a download listener.
+     *
+     * @param listener the listener to remove
+     */
+    public void removeDownloadListener(Consumer<CardDownloadData> listener) {
+        downloadListeners.remove(listener);
+    }
+
+    /**
+     * Notify all listeners that an image was downloaded.
+     */
+    private void notifyListeners(CardDownloadData card) {
+        int count = 0;
+        for (Consumer<CardDownloadData> listener : downloadListeners) {
+            try {
+                listener.accept(card);
+                count++;
+            } catch (Exception e) {
+                logger.error("Error notifying download listener: " + e.getMessage(), e);
+            }
+        }
+        logger.debug("Notified " + count + " listeners for " + card.getName());
     }
 }

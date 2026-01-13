@@ -378,4 +378,33 @@ public final class ImageCache {
         }
         return null;
     }
+
+    /**
+     * Invalidate all cache entries for a card so it will be reloaded from disk on next access.
+     * Used after on-demand image download completes.
+     *
+     * @param name card name
+     * @param setCode set code
+     * @param collectorId collector number
+     */
+    public static void invalidateCard(String name, String setCode, String collectorId) {
+        // Key format: imageFileName#setCode#imageNumber#cardNumber#imageSize#usesVariousArt
+        // We need to find and invalidate all keys matching this card
+        String keyPattern = "#" + setCode + "#";
+        String cardNumberPattern = "#" + collectorId + "#";
+
+        int cacheSize = SHARED_CARD_IMAGES_CACHE.asMap().size();
+        LOGGER.debug("ImageCache invalidateCard: " + name + " [" + setCode + "/" + collectorId + "] cache size before: " + cacheSize);
+
+        // Iterate through cache and invalidate matching entries
+        int removed = 0;
+        for (String key : SHARED_CARD_IMAGES_CACHE.asMap().keySet()) {
+            if (key.startsWith(name + "#") && key.contains(keyPattern) && key.contains(cardNumberPattern)) {
+                LOGGER.debug("ImageCache removing key: " + key);
+                SHARED_CARD_IMAGES_CACHE.invalidate(key);
+                removed++;
+            }
+        }
+        LOGGER.debug("ImageCache invalidateCard: removed " + removed + " entries");
+    }
 }
