@@ -1439,7 +1439,7 @@
 |Generate|TOK:VOC|Bat|||BatToken|
 |Generate|TOK:VOC|Clue|||ClueArtifactToken|
 |Generate|TOK:VOC|Spirit|1||SpiritToken|
-|Generate|TOK:VOC|Spirit|2||AnotherSpiritToken|
+|Generate|TOK:VOC|Spirit|2||Spirit33Token|
 |Generate|TOK:VOC|Thopter|||ThopterColorlessToken|
 
 # VOW
@@ -2732,9 +2732,9 @@
 |Generate|TOK:TDM|Soldier|1||SoldierToken|
 |Generate|TOK:TDM|Soldier|2||Soldier22Token|
 |Generate|TOK:TDM|Spirit|1||SpiritXXToken|
-|Generate|TOK:TDM|Spirit|2||NoFlyingSpiritWhiteToken|
-# TODO: 2/2 Spirit (no relevant cards revealed, token not implemented)
-# TODO: 3/3 Spirit (no relevant cards revealed, token not implemented)
+|Generate|TOK:TDM|Spirit|2||NoFlyingSpiritWhite11Token|
+|Generate|TOK:TDM|Spirit|3||NoFlyingSpiritWhite22Token|
+|Generate|TOK:TDM|Spirit|4||NoFlyingSpiritWhite33Token|
 |Generate|TOK:TDM|Treasure|||TreasureToken|
 |Generate|TOK:TDM|Warrior|||RedWarriorToken|
 |Generate|TOK:TDM|Zombie Druid|||ZombieDruidToken|
