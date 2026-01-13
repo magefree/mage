@@ -8,7 +8,6 @@ import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.keyword.BestowAbility;
 import mage.abilities.keyword.PrototypeAbility;
-import mage.abilities.keyword.TransformAbility;
 import mage.cards.*;
 import mage.constants.*;
 import mage.counters.Counter;
@@ -81,11 +80,6 @@ public class Spell extends StackObjectImpl implements Card {
 
         Card affectedCard = card;
 
-        // TODO: must be removed after transform cards (one side) migrated to MDF engine (multiple sides)
-        if (ability.getSpellAbilityCastMode().isTransformed() && affectedCard.getSecondCardFace() != null) {
-            // simulate another side as new card (another code part in continues effect from disturb ability)
-            affectedCard = TransformAbility.transformCardSpellStatic(card, card.getSecondCardFace(), game);
-        }
         if (ability instanceof PrototypeAbility) {
             affectedCard = ((PrototypeAbility) ability).prototypeCardSpell(card);
             this.prototyped = true;

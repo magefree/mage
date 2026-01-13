@@ -6,7 +6,6 @@ import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.TransformAbility;
 import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardSetInfo;
 import mage.cards.DoubleFacedCardHalf;
@@ -107,7 +106,7 @@ class VengefulStranglerEffect extends OneShotEffect {
             return false;
         }
 
-        game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
+        game.getState().setValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
         game.getState().setValue("attachTo:" + card.getOtherSide().getId(), permanent);
         if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
             permanent.addAttachment(card.getOtherSide().getId(), source, game);

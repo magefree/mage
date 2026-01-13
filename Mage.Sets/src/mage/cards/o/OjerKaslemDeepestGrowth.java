@@ -12,7 +12,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.hint.common.PermanentsYouControlHint;
 import mage.abilities.keyword.TrampleAbility;
-import mage.abilities.keyword.TransformAbility;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.*;
 import mage.cards.g.GishathSunsAvatar;
@@ -96,7 +95,7 @@ class OjerKaslemDeepestGrowthTransformEffect extends OneShotEffect {
         if (controller == null || card == null) {
             return false;
         }
-        game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
+        game.getState().setValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
         controller.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, true, null);
         return true;
     }

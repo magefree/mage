@@ -1229,11 +1229,6 @@ public class VerifyCardDataTest {
                         cardInfo.getCardNumber(), cardInfo.getRarity(), cardInfo.getGraphicInfo()));
                 Assert.assertNotNull(card);
 
-                //TODO: do we need this check after tdfc rework?
-                if (card.getSecondCardFace() != null && !(card instanceof DoubleFacedCard)) {
-                    containsDoubleSideCards = true;
-                }
-
                 // CHECK: all planeswalkers must be legendary
                 if (card.isPlaneswalker() && !card.isLegendary()) {
                     errorsList.add("Error: planeswalker must have legendary type: " + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
@@ -2298,29 +2293,12 @@ public class VerifyCardDataTest {
             fail(card, "abilities", "transforming double-faced card should not have abilities on the main card");
         }
 
-        // TODO: remove after transform ability removed
-        // special check: new DFC implementation should not have transform ability
-        if (card instanceof DoubleFacedCardHalf && card.getAbilities().containsClass(TransformAbility.class)
-                && !card.getAbilities().containsClass(DayboundAbility.class)
-                && !card.getAbilities().containsClass(CraftAbility.class)
-                && !card.getAbilities().containsClass(SiegeAbility.class)) {
-            fail(card, "abilities", "new transforming double-faced card should not have transform ability");
-        }
-
         // special check: Werewolves front ability should only be on front and vice versa
-        if (card.getAbilities().containsClass(WerewolfFrontTriggeredAbility.class) && (card.isNightCard() || (card instanceof DoubleFacedCardHalf && ((DoubleFacedCardHalf) card).isBackSide()))) {
+        if (card.getAbilities().containsClass(WerewolfFrontTriggeredAbility.class) && (card instanceof DoubleFacedCardHalf && ((DoubleFacedCardHalf) card).isBackSide())) {
             fail(card, "abilities", "card is a back face werewolf with a front face ability");
         }
-        if (card.getAbilities().containsClass(WerewolfBackTriggeredAbility.class) && (!card.isNightCard() && (card instanceof DoubleFacedCardHalf && !((DoubleFacedCardHalf) card).isBackSide()))) {
+        if (card.getAbilities().containsClass(WerewolfBackTriggeredAbility.class) && (card instanceof DoubleFacedCardHalf && !((DoubleFacedCardHalf) card).isBackSide())) {
             fail(card, "abilities", "card is a front face werewolf with a back face ability");
-        }
-
-        // special check: transform ability in TDFC should only be on front and vice versa
-        if (card.getSecondCardFace() != null && !card.isNightCard() && !card.getAbilities().containsClass(TransformAbility.class)) {
-            fail(card, "abilities", "double-faced cards should have transform ability on the front");
-        }
-        if (card.getSecondCardFace() != null && card.isNightCard() && card.getAbilities().containsClass(TransformAbility.class)) {
-            fail(card, "abilities", "double-faced cards should not have transform ability on the back");
         }
 
         // special check: back side in TDFC must be only night card

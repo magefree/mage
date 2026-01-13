@@ -8,6 +8,9 @@ import java.util.UUID;
 
 public abstract class TransformingDoubleFacedCard extends DoubleFacedCard {
 
+    // this state value controls if a permanent enters the battlefield already transformed
+    public static final String VALUE_KEY_ENTER_TRANSFORMED = "EnterTransformed";
+
     public TransformingDoubleFacedCard(
             UUID ownerId, CardSetInfo setInfo,
             CardType[] typesLeft, SubType[] subTypesLeft, String costsLeft,

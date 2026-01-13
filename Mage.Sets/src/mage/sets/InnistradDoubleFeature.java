@@ -227,7 +227,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Florian, Voldaren Scion", 223, Rarity.RARE, mage.cards.f.FlorianVoldarenScion.class));
         cards.add(new SetCardInfo("Flourishing Hunter", 466, Rarity.COMMON, mage.cards.f.FlourishingHunter.class));
         cards.add(new SetCardInfo("Foreboding Statue", 523, Rarity.UNCOMMON, mage.cards.f.ForebodingStatue.class));
-        cards.add(new SetCardInfo("Forsaken Thresher", 523, Rarity.UNCOMMON, mage.cards.f.ForsakenThresher.class));
         cards.add(new SetCardInfo("Foul Play", 101, Rarity.UNCOMMON, mage.cards.f.FoulPlay.class));
         cards.add(new SetCardInfo("Frenzied Devils", 426, Rarity.UNCOMMON, mage.cards.f.FrenziedDevils.class));
         cards.add(new SetCardInfo("Galedrifter", 55, Rarity.COMMON, mage.cards.g.Galedrifter.class));

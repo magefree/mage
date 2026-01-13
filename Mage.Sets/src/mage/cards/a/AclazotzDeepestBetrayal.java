@@ -16,7 +16,6 @@ import mage.abilities.hint.ConditionHint;
 import mage.abilities.hint.Hint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
-import mage.abilities.keyword.TransformAbility;
 import mage.abilities.mana.BlackManaAbility;
 import mage.cards.*;
 import mage.constants.*;
@@ -191,7 +190,7 @@ class AclazotzDeepestBetrayalTransformEffect extends OneShotEffect {
         if (controller == null || card == null) {
             return false;
         }
-        game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
+        game.getState().setValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
         controller.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, true, null);
         return true;
     }

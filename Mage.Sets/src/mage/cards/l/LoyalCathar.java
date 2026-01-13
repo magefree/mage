@@ -6,7 +6,6 @@ import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.TransformAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.Card;
 import mage.cards.CardSetInfo;
@@ -111,7 +110,7 @@ class ReturnLoyalCatharEffect extends OneShotEffect {
         }
         Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (card != null) {
-            game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId(), Boolean.TRUE);
+            game.getState().setValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + card.getId(), Boolean.TRUE);
             controller.moveCards(card, Zone.BATTLEFIELD, source, game);
         }
         return true;

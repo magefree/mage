@@ -11,7 +11,6 @@ import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.effects.common.cost.SpellsCostModificationThatTargetSourceEffect;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.TransformAbility;
 import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardSetInfo;
 import mage.cards.DoubleFacedCardHalf;
@@ -112,7 +111,7 @@ class AccursedWitchReturnTransformedEffect extends OneShotEffect {
             return false;
         }
 
-        game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
+        game.getState().setValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
         game.getState().setValue("attachTo:" + card.getOtherSide().getId(), attachTo.getId());
         if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
             attachTo.addAttachment(card.getOtherSide().getId(), source, game);
@@ -120,6 +119,7 @@ class AccursedWitchReturnTransformedEffect extends OneShotEffect {
         return true;
     }
 }
+
 class InfectiousCurseCostReductionEffect extends CostModificationEffectImpl {
 
     InfectiousCurseCostReductionEffect() {

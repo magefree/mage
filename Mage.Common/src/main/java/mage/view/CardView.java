@@ -538,17 +538,7 @@ public class CardView extends SimpleCardView {
 
             this.extraDeckCard = card.isExtraDeckCard();
 
-            // TODO: can probably remove this after tdfc rework
-            // transformable, double faces cards
-            if (!(sourceCard.getMainCard() instanceof DoubleFacedCard)) {
-                this.transformable = card.isTransformable();
-
-                Card secondSideCard = card.getSecondCardFace();
-                if (secondSideCard != null) {
-                    this.secondCardFace = new CardView(secondSideCard, game);
-                    this.alternateName = secondCardFace.getName();
-                }
-            } else if (card instanceof PermanentCard && card.isTransformable()) {
+            if (card instanceof PermanentCard && card.isTransformable()) {
                 this.transformable = card.isTransformable();
                 Card secondSideCard = (Card) ((PermanentCard) card).getOtherFace();
                 this.secondCardFace = new CardView(secondSideCard, game);

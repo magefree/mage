@@ -239,7 +239,6 @@ public final class EldritchMoon extends ExpansionSet {
         cards.add(new SetCardInfo("Vexing Scuttler", 11, Rarity.UNCOMMON, mage.cards.v.VexingScuttler.class));
         cards.add(new SetCardInfo("Vildin-Pack Outcast", 148, Rarity.COMMON, mage.cards.v.VildinPackOutcast.class));
         cards.add(new SetCardInfo("Voldaren Pariah", 111, Rarity.RARE, mage.cards.v.VoldarenPariah.class));
-        cards.add(new SetCardInfo("Voracious Reader", 54, Rarity.UNCOMMON, mage.cards.v.VoraciousReader.class));
         cards.add(new SetCardInfo("Wailing Ghoul", 112, Rarity.COMMON, mage.cards.w.WailingGhoul.class));
         cards.add(new SetCardInfo("Waxing Moon", 177, Rarity.COMMON, mage.cards.w.WaxingMoon.class));
         cards.add(new SetCardInfo("Weaver of Lightning", 149, Rarity.UNCOMMON, mage.cards.w.WeaverOfLightning.class));
