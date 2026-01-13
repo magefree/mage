@@ -247,6 +247,8 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Nightmare Sower", 114, Rarity.UNCOMMON, mage.cards.n.NightmareSower.class));
         cards.add(new SetCardInfo("Noggle Robber", 237, Rarity.UNCOMMON, mage.cards.n.NoggleRobber.class));
         cards.add(new SetCardInfo("Noggle the Mind", 60, Rarity.UNCOMMON, mage.cards.n.NoggleTheMind.class));
+        cards.add(new SetCardInfo("Oko, Lorwyn Liege", 287, Rarity.MYTHIC, mage.cards.o.OkoLorwynLiege.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Oko, Lorwyn Liege", 61, Rarity.MYTHIC, mage.cards.o.OkoLorwynLiege.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Omni-Changeling", 62, Rarity.UNCOMMON, mage.cards.o.OmniChangeling.class));
         cards.add(new SetCardInfo("Overgrown Tomb", "350b", Rarity.RARE, mage.cards.o.OvergrownTomb.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Overgrown Tomb", 266, Rarity.RARE, mage.cards.o.OvergrownTomb.class, NON_FULL_USE_VARIOUS));
