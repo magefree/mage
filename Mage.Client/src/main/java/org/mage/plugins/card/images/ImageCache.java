@@ -88,12 +88,19 @@ public final class ImageCache {
 
                 // try unknown token image
                 if (tokenFile == null || !tokenFile.exists()) {
+                    // Queue token for on-demand download
+                    OnDemandImageDownloader.getInstance().queueDownload(info);
                     // TODO: replace empty token by other default card, not cardback
                     path = CardImageUtils.buildImagePathToDefault(DirectLinksForDownload.cardbackFilename);
                 }
             } else {
                 // CARD
                 path = CardImageUtils.buildImagePathToCardOrToken(info);
+                TFile cardFile = getTFile(path);
+                if (cardFile == null || !cardFile.exists()) {
+                    // Queue card for on-demand download
+                    OnDemandImageDownloader.getInstance().queueDownload(info);
+                }
             }
 
             TFile file = getTFile(path);
