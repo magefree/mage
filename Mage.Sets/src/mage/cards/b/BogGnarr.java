@@ -28,7 +28,7 @@ public final class BogGnarr extends CardImpl {
 
     public BogGnarr(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
-        this.subtype.add( SubType.BEAST);
+        this.subtype.add(SubType.BEAST);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
