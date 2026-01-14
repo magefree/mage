@@ -5,6 +5,7 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.constants.Zone;
+import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.game.Controllable;
 import mage.game.Game;
@@ -115,6 +116,8 @@ public interface Permanent extends Card, Controllable {
     void setCounterTypeCantBeAdded(CounterType counterType);
 
     boolean canHaveCounterAdded(CounterType counterType);
+
+    boolean canHaveCounterAdded(Counter counter);
 
     void setCardNumber(String cid);
 

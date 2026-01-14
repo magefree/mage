@@ -11,7 +11,10 @@ import mage.cards.Card;
 import mage.cards.repository.TokenInfo;
 import mage.cards.repository.TokenRepository;
 import mage.cards.repository.TokenType;
-import mage.constants.*;
+import mage.constants.Outcome;
+import mage.constants.SpellAbilityCastMode;
+import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.CreateTokenEvent;
 import mage.game.events.CreatedTokenEvent;
@@ -81,6 +84,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
     /**
      * Add an ability to the token. When copying from an existing source
      * you should use the fromExistingObject variant of this function to prevent double-copying subabilities
+     *
      * @param ability The ability to be added
      */
     @Override
@@ -89,9 +93,9 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
     }
 
     /**
-     * @param ability The ability to be added
+     * @param ability            The ability to be added
      * @param fromExistingObject if copying abilities from an existing source then must ignore sub-abilities because they're already on the source object
-     *                         Otherwise sub-abilities will be added twice to the resulting object
+     *                           Otherwise sub-abilities will be added twice to the resulting object
      */
     @Override
     public void addAbility(Ability ability, boolean fromExistingObject) {
@@ -333,10 +337,12 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
                 newPermanent.updateZoneChangeCounter(game, emptyEvent);
 
                 if (source != null) {
-                    MageObjectReference mor = new MageObjectReference(newPermanent.getId(),newPermanent.getZoneChangeCounter(game)-1,game);
+                    MageObjectReference mor = new MageObjectReference(newPermanent.getId(), newPermanent.getZoneChangeCounter(game) - 1, game);
                     game.storePermanentCostsTags(mor, source);
                 }
             }
+
+            game.processAction();
 
             // check ETB effects
             game.setScopeRelevant(true);

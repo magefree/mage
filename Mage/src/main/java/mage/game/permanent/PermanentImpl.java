@@ -1887,6 +1887,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
+    public boolean canHaveCounterAdded(Counter counter) {
+        return this.canHaveCounterAdded(CounterType.findByName(counter.getName()));
+    }
+
+    @Override
     public void setPairedCard(MageObjectReference pairedCard) {
         this.pairedPermanent = pairedCard;
         if (pairedCard == null) {

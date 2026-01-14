@@ -3,7 +3,6 @@ package org.mage.test.cards.single.shm;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -63,7 +62,6 @@ public class DevotedDruidTest extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore // TODO: must fix, see #13583
     public void test_PutCounter_ModifiedToZeroCounters() {
         // {T}: Add {G}.
         // Put a -1/-1 counter on this creature: Untap this creature.

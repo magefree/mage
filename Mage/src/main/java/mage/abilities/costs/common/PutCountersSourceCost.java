@@ -7,6 +7,7 @@ import mage.counters.Counter;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -28,15 +29,18 @@ public class PutCountersSourceCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        // TODO: implement permanent.canAddCounters with replacement events check, see tests with Devoted Druid
-        return true;
+        return Optional
+                .ofNullable(source.getSourcePermanentIfItStillExists(game))
+                .filter(permanent -> permanent.canHaveCounterAdded(counter))
+                .isPresent();
     }
 
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            this.paid = permanent.addCounters(counter, controllerId, ability, game, false);
+            permanent.addCounters(counter, controllerId, ability, game, false);
+            this.paid = true;
         }
         return paid;
     }

@@ -41,6 +41,16 @@ public class CantHaveCountersAddedAllEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        for (Permanent permanent : game.getPermanentsEntering().values()) {
+            if (!filter.match(permanent, source.getControllerId(), source, game)) {
+                continue;
+            }
+            if (counterType == null) {
+                permanent.setCountersCanBeAdded(false);
+            } else {
+                permanent.setCounterTypeCantBeAdded(counterType);
+            }
+        }
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
             if (counterType == null) {
                 permanent.setCountersCanBeAdded(false);

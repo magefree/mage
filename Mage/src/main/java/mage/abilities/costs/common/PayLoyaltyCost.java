@@ -48,7 +48,9 @@ public class PayLoyaltyCost extends CostImpl {
             }
         }
 
-        return planeswalker.getCounters(game).getCount(CounterType.LOYALTY) + loyaltyCost >= 0 && planeswalker.canLoyaltyBeUsed(game);
+        return planeswalker.getCounters(game).getCount(CounterType.LOYALTY) + loyaltyCost >= 0
+                && planeswalker.canLoyaltyBeUsed(game)
+                && (loyaltyCost <= 0 || planeswalker.canHaveCounterAdded(CounterType.LOYALTY));
     }
 
     /**
@@ -61,15 +63,19 @@ public class PayLoyaltyCost extends CostImpl {
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Permanent planeswalker = game.getPermanent(source.getSourceId());
-        if (planeswalker != null && planeswalker.getCounters(game).getCount(CounterType.LOYALTY) + amount >= 0 && planeswalker.canLoyaltyBeUsed(game)) {
-            if (amount > 0) {
-                planeswalker.addCounters(CounterType.LOYALTY.createInstance(amount), source.getControllerId(), ability, game, false);
-            } else if (amount < 0) {
-                planeswalker.removeCounters(CounterType.LOYALTY.getName(), Math.abs(amount), source, game);
-            }
-            planeswalker.addLoyaltyUsed();
-            this.paid = true;
+        if (planeswalker == null
+                || planeswalker.getCounters(game).getCount(CounterType.LOYALTY) + amount < 0
+                || !planeswalker.canLoyaltyBeUsed(game)
+                || (amount > 0 && !planeswalker.canHaveCounterAdded(CounterType.LOYALTY))) {
+            return paid;
         }
+        if (amount > 0) {
+            planeswalker.addCounters(CounterType.LOYALTY.createInstance(amount), source.getControllerId(), ability, game, false);
+        } else if (amount < 0) {
+            planeswalker.removeCounters(CounterType.LOYALTY.getName(), Math.abs(amount), source, game);
+        }
+        planeswalker.addLoyaltyUsed();
+        this.paid = true;
         return paid;
     }
 
