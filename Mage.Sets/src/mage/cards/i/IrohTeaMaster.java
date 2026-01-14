@@ -24,7 +24,6 @@ import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetOpponent;
-import mage.target.targetpointer.EachTargetPointer;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.Optional;
@@ -50,8 +49,8 @@ public final class IrohTeaMaster extends CardImpl {
 
         // At the beginning of combat on your turn, you may have target opponent gain control of target permanent you control. When you do, create a 1/1 white Ally creature token. Put a +1/+1 counter on that token for each permanent you own that your opponents control.
         Ability ability = new BeginningOfCombatTriggeredAbility(new IrohTeaMasterControlEffect(), true);
-        ability.addTarget(new TargetOpponent());
-        ability.addTarget(new TargetControlledPermanent());
+        ability.addTarget(new TargetOpponent().setTargetTag(1));
+        ability.addTarget(new TargetControlledPermanent().setTargetTag(2));
         this.addAbility(ability.addHint(IrohTeaMasterTokenEffect.getHint()));
     }
 
@@ -72,7 +71,6 @@ class IrohTeaMasterControlEffect extends OneShotEffect {
         staticText = "have target opponent gain control of target permanent you control. " +
                 "When you do, create a 1/1 white Ally creature token. " +
                 "Put a +1/+1 counter on that token for each permanent you own that your opponents control";
-        this.setTargetPointer(new EachTargetPointer());
     }
 
     private IrohTeaMasterControlEffect(final IrohTeaMasterControlEffect effect) {
@@ -86,8 +84,8 @@ class IrohTeaMasterControlEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
-        Permanent permanent = game.getPermanent(getTargetPointer().getTargets(game, source).get(0));
+        Player player = game.getPlayer(source.getTargets().getByTag(1).getFirstTarget());
+        Permanent permanent = game.getPermanent(source.getTargets().getByTag(2).getFirstTarget());
         if (player == null || permanent == null) {
             return false;
         }
