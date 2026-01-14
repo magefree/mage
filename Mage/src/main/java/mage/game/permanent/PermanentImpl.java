@@ -7,6 +7,7 @@ import mage.ObjectColor;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
+import mage.abilities.common.RoomAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.RequirementEffect;
@@ -17,7 +18,6 @@ import mage.abilities.hint.HintUtils;
 import mage.abilities.keyword.*;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.abilities.common.RoomAbility;
 import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.CounterType;
@@ -80,6 +80,8 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected boolean disguised = false;
     protected boolean ringBearerFlag = false;
     protected boolean canBeSacrificed = true;
+    protected boolean countersCanBeAdded = true;
+    protected Set<CounterType> counterTypesCantBeAdded = new HashSet<>();
     protected int classLevel = 1;
     protected final Set<UUID> goadingPlayers = new HashSet<>();
     protected UUID originalControllerId;
@@ -254,6 +256,8 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.loyaltyActivationsAvailable = 1;
         this.legendRuleApplies = true;
         this.canBeSacrificed = true;
+        this.countersCanBeAdded = true;
+        this.counterTypesCantBeAdded.clear();
     }
 
     @Override
@@ -1865,6 +1869,21 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public boolean canBeSacrificed() {
         return canBeSacrificed;
+    }
+
+    @Override
+    public void setCountersCanBeAdded(boolean countersCanBeAdded) {
+        this.countersCanBeAdded = countersCanBeAdded;
+    }
+
+    @Override
+    public void setCounterTypeCantBeAdded(CounterType counterType) {
+        this.counterTypesCantBeAdded.add(counterType);
+    }
+
+    @Override
+    public boolean canHaveCounterAdded(CounterType counterType) {
+        return this.countersCanBeAdded && !this.counterTypesCantBeAdded.contains(counterType);
     }
 
     @Override

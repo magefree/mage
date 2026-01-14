@@ -5,6 +5,7 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.GameState;
@@ -108,6 +109,12 @@ public interface Permanent extends Card, Controllable {
     void setCanBeSacrificed(boolean canBeSacrificed);
 
     boolean canBeSacrificed();
+
+    void setCountersCanBeAdded(boolean countersCanBeAdded);
+
+    void setCounterTypeCantBeAdded(CounterType counterType);
+
+    boolean canHaveCounterAdded(CounterType counterType);
 
     void setCardNumber(String cid);
 
