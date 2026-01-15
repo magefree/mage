@@ -80,8 +80,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected boolean disguised = false;
     protected boolean ringBearerFlag = false;
     protected boolean canBeSacrificed = true;
-    protected boolean countersCanBeAdded = true;
-    protected Set<CounterType> counterTypesCantBeAdded = new HashSet<>();
     protected int classLevel = 1;
     protected final Set<UUID> goadingPlayers = new HashSet<>();
     protected UUID originalControllerId;
@@ -256,8 +254,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.loyaltyActivationsAvailable = 1;
         this.legendRuleApplies = true;
         this.canBeSacrificed = true;
-        this.countersCanBeAdded = true;
-        this.counterTypesCantBeAdded.clear();
     }
 
     @Override
@@ -1872,23 +1868,25 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public void setCountersCanBeAdded(boolean countersCanBeAdded) {
-        this.countersCanBeAdded = countersCanBeAdded;
+    public boolean canHaveAnyCounterAdded(Game game, Ability source) {
+        return this.canHaveCounterAdded((CounterType) null, 1, game, source);
     }
 
     @Override
-    public void setCounterTypeCantBeAdded(CounterType counterType) {
-        this.counterTypesCantBeAdded.add(counterType);
+    public boolean canHaveCounterAdded(Counter counter, Game game, Ability source) {
+        return this.canHaveCounterAdded(CounterType.findByName(counter.getName()), counter.getCount(), game, source);
     }
 
     @Override
-    public boolean canHaveCounterAdded(CounterType counterType) {
-        return this.countersCanBeAdded && !this.counterTypesCantBeAdded.contains(counterType);
+    public boolean canHaveCounterAdded(CounterType counterType, Game game, Ability source) {
+        return this.canHaveCounterAdded(counterType, 1, game, source);
     }
 
-    @Override
-    public boolean canHaveCounterAdded(Counter counter) {
-        return this.canHaveCounterAdded(CounterType.findByName(counter.getName()));
+    protected boolean canHaveCounterAdded(CounterType counterType, int amount, Game game, Ability source) {
+        return game.replaceEvent(GameEvent.getEvent(
+                EventType.CAN_ADD_COUNTERS, objectId, source,
+                source.getControllerId(), counterType == null ? "" : counterType.getName(), amount
+        ));
     }
 
     @Override

@@ -3,7 +3,7 @@ package mage.cards.s;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.continuous.CantHaveCountersAddedAllEffect;
+import mage.abilities.effects.common.ruleModifying.CantHaveCountersAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -40,7 +40,7 @@ public final class Solemnity extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new SolemnityEffect()));
 
         // Counters can't be put on artifacts, creatures, enchantments, or lands.
-        this.addAbility(new SimpleStaticAbility(new CantHaveCountersAddedAllEffect(filter, null)
+        this.addAbility(new SimpleStaticAbility(new CantHaveCountersAllEffect(filter, null)
                 .setText("counters can't be put on artifacts, creatures, enchantments, or lands")));
     }
 

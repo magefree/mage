@@ -50,7 +50,7 @@ public class PayLoyaltyCost extends CostImpl {
 
         return planeswalker.getCounters(game).getCount(CounterType.LOYALTY) + loyaltyCost >= 0
                 && planeswalker.canLoyaltyBeUsed(game)
-                && (loyaltyCost <= 0 || planeswalker.canHaveCounterAdded(CounterType.LOYALTY));
+                && (loyaltyCost <= 0 || planeswalker.canHaveCounterAdded(CounterType.LOYALTY, game, source));
     }
 
     /**
@@ -66,7 +66,7 @@ public class PayLoyaltyCost extends CostImpl {
         if (planeswalker == null
                 || planeswalker.getCounters(game).getCount(CounterType.LOYALTY) + amount < 0
                 || !planeswalker.canLoyaltyBeUsed(game)
-                || (amount > 0 && !planeswalker.canHaveCounterAdded(CounterType.LOYALTY))) {
+                || (amount > 0 && !planeswalker.canHaveCounterAdded(CounterType.LOYALTY, game, source))) {
             return paid;
         }
         if (amount > 0) {

@@ -3,14 +3,17 @@ package mage.cards.b;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.TapEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -87,10 +90,10 @@ class BlossombindUntapEffect extends ReplacementEffectImpl {
     }
 }
 
-class BlossombindCounterEffect extends ContinuousEffectImpl {
+class BlossombindCounterEffect extends ContinuousRuleModifyingEffectImpl {
 
     BlossombindCounterEffect() {
-        super(Duration.WhileOnBattlefield, Layer.RulesEffects, SubLayer.NA, Outcome.Detriment);
+        super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "and can't have counters put on it";
     }
 
@@ -104,11 +107,16 @@ class BlossombindCounterEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Optional.ofNullable(source.getSourcePermanentIfItStillExists(game))
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.CAN_ADD_COUNTERS;
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        return Optional
+                .ofNullable(source.getSourcePermanentIfItStillExists(game))
                 .map(Permanent::getAttachedTo)
-                .map(game::getPermanent)
-                .ifPresent(permanent -> permanent.setCountersCanBeAdded(false));
-        return true;
+                .filter(event.getTargetId()::equals)
+                .isPresent();
     }
 }

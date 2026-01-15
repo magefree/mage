@@ -4,13 +4,15 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.RemoveAllCountersPermanentTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -119,10 +121,10 @@ class SuncleanserPreventCountersPlayerEffect extends ContinuousRuleModifyingEffe
     }
 }
 
-class SuncleanserPreventCountersPermanentEffect extends ContinuousEffectImpl {
+class SuncleanserPreventCountersPermanentEffect extends ContinuousRuleModifyingEffectImpl {
 
     SuncleanserPreventCountersPermanentEffect() {
-        super(Duration.UntilSourceLeavesBattlefield, Layer.RulesEffects, SubLayer.NA, Outcome.Detriment);
+        super(Duration.UntilSourceLeavesBattlefield, Outcome.Detriment);
         staticText = "It can't have counters put on it for as long as {this} remains on the battlefield";
     }
 
@@ -136,13 +138,17 @@ class SuncleanserPreventCountersPermanentEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.CAN_ADD_COUNTERS;
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (permanent == null) {
-            discard();
-            return false;
+        if (permanent != null) {
+            return true;
         }
-        permanent.setCountersCanBeAdded(false);
-        return true;
+        discard();
+        return false;
     }
 }

@@ -2,14 +2,15 @@ package mage.filter.predicate.permanent;
 
 import mage.counters.Counter;
 import mage.counters.CounterType;
-import mage.filter.predicate.Predicate;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
  * @author TheElk801
  */
-public class CanHaveCounterAddedPredicate implements Predicate<Permanent> {
+public class CanHaveCounterAddedPredicate implements ObjectSourcePlayerPredicate<Permanent> {
 
     private final CounterType counterType;
 
@@ -22,7 +23,7 @@ public class CanHaveCounterAddedPredicate implements Predicate<Permanent> {
     }
 
     @Override
-    public boolean apply(Permanent input, Game game) {
-        return input.canHaveCounterAdded(counterType);
+    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
+        return input.getObject().canHaveCounterAdded(counterType, game, input.getSource());
     }
 }

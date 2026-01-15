@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.continuous.CantHaveCountersAddedAllEffect;
+import mage.abilities.effects.common.ruleModifying.CantHaveCountersAllEffect;
 import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -38,7 +38,7 @@ public final class MeliraSylvokOutcast extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new MeliraSylvokOutcastEffect()));
 
         // Creatures you control can't have -1/-1 counters put on them.
-        this.addAbility(new SimpleStaticAbility(new CantHaveCountersAddedAllEffect(
+        this.addAbility(new SimpleStaticAbility(new CantHaveCountersAllEffect(
                 StaticFilters.FILTER_CONTROLLED_CREATURES, CounterType.M1M1
         )));
 

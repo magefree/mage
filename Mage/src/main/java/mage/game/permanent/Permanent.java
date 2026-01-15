@@ -111,13 +111,11 @@ public interface Permanent extends Card, Controllable {
 
     boolean canBeSacrificed();
 
-    void setCountersCanBeAdded(boolean countersCanBeAdded);
+    boolean canHaveAnyCounterAdded(Game game, Ability source);
 
-    void setCounterTypeCantBeAdded(CounterType counterType);
+    boolean canHaveCounterAdded(Counter counter, Game game, Ability source);
 
-    boolean canHaveCounterAdded(CounterType counterType);
-
-    boolean canHaveCounterAdded(Counter counter);
+    boolean canHaveCounterAdded(CounterType counterType, Game game, Ability source);
 
     void setCardNumber(String cid);
 

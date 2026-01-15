@@ -546,6 +546,7 @@ public class GameEvent implements Serializable {
          flag        not used for this event
          */
         STAY_ATTACHED,
+        CAN_ADD_COUNTERS,
         ADD_COUNTER, COUNTER_ADDED,
         ADD_COUNTERS, COUNTERS_ADDED,
         /* REMOVE_COUNTER, REMOVE_COUNTERS, COUNTER_REMOVED, COUNTERS_REMOVED

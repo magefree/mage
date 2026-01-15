@@ -3,7 +3,7 @@ package mage.cards.b;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continuous.CantHaveCountersAddedAllEffect;
+import mage.abilities.effects.common.ruleModifying.CantHaveCountersAllEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -30,7 +30,7 @@ public final class Blightbeetle extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.GREEN));
 
         // Creatures your opponents control can't have +1/+1 counters put on them.
-        this.addAbility(new SimpleStaticAbility(new CantHaveCountersAddedAllEffect(
+        this.addAbility(new SimpleStaticAbility(new CantHaveCountersAllEffect(
                 StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURES, CounterType.P1P1
         )));
     }

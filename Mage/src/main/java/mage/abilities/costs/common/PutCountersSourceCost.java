@@ -31,7 +31,7 @@ public class PutCountersSourceCost extends CostImpl {
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         return Optional
                 .ofNullable(source.getSourcePermanentIfItStillExists(game))
-                .filter(permanent -> permanent.canHaveCounterAdded(counter))
+                .filter(permanent -> permanent.canHaveCounterAdded(counter, game, source))
                 .isPresent();
     }
 
