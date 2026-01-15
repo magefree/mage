@@ -168,7 +168,7 @@ Lorwyn|Lorwyn|
 Lorwyn Eclipsed|LorwynEclipsed|
 Lorwyn Eclipsed Commander|LorwynEclipsedCommander|
 The Lost Caverns of Ixalan|TheLostCavernsOfIxalan|
-The Lost Caverns of Ixalan Commander|LostCavernsOfIxalanCommander|
+The Lost Caverns of Ixalan Commander|TheLostCavernsOfIxalanCommander|
 Magic 2010|Magic2010|
 Magic 2011|Magic2011|
 Magic 2012|Magic2012|
