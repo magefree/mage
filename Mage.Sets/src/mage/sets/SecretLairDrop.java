@@ -2228,6 +2228,8 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Serum Visions", 2323, Rarity.RARE, mage.cards.s.SerumVisions.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Umbris, Fear Manifest", 2324, Rarity.MYTHIC, mage.cards.u.UmbrisFearManifest.class));
         cards.add(new SetCardInfo("Spellskite", 2325, Rarity.RARE, mage.cards.s.Spellskite.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Ghoul, Gunslinger", 2448, Rarity.MYTHIC, mage.cards.t.TheGhoulGunslinger.class));
+        cards.add(new SetCardInfo("Maximus, Knight Apparent", 2449, Rarity.MYTHIC, mage.cards.m.MaximusKnightApparent.class));
         cards.add(new SetCardInfo("Pre-War Formalwear", 2450, Rarity.RARE, mage.cards.p.PreWarFormalwear.class));
         cards.add(new SetCardInfo("Spirit Mantle", 2451, Rarity.RARE, mage.cards.s.SpiritMantle.class));
         cards.add(new SetCardInfo("T-45 Power Armor", 2452, Rarity.RARE, mage.cards.t.T45PowerArmor.class));
