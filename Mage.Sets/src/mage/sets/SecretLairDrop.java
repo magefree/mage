@@ -793,7 +793,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Solemn Simulacrum", "791*", Rarity.RARE, mage.cards.s.SolemnSimulacrum.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Command Tower", 792, Rarity.RARE, mage.cards.c.CommandTower.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nine Lives", 793, Rarity.RARE, mage.cards.n.NineLives.class));
-        cards.add(new SetCardInfo("Yoshimaru, Ever Faithful", 794, Rarity.MYTHIC, mage.cards.y.YoshimaruEverFaithful.class));
+        cards.add(new SetCardInfo("Yoshimaru, Ever Faithful", 794, Rarity.MYTHIC, mage.cards.y.YoshimaruEverFaithful.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wastes", "795*", Rarity.RARE, mage.cards.w.Wastes.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mana Vault", "796*", Rarity.MYTHIC, mage.cards.m.ManaVault.class));
         cards.add(new SetCardInfo("Seraph Sanctuary", 797, Rarity.RARE, mage.cards.s.SeraphSanctuary.class, NON_FULL_USE_VARIOUS));
@@ -2140,7 +2140,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Captain N'ghathrod", 2183, Rarity.MYTHIC, mage.cards.c.CaptainNghathrod.class));
         cards.add(new SetCardInfo("Nekusar, the Mindrazer", 2184, Rarity.RARE, mage.cards.n.NekusarTheMindrazer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Iron Maiden", 2185, Rarity.RARE, mage.cards.i.IronMaiden.class, FULL_ART));
-        cards.add(new SetCardInfo("Mindcrank", 2186, Rarity.RARE, mage.cards.m.Mindcrank.class, FULL_ART));
+        cards.add(new SetCardInfo("Mindcrank", 2186, Rarity.RARE, mage.cards.m.Mindcrank.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Lethal Scheme", 2187, Rarity.RARE, mage.cards.l.LethalScheme.class));
         cards.add(new SetCardInfo("Grave Titan", 2188, Rarity.MYTHIC, mage.cards.g.GraveTitan.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Animate Dead", 2189, Rarity.RARE, mage.cards.a.AnimateDead.class));
