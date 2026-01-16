@@ -19,6 +19,8 @@ public final class LorwynEclipsedCommander extends ExpansionSet {
         super("Lorwyn Eclipsed Commander", "ECC", ExpansionSet.buildDate(2026, 1, 23), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false; // temporary
 
+        cards.add(new SetCardInfo("Aberrant Return", 27, Rarity.RARE, mage.cards.a.AberrantReturn.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Aberrant Return", 7, Rarity.RARE, mage.cards.a.AberrantReturn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Abundant Countryside", 22, Rarity.RARE, mage.cards.a.AbundantCountryside.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Abundant Countryside", 42, Rarity.RARE, mage.cards.a.AbundantCountryside.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Abundant Growth", 97, Rarity.COMMON, mage.cards.a.AbundantGrowth.class));
