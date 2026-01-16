@@ -2870,6 +2870,7 @@ public class ScryfallImageSupportTokens {
             put("ECL/Worm", "https://api.scryfall.com/cards/tecl/9/?format=image");
             put("ECL/Treasure", "https://api.scryfall.com/cards/tecl/10/?format=image");
             put("ECL/Mutavault", "https://api.scryfall.com/cards/tecl/11/?format=image");
+            put("ECL/Emblem Oko", "https://api.scryfall.com/cards/tecl/12/?format=image");
 
             // ECC
             put("ECC/Elemental/1", "https://api.scryfall.com/cards/tecc/2?format=image");
