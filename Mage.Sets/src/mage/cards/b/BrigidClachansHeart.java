@@ -36,7 +36,7 @@ public final class BrigidClachansHeart extends TransformingDoubleFacedCard {
         super(
             ownerId, setInfo,
             new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.KITHKIN, SubType.WARRIOR}, "{2}{W}",
-            "Brigid, Clachan's Heart",
+            "Brigid, Doun's Mind",
             new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.KITHKIN, SubType.SOLDIER}, "G"
         );
         this.getLeftHalfCard().setPT(3, 2);
