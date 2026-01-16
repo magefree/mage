@@ -93,8 +93,8 @@ class AzulaCunningUsurperExileEffect extends OneShotEffect {
             player.choose(Outcome.Exile, target, source, game);
             cards.add(target.getFirstTarget());
         }
-        if (player.getGraveyard().count(StaticFilters.FILTER_CARD_A_NON_CREATURE, game) > 0) {
-            TargetCard target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_A_NON_CREATURE);
+        if (player.getGraveyard().count(StaticFilters.FILTER_CARD_A_NON_LAND, game) > 0) {
+            TargetCard target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_A_NON_LAND);
             target.withNotTarget(true);
             player.choose(Outcome.Exile, target, source, game);
             cards.add(target.getFirstTarget());

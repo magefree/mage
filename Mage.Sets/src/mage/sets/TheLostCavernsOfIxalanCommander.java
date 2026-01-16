@@ -282,6 +282,7 @@ public final class TheLostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Terramorphic Expanse", 360, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class));
         cards.add(new SetCardInfo("Tetzin, Gnome Champion", 13, Rarity.RARE, mage.cards.t.TetzinGnomeChampion.class));
         cards.add(new SetCardInfo("Thassa, God of the Sea", 176, Rarity.MYTHIC, mage.cards.t.ThassaGodOfTheSea.class));
+        cards.add(new SetCardInfo("The Grim Captain's Locker", 50, Rarity.RARE, mage.cards.t.TheGrimCaptainsLocker.class));
         cards.add(new SetCardInfo("The Indomitable", 43, Rarity.RARE, mage.cards.t.TheIndomitable.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Indomitable", 75, Rarity.RARE, mage.cards.t.TheIndomitable.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thieving Skydiver", 177, Rarity.RARE, mage.cards.t.ThievingSkydiver.class));

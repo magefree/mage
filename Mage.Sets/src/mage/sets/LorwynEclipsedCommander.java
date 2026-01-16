@@ -19,6 +19,8 @@ public final class LorwynEclipsedCommander extends ExpansionSet {
         super("Lorwyn Eclipsed Commander", "ECC", ExpansionSet.buildDate(2026, 1, 23), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false; // temporary
 
+        cards.add(new SetCardInfo("Aberrant Return", 27, Rarity.RARE, mage.cards.a.AberrantReturn.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Aberrant Return", 7, Rarity.RARE, mage.cards.a.AberrantReturn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Abundant Countryside", 22, Rarity.RARE, mage.cards.a.AbundantCountryside.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Abundant Countryside", 42, Rarity.RARE, mage.cards.a.AbundantCountryside.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Abundant Growth", 97, Rarity.COMMON, mage.cards.a.AbundantGrowth.class));
@@ -161,6 +163,8 @@ public final class LorwynEclipsedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Soul Snuffers", 87, Rarity.UNCOMMON, mage.cards.s.SoulSnuffers.class));
         cards.add(new SetCardInfo("Springleaf Parade", 19, Rarity.RARE, mage.cards.s.SpringleafParade.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Springleaf Parade", 39, Rarity.RARE, mage.cards.s.SpringleafParade.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Subterfuge", 26, Rarity.RARE, mage.cards.s.Subterfuge.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Subterfuge", 6, Rarity.RARE, mage.cards.s.Subterfuge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Terminate", 134, Rarity.COMMON, mage.cards.t.Terminate.class));
         cards.add(new SetCardInfo("Terramorphic Expanse", 169, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class));
         cards.add(new SetCardInfo("The Reaper, King No More", 4, Rarity.MYTHIC, mage.cards.t.TheReaperKingNoMore.class));

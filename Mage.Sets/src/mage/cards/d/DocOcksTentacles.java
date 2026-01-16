@@ -7,10 +7,7 @@ import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
@@ -35,8 +32,9 @@ public final class DocOcksTentacles extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Whenever a creature you control with mana value 5 or greater enters, you may attach this Equipment to it.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(
-                new AttachEffect(Outcome.BoostCreature, "attach {this} to it"), filter, true
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD,
+                new AttachEffect(Outcome.BoostCreature, "attach {this} to it"),
+                filter, true, SetTargetPointer.PERMANENT
         ));
 
         // Equipped creature gets +4/+4.

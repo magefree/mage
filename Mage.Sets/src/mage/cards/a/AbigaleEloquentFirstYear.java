@@ -50,7 +50,7 @@ public final class AbigaleEloquentFirstYear extends CardImpl {
                 .setText("Put a flying counter"));
         ability.addEffect(new AddCountersTargetEffect(CounterType.FIRST_STRIKE.createInstance())
                 .setText(", a first strike counter"));
-        ability.addEffect(new AddCountersTargetEffect(CounterType.FLYING.createInstance())
+        ability.addEffect(new AddCountersTargetEffect(CounterType.LIFELINK.createInstance())
                 .setText(", and a lifelink counter on that creature"));
         ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_ANOTHER_TARGET_CREATURE));
         this.addAbility(ability);
