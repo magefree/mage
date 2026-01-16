@@ -96,6 +96,8 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Creakwood Safewright", 96, Rarity.UNCOMMON, mage.cards.c.CreakwoodSafewright.class));
         cards.add(new SetCardInfo("Crib Swap", 11, Rarity.UNCOMMON, mage.cards.c.CribSwap.class));
         cards.add(new SetCardInfo("Crossroads Watcher", 173, Rarity.COMMON, mage.cards.c.CrossroadsWatcher.class));
+        cards.add(new SetCardInfo("Curious Colossus", 12, Rarity.MYTHIC, mage.cards.c.CuriousColossus.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Curious Colossus", 298, Rarity.MYTHIC, mage.cards.c.CuriousColossus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Darkness Descends", 97, Rarity.UNCOMMON, mage.cards.d.DarknessDescends.class));
         cards.add(new SetCardInfo("Dawn's Light Archer", 174, Rarity.COMMON, mage.cards.d.DawnsLightArcher.class));
         cards.add(new SetCardInfo("Dawnhand Eulogist", 99, Rarity.COMMON, mage.cards.d.DawnhandEulogist.class));
