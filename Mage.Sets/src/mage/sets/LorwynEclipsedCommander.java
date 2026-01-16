@@ -161,6 +161,8 @@ public final class LorwynEclipsedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Soul Snuffers", 87, Rarity.UNCOMMON, mage.cards.s.SoulSnuffers.class));
         cards.add(new SetCardInfo("Springleaf Parade", 19, Rarity.RARE, mage.cards.s.SpringleafParade.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Springleaf Parade", 39, Rarity.RARE, mage.cards.s.SpringleafParade.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Subterfuge", 26, Rarity.RARE, mage.cards.s.Subterfuge.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Subterfuge", 6, Rarity.RARE, mage.cards.s.Subterfuge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Terminate", 134, Rarity.COMMON, mage.cards.t.Terminate.class));
         cards.add(new SetCardInfo("Terramorphic Expanse", 169, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class));
         cards.add(new SetCardInfo("The Reaper, King No More", 4, Rarity.MYTHIC, mage.cards.t.TheReaperKingNoMore.class));
