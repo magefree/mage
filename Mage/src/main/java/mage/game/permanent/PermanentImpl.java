@@ -1883,7 +1883,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     protected boolean canHaveCounterAdded(CounterType counterType, int amount, Game game, Ability source) {
-        return game.replaceEvent(GameEvent.getEvent(
+        return !game.replaceEvent(GameEvent.getEvent(
                 EventType.CAN_ADD_COUNTERS, objectId, source,
                 source.getControllerId(), counterType == null ? "" : counterType.getName(), amount
         ));
