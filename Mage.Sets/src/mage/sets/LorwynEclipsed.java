@@ -99,6 +99,10 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Chronicle of Victory", 346, Rarity.MYTHIC, mage.cards.c.ChronicleOfVictory.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cinder Strike", 131, Rarity.COMMON, mage.cards.c.CinderStrike.class));
         cards.add(new SetCardInfo("Clachan Festival", 10, Rarity.UNCOMMON, mage.cards.c.ClachanFestival.class));
+        cards.add(new SetCardInfo("Collective Inferno", 132, Rarity.RARE, mage.cards.c.CollectiveInferno.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Collective Inferno", 363, Rarity.RARE, mage.cards.c.CollectiveInferno.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Collective Inferno", 387, Rarity.MYTHIC, mage.cards.c.CollectiveInferno.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Collective Inferno", 397, Rarity.MYTHIC, mage.cards.c.CollectiveInferno.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Creakwood Safewright", 96, Rarity.UNCOMMON, mage.cards.c.CreakwoodSafewright.class));
         cards.add(new SetCardInfo("Crib Swap", 11, Rarity.UNCOMMON, mage.cards.c.CribSwap.class));
         cards.add(new SetCardInfo("Crossroads Watcher", 173, Rarity.COMMON, mage.cards.c.CrossroadsWatcher.class));
