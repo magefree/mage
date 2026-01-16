@@ -7,6 +7,7 @@ import mage.abilities.keyword.BlightAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
@@ -27,6 +28,7 @@ public final class CinderStrike extends CardImpl {
                 BlightedCondition.instance, "{this} deals 2 damage to target creature. " +
                 "It deals 4 damage to that creature instead if this spell's additional cost was paid"
         ));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     private CinderStrike(final CinderStrike card) {
