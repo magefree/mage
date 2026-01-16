@@ -29,7 +29,7 @@ import mage.target.TargetPlayer;
  */
 public final class TheGhoulGunslinger extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledPermanent();
+    private static final FilterPermanent filter = new FilterControlledPermanent("another nontoken Zombie or Mutant you control");
 
     static {
         filter.add(Predicates.or(
@@ -89,13 +89,12 @@ class TheGhoulGunslingerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
         Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (targetPlayer == null) {
             return false;
         }
         targetPlayer.addCounters(CounterType.RAD.createInstance(2), source.getControllerId(), source, game);
-        if (controller != null && controller.getId().equals(targetPlayer.getId())) {
+        if (source.isControlledBy(targetPlayer.getId())) {
             Token token = new TreasureToken();
             token.putOntoBattlefield(1, game, source, source.getControllerId());
         }
