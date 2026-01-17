@@ -38,7 +38,7 @@ public final class IllusionSpinners extends CardImpl {
 
         // You may cast this spell as though it had flash if you control a Faerie.
         this.addAbility(new CastAsThoughItHadFlashIfConditionAbility(
-                condition, "you may cast this spell as though it had flash if you control a Faerie"
+                condition, "you may cast this spell as though it had flash if you control a Faerie."
         ));
 
         // Flying

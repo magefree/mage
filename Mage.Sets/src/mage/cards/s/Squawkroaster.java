@@ -32,6 +32,7 @@ public final class Squawkroaster extends CardImpl {
         // Vivid -- Squawkroaster's power is equal to the number of colors among permanents you control.
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL, new SetBasePowerSourceEffect(ColorsAmongControlledPermanentsCount.ALL_PERMANENTS)
+                .setText("{this}'s power is equal to the number of colors among permanents you control")
         ).setAbilityWord(AbilityWord.VIVID).addHint(ColorsAmongControlledPermanentsCount.ALL_PERMANENTS.getHint()));
     }
 

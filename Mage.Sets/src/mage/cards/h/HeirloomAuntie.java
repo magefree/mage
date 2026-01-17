@@ -37,7 +37,7 @@ public final class HeirloomAuntie extends CardImpl {
 
         // Whenever another creature you control dies, surveil 1, then remove a -1/-1 counter from this creature.
         Ability ability = new DiesCreatureTriggeredAbility(
-                new SurveilEffect(1), false,
+                new SurveilEffect(1, false), false,
                 StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL
         );
         ability.addEffect(new RemoveCounterSourceEffect(CounterType.M1M1.createInstance()).concatBy(", then"));

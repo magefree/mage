@@ -32,7 +32,7 @@ public final class BoggartMischief extends CardImpl {
 
         // When this enchantment enters, you may blight 1. If you do, create two 1/1 black and red Goblin creature tokens.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new DoIfCostPaid(new CreateTokenEffect(new BlackAndRedGoblinToken()), new BlightCost(1))
+                new DoIfCostPaid(new CreateTokenEffect(new BlackAndRedGoblinToken(), 2), new BlightCost(1))
         ));
 
         // Whenever a Goblin creature you control dies, each opponent loses 1 life and you gain 1 life.

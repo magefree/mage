@@ -14,7 +14,8 @@ import java.util.UUID;
  */
 public class TargetCardInGraveyard extends TargetCard {
 
-    private static final FilterCard defaultFilter = new FilterCard("card from a graveyard");
+    private static final FilterCard defaultFilterSingular = new FilterCard("card from a graveyard");
+    private static final FilterCard defaultFilterPlural = new FilterCard("cards from graveyards");
 
     public TargetCardInGraveyard() {
         this(1, 1);
@@ -29,7 +30,7 @@ public class TargetCardInGraveyard extends TargetCard {
     }
 
     public TargetCardInGraveyard(int minNumTargets, int maxNumTargets) {
-        this(minNumTargets, maxNumTargets, defaultFilter, false);
+        this(minNumTargets, maxNumTargets, maxNumTargets > 1 ? defaultFilterPlural : defaultFilterSingular, false);
     }
 
     public TargetCardInGraveyard(int minNumTargets, int maxNumTargets, FilterCard filter) {

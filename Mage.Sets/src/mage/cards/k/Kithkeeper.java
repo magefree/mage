@@ -36,7 +36,10 @@ public final class Kithkeeper extends CardImpl {
         // Vivid -- When this creature enters, create X 1/1 green and white Kithkin creature tokens, where X is the number of colors among permanents you control.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(
                 new KithkinGreenWhiteToken(), ColorsAmongControlledPermanentsCount.ALL_PERMANENTS
-        )).setAbilityWord(AbilityWord.VIVID).addHint(ColorsAmongControlledPermanentsCount.ALL_PERMANENTS.getHint()));
+        ).setText("create X 1/1 green and white Kithkin creature tokens, " +
+                "where X is the number of colors among permanents you control"))
+                .setAbilityWord(AbilityWord.VIVID)
+                .addHint(ColorsAmongControlledPermanentsCount.ALL_PERMANENTS.getHint()));
 
         // Tap three untapped creatures you control: This creature gets +3/+0 and gains flying until end of turn.
         Ability ability = new SimpleActivatedAbility(

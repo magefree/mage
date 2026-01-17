@@ -43,7 +43,8 @@ public final class MoonVigilAdherents extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // This creature gets +1/+1 for each creature you control and each creature card in your graveyard.
-        this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(xValue, xValue, Duration.WhileOnBattlefield)).addHint(hint));
+        this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(xValue, xValue, Duration.WhileOnBattlefield)
+                .setText("{this} gets +1/+1 for each creature you control and each creature card in your graveyard")).addHint(hint));
     }
 
     private MoonVigilAdherents(final MoonVigilAdherents card) {

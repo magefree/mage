@@ -26,7 +26,7 @@ public final class MoongloveExtractor extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever this creature attacks, you draw a card and lose 1 life.
-        Ability ability = new AttacksTriggeredAbility(new DrawCardSourceControllerEffect(1));
+        Ability ability = new AttacksTriggeredAbility(new DrawCardSourceControllerEffect(1, true));
         ability.addEffect(new LoseLifeSourceControllerEffect(1).setText("and lose 1 life"));
         this.addAbility(ability);
     }

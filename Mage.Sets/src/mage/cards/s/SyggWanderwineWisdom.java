@@ -55,7 +55,7 @@ public final class SyggWanderwineWisdom extends TransformingDoubleFacedCard {
                 new DealsCombatDamageToAPlayerOrPlaneswalkerTriggeredAbility(
                         new DrawCardSourceControllerEffect(1), false
                 ), Duration.EndOfTurn
-        ), false);
+        ).setText("target creature gains \"Whenever this creature deals combat damage to a player or planeswalker, draw a card\" until end of turn"), false);
         ability.addTarget(new TargetCreaturePermanent());
         this.getLeftHalfCard().addAbility(ability);
 
@@ -71,7 +71,7 @@ public final class SyggWanderwineWisdom extends TransformingDoubleFacedCard {
         this.getRightHalfCard().addAbility(new CantBeBlockedSourceAbility());
 
         // Whenever this creature transforms into Sygg, Wanderbrine Shield, target creature you control gains protection from each color until your next turn.
-        Ability ability2 = new TransformIntoSourceTriggeredAbility(new GainAbilityTargetEffect(new ProtectionAbility(filter), Duration.UntilYourNextTurn));
+        Ability ability2 = new TransformIntoSourceTriggeredAbility(new GainAbilityTargetEffect(new ProtectionAbility(filter), Duration.UntilYourNextTurn), false, true);
         ability2.addTarget(new TargetControlledCreaturePermanent());
         this.getRightHalfCard().addAbility(ability2);
 

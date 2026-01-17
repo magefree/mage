@@ -5,19 +5,15 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.ChooseColorEffect;
-import mage.abilities.effects.common.continuous.SetChosenColorEffect;
-import mage.abilities.effects.common.enterAttribute.EnterAttributeSetChosenColorEffect;
 import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.mana.EnchantedTappedTriggeredManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
-import mage.constants.Outcome;
-import mage.constants.SubType;
+import mage.constants.*;
 import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -45,15 +41,13 @@ public final class ShimmerwildsGrowth extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // As this Aura enters, choose a color.
-        Ability ability = new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral));
-        ability.addEffect(new EnterAttributeSetChosenColorEffect());
-        this.addAbility(ability);
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral)));
 
         // Enchanted land is the chosen color.
-        this.addAbility(new SimpleStaticAbility(new SetChosenColorEffect()));
+        this.addAbility(new SimpleStaticAbility(new ShimmerwildsGrowthColorEffect()));
 
         // Whenever enchanted land is tapped for mana, its controller adds an additional one mana of the chosen color.
-        this.addAbility(new EnchantedTappedTriggeredManaAbility(new ShimmerwildsGrowthEffect(), "land"));
+        this.addAbility(new EnchantedTappedTriggeredManaAbility(new ShimmerwildsGrowthManaEffect(), "land"));
     }
 
     private ShimmerwildsGrowth(final ShimmerwildsGrowth card) {
@@ -66,14 +60,46 @@ public final class ShimmerwildsGrowth extends CardImpl {
     }
 }
 
-class ShimmerwildsGrowthEffect extends ManaEffect {
+class ShimmerwildsGrowthColorEffect extends ContinuousEffectImpl {
 
-    ShimmerwildsGrowthEffect() {
+    ShimmerwildsGrowthColorEffect() {
+        super(Duration.WhileOnBattlefield, Layer.ColorChangingEffects_5, SubLayer.NA, Outcome.Neutral);
+        staticText = "enchanted land is the chosen color";
+    }
+
+    private ShimmerwildsGrowthColorEffect(final ShimmerwildsGrowthColorEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public ShimmerwildsGrowthColorEffect copy() {
+        return new ShimmerwildsGrowthColorEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = Optional
+                .ofNullable(source.getSourcePermanentIfItStillExists(game))
+                .map(Permanent::getAttachedTo)
+                .map(game::getPermanent)
+                .orElse(null);
+        ObjectColor color = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");
+        if (permanent == null || color == null) {
+            return false;
+        }
+        permanent.getColor().setColor(color);
+        return true;
+    }
+}
+
+class ShimmerwildsGrowthManaEffect extends ManaEffect {
+
+    ShimmerwildsGrowthManaEffect() {
         super();
         staticText = "its controller adds an additional one mana of the chosen color";
     }
 
-    private ShimmerwildsGrowthEffect(final ShimmerwildsGrowthEffect effect) {
+    private ShimmerwildsGrowthManaEffect(final ShimmerwildsGrowthManaEffect effect) {
         super(effect);
     }
 
@@ -103,7 +129,7 @@ class ShimmerwildsGrowthEffect extends ManaEffect {
     }
 
     @Override
-    public ShimmerwildsGrowthEffect copy() {
-        return new ShimmerwildsGrowthEffect(this);
+    public ShimmerwildsGrowthManaEffect copy() {
+        return new ShimmerwildsGrowthManaEffect(this);
     }
 }

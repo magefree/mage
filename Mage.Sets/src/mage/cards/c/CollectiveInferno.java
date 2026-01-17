@@ -2,6 +2,7 @@ package mage.cards.c;
 
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
@@ -30,7 +31,7 @@ public final class CollectiveInferno extends CardImpl {
         this.addAbility(new ConvokeAbility());
 
         // As this enchantment enters, choose a creature type.
-        this.addAbility(new SimpleStaticAbility(new ChooseCreatureTypeEffect(Outcome.Benefit)));
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.Benefit)));
 
         // Double all damage that sources you control of the chosen type would deal.
         this.addAbility(new SimpleStaticAbility(new CollectiveInfernoEffect()));

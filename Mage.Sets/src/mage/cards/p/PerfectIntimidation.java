@@ -22,6 +22,9 @@ public final class PerfectIntimidation extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}");
 
         // Choose one or both --
+        this.getSpellAbility().getModes().setMinModes(1);
+        this.getSpellAbility().getModes().setMaxModes(2);
+
         // * Target opponent exiles two cards from their hand.
         this.getSpellAbility().addEffect(new ExileFromZoneTargetEffect(
                 Zone.HAND, StaticFilters.FILTER_CARD_CARDS, 2, false

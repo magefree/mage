@@ -18,7 +18,7 @@ public final class BlightRot extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{B}");
 
         // Put four -1/-1 counters on target creature.
-        this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance(4)));
+        this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.M1M1.createInstance(4)));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

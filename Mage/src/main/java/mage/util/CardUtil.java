@@ -84,7 +84,7 @@ public final class CardUtil {
     public static final SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss.SSS");
 
     private static final List<String> costWords = Arrays.asList(
-            "put", "return", "exile", "discard", "mill", "sacrifice", "remove", "tap", "reveal", "pay", "have", "collect", "forage", "transform"
+            "put", "return", "exile", "discard", "mill", "sacrifice", "remove", "tap", "reveal", "pay", "have", "collect", "forage", "transform", "blight"
     );
 
     // search set code in commands like "set_code-card_name"
@@ -2199,7 +2199,7 @@ public final class CardUtil {
         return "T" + gameState.getTurnNum() + "." + gameState.getTurn().getStep().getType().getStepShortText();
     }
 
-    public static  String concatWithOr(List<?> strings) {
+    public static String concatWithOr(List<?> strings) {
         return concatWith(strings, "or");
     }
 
