@@ -50,13 +50,13 @@ public final class KrangUtromWarlord extends CardImpl {
         ));
         ability.addEffect(new GainAbilityControlledEffect(
             TrampleAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENTS_ARTIFACT_CREATURE, true
-        ));
+        ).setText(", trample"));
         ability.addEffect(new GainAbilityControlledEffect(
             IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENTS_ARTIFACT_CREATURE, true
-        ));
+        ).setText(", indestructible"));
         ability.addEffect(new GainAbilityControlledEffect(
             HasteAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENTS_ARTIFACT_CREATURE, true
-        ).setText("and haste"));
+        ).setText(", and haste"));
         this.addAbility(ability);
     }
 
