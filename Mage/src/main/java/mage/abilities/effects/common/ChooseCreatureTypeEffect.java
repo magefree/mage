@@ -37,6 +37,7 @@ public class ChooseCreatureTypeEffect extends OneShotEffect {
 
     protected ChooseCreatureTypeEffect(final ChooseCreatureTypeEffect effect) {
         super(effect);
+        this.subTypes.addAll(effect.subTypes);
     }
 
     @Override
