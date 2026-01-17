@@ -546,6 +546,19 @@ public class GameEvent implements Serializable {
          flag        not used for this event
          */
         STAY_ATTACHED,
+        /* CAN_ADD_COUNTERS
+           ADD_COUNTER, COUNTER_ADDED,
+           ADD_COUNTERS, COUNTERS_ADDED,
+         targetId    id of the permanent or player getting counter(s)
+         sourceId    id of the ability adding them
+         playerId    player who is adding the counter(s)
+         amount      number of counters being added
+         data        name of the counter(s) being added
+
+         NOTE: only use CAN_ADD_COUNTERS to check whether a permanent can have counters added (e.g. for paying a cost),
+               otherwise use ADD_COUNTER/ADD_COUNTERS to modify how many counters are added (e.g. doubling or reducing)
+         */
+        CAN_ADD_COUNTERS,
         ADD_COUNTER, COUNTER_ADDED,
         ADD_COUNTERS, COUNTERS_ADDED,
         /* REMOVE_COUNTER, REMOVE_COUNTERS, COUNTER_REMOVED, COUNTERS_REMOVED

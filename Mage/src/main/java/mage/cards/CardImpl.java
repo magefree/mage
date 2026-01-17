@@ -758,8 +758,11 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     public boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game, List<UUID> appliedEffects, boolean isEffect, int maxCounters) {
-        if (this instanceof Permanent && !((Permanent) this).isPhasedIn()) {
-            return false;
+        if (this instanceof Permanent) {
+            Permanent permanent = (Permanent) this;
+            if (!permanent.isPhasedIn() || !permanent.canHaveCounterAdded(counter, game, source)) {
+                return false;
+            }
         }
 
         boolean returnCode = true;

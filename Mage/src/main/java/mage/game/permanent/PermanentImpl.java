@@ -7,6 +7,7 @@ import mage.ObjectColor;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
+import mage.abilities.common.RoomAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.RequirementEffect;
@@ -17,7 +18,6 @@ import mage.abilities.hint.HintUtils;
 import mage.abilities.keyword.*;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.abilities.common.RoomAbility;
 import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.CounterType;
@@ -1865,6 +1865,29 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public boolean canBeSacrificed() {
         return canBeSacrificed;
+    }
+
+    @Override
+    public boolean canHaveAnyCounterAdded(Game game, Ability source) {
+        return this.canHaveCounterAdded((CounterType) null, 1, game, source);
+    }
+
+    @Override
+    public boolean canHaveCounterAdded(Counter counter, Game game, Ability source) {
+        return this.canHaveCounterAdded(CounterType.findByName(counter.getName()), counter.getCount(), game, source);
+    }
+
+    @Override
+    public boolean canHaveCounterAdded(CounterType counterType, Game game, Ability source) {
+        return this.canHaveCounterAdded(counterType, 1, game, source);
+    }
+
+    protected boolean canHaveCounterAdded(CounterType counterType, int amount, Game game, Ability source) {
+        return !game.replaceEvent(GameEvent.getEvent(
+                EventType.CAN_ADD_COUNTERS, objectId, source,
+                source != null ? source.getControllerId() : game.getActivePlayerId(),
+                counterType != null ? counterType.getName() : "", amount
+        ));
     }
 
     @Override

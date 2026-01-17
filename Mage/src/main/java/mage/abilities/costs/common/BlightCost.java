@@ -5,12 +5,13 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
-import mage.filter.StaticFilters;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.permanent.CanHaveCounterAddedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
 
@@ -18,6 +19,12 @@ import java.util.UUID;
  * @author TheElk801
  */
 public class BlightCost extends CostImpl {
+
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent();
+
+    static {
+        filter.add(new CanHaveCounterAddedPredicate(CounterType.M1M1));
+    }
 
     private int amount;
 
@@ -45,7 +52,7 @@ public class BlightCost extends CostImpl {
     public static boolean canBlight(UUID controllerId, Game game, Ability source) {
         return game
                 .getBattlefield()
-                .contains(StaticFilters.FILTER_CONTROLLED_CREATURE, controllerId, source, game, 1);
+                .contains(filter, controllerId, source, game, 1);
     }
 
     @Override
@@ -56,12 +63,10 @@ public class BlightCost extends CostImpl {
     }
 
     public static Permanent doBlight(Player player, int amount, Game game, Ability source) {
-        if (player == null || amount < 1 || !game.getBattlefield().contains(
-                StaticFilters.FILTER_CONTROLLED_CREATURE, player.getId(), source, game, 1
-        )) {
+        if (player == null || amount < 1 || !canBlight(player.getId(), game, source)) {
             return null;
         }
-        TargetPermanent target = new TargetControlledCreaturePermanent();
+        TargetPermanent target = new TargetPermanent(filter);
         target.withNotTarget(true);
         target.withChooseHint("to put a -1/-1 counter on");
         player.choose(Outcome.UnboostCreature, target, source, game);
