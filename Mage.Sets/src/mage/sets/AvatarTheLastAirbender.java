@@ -21,7 +21,7 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         this.rotationSet = true;
         this.hasBasicLands = true;
 
-        this.enablePlayBooster(Integer.MAX_VALUE);
+        this.enablePlayBooster(358);
         this.numBoosterDoubleFaced = -1;
 
         cards.add(new SetCardInfo("Aang's Iceberg", 336, Rarity.RARE, mage.cards.a.AangsIceberg.class, NON_FULL_USE_VARIOUS));
