@@ -2199,20 +2199,20 @@ public final class CardUtil {
         return "T" + gameState.getTurnNum() + "." + gameState.getTurn().getStep().getType().getStepShortText();
     }
 
-    public static String concatWithOr(List<String> strings) {
+    public static  String concatWithOr(List<?> strings) {
         return concatWith(strings, "or");
     }
 
-    public static String concatWithAnd(List<String> strings) {
+    public static String concatWithAnd(List<?> strings) {
         return concatWith(strings, "and");
     }
 
-    private static String concatWith(List<String> strings, String last) {
+    private static String concatWith(List<?> strings, String last) {
         switch (strings.size()) {
             case 0:
                 return "";
             case 1:
-                return strings.get(0);
+                return strings.get(0).toString();
             case 2:
                 return strings.get(0) + " " + last + " " + strings.get(1);
         }
