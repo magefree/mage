@@ -144,6 +144,8 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Emptiness", 222, Rarity.MYTHIC, mage.cards.e.Emptiness.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Emptiness", 294, Rarity.MYTHIC, mage.cards.e.Emptiness.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Encumbered Reejerey", 14, Rarity.UNCOMMON, mage.cards.e.EncumberedReejerey.class));
+        cards.add(new SetCardInfo("End-Blaze Epiphany", 134, Rarity.RARE, mage.cards.e.EndBlazeEpiphany.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("End-Blaze Epiphany", 364, Rarity.RARE, mage.cards.e.EndBlazeEpiphany.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Enraged Flamecaster", 135, Rarity.COMMON, mage.cards.e.EnragedFlamecaster.class));
         cards.add(new SetCardInfo("Evershrike's Gift", 15, Rarity.UNCOMMON, mage.cards.e.EvershrikesGift.class));
         cards.add(new SetCardInfo("Evolving Wilds", 264, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
