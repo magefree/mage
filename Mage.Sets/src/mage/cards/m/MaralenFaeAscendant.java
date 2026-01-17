@@ -96,7 +96,7 @@ class MaralenFaeAscendantEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getFirstTarget());
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
 
         if (player == null) {
             return false;
@@ -113,7 +113,7 @@ class MaralenFaeAscendantEffect extends OneShotEffect {
                     game,
                     true,
                     exileZone,
-                    source.getSourceObject(game).getIdName()
+                    CardUtil.getSourceName(game, source)
             );
         }
         return true;
@@ -125,7 +125,7 @@ class MaralenFaeAscendantCastFromExileEffect extends AsThoughEffectImpl {
     MaralenFaeAscendantCastFromExileEffect() {
         super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Once each turn, you may cast a spell with mana value less than or equal to the number of " +
-                "Elves and Faeries you control from among cards exiled with Maralen this turn " +
+                "Elves and Faeries you control from among cards exiled with {this} this turn " +
                 "without paying its mana cost.";
     }
 
@@ -226,7 +226,6 @@ class MaralenFaeAscendantWatcher extends Watcher {
         exiledThisTurn
                 .computeIfAbsent(exileZone, k -> new HashSet<>())
                 .add(zEvent.getTargetId());
-        System.out.println(exiledThisTurn);
     }
     public boolean isExiledThisTurn(UUID exileZone, UUID cardId) {
         Set<UUID> exiledCards = exiledThisTurn.get(exileZone);
