@@ -11,7 +11,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.CastManaAdjustment;
 import mage.constants.SubType;
-import mage.filter.StaticFilters;
+import mage.filter.FilterCard;
+import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.target.common.TargetCardInGraveyard;
 
 import java.util.UUID;
@@ -20,6 +21,8 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class Impulsivity extends CardImpl {
+
+    private static final FilterCard filter = new FilterInstantOrSorceryCard("instant or sorcery card from a graveyard");
 
     public Impulsivity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{R}");
@@ -33,7 +36,7 @@ public final class Impulsivity extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(
                 new MayCastTargetCardEffect(CastManaAdjustment.WITHOUT_PAYING_MANA_COST, true)
         );
-        ability.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY));
+        ability.addTarget(new TargetCardInGraveyard(filter));
         this.addAbility(ability);
 
         // Encore {7}{R}{R}

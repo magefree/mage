@@ -45,7 +45,7 @@ public enum ColorsAmongControlledPermanentsCount implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "for each color among " + filter.getMessage();
+        return "color among " + filter.getMessage();
     }
 
     @Override

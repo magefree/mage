@@ -25,7 +25,7 @@ import java.util.UUID;
  */
 public final class MorcantsEyes extends CardImpl {
 
-    private static final DynamicValue xValue = new CardsInControllerGraveyardCount(new FilterCard(SubType.ELF), null);
+    private static final DynamicValue xValue = new CardsInControllerGraveyardCount(new FilterCard(SubType.ELF, "Elf cards"), null);
     private static final Hint hint = new ValueHint("Elf cards in your graveyard", xValue);
 
     public MorcantsEyes(UUID ownerId, CardSetInfo setInfo) {

@@ -1,23 +1,23 @@
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.constants.SubType;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.abilities.keyword.VigilanceAbility;
-import mage.abilities.keyword.ReachAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.GreatestAmongPermanentsValue;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.hint.Hint;
+import mage.abilities.keyword.ReachAbility;
+import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.keyword.WardAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.filter.common.FilterControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author muz
  */
 public final class PummelerForHire extends CardImpl {
@@ -44,7 +44,8 @@ public final class PummelerForHire extends CardImpl {
         this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}")));
 
         // When this creature enters, you gain X life, where X is the greatest power among Giants you control.
-        EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new GainLifeEffect(xValue));
+        EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new GainLifeEffect(xValue)
+                .setText("you gain X life, where X is the greatest power among Giants you control"));
         ability.addHint(hint);
         this.addAbility(ability);
     }

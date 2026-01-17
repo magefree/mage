@@ -42,7 +42,7 @@ public final class DawnhandEulogist extends CardImpl {
         // When this creature enters, mill three cards. Then if there is an Elf card in your graveyard, each opponent loses 2 life and you gain 2 life.
         Ability ability = new EntersBattlefieldTriggeredAbility(new MillCardsControllerEffect(3));
         ability.addEffect(new ConditionalOneShotEffect(
-                new LoseLifeOpponentsEffect(2), condition, "then if there is an Elf " +
+                new LoseLifeOpponentsEffect(2), condition, "Then if there is an Elf " +
                 "card in your graveyard, each opponent loses 2 life and you gain 2 life"
         ).addEffect(new GainLifeEffect(2)));
         this.addAbility(ability.addHint(hint));

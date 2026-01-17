@@ -30,7 +30,7 @@ public final class StalactiteDagger extends CardImpl {
 
         // Equipped creature gets +1/+1 and is all creature types.
         Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(1, 1));
-        ability.addEffect(new GainAllCreatureTypesAttachedEffect());
+        ability.addEffect(new GainAllCreatureTypesAttachedEffect().setText("and is all creature types"));
         this.addAbility(ability);
 
         // Equip {2}

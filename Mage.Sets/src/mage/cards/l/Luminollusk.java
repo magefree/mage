@@ -31,6 +31,7 @@ public final class Luminollusk extends CardImpl {
         // Vivid -- When this creature enters, you gain life equal to the number of colors among permanents you control.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
                 new GainLifeEffect(ColorsAmongControlledPermanentsCount.ALL_PERMANENTS)
+                        .setText("you gain life equal to the number of colors among permanents you control")
         ).setAbilityWord(AbilityWord.VIVID).addHint(ColorsAmongControlledPermanentsCount.ALL_PERMANENTS.getHint()));
     }
 

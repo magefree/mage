@@ -3,7 +3,7 @@ package mage.cards.g;
 import mage.MageInt;
 import mage.abilities.costs.common.BlightCost;
 import mage.abilities.effects.common.DoIfCostPaid;
-import mage.abilities.effects.common.LoseLifeOpponentsEffect;
+import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.triggers.BeginningOfFirstMainTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -27,7 +27,7 @@ public final class GutsplitterGang extends CardImpl {
 
         // At the beginning of your first main phase, you may blight 2. If you don't, you lose 3 life.
         this.addAbility(new BeginningOfFirstMainTriggeredAbility(new DoIfCostPaid(
-                null, new LoseLifeOpponentsEffect(3), new BlightCost(2)
+                null, new LoseLifeSourceControllerEffect(3), new BlightCost(2)
         )));
     }
 

@@ -1,34 +1,32 @@
 package mage.cards.s;
 
-import java.util.List;
-import java.util.UUID;
-import java.util.stream.Collectors;
-
 import mage.MageInt;
-import mage.MageObject;
-import mage.constants.SubType;
-import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.targetpointer.FixedTargets;
-import mage.abilities.keyword.FlashAbility;
-import mage.abilities.keyword.HexproofAbility;
-import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.Ability;
-import mage.abilities.common.AsEntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.ConvokeAbility;
+import mage.abilities.keyword.FlashAbility;
+import mage.abilities.keyword.HexproofAbility;
+import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceCreatureType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.filter.StaticFilters;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
+import mage.target.targetpointer.FixedTargets;
+
+import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
- *
  * @author muz
  */
 public final class SelflessSafewright extends CardImpl {
@@ -48,7 +46,7 @@ public final class SelflessSafewright extends CardImpl {
         this.addAbility(new ConvokeAbility());
 
         // When this creature enters, choose a creature type. Other permanents you control of that type gain hexproof and indestructible until end of turn.
-        this.addAbility(new AsEntersBattlefieldAbility(new SelflessSafewrightEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SelflessSafewrightEffect()));
     }
 
     private SelflessSafewright(final SelflessSafewright card) {

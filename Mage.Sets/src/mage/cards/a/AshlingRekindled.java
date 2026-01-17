@@ -55,6 +55,8 @@ public final class AshlingRekindled extends TransformingDoubleFacedCard {
         this.getRightHalfCard().addAbility(new OrTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new AddConditionalManaOfAnyColorEffect(2, new ConditionalSpellManaBuilder(filter)),
+                false,
+                "Whenever this creature transforms into {this} and at the beginning of your first main phase, ",
                 new TransformIntoSourceTriggeredAbility(null),
                 new BeginningOfFirstMainTriggeredAbility(null)
         ));

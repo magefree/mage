@@ -65,11 +65,11 @@ public final class TrystanCallousCultivator extends TransformingDoubleFacedCard 
 
         // Trystan, Penitent Culler
         // Whenever this creature transforms into Trystan, Penitent Culler, mill three cards, then you may exile an Elf card from your graveyard. If you do, each opponent loses 2 life.
-        ability = new TransformIntoSourceTriggeredAbility(new MillCardsControllerEffect(3));
+        ability = new TransformIntoSourceTriggeredAbility(new MillCardsControllerEffect(3), false, true);
         ability.addEffect(new DoIfCostPaid(
                 new LoseLifeOpponentsEffect(2),
                 new ExileFromGraveCost(new TargetCardInYourGraveyard(filter))
-        ));
+        ).concatBy(", then"));
         this.getRightHalfCard().addAbility(ability);
 
         // At the beginning of your first main phase, you may pay {G}. If you do, transform Trystan.

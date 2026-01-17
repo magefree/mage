@@ -12,7 +12,9 @@ import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetEnchantmentPermanent;
 
@@ -41,8 +43,10 @@ public final class GlissaSunslayer extends CardImpl {
 
         // Whenever Glissa Sunslayer deals combat damage to a player, choose one —
         // • You draw a card and you lose 1 life.
-        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new DrawCardSourceControllerEffect(1).setText("you draw a card"), false, false);
-        ability.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
+        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(
+                new DrawCardSourceControllerEffect(1, true), false, false
+        );
+        ability.addEffect(new LoseLifeSourceControllerEffect(1).setText("and lose 1 life"));
 
         // • Destroy target enchantment.
         Mode mode = new Mode(new DestroyTargetEffect());

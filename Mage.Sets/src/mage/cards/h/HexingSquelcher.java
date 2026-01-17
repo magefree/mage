@@ -14,7 +14,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreatureSpell;
 
 import java.util.UUID;
 
@@ -23,7 +22,7 @@ import java.util.UUID;
  */
 public final class HexingSquelcher extends CardImpl {
 
-    private static final FilterSpell filter = new FilterCreatureSpell("creature spells you control");
+    private static final FilterSpell filter = new FilterSpell("spells you control");
 
     public HexingSquelcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
@@ -46,7 +45,7 @@ public final class HexingSquelcher extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
                 new WardAbility(new PayLifeCost(2)), Duration.WhileOnBattlefield,
                 StaticFilters.FILTER_PERMANENT_CREATURES, true
-        )));
+        ).withForceQuotes()));
     }
 
     private HexingSquelcher(final HexingSquelcher card) {

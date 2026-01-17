@@ -4,9 +4,9 @@ import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.assignment.common.ColorAssignment;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.common.ColorsAmongControlledPermanentsCount;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.triggers.BeginningOfFirstMainTriggeredAbility;
 import mage.cards.*;
 import mage.constants.*;
 import mage.filter.FilterCard;
@@ -37,7 +37,7 @@ public final class SanarInnovativeFirstYear extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Vivid -- At the beginning of your first main phase, reveal cards from the top of your library until you reveal X nonland cards, where X is the number of colors among permanents you control. For each of those colors, you may exile a card of that color from among the revealed cards. Then shuffle. You may cast the exiled cards this turn.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SanarInnovativeFirstYearEffect())
+        this.addAbility(new BeginningOfFirstMainTriggeredAbility(new SanarInnovativeFirstYearEffect())
                 .setAbilityWord(AbilityWord.VIVID)
                 .addHint(ColorsAmongControlledPermanentsCount.ALL_PERMANENTS.getHint()));
     }

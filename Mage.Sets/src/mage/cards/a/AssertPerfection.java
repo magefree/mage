@@ -22,7 +22,7 @@ public final class AssertPerfection extends CardImpl {
         this.getSpellAbility().addEffect(new BoostTargetEffect(1, 0));
         this.getSpellAbility().addEffect(new DamageWithPowerFromOneToAnotherTargetEffect("it"));
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        this.getSpellAbility().addTarget(new TargetOpponentsCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetOpponentsCreaturePermanent(0, 1));
     }
 
     private AssertPerfection(final AssertPerfection card) {

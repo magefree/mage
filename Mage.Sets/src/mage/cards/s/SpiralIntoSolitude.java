@@ -43,8 +43,8 @@ public final class SpiralIntoSolitude extends CardImpl {
 
         // {1}{W}, Blight 1, Sacrifice this Aura: Exile enchanted creature.
         Ability ability = new SimpleActivatedAbility(new ExileAttachedEffect(), new ManaCostsImpl<>("{1}{W}"));
-        ability.addCost(new SacrificeSourceCost());
         ability.addCost(new BlightCost(1));
+        ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }
 

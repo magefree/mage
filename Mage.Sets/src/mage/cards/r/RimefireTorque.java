@@ -1,7 +1,5 @@
 package mage.cards.r;
 
-import java.util.UUID;
-
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -20,8 +18,9 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.ChosenSubtypePredicate;
 
+import java.util.UUID;
+
 /**
- *
  * @author muz
  */
 public final class RimefireTorque extends CardImpl {
@@ -39,21 +38,16 @@ public final class RimefireTorque extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.Benefit)));
 
         // Whenever a permanent you control of the chosen type enters, put a charge counter on this artifact.
-        this.addAbility(
-            new EntersBattlefieldAllTriggeredAbility(
-                Zone.BATTLEFIELD,
-                new AddCountersSourceEffect(CounterType.CHARGE.createInstance()),
-                filter,
-                false
-            )
-        );
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(
+                Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), filter, false
+        ));
 
         // {T}, Remove three charge counters from this artifact: When you next cast an instant or sorcery spell this turn, copy it. You may choose new targets for the copy.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(
-            new CreateDelayedTriggeredAbilityEffect(new CopyNextSpellDelayedTriggeredAbility()),
-            new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(3))
+                new CreateDelayedTriggeredAbilityEffect(new CopyNextSpellDelayedTriggeredAbility()),
+                new TapSourceCost()
         );
-        ability.addCost(new TapSourceCost());
+        ability.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(3)));
         this.addAbility(ability);
     }
 
