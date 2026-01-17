@@ -19,7 +19,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         super("Duskmourn: House of Horror", "DSK", ExpansionSet.buildDate(2024, 9, 27), SetType.EXPANSION);
         this.blockName = "Duskmourn: House of Horror"; // for sorting in GUI
 
-        this.enablePlayBooster(Integer.MAX_VALUE);
+        this.enablePlayBooster(367);
 
         cards.add(new SetCardInfo("Abandoned Campground", 255, Rarity.COMMON, mage.cards.a.AbandonedCampground.class));
         cards.add(new SetCardInfo("Abhorrent Oculus", 344, Rarity.MYTHIC, mage.cards.a.AbhorrentOculus.class, NON_FULL_USE_VARIOUS));
