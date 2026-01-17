@@ -1,19 +1,19 @@
 package mage.cards.e;
 
-import java.util.UUID;
-
 import mage.abilities.dynamicvalue.common.ColorsAmongControlledPermanentsCount;
 import mage.abilities.dynamicvalue.common.CreaturesYouControlCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.hint.common.CreaturesYouControlHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.game.permanent.token.OmnathElementalToken;
 
+import java.util.UUID;
+
 /**
- *
  * @author muz
  */
 public final class ElementalSpectacle extends CardImpl {
@@ -23,13 +23,14 @@ public final class ElementalSpectacle extends CardImpl {
 
         // Vivid -- Create a number of 5/5 red and green Elemental creature tokens equal to the number of colors among permanents you control. Then you gain life equal to the number of creatures you control.
         this.getSpellAbility().addEffect(new CreateTokenEffect(
-            new OmnathElementalToken(),
-            ColorsAmongControlledPermanentsCount.ALL_PERMANENTS
-        ));
+                new OmnathElementalToken(), ColorsAmongControlledPermanentsCount.ALL_PERMANENTS
+        ).setText("create a number of 5/5 red and green Elemental creature tokens " +
+                "equal to the number of colors among permanents you control"));
         this.getSpellAbility().addEffect(new GainLifeEffect(CreaturesYouControlCount.PLURAL)
-            .setText(", then you gain life equal to the number of creatures you control"));
+                .setText("Then you gain life equal to the number of creatures you control"));
         this.getSpellAbility().setAbilityWord(AbilityWord.VIVID);
         this.getSpellAbility().addHint(ColorsAmongControlledPermanentsCount.ALL_PERMANENTS.getHint());
+        this.getSpellAbility().addHint(CreaturesYouControlHint.instance);
     }
 
     private ElementalSpectacle(final ElementalSpectacle card) {

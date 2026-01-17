@@ -1,7 +1,5 @@
 package mage.cards.w;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -22,8 +20,9 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.ScarecrowToken;
 
+import java.util.UUID;
+
 /**
- *
  * @author muz
  */
 public final class WickersmithsTools extends CardImpl {
@@ -38,7 +37,10 @@ public final class WickersmithsTools extends CardImpl {
         this.addAbility(new AnyColorManaAbility());
 
         // {5}, {T}, Sacrifice this artifact: Create X tapped 2/2 colorless Scarecrow artifact creature tokens, where X is the number of charge counters on this artifact.
-        Ability ability = new SimpleActivatedAbility(new CreateTokenEffect(new ScarecrowToken(), new CountersSourceCount(CounterType.CHARGE)), new ManaCostsImpl<>("{5}"));
+        Ability ability = new SimpleActivatedAbility(new CreateTokenEffect(
+                new ScarecrowToken(), new CountersSourceCount(CounterType.CHARGE)
+        ).setText("create X tapped 2/2 colorless Scarecrow artifact creature tokens, " +
+                "where X is the number of charge counters on {this}"), new ManaCostsImpl<>("{5}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
