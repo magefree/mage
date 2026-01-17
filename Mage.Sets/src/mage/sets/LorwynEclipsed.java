@@ -391,6 +391,8 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Trystan, Callous Cultivator", 199, Rarity.RARE, mage.cards.t.TrystanCallousCultivator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Trystan, Callous Cultivator", 291, Rarity.RARE, mage.cards.t.TrystanCallousCultivator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tweeze", 162, Rarity.COMMON, mage.cards.t.Tweeze.class));
+        cards.add(new SetCardInfo("Twilight Diviner", 122, Rarity.RARE, mage.cards.t.TwilightDiviner.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Twilight Diviner", 315, Rarity.RARE, mage.cards.t.TwilightDiviner.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Twinflame Travelers", 248, Rarity.UNCOMMON, mage.cards.t.TwinflameTravelers.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Twinflame Travelers", 345, Rarity.UNCOMMON, mage.cards.t.TwinflameTravelers.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Unbury", 123, Rarity.UNCOMMON, mage.cards.u.Unbury.class));
