@@ -43,5 +43,6 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 255, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 312, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Transdimensional Bovine", 134, Rarity.RARE, mage.cards.t.TransdimensionalBovine.class));
+        cards.add(new SetCardInfo("Triceraton Commander", 25, Rarity.MYTHIC, mage.cards.t.TriceratonCommander.class));
     }
 }
