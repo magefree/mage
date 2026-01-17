@@ -39,10 +39,15 @@ public final class TriceratonCommander extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever this creature attacks, Dinosaurs you control other than this creature get +1/+1 and gain flying until end of turn.
-        Ability ability = new AttacksTriggeredAbility(new BoostControlledEffect(
-            1, 1, Duration.EndOfTurn, filter, true
-        ), false);
-        ability.addEffect(new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.EndOfTurn, filter, true));
+        Ability ability = new AttacksTriggeredAbility(
+            new BoostControlledEffect(1, 1, Duration.EndOfTurn, filter, true)
+                .setText("Dinosaurs you control other than this creature get +1/+1"),
+            false
+        );
+        ability.addEffect(
+            new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.EndOfTurn, filter, true)
+                .setText("and gain flying until end of turn")
+        );
         this.addAbility(ability);
 
         // When this creature enters, create X 2/2 white Dinosaur Soldier creature tokens.
