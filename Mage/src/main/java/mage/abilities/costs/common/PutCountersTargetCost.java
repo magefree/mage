@@ -5,7 +5,7 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.constants.Outcome;
 import mage.counters.Counter;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.CanHaveCounterAddedPredicate;
 import mage.game.Game;
@@ -29,12 +29,12 @@ public class PutCountersTargetCost extends CostImpl {
     }
 
     public PutCountersTargetCost(Counter counter) {
-        this(counter, makeFilter(new FilterControlledCreaturePermanent(), counter));
+        this(counter, StaticFilters.FILTER_CONTROLLED_CREATURE);
     }
 
     public PutCountersTargetCost(Counter counter, FilterControlledPermanent filter) {
         this.counter = counter.copy();
-        TargetControlledPermanent target = new TargetControlledPermanent(filter);
+        TargetControlledPermanent target = new TargetControlledPermanent(makeFilter(filter, counter));
         target.withNotTarget(true);
         this.addTarget(target);
         this.text = "put " + counter.getDescription() + " on " + target.getDescription();
