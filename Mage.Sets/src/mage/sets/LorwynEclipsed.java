@@ -178,6 +178,8 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Glen Elendra Guardian", 383, Rarity.MYTHIC, mage.cards.g.GlenElendraGuardian.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Glen Elendra Guardian", 393, Rarity.MYTHIC, mage.cards.g.GlenElendraGuardian.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Glen Elendra Guardian", 51, Rarity.RARE, mage.cards.g.GlenElendraGuardian.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Glen Elendra's Answer", 306, Rarity.MYTHIC, mage.cards.g.GlenElendrasAnswer.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Glen Elendra's Answer", 52, Rarity.MYTHIC, mage.cards.g.GlenElendrasAnswer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Glister Bairn", 227, Rarity.UNCOMMON, mage.cards.g.GlisterBairn.class));
         cards.add(new SetCardInfo("Gloom Ripper", 102, Rarity.RARE, mage.cards.g.GloomRipper.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gloom Ripper", 312, Rarity.RARE, mage.cards.g.GloomRipper.class, NON_FULL_USE_VARIOUS));
