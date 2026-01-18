@@ -56,7 +56,7 @@ public final class ShanidSleepersScourge extends CardImpl {
                 true)));
         // Whenever you play a legendary land or cast a legendary spell, you draw a card and you lose 1 life.
         Ability ability = new OrTriggeredAbility(Zone.BATTLEFIELD,
-                new DrawCardSourceControllerEffect(1).setText("you draw a card"), false,
+                new DrawCardSourceControllerEffect(1, true), false,
                 "Whenever you play a legendary land or cast a legendary spell, ",
                 new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, null, legendaryLandFilter, true),
                 new SpellCastControllerTriggeredAbility(null, legendarySpellFilter, false)

@@ -1,26 +1,25 @@
 
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 
+import java.util.UUID;
+
 /**
- *
  * @author jonubuu
  */
 public final class NightsWhisper extends CardImpl {
 
     public NightsWhisper(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");
 
         // You draw two cards and you lose 2 life.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2, true));
-        this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(2).concatBy("and"));
+        this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(2, false).concatBy("and"));
     }
 
     private NightsWhisper(final NightsWhisper card) {

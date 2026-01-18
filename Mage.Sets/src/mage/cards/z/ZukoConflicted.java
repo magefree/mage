@@ -50,7 +50,7 @@ public final class ZukoConflicted extends CardImpl {
 
         // * Add {R}.
         ability.addMode(new Mode(new BasicManaEffect(Mana.RedMana(1)).setText("add"))
-                .addEffect(new LoseLifeSourceControllerEffect(2).setText("{R}")));
+                .addEffect(new LoseLifeSourceControllerEffect(2).setText(" {R}")));
 
         // * Exile Zuko, then return him to the battlefield under an opponent's control.
         ability.addMode(new Mode(new ZukoConflictedEffect())

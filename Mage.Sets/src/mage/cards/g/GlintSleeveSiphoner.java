@@ -1,7 +1,6 @@
 package mage.cards.g;
 
 import mage.MageInt;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
 import mage.abilities.costs.common.PayEnergyCost;
 import mage.abilities.effects.common.DoIfCostPaid;
@@ -9,6 +8,7 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
 import mage.abilities.keyword.MenaceAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -37,7 +37,7 @@ public final class GlintSleeveSiphoner extends CardImpl {
 
         // At the beginning of your upkeep, you may pay {E}{E}. If you do, draw a card and you lose 1 life.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DoIfCostPaid(
-                new DrawCardSourceControllerEffect(1).setText("you draw a card"), new PayEnergyCost(2)
+                new DrawCardSourceControllerEffect(1, true), new PayEnergyCost(2)
         ).addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"))));
     }
 

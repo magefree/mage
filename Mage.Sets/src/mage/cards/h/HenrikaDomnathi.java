@@ -60,7 +60,7 @@ public final class HenrikaDomnathi extends TransformingDoubleFacedCard {
         ability.getModes().setLimitUsageByOnce(false);
 
         // • You draw a card and you lose 1 life.
-        Mode mode = new Mode(new DrawCardSourceControllerEffect(1).setText("you draw a card"));
+        Mode mode = new Mode(new DrawCardSourceControllerEffect(1));
         mode.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
         mode.setModeTag("draw and lose life");
         ability.addMode(mode);

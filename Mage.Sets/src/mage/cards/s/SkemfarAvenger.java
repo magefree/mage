@@ -44,7 +44,7 @@ public final class SkemfarAvenger extends CardImpl {
 
         // Whenever another nontoken Elf or Berserker you control dies, you draw a card and you lose 1 life.
         Ability ability = new DiesCreatureTriggeredAbility(
-                new DrawCardSourceControllerEffect(1).setText("you draw a card"), false, filter
+                new DrawCardSourceControllerEffect(1, true), false, filter
         );
         ability.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
         this.addAbility(ability);

@@ -31,8 +31,7 @@ public final class TheCouncilOfFour extends CardImpl {
 
         // Whenever a player draws their second card during their turn, you draw a card.
         this.addAbility(new DrawNthCardTriggeredAbility(
-                new DrawCardSourceControllerEffect(1)
-                        .setText("you draw a card"),
+                new DrawCardSourceControllerEffect(1, true),
                 false, TargetController.ACTIVE, 2
         ));
 

@@ -53,7 +53,7 @@ public final class SyrGwynHeroOfAshvale extends CardImpl {
 
         // Whenever an equipped creature you control attacks, you draw a card and you lose 1 life.
         Ability ability = new AttacksCreatureYouControlTriggeredAbility(
-                new DrawCardSourceControllerEffect(1).setText("you draw a card"), false, filter
+                new DrawCardSourceControllerEffect(1, true), false, filter
         );
         ability.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
         this.addAbility(ability);

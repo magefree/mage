@@ -34,8 +34,7 @@ public final class UnwillingIngredient extends CardImpl {
         // {2}{B}, Exile Unwilling Ingredient from your graveyard: You draw a card and you lose 1 life.
         Ability ability = new SimpleActivatedAbility(
                 Zone.GRAVEYARD,
-                new DrawCardSourceControllerEffect(1)
-                        .setText("you draw a card"),
+                new DrawCardSourceControllerEffect(1, true),
                 new ManaCostsImpl<>("{2}{B}")
         );
         ability.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));

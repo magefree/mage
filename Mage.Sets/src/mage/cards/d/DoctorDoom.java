@@ -68,7 +68,7 @@ public final class DoctorDoom extends CardImpl {
 
         // At the beginning of your end step, you draw a card and lose 1 life.
         Ability ability = new BeginningOfEndStepTriggeredAbility(new DrawCardSourceControllerEffect(1, true));
-        ability.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
+        ability.addEffect(new LoseLifeSourceControllerEffect(1, false).concatBy("and"));
         this.addAbility(ability);
     }
 

@@ -36,8 +36,8 @@ public final class VraskaBetrayalsSting extends CardImpl {
         this.addAbility(CompleatedAbility.getInstance());
 
         // 0: You draw a card and you lose 1 life. Proliferate.
-        Ability ability = new LoyaltyAbility(new DrawCardSourceControllerEffect(1).setText("You draw a card"), 0);
-        ability.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
+        Ability ability = new LoyaltyAbility(new DrawCardSourceControllerEffect(1, true), 0);
+        ability.addEffect(new LoseLifeSourceControllerEffect(1, false).concatBy("and"));
         ability.addEffect(new ProliferateEffect(false));
         this.addAbility(ability);
 

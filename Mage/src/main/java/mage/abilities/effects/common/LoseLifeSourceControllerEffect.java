@@ -1,12 +1,10 @@
-
-
 package mage.abilities.effects.common;
 
-import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -18,13 +16,21 @@ public class LoseLifeSourceControllerEffect extends OneShotEffect {
     protected DynamicValue amount;
 
     public LoseLifeSourceControllerEffect(int amount) {
-        this(StaticValue.get(amount));
+        this(amount, true);
+    }
+
+    public LoseLifeSourceControllerEffect(int amount, boolean youLose) {
+        this(StaticValue.get(amount), youLose);
     }
 
     public LoseLifeSourceControllerEffect(DynamicValue amount) {
+        this(amount, true);
+    }
+
+    public LoseLifeSourceControllerEffect(DynamicValue amount, boolean youLose) {
         super(Outcome.LoseLife);
         this.amount = amount;
-        setText();
+        setText(youLose);
     }
 
     protected LoseLifeSourceControllerEffect(final LoseLifeSourceControllerEffect effect) {
@@ -47,9 +53,14 @@ public class LoseLifeSourceControllerEffect extends OneShotEffect {
         return false;
     }
 
-    private void setText() {
+    private void setText(boolean youLose) {
         StringBuilder sb = new StringBuilder();
-        sb.append("you lose ").append(amount.toString()).append(" life");
+        if (youLose) {
+            sb.append("you ");
+        }
+        sb.append("lose ");
+        sb.append(amount.toString());
+        sb.append(" life");
         String message = amount.getMessage();
         if (!message.isEmpty()) {
             sb.append(" for each ");

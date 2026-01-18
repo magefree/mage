@@ -1,11 +1,8 @@
-
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageToOpponentTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
@@ -14,8 +11,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.UUID;
+
 /**
- *
  * @author LoneFox
  */
 public final class FungalShambler extends CardImpl {
@@ -29,13 +27,10 @@ public final class FungalShambler extends CardImpl {
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());
+
         // Whenever Fungal Shambler deals damage to an opponent, you draw a card and that opponent discards a card.
-        Effect effect = new DrawCardSourceControllerEffect(1);
-        effect.setText("you draw a card");
-        Ability ability = new DealsDamageToOpponentTriggeredAbility(effect, false, false, true);
-        effect = new DiscardTargetEffect(1);
-        effect.setText("and that opponent discards a card");
-        ability.addEffect(effect);
+        Ability ability = new DealsDamageToOpponentTriggeredAbility(new DrawCardSourceControllerEffect(1), false, false, true);
+        ability.addEffect(new DiscardTargetEffect(1).setText("and that opponent discards a card"));
         this.addAbility(ability);
     }
 

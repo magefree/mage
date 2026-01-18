@@ -27,7 +27,7 @@ public final class NoviceOccultist extends CardImpl {
 
         // When Novice Occultist dies, you draw a card and you lose 1 life.
         Ability ability = new DiesSourceTriggeredAbility(
-                new DrawCardSourceControllerEffect(1).setText("you draw a card")
+                new DrawCardSourceControllerEffect(1, true)
         );
         ability.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
         this.addAbility(ability);

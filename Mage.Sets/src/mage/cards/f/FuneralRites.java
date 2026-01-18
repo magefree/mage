@@ -18,8 +18,7 @@ public final class FuneralRites extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");
 
         // You draw two cards, lose 2 life, and put the top two cards of your library into your graveyard
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2)
-                .setText("You draw two cards"));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2, true));
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(2)
                 .setText(", lose 2 life"));
         this.getSpellAbility().addEffect(new MillCardsControllerEffect(2)
