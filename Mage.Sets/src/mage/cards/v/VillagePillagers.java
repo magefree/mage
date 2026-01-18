@@ -46,7 +46,9 @@ public final class VillagePillagers extends CardImpl {
 
         // Whenever a creature an opponent controls with a counter on it dies, you create a tapped Treasure token.
         this.addAbility(new DiesCreatureTriggeredAbility(
-                new CreateTokenEffect(new TreasureToken(), 1, true),  false, filter
+                new CreateTokenEffect(new TreasureToken(), 1, true)
+                        .setText("you create a tapped Treasure token"),
+                false, filter
         ));
     }
 
