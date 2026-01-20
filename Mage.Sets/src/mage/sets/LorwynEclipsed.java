@@ -140,6 +140,7 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Eclipsed Kithkin", 338, Rarity.UNCOMMON, mage.cards.e.EclipsedKithkin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Eclipsed Merrow", 221, Rarity.UNCOMMON, mage.cards.e.EclipsedMerrow.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Eclipsed Merrow", 339, Rarity.UNCOMMON, mage.cards.e.EclipsedMerrow.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Eclipsed Realms", 263, Rarity.UNCOMMON, mage.cards.e.EclipsedRealms.class));
         cards.add(new SetCardInfo("Eirdu, Carrier of Dawn", 13, Rarity.MYTHIC, mage.cards.e.EirduCarrierOfDawn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Eirdu, Carrier of Dawn", 286, Rarity.MYTHIC, mage.cards.e.EirduCarrierOfDawn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Elder Auntie", 133, Rarity.COMMON, mage.cards.e.ElderAuntie.class));
