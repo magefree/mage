@@ -12,6 +12,7 @@ public final class BlackGreenElfToken extends TokenImpl {
     public BlackGreenElfToken() {
         super("Elf Token", "2/2 black and green Elf creature token");
         this.cardType.add(CardType.CREATURE);
+        this.color.setBlack(true);
         this.color.setGreen(true);
         this.subtype.add(SubType.ELF);
 

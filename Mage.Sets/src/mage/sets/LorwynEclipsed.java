@@ -374,6 +374,8 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Tam, Mindful First-Year", 245, Rarity.RARE, mage.cards.t.TamMindfulFirstYear.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tam, Mindful First-Year", 380, Rarity.RARE, mage.cards.t.TamMindfulFirstYear.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tanufel Rimespeaker", 77, Rarity.UNCOMMON, mage.cards.t.TanufelRimespeaker.class));
+        cards.add(new SetCardInfo("Taster of Wares", 121, Rarity.RARE, mage.cards.t.TasterOfWares.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Taster of Wares", 314, Rarity.RARE, mage.cards.t.TasterOfWares.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Temple Garden", "351b", Rarity.RARE, mage.cards.t.TempleGarden.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Temple Garden", 268, Rarity.RARE, mage.cards.t.TempleGarden.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Temple Garden", 351, Rarity.RARE, mage.cards.t.TempleGarden.class, NON_FULL_USE_VARIOUS));

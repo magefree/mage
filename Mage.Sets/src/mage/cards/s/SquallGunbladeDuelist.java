@@ -4,32 +4,27 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.AttacksPlayerWithCreaturesTriggeredAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.ObjectSourcePlayer;
-import mage.filter.predicate.ObjectSourcePlayerPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.Collection;
+import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 /**
  * @author TheElk801
  */
 public final class SquallGunbladeDuelist extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterCreaturePermanent();
-
-    static {
-        filter.add(SquallGunbladeDuelistPredicate.instance);
-    }
 
     public SquallGunbladeDuelist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{W}{B}");
@@ -49,9 +44,9 @@ public final class SquallGunbladeDuelist extends CardImpl {
         // Whenever one or more creatures attack one of your opponents, if any of those creatures have power or toughness equal to the chosen number, Squall deals damage equal to its power to defending player.
         this.addAbility(new AttacksPlayerWithCreaturesTriggeredAbility(
                 new SquallGunbladeDuelistDamageEffect(), 1,
-                filter, SetTargetPointer.PLAYER, true
-        ).setTriggerPhrase("Whenever one or more creatures attack one of your opponents, " +
-                "if any of those creatures have power or toughness equal to the chosen number, "));
+                StaticFilters.FILTER_PERMANENT_CREATURE, SetTargetPointer.PLAYER, true
+        ).withInterveningIf(SquallGunbladeDuelistCondition.instance)
+                .setTriggerPhrase("Whenever one or more creatures attack one of your opponents, "));
     }
 
     private SquallGunbladeDuelist(final SquallGunbladeDuelist card) {
@@ -64,20 +59,34 @@ public final class SquallGunbladeDuelist extends CardImpl {
     }
 }
 
-enum SquallGunbladeDuelistPredicate implements ObjectSourcePlayerPredicate<Permanent> {
+enum SquallGunbladeDuelistCondition implements Condition {
     instance;
 
     @Override
-    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
+    public boolean apply(Game game, Ability source) {
         Integer number = (Integer) game
                 .getState()
                 .getValue(CardUtil.getObjectZoneString(
-                        "chosenNumber", input.getSource().getId(), game,
-                        input.getSource().getStackMomentSourceZCC(), true
+                        "chosenNumber", source.getSourceId(), game,
+                        game.getState().getZoneChangeCounter(source.getSourceId()), true
                 ));
-        return number != null
-                && (input.getObject().getPower().getValue() == number
-                || input.getObject().getToughness().getValue() == number);
+        return source
+                .getAllEffects()
+                .stream()
+                .map(effect -> (Set<Permanent>) effect.getValue("attackingCreatures"))
+                .filter(Objects::nonNull)
+                .findFirst()
+                .map(Collection::stream)
+                .filter(stream -> stream.anyMatch(
+                        permanent -> permanent.getPower().getValue() == number
+                                || permanent.getToughness().getValue() == number
+                ))
+                .isPresent();
+    }
+
+    @Override
+    public String toString() {
+        return "any of those creatures have power or toughness equal to the chosen number";
     }
 }
 
@@ -105,8 +114,8 @@ class SquallGunbladeDuelistChooseEffect extends OneShotEffect {
         }
         int number = player.getAmount(0, Integer.MAX_VALUE, "Choose a number", source, game);
         game.getState().setValue(CardUtil.getObjectZoneString(
-                "chosenNumber", source.getId(), game,
-                source.getStackMomentSourceZCC(), false
+                "chosenNumber", source.getSourceId(), game,
+                game.getState().getZoneChangeCounter(source.getSourceId()), false
         ), number);
         Permanent permanent = game.getPermanentEntering(source.getSourceId());
         if (permanent != null) {

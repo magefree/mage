@@ -15,13 +15,13 @@ import mage.target.targetpointer.FixedTarget;
 import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
  * based heavily on AttacksWithCreaturesTriggeredAbility
+ *
  * @author notgreat
  */
 public class AttacksPlayerWithCreaturesTriggeredAbility extends TriggeredAbilityImpl {
@@ -82,26 +82,28 @@ public class AttacksPlayerWithCreaturesTriggeredAbility extends TriggeredAbility
             return false;
         }
         DefenderAttackedEvent attackedEvent = (DefenderAttackedEvent) event;
-        List<Permanent> attackers = attackedEvent.getAttackers(game).stream()
+        Set<Permanent> attackers = attackedEvent
+                .getAttackers(game)
+                .stream()
                 .filter(permanent -> filter.match(permanent, controllerId, this, game))
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
         if (attackers.size() < minAttackers || (onlyOpponents && !game.isOpponent(player, attackedId))) {
             return false;
         }
-        switch (setTargetPointer){
+        switch (setTargetPointer) {
             case NONE:
                 break;
             case PLAYER:
                 getEffects().setTargetPointer(new FixedTarget(attackedId));
                 break;
             case PERMANENT:
-                getEffects().setTargetPointer(new FixedTargets(new ArrayList<>(attackers), game));
+                getEffects().setTargetPointer(new FixedTargets(attackers, game));
                 break;
             default:
                 throw new UnsupportedOperationException("Unexpected setTargetPointer in AttacksPlayerWithCreaturesTriggeredAbility: " + setTargetPointer);
-
         }
-        this.getEffects().setValue("playerAttacked",attackedId);
+        this.getAllEffects().setValue("attackingCreatures", attackers);
+        this.getAllEffects().setValue("playerAttacked", attackedId);
         return true;
     }
 }

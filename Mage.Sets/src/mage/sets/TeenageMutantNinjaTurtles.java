@@ -26,6 +26,7 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("Casey Jones, Jury-Rig Justiciar", 87, Rarity.UNCOMMON, mage.cards.c.CaseyJonesJuryRigJusticiar.class));
         cards.add(new SetCardInfo("Cool but Rude", 89, Rarity.RARE, mage.cards.c.CoolButRude.class));
         cards.add(new SetCardInfo("Does Machines", 34, Rarity.RARE, mage.cards.d.DoesMachines.class));
+        cards.add(new SetCardInfo("Donatello, Gadget Master", 35, Rarity.RARE, mage.cards.d.DonatelloGadgetMaster.class));
         cards.add(new SetCardInfo("Forest", 257, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", 314, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Groundchuck & Dirtbag", 115, Rarity.RARE, mage.cards.g.GroundchuckAndDirtbag.class));
@@ -35,6 +36,7 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("Leonardo, Cutting Edge", 15, Rarity.RARE, mage.cards.l.LeonardoCuttingEdge.class));
         cards.add(new SetCardInfo("Leonardo, Sewer Samurai", 17, Rarity.MYTHIC, mage.cards.l.LeonardoSewerSamurai.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Leonardo, Sewer Samurai", 301, Rarity.MYTHIC, mage.cards.l.LeonardoSewerSamurai.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Krang, Utrom Warlord", 175, Rarity.MYTHIC, mage.cards.k.KrangUtromWarlord.class));
         cards.add(new SetCardInfo("Michelangelo, Weirdness to 11", 121, Rarity.RARE, mage.cards.m.MichelangeloWeirdnessTo11.class));
         cards.add(new SetCardInfo("Mountain", 256, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 313, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
@@ -42,6 +44,7 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("North Wind Avatar", 162, Rarity.MYTHIC, mage.cards.n.NorthWindAvatar.class));
         cards.add(new SetCardInfo("Plains", 253, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Plains", 310, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Prehistoric Pet", 22, Rarity.RARE, mage.cards.p.PrehistoricPet.class));
         cards.add(new SetCardInfo("Raphael's Technique", 105, Rarity.RARE, mage.cards.r.RaphaelsTechnique.class));
         cards.add(new SetCardInfo("Raphael, the Nightwatcher", 103, Rarity.RARE, mage.cards.r.RaphaelTheNightwatcher.class));
         cards.add(new SetCardInfo("Sally Pride, Lioness Leader", 24, Rarity.RARE, mage.cards.s.SallyPrideLionessLeader.class));
