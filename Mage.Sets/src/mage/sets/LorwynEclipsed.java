@@ -256,6 +256,8 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Midnight Tilling", 182, Rarity.COMMON, mage.cards.m.MidnightTilling.class));
         cards.add(new SetCardInfo("Mirrorform", 308, Rarity.MYTHIC, mage.cards.m.Mirrorform.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mirrorform", 59, Rarity.MYTHIC, mage.cards.m.Mirrorform.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mirrormind Crown", 258, Rarity.RARE, mage.cards.m.MirrormindCrown.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mirrormind Crown", 381, Rarity.RARE, mage.cards.m.MirrormindCrown.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mischievous Sneakling", 235, Rarity.COMMON, mage.cards.m.MischievousSneakling.class));
         cards.add(new SetCardInfo("Mistmeadow Council", 183, Rarity.COMMON, mage.cards.m.MistmeadowCouncil.class));
         cards.add(new SetCardInfo("Moon-Vigil Adherents", 184, Rarity.UNCOMMON, mage.cards.m.MoonVigilAdherents.class));
