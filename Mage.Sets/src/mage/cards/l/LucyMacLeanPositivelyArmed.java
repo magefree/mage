@@ -79,7 +79,7 @@ class LucyMacLeanPositivelyArmedEffect extends OneShotEffect {
     LucyMacLeanPositivelyArmedEffect() {
         super(Outcome.Benefit);
         staticText = "you may have target player other than its controller create a token that's a copy of it, " +
-                "then you draw a card if an opponent created a token this way. Do this only once each turn";
+                "then you draw a card if an opponent created a token this way";
     }
 
     private LucyMacLeanPositivelyArmedEffect(final LucyMacLeanPositivelyArmedEffect effect) {

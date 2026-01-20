@@ -65,7 +65,7 @@ class CrashingWaveEffect extends OneShotEffect {
 
     CrashingWaveEffect() {
         super(Outcome.Benefit);
-        staticText = ", then distribute three stun counters among tapped creatures your opponents control";
+        staticText = ", then distribute three stun counters among any number of tapped creatures your opponents control";
     }
 
     private CrashingWaveEffect(final CrashingWaveEffect effect) {

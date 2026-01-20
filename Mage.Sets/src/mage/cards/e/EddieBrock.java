@@ -34,7 +34,7 @@ import java.util.UUID;
  */
 public final class EddieBrock extends ModalDoubleFacedCard {
 
-    private static final FilterCard filter = new FilterCreatureCard("creature card with mana value 1 or less");
+    private static final FilterCard filter = new FilterCreatureCard("creature card with mana value 1 or less from your graveyard");
 
     static {
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 2));

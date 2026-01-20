@@ -8,6 +8,7 @@ import mage.abilities.common.WerewolfFrontTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardSetInfo;
 import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
@@ -48,6 +49,10 @@ public final class HuntmasterOfTheFells extends TransformingDoubleFacedCard {
         // At the beginning of each upkeep, if no spells were cast last turn, transform Huntmaster of the Fells.
         this.getLeftHalfCard().addAbility(new WerewolfFrontTriggeredAbility());
 
+        // Ravager of the Fells
+
+        // Trample
+        this.getRightHalfCard().addAbility(TrampleAbility.getInstance());
 
         // Whenever this creature transforms into Ravager of the Fells, it deals 2 damage to target opponent and 2 damage to up to one target creature that player controls.
         Ability ravagerAbility = new TransformIntoSourceTriggeredAbility(

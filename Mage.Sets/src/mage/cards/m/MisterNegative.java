@@ -59,7 +59,7 @@ class MisterNegativeEffect extends OneShotEffect {
 
     MisterNegativeEffect() {
         super(Outcome.Neutral);
-        staticText = "you may exchange life totals with target opponent. If you lose life this way, draw that many cards.";
+        staticText = "you may exchange life totals with target opponent. If you lost life this way, draw that many cards.";
     }
 
     protected MisterNegativeEffect(final MisterNegativeEffect effect) {

@@ -17,7 +17,7 @@ import java.util.UUID;
  */
 public final class ArcTrail extends CardImpl {
 
-    private static final FilterPermanentOrPlayer filter2 = new FilterAnyTarget("another target");
+    private static final FilterPermanentOrPlayer filter2 = new FilterAnyTarget("any other target");
 
     static {
         filter2.getPermanentFilter().add(new AnotherTargetPredicate(2));

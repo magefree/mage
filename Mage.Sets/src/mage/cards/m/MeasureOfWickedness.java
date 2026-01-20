@@ -1,12 +1,11 @@
 package mage.cards.m;
 
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.PutCardIntoGraveFromAnywhereAllTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.TargetPlayerGainControlSourceEffect;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -35,8 +34,7 @@ public final class MeasureOfWickedness extends CardImpl {
 
         // At the beginning of your end step, sacrifice Measure of Wickedness and you lose 8 life.        
         Ability ability = new BeginningOfEndStepTriggeredAbility(TargetController.YOU, new SacrificeSourceEffect(), false, null);
-        Effect effect = new LoseLifeSourceControllerEffect(8);
-        ability.addEffect(effect);
+        ability.addEffect(new LoseLifeSourceControllerEffect(8).concatBy("and"));
         this.addAbility(ability);
 
         // Whenever another card is put into your graveyard from anywhere, target opponent gains control of Measure of Wickedness.
