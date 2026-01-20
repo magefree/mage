@@ -34,7 +34,7 @@ public final class SoulImmolation extends CardImpl {
         this.getSpellAbility().addEffect(new DamagePlayersEffect(GetXValue.instance, TargetController.OPPONENT));
         this.getSpellAbility().addEffect(new DamageAllEffect(
                 GetXValue.instance, StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURES
-        ).setText("{this} deals X damage to each opponent and each creature they control"));
+        ).setText("and each creature they control"));
     }
 
     private SoulImmolation(final SoulImmolation card) {
@@ -51,7 +51,7 @@ class SoulImmolationCost extends VariableCostImpl {
 
     SoulImmolationCost() {
         super(VariableCostType.ADDITIONAL, "amount to blight");
-        this.setText("blight X. X can't be greater than the greatest toughness among creatures you control.");
+        this.setText("blight X. X can't be greater than the greatest toughness among creatures you control");
     }
 
     private SoulImmolationCost(final SoulImmolationCost cost) {
