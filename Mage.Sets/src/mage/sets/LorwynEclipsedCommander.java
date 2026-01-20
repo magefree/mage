@@ -64,6 +64,8 @@ public final class LorwynEclipsedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Elemental Spectacle", 15, Rarity.RARE, mage.cards.e.ElementalSpectacle.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Elemental Spectacle", 35, Rarity.RARE, mage.cards.e.ElementalSpectacle.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Endurance", 51, Rarity.MYTHIC, mage.cards.e.Endurance.class));
+        cards.add(new SetCardInfo("Eventide's Shadow", 28, Rarity.RARE, mage.cards.e.EventidesShadow.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Eventide's Shadow", 8, Rarity.RARE, mage.cards.e.EventidesShadow.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Everlasting Torment", 121, Rarity.RARE, mage.cards.e.EverlastingTorment.class));
         cards.add(new SetCardInfo("Evolution Sage", 105, Rarity.UNCOMMON, mage.cards.e.EvolutionSage.class));
         cards.add(new SetCardInfo("Exotic Orchard", 148, Rarity.RARE, mage.cards.e.ExoticOrchard.class));

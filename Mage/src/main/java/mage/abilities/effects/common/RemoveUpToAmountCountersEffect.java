@@ -64,6 +64,13 @@ public class RemoveUpToAmountCountersEffect extends OneShotEffect {
         return 0;
     }
 
+    private static String getIdName(Permanent permanent, Player player) {
+        if (permanent != null) {
+            return permanent.getIdName();
+        }
+        return player.getName();
+    }
+
     public static int doRemoval(int amount, UUID targetId, Player controller, Game game, Ability source) {
         Permanent permanent = game.getPermanent(targetId);
         Player player = game.getPlayer(targetId);
@@ -75,8 +82,8 @@ public class RemoveUpToAmountCountersEffect extends OneShotEffect {
             return 0;
         }
         List<Integer> counterList = controller.getMultiAmount(
-                Outcome.UnboostCreature, toChoose, 0, 0,
-                amount, MultiAmountType.REMOVE_COUNTERS, game
+                Outcome.UnboostCreature, toChoose, 0, 0, amount,
+                new MultiAmountType("Choose counters", "Remove counters (from " + getIdName(permanent, player) + ')'), game
         );
         int total = 0;
         for (int i = 0; i < toChoose.size(); i++) {
