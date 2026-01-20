@@ -69,6 +69,8 @@ public final class LorwynEclipsedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Exotic Orchard", 148, Rarity.RARE, mage.cards.e.ExoticOrchard.class));
         cards.add(new SetCardInfo("Faeburrow Elder", 53, Rarity.RARE, mage.cards.f.FaeburrowElder.class));
         cards.add(new SetCardInfo("Fellwar Stone", 141, Rarity.UNCOMMON, mage.cards.f.FellwarStone.class));
+        cards.add(new SetCardInfo("Ferrafor, Young Yew", 16, Rarity.RARE, mage.cards.f.FerraforYoungYew.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ferrafor, Young Yew", 36, Rarity.RARE, mage.cards.f.FerraforYoungYew.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fertile Ground", 106, Rarity.COMMON, mage.cards.f.FertileGround.class));
         cards.add(new SetCardInfo("Festering Thicket", 61, Rarity.RARE, mage.cards.f.FesteringThicket.class));
         cards.add(new SetCardInfo("Fire Covenant", 54, Rarity.UNCOMMON, mage.cards.f.FireCovenant.class));
