@@ -20,7 +20,7 @@ public final class MarvelsSpiderMan extends ExpansionSet {
         this.blockName = "Marvel's Spider-Man"; // for sorting in GUI
         this.hasBasicLands = true;
 
-        this.enablePlayBooster(Integer.MAX_VALUE);
+        this.enablePlayBooster(231);
 
         cards.add(new SetCardInfo("Agent Venom", 255, Rarity.RARE, mage.cards.a.AgentVenom.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Agent Venom", 49, Rarity.RARE, mage.cards.a.AgentVenom.class, NON_FULL_USE_VARIOUS));

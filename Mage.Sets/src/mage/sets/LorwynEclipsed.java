@@ -20,7 +20,7 @@ public final class LorwynEclipsed extends ExpansionSet {
         this.blockName = "Lorwyn Eclipsed"; // for sorting in GUI
         this.hasBasicLands = true;
 
-        this.enablePlayBooster(Integer.MAX_VALUE);
+        this.enablePlayBooster(351);
         this.numBoosterDoubleFaced = -1;
 
         cards.add(new SetCardInfo("Abigale, Eloquent First-Year", 204, Rarity.RARE, mage.cards.a.AbigaleEloquentFirstYear.class, NON_FULL_USE_VARIOUS));
