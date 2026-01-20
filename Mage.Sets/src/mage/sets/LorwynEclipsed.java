@@ -351,6 +351,10 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Soulbright Seeker", 157, Rarity.UNCOMMON, mage.cards.s.SoulbrightSeeker.class));
         cards.add(new SetCardInfo("Sourbread Auntie", 158, Rarity.UNCOMMON, mage.cards.s.SourbreadAuntie.class));
         cards.add(new SetCardInfo("Spell Snare", 71, Rarity.UNCOMMON, mage.cards.s.SpellSnare.class));
+        cards.add(new SetCardInfo("Spinerock Tyrant", 159, Rarity.MYTHIC, mage.cards.s.SpinerockTyrant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Spinerock Tyrant", 322, Rarity.MYTHIC, mage.cards.s.SpinerockTyrant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Spinerock Tyrant", 389, Rarity.MYTHIC, mage.cards.s.SpinerockTyrant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Spinerock Tyrant", 399, Rarity.MYTHIC, mage.cards.s.SpinerockTyrant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Spiral into Solitude", 36, Rarity.COMMON, mage.cards.s.SpiralIntoSolitude.class));
         cards.add(new SetCardInfo("Springleaf Drum", 260, Rarity.UNCOMMON, mage.cards.s.SpringleafDrum.class));
         cards.add(new SetCardInfo("Spry and Mighty", 195, Rarity.RARE, mage.cards.s.SpryAndMighty.class, NON_FULL_USE_VARIOUS));
