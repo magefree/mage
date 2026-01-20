@@ -165,6 +165,7 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Flitterwing Nuisance", 304, Rarity.RARE, mage.cards.f.FlitterwingNuisance.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Flitterwing Nuisance", 48, Rarity.RARE, mage.cards.f.FlitterwingNuisance.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Flock Impostor", 16, Rarity.UNCOMMON, mage.cards.f.FlockImpostor.class));
+        cards.add(new SetCardInfo("Foraging Wickermaw", 256, Rarity.COMMON, mage.cards.f.ForagingWickermaw.class));
         cards.add(new SetCardInfo("Forest", 273, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 278, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", 283, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
