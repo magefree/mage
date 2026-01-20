@@ -346,6 +346,8 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Sizzling Changeling", 155, Rarity.UNCOMMON, mage.cards.s.SizzlingChangeling.class));
         cards.add(new SetCardInfo("Slumbering Walker", 302, Rarity.RARE, mage.cards.s.SlumberingWalker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Slumbering Walker", 35, Rarity.RARE, mage.cards.s.SlumberingWalker.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Soul Immolation", 156, Rarity.MYTHIC, mage.cards.s.SoulImmolation.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Soul Immolation", 321, Rarity.MYTHIC, mage.cards.s.SoulImmolation.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Soulbright Seeker", 157, Rarity.UNCOMMON, mage.cards.s.SoulbrightSeeker.class));
         cards.add(new SetCardInfo("Sourbread Auntie", 158, Rarity.UNCOMMON, mage.cards.s.SourbreadAuntie.class));
         cards.add(new SetCardInfo("Spell Snare", 71, Rarity.UNCOMMON, mage.cards.s.SpellSnare.class));
