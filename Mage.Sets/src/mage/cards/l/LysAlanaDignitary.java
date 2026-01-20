@@ -14,7 +14,6 @@ import mage.abilities.hint.Hint;
 import mage.abilities.mana.ActivateIfConditionManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.BeholdType;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
@@ -42,7 +41,7 @@ public final class LysAlanaDignitary extends CardImpl {
         // As an additional cost to cast this spell, behold an Elf or pay {2}.
         this.getSpellAbility().addCost(new OrCost(
                 "behold an Elf or pay {2}",
-                new BeholdCost(BeholdType.ELF), new GenericManaCost(2)
+                new BeholdCost(SubType.ELF), new GenericManaCost(2)
         ));
 
         // {T}: Add {G}{G}. Activate only if there is an Elf card in your graveyard.

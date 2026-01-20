@@ -8,7 +8,6 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.BeholdType;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.game.permanent.token.MerfolkWhiteBlueToken;
@@ -31,7 +30,7 @@ public final class SilvergillMentor extends CardImpl {
         // As an additional cost to cast this spell, behold a Merfolk or pay {2}.
         this.getSpellAbility().addCost(new OrCost(
                 "behold a Merfolk or pay {2}",
-                new BeholdCost(BeholdType.MERFOLK), new GenericManaCost(2)
+                new BeholdCost(SubType.MERFOLK), new GenericManaCost(2)
         ));
 
         // When this creature enters, create a 1/1 white and blue Merfolk creature token.

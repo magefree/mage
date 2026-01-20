@@ -7,6 +7,7 @@ import mage.abilities.costs.*;
 import mage.abilities.costs.common.BeholdCost;
 import mage.constants.BeholdType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -29,7 +30,7 @@ public class BeholdAbility extends StaticAbility implements OptionalAdditionalSo
         OptionalAdditionalCost cost = new OptionalAdditionalCostImpl(
                 keywordText + beholdType.getDescription(),
                 reminderText.replace("$$$", beholdType.getDescription()),
-                new BeholdCost(beholdType)
+                new BeholdCost(beholdType, 1)
         );
         cost.setRepeatable(false);
         return cost;
@@ -37,9 +38,9 @@ public class BeholdAbility extends StaticAbility implements OptionalAdditionalSo
 
     private final BeholdType beholdType;
 
-    public BeholdAbility(BeholdType beholdType) {
+    public BeholdAbility(SubType subType) {
         super(Zone.STACK, null);
-        this.beholdType = beholdType;
+        this.beholdType = BeholdType.getBeholdType(subType);
         this.additionalCost = makeCost(beholdType);
         this.rule = additionalCost.getName() + ". " + additionalCost.getReminderText();
         this.setRuleAtTheTop(true);

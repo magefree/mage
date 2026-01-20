@@ -12,7 +12,6 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.meta.OrTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.BeholdType;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
@@ -35,7 +34,7 @@ public final class ChampionsOfTheShoal extends CardImpl {
         this.toughness = new MageInt(6);
 
         // As an additional cost to cast this spell, behold a Merfolk and exile it.
-        this.getSpellAbility().addCost(new BeholdAndExileCost(BeholdType.MERFOLK));
+        this.getSpellAbility().addCost(new BeholdAndExileCost(SubType.MERFOLK));
 
         // Whenever this creature enters or becomes tapped, tap up to one target creature and put a stun counter on it.
         Ability ability = new OrTriggeredAbility(

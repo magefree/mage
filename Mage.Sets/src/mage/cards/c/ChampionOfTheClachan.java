@@ -9,7 +9,6 @@ import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.BeholdType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
@@ -36,7 +35,7 @@ public final class ChampionOfTheClachan extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
 
         // As an additional cost to cast this spell, behold a Kithkin and exile it.
-        this.getSpellAbility().addCost(new BeholdAndExileCost(BeholdType.KITHKIN));
+        this.getSpellAbility().addCost(new BeholdAndExileCost(SubType.KITHKIN));
 
         // Other Kithkin you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(

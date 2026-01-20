@@ -16,25 +16,24 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInHand;
 import mage.util.CardUtil;
 
-import java.util.Objects;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
  */
-public enum BeholdType {
-    DRAGON(SubType.DRAGON),
-    GOBLIN(SubType.GOBLIN),
-    ELEMENTAL(SubType.ELEMENTAL),
-    ELF(SubType.ELF),
-    KITHKIN(SubType.KITHKIN),
-    MERFOLK(SubType.MERFOLK);
+public class BeholdType {
+
+    private static Map<SubType, BeholdType> typeMap = new HashMap<>();
+
+    public static BeholdType getBeholdType(SubType subType) {
+        return typeMap.computeIfAbsent(subType, s -> new BeholdType(s));
+    }
 
     private final FilterPermanent filterPermanent;
     private final FilterCard filterCard;
     private final SubType subType;
+
     private final String description;
 
     BeholdType(SubType subType) {

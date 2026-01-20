@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -14,19 +13,18 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.hint.common.AbilityResolutionCountHint;
 import mage.abilities.keyword.TrampleAbility;
-import mage.constants.SubType;
-import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
-import mage.watchers.common.AbilityResolvedWatcher;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.BeholdType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.target.common.TargetControlledCreaturePermanent;
+import mage.watchers.common.AbilityResolvedWatcher;
+
+import java.util.UUID;
 
 /**
- *
  * @author muz
  */
 public final class SoulbrightSeeker extends CardImpl {
@@ -41,8 +39,8 @@ public final class SoulbrightSeeker extends CardImpl {
 
         // As an additional cost to cast this spell, behold an Elemental or pay {2}.
         this.getSpellAbility().addCost(new OrCost("behold an Elemental or pay {2}",
-            new BeholdCost(BeholdType.ELEMENTAL),
-            new GenericManaCost(2)
+                new BeholdCost(SubType.ELEMENTAL),
+                new GenericManaCost(2)
         ));
 
         // {R}: Target creature you control gains trample until end of turn. If this is the third time this ability has resolved this turn, add {R}{R}{R}{R}.
@@ -50,9 +48,9 @@ public final class SoulbrightSeeker extends CardImpl {
                 TrampleAbility.getInstance(), Duration.EndOfTurn
         ), new ManaCostsImpl<>("{R}"));
         ability.addEffect(
-            new IfAbilityHasResolvedXTimesEffect(
-                Outcome.PutManaInPool, 3, new BasicManaEffect(Mana.RedMana(4))
-            ).setText("If this is the third time this ability has resolved this turn, add {R}{R}{R}{R}")
+                new IfAbilityHasResolvedXTimesEffect(
+                        Outcome.PutManaInPool, 3, new BasicManaEffect(Mana.RedMana(4))
+                ).setText("If this is the third time this ability has resolved this turn, add {R}{R}{R}{R}")
         );
         ability.addTarget(new TargetControlledCreaturePermanent());
         ability.addHint(AbilityResolutionCountHint.instance);

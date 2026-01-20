@@ -7,8 +7,8 @@ import mage.abilities.effects.keyword.SurveilEffect;
 import mage.abilities.keyword.BeholdAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.BeholdType;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreatureOrPlaneswalker;
 
@@ -23,7 +23,7 @@ public final class PiercingExhale extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");
 
         // As an additional cost to cast this spell, you may behold a Dragon.
-        this.addAbility(new BeholdAbility(BeholdType.DRAGON));
+        this.addAbility(new BeholdAbility(SubType.DRAGON));
 
         // Target creature you control deals damage equal to its power to target creature or planeswalker. If a Dragon was beheld, surveil 2.
         this.getSpellAbility().addEffect(new DamageWithPowerFromOneToAnotherTargetEffect());

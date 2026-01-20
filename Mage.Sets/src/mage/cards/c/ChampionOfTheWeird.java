@@ -11,7 +11,6 @@ import mage.abilities.effects.common.ReturnExiledCardToHandEffect;
 import mage.abilities.effects.keyword.BlightTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.BeholdType;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.target.common.TargetOpponent;
@@ -32,7 +31,7 @@ public final class ChampionOfTheWeird extends CardImpl {
         this.toughness = new MageInt(5);
 
         // As an additional cost to cast this spell, behold a Goblin and exile it.
-        this.getSpellAbility().addCost(new BeholdAndExileCost(BeholdType.GOBLIN));
+        this.getSpellAbility().addCost(new BeholdAndExileCost(SubType.GOBLIN));
 
         // Pay 1 life, Blight 2: Target opponent blights 2. Activate only as a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(new BlightTargetEffect(2), new PayLifeCost(1));

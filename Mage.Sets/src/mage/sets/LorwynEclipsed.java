@@ -82,6 +82,8 @@ public final class LorwynEclipsed extends ExpansionSet {
         cards.add(new SetCardInfo("Burning Curiosity", 129, Rarity.COMMON, mage.cards.b.BurningCuriosity.class));
         cards.add(new SetCardInfo("Catharsis", 209, Rarity.MYTHIC, mage.cards.c.Catharsis.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Catharsis", 292, Rarity.MYTHIC, mage.cards.c.Catharsis.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Celestial Reunion", 170, Rarity.MYTHIC, mage.cards.c.CelestialReunion.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Celestial Reunion", 326, Rarity.MYTHIC, mage.cards.c.CelestialReunion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Champion of the Clachan", 353, Rarity.RARE, mage.cards.c.ChampionOfTheClachan.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Champion of the Clachan", 9, Rarity.RARE, mage.cards.c.ChampionOfTheClachan.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Champion of the Path", 130, Rarity.RARE, mage.cards.c.ChampionOfThePath.class, NON_FULL_USE_VARIOUS));

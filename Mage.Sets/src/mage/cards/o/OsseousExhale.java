@@ -7,8 +7,8 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.BeholdAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.BeholdType;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.common.TargetAttackingOrBlockingCreature;
 
 import java.util.UUID;
@@ -22,7 +22,7 @@ public final class OsseousExhale extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");
 
         // As an additional cost to cast this spell, you may behold a Dragon.
-        this.addAbility(new BeholdAbility(BeholdType.DRAGON));
+        this.addAbility(new BeholdAbility(SubType.DRAGON));
 
         // Osseous Exhale deals 5 damage to target attacking or blocking creature. If a Dragon was beheld, you gain 2 life.
         this.getSpellAbility().addEffect(new DamageTargetEffect(5));

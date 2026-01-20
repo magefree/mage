@@ -9,7 +9,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnExiledCardToHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.BeholdType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -42,7 +41,7 @@ public final class ChampionOfThePath extends CardImpl {
         this.toughness = new MageInt(3);
 
         // As an additional cost to cast this spell, behold an Elemental and exile it.
-        this.getSpellAbility().addCost(new BeholdAndExileCost(BeholdType.ELEMENTAL));
+        this.getSpellAbility().addCost(new BeholdAndExileCost(SubType.ELEMENTAL));
 
         // Whenever another Elemental you control enters, it deals damage equal to its power to each opponent.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(new ChampionOfThePathEffect(), filter));

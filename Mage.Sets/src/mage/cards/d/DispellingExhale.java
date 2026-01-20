@@ -7,8 +7,8 @@ import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.abilities.keyword.BeholdAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.BeholdType;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.TargetSpell;
 
 import java.util.UUID;
@@ -22,7 +22,7 @@ public final class DispellingExhale extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
         // As an additional cost to cast this spell, you may behold a Dragon.
-        this.addAbility(new BeholdAbility(BeholdType.DRAGON));
+        this.addAbility(new BeholdAbility(SubType.DRAGON));
 
         // Counter target spell unless its controller pays {2}. If a Dragon was beheld, counter that spell unless its controller pays {4} instead.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(

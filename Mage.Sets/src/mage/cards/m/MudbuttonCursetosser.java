@@ -10,7 +10,6 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.BeholdType;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.SubType;
@@ -43,7 +42,7 @@ public final class MudbuttonCursetosser extends CardImpl {
         // As an additional cost to cast this spell, behold a Goblin or pay {2}.
         this.getSpellAbility().addCost(new OrCost(
                 "behold a Goblin or pay {2}",
-                new BeholdCost(BeholdType.GOBLIN), new GenericManaCost(2)
+                new BeholdCost(SubType.GOBLIN), new GenericManaCost(2)
         ));
 
         // This creature can't block.

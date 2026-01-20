@@ -5,6 +5,7 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.cards.Card;
 import mage.constants.BeholdType;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -18,9 +19,9 @@ public class BeholdAndExileCost extends CostImpl {
 
     private final BeholdType beholdType;
 
-    public BeholdAndExileCost(BeholdType beholdType) {
+    public BeholdAndExileCost(SubType subType) {
         super();
-        this.beholdType = beholdType;
+        this.beholdType = BeholdType.getBeholdType(subType);
         this.text = "behold " + beholdType.getDescription() + " and exile it";
     }
 

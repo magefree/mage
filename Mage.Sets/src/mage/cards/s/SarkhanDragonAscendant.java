@@ -39,7 +39,7 @@ public final class SarkhanDragonAscendant extends CardImpl {
 
         // When Sarkhan enters, you may behold a Dragon. If you do, create a Treasure token.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new DoIfCostPaid(new CreateTokenEffect(new TreasureToken()), new BeholdCost(BeholdType.DRAGON))
+                new DoIfCostPaid(new CreateTokenEffect(new TreasureToken()), new BeholdCost(SubType.DRAGON))
         ));
 
         // Whenever a Dragon you control enters, put a +1/+1 counter on Sarkhan. Until end of turn, Sarkhan becomes a Dragon in addition to its other types and gains flying.

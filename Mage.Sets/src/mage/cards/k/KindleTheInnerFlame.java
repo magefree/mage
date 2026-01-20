@@ -10,7 +10,6 @@ import mage.abilities.keyword.HasteAbility;
 import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.BeholdType;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
@@ -40,7 +39,7 @@ public final class KindleTheInnerFlame extends CardImpl {
 
         // Flashback--{1}{R}, Behold three Elementals.
         Ability ability = new FlashbackAbility(this, new ManaCostsImpl<>("{1}{R}"));
-        ability.addCost(new BeholdCost(BeholdType.ELEMENTAL, 3));
+        ability.addCost(new BeholdCost(SubType.ELEMENTAL, 3));
         this.addAbility(ability);
     }
 

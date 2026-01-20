@@ -8,7 +8,6 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ReturnExiledCardToHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.BeholdType;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
@@ -29,7 +28,7 @@ public final class ChampionsOfThePerfect extends CardImpl {
         this.toughness = new MageInt(6);
 
         // As an additional cost to cast this spell, behold an Elf and exile it.
-        this.getSpellAbility().addCost(new BeholdAndExileCost(BeholdType.ELF));
+        this.getSpellAbility().addCost(new BeholdAndExileCost(SubType.ELF));
 
         // Whenever you cast a creature spell, draw a card.
         this.addAbility(new SpellCastControllerTriggeredAbility(

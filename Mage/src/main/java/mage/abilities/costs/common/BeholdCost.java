@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.constants.BeholdType;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -18,8 +19,12 @@ public class BeholdCost extends CostImpl {
     private final BeholdType beholdType;
     private final int amount;
 
-    public BeholdCost(BeholdType beholdType) {
-        this(beholdType, 1);
+    public BeholdCost(SubType subType) {
+        this(subType, 1);
+    }
+
+    public BeholdCost(SubType subType, int amount) {
+        this(BeholdType.getBeholdType(subType), amount);
     }
 
     public BeholdCost(BeholdType beholdType, int amount) {
@@ -28,8 +33,8 @@ public class BeholdCost extends CostImpl {
         this.amount = amount;
         this.text = "behold " + (
                 amount > 1
-                        ? CardUtil.numberToText(amount) + ' ' + beholdType.getSubType().getPluralName()
-                        : beholdType.getDescription()
+                        ? CardUtil.numberToText(amount) + ' ' + this.beholdType.getSubType().getPluralName()
+                        : this.beholdType.getDescription()
         );
     }
 
