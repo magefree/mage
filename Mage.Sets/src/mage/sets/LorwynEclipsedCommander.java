@@ -134,6 +134,8 @@ public final class LorwynEclipsedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Path to Exile", 65, Rarity.UNCOMMON, mage.cards.p.PathToExile.class));
         cards.add(new SetCardInfo("Persist", 83, Rarity.RARE, mage.cards.p.Persist.class));
         cards.add(new SetCardInfo("Primal Beyond", 159, Rarity.RARE, mage.cards.p.PrimalBeyond.class));
+        cards.add(new SetCardInfo("Puca's Covenant", 18, Rarity.RARE, mage.cards.p.PucasCovenant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Puca's Covenant", 38, Rarity.RARE, mage.cards.p.PucasCovenant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Puppeteer Clique", 84, Rarity.RARE, mage.cards.p.PuppeteerClique.class));
         cards.add(new SetCardInfo("Putrefy", 131, Rarity.UNCOMMON, mage.cards.p.Putrefy.class));
         cards.add(new SetCardInfo("Raging Ravine", 160, Rarity.RARE, mage.cards.r.RagingRavine.class));
