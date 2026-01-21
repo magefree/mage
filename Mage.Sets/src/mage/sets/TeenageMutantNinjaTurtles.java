@@ -39,6 +39,7 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("Kitsune's Technique", 42, Rarity.RARE, mage.cards.k.KitsunesTechnique.class));
         cards.add(new SetCardInfo("Krang, Master Mind", 43, Rarity.RARE, mage.cards.k.KrangMasterMind.class));
         cards.add(new SetCardInfo("Krang, Utrom Warlord", 175, Rarity.MYTHIC, mage.cards.k.KrangUtromWarlord.class));
+        cards.add(new SetCardInfo("Leader's Talent", 13, Rarity.RARE, mage.cards.l.LeadersTalent.class));
         cards.add(new SetCardInfo("Leonardo's Technique", 18, Rarity.RARE, mage.cards.l.LeonardosTechnique.class));
         cards.add(new SetCardInfo("Leonardo, Cutting Edge", 15, Rarity.RARE, mage.cards.l.LeonardoCuttingEdge.class));
         cards.add(new SetCardInfo("Leonardo, Sewer Samurai", 17, Rarity.MYTHIC, mage.cards.l.LeonardoSewerSamurai.class, NON_FULL_USE_VARIOUS));
