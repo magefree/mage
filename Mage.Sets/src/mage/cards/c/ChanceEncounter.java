@@ -9,6 +9,7 @@ import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.counters.CounterType;
 
 import java.util.UUID;
@@ -18,7 +19,7 @@ import java.util.UUID;
  */
 public final class ChanceEncounter extends CardImpl {
 
-    private static final Condition condition = new SourceHasCounterCondition(CounterType.LUCK, 10);
+    private static final Condition condition = new SourceHasCounterCondition(CounterType.LUCK, ComparisonType.MORE_THAN, 9);
 
     public ChanceEncounter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");

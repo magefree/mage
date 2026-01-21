@@ -23,7 +23,7 @@ import java.util.UUID;
  */
 public final class ManaBloom extends CardImpl {
 
-    private static final Condition condition = new SourceHasCounterCondition(CounterType.CHARGE, ComparisonType.EQUAL_TO, 0);
+    private static final Condition condition = new SourceHasCounterCondition(CounterType.CHARGE, ComparisonType.EQUAL_TO, 0).withText("{this} has no charge counters on it");
 
     public ManaBloom(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{X}{G}");

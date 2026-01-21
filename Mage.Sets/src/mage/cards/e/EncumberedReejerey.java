@@ -19,7 +19,7 @@ import java.util.UUID;
  */
 public final class EncumberedReejerey extends CardImpl {
 
-    private static final Condition condition = new SourceHasCounterCondition(CounterType.M1M1);
+    private static final Condition condition = new SourceHasCounterCondition(CounterType.M1M1).withText("it has a -1/-1 counter on it");
 
     public EncumberedReejerey(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");

@@ -18,6 +18,7 @@ import java.util.Optional;
 public class SourceHasCounterCondition extends IntCompareCondition {
 
     private final CounterType counterType;
+    private String text = null;
 
     public SourceHasCounterCondition(CounterType counterType) {
         this(counterType, 1);
@@ -45,8 +46,16 @@ public class SourceHasCounterCondition extends IntCompareCondition {
                 .orElse(0);
     }
 
+    public SourceHasCounterCondition withText(String text) {
+        this.text = text;
+        return this;
+    }
+
     @Override
     public String toString() {
+        if (this.text != null) {
+            return this.text;
+        }
         switch (type) {
             case EQUAL_TO:
                 StringBuilder sb = new StringBuilder("there ");
@@ -70,16 +79,20 @@ public class SourceHasCounterCondition extends IntCompareCondition {
                 sb.append(" on {this}");
                 return sb.toString();
             case OR_GREATER:
-                if (value == 0) {
-                    throw new IllegalArgumentException("0 or greater should not be used");
+                switch (value) {
+                    case 0:
+                        throw new IllegalArgumentException("0 or greater should not be used");
+                    case 1:
+                        return "{this} has " + counterType.getArticle() + ' ' + counterType.getName() + " counter on it";
+                    default:
+                        return "there are " + CardUtil.numberToText(value) + " or more " + counterType.getName() + " counters on {this}";
                 }
-                return "there are " + CardUtil.numberToText(value) + " or more " + counterType.getName() + " counters on {this}";
             case OR_LESS:
                 return "{this} has " + CardUtil.numberToText(value) + " or fewer " + counterType.getName() + " counters on it";
             case FEWER_THAN:
                 return "{this} has fewer than " + CardUtil.numberToText(value) + ' ' + counterType.getName() + " counters on it";
             case MORE_THAN:
-                return "{this} has more than " + CardUtil.numberToText(value) + ' ' + counterType.getName() + " counters on it";
+                return "{this} has " + CardUtil.numberToText(value+1) + " or more " + counterType.getName() + " counters on it";
             default:
                 throw new UnsupportedOperationException("There should be a comparison type");
         }
