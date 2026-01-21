@@ -20,6 +20,7 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         this.blockName = "Teenage Mutant Ninja Turtles"; // for sorting in GUI
         this.hasBasicLands = true;
 
+        cards.add(new SetCardInfo("Agent Bishop, Man in Black", 2, Rarity.RARE, mage.cards.a.AgentBishopManInBlack.class));
         cards.add(new SetCardInfo("April O'Neil, Hacktivist", 29, Rarity.RARE, mage.cards.a.AprilONeilHacktivist.class));
         cards.add(new SetCardInfo("Armaggon, Future Shark", 58, Rarity.RARE, mage.cards.a.ArmaggonFutureShark.class));
         cards.add(new SetCardInfo("Bebop & Rocksteady", 140, Rarity.RARE, mage.cards.b.BebopAndRocksteady.class));
