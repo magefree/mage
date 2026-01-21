@@ -2,13 +2,12 @@ package mage.cards.l;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.TapTargetEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -33,10 +32,7 @@ public final class LochMare extends CardImpl {
         this.toughness = new MageInt(5);
 
         // This creature enters with three -1/-1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.M1M1.createInstance(3)),
-                "with three -1/-1 counters on it"
-        ));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.M1M1.createInstance(3)));
 
         // {1}{U}, Remove a counter from this creature: Draw a card.
         Ability ability = new SimpleActivatedAbility(

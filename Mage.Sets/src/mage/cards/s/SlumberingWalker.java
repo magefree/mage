@@ -1,12 +1,11 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.effects.common.DoWhenCostPaid;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -41,10 +40,7 @@ public final class SlumberingWalker extends CardImpl {
         this.toughness = new MageInt(7);
 
         // This creature enters with two -1/-1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.M1M1.createInstance(2)),
-                "with two -1/-1 counters on it"
-        ));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.M1M1.createInstance(2)));
 
         // At the beginning of your end step, you may remove a counter from this creature. When you do, return target creature card with power 2 or less from your graveyard to the battlefield.
         ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(

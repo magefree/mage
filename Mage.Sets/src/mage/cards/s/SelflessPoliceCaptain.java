@@ -3,9 +3,8 @@ package mage.cards.s;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.effects.common.PutSourceCountersOnTargetEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -29,10 +28,7 @@ public final class SelflessPoliceCaptain extends CardImpl {
         this.toughness = new MageInt(1);
 
         // This creature enters with a +1/+1 counter on it.
-        this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                "with a +1/+1 counter on it"
-        ));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.P1P1.createInstance()));
 
         // When this creature leaves the battlefield, put its +1/+1 counters on target creature you control.
         Ability ability = new DiesSourceTriggeredAbility(new PutSourceCountersOnTargetEffect(CounterType.P1P1));

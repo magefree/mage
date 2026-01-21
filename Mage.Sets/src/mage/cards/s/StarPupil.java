@@ -3,9 +3,8 @@ package mage.cards.s;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.effects.common.PutSourceCountersOnTargetEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -29,10 +28,7 @@ public final class StarPupil extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Star Pupil enters the battlefield with a +1/+1 counter on it.
-        this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                "with a +1/+1 counter on it"
-        ));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.P1P1.createInstance()));
 
         // When Star Pupil dies, put its counters on target creature you control.
         Ability ability = new DiesSourceTriggeredAbility(new PutSourceCountersOnTargetEffect());

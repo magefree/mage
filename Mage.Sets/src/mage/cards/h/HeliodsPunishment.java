@@ -1,7 +1,7 @@
 package mage.cards.h;
 
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -9,7 +9,6 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.combat.CantAttackBlockAttachedEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -40,7 +39,7 @@ public final class HeliodsPunishment extends CardImpl {
         this.addAbility(ability);
 
         // Heliod's Punishment enters the battlefield with four task counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.TASK.createInstance(4)), "with four task counters on it"));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.TASK.createInstance(4)));
 
         // Enchanted creature can't attack or block. It loses all abilities and has "{T}: Remove a task counter from Heliod's Punishment. Then if it has no task counters on it, destroy Heliod's Punishment."
         ability = new SimpleStaticAbility(new CantAttackBlockAttachedEffect(AttachmentType.AURA));

@@ -2,14 +2,13 @@ package mage.cards.c;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControllerEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
@@ -45,10 +44,7 @@ public final class CaptainAmericaSuperSoldier extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // Captain America enters with a shield counter on him.
-        this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.SHIELD.createInstance()),
-                "with a shield counter on him"
-        ));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.SHIELD.createInstance()));
 
         // As long as Captain America has a shield counter on him, you and other Heroes you control have hexproof.
         Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(

@@ -3,10 +3,9 @@ package mage.cards.i;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.condition.common.SourceHasCountersCondition;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -32,9 +31,7 @@ public final class IronApprentice extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Iron Apprentice enters the battlefield with a +1/+1 counter on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(
-                CounterType.P1P1.createInstance(1)
-        ), "with a +1/+1 counter on it"));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.P1P1.createInstance(1)));
 
         // When Iron Apprentice dies, if it had counters on it, put those counters on target creature you control.
         Ability ability = new DiesSourceTriggeredAbility(new IronApprenticeEffect())

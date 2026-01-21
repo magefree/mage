@@ -1,13 +1,12 @@
 package mage.cards.r;
 
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -33,11 +32,7 @@ public final class RhoxPummeler extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Rhox Pummeler enters the battlefield with a shield counter on it.
-        this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.SHIELD.createInstance(1)),
-                "with a shield counter on it. <i>(If it would be dealt damage " +
-                        "or destroyed, remove a shield counter from it instead.)</i>"
-        ));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.SHIELD.createInstance(1)));
 
         // As long as Rhox Pummeler has a shield counter on it, it has trample.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(

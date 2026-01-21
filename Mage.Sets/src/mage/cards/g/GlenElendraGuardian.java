@@ -1,24 +1,24 @@
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.constants.SubType;
-import mage.counters.CounterType;
-import mage.filter.StaticFilters;
-import mage.target.TargetSpell;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.DrawCardTargetControllerEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.counters.CounterType;
+import mage.filter.StaticFilters;
+import mage.target.TargetSpell;
+
+import java.util.UUID;
 
 /**
  *
@@ -41,10 +41,7 @@ public final class GlenElendraGuardian extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // This creature enters with a -1/-1 counter on it.
-        this.addAbility(new EntersBattlefieldAbility(
-            new AddCountersSourceEffect(CounterType.M1M1.createInstance(1)),
-            "with a -1/-1 counter on it"
-        ));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.M1M1.createInstance(1)));
 
         // {1}{U}, Remove a counter from this creature: Counter target noncreature spell. Its controller draws a card.
         Ability ability = new SimpleActivatedAbility(new CounterTargetEffect(), new ManaCostsImpl<>("{1}{U}"));

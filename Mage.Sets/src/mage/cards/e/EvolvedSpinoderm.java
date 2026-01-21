@@ -2,7 +2,7 @@ package mage.cards.e;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceHasCounterCondition;
@@ -10,7 +10,6 @@ import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.abilities.keyword.HexproofAbility;
 import mage.abilities.keyword.TrampleAbility;
@@ -41,10 +40,7 @@ public final class EvolvedSpinoderm extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Evolved Spinoderm enters the battlefield with four oil counters on it.
-        this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.OIL.createInstance(4)),
-                "with four oil counters on it"
-        ));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.OIL.createInstance(4)));
 
         // Evolved Spinoderm has trample as long as it was two or fewer oil counters on it, Otherwise, it has hexproof.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(

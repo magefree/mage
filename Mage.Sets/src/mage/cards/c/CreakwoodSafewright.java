@@ -1,12 +1,11 @@
 package mage.cards.c;
 
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.condition.CompoundCondition;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.condition.common.SourceHasCounterCondition;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.abilities.hint.ConditionHint;
 import mage.abilities.hint.Hint;
@@ -44,10 +43,7 @@ public final class CreakwoodSafewright extends CardImpl {
         this.toughness = new MageInt(5);
 
         // This creature enters with three -1/-1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.M1M1.createInstance(3)),
-                "with three -1/-1 counters on it"
-        ));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.M1M1.createInstance(3)));
 
         // At the beginning of your end step, if there is an Elf card in your graveyard and this creature has a -1/-1 counter on it, remove a -1/-1 counter from this creature.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(

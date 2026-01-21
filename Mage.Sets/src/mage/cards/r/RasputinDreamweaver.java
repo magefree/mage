@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.CantHaveMoreThanAmountCountersSourceAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
@@ -42,10 +42,7 @@ public final class RasputinDreamweaver extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Rasputin Dreamweaver enters the battlefield with seven dream counters on it.
-        this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.DREAM.createInstance(7)),
-                "with seven dream counters on it"
-        ));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.DREAM.createInstance(7)));
 
         // Remove a dream counter from Rasputin: Add {C}.
         this.addAbility(new SimpleManaAbility(

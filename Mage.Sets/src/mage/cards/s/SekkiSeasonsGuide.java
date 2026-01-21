@@ -1,16 +1,14 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -22,6 +20,8 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SpiritToken;
 import mage.target.common.TargetSacrifice;
 
+import java.util.UUID;
+
 /**
  *
  * @author LevelX2
@@ -31,7 +31,7 @@ public final class SekkiSeasonsGuide extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.SPIRIT, "Spirits");
 
     public SekkiSeasonsGuide(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}{G}{G}");
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
 
@@ -39,7 +39,7 @@ public final class SekkiSeasonsGuide extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Sekki, Seasons' Guide enters the battlefield with eight +1/+1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(8)), "with eight +1/+1 counters on it"));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.P1P1.createInstance(8)));
 
         // If damage would be dealt to Sekki, prevent that damage, remove that many +1/+1 counters from Sekki, and create that many 1/1 colorless Spirit creature tokens.
         this.addAbility(new SimpleStaticAbility(new SekkiSeasonsGuideEffect()));

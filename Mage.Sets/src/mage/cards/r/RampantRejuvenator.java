@@ -4,9 +4,8 @@ import mage.MageInt;
 import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
@@ -38,9 +37,7 @@ public final class RampantRejuvenator extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Rampant Rejuvenator enters the battlefield with two +1/+1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(
-                CounterType.P1P1.createInstance(2)
-        ), "with two +1/+1 counters on it"));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.P1P1.createInstance(2)));
 
         // When Rampant Rejuvenator dies, search your library for up to X basic land cards, where X is Rampant Rejuvenator's power, put them onto the battlefield, then shuffle.
         this.addAbility(new DiesSourceTriggeredAbility(new RampantRejuvenatorEffect()));

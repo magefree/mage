@@ -2,7 +2,8 @@ package mage.cards.e;
 
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.*;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
@@ -33,10 +34,7 @@ public class EvolvingAdaptive extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Evolving Adaptive enters the battlefield with an oil counter on it.
-        this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.OIL.createInstance()),
-                "with an oil counter on it"
-        ));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.OIL.createInstance()));
 
         // Evolving Adaptive gets +1/+1 for each oil counter on it.
         DynamicValue oilCounters = new CountersSourceCount(CounterType.OIL);

@@ -3,14 +3,13 @@ package mage.cards.z;
 import mage.MageInt;
 import mage.MageItem;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PutSourceCountersOnTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -49,10 +48,7 @@ public final class ZackFair extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Zack Fair enters with a +1/+1 counter on it.
-        this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                "with a +1/+1 counter on it"
-        ));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.P1P1.createInstance()));
 
         // {1}, Sacrifice Zack Fair: Target creature you control gains indestructible until end of turn. Put Zack Fair's counters on that creature and attach an Equipment that was attached to Zack Fair to that creature.
         Ability ability = new SimpleActivatedAbility(

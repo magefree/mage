@@ -3,9 +3,8 @@ package mage.cards.m;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -44,10 +43,7 @@ public final class MagnanimousMagistrate extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Magnanimous Magistrate enters the battlefield with five reprieve counters on it.
-        this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.REPRIEVE.createInstance(5)),
-                "with five reprieve counters on it"
-        ));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.REPRIEVE.createInstance(5)));
 
         // Whenever another nontoken creature you control dies, if its mana value was 1 or greater, you may remove that many reprieve counters from Magnanimous Magistrate. If you do, return that card to the battlefield under its owner's control.
         this.addAbility(new DiesCreatureTriggeredAbility(new MagnanimousMagistrateEffect(), false, filter));

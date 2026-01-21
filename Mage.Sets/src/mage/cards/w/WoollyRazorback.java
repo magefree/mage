@@ -4,14 +4,13 @@ package mage.cards.w;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BlocksSourceTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.decorator.ConditionalReplacementEffect;
 import mage.abilities.effects.common.PreventCombatDamageBySourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
@@ -19,7 +18,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 
 import java.util.UUID;
@@ -37,8 +35,7 @@ public final class WoollyRazorback extends CardImpl {
         this.toughness = new MageInt(7);
 
         // Woolly Razorback enters the battlefield with three ice counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.ICE.createInstance(3)),
-                "with three ice counters on it"));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.ICE.createInstance(3)));
         // As long as Woolly Razorback has an ice counter on it, prevent all combat damage it would deal and it has defender.
         ConditionalReplacementEffect effect = new ConditionalReplacementEffect(new PreventCombatDamageBySourceEffect(Duration.WhileOnBattlefield),
                 new SourceHasCounterCondition(CounterType.ICE));

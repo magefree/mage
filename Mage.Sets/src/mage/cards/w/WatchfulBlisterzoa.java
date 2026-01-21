@@ -2,11 +2,10 @@ package mage.cards.w;
 
 import mage.MageInt;
 import mage.abilities.common.DiesSourceTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -35,10 +34,7 @@ public final class WatchfulBlisterzoa extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Watchful Blisterzoa enters the battlefield with an oil counter on it.
-        this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.OIL.createInstance()),
-                "with an oil counter on it"
-        ));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.OIL.createInstance()));
 
         // When Watchful Blisterzoa dies, draw cards equal to the number of oil counters on it.
         this.addAbility(new DiesSourceTriggeredAbility(new DrawCardSourceControllerEffect(xValue)

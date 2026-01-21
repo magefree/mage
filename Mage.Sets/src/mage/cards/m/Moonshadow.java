@@ -3,8 +3,7 @@ package mage.cards.m;
 import mage.MageInt;
 import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.Card;
@@ -38,10 +37,7 @@ public final class Moonshadow extends CardImpl {
         this.addAbility(new MenaceAbility());
 
         // This creature enters with six -1/-1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.M1M1.createInstance(6)),
-                "with six -1/-1 counters on it"
-        ));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.M1M1.createInstance(6)));
 
         // Whenever one or more permanent cards are put into your graveyard from anywhere while this creature has a -1/-1 counter on it, remove a -1/-1 counter from this creature.
         this.addAbility(new MoonshadowTriggeredAbility());

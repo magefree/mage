@@ -3,18 +3,20 @@ package mage.cards.o;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BecomesTappedAttachedTriggeredAbility;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DamageAttachedControllerEffect;
 import mage.abilities.effects.common.DestroyAttachedToEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.meta.OrTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -32,7 +34,7 @@ public final class OrcishMine extends CardImpl {
 
     public OrcishMine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{R}");
-        
+
         this.subtype.add(SubType.AURA);
 
         // Enchant land
@@ -43,7 +45,7 @@ public final class OrcishMine extends CardImpl {
         this.addAbility(ability);
 
         // Orcish Mine enters the battlefield with three ore counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.ORE.createInstance(3)), "with three ore counters on it"));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.ORE.createInstance(3)));
 
         // At the beginning of your upkeep or whenever enchanted land becomes tapped, remove an ore counter from Orcish Mine.
         this.addAbility(new OrTriggeredAbility(Zone.BATTLEFIELD, new RemoveCounterSourceEffect(CounterType.ORE.createInstance()),

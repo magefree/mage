@@ -1,7 +1,7 @@
 package mage.cards.m;
 
 import mage.abilities.common.DiesAttachedTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
@@ -30,10 +30,7 @@ public final class MaleficScythe extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Malefic Scythe enters the battlefield with a soul counter on it.
-        this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.SOUL.createInstance(1)),
-                "with a soul counter on it"
-        ));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.SOUL.createInstance(1)));
 
         // Equipped creature gets +1/+1 for each soul counter on Malefic Scythe.
         this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(xValue, xValue, Duration.WhileOnBattlefield)));
