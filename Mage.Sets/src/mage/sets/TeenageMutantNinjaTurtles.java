@@ -37,6 +37,7 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 254, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Island", 311, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Kitsune's Technique", 42, Rarity.RARE, mage.cards.k.KitsunesTechnique.class));
+        cards.add(new SetCardInfo("Kitsune, Dragon's Daughter", 41, Rarity.RARE, mage.cards.k.KitsuneDragonsDaughter.class));
         cards.add(new SetCardInfo("Krang, Master Mind", 43, Rarity.RARE, mage.cards.k.KrangMasterMind.class));
         cards.add(new SetCardInfo("Krang, Utrom Warlord", 175, Rarity.MYTHIC, mage.cards.k.KrangUtromWarlord.class));
         cards.add(new SetCardInfo("Leader's Talent", 13, Rarity.RARE, mage.cards.l.LeadersTalent.class));
