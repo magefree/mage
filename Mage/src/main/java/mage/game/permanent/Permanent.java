@@ -240,17 +240,24 @@ public interface Permanent extends Card, Controllable {
 
     String getValue(GameState state);
 
+    // TODO: remove all in favor of the originalId ones?
+    Ability addAbility(Ability ability, UUID sourceId, Game game);
+
+    // TODO: remove all in favor of the originalId ones?
+    Ability addAbility(Ability ability, UUID sourceId, Game game, boolean fromExistingObject);
+
     /**
      * Add abilities to the permanent, can be used in effects
      *
      * @param ability
-     * @param sourceId can be null
+     * @param originalId set the originalId for the ability's copy.
+     * @param sourceId   can be null
      * @param game
      * @return can be null for exists abilities
      */
-    Ability addAbility(Ability ability, UUID sourceId, Game game);
+    Ability addAbility(Ability ability, UUID originalId, UUID sourceId, Game game);
 
-    Ability addAbility(Ability ability, UUID sourceId, Game game, boolean fromExistingObject);
+    Ability addAbility(Ability ability, UUID originalId, UUID sourceId, Game game, boolean fromExistingObject);
 
     void removeAllAbilities(UUID sourceId, Game game);
 

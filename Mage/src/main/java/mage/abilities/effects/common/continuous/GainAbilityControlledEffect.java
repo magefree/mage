@@ -1,5 +1,6 @@
 package mage.abilities.effects.common.continuous;
 
+import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.CompoundAbility;
@@ -13,48 +14,58 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
-import java.util.Iterator;
+import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
  */
 public class GainAbilityControlledEffect extends ContinuousEffectImpl {
 
-    protected CompoundAbility ability;
+    protected CompoundAbility abilities;
     protected boolean excludeSource;
     protected FilterPermanent filter;
     protected boolean forceQuotes = false;
     protected boolean durationRuleAtStart = false; // put duration rule to the start of the rules instead end
+    protected Map<MageObjectReference, List<UUID>> originalIds = new HashMap<>(); // keep consistent individual originalId of gained ability for each affected permanent.
+    protected UUID lastSourceOriginalId; // remember the original id for the source giving the ability. If it changes, originalIds need to be fresh.
+    protected int lastSourceZcc; // remember the source zcc giving the ability. If it changes, originalIds need to be fresh.
 
     public GainAbilityControlledEffect(Ability ability, Duration duration, FilterPermanent filter) {
         this(ability, duration, filter, false);
     }
 
-    public GainAbilityControlledEffect(CompoundAbility ability, Duration duration, FilterPermanent filter) {
-        this(ability, duration, filter, false);
+    public GainAbilityControlledEffect(CompoundAbility abilities, Duration duration, FilterPermanent filter) {
+        this(abilities, duration, filter, false);
     }
 
     public GainAbilityControlledEffect(Ability ability, Duration duration, FilterPermanent filter, boolean excludeSource) {
         this(new CompoundAbility(ability), duration, filter, excludeSource);
     }
 
-    public GainAbilityControlledEffect(CompoundAbility ability, Duration duration, FilterPermanent filter, boolean excludeSource) {
+    public GainAbilityControlledEffect(CompoundAbility abilities, Duration duration, FilterPermanent filter, boolean excludeSource) {
         super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-        this.ability = ability;
+        this.abilities = abilities;
         this.filter = filter;
         this.excludeSource = excludeSource;
         setText();
 
-        this.generateGainAbilityDependencies(ability, filter);
+        this.generateGainAbilityDependencies(abilities, filter);
     }
 
     protected GainAbilityControlledEffect(final GainAbilityControlledEffect effect) {
         super(effect);
-        this.ability = effect.ability.copy();
+        this.abilities = effect.abilities.copy();
         this.filter = effect.filter.copy();
         this.excludeSource = effect.excludeSource;
         this.forceQuotes = effect.forceQuotes;
         this.durationRuleAtStart = effect.durationRuleAtStart;
+        for (MageObjectReference mor : effect.originalIds.keySet()) {
+            List<UUID> array = new ArrayList<>();
+            array.addAll(effect.originalIds.get(mor));
+            this.originalIds.put(mor, array);
+        }
+        this.lastSourceOriginalId = effect.lastSourceOriginalId;
+        this.lastSourceZcc = effect.lastSourceZcc;
     }
 
     @Override
@@ -75,14 +86,44 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl {
         return new GainAbilityControlledEffect(this);
     }
 
+    /**
+     * OriginalIds for the copied abilities for a given permanent need to stay consistent each time the effect apply.
+     * This method attempts to retrieved stored originalIds, and if not found, create new ones.
+     */
+    private List<UUID> getOriginalIds(MageObjectReference permMOR, Ability source, Game game) {
+        UUID sourceOriginalId = source.getOriginalId();
+        MageObject sourceObject = source.getSourceObject(game);
+        int sourceZcc = sourceObject == null ? -1 : sourceObject.getZoneChangeCounter(game);
+        //System.out.println(sourceOriginalId + " " + sourceZcc);
+        if (!sourceOriginalId.equals(lastSourceOriginalId) || sourceZcc != lastSourceZcc) {
+            // The source of the ability has changed, discarding outdated originalIds
+            originalIds.clear();
+            lastSourceOriginalId = sourceOriginalId;
+            lastSourceZcc = sourceZcc;
+        }
+        if (originalIds.containsKey(permMOR)) {
+            return originalIds.get(permMOR);
+        }
+        List<UUID> newOriginalIds = new ArrayList<>();
+        for (int i = 0; i < abilities.size(); ++i) {
+            newOriginalIds.add(UUID.randomUUID());
+        }
+        originalIds.put(permMOR, newOriginalIds);
+        return newOriginalIds;
+    }
+
     @Override
     public boolean apply(Game game, Ability source) {
         if (getAffectedObjectsSet()) {
             for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext(); ) { // filter may not be used again, because object can have changed filter relevant attributes but still geets boost
-                Permanent perm = it.next().getPermanentOrLKIBattlefield(game); //LKI is neccessary for "dies triggered abilities" to work given to permanets  (e.g. Showstopper)
+                MageObjectReference mor = it.next();
+                Permanent perm = mor.getPermanentOrLKIBattlefield(game); //LKI is necessary for "dies triggered abilities" to work given to permanets  (e.g. Showstopper)
                 if (perm != null) {
-                    for (Ability abilityToAdd : ability) {
-                        perm.addAbility(abilityToAdd, source.getSourceId(), game);
+                    List<UUID> originalIds = getOriginalIds(mor, source, game);
+                    for (int i = 0; i < abilities.size(); ++i) {
+                        Ability abilityToAdd = abilities.get(i);
+                        UUID originalId = originalIds.get(i);
+                        perm.addAbility(abilityToAdd, originalId, source.getSourceId(), game);
                     }
                 } else {
                     it.remove();
@@ -95,21 +136,16 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl {
             for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                 if (perm.isControlledBy(source.getControllerId())
                         && !(excludeSource && perm.getId().equals(source.getSourceId()))) {
-                    for (Ability abilityToAdd : ability) {
-                        perm.addAbility(abilityToAdd, source.getSourceId(), game);
+                    List<UUID> originalIds = getOriginalIds(new MageObjectReference(perm, game), source, game);
+                    for (int i = 0; i < abilities.size(); ++i) {
+                        Ability abilityToAdd = abilities.get(i);
+                        UUID originalId = originalIds.get(i);
+                        perm.addAbility(abilityToAdd, originalId, source.getSourceId(), game);
                     }
                 }
             }
         }
         return true;
-    }
-
-    public void setAbility(Ability ability) {
-        this.ability = new CompoundAbility(ability);
-    }
-
-    public Ability getFirstAbility() {
-        return ability.get(0);
     }
 
     private void setText() {
@@ -120,7 +156,7 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl {
         if (excludeSource) {
             sb.append("other ");
         }
-        String gainedAbility = CardUtil.stripReminderText(ability.getRule());
+        String gainedAbility = CardUtil.stripReminderText(abilities.getRule());
         sb.append(filter.getMessage());
         if (!filter.getMessage().contains("you control")) {
             sb.append(" you control");
