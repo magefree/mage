@@ -29,6 +29,10 @@ public class FilterPermanent extends FilterObject<Permanent> implements FilterIn
         super(name);
     }
 
+    public FilterPermanent(SubType subtype) {
+        this(subtype, subtype.getDescription());
+    }
+
     public FilterPermanent(SubType subtype, String name) {
         super(name);
         this.add(subtype.getPredicate());

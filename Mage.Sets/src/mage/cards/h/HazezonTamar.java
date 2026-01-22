@@ -1,7 +1,5 @@
-
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -19,19 +17,20 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.token.SandWarriorToken;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class HazezonTamar extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Sand Warriors");
+    private static final FilterPermanent filter = new FilterPermanent("Sand Warriors");
 
     static {
         filter.add(SubType.SAND.getPredicate());
@@ -49,6 +48,7 @@ public final class HazezonTamar extends CardImpl {
 
         // When Hazezon Tamar enters the battlefield, create X 1/1 Sand Warrior creature tokens that are red, green, and white at the beginning of your next upkeep, where X is the number of lands you control at that time.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new HazezonTamarEntersEffect(), false));
+
         // When Hazezon leaves the battlefield, exile all Sand Warriors.
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new ExileAllEffect(filter), false));
     }

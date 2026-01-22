@@ -1,7 +1,5 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -11,25 +9,21 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author Plopman
  */
 public final class DwarvenDemolitionTeam extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Wall");
-    
-    static{
-        filter.add(SubType.WALL.getPredicate());
-    }
-    
+    private static final FilterPermanent filter = new FilterCreaturePermanent(SubType.WALL, "Wall");
+
     public DwarvenDemolitionTeam(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.subtype.add(SubType.DWARF);
 
         this.power = new MageInt(1);
