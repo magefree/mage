@@ -5,7 +5,8 @@ import mage.MageInt;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
+import mage.filter.common.FilterNonlandPermanent;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.EnteredThisTurnPredicate;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
@@ -20,13 +21,12 @@ import mage.constants.CardType;
  */
 public final class RenetTemporalApprentice extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("nonland permanent that entered this turn");
+    private static final FilterPermanent filter = new FilterNonlandPermanent("nonland permanent that entered this turn");
 
     static {
-        filter.add(Predicates.not(CardType.LAND.getPredicate()));
+        filter.add(AnotherPredicate.instance);
         filter.add(EnteredThisTurnPredicate.instance);
     }
-
 
     public RenetTemporalApprentice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
