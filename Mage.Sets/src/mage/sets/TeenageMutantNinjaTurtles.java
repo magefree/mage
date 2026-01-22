@@ -77,6 +77,7 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("Super Shredder", 83, Rarity.MYTHIC, mage.cards.s.SuperShredder.class));
         cards.add(new SetCardInfo("Swamp", 255, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 312, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Technodrome", 179, Rarity.MYTHIC, mage.cards.t.Technodrome.class));
         cards.add(new SetCardInfo("The Last Ronin", 154, Rarity.MYTHIC, mage.cards.t.TheLastRonin.class));
         cards.add(new SetCardInfo("The Ooze", 177, Rarity.RARE, mage.cards.t.TheOoze.class));
         cards.add(new SetCardInfo("Tokka & Rahzar, Terrible Twos", 171, Rarity.RARE, mage.cards.t.TokkaAndRahzarTerribleTwos.class));
