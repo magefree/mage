@@ -11,7 +11,7 @@ import mage.target.TargetPermanent;
 import mage.watchers.common.CrewedVehicleWatcher;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.condition.common.SourceHasSubtypeCondition;
+import mage.abilities.condition.common.TargetHasSubtypeCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DoubleCountersTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -43,9 +43,11 @@ public final class TurtleVan extends CardImpl {
         Ability ability = new AttacksTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
         ability.addTarget(new TargetPermanent(filter));
         ability.addEffect(new ConditionalOneShotEffect(
-            new DoubleCountersTargetEffect(CounterType.P1P1).setText(", then double the number of +1/+1 counters on it"),
-            new SourceHasSubtypeCondition(SubType.MUTANT, SubType.NINJA, SubType.TURTLE)
-        ).concatBy("Then"));
+            new DoubleCountersTargetEffect(CounterType.P1P1),
+            new TargetHasSubtypeCondition(SubType.MUTANT, SubType.NINJA, SubType.TURTLE),
+            "whenever this Vehicle attacks, put a +1/+1 counter on target creature that crewed it this turn. " +
+            "Then if that creature is a Mutant, Ninja, or Turtle, double the number of +1/+1 counters on it"
+        ));
         this.addAbility(ability, new CrewedVehicleWatcher());
 
         // Crew 1
