@@ -29,6 +29,7 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("Casey Jones, Vigilante", 88, Rarity.RARE, mage.cards.c.CaseyJonesVigilante.class));
         cards.add(new SetCardInfo("Chrome Dome", 172, Rarity.RARE, mage.cards.c.ChromeDome.class));
         cards.add(new SetCardInfo("Cool but Rude", 89, Rarity.RARE, mage.cards.c.CoolButRude.class));
+        cards.add(new SetCardInfo("Dark Leo & Shredder", 142, Rarity.MYTHIC, mage.cards.d.DarkLeoAndShredder.class));
         cards.add(new SetCardInfo("Does Machines", 34, Rarity.RARE, mage.cards.d.DoesMachines.class));
         cards.add(new SetCardInfo("Donatello, Gadget Master", 35, Rarity.RARE, mage.cards.d.DonatelloGadgetMaster.class));
         cards.add(new SetCardInfo("Forest", 257, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
