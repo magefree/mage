@@ -84,6 +84,7 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("Tokka & Rahzar, Terrible Twos", 171, Rarity.RARE, mage.cards.t.TokkaAndRahzarTerribleTwos.class));
         cards.add(new SetCardInfo("Transdimensional Bovine", 134, Rarity.RARE, mage.cards.t.TransdimensionalBovine.class));
         cards.add(new SetCardInfo("Triceraton Commander", 25, Rarity.MYTHIC, mage.cards.t.TriceratonCommander.class));
+        cards.add(new SetCardInfo("Turncoat Kunoichi", 26, Rarity.RARE, mage.cards.t.TurncoatKunoichi.class));
         cards.add(new SetCardInfo("Turtle Power!", 135, Rarity.RARE, mage.cards.t.TurtlePower.class));
         cards.add(new SetCardInfo("Turtle Van", 181, Rarity.RARE, mage.cards.t.TurtleVan.class));
         cards.add(new SetCardInfo("Weather Maker", 182, Rarity.RARE, mage.cards.w.WeatherMaker.class));
