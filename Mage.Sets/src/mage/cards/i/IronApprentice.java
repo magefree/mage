@@ -5,15 +5,12 @@ import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.condition.common.SourceHasCountersCondition;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.PutSavedPermanentCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
@@ -34,9 +31,8 @@ public final class IronApprentice extends CardImpl {
         this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.P1P1.createInstance(1)));
 
         // When Iron Apprentice dies, if it had counters on it, put those counters on target creature you control.
-        Ability ability = new DiesSourceTriggeredAbility(new IronApprenticeEffect())
-                .withTriggerCondition(SourceHasCountersCondition.instance)
-                .setTriggerPhrase("When {this} dies, if it had counters on it, ");
+        Ability ability = new DiesSourceTriggeredAbility(new PutSavedPermanentCountersTargetEffect("permanentLeftBattlefield"))
+                .withTriggerCondition(SourceHasCountersCondition.instance);
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }
@@ -48,37 +44,5 @@ public final class IronApprentice extends CardImpl {
     @Override
     public IronApprentice copy() {
         return new IronApprentice(this);
-    }
-}
-
-class IronApprenticeEffect extends OneShotEffect {
-
-    IronApprenticeEffect() {
-        super(Outcome.Benefit);
-        staticText = "put those counters on target creature you control";
-    }
-
-    private IronApprenticeEffect(final IronApprenticeEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public IronApprenticeEffect copy() {
-        return new IronApprenticeEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = (Permanent) getValue("permanentLeftBattlefield");
-        Permanent creature = game.getPermanent(source.getFirstTarget());
-        if (permanent == null || creature == null) {
-            return false;
-        }
-        permanent
-                .getCounters(game)
-                .copy()
-                .values()
-                .forEach(counter -> creature.addCounters(counter, source, game));
-        return true;
     }
 }

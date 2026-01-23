@@ -1,7 +1,6 @@
 
 package mage.abilities.common;
 
-import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.SetTargetPointer;
@@ -14,7 +13,6 @@ import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author Styxo
  */
 public class LeavesBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
@@ -61,25 +59,21 @@ public class LeavesBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
-            UUID targetId = event.getTargetId();
-            Permanent permanent = game.getPermanentOrLKIBattlefield(targetId);
-            if (filter.match(permanent, getControllerId(), this, game)) {
-                if (setTargetPointer != SetTargetPointer.NONE) {
-                    for (Effect effect : this.getEffects()) {
-                        switch (setTargetPointer) {
-                            case PERMANENT:
-                                effect.setTargetPointer(new FixedTarget(permanent, game));
-                                break;
-                            case PLAYER:
-                                effect.setTargetPointer(new FixedTarget(permanent.getControllerId()));
-                                break;
-                        }
-                    }
-                }
-                return true;
-            }
+        if (zEvent.getFromZone() != Zone.BATTLEFIELD) {
+            return false;
         }
-        return false;
+        Permanent permanent = zEvent.getTarget();
+        if (!filter.match(permanent, getControllerId(), this, game)) {
+            return false;
+        }
+        this.getAllEffects().setValue("permanentLeftBattlefield", permanent);
+        switch (setTargetPointer) {
+            case PERMANENT:
+                this.getAllEffects().setTargetPointer(new FixedTarget(permanent, game));
+                break;
+            case PLAYER:
+                this.getAllEffects().setTargetPointer(new FixedTarget(permanent.getControllerId()));
+        }
+        return true;
     }
 }
