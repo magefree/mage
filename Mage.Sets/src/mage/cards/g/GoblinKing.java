@@ -1,26 +1,26 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.MountainwalkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.Zone;
-import mage.filter.StaticFilters;
+import mage.constants.SubType;
+import mage.filter.FilterPermanent;
+
+import java.util.UUID;
 
 /**
  * @author Loki
  */
 public final class GoblinKing extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterPermanent(SubType.GOBLIN, "Goblins");
 
     public GoblinKing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
@@ -29,13 +29,13 @@ public final class GoblinKing extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Other Goblin creatures get +1/+1 and have mountainwalk.
-        Effect effect = new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_GOBLINS, true);
-        effect.setText("Other Goblins get +1/+1");
-        Ability ability = new SimpleStaticAbility(effect);
-        effect = new GainAbilityAllEffect(new MountainwalkAbility(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_GOBLINS, true);
-        effect.setText("and have mountainwalk");
-        ability.addEffect(effect);
+        // Other Goblins get +1/+1 and have mountainwalk.
+        Ability ability = new SimpleStaticAbility(new BoostAllEffect(
+                1, 1, Duration.WhileOnBattlefield, filter, true
+        ));
+        ability.addEffect(new GainAbilityAllEffect(
+                new MountainwalkAbility(), Duration.WhileOnBattlefield, filter, true
+        ).setText("and have mountainwalk"));
         this.addAbility(ability);
     }
 

@@ -11,7 +11,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.target.common.TargetCardWithDifferentNameInLibrary;
@@ -24,7 +23,7 @@ import java.util.UUID;
 public final class Tiamat extends CardImpl {
 
     private static final FilterCard filter
-            = new FilterCreatureCard("Dragon cards not named Tiamat that each have different names");
+            = new FilterCard("Dragon cards not named Tiamat that each have different names");
 
     static {
         filter.add(SubType.DRAGON.getPredicate());

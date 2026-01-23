@@ -2,8 +2,8 @@ package mage.cards.r;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.OneOrMoreCombatDamagePlayerTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.OneOrMoreCombatDamagePlayerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
@@ -11,7 +11,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.token.TreasureToken;
 import mage.players.Player;
@@ -24,7 +24,7 @@ import java.util.UUID;
  */
 public final class RamirezDePietroPillager extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.PIRATE, "Pirates");
+    private static final FilterPermanent filter = new FilterPermanent(SubType.PIRATE, "Pirates");
 
     public RamirezDePietroPillager(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{B}");

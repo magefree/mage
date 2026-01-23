@@ -1,31 +1,27 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.effects.Effect;
 import mage.abilities.keyword.DeathtouchAbility;
-import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.FlashAbility;
+import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author Tsirides
  */
 public final class BlacklanceParagon extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.KNIGHT, "Knight");
+    private static final FilterPermanent filter = new FilterPermanent(SubType.KNIGHT);
 
     public BlacklanceParagon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
@@ -38,17 +34,13 @@ public final class BlacklanceParagon extends CardImpl {
         // Flash
         this.addAbility(FlashAbility.getInstance());
 
-     
         // When Blacklance Paragon enters the battlefield, target Knight gains deathtouch and lifelink until end of turn. 
-        Effect effect = new GainAbilityTargetEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("target Knight gains deathtouch");
-        Ability ability = new EntersBattlefieldTriggeredAbility(effect);
-        effect = new GainAbilityTargetEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("and lifelink until end of turn");
-        ability.addEffect(effect);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new GainAbilityTargetEffect(DeathtouchAbility.getInstance())
+                .setText("target Knight gains deathtouch"));
+        ability.addEffect(new GainAbilityTargetEffect(LifelinkAbility.getInstance())
+                .setText("and lifelink until end of turn"));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
-        
     }
 
     private BlacklanceParagon(final BlacklanceParagon card) {

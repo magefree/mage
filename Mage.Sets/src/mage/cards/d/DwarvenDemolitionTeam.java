@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -20,7 +19,7 @@ import java.util.UUID;
  */
 public final class DwarvenDemolitionTeam extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent(SubType.WALL, "Wall");
+    private static final FilterPermanent filter = new FilterPermanent(SubType.WALL);
 
     public DwarvenDemolitionTeam(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
