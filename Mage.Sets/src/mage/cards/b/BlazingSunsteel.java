@@ -98,7 +98,7 @@ class BlazingSunsteelTriggeredAbility extends TriggeredAbilityImpl implements Ba
 class BlazingSunsteelEffect extends OneShotEffect {
 
     BlazingSunsteelEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.Damage);
     }
 
     private BlazingSunsteelEffect(final BlazingSunsteelEffect effect) {
