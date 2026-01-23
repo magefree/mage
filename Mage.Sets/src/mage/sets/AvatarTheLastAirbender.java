@@ -18,7 +18,6 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
     private AvatarTheLastAirbender() {
         super("Avatar: The Last Airbender", "TLA", ExpansionSet.buildDate(2025, 11, 21), SetType.EXPANSION);
         this.blockName = "Avatar: The Last Airbender"; // for sorting in GUI
-        this.rotationSet = true;
         this.hasBasicLands = true;
 
         this.enablePlayBooster(358);

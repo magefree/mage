@@ -18,7 +18,6 @@ public final class AvatarTheLastAirbenderEternal extends ExpansionSet {
     private AvatarTheLastAirbenderEternal() {
         super("Avatar: The Last Airbender Eternal", "TLE", ExpansionSet.buildDate(2025, 11, 21), SetType.SUPPLEMENTAL);
         this.blockName = "Avatar: The Last Airbender"; // for sorting in GUI
-        this.rotationSet = true;
         this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Aang and Katara", 69, Rarity.RARE, mage.cards.a.AangAndKatara.class));
