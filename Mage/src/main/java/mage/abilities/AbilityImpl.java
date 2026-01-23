@@ -648,7 +648,12 @@ public abstract class AbilityImpl implements Ability {
             if (!(variableCost instanceof VariableManaCost) && !((Cost) variableCost).isPaid()) {
                 int xValue = variableCost.announceXValue(this, game);
                 Cost fixedCost = variableCost.getFixedCostsFromAnnouncedValue(xValue);
-                addCost(fixedCost);
+                int index = getCosts().indexOf(variableCost);
+                if (index == -1) {
+                    addCost(fixedCost);
+                } else {
+                    addCost(fixedCost, index + 1);
+                }
                 // set the xcosts to paid
                 variableCost.setAmount(xValue, xValue, false);
                 ((Cost) variableCost).setPaid();
@@ -1113,6 +1118,31 @@ public abstract class AbilityImpl implements Ability {
                 manaCostsToPay.add((ManaCost) cost);
             } else {
                 costs.add(cost);
+            }
+        }
+    }
+
+    public void addCost(Cost cost, int index) {
+        if (cost == null) {
+            return;
+        }
+        if (cost instanceof Costs) {
+            // as list of costs
+            Costs<Cost> list = (Costs<Cost>) cost;
+            for (Cost single : list) {
+                addCost(single, index);
+            }
+        } else {
+            // as single cost
+            if (cost instanceof ManaCost) {
+                manaCosts.add((ManaCost) cost);
+                manaCostsToPay.add((ManaCost) cost);
+            } else {
+                if (index > costs.size()) {
+                    costs.add(cost);
+                } else {
+                    costs.add(index, cost);
+                }
             }
         }
     }
