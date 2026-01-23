@@ -94,6 +94,7 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("Turncoat Kunoichi", 26, Rarity.RARE, mage.cards.t.TurncoatKunoichi.class));
         cards.add(new SetCardInfo("Turtle Power!", 135, Rarity.RARE, mage.cards.t.TurtlePower.class));
         cards.add(new SetCardInfo("Turtle Van", 181, Rarity.RARE, mage.cards.t.TurtleVan.class));
+        cards.add(new SetCardInfo("Turtles in Time", 55, Rarity.MYTHIC, mage.cards.t.TurtlesInTime.class));
         cards.add(new SetCardInfo("Weather Maker", 182, Rarity.RARE, mage.cards.w.WeatherMaker.class));
     }
 }

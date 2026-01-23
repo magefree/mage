@@ -1,15 +1,16 @@
-package mage.cards.s;
+package mage.cards.t;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
-import mage.abilities.keyword.PlotAbility;
+import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -18,45 +19,46 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * @author Susucr
+ * @author TheElk801
  */
-public final class StepBetweenWorlds extends CardImpl {
+public final class TurtlesInTime extends CardImpl {
 
-    public StepBetweenWorlds(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
+    public TurtlesInTime(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{U}{U}");
 
-        // Each player may shuffle their hand and graveyard into their library. Each player who does draws seven cards. Exile Step Between Worlds.
-        this.getSpellAbility().addEffect(new StepBetweenWorldsEffect());
-        this.getSpellAbility().addEffect(new ExileSpellEffect());
+        // Return all creatures to their owners' hands. Each player may shuffle their hand and graveyard into their library, then each player who does draws seven cards.
+        this.getSpellAbility().addEffect(new ReturnToHandFromBattlefieldAllEffect(StaticFilters.FILTER_PERMANENT_CREATURES));
+        this.getSpellAbility().addEffect(new TurtlesInTimeEffect());
 
-        // Plot {4}{U}{U}
-        this.addAbility(new PlotAbility("{4}{U}{U}"));
+        // Exile Turtles in Time.
+        this.getSpellAbility().addEffect(new ExileSpellEffect().concatBy("<br>"));
     }
 
-    private StepBetweenWorlds(final StepBetweenWorlds card) {
+    private TurtlesInTime(final TurtlesInTime card) {
         super(card);
     }
 
     @Override
-    public StepBetweenWorlds copy() {
-        return new StepBetweenWorlds(this);
+    public TurtlesInTime copy() {
+        return new TurtlesInTime(this);
     }
 }
 
-class StepBetweenWorldsEffect extends OneShotEffect {
+class TurtlesInTimeEffect extends OneShotEffect {
 
-    StepBetweenWorldsEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "Each player may shuffle their hand and graveyard into their library. Each player who does draws seven cards";
+    TurtlesInTimeEffect() {
+        super(Outcome.Benefit);
+        staticText = "Each player may shuffle their hand and graveyard into their library, " +
+                "then each player who does draws seven cards";
     }
 
-    private StepBetweenWorldsEffect(final StepBetweenWorldsEffect effect) {
+    private TurtlesInTimeEffect(final TurtlesInTimeEffect effect) {
         super(effect);
     }
 
     @Override
-    public StepBetweenWorldsEffect copy() {
-        return new StepBetweenWorldsEffect(this);
+    public TurtlesInTimeEffect copy() {
+        return new TurtlesInTimeEffect(this);
     }
 
     @Override
