@@ -68,6 +68,7 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("Raphael's Technique", 105, Rarity.RARE, mage.cards.r.RaphaelsTechnique.class));
         cards.add(new SetCardInfo("Raphael, Ninja Destroyer", 102, Rarity.MYTHIC, mage.cards.r.RaphaelNinjaDestroyer.class));
         cards.add(new SetCardInfo("Raphael, the Nightwatcher", 103, Rarity.RARE, mage.cards.r.RaphaelTheNightwatcher.class));
+        cards.add(new SetCardInfo("Rat King, Verminister", 71, Rarity.RARE, mage.cards.r.RatKingVerminister.class));
         cards.add(new SetCardInfo("Ravenous Robots", 106, Rarity.RARE, mage.cards.r.RavenousRobots.class));
         cards.add(new SetCardInfo("Renet, Temporal Apprentice", 50, Rarity.RARE, mage.cards.r.RenetTemporalApprentice.class));
         cards.add(new SetCardInfo("Sally Pride, Lioness Leader", 24, Rarity.RARE, mage.cards.s.SallyPrideLionessLeader.class));
