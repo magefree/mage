@@ -86,7 +86,10 @@ public class VerifyCardDataTest {
 
     private static String FULL_ABILITIES_CHECK_SET_CODES = ""; // check ability text due mtgjson, can use multiple sets like MAT;CMD or * for all
     private static boolean CHECK_ONLY_ABILITIES_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
-    private static final boolean CHECK_COPYABLE_FIELDS = true; // disable for better verify test performance
+
+    // disable for better performance on verify checks
+    private static final boolean CHECK_COPYABLE_FIELDS = true;
+    private static final boolean CHECK_FILTER_FIELDS = true;
 
     // for automated local testing support
     static {
@@ -330,8 +333,12 @@ public class VerifyCardDataTest {
         checkWrongAbilitiesTextStart();
 
         int cardIndex = 0;
+        System.out.printf("verify cards loading...%n");
         List<Card> allCards = CardScanner.getAllCards();
         for (Card card : allCards) {
+            if (cardIndex % 10000 == 0) {
+                System.out.printf("verify cards checking: %d of %d%n", cardIndex, allCards.size());
+            }
             cardIndex++;
             if (card instanceof CardWithHalves) {
                 check(((CardWithHalves) card).getLeftHalfCard(), cardIndex);
@@ -343,6 +350,7 @@ public class VerifyCardDataTest {
                 check(card, cardIndex);
             }
         }
+        System.out.printf("verify cards done%n");
 
         checkWrongAbilitiesTextEnd();
 
@@ -1890,6 +1898,9 @@ public class VerifyCardDataTest {
             checkRarityAndBasicLands(card, ref);
             checkMissingAbilities(card, ref);
             checkWrongSymbolsInRules(card);
+            if (CHECK_FILTER_FIELDS) {
+                //checkWrongCreatureFilter(card); // TODO: enable after all creature filter fixes, see #14302, #7008
+            }
             if (CHECK_COPYABLE_FIELDS) {
                 checkCardCanBeCopied(card);
             }
@@ -2255,6 +2266,78 @@ public class VerifyCardDataTest {
                 || modes.stream().flatMap(mode -> mode.getEffects().stream()).anyMatch(effect -> recursiveTargetEffectCheck(effect, depth - 1));
     }
 
+    boolean recursiveCreatureFilterCheck(Card card, Object obj, int depth) {
+        if (depth < 0 || obj == null) {
+            return false;
+        }
+
+        if (obj instanceof Collection) {
+            return ((Collection) obj).stream().anyMatch(x -> recursiveCreatureFilterCheck(card, x, depth - 1));
+        }
+
+        if (obj instanceof Map) {
+            return ((Map) obj).values().stream().anyMatch(x -> recursiveCreatureFilterCheck(card, x, depth - 1));
+        }
+
+        // check filters only
+        if (obj instanceof Filter) {
+            boolean isCreatureInRules = card.getRules().stream()
+                    .map(s -> s.toLowerCase(Locale.ENGLISH))
+                    .anyMatch(s -> s.contains("creature"));
+
+            List<Predicate> list = new ArrayList<>();
+            Predicates.collectAllComponents(((Filter) obj).getPredicates(), ((Filter) obj).getExtraPredicates(), list);
+            boolean isCreatureInFilter = list.stream().anyMatch(p -> p.equals(CardType.CREATURE.getPredicate()));
+
+            return isCreatureInFilter && !isCreatureInRules;
+        }
+
+        List<Class<?>> fullClasses = new ArrayList<>();
+        Class<?> current = obj.getClass();
+        while (current != null && current != Object.class) {
+            fullClasses.add(current);
+            current = current.getSuperclass();
+        }
+
+        return fullClasses.stream()
+                .flatMap(clazz -> Arrays.stream(clazz.getDeclaredFields()))
+                .filter(f -> isCheckableField(f, true))
+                .anyMatch(f -> {
+                    f.setAccessible(true);
+                    try {
+                        return recursiveCreatureFilterCheck(card, f.get(obj), depth - 1);
+                    } catch (IllegalAccessException ex) {
+                        throw new RuntimeException(ex); // Should never happen due to setAccessible
+                    }
+                });
+    }
+
+    private boolean isCheckableField(Field field, boolean ignoreStaticFields) {
+        // ignore static fields for better performance
+        // it's used anyway and will go to check (example: static filter added into effect)
+        if (ignoreStaticFields && Modifier.isStatic(field.getModifiers())) {
+            return false;
+        }
+
+        // keep collections
+        if (Collection.class.isAssignableFrom(field.getType()) || Map.class.isAssignableFrom(field.getType())) {
+            return true;
+        }
+
+        // ignore simple data
+        if (field.getType().isPrimitive()) {
+            return false;
+        }
+
+        // ignore default java types
+        if (field.getType().getPackage() != null && field.getType().getPackage().getName().startsWith("java.")) {
+            return false;
+        }
+
+        // all other fields can be checked by verify
+        return true;
+    }
+
     private void checkMissingAbilities(Card card, MtgJsonCard ref) {
         if (skipListHaveName(SKIP_LIST_MISSING_ABILITIES, card.getExpansionSetCode(), card.getName())) {
             return;
@@ -2570,6 +2653,17 @@ public class VerifyCardDataTest {
             if (rule.contains("&mdash ")) {
                 fail(card, "rules", "card's rules contains restricted test [&mdash ] instead [&mdash;]");
             }
+        }
+    }
+
+    /**
+     * Checking wrong usage of creature filter, see #14302, #7008
+     */
+    private void checkWrongCreatureFilter(Card card) {
+        // start with abilities, no need other card fields
+        // bigger depth - better results, but slower (~10 is good)
+        if (card.getAbilities().stream().anyMatch(ability -> recursiveCreatureFilterCheck(card, ability, 10))) {
+            fail(card, "filters", "wrong creature filter (must be permanent, not creature)");
         }
     }
 
