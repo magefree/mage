@@ -45,7 +45,6 @@ public final class TurtleVan extends CardImpl {
         ability.addEffect(new ConditionalOneShotEffect(
             new DoubleCountersTargetEffect(CounterType.P1P1),
             new TargetHasSubtypeCondition(SubType.MUTANT, SubType.NINJA, SubType.TURTLE),
-            "whenever this Vehicle attacks, put a +1/+1 counter on target creature that crewed it this turn. " +
             "Then if that creature is a Mutant, Ninja, or Turtle, double the number of +1/+1 counters on it"
         ));
         this.addAbility(ability, new CrewedVehicleWatcher());
