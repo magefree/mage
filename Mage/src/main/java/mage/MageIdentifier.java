@@ -40,6 +40,7 @@ public enum MageIdentifier {
     LockeTreasureHunterWatcher,
     TheFourthDoctorWatcher,
     AccessMazeWatcher,
+    MikeyAndDonWatcher,
 
     // ----------------------------//
     //       alternate casts       //
