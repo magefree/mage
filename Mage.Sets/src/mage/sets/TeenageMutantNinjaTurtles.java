@@ -56,6 +56,7 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("Michelangelo's Technique", 122, Rarity.RARE, mage.cards.m.MichelangelosTechnique.class));
         cards.add(new SetCardInfo("Michelangelo, Improviser", 119, Rarity.MYTHIC, mage.cards.m.MichelangeloImproviser.class));
         cards.add(new SetCardInfo("Michelangelo, Weirdness to 11", 121, Rarity.RARE, mage.cards.m.MichelangeloWeirdnessTo11.class));
+        cards.add(new SetCardInfo("Mikey & Don, Party Planners", 157, Rarity.RARE, mage.cards.m.MikeyAndDonPartyPlanners.class));
         cards.add(new SetCardInfo("Mikey & Leo, Chaos & Order", 158, Rarity.RARE, mage.cards.m.MikeyAndLeoChaosAndOrder.class));
         cards.add(new SetCardInfo("Mondo Gecko", 46, Rarity.MYTHIC, mage.cards.m.MondoGecko.class));
         cards.add(new SetCardInfo("Mountain", 256, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
