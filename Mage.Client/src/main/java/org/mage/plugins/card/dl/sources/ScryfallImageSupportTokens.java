@@ -1465,6 +1465,7 @@ public class ScryfallImageSupportTokens {
             put("CNS/Emblem Dack", "https://api.scryfall.com/cards/tcns/9/en?format=image");
             put("CNS/Demon", "https://api.scryfall.com/cards/tcns/2/en?format=image");
             put("CNS/Elephant", "https://api.scryfall.com/cards/tcns/5/en?format=image");
+            put("CNS/Ogre", "https://api.scryfall.com/cards/tcns/4/en?format=image");
             put("CNS/Spirit", "https://api.scryfall.com/cards/tcns/1/en?format=image");
             put("CNS/Squirrel", "https://api.scryfall.com/cards/tcns/6/en?format=image");
             put("CNS/Wolf", "https://api.scryfall.com/cards/tcns/7/en?format=image");
