@@ -5328,8 +5328,11 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public Cards millCards(int toMill, Ability source, Game game) {
+        if (toMill < 1) {
+            return new CardsImpl();
+        }
         GameEvent event = GameEvent.getEvent(GameEvent.EventType.MILL_CARDS, getId(), source, getId(), toMill);
-        if (game.replaceEvent(event)) {
+        if (game.replaceEvent(event) || event.getAmount() < 1) {
             return new CardsImpl();
         }
         Cards cards = new CardsImpl(this.getLibrary().getTopCards(game, event.getAmount()));
