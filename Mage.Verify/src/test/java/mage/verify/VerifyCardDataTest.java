@@ -91,6 +91,11 @@ public class VerifyCardDataTest {
     private static final boolean CHECK_COPYABLE_FIELDS = true;
     private static final boolean CHECK_FILTER_FIELDS = true;
 
+    // enable to do full audits of token data
+    // First task to tackle is all private tokens must be replaced by CreatureToken
+    // This will solve multiple errors for currently offending classes and minimise other subsequent fixes
+    private static final boolean CHECK_TOKEN_DATA_FULL = false;
+
     // for automated local testing support
     static {
         String val = System.getProperty("xmage.tests.verifyCheckSetCodes");
@@ -1463,31 +1468,34 @@ public class VerifyCardDataTest {
             }
         }
 
-        // CHECK: private class for inner tokens (no needs at all -- all private tokens must be replaced by CreatureToken)
-        // for (Class<? extends TokenImpl> tokenClass : privateTokens) {
-        //     String className = extractShortClass(tokenClass);
-        //     errorsList.add("Warning: no needs in private tokens, replace it with CreatureToken: " + className + " from " + tokenClass.getName());
-        // }
+        if (CHECK_TOKEN_DATA_FULL) {
+            // CHECK: private class for inner tokens (no needs at all -- all private tokens must be replaced by CreatureToken)
+            for (Class<? extends TokenImpl> tokenClass : privateTokens) {
+                String className = extractShortClass(tokenClass);
+                errorsList.add("Warning: no needs in private tokens, replace it with CreatureToken: " + className + " from " + tokenClass.getName());
+            }
 
-        // CHECK: all public tokens must have tok-data (private tokens uses for innner abilities -- no need images for it)
-        // for (Class<? extends TokenImpl> tokenClass : publicTokens) {
-        //     Token token = (Token) createNewObject(tokenClass);
-        //     if (token == null) {
-        //         // how-to fix:
-        //         // - create empty param
-        //         // - fix error in token's constructor
-        //         errorsList.add("Error: token must have default constructor with zero params: " + tokenClass.getName());
-        //     } else if (tokDataNamesIndex.getOrDefault(token.getName().replace(" Token", ""), "").isEmpty()) {
-        //         if (token instanceof CreatureToken || token instanceof XmageToken) {
-        //             // ignore custom token builders
-        //             continue;
-        //         }
-        //         // how-to fix:
-        //         // - public token must be downloadable, so tok-data must contain miss set
-        //         //   (also don't forget to add new set to scryfall download)
-        //         errorsList.add("Error: can't find data in tokens-database.txt for token: " + tokenClass.getName() + " -> " + token.getName());
-        //     }
-        // }
+
+            // CHECK: all public tokens must have tok-data (private tokens uses for innner abilities -- no need images for it)
+            for (Class<? extends TokenImpl> tokenClass : publicTokens) {
+                Token token = (Token) createNewObject(tokenClass);
+                if (token == null) {
+                    // how-to fix:
+                    // - create empty param
+                    // - fix error in token's constructor
+                    errorsList.add("Error: token must have default constructor with zero params: " + tokenClass.getName());
+                } else if (tokDataNamesIndex.getOrDefault(token.getName().replace(" Token", ""), "").isEmpty()) {
+                    if (token instanceof CreatureToken || token instanceof XmageToken) {
+                        // ignore custom token builders
+                        continue;
+                    }
+                    // how-to fix:
+                    // - public token must be downloadable, so tok-data must contain miss set
+                    //   (also don't forget to add new set to scryfall download)
+                    errorsList.add("Error: can't find data in tokens-database.txt for token: " + tokenClass.getName() + " -> " + token.getName());
+                }
+            }
+        }
 
         // 111.4. A spell or ability that creates a token sets both its name and its subtype(s).
         // If the spell or ability doesn’t specify the name of the token, its name is the same
@@ -1501,20 +1509,22 @@ public class VerifyCardDataTest {
             }
 
             // CHECK: tokens must have Token word in the name
-            // if (token.getDescription().startsWith(token.getName() + ", ")
-            //         || token.getDescription().contains("named " + token.getName())
-            //         || (token instanceof CreatureToken)
-            //         || (token instanceof XmageToken)) {
-            //     // ignore some names:
-            //     // - Boo, a legendary 1/1 red Hamster creature token with trample and haste
-            //     // - 1/1 green Insect creature token with flying named Butterfly
-            //     // - custom token builders
-            // } else {
-            //     if (!token.getName().endsWith("Token")) {
-            //         errorsList.add("Error: token's name must ends with Token: "
-            //                 + tokenClass.getName() + " - " + token.getName());
-            //     }
-            // }
+            if (CHECK_TOKEN_DATA_FULL) {
+                if (token.getDescription().startsWith(token.getName() + ", ")
+                        || token.getDescription().contains("named " + token.getName())
+                        || (token instanceof CreatureToken)
+                        || (token instanceof XmageToken)) {
+                    // ignore some names:
+                    // - Boo, a legendary 1/1 red Hamster creature token with trample and haste
+                    // - 1/1 green Insect creature token with flying named Butterfly
+                    // - custom token builders
+                } else {
+                    if (!token.getName().endsWith("Token")) {
+                        errorsList.add("Error: token's name must ends with Token: "
+                                + tokenClass.getName() + " - " + token.getName());
+                    }
+                }
+            }
 
             // CHECK: named tokens must not have Token in the name
             if (token.getDescription().contains("named") && token.getName().contains("Token")) {
