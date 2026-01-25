@@ -9,9 +9,9 @@ import mage.constants.SubType;
 /**
  * @author TheElk801
  */
-public final class AssassinToken2 extends TokenImpl {
+public final class AssassinDeathtouchToken extends TokenImpl {
 
-    public AssassinToken2() {
+    public AssassinDeathtouchToken() {
         super("Assassin Token", "1/1 black Assassin creature token with deathtouch and \"Whenever this creature deals damage to a planeswalker, destroy that planeswalker.\"");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
@@ -22,12 +22,11 @@ public final class AssassinToken2 extends TokenImpl {
         addAbility(new DestroyPlaneswalkerWhenDamagedTriggeredAbility());
     }
 
-    private AssassinToken2(final AssassinToken2 token) {
+    private AssassinDeathtouchToken(final AssassinDeathtouchToken token) {
         super(token);
     }
 
-    public AssassinToken2 copy() {
-        return new AssassinToken2(this);
+    public AssassinDeathtouchToken copy() {
+        return new AssassinDeathtouchToken(this);
     }
 }
-

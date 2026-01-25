@@ -1067,7 +1067,7 @@
 
 # WAR
 |TOK:WAR|Angel||AngelVigilanceToken|
-|TOK:WAR|Assassin||AssassinToken2|
+|TOK:WAR|Assassin||AssassinDeathtouchToken|
 |TOK:WAR|Citizen||PlanewideCelebrationToken|
 |TOK:WAR|Devil||DevilToken|
 |TOK:WAR|Dragon||DragonToken|
