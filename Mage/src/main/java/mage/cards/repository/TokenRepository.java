@@ -200,6 +200,12 @@ public enum TokenRepository {
                         }
                     }
 
+                    // type - unknown
+                    if (tokenType == null) {
+                        errorsList.add("Tokens database: unknown line format: " + line);
+                        continue;
+                    }
+
                     // OK
                     TokenInfo token = new TokenInfo(tokenType, tokenName, setCode, imageNumber, tokenClassName);
                     list.add(token);
