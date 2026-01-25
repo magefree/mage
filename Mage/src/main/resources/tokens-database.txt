@@ -1108,7 +1108,7 @@
 
 # M19
 |TOK:M19|Angel||AngelVigilanceToken|
-|TOK:M19|Avatar||AvatarToken2|
+|TOK:M19|Avatar||AvatarFlyingToken|
 |TOK:M19|Bat||BatToken|
 |TOK:M19|Beast||BeastToken|
 |TOK:M19|Cat||CatToken2|

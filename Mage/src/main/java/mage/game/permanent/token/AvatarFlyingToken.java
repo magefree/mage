@@ -5,9 +5,9 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-public final class AvatarToken2 extends TokenImpl {
+public final class AvatarFlyingToken extends TokenImpl {
 
-    public AvatarToken2() {
+    public AvatarFlyingToken() {
         super("Avatar Token", "4/4 white Avatar creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
@@ -17,11 +17,11 @@ public final class AvatarToken2 extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
     }
 
-    protected AvatarToken2(final AvatarToken2 token) {
+    protected AvatarFlyingToken(final AvatarFlyingToken token) {
         super(token);
     }
 
-    public AvatarToken2 copy() {
-        return new AvatarToken2(this);
+    public AvatarFlyingToken copy() {
+        return new AvatarFlyingToken(this);
     }
 }
