@@ -330,7 +330,7 @@
 |TOK:C15|Lightning Rager||LightningRagerToken|
 |TOK:C15|Phyrexian Germ||PhyrexianGermToken|
 |TOK:C15|Saproling||SaprolingToken|
-|TOK:C15|Shapeshifter||CribSwapShapeshifterWhiteToken|
+|TOK:C15|Shapeshifter||ShapeshifterColorlessToken|
 |TOK:C15|Snake|1|SnakeToken|
 |TOK:C15|Snake|2|PatagiaViperSnakeToken|
 |TOK:C15|Spider||SpiderToken|
@@ -392,7 +392,7 @@
 |TOK:C18|Phyrexian Myr||BrudicladTelchorMyrToken|
 |TOK:C18|Plant||PlantToken|
 |TOK:C18|Servo||ServoToken|
-|TOK:C18|Shapeshifter||CribSwapShapeshifterWhiteToken|
+|TOK:C18|Shapeshifter||ShapeshifterColorlessToken|
 |TOK:C18|Soldier||SoldierToken|
 |TOK:C18|Survivor||SurvivorToken|
 |TOK:C18|Thopter|1|ThopterColorlessToken|
@@ -709,7 +709,7 @@
 |TOK:LRW|Goblin Rogue||GoblinRogueToken|
 |TOK:LRW|Kithkin Soldier||KithkinSoldierToken|
 |TOK:LRW|Merfolk Wizard||MerfolkWizardToken|
-|TOK:LRW|Shapeshifter||CribSwapShapeshifterWhiteToken|
+|TOK:LRW|Shapeshifter||ShapeshifterColorlessToken|
 |TOK:LRW|Wolf||WolfToken|
 
 # M10
@@ -995,7 +995,7 @@
 |TOK:UST|Angel||AngelToken|
 |TOK:UST|Beast||BeastToken|
 |TOK:UST|Brainiac||BrainiacToken|
-|TOK:UST|Clue||ClueToken|
+|TOK:UST|Clue||ClueArtifactToken|
 |TOK:UST|Dragon||DragonTokenGold|
 |TOK:UST|Elemental|1|RedElementalToken|
 |TOK:UST|Elemental|2|VoiceOfResurgenceToken|
@@ -1450,7 +1450,7 @@
 |TOK:VOC|Bat||BatToken|
 |TOK:VOC|Clue||ClueArtifactToken|
 |TOK:VOC|Spirit|1|SpiritToken|
-|TOK:VOC|Spirit|2|AnotherSpiritToken|
+|TOK:VOC|Spirit|2|Spirit33Token|
 |TOK:VOC|Thopter||ThopterColorlessToken|
 
 # VOW
@@ -1600,7 +1600,7 @@
 |TOK:2XM|Plant||PlantToken|
 |TOK:2XM|Saproling||SaprolingToken|
 |TOK:2XM|Servo||ServoToken|
-|TOK:2XM|Shapeshifter||CribSwapShapeshifterWhiteToken|
+|TOK:2XM|Shapeshifter||ShapeshifterColorlessToken|
 |TOK:2XM|Soldier||SoldierToken|
 |TOK:2XM|Squirrel||SquirrelToken|
 |TOK:2XM|Thopter|1|ThopterColorlessToken|
@@ -1699,7 +1699,7 @@
 |TOK:CM2|Phyrexian Wurm|1|WurmWithDeathtouchToken|
 |TOK:CM2|Phyrexian Wurm|2|WurmWithLifelinkToken|
 |TOK:CM2|Saproling||SaprolingToken|
-|TOK:CM2|Shapeshifter||CribSwapShapeshifterWhiteToken|
+|TOK:CM2|Shapeshifter||ShapeshifterColorlessToken|
 |TOK:CM2|Spirit||SpiritWhiteToken|
 |TOK:CM2|Triskelavite||TriskelaviteToken|
 |TOK:CM2|Tuktuk the Returned||TuktukTheReturnedToken|
@@ -1839,7 +1839,7 @@
 |TOK:CLB|Rabbit||RabbitToken|
 |TOK:CLB|Saproling||SaprolingToken|
 |TOK:CLB|Satyr||XenagosSatyrToken|
-|TOK:CLB|Shapeshifter|1|CribSwapShapeshifterWhiteToken|
+|TOK:CLB|Shapeshifter|1|ShapeshifterColorlessToken|
 |TOK:CLB|Shapeshifter|2|ShapeshifterToken|
 |TOK:CLB|Shapeshifter|3|Shapeshifter32Token|
 |TOK:CLB|Shapeshifter|4|ShapeshifterBlueToken|
@@ -2272,9 +2272,9 @@
 |TOK:WHO|Alien Salamander||AlienSalamanderToken|
 |TOK:WHO|Alien Warrior||AlienWarriorToken|
 |TOK:WHO|Beast||BeastToken|
-|TOK:WHO|Clue|1|ClueToken|
-|TOK:WHO|Clue|2|ClueToken|
-|TOK:WHO|Clue|3|ClueToken|
+|TOK:WHO|Clue|1|ClueArtifactToken|
+|TOK:WHO|Clue|2|ClueArtifactToken|
+|TOK:WHO|Clue|3|ClueArtifactToken|
 |TOK:WHO|Dalek||DalekToken|
 |TOK:WHO|Dinosaur||DinosaurFlyingHasteToken|
 |TOK:WHO|Fish||FishNoAbilityToken|
@@ -2296,7 +2296,7 @@
 
 # PIP
 |TOK:PIP|Alien||Alien00Token|
-|TOK:PIP|Clue||ClueToken|
+|TOK:PIP|Clue||ClueArtifactToken|
 |TOK:PIP|Food|1|FoodToken|
 |TOK:PIP|Food|2|FoodToken|
 |TOK:PIP|Food|3|FoodToken|
@@ -2568,7 +2568,7 @@
 |TOK:M3C|Phyrexian Myr||BrudicladTelchorMyrToken|
 |TOK:M3C|Sand Warrior||SandWarriorToken|
 |TOK:M3C|Saproling||SaprolingToken|
-|TOK:M3C|Shapeshifter|1|CribSwapShapeshifterWhiteToken|
+|TOK:M3C|Shapeshifter|1|ShapeshifterColorlessToken|
 |TOK:M3C|Shapeshifter|2|ShapeshifterBlueToken|
 |TOK:M3C|Spirit||UginTheIneffableToken|
 |TOK:M3C|Tarmogoyf||TarmogoyfToken|
@@ -2771,7 +2771,7 @@
 |TOK:TDC|Inkling||InklingToken|
 |TOK:TDC|Insect|1|InsectToken|
 |TOK:TDC|Insect|2|InsectDeathToken|
-|TOK:TDC|Karox Bladewing||KaroxBladewingToken|
+|TOK:TDC|Karox Bladewing||KaroxBladewingDragonToken|
 |TOK:TDC|Myr||MyrToken|
 |TOK:TDC|Plant||PlantToken|
 |TOK:TDC|Rat||RatToken|
