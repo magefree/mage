@@ -337,6 +337,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Silent Hallcreeper", 72, Rarity.RARE, mage.cards.s.SilentHallcreeper.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Skullsnap Nuisance", 234, Rarity.UNCOMMON, mage.cards.s.SkullsnapNuisance.class));
         cards.add(new SetCardInfo("Slavering Branchsnapper", 198, Rarity.COMMON, mage.cards.s.SlaveringBranchsnapper.class));
+        cards.add(new SetCardInfo("Smoky Lounge // Misty Salon", 235, Rarity.UNCOMMON, mage.cards.s.SmokyLoungeMistySalon.class));
         cards.add(new SetCardInfo("Spectral Snatcher", 116, Rarity.COMMON, mage.cards.s.SpectralSnatcher.class));
         cards.add(new SetCardInfo("Spineseeker Centipede", 199, Rarity.COMMON, mage.cards.s.SpineseekerCentipede.class));
         cards.add(new SetCardInfo("Split Up", 304, Rarity.RARE, mage.cards.s.SplitUp.class, NON_FULL_USE_VARIOUS));
