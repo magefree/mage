@@ -29,7 +29,7 @@ public class AddConditionalManaEffect extends ManaEffect {
         this.mana = mana;
         this.manaBuilder = manaBuilder;
         this.netAmount = netAmount;
-        staticText = "Add " + this.mana.toString() + ". " + manaBuilder.getRule();
+        staticText = "add " + this.mana.toString() + ". " + manaBuilder.getRule();
 
     }
 
