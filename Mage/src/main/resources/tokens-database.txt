@@ -219,7 +219,7 @@
 |TOK:AKH|Beast||Beast42Token|
 |TOK:AKH|Cat||CatToken2|
 |TOK:AKH|Drake||DrakeToken|
-|TOK:AKH|Hippo||HippoToken2|
+|TOK:AKH|Hippo||Hippo33Token|
 |TOK:AKH|Insect||NestOfScarabsBlackInsectToken|
 |TOK:AKH|Snake||DeathtouchSnakeToken|
 |TOK:AKH|Warrior||WarriorVigilantToken|
