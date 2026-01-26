@@ -471,7 +471,7 @@
 
 # CON
 |TOK:CON|Angel||AngelToken|
-|TOK:CON|Elemental||ElementalTokenWithHaste|
+|TOK:CON|Elemental||ElementalHasteToken|
 
 # DVD
 |TOK:DVD|Demon||DemonFlyingToken|
@@ -878,7 +878,7 @@
 |TOK:OGW|Eldrazi Scion|5|EldraziScionToken|
 |TOK:OGW|Eldrazi Scion|6|EldraziScionToken|
 |TOK:OGW|Elemental|1|ElementalXXGreenToken|
-|TOK:OGW|Elemental|2|ElementalTokenWithHaste|
+|TOK:OGW|Elemental|2|ElementalHasteToken|
 |TOK:OGW|Plant||PlantToken|
 |TOK:OGW|Zombie||ZombieToken|
 
@@ -1193,7 +1193,7 @@
 |TOK:C20|Bird Illusion||BirdIllusionToken|
 |TOK:C20|Dinosaur Cat||DinosaurCatToken|
 |TOK:C20|Drake||DrakeToken|
-|TOK:C20|Elemental|1|ElementalTokenWithHaste|
+|TOK:C20|Elemental|1|ElementalHasteToken|
 |TOK:C20|Elemental|2|WhiteElementalToken|
 |TOK:C20|Goblin Warrior||GoblinWarriorToken|
 |TOK:C20|Human||HumanToken|
@@ -2186,7 +2186,7 @@
 |TOK:CMM|Eldrazi Scion||EldraziScionToken|
 |TOK:CMM|Eldrazi Spawn||EldraziSpawnToken|
 |TOK:CMM|Elemental|1|Elemental11HasteToken|
-|TOK:CMM|Elemental|2|ElementalTokenWithHaste|
+|TOK:CMM|Elemental|2|ElementalHasteToken|
 |TOK:CMM|Elemental|3|Elemental31TrampleHasteToken|
 |TOK:CMM|Elemental|4|Elemental44Token|
 |TOK:CMM|Elephant||ElephantToken|
