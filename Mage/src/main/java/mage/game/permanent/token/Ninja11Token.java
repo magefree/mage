@@ -7,9 +7,9 @@ import mage.constants.SubType;
 /**
  * @author TheElk801
  */
-public final class NinjaToken3 extends TokenImpl {
+public final class Ninja11Token extends TokenImpl {
 
-    public NinjaToken3() {
+    public Ninja11Token() {
         super("Ninja Token", "1/1 black Ninja creature token");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
@@ -18,11 +18,11 @@ public final class NinjaToken3 extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    private NinjaToken3(final NinjaToken3 token) {
+    private Ninja11Token(final Ninja11Token token) {
         super(token);
     }
 
-    public NinjaToken3 copy() {
-        return new NinjaToken3(this);
+    public Ninja11Token copy() {
+        return new Ninja11Token(this);
     }
 }

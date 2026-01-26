@@ -21,7 +21,7 @@ import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.common.FilterControlledPermanent;
-import mage.game.permanent.token.NinjaToken3;
+import mage.game.permanent.token.Ninja11Token;
 
 import java.util.UUID;
 
@@ -64,7 +64,7 @@ public final class DarkLeoAndShredder extends CardImpl {
 
         // Whenever Dark Leo & Shredder deal combat damage to a player, create a 1/1 black Ninja creature token. Then if you control five or more Ninjas, that player loses half their life, rounded up.
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(
-                new CreateTokenEffect(new NinjaToken3()), false, true
+                new CreateTokenEffect(new Ninja11Token()), false, true
         ).setTriggerPhrase("Whenever {this} deal combat damage to a player, ");
         ability.addEffect(new ConditionalOneShotEffect(
                 new LoseHalfLifeTargetEffect(), condition, "Then if you control " +
