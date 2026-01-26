@@ -10,7 +10,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.permanent.token.WeirdToken2;
+import mage.game.permanent.token.WeirdXXToken;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -65,7 +65,7 @@ class ExperimentalOverloadEffect extends OneShotEffect {
             return false;
         }
         int spellCount = player.getGraveyard().count(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY, game);
-        new WeirdToken2(spellCount).putOntoBattlefield(1, game, source, source.getControllerId());
+        new WeirdXXToken(spellCount).putOntoBattlefield(1, game, source, source.getControllerId());
         if (spellCount < 1) {
             return true;
         }

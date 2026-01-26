@@ -1223,7 +1223,7 @@
 |TOK:M21|Saproling||SaprolingToken|
 |TOK:M21|Soldier||SoldierToken|
 |TOK:M21|Treasure||TreasureToken|
-|TOK:M21|Weird||WeirdToken2|
+|TOK:M21|Weird||WeirdXXToken|
 |TOK:M21|Zombie||ZombieToken|
 
 # ZNR

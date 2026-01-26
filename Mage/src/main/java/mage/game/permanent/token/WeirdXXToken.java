@@ -7,13 +7,13 @@ import mage.constants.SubType;
 /**
  * @author TheElk801
  */
-public final class WeirdToken2 extends TokenImpl {
+public final class WeirdXXToken extends TokenImpl {
 
-    public WeirdToken2() {
+    public WeirdXXToken() {
         this(0);
     }
 
-    public WeirdToken2(int xValue) {
+    public WeirdXXToken(int xValue) {
         super("Weird Token", "X/X blue and red Weird creature token");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
@@ -23,11 +23,11 @@ public final class WeirdToken2 extends TokenImpl {
         toughness = new MageInt(xValue);
     }
 
-    private WeirdToken2(final WeirdToken2 token) {
+    private WeirdXXToken(final WeirdXXToken token) {
         super(token);
     }
 
-    public WeirdToken2 copy() {
-        return new WeirdToken2(this);
+    public WeirdXXToken copy() {
+        return new WeirdXXToken(this);
     }
 }
