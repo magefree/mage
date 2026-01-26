@@ -8,9 +8,9 @@ import mage.constants.SubType;
 /**
  * @author LoneFox
  */
-public final class SoldierTokenWithHaste extends TokenImpl {
+public final class SoldierHasteToken extends TokenImpl {
 
-    public SoldierTokenWithHaste() {
+    public SoldierHasteToken() {
         super("Soldier Token", "1/1 red and white Soldier creature token with haste");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
@@ -21,12 +21,12 @@ public final class SoldierTokenWithHaste extends TokenImpl {
         addAbility(HasteAbility.getInstance());
     }
 
-    protected SoldierTokenWithHaste(final SoldierTokenWithHaste token) {
+    protected SoldierHasteToken(final SoldierHasteToken token) {
         super(token);
     }
 
     @Override
-    public SoldierTokenWithHaste copy() {
-        return new SoldierTokenWithHaste(this);
+    public SoldierHasteToken copy() {
+        return new SoldierHasteToken(this);
     }
 }

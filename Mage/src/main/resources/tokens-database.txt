@@ -643,7 +643,7 @@
 |TOK:GTC|Frog Lizard||FrogLizardToken|
 |TOK:GTC|Horror||NightwingHorrorToken|
 |TOK:GTC|Rat||RatToken|
-|TOK:GTC|Soldier||SoldierTokenWithHaste|
+|TOK:GTC|Soldier||SoldierHasteToken|
 |TOK:GTC|Spirit||WhiteBlackSpiritToken|
 
 # H17
@@ -827,7 +827,7 @@
 |TOK:MM3|Phyrexian Golem||PhyrexianGolemToken|
 |TOK:MM3|Saproling||SaprolingToken|
 |TOK:MM3|Soldier|1|SoldierToken|
-|TOK:MM3|Soldier|2|SoldierTokenWithHaste|
+|TOK:MM3|Soldier|2|SoldierHasteToken|
 |TOK:MM3|Spider||PenumbraSpiderToken|
 |TOK:MM3|Spirit||SpiritWhiteToken|
 |TOK:MM3|Wurm||WurmWithTrampleToken|
@@ -1654,7 +1654,7 @@
 |TOK:NCC|Plant||PlantToken|
 |TOK:NCC|Saproling||SaprolingToken|
 |TOK:NCC|Soldier|1|SoldierLifelinkToken|
-|TOK:NCC|Soldier|2|SoldierTokenWithHaste|
+|TOK:NCC|Soldier|2|SoldierHasteToken|
 |TOK:NCC|Spider||SpiderToken|
 |TOK:NCC|Squid||SquidToken|
 |TOK:NCC|Tentacle||TentacleToken|
@@ -1786,7 +1786,7 @@
 |TOK:GK1|Horror||NightwingHorrorToken|
 |TOK:GK1|Saproling|1|SaprolingToken|
 |TOK:GK1|Saproling|2|SaprolingToken|
-|TOK:GK1|Soldier||SoldierTokenWithHaste|
+|TOK:GK1|Soldier||SoldierHasteToken|
 |TOK:GK1|Voja||VojaToken|
 |TOK:GK1|Weird||WeirdToken|
 |TOK:GK1|Wurm||WurmWithTrampleToken|
@@ -2036,7 +2036,7 @@
 |TOK:ONC|Phyrexian Wurm||PhyrexianWurmToken|
 |TOK:ONC|Soldier|1|SoldierToken|
 |TOK:ONC|Soldier|2|SoldierVigilanceToken|
-|TOK:ONC|Soldier|3|SoldierTokenWithHaste|
+|TOK:ONC|Soldier|3|SoldierHasteToken|
 |TOK:ONC|Spirit||SpiritWhiteToken|
 |TOK:ONC|Thopter||ThopterColorlessToken|
 
@@ -2305,7 +2305,7 @@
 |TOK:PIP|Junk||JunkToken|
 |TOK:PIP|Robot||Robot33Token|
 |TOK:PIP|Settlement||SettlementToken|
-|TOK:PIP|Soldier|1|SoldierTokenWithHaste|
+|TOK:PIP|Soldier|1|SoldierHasteToken|
 |TOK:PIP|Soldier|2|SoldierToken|
 |TOK:PIP|Squirrel||SquirrelToken|
 |TOK:PIP|Thopter||ThopterToken|
@@ -2364,7 +2364,7 @@
 |TOK:RVR|Goblin|2|RakdosGuildmageGoblinToken|
 |TOK:RVR|Rhino||RhinoToken|
 |TOK:RVR|Saproling||SaprolingToken|
-|TOK:RVR|Soldier||SoldierTokenWithHaste|
+|TOK:RVR|Soldier||SoldierHasteToken|
 |TOK:RVR|Sphinx||WardenSphinxToken|
 |TOK:RVR|Spirit|1|SpiritWhiteToken|
 |TOK:RVR|Spirit|2|WhiteBlackSpiritToken|
