@@ -46,7 +46,7 @@ public final class KaitoCunningInfiltrator extends CardImpl {
         this.addAbility(plusOneAbility);
 
         // -2: Create a 2/1 blue Ninja creature token.
-        this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new NinjaToken2()), -2));
+        this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new Ninja21Token()), -2));
 
         // -9: You get an emblem with "Whenever a player casts a spell, you create a 2/1 blue Ninja creature token."
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new KaitoCunningInfiltratorEmblem()), -9));
