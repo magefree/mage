@@ -17,7 +17,7 @@ import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
-import mage.game.permanent.token.DragonTokenGold;
+import mage.game.permanent.token.DragonGoldToken;
 import mage.players.Player;
 
 import java.util.UUID;
@@ -93,7 +93,7 @@ class SwordOfDungeonsAndDragonsEffect extends OneShotEffect {
             return false;
         }
         for (int i = 0; i < 1000; i++) { // just in case loop goes too long
-            new DragonTokenGold().putOntoBattlefield(1, game, source);
+            new DragonGoldToken().putOntoBattlefield(1, game, source);
             if (controller.rollDice(outcome, source, game, 20) != 20) {
                 break;
             }

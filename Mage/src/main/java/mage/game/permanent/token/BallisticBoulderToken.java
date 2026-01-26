@@ -10,9 +10,9 @@ import mage.constants.SubType;
 /**
  * @author Susucr
  */
-public final class BallisticBoulder extends TokenImpl {
+public final class BallisticBoulderToken extends TokenImpl {
 
-    public BallisticBoulder() {
+    public BallisticBoulderToken() {
         super("Ballistic Boulder", "2/1 colorless Construct artifact creature token with flying named Ballistic Boulder");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
@@ -23,11 +23,11 @@ public final class BallisticBoulder extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    protected BallisticBoulder(final BallisticBoulder token) {
+    protected BallisticBoulderToken(final BallisticBoulderToken token) {
         super(token);
     }
 
-    public BallisticBoulder copy() {
-        return new BallisticBoulder(this);
+    public BallisticBoulderToken copy() {
+        return new BallisticBoulderToken(this);
     }
 }

@@ -6,7 +6,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
-import mage.game.permanent.token.DragonToken2;
+import mage.game.permanent.token.Dragon55Token;
 
 import java.util.UUID;
 
@@ -21,7 +21,7 @@ public final class RiteOfTheDragoncaller extends CardImpl {
 
         // Whenever you cast an instant or sorcery spell, create a 5/5 red Dragon creature token with flying.
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                new CreateTokenEffect(new DragonToken2()),
+                new CreateTokenEffect(new Dragon55Token()),
                 StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, false
         ));
     }

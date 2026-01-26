@@ -24,7 +24,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.WolfToken;
-import mage.game.permanent.token.WolfTokenWithDeathtouch;
+import mage.game.permanent.token.WolfDeathtouchToken;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -61,7 +61,7 @@ public final class GarrukRelentless extends TransformingDoubleFacedCard {
 
         // Garruk, the Veil-Cursed
         // +1: Create a 1/1 black Wolf creature token with deathtouch.
-        this.getRightHalfCard().addAbility(new LoyaltyAbility(new CreateTokenEffect(new WolfTokenWithDeathtouch()), 1));
+        this.getRightHalfCard().addAbility(new LoyaltyAbility(new CreateTokenEffect(new WolfDeathtouchToken()), 1));
 
         // -1: Sacrifice a creature. If you do, search your library for a creature card, reveal it, put it into your hand, then shuffle.
         this.getRightHalfCard().addAbility(new LoyaltyAbility(new DoIfCostPaid(

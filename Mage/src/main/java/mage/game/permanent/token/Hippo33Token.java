@@ -9,9 +9,9 @@ import mage.constants.SubType;
 /**
  * @author Stravant
  */
-public final class HippoToken2 extends TokenImpl {
+public final class Hippo33Token extends TokenImpl {
 
-    public HippoToken2() {
+    public Hippo33Token() {
         super("Hippo Token", "3/3 green Hippo creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
@@ -20,11 +20,11 @@ public final class HippoToken2 extends TokenImpl {
         toughness = new MageInt(3);
     }
 
-    protected HippoToken2(final HippoToken2 token) {
+    protected Hippo33Token(final Hippo33Token token) {
         super(token);
     }
 
-    public HippoToken2 copy() {
-        return new HippoToken2(this);
+    public Hippo33Token copy() {
+        return new Hippo33Token(this);
     }
 }

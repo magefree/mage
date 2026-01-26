@@ -8,9 +8,9 @@ import mage.constants.SubType;
 /**
  * @author fireshoes
  */
-public final class CatToken2 extends TokenImpl {
+public final class Cat11LifelinkToken extends TokenImpl {
 
-    public CatToken2() {
+    public Cat11LifelinkToken() {
         super("Cat Token", "1/1 white Cat creature token with lifelink");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
@@ -20,12 +20,12 @@ public final class CatToken2 extends TokenImpl {
         addAbility(LifelinkAbility.getInstance());
     }
 
-    protected CatToken2(final CatToken2 token) {
+    protected Cat11LifelinkToken(final Cat11LifelinkToken token) {
         super(token);
     }
 
-    public CatToken2 copy() {
-        return new CatToken2(this);
+    public Cat11LifelinkToken copy() {
+        return new Cat11LifelinkToken(this);
     }
 
 }

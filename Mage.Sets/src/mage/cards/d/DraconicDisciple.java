@@ -13,8 +13,7 @@ import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
-import mage.game.permanent.token.DragonToken2;
+import mage.game.permanent.token.Dragon55Token;
 
 /**
  *
@@ -35,7 +34,7 @@ public final class DraconicDisciple extends CardImpl {
 
         // {7}, {T}, Sacrifice Draconic Disciple: Create a 5/5 red Dragon creature token with flying.
         Ability ability = new SimpleActivatedAbility(
-                new CreateTokenEffect(new DragonToken2()),
+                new CreateTokenEffect(new Dragon55Token()),
                 new GenericManaCost(7)
         );
         ability.addCost(new TapSourceCost());

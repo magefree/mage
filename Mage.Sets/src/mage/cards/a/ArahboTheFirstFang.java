@@ -15,7 +15,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
-import mage.game.permanent.token.CatToken3;
+import mage.game.permanent.token.Cat11Token;
 
 import java.util.UUID;
 
@@ -47,7 +47,7 @@ public final class ArahboTheFirstFang extends CardImpl {
 
         // Whenever Arahbo or another nontoken Cat you control enters, create a 1/1 white Cat creature token.
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
-                new CreateTokenEffect(new CatToken3()), filter2, false, false
+                new CreateTokenEffect(new Cat11Token()), filter2, false, false
         ));
     }
 

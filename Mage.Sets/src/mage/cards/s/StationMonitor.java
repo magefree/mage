@@ -7,7 +7,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.game.permanent.token.DroneToken2;
+import mage.game.permanent.token.DroneFlyingToken;
 
 import java.util.UUID;
 
@@ -25,7 +25,7 @@ public final class StationMonitor extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever you cast your second spell each turn, create a 1/1 colorless Drone artifact creature token with flying and "This token can block only creatures with flying."
-        this.addAbility(new CastSecondSpellTriggeredAbility(new CreateTokenEffect(new DroneToken2())));
+        this.addAbility(new CastSecondSpellTriggeredAbility(new CreateTokenEffect(new DroneFlyingToken())));
     }
 
     private StationMonitor(final StationMonitor card) {

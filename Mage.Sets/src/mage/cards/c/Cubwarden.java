@@ -9,7 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.game.permanent.token.CatToken2;
+import mage.game.permanent.token.Cat11LifelinkToken;
 
 import java.util.UUID;
 
@@ -32,7 +32,7 @@ public final class Cubwarden extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // Whenever this creature mutates, create two 1/1 white Cat creature tokens with lifelink.
-        this.addAbility(new MutatesSourceTriggeredAbility(new CreateTokenEffect(new CatToken2(), 2)));
+        this.addAbility(new MutatesSourceTriggeredAbility(new CreateTokenEffect(new Cat11LifelinkToken(), 2)));
     }
 
     private Cubwarden(final Cubwarden card) {

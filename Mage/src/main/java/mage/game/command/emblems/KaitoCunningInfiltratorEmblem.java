@@ -6,7 +6,7 @@ import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.game.command.Emblem;
-import mage.game.permanent.token.NinjaToken2;
+import mage.game.permanent.token.Ninja21Token;
 
 /**
  * @author ciaccona007
@@ -17,7 +17,7 @@ public class KaitoCunningInfiltratorEmblem extends Emblem {
     public KaitoCunningInfiltratorEmblem() {
         super("Emblem Kaito");
         this.getAbilities().add(new SpellCastAllTriggeredAbility(
-                Zone.COMMAND, new CreateTokenEffect(new NinjaToken2()), new FilterSpell(), false, SetTargetPointer.NONE
+                Zone.COMMAND, new CreateTokenEffect(new Ninja21Token()), new FilterSpell(), false, SetTargetPointer.NONE
         ).setTriggerPhrase("Whenever a player casts a spell, you "));
     }
 

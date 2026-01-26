@@ -8,7 +8,7 @@ import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.permanent.token.CatToken2;
+import mage.game.permanent.token.Cat11LifelinkToken;
 
 /**
  *
@@ -26,7 +26,7 @@ public final class LeoninWarleader extends CardImpl {
 
         // Whenever Leonin Warleader attacks, create two 1/1 white Cat creature tokens with lifelink that are tapped and attacking.
         this.addAbility(new AttacksTriggeredAbility(
-                new CreateTokenEffect(new CatToken2(), 2, true, true), false
+                new CreateTokenEffect(new Cat11LifelinkToken(), 2, true, true), false
         ));
     }
 

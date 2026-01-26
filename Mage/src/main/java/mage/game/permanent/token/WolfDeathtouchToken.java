@@ -8,9 +8,9 @@ import mage.constants.SubType;
 /**
  * @author nantuko
  */
-public final class WolfTokenWithDeathtouch extends TokenImpl {
+public final class WolfDeathtouchToken extends TokenImpl {
 
-    public WolfTokenWithDeathtouch() {
+    public WolfDeathtouchToken() {
         super("Wolf Token", "1/1 black Wolf creature token with deathtouch");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
@@ -21,11 +21,11 @@ public final class WolfTokenWithDeathtouch extends TokenImpl {
         addAbility(DeathtouchAbility.getInstance());
     }
 
-    protected WolfTokenWithDeathtouch(final WolfTokenWithDeathtouch token) {
+    protected WolfDeathtouchToken(final WolfDeathtouchToken token) {
         super(token);
     }
 
-    public WolfTokenWithDeathtouch copy() {
-        return new WolfTokenWithDeathtouch(this);
+    public WolfDeathtouchToken copy() {
+        return new WolfDeathtouchToken(this);
     }
 }

@@ -300,7 +300,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
                                 break;
                             case 15: // (gold) SARKHAN UNBROKEN 2
                                 sb.append("Create a 4/4 gold Dragon creature token with flying.");
-                                effects.add(new CreateTokenEffect(new DragonTokenGold(), 1));
+                                effects.add(new CreateTokenEffect(new DragonGoldToken(), 1));
                                 break;
                             case 16: // SORIN MARKOV 2
                                 sb.append("Target player's life total becomes 10.");

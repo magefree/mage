@@ -7,9 +7,9 @@ import mage.constants.SubType;
 /**
  * @author TheElk801
  */
-public final class CatToken3 extends TokenImpl {
+public final class Cat11Token extends TokenImpl {
 
-    public CatToken3() {
+    public Cat11Token() {
         super("Cat Token", "1/1 white Cat creature token");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
@@ -18,11 +18,11 @@ public final class CatToken3 extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    private CatToken3(final CatToken3 token) {
+    private Cat11Token(final Cat11Token token) {
         super(token);
     }
 
-    public CatToken3 copy() {
-        return new CatToken3(this);
+    public Cat11Token copy() {
+        return new Cat11Token(this);
     }
 }

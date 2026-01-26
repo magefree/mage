@@ -7,7 +7,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.game.permanent.token.BeastToken2;
+import mage.game.permanent.token.Beast44Token;
 
 import java.util.UUID;
 
@@ -25,7 +25,7 @@ public final class HerdBaloth extends CardImpl {
 
         // Whenever one or more +1/+1 counters are put on Herd Baloth, you may create a 4/4 green Beast creature token.
         this.addAbility(new OneOrMoreCountersAddedTriggeredAbility(
-                new CreateTokenEffect(new BeastToken2()), true
+                new CreateTokenEffect(new Beast44Token()), true
         ));
     }
 
