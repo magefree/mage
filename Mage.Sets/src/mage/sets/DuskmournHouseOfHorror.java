@@ -61,6 +61,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Conductive Machete", 244, Rarity.UNCOMMON, mage.cards.c.ConductiveMachete.class));
         cards.add(new SetCardInfo("Coordinated Clobbering", 173, Rarity.UNCOMMON, mage.cards.c.CoordinatedClobbering.class));
         cards.add(new SetCardInfo("Cracked Skull", 88, Rarity.COMMON, mage.cards.c.CrackedSkull.class));
+        cards.add(new SetCardInfo("Creeping Peeper", 46, Rarity.COMMON, mage.cards.c.CreepingPeeper.class));
         cards.add(new SetCardInfo("Cryptid Inspector", 174, Rarity.COMMON, mage.cards.c.CryptidInspector.class));
         cards.add(new SetCardInfo("Cult Healer", 2, Rarity.COMMON, mage.cards.c.CultHealer.class));
         cards.add(new SetCardInfo("Cursed Recording", 131, Rarity.RARE, mage.cards.c.CursedRecording.class, NON_FULL_USE_VARIOUS));
