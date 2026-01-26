@@ -32,7 +32,8 @@ public final class IronApprentice extends CardImpl {
 
         // When Iron Apprentice dies, if it had counters on it, put those counters on target creature you control.
         Ability ability = new DiesSourceTriggeredAbility(new PutSavedPermanentCountersTargetEffect("permanentLeftBattlefield"))
-                .withTriggerCondition(SourceHasCountersCondition.instance);
+                .withTriggerCondition(SourceHasCountersCondition.instance) // don't want to check intervening if on resolution
+                .setTriggerPhrase("When {this} dies, ");
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }

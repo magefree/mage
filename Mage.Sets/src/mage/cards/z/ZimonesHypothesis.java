@@ -1,7 +1,6 @@
 package mage.cards.z;
 
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
 import mage.cards.CardImpl;
@@ -10,7 +9,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerParityPredicate;
 import mage.game.Game;
@@ -33,7 +31,7 @@ public final class ZimonesHypothesis extends CardImpl {
         // You may put a +1/+1 counter on a creature.
         this.getSpellAbility().addEffect(new ZimonesHypothesisCounterEffect());
 
-        //Then choose odd or even. Return each creature with power of the chosen quality to its owner’s hand.
+        // Then choose odd or even. Return each creature with power of the chosen quality to its owner’s hand.
         this.getSpellAbility().addEffect(new ZimonesHypothesisBounceEffect());
     }
 
@@ -65,13 +63,13 @@ class ZimonesHypothesisCounterEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        final Player player = game.getPlayer(source.getControllerId());
+        Player player = game.getPlayer(source.getControllerId());
         if (player == null) {
             return false;
         }
-        final Target target = new TargetCreaturePermanent(0, 1).withNotTarget(true);
+        Target target = new TargetCreaturePermanent(0, 1).withNotTarget(true);
         player.choose(this.outcome, target, source, game);
-        final Permanent permanent = game.getPermanent(target.getFirstTarget());
+        Permanent permanent = game.getPermanent(target.getFirstTarget());
         return permanent != null && permanent.addCounters(CounterType.P1P1.createInstance(), source, game);
     }
 }
@@ -88,7 +86,7 @@ class ZimonesHypothesisBounceEffect extends OneShotEffect {
 
     ZimonesHypothesisBounceEffect() {
         super(Outcome.ReturnToHand);
-        this.staticText = "<br>Then choose odd or even. Return each creature with power of the chosen quality to its owner's hand. <i>(Zero is even.)</i>";
+        this.staticText = "Then choose odd or even. Return each creature with power of the chosen quality to its owner's hand. <i>(Zero is even.)</i>";
     }
 
     private ZimonesHypothesisBounceEffect(final ZimonesHypothesisBounceEffect effect) {
@@ -102,11 +100,11 @@ class ZimonesHypothesisBounceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        final Player player = game.getPlayer(source.getControllerId());
+        Player player = game.getPlayer(source.getControllerId());
         if (player == null) {
             return false;
         }
-        final FilterPermanent filter = player.chooseUse(this.outcome, "Odd or even?", null, "Odd", "Even", source, game) ? oddFilter : evenFilter;
+        FilterPermanent filter = player.chooseUse(this.outcome, "Odd or even?", null, "Odd", "Even", source, game) ? oddFilter : evenFilter;
         return new ReturnToHandFromBattlefieldAllEffect(filter).apply(game, source);
     }
 }

@@ -11,6 +11,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  * @author Styxo
@@ -36,7 +37,7 @@ public class LeavesBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
         super(zone, effect, optional);
         this.filter = filter;
         this.setTargetPointer = setTargetPointer;
-        setTriggerPhrase("Whenever " + filter.getMessage() + " leaves the battlefield, ");
+        setTriggerPhrase("Whenever " + CardUtil.addArticle(filter.getMessage()) + " leaves the battlefield, ");
         setLeavesTheBattlefieldTrigger(true);
     }
 
