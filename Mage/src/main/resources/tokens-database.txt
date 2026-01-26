@@ -1034,7 +1034,7 @@
 |TOK:ZEN|Angel||AngelToken|
 |TOK:ZEN|Beast||Beast44Token|
 |TOK:ZEN|Bird||BirdToken|
-|TOK:ZEN|Elemental||RedElementalWithTrampleAndHaste|
+|TOK:ZEN|Elemental||RedElementalTrampleHasteToken|
 |TOK:ZEN|Illusion||IllusionToken|
 |TOK:ZEN|Kor Soldier||KorSoldierToken|
 |TOK:ZEN|Merfolk||MerfolkToken|
