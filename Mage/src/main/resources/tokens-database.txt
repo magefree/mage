@@ -610,7 +610,7 @@
 |TOK:EMN|Zombie|1|ZombieToken|
 |TOK:EMN|Zombie|2|ZombieToken|
 |TOK:EMN|Zombie|3|ZombieToken|
-|TOK:EMN|Zombie|4|ZombieToken2|
+|TOK:EMN|Zombie|4|ZombieStarToken|
 #TOK:EMN - Human Soldier, Spirit, Devil, Insect and Wolf tokens from SOI set
 #|Generate|TOK:EMN|Devil||DevilToken|
 #|Generate|TOK:EMN|Human Soldier||HumanSoldierToken|
@@ -2701,7 +2701,7 @@
 |TOK:INR|Vampire|2|VampireToken|
 |TOK:INR|Wolf|1|WolfDeathtouchToken|
 |TOK:INR|Wolf|2|WolfToken|
-|TOK:INR|Zombie|1|ZombieToken2|
+|TOK:INR|Zombie|1|ZombieStarToken|
 |TOK:INR|Zombie|2|ZombieToken|
 |TOK:INR|Zombie|3|ZombieDecayedToken|
 
