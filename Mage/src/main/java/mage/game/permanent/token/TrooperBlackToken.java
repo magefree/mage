@@ -7,9 +7,9 @@ import mage.constants.SubType;
 /**
  * @author NinthWorld
  */
-public final class TrooperToken2 extends TokenImpl {
+public final class TrooperBlackToken extends TokenImpl {
 
-    public TrooperToken2() {
+    public TrooperBlackToken() {
         super("Trooper Token", "1/1 black Trooper creature token");
 
         cardType.add(CardType.CREATURE);
@@ -20,11 +20,11 @@ public final class TrooperToken2 extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    protected TrooperToken2(final TrooperToken2 token) {
+    protected TrooperBlackToken(final TrooperBlackToken token) {
         super(token);
     }
 
-    public TrooperToken2 copy() {
-        return new TrooperToken2(this);
+    public TrooperBlackToken copy() {
+        return new TrooperBlackToken(this);
     }
 }

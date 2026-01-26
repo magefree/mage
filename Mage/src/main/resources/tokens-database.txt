@@ -976,7 +976,7 @@
 |TOK:SWS|Rebel||RebelToken|
 |TOK:SWS|Royal Guard||RoyalGuardToken|
 |TOK:SWS|TIE Fighter||TIEFighterToken|
-|TOK:SWS|Trooper||TrooperToken|
+|TOK:SWS|Trooper||TrooperWhiteToken|
 |TOK:SWS|Tusken Raider||TuskenRaiderToken|
 
 # THS
