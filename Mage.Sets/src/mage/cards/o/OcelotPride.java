@@ -24,7 +24,7 @@ import mage.filter.predicate.permanent.EnteredThisTurnPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.CatToken3;
+import mage.game.permanent.token.Cat11Token;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.PlayerGainedLifeWatcher;
 
@@ -57,7 +57,7 @@ public final class OcelotPride extends CardImpl {
 
         // At the beginning of your end step, if you gained life this turn, create a 1/1 white Cat creature token. Then if you have the city's blessing, for each token you control that entered the battlefield this turn, create a token that's a copy of it.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                TargetController.YOU, new CreateTokenEffect(new CatToken3()),
+                TargetController.YOU, new CreateTokenEffect(new Cat11Token()),
                 false, condition
         );
         ability.addEffect(new ConditionalOneShotEffect(
