@@ -216,7 +216,7 @@
 |TOK:AER|Ragavan||RagavanToken|
 
 # AKH
-|TOK:AKH|Beast||BeastToken3|
+|TOK:AKH|Beast||Beast42Token|
 |TOK:AKH|Cat||CatToken2|
 |TOK:AKH|Drake||DrakeToken|
 |TOK:AKH|Hippo||HippoToken2|

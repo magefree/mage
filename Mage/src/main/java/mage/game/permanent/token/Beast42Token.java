@@ -7,9 +7,9 @@ import mage.constants.SubType;
 /**
  * @author fireshoes
  */
-public final class BeastToken3 extends TokenImpl {
+public final class Beast42Token extends TokenImpl {
 
-    public BeastToken3() {
+    public Beast42Token() {
         super("Beast Token", "4/2 green Beast creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
@@ -18,12 +18,12 @@ public final class BeastToken3 extends TokenImpl {
         toughness = new MageInt(2);
     }
 
-    protected BeastToken3(final BeastToken3 token) {
+    protected Beast42Token(final Beast42Token token) {
         super(token);
     }
 
     @Override
-    public BeastToken3 copy() {
-        return new BeastToken3(this);
+    public Beast42Token copy() {
+        return new Beast42Token(this);
     }
 }
