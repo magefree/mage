@@ -647,7 +647,7 @@
 |TOK:GTC|Spirit||WhiteBlackSpiritToken|
 
 # H17
-|TOK:H17|Dragon||DragonTokenGold|
+|TOK:H17|Dragon||DragonGoldToken|
 
 # HOU
 |TOK:HOU|Horse||CrestedSunmareToken|
@@ -996,7 +996,7 @@
 |TOK:UST|Beast||BeastToken|
 |TOK:UST|Brainiac||BrainiacToken|
 |TOK:UST|Clue||ClueArtifactToken|
-|TOK:UST|Dragon||DragonTokenGold|
+|TOK:UST|Dragon||DragonGoldToken|
 |TOK:UST|Elemental|1|RedElementalToken|
 |TOK:UST|Elemental|2|VoiceOfResurgenceToken|
 |TOK:UST|Gnome||GnomeToken|

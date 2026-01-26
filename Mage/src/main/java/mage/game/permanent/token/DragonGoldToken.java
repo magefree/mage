@@ -10,9 +10,9 @@ import mage.constants.SubType;
  *
  * @author Saga
  */
-public final class DragonTokenGold extends TokenImpl {
+public final class DragonGoldToken extends TokenImpl {
 
-    public DragonTokenGold() {
+    public DragonGoldToken() {
         super("Dragon Token", "4/4 gold Dragon creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
@@ -26,11 +26,11 @@ public final class DragonTokenGold extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
     }
 
-    protected DragonTokenGold(final DragonTokenGold token) {
+    protected DragonGoldToken(final DragonGoldToken token) {
         super(token);
     }
 
-    public DragonTokenGold copy() {
-        return new DragonTokenGold(this);
+    public DragonGoldToken copy() {
+        return new DragonGoldToken(this);
     }
 }
