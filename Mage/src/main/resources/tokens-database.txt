@@ -662,7 +662,7 @@
 |TOK:ISD|Spider||SpiderToken|
 |TOK:ISD|Spirit||SpiritWhiteToken|
 |TOK:ISD|Vampire||VampireToken|
-|TOK:ISD|Wolf|1|WolfTokenWithDeathtouch|
+|TOK:ISD|Wolf|1|WolfDeathtouchToken|
 |TOK:ISD|Wolf|2|WolfToken|
 |TOK:ISD|Zombie|1|ZombieToken|
 |TOK:ISD|Zombie|2|ZombieToken|
@@ -2699,7 +2699,7 @@
 |TOK:INR|Treefolk||WrennAndSevenTreefolkToken|
 |TOK:INR|Vampire|1|EdgarMarkovToken|
 |TOK:INR|Vampire|2|VampireToken|
-|TOK:INR|Wolf|1|WolfTokenWithDeathtouch|
+|TOK:INR|Wolf|1|WolfDeathtouchToken|
 |TOK:INR|Wolf|2|WolfToken|
 |TOK:INR|Zombie|1|ZombieToken2|
 |TOK:INR|Zombie|2|ZombieToken|
