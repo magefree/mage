@@ -8,9 +8,9 @@ import mage.constants.SubType;
 /**
  * @author LoneFox
  */
-public final class DragonToken2 extends TokenImpl {
+public final class Dragon55Token extends TokenImpl {
 
-    public DragonToken2() {
+    public Dragon55Token() {
         super("Dragon Token", "5/5 red Dragon creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
@@ -21,11 +21,11 @@ public final class DragonToken2 extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
     }
 
-    protected DragonToken2(final DragonToken2 token) {
+    protected Dragon55Token(final Dragon55Token token) {
         super(token);
     }
 
-    public DragonToken2 copy() {
-        return new DragonToken2(this);
+    public Dragon55Token copy() {
+        return new Dragon55Token(this);
     }
 }

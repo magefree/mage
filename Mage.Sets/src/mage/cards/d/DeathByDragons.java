@@ -9,7 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.permanent.token.DragonToken2;
+import mage.game.permanent.token.Dragon55Token;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -61,7 +61,7 @@ class DeathByDragonsEffect extends OneShotEffect {
         if (controller != null) {
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 if (!playerId.equals(this.getTargetPointer().getFirst(game, source))) {
-                    Token token = new DragonToken2();
+                    Token token = new Dragon55Token();
                     token.putOntoBattlefield(1, game, source, playerId);
                 }
             }
