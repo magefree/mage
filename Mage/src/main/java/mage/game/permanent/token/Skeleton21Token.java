@@ -4,9 +4,9 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-public class SkeletonToken2 extends TokenImpl {
+public class Skeleton21Token extends TokenImpl {
 
-    public SkeletonToken2() {
+    public Skeleton21Token() {
         super("Skeleton Token", "2/1 black Skeleton creature token");
         cardType.add(CardType.CREATURE);
         this.subtype.add(SubType.SKELETON);
@@ -15,11 +15,11 @@ public class SkeletonToken2 extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    private SkeletonToken2(final SkeletonToken2 token) {
+    private Skeleton21Token(final Skeleton21Token token) {
         super(token);
     }
 
-    public SkeletonToken2 copy() {
-        return new SkeletonToken2(this);
+    public Skeleton21Token copy() {
+        return new Skeleton21Token(this);
     }
 }

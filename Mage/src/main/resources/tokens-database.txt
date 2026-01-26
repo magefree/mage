@@ -2387,7 +2387,7 @@
 |TOK:MKM|Merfolk||MerfolkToken|
 |TOK:MKM|Ooze||OozeTrampleToken|
 |TOK:MKM|Plant||PlantToken|
-|TOK:MKM|Skeleton||SkeletonToken2|
+|TOK:MKM|Skeleton||Skeleton21Token|
 |TOK:MKM|Spider||IzoniSpiderToken|
 |TOK:MKM|Spirit||WhiteBlackSpiritToken|
 |TOK:MKM|Thopter|1|Thopter00ColorlessToken|
