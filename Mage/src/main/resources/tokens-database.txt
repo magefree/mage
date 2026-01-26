@@ -2669,7 +2669,7 @@
 |TOK:FDN|Insect||InsectBlackGreenFlyingToken|
 |TOK:FDN|Knight||Knight33Token|
 |TOK:FDN|Koma's Coil||KomasCoilToken|
-|TOK:FDN|Ninja||NinjaToken2|
+|TOK:FDN|Ninja||Ninja21Token|
 |TOK:FDN|Phyrexian Goblin||PhyrexianGoblinToken|
 |TOK:FDN|Rabbit||RabbitToken|
 |TOK:FDN|Raccoon||RaccoonToken|

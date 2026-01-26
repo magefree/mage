@@ -14,7 +14,7 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.command.emblems.KaitoCunningInfiltratorEmblem;
-import mage.game.permanent.token.NinjaToken2;
+import mage.game.permanent.token.Ninja21Token;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
@@ -27,7 +27,7 @@ public final class KaitoCunningInfiltrator extends CardImpl {
 
     public KaitoCunningInfiltrator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{U}{U}");
-        
+
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KAITO);
         this.setStartingLoyalty(3);
