@@ -18,7 +18,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
-import mage.game.permanent.token.BeastToken2;
+import mage.game.permanent.token.Beast44Token;
 
 import java.util.UUID;
 
@@ -44,7 +44,7 @@ public final class BalothPrime extends CardImpl {
 
         // Whenever you sacrifice a land, create a tapped 4/4 green Beast creature token and untap this creature.
         ability = new SacrificePermanentTriggeredAbility(
-                new CreateTokenEffect(new BeastToken2(), 1, true), StaticFilters.FILTER_LAND
+                new CreateTokenEffect(new Beast44Token(), 1, true), StaticFilters.FILTER_LAND
         );
         ability.addEffect(new UntapSourceEffect().concatBy("and"));
         this.addAbility(ability);

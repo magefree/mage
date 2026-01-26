@@ -282,7 +282,7 @@
 |TOK:C14|Angel||AngelToken|
 |TOK:C14|Ape||ApeToken|
 |TOK:C14|Beast|1|BeastToken|
-|TOK:C14|Beast|2|BeastToken2|
+|TOK:C14|Beast|2|Beast44Token|
 |TOK:C14|Cat||CatToken|
 |TOK:C14|Demon|1|DemonToken|
 |TOK:C14|Demon|2|DemonFlyingToken|
@@ -316,7 +316,7 @@
 # C15
 |TOK:C15|Angel||AngelToken|
 |TOK:C15|Bear||BearToken|
-|TOK:C15|Beast||BeastToken2|
+|TOK:C15|Beast||Beast44Token|
 |TOK:C15|Cat||CatToken|
 |TOK:C15|Dragon||DragonToken2|
 |TOK:C15|Drake||DrakeToken|
@@ -376,7 +376,7 @@
 
 # C18
 |TOK:C18|Angel||AngelToken|
-|TOK:C18|Beast|1|BeastToken2|
+|TOK:C18|Beast|1|Beast44Token|
 |TOK:C18|Beast|2|SpawningGroundsBeastToken|
 |TOK:C18|Cat||CatToken|
 |TOK:C18|Cat Warrior||CatWarriorToken|
@@ -404,7 +404,7 @@
 # C19
 |TOK:C19|Assassin||AssassinToken|
 |TOK:C19|Beast|1|BeastToken|
-|TOK:C19|Beast|2|BeastToken2|
+|TOK:C19|Beast|2|Beast44Token|
 |TOK:C19|Bird|1|RocEggToken|
 |TOK:C19|Bird|2|WingmateRocToken|
 |TOK:C19|Centaur||CentaurToken|
@@ -429,7 +429,7 @@
 
 # CMA
 |TOK:CMA|Beast|1|BeastToken|
-|TOK:CMA|Beast|2|BeastToken2|
+|TOK:CMA|Beast|2|Beast44Token|
 |TOK:CMA|Dragon||DragonToken2|
 |TOK:CMA|Drake||LeafdrakeRoostDrakeToken|
 |TOK:CMA|Elemental||TitaniaProtectorOfArgothElementalToken|
@@ -481,7 +481,7 @@
 # GVL
 |TOK:GVL|Bat||BatToken|
 |TOK:GVL|Beast|1|BeastToken|
-|TOK:GVL|Beast|2|BeastToken2|
+|TOK:GVL|Beast|2|Beast44Token|
 |TOK:GVL|Elephant||ElephantToken|
 
 # DDC
@@ -491,7 +491,7 @@
 
 # DDD
 |TOK:DDD|Beast|1|BeastToken|
-|TOK:DDD|Beast|2|BeastToken2|
+|TOK:DDD|Beast|2|Beast44Token|
 |TOK:DDD|Elephant||ElephantToken|
 
 # DDE
@@ -578,7 +578,7 @@
 
 # E01
 |TOK:E01|Beast|1|BeastToken|
-|TOK:E01|Beast|2|BeastToken2|
+|TOK:E01|Beast|2|Beast44Token|
 |TOK:E01|Soldier||SoldierToken|
 |TOK:E01|Spirit||SpiritWhiteToken|
 
@@ -814,7 +814,7 @@
 # MM3
 |TOK:MM3|Angel||AngelToken|
 |TOK:MM3|Beast|1|BeastToken|
-|TOK:MM3|Beast|2|BeastToken2|
+|TOK:MM3|Beast|2|Beast44Token|
 |TOK:MM3|Bird||BirdToken|
 |TOK:MM3|Centaur||CentaurToken|
 |TOK:MM3|Dragon||DragonToken|
@@ -863,7 +863,7 @@
 
 # ODY
 |TOK:ODY|Bear||BearToken|
-|TOK:ODY|Beast||BeastToken2|
+|TOK:ODY|Beast||Beast44Token|
 |TOK:ODY|Elephant||ElephantToken|
 |TOK:ODY|Squirrel||SquirrelToken|
 |TOK:ODY|Wurm||WurmToken|
@@ -1032,7 +1032,7 @@
 
 # ZEN
 |TOK:ZEN|Angel||AngelToken|
-|TOK:ZEN|Beast||BeastToken2|
+|TOK:ZEN|Beast||Beast44Token|
 |TOK:ZEN|Bird||BirdToken|
 |TOK:ZEN|Elemental||RedElementalWithTrampleAndHaste|
 |TOK:ZEN|Illusion||IllusionToken|
@@ -1188,7 +1188,7 @@
 
 # C20
 |TOK:C20|Angel||AngelToken|
-|TOK:C20|Beast||BeastToken2|
+|TOK:C20|Beast||Beast44Token|
 |TOK:C20|Bird||BirdToken|
 |TOK:C20|Bird Illusion||BirdIllusionToken|
 |TOK:C20|Dinosaur Cat||DinosaurCatToken|
@@ -1240,7 +1240,7 @@
 |TOK:ZNR|Plant||PlantToken|
 
 # ZNC
-|TOK:ZNC|Beast||BeastToken2|
+|TOK:ZNC|Beast||Beast44Token|
 |TOK:ZNC|Bird||BirdToken|
 |TOK:ZNC|Elemental|1|OmnathElementalToken|
 |TOK:ZNC|Elemental|2|ZendikarsRoilElementalToken|
@@ -1257,7 +1257,7 @@
 # CMR
 |TOK:CMR|Angel||AngelToken|
 |TOK:CMR|Beast|1|BeastToken|
-|TOK:CMR|Beast|2|BeastToken2|
+|TOK:CMR|Beast|2|Beast44Token|
 |TOK:CMR|Cat||CatToken|
 |TOK:CMR|Dragon||DragonEggDragonToken|
 |TOK:CMR|Elephant||ElephantToken|
@@ -1335,7 +1335,7 @@
 
 # C21
 |TOK:C21|Beast|1|BeastToken|
-|TOK:C21|Beast|2|BeastToken2|
+|TOK:C21|Beast|2|Beast44Token|
 |TOK:C21|Boar||Boar2Token|
 |TOK:C21|Construct|1|MetallurgicSummoningsConstructToken|
 |TOK:C21|Construct|2|KarnConstructToken|
@@ -1364,7 +1364,7 @@
 |TOK:C21|Zombie||ZombieToken|
 
 # MH2
-|TOK:MH2|Beast||BeastToken2|
+|TOK:MH2|Beast||Beast44Token|
 |TOK:MH2|Bird||BirdToken|
 |TOK:MH2|Clue|1|ClueArtifactToken|
 |TOK:MH2|Clue|2|ClueArtifactToken|
@@ -1429,7 +1429,7 @@
 
 # MID
 |TOK:MID|Bat||BatToken|
-|TOK:MID|Beast||BeastToken2|
+|TOK:MID|Beast||Beast44Token|
 |TOK:MID|Bird||OminousRoostBirdToken|
 |TOK:MID|Clue||ClueArtifactToken|
 |TOK:MID|Devil||DevilToken|
@@ -1679,7 +1679,7 @@
 
 # IMA
 |TOK:IMA|Angel||AngelToken|
-|TOK:IMA|Beast||BeastToken2|
+|TOK:IMA|Beast||Beast44Token|
 |TOK:IMA|Bird||BirdToken|
 |TOK:IMA|Djinn Monk||DjinnMonkToken|
 |TOK:IMA|Dragon|1|DragonEggDragonToken|
@@ -1747,7 +1747,7 @@
 |TOK:DDR|Zombie Giant||QuestForTheGravelordZombieToken|
 
 # DDS
-|TOK:DDS|Beast||BeastToken2|
+|TOK:DDS|Beast||Beast44Token|
 |TOK:DDS|Drake||DrakeToken|
 |TOK:DDS|Elemental||RedElementalToken|
 |TOK:DDS|Elephant||ElephantToken|
@@ -2086,7 +2086,7 @@
 |TOK:MOC|Angel|1|Angel33Token|
 |TOK:MOC|Angel|2|AngelToken|
 |TOK:MOC|Assassin||QueenMarchesaAssassinToken|
-|TOK:MOC|Beast||BeastToken2|
+|TOK:MOC|Beast||Beast44Token|
 |TOK:MOC|Bird||BirdToken|
 |TOK:MOC|Blood||BloodToken|
 |TOK:MOC|Butterfly||ButterflyToken|
@@ -2551,7 +2551,7 @@
 |TOK:M3C|Ape||ApeToken|
 |TOK:M3C|Beast|1|GarrukApexPredatorBeastToken|
 |TOK:M3C|Beast|2|BeastToken|
-|TOK:M3C|Beast|3|BeastToken2|
+|TOK:M3C|Beast|3|Beast44Token|
 |TOK:M3C|Boar||Boar2Token|
 |TOK:M3C|Construct||StoneIdolToken|
 |TOK:M3C|Dragon||DragonToken2|
@@ -2590,7 +2590,7 @@
 
 # BLC
 |TOK:BLC|Beast|1|BeastToken|
-|TOK:BLC|Beast|2|BeastToken2|
+|TOK:BLC|Beast|2|Beast44Token|
 |TOK:BLC|Bird|1|SwanSongBirdToken|
 |TOK:BLC|Bird|2|BirdToken|
 |TOK:BLC|Blood||BloodToken|
@@ -2651,7 +2651,7 @@
 
 # FDN
 |TOK:FDN|Beast|1|BeastToken|
-|TOK:FDN|Beast|2|BeastToken2|
+|TOK:FDN|Beast|2|Beast44Token|
 |TOK:FDN|Cat|1|CatToken3|
 |TOK:FDN|Cat|2|CatToken2|
 |TOK:FDN|Cat|3|CatToken|
@@ -2871,7 +2871,7 @@
 
 # EOC
 |TOK:EOC|Beast|1|BeastToken|
-|TOK:EOC|Beast|2|BeastToken2|
+|TOK:EOC|Beast|2|Beast44Token|
 |TOK:EOC|Bird||SwanSongBirdToken|
 |TOK:EOC|Clue||ClueArtifactToken|
 |TOK:EOC|Elemental|1|TitaniaProtectorOfArgothElementalToken|
@@ -2987,7 +2987,7 @@
 
 # MPR
 |TOK:MPR|Bear||BearToken|
-|TOK:MPR|Beast||BeastToken2|
+|TOK:MPR|Beast||Beast44Token|
 |TOK:MPR|Bird||BlueBirdToken|
 |TOK:MPR|Elephant||ElephantToken|
 |TOK:MPR|Goblin Soldier||GoblinSoldierToken|
