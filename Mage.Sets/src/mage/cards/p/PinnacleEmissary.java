@@ -9,7 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
-import mage.game.permanent.token.DroneToken2;
+import mage.game.permanent.token.DroneFlyingToken;
 
 import java.util.UUID;
 
@@ -27,7 +27,7 @@ public final class PinnacleEmissary extends CardImpl {
 
         // Whenever you cast an artifact spell, create a 1/1 colorless Drone artifact creature token with flying and "This token can block only creatures with flying."
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                new CreateTokenEffect(new DroneToken2()), StaticFilters.FILTER_SPELL_AN_ARTIFACT, false
+                new CreateTokenEffect(new DroneFlyingToken()), StaticFilters.FILTER_SPELL_AN_ARTIFACT, false
         ));
 
         // Warp {U/R}

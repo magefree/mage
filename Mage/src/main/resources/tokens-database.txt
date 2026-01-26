@@ -2858,7 +2858,7 @@
 |TOK:FIC|Clue||ClueArtifactToken|
 
 # EOE
-|TOK:EOE|Drone||DroneToken2|
+|TOK:EOE|Drone||DroneFlyingToken|
 |TOK:EOE|Human Soldier||HumanSoldierToken|
 |TOK:EOE|Lander|1|LanderToken|
 |TOK:EOE|Lander|2|LanderToken|

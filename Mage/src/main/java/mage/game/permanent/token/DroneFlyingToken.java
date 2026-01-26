@@ -9,9 +9,9 @@ import mage.constants.SubType;
 /**
  * @author TheElk801
  */
-public final class DroneToken2 extends TokenImpl {
+public final class DroneFlyingToken extends TokenImpl {
 
-    public DroneToken2() {
+    public DroneFlyingToken() {
         super("Drone Token", "1/1 colorless Drone artifact creature token with flying and \"This token can block only creatures with flying.\"");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
@@ -23,12 +23,12 @@ public final class DroneToken2 extends TokenImpl {
         addAbility(new CanBlockOnlyFlyingAbility());
     }
 
-    private DroneToken2(final DroneToken2 token) {
+    private DroneFlyingToken(final DroneFlyingToken token) {
         super(token);
     }
 
     @Override
-    public DroneToken2 copy() {
-        return new DroneToken2(this);
+    public DroneFlyingToken copy() {
+        return new DroneFlyingToken(this);
     }
 }
