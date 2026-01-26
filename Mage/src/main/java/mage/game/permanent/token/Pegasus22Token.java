@@ -8,9 +8,9 @@ import mage.constants.SubType;
 /**
  * @author TheElk801
  */
-public final class PegasusToken2 extends TokenImpl {
+public final class Pegasus22Token extends TokenImpl {
 
-    public PegasusToken2() {
+    public Pegasus22Token() {
         super("Pegasus Token", "2/2 white Pegasus creature token with flying");
         this.cardType.add(CardType.CREATURE);
         this.color.setWhite(true);
@@ -20,11 +20,11 @@ public final class PegasusToken2 extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    private PegasusToken2(final PegasusToken2 token) {
+    private Pegasus22Token(final Pegasus22Token token) {
         super(token);
     }
 
-    public PegasusToken2 copy() {
-        return new PegasusToken2(this);
+    public Pegasus22Token copy() {
+        return new Pegasus22Token(this);
     }
 }

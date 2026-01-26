@@ -1164,7 +1164,7 @@
 |TOK:THB|Human Soldier||HumanSoldierToken|
 |TOK:THB|Kraken||KrakenHexproofToken|
 |TOK:THB|Nightmare||AshiokNightmareMuseToken|
-|TOK:THB|Pegasus||PegasusToken2|
+|TOK:THB|Pegasus||Pegasus22Token|
 |TOK:THB|Reflection||ReflectionBlueToken|
 |TOK:THB|Satyr||SatyrCantBlockToken|
 |TOK:THB|Spider||SpiderToken|
@@ -2203,7 +2203,7 @@
 |TOK:CMM|Myr||MyrToken|
 |TOK:CMM|Ogre||OgreToken|
 |TOK:CMM|Ox||OxToken|
-|TOK:CMM|Pegasus||PegasusToken2|
+|TOK:CMM|Pegasus||Pegasus22Token|
 |TOK:CMM|Phyrexian Beast||PhyrexianBeastToken|
 |TOK:CMM|Phyrexian Germ||PhyrexianGermToken|
 |TOK:CMM|Phyrexian Golem||PhyrexianGolemToken|
@@ -2258,7 +2258,7 @@
 |TOK:WOC|Faerie Rogue|2|OonaQueenFaerieRogueToken|
 |TOK:WOC|Human Soldier||HumanSoldierToken|
 |TOK:WOC|Monster||MonsterRoleToken|
-|TOK:WOC|Pegasus||PegasusToken2|
+|TOK:WOC|Pegasus||Pegasus22Token|
 |TOK:WOC|Pirate||NettlingNuisancePirateToken|
 |TOK:WOC|Royal||RoyalRoleToken|
 |TOK:WOC|Saproling||SaprolingToken|
