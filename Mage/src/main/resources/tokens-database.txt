@@ -2131,7 +2131,7 @@
 |TOK:MUL|Phyrexian Myr||BrudicladTelchorMyrToken|
 
 # LTR
-|TOK:LTR|Ballistic Boulder||BallisticBoulder|
+|TOK:LTR|Ballistic Boulder||BallisticBoulderToken|
 |TOK:LTR|Food|1|FoodToken|
 |TOK:LTR|Food|2|FoodToken|
 |TOK:LTR|Food|3|FoodToken|
@@ -2901,7 +2901,7 @@
 |TOK:TLA|Ally|3|AllyToken|
 |TOK:TLA|Ally|4|AllyToken|
 |TOK:TLA|Ally|5|AllyToken|
-|TOK:TLA|Ballistic Boulder||BallisticBoulder|
+|TOK:TLA|Ballistic Boulder||BallisticBoulderToken|
 |TOK:TLA|Bear||BearsCompanionBearToken|
 |TOK:TLA|Clue|1|ClueArtifactToken|
 |TOK:TLA|Clue|2|ClueArtifactToken|
