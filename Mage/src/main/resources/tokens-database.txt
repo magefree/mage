@@ -217,7 +217,7 @@
 
 # AKH
 |TOK:AKH|Beast||Beast42Token|
-|TOK:AKH|Cat||CatToken2|
+|TOK:AKH|Cat||Cat11LifelinkToken|
 |TOK:AKH|Drake||DrakeToken|
 |TOK:AKH|Hippo||Hippo33Token|
 |TOK:AKH|Insect||NestOfScarabsBlackInsectToken|
@@ -1111,7 +1111,7 @@
 |TOK:M19|Avatar||AvatarToken2|
 |TOK:M19|Bat||BatToken|
 |TOK:M19|Beast||BeastToken|
-|TOK:M19|Cat||CatToken2|
+|TOK:M19|Cat||Cat11LifelinkToken|
 |TOK:M19|Dragon|1|DragonEggDragonToken|
 |TOK:M19|Dragon|2|DragonToken2|
 |TOK:M19|Elf Warrior||ElfWarriorToken|
@@ -1175,7 +1175,7 @@
 
 # IKO
 |TOK:IKO|Beast||BeastToken|
-|TOK:IKO|Cat||CatToken2|
+|TOK:IKO|Cat||Cat11LifelinkToken|
 |TOK:IKO|Cat Bird||CatBirdToken|
 |TOK:IKO|Dinosaur||DinosaurHasteToken|
 |TOK:IKO|Dinosaur Beast||DinosaurBeastToken|
@@ -1528,8 +1528,8 @@
 |TOK:SLD|Angel||AngelToken|
 |TOK:SLD|Blood||BloodToken|
 |TOK:SLD|Cat|1|GreenCatToken|
-|TOK:SLD|Cat|2|CatToken2|
-|TOK:SLD|Cat|3|CatToken2|
+|TOK:SLD|Cat|2|Cat11LifelinkToken|
+|TOK:SLD|Cat|3|Cat11LifelinkToken|
 |TOK:SLD|Clue||ClueArtifactToken|
 |TOK:SLD|Cordyceps Infected|1|CordycepsInfectedToken|
 |TOK:SLD|Cordyceps Infected|2|CordycepsInfectedToken|
@@ -2653,7 +2653,7 @@
 |TOK:FDN|Beast|1|BeastToken|
 |TOK:FDN|Beast|2|Beast44Token|
 |TOK:FDN|Cat|1|Cat11Token|
-|TOK:FDN|Cat|2|CatToken2|
+|TOK:FDN|Cat|2|Cat11LifelinkToken|
 |TOK:FDN|Cat|3|CatToken|
 |TOK:FDN|Cat Beast||CatBeastToken|
 |TOK:FDN|Dog||WhiteDogToken|
@@ -2706,7 +2706,7 @@
 |TOK:INR|Zombie|3|ZombieDecayedToken|
 
 # DFT
-|TOK:DFT|Cat||CatToken2|
+|TOK:DFT|Cat||Cat11LifelinkToken|
 |TOK:DFT|Dinosaur Dragon||DinDragonToken|
 |TOK:DFT|Elephant||ElephantToken|
 |TOK:DFT|Goblin||GoblinToken|
