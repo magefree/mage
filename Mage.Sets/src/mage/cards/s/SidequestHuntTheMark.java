@@ -127,7 +127,7 @@ enum SidequestHuntTheMarkCondition implements Condition {
 
 class SidequestHuntTheMarkWatcher extends Watcher {
 
-    private static final Set<UUID> set = new HashSet<>();
+    private final Set<UUID> set = new HashSet<>();
 
     SidequestHuntTheMarkWatcher() {
         super(WatcherScope.GAME);
@@ -151,10 +151,10 @@ class SidequestHuntTheMarkWatcher extends Watcher {
     }
 
     static boolean checkPlayer(Game game, Ability source) {
-        game
+        return game
                 .getState()
-                .getWatcher(SidequestHuntTheMarkWatcher.class);
-        return set
+                .getWatcher(SidequestHuntTheMarkWatcher.class)
+                .set
                 .contains(source.getControllerId());
     }
 }
