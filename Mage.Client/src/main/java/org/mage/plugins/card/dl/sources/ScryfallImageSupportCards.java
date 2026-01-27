@@ -615,6 +615,7 @@ public class ScryfallImageSupportCards {
             add("MAR"); // Marvel Universe
             add("TLA"); // Avatar: The Last Airbender
             add("TLE"); // Avatar: The Last Airbender Eternal
+            add("PF26"); // MagicFest 2026
             add("ECL"); // Lorwyn Eclipsed
             add("ECC"); // Lorwyn Eclipsed Commander
             add("PL26"); // Year of the Horse 2026

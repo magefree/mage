@@ -19,7 +19,7 @@ public class SecretLairPromo extends ExpansionSet {
         super("Secret Lair Promo", "SLP", ExpansionSet.buildDate(2023, 2, 17), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = true;
-		
+
         cards.add(new SetCardInfo("An Offer You Can't Refuse", 7, Rarity.RARE, mage.cards.a.AnOfferYouCantRefuse.class));
         cards.add(new SetCardInfo("Brainstorm", 1, Rarity.RARE, mage.cards.b.Brainstorm.class));
         cards.add(new SetCardInfo("Dark Ritual", 16, Rarity.RARE, mage.cards.d.DarkRitual.class));
@@ -63,6 +63,7 @@ public class SecretLairPromo extends ExpansionSet {
         cards.add(new SetCardInfo("Supreme Verdict", 26, Rarity.RARE, mage.cards.s.SupremeVerdict.class, FULL_ART));
         cards.add(new SetCardInfo("Swamp", 33, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Swords to Plowshares", 20, Rarity.RARE, mage.cards.s.SwordsToPlowshares.class));
+        cards.add(new SetCardInfo("Tamiyo, Inquisitive Student", 49, Rarity.MYTHIC, mage.cards.t.TamiyoInquisitiveStudent.class));
         cards.add(new SetCardInfo("Ugin, the Spirit Dragon", 6, Rarity.MYTHIC, mage.cards.u.UginTheSpiritDragon.class));
         cards.add(new SetCardInfo("Unholy Heat", 4, Rarity.RARE, mage.cards.u.UnholyHeat.class));
         cards.add(new SetCardInfo("Valakut, the Molten Pinnacle", 14, Rarity.RARE, mage.cards.v.ValakutTheMoltenPinnacle.class));
