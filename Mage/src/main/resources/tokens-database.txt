@@ -3027,3 +3027,6 @@
 
 # PL25
 |TOK:PL25|Snake||SnakeToken|
+
+# PL26
+|TOK:PL26|Treasure||TreasureToken|

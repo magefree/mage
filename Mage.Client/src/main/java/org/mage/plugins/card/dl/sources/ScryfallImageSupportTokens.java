@@ -3006,6 +3006,9 @@ public class ScryfallImageSupportTokens {
             // PL25
             put("PL25/Snake", "https://api.scryfall.com/cards/pl25/2?format=image");
 
+            // PL26
+            put("PL26/Treasure", "https://api.scryfall.com/cards/pl26/2?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
