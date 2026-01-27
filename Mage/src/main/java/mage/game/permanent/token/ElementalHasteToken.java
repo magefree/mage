@@ -8,9 +8,9 @@ import mage.constants.SubType;
 /**
  * @author magenoxx
  */
-public final class ElementalTokenWithHaste extends TokenImpl {
+public final class ElementalHasteToken extends TokenImpl {
 
-    public ElementalTokenWithHaste() {
+    public ElementalHasteToken() {
         super("Elemental Token", "3/1 red Elemental creature token with haste");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
@@ -20,11 +20,11 @@ public final class ElementalTokenWithHaste extends TokenImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    protected ElementalTokenWithHaste(final ElementalTokenWithHaste token) {
+    protected ElementalHasteToken(final ElementalHasteToken token) {
         super(token);
     }
 
-    public ElementalTokenWithHaste copy() {
-        return new ElementalTokenWithHaste(this);
+    public ElementalHasteToken copy() {
+        return new ElementalHasteToken(this);
     }
 }

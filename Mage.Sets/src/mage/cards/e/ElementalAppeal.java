@@ -17,7 +17,7 @@ import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.game.Game;
-import mage.game.permanent.token.RedElementalWithTrampleAndHaste;
+import mage.game.permanent.token.RedElementalTrampleHasteToken;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,7 +68,7 @@ class ElementalAppealEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        CreateTokenEffect effect = new CreateTokenEffect(new RedElementalWithTrampleAndHaste());
+        CreateTokenEffect effect = new CreateTokenEffect(new RedElementalTrampleHasteToken());
         if (effect.apply(game, source)) {
             effect.exileTokensCreatedAtNextEndStep(game, source);
             if (KickedCondition.ONCE.apply(game, source)) {

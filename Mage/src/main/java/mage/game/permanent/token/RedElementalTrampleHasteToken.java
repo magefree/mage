@@ -10,9 +10,9 @@ import mage.util.RandomUtil;
 /**
  * @author spjspj
  */
-public final class RedElementalWithTrampleAndHaste extends TokenImpl {
+public final class RedElementalTrampleHasteToken extends TokenImpl {
 
-    public RedElementalWithTrampleAndHaste() {
+    public RedElementalTrampleHasteToken() {
         super("Elemental Token", "7/1 red Elemental creature token with trample and haste");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
@@ -23,11 +23,11 @@ public final class RedElementalWithTrampleAndHaste extends TokenImpl {
         addAbility(HasteAbility.getInstance());
     }
 
-    protected RedElementalWithTrampleAndHaste(final RedElementalWithTrampleAndHaste token) {
+    protected RedElementalTrampleHasteToken(final RedElementalTrampleHasteToken token) {
         super(token);
     }
 
-    public RedElementalWithTrampleAndHaste copy() {
-        return new RedElementalWithTrampleAndHaste(this);
+    public RedElementalTrampleHasteToken copy() {
+        return new RedElementalTrampleHasteToken(this);
     }
 }

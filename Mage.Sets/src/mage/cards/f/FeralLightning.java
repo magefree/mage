@@ -8,7 +8,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.permanent.token.ElementalTokenWithHaste;
+import mage.game.permanent.token.ElementalHasteToken;
 import mage.players.Player;
 
 import java.util.UUID;
@@ -56,7 +56,7 @@ class FeralLightningEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            CreateTokenEffect effect = new CreateTokenEffect(new ElementalTokenWithHaste(), 3);
+            CreateTokenEffect effect = new CreateTokenEffect(new ElementalHasteToken(), 3);
             effect.apply(game, source);
             effect.exileTokensCreatedAtNextEndStep(game, source);
             return true;

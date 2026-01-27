@@ -15,7 +15,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.game.permanent.token.TrooperToken;
+import mage.game.permanent.token.TrooperWhiteToken;
 
 /**
  *
@@ -30,7 +30,7 @@ public final class LAATGunship extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When LAAT Gunship attacks, create a 1/1 white Trooper creature token on to battlefield tapped and attacking.
-        this.addAbility(new AttacksTriggeredAbility(new CreateTokenEffect(new TrooperToken(), 1, true, true), false));
+        this.addAbility(new AttacksTriggeredAbility(new CreateTokenEffect(new TrooperWhiteToken(), 1, true, true), false));
 
         // {W}: LAAT Gunship gains spaceflight until the end of turn. Activate this ability only as a sorcery
         this.addAbility(new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(SpaceflightAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{W}")));

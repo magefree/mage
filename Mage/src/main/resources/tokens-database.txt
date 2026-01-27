@@ -471,7 +471,7 @@
 
 # CON
 |TOK:CON|Angel||AngelToken|
-|TOK:CON|Elemental||ElementalTokenWithHaste|
+|TOK:CON|Elemental||ElementalHasteToken|
 
 # DVD
 |TOK:DVD|Demon||DemonFlyingToken|
@@ -643,7 +643,7 @@
 |TOK:GTC|Frog Lizard||FrogLizardToken|
 |TOK:GTC|Horror||NightwingHorrorToken|
 |TOK:GTC|Rat||RatToken|
-|TOK:GTC|Soldier||SoldierTokenWithHaste|
+|TOK:GTC|Soldier||SoldierHasteToken|
 |TOK:GTC|Spirit||WhiteBlackSpiritToken|
 
 # H17
@@ -827,7 +827,7 @@
 |TOK:MM3|Phyrexian Golem||PhyrexianGolemToken|
 |TOK:MM3|Saproling||SaprolingToken|
 |TOK:MM3|Soldier|1|SoldierToken|
-|TOK:MM3|Soldier|2|SoldierTokenWithHaste|
+|TOK:MM3|Soldier|2|SoldierHasteToken|
 |TOK:MM3|Spider||PenumbraSpiderToken|
 |TOK:MM3|Spirit||SpiritWhiteToken|
 |TOK:MM3|Wurm||WurmWithTrampleToken|
@@ -878,7 +878,7 @@
 |TOK:OGW|Eldrazi Scion|5|EldraziScionToken|
 |TOK:OGW|Eldrazi Scion|6|EldraziScionToken|
 |TOK:OGW|Elemental|1|ElementalXXGreenToken|
-|TOK:OGW|Elemental|2|ElementalTokenWithHaste|
+|TOK:OGW|Elemental|2|ElementalHasteToken|
 |TOK:OGW|Plant||PlantToken|
 |TOK:OGW|Zombie||ZombieToken|
 
@@ -976,7 +976,7 @@
 |TOK:SWS|Rebel||RebelToken|
 |TOK:SWS|Royal Guard||RoyalGuardToken|
 |TOK:SWS|TIE Fighter||TIEFighterToken|
-|TOK:SWS|Trooper||TrooperToken|
+|TOK:SWS|Trooper||TrooperWhiteToken|
 |TOK:SWS|Tusken Raider||TuskenRaiderToken|
 
 # THS
@@ -1034,7 +1034,7 @@
 |TOK:ZEN|Angel||AngelToken|
 |TOK:ZEN|Beast||Beast44Token|
 |TOK:ZEN|Bird||BirdToken|
-|TOK:ZEN|Elemental||RedElementalWithTrampleAndHaste|
+|TOK:ZEN|Elemental||RedElementalTrampleHasteToken|
 |TOK:ZEN|Illusion||IllusionToken|
 |TOK:ZEN|Kor Soldier||KorSoldierToken|
 |TOK:ZEN|Merfolk||MerfolkToken|
@@ -1193,7 +1193,7 @@
 |TOK:C20|Bird Illusion||BirdIllusionToken|
 |TOK:C20|Dinosaur Cat||DinosaurCatToken|
 |TOK:C20|Drake||DrakeToken|
-|TOK:C20|Elemental|1|ElementalTokenWithHaste|
+|TOK:C20|Elemental|1|ElementalHasteToken|
 |TOK:C20|Elemental|2|WhiteElementalToken|
 |TOK:C20|Goblin Warrior||GoblinWarriorToken|
 |TOK:C20|Human||HumanToken|
@@ -1654,7 +1654,7 @@
 |TOK:NCC|Plant||PlantToken|
 |TOK:NCC|Saproling||SaprolingToken|
 |TOK:NCC|Soldier|1|SoldierLifelinkToken|
-|TOK:NCC|Soldier|2|SoldierTokenWithHaste|
+|TOK:NCC|Soldier|2|SoldierHasteToken|
 |TOK:NCC|Spider||SpiderToken|
 |TOK:NCC|Squid||SquidToken|
 |TOK:NCC|Tentacle||TentacleToken|
@@ -1786,7 +1786,7 @@
 |TOK:GK1|Horror||NightwingHorrorToken|
 |TOK:GK1|Saproling|1|SaprolingToken|
 |TOK:GK1|Saproling|2|SaprolingToken|
-|TOK:GK1|Soldier||SoldierTokenWithHaste|
+|TOK:GK1|Soldier||SoldierHasteToken|
 |TOK:GK1|Voja||VojaToken|
 |TOK:GK1|Weird||WeirdToken|
 |TOK:GK1|Wurm||WurmWithTrampleToken|
@@ -2036,7 +2036,7 @@
 |TOK:ONC|Phyrexian Wurm||PhyrexianWurmToken|
 |TOK:ONC|Soldier|1|SoldierToken|
 |TOK:ONC|Soldier|2|SoldierVigilanceToken|
-|TOK:ONC|Soldier|3|SoldierTokenWithHaste|
+|TOK:ONC|Soldier|3|SoldierHasteToken|
 |TOK:ONC|Spirit||SpiritWhiteToken|
 |TOK:ONC|Thopter||ThopterColorlessToken|
 
@@ -2186,7 +2186,7 @@
 |TOK:CMM|Eldrazi Scion||EldraziScionToken|
 |TOK:CMM|Eldrazi Spawn||EldraziSpawnToken|
 |TOK:CMM|Elemental|1|Elemental11HasteToken|
-|TOK:CMM|Elemental|2|ElementalTokenWithHaste|
+|TOK:CMM|Elemental|2|ElementalHasteToken|
 |TOK:CMM|Elemental|3|Elemental31TrampleHasteToken|
 |TOK:CMM|Elemental|4|Elemental44Token|
 |TOK:CMM|Elephant||ElephantToken|
@@ -2305,7 +2305,7 @@
 |TOK:PIP|Junk||JunkToken|
 |TOK:PIP|Robot||Robot33Token|
 |TOK:PIP|Settlement||SettlementToken|
-|TOK:PIP|Soldier|1|SoldierTokenWithHaste|
+|TOK:PIP|Soldier|1|SoldierHasteToken|
 |TOK:PIP|Soldier|2|SoldierToken|
 |TOK:PIP|Squirrel||SquirrelToken|
 |TOK:PIP|Thopter||ThopterToken|
@@ -2364,7 +2364,7 @@
 |TOK:RVR|Goblin|2|RakdosGuildmageGoblinToken|
 |TOK:RVR|Rhino||RhinoToken|
 |TOK:RVR|Saproling||SaprolingToken|
-|TOK:RVR|Soldier||SoldierTokenWithHaste|
+|TOK:RVR|Soldier||SoldierHasteToken|
 |TOK:RVR|Sphinx||WardenSphinxToken|
 |TOK:RVR|Spirit|1|SpiritWhiteToken|
 |TOK:RVR|Spirit|2|WhiteBlackSpiritToken|
