@@ -258,6 +258,7 @@ Star Wars|StarWars|
 Streets of New Capenna|StreetsOfNewCapenna|
 New Capenna Commander|NewCapennaCommander|
 Strixhaven: School of Mages|StrixhavenSchoolOfMages|
+Secrets of Strixhaven|SecretsOfStrixhaven|
 Stronghold|Stronghold|
 Super Series|SuperSeries|
 Tarkir: Dragonstorm|TarkirDragonstorm|
