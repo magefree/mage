@@ -718,6 +718,17 @@ public final class CardUtil {
         return overflowResult((long) base * multiply);
     }
 
+    /**
+     * Integer operation with overflow protection
+     *
+     * @param base
+     * @param power
+     * @return
+     */
+    public static int overflowExp(int base, int power) {
+        return overflowResult((long) Math.pow(base, power));
+    }
+
     private static int overflowResult(long value) {
         if (value >= Integer.MAX_VALUE) {
             return Integer.MAX_VALUE;
