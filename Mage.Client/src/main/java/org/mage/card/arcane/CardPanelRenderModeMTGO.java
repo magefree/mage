@@ -3,6 +3,7 @@ package org.mage.card.arcane;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import mage.cards.action.ActionCallback;
+import mage.client.dialog.PreferencesDialog;
 import mage.client.util.ImageCaches;
 import mage.constants.CardType;
 import mage.constants.SubType;
@@ -10,18 +11,24 @@ import mage.constants.SuperType;
 import mage.view.CardView;
 import mage.view.CounterView;
 import mage.view.PermanentView;
+import org.apache.log4j.Logger;
 import org.jdesktop.swingx.graphics.GraphicsUtilities;
+import org.mage.plugins.card.images.CardDownloadData;
 import org.mage.plugins.card.images.ImageCache;
+import org.mage.plugins.card.images.OnDemandImageDownloader;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Consumer;
 
 /**
  * Render mode: MTGO
  */
 public class CardPanelRenderModeMTGO extends CardPanel {
+
+    private static final Logger LOGGER = Logger.getLogger(CardPanelRenderModeMTGO.class);
 
     // TODO: share code and use for all images/rendering (potential injection point - images cache), see #969
     private static final boolean MTGO_MODE_RENDER_SMOOTH_IMAGES_ENABLED = false;
@@ -51,6 +58,9 @@ public class CardPanelRenderModeMTGO extends CardPanel {
 
     private int updateArtImageStamp;
     private final int cardRenderMode;
+
+    // Listener for on-demand image downloads
+    private Consumer<CardDownloadData> downloadListener;
 
     private static class ImageKey {
         final BufferedImage artImage;
@@ -288,32 +298,89 @@ public class CardPanelRenderModeMTGO extends CardPanel {
         // Schedule a repaint
         repaint();
 
-        // See if the image is already loaded
-        //artImage = ImageCache.tryGetImage(gameCard, getCardWidth(), getCardHeight());
-        //this.cardRenderer.setArtImage(artImage);
+        // Capture card info on EDT before submitting to thread pool
+        final CardView card = getGameCard();
+        if (card == null) {
+            return;
+        }
+        final String cardName = card.getName();
+        final String setCode = card.getExpansionSetCode();
+        final String cardNumber = card.getCardNumber();
 
         // Submit a task to draw with the card art when it arrives
-        if (artImage == null) {
-            final int stamp = ++updateArtImageStamp;
-            Util.threadPool.submit(() -> {
-                try {
-                    final BufferedImage srcImage;
-                    srcImage = ImageCache.getCardImage(getGameCard(), getCardWidth(), getCardHeight()).getImage();
-                    UI.invokeLater(() -> {
-                        if (stamp == updateArtImageStamp) {
-                            artImage = srcImage;
-                            cardRenderer.setArtImage(srcImage);
-                            if (srcImage != null) {
-                                // Invalidate and repaint
-                                cardImage = null;
-                                repaint();
+        final int stamp = ++updateArtImageStamp;
+        Util.threadPool.submit(() -> {
+            try {
+                final BufferedImage srcImage;
+                srcImage = ImageCache.getCardImage(card, getCardWidth(), getCardHeight()).getImage();
+
+                // Register for download notification if image is missing
+                if (srcImage == null) {
+                    registerDownloadListener(cardName, setCode, cardNumber);
+                }
+
+                UI.invokeLater(() -> {
+                    if (stamp == updateArtImageStamp) {
+                        artImage = srcImage;
+                        cardRenderer.setArtImage(srcImage);
+                        if (srcImage != null) {
+                            // Invalidate and repaint
+                            cardImage = null;
+                            repaint();
+
+                            // Unregister listener if we now have an image
+                            if (downloadListener != null) {
+                                OnDemandImageDownloader.getInstance().removeDownloadListener(downloadListener);
+                                downloadListener = null;
                             }
                         }
-                    });
-                } catch (Exception | Error e) {
-                    e.printStackTrace();
-                }
-            });
+                    }
+                });
+            } catch (Exception | Error e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    /**
+     * Register a listener to refresh this card when its image is downloaded.
+     */
+    private void registerDownloadListener(String cardName, String setCode, String cardNumber) {
+        // Only register if auto-download is enabled
+        if (!PreferencesDialog.isAutoDownloadEnabled()) {
+            return;
+        }
+
+        if (downloadListener != null) {
+            return; // Already registered
+        }
+
+        LOGGER.debug("MTGO: Registering download listener for: " + cardName + " [" + setCode + "/" + cardNumber + "]");
+
+        downloadListener = downloadedCard -> {
+            // Check if this download matches our card
+            boolean matches = downloadedCard.getName().equals(cardName)
+                    && downloadedCard.getSet().equals(setCode)
+                    && downloadedCard.getCollectorId().equals(cardNumber);
+
+            if (matches) {
+                // Refresh this card's image on the EDT
+                LOGGER.debug("MTGO: Triggering updateArtImage for: " + cardName);
+                UI.invokeLater(this::updateArtImage);
+            }
+        };
+
+        OnDemandImageDownloader.getInstance().addDownloadListener(downloadListener);
+    }
+
+    @Override
+    public void cleanUp() {
+        super.cleanUp();
+
+        // Unregister download listener
+        if (downloadListener != null) {
+            OnDemandImageDownloader.getInstance().removeDownloadListener(downloadListener);
+            downloadListener = null;
         }
     }
 
