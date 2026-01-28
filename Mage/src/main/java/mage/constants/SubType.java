@@ -410,6 +410,7 @@ public enum SubType {
     SPLINTER("Splinter", SubTypeSet.CreatureType),
     SPLITTER("Splitter", SubTypeSet.CreatureType),
     SPONGE("Sponge", SubTypeSet.CreatureType),
+    SPY("Spy", SubTypeSet.CreatureType),
     SQUID("Squid", SubTypeSet.CreatureType),
     SQUIRREL("Squirrel", SubTypeSet.CreatureType),
     STARFISH("Starfish", SubTypeSet.CreatureType),
