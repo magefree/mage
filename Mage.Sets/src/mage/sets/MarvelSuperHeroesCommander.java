@@ -23,6 +23,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Human Torch", 3, Rarity.MYTHIC, mage.cards.h.HumanTorch.class));
         cards.add(new SetCardInfo("Invisible Woman", 1, Rarity.MYTHIC, mage.cards.i.InvisibleWoman.class));
         cards.add(new SetCardInfo("Mister Fantastic", 2, Rarity.MYTHIC, mage.cards.m.MisterFantastic.class));
+        cards.add(new SetCardInfo("T'Challa, the Black Panther", 7, Rarity.MYTHIC, mage.cards.t.TChallaTheBlackPanther.class));
         cards.add(new SetCardInfo("The Thing", 4, Rarity.MYTHIC, mage.cards.t.TheThing.class));
     }
 }
