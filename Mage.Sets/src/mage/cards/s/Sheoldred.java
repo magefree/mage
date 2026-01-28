@@ -76,7 +76,7 @@ public final class Sheoldred extends TransformingDoubleFacedCard {
                     ability.addEffect(new DestroyTargetEffect().setTargetPointer(new EachTargetPointer())
                             .setText("for each opponent, destroy up to one target creature or planeswalker that player controls"));
                     ability.addTarget(new TargetCreatureOrPlaneswalker(0, 1));
-                    ability.setTargetAdjuster(new ForEachPlayerTargetsAdjuster(false, true));
+                    ability.setTargetAdjuster(new ForEachPlayerTargetsAdjuster(false, true, true));
                 }
         );
 
