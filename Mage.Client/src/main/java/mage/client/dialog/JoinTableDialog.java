@@ -8,6 +8,7 @@ import mage.remote.Session;
 import org.apache.log4j.Logger;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.UUID;
 
 /**
@@ -39,11 +40,14 @@ public class JoinTableDialog extends MageDialog {
         this.isTournament = isTournament;
         this.newPlayerPanel.setPlayerName(SessionHandler.getUserName());
         this.newPlayerPanel.showDeckElements(!isLimited);
+        this.newPlayerPanel.loadRecentDeckFiles();
         this.setModal(true);
         this.setLocation(100, 100);
         this.setVisible(true);
+        this.setResizable(true);
+        this.setMinimumSize(this.getPreferredSize());
+        this.setMaximumSize(new Dimension(Short.MAX_VALUE, this.getPreferredSize().height));
     }
-
 
     /**
      * This method is called from within the constructor to
