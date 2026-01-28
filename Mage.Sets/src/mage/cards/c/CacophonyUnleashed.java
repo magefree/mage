@@ -1,6 +1,5 @@
 package mage.cards.c;
 
-import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldThisOrAnotherTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CastFromEverywhereSourceCondition;
@@ -18,7 +17,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 
 import java.util.UUID;
 
@@ -42,9 +41,16 @@ public final class CacophonyUnleashed extends CardImpl {
 
         // Whenever Cacophony Unleashed or another enchantment you control enters, until end of turn, Cacophony Unleashed becomes a legendary 6/6 Nightmare God creature with menace and deathtouch. It's still an enchantment.
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
-                new BecomesCreatureSourceEffect(new CacophonyUnleashedToken(), CardType.ENCHANTMENT, Duration.EndOfTurn)
-                        .setText("until end of turn, {this} becomes a legendary 6/6 Nightmare God "
-                                + "creature with menace and deathtouch. It's still an enchantment."),
+                new BecomesCreatureSourceEffect(
+                    new CreatureToken(
+                        6, 6,
+                        "legendary 6/6 Nightmare God creature with menace and deathtouch",
+                        SubType.NIGHTMARE, SubType.GOD
+                    ).withSuperType(SuperType.LEGENDARY).withAbility(new MenaceAbility()).withAbility(DeathtouchAbility.getInstance()),
+                    CardType.ENCHANTMENT,
+                    Duration.EndOfTurn
+                ).setText("until end of turn, {this} becomes a legendary 6/6 Nightmare God "
+                    + "creature with menace and deathtouch. It's still an enchantment."),
                 StaticFilters.FILTER_PERMANENT_ENCHANTMENT,
                 false, true
         ));
@@ -57,28 +63,5 @@ public final class CacophonyUnleashed extends CardImpl {
     @Override
     public CacophonyUnleashed copy() {
         return new CacophonyUnleashed(this);
-    }
-}
-
-class CacophonyUnleashedToken extends TokenImpl {
-
-    CacophonyUnleashedToken() {
-        super("", "legendary 6/6 Nightmare God creature with menace and deathtouch");
-        supertype.add(SuperType.LEGENDARY);
-        cardType.add(CardType.CREATURE);
-        subtype.add(SubType.NIGHTMARE);
-        subtype.add(SubType.GOD);
-        power = new MageInt(6);
-        toughness = new MageInt(6);
-        addAbility(new MenaceAbility(false));
-        addAbility(DeathtouchAbility.getInstance());
-    }
-
-    private CacophonyUnleashedToken(final CacophonyUnleashedToken token) {
-        super(token);
-    }
-
-    public CacophonyUnleashedToken copy() {
-        return new CacophonyUnleashedToken(this);
     }
 }
