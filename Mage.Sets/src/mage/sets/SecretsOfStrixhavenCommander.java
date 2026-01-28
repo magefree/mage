@@ -21,6 +21,7 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         this.hasBasicLands = false; // temporary
 
         cards.add(new SetCardInfo("Dina, Essence Brewer", 1, Rarity.MYTHIC, mage.cards.d.DinaEssenceBrewer.class));
+        cards.add(new SetCardInfo("Killian, Decisive Mentor", 4, Rarity.MYTHIC, mage.cards.k.KillianDecisiveMentor.class));
         cards.add(new SetCardInfo("Sol Ring", 427, Rarity.MYTHIC, mage.cards.s.SolRing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Talisman of Conviction", 428, Rarity.MYTHIC, mage.cards.t.TalismanOfConviction.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Talisman of Creativity", 429, Rarity.MYTHIC, mage.cards.t.TalismanOfCreativity.class, NON_FULL_USE_VARIOUS));
