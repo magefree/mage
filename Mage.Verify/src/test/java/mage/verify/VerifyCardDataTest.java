@@ -2624,6 +2624,13 @@ public class VerifyCardDataTest {
             return;
         }
 
+        // lands on back of NDFCs *may* have only one ability
+        if (card instanceof TransformingDoubleFacedCardHalf
+            && ((DoubleFacedCardHalf)card).isBackSide()
+            && card.isLand()) {
+            return;
+        }
+
         // additional cost go to 1 ability
         if (refLowerText.startsWith("as an additional cost to cast")) {
             return;

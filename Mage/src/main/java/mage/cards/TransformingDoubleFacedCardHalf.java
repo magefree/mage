@@ -1,6 +1,9 @@
 package mage.cards;
 
 import mage.ObjectColor;
+import mage.abilities.Abilities;
+import mage.abilities.Ability;
+import mage.abilities.PlayLandAbility;
 import mage.abilities.SpellAbility;
 import mage.constants.*;
 import mage.game.Game;
@@ -45,5 +48,17 @@ public class TransformingDoubleFacedCardHalf extends DoubleFacedCardHalf {
     @Override
     public TransformingDoubleFacedCard getParentCard() {
         return (TransformingDoubleFacedCard) parentCard;
+    }
+
+    @Override
+    public Abilities<Ability> getAbilities() {
+        final Abilities<Ability> all = super.getAbilities();
+
+        // lands on the back of transforming double-faced cards should not be playable
+        if (this.isBackSide()) {
+            all.removeIf(ability -> ability instanceof PlayLandAbility);
+        }
+
+        return all;
     }
 }
