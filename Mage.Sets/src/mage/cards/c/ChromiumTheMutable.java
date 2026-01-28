@@ -17,7 +17,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 
 /**
  *
@@ -46,7 +46,13 @@ public final class ChromiumTheMutable extends CardImpl {
         // Discard a card: Until end of turn, Chromium, the Mutable becomes a Human with base power and toughness 1/1, loses all abilities, and gains hexproof. It can't be blocked this turn.
         Ability ability = new SimpleActivatedAbility(
                 new BecomesCreatureSourceEffect(
-                        new ChromiumTheMutableToken(), CardType.CREATURE, Duration.EndOfTurn
+                    new CreatureToken(
+                        1, 1,
+                        "Human with base power and toughness 1/1, loses all abilities, and gains hexproof",
+                        SubType.HUMAN
+                    ).withAbility(HexproofAbility.getInstance()),
+                    CardType.CREATURE,
+                    Duration.EndOfTurn
                 ).andLoseAbilities(true),
                 new DiscardCardCost()
         );
@@ -64,26 +70,5 @@ public final class ChromiumTheMutable extends CardImpl {
     @Override
     public ChromiumTheMutable copy() {
         return new ChromiumTheMutable(this);
-    }
-}
-
-class ChromiumTheMutableToken extends TokenImpl {
-
-    public ChromiumTheMutableToken() {
-        super("", "Human with base power and toughness 1/1, loses all abilities, and gains hexproof");
-        cardType.add(CardType.CREATURE);
-        subtype.add(SubType.HUMAN);
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-
-        addAbility(HexproofAbility.getInstance());
-    }
-
-    private ChromiumTheMutableToken(final ChromiumTheMutableToken token) {
-        super(token);
-    }
-
-    public ChromiumTheMutableToken copy() {
-        return new ChromiumTheMutableToken(this);
     }
 }
