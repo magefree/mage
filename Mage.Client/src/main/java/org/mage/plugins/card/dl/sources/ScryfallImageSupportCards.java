@@ -622,6 +622,7 @@ public class ScryfallImageSupportCards {
             add("TMT"); // Teenage Mutant Ninja Turtles
             add("TMC"); // Teenage Mutant Ninja Turtles Eternal
             add("SOS"); // Secrets of Strixhaven
+            add("SOC"); // Secrets of Strixhaven Commander
             add("MSH"); // Marvel Super Heroes
             add("MSC"); // Marvel Super Heroes Commander
 
