@@ -3,8 +3,6 @@ package mage.cards.a;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.ManaCost;
-import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.keyword.SurveilEffect;
 import mage.abilities.keyword.MiracleAbility;
@@ -70,9 +68,7 @@ class AminatouVeilPiercerEffect extends ContinuousEffectImpl {
             return false;
         }
         for (Card card : controller.getHand().getCards(StaticFilters.FILTER_CARD_ENCHANTMENT, game)) {
-            ManaCosts<ManaCost> manaCosts = card.getManaCost().copy();
-            CardUtil.reduceCost(manaCosts, 4);
-            Ability ability = new MiracleAbility(manaCosts.getText());
+            Ability ability = new MiracleAbility(CardUtil.reduceCost(card.getManaCost(), 4).getText());
             ability.setSourceId(card.getId());
             ability.setControllerId(card.getOwnerId());
             game.getState().addOtherAbility(card, ability);

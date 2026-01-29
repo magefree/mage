@@ -795,6 +795,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 if (isTopCardRevealed() && !isDrawsFromBottom()) {
                     game.fireInformEvent(getLogName() + " draws a revealed card  (" + card.getLogName() + ')');
                 }
+                game.processAction();
                 game.fireEvent(new DrewCardEvent(card.getId(), getId(), source, event));
                 numDrawn++;
             }

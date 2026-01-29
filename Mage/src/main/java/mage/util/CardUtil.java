@@ -163,6 +163,11 @@ public final class CardUtil {
     public static ManaCosts<ManaCost> adjustCost(ManaCosts<ManaCost> manaCosts, int reduceCount) {
         ManaCosts<ManaCost> newCost = new ManaCostsImpl<>();
 
+        // if mana cost is empty then it can't be modified (e.g. Hypergenesis)
+        if (manaCosts.isEmpty()) {
+            return newCost;
+        }
+
         // nothing to change
         if (reduceCount == 0) {
             for (ManaCost manaCost : manaCosts) {
@@ -303,6 +308,10 @@ public final class CardUtil {
                 .orElse(null);
         if (filter != null) {
             newCost.setSourceFilter(filter);
+        }
+        // there should always be a {0} left over if the cost has been fully reduced
+        if (newCost.isEmpty()) {
+            newCost.add(new GenericManaCost(0));
         }
 
         return newCost;
