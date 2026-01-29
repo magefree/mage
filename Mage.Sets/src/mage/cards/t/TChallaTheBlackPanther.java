@@ -4,7 +4,6 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.constants.SubType;
@@ -48,7 +47,7 @@ public final class TChallaTheBlackPanther extends CardImpl {
 
         // Whenever you cast an artifact spell with mana value 4 or greater, put two +1/+1 counters on T'Challa.
         this.addAbility(new SpellCastControllerTriggeredAbility(
-            new AddCountersSourceEffect(CounterType.P1P1.createInstance(), StaticValue.get(2)), filter, false
+            new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), filter, false
         ));
     }
 
