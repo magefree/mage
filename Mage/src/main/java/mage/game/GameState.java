@@ -1157,6 +1157,13 @@ public class GameState implements Serializable, Copyable<GameState> {
     private void addCard(Card card, Zone zone) {
         setZone(card.getId(), zone);
 
+        // Actually put the card in the exile zone if it's exiled;
+        // see https://github.com/magefree/mage/issues/14005 for why this is necessary.
+        // This is only called from addCard(card) which uses Zone.OUTSIDE, and in the copy spell code.
+        if (zone.match(Zone.EXILED)) {
+            getExile().getPermanentExile().add(card.getId());
+        }
+
         // add card specific abilities to game
         for (Ability ability : card.getInitAbilities()) {
             addAbility(ability, null, card);
