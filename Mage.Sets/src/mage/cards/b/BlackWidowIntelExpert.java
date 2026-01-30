@@ -4,16 +4,14 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.game.Game;
-import mage.players.Player;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 
 /**
  *
@@ -35,7 +33,10 @@ public final class BlackWidowIntelExpert extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // Whenever Black Widow deals combat damage to an opponent, you and that player each draw two cards.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new BlackWidowEffect(), false, true));
+        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(
+            new DrawCardSourceControllerEffect(2).setText("you"), false, true
+        );
+        ability.addEffect(new DrawCardTargetEffect(2).setText("and that player each draw two cards"));
 
     }
 
@@ -46,37 +47,5 @@ public final class BlackWidowIntelExpert extends CardImpl {
     @Override
     public BlackWidowIntelExpert copy() {
         return new BlackWidowIntelExpert(this);
-    }
-}
-
-class BlackWidowEffect extends OneShotEffect {
-
-    BlackWidowEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "you and that player each draw two cards";
-    }
-
-    private BlackWidowEffect(final BlackWidowEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public BlackWidowEffect copy() {
-        return new BlackWidowEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player sourceController = game.getPlayer(source.getControllerId());
-        Player damagedPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
-        if (sourceController != null && damagedPlayer != null) {
-            int amount = (Integer) getValue("damage");
-            if (amount > 0) {
-                sourceController.drawCards(2, source, game);
-                damagedPlayer.drawCards(2, source, game);
-                return true;
-            }
-        }
-        return false;
     }
 }
