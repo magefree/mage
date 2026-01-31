@@ -136,6 +136,7 @@ class RoothaMasteringTheMomentEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int xValue = RoothaMasteringTheMomentDynamicValue.instance.calculate(game, source, this);
+        // TODO: After the set reveals, confirm there isn't a valid printed Token to use instead. Otherwise delete this comment.
         return new CreatureToken(
             xValue, xValue,
             "X/X blue and red Elemental creature token with flying and haste",
