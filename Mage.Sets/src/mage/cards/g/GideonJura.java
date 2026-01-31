@@ -1,6 +1,5 @@
 package mage.cards.g;
 
-import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
@@ -16,9 +15,8 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetOpponent;
 
 import java.util.UUID;
@@ -52,9 +50,12 @@ public final class GideonJura extends CardImpl {
         this.addAbility(ability2);
 
         // 0: Until end of turn, Gideon Jura becomes a 6/6 Human Soldier creature that's still a planeswalker. Prevent all damage that would be dealt to him this turn.
-        LoyaltyAbility ability3 = new LoyaltyAbility(new BecomesCreatureSourceEffect(new GideonJuraToken(), CardType.PLANESWALKER, Duration.EndOfTurn), 0);
-        Effect effect = new PreventAllDamageToSourceEffect(Duration.EndOfTurn);
-        effect.setText("Prevent all damage that would be dealt to him this turn");
+        LoyaltyAbility ability3 = new LoyaltyAbility(new BecomesCreatureSourceEffect(
+            new CreatureToken(6, 6, "6/6 Human Soldier creature", SubType.HUMAN, SubType.SOLDIER),
+            CardType.PLANESWALKER,
+            Duration.EndOfTurn
+        ), 0);
+        Effect effect = new PreventAllDamageToSourceEffect(Duration.EndOfTurn).setText("Prevent all damage that would be dealt to him this turn");
         ability3.addEffect(effect);
         this.addAbility(ability3);
     }
@@ -68,27 +69,6 @@ public final class GideonJura extends CardImpl {
         return new GideonJura(this);
     }
 
-}
-
-class GideonJuraToken extends TokenImpl {
-
-    public GideonJuraToken() {
-        super("", "6/6 Human Soldier creature");
-        cardType.add(CardType.CREATURE);
-        subtype.add(SubType.HUMAN);
-        subtype.add(SubType.SOLDIER);
-        power = new MageInt(6);
-        toughness = new MageInt(6);
-    }
-
-    private GideonJuraToken(final GideonJuraToken token) {
-        super(token);
-    }
-
-    @Override
-    public GideonJuraToken copy() {
-        return new GideonJuraToken(this);
-    }
 }
 
 class GideonJuraEffect extends RequirementEffect {
