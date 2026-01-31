@@ -2,7 +2,6 @@
 package mage.cards.g;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GetEmblemEffect;
@@ -17,7 +16,7 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.game.command.emblems.GideonOfTheTrialsEmblem;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.TargetPermanent;
 
 /**
@@ -42,7 +41,12 @@ public final class GideonOfTheTrials extends CardImpl {
         this.addAbility(ability);
 
         // 0: Until end of turn, Gideon of the Trials becomes a 4/4 Human Soldier creature with indestructible that's still a planeswalker. Prevent all damage that would be dealt to him this turn.
-        ability = new LoyaltyAbility(new BecomesCreatureSourceEffect(new GideonOfTheTrialsToken(), CardType.PLANESWALKER, Duration.EndOfTurn), 0);
+        ability = new LoyaltyAbility(new BecomesCreatureSourceEffect(
+            new CreatureToken(4, 4, "4/4 Human Soldier creature with indestructible", SubType.HUMAN, SubType.SOLDIER)
+                .withAbility(IndestructibleAbility.getInstance()),
+            CardType.PLANESWALKER,
+            Duration.EndOfTurn
+        ), 0);
         effect = new PreventAllDamageToSourceEffect(Duration.EndOfTurn);
         effect.setText("Prevent all damage that would be dealt to him this turn");
         ability.addEffect(effect);
@@ -50,7 +54,6 @@ public final class GideonOfTheTrials extends CardImpl {
 
         // 0: You get an emblem with "As long as you control a Gideon planeswalker, you can't lose the game and your opponent can't win the game."
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new GideonOfTheTrialsEmblem()), 0));
-
     }
 
     private GideonOfTheTrials(final GideonOfTheTrials card) {
@@ -60,25 +63,5 @@ public final class GideonOfTheTrials extends CardImpl {
     @Override
     public GideonOfTheTrials copy() {
         return new GideonOfTheTrials(this);
-    }
-}
-
-class GideonOfTheTrialsToken extends TokenImpl {
-
-    public GideonOfTheTrialsToken() {
-        super("", "4/4 Human Soldier creature with indestructible");
-        cardType.add(CardType.CREATURE);
-        subtype.add(SubType.HUMAN);
-        subtype.add(SubType.SOLDIER);
-        power = new MageInt(4);
-        toughness = new MageInt(4);
-        this.addAbility(IndestructibleAbility.getInstance());
-    }
-    private GideonOfTheTrialsToken(final GideonOfTheTrialsToken token) {
-        super(token);
-    }
-
-    public GideonOfTheTrialsToken copy() {
-        return new GideonOfTheTrialsToken(this);
     }
 }
