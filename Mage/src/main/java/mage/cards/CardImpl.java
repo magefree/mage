@@ -487,94 +487,90 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     public boolean removeFromZone(Game game, Zone fromZone, Ability source) {
         boolean removed = false;
         MageObject lkiObject = null;
-        if (isCopy()) { // copied cards have no need to be removed from a previous zone
-            removed = true;
-        } else {
-            switch (fromZone) {
-                case GRAVEYARD:
-                    removed = game.getPlayer(ownerId).removeFromGraveyard(this, game);
-                    break;
-                case HAND:
-                    removed = game.getPlayer(ownerId).removeFromHand(this, game);
-                    break;
-                case LIBRARY:
-                    removed = game.getPlayer(ownerId).removeFromLibrary(this, game);
-                    break;
-                case EXILED:
-                    if (game.getExile().getCard(getId(), game) != null) {
-                        removed = game.getExile().removeCard(this);
-                    }
-                    break;
-                case STACK:
-                    StackObject stackObject;
-                    if (getSpellAbility() != null) {
-                        stackObject = game.getStack().getSpell(getSpellAbility().getId(), false);
-                    } else {
-                        stackObject = game.getStack().getSpell(this.getId(), false);
-                    }
+        switch (fromZone) {
+            case GRAVEYARD:
+                removed = game.getPlayer(ownerId).removeFromGraveyard(this, game);
+                break;
+            case HAND:
+                removed = game.getPlayer(ownerId).removeFromHand(this, game);
+                break;
+            case LIBRARY:
+                removed = game.getPlayer(ownerId).removeFromLibrary(this, game);
+                break;
+            case EXILED:
+                if (game.getExile().getCard(getId(), game) != null) {
+                    removed = game.getExile().removeCard(this);
+                }
+                break;
+            case STACK:
+                StackObject stackObject;
+                if (getSpellAbility() != null) {
+                    stackObject = game.getStack().getSpell(getSpellAbility().getId(), false);
+                } else {
+                    stackObject = game.getStack().getSpell(this.getId(), false);
+                }
 
-                    // handle half of Split Cards on stack
-                    if (stackObject == null && (this instanceof SplitCard)) {
-                        stackObject = game.getStack().getSpell(((SplitCard) this).getLeftHalfCard().getId(), false);
-                        if (stackObject == null) {
-                            stackObject = game.getStack().getSpell(((SplitCard) this).getRightHalfCard().getId(),
-                                    false);
-                        }
-                    }
-
-                    // handle half of Double Faces Cards on stack
-                    if (stackObject == null && (this instanceof DoubleFacedCard)) {
-                        stackObject = game.getStack().getSpell(((DoubleFacedCard) this).getLeftHalfCard().getId(),
-                                false);
-                        if (stackObject == null) {
-                            stackObject = game.getStack()
-                                    .getSpell(((DoubleFacedCard) this).getRightHalfCard().getId(), false);
-                        }
-                    }
-
-                    if (stackObject == null && (this instanceof CardWithSpellOption)) {
-                        stackObject = game.getStack().getSpell(((CardWithSpellOption) this).getSpellCard().getId(), false);
-                    }
-
+                // handle half of Split Cards on stack
+                if (stackObject == null && (this instanceof SplitCard)) {
+                    stackObject = game.getStack().getSpell(((SplitCard) this).getLeftHalfCard().getId(), false);
                     if (stackObject == null) {
-                        stackObject = game.getStack().getSpell(getId(), false);
+                        stackObject = game.getStack().getSpell(((SplitCard) this).getRightHalfCard().getId(),
+                                false);
                     }
-                    if (stackObject != null) {
-                        removed = game.getStack().remove(stackObject, game);
-                        lkiObject = stackObject;
+                }
+
+                // handle half of Double Faces Cards on stack
+                if (stackObject == null && (this instanceof DoubleFacedCard)) {
+                    stackObject = game.getStack().getSpell(((DoubleFacedCard) this).getLeftHalfCard().getId(),
+                            false);
+                    if (stackObject == null) {
+                        stackObject = game.getStack()
+                                .getSpell(((DoubleFacedCard) this).getRightHalfCard().getId(), false);
                     }
-                    break;
-                case COMMAND:
-                    for (CommandObject commandObject : game.getState().getCommand()) {
-                        if (commandObject.getId().equals(objectId)) {
-                            lkiObject = commandObject;
-                        }
+                }
+
+                if (stackObject == null && (this instanceof CardWithSpellOption)) {
+                    stackObject = game.getStack().getSpell(((CardWithSpellOption) this).getSpellCard().getId(), false);
+                }
+
+                if (stackObject == null) {
+                    stackObject = game.getStack().getSpell(getId(), false);
+                }
+                if (stackObject != null) {
+                    removed = game.getStack().remove(stackObject, game);
+                    lkiObject = stackObject;
+                }
+                break;
+            case COMMAND:
+                for (CommandObject commandObject : game.getState().getCommand()) {
+                    if (commandObject.getId().equals(objectId)) {
+                        lkiObject = commandObject;
                     }
-                    if (lkiObject != null) {
-                        removed = game.getState().getCommand().remove(lkiObject);
-                    }
-                    break;
-                case OUTSIDE:
-                    if (game.getPlayer(ownerId).getSideboard().contains(this.getId())) {
-                        game.getPlayer(ownerId).getSideboard().remove(this.getId());
-                        removed = true;
-                    } else if (game.getPhase() == null) {
-                        // E.g. Commander of commander game
-                        removed = true;
-                    } else {
-                        // Unstable - Summon the Pack
-                        removed = true;
-                    }
-                    break;
-                case BATTLEFIELD: // for sacrificing permanents or putting to library
+                }
+                if (lkiObject != null) {
+                    removed = game.getState().getCommand().remove(lkiObject);
+                }
+                break;
+            case OUTSIDE:
+                if (game.getPlayer(ownerId).getSideboard().contains(this.getId())) {
+                    game.getPlayer(ownerId).getSideboard().remove(this.getId());
                     removed = true;
-                    break;
-                default:
-                    MageObject sourceObject = game.getObject(source);
-                    logger.fatal("Invalid from zone [" + fromZone + "] for card [" + this.getIdName()
-                            + "] source [" + (sourceObject != null ? sourceObject.getName() : "null") + ']');
-                    break;
-            }
+                } else if (game.getPhase() == null) {
+                    // E.g. Commander of commander game
+                    removed = true;
+                } else {
+                    // Unstable - Summon the Pack
+                    removed = true;
+                }
+                break;
+            case BATTLEFIELD: // for sacrificing permanents or putting to library
+                removed = true;
+                break;
+            default:
+                MageObject sourceObject = game.getObject(source);
+                logger.fatal("Invalid from zone [" + fromZone + "] for card [" + this.getIdName()
+                        + "] source [" + (sourceObject != null ? sourceObject.getName() : "null") + ']');
+                break;
         }
         if (removed) {
             if (fromZone != Zone.OUTSIDE) {
