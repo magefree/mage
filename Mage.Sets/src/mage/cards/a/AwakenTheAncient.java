@@ -1,6 +1,5 @@
 package mage.cards.a;
 
-import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureAttachedEffect;
@@ -13,7 +12,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -37,8 +36,12 @@ public final class AwakenTheAncient extends CardImpl {
 
         // Enchanted Mountain is a 7/7 red Giant creature with haste. It's still a land.
         this.addAbility(new SimpleStaticAbility(new BecomesCreatureAttachedEffect(
-                new GiantToken(), "Enchanted Mountain is a 7/7 red Giant creature with haste. It's still a land",
-                Duration.WhileOnBattlefield, BecomesCreatureAttachedEffect.LoseType.COLOR
+            new CreatureToken(
+                7, 7, "7/7 red Giant creature with haste", SubType.GIANT
+            ).withColor("R").withAbility(HasteAbility.getInstance()),
+            "Enchanted Mountain is a 7/7 red Giant creature with haste. It's still a land",
+            Duration.WhileOnBattlefield,
+            BecomesCreatureAttachedEffect.LoseType.COLOR
         )));
     }
 
@@ -49,26 +52,5 @@ public final class AwakenTheAncient extends CardImpl {
     @Override
     public AwakenTheAncient copy() {
         return new AwakenTheAncient(this);
-    }
-
-    private static class GiantToken extends TokenImpl {
-
-        GiantToken() {
-            super("Giant", "7/7 red Giant creature with haste");
-            cardType.add(CardType.CREATURE);
-            color.setRed(true);
-            subtype.add(SubType.GIANT);
-            power = new MageInt(7);
-            toughness = new MageInt(7);
-            this.addAbility(HasteAbility.getInstance());
-        }
-
-        private GiantToken(final GiantToken token) {
-            super(token);
-        }
-
-        public GiantToken copy() {
-            return new GiantToken(this);
-        }
     }
 }
