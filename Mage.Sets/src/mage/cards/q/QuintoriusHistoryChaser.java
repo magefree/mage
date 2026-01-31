@@ -47,8 +47,14 @@ public final class QuintoriusHistoryChaser extends CardImpl {
         ));
 
         // −4: Spirits you control gain double strike and vigilance until end of turn.
-        LoyaltyAbility ability = new LoyaltyAbility(new GainAbilityControlledEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn, filter), -4);
-        ability.addEffect(new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn, filter));
+        LoyaltyAbility ability = new LoyaltyAbility(
+            new GainAbilityControlledEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn, filter)
+                .setText("Spirits you control gain double strike"), -4
+        );
+        ability.addEffect(
+            new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn, filter)
+                .setText("and vigilance until end of turn")
+        );
         this.addAbility(ability);
 
         // Quintorius, History Chaser can be your commander.
