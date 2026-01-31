@@ -8,7 +8,8 @@ import mage.abilities.condition.Condition;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
@@ -29,6 +30,11 @@ import mage.constants.Outcome;
  */
 public final class RoothaMasteringTheMoment extends CardImpl {
 
+    private static final Hint hint = new ValueHint(
+        "the greatest mana among instant and sorcery spells you've cast this turn",
+        RoothaMasteringTheMomentDynamicValue.instance
+    );
+
     public RoothaMasteringTheMoment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{R}");
 
@@ -42,7 +48,7 @@ public final class RoothaMasteringTheMoment extends CardImpl {
         // create an X/X blue and red Elemental creature token with flying and haste, where X is the
         //  greatest mana value among instant and sorcery spells you've cast this turn.
         this.addAbility(new BeginningOfCombatTriggeredAbility(new RoothaMasteringTheMomentEffect())
-            .withInterveningIf(RoothaMasteringTheMomentCondition.instance));
+            .withInterveningIf(RoothaMasteringTheMomentCondition.instance).addHint(hint));
     }
 
     private RoothaMasteringTheMoment(final RoothaMasteringTheMoment card) {
@@ -66,11 +72,11 @@ enum RoothaMasteringTheMomentDynamicValue implements DynamicValue {
         }
 
         return watcher
-                .getSpellsCastThisTurn(sourceAbility.getControllerId())
-                .stream()
-                .filter(s -> s.isInstantOrSorcery(game) && !s.getSourceId().equals(sourceAbility.getSourceId()))
-                .mapToInt(Spell::getManaValue)
-                .max().orElse(0);
+            .getSpellsCastThisTurn(sourceAbility.getControllerId())
+            .stream()
+            .filter(s -> s.isInstantOrSorcery(game))
+            .mapToInt(Spell::getManaValue)
+            .max().orElse(0);
     }
 
     @Override
@@ -85,7 +91,7 @@ enum RoothaMasteringTheMomentDynamicValue implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "total mana value of other spells you've cast this turn";
+        return "the greatest mana among instant and sorcery spells you've cast this turn";
     }
 }
 
@@ -94,17 +100,10 @@ enum RoothaMasteringTheMomentCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
-        if (watcher == null) {
-            return false;
-        }
-        List<Spell> spells = watcher.getSpellsCastThisTurn(source.getControllerId());
-        if (spells == null) {
-            return false;
-        }
+        List<Spell> spells = game.getState().getWatcher(SpellsCastWatcher.class)
+            .getSpellsCastThisTurn(source.getControllerId());
         for (Spell spell : spells) {
-            if (!spell.getSourceId().equals(source.getSourceId())
-                    && spell.isInstantOrSorcery(game)) {
+            if (spell.isInstantOrSorcery(game)) {
                 return true;
             }
         }
@@ -137,12 +136,11 @@ class RoothaMasteringTheMomentEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int xValue = RoothaMasteringTheMomentDynamicValue.instance.calculate(game, source, this);
-        return new CreateTokenEffect(
-            new CreatureToken(
-                xValue, xValue,
-                "X/X blue and red Elemental creature token with flying and haste",
-                    SubType.ELEMENTAL
-            ).withColor("UR").withAbility(FlyingAbility.getInstance()).withAbility(HasteAbility.getInstance())
-        ).apply(game, source);
+        return new CreatureToken(
+            xValue, xValue,
+            "X/X blue and red Elemental creature token with flying and haste",
+                SubType.ELEMENTAL
+        ).withColor("UR").withAbility(FlyingAbility.getInstance()).withAbility(HasteAbility.getInstance())
+        .putOntoBattlefield(1, game, source);
     }
 }
