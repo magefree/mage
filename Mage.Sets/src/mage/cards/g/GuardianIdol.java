@@ -2,7 +2,6 @@
 package mage.cards.g;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -13,8 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.Zone;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 
 /**
  *
@@ -30,7 +28,14 @@ public final class GuardianIdol extends CardImpl {
         // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         // {2}: Guardian Idol becomes a 2/2 Golem artifact creature until end of turn.
-        this.addAbility(new SimpleActivatedAbility(new BecomesCreatureSourceEffect(new GuardianIdolGolemToken(), CardType.ARTIFACT, Duration.EndOfTurn), new ManaCostsImpl<>("{2}")));
+        this.addAbility(new SimpleActivatedAbility(
+            new BecomesCreatureSourceEffect(
+                new CreatureToken(2, 2, "2/2 Golem artifact creature", SubType.GOLEM).withType(CardType.ARTIFACT),
+                CardType.ARTIFACT,
+                Duration.EndOfTurn
+            ),
+        new ManaCostsImpl<>("{2}")
+    ));
     }
 
     private GuardianIdol(final GuardianIdol card) {
@@ -40,24 +45,5 @@ public final class GuardianIdol extends CardImpl {
     @Override
     public GuardianIdol copy() {
         return new GuardianIdol(this);
-    }
-}
-
-class GuardianIdolGolemToken extends TokenImpl {
-
-    public GuardianIdolGolemToken() {
-        super("Golem", "2/2 Golem artifact creature");
-        cardType.add(CardType.ARTIFACT);
-        cardType.add(CardType.CREATURE);
-        subtype.add(SubType.GOLEM);
-        power = new MageInt(2);
-        toughness = new MageInt(2);
-    }
-    private GuardianIdolGolemToken(final GuardianIdolGolemToken token) {
-        super(token);
-    }
-
-    public GuardianIdolGolemToken copy() {
-        return new GuardianIdolGolemToken(this);
     }
 }
