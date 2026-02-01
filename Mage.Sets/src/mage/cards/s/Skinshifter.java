@@ -30,8 +30,6 @@ public final class Skinshifter extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // TODO: Either confirm it's not safe and delete this comment, or replace
-        // rhinoToken with public RhinoToken. See #14315
         CreatureToken rhinoToken = new CreatureToken(
             4, 4,
             "Rhino with base power and toughness 4/4 and gains trample",
