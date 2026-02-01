@@ -186,6 +186,7 @@ public enum SubType {
     ELF("Elf", SubTypeSet.CreatureType),
     ELK("Elk", SubTypeSet.CreatureType),
     EMPLOYEE("Employee", SubTypeSet.CreatureType),
+    ETERNAL("Eternal", SubTypeSet.CreatureType),
     EWOK("Ewok", SubTypeSet.CreatureType, true), // Star Wars
     EXPANSION_SYMBOL("Expansion-Symbol", SubTypeSet.CreatureType, true), // Unhinged
     EYE("Eye", SubTypeSet.CreatureType),
