@@ -488,10 +488,8 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         boolean removed = false;
         MageObject lkiObject = null;
         if (isCopy()) { // copied cards have no need to be removed from a previous zone
-            if (fromZone != null && fromZone.match(Zone.EXILED)) {
-                if (game.getExile().getCard(getId(), game) != null) {
-                    removed = game.getExile().removeCard(this);
-                }
+            if (fromZone != null && fromZone.match(Zone.EXILED) && game.getExile().getCard(getId(), game) != null) {
+                removed = game.getExile().removeCard(this);
             } else {
                 removed = true;
             }
