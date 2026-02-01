@@ -93,7 +93,7 @@ class AlpineMoonEffect extends ContinuousEffectImpl {
                     land.removeAllSubTypes(game, SubTypeSet.NonBasicLandType);
                     break;
                 case AbilityAddingRemovingEffects_6:
-                    land.removeAbilities(land.getAbilities(), source.getSourceId(), game);
+                    land.removeAllAbilities(source.getSourceId(), game);
                     land.addAbility(new AnyColorManaAbility(), source.getSourceId(), game);
                     break;
             }
