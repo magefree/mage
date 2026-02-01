@@ -503,6 +503,10 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
+    public void setOriginalId(UUID newOriginalId) {
+    }
+
+    @Override
     public Ability getStackAbility() {
         return ability;
     }

@@ -425,22 +425,36 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         return super.getAbilities(game);
     }
 
+    // TODO: remove. temporary
+    @Override
+    public Ability addAbility(Ability ability, UUID sourceId, Game game) {
+        return addAbility(ability, null, sourceId, game);
+    }
+
+    // TODO: remove. temporary
+    @Override
+    public Ability addAbility(Ability ability, UUID sourceId, Game game, boolean fromExistingObject) {
+        return addAbility(ability, null, sourceId, game, fromExistingObject);
+    }
+
     /**
      * Add an ability to the permanent. When copying from an existing source
      * you should use the fromExistingObject variant of this function to prevent double-copying subabilities
      *
-     * @param ability  The ability to be added
-     * @param sourceId id of the source doing the added (for the effect created to add it)
+     * @param ability    The ability to be added
+     * @param originalId original id for the ability once added.
+     * @param sourceId   id of the source doing the added (for the effect created to add it)
      * @param game
      * @return The newly added ability copy
      */
     @Override
-    public Ability addAbility(Ability ability, UUID sourceId, Game game) {
-        return addAbility(ability, sourceId, game, false);
+    public Ability addAbility(Ability ability, UUID originalId, UUID sourceId, Game game) {
+        return addAbility(ability, originalId, sourceId, game, false);
     }
 
     /**
      * @param ability            The ability to be added
+     * @param originalId         original id for the ability once added.
      * @param sourceId           id of the source doing the added (for the effect created to add it)
      * @param game
      * @param fromExistingObject if copying abilities from an existing source then must ignore sub-abilities because they're already on the source object
@@ -448,12 +462,15 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
      * @return The newly added ability copy
      */
     @Override
-    public Ability addAbility(Ability ability, UUID sourceId, Game game, boolean fromExistingObject) {
+    public Ability addAbility(Ability ability, UUID originalId, UUID sourceId, Game game, boolean fromExistingObject) {
         // singleton abilities -- only one instance
         // other abilities -- any amount of instances
         if (!abilities.containsKey(ability.getId())) {
             Ability copyAbility = ability.copy();
             copyAbility.newId(); // needed so that source can get an ability multiple times (e.g. Raging Ravine)
+            if (originalId != null) { // TODO: should we enforce not null originalId?
+                copyAbility.setOriginalId(originalId);
+            }
             copyAbility.setControllerId(controllerId);
             copyAbility.setSourceId(objectId);
             // triggered abilities must be added to the state().triggers
