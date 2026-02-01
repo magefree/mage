@@ -66,7 +66,7 @@ class HarmonizedCrescendoEffect extends OneShotEffect {
         }
         Choice choice = new ChoiceCreatureType(game, source);
         player.choose(outcome, choice, game);
-        SubType subType = SubType.fromString(choice.getChoice());
+        SubType subType = SubType.byDescription(choice.getChoice());
         if (subType == null) {
             return false;
         }
