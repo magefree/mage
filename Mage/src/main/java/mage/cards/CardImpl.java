@@ -503,6 +503,10 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 }
                 break;
             case STACK:
+                if (isCopy()) {
+                    removed = true;
+                    break;
+                }
                 StackObject stackObject;
                 if (getSpellAbility() != null) {
                     stackObject = game.getStack().getSpell(getSpellAbility().getId(), false);
