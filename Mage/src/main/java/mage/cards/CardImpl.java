@@ -487,8 +487,12 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     public boolean removeFromZone(Game game, Zone fromZone, Ability source) {
         boolean removed = false;
         MageObject lkiObject = null;
-        if (isCopy()) { // copied cards have no need to be removed from a previous zone
-            removed = true;
+        if (isCopy()) { // most copied cards have no need to be removed from a previous zone
+            if (fromZone != null && fromZone.match(Zone.EXILED) && game.getExile().getCard(getId(), game) != null) {
+                removed = game.getExile().removeCard(this); // copied cards are actually put in exile now, so remove them.
+            } else {
+                removed = true;
+            }
         } else {
             switch (fromZone) {
                 case GRAVEYARD:
