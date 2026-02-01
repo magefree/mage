@@ -1,6 +1,5 @@
 package mage.cards.a;
 
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -16,8 +15,7 @@ import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Angel33Token;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 
 import java.util.UUID;
 
@@ -73,7 +71,10 @@ class AnsweredPrayersEffect extends OneShotEffect {
             return true;
         }
         game.addEffect(new BecomesCreatureSourceEffect(
-                new Angel33Token(), CardType.ENCHANTMENT, Duration.EndOfTurn
+            new CreatureToken(3, 3, "3/3 Angel creature with flying", SubType.ANGEL)
+                .withAbility(FlyingAbility.getInstance()),
+                CardType.ENCHANTMENT,
+                Duration.EndOfTurn
         ), source);
         return true;
     }
