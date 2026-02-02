@@ -1,7 +1,6 @@
 
 package mage.cards.l;
 
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.ContinuousEffect;
@@ -15,7 +14,7 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -71,34 +70,19 @@ class LifecraftAwakeningEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getTargets().getFirstTarget());
-        if (!permanent.isCreature(game) && !permanent.hasSubtype(SubType.VEHICLE, game)) {
-            ContinuousEffect continuousEffect = new BecomesCreatureTargetEffect(new LifecraftAwakeningToken(), false, true, Duration.Custom);
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (!permanent.isCreature(game) || !permanent.hasSubtype(SubType.VEHICLE, game)) {
+            ContinuousEffect continuousEffect = new BecomesCreatureTargetEffect(
+                new CreatureToken(0, 0, "0/0 Construct artifact creature", SubType.CONSTRUCT)
+                    .withType(CardType.ARTIFACT),
+                false,
+                true,
+                Duration.Custom
+            );
             continuousEffect.setTargetPointer(new FixedTarget(permanent, game));
             game.addEffect(continuousEffect, source);
             return true;
         }
         return false;
-    }
-}
-
-class LifecraftAwakeningToken extends TokenImpl {
-
-    LifecraftAwakeningToken() {
-        super("", "0/0 Construct artifact creature");
-        this.cardType.add(CardType.ARTIFACT);
-        this.cardType.add(CardType.CREATURE);
-
-        this.subtype.add(SubType.CONSTRUCT);
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(0);
-    }
-
-    private LifecraftAwakeningToken(final LifecraftAwakeningToken token) {
-        super(token);
-    }
-
-    public LifecraftAwakeningToken copy() {
-        return new LifecraftAwakeningToken(this);
     }
 }
