@@ -1,7 +1,6 @@
 package mage.cards.b;
 
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.OverloadAbility;
 import mage.cards.CardImpl;
@@ -34,11 +33,9 @@ public final class BreakTheIce extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}{B}");
 
         // Destroy target land that is snow or could produce {C}.
-        this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
-
         // Overload {4}{B}{B}
-        this.addAbility(new OverloadAbility(this, new DestroyAllEffect(filter), new ManaCostsImpl<>("{4}{B}{B}")));
+        OverloadAbility.ImplementOverloadAbility(this, new ManaCostsImpl<>("{4}{B}{B}"),
+                new TargetPermanent(filter), new DestroyTargetEffect());
     }
 
     private BreakTheIce(final BreakTheIce card) {
