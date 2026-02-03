@@ -1,6 +1,5 @@
 package mage.cards.n;
 
-import mage.MageInt;
 import mage.abilities.condition.common.ThresholdCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
@@ -13,7 +12,7 @@ import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 
 import java.util.UUID;
 
@@ -25,13 +24,20 @@ public final class NantukoMonastery extends CardImpl {
     public NantukoMonastery(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        // {tap}: Add {C}.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
         // Threshold - {G}{W}: Nantuko Monastery becomes a 4/4 green and white Insect Monk creature with first strike until end of turn. It's still a land. Activate this ability only if seven or more cards are in your graveyard.
-        this.addAbility(new ActivateIfConditionActivatedAbility(new BecomesCreatureSourceEffect(
-                new NantukoMonasteryToken(), CardType.LAND, Duration.EndOfTurn),
-                new ManaCostsImpl<>("{G}{W}"), ThresholdCondition.instance
+        this.addAbility(new ActivateIfConditionActivatedAbility(
+            new BecomesCreatureSourceEffect(
+                new CreatureToken(
+                    4, 4, "4/4 green and white Insect Monk creature with first strike", SubType.INSECT, SubType.MONK
+                ).withColor("GW").withAbility(FirstStrikeAbility.getInstance()),
+                CardType.LAND,
+                Duration.EndOfTurn
+            ),
+            new ManaCostsImpl<>("{G}{W}"),
+            ThresholdCondition.instance
         ).setAbilityWord(AbilityWord.THRESHOLD));
     }
 
@@ -42,28 +48,5 @@ public final class NantukoMonastery extends CardImpl {
     @Override
     public NantukoMonastery copy() {
         return new NantukoMonastery(this);
-    }
-}
-
-class NantukoMonasteryToken extends TokenImpl {
-
-    public NantukoMonasteryToken() {
-        super("", "4/4 green and white Insect Monk creature with first strike");
-        cardType.add(CardType.CREATURE);
-        subtype.add(SubType.INSECT);
-        subtype.add(SubType.MONK);
-        color.setGreen(true);
-        color.setWhite(true);
-        power = new MageInt(4);
-        toughness = new MageInt(4);
-        this.addAbility(FirstStrikeAbility.getInstance());
-    }
-
-    private NantukoMonasteryToken(final NantukoMonasteryToken token) {
-        super(token);
-    }
-
-    public NantukoMonasteryToken copy() {
-        return new NantukoMonasteryToken(this);
     }
 }
