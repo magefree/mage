@@ -13,7 +13,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterSpell;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.other.HasOnlySingleTargetPermanentPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -34,11 +34,9 @@ import mage.constants.Outcome;
 public final class LokiGodOfLies extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a spell that targets only a single creature");
-    private static final FilterCreaturePermanent subfilter = new FilterCreaturePermanent("creature");
 
     static {
-        filter.add(new HasOnlySingleTargetPermanentPredicate(subfilter));
-        subfilter.add(CardType.CREATURE.getPredicate());
+        filter.add(new HasOnlySingleTargetPermanentPredicate(StaticFilters.FILTER_PERMANENT_A_CREATURE));
     }
 
     public LokiGodOfLies(UUID ownerId, CardSetInfo setInfo) {
