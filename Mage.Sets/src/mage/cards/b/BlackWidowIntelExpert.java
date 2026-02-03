@@ -37,7 +37,7 @@ public final class BlackWidowIntelExpert extends CardImpl {
             new DrawCardSourceControllerEffect(2).setText("you"), false, true
         );
         ability.addEffect(new DrawCardTargetEffect(2).setText("and that player each draw two cards"));
-
+        this.addAbility(ability);
     }
 
     private BlackWidowIntelExpert(final BlackWidowIntelExpert card) {
