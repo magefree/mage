@@ -90,15 +90,19 @@ class HawkeyeTrickShotEffect extends OneShotEffect {
             return false;
         }
 
-        UUID target = source.getTargets().getFirstTarget();
+        int amount = heroes.calculate(game, source, this);
+        if (amount == 0) {
+            return false;
+        }
 
+        UUID target = getTargetPointer().getFirst(game, source);
         Permanent permanent = game.getPermanent(target);
         if (permanent != null) {
-            return permanent.damage(heroes.calculate(game, source, this), hero.getId(), source, game, false, true) > 0;
+            return permanent.damage(amount, hero.getId(), source, game, false, true) > 0;
         }
         Player player = game.getPlayer(target);
         if (player != null) {
-            return player.damage(heroes.calculate(game, source, this), hero.getId(), source, game) > 0;
+            return player.damage(amount, hero.getId(), source, game) > 0;
         }
 
         return false;
