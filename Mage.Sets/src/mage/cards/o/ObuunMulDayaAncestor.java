@@ -16,7 +16,7 @@ import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -38,10 +38,10 @@ public final class ObuunMulDayaAncestor extends CardImpl {
 
         // At the beginning of combat on your turn, up to one target land you control becomes an X/X Elemental creature with trample and haste until end of turn, where X is Obuun's power. It's still a land.
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new ObuunMulDayaAncestorEffect()
+            new ObuunMulDayaAncestorEffect()
         );
         ability.addTarget(new TargetPermanent(
-                0, 1, StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND, false
+            0, 1, StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND, false
         ));
         this.addAbility(ability);
 
@@ -85,31 +85,14 @@ class ObuunMulDayaAncestorEffect extends OneShotEffect {
             return false;
         }
         game.addEffect(new BecomesCreatureTargetEffect(
-                new ObuunMulDayaAncestorToken(permanent.getPower().getValue()),
-                false, true, Duration.EndOfTurn
+            new CreatureToken(
+                permanent.getPower().getValue(),
+                permanent.getPower().getValue(),
+                "X/X Elemental creature with trample and haste",
+                SubType.ELEMENTAL
+            ).withAbility(TrampleAbility.getInstance()).withAbility(HasteAbility.getInstance()),
+            false, true, Duration.EndOfTurn
         ), source);
         return true;
-    }
-}
-
-class ObuunMulDayaAncestorToken extends TokenImpl {
-
-    ObuunMulDayaAncestorToken(int xValue) {
-        super("", "X/X Elemental creature with trample and haste");
-        this.cardType.add(CardType.CREATURE);
-        this.subtype.add(SubType.ELEMENTAL);
-        this.power = new MageInt(xValue);
-        this.toughness = new MageInt(xValue);
-
-        this.addAbility(TrampleAbility.getInstance());
-        this.addAbility(HasteAbility.getInstance());
-    }
-
-    private ObuunMulDayaAncestorToken(final ObuunMulDayaAncestorToken token) {
-        super(token);
-    }
-
-    public ObuunMulDayaAncestorToken copy() {
-        return new ObuunMulDayaAncestorToken(this);
     }
 }
