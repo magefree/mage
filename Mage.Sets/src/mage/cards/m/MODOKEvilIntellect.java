@@ -4,9 +4,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.TokenPredicate;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetOpponent;
 import mage.abilities.Ability;
 import mage.abilities.common.DrawNthCardTriggeredAbility;
@@ -22,12 +20,6 @@ import mage.constants.CardType;
  */
 public final class MODOKEvilIntellect extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent("a nontoken creature");
-
-    static {
-        filter.add(TokenPredicate.FALSE);
-    }
-
     public MODOKEvilIntellect(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{B}{B}");
 
@@ -41,7 +33,7 @@ public final class MODOKEvilIntellect extends CardImpl {
 
         // Whenever you draw your second card each turn, target opponent sacrifices a nontoken creature of their choice.
         Ability ability = new DrawNthCardTriggeredAbility(
-            new SacrificeEffect(filter, 1, "target opponent"), false, 2
+            new SacrificeEffect(StaticFilters.FILTER_CREATURE_NON_TOKEN, 1, "target opponent"), false, 2
         );
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
