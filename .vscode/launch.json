@@ -1,0 +1,27 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Debug (Launch) - Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Run Client",
+            "request": "launch",
+            "mainClass": "mage.client.MageFrame",
+            "projectName": "mage-client",
+            "cwd": "${workspaceFolder}/Mage.Client"
+        },
+        {
+            "type": "java",
+            "name": "Run Server",
+            "request": "launch",
+            "mainClass": "mage.server.Main",
+            "projectName": "mage-server",
+            "cwd": "${workspaceFolder}/Mage.Server"
+        }
+    ]
+}
