@@ -24,7 +24,7 @@ public class WaterbendCost extends GenericManaCost {
     public WaterbendCost(int amount) {
         super(amount);
         for (int i = 0; i < amount; i++) {
-            options.add(Mana.ColorlessMana(i));
+            options.add(Mana.GenericMana(i));
         }
     }
 

@@ -109,4 +109,28 @@ public class WaterbendTest extends CardTestPlayerBase {
         assertTapped(relic, true);
         assertTapped(spirit, false);
     }
+
+    @Test
+    public void testCostReduction() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Arcane Melee");
+        addCard(Zone.BATTLEFIELD, playerA, "Balduvian Bears");
+        addCard(Zone.HAND, playerA, "Spirit Water Revival");
+        addCard(Zone.HAND, playerA, "Grizzly Bears", 7);
+
+        // cost should be reduced from {1}{U}{U}{waterbend(6)} -> {U}{U}{waterbend(5)} with bears paying for 1
+        // so 6 free mana needed
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spirit Water Revival");
+        setChoice(playerA, true);
+        setChoice(playerA, "Balduvian Bears");
+
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        // we drew 7 cards
+        assertHandCount(playerA, 14);
+    }
 }

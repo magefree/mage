@@ -82,7 +82,7 @@ public class WaterbendAbility extends StaticAbility implements OptionalAdditiona
 
         additionalCost.activate();
         for (Cost cost : ((Costs<Cost>) additionalCost)) {
-            ability.getCosts().add(cost.copy());
+            ability.addCost(cost.copy());
         }
         ability.setCostsTag(WATERBEND_ACTIVATION_VALUE_KEY, null);
     }
