@@ -1,6 +1,7 @@
 package mage.cards.n;
 
-import mage.MageInt;
+import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -16,11 +17,9 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
-
-import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -41,8 +40,12 @@ public final class NissasZendikon extends CardImpl {
 
         // Enchanted land is a 4/4 Elemental creature with reach and haste. It's still a land.
         this.addAbility(new SimpleStaticAbility(new BecomesCreatureAttachedEffect(
-                new NissasZendikonToken(), "Enchanted land is a 4/4 Elemental creature with reach and haste. It's still a land",
-                Duration.WhileOnBattlefield, BecomesCreatureAttachedEffect.LoseType.COLOR
+            new CreatureToken(
+                4, 4, "4/4 Elemental creature with reach and haste", SubType.ELEMENTAL
+            ).withAbility(ReachAbility.getInstance()).withAbility(HasteAbility.getInstance()),
+            "Enchanted land is a 4/4 Elemental creature with reach and haste. It's still a land",
+            Duration.WhileOnBattlefield,
+            BecomesCreatureAttachedEffect.LoseType.COLOR
         )));
 
         // When enchanted land dies, return that card to its owner's hand.
@@ -58,26 +61,5 @@ public final class NissasZendikon extends CardImpl {
     @Override
     public NissasZendikon copy() {
         return new NissasZendikon(this);
-    }
-}
-
-class NissasZendikonToken extends TokenImpl {
-    NissasZendikonToken() {
-        super("", "4/4 Elemental creature with reach and haste");
-        cardType.add(CardType.CREATURE);
-        color.setBlue(true);
-        subtype.add(SubType.ELEMENTAL);
-        power = new MageInt(4);
-        toughness = new MageInt(4);
-        addAbility(ReachAbility.getInstance());
-        addAbility(HasteAbility.getInstance());
-    }
-
-    private NissasZendikonToken(final NissasZendikonToken token) {
-        super(token);
-    }
-
-    public NissasZendikonToken copy() {
-        return new NissasZendikonToken(this);
     }
 }

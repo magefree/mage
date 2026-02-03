@@ -1,6 +1,5 @@
 package mage.cards.n;
 
-import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
@@ -26,7 +25,7 @@ import mage.game.command.emblems.NissaWhoShakesTheWorldEmblem;
 import mage.game.events.GameEvent;
 import mage.game.events.TappedForManaEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
 
@@ -62,7 +61,10 @@ public final class NissaWhoShakesTheWorld extends CardImpl {
         ), 1);
         ability.addEffect(new UntapTargetEffect().setText("Untap it."));
         ability.addEffect(new BecomesCreatureTargetEffect(
-                new NissaWhoShakesTheWorldToken(), false, true, Duration.Custom
+            new CreatureToken(
+                0, 0, "0/0 Elemental creature with vigilance and haste", SubType.ELEMENTAL
+            ).withAbility(VigilanceAbility.getInstance()).withAbility(HasteAbility.getInstance()),
+            false, true, Duration.Custom
         ).setText("It becomes a 0/0 Elemental creature with vigilance and haste that's still a land."));
         ability.addTarget(new TargetPermanent(0, 1, filter, false));
         this.addAbility(ability);
@@ -117,27 +119,5 @@ class NissaWhoShakesTheWorldTriggeredAbility extends TriggeredManaAbility {
     @Override
     public String getRule() {
         return "Whenever you tap a Forest for mana, add an additional {G}.";
-    }
-}
-
-class NissaWhoShakesTheWorldToken extends TokenImpl {
-
-    NissaWhoShakesTheWorldToken() {
-        super("", "0/0 Elemental creature with vigilance and haste that's still a land.");
-        this.cardType.add(CardType.CREATURE);
-        this.subtype.add(SubType.ELEMENTAL);
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(0);
-
-        this.addAbility(HasteAbility.getInstance());
-        this.addAbility(VigilanceAbility.getInstance());
-    }
-
-    private NissaWhoShakesTheWorldToken(final NissaWhoShakesTheWorldToken token) {
-        super(token);
-    }
-
-    public NissaWhoShakesTheWorldToken copy() {
-        return new NissaWhoShakesTheWorldToken(this);
     }
 }
