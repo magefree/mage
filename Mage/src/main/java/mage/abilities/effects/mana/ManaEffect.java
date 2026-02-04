@@ -2,6 +2,7 @@ package mage.abilities.effects.mana;
 
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.ManaType;
 import mage.constants.Outcome;
@@ -12,6 +13,7 @@ import mage.players.Player;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -51,6 +53,14 @@ public abstract class ManaEffect extends OneShotEffect {
     }
 
     protected Player getPlayer(Game game, Ability source) {
+        //20260116 - 113.8
+        // The controller of an activated ability on the stack is the player who activated it.
+        if (source instanceof ActivatedAbilityImpl) {
+            final Player activator = game.getPlayer(((ActivatedAbilityImpl)source).getActivatorId());
+            if (activator != null) {
+                return activator;
+            }
+        }
         return game.getPlayer(source.getControllerId());
     }
 
