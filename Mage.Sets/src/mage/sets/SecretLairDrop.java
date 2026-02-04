@@ -27,7 +27,8 @@ public class SecretLairDrop extends ExpansionSet {
 
         // workaround to fix compilation error: java: code too large
         addPart1(); // 1-1000
-        addPart2(); // 1001+
+        addPart2(); // 1001-2000
+        addPart3(); // 2001+
     }
 
     private void addPart1() {
@@ -2002,6 +2003,9 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Blasphemous Act", 1998, Rarity.RARE, mage.cards.b.BlasphemousAct.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Impact Tremors", 1999, Rarity.RARE, mage.cards.i.ImpactTremors.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Damnation", 2000, Rarity.RARE, mage.cards.d.Damnation.class, NON_FULL_USE_VARIOUS));
+    }
+
+    private void addPart3() {
         cards.add(new SetCardInfo("Dark Ritual", 2001, Rarity.RARE, mage.cards.d.DarkRitual.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Peer into the Abyss", 2002, Rarity.RARE, mage.cards.p.PeerIntoTheAbyss.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Surgical Extraction", 2003, Rarity.RARE, mage.cards.s.SurgicalExtraction.class, NON_FULL_USE_VARIOUS));
