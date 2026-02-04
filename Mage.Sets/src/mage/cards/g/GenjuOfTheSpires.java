@@ -1,7 +1,5 @@
-
 package mage.cards.g;
 
-import mage.MageInt;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -16,7 +14,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -40,8 +38,11 @@ public final class GenjuOfTheSpires extends CardImpl {
 
         // {2}: Enchanted Mountain becomes a 6/1 red Spirit creature until end of turn. It's still a land.
         this.addAbility(new SimpleActivatedAbility(new BecomesCreatureAttachedWithActivatedAbilityOrSpellEffect(
-                new SpiritToken(), "Enchanted Mountain becomes a 6/1 " +
-                "red Spirit creature until end of turn. It's still a land", Duration.EndOfTurn
+            new CreatureToken(
+                6, 1, "6/1 red Spirit creature", SubType.SPIRIT
+            ).withColor("R"),
+            "Enchanted Mountain becomes a 6/1 red Spirit creature until end of turn. It's still a land",
+            Duration.EndOfTurn
         ), new GenericManaCost(2)));
 
         // When enchanted Mountain is put into a graveyard, you may return Genju of the Spires from your graveyard to your hand.
@@ -59,25 +60,5 @@ public final class GenjuOfTheSpires extends CardImpl {
     @Override
     public GenjuOfTheSpires copy() {
         return new GenjuOfTheSpires(this);
-    }
-
-    private static class SpiritToken extends TokenImpl {
-
-        SpiritToken() {
-            super("Spirit", "6/1 red Spirit creature");
-            cardType.add(CardType.CREATURE);
-            color.setRed(true);
-            subtype.add(SubType.SPIRIT);
-            power = new MageInt(6);
-            toughness = new MageInt(1);
-        }
-
-        private SpiritToken(final SpiritToken token) {
-            super(token);
-        }
-
-        public SpiritToken copy() {
-            return new SpiritToken(this);
-        }
     }
 }

@@ -2,8 +2,6 @@
 package mage.cards.g;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -16,7 +14,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
 
@@ -35,18 +33,23 @@ public final class GenjuOfTheRealm extends CardImpl {
         TargetPermanent auraTarget = new TargetLandPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.PutCreatureInPlay));
-        Ability ability = new EnchantAbility(auraTarget);
-        this.addAbility(ability);
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // {2}: Enchanted land becomes a legendary 8/12 Spirit creature with trample until end of turn. It's still a land.
-        Ability ability2 = new SimpleActivatedAbility(new BecomesCreatureAttachedWithActivatedAbilityOrSpellEffect(new SpiritToken(), "Enchanted land becomes a legendary 8/12 Spirit creature with trample until end of turn. It's still a land", Duration.EndOfTurn), new GenericManaCost(2));
-        this.addAbility(ability2);
+        this.addAbility(new SimpleActivatedAbility(
+            new BecomesCreatureAttachedWithActivatedAbilityOrSpellEffect(
+                new CreatureToken(8, 12, "legendary 8/12 Spirit creature with trample", SubType.SPIRIT)
+                    .withSuperType(SuperType.LEGENDARY)
+                    .withAbility(TrampleAbility.getInstance()),
+                "Enchanted land becomes a legendary 8/12 Spirit creature with trample until end of turn. It's still a land",
+                Duration.EndOfTurn
+            ),
+            new GenericManaCost(2)
+        ));
 
         // When enchanted land is put into a graveyard, you may return Genju of the Realm from your graveyard to your hand.
-        Effect effect = new ReturnToHandSourceEffect(false, true);
-        effect.setText("you may return {this} from your graveyard to your hand");
-        Ability ability3 = new DiesAttachedTriggeredAbility(effect, "enchanted land", true, false);
-        this.addAbility(ability3);
+        Effect effect = new ReturnToHandSourceEffect(false, true).setText("you may return {this} from your graveyard to your hand");
+        this.addAbility(new DiesAttachedTriggeredAbility(effect, "enchanted land", true, false));
     }
 
     private GenjuOfTheRealm(final GenjuOfTheRealm card) {
@@ -56,31 +59,5 @@ public final class GenjuOfTheRealm extends CardImpl {
     @Override
     public GenjuOfTheRealm copy() {
         return new GenjuOfTheRealm(this);
-    }
-
-    private static class SpiritToken extends TokenImpl {
-
-        SpiritToken() {
-            super("Spirit", "legendary 8/12 Spirit creature with trample");
-            this.supertype.add(SuperType.LEGENDARY);
-            cardType.add(CardType.CREATURE);
-            this.color.setWhite(true);
-            this.color.setBlue(true);
-            this.color.setBlack(true);
-            this.color.setRed(true);
-            this.color.setGreen(true);
-            subtype.add(SubType.SPIRIT);
-            power = new MageInt(8);
-            toughness = new MageInt(12);
-            this.addAbility(TrampleAbility.getInstance());
-        }
-
-        private SpiritToken(final SpiritToken token) {
-            super(token);
-        }
-
-        public SpiritToken copy() {
-            return new SpiritToken(this);
-        }
     }
 }
