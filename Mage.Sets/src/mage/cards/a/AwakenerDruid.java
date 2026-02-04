@@ -10,7 +10,7 @@ import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -36,7 +36,6 @@ public final class AwakenerDruid extends CardImpl {
         this.addAbility(ability);
     }
 
-
     private AwakenerDruid(final AwakenerDruid card) {
         super(card);
     }
@@ -50,7 +49,11 @@ public final class AwakenerDruid extends CardImpl {
 class AwakenerDruidBecomesCreatureEffect extends BecomesCreatureTargetEffect {
 
     AwakenerDruidBecomesCreatureEffect() {
-        super(new AwakenerDruidToken(), false, true, Duration.WhileOnBattlefield);
+        super(
+            new CreatureToken(4, 5, "4/5 green Treefolk creature for as long as {this} is on the battlefield", SubType.TREEFOLK)
+                .withColor("G"),
+            false, true, Duration.WhileOnBattlefield
+        );
         this.staticText = "target Forest becomes a 4/5 green Treefolk creature for as long as {this} remains on the battlefield. It's still a land";
     }
 
@@ -71,26 +74,5 @@ class AwakenerDruidBecomesCreatureEffect extends BecomesCreatureTargetEffect {
             return false;
         }
         return super.apply(layer, sublayer, source, game);
-    }
-}
-
-class AwakenerDruidToken extends TokenImpl {
-
-    public AwakenerDruidToken() {
-        super("", "4/5 green Treefolk creature as long as {this} is on the battlefield");
-        cardType.add(CardType.CREATURE);
-        subtype.add(SubType.TREEFOLK);
-        color.setGreen(true);
-        power = new MageInt(4);
-        toughness = new MageInt(5);
-    }
-
-    private AwakenerDruidToken(final AwakenerDruidToken token) {
-        super(token);
-    }
-
-    @Override
-    public AwakenerDruidToken copy() {
-        return new AwakenerDruidToken(this);
     }
 }
