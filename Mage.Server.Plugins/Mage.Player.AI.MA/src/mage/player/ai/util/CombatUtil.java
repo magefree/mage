@@ -197,18 +197,26 @@ public final class CombatUtil {
             });
 
             // split blockers by usage priority
-            List<Permanent> survivedAndKillBlocker = new ArrayList<>();
-            List<Permanent> survivedBlockers = new ArrayList<>();
-            List<Permanent> diedBlockers = new ArrayList<>();
+            List<Permanent> survivedAndKillBlocker = new ArrayList<>();  // Blocker survives AND kills attacker (best)
+            List<Permanent> survivedBlockers = new ArrayList<>();         // Blocker survives (may not kill attacker)
+            List<Permanent> tradedBlockers = new ArrayList<>();           // Both die (mutual trade, acceptable)
+            List<Permanent> chumpBlockers = new ArrayList<>();            // Only blocker dies (chump block)
             blockerStats.forEach(stats -> {
                 if (stats.isAttackerDied() && !stats.isBlockerDied()) {
                     survivedAndKillBlocker.add(stats.getBlocker());
                 } else if (!stats.isBlockerDied()) {
                     survivedBlockers.add(stats.getBlocker());
+                } else if (stats.isAttackerDied()) {
+                    // Both die - mutual trade
+                    tradedBlockers.add(stats.getBlocker());
                 } else {
-                    diedBlockers.add(stats.getBlocker());
+                    // Only blocker dies - chump block
+                    chumpBlockers.add(stats.getBlocker());
                 }
             });
+            // Combine for backwards compatibility (diedBlockers = tradedBlockers + chumpBlockers)
+            List<Permanent> diedBlockers = new ArrayList<>(tradedBlockers);
+            diedBlockers.addAll(chumpBlockers);
 
             int blockedCount = 0;
 
@@ -247,7 +255,7 @@ public final class CombatUtil {
                 }
             } else {
                 // Normal blocking logic (non-deathtouch or some blockers survive)
-                // find good blocker
+                // find good blocker that survives
                 Permanent blocker = getWorstCreature(survivedAndKillBlocker, survivedBlockers);
                 if (blocker != null) {
                     combatInfo.addPair(attacker, blocker);
@@ -255,7 +263,18 @@ public final class CombatUtil {
                     blockedCount++;
                 }
 
-                // Try group blocking (2 blockers) if no single blocker can kill the attacker and survive
+                // If no survivor, try 1-for-1 trade (mutual destruction) before group blocking
+                // This is often preferable to using 2 blockers for one attacker
+                if (blocker == null && !tradedBlockers.isEmpty()) {
+                    blocker = getWorstCreature(tradedBlockers);
+                    if (blocker != null) {
+                        combatInfo.addPair(attacker, blocker);
+                        removeWorstCreature(blocker, blockers, tradedBlockers, diedBlockers);
+                        blockedCount++;
+                    }
+                }
+
+                // Try group blocking (2 blockers) only if no single blocker can kill the attacker
                 // Skip for trample attackers (excess damage goes through anyway)
                 boolean attackerHasTrample = attacker.getAbilities(game).containsKey(TrampleAbility.getInstance().getId());
                 if (blocker == null && !attackerHasTrample && allBlockers.size() >= 2) {

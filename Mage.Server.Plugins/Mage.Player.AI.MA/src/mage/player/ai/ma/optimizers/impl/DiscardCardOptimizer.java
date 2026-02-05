@@ -11,7 +11,7 @@ import java.util.Set;
  * AI: removes abilities that require only discard a card for activation.
  * Enhanced to be combo-aware: protects combo pieces from being discarded.
  *
- * @author magenoxx_at_gmail.com, Claude
+ * @author magenoxx_at_gmail.com
  */
 public class DiscardCardOptimizer extends BaseTreeOptimizer {
 
@@ -42,31 +42,26 @@ public class DiscardCardOptimizer extends BaseTreeOptimizer {
         for (Ability ability : actions) {
             String abilityText = ability.toString();
 
-            // Check for discard abilities
-            if (abilityText.startsWith("Discard card") || abilityText.contains("Discard a card")) {
-                // If no combo detection, just remove all discards (original behavior)
+            // Only remove generic "Discard card" abilities that exist purely to discard
+            // Do NOT remove abilities like "Discard a card: Pump creature" where discard is a cost
+            // The original optimizer only looked for abilities that START with "Discard"
+            if (abilityText.startsWith("Discard card") || abilityText.startsWith("Discard a card")) {
+                // If no combo detection, remove generic discards (original behavior)
                 if (comboPieces == null || comboPieces.isEmpty()) {
                     actionsToRemove.add(ability);
                     continue;
                 }
 
                 // With combo detection: check if the discard target is a combo piece
-                // For generic "Discard card" abilities, we can't know the target yet,
-                // so we still remove them to be safe
-                if (abilityText.startsWith("Discard card")) {
-                    actionsToRemove.add(ability);
-                    continue;
-                }
-
-                // For abilities that specify a card, check if it's a combo piece
-                // This handles cases like "Discard [Card Name]: Effect"
                 String cardName = extractCardNameFromDiscard(abilityText);
                 if (cardName != null && comboPieces.contains(cardName)) {
                     // Don't discard combo pieces!
                     logger.debug("Protecting combo piece from discard: " + cardName);
                     actionsToRemove.add(ability);
+                } else {
+                    // Remove generic discards even with combo detection
+                    actionsToRemove.add(ability);
                 }
-                // Allow discarding non-combo cards
             }
         }
     }

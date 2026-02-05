@@ -1136,26 +1136,12 @@ public class ComputerPlayer6 extends ComputerPlayer {
                     for (Permanent blocker : possibleBlockers) {
                         int blockerValue = eval.evaluate(blocker, game);
 
-                        // blocker can kill attacker
+                        // blocker can kill attacker (and attacker cannot kill blocker)
+                        // This is NOT a trade - the attacker just dies
                         if (attacker.getPower().getValue() <= blocker.getToughness().getValue()
                                 && attacker.getToughness().getValue() <= blocker.getPower().getValue()) {
-                            // Strategic role adjustment for trades
-                            if (strategicRole == StrategicRoleEvaluator.ROLE_BEATDOWN) {
-                                // Beatdown: Accept trades if attacker value <= blocker value * 0.8
-                                // (more willing to trade to push damage through)
-                                if (attackerValue <= blockerValue * 0.8) {
-                                    safeToAttack = true; // Accept the trade
-                                } else {
-                                    safeToAttack = false;
-                                }
-                            } else if (strategicRole == StrategicRoleEvaluator.ROLE_CONTROL) {
-                                // Control: Only attack if attacker value < blocker value * 0.5
-                                // (much more conservative about trades)
-                                safeToAttack = false;
-                            } else {
-                                // Flexible: Standard logic
-                                safeToAttack = false;
-                            }
+                            // Never attack into a losing situation (regardless of strategic role)
+                            safeToAttack = false;
                         }
 
                         // attacker and blocker have the same P/T, check their overall value

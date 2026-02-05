@@ -132,9 +132,9 @@ public class AIBehaviorImprovementsTest extends CardTestPlayerBaseWithAIHelps {
 
     @Test
     public void test_GroupBlocking_TwoSmallBlockersKillBigAttacker() {
-        // A 4/4 attacks. AI has two 2/3s.
-        // Neither 2/3 can kill the 4/4 alone, but together they can (4 power total > 4 toughness)
-        // and one 2/3 survives (4 power can only kill one 2/3)
+        // A 5/5 attacks. AI has two 3/3s.
+        // Neither 3/3 can kill the 5/5 alone, but together they can (6 power total > 5 toughness)
+        // and one 3/3 survives (5 power can only kill one 3/3)
 
         addCard(Zone.BATTLEFIELD, playerA, "Deadbridge Goliath", 1); // 5/5
         addCard(Zone.BATTLEFIELD, playerB, "Centaur Courser", 2); // 3/3 each
@@ -146,8 +146,9 @@ public class AIBehaviorImprovementsTest extends CardTestPlayerBaseWithAIHelps {
         // Attacker power 5 can only deal 5 damage total - one 3/3 dies, one survives
         aiPlayStep(1, PhaseStep.DECLARE_BLOCKERS, playerB);
 
+        // Not using strict mode because damage assignment by PlayerA is handled by computer
         setStopAt(1, PhaseStep.END_TURN);
-        setStrictChooseMode(true);
+        setStrictChooseMode(false);
         execute();
 
         // The 5/5 should be dead (gang-blocked)
@@ -160,7 +161,7 @@ public class AIBehaviorImprovementsTest extends CardTestPlayerBaseWithAIHelps {
     public void test_GroupBlocking_NotUsedAgainstDeathtouch() {
         // Group blocking shouldn't be used against deathtouch (all blockers die anyway)
 
-        // 2/2 deathtouch
+        // Narnam Renegade is 1/2 with deathtouch
         addCard(Zone.BATTLEFIELD, playerA, "Narnam Renegade", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Centaur Courser", 2); // 3/3 each
 
@@ -175,7 +176,7 @@ public class AIBehaviorImprovementsTest extends CardTestPlayerBaseWithAIHelps {
 
         // Both 3/3s should survive (AI didn't sacrifice them)
         assertPermanentCount(playerB, "Centaur Courser", 2);
-        assertLife(playerB, 18); // Took 2 damage instead
+        assertLife(playerB, 19); // Took 1 damage (Narnam Renegade is 1/2)
     }
 
     @Test

@@ -83,16 +83,24 @@ public final class StrategicRoleEvaluator {
         // Higher aggro score = more likely to be beatdown
         int deckDifference = myAggroScore - oppAggroScore;
 
-        // CRITICAL: Play/Draw advantage in close matchups
-        // When decks are similar, whoever went first should be the beatdown
-        // because they have natural tempo advantage (attack first each turn cycle)
+        // CRITICAL: Play/Draw advantage in close matchups (or unknown opponent decks)
+        // When decks are similar OR we don't have enough info about opponent's deck,
+        // whoever went first should be the beatdown because they have natural tempo advantage
+        // (attack first each turn cycle).
+        // 50 is the default "unknown" value from opponent analysis, so treat it as potentially close
         boolean isCloseMatchup = Math.abs(deckDifference) < CLOSE_MATCHUP_THRESHOLD;
-        if (isCloseMatchup) {
+        boolean unknownOpponentDeck = (oppAggroScore == 50);
+        if (isCloseMatchup || unknownOpponentDeck) {
             boolean wentFirst = didPlayerGoFirst(player, game);
             if (wentFirst) {
                 deckDifference += PLAY_ADVANTAGE_BONUS;  // Push toward beatdown
             } else {
                 deckDifference -= PLAY_ADVANTAGE_BONUS;  // Push toward control
+            }
+            // When opponent deck is unknown, also reset the deckDifference to near-zero
+            // since we're essentially assuming mirror matchup
+            if (unknownOpponentDeck) {
+                deckDifference = wentFirst ? PLAY_ADVANTAGE_BONUS : -PLAY_ADVANTAGE_BONUS;
             }
         }
 
@@ -370,13 +378,19 @@ public final class StrategicRoleEvaluator {
 
         int deckDifference = myAggroScore - oppAggroScore;
 
+        // Handle close matchups and unknown opponent decks
         boolean isCloseMatchup = Math.abs(deckDifference) < CLOSE_MATCHUP_THRESHOLD;
-        if (isCloseMatchup) {
+        boolean unknownOpponentDeck = (oppAggroScore == 50);
+        if (isCloseMatchup || unknownOpponentDeck) {
             boolean wentFirst = didPlayerGoFirst(player, game);
             if (wentFirst) {
                 deckDifference += PLAY_ADVANTAGE_BONUS;
             } else {
                 deckDifference -= PLAY_ADVANTAGE_BONUS;
+            }
+            // When opponent deck is unknown, reset deckDifference to just the play/draw bonus
+            if (unknownOpponentDeck) {
+                deckDifference = wentFirst ? PLAY_ADVANTAGE_BONUS : -PLAY_ADVANTAGE_BONUS;
             }
         }
 
@@ -384,7 +398,10 @@ public final class StrategicRoleEvaluator {
         int boardAdvantage = calculateBoardAdvantage(player, opponent, game);
         int turnNumber = game.getTurnNum();
 
-        int lifeModifier = lifeDifference / 2; // Scale down
+        // Life modifier: being behind on life pushes toward aggro (need to race)
+        // being ahead pushes toward control (protect the lead)
+        // Note: lifeDifference is negative when behind, so we negate to get positive modifier
+        int lifeModifier = -lifeDifference / 2;
         int boardModifier = boardAdvantage / 10; // Scale down
         int turnModifier = (turnNumber > 6) ? -10 : 0;
 

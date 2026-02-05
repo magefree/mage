@@ -120,8 +120,14 @@ public final class DeckArchetypeAnalyzer {
         // Gather only revealed cards
         List<Card> revealedCards = getRevealedCards(opponent, game);
 
-        // If we haven't seen enough cards, return unknown (midrange assumption)
-        if (revealedCards.size() < MIN_REVEALED_CARDS_FOR_ANALYSIS) {
+        // Count non-land cards - lands don't tell us much about deck archetype
+        long nonLandCount = revealedCards.stream()
+                .filter(card -> !card.isLand(game))
+                .count();
+
+        // If we haven't seen enough NON-LAND cards, return unknown (midrange assumption)
+        // This prevents us from making wrong assumptions when only lands are visible
+        if (nonLandCount < MIN_REVEALED_CARDS_FOR_ANALYSIS) {
             return 50;
         }
 
