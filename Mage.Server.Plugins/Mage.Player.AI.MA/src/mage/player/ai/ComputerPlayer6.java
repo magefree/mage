@@ -21,6 +21,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
+import mage.player.ai.combo.ComboDetectionEngine;
 import mage.player.ai.ma.optimizers.TreeOptimizer;
 import mage.player.ai.ma.optimizers.impl.*;
 import mage.player.ai.score.GameStateEvaluator2;
@@ -81,12 +82,17 @@ public class ComputerPlayer6 extends ComputerPlayer {
     protected int lastLoggedTurn = 0; // for debug logs: mark start of the turn
     protected static final String BLANKS = "...............................................";
 
+    // Combo detection engine for this player
+    protected ComboDetectionEngine comboEngine;
+    protected boolean comboEngineInitialized = false;
+
     static {
         optimizers.add(new WrongCodeUsageOptimizer());
         optimizers.add(new LevelUpOptimizer());
         optimizers.add(new EquipOptimizer());
         optimizers.add(new DiscardCardOptimizer());
         optimizers.add(new OutcomeOptimizer());
+        optimizers.add(new ComboAwareOptimizer());  // Combo-aware action filtering
     }
 
     public ComputerPlayer6(String name, RangeOfInfluence range, int skill) {
@@ -112,6 +118,41 @@ public class ComputerPlayer6 extends ComputerPlayer {
         this.targets.addAll(player.targets);
         this.choices.addAll(player.choices);
         this.actionCache = player.actionCache;
+        // Share combo engine reference (it's stateless per-game)
+        this.comboEngine = player.comboEngine;
+        this.comboEngineInitialized = player.comboEngineInitialized;
+    }
+
+    /**
+     * Initialize the combo detection engine for this player.
+     * Should be called at the start of the game or first priority.
+     */
+    protected void initializeComboEngine(Game game) {
+        if (comboEngineInitialized) {
+            return;
+        }
+        comboEngine = new ComboDetectionEngine();
+        comboEngine.analyzeDeck(game, playerId);
+        comboEngineInitialized = true;
+        logger.info("Combo detection engine initialized for " + getName() +
+                " - found " + comboEngine.getPatterns(playerId).size() + " potential combos");
+    }
+
+    /**
+     * Get the combo detection engine for this player.
+     */
+    public ComboDetectionEngine getComboEngine() {
+        return comboEngine;
+    }
+
+    /**
+     * Get the set of combo piece card names for this player.
+     */
+    public Set<String> getComboPieces() {
+        if (comboEngine == null) {
+            return Collections.emptySet();
+        }
+        return comboEngine.getComboPieces(playerId);
     }
 
     /**
@@ -514,6 +555,12 @@ public class ComputerPlayer6 extends ComputerPlayer {
             logger.debug("AI game sim interrupted by timeout");
             return GameStateEvaluator2.evaluate(playerId, game).getTotalScore();
         }
+
+        // Initialize combo detection engine on first priority at max depth
+        if (depth == maxDepth && !comboEngineInitialized) {
+            initializeComboEngine(game);
+        }
+
         node.setGameValue(game.getState().getValue(true).hashCode());
         SimulatedPlayer2 currentPlayer = (SimulatedPlayer2) game.getPlayer(game.getPlayerList().get());
         SimulationNode2 bestNode = null;
@@ -815,8 +862,22 @@ public class ComputerPlayer6 extends ComputerPlayer {
      * @param allActions
      */
     protected void optimize(Game game, List<Ability> allActions) {
-        for (TreeOptimizer optimizer : optimizers) {
-            optimizer.optimize(game, allActions);
+        // Set up combo engine for combo-aware optimizers
+        Set<String> comboPieces = getComboPieces();
+        if (comboEngine != null) {
+            ComboAwareOptimizer.setEngine(comboEngine, playerId);
+            GameStateEvaluator2.setComboEngine(comboEngine, comboPieces);
+            DiscardCardOptimizer.setComboPieces(comboPieces);
+        }
+        try {
+            for (TreeOptimizer optimizer : optimizers) {
+                optimizer.optimize(game, allActions);
+            }
+        } finally {
+            // Clean up thread-local state
+            ComboAwareOptimizer.clearEngine();
+            GameStateEvaluator2.clearComboEngine();
+            DiscardCardOptimizer.clearComboPieces();
         }
         Collections.sort(allActions, new Comparator<Ability>() {
             @Override
@@ -1058,8 +1119,14 @@ public class ComputerPlayer6 extends ComputerPlayer {
                 }
                 List<Permanent> possibleBlockers = defender.getAvailableBlockers(game);
 
+                // Determine strategic role to adjust attack aggression
+                int strategicRole = StrategicRoleEvaluator.determineRole(attackingPlayer, defender, game);
+
                 // The AI will now attack more sanely.  Simple, but good enough for now.
                 // The sim minmax does not work at the moment.
+                // Strategic role affects attack thresholds:
+                // - Beatdown: More willing to attack even with potential bad trades
+                // - Control: Only attack when clearly safe
                 boolean safeToAttack;
                 CombatEvaluator eval = new CombatEvaluator();
 
@@ -1072,7 +1139,23 @@ public class ComputerPlayer6 extends ComputerPlayer {
                         // blocker can kill attacker
                         if (attacker.getPower().getValue() <= blocker.getToughness().getValue()
                                 && attacker.getToughness().getValue() <= blocker.getPower().getValue()) {
-                            safeToAttack = false;
+                            // Strategic role adjustment for trades
+                            if (strategicRole == StrategicRoleEvaluator.ROLE_BEATDOWN) {
+                                // Beatdown: Accept trades if attacker value <= blocker value * 0.8
+                                // (more willing to trade to push damage through)
+                                if (attackerValue <= blockerValue * 0.8) {
+                                    safeToAttack = true; // Accept the trade
+                                } else {
+                                    safeToAttack = false;
+                                }
+                            } else if (strategicRole == StrategicRoleEvaluator.ROLE_CONTROL) {
+                                // Control: Only attack if attacker value < blocker value * 0.5
+                                // (much more conservative about trades)
+                                safeToAttack = false;
+                            } else {
+                                // Flexible: Standard logic
+                                safeToAttack = false;
+                            }
                         }
 
                         // attacker and blocker have the same P/T, check their overall value
@@ -1245,6 +1328,12 @@ public class ComputerPlayer6 extends ComputerPlayer {
     @Override
     public void cleanUpOnMatchEnd() {
         root = null;
+        // Clean up combo detection engine
+        if (comboEngine != null) {
+            comboEngine.clearPlayer(playerId);
+            comboEngine = null;
+        }
+        comboEngineInitialized = false;
         super.cleanUpOnMatchEnd();
     }
 

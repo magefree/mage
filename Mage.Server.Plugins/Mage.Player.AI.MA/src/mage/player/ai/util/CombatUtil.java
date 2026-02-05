@@ -2,8 +2,10 @@ package mage.player.ai.util;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.InfectAbility;
+import mage.abilities.keyword.TrampleAbility;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.combat.Combat;
@@ -13,6 +15,7 @@ import mage.game.permanent.Permanent;
 import mage.game.turn.CombatDamageStep;
 import mage.game.turn.EndOfCombatStep;
 import mage.game.turn.Step;
+import mage.player.ai.StrategicRoleEvaluator;
 import mage.player.ai.score.GameStateEvaluator2;
 import mage.players.Player;
 import org.apache.log4j.Logger;
@@ -168,10 +171,21 @@ public final class CombatUtil {
             return new CombatInfo();
         }
 
+        // Determine strategic role for role-aware blocking decisions
+        Player defendingPlayer = game.getPlayer(defenderId);
+        Player attackingPlayer = game.getPlayer(attackerId);
+        int strategicRole = StrategicRoleEvaluator.ROLE_FLEXIBLE;
+        if (defendingPlayer != null && attackingPlayer != null) {
+            strategicRole = StrategicRoleEvaluator.determineRole(defendingPlayer, attackingPlayer, game);
+        }
+
         // TODO: implement full game simulations of all possible combinations (e.g. multiblockers support)
 
         CombatInfo combatInfo = new CombatInfo();
         for (Permanent attacker : attackers) {
+            // Check if attacker has deathtouch - this affects blocking strategy significantly
+            boolean attackerHasDeathtouch = attacker.getAbilities(game).containsKey(DeathtouchAbility.getInstance().getId());
+
             // simple combat simulation (1 vs 1)
             List<Permanent> allBlockers = getPossibleBlockers(game, attacker, blockers);
             List<SurviveInfo> blockerStats = getBlockersThatWillSurvive2(game, attackerId, defenderId, attacker, allBlockers);
@@ -198,27 +212,95 @@ public final class CombatUtil {
 
             int blockedCount = 0;
 
-            // find good blocker
-            Permanent blocker = getWorstCreature(survivedAndKillBlocker, survivedBlockers);
-            if (blocker != null) {
-                combatInfo.addPair(attacker, blocker);
-                removeWorstCreature(blocker, blockers, survivedAndKillBlocker, survivedBlockers);
-                blockedCount++;
-            }
+            // Special handling for deathtouch attackers:
+            // Against deathtouch, ALL blockers die (regardless of toughness), so survivedAndKillBlocker
+            // and survivedBlockers should be empty. We must use the LOWEST VALUE creature if we block at all.
+            // The trade is only worth it if the blocker's value is less than or similar to the attacker's value,
+            // or if not blocking would lose the game.
+            if (attackerHasDeathtouch && survivedAndKillBlocker.isEmpty() && survivedBlockers.isEmpty()) {
+                // All blockers will die due to deathtouch
+                // Find the blocker with the lowest power that can still kill the attacker
+                // (any blocker can kill a deathtouch creature since we're trading anyway)
+                Permanent bestBlocker = null;
+                int bestScore = Integer.MIN_VALUE;
 
-            // find good sacrifices (chump blocks also supported due bad game score on loose)
-            // TODO: add chump blocking support here?
-            // TODO: there are many triggers on damage, attack, etc - it can't be processed without real game simulations
-            if (blocker == null) {
-                blocker = getWorstCreature(diedBlockers);
+                for (Permanent b : diedBlockers) {
+                    int diffBlockingScore = blockingDiffScore.getOrDefault(b, 0);
+                    int diffNonBlockingScore = nonBlockingDiffScore.getOrDefault(b, 0);
+
+                    // Only consider blocking if it improves the game state or prevents loss
+                    if (diffBlockingScore >= diffNonBlockingScore) {
+                        // Prefer the lowest power creature (smallest sacrifice)
+                        // Use negative power as score so lower power = higher "score"
+                        int score = -b.getPower().getValue();
+                        if (bestBlocker == null || score > bestScore) {
+                            bestBlocker = b;
+                            bestScore = score;
+                        }
+                    }
+                }
+
+                if (bestBlocker != null) {
+                    combatInfo.addPair(attacker, bestBlocker);
+                    removeWorstCreature(bestBlocker, blockers, diedBlockers);
+                    blockedCount++;
+                }
+            } else {
+                // Normal blocking logic (non-deathtouch or some blockers survive)
+                // find good blocker
+                Permanent blocker = getWorstCreature(survivedAndKillBlocker, survivedBlockers);
                 if (blocker != null) {
-                    int diffBlockingScore = blockingDiffScore.getOrDefault(blocker, 0);
-                    int diffNonBlockingScore = nonBlockingDiffScore.getOrDefault(blocker, 0);
-                    if (diffBlockingScore >= 0 || diffBlockingScore > diffNonBlockingScore) {
-                        // it's good - can sacrifice and get better game state, also protect from game loose
-                        combatInfo.addPair(attacker, blocker);
-                        removeWorstCreature(blocker, blockers, diedBlockers);
-                        blockedCount++;
+                    combatInfo.addPair(attacker, blocker);
+                    removeWorstCreature(blocker, blockers, survivedAndKillBlocker, survivedBlockers);
+                    blockedCount++;
+                }
+
+                // Try group blocking (2 blockers) if no single blocker can kill the attacker and survive
+                // Skip for trample attackers (excess damage goes through anyway)
+                boolean attackerHasTrample = attacker.getAbilities(game).containsKey(TrampleAbility.getInstance().getId());
+                if (blocker == null && !attackerHasTrample && allBlockers.size() >= 2) {
+                    // Try to find a 2-blocker combination that kills the attacker with at least one survivor
+                    GroupBlockResult groupBlock = findBestGroupBlock(game, attacker, allBlockers);
+                    if (groupBlock != null) {
+                        combatInfo.addPair(attacker, groupBlock.blocker1);
+                        combatInfo.addPair(attacker, groupBlock.blocker2);
+                        blockers.remove(groupBlock.blocker1);
+                        blockers.remove(groupBlock.blocker2);
+                        blockedCount += 2;
+                    }
+                }
+
+                // find good sacrifices (chump blocks also supported due bad game score on loose)
+                // Strategic role affects willingness to chump block:
+                // - Beatdown: Preserve creatures for attacking, only chump if it prevents lethal
+                // - Control: More willing to chump block to preserve life total
+                // - Flexible: Standard logic
+                if (blocker == null && blockedCount == 0) {
+                    blocker = getWorstCreature(diedBlockers);
+                    if (blocker != null) {
+                        int diffBlockingScore = blockingDiffScore.getOrDefault(blocker, 0);
+                        int diffNonBlockingScore = nonBlockingDiffScore.getOrDefault(blocker, 0);
+
+                        // Adjust threshold based on strategic role
+                        boolean shouldChumpBlock;
+                        if (strategicRole == StrategicRoleEvaluator.ROLE_BEATDOWN) {
+                            // Beatdown: Only chump block if it significantly improves position
+                            // (preserves creatures for attacking)
+                            shouldChumpBlock = diffBlockingScore > diffNonBlockingScore + 20;
+                        } else if (strategicRole == StrategicRoleEvaluator.ROLE_CONTROL) {
+                            // Control: More willing to chump block to preserve life
+                            shouldChumpBlock = diffBlockingScore >= diffNonBlockingScore - 10;
+                        } else {
+                            // Flexible: Standard logic
+                            shouldChumpBlock = diffBlockingScore >= 0 || diffBlockingScore > diffNonBlockingScore;
+                        }
+
+                        if (shouldChumpBlock) {
+                            // it's good - can sacrifice and get better game state, also protect from game loose
+                            combatInfo.addPair(attacker, blocker);
+                            removeWorstCreature(blocker, blockers, diedBlockers);
+                            blockedCount++;
+                        }
                     }
                 }
             }
@@ -235,7 +317,7 @@ public final class CombatUtil {
                 // effects support: can't be blocked except by xxx or more creatures
                 if (blockedCount > 0 && attacker.getMinBlockedBy() > blockedCount) {
                     // it already has 1 blocker (killer in best use case), so no needs in second killer
-                    blocker = getWorstCreature(survivedBlockers, survivedAndKillBlocker, diedBlockers);
+                    Permanent blocker = getWorstCreature(survivedBlockers, survivedAndKillBlocker, diedBlockers);
                     if (blocker != null) {
                         combatInfo.addPair(attacker, blocker);
                         removeWorstCreature(blocker, blockers, survivedBlockers, survivedAndKillBlocker, diedBlockers);
@@ -418,5 +500,85 @@ public final class CombatUtil {
             }
             step.endStep(sim, sim.getActivePlayerId());
         }
+    }
+
+    /**
+     * Result of a group blocking analysis
+     */
+    private static class GroupBlockResult {
+        final Permanent blocker1;
+        final Permanent blocker2;
+
+        GroupBlockResult(Permanent blocker1, Permanent blocker2) {
+            this.blocker1 = blocker1;
+            this.blocker2 = blocker2;
+        }
+    }
+
+    /**
+     * Find the best 2-blocker combination that can kill the attacker with at least one survivor.
+     * Returns null if no good combination exists.
+     */
+    private static GroupBlockResult findBestGroupBlock(Game game, Permanent attacker, List<Permanent> possibleBlockers) {
+        if (possibleBlockers.size() < 2) {
+            return null;
+        }
+
+        int attackerPower = attacker.getPower().getValue();
+        int attackerToughness = attacker.getToughness().getValue();
+
+        GroupBlockResult bestResult = null;
+        int bestScore = Integer.MIN_VALUE;
+
+        // Try all 2-blocker combinations
+        for (int i = 0; i < possibleBlockers.size(); i++) {
+            for (int j = i + 1; j < possibleBlockers.size(); j++) {
+                Permanent blocker1 = possibleBlockers.get(i);
+                Permanent blocker2 = possibleBlockers.get(j);
+
+                int blocker1Power = blocker1.getPower().getValue();
+                int blocker2Power = blocker2.getPower().getValue();
+                int blocker1Toughness = blocker1.getToughness().getValue();
+                int blocker2Toughness = blocker2.getToughness().getValue();
+
+                // Combined power must be enough to kill attacker
+                int combinedPower = blocker1Power + blocker2Power;
+                if (combinedPower < attackerToughness) {
+                    continue; // Can't kill attacker
+                }
+
+                // At least one blocker must survive
+                // Attacker assigns damage; it will typically kill the smaller blocker first
+                // For simplicity, assume attacker kills the lower-toughness blocker
+                Permanent lowerToughness = blocker1Toughness <= blocker2Toughness ? blocker1 : blocker2;
+                Permanent higherToughness = blocker1Toughness > blocker2Toughness ? blocker1 : blocker2;
+
+                int damageToLower = Math.min(attackerPower, lowerToughness.getToughness().getValue());
+                int remainingDamage = attackerPower - damageToLower;
+
+                boolean lowerSurvives = damageToLower < lowerToughness.getToughness().getValue();
+                boolean higherSurvives = remainingDamage < higherToughness.getToughness().getValue();
+
+                if (!lowerSurvives && !higherSurvives) {
+                    continue; // Both blockers die - not a good trade
+                }
+
+                // Score this combination: prefer smaller blockers (less value sacrificed)
+                // Use negative combined power as score (lower power = better)
+                int score = -(blocker1Power + blocker2Power);
+
+                // Bonus if both survive
+                if (lowerSurvives && higherSurvives) {
+                    score += 100;
+                }
+
+                if (bestResult == null || score > bestScore) {
+                    bestResult = new GroupBlockResult(blocker1, blocker2);
+                    bestScore = score;
+                }
+            }
+        }
+
+        return bestResult;
     }
 }

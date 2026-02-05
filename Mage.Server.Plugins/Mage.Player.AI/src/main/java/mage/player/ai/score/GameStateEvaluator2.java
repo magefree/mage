@@ -1,14 +1,17 @@
 package mage.player.ai.score;
 
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import org.apache.log4j.Logger;
-
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.constants.Outcome;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.player.ai.StrategicRoleEvaluator;
+import mage.player.ai.combo.ComboDetectionEngine;
+import mage.players.Player;
+import org.apache.log4j.Logger;
+
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * @author nantuko
@@ -23,6 +26,27 @@ public final class GameStateEvaluator2 {
     public static final int LOSE_GAME_SCORE = -WIN_GAME_SCORE;
 
     public static final int HAND_CARD_SCORE = 5;
+
+    // Thread-local combo detection engine for AI evaluation
+    private static final ThreadLocal<ComboDetectionEngine> comboEngineHolder = new ThreadLocal<>();
+    private static final ThreadLocal<Set<String>> comboPiecesHolder = new ThreadLocal<>();
+
+    /**
+     * Set the combo detection engine for current AI evaluation.
+     * This enables combo-aware scoring during game state evaluation.
+     */
+    public static void setComboEngine(ComboDetectionEngine engine, Set<String> comboPieces) {
+        comboEngineHolder.set(engine);
+        comboPiecesHolder.set(comboPieces);
+    }
+
+    /**
+     * Clear the combo engine after AI evaluation completes.
+     */
+    public static void clearComboEngine() {
+        comboEngineHolder.remove();
+        comboPiecesHolder.remove();
+    }
 
     public static PlayerEvaluateScore evaluate(UUID playerId, Game game) {
         return evaluate(playerId, game, true);
@@ -112,17 +136,63 @@ public final class GameStateEvaluator2 {
         int playerHandScore = player.getHand().size() * HAND_CARD_SCORE;
         int opponentHandScore = opponent.getHand().size() * HAND_CARD_SCORE;
 
-        int score = (playerLifeScore - opponentLifeScore)
-                + (playerPermanentsScore - opponentPermanentsScore)
-                + (playerHandScore - opponentHandScore);
-        logger.debug(score
-                + " total Score (life:" + (playerLifeScore - opponentLifeScore)
-                + " permanents:" + (playerPermanentsScore - opponentPermanentsScore)
-                + " hand:" + (playerHandScore - opponentHandScore) + ')');
+        // Add combo progress bonus
+        int playerComboScore = evaluateComboProgress(playerId, game);
+
+        // Apply strategic role-based weight adjustments
+        // Beatdown: values dealing damage more, cares less about own life
+        // Control: values preserving life and board presence more
+        int role = StrategicRoleEvaluator.determineRole(player, opponent, game);
+
+        double ownLifeWeight = 1.0;
+        double opponentLifeWeight = 1.0;
+        double permanentWeight = 1.0;
+
+        if (role == StrategicRoleEvaluator.ROLE_BEATDOWN) {
+            // Beatdown: prioritize dealing damage, willing to trade life
+            opponentLifeWeight = 1.5;    // Prioritize reducing opponent life
+            ownLifeWeight = 0.7;         // More willing to trade own life
+            permanentWeight = 0.8;       // Less concerned about board trades
+        } else if (role == StrategicRoleEvaluator.ROLE_CONTROL) {
+            // Control: prioritize preserving life and board presence
+            ownLifeWeight = 1.3;         // Prioritize preserving own life
+            permanentWeight = 1.2;       // Value board presence more
+            opponentLifeWeight = 0.8;    // Less focused on opponent's life
+        }
+
+        int adjustedLifeDiff = (int) ((playerLifeScore * ownLifeWeight) - (opponentLifeScore * opponentLifeWeight));
+        int adjustedPermanentDiff = (int) ((playerPermanentsScore - opponentPermanentsScore) * permanentWeight);
+
+        int score = adjustedLifeDiff
+                + adjustedPermanentDiff
+                + (playerHandScore - opponentHandScore)
+                + playerComboScore;
+
+        if (logger.isDebugEnabled()) {
+            logger.debug(score
+                    + " total Score (role:" + StrategicRoleEvaluator.getRoleName(role)
+                    + " life:" + adjustedLifeDiff
+                    + " permanents:" + adjustedPermanentDiff
+                    + " hand:" + (playerHandScore - opponentHandScore)
+                    + " combo:" + playerComboScore + ')');
+        }
         return new PlayerEvaluateScore(
                 playerId,
                 playerLifeScore, playerHandScore, playerPermanentsScore,
-                opponentLifeScore, opponentHandScore, opponentPermanentsScore);
+                opponentLifeScore, opponentHandScore, opponentPermanentsScore,
+                playerComboScore);
+    }
+
+    /**
+     * Evaluate combo progress and return a score bonus.
+     * Rewards having combo pieces and gives large bonus when combo is executable.
+     */
+    private static int evaluateComboProgress(UUID playerId, Game game) {
+        ComboDetectionEngine engine = comboEngineHolder.get();
+        if (engine == null) {
+            return 0;
+        }
+        return engine.calculateComboScoreBonus(game, playerId);
     }
 
     public static int evaluatePermanent(Permanent permanent, Game game, boolean useCombatPermanentScore) {
@@ -155,6 +225,7 @@ public final class GameStateEvaluator2 {
         private int playerLifeScore = 0;
         private int playerHandScore = 0;
         private int playerPermanentsScore = 0;
+        private int playerComboScore = 0;
 
         private int opponentLifeScore = 0;
         private int opponentHandScore = 0;
@@ -170,6 +241,14 @@ public final class GameStateEvaluator2 {
         public PlayerEvaluateScore(UUID playerId,
                                    int playerLifeScore, int playerHandScore, int playerPermanentsScore,
                                    int opponentLifeScore, int opponentHandScore, int opponentPermanentsScore) {
+            this(playerId, playerLifeScore, playerHandScore, playerPermanentsScore,
+                    opponentLifeScore, opponentHandScore, opponentPermanentsScore, 0);
+        }
+
+        public PlayerEvaluateScore(UUID playerId,
+                                   int playerLifeScore, int playerHandScore, int playerPermanentsScore,
+                                   int opponentLifeScore, int opponentHandScore, int opponentPermanentsScore,
+                                   int playerComboScore) {
             this.playerId = playerId;
             this.playerLifeScore = playerLifeScore;
             this.playerHandScore = playerHandScore;
@@ -177,6 +256,7 @@ public final class GameStateEvaluator2 {
             this.opponentLifeScore = opponentLifeScore;
             this.opponentHandScore = opponentHandScore;
             this.opponentPermanentsScore = opponentPermanentsScore;
+            this.playerComboScore = playerComboScore;
         }
 
         public UUID getPlayerId() {
@@ -184,7 +264,7 @@ public final class GameStateEvaluator2 {
         }
 
         public int getPlayerScore() {
-            return playerLifeScore + playerHandScore + playerPermanentsScore;
+            return playerLifeScore + playerHandScore + playerPermanentsScore + playerComboScore;
         }
 
         public int getOpponentScore() {
@@ -211,16 +291,28 @@ public final class GameStateEvaluator2 {
             return playerPermanentsScore;
         }
 
+        public int getPlayerComboScore() {
+            return playerComboScore;
+        }
+
         public String getPlayerInfoFull() {
-            return "Life:" + playerLifeScore
+            String info = "Life:" + playerLifeScore
                     + ", Hand:" + playerHandScore
                     + ", Perm:" + playerPermanentsScore;
+            if (playerComboScore > 0) {
+                info += ", Combo:" + playerComboScore;
+            }
+            return info;
         }
 
         public String getPlayerInfoShort() {
-            return "L:" + playerLifeScore
+            String info = "L:" + playerLifeScore
                     + ",H:" + playerHandScore
                     + ",P:" + playerPermanentsScore;
+            if (playerComboScore > 0) {
+                info += ",C:" + playerComboScore;
+            }
+            return info;
         }
 
         public String getOpponentInfoFull() {
