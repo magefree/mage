@@ -1,7 +1,6 @@
 
 package mage.cards.g;
 
-import mage.MageInt;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -17,7 +16,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -40,12 +39,16 @@ public final class GenjuOfTheFalls extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // {2}: Enchanted Island becomes a 3/2 blue Spirit creature with flying until end of turn. It's still a land.
-        this.addAbility(new SimpleActivatedAbility(new BecomesCreatureAttachedWithActivatedAbilityOrSpellEffect(
-                new SpiritToken(), "Enchanted Island becomes a 3/2 blue Spirit " +
-                "creature with flying until end of turn. It's still a land", Duration.EndOfTurn
-        ), new GenericManaCost(2)));
+        this.addAbility(new SimpleActivatedAbility(
+            new BecomesCreatureAttachedWithActivatedAbilityOrSpellEffect(
+                new CreatureToken(3, 2, "3/2 blue Spirit creature with flying", SubType.SPIRIT).withColor("U").withAbility(FlyingAbility.getInstance()),
+                "Enchanted Island becomes a 3/2 blue Spirit creature with flying until end of turn. It's still a land",
+                Duration.EndOfTurn
+            ),
+            new GenericManaCost(2)
+        ));
 
-        // When enchanted Island is put into a graveyard, you may return Genju of the Falls from your graveyard to your hand.        TargetPermanent auraTarget = new TargetLandPermanent(filter);
+        // When enchanted Island is put into a graveyard, you may return Genju of the Falls from your graveyard to your hand.
         this.addAbility(new DiesAttachedTriggeredAbility(
                 new ReturnToHandSourceEffect(false, true)
                         .setText("you may return {this} from your graveyard to your hand"),
@@ -60,26 +63,5 @@ public final class GenjuOfTheFalls extends CardImpl {
     @Override
     public GenjuOfTheFalls copy() {
         return new GenjuOfTheFalls(this);
-    }
-
-    private static class SpiritToken extends TokenImpl {
-
-        SpiritToken() {
-            super("Spirit", "3/2 blue Spirit creature with flying");
-            cardType.add(CardType.CREATURE);
-            color.setBlue(true);
-            subtype.add(SubType.SPIRIT);
-            power = new MageInt(3);
-            toughness = new MageInt(2);
-            addAbility(FlyingAbility.getInstance());
-        }
-
-        private SpiritToken(final SpiritToken token) {
-            super(token);
-        }
-
-        public SpiritToken copy() {
-            return new SpiritToken(this);
-        }
     }
 }
