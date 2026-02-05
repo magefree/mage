@@ -12,64 +12,100 @@ import java.util.*;
 
 /**
  * AI: Reanimator combo pattern.
- * Detects decks trying to cheat big creatures into play from the graveyard
- * using Entomb, Buried Alive, or self-discard effects + Reanimate effects.
+ * Detects decks trying to cheat creatures into play from the graveyard via:
+ * - Enablers: Entomb, Buried Alive, Faithless Looting, Faithful Mending,
+ *   Psychic Frog, or evoke creatures (Grief, Solitude)
+ * - Reanimation: Reanimate, Animate Dead, Goryo's Vengeance, Unearth,
+ *   Emperor of Bones, Persist, etc.
+ * - Targets: Griselbrand, Atraxa, Archon of Cruelty, evoke elementals
  *
- * @author Claude
+ * @author duxbuse
  */
 public class ReanimatorPattern implements ComboPattern {
 
     private static final String COMBO_ID = "reanimator-combo";
 
-    // Cards that put creatures in graveyard from library
+    // Cards that put creatures in graveyard from library/hand
     private static final Set<String> ENABLERS = new HashSet<>(Arrays.asList(
+            // Direct to graveyard from library
             "Entomb",
             "Buried Alive",
             "Unmarked Grave",
+            // Looting/discard effects
             "Faithless Looting",
+            "Faithful Mending",
             "Careful Study",
             "Putrid Imp",
-            "Oona's Prowler"
+            "Oona's Prowler",
+            "Psychic Frog",
+            // Evoke creatures (cast, die, reanimate)
+            "Grief",
+            "Solitude",
+            "Fury",
+            "Subtlety",
+            "Endurance"
     ));
 
     // Reanimation spells
     private static final Set<String> REANIMATION_SPELLS = new HashSet<>(Arrays.asList(
+            // Classic reanimation
             "Reanimate",
             "Animate Dead",
             "Dance of the Dead",
             "Necromancy",
             "Exhume",
             "Life // Death",
+            "Unburial Rites",
+            "Persist",
+            "Victimize",
+            // Instant speed / conditional
             "Goryo's Vengeance",
             "Shallow Grave",
             "Makeshift Mannequin",
-            "Unburial Rites",
-            "Persist",
-            "Victimize"
+            "Corpse Dance",
+            // Cheap / low CMC reanimation
+            "Unearth",
+            "Claim // Fame",
+            // Creature-based reanimation
+            "Emperor of Bones",
+            "Apprentice Necromancer",
+            "Doomed Necromancer"
     ));
 
     // High-value reanimation targets
     private static final Set<String> PRIME_TARGETS = new HashSet<>(Arrays.asList(
+            // S-tier targets
             "Griselbrand",
             "Jin-Gitaxias, Core Augur",
+            "Razaketh, the Foulblooded",
+            "Atraxa, Grand Unifier",
+            // A-tier targets
+            "Vilis, Broker of Blood",
+            "Archon of Cruelty",
             "Iona, Shield of Emeria",
             "Elesh Norn, Grand Cenobite",
-            "Archon of Cruelty",
-            "Atraxa, Grand Unifier",
-            "Razaketh, the Foulblooded",
-            "Vilis, Broker of Blood",
-            "Sheoldred, Whispering One",
+            "Serra's Emissary",
+            // Evoke elementals (for Scam-style decks)
+            "Grief",
+            "Solitude",
+            "Fury",
+            // Control/lock pieces
             "Sire of Insanity",
+            "Sheoldred, Whispering One",
+            "Blazing Archon",
+            // Value creatures
             "Tidespout Tyrant",
             "Inkwell Leviathan",
-            "Blazing Archon",
             "Empyrial Archangel",
             "Angel of Despair",
             "Ashen Rider",
             "Grave Titan",
             "Massacre Wurm",
             "Craterhoof Behemoth",
-            "Worldspine Wurm"
+            "Worldspine Wurm",
+            // Modern/Pioneer targets
+            "Archon of Emeria",
+            "Chancellor of the Annex"
     ));
 
     private final Set<String> allComboPieces;
@@ -322,13 +358,20 @@ public class ReanimatorPattern implements ComboPattern {
             case "Archon of Cruelty":
                 return 80;   // Value engine
             case "Iona, Shield of Emeria":
-                return 75;   // Lock out mono-color
+            case "Serra's Emissary":
+                return 75;   // Lock out color/card type
             case "Elesh Norn, Grand Cenobite":
                 return 70;   // Board control
+            case "Grief":
+                return 68;   // Thoughtseize on a stick (Scam)
             case "Sire of Insanity":
                 return 65;   // Discard lock
+            case "Solitude":
+                return 62;   // Removal + body
             case "Sheoldred, Whispering One":
                 return 60;
+            case "Fury":
+                return 55;   // Board wipe potential
             default:
                 return 50;
         }

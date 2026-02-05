@@ -15,7 +15,7 @@ import java.util.*;
  * Loaded from infinite-combos.txt, represents combos where two specific
  * cards together create an infinite loop or game-winning condition.
  *
- * @author Claude
+ * @author duxbuse
  */
 public class TwoCardComboPattern implements ComboPattern {
 

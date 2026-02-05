@@ -19,7 +19,7 @@ import java.util.*;
  * With creatures that can be cast from exile (Misthollow Griffin, etc.),
  * you can generate infinite mana and cast your commander infinite times.
  *
- * @author Claude
+ * @author duxbuse
  */
 public class FoodChainPattern implements ComboPattern {
 

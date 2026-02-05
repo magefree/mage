@@ -8,7 +8,7 @@ import java.util.Set;
  * AI: Holds the result of combo detection including confidence level,
  * which pieces are found, and what's still needed.
  *
- * @author Claude
+ * @author duxbuse
  */
 public class ComboDetectionResult {
 

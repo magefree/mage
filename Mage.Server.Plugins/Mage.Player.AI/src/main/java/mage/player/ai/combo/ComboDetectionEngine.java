@@ -13,7 +13,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * Analyzes player decks at game start and continuously tracks
  * combo progress throughout the game.
  *
- * @author Claude
+ * @author duxbuse
  */
 public class ComboDetectionEngine {
 

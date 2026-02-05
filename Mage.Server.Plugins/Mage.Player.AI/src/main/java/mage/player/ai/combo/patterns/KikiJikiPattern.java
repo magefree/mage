@@ -18,17 +18,19 @@ import java.util.*;
  * The combo: Kiki-Jiki copies a creature that untaps Kiki.
  * The copy has haste and untaps Kiki, allowing infinite copies.
  *
- * @author Claude
+ * @author duxbuse
  */
 public class KikiJikiPattern implements ComboPattern {
 
     private static final String COMBO_ID = "kiki-jiki-combo";
 
-    // The copy makers
+    // The copy makers (creatures/enchantments that make token copies)
     private static final Set<String> COPY_MAKERS = new HashSet<>(Arrays.asList(
             "Kiki-Jiki, Mirror Breaker",
             "Splinter Twin",
-            "Helm of the Host"
+            "Helm of the Host",
+            "Saheeli Rai",            // -2: Copy artifact or creature, combo with Felidar Guardian
+            "Saheeli, Sublime Artificer" // Can copy with other pieces
     ));
 
     // Creatures that untap target creature/permanent (combo with Kiki/Twin)
@@ -39,14 +41,25 @@ public class KikiJikiPattern implements ComboPattern {
             "Village Bell-Ringer",    // Untaps all your creatures
             "Bounding Krasis",        // Untaps target creature
             "Breaching Hippocamp",    // Untaps target creature
-            "Restoration Angel",      // Flickers, resetting Kiki
-            "Felidar Guardian",       // Flickers target permanent
             "Great Oak Guardian",     // Untaps all creatures
             "Midnight Guard",         // Untaps when creature enters (needs extra piece)
             "Corridor Monitor",       // Untaps target artifact or creature
             "Hyrax Tower Scout",      // Untaps target creature
             "Intruder Alarm",         // Untaps all on creature entering
             "Combat Celebrant"        // Extra combat untaps
+    ));
+
+    // Blink effects that reset Kiki/copy makers (flicker = exile and return)
+    // These work because the permanent returns untapped
+    private static final Set<String> BLINKERS = new HashSet<>(Arrays.asList(
+            "Felidar Guardian",       // Flickers any permanent - Saheeli combo!
+            "Restoration Angel",      // Flickers non-Angel creature
+            "Flickerwisp",            // Flickers any permanent (delayed return)
+            "Charming Prince",        // Flickers your creature
+            "Wispweaver Angel",       // Flickers your creature
+            "Glasspool Mimic",        // Copies a creature
+            "Spark Double",           // Copies planeswalker or creature
+            "Clever Impersonator"     // Copies any nonland permanent
     ));
 
     // Cards that tutor for creatures
@@ -61,12 +74,18 @@ public class KikiJikiPattern implements ComboPattern {
             "Worldly Tutor"           // Creature to top
     ));
 
+    // All combo enablers (untappers + blinkers)
+    private final Set<String> allEnablers;
     private final Set<String> allComboPieces;
 
     public KikiJikiPattern() {
+        allEnablers = new HashSet<>();
+        allEnablers.addAll(UNTAPPERS);
+        allEnablers.addAll(BLINKERS);
+
         allComboPieces = new HashSet<>();
         allComboPieces.addAll(COPY_MAKERS);
-        allComboPieces.addAll(UNTAPPERS);
+        allComboPieces.addAll(allEnablers);
         // Don't include generic tutors in pieces
     }
 
@@ -77,7 +96,7 @@ public class KikiJikiPattern implements ComboPattern {
 
     @Override
     public String getComboName() {
-        return "Kiki-Jiki / Splinter Twin";
+        return "Kiki-Jiki / Splinter Twin / Saheeli";
     }
 
     @Override
@@ -98,10 +117,10 @@ public class KikiJikiPattern implements ComboPattern {
         boolean hasCopyMakerOnBattlefield = false;
         String copyMakerOnBattlefield = null;
 
-        boolean hasUntapper = false;
-        boolean hasUntapperInHand = false;
-        boolean hasUntapperOnBattlefield = false;
-        String untapperOnBattlefield = null;
+        boolean hasEnabler = false;       // Untapper OR blinker
+        boolean hasEnablerInHand = false;
+        boolean hasEnablerOnBattlefield = false;
+        String enablerOnBattlefield = null;
 
         boolean hasTutor = false;
 
@@ -113,9 +132,9 @@ public class KikiJikiPattern implements ComboPattern {
                 hasCopyMakerInHand = true;
                 piecesInHand.add(name);
                 foundPieces.add(name);
-            } else if (UNTAPPERS.contains(name)) {
-                hasUntapper = true;
-                hasUntapperInHand = true;
+            } else if (allEnablers.contains(name)) {
+                hasEnabler = true;
+                hasEnablerInHand = true;
                 piecesInHand.add(name);
                 foundPieces.add(name);
             } else if (TUTORS.contains(name)) {
@@ -132,10 +151,10 @@ public class KikiJikiPattern implements ComboPattern {
                 copyMakerOnBattlefield = name;
                 piecesOnBattlefield.add(name);
                 foundPieces.add(name);
-            } else if (UNTAPPERS.contains(name)) {
-                hasUntapper = true;
-                hasUntapperOnBattlefield = true;
-                untapperOnBattlefield = name;
+            } else if (allEnablers.contains(name)) {
+                hasEnabler = true;
+                hasEnablerOnBattlefield = true;
+                enablerOnBattlefield = name;
                 piecesOnBattlefield.add(name);
                 foundPieces.add(name);
             }
@@ -147,8 +166,8 @@ public class KikiJikiPattern implements ComboPattern {
             if (COPY_MAKERS.contains(name)) {
                 hasCopyMaker = true;
                 foundPieces.add(name);
-            } else if (UNTAPPERS.contains(name)) {
-                hasUntapper = true;
+            } else if (allEnablers.contains(name)) {
+                hasEnabler = true;
                 foundPieces.add(name);
             } else if (TUTORS.contains(name)) {
                 hasTutor = true;
@@ -165,14 +184,14 @@ public class KikiJikiPattern implements ComboPattern {
 
         // Build missing pieces
         if (!hasCopyMaker) {
-            missingPieces.add("Kiki-Jiki or Splinter Twin");
+            missingPieces.add("Kiki-Jiki, Splinter Twin, or Saheeli Rai");
         }
-        if (!hasUntapper) {
-            missingPieces.add("Untapper (Deceiver Exarch, Zealous Conscripts, etc.)");
+        if (!hasEnabler) {
+            missingPieces.add("Enabler (Felidar Guardian, Deceiver Exarch, etc.)");
         }
 
-        // Is this a Kiki combo deck?
-        boolean isKikiDeck = hasCopyMaker && hasUntapper;
+        // Is this a Kiki/Saheeli combo deck?
+        boolean isKikiDeck = hasCopyMaker && hasEnabler;
 
         if (!isKikiDeck) {
             return ComboDetectionResult.notDetected(COMBO_ID);
@@ -183,38 +202,48 @@ public class KikiJikiPattern implements ComboPattern {
         double confidence;
         String notes;
 
-        // Check if Kiki is untapped and ready to combo
-        boolean kikiReady = false;
+        // Check if copy maker is ready (untapped, no summoning sickness)
+        // For Saheeli, check loyalty (needs at least 2 for -2 ability)
+        boolean copyMakerReady = false;
         if (hasCopyMakerOnBattlefield) {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(playerId)) {
-                if (COPY_MAKERS.contains(permanent.getName()) && !permanent.isTapped() && !permanent.hasSummoningSickness()) {
-                    kikiReady = true;
-                    break;
+                String name = permanent.getName();
+                if (COPY_MAKERS.contains(name)) {
+                    if (permanent.isPlaneswalker(game)) {
+                        // Saheeli needs loyalty >= 2 for -2 ability
+                        if (permanent.getCounters(game).getCount("loyalty") >= 2) {
+                            copyMakerReady = true;
+                            break;
+                        }
+                    } else if (!permanent.isTapped() && !permanent.hasSummoningSickness()) {
+                        copyMakerReady = true;
+                        break;
+                    }
                 }
             }
         }
 
-        if (kikiReady && hasUntapperInHand) {
-            // Kiki on battlefield untapped, untapper in hand - win!
+        if (copyMakerReady && hasEnablerInHand) {
+            // Copy maker ready, enabler in hand - win!
             state = ComboState.EXECUTABLE;
             confidence = 1.0;
-            notes = copyMakerOnBattlefield + " ready, can play untapper to combo";
-        } else if (hasCopyMakerOnBattlefield && hasUntapperOnBattlefield) {
+            notes = copyMakerOnBattlefield + " ready, can play enabler to combo";
+        } else if (hasCopyMakerOnBattlefield && hasEnablerOnBattlefield) {
             // Both on battlefield - check if can activate
             state = ComboState.EXECUTABLE;
             confidence = 0.95;
             notes = "Both pieces on battlefield";
-        } else if (hasCopyMakerInHand && hasUntapperInHand) {
+        } else if (hasCopyMakerInHand && hasEnablerInHand) {
             // Both in hand
             state = ComboState.READY_IN_HAND;
             confidence = 0.85;
             notes = "Both combo pieces in hand";
-        } else if ((hasCopyMakerOnBattlefield && hasUntapper) || (hasUntapperOnBattlefield && hasCopyMaker)) {
+        } else if ((hasCopyMakerOnBattlefield && hasEnabler) || (hasEnablerOnBattlefield && hasCopyMaker)) {
             // One piece on battlefield, other in deck
             state = ComboState.READY_IN_HAND;
             confidence = 0.75;
             notes = "One piece on battlefield, other in deck/hand";
-        } else if (hasCopyMaker && hasUntapper) {
+        } else if (hasCopyMaker && hasEnabler) {
             // Both in deck
             state = ComboState.READY_IN_DECK;
             confidence = hasTutor ? 0.7 : 0.5;
@@ -254,45 +283,50 @@ public class KikiJikiPattern implements ComboPattern {
 
         // Check what's on battlefield
         String copyMakerOnField = null;
-        String untapperOnField = null;
-        boolean copyMakerUntapped = false;
+        String enablerOnField = null;
+        boolean copyMakerReady = false;
 
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(playerId)) {
             String name = permanent.getName();
             if (COPY_MAKERS.contains(name)) {
                 copyMakerOnField = name;
-                if (!permanent.isTapped() && !permanent.hasSummoningSickness()) {
-                    copyMakerUntapped = true;
+                if (permanent.isPlaneswalker(game)) {
+                    // Saheeli needs 2+ loyalty
+                    if (permanent.getCounters(game).getCount("loyalty") >= 2) {
+                        copyMakerReady = true;
+                    }
+                } else if (!permanent.isTapped() && !permanent.hasSummoningSickness()) {
+                    copyMakerReady = true;
                 }
-            } else if (UNTAPPERS.contains(name)) {
-                untapperOnField = name;
+            } else if (allEnablers.contains(name)) {
+                enablerOnField = name;
             }
         }
 
         // Check hand
         String copyMakerInHand = null;
-        String untapperInHand = null;
+        String enablerInHand = null;
         for (Card card : player.getHand().getCards(game)) {
             String name = card.getName();
             if (COPY_MAKERS.contains(name) && copyMakerInHand == null) {
                 copyMakerInHand = name;
-            } else if (UNTAPPERS.contains(name) && untapperInHand == null) {
-                untapperInHand = name;
+            } else if (allEnablers.contains(name) && enablerInHand == null) {
+                enablerInHand = name;
             }
         }
 
         // Build optimal sequence
-        if (copyMakerUntapped && untapperInHand != null) {
-            // Cast untapper, then activate Kiki targeting it
-            sequence.add(untapperInHand);
-            sequence.add(copyMakerOnField + " (activate targeting " + untapperInHand + ")");
-        } else if (copyMakerOnField != null && untapperOnField != null) {
+        if (copyMakerReady && enablerInHand != null) {
+            // Cast enabler, then activate copy maker targeting it
+            sequence.add(enablerInHand);
+            sequence.add(copyMakerOnField + " (activate targeting " + enablerInHand + ")");
+        } else if (copyMakerOnField != null && enablerOnField != null) {
             // Both on battlefield - activate
-            sequence.add(copyMakerOnField + " (activate targeting " + untapperOnField + ")");
-        } else if (copyMakerInHand != null && untapperInHand != null) {
-            // Need to play both - usually Kiki first, then untapper
+            sequence.add(copyMakerOnField + " (activate targeting " + enablerOnField + ")");
+        } else if (copyMakerInHand != null && enablerInHand != null) {
+            // Need to play both - play copy maker first, then enabler
             sequence.add(copyMakerInHand);
-            sequence.add(untapperInHand);
+            sequence.add(enablerInHand);
         }
 
         return sequence;

@@ -13,7 +13,7 @@ import java.util.*;
  * When a combo is executable, filters out non-combo actions to help
  * AI focus on executing the winning line.
  *
- * @author Claude
+ * @author duxbuse
  */
 public class ComboAwareOptimizer extends BaseTreeOptimizer {
 

@@ -1,5 +1,6 @@
 package mage.player.ai.combo;
 
+import mage.player.ai.combo.patterns.DredgeLivingEndPattern;
 import mage.player.ai.combo.patterns.FoodChainPattern;
 import mage.player.ai.combo.patterns.KikiJikiPattern;
 import mage.player.ai.combo.patterns.ReanimatorPattern;
@@ -20,7 +21,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * Loads two-card combos from infinite-combos.txt and registers
  * complex combo patterns.
  *
- * @author Claude
+ * @author duxbuse
  */
 public final class ComboRegistry {
 
@@ -128,6 +129,10 @@ public final class ComboRegistry {
 
         // Food Chain pattern
         registerPattern(new FoodChainPattern());
+        complexPatternsLoaded++;
+
+        // Dredge / Living End pattern
+        registerPattern(new DredgeLivingEndPattern());
         complexPatternsLoaded++;
     }
 

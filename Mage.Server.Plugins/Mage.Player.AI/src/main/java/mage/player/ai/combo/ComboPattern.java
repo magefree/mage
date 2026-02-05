@@ -11,7 +11,7 @@ import java.util.UUID;
  * Implementations define how to detect specific combo archetypes and provide
  * execution guidance for the AI.
  *
- * @author Claude
+ * @author duxbuse
  */
 public interface ComboPattern {
 

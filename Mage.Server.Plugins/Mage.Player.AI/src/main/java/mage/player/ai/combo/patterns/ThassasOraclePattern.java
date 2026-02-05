@@ -14,10 +14,13 @@ import java.util.*;
 
 /**
  * AI: Thassa's Oracle / Laboratory Maniac combo pattern.
- * Detects decks trying to win by emptying their library with
- * Demonic Consultation, Tainted Pact, or similar effects.
+ * Detects decks trying to win by emptying their library via:
+ * - Library exilers: Demonic Consultation, Tainted Pact, Doomsday
+ * - Self-mill: Hermit Druid, Mesmeric Orb, Altar of Dementia
+ * - Draw engines: Song of Creation, Glimpse of Nature, Beast Whisperer
+ *   combined with enablers like Aluren, Cloudstone Curio, Intruder Alarm
  *
- * @author Claude
+ * @author duxbuse
  */
 public class ThassasOraclePattern implements ComboPattern {
 
@@ -51,6 +54,37 @@ public class ThassasOraclePattern implements ComboPattern {
             "Fleet Swallower"
     ));
 
+    // Draw engines that can draw through entire library with cheap/free spells
+    private static final Set<String> DRAW_ENGINES = new HashSet<>(Arrays.asList(
+            "Song of Creation",       // Draw 2 on each spell cast
+            "Glimpse of Nature",      // Draw on creature cast
+            "Beast Whisperer",        // Draw on creature cast
+            "Guardian Project",       // Draw on nontoken creature ETB
+            "The Great Henge",        // Draw on creature ETB
+            "Recycle",                // Draw when you cast a spell
+            "Null Profusion",         // Draw when you cast a spell
+            "Jeskai Ascendancy",      // Loot on noncreature spell (with mana dorks)
+            "Mindmoil",               // Wheel effect on spell cast
+            "Teferi's Ageless Insight", // Double draws
+            "Alhammarret's Archive",  // Double draws
+            "Thought Reflection"      // Double draws
+    ));
+
+    // Enablers that make draw engines go infinite (free spells, untap effects)
+    private static final Set<String> DRAW_ENGINE_ENABLERS = new HashSet<>(Arrays.asList(
+            "Aluren",                 // Free creature spells 3 CMC or less
+            "Cloudstone Curio",       // Bounce creatures to recast
+            "Intruder Alarm",         // Untap all creatures on creature ETB
+            "Earthcraft",             // Untap lands with creatures
+            "Shrieking Drake",        // Self-bounce creature
+            "Whitemane Lion",         // Self-bounce creature
+            "Kor Skyfisher",          // Self-bounce creature
+            "Temur Sabertooth",       // Bounce creatures
+            "Wirewood Symbiote",      // Bounce elves
+            "Equilibrium",            // Bounce on creature cast
+            "Words of Wind"           // Bounce instead of draw
+    ));
+
     // Tutors to find combo pieces
     private static final Set<String> RELEVANT_TUTORS = new HashSet<>(Arrays.asList(
             "Demonic Tutor",
@@ -69,6 +103,8 @@ public class ThassasOraclePattern implements ComboPattern {
         allComboPieces.addAll(WIN_CONDITIONS);
         allComboPieces.addAll(LIBRARY_EXILERS);
         allComboPieces.addAll(SELF_MILL);
+        allComboPieces.addAll(DRAW_ENGINES);
+        allComboPieces.addAll(DRAW_ENGINE_ENABLERS);
         // Don't include tutors in combo pieces - they're too generic
     }
 
@@ -100,6 +136,10 @@ public class ThassasOraclePattern implements ComboPattern {
         boolean hasWinConditionOnBattlefield = false;
         boolean hasExiler = false;
         boolean hasExilerInHand = false;
+        boolean hasDrawEngine = false;
+        boolean hasDrawEngineOnBattlefield = false;
+        boolean hasDrawEngineEnabler = false;
+        boolean hasDrawEngineEnablerOnBattlefield = false;
 
         int librarySize = player.getLibrary().size();
         boolean libraryEmpty = librarySize == 0;
@@ -121,6 +161,14 @@ public class ThassasOraclePattern implements ComboPattern {
             } else if (SELF_MILL.contains(name)) {
                 piecesInHand.add(name);
                 foundPieces.add(name);
+            } else if (DRAW_ENGINES.contains(name)) {
+                hasDrawEngine = true;
+                piecesInHand.add(name);
+                foundPieces.add(name);
+            } else if (DRAW_ENGINE_ENABLERS.contains(name)) {
+                hasDrawEngineEnabler = true;
+                piecesInHand.add(name);
+                foundPieces.add(name);
             }
         }
 
@@ -133,6 +181,16 @@ public class ThassasOraclePattern implements ComboPattern {
                 piecesOnBattlefield.add(name);
                 foundPieces.add(name);
             } else if (SELF_MILL.contains(name)) {
+                piecesOnBattlefield.add(name);
+                foundPieces.add(name);
+            } else if (DRAW_ENGINES.contains(name)) {
+                hasDrawEngine = true;
+                hasDrawEngineOnBattlefield = true;
+                piecesOnBattlefield.add(name);
+                foundPieces.add(name);
+            } else if (DRAW_ENGINE_ENABLERS.contains(name)) {
+                hasDrawEngineEnabler = true;
+                hasDrawEngineEnablerOnBattlefield = true;
                 piecesOnBattlefield.add(name);
                 foundPieces.add(name);
             }
@@ -148,6 +206,12 @@ public class ThassasOraclePattern implements ComboPattern {
                 hasExiler = true;
                 foundPieces.add(name);
             } else if (SELF_MILL.contains(name)) {
+                foundPieces.add(name);
+            } else if (DRAW_ENGINES.contains(name)) {
+                hasDrawEngine = true;
+                foundPieces.add(name);
+            } else if (DRAW_ENGINE_ENABLERS.contains(name)) {
+                hasDrawEngineEnabler = true;
                 foundPieces.add(name);
             }
         }
@@ -167,12 +231,16 @@ public class ThassasOraclePattern implements ComboPattern {
         if (!hasWinCondition) {
             missingPieces.add("Thassa's Oracle (or Lab Man)");
         }
-        if (!hasExiler && !libraryEmpty) {
-            missingPieces.add("Demonic Consultation (or library exile)");
+        if (!hasExiler && !libraryEmpty && !(hasDrawEngine && hasDrawEngineEnabler)) {
+            missingPieces.add("Demonic Consultation (or library exile/draw engine)");
         }
 
         // Is this a consultation/oracle deck?
-        boolean isOracleDeck = hasWinCondition && (hasExiler || foundPieces.stream().anyMatch(SELF_MILL::contains));
+        // Valid combos: Win condition + (Exiler OR Self-mill OR Draw engine with enabler)
+        boolean hasLibraryEmptyMethod = hasExiler
+                || foundPieces.stream().anyMatch(SELF_MILL::contains)
+                || (hasDrawEngine && hasDrawEngineEnabler);
+        boolean isOracleDeck = hasWinCondition && hasLibraryEmptyMethod;
 
         if (!isOracleDeck) {
             return ComboDetectionResult.notDetected(COMBO_ID);
@@ -204,11 +272,21 @@ public class ThassasOraclePattern implements ComboPattern {
             state = ComboState.READY_IN_HAND;
             confidence = 0.9;
             notes = "Both pieces in hand, can attempt combo";
+        } else if (hasWinConditionInHand && hasDrawEngineOnBattlefield && hasDrawEngineEnablerOnBattlefield) {
+            // Draw engine combo assembled on battlefield, win condition in hand
+            state = ComboState.READY_IN_HAND;
+            confidence = 0.85;
+            notes = "Draw engine active, win condition in hand";
         } else if (hasWinCondition && hasExiler) {
             // Have both in deck
             state = ComboState.READY_IN_DECK;
             confidence = 0.7;
             notes = "Combo pieces in deck";
+        } else if (hasWinCondition && hasDrawEngine && hasDrawEngineEnabler) {
+            // Have draw engine combo in deck
+            state = ComboState.READY_IN_DECK;
+            confidence = 0.6;
+            notes = "Draw engine combo pieces in deck";
         } else {
             state = ComboState.PARTIAL;
             confidence = 0.4;
