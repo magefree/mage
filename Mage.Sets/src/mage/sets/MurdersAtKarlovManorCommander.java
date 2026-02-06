@@ -191,6 +191,9 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Necromancy", 131, Rarity.UNCOMMON, mage.cards.n.Necromancy.class));
         cards.add(new SetCardInfo("Needle Spires", 278, Rarity.RARE, mage.cards.n.NeedleSpires.class));
         cards.add(new SetCardInfo("Neheb, the Eternal", 158, Rarity.MYTHIC, mage.cards.n.NehebTheEternal.class));
+        cards.add(new SetCardInfo("Nelly Borca, Impulsive Accuser", 4, Rarity.MYTHIC, mage.cards.n.NellyBorcaImpulsiveAccuser.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Nelly Borca, Impulsive Accuser", 52, Rarity.MYTHIC, mage.cards.n.NellyBorcaImpulsiveAccuser.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Nelly Borca, Impulsive Accuser", 318, Rarity.MYTHIC, mage.cards.n.NellyBorcaImpulsiveAccuser.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nettlecyst", 233, Rarity.RARE, mage.cards.n.Nettlecyst.class));
         cards.add(new SetCardInfo("Nightveil Sprite", 113, Rarity.UNCOMMON, mage.cards.n.NightveilSprite.class));
         cards.add(new SetCardInfo("Notion Rain", 217, Rarity.COMMON, mage.cards.n.NotionRain.class));
