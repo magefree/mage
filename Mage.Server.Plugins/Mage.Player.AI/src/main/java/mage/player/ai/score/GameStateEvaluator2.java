@@ -7,6 +7,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.player.ai.StrategicRoleEvaluator;
 import mage.player.ai.combo.ComboDetectionEngine;
+import mage.player.ai.synergy.SynergyDetectionEngine;
 import mage.players.Player;
 import org.apache.log4j.Logger;
 
@@ -31,6 +32,9 @@ public final class GameStateEvaluator2 {
     private static final ThreadLocal<ComboDetectionEngine> comboEngineHolder = new ThreadLocal<>();
     private static final ThreadLocal<Set<String>> comboPiecesHolder = new ThreadLocal<>();
 
+    // Thread-local synergy detection engine for AI evaluation
+    private static final ThreadLocal<SynergyDetectionEngine> synergyEngineHolder = new ThreadLocal<>();
+
     /**
      * Set the combo detection engine for current AI evaluation.
      * This enables combo-aware scoring during game state evaluation.
@@ -41,11 +45,41 @@ public final class GameStateEvaluator2 {
     }
 
     /**
+     * Set the synergy detection engine for current AI evaluation.
+     * This enables synergy-aware scoring during game state evaluation.
+     */
+    public static void setSynergyEngine(SynergyDetectionEngine engine) {
+        synergyEngineHolder.set(engine);
+    }
+
+    /**
      * Clear the combo engine after AI evaluation completes.
      */
     public static void clearComboEngine() {
         comboEngineHolder.remove();
         comboPiecesHolder.remove();
+    }
+
+    /**
+     * Clear the synergy engine after AI evaluation completes.
+     */
+    public static void clearSynergyEngine() {
+        synergyEngineHolder.remove();
+    }
+
+    /**
+     * Clear all engines after AI evaluation completes.
+     */
+    public static void clearAllEngines() {
+        clearComboEngine();
+        clearSynergyEngine();
+    }
+
+    /**
+     * Get the current synergy engine (for use by CombatUtil).
+     */
+    public static SynergyDetectionEngine getSynergyEngine() {
+        return synergyEngineHolder.get();
     }
 
     public static PlayerEvaluateScore evaluate(UUID playerId, Game game) {
@@ -139,6 +173,9 @@ public final class GameStateEvaluator2 {
         // Add combo progress bonus
         int playerComboScore = evaluateComboProgress(playerId, game);
 
+        // Add synergy progress bonus
+        int playerSynergyScore = evaluateSynergyProgress(playerId, game);
+
         // Apply strategic role-based weight adjustments
         // Beatdown: values dealing damage more, cares less about own life
         // Control: values preserving life and board presence more
@@ -163,10 +200,13 @@ public final class GameStateEvaluator2 {
         int adjustedLifeDiff = (int) ((playerLifeScore * ownLifeWeight) - (opponentLifeScore * opponentLifeWeight));
         int adjustedPermanentDiff = (int) ((playerPermanentsScore - opponentPermanentsScore) * permanentWeight);
 
+        // Combine combo and synergy scores
+        int playerComboAndSynergyScore = playerComboScore + playerSynergyScore;
+
         int score = adjustedLifeDiff
                 + adjustedPermanentDiff
                 + (playerHandScore - opponentHandScore)
-                + playerComboScore;
+                + playerComboAndSynergyScore;
 
         if (logger.isDebugEnabled()) {
             logger.debug(score
@@ -174,13 +214,14 @@ public final class GameStateEvaluator2 {
                     + " life:" + adjustedLifeDiff
                     + " permanents:" + adjustedPermanentDiff
                     + " hand:" + (playerHandScore - opponentHandScore)
-                    + " combo:" + playerComboScore + ')');
+                    + " combo:" + playerComboScore
+                    + " synergy:" + playerSynergyScore + ')');
         }
         return new PlayerEvaluateScore(
                 playerId,
                 playerLifeScore, playerHandScore, playerPermanentsScore,
                 opponentLifeScore, opponentHandScore, opponentPermanentsScore,
-                playerComboScore);
+                playerComboAndSynergyScore);
     }
 
     /**
@@ -193,6 +234,18 @@ public final class GameStateEvaluator2 {
             return 0;
         }
         return engine.calculateComboScoreBonus(game, playerId);
+    }
+
+    /**
+     * Evaluate synergy progress and return a score bonus.
+     * Rewards having synergy enablers with payoffs and gives larger bonus when synergy is active.
+     */
+    private static int evaluateSynergyProgress(UUID playerId, Game game) {
+        SynergyDetectionEngine engine = synergyEngineHolder.get();
+        if (engine == null) {
+            return 0;
+        }
+        return engine.calculateSynergyScoreBonus(game, playerId);
     }
 
     public static int evaluatePermanent(Permanent permanent, Game game, boolean useCombatPermanentScore) {

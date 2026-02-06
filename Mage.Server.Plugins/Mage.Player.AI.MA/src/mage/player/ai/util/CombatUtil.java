@@ -17,6 +17,7 @@ import mage.game.turn.EndOfCombatStep;
 import mage.game.turn.Step;
 import mage.player.ai.StrategicRoleEvaluator;
 import mage.player.ai.score.GameStateEvaluator2;
+import mage.player.ai.synergy.SynergyDetectionEngine;
 import mage.players.Player;
 import org.apache.log4j.Logger;
 
@@ -104,6 +105,68 @@ public final class CombatUtil {
             }
         }
         return null;
+    }
+
+    /**
+     * Get the worst creature considering synergy value.
+     * Synergy enablers are protected and treated as more valuable.
+     *
+     * @param game      the current game
+     * @param playerId  the player who controls the creatures
+     * @param lists     lists of creatures to consider
+     * @return the worst creature (lowest value when considering synergies)
+     */
+    public static Permanent getWorstCreatureWithSynergyAwareness(Game game, UUID playerId, List<Permanent>... lists) {
+        SynergyDetectionEngine synergyEngine = GameStateEvaluator2.getSynergyEngine();
+
+        for (List<Permanent> list : lists) {
+            if (!list.isEmpty()) {
+                // Sort by effective value: power + synergy bonus
+                list.sort(Comparator.comparingInt(p -> {
+                    int power = p.getPower().getValue();
+                    int synergyBonus = 0;
+                    if (synergyEngine != null) {
+                        synergyBonus = synergyEngine.getPermanentSynergyBonus(game, playerId, p);
+                    }
+                    // Higher synergy bonus = higher effective value = less likely to trade
+                    return power + (synergyBonus / 10);  // Scale synergy bonus down to be comparable to power
+                }));
+                return list.get(0);
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Check if a creature is a synergy piece that should be protected.
+     *
+     * @param game      the current game
+     * @param playerId  the player who controls the creature
+     * @param permanent the creature to check
+     * @return true if the creature is a synergy enabler
+     */
+    public static boolean isSynergyEnabler(Game game, UUID playerId, Permanent permanent) {
+        SynergyDetectionEngine synergyEngine = GameStateEvaluator2.getSynergyEngine();
+        if (synergyEngine == null) {
+            return false;
+        }
+        return synergyEngine.isSynergyEnabler(playerId, permanent.getName());
+    }
+
+    /**
+     * Get the synergy bonus for a creature.
+     *
+     * @param game      the current game
+     * @param playerId  the player who controls the creature
+     * @param permanent the creature to evaluate
+     * @return synergy bonus (0 if no synergies)
+     */
+    public static int getSynergyBonus(Game game, UUID playerId, Permanent permanent) {
+        SynergyDetectionEngine synergyEngine = GameStateEvaluator2.getSynergyEngine();
+        if (synergyEngine == null) {
+            return 0;
+        }
+        return synergyEngine.getPermanentSynergyBonus(game, playerId, permanent);
     }
 
     public static void removeWorstCreature(Permanent permanent, List<Permanent>... lists) {
@@ -229,6 +292,7 @@ public final class CombatUtil {
                 // All blockers will die due to deathtouch
                 // Find the blocker with the lowest power that can still kill the attacker
                 // (any blocker can kill a deathtouch creature since we're trading anyway)
+                // IMPORTANT: Avoid using synergy enablers unless absolutely necessary
                 Permanent bestBlocker = null;
                 int bestScore = Integer.MIN_VALUE;
 
@@ -241,6 +305,13 @@ public final class CombatUtil {
                         // Prefer the lowest power creature (smallest sacrifice)
                         // Use negative power as score so lower power = higher "score"
                         int score = -b.getPower().getValue();
+
+                        // Heavily penalize synergy enablers - don't sacrifice them unless necessary
+                        int synergyBonus = getSynergyBonus(game, defenderId, b);
+                        if (synergyBonus > 0) {
+                            score -= synergyBonus / 5;  // Synergy pieces are less desirable as blockers
+                        }
+
                         if (bestBlocker == null || score > bestScore) {
                             bestBlocker = b;
                             bestScore = score;
@@ -268,14 +339,26 @@ public final class CombatUtil {
                 // Strategic role affects willingness to trade:
                 // - Control: More willing to trade to stabilize the board
                 // - Beatdown: Only trade if it clearly improves position (preserve attackers)
+                // IMPORTANT: Protect synergy enablers from bad trades
                 if (blocker == null && !tradedBlockers.isEmpty()) {
-                    blocker = getWorstCreature(tradedBlockers);
+                    // Use synergy-aware selection to avoid trading synergy enablers
+                    blocker = getWorstCreatureWithSynergyAwareness(game, defenderId, tradedBlockers);
                     if (blocker != null) {
                         int diffBlockingScore = blockingDiffScore.getOrDefault(blocker, 0);
                         int diffNonBlockingScore = nonBlockingDiffScore.getOrDefault(blocker, 0);
 
+                        // Check if this creature is a synergy enabler
+                        int synergyBonus = getSynergyBonus(game, defenderId, blocker);
+                        boolean isSynergyPiece = synergyBonus > 0;
+
                         boolean shouldTrade;
-                        if (strategicRole == StrategicRoleEvaluator.ROLE_CONTROL) {
+                        if (isSynergyPiece) {
+                            // Synergy pieces require much better trade value to sacrifice
+                            // Only trade if blocking is significantly better AND the synergy bonus
+                            // doesn't outweigh the trade benefit
+                            int adjustedBlockingScore = diffBlockingScore - synergyBonus;
+                            shouldTrade = adjustedBlockingScore > diffNonBlockingScore + 50;
+                        } else if (strategicRole == StrategicRoleEvaluator.ROLE_CONTROL) {
                             // Control: Trade if it doesn't hurt us too much (willing to trade down to stabilize)
                             shouldTrade = diffBlockingScore >= diffNonBlockingScore - 10;
                         } else if (strategicRole == StrategicRoleEvaluator.ROLE_BEATDOWN) {
@@ -316,15 +399,26 @@ public final class CombatUtil {
                 // - Beatdown: Preserve creatures for attacking, only chump if it prevents lethal
                 // - Control: More willing to chump block to preserve life total
                 // - Flexible: Standard logic
+                // IMPORTANT: Protect synergy enablers from being chump blocked
                 if (blocker == null && blockedCount == 0) {
-                    blocker = getWorstCreature(diedBlockers);
+                    // Use synergy-aware selection to avoid chump blocking with synergy enablers
+                    blocker = getWorstCreatureWithSynergyAwareness(game, defenderId, diedBlockers);
                     if (blocker != null) {
                         int diffBlockingScore = blockingDiffScore.getOrDefault(blocker, 0);
                         int diffNonBlockingScore = nonBlockingDiffScore.getOrDefault(blocker, 0);
 
+                        // Check if this creature is a synergy enabler
+                        int synergyBonus = getSynergyBonus(game, defenderId, blocker);
+                        boolean isSynergyPiece = synergyBonus > 0;
+
                         // Adjust threshold based on strategic role
                         boolean shouldChumpBlock;
-                        if (strategicRole == StrategicRoleEvaluator.ROLE_BEATDOWN) {
+                        if (isSynergyPiece) {
+                            // NEVER chump block with synergy enablers unless it's absolutely necessary
+                            // to prevent losing the game (diffBlockingScore would be very negative otherwise)
+                            int adjustedBlockingScore = diffBlockingScore - synergyBonus;
+                            shouldChumpBlock = adjustedBlockingScore > diffNonBlockingScore + 100;
+                        } else if (strategicRole == StrategicRoleEvaluator.ROLE_BEATDOWN) {
                             // Beatdown: Only chump block if it significantly improves position
                             // (preserves creatures for attacking)
                             shouldChumpBlock = diffBlockingScore > diffNonBlockingScore + 20;

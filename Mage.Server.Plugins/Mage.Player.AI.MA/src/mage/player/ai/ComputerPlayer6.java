@@ -3,6 +3,7 @@ package mage.player.ai;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
+import mage.abilities.PlayLandAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
 import mage.abilities.common.PassAbility;
@@ -24,6 +25,7 @@ import mage.game.stack.StackObject;
 import mage.player.ai.combo.ComboDetectionEngine;
 import mage.player.ai.ma.optimizers.TreeOptimizer;
 import mage.player.ai.ma.optimizers.impl.*;
+import mage.player.ai.synergy.SynergyDetectionEngine;
 import mage.player.ai.score.GameStateEvaluator2;
 import mage.player.ai.util.CombatInfo;
 import mage.player.ai.util.CombatUtil;
@@ -86,6 +88,10 @@ public class ComputerPlayer6 extends ComputerPlayer {
     protected ComboDetectionEngine comboEngine;
     protected boolean comboEngineInitialized = false;
 
+    // Synergy detection engine for this player
+    protected SynergyDetectionEngine synergyEngine;
+    protected boolean synergyEngineInitialized = false;
+
     static {
         optimizers.add(new WrongCodeUsageOptimizer());
         optimizers.add(new LevelUpOptimizer());
@@ -139,10 +145,32 @@ public class ComputerPlayer6 extends ComputerPlayer {
     }
 
     /**
+     * Initialize the synergy detection engine for this player.
+     * Should be called at the start of the game or first priority.
+     */
+    protected void initializeSynergyEngine(Game game) {
+        if (synergyEngineInitialized) {
+            return;
+        }
+        synergyEngine = new SynergyDetectionEngine();
+        synergyEngine.analyzeDeck(game, playerId);
+        synergyEngineInitialized = true;
+        logger.info("Synergy detection engine initialized for " + getName() +
+                " - found " + synergyEngine.getPatterns(playerId).size() + " potential synergies");
+    }
+
+    /**
      * Get the combo detection engine for this player.
      */
     public ComboDetectionEngine getComboEngine() {
         return comboEngine;
+    }
+
+    /**
+     * Get the synergy detection engine for this player.
+     */
+    public SynergyDetectionEngine getSynergyEngine() {
+        return synergyEngine;
     }
 
     /**
@@ -153,6 +181,16 @@ public class ComputerPlayer6 extends ComputerPlayer {
             return Collections.emptySet();
         }
         return comboEngine.getComboPieces(playerId);
+    }
+
+    /**
+     * Get the set of synergy piece card names for this player.
+     */
+    public Set<String> getSynergyPieces() {
+        if (synergyEngine == null) {
+            return Collections.emptySet();
+        }
+        return synergyEngine.getSynergyPieces(playerId);
     }
 
     /**
@@ -561,6 +599,11 @@ public class ComputerPlayer6 extends ComputerPlayer {
             initializeComboEngine(game);
         }
 
+        // Initialize synergy detection engine on first priority at max depth
+        if (depth == maxDepth && !synergyEngineInitialized) {
+            initializeSynergyEngine(game);
+        }
+
         node.setGameValue(game.getState().getValue(true).hashCode());
         SimulatedPlayer2 currentPlayer = (SimulatedPlayer2) game.getPlayer(game.getPlayerList().get());
         SimulationNode2 bestNode = null;
@@ -576,10 +619,20 @@ public class ComputerPlayer6 extends ComputerPlayer {
                     startedScore,
                     (actions.isEmpty() ? "" : ":")
             ));
+            boolean foundMdfcLandPlay = false;
             for (int i = 0; i < allActions.size(); i++) {
                 // print possible actions with detailed targets
                 Ability possibleAbility = allActions.get(i);
                 logger.info(String.format("-> #%d (%s)", i + 1, getAbilityAndSourceInfo(game, possibleAbility, true)));
+                if (possibleAbility instanceof PlayLandAbility) {
+                    String abilityName = possibleAbility.toString();
+                    if (abilityName != null && abilityName.contains("Play ")) {
+                        foundMdfcLandPlay = true;
+                    }
+                }
+            }
+            if (foundMdfcLandPlay) {
+                logger.info("MDFC: land-play ability detected in action list");
             }
         }
         int actionNumber = 0;
@@ -869,6 +922,10 @@ public class ComputerPlayer6 extends ComputerPlayer {
             GameStateEvaluator2.setComboEngine(comboEngine, comboPieces);
             DiscardCardOptimizer.setComboPieces(comboPieces);
         }
+        // Set up synergy engine for synergy-aware evaluation
+        if (synergyEngine != null) {
+            GameStateEvaluator2.setSynergyEngine(synergyEngine);
+        }
         try {
             for (TreeOptimizer optimizer : optimizers) {
                 optimizer.optimize(game, allActions);
@@ -876,7 +933,7 @@ public class ComputerPlayer6 extends ComputerPlayer {
         } finally {
             // Clean up thread-local state
             ComboAwareOptimizer.clearEngine();
-            GameStateEvaluator2.clearComboEngine();
+            GameStateEvaluator2.clearAllEngines();
             DiscardCardOptimizer.clearComboPieces();
         }
         Collections.sort(allActions, new Comparator<Ability>() {
