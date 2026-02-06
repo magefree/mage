@@ -1,11 +1,7 @@
 package mage.abilities.keyword;
 
-import mage.ApprovingObject;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.costs.mana.ManaCost;
-import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -15,6 +11,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 import mage.watchers.common.MiracleWatcher;
 
 /**
@@ -73,18 +70,21 @@ import mage.watchers.common.MiracleWatcher;
  */
 public class MiracleAbility extends TriggeredAbilityImpl {
 
-    private static final String staticRule = " <i>(You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)</i>";
-    private final String ruleText;
+    private final String miracleCost;
 
-    public MiracleAbility(String miracleCosts) {
-        super(Zone.HAND, new MiracleEffect(miracleCosts), true);
-        addWatcher(new MiracleWatcher());
-        ruleText = "Miracle " + miracleCosts + staticRule;
+    public String getMiracleCost() {
+        return miracleCost;
+    }
+
+    public MiracleAbility(String miracleCost) {
+        super(Zone.HAND, new MiracleEffect(miracleCost), true);
+        this.miracleCost = miracleCost;
+        this.addWatcher(new MiracleWatcher());
     }
 
     private MiracleAbility(final MiracleAbility ability) {
         super(ability);
-        this.ruleText = ability.ruleText;
+        this.miracleCost = ability.miracleCost;
     }
 
     @Override
@@ -99,33 +99,32 @@ public class MiracleAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getTargetId().equals(this.getSourceId())) {
-            // Refer to the card at the zone it is now (hand)
-            getEffects().setTargetPointer(new FixedTarget(game.getCard(event.getTargetId()), game));
-            return true;
+        if (!event.getTargetId().equals(this.getSourceId()) || !("" + this.getId()).equals(event.getData())) {
+            return false;
         }
-        return false;
+        // Refer to the card at the zone it is now (hand)
+        this.getEffects().setTargetPointer(new FixedTarget(game.getCard(event.getTargetId()), game));
+        return true;
     }
 
     @Override
     public String getRule() {
-        return ruleText;
+        return "Miracle " + miracleCost + " <i>(You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)</i>";
     }
 }
 
 class MiracleEffect extends OneShotEffect {
 
-    private final ManaCosts<ManaCost> miracleCosts;
+    private final String miracleCost;
 
-    public MiracleEffect(String miracleCosts) {
+    public MiracleEffect(String miracleCost) {
         super(Outcome.Benefit);
-        this.staticText = "cast this card for its miracle cost";
-        this.miracleCosts = new ManaCostsImpl<>(miracleCosts);
+        this.miracleCost = miracleCost;
     }
 
     protected MiracleEffect(final MiracleEffect effect) {
         super(effect);
-        this.miracleCosts = effect.miracleCosts;
+        this.miracleCost = effect.miracleCost;
     }
 
     @Override
@@ -135,18 +134,9 @@ class MiracleEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        // use target pointer here, so it's the same card that triggered the event (not gone back to library e.g.)
+        Player player = game.getPlayer(source.getControllerId());
         Card card = game.getCard(getTargetPointer().getFirst(game, source));
-        if (controller != null && card != null) {
-            SpellAbility abilityToCast = card.getSpellAbility().copy();
-            ManaCosts<ManaCost> costRef = abilityToCast.getManaCostsToPay();
-            // replace with the new cost
-            costRef.clear();
-            costRef.add(miracleCosts);
-            controller.cast(abilityToCast, game, false, new ApprovingObject(source, game));
-            return true;
-        }
-        return false;
+        return player != null && card != null && !card.isLand(game)
+                && CardUtil.castSingle(player, source, game, card, new ManaCostsImpl<>(miracleCost));
     }
 }
