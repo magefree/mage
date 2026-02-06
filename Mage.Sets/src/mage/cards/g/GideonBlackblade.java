@@ -1,6 +1,5 @@
 package mage.cards.g;
 
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -24,7 +23,7 @@ import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetNonlandPermanent;
 
@@ -50,10 +49,16 @@ public final class GideonBlackblade extends CardImpl {
 
         // As long as it's your turn, Gideon Blackblade is a 4/4 Human Soldier creature with indestructible that's still a planeswalker.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
-                new BecomesCreatureSourceEffect(
-                        new GideonBlackbladeToken(), CardType.PLANESWALKER, Duration.WhileOnBattlefield
-                ), MyTurnCondition.instance, "During your turn, " +
-                "{this} is a 4/4 Human Soldier creature with indestructible that's still a planeswalker."
+            new BecomesCreatureSourceEffect(
+                new CreatureToken(
+                    4, 4,
+                    "4/4 Human Soldier creature with indestructible",
+                    SubType.HUMAN, SubType.SOLDIER
+                ).withAbility(IndestructibleAbility.getInstance()),
+                CardType.PLANESWALKER,
+                Duration.WhileOnBattlefield
+            ), MyTurnCondition.instance, "During your turn, " +
+            "{this} is a 4/4 Human Soldier creature with indestructible that's still a planeswalker."
         )).addHint(MyTurnHint.instance));
 
         // Prevent all damage that would be dealt to Gideon Blackblade during your turn.
@@ -81,27 +86,5 @@ public final class GideonBlackblade extends CardImpl {
     @Override
     public GideonBlackblade copy() {
         return new GideonBlackblade(this);
-    }
-}
-
-class GideonBlackbladeToken extends TokenImpl {
-
-    GideonBlackbladeToken() {
-        super("", "4/4 Human Soldier creature");
-        cardType.add(CardType.CREATURE);
-        subtype.add(SubType.HUMAN);
-        subtype.add(SubType.SOLDIER);
-        power = new MageInt(4);
-        toughness = new MageInt(4);
-        this.addAbility(IndestructibleAbility.getInstance());
-    }
-
-    private GideonBlackbladeToken(final GideonBlackbladeToken token) {
-        super(token);
-    }
-
-    @Override
-    public GideonBlackbladeToken copy() {
-        return new GideonBlackbladeToken(this);
     }
 }
