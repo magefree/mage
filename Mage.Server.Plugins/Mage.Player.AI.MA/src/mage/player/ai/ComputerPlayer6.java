@@ -1190,6 +1190,45 @@ public class ComputerPlayer6 extends ComputerPlayer {
                     }
                 }
 
+                // Check for "massive attack" scenario: many attackers vs few blockers
+                // When attackers significantly outnumber blockers, excess attackers get through unblocked
+                // Even if individual attackers are "unsafe", the collective attack may be profitable
+                if (attackersToCheck.isEmpty() && attackersList.size() > possibleBlockers.size()) {
+                    int excessAttackers = attackersList.size() - possibleBlockers.size();
+
+                    // Calculate total damage that would get through
+                    // Sort attackers by power (descending) - highest power attackers get through
+                    List<Permanent> sortedAttackers = new ArrayList<>(attackersList);
+                    sortedAttackers.sort((a, b) -> b.getPower().getValue() - a.getPower().getValue());
+
+                    int guaranteedDamage = 0;
+                    for (int i = 0; i < excessAttackers && i < sortedAttackers.size(); i++) {
+                        guaranteedDamage += sortedAttackers.get(i).getPower().getValue();
+                    }
+
+                    // Calculate worst case: we lose our weakest attacker(s) to blockers
+                    // Sort by value (ascending) to find the least valuable attackers
+                    List<Permanent> byValue = new ArrayList<>(attackersList);
+                    byValue.sort((a, b) -> eval.evaluate(a, game) - eval.evaluate(b, game));
+
+                    int maxPotentialLoss = 0;
+                    for (int i = 0; i < possibleBlockers.size() && i < byValue.size(); i++) {
+                        maxPotentialLoss += eval.evaluate(byValue.get(i), game);
+                    }
+
+                    // Attack if guaranteed damage is significant relative to potential loss
+                    // Threshold: guaranteed damage >= defender's life / 3, OR
+                    // guaranteed damage significantly exceeds the value of creatures we might lose
+                    int defenderLife = defender.getLife();
+                    boolean massiveAttackWorthwhile = (guaranteedDamage >= defenderLife / 3)
+                            || (guaranteedDamage >= 2 * possibleBlockers.size() && excessAttackers >= 2);
+
+                    if (massiveAttackWorthwhile) {
+                        // Attack with all creatures - the excess damage is worth losing some
+                        attackersToCheck.addAll(attackersList);
+                    }
+                }
+
                 // find possible target for attack (priority: planeswalker -> battle -> player)
                 int totalPowerOfAttackers = 0;
                 int usedPowerOfAttackers = 0;
