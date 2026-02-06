@@ -159,6 +159,24 @@ public class ComputerPlayer extends PlayerImpl {
             return false;
         }
 
+        // Special handling for pile separation (e.g., Fact or Fiction)
+        // When the filter message mentions "first pile", we're separating cards into two piles
+        // AI should create roughly equal piles to avoid giving opponent an obvious choice
+        String targetMessage = target.getFilter() != null ? target.getFilter().getMessage() : "";
+        if (outcome == Outcome.Neutral && targetMessage.contains("first pile") && fromCards != null) {
+            return makePileSeparationChoice(target, source, game, fromCards, abilityControllerId);
+        }
+
+        // Don't target own permanents with destructive effects (e.g., Beast Within on own lands)
+        // if there are no opponent targets available and targeting is optional (min = 0)
+        if (possibleTargetsSelector.hasOnlyBadTargetsForDestructiveEffect()) {
+            // If targeting is optional (min = 0), don't choose any targets
+            if (target.getMinNumberOfTargets() == 0) {
+                return target.isChosen(game);
+            }
+            // If we must choose targets, we'll have to use bad targets (handled below)
+        }
+
         // good targets -- choose as much as possible
         for (MageItem item : possibleTargetsSelector.getGoodTargets()) {
             target.add(item.getId(), game);
@@ -175,6 +193,63 @@ public class ComputerPlayer extends PlayerImpl {
         }
 
         return target.isChosen(game) && !target.getTargets().isEmpty();
+    }
+
+    /**
+     * Smart pile separation for cards like Fact or Fiction.
+     * AI tries to create two piles of roughly equal value, with neither pile being obviously better.
+     */
+    private boolean makePileSeparationChoice(Target target, Ability source, Game game, Cards fromCards, UUID abilityControllerId) {
+        // Get all cards and rate them
+        List<Card> allCards = new ArrayList<>(fromCards.getCards(game));
+        if (allCards.isEmpty()) {
+            return false;
+        }
+
+        // Sort cards by rating (highest first)
+        allCards.sort((c1, c2) -> {
+            int rating1 = RateCard.rateCard(c1, Collections.emptyList());
+            int rating2 = RateCard.rateCard(c2, Collections.emptyList());
+            return Integer.compare(rating2, rating1);
+        });
+
+        // Calculate total value
+        int totalValue = 0;
+        for (Card card : allCards) {
+            totalValue += RateCard.rateCard(card, Collections.emptyList());
+        }
+
+        // Try to create two piles of roughly equal value
+        // Use a greedy approach: alternate adding to pile1 and pile2, keeping them balanced
+        List<Card> pile1 = new ArrayList<>();
+        int pile1Value = 0;
+        int targetPile1Value = totalValue / 2;
+
+        // Add cards to pile1 until we reach roughly half the value
+        for (Card card : allCards) {
+            int cardValue = RateCard.rateCard(card, Collections.emptyList());
+            // Add to pile1 if it would keep us closer to the target
+            if (pile1Value + cardValue <= targetPile1Value + (cardValue / 2)) {
+                pile1.add(card);
+                pile1Value += cardValue;
+            }
+        }
+
+        // Ensure we don't create a 0/5 or 5/0 split - have at least 1 card in each pile
+        if (pile1.isEmpty() && allCards.size() > 1) {
+            // Put the worst card in pile1
+            pile1.add(allCards.get(allCards.size() - 1));
+        } else if (pile1.size() == allCards.size() && allCards.size() > 1) {
+            // Remove the worst card from pile1
+            pile1.remove(pile1.size() - 1);
+        }
+
+        // Add pile1 cards to target
+        for (Card card : pile1) {
+            target.add(card.getId(), game);
+        }
+
+        return target.isChosen(game);
     }
 
     /**
@@ -773,6 +848,20 @@ public class ComputerPlayer extends PlayerImpl {
         // Be proactive! Always use abilities, the evaluation function will decide if it's good or not
         // Otherwise some abilities won't be used by AI like LoseTargetEffect that has "bad" outcome
         // but still is good when targets opponent
+
+        // Check for life payment prompts (e.g., Necropotence, Sylvan Library, Phyrexian mana)
+        // AI should not pay life when at low life totals
+        if (message != null) {
+            String lowerMessage = message.toLowerCase();
+            if (lowerMessage.contains("pay") && lowerMessage.contains("life")) {
+                // Don't pay life if we're at or below 7 life (reasonable threshold to stay safe)
+                int lifeThreshold = 7;
+                if (this.getLife() <= lifeThreshold) {
+                    return false;
+                }
+            }
+        }
+
         return outcome != Outcome.AIDontUseIt; // Added for Desecration Demon sacrifice ability
     }
 
@@ -859,24 +948,81 @@ public class ComputerPlayer extends PlayerImpl {
                 }
             }
         } else {
-            // choose a creature type of hand or library
-            for (UUID cardId : this.getHand()) {
-                Card card = game.getCard(cardId);
-                if (card != null && card.getCardType(game).contains(CardType.CREATURE) && !card.getSubtype(game).isEmpty()) {
-                    if (choice.getChoices().contains(card.getSubtype(game).get(0).toString())) {
-                        choice.setChoice(card.getSubtype(game).get(0).toString());
-                        break;
+            // choose a creature type from battlefield first (most relevant)
+            if (!choice.isChosen()) {
+                Map<String, Integer> creatureTypeCounts = new HashMap<>();
+                for (Permanent permanent : game.getBattlefield().getAllActivePermanents(this.getId())) {
+                    if (permanent.getCardType(game).contains(CardType.CREATURE) && !permanent.getSubtype(game).isEmpty()) {
+                        for (SubType subType : permanent.getSubtype(game)) {
+                            if (subType.getSubTypeSet() == SubTypeSet.CreatureType) {
+                                String typeName = subType.toString();
+                                if (choice.getChoices().contains(typeName)) {
+                                    creatureTypeCounts.merge(typeName, 1, Integer::sum);
+                                }
+                            }
+                        }
+                    }
+                }
+                // Pick the most common type on battlefield
+                if (!creatureTypeCounts.isEmpty()) {
+                    String bestType = creatureTypeCounts.entrySet().stream()
+                            .max(Map.Entry.comparingByValue())
+                            .map(Map.Entry::getKey)
+                            .orElse(null);
+                    if (bestType != null) {
+                        choice.setChoice(bestType);
                     }
                 }
             }
+
+            // choose a creature type from hand
             if (!choice.isChosen()) {
-                for (UUID cardId : this.getLibrary().getCardList()) {
+                for (UUID cardId : this.getHand()) {
                     Card card = game.getCard(cardId);
                     if (card != null && card.getCardType(game).contains(CardType.CREATURE) && !card.getSubtype(game).isEmpty()) {
                         if (choice.getChoices().contains(card.getSubtype(game).get(0).toString())) {
                             choice.setChoice(card.getSubtype(game).get(0).toString());
                             break;
                         }
+                    }
+                }
+            }
+
+            // Scan library for the most common creature type (tribal deck support)
+            if (!choice.isChosen()) {
+                Map<String, Integer> libraryTypeCounts = new HashMap<>();
+                for (UUID cardId : this.getLibrary().getCardList()) {
+                    Card card = game.getCard(cardId);
+                    if (card != null && card.getCardType(game).contains(CardType.CREATURE) && !card.getSubtype(game).isEmpty()) {
+                        for (SubType subType : card.getSubtype(game)) {
+                            if (subType.getSubTypeSet() == SubTypeSet.CreatureType) {
+                                String typeName = subType.toString();
+                                if (choice.getChoices().contains(typeName)) {
+                                    libraryTypeCounts.merge(typeName, 1, Integer::sum);
+                                }
+                            }
+                        }
+                    }
+                }
+                // Pick the most common type in library
+                if (!libraryTypeCounts.isEmpty()) {
+                    String bestType = libraryTypeCounts.entrySet().stream()
+                            .max(Map.Entry.comparingByValue())
+                            .map(Map.Entry::getKey)
+                            .orElse(null);
+                    if (bestType != null) {
+                        choice.setChoice(bestType);
+                    }
+                }
+            }
+
+            // Fallback to common creature types instead of random
+            if (!choice.isChosen()) {
+                String[] commonTypes = {"Human", "Elf", "Soldier", "Zombie", "Goblin", "Wizard", "Warrior", "Cleric", "Merfolk", "Dragon"};
+                for (String commonType : commonTypes) {
+                    if (choice.getChoices().contains(commonType)) {
+                        choice.setChoice(commonType);
+                        break;
                     }
                 }
             }
@@ -896,8 +1042,27 @@ public class ComputerPlayer extends PlayerImpl {
 
     @Override
     public boolean choosePile(Outcome outcome, String message, List<? extends Card> pile1, List<? extends Card> pile2, Game game) {
-        //TODO: improve this
-        return true; // select left pile all the time
+        // Evaluate pile values using card ratings
+        int pile1Value = 0;
+        int pile2Value = 0;
+
+        for (Card card : pile1) {
+            pile1Value += RateCard.rateCard(card, Collections.emptyList());
+        }
+        for (Card card : pile2) {
+            pile2Value += RateCard.rateCard(card, Collections.emptyList());
+        }
+
+        // For good outcomes (we're choosing), pick the better pile
+        // For bad outcomes (opponent is choosing for us), pick the worse pile since they'll give us what we don't want
+        if (outcome.isGood()) {
+            // We want the better pile
+            return pile1Value >= pile2Value;
+        } else {
+            // Opponent will give us what we don't want, so "choose" the worse one
+            // (the logic depends on how the card is implemented - this returns true for pile1)
+            return pile1Value <= pile2Value;
+        }
     }
 
     @Override

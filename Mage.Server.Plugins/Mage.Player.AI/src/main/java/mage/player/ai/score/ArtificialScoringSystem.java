@@ -10,6 +10,7 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -25,6 +26,7 @@ public final class ArtificialScoringSystem {
     private static final int UNKNOWN_CARD_SCORE = 300;
     private static final int PERMANENT_SCORE = 300;
     private static final int LIFE_ABOVE_MULTIPLIER = 100;
+    private static final int COMBO_PIECE_BONUS = 1000;  // Bonus for permanents that are combo pieces
 
     public static int getCardDefinitionScore(final Game game, final Card card) {
         int value = 3; //TODO: add new rating system card value
@@ -169,5 +171,68 @@ public final class ArtificialScoringSystem {
          */
         int score = 0;
         return score;
+    }
+
+    /**
+     * Get the score for a permanent, with bonus if it's a combo piece.
+     * Use this when evaluating whether to sacrifice, trade, or protect permanents.
+     *
+     * @param game the current game
+     * @param permanent the permanent to score
+     * @param comboPieces set of card names that are combo pieces (can be null)
+     * @return the permanent score with combo bonus if applicable
+     */
+    public static int getComboAwarePermanentScore(final Game game, final Permanent permanent, Set<String> comboPieces) {
+        int baseScore = getFixedPermanentScore(game, permanent);
+        baseScore += getDynamicPermanentScore(game, permanent);
+
+        // Add combo piece bonus
+        if (comboPieces != null && comboPieces.contains(permanent.getName())) {
+            baseScore += COMBO_PIECE_BONUS;
+        }
+
+        return baseScore;
+    }
+
+    /**
+     * Get the score for a card in hand, with bonus if it's a combo piece.
+     * Use this when evaluating what to discard.
+     *
+     * @param game the current game
+     * @param card the card to score
+     * @param comboPieces set of card names that are combo pieces (can be null)
+     * @return the card score with combo bonus if applicable
+     */
+    public static int getComboAwareCardScore(final Game game, final Card card, Set<String> comboPieces) {
+        int baseScore = getCardDefinitionScore(game, card);
+
+        // Add combo piece bonus - even higher than permanent since we don't want to discard combo pieces
+        if (comboPieces != null && comboPieces.contains(card.getName())) {
+            baseScore += COMBO_PIECE_BONUS * 2;
+        }
+
+        return baseScore;
+    }
+
+    /**
+     * Check if a permanent is a combo piece.
+     *
+     * @param permanent the permanent to check
+     * @param comboPieces set of combo piece names
+     * @return true if the permanent is a combo piece
+     */
+    public static boolean isComboPiece(final Permanent permanent, Set<String> comboPieces) {
+        return comboPieces != null && comboPieces.contains(permanent.getName());
+    }
+
+    /**
+     * Check if a card is a combo piece.
+     *
+     * @param card the card to check
+     * @param comboPieces set of combo piece names
+     * @return true if the card is a combo piece
+     */
+    public static boolean isComboPiece(final Card card, Set<String> comboPieces) {
+        return comboPieces != null && comboPieces.contains(card.getName());
     }
 }

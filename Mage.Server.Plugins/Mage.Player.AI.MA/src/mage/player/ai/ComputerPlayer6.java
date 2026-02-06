@@ -3,6 +3,7 @@ package mage.player.ai;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
+import mage.abilities.PlayLandAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
 import mage.abilities.common.PassAbility;
@@ -21,8 +22,10 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
+import mage.player.ai.combo.ComboDetectionEngine;
 import mage.player.ai.ma.optimizers.TreeOptimizer;
 import mage.player.ai.ma.optimizers.impl.*;
+import mage.player.ai.synergy.SynergyDetectionEngine;
 import mage.player.ai.score.GameStateEvaluator2;
 import mage.player.ai.util.CombatInfo;
 import mage.player.ai.util.CombatUtil;
@@ -81,12 +84,21 @@ public class ComputerPlayer6 extends ComputerPlayer {
     protected int lastLoggedTurn = 0; // for debug logs: mark start of the turn
     protected static final String BLANKS = "...............................................";
 
+    // Combo detection engine for this player
+    protected ComboDetectionEngine comboEngine;
+    protected boolean comboEngineInitialized = false;
+
+    // Synergy detection engine for this player
+    protected SynergyDetectionEngine synergyEngine;
+    protected boolean synergyEngineInitialized = false;
+
     static {
         optimizers.add(new WrongCodeUsageOptimizer());
         optimizers.add(new LevelUpOptimizer());
         optimizers.add(new EquipOptimizer());
         optimizers.add(new DiscardCardOptimizer());
         optimizers.add(new OutcomeOptimizer());
+        optimizers.add(new ComboAwareOptimizer());  // Combo-aware action filtering
     }
 
     public ComputerPlayer6(String name, RangeOfInfluence range, int skill) {
@@ -112,6 +124,73 @@ public class ComputerPlayer6 extends ComputerPlayer {
         this.targets.addAll(player.targets);
         this.choices.addAll(player.choices);
         this.actionCache = player.actionCache;
+        // Share combo engine reference (it's stateless per-game)
+        this.comboEngine = player.comboEngine;
+        this.comboEngineInitialized = player.comboEngineInitialized;
+    }
+
+    /**
+     * Initialize the combo detection engine for this player.
+     * Should be called at the start of the game or first priority.
+     */
+    protected void initializeComboEngine(Game game) {
+        if (comboEngineInitialized) {
+            return;
+        }
+        comboEngine = new ComboDetectionEngine();
+        comboEngine.analyzeDeck(game, playerId);
+        comboEngineInitialized = true;
+        logger.info("Combo detection engine initialized for " + getName() +
+                " - found " + comboEngine.getPatterns(playerId).size() + " potential combos");
+    }
+
+    /**
+     * Initialize the synergy detection engine for this player.
+     * Should be called at the start of the game or first priority.
+     */
+    protected void initializeSynergyEngine(Game game) {
+        if (synergyEngineInitialized) {
+            return;
+        }
+        synergyEngine = new SynergyDetectionEngine();
+        synergyEngine.analyzeDeck(game, playerId);
+        synergyEngineInitialized = true;
+        logger.info("Synergy detection engine initialized for " + getName() +
+                " - found " + synergyEngine.getPatterns(playerId).size() + " potential synergies");
+    }
+
+    /**
+     * Get the combo detection engine for this player.
+     */
+    public ComboDetectionEngine getComboEngine() {
+        return comboEngine;
+    }
+
+    /**
+     * Get the synergy detection engine for this player.
+     */
+    public SynergyDetectionEngine getSynergyEngine() {
+        return synergyEngine;
+    }
+
+    /**
+     * Get the set of combo piece card names for this player.
+     */
+    public Set<String> getComboPieces() {
+        if (comboEngine == null) {
+            return Collections.emptySet();
+        }
+        return comboEngine.getComboPieces(playerId);
+    }
+
+    /**
+     * Get the set of synergy piece card names for this player.
+     */
+    public Set<String> getSynergyPieces() {
+        if (synergyEngine == null) {
+            return Collections.emptySet();
+        }
+        return synergyEngine.getSynergyPieces(playerId);
     }
 
     /**
@@ -514,6 +593,17 @@ public class ComputerPlayer6 extends ComputerPlayer {
             logger.debug("AI game sim interrupted by timeout");
             return GameStateEvaluator2.evaluate(playerId, game).getTotalScore();
         }
+
+        // Initialize combo detection engine on first priority at max depth
+        if (depth == maxDepth && !comboEngineInitialized) {
+            initializeComboEngine(game);
+        }
+
+        // Initialize synergy detection engine on first priority at max depth
+        if (depth == maxDepth && !synergyEngineInitialized) {
+            initializeSynergyEngine(game);
+        }
+
         node.setGameValue(game.getState().getValue(true).hashCode());
         SimulatedPlayer2 currentPlayer = (SimulatedPlayer2) game.getPlayer(game.getPlayerList().get());
         SimulationNode2 bestNode = null;
@@ -529,10 +619,20 @@ public class ComputerPlayer6 extends ComputerPlayer {
                     startedScore,
                     (actions.isEmpty() ? "" : ":")
             ));
+            boolean foundMdfcLandPlay = false;
             for (int i = 0; i < allActions.size(); i++) {
                 // print possible actions with detailed targets
                 Ability possibleAbility = allActions.get(i);
                 logger.info(String.format("-> #%d (%s)", i + 1, getAbilityAndSourceInfo(game, possibleAbility, true)));
+                if (possibleAbility instanceof PlayLandAbility) {
+                    String abilityName = possibleAbility.toString();
+                    if (abilityName != null && abilityName.contains("Play ")) {
+                        foundMdfcLandPlay = true;
+                    }
+                }
+            }
+            if (foundMdfcLandPlay) {
+                logger.info("MDFC: land-play ability detected in action list");
             }
         }
         int actionNumber = 0;
@@ -815,8 +915,26 @@ public class ComputerPlayer6 extends ComputerPlayer {
      * @param allActions
      */
     protected void optimize(Game game, List<Ability> allActions) {
-        for (TreeOptimizer optimizer : optimizers) {
-            optimizer.optimize(game, allActions);
+        // Set up combo engine for combo-aware optimizers
+        Set<String> comboPieces = getComboPieces();
+        if (comboEngine != null) {
+            ComboAwareOptimizer.setEngine(comboEngine, playerId);
+            GameStateEvaluator2.setComboEngine(comboEngine, comboPieces);
+            DiscardCardOptimizer.setComboPieces(comboPieces);
+        }
+        // Set up synergy engine for synergy-aware evaluation
+        if (synergyEngine != null) {
+            GameStateEvaluator2.setSynergyEngine(synergyEngine);
+        }
+        try {
+            for (TreeOptimizer optimizer : optimizers) {
+                optimizer.optimize(game, allActions);
+            }
+        } finally {
+            // Clean up thread-local state
+            ComboAwareOptimizer.clearEngine();
+            GameStateEvaluator2.clearAllEngines();
+            DiscardCardOptimizer.clearComboPieces();
         }
         Collections.sort(allActions, new Comparator<Ability>() {
             @Override
@@ -1058,8 +1176,14 @@ public class ComputerPlayer6 extends ComputerPlayer {
                 }
                 List<Permanent> possibleBlockers = defender.getAvailableBlockers(game);
 
+                // Determine strategic role to adjust attack aggression
+                int strategicRole = StrategicRoleEvaluator.determineRole(attackingPlayer, defender, game);
+
                 // The AI will now attack more sanely.  Simple, but good enough for now.
                 // The sim minmax does not work at the moment.
+                // Strategic role affects attack thresholds:
+                // - Beatdown: More willing to attack even with potential bad trades
+                // - Control: Only attack when clearly safe
                 boolean safeToAttack;
                 CombatEvaluator eval = new CombatEvaluator();
 
@@ -1069,9 +1193,11 @@ public class ComputerPlayer6 extends ComputerPlayer {
                     for (Permanent blocker : possibleBlockers) {
                         int blockerValue = eval.evaluate(blocker, game);
 
-                        // blocker can kill attacker
+                        // blocker can kill attacker (and attacker cannot kill blocker)
+                        // This is NOT a trade - the attacker just dies
                         if (attacker.getPower().getValue() <= blocker.getToughness().getValue()
                                 && attacker.getToughness().getValue() <= blocker.getPower().getValue()) {
+                            // Never attack into a losing situation (regardless of strategic role)
                             safeToAttack = false;
                         }
 
@@ -1118,6 +1244,45 @@ public class ComputerPlayer6 extends ComputerPlayer {
                     // add attacker to the next list of all attackers that can safely attack
                     if (safeToAttack) {
                         attackersToCheck.add(attacker);
+                    }
+                }
+
+                // Check for "massive attack" scenario: many attackers vs few blockers
+                // When attackers significantly outnumber blockers, excess attackers get through unblocked
+                // Even if individual attackers are "unsafe", the collective attack may be profitable
+                if (attackersToCheck.isEmpty() && attackersList.size() > possibleBlockers.size()) {
+                    int excessAttackers = attackersList.size() - possibleBlockers.size();
+
+                    // Calculate total damage that would get through
+                    // Sort attackers by power (descending) - highest power attackers get through
+                    List<Permanent> sortedAttackers = new ArrayList<>(attackersList);
+                    sortedAttackers.sort((a, b) -> b.getPower().getValue() - a.getPower().getValue());
+
+                    int guaranteedDamage = 0;
+                    for (int i = 0; i < excessAttackers && i < sortedAttackers.size(); i++) {
+                        guaranteedDamage += sortedAttackers.get(i).getPower().getValue();
+                    }
+
+                    // Calculate worst case: we lose our weakest attacker(s) to blockers
+                    // Sort by value (ascending) to find the least valuable attackers
+                    List<Permanent> byValue = new ArrayList<>(attackersList);
+                    byValue.sort((a, b) -> eval.evaluate(a, game) - eval.evaluate(b, game));
+
+                    int maxPotentialLoss = 0;
+                    for (int i = 0; i < possibleBlockers.size() && i < byValue.size(); i++) {
+                        maxPotentialLoss += eval.evaluate(byValue.get(i), game);
+                    }
+
+                    // Attack if guaranteed damage is significant relative to potential loss
+                    // Threshold: guaranteed damage >= defender's life / 3, OR
+                    // guaranteed damage significantly exceeds the value of creatures we might lose
+                    int defenderLife = defender.getLife();
+                    boolean massiveAttackWorthwhile = (guaranteedDamage >= defenderLife / 3)
+                            || (guaranteedDamage >= 2 * possibleBlockers.size() && excessAttackers >= 2);
+
+                    if (massiveAttackWorthwhile) {
+                        // Attack with all creatures - the excess damage is worth losing some
+                        attackersToCheck.addAll(attackersList);
                     }
                 }
 
@@ -1245,6 +1410,12 @@ public class ComputerPlayer6 extends ComputerPlayer {
     @Override
     public void cleanUpOnMatchEnd() {
         root = null;
+        // Clean up combo detection engine
+        if (comboEngine != null) {
+            comboEngine.clearPlayer(playerId);
+            comboEngine = null;
+        }
+        comboEngineInitialized = false;
         super.cleanUpOnMatchEnd();
     }
 

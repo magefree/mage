@@ -147,16 +147,20 @@ public class AttackAndBlockByAITest extends CardTestPlayerBaseAI {
     }
 
     @Test
-    @Ignore // TODO: add massive attack vs small amount of blockers
     public void test_Attack_10_small_vs_1_big_massive_strike() {
+        // AI should recognize that attacking with all 10 bears is profitable:
+        // - One bear dies to the 9/9 blocker
+        // - 9 bears deal 18 damage to opponent
+        // - Net result: lose 1 creature, deal 18 damage = good trade
         addCard(Zone.BATTLEFIELD, playerA, "Balduvian Bears", 10); // 2/2
         addCard(Zone.BATTLEFIELD, playerB, "Ancient Brontodon", 1); // 9/9
 
-        block(1, playerB, "Ancient Brontodon", "Balduvian Bears");
         String needAttackers = IntStream.rangeClosed(1, 10)
                 .mapToObj(x -> "Balduvian Bears")
                 .collect(Collectors.joining("^"));
         checkAttackers("x10 attack", 1, playerA, needAttackers);
+
+        block(1, playerB, "Ancient Brontodon", "Balduvian Bears");
 
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);

@@ -272,6 +272,15 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <configuration>
                     <mainClass>mage.server.Main</mainClass>
+                    <!-- For exec:exec goal (spawns separate JVM with Java 9+ module access) -->
+                    <executable>java</executable>
+                    <arguments>
+                        <argument>--add-opens</argument>
+                        <argument>java.base/java.io=ALL-UNNAMED</argument>
+                        <argument>-classpath</argument>
+                        <classpath/>
+                        <argument>mage.server.Main</argument>
+                    </arguments>
                 </configuration>
             </plugin>
             <plugin>
