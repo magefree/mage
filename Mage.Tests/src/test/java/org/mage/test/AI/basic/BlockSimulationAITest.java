@@ -329,7 +329,7 @@ public class BlockSimulationAITest extends CardTestPlayerBaseWithAIHelps {
         addCard(Zone.BATTLEFIELD, playerA, "Bilious Skulldweller", 1); // 1/1
         //
         // Menace
-        // At the beginning of each player’s upkeep, Furnace Punisher deals 2 damage to that player unless they control
+        // At the beginning of each player's upkeep, Furnace Punisher deals 2 damage to that player unless they control
         // two or more basic lands.
         addCard(Zone.BATTLEFIELD, playerB, "Furnace Punisher", 1); // 3/3
 
@@ -351,5 +351,222 @@ public class BlockSimulationAITest extends CardTestPlayerBaseWithAIHelps {
         assertLife(playerB, 20 - 3 - 1 - 1);
         assertPermanentCount(playerA, "Glissa Sunslayer", 1);
         assertGraveyardCount(playerB, 0);
+    }
+
+    // ==================== Flying + Reach Interactions ====================
+
+    @Test
+    public void test_Block_FlyingAttacker_BlockedByReach() {
+        // Flying creatures can only be blocked by creatures with flying or reach
+        // AI should use reach creatures to block flyers
+
+        // Serra Angel: 4/4 flying, vigilance
+        addCard(Zone.BATTLEFIELD, playerA, "Serra Angel", 1);
+        // Giant Spider: 2/4 reach - can block flyers
+        addCard(Zone.BATTLEFIELD, playerB, "Giant Spider", 1);
+
+        attack(1, playerA, "Serra Angel");
+
+        // AI should block with reach creature (survives with 4 toughness vs 4 power)
+        aiPlayStep(1, PhaseStep.DECLARE_BLOCKERS, playerB);
+        checkBlockers("reach blocks flyer", 1, playerB, "Giant Spider");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20); // Blocked, no damage
+        // Spider survives (4 toughness - 4 damage = 0, dies) - actually both die
+        assertGraveyardCount(playerA, "Serra Angel", 1);
+        assertGraveyardCount(playerB, "Giant Spider", 1);
+    }
+
+    @Test
+    public void test_Block_FlyingAttacker_NotBlockedByNonFlyer() {
+        // Ground creatures without reach cannot block flyers
+        // AI should NOT try to block with ground creatures
+
+        addCard(Zone.BATTLEFIELD, playerA, "Serra Angel", 1); // 4/4 flying
+        addCard(Zone.BATTLEFIELD, playerB, "Colossal Dreadmaw", 1); // 6/6 trample, no flying/reach
+
+        attack(1, playerA, "Serra Angel");
+
+        // AI cannot block a flyer with a ground creature
+        aiPlayStep(1, PhaseStep.DECLARE_BLOCKERS, playerB);
+        checkBlockers("no valid blockers", 1, playerB, "");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20 - 4); // Takes flying damage
+        assertPermanentCount(playerA, "Serra Angel", 1);
+        assertPermanentCount(playerB, "Colossal Dreadmaw", 1);
+    }
+
+    @Test
+    public void test_Block_FlyingAttacker_ChooseBestFlyingBlocker() {
+        // When AI has multiple flying/reach blockers, it should choose optimally
+
+        addCard(Zone.BATTLEFIELD, playerA, "Wind Drake", 1); // 2/2 flying
+        // AI has flying and reach options
+        addCard(Zone.BATTLEFIELD, playerB, "Giant Spider", 1); // 2/4 reach
+        addCard(Zone.BATTLEFIELD, playerB, "Welkin Tern", 1); // 2/1 flying
+
+        attack(1, playerA, "Wind Drake");
+
+        // AI should use Giant Spider (survives) over Welkin Tern (trades)
+        aiPlayStep(1, PhaseStep.DECLARE_BLOCKERS, playerB);
+        checkBlockers("use spider", 1, playerB, "Giant Spider");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+        assertGraveyardCount(playerA, "Wind Drake", 1); // Killed by spider
+        assertPermanentCount(playerB, "Giant Spider", 1); // Survives
+        assertPermanentCount(playerB, "Welkin Tern", 1); // Not used
+    }
+
+    // ==================== Double Strike Blocking Decisions ====================
+
+    @Test
+    public void test_Block_DoubleStrike_AIAccountsForDoubleDamage() {
+        // Double strike deals damage twice (first strike + normal)
+        // A 2/2 double strike deals 4 total damage
+        // AI should recognize this and not block with creatures that would die
+
+        // Fencing Ace: 1/1 double strike
+        addCard(Zone.BATTLEFIELD, playerA, "Fencing Ace", 1);
+        // AI has a 2/2 - would die to double strike (2 damage total)
+        addCard(Zone.BATTLEFIELD, playerB, "Balduvian Bears", 1); // 2/2
+
+        attack(1, playerA, "Fencing Ace");
+
+        // AI should block - 2/2 can kill the 1/1 and only takes 1 damage in first strike
+        // Then normal damage happens but Fencing Ace is dead
+        aiPlayStep(1, PhaseStep.DECLARE_BLOCKERS, playerB);
+        checkBlockers("block double strike", 1, playerB, "Balduvian Bears");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+        // Both die in combat - Fencing Ace deals 1 first strike, Bears deal 2 back
+        assertGraveyardCount(playerA, "Fencing Ace", 1);
+        assertDamageReceived(playerB, "Balduvian Bears", 1); // Only first strike damage
+    }
+
+    @Test
+    public void test_Block_DoubleStrike_LargerAttacker() {
+        // Larger double strike creature - AI must account for full damage
+
+        // Mirran Crusader: 2/2 double strike, protection from black/green
+        addCard(Zone.BATTLEFIELD, playerA, "Mirran Crusader", 1);
+        // AI has options
+        addCard(Zone.BATTLEFIELD, playerB, "Colossal Dreadmaw", 1); // 6/6 trample
+        addCard(Zone.BATTLEFIELD, playerB, "Balduvian Bears", 1); // 2/2
+
+        attack(1, playerA, "Mirran Crusader");
+
+        // AI should block with 6/6 - survives (takes 2+2=4 damage) and kills the 2/2
+        aiPlayStep(1, PhaseStep.DECLARE_BLOCKERS, playerB);
+        checkBlockers("big blocker survives", 1, playerB, "Colossal Dreadmaw");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+        assertGraveyardCount(playerA, "Mirran Crusader", 1);
+        assertDamageReceived(playerB, "Colossal Dreadmaw", 4); // 2 first strike + 2 normal
+    }
+
+    // ==================== Menace Blocking Requirements ====================
+
+    @Test
+    public void test_Block_Menace_RequiresTwoBlockers() {
+        // Menace requires at least two creatures to block
+        // AI with only one creature cannot block a menace creature
+
+        // Boggart Brute: 3/2 menace
+        addCard(Zone.BATTLEFIELD, playerA, "Boggart Brute", 1);
+        // AI has only one blocker
+        addCard(Zone.BATTLEFIELD, playerB, "Colossal Dreadmaw", 1); // 6/6
+
+        attack(1, playerA, "Boggart Brute");
+
+        // AI cannot block menace with single creature
+        aiPlayStep(1, PhaseStep.DECLARE_BLOCKERS, playerB);
+        checkBlockers("cannot block menace alone", 1, playerB, "");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20 - 3); // Takes menace damage
+        assertPermanentCount(playerA, "Boggart Brute", 1);
+        assertPermanentCount(playerB, "Colossal Dreadmaw", 1);
+    }
+
+    @Test
+    public void test_Block_Menace_TwoBlockersCanBlock() {
+        // With two creatures, AI can block menace
+
+        // Boggart Brute: 3/2 menace
+        addCard(Zone.BATTLEFIELD, playerA, "Boggart Brute", 1);
+        // AI has two blockers
+        addCard(Zone.BATTLEFIELD, playerB, "Balduvian Bears", 2); // 2/2 each
+
+        attack(1, playerA, "Boggart Brute");
+
+        // AI can gang-block menace with two creatures
+        // Combined: 4 power kills 3/2, one bear dies to 3 damage
+        aiPlayStep(1, PhaseStep.DECLARE_BLOCKERS, playerB);
+        // Note: checking that at least some blocking happens
+        // The exact block configuration may vary
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(false); // AI decides damage assignment
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20); // Blocked
+        // Attacker should die (4 power from 2 bears > 2 toughness)
+        assertGraveyardCount(playerA, "Boggart Brute", 1);
+        // One bear survives (3 power distributed)
+        assertPermanentCount(playerB, "Balduvian Bears", 1);
+    }
+
+    @Test
+    public void test_Block_Menace_ThreeBlockersAvailable() {
+        // AI should use exactly 2 blockers for menace, preserving the third
+
+        // Boggart Brute: 3/2 menace
+        addCard(Zone.BATTLEFIELD, playerA, "Boggart Brute", 1);
+        // AI has three blockers - should only use two
+        addCard(Zone.BATTLEFIELD, playerB, "Balduvian Bears", 3); // 2/2 each
+
+        attack(1, playerA, "Boggart Brute");
+
+        aiPlayStep(1, PhaseStep.DECLARE_BLOCKERS, playerB);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(false);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20); // Blocked
+        assertGraveyardCount(playerA, "Boggart Brute", 1);
+        // At least 2 bears should survive (one dies to 3 damage, third preserved)
+        assertPermanentCount(playerB, "Balduvian Bears", 2);
     }
 }

@@ -264,13 +264,35 @@ public final class CombatUtil {
                 }
 
                 // If no survivor, try 1-for-1 trade (mutual destruction) before group blocking
-                // This is often preferable to using 2 blockers for one attacker
+                // But only if the trade is worth it based on game state evaluation
+                // Strategic role affects willingness to trade:
+                // - Control: More willing to trade to stabilize the board
+                // - Beatdown: Only trade if it clearly improves position (preserve attackers)
                 if (blocker == null && !tradedBlockers.isEmpty()) {
                     blocker = getWorstCreature(tradedBlockers);
                     if (blocker != null) {
-                        combatInfo.addPair(attacker, blocker);
-                        removeWorstCreature(blocker, blockers, tradedBlockers, diedBlockers);
-                        blockedCount++;
+                        int diffBlockingScore = blockingDiffScore.getOrDefault(blocker, 0);
+                        int diffNonBlockingScore = nonBlockingDiffScore.getOrDefault(blocker, 0);
+
+                        boolean shouldTrade;
+                        if (strategicRole == StrategicRoleEvaluator.ROLE_CONTROL) {
+                            // Control: Trade if it doesn't hurt us too much (willing to trade down to stabilize)
+                            shouldTrade = diffBlockingScore >= diffNonBlockingScore - 10;
+                        } else if (strategicRole == StrategicRoleEvaluator.ROLE_BEATDOWN) {
+                            // Beatdown: Only trade if it clearly improves our position
+                            shouldTrade = diffBlockingScore > diffNonBlockingScore + 10;
+                        } else {
+                            // Flexible: Trade if blocking is at least as good as not blocking
+                            shouldTrade = diffBlockingScore >= diffNonBlockingScore;
+                        }
+
+                        if (shouldTrade) {
+                            combatInfo.addPair(attacker, blocker);
+                            removeWorstCreature(blocker, blockers, tradedBlockers, diedBlockers);
+                            blockedCount++;
+                        } else {
+                            blocker = null; // Reset so group blocking can be considered
+                        }
                     }
                 }
 
