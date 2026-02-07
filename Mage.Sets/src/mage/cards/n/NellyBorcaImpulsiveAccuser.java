@@ -2,7 +2,6 @@ package mage.cards.n;
 
 import mage.MageInt;
 import mage.abilities.BatchTriggeredAbility;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -28,9 +27,7 @@ import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  *
@@ -83,8 +80,8 @@ public final class NellyBorcaImpulsiveAccuser extends CardImpl {
 class NellyBorcaTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedPlayerEvent> {
 
     NellyBorcaTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), false);
-        this.addEffect(new DrawCardTargetEffect(1, false));
+        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1));
+        this.addEffect(new DrawCardTargetEffect(1));
     }
 
     private NellyBorcaTriggeredAbility(final TriggeredAbilityImpl ability) {
@@ -99,41 +96,40 @@ class NellyBorcaTriggeredAbility extends TriggeredAbilityImpl implements BatchTr
 
     @Override
     public boolean checkEvent(DamagedPlayerEvent event, Game game) {
-        // exclude non-combat damage and damage dealt to the controller
-        if (!event.isCombatDamage() || event.getTargetId() == getControllerId()) {
+        // exclude non-combat damage
+        if (!event.isCombatDamage()) {
+            return false;
+        }
+        // check if damage is dealt to opponent
+        if (!game.getOpponents(getControllerId()).contains(event.getTargetId())) {
             return false;
         }
 
-        // exclude damage dealt by the controller
         Permanent sourceCreature = game.getPermanentOrLKIBattlefield(event.getSourceId());
+        // check if damage is dealt by opponent
         return sourceCreature != null
-                && !sourceCreature.isControlledBy(getControllerId());
+                && game.getOpponents(getControllerId()).contains(sourceCreature.getControllerId());
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         List<DamagedPlayerEvent> events = getFilteredEvents((DamagedBatchForPlayersEvent) event, game);
-        if (events.isEmpty()) {
-            return false;
-        }
 
-        Set<UUID> attackingPlayerSet = events.stream()
+        UUID sourcePlayerID = events.stream()
                 .map(DamagedPlayerEvent::getSourceId)
                 .map(game::getControllerId)
-                .collect(Collectors.toSet());
+                .findFirst().orElse(null);
 
-        if (attackingPlayerSet.size() != 1) {
+        if (sourcePlayerID == null) {
             return false;
         }
-
-        UUID sourcePlayerID = attackingPlayerSet.iterator().next();
 
         this.getEffects().setTargetPointer(new FixedTarget(sourcePlayerID));
         return true;
     }
 
     @Override
-    public TriggeredAbility copy() {
+    public NellyBorcaTriggeredAbility copy() {
         return new NellyBorcaTriggeredAbility(this);
     }
 
