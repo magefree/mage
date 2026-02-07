@@ -259,6 +259,7 @@ Streets of New Capenna|StreetsOfNewCapenna|
 New Capenna Commander|NewCapennaCommander|
 Strixhaven: School of Mages|StrixhavenSchoolOfMages|
 Secrets of Strixhaven|SecretsOfStrixhaven|
+Secrets of Strixhaven Commander|SecretsOfStrixhavenCommander|
 Stronghold|Stronghold|
 Super Series|SuperSeries|
 Tarkir: Dragonstorm|TarkirDragonstorm|
