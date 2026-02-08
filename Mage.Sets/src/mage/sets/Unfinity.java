@@ -28,6 +28,7 @@ public final class Unfinity extends ExpansionSet {
         cards.add(new SetCardInfo("Atomwheel Acrobats", 130, Rarity.COMMON, mage.cards.a.AtomwheelAcrobats.class));
         cards.add(new SetCardInfo("Attempted Murder", 66, Rarity.UNCOMMON, mage.cards.a.AttemptedMurder.class));
         cards.add(new SetCardInfo("Blood Crypt", 279, Rarity.RARE, mage.cards.b.BloodCrypt.class));
+        cards.add(new SetCardInfo("Blorbian Buddy", 131, Rarity.COMMON, mage.cards.b.BlorbianBuddy.class));
         cards.add(new SetCardInfo("Boing!", 40, Rarity.COMMON, mage.cards.b.Boing.class));
         cards.add(new SetCardInfo("Breeding Pool", 286, Rarity.RARE, mage.cards.b.BreedingPool.class));
         cards.add(new SetCardInfo("Celebr-8000", 185, Rarity.RARE, mage.cards.c.Celebr8000.class));
@@ -67,6 +68,7 @@ public final class Unfinity extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 242, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_UST_VARIOUS));
         cards.add(new SetCardInfo("Temple Garden", 281, Rarity.RARE, mage.cards.t.TempleGarden.class));
         cards.add(new SetCardInfo("The Space Family Goblinson", 179, Rarity.UNCOMMON, mage.cards.t.TheSpaceFamilyGoblinson.class));
+        cards.add(new SetCardInfo("Ticket Turbotubes", 194, Rarity.COMMON, mage.cards.t.TicketTurbotubes.class));
         cards.add(new SetCardInfo("Vegetation Abomination", 160, Rarity.COMMON, mage.cards.v.VegetationAbomination.class));
         cards.add(new SetCardInfo("Watery Grave", 278, Rarity.RARE, mage.cards.w.WateryGrave.class));
     }
