@@ -280,6 +280,8 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Swords to Plowshares", 88, Rarity.UNCOMMON, mage.cards.s.SwordsToPlowshares.class));
         cards.add(new SetCardInfo("Syr Konrad, the Grim", 141, Rarity.UNCOMMON, mage.cards.s.SyrKonradTheGrim.class));
         cards.add(new SetCardInfo("Tainted Isle", 300, Rarity.UNCOMMON, mage.cards.t.TaintedIsle.class));
+        cards.add(new SetCardInfo("Take the Bait", 43, Rarity.RARE, mage.cards.t.TakeTheBait.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Take the Bait", 353, Rarity.RARE, mage.cards.t.TakeTheBait.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Talisman of Conviction", 240, Rarity.UNCOMMON, mage.cards.t.TalismanOfConviction.class));
         cards.add(new SetCardInfo("Talisman of Curiosity", 241, Rarity.UNCOMMON, mage.cards.t.TalismanOfCuriosity.class));
         cards.add(new SetCardInfo("Talisman of Dominance", 242, Rarity.UNCOMMON, mage.cards.t.TalismanOfDominance.class));
