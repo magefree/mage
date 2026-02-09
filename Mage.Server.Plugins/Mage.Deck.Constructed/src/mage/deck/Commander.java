@@ -15,7 +15,6 @@ public class Commander extends AbstractCommander {
         this("Commander");
         banned.add("Ancestral Recall");
         banned.add("Balance");
-        banned.add("Biorhythm");
         banned.add("Black Lotus");
         banned.add("Channel");
         banned.add("Dockside Extortionist");
@@ -33,7 +32,6 @@ public class Commander extends AbstractCommander {
         banned.add("Leovold, Emissary of Trest");
         banned.add("Library of Alexandria");
         banned.add("Limited Resources");
-        banned.add("Lutri, the Spellchaser");
         banned.add("Mana Crypt");
         banned.add("Mox Emerald");
         banned.add("Mox Jet");
@@ -55,6 +53,8 @@ public class Commander extends AbstractCommander {
         banned.add("Trade Secrets");
         banned.add("Upheaval");
         banned.add("Yawgmoth's Bargain");
+
+        bannedCompanion.add("Lutri, the Spellchaser");
     }
 
     protected Commander(String name) {
