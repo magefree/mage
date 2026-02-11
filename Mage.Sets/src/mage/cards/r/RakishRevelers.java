@@ -30,7 +30,7 @@ public final class RakishRevelers extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new CitizenGreenWhiteToken())));
 
         // {2}, Exile Rakish Revelers from your hand: Target land gains "{T}: Add {R}, {G}, or {W}" until Rakish Revelers is cast from exile. You may cast Rakish Revelers for as long as it remains exiled.
-        this.addAbility(new GiveManaAbilityAndCastSourceAbility("RGW"));
+        this.addAbility(new GiveManaAbilityAndCastSourceAbility("RGW",2));
     }
 
     private RakishRevelers(final RakishRevelers card) {
