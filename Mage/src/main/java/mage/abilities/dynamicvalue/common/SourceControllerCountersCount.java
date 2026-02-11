@@ -13,7 +13,8 @@ import mage.players.Player;
 public enum SourceControllerCountersCount implements DynamicValue {
     ENERGY(CounterType.ENERGY),
     EXPERIENCE(CounterType.EXPERIENCE),
-    RAD(CounterType.RAD);
+    RAD(CounterType.RAD),
+    TICKET(CounterType.TICKET);
 
     private final CounterType counterType;
 

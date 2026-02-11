@@ -226,6 +226,7 @@ public enum CounterType {
     TAKEOVER("takeover"),
     TASK("task"),
     THEFT("theft"),
+    TICKET("ticket"),
     TIDE("tide"),
     TIME("time"),
     TOWER("tower"),
