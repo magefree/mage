@@ -485,7 +485,16 @@ public interface Permanent extends Card, Controllable {
 
     void setHarnessed(boolean value);
 
-    boolean wasRoomUnlockedOnCast();
+    // Mutate support
+    boolean isMutated();
+
+    List<Card> getMergedCards(Game game);
+
+    Card getTopMergedCard(Game game);
+
+    void mergeCard(Card card, boolean onTop, Game game);
+
+    wasRoomUnlockedOnCast();
 
     /**
      * used to reset the locked status of a room. Only used when copying a room

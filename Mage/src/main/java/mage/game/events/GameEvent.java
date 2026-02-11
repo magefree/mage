@@ -254,6 +254,12 @@ public class GameEvent implements Serializable {
          flag        not used for this event
          zone        zone the spell is cast from
          */
+        MUTATE,
+        /* MUTATE
+         targetId    id of the permanent that mutated
+         sourceId    id of the card being merged
+         playerId    controller of the creature
+         */
         ACTIVATE_ABILITY, ACTIVATED_ABILITY,
         /* ACTIVATE_ABILITY, ACTIVATED_ABILITY,
          WARNING, do not use choose dialogs inside, can be calls multiple types, e.g. on playable checking

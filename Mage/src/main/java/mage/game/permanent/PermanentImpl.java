@@ -123,6 +123,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected boolean legendRuleApplies = true;
     protected boolean prototyped;
 
+    // Mutate support - ordered list of merged cards (top to bottom)
+    protected List<UUID> mergedCardIds = new ArrayList<>();
+
     private static final List<UUID> emptyList = Collections.unmodifiableList(new ArrayList<>());
 
     protected PermanentImpl(UUID ownerId, UUID controllerId, String name) {
@@ -198,6 +201,8 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.leftHalfUnlocked = permanent.leftHalfUnlocked;
         this.rightHalfUnlocked = permanent.rightHalfUnlocked;
         this.roomWasUnlockedOnCast = permanent.roomWasUnlockedOnCast;
+        this.mergedCardIds.addAll(permanent.mergedCardIds);
+
         this.manifested = permanent.manifested;
         this.cloaked = permanent.cloaked;
         this.createOrder = permanent.createOrder;
@@ -258,6 +263,14 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public String getName() {
+        // Mutated creatures use top card's name
+        if (isMutated()) {
+            Card topCard = getTopMergedCard(null);
+            if (topCard != null) {
+                return topCard.getName();
+            }
+        }
+
         if (name.isEmpty()) {
             if (faceDown) {
                 return EmptyNames.FACE_DOWN_CREATURE.getObjectName();
@@ -422,7 +435,18 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public Abilities<Ability> getAbilities(Game game) {
-        return super.getAbilities(game);
+        Abilities<Ability> abilities = super.getAbilities(game);
+
+        // If mutated, add abilities from all merged cards
+        if (isMutated()) {
+            for (Card card : getMergedCards(game)) {
+                if (card != null) {
+                    abilities.addAll(card.getAbilities(game));
+                }
+            }
+        }
+
+        return abilities;
     }
 
     /**
@@ -2198,5 +2222,40 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         }
 
         return true;
+    }
+
+    @Override
+    public boolean isMutated() {
+        return !mergedCardIds.isEmpty();
+    }
+
+    @Override
+    public List<Card> getMergedCards(Game game) {
+        List<Card> cards = new ArrayList<>();
+        for (UUID cardId : mergedCardIds) {
+            Card card = game.getCard(cardId);
+            if (card != null) {
+                cards.add(card);
+            }
+        }
+        return cards;
+    }
+
+    @Override
+    public Card getTopMergedCard(Game game) {
+        if (mergedCardIds.isEmpty()) {
+            return this;
+        }
+        Card card = game.getCard(mergedCardIds.get(0));
+        return card != null ? card : this;
+    }
+
+    @Override
+    public void mergeCard(Card card, boolean onTop, Game game) {
+        if (onTop) {
+            mergedCardIds.add(0, card.getId());
+        } else {
+            mergedCardIds.add(card.getId());
+        }
     }
 }
