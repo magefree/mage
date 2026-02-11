@@ -44,8 +44,9 @@ public final class CaptainAmericaTeamLeader extends CardImpl {
         // Whenever another Hero you control enters, it gains vigilance and haste until end of turn.
         // Put a +1/+1 counter on that Hero and a +1/+1 counter on Captain America.
         Ability ability = new EntersBattlefieldAllTriggeredAbility(
+            Zone.BATTLEFIELD,
             new GainAbilityTargetEffect(VigilanceAbility.getInstance()).setText("it gains vigilance"),
-            filter
+            filter, false, SetTargetPointer.PERMANENT
         );
         ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance()).setText("and haste until end of turn"));
         ability.addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance())
