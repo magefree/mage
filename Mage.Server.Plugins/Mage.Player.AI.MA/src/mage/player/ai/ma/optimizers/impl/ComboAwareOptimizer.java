@@ -1,5 +1,6 @@
 package mage.player.ai.ma.optimizers.impl;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.game.Game;
 import mage.player.ai.combo.ComboDetectionEngine;
@@ -67,11 +68,11 @@ public class ComboAwareOptimizer extends BaseTreeOptimizer {
 
         if (comboSequence.isEmpty()) {
             // No specific sequence, but we have combo - keep combo piece actions
-            filterNonComboActions(actions, actionsToRemove, comboPieces);
+            filterNonComboActions(game, actions, actionsToRemove, comboPieces);
         } else {
             // Have a specific sequence - prioritize first action in sequence
             String nextCardToPlay = comboSequence.get(0);
-            prioritizeAction(actions, actionsToRemove, nextCardToPlay, comboPieces);
+            prioritizeAction(game, actions, actionsToRemove, nextCardToPlay, comboPieces);
         }
     }
 
@@ -127,7 +128,7 @@ public class ComboAwareOptimizer extends BaseTreeOptimizer {
      * Filter out actions that don't involve combo pieces.
      * Keep Pass action as fallback.
      */
-    private void filterNonComboActions(List<Ability> actions, List<Ability> actionsToRemove,
+    private void filterNonComboActions(Game game, List<Ability> actions, List<Ability> actionsToRemove,
                                        Set<String> comboPieces) {
         for (Ability action : actions) {
             String rule = action.toString();
@@ -143,7 +144,7 @@ public class ComboAwareOptimizer extends BaseTreeOptimizer {
             }
 
             // Check if action involves a combo piece
-            String cardName = getSourceCardName(action);
+            String cardName = getSourceCardName(game, action);
             if (cardName != null && comboPieces.contains(cardName)) {
                 continue;  // Keep combo piece actions
             }
@@ -160,7 +161,7 @@ public class ComboAwareOptimizer extends BaseTreeOptimizer {
     /**
      * Prioritize the specific next action in the combo sequence.
      */
-    private void prioritizeAction(List<Ability> actions, List<Ability> actionsToRemove,
+    private void prioritizeAction(Game game, List<Ability> actions, List<Ability> actionsToRemove,
                                   String nextCardToPlay, Set<String> comboPieces) {
         Ability targetAction = null;
 
@@ -177,7 +178,7 @@ public class ComboAwareOptimizer extends BaseTreeOptimizer {
                 continue;
             }
 
-            String cardName = getSourceCardName(action);
+            String cardName = getSourceCardName(game, action);
 
             // Is this the card we want to play next?
             if (cardName != null && cardName.equals(nextCardToPlay)) {
@@ -203,22 +204,15 @@ public class ComboAwareOptimizer extends BaseTreeOptimizer {
     }
 
     /**
-     * Get the source card name from an ability.
-     */
-    private String getSourceCardName(Ability action) {
-        if (action.getSourceObject(null) != null) {
-            return action.getSourceObject(null).getName();
-        }
-        return null;
-    }
-
-    /**
      * Get the source card name from an ability with game context.
      */
     private String getSourceCardName(Game game, Ability action) {
-        if (action.getSourceObject(game) != null) {
-            return action.getSourceObject(game).getName();
+        if (game != null) {
+            MageObject sourceObject = action.getSourceObject(game);
+            if (sourceObject != null) {
+                return sourceObject.getName();
+            }
         }
-        return getSourceCardName(action);
+        return null;
     }
 }

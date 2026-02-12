@@ -181,7 +181,7 @@ public class AISynergyDetectionTest extends CardTestPlayerBaseWithAIHelps {
      * Test: With active synergy and lethal threat, AI may need to chump block.
      *
      * Scenario: AI is at 3 life with Puresteel Paladin + Colossus Hammer.
-     * Opponent attacks with a 5/5.
+     * Opponent attacks with a 6/4 (no trample).
      *
      * Expected: AI must block to survive, even if it means losing the synergy enabler.
      */
@@ -194,15 +194,15 @@ public class AISynergyDetectionTest extends CardTestPlayerBaseWithAIHelps {
         addCard(Zone.BATTLEFIELD, playerB, "Colossus Hammer", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Sol Ring", 2);
 
-        // Opponent's big attacker
-        addCard(Zone.BATTLEFIELD, playerA, "Colossal Dreadmaw", 1); // 6/6 trample
+        // Opponent's big attacker (no trample, so chump blocking prevents all damage)
+        addCard(Zone.BATTLEFIELD, playerA, "Craw Wurm", 1); // 6/4
 
         // Reduce AI to low life where it must block
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "target damage 17", playerB);
 
-        attack(1, playerA, "Colossal Dreadmaw");
+        attack(1, playerA, "Craw Wurm");
 
-        // At 3 life, AI MUST chump block or die
+        // At 3 life, AI MUST chump block or die to 6 damage
         // Synergy protection is overridden by survival
         aiPlayStep(1, PhaseStep.DECLARE_BLOCKERS, playerB);
         // Puresteel Paladin should chump block
@@ -214,9 +214,8 @@ public class AISynergyDetectionTest extends CardTestPlayerBaseWithAIHelps {
 
         // Paladin dies chump blocking
         assertGraveyardCount(playerB, "Puresteel Paladin", 1);
-        // AI survives (trample still deals 4 damage through 2 toughness, so life = 3 - 4 = -1)
-        // Actually with 6/6 trample vs 2/2, trample deals 6-2=4 through
-        // AI at 3 life takes 4 trample... dies anyway. Let's adjust the test.
+        // AI survives at 3 life (no trample means 0 damage gets through)
+        assertLife(playerB, 3);
     }
 
     /**
