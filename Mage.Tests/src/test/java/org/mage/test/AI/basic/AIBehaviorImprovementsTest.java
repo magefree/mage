@@ -160,14 +160,17 @@ public class AIBehaviorImprovementsTest extends CardTestPlayerBaseWithAIHelps {
     @Test
     public void test_GroupBlocking_NotUsedAgainstDeathtouch() {
         // Group blocking shouldn't be used against deathtouch (all blockers die anyway)
+        // Need a deathtoucher with toughness > 3 so a single 3/3 can't kill it alone,
+        // making gang-blocking tempting — but still wrong because deathtouch kills all blockers
 
-        // Narnam Renegade is 1/2 with deathtouch
-        addCard(Zone.BATTLEFIELD, playerA, "Narnam Renegade", 1);
+        // Ohran Frostfang is 2/6 with deathtouch
+        addCard(Zone.BATTLEFIELD, playerA, "Ohran Frostfang", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Centaur Courser", 2); // 3/3 each
 
-        attack(1, playerA, "Narnam Renegade");
+        attack(1, playerA, "Ohran Frostfang");
 
         // AI should NOT gang-block a deathtouch creature
+        // Even though two 3/3s (6 power total) can kill the 2/6, both blockers die to deathtouch
         aiPlayStep(1, PhaseStep.DECLARE_BLOCKERS, playerB);
 
         setStopAt(1, PhaseStep.END_TURN);
@@ -176,7 +179,7 @@ public class AIBehaviorImprovementsTest extends CardTestPlayerBaseWithAIHelps {
 
         // Both 3/3s should survive (AI didn't sacrifice them)
         assertPermanentCount(playerB, "Centaur Courser", 2);
-        assertLife(playerB, 19); // Took 1 damage (Narnam Renegade is 1/2)
+        assertLife(playerB, 18); // Took 2 damage (Ohran Frostfang is 2/6)
     }
 
     @Test
