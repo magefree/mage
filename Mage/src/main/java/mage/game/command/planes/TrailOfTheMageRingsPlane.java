@@ -35,12 +35,6 @@ import java.util.UUID;
  */
 public class TrailOfTheMageRingsPlane extends Plane {
 
-    private static final FilterCard filter = new FilterCard("creature spells");
-
-    static {
-        filter.add(CardType.CREATURE.getPredicate());
-    }
-
     public TrailOfTheMageRingsPlane() {
         this.setPlaneType(Planes.PLANE_TRAIL_OF_THE_MAGE_RINGS);
 
