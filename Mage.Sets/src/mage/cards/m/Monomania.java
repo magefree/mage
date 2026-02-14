@@ -7,7 +7,6 @@ import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -40,8 +39,6 @@ public final class Monomania extends CardImpl {
 }
 
 class MonomaniaEffect extends OneShotEffect {
-
-    private static final FilterCard filter = new FilterCard("a card");
 
     MonomaniaEffect() {
         super(Outcome.Discard);
