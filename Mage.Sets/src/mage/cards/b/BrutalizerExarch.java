@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreatureCard;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
 
@@ -33,7 +32,7 @@ public final class BrutalizerExarch extends CardImpl {
         // When Brutalizer Exarch enters the battlefield, choose one
         // - Search your library for a creature card, reveal it, then shuffle your library and put that card on top of it;
         Ability ability = new EntersBattlefieldTriggeredAbility(new SearchLibraryPutOnLibraryEffect(
-                new TargetCardInLibrary(new FilterCreatureCard("a creature card")), true
+                new TargetCardInLibrary(StaticFilters.FILTER_CARD_CREATURE_A), true
         ), false);
 
         // or put target noncreature permanent on the bottom of its owner's library.
