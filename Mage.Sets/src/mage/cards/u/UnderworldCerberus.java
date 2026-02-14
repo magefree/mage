@@ -14,8 +14,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -38,7 +37,7 @@ public final class UnderworldCerberus extends CardImpl {
 
         // When Underworld Cerberus dies, exile it and each player returns all creature cards from their graveyard to their hand.
         Ability ability = new DiesSourceTriggeredAbility(new ExileSourceEffect());
-        ability.addEffect(new ReturnToHandFromGraveyardAllEffect(new FilterCreatureCard("creature cards"))
+        ability.addEffect(new ReturnToHandFromGraveyardAllEffect(StaticFilters.FILTER_CARD_CREATURES)
                 .concatBy("and"));
         this.addAbility(ability);
     }

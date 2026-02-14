@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
@@ -72,7 +71,7 @@ class ToothAndNailPutCreatureOnBattlefieldEffect extends OneShotEffect {
             return false;
         }
 
-        TargetCardInHand target = new TargetCardInHand(0, 2, new FilterCreatureCard("creature cards"));
+        TargetCardInHand target = new TargetCardInHand(0, 2, StaticFilters.FILTER_CARD_CREATURES);
         if (controller.choose(Outcome.PutCreatureInPlay, target, source, game)) {
             return controller.moveCards(new CardsImpl(target.getTargets()).getCards(game),
                     Zone.BATTLEFIELD, source, game, false, false, false, null);

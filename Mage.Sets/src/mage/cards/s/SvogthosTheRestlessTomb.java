@@ -14,7 +14,7 @@ import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.TokenImpl;
 
 /**
@@ -54,7 +54,7 @@ class SvogthosToken extends TokenImpl {
         color.setBlack(true);
         power = new MageInt(0);
         toughness = new MageInt(0);
-        CardsInControllerGraveyardCount count = new CardsInControllerGraveyardCount(new FilterCreatureCard("creature cards"));
+        CardsInControllerGraveyardCount count = new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_CREATURES);
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(count, Duration.WhileOnBattlefield)));
     }
     private SvogthosToken(final SvogthosToken token) {

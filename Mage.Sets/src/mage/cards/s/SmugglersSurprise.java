@@ -16,7 +16,7 @@ import mage.cards.CardsImpl;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.PowerPredicate;
@@ -101,7 +101,7 @@ class SmugglersSurpriseEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        TargetCardInHand target = new TargetCardInHand(0, 2, new FilterCreatureCard("creature cards"));
+        TargetCardInHand target = new TargetCardInHand(0, 2, StaticFilters.FILTER_CARD_CREATURES);
         if (controller.choose(Outcome.PutCreatureInPlay, target, source, game)) {
             return controller.moveCards(
                     new CardsImpl(target.getTargets()).getCards(game),
