@@ -1,26 +1,22 @@
 package mage.cards.w;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.keyword.SurveilEffect;
 import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.watchers.Watcher;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
+
+import java.util.*;
 
 /**
  *
@@ -85,7 +81,7 @@ class WaryFarmerWatcher extends Watcher {
             return;
         }
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent != null) {
+        if (permanent != null && permanent.isCreature(game)) {
             map.computeIfAbsent(permanent.getControllerId(), x -> new HashSet<>())
                     .add(new MageObjectReference(permanent, game));
         }
