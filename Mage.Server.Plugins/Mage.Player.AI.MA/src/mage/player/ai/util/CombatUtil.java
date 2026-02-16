@@ -328,10 +328,21 @@ public final class CombatUtil {
                 // Normal blocking logic (non-deathtouch or some blockers survive)
                 // find good blocker that survives
                 Permanent blocker = getWorstCreature(survivedAndKillBlocker, survivedBlockers);
-                if (blocker != null) {
+                
+                // For control role under pressure, prioritize group blocking over single blockers
+                // to clear threats and stabilize even at creature cost
+                boolean shouldSkipSingleBlockerForGroupBlock = false;
+                if (blocker != null && allBlockers.size() >= 2) {
+                    shouldSkipSingleBlockerForGroupBlock = isControlRoleUnderPressure(strategicRole, defendingPlayer, attackingPlayer);
+                }
+                
+                if (blocker != null && !shouldSkipSingleBlockerForGroupBlock) {
                     combatInfo.addPair(attacker, blocker);
                     removeWorstCreature(blocker, blockers, survivedAndKillBlocker, survivedBlockers);
                     blockedCount++;
+                } else if (shouldSkipSingleBlockerForGroupBlock) {
+                    // Skip single blocker - try group blocking instead
+                    blocker = null;
                 }
 
                 // If no survivor, try 1-for-1 trade (mutual destruction) before group blocking
@@ -384,7 +395,8 @@ public final class CombatUtil {
                 boolean attackerHasTrample = attacker.getAbilities(game).containsKey(TrampleAbility.getInstance().getId());
                 if (blocker == null && !attackerHasTrample && allBlockers.size() >= 2) {
                     // Try to find a 2-blocker combination that kills the attacker with at least one survivor
-                    GroupBlockResult groupBlock = findBestGroupBlock(game, attacker, allBlockers);
+                    // For control role under pressure, also consider combinations where both die (for stabilization)
+                    GroupBlockResult groupBlock = findBestGroupBlock(game, attacker, allBlockers, strategicRole, defendingPlayer);
                     if (groupBlock != null) {
                         combatInfo.addPair(attacker, groupBlock.blocker1);
                         combatInfo.addPair(attacker, groupBlock.blocker2);
@@ -654,13 +666,18 @@ public final class CombatUtil {
      * Find the best 2-blocker combination that can kill the attacker with at least one survivor.
      * Returns null if no good combination exists.
      */
-    private static GroupBlockResult findBestGroupBlock(Game game, Permanent attacker, List<Permanent> possibleBlockers) {
+    private static GroupBlockResult findBestGroupBlock(Game game, Permanent attacker, List<Permanent> possibleBlockers,
+                                                       int strategicRole, Player defendingPlayer) {
         if (possibleBlockers.size() < 2) {
             return null;
         }
 
         int attackerPower = attacker.getPower().getValue();
         int attackerToughness = attacker.getToughness().getValue();
+        Player attackingPlayer = game.getPlayer(game.getCombat().getAttackingPlayerId());
+
+        // Check if control role needs stabilization
+        boolean isControlUnderPressure = isControlRoleUnderPressure(strategicRole, defendingPlayer, attackingPlayer);
 
         GroupBlockResult bestResult = null;
         int bestScore = Integer.MIN_VALUE;
@@ -694,8 +711,11 @@ public final class CombatUtil {
                 boolean lowerSurvives = damageToLower < lowerToughness.getToughness().getValue();
                 boolean higherSurvives = remainingDamage < higherToughness.getToughness().getValue();
 
-                if (!lowerSurvives && !higherSurvives) {
-                    continue; // Both blockers die - not a good trade
+                // For control role under pressure, allow both blockers to die if it kills the attacker
+                // (board stabilization is more important than creature preservation)
+                boolean bothDie = !lowerSurvives && !higherSurvives;
+                if (bothDie && !isControlUnderPressure) {
+                    continue; // Only allow "both die" scenario for control role
                 }
 
                 // Score this combination: prefer smaller blockers (less value sacrificed)
@@ -705,6 +725,10 @@ public final class CombatUtil {
                 // Bonus if both survive
                 if (lowerSurvives && higherSurvives) {
                     score += 100;
+                } else if (bothDie && isControlUnderPressure) {
+                    // For control role stabilization, "both die" is acceptable (neutral score, attacker dies)
+                    // Prefer this over no block at all
+                    score += 50;  // Slightly lower than 1-survivor cases but still positive
                 }
 
                 if (bestResult == null || score > bestScore) {
@@ -715,5 +739,29 @@ public final class CombatUtil {
         }
 
         return bestResult;
+    }
+
+    /**
+     * Check if defending player should prioritize stabilization through group blocking.
+     * This includes control role players, and also players under critical pressure
+     * who need to clear threats to survive.
+     *
+     * @param defendingPlayer The defending player
+     * @param attackingPlayer The attacking player
+     * @return true if group blocking should be prioritized for stabilization
+     */
+    private static boolean isControlRoleUnderPressure(int strategicRole, Player defendingPlayer, Player attackingPlayer) {
+        if (defendingPlayer == null || attackingPlayer == null) {
+            return false;
+        }
+
+        // Under critical pressure: defending at very low life (<10>)
+        // In this situation, clearing threats through group blocking is priority over preserving creatures
+        boolean isUnderCriticalPressure = defendingPlayer.getLife() <= 10 && attackingPlayer.getLife() > 10;
+
+        // Also enable for explicit control role
+        boolean isControlRole = strategicRole == StrategicRoleEvaluator.ROLE_CONTROL;
+
+        return isUnderCriticalPressure || isControlRole;
     }
 }

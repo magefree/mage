@@ -203,6 +203,45 @@ public class AIBehaviorImprovementsTest extends CardTestPlayerBaseWithAIHelps {
         assertPermanentCount(playerB, "Centaur Courser", 2);
     }
 
+    @Test
+    public void test_GroupBlocking_ControlRole_TradesBothCreaturesToClearBoard() {
+        // Control player under heavy pressure accepts bad trades to clear the board and stabilize
+        // Control player is at very low life (3) from beatdown pressure, while opponent is still high (20)
+        // Serra Angel (4/4 flying) attacks
+        // AI has two 2/1 War Falcons - normally a bad trade (2 for 1)
+        // But control role wants to stabilize from a critical life total, even at trade cost
+
+        addCard(Zone.BATTLEFIELD, playerA, "Serra Angel", 1); // 4/4 flying
+        addCard(Zone.BATTLEFIELD, playerB, "War Falcon", 2); // 2/1 flying each
+
+        // Control player under extreme pressure: at 3 life (barely hanging on)
+        // Beatdown player still at starting life, having landed hits
+        // Control needs to clear threats to stabilize and survive
+        setLife(playerA, 20);
+        setLife(playerB, 3);
+
+        attack(1, playerA, "Serra Angel");
+
+        // AI in control role should gang-block with both War Falcons to clear the board
+        // Even though it's a 2-for-1 trade (losing 2 creatures for 1), stabilizing is critical at 3 life
+        // Control player prioritizes board dominance over favorable trades when threatened
+        aiPlayStep(1, PhaseStep.DECLARE_BLOCKERS, playerB);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(false);
+        execute();
+
+        // The Serra Angel should be destroyed (gang-blocked by both War Falcons)
+        assertGraveyardCount(playerA, "Serra Angel", 1);
+        // Both War Falcons should be in graveyard (traded for the Serra Angel)
+        assertGraveyardCount(playerB, "War Falcon", 2);
+        // Board is clear of creatures - control player achieved stabilization despite being low on life
+        assertPermanentCount(playerA, "Serra Angel", 0);
+        assertPermanentCount(playerB, "War Falcon", 0);
+        // Control player survives the turn at 3 life by clearing the threat
+        assertLife(playerB, 3);
+    }
+
     // ==================== Trading Behavior by Strategic Role ====================
 
     @Test
