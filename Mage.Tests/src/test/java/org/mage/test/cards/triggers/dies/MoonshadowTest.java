@@ -7,13 +7,10 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- * @author Test
+ * @author GregorStocks
  */
 public class MoonshadowTest extends CardTestPlayerBase {
 
-    // Regression: event.getTarget().isPermanent(game) NPEs for cards entering
-    // graveyard from non-battlefield zones because ZoneChangeEvent.getTarget()
-    // is only set for permanents leaving the battlefield.
     @Test
     public void testTriggerFromAllZones() {
         addCard(Zone.BATTLEFIELD, playerA, "Moonshadow");
