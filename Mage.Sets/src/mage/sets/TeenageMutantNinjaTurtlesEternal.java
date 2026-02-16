@@ -19,6 +19,7 @@ public final class TeenageMutantNinjaTurtlesEternal extends ExpansionSet {
         super("Teenage Mutant Ninja Turtles Eternal", "TMC", ExpansionSet.buildDate(2026, 3, 6), SetType.EXPANSION);
         this.hasBasicLands = false;
 
+        cards.add(new SetCardInfo("April O'Neil, Live on the Scene", 9, Rarity.MYTHIC, mage.cards.a.AprilONeilLiveOnTheScene.class));
         cards.add(new SetCardInfo("Commander's Plate", 135, Rarity.MYTHIC, mage.cards.c.CommandersPlate.class));
         cards.add(new SetCardInfo("Dark Leo & Shredder", 99999, Rarity.MYTHIC, mage.cards.d.DarkLeoAndShredder.class));
         cards.add(new SetCardInfo("Dark Ritual", 131, Rarity.MYTHIC, mage.cards.d.DarkRitual.class));
