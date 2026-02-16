@@ -30,7 +30,7 @@ public final class AettirAndPriwen extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new AettirAndPriwenEffect()));
 
         // Equip {5}
-        this.addAbility(new EquipAbility(5));
+        this.addAbility(new EquipAbility(5, false));
     }
 
     private AettirAndPriwen(final AettirAndPriwen card) {

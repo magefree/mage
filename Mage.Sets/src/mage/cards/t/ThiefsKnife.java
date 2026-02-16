@@ -43,7 +43,7 @@ public final class ThiefsKnife extends CardImpl {
         this.addAbility(ability);
 
         // Equip {4}
-        this.addAbility(new EquipAbility(4));
+        this.addAbility(new EquipAbility(4, false));
     }
 
     private ThiefsKnife(final ThiefsKnife card) {

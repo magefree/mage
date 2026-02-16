@@ -38,7 +38,7 @@ public final class ExcaliburII extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(xValue, xValue)));
 
         // Equip {3}
-        this.addAbility(new EquipAbility(3));
+        this.addAbility(new EquipAbility(3, false));
     }
 
     private ExcaliburII(final ExcaliburII card) {

@@ -36,7 +36,7 @@ public final class RoverBlades extends CardImpl {
         )));
 
         // Equip {4}
-        this.addAbility(new EquipAbility(4));
+        this.addAbility(new EquipAbility(4, false));
 
         // Crew 2
         this.addAbility(new CrewAbility(2));

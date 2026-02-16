@@ -41,7 +41,7 @@ public final class DocOcksTentacles extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(4, 4)));
 
         // Equip {5}
-        this.addAbility(new EquipAbility(5));
+        this.addAbility(new EquipAbility(5, false));
     }
 
     private DocOcksTentacles(final DocOcksTentacles card) {
