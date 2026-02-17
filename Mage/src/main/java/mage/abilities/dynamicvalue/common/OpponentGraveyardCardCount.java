@@ -10,6 +10,8 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.Objects;
+
 /**
  * Counts artifact and/or creature cards in opponent's graveyards
  *
@@ -26,6 +28,11 @@ public class OpponentGraveyardCardCount implements DynamicValue {
         ));
     }
 
+    private OpponentGraveyardCardCount() {
+    }
+
+    public static OpponentGraveyardCardCount instance = new OpponentGraveyardCardCount();
+
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         if (sourceAbility == null) {
@@ -41,7 +48,10 @@ public class OpponentGraveyardCardCount implements DynamicValue {
 
         // Count in all opponent graveyards
         for (Player opponent : game.getOpponents(controller)) {
-            total += opponent.getGraveyard().count(FILTER, game);
+            total += opponent.getGraveyard().count(
+                    FILTER,
+                    sourceAbility.getControllerId(), sourceAbility, game
+            );
         }
 
         return total;
@@ -49,7 +59,7 @@ public class OpponentGraveyardCardCount implements DynamicValue {
 
     @Override
     public DynamicValue copy() {
-        return new OpponentGraveyardCardCount();
+        return instance;
     }
 
     @Override
@@ -59,7 +69,7 @@ public class OpponentGraveyardCardCount implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "the number of artifact and/or creature cards in opponents' graveyards";
+        return "the number of artifact and/or creature cards in an opponent's graveyard";
     }
 }
 

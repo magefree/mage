@@ -18,22 +18,78 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class SpoilsOfWarTest extends CardTestPlayerBase {
 
     /**
-     * Test: Verify Spoils of War card exists and can be cast
+     * Test: Spoils of War counts artifacts in opponent graveyard as X value
+     * Expected: X equals the number of artifacts (2)
      */
     @Test
-    public void testCardExists() {
+    public void testXCountsArtifacts() {
+        // Setup: Opponent has 2 artifacts in graveyard
         addCard(Zone.GRAVEYARD, playerB, "Ornithopter", 2);
+        // Setup: Player A has a creature to boost
         addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears");
+        // Add the spell and mana to player A's hand
         addCard(Zone.HAND, playerA, "Spoils of War");
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
 
-        // Just verify the game state is valid
-        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spoils of War");
+        addTarget(playerA, "Grizzly Bears");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertHandCount(playerA, 1);
+        // Grizzly Bears should have 2 +1/+1 counters (2/2 -> 4/4)
+        assertPowerToughness(playerA, "Grizzly Bears", 4, 4);
+    }
+
+    /**
+     * Test: Spoils of War with empty opponent graveyard
+     * Expected: X equals 0, no counters added
+     */
+    @Test
+    public void testXEqualsZeroWithEmptyGraveyard() {
+        // Setup: Opponent has no artifacts or creatures in graveyard
+        // Setup: Player A has a creature to boost
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears");
+        // Add the spell and mana to player A's hand
+        addCard(Zone.HAND, playerA, "Spoils of War");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spoils of War");
+        addTarget(playerA, "Grizzly Bears");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        // Grizzly Bears should have no counters
+        assertPowerToughness(playerA, "Grizzly Bears", 2, 2);
+    }
+
+    /**
+     * Test: Spoils of War filters out non-artifact/creature cards
+     * Expected: X counts only artifacts (2), not lands (3)
+     */
+    @Test
+    public void testXFiltersOutLands() {
+        // Setup: Opponent has lands and artifacts in graveyard
+        addCard(Zone.GRAVEYARD, playerB, "Plains", 3);
+        addCard(Zone.GRAVEYARD, playerB, "Ornithopter", 2);
+        // Setup: Player A has a creature to boost
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears");
+        // Add the spell and mana to player A's hand
+        addCard(Zone.HAND, playerA, "Spoils of War");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spoils of War");
+        addTarget(playerA, "Grizzly Bears");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        // Grizzly Bears should only have 2 +1/+1 counters (from artifacts only)
+        assertPowerToughness(playerA, "Grizzly Bears", 4, 4);
     }
 }
+
 
 
 
