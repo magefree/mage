@@ -282,10 +282,28 @@ public abstract class ExpansionSet implements Serializable {
             }
         }
 
-        while (theBooster.size() > 15) {
+        // removing positional cards from collated boosters is going to mess with balancing and as-fan
+        // also for sets with common lands in the land slot, this may eliminate the majority of fixing from a pack
+        // instead removing a random card that is not in the last four (where rare and uncommons usually are - though some uncommons may be displayed by cards with special collation - eg DFC or bonus sheet).
+        if (theBooster.size() > 15 && theBooster.get(0).getRarity() == Rarity.LAND) {
             theBooster.remove(0);
         }
-
+        int keepCards = 4;
+        ArrayList<Rarity> dontRemove = new ArrayList<>(Arrays.asList(Rarity.UNCOMMON, Rarity.RARE, Rarity.MYTHIC));
+        int toRemove;
+        while (theBooster.size() > 15) {
+          if (theBooster.size() > keepCards) {
+            toRemove = RandomUtil.nextInt(theBooster.size() - keepCards);
+            if( dontRemove.contains( theBooster.get(toRemove).getRarity() )) {
+                keepCards = theBooster.size() - toRemove ;
+            } else {
+                theBooster.remove(toRemove);
+            }
+          } else {
+              theBooster.remove(0);
+          }
+        }
+    
         return theBooster;
     }
 
