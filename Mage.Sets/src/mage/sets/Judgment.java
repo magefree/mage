@@ -148,6 +148,7 @@ public final class Judgment extends ExpansionSet {
         cards.add(new SetCardInfo("Soulgorger Orgg", 99, Rarity.UNCOMMON, mage.cards.s.SoulgorgerOrgg.class, RETRO_ART));
         cards.add(new SetCardInfo("Spellgorger Barbarian", 100, Rarity.COMMON, mage.cards.s.SpellgorgerBarbarian.class, RETRO_ART));
         cards.add(new SetCardInfo("Spelljack", 51, Rarity.RARE, mage.cards.s.Spelljack.class, RETRO_ART));
+        cards.add(new SetCardInfo("Spoils of War", 73, Rarity.UNCOMMON, mage.cards.s.SpoilsOfWar.class, RETRO_ART));
         cards.add(new SetCardInfo("Spirit Cairn", 26, Rarity.UNCOMMON, mage.cards.s.SpiritCairn.class, RETRO_ART));
         cards.add(new SetCardInfo("Spurnmage Advocate", 27, Rarity.UNCOMMON, mage.cards.s.SpurnmageAdvocate.class, RETRO_ART));
         cards.add(new SetCardInfo("Stitch Together", 72, Rarity.UNCOMMON, mage.cards.s.StitchTogether.class, RETRO_ART));
