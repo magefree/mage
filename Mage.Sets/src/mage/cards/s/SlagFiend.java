@@ -11,7 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterArtifactCard;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -28,7 +28,7 @@ public final class SlagFiend extends CardImpl {
         this.toughness = new MageInt(0);
 
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(
-                new CardsInAllGraveyardsCount(new FilterArtifactCard("artifact cards")))));
+                new CardsInAllGraveyardsCount(StaticFilters.FILTER_CARD_ARTIFACTS))));
     }
 
     private SlagFiend(final SlagFiend card) {

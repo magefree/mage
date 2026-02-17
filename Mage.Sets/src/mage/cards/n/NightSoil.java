@@ -8,8 +8,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.SaprolingToken;
 import mage.target.common.TargetCardInASingleGraveyard;
 
@@ -25,7 +24,7 @@ public final class NightSoil extends CardImpl {
 
         // {1}, Exile two creature cards from a single graveyard: Create a 1/1 green Saproling creature token.
         Ability ability = new SimpleActivatedAbility(new CreateTokenEffect(new SaprolingToken()), new GenericManaCost(1));
-        ability.addCost(new ExileFromGraveCost(new TargetCardInASingleGraveyard(2, 2, new FilterCreatureCard("creature cards"))));
+        ability.addCost(new ExileFromGraveCost(new TargetCardInASingleGraveyard(2, 2, StaticFilters.FILTER_CARD_CREATURES)));
         this.addAbility(ability);
     }
 

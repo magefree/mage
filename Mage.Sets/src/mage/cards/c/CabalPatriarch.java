@@ -14,9 +14,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -41,7 +39,7 @@ public final class CabalPatriarch extends CardImpl {
 
         // {2}{B}, Exile a creature card from your graveyard: Target creature gets -2/-2 until end of turn.
         Ability ability2 = new SimpleActivatedAbility(new BoostTargetEffect(-2, -2), new ManaCostsImpl<>("{2}{B}"));
-        ability2.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(new FilterCreatureCard("a creature card"))));
+        ability2.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_A)));
         ability2.addTarget(new TargetCreaturePermanent().withChooseHint("gets -2/-2"));
         this.addAbility(ability2);
     }

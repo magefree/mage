@@ -11,7 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -30,13 +30,13 @@ public final class SidisiUndeadVizier extends CardImpl {
 
         // Deathtouch
         this.addAbility(DeathtouchAbility.getInstance());
-        
+
         // Exploit
         this.addAbility(new ExploitAbility());
-        
+
         // When Sidisi, Undead Vizier exploits a creature, you may search your library for a card, put it into your hand, then shuffle your library.
         this.addAbility(new ExploitCreatureTriggeredAbility(new SearchLibraryPutInHandEffect(
-                new TargetCardInLibrary(new FilterCard("card")), false
+                new TargetCardInLibrary(StaticFilters.FILTER_CARD), false
         ), true));
     }
 

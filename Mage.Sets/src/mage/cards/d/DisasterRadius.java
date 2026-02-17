@@ -10,7 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -27,9 +27,9 @@ public final class DisasterRadius extends CardImpl {
 
 
         // As an additional cost to cast Disaster Radius, reveal a creature card from your hand.
-        TargetCardInHand targetCard = new TargetCardInHand(new FilterCreatureCard("a creature card from your hand"));
+        TargetCardInHand targetCard = new TargetCardInHand(StaticFilters.FILTER_CARD_CREATURE_YOUR_HAND);
         this.getSpellAbility().addCost(new RevealTargetFromHandCost(targetCard));
-        
+
         // Disaster Radius deals X damage to each creature your opponents control, where X is the revealed card's converted mana cost.
         this.getSpellAbility().addEffect(new DisasterRadiusEffect());
     }
@@ -45,9 +45,9 @@ public final class DisasterRadius extends CardImpl {
 }
 
 class DisasterRadiusEffect extends OneShotEffect {
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature your opponents control");
-    
+
     static {
         filter.add(TargetController.OPPONENT.getControllerPredicate());
     }

@@ -12,7 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInHand;
@@ -25,15 +25,13 @@ import mage.target.targetpointer.FixedTarget;
  */
 public final class InduceDespair extends CardImpl {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("a creature card from your hand");
-
     public InduceDespair(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{B}");
 
         // As an additional cost to cast Induce Despair, reveal a creature card from your hand.
         // Target creature gets -X/-X until end of turn, where X is the revealed card's converted mana cost.
         this.getSpellAbility().addEffect(new InduceDespairEffect());
-        this.getSpellAbility().addCost(new RevealTargetFromHandCost(new TargetCardInHand(filter)));
+        this.getSpellAbility().addCost(new RevealTargetFromHandCost(new TargetCardInHand(StaticFilters.FILTER_CARD_CREATURE_YOUR_HAND)));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

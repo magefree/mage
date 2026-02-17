@@ -12,7 +12,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.SpiritWhiteToken;
 
 /**
@@ -32,10 +32,9 @@ public final class HallowedSpiritkeeper extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // When Hallowed Spiritkeeper dies, create X 1/1 white Spirit creature tokens with flying, where X is the number of creature cards in your graveyard.
-        Effect effect = new CreateTokenEffect(new SpiritWhiteToken(), new CardsInControllerGraveyardCount(new FilterCreatureCard("creature cards")));
+        Effect effect = new CreateTokenEffect(new SpiritWhiteToken(), new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_CREATURES));
         effect.setText("create X 1/1 white Spirit creature tokens with flying, where X is the number of creature cards in your graveyard");
         this.addAbility(new DiesSourceTriggeredAbility(effect, false));
-
     }
 
     private HallowedSpiritkeeper(final HallowedSpiritkeeper card) {

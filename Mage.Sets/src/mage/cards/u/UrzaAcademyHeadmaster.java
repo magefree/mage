@@ -167,7 +167,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
                                 break;
                             case 7: // GARRUK CALLER OF BEASTS 1
                                 sb.append("Reveal the top five cards of your library. Put all creature cards revealed this way into your hand and the rest on the bottom of your library in any order.");
-                                effects.add(new RevealLibraryPutIntoHandEffect(5, new FilterCreatureCard("creature cards"), Zone.LIBRARY));
+                                effects.add(new RevealLibraryPutIntoHandEffect(5, StaticFilters.FILTER_CARD_CREATURES, Zone.LIBRARY));
                                 break;
                             case 8: // GIDEON JURA 1
                                 sb.append("During target opponent's next turn, creatures that player controls attack Urza if able.");
@@ -286,7 +286,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
                                 break;
                             case 12: // (altered) LILIANA VESS 2
                                 sb.append("Search your library for a card and put that card into your hand. Then shuffle.");
-                                effects.add(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(new FilterCard("a card")), false));
+                                effects.add(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_A), false));
                                 break;
                             case 13: // (double) LILIANA OF THE VEIL 2
                                 sb.append("Target player sacrifices two creatures.");
