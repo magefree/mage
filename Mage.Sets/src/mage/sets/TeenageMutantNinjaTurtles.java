@@ -63,6 +63,7 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 319, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Groundchuck & Dirtbag", 115, Rarity.RARE, mage.cards.g.GroundchuckAndDirtbag.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Groundchuck & Dirtbag", 238, Rarity.RARE, mage.cards.g.GroundchuckAndDirtbag.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Hard-Won Jitte", 91, Rarity.UNCOMMON, mage.cards.h.HardWonJitte.class));
         cards.add(new SetCardInfo("Improvised Arsenal", 270, Rarity.RARE, mage.cards.i.ImprovisedArsenal.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Improvised Arsenal", 92, Rarity.RARE, mage.cards.i.ImprovisedArsenal.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 192, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
