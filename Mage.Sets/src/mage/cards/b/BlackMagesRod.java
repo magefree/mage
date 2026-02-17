@@ -26,7 +26,7 @@ public final class BlackMagesRod extends CardImpl {
 
     public BlackMagesRod(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}{B}");
-        
+
         this.subtype.add(SubType.EQUIPMENT);
 
         // Job select
@@ -48,7 +48,7 @@ public final class BlackMagesRod extends CardImpl {
         this.addAbility(ability);
 
         // Equip {3}
-        this.addAbility(new EquipAbility(3));
+        this.addAbility(new EquipAbility(3, false));
     }
 
     private BlackMagesRod(final BlackMagesRod card) {

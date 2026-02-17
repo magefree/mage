@@ -38,7 +38,7 @@ public final class BarbedBloodletter extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(1, 2)));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2));
+        this.addAbility(new EquipAbility(2, false));
     }
 
     private BarbedBloodletter(final BarbedBloodletter card) {

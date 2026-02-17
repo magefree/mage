@@ -1940,7 +1940,7 @@ public class VerifyCardDataTest {
 
     // "copy" fails means that the copy constructor are not correct inside a card.
     // To fix those, try to find the class that did trigger the copy failure, and check
-    // that copy() exists, a copy constructor exists, and the copy constructor is right. 
+    // that copy() exists, a copy constructor exists, and the copy constructor is right.
     private void checkCardCanBeCopied(Card card1) {
         Card card2;
         try {
@@ -2208,7 +2208,7 @@ public class VerifyCardDataTest {
     // FIN added equip abilities with flavor words, allow for those. There are also cards that affect equip costs or equip abilities, exclude those
     // Technically Enchant should be in this list, but that's added to the SpellAbility in XMage
     // Earthbend is an action word and thus can be anywhere, the rest are keywords that are always first in the line
-    Pattern targetKeywordRegexPattern = Pattern.compile("earthbend |^((.*— )?equip(?! cost| abilit)|bestow|partner with|modular|backup)\\b", Pattern.MULTILINE);
+    Pattern targetKeywordRegexPattern = Pattern.compile("earthbend |^((<i>[a-z ]+<\\/i> &mdash; )?equip(?! cost| abilit)|bestow|partner with|modular|backup)\\b", Pattern.MULTILINE);
 
     // Checks for targeted reflexive or delayed triggered abilities, ones that only can trigger as a result of another ability
     // and thus have their "when" located after a previous statement (detected by a period or comma followed by a space) instead of the start.

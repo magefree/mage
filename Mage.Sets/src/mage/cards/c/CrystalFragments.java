@@ -38,7 +38,7 @@ public final class CrystalFragments extends TransformingDoubleFacedCard {
         ));
 
         // Equip {1}
-        this.getLeftHalfCard().addAbility(new EquipAbility(1));
+        this.getLeftHalfCard().addAbility(new EquipAbility(1, false));
 
         // Summon: Alexander
         this.getRightHalfCard().setPT(4, 3);

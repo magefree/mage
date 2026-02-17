@@ -41,7 +41,7 @@ public final class MirrormindCrown extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new MirrormindCrownEffect()), new CreatedTokenWatcher());
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2));
+        this.addAbility(new EquipAbility(2, false));
     }
 
     private MirrormindCrown(final MirrormindCrown card) {

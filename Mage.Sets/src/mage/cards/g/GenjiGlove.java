@@ -39,7 +39,7 @@ public final class GenjiGlove extends CardImpl {
         this.addAbility(ability);
 
         // Equip {3}
-        this.addAbility(new EquipAbility(3));
+        this.addAbility(new EquipAbility(3, false));
     }
 
     private GenjiGlove(final GenjiGlove card) {

@@ -44,7 +44,7 @@ public final class HookSwords extends CardImpl {
         this.addAbility(ability);
 
         // Equip {3}
-        this.addAbility(new EquipAbility(3));
+        this.addAbility(new EquipAbility(3, false));
     }
 
     private HookSwords(final HookSwords card) {
