@@ -499,6 +499,13 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
+    public void newDeterministicId(String string) {
+        if (!(this instanceof MageSingleton)) {
+            this.ability.newDeterministicId(string);
+        }
+    }
+
+    @Override
     public void newOriginalId() {
     }
 
