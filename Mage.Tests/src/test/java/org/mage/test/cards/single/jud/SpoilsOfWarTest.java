@@ -2,7 +2,6 @@ package org.mage.test.cards.single.jud;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import mage.counters.CounterType;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -18,77 +17,69 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class SpoilsOfWarTest extends CardTestPlayerBase {
 
-    private static final String spoilsOfWar = "Spoils of War";
+    private static final String SPOILS_OF_WAR = "Spoils of War";
 
     /**
-     * Test: Spoils of War with artifacts in opponent graveyard
+     * Test: Spoils of War with 2 artifacts in opponent graveyard
+     * Expected: Grizzly Bears gains 2 +1/+1 counters
      */
     @Test
-    public void testSpoilsOfWarWithArtifacts() {
-        // Setup: Opponent has 2 artifacts in graveyard
+    public void testWithArtifacts() {
         addCard(Zone.GRAVEYARD, playerB, "Ornithopter", 2);
-        // Setup: Player A has a creature to boost
         addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears");
-        // Add the spell and mana to player A's hand
-        addCard(Zone.HAND, playerA, spoilsOfWar);
+        addCard(Zone.HAND, playerA, SPOILS_OF_WAR);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, spoilsOfWar);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, SPOILS_OF_WAR);
         addTarget(playerA, "Grizzly Bears");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        // Grizzly Bears should have 2 +1/+1 counters (2/2 -> 4/4)
         assertPowerToughness(playerA, "Grizzly Bears", 4, 4);
     }
 
     /**
-     * Test: Spoils of War with no relevant cards in graveyard (X = 0)
+     * Test: Spoils of War with empty graveyard
+     * Expected: Grizzly Bears gains no counters
      */
     @Test
-    public void testSpoilsOfWarWithoutCardsInGraveyard() {
-        // Setup: Opponent has no artifacts or creatures in graveyard
-        // Setup: Player A has a creature to boost
+    public void testWithEmptyGraveyard() {
         addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears");
-        // Add the spell and mana to player A's hand
-        addCard(Zone.HAND, playerA, spoilsOfWar);
+        addCard(Zone.HAND, playerA, SPOILS_OF_WAR);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, spoilsOfWar);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, SPOILS_OF_WAR);
         addTarget(playerA, "Grizzly Bears");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        // Grizzly Bears should not gain any counters (X=0)
         assertPowerToughness(playerA, "Grizzly Bears", 2, 2);
     }
 
     /**
-     * Test: Spoils of War filters out land cards correctly
+     * Test: Spoils of War filters land cards correctly
+     * Expected: Only counts artifacts and creatures (2), not lands (3)
      */
     @Test
-    public void testSpoilsOfWarFilterLands() {
-        // Setup: Opponent has lands and artifacts in graveyard (lands don't count)
+    public void testFiltersLands() {
         addCard(Zone.GRAVEYARD, playerB, "Plains", 3);
         addCard(Zone.GRAVEYARD, playerB, "Ornithopter", 2);
-        // Setup: Player A has a creature to boost
         addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears");
-        // Add the spell and mana to player A's hand
-        addCard(Zone.HAND, playerA, spoilsOfWar);
+        addCard(Zone.HAND, playerA, SPOILS_OF_WAR);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, spoilsOfWar);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, SPOILS_OF_WAR);
         addTarget(playerA, "Grizzly Bears");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        // Grizzly Bears should only have 2 +1/+1 counters (from artifacts only)
         assertPowerToughness(playerA, "Grizzly Bears", 4, 4);
     }
 }
+
 
 
 
