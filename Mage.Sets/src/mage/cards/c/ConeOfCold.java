@@ -42,7 +42,7 @@ public final class ConeOfCold extends CardImpl {
                 20, 20,
                 new TapAllEffect(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURES), new ConeOfColdEffect(),
                 new PermanentsEnterBattlefieldTappedEffect(
-                        StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURES, Duration.EndOfTurn
+                        StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURES, Duration.UntilYourNextTurn
                 ).setText("Until your next turn, creatures your opponents control enter the battlefield tapped")
         );
 
