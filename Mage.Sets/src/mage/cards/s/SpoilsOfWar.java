@@ -1,15 +1,11 @@
 package mage.cards.s;
 
-import mage.abilities.Ability;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.CostImpl;
 import mage.abilities.dynamicvalue.common.OpponentGraveyardCardCount;
 import mage.abilities.effects.common.counter.DistributeCountersEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.counters.CounterType;
-import mage.game.Game;
 import mage.target.common.TargetCreaturePermanentAmount;
 
 import java.util.UUID;
@@ -38,4 +34,5 @@ public final class SpoilsOfWar extends CardImpl {
         return new SpoilsOfWar(this);
     }
 }
+
 
