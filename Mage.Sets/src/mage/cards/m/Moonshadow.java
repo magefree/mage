@@ -83,7 +83,7 @@ class MoonshadowTriggeredAbility extends TriggeredAbilityImpl implements BatchTr
         Card card = game.getCard(event.getTargetId());
         return card != null
                 && isControlledBy(card.getOwnerId())
-                && event.getTarget().isPermanent(game);
+                && card.isPermanent(game);
     }
 
     @Override
