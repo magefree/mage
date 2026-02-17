@@ -21,11 +21,13 @@ public class SecretLairPromo extends ExpansionSet {
         this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("An Offer You Can't Refuse", 7, Rarity.RARE, mage.cards.a.AnOfferYouCantRefuse.class));
+        cards.add(new SetCardInfo("Ancient Stirrings", 50, Rarity.RARE, mage.cards.a.AncientStirrings.class));
         cards.add(new SetCardInfo("Brainstorm", 1, Rarity.RARE, mage.cards.b.Brainstorm.class));
         cards.add(new SetCardInfo("Dark Ritual", 16, Rarity.RARE, mage.cards.d.DarkRitual.class));
         cards.add(new SetCardInfo("Death's Shadow", 8, Rarity.RARE, mage.cards.d.DeathsShadow.class));
         cards.add(new SetCardInfo("Dragonlord Silumgar", 9, Rarity.MYTHIC, mage.cards.d.DragonlordSilumgar.class));
         cards.add(new SetCardInfo("Eldritch Evolution", 5, Rarity.RARE, mage.cards.e.EldritchEvolution.class));
+        cards.add(new SetCardInfo("Emberheart Challenger", 48, Rarity.RARE, mage.cards.e.EmberheartChallenger.class));
         cards.add(new SetCardInfo("Explore", 12, Rarity.RARE, mage.cards.e.Explore.class));
         cards.add(new SetCardInfo("Expressive Iteration", 13, Rarity.RARE, mage.cards.e.ExpressiveIteration.class));
         cards.add(new SetCardInfo("Fatal Push", 3, Rarity.RARE, mage.cards.f.FatalPush.class));
@@ -57,6 +59,7 @@ public class SecretLairPromo extends ExpansionSet {
         cards.add(new SetCardInfo("Seasoned Pyromancer", 24, Rarity.MYTHIC, mage.cards.s.SeasonedPyromancer.class));
         cards.add(new SetCardInfo("Shoot the Sheriff", 43, Rarity.RARE, mage.cards.s.ShootTheSheriff.class, FULL_ART));
         cards.add(new SetCardInfo("Sleight of Hand", 25, Rarity.RARE, mage.cards.s.SleightOfHand.class, FULL_ART));
+        cards.add(new SetCardInfo("Sowing Mycospawn", 51, Rarity.RARE, mage.cards.s.SowingMycospawn.class));
         cards.add(new SetCardInfo("Spell Pierce", 18, Rarity.RARE, mage.cards.s.SpellPierce.class));
         cards.add(new SetCardInfo("Springleaf Drum", 22, Rarity.RARE, mage.cards.s.SpringleafDrum.class));
         cards.add(new SetCardInfo("Sudden Edict", 39, Rarity.RARE, mage.cards.s.SuddenEdict.class, FULL_ART));
