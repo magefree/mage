@@ -2,7 +2,7 @@ package mage.cards.c;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DontUntapInControllersUntapStepTargetEffect;
+import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.effects.common.PermanentsEnterBattlefieldTappedEffect;
 import mage.abilities.effects.common.RollDieWithResultTableEffect;
 import mage.abilities.effects.common.TapAllEffect;
@@ -77,7 +77,7 @@ class ConeOfColdEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        game.addEffect(new DontUntapInControllersUntapStepTargetEffect(Duration.EndOfTurn)
+        game.addEffect(new DontUntapInControllersNextUntapStepTargetEffect()
                 .setTargetPointer(new FixedTargets(
                         game.getBattlefield().getActivePermanents(
                                 StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURES,
