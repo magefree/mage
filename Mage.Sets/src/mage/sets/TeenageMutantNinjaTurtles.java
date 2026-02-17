@@ -162,6 +162,7 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("Slash, Reptile Rampager", 108, Rarity.RARE, mage.cards.s.SlashReptileRampager.class));
         cards.add(new SetCardInfo("South Wind Avatar", 269, Rarity.RARE, mage.cards.s.SouthWindAvatar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("South Wind Avatar", 78, Rarity.RARE, mage.cards.s.SouthWindAvatar.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Spicy Oatmeal Pizza", 109, Rarity.UNCOMMON, mage.cards.s.SpicyOatmealPizza.class));
         cards.add(new SetCardInfo("Splinter's Technique", 233, Rarity.RARE, mage.cards.s.SplintersTechnique.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Splinter's Technique", 80, Rarity.RARE, mage.cards.s.SplintersTechnique.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Splinter, Radical Rat", 169, Rarity.RARE, mage.cards.s.SplinterRadicalRat.class, NON_FULL_USE_VARIOUS));
