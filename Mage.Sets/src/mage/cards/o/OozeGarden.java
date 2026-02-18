@@ -18,7 +18,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
-import mage.game.permanent.token.custom.CreatureToken;
+import mage.game.permanent.token.OozeToken;
 
 /**
  *
@@ -73,9 +73,7 @@ class OozeGardenCreateTokenEffect extends OneShotEffect {
                 value = ((SacrificeTargetCost)cost).getPermanents().get(0).getPower().getValue();
             }
         }
-        new CreatureToken(
-            value, value, "X/X green Ooze creature token", SubType.OOZE
-        ).putOntoBattlefield(1, game, source, source.getControllerId());
+        new OozeToken(value, value).putOntoBattlefield(1, game, source, source.getControllerId());
         return true;
     }
 }
