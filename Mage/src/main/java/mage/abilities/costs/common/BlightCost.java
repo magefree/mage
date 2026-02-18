@@ -72,7 +72,7 @@ public class BlightCost extends CostImpl {
         player.choose(Outcome.UnboostCreature, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         if (permanent != null) {
-            permanent.addCounters(CounterType.M1M1.createInstance(amount), source, game);
+            permanent.addCounters(CounterType.M1M1.createInstance(amount), player.getId(), source, game);
         }
         return permanent;
     }

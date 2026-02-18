@@ -247,4 +247,27 @@ public class NestOfScarabsTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Insect Token", 0);
         assertPermanentCount(playerB, "Insect Token", 0);
     }
+
+    // https://github.com/magefree/mage/issues/14421
+    @Test
+    public void noTriggerOpponentBlight() {
+        // Whenever {this} or another Elf you control enters, each opponent blights 1.
+        // Tap three untapped Elves you control: Proliferate. Activate only as a sorcery.
+        addCard(Zone.HAND, playerA, "High Perfect Morcant");
+        addCard(Zone.BATTLEFIELD, playerA, nestScarabs);
+        addCard(Zone.BATTLEFIELD, playerB, "Memnite");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest");
+        addCard(Zone.BATTLEFIELD, playerA, "Wastes", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "High Perfect Morcant");
+        setChoice(playerB, "Memnite");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertGraveyardCount(playerB, "Memnite", 1);
+        assertPermanentCount(playerA, "Insect Token", 0);
+    }
 }
