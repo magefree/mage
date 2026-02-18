@@ -22,6 +22,7 @@ public final class TeenageMutantNinjaTurtlesEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Commander's Plate", 135, Rarity.MYTHIC, mage.cards.c.CommandersPlate.class));
         cards.add(new SetCardInfo("Dark Leo & Shredder", 99999, Rarity.MYTHIC, mage.cards.d.DarkLeoAndShredder.class));
         cards.add(new SetCardInfo("Dark Ritual", 131, Rarity.MYTHIC, mage.cards.d.DarkRitual.class));
+        cards.add(new SetCardInfo("Definitely Not a Turtle", 98, Rarity.UNCOMMON, mage.cards.d.DefinitelyNotATurtle.class));
         cards.add(new SetCardInfo("Donatello, Rad Scientist", 109, Rarity.MYTHIC, mage.cards.d.DonatelloRadScientist.class));
         cards.add(new SetCardInfo("Donatello, the Brains", 2, Rarity.MYTHIC, mage.cards.d.DonatelloTheBrains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Donatello, the Brains", 85, Rarity.MYTHIC, mage.cards.d.DonatelloTheBrains.class, NON_FULL_USE_VARIOUS));
