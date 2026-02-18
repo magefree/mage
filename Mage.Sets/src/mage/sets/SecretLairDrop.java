@@ -457,7 +457,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Dance of Many", 442, Rarity.RARE, mage.cards.d.DanceOfMany.class));
         cards.add(new SetCardInfo("Etherium Sculptor", 443, Rarity.RARE, mage.cards.e.EtheriumSculptor.class));
         cards.add(new SetCardInfo("Grim Tutor", 444, Rarity.MYTHIC, mage.cards.g.GrimTutor.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Triumph of the Hordes", 445, Rarity.RARE, mage.cards.t.TriumphOfTheHordes.class));
+        cards.add(new SetCardInfo("Triumph of the Hordes", 445, Rarity.RARE, mage.cards.t.TriumphOfTheHordes.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Smuggler's Copter", 446, Rarity.RARE, mage.cards.s.SmugglersCopter.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Planar Bridge", 447, Rarity.MYTHIC, mage.cards.p.PlanarBridge.class));
         cards.add(new SetCardInfo("Plains", 448, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
@@ -998,7 +998,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 1090, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 1091, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", 1092, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
-        cards.add(new SetCardInfo("Deepglow Skate", 1093, Rarity.RARE, mage.cards.d.DeepglowSkate.class));
+        cards.add(new SetCardInfo("Deepglow Skate", 1093, Rarity.RARE, mage.cards.d.DeepglowSkate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tireless Tracker", 1094, Rarity.RARE, mage.cards.t.TirelessTracker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Contagion Engine", 1095, Rarity.RARE, mage.cards.c.ContagionEngine.class));
         cards.add(new SetCardInfo("Sword of Truth and Justice", 1096, Rarity.MYTHIC, mage.cards.s.SwordOfTruthAndJustice.class, NON_FULL_USE_VARIOUS));
@@ -2285,6 +2285,11 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Sakashima's Student", 2359, Rarity.RARE, mage.cards.s.SakashimasStudent.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Throat Slitter", 2360, Rarity.RARE, mage.cards.t.ThroatSlitter.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Guttersnipe", 2361, Rarity.RARE, mage.cards.g.Guttersnipe.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Deepglow Skate", 2362, Rarity.RARE, mage.cards.d.DeepglowSkate.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Pirated Copy", 2363, Rarity.RARE, mage.cards.p.PiratedCopy.class));
+        cards.add(new SetCardInfo("Kediss, Emberclaw Familiar", 2364, Rarity.RARE, mage.cards.k.KedissEmberclawFamiliar.class));
+        cards.add(new SetCardInfo("Hardened Scales", 2365, Rarity.RARE, mage.cards.h.HardenedScales.class));
+        cards.add(new SetCardInfo("Triumph of the Hordes", 2366, Rarity.RARE, mage.cards.t.TriumphOfTheHordes.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Settle the Wreckage", 2372, Rarity.RARE, mage.cards.s.SettleTheWreckage.class, FULL_ART));
         cards.add(new SetCardInfo("Mental Misstep", 2373, Rarity.RARE, mage.cards.m.MentalMisstep.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Ink-Eyes, Servant of Oni", 2374, Rarity.RARE, mage.cards.i.InkEyesServantOfOni.class, FULL_ART_USE_VARIOUS));
