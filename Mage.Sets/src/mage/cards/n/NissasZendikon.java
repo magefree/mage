@@ -45,7 +45,7 @@ public final class NissasZendikon extends CardImpl {
             ).withAbility(ReachAbility.getInstance()).withAbility(HasteAbility.getInstance()),
             "Enchanted land is a 4/4 Elemental creature with reach and haste. It's still a land",
             Duration.WhileOnBattlefield,
-            BecomesCreatureAttachedEffect.LoseType.COLOR
+            BecomesCreatureAttachedEffect.LoseType.SUBTYPE
         )));
 
         // When enchanted land dies, return that card to its owner's hand.
