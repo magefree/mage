@@ -1602,7 +1602,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Avabruck Caretaker", 1608, Rarity.MYTHIC, mage.cards.a.AvabruckCaretaker.class));
         cards.add(new SetCardInfo("Beastmaster Ascension", 1609, Rarity.RARE, mage.cards.b.BeastmasterAscension.class));
         cards.add(new SetCardInfo("Howl of the Night Pack", 1610, Rarity.RARE, mage.cards.h.HowlOfTheNightPack.class));
-        cards.add(new SetCardInfo("Second Harvest", 1611, Rarity.RARE, mage.cards.s.SecondHarvest.class));
+        cards.add(new SetCardInfo("Second Harvest", 1611, Rarity.RARE, mage.cards.s.SecondHarvest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tovolar, Dire Overlord", 1612, Rarity.RARE, mage.cards.t.TovolarDireOverlord.class));
         cards.add(new SetCardInfo("Brash Taunter", 1614, Rarity.RARE, mage.cards.b.BrashTaunter.class));
         cards.add(new SetCardInfo("Goblin Chieftain", 1615, Rarity.RARE, mage.cards.g.GoblinChieftain.class));
@@ -2277,6 +2277,11 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Serum Visions", 2338, Rarity.RARE, mage.cards.s.SerumVisions.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Umbris, Fear Manifest", 2339, Rarity.MYTHIC, mage.cards.u.UmbrisFearManifest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Spellskite", 2340, Rarity.RARE, mage.cards.s.Spellskite.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Baylen, the Haymaker", 2377, Rarity.RARE, mage.cards.b.BaylenTheHaymaker.class));
+        cards.add(new SetCardInfo("Felidar Retreat", 2378, Rarity.RARE, mage.cards.f.FelidarRetreat.class));
+        cards.add(new SetCardInfo("Master of Ceremonies", 2379, Rarity.RARE, mage.cards.m.MasterOfCeremonies.class));
+        cards.add(new SetCardInfo("Second Harvest", 2380, Rarity.RARE, mage.cards.s.SecondHarvest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sunforger", 2381, Rarity.RARE, mage.cards.s.Sunforger.class));
         cards.add(new SetCardInfo("Lucy MacLean, Positively Armed", 2447, Rarity.MYTHIC, mage.cards.l.LucyMacLeanPositivelyArmed.class));
         cards.add(new SetCardInfo("The Ghoul, Gunslinger", 2448, Rarity.MYTHIC, mage.cards.t.TheGhoulGunslinger.class));
         cards.add(new SetCardInfo("Maximus, Knight Apparent", 2449, Rarity.MYTHIC, mage.cards.m.MaximusKnightApparent.class));
