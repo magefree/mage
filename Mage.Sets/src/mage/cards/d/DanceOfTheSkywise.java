@@ -28,7 +28,7 @@ public final class DanceOfTheSkywise extends CardImpl {
                 4, 4,
                 "blue Dragon Illusion with base power and toughness 4/4 and with flying",
                 SubType.DRAGON, SubType.ILLUSION
-            ).withAbility(FlyingAbility.getInstance()),
+            ).withColor("U").withAbility(FlyingAbility.getInstance()),
             true, false, Duration.EndOfTurn
         ).withDurationRuleAtStart(true);
         effect.setText("Until end of turn, target creature you control becomes a blue Dragon Illusion with base power and toughness 4/4, loses all abilities, and gains flying.");

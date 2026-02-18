@@ -36,7 +36,7 @@ public final class DancingSword extends CardImpl {
                     2, 1,
                     "2/1 Construct artifact creature with flying and ward {1}. If you do, it isn't an Equipment",
                     SubType.CONSTRUCT
-                ).withAbility(FlyingAbility.getInstance()).withAbility(new WardAbility(new GenericManaCost(1), false)),
+                ).withType(CardType.ARTIFACT).withAbility(FlyingAbility.getInstance()).withAbility(new WardAbility(new GenericManaCost(1), false)),
                 CardType.ARTIFACT,
                 Duration.WhileOnBattlefield
             ).andNotEquipment(true),

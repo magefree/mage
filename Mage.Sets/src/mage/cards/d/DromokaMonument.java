@@ -35,7 +35,7 @@ public final class DromokaMonument extends CardImpl {
                     4, 4,
                     "4/4 green and white Dragon artifact creature with flying",
                     SubType.DRAGON
-                ).withColor("GW").withAbility(FlyingAbility.getInstance()),
+                ).withColor("GW").withType(CardType.ARTIFACT).withAbility(FlyingAbility.getInstance()),
                 CardType.ARTIFACT,
                 Duration.EndOfTurn
             ),
