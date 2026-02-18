@@ -2277,10 +2277,14 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Serum Visions", 2338, Rarity.RARE, mage.cards.s.SerumVisions.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Umbris, Fear Manifest", 2339, Rarity.MYTHIC, mage.cards.u.UmbrisFearManifest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Spellskite", 2340, Rarity.RARE, mage.cards.s.Spellskite.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Loxodon Gatekeeper", 2354, Rarity.RARE, mage.cards.l.LoxodonGatekeeper.class));
-        cards.add(new SetCardInfo("Sakashima's Student", 2355, Rarity.RARE, mage.cards.s.SakashimasStudent.class));
-        cards.add(new SetCardInfo("Throat Slitter", 2356, Rarity.RARE, mage.cards.t.ThroatSlitter.class));
-        cards.add(new SetCardInfo("Guttersnipe", 2357, Rarity.RARE, mage.cards.g.Guttersnipe.class));
+        cards.add(new SetCardInfo("Loxodon Gatekeeper", 2354, Rarity.RARE, mage.cards.l.LoxodonGatekeeper.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sakashima's Student", 2355, Rarity.RARE, mage.cards.s.SakashimasStudent.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Throat Slitter", 2356, Rarity.RARE, mage.cards.t.ThroatSlitter.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Guttersnipe", 2357, Rarity.RARE, mage.cards.g.Guttersnipe.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Loxodon Gatekeeper", 2358, Rarity.RARE, mage.cards.l.LoxodonGatekeeper.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sakashima's Student", 2359, Rarity.RARE, mage.cards.s.SakashimasStudent.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Throat Slitter", 2360, Rarity.RARE, mage.cards.t.ThroatSlitter.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Guttersnipe", 2361, Rarity.RARE, mage.cards.g.Guttersnipe.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Baylen, the Haymaker", 2377, Rarity.RARE, mage.cards.b.BaylenTheHaymaker.class));
         cards.add(new SetCardInfo("Felidar Retreat", 2378, Rarity.RARE, mage.cards.f.FelidarRetreat.class));
         cards.add(new SetCardInfo("Master of Ceremonies", 2379, Rarity.RARE, mage.cards.m.MasterOfCeremonies.class));
