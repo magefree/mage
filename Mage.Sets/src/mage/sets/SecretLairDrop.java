@@ -60,7 +60,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Serum Visions", 30, Rarity.RARE, mage.cards.s.SerumVisions.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Serum Visions", 31, Rarity.RARE, mage.cards.s.SerumVisions.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Serum Visions", 32, Rarity.RARE, mage.cards.s.SerumVisions.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Ink-Eyes, Servant of Oni", 33, Rarity.RARE, mage.cards.i.InkEyesServantOfOni.class));
+        cards.add(new SetCardInfo("Ink-Eyes, Servant of Oni", 33, Rarity.RARE, mage.cards.i.InkEyesServantOfOni.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Marrow-Gnawer", 34, Rarity.RARE, mage.cards.m.MarrowGnawer.class));
         cards.add(new SetCardInfo("Pack Rat", 35, Rarity.RARE, mage.cards.p.PackRat.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rat Colony", 36, Rarity.RARE, mage.cards.r.RatColony.class));
@@ -1082,7 +1082,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("It That Betrays", 1176, Rarity.RARE, mage.cards.i.ItThatBetrays.class));
         cards.add(new SetCardInfo("Forced Fruition", 1177, Rarity.RARE, mage.cards.f.ForcedFruition.class));
         cards.add(new SetCardInfo("Future Sight", 1178, Rarity.RARE, mage.cards.f.FutureSight.class));
-        cards.add(new SetCardInfo("Mental Misstep", 1179, Rarity.RARE, mage.cards.m.MentalMisstep.class));
+        cards.add(new SetCardInfo("Mental Misstep", 1179, Rarity.RARE, mage.cards.m.MentalMisstep.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mind's Dilation", 1180, Rarity.MYTHIC, mage.cards.m.MindsDilation.class));
         cards.add(new SetCardInfo("Well of Lost Dreams", 1181, Rarity.RARE, mage.cards.w.WellOfLostDreams.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Felidar Sovereign", 1182, Rarity.RARE, mage.cards.f.FelidarSovereign.class, NON_FULL_USE_VARIOUS));
@@ -1582,7 +1582,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Liliana of the Dark Realms", 1593, Rarity.MYTHIC, mage.cards.l.LilianaOfTheDarkRealms.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chandra's Ignition", 1594, Rarity.RARE, mage.cards.c.ChandrasIgnition.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chandra's Ignition", "1594*", Rarity.RARE, mage.cards.c.ChandrasIgnition.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Chord of Calling", 1595, Rarity.RARE, mage.cards.c.ChordOfCalling.class));
+        cards.add(new SetCardInfo("Chord of Calling", 1595, Rarity.RARE, mage.cards.c.ChordOfCalling.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Harmonize", 1596, Rarity.RARE, mage.cards.h.Harmonize.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Harmonize", "1596*", Rarity.RARE, mage.cards.h.Harmonize.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Azusa, Lost but Seeking", 1597, Rarity.RARE, mage.cards.a.AzusaLostButSeeking.class, NON_FULL_USE_VARIOUS));
@@ -2285,6 +2285,11 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Sakashima's Student", 2359, Rarity.RARE, mage.cards.s.SakashimasStudent.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Throat Slitter", 2360, Rarity.RARE, mage.cards.t.ThroatSlitter.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Guttersnipe", 2361, Rarity.RARE, mage.cards.g.Guttersnipe.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Settle the Wreckage", 2372, Rarity.RARE, mage.cards.s.SettleTheWreckage.class, FULL_ART));
+        cards.add(new SetCardInfo("Mental Misstep", 2373, Rarity.RARE, mage.cards.m.MentalMisstep.class, FULL_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ink-Eyes, Servant of Oni", 2374, Rarity.RARE, mage.cards.i.InkEyesServantOfOni.class, FULL_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Anger", 2375, Rarity.RARE, mage.cards.a.Anger.class, FULL_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Chord of Calling", 2376, Rarity.RARE, mage.cards.c.ChordOfCalling.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Baylen, the Haymaker", 2377, Rarity.RARE, mage.cards.b.BaylenTheHaymaker.class));
         cards.add(new SetCardInfo("Felidar Retreat", 2378, Rarity.RARE, mage.cards.f.FelidarRetreat.class));
         cards.add(new SetCardInfo("Master of Ceremonies", 2379, Rarity.RARE, mage.cards.m.MasterOfCeremonies.class));
