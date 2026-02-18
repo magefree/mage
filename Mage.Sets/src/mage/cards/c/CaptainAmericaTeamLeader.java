@@ -11,6 +11,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.constants.SubType;
 import mage.constants.SuperType;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -18,6 +19,7 @@ import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
 
 /**
  *
