@@ -723,7 +723,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Maro", 719, Rarity.RARE, mage.cards.m.Maro.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thought-Knot Seer", 720, Rarity.RARE, mage.cards.t.ThoughtKnotSeer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Diabolic Tutor", 721, Rarity.RARE, mage.cards.d.DiabolicTutor.class, RETRO_ART_USE_VARIOUS));
-        cards.add(new SetCardInfo("Delver of Secrets", 722, Rarity.RARE, mage.cards.d.DelverOfSecrets.class));
+        cards.add(new SetCardInfo("Delver of Secrets", 722, Rarity.RARE, mage.cards.d.DelverOfSecrets.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Brainstorm", 723, Rarity.RARE, mage.cards.b.Brainstorm.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lightning Strike", 724, Rarity.RARE, mage.cards.l.LightningStrike.class));
         cards.add(new SetCardInfo("Fleshbag Marauder", 725, Rarity.RARE, mage.cards.f.FleshbagMarauder.class, NON_FULL_USE_VARIOUS));
@@ -1167,7 +1167,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Olivia Voldaren", 1264, Rarity.MYTHIC, mage.cards.o.OliviaVoldaren.class));
         cards.add(new SetCardInfo("Walking Ballista", 1265, Rarity.RARE, mage.cards.w.WalkingBallista.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The World Tree", 1266, Rarity.RARE, mage.cards.t.TheWorldTree.class));
-        cards.add(new SetCardInfo("Higure, the Still Wind", 1267, Rarity.RARE, mage.cards.h.HigureTheStillWind.class));
+        cards.add(new SetCardInfo("Higure, the Still Wind", 1267, Rarity.RARE, mage.cards.h.HigureTheStillWind.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nezahal, Primal Tide", 1268, Rarity.RARE, mage.cards.n.NezahalPrimalTide.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dragonlord Kolaghan", 1269, Rarity.MYTHIC, mage.cards.d.DragonlordKolaghan.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mina and Denn, Wildborn", 1270, Rarity.RARE, mage.cards.m.MinaAndDennWildborn.class));
@@ -2290,6 +2290,11 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Kediss, Emberclaw Familiar", 2364, Rarity.RARE, mage.cards.k.KedissEmberclawFamiliar.class));
         cards.add(new SetCardInfo("Hardened Scales", 2365, Rarity.RARE, mage.cards.h.HardenedScales.class));
         cards.add(new SetCardInfo("Triumph of the Hordes", 2366, Rarity.RARE, mage.cards.t.TriumphOfTheHordes.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Delver of Secrets", 2367, Rarity.RARE, mage.cards.d.DelverOfSecrets.class, FULL_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Higure, the Still Wind", 2368, Rarity.RARE, mage.cards.h.HigureTheStillWind.class, FULL_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Species Specialist", 2369, Rarity.RARE, mage.cards.s.SpeciesSpecialist.class, FULL_ART));
+        cards.add(new SetCardInfo("Rampaging Baloths", 2370, Rarity.RARE, mage.cards.r.RampagingBaloths.class, FULL_ART));
+        cards.add(new SetCardInfo("Triskelion", 2371, Rarity.RARE, mage.cards.t.Triskelion.class, FULL_ART));
         cards.add(new SetCardInfo("Settle the Wreckage", 2372, Rarity.RARE, mage.cards.s.SettleTheWreckage.class, FULL_ART));
         cards.add(new SetCardInfo("Mental Misstep", 2373, Rarity.RARE, mage.cards.m.MentalMisstep.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Ink-Eyes, Servant of Oni", 2374, Rarity.RARE, mage.cards.i.InkEyesServantOfOni.class, FULL_ART_USE_VARIOUS));
