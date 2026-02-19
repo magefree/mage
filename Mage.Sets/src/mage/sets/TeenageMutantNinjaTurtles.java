@@ -138,6 +138,7 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 308, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 313, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 318, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mouser Foundry", 96, Rarity.COMMON, mage.cards.m.MouserFoundry.class));
         cards.add(new SetCardInfo("Mutagen Man, Living Ooze", 124, Rarity.RARE, mage.cards.m.MutagenManLivingOoze.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mutagen Man, Living Ooze", 273, Rarity.RARE, mage.cards.m.MutagenManLivingOoze.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mutant Chain Reaction", 125, Rarity.COMMON, mage.cards.m.MutantChainReaction.class));
