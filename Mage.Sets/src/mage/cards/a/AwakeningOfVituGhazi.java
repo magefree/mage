@@ -1,6 +1,5 @@
 package mage.cards.a;
 
-import mage.MageInt;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.HasteAbility;
@@ -12,7 +11,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -28,7 +27,11 @@ public final class AwakeningOfVituGhazi extends CardImpl {
         // Put nine +1/+1 counters on target land you control. It becomes a legendary 0/0 Elemental creature with haste named Vitu-Ghazi. It's still a land.
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance(9)));
         this.getSpellAbility().addEffect(new BecomesCreatureTargetEffect(
-                new AwakeningOfVituGhaziToken(), false, true, Duration.Custom, true
+            new CreatureToken(0, 0, "legendary 0/0 Elemental creature with haste named Vitu-Ghazi", SubType.ELEMENTAL)
+                .withAbility(HasteAbility.getInstance())
+                .withSuperType(SuperType.LEGENDARY)
+                .withName("Vitu-Ghazi"),
+            false, true, Duration.Custom, true
         ).setText("It becomes a legendary 0/0 Elemental creature with haste named Vitu-Ghazi. It's still a land."));
         this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND));
     }
@@ -40,27 +43,5 @@ public final class AwakeningOfVituGhazi extends CardImpl {
     @Override
     public AwakeningOfVituGhazi copy() {
         return new AwakeningOfVituGhazi(this);
-    }
-}
-
-class AwakeningOfVituGhaziToken extends TokenImpl {
-
-    AwakeningOfVituGhaziToken() {
-        super("Vitu-Ghazi", "legendary 0/0 Elemental creature with haste named Vitu-Ghazi");
-        this.supertype.add(SuperType.LEGENDARY);
-        this.cardType.add(CardType.CREATURE);
-        this.subtype.add(SubType.ELEMENTAL);
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(0);
-
-        this.addAbility(HasteAbility.getInstance());
-    }
-
-    private AwakeningOfVituGhaziToken(final AwakeningOfVituGhaziToken token) {
-        super(token);
-    }
-
-    public AwakeningOfVituGhaziToken copy() {
-        return new AwakeningOfVituGhaziToken(this);
     }
 }

@@ -22,7 +22,7 @@ import mage.filter.FilterSpell;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.targetpointer.FixedTarget;
@@ -49,7 +49,7 @@ public final class NoyanDarRoilShaper extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // Whenever you cast an instant or sorcery spell, you may put three +1/+1 counters on target land you control. 
+        // Whenever you cast an instant or sorcery spell, you may put three +1/+1 counters on target land you control.
         // If you do, that land becomes a 0/0 Elemental creature with haste that's still a land.
         Ability ability = new SpellCastControllerTriggeredAbility(new NoyanDarEffect(), filter, true);
         ability.addTarget(new TargetControlledPermanent(new FilterControlledLandPermanent()));
@@ -90,7 +90,11 @@ class NoyanDarEffect extends OneShotEffect {
         }
         if (targetId != null) {
             FixedTarget blueprintTarget = new FixedTarget(targetId, game);
-            ContinuousEffect continuousEffect = new BecomesCreatureTargetEffect(new AwakenElementalToken(), false, true, Duration.EndOfGame);
+            ContinuousEffect continuousEffect = new BecomesCreatureTargetEffect(
+                new CreatureToken(0, 0, "0/0 Elemental creature with haste", SubType.ELEMENTAL)
+                    .withAbility(HasteAbility.getInstance()),
+                false, true, Duration.EndOfGame
+            );
             continuousEffect.setTargetPointer(blueprintTarget.copy());
             game.addEffect(continuousEffect, source);
             Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(3));
@@ -98,27 +102,5 @@ class NoyanDarEffect extends OneShotEffect {
             return effect.apply(game, source);
         }
         return true;
-    }
-}
-
-class AwakenElementalToken extends TokenImpl {
-
-    public AwakenElementalToken() {
-        super("", "0/0 Elemental creature with haste");
-        this.cardType.add(CardType.CREATURE);
-
-        this.subtype.add(SubType.ELEMENTAL);
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(0);
-
-        this.addAbility(HasteAbility.getInstance());
-    }
-
-    private AwakenElementalToken(final AwakenElementalToken token) {
-        super(token);
-    }
-
-    public AwakenElementalToken copy() {
-        return new AwakenElementalToken(this);
     }
 }
