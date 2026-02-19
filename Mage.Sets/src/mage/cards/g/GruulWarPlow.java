@@ -1,8 +1,7 @@
- 
+
 package mage.cards.g;
 
  import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -14,9 +13,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 
 /**
  * @author Loki
@@ -30,7 +28,15 @@ public final class GruulWarPlow extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES)));
 
         // {1}{R}{G}: Gruul War Plow becomes a 4/4 Juggernaut artifact creature until end of turn.
-        this.addAbility(new SimpleActivatedAbility(new BecomesCreatureSourceEffect(new GruulWarPlowToken(), CardType.ARTIFACT, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{R}{G}")));
+        this.addAbility(new SimpleActivatedAbility(
+            new BecomesCreatureSourceEffect(
+                new CreatureToken(4, 4, "4/4 Juggernaut artifact creature", SubType.JUGGERNAUT)
+                    .withType(CardType.ARTIFACT),
+                CardType.ARTIFACT,
+                Duration.EndOfTurn
+            ),
+            new ManaCostsImpl<>("{1}{R}{G}")
+        ));
     }
 
     private GruulWarPlow(final GruulWarPlow card) {
@@ -40,24 +46,5 @@ public final class GruulWarPlow extends CardImpl {
     @Override
     public GruulWarPlow copy() {
         return new GruulWarPlow(this);
-    }
-}
-
-class GruulWarPlowToken extends TokenImpl {
-
-    GruulWarPlowToken() {
-        super("Juggernaut", "4/4 Juggernaut artifact creature");
-        cardType.add(CardType.ARTIFACT);
-        cardType.add(CardType.CREATURE);
-        subtype.add(SubType.JUGGERNAUT);
-        power = new MageInt(4);
-        toughness = new MageInt(4);
-    }
-    private GruulWarPlowToken(final GruulWarPlowToken token) {
-        super(token);
-    }
-
-    public GruulWarPlowToken copy() {
-        return new GruulWarPlowToken(this);
     }
 }
