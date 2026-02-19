@@ -63,6 +63,7 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("Donatello, Mutant Mechanic", 216, Rarity.MYTHIC, mage.cards.d.DonatelloMutantMechanic.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Donatello, Mutant Mechanic", 302, Rarity.MYTHIC, mage.cards.d.DonatelloMutantMechanic.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Donatello, Mutant Mechanic", 36, Rarity.MYTHIC, mage.cards.d.DonatelloMutantMechanic.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("EPF Point Squad", 145, Rarity.COMMON, mage.cards.e.EPFPointSquad.class));
         cards.add(new SetCardInfo("Escape Tunnel", 184, Rarity.COMMON, mage.cards.e.EscapeTunnel.class));
         cards.add(new SetCardInfo("Everything Pizza", 173, Rarity.UNCOMMON, mage.cards.e.EverythingPizza.class));
         cards.add(new SetCardInfo("Foot Elite", 146, Rarity.COMMON, mage.cards.f.FootElite.class));
