@@ -1,6 +1,5 @@
 package mage.cards.r;
 
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
@@ -12,7 +11,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -38,10 +37,10 @@ public final class Reprobation extends CardImpl {
         // Enchanted creature loses all abilities and is a Coward creature with base power and toughness 0/1.
         // (It keeps all supertypes but loses all other types and creature types.)
         this.addAbility(new SimpleStaticAbility(new BecomesCreatureAttachedEffect(
-                new ReprobationToken(), "Enchanted creature loses all abilities " +
-                "and is a Coward creature with base power and toughness 0/1. " +
-                "<i>(It keeps all supertypes but loses all other types and creature types.)</i>",
-                Duration.WhileOnBattlefield, BecomesCreatureAttachedEffect.LoseType.ABILITIES_SUBTYPE
+            new CreatureToken(0, 1, "loses all abilities and is a Coward creature with base power and toughness 0/1", SubType.COWARD),
+            "Enchanted creature loses all abilities and is a Coward creature with base power and toughness 0/1. " +
+            "<i>(It keeps all supertypes but loses all other types and creature types.)</i>",
+            Duration.WhileOnBattlefield, BecomesCreatureAttachedEffect.LoseType.ABILITIES_SUBTYPE
         )));
     }
 
@@ -53,24 +52,4 @@ public final class Reprobation extends CardImpl {
     public Reprobation copy() {
         return new Reprobation(this);
     }
-}
-
-class ReprobationToken extends TokenImpl {
-
-    ReprobationToken() {
-        super("", "loses all abilities and is a Coward creature with base power and toughness 0/1");
-        cardType.add(CardType.CREATURE);
-        subtype.add(SubType.COWARD);
-        power = new MageInt(0);
-        toughness = new MageInt(1);
-    }
-
-    private ReprobationToken(final ReprobationToken token) {
-        super(token);
-    }
-
-    public ReprobationToken copy() {
-        return new ReprobationToken(this);
-    }
-
 }
