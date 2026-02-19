@@ -157,6 +157,7 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 315, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Prehistoric Pet", 22, Rarity.RARE, mage.cards.p.PrehistoricPet.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Prehistoric Pet", 259, Rarity.RARE, mage.cards.p.PrehistoricPet.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Primordial Pachyderm", 129, Rarity.COMMON, mage.cards.p.PrimordialPachyderm.class));
         cards.add(new SetCardInfo("Raph & Leo, Sibling Rivals", 166, Rarity.RARE, mage.cards.r.RaphAndLeoSiblingRivals.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Raph & Leo, Sibling Rivals", 249, Rarity.RARE, mage.cards.r.RaphAndLeoSiblingRivals.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Raph & Mikey, Troublemakers", 167, Rarity.RARE, mage.cards.r.RaphAndMikeyTroublemakers.class, NON_FULL_USE_VARIOUS));
