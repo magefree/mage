@@ -141,6 +141,7 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("Mutagen Man, Living Ooze", 124, Rarity.RARE, mage.cards.m.MutagenManLivingOoze.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mutagen Man, Living Ooze", 273, Rarity.RARE, mage.cards.m.MutagenManLivingOoze.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mutant Chain Reaction", 125, Rarity.COMMON, mage.cards.m.MutantChainReaction.class));
+        cards.add(new SetCardInfo("Mutant Town Musicians", 97, Rarity.COMMON, mage.cards.m.MutantTownMusicians.class));
         cards.add(new SetCardInfo("Negate", 47, Rarity.COMMON, mage.cards.n.Negate.class));
         cards.add(new SetCardInfo("Ninja Teen", 67, Rarity.RARE, mage.cards.n.NinjaTeen.class));
         cards.add(new SetCardInfo("North Wind Avatar", 162, Rarity.MYTHIC, mage.cards.n.NorthWindAvatar.class, NON_FULL_USE_VARIOUS));
