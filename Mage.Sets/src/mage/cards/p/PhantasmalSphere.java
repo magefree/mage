@@ -19,7 +19,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.game.Game;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
@@ -42,8 +42,8 @@ public final class PhantasmalSphere extends CardImpl {
 
         // At the beginning of your upkeep, put a +1/+1 counter on Phantasmal Sphere, then sacrifice Phantasmal Sphere unless you pay {1} for each +1/+1 counter on it.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
-        Effect effect = new SacrificeSourceUnlessPaysEffect(new CountersSourceCount(CounterType.P1P1));
-        effect.setText("then sacrifice {this} unless you pay {1} for each +1/+1 counter on it.");
+        Effect effect = new SacrificeSourceUnlessPaysEffect(new CountersSourceCount(CounterType.P1P1))
+            .setText("then sacrifice {this} unless you pay {1} for each +1/+1 counter on it.");
         ability.addEffect(effect);
         this.addAbility(ability);
 
@@ -51,7 +51,6 @@ public final class PhantasmalSphere extends CardImpl {
         Ability ability2 = new LeavesBattlefieldTriggeredAbility(new PhantasmalSphereEffect(), false);
         ability2.addTarget(new TargetOpponent());
         this.addAbility(ability2);
-
     }
 
     private PhantasmalSphere(final PhantasmalSphere card) {
@@ -69,8 +68,7 @@ class PhantasmalSphereEffect extends OneShotEffect {
     PhantasmalSphereEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "target opponent creates an X/X blue Orb creature token "
-                + "with flying, where X is the number "
-                + "of +1/+1 counters on {this}";
+            + "with flying, where X is the number of +1/+1 counters on {this}";
     }
 
     private PhantasmalSphereEffect(final PhantasmalSphereEffect effect) {
@@ -86,35 +84,16 @@ class PhantasmalSphereEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player targetOpponent = game.getPlayer(source.getFirstTarget());
-        if (controller != null
-                && targetOpponent != null) {
-            Effect effect = new CreateTokenTargetEffect(new PhantasmalSphereToken(
-                    new CountersSourceCount(CounterType.P1P1).calculate(
-                            game, source, null)));
+        if (controller != null && targetOpponent != null) {
+            int xValue = new CountersSourceCount(CounterType.P1P1).calculate(game, source, null);
+            Effect effect = new CreateTokenTargetEffect(
+                new CreatureToken(
+                    xValue, xValue, "X/X blue Orb creature token with flying", SubType.ORB
+                ).withColor("U").withAbility(FlyingAbility.getInstance())
+            );
             effect.setTargetPointer(new FixedTarget(targetOpponent.getId()));
             effect.apply(game, source);
         }
         return false;
-    }
-}
-
-class PhantasmalSphereToken extends TokenImpl {
-
-    public PhantasmalSphereToken(int xValue) {
-        super("Orb Token", "X/X blue Orb creature token with flying");
-        cardType.add(CardType.CREATURE);
-        color.setBlue(true);
-        subtype.add(SubType.ORB);
-        power = new MageInt(xValue);
-        toughness = new MageInt(xValue);
-        addAbility(FlyingAbility.getInstance());
-    }
-
-    private PhantasmalSphereToken(final PhantasmalSphereToken token) {
-        super(token);
-    }
-
-    public PhantasmalSphereToken copy() {
-        return new PhantasmalSphereToken(this);
     }
 }
