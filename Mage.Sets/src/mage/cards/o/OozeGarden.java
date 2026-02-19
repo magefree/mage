@@ -3,8 +3,6 @@ package mage.cards.o;
 
 import java.util.UUID;
 
-import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.Cost;
@@ -20,9 +18,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
-import mage.game.permanent.token.TokenImpl;
-import mage.game.permanent.token.Token;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.game.permanent.token.OozeToken;
 
 /**
  *
@@ -36,7 +32,6 @@ public final class OozeGarden extends CardImpl {
     }
     public OozeGarden(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");
-
 
         // {1}{G}, Sacrifice a non-Ooze creature: Create an X/X green Ooze creature token, where X is the sacrificed creature's power. Activate this ability only any time you could cast a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new OozeGardenCreateTokenEffect(), new ManaCostsImpl<>("{1}{G}"));
@@ -74,37 +69,11 @@ class OozeGardenCreateTokenEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int value = 0;
         for(Cost cost : source.getCosts()){
-            if(cost instanceof SacrificeTargetCost){
+            if (cost instanceof SacrificeTargetCost){
                 value = ((SacrificeTargetCost)cost).getPermanents().get(0).getPower().getValue();
             }
         }
-        Token token = new OozeToken(value);
-        token.getAbilities().newId(); // neccessary if token has ability like DevourAbility()
-        token.putOntoBattlefield(1, game, source, source.getControllerId());
+        new OozeToken(value, value).putOntoBattlefield(1, game, source, source.getControllerId());
         return true;
-    }
-}
-
-class OozeToken extends TokenImpl {
-
-    public OozeToken() {
-        this(1);
-    }
-
-    public OozeToken(int x) {
-        super("Ooze Token", "X/X green Ooze creature token, where X is the sacrificed creature's power");
-        this.cardType.add(CardType.CREATURE);
-        this.color.addColor(ObjectColor.GREEN);
-        this.subtype.add(SubType.OOZE);
-        this.toughness = new MageInt(x);
-        this.power = new MageInt(x);
-    }
-
-    private OozeToken(final OozeToken token) {
-        super(token);
-    }
-
-    public OozeToken copy() {
-        return new OozeToken(this);
     }
 }
