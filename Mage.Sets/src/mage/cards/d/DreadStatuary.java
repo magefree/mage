@@ -3,7 +3,6 @@
 package mage.cards.d;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
@@ -13,8 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.Zone;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 
 /**
  *
@@ -25,7 +23,14 @@ public final class DreadStatuary extends CardImpl {
     public DreadStatuary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
         this.addAbility(new ColorlessManaAbility());
-        this.addAbility(new SimpleActivatedAbility(new BecomesCreatureSourceEffect(new DreadStatuaryToken(), CardType.LAND, Duration.EndOfTurn), new ManaCostsImpl<>("{4}")));
+        this.addAbility(new SimpleActivatedAbility(
+            new BecomesCreatureSourceEffect(
+                new CreatureToken(4, 2, "4/2 Golem artifact creature", SubType.GOLEM)
+                    .withType(CardType.ARTIFACT),
+                CardType.LAND,
+                Duration.EndOfTurn),
+            new ManaCostsImpl<>("{4}")
+        ));
     }
 
     private DreadStatuary(final DreadStatuary card) {
@@ -37,23 +42,4 @@ public final class DreadStatuary extends CardImpl {
         return new DreadStatuary(this);
     }
 
-}
-
-class DreadStatuaryToken extends TokenImpl {
-
-    public DreadStatuaryToken() {
-        super("", "4/2 Golem artifact creature");
-        cardType.add(CardType.ARTIFACT);
-        cardType.add(CardType.CREATURE);
-        subtype.add(SubType.GOLEM);
-        power = new MageInt(4);
-        toughness = new MageInt(2);
-    }
-    private DreadStatuaryToken(final DreadStatuaryToken token) {
-        super(token);
-    }
-
-    public DreadStatuaryToken copy() {
-        return new DreadStatuaryToken(this);
-    }
 }
