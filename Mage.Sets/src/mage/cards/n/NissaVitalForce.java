@@ -1,6 +1,5 @@
 package mage.cards.n;
 
-import mage.MageInt;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
@@ -17,7 +16,7 @@ import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterPermanentCard;
 import mage.game.command.emblems.NissaVitalForceEmblem;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -40,7 +39,10 @@ public final class NissaVitalForce extends CardImpl {
         // +1: Untap target land you control. Until your next turn, it becomes a 5/5 Elemental creature with haste. It's still a land.
         LoyaltyAbility ability = new LoyaltyAbility(new UntapTargetEffect(), 1);
         ability.addEffect(new BecomesCreatureTargetEffect(
-                new NissaVitalForceToken(), false, true, Duration.UntilYourNextTurn
+            new CreatureToken(
+                5, 5, "5/5 Elemental creature with haste", SubType.ELEMENTAL
+            ).withAbility(HasteAbility.getInstance()),
+            false, true, Duration.UntilYourNextTurn
         ).withDurationRuleAtStart(true).setText("Until your next turn, it becomes a 5/5 Elemental creature with haste. It's still a land"));
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND));
         this.addAbility(ability);
@@ -61,26 +63,5 @@ public final class NissaVitalForce extends CardImpl {
     @Override
     public NissaVitalForce copy() {
         return new NissaVitalForce(this);
-    }
-}
-
-class NissaVitalForceToken extends TokenImpl {
-
-    public NissaVitalForceToken() {
-        super("", "5/5 Elemental creature with haste");
-        this.cardType.add(CardType.CREATURE);
-
-        this.subtype.add(SubType.ELEMENTAL);
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
-        this.addAbility(HasteAbility.getInstance());
-    }
-
-    private NissaVitalForceToken(final NissaVitalForceToken token) {
-        super(token);
-    }
-
-    public NissaVitalForceToken copy() {
-        return new NissaVitalForceToken(this);
     }
 }

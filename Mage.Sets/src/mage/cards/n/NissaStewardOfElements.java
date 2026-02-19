@@ -1,7 +1,6 @@
 
 package mage.cards.n;
 
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
@@ -23,7 +22,7 @@ import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 
@@ -52,7 +51,12 @@ public final class NissaStewardOfElements extends CardImpl {
         Effect effect = new UntapTargetEffect();
         effect.setText("Untap up to two target lands you control");
         LoyaltyAbility ability = new LoyaltyAbility(effect, -6);
-        effect = new BecomesCreatureTargetEffect(new NissaStewardOfElementsToken(), false, true, Duration.EndOfTurn);
+        effect = new BecomesCreatureTargetEffect(
+            new CreatureToken(
+                5, 5, "5/5 Elemental creature with flying and haste", SubType.ELEMENTAL
+            ).withAbility(FlyingAbility.getInstance()).withAbility(HasteAbility.getInstance()),
+            false, true, Duration.EndOfTurn
+        );
         effect.setText("They become 5/5 Elemental creatures with flying and haste until end of turn. They're still lands");
         ability.addEffect(effect);
         ability.addTarget(new TargetPermanent(0, 2, new FilterControlledLandPermanent(), false));
@@ -107,26 +111,5 @@ class NissaStewardOfElementsEffect extends OneShotEffect {
             }
         }
         return true;
-    }
-}
-
-class NissaStewardOfElementsToken extends TokenImpl {
-
-    public NissaStewardOfElementsToken() {
-        super("", "5/5 Elemental creature with flying and haste");
-        this.cardType.add(CardType.CREATURE);
-        this.subtype.add(SubType.ELEMENTAL);
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
-        this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(HasteAbility.getInstance());
-    }
-
-    private NissaStewardOfElementsToken(final NissaStewardOfElementsToken token) {
-        super(token);
-    }
-
-    public NissaStewardOfElementsToken copy() {
-        return new NissaStewardOfElementsToken(this);
     }
 }
