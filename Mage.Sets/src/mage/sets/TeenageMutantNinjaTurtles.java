@@ -66,6 +66,8 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("Escape Tunnel", 184, Rarity.COMMON, mage.cards.e.EscapeTunnel.class));
         cards.add(new SetCardInfo("Everything Pizza", 173, Rarity.UNCOMMON, mage.cards.e.EverythingPizza.class));
         cards.add(new SetCardInfo("Foot Elite", 146, Rarity.COMMON, mage.cards.f.FootElite.class));
+        cards.add(new SetCardInfo("Foot Ninjas", 147, Rarity.COMMON, mage.cards.f.FootNinjas.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Foot Ninjas", 209, Rarity.COMMON, mage.cards.f.FootNinjas.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 195, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 257, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", 309, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
