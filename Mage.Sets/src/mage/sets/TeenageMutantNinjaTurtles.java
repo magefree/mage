@@ -93,6 +93,8 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 316, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jennika's Technique", 236, Rarity.UNCOMMON, mage.cards.j.JennikasTechnique.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jennika's Technique", 93, Rarity.UNCOMMON, mage.cards.j.JennikasTechnique.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Jennika, Bad Apple Big Sister", 10, Rarity.COMMON, mage.cards.j.JennikaBadAppleBigSister.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Jennika, Bad Apple Big Sister", 203, Rarity.COMMON, mage.cards.j.JennikaBadAppleBigSister.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kitsune's Technique", 229, Rarity.RARE, mage.cards.k.KitsunesTechnique.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kitsune's Technique", 42, Rarity.RARE, mage.cards.k.KitsunesTechnique.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kitsune, Dragon's Daughter", 262, Rarity.RARE, mage.cards.k.KitsuneDragonsDaughter.class, NON_FULL_USE_VARIOUS));
