@@ -131,6 +131,7 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("Leonardo, Sewer Samurai", 301, Rarity.MYTHIC, mage.cards.l.LeonardoSewerSamurai.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lessons from Life", 155, Rarity.UNCOMMON, mage.cards.l.LessonsFromLife.class));
         cards.add(new SetCardInfo("Lita, Little Orphan Amphibian", 19, Rarity.UNCOMMON, mage.cards.l.LitaLittleOrphanAmphibian.class));
+        cards.add(new SetCardInfo("Lord Dregg, Insect Invader", 65, Rarity.UNCOMMON, mage.cards.l.LordDreggInsectInvader.class));
         cards.add(new SetCardInfo("Madame Null, Power Broker", 265, Rarity.RARE, mage.cards.m.MadameNullPowerBroker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Madame Null, Power Broker", 66, Rarity.RARE, mage.cards.m.MadameNullPowerBroker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Make Your Move", 20, Rarity.COMMON, mage.cards.m.MakeYourMove.class));
