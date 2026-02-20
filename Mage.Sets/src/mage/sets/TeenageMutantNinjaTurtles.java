@@ -113,6 +113,7 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("Leatherhead, Swamp Stalker", 272, Rarity.RARE, mage.cards.l.LeatherheadSwampStalker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Leonardo's Technique", 18, Rarity.RARE, mage.cards.l.LeonardosTechnique.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Leonardo's Technique", 224, Rarity.RARE, mage.cards.l.LeonardosTechnique.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Leonardo, Big Brother", 14, Rarity.COMMON, mage.cards.l.LeonardoBigBrother.class));
         cards.add(new SetCardInfo("Leonardo, Cutting Edge", 15, Rarity.RARE, mage.cards.l.LeonardoCuttingEdge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Leonardo, Cutting Edge", 211, Rarity.RARE, mage.cards.l.LeonardoCuttingEdge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Leonardo, Cutting Edge", 281, Rarity.MYTHIC, mage.cards.l.LeonardoCuttingEdge.class, NON_FULL_USE_VARIOUS));
