@@ -34,6 +34,7 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("Bebop & Rocksteady", 241, Rarity.RARE, mage.cards.b.BebopAndRocksteady.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Broadcast Takeover", 234, Rarity.MYTHIC, mage.cards.b.BroadcastTakeover.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Broadcast Takeover", 86, Rarity.MYTHIC, mage.cards.b.BroadcastTakeover.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Buzz Bots", 32, Rarity.COMMON, mage.cards.b.BuzzBots.class));
         cards.add(new SetCardInfo("Casey Jones, Jury-Rig Justiciar", 207, Rarity.UNCOMMON, mage.cards.c.CaseyJonesJuryRigJusticiar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Casey Jones, Jury-Rig Justiciar", 87, Rarity.UNCOMMON, mage.cards.c.CaseyJonesJuryRigJusticiar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Casey Jones, Vigilante", 235, Rarity.RARE, mage.cards.c.CaseyJonesVigilante.class, NON_FULL_USE_VARIOUS));
