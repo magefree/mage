@@ -229,6 +229,7 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("Turtles in Time", 284, Rarity.MYTHIC, mage.cards.t.TurtlesInTime.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Turtles in Time", 294, Rarity.MYTHIC, mage.cards.t.TurtlesInTime.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Turtles in Time", 55, Rarity.MYTHIC, mage.cards.t.TurtlesInTime.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Utrom Scientists", 56, Rarity.COMMON, mage.cards.u.UtromScientists.class));
         cards.add(new SetCardInfo("Weather Maker", 182, Rarity.RARE, mage.cards.w.WeatherMaker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Weather Maker", 279, Rarity.RARE, mage.cards.w.WeatherMaker.class, NON_FULL_USE_VARIOUS));
     }
