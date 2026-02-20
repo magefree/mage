@@ -48,6 +48,7 @@ public final class TeenageMutantNinjaTurtlesEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Foe-liage", 122, Rarity.COMMON, mage.cards.f.FoeLiage.class));
         cards.add(new SetCardInfo("Food Chain", 133, Rarity.MYTHIC, mage.cards.f.FoodChain.class));
         cards.add(new SetCardInfo("Grand Coliseum", 68, Rarity.RARE, mage.cards.g.GrandColiseum.class));
+        cards.add(new SetCardInfo("Hamato Ninpo", 100, Rarity.COMMON, mage.cards.h.HamatoNinpo.class));
         cards.add(new SetCardInfo("Harmonize", 51, Rarity.UNCOMMON, mage.cards.h.Harmonize.class));
         cards.add(new SetCardInfo("Heroes in a Half Shell", 6, Rarity.MYTHIC, mage.cards.h.HeroesInAHalfShell.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Heroes in a Half Shell", 96, Rarity.MYTHIC, mage.cards.h.HeroesInAHalfShell.class, NON_FULL_USE_VARIOUS));
