@@ -1,48 +1,48 @@
-package mage.cards.s;
+package mage.cards.m;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.RestrictionEffect;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-
-import java.util.UUID;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
 
 /**
- * @author Plopman
+ *
+ * @author muz
  */
-public final class SteelcladSerpent extends CardImpl {
+public final class MouserMarkIII extends CardImpl {
 
-    public SteelcladSerpent(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}{U}");
-        this.subtype.add(SubType.SERPENT);
+    public MouserMarkIII(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}{U/R}");
 
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(5);
+        this.subtype.add(SubType.ROBOT);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(3);
 
-        // Steelclad Serpent can't attack unless you control another artifact.
-        this.addAbility(new SimpleStaticAbility(new SteelcladSerpentEffect()));
+        // This creature can't attack unless you control another artifact.
+        this.addAbility(new SimpleStaticAbility(new MouserMarkIIIEffect()));
     }
 
-    private SteelcladSerpent(final SteelcladSerpent card) {
+    private MouserMarkIII(final MouserMarkIII card) {
         super(card);
     }
 
     @Override
-    public SteelcladSerpent copy() {
-        return new SteelcladSerpent(this);
+    public MouserMarkIII copy() {
+        return new MouserMarkIII(this);
     }
 }
 
-class SteelcladSerpentEffect extends RestrictionEffect {
+class MouserMarkIIIEffect extends RestrictionEffect {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("another artifact");
 
@@ -51,18 +51,18 @@ class SteelcladSerpentEffect extends RestrictionEffect {
         filter.add(AnotherPredicate.instance);
     }
 
-    public SteelcladSerpentEffect() {
+    public MouserMarkIIIEffect() {
         super(Duration.WhileOnBattlefield);
-        staticText = "{this} can't attack unless you control another artifact";
+        staticText = "This creature can't attack unless you control another artifact";
     }
 
-    private SteelcladSerpentEffect(final SteelcladSerpentEffect effect) {
+    private MouserMarkIIIEffect(final MouserMarkIIIEffect effect) {
         super(effect);
     }
 
     @Override
-    public SteelcladSerpentEffect copy() {
-        return new SteelcladSerpentEffect(this);
+    public MouserMarkIIIEffect copy() {
+        return new MouserMarkIIIEffect(this);
     }
 
     @Override
