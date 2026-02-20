@@ -207,6 +207,7 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 317, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Technodrome", 179, Rarity.MYTHIC, mage.cards.t.Technodrome.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Technodrome", 222, Rarity.MYTHIC, mage.cards.t.Technodrome.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Tenderize", 133, Rarity.COMMON, mage.cards.t.Tenderize.class));
         cards.add(new SetCardInfo("The Cloning of Shredder", 60, Rarity.MYTHIC, mage.cards.t.TheCloningOfShredder.class));
         cards.add(new SetCardInfo("The Last Ronin", 154, Rarity.MYTHIC, mage.cards.t.TheLastRonin.class));
         cards.add(new SetCardInfo("The Last Ronin's Technique", 12, Rarity.UNCOMMON, mage.cards.t.TheLastRoninsTechnique.class, NON_FULL_USE_VARIOUS));
