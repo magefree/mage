@@ -141,6 +141,7 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("Mikey & Leo, Chaos & Order", 158, Rarity.RARE, mage.cards.m.MikeyAndLeoChaosAndOrder.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mikey & Leo, Chaos & Order", 200, Rarity.RARE, mage.cards.m.MikeyAndLeoChaosAndOrder.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mikey & Leo, Chaos & Order", 247, Rarity.RARE, mage.cards.m.MikeyAndLeoChaosAndOrder.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mind Transfer Protocol", 45, Rarity.COMMON, mage.cards.m.MindTransferProtocol.class));
         cards.add(new SetCardInfo("Mona Lisa, Science Geek", 123, Rarity.UNCOMMON, mage.cards.m.MonaLisaScienceGeek.class));
         cards.add(new SetCardInfo("Mondo Gecko", 231, Rarity.MYTHIC, mage.cards.m.MondoGecko.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mondo Gecko", 46, Rarity.MYTHIC, mage.cards.m.MondoGecko.class, NON_FULL_USE_VARIOUS));
