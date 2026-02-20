@@ -26,6 +26,7 @@ public final class TeenageMutantNinjaTurtlesEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Assassin's Trophy", 55, Rarity.RARE, mage.cards.a.AssassinsTrophy.class));
         cards.add(new SetCardInfo("Biogenic Ooze", 49, Rarity.RARE, mage.cards.b.BiogenicOoze.class));
         cards.add(new SetCardInfo("Blasphemous Act", 47, Rarity.RARE, mage.cards.b.BlasphemousAct.class));
+        cards.add(new SetCardInfo("Casey Jones, Asphalt Hooligan", 115, Rarity.RARE, mage.cards.c.CaseyJonesAsphaltHooligan.class));
         cards.add(new SetCardInfo("Chromatic Lantern", 58, Rarity.RARE, mage.cards.c.ChromaticLantern.class));
         cards.add(new SetCardInfo("Cinder Glade", 61, Rarity.RARE, mage.cards.c.CinderGlade.class));
         cards.add(new SetCardInfo("City of Brass", 62, Rarity.RARE, mage.cards.c.CityOfBrass.class));
