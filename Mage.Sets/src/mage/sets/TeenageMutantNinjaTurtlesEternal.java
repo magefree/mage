@@ -98,5 +98,6 @@ public final class TeenageMutantNinjaTurtlesEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Voracious Hydra", 54, Rarity.RARE, mage.cards.v.VoraciousHydra.class));
         cards.add(new SetCardInfo("Waste Not", 132, Rarity.MYTHIC, mage.cards.w.WasteNot.class));
         cards.add(new SetCardInfo("Wave Goodbye", 46, Rarity.RARE, mage.cards.w.WaveGoodbye.class));
+        cards.add(new SetCardInfo("Wooden Cane", 106, Rarity.UNCOMMON, mage.cards.w.WoodenCane.class));
     }
 }
