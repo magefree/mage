@@ -84,6 +84,7 @@ public final class TeenageMutantNinjaTurtlesEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Thriving Grove", 77, Rarity.COMMON, mage.cards.t.ThrivingGrove.class));
         cards.add(new SetCardInfo("Thriving Isle", 78, Rarity.COMMON, mage.cards.t.ThrivingIsle.class));
         cards.add(new SetCardInfo("Thriving Moor", 79, Rarity.COMMON, mage.cards.t.ThrivingMoor.class));
+        cards.add(new SetCardInfo("Ticked Off", 121, Rarity.COMMON, mage.cards.t.TickedOff.class));
         cards.add(new SetCardInfo("Together Forever", 44, Rarity.RARE, mage.cards.t.TogetherForever.class));
         cards.add(new SetCardInfo("Triceraton Regenta", 105, Rarity.COMMON, mage.cards.t.TriceratonRegenta.class));
         cards.add(new SetCardInfo("Undergrowth Stadium", 80, Rarity.RARE, mage.cards.u.UndergrowthStadium.class));
