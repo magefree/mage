@@ -176,6 +176,7 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("Rat King, Verminister", 71, Rarity.RARE, mage.cards.r.RatKingVerminister.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ravenous Robots", 106, Rarity.RARE, mage.cards.r.RavenousRobots.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ravenous Robots", 271, Rarity.RARE, mage.cards.r.RavenousRobots.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ray Fillet, Man Ray", 49, Rarity.UNCOMMON, mage.cards.r.RayFilletManRay.class));
         cards.add(new SetCardInfo("Renet, Temporal Apprentice", 202, Rarity.RARE, mage.cards.r.RenetTemporalApprentice.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Renet, Temporal Apprentice", 50, Rarity.RARE, mage.cards.r.RenetTemporalApprentice.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sally Pride, Lioness Leader", 225, Rarity.RARE, mage.cards.s.SallyPrideLionessLeader.class, NON_FULL_USE_VARIOUS));
