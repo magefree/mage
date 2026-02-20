@@ -46,6 +46,7 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("Cool but Rude", 89, Rarity.RARE, mage.cards.c.CoolButRude.class));
         cards.add(new SetCardInfo("Courier of Comestibles", 112, Rarity.UNCOMMON, mage.cards.c.CourierOfComestibles.class));
         cards.add(new SetCardInfo("Cowabunga!", 113, Rarity.COMMON, mage.cards.c.Cowabunga.class));
+        cards.add(new SetCardInfo("Crustacean Commando", 33, Rarity.COMMON, mage.cards.c.CrustaceanCommando.class));
         cards.add(new SetCardInfo("Dark Leo & Shredder", 142, Rarity.MYTHIC, mage.cards.d.DarkLeoAndShredder.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dark Leo & Shredder", 220, Rarity.MYTHIC, mage.cards.d.DarkLeoAndShredder.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dark Leo & Shredder", 289, Rarity.MYTHIC, mage.cards.d.DarkLeoAndShredder.class, NON_FULL_USE_VARIOUS));
