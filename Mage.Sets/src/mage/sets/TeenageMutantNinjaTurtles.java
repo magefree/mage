@@ -51,6 +51,7 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("Dark Leo & Shredder", 220, Rarity.MYTHIC, mage.cards.d.DarkLeoAndShredder.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dark Leo & Shredder", 289, Rarity.MYTHIC, mage.cards.d.DarkLeoAndShredder.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dark Leo & Shredder", 299, Rarity.MYTHIC, mage.cards.d.DarkLeoAndShredder.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Dimension X", 183, Rarity.COMMON, mage.cards.d.DimensionX.class));
         cards.add(new SetCardInfo("Dimensional Exile", 4, Rarity.UNCOMMON, mage.cards.d.DimensionalExile.class));
         cards.add(new SetCardInfo("Does Machines", 34, Rarity.RARE, mage.cards.d.DoesMachines.class));
         cards.add(new SetCardInfo("Don & Leo, Problem Solvers", 143, Rarity.RARE, mage.cards.d.DonAndLeoProblemSolvers.class, NON_FULL_USE_VARIOUS));
