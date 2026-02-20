@@ -3,12 +3,15 @@ package mage.player.ai;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
+import mage.abilities.PlayLandAbility;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.PassAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.Effect;
+import mage.cards.Card;
+import mage.cards.ModalDoubleFacedCard;
 import mage.game.Game;
 import mage.game.combat.Combat;
 import mage.game.events.GameEvent;
@@ -106,12 +109,43 @@ public final class SimulatedPlayer2 extends ComputerPlayer {
     }
 
     private void simulateOptions(Game game) {
-        List<ActivatedAbility> playables = game.getPlayer(playerId).getPlayable(game, isSimulatedPlayer);
+        Player player = game.getPlayer(playerId);
+        List<ActivatedAbility> playables = player.getPlayable(game, isSimulatedPlayer);
+
+        // Defensive check: ensure MDFC land plays are included in playable list
+        // The normal getPlayable() should find these, but during simulation copies
+        // they can be lost. This ensures the AI always considers MDFC land backs.
+        if (player.canPlayLand() && game.canPlaySorcery(playerId)) {
+            boolean hasPlayLandInList = playables.stream().anyMatch(a -> a instanceof PlayLandAbility);
+            if (!hasPlayLandInList) {
+                for (Card card : player.getHand().getCards(game)) {
+                    if (card instanceof ModalDoubleFacedCard) {
+                        ModalDoubleFacedCard mdfc = (ModalDoubleFacedCard) card;
+                        Card rightHalf = mdfc.getRightHalfCard();
+                        if (rightHalf != null && rightHalf.isLand(game)) {
+                            // Find the PlayLandAbility on the right half and add it
+                            for (Ability ability : rightHalf.getAbilities(game)) {
+                                if (ability instanceof PlayLandAbility) {
+                                    PlayLandAbility landAbility = (PlayLandAbility) ability;
+                                    if (landAbility.canActivate(playerId, game).canActivate()) {
+                                        playables.add(landAbility);
+                                        logger.debug("MDFC: added land-play ability for " + rightHalf.getName()
+                                                + " (back face of " + mdfc.getName() + ")");
+                                    }
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         for (ActivatedAbility ability : playables) {
             if (ability.isManaAbility()) {
                 continue;
             }
-            List<Ability> options = game.getPlayer(playerId).getPlayableOptions(ability, game);
+            List<Ability> options = player.getPlayableOptions(ability, game);
             options = optimizeOptions(game, options, ability);
             if (options.isEmpty()) {
                 allActions.add(ability);

@@ -44,7 +44,7 @@ public abstract class DoubleFacedCard extends CardImpl implements CardWithHalves
     }
 
     public DoubleFacedCardHalf getRightHalfCard() {
-        return leftHalfCard;
+        return rightHalfCard;
     }
 
     public void setParts(DoubleFacedCardHalf leftHalfCard, DoubleFacedCardHalf rightHalfCard) {

@@ -2,8 +2,10 @@ package mage.player.ai.util;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.InfectAbility;
+import mage.abilities.keyword.TrampleAbility;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.combat.Combat;
@@ -13,7 +15,9 @@ import mage.game.permanent.Permanent;
 import mage.game.turn.CombatDamageStep;
 import mage.game.turn.EndOfCombatStep;
 import mage.game.turn.Step;
+import mage.player.ai.StrategicRoleEvaluator;
 import mage.player.ai.score.GameStateEvaluator2;
+import mage.player.ai.synergy.SynergyDetectionEngine;
 import mage.players.Player;
 import org.apache.log4j.Logger;
 
@@ -103,6 +107,68 @@ public final class CombatUtil {
         return null;
     }
 
+    /**
+     * Get the worst creature considering synergy value.
+     * Synergy enablers are protected and treated as more valuable.
+     *
+     * @param game      the current game
+     * @param playerId  the player who controls the creatures
+     * @param lists     lists of creatures to consider
+     * @return the worst creature (lowest value when considering synergies)
+     */
+    public static Permanent getWorstCreatureWithSynergyAwareness(Game game, UUID playerId, List<Permanent>... lists) {
+        SynergyDetectionEngine synergyEngine = GameStateEvaluator2.getSynergyEngine();
+
+        for (List<Permanent> list : lists) {
+            if (!list.isEmpty()) {
+                // Sort by effective value: power + synergy bonus
+                list.sort(Comparator.comparingInt(p -> {
+                    int power = p.getPower().getValue();
+                    int synergyBonus = 0;
+                    if (synergyEngine != null) {
+                        synergyBonus = synergyEngine.getPermanentSynergyBonus(game, playerId, p);
+                    }
+                    // Higher synergy bonus = higher effective value = less likely to trade
+                    return power + (synergyBonus / 10);  // Scale synergy bonus down to be comparable to power
+                }));
+                return list.get(0);
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Check if a creature is a synergy piece that should be protected.
+     *
+     * @param game      the current game
+     * @param playerId  the player who controls the creature
+     * @param permanent the creature to check
+     * @return true if the creature is a synergy enabler
+     */
+    public static boolean isSynergyEnabler(Game game, UUID playerId, Permanent permanent) {
+        SynergyDetectionEngine synergyEngine = GameStateEvaluator2.getSynergyEngine();
+        if (synergyEngine == null) {
+            return false;
+        }
+        return synergyEngine.isSynergyEnabler(playerId, permanent.getName());
+    }
+
+    /**
+     * Get the synergy bonus for a creature.
+     *
+     * @param game      the current game
+     * @param playerId  the player who controls the creature
+     * @param permanent the creature to evaluate
+     * @return synergy bonus (0 if no synergies)
+     */
+    public static int getSynergyBonus(Game game, UUID playerId, Permanent permanent) {
+        SynergyDetectionEngine synergyEngine = GameStateEvaluator2.getSynergyEngine();
+        if (synergyEngine == null) {
+            return 0;
+        }
+        return synergyEngine.getPermanentSynergyBonus(game, playerId, permanent);
+    }
+
     public static void removeWorstCreature(Permanent permanent, List<Permanent>... lists) {
         for (List<Permanent> list : lists) {
             if (!list.isEmpty()) {
@@ -168,10 +234,21 @@ public final class CombatUtil {
             return new CombatInfo();
         }
 
+        // Determine strategic role for role-aware blocking decisions
+        Player defendingPlayer = game.getPlayer(defenderId);
+        Player attackingPlayer = game.getPlayer(attackerId);
+        int strategicRole = StrategicRoleEvaluator.ROLE_FLEXIBLE;
+        if (defendingPlayer != null && attackingPlayer != null) {
+            strategicRole = StrategicRoleEvaluator.determineRole(defendingPlayer, attackingPlayer, game);
+        }
+
         // TODO: implement full game simulations of all possible combinations (e.g. multiblockers support)
 
         CombatInfo combatInfo = new CombatInfo();
         for (Permanent attacker : attackers) {
+            // Check if attacker has deathtouch - this affects blocking strategy significantly
+            boolean attackerHasDeathtouch = attacker.getAbilities(game).containsKey(DeathtouchAbility.getInstance().getId());
+
             // simple combat simulation (1 vs 1)
             List<Permanent> allBlockers = getPossibleBlockers(game, attacker, blockers);
             List<SurviveInfo> blockerStats = getBlockersThatWillSurvive2(game, attackerId, defenderId, attacker, allBlockers);
@@ -183,42 +260,194 @@ public final class CombatUtil {
             });
 
             // split blockers by usage priority
-            List<Permanent> survivedAndKillBlocker = new ArrayList<>();
-            List<Permanent> survivedBlockers = new ArrayList<>();
-            List<Permanent> diedBlockers = new ArrayList<>();
+            List<Permanent> survivedAndKillBlocker = new ArrayList<>();  // Blocker survives AND kills attacker (best)
+            List<Permanent> survivedBlockers = new ArrayList<>();         // Blocker survives (may not kill attacker)
+            List<Permanent> tradedBlockers = new ArrayList<>();           // Both die (mutual trade, acceptable)
+            List<Permanent> chumpBlockers = new ArrayList<>();            // Only blocker dies (chump block)
             blockerStats.forEach(stats -> {
                 if (stats.isAttackerDied() && !stats.isBlockerDied()) {
                     survivedAndKillBlocker.add(stats.getBlocker());
                 } else if (!stats.isBlockerDied()) {
                     survivedBlockers.add(stats.getBlocker());
+                } else if (stats.isAttackerDied()) {
+                    // Both die - mutual trade
+                    tradedBlockers.add(stats.getBlocker());
                 } else {
-                    diedBlockers.add(stats.getBlocker());
+                    // Only blocker dies - chump block
+                    chumpBlockers.add(stats.getBlocker());
                 }
             });
+            // Combine for backwards compatibility (diedBlockers = tradedBlockers + chumpBlockers)
+            List<Permanent> diedBlockers = new ArrayList<>(tradedBlockers);
+            diedBlockers.addAll(chumpBlockers);
 
             int blockedCount = 0;
 
-            // find good blocker
-            Permanent blocker = getWorstCreature(survivedAndKillBlocker, survivedBlockers);
-            if (blocker != null) {
-                combatInfo.addPair(attacker, blocker);
-                removeWorstCreature(blocker, blockers, survivedAndKillBlocker, survivedBlockers);
-                blockedCount++;
-            }
+            // Special handling for deathtouch attackers:
+            // Against deathtouch, ALL blockers die (regardless of toughness), so survivedAndKillBlocker
+            // and survivedBlockers should be empty. We must use the LOWEST VALUE creature if we block at all.
+            // The trade is only worth it if the blocker's value is less than or similar to the attacker's value,
+            // or if not blocking would lose the game.
+            if (attackerHasDeathtouch && survivedAndKillBlocker.isEmpty() && survivedBlockers.isEmpty()) {
+                // All blockers will die due to deathtouch
+                // Find the blocker with the lowest power that can still kill the attacker
+                // (any blocker can kill a deathtouch creature since we're trading anyway)
+                // IMPORTANT: Avoid using synergy enablers unless absolutely necessary
+                Permanent bestBlocker = null;
+                int bestScore = Integer.MIN_VALUE;
 
-            // find good sacrifices (chump blocks also supported due bad game score on loose)
-            // TODO: add chump blocking support here?
-            // TODO: there are many triggers on damage, attack, etc - it can't be processed without real game simulations
-            if (blocker == null) {
-                blocker = getWorstCreature(diedBlockers);
-                if (blocker != null) {
-                    int diffBlockingScore = blockingDiffScore.getOrDefault(blocker, 0);
-                    int diffNonBlockingScore = nonBlockingDiffScore.getOrDefault(blocker, 0);
-                    if (diffBlockingScore >= 0 || diffBlockingScore > diffNonBlockingScore) {
-                        // it's good - can sacrifice and get better game state, also protect from game loose
-                        combatInfo.addPair(attacker, blocker);
-                        removeWorstCreature(blocker, blockers, diedBlockers);
-                        blockedCount++;
+                for (Permanent b : diedBlockers) {
+                    int diffBlockingScore = blockingDiffScore.getOrDefault(b, 0);
+                    int diffNonBlockingScore = nonBlockingDiffScore.getOrDefault(b, 0);
+
+                    // Only consider blocking if it improves the game state or prevents loss
+                    if (diffBlockingScore >= diffNonBlockingScore) {
+                        // Prefer the lowest power creature (smallest sacrifice)
+                        // Use negative power as score so lower power = higher "score"
+                        int score = -b.getPower().getValue();
+
+                        // Heavily penalize synergy enablers - don't sacrifice them unless necessary
+                        int synergyBonus = getSynergyBonus(game, defenderId, b);
+                        if (synergyBonus > 0) {
+                            score -= synergyBonus / 5;  // Synergy pieces are less desirable as blockers
+                        }
+
+                        if (bestBlocker == null || score > bestScore) {
+                            bestBlocker = b;
+                            bestScore = score;
+                        }
+                    }
+                }
+
+                if (bestBlocker != null) {
+                    combatInfo.addPair(attacker, bestBlocker);
+                    removeWorstCreature(bestBlocker, blockers, diedBlockers);
+                    blockedCount++;
+                }
+            } else {
+                // Normal blocking logic (non-deathtouch or some blockers survive)
+                // find good blocker that survives
+                Permanent blocker = getWorstCreature(survivedAndKillBlocker, survivedBlockers);
+                
+                // For control role under pressure, prioritize group blocking over single blockers
+                // to clear threats and stabilize even at creature cost
+                boolean shouldSkipSingleBlockerForGroupBlock = false;
+                if (blocker != null && allBlockers.size() >= 2) {
+                    shouldSkipSingleBlockerForGroupBlock = isControlRoleUnderPressure(strategicRole, defendingPlayer, attackingPlayer);
+                }
+                
+                if (blocker != null && !shouldSkipSingleBlockerForGroupBlock) {
+                    combatInfo.addPair(attacker, blocker);
+                    removeWorstCreature(blocker, blockers, survivedAndKillBlocker, survivedBlockers);
+                    blockedCount++;
+                } else if (shouldSkipSingleBlockerForGroupBlock) {
+                    // Skip single blocker - try group blocking instead
+                    blocker = null;
+                }
+
+                // If no survivor, try 1-for-1 trade (mutual destruction) before group blocking
+                // But only if the trade is worth it based on game state evaluation
+                // Strategic role affects willingness to trade:
+                // - Control: More willing to trade to stabilize the board
+                // - Beatdown: Only trade if it clearly improves position (preserve attackers)
+                // IMPORTANT: Protect synergy enablers from bad trades
+                if (blocker == null && !tradedBlockers.isEmpty()) {
+                    // Use synergy-aware selection to avoid trading synergy enablers
+                    blocker = getWorstCreatureWithSynergyAwareness(game, defenderId, tradedBlockers);
+                    if (blocker != null) {
+                        int diffBlockingScore = blockingDiffScore.getOrDefault(blocker, 0);
+                        int diffNonBlockingScore = nonBlockingDiffScore.getOrDefault(blocker, 0);
+
+                        // Check if this creature is a synergy enabler
+                        int synergyBonus = getSynergyBonus(game, defenderId, blocker);
+                        boolean isSynergyPiece = synergyBonus > 0;
+
+                        boolean shouldTrade;
+                        if (isSynergyPiece) {
+                            // Synergy pieces require much better trade value to sacrifice
+                            // Only trade if blocking is significantly better AND the synergy bonus
+                            // doesn't outweigh the trade benefit
+                            int adjustedBlockingScore = diffBlockingScore - synergyBonus;
+                            shouldTrade = adjustedBlockingScore > diffNonBlockingScore + 50;
+                        } else if (strategicRole == StrategicRoleEvaluator.ROLE_CONTROL) {
+                            // Control: Trade if it doesn't hurt us too much (willing to trade down to stabilize)
+                            shouldTrade = diffBlockingScore >= diffNonBlockingScore - 10;
+                        } else if (strategicRole == StrategicRoleEvaluator.ROLE_BEATDOWN) {
+                            // Beatdown: Only trade if it clearly improves our position
+                            shouldTrade = diffBlockingScore > diffNonBlockingScore + 10;
+                        } else {
+                            // Flexible: Trade if blocking is at least as good as not blocking
+                            shouldTrade = diffBlockingScore >= diffNonBlockingScore;
+                        }
+
+                        if (shouldTrade) {
+                            combatInfo.addPair(attacker, blocker);
+                            removeWorstCreature(blocker, blockers, tradedBlockers, diedBlockers);
+                            blockedCount++;
+                        } else {
+                            blocker = null; // Reset so group blocking can be considered
+                        }
+                    }
+                }
+
+                // Try group blocking (2 blockers) only if no single blocker can kill the attacker
+                // Skip for trample attackers (excess damage goes through anyway)
+                boolean attackerHasTrample = attacker.getAbilities(game).containsKey(TrampleAbility.getInstance().getId());
+                if (blocker == null && !attackerHasTrample && allBlockers.size() >= 2) {
+                    // Try to find a 2-blocker combination that kills the attacker with at least one survivor
+                    // For control role under pressure, also consider combinations where both die (for stabilization)
+                    GroupBlockResult groupBlock = findBestGroupBlock(game, attacker, allBlockers, strategicRole, defendingPlayer);
+                    if (groupBlock != null) {
+                        combatInfo.addPair(attacker, groupBlock.blocker1);
+                        combatInfo.addPair(attacker, groupBlock.blocker2);
+                        blockers.remove(groupBlock.blocker1);
+                        blockers.remove(groupBlock.blocker2);
+                        blockedCount += 2;
+                    }
+                }
+
+                // find good sacrifices (chump blocks also supported due bad game score on loose)
+                // Strategic role affects willingness to chump block:
+                // - Beatdown: Preserve creatures for attacking, only chump if it prevents lethal
+                // - Control: More willing to chump block to preserve life total
+                // - Flexible: Standard logic
+                // IMPORTANT: Protect synergy enablers from being chump blocked
+                if (blocker == null && blockedCount == 0) {
+                    // Use synergy-aware selection to avoid chump blocking with synergy enablers
+                    blocker = getWorstCreatureWithSynergyAwareness(game, defenderId, diedBlockers);
+                    if (blocker != null) {
+                        int diffBlockingScore = blockingDiffScore.getOrDefault(blocker, 0);
+                        int diffNonBlockingScore = nonBlockingDiffScore.getOrDefault(blocker, 0);
+
+                        // Check if this creature is a synergy enabler
+                        int synergyBonus = getSynergyBonus(game, defenderId, blocker);
+                        boolean isSynergyPiece = synergyBonus > 0;
+
+                        // Adjust threshold based on strategic role
+                        boolean shouldChumpBlock;
+                        if (isSynergyPiece) {
+                            // NEVER chump block with synergy enablers unless it's absolutely necessary
+                            // to prevent losing the game (diffBlockingScore would be very negative otherwise)
+                            int adjustedBlockingScore = diffBlockingScore - synergyBonus;
+                            shouldChumpBlock = adjustedBlockingScore > diffNonBlockingScore + 100;
+                        } else if (strategicRole == StrategicRoleEvaluator.ROLE_BEATDOWN) {
+                            // Beatdown: Only chump block if it significantly improves position
+                            // (preserves creatures for attacking)
+                            shouldChumpBlock = diffBlockingScore > diffNonBlockingScore + 20;
+                        } else if (strategicRole == StrategicRoleEvaluator.ROLE_CONTROL) {
+                            // Control: More willing to chump block to preserve life
+                            shouldChumpBlock = diffBlockingScore >= diffNonBlockingScore - 10;
+                        } else {
+                            // Flexible: Standard logic
+                            shouldChumpBlock = diffBlockingScore >= 0 || diffBlockingScore > diffNonBlockingScore;
+                        }
+
+                        if (shouldChumpBlock) {
+                            // it's good - can sacrifice and get better game state, also protect from game loose
+                            combatInfo.addPair(attacker, blocker);
+                            removeWorstCreature(blocker, blockers, diedBlockers);
+                            blockedCount++;
+                        }
                     }
                 }
             }
@@ -235,7 +464,7 @@ public final class CombatUtil {
                 // effects support: can't be blocked except by xxx or more creatures
                 if (blockedCount > 0 && attacker.getMinBlockedBy() > blockedCount) {
                     // it already has 1 blocker (killer in best use case), so no needs in second killer
-                    blocker = getWorstCreature(survivedBlockers, survivedAndKillBlocker, diedBlockers);
+                    Permanent blocker = getWorstCreature(survivedBlockers, survivedAndKillBlocker, diedBlockers);
                     if (blocker != null) {
                         combatInfo.addPair(attacker, blocker);
                         removeWorstCreature(blocker, blockers, survivedBlockers, survivedAndKillBlocker, diedBlockers);
@@ -418,5 +647,121 @@ public final class CombatUtil {
             }
             step.endStep(sim, sim.getActivePlayerId());
         }
+    }
+
+    /**
+     * Result of a group blocking analysis
+     */
+    private static class GroupBlockResult {
+        final Permanent blocker1;
+        final Permanent blocker2;
+
+        GroupBlockResult(Permanent blocker1, Permanent blocker2) {
+            this.blocker1 = blocker1;
+            this.blocker2 = blocker2;
+        }
+    }
+
+    /**
+     * Find the best 2-blocker combination that can kill the attacker with at least one survivor.
+     * Returns null if no good combination exists.
+     */
+    private static GroupBlockResult findBestGroupBlock(Game game, Permanent attacker, List<Permanent> possibleBlockers,
+                                                       int strategicRole, Player defendingPlayer) {
+        if (possibleBlockers.size() < 2) {
+            return null;
+        }
+
+        int attackerPower = attacker.getPower().getValue();
+        int attackerToughness = attacker.getToughness().getValue();
+        Player attackingPlayer = game.getPlayer(game.getCombat().getAttackingPlayerId());
+
+        // Check if control role needs stabilization
+        boolean isControlUnderPressure = isControlRoleUnderPressure(strategicRole, defendingPlayer, attackingPlayer);
+
+        GroupBlockResult bestResult = null;
+        int bestScore = Integer.MIN_VALUE;
+
+        // Try all 2-blocker combinations
+        for (int i = 0; i < possibleBlockers.size(); i++) {
+            for (int j = i + 1; j < possibleBlockers.size(); j++) {
+                Permanent blocker1 = possibleBlockers.get(i);
+                Permanent blocker2 = possibleBlockers.get(j);
+
+                int blocker1Power = blocker1.getPower().getValue();
+                int blocker2Power = blocker2.getPower().getValue();
+                int blocker1Toughness = blocker1.getToughness().getValue();
+                int blocker2Toughness = blocker2.getToughness().getValue();
+
+                // Combined power must be enough to kill attacker
+                int combinedPower = blocker1Power + blocker2Power;
+                if (combinedPower < attackerToughness) {
+                    continue; // Can't kill attacker
+                }
+
+                // At least one blocker must survive
+                // Attacker assigns damage; it will typically kill the smaller blocker first
+                // For simplicity, assume attacker kills the lower-toughness blocker
+                Permanent lowerToughness = blocker1Toughness <= blocker2Toughness ? blocker1 : blocker2;
+                Permanent higherToughness = blocker1Toughness > blocker2Toughness ? blocker1 : blocker2;
+
+                int damageToLower = Math.min(attackerPower, lowerToughness.getToughness().getValue());
+                int remainingDamage = attackerPower - damageToLower;
+
+                boolean lowerSurvives = damageToLower < lowerToughness.getToughness().getValue();
+                boolean higherSurvives = remainingDamage < higherToughness.getToughness().getValue();
+
+                // For control role under pressure, allow both blockers to die if it kills the attacker
+                // (board stabilization is more important than creature preservation)
+                boolean bothDie = !lowerSurvives && !higherSurvives;
+                if (bothDie && !isControlUnderPressure) {
+                    continue; // Only allow "both die" scenario for control role
+                }
+
+                // Score this combination: prefer smaller blockers (less value sacrificed)
+                // Use negative combined power as score (lower power = better)
+                int score = -(blocker1Power + blocker2Power);
+
+                // Bonus if both survive
+                if (lowerSurvives && higherSurvives) {
+                    score += 100;
+                } else if (bothDie && isControlUnderPressure) {
+                    // For control role stabilization, "both die" is acceptable (neutral score, attacker dies)
+                    // Prefer this over no block at all
+                    score += 50;  // Slightly lower than 1-survivor cases but still positive
+                }
+
+                if (bestResult == null || score > bestScore) {
+                    bestResult = new GroupBlockResult(blocker1, blocker2);
+                    bestScore = score;
+                }
+            }
+        }
+
+        return bestResult;
+    }
+
+    /**
+     * Check if defending player should prioritize stabilization through group blocking.
+     * This includes control role players, and also players under critical pressure
+     * who need to clear threats to survive.
+     *
+     * @param defendingPlayer The defending player
+     * @param attackingPlayer The attacking player
+     * @return true if group blocking should be prioritized for stabilization
+     */
+    private static boolean isControlRoleUnderPressure(int strategicRole, Player defendingPlayer, Player attackingPlayer) {
+        if (defendingPlayer == null || attackingPlayer == null) {
+            return false;
+        }
+
+        // Under critical pressure: defending at very low life (<10>)
+        // In this situation, clearing threats through group blocking is priority over preserving creatures
+        boolean isUnderCriticalPressure = defendingPlayer.getLife() <= 10 && attackingPlayer.getLife() > 10;
+
+        // Also enable for explicit control role
+        boolean isControlRole = strategicRole == StrategicRoleEvaluator.ROLE_CONTROL;
+
+        return isUnderCriticalPressure || isControlRole;
     }
 }

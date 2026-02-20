@@ -192,4 +192,23 @@ public class PossibleTargetsSelector {
         return this.target.getMinNumberOfTargets() == 0
                 || this.any.size() >= this.target.getMinNumberOfTargets();
     }
+
+    /**
+     * Returns true if this effect would only target the AI's own permanents for a destructive effect.
+     * Used to prevent the AI from casting Beast Within on its own lands when there are no opponent targets.
+     */
+    public boolean hasOnlyBadTargetsForDestructiveEffect() {
+        // Only applies to bad effects (destruction, exile of permanents, etc.)
+        if (isGoodEffect() || isAnyEffect()) {
+            return false;
+        }
+
+        // Check if we have good targets (opponent's permanents)
+        if (!getGoodTargets().isEmpty()) {
+            return false;
+        }
+
+        // We only have bad targets (our own permanents) for a destructive effect
+        return !getBadTargets().isEmpty();
+    }
 }
