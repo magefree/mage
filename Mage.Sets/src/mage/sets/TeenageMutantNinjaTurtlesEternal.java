@@ -24,6 +24,8 @@ public final class TeenageMutantNinjaTurtlesEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Arcane Signet", 57, Rarity.UNCOMMON, mage.cards.a.ArcaneSignet.class));
         cards.add(new SetCardInfo("Ash Barrens", 60, Rarity.COMMON, mage.cards.a.AshBarrens.class));
         cards.add(new SetCardInfo("Assassin's Trophy", 55, Rarity.RARE, mage.cards.a.AssassinsTrophy.class));
+        cards.add(new SetCardInfo("Big Mother Mouser", 37, Rarity.RARE, mage.cards.b.BigMotherMouser.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Big Mother Mouser", 97, Rarity.RARE, mage.cards.b.BigMotherMouser.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Biogenic Ooze", 49, Rarity.RARE, mage.cards.b.BiogenicOoze.class));
         cards.add(new SetCardInfo("Blasphemous Act", 47, Rarity.RARE, mage.cards.b.BlasphemousAct.class));
         cards.add(new SetCardInfo("Chromatic Lantern", 58, Rarity.RARE, mage.cards.c.ChromaticLantern.class));
