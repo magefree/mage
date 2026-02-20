@@ -59,6 +59,7 @@ public final class TeenageMutantNinjaTurtlesEternal extends ExpansionSet {
         cards.add(new SetCardInfo("High Score", 29, Rarity.RARE, mage.cards.h.HighScore.class));
         cards.add(new SetCardInfo("Hinterland Harbor", 69, Rarity.RARE, mage.cards.h.HinterlandHarbor.class));
         cards.add(new SetCardInfo("Leatherhead, Iron Gator", 30, Rarity.RARE, mage.cards.l.LeatherheadIronGator.class));
+        cards.add(new SetCardInfo("Leo's Guidance", 102, Rarity.UNCOMMON, mage.cards.l.LeosGuidance.class));
         cards.add(new SetCardInfo("Leonardo, Worldly Warrior", 101, Rarity.MYTHIC, mage.cards.l.LeonardoWorldlyWarrior.class));
         cards.add(new SetCardInfo("Leonardo, the Balance", 1, Rarity.MYTHIC, mage.cards.l.LeonardoTheBalance.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Leonardo, the Balance", 83, Rarity.MYTHIC, mage.cards.l.LeonardoTheBalance.class, NON_FULL_USE_VARIOUS));
