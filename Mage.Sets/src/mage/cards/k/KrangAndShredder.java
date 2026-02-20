@@ -10,10 +10,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -46,7 +43,7 @@ public final class KrangAndShredder extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new KrangAndShredderCastEffect(), false)
                 .withInterveningIf(RevoltCondition.instance)
                 .addHint(RevoltCondition.getHint())
-                .withFlavorWord("Disappear"), new RevoltWatcher());
+                .setAbilityWord(AbilityWord.DISAPPEAR), new RevoltWatcher());
     }
 
     private KrangAndShredder(final KrangAndShredder card) {
