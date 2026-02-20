@@ -29,6 +29,7 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("April O'Neil, Hacktivist", 292, Rarity.MYTHIC, mage.cards.a.AprilONeilHacktivist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Armaggon, Future Shark", 264, Rarity.RARE, mage.cards.a.ArmaggonFutureShark.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Armaggon, Future Shark", 58, Rarity.RARE, mage.cards.a.ArmaggonFutureShark.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Baxter Stockman", 139, Rarity.UNCOMMON, mage.cards.b.BaxterStockman.class));
         cards.add(new SetCardInfo("Bebop & Rocksteady", 140, Rarity.RARE, mage.cards.b.BebopAndRocksteady.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bebop & Rocksteady", 204, Rarity.RARE, mage.cards.b.BebopAndRocksteady.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bebop & Rocksteady", 241, Rarity.RARE, mage.cards.b.BebopAndRocksteady.class, NON_FULL_USE_VARIOUS));
