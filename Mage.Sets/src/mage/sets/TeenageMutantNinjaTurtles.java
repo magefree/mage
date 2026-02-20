@@ -223,6 +223,7 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("Splinter's Technique", 80, Rarity.RARE, mage.cards.s.SplintersTechnique.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Splinter, Radical Rat", 169, Rarity.RARE, mage.cards.s.SplinterRadicalRat.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Splinter, Radical Rat", 251, Rarity.RARE, mage.cards.s.SplinterRadicalRat.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Squirrelanoids", 81, Rarity.COMMON, mage.cards.s.Squirrelanoids.class));
         cards.add(new SetCardInfo("Stockman, Mad Fly-entist", 54, Rarity.COMMON, mage.cards.s.StockmanMadFlyEntist.class));
         cards.add(new SetCardInfo("Super Shredder", 217, Rarity.MYTHIC, mage.cards.s.SuperShredder.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Super Shredder", 285, Rarity.MYTHIC, mage.cards.s.SuperShredder.class, NON_FULL_USE_VARIOUS));
