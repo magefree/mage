@@ -62,6 +62,8 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("Don & Raph, Hard Science", 144, Rarity.RARE, mage.cards.d.DonAndRaphHardScience.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Don & Raph, Hard Science", 205, Rarity.RARE, mage.cards.d.DonAndRaphHardScience.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Don & Raph, Hard Science", 243, Rarity.RARE, mage.cards.d.DonAndRaphHardScience.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Donatello's Technique", 228, Rarity.UNCOMMON, mage.cards.d.DonatellosTechnique.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Donatello's Technique", 39, Rarity.UNCOMMON, mage.cards.d.DonatellosTechnique.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Donatello, Gadget Master", 212, Rarity.RARE, mage.cards.d.DonatelloGadgetMaster.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Donatello, Gadget Master", 283, Rarity.MYTHIC, mage.cards.d.DonatelloGadgetMaster.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Donatello, Gadget Master", 293, Rarity.MYTHIC, mage.cards.d.DonatelloGadgetMaster.class, NON_FULL_USE_VARIOUS));
