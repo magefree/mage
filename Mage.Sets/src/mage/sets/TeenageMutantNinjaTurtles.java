@@ -93,6 +93,7 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("Illegitimate Business", 186, Rarity.COMMON, mage.cards.i.IllegitimateBusiness.class));
         cards.add(new SetCardInfo("Improvised Arsenal", 270, Rarity.RARE, mage.cards.i.ImprovisedArsenal.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Improvised Arsenal", 92, Rarity.RARE, mage.cards.i.ImprovisedArsenal.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Insectoid Exterminator", 64, Rarity.COMMON, mage.cards.i.InsectoidExterminator.class));
         cards.add(new SetCardInfo("Island", 192, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 254, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Island", 306, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
