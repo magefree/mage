@@ -175,6 +175,7 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("Northampton Farm", 188, Rarity.RARE, mage.cards.n.NorthamptonFarm.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Northampton Farm", 280, Rarity.RARE, mage.cards.n.NorthamptonFarm.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Null Group Biological Assets", 98, Rarity.COMMON, mage.cards.n.NullGroupBiologicalAssets.class));
+        cards.add(new SetCardInfo("Old Hob, Alleycat Blues", 99, Rarity.UNCOMMON, mage.cards.o.OldHobAlleycatBlues.class));
         cards.add(new SetCardInfo("Omni-Cheese Pizza", 176, Rarity.COMMON, mage.cards.o.OmniCheesePizza.class));
         cards.add(new SetCardInfo("Ooze Spill", 48, Rarity.UNCOMMON, mage.cards.o.OozeSpill.class));
         cards.add(new SetCardInfo("Party Dude", 128, Rarity.RARE, mage.cards.p.PartyDude.class));
