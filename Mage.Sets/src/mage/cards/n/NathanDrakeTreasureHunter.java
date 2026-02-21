@@ -134,6 +134,9 @@ class NathanDrakeTreasureHunterCastEffect extends OneShotEffect {
         target.withNotTarget(true);
         player.choose(Outcome.DrawCard, cards, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
+        if (card == null) {
+            return false;
+        }
         CardUtil.castSingle(player, source, game, card);
         return true;
     }
