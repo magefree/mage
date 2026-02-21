@@ -92,7 +92,9 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("Groundchuck & Dirtbag", 238, Rarity.RARE, mage.cards.g.GroundchuckAndDirtbag.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Grounded for Life", 7, Rarity.COMMON, mage.cards.g.GroundedForLife.class));
         cards.add(new SetCardInfo("Guac & Marshmallow Pizza", 116, Rarity.COMMON, mage.cards.g.GuacAndMarshmallowPizza.class));
+        cards.add(new SetCardInfo("Hamato Guardian Stance", 8, Rarity.COMMON, mage.cards.h.HamatoGuardianStance.class));
         cards.add(new SetCardInfo("Hard-Won Jitte", 91, Rarity.UNCOMMON, mage.cards.h.HardWonJitte.class));
+        cards.add(new SetCardInfo("Henchbots", 174, Rarity.UNCOMMON, mage.cards.h.Henchbots.class));
         cards.add(new SetCardInfo("High-Flying Ace", 9, Rarity.COMMON, mage.cards.h.HighFlyingAce.class));
         cards.add(new SetCardInfo("Illegitimate Business", 186, Rarity.COMMON, mage.cards.i.IllegitimateBusiness.class));
         cards.add(new SetCardInfo("Improvised Arsenal", 270, Rarity.RARE, mage.cards.i.ImprovisedArsenal.class, NON_FULL_USE_VARIOUS));
@@ -162,6 +164,7 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 308, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 313, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 318, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mouser Attack!", 95, Rarity.COMMON, mage.cards.m.MouserAttack.class));
         cards.add(new SetCardInfo("Mouser Foundry", 96, Rarity.COMMON, mage.cards.m.MouserFoundry.class));
         cards.add(new SetCardInfo("Mouser Mark III", 159, Rarity.COMMON, mage.cards.m.MouserMarkIII.class));
         cards.add(new SetCardInfo("Mutagen Man, Living Ooze", 124, Rarity.RARE, mage.cards.m.MutagenManLivingOoze.class, NON_FULL_USE_VARIOUS));
@@ -215,15 +218,20 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("Sally Pride, Lioness Leader", 24, Rarity.RARE, mage.cards.s.SallyPrideLionessLeader.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Savanti Romero, Time's Exile", 267, Rarity.RARE, mage.cards.s.SavantiRomeroTimesExile.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Savanti Romero, Time's Exile", 72, Rarity.RARE, mage.cards.s.SavantiRomeroTimesExile.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sewer-veillance Cam", 53, Rarity.COMMON, mage.cards.s.SewerVeillanceCam.class));
         cards.add(new SetCardInfo("Shark Shredder, Killer Clone", 268, Rarity.RARE, mage.cards.s.SharkShredderKillerClone.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shark Shredder, Killer Clone", 320, Rarity.RARE, mage.cards.s.SharkShredderKillerClone.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shark Shredder, Killer Clone", 73, Rarity.RARE, mage.cards.s.SharkShredderKillerClone.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shredder's Revenge", 76, Rarity.COMMON, mage.cards.s.ShreddersRevenge.class));
+        cards.add(new SetCardInfo("Shredder's Technique", 232, Rarity.UNCOMMON, mage.cards.s.ShreddersTechnique.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Shredder's Technique", 77, Rarity.UNCOMMON, mage.cards.s.ShreddersTechnique.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shredder, Unrelenting", 210, Rarity.UNCOMMON, mage.cards.s.ShredderUnrelenting.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shredder, Unrelenting", 74, Rarity.UNCOMMON, mage.cards.s.ShredderUnrelenting.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Skateboard", 178, Rarity.UNCOMMON, mage.cards.s.Skateboard.class));
         cards.add(new SetCardInfo("Slash, Reptile Rampager", 108, Rarity.RARE, mage.cards.s.SlashReptileRampager.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Slash, Reptile Rampager", 208, Rarity.RARE, mage.cards.s.SlashReptileRampager.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Slithering Cryptid", 168, Rarity.COMMON, mage.cards.s.SlitheringCryptid.class));
+        cards.add(new SetCardInfo("Slash, Reptile Rampager", 108, Rarity.RARE, mage.cards.s.SlashReptileRampager.class));
         cards.add(new SetCardInfo("South Wind Avatar", 269, Rarity.RARE, mage.cards.s.SouthWindAvatar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("South Wind Avatar", 78, Rarity.RARE, mage.cards.s.SouthWindAvatar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Spicy Oatmeal Pizza", 109, Rarity.UNCOMMON, mage.cards.s.SpicyOatmealPizza.class));
@@ -274,6 +282,7 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("Utrom Scientists", 56, Rarity.COMMON, mage.cards.u.UtromScientists.class));
         cards.add(new SetCardInfo("Weather Maker", 182, Rarity.RARE, mage.cards.w.WeatherMaker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Weather Maker", 279, Rarity.RARE, mage.cards.w.WeatherMaker.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Zog, Triceraton Castaway", 111, Rarity.COMMON, mage.cards.z.ZogTriceratonCastaway.class));
         cards.add(new SetCardInfo("Zoo Escapees", 138, Rarity.COMMON, mage.cards.z.ZooEscapees.class));
     }
 }
