@@ -2957,6 +2957,11 @@
 |TOK:TMT|Rat||RatToken|
 |TOK:TMT|Robot||Robot11Token|
 
+# TMC
+|TOK:TMC|Clue||ClueArtifactToken|
+|TOK:TMC|Ooze||BiogenicOozeToken|
+|TOK:TMC|Treasure||TreasureToken|
+
 # JVC
 |TOK:JVC|Elemental Shaman||ElementalShamanToken|
 

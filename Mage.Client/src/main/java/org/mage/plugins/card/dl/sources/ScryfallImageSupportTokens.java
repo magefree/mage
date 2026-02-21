@@ -2895,6 +2895,11 @@ public class ScryfallImageSupportTokens {
             put("TMT/Rat", "https://api.scryfall.com/cards/ttmt/6?format=image");
             put("TMT/Robot", "https://api.scryfall.com/cards/ttmt/10?format=image");
 
+            // TMC
+            put("TMT/Clue", "https://api.scryfall.com/cards/ttmc/2?format=image");
+            put("TMT/Ooze", "https://api.scryfall.com/cards/ttmc/1?format=image");
+            put("TMT/Treasure", "https://api.scryfall.com/cards/ttmc/3?format=image");
+
             // JVC
             put("JVC/Elemental Shaman", "https://api.scryfall.com/cards/tjvc/4?format=image");
 
