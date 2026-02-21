@@ -155,6 +155,7 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("Metalhead", 44, Rarity.UNCOMMON, mage.cards.m.Metalhead.class));
         cards.add(new SetCardInfo("Michelangelo's Technique", 122, Rarity.RARE, mage.cards.m.MichelangelosTechnique.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Michelangelo's Technique", 239, Rarity.RARE, mage.cards.m.MichelangelosTechnique.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Michelangelo, Game Master", 118, Rarity.COMMON, mage.cards.m.MichelangeloGameMaster.class));
         cards.add(new SetCardInfo("Michelangelo, Improviser", 119, Rarity.MYTHIC, mage.cards.m.MichelangeloImproviser.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Michelangelo, Improviser", 219, Rarity.MYTHIC, mage.cards.m.MichelangeloImproviser.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Michelangelo, Improviser", 304, Rarity.MYTHIC, mage.cards.m.MichelangeloImproviser.class, NON_FULL_USE_VARIOUS));
