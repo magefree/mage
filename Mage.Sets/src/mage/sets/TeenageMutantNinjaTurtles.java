@@ -217,6 +217,7 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("Sally Pride, Lioness Leader", 24, Rarity.RARE, mage.cards.s.SallyPrideLionessLeader.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Savanti Romero, Time's Exile", 267, Rarity.RARE, mage.cards.s.SavantiRomeroTimesExile.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Savanti Romero, Time's Exile", 72, Rarity.RARE, mage.cards.s.SavantiRomeroTimesExile.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sewer-veillance Cam", 53, Rarity.COMMON, mage.cards.s.SewerVeillanceCam.class));
         cards.add(new SetCardInfo("Shark Shredder, Killer Clone", 268, Rarity.RARE, mage.cards.s.SharkShredderKillerClone.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shark Shredder, Killer Clone", 320, Rarity.RARE, mage.cards.s.SharkShredderKillerClone.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shark Shredder, Killer Clone", 73, Rarity.RARE, mage.cards.s.SharkShredderKillerClone.class, NON_FULL_USE_VARIOUS));
