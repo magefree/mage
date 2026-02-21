@@ -35,6 +35,7 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("Bebop & Rocksteady", 140, Rarity.RARE, mage.cards.b.BebopAndRocksteady.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bebop & Rocksteady", 204, Rarity.RARE, mage.cards.b.BebopAndRocksteady.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bebop & Rocksteady", 241, Rarity.RARE, mage.cards.b.BebopAndRocksteady.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Bebop, Warthog Warrior", 59, Rarity.COMMON, mage.cards.b.BebopWarthogWarrior.class));
         cards.add(new SetCardInfo("Bespoke Bo", 31, Rarity.UNCOMMON, mage.cards.b.BespokeBo.class));
         cards.add(new SetCardInfo("Bot Bashing Time", 85, Rarity.COMMON, mage.cards.b.BotBashingTime.class));
         cards.add(new SetCardInfo("Broadcast Takeover", 234, Rarity.MYTHIC, mage.cards.b.BroadcastTakeover.class, NON_FULL_USE_VARIOUS));
