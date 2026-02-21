@@ -21,6 +21,8 @@ public final class TeenageMutantNinjaTurtlesEternal extends ExpansionSet {
 
         cards.add(new SetCardInfo("Acidic Slime", 48, Rarity.UNCOMMON, mage.cards.a.AcidicSlime.class));
         cards.add(new SetCardInfo("April O'Neil, Human Element", 107, Rarity.RARE, mage.cards.a.AprilONeilHumanElement.class));
+        cards.add(new SetCardInfo("April O'Neil, Live on the Scene", 84, Rarity.MYTHIC, mage.cards.a.AprilONeilLiveOnTheScene.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("April O'Neil, Live on the Scene", 9, Rarity.MYTHIC, mage.cards.a.AprilONeilLiveOnTheScene.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arcade Cabinet", 36, Rarity.RARE, mage.cards.a.ArcadeCabinet.class));
         cards.add(new SetCardInfo("Arcane Signet", 57, Rarity.UNCOMMON, mage.cards.a.ArcaneSignet.class));
         cards.add(new SetCardInfo("Ash Barrens", 60, Rarity.COMMON, mage.cards.a.AshBarrens.class));
