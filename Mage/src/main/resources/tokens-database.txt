@@ -2947,7 +2947,15 @@
 |TOK:ECC|Zombie||ZombieToken|
 
 # TMT
+|TOK:TMT|Dinosaur Soldier||DinosaurSoldierToken|
+|TOK:TMT|Food||FoodToken|
+|TOK:TMT|Insect Warrior||InsectWarriorToken|
 |TOK:TMT|Mutagen||MutagenToken|
+|TOK:TMT|Mutant||RedMutantToken|
+|TOK:TMT|Ninja Turtle Spirit||NinjaTurtleSpiritToken|
+|TOK:TMT|Ninja||Ninja11Token|
+|TOK:TMT|Rat||RatToken|
+|TOK:TMT|Robot||Robot11Token|
 
 # JVC
 |TOK:JVC|Elemental Shaman||ElementalShamanToken|
