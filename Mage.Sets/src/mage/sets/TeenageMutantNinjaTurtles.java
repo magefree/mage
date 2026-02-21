@@ -253,6 +253,7 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 312, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 317, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("TCRI Building", 189, Rarity.COMMON, mage.cards.t.TCRIBuilding.class));
+        cards.add(new SetCardInfo("Tainted Treats", 170, Rarity.UNCOMMON, mage.cards.t.TaintedTreats.class));
         cards.add(new SetCardInfo("Technodrome", 179, Rarity.MYTHIC, mage.cards.t.Technodrome.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Technodrome", 222, Rarity.MYTHIC, mage.cards.t.Technodrome.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tenderize", 133, Rarity.COMMON, mage.cards.t.Tenderize.class));
