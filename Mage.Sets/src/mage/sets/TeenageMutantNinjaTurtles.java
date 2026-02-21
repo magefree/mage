@@ -194,6 +194,8 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("Raph & Mikey, Troublemakers", 250, Rarity.RARE, mage.cards.r.RaphAndMikeyTroublemakers.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Raphael's Technique", 105, Rarity.RARE, mage.cards.r.RaphaelsTechnique.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Raphael's Technique", 237, Rarity.RARE, mage.cards.r.RaphaelsTechnique.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Raphael, Most Attitude", 101, Rarity.UNCOMMON, mage.cards.r.RaphaelMostAttitude.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Raphael, Most Attitude", 199, Rarity.UNCOMMON, mage.cards.r.RaphaelMostAttitude.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Raphael, Ninja Destroyer", 102, Rarity.MYTHIC, mage.cards.r.RaphaelNinjaDestroyer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Raphael, Ninja Destroyer", 218, Rarity.MYTHIC, mage.cards.r.RaphaelNinjaDestroyer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Raphael, Ninja Destroyer", 303, Rarity.MYTHIC, mage.cards.r.RaphaelNinjaDestroyer.class, NON_FULL_USE_VARIOUS));
