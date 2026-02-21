@@ -10,6 +10,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
+import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.constants.SubType;
 import mage.constants.SuperType;
@@ -54,7 +55,7 @@ public final class OldHobAlleycatBlues extends CardImpl {
         this.addAbility(new BeginningOfCombatTriggeredAbility(new OldHobAlleycatBluesEffect()));
 
         // {1}{W}: Target attacking creature token gains indestructible until end of turn.
-        Ability activatedAbility = new SimpleActivatedAbility(null, new ManaCostsImpl<>("{1}{W}"));
+        Ability activatedAbility = new SimpleActivatedAbility(new GainAbilityTargetEffect(IndestructibleAbility.getInstance()), new ManaCostsImpl<>("{1}{W}"));
         activatedAbility.addTarget(new TargetPermanent(filter));
         this.addAbility(activatedAbility);
     }
