@@ -101,6 +101,7 @@ public final class TeenageMutantNinjaTurtlesEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Super Combo", 34, Rarity.RARE, mage.cards.s.SuperCombo.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Super Combo", 95, Rarity.RARE, mage.cards.s.SuperCombo.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Supreme Verdict", 134, Rarity.MYTHIC, mage.cards.s.SupremeVerdict.class));
+        cards.add(new SetCardInfo("Swift Demise", 21, Rarity.RARE, mage.cards.s.SwiftDemise.class));
         cards.add(new SetCardInfo("Sword of Hearth and Home", 136, Rarity.MYTHIC, mage.cards.s.SwordOfHearthAndHome.class));
         cards.add(new SetCardInfo("Thriving Grove", 77, Rarity.COMMON, mage.cards.t.ThrivingGrove.class));
         cards.add(new SetCardInfo("Thriving Isle", 78, Rarity.COMMON, mage.cards.t.ThrivingIsle.class));
