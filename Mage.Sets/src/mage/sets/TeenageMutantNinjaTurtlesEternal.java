@@ -83,6 +83,7 @@ public final class TeenageMutantNinjaTurtlesEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Sodden Verdure", 74, Rarity.RARE, mage.cards.s.SoddenVerdure.class));
         cards.add(new SetCardInfo("Sol Ring", 59, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
         cards.add(new SetCardInfo("Spire Garden", 75, Rarity.RARE, mage.cards.s.SpireGarden.class));
+        cards.add(new SetCardInfo("Splinter, Aging Champion", 104, Rarity.RARE, mage.cards.s.SplinterAgingChampion.class));
         cards.add(new SetCardInfo("Splinter, the Mentor", 3, Rarity.MYTHIC, mage.cards.s.SplinterTheMentor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Splinter, the Mentor", 89, Rarity.MYTHIC, mage.cards.s.SplinterTheMentor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Steelbane Hydra", 52, Rarity.RARE, mage.cards.s.SteelbaneHydra.class));
