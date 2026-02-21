@@ -214,7 +214,6 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("Punk Frogs", 164, Rarity.COMMON, mage.cards.p.PunkFrogs.class));
         cards.add(new SetCardInfo("Quintessential Katana", 23, Rarity.UNCOMMON, mage.cards.q.QuintessentialKatana.class));
         cards.add(new SetCardInfo("Purple Dragon Punks", 100, Rarity.COMMON, mage.cards.p.PurpleDragonPunks.class));
-        cards.add(new SetCardInfo("Putrid Pals", 165, Rarity.COMMON, mage.cards.p.PutridPals.class));
         cards.add(new SetCardInfo("Ragamuffin Raptor", 130, Rarity.COMMON, mage.cards.r.RagamuffinRaptor.class));
         cards.add(new SetCardInfo("Raph & Leo, Sibling Rivals", 166, Rarity.RARE, mage.cards.r.RaphAndLeoSiblingRivals.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Raph & Leo, Sibling Rivals", 249, Rarity.RARE, mage.cards.r.RaphAndLeoSiblingRivals.class, NON_FULL_USE_VARIOUS));
