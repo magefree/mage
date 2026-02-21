@@ -84,6 +84,8 @@ public final class TeenageMutantNinjaTurtlesEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Raphael, the Muscle", 4, Rarity.MYTHIC, mage.cards.r.RaphaelTheMuscle.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Raphael, the Muscle", 91, Rarity.MYTHIC, mage.cards.r.RaphaelTheMuscle.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Roadkill Rodney", 41, Rarity.RARE, mage.cards.r.RoadkillRodney.class));
+        cards.add(new SetCardInfo("Rocksteady, Mutant Marauder", 33, Rarity.RARE, mage.cards.r.RocksteadyMutantMarauder.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Rocksteady, Mutant Marauder", 94, Rarity.RARE, mage.cards.r.RocksteadyMutantMarauder.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rootbound Crag", 72, Rarity.RARE, mage.cards.r.RootboundCrag.class));
         cards.add(new SetCardInfo("Smoldering Marsh", 73, Rarity.RARE, mage.cards.s.SmolderingMarsh.class));
         cards.add(new SetCardInfo("Sodden Verdure", 74, Rarity.RARE, mage.cards.s.SoddenVerdure.class));
