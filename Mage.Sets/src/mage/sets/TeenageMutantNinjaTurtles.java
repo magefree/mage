@@ -144,6 +144,8 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("Leonardo, Cutting Edge", 211, Rarity.RARE, mage.cards.l.LeonardoCuttingEdge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Leonardo, Cutting Edge", 281, Rarity.MYTHIC, mage.cards.l.LeonardoCuttingEdge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Leonardo, Cutting Edge", 291, Rarity.MYTHIC, mage.cards.l.LeonardoCuttingEdge.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Leonardo, Leader in Blue", 16, Rarity.UNCOMMON, mage.cards.l.LeonardoLeaderInBlue.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Leonardo, Leader in Blue", 196, Rarity.UNCOMMON, mage.cards.l.LeonardoLeaderInBlue.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Leonardo, Sewer Samurai", 17, Rarity.MYTHIC, mage.cards.l.LeonardoSewerSamurai.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Leonardo, Sewer Samurai", 215, Rarity.MYTHIC, mage.cards.l.LeonardoSewerSamurai.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Leonardo, Sewer Samurai", 301, Rarity.MYTHIC, mage.cards.l.LeonardoSewerSamurai.class, NON_FULL_USE_VARIOUS));
