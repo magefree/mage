@@ -246,6 +246,7 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("Shark Shredder, Killer Clone", 268, Rarity.RARE, mage.cards.s.SharkShredderKillerClone.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shark Shredder, Killer Clone", 320, Rarity.RARE, mage.cards.s.SharkShredderKillerClone.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shark Shredder, Killer Clone", 73, Rarity.RARE, mage.cards.s.SharkShredderKillerClone.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Shredder's Armor", 75, Rarity.UNCOMMON, mage.cards.s.ShreddersArmor.class));
         cards.add(new SetCardInfo("Shredder's Revenge", 76, Rarity.COMMON, mage.cards.s.ShreddersRevenge.class));
         cards.add(new SetCardInfo("Shredder's Technique", 232, Rarity.UNCOMMON, mage.cards.s.ShreddersTechnique.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shredder's Technique", 77, Rarity.UNCOMMON, mage.cards.s.ShreddersTechnique.class, NON_FULL_USE_VARIOUS));
