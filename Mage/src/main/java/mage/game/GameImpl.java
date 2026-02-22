@@ -2577,14 +2577,14 @@ public abstract class GameImpl implements Game {
                         }
                     }
                 }
-                if (perm.getPairedCard() != null) {
+                if (perm.getPairedMOR() != null) {
                     //702.93e.: ...another player gains control
                     // ...or the creature it's paired with leaves the battlefield.
-                    Permanent paired = perm.getPairedCard().getPermanent(this);
-                    if (paired == null || !perm.isControlledBy(paired.getControllerId()) || paired.getPairedCard() == null) {
-                        perm.setPairedCard(null);
-                        if (paired != null && paired.getPairedCard() != null) {
-                            paired.setPairedCard(null);
+                    Permanent paired = perm.getPairedMOR().getPermanent(this);
+                    if (paired == null || !perm.isControlledBy(paired.getControllerId()) || paired.getPairedMOR() == null) {
+                        perm.setUnpaired();
+                        if (paired != null && paired.getPairedMOR() != null) {
+                            paired.setUnpaired();
                         }
                         somethingHappened = true;
                     }
@@ -2601,12 +2601,12 @@ public abstract class GameImpl implements Game {
                         }
                     }
                 }
-            } else if (perm.getPairedCard() != null) {
+            } else if (perm.getPairedMOR() != null) {
                 //702.93e.: ...stops being a creature
-                Permanent paired = perm.getPairedCard().getPermanent(this);
-                perm.setPairedCard(null);
+                Permanent paired = perm.getPairedMOR().getPermanent(this);
+                perm.setUnpaired();
                 if (paired != null) {
-                    paired.setPairedCard(null);
+                    paired.setUnpaired();
                 }
                 somethingHappened = true;
             } else if (perm.getBandedCards() != null && !perm.getBandedCards().isEmpty()) {

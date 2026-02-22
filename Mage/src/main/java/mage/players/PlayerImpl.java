@@ -1012,10 +1012,10 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
 
         }
-        if (permanent.getPairedCard() != null) {
-            Permanent pairedCard = permanent.getPairedCard().getPermanent(game);
+        if (permanent.getPairedMOR() != null) {
+            Permanent pairedCard = permanent.getPairedMOR().getPermanent(game);
             if (pairedCard != null) {
-                pairedCard.clearPairedCard();
+                pairedCard.setUnpaired();
             }
         }
         if (permanent.getBandedCards() != null && !permanent.getBandedCards().isEmpty()) {
