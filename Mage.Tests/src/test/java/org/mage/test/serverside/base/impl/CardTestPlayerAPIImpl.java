@@ -1478,7 +1478,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         cardName = EmptyNames.replaceTestCommandByObjectName(cardName);
 
         int actual;
-        if (cardName.contains("//")) { // special logic for checked split cards, because in game logic of card name filtering is different from in test
+        if (cardName.contains(" // ")) { // special logic for checked split cards, because in game logic of card name filtering is different from in test
             actual = 0;
             for (Card card : currentGame.getPlayer(player.getId()).getHand().getCards(currentGame)) {
                 if (CardUtil.haveSameNames(card.getName(), cardName, true)) {
