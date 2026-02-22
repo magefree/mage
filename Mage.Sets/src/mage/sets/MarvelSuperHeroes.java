@@ -35,5 +35,6 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("The Coming of Galactus", 212, Rarity.MYTHIC, mage.cards.t.TheComingOfGalactus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Coming of Galactus", 307, Rarity.MYTHIC, mage.cards.t.TheComingOfGalactus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Sentry, Golden Guardian", 35, Rarity.RARE, mage.cards.t.TheSentryGoldenGuardian.class));
+        cards.add(new SetCardInfo("Thunderbolts Conspiracy", 117, Rarity.RARE, mage.cards.t.ThunderboltsConspiracy.class));
     }
 }
