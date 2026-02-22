@@ -315,6 +315,7 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("Weather Maker", 182, Rarity.RARE, mage.cards.w.WeatherMaker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Weather Maker", 279, Rarity.RARE, mage.cards.w.WeatherMaker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("West Wind Avatar", 137, Rarity.UNCOMMON, mage.cards.w.WestWindAvatar.class));
+        cards.add(new SetCardInfo("Wingnut, Bat on the Belfry", 110, Rarity.UNCOMMON, mage.cards.w.WingnutBatOnTheBelfry.class));
         cards.add(new SetCardInfo("Zog, Triceraton Castaway", 111, Rarity.COMMON, mage.cards.z.ZogTriceratonCastaway.class));
         cards.add(new SetCardInfo("Zoo Escapees", 138, Rarity.COMMON, mage.cards.z.ZooEscapees.class));
     }
