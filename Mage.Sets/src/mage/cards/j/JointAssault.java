@@ -70,8 +70,8 @@ class JointAssaultBoostTargetEffect extends ContinuousEffectImpl {
         UUID permanentId = getTargetPointer().getFirst(game, source);
         Permanent target = game.getPermanent(permanentId);
         if (target != null) {
-            if (target.getPairedCard() != null) {
-                this.paired = target.getPairedCard();
+            if (target.getPairedMOR() != null) {
+                this.paired = target.getPairedMOR();
             }
         }
     }

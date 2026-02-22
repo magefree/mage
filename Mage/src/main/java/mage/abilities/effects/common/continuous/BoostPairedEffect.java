@@ -40,8 +40,8 @@ public class BoostPairedEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null && permanent.getPairedCard() != null) {
-            Permanent paired = permanent.getPairedCard().getPermanent(game);
+        if (permanent != null && permanent.getPairedMOR() != null) {
+            Permanent paired = permanent.getPairedMOR().getPermanent(game);
             if (paired != null) {
                 permanent.addPower(power);
                 permanent.addToughness(toughness);

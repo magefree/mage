@@ -461,8 +461,8 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
 
         Permanent trustedForcemage = getPermanent(forcemage, playerA.getId());
         Permanent eliteVanguard = getPermanent(vanguard, playerA.getId());
-        Assert.assertNull(trustedForcemage.getPairedCard());
-        Assert.assertNull(eliteVanguard.getPairedCard());
+        Assert.assertNull(trustedForcemage.getPairedMOR());
+        Assert.assertNull(eliteVanguard.getPairedMOR());
     }
 
     /**
@@ -494,7 +494,7 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
         execute();
 
         Permanent palinchron = getPermanent("Palinchron", playerA);
-        Assert.assertNull(palinchron.getPairedCard()); // should not be paired
+        Assert.assertNull(palinchron.getPairedMOR()); // should not be paired
         assertGraveyardCount(playerA, "Deadeye Navigator", 1);
         assertGraveyardCount(playerB, "Doom Blade", 1);
         assertPermanentCount(playerA, "Palinchron", 1);
@@ -534,7 +534,7 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
         assertAbility(playerA, nearheath, ReachAbility.getInstance(), true);
         assertAbility(playerA, trappers, ReachAbility.getInstance(), true);
         Permanent forcemage1 = getPermanent(forcemage, playerA);
-        Assert.assertNull(forcemage1.getPairedCard()); // should not be paired
+        Assert.assertNull(forcemage1.getPairedMOR()); // should not be paired
         assertType("Hidden Predators", CardType.CREATURE, false);
 
     }

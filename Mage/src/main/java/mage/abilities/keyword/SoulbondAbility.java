@@ -1,6 +1,5 @@
 package mage.abilities.keyword;
 
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -18,7 +17,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
-import mage.util.GameLog;
 
 /**
  * 702.94. Soulbond
@@ -75,13 +73,13 @@ public class SoulbondAbility extends EntersBattlefieldTriggeredAbility {
         if (sourcePerm == null
                 || !sourcePerm.isControlledBy(getControllerId())
                 || !sourcePerm.isCreature(game)
-                || sourcePerm.getPairedCard() != null) {
+                || sourcePerm.getPairedMOR() != null) {
             return false;
         }
         return game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, getControllerId(), game)
                 .stream()
                 .filter(p -> !p.getId().equals(sourcePerm.getId()))
-                .anyMatch(p -> p.getPairedCard() == null);
+                .anyMatch(p -> p.getPairedMOR() == null);
     }
 
     @Override
@@ -125,7 +123,7 @@ class SoulbondEntersSelfEffect extends OneShotEffect {
         if (sourcePerm == null
                 || !sourcePerm.isControlledBy(source.getControllerId())
                 || !sourcePerm.isCreature(game)
-                || sourcePerm.getPairedCard() != null) {
+                || sourcePerm.getPairedMOR() != null) {
             return false;
         }
         Player controller = game.getPlayer(source.getControllerId());
@@ -138,10 +136,8 @@ class SoulbondEntersSelfEffect extends OneShotEffect {
             if (controller.choose(Outcome.Benefit, target, source, game)) {
                 Permanent chosen = game.getPermanent(target.getFirstTarget());
                 if (chosen != null) {
-                    chosen.setPairedCard(new MageObjectReference(sourcePerm, game));
-                    chosen.addInfo("soulbond", "Soulbond to " + GameLog.getColoredObjectIdNameForTooltip(sourcePerm), game);
-                    sourcePerm.setPairedCard(new MageObjectReference(chosen, game));
-                    sourcePerm.addInfo("soulbond", "Soulbond to " + GameLog.getColoredObjectIdNameForTooltip(chosen), game);
+                    chosen.setPairedWith(sourcePerm, game);
+                    sourcePerm.setPairedWith(chosen, game);
                     game.informPlayers(controller.getLogName() + " soulbonds " + sourcePerm.getLogName() + " with " + chosen.getLogName());
                     return true;
                 }
@@ -188,7 +184,7 @@ class SoulbondEntersOtherAbility extends EntersBattlefieldAllTriggeredAbility {
         if (sourcePerm == null
                 || !sourcePerm.isControlledBy(getControllerId())
                 || !sourcePerm.isCreature(game)
-                || sourcePerm.getPairedCard() != null) {
+                || sourcePerm.getPairedMOR() != null) {
             return false;
         }
         // no event param to check the other creature specifically
@@ -232,18 +228,18 @@ class SoulbondEntersOtherEffect extends OneShotEffect {
         if (sourcePerm == null
                 || !sourcePerm.isControlledBy(source.getControllerId())
                 || !sourcePerm.isCreature(game)
-                || sourcePerm.getPairedCard() != null) {
+                || sourcePerm.getPairedMOR() != null) {
             return false;
         }
         Permanent enteringPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (enteringPermanent == null
                 || !enteringPermanent.isControlledBy(source.getControllerId())
                 || !enteringPermanent.isCreature(game)
-                || enteringPermanent.getPairedCard() != null) {
+                || enteringPermanent.getPairedMOR() != null) {
             return false;
         }
-        enteringPermanent.setPairedCard(new MageObjectReference(sourcePerm, game));
-        sourcePerm.setPairedCard(new MageObjectReference(enteringPermanent, game));
+        enteringPermanent.setPairedWith(sourcePerm, game);
+        sourcePerm.setPairedWith(enteringPermanent, game);
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             game.informPlayers(controller.getLogName() + " soulbonds " + sourcePerm.getLogName() + " with " + enteringPermanent.getLogName());
@@ -267,7 +263,7 @@ enum PairedPredicate implements Predicate<Permanent> {
 
     @Override
     public boolean apply(Permanent input, Game game) {
-        return paired == (input.getPairedCard() != null);
+        return paired == (input.getPairedMOR() != null);
     }
 
     @Override

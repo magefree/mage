@@ -38,16 +38,16 @@ public class GainAbilityPairedEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null && permanent.getPairedCard() != null) {
-            Permanent paired = permanent.getPairedCard().getPermanent(game);
-            if (paired != null && paired.getPairedCard() != null && paired.getPairedCard().equals(new MageObjectReference(permanent, game))) {
+        if (permanent != null && permanent.getPairedMOR() != null) {
+            Permanent paired = permanent.getPairedMOR().getPermanent(game);
+            if (paired != null && paired.getPairedMOR() != null && paired.getPairedMOR().equals(new MageObjectReference(permanent, game))) {
                 permanent.addAbility(ability, source.getSourceId(), game);
                 paired.addAbility(ability, source.getSourceId(), game);
                 return true;
 
             } else {
                 // No longer the same cards as orininally paired.
-                permanent.setPairedCard(null);
+                permanent.setUnpaired();
             }
         }
         return false;

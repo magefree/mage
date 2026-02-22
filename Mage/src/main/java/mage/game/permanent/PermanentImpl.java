@@ -1891,22 +1891,24 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public void setPairedCard(MageObjectReference pairedCard) {
-        this.pairedPermanent = pairedCard;
-        if (pairedCard == null) {
-            // remove existing soulbond info text
-            this.addInfo("soulbond", null, null);
+    public void setPairedWith(Permanent permanent, Game game) {
+        if (permanent != null) {
+            this.pairedPermanent = new MageObjectReference(permanent, game);
+            this.addInfo("soulbond", "Paired with " + GameLog.getColoredObjectIdNameForTooltip(permanent), game);
+        } else {
+            setUnpaired();
         }
     }
 
     @Override
-    public MageObjectReference getPairedCard() {
+    public MageObjectReference getPairedMOR() {
         return pairedPermanent;
     }
 
     @Override
-    public void clearPairedCard() {
+    public void setUnpaired() {
         this.pairedPermanent = null;
+        this.addInfo("soulbond", null, null);
     }
 
     @Override

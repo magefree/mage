@@ -431,23 +431,19 @@ public interface Permanent extends Card, Controllable {
     void clearConnectedCards(String key);
 
     /**
-     * Sets paired card.
-     *
-     * @param pairedCard
+     * Sets paired permanent (Soulbond ability)
      */
-    void setPairedCard(MageObjectReference pairedCard);
+    void setPairedWith(Permanent permanent, Game game);
 
     /**
-     * Gets paired card. Can return null.
-     *
-     * @return
+     * Returns a MageObjectReference for the paired permanent, or null if unpaired
      */
-    MageObjectReference getPairedCard();
+    MageObjectReference getPairedMOR();
 
     /**
-     * Makes permanent paired with no other permanent.
+     * Makes permanent unpaired.
      */
-    void clearPairedCard();
+    void setUnpaired();
 
     void addBandedCard(UUID bandedCard);
 
