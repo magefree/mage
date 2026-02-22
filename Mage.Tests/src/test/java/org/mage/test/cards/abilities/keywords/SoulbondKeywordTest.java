@@ -9,7 +9,6 @@ import mage.abilities.keyword.ReachAbility;
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
 import org.junit.Test;
@@ -76,21 +75,49 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
      * Tests two creatures with Soulbond paired with each other
      */
     @Test
-    public void testTwoSoulbondCreaturesOnBattlefield() {
-        addCard(Zone.HAND, playerA, forcemage, 2);
-        addCard(Zone.BATTLEFIELD, playerA, "Forest", 6);
+    public void testTwoSoulbondCreaturesFirstAbility() {
+        addCard(Zone.HAND, playerA, forcemage);
+        addCard(Zone.HAND, playerA, trappers);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 8);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, forcemage, true);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, forcemage);
-        setChoice(playerA, "Soulbond"); // order triggers
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, trappers);
+        setChoice(playerA, trappers); // order triggers
         setChoice(playerA, true);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertPermanentCount(playerA, forcemage, 2);
-        assertPowerToughness(playerA, forcemage, 4, 4, Filter.ComparisonScope.All);
+        assertPowerToughness(playerA, forcemage, 3, 3);
+        assertPowerToughness(playerA, trappers, 4, 6);
+        assertAbility(playerA, forcemage, ReachAbility.getInstance(), true);
+        assertAbility(playerA, trappers, ReachAbility.getInstance(), true);
+    }
+
+    /**
+     * Tests two creatures with Soulbond paired with each other
+     */
+    @Test
+    public void testTwoSoulbondCreaturesSecondAbility() {
+        addCard(Zone.HAND, playerA, forcemage);
+        addCard(Zone.HAND, playerA, trappers);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 8);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, forcemage, true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, trappers);
+        setChoice(playerA, forcemage); // order triggers
+        setChoice(playerA, true);
+        setChoice(playerA, forcemage); // choose paired
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPowerToughness(playerA, forcemage, 3, 3);
+        assertPowerToughness(playerA, trappers, 4, 6);
+        assertAbility(playerA, forcemage, ReachAbility.getInstance(), true);
+        assertAbility(playerA, trappers, ReachAbility.getInstance(), true);
     }
 
     /**
