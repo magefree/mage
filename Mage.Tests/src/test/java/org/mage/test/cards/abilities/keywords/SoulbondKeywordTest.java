@@ -4,6 +4,8 @@ import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
 import mage.abilities.keyword.LifelinkAbility;
+import mage.abilities.keyword.ReachAbility;
+import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.filter.Filter;
@@ -24,6 +26,7 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
     private static final String nearheath = "Nearheath Pilgrim"; // 2/1 soulbond lifelink
     private static final String phantasmalBear = "Phantasmal Bear"; // 2/2
     private static final String bolt = "Lightning Bolt";
+    private static final String trappers = "Geist Trappers"; // 3/5 soulbond reach
 
     @Test
     public void testPairOnCast() {
@@ -496,4 +499,66 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Doom Blade", 1);
         assertPermanentCount(playerA, "Palinchron", 1);
     }
+
+    /**
+     * Three soulbond creatures, but only one pairing, even if yes to all triggers
+     */
+    @Test
+    public void testThreeSoulbond() {
+        addCard(Zone.BATTLEFIELD, playerA, nearheath); // 2/1 soulbond lifelink
+        addCard(Zone.BATTLEFIELD, playerA, forcemage); // 2/2 soulbond +1/+1
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 5);
+        addCard(Zone.HAND, playerA, trappers); // 3/5 soulbond reach
+        addCard(Zone.BATTLEFIELD, playerB, "Hidden Predators"); // state trigger
+        // When an opponent controls a creature with power 4 or greater,
+        // if this permanent is an enchantment, it becomes a 4/4 Beast creature.
+        // (checks that never pairs with Forcemage)
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, trappers);
+        setChoice(playerA, "Soulbond"); // order triggers in default order
+        // trappers bottom of stack, then forcemage, then nearheath on top to resolve first
+        setChoice(playerA, "Soulbond");
+        setChoice(playerA, true); // yes for nearheath
+        // forcemage trigger then fizzles
+        // no choice for trappers as it is already paired
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPowerToughness(playerA, nearheath, 2, 1);
+        assertPowerToughness(playerA, forcemage, 2, 2);
+        assertPowerToughness(playerA, trappers, 3, 5);
+        assertAbility(playerA, nearheath, LifelinkAbility.getInstance(), true);
+        assertAbility(playerA, trappers, LifelinkAbility.getInstance(), true);
+        assertAbility(playerA, nearheath, ReachAbility.getInstance(), true);
+        assertAbility(playerA, trappers, ReachAbility.getInstance(), true);
+        Permanent forcemage1 = getPermanent(forcemage, playerA);
+        Assert.assertNull(forcemage1.getPairedCard()); // should not be paired
+        assertType("Hidden Predators", CardType.CREATURE, false);
+
+    }
+
+    @Test
+    public void testJointAssault() {
+        addCard(Zone.BATTLEFIELD, playerA, vanguard);
+        addCard(Zone.HAND, playerA, forcemage);
+        addCard(Zone.HAND, playerA, "Joint Assault");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, forcemage);
+        setChoice(playerA, true);
+        setChoice(playerA, vanguard);
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Joint Assault", vanguard);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, forcemage, 1);
+        assertPowerToughness(playerA, forcemage, 5, 5);
+        assertPowerToughness(playerA, vanguard, 5, 4);
+    }
+
 }
