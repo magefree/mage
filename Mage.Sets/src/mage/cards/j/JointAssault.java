@@ -56,6 +56,7 @@ class JointAssaultBoostTargetEffect extends ContinuousEffectImpl {
         super(effect);
         this.power = effect.power;
         this.toughness = effect.toughness;
+        this.paired = effect.paired;
     }
 
     @Override
