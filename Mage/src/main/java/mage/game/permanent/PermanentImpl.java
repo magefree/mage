@@ -880,6 +880,13 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             this.removeFromCombat(game);
             this.controlledFromStartOfControllerTurn = false;
             this.removeUncontrolledRingBearer(game);
+            if (this.getPairedMOR() != null) {
+                Permanent paired = this.getPairedMOR().getPermanent(game);
+                if (paired != null) {
+                    paired.setUnpaired();
+                }
+                this.setUnpaired();
+            }
 
             this.getAbilities(game).setControllerId(controllerId);
             game.getContinuousEffects().setController(objectId, controllerId);

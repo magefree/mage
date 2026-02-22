@@ -206,6 +206,32 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
     }
 
     /**
+     * If both paired creatures change control simultaneously, should still become unpaired
+     */
+    @Test
+    public void testBothPairedCreaturesChangeControl() {
+        addCard(Zone.BATTLEFIELD, playerA, vanguard);
+        addCard(Zone.HAND, playerA, forcemage);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+
+        addCard(Zone.HAND, playerB, "Insurrection");
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 8);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, forcemage);
+        setChoice(playerA, true);
+        setChoice(playerA, vanguard);
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Insurrection");
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPowerToughness(playerB, forcemage, 2, 2);
+        assertPowerToughness(playerB, vanguard, 2, 1);
+    }
+
+    /**
      * Tests that stealing creature will allow to use Soulbond ability on
      * controller's creature
      */
