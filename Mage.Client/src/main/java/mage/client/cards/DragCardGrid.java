@@ -568,6 +568,8 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
         void duplicateCards(Collection<CardView> cards);
 
+        void markCardsAsFavorite(Collection<CardView> cards);
+
         void invertCardSelection(Collection<CardView> cards);
 
         void showAll();
@@ -1178,6 +1180,13 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         Collection<CardView> toDuplicate = dragCardList();
         for (DragCardGridListener l : listeners) {
             l.duplicateCards(toDuplicate);
+        }
+    }
+
+    private void markAsFavorite() {
+        Collection<CardView> toFave = dragCardList();
+        for (DragCardGridListener l : listeners) {
+            l.markCardsAsFavorite(toFave);
         }
     }
 
@@ -1980,6 +1989,10 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             JMenuItem duplicateSelection = new JMenuItem("Duplicate selected cards");
             duplicateSelection.addActionListener(e2 -> duplicateSelection());
             menu.add(duplicateSelection);
+
+            JMenuItem markAsFavorite = new JMenuItem("Mark selected card editions as favorite");
+            markAsFavorite.addActionListener(e2 -> markAsFavorite());
+            menu.add(markAsFavorite);
         }
         menu.show(e.getComponent(), e.getX(), e.getY());
     }

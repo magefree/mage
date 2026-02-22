@@ -11,6 +11,7 @@ import mage.client.util.ClientEventType;
 import mage.client.util.Event;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.Listener;
+import mage.client.preference.MagePreferences;
 import mage.view.CardView;
 import mage.view.CardsView;
 
@@ -113,6 +114,17 @@ public class DeckArea extends javax.swing.JPanel {
                     deckList.addCardView(newCard, card);
                 }
             }
+            
+            @Override
+            public void markCardsAsFavorite(Collection<CardView> cards) {
+                deckList.deselectAll();
+                for (CardView card : cards) {
+                    String name = card.getName();
+                    String setCode = card.getExpansionSetCode();
+                    String cardNumber = card.getCardNumber();
+                    MagePreferences.setFavoriteCard(name, cardNumber, setCode);
+                }
+            }
 
             @Override
             public void invertCardSelection(Collection<CardView> cards) {
@@ -151,6 +163,17 @@ public class DeckArea extends javax.swing.JPanel {
                 for (CardView card : cards) {
                     CardView newCard = new CardView(card);
                     sideboardList.addCardView(newCard, card);
+                }
+            }
+
+            @Override
+            public void markCardsAsFavorite(Collection<CardView> cards) {
+                deckList.deselectAll();
+                for (CardView card : cards) {
+                    String name = card.getName();
+                    String setCode = card.getExpansionSetCode();
+                    String cardNumber = card.getCardNumber();
+                    MagePreferences.setFavoriteCard(name, cardNumber, setCode);
                 }
             }
 
