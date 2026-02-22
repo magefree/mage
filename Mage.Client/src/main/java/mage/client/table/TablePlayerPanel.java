@@ -129,6 +129,7 @@ public class TablePlayerPanel extends javax.swing.JPanel {
         if (getPlayerType() != PlayerType.HUMAN) {
             this.newPlayerPanel.setVisible(true);
             this.newPlayerPanel.setPlayerName(extractAiPlayerNumberFromLabel(this.lblPlayerNum.getText()));
+            this.newPlayerPanel.loadRecentDeckFiles();
         } else {
             this.newPlayerPanel.setVisible(false);
         }

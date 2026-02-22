@@ -1,11 +1,9 @@
 package mage.client.table;
 
-import java.io.File;
-import java.io.IOException;
+import java.awt.*;
 import javax.swing.*;
 
-import mage.cards.decks.DeckFileFilter;
-import mage.client.MageFrame;
+import mage.client.components.DecklistChooser;
 import mage.client.deck.generator.DeckGenerator;
 import mage.client.util.ClientDefaultSettings;
 
@@ -15,78 +13,56 @@ import mage.client.util.ClientDefaultSettings;
  */
 public class NewPlayerPanel extends javax.swing.JPanel {
 
-    private final JFileChooser fcSelectDeck;
-
     public NewPlayerPanel() {
         initComponents();
-        fcSelectDeck = new JFileChooser();
-        fcSelectDeck.setAcceptAllFileFilterUsed(false);
-        fcSelectDeck.addChoosableFileFilter(new DeckFileFilter("dck", "XMage's deck files (*.dck)"));
-        this.txtPlayerDeck.setText("");
-        this.txtPlayerName.setText(ClientDefaultSettings.computerName);
+        txtPlayerName.setText(ClientDefaultSettings.computerName);
+    }
+
+    /**
+     * Fill the combobox with the recent n filenames.
+     */
+    public void loadRecentDeckFiles() {
+        decklist.update();
     }
 
     public void setPlayerName(String playerName) {
-        this.txtPlayerName.setText(playerName);
-        this.txtPlayerName.setEditable(false);
-        this.txtPlayerName.setEnabled(false);
-    }
-    
-    protected void playerLoadDeck() {
-        String lastFolder = MageFrame.getPreferences().get("lastDeckFolder", "");
-        if (!lastFolder.isEmpty()) {
-            fcSelectDeck.setCurrentDirectory(new File(lastFolder));
-        }
-        int ret = fcSelectDeck.showDialog(this, "Select Deck");
-        if (ret == JFileChooser.APPROVE_OPTION) {
-            File file = fcSelectDeck.getSelectedFile();
-            this.txtPlayerDeck.setText(file.getPath());
-            try {
-                MageFrame.getPreferences().put("lastDeckFolder", file.getCanonicalPath());
-            } catch (IOException ex) {
-            }
-        }
-        fcSelectDeck.setSelectedFile(null);
+        txtPlayerName.setText(playerName);
+        txtPlayerName.setEditable(false);
+        txtPlayerName.setEnabled(false);
     }
 
     protected void generateDeck() {
-        String path = DeckGenerator.generateDeck();
-        if (path == null) {
-            return;
-        }
-        this.txtPlayerDeck.setText(path);
+        decklist.setFile(DeckGenerator.generateDeck());
     }
 
     public String getPlayerName() {
-        return this.txtPlayerName.getText();
+        return txtPlayerName.getText();
     }
 
     public String getDeckFile() {
-        return this.txtPlayerDeck.getText();
+        return decklist.getFile();
     }
 
-    public void setDeckFile(String deckFile) {
-        this.txtPlayerDeck.setText(deckFile);
+    public void setDeckFile(String filename) {
+        decklist.setFile(filename);
     }
 
     public void setSkillLevel(int level) {
-        this.spnLevel.setValue(level);
+        spnLevel.setValue(level);
     }
 
     public int getSkillLevel() {
-        return (Integer) spnLevel.getValue();
+        return (Integer)spnLevel.getValue();
     }
 
     public void showLevel(boolean show) {
-        this.spnLevel.setVisible(show);
-        this.lblLevel.setVisible(show);
+        spnLevel.setVisible(show);
+        lblLevel.setVisible(show);
     }
 
     public void showDeckElements(boolean show) {
-        this.lblPlayerDeck.setVisible(show);
-        this.txtPlayerDeck.setVisible(show);
-        this.btnGenerate.setVisible(show);
-        this.btnPlayerDeck.setVisible(show);
+        lblPlayerDeck.setVisible(show);
+        decklist.setVisible(show);
     }
 
     /**
@@ -101,21 +77,13 @@ public class NewPlayerPanel extends javax.swing.JPanel {
         lblPlayerName = new javax.swing.JLabel();
         txtPlayerName = new javax.swing.JTextField();
         lblPlayerDeck = new javax.swing.JLabel();
-        txtPlayerDeck = new javax.swing.JTextField();
-        btnPlayerDeck = new javax.swing.JButton();
-        btnGenerate = new javax.swing.JButton();
+        decklist = new DecklistChooser();
         lblLevel = new javax.swing.JLabel();
         spnLevel = new javax.swing.JSpinner();
 
         lblPlayerName.setText("Name:");
 
         lblPlayerDeck.setText("Deck:");
-
-        btnPlayerDeck.setText("...");
-        btnPlayerDeck.addActionListener(evt -> btnPlayerDeckActionPerformed(evt));
-
-        btnGenerate.setText("Generate");
-        btnGenerate.addActionListener(evt -> btnGenerateActionPerformed(evt));
 
         lblLevel.setText("Skill:");
 
@@ -134,13 +102,9 @@ public class NewPlayerPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtPlayerName, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
-                    .addComponent(txtPlayerDeck, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE))
+                    .addComponent(decklist, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnPlayerDeck, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnGenerate, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblLevel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -158,28 +122,16 @@ public class NewPlayerPanel extends javax.swing.JPanel {
                 .addGap(3, 3, 3)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPlayerDeck)
-                    .addComponent(txtPlayerDeck, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPlayerDeck, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGenerate, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(decklist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnPlayerDeckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayerDeckActionPerformed
-        playerLoadDeck();
-}//GEN-LAST:event_btnPlayerDeckActionPerformed
-
-    private void btnGenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerateActionPerformed
-        generateDeck();
-    }//GEN-LAST:event_btnGenerateActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnGenerate;
-    private javax.swing.JButton btnPlayerDeck;
+    private DecklistChooser decklist;
     private javax.swing.JLabel lblLevel;
     private javax.swing.JLabel lblPlayerDeck;
     private javax.swing.JLabel lblPlayerName;
     private javax.swing.JSpinner spnLevel;
-    private javax.swing.JTextField txtPlayerDeck;
     private javax.swing.JTextField txtPlayerName;
     // End of variables declaration//GEN-END:variables
 
