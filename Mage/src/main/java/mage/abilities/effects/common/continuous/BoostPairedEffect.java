@@ -15,20 +15,21 @@ import mage.game.permanent.Permanent;
  */
 public class BoostPairedEffect extends ContinuousEffectImpl {
 
-    private int power;
-    private int toughness;
+    private final int power;
+    private final int toughness;
 
-    public BoostPairedEffect(int power, int toughness, String rule) {
+    public BoostPairedEffect(int power, int toughness) {
         super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
         this.power = power;
         this.toughness = toughness;
-        staticText = rule;
+        this.staticText = "As long as {this} is paired with another creature, each of those creatures gets +"
+                + power + "/+" + toughness;
     }
 
     protected BoostPairedEffect(final BoostPairedEffect effect) {
         super(effect);
-        power = effect.power;
-        toughness = effect.toughness;
+        this.power = effect.power;
+        this.toughness = effect.toughness;
     }
 
     @Override
