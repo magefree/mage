@@ -77,7 +77,11 @@ class FandanielTelophoroiAscianEffect extends OneShotEffect {
         List<Permanent> permanents = new ArrayList<>();
         for (UUID playerId : game.getOpponents(source.getControllerId())) {
             Player player = game.getPlayer(playerId);
-            if (player == null || !game.getBattlefield().contains(
+            if (player == null) {
+                continue;
+            }
+            players.add(playerId);
+            if (!game.getBattlefield().contains(
                     StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN,
                     playerId, source, game, 1
             )) {
@@ -88,7 +92,6 @@ class FandanielTelophoroiAscianEffect extends OneShotEffect {
             );
             player.choose(Outcome.Sacrifice, target, source, game);
             permanents.add(game.getPermanent(target.getFirstTarget()));
-            players.add(playerId);
         }
         permanents.removeIf(Objects::isNull);
         for (Permanent permanent : permanents) {
