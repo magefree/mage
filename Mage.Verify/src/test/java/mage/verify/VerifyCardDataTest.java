@@ -2643,7 +2643,7 @@ public class VerifyCardDataTest {
         }
     }
 
-    private static final String[] wrongSymbols = {"’", "“", "”"};
+    private static final String[] wrongSymbols = {"’", "“", "”", "\n"};
 
     private void checkWrongSymbolsInRules(Card card) {
         for (String s : wrongSymbols) {
@@ -2652,6 +2652,10 @@ public class VerifyCardDataTest {
             }
         }
 
+        Pattern ruleNameCheck = Pattern.compile("\\b(?<!named |name is )"+Pattern.quote(card.getName())+"(?! \\{)");
+        Set<String> overlapNames = Arrays.stream(SubType.class.getEnumConstants()).map(SubType::toString).collect(Collectors.toSet()); // Assembly-Worker, Coward, etc.
+        // TODO: Tibalt, Cosmic Impostor's emblem should refer to the source permanent, even if it has a different name
+        overlapNames.addAll(Arrays.asList("Exile", "Kher Keep", "Kookus", "Regenerate", "Shield of Kaldra", "Stangg", "Tibalt, Cosmic Impostor"));
         for (String rule : card.getRules()) {
             for (String s : wrongSymbols) {
                 if (rule.contains(s)) {
@@ -2660,6 +2664,12 @@ public class VerifyCardDataTest {
             }
             if (rule.contains("&mdash ")) {
                 fail(card, "rules", "card's rules contains restricted test [&mdash ] instead [&mdash;]");
+            }
+            if (ruleNameCheck.matcher(rule).find() && !overlapNames.contains(card.getName())) {
+                fail(card, "rules", "card's pre-formatted rules incorrectly contains its name directly, probably use {this} instead or add to overlapNames exceptions list");
+            }
+            if (rule.contains("named {this}") || rule.contains("name is {this}")) {
+                fail(card, "rules", "card's rules contains \"named {this}\" or \"name is {this}\", should use card's name directly");
             }
         }
     }
