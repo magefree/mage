@@ -241,6 +241,7 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("Retro-Mutation", 51, Rarity.COMMON, mage.cards.r.RetroMutation.class));
         cards.add(new SetCardInfo("Return to the Sewers", 52, Rarity.COMMON, mage.cards.r.ReturnToTheSewers.class));
         cards.add(new SetCardInfo("Rock Soldiers", 107, Rarity.COMMON, mage.cards.r.RockSoldiers.class));
+        cards.add(new SetCardInfo("Rocksteady, Crash Courser", 131, Rarity.COMMON, mage.cards.r.RocksteadyCrashCourser.class));
         cards.add(new SetCardInfo("Sally Pride, Lioness Leader", 225, Rarity.RARE, mage.cards.s.SallyPrideLionessLeader.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sally Pride, Lioness Leader", 24, Rarity.RARE, mage.cards.s.SallyPrideLionessLeader.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Savanti Romero, Time's Exile", 267, Rarity.RARE, mage.cards.s.SavantiRomeroTimesExile.class, NON_FULL_USE_VARIOUS));
