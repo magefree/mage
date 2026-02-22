@@ -3,6 +3,7 @@ package org.mage.test.cards.abilities.keywords;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
+import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.constants.CardType;
@@ -27,6 +28,9 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
     private static final String phantasmalBear = "Phantasmal Bear"; // 2/2
     private static final String bolt = "Lightning Bolt";
     private static final String trappers = "Geist Trappers"; // 3/5 soulbond reach
+    private static final String angelsTomb = "Angel's Tomb";
+    // Whenever a creature you control enters, you may have this artifact become a 3/3 white Angel artifact creature with flying until end of turn.
+
 
     @Test
     public void testPairOnCast() {
@@ -317,6 +321,29 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, blinkmoth, 2, 2);
     }
 
+    @Test
+    public void testUnpairWhenNoLongerCreature() {
+        addCard(Zone.HAND, playerA, forcemage);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
+        addCard(Zone.BATTLEFIELD, playerA, blinkmoth, 1);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}: ");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, forcemage);
+        setChoice(playerA, true);
+        setChoice(playerA, blinkmoth);
+
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}: ");
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        // test not paired
+        assertPowerToughness(playerA, forcemage, 2, 2);
+        assertPowerToughness(playerA, blinkmoth, 1, 1);
+    }
+
     /**
      * Tests no effect whether land was animated after Soulbond creature has
      * entered the battlefield
@@ -515,9 +542,9 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
         // (checks that never pairs with Forcemage)
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, trappers);
-        setChoice(playerA, "Soulbond"); // order triggers in default order
+        setChoice(playerA, trappers); // order triggers
         // trappers bottom of stack, then forcemage, then nearheath on top to resolve first
-        setChoice(playerA, "Soulbond");
+        setChoice(playerA, forcemage);
         setChoice(playerA, true); // yes for nearheath
         // forcemage trigger then fizzles
         // no choice for trappers as it is already paired
@@ -559,6 +586,51 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, forcemage, 1);
         assertPowerToughness(playerA, forcemage, 5, 5);
         assertPowerToughness(playerA, vanguard, 5, 4);
+    }
+
+    @Test
+    public void testAngelsTombOnly() {
+        addCard(Zone.BATTLEFIELD, playerA, angelsTomb);
+        addCard(Zone.HAND, playerA, forcemage);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, forcemage);
+        // no choice from soulbond as it doesn't trigger
+        setChoice(playerA, true); // yes for Angel's Tomb animate
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, forcemage, 1);
+        assertPowerToughness(playerA, forcemage, 2, 2);
+        assertType(angelsTomb, CardType.CREATURE, true);
+        assertPowerToughness(playerA, angelsTomb, 3, 3);
+        assertAbility(playerA, angelsTomb, FlyingAbility.getInstance(), true);
+    }
+
+    @Test
+    public void testAngelsTombAndAnother() {
+        addCard(Zone.BATTLEFIELD, playerA, angelsTomb);
+        addCard(Zone.BATTLEFIELD, playerA, vanguard);
+        addCard(Zone.HAND, playerA, forcemage);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, forcemage);
+        setChoice(playerA, "Soulbond"); // order triggers so that animate resolves first
+        setChoice(playerA, true); // yes for Angel's Tomb animate
+        setChoice(playerA, true); // yes to soulbond
+        setChoice(playerA, angelsTomb); // choose soulbond
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, forcemage, 1);
+        assertPowerToughness(playerA, forcemage, 3, 3);
+        assertType(angelsTomb, CardType.CREATURE, true);
+        assertPowerToughness(playerA, angelsTomb, 4, 4);
+        assertAbility(playerA, angelsTomb, FlyingAbility.getInstance(), true);
     }
 
 }
