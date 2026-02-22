@@ -24,7 +24,10 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Trusted Forcemage");
+        setChoice(playerA, true);
+        setChoice(playerA, "Elite Vanguard");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -43,7 +46,9 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Elite Vanguard");
+        setChoice(playerA, true);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -62,7 +67,10 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Trusted Forcemage", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Trusted Forcemage");
+        setChoice(playerA, "Soulbond"); // order triggers
+        setChoice(playerA, true);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -80,6 +88,7 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Trusted Forcemage");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -104,8 +113,11 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 3);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Trusted Forcemage");
+        setChoice(playerA, true);
+        setChoice(playerA, "Elite Vanguard");
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Act of Treason", "Trusted Forcemage");
 
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -119,7 +131,7 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
     }
 
     /**
-     * Tests Soulbond effect disabling when paired creture changes its
+     * Tests Soulbond effect disabling when paired creature changes its
      * controller
      */
     @Test
@@ -134,8 +146,11 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 3);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Trusted Forcemage");
+        setChoice(playerA, true);
+        setChoice(playerA, "Elite Vanguard");
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Act of Treason", "Elite Vanguard");
 
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -161,8 +176,11 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 3);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Trusted Forcemage");
+        setChoice(playerA, true);
+        setChoice(playerA, "Elite Vanguard");
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Act of Treason", "Trusted Forcemage");
 
+        setStrictChooseMode(true);
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
@@ -190,7 +208,9 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Act of Treason", "Trusted Forcemage");
         waitStackResolved(2, PhaseStep.PRECOMBAT_MAIN);
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Elite Vanguard");
+        setChoice(playerB, true);
 
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -219,7 +239,9 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Act of Treason", "Trusted Forcemage");
         waitStackResolved(2, PhaseStep.PRECOMBAT_MAIN);
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Elite Vanguard");
+        setChoice(playerB, true);
 
+        setStrictChooseMode(true);
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN); // Effect of "Act of Treason" will end here
         execute();
 
@@ -243,9 +265,16 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Unsummon", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Trusted Forcemage");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Unsummon", "Elite Vanguard");
+        setChoice(playerA, true);
+        setChoice(playerA, "Elite Vanguard");
 
-        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        checkPT("paired boost", 1, PhaseStep.BEGIN_COMBAT, playerA, "Trusted Forcemage", 3, 3);
+        checkPT("paired boost", 1, PhaseStep.BEGIN_COMBAT, playerA, "Elite Vanguard", 3, 2);
+
+        castSpell(1, PhaseStep.DECLARE_ATTACKERS, playerA, "Unsummon", "Elite Vanguard");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
         assertPermanentCount(playerA, "Elite Vanguard", 0);
@@ -265,7 +294,10 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}: ");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Trusted Forcemage");
+        setChoice(playerA, true);
+        setChoice(playerA, "Blinkmoth Nexus");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -287,6 +319,7 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Trusted Forcemage");
         activateAbility(1, PhaseStep.BEGIN_COMBAT, playerA, "{1}: ");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.DECLARE_ATTACKERS);
         execute();
 
@@ -307,7 +340,13 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}: ");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Trusted Forcemage");
+        setChoice(playerA, true);
+        setChoice(playerA, "Blinkmoth Nexus");
 
+        checkPT("paired boost", 1, PhaseStep.BEGIN_COMBAT, playerA, "Trusted Forcemage", 3, 3);
+        checkPT("paired boost", 1, PhaseStep.BEGIN_COMBAT, playerA, "Blinkmoth Nexus", 2, 2);
+
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
@@ -335,9 +374,20 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Lightning Bolt", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Trusted Forcemage", true);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Elite Vanguard");
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Phantasmal Bear");
+        setChoice(playerA, true);
+        setChoice(playerA, "Elite Vanguard");
 
+        checkPT("paired boost", 1, PhaseStep.BEGIN_COMBAT, playerA, "Trusted Forcemage", 3, 3);
+        checkPT("paired boost", 1, PhaseStep.BEGIN_COMBAT, playerA, "Elite Vanguard", 3, 2);
+
+        castSpell(1, PhaseStep.DECLARE_ATTACKERS, playerA, "Lightning Bolt", "Elite Vanguard");
+
+        checkPT("unpaired", 1, PhaseStep.END_COMBAT, playerA, "Trusted Forcemage", 2, 2);
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Phantasmal Bear");
+        setChoice(playerA, true);
+
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
@@ -360,7 +410,10 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nearheath Pilgrim");
+        setChoice(playerA, true);
+        setChoice(playerA, "Elite Vanguard");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -387,6 +440,7 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cloudshift", "Trusted Forcemage");
         setChoice(playerA, false);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
@@ -394,9 +448,9 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Trusted Forcemage", 2, 2);
         assertPowerToughness(playerA, "Elite Vanguard", 2, 1);
 
-        Permanent trustedForcemange = getPermanent("Trusted Forcemage", playerA.getId());
+        Permanent trustedForcemage = getPermanent("Trusted Forcemage", playerA.getId());
         Permanent eliteVanguard = getPermanent("Elite Vanguard", playerA.getId());
-        Assert.assertNull(trustedForcemange.getPairedCard());
+        Assert.assertNull(trustedForcemage.getPairedCard());
         Assert.assertNull(eliteVanguard.getPairedCard());
     }
 
@@ -404,7 +458,7 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
      * Reported bug: Soulbond should use the stack, but unable to use instant speed removal since no trigger occurs
      */
     @Test
-    public void testRespondToSoulboundWithRemoval() {
+    public void testRespondToSoulbondWithRemoval() {
         // When Palinchron enters the battlefield, untap up to seven lands.
         // {2}{U}{U}: Return Palinchron to its owner's hand.
         addCard(Zone.BATTLEFIELD, playerA, "Palinchron"); // 4/5 flying
@@ -423,6 +477,8 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
 
         // Deadeye's ability should not be usable since was destroyed before Soulbond trigger resolved
         checkPlayableAbility("Can't activate", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}{U}:", false);
+
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
