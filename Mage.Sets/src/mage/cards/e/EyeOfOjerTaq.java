@@ -102,6 +102,39 @@ class EyeOfOjerTaqTarget extends TargetCardInGraveyardBattlefieldOrStack {
     }
 
     @Override
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
+        Set<UUID> possibleTargets = super.possibleTargets(sourceControllerId, source, game);
+        Set<UUID> targetIds = new HashSet<>(this.getTargets());
+        if (targetIds.isEmpty()) {
+            return possibleTargets;
+        }
+        Set<CardType> unionTypes = new HashSet<>();
+        for (UUID tId : this.getTargets()) {
+            Card tCard = game.getCard(tId);
+            if (tCard != null) {
+                unionTypes.addAll(tCard.getCardType(game));
+            }
+        }
+        return possibleTargets.stream()
+                .filter(id -> {
+                    if (targetIds.contains(id)) {
+                        return true;
+                    }
+                    Card card = game.getCard(id);
+                    if (card == null) {
+                        return false;
+                    }
+                    for (CardType type : card.getCardType(game)) {
+                        if (unionTypes.contains(type)) {
+                            return true;
+                        }
+                    }
+                    return false;
+                })
+                .collect(Collectors.toSet());
+    }
+
+    @Override
     public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
         if (!super.canTarget(playerId, id, source, game)) {
             return false;
@@ -118,9 +151,11 @@ class EyeOfOjerTaqTarget extends TargetCardInGraveyardBattlefieldOrStack {
         if (card1.getId().equals(card2.getId())) {
             return false;
         }
+        // this should be returned true, but the invert works.
+        // if you note the code logic issue, please speak up.
         for (CardType type : card1.getCardType(game)) {
             if (card2.getCardType(game).contains(type)) {
-                return false; // see comment in original code
+                return false;
             }
         }
         return true;
@@ -142,7 +177,7 @@ class ChooseCardTypeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject mageObject = game.getPermanentEntering(source.getSourceId());
-        List<CardType> exiledCardsCardType = new ArrayList<>();
+        Set<CardType> exiledCardsCardType = new HashSet<>();
         if (mageObject == null) {
             mageObject = game.getObject(source);
         }
@@ -158,30 +193,17 @@ class ChooseCardTypeEffect extends OneShotEffect {
             if (exileZone == null) {
                 return false;
             }
+            List<String> sharedCardTypes = new ArrayList<>();
             for (Card card : exileZone.getCards(game)) {
-                exiledCardsCardType.addAll(card.getCardType(game));
-            }
-            Choice cardTypeChoice = new ChoiceCardType();
-            cardTypeChoice.getChoices().clear();
-            cardTypeChoice.getChoices().addAll(exiledCardsCardType.stream().map(CardType::toString).collect(Collectors.toList()));
-            Map<String, Integer> cardTypeCounts = new HashMap<>();
-            for (String cardType : cardTypeChoice.getChoices()) {
-                cardTypeCounts.put(cardType, 0);
-            }
-            for (Card c : exileZone.getCards(game)) {
-                for (CardType cardType : c.getCardType(game)) {
-                    if (cardTypeCounts.containsKey(cardType.toString())) {
-                        cardTypeCounts.put(cardType.toString(), cardTypeCounts.get(cardType.toString()) + 1);
+                for (CardType cardType : card.getCardType(game)) {
+                    if (!exiledCardsCardType.add(cardType)) {
+                        sharedCardTypes.add(cardType.toString());
                     }
                 }
             }
-            List<String> sharedCardTypes = new ArrayList<>();
-            int numExiledCards = exileZone.getCards(game).size();
-            for (Map.Entry<String, Integer> entry : cardTypeCounts.entrySet()) {
-                if (entry.getValue() == numExiledCards) {
-                    sharedCardTypes.add(entry.getKey());
-                }
-            }
+            Choice cardTypeChoice = new ChoiceCardType();
+            cardTypeChoice.getChoices().clear();
+            cardTypeChoice.getChoices().addAll(sharedCardTypes);
             if (sharedCardTypes.isEmpty()) {
                 game.informPlayers(mageObject.getIdName() + " No exiled cards shared a type in exile, so nothing is done.");
                 if (mageObject instanceof Permanent) {
