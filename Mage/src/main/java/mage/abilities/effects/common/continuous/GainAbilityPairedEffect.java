@@ -1,7 +1,5 @@
-
 package mage.abilities.effects.common.continuous;
 
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
@@ -16,7 +14,7 @@ import mage.game.permanent.Permanent;
  */
 public class GainAbilityPairedEffect extends ContinuousEffectImpl {
 
-    protected Ability ability;
+    private final Ability ability;
 
     public GainAbilityPairedEffect(Ability ability, String rule) {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
@@ -24,7 +22,7 @@ public class GainAbilityPairedEffect extends ContinuousEffectImpl {
         staticText = rule;
     }
 
-    protected GainAbilityPairedEffect(final GainAbilityPairedEffect effect) {
+    private GainAbilityPairedEffect(final GainAbilityPairedEffect effect) {
         super(effect);
         this.ability = effect.ability.copy();
         ability.newId(); // This is needed if the effect is copied e.g. by a clone so the ability can be added multiple times to permanents
@@ -37,17 +35,13 @@ public class GainAbilityPairedEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null && permanent.getPairedMOR() != null) {
             Permanent paired = permanent.getPairedMOR().getPermanent(game);
-            if (paired != null && paired.getPairedMOR() != null && paired.getPairedMOR().equals(new MageObjectReference(permanent, game))) {
+            if (paired != null) {
                 permanent.addAbility(ability, source.getSourceId(), game);
                 paired.addAbility(ability, source.getSourceId(), game);
                 return true;
-
-            } else {
-                // No longer the same cards as orininally paired.
-                permanent.setUnpaired();
             }
         }
         return false;

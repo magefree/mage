@@ -431,17 +431,22 @@ public interface Permanent extends Card, Controllable {
     void clearConnectedCards(String key);
 
     /**
-     * Sets paired permanent (Soulbond ability)
+     * For soulbond ability, sets this permanent paired with another.
+     * Always call it twice for both permanents to pair with each other.
      */
     void setPairedWith(Permanent permanent, Game game);
 
     /**
-     * Returns a MageObjectReference for the paired permanent, or null if unpaired
+     * Returns a MageObjectReference referring to the permanent this permanent is paired with,
+     * or null if unpaired
      */
     MageObjectReference getPairedMOR();
 
     /**
-     * Makes permanent unpaired.
+     * 702.95e. A paired creature becomes unpaired if any of the following occur:
+     * another player gains control of it or the creature it's paired with;
+     * it or the creature it's paired with stops being a creature;
+     * or it or the creature it's paired with leaves the battlefield.
      */
     void setUnpaired();
 

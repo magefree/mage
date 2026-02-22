@@ -1903,7 +1903,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             this.pairedPermanent = new MageObjectReference(permanent, game);
             this.addInfo("soulbond", "Paired with " + GameLog.getColoredObjectIdNameForTooltip(permanent), game);
         } else {
-            setUnpaired();
+            this.setUnpaired();
         }
     }
 
