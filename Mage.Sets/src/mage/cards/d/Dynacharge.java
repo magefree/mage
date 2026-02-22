@@ -1,9 +1,7 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.OverloadAbility;
 import mage.cards.CardImpl;
@@ -11,6 +9,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -23,11 +23,9 @@ public final class Dynacharge extends CardImpl {
 
 
         // Target creature you control gets +2/+0 until end of turn.
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        this.getSpellAbility().addEffect(new BoostTargetEffect(2,0, Duration.EndOfTurn));
-
         // Overload {2}{R} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
-        this.addAbility(new OverloadAbility(this, new BoostControlledEffect(2,0, Duration.EndOfTurn), new ManaCostsImpl<>("{2}{R}")));
+        OverloadAbility.ImplementOverloadAbility(this, new ManaCostsImpl<>("{2}{R}"),
+                new TargetControlledCreaturePermanent(), new BoostTargetEffect(2,0, Duration.EndOfTurn));
     }
 
     private Dynacharge(final Dynacharge card) {
