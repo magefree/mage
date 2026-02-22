@@ -573,10 +573,10 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Ominous Cemetery", 189, Rarity.UNCOMMON, mage.cards.o.OminousCemetery.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ominous Cemetery", 794, Rarity.UNCOMMON, mage.cards.o.OminousCemetery.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("Ood Sphere", 594, Rarity.COMMON, mage.cards.o.OodSphere.class));
-        //cards.add(new SetCardInfo("Osgood, Operation Double", 191, Rarity.RARE, mage.cards.o.OsgoodOperationDouble.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Osgood, Operation Double", 367, Rarity.RARE, mage.cards.o.OsgoodOperationDouble.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Osgood, Operation Double", 796, Rarity.RARE, mage.cards.o.OsgoodOperationDouble.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Osgood, Operation Double", 958, Rarity.RARE, mage.cards.o.OsgoodOperationDouble.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Osgood, Operation Double", 191, Rarity.RARE, mage.cards.o.OsgoodOperationDouble.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Osgood, Operation Double", 367, Rarity.RARE, mage.cards.o.OsgoodOperationDouble.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Osgood, Operation Double", 796, Rarity.RARE, mage.cards.o.OsgoodOperationDouble.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Osgood, Operation Double", 958, Rarity.RARE, mage.cards.o.OsgoodOperationDouble.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Out of Time", 1058, Rarity.RARE, mage.cards.o.OutOfTime.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Out of Time", 209, Rarity.RARE, mage.cards.o.OutOfTime.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Out of Time", 467, Rarity.RARE, mage.cards.o.OutOfTime.class, NON_FULL_USE_VARIOUS));
