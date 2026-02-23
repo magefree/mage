@@ -19,7 +19,7 @@ public final class Megrim extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}");
 
         // Whenever an opponent discards a card, Megrim deals 2 damage to that player.
-        this.addAbility(new DiscardsACardOpponentTriggeredAbility(new DamageTargetEffect(2, true, "that player"), false, SetTargetPointer.PLAYER));
+        this.addAbility(new DiscardsACardOpponentTriggeredAbility(new DamageTargetEffect(2).withTargetDescription("that player"), false, SetTargetPointer.PLAYER));
     }
 
     private Megrim(final Megrim card) {

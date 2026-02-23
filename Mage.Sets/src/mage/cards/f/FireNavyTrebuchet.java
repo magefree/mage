@@ -14,7 +14,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.game.Game;
-import mage.game.permanent.token.BallisticBoulder;
+import mage.game.permanent.token.BallisticBoulderToken;
 import mage.game.permanent.token.Token;
 import mage.target.targetpointer.FixedTargets;
 
@@ -71,7 +71,7 @@ class FireNavyTrebuchetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Token token = new BallisticBoulder();
+        Token token = new BallisticBoulderToken();
         token.putOntoBattlefield(1, game, source, source.getControllerId(), true, true);
         game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
                 new SacrificeTargetEffect()

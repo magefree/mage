@@ -24,9 +24,8 @@ public final class FalkenrathPerforator extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Falkenrath Perforator attacks, it deals 1 damage to defending player.
-        this.addAbility(new AttacksTriggeredAbility(new DamageTargetEffect(
-                1, true, "defending player", "it"
-        ), false, null, SetTargetPointer.PLAYER));
+        this.addAbility(new AttacksTriggeredAbility(new DamageTargetEffect(1)
+                .withTargetDescription("defending player"), false, null, SetTargetPointer.PLAYER));
     }
 
     private FalkenrathPerforator(final FalkenrathPerforator card) {

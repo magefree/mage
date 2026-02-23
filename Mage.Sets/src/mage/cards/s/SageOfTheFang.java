@@ -36,7 +36,8 @@ public final class SageOfTheFang extends CardImpl {
         // Renew -- {3}{G}, Exile this card from your graveyard: Put a +1/+1 counter on target creature, then double the number of +1/+1 counters on that creature.
         ability = new RenewAbility("{3}{G}", CounterType.P1P1.createInstance());
         ability.addEffect(new DoubleCountersTargetEffect(CounterType.P1P1)
-                .setText(", then double the number of +1/+1 counters on that creature"));
+                .withTargetDescription("that creature")
+                .concatBy(", then"));
         this.addAbility(ability);
     }
 

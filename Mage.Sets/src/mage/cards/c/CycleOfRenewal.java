@@ -24,7 +24,7 @@ public final class CycleOfRenewal extends CardImpl {
         // Sacrifice a land. Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle.
         this.getSpellAbility().addEffect(new SacrificeControllerEffect(StaticFilters.FILTER_LAND, 1, ""));
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(
-                0, 2, StaticFilters.FILTER_CARD_BASIC_LAND
+                0, 2, StaticFilters.FILTER_CARD_BASIC_LANDS
         ), true));
     }
 

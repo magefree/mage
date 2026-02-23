@@ -8,6 +8,7 @@ import mage.filter.common.*;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.*;
 import mage.filter.predicate.other.AnotherTargetPredicate;
+import mage.filter.predicate.other.TriggeredAbilityPredicate;
 import mage.filter.predicate.permanent.*;
 
 /**
@@ -30,7 +31,6 @@ public final class StaticFilters {
     static {
         FILTER_CARD.setLockedFilter(true);
     }
-
 
     public static final FilterCard FILTER_CARD_A = new FilterCard("a card");
 
@@ -475,6 +475,17 @@ public final class StaticFilters {
                 CardType.CREATURE.getPredicate()
         ));
         FILTER_CONTROLLED_PERMANENT_ARTIFACT_OR_CREATURE.setLockedFilter(true);
+    }
+
+    public static final FilterControlledPermanent FILTER_CONTROLLED_UNTAPPED_ARTIFACT_OR_CREATURE = new FilterControlledPermanent("untapped artifact or creature you control");
+
+    static {
+        FILTER_CONTROLLED_UNTAPPED_ARTIFACT_OR_CREATURE.add(TappedPredicate.UNTAPPED);
+        FILTER_CONTROLLED_UNTAPPED_ARTIFACT_OR_CREATURE.add(Predicates.or(
+                CardType.ARTIFACT.getPredicate(),
+                CardType.CREATURE.getPredicate()
+        ));
+        FILTER_CONTROLLED_UNTAPPED_ARTIFACT_OR_CREATURE.setLockedFilter(true);
     }
 
     public static final FilterControlledPermanent FILTER_CONTROLLED_ARTIFACT_OR_OTHER_CREATURE = new FilterControlledPermanent("another creature or an artifact");
@@ -976,6 +987,14 @@ public final class StaticFilters {
 
     static {
         FILTER_SPELL_OR_ABILITY_A.setLockedFilter(true);
+    }
+
+    public static final FilterStackObject FILTER_CONTROLLED_TRIGGERED_ABILITY = new FilterStackObject("triggered ability you control");
+
+    static {
+        FILTER_CONTROLLED_TRIGGERED_ABILITY.add(TriggeredAbilityPredicate.instance);
+        FILTER_CONTROLLED_TRIGGERED_ABILITY.add(TargetController.YOU.getControllerPredicate());
+        FILTER_CONTROLLED_TRIGGERED_ABILITY.setLockedFilter(true);
     }
 
     public static final FilterCreatureSpell FILTER_SPELL_A_CREATURE = new FilterCreatureSpell("a creature spell");

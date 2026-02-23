@@ -13,7 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 
 import java.util.UUID;
 
@@ -30,15 +30,33 @@ public final class Skinshifter extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
+        CreatureToken rhinoToken = new CreatureToken(
+            4, 4,
+            "Rhino with base power and toughness 4/4 and gains trample",
+            SubType.RHINO
+        ).withAbility(TrampleAbility.getInstance());
+
+        CreatureToken birdToken = new CreatureToken(
+            2, 2,
+            "Bird with base power and toughness 2/2 and gains flying",
+            SubType.BIRD
+        ).withAbility(FlyingAbility.getInstance());
+
+        CreatureToken plantToken = new CreatureToken(
+            0, 8,
+            "Plant with base power and toughness 0/8",
+            SubType.PLANT
+        );
+
         Ability ability = new SimpleActivatedAbility(
-                new BecomesCreatureSourceEffect(new RhinoToken(), CardType.CREATURE, Duration.EndOfTurn),
+                new BecomesCreatureSourceEffect(rhinoToken, CardType.CREATURE, Duration.EndOfTurn),
                 new ManaCostsImpl<>("{G}"));
         ability.getModes().setChooseText("Choose one. Activate only once each turn.");
 
-        Mode mode = new Mode(new BecomesCreatureSourceEffect(new BirdToken(), CardType.CREATURE, Duration.EndOfTurn));
+        Mode mode = new Mode(new BecomesCreatureSourceEffect(birdToken, CardType.CREATURE, Duration.EndOfTurn));
         ability.addMode(mode);
 
-        mode = new Mode(new BecomesCreatureSourceEffect(new PlantToken(), CardType.CREATURE, Duration.EndOfTurn));
+        mode = new Mode(new BecomesCreatureSourceEffect(plantToken, CardType.CREATURE, Duration.EndOfTurn));
         ability.addMode(mode);
 
         this.addAbility(ability);
@@ -51,70 +69,5 @@ public final class Skinshifter extends CardImpl {
     @Override
     public Skinshifter copy() {
         return new Skinshifter(this);
-    }
-
-    private static final class RhinoToken extends TokenImpl {
-
-        public RhinoToken() {
-            super("Rhino", "Rhino with base power and toughness 4/4 and gains trample");
-            this.cardType.add(CardType.CREATURE);
-            this.subtype.add(SubType.RHINO);
-
-            this.color.setGreen(true);
-            this.power = new MageInt(4);
-            this.toughness = new MageInt(4);
-            this.addAbility(TrampleAbility.getInstance());
-        }
-
-        private RhinoToken(final RhinoToken token) {
-            super(token);
-        }
-
-        public RhinoToken copy() {
-            return new RhinoToken(this);
-        }
-    }
-
-    private static final class BirdToken extends TokenImpl {
-
-        public BirdToken() {
-            super("Bird", "Bird with base power and toughness 2/2 and gains flying");
-            this.cardType.add(CardType.CREATURE);
-            this.subtype.add(SubType.BIRD);
-
-            this.color.setGreen(true);
-            this.power = new MageInt(2);
-            this.toughness = new MageInt(2);
-            this.addAbility(FlyingAbility.getInstance());
-        }
-
-        private BirdToken(final BirdToken token) {
-            super(token);
-        }
-
-        public BirdToken copy() {
-            return new BirdToken(this);
-        }
-    }
-
-    private static final class PlantToken extends TokenImpl {
-
-        public PlantToken() {
-            super("Plant", "Plant with base power and toughness 0/8");
-            this.cardType.add(CardType.CREATURE);
-            this.subtype.add(SubType.PLANT);
-
-            this.color.setGreen(true);
-            this.power = new MageInt(0);
-            this.toughness = new MageInt(8);
-        }
-
-        private PlantToken(final PlantToken token) {
-            super(token);
-        }
-
-        public PlantToken copy() {
-            return new PlantToken(this);
-        }
     }
 }

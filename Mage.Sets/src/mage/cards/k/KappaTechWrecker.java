@@ -3,13 +3,12 @@ package mage.cards.k;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoWhenCostPaid;
 import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.NinjutsuAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -42,9 +41,7 @@ public final class KappaTechWrecker extends CardImpl {
         this.addAbility(new NinjutsuAbility("{1}{G}"));
 
         // Kappa Tech-Wrecker enters the battlefield with a deathtouch counter on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(
-                CounterType.DEATHTOUCH.createInstance(1)
-        ), "with a deathtouch counter on it"));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.DEATHTOUCH.createInstance(1)));
 
         // Whenever Kappa Tech-Wrecker deals combat damage to a player, you may remove a deathtouch counter from it. When you do, exile target artifact or enchantment that player controls.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(

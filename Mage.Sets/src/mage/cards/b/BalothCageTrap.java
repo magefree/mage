@@ -12,7 +12,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.BeastToken2;
+import mage.game.permanent.token.Beast44Token;
 import mage.watchers.common.PermanentsEnteredBattlefieldWatcher;
 
 import java.util.List;
@@ -31,7 +31,7 @@ public final class BalothCageTrap extends CardImpl {
         this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl<>("{1}{G}"), BalothCageTrapCondition.instance), new PermanentsEnteredBattlefieldWatcher());
 
         // Create a 4/4 green Beast creature token.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new BeastToken2()));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new Beast44Token()));
     }
 
     private BalothCageTrap(final BalothCageTrap card) {

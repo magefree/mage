@@ -28,7 +28,7 @@ public final class FurnaceScamp extends CardImpl {
 
         // Whenever Furnace Scamp deals combat damage to a player, you may sacrifice it. If you do, Furnace Scamp deals 3 damage to that player.
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new DoIfCostPaid(
-                new DamageTargetEffect(3, true, "that player"), new SacrificeSourceCost()
+                new DamageTargetEffect(3).withTargetDescription("that player"), new SacrificeSourceCost()
         ), false, true);
         this.addAbility(ability);
     }

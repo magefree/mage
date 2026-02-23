@@ -19,7 +19,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
-import mage.game.permanent.token.CatToken2;
+import mage.game.permanent.token.Cat11LifelinkToken;
 
 import java.util.UUID;
 
@@ -40,7 +40,7 @@ public final class BasriTomorrowsChampion extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {W}, {T}, Exert Basri: Create a 1/1 white Cat creature token with lifelink.
-        Ability ability = new SimpleActivatedAbility(new CreateTokenEffect(new CatToken2()), new ManaCostsImpl<>("{W}"));
+        Ability ability = new SimpleActivatedAbility(new CreateTokenEffect(new Cat11LifelinkToken()), new ManaCostsImpl<>("{W}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new ExertSourceCost());
         this.addAbility(ability);

@@ -33,6 +33,7 @@ public final class MathiseSurgeChanneler extends CardImpl {
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.SHAMAN);
+        this.subtype.add(SubType.SORCERER);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

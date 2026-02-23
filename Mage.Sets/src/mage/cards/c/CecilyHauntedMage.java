@@ -6,7 +6,6 @@ import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect;
-import mage.abilities.keyword.FriendsForeverAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -40,7 +39,7 @@ public final class CecilyHauntedMage extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new CecilyHauntedMageEffect()));
 
         // Friends forever
-        this.addAbility(FriendsForeverAbility.getInstance());
+        this.addAbility(PartnerVariantType.FRIENDS_FOREVER.makeAbility());
     }
 
     private CecilyHauntedMage(final CecilyHauntedMage card) {

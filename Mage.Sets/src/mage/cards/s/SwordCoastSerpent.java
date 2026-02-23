@@ -1,9 +1,8 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.CastNoncreatureSpellThisTurnCondition;
 import mage.abilities.decorator.ConditionalRestrictionEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
@@ -11,13 +10,8 @@ import mage.cards.AdventureCard;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.game.Game;
-import mage.game.stack.Spell;
 import mage.target.common.TargetCreaturePermanent;
-import mage.watchers.common.SpellsCastWatcher;
 
-import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -35,9 +29,9 @@ public final class SwordCoastSerpent extends AdventureCard {
 
         // Sword Coast Serpent can't be blocked as long as you've cast a noncreature spell this turn.
         this.addAbility(new SimpleStaticAbility(new ConditionalRestrictionEffect(
-                new CantBeBlockedSourceEffect(), SwordCoastSerpentCondition.instance,
+                new CantBeBlockedSourceEffect(), CastNoncreatureSpellThisTurnCondition.instance,
                 "{this} can't be blocked as long as you've cast a noncreature spell this turn"
-        )));
+        )).addHint(CastNoncreatureSpellThisTurnCondition.getHint()));
 
         // Capsizing Wave
         // Return target creature to its owner's hand.
@@ -54,22 +48,5 @@ public final class SwordCoastSerpent extends AdventureCard {
     @Override
     public SwordCoastSerpent copy() {
         return new SwordCoastSerpent(this);
-    }
-}
-
-enum SwordCoastSerpentCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
-        if (watcher == null) {
-            return false;
-        }
-        List<Spell> spells = watcher.getSpellsCastThisTurn(source.getControllerId());
-        return spells != null && spells
-                .stream()
-                .filter(Objects::nonNull)
-                .anyMatch(spell -> !spell.isCreature(game));
     }
 }

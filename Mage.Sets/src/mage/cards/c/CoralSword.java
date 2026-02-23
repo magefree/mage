@@ -38,7 +38,7 @@ public final class CoralSword extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(1, 0)));
 
         // Equip {1}
-        this.addAbility(new EquipAbility(1));
+        this.addAbility(new EquipAbility(1, false));
     }
 
     private CoralSword(final CoralSword card) {

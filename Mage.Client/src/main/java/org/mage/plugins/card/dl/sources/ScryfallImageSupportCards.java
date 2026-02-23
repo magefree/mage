@@ -615,9 +615,15 @@ public class ScryfallImageSupportCards {
             add("MAR"); // Marvel Universe
             add("TLA"); // Avatar: The Last Airbender
             add("TLE"); // Avatar: The Last Airbender Eternal
+            add("PF26"); // MagicFest 2026
             add("ECL"); // Lorwyn Eclipsed
+            add("ECC"); // Lorwyn Eclipsed Commander
+            add("PL26"); // Year of the Horse 2026
             add("TMT"); // Teenage Mutant Ninja Turtles
             add("TMC"); // Teenage Mutant Ninja Turtles Eternal
+            add("SOS"); // Secrets of Strixhaven
+            add("MSH"); // Marvel Super Heroes
+            add("MSC"); // Marvel Super Heroes Commander
 
             // Custom sets using Scryfall images - must provide a direct link for each card in directDownloadLinks
             add("CALC"); // Custom Alchemized versions of existing cards
@@ -741,7 +747,7 @@ public class ScryfallImageSupportCards {
             // LTR - 0 number for tokens only
             // Scryfall has a bug, for some reason this link doesn't work with ?format=image even though it works with ?format=json
             // and ?format=text. Base url fails because language is qya and not en and alternate url fails because of this bug
-            // TODO: This should be reverted when Scryfall fixes the bug 
+            // TODO: This should be reverted when Scryfall fixes the bug
             // put("LTR/The One Ring/001", "https://api.scryfall.com/cards/ltr/0/");
             put("LTR/The One Ring/001", "https://api.scryfall.com/cards/ltr/0/qya?format=image");
 
@@ -760,6 +766,13 @@ public class ScryfallImageSupportCards {
             put("TDM/Marang River Regent/378b", "https://api.scryfall.com/cards/tdm/378/en?format=image&face=back");
             put("TDM/Scavenger Regent/379b", "https://api.scryfall.com/cards/tdm/379/en?format=image&face=back");
             put("TDM/Ugin, Eye of the Storms/382b", "https://api.scryfall.com/cards/tdm/382/en?format=image&face=back");
+
+            // ECL - double faced lands
+            put("ECL/Blood Crypt/349b", "https://api.scryfall.com/cards/ecl/349/en?format=image&face=back");
+            put("ECL/Hallowed Fountain/347b", "https://api.scryfall.com/cards/ecl/347/en?format=image&face=back");
+            put("ECL/Overgrown Tomb/350b", "https://api.scryfall.com/cards/ecl/350/en?format=image&face=back");
+            put("ECL/Steam Vents/348b", "https://api.scryfall.com/cards/ecl/348/en?format=image&face=back");
+            put("ECL/Temple Garden/351b", "https://api.scryfall.com/cards/ecl/351/en?format=image&face=back");
 
         }
     };

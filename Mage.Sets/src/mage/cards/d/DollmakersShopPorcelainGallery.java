@@ -9,7 +9,9 @@ import mage.abilities.effects.common.continuous.SetBasePowerToughnessAllEffect;
 import mage.abilities.hint.ValueHint;
 import mage.cards.CardSetInfo;
 import mage.cards.RoomCard;
-import mage.constants.*;
+import mage.constants.Duration;
+import mage.constants.SetTargetPointer;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -29,21 +31,22 @@ public final class DollmakersShopPorcelainGallery extends RoomCard {
     }
 
     public DollmakersShopPorcelainGallery(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}", "{4}{W}{W}", SpellAbilityType.SPLIT);
+        super(ownerId, setInfo, "{1}{W}", "{4}{W}{W}");
         this.subtype.add(SubType.ROOM);
 
         // Dollmaker's Shop: Whenever one or more non-Toy creatures you control attack a player, create a 1/1 white Toy artifact creature token.
         Ability left = new AttacksPlayerWithCreaturesTriggeredAbility(new CreateTokenEffect(new ToyToken()), filter, SetTargetPointer.NONE);
+        this.getLeftHalfCard().addAbility(left);
 
         // Porcelain Gallery: Creatures you control have base power and toughness each equal to the number of creatures you control.
         Ability right = new SimpleStaticAbility(new SetBasePowerToughnessAllEffect(
                 CreaturesYouControlCount.PLURAL, Duration.WhileOnBattlefield, StaticFilters.FILTER_CONTROLLED_CREATURES
         ).setText("Creatures you control have base power and toughness each equal to the number of creatures you control"));
-
-        this.addRoomAbilities(left, right.addHint(new ValueHint("Creatures you control", CreaturesYouControlCount.PLURAL)));
+        right.addHint(new ValueHint("Creatures you control", CreaturesYouControlCount.PLURAL));
+        this.getRightHalfCard().addAbility(right);
     }
 
-    private DollmakersShopPorcelainGallery (final DollmakersShopPorcelainGallery card) {
+    private DollmakersShopPorcelainGallery(final DollmakersShopPorcelainGallery card) {
         super(card);
     }
 

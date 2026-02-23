@@ -18,7 +18,7 @@ public final class FuriousReprisal extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}");
 
         // Furious Reprisal deals 2 damage to each of two target creatures and/or players.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(2, true, "each of two targets"));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(2).withTargetDescription("each of two targets"));
         this.getSpellAbility().addTarget(new TargetAnyTarget(2, 2));
     }
 

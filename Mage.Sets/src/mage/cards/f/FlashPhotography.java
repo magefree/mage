@@ -26,7 +26,7 @@ public final class FlashPhotography extends CardImpl {
 
         // You may cast this spell as though it had flash if it targets a permanent you control.
         this.addAbility(new CastAsThoughItHadFlashIfConditionAbility(
-                condition, "you may cast this spell as though it had flash if it targets a permanent you control"
+                condition, "you may cast this spell as though it had flash if it targets a permanent you control."
         ));
 
         // Create a token that's a copy of target permanent.

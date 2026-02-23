@@ -1,7 +1,6 @@
 package mage.cards.t;
 
 import mage.abilities.dynamicvalue.common.CardsInTargetHandCount;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
@@ -20,17 +19,14 @@ public final class ToilTrouble extends SplitCard {
 
         // Toil
         // Target player draws two cards and loses 2 life.
-        getLeftHalfCard().getSpellAbility().addTarget(new TargetPlayer().withChooseHint("to draw two cards and lose 2 life"));
-        getLeftHalfCard().getSpellAbility().addEffect(new DrawCardTargetEffect(2));
-        getLeftHalfCard().getSpellAbility().addEffect(new LoseLifeTargetEffect(2).setText("and loses 2 life"));
+        this.getLeftHalfCard().getSpellAbility().addTarget(new TargetPlayer().withChooseHint("to draw two cards and lose 2 life"));
+        this.getLeftHalfCard().getSpellAbility().addEffect(new DrawCardTargetEffect(2));
+        this.getLeftHalfCard().getSpellAbility().addEffect(new LoseLifeTargetEffect(2).withTargetDescription("and"));
 
         // Trouble
         // Trouble deals damage to target player equal to the number of cards in that player's hand.
-        Effect effect = new DamageTargetEffect(CardsInTargetHandCount.instance);
-        effect.setText("{this} deals damage to target player equal to the number of cards in that player's hand");
-        getRightHalfCard().getSpellAbility().addEffect(effect);
-        getRightHalfCard().getSpellAbility().addTarget(new TargetPlayer().withChooseHint("to deal damage to"));
-
+        this.getRightHalfCard().getSpellAbility().addEffect(new DamageTargetEffect(CardsInTargetHandCount.instance).setText("{this} deals damage to target player equal to the number of cards in that player's hand"));
+        this.getRightHalfCard().getSpellAbility().addTarget(new TargetPlayer().withChooseHint("to deal damage to"));
     }
 
     private ToilTrouble(final ToilTrouble card) {

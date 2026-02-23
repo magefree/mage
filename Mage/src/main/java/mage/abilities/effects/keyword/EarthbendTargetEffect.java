@@ -28,19 +28,26 @@ import mage.util.CardUtil;
 public class EarthbendTargetEffect extends OneShotEffect {
 
     private final DynamicValue amount;
+    private final boolean withReminderText;
 
     public EarthbendTargetEffect(int amount) {
-        this(StaticValue.get(amount));
+        this(amount, true);
     }
 
-    public EarthbendTargetEffect(DynamicValue amount) {
+    public EarthbendTargetEffect(int amount, boolean withReminderText) {
+        this(StaticValue.get(amount), withReminderText);
+    }
+
+    public EarthbendTargetEffect(DynamicValue amount, boolean withReminderText) {
         super(Outcome.Benefit);
         this.amount = amount;
+        this.withReminderText = withReminderText;
     }
 
     private EarthbendTargetEffect(final EarthbendTargetEffect effect) {
         super(effect);
         this.amount = effect.amount;
+        this.withReminderText = effect.withReminderText;
     }
 
     @Override
@@ -64,7 +71,9 @@ public class EarthbendTargetEffect extends OneShotEffect {
                 new CreatureToken(0, 0)
                         .withAbility(HasteAbility.getInstance()),
                 false, true, Duration.Custom
-        ), source);
+        ).setTargetPointer(new FixedTarget(permanent.getId())), source);
+        // Make the land into a creature before putting counters on, for the purposes of counter doublers that only apply to creatures.
+        game.processAction();
         permanent.addCounters(CounterType.P1P1.createInstance(value), source, game);
         game.addDelayedTriggeredAbility(new EarthbendingDelayedTriggeredAbility(permanent, game), source);
         game.fireEvent(GameEvent.getEvent(
@@ -79,10 +88,14 @@ public class EarthbendTargetEffect extends OneShotEffect {
             return staticText;
         }
         StringBuilder sb = new StringBuilder("earthbend ");
-        sb.append(amount);
-        if (!(amount instanceof StaticValue)) {
-            sb.append(", where X is ");
+        if (amount instanceof StaticValue) {
+            sb.append(amount);
+        } else {
+            sb.append("X, where X is ");
             sb.append(amount.getMessage());
+        }
+        if (!withReminderText) {
+            return sb.toString();
         }
         sb.append(". <i>(Target land you control becomes a 0/0 creature with haste that's still a land. Put ");
         String value = amount instanceof StaticValue

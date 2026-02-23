@@ -2,7 +2,7 @@ package mage.cards.c;
 
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.common.LeavesBattlefieldAllTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -33,10 +33,7 @@ public final class CostumeCloset extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}{W}");
 
         // This artifact enters with two +1/+1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)),
-                "with two +1/+1 counters on it"
-        ));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.P1P1.createInstance(2)));
 
         // {T}: Move a +1/+1 counter from this artifact onto target creature you control. Activate only as a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(

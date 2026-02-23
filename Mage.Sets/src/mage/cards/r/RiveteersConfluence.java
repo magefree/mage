@@ -1,7 +1,10 @@
 package mage.cards.r;
 
 import mage.abilities.Mode;
-import mage.abilities.effects.common.*;
+import mage.abilities.effects.common.DamageAllEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
+import mage.abilities.effects.common.PutCardFromHandOrGraveyardOntoBattlefieldEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -32,7 +35,7 @@ public class RiveteersConfluence extends CardImpl {
         this.getSpellAbility().getModes().setMayChooseSameModeMoreThanOnce(true);
 
         //• You draw a card and you lose 1 life.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).setText("you draw a card"));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1, true));
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
 
         //• Riveteers Confluence deals 1 damage to each creature and planeswalker you don’t control.

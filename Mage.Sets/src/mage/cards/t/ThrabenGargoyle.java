@@ -1,39 +1,43 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
-
-import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
-import mage.abilities.keyword.TransformAbility;
-import mage.cards.CardImpl;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  * @author fireshoes
  */
-public final class ThrabenGargoyle extends CardImpl {
+public final class ThrabenGargoyle extends TransformingDoubleFacedCard {
 
     public ThrabenGargoyle(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}");
-        this.subtype.add(SubType.GARGOYLE);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        super(ownerId, setInfo,
+                new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, new SubType[]{SubType.GARGOYLE}, "{1}",
+                "Stonewing Antagonizer",
+                new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, new SubType[]{SubType.GARGOYLE, SubType.HORROR}, ""
+        );
 
-        this.secondSideCardClazz = mage.cards.s.StonewingAntagonizer.class;
+        // Thraben Gargoyle
+        this.getLeftHalfCard().setPT(2, 2);
 
         // Defender
-        this.addAbility(DefenderAbility.getInstance());
+        this.getLeftHalfCard().addAbility(DefenderAbility.getInstance());
 
         // {6}: Transform Thraben Gargoyle.
-        this.addAbility(new TransformAbility());
-        this.addAbility(new SimpleActivatedAbility(new TransformSourceEffect(), new GenericManaCost(6)));
+        this.getLeftHalfCard().addAbility(new SimpleActivatedAbility(new TransformSourceEffect(), new GenericManaCost(6)));
+
+        // Stonewing Antagonizer
+        this.getRightHalfCard().setPT(4, 2);
+
+        // Flying
+        this.getRightHalfCard().addAbility(FlyingAbility.getInstance());
     }
 
     private ThrabenGargoyle(final ThrabenGargoyle card) {

@@ -3,9 +3,8 @@ package mage.cards.v;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessTargetEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -30,11 +29,7 @@ public final class VoiceOfTheVermin extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Voice of the Vermin enters the battlefield with a shield counter on it.
-        this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.SHIELD.createInstance(1)),
-                "with a shield counter on it. <i>(If it would be dealt damage " +
-                        "or destroyed, remove a shield counter from it instead.)</i>"
-        ));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.SHIELD.createInstance(1)));
 
         // Whenever Voice of the Vermin attacks, target creature you control has base power and toughness 4/4 until end of turn.
         Ability ability = new AttacksTriggeredAbility(

@@ -25,7 +25,6 @@ public class ShadowsOverInnistradRemastered extends ExpansionSet {
         // TODO: implement special slot with x1 card from SIS - Shadows of the Past
         //  https://mtg.fandom.com/wiki/Shadows_over_Innistrad_Remastered/Shadows_of_the_Past
 
-        cards.add(new SetCardInfo("Abolisher of Bloodlines", 138, Rarity.RARE, mage.cards.a.AbolisherOfBloodlines.class));
         cards.add(new SetCardInfo("Abundant Maw", 1, Rarity.UNCOMMON, mage.cards.a.AbundantMaw.class));
         cards.add(new SetCardInfo("Accursed Witch", 97, Rarity.UNCOMMON, mage.cards.a.AccursedWitch.class));
         cards.add(new SetCardInfo("Advanced Stitchwing", 54, Rarity.UNCOMMON, mage.cards.a.AdvancedStitchwing.class));
@@ -39,14 +38,8 @@ public class ShadowsOverInnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Apothecary Geist", 12, Rarity.COMMON, mage.cards.a.ApothecaryGeist.class));
         cards.add(new SetCardInfo("Archangel Avacyn", 13, Rarity.MYTHIC, mage.cards.a.ArchangelAvacyn.class));
         cards.add(new SetCardInfo("Arlinn Kord", 230, Rarity.MYTHIC, mage.cards.a.ArlinnKord.class));
-        cards.add(new SetCardInfo("Arlinn, Embraced by the Moon", 230, Rarity.MYTHIC, mage.cards.a.ArlinnEmbracedByTheMoon.class));
-        cards.add(new SetCardInfo("Ashmouth Blade", 256, Rarity.UNCOMMON, mage.cards.a.AshmouthBlade.class));
         cards.add(new SetCardInfo("Assembled Alphas", 141, Rarity.RARE, mage.cards.a.AssembledAlphas.class));
-        cards.add(new SetCardInfo("Aurora of Emrakul", 248, Rarity.UNCOMMON, mage.cards.a.AuroraOfEmrakul.class));
         cards.add(new SetCardInfo("Avacyn's Judgment", 142, Rarity.RARE, mage.cards.a.AvacynsJudgment.class));
-        cards.add(new SetCardInfo("Avacyn, the Purifier", 13, Rarity.MYTHIC, mage.cards.a.AvacynThePurifier.class));
-        cards.add(new SetCardInfo("Awoken Horror", 95, Rarity.RARE, mage.cards.a.AwokenHorror.class));
-        cards.add(new SetCardInfo("Bearer of Overwhelming Truths", 59, Rarity.UNCOMMON, mage.cards.b.BearerOfOverwhelmingTruths.class));
         cards.add(new SetCardInfo("Bedlam Reveler", 143, Rarity.RARE, mage.cards.b.BedlamReveler.class));
         cards.add(new SetCardInfo("Biting Rain", 99, Rarity.UNCOMMON, mage.cards.b.BitingRain.class));
         cards.add(new SetCardInfo("Blessed Alliance", 14, Rarity.UNCOMMON, mage.cards.b.BlessedAlliance.class));
@@ -74,7 +67,6 @@ public class ShadowsOverInnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Collective Defiance", 148, Rarity.RARE, mage.cards.c.CollectiveDefiance.class));
         cards.add(new SetCardInfo("Collective Effort", 19, Rarity.RARE, mage.cards.c.CollectiveEffort.class));
         cards.add(new SetCardInfo("Compelling Deterrence", 55, Rarity.UNCOMMON, mage.cards.c.CompellingDeterrence.class));
-        cards.add(new SetCardInfo("Conduit of Emrakul", 149, Rarity.COMMON, mage.cards.c.ConduitOfEmrakul.class));
         cards.add(new SetCardInfo("Conduit of Storms", 149, Rarity.COMMON, mage.cards.c.ConduitOfStorms.class));
         cards.add(new SetCardInfo("Confirm Suspicions", 56, Rarity.RARE, mage.cards.c.ConfirmSuspicions.class));
         cards.add(new SetCardInfo("Confront the Unknown", 190, Rarity.COMMON, mage.cards.c.ConfrontTheUnknown.class));
@@ -93,7 +85,6 @@ public class ShadowsOverInnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Deathcap Cultivator", 193, Rarity.UNCOMMON, mage.cards.d.DeathcapCultivator.class));
         cards.add(new SetCardInfo("Decimator of the Provinces", 2, Rarity.MYTHIC, mage.cards.d.DecimatorOfTheProvinces.class));
         cards.add(new SetCardInfo("Declaration in Stone", 23, Rarity.RARE, mage.cards.d.DeclarationInStone.class));
-        cards.add(new SetCardInfo("Demon-Possessed Witch", 107, Rarity.UNCOMMON, mage.cards.d.DemonPossessedWitch.class));
         cards.add(new SetCardInfo("Deny Existence", 60, Rarity.COMMON, mage.cards.d.DenyExistence.class));
         cards.add(new SetCardInfo("Deranged Whelp", 150, Rarity.COMMON, mage.cards.d.DerangedWhelp.class));
         cards.add(new SetCardInfo("Descend upon the Sinful", 24, Rarity.MYTHIC, mage.cards.d.DescendUponTheSinful.class));
@@ -128,7 +119,6 @@ public class ShadowsOverInnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Field Creeper", 251, Rarity.COMMON, mage.cards.f.FieldCreeper.class));
         cards.add(new SetCardInfo("Fiend Binder", 29, Rarity.COMMON, mage.cards.f.FiendBinder.class));
         cards.add(new SetCardInfo("Fiery Temper", 154, Rarity.UNCOMMON, mage.cards.f.FieryTemper.class));
-        cards.add(new SetCardInfo("Final Iteration", 61, Rarity.RARE, mage.cards.f.FinalIteration.class));
         cards.add(new SetCardInfo("Flameblade Angel", 155, Rarity.RARE, mage.cards.f.FlamebladeAngel.class));
         cards.add(new SetCardInfo("Fleeting Memories", 69, Rarity.UNCOMMON, mage.cards.f.FleetingMemories.class));
         cards.add(new SetCardInfo("Fogwalker", 70, Rarity.COMMON, mage.cards.f.Fogwalker.class));
@@ -144,7 +134,6 @@ public class ShadowsOverInnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Galvanic Bombardment", 157, Rarity.COMMON, mage.cards.g.GalvanicBombardment.class));
         cards.add(new SetCardInfo("Game Trail", 269, Rarity.UNCOMMON, mage.cards.g.GameTrail.class));
         cards.add(new SetCardInfo("Gatstaf Arsonists", 158, Rarity.COMMON, mage.cards.g.GatstafArsonists.class));
-        cards.add(new SetCardInfo("Gatstaf Ravagers", 158, Rarity.COMMON, mage.cards.g.GatstafRavagers.class));
         cards.add(new SetCardInfo("Gavony Unhallowed", 111, Rarity.COMMON, mage.cards.g.GavonyUnhallowed.class));
         cards.add(new SetCardInfo("Geier Reach Bandit", 159, Rarity.UNCOMMON, mage.cards.g.GeierReachBandit.class));
         cards.add(new SetCardInfo("Geier Reach Sanitarium", 270, Rarity.RARE, mage.cards.g.GeierReachSanitarium.class));
@@ -175,15 +164,12 @@ public class ShadowsOverInnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Highland Lake", 272, Rarity.UNCOMMON, mage.cards.h.HighlandLake.class));
         cards.add(new SetCardInfo("Hinterland Logger", 201, Rarity.COMMON, mage.cards.h.HinterlandLogger.class));
         cards.add(new SetCardInfo("Hope Against Hope", 33, Rarity.UNCOMMON, mage.cards.h.HopeAgainstHope.class));
-        cards.add(new SetCardInfo("Howling Chorus", 214, Rarity.UNCOMMON, mage.cards.h.HowlingChorus.class));
         cards.add(new SetCardInfo("Howlpack Resurgence", 202, Rarity.UNCOMMON, mage.cards.h.HowlpackResurgence.class));
         cards.add(new SetCardInfo("Howlpack Wolf", 162, Rarity.COMMON, mage.cards.h.HowlpackWolf.class));
         cards.add(new SetCardInfo("Humble the Brute", 34, Rarity.UNCOMMON, mage.cards.h.HumbleTheBrute.class));
         cards.add(new SetCardInfo("Imprisoned in the Moon", 74, Rarity.COMMON, mage.cards.i.ImprisonedInTheMoon.class));
         cards.add(new SetCardInfo("Incendiary Flow", 163, Rarity.COMMON, mage.cards.i.IncendiaryFlow.class));
-        cards.add(new SetCardInfo("Incited Rabble", 53, Rarity.UNCOMMON, mage.cards.i.IncitedRabble.class));
         cards.add(new SetCardInfo("Indulgent Aristocrat", 118, Rarity.UNCOMMON, mage.cards.i.IndulgentAristocrat.class));
-        cards.add(new SetCardInfo("Infectious Curse", 97, Rarity.UNCOMMON, mage.cards.i.InfectiousCurse.class));
         cards.add(new SetCardInfo("Ingenious Skaab", 75, Rarity.COMMON, mage.cards.i.IngeniousSkaab.class));
         cards.add(new SetCardInfo("Insatiable Gorgers", 164, Rarity.COMMON, mage.cards.i.InsatiableGorgers.class));
         cards.add(new SetCardInfo("Insolent Neonate", 165, Rarity.COMMON, mage.cards.i.InsolentNeonate.class));
@@ -194,11 +180,9 @@ public class ShadowsOverInnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 280, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 281, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 282, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("It That Rides as One", 36, Rarity.UNCOMMON, mage.cards.i.ItThatRidesAsOne.class));
         cards.add(new SetCardInfo("Jace's Scrutiny", 78, Rarity.COMMON, mage.cards.j.JacesScrutiny.class));
         cards.add(new SetCardInfo("Jace, Unraveler of Secrets", 77, Rarity.MYTHIC, mage.cards.j.JaceUnravelerOfSecrets.class));
         cards.add(new SetCardInfo("Kindly Stranger", 107, Rarity.UNCOMMON, mage.cards.k.KindlyStranger.class));
-        cards.add(new SetCardInfo("Krallenhorde Howler", 194, Rarity.UNCOMMON, mage.cards.k.KrallenhordeHowler.class));
         cards.add(new SetCardInfo("Laboratory Brute", 79, Rarity.COMMON, mage.cards.l.LaboratoryBrute.class));
         cards.add(new SetCardInfo("Lightning Axe", 166, Rarity.UNCOMMON, mage.cards.l.LightningAxe.class));
         cards.add(new SetCardInfo("Liliana's Elite", 120, Rarity.COMMON, mage.cards.l.LilianasElite.class));
@@ -221,7 +205,6 @@ public class ShadowsOverInnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Mirrorwing Dragon", 170, Rarity.MYTHIC, mage.cards.m.MirrorwingDragon.class));
         cards.add(new SetCardInfo("Mockery of Nature", 8, Rarity.UNCOMMON, mage.cards.m.MockeryOfNature.class));
         cards.add(new SetCardInfo("Moonlight Hunt", 205, Rarity.COMMON, mage.cards.m.MoonlightHunt.class));
-        cards.add(new SetCardInfo("Moonrise Intruder", 184, Rarity.UNCOMMON, mage.cards.m.MoonriseIntruder.class));
         cards.add(new SetCardInfo("Morkrut Necropod", 125, Rarity.COMMON, mage.cards.m.MorkrutNecropod.class));
         cards.add(new SetCardInfo("Mountain", 286, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 287, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
@@ -241,10 +224,8 @@ public class ShadowsOverInnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Olivia's Dragoon", 128, Rarity.COMMON, mage.cards.o.OliviasDragoon.class));
         cards.add(new SetCardInfo("Olivia, Mobilized for War", 239, Rarity.MYTHIC, mage.cards.o.OliviaMobilizedForWar.class));
         cards.add(new SetCardInfo("Ongoing Investigation", 84, Rarity.UNCOMMON, mage.cards.o.OngoingInvestigation.class));
-        cards.add(new SetCardInfo("Ormendahl, Profane Prince", 275, Rarity.RARE, mage.cards.o.OrmendahlProfanePrince.class));
         cards.add(new SetCardInfo("Pack Guardian", 208, Rarity.UNCOMMON, mage.cards.p.PackGuardian.class));
         cards.add(new SetCardInfo("Permeating Mass", 209, Rarity.RARE, mage.cards.p.PermeatingMass.class));
-        cards.add(new SetCardInfo("Persistent Nightmare", 90, Rarity.MYTHIC, mage.cards.p.PersistentNightmare.class));
         cards.add(new SetCardInfo("Pick the Brain", 129, Rarity.UNCOMMON, mage.cards.p.PickTheBrain.class));
         cards.add(new SetCardInfo("Pieces of the Puzzle", 85, Rarity.UNCOMMON, mage.cards.p.PiecesOfThePuzzle.class));
         cards.add(new SetCardInfo("Plains", 277, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
@@ -268,7 +249,6 @@ public class ShadowsOverInnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Sage of Ancient Lore", 211, Rarity.RARE, mage.cards.s.SageOfAncientLore.class));
         cards.add(new SetCardInfo("Sanitarium Skeleton", 133, Rarity.COMMON, mage.cards.s.SanitariumSkeleton.class));
         cards.add(new SetCardInfo("Scourge Wolf", 175, Rarity.UNCOMMON, mage.cards.s.ScourgeWolf.class));
-        cards.add(new SetCardInfo("Scrounged Scythe", 252, Rarity.UNCOMMON, mage.cards.s.ScroungedScythe.class));
         cards.add(new SetCardInfo("Seasons Past", 212, Rarity.MYTHIC, mage.cards.s.SeasonsPast.class));
         cards.add(new SetCardInfo("Second Harvest", 213, Rarity.RARE, mage.cards.s.SecondHarvest.class));
         cards.add(new SetCardInfo("Selfless Spirit", 42, Rarity.RARE, mage.cards.s.SelflessSpirit.class));
@@ -313,7 +293,6 @@ public class ShadowsOverInnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Thornhide Wolves", 218, Rarity.COMMON, mage.cards.t.ThornhideWolves.class));
         cards.add(new SetCardInfo("Thraben Foulbloods", 135, Rarity.COMMON, mage.cards.t.ThrabenFoulbloods.class));
         cards.add(new SetCardInfo("Thraben Inspector", 51, Rarity.COMMON, mage.cards.t.ThrabenInspector.class));
-        cards.add(new SetCardInfo("Timber Shredder", 201, Rarity.COMMON, mage.cards.t.TimberShredder.class));
         cards.add(new SetCardInfo("Tireless Tracker", 219, Rarity.RARE, mage.cards.t.TirelessTracker.class));
         cards.add(new SetCardInfo("Topplegeist", 52, Rarity.UNCOMMON, mage.cards.t.Topplegeist.class));
         cards.add(new SetCardInfo("Tormenting Voice", 181, Rarity.COMMON, mage.cards.t.TormentingVoice.class));
@@ -324,21 +303,16 @@ public class ShadowsOverInnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("True-Faith Censer", 262, Rarity.COMMON, mage.cards.t.TrueFaithCenser.class));
         cards.add(new SetCardInfo("Ulrich of the Krallenhorde", 246, Rarity.RARE, mage.cards.u.UlrichOfTheKrallenhorde.class));
         cards.add(new SetCardInfo("Ulrich's Kindred", 182, Rarity.UNCOMMON, mage.cards.u.UlrichsKindred.class));
-        cards.add(new SetCardInfo("Ulrich, Uncontested Alpha", 246, Rarity.RARE, mage.cards.u.UlrichUncontestedAlpha.class));
-        cards.add(new SetCardInfo("Ulvenwald Abomination", 221, Rarity.COMMON, mage.cards.u.UlvenwaldAbomination.class));
         cards.add(new SetCardInfo("Ulvenwald Captive", 221, Rarity.COMMON, mage.cards.u.UlvenwaldCaptive.class));
         cards.add(new SetCardInfo("Ulvenwald Hydra", 222, Rarity.RARE, mage.cards.u.UlvenwaldHydra.class));
         cards.add(new SetCardInfo("Ulvenwald Mysteries", 223, Rarity.UNCOMMON, mage.cards.u.UlvenwaldMysteries.class));
         cards.add(new SetCardInfo("Uncaged Fury", 183, Rarity.UNCOMMON, mage.cards.u.UncagedFury.class));
         cards.add(new SetCardInfo("Vessel of Nascency", 224, Rarity.UNCOMMON, mage.cards.v.VesselOfNascency.class));
         cards.add(new SetCardInfo("Veteran Cathar", 225, Rarity.UNCOMMON, mage.cards.v.VeteranCathar.class));
-        cards.add(new SetCardInfo("Vildin-Pack Alpha", 159, Rarity.UNCOMMON, mage.cards.v.VildinPackAlpha.class));
         cards.add(new SetCardInfo("Village Messenger", 184, Rarity.UNCOMMON, mage.cards.v.VillageMessenger.class));
         cards.add(new SetCardInfo("Voldaren Pariah", 138, Rarity.RARE, mage.cards.v.VoldarenPariah.class));
-        cards.add(new SetCardInfo("Voracious Reader", 58, Rarity.UNCOMMON, mage.cards.v.VoraciousReader.class));
         cards.add(new SetCardInfo("Weirded Vampire", 139, Rarity.COMMON, mage.cards.w.WeirdedVampire.class));
         cards.add(new SetCardInfo("Weirding Wood", 226, Rarity.COMMON, mage.cards.w.WeirdingWood.class));
-        cards.add(new SetCardInfo("Werewolf of Ancient Hunger", 211, Rarity.RARE, mage.cards.w.WerewolfOfAncientHunger.class));
         cards.add(new SetCardInfo("Westvale Abbey", 275, Rarity.RARE, mage.cards.w.WestvaleAbbey.class));
         cards.add(new SetCardInfo("Wharf Infiltrator", 96, Rarity.RARE, mage.cards.w.WharfInfiltrator.class));
         cards.add(new SetCardInfo("Wild-Field Scarecrow", 263, Rarity.COMMON, mage.cards.w.WildFieldScarecrow.class));

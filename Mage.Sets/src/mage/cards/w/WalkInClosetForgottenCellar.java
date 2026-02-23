@@ -6,9 +6,7 @@ import mage.abilities.effects.common.replacement.GraveyardFromAnywhereExileRepla
 import mage.abilities.effects.common.ruleModifying.PlayFromGraveyardControllerEffect;
 import mage.cards.CardSetInfo;
 import mage.cards.RoomCard;
-import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.SpellAbilityType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
 
@@ -20,11 +18,12 @@ import java.util.UUID;
 public final class WalkInClosetForgottenCellar extends RoomCard {
 
     public WalkInClosetForgottenCellar(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}", "{3}{G}{G}", SpellAbilityType.SPLIT);
+        super(ownerId, setInfo, "{2}{G}", "{3}{G}{G}");
         this.subtype.add(SubType.ROOM);
 
         // Walk-In Closet: You may play lands from your graveyard.
         SimpleStaticAbility left = new SimpleStaticAbility(PlayFromGraveyardControllerEffect.playLands());
+        this.getLeftHalfCard().addAbility(left);
 
         // Forgotten Cellar: When you unlock this door, you may cast spells from your graveyard this turn, and if a card would be put into your graveyard from anywhere this turn, exile it instead.
         UnlockThisDoorTriggeredAbility right = new UnlockThisDoorTriggeredAbility(
@@ -34,8 +33,7 @@ public final class WalkInClosetForgottenCellar extends RoomCard {
         right.addEffect(new GraveyardFromAnywhereExileReplacementEffect(Duration.EndOfTurn).concatBy(", and")
                 .setText("if a card would be put into your graveyard from anywhere this turn, exile it instead")
         );
-
-        this.addRoomAbilities(left, right);
+        this.getRightHalfCard().addAbility(right);
     }
 
     private WalkInClosetForgottenCellar(final WalkInClosetForgottenCellar card) {

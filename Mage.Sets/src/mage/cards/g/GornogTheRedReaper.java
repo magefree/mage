@@ -20,7 +20,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AttackingPredicate;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.ThatPlayerControlsTargetAdjuster;
 
 import java.util.UUID;
@@ -61,7 +61,7 @@ public final class GornogTheRedReaper extends CardImpl {
         Ability ability = new AttacksPlayerWithCreaturesTriggeredAbility(
                 new BecomesCreatureTypeTargetEffect(Duration.EndOfGame, SubType.COWARD).setText("target creature that player controls becomes a Coward"),
                 filterWarrior, SetTargetPointer.PLAYER);
-        ability.addTarget(new TargetPermanent());
+        ability.addTarget(new TargetCreaturePermanent());
         ability.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster());
         this.addAbility(ability);
 

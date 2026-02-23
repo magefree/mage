@@ -61,32 +61,25 @@ class StepBetweenWorldsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
         List<Player> players = new ArrayList<>();
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player == null) {
                 continue;
             }
-            if (!player.chooseUse(
-                    Outcome.Benefit,
-                    "Shuffle your hand and graveyard into your library, then draw seven cards?",
-                    source, game
-            )) {
-                continue;
+            if (player.chooseUse(Outcome.DrawCard, "Shuffle your hand and graveyard into your library and draw seven cards?", source, game)) {
+                game.informPlayers(player.getLogName() + " chooses to shuffle and draw");
+                players.add(player);
+            } else {
+                game.informPlayers(player.getLogName() + " chooses not to shuffle and draw");
             }
-            players.add(player);
-            Cards cards = new CardsImpl(player.getHand());
-            cards.addAll(player.getGraveyard());
-            player.putCardsOnTopOfLibrary(cards, game, source, false);
-            player.shuffleLibrary(source, game);
         }
         for (Player player : players) {
+            Cards cards = new CardsImpl(player.getHand());
+            cards.addAll(player.getGraveyard());
+            player.shuffleCardsToLibrary(cards, game, source);
             player.drawCards(7, source, game);
         }
-        return true;
+        return !players.isEmpty();
     }
 }

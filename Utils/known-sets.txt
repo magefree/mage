@@ -166,8 +166,9 @@ The Lord of the Rings: Tales of Middle-earth|TheLordOfTheRingsTalesOfMiddleEarth
 Tales of Middle-earth Commander|TalesOfMiddleEarthCommander|
 Lorwyn|Lorwyn|
 Lorwyn Eclipsed|LorwynEclipsed|
+Lorwyn Eclipsed Commander|LorwynEclipsedCommander|
 The Lost Caverns of Ixalan|TheLostCavernsOfIxalan|
-The Lost Caverns of Ixalan Commander|LostCavernsOfIxalanCommander|
+The Lost Caverns of Ixalan Commander|TheLostCavernsOfIxalanCommander|
 Magic 2010|Magic2010|
 Magic 2011|Magic2011|
 Magic 2012|Magic2012|
@@ -191,6 +192,8 @@ Media Inserts|MediaInserts|
 March of the Machine|MarchOfTheMachine|
 March of the Machine Commander|MarchOfTheMachineCommander|
 March of the Machine: The Aftermath|MarchOfTheMachineTheAftermath|
+Marvel Super Heroes|MarvelSuperHeroes|
+Marvel Super Heroes Commander|MarvelSuperHeroesCommander|
 Mercadian Masques|MercadianMasques|
 Mirage|Mirage|
 Mirrodin|Mirrodin|
@@ -242,7 +245,7 @@ Sega Dreamcast Cards|SegaDreamcastCards|
 Scars of Mirrodin|ScarsOfMirrodin|
 Scourge|Scourge|
 Secret Lair Drop|SecretLairDrop|
-Secret Lair Showdown|SecretLairShowdown|
+Secret Lair Promo|SecretLairPromo|
 Seventh Edition|SeventhEdition|
 Shadowmoor|Shadowmoor|
 Shadows over Innistrad|ShadowsOverInnistrad|
@@ -255,6 +258,7 @@ Star Wars|StarWars|
 Streets of New Capenna|StreetsOfNewCapenna|
 New Capenna Commander|NewCapennaCommander|
 Strixhaven: School of Mages|StrixhavenSchoolOfMages|
+Secrets of Strixhaven|SecretsOfStrixhaven|
 Stronghold|Stronghold|
 Super Series|SuperSeries|
 Tarkir: Dragonstorm|TarkirDragonstorm|

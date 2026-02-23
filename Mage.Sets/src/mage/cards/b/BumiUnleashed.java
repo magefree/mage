@@ -67,7 +67,7 @@ class BumiUnleashedEffect extends OneShotEffect {
 
     BumiUnleashedEffect() {
         super(Outcome.Benefit);
-        staticText = "After this main phase, there is an additional combat phase. Only land creatures can attack during that combat phase";
+        staticText = "After this phase, there is an additional combat phase. Only land creatures can attack during that combat phase";
     }
 
     private BumiUnleashedEffect(final BumiUnleashedEffect effect) {

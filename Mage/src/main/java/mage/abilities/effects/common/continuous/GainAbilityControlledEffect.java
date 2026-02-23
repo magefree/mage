@@ -132,13 +132,15 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl {
             sb.append(singular ? " gains " : " gain ");
         }
         if (forceQuotes || gainedAbility.startsWith("When") || gainedAbility.startsWith("{T}")) {
-            gainedAbility = '"' + gainedAbility + '"';
+            sb.append('"');
+            sb.append(CardUtil.getTextWithFirstCharUpperCase(gainedAbility));
+            sb.append('"');
         } else {
-            gainedAbility = CardUtil.getTextWithFirstCharLowerCase(gainedAbility);
+            sb.append(CardUtil.getTextWithFirstCharLowerCase(gainedAbility));
         }
-        sb.append(gainedAbility);
         if (!durationRuleAtStart && !duration.toString().isEmpty() && duration != Duration.EndOfGame) {
-            sb.append(' ').append(duration.toString());
+            sb.append(' ');
+            sb.append(duration);
         }
         staticText = sb.toString();
     }

@@ -1,13 +1,12 @@
 package mage.cards.p;
 
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DoubleCountersSourceEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -27,10 +26,7 @@ public final class ParadoxZone extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}");
 
         // Paradox Zone enters the battlefield with a growth counter on it.
-        this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.GROWTH.createInstance()),
-                "with a growth counter on it"
-        ));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.GROWTH.createInstance()));
 
         // At the beginning of your end step, double the number of growth counters on Paradox Zone. Then create a 0/0 blue and green Fractal creature token. Put X +1/+1 counters on it, where X is the number of growth counters on Paradox Zone.
         Ability ability = new BeginningOfEndStepTriggeredAbility(

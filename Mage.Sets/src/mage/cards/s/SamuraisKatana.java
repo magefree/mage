@@ -44,7 +44,7 @@ public final class SamuraisKatana extends CardImpl {
         this.addAbility(ability);
 
         // Murasame -- Equip {5}
-        this.addAbility(new EquipAbility(5).withFlavorWord("Murasame"));
+        this.addAbility(new EquipAbility(5, false).withFlavorWord("Murasame"));
     }
 
     private SamuraisKatana(final SamuraisKatana card) {

@@ -30,7 +30,7 @@ import java.util.UUID;
  */
 public final class SarulfRealmEater extends CardImpl {
 
-    private static final Condition condition = new SourceHasCounterCondition(CounterType.P1P1);
+    private static final Condition condition = new SourceHasCounterCondition(CounterType.P1P1, ComparisonType.MORE_THAN, 0);
 
     public SarulfRealmEater(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{G}");

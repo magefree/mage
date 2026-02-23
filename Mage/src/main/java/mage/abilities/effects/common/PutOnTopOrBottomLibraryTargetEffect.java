@@ -68,7 +68,7 @@ public class PutOnTopOrBottomLibraryTargetEffect extends OneShotEffect {
             sb.append(targetText);
             sb.append("'s owner");
         }
-        sb.append(" puts it");
+        sb.append(" puts it ");
         if (position > 1) {
             sb.append("into their library ");
             sb.append(CardUtil.numberToOrdinalText(position));

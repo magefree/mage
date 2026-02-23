@@ -7,7 +7,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
 
 import java.util.UUID;
 
@@ -16,7 +16,7 @@ import java.util.UUID;
  */
 public final class PrideOfThePerfect extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.ELF, "Elves");
+    private static final FilterPermanent filter = new FilterPermanent(SubType.ELF, "Elves");
 
     public PrideOfThePerfect(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");

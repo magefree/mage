@@ -1,6 +1,5 @@
 package mage.abilities.keyword;
 
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -14,7 +13,7 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.targetpointer.FixedTarget;
@@ -105,7 +104,11 @@ class AwakenEffect extends OneShotEffect {
             }
             if (targetId != null) {
                 FixedTarget blueprintTarget = new FixedTarget(targetId, game);
-                ContinuousEffect continuousEffect = new BecomesCreatureTargetEffect(new AwakenElementalToken(), false, true, Duration.Custom);
+                ContinuousEffect continuousEffect = new BecomesCreatureTargetEffect(
+                    new CreatureToken(0, 0, "0/0 Elemental creature with haste", SubType.ELEMENTAL)
+                        .withAbility(HasteAbility.getInstance()),
+                    false, true, Duration.Custom
+                );
                 continuousEffect.setTargetPointer(blueprintTarget.copy());
                 game.addEffect(continuousEffect, source);
                 Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(awakenValue));
@@ -115,27 +118,5 @@ class AwakenEffect extends OneShotEffect {
             return true;
         }
         return false;
-    }
-}
-
-class AwakenElementalToken extends TokenImpl {
-
-    public AwakenElementalToken() {
-        super("", "0/0 Elemental creature with haste");
-        this.cardType.add(CardType.CREATURE);
-
-        this.subtype.add(SubType.ELEMENTAL);
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(0);
-
-        this.addAbility(HasteAbility.getInstance());
-    }
-
-    private AwakenElementalToken(final AwakenElementalToken token) {
-        super(token);
-    }
-
-    public AwakenElementalToken copy() {
-        return new AwakenElementalToken(this);
     }
 }

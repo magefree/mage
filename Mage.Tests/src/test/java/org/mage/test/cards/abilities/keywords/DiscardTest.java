@@ -36,6 +36,27 @@ public class DiscardTest extends CardTestPlayerBase {
         assertHandCount(playerA, 1); // the card drawn by Cycling
     }
 
+    // https://github.com/magefree/mage/issues/14419
+    @Test
+    public void testRestInPeaceAndDiscard() {
+        addCard(Zone.BATTLEFIELD, playerA, "Rest in Peace");
+        addCard(Zone.HAND, playerA, "Mind Sludge");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp");
+        addCard(Zone.BATTLEFIELD, playerA, "Wastes", 4);
+        addCard(Zone.HAND, playerB, "Orvar, the All-Form");
+        addCard(Zone.BATTLEFIELD, playerA, "Balduvian Bears");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mind Sludge");
+        addTarget(playerA, playerB);
+        addTarget(playerB, "Balduvian Bears");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerB, "Balduvian Bears", 1);
+    }
+
     @Test
     public void AmnesiaTest() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 20);

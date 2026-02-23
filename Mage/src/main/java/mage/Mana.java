@@ -1479,7 +1479,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
 
     /**
      * Hardcoding here versus using Objects.hash in order to increase performance since this is
-     * called thousands of times by {@link mage.abilities.mana.ManaOptions#addManaWithCost(List, Game)}
+     * called thousands of times by {@link mage.abilities.mana.ManaOptions#addManaWithCost(List, mage.game.Game)}
      *
      * @return
      */
@@ -1516,5 +1516,25 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
             value = 0;
         }
         return value;
+    }
+
+    public static Mana fromColor(ObjectColor color) {
+        Mana mana = new Mana();
+        if (color.isWhite()) {
+            mana.increaseWhite();
+        }
+        if (color.isBlue()) {
+            mana.increaseBlue();
+        }
+        if (color.isBlack()) {
+            mana.increaseBlack();
+        }
+        if (color.isRed()) {
+            mana.increaseRed();
+        }
+        if (color.isGreen()) {
+            mana.increaseGreen();
+        }
+        return mana;
     }
 }

@@ -2,11 +2,11 @@ package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.constants.Pronoun;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
+import mage.constants.Pronoun;
 import mage.constants.PutCards;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -74,7 +74,7 @@ public class ExileAndReturnSourceEffect extends OneShotEffect {
                 returnUnderYourControl ? controller : game.getPlayer(permanent.getOwnerId()),
                 permanent.getMainCard(), source, game, "card"
         );
-        if (additionalEffect == null || game.getPermanent(permanent.getId()) == null) {
+        if (additionalEffect == null || !game.getState().getZone(permanent.getMainCard().getId()).equals(Zone.BATTLEFIELD)) {
             return true;
         }
         if (additionalEffect instanceof ContinuousEffect) {

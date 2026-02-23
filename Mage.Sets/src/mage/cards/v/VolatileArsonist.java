@@ -1,14 +1,14 @@
 package mage.cards.v;
 
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.DayboundAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.MenaceAbility;
-import mage.cards.CardImpl;
+import mage.abilities.keyword.NightboundAbility;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.target.TargetPlayer;
@@ -20,22 +20,23 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class VolatileArsonist extends CardImpl {
+public final class VolatileArsonist extends TransformingDoubleFacedCard {
 
     public VolatileArsonist(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.WEREWOLF}, "{3}{R}{R}",
+                "Dire-Strain Anarchist",
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.WEREWOLF}, "R"
+        );
 
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.WEREWOLF);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
-        this.secondSideCardClazz = mage.cards.d.DireStrainAnarchist.class;
+        // Volatile Arsonist
+        this.getLeftHalfCard().setPT(4, 4);
 
         // Menace
-        this.addAbility(new MenaceAbility(false));
+        this.getLeftHalfCard().addAbility(new MenaceAbility(false));
 
         // Haste
-        this.addAbility(HasteAbility.getInstance());
+        this.getLeftHalfCard().addAbility(HasteAbility.getInstance());
 
         // Whenever Volatile Arsonist attacks, it deals 1 damage to each of up to one target creature, up to one target player, and/or up to one target planeswalker.
         Ability ability = new AttacksTriggeredAbility(new DamageTargetEffect(1)
@@ -43,10 +44,29 @@ public final class VolatileArsonist extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent(0, 1));
         ability.addTarget(new TargetPlayer(0, 1, false));
         ability.addTarget(new TargetPlaneswalkerPermanent(0, 1));
-        this.addAbility(ability);
+        this.getLeftHalfCard().addAbility(ability);
 
         // Daybound
-        this.addAbility(new DayboundAbility());
+        this.getLeftHalfCard().addAbility(new DayboundAbility());
+
+        // Dire-Strain Anarchist
+        this.getRightHalfCard().setPT(5, 5);
+
+        // Menace
+        this.getRightHalfCard().addAbility(new MenaceAbility(false));
+
+        // Haste
+        this.getRightHalfCard().addAbility(HasteAbility.getInstance());
+
+        // Whenever Dire-Strain Anarchist attacks, it deals 2 damage to each of up to one target creature, up to one target player, and/or up to one target planeswalker.
+        Ability ability2 = new AttacksTriggeredAbility(new DamageTargetEffect(2).setText("it deals 2 damage to each of up to one target creature, up to one target player, and/or up to one target planeswalker"));
+        ability2.addTarget(new TargetCreaturePermanent(0, 1));
+        ability2.addTarget(new TargetPlayer(0, 1, false));
+        ability2.addTarget(new TargetPlaneswalkerPermanent(0, 1));
+        this.getRightHalfCard().addAbility(ability2);
+
+        // Nightbound
+        this.getRightHalfCard().addAbility(new NightboundAbility());
     }
 
     private VolatileArsonist(final VolatileArsonist card) {

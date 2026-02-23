@@ -26,7 +26,7 @@ import java.util.UUID;
  */
 public final class TheBoulderReadyToRumble extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("creatures you control with power 4 or greater");
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("the number of creatures you control with power 4 or greater");
 
     static {
         filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 3));
@@ -46,7 +46,7 @@ public final class TheBoulderReadyToRumble extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever The Boulder attacks, earthbend X, where X is the number of creatures you control with power 4 or greater.
-        Ability ability = new AttacksTriggeredAbility(new EarthbendTargetEffect(xValue));
+        Ability ability = new AttacksTriggeredAbility(new EarthbendTargetEffect(xValue, true));
         ability.addTarget(new TargetControlledLandPermanent());
         this.addAbility(ability.addHint(hint));
     }

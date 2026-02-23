@@ -2,12 +2,11 @@ package mage.cards.b;
 
 import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.effects.common.DoWhenCostPaid;
 import mage.abilities.effects.common.ExileCardYouChooseTargetOpponentEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.NinjutsuAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -35,9 +34,7 @@ public final class BitingPalmNinja extends CardImpl {
         this.addAbility(new NinjutsuAbility("{2}{B}"));
 
         // Biting-Palm Ninja enters the battlefield with a menace counter on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(
-                CounterType.MENACE.createInstance(1)
-        ), "with a menace counter on it"));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.MENACE.createInstance(1)));
 
         // Whenever Biting-Palm Ninja deals combat damage to a player, you may remove a menace counter from it. When you do, that player reveals their hand and you choose a nonland card from it. Exile that card.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(

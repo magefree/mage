@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
 
 import java.util.UUID;
 
@@ -21,8 +20,7 @@ import java.util.UUID;
  */
 public final class BrambleguardVeteran extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.RACCOON, "");
-    private static final FilterPermanent filter2 = new FilterPermanent(SubType.RACCOON, "");
+    private static final FilterPermanent filter = new FilterPermanent(SubType.RACCOON);
 
     public BrambleguardVeteran(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
@@ -40,7 +38,7 @@ public final class BrambleguardVeteran extends CardImpl {
                 ExpendTriggeredAbility.Expend.FOUR
         );
         ability.addEffect(new GainAbilityControlledEffect(
-                VigilanceAbility.getInstance(), Duration.EndOfTurn, filter2
+                VigilanceAbility.getInstance(), Duration.EndOfTurn, filter
         ).setText("and gain vigilance until end of turn"));
         this.addAbility(ability);
     }

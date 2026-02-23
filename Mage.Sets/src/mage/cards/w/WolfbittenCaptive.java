@@ -1,13 +1,12 @@
 package mage.cards.w;
 
-import mage.MageInt;
 import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
+import mage.abilities.common.WerewolfBackTriggeredAbility;
 import mage.abilities.common.WerewolfFrontTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.keyword.TransformAbility;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
@@ -18,24 +17,32 @@ import java.util.UUID;
 /**
  * @author Loki
  */
-public final class WolfbittenCaptive extends CardImpl {
+public final class WolfbittenCaptive extends TransformingDoubleFacedCard {
 
     public WolfbittenCaptive(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.WEREWOLF);
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.WEREWOLF}, "{G}",
+                "Krallenhorde Killer",
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.WEREWOLF}, "G"
+        );
 
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        this.secondSideCardClazz = mage.cards.k.KrallenhordeKiller.class;
+        // Wolfbitten Captive
+        this.getLeftHalfCard().setPT(1, 1);
 
         // {1}{G}: Wolfbitten Captive gets +2/+2 until end of turn. Activate this ability only once each turn.
-        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{G}")));
+        this.getLeftHalfCard().addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{G}")));
 
         // At the beginning of each upkeep, if no spells were cast last turn, transform Wolfbitten Captive.
-        this.addAbility(new TransformAbility());
-        this.addAbility(new WerewolfFrontTriggeredAbility());
+        this.getLeftHalfCard().addAbility(new WerewolfFrontTriggeredAbility());
+
+        // Krallenhorde Killer
+        this.getRightHalfCard().setPT(2, 2);
+
+        // {3}{G}: Krallenhorde Killer gets +4/+4 until end of turn. Activate this ability only once each turn.
+        this.getRightHalfCard().addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(4, 4, Duration.EndOfTurn), new ManaCostsImpl<>("{3}{G}")));
+
+        // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Krallenhorde Killer.
+        this.getRightHalfCard().addAbility(new WerewolfBackTriggeredAbility());
     }
 
     private WolfbittenCaptive(final WolfbittenCaptive card) {

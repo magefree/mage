@@ -46,12 +46,12 @@ public final class ChongAndLilyNomads extends CardImpl {
         // * Put a lore counter on each of any number of target Sagas you control.
         Ability ability = new AttacksWithCreaturesTriggeredAbility(
                 new AddCountersTargetEffect(CounterType.LORE.createInstance()), 1, filter
-        );
+        ).setTriggerPhrase("Whenever one or more Bards you control attack, ");
         ability.addTarget(new TargetPermanent(0, Integer.MAX_VALUE, ChongAndLilyNomadsValue.getFilter()));
 
         // * Creatures you control get +1/+0 until end of turn for each lore counter among Sagas you control.
         ability.addMode(new Mode(new BoostControlledEffect(
-                ChongAndLilyNomadsValue.instance, StaticValue.get(0), Duration.WhileOnBattlefield
+                ChongAndLilyNomadsValue.instance, StaticValue.get(0), Duration.EndOfTurn
         )));
         this.addAbility(ability.addHint(ChongAndLilyNomadsValue.getHint()));
     }

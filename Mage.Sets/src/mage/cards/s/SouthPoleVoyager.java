@@ -11,6 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
+import mage.watchers.common.AbilityResolvedWatcher;
 
 import java.util.UUID;
 
@@ -33,7 +34,7 @@ public final class SouthPoleVoyager extends CardImpl {
         // Whenever this creature or another Ally you control enters, you gain 1 life. If this is the second time this ability has resolved this turn, draw a card.
         Ability ability = new EntersBattlefieldThisOrAnotherTriggeredAbility(new GainLifeEffect(1), filter, false, true);
         ability.addEffect(new IfAbilityHasResolvedXTimesEffect(2, new DrawCardSourceControllerEffect(1)));
-        this.addAbility(ability);
+        this.addAbility(ability, new AbilityResolvedWatcher());
     }
 
     private SouthPoleVoyager(final SouthPoleVoyager card) {

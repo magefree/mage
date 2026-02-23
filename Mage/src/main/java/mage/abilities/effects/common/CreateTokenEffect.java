@@ -210,9 +210,13 @@ public class CreateTokenEffect extends OneShotEffect {
                 if (tokenDescription.endsWith("token")) {
                     sb.append("s");
                 }
-                int tokenLocation = sb.indexOf("token ");
+                int tokenLocation = sb.indexOf("token with");
                 if (tokenLocation != -1) {
-                    sb.replace(tokenLocation, tokenLocation + 6, "tokens ");
+                    sb.replace(tokenLocation, tokenLocation + 10, "tokens with");
+                }
+                tokenLocation = sb.indexOf("token named");
+                if (tokenLocation != -1) {
+                    sb.replace(tokenLocation, tokenLocation + 11, "tokens named");
                 }
             }
         }

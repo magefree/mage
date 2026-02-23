@@ -139,12 +139,17 @@ class SummonBrynhildrWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() != GameEvent.EventType.COUNTER_ADDED
-                || !CounterType.STUN.getName().equals(event.getData())) {
+                || !CounterType.LORE.getName().equals(event.getData())) {
             return;
         }
         Permanent permanent = game.getPermanent(event.getTargetId());
+        int offset = 0;
+        if (permanent == null) {
+            permanent = game.getPermanentEntering(event.getTargetId());
+            offset++;
+        }
         if (permanent != null) {
-            map.computeIfAbsent(new MageObjectReference(permanent, game), x -> new HashSet<>())
+            map.computeIfAbsent(new MageObjectReference(permanent, game, offset), x -> new HashSet<>())
                     .add(event.getPlayerId());
         }
     }

@@ -1,36 +1,56 @@
 package mage.cards.k;
 
-import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.WerewolfBackTriggeredAbility;
 import mage.abilities.common.WerewolfFrontTriggeredAbility;
+import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
+import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
-import mage.abilities.keyword.TransformAbility;
-import mage.cards.CardImpl;
+import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.SubType;
+import mage.filter.FilterPermanent;
 
 import java.util.UUID;
 
 /**
  * @author North
  */
-public final class KruinOutlaw extends CardImpl {
+public final class KruinOutlaw extends TransformingDoubleFacedCard {
+
+    private static final FilterPermanent filter = new FilterPermanent(SubType.WEREWOLF, "Werewolves");
 
     public KruinOutlaw(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.ROGUE);
-        this.subtype.add(SubType.WEREWOLF);
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.ROGUE, SubType.WEREWOLF}, "{1}{R}{R}",
+                "Terror of Kruin Pass",
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.WEREWOLF}, "R");
 
-        this.secondSideCardClazz = mage.cards.t.TerrorOfKruinPass.class;
+        // Kruin Outlaw
+        this.getLeftHalfCard().setPT(2, 2);
 
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        // First strike
+        this.getLeftHalfCard().addAbility(FirstStrikeAbility.getInstance());
 
-        this.addAbility(FirstStrikeAbility.getInstance());
         // At the beginning of each upkeep, if no spells were cast last turn, transform Kruin Outlaw.
-        this.addAbility(new TransformAbility());
-        this.addAbility(new WerewolfFrontTriggeredAbility());
+        this.getLeftHalfCard().addAbility(new WerewolfFrontTriggeredAbility());
+
+        // Terror of Kruin Pass
+        this.getRightHalfCard().setPT(3, 3);
+
+        // Double strike
+        this.getRightHalfCard().addAbility(DoubleStrikeAbility.getInstance());
+
+        // Werewolves you control have menace.
+        this.getRightHalfCard().addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
+                new MenaceAbility(), Duration.WhileOnBattlefield, filter, false
+        )));
+
+        // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Terror of Kruin Pass.
+        this.getRightHalfCard().addAbility(new WerewolfBackTriggeredAbility());
     }
 
     private KruinOutlaw(final KruinOutlaw card) {

@@ -9,15 +9,13 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.OmenCard;
-import mage.cards.o.Omen;
 import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.DeathtouchAbility;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.counters.CounterType;
-import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInASingleGraveyard;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -29,7 +27,7 @@ public final class FeralDeathgorger extends OmenCard {
 
     public FeralDeathgorger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{5}{B}", "Dusk Sight", "{1}{B}");
-        
+
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
@@ -42,7 +40,7 @@ public final class FeralDeathgorger extends OmenCard {
 
         // When this creature enters, exile up to two target cards from a single graveyard.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExileTargetEffect());
-        ability.addTarget(new TargetCardInASingleGraveyard(0, 2, new FilterCard("cards")));
+        ability.addTarget(new TargetCardInASingleGraveyard(0, 2, StaticFilters.FILTER_CARD_CARDS));
         this.addAbility(ability);
 
         // Dusk Sight

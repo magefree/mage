@@ -1,6 +1,5 @@
 package mage.cards.w;
 
-import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.NotMyTurnCondition;
@@ -14,7 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 
 import java.util.UUID;
 
@@ -29,15 +28,21 @@ public final class WardenOfTheWall extends CardImpl {
         // Warden of the Wall enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
 
-        // {tap}: Add {C}.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
         // As long as it's not your turn, Warden of the Wall is a 2/3 Gargoyle artifact creature with flying.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
-                new BecomesCreatureSourceEffect(new GargoyleToken(), CardType.ARTIFACT, Duration.WhileOnBattlefield),
-                NotMyTurnCondition.instance,
-                "During turns other than yours, {this} is a 2/3 Gargoyle artifact creature with flying"))
-                .addHint(NotMyTurnHint.instance));
+            new BecomesCreatureSourceEffect(
+                new CreatureToken(
+                    2, 3, "2/3 Gargoyle artifact creature with flying", SubType.GARGOYLE
+                ).withType(CardType.ARTIFACT).withAbility(FlyingAbility.getInstance()),
+                CardType.ARTIFACT,
+                Duration.WhileOnBattlefield
+            ),
+            NotMyTurnCondition.instance,
+            "During turns other than yours, {this} is a 2/3 Gargoyle artifact creature with flying"
+        )).addHint(NotMyTurnHint.instance));
     }
 
     private WardenOfTheWall(final WardenOfTheWall card) {
@@ -48,26 +53,4 @@ public final class WardenOfTheWall extends CardImpl {
     public WardenOfTheWall copy() {
         return new WardenOfTheWall(this);
     }
-}
-
-class GargoyleToken extends TokenImpl {
-
-    public GargoyleToken() {
-        super("", "2/3 Gargoyle artifact creature with flying");
-        cardType.add(CardType.ARTIFACT);
-        cardType.add(CardType.CREATURE);
-        subtype.add(SubType.GARGOYLE);
-        power = new MageInt(2);
-        toughness = new MageInt(3);
-        addAbility(FlyingAbility.getInstance());
-    }
-
-    private GargoyleToken(final GargoyleToken token) {
-        super(token);
-    }
-
-    public GargoyleToken copy() {
-        return new GargoyleToken(this);
-    }
-
 }

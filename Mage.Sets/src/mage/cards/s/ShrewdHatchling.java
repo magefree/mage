@@ -3,12 +3,11 @@ package mage.cards.s;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.combat.CantBeBlockedByTargetSourceEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -43,9 +42,7 @@ public final class ShrewdHatchling extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Shrewd Hatchling enters the battlefield with four -1/-1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(
-                CounterType.M1M1.createInstance(4)
-        ), "with four -1/-1 counters on it"));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.M1M1.createInstance(4)));
 
         // {U/R}: Target creature can't block Shrewd Hatchling this turn.
         Ability ability = new SimpleActivatedAbility(

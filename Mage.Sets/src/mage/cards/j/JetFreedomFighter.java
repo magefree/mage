@@ -35,7 +35,9 @@ public final class JetFreedomFighter extends CardImpl {
 
         // When Jet enters, he deals damage equal to the number of creatures you control to target creature an opponent controls.
         Ability ability = new EntersBattlefieldTriggeredAbility(
-                new DamageTargetEffect(CreaturesYouControlCount.PLURAL, "he")
+                new DamageTargetEffect(CreaturesYouControlCount.PLURAL)
+                        .setText("he deals damage equal to the number of creatures " +
+                                "you control to target creature an opponent controls")
         );
         ability.addTarget(new TargetOpponentsCreaturePermanent());
         this.addAbility(ability);

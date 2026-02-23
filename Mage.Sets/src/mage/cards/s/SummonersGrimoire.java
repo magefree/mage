@@ -44,7 +44,7 @@ public final class SummonersGrimoire extends CardImpl {
         this.addAbility(ability);
 
         // Abraxas -- Equip {3}
-        this.addAbility(new EquipAbility(3).withFlavorWord("Abraxas"));
+        this.addAbility(new EquipAbility(3, false).withFlavorWord("Abraxas"));
     }
 
     private SummonersGrimoire(final SummonersGrimoire card) {

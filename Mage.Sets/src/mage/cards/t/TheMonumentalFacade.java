@@ -1,25 +1,23 @@
 package mage.cards.t;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.mana.ColorlessManaAbility;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -42,10 +40,7 @@ public final class TheMonumentalFacade extends CardImpl {
         this.subtype.add(SubType.SPHERE);
 
         // The Monumental Facade enters the battlefield with two oil counters on it.
-        this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.OIL.createInstance(2)),
-                "with two oil counters on it"
-        ));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.OIL.createInstance(2)));
 
         // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());

@@ -15,7 +15,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterSpell;
-import mage.game.permanent.token.DragonToken2;
+import mage.game.permanent.token.Dragon55Token;
 
 /**
  *
@@ -53,7 +53,7 @@ public final class SarkhanFireblood extends CardImpl {
         ));
 
         // -7: Create four 5/5 red Dragon creature tokens with flying.
-        this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new DragonToken2(), 4), -7));
+        this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new Dragon55Token(), 4), -7));
     }
 
     private SarkhanFireblood(final SarkhanFireblood card) {

@@ -38,11 +38,11 @@ public final class WreckingBallArm extends CardImpl {
         // Equip legendary creature {3}
         this.addAbility(new EquipAbility(
                 Outcome.BoostCreature, new GenericManaCost(3),
-                new TargetPermanent(StaticFilters.FILTER_CONTROLLED_CREATURE_LEGENDARY)
+                new TargetPermanent(StaticFilters.FILTER_CONTROLLED_CREATURE_LEGENDARY), false
         ));
 
         // Equip {7}
-        this.addAbility(new EquipAbility(7));
+        this.addAbility(new EquipAbility(7, false));
     }
 
     private WreckingBallArm(final WreckingBallArm card) {

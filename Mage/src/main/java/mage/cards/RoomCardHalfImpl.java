@@ -14,9 +14,8 @@ import java.util.UUID;
  */
 public class RoomCardHalfImpl extends SplitCardHalfImpl implements RoomCardHalf {
 
-    public RoomCardHalfImpl(UUID ownerId, CardSetInfo setInfo, CardType[] cardTypes, String costs,
-            RoomCard splitCardParent, SpellAbilityType spellAbilityType) {
-        super(ownerId, setInfo, cardTypes, costs, splitCardParent, spellAbilityType);
+    public RoomCardHalfImpl(CardSetInfo setInfo, String costs, RoomCard splitCardParent, SpellAbilityType spellAbilityType) {
+        super(splitCardParent.ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, costs, splitCardParent, spellAbilityType);
         this.addSubType(SubType.ROOM);
     }
 

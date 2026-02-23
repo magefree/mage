@@ -1,5 +1,3 @@
-
-
 package mage.abilities.costs.common;
 
 import mage.abilities.Ability;
@@ -24,6 +22,7 @@ import java.util.UUID;
 public class ExileTargetCost extends CostImpl {
 
     List<Permanent> permanents = new ArrayList<>();
+    boolean useSourceExileZone = true;
 
     public ExileTargetCost(TargetControlledPermanent target) {
         target.withNotTarget(true);
@@ -36,6 +35,7 @@ public class ExileTargetCost extends CostImpl {
         for (Permanent permanent : cost.permanents) {
             this.permanents.add(permanent.copy());
         }
+        this.useSourceExileZone = cost.useSourceExileZone;
     }
 
     @Override
@@ -55,13 +55,19 @@ public class ExileTargetCost extends CostImpl {
             // 117.11. The actions performed when paying a cost may be modified by effects.
             // Even if they are, meaning the actions that are performed don't match the actions
             // that are called for, the cost has still been paid.
-            // so return state here is not important because the user indended to exile the target anyway
+            // so return state here is not important because the user intended to exile the target anyway
         }
-        player.moveCardsToExile(
-                cards.getCards(game), source, game, true,
-                CardUtil.getExileZoneId(game, source),
-                CardUtil.getSourceName(game, source)
-        );
+        if (useSourceExileZone) {
+            player.moveCardsToExile(
+                    cards.getCards(game), source, game, true,
+                    CardUtil.getExileZoneId(game, source),
+                    CardUtil.getSourceName(game, source)
+            );
+        }
+        else {
+            player.moveCardsToExile(cards.getCards(game), source, game, false, null, "");
+        }
+
         paid = true;
         return paid;
     }
@@ -78,5 +84,13 @@ public class ExileTargetCost extends CostImpl {
 
     public List<Permanent> getPermanents() {
         return permanents;
+    }
+
+    /**
+     * Put exiled cards to source zone, so next linked ability can find it
+     */
+    public ExileTargetCost withSourceExileZone(boolean useSourceExileZone) {
+        this.useSourceExileZone = useSourceExileZone;
+        return this;
     }
 }

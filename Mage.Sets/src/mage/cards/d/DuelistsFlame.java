@@ -42,7 +42,7 @@ public final class DuelistsFlame extends CardImpl {
         // Until end of turn, target blocked creature you control gets +X/+0 and gains trample and "Whenever this creature deals combat damage to a player, look at that many cards from the top of your library. Exile up to one nonland card from among them and put the rest on the bottom of your library in a random order. You may cast the exiled card without paying its mana cost."
         this.getSpellAbility().addEffect(new BoostTargetEffect(GetXValue.instance, StaticValue.get(0))
                 .setText("until end of turn, target blocked creature you control gets +X/+0"));
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance()).setText("and has trample"));
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance()).setText("and gains trample"));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(
                 new DealsCombatDamageToAPlayerTriggeredAbility(new DuelistsFlameEffect())
         ).setText("and \"Whenever this creature deals combat damage to a player, " +

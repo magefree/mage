@@ -1,7 +1,6 @@
 package mage.cards.g;
 
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.OrCost;
@@ -14,9 +13,13 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.EquipAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.AttachmentType;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -57,7 +60,7 @@ public final class GavelOfTheRighteous extends CardImpl {
                 Outcome.BoostCreature,
                 new OrCost(
                         "Pay {3} or remove a counter from {this}",
-                        new GenericManaCost(3), new RemoveCountersSourceCost()
+                        new GenericManaCost(3), new RemoveCountersSourceCost(1)
                 ),
                 false
         ));

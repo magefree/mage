@@ -1,4 +1,3 @@
-
 package org.mage.test.cards.abilities.oneshot.damage;
 
 import mage.constants.PhaseStep;
@@ -38,7 +37,7 @@ public class FlameheartWerewolfTest extends CardTestPlayerBase {
 
         // both should die
         assertPermanentCount(playerA, "Flameheart Werewolf", 0);
-        assertExileCount("Flameheart Werewolf", 1); // exiled by Kalitas
+        assertExileCount("Kessig Forgemaster", 1); // exiled by Kalitas
         assertPermanentCount(playerB, "Kalitas, Traitor of Ghet", 0);
         assertGraveyardCount(playerB, "Kalitas, Traitor of Ghet", 1);
     }

@@ -29,7 +29,7 @@ public final class Scald extends CardImpl {
 
         // Whenever a player taps an Island for mana, Scald deals 1 damage to that player.
         this.addAbility(new TapForManaAllTriggeredAbility(
-                new DamageTargetEffect(1, true, "that player"),
+                new DamageTargetEffect(1).withTargetDescription("that player"),
                 filter,
                 SetTargetPointer.PLAYER));
     }

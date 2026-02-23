@@ -22,10 +22,11 @@ public final class CrackedEarthTechnique extends CardImpl {
         this.subtype.add(SubType.LESSON);
 
         // Earthbend 3, then earthbend 3. You gain 3 life.
-        this.getSpellAbility().addEffect(new EarthbendTargetEffect(3));
-        this.getSpellAbility().addEffect(new EarthbendTargetEffect(3)
+        this.getSpellAbility().addEffect(new EarthbendTargetEffect(3, false));
+        this.getSpellAbility().addEffect(new EarthbendTargetEffect(3, false)
+                .concatBy(", then")
                 .setTargetPointer(new SecondTargetPointer())
-                .concatBy(", then"));
+        );
         this.getSpellAbility().addTarget(new TargetControlledLandPermanent().withChooseHint("first target"));
         this.getSpellAbility().addTarget(new TargetControlledLandPermanent().withChooseHint("second target"));
         this.getSpellAbility().addEffect(new GainLifeEffect(3));

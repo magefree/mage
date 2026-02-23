@@ -35,7 +35,7 @@ public final class DancersChakrams extends CardImpl {
 
     public DancersChakrams(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}{W}");
-        
+
         this.subtype.add(SubType.EQUIPMENT);
 
         // Job select
@@ -55,7 +55,7 @@ public final class DancersChakrams extends CardImpl {
         this.addAbility(ability);
 
         // Krishna -- Equip {3}
-        this.addAbility(new EquipAbility(3).withFlavorWord("Krishna"));
+        this.addAbility(new EquipAbility(3, false).withFlavorWord("Krishna"));
     }
 
     private DancersChakrams(final DancersChakrams card) {

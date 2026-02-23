@@ -56,7 +56,7 @@ public final class ReapersScythe extends CardImpl {
         this.addAbility(ability);
 
         // Death Sickle -- Equip {2}
-        this.addAbility(new EquipAbility(2).withFlavorWord("Death Sickle"));
+        this.addAbility(new EquipAbility(2, false).withFlavorWord("Death Sickle"));
     }
 
     private ReapersScythe(final ReapersScythe card) {

@@ -11,7 +11,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.counters.CounterType;
-import mage.game.permanent.token.SoldierTokenWithHaste;
+import mage.game.permanent.token.SoldierHasteToken;
 
 /**
 *
@@ -24,7 +24,7 @@ public final class AssembleTheLegion extends CardImpl {
 
         // At the beginning of your upkeep, put a muster counter on Assemble the Legion. Then create a 1/1 red and white Soldier creature token with haste for each muster counter on Assemble the Legion.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.MUSTER.createInstance()));
-        ability.addEffect(new CreateTokenEffect(new SoldierTokenWithHaste(), new CountersSourceCount(CounterType.MUSTER)).concatBy("Then"));
+        ability.addEffect(new CreateTokenEffect(new SoldierHasteToken(), new CountersSourceCount(CounterType.MUSTER)).concatBy("Then"));
         this.addAbility(ability);
     }
 

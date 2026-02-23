@@ -40,7 +40,7 @@ public class ScryfallImageSupportTokens {
 
             // RIX
             // TODO: this should be readded when condition tokens are implemented
-            // put("RIX/City's Blessing", "https://api.scryfall.com/cards/trix/6/en?format=image"); 
+            // put("RIX/City's Blessing", "https://api.scryfall.com/cards/trix/6/en?format=image");
             put("RIX/Elemental/1", "https://api.scryfall.com/cards/trix/1/en?format=image");
             put("RIX/Elemental/2", "https://api.scryfall.com/cards/trix/2/en?format=image");
             put("RIX/Golem", "https://api.scryfall.com/cards/trix/4/en?format=image");
@@ -2693,9 +2693,10 @@ public class ScryfallImageSupportTokens {
             put("TDM/Reliquary Dragon", "https://api.scryfall.com/cards/ttdm/15/en?format=image");
             put("TDM/Soldier/1", "https://api.scryfall.com/cards/ttdm/4/en?format=image");
             put("TDM/Soldier/2", "https://api.scryfall.com/cards/ttdm/5/en?format=image");
-            put("TDM/Spirit/1", "https://api.scryfall.com/cards/ttdm/9/en?format=image");
-            put("TDM/Spirit/2", "https://api.scryfall.com/cards/ttdm/6/en?format=image");
-            // TODO: 2/2 and 3/3 Spirit tokens (no relevant cards revealed, token not implemented)
+            put("TDM/Spirit/1", "https://api.scryfall.com/cards/ttdm/9/en?format=image"); // */*
+            put("TDM/Spirit/2", "https://api.scryfall.com/cards/ttdm/6/en?format=image"); // 1/1
+            put("TDM/Spirit/3", "https://api.scryfall.com/cards/ttdm/7/en?format=image"); // 2/2
+            put("TDM/Spirit/4", "https://api.scryfall.com/cards/ttdm/8/en?format=image"); // 3/3
             put("TDM/Treasure", "https://api.scryfall.com/cards/ttdm/16/en?format=image");
             put("TDM/Warrior", "https://api.scryfall.com/cards/ttdm/13/en?format=image");
             put("TDM/Zombie Druid", "https://api.scryfall.com/cards/ttdm/10/en?format=image");
@@ -2857,8 +2858,47 @@ public class ScryfallImageSupportTokens {
             put("TLE/Marit Lage", "https://api.scryfall.com/cards/ttle/1/?format=image");
             put("TLE/Soldier", "https://api.scryfall.com/cards/ttle/2?format=image");
 
+            // ECL
+            put("ECL/Shapeshifter", "https://api.scryfall.com/cards/tecl/1/?format=image");
+            put("ECL/Elk", "https://api.scryfall.com/cards/tecl/2/?format=image");
+            put("ECL/Treefolk", "https://api.scryfall.com/cards/tecl/3/?format=image");
+            put("ECL/Elf", "https://api.scryfall.com/cards/tecl/4/?format=image");
+            put("ECL/Faerie", "https://api.scryfall.com/cards/tecl/5/?format=image");
+            put("ECL/Goblin", "https://api.scryfall.com/cards/tecl/6/?format=image");
+            put("ECL/Kithkin", "https://api.scryfall.com/cards/tecl/7/?format=image");
+            put("ECL/Merfolk", "https://api.scryfall.com/cards/tecl/8/?format=image");
+            put("ECL/Worm", "https://api.scryfall.com/cards/tecl/9/?format=image");
+            put("ECL/Treasure", "https://api.scryfall.com/cards/tecl/10/?format=image");
+            put("ECL/Mutavault", "https://api.scryfall.com/cards/tecl/11/?format=image");
+            put("ECL/Emblem Oko", "https://api.scryfall.com/cards/tecl/12/?format=image");
+
+            // ECC
+            put("ECC/Elemental/1", "https://api.scryfall.com/cards/tecc/2?format=image");
+            put("ECC/Elemental/2", "https://api.scryfall.com/cards/tecc/9?format=image");
+            put("ECC/Elemental/3", "https://api.scryfall.com/cards/tecc/10?format=image");
+            put("ECC/Elf Warrior", "https://api.scryfall.com/cards/tecc/4?format=image");
+            put("ECC/Plant", "https://api.scryfall.com/cards/tecc/5?format=image");
+            put("ECC/Rhino Warrior", "https://api.scryfall.com/cards/tecc/6?format=image");
+            put("ECC/Saproling", "https://api.scryfall.com/cards/tecc/7?format=image");
+            put("ECC/Scarecrow", "https://api.scryfall.com/cards/tecc/11?format=image");
+            put("ECC/Snake", "https://api.scryfall.com/cards/tecc/8?format=image");
+            put("ECC/Zombie", "https://api.scryfall.com/cards/tecc/3?format=image");
+
             // TMT
+            put("TMT/Dinosaur Soldier", "https://api.scryfall.com/cards/ttmt/2?format=image");
+            put("TMT/Food", "https://api.scryfall.com/cards/ttmt/8?format=image");
+            put("TMT/Insect Warrior", "https://api.scryfall.com/cards/ttmt/4?format=image");
             put("TMT/Mutagen", "https://api.scryfall.com/cards/ttmt/9?format=image");
+            put("TMT/Mutant", "https://api.scryfall.com/cards/ttmt/7?format=image");
+            put("TMT/Ninja Turtle Spirit", "https://api.scryfall.com/cards/ttmt/3?format=image");
+            put("TMT/Ninja", "https://api.scryfall.com/cards/ttmt/5?format=image");
+            put("TMT/Rat", "https://api.scryfall.com/cards/ttmt/6?format=image");
+            put("TMT/Robot", "https://api.scryfall.com/cards/ttmt/10?format=image");
+
+            // TMC
+            put("TMT/Clue", "https://api.scryfall.com/cards/ttmc/2?format=image");
+            put("TMT/Ooze", "https://api.scryfall.com/cards/ttmc/1?format=image");
+            put("TMT/Treasure", "https://api.scryfall.com/cards/ttmc/3?format=image");
 
             // JVC
             put("JVC/Elemental Shaman", "https://api.scryfall.com/cards/tjvc/4?format=image");
@@ -2889,12 +2929,12 @@ public class ScryfallImageSupportTokens {
             put("REX/Treasure", "https://api.scryfall.com/cards/trex/2?format=image");
 
             // UGL
-            put("UGL/Goblin", "https://api.scryfall.com/cards/tugl/4?format=image");
-            put("UGL/Pegasus", "https://api.scryfall.com/cards/tugl/1?format=image");
-            put("UGL/Rabid Sheep", "https://api.scryfall.com/cards/tugl/5?format=image");
-            put("UGL/Soldier", "https://api.scryfall.com/cards/tugl/2?format=image");
-            put("UGL/Squirrel", "https://api.scryfall.com/cards/tugl/6?format=image");
-            put("UGL/Zombie", "https://api.scryfall.com/cards/tugl/3?format=image");
+            put("UGL/Goblin", "https://api.scryfall.com/cards/tugl/92?format=image");
+            put("UGL/Pegasus", "https://api.scryfall.com/cards/tugl/89?format=image");
+            put("UGL/Rabid Sheep", "https://api.scryfall.com/cards/tugl/93?format=image");
+            put("UGL/Soldier", "https://api.scryfall.com/cards/tugl/90?format=image");
+            put("UGL/Squirrel", "https://api.scryfall.com/cards/tugl/94?format=image");
+            put("UGL/Zombie", "https://api.scryfall.com/cards/tugl/91?format=image");
 
             // UST
             put("UST/Angel", "https://api.scryfall.com/cards/tust/1?format=image");
@@ -2978,6 +3018,9 @@ public class ScryfallImageSupportTokens {
 
             // PL25
             put("PL25/Snake", "https://api.scryfall.com/cards/pl25/2?format=image");
+
+            // PL26
+            put("PL26/Treasure", "https://api.scryfall.com/cards/pl26/2?format=image");
 
             // generate supported sets
             supportedSets.clear();

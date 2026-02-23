@@ -2,11 +2,10 @@ package mage.cards.g;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -30,10 +29,7 @@ public final class GlistenerSeer extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Glistener Seer enters the battlefield with three oil counters on it.
-        this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.OIL.createInstance(3)),
-                "with three oil counters on it"
-        ));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.OIL.createInstance(3)));
 
         // {T}, Remove an oil counter from Glistener Seer: Scry 1.
         Ability ability = new SimpleActivatedAbility(new ScryEffect(1, false), new TapSourceCost());

@@ -14,6 +14,7 @@ import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -29,7 +30,7 @@ import java.util.UUID;
  */
 public final class SimicAscendancy extends CardImpl {
 
-    private static final Condition condition = new SourceHasCounterCondition(CounterType.GROWTH, 20);
+    private static final Condition condition = new SourceHasCounterCondition(CounterType.GROWTH, ComparisonType.MORE_THAN,19);
 
     public SimicAscendancy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}{U}");

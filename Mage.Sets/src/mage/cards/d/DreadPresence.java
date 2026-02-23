@@ -35,7 +35,7 @@ public final class DreadPresence extends CardImpl {
         // Whenever a Swamp you control enters, choose one ---
         // • You draw a card and you lose 1 life.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(
-                new DrawCardSourceControllerEffect(1).setText("you draw a card"), filter
+                new DrawCardSourceControllerEffect(1, true), filter
         );
         ability.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
 

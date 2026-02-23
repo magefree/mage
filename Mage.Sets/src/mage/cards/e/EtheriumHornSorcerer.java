@@ -23,6 +23,7 @@ public final class EtheriumHornSorcerer extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}{U}{R}");
         this.subtype.add(SubType.MINOTAUR);
         this.subtype.add(SubType.WIZARD);
+        this.subtype.add(SubType.SORCERER);
 
 
         this.power = new MageInt(3);

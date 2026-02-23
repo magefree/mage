@@ -1,7 +1,5 @@
-
 package mage.abilities.keyword;
 
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -10,16 +8,15 @@ import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
 import mage.constants.TargetController;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicate;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
-import mage.util.GameLog;
 
 /**
  * 702.94. Soulbond
@@ -56,7 +53,7 @@ import mage.util.GameLog;
 public class SoulbondAbility extends EntersBattlefieldTriggeredAbility {
 
     public SoulbondAbility() {
-        super(new SoulboundEntersSelfEffect(), true);
+        super(new SoulbondEntersSelfEffect(), true);
         this.addSubAbility(new SoulbondEntersOtherAbility());
     }
 
@@ -72,28 +69,17 @@ public class SoulbondAbility extends EntersBattlefieldTriggeredAbility {
     @Override
     public boolean checkInterveningIfClause(Game game) {
         // if you control both this creature and another creature and both are unpaired
-        boolean self = false;
-        boolean other = false;
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(getControllerId())) {
-            if (permanent.isCreature(game)) {
-                if (permanent.getId().equals(getSourceId())) {
-                    if (permanent.isControlledBy(getControllerId())) {
-                        self = true;
-                        if (other) {
-                            return true;
-                        }
-                    } else {
-                        return false;
-                    }
-                } else if (permanent.getPairedCard() == null) {
-                    other = true;
-                    if (self) {
-                        return true;
-                    }
-                }
-            }
+        Permanent sourcePerm = game.getPermanent(getSourceId());
+        if (sourcePerm == null
+                || !sourcePerm.isControlledBy(getControllerId())
+                || !sourcePerm.isCreature(game)
+                || sourcePerm.getPairedMOR() != null) {
+            return false;
         }
-        return false;
+        return game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, getControllerId(), game)
+                .stream()
+                .filter(p -> !p.getId().equals(sourcePerm.getId()))
+                .anyMatch(p -> p.getPairedMOR() == null);
     }
 
     @Override
@@ -103,83 +89,86 @@ public class SoulbondAbility extends EntersBattlefieldTriggeredAbility {
     }
 
 }
-// When this creature enters the battlefield, if you control both this creature and another creature and both are unpaired, you may pair
-// this creature with another unpaired creature you control for as long as both remain creatures on the battlefield under your control
+/*
+ * When this creature enters, if you control both this creature and another creature and both are unpaired,
+ * you may pair this creature with another unpaired creature you control
+ * for as long as both remain creatures on the battlefield under your control.
+ */
 
-class SoulboundEntersSelfEffect extends OneShotEffect {
+class SoulbondEntersSelfEffect extends OneShotEffect {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another not paired creature you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another unpaired creature you control");
 
     static {
         filter.add(AnotherPredicate.instance);
-        filter.add(Predicates.not(new PairedPredicate()));
+        filter.add(PairedPredicate.UNPAIRED);
     }
 
-    public SoulboundEntersSelfEffect() {
+    SoulbondEntersSelfEffect() {
         super(Outcome.Benefit);
     }
 
-    protected SoulboundEntersSelfEffect(final SoulboundEntersSelfEffect effect) {
+    private SoulbondEntersSelfEffect(final SoulbondEntersSelfEffect effect) {
         super(effect);
     }
 
     @Override
-    public SoulboundEntersSelfEffect copy() {
-        return new SoulboundEntersSelfEffect(this);
+    public SoulbondEntersSelfEffect copy() {
+        return new SoulbondEntersSelfEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null && permanent.isCreature(game)) {
-            Player controller = game.getPlayer(permanent.getControllerId());
-            if (controller != null) {
-                TargetControlledPermanent target = new TargetControlledPermanent(filter);
-                target.withNotTarget(true);
-                if (target.canChoose(controller.getId(), source, game)) {
-                    if (controller.choose(Outcome.Benefit, target, source, game)) {
-                        Permanent chosen = game.getPermanent(target.getFirstTarget());
-                        if (chosen != null) {
-                            chosen.setPairedCard(new MageObjectReference(permanent, game));
-                            chosen.addInfo("soulbond", "Soulbond to " + GameLog.getColoredObjectIdNameForTooltip(permanent), game);
-                            permanent.setPairedCard(new MageObjectReference(chosen, game));
-                            permanent.addInfo("soulbond", "Soulbond to " + GameLog.getColoredObjectIdNameForTooltip(chosen), game);
-                            if (!game.isSimulation()) {
-                                game.informPlayers(controller.getLogName() + " soulbonds " + permanent.getLogName() + " with " + chosen.getLogName());
-                            }
-                        }
-                    }
+        Permanent sourcePerm = source.getSourcePermanentIfItStillExists(game);
+        if (sourcePerm == null
+                || !sourcePerm.isControlledBy(source.getControllerId())
+                || !sourcePerm.isCreature(game)
+                || sourcePerm.getPairedMOR() != null) {
+            return false;
+        }
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
+        TargetControlledPermanent target = new TargetControlledPermanent(filter);
+        target.withNotTarget(true);
+        if (target.canChoose(controller.getId(), source, game)) {
+            if (controller.choose(Outcome.Benefit, target, source, game)) {
+                Permanent chosen = game.getPermanent(target.getFirstTarget());
+                if (chosen != null) {
+                    chosen.setPairedWith(sourcePerm, game);
+                    sourcePerm.setPairedWith(chosen, game);
+                    game.informPlayers(controller.getLogName() + " soulbonds " + sourcePerm.getLogName() + " with " + chosen.getLogName());
+                    return true;
                 }
-
             }
-            return true;
         }
         return false;
     }
 }
 
 /**
- * “Whenever another creature you control enters, if you
- * control both that creature and this one and both are unpaired, you may pair
- * that creature with this creature for as long as both remain creatures on the
- * battlefield under your control.”
+ * Whenever another creature you control enters, 
+ * if you control both that creature and this one and both are unpaired,
+ * you may pair that creature with this creature 
+ * for as long as both remain creatures on the battlefield under your control.
  */
 class SoulbondEntersOtherAbility extends EntersBattlefieldAllTriggeredAbility {
 
     private static final FilterCreaturePermanent soulbondFilter = new FilterCreaturePermanent();
 
     static {
-        soulbondFilter.add(Predicates.not(new PairedPredicate()));
+        soulbondFilter.add(PairedPredicate.UNPAIRED);
         soulbondFilter.add(TargetController.YOU.getControllerPredicate());
         soulbondFilter.add(AnotherPredicate.instance);
     }
 
-    public SoulbondEntersOtherAbility() {
-        super(Zone.BATTLEFIELD, new SoulboundEntersOtherEffect(), soulbondFilter, true, SetTargetPointer.PERMANENT);
+    SoulbondEntersOtherAbility() {
+        super(Zone.BATTLEFIELD, new SoulbondEntersOtherEffect(), soulbondFilter, true, SetTargetPointer.PERMANENT);
         setRuleVisible(false);
     }
 
-    public SoulbondEntersOtherAbility(SoulbondEntersOtherAbility ability) {
+    private SoulbondEntersOtherAbility(SoulbondEntersOtherAbility ability) {
         super(ability);
     }
 
@@ -190,14 +179,18 @@ class SoulbondEntersOtherAbility extends EntersBattlefieldAllTriggeredAbility {
 
     @Override
     public boolean checkInterveningIfClause(Game game) {
-        // if you control both this creature and another creature and both are unpaired
-        if (game.getBattlefield().countAll(filter, getControllerId(), game) > 0) {
-            Permanent sourcePermanent = game.getPermanent(getSourceId());
-            if (sourcePermanent != null && sourcePermanent.isControlledBy(getControllerId()) && sourcePermanent.getPairedCard() == null) {
-                return true;
-            }
+        // if you control both that creature and this one and both are unpaired
+        Permanent sourcePerm = game.getPermanent(getSourceId());
+        if (sourcePerm == null
+                || !sourcePerm.isControlledBy(getControllerId())
+                || !sourcePerm.isCreature(game)
+                || sourcePerm.getPairedMOR() != null) {
+            return false;
         }
-        return false;
+        // no event param to check the other creature specifically
+        // at least check that a valid creature exists
+        // the effect will still fizzle if not valid
+        return game.getBattlefield().count(soulbondFilter, getControllerId(), this, game) > 0;
     }
 
     @Override
@@ -207,63 +200,75 @@ class SoulbondEntersOtherAbility extends EntersBattlefieldAllTriggeredAbility {
 
 }
 
-class SoulboundEntersOtherEffect extends OneShotEffect {
+class SoulbondEntersOtherEffect extends OneShotEffect {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another not paired creature you control");
 
     static {
         filter.add(AnotherPredicate.instance);
-        filter.add(Predicates.not(new PairedPredicate()));
+        filter.add(PairedPredicate.UNPAIRED);
     }
 
-    public SoulboundEntersOtherEffect() {
+    SoulbondEntersOtherEffect() {
         super(Outcome.Benefit);
     }
 
-    protected SoulboundEntersOtherEffect(final SoulboundEntersOtherEffect effect) {
+    private SoulbondEntersOtherEffect(final SoulbondEntersOtherEffect effect) {
         super(effect);
     }
 
     @Override
-    public SoulboundEntersOtherEffect copy() {
-        return new SoulboundEntersOtherEffect(this);
+    public SoulbondEntersOtherEffect copy() {
+        return new SoulbondEntersOtherEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null && permanent.getPairedCard() == null
-                && permanent.isCreature(game)) {
-            Player controller = game.getPlayer(permanent.getControllerId());
-            if (controller != null) {
-                Permanent enteringPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-                if (enteringPermanent != null && enteringPermanent.isCreature(game) && enteringPermanent.getPairedCard() == null) {
-                    enteringPermanent.setPairedCard(new MageObjectReference(permanent, game));
-                    permanent.setPairedCard(new MageObjectReference(enteringPermanent, game));
-                    if (!game.isSimulation()) {
-                        game.informPlayers(controller.getLogName() + " soulbonds " + permanent.getLogName() + " with " + enteringPermanent.getLogName());
-                    }
-                }
-            }
-
-            return true;
+        Permanent sourcePerm = source.getSourcePermanentIfItStillExists(game);
+        if (sourcePerm == null
+                || !sourcePerm.isControlledBy(source.getControllerId())
+                || !sourcePerm.isCreature(game)
+                || sourcePerm.getPairedMOR() != null) {
+            return false;
         }
-
-        return false;
+        Permanent enteringPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (enteringPermanent == null
+                || !enteringPermanent.isControlledBy(source.getControllerId())
+                || !enteringPermanent.isCreature(game)
+                || enteringPermanent.getPairedMOR() != null) {
+            return false;
+        }
+        enteringPermanent.setPairedWith(sourcePerm, game);
+        sourcePerm.setPairedWith(enteringPermanent, game);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            game.informPlayers(controller.getLogName() + " soulbonds " + sourcePerm.getLogName() + " with " + enteringPermanent.getLogName());
+        }
+        return true;
     }
 
 }
 
-class PairedPredicate implements Predicate<Permanent> {
+// See state based actions check for clearing paired status
+
+enum PairedPredicate implements Predicate<Permanent> {
+    PAIRED(true),
+    UNPAIRED(false);
+
+    private final boolean paired;
+
+    PairedPredicate(boolean paired) {
+        this.paired = paired;
+    }
 
     @Override
     public boolean apply(Permanent input, Game game) {
-        return input.getPairedCard() != null;
+        return paired == (input.getPairedMOR() != null);
     }
 
     @Override
     public String toString() {
-        return "Paired";
+        return paired ? "Paired" : "Unpaired";
     }
 
 }

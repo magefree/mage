@@ -5,7 +5,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.command.Emblem;
-import mage.game.permanent.token.CatToken2;
+import mage.game.permanent.token.Cat11LifelinkToken;
 
 /**
  * @author TheElk801
@@ -16,7 +16,7 @@ public final class AjaniAdversaryOfTyrantsEmblem extends Emblem {
     public AjaniAdversaryOfTyrantsEmblem() {
         super("Emblem Ajani");
         this.getAbilities().add(new BeginningOfEndStepTriggeredAbility(
-                Zone.COMMAND, TargetController.YOU, new CreateTokenEffect(new CatToken2(), 3),
+                Zone.COMMAND, TargetController.YOU, new CreateTokenEffect(new Cat11LifelinkToken(), 3),
                 false, null
         ));
     }

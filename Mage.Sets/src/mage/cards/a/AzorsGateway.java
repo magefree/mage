@@ -1,23 +1,26 @@
 package mage.cards.a;
 
 import mage.MageObject;
+import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.dynamicvalue.common.ControllerLifeCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
-import mage.abilities.keyword.TransformAbility;
+import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.Card;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -31,18 +34,17 @@ import java.util.UUID;
 /**
  * @author LevelX2
  */
-public final class AzorsGateway extends CardImpl {
+public final class AzorsGateway extends TransformingDoubleFacedCard {
 
     public AzorsGateway(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
-
-        this.supertype.add(SuperType.LEGENDARY);
-        this.secondSideCardClazz = mage.cards.s.SanctumOfTheSun.class;
+        super(ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.ARTIFACT}, new SubType[]{}, "{2}",
+                "Sanctum of the Sun",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.LAND}, new SubType[]{}, "");
 
         // {1}, {T}: Draw a card, then exile a card from your hand.
         //           If cards with five or more different converted mana costs are exiled with Azor's Gateway,
         //           you gain 5 life, untap Azor's Gateway, and transform it.
-        this.addAbility(new TransformAbility());
         Ability ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new AzorsGatewayEffect());
@@ -50,7 +52,13 @@ public final class AzorsGateway extends CardImpl {
                 new GainLifeEffect(5), AzorsGatewayCondition.instance, "If cards with five or more " +
                 "different mana values are exiled with {this}, you gain 5 life, untap {this}, and transform it."
         ).addEffect(new UntapSourceEffect()).addEffect(new TransformSourceEffect()));
-        this.addAbility(ability);
+        this.getLeftHalfCard().addAbility(ability);
+
+        // Sanctum of the Sun
+        // {T}: Add X mana of any one color, where X is your life total.
+        this.getRightHalfCard().addAbility(new DynamicManaAbility(new Mana(0, 0, 0, 0, 0, 0, 1, 0), ControllerLifeCount.instance, new TapSourceCost(),
+                "Add X mana of any one color, where X is your life total", true));
+
     }
 
     private AzorsGateway(final AzorsGateway card) {

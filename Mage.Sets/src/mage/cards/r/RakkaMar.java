@@ -13,7 +13,7 @@ import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.game.permanent.token.ElementalTokenWithHaste;
+import mage.game.permanent.token.ElementalHasteToken;
 
 import java.util.UUID;
 
@@ -33,7 +33,7 @@ public final class RakkaMar extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         Ability ability = new SimpleActivatedAbility(
-                new CreateTokenEffect(new ElementalTokenWithHaste()),
+                new CreateTokenEffect(new ElementalHasteToken()),
                 new ColoredManaCost(ColoredManaSymbol.R)
         );
         ability.addCost(new TapSourceCost());

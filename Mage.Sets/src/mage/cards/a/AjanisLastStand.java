@@ -13,7 +13,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
-import mage.game.permanent.token.AvatarToken2;
+import mage.game.permanent.token.AvatarFlyingToken;
 
 import java.util.UUID;
 
@@ -31,12 +31,12 @@ public final class AjanisLastStand extends CardImpl {
 
         // Whenever a creature or planeswalker you control dies, you may sacrifice Ajani's Last Stand. If you do, create a 4/4 white Avatar creature token with flying.
         this.addAbility(new DiesCreatureTriggeredAbility(
-                new DoIfCostPaid(new CreateTokenEffect(new AvatarToken2()), new SacrificeSourceCost()),
+                new DoIfCostPaid(new CreateTokenEffect(new AvatarFlyingToken()), new SacrificeSourceCost()),
                 false, StaticFilters.FILTER_CONTROLLED_PERMANENT_CREATURE_OR_PLANESWALKER
         ));
 
         // When a spell or ability an opponent controls causes you to discard this card, if you control a Plains, create a 4/4 white Avatar creature token with flying.
-        this.addAbility(new DiscardedByOpponentTriggeredAbility(new CreateTokenEffect(new AvatarToken2())).withInterveningIf(condition));
+        this.addAbility(new DiscardedByOpponentTriggeredAbility(new CreateTokenEffect(new AvatarFlyingToken())).withInterveningIf(condition));
     }
 
     private AjanisLastStand(final AjanisLastStand card) {

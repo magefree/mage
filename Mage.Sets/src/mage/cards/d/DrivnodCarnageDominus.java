@@ -12,8 +12,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.NumberOfTriggersEvent;
@@ -26,8 +25,6 @@ import java.util.UUID;
  * @author Grath
  */
 public final class DrivnodCarnageDominus extends CardImpl {
-
-    private static final FilterCard filter = new FilterCreatureCard("creature cards from your graveyard");
 
     public DrivnodCarnageDominus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
@@ -43,7 +40,7 @@ public final class DrivnodCarnageDominus extends CardImpl {
 
         // {B/P}{B/P}, Exile three creature cards from your graveyard: Put an indestructible counter on Drivnod, Carnage Dominus.
         Ability ability = new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.INDESTRUCTIBLE.createInstance()), new ManaCostsImpl<>("{B/P}{B/P}"));
-        ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(3, filter)));
+        ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(3, StaticFilters.FILTER_CARD_CREATURES_YOUR_GRAVEYARD)));
         this.addAbility(ability);
     }
 

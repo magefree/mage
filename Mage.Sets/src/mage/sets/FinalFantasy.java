@@ -20,7 +20,7 @@ public final class FinalFantasy extends ExpansionSet {
         this.blockName = "Final Fantasy"; // for sorting in GUI
         this.hasBasicLands = true;
 
-        this.enablePlayBooster(Integer.MAX_VALUE);
+        this.enablePlayBooster(420);
         this.numBoosterDoubleFaced = -1;
 
         cards.add(new SetCardInfo("A Realm Reborn", 196, Rarity.RARE, mage.cards.a.ARealmReborn.class, NON_FULL_USE_VARIOUS));
@@ -56,12 +56,6 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Astrologian's Planisphere", 46, Rarity.RARE, mage.cards.a.AstrologiansPlanisphere.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Astrologian's Planisphere", 581, Rarity.RARE, mage.cards.a.AstrologiansPlanisphere.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Auron's Inspiration", 8, Rarity.UNCOMMON, mage.cards.a.AuronsInspiration.class));
-        cards.add(new SetCardInfo("Bahamut, Warden of Light", 16, Rarity.RARE, mage.cards.b.BahamutWardenOfLight.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Bahamut, Warden of Light", 376, Rarity.RARE, mage.cards.b.BahamutWardenOfLight.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Bahamut, Warden of Light", 428, Rarity.RARE, mage.cards.b.BahamutWardenOfLight.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Bahamut, Warden of Light", 521, Rarity.RARE, mage.cards.b.BahamutWardenOfLight.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Balamb Garden, Airborne", 272, Rarity.RARE, mage.cards.b.BalambGardenAirborne.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Balamb Garden, Airborne", 354, Rarity.RARE, mage.cards.b.BalambGardenAirborne.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Balamb Garden, SeeD Academy", 272, Rarity.RARE, mage.cards.b.BalambGardenSeeDAcademy.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Balamb Garden, SeeD Academy", 354, Rarity.RARE, mage.cards.b.BalambGardenSeeDAcademy.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Balamb T-Rexaur", 173, Rarity.COMMON, mage.cards.b.BalambTRexaur.class));
@@ -80,16 +74,12 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Battle Menu", 9, Rarity.UNCOMMON, mage.cards.b.BattleMenu.class));
         cards.add(new SetCardInfo("Beatrix, Loyal General", 426, Rarity.RARE, mage.cards.b.BeatrixLoyalGeneral.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Beatrix, Loyal General", 554, Rarity.RARE, mage.cards.b.BeatrixLoyalGeneral.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Black Chocobo", 201, Rarity.UNCOMMON, mage.cards.b.BlackChocobo.class));
         cards.add(new SetCardInfo("Black Mage's Rod", 90, Rarity.COMMON, mage.cards.b.BlackMagesRod.class));
         cards.add(new SetCardInfo("Black Waltz No. 3", 214, Rarity.UNCOMMON, mage.cards.b.BlackWaltzNo3.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Black Waltz No. 3", 478, Rarity.UNCOMMON, mage.cards.b.BlackWaltzNo3.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Blazing Bomb", 130, Rarity.COMMON, mage.cards.b.BlazingBomb.class));
         cards.add(new SetCardInfo("Blitzball Shot", 176, Rarity.COMMON, mage.cards.b.BlitzballShot.class));
         cards.add(new SetCardInfo("Blitzball", 254, Rarity.COMMON, mage.cards.b.Blitzball.class));
-        cards.add(new SetCardInfo("Braska's Final Aeon", 104, Rarity.RARE, mage.cards.b.BraskasFinalAeon.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Braska's Final Aeon", 363, Rarity.RARE, mage.cards.b.BraskasFinalAeon.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Braska's Final Aeon", 448, Rarity.RARE, mage.cards.b.BraskasFinalAeon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Buster Sword", 255, Rarity.MYTHIC, mage.cards.b.BusterSword.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Buster Sword", 351, Rarity.MYTHIC, mage.cards.b.BusterSword.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cactuar", 177, Rarity.UNCOMMON, mage.cards.c.Cactuar.class));
@@ -100,12 +90,6 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Cecil, Dark Knight", 445, Rarity.RARE, mage.cards.c.CecilDarkKnight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cecil, Dark Knight", 525, Rarity.RARE, mage.cards.c.CecilDarkKnight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cecil, Dark Knight", 91, Rarity.RARE, mage.cards.c.CecilDarkKnight.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Cecil, Redeemed Paladin", 380, Rarity.RARE, mage.cards.c.CecilRedeemedPaladin.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Cecil, Redeemed Paladin", 445, Rarity.RARE, mage.cards.c.CecilRedeemedPaladin.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Cecil, Redeemed Paladin", 525, Rarity.RARE, mage.cards.c.CecilRedeemedPaladin.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Cecil, Redeemed Paladin", 91, Rarity.RARE, mage.cards.c.CecilRedeemedPaladin.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Chaos, the Endless", 221, Rarity.UNCOMMON, mage.cards.c.ChaosTheEndless.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Chaos, the Endless", 486, Rarity.UNCOMMON, mage.cards.c.ChaosTheEndless.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Choco, Seeker of Paradise", 215, Rarity.RARE, mage.cards.c.ChocoSeekerOfParadise.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Choco, Seeker of Paradise", 479, Rarity.RARE, mage.cards.c.ChocoSeekerOfParadise.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Choco, Seeker of Paradise", 569, Rarity.RARE, mage.cards.c.ChocoSeekerOfParadise.class, NON_FULL_USE_VARIOUS));
@@ -152,14 +136,11 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Coliseum Behemoth", 181, Rarity.UNCOMMON, mage.cards.c.ColiseumBehemoth.class));
         cards.add(new SetCardInfo("Combat Tutorial", 48, Rarity.COMMON, mage.cards.c.CombatTutorial.class));
         cards.add(new SetCardInfo("Commune with Beavers", 182, Rarity.COMMON, mage.cards.c.CommuneWithBeavers.class));
-        cards.add(new SetCardInfo("Cooking Campsite", 31, Rarity.UNCOMMON, mage.cards.c.CookingCampsite.class));
         cards.add(new SetCardInfo("Coral Sword", 134, Rarity.UNCOMMON, mage.cards.c.CoralSword.class));
         cards.add(new SetCardInfo("Cornered by Black Mages", 93, Rarity.COMMON, mage.cards.c.CorneredByBlackMages.class));
         cards.add(new SetCardInfo("Crossroads Village", 276, Rarity.COMMON, mage.cards.c.CrossroadsVillage.class));
         cards.add(new SetCardInfo("Crystal Fragments", 13, Rarity.UNCOMMON, mage.cards.c.CrystalFragments.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Crystal Fragments", 357, Rarity.UNCOMMON, mage.cards.c.CrystalFragments.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Crystallized Serah", 240, Rarity.RARE, mage.cards.c.CrystallizedSerah.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Crystallized Serah", 506, Rarity.RARE, mage.cards.c.CrystallizedSerah.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dark Confidant", 334, Rarity.MYTHIC, mage.cards.d.DarkConfidant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dark Confidant", 94, Rarity.MYTHIC, mage.cards.d.DarkConfidant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dark Knight's Greatsword", 95, Rarity.UNCOMMON, mage.cards.d.DarkKnightsGreatsword.class));
@@ -188,9 +169,6 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Emet-Selch, Unsundered", 539, Rarity.MYTHIC, mage.cards.e.EmetSelchUnsundered.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Esper Origins", 185, Rarity.RARE, mage.cards.e.EsperOrigins.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Esper Origins", 370, Rarity.RARE, mage.cards.e.EsperOrigins.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Esper Terra", 245, Rarity.MYTHIC, mage.cards.e.EsperTerra.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Esper Terra", 323, Rarity.MYTHIC, mage.cards.e.EsperTerra.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Esper Terra", 511, Rarity.MYTHIC, mage.cards.e.EsperTerra.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ether", 53, Rarity.UNCOMMON, mage.cards.e.Ether.class));
         cards.add(new SetCardInfo("Evil Reawakened", 98, Rarity.UNCOMMON, mage.cards.e.EvilReawakened.class));
         cards.add(new SetCardInfo("Excalibur II", 257, Rarity.RARE, mage.cards.e.ExcaliburII.class, NON_FULL_USE_VARIOUS));
@@ -220,10 +198,6 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Gaelicat", 22, Rarity.COMMON, mage.cards.g.Gaelicat.class));
         cards.add(new SetCardInfo("Gaius van Baelsar", 102, Rarity.UNCOMMON, mage.cards.g.GaiusVanBaelsar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gaius van Baelsar", 447, Rarity.UNCOMMON, mage.cards.g.GaiusVanBaelsar.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Galian Beast", 125, Rarity.RARE, mage.cards.g.GalianBeast.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Galian Beast", 383, Rarity.RARE, mage.cards.g.GalianBeast.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Galian Beast", 454, Rarity.RARE, mage.cards.g.GalianBeast.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Galian Beast", 528, Rarity.RARE, mage.cards.g.GalianBeast.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Galuf's Final Act", 186, Rarity.UNCOMMON, mage.cards.g.GalufsFinalAct.class));
         cards.add(new SetCardInfo("Garland, Knight of Cornelia", 221, Rarity.UNCOMMON, mage.cards.g.GarlandKnightOfCornelia.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Garland, Knight of Cornelia", 486, Rarity.UNCOMMON, mage.cards.g.GarlandKnightOfCornelia.class, NON_FULL_USE_VARIOUS));
@@ -252,10 +226,6 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Gran Pulse Ochu", 189, Rarity.COMMON, mage.cards.g.GranPulseOchu.class));
         cards.add(new SetCardInfo("Guadosalam, Farplane Gateway", 281, Rarity.COMMON, mage.cards.g.GuadosalamFarplaneGateway.class));
         cards.add(new SetCardInfo("Gysahl Greens", 190, Rarity.COMMON, mage.cards.g.GysahlGreens.class));
-        cards.add(new SetCardInfo("Hades, Sorcerer of Eld", 218, Rarity.MYTHIC, mage.cards.h.HadesSorcererOfEld.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Hades, Sorcerer of Eld", 394, Rarity.MYTHIC, mage.cards.h.HadesSorcererOfEld.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Hades, Sorcerer of Eld", 483, Rarity.MYTHIC, mage.cards.h.HadesSorcererOfEld.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Hades, Sorcerer of Eld", 539, Rarity.MYTHIC, mage.cards.h.HadesSorcererOfEld.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Haste Magic", 140, Rarity.COMMON, mage.cards.h.HasteMagic.class));
         cards.add(new SetCardInfo("Hecteyes", 103, Rarity.COMMON, mage.cards.h.Hecteyes.class));
         cards.add(new SetCardInfo("Hill Gigas", 141, Rarity.COMMON, mage.cards.h.HillGigas.class));
@@ -263,16 +233,8 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Hope Estheim", 396, Rarity.RARE, mage.cards.h.HopeEstheim.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hope Estheim", 491, Rarity.RARE, mage.cards.h.HopeEstheim.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hope Estheim", 541, Rarity.RARE, mage.cards.h.HopeEstheim.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Hydaelyn, the Mothercrystal", 329, Rarity.RARE, mage.cards.h.HydaelynTheMothercrystal.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Hydaelyn, the Mothercrystal", 39, Rarity.RARE, mage.cards.h.HydaelynTheMothercrystal.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Hydaelyn, the Mothercrystal", 434, Rarity.RARE, mage.cards.h.HydaelynTheMothercrystal.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ice Flan", 55, Rarity.COMMON, mage.cards.i.IceFlan.class));
         cards.add(new SetCardInfo("Ice Magic", 56, Rarity.COMMON, mage.cards.i.IceMagic.class));
-        cards.add(new SetCardInfo("Ifrit, Warden of Inferno", 133, Rarity.MYTHIC, mage.cards.i.IfritWardenOfInferno.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Ifrit, Warden of Inferno", 318, Rarity.MYTHIC, mage.cards.i.IfritWardenOfInferno.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Ifrit, Warden of Inferno", 385, Rarity.MYTHIC, mage.cards.i.IfritWardenOfInferno.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Ifrit, Warden of Inferno", 458, Rarity.MYTHIC, mage.cards.i.IfritWardenOfInferno.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Ifrit, Warden of Inferno", 530, Rarity.MYTHIC, mage.cards.i.IfritWardenOfInferno.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ignis Scientia", 227, Rarity.UNCOMMON, mage.cards.i.IgnisScientia.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ignis Scientia", 492, Rarity.UNCOMMON, mage.cards.i.IgnisScientia.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Il Mheg Pixie", 57, Rarity.UNCOMMON, mage.cards.i.IlMhegPixie.class));
@@ -315,11 +277,6 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Kefka, Court Mage", 398, Rarity.MYTHIC, mage.cards.k.KefkaCourtMage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kefka, Court Mage", 496, Rarity.MYTHIC, mage.cards.k.KefkaCourtMage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kefka, Court Mage", 543, Rarity.MYTHIC, mage.cards.k.KefkaCourtMage.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Kefka, Ruler of Ruin", 231, Rarity.MYTHIC, mage.cards.k.KefkaRulerOfRuin.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Kefka, Ruler of Ruin", 322, Rarity.MYTHIC, mage.cards.k.KefkaRulerOfRuin.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Kefka, Ruler of Ruin", 398, Rarity.MYTHIC, mage.cards.k.KefkaRulerOfRuin.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Kefka, Ruler of Ruin", 496, Rarity.MYTHIC, mage.cards.k.KefkaRulerOfRuin.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Kefka, Ruler of Ruin", 543, Rarity.MYTHIC, mage.cards.k.KefkaRulerOfRuin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kuja, Genome Sorcerer", 232, Rarity.RARE, mage.cards.k.KujaGenomeSorcerer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kuja, Genome Sorcerer", 399, Rarity.RARE, mage.cards.k.KujaGenomeSorcerer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kuja, Genome Sorcerer", 497, Rarity.RARE, mage.cards.k.KujaGenomeSorcerer.class, NON_FULL_USE_VARIOUS));
@@ -345,7 +302,6 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Machinist's Arsenal", 23, Rarity.RARE, mage.cards.m.MachinistsArsenal.class));
         cards.add(new SetCardInfo("Magic Damper", 61, Rarity.COMMON, mage.cards.m.MagicDamper.class));
         cards.add(new SetCardInfo("Magic Pot", 263, Rarity.COMMON, mage.cards.m.MagicPot.class));
-        cards.add(new SetCardInfo("Magicked Card", 73, Rarity.UNCOMMON, mage.cards.m.MagickedCard.class));
         cards.add(new SetCardInfo("Magitek Armor", 24, Rarity.UNCOMMON, mage.cards.m.MagitekArmor.class));
         cards.add(new SetCardInfo("Magitek Infantry", 25, Rarity.COMMON, mage.cards.m.MagitekInfantry.class));
         cards.add(new SetCardInfo("Magitek Scythe", 562, Rarity.RARE, mage.cards.m.MagitekScythe.class));
@@ -367,8 +323,6 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 575, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mysidian Elder", 145, Rarity.COMMON, mage.cards.m.MysidianElder.class));
         cards.add(new SetCardInfo("Namazu Trader", 107, Rarity.COMMON, mage.cards.n.NamazuTrader.class));
-        cards.add(new SetCardInfo("Neo Exdeath, Dimension's End", 220, Rarity.UNCOMMON, mage.cards.n.NeoExdeathDimensionsEnd.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Neo Exdeath, Dimension's End", 485, Rarity.UNCOMMON, mage.cards.n.NeoExdeathDimensionsEnd.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nibelheim Aflame", 146, Rarity.MYTHIC, mage.cards.n.NibelheimAflame.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nibelheim Aflame", 339, Rarity.MYTHIC, mage.cards.n.NibelheimAflame.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ninja's Blades", 108, Rarity.RARE, mage.cards.n.NinjasBlades.class));
@@ -385,10 +339,6 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Phantom Train", 110, Rarity.UNCOMMON, mage.cards.p.PhantomTrain.class));
         cards.add(new SetCardInfo("Phoenix Down", 29, Rarity.UNCOMMON, mage.cards.p.PhoenixDown.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Phoenix Down", 578, Rarity.UNCOMMON, mage.cards.p.PhoenixDown.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Phoenix, Warden of Fire", 229, Rarity.RARE, mage.cards.p.PhoenixWardenOfFire.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Phoenix, Warden of Fire", 397, Rarity.RARE, mage.cards.p.PhoenixWardenOfFire.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Phoenix, Warden of Fire", 494, Rarity.RARE, mage.cards.p.PhoenixWardenOfFire.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Phoenix, Warden of Fire", 542, Rarity.RARE, mage.cards.p.PhoenixWardenOfFire.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 294, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Plains", 295, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Plains", 296, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
@@ -460,11 +410,6 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Sephiroth, Fabled SOLDIER", 382, Rarity.MYTHIC, mage.cards.s.SephirothFabledSOLDIER.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sephiroth, Fabled SOLDIER", 451, Rarity.MYTHIC, mage.cards.s.SephirothFabledSOLDIER.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sephiroth, Fabled SOLDIER", 527, Rarity.MYTHIC, mage.cards.s.SephirothFabledSOLDIER.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Sephiroth, One-Winged Angel", 115, Rarity.MYTHIC, mage.cards.s.SephirothOneWingedAngel.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Sephiroth, One-Winged Angel", 317, Rarity.MYTHIC, mage.cards.s.SephirothOneWingedAngel.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Sephiroth, One-Winged Angel", 382, Rarity.MYTHIC, mage.cards.s.SephirothOneWingedAngel.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Sephiroth, One-Winged Angel", 451, Rarity.MYTHIC, mage.cards.s.SephirothOneWingedAngel.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Sephiroth, One-Winged Angel", 527, Rarity.MYTHIC, mage.cards.s.SephirothOneWingedAngel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sephiroth, Planet's Heir", 505, Rarity.MYTHIC, mage.cards.s.SephirothPlanetsHeir.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sephiroth, Planet's Heir", 553, Rarity.MYTHIC, mage.cards.s.SephirothPlanetsHeir.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Serah Farron", 240, Rarity.RARE, mage.cards.s.SerahFarron.class, NON_FULL_USE_VARIOUS));
@@ -476,14 +421,6 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Shantotto, Tactician Magician", 507, Rarity.UNCOMMON, mage.cards.s.ShantottoTacticianMagician.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sharlayan, Nation of Scholars", 288, Rarity.COMMON, mage.cards.s.SharlayanNationOfScholars.class));
         cards.add(new SetCardInfo("Shinra Reinforcements", 118, Rarity.COMMON, mage.cards.s.ShinraReinforcements.class));
-        cards.add(new SetCardInfo("Shinryu, Transcendent Rival", 127, Rarity.RARE, mage.cards.s.ShinryuTranscendentRival.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Shinryu, Transcendent Rival", 384, Rarity.RARE, mage.cards.s.ShinryuTranscendentRival.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Shinryu, Transcendent Rival", 455, Rarity.RARE, mage.cards.s.ShinryuTranscendentRival.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Shinryu, Transcendent Rival", 529, Rarity.RARE, mage.cards.s.ShinryuTranscendentRival.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Shiva, Warden of Ice", 378, Rarity.RARE, mage.cards.s.ShivaWardenOfIce.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Shiva, Warden of Ice", 438, Rarity.RARE, mage.cards.s.ShivaWardenOfIce.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Shiva, Warden of Ice", 523, Rarity.RARE, mage.cards.s.ShivaWardenOfIce.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Shiva, Warden of Ice", 58, Rarity.RARE, mage.cards.s.ShivaWardenOfIce.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sidequest: Card Collection", 73, Rarity.UNCOMMON, mage.cards.s.SidequestCardCollection.class));
         cards.add(new SetCardInfo("Sidequest: Catch a Fish", 31, Rarity.UNCOMMON, mage.cards.s.SidequestCatchAFish.class));
         cards.add(new SetCardInfo("Sidequest: Hunt the Mark", 119, Rarity.UNCOMMON, mage.cards.s.SidequestHuntTheMark.class, NON_FULL_USE_VARIOUS));
@@ -510,8 +447,6 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Stolen Uniform", 332, Rarity.UNCOMMON, mage.cards.s.StolenUniform.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stolen Uniform", 75, Rarity.UNCOMMON, mage.cards.s.StolenUniform.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stuck in Summoner's Sanctum", 76, Rarity.COMMON, mage.cards.s.StuckInSummonersSanctum.class));
-        cards.add(new SetCardInfo("Summon: Alexander", 13, Rarity.UNCOMMON, mage.cards.s.SummonAlexander.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Summon: Alexander", 357, Rarity.UNCOMMON, mage.cards.s.SummonAlexander.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Anima", 120, Rarity.UNCOMMON, mage.cards.s.SummonAnima.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Anima", 364, Rarity.UNCOMMON, mage.cards.s.SummonAnima.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Bahamut", 1, Rarity.MYTHIC, mage.cards.s.SummonBahamut.class, NON_FULL_USE_VARIOUS));
@@ -520,8 +455,6 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Summon: Brynhildr", 366, Rarity.RARE, mage.cards.s.SummonBrynhildr.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Choco/Mog", 35, Rarity.COMMON, mage.cards.s.SummonChocoMog.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Choco/Mog", 358, Rarity.COMMON, mage.cards.s.SummonChocoMog.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Summon: Esper Maduin", 185, Rarity.RARE, mage.cards.s.SummonEsperMaduin.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Summon: Esper Maduin", 370, Rarity.RARE, mage.cards.s.SummonEsperMaduin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Esper Ramuh", 161, Rarity.UNCOMMON, mage.cards.s.SummonEsperRamuh.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Esper Ramuh", 367, Rarity.UNCOMMON, mage.cards.s.SummonEsperRamuh.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Fat Chocobo", 202, Rarity.COMMON, mage.cards.s.SummonFatChocobo.class, NON_FULL_USE_VARIOUS));
@@ -569,8 +502,6 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("The Fire Crystal", 135, Rarity.RARE, mage.cards.t.TheFireCrystal.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Fire Crystal", 337, Rarity.RARE, mage.cards.t.TheFireCrystal.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Gold Saucer", 279, Rarity.UNCOMMON, mage.cards.t.TheGoldSaucer.class));
-        cards.add(new SetCardInfo("The Lord Master of Hell", 219, Rarity.UNCOMMON, mage.cards.t.TheLordMasterOfHell.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("The Lord Master of Hell", 484, Rarity.UNCOMMON, mage.cards.t.TheLordMasterOfHell.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Lunar Whale", 60, Rarity.RARE, mage.cards.t.TheLunarWhale.class));
         cards.add(new SetCardInfo("The Masamune", 264, Rarity.RARE, mage.cards.t.TheMasamune.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Masamune", 353, Rarity.RARE, mage.cards.t.TheMasamune.class, NON_FULL_USE_VARIOUS));
@@ -599,10 +530,6 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Torgal, A Fine Hound", 345, Rarity.UNCOMMON, mage.cards.t.TorgalAFineHound.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Torgal, A Fine Hound", 474, Rarity.UNCOMMON, mage.cards.t.TorgalAFineHound.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Town Greeter", 209, Rarity.COMMON, mage.cards.t.TownGreeter.class));
-        cards.add(new SetCardInfo("Trance Kuja, Fate Defied", 232, Rarity.RARE, mage.cards.t.TranceKujaFateDefied.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Trance Kuja, Fate Defied", 399, Rarity.RARE, mage.cards.t.TranceKujaFateDefied.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Trance Kuja, Fate Defied", 497, Rarity.RARE, mage.cards.t.TranceKujaFateDefied.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Trance Kuja, Fate Defied", 544, Rarity.RARE, mage.cards.t.TranceKujaFateDefied.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Travel the Overworld", 82, Rarity.UNCOMMON, mage.cards.t.TravelTheOverworld.class));
         cards.add(new SetCardInfo("Traveling Chocobo", "551a", Rarity.MYTHIC, mage.cards.t.TravelingChocobo.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Traveling Chocobo", "551b", Rarity.MYTHIC, mage.cards.t.TravelingChocobo.class, NON_FULL_USE_VARIOUS));
@@ -622,8 +549,6 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Ultima, Origin of Oblivion", 2, Rarity.RARE, mage.cards.u.UltimaOriginOfOblivion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ultima, Origin of Oblivion", 324, Rarity.RARE, mage.cards.u.UltimaOriginOfOblivion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ultima, Origin of Oblivion", 421, Rarity.RARE, mage.cards.u.UltimaOriginOfOblivion.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Ultimecia, Omnipotent", 247, Rarity.UNCOMMON, mage.cards.u.UltimeciaOmnipotent.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Ultimecia, Omnipotent", 513, Rarity.UNCOMMON, mage.cards.u.UltimeciaOmnipotent.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ultimecia, Temporal Threat", 441, Rarity.RARE, mage.cards.u.UltimeciaTemporalThreat.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ultimecia, Temporal Threat", 556, Rarity.RARE, mage.cards.u.UltimeciaTemporalThreat.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ultimecia, Time Sorceress", 247, Rarity.UNCOMMON, mage.cards.u.UltimeciaTimeSorceress.class, NON_FULL_USE_VARIOUS));
@@ -662,15 +587,12 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("White Auracite", 579, Rarity.COMMON, mage.cards.w.WhiteAuracite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("White Mage's Staff", 42, Rarity.COMMON, mage.cards.w.WhiteMagesStaff.class));
         cards.add(new SetCardInfo("Windurst, Federation Center", 292, Rarity.COMMON, mage.cards.w.WindurstFederationCenter.class));
-        cards.add(new SetCardInfo("World Champion, Celestial Weapon", 158, Rarity.UNCOMMON, mage.cards.w.WorldChampionCelestialWeapon.class));
         cards.add(new SetCardInfo("World Map", 270, Rarity.COMMON, mage.cards.w.WorldMap.class));
         cards.add(new SetCardInfo("Xande, Dark Mage", 516, Rarity.RARE, mage.cards.x.XandeDarkMage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Xande, Dark Mage", 561, Rarity.RARE, mage.cards.x.XandeDarkMage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Y'shtola Rhul", 443, Rarity.MYTHIC, mage.cards.y.YshtolaRhul.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Y'shtola Rhul", 577, Rarity.MYTHIC, mage.cards.y.YshtolaRhul.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Y'shtola Rhul", 86, Rarity.MYTHIC, mage.cards.y.YshtolaRhul.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Yiazmat, Ultimate Mark", 119, Rarity.UNCOMMON, mage.cards.y.YiazmatUltimateMark.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Yiazmat, Ultimate Mark", 453, Rarity.UNCOMMON, mage.cards.y.YiazmatUltimateMark.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("You're Not Alone", 44, Rarity.COMMON, mage.cards.y.YoureNotAlone.class));
         cards.add(new SetCardInfo("Yuna, Hope of Spira", 250, Rarity.MYTHIC, mage.cards.y.YunaHopeOfSpira.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Yuna, Hope of Spira", 404, Rarity.MYTHIC, mage.cards.y.YunaHopeOfSpira.class, NON_FULL_USE_VARIOUS));

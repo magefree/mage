@@ -28,7 +28,7 @@ public final class PlumbTheForbidden extends CardImpl {
         this.getSpellAbility().addCost(new PlumbTheForbiddenCost());
 
         // You draw a card and you lose 1 life.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).setText("you draw a card"));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1, true));
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
     }
 

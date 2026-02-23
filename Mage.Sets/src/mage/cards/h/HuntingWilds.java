@@ -2,7 +2,6 @@
 package mage.cards.h;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -23,7 +22,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.common.FilterLandCard;
 import mage.game.Game;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.targetpointer.FixedTargets;
 
@@ -87,7 +86,13 @@ class HuntingWildsEffect extends OneShotEffect {
                     untapEffect.setTargetPointer(blueprintTarget.copy());
                     untapEffect.apply(game, source);
 
-                    BecomesCreatureTargetEffect becomesCreatureEffect = new BecomesCreatureTargetEffect(new HuntingWildsToken(), false, true, Duration.Custom);
+                    BecomesCreatureTargetEffect becomesCreatureEffect = new BecomesCreatureTargetEffect(
+                        new CreatureToken(3, 3, "3/3 green creature with haste")
+                            .withColor("G").withAbility(HasteAbility.getInstance()),
+                        false,
+                        true,
+                        Duration.Custom
+                    );
                     becomesCreatureEffect.setTargetPointer(blueprintTarget.copy());
                     game.addEffect(becomesCreatureEffect, source);
                 }
@@ -95,26 +100,5 @@ class HuntingWildsEffect extends OneShotEffect {
             }
         }
         return false;
-    }
-}
-
-class HuntingWildsToken extends TokenImpl {
-
-    public HuntingWildsToken() {
-        super("", "3/3 green creature with haste");
-        this.cardType.add(CardType.CREATURE);
-
-        this.color.setGreen(true);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-
-        this.addAbility(HasteAbility.getInstance());
-    }
-    private HuntingWildsToken(final HuntingWildsToken token) {
-        super(token);
-    }
-
-    public HuntingWildsToken copy() {
-        return new HuntingWildsToken(this);
     }
 }

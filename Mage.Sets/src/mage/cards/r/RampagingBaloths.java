@@ -11,7 +11,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.game.permanent.token.BeastToken2;
+import mage.game.permanent.token.Beast44Token;
 
 /**
  *
@@ -26,7 +26,7 @@ public final class RampagingBaloths extends CardImpl {
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
         this.addAbility(TrampleAbility.getInstance());
-        this.addAbility(new LandfallAbility(new CreateTokenEffect(new BeastToken2()), false));
+        this.addAbility(new LandfallAbility(new CreateTokenEffect(new Beast44Token()), false));
     }
 
     private RampagingBaloths(final RampagingBaloths card) {

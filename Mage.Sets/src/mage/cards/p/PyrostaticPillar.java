@@ -42,7 +42,7 @@ class PyrostaticPillarTriggeredAbility extends TriggeredAbilityImpl {
 
 
     public PyrostaticPillarTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(2, true, "that player"));
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(2).withTargetDescription("that player"));
     }
 
 

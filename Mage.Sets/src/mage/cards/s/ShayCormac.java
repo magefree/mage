@@ -58,7 +58,7 @@ public final class ShayCormac extends CardImpl {
 
         // Whenever a creature with a bounty counter on it dies, put two +1/+1 counters on Shay Cormac.
         this.addAbility(new DiesCreatureTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, filter2
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), false, filter2
         ));
     }
 

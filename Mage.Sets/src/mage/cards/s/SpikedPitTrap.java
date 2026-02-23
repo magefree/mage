@@ -39,14 +39,11 @@ public final class SpikedPitTrap extends CardImpl {
         this.addAbility(ability);
 
         // 1-9 | Spiked Pit Trap deals 5 damage to that creature.
-        effect.addTableEntry(1, 9, new DamageTargetEffect(
-                5, true, "that creature"
-        ));
+        effect.addTableEntry(1, 9, new DamageTargetEffect(5).withTargetDescription("that creature"));
 
         // 10-20 | Spike Pit Trap deals 5 damage to that creature. Create a Treasure token.
-        effect.addTableEntry(10, 20, new DamageTargetEffect(
-                5, true, "that creature."
-        ), new CreateTokenEffect(new TreasureToken()));
+        effect.addTableEntry(10, 20, new DamageTargetEffect(5).withTargetDescription("that creature"),
+                new CreateTokenEffect(new TreasureToken()));
     }
 
     private SpikedPitTrap(final SpikedPitTrap card) {

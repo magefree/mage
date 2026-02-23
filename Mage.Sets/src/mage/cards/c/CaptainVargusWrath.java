@@ -11,7 +11,7 @@ import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.players.Player;
 import mage.watchers.common.CommanderPlaysCountWatcher;
@@ -23,7 +23,7 @@ import java.util.UUID;
  */
 public final class CaptainVargusWrath extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.PIRATE, "");
+    private static final FilterPermanent filter = new FilterPermanent(SubType.PIRATE, "");
 
     public CaptainVargusWrath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{R}");

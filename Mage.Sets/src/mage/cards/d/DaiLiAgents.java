@@ -46,7 +46,7 @@ public final class DaiLiAgents extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When this creature enters, earthbend 1, then earthbend 1.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new EarthbendTargetEffect(1).setText("earhbend 1"));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new EarthbendTargetEffect(1).setText("earthbend 1"));
         ability.addEffect(new EarthbendTargetEffect(1)
                 .setTargetPointer(new SecondTargetPointer())
                 .concatBy(", then"));
@@ -56,7 +56,7 @@ public final class DaiLiAgents extends CardImpl {
 
         // Whenever this creature attacks, each opponent loses X life and you gain X life, where X is the number of creatures you control with +1/+1 counters on them.
         ability = new AttacksTriggeredAbility(new LoseLifeOpponentsEffect(xValue).setText("each opponent loses X life"));
-        ability.addEffect(new GainLifeEffect(xValue).concatBy("and"));
+        ability.addEffect(new GainLifeEffect(xValue).setText("and you gain X life, where X is the number of creatures you control with +1/+1 counters on them"));
         this.addAbility(ability);
     }
 

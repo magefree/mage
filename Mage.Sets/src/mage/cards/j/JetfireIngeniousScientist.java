@@ -1,18 +1,20 @@
 package mage.cards.j;
 
-import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.common.RemoveVariableCountersTargetCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
+import mage.abilities.effects.keyword.AdaptEffect;
 import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.LivingMetalAbility;
 import mage.abilities.keyword.MoreThanMeetsTheEyeAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -30,22 +32,22 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class JetfireIngeniousScientist extends CardImpl {
+public final class JetfireIngeniousScientist extends TransformingDoubleFacedCard {
 
     public JetfireIngeniousScientist(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}{U}");
+        super(ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, new SubType[]{SubType.ROBOT}, "{4}{U}",
+                "Jetfire, Air Guardian",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.ARTIFACT}, new SubType[]{SubType.VEHICLE}, "U");
 
-        this.supertype.add(SuperType.LEGENDARY);
-        this.subtype.add(SubType.ROBOT);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(4);
-        this.secondSideCardClazz = mage.cards.j.JetfireAirGuardian.class;
+        // Jetfire, Ingenious Scientist
+        this.getLeftHalfCard().setPT(3, 4);
 
         // More Than Meets the Eye {3}{U}
-        this.addAbility(new MoreThanMeetsTheEyeAbility(this, "{3}{U}"));
+        this.getLeftHalfCard().addAbility(new MoreThanMeetsTheEyeAbility(this, "{3}{U}"));
 
         // Flying
-        this.addAbility(FlyingAbility.getInstance());
+        this.getLeftHalfCard().addAbility(FlyingAbility.getInstance());
 
         // Remove one or more +1/+1 counters from among artifacts you control: Target player adds that much {C}. This mana can't be spent to cast nonartifact spells. Convert Jetfire.
         Ability ability = new SimpleActivatedAbility(
@@ -57,7 +59,25 @@ public final class JetfireIngeniousScientist extends CardImpl {
         );
         ability.addEffect(new TransformSourceEffect().setText("convert {this}"));
         ability.addTarget(new TargetPlayer());
-        this.addAbility(ability);
+        this.getLeftHalfCard().addAbility(ability);
+
+        // Jetfire, Air Guardian
+        this.getRightHalfCard().setPT(3, 4);
+
+        // Living metal
+        this.getRightHalfCard().addAbility(new LivingMetalAbility());
+
+        // Flying
+        this.getRightHalfCard().addAbility(FlyingAbility.getInstance());
+
+        // {U}{U}{U}: Convert Jetfire, then adapt 3.
+        Ability backAbility = new SimpleActivatedAbility(
+                new TransformSourceEffect()
+                        .setText("convert {this}"),
+                new ManaCostsImpl<>("{U}{U}{U}")
+        );
+        backAbility.addEffect(new AdaptEffect(3).concatBy(", then"));
+        this.getRightHalfCard().addAbility(backAbility);
     }
 
     private JetfireIngeniousScientist(final JetfireIngeniousScientist card) {

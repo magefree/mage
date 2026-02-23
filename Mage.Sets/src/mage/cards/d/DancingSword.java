@@ -1,6 +1,5 @@
 package mage.cards.d;
 
-import mage.MageInt;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -12,7 +11,7 @@ import mage.abilities.keyword.WardAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
@@ -32,7 +31,16 @@ public final class DancingSword extends CardImpl {
 
         // When equipped creature dies, you may have Dancing Sword become a 2/1 Construct artifact creature with flying and ward {1}. If you do, it isn't an Equipment.
         this.addAbility(new DiesAttachedTriggeredAbility(
-                new BecomesCreatureSourceEffect(new DancingSwordToken(), CardType.ARTIFACT, Duration.WhileOnBattlefield).andNotEquipment(true), "equipped creature", true
+            new BecomesCreatureSourceEffect(
+                new CreatureToken(
+                    2, 1,
+                    "2/1 Construct artifact creature with flying and ward {1}. If you do, it isn't an Equipment",
+                    SubType.CONSTRUCT
+                ).withType(CardType.ARTIFACT).withAbility(FlyingAbility.getInstance()).withAbility(new WardAbility(new GenericManaCost(1), false)),
+                CardType.ARTIFACT,
+                Duration.WhileOnBattlefield
+            ).andNotEquipment(true),
+            "equipped creature", true
         ).setTriggerPhrase("When equipped creature dies, "));
 
         // Equip {1}
@@ -47,27 +55,4 @@ public final class DancingSword extends CardImpl {
     public DancingSword copy() {
         return new DancingSword(this);
     }
-}
-
-class DancingSwordToken extends TokenImpl {
-
-    public DancingSwordToken() {
-        super("", "2/1 Construct artifact creature with flying and ward {1}. If you do, it isn't an Equipment");
-        cardType.add(CardType.ARTIFACT);
-        cardType.add(CardType.CREATURE);
-        subtype.add(SubType.CONSTRUCT);
-        power = new MageInt(2);
-        toughness = new MageInt(1);
-        this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new WardAbility(new GenericManaCost(1), false));
-    }
-
-    private DancingSwordToken(final DancingSwordToken token) {
-        super(token);
-    }
-
-    public DancingSwordToken copy() {
-        return new DancingSwordToken(this);
-    }
-
 }

@@ -1,56 +1,76 @@
 package mage.cards.s;
 
-import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.keyword.MoreThanMeetsTheEyeAbility;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.keyword.DoubleStrikeAbility;
-import mage.abilities.keyword.HasteAbility;
+import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.combat.GoadTargetEffect;
+import mage.abilities.effects.common.continuous.CantBeSacrificedSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
-import mage.abilities.effects.common.continuous.CantBeSacrificedSourceEffect;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.CardImpl;
+import mage.abilities.keyword.*;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardSetInfo;
-import mage.game.Game;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.*;
+import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.targetpointer.FixedTarget;
 import mage.players.Player;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  * @author grimreap124
  */
-public final class SlicerHiredMuscle extends CardImpl {
+public final class SlicerHiredMuscle extends TransformingDoubleFacedCard {
 
     public SlicerHiredMuscle(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[] { CardType.ARTIFACT, CardType.CREATURE }, "{4}{R}");
+        super(ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, new SubType[]{SubType.ROBOT}, "{4}{R}",
+                "Slicer, High-Speed Antagonist",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.ARTIFACT}, new SubType[]{SubType.VEHICLE}, "R"
+        );
 
-        this.supertype.add(SuperType.LEGENDARY);
-        this.subtype.add(SubType.ROBOT);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(4);
-        this.secondSideCardClazz = mage.cards.s.SlicerHighSpeedAntagonist.class;
+        // Slicer, Hired Muscle
+        this.getLeftHalfCard().setPT(3, 4);
 
         // More Than Meets the Eye {2}{R}
-        this.addAbility(new MoreThanMeetsTheEyeAbility(this, "{2}{R}"));
+        this.getLeftHalfCard().addAbility(new MoreThanMeetsTheEyeAbility(this, "{2}{R}"));
 
         // Double strike
-        this.addAbility(DoubleStrikeAbility.getInstance());
+        this.getLeftHalfCard().addAbility(DoubleStrikeAbility.getInstance());
 
         // Haste
-        this.addAbility(HasteAbility.getInstance());
+        this.getLeftHalfCard().addAbility(HasteAbility.getInstance());
 
         // At the beginning of each opponent's upkeep, you may have that player gain
         // control of Slicer until end of turn. If you do, untap Slicer, goad it, and it
         // can't be sacrificed this turn. If you don't, convert it.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.OPPONENT, new SlicerHiredMuscleUpkeepEffect(),
+        this.getLeftHalfCard().addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.OPPONENT, new SlicerHiredMuscleUpkeepEffect(),
                 false));
 
+        // Slicer, High-Speed Antagonist
+        this.getRightHalfCard().setPT(3, 2);
+
+        // Living metal
+        this.getRightHalfCard().addAbility(new LivingMetalAbility());
+
+        // First strike
+        this.getRightHalfCard().addAbility(FirstStrikeAbility.getInstance());
+
+        // Haste
+        this.getRightHalfCard().addAbility(HasteAbility.getInstance());
+
+        // Whenever Slicer deals combat damage to a player, convert it at end of combat.
+        this.getRightHalfCard().addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
+                new CreateDelayedTriggeredAbilityEffect(
+                        new AtTheEndOfCombatDelayedTriggeredAbility(new TransformSourceEffect()))
+                        .setText("convert it at end of combat"),
+                false));
     }
 
     private SlicerHiredMuscle(final SlicerHiredMuscle card) {
@@ -104,8 +124,8 @@ class SlicerHiredMuscleUpkeepEffect extends OneShotEffect {
 
             // Goad
             game.addEffect(new GoadTargetEffect()
-                    .setDuration(Duration.EndOfTurn)
-                    .setTargetPointer(new FixedTarget(sourcePermanent, game)),
+                            .setDuration(Duration.EndOfTurn)
+                            .setTargetPointer(new FixedTarget(sourcePermanent, game)),
                     source);
 
             // Can't be sacrificed

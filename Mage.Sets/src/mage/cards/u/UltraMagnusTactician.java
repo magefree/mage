@@ -1,20 +1,26 @@
 package mage.cards.u;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
-import mage.abilities.keyword.MoreThanMeetsTheEyeAbility;
-import mage.abilities.keyword.WardAbility;
+import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
+import mage.abilities.keyword.*;
 import mage.cards.Card;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.*;
 import mage.filter.FilterCard;
+import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterArtifactCard;
+import mage.filter.common.FilterAttackingCreature;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -27,26 +33,46 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class UltraMagnusTactician extends CardImpl {
+public final class UltraMagnusTactician extends TransformingDoubleFacedCard {
 
     public UltraMagnusTactician(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}{R}{G}{W}");
+        super(ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, new SubType[]{SubType.ROBOT}, "{4}{R}{G}{W}",
+                "Ultra Magnus, Armored Carrier",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.ARTIFACT}, new SubType[]{SubType.VEHICLE}, "RGW"
+        );
 
-        this.supertype.add(SuperType.LEGENDARY);
-        this.subtype.add(SubType.ROBOT);
-        this.power = new MageInt(7);
-        this.toughness = new MageInt(7);
-
-        this.secondSideCardClazz = mage.cards.u.UltraMagnusArmoredCarrier.class;
+        // Ultra Magnus, Tactician
+        this.getLeftHalfCard().setPT(7, 7);
 
         // More Than Meets the Eye {2}{R}{G}{W}
-        this.addAbility(new MoreThanMeetsTheEyeAbility(this, "{2}{R}{G}{W}"));
+        this.getLeftHalfCard().addAbility(new MoreThanMeetsTheEyeAbility(this, "{2}{R}{G}{W}"));
 
         // Ward {2}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}"), false));
+        this.getLeftHalfCard().addAbility(new WardAbility(new ManaCostsImpl<>("{2}"), false));
 
         // Whenever Ultra Magnus attacks, you may put an artifact creature card from your hand onto the battlefield tapped and attacking. If you do, convert Ultra Magnus at end of combat.
-        this.addAbility(new AttacksTriggeredAbility(new UltraMagnusTacticianEffect()));
+        this.getLeftHalfCard().addAbility(new AttacksTriggeredAbility(new UltraMagnusTacticianEffect()));
+
+        // Ultra Magnus, Armored Carrier
+        this.getRightHalfCard().setPT(4, 7);
+
+        // Living metal
+        this.getRightHalfCard().addAbility(new LivingMetalAbility());
+
+        // Haste
+        this.getRightHalfCard().addAbility(HasteAbility.getInstance());
+
+        // Formidable -- Whenever Ultra Magnus attacks, attacking creatures you control gain indestructible until end of turn. If those creatures have total power 8 or greater, convert Ultra Magnus.
+        Ability ability = new AttacksTriggeredAbility(new GainAbilityControlledEffect(
+                IndestructibleAbility.getInstance(), Duration.EndOfTurn,
+                StaticFilters.FILTER_ATTACKING_CREATURES
+        ));
+        ability.addEffect(new ConditionalOneShotEffect(
+                new TransformSourceEffect(), UltraMagnusArmoredCarrierCondition.instance,
+                "If those creatures have total power 8 or greater, convert {this}"
+        ));
+        this.getRightHalfCard().addAbility(ability.setAbilityWord(AbilityWord.FORMIDABLE));
     }
 
     private UltraMagnusTactician(final UltraMagnusTactician card) {
@@ -107,5 +133,25 @@ class UltraMagnusTacticianEffect extends OneShotEffect {
                 new TransformSourceEffect().setText("convert {this}")
         ), source);
         return true;
+    }
+}
+
+enum UltraMagnusArmoredCarrierCondition implements Condition {
+    instance;
+    private static final FilterPermanent filter = new FilterAttackingCreature();
+
+    static {
+        filter.add(TargetController.YOU.getControllerPredicate());
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return game
+                .getBattlefield()
+                .getActivePermanents(filter, source.getControllerId(), source, game)
+                .stream()
+                .map(MageObject::getPower)
+                .mapToInt(MageInt::getValue)
+                .sum() >= 8;
     }
 }

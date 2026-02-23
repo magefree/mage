@@ -8,6 +8,10 @@ import mage.constants.SubType;
 
 public class NalaarAetherjetToken extends TokenImpl{
 
+    public NalaarAetherjetToken() {
+        this(0);
+    }
+
     public NalaarAetherjetToken(int xValue) {
         super("Nalaar Aetherjet", "X/X colorless Vehicle artifact token named Nalaar Aetherjet with flying and crew 2");
         cardType.add(CardType.ARTIFACT);

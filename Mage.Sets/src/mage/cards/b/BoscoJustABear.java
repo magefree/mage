@@ -47,7 +47,7 @@ public final class BoscoJustABear extends CardImpl {
 
         // {2}{G}, Sacrifice a Food: Put two +1/+1 counters on Bosco. He gains trample until end of turn.
         Ability ability = new SimpleActivatedAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl<>("{2}{G}")
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), new ManaCostsImpl<>("{2}{G}")
         );
         ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_FOOD));
         ability.addEffect(new GainAbilitySourceEffect(

@@ -1,13 +1,9 @@
-
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.CardsInHandCondition;
+import mage.abilities.condition.common.HeckbentCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
@@ -15,21 +11,20 @@ import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.filter.FilterPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 public final class NehebTheWorthy extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Minotaurs");
-
-    static {
-        filter.add(SubType.MINOTAUR.getPredicate());
-        filter.add(TargetController.YOU.getControllerPredicate());
-    }
+    private static final FilterPermanent filter = new FilterPermanent(SubType.MINOTAUR, "Minotaurs");
 
     public NehebTheWorthy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{R}");
@@ -44,13 +39,15 @@ public final class NehebTheWorthy extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // Other Minotaurs you control have first strike.
-        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter, true)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
+                FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter, true
+        )));
 
         // As long as you have one or fewer cards in hand, Minotaurs you control get +2/+0.
-        Condition condition = new CardsInHandCondition(ComparisonType.FEWER_THAN, 2);
-        Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
-                new BoostControlledEffect(2, 0, Duration.WhileOnBattlefield, filter), condition, "As long as you have one or fewer cards in hand, Minotaurs you control get +2/+0"));
-        this.addAbility(ability);
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
+                new BoostControlledEffect(2, 0, Duration.WhileOnBattlefield, filter),
+                HeckbentCondition.instance, "as long as you have one or fewer cards in hand, Minotaurs you control get +2/+0"
+        )));
 
         // Whenever Neheb, the Worthy deals combat damage to a player, each player discards a card.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DiscardEachPlayerEffect(), false));

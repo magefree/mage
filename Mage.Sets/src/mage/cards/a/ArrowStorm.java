@@ -7,7 +7,6 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.hint.common.RaidHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.target.common.TargetAnyTarget;
 import mage.watchers.common.PlayerAttackedWatcher;
@@ -30,7 +29,7 @@ public final class ArrowStorm extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         // Raid - If you attacked with a creature this turn, instead Arrow Storm deals 5 damage to that creature or player and the damage can't be prevented.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new DamageTargetEffect(5, false),
+                new DamageTargetEffect(5).withCantBePrevented(),
                 RaidCondition.instance,
                 "<br/><br/><i>Raid</i> &mdash; If you attacked this turn, instead {this} deals 5 damage to that permanent or player and the damage can't be prevented"));
         this.getSpellAbility().addWatcher(new PlayerAttackedWatcher());

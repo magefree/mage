@@ -21,6 +21,10 @@ public class PutToBattlefieldInfo {
         return card;
     }
 
+    public Card getMainCard() {
+        return card.getMainCard();
+    }
+
     public boolean isTapped() {
         return tapped;
     }

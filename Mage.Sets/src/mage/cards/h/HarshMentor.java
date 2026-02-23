@@ -2,7 +2,6 @@ package mage.cards.h;
 
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.Card;
@@ -48,7 +47,8 @@ public final class HarshMentor extends CardImpl {
 class HarshMentorTriggeredAbility extends TriggeredAbilityImpl {
 
     HarshMentorTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(StaticValue.get(2), true, "that player"));
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(2).withTargetDescription("that player"));
+        setTriggerPhrase("Whenever an opponent activates an ability of an artifact, creature, or land on the battlefield, if it isn't a mana ability, ");
     }
 
     private HarshMentorTriggeredAbility(final HarshMentorTriggeredAbility ability) {
@@ -82,8 +82,4 @@ class HarshMentorTriggeredAbility extends TriggeredAbilityImpl {
         return false;
     }
 
-    @Override
-    public String getRule() {
-        return "Whenever an opponent activates an ability of an artifact, creature, or land on the battlefield, if it isn't a mana ability, {this} deals 2 damage to that player.";
-    }
 }

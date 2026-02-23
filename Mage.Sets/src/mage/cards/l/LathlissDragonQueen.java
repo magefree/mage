@@ -14,12 +14,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
-import mage.game.permanent.token.DragonToken2;
+import mage.game.permanent.token.Dragon55Token;
 
 /**
  *
@@ -50,7 +49,7 @@ public final class LathlissDragonQueen extends CardImpl {
 
         // Whenever another nontoken Dragon you control enters, create a 5/5 red Dragon creature token with flying.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
-                new CreateTokenEffect(new DragonToken2()), filter
+                new CreateTokenEffect(new Dragon55Token()), filter
         ));
         // {1}{R}: Dragons you control get +1/+0 until end of turn.
         this.addAbility(new SimpleActivatedAbility(

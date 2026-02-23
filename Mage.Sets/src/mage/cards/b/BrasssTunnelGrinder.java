@@ -1,6 +1,7 @@
 package mage.cards.b;
 
 import mage.abilities.Ability;
+import mage.abilities.common.CastSpellPaidBySourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.DescendedThisTurnCondition;
@@ -11,16 +12,17 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.RemoveAllCountersSourceEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.keyword.TransformAbility;
+import mage.abilities.effects.keyword.DiscoverEffect;
+import mage.abilities.mana.RedManaAbility;
 import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.TargetController;
+import mage.cards.TransformingDoubleFacedCard;
+import mage.constants.*;
 import mage.counters.CounterType;
+import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.PermanentPredicate;
 import mage.game.Game;
+import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.watchers.common.DescendedWatcher;
 
@@ -29,21 +31,27 @@ import java.util.UUID;
 /**
  * @author Susucr
  */
-public final class BrasssTunnelGrinder extends CardImpl {
+public final class BrasssTunnelGrinder extends TransformingDoubleFacedCard {
 
     private static final Condition condition = new SourceHasCounterCondition(CounterType.BORE, 3);
 
+    private static final FilterSpell filter = new FilterSpell("a permanent spell");
+
+    static {
+        filter.add(PermanentPredicate.instance);
+    }
+
     public BrasssTunnelGrinder(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}{R}");
-        this.secondSideCardClazz = mage.cards.t.TecutlanTheSearingRift.class;
+        super(ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.ARTIFACT}, new SubType[]{}, "{2}{R}",
+                "Tecutlan, the Searing Rift",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.LAND}, new SubType[]{SubType.CAVE}, "");
 
-        this.supertype.add(SuperType.LEGENDARY);
-
+        // Brass's Tunnel-Grinder
         // When Brass's Tunnel-Grinder enters the battlefield, discard any number of cards, then draw that many cards plus one.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new BrasssTunnelGrinderEffect()));
+        this.getLeftHalfCard().addAbility(new EntersBattlefieldTriggeredAbility(new BrasssTunnelGrinderEffect()));
 
         // At the beginning of your end step, if you descended this turn, put a bore counter on Brass's Tunnel-Grinder. Then if there are three or more bore counters on it, remove those counters and transform it.
-        this.addAbility(new TransformAbility());
         Ability ability = new BeginningOfEndStepTriggeredAbility(
                 TargetController.YOU, new AddCountersSourceEffect(CounterType.BORE.createInstance()),
                 false, DescendedThisTurnCondition.instance
@@ -53,7 +61,18 @@ public final class BrasssTunnelGrinder extends CardImpl {
                 "Then if there are three or more bore counters on it, remove those counters and transform it"
         ).addEffect(new TransformSourceEffect()));
         ability.addHint(DescendedThisTurnCount.getHint());
-        this.addAbility(ability, new DescendedWatcher());
+        ability.addWatcher(new DescendedWatcher());
+        this.getLeftHalfCard().addAbility(ability);
+
+        // Tecutlan, the Searing Rift
+        // {T}: Add {R}.
+        this.getRightHalfCard().addAbility(new RedManaAbility());
+
+        // Whenever you cast a permanent spell using mana produced by Tecutlan, the Searing Rift, discover X, where X is that spell's mana value.
+        this.getRightHalfCard().addAbility(new CastSpellPaidBySourceTriggeredAbility(
+                new TecutlanTheSearingRiftEffect(),
+                filter, true
+        ));
     }
 
     private BrasssTunnelGrinder(final BrasssTunnelGrinder card) {
@@ -93,4 +112,36 @@ class BrasssTunnelGrinderEffect extends OneShotEffect {
         player.drawCards(1 + dicarded, source, game);
         return true;
     }
+}
+
+class TecutlanTheSearingRiftEffect extends OneShotEffect {
+
+    TecutlanTheSearingRiftEffect() {
+        super(Outcome.Benefit);
+        staticText = "discover X, where X is that spell's mana value";
+    }
+
+    private TecutlanTheSearingRiftEffect(final TecutlanTheSearingRiftEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public TecutlanTheSearingRiftEffect copy() {
+        return new TecutlanTheSearingRiftEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
+
+        Spell spell = game.getSpellOrLKIStack(getTargetPointer().getFirst(game, source));
+        int mv = spell == null ? 0 : Math.max(0, spell.getManaValue());
+
+        DiscoverEffect.doDiscover(controller, mv, game, source);
+        return true;
+    }
+
 }

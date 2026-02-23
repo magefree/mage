@@ -3,8 +3,8 @@ package mage.cards.m;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.FightEnchantedTargetEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedByMoreThanOneAttachedEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -14,13 +14,10 @@ import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 
-import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -40,7 +37,7 @@ public final class MeltstridersResolve extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // When this Aura enters, enchanted creature fights up to one target creature an opponent controls.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new MeltstridersResolveEffect());
+        Ability ability = new EntersBattlefieldTriggeredAbility(new FightEnchantedTargetEffect());
         ability.addTarget(new TargetOpponentsCreaturePermanent(0, 1));
         this.addAbility(ability);
 
@@ -58,33 +55,5 @@ public final class MeltstridersResolve extends CardImpl {
     @Override
     public MeltstridersResolve copy() {
         return new MeltstridersResolve(this);
-    }
-}
-
-class MeltstridersResolveEffect extends OneShotEffect {
-
-    MeltstridersResolveEffect() {
-        super(Outcome.Benefit);
-        staticText = "enchanted creature fights up to one target creature an opponent controls";
-    }
-
-    private MeltstridersResolveEffect(final MeltstridersResolveEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public MeltstridersResolveEffect copy() {
-        return new MeltstridersResolveEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = Optional
-                .ofNullable(source.getSourcePermanentOrLKI(game))
-                .map(Permanent::getAttachedTo)
-                .map(game::getPermanent)
-                .orElse(null);
-        Permanent creature = game.getPermanent(getTargetPointer().getFirst(game, source));
-        return permanent != null && creature != null && permanent.fight(creature, source, game);
     }
 }

@@ -32,7 +32,7 @@ public final class Rockalanche extends CardImpl {
         this.subtype.add(SubType.LESSON);
 
         // Earthbend X, where X is the number of Forests you control.
-        this.getSpellAbility().addEffect(new EarthbendTargetEffect(xValue));
+        this.getSpellAbility().addEffect(new EarthbendTargetEffect(xValue, true));
         this.getSpellAbility().addTarget(new TargetControlledLandPermanent());
         this.getSpellAbility().addHint(hint);
 

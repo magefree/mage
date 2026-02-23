@@ -14,7 +14,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
 
 import java.util.UUID;
 
@@ -23,7 +24,7 @@ import java.util.UUID;
  */
 public final class MiaraThornOfTheGlade extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.ELF, "Elf you control");
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.ELF);
 
     static {
         filter.add(TargetController.YOU.getControllerPredicate());
@@ -39,16 +40,14 @@ public final class MiaraThornOfTheGlade extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Miara, Thorn of the Glade or another Elf you control dies, you may pay {1} and 1 life. If you do, draw a card.
-        this.addAbility(new DiesThisOrAnotherTriggeredAbility(
-                new DoIfCostPaid(
-                        new DrawCardSourceControllerEffect(1),
-                        new CompositeCost(
-                                new GenericManaCost(1),
-                                new PayLifeCost(1),
-                                "{1} and 1 life"
-                        )
-                ), false, filter
-        ));
+        this.addAbility(new DiesThisOrAnotherTriggeredAbility(new DoIfCostPaid(
+                new DrawCardSourceControllerEffect(1),
+                new CompositeCost(
+                        new GenericManaCost(1),
+                        new PayLifeCost(1),
+                        "{1} and 1 life"
+                )
+        ), false, filter));
 
         // Partner
         this.addAbility(PartnerAbility.getInstance());

@@ -15,7 +15,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.game.permanent.token.CatToken2;
+import mage.game.permanent.token.Cat11LifelinkToken;
 
 /**
  *
@@ -45,7 +45,7 @@ public final class RegalCaracal extends CardImpl {
         this.addAbility(ability);
 
         // When Regal Caracal enters the battlefield, create two 1/1 white Cat creature tokens with lifelink.
-        Effect effect2 = new CreateTokenEffect(new CatToken2(), 2);
+        Effect effect2 = new CreateTokenEffect(new Cat11LifelinkToken(), 2);
         effect2.setText("create two 1/1 white Cat creature tokens with lifelink");
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect2));
     }

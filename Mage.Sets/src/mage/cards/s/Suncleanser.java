@@ -37,15 +37,13 @@ public final class Suncleanser extends CardImpl {
 
         // When Suncleanser enters the battlefield, choose one —
         // • Remove all counters from target creature. It can't have counters put on it for as long as Suncleanser remains on the battlefield.
-        Ability ability = new EntersBattlefieldTriggeredAbility(
-                new RemoveAllCountersPermanentTargetEffect(), false
-        );
-        ability.addEffect(new SuncleanserPreventCountersEffect(false));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new RemoveAllCountersPermanentTargetEffect());
+        ability.addEffect(new SuncleanserPreventCountersPermanentEffect());
         ability.addTarget(new TargetCreaturePermanent());
 
         // • Target opponent loses all counters. That player can't get counters for as long as Suncleanser remains on the battlefield.
         Mode mode = new Mode(new SuncleanserRemoveCountersPlayerEffect());
-        mode.addEffect(new SuncleanserPreventCountersEffect(true));
+        mode.addEffect(new SuncleanserPreventCountersPlayerEffect());
         mode.addTarget(new TargetOpponent());
         ability.addMode(mode);
         this.addAbility(ability);
@@ -88,24 +86,20 @@ class SuncleanserRemoveCountersPlayerEffect extends OneShotEffect {
     }
 }
 
-class SuncleanserPreventCountersEffect extends ContinuousRuleModifyingEffectImpl {
+class SuncleanserPreventCountersPlayerEffect extends ContinuousRuleModifyingEffectImpl {
 
-    SuncleanserPreventCountersEffect(boolean player) {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        if (player) {
-            staticText = "That player can't get counters for as long as {this} remains on the battlefield.";
-        } else {
-            staticText = "It can't have counters put on it for as long as {this} remains on the battlefield";
-        }
+    SuncleanserPreventCountersPlayerEffect() {
+        super(Duration.UntilSourceLeavesBattlefield, Outcome.Detriment);
+        staticText = "That player can't get counters for as long as {this} remains on the battlefield.";
     }
 
-    private SuncleanserPreventCountersEffect(final SuncleanserPreventCountersEffect effect) {
+    private SuncleanserPreventCountersPlayerEffect(final SuncleanserPreventCountersPlayerEffect effect) {
         super(effect);
     }
 
     @Override
-    public SuncleanserPreventCountersEffect copy() {
-        return new SuncleanserPreventCountersEffect(this);
+    public SuncleanserPreventCountersPlayerEffect copy() {
+        return new SuncleanserPreventCountersPlayerEffect(this);
     }
 
     @Override
@@ -124,5 +118,37 @@ class SuncleanserPreventCountersEffect extends ContinuousRuleModifyingEffectImpl
             return false;
         }
         return true;
+    }
+}
+
+class SuncleanserPreventCountersPermanentEffect extends ContinuousRuleModifyingEffectImpl {
+
+    SuncleanserPreventCountersPermanentEffect() {
+        super(Duration.UntilSourceLeavesBattlefield, Outcome.Detriment);
+        staticText = "It can't have counters put on it for as long as {this} remains on the battlefield";
+    }
+
+    private SuncleanserPreventCountersPermanentEffect(final SuncleanserPreventCountersPermanentEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public SuncleanserPreventCountersPermanentEffect copy() {
+        return new SuncleanserPreventCountersPermanentEffect(this);
+    }
+
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.CAN_ADD_COUNTERS;
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (permanent != null) {
+            return true;
+        }
+        discard();
+        return false;
     }
 }

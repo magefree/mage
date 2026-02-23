@@ -1,31 +1,54 @@
 package mage.cards.b;
 
-import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.WerewolfBackTriggeredAbility;
 import mage.abilities.common.WerewolfFrontTriggeredAbility;
-import mage.abilities.keyword.TransformAbility;
-import mage.cards.CardImpl;
+import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.SubType;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
 /**
  * @author fireshoes
  */
-public final class BreakneckRider extends CardImpl {
+public final class BreakneckRider extends TransformingDoubleFacedCard {
 
     public BreakneckRider(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
-        this.subtype.add(SubType.HUMAN, SubType.SCOUT, SubType.WEREWOLF);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.SCOUT, SubType.WEREWOLF}, "{1}{R}{R}",
+                "Neck Breaker",
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.WEREWOLF}, "R");
 
-        this.secondSideCardClazz = mage.cards.n.NeckBreaker.class;
+        // Breakneck Rider
+        this.getLeftHalfCard().setPT(3, 3);
 
         // At the beginning of each upkeep, if no spells were cast last turn, transform Breakneck Rider.
-        this.addAbility(new TransformAbility());
-        this.addAbility(new WerewolfFrontTriggeredAbility());
+        this.getLeftHalfCard().addAbility(new WerewolfFrontTriggeredAbility());
+
+        // Neck Breaker
+        this.getRightHalfCard().setPT(4, 3);
+
+        // Attacking creatures you control get +1/+0 and have trample.
+        Ability ability = new SimpleStaticAbility(new BoostControlledEffect(
+                1, 0, Duration.WhileOnBattlefield,
+                StaticFilters.FILTER_ATTACKING_CREATURES
+        ));
+        ability.addEffect(new GainAbilityControlledEffect(
+                TrampleAbility.getInstance(), Duration.WhileOnBattlefield,
+                StaticFilters.FILTER_ATTACKING_CREATURES
+        ).setText("and have trample"));
+        this.getRightHalfCard().addAbility(ability);
+
+        // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Neck Breaker.
+        this.getRightHalfCard().addAbility(new WerewolfBackTriggeredAbility());
     }
 
     private BreakneckRider(final BreakneckRider card) {

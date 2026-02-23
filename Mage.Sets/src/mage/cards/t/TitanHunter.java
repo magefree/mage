@@ -39,7 +39,7 @@ public final class TitanHunter extends CardImpl {
         // At the beginning of each player's end step, if no creatures died this turn, Titan Hunter deals 4 damage to that player.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 TargetController.EACH_PLAYER,
-                new DamageTargetEffect(4, true, "that player"),
+                new DamageTargetEffect(4).withTargetDescription("that player"),
                 false, condition
         ).addHint(MorbidHint.instance));
 

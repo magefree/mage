@@ -4,16 +4,18 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.RemoveUpToAmountCountersEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -64,40 +66,16 @@ class HexParasiteEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        TargetPermanent target = (TargetPermanent) source.getTargets().get(0);
-        Permanent permanent = game.getPermanent(target.getFirstTarget());
-        Player controller = game.getPlayer(source.getControllerId());
-        if (permanent == null || controller == null) {
+        int removed = RemoveUpToAmountCountersEffect.doRemoval(
+                GetXValue.instance.calculate(game, source, this),
+                getTargetPointer().getFirst(game, source),
+                game.getPlayer(source.getControllerId()),
+                game, source
+        );
+        if (removed < 1) {
             return false;
         }
-
-        int toRemove = CardUtil.getSourceCostsTag(game, source, "X", 0);
-        if (toRemove == 0) {
-            return true;
-        }
-
-        int removed = 0;
-        String[] counterNames = permanent.getCounters(game).keySet().toArray(new String[0]);
-        for (String counterName : counterNames) {
-            if (controller.chooseUse(Outcome.Neutral, "Remove " + counterName + " counters?", source, game)) {
-                if (permanent.getCounters(game).get(counterName).getCount() == 1 || (toRemove - removed == 1)) {
-                    permanent.removeCounters(counterName, 1, source, game);
-                    removed++;
-                } else {
-                    int amount = controller.getAmount(1, Math.min(permanent.getCounters(game).get(counterName).getCount(), toRemove - removed), "How many?", source, game);
-                    if (amount > 0) {
-                        removed += amount;
-                        permanent.removeCounters(counterName, amount, source, game);
-                    }
-                }
-            }
-            if (removed >= toRemove) {
-                break;
-            }
-        }
-        if (removed > 0) {
-            game.addEffect(new BoostSourceEffect(removed, 0, Duration.EndOfTurn), source);
-        }
+        game.addEffect(new BoostSourceEffect(removed, 0, Duration.EndOfTurn), source);
         return true;
     }
 }

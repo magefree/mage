@@ -204,4 +204,48 @@ public class CommanderDeckValidationTest extends MageTestPlayerBase {
 
         deckTester.validate("Legendary Spacecraft should not be able to be a commander if they can't become a creature");
     }
+
+    @Test
+    public void testLutriCommander() {
+        DeckTester deckTester = new DeckTester(new Commander());
+        deckTester.addMaindeck("Island", 99);
+
+        deckTester.addSideboard("Lutri, the Spellchaser", 1);
+
+        deckTester.validate("Lutri can be your commander");
+    }
+
+    @Test
+    public void testLutriMaindeck() {
+        DeckTester deckTester = new DeckTester(new Commander());
+        deckTester.addMaindeck("Island", 98);
+        deckTester.addMaindeck("Lutri, the Spellchaser", 1);
+
+        deckTester.addSideboard("Niv-Mizzet, the Firemind", 1);
+
+        deckTester.validate("Lutri can be in your main deck in commander");
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testLutriCompanion() {
+        DeckTester deckTester = new DeckTester(new Commander());
+        deckTester.addMaindeck("Island", 99);
+
+        deckTester.addSideboard("Niv-Mizzet, the Firemind", 1);
+        deckTester.addSideboard("Lutri, the Spellchaser", 1);
+
+        deckTester.validate("Lutri can't be your companion in commander");
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testLutriCompanionPartner() {
+        DeckTester deckTester = new DeckTester(new Commander());
+        deckTester.addMaindeck("Island", 98);
+
+        deckTester.addSideboard("Ludevic, Necro-Alchemist", 1);
+        deckTester.addSideboard("Kraum, Ludevic's Opus", 1);
+        deckTester.addSideboard("Lutri, the Spellchaser", 1);
+
+        deckTester.validate("Lutri can't be your companion in commander");
+    }
 }

@@ -42,7 +42,7 @@ public final class TophGreatestEarthbender extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Toph enters, earthbend X, where X is the amount of mana spent to cast her.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new EarthbendTargetEffect(ManaSpentToCastCount.instance));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new EarthbendTargetEffect(ManaSpentToCastCount.instance, true));
         ability.addTarget(new TargetControlledLandPermanent());
         this.addAbility(ability);
 

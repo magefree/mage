@@ -208,6 +208,10 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
         if (!plural && putLookedCards == PutCards.TOP_ANY) {
             return setText(mode, sb.toString());
         }
+        if (putLookedCards == PutCards.SHUFFLE) {
+            sb.append(". Then shuffle");
+            return setText(mode, sb.toString());
+        }
         sb.append(havePredicates && (optional || upTo) ? ". Put" : " and");
         sb.append(" the ");
         sb.append(plural ? "rest " : "other ");

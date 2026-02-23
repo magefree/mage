@@ -18,7 +18,7 @@ public final class ATATToken extends TokenImpl {
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
-        addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new TrooperToken(), 2)));
+        addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new TrooperWhiteToken(), 2)));
         subtype.add(SubType.ATAT);
     }
 

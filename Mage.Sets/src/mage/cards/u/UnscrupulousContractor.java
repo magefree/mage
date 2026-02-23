@@ -32,7 +32,7 @@ public final class UnscrupulousContractor extends CardImpl {
 
         // When Unscrupulous Contractor enters the battlefield, you may sacrifice a creature. When you do, target player draws two cards and loses 2 life.
         ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(new DrawCardTargetEffect(2), false);
-        ability.addEffect(new LoseLifeTargetEffect(2).setText("and loses 2 life"));
+        ability.addEffect(new LoseLifeTargetEffect(2).withTargetDescription("and"));
         ability.addTarget(new TargetPlayer());
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DoWhenCostPaid(
                 ability, new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE),

@@ -12,7 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPermanent;
 
@@ -24,6 +24,7 @@ import java.util.UUID;
 public final class ThrullChampion extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.THRULL, "Thrull creatures");
+    private static final FilterPermanent filter2 = new FilterPermanent(SubType.THRULL);
 
     public ThrullChampion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}");
@@ -32,12 +33,13 @@ public final class ThrullChampion extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Thrull creatures get +1/+1.
-        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(
+                1, 1, Duration.WhileOnBattlefield, filter, false
+        )));
 
         // {tap}: Gain control of target Thrull for as long as you control Thrull Champion.
-        Ability ability = new SimpleActivatedAbility(new GainControlTargetEffect(Duration.WhileControlled)
-                .setText("gain control of target Thrull for as long as you control {this}"), new TapSourceCost());
-        ability.addTarget(new TargetPermanent(filter));
+        Ability ability = new SimpleActivatedAbility(new GainControlTargetEffect(Duration.WhileControlled), new TapSourceCost());
+        ability.addTarget(new TargetPermanent(filter2));
         this.addAbility(ability);
     }
 

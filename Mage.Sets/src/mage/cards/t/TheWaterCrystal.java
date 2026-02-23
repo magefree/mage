@@ -86,7 +86,7 @@ class TheWaterCrystalEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return game.getOpponents(source.getControllerId()).contains(event.getPlayerId());
+        return game.getOpponents(source.getControllerId()).contains(event.getPlayerId()) && event.getAmount() >= 1;
     }
 
     @Override

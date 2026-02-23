@@ -10,14 +10,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 
 /**
  * @author noxx
  */
 public final class TrustedForcemage extends CardImpl {
-
-    private static final String ruleText = "As long as {this} is paired with another creature, each of those creatures gets +1/+1";
 
     public TrustedForcemage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
@@ -31,7 +28,7 @@ public final class TrustedForcemage extends CardImpl {
         this.addAbility(new SoulbondAbility());
 
         // As long as Trusted Forcemage is paired with another creature, each of those creatures gets +1/+1.
-        this.addAbility(new SimpleStaticAbility(new BoostPairedEffect(1, 1, ruleText)));
+        this.addAbility(new SimpleStaticAbility(new BoostPairedEffect(1, 1)));
     }
 
     private TrustedForcemage(final TrustedForcemage card) {

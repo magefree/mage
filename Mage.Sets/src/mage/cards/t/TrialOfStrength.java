@@ -11,7 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.game.permanent.token.BeastToken3;
+import mage.game.permanent.token.Beast42Token;
 
 /**
  *
@@ -29,7 +29,7 @@ public final class TrialOfStrength extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
 
         // When Trial of Strength enters the battlefield, create a 4/2 green Beast creature token.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new BeastToken3())));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new Beast42Token())));
 
         // When a Cartouche you control enters, return Trial of Strength to its owner's hand.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new ReturnToHandSourceEffect(), filter

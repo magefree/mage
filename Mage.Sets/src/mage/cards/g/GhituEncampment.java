@@ -2,7 +2,6 @@
 package mage.cards.g;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -14,8 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.Zone;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 
 /**
  *
@@ -29,8 +27,15 @@ public final class GhituEncampment extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
         this.addAbility(new RedManaAbility());
         this.addAbility(new SimpleActivatedAbility(
-                new BecomesCreatureSourceEffect(new GhituEncampmentToken(), CardType.LAND, Duration.EndOfTurn),
-                new ManaCostsImpl<>("{1}{R}")));
+            new BecomesCreatureSourceEffect(
+                new CreatureToken(
+                    2, 1, "2/1 red Warrior creature with first strike", SubType.WARRIOR
+                ).withColor("R").withAbility(FirstStrikeAbility.getInstance()),
+                CardType.LAND,
+                Duration.EndOfTurn
+            ),
+            new ManaCostsImpl<>("{1}{R}")
+        ));
     }
 
     private GhituEncampment(final GhituEncampment card) {
@@ -40,27 +45,5 @@ public final class GhituEncampment extends CardImpl {
     @Override
     public GhituEncampment copy() {
         return new GhituEncampment(this);
-    }
-}
-
-class GhituEncampmentToken extends TokenImpl {
-
-    public GhituEncampmentToken() {
-        super("Warrior", "2/1 red Warrior creature with first strike");
-        cardType.add(CardType.CREATURE);
-        this.subtype.add(SubType.WARRIOR);
-
-        this.color.setRed(true);
-        power = new MageInt(2);
-        toughness = new MageInt(1);
-
-        this.addAbility(FirstStrikeAbility.getInstance());
-    }
-    private GhituEncampmentToken(final GhituEncampmentToken token) {
-        super(token);
-    }
-
-    public GhituEncampmentToken copy() {
-        return new GhituEncampmentToken(this);
     }
 }

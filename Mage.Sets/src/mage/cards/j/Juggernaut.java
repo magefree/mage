@@ -1,7 +1,5 @@
-
 package mage.cards.j;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksEachCombatStaticAbility;
 import mage.abilities.common.SimpleEvasionAbility;
@@ -13,17 +11,14 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public final class Juggernaut extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Walls");
-
-    static {
-        filter.add(SubType.WALL.getPredicate());
-    }
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.WALL, "Walls");
 
     public Juggernaut(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");

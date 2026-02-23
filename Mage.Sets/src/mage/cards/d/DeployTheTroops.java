@@ -6,7 +6,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.permanent.token.TrooperToken;
+import mage.game.permanent.token.TrooperWhiteToken;
 
 /**
  *
@@ -18,7 +18,7 @@ public final class DeployTheTroops extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{W}");
 
         // Create 3 1/1 white Trooper creature tokens.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new TrooperToken(), 3));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new TrooperWhiteToken(), 3));
 
     }
 

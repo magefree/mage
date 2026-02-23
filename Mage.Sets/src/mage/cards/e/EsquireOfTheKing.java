@@ -3,14 +3,12 @@ package mage.cards.e;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.condition.common.YouControlALegendaryCreatureCondition;
 import mage.abilities.costs.CostAdjuster;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.abilities.hint.ConditionHint;
-import mage.abilities.hint.Hint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -27,11 +25,6 @@ import java.util.UUID;
  */
 public final class EsquireOfTheKing extends CardImpl {
 
-    private static final Hint hint = new ConditionHint(
-            new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_CONTROLLED_CREATURE_LEGENDARY),
-            "You control a legendary creature"
-    );
-
     public EsquireOfTheKing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");
 
@@ -47,7 +40,7 @@ public final class EsquireOfTheKing extends CardImpl {
         ability.addCost(new TapSourceCost());
         ability.setCostAdjuster(EsquireOfTheKingAdjuster.instance);
         ability.addEffect(new InfoEffect("This ability costs {2} less to activate if you control a legendary creature."));
-        this.addAbility(ability.addHint(hint));
+        this.addAbility(ability.addHint(YouControlALegendaryCreatureCondition.getHint()));
     }
 
     private EsquireOfTheKing(final EsquireOfTheKing card) {

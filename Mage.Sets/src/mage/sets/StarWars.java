@@ -99,7 +99,6 @@ public final class StarWars extends ExpansionSet {
         cards.add(new SetCardInfo("Darth Maul", 178, Rarity.RARE, mage.cards.d.DarthMaul.class));
         cards.add(new SetCardInfo("Darth Sidious, Sith Lord", 179, Rarity.MYTHIC, mage.cards.d.DarthSidiousSithLord.class));
         cards.add(new SetCardInfo("Darth Tyranus, Count of Serenno", 180, Rarity.MYTHIC, mage.cards.d.DarthTyranusCountOfSerenno.class));
-        cards.add(new SetCardInfo("Darth Vader", 140, Rarity.MYTHIC, mage.cards.d.DarthVader.class));
         cards.add(new SetCardInfo("Death Trooper", 71, Rarity.UNCOMMON, mage.cards.d.DeathTrooper.class));
         cards.add(new SetCardInfo("Delay Tactic", 504, Rarity.COMMON, mage.cards.d.DelayTactic.class));
         cards.add(new SetCardInfo("Deploy The Troops", 8, Rarity.UNCOMMON, mage.cards.d.DeployTheTroops.class));

@@ -49,10 +49,10 @@ public final class BarretWallace extends CardImpl {
 
         // Whenever Barret Wallace attacks, it deals damage equal to the number of equipped creatures you control to defending player.
         this.addAbility(new AttacksTriggeredAbility(
-                new DamageTargetEffect(xValue, true, "it")
+                new DamageTargetEffect(xValue)
                         .setText("it deals damage equal to the number of equipped creatures you control to defending player"),
                 false, null, SetTargetPointer.PLAYER
-        ).withRuleTextReplacement(true).addHint(hint));
+        ).addHint(hint));
     }
 
     private BarretWallace(final BarretWallace card) {

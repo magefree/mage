@@ -2,7 +2,6 @@
 package mage.cards.f;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -13,8 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.Zone;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 
 /**
  *
@@ -32,7 +30,14 @@ public final class ForbiddingWatchtower extends CardImpl {
         this.addAbility(new WhiteManaAbility());
 
         // {1}{W}: Forbidding Watchtower becomes a 1/5 white Soldier creature until end of turn. It's still a land.
-        this.addAbility(new SimpleActivatedAbility(new BecomesCreatureSourceEffect(new ForbiddingWatchtowerToken(), CardType.LAND, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{W}")));
+        this.addAbility(new SimpleActivatedAbility(
+            new BecomesCreatureSourceEffect(
+                new CreatureToken(1, 5, "1/5 white Soldier creature", SubType.SOLDIER).withColor("W"),
+                CardType.LAND,
+                Duration.EndOfTurn
+            ),
+            new ManaCostsImpl<>("{1}{W}")
+        ));
     }
 
     private ForbiddingWatchtower(final ForbiddingWatchtower card) {
@@ -42,24 +47,5 @@ public final class ForbiddingWatchtower extends CardImpl {
     @Override
     public ForbiddingWatchtower copy() {
         return new ForbiddingWatchtower(this);
-    }
-}
-
-class ForbiddingWatchtowerToken extends TokenImpl {
-    ForbiddingWatchtowerToken() {
-        super("Soldier", "1/5 white Soldier creature");
-        cardType.add(CardType.CREATURE);
-        this.subtype.add(SubType.SOLDIER);
-        color.setWhite(true);
-        
-        power = new MageInt(1);
-        toughness = new MageInt(5);
-    }
-    private ForbiddingWatchtowerToken(final ForbiddingWatchtowerToken token) {
-        super(token);
-    }
-
-    public ForbiddingWatchtowerToken copy() {
-        return new ForbiddingWatchtowerToken(this);
     }
 }

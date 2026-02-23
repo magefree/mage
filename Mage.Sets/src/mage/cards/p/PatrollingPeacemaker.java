@@ -3,8 +3,7 @@ package mage.cards.p;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.CommittedCrimeTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.effects.common.counter.ProliferateEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -31,10 +30,7 @@ public final class PatrollingPeacemaker extends CardImpl {
         this.toughness = new MageInt(0);
 
         // This creature enters with two +1/+1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)),
-                "with two +1/+1 counters on it"
-        ));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.P1P1.createInstance(2)));
 
         // Whenever an opponent commits a crime, proliferate.
         this.addAbility(new PatrollingPeacemakerTriggeredAbility());

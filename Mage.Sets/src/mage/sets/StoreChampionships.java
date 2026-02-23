@@ -55,7 +55,6 @@ public final class StoreChampionships extends ExpansionSet {
         cards.add(new SetCardInfo("Preacher of the Schism", 34, Rarity.RARE, mage.cards.p.PreacherOfTheSchism.class));
         cards.add(new SetCardInfo("Preordain", 39, Rarity.RARE, mage.cards.p.Preordain.class));
         cards.add(new SetCardInfo("Reality Smasher", 31, Rarity.RARE, mage.cards.r.RealitySmasher.class));
-        cards.add(new SetCardInfo("Reflection of Kiki-Jiki", 44, Rarity.RARE, mage.cards.r.ReflectionOfKikiJiki.class));
         cards.add(new SetCardInfo("Shark Typhoon", 28, Rarity.RARE, mage.cards.s.SharkTyphoon.class));
         cards.add(new SetCardInfo("Slickshot Show-Off", 43, Rarity.RARE, mage.cards.s.SlickshotShowOff.class));
         cards.add(new SetCardInfo("Spell Pierce", 4, Rarity.RARE, mage.cards.s.SpellPierce.class));

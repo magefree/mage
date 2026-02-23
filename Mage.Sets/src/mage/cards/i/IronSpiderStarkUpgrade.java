@@ -29,11 +29,14 @@ import java.util.UUID;
 public final class IronSpiderStarkUpgrade extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterControlledPermanent("creature and/or Vehicle you control");
+            = new FilterControlledPermanent("artifact creature and/or Vehicle you control");
 
     static {
         filter.add(Predicates.or(
-                CardType.CREATURE.getPredicate(),
+                Predicates.and(
+                        CardType.ARTIFACT.getPredicate(),
+                        CardType.CREATURE.getPredicate()
+                ),
                 SubType.VEHICLE.getPredicate()
         ));
     }
@@ -59,7 +62,7 @@ public final class IronSpiderStarkUpgrade extends CardImpl {
         Ability ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new GenericManaCost(2));
         ability.addCost(new RemoveCounterCost(new TargetPermanent(
                 1, 2, StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT
-        ), CounterType.P1P1, 2).setText("remove two +1/+1 counters from among creatures you control"));
+        ), CounterType.P1P1, 2).setText("remove two +1/+1 counters from among artifacts you control"));
         this.addAbility(ability);
     }
 

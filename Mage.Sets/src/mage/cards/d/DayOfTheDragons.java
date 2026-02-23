@@ -15,7 +15,7 @@ import mage.filter.FilterPermanent;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.PermanentToken;
-import mage.game.permanent.token.DragonToken2;
+import mage.game.permanent.token.Dragon55Token;
 import mage.players.Player;
 import mage.util.CardUtil;
 
@@ -80,7 +80,7 @@ class DayOfTheDragonsEntersEffect extends OneShotEffect {
             if (!toExile.isEmpty()) {
                 UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getStackMomentSourceZCC());
                 controller.moveCardsToExile(toExile, source, game, true, exileId, sourceObject.getIdName());
-                DragonToken2 token = new DragonToken2();
+                Dragon55Token token = new Dragon55Token();
                 token.putOntoBattlefield(toExile.size(), game, source, source.getControllerId());
             }
             return true;

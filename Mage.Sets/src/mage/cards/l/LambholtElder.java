@@ -1,10 +1,11 @@
 package mage.cards.l;
 
-import mage.MageInt;
+import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.common.WerewolfBackTriggeredAbility;
 import mage.abilities.common.WerewolfFrontTriggeredAbility;
-import mage.abilities.keyword.TransformAbility;
-import mage.cards.CardImpl;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
@@ -13,21 +14,31 @@ import java.util.UUID;
 /**
  * @author Loki
  */
-public final class LambholtElder extends CardImpl {
+public final class LambholtElder extends TransformingDoubleFacedCard {
 
     public LambholtElder(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.WEREWOLF);
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.WEREWOLF}, "{2}{G}",
+                "Silverpelt Werewolf",
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.WEREWOLF}, "G"
+        );
 
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(2);
-
-        this.secondSideCardClazz = mage.cards.s.SilverpeltWerewolf.class;
+        // Lambholt Elder
+        this.getLeftHalfCard().setPT(1, 2);
 
         // At the beginning of each upkeep, if no spells were cast last turn, transform Lambholt Elder.
-        this.addAbility(new TransformAbility());
-        this.addAbility(new WerewolfFrontTriggeredAbility());
+        this.getLeftHalfCard().addAbility(new WerewolfFrontTriggeredAbility());
+
+        // Silverpelt Werewolf
+        this.getRightHalfCard().setPT(4, 5);
+
+        // Whenever Silverpelt Werewolf deals combat damage to a player, draw a card.
+        this.getRightHalfCard().addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
+                new DrawCardSourceControllerEffect(1), false
+        ));
+
+        // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Silverpelt Werewolf.
+        this.getRightHalfCard().addAbility(new WerewolfBackTriggeredAbility());
     }
 
     private LambholtElder(final LambholtElder card) {

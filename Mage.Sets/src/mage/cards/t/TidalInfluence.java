@@ -3,7 +3,7 @@ package mage.cards.t;
 import mage.ObjectColor;
 import mage.abilities.StateTriggeredAbility;
 import mage.abilities.common.CastOnlyIfConditionIsTrueAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -55,8 +55,7 @@ public final class TidalInfluence extends CardImpl {
         this.addAbility(new CastOnlyIfConditionIsTrueAbility(conditionCast));
 
         // Tidal Influence enters the battlefield with a tide counter on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.TIDE.createInstance()),
-                "with a tide counter on it."));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.TIDE.createInstance()));
 
         // At the beginning of your upkeep, put a tide counter on Tidal Influence.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.TIDE.createInstance())

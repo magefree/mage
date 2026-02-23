@@ -32,7 +32,7 @@ import java.util.UUID;
 public final class BoilingRockRioter extends CardImpl {
 
     private static final FilterControlledPermanent filter
-            = new FilterControlledPermanent(SubType.ALLY, "untaped Ally you control");
+            = new FilterControlledPermanent(SubType.ALLY, "untapped Ally you control");
 
     static {
         filter.add(TappedPredicate.UNTAPPED);

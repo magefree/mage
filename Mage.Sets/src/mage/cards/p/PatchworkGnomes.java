@@ -10,8 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInHand;
 
 /**
@@ -28,7 +27,7 @@ public final class PatchworkGnomes extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Discard a card: Regenerate Patchwork Gnomes.
-        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(), new DiscardTargetCost(new TargetCardInHand(new FilterCard("a card")))));
+        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(), new DiscardTargetCost(new TargetCardInHand(StaticFilters.FILTER_CARD_A))));
     }
 
     private PatchworkGnomes(final PatchworkGnomes card) {

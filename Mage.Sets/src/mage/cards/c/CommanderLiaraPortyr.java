@@ -65,7 +65,7 @@ class CommanderLiaraPortyrCostEffect extends CostModificationEffectImpl {
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         Optional.ofNullable((Integer) getValue(AttacksWithCreaturesTriggeredAbility.VALUEKEY_NUMBER_DEFENDING_PLAYERS))
-                .ifPresent(i -> CardUtil.reduceCost(abilityToModify, 1));
+                .ifPresent(i -> CardUtil.reduceCost(abilityToModify, i));
         return true;
     }
 

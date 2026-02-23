@@ -46,7 +46,7 @@ public final class BiorganicCarapace extends CardImpl {
         this.addAbility(equipAbility);
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2));
+        this.addAbility(new EquipAbility(2, false));
     }
 
     private BiorganicCarapace(final BiorganicCarapace card) {

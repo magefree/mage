@@ -1,4 +1,3 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -31,7 +30,6 @@ public final class TheLostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Amulet of Vigor", 103, Rarity.RARE, mage.cards.a.AmuletOfVigor.class));
         cards.add(new SetCardInfo("Angrath's Marauders", 215, Rarity.RARE, mage.cards.a.AngrathsMarauders.class));
         cards.add(new SetCardInfo("Apex Altisaur", 232, Rarity.RARE, mage.cards.a.ApexAltisaur.class));
-        cards.add(new SetCardInfo("Apex Observatory", 15, Rarity.MYTHIC, mage.cards.a.ApexObservatory.class));
         cards.add(new SetCardInfo("Arcane Signet", 104, Rarity.UNCOMMON, mage.cards.a.ArcaneSignet.class));
         cards.add(new SetCardInfo("Arch of Orazca", 319, Rarity.RARE, mage.cards.a.ArchOfOrazca.class));
         cards.add(new SetCardInfo("Archaeomancer's Map", 101, Rarity.RARE, mage.cards.a.ArchaeomancersMap.class));
@@ -85,7 +83,6 @@ public final class TheLostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Coralhelm Commander", 148, Rarity.RARE, mage.cards.c.CoralhelmCommander.class));
         cards.add(new SetCardInfo("Cordial Vampire", 189, Rarity.RARE, mage.cards.c.CordialVampire.class));
         cards.add(new SetCardInfo("Corsair Captain", 149, Rarity.RARE, mage.cards.c.CorsairCaptain.class));
-        cards.add(new SetCardInfo("Cosmium Catalyst", 11, Rarity.RARE, mage.cards.c.CosmiumCatalyst.class));
         cards.add(new SetCardInfo("Crossway Troublemakers", 190, Rarity.RARE, mage.cards.c.CrosswayTroublemakers.class));
         cards.add(new SetCardInfo("Cruel Celebrant", 267, Rarity.UNCOMMON, mage.cards.c.CruelCelebrant.class));
         cards.add(new SetCardInfo("Crumbling Necropolis", 326, Rarity.UNCOMMON, mage.cards.c.CrumblingNecropolis.class));
@@ -285,10 +282,9 @@ public final class TheLostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Terramorphic Expanse", 360, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class));
         cards.add(new SetCardInfo("Tetzin, Gnome Champion", 13, Rarity.RARE, mage.cards.t.TetzinGnomeChampion.class));
         cards.add(new SetCardInfo("Thassa, God of the Sea", 176, Rarity.MYTHIC, mage.cards.t.ThassaGodOfTheSea.class));
-        cards.add(new SetCardInfo("The Golden-Gear Colossus", 13, Rarity.RARE, mage.cards.t.TheGoldenGearColossus.class));
+        cards.add(new SetCardInfo("The Grim Captain's Locker", 50, Rarity.RARE, mage.cards.t.TheGrimCaptainsLocker.class));
         cards.add(new SetCardInfo("The Indomitable", 43, Rarity.RARE, mage.cards.t.TheIndomitable.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Indomitable", 75, Rarity.RARE, mage.cards.t.TheIndomitable.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("The Grim Captain's Locker", 82, Rarity.RARE, mage.cards.t.TheGrimCaptainsLocker.class));
         cards.add(new SetCardInfo("Thieving Skydiver", 177, Rarity.RARE, mage.cards.t.ThievingSkydiver.class));
         cards.add(new SetCardInfo("Thought Vessel", 118, Rarity.UNCOMMON, mage.cards.t.ThoughtVessel.class));
         cards.add(new SetCardInfo("Thriving Bluff", 361, Rarity.COMMON, mage.cards.t.ThrivingBluff.class));
@@ -329,7 +325,6 @@ public final class TheLostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Windfall", 180, Rarity.UNCOMMON, mage.cards.w.Windfall.class));
         cards.add(new SetCardInfo("Worn Powerstone", 120, Rarity.UNCOMMON, mage.cards.w.WornPowerstone.class));
         cards.add(new SetCardInfo("Wrathful Raptors", 88, Rarity.RARE, mage.cards.w.WrathfulRaptors.class));
-        cards.add(new SetCardInfo("Wretched Bonemass", 10, Rarity.RARE, mage.cards.w.WretchedBonemass.class));
         cards.add(new SetCardInfo("Xavier Sal, Infested Captain", 14, Rarity.RARE, mage.cards.x.XavierSalInfestedCaptain.class));
         cards.add(new SetCardInfo("Xenagos, God of Revels", 295, Rarity.MYTHIC, mage.cards.x.XenagosGodOfRevels.class));
         cards.add(new SetCardInfo("Xolatoyac, the Smiling Flood", 8, Rarity.MYTHIC, mage.cards.x.XolatoyacTheSmilingFlood.class));

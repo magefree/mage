@@ -39,12 +39,8 @@ public final class SkeletalScrying extends CardImpl {
         this.getSpellAbility().setCostAdjuster(SkeletalScryingAdjuster.instance);
 
         // You draw X cards and you lose X life.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(
-                GetXValue.instance
-        ).setText("you draw X cards"));
-        this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(
-                GetXValue.instance
-        ).concatBy("and"));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(GetXValue.instance, true));
+        this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(GetXValue.instance).concatBy("and"));
     }
 
     private SkeletalScrying(final SkeletalScrying card) {

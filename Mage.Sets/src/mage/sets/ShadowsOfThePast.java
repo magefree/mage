@@ -54,7 +54,6 @@ public class ShadowsOfThePast extends ExpansionSet {
         cards.add(new SetCardInfo("Forge Devil", 41, Rarity.COMMON, mage.cards.f.ForgeDevil.class));
         cards.add(new SetCardInfo("Galvanic Juggernaut", 72, Rarity.UNCOMMON, mage.cards.g.GalvanicJuggernaut.class));
         cards.add(new SetCardInfo("Garruk Relentless", 49, Rarity.MYTHIC, mage.cards.g.GarrukRelentless.class));
-        cards.add(new SetCardInfo("Garruk, the Veil-Cursed", 49, Rarity.MYTHIC, mage.cards.g.GarrukTheVeilCursed.class));
         cards.add(new SetCardInfo("Geist of Saint Traft", 62, Rarity.MYTHIC, mage.cards.g.GeistOfSaintTraft.class));
         cards.add(new SetCardInfo("Ghoulraiser", 30, Rarity.COMMON, mage.cards.g.Ghoulraiser.class));
         cards.add(new SetCardInfo("Gnaw to the Bone", 50, Rarity.COMMON, mage.cards.g.GnawToTheBone.class));
@@ -64,14 +63,12 @@ public class ShadowsOfThePast extends ExpansionSet {
         cards.add(new SetCardInfo("Havengul Lich", 63, Rarity.MYTHIC, mage.cards.h.HavengulLich.class));
         cards.add(new SetCardInfo("Havengul Runebinder", 16, Rarity.RARE, mage.cards.h.HavengulRunebinder.class));
         cards.add(new SetCardInfo("Hollowhenge Scavenger", 52, Rarity.COMMON, mage.cards.h.HollowhengeScavenger.class));
-        cards.add(new SetCardInfo("Howlpack Alpha", 53, Rarity.RARE, mage.cards.h.HowlpackAlpha.class));
         cards.add(new SetCardInfo("Huntmaster of the Fells", 64, Rarity.MYTHIC, mage.cards.h.HuntmasterOfTheFells.class));
         cards.add(new SetCardInfo("Immerwolf", 65, Rarity.UNCOMMON, mage.cards.i.Immerwolf.class));
         cards.add(new SetCardInfo("Increasing Ambition", 32, Rarity.RARE, mage.cards.i.IncreasingAmbition.class));
         cards.add(new SetCardInfo("Invisible Stalker", 17, Rarity.UNCOMMON, mage.cards.i.InvisibleStalker.class));
         cards.add(new SetCardInfo("Kruin Outlaw", 42, Rarity.RARE, mage.cards.k.KruinOutlaw.class));
         cards.add(new SetCardInfo("Lingering Souls", 9, Rarity.UNCOMMON, mage.cards.l.LingeringSouls.class));
-        cards.add(new SetCardInfo("Lord of Lineage", 27, Rarity.MYTHIC, mage.cards.l.LordOfLineage.class));
         cards.add(new SetCardInfo("Mayor of Avabruck", 53, Rarity.RARE, mage.cards.m.MayorOfAvabruck.class));
         cards.add(new SetCardInfo("Mist Raven", 18, Rarity.COMMON, mage.cards.m.MistRaven.class));
         cards.add(new SetCardInfo("Moonmist", 54, Rarity.COMMON, mage.cards.m.Moonmist.class));
@@ -79,7 +76,6 @@ public class ShadowsOfThePast extends ExpansionSet {
         cards.add(new SetCardInfo("Mystic Retrieval", 20, Rarity.UNCOMMON, mage.cards.m.MysticRetrieval.class));
         cards.add(new SetCardInfo("Past in Flames", 43, Rarity.MYTHIC, mage.cards.p.PastInFlames.class));
         cards.add(new SetCardInfo("Rally the Peasants", 10, Rarity.UNCOMMON, mage.cards.r.RallyThePeasants.class));
-        cards.add(new SetCardInfo("Ravager of the Fells", 64, Rarity.MYTHIC, mage.cards.r.RavagerOfTheFells.class));
         cards.add(new SetCardInfo("Requiem Angel", 11, Rarity.RARE, mage.cards.r.RequiemAngel.class));
         cards.add(new SetCardInfo("Seance", 12, Rarity.UNCOMMON, mage.cards.s.Seance.class));
         cards.add(new SetCardInfo("Selhoff Occultist", 21, Rarity.COMMON, mage.cards.s.SelhoffOccultist.class));
@@ -93,7 +89,6 @@ public class ShadowsOfThePast extends ExpansionSet {
         cards.add(new SetCardInfo("Spider Spawning", 56, Rarity.UNCOMMON, mage.cards.s.SpiderSpawning.class));
         cards.add(new SetCardInfo("Stitcher's Apprentice", 24, Rarity.COMMON, mage.cards.s.StitchersApprentice.class));
         cards.add(new SetCardInfo("Stromkirk Captain", 67, Rarity.UNCOMMON, mage.cards.s.StromkirkCaptain.class));
-        cards.add(new SetCardInfo("Terror of Kruin Pass", 42, Rarity.RARE, mage.cards.t.TerrorOfKruinPass.class));
         cards.add(new SetCardInfo("Tragic Slip", 35, Rarity.COMMON, mage.cards.t.TragicSlip.class));
         cards.add(new SetCardInfo("Traitorous Blood", 45, Rarity.COMMON, mage.cards.t.TraitorousBlood.class));
         cards.add(new SetCardInfo("Travel Preparations", 57, Rarity.COMMON, mage.cards.t.TravelPreparations.class));

@@ -8,8 +8,7 @@ import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TimingRule;
-import mage.game.permanent.token.BeastToken2;
+import mage.game.permanent.token.Beast44Token;
 
 /**
  *
@@ -21,7 +20,7 @@ public final class BeastAttack extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}{G}{G}");
 
         // Create a 4/4 green Beast creature token.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new BeastToken2()));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new Beast44Token()));
 
         // Flashback {2}{G}{G}{G}
         this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{2}{G}{G}{G}")));

@@ -1,18 +1,21 @@
 package mage.cards.v;
 
-import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.DiesThisOrAnotherTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
+import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.TransformAbility;
-import mage.cards.CardImpl;
+import mage.abilities.keyword.HasteAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
@@ -23,41 +26,64 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.BloodToken;
+import mage.game.permanent.token.custom.CreatureToken;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
 /**
  * @author TheElk801
  */
-public final class VoldarenBloodcaster extends CardImpl {
+public final class VoldarenBloodcaster extends TransformingDoubleFacedCard {
 
     private static final FilterPermanent filter
             = new FilterControlledCreaturePermanent("nontoken creature you control");
+    private static final FilterPermanent filter2
+            = new FilterControlledPermanent(SubType.BLOOD, "Blood token you control");
 
     static {
         filter.add(TokenPredicate.FALSE);
+        filter2.add(TokenPredicate.TRUE);
     }
 
     public VoldarenBloodcaster(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.VAMPIRE, SubType.WIZARD}, "{1}{B}",
+                "Bloodbat Summoner",
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.VAMPIRE, SubType.WIZARD}, "B"
+        );
 
-        this.subtype.add(SubType.VAMPIRE);
-        this.subtype.add(SubType.WIZARD);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
-        this.secondSideCardClazz = mage.cards.b.BloodbatSummoner.class;
+        // Voldaren Bloodcaster
+        this.getLeftHalfCard().setPT(2, 1);
 
         // Flying
-        this.addAbility(FlyingAbility.getInstance());
+        this.getLeftHalfCard().addAbility(FlyingAbility.getInstance());
 
         // Whenever Voldaren Bloodcaster or another nontoken creature you control dies, create a Blood token.
-        this.addAbility(new DiesThisOrAnotherTriggeredAbility(
+        this.getLeftHalfCard().addAbility(new DiesThisOrAnotherTriggeredAbility(
                 new CreateTokenEffect(new BloodToken()), false, filter
         ));
 
         // Whenever you create a Blood token, if you control five or more Blood tokens, transform Voldaren Bloodcaster.
-        this.addAbility(new TransformAbility());
-        this.addAbility(new VoldarenBloodcasterTriggeredAbility());
+        this.getLeftHalfCard().addAbility(new VoldarenBloodcasterTriggeredAbility());
+
+        // Bloodbat Summoner
+        this.getRightHalfCard().setPT(3, 3);
+
+        // Flying
+        this.getRightHalfCard().addAbility(FlyingAbility.getInstance());
+
+        // At the beginning of combat on your turn, up to one target Blood token you control becomes a 2/2 black Bat creature with flying and haste in addition to its other types.
+        Ability ability = new BeginningOfCombatTriggeredAbility(new BecomesCreatureTargetEffect(
+                new CreatureToken(2, 2, "", SubType.BAT)
+                        .withAbility(FlyingAbility.getInstance())
+                        .withAbility(HasteAbility.getInstance())
+                        .withColor("B"),
+                false, false, Duration.Custom
+        ).setText("up to one target Blood token you control becomes a " +
+                "2/2 black Bat creature with flying and haste in addition to its other types"));
+        ability.addTarget(new TargetPermanent(0, 1, filter2));
+        this.getRightHalfCard().addAbility(ability);
     }
 
     private VoldarenBloodcaster(final VoldarenBloodcaster card) {

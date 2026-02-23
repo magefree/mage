@@ -1,26 +1,23 @@
 package mage.cards.s;
 
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.TransformSourceEffect;
+import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueConditionHint;
-import mage.abilities.keyword.TransformAbility;
 import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.Card;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.WatcherScope;
+import mage.cards.TransformingDoubleFacedCard;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.ObjectSourcePlayer;
@@ -38,7 +35,7 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class SerahFarron extends CardImpl {
+public final class SerahFarron extends TransformingDoubleFacedCard {
 
     private static final FilterCard filter
             = new FilterCreatureCard("the first legendary creature spell you cast each turn");
@@ -59,23 +56,32 @@ public final class SerahFarron extends CardImpl {
     );
 
     public SerahFarron(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{W}");
+        super(ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.CITIZEN}, "{1}{G}{W}",
+                "Crystallized Serah",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.ARTIFACT}, new SubType[]{}, "WG");
 
-        this.supertype.add(SuperType.LEGENDARY);
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.CITIZEN);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-        this.secondSideCardClazz = mage.cards.c.CrystallizedSerah.class;
+        // Serah Farron
+        this.getLeftHalfCard().setPT(2, 2);
 
         // The first legendary creature spell you cast each turn costs {2} less to cast.
-        this.addAbility(makeAbility(), new SerahFarronWatcher());
+        Ability ability = new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 2));
+        ability.addWatcher(new SerahFarronWatcher());
+        this.getLeftHalfCard().addAbility(ability);
 
         // At the beginning of combat on your turn, if you control two or more other legendary creatures, you may transform Serah Farron.
-        this.addAbility(new TransformAbility());
-        this.addAbility(new BeginningOfCombatTriggeredAbility(
+        this.getLeftHalfCard().addAbility(new BeginningOfCombatTriggeredAbility(
                 new TransformSourceEffect(), true
         ).withInterveningIf(condition).addHint(hint));
+
+        // Crystallized Serah
+        // The first legendary creature spell you cast each turn costs {2} less to cast.
+        this.getRightHalfCard().addAbility(ability.copy());
+
+        // Legendary creatures you control get +2/+2.
+        this.getRightHalfCard().addAbility(new SimpleStaticAbility(new BoostControlledEffect(
+                2, 2, Duration.WhileOnBattlefield, StaticFilters.FILTER_CREATURES_LEGENDARY
+        )));
     }
 
     private SerahFarron(final SerahFarron card) {
@@ -86,11 +92,6 @@ public final class SerahFarron extends CardImpl {
     public SerahFarron copy() {
         return new SerahFarron(this);
     }
-
-    public static Ability makeAbility() {
-        return new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 2));
-    }
-
 }
 
 enum SerahFarronPredicate implements ObjectSourcePlayerPredicate<Card> {

@@ -66,7 +66,7 @@ public class DamageTargetAndTargetEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return "{this} deals " + firstAmount + "damage to " + mode.getTargets().getByTag(1).getDescription() +
-                " and " + secondAmount + "damage to " + mode.getTargets().getByTag(2).getDescription();
+        return "{this} deals " + firstAmount + " damage to " + mode.getTargets().getByTag(1).getDescription() +
+                " and " + secondAmount + " damage to " + mode.getTargets().getByTag(2).getDescription();
     }
 }

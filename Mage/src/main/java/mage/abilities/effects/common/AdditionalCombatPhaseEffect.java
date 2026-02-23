@@ -13,9 +13,7 @@ public class AdditionalCombatPhaseEffect extends OneShotEffect {
     private final int additionalPhases;
 
     public AdditionalCombatPhaseEffect() {
-        super(Outcome.Benefit);
-        this.additionalPhases = 1;
-        staticText = "after this phase, there is an additional combat phase";
+        this(1);
     }
 
     public AdditionalCombatPhaseEffect(int additionalPhases) {
@@ -23,13 +21,11 @@ public class AdditionalCombatPhaseEffect extends OneShotEffect {
         if (additionalPhases < 1) {
             throw new IllegalArgumentException("Number of additional phases must be at least 1");
         }
-        if (additionalPhases == 1) {
-            this.additionalPhases = 1;
-            staticText = "after this phase, there is an additional combat phase";
-        } else {
-            this.additionalPhases = additionalPhases;
-            staticText = "after this phase, there are " + additionalPhases + " additional combat phases";
-        }
+        this.additionalPhases = additionalPhases;
+        staticText = "after this phase, there " +
+                (additionalPhases > 1 ? "are " + additionalPhases : "is an") +
+                " additional combat phase" +
+                (additionalPhases > 1 ? "s" : "");
     }
 
     protected AdditionalCombatPhaseEffect(final AdditionalCombatPhaseEffect effect) {

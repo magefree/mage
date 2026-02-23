@@ -41,7 +41,8 @@ public final class SuperiorSpiderMan extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Mind Swap -- You may have Superior Spider-Man enter as a copy of any creature card in a graveyard, except his name is Superior Spider-Man and he's a 4/4 Spider Human Hero in addition to his other types. When you do, exile that card.
-        this.addAbility(new EntersBattlefieldAbility(new SuperiorSpiderManCopyEffect(), true));
+        this.addAbility(new EntersBattlefieldAbility(new SuperiorSpiderManCopyEffect(), true)
+                .withFlavorWord("Mind Swap"));
     }
 
     private SuperiorSpiderMan(final SuperiorSpiderMan card) {

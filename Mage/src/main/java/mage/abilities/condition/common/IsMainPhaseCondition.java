@@ -1,4 +1,3 @@
-
 package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
@@ -10,23 +9,22 @@ import mage.game.Game;
  */
 public enum IsMainPhaseCondition implements Condition {
 
-    YOUR(true),
-    ANY(false);
+    YOURS(true),
+    NOT_YOURS(false);
 
-    private final boolean yourMainPhaseOnly;
+    private final boolean yours;
 
-    IsMainPhaseCondition(boolean yourMainPhaseOnly) {
-        this.yourMainPhaseOnly = yourMainPhaseOnly;
+    IsMainPhaseCondition(boolean yours) {
+        this.yours = yours;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return game.getTurnPhaseType().isMain() &&
-                (!yourMainPhaseOnly || game.getActivePlayerId().equals(source.getControllerId()));
+        return game.getTurnPhaseType().isMain() && yours == game.isActivePlayer(source.getControllerId());
     }
 
     @Override
     public String toString() {
-        return "it's" + (yourMainPhaseOnly ? " your " : " ") + "main phase";
+        return "it" + (yours ? "'s" : " isn't") + " your main phase";
     }
 }

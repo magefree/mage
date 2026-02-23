@@ -35,7 +35,7 @@ public final class BumisFeastLecture extends CardImpl {
 
         // Create a Food token. Then earthbend X, where X is twice the number of Foods you control.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new FoodToken()));
-        this.getSpellAbility().addEffect(new EarthbendTargetEffect(xValue).concatBy("Then"));
+        this.getSpellAbility().addEffect(new EarthbendTargetEffect(xValue, true).concatBy("Then"));
         this.getSpellAbility().addTarget(new TargetControlledLandPermanent());
         this.getSpellAbility().addHint(hint);
     }

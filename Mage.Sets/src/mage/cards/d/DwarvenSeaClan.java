@@ -42,7 +42,7 @@ public final class DwarvenSeaClan extends CardImpl {
         // {tap}: Choose target attacking or blocking creature whose controller controls an Island. Dwarven Sea Clan deals 2 damage to that creature at end of combat. Activate this ability only before the end of combat step.
         Ability ability = new ActivateIfConditionActivatedAbility(
                 new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(
-                        new DamageTargetEffect(2, true, "that creature")
+                        new DamageTargetEffect(2).withTargetDescription("that creature")
                 )).setText("Choose target attacking or blocking creature whose controller controls an Island. " +
                         "{this} deals 2 damage to that creature at end of combat."),
                 new TapSourceCost(), BeforeEndCombatCondition.getInstance()

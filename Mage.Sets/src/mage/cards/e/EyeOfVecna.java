@@ -1,12 +1,12 @@
 package mage.cards.e;
 
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -26,19 +26,15 @@ public final class EyeOfVecna extends CardImpl {
 
         // When Eye of Vecna enters the battlefield, you draw a card and you lose 2 life.
         Ability ability = new EntersBattlefieldTriggeredAbility(
-                new DrawCardSourceControllerEffect(1).setText("you draw a card")
+                new DrawCardSourceControllerEffect(1, true)
         );
         ability.addEffect(new LoseLifeSourceControllerEffect(2).concatBy("and"));
         this.addAbility(ability);
 
         // At the beginning of your upkeep, you may pay {2}. If you do, you draw a card and you lose 2 life.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new DoIfCostPaid(
-                        new DrawCardSourceControllerEffect(1)
-                                .setText("you draw a card"),
-                        new GenericManaCost(2)
-                ).addEffect(new LoseLifeSourceControllerEffect(2).concatBy("and"))
-        ));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DoIfCostPaid(
+                new DrawCardSourceControllerEffect(1, true), new GenericManaCost(2)
+        ).addEffect(new LoseLifeSourceControllerEffect(2).concatBy("and"))));
     }
 
     private EyeOfVecna(final EyeOfVecna card) {

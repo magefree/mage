@@ -33,6 +33,7 @@ public final class GempalmSorcerer extends CardImpl {
 
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
+        this.subtype.add(SubType.SORCERER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

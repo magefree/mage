@@ -46,7 +46,7 @@ public final class CoriSteelCutter extends CardImpl {
         )));
 
         // Equip {1}{R}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{1}{R}")));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{1}{R}"), false));
     }
 
     private CoriSteelCutter(final CoriSteelCutter card) {

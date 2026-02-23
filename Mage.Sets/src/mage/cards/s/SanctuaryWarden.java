@@ -1,13 +1,12 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.costs.common.RemoveCounterCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -48,11 +47,7 @@ public final class SanctuaryWarden extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Sanctuary Warden enters the battlefield with two shield counters on it.
-        this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.SHIELD.createInstance(2)),
-                "with two shield counters on it. <i>(If it would be dealt damage "
-                + "or destroyed, remove a shield counter from it instead.)</i>"
-        ));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.SHIELD.createInstance(2)));
 
         // Whenever Sanctuary Warden enters the battlefield or attacks, you may remove a counter from a creature or planeswalker you control. If you do, draw a card and create a 1/1 green and white Citizen creature token.
         this.addAbility(new EntersBattlefieldOrAttacksSourceTriggeredAbility(

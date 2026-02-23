@@ -29,6 +29,7 @@ public final class DakmorSorceress extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
+        this.subtype.add(SubType.SORCERER);
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);
 

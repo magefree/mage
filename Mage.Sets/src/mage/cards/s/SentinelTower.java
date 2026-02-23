@@ -5,7 +5,7 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastAllTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.hint.ValueHint;
@@ -50,7 +50,7 @@ class SentinelTowerTriggeredAbility extends SpellCastAllTriggeredAbility {
     private String damageInfo;
 
     SentinelTowerTriggeredAbility() {
-        super(new DamageTargetEffect(0), StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, false);
+        super(new DamageTargetEffect(SavedDamageValue.MUCH), StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, false);
         this.addTarget(new TargetAnyTarget());
         this.addHint(new ValueHint("There were cast instant and sorcery this turn", SentinelTowerSpellsCastValue.instance));
         this.damageInfo = null;
@@ -87,12 +87,7 @@ class SentinelTowerTriggeredAbility extends SpellCastAllTriggeredAbility {
                 }
             }
             damageInfo = " (<b>" + damageToDeal + " damage</b>)";
-            for (Effect effect : this.getEffects()) {
-                if (effect instanceof DamageTargetEffect) {
-                    ((DamageTargetEffect) effect).setAmount(StaticValue.get(damageToDeal));
-                    return true;
-                }
-            }
+            this.getEffects().setValue("damage", damageToDeal);
         }
         return false;
     }

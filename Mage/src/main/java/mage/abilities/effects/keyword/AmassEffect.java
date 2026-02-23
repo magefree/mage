@@ -24,6 +24,9 @@ import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
+import java.util.Set;
+import java.util.UUID;
+
 /**
  * @author TheElk801
  */
@@ -99,23 +102,36 @@ public class AmassEffect extends OneShotEffect {
         if (!game.getBattlefield().contains(filter, source, game, 1)) {
             makeToken(subType).putOntoBattlefield(1, game, source);
         }
+
         Target target = new TargetPermanent(filter);
         target.withNotTarget(true);
-        player.choose(Outcome.BoostCreature, target, source, game);
-        Permanent permanent = game.getPermanent(target.getFirstTarget());
-        if (permanent == null) {
+        Permanent armyPermanent;
+        Set<UUID> possibleTargets = target.possibleTargets(source.getControllerId(), source, game);
+        if (possibleTargets.isEmpty()) {
             return null;
         }
-        if (!permanent.hasSubtype(subType, game)) {
+        // only one possible option, don't prompt user to click permanent
+        if (possibleTargets.size() == 1) {
+            armyPermanent = game.getPermanent(possibleTargets.iterator().next());
+        }
+        else {
+            player.choose(Outcome.BoostCreature, target, source, game);
+            armyPermanent = game.getPermanent(target.getFirstTarget());
+        }
+
+        if (armyPermanent == null) {
+            return null;
+        }
+        if (!armyPermanent.hasSubtype(subType, game)) {
             game.addEffect(new AddCardSubTypeTargetEffect(subType, Duration.Custom)
-                    .setTargetPointer(new FixedTarget(permanent, game)), source);
+                    .setTargetPointer(new FixedTarget(armyPermanent, game)), source);
         }
         if (xValue > 0) {
-            permanent.addCounters(
+            armyPermanent.addCounters(
                     CounterType.P1P1.createInstance(xValue),
                     source.getControllerId(), source, game
             );
         }
-        return permanent;
+        return armyPermanent;
     }
 }

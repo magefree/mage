@@ -42,7 +42,7 @@ public final class TophEarthbendingMaster extends CardImpl {
         )));
 
         // Whenever you attack, earthbend X, where X is the number of experience counters you have.
-        Ability ability = new AttacksWithCreaturesTriggeredAbility(new EarthbendTargetEffect(xValue), 1);
+        Ability ability = new AttacksWithCreaturesTriggeredAbility(new EarthbendTargetEffect(xValue, true), 1);
         ability.addTarget(new TargetControlledLandPermanent());
         this.addAbility(ability);
     }

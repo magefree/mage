@@ -14,7 +14,7 @@ import mage.constants.SagaChapter;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
-import mage.game.permanent.token.NoFlyingSpiritWhiteToken;
+import mage.game.permanent.token.NoFlyingSpiritWhite11Token;
 import mage.target.common.TargetPermanentAmount;
 
 import java.util.UUID;
@@ -35,7 +35,7 @@ public final class RevivalOfTheAncestors extends CardImpl {
         // I -- Create three 1/1 white Spirit creature tokens.
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_I,
-                new CreateTokenEffect(new NoFlyingSpiritWhiteToken(), 3)
+                new CreateTokenEffect(new NoFlyingSpiritWhite11Token(), 3)
         );
 
         // II -- Distribute three +1/+1 counters among one, two, or three target creatures you control.

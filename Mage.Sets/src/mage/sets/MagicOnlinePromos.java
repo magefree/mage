@@ -4,9 +4,6 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * https://scryfall.com/sets/prm
  */
@@ -103,7 +100,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Angel of Suffering", 99767, Rarity.MYTHIC, mage.cards.a.AngelOfSuffering.class));
         cards.add(new SetCardInfo("Angel of the Ruins", 90002, Rarity.RARE, mage.cards.a.AngelOfTheRuins.class));
         cards.add(new SetCardInfo("Angelfire Ignition", 94080, Rarity.RARE, mage.cards.a.AngelfireIgnition.class));
-        cards.add(new SetCardInfo("Angelic Enforcer", 93888, Rarity.MYTHIC, mage.cards.a.AngelicEnforcer.class));
         cards.add(new SetCardInfo("Angelic Sleuth", 99921, Rarity.RARE, mage.cards.a.AngelicSleuth.class));
         cards.add(new SetCardInfo("Anger of the Gods", 102265, Rarity.RARE, mage.cards.a.AngerOfTheGods.class));
         cards.add(new SetCardInfo("Angrath, Captain of Chaos", 72237, Rarity.UNCOMMON, mage.cards.a.AngrathCaptainOfChaos.class, NON_FULL_USE_VARIOUS));
@@ -139,12 +135,10 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Arcbound Ravager", 72888, Rarity.RARE, mage.cards.a.ArcboundRavager.class));
         cards.add(new SetCardInfo("Archaeomancer's Map", 90008, Rarity.RARE, mage.cards.a.ArchaeomancersMap.class));
         cards.add(new SetCardInfo("Archangel of Wrath", 103392, Rarity.RARE, mage.cards.a.ArchangelOfWrath.class));
-        cards.add(new SetCardInfo("Archdemon of Greed", 43503, Rarity.RARE, mage.cards.a.ArchdemonOfGreed.class));
         cards.add(new SetCardInfo("Archelos, Lagoon Mystic", 86334, Rarity.RARE, mage.cards.a.ArchelosLagoonMystic.class));
         cards.add(new SetCardInfo("Archfiend of Depravity", 55711, Rarity.RARE, mage.cards.a.ArchfiendOfDepravity.class));
         cards.add(new SetCardInfo("Archfiend of Ifnir", 64422, Rarity.RARE, mage.cards.a.ArchfiendOfIfnir.class));
         cards.add(new SetCardInfo("Archipelagore", 81005, Rarity.UNCOMMON, mage.cards.a.Archipelagore.class));
-        cards.add(new SetCardInfo("Architect of Restoration", 97897, Rarity.RARE, mage.cards.a.ArchitectOfRestoration.class));
         cards.add(new SetCardInfo("Archmage Emeritus", 90016, Rarity.RARE, mage.cards.a.ArchmageEmeritus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Archmage Emeritus", 90018, Rarity.RARE, mage.cards.a.ArchmageEmeritus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Archmage's Charm", 91233, Rarity.RARE, mage.cards.a.ArchmagesCharm.class, RETRO_ART));
@@ -159,7 +153,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Argivian Archaeologist", 219, Rarity.RARE, mage.cards.a.ArgivianArchaeologist.class, RETRO_ART));
         cards.add(new SetCardInfo("Argothian Enchantress", 36104, Rarity.RARE, mage.cards.a.ArgothianEnchantress.class, RETRO_ART));
         cards.add(new SetCardInfo("Arid Mesa", 91405, Rarity.RARE, mage.cards.a.AridMesa.class));
-        cards.add(new SetCardInfo("Arlinn, the Moon's Fury", 94060, Rarity.MYTHIC, mage.cards.a.ArlinnTheMoonsFury.class));
         cards.add(new SetCardInfo("Arlinn, the Pack's Hope", 94060, Rarity.MYTHIC, mage.cards.a.ArlinnThePacksHope.class));
         cards.add(new SetCardInfo("Arlinn, Voice of the Pack", 72239, Rarity.UNCOMMON, mage.cards.a.ArlinnVoiceOfThePack.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arlinn, Voice of the Pack", 77973, Rarity.UNCOMMON, mage.cards.a.ArlinnVoiceOfThePack.class, NON_FULL_USE_VARIOUS));
@@ -180,7 +173,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Ashiok, Dream Render", 72259, Rarity.UNCOMMON, mage.cards.a.AshiokDreamRender.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ashiok, Dream Render", 77993, Rarity.UNCOMMON, mage.cards.a.AshiokDreamRender.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ashiok, Nightmare Muse", 79847, Rarity.MYTHIC, mage.cards.a.AshiokNightmareMuse.class));
-        cards.add(new SetCardInfo("Ashmouth Dragon", 94012, Rarity.RARE, mage.cards.a.AshmouthDragon.class));
         cards.add(new SetCardInfo("Ashnod the Uncaring", 105806, Rarity.MYTHIC, mage.cards.a.AshnodTheUncaring.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ashnod the Uncaring", 105808, Rarity.MYTHIC, mage.cards.a.AshnodTheUncaring.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Ashnod, Flesh Mechanist", 105688, Rarity.RARE, mage.cards.a.AshnodFleshMechanist.class));
@@ -254,7 +246,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Beledros Witherbloom", 90318, Rarity.MYTHIC, mage.cards.b.BeledrosWitherbloom.class));
         cards.add(new SetCardInfo("Bell Borca, Spectral Sergeant", 86308, Rarity.RARE, mage.cards.b.BellBorcaSpectralSergeant.class));
         cards.add(new SetCardInfo("Bellowing Mauler", 99853, Rarity.RARE, mage.cards.b.BellowingMauler.class));
-        cards.add(new SetCardInfo("Benevolent Geist", 93950, Rarity.RARE, mage.cards.b.BenevolentGeist.class));
         cards.add(new SetCardInfo("Bennie Bracks, Zoologist", 99815, Rarity.MYTHIC, mage.cards.b.BennieBracksZoologist.class));
         cards.add(new SetCardInfo("Bident of Thassa", 50114, Rarity.RARE, mage.cards.b.BidentOfThassa.class));
         cards.add(new SetCardInfo("Bile Blight", 53838, Rarity.UNCOMMON, mage.cards.b.BileBlight.class));
@@ -539,7 +530,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Crash the Party", 99839, Rarity.RARE, mage.cards.c.CrashTheParty.class));
         cards.add(new SetCardInfo("Crawling Barrens", 83732, Rarity.RARE, mage.cards.c.CrawlingBarrens.class));
         cards.add(new SetCardInfo("Creative Technique", 90122, Rarity.RARE, mage.cards.c.CreativeTechnique.class));
-        cards.add(new SetCardInfo("Creeping Inn", 94088, Rarity.MYTHIC, mage.cards.c.CreepingInn.class));
         cards.add(new SetCardInfo("Creeping Mold", 32525, Rarity.UNCOMMON, mage.cards.c.CreepingMold.class, RETRO_ART));
         cards.add(new SetCardInfo("Creepy Puppeteer", 95365, Rarity.RARE, mage.cards.c.CreepyPuppeteer.class));
         cards.add(new SetCardInfo("Crippling Fear", 88286, Rarity.RARE, mage.cards.c.CripplingFear.class));
@@ -669,7 +659,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Dimir Guildmage", 32579, Rarity.UNCOMMON, mage.cards.d.DimirGuildmage.class));
         cards.add(new SetCardInfo("Dimir Signet", 46924, Rarity.UNCOMMON, mage.cards.d.DimirSignet.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dimir Signet", 62435, Rarity.COMMON, mage.cards.d.DimirSignet.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Dire-Strain Anarchist", 95397, Rarity.MYTHIC, mage.cards.d.DireStrainAnarchist.class));
         cards.add(new SetCardInfo("Dire-Strain Rampage", 94070, Rarity.RARE, mage.cards.d.DireStrainRampage.class));
         cards.add(new SetCardInfo("Diregraf Ghoul", 42882, Rarity.UNCOMMON, mage.cards.d.DiregrafGhoul.class));
         cards.add(new SetCardInfo("Dirge Bat", 80935, Rarity.RARE, mage.cards.d.DirgeBat.class, NON_FULL_USE_VARIOUS));
@@ -714,7 +703,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Dragon Broodmother", 32553, Rarity.MYTHIC, mage.cards.d.DragonBroodmother.class));
         cards.add(new SetCardInfo("Dragon Fodder", 55898, Rarity.COMMON, mage.cards.d.DragonFodder.class));
         cards.add(new SetCardInfo("Dragon Throne of Tarkir", 54565, Rarity.RARE, mage.cards.d.DragonThroneOfTarkir.class));
-        cards.add(new SetCardInfo("Dragon-Kami's Egg", 98051, Rarity.RARE, mage.cards.d.DragonKamisEgg.class));
         cards.add(new SetCardInfo("Dragonkin Berserker", 88310, Rarity.RARE, mage.cards.d.DragonkinBerserker.class));
         cards.add(new SetCardInfo("Dragonlord Dromoka", 102319, Rarity.MYTHIC, mage.cards.d.DragonlordDromoka.class));
         cards.add(new SetCardInfo("Dragonlord's Servant", 55884, Rarity.UNCOMMON, mage.cards.d.DragonlordsServant.class));
@@ -760,7 +748,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Eater of Hope", 51918, Rarity.RARE, mage.cards.e.EaterOfHope.class));
         cards.add(new SetCardInfo("Eater of Virtue", 98111, Rarity.RARE, mage.cards.e.EaterOfVirtue.class));
         cards.add(new SetCardInfo("Ebondeath, Dracolich", 92692, Rarity.MYTHIC, mage.cards.e.EbondeathDracolich.class));
-        cards.add(new SetCardInfo("Echo of Death's Wail", 97969, Rarity.RARE, mage.cards.e.EchoOfDeathsWail.class));
         cards.add(new SetCardInfo("Echo of Eons", 95469, Rarity.RARE, mage.cards.e.EchoOfEons.class));
         cards.add(new SetCardInfo("Ecological Appreciation", 90166, Rarity.MYTHIC, mage.cards.e.EcologicalAppreciation.class));
         cards.add(new SetCardInfo("Eerie Ultimatum", 80895, Rarity.RARE, mage.cards.e.EerieUltimatum.class));
@@ -972,7 +959,7 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 40050, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 40060, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 40094, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Forest", 53875, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_ZEN_VARIOUS ));
+        cards.add(new SetCardInfo("Forest", 53875, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_ZEN_VARIOUS));
         cards.add(new SetCardInfo("Forest", 58261, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 73628, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 81872, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
@@ -1045,7 +1032,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Getaway Car", 99727, Rarity.RARE, mage.cards.g.GetawayCar.class));
         cards.add(new SetCardInfo("Geyadrone Dihada", 91329, Rarity.MYTHIC, mage.cards.g.GeyadroneDihada.class));
         cards.add(new SetCardInfo("Ghalta, Primal Hunger", 66896, Rarity.RARE, mage.cards.g.GhaltaPrimalHunger.class));
-        cards.add(new SetCardInfo("Ghastly Mimicry", 95313, Rarity.RARE, mage.cards.g.GhastlyMimicry.class));
         cards.add(new SetCardInfo("Ghen, Arcanum Weaver", 86340, Rarity.RARE, mage.cards.g.GhenArcanumWeaver.class));
         cards.add(new SetCardInfo("Ghor-Clan Rampager", 50110, Rarity.UNCOMMON, mage.cards.g.GhorClanRampager.class));
         cards.add(new SetCardInfo("Ghost of Ramirez DePietro", 86286, Rarity.UNCOMMON, mage.cards.g.GhostOfRamirezDePietro.class));
@@ -1078,6 +1064,7 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Gladehart Cavalry", 59661, Rarity.RARE, mage.cards.g.GladehartCavalry.class));
         cards.add(new SetCardInfo("Glasspool Mimic", 83872, Rarity.RARE, mage.cards.g.GlasspoolMimic.class));
         cards.add(new SetCardInfo("Gleancrawler", 32017, Rarity.RARE, mage.cards.g.Gleancrawler.class));
+        cards.add(new SetCardInfo("Gleemox", 26584, Rarity.RARE, mage.cards.g.Gleemox.class));
         cards.add(new SetCardInfo("Glimpse of Tomorrow", 91287, Rarity.RARE, mage.cards.g.GlimpseOfTomorrow.class));
         cards.add(new SetCardInfo("Glimpse the Unthinkable", 102297, Rarity.RARE, mage.cards.g.GlimpseTheUnthinkable.class));
         cards.add(new SetCardInfo("Glint Raker", 105660, Rarity.RARE, mage.cards.g.GlintRaker.class, NON_FULL_USE_VARIOUS));
@@ -1233,7 +1220,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Hoard Hauler", 99747, Rarity.RARE, mage.cards.h.HoardHauler.class));
         cards.add(new SetCardInfo("Hobgoblin Bandit Lord", 92734, Rarity.RARE, mage.cards.h.HobgoblinBanditLord.class));
         cards.add(new SetCardInfo("Hofri Ghostforge", 90278, Rarity.MYTHIC, mage.cards.h.HofriGhostforge.class));
-        cards.add(new SetCardInfo("Hollowhenge Huntmaster", 95433, Rarity.MYTHIC, mage.cards.h.HollowhengeHuntmaster.class));
         cards.add(new SetCardInfo("Hollowhenge Overlord", 95419, Rarity.RARE, mage.cards.h.HollowhengeOverlord.class));
         cards.add(new SetCardInfo("Honor of the Pure", 43554, Rarity.RARE, mage.cards.h.HonorOfThePure.class));
         cards.add(new SetCardInfo("Honored Hierarch", 57598, Rarity.RARE, mage.cards.h.HonoredHierarch.class));
@@ -1246,8 +1232,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Hostile Hostel", 94088, Rarity.MYTHIC, mage.cards.h.HostileHostel.class));
         cards.add(new SetCardInfo("Hostile Negotiations", 105712, Rarity.RARE, mage.cards.h.HostileNegotiations.class));
         cards.add(new SetCardInfo("Howling Moon", 95417, Rarity.RARE, mage.cards.h.HowlingMoon.class));
-        cards.add(new SetCardInfo("Howlpack Alpha", 42866, Rarity.RARE, mage.cards.h.HowlpackAlpha.class));
-        cards.add(new SetCardInfo("Howlpack Avenger", 95389, Rarity.RARE, mage.cards.h.HowlpackAvenger.class));
         cards.add(new SetCardInfo("Howlpack Piper", 95425, Rarity.RARE, mage.cards.h.HowlpackPiper.class));
         cards.add(new SetCardInfo("Huatli, the Sun's Heart", 72241, Rarity.UNCOMMON, mage.cards.h.HuatliTheSunsHeart.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Huatli, the Sun's Heart", 77975, Rarity.UNCOMMON, mage.cards.h.HuatliTheSunsHeart.class, NON_FULL_USE_VARIOUS));
@@ -1320,7 +1304,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Inscription of Abundance", 83728, Rarity.RARE, mage.cards.i.InscriptionOfAbundance.class));
         cards.add(new SetCardInfo("Inscription of Insight", 83802, Rarity.RARE, mage.cards.i.InscriptionOfInsight.class));
         cards.add(new SetCardInfo("Inscription of Ruin", 83798, Rarity.RARE, mage.cards.i.InscriptionOfRuin.class));
-        cards.add(new SetCardInfo("Insidious Mist", 60472, Rarity.RARE, mage.cards.i.InsidiousMist.class));
         cards.add(new SetCardInfo("Inspired Idea", 95307, Rarity.RARE, mage.cards.i.InspiredIdea.class));
         cards.add(new SetCardInfo("Inspired Ultimatum", 80899, Rarity.RARE, mage.cards.i.InspiredUltimatum.class));
         cards.add(new SetCardInfo("Inspiring Refrain", 90034, Rarity.RARE, mage.cards.i.InspiringRefrain.class));
@@ -1352,7 +1335,7 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 40052, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 40062, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 40100, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Island", 53881, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_ZEN_VARIOUS ));
+        cards.add(new SetCardInfo("Island", 53881, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_ZEN_VARIOUS));
         cards.add(new SetCardInfo("Island", 58255, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 73634, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 81846, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
@@ -1470,7 +1453,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Kiora, Behemoth Beckoner", 78027, Rarity.UNCOMMON, mage.cards.k.KioraBehemothBeckoner.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kiora, the Crashing Wave", 59651, Rarity.MYTHIC, mage.cards.k.KioraTheCrashingWave.class));
         cards.add(new SetCardInfo("Kird Ape", 31383, Rarity.UNCOMMON, mage.cards.k.KirdApe.class));
-        cards.add(new SetCardInfo("Kirin-Touched Orochi", 98047, Rarity.RARE, mage.cards.k.KirinTouchedOrochi.class));
         cards.add(new SetCardInfo("Kitchen Finks", 36166, Rarity.UNCOMMON, mage.cards.k.KitchenFinks.class));
         cards.add(new SetCardInfo("Kiyomaro, First to Stand", 32015, Rarity.RARE, mage.cards.k.KiyomaroFirstToStand.class));
         cards.add(new SetCardInfo("Kjeldoran Outpost", 23952, Rarity.RARE, mage.cards.k.KjeldoranOutpost.class, RETRO_ART_USE_VARIOUS));
@@ -1531,7 +1513,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Leaf-Crowned Visionary", 103462, Rarity.RARE, mage.cards.l.LeafCrownedVisionary.class));
         cards.add(new SetCardInfo("Leatherback Baloth", 43576, Rarity.UNCOMMON, mage.cards.l.LeatherbackBaloth.class));
         cards.add(new SetCardInfo("Ledger Shredder", 99733, Rarity.RARE, mage.cards.l.LedgerShredder.class));
-        cards.add(new SetCardInfo("Leeching Lurker", 93988, Rarity.RARE, mage.cards.l.LeechingLurker.class));
         cards.add(new SetCardInfo("Legion Angel", 83754, Rarity.RARE, mage.cards.l.LegionAngel.class));
         cards.add(new SetCardInfo("Legions to Ashes", 105784, Rarity.RARE, mage.cards.l.LegionsToAshes.class));
         cards.add(new SetCardInfo("Leinore, Autumn Sovereign", 94054, Rarity.MYTHIC, mage.cards.l.LeinoreAutumnSovereign.class));
@@ -1569,7 +1550,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Lion Sash", 97887, Rarity.RARE, mage.cards.l.LionSash.class));
         cards.add(new SetCardInfo("Lion's Eye Diamond", 51936, Rarity.RARE, mage.cards.l.LionsEyeDiamond.class));
         cards.add(new SetCardInfo("Lithoform Engine", 83722, Rarity.MYTHIC, mage.cards.l.LithoformEngine.class));
-        cards.add(new SetCardInfo("Living Breakthrough", 97937, Rarity.RARE, mage.cards.l.LivingBreakthrough.class));
         cards.add(new SetCardInfo("Living Death", 36042, Rarity.RARE, mage.cards.l.LivingDeath.class, RETRO_ART));
         cards.add(new SetCardInfo("Living Wish", 35068, Rarity.RARE, mage.cards.l.LivingWish.class));
         cards.add(new SetCardInfo("Livio, Oathsworn Sentinel", 86348, Rarity.RARE, mage.cards.l.LivioOathswornSentinel.class));
@@ -1602,7 +1582,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Loyal Retainers", 47973, Rarity.UNCOMMON, mage.cards.l.LoyalRetainers.class));
         cards.add(new SetCardInfo("Loyal Warhound", 92630, Rarity.RARE, mage.cards.l.LoyalWarhound.class));
         cards.add(new SetCardInfo("Lu Bu, Master-at-Arms", 36130, Rarity.RARE, mage.cards.l.LuBuMasterAtArms.class, RETRO_ART));
-        cards.add(new SetCardInfo("Ludevic's Abomination", 42874, Rarity.RARE, mage.cards.l.LudevicsAbomination.class));
         cards.add(new SetCardInfo("Ludevic's Test Subject", 42874, Rarity.RARE, mage.cards.l.LudevicsTestSubject.class));
         cards.add(new SetCardInfo("Ludevic, Necro-Alchemist", 86166, Rarity.MYTHIC, mage.cards.l.LudevicNecroAlchemist.class));
         cards.add(new SetCardInfo("Lukka, Coppercoat Outcast", 80801, Rarity.MYTHIC, mage.cards.l.LukkaCoppercoatOutcast.class));
@@ -1778,7 +1757,7 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 40054, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 40064, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 40096, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Mountain", 53877, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_ZEN_VARIOUS ));
+        cards.add(new SetCardInfo("Mountain", 53877, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_ZEN_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 58259, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 73630, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 81864, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
@@ -1908,7 +1887,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Nymris, Oona's Trickster", 86342, Rarity.RARE, mage.cards.n.NymrisOonasTrickster.class));
         cards.add(new SetCardInfo("Nyx Lotus", 79917, Rarity.RARE, mage.cards.n.NyxLotus.class));
         cards.add(new SetCardInfo("Nyxbloom Ancient", 79965, Rarity.MYTHIC, mage.cards.n.NyxbloomAncient.class));
-        cards.add(new SetCardInfo("O-Kagachi Made Manifest", 98101, Rarity.MYTHIC, mage.cards.o.OKagachiMadeManifest.class));
         cards.add(new SetCardInfo("Oakhame Ranger", 78738, Rarity.UNCOMMON, mage.cards.o.OakhameRanger.class));
         cards.add(new SetCardInfo("Oath of Druids", 36092, Rarity.RARE, mage.cards.o.OathOfDruids.class, RETRO_ART));
         cards.add(new SetCardInfo("Ob Nixilis Reignited", 62509, Rarity.MYTHIC, mage.cards.o.ObNixilisReignited.class));
@@ -2037,7 +2015,7 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 40066, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 40098, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 48582, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Plains", 53879, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_ZEN_VARIOUS ));
+        cards.add(new SetCardInfo("Plains", 53879, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_ZEN_VARIOUS));
         cards.add(new SetCardInfo("Plains", 58253, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 73626, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 81830, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
@@ -2058,7 +2036,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Pollywog Symbiote", 80931, Rarity.UNCOMMON, mage.cards.p.PollywogSymbiote.class));
         cards.add(new SetCardInfo("Polukranos, Unchained", 79931, Rarity.MYTHIC, mage.cards.p.PolukranosUnchained.class));
         cards.add(new SetCardInfo("Ponder", 35118, Rarity.COMMON, mage.cards.p.Ponder.class, FULL_ART));
-        cards.add(new SetCardInfo("Poppet Factory", 93918, Rarity.MYTHIC, mage.cards.p.PoppetFactory.class));
         cards.add(new SetCardInfo("Poppet Stitcher", 93918, Rarity.MYTHIC, mage.cards.p.PoppetStitcher.class));
         cards.add(new SetCardInfo("Porcuparrot", 80965, Rarity.UNCOMMON, mage.cards.p.Porcuparrot.class));
         cards.add(new SetCardInfo("Port Razer", 86068, Rarity.MYTHIC, mage.cards.p.PortRazer.class));
@@ -2187,7 +2164,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Red Dragon", 92754, Rarity.UNCOMMON, mage.cards.r.RedDragon.class));
         cards.add(new SetCardInfo("Red Elemental Blast", 43610, Rarity.UNCOMMON, mage.cards.r.RedElementalBlast.class));
         cards.add(new SetCardInfo("Reflecting Pool", 62487, Rarity.RARE, mage.cards.r.ReflectingPool.class));
-        cards.add(new SetCardInfo("Reflection of Kiki-Jiki", 98009, Rarity.RARE, mage.cards.r.ReflectionOfKikiJiki.class));
         cards.add(new SetCardInfo("Reflections of Littjara", 88252, Rarity.RARE, mage.cards.r.ReflectionsOfLittjara.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Reflections of Littjara", 88254, Rarity.RARE, mage.cards.r.ReflectionsOfLittjara.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Regal Leosaur", 80967, Rarity.UNCOMMON, mage.cards.r.RegalLeosaur.class));
@@ -2204,7 +2180,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Reliquary Tower", 69250, Rarity.UNCOMMON, mage.cards.r.ReliquaryTower.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Reliquary Tower", 86146, Rarity.UNCOMMON, mage.cards.r.ReliquaryTower.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Remand", 31429, Rarity.UNCOMMON, mage.cards.r.Remand.class));
-        cards.add(new SetCardInfo("Remnant of the Rising Star", 98063, Rarity.MYTHIC, mage.cards.r.RemnantOfTheRisingStar.class));
         cards.add(new SetCardInfo("Remove Soul", 35130, Rarity.COMMON, mage.cards.r.RemoveSoul.class, FULL_ART));
         cards.add(new SetCardInfo("Renata, Called to the Hunt", 79859, Rarity.UNCOMMON, mage.cards.r.RenataCalledToTheHunt.class));
         cards.add(new SetCardInfo("Render Silent", 48576, Rarity.RARE, mage.cards.r.RenderSilent.class));
@@ -2224,7 +2199,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Retaliator Griffin", 43546, Rarity.RARE, mage.cards.r.RetaliatorGriffin.class));
         cards.add(new SetCardInfo("Retriever Phoenix", 90094, Rarity.RARE, mage.cards.r.RetrieverPhoenix.class));
         cards.add(new SetCardInfo("Return to Dust", 86104, Rarity.UNCOMMON, mage.cards.r.ReturnToDust.class));
-        cards.add(new SetCardInfo("Revealing Eye", 95351, Rarity.RARE, mage.cards.r.RevealingEye.class));
         cards.add(new SetCardInfo("Revenant", 32192, Rarity.RARE, mage.cards.r.Revenant.class, RETRO_ART));
         cards.add(new SetCardInfo("Reverse Engineer", 64995, Rarity.UNCOMMON, mage.cards.r.ReverseEngineer.class));
         cards.add(new SetCardInfo("Revival Experiment", 90220, Rarity.RARE, mage.cards.r.RevivalExperiment.class));
@@ -2458,7 +2432,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Simic Signet", 62391, Rarity.COMMON, mage.cards.s.SimicSignet.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sin Collector", 50112, Rarity.UNCOMMON, mage.cards.s.SinCollector.class));
         cards.add(new SetCardInfo("Sinkhole", 43566, Rarity.RARE, mage.cards.s.Sinkhole.class));
-        cards.add(new SetCardInfo("Sinner's Judgment", 95279, Rarity.MYTHIC, mage.cards.s.SinnersJudgment.class));
         cards.add(new SetCardInfo("Siphon Insight", 94066, Rarity.RARE, mage.cards.s.SiphonInsight.class));
         cards.add(new SetCardInfo("Sisay, Weatherlight Captain", 91211, Rarity.RARE, mage.cards.s.SisayWeatherlightCaptain.class, RETRO_ART));
         cards.add(new SetCardInfo("Skarrg Goliath", 47989, Rarity.RARE, mage.cards.s.SkarrgGoliath.class));
@@ -2646,7 +2619,7 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 40058, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 40068, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 40092, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Swamp", 53883, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_ZEN_VARIOUS ));
+        cards.add(new SetCardInfo("Swamp", 53883, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_ZEN_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 58257, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 73632, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 81856, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
@@ -2861,7 +2834,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Torrent Sculptor", 90248, Rarity.RARE, mage.cards.t.TorrentSculptor.class));
         cards.add(new SetCardInfo("Toski, Bearer of Secrets", 88340, Rarity.RARE, mage.cards.t.ToskiBearerOfSecrets.class));
         cards.add(new SetCardInfo("Tourach, Dread Cantor", 91253, Rarity.MYTHIC, mage.cards.t.TourachDreadCantor.class));
-        cards.add(new SetCardInfo("Tovolar's Magehunter", 43507, Rarity.RARE, mage.cards.t.TovolarsMagehunter.class));
         cards.add(new SetCardInfo("Toxic Deluge", 82832, Rarity.RARE, mage.cards.t.ToxicDeluge.class));
         cards.add(new SetCardInfo("Tradewind Rider", 36048, Rarity.RARE, mage.cards.t.TradewindRider.class, RETRO_ART));
         cards.add(new SetCardInfo("Training Center", 85954, Rarity.RARE, mage.cards.t.TrainingCenter.class));
@@ -2918,7 +2890,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Uktabi Orangutan", 36016, Rarity.UNCOMMON, mage.cards.u.UktabiOrangutan.class, RETRO_ART));
         cards.add(new SetCardInfo("Ulamog, the Infinite Gyre", 102345, Rarity.MYTHIC, mage.cards.u.UlamogTheInfiniteGyre.class));
         cards.add(new SetCardInfo("Ultimate Price", 58269, Rarity.UNCOMMON, mage.cards.u.UltimatePrice.class));
-        cards.add(new SetCardInfo("Ulvenwald Behemoth", 95421, Rarity.RARE, mage.cards.u.UlvenwaldBehemoth.class));
         cards.add(new SetCardInfo("Ulvenwald Observer", 61553, Rarity.RARE, mage.cards.u.UlvenwaldObserver.class));
         cards.add(new SetCardInfo("Ulvenwald Oddity", 95421, Rarity.RARE, mage.cards.u.UlvenwaldOddity.class));
         cards.add(new SetCardInfo("Umezawa's Jitte", 36210, Rarity.RARE, mage.cards.u.UmezawasJitte.class));
@@ -2989,7 +2960,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Verazol, the Split Current", 83820, Rarity.RARE, mage.cards.v.VerazolTheSplitCurrent.class));
         cards.add(new SetCardInfo("Verdant Catacombs", 91403, Rarity.RARE, mage.cards.v.VerdantCatacombs.class));
         cards.add(new SetCardInfo("Verdant Mastery", 90138, Rarity.RARE, mage.cards.v.VerdantMastery.class));
-        cards.add(new SetCardInfo("Vessel of the All-Consuming", 98105, Rarity.MYTHIC, mage.cards.v.VesselOfTheAllConsuming.class));
         cards.add(new SetCardInfo("Vesuvan Duplimancy", 103402, Rarity.MYTHIC, mage.cards.v.VesuvanDuplimancy.class));
         cards.add(new SetCardInfo("Vexing Shusher", 32533, Rarity.RARE, mage.cards.v.VexingShusher.class));
         cards.add(new SetCardInfo("Veyran, Voice of Duality", 90282, Rarity.MYTHIC, mage.cards.v.VeyranVoiceOfDuality.class));
@@ -3053,7 +3023,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Weathered Wayfarer", 102223, Rarity.RARE, mage.cards.w.WeatheredWayfarer.class));
         cards.add(new SetCardInfo("Weaver of Harmony", 98031, Rarity.RARE, mage.cards.w.WeaverOfHarmony.class));
         cards.add(new SetCardInfo("Wedding Announcement", 95267, Rarity.RARE, mage.cards.w.WeddingAnnouncement.class));
-        cards.add(new SetCardInfo("Wedding Festivity", 95267, Rarity.RARE, mage.cards.w.WeddingFestivity.class));
         cards.add(new SetCardInfo("Wee Dragonauts", 35174, Rarity.COMMON, mage.cards.w.WeeDragonauts.class));
         cards.add(new SetCardInfo("Werewolf Pack Leader", 92760, Rarity.RARE, mage.cards.w.WerewolfPackLeader.class));
         cards.add(new SetCardInfo("Wheel and Deal", 62411, Rarity.RARE, mage.cards.w.WheelAndDeal.class));
@@ -3072,7 +3041,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Wild-Magic Sorcerer", 92752, Rarity.RARE, mage.cards.w.WildMagicSorcerer.class));
         cards.add(new SetCardInfo("Wildcall", 55749, Rarity.RARE, mage.cards.w.Wildcall.class));
         cards.add(new SetCardInfo("Wildfire Eternal", 64989, Rarity.RARE, mage.cards.w.WildfireEternal.class));
-        cards.add(new SetCardInfo("Wildsong Howler", 95425, Rarity.RARE, mage.cards.w.WildsongHowler.class));
         cards.add(new SetCardInfo("Willbender", 36258, Rarity.UNCOMMON, mage.cards.w.Willbender.class));
         cards.add(new SetCardInfo("Willow Geist", 94024, Rarity.RARE, mage.cards.w.WillowGeist.class));
         cards.add(new SetCardInfo("Willowdusk, Essence Seer", 90288, Rarity.MYTHIC, mage.cards.w.WillowduskEssenceSeer.class));

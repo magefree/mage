@@ -42,7 +42,7 @@ public final class AllOutAssault extends CardImpl {
         extraCombatAbility.addEffect(new CreateDelayedTriggeredAbilityEffect(new WhenYouAttackDelayedTriggeredAbility(
                 new UntapAllControllerEffect(
                         StaticFilters.FILTER_CONTROLLED_CREATURE, "untap each creature you control"), Duration.EndOfTurn, true)));
-        this.addAbility(extraCombatAbility.withInterveningIf(IsMainPhaseCondition.YOUR));
+        this.addAbility(extraCombatAbility.withInterveningIf(IsMainPhaseCondition.YOURS));
 
     }
 

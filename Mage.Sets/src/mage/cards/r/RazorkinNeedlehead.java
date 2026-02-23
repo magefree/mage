@@ -35,9 +35,9 @@ public final class RazorkinNeedlehead extends CardImpl {
         )));
 
         // Whenever an opponent draws a card, Razorkin Needlehead deals 1 damage to them.
-        this.addAbility(new DrawCardOpponentTriggeredAbility(new DamageTargetEffect(
-                1, true, "them"
-        ), false, true));
+        this.addAbility(new DrawCardOpponentTriggeredAbility(
+                new DamageTargetEffect(1).withTargetDescription("them"),
+                false, true));
     }
 
     private RazorkinNeedlehead(final RazorkinNeedlehead card) {

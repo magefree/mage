@@ -5,11 +5,13 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.ruleModifying.CantHaveCountersAllEffect;
 import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -36,7 +38,9 @@ public final class MeliraSylvokOutcast extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new MeliraSylvokOutcastEffect()));
 
         // Creatures you control can't have -1/-1 counters put on them.
-        this.addAbility(new SimpleStaticAbility(new MeliraSylvokOutcastEffect2()));
+        this.addAbility(new SimpleStaticAbility(new CantHaveCountersAllEffect(
+                StaticFilters.FILTER_CONTROLLED_CREATURES, CounterType.M1M1
+        )));
 
         // Creatures your opponents control lose infect.
         this.addAbility(new SimpleStaticAbility(new MeliraSylvokOutcastEffect3()));
@@ -84,45 +88,6 @@ class MeliraSylvokOutcastEffect extends ReplacementEffectImpl {
         return event.getData().equals(CounterType.POISON.getName()) && event.getTargetId().equals(source.getControllerId());
     }
 
-}
-
-class MeliraSylvokOutcastEffect2 extends ReplacementEffectImpl {
-
-    public MeliraSylvokOutcastEffect2() {
-        super(Duration.WhileOnBattlefield, Outcome.PreventDamage);
-        staticText = "Creatures you control can't have -1/-1 counters put on them";
-    }
-
-    private MeliraSylvokOutcastEffect2(final MeliraSylvokOutcastEffect2 effect) {
-        super(effect);
-    }
-
-    @Override
-    public MeliraSylvokOutcastEffect2 copy() {
-        return new MeliraSylvokOutcastEffect2(this);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ADD_COUNTERS;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getData().equals(CounterType.M1M1.getName())) {
-            Permanent perm = game.getPermanent(event.getTargetId());
-            if (perm == null) {
-                perm = game.getPermanentEntering(event.getTargetId());
-            }
-            return perm != null && perm.isCreature(game) && perm.isControlledBy(source.getControllerId());
-        }
-        return false;
-    }
 }
 
 class MeliraSylvokOutcastEffect3 extends ContinuousEffectImpl {

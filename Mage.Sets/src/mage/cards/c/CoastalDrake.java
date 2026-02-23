@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -13,21 +11,22 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 import static mage.constants.SubType.KAVU;
 
 /**
- *
  * @author Loki
  */
 public final class CoastalDrake extends CardImpl {
 
+    private static final FilterPermanent filter = new FilterPermanent(KAVU);
+
     public CoastalDrake(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
         this.subtype.add(SubType.DRAKE);
 
         this.power = new MageInt(2);
@@ -38,7 +37,7 @@ public final class CoastalDrake extends CardImpl {
 
         // {1}{U}, {T} : Return target Kavu to its owner's hand.
         Ability ability = new SimpleActivatedAbility(new ReturnToHandTargetEffect(), new ManaCostsImpl<>("{1}{U}"));
-        ability.addTarget(new TargetPermanent(new FilterCreaturePermanent(KAVU, "Kavu")));
+        ability.addTarget(new TargetPermanent(filter));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

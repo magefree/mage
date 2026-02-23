@@ -13,7 +13,7 @@ import mage.game.permanent.token.Token;
 public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
 
     public enum LoseType {
-        NONE, ALL, ALL_BUT_COLOR, ABILITIES, ABILITIES_SUBTYPE, COLOR
+        NONE, ALL, ALL_BUT_COLOR, ABILITIES, ABILITIES_SUBTYPE, COLOR, SUBTYPE
     }
 
     protected Token token;
@@ -81,6 +81,7 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
                 switch (loseType) {
                     case ALL:
                     case ALL_BUT_COLOR:
+                    case SUBTYPE:
                         permanent.removeAllSubTypes(game);
                         break;
                     case ABILITIES_SUBTYPE:

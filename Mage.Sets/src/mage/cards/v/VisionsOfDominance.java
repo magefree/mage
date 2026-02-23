@@ -24,7 +24,9 @@ public final class VisionsOfDominance extends CardImpl {
 
         // Put a +1/+1 counter on target creature, then double the number of +1/+1 counters on it.
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
-        this.getSpellAbility().addEffect(new DoubleCountersTargetEffect(CounterType.P1P1).concatBy(", then"));
+        this.getSpellAbility().addEffect(new DoubleCountersTargetEffect(CounterType.P1P1)
+                .withTargetDescription("it")
+                .concatBy(", then"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Flashback {8}{G}{G}. This spell costs {X} less to cast this way, where X is the greatest mana value of a commander you own on the battlefield or in the command zone.

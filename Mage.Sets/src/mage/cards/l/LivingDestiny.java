@@ -7,8 +7,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
@@ -20,13 +19,11 @@ import java.util.UUID;
  */
 public final class LivingDestiny extends CardImpl {
 
-    private static final FilterCard filter = new FilterCreatureCard("a creature card from your hand");
-
     public LivingDestiny(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{G}");
 
         // As an additional cost to cast Living Destiny, reveal a creature card from your hand.
-        TargetCardInHand targetCard = new TargetCardInHand(filter);
+        TargetCardInHand targetCard = new TargetCardInHand(StaticFilters.FILTER_CARD_CREATURE_YOUR_HAND);
         this.getSpellAbility().addCost(new RevealTargetFromHandCost(targetCard));
 
         // You gain life equal to the revealed card's converted mana cost.

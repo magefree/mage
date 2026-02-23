@@ -46,7 +46,7 @@ public final class ElvishVatkeeper extends CardImpl {
 
         // {5}: Transform target Incubator token you control. Double the number of +1/+1 counters on it.
         Ability ability = new SimpleActivatedAbility(new TransformTargetEffect(), new GenericManaCost(5));
-        ability.addEffect(new DoubleCountersTargetEffect(CounterType.P1P1));
+        ability.addEffect(new DoubleCountersTargetEffect(CounterType.P1P1).withTargetDescription("it"));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
