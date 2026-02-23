@@ -2,9 +2,11 @@ package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
+import mage.abilities.costs.common.ExileSourceFromGraveCost;
+import mage.abilities.effects.common.DoWhenCostPaid;
 import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.constants.SubType;
@@ -32,9 +34,13 @@ public final class ParameciaColoniex extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new MillCardsControllerEffect(3)));
 
         // When this creature dies, you may exile it. When you do, put target creature card from your graveyard on top of your library.
-        Ability ability = new DiesSourceTriggeredAbility(new PutOnLibraryTargetEffect(true), true);
+        ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
+            new PutOnLibraryTargetEffect(true), false
+        );
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
-        this.addAbility(ability);
+        this.addAbility(new DiesSourceTriggeredAbility(new DoWhenCostPaid(
+            ability, new ExileSourceFromGraveCost().setText("exile it"), "Exile {this}?"
+        )));
     }
 
     private ParameciaColoniex(final ParameciaColoniex card) {
