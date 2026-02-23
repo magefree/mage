@@ -820,14 +820,10 @@ public class HumanPlayer extends PlayerImpl {
                 }
             } else {
                 // done or cancel button pressed
-                if (target.isChosen(game)) {
-                    // try to finish
-                    return false;
+                if (required) {
+                    return target.isChosen(game);
                 } else {
-                    if (!required) {
-                        // can stop at any moment
-                        return false;
-                    }
+                    return true;
                 }
             }
         }
@@ -915,14 +911,10 @@ public class HumanPlayer extends PlayerImpl {
                     }
                 } else {
                     // done or cancel button pressed
-                    if (target.isChosen(game)) {
-                        // try to finish
-                        return false;
+                    if (required) {
+                        return target.isChosen(game);
                     } else {
-                        if (!required) {
-                            // can stop at any moment
-                            return false;
-                        }
+                        return true;
                     }
                 }
                 // continue to next target
