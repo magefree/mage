@@ -3,7 +3,7 @@ package mage.cards.d;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.effects.common.DiscardCardControllerTriggeredAbility;
+import mage.abilities.effects.common.DiscardOneOrMoreCardsTriggeredAbility;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.keyword.ConniveTargetEffect;
@@ -11,6 +11,7 @@ import mage.abilities.keyword.MenaceAbility;
 import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.constants.SubType;
 import mage.constants.SuperType;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterLandCard;
@@ -40,17 +41,17 @@ public final class DoctorDoomKingOfLatveria extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever you discard one or more land cards, each opponent loses 2 life.
-        this.addAbility(new DiscardCardControllerTriggeredAbility(
-            new LoseLifeOpponentsEffect(2), false, filter
+        this.addAbility(new DiscardOneOrMoreCardsTriggeredAbility(
+            Zone.BATTLEFIELD, new LoseLifeOpponentsEffect(2), false, filter
         ));
 
         // At the beginning of combat on your turn, target Villain you control gains menace until end of turn. It connives.
         Ability ability = new BeginningOfCombatTriggeredAbility(
-            new GainAbilityTargetEffect(new MenaceAbility())
-                .setText("target Villain you control gains menace until end of turn")
+            new GainAbilityTargetEffect(new MenaceAbility(false))
         );
         ability.addEffect(new ConniveTargetEffect().setText("it connives"));
         ability.addTarget(new TargetControlledPermanent(filter2));
+        this.addAbility(ability);
     }
 
     private DoctorDoomKingOfLatveria(final DoctorDoomKingOfLatveria card) {
