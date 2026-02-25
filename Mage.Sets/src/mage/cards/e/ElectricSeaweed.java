@@ -97,11 +97,12 @@ class ElectricSeaweedDelayedTriggeredAbility extends DelayedTriggeredAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zoneChangeEvent = (ZoneChangeEvent) event;
-        if (zoneChangeEvent.isDiesEvent()) {
-            Permanent permanent = zoneChangeEvent.getTarget();
-            return permanent != null && StaticFilters.FILTER_ANOTHER_CREATURE.match(permanent, game);
+        if (!zoneChangeEvent.isDiesEvent()) {
+            return false;
         }
-        return false;
+
+        Permanent permanent = zoneChangeEvent.getTarget();
+        return permanent != null && StaticFilters.FILTER_ANOTHER_CREATURE.match(permanent, this.getControllerId(), this, game);
     }
 
     @Override
