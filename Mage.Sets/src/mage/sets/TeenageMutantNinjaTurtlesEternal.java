@@ -30,6 +30,7 @@ public final class TeenageMutantNinjaTurtlesEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Baxter, Fly in the Ointment", 10, Rarity.RARE, mage.cards.b.BaxterFlyInTheOintment.class));
         cards.add(new SetCardInfo("Bebop, Skull & Crossbones", 15, Rarity.RARE, mage.cards.b.BebopSkullAndCrossbones.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bebop, Skull & Crossbones", 87, Rarity.RARE, mage.cards.b.BebopSkullAndCrossbones.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Big Apple, 3 a.m.", 42, Rarity.RARE, mage.cards.b.BigApple3AM.class));
         cards.add(new SetCardInfo("Big Mother Mouser", 37, Rarity.RARE, mage.cards.b.BigMotherMouser.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Big Mother Mouser", 97, Rarity.RARE, mage.cards.b.BigMotherMouser.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Biogenic Ooze", 49, Rarity.RARE, mage.cards.b.BiogenicOoze.class));
