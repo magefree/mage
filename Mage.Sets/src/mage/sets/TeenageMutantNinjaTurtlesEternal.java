@@ -38,6 +38,7 @@ public final class TeenageMutantNinjaTurtlesEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Chromatic Lantern", 58, Rarity.RARE, mage.cards.c.ChromaticLantern.class));
         cards.add(new SetCardInfo("Cinder Glade", 61, Rarity.RARE, mage.cards.c.CinderGlade.class));
         cards.add(new SetCardInfo("City of Brass", 62, Rarity.RARE, mage.cards.c.CityOfBrass.class));
+        cards.add(new SetCardInfo("Coin of Mastery", 38, Rarity.RARE, mage.cards.c.CoinOfMastery.class));
         cards.add(new SetCardInfo("Command Tower", 63, Rarity.COMMON, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Commander's Plate", 135, Rarity.MYTHIC, mage.cards.c.CommandersPlate.class));
         cards.add(new SetCardInfo("Containment Protocol", 108, Rarity.COMMON, mage.cards.c.ContainmentProtocol.class));
