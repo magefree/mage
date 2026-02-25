@@ -83,6 +83,7 @@ public final class TeenageMutantNinjaTurtlesEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Raphael, Tag Team Tough", 118, Rarity.MYTHIC, mage.cards.r.RaphaelTagTeamTough.class));
         cards.add(new SetCardInfo("Raphael, the Muscle", 4, Rarity.MYTHIC, mage.cards.r.RaphaelTheMuscle.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Raphael, the Muscle", 91, Rarity.MYTHIC, mage.cards.r.RaphaelTheMuscle.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Rat King, Pale Piper", 19, Rarity.RARE, mage.cards.r.RatKingPalePiper.class));
         cards.add(new SetCardInfo("Roadkill Rodney", 41, Rarity.RARE, mage.cards.r.RoadkillRodney.class));
         cards.add(new SetCardInfo("Rocksteady, Mutant Marauder", 33, Rarity.RARE, mage.cards.r.RocksteadyMutantMarauder.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rocksteady, Mutant Marauder", 94, Rarity.RARE, mage.cards.r.RocksteadyMutantMarauder.class, NON_FULL_USE_VARIOUS));
