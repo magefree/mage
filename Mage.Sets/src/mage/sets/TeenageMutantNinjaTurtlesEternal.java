@@ -61,6 +61,7 @@ public final class TeenageMutantNinjaTurtlesEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Harmonize", 51, Rarity.UNCOMMON, mage.cards.h.Harmonize.class));
         cards.add(new SetCardInfo("Heroes in a Half Shell", 6, Rarity.MYTHIC, mage.cards.h.HeroesInAHalfShell.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Heroes in a Half Shell", 96, Rarity.MYTHIC, mage.cards.h.HeroesInAHalfShell.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Hidden Hideout", 43, Rarity.RARE, mage.cards.h.HiddenHideout.class));
         cards.add(new SetCardInfo("High Score", 29, Rarity.RARE, mage.cards.h.HighScore.class));
         cards.add(new SetCardInfo("Hinterland Harbor", 69, Rarity.RARE, mage.cards.h.HinterlandHarbor.class));
         cards.add(new SetCardInfo("Leatherhead, Iron Gator", 30, Rarity.RARE, mage.cards.l.LeatherheadIronGator.class));
