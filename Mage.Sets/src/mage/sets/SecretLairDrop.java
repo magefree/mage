@@ -207,7 +207,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Nature's Lore", 189, Rarity.RARE, mage.cards.n.NaturesLore.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Soul-Scar Mage", 190, Rarity.RARE, mage.cards.s.SoulScarMage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dryad of the Ilysian Grove", 191, Rarity.RARE, mage.cards.d.DryadOfTheIlysianGrove.class));
-        cards.add(new SetCardInfo("Sakura-Tribe Elder", 192, Rarity.RARE, mage.cards.s.SakuraTribeElder.class));
+        cards.add(new SetCardInfo("Sakura-Tribe Elder", 192, Rarity.RARE, mage.cards.s.SakuraTribeElder.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Spell Queller", 193, Rarity.RARE, mage.cards.s.SpellQueller.class));
         cards.add(new SetCardInfo("Metallic Mimic", 194, Rarity.RARE, mage.cards.m.MetallicMimic.class));
         cards.add(new SetCardInfo("Chatter of the Squirrel", 195, Rarity.RARE, mage.cards.c.ChatterOfTheSquirrel.class));
@@ -2357,6 +2357,16 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 2511, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 2512, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", 2513, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Mirror Entity", 2514, Rarity.RARE, mage.cards.m.MirrorEntity.class));
+        cards.add(new SetCardInfo("Jace's Archivist", 2515, Rarity.RARE, mage.cards.j.JacesArchivist.class));
+        cards.add(new SetCardInfo("Stinkweed Imp", 2516, Rarity.RARE, mage.cards.s.StinkweedImp.class));
+        cards.add(new SetCardInfo("Mogg Assassin", 2517, Rarity.RARE, mage.cards.m.MoggAssassin.class));
+        cards.add(new SetCardInfo("Sakura-Tribe Elder", 2518, Rarity.RARE, mage.cards.s.SakuraTribeElder.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Irrigated Farmland", 2519, Rarity.RARE, mage.cards.i.IrrigatedFarmland.class));
+        cards.add(new SetCardInfo("Fetid Pools", 2520, Rarity.RARE, mage.cards.f.FetidPools.class));
+        cards.add(new SetCardInfo("Canyon Slough", 2521, Rarity.RARE, mage.cards.c.CanyonSlough.class));
+        cards.add(new SetCardInfo("Sheltered Thicket", 2522, Rarity.RARE, mage.cards.s.ShelteredThicket.class));
+        cards.add(new SetCardInfo("Scattered Groves", 2523, Rarity.RARE, mage.cards.s.ScatteredGroves.class));
         cards.add(new SetCardInfo("Feed the Swarm", 7001, Rarity.RARE, mage.cards.f.FeedTheSwarm.class));
         cards.add(new SetCardInfo("Forge Anew", 7002, Rarity.RARE, mage.cards.f.ForgeAnew.class));
         cards.add(new SetCardInfo("Silence", 7003, Rarity.RARE, mage.cards.s.Silence.class, NON_FULL_USE_VARIOUS));
