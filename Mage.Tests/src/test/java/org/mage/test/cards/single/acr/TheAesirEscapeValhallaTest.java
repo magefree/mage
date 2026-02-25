@@ -46,5 +46,7 @@ public class TheAesirEscapeValhallaTest extends CardTestPlayerBase {
 
         assertHandCount(playerA, "Gigantosaurus", 1);
         assertHandCount(playerA, aesir, 1);
+        assertExileCount(playerA, "Gigantosaurus", 0);
+        assertExileCount(playerA, aesir, 0);
     }
 }
