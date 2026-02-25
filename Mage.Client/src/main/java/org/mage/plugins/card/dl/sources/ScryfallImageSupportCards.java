@@ -621,6 +621,7 @@ public class ScryfallImageSupportCards {
             add("PL26"); // Year of the Horse 2026
             add("TMT"); // Teenage Mutant Ninja Turtles
             add("TMC"); // Teenage Mutant Ninja Turtles Eternal
+            add("PZA"); // Teenage Mutant Ninja Turtles Source Material
             add("SOS"); // Secrets of Strixhaven
             add("MSH"); // Marvel Super Heroes
             add("MSC"); // Marvel Super Heroes Commander
