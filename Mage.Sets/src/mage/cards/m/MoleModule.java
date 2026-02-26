@@ -76,7 +76,7 @@ class MoleModuleEffect extends OneShotEffect {
             return false;
         }
         Cards cards = player.millCards(4, source, game);
-        TargetCard target = new TargetCard(1, Zone.GRAVEYARD, StaticFilters.FILTER_CARD_PERMANENT);
+        TargetCard target = new TargetCard(0, 1, Zone.ALL, StaticFilters.FILTER_CARD_PERMANENT);
         player.choose(outcome, cards, target, source, game);
         player.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, source, game);
         return true;
