@@ -28,7 +28,7 @@ import mage.constants.Outcome;
 public final class HawkeyeTrickShot extends CardImpl {
 
     private static final FilterControlledPermanent filter =
-        new FilterControlledPermanent(SubType.HERO, "{this} or another Hero you control");
+        new FilterControlledPermanent(SubType.HERO);
 
     public HawkeyeTrickShot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
