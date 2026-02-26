@@ -1,9 +1,7 @@
 package mage.abilities.effects.common;
 
-import java.util.Set;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
-import mage.cards.Card;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
@@ -53,12 +51,12 @@ public class DiscardOneOrMoreCardsTriggeredAbility extends TriggeredAbilityImpl 
             return false;
         }
         DiscardedCardsEvent discardedCardsEvent = (DiscardedCardsEvent) event;
-        Set<Card> discardedCards = discardedCardsEvent.getDiscardedCards().getCards(filter, game);
-        if (discardedCards.isEmpty()) {
+        int count = discardedCardsEvent.getDiscardedCards().count(filter, game);
+        if (count < 1) {
             return false;
         }
 
-        this.getEffects().setValue("discarded", discardedCards.size());
+        this.getEffects().setValue("discarded", count);
         return true;
     }
 }

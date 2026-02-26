@@ -12,9 +12,8 @@ import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.common.FilterLandCard;
 import mage.target.common.TargetControlledPermanent;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -26,9 +25,8 @@ import mage.constants.CardType;
  */
 public final class DoctorDoomKingOfLatveria extends CardImpl {
 
-    private static final FilterCard filter = new FilterLandCard("one or more land cards");
-    private static final FilterControlledPermanent filter2 =
-        new FilterControlledPermanent(SubType.VILLAIN, "Villain you control");
+    private static final FilterControlledPermanent filter =
+        new FilterControlledPermanent(SubType.VILLAIN);
 
     public DoctorDoomKingOfLatveria(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{B}{R}");
@@ -42,7 +40,7 @@ public final class DoctorDoomKingOfLatveria extends CardImpl {
 
         // Whenever you discard one or more land cards, each opponent loses 2 life.
         this.addAbility(new DiscardOneOrMoreCardsTriggeredAbility(
-            Zone.BATTLEFIELD, new LoseLifeOpponentsEffect(2), false, filter
+            Zone.BATTLEFIELD, new LoseLifeOpponentsEffect(2), false, StaticFilters.FILTER_CARD_LANDS
         ));
 
         // At the beginning of combat on your turn, target Villain you control gains menace until end of turn. It connives.
@@ -50,7 +48,7 @@ public final class DoctorDoomKingOfLatveria extends CardImpl {
             new GainAbilityTargetEffect(new MenaceAbility(false))
         );
         ability.addEffect(new ConniveTargetEffect().setText("it connives"));
-        ability.addTarget(new TargetControlledPermanent(filter2));
+        ability.addTarget(new TargetControlledPermanent(filter));
         this.addAbility(ability);
     }
 
