@@ -1012,10 +1012,10 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
 
         }
-        if (permanent.getPairedCard() != null) {
-            Permanent pairedCard = permanent.getPairedCard().getPermanent(game);
+        if (permanent.getPairedMOR() != null) {
+            Permanent pairedCard = permanent.getPairedMOR().getPermanent(game);
             if (pairedCard != null) {
-                pairedCard.clearPairedCard();
+                pairedCard.setUnpaired();
             }
         }
         if (permanent.getBandedCards() != null && !permanent.getBandedCards().isEmpty()) {
@@ -1517,6 +1517,10 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     protected boolean playManaAbility(ActivatedManaAbilityImpl ability, Game game) {
         int bookmark = game.bookmarkState();
+        //20260116 - 109.4a
+        //The controller of a mana ability is determined as though it were on the stack.
+        ability.newId();
+        ability.setControllerId(playerId);
         if (ability.activate(game, false) && ability.resolve(game)) {
             if (ability.isUndoPossible()) {
                 if (storedBookmark == -1 || storedBookmark > bookmark) { // e.g. useful for undo Nykthos, Shrine to Nyx

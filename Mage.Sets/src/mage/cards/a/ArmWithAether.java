@@ -2,7 +2,7 @@
 package mage.cards.a;
 
 import mage.abilities.Ability;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.common.DealsDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
@@ -28,7 +28,7 @@ public final class ArmWithAether extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}");
 
         // Until end of turn, creatures you control gain "Whenever this creature deals damage to an opponent, you may return target creature that player controls to its owner's hand."
-        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new ReturnToHandTargetEffect(), false, true);
+        Ability ability = new DealsDamageToAPlayerTriggeredAbility(new ReturnToHandTargetEffect(), false, true);
         ability.addTarget(new TargetPermanent(filter));
         ability.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster());
 

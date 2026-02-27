@@ -7,17 +7,20 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.effects.common.combat.CantBeBlockedAllEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesAllEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
+import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.constants.TargetController;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.permanent.token.Spider21Token;
 
 import java.util.UUID;
@@ -27,11 +30,19 @@ import java.util.UUID;
  */
 public final class WallCrawl extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter
-            = new FilterControlledCreaturePermanent(SubType.SPIDER, "Spiders you control");
+    private static final FilterCreaturePermanent filterSpiders
+            = new FilterCreaturePermanent(SubType.SPIDER, "Spiders you control");
+    static {
+        filterSpiders.add(TargetController.YOU.getControllerPredicate());
+    }
     private static final DynamicValue xValue
             = new PermanentsOnBattlefieldCount(new FilterControlledPermanent(SubType.SPIDER));
     private static final Hint hint = new ValueHint("Spiders you control", xValue);
+    private static final FilterCreaturePermanent filterDefenders
+            = new FilterCreaturePermanent("creatures with defender");
+    static {
+        filterDefenders.add(new AbilityPredicate(DefenderAbility.class));
+    }
 
     public WallCrawl(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
@@ -43,9 +54,9 @@ public final class WallCrawl extends CardImpl {
 
         // Spiders you control get +1/+1 and can't be blocked by creatures with defender.
         ability = new SimpleStaticAbility(new BoostAllEffect(
-                1, 1, Duration.WhileControlled, filter, false
+                1, 1, Duration.WhileOnBattlefield, filterSpiders, false
         ));
-        ability.addEffect(new CantBeBlockedAllEffect(filter, Duration.WhileControlled)
+        ability.addEffect(new CantBeBlockedByCreaturesAllEffect(filterSpiders, filterDefenders, Duration.WhileOnBattlefield)
                 .setText("and can't be blocked by creatures with defender"));
         this.addAbility(ability);
     }

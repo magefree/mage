@@ -115,9 +115,8 @@ class UnboundFlourishingDoubleXEffect extends OneShotEffect {
         if (player != null && controller != null) {
             Spell needObject = game.getSpell(getTargetPointer().getFirst(game, source));
             if (needObject != null) {
-                Map<String, Object> tagsMap = CardUtil.getSourceCostsTagsMap(game, needObject.getSpellAbility());
-                if (tagsMap.containsKey("X")) {
-                    tagsMap.put("X", ((int) tagsMap.get("X")) * 2);
+                if (CardUtil.checkSourceCostsTagExists(game, needObject.getSpellAbility(), "X")) {
+                    CardUtil.getSourceCostsTagsMap(game, needObject.getSpellAbility()).put("X", CardUtil.overflowMultiply(CardUtil.getSourceCostsTagX(game, needObject.getSpellAbility(), 0), 2));
                 }
             }
         }

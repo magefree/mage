@@ -2885,7 +2885,20 @@ public class ScryfallImageSupportTokens {
             put("ECC/Zombie", "https://api.scryfall.com/cards/tecc/3?format=image");
 
             // TMT
+            put("TMT/Dinosaur Soldier", "https://api.scryfall.com/cards/ttmt/2?format=image");
+            put("TMT/Food", "https://api.scryfall.com/cards/ttmt/8?format=image");
+            put("TMT/Insect Warrior", "https://api.scryfall.com/cards/ttmt/4?format=image");
             put("TMT/Mutagen", "https://api.scryfall.com/cards/ttmt/9?format=image");
+            put("TMT/Mutant", "https://api.scryfall.com/cards/ttmt/7?format=image");
+            put("TMT/Ninja Turtle Spirit", "https://api.scryfall.com/cards/ttmt/3?format=image");
+            put("TMT/Ninja", "https://api.scryfall.com/cards/ttmt/5?format=image");
+            put("TMT/Rat", "https://api.scryfall.com/cards/ttmt/6?format=image");
+            put("TMT/Robot", "https://api.scryfall.com/cards/ttmt/10?format=image");
+
+            // TMC
+            put("TMT/Clue", "https://api.scryfall.com/cards/ttmc/2?format=image");
+            put("TMT/Ooze", "https://api.scryfall.com/cards/ttmc/1?format=image");
+            put("TMT/Treasure", "https://api.scryfall.com/cards/ttmc/3?format=image");
 
             // JVC
             put("JVC/Elemental Shaman", "https://api.scryfall.com/cards/tjvc/4?format=image");

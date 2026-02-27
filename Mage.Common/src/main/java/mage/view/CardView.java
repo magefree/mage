@@ -486,7 +486,7 @@ public class CardView extends SimpleCardView {
                         counters.add(new CounterView(counter));
                     }
                 }
-                this.pairedCard = permanent.getPairedCard() != null ? permanent.getPairedCard().getSourceId() : null;
+                this.pairedCard = permanent.getPairedMOR() != null ? permanent.getPairedMOR().getSourceId() : null;
                 this.bandedCards = new ArrayList<>();
                 for (UUID bandedCard : permanent.getBandedCards()) {
                     bandedCards.add(bandedCard);

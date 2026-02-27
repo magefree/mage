@@ -3,10 +3,12 @@ package org.mage.test.cards.abilities.keywords;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
+import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
+import mage.abilities.keyword.ReachAbility;
+import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
 import org.junit.Test;
@@ -17,20 +19,35 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class SoulbondKeywordTest extends CardTestPlayerBase {
 
+    private static final String vanguard = "Elite Vanguard"; // 2/1
+    private static final String forcemage = "Trusted Forcemage"; // 2/2 soulbond +1/+1
+    private static final String treason = "Act of Treason";
+    private static final String blinkmoth = "Blinkmoth Nexus";
+    private static final String nearheath = "Nearheath Pilgrim"; // 2/1 soulbond lifelink
+    private static final String phantasmalBear = "Phantasmal Bear"; // 2/2
+    private static final String bolt = "Lightning Bolt";
+    private static final String trappers = "Geist Trappers"; // 3/5 soulbond reach
+    private static final String angelsTomb = "Angel's Tomb";
+    // Whenever a creature you control enters, you may have this artifact become a 3/3 white Angel artifact creature with flying until end of turn.
+
+
     @Test
     public void testPairOnCast() {
-        addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard");
-        addCard(Zone.HAND, playerA, "Trusted Forcemage");
+        addCard(Zone.BATTLEFIELD, playerA, vanguard);
+        addCard(Zone.HAND, playerA, forcemage);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Trusted Forcemage");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, forcemage);
+        setChoice(playerA, true);
+        setChoice(playerA, vanguard);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertPermanentCount(playerA, "Trusted Forcemage", 1);
-        assertPowerToughness(playerA, "Trusted Forcemage", 3, 3);
-        assertPowerToughness(playerA, "Elite Vanguard", 3, 2);
+        assertPermanentCount(playerA, forcemage, 1);
+        assertPowerToughness(playerA, forcemage, 3, 3);
+        assertPowerToughness(playerA, vanguard, 3, 2);
     }
 
     /**
@@ -38,36 +55,69 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
      */
     @Test
     public void testPairOnEntersBattlefield() {
-        addCard(Zone.HAND, playerA, "Elite Vanguard");
-        addCard(Zone.BATTLEFIELD, playerA, "Trusted Forcemage");
+        addCard(Zone.HAND, playerA, vanguard);
+        addCard(Zone.BATTLEFIELD, playerA, forcemage);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Elite Vanguard");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, vanguard);
+        setChoice(playerA, true);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertPermanentCount(playerA, "Trusted Forcemage", 1);
-        assertPowerToughness(playerA, "Trusted Forcemage", 3, 3);
-        assertPowerToughness(playerA, "Elite Vanguard", 3, 2);
+        assertPermanentCount(playerA, forcemage, 1);
+        assertPowerToughness(playerA, forcemage, 3, 3);
+        assertPowerToughness(playerA, vanguard, 3, 2);
     }
 
     /**
      * Tests two creatures with Soulbond paired with each other
      */
     @Test
-    public void testTwoSoulbondCreaturesOnBattlefield() {
-        addCard(Zone.HAND, playerA, "Trusted Forcemage", 2);
-        addCard(Zone.BATTLEFIELD, playerA, "Forest", 6);
+    public void testTwoSoulbondCreaturesFirstAbility() {
+        addCard(Zone.HAND, playerA, forcemage);
+        addCard(Zone.HAND, playerA, trappers);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 8);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Trusted Forcemage", true);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Trusted Forcemage");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, forcemage, true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, trappers);
+        setChoice(playerA, trappers); // order triggers
+        setChoice(playerA, true);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertPermanentCount(playerA, "Trusted Forcemage", 2);
-        assertPowerToughness(playerA, "Trusted Forcemage", 4, 4, Filter.ComparisonScope.All);
+        assertPowerToughness(playerA, forcemage, 3, 3);
+        assertPowerToughness(playerA, trappers, 4, 6);
+        assertAbility(playerA, forcemage, ReachAbility.getInstance(), true);
+        assertAbility(playerA, trappers, ReachAbility.getInstance(), true);
+    }
+
+    /**
+     * Tests two creatures with Soulbond paired with each other
+     */
+    @Test
+    public void testTwoSoulbondCreaturesSecondAbility() {
+        addCard(Zone.HAND, playerA, forcemage);
+        addCard(Zone.HAND, playerA, trappers);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 8);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, forcemage, true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, trappers);
+        setChoice(playerA, forcemage); // order triggers
+        setChoice(playerA, true);
+        setChoice(playerA, forcemage); // choose paired
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPowerToughness(playerA, forcemage, 3, 3);
+        assertPowerToughness(playerA, trappers, 4, 6);
+        assertAbility(playerA, forcemage, ReachAbility.getInstance(), true);
+        assertAbility(playerA, trappers, ReachAbility.getInstance(), true);
     }
 
     /**
@@ -75,16 +125,17 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
      */
     @Test
     public void testNoPairOnSingleCreature() {
-        addCard(Zone.HAND, playerA, "Trusted Forcemage", 1);
+        addCard(Zone.HAND, playerA, forcemage, 1);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Trusted Forcemage");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, forcemage);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertPermanentCount(playerA, "Trusted Forcemage", 1);
-        assertPowerToughness(playerA, "Trusted Forcemage", 2, 2);
+        assertPermanentCount(playerA, forcemage, 1);
+        assertPowerToughness(playerA, forcemage, 2, 2);
     }
 
     /**
@@ -93,58 +144,64 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
      */
     @Test
     public void testChangeControllerForSoulbondCreature() {
-        addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard");
+        addCard(Zone.BATTLEFIELD, playerA, vanguard);
         // Soulbond (You may pair this creature with another unpaired creature when either enters the battlefield. They remain paired for as long as you control both of them.)
         // As long as Trusted Forcemage is paired with another creature, each of those creatures gets +1/+1.
-        addCard(Zone.HAND, playerA, "Trusted Forcemage");
+        addCard(Zone.HAND, playerA, forcemage);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
 
         // Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn. (It can attack and Tap this turn.)
-        addCard(Zone.HAND, playerB, "Act of Treason");
+        addCard(Zone.HAND, playerB, treason);
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 3);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Trusted Forcemage");
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Act of Treason", "Trusted Forcemage");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, forcemage);
+        setChoice(playerA, true);
+        setChoice(playerA, vanguard);
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, treason, forcemage);
 
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertPermanentCount(playerA, "Trusted Forcemage", 0);
-        assertPermanentCount(playerA, "Elite Vanguard", 1);
-        assertPowerToughness(playerA, "Elite Vanguard", 2, 1);
+        assertPermanentCount(playerA, forcemage, 0);
+        assertPermanentCount(playerA, vanguard, 1);
+        assertPowerToughness(playerA, vanguard, 2, 1);
 
-        assertPermanentCount(playerB, "Trusted Forcemage", 1);
-        assertPowerToughness(playerB, "Trusted Forcemage", 2, 2);
+        assertPermanentCount(playerB, forcemage, 1);
+        assertPowerToughness(playerB, forcemage, 2, 2);
 
     }
 
     /**
-     * Tests Soulbond effect disabling when paired creture changes its
+     * Tests Soulbond effect disabling when paired creature changes its
      * controller
      */
     @Test
     public void testChangeControllerForAnotherCreature() {
-        addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard"); // 2,1
+        addCard(Zone.BATTLEFIELD, playerA, vanguard); // 2,1
         // Soulbond (You may pair this creature with another unpaired creature when either enters the battlefield. They remain paired for as long as you control both of them.)
         // As long as Trusted Forcemage is paired with another creature, each of those creatures gets +1/+1.
-        addCard(Zone.HAND, playerA, "Trusted Forcemage"); // 2/2
+        addCard(Zone.HAND, playerA, forcemage); // 2/2
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
 
-        addCard(Zone.HAND, playerB, "Act of Treason");
+        addCard(Zone.HAND, playerB, treason);
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 3);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Trusted Forcemage");
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Act of Treason", "Elite Vanguard");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, forcemage);
+        setChoice(playerA, true);
+        setChoice(playerA, vanguard);
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, treason, vanguard);
 
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertPermanentCount(playerA, "Trusted Forcemage", 1);
-        assertPermanentCount(playerA, "Elite Vanguard", 0);
-        assertPowerToughness(playerA, "Trusted Forcemage", 2, 2);
+        assertPermanentCount(playerA, forcemage, 1);
+        assertPermanentCount(playerA, vanguard, 0);
+        assertPowerToughness(playerA, forcemage, 2, 2);
 
-        assertPermanentCount(playerB, "Elite Vanguard", 1);
-        assertPowerToughness(playerB, "Elite Vanguard", 2, 1);
+        assertPermanentCount(playerB, vanguard, 1);
+        assertPowerToughness(playerB, vanguard, 2, 1);
     }
 
     /**
@@ -153,23 +210,52 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
      */
     @Test
     public void testChangeControllerAndGettingBack() {
-        addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard");
-        addCard(Zone.HAND, playerA, "Trusted Forcemage");
+        addCard(Zone.BATTLEFIELD, playerA, vanguard);
+        addCard(Zone.HAND, playerA, forcemage);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
 
-        addCard(Zone.HAND, playerB, "Act of Treason");
+        addCard(Zone.HAND, playerB, treason);
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 3);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Trusted Forcemage");
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Act of Treason", "Trusted Forcemage");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, forcemage);
+        setChoice(playerA, true);
+        setChoice(playerA, vanguard);
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, treason, forcemage);
 
+        setStrictChooseMode(true);
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
-        assertPermanentCount(playerA, "Trusted Forcemage", 1);
-        assertPowerToughness(playerA, "Trusted Forcemage", 2, 2);
-        assertPermanentCount(playerA, "Elite Vanguard", 1);
-        assertPowerToughness(playerA, "Elite Vanguard", 2, 1);
+        assertPermanentCount(playerA, forcemage, 1);
+        assertPowerToughness(playerA, forcemage, 2, 2);
+        assertPermanentCount(playerA, vanguard, 1);
+        assertPowerToughness(playerA, vanguard, 2, 1);
+    }
+
+    /**
+     * If both paired creatures change control simultaneously, should still become unpaired
+     */
+    @Test
+    public void testBothPairedCreaturesChangeControl() {
+        addCard(Zone.BATTLEFIELD, playerA, vanguard);
+        addCard(Zone.HAND, playerA, forcemage);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+
+        addCard(Zone.HAND, playerB, "Insurrection");
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 8);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, forcemage);
+        setChoice(playerA, true);
+        setChoice(playerA, vanguard);
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Insurrection");
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPowerToughness(playerB, forcemage, 2, 2);
+        assertPowerToughness(playerB, vanguard, 2, 1);
     }
 
     /**
@@ -178,28 +264,30 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
      */
     @Test
     public void testSoulbondWorksOnControllerSide() {
-        addCard(Zone.HAND, playerA, "Trusted Forcemage");
+        addCard(Zone.HAND, playerA, forcemage);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
 
-        addCard(Zone.HAND, playerB, "Act of Treason");
+        addCard(Zone.HAND, playerB, treason);
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 3);
-        addCard(Zone.HAND, playerB, "Elite Vanguard");
+        addCard(Zone.HAND, playerB, vanguard);
         addCard(Zone.BATTLEFIELD, playerB, "Plains", 3);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Trusted Forcemage");
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Act of Treason", "Trusted Forcemage");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, forcemage);
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, treason, forcemage);
         waitStackResolved(2, PhaseStep.PRECOMBAT_MAIN);
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Elite Vanguard");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, vanguard);
+        setChoice(playerB, true);
 
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
 
         // stolen
-        assertPermanentCount(playerA, "Trusted Forcemage", 0);
+        assertPermanentCount(playerA, forcemage, 0);
 
         // both paired and have boost
-        assertPowerToughness(playerB, "Trusted Forcemage", 3, 3);
-        assertPowerToughness(playerB, "Elite Vanguard", 3, 2);
+        assertPowerToughness(playerB, forcemage, 3, 3);
+        assertPowerToughness(playerB, vanguard, 3, 2);
     }
 
     /**
@@ -207,28 +295,30 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
      */
     @Test
     public void testReturnBack() {
-        addCard(Zone.HAND, playerA, "Trusted Forcemage");
+        addCard(Zone.HAND, playerA, forcemage);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
 
-        addCard(Zone.HAND, playerB, "Act of Treason");
+        addCard(Zone.HAND, playerB, treason);
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 3);
-        addCard(Zone.HAND, playerB, "Elite Vanguard");
+        addCard(Zone.HAND, playerB, vanguard);
         addCard(Zone.BATTLEFIELD, playerB, "Plains", 3);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Trusted Forcemage");
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Act of Treason", "Trusted Forcemage");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, forcemage);
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, treason, forcemage);
         waitStackResolved(2, PhaseStep.PRECOMBAT_MAIN);
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Elite Vanguard");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, vanguard);
+        setChoice(playerB, true);
 
+        setStrictChooseMode(true);
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN); // Effect of "Act of Treason" will end here
         execute();
 
         // returned back with no boost
-        assertPermanentCount(playerA, "Trusted Forcemage", 1);
-        assertPowerToughness(playerA, "Trusted Forcemage", 2, 2);
+        assertPermanentCount(playerA, forcemage, 1);
+        assertPowerToughness(playerA, forcemage, 2, 2);
 
         // no boost on next turn (gets unpaired)
-        assertPowerToughness(playerB, "Elite Vanguard", 2, 1);
+        assertPowerToughness(playerB, vanguard, 2, 1);
     }
 
     /**
@@ -236,20 +326,27 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
      */
     @Test
     public void testUnsummon() {
-        addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard");
-        addCard(Zone.HAND, playerA, "Trusted Forcemage");
+        addCard(Zone.BATTLEFIELD, playerA, vanguard);
+        addCard(Zone.HAND, playerA, forcemage);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
         addCard(Zone.HAND, playerA, "Unsummon", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Trusted Forcemage");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Unsummon", "Elite Vanguard");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, forcemage);
+        setChoice(playerA, true);
+        setChoice(playerA, vanguard);
 
-        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        checkPT("paired boost", 1, PhaseStep.BEGIN_COMBAT, playerA, forcemage, 3, 3);
+        checkPT("paired boost", 1, PhaseStep.BEGIN_COMBAT, playerA, vanguard, 3, 2);
+
+        castSpell(1, PhaseStep.DECLARE_ATTACKERS, playerA, "Unsummon", vanguard);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        assertPermanentCount(playerA, "Elite Vanguard", 0);
-        assertPowerToughness(playerA, "Trusted Forcemage", 2, 2);
+        assertPermanentCount(playerA, vanguard, 0);
+        assertPowerToughness(playerA, forcemage, 2, 2);
     }
 
     /**
@@ -258,20 +355,46 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
      */
     @Test
     public void testPairOnAnimatedLand() {
-        addCard(Zone.HAND, playerA, "Trusted Forcemage");
+        addCard(Zone.HAND, playerA, forcemage);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
-        addCard(Zone.BATTLEFIELD, playerA, "Blinkmoth Nexus", 1);
+        addCard(Zone.BATTLEFIELD, playerA, blinkmoth, 1);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}: ");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Trusted Forcemage");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, forcemage);
+        setChoice(playerA, true);
+        setChoice(playerA, blinkmoth);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         // test paired with boost
-        assertPowerToughness(playerA, "Trusted Forcemage", 3, 3);
-        assertPowerToughness(playerA, "Blinkmoth Nexus", 2, 2);
+        assertPowerToughness(playerA, forcemage, 3, 3);
+        assertPowerToughness(playerA, blinkmoth, 2, 2);
+    }
+
+    @Test
+    public void testUnpairWhenNoLongerCreature() {
+        addCard(Zone.HAND, playerA, forcemage);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
+        addCard(Zone.BATTLEFIELD, playerA, blinkmoth, 1);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}: ");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, forcemage);
+        setChoice(playerA, true);
+        setChoice(playerA, blinkmoth);
+
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}: ");
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        // test not paired
+        assertPowerToughness(playerA, forcemage, 2, 2);
+        assertPowerToughness(playerA, blinkmoth, 1, 1);
     }
 
     /**
@@ -280,19 +403,20 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
      */
     @Test
     public void testPairOnPostAnimatedLand() {
-        addCard(Zone.HAND, playerA, "Trusted Forcemage");
+        addCard(Zone.HAND, playerA, forcemage);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
-        addCard(Zone.BATTLEFIELD, playerA, "Blinkmoth Nexus", 1);
+        addCard(Zone.BATTLEFIELD, playerA, blinkmoth, 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Trusted Forcemage");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, forcemage);
         activateAbility(1, PhaseStep.BEGIN_COMBAT, playerA, "{1}: ");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.DECLARE_ATTACKERS);
         execute();
 
         // no effect on later animation
-        assertPowerToughness(playerA, "Trusted Forcemage", 2, 2);
-        assertPowerToughness(playerA, "Blinkmoth Nexus", 1, 1);
+        assertPowerToughness(playerA, forcemage, 2, 2);
+        assertPowerToughness(playerA, blinkmoth, 1, 1);
     }
 
     /**
@@ -300,19 +424,25 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
      */
     @Test
     public void testCreatureTypeLoss() {
-        addCard(Zone.HAND, playerA, "Trusted Forcemage");
+        addCard(Zone.HAND, playerA, forcemage);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
-        addCard(Zone.BATTLEFIELD, playerA, "Blinkmoth Nexus", 1);
+        addCard(Zone.BATTLEFIELD, playerA, blinkmoth, 1);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}: ");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Trusted Forcemage");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, forcemage);
+        setChoice(playerA, true);
+        setChoice(playerA, blinkmoth);
 
+        checkPT("paired boost", 1, PhaseStep.BEGIN_COMBAT, playerA, forcemage, 3, 3);
+        checkPT("paired boost", 1, PhaseStep.BEGIN_COMBAT, playerA, blinkmoth, 2, 2);
+
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
         // test boost loss
-        assertPowerToughness(playerA, "Trusted Forcemage", 2, 2);
+        assertPowerToughness(playerA, forcemage, 2, 2);
     }
 
     /**
@@ -322,30 +452,41 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
     @Test
     public void testRebondOnNextCreature() {
         // When Phantasmal Bear becomes the target of a spell or ability, sacrifice it.
-        addCard(Zone.HAND, playerA, "Phantasmal Bear");
+        addCard(Zone.HAND, playerA, phantasmalBear);
         // Soulbond
         // As long as Trusted Forcemage is paired with another creature, each of those creatures gets +1/+1.
-        addCard(Zone.HAND, playerA, "Trusted Forcemage");
-        addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard"); // 2/1
+        addCard(Zone.HAND, playerA, forcemage);
+        addCard(Zone.BATTLEFIELD, playerA, vanguard); // 2/1
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
 
-        addCard(Zone.HAND, playerA, "Lightning Bolt", 1);
+        addCard(Zone.HAND, playerA, bolt, 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Trusted Forcemage", true);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Elite Vanguard");
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Phantasmal Bear");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, forcemage, true);
+        setChoice(playerA, true);
+        setChoice(playerA, vanguard);
 
+        checkPT("paired boost", 1, PhaseStep.BEGIN_COMBAT, playerA, forcemage, 3, 3);
+        checkPT("paired boost", 1, PhaseStep.BEGIN_COMBAT, playerA, vanguard, 3, 2);
+
+        castSpell(1, PhaseStep.DECLARE_ATTACKERS, playerA, bolt, vanguard);
+
+        checkPT("unpaired", 1, PhaseStep.END_COMBAT, playerA, forcemage, 2, 2);
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, phantasmalBear);
+        setChoice(playerA, true);
+
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertPermanentCount(playerA, "Elite Vanguard", 0);
-        assertPermanentCount(playerA, "Phantasmal Bear", 1);
+        assertPermanentCount(playerA, vanguard, 0);
+        assertPermanentCount(playerA, phantasmalBear, 1);
 
-        assertPowerToughness(playerA, "Trusted Forcemage", 3, 3);
-        assertPowerToughness(playerA, "Phantasmal Bear", 3, 3);
+        assertPowerToughness(playerA, forcemage, 3, 3);
+        assertPowerToughness(playerA, phantasmalBear, 3, 3);
     }
 
     /**
@@ -353,58 +494,62 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
      */
     @Test
     public void testGrantingAbility() {
-        addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard"); // 2/1
+        addCard(Zone.BATTLEFIELD, playerA, vanguard); // 2/1
         // Soulbond
         // As long as Nearheath Pilgrim is paired with another creature, both creatures have lifelink.
-        addCard(Zone.HAND, playerA, "Nearheath Pilgrim");
+        addCard(Zone.HAND, playerA, nearheath);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nearheath Pilgrim");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, nearheath);
+        setChoice(playerA, true);
+        setChoice(playerA, vanguard);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertPowerToughness(playerA, "Nearheath Pilgrim", 2, 1);
-        assertPowerToughness(playerA, "Elite Vanguard", 2, 1);
+        assertPowerToughness(playerA, nearheath, 2, 1);
+        assertPowerToughness(playerA, vanguard, 2, 1);
 
         Abilities<Ability> abilities = new AbilitiesImpl<>();
         abilities.add(LifelinkAbility.getInstance());
-        assertAbilities(playerA, "Nearheath Pilgrim", abilities);
-        assertAbilities(playerA, "Elite Vanguard", abilities);
+        assertAbilities(playerA, nearheath, abilities);
+        assertAbilities(playerA, vanguard, abilities);
     }
 
     @Test
     public void testExileAndReturnBack() {
-        addCard(Zone.HAND, playerA, "Elite Vanguard");
+        addCard(Zone.HAND, playerA, vanguard);
         addCard(Zone.HAND, playerA, "Cloudshift");
         // Soulbond (You may pair this creature with another unpaired creature when either enters the battlefield. They remain paired for as long as you control both of them.)
         // As long as Trusted Forcemage is paired with another creature, each of those creatures gets +1/+1.
-        addCard(Zone.BATTLEFIELD, playerA, "Trusted Forcemage");
+        addCard(Zone.BATTLEFIELD, playerA, forcemage);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Elite Vanguard");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, vanguard);
         setChoice(playerA, true);
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cloudshift", "Trusted Forcemage");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cloudshift", forcemage);
         setChoice(playerA, false);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertPermanentCount(playerA, "Trusted Forcemage", 1);
-        assertPowerToughness(playerA, "Trusted Forcemage", 2, 2);
-        assertPowerToughness(playerA, "Elite Vanguard", 2, 1);
+        assertPermanentCount(playerA, forcemage, 1);
+        assertPowerToughness(playerA, forcemage, 2, 2);
+        assertPowerToughness(playerA, vanguard, 2, 1);
 
-        Permanent trustedForcemange = getPermanent("Trusted Forcemage", playerA.getId());
-        Permanent eliteVanguard = getPermanent("Elite Vanguard", playerA.getId());
-        Assert.assertNull(trustedForcemange.getPairedCard());
-        Assert.assertNull(eliteVanguard.getPairedCard());
+        Permanent trustedForcemage = getPermanent(forcemage, playerA.getId());
+        Permanent eliteVanguard = getPermanent(vanguard, playerA.getId());
+        Assert.assertNull(trustedForcemage.getPairedMOR());
+        Assert.assertNull(eliteVanguard.getPairedMOR());
     }
 
     /**
      * Reported bug: Soulbond should use the stack, but unable to use instant speed removal since no trigger occurs
      */
     @Test
-    public void testRespondToSoulboundWithRemoval() {
+    public void testRespondToSoulbondWithRemoval() {
         // When Palinchron enters the battlefield, untap up to seven lands.
         // {2}{U}{U}: Return Palinchron to its owner's hand.
         addCard(Zone.BATTLEFIELD, playerA, "Palinchron"); // 4/5 flying
@@ -423,13 +568,122 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
 
         // Deadeye's ability should not be usable since was destroyed before Soulbond trigger resolved
         checkPlayableAbility("Can't activate", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}{U}:", false);
+
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         Permanent palinchron = getPermanent("Palinchron", playerA);
-        Assert.assertNull(palinchron.getPairedCard()); // should not be paired
+        Assert.assertNull(palinchron.getPairedMOR()); // should not be paired
         assertGraveyardCount(playerA, "Deadeye Navigator", 1);
         assertGraveyardCount(playerB, "Doom Blade", 1);
         assertPermanentCount(playerA, "Palinchron", 1);
     }
+
+    /**
+     * Three soulbond creatures, but only one pairing, even if yes to all triggers
+     */
+    @Test
+    public void testThreeSoulbond() {
+        addCard(Zone.BATTLEFIELD, playerA, nearheath); // 2/1 soulbond lifelink
+        addCard(Zone.BATTLEFIELD, playerA, forcemage); // 2/2 soulbond +1/+1
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 5);
+        addCard(Zone.HAND, playerA, trappers); // 3/5 soulbond reach
+        addCard(Zone.BATTLEFIELD, playerB, "Hidden Predators"); // state trigger
+        // When an opponent controls a creature with power 4 or greater,
+        // if this permanent is an enchantment, it becomes a 4/4 Beast creature.
+        // (checks that never pairs with Forcemage)
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, trappers);
+        setChoice(playerA, trappers); // order triggers
+        // trappers bottom of stack, then forcemage, then nearheath on top to resolve first
+        setChoice(playerA, forcemage);
+        setChoice(playerA, true); // yes for nearheath
+        // forcemage trigger then fizzles
+        // no choice for trappers as it is already paired
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPowerToughness(playerA, nearheath, 2, 1);
+        assertPowerToughness(playerA, forcemage, 2, 2);
+        assertPowerToughness(playerA, trappers, 3, 5);
+        assertAbility(playerA, nearheath, LifelinkAbility.getInstance(), true);
+        assertAbility(playerA, trappers, LifelinkAbility.getInstance(), true);
+        assertAbility(playerA, nearheath, ReachAbility.getInstance(), true);
+        assertAbility(playerA, trappers, ReachAbility.getInstance(), true);
+        Permanent forcemage1 = getPermanent(forcemage, playerA);
+        Assert.assertNull(forcemage1.getPairedMOR()); // should not be paired
+        assertType("Hidden Predators", CardType.CREATURE, false);
+
+    }
+
+    @Test
+    public void testJointAssault() {
+        addCard(Zone.BATTLEFIELD, playerA, vanguard);
+        addCard(Zone.HAND, playerA, forcemage);
+        addCard(Zone.HAND, playerA, "Joint Assault");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, forcemage);
+        setChoice(playerA, true);
+        setChoice(playerA, vanguard);
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Joint Assault", vanguard);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, forcemage, 1);
+        assertPowerToughness(playerA, forcemage, 5, 5);
+        assertPowerToughness(playerA, vanguard, 5, 4);
+    }
+
+    @Test
+    public void testAngelsTombOnly() {
+        addCard(Zone.BATTLEFIELD, playerA, angelsTomb);
+        addCard(Zone.HAND, playerA, forcemage);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, forcemage);
+        // no choice from soulbond as it doesn't trigger
+        setChoice(playerA, true); // yes for Angel's Tomb animate
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, forcemage, 1);
+        assertPowerToughness(playerA, forcemage, 2, 2);
+        assertType(angelsTomb, CardType.CREATURE, true);
+        assertPowerToughness(playerA, angelsTomb, 3, 3);
+        assertAbility(playerA, angelsTomb, FlyingAbility.getInstance(), true);
+    }
+
+    @Test
+    public void testAngelsTombAndAnother() {
+        addCard(Zone.BATTLEFIELD, playerA, angelsTomb);
+        addCard(Zone.BATTLEFIELD, playerA, vanguard);
+        addCard(Zone.HAND, playerA, forcemage);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, forcemage);
+        setChoice(playerA, "Soulbond"); // order triggers so that animate resolves first
+        setChoice(playerA, true); // yes for Angel's Tomb animate
+        setChoice(playerA, true); // yes to soulbond
+        setChoice(playerA, angelsTomb); // choose soulbond
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, forcemage, 1);
+        assertPowerToughness(playerA, forcemage, 3, 3);
+        assertType(angelsTomb, CardType.CREATURE, true);
+        assertPowerToughness(playerA, angelsTomb, 4, 4);
+        assertAbility(playerA, angelsTomb, FlyingAbility.getInstance(), true);
+    }
+
 }

@@ -24,6 +24,7 @@ public enum AbilityWord {
     DELIRIUM("Delirium"),
     DESCEND_4("Descend 4"),
     DESCEND_8("Descend 8"),
+    DISAPPEAR("Disappear"),
     DOMAIN("Domain"),
     EERIE("Eerie"),
     EMINENCE("Eminence"),

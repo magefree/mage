@@ -11,9 +11,12 @@ import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.common.FilterLandPermanent;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.TargetPermanent;
 
 /**
@@ -36,7 +39,16 @@ public final class BalduvianFrostwaker extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {U}, {T}: Target snow land becomes a 2/2 blue Elemental creature with flying. It's still a land.
-        Ability ability = new SimpleActivatedAbility(new BecomesCreatureTargetEffect(new BalduvianFrostwakerToken(), false, true, Duration.Custom), new ManaCostsImpl<>("{U}"));
+        Ability ability = new SimpleActivatedAbility(
+            new BecomesCreatureTargetEffect(
+                new CreatureToken(2, 2, "2/2 blue Elemental creature with flying", SubType.ELEMENTAL)
+                    .withColor("U").withAbility(FlyingAbility.getInstance()),
+                false,
+                true,
+                Duration.Custom
+            ),
+            new ManaCostsImpl<>("{U}")
+        );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
@@ -49,25 +61,5 @@ public final class BalduvianFrostwaker extends CardImpl {
     @Override
     public BalduvianFrostwaker copy() {
         return new BalduvianFrostwaker(this);
-    }
-}
-
-class BalduvianFrostwakerToken extends TokenImpl {
-
-    public BalduvianFrostwakerToken() {
-        super("Elemental", "2/2 blue Elemental creature with flying");
-        this.cardType.add(CardType.CREATURE);
-        color.setBlue(true);
-        subtype.add(SubType.ELEMENTAL);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-        this.addAbility(FlyingAbility.getInstance());
-    }
-    private BalduvianFrostwakerToken(final BalduvianFrostwakerToken token) {
-        super(token);
-    }
-
-    public BalduvianFrostwakerToken copy() {
-        return new BalduvianFrostwakerToken(this);
     }
 }

@@ -2691,7 +2691,7 @@ public class TestPlayer implements Player {
             String choice = choices.get(0);
 
             for (TriggeredAbility ability : abilities) {
-                if (ability.toString().startsWith(choice)) {
+                if (ability.toString().startsWith(choice) || ability.getSourceObject(game).getName().startsWith(choice)) {
                     choicesRemoveCurrent(game, "on choose triggers"); // TODO: add short lists?
                     return ability;
                 }

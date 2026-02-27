@@ -93,9 +93,9 @@ class DonnaNobleTriggeredAbility extends TriggeredAbilityImpl implements BatchTr
         if (!CardUtil.getEventTargets(event).contains(getSourceId())) {
             Permanent paired;
             Permanent permanent = game.getPermanent(getSourceId());
-            if (permanent != null && permanent.getPairedCard() != null) {
-                paired = permanent.getPairedCard().getPermanent(game);
-                if (paired == null || paired.getPairedCard() == null || !paired.getPairedCard().equals(new MageObjectReference(permanent, game))) {
+            if (permanent != null && permanent.getPairedMOR() != null) {
+                paired = permanent.getPairedMOR().getPermanent(game);
+                if (paired == null || paired.getPairedMOR() == null || !paired.getPairedMOR().equals(new MageObjectReference(permanent, game))) {
                     return false;
                 }
             } else {

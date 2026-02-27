@@ -85,13 +85,19 @@ class FlitterwingNuisanceTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (!event.getSourceId().equals(getSourceId()) || !((DamagedEvent) event).isCombatDamage()) {
+        if (!((DamagedEvent) event).isCombatDamage()) {
+            return false;
+        }
+        Permanent damagingPermanent = game.getPermanent(event.getSourceId());
+        if (damagingPermanent == null
+                || !damagingPermanent.isCreature(game)
+                || !damagingPermanent.isControlledBy(getControllerId())) {
             return false;
         }
         if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
             return true;
         }
-        Permanent permanent = game.getPermanent(event.getTargetId());
-        return permanent != null && permanent.isPlaneswalker(game);
+        Permanent damagedPermanent = game.getPermanent(event.getTargetId());
+        return damagedPermanent != null && damagedPermanent.isPlaneswalker(game);
     }
 }

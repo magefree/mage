@@ -2,7 +2,6 @@
 package mage.cards.e;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -16,8 +15,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 
 /**
  *
@@ -30,7 +28,15 @@ public final class EnsouledScimitar extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // {3}: Ensouled Scimitar becomes a 1/5 Spirit artifact creature with flying until end of turn.
-        this.addAbility(new SimpleActivatedAbility(new BecomesCreatureSourceEffect(new EnsouledScimitarToken(), CardType.ARTIFACT, Duration.EndOfTurn), new ManaCostsImpl<>("{3}")));
+        this.addAbility(new SimpleActivatedAbility(
+            new BecomesCreatureSourceEffect(
+                new CreatureToken(1, 5, "1/5 Spirit artifact creature with flying", SubType.SPIRIT)
+                    .withType(CardType.ARTIFACT).withAbility(FlyingAbility.getInstance()),
+                CardType.ARTIFACT,
+                Duration.EndOfTurn
+            ),
+            new ManaCostsImpl<>("{3}")
+        ));
         // Equipped creature gets +1/+5.
         this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(1, 5)));
         // Equip {2}
@@ -44,25 +50,5 @@ public final class EnsouledScimitar extends CardImpl {
     @Override
     public EnsouledScimitar copy() {
         return new EnsouledScimitar(this);
-    }
-}
-
-class EnsouledScimitarToken extends TokenImpl {
-
-    public EnsouledScimitarToken() {
-        super("Pincher", "1/5 Spirit artifact creature with flying");
-        cardType.add(CardType.CREATURE);
-        subtype.add(SubType.SPIRIT);
-        power = new MageInt(1);
-        toughness = new MageInt(5);
-        this.addAbility(FlyingAbility.getInstance());
-    }
-
-    private EnsouledScimitarToken(final EnsouledScimitarToken token) {
-        super(token);
-    }
-
-    public EnsouledScimitarToken copy() {
-        return new EnsouledScimitarToken(this);
     }
 }

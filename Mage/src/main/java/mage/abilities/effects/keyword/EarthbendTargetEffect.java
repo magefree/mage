@@ -71,7 +71,7 @@ public class EarthbendTargetEffect extends OneShotEffect {
                 new CreatureToken(0, 0)
                         .withAbility(HasteAbility.getInstance()),
                 false, true, Duration.Custom
-        ), source);
+        ).setTargetPointer(new FixedTarget(permanent.getId())), source);
         // Make the land into a creature before putting counters on, for the purposes of counter doublers that only apply to creatures.
         game.processAction();
         permanent.addCounters(CounterType.P1P1.createInstance(value), source, game);

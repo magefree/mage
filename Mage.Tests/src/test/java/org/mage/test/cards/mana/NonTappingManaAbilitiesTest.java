@@ -1,6 +1,7 @@
 package org.mage.test.cards.mana;
 
 import mage.abilities.mana.ManaOptions;
+import mage.constants.ManaType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -308,6 +309,25 @@ public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
         Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
         assertManaOptions("{C}{C}", manaOptions);
     }    
+
+    @Test
+    public void Test_ManaCacheActivate() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Upwelling");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+
+        // At the beginning of each player's end step, put a charge counter on Mana Cache for each untapped land that player controls.
+        // Remove a charge counter from Mana Cache: Add {C}. Any player may activate this ability but only during their turn before the end step.
+        addCard(Zone.BATTLEFIELD, playerA, "Mana Cache", 1);
+
+        activateManaAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Remove a charge counter");
+
+        setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertManaPool(playerB, ManaType.COLORLESS, 1);
+    }
     
     @Test
     public void testAvailableManaWithSpiritGuides() {
