@@ -34,10 +34,11 @@ public final class ElderOwynLyons extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Artifacts you control have ward {1}.
+        WardAbility wardAbility = new WardAbility(new GenericManaCost(1));
         this.addAbility(new SimpleStaticAbility(
                 new GainAbilityControlledEffect(
-                        new WardAbility(new GenericManaCost(1)), Duration.WhileOnBattlefield, StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACTS
-                )
+                        wardAbility, Duration.WhileOnBattlefield, StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACTS
+                ).setText("Artifacts you control have " + wardAbility.getRule())
         ));
 
         // When Elder Owyn Lyons enters the battlefield or dies, return target artifact card from your graveyard to your hand.
