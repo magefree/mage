@@ -32,7 +32,7 @@ public final class GlistenerSeer extends CardImpl {
         this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.OIL.createInstance(3)));
 
         // {T}, Remove an oil counter from Glistener Seer: Scry 1.
-        Ability ability = new SimpleActivatedAbility(new ScryEffect(1, false), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new ScryEffect(1), new TapSourceCost());
         ability.addCost(new RemoveCountersSourceCost(CounterType.OIL.createInstance()));
         this.addAbility(ability);
     }
