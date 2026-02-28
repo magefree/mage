@@ -16,8 +16,7 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.EnchantmentToken;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.CastSpellLastTurnWatcher;
 
@@ -42,7 +41,6 @@ public final class ErayoSoratamiAscendant extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // Whenever the fourth spell of a turn is cast, flip Erayo, Soratami Ascendant.
         this.addAbility(new ErayoSoratamiAscendantTriggeredAbility());
-
     }
 
     private ErayoSoratamiAscendant(final ErayoSoratamiAscendant card) {
@@ -63,7 +61,12 @@ class ErayoSoratamiAscendantTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     private static Effect getFlipEffect() {
-        Effect effect = new FlipSourceEffect(new ErayosEssenceToken());
+        Effect tokenEffect = new CounterTargetEffect().setText("counter that spell");
+        EnchantmentToken flipToken = new EnchantmentToken("Erayo's Essence", true)
+            .withColor("U")
+            .withAbility(new ErayosEssenceTriggeredAbility(tokenEffect));
+
+        Effect effect = new FlipSourceEffect(flipToken);
         effect.setText("flip {this}");
         return effect;
     }
@@ -86,29 +89,6 @@ class ErayoSoratamiAscendantTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public ErayoSoratamiAscendantTriggeredAbility copy() {
         return new ErayoSoratamiAscendantTriggeredAbility(this);
-    }
-}
-
-class ErayosEssenceToken extends TokenImpl {
-
-    ErayosEssenceToken() {
-        super("Erayo's Essence", "");
-        this.supertype.add(SuperType.LEGENDARY);
-        cardType.add(CardType.ENCHANTMENT);
-
-        color.setBlue(true);
-
-        // Whenever an opponent casts a spell for the first time in a turn, counter that spell.
-        Effect effect = new CounterTargetEffect();
-        effect.setText("counter that spell");
-        this.addAbility(new ErayosEssenceTriggeredAbility(effect));
-    }
-    private ErayosEssenceToken(final ErayosEssenceToken token) {
-        super(token);
-    }
-
-    public ErayosEssenceToken copy() {
-        return new ErayosEssenceToken(this);
     }
 }
 
