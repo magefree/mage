@@ -42,7 +42,7 @@ public final class FamishedWorldsire extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Ward {3}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{3}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{3}"), false));
 
         // Devour land 3
         this.addAbility(new DevourAbility(3, filter));

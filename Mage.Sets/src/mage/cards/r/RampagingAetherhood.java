@@ -27,11 +27,9 @@ import mage.players.Player;
  */
 public final class RampagingAetherhood extends CardImpl {
 
-    private static final String energyText = "you get an amount of {E} equal to this creature's power.";
-
     public RampagingAetherhood(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");
-        
+
         this.subtype.add(SubType.SNAKE);
         this.subtype.add(SubType.HYDRA);
         this.power = new MageInt(4);
@@ -41,7 +39,7 @@ public final class RampagingAetherhood extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Ward {2}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}"), false));
 
         // At the beginning of your upkeep, you get an amount of {E} equal to this creature's power. Then you may pay one or more {E}. If you do, put that many +1/+1 counters on this creature.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new RampagingAetherhoodEffect()));

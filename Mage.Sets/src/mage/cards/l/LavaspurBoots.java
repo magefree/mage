@@ -33,8 +33,8 @@ public final class LavaspurBoots extends CardImpl {
                 HasteAbility.getInstance(), AttachmentType.EQUIPMENT, Duration.WhileOnBattlefield
         ).setText("and has haste"));
         ability.addEffect(new GainAbilityAttachedEffect(
-                new WardAbility(new GenericManaCost(1)), AttachmentType.EQUIPMENT, Duration.WhileOnBattlefield
-        ).setText("and ward {1}"));
+            new WardAbility(new GenericManaCost(1)), AttachmentType.EQUIPMENT, Duration.WhileOnBattlefield
+        ).concatBy("and"));
         this.addAbility(ability);
 
         // Equip {1}

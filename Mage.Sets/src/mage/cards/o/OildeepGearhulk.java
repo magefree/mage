@@ -19,7 +19,6 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetCardInHand;
 
 import java.util.UUID;
 
@@ -39,7 +38,7 @@ public final class OildeepGearhulk extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // Ward {1}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{1}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{1}"), false));
 
         // When this creature enters, look at target player's hand. You may choose a card from it. If you do, that player discards that card, then draws a card.
         Ability ability = new EntersBattlefieldTriggeredAbility(new OildeepGearhulkEffect());

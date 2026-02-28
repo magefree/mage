@@ -43,7 +43,7 @@ public final class EdeaPossessedSorceress extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Ward {2}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}"), false));
 
         // At the beginning of combat on your turn, gain control of target creature an opponent controls until end of turn. Untap that creature. It gains haste until end of turn.
         Ability ability = new BeginningOfCombatTriggeredAbility(new GainControlTargetEffect(Duration.EndOfTurn));

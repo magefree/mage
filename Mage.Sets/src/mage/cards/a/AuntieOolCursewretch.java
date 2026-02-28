@@ -33,7 +33,7 @@ public final class AuntieOolCursewretch extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Ward--Blight 2.
-        this.addAbility(new WardAbility(new BlightCost(2)));
+        this.addAbility(new WardAbility(new BlightCost(2), false));
 
         // Whenever one or more -1/-1 counters are put on a creature, draw a card if you control that creature. If you don't control it, its controller loses 1 life.
         this.addAbility(new AuntieOolCursewretchTriggeredAbility());

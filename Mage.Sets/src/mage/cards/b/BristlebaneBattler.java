@@ -37,7 +37,7 @@ public final class BristlebaneBattler extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Ward {2}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}"), false));
 
         // This creature enters with five -1/-1 counters on it.
         this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.M1M1.createInstance(5)));

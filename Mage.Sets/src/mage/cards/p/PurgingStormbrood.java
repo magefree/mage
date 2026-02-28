@@ -11,12 +11,9 @@ import mage.abilities.effects.common.counter.RemoveAllCountersPermanentTargetEff
 import mage.abilities.keyword.HexproofAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.OmenCard;
-import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.WardAbility;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.common.TargetCreaturePermanent;
@@ -29,7 +26,7 @@ public final class PurgingStormbrood extends OmenCard {
 
     public PurgingStormbrood(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.INSTANT}, "{4}{B}", "Absorb Essence", "{1}{W}");
-        
+
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
@@ -38,7 +35,7 @@ public final class PurgingStormbrood extends OmenCard {
         this.addAbility(FlyingAbility.getInstance());
 
         // Ward--Pay 2 life.
-        this.addAbility(new WardAbility(new PayLifeCost(2)));
+        this.addAbility(new WardAbility(new PayLifeCost(2), false));
 
         // When this creature enters, remove all counters from up to one target creature.
         Ability ability = new EntersBattlefieldTriggeredAbility(new RemoveAllCountersPermanentTargetEffect());

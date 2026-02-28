@@ -36,14 +36,14 @@ public final class HexingSquelcher extends CardImpl {
         this.addAbility(new CantBeCounteredSourceAbility());
 
         // Ward--Pay 2 life.
-        this.addAbility(new WardAbility(new PayLifeCost(2)));
+        this.addAbility(new WardAbility(new PayLifeCost(2), false));
 
         // Spells you control can't be countered.
         this.addAbility(new SimpleStaticAbility(new CantBeCounteredControlledEffect(filter, Duration.WhileOnBattlefield)));
 
         // Other creatures you control have "Ward--Pay 2 life."
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
-                new WardAbility(new PayLifeCost(2)), Duration.WhileOnBattlefield,
+                new WardAbility(new PayLifeCost(2), false), Duration.WhileOnBattlefield,
                 StaticFilters.FILTER_PERMANENT_CREATURES, true
         ).withForceQuotes()));
     }

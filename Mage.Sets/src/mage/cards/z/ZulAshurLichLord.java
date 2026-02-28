@@ -30,7 +30,7 @@ public final class ZulAshurLichLord extends CardImpl {
 
     public ZulAshurLichLord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        
+
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.WARLOCK);
@@ -38,7 +38,7 @@ public final class ZulAshurLichLord extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Ward--Pay 2 life.
-        this.addAbility(new WardAbility(new PayLifeCost(2), false));
+        this.addAbility(new WardAbility(new PayLifeCost(2), true));
 
         // {T}: You may cast target Zombie creature card from your graveyard this turn.
         Ability ability = new SimpleActivatedAbility(

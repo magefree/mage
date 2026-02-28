@@ -32,7 +32,7 @@ public final class ScavengerRegent extends OmenCard {
 
     public ScavengerRegent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{3}{B}", "Exude Toxin", "{X}{B}{B}");
-        
+
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
@@ -41,7 +41,7 @@ public final class ScavengerRegent extends OmenCard {
         this.addAbility(FlyingAbility.getInstance());
 
         // Ward--Discard a card.
-        this.addAbility(new WardAbility(new DiscardCardCost()));
+        this.addAbility(new WardAbility(new DiscardCardCost(), false));
 
         // Exude Toxin
         // Each non-Dragon creature gets -X/-X until end of turn.
