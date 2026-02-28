@@ -82,22 +82,20 @@ class BrillianceUnleashedEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
+        Card card = game.getCard(getTargetPointer().getFirst(game, source));
+        if (controller == null || card == null) {
             return false;
         }
 
-        Card card = game.getCard(getTargetPointer().getFirst(game, source));
-        if (card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {
-            controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-            if (!card.isCreature()) {
-                Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
-                if (permanent != null) {
-                    game.addEffect(new BecomesCreatureTargetEffect(
-                        new CreatureToken(3, 3, "3/3 Robot artifact creature with flying", SubType.ROBOT)
-                            .withType(CardType.ARTIFACT).withAbility(FlyingAbility.getInstance()),
-                        false, true, Duration.Custom
-                    ).setTargetPointer(new FixedTarget(permanent, game)), source);
-                }
+        controller.moveCards(card, Zone.BATTLEFIELD, source, game);
+        if (!card.isCreature(game)) {
+            Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
+            if (permanent != null) {
+                game.addEffect(new BecomesCreatureTargetEffect(
+                    new CreatureToken(3, 3, "3/3 Robot artifact creature with flying", SubType.ROBOT)
+                        .withType(CardType.ARTIFACT).withAbility(FlyingAbility.getInstance()),
+                    false, true, Duration.Custom
+                ).setTargetPointer(new FixedTarget(permanent, game)), source);
             }
         }
         return true;
