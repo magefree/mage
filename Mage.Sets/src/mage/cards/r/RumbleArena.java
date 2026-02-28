@@ -26,7 +26,7 @@ public final class RumbleArena extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // When this land enters, scry 1.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(1)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(1, false)));
 
         // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());

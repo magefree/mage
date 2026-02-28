@@ -45,7 +45,7 @@ public final class VoyagerGlidecar extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When this Vehicle enters, scry 1.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(1)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(1, false)));
 
         // Tap three other untapped creatures you control: Until end of turn, this Vehicle becomes an artifact creature and gains flying. Put a +1/+1 counter on it.
         Ability ability = new SimpleActivatedAbility(

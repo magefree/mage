@@ -28,7 +28,7 @@ public final class CompassionateHealer extends CardImpl {
 
         // Whenever this creature becomes tapped, you gain 1 life and scry 1.
         Ability ability = new BecomesTappedSourceTriggeredAbility(new GainLifeEffect(1));
-        ability.addEffect(new ScryEffect(1).concatBy("and"));
+        ability.addEffect(new ScryEffect(1, false).concatBy("and"));
         this.addAbility(ability);
     }
 
