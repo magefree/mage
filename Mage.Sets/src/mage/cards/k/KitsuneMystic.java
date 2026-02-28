@@ -20,7 +20,7 @@ import mage.filter.predicate.permanent.AttachmentAttachedToCardTypePredicate;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.players.Player;
 import mage.target.TargetImpl;
 import mage.target.TargetPermanent;
@@ -32,6 +32,13 @@ import java.util.UUID;
  * @author LevelX2
  */
 public final class KitsuneMystic extends CardImpl {
+
+    private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("Aura attached to a creature");
+
+    static {
+        filter.add(new AttachmentAttachedToCardTypePredicate(CardType.CREATURE));
+        filter.add(SubType.AURA.getPredicate());
+    }
 
     private static final Condition condition = new EnchantedSourceCondition(2);
 
@@ -45,9 +52,18 @@ public final class KitsuneMystic extends CardImpl {
         this.flipCard = true;
         this.flipCardName = "Autumn-Tail, Kitsune Sage";
 
+        Ability ability = new SimpleActivatedAbility(new AutumnTailEffect(), new GenericManaCost(1));
+        ability.addTarget(new TargetPermanent(filter));
+
+        CreatureToken flipToken = new CreatureToken(4, 5, "", SubType.FOX, SubType.WIZARD)
+            .withName("Autumn-Tail, Kitsune Sage")
+            .withSuperType(SuperType.LEGENDARY)
+            .withColor("W")
+            .withAbility(ability);
+
         // At the beginning of the end step, if Kitsune Mystic is enchanted by two or more Auras, flip it.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                TargetController.NEXT, new FlipSourceEffect(new AutumnTailKitsuneSage()).setText("flip it"), false, condition
+            TargetController.NEXT, new FlipSourceEffect(flipToken).setText("flip it"), false, condition
         ));
     }
 
@@ -58,40 +74,6 @@ public final class KitsuneMystic extends CardImpl {
     @Override
     public KitsuneMystic copy() {
         return new KitsuneMystic(this);
-    }
-}
-
-class AutumnTailKitsuneSage extends TokenImpl {
-
-    private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("Aura attached to a creature");
-
-    static {
-        filter.add(new AttachmentAttachedToCardTypePredicate(CardType.CREATURE));
-        filter.add(SubType.AURA.getPredicate());
-    }
-
-    AutumnTailKitsuneSage() {
-        super("Autumn-Tail, Kitsune Sage", "");
-        this.supertype.add(SuperType.LEGENDARY);
-        cardType.add(CardType.CREATURE);
-        color.setWhite(true);
-        subtype.add(SubType.FOX);
-        subtype.add(SubType.WIZARD);
-        power = new MageInt(4);
-        toughness = new MageInt(5);
-
-        // {1}: Attach target Aura attached to a creature to another creature.
-        Ability ability = new SimpleActivatedAbility(new AutumnTailEffect(), new GenericManaCost(1));
-        ability.addTarget(new TargetPermanent(filter));
-        this.addAbility(ability);
-    }
-
-    private AutumnTailKitsuneSage(final AutumnTailKitsuneSage token) {
-        super(token);
-    }
-
-    public AutumnTailKitsuneSage copy() {
-        return new AutumnTailKitsuneSage(this);
     }
 }
 
