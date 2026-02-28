@@ -22,7 +22,7 @@ public class ScryEffect extends OneShotEffect {
     }
 
     public ScryEffect(DynamicValue amount) {
-        this(amount, false);
+        this(amount, true);
     }
 
     public ScryEffect(int scryNumber, boolean showEffectHint) {
