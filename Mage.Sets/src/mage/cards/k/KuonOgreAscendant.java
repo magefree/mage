@@ -17,7 +17,7 @@ import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.EnchantmentToken;
 import mage.watchers.common.CreaturesDiedWatcher;
 
 /**
@@ -38,9 +38,17 @@ public final class KuonOgreAscendant extends CardImpl {
         this.flipCard = true;
         this.flipCardName = "Kuon's Essence";
 
+        EnchantmentToken flipToken = new EnchantmentToken("Kuon's Essence", true)
+            .withColor("B")
+            .withAbility(new BeginningOfUpkeepTriggeredAbility(
+                TargetController.ANY,
+                new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, "that player"),
+                false
+            ));
+
         // At the beginning of the end step, if three or more creatures died this turn, flip Kuon, Ogre Ascendant.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                TargetController.NEXT, new FlipSourceEffect(new KuonsEssenceToken()),
+                TargetController.NEXT, new FlipSourceEffect(flipToken),
                 false, KuonOgreAscendantCondition.instance));
     }
 
@@ -51,29 +59,6 @@ public final class KuonOgreAscendant extends CardImpl {
     @Override
     public KuonOgreAscendant copy() {
         return new KuonOgreAscendant(this);
-    }
-}
-
-class KuonsEssenceToken extends TokenImpl {
-
-    KuonsEssenceToken() {
-        super("Kuon's Essence", "");
-        this.supertype.add(SuperType.LEGENDARY);
-        cardType.add(CardType.ENCHANTMENT);
-
-        color.setBlack(true);
-
-        // At the beginning of each player's upkeep, that player sacrifices a creature..
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                TargetController.ANY, new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, "that player"),
-                false));
-    }
-    private KuonsEssenceToken(final KuonsEssenceToken token) {
-        super(token);
-    }
-
-    public KuonsEssenceToken copy() {
-        return new KuonsEssenceToken(this);
     }
 }
 

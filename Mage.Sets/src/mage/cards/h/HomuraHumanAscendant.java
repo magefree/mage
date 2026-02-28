@@ -23,10 +23,10 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.EnchantmentToken;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 
@@ -47,10 +47,25 @@ public final class HomuraHumanAscendant extends CardImpl {
         this.flipCard = true;
         this.flipCardName = "Homura's Essence";
 
+        Ability ability = new SimpleStaticAbility(new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE, false));
+        Effect effect = new GainAbilityControlledEffect(
+            FlyingAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE
+        ).setText("and have flying");
+        ability.addEffect(effect);
+        Ability gainedAbility = new SimpleActivatedAbility(new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{R}"));
+        effect = new GainAbilityControlledEffect(
+            gainedAbility, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE
+        ).setText("and \"{R}: This creature gets +1/+0 until end of turn.\"");
+        ability.addEffect(effect);
+
+        EnchantmentToken flipToken = new EnchantmentToken("Homura's Essence", true)
+            .withColor("R")
+            .withAbility(ability);
+
         // Homura, Human Ascendant can't block.
         this.addAbility(new CantBlockAbility());
         // When Homura dies, return it to the battlefield flipped.
-        this.addAbility(new DiesSourceTriggeredAbility(new HomuraReturnFlippedSourceEffect(new HomurasEssence2())));
+        this.addAbility(new DiesSourceTriggeredAbility(new HomuraReturnFlippedSourceEffect(flipToken)));
     }
 
     private HomuraHumanAscendant(final HomuraHumanAscendant card) {
@@ -100,32 +115,4 @@ class HomuraReturnFlippedSourceEffect extends OneShotEffect {
         return new HomuraReturnFlippedSourceEffect(this);
     }
 
-}
-
-class HomurasEssence2 extends TokenImpl {
-
-    HomurasEssence2() {
-        super("Homura's Essence", "");
-        this.supertype.add(SuperType.LEGENDARY);
-        cardType.add(CardType.ENCHANTMENT);
-        color.setRed(true);
-        // Creatures you control get +2/+2 and have flying and "{R}: This creature gets +1/+0 until end of turn."
-        FilterCreaturePermanent filter = new FilterCreaturePermanent();
-        Ability ability = new SimpleStaticAbility(new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, filter, false));
-        Effect effect = new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, filter);
-        effect.setText("and have flying");
-        ability.addEffect(effect);
-        Ability gainedAbility = new SimpleActivatedAbility(new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{R}"));
-        effect = new GainAbilityControlledEffect(gainedAbility, Duration.WhileOnBattlefield, filter);
-        effect.setText("and \"{R}: This creature gets +1/+0 until end of turn.\"");
-        ability.addEffect(effect);
-        this.addAbility(ability);
-    }
-    private HomurasEssence2(final HomurasEssence2 token) {
-        super(token);
-    }
-
-    public HomurasEssence2 copy() {
-        return new HomurasEssence2(this);
-    }
 }

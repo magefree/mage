@@ -22,7 +22,7 @@ import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.EnchantmentToken;
 import mage.players.Player;
 
 import java.util.List;
@@ -83,38 +83,18 @@ class SasayaOrochiAscendantFlipEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            if (controller.getHand().count(new FilterLandCard(), game) > 6) {
-                new FlipSourceEffect(new SasayasEssence()).apply(game, source);
-            }
+        if (controller != null && controller.getHand().count(new FilterLandCard(), game) >= 7) {
+            EnchantmentToken flipToken = new EnchantmentToken("Sasaya's Essence", true)
+                .withColor("G")
+                .withAbility(new TapForManaAllTriggeredManaAbility(
+                    new SasayasEssenceManaEffect(), new FilterControlledLandPermanent(), SetTargetPointer.PERMANENT
+                ));
+
+            new FlipSourceEffect(flipToken).apply(game, source);
             return true;
         }
+
         return false;
-    }
-}
-
-class SasayasEssence extends TokenImpl {
-
-    SasayasEssence() {
-        super("Sasaya's Essence", "");
-        this.supertype.add(SuperType.LEGENDARY);
-        cardType.add(CardType.ENCHANTMENT);
-
-        color.setGreen(true);
-
-        // Whenever a land you control is tapped for mana, for each other land you control with the same name, add one mana of any type that land produced.
-        this.addAbility(new TapForManaAllTriggeredManaAbility(
-                new SasayasEssenceManaEffect(),
-                new FilterControlledLandPermanent(), SetTargetPointer.PERMANENT));
-    }
-
-    private SasayasEssence(final SasayasEssence token) {
-        super(token);
-    }
-
-    @Override
-    public SasayasEssence copy() {
-        return new SasayasEssence(this);
     }
 }
 
@@ -163,7 +143,7 @@ class SasayasEssenceManaEffect extends ManaEffect {
                 }
                 if (producedMana.getColorless() > 0) {
                     netMana.add(Mana.ColorlessMana(count));
-                }                
+                }
             }
         }
         return netMana;
