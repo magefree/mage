@@ -37,7 +37,7 @@ public final class TemmetNaktamunsWill extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever you attack, draw a card, then discard a card.
         this.addAbility(new AttacksWithCreaturesTriggeredAbility(

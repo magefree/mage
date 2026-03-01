@@ -29,7 +29,7 @@ public final class JechtReluctantGuardian extends TransformingDoubleFacedCard {
         this.getLeftHalfCard().setPT(4, 3);
 
         // Menace
-        this.getLeftHalfCard().addAbility(new MenaceAbility());
+        this.getLeftHalfCard().addAbility(new MenaceAbility(false));
 
         // Whenever Jecht deals combat damage to a player, you may exile it, then return it to the battlefield transformed under its owner's control.
         this.getLeftHalfCard().addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
@@ -58,7 +58,7 @@ public final class JechtReluctantGuardian extends TransformingDoubleFacedCard {
         this.getRightHalfCard().addAbility(sagaAbility.withShowSacText(true));
 
         // Menace
-        this.getRightHalfCard().addAbility(new MenaceAbility());
+        this.getRightHalfCard().addAbility(new MenaceAbility(false));
     }
 
     private JechtReluctantGuardian(final JechtReluctantGuardian card) {

@@ -38,7 +38,7 @@ public final class ZhaoTheMoonSlayer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Nonbasic lands enter tapped.
         this.addAbility(new SimpleStaticAbility(new PermanentsEnterBattlefieldTappedEffect(StaticFilters.FILTER_LANDS_NONBASIC)));

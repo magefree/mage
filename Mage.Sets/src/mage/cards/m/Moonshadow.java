@@ -34,7 +34,7 @@ public final class Moonshadow extends CardImpl {
         this.toughness = new MageInt(7);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // This creature enters with six -1/-1 counters on it.
         this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.M1M1.createInstance(6)));

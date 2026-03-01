@@ -58,7 +58,7 @@ public final class NormanOsborn extends ModalDoubleFacedCard {
         this.getRightHalfCard().addAbility(FlyingAbility.getInstance());
 
         // Menace
-        this.getRightHalfCard().addAbility(new MenaceAbility());
+        this.getRightHalfCard().addAbility(new MenaceAbility(false));
 
         // Spells you cast from your graveyard cost {2} less to cast.
         this.getRightHalfCard().addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 2)));
