@@ -1,20 +1,22 @@
 package mage.abilities.keyword;
 
 import mage.abilities.Ability;
+import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.costs.*;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
+import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.EntersTheBattlefieldEvent;
+import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.util.CardUtil;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  * @author TheElk801
@@ -42,8 +44,6 @@ public class OffspringAbility extends StaticAbility implements OptionalAdditiona
         this.additionalCost.setRepeatable(false);
         this.rule = additionalCost.getName() + ' ' + additionalCost.getReminderText();
         this.setRuleAtTheTop(true);
-        this.addSubAbility(new EntersBattlefieldTriggeredAbility(new OffspringEffect())
-                .withInterveningIf(OffspringCondition.instance).setRuleVisible(false));
     }
 
     private OffspringAbility(final OffspringAbility ability) {
@@ -76,6 +76,7 @@ public class OffspringAbility extends StaticAbility implements OptionalAdditiona
             ability.getCosts().add(cost.copy());
         }
         ability.setCostsTag(OFFSPRING_ACTIVATION_VALUE_KEY, null);
+        game.addDelayedTriggeredAbility(new OffspringDelayedTriggeredAbility(), ability);
     }
 
     @Override
@@ -107,7 +108,10 @@ class OffspringEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = source.getSourcePermanentOrLKI(game);
+        Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
+        if (permanent == null) {
+            permanent = source.getSourcePermanentOrLKI(game);
+        }
         return permanent != null && new CreateTokenCopyTargetEffect(
                 null, null, false, 1, false,
                 false, null, 1, 1, false
@@ -115,16 +119,41 @@ class OffspringEffect extends OneShotEffect {
     }
 }
 
-enum OffspringCondition implements Condition {
-    instance;
+class OffspringDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return CardUtil.checkSourceCostsTagExists(game, source, OffspringAbility.OFFSPRING_ACTIVATION_VALUE_KEY);
+    OffspringDelayedTriggeredAbility() {
+        super(new OffspringEffect(), Duration.EndOfTurn, true);
+        this.setRuleVisible(false);
+    }
+
+    private OffspringDelayedTriggeredAbility(final OffspringDelayedTriggeredAbility ability) {
+        super(ability);
     }
 
     @Override
-    public String toString() {
-        return "its offspring cost was paid";
+    public OffspringDelayedTriggeredAbility copy() {
+        return new OffspringDelayedTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (!event.getTargetId().equals(getSourceId())) {
+            return false;
+        }
+        if (!(event instanceof EntersTheBattlefieldEvent)) {
+            return false;
+        }
+        Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
+        if (permanent == null
+                || permanent.getZoneChangeCounter(game) != getStackMomentSourceZCC() + 1) {
+            return false;
+        }
+        getEffects().setTargetPointer(new FixedTarget(permanent, game));
+        return true;
     }
 }
