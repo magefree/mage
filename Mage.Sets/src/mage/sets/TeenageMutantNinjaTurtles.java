@@ -327,6 +327,8 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("Turtle Power!", 275, Rarity.RARE, mage.cards.t.TurtlePower.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Turtle Van", 181, Rarity.RARE, mage.cards.t.TurtleVan.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Turtle Van", 278, Rarity.RARE, mage.cards.t.TurtleVan.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Turtles Forever", 261, Rarity.RARE, mage.cards.t.TurtlesForever.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Turtles Forever", 27, Rarity.RARE, mage.cards.t.TurtlesForever.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Turtles in Time", 263, Rarity.MYTHIC, mage.cards.t.TurtlesInTime.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Turtles in Time", 284, Rarity.MYTHIC, mage.cards.t.TurtlesInTime.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Turtles in Time", 294, Rarity.MYTHIC, mage.cards.t.TurtlesInTime.class, NON_FULL_USE_VARIOUS));
