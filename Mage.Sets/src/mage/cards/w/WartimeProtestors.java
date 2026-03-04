@@ -2,14 +2,16 @@ package mage.cards.w;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -41,8 +43,11 @@ public final class WartimeProtestors extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Whenever another Ally you control enters, put a +1/+1 counter on that creature and it gains haste until end of turn.
-        Ability ability = new EntersBattlefieldAllTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), filter);
-        ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance()).setText("and it gains haste until end of turn"));
+        Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD,
+            new AddCountersTargetEffect(CounterType.P1P1.createInstance()).setText("put a +1/+1 counter on that creature"),
+            filter, false, SetTargetPointer.PERMANENT);
+        ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance())
+            .setText("and it gains haste until end of turn"));
         this.addAbility(ability);
     }
 
