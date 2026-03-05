@@ -30,7 +30,7 @@ public final class SuperShredder extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever another permanent leaves the battlefield, put a +1/+1 counter on Super Shredder.
         this.addAbility(new LeavesBattlefieldAllTriggeredAbility(

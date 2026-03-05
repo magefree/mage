@@ -25,7 +25,7 @@ public final class BoostedSloop extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever you attack, draw a card, then discard a card.
         this.addAbility(new AttacksWithCreaturesTriggeredAbility(

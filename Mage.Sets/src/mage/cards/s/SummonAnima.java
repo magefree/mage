@@ -48,7 +48,7 @@ public final class SummonAnima extends CardImpl {
         this.addAbility(sagaAbility);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
     }
 
     private SummonAnima(final SummonAnima card) {

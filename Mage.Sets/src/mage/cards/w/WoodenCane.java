@@ -30,7 +30,7 @@ public final class WoodenCane extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(2, 1)));
 
         // Equip {3}
-        this.addAbility(new EquipAbility(3, false));
+        this.addAbility(new EquipAbility(3));
     }
 
     private WoodenCane(final WoodenCane card) {

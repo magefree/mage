@@ -48,7 +48,7 @@ public final class BrigidsCommand extends CardImpl {
                 .addTarget(new TargetControlledCreaturePermanent().withChooseHint("+3/+3")));
 
         // * Target creature you control fights target creature an opponent controls.
-        this.getSpellAbility().addMode(new Mode(new FightTargetsEffect())
+        this.getSpellAbility().addMode(new Mode(new FightTargetsEffect(false))
                 .addTarget(new TargetControlledCreaturePermanent().withChooseHint("to fight"))
                 .addTarget(new TargetOpponentsCreaturePermanent().withChooseHint("to fight")));
     }
