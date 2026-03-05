@@ -5,7 +5,6 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.CompoundCondition;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceIsSpellCondition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
@@ -140,7 +139,7 @@ class DemonOfFatesDesignAlternativeCostSourceAbility extends AlternativeCostSour
 
     DemonOfFatesDesignAlternativeCostSourceAbility() {
         super(
-                new CompoundCondition(SourceIsSpellCondition.instance, IsBeingCastFromHandCondition.instance),
+                SourceIsSpellCondition.instance,
                 null, StaticFilters.FILTER_CARD_ENCHANTMENT,
                 true, DemonOfFatesDesignCost.instance
         );
