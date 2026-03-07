@@ -14,6 +14,8 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class OffspringTest extends CardTestPlayerBase {
 
     private static final String vinelasher = "Iridescent Vinelasher";
+    private static final String bandit = "Prosperous Bandit";
+    private static final String lion = "Silvercoat Lion";
 
     private Permanent getCreature(String name, boolean isToken) {
         for (Permanent permanent : currentGame.getBattlefield().getActivePermanents(playerA.getId(), currentGame)) {
@@ -80,4 +82,112 @@ public class OffspringTest extends CardTestPlayerBase {
 
         checkOffspring(vinelasher, 1, 2, true);
     }
+
+    @Test
+    public void testHumilityInResponseNoCopy() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+        addCard(Zone.HAND, playerA, vinelasher);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 4);
+        addCard(Zone.BATTLEFIELD, playerB, "Vedalken Orrery");
+        addCard(Zone.HAND, playerB, "Humility");
+
+        setChoice(playerA, true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, vinelasher);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Humility", true);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, vinelasher, 1);
+        assertTokenCount(playerA, vinelasher, 0);
+        assertPowerToughness(playerA, vinelasher, 1, 1);
+    }
+
+    @Test
+    public void testHumilityInResponseNoCopyWithPrintedAndGrantedOffspring() {
+        addCard(Zone.BATTLEFIELD, playerA, "Zinnia, Valley's Voice");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
+        addCard(Zone.HAND, playerA, vinelasher);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 4);
+        addCard(Zone.BATTLEFIELD, playerB, "Vedalken Orrery");
+        addCard(Zone.HAND, playerB, "Humility");
+
+        setChoice(playerA, true);
+        setChoice(playerA, true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, vinelasher);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Humility", true);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, vinelasher, 1);
+        assertTokenCount(playerA, vinelasher, 0);
+        assertPowerToughness(playerA, vinelasher, 1, 1);
+    }
+
+    @Test
+    public void testGrantedOffspringSourceRemovedBeforeEtbNoCopy() {
+        addCard(Zone.BATTLEFIELD, playerA, "Zinnia, Valley's Voice");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
+        addCard(Zone.HAND, playerA, lion);
+        addCard(Zone.HAND, playerA, "Path to Exile");
+
+        setChoice(playerA, true);
+        setChoice(playerA, false);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, lion);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Path to Exile", "Zinnia, Valley's Voice");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, lion, 1);
+        assertTokenCount(playerA, lion, 0);
+    }
+
+    @Test
+    public void testPrintedAndGrantedOffspringOnePayment() {
+        addCard(Zone.BATTLEFIELD, playerA, "Zinnia, Valley's Voice");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 6);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
+        addCard(Zone.HAND, playerA, bandit);
+
+        setChoice(playerA, true);
+        setChoice(playerA, false);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, bandit);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, bandit, 2);
+        assertTokenCount(playerA, bandit, 1);
+    }
+
+    @Test
+    public void testPrintedAndGrantedOffspringTwoPayments() {
+        addCard(Zone.BATTLEFIELD, playerA, "Zinnia, Valley's Voice");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 6);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
+        addCard(Zone.HAND, playerA, bandit);
+
+        setChoice(playerA, true);
+        setChoice(playerA, true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, bandit);
+        setChoice(playerA, "When this permanent enters");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, bandit, 3);
+        assertTokenCount(playerA, bandit, 2);
+    }
+
 }
