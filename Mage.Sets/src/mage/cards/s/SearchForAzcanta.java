@@ -35,7 +35,7 @@ public final class SearchForAzcanta extends TransformingDoubleFacedCard {
     public SearchForAzcanta(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,
                 new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.ENCHANTMENT}, new SubType[]{}, "{1}{U}",
-                "Azcanta, The Sunken Ruin",
+                "Azcanta, the Sunken Ruin",
                 new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.LAND}, new SubType[]{}, "U"
         );
 
