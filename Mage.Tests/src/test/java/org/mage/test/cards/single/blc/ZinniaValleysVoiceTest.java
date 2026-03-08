@@ -1,4 +1,4 @@
-package org.mage.test.cards.single.blb;
+package org.mage.test.cards.single.blc;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
@@ -9,6 +9,7 @@ public class ZinniaValleysVoiceTest extends CardTestPlayerBase {
 
     private static final String zinnia = "Zinnia, Valley's Voice";
     private static final String lion = "Silvercoat Lion";
+    private static final String bandit = "Prosperous Bandit";
 
     @Test
     public void testGrantsOffspringToCreatureSpells() {
@@ -45,5 +46,31 @@ public class ZinniaValleysVoiceTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, lion, 1);
         assertTokenCount(playerA, lion, 0);
+    }
+
+    @Test
+    public void testRemoveZinniaWhileOffspringTriggersOnStackBothStillResolve() {
+        addCard(Zone.BATTLEFIELD, playerA, zinnia);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 6);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
+        addCard(Zone.HAND, playerA, bandit);
+        addCard(Zone.BATTLEFIELD, playerB, "Plains");
+        addCard(Zone.HAND, playerB, "Path to Exile");
+
+        setChoice(playerA, true); // Pay printed offspring {1}
+        setChoice(playerA, true); // Pay granted offspring {2}
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, bandit);
+        setChoice(playerA, "When this permanent enters");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Path to Exile", zinnia, "create a 1/1 token copy of it.");
+        setChoice(playerA, false); // Decline Path's basic land search
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, zinnia, 0);
+        assertPermanentCount(playerA, bandit, 3);
+        assertTokenCount(playerA, bandit, 2);
     }
 }
