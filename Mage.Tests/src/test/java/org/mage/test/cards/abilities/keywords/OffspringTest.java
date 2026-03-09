@@ -1,7 +1,12 @@
 package org.mage.test.cards.abilities.keywords;
 
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continuous.GainAbilityControlledSpellsEffect;
+import mage.abilities.keyword.OffspringAbility;
+import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.filter.common.FilterNonlandCard;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import org.junit.Assert;
@@ -115,6 +120,45 @@ public class OffspringTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Vedalken Orrery");
         addCard(Zone.HAND, playerB, "Humility");
 
+        setChoice(playerA, true);
+        setChoice(playerA, true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, vinelasher);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Humility", true);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, vinelasher, 1);
+        assertTokenCount(playerA, vinelasher, 0);
+        assertPowerToughness(playerA, vinelasher, 1, 1);
+    }
+
+    @Test
+    public void testHumilityInResponseNoCopyWithPrintedAndGrantedOffspringFromNonCreatureSource() {
+        FilterNonlandCard creatureSpells = new FilterNonlandCard("creature spells");
+        creatureSpells.add(CardType.CREATURE.getPredicate());
+        addCustomCardWithAbility(
+                "offspring grant source",
+                playerA,
+                new SimpleStaticAbility(
+                        Zone.BATTLEFIELD,
+                        new GainAbilityControlledSpellsEffect(new OffspringAbility("{2}"), creatureSpells)
+                ),
+                null,
+                CardType.ENCHANTMENT,
+                "",
+                Zone.BATTLEFIELD
+        );
+
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
+        addCard(Zone.HAND, playerA, vinelasher);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 4);
+        addCard(Zone.BATTLEFIELD, playerB, "Vedalken Orrery");
+        addCard(Zone.HAND, playerB, "Humility");
+
+        // pay both offspring costs so the granted delayed trigger is definitely created
         setChoice(playerA, true);
         setChoice(playerA, true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, vinelasher);
