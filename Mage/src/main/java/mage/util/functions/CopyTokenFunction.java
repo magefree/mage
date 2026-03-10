@@ -200,6 +200,8 @@ public class CopyTokenFunction {
         target.setToughness(sourceObj.getToughness().getBaseValue());
         target.setStartingLoyalty(sourceObj.getStartingLoyalty());
         target.setStartingDefense(sourceObj.getStartingDefense());
+
+        target.setCopy(true, sourceObj);
     }
 
     private Token from(Card source, Game game, Spell spell) {
