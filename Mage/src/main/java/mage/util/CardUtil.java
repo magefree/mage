@@ -1278,10 +1278,9 @@ public final class CardUtil {
             permCard = card;
         }
 
-        // must be creature/planeswalker (if you catch this error then check targeting/copying code)
-        if (permCard.isInstantOrSorcery(game)) {
-            throw new IllegalArgumentException("Card side can't be put to battlefield: " + permCard.getName());
-        }
+        // original code checked to ensure card not instant or sorcery
+        // but that's not correct, e.g. manifest with Fierce Invocation
+        // must not throw error in that case, just continue
 
         return permCard;
     }
