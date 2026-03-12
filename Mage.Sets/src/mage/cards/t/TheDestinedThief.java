@@ -21,6 +21,7 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
+import mage.game.events.DamagedBatchForPlayersEvent;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.target.TargetPermanent;
@@ -92,7 +93,7 @@ class TheDestinedThiefTriggeredAbility extends TriggeredAbilityImpl implements B
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return true;
+        return !getFilteredEvents((DamagedBatchForPlayersEvent) event, game).isEmpty();
     }
 
     @Override
