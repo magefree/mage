@@ -15,9 +15,9 @@ public enum GreatestPowerControlledPredicate implements ObjectSourcePlayerPredic
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
         int greatestPower = Integer.MIN_VALUE;
-        for (Permanent p : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_CONTROLLED_CREATURE, input.getPlayerId(), input.getSource(), game)) {
+        for (Permanent p : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_CONTROLLED_CREATURE, input.getObject().getControllerId(), input.getSource(), game)) {
             greatestPower = Math.max(greatestPower, p.getPower().getValue());
         }
-        return input.getObject().getPower().getValue() == greatestPower;
+        return input.getObject().getPower().getValue() >= greatestPower;
     }
 }
