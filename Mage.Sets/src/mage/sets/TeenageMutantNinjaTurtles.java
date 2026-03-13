@@ -131,6 +131,7 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("Kitsune's Technique", 42, Rarity.RARE, mage.cards.k.KitsunesTechnique.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kitsune, Dragon's Daughter", 262, Rarity.RARE, mage.cards.k.KitsuneDragonsDaughter.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kitsune, Dragon's Daughter", 41, Rarity.RARE, mage.cards.k.KitsuneDragonsDaughter.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Koya, Death from Above", 11, Rarity.UNCOMMON, mage.cards.k.KoyaDeathFromAbove.class));
         cards.add(new SetCardInfo("Krang & Shredder", 153, Rarity.RARE, mage.cards.k.KrangAndShredder.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Krang & Shredder", 201, Rarity.RARE, mage.cards.k.KrangAndShredder.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Krang & Shredder", 245, Rarity.RARE, mage.cards.k.KrangAndShredder.class, NON_FULL_USE_VARIOUS));
