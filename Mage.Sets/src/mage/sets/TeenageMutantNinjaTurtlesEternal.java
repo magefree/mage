@@ -79,6 +79,7 @@ public final class TeenageMutantNinjaTurtlesEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Michelangelo, On the Scene", 124, Rarity.MYTHIC, mage.cards.m.MichelangeloOnTheScene.class));
         cards.add(new SetCardInfo("Michelangelo, the Heart", 5, Rarity.MYTHIC, mage.cards.m.MichelangeloTheHeart.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Michelangelo, the Heart", 92, Rarity.MYTHIC, mage.cards.m.MichelangeloTheHeart.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mole Module", 40, Rarity.RARE, mage.cards.m.MoleModule.class));
         cards.add(new SetCardInfo("Mona Lisa, Ever Adaptable", 126, Rarity.RARE, mage.cards.m.MonaLisaEverAdaptable.class));
         cards.add(new SetCardInfo("Monster Mashup", 117, Rarity.COMMON, mage.cards.m.MonsterMashup.class));
         cards.add(new SetCardInfo("Ninja Pizza", 32, Rarity.RARE, mage.cards.n.NinjaPizza.class, NON_FULL_USE_VARIOUS));
