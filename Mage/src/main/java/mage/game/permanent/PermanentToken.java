@@ -145,15 +145,13 @@ public class PermanentToken extends PermanentImpl {
     }
 
     @Override
-    public Card getMainCard() {
-        // Check if we have a copy source card (for tokens created from copied spells)
-        Card copySourceCard = token.getCopySourceCard();
-        if (copySourceCard != null) {
-            return copySourceCard;
-        }
+    public boolean isCopy() {
+        return this.token.getCopySourceCard() != null;
+    }
 
-        // Fallback to current behavior
-        return this;
+    @Override
+    public MageObject getCopyFrom() {
+        return this.token.getCopySourceCard();
     }
 
     @Override

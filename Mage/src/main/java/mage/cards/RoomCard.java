@@ -146,7 +146,7 @@ class RoomEnterUnlockEffect extends OneShotEffect {
         RoomCard roomCard = null;
         // Get the parent card to access the lastCastHalf variable
         if (permanent instanceof PermanentToken) {
-            Card mainCard = permanent.getMainCard();
+            Card mainCard = game.getCard((permanent.isCopy() ? permanent.getCopyFrom() : permanent).getId());
             if (mainCard instanceof RoomCard) {
                 roomCard = (RoomCard) mainCard;
             }
