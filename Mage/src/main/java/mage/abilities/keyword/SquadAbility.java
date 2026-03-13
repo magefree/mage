@@ -98,7 +98,7 @@ public class SquadAbility extends StaticAbility implements OptionalAdditionalSou
                 again = false;
             }
         }
-        ability.setCostsTag(SQUAD_ACTIVATION_VALUE_KEY, cost.getActivateCount());
+        ability.setCostsTag(CardUtil.getLinkedCostTag(this, SQUAD_ACTIVATION_VALUE_KEY), cost.getActivateCount());
     }
 
     @Override
@@ -134,7 +134,8 @@ class SquadTriggerAbility extends EntersBattlefieldTriggeredAbility {
 
     @Override
     public boolean checkInterveningIfClause(Game game) {
-        int squadCount = CardUtil.getSourceCostsTag(game, this, SquadAbility.SQUAD_ACTIVATION_VALUE_KEY, 0);
+        int squadCount = CardUtil.getSourceCostsTag(game, this,
+                CardUtil.getLinkedCostTag(this, SquadAbility.SQUAD_ACTIVATION_VALUE_KEY), 0);
         return (squadCount > 0);
     }
 
@@ -162,7 +163,8 @@ class SquadEffectETB extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int squadCount = CardUtil.getSourceCostsTag(game, source, SquadAbility.SQUAD_ACTIVATION_VALUE_KEY, 0);
+        int squadCount = CardUtil.getSourceCostsTag(game, source,
+                CardUtil.getLinkedCostTag(source, SquadAbility.SQUAD_ACTIVATION_VALUE_KEY), 0);
         CreateTokenCopySourceEffect effect = new CreateTokenCopySourceEffect(squadCount);
         return effect.apply(game, source);
     }

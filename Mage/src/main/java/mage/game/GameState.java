@@ -103,6 +103,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     private List<GameEvent> simultaneousEvents = new ArrayList<>();
     private Map<UUID, CardState> cardState = new HashMap<>();
     private Map<MageObjectReference, Map<String, Object>> permanentCostsTags = new HashMap<>(); // Permanent reference -> map of (tag -> values) describing how the permanent's spell was cast
+    private Map<MageObjectReference, Abilities<Ability>> enteringAbilities = new HashMap<>(); // Abilities granted to a spell that should persist through ETB
     private Map<UUID, MageObjectAttribute> mageObjectAttribute = new HashMap<>();
     private Map<UUID, Integer> zoneChangeCounter = new HashMap<>();
     private Map<UUID, Card> copiedCards = new HashMap<>();
@@ -177,6 +178,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.simultaneousEvents.addAll(state.simultaneousEvents);
         this.cardState = CardUtil.deepCopyObject(state.cardState);
         this.permanentCostsTags = CardUtil.deepCopyObject(state.permanentCostsTags);
+        this.enteringAbilities = CardUtil.deepCopyObject(state.enteringAbilities);
         this.mageObjectAttribute = CardUtil.deepCopyObject(state.mageObjectAttribute);
         this.zoneChangeCounter.putAll(state.zoneChangeCounter);
         this.copiedCards.putAll(state.copiedCards);
@@ -219,6 +221,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         specialActions.clear();
         cardState.clear();
         permanentCostsTags.clear();
+        enteringAbilities.clear();
         combat.clear();
         turnMods.clear();
         watchers.clear();
@@ -271,6 +274,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.simultaneousEvents = state.simultaneousEvents;
         this.cardState = state.cardState;
         this.permanentCostsTags = state.permanentCostsTags;
+        this.enteringAbilities = state.enteringAbilities;
         this.mageObjectAttribute = state.mageObjectAttribute;
         this.zoneChangeCounter = state.zoneChangeCounter;
         this.copiedCards = state.copiedCards;
@@ -672,6 +676,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
         this.reset();
         battlefield.reset(game);
+        applyEnteringAbilities(game);
         combat.reset(game);
         effects.apply(game);
         combat.checkForRemoveFromCombat(game);
@@ -1453,7 +1458,12 @@ public class GameState implements Serializable, Copyable<GameState> {
             // must use new id, so you can add multiple instances of the same ability
             // (example: gained Cascade from multiple Imoti, Celebrant of Bounty)
             newAbility = ability.copy();
-            newAbility.newId();
+            if (newAbility instanceof AbilityImpl) {
+                // keep linkage id stable across applyEffects cycles so linked-ability tags stay consistent (CR 607)
+                ((AbilityImpl) newAbility).newIdKeepingLinkage();
+            } else {
+                newAbility.newId();
+            }
         }
         newAbility.setSourceId(attachedTo.getId());
         newAbility.setControllerId(attachedTo.getOwnerId());
@@ -1543,6 +1553,55 @@ public class GameState implements Serializable, Copyable<GameState> {
     void storePermanentCostsTags(MageObjectReference permanentMOR, Ability source) {
         if (source.getCostsTagMap() != null) {
             permanentCostsTags.put(permanentMOR, CardUtil.deepCopyObject(source.getCostsTagMap()));
+        }
+    }
+
+    public void storeEnteringAbilities(MageObjectReference permanentMOR, Abilities<Ability> abilities) {
+        if (abilities == null || abilities.isEmpty()) {
+            return;
+        }
+        enteringAbilities.put(permanentMOR, abilities.copy());
+    }
+
+    public Abilities<Ability> getEnteringAbilities(MageObjectReference permanentMOR) {
+        return enteringAbilities.get(permanentMOR);
+    }
+
+    public Abilities<Ability> getAndRemoveEnteringAbilities(MageObjectReference permanentMOR) {
+        return enteringAbilities.remove(permanentMOR);
+    }
+
+    private void applyEnteringAbilities(Game game) {
+        if (enteringAbilities.isEmpty()) {
+            return;
+        }
+
+        // Apply entering abilities for this applyEffects cycle, then clear them.
+        Map<MageObjectReference, Abilities<Ability>> snapshot = new HashMap<>(enteringAbilities);
+        enteringAbilities.clear();
+        for (Map.Entry<MageObjectReference, Abilities<Ability>> entry : snapshot.entrySet()) {
+            Abilities<Ability> abilities = entry.getValue();
+            if (abilities == null || abilities.isEmpty()) {
+                continue;
+            }
+
+            Permanent permanent = entry.getKey().getPermanent(game);
+            if (permanent == null) {
+                continue;
+            }
+
+            UUID sourceId = entry.getKey().getSourceId();
+            // Add only top-level abilities; sub abilities will be handled by addAbility recursion.
+            Set<Ability> subAbilities = Collections.newSetFromMap(new IdentityHashMap<>());
+            for (Ability ability : abilities) {
+                subAbilities.addAll(ability.getSubAbilities());
+            }
+            for (Ability ability : abilities) {
+                if (subAbilities.contains(ability)) {
+                    continue;
+                }
+                addAbility(ability, sourceId, permanent);
+            }
         }
     }
 

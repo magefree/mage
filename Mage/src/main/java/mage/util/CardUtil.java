@@ -1965,6 +1965,21 @@ public final class CardUtil {
         return getSourceCostsTag(game, source, "X", defaultValue);
     }
 
+    /**
+     * Build a costs tag key that is unique per linked-ability instance (CR 607).
+     */
+    public static String getLinkedCostTag(Ability ability, String baseTag) {
+        return baseTag + "|" + ability.getLinkageId();
+    }
+
+    /**
+     * Build a costs tag key that is unique per linked-ability instance (CR 607),
+     * with a suffix to differentiate multiple costs within the same ability.
+     */
+    public static String getLinkedCostTag(Ability ability, String baseTag, String suffix) {
+        return baseTag + "|" + ability.getLinkageId() + "|" + suffix;
+    }
+
     public static String addCostVerb(String text) {
         if (costWords.stream().anyMatch(text.toLowerCase(Locale.ENGLISH)::startsWith)) {
             return text;

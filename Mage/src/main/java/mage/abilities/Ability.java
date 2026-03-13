@@ -461,6 +461,13 @@ public interface Ability extends Controllable, Serializable {
     UUID getOriginalId();
 
     /**
+     * Get the linkage id used to associate linked abilities (CR 607).
+     *
+     * @return linkage id
+     */
+    UUID getLinkageId();
+
+    /**
      * Sets the ability word for the given ability. An ability word is a word
      * that, in essence, groups, and reminds players of, cards that have a
      * common functionality and does not imply any particular rules.

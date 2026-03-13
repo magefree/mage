@@ -22,6 +22,9 @@ public class OffspringTest extends CardTestPlayerBase {
     private static final String bandit = "Prosperous Bandit";
     private static final String lion = "Silvercoat Lion";
 
+    // CR 702.175a/b: Offspring is an additional cost and creates a linked ETB trigger; multiple instances are paid separately.
+    // CR 607.2i, 607.5: linked abilities remain linked per instance, including abilities gained from other effects.
+
     private Permanent getCreature(String name, boolean isToken) {
         for (Permanent permanent : currentGame.getBattlefield().getActivePermanents(playerA.getId(), currentGame)) {
             if (name.equals(permanent.getName()) && (permanent instanceof PermanentToken) == isToken) {
@@ -224,7 +227,7 @@ public class OffspringTest extends CardTestPlayerBase {
         setChoice(playerA, true);
         setChoice(playerA, true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, bandit);
-        setChoice(playerA, "When this permanent enters");
+        setChoice(playerA, bandit); // stack both offspring triggers (2 triggers -> 1 choice)
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);

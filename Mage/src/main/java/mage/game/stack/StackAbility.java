@@ -574,6 +574,11 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
+    public UUID getLinkageId() {
+        return this.ability.getLinkageId();
+    }
+
+    @Override
     public Ability setAbilityWord(AbilityWord abilityWord) {
         throw new UnsupportedOperationException("Not supported.");
     }

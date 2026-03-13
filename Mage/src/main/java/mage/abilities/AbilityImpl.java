@@ -65,6 +65,7 @@ public abstract class AbilityImpl implements Ability {
 
     protected UUID id;
     private UUID originalId; // TODO: delete originalId???
+    private UUID linkageId;
     protected AbilityType abilityType;
     protected UUID controllerId;
     protected UUID sourceId;
@@ -101,6 +102,7 @@ public abstract class AbilityImpl implements Ability {
     protected AbilityImpl(AbilityType abilityType, Zone zone) {
         this.id = UUID.randomUUID();
         this.originalId = id;
+        this.linkageId = UUID.randomUUID();
         this.abilityType = abilityType;
         this.zone = zone;
         this.manaCosts = new ManaCostsImpl<>();
@@ -112,6 +114,7 @@ public abstract class AbilityImpl implements Ability {
     protected AbilityImpl(final AbilityImpl ability) {
         this.id = ability.id;
         this.originalId = ability.originalId;
+        this.linkageId = ability.linkageId;
         this.abilityType = ability.abilityType;
         this.controllerId = ability.controllerId;
         this.sourceId = ability.sourceId;
@@ -154,21 +157,45 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public void newId() {
-        if (!(this instanceof MageSingleton)) {
-            this.id = UUID.randomUUID();
-        }
-        getEffects().newId();
+        newIdInternal(UUID.randomUUID());
+    }
 
-        for (Ability sub : getSubAbilities()) {
-            sub.newId();
-        }
+    public void newIdKeepingLinkage() {
+        newIdInternal(this.linkageId);
     }
 
     @Override
     public void newOriginalId() {
+        newOriginalIdInternal(UUID.randomUUID());
+    }
+
+    protected void newIdInternal(UUID newLinkageId) {
+        if (!(this instanceof MageSingleton)) {
+            this.id = UUID.randomUUID();
+        }
+        setLinkageIdInternal(newLinkageId);
+        getEffects().newId();
+        for (Ability sub : getSubAbilities()) {
+            if (sub instanceof AbilityImpl) {
+                ((AbilityImpl) sub).newIdInternal(newLinkageId);
+            } else {
+                sub.newId();
+            }
+        }
+    }
+
+    protected void newOriginalIdInternal(UUID newLinkageId) {
         this.id = UUID.randomUUID();
         this.originalId = id;
+        setLinkageIdInternal(newLinkageId);
         getEffects().newId();
+        for (Ability sub : getSubAbilities()) {
+            if (sub instanceof AbilityImpl) {
+                ((AbilityImpl) sub).newOriginalIdInternal(newLinkageId);
+            } else {
+                sub.newId();
+            }
+        }
     }
 
     @Override
@@ -199,6 +226,20 @@ public abstract class AbilityImpl implements Ability {
     @Override
     public boolean isManaAbility() {
         return this.abilityType.isManaAbility();
+    }
+
+    @Override
+    public UUID getLinkageId() {
+        return linkageId;
+    }
+
+    protected void setLinkageIdInternal(UUID linkageId) {
+        this.linkageId = linkageId;
+        for (Ability sub : getSubAbilities()) {
+            if (sub instanceof AbilityImpl) {
+                ((AbilityImpl) sub).setLinkageIdInternal(linkageId);
+            }
+        }
     }
 
     @Override
@@ -1021,6 +1062,9 @@ public abstract class AbilityImpl implements Ability {
         }
         ability.setSourceId(this.sourceId);
         ability.setControllerId(this.controllerId);
+        if (ability instanceof AbilityImpl) {
+            ((AbilityImpl) ability).setLinkageIdInternal(this.linkageId);
+        }
         subAbilities.add(ability);
     }
 
