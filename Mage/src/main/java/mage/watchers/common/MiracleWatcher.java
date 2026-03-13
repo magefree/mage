@@ -24,7 +24,7 @@ import java.util.UUID;
  */
 public class MiracleWatcher extends Watcher {
 
-    private final Map<UUID, Integer> amountOfCardsDrawnThisTurn = new HashMap<>();
+    private final Map<UUID, UUID> playerDrawEventMap = new HashMap<>();
 
     public MiracleWatcher() {
         super(WatcherScope.GAME);
@@ -32,45 +32,50 @@ public class MiracleWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.UNTAP_STEP_PRE) {
-            reset();
-        }
         // inital card draws do not trigger miracle so check that phase != null
-        if (game.getPhase() != null && event.getType() == GameEvent.EventType.DREW_CARD) {
-            UUID playerId = event.getPlayerId();
-            if (playerId != null) {
-                int amount = 1 + amountOfCardsDrawnThisTurn.getOrDefault(playerId, 0);
-                amountOfCardsDrawnThisTurn.put(playerId, amount);
-                if (amount == 1) {
-                    checkMiracleAbility(event, game);
-                }
-            }
+        if (game.getPhase() != null
+                && event.getType() == GameEvent.EventType.DREW_CARD) {
+            playerDrawEventMap.putIfAbsent(event.getPlayerId(), event.getId());
+            checkMiracleAbility(event, game);
         }
     }
 
     private void checkMiracleAbility(GameEvent event, Game game) {
+        if (!event.getId().equals(playerDrawEventMap.get(event.getPlayerId()))) {
+            return;
+        }
         Card card = game.getCard(event.getTargetId());
-        if (card != null) {
-            for (Ability ability : card.getAbilities(game)) {
-                if (ability instanceof MiracleAbility) {
-                    Player controller = game.getPlayer(ability.getControllerId());
-                    if (controller != null) {
-                        Cards cards = new CardsImpl(card);
-                        controller.lookAtCards("Miracle", cards, game);
-                        if (controller.chooseUse(Outcome.Benefit, "Reveal " + card.getLogName() + " to be able to use Miracle?", ability, game)) {
-                            controller.revealCards("Miracle", cards, game);
-                            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.MIRACLE_CARD_REVEALED, card.getId(), ability, controller.getId()));
-                            break;
-                        }
-                    }
-                }
+        if (card == null) {
+            return;
+        }
+        Player controller = game.getPlayer(card.getOwnerId());
+        if (controller == null) {
+            return;
+        }
+        for (Ability ability : card.getAbilities(game)) {
+            if (!(ability instanceof MiracleAbility)) {
+                continue;
             }
+            String miracleCost = ((MiracleAbility) ability).getMiracleCost();
+            Cards cards = new CardsImpl(card);
+            controller.lookAtCards("Miracle", cards, game);
+            if (!controller.chooseUse(
+                    Outcome.Benefit, "Reveal " + card.getLogName() +
+                            " to cast for " + miracleCost + " with Miracle?", ability, game
+            )) {
+                continue;
+            }
+            controller.revealCards("Miracle", cards, game);
+            game.fireEvent(GameEvent.getEvent(
+                    GameEvent.EventType.MIRACLE_CARD_REVEALED, card.getId(),
+                    ability, controller.getId(), "" + ability.getId(), 0
+            ));
         }
     }
 
     @Override
     public void reset() {
         super.reset();
-        amountOfCardsDrawnThisTurn.clear();
+        playerDrawEventMap.clear();
     }
 }
