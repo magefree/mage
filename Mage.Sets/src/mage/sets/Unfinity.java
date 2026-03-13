@@ -71,5 +71,6 @@ public final class Unfinity extends ExpansionSet {
         cards.add(new SetCardInfo("Ticket Turbotubes", 194, Rarity.COMMON, mage.cards.t.TicketTurbotubes.class));
         cards.add(new SetCardInfo("Vegetation Abomination", 160, Rarity.COMMON, mage.cards.v.VegetationAbomination.class));
         cards.add(new SetCardInfo("Watery Grave", 278, Rarity.RARE, mage.cards.w.WateryGrave.class));
+        cards.add(new SetCardInfo("Xenosquirrels", 96, Rarity.COMMON, mage.cards.x.Xenosquirrels.class));
     }
 }
