@@ -301,6 +301,7 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("The Last Ronin", 154, Rarity.MYTHIC, mage.cards.t.TheLastRonin.class));
         cards.add(new SetCardInfo("The Last Ronin's Technique", 12, Rarity.UNCOMMON, mage.cards.t.TheLastRoninsTechnique.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Last Ronin's Technique", 223, Rarity.UNCOMMON, mage.cards.t.TheLastRoninsTechnique.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Neutrinos", 160, Rarity.UNCOMMON, mage.cards.t.TheNeutrinos.class));
         cards.add(new SetCardInfo("The Ooze", 177, Rarity.RARE, mage.cards.t.TheOoze.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Ooze", 277, Rarity.RARE, mage.cards.t.TheOoze.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tokka & Rahzar, Terrible Twos", 171, Rarity.RARE, mage.cards.t.TokkaAndRahzarTerribleTwos.class, NON_FULL_USE_VARIOUS));
