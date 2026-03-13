@@ -60,6 +60,7 @@ public final class TeenageMutantNinjaTurtlesEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Exotic Orchard", 66, Rarity.RARE, mage.cards.e.ExoticOrchard.class));
         cards.add(new SetCardInfo("Exploding Barrel", 39, Rarity.RARE, mage.cards.e.ExplodingBarrel.class));
         cards.add(new SetCardInfo("Fabled Passage", 67, Rarity.RARE, mage.cards.f.FabledPassage.class));
+        cards.add(new SetCardInfo("Fast Forward", 24, Rarity.RARE, mage.cards.f.FastForward.class));
         cards.add(new SetCardInfo("Foe-liage", 122, Rarity.COMMON, mage.cards.f.FoeLiage.class));
         cards.add(new SetCardInfo("Food Chain", 133, Rarity.MYTHIC, mage.cards.f.FoodChain.class));
         cards.add(new SetCardInfo("Grand Coliseum", 68, Rarity.RARE, mage.cards.g.GrandColiseum.class));
