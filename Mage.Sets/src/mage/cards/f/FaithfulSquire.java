@@ -17,7 +17,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -39,15 +39,27 @@ public final class FaithfulSquire extends CardImpl {
         this.flipCard = true;
         this.flipCardName = "Kaiso, Memory of Loyalty";
 
+        Ability ability = new SimpleActivatedAbility(
+            new PreventDamageToTargetEffect(Duration.EndOfTurn, Integer.MAX_VALUE),
+            new RemoveCountersSourceCost(CounterType.KI.createInstance()));
+        ability.addTarget(new TargetCreaturePermanent());
+
+        CreatureToken flipToken = new CreatureToken(3, 4, "", SubType.SPIRIT)
+            .withName("Kaiso, Memory of Loyalty")
+            .withSuperType(SuperType.LEGENDARY)
+            .withColor("W")
+            .withAbility(FlyingAbility.getInstance())
+            .withAbility(ability);
+
         // Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Faithful Squire.
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.KI.createInstance()),
-                StaticFilters.FILTER_SPELL_SPIRIT_OR_ARCANE, true
+            new AddCountersSourceEffect(CounterType.KI.createInstance()),
+            StaticFilters.FILTER_SPELL_SPIRIT_OR_ARCANE, true
         ));
 
         // At the beginning of the end step, if there are two or more ki counters on Faithful Squire, you may flip it
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                TargetController.NEXT, new FlipSourceEffect(new KaisoMemoryOfLoyaltyToken()).setText("flip it"), true, condition
+            TargetController.NEXT, new FlipSourceEffect(flipToken).setText("flip it"), true, condition
         ));
     }
 
@@ -58,36 +70,5 @@ public final class FaithfulSquire extends CardImpl {
     @Override
     public FaithfulSquire copy() {
         return new FaithfulSquire(this);
-    }
-}
-
-class KaisoMemoryOfLoyaltyToken extends TokenImpl {
-
-    KaisoMemoryOfLoyaltyToken() {
-        super("Kaiso, Memory of Loyalty", "");
-        this.supertype.add(SuperType.LEGENDARY);
-        cardType.add(CardType.CREATURE);
-        color.setWhite(true);
-        subtype.add(SubType.SPIRIT);
-        power = new MageInt(3);
-        toughness = new MageInt(4);
-
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-
-        // Remove a ki counter from Kaiso, Memory of Loyalty: Prevent all damage that would be dealt to target creature this turn.
-        Ability ability = new SimpleActivatedAbility(
-                new PreventDamageToTargetEffect(Duration.EndOfTurn, Integer.MAX_VALUE),
-                new RemoveCountersSourceCost(CounterType.KI.createInstance()));
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
-    }
-
-    private KaisoMemoryOfLoyaltyToken(final KaisoMemoryOfLoyaltyToken token) {
-        super(token);
-    }
-
-    public KaisoMemoryOfLoyaltyToken copy() {
-        return new KaisoMemoryOfLoyaltyToken(this);
     }
 }

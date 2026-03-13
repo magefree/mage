@@ -19,7 +19,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.SuperType;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.TargetPlayer;
 
 /**
@@ -38,10 +38,20 @@ public final class JushiApprentice extends CardImpl {
         this.flipCard = true;
         this.flipCardName = "Tomoya the Revealer";
 
+        Ability flipAbility = new SimpleActivatedAbility(new DrawCardTargetEffect(CardsInControllerHandCount.ANY), new ManaCostsImpl<>("{3}{U}{U}"));
+        flipAbility.addCost(new TapSourceCost());
+        flipAbility.addTarget(new TargetPlayer());
+
+        CreatureToken flipToken = new CreatureToken(2, 3, "", SubType.HUMAN, SubType.WIZARD)
+            .withName("Tomoya the Revealer")
+            .withSuperType(SuperType.LEGENDARY)
+            .withColor("U")
+            .withAbility(flipAbility);
+
         // {2}{U}, {tap}: Draw a card. If you have nine or more cards in hand, flip Jushi Apprentice.
         Ability ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{2}{U}"));
         ability.addCost(new TapSourceCost());
-        ability.addEffect(new ConditionalOneShotEffect(new FlipSourceEffect(new TomoyaTheRevealer()), new CardsInHandCondition(ComparisonType.MORE_THAN, 8),
+        ability.addEffect(new ConditionalOneShotEffect(new FlipSourceEffect(flipToken), new CardsInHandCondition(ComparisonType.MORE_THAN, 8),
                     "If you have nine or more cards in hand, flip {this}"));
         this.addAbility(ability);
     }
@@ -53,32 +63,5 @@ public final class JushiApprentice extends CardImpl {
     @Override
     public JushiApprentice copy() {
         return new JushiApprentice(this);
-    }
-}
-
-class TomoyaTheRevealer extends TokenImpl {
-
-    TomoyaTheRevealer() {
-        super("Tomoya the Revealer", "");
-        this.supertype.add(SuperType.LEGENDARY);
-        cardType.add(CardType.CREATURE);
-        color.setBlue(true);
-        subtype.add(SubType.HUMAN);
-        subtype.add(SubType.WIZARD);
-        power = new MageInt(2);
-        toughness = new MageInt(3);
-
-        // {3}{U}{U},{T} : Target player draws X cards, where X is the number of cards in your hand.
-        Ability ability = new SimpleActivatedAbility(new DrawCardTargetEffect(CardsInControllerHandCount.ANY), new ManaCostsImpl<>("{3}{U}{U}"));
-        ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetPlayer());
-        this.addAbility(ability);
-    }
-    private TomoyaTheRevealer(final TomoyaTheRevealer token) {
-        super(token);
-    }
-
-    public TomoyaTheRevealer copy() {
-        return new TomoyaTheRevealer(this);
     }
 }
