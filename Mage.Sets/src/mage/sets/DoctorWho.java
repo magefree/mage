@@ -652,10 +652,10 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("River Song", 436, Rarity.RARE, mage.cards.r.RiverSong.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("River Song", 547, Rarity.RARE, mage.cards.r.RiverSong.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("River Song", 757, Rarity.RARE, mage.cards.r.RiverSong.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("River Song's Diary", 1051, Rarity.RARE, mage.cards.r.RiverSongsDiary.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("River Song's Diary", 182, Rarity.RARE, mage.cards.r.RiverSongsDiary.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("River Song's Diary", 460, Rarity.RARE, mage.cards.r.RiverSongsDiary.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("River Song's Diary", 787, Rarity.RARE, mage.cards.r.RiverSongsDiary.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("River Song's Diary", 1051, Rarity.RARE, mage.cards.r.RiverSongsDiary.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("River Song's Diary", 182, Rarity.RARE, mage.cards.r.RiverSongsDiary.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("River Song's Diary", 460, Rarity.RARE, mage.cards.r.RiverSongsDiary.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("River Song's Diary", 787, Rarity.RARE, mage.cards.r.RiverSongsDiary.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("RMS Titanic", 389, Rarity.RARE, mage.cards.r.RMSTitanic.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("RMS Titanic", 698, Rarity.RARE, mage.cards.r.RMSTitanic.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("RMS Titanic", 93, Rarity.RARE, mage.cards.r.RMSTitanic.class, NON_FULL_USE_VARIOUS));
