@@ -53,6 +53,7 @@ public final class TeenageMutantNinjaTurtlesEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Donatello, the Brains", 2, Rarity.MYTHIC, mage.cards.d.DonatelloTheBrains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Donatello, the Brains", 85, Rarity.MYTHIC, mage.cards.d.DonatelloTheBrains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Donnie & April, Adorkable Duo", 111, Rarity.RARE, mage.cards.d.DonnieAndAprilAdorkableDuo.class));
+        cards.add(new SetCardInfo("Double Jump // Flying Kick", 35, Rarity.RARE, mage.cards.d.DoubleJumpFlyingKick.class));
         cards.add(new SetCardInfo("Dragonskull Summit", 64, Rarity.RARE, mage.cards.d.DragonskullSummit.class));
         cards.add(new SetCardInfo("Endless Foot Assault", 8, Rarity.RARE, mage.cards.e.EndlessFootAssault.class));
         cards.add(new SetCardInfo("Electric Seaweed", 23, Rarity.RARE, mage.cards.e.ElectricSeaweed.class));
