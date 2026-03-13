@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.util.Locale;
+import java.util.prefs.Preferences;
 import java.util.Scanner;
 
 /**
@@ -46,6 +47,12 @@ public abstract class DeckImporter {
     protected static final Logger logger = Logger.getLogger(DeckImporter.class);
 
     private static final String[] SIDEBOARD_MARKS = new String[]{"//sideboard", "sb: "};
+
+    protected Preferences prefs = null;
+
+    public void setPreferences(Preferences prefs) {
+        this.prefs = prefs;
+    }
 
     public static DeckImporter getDeckImporter(String file) {
         if (file == null) {
