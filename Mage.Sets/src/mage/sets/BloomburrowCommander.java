@@ -371,6 +371,7 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Wooded Ridgeline", 353, Rarity.COMMON, mage.cards.w.WoodedRidgeline.class));
         cards.add(new SetCardInfo("Woodland Cemetery", 354, Rarity.RARE, mage.cards.w.WoodlandCemetery.class));
         cards.add(new SetCardInfo("Yavimaya Coast", 355, Rarity.RARE, mage.cards.y.YavimayaCoast.class));
+        cards.add(new SetCardInfo("Zinnia, Valley's Voice", 4, Rarity.MYTHIC, mage.cards.z.ZinniaValleysVoice.class));
         cards.add(new SetCardInfo("Zulaport Cutthroat", 190, Rarity.UNCOMMON, mage.cards.z.ZulaportCutthroat.class));
     }
 }

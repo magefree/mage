@@ -7,6 +7,7 @@ import mage.abilities.costs.mana.ActivationManaAbilityStep;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.keyword.BestowAbility;
+import mage.abilities.keyword.OffspringAbility;
 import mage.abilities.keyword.PrototypeAbility;
 import mage.cards.*;
 import mage.constants.*;
@@ -356,6 +357,7 @@ public class Spell extends StackObjectImpl implements Card {
                     }
                 } else {
                     permId = card.getId();
+                    OffspringAbility.syncActivationTagsWithCurrentSpellAbilities(this, game);
                     MageObjectReference mor = new MageObjectReference(getSpellAbility());
                     game.storePermanentCostsTags(mor, getSpellAbility());
                     permanentCreated = controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null);
@@ -389,6 +391,7 @@ public class Spell extends StackObjectImpl implements Card {
             }
             // Aura has no legal target and its a bestow enchantment -> Add it to battlefield as creature
             if (bestow) {
+                OffspringAbility.syncActivationTagsWithCurrentSpellAbilities(this, game);
                 MageObjectReference mor = new MageObjectReference(getSpellAbility());
                 game.storePermanentCostsTags(mor, getSpellAbility());
                 return controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null);
@@ -406,6 +409,7 @@ public class Spell extends StackObjectImpl implements Card {
             token.putOntoBattlefield(1, game, ability, getControllerId(), false, false, null, null, false);
             return true;
         } else {
+            OffspringAbility.syncActivationTagsWithCurrentSpellAbilities(this, game);
             MageObjectReference mor = new MageObjectReference(getSpellAbility());
             game.storePermanentCostsTags(mor, getSpellAbility());
             return controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null);
