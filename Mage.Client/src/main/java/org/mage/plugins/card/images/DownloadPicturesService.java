@@ -13,6 +13,7 @@ import mage.client.remote.XmageURLConnection;
 import mage.client.util.CardLanguage;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.sets.ConstructedFormats;
+import mage.constants.Rarity;
 import mage.util.ThreadUtils;
 import mage.util.XmageThreadFactory;
 import net.java.truevfs.access.TFile;
@@ -59,6 +60,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
     private static final String ALL_IMAGES = "- ALL images from selected source (can be slow)";
     private static final String ALL_MODERN_IMAGES = "- MODERN images (can be slow)";
     private static final String ALL_STANDARD_IMAGES = "- STANDARD images";
+    private static final String ALL_PAUPER_IMAGES = "- PAUPER images (can be slow)";
     private static final String ALL_TOKENS = "- TOKEN images";
     private static final String ALL_BASICS = "- BASIC LAND images";
 
@@ -329,6 +331,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
             setNames.add(ALL_IMAGES);
             setNames.add(ALL_MODERN_IMAGES);
             setNames.add(ALL_STANDARD_IMAGES);
+            setNames.add(ALL_PAUPER_IMAGES);
             setNames.add(ALL_BASICS);
         }
         if (selectedSource.isTokenSource()) {
@@ -356,6 +359,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         selectedSets.clear();
         boolean onlyTokens = false;
         boolean onlyBasics = false;
+        boolean onlyCommons = false;
         List<String> formatSets;
         List<String> sourceSets = selectedSource.getSupportedSets();
         switch (selectedItem) {
@@ -388,6 +392,11 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                 onlyTokens = true;
                 break;
 
+            case ALL_PAUPER_IMAGES:
+                selectedSets.addAll(selectedSource.getSupportedSets());
+                onlyCommons = true;
+                break;
+
             default:
                 // selects one set
                 ExpansionSet selectedExp = findSetByNameWithYear(selectedItem);
@@ -402,6 +411,16 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         int numberTokenImagesAvailable = 0;
         int numberCardImagesAvailable = 0;
         for (CardDownloadData data : cardsMissing) {
+            if(onlyCommons) {
+                if(data.isCommon()
+                    && selectedSource.isCardSource()
+                    && selectedSource.isCardImageProvided(data.getSet(), data.getName())
+                    && selectedSets.contains(data.getSet())) {
+                    numberTokenImagesAvailable++;
+                    cardsDownloadQueue.add(data);
+                }
+                continue;
+            }
             if (data.isToken()) {
                 if (!onlyBasics
                         && selectedSource.isTokenSource()
@@ -498,6 +517,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                         }
 
                         url.setSplitCard(card.isSplitCard());
+                        url.setCommon(card.getRarity() == Rarity.COMMON);
                         allCardsUrls.add(url);
                     }
                     // second side
