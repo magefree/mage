@@ -161,6 +161,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         List<Permanent> targetList = new ArrayList<>();
+        List<Token> creationList = new ArrayList<>();
         if (savedPermanent != null) {
             targetList.add(savedPermanent);
         } else if (useLKI) {
@@ -216,9 +217,12 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
             } else {
                 applyAdditionsToToken(token);
             }
-
-            token.putOntoBattlefield(number, game, source, playerId == null ? source.getControllerId() : playerId, tapped, attacking, attackedPlayer, attachedTo);
-            for (UUID tokenId : token.getLastAddedTokenIds()) { // by cards like Doubling Season multiple tokens can be added to the battlefield
+            creationList.add(token);
+        }
+        if (!creationList.isEmpty()) {
+            Token firstToken = creationList.get(0);
+            firstToken.putOntoBattlefield(number, game, source, playerId == null ? source.getControllerId() : playerId, tapped, attacking, attackedPlayer, attachedTo, true, creationList);
+            for (UUID tokenId : firstToken.getLastAddedTokenIds()) { // by cards like Doubling Season multiple tokens can be added to the battlefield
                 Permanent tokenPermanent = game.getPermanent(tokenId);
                 if (tokenPermanent != null) {
                     addedTokenPermanents.add(tokenPermanent);
