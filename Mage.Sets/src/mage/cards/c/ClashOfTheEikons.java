@@ -32,7 +32,7 @@ public final class ClashOfTheEikons extends CardImpl {
         this.getSpellAbility().getModes().setMaxModes(3);
 
         // * Target creature you control fights target creature an opponent controls.
-        this.getSpellAbility().addEffect(new FightTargetsEffect());
+        this.getSpellAbility().addEffect(new FightTargetsEffect(false));
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addTarget(new TargetOpponentsCreaturePermanent());
 

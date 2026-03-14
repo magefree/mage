@@ -32,7 +32,7 @@ public final class JoelResoluteSurvivor extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever a creature token dies, put a +1/+1 counter on Joel and draw a card. This ability triggers only once each turn.
         Ability ability = new DiesCreatureTriggeredAbility(

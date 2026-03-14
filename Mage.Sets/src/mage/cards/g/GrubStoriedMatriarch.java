@@ -42,7 +42,7 @@ public final class GrubStoriedMatriarch extends TransformingDoubleFacedCard {
         this.getRightHalfCard().setPT(2, 1);
 
         // Menace
-        this.getLeftHalfCard().addAbility(new MenaceAbility());
+        this.getLeftHalfCard().addAbility(new MenaceAbility(false));
 
         // Whenever this creature enters or transforms into Grub, Storied Matriarch, return up to one target Goblin card from your graveyard to your hand.
         Ability ability = new TransformsOrEntersTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect(), false);
@@ -56,7 +56,7 @@ public final class GrubStoriedMatriarch extends TransformingDoubleFacedCard {
 
         // Grub, Notorious Auntie
         // Menace
-        this.getRightHalfCard().addAbility(new MenaceAbility());
+        this.getRightHalfCard().addAbility(new MenaceAbility(false));
 
         // Whenever Grub attacks, you may blight 1. If you do, create a tapped and attacking token that's a copy of the blighted creature, except it has "At the beginning of the end step, sacrifice this token."
         this.getRightHalfCard().addAbility(new AttacksTriggeredAbility(new GrubStoriedMatriarchEffect()));

@@ -51,7 +51,7 @@ public final class QuintessentialKatana extends CardImpl {
         ));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2, false));
+        this.addAbility(new EquipAbility(2));
     }
 
     private QuintessentialKatana(final QuintessentialKatana card) {

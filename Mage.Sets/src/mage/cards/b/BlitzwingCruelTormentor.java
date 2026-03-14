@@ -31,7 +31,7 @@ public final class BlitzwingCruelTormentor extends TransformingDoubleFacedCard {
     public BlitzwingCruelTormentor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,
                 new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, new SubType[]{SubType.ROBOT}, "{5}{B}",
-                "Blitzwing Adaptive Assailant",
+                "Blitzwing, Adaptive Assailant",
                 new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.ARTIFACT}, new SubType[]{SubType.VEHICLE}, "B");
 
 

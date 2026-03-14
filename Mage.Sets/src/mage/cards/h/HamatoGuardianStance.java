@@ -26,7 +26,7 @@ public final class HamatoGuardianStance extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FlyingAbility.getInstance())
             .setText("and gains flying until end of turn"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new ScryEffect(1).setText("Scry 1"));
+        this.getSpellAbility().addEffect(new ScryEffect(1));
     }
 
     private HamatoGuardianStance(final HamatoGuardianStance card) {

@@ -19,7 +19,7 @@ public final class TeenageMutantNinjaTurtlesSourceMaterial extends ExpansionSet 
         super("Teenage Mutant Ninja Turtles Source Material", "PZA", ExpansionSet.buildDate(2026, 3, 6), SetType.SUPPLEMENTAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
-        this.maxCardNumberInBooster = 64; // TODO: Update once more info is available
+        this.maxCardNumberInBooster = 20;
 
         cards.add(new SetCardInfo("All Will Be One", 8, Rarity.MYTHIC, mage.cards.a.AllWillBeOne.class));
         cards.add(new SetCardInfo("Arcbound Ravager", 14, Rarity.MYTHIC, mage.cards.a.ArcboundRavager.class));

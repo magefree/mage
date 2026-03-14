@@ -30,7 +30,7 @@ public final class SunsetSaboteur extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Ward--Discard a card.
         this.addAbility(new WardAbility(new DiscardCardCost(), false));

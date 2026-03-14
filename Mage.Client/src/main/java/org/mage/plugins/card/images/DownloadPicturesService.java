@@ -790,7 +790,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                 // gen temp file (download to images folder)
                 String tempPath = getImagesDir() + File.separator + "downloading" + File.separator;
                 if (useSpecifiedPaths) {
-                    fileTempImage = new TFile(tempPath + actualFilename + "-" + card.hashCode() + ".jpg");
+                    fileTempImage = new TFile(tempPath + CardImageUtils.prepareCardNameForFile(actualFilename) + "-" + card.hashCode() + ".jpg");
                 } else {
                     fileTempImage = new TFile(tempPath + CardImageUtils.prepareCardNameForFile(card.getName()) + "-" + card.hashCode() + ".jpg");
                 }
@@ -804,9 +804,9 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                 // gen dest file name
                 if (useSpecifiedPaths) {
                     if (card.isToken()) {
-                        destFile = new TFile(CardImageUtils.buildImagePathToSet(card) + actualFilename + ".jpg");
+                        destFile = new TFile(CardImageUtils.buildImagePathToSet(card) + CardImageUtils.prepareCardNameForFile(actualFilename) + ".jpg");
                     } else {
-                        destFile = new TFile(CardImageUtils.buildImagePathToTokens() + actualFilename + ".jpg");
+                        destFile = new TFile(CardImageUtils.buildImagePathToTokens() + CardImageUtils.prepareCardNameForFile(actualFilename) + ".jpg");
                     }
                 } else {
                     destFile = new TFile(CardImageUtils.buildImagePathToCardOrToken(card));

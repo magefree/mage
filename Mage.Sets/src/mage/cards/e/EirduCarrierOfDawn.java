@@ -71,7 +71,7 @@ public final class EirduCarrierOfDawn extends TransformingDoubleFacedCard {
 
         // Each other nontoken creature you control has persist.
         this.getRightHalfCard().addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
-                new PersistAbility(), Duration.WhileControlled,
+                new PersistAbility(), Duration.WhileOnBattlefield,
                 StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN, true
         ).setText("each other nontoken creature you control has persist")));
 

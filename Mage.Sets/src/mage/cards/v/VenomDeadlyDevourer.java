@@ -41,7 +41,7 @@ public final class VenomDeadlyDevourer extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // {3}: Exile target creature card from a graveyard. When you do, put X +1/+1 counters on target Symbiote, where X is the exiled card's toughness.
         Ability ability = new SimpleActivatedAbility(new VenomDeadlyDevourerEffect(), new GenericManaCost(3));

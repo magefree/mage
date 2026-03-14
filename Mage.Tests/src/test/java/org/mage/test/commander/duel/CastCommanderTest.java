@@ -6,6 +6,7 @@ import mage.constants.Zone;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestCommanderDuelBase;
 
 /**
@@ -126,4 +127,22 @@ public class CastCommanderTest extends CardTestCommanderDuelBase {
         assertLife(playerA, 40);
         assertLife(playerB, 40);        
     }        
+
+    // https://github.com/magefree/mage/issues/14571
+    @Test
+    public void testCastWithDemonOfFatesDesign() {
+        addCard(Zone.BATTLEFIELD, playerA, "Demon of Fate's Design");
+        addCard(Zone.COMMAND, playerA, "Anikthea, Hand of Erebos");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Anikthea, Hand of Erebos");
+        setChoice(playerA, "Cast with alternative cost: Pay 5 life");
+        addTarget(playerA, TestPlayer.TARGET_SKIP);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Anikthea, Hand of Erebos", 1);
+        assertLife(playerA, 35);
+    }
 }

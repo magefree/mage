@@ -32,7 +32,7 @@ public final class StarAthlete extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever Star Athlete attacks, choose up to one target nonland permanent. Its controller may sacrifice it. If they don't, Star Athlete deals 5 damage to that player.
         Ability ability = new AttacksTriggeredAbility(new StarAthleteEffect());

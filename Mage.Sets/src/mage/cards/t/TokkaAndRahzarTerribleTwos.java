@@ -44,7 +44,7 @@ public final class TokkaAndRahzarTerribleTwos extends CardImpl {
         this.addAbility(new CantBeCounteredSourceAbility());
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever a player casts a spell, if the amount of mana spent to cast it was less than its mana value, Tokka & Rahzar deal 3 damage to that player.
         this.addAbility(new SpellCastAllTriggeredAbility(
