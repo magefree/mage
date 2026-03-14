@@ -77,7 +77,6 @@ public class CoreSet2019Promos extends ExpansionSet {
         cards.add(new SetCardInfo("Mistcaller", "62s", Rarity.RARE, mage.cards.m.Mistcaller.class));
         cards.add(new SetCardInfo("Murder", 110, Rarity.UNCOMMON, mage.cards.m.Murder.class));
         cards.add(new SetCardInfo("Mystic Archaeologist", "63s", Rarity.RARE, mage.cards.m.MysticArchaeologist.class));
-        cards.add(new SetCardInfo("Nicol Bolas, the Arisen", "218s", Rarity.MYTHIC, mage.cards.n.NicolBolasTheArisen.class));
         cards.add(new SetCardInfo("Nicol Bolas, the Ravager", "218s", Rarity.MYTHIC, mage.cards.n.NicolBolasTheRavager.class));
         cards.add(new SetCardInfo("Omniscience", "65s", Rarity.MYTHIC, mage.cards.o.Omniscience.class));
         cards.add(new SetCardInfo("One with the Machine", "66s", Rarity.RARE, mage.cards.o.OneWithTheMachine.class));

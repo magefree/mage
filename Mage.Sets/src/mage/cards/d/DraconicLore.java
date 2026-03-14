@@ -23,7 +23,7 @@ import java.util.UUID;
 public final class DraconicLore extends CardImpl {
 
     private static final Condition condition = new PermanentsOnTheBattlefieldCondition(
-            new FilterControlledPermanent(SubType.DRAGON, "you control a Dragon")
+        new FilterControlledPermanent(SubType.DRAGON, "you control a Dragon")
     );
     private static final Hint hint = new ConditionHint(condition, "You control a Dragon");
 

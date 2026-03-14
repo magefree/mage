@@ -38,7 +38,7 @@ public final class SquiresLightblade extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(1, 0)));
 
         // Equip 3
-        this.addAbility(new EquipAbility(3));
+        this.addAbility(new EquipAbility(3, false));
     }
 
     private SquiresLightblade(final SquiresLightblade card) {

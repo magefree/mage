@@ -1,6 +1,5 @@
 package mage.cards.g;
 
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageSourceTriggeredAbility;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
@@ -17,7 +16,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -40,10 +39,14 @@ public final class GenjuOfTheFields extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // {2}: Until end of turn, enchanted Plains becomes a 2/5 white Spirit creature with "Whenever this creature deals damage, its controller gains that much life." It's still a land.
-        Ability ability = new SimpleActivatedAbility(new BecomesCreatureAttachedWithActivatedAbilityOrSpellEffect(
-                new SpiritToken(), "Until end of turn, enchanted Plains " +
-                "becomes a 2/5 white Spirit creature", Duration.EndOfTurn
-        ), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(
+            new BecomesCreatureAttachedWithActivatedAbilityOrSpellEffect(
+                new CreatureToken(2, 5, "2/5 white Spirit creature", SubType.SPIRIT).withColor("W"),
+                "Until end of turn, enchanted Plains becomes a 2/5 white Spirit creature",
+                Duration.EndOfTurn
+            ),
+            new GenericManaCost(2)
+        );
         ability.addEffect(new GainAbilityAttachedEffect(
                 new DealsDamageSourceTriggeredAbility(new GainLifeEffect(SavedDamageValue.MUCH)), AttachmentType.AURA, Duration.EndOfTurn
         ).setText("with \"Whenever this creature deals damage, its controller gains that much life.\" It's still a land"));
@@ -64,25 +67,5 @@ public final class GenjuOfTheFields extends CardImpl {
     @Override
     public GenjuOfTheFields copy() {
         return new GenjuOfTheFields(this);
-    }
-
-    private static class SpiritToken extends TokenImpl {
-
-        SpiritToken() {
-            super("Spirit", "2/5 white Spirit creature");
-            cardType.add(CardType.CREATURE);
-            color.setWhite(true);
-            subtype.add(SubType.SPIRIT);
-            power = new MageInt(2);
-            toughness = new MageInt(5);
-        }
-
-        private SpiritToken(final SpiritToken token) {
-            super(token);
-        }
-
-        public SpiritToken copy() {
-            return new SpiritToken(this);
-        }
     }
 }

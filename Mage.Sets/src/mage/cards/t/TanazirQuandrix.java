@@ -43,9 +43,7 @@ public final class TanazirQuandrix extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // When Tanazir Quandrix enters the battlefield, double the number of +1/+1 counters on target creature you control.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DoubleCountersTargetEffect(CounterType.P1P1)
-                .setText("double the number of +1/+1 counters on target creature you control")
-        );
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DoubleCountersTargetEffect(CounterType.P1P1));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
 

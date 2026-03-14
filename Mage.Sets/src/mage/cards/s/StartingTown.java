@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedUnlessAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.PayLifeCost;
+import mage.abilities.hint.ConditionHint;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
@@ -27,7 +28,7 @@ public final class StartingTown extends CardImpl {
         this.subtype.add(SubType.TOWN);
 
         // This land enters tapped unless it's your first, second, or third turn of the game.
-        this.addAbility(new EntersBattlefieldTappedUnlessAbility(StartingTownCondition.instance));
+        this.addAbility(new EntersBattlefieldTappedUnlessAbility(StartingTownCondition.instance).addHint(new ConditionHint(StartingTownCondition.instance)));
 
         // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());

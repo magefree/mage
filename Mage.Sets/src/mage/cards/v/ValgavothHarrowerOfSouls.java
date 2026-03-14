@@ -37,7 +37,7 @@ public final class ValgavothHarrowerOfSouls extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Ward--Pay 2 life.
-        this.addAbility(new WardAbility(new PayLifeCost(2)));
+        this.addAbility(new WardAbility(new PayLifeCost(2), false));
 
         // Whenever an opponent loses life for the first time during each of their turns, put a +1/+1 counter on Valgavoth, Harrower of Souls and draw a card.
         this.addAbility(new ValgavothHarrowerOfSoulsTriggeredAbility());

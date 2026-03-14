@@ -11,8 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.Zone;
-import mage.filter.common.FilterArtifactCard;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -29,7 +28,7 @@ public final class Fleshgrafter extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Discard an artifact card: Fleshgrafter gets +2/+2 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), new DiscardCardCost(new FilterArtifactCard("an artifact card"))));
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), new DiscardCardCost(StaticFilters.FILTER_CARD_ARTIFACT_AN)));
     }
 
     private Fleshgrafter(final Fleshgrafter card) {

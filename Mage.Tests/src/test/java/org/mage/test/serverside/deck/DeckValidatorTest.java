@@ -4,6 +4,7 @@ import mage.cards.decks.DeckValidator;
 import mage.deck.Commander;
 import mage.deck.Limited;
 import mage.deck.Modern;
+import mage.deck.Legacy;
 import mage.deck.Standard;
 import org.junit.Assert;
 import org.junit.Test;
@@ -17,6 +18,14 @@ import static org.mage.test.serverside.deck.DeckValidationUtil.testDeckValid;
  * @author LevelX2
  */
 public class DeckValidatorTest extends MageTestPlayerBase {
+
+    @Test
+    public void testGleemoxBanned() {
+        DeckTester deckTester = new DeckTester(new Legacy());
+        deckTester.addMaindeck("Gleemox", 1);
+        deckTester.addMaindeck("Island", 59);
+        deckTester.validate("Gleemox is banned.", false);
+    }
 
     @Test
     public void testStandardDeckCardsAmountValid() {

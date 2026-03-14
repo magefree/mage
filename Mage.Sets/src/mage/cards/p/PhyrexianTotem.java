@@ -1,6 +1,5 @@
 package mage.cards.p;
 
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealtDamageToSourceTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -19,7 +18,7 @@ import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 
 import java.util.UUID;
 
@@ -35,8 +34,16 @@ public final class PhyrexianTotem extends CardImpl {
         this.addAbility(new BlackManaAbility());
 
         // {2}{B}: {this} becomes a 5/5 black Horror artifact creature with trample until end of turn.
-        this.addAbility(new SimpleActivatedAbility(new BecomesCreatureSourceEffect(
-                new PhyrexianTotemToken(), CardType.ARTIFACT, Duration.EndOfTurn), new ManaCostsImpl<>("{2}{B}")));
+        this.addAbility(new SimpleActivatedAbility(
+            new BecomesCreatureSourceEffect(
+                new CreatureToken(
+                    5, 5, "5/5 black Horror artifact creature with trample", SubType.HORROR
+                ).withColor("B").withType(CardType.ARTIFACT).withAbility(TrampleAbility.getInstance()),
+                CardType.ARTIFACT,
+                Duration.EndOfTurn
+            ),
+            new ManaCostsImpl<>("{2}{B}")
+        ));
 
         // Whenever {this} is dealt damage, if it's a creature, sacrifice that many permanents.
         this.addAbility(new DealtDamageToSourceTriggeredAbility(
@@ -51,28 +58,6 @@ public final class PhyrexianTotem extends CardImpl {
     @Override
     public PhyrexianTotem copy() {
         return new PhyrexianTotem(this);
-    }
-
-    private static class PhyrexianTotemToken extends TokenImpl {
-        PhyrexianTotemToken() {
-            super("Phyrexian Horror", "5/5 black Phyrexian Horror artifact creature with trample");
-            cardType.add(CardType.ARTIFACT);
-            cardType.add(CardType.CREATURE);
-            color.setBlack(true);
-            this.subtype.add(SubType.PHYREXIAN);
-            this.subtype.add(SubType.HORROR);
-            power = new MageInt(5);
-            toughness = new MageInt(5);
-            this.addAbility(TrampleAbility.getInstance());
-        }
-
-        private PhyrexianTotemToken(final PhyrexianTotemToken token) {
-            super(token);
-        }
-
-        public PhyrexianTotemToken copy() {
-            return new PhyrexianTotemToken(this);
-        }
     }
 }
 

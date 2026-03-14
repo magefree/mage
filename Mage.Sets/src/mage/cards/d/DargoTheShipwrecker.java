@@ -14,13 +14,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
-import mage.watchers.Watcher;
+import mage.watchers.common.PermanentsSacrificedWatcher;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -45,7 +41,7 @@ public final class DargoTheShipwrecker extends CardImpl {
         this.getSpellAbility().addCost(cost);
         Ability ability = new SimpleStaticAbility(Zone.ALL, new DargoTheShipwreckerEffect());
         ability.setRuleVisible(false);
-        this.addAbility(ability, new DargoTheShipwreckerWatcher());
+        this.addAbility(ability, new PermanentsSacrificedWatcher());
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());
@@ -91,11 +87,16 @@ class DargoTheShipwreckerEffect extends CostModificationEffectImpl {
             }
             break;
         }
-        DargoTheShipwreckerWatcher watcher = game.getState().getWatcher(DargoTheShipwreckerWatcher.class);
-        if (watcher != null) {
-            reduction += watcher.getSacCount(source.getControllerId());
-        }
+        reduction += (int) game
+                .getState()
+                .getWatcher(PermanentsSacrificedWatcher.class)
+                .getThisTurnSacrificedPermanents(source.getControllerId())
+                .stream()
+                .filter(permanent -> permanent.isArtifact(game) || permanent.isCreature(game))
+                .count();
+
         CardUtil.adjustCost(spellAbility, reduction * 2);
+
         return true;
     }
 
@@ -107,35 +108,5 @@ class DargoTheShipwreckerEffect extends CostModificationEffectImpl {
     @Override
     public DargoTheShipwreckerEffect copy() {
         return new DargoTheShipwreckerEffect(this);
-    }
-}
-
-class DargoTheShipwreckerWatcher extends Watcher {
-
-    private static final Map<UUID, Integer> sacMap = new HashMap<>();
-
-    DargoTheShipwreckerWatcher() {
-        super(WatcherScope.GAME);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() != GameEvent.EventType.SACRIFICED_PERMANENT) {
-            return;
-        }
-        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
-        if (permanent != null && (permanent.isCreature(game) || permanent.isArtifact(game))) {
-            sacMap.compute(event.getPlayerId(), CardUtil::setOrIncrementValue);
-        }
-    }
-
-    @Override
-    public void reset() {
-        sacMap.clear();
-        super.reset();
-    }
-
-    int getSacCount(UUID playerId) {
-        return sacMap.getOrDefault(playerId, 0);
     }
 }

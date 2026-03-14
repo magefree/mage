@@ -15,8 +15,6 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.PreventDamageEvent;
-import mage.game.events.PreventedDamageEvent;
 import mage.game.permanent.Permanent;
 
 import java.util.UUID;
@@ -84,21 +82,6 @@ class MagebaneArmorPreventionEffect extends PreventionEffectImpl {
     @Override
     public MagebaneArmorPreventionEffect copy() {
         return new MagebaneArmorPreventionEffect(this);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent equipment = game.getPermanent(source.getSourceId());
-        if (equipment != null && equipment.getAttachedTo() != null) {
-            GameEvent preventEvent = new PreventDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), event.getAmount(), ((DamageEvent) event).isCombatDamage());
-            if (!game.replaceEvent(preventEvent)) {
-                int damage = event.getAmount();
-                event.setAmount(0);
-                game.fireEvent(new PreventedDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), damage));
-                return true;
-            }
-        }
-        return false;
     }
 
     @Override

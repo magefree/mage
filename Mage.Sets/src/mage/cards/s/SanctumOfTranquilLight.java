@@ -4,19 +4,14 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.CostAdjuster;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.dynamicvalue.common.ShrinesYouControlCount;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.TapTargetEffect;
-import mage.abilities.hint.Hint;
-import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
@@ -40,7 +35,7 @@ public final class SanctumOfTranquilLight extends CardImpl {
         ability.addEffect(new InfoEffect("This ability costs {1} less to activate for each Shrine you control"));
         ability.addTarget(new TargetCreaturePermanent());
         ability.setCostAdjuster(SanctumOfTranquilLightAdjuster.instance);
-        this.addAbility(ability.addHint(SanctumOfTranquilLightAdjuster.getHint()));
+        this.addAbility(ability.addHint(ShrinesYouControlCount.getHint()));
     }
 
     private SanctumOfTranquilLight(final SanctumOfTranquilLight card) {
@@ -56,19 +51,11 @@ public final class SanctumOfTranquilLight extends CardImpl {
 enum SanctumOfTranquilLightAdjuster implements CostAdjuster {
     instance;
 
-    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.SHRINE);
-    private static final DynamicValue count = new PermanentsOnBattlefieldCount(filter);
-    private static final Hint hint = new ValueHint("Shrines you control", count);
-
-    public static Hint getHint() {
-        return hint;
-    }
-
     @Override
     public void reduceCost(Ability ability, Game game) {
         Player controller = game.getPlayer(ability.getControllerId());
         if (controller != null) {
-            CardUtil.reduceCost(ability, count.calculate(game, ability, null));
+            CardUtil.reduceCost(ability, ShrinesYouControlCount.FOR_EACH.calculate(game, ability, null));
         }
     }
 }

@@ -12,8 +12,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
-import mage.game.permanent.token.TokenImpl;
-import mage.target.common.TargetControlledPermanent;
+import mage.game.permanent.token.custom.CreatureToken;
 
 import java.util.UUID;
 
@@ -32,7 +31,10 @@ public final class BogardanDragonheart extends CardImpl {
 
         // Sacrifice another creature: Until end of turn, Bogardan Dragonheart becomes a Dragon with base power and toughness 4/4, flying, and haste.
         this.addAbility(new SimpleActivatedAbility(new BecomesCreatureSourceEffect(
-                new BogardanDragonheartToken(), CardType.CREATURE, Duration.EndOfTurn
+            new CreatureToken(4, 4, "Dragon with base power and toughness 4/4, flying, and haste", SubType.DRAGON)
+                .withAbility(FlyingAbility.getInstance()).withAbility(HasteAbility.getInstance()),
+            CardType.CREATURE,
+            Duration.EndOfTurn
         ), new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
     }
 
@@ -43,27 +45,5 @@ public final class BogardanDragonheart extends CardImpl {
     @Override
     public BogardanDragonheart copy() {
         return new BogardanDragonheart(this);
-    }
-}
-
-class BogardanDragonheartToken extends TokenImpl {
-
-    BogardanDragonheartToken() {
-        super("", "Dragon with base power and toughness 4/4, flying, and haste");
-        cardType.add(CardType.CREATURE);
-        subtype.add(SubType.DRAGON);
-        power = new MageInt(4);
-        toughness = new MageInt(4);
-
-        addAbility(FlyingAbility.getInstance());
-        addAbility(HasteAbility.getInstance());
-    }
-
-    private BogardanDragonheartToken(final BogardanDragonheartToken token) {
-        super(token);
-    }
-
-    public BogardanDragonheartToken copy() {
-        return new BogardanDragonheartToken(this);
     }
 }

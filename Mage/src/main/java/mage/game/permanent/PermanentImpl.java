@@ -7,6 +7,7 @@ import mage.ObjectColor;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
+import mage.abilities.common.RoomAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.RequirementEffect;
@@ -102,6 +103,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected boolean deathtouched;
     protected boolean solved = false;
 
+    protected boolean roomWasUnlockedOnCast = false;
+    protected boolean leftHalfUnlocked = false;
+    protected boolean rightHalfUnlocked = false;
     protected Map<String, List<UUID>> connectedCards = new HashMap<>();
     protected Set<MageObjectReference> dealtDamageByThisTurn;
     protected UUID attachedTo;
@@ -191,6 +195,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
         this.morphed = permanent.morphed;
         this.disguised = permanent.disguised;
+        this.leftHalfUnlocked = permanent.leftHalfUnlocked;
+        this.rightHalfUnlocked = permanent.rightHalfUnlocked;
+        this.roomWasUnlockedOnCast = permanent.roomWasUnlockedOnCast;
         this.manifested = permanent.manifested;
         this.cloaked = permanent.cloaked;
         this.createOrder = permanent.createOrder;
@@ -700,11 +707,14 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 + CardUtil.getSourceLogName(game, source, this.getId()));
         this.setTransformed(!this.transformed);
         this.transformCount++;
+        initOtherFace(game);
         game.applyEffects(); // not process action - no firing of simultaneous events yet
         this.replaceEvent(EventType.TRANSFORMING, game);
         game.addSimultaneousEvent(GameEvent.getEvent(EventType.TRANSFORMED, this.getId(), this.getControllerId()));
         return true;
     }
+
+    protected abstract void initOtherFace(Game game);
 
     @Override
     public int getTransformCount() {
@@ -870,6 +880,13 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             this.removeFromCombat(game);
             this.controlledFromStartOfControllerTurn = false;
             this.removeUncontrolledRingBearer(game);
+            if (this.getPairedMOR() != null) {
+                Permanent paired = this.getPairedMOR().getPermanent(game);
+                if (paired != null) {
+                    paired.setUnpaired();
+                }
+                this.setUnpaired();
+            }
 
             this.getAbilities(game).setControllerId(controllerId);
             game.getContinuousEffects().setController(objectId, controllerId);
@@ -1858,22 +1875,47 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public void setPairedCard(MageObjectReference pairedCard) {
-        this.pairedPermanent = pairedCard;
-        if (pairedCard == null) {
-            // remove existing soulbond info text
-            this.addInfo("soulbond", null, null);
+    public boolean canHaveAnyCounterAdded(Game game, Ability source) {
+        return this.canHaveCounterAdded((CounterType) null, 1, game, source);
+    }
+
+    @Override
+    public boolean canHaveCounterAdded(Counter counter, Game game, Ability source) {
+        return this.canHaveCounterAdded(CounterType.findByName(counter.getName()), counter.getCount(), game, source);
+    }
+
+    @Override
+    public boolean canHaveCounterAdded(CounterType counterType, Game game, Ability source) {
+        return this.canHaveCounterAdded(counterType, 1, game, source);
+    }
+
+    protected boolean canHaveCounterAdded(CounterType counterType, int amount, Game game, Ability source) {
+        return !game.replaceEvent(GameEvent.getEvent(
+                EventType.CAN_ADD_COUNTERS, objectId, source,
+                source != null ? source.getControllerId() : game.getActivePlayerId(),
+                counterType != null ? counterType.getName() : "", amount
+        ));
+    }
+
+    @Override
+    public void setPairedWith(Permanent permanent, Game game) {
+        if (permanent != null) {
+            this.pairedPermanent = new MageObjectReference(permanent, game);
+            this.addInfo("soulbond", "Paired with " + GameLog.getColoredObjectIdNameForTooltip(permanent), game);
+        } else {
+            this.setUnpaired();
         }
     }
 
     @Override
-    public MageObjectReference getPairedCard() {
+    public MageObjectReference getPairedMOR() {
         return pairedPermanent;
     }
 
     @Override
-    public void clearPairedCard() {
+    public void setUnpaired() {
         this.pairedPermanent = null;
+        this.addInfo("soulbond", null, null);
     }
 
     @Override
@@ -2018,16 +2060,17 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public boolean fight(Permanent fightTarget, Ability source, Game game) {
-        return this.fight(fightTarget, source, game, true);
+        this.fightWithExcess(fightTarget, source, game, true);
+        return true;
     }
 
     @Override
-    public boolean fight(Permanent fightTarget, Ability source, Game game, boolean batchTrigger) {
+    public int fightWithExcess(Permanent fightTarget, Ability source, Game game, boolean batchTrigger) {
         // double fight events for each creature
         game.fireEvent(GameEvent.getEvent(GameEvent.EventType.FIGHTED_PERMANENT, fightTarget.getId(), source, source.getControllerId()));
         game.fireEvent(GameEvent.getEvent(GameEvent.EventType.FIGHTED_PERMANENT, getId(), source, source.getControllerId()));
         damage(fightTarget.getPower().getValue(), fightTarget.getId(), source, game);
-        fightTarget.damage(getPower().getValue(), getId(), source, game);
+        int excess = fightTarget.damageWithExcess(getPower().getValue(), getId(), source, game);
 
         if (batchTrigger) {
             Set<MageObjectReference> morSet = new HashSet<>();
@@ -2038,7 +2081,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.BATCH_FIGHT, getId(), source, source.getControllerId(), data, 0));
         }
 
-        return true;
+        return excess;
     }
 
     @Override
@@ -2085,5 +2128,84 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         ZoneChangeInfo.Exile zcInfo = new ZoneChangeInfo.Exile(event, exileId, name);
 
         return ZonesHandler.moveCard(zcInfo, game, source);
+    }
+
+    @Override
+    public boolean wasRoomUnlockedOnCast() {
+        return roomWasUnlockedOnCast;
+    }
+
+    @Override
+    public void resetLockedStatus() {
+        leftHalfUnlocked = false;
+        rightHalfUnlocked = false;
+    }
+
+    @Override
+    public boolean isLeftDoorUnlocked() {
+        return leftHalfUnlocked;
+    }
+
+    @Override
+    public boolean isRightDoorUnlocked() {
+        return rightHalfUnlocked;
+    }
+
+    @Override
+    public boolean unlockRoomOnCast(Game game) {
+        if (this.roomWasUnlockedOnCast) {
+            return false;
+        }
+        this.roomWasUnlockedOnCast = true;
+        return true;
+    }
+
+    @Override
+    public boolean unlockDoor(Game game, Ability source, boolean isLeftDoor) {
+        // Check if already unlocked
+        boolean thisDoorUnlocked = isLeftDoor ? leftHalfUnlocked : rightHalfUnlocked;
+        if (thisDoorUnlocked) {
+            return false;
+        }
+
+        // Log the unlock
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            String doorSide = isLeftDoor ? "left" : "right";
+            game.informPlayers(controller.getLogName() + " unlocked the " + doorSide + " door of "
+                    + getLogName() + CardUtil.getSourceLogName(game, source));
+        }
+
+        // Update unlock state
+        if (isLeftDoor) {
+            leftHalfUnlocked = true;
+        } else {
+            rightHalfUnlocked = true;
+        }
+
+        // Update intrinsic stats/abilities from unlocking
+        // find the RoomCharacteristicsEffect applied by this permanent's ability
+        Abilities<Ability> abilities = this.getAbilities(game);
+        for (Ability ability : abilities) {
+            if (ability instanceof RoomAbility) {
+                ((RoomAbility) ability).restoreUnlockedStats(game, this);
+                break;
+            }
+        }
+
+        // Create door unlock event
+        GameEvent event = new GameEvent(GameEvent.EventType.DOOR_UNLOCKED, getId(), source, source.getControllerId());
+        event.setFlag(isLeftDoor);
+
+        // Check if room is now fully unlocked
+        boolean otherDoorUnlocked = isLeftDoor ? rightHalfUnlocked : leftHalfUnlocked;
+        if (otherDoorUnlocked) {
+            game.addSimultaneousEvent(event);
+            game.addSimultaneousEvent(new GameEvent(EventType.ROOM_FULLY_UNLOCKED, getId(), source, source.getControllerId()));
+        } else {
+            game.fireEvent(event);
+        }
+
+        return true;
     }
 }

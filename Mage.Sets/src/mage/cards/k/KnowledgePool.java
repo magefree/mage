@@ -1,5 +1,6 @@
 package mage.cards.k;
 
+import mage.ApprovingObject;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -26,7 +27,6 @@ import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 import java.util.UUID;
-import mage.ApprovingObject;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -181,7 +181,7 @@ class KnowledgePoolExileAndPlayEffect extends OneShotEffect {
         FilterNonlandCard filter = new FilterNonlandCard("nonland card exiled with Knowledge Pool");
         filter.add(Predicates.not(new CardIdPredicate(spell.getSourceId())));
 
-        TargetCardInExile target = new TargetCardInExile(0, 1, filter, source.getSourceId());
+        TargetCardInExile target = new TargetCardInExile(0, 1, filter, exileZoneId);
         target.withNotTarget(true);
 
         if (!spellController.choose(Outcome.PlayForFree, game.getExile().getExileZone(exileZoneId), target, source, game)) {

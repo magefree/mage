@@ -15,6 +15,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
@@ -34,7 +35,7 @@ import java.util.UUID;
  */
 public final class SpiderPunk extends CardImpl {
 
-    static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.SPIDER, "Spiders you control");
+    static final FilterPermanent filter = new FilterPermanent(SubType.SPIDER, "Spiders you control");
 
     public SpiderPunk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
@@ -125,7 +126,7 @@ class SpiderPunkRiotETBEffect extends ReplacementEffectImpl {
         return creature != null
                 && creature.getId() != source.getSourceId()
                 && creature.isControlledBy(source.getControllerId())
-                && creature.isCreature(game)
+                && SpiderPunk.filter.match(creature, source.getControllerId(), source, game)
                 && !(creature instanceof PermanentToken);
     }
 

@@ -42,7 +42,7 @@ public final class ThirstingAxe extends CardImpl {
         ).withInterveningIf(ThirstingAxeCondition.instance), new ThirstingAxeWatcher());
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2));
+        this.addAbility(new EquipAbility(2, false));
     }
 
     private ThirstingAxe(final ThirstingAxe card) {

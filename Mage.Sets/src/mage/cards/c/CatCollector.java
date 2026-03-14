@@ -10,7 +10,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.token.CatToken3;
+import mage.game.permanent.token.Cat11Token;
 import mage.game.permanent.token.FoodToken;
 
 import java.util.UUID;
@@ -23,7 +23,7 @@ public final class CatCollector extends CardImpl {
 
     public CatCollector(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        
+
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.CITIZEN);
         this.power = new MageInt(3);
@@ -49,7 +49,7 @@ public final class CatCollector extends CardImpl {
 class CatCollectorTriggeredAbility extends GainLifeFirstTimeTriggeredAbility {
 
     CatCollectorTriggeredAbility() {
-        super(new CreateTokenEffect(new CatToken3()));
+        super(new CreateTokenEffect(new Cat11Token()));
         setTriggerPhrase("Whenever you gain life for the first time during each of your turns, ");
     }
 

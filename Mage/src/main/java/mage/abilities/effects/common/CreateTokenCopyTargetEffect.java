@@ -58,8 +58,8 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
     private final boolean tapped;
     private Permanent savedPermanent = null;
     private int startingLoyalty = -1;
-    private final int tokenPower;
-    private final int tokenToughness;
+    private int tokenPower;
+    private int tokenToughness;
     private boolean useLKI = false;
     private PermanentModifier permanentModifier = null;
 
@@ -216,6 +216,28 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         // create token and modify all attributes permanently (without game usage)
         Token token = CopyTokenFunction.createTokenCopy(copyFrom, game); // needed so that entersBattlefield triggered abilities see the attributes (e.g. Master Biomancer)
         applier.apply(game, token, source, targetId);
+        // the active face should have the modified attributes
+        if (token.isEntersTransformed()) {
+            applyAdditionsToToken(token.getBackFace());
+        } else {
+            applyAdditionsToToken(token);
+        }
+
+        token.putOntoBattlefield(number, game, source, playerId == null ? source.getControllerId() : playerId, tapped, attacking, attackedPlayer, attachedTo);
+        for (UUID tokenId : token.getLastAddedTokenIds()) { // by cards like Doubling Season multiple tokens can be added to the battlefield
+            Permanent tokenPermanent = game.getPermanent(tokenId);
+            if (tokenPermanent != null) {
+                addedTokenPermanents.add(tokenPermanent);
+                // TODO: Workaround to add counters to all created tokens, necessary for correct interactions with cards like Chatterfang, Squirrel General and Ochre Jelly / Printlifter Ooze. See #10786
+                if (counter != null && numberOfCounters > 0) {
+                    tokenPermanent.addCounters(counter.createInstance(numberOfCounters), source.getControllerId(), source, game);
+                }
+            }
+        }
+        return true;
+    }
+
+    private void applyAdditionsToToken(Token token) {
         if (becomesArtifact) {
             token.addCardType(CardType.ARTIFACT);
         }
@@ -281,19 +303,6 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
                 token.removeAbility(ability);
             }
         }
-
-        token.putOntoBattlefield(number, game, source, playerId == null ? source.getControllerId() : playerId, tapped, attacking, attackedPlayer, attachedTo);
-        for (UUID tokenId : token.getLastAddedTokenIds()) { // by cards like Doubling Season multiple tokens can be added to the battlefield
-            Permanent tokenPermanent = game.getPermanent(tokenId);
-            if (tokenPermanent != null) {
-                addedTokenPermanents.add(tokenPermanent);
-                // TODO: Workaround to add counters to all created tokens, necessary for correct interactions with cards like Chatterfang, Squirrel General and Ochre Jelly / Printlifter Ooze. See #10786
-                if (counter != null && numberOfCounters > 0) {
-                    tokenPermanent.addCounters(counter.createInstance(numberOfCounters), source.getControllerId(), source, game);
-                }
-            }
-        }
-        return true;
     }
 
     @Override
@@ -384,6 +393,16 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
 
     public CreateTokenCopyTargetEffect setNumber(int number) {
         this.number = number;
+        return this;
+    }
+
+    public CreateTokenCopyTargetEffect setPower(int tokenPower) {
+        this.tokenPower = tokenPower;
+        return this;
+    }
+
+    public CreateTokenCopyTargetEffect setToughness(int tokenToughness) {
+        this.tokenToughness = tokenToughness;
         return this;
     }
 

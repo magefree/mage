@@ -62,8 +62,7 @@ class DevastatingOnslaughtEffect extends OneShotEffect {
         if (permanent == null || xValue < 1) {
             return false;
         }
-        CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect();
-        effect.setHasHaste(true);
+        CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(null, null, true, xValue);
         effect.setSavedPermanent(permanent);
         effect.apply(game, source);
         effect.sacrificeTokensCreatedAtNextEndStep(game, source);

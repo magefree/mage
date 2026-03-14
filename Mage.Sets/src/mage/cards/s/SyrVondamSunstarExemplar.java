@@ -43,7 +43,7 @@ public final class SyrVondamSunstarExemplar extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever another creature you control dies or is put into exile, put a +1/+1 counter on Syr Vondam and you gain 1 life.
         this.addAbility(new SyrVondamSunstarExemplarFirstTriggeredAbility());
@@ -105,7 +105,7 @@ class SyrVondamSunstarExemplarFirstTriggeredAbility extends TriggeredAbilityImpl
 class SyrVondamSunstarExemplarSecondTriggeredAbility extends TriggeredAbilityImpl {
 
     SyrVondamSunstarExemplarSecondTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DestroyTargetEffect());
+        super(Zone.ALL, new DestroyTargetEffect());
         this.addTarget(new TargetNonlandPermanent(0, 1));
         this.setTriggerPhrase("When {this} dies or is put into exile while its power is 4 or greater, ");
         this.setLeavesTheBattlefieldTrigger(true);

@@ -6,7 +6,6 @@ import mage.abilities.LoyaltyAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
@@ -73,7 +72,8 @@ public final class FlamescrollCelebrant extends ModalDoubleFacedCard {
 class FlamescrollCelebrantTriggeredAbility extends TriggeredAbilityImpl {
 
     FlamescrollCelebrantTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(StaticValue.get(1), true, "that player", true));
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(1).withTargetDescription("that player"));
+        setTriggerPhrase("Whenever an opponent activates an ability that isn't a mana ability, ");
     }
 
     private FlamescrollCelebrantTriggeredAbility(final FlamescrollCelebrantTriggeredAbility ability) {
@@ -103,11 +103,6 @@ class FlamescrollCelebrantTriggeredAbility extends TriggeredAbilityImpl {
         return true;
     }
 
-    @Override
-    public String getRule() {
-        return "Whenever an opponent activates an ability that isn't a mana ability, " +
-                "{this} deals 1 damage to that player.";
-    }
 }
 
 class RevelInSilenceEffect extends ContinuousRuleModifyingEffectImpl {

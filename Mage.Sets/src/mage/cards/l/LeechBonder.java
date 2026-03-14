@@ -2,11 +2,10 @@ package mage.cards.l;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.UntapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.MoveCounterTargetsEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -41,7 +40,7 @@ public final class LeechBonder extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Leech Bonder enters the battlefield with two -1/-1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance(2)), "with two -1/-1 counters on it"));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.M1M1.createInstance(2)));
 
         // {U}, {untap}: Move a counter from target creature onto another target creature.
         Ability ability = new SimpleActivatedAbility(new MoveCounterTargetsEffect(), new ManaCostsImpl<>("{U}"));

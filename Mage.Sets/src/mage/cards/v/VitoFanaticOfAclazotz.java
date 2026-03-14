@@ -3,13 +3,18 @@ package mage.cards.v;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SacrificePermanentTriggeredAbility;
-import mage.abilities.effects.common.*;
+import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.IfAbilityHasResolvedXTimesEffect;
+import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.VampireDemonToken;
 import mage.watchers.common.AbilityResolvedWatcher;
 
@@ -19,12 +24,6 @@ import java.util.UUID;
  * @author Susucr
  */
 public final class VitoFanaticOfAclazotz extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterPermanent("another permanent");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public VitoFanaticOfAclazotz(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{B}");
@@ -43,7 +42,7 @@ public final class VitoFanaticOfAclazotz extends CardImpl {
                 new IfAbilityHasResolvedXTimesEffect(
                         Outcome.GainLife, 1, new GainLifeEffect(2)
                 ).setText("you gain 2 life if this is the first time this ability has resolved this turn"),
-                filter
+                StaticFilters.FILTER_ANOTHER_PERMANENT
         );
         ability.addEffect(
                 new IfAbilityHasResolvedXTimesEffect(

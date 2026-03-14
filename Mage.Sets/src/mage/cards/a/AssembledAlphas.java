@@ -1,16 +1,14 @@
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.BlocksOrBlockedByCreatureSourceTriggeredAbility;
-import mage.abilities.effects.common.DamageTargetControllerEffect;
-import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.DamageTargetAndTargetControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
  *
@@ -25,9 +23,8 @@ public final class AssembledAlphas extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Whenever Assembled Alphas blocks or becomes blocked by a creature, Assembled Alphas deals 3 damage to that creature and 3 damage to that creature's controller.
-        Ability ability = new BlocksOrBlockedByCreatureSourceTriggeredAbility(new DamageTargetEffect(3, true, "that creature"));
-        ability.addEffect(new DamageTargetControllerEffect(3).setText("and 3 damage to that creature's controller"));
-        this.addAbility(ability);
+        this.addAbility(new BlocksOrBlockedByCreatureSourceTriggeredAbility(
+                new DamageTargetAndTargetControllerEffect(3, 3)));
     }
 
     private AssembledAlphas(final AssembledAlphas card) {

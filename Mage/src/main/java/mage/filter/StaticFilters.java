@@ -8,6 +8,7 @@ import mage.filter.common.*;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.*;
 import mage.filter.predicate.other.AnotherTargetPredicate;
+import mage.filter.predicate.other.TriggeredAbilityPredicate;
 import mage.filter.predicate.permanent.*;
 
 /**
@@ -30,7 +31,6 @@ public final class StaticFilters {
     static {
         FILTER_CARD.setLockedFilter(true);
     }
-
 
     public static final FilterCard FILTER_CARD_A = new FilterCard("a card");
 
@@ -477,6 +477,17 @@ public final class StaticFilters {
         FILTER_CONTROLLED_PERMANENT_ARTIFACT_OR_CREATURE.setLockedFilter(true);
     }
 
+    public static final FilterControlledPermanent FILTER_CONTROLLED_UNTAPPED_ARTIFACT_OR_CREATURE = new FilterControlledPermanent("untapped artifact or creature you control");
+
+    static {
+        FILTER_CONTROLLED_UNTAPPED_ARTIFACT_OR_CREATURE.add(TappedPredicate.UNTAPPED);
+        FILTER_CONTROLLED_UNTAPPED_ARTIFACT_OR_CREATURE.add(Predicates.or(
+                CardType.ARTIFACT.getPredicate(),
+                CardType.CREATURE.getPredicate()
+        ));
+        FILTER_CONTROLLED_UNTAPPED_ARTIFACT_OR_CREATURE.setLockedFilter(true);
+    }
+
     public static final FilterControlledPermanent FILTER_CONTROLLED_ARTIFACT_OR_OTHER_CREATURE = new FilterControlledPermanent("another creature or an artifact");
 
     static {
@@ -599,6 +610,13 @@ public final class StaticFilters {
                 CardType.CREATURE.getPredicate()
         ));
         FILTER_OPPONENTS_PERMANENT_ARTIFACT_OR_CREATURE.setLockedFilter(true);
+    }
+
+    public static final FilterPermanent FILTER_ANOTHER_PERMANENT = new FilterPermanent("another permanent");
+
+    static {
+        FILTER_ANOTHER_PERMANENT.add(AnotherPredicate.instance);
+        FILTER_ANOTHER_PERMANENT.setLockedFilter(true);
     }
 
     public static final FilterCreaturePermanent FILTER_ANOTHER_CREATURE = new FilterCreaturePermanent("another creature");
@@ -902,6 +920,13 @@ public final class StaticFilters {
         FILTER_CONTROLLED_SAMURAI_OR_WARRIOR.setLockedFilter(true);
     }
 
+    public static final FilterControlledPermanent FILTER_ANOTHER_CONTROLLED_SHRINE = new FilterControlledPermanent(SubType.SHRINE, "another Shrine you control");
+
+    static {
+        FILTER_ANOTHER_CONTROLLED_SHRINE.add(AnotherPredicate.instance);
+        FILTER_ANOTHER_CONTROLLED_SHRINE.setLockedFilter(true);
+    }
+
     public static final FilterPlaneswalkerPermanent FILTER_PERMANENT_PLANESWALKER = new FilterPlaneswalkerPermanent();
 
     static {
@@ -962,6 +987,14 @@ public final class StaticFilters {
 
     static {
         FILTER_SPELL_OR_ABILITY_A.setLockedFilter(true);
+    }
+
+    public static final FilterStackObject FILTER_CONTROLLED_TRIGGERED_ABILITY = new FilterStackObject("triggered ability you control");
+
+    static {
+        FILTER_CONTROLLED_TRIGGERED_ABILITY.add(TriggeredAbilityPredicate.instance);
+        FILTER_CONTROLLED_TRIGGERED_ABILITY.add(TargetController.YOU.getControllerPredicate());
+        FILTER_CONTROLLED_TRIGGERED_ABILITY.setLockedFilter(true);
     }
 
     public static final FilterCreatureSpell FILTER_SPELL_A_CREATURE = new FilterCreatureSpell("a creature spell");

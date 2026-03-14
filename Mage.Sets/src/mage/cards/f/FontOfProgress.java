@@ -1,14 +1,13 @@
 package mage.cards.f;
 
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.MillCardsTargetEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -28,10 +27,7 @@ public final class FontOfProgress extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{U}");
 
         // Font of Progress enters the battlefield with two oil counters on it.
-        this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.OIL.createInstance(2)),
-                "with two oil counters on it"
-        ));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.OIL.createInstance(2)));
 
         // {3}, {T}: Target player mills X cards, where X is the number of oil counters on Font of Progress.
         Ability ability = new SimpleActivatedAbility(new MillCardsTargetEffect(xValue)

@@ -38,7 +38,7 @@ public final class SeismicTutelage extends CardImpl {
 
         // Whenever enchanted creature attacks, double the number of +1/+1 counters on it.
         this.addAbility(new AttacksAttachedTriggeredAbility(
-                new DoubleCountersTargetEffect(CounterType.P1P1),
+                new DoubleCountersTargetEffect(CounterType.P1P1).withTargetDescription("it"),
                 AttachmentType.AURA, false, SetTargetPointer.PERMANENT
         ));
     }

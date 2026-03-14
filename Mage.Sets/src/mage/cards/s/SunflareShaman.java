@@ -1,25 +1,23 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DamageSelfEffect;
-import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.DamageTargetAndSelfEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -60,7 +58,7 @@ class SunflareShamanEffect extends OneShotEffect {
         filter.add(SubType.ELEMENTAL.getPredicate());
     }
 
-    public SunflareShamanEffect() {
+    SunflareShamanEffect() {
         super(Outcome.Damage);
         this.staticText = "{this} deals X damage to any target and X damage to itself, where X is the number of Elemental cards in your graveyard";
     }
@@ -78,9 +76,8 @@ class SunflareShamanEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int ElementalsInYourGraveyard = controller.getGraveyard().count(filter, game);
-            new DamageTargetEffect(ElementalsInYourGraveyard).apply(game, source);
-            new DamageSelfEffect(ElementalsInYourGraveyard).apply(game, source);
+            int amount = controller.getGraveyard().count(filter, game);
+            new DamageTargetAndSelfEffect(amount, amount).apply(game, source);
             return true;
         }
         return false;

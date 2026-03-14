@@ -140,6 +140,7 @@ Ikoria: Lair of Behemoths|IKO|
 Invasion|INV|
 Innistrad|ISD|
 Lorwyn Eclipsed|ECL|
+Lorwyn Eclipsed Commander|ECC|
 The Lost Caverns of Ixalan|LCI|
 The Lost Caverns of Ixalan Commander|LCC|
 Innistrad: Midnight Hunt|MID|
@@ -178,6 +179,8 @@ Masters 25|A25|
 Magic: The Gathering-Commander|CMD|
 Magic: The Gathering-Conspiracy|CNS|
 Media Inserts|MBP|
+Marvel Super Heroes|MSH|
+Marvel Super Heroes Commander|MSC|
 Marvel's Spider-Man|SPM|
 Marvel's Spider-Man Eternal|SPE|
 March of the Machine|MOM|
@@ -243,6 +246,7 @@ Starter 2000|S00|
 Starter 1999|S99|
 Starter Commander Decks|SCD|
 Strixhaven: School of Mages|STX|
+Secrets of Strixhaven|SOS|
 Scourge|SCG|
 Secret Lair|SLD|
 Secret Lair Showdown|SLP|

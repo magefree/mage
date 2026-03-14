@@ -1,7 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.PutIntoGraveFromAnywhereSourceTriggeredAbility;
@@ -13,13 +12,14 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -73,8 +73,7 @@ class PurityEffect extends PreventionEffectImpl {
         if (player != null) {
             player.gainLife(preventionData.getPreventedDamage(), game, source);
         }
-
-        return true;
+        return false;
     }
 
     @Override

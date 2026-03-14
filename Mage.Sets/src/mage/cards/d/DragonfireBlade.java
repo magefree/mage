@@ -31,7 +31,7 @@ public final class DragonfireBlade extends CardImpl {
 
     public DragonfireBlade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
-        
+
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +2/+2 and has hexproof from monocolored.
@@ -41,7 +41,7 @@ public final class DragonfireBlade extends CardImpl {
         this.addAbility(ability);
 
         // Equip {4}. This ability costs {1} less to activate for each color of the creature it targets.
-        EquipAbility equipAbility = new EquipAbility(4);
+        EquipAbility equipAbility = new EquipAbility(4, false);
         equipAbility.setCostAdjuster(DragonfireBladeCostAdjuster.instance);
         equipAbility.setCostReduceText("This ability costs {1} less to activate for each color of the creature it targets.");
         this.addAbility(equipAbility);

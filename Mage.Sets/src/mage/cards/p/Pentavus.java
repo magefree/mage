@@ -1,10 +1,9 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -15,11 +14,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.PentaviteToken;
-import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -40,8 +39,7 @@ public final class Pentavus extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Pentavus enters the battlefield with five +1/+1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(5)),
-                "with five +1/+1 counters on it"));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.P1P1.createInstance(5)));
 
         // {1}, Remove a +1/+1 counter from Pentavus: Create a 1/1 colorless Pentavite artifact creature token with flying.
         Ability firstAbility = new SimpleActivatedAbility(new CreateTokenEffect(new PentaviteToken(), 1), new GenericManaCost(1));

@@ -3,7 +3,6 @@ package org.mage.test.cards.single.woe;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -21,7 +20,6 @@ public class ThePrincessTakesFlightTest extends CardTestPlayerBase {
      */
     private static final String flight = "The Princess Takes Flight";
 
-    @Ignore // TODO: goal of #11619 is to fix this nicely
     @Test
     public void test_SimplePlay() {
         addCard(Zone.HAND, playerA, flight, 1);
@@ -54,7 +52,6 @@ public class ThePrincessTakesFlightTest extends CardTestPlayerBase {
         assertExileCount(playerB, "Memnite", 0);
         assertPermanentCount(playerB, "Memnite", 1);
     }
-    @Ignore // TODO: goal of #11619 is to fix this nicely
     @Test
     public void testFlicker() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
@@ -81,5 +78,74 @@ public class ThePrincessTakesFlightTest extends CardTestPlayerBase {
         assertExileCount(playerA, "Grizzly Bears", 1); //Bear stays exiled
         assertPermanentCount(playerA, "Memnite", 1);
         assertGraveyardCount(playerA, flight, 1);
+    }
+
+    @Test
+    public void test_TokenCopy() {
+        addCard(Zone.HAND, playerA, flight, 1);
+        addCard(Zone.HAND, playerA, "Swords to Plowshares", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Ondu Spiritdancer", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Memnite", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, flight);
+        setChoice(playerA, "I - ");
+        addTarget(playerA, "Memnite");
+        setChoice(playerA, true);
+        addTarget(playerA, "Grizzly Bears");
+
+        checkExileCount("after I, exiled Memnite", 1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Memnite", 1);
+        checkExileCount("after I, exiled Grizzly Bears", 1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Grizzly Bears", 1);
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Swords to Plowshares", "Ondu Spiritdancer");
+
+        // turn 3
+        setChoice(playerA, "II - ");
+        // No targets available
+
+        // turn 5
+        setChoice(playerA, "III - ");
+        setStrictChooseMode(true);
+        setStopAt(5, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertExileCount(playerA, "Grizzly Bears", 0);
+        assertExileCount(playerB, "Memnite", 0);
+        assertPermanentCount(playerA, "Grizzly Bears", 1);
+        assertPermanentCount(playerB, "Memnite", 1);
+    }
+    @Test
+    public void test_SpellCopy() {
+        addCard(Zone.HAND, playerA, flight, 1);
+        addCard(Zone.HAND, playerA, "Swords to Plowshares", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "The Sixth Doctor", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Memnite", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, flight);
+        addTarget(playerA, "Memnite");
+        addTarget(playerA, "Grizzly Bears");
+
+        checkExileCount("after I, exiled Memnite", 1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Memnite", 1);
+        checkExileCount("after I, exiled Grizzly Bears", 1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Grizzly Bears", 1);
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Swords to Plowshares", "The Sixth Doctor");
+
+        // turn 3
+        setChoice(playerA, "II - ");
+        // No targets available
+
+        // turn 5
+        setChoice(playerA, "III - ");
+        setStrictChooseMode(true);
+        setStopAt(5, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertExileCount(playerA, "Grizzly Bears", 0);
+        assertExileCount(playerB, "Memnite", 0);
+        assertPermanentCount(playerA, "Grizzly Bears", 1);
+        assertPermanentCount(playerB, "Memnite", 1);
     }
 }

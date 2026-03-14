@@ -107,10 +107,10 @@ class PaintersServantEffect extends ContinuousEffectImpl {
             affectedCards.forEach(card -> {
                 game.getState().getCreateMageObjectAttribute(card, game).getColor().addColor(color);
 
-                // mdf cards
-                if (card instanceof ModalDoubleFacedCard) {
-                    ModalDoubleFacedCardHalf leftHalfCard = ((ModalDoubleFacedCard) card).getLeftHalfCard();
-                    ModalDoubleFacedCardHalf rightHalfCard = ((ModalDoubleFacedCard) card).getRightHalfCard();
+                // df cards
+                if (card instanceof DoubleFacedCard) {
+                    DoubleFacedCardHalf leftHalfCard = ((DoubleFacedCard) card).getLeftHalfCard();
+                    DoubleFacedCardHalf rightHalfCard = ((DoubleFacedCard) card).getRightHalfCard();
                     game.getState().getCreateMageObjectAttribute(leftHalfCard, game).getColor().addColor(color);
                     game.getState().getCreateMageObjectAttribute(rightHalfCard, game).getColor().addColor(color);
                 }
@@ -121,11 +121,6 @@ class PaintersServantEffect extends ContinuousEffectImpl {
                     SplitCardHalf rightHalfCard = ((SplitCard) card).getRightHalfCard();
                     game.getState().getCreateMageObjectAttribute(leftHalfCard, game).getColor().addColor(color);
                     game.getState().getCreateMageObjectAttribute(rightHalfCard, game).getColor().addColor(color);
-                }
-
-                // double faces cards
-                if (card.getSecondCardFace() != null) {
-                    game.getState().getCreateMageObjectAttribute(card.getSecondCardFace(), game).getColor().addColor(color);
                 }
             });
             return true;

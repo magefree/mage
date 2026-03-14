@@ -82,7 +82,8 @@ sub cardSort {
 sub toCamelCase {
     my $string = $_[0];
     $string =~ s/\b([\w']+)\b/ucfirst($1)/ge;
-    $string =~ s/[-,\s\'\.!@#*\(\)]//g;
+    $string =~ s/[-,\s\'\.!@#*:\(\)]//g;
+    $string =~ s/\&/And/g;
     $string;
 }
 
@@ -116,6 +117,7 @@ foreach my $card (sort cardSort @setCards) {
     my $currentFileName = "../Mage.Sets/src/mage/cards/" . lc(substr($className, 0, 1)) . "/" . $className . ".java";
     my $cardNameForUrl = $cardName;
     $cardNameForUrl =~ s/ //g;
+    $cardNameForUrl =~ s/\&/%26/g; # URL encode ampersands
     my $cardEntry = "- [ ] In progress -- [$cardName](https://scryfall.com/search?q=!\"$cardNameForUrl\"&nbsp;e:$setAbbr)";
 
     if(-e $currentFileName) {
@@ -138,6 +140,7 @@ foreach my $cardName (sort keys %cardNames) {
         my $urlCardName = $cardName;
         $urlCardName =~ s/ //g;
         $urlCardName =~ s/"/\\"/g;  # Escape quotes
+        $urlCardName =~ s/\&/%26/g; # URL encode ampersands
         push(@unimplementedNames, "!\"$urlCardName\"");
     }
 }

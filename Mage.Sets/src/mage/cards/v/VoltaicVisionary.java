@@ -1,18 +1,17 @@
 package mage.cards.v;
 
-import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
+import mage.abilities.common.CantBlockAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
-import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.*;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -26,27 +25,33 @@ import java.util.*;
 /**
  * @author TheElk801
  */
-public final class VoltaicVisionary extends CardImpl {
+public final class VoltaicVisionary extends TransformingDoubleFacedCard {
 
     public VoltaicVisionary(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.WIZARD}, "{1}{R}",
+                "Volt-Charged Berserker",
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.BERSERKER}, "R"
+        );
 
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.WIZARD);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(1);
-        this.secondSideCardClazz = mage.cards.v.VoltChargedBerserker.class;
+        // Voltaic Visionary
+        this.getLeftHalfCard().setPT(3, 1);
 
         // {T}: Voltaic Visionary deals 2 damage to you. Exile the top card of your library. You may play that card this turn. Activate only as a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(
                 new DamageControllerEffect(2), new TapSourceCost()
         );
         ability.addEffect(new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn));
-        this.addAbility(ability);
+        this.getLeftHalfCard().addAbility(ability);
 
         // When you play a card exiled with Voltaic Visionary, transform Voltaic Visionary.
-        this.addAbility(new TransformAbility());
-        this.addAbility(new VoltaicVisionaryTriggeredAbility());
+        this.getLeftHalfCard().addAbility(new VoltaicVisionaryTriggeredAbility());
+
+        // Volt-Charged Berserker
+        this.getRightHalfCard().setPT(4, 3);
+
+        // Volt-Charged Berserker can't block.
+        this.getRightHalfCard().addAbility(new CantBlockAbility());
     }
 
     private VoltaicVisionary(final VoltaicVisionary card) {

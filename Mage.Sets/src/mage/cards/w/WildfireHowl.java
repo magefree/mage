@@ -33,6 +33,8 @@ public final class WildfireHowl extends CardImpl {
                 GiftWasPromisedCondition.TRUE, "{this} deals 2 damage to each creature. " +
                 "If the gift was promised, instead {this} deals 1 damage to any target and 2 damage to each creature"
         ).addEffect(new DamageAllEffect(2, StaticFilters.FILTER_PERMANENT_CREATURE)));
+        // ConditionalOneShotEffect doesn't call processAction between effects, so currently works
+        // if that gets changed (which it perhaps should?) then need to make this a single effect
         this.getSpellAbility().setTargetAdjuster(new ConditionalTargetAdjuster(
                 GiftWasPromisedCondition.TRUE, new TargetAnyTarget()
         ));

@@ -1,14 +1,13 @@
 package mage.cards.c;
 
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.CaseAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SolvedSourceCondition;
+import mage.abilities.dynamicvalue.common.ColorsAmongControlledPermanentsCount;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
-import mage.abilities.hint.common.CaseSolvedHint;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
@@ -49,7 +48,7 @@ public final class CaseOfTheShatteredPact extends CardImpl {
         solvedAbility.addTarget(new TargetControlledCreaturePermanent());
 
         this.addAbility(new CaseAbility(initialAbility, CaseOfTheShatteredPactCondition.instance, solvedAbility)
-                .addHint(new CaseOfTheShatteredPactHint(CaseOfTheShatteredPactCondition.instance)));
+                .addHint(ColorsAmongControlledPermanentsCount.ALL_PERMANENTS.getHint()));
     }
 
     private CaseOfTheShatteredPact(final CaseOfTheShatteredPact card) {
@@ -67,44 +66,11 @@ enum CaseOfTheShatteredPactCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        ObjectColor color = new ObjectColor("");
-        game.getBattlefield()
-                .getAllActivePermanents(source.getControllerId())
-                .stream()
-                .map(permanent -> permanent.getColor(game))
-                .forEach(color::addColor);
-        return color.getColorCount() == 5;
+        return ColorsAmongControlledPermanentsCount.ALL_PERMANENTS.calculate(game, source, null) >= 5;
     }
 
     @Override
     public String toString() {
         return "There are five colors among permanents you control";
-    }
-}
-
-class CaseOfTheShatteredPactHint extends CaseSolvedHint {
-
-    CaseOfTheShatteredPactHint(Condition condition) {
-        super(condition);
-    }
-
-    CaseOfTheShatteredPactHint(final CaseOfTheShatteredPactHint hint) {
-        super(hint);
-    }
-
-    @Override
-    public CaseOfTheShatteredPactHint copy() {
-        return new CaseOfTheShatteredPactHint(this);
-    }
-
-    @Override
-    public String getConditionText(Game game, Ability ability) {
-        ObjectColor color = new ObjectColor("");
-        game.getBattlefield()
-                .getAllActivePermanents(ability.getControllerId())
-                .stream()
-                .map(permanent -> permanent.getColor(game))
-                .forEach(color::addColor);
-        return "Colors: " + color.getColorCount() + " (need 5).";
     }
 }

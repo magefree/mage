@@ -41,7 +41,7 @@ public final class SireOfSevenDeaths extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // Ward--Pay 7 life.
-        this.addAbility(new WardAbility(new PayLifeCost(7)));
+        this.addAbility(new WardAbility(new PayLifeCost(7), false));
     }
 
     private SireOfSevenDeaths(final SireOfSevenDeaths card) {

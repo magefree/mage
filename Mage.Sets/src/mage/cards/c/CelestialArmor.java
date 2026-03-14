@@ -25,7 +25,7 @@ public final class CelestialArmor extends CardImpl {
 
     public CelestialArmor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}{W}");
-        
+
         this.subtype.add(SubType.EQUIPMENT);
 
         // Flash
@@ -47,7 +47,7 @@ public final class CelestialArmor extends CardImpl {
         this.addAbility(staticAbility);
 
         // Equip {3}{W}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{3}{W}"), false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{3}{W}")));
     }
 
     private CelestialArmor(final CelestialArmor card) {

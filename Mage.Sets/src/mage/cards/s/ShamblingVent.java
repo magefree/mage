@@ -2,7 +2,6 @@
 package mage.cards.s;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -15,8 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.Zone;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 
 /**
  *
@@ -35,8 +33,15 @@ public final class ShamblingVent extends CardImpl {
         this.addAbility(new BlackManaAbility());
 
         // {1}{W}{B}: Shambling Vent becomes a 2/3 white and black Elemental creature with lifelink until end of turn. It's still a land.
-        this.addAbility(new SimpleActivatedAbility(new BecomesCreatureSourceEffect(
-                new ShamblingVentToken(), CardType.LAND, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{W}{B}")));
+        this.addAbility(new SimpleActivatedAbility(
+            new BecomesCreatureSourceEffect(
+                new CreatureToken(2, 3, "2/3 white and black Elemental creature with lifelink", SubType.ELEMENTAL)
+                    .withColor("WB").withAbility(LifelinkAbility.getInstance()),
+                CardType.LAND,
+                Duration.EndOfTurn
+            ),
+            new ManaCostsImpl<>("{1}{W}{B}")
+        ));
     }
 
     private ShamblingVent(final ShamblingVent card) {
@@ -46,26 +51,5 @@ public final class ShamblingVent extends CardImpl {
     @Override
     public ShamblingVent copy() {
         return new ShamblingVent(this);
-    }
-}
-
-class ShamblingVentToken extends TokenImpl {
-
-    public ShamblingVentToken() {
-        super("", "2/3 white and black Elemental creature with lifelink");
-        cardType.add(CardType.CREATURE);
-        subtype.add(SubType.ELEMENTAL);
-        color.setWhite(true);
-        color.setBlack(true);
-        power = new MageInt(2);
-        toughness = new MageInt(3);
-        addAbility(LifelinkAbility.getInstance());
-    }
-    private ShamblingVentToken(final ShamblingVentToken token) {
-        super(token);
-    }
-
-    public ShamblingVentToken copy() {
-        return new ShamblingVentToken(this);
     }
 }

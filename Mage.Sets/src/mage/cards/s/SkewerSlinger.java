@@ -30,7 +30,7 @@ public final class SkewerSlinger extends CardImpl {
 
         // Whenever Skewer Slinger blocks or becomes blocked by a creature, Skewer Slinger deals 1 damage to that creature.
         this.addAbility(new BlocksOrBlockedByCreatureSourceTriggeredAbility(
-                new DamageTargetEffect(1, true, "that creature")
+                new DamageTargetEffect(1).withTargetDescription("that creature")
         ));
     }
 

@@ -3,7 +3,6 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.constants.SubType;
@@ -13,10 +12,10 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.SubLayer;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.TargetPermanent;
 
 /**
@@ -24,12 +23,6 @@ import mage.target.TargetPermanent;
  * @author TheElk801
  */
 public final class SkilledAnimator extends CardImpl {
-
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact you control");
-
-    static {
-        filter.add(CardType.ARTIFACT.getPredicate());
-    }
 
     public SkilledAnimator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
@@ -41,7 +34,7 @@ public final class SkilledAnimator extends CardImpl {
 
         // When Skilled Animator enters the battlefield, target artifact you control becomes an artifact creature with base power and toughness 5/5 for as long as Skilled Animator remains on the battlefield.
         Ability ability = new EntersBattlefieldTriggeredAbility(new SkilledAnimatorBecomesCreatureEffect(), false);
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT));
         this.addAbility(ability);
     }
 
@@ -58,7 +51,8 @@ public final class SkilledAnimator extends CardImpl {
 class SkilledAnimatorBecomesCreatureEffect extends BecomesCreatureTargetEffect {
 
     SkilledAnimatorBecomesCreatureEffect() {
-        super(new SkilledAnimatorToken(), false, false, Duration.WhileOnBattlefield);
+        super(
+        new CreatureToken(5, 5, "5/5 artifact creature as long as {this} is on the battlefield").withType(CardType.ARTIFACT), false, false, Duration.WhileOnBattlefield);
         this.staticText = "target artifact you control becomes an artifact creature with base power and toughness 5/5 for as long as {this} remains on the battlefield";
     }
 
@@ -79,24 +73,5 @@ class SkilledAnimatorBecomesCreatureEffect extends BecomesCreatureTargetEffect {
             return false;
         }
         return super.apply(layer, sublayer, source, game);
-    }
-}
-
-class SkilledAnimatorToken extends TokenImpl {
-
-    public SkilledAnimatorToken() {
-        super("", "5/5 artifact creature as long as {this} is on the battlefield");
-        cardType.add(CardType.ARTIFACT);
-        cardType.add(CardType.CREATURE);
-        power = new MageInt(5);
-        toughness = new MageInt(5);
-    }
-
-    private SkilledAnimatorToken(final SkilledAnimatorToken token) {
-        super(token);
-    }
-
-    public SkilledAnimatorToken copy() {
-        return new SkilledAnimatorToken(this);
     }
 }

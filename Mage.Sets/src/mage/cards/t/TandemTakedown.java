@@ -26,7 +26,7 @@ public final class TandemTakedown extends CardImpl {
                 CardType.PLANESWALKER.getPredicate(),
                 CardType.BATTLE.getPredicate()
         ));
-        filter.add(new AnotherTargetPredicate(2));
+        filter.add(new AnotherTargetPredicate(3));
     }
 
     public TandemTakedown(UUID ownerId, CardSetInfo setInfo) {

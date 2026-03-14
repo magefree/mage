@@ -6,13 +6,9 @@ import mage.abilities.common.EntersBattlefieldOrLeavesSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.keyword.InvestigateEffect;
 import mage.abilities.effects.keyword.InvestigateTargetEffect;
-import mage.abilities.keyword.FriendsForeverAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
@@ -36,7 +32,7 @@ public final class WernogRidersChaplain extends CardImpl {
         this.addAbility(new EntersBattlefieldOrLeavesSourceTriggeredAbility(new WernogRidersChaplainEffect(), false));
 
         // Friends forever
-        this.addAbility(FriendsForeverAbility.getInstance());
+        this.addAbility(PartnerVariantType.FRIENDS_FOREVER.makeAbility());
     }
 
     private WernogRidersChaplain(final WernogRidersChaplain card) {

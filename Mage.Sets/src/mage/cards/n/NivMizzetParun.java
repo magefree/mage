@@ -1,6 +1,5 @@
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.CantBeCounteredSourceAbility;
@@ -8,17 +7,18 @@ import mage.abilities.common.DrawCardControllerTriggeredAbility;
 import mage.abilities.common.SpellCastAllTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetAnyTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class NivMizzetParun extends CardImpl {
@@ -47,7 +47,7 @@ public final class NivMizzetParun extends CardImpl {
 
         // Whenever a player casts an instant or sorcery spell, you draw a card.
         this.addAbility(new SpellCastAllTriggeredAbility(
-                new DrawCardSourceControllerEffect(1).setText("you draw a card"),
+                new DrawCardSourceControllerEffect(1, true),
                 StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, false
         ));
     }

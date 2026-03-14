@@ -79,13 +79,15 @@ public enum MageTray {
             } catch (AWTException e) {
                 log.error("TrayIcon could not be added: ", e);
             }
-
         } catch (Exception e) {
             log.error(e);
         }
     }
 
     public synchronized void blink() {
+        if (trayIcon == null)
+            return;
+
         if (state == 0) {
             synchronized (MageTray.class) {
                 if (state == 0) {

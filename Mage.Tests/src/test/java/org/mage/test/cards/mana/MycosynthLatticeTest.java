@@ -6,6 +6,8 @@ import mage.counters.CounterType;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
+import static org.junit.Assert.assertTrue;
+
 public class MycosynthLatticeTest extends CardTestPlayerBase {
 
     @Test
@@ -56,5 +58,33 @@ public class MycosynthLatticeTest extends CardTestPlayerBase {
         execute();
 
         assertCounterCount(playerA, crawler, CounterType.P1P1, 4);
+    }
+
+    @Test
+    public void testColorsWithDifferentCardTypes() {
+        String azusasManyJourneys = "Azusa's Many Journeys"; // TDFC
+        String alrundGodOfTheCosmos = "Alrund, God of the Cosmos"; // MDFC
+        String carnivalCarnage = "Carnival // Carnage"; // Split Card
+
+        addCard(Zone.BATTLEFIELD, playerA, "Mycosynth Lattice");
+        addCard(Zone.GRAVEYARD, playerA, azusasManyJourneys);
+        addCard(Zone.HAND, playerA, alrundGodOfTheCosmos);
+        addCard(Zone.LIBRARY, playerA, carnivalCarnage);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        currentGame.getCards().forEach(card -> {
+            if (card.getName().equals(azusasManyJourneys)
+                    || card.getName().equals("Likeness of the Seeker")
+                    || card.getName().equals(alrundGodOfTheCosmos)
+                    || card.getName().equals("Alrund's Epiphany")
+                    || card.getName().equals("Carnival")
+                    || card.getName().equals("Carnage")) {
+                assertTrue("Card " + card.getName() + " should be colorless", card.getColor(currentGame).isColorless());
+            }
+        });
+
     }
 }

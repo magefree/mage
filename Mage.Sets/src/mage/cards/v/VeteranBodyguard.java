@@ -4,21 +4,20 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.SourceTappedCondition;
-import mage.abilities.decorator.ConditionalPreventionEffect;
-import mage.abilities.effects.PreventionEffectImpl;
+import mage.abilities.decorator.ConditionalReplacementEffect;
+import mage.abilities.effects.RedirectionEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.UnblockedPredicate;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
-import mage.game.events.DamagePlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -35,10 +34,8 @@ public final class VeteranBodyguard extends CardImpl {
         this.toughness = new MageInt(5);
 
         // As long as Veteran Bodyguard is untapped, all damage that would be dealt to you by unblocked creatures is dealt to Veteran Bodyguard instead.
-        this.addAbility(new SimpleStaticAbility(new ConditionalPreventionEffect(
-                new VeteranBodyguardEffect(),
-                SourceTappedCondition.UNTAPPED,
-                "As long as {this} is untapped, all damage that would be dealt to you by unblocked creatures is dealt to {this} instead."
+        this.addAbility(new SimpleStaticAbility(new ConditionalReplacementEffect(new VeteranBodyguardEffect(), SourceTappedCondition.UNTAPPED)
+                .setText("As long as {this} is untapped, all damage that would be dealt to you by unblocked creatures is dealt to {this} instead."
         )));
     }
 
@@ -52,7 +49,7 @@ public final class VeteranBodyguard extends CardImpl {
     }
 }
 
-class VeteranBodyguardEffect extends PreventionEffectImpl {
+class VeteranBodyguardEffect extends RedirectionEffect {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("unblocked creatures");
 
@@ -70,22 +67,6 @@ class VeteranBodyguardEffect extends PreventionEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        DamagePlayerEvent damageEvent = (DamagePlayerEvent) event;
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            permanent.damage(damageEvent.getAmount(), event.getSourceId(), source, game, damageEvent.isCombatDamage(), damageEvent.isPreventable());
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGE_PLAYER;
-    }
-
-    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getPlayerId().equals(source.getControllerId())
                 && ((DamageEvent) event).isCombatDamage()) {
@@ -93,6 +74,9 @@ class VeteranBodyguardEffect extends PreventionEffectImpl {
             if (p != null) {
                 for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                     if (event.getSourceId().equals(permanent.getId())) {
+                        TargetPermanent target = new TargetPermanent();
+                        target.add(source.getSourceId(), game);
+                        this.redirectTarget = target;
                         return true;
                     }
                 }

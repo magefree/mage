@@ -88,16 +88,35 @@ public class CantAttackOrBlockAloneTest extends CardTestPlayerBase {
     @Test
     public void testCantBlockAlone2() {
         addCard(Zone.BATTLEFIELD, playerA, "Mogg Flunkies");
-        addCard(Zone.BATTLEFIELD, playerA, "Llanowar Elves");
+        addCard(Zone.BATTLEFIELD, playerA, "Ember Beast");
         addCard(Zone.BATTLEFIELD, playerB, "Elite Vanguard");
 
         attack(2, playerB, "Elite Vanguard");
         block(2, playerA, "Mogg Flunkies", "Elite Vanguard");
-        block(2, playerA, "Llanowar Elves", "Elite Vanguard");
+        block(2, playerA, "Ember Beast", "Elite Vanguard");
 
         setStopAt(2, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerA, 20);
+    }
+
+    /**
+     * Try to attack with three Orcish Conscripts (can't attack unless 2 others attack)
+     */
+    @Test
+    public void testCanAttackWithThree() {
+        addCard(Zone.BATTLEFIELD, playerA, "Orcish Conscripts", 3); // 2/2
+
+        attack(1, playerA, "Orcish Conscripts");
+        attack(1, playerA, "Orcish Conscripts");
+        attack(1, playerA, "Orcish Conscripts");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        assertLife(playerB, 14);
+
     }
 }

@@ -92,7 +92,7 @@ class EzurisPredationEffect extends OneShotEffect {
                         Permanent opponentCreature = creaturesOfOpponents.iterator().next();
                         creaturesOfOpponents.remove(opponentCreature);
                         // can be multiple tokens, so must be used custom BATCH_FIGHT event
-                        token.fight(opponentCreature, source, game, false);
+                        token.fightWithExcess(opponentCreature, source, game, false);
                         morSet.add(new MageObjectReference(token, game));
                         morSet.add(new MageObjectReference(opponentCreature, game));
                         game.informPlayers(token.getLogName() + " fights " + opponentCreature.getLogName());

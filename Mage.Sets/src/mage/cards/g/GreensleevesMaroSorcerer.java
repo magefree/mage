@@ -31,6 +31,7 @@ public final class GreensleevesMaroSorcerer extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELEMENTAL);
+        this.subtype.add(SubType.SORCERER);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);

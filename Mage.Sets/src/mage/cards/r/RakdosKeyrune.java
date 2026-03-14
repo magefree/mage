@@ -2,7 +2,6 @@
 package mage.cards.r;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
@@ -14,8 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.Zone;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 
 /**
  * @author LevelX2
@@ -30,7 +28,15 @@ public final class RakdosKeyrune extends CardImpl {
         this.addAbility(new RedManaAbility());
 
         // {B}{R}: Rakdos Keyrune becomes a 3/1 black and red Devil artifact creature with first strike until end of turn.
-        this.addAbility(new SimpleActivatedAbility(new BecomesCreatureSourceEffect(new RakdosKeyruneToken(), CardType.ARTIFACT, Duration.EndOfTurn), new ManaCostsImpl<>("{B}{R}")));
+        this.addAbility(new SimpleActivatedAbility(
+            new BecomesCreatureSourceEffect(
+                new CreatureToken(3, 1, "3/1 black and red Devil artifact creature with first strike", SubType.DEVIL)
+                    .withColor("BR").withType(CardType.ARTIFACT).withAbility(FirstStrikeAbility.getInstance()),
+                CardType.ARTIFACT,
+                Duration.EndOfTurn
+            ),
+            new ManaCostsImpl<>("{B}{R}")
+        ));
     }
 
     private RakdosKeyrune(final RakdosKeyrune card) {
@@ -40,26 +46,5 @@ public final class RakdosKeyrune extends CardImpl {
     @Override
     public RakdosKeyrune copy() {
         return new RakdosKeyrune(this);
-    }
-
-    private static class RakdosKeyruneToken extends TokenImpl {
-        RakdosKeyruneToken() {
-            super("", "3/1 black and red Devil artifact creature with first strike");
-            cardType.add(CardType.ARTIFACT);
-            cardType.add(CardType.CREATURE);
-            color.setBlack(true);
-            color.setRed(true);
-            this.subtype.add(SubType.DEVIL);
-            power = new MageInt(3);
-            toughness = new MageInt(1);
-            this.addAbility(FirstStrikeAbility.getInstance());
-        }
-        private RakdosKeyruneToken(final RakdosKeyruneToken token) {
-            super(token);
-        }
-
-        public RakdosKeyruneToken copy() {
-            return new RakdosKeyruneToken(this);
-        }
     }
 }

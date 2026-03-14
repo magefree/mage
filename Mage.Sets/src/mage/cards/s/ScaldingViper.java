@@ -34,7 +34,7 @@ public final class ScaldingViper extends AdventureCard {
 
         // Whenever an opponent casts a spell with mana value 3 or less, Scalding Viper deals 1 damage to that player.
         this.addAbility(new SpellCastOpponentTriggeredAbility(
-                Zone.BATTLEFIELD, new DamageTargetEffect(1, true, "that player"),
+                Zone.BATTLEFIELD, new DamageTargetEffect(1).withTargetDescription("that player"),
                 filter, false, SetTargetPointer.PLAYER
         ));
 

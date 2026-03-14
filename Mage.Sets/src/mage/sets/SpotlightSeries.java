@@ -22,9 +22,10 @@ public final class SpotlightSeries extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
-        cards.add(new SetCardInfo("Cloud, Midgar Mercenary", 5, Rarity.MYTHIC, mage.cards.c.CloudMidgarMercenary.class));
-        cards.add(new SetCardInfo("Get Lost", 6, Rarity.RARE, mage.cards.g.GetLost.class));
+        cards.add(new SetCardInfo("Cloud, Midgar Mercenary", 4, Rarity.MYTHIC, mage.cards.c.CloudMidgarMercenary.class));
+        cards.add(new SetCardInfo("Get Lost", 5, Rarity.RARE, mage.cards.g.GetLost.class));
         cards.add(new SetCardInfo("Kaldra Compleat", 2, Rarity.MYTHIC, mage.cards.k.KaldraCompleat.class));
+        cards.add(new SetCardInfo("Spectacular Spider-Man", 6, Rarity.RARE, mage.cards.s.SpectacularSpiderMan.class));
         cards.add(new SetCardInfo("Sword of Forge and Frontier", 3, Rarity.MYTHIC, mage.cards.s.SwordOfForgeAndFrontier.class));
         cards.add(new SetCardInfo("Terror of the Peaks", 1, Rarity.RARE, mage.cards.t.TerrorOfThePeaks.class));
     }

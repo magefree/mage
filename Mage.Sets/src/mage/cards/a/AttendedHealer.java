@@ -15,7 +15,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
-import mage.game.permanent.token.CatToken3;
+import mage.game.permanent.token.Cat11Token;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -40,7 +40,7 @@ public final class AttendedHealer extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever you gain life for the first time each turn, create a 1/1 white Cat creature token.
-        this.addAbility(new GainLifeFirstTimeTriggeredAbility(new CreateTokenEffect(new CatToken3())));
+        this.addAbility(new GainLifeFirstTimeTriggeredAbility(new CreateTokenEffect(new Cat11Token())));
 
         // {2}{W}: Another target Cleric gains lifelink until end of turn.
         Ability ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(

@@ -47,7 +47,7 @@ public final class ConformerShuriken extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(ability, AttachmentType.EQUIPMENT)));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2));
+        this.addAbility(new EquipAbility(2, false));
     }
 
     private ConformerShuriken(final ConformerShuriken card) {

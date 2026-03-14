@@ -36,8 +36,7 @@ public final class ChandraPyromaster extends CardImpl {
 
         this.setStartingLoyalty(4);
 
-        // +1: Chandra, Pyromaster deals 1 damage to target player and 1 damage to 
-        // up to one target creature that player controls. That creature can't block this turn.
+        // +1: Chandra, Pyromaster deals 1 damage to target player and 1 damage to up to one target creature that player controls. That creature can't block this turn.
         LoyaltyAbility ability1 = new LoyaltyAbility(new ChandraPyromasterEffect1(), 1);
         Target target1 = new TargetPlayerOrPlaneswalker();
         ability1.addTarget(target1);
@@ -68,7 +67,7 @@ public final class ChandraPyromaster extends CardImpl {
 
 class ChandraPyromasterEffect1 extends OneShotEffect {
 
-    public ChandraPyromasterEffect1() {
+    ChandraPyromasterEffect1() {
         super(Outcome.Damage);
         staticText = "{this} deals 1 damage to target player or planeswalker "
                 + "and 1 damage to up to one target creature that player or that "
@@ -101,7 +100,7 @@ class ChandraPyromasterEffect1 extends OneShotEffect {
 
 class ChandraPyromasterTarget extends TargetPermanent {
 
-    public ChandraPyromasterTarget() {
+    ChandraPyromasterTarget() {
         super(0, 1, new FilterCreaturePermanent("creature that the targeted player "
                 + "or planeswalker's controller controls"), false);
     }
@@ -138,7 +137,7 @@ class ChandraPyromasterTarget extends TargetPermanent {
 
 class ChandraPyromasterEffect2 extends OneShotEffect {
 
-    public ChandraPyromasterEffect2() {
+    ChandraPyromasterEffect2() {
         super(Outcome.Detriment);
         this.staticText = "Exile the top card of your library. You may play it this turn";
     }

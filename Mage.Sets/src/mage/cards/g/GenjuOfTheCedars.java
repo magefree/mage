@@ -1,6 +1,5 @@
 package mage.cards.g;
 
-import mage.MageInt;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -16,7 +15,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterLandPermanent;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -39,10 +38,14 @@ public final class GenjuOfTheCedars extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // {2}: Enchanted Forest becomes a 4/4 green Spirit creature until end of turn. It's still a land.
-        this.addAbility(new SimpleActivatedAbility(new BecomesCreatureAttachedWithActivatedAbilityOrSpellEffect(
-                new SpiritToken(), "Enchanted Forest becomes a 4/4 green " +
-                "Spirit creature until end of turn. It's still a land", Duration.EndOfTurn
-        ), new GenericManaCost(2)));
+        this.addAbility(new SimpleActivatedAbility(
+            new BecomesCreatureAttachedWithActivatedAbilityOrSpellEffect(
+                new CreatureToken(4, 4, "4/4 green Spirit creature", SubType.SPIRIT).withColor("G"),
+                "Enchanted Forest becomes a 4/4 green Spirit creature until end of turn. It's still a land",
+                Duration.EndOfTurn
+            ),
+            new GenericManaCost(2)
+        ));
 
         // When enchanted Forest is put into a graveyard, you may return Genju of the Cedars from your graveyard to your hand.
         this.addAbility(new DiesAttachedTriggeredAbility(
@@ -59,25 +62,5 @@ public final class GenjuOfTheCedars extends CardImpl {
     @Override
     public GenjuOfTheCedars copy() {
         return new GenjuOfTheCedars(this);
-    }
-
-    private static class SpiritToken extends TokenImpl {
-
-        SpiritToken() {
-            super("", "4/4 green Spirit creature");
-            cardType.add(CardType.CREATURE);
-            color.setGreen(true);
-            subtype.add(SubType.SPIRIT);
-            power = new MageInt(4);
-            toughness = new MageInt(4);
-        }
-
-        private SpiritToken(final SpiritToken token) {
-            super(token);
-        }
-
-        public SpiritToken copy() {
-            return new SpiritToken(this);
-        }
     }
 }

@@ -1,6 +1,5 @@
 package mage.cards.c;
 
-import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.CaseAbility;
@@ -21,7 +20,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.TargetPermanent;
 import mage.watchers.common.CardsPutIntoGraveyardWatcher;
 
@@ -51,10 +50,14 @@ public final class CaseOfTheGorgonsKiss extends CardImpl {
         Condition toSolveCondition = new CaseOfTheGorgonsKissCondition();
         // Solved -- This Case is a 4/4 Gorgon creature with deathtouch and lifelink in addition to its other types.
         Ability solvedAbility = new SimpleStaticAbility(new ConditionalContinuousEffect(
-                new BecomesCreatureSourceEffect(new CaseOfTheGorgonsKissToken(),
-                        CardType.ENCHANTMENT, Duration.WhileOnBattlefield),
-                SolvedSourceCondition.SOLVED, "")
-                .setText("This Case is a 4/4 Gorgon creature with deathtouch and lifelink in addition to its other types."));
+            new BecomesCreatureSourceEffect(
+                new CreatureToken(4, 4, "4/4 Gorgon creature with deathtouch and lifelink", SubType.GORGON)
+                    .withAbility(DeathtouchAbility.getInstance()).withAbility(LifelinkAbility.getInstance()),
+                CardType.ENCHANTMENT,
+                Duration.WhileOnBattlefield
+            ),
+            SolvedSourceCondition.SOLVED, ""
+        ).setText("This Case is a 4/4 Gorgon creature with deathtouch and lifelink in addition to its other types."));
 
         this.addAbility(new CaseAbility(initialAbility, toSolveCondition, solvedAbility)
                         .addHint(new CaseOfTheGorgonsKissHint(toSolveCondition)),
@@ -113,28 +116,5 @@ class CaseOfTheGorgonsKissHint extends CaseSolvedHint {
                 .filter(MageObject::isCreature)
                 .count();
         return "Creatures put into graveyards: " + creatures + " (need 3).";
-    }
-}
-
-class CaseOfTheGorgonsKissToken extends TokenImpl {
-
-    CaseOfTheGorgonsKissToken() {
-        super("", "4/4 Gorgon creature with deathtouch and lifelink");
-        this.cardType.add(CardType.CREATURE);
-
-        this.subtype.add(SubType.GORGON);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
-        this.addAbility(DeathtouchAbility.getInstance());
-        this.addAbility(LifelinkAbility.getInstance());
-    }
-
-    private CaseOfTheGorgonsKissToken(final CaseOfTheGorgonsKissToken token) {
-        super(token);
-    }
-
-    @Override
-    public CaseOfTheGorgonsKissToken copy() {
-        return new CaseOfTheGorgonsKissToken(this);
     }
 }

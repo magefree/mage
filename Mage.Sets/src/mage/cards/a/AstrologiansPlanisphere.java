@@ -48,7 +48,7 @@ public final class AstrologiansPlanisphere extends CardImpl {
         this.addAbility(ability);
 
         // Diana -- Equip {2}
-        this.addAbility(new EquipAbility(2).withFlavorWord("Diana"));
+        this.addAbility(new EquipAbility(2, false).withFlavorWord("Diana"));
     }
 
     private AstrologiansPlanisphere(final AstrologiansPlanisphere card) {

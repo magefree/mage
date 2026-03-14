@@ -35,7 +35,7 @@ public final class LittjaraKinseekers extends CardImpl {
         // When Littjara Kinseekers enters the battlefield, if you control three or more creatures that share a creature type, put a +1/+1 counter on Littjara Kinseekers, then scry 1.
         Ability ability = new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()))
                 .withInterveningIf(LittjaraKinseekersCondition.instance);
-        ability.addEffect(new ScryEffect(1).concatBy(", then"));
+        ability.addEffect(new ScryEffect(1, false).concatBy(", then"));
         this.addAbility(ability.addHint(GreatestSharedCreatureTypeCount.getHint()));
     }
 

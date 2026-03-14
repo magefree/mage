@@ -37,7 +37,7 @@ public final class AmblingStormshell extends CardImpl {
         this.toughness = new MageInt(9);
 
         // Ward {2}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}"), false));
 
         // Whenever this creature attacks, put three stun counters on it and draw three cards.
         Ability ability = new AttacksTriggeredAbility(

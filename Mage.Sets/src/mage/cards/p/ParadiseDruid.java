@@ -2,7 +2,6 @@ package mage.cards.p;
 
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.SourceTappedCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
@@ -31,11 +30,11 @@ public final class ParadiseDruid extends CardImpl {
 
         // Paradise Druid has hexproof as long as it's untapped.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
-                new GainAbilitySourceEffect(
-                        HexproofAbility.getInstance(),
-                        Duration.WhileOnBattlefield
-                ), SourceTappedCondition.UNTAPPED,
-                "{this} has hexproof as long as it's untapped"
+            new GainAbilitySourceEffect(
+                HexproofAbility.getInstance(),
+                Duration.WhileOnBattlefield
+            ), SourceTappedCondition.UNTAPPED,
+            "{this} has hexproof as long as it's untapped"
         )));
 
         // {T}: Add one mana of any color.

@@ -25,7 +25,7 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.SuspectedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.SkeletonToken2;
+import mage.game.permanent.token.Skeleton21Token;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -77,7 +77,7 @@ public final class CaseOfTheStashedSkeleton extends CardImpl {
 class CaseOfTheStashedSkeletonEffect extends CreateTokenEffect {
 
     CaseOfTheStashedSkeletonEffect() {
-        super(new SkeletonToken2());
+        super(new Skeleton21Token());
         staticText = "create a 2/1 black Skeleton creature token and suspect it";
     }
 

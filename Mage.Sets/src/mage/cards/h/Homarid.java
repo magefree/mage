@@ -2,7 +2,7 @@ package mage.cards.h;
 
 import mage.MageInt;
 import mage.abilities.StateTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceHasCounterCondition;
@@ -36,9 +36,7 @@ public final class Homarid extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Homarid enters the battlefield with a tide counter on it.
-        this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.TIDE.createInstance()), "with a tide counter on it."
-        ));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.TIDE.createInstance()));
 
         // At the beginning of your upkeep, put a tide counter on Homarid.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(

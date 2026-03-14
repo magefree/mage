@@ -1,15 +1,13 @@
 package mage.cards.g;
 
 import mage.MageInt;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.dynamicvalue.common.ShrinesYouControlCount;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.DoWhenCostPaid;
-import mage.abilities.hint.Hint;
-import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.DeathtouchAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -58,7 +56,7 @@ public final class GoShintaiOfHiddenCruelty extends CardImpl {
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 new DoWhenCostPaid(ability, new GenericManaCost(1), "Pay {1}?")
-        ).addHint(GoShintaiOfHiddenCrueltyPredicate.getHint()));
+        ).addHint(ShrinesYouControlCount.getHint()));
     }
 
     private GoShintaiOfHiddenCruelty(final GoShintaiOfHiddenCruelty card) {
@@ -74,13 +72,6 @@ public final class GoShintaiOfHiddenCruelty extends CardImpl {
 enum GoShintaiOfHiddenCrueltyPredicate implements ObjectSourcePlayerPredicate<Permanent> {
     instance;
     private static final FilterPermanent filter = new FilterControlledPermanent(SubType.SHRINE);
-    private static final Hint hint = new ValueHint(
-            "Shrines you control", new PermanentsOnBattlefieldCount(filter)
-    );
-
-    public static Hint getHint() {
-        return hint;
-    }
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {

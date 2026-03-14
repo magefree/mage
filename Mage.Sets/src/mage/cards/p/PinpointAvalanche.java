@@ -18,7 +18,7 @@ public final class PinpointAvalanche extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{R}{R}");
 
         // Pinpoint Avalanche deals 4 damage to target creature. The damage can't be prevented.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(4, false));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(4).withCantBePrevented());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

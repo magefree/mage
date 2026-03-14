@@ -193,6 +193,9 @@ public class Constructed extends DeckValidator {
         banned.add("Vorthos, Steward of Myth");
         banned.add("Water Gun Balloon Game");
         banned.add("Well Done");
+
+        // Gleemox is banned
+        banned.add("Gleemox");
     }
 
     public List<String> getSetCodes() {

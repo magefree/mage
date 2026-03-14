@@ -1,6 +1,5 @@
 package mage.cards.n;
 
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.effects.ContinuousEffect;
@@ -17,7 +16,7 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
@@ -42,7 +41,12 @@ public final class NissaWorldwaker extends CardImpl {
         this.setStartingLoyalty(3);
 
         // +1: Target land you control becomes a 4/4 Elemental creature with trample.  It's still a land.
-        LoyaltyAbility ability = new LoyaltyAbility(new BecomesCreatureTargetEffect(new NissaWorldwakerToken(), false, true, Duration.Custom), 1);
+        LoyaltyAbility ability = new LoyaltyAbility(new BecomesCreatureTargetEffect(
+            new CreatureToken(
+                4, 4, "4/4 Elemental creature with trample", SubType.ELEMENTAL
+            ).withAbility(TrampleAbility.getInstance()),
+            false, true, Duration.Custom
+        ), 1);
         ability.addTarget(new TargetPermanent(new FilterControlledLandPermanent()));
         this.addAbility(ability);
 
@@ -96,7 +100,11 @@ class NissaWorldwakerSearchEffect extends OneShotEffect {
                         if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
                             Permanent land = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
                             if (land != null) {
-                                ContinuousEffect effect = new BecomesCreatureTargetEffect(new NissaWorldwakerToken(), false, true, Duration.Custom);
+                                ContinuousEffect effect = new BecomesCreatureTargetEffect(
+                                    new CreatureToken(4, 4, "4/4 Elemental creature with trample", SubType.ELEMENTAL)
+                                        .withAbility(TrampleAbility.getInstance()),
+                                    false, true, Duration.Custom
+                                );
                                 effect.setTargetPointer(new FixedTarget(land, game));
                                 game.addEffect(effect, source);
 
@@ -108,25 +116,5 @@ class NissaWorldwakerSearchEffect extends OneShotEffect {
         }
         controller.shuffleLibrary(source, game);
         return true;
-    }
-}
-
-class NissaWorldwakerToken extends TokenImpl {
-
-    public NissaWorldwakerToken() {
-        super("", "4/4 Elemental creature with trample");
-        this.cardType.add(CardType.CREATURE);
-
-        this.subtype.add(SubType.ELEMENTAL);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
-        this.addAbility(TrampleAbility.getInstance());
-    }
-    private NissaWorldwakerToken(final NissaWorldwakerToken token) {
-        super(token);
-    }
-
-    public NissaWorldwakerToken copy() {
-        return new NissaWorldwakerToken(this);
     }
 }

@@ -2,8 +2,6 @@ package org.mage.test.cards.single.shm;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -46,24 +44,10 @@ public class DevotedDruidTest extends CardTestPlayerBase {
         // ...
         // (2018-12-07)
 
-        //checkPlayableAbility("can't put counters", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Put a -1/-1", false);
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Put a -1/-1");
-
-        setStopAt(1, PhaseStep.END_TURN);
-        // TODO: improve PutCountersSourceCost, so it can find real playable ability here instead restriction
-        try {
-            setStrictChooseMode(true);
-            execute();
-            Assert.fail("must throw exception on execute");
-        } catch (Throwable e) {
-            if (!e.getMessage().contains("Put a -1/-1")) {
-                Assert.fail("Needed error about not being able to use the Devoted Druid's -1/-1 ability, but got:\n" + e.getMessage());
-            }
-        }
+        checkPlayableAbility("can't put counters", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Put a -1/-1", false);
     }
 
     @Test
-    @Ignore // TODO: must fix, see #13583
     public void test_PutCounter_ModifiedToZeroCounters() {
         // {T}: Add {G}.
         // Put a -1/-1 counter on this creature: Untap this creature.

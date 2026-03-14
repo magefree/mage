@@ -1,16 +1,17 @@
 package mage.cards.e;
 
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
+import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
+import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.TrampleAbility;
-import mage.abilities.keyword.TransformAbility;
 import mage.cards.*;
 import mage.constants.*;
+import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
@@ -21,27 +22,40 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class EtaliPrimalConqueror extends CardImpl {
+public final class EtaliPrimalConqueror extends TransformingDoubleFacedCard {
 
     public EtaliPrimalConqueror(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}{R}");
+        super(ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.ELDER, SubType.DINOSAUR}, "{5}{R}{R}",
+                "Etali, Primal Sickness",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.PHYREXIAN, SubType.ELDER, SubType.DINOSAUR}, "RG"
+        );
 
-        this.supertype.add(SuperType.LEGENDARY);
-        this.subtype.add(SubType.ELDER);
-        this.subtype.add(SubType.DINOSAUR);
-        this.power = new MageInt(7);
-        this.toughness = new MageInt(7);
-        this.secondSideCardClazz = mage.cards.e.EtaliPrimalSickness.class;
+        // Etali, Primal Conqueror
+        this.getLeftHalfCard().setPT(7, 7);
 
         // Trample
-        this.addAbility(TrampleAbility.getInstance());
+        this.getLeftHalfCard().addAbility(TrampleAbility.getInstance());
 
         // When Etali, Primal Conqueror enters the battlefield, each player exiles cards from the top of their library until they exile a nonland card. You may cast any number of spells from among the nonland cards exiled this way without paying their mana costs.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new EtaliPrimalConquerorEffect()));
+        this.getLeftHalfCard().addAbility(new EntersBattlefieldTriggeredAbility(new EtaliPrimalConquerorEffect()));
 
         // {9}{G/P}: Transform Etali. Activate only as a sorcery.
-        this.addAbility(new TransformAbility());
-        this.addAbility(new ActivateAsSorceryActivatedAbility(new TransformSourceEffect(), new ManaCostsImpl<>("{9}{G/P}")));
+        this.getLeftHalfCard().addAbility(new ActivateAsSorceryActivatedAbility(new TransformSourceEffect(), new ManaCostsImpl<>("{9}{G/P}")));
+
+        // Etali, Primal Sickness
+        this.getRightHalfCard().setPT(11, 11);
+
+        // Trample
+        this.getRightHalfCard().addAbility(TrampleAbility.getInstance());
+
+        // Indestructible
+        this.getRightHalfCard().addAbility(IndestructibleAbility.getInstance());
+
+        // Whenever Etali, Primal Sickness deals combat damage to a player, they get that many poison counters.
+        this.getRightHalfCard().addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
+                new EtaliPrimalSicknessEffect(), false, true
+        ));
     }
 
     private EtaliPrimalConqueror(final EtaliPrimalConqueror card) {
@@ -95,5 +109,29 @@ class EtaliPrimalConquerorEffect extends OneShotEffect {
         cards.retainZone(Zone.EXILED, game);
         CardUtil.castMultipleWithAttributeForFree(controller, source, game, cards, StaticFilters.FILTER_CARD);
         return true;
+    }
+}
+
+class EtaliPrimalSicknessEffect extends OneShotEffect {
+
+    EtaliPrimalSicknessEffect() {
+        super(Outcome.Benefit);
+        staticText = "they get that many poison counters";
+    }
+
+    private EtaliPrimalSicknessEffect(final EtaliPrimalSicknessEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public EtaliPrimalSicknessEffect copy() {
+        return new EtaliPrimalSicknessEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
+        int damage = (Integer) getValue("damage");
+        return player != null && player.addCounters(CounterType.POISON.createInstance(damage), source.getControllerId(), source, game);
     }
 }

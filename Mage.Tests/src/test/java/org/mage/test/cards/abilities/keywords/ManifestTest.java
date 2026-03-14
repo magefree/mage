@@ -726,6 +726,26 @@ public class ManifestTest extends CardTestPlayerBase {
 
     }
 
+    @Test
+    public void test_ManifestNonPermanentWithCounters() {
+
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
+        addCard(Zone.HAND, playerA, "Fierce Invocation");
+        // Manifest the top card of your library, then put two +1/+1 counters on it.
+
+        addCard(Zone.LIBRARY, playerA, "Lightning Bolt", 1);
+        skipInitShuffling();
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fierce Invocation");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 4, 4);
+
+    }
+
     private PermanentView findFaceDownPermanent(Game game, TestPlayer viewFromPlayer, TestPlayer searchInPlayer) {
         Permanent perm = game.getBattlefield().getAllPermanents()
                 .stream()

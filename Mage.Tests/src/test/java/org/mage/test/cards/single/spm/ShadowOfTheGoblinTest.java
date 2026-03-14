@@ -61,7 +61,7 @@ public class ShadowOfTheGoblinTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Mountain");
         addCard(Zone.HAND, playerA, partyThrasher);
 
-        setChoice(playerA, false); // shadow trigger
+        setChoice(playerA, "Mountain"); // shadow trigger
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mountain");

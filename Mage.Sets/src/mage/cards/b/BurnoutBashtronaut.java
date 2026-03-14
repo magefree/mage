@@ -31,7 +31,7 @@ public final class BurnoutBashtronaut extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Start your engines!
         this.addAbility(new StartYourEnginesAbility());

@@ -1,19 +1,19 @@
 package mage.cards.k;
 
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
+import mage.abilities.common.LoseLifeTriggeredAbility;
+import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.dynamicvalue.common.SavedLifeLossValue;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.SacrificeOpponentsEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
-import mage.abilities.keyword.TransformAbility;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.*;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Controllable;
 import mage.game.Game;
@@ -25,28 +25,38 @@ import java.util.*;
 /**
  * @author TheElk801
  */
-public final class KefkaCourtMage extends CardImpl {
+public final class KefkaCourtMage extends TransformingDoubleFacedCard {
 
     public KefkaCourtMage(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{B}{R}");
+        super(ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.WIZARD}, "{2}{U}{B}{R}",
+                "Kefka, Ruler of Ruin",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.AVATAR, SubType.WIZARD}, "UBR");
 
-        this.supertype.add(SuperType.LEGENDARY);
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.WIZARD);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(5);
-        this.secondSideCardClazz = mage.cards.k.KefkaRulerOfRuin.class;
+        // Kefka, Court Mage
+        this.getLeftHalfCard().setPT(4, 5);
 
         // Whenever Kefka enters or attacks, each player discards a card. Then you draw a card for each card type among cards discarded this way.
-        this.addAbility(new EntersBattlefieldOrAttacksSourceTriggeredAbility(new KefkaCourtMageEffect()));
+        this.getLeftHalfCard().addAbility(new EntersBattlefieldOrAttacksSourceTriggeredAbility(new KefkaCourtMageEffect()));
 
         // {8}: Each opponent sacrifices a permanent of their choice. Transform Kefka. Activate only as a sorcery.
-        this.addAbility(new TransformAbility());
         Ability ability = new ActivateAsSorceryActivatedAbility(
                 new SacrificeOpponentsEffect(StaticFilters.FILTER_PERMANENT), new GenericManaCost(8)
         );
         ability.addEffect(new TransformSourceEffect());
-        this.addAbility(ability);
+        this.getLeftHalfCard().addAbility(ability);
+
+        // Kefka, Ruler of Ruin
+        this.getRightHalfCard().setPT(5, 7);
+
+        // Flying
+        this.getRightHalfCard().addAbility(FlyingAbility.getInstance());
+
+        // Whenever an opponent loses life during your turn, you draw that many cards.
+        this.getRightHalfCard().addAbility(new LoseLifeTriggeredAbility(
+                new DrawCardSourceControllerEffect(SavedLifeLossValue.MANY, true),
+                TargetController.OPPONENT, false, false
+        ).withTriggerCondition(MyTurnCondition.instance));
     }
 
     private KefkaCourtMage(final KefkaCourtMage card) {

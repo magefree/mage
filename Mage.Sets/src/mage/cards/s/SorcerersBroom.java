@@ -9,8 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -18,12 +17,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class SorcerersBroom extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterPermanent("another permanent");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public SorcerersBroom(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");
@@ -35,7 +28,7 @@ public final class SorcerersBroom extends CardImpl {
         // Whenever you sacrifice another permanent, you may pay {3}. If you do, create a token that's a copy of Sorcerer's Broom.
         this.addAbility(new SacrificePermanentTriggeredAbility(
                 new DoIfCostPaid(new CreateTokenCopySourceEffect(), new GenericManaCost(3)),
-                filter
+                StaticFilters.FILTER_ANOTHER_PERMANENT
         ));
     }
 

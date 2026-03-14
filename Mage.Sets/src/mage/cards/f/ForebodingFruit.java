@@ -23,7 +23,7 @@ public final class ForebodingFruit extends CardImpl {
 
         // Target player draws two cards and loses 2 life.
         this.getSpellAbility().addEffect(new DrawCardTargetEffect(2));
-        this.getSpellAbility().addEffect(new LoseLifeTargetEffect(2).setText("and loses 2 life"));
+        this.getSpellAbility().addEffect(new LoseLifeTargetEffect(2).withTargetDescription("and"));
         this.getSpellAbility().addTarget(new TargetPlayer());
 
         // Adamant — If at least three black mana was spent to cast this spell, create a Food token.

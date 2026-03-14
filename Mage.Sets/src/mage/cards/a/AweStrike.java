@@ -57,14 +57,13 @@ class AweStrikeEffect extends PreventionEffectImpl {
         if (player != null) {
             player.gainLife(preventionData.getPreventedDamage(), game, source);
         }
-        this.used = true;
         this.discard();
-        return true;
+        return false;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!this.used && super.applies(event, source, game)) {
+        if (super.applies(event, source, game)) {
             Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
             return targetCreature != null && targetCreature.getId().equals(event.getSourceId());
         }

@@ -14,8 +14,13 @@ public class YouDontLoseManaEffect extends ContinuousEffectImpl {
     private final ManaType manaType;
 
     public YouDontLoseManaEffect(ManaType manaType) {
-        super(Duration.WhileOnBattlefield, Layer.RulesEffects, SubLayer.NA, Outcome.Detriment);
-        staticText = "you don't lose unspent " + manaType + " mana as steps and phases end";
+        this(Duration.WhileOnBattlefield, manaType);
+    }
+
+    public YouDontLoseManaEffect(Duration duration, ManaType manaType) {
+        super(duration, Layer.RulesEffects, SubLayer.NA, Outcome.Detriment);
+        staticText = (duration == Duration.EndOfTurn ? "until end of turn, " : "") +
+                "you don't lose unspent " + manaType + " mana as steps and phases end";
         this.manaType = manaType;
     }
 

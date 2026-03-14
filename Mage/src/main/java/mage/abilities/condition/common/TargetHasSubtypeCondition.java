@@ -7,6 +7,10 @@ import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  *
  * @author LevelX2
@@ -14,18 +18,23 @@ import mage.game.permanent.Permanent;
 
 public class TargetHasSubtypeCondition implements Condition {
 
-    private final SubType subtype;
+    private final List<SubType> subtypes = new ArrayList<>();
 
-    public TargetHasSubtypeCondition(SubType subtype) {
-        this.subtype = subtype;
+    public TargetHasSubtypeCondition(SubType... subTypes) {
+        this.subtypes.addAll(Arrays.asList(subTypes));
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         if (!source.getTargets().isEmpty()) {
             Permanent permanent = game.getPermanent(source.getFirstTarget());
-            if (permanent != null) {
-                return permanent.hasSubtype(subtype, game);
+            if (permanent == null) {
+                return false;
+            }
+            for (SubType subtype : subtypes) {
+                if (permanent.hasSubtype(subtype, game)) {
+                    return true;
+                }
             }
         }
         return false;

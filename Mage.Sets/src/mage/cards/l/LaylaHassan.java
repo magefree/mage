@@ -1,9 +1,7 @@
 package mage.cards.l;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.OneOrMoreDamagePlayerTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
@@ -12,7 +10,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.HistoricPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -25,14 +23,9 @@ import java.util.UUID;
  */
 public final class LaylaHassan extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("historic card from your graveyard");
-    static {
-        filter.add(HistoricPredicate.instance);
-    }
-
     public LaylaHassan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
-        
+
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ASSASSIN);
@@ -43,9 +36,7 @@ public final class LaylaHassan extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // When Layla Hassan enters the battlefield and whenever one or more Assassins you control deal combat damage to a player, return target historic card from your graveyard to your hand.
-        Ability ability = new LaylaHassanTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect());
-        ability.addTarget(new TargetCardInYourGraveyard(filter));
-        this.addAbility(ability);
+        this.addAbility(new LaylaHassanTriggeredAbility());
     }
 
     private LaylaHassan(final LaylaHassan card) {
@@ -60,14 +51,16 @@ public final class LaylaHassan extends CardImpl {
 
 class LaylaHassanTriggeredAbility extends OneOrMoreDamagePlayerTriggeredAbility {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Assassins");
+    private static final FilterPermanent filter = new FilterPermanent(SubType.ASSASSIN, "Assassins");
+    private static final FilterCard filter2 = new FilterCard("historic card from your graveyard");
 
     static {
-        filter.add(SubType.ASSASSIN.getPredicate());
+        filter2.add(HistoricPredicate.instance);
     }
 
-    public LaylaHassanTriggeredAbility(Effect effect) {
-        super(effect, filter, true, true);
+    public LaylaHassanTriggeredAbility() {
+        super(new ReturnFromGraveyardToHandTargetEffect(), filter, true, true);
+        this.addTarget(new TargetCardInYourGraveyard(filter2));
     }
 
     private LaylaHassanTriggeredAbility(final LaylaHassanTriggeredAbility ability) {
@@ -76,8 +69,8 @@ class LaylaHassanTriggeredAbility extends OneOrMoreDamagePlayerTriggeredAbility 
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD 
-            || event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_ONE_PLAYER;
+        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD
+                || event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_ONE_PLAYER;
     }
 
     @Override
@@ -94,7 +87,8 @@ class LaylaHassanTriggeredAbility extends OneOrMoreDamagePlayerTriggeredAbility 
 
     @Override
     public String getRule() {
-        return "When {this} enters the battlefield and whenever one or more Assassins you control deal combat damage to a player, return target historic card from your graveyard to your hand.";
+        return "When {this} enters the battlefield and whenever one or more Assassins you control " +
+                "deal combat damage to a player, return target historic card from your graveyard to your hand.";
     }
 
     @Override

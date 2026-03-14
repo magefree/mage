@@ -1,6 +1,6 @@
 package mage.cards.c;
 
-import mage.abilities.effects.common.DamageTargetControllerEffect;
+import mage.abilities.effects.common.DamageTargetAndTargetControllerEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardSetInfo;
@@ -22,8 +22,7 @@ public final class CarnivalCarnage extends SplitCard {
 
         // Carnival
         // Carnival deals 1 damage to target creature or planeswalker and 1 damage to that permanent's controller.
-        this.getLeftHalfCard().getSpellAbility().addEffect(new DamageTargetEffect(1));
-        this.getLeftHalfCard().getSpellAbility().addEffect(new DamageTargetControllerEffect(1).setText("and 1 damage to that permanent's controller"));
+        this.getLeftHalfCard().getSpellAbility().addEffect(new DamageTargetAndTargetControllerEffect(1, 1));
         this.getLeftHalfCard().getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker());
 
         // Carnage

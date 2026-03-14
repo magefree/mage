@@ -36,14 +36,12 @@ public final class FieryAnnihilation extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}");
 
         // Fiery Annihilation deals 5 damage to target creature. Exile up to one target Equipment attached to that creature. If that creature would die this turn, exile it instead.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(
-                5, true, "target creature", true
-        ));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(5));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new ExileTargetEffect()
                 .setTargetPointer(new SecondTargetPointer())
                 .setText("exile up to one target Equipment attached to that creature"));
         this.getSpellAbility().addEffect(new ExileTargetIfDiesEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addTarget(new TargetPermanent(0, 1, filter));
     }
 

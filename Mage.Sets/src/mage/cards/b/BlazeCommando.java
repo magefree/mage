@@ -9,7 +9,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.game.permanent.token.SoldierTokenWithHaste;
+import mage.game.permanent.token.SoldierHasteToken;
 
 import java.util.UUID;
 
@@ -27,7 +27,7 @@ public final class BlazeCommando extends CardImpl {
 
         // Whenever an instant or sorcery spell you control deals damage, create two 1/1 red and white Soldier creature tokens with haste.
         this.addAbility(new SpellControlledDealsDamageTriggeredAbility(Zone.BATTLEFIELD,
-                new CreateTokenEffect(new SoldierTokenWithHaste(), 2),
+                new CreateTokenEffect(new SoldierHasteToken(), 2),
                 StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY, false
         ));
 

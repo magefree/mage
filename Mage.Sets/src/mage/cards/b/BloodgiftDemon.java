@@ -30,7 +30,7 @@ public final class BloodgiftDemon extends CardImpl {
 
         // At the beginning of your upkeep, target player draws a card and loses 1 life.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new DrawCardTargetEffect(1));
-        ability.addEffect(new LoseLifeTargetEffect(1).setText("and loses 1 life"));
+        ability.addEffect(new LoseLifeTargetEffect(1).withTargetDescription("and"));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

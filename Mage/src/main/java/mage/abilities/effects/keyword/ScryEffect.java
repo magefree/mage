@@ -22,7 +22,7 @@ public class ScryEffect extends OneShotEffect {
     }
 
     public ScryEffect(DynamicValue amount) {
-        this(amount, false);
+        this(amount, true);
     }
 
     public ScryEffect(int scryNumber, boolean showEffectHint) {
@@ -66,7 +66,7 @@ public class ScryEffect extends OneShotEffect {
             sb.append(message);
         }
         if (showEffectHint) {
-            if (value == "1") {
+            if (value.equals("1")) {
                 sb.append(". <i>(Look at the top card of your library. You may put that card on the bottom.)</i>");
             } else {
                 sb.append(". <i>(Look at the top ");

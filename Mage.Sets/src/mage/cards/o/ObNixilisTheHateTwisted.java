@@ -28,9 +28,8 @@ public final class ObNixilisTheHateTwisted extends CardImpl {
         this.setStartingLoyalty(5);
 
         // Whenever an opponent draws a card, Ob Nixilis, the Hate-Twisted deals 1 damage to that player.
-        this.addAbility(new DrawCardOpponentTriggeredAbility(new DamageTargetEffect(
-                1, true, "that player"
-        ), false, true));
+        this.addAbility(new DrawCardOpponentTriggeredAbility(new DamageTargetEffect(1)
+                .withTargetDescription("that player"), false, true));
 
         // -2: Destroy target creature. Its controller draws two cards.
         Ability ability = new LoyaltyAbility(new DestroyTargetEffect(), -2);

@@ -24,7 +24,7 @@ public final class FlamesOfTheBloodHand extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}");
 
         // Flames of the Blood Hand deals 4 damage to target player. The damage can't be prevented.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(4, false));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(4).withCantBePrevented());
         // If that player would gain life this turn, that player gains no life instead.
         this.getSpellAbility().addEffect(new FlamesOfTheBloodHandReplacementEffect());
         this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());

@@ -35,7 +35,7 @@ public final class VeteranGuardmouse extends CardImpl {
         ability.addEffect(new GainAbilitySourceEffect(
                 FirstStrikeAbility.getInstance(), Duration.EndOfTurn
         ).setText("and gains first strike until end of turn"));
-        ability.addEffect(new ScryEffect(1, false));
+        ability.addEffect(new ScryEffect(1));
         this.addAbility(ability);
     }
 

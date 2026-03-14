@@ -1,7 +1,5 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
@@ -9,23 +7,18 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author noxx
-
  */
 public final class MidnightDuelist extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent("Vampires");
-
-    static {
-        filter.add(SubType.VAMPIRE.getPredicate());
-    }
+    private static final FilterPermanent filter = new FilterPermanent(SubType.VAMPIRE, "Vampires");
 
     public MidnightDuelist(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
 

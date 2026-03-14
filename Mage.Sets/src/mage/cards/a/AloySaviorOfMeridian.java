@@ -10,10 +10,7 @@ import mage.abilities.keyword.ReachAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
@@ -42,8 +39,8 @@ public final class AloySaviorOfMeridian extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
 
         // In You, All Things Are Possible -- Whenever one or more artifact creatures you control attack, discover X, where X is the greatest power among them.
-        this.addAbility(new AttacksWithCreaturesTriggeredAbility(
-                new AloySaviorOfMeridianEffect(), 1, StaticFilters.FILTER_PERMANENT_ARTIFACT_CREATURE
+        this.addAbility(new AttacksWithCreaturesTriggeredAbility(Zone.BATTLEFIELD,
+                new AloySaviorOfMeridianEffect(), 1, StaticFilters.FILTER_PERMANENT_ARTIFACT_CREATURE, true
         ).setTriggerPhrase("Whenever one or more artifact creatures you control attack, ").withFlavorWord("In You, All Things Are Possible"));
     }
 

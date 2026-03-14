@@ -44,6 +44,7 @@ public final class AzorsElocutors extends CardImpl {
                 new WinGameSourceControllerEffect(), condition,
                 "Then if {this} has five or more filibuster counters on it, you win the game"
         ));
+        this.addAbility(ability);
 
         // Whenever a source deals damage to you, remove a filibuster counter from Azor's Elocutors.
         this.addAbility(new AzorsElocutorsTriggeredAbility());

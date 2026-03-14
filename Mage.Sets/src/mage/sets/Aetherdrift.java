@@ -19,7 +19,7 @@ public final class Aetherdrift extends ExpansionSet {
         super("Aetherdrift", "DFT", ExpansionSet.buildDate(2025, 2, 14), SetType.EXPANSION);
         this.blockName = "Aetherdrift"; // for sorting in GUI
 
-        this.enablePlayBooster(Integer.MAX_VALUE);
+        this.enablePlayBooster(354);
 
         cards.add(new SetCardInfo("Aatchik, Emerald Radian", 187, Rarity.RARE, mage.cards.a.AatchikEmeraldRadian.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aatchik, Emerald Radian", 360, Rarity.RARE, mage.cards.a.AatchikEmeraldRadian.class, NON_FULL_USE_VARIOUS));

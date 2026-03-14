@@ -28,7 +28,7 @@ public final class AlpharaelStonechosen extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Ward--Discard a card at random.
-        this.addAbility(new WardAbility(new DiscardCardCost(true)));
+        this.addAbility(new WardAbility(new DiscardCardCost(true), false));
 
         // Void -- Whenever Alpharael attacks, if a nonland permanent left the battlefield this turn or a spell was warped this turn, defending player loses half their life, rounded up.
         this.addAbility(new AttacksTriggeredAbility(

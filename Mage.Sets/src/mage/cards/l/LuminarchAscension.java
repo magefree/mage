@@ -11,6 +11,7 @@ import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -24,7 +25,7 @@ import java.util.UUID;
  */
 public final class LuminarchAscension extends CardImpl {
 
-    private static final Condition condition = new SourceHasCounterCondition(CounterType.QUEST, 4);
+    private static final Condition condition = new SourceHasCounterCondition(CounterType.QUEST, ComparisonType.MORE_THAN, 3);
 
     public LuminarchAscension(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");

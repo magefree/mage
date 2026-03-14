@@ -1,6 +1,5 @@
 package mage.cards.a;
 
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -16,7 +15,7 @@ import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 
 import java.util.UUID;
 
@@ -72,28 +71,11 @@ class AnsweredPrayersEffect extends OneShotEffect {
             return true;
         }
         game.addEffect(new BecomesCreatureSourceEffect(
-                new AnsweredPrayersToken(), CardType.ENCHANTMENT, Duration.EndOfTurn
+            new CreatureToken(3, 3, "3/3 Angel creature with flying", SubType.ANGEL)
+                .withAbility(FlyingAbility.getInstance()),
+                CardType.ENCHANTMENT,
+                Duration.EndOfTurn
         ), source);
         return true;
-    }
-}
-
-class AnsweredPrayersToken extends TokenImpl {
-
-    AnsweredPrayersToken() {
-        super("", "3/3 Angel creature with flying");
-        cardType.add(CardType.CREATURE);
-        subtype.add(SubType.ANGEL);
-        power = new MageInt(3);
-        toughness = new MageInt(3);
-        this.addAbility(FlyingAbility.getInstance());
-    }
-
-    private AnsweredPrayersToken(final AnsweredPrayersToken token) {
-        super(token);
-    }
-
-    public AnsweredPrayersToken copy() {
-        return new AnsweredPrayersToken(this);
     }
 }

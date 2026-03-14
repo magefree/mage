@@ -33,8 +33,7 @@ public class FaerieMastermind extends CardImpl {
 
         //Whenever an opponent draws their second card each turn, you draw a card.
         this.addAbility(new DrawNthCardTriggeredAbility(
-                new DrawCardSourceControllerEffect(1)
-                        .setText("you draw a card"),
+                new DrawCardSourceControllerEffect(1, true),
                 false, TargetController.OPPONENT, 2
         ));
 

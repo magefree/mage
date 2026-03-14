@@ -2,18 +2,19 @@ package mage.cards.s;
 
 import mage.abilities.Ability;
 import mage.abilities.common.EndOfCombatTriggeredAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
+import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.abilities.keyword.TransformAbility;
+import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
+import mage.abilities.keyword.DoubleStrikeAbility;
+import mage.abilities.keyword.EquipAbility;
 import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.WatcherScope;
+import mage.cards.TransformingDoubleFacedCard;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.DamagedEvent;
@@ -32,25 +33,39 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class SidequestPlayBlitzball extends CardImpl {
+public final class SidequestPlayBlitzball extends TransformingDoubleFacedCard {
 
     public SidequestPlayBlitzball(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
+        super(ownerId, setInfo,
+                new SuperType[]{}, new CardType[]{CardType.ENCHANTMENT}, new SubType[]{}, "{2}{R}",
+                "World Champion, Celestial Weapon",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.ARTIFACT}, new SubType[]{SubType.EQUIPMENT}, "R"
+        );
 
-        this.secondSideCardClazz = mage.cards.w.WorldChampionCelestialWeapon.class;
-
+        // Sidequest: Play Blitzball
         // At the beginning of combat on your turn, target creature you control gets +2/+0 until end of turn.
         Ability ability = new BeginningOfCombatTriggeredAbility(new BoostTargetEffect(2, 0));
         ability.addTarget(new TargetControlledCreaturePermanent());
-        this.addAbility(ability);
+        this.getLeftHalfCard().addAbility(ability);
 
         // At the end of combat on your turn, if a player was dealt 6 or more combat damage this turn, transform this enchantment, then attach it to a creature you control.
-        this.addAbility(new TransformAbility());
         ability = new EndOfCombatTriggeredAbility(
                 new TransformSourceEffect(), TargetController.YOU, false
         ).withInterveningIf(SidequestPlayBlitzballCondition.instance).setTriggerPhrase("At the end of combat on your turn, ");
         ability.addEffect(new SidequestPlayBlitzballEffect());
-        this.addAbility(ability, new SidequestPlayBlitzballWatcher());
+        ability.addWatcher(new SidequestPlayBlitzballWatcher());
+        this.getLeftHalfCard().addAbility(ability);
+
+        // World Champion, Celestial Weapon
+        // Double Overdrive -- Equipped creature gets +2/+0 and has double strike.
+        Ability eAbility = new SimpleStaticAbility(new BoostEquippedEffect(2, 0));
+        eAbility.addEffect(new GainAbilityAttachedEffect(
+                DoubleStrikeAbility.getInstance(), AttachmentType.EQUIPMENT
+        ).setText("and has double strike"));
+        this.getRightHalfCard().addAbility(eAbility.withFlavorWord("Double Overdrive"));
+
+        // Equip {3}
+        this.getRightHalfCard().addAbility(new EquipAbility(3));
     }
 
     private SidequestPlayBlitzball(final SidequestPlayBlitzball card) {

@@ -1,19 +1,17 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DamageSelfEffect;
-import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.DamageTargetAndSelfEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.target.common.TargetAnyTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -30,8 +28,7 @@ public final class RecklessEmbermage extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {1}{R}: Reckless Embermage deals 1 damage to any target and 1 damage to itself.
-        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new ManaCostsImpl<>("{1}{R}"));
-        ability.addEffect(new DamageSelfEffect(1).setText("and 1 damage to itself"));
+        Ability ability = new SimpleActivatedAbility(new DamageTargetAndSelfEffect(1), new ManaCostsImpl<>("{1}{R}"));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

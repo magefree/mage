@@ -1,49 +1,65 @@
 package mage.cards.j;
 
-import java.util.UUID;
-import mage.MageInt;
+import mage.MageIdentifier;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.TransformSourceEffect;
-import mage.abilities.keyword.TransformAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.Card;
-import mage.constants.*;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
+import mage.constants.*;
+import mage.game.ExileZone;
 import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
+import mage.watchers.Watcher;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
- *
  * @author weirddan455
  */
-public final class JacobHaukenInspector extends CardImpl {
+public final class JacobHaukenInspector extends TransformingDoubleFacedCard {
 
     public JacobHaukenInspector(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
+        super(ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.ADVISOR}, "{1}{U}",
+                "Hauken's Insight",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.ENCHANTMENT}, new SubType[]{}, "U");
 
-        this.supertype.add(SuperType.LEGENDARY);
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.ADVISOR);
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(2);
-
-        this.secondSideCardClazz = mage.cards.h.HaukensInsight.class;
+        // Jacob Hauken, Inspector
+        this.getLeftHalfCard().setPT(0, 2);
 
         // {T}: Draw a card, then exile a card from your hand face down. You may look at that card for as long as it remains exiled. You may pay {4}{U}{U}. If you do, transform Jacob Hauken, Inspector.
-        this.addAbility(new TransformAbility());
         Ability ability = new SimpleActivatedAbility(new JacobHaukenInspectorExileEffect(), new TapSourceCost());
         ability.addEffect(new DoIfCostPaid(new TransformSourceEffect(), new ManaCostsImpl<>("{4}{U}{U}")));
-        this.addAbility(ability);
+        this.getLeftHalfCard().addAbility(ability);
+
+        // Hauken's Insight
+
+        // At the beginning of your upkeep, exile the top card of your library face down. You may look at that card for as long as it remains exiled.
+        this.getRightHalfCard().addAbility(new BeginningOfUpkeepTriggeredAbility(new HaukensInsightExileEffect()));
+
+        // Once during each of your turns, you may play a land or cast a spell from among the cards exiled with this permanent without paying its mana cost.
+        Ability playAbility = new SimpleStaticAbility(new HaukensInsightPlayEffect())
+                .setIdentifier(MageIdentifier.HaukensInsightWatcher);
+        playAbility.addWatcher(new HaukensInsightWatcher());
+        this.getRightHalfCard().addAbility(playAbility);
     }
 
     private JacobHaukenInspector(final JacobHaukenInspector card) {
@@ -133,5 +149,148 @@ class JacobHaukenInspectorLookEffect extends AsThoughEffectImpl {
         }
         return affectedControllerId.equals(authorizedPlayerId)
                 && objectId.equals(cardId);
+    }
+}
+
+class HaukensInsightExileEffect extends OneShotEffect {
+
+    HaukensInsightExileEffect() {
+        super(Outcome.Benefit);
+        staticText = "exile the top card of your library face down. You may look at that card for as long as it remains exiled";
+    }
+
+    private HaukensInsightExileEffect(final HaukensInsightExileEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public HaukensInsightExileEffect copy() {
+        return new HaukensInsightExileEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Card card = controller.getLibrary().getFromTop(game);
+            if (card != null) {
+                UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getStackMomentSourceZCC());
+                MageObject sourceObject = source.getSourceObject(game);
+                String exileName = sourceObject == null ? null : sourceObject.getIdName();
+                card.setFaceDown(true, game);
+                controller.moveCardsToExile(card, source, game, false, exileId, exileName);
+                if (game.getState().getZone(card.getId()) == Zone.EXILED) {
+                    card.setFaceDown(true, game);
+                    HaukensInsightLookEffect effect = new HaukensInsightLookEffect(controller.getId());
+                    effect.setTargetPointer(new FixedTarget(card, game));
+                    game.addEffect(effect, source);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+}
+
+class HaukensInsightLookEffect extends AsThoughEffectImpl {
+
+    private final UUID authorizedPlayerId;
+
+    public HaukensInsightLookEffect(UUID authorizedPlayerId) {
+        super(AsThoughEffectType.LOOK_AT_FACE_DOWN, Duration.EndOfGame, Outcome.Benefit);
+        this.authorizedPlayerId = authorizedPlayerId;
+    }
+
+    private HaukensInsightLookEffect(final HaukensInsightLookEffect effect) {
+        super(effect);
+        this.authorizedPlayerId = effect.authorizedPlayerId;
+    }
+
+    @Override
+    public HaukensInsightLookEffect copy() {
+        return new HaukensInsightLookEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
+
+    @Override
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        UUID cardId = getTargetPointer().getFirst(game, source);
+        if (cardId == null) {
+            this.discard(); // card is no longer in the origin zone, effect can be discarded
+        }
+        return affectedControllerId.equals(authorizedPlayerId)
+                && objectId.equals(cardId);
+    }
+}
+
+class HaukensInsightPlayEffect extends AsThoughEffectImpl {
+
+    HaukensInsightPlayEffect() {
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.PlayForFree);
+        staticText = "Once during each of your turns, you may play a land or cast a spell from among the cards exiled with this permanent without paying its mana cost";
+    }
+
+    private HaukensInsightPlayEffect(final HaukensInsightPlayEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public HaukensInsightPlayEffect copy() {
+        return new HaukensInsightPlayEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
+
+    @Override
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        if (affectedControllerId.equals(source.getControllerId()) && game.isActivePlayer(source.getControllerId())) {
+            Player controller = game.getPlayer(source.getControllerId());
+            HaukensInsightWatcher watcher = game.getState().getWatcher(HaukensInsightWatcher.class);
+            Permanent sourceObject = game.getPermanent(source.getSourceId());
+            if (controller != null && watcher != null && sourceObject != null && !watcher.isAbilityUsed(new MageObjectReference(sourceObject, game))) {
+                UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), game.getState().getZoneChangeCounter(source.getSourceId()));
+                ExileZone exileZone = game.getExile().getExileZone(exileId);
+                if (exileZone != null && exileZone.contains(CardUtil.getMainCardId(game, objectId))) {
+                    allowCardToPlayWithoutMana(objectId, source, affectedControllerId, MageIdentifier.HaukensInsightWatcher, game);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+}
+
+class HaukensInsightWatcher extends Watcher {
+
+    private final Set<MageObjectReference> usedFrom = new HashSet<>();
+
+    public HaukensInsightWatcher() {
+        super(WatcherScope.GAME);
+    }
+
+    @Override
+    public void watch(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.SPELL_CAST || event.getType() == GameEvent.EventType.LAND_PLAYED) {
+            if (event.hasApprovingIdentifier(MageIdentifier.HaukensInsightWatcher)) {
+                usedFrom.add(event.getApprovingObject().getApprovingMageObjectReference());
+            }
+        }
+    }
+
+    @Override
+    public void reset() {
+        super.reset();
+        usedFrom.clear();
+    }
+
+    public boolean isAbilityUsed(MageObjectReference mor) {
+        return usedFrom.contains(mor);
     }
 }

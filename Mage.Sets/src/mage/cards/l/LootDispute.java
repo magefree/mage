@@ -13,7 +13,7 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.token.DragonToken2;
+import mage.game.permanent.token.Dragon55Token;
 import mage.game.permanent.token.TreasureToken;
 
 import java.util.UUID;
@@ -37,7 +37,7 @@ public final class LootDispute extends CardImpl {
 
         // Loud Ruckus — Whenever you complete a dungeon, create a 5/5 red Dragon creature token with flying.
         this.addAbility(new CompletedDungeonTriggeredAbility(
-                new CreateTokenEffect(new DragonToken2())
+                new CreateTokenEffect(new Dragon55Token())
         ).withFlavorWord("Loud Ruckus"));
     }
 

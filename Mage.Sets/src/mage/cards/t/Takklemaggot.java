@@ -202,7 +202,7 @@ class TakklemaggotUpkeepAbility extends TriggeredAbilityImpl {
     private final UUID playerId;
 
     TakklemaggotUpkeepAbility(UUID playerId) {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(1, true, "that player")
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(1).withTargetDescription("that player")
                 .setTargetPointer(new FixedTarget(playerId)), false);
         this.playerId = playerId;
         setTriggerPhrase("At the beginning of that player's upkeep, ");

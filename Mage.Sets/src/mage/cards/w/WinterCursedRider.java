@@ -41,7 +41,7 @@ public final class WinterCursedRider extends CardImpl {
 
     public WinterCursedRider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{B}");
-        
+
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARLOCK);
@@ -49,10 +49,10 @@ public final class WinterCursedRider extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Ward--Pay 2 life.
-        this.addAbility(new WardAbility(new PayLifeCost(2)));
+        this.addAbility(new WardAbility(new PayLifeCost(2), false));
 
         // Artifacts you control have "Ward--Pay 2 life."
-        WardAbility wardAbility = new WardAbility(new PayLifeCost(2));
+        WardAbility wardAbility = new WardAbility(new PayLifeCost(2), false);
         this.addAbility(new SimpleStaticAbility(
                 new GainAbilityAllEffect(wardAbility, Duration.WhileOnBattlefield, StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACTS)
                         .setText("Artifacts you control have " + "\"" + CardUtil.getTextWithFirstCharUpperCase(wardAbility.getRuleWithoutHint()) + "\"")

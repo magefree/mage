@@ -116,7 +116,7 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
         StringBuilder sb = new StringBuilder();
         String message = filter.getMessage().toLowerCase(Locale.ENGLISH);
         boolean each = message.startsWith("each");
-        if (excludeSource && !each && !message.startsWith("all")) {
+        if (excludeSource && !each && !message.startsWith("all ")) {
             sb.append("other ");
         }
         sb.append(filter.getMessage());

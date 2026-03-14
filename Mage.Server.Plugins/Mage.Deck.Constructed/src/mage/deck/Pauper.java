@@ -46,6 +46,7 @@ public class Pauper extends Constructed {
         banned.add("Gitaxian Probe");
         banned.add("Grapeshot");
         banned.add("Gush");
+        banned.add("High Tide");
         banned.add("Hymn to Tourach");
         banned.add("Invigorate");
         banned.add("Kuldotha Rebirth");

@@ -20,7 +20,7 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -45,7 +45,7 @@ public final class PrimalAdversary extends CardImpl {
         // When you pay this cost one or more times, put that many +1/+1 counters on Primal Adversary,
         // then up to that many target lands you control become 3/3 Wolf creatures with haste that are still lands.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DoIfAnyNumberCostPaid(
-                new PrimalAdversaryEffect(), new ManaCostsImpl<>("{1}{G}")
+            new PrimalAdversaryEffect(), new ManaCostsImpl<>("{1}{G}")
         )));
     }
 
@@ -64,7 +64,7 @@ class PrimalAdversaryEffect extends OneShotEffect {
     PrimalAdversaryEffect() {
         super(Outcome.Benefit);
         staticText = "put that many +1/+1 counters on {this}, " +
-                "then up to that many target lands you control become 3/3 Wolf creatures with haste that are still lands";
+            "then up to that many target lands you control become 3/3 Wolf creatures with haste that are still lands";
     }
 
     private PrimalAdversaryEffect(final PrimalAdversaryEffect effect) {
@@ -83,33 +83,16 @@ class PrimalAdversaryEffect extends OneShotEffect {
             return false;
         }
         ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance(timesPaid)),
-                false, staticText
+            new AddCountersSourceEffect(CounterType.P1P1.createInstance(timesPaid)),
+            false, staticText
         );
-        ability.addEffect(new BecomesCreatureTargetEffect(new PrimalAdversaryToken(), false, true, Duration.Custom));
+        ability.addEffect(new BecomesCreatureTargetEffect(
+            new CreatureToken(3, 3, "3/3 Wolf creature with haste that's still a land", SubType.WOLF)
+                .withAbility(HasteAbility.getInstance()),
+            false, true, Duration.Custom
+        ));
         ability.addTarget(new TargetPermanent(0, timesPaid, StaticFilters.FILTER_CONTROLLED_PERMANENT_LANDS));
         game.fireReflexiveTriggeredAbility(ability, source);
         return true;
-    }
-}
-
-class PrimalAdversaryToken extends TokenImpl {
-
-    public PrimalAdversaryToken() {
-        super("", "3/3 Wolf creature with haste that's still a land");
-        this.cardType.add(CardType.CREATURE);
-        this.subtype.add(SubType.WOLF);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-        this.addAbility(HasteAbility.getInstance());
-    }
-
-    private PrimalAdversaryToken(final PrimalAdversaryToken token) {
-        super(token);
-    }
-
-    @Override
-    public PrimalAdversaryToken copy() {
-        return new PrimalAdversaryToken(this);
     }
 }

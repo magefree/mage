@@ -32,7 +32,7 @@ public final class InterceptorShadowsHound extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Assassins you control have menace.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(

@@ -21,7 +21,7 @@ import java.util.UUID;
 public final class SearchForDagger extends CardImpl {
 
     private static final FilterCard filter = new FilterCreatureCard("a legendary creature card");
-    private static final FilterPermanent filter2 = new FilterPermanent("you commander");
+    private static final FilterPermanent filter2 = new FilterPermanent("your commander");
 
     static {
         filter.add(SuperType.LEGENDARY.getPredicate());

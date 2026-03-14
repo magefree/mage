@@ -2,7 +2,6 @@
 package mage.cards.l;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
@@ -11,7 +10,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
 
@@ -25,9 +24,7 @@ public final class LivingTerrain extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}{G}");
         this.subtype.add(SubType.AURA);
 
-
         // Enchant land
-        
         TargetPermanent auraTarget = new TargetLandPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.PutCreatureInPlay));
@@ -35,7 +32,12 @@ public final class LivingTerrain extends CardImpl {
         this.addAbility(ability);
         // Enchanted land is a 5/6 green Treefolk creature that's still a land.
         this.addAbility(new SimpleStaticAbility(new BecomesCreatureAttachedEffect(
-                new TreefolkToken(), "Enchanted land is a 5/6 green Treefolk creature that's still a land", Duration.WhileOnBattlefield, BecomesCreatureAttachedEffect.LoseType.COLOR)));
+            new CreatureToken(5, 6, "5/6 green Treefolk creature", SubType.TREEFOLK)
+                .withColor("G"),
+            "Enchanted land is a 5/6 green Treefolk creature that's still a land",
+            Duration.WhileOnBattlefield,
+            BecomesCreatureAttachedEffect.LoseType.COLOR
+        )));
     }
 
     private LivingTerrain(final LivingTerrain card) {
@@ -47,21 +49,3 @@ public final class LivingTerrain extends CardImpl {
         return new LivingTerrain(this);
     }
 }
-
-class TreefolkToken extends TokenImpl {
-        TreefolkToken() {
-            super("Treefolk", "5/6 green Treefolk creature");
-            cardType.add(CardType.CREATURE);
-            this.color.setGreen(true);
-            subtype.add(SubType.TREEFOLK);
-            power = new MageInt(5);
-            toughness = new MageInt(6);
-        }
-    private TreefolkToken(final TreefolkToken token) {
-        super(token);
-    }
-
-    public TreefolkToken copy() {
-        return new TreefolkToken(this);
-    }
-    }

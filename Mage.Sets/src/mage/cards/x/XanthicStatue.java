@@ -2,7 +2,6 @@
 package mage.cards.x;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
@@ -11,8 +10,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Zone;
-import mage.game.permanent.token.TokenImpl;
+import mage.constants.SubType;
+import mage.game.permanent.token.custom.CreatureToken;
 
 /**
  *
@@ -24,9 +23,15 @@ public final class XanthicStatue extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{8}");
 
         // {5}: Until end of turn, Xanthic Statue becomes an 8/8 Golem artifact creature with trample.
-        this.addAbility(new SimpleActivatedAbility(new BecomesCreatureSourceEffect(new XanthicStatueCreature(), CardType.ARTIFACT, Duration.EndOfTurn)
-                .setText("until end of turn, {this} becomes an 8/8 Golem artifact creature with trample")
-                , new ManaCostsImpl<>("{5}")));
+        this.addAbility(new SimpleActivatedAbility(
+            new BecomesCreatureSourceEffect(
+                new CreatureToken(8, 8, "8/8 Golem artifact creature with trample", SubType.GOLEM)
+                    .withAbility(TrampleAbility.getInstance()),
+                CardType.ARTIFACT,
+                Duration.EndOfTurn
+            ).setText("until end of turn, {this} becomes an 8/8 Golem artifact creature with trample"),
+            new ManaCostsImpl<>("{5}")
+        ));
     }
 
     private XanthicStatue(final XanthicStatue card) {
@@ -36,25 +41,5 @@ public final class XanthicStatue extends CardImpl {
     @Override
     public XanthicStatue copy() {
         return new XanthicStatue(this);
-    }
-}
-
-class XanthicStatueCreature extends TokenImpl {
-
-    public XanthicStatueCreature() {
-        super("Xanthic Statue", "8/8 Golem artifact creature with trample");
-        cardType.add(CardType.ARTIFACT);
-        cardType.add(CardType.CREATURE);
-        power = new MageInt(8);
-        toughness = new MageInt(8);
-
-        this.addAbility(TrampleAbility.getInstance());
-    }
-    private XanthicStatueCreature(final XanthicStatueCreature token) {
-        super(token);
-    }
-
-    public XanthicStatueCreature copy() {
-        return new XanthicStatueCreature(this);
     }
 }

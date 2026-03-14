@@ -1,22 +1,22 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.CantAttackAloneAttachedEffect;
+import mage.abilities.effects.common.combat.CantAttackAloneSourceEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.BestowAbility;
-import mage.abilities.keyword.CantAttackAloneAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -35,7 +35,7 @@ public final class SightlessBrawler extends CardImpl {
         // Bestow 4W (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)
         this.addAbility(new BestowAbility(this, "{4}{W}"));
         // Sightless Brawler can't attack alone.
-        this.addAbility(new CantAttackAloneAbility());
+        this.addAbility(new SimpleStaticAbility(new CantAttackAloneSourceEffect()));
         // Enchanted creature gets +3/+2 and can't attack alone.
         Effect effect = new BoostEnchantedEffect(3, 2, Duration.WhileOnBattlefield);
         effect.setText("Enchanted creature gets +3/+2");

@@ -9,10 +9,8 @@ import mage.abilities.effects.keyword.SurveilEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -22,14 +20,7 @@ import java.util.UUID;
  */
 public final class PriceOfFame extends CardImpl {
 
-    private static final FilterPermanent filter
-            = new FilterCreaturePermanent("a legendary creature");
-
-    static {
-        filter.add(SuperType.LEGENDARY.getPredicate());
-    }
-
-    private static final Condition condition = new SourceTargetsPermanentCondition(filter);
+    private static final Condition condition = new SourceTargetsPermanentCondition(StaticFilters.FILTER_CREATURE_LEGENDARY);
 
     public PriceOfFame(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{B}");

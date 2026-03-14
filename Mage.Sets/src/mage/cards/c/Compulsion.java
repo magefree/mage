@@ -11,8 +11,7 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInHand;
 
 /**
@@ -26,9 +25,9 @@ public final class Compulsion extends CardImpl {
 
         // {1}{U}, Discard a card: Draw a card.
         Ability ability1 = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{1}{U}"));
-        ability1.addCost(new DiscardTargetCost(new TargetCardInHand(1, new FilterCard("a card"))));
+        ability1.addCost(new DiscardTargetCost(new TargetCardInHand(1, StaticFilters.FILTER_CARD_A)));
         this.addAbility(ability1);
-        
+
         // {1}{U}, Sacrifice Compulsion: Draw a card.
         Ability ability2 = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{1}{U}"));
         ability2.addCost(new SacrificeSourceCost());

@@ -2,12 +2,11 @@ package mage.cards.i;
 
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -25,10 +24,7 @@ public final class IncubationSac extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{G}");
 
         // Incubation Sac enters the battlefield with three oil counters on it.
-        this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.OIL.createInstance(3)),
-                "with three oil counters on it"
-        ));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.OIL.createInstance(3)));
 
         // {4}, {T}, Remove an oil counter from Incubation Sac: Create a 3/3 colorless Phyrexian Golem artifact creature token. Activate only as a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(

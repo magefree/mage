@@ -11,8 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.game.permanent.token.SoldierTokenWithHaste;
+import mage.game.permanent.token.SoldierHasteToken;
 
 /**
  *
@@ -32,7 +31,7 @@ public final class SunhomeGuildmage extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(new BoostControlledEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{R}{W}")));
 
         //{2}{R}{W}: Create a 1/1 red and white Soldier creature token with haste.
-        this.addAbility(new SimpleActivatedAbility(new CreateTokenEffect(new SoldierTokenWithHaste()), new ManaCostsImpl<>("{2}{R}{W}")));
+        this.addAbility(new SimpleActivatedAbility(new CreateTokenEffect(new SoldierHasteToken()), new ManaCostsImpl<>("{2}{R}{W}")));
     }
 
     private SunhomeGuildmage(final SunhomeGuildmage card) {

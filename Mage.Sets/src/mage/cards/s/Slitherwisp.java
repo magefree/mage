@@ -41,9 +41,7 @@ public final class Slitherwisp extends CardImpl {
 
         // Whenever you cast another spell with flash, you draw a card and each opponent loses 1 life.
         Ability ability = new SpellCastControllerTriggeredAbility(
-                new DrawCardSourceControllerEffect(1)
-                        .setText("you draw a card"),
-                filter, false
+                new DrawCardSourceControllerEffect(1, true), filter, false
         );
         ability.addEffect(new LoseLifeOpponentsEffect(1).concatBy("and"));
         this.addAbility(ability);

@@ -104,8 +104,10 @@ class SasayasEssence extends TokenImpl {
 
         // Whenever a land you control is tapped for mana, for each other land you control with the same name, add one mana of any type that land produced.
         this.addAbility(new TapForManaAllTriggeredManaAbility(
-                new SasayasEssenceManaEffect(),
-                new FilterControlledLandPermanent(), SetTargetPointer.PERMANENT));
+            new SasayasEssenceManaEffect(),
+            new FilterControlledLandPermanent("a land you control is tapped"),
+            SetTargetPointer.PERMANENT
+        ));
     }
 
     private SasayasEssence(final SasayasEssence token) {
@@ -163,7 +165,7 @@ class SasayasEssenceManaEffect extends ManaEffect {
                 }
                 if (producedMana.getColorless() > 0) {
                     netMana.add(Mana.ColorlessMana(count));
-                }                
+                }
             }
         }
         return netMana;

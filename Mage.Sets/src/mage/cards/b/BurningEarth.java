@@ -29,7 +29,7 @@ public final class BurningEarth extends CardImpl {
 
         // Whenever a player taps a nonbasic land for mana, Burning Earth deals 1 damage to that player.
         this.addAbility(new TapForManaAllTriggeredAbility(
-                new DamageTargetEffect(1, true, "that player"),
+                new DamageTargetEffect(1).withTargetDescription("that player"),
                 filter, SetTargetPointer.PLAYER));
     }
 

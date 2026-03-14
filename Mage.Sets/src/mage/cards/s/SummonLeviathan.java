@@ -62,7 +62,7 @@ public final class SummonLeviathan extends CardImpl {
         this.addAbility(sagaAbility);
 
         // Ward {2}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}"), false));
     }
 
     private SummonLeviathan(final SummonLeviathan card) {

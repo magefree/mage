@@ -7,6 +7,8 @@ import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectsList;
 import mage.cards.Card;
+import mage.cards.DoubleFacedCard;
+import mage.cards.DoubleFacedCardHalf;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.importer.DeckImporter;
@@ -773,6 +775,12 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         if (gameZone == Zone.BATTLEFIELD) {
             for (int i = 0; i < count; i++) {
                 Card newCard = cardInfo.createCard();
+                if (newCard instanceof DoubleFacedCard) {
+                    DoubleFacedCardHalf rightHalf = ((DoubleFacedCard) newCard).getRightHalfCard();
+                    if (rightHalf.getName().equals(cardName) && rightHalf.isPermanent()) {
+                        newCard = rightHalf;
+                    }
+                }
                 getBattlefieldCards(player).add(new PutToBattlefieldInfo(
                         newCard,
                         tapped
@@ -781,7 +789,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
                     // TODO: is it bugged with double faced cards (wrong ref)?
                     // add to all players
                     String aliasId = player.generateAliasName(aliasName, useAliasMultiNames, i + 1);
-                    currentGame.getPlayers().values().forEach(pl -> ((TestPlayer) pl).addAlias(aliasId, newCard.getId()));
+                    Card finalNewCard = newCard;
+                    currentGame.getPlayers().values().forEach(pl -> ((TestPlayer) pl).addAlias(aliasId, finalNewCard.getId()));
                 }
             }
         } else {
@@ -2037,7 +2046,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      *                          multiple targets can be seperated by ^;
      *                          no target marks as TestPlayer.NO_TARGET;
      *                          warning, do not support cards with target adjusters - use addTarget instead
-     * @param waitStackResolved if true, wait for stack to resolve
+     * @param waitStackResolved if true, wait for stack to resolve before continuing
      */
     public void castSpell(int turnNum, PhaseStep step, TestPlayer player, String cardName, String targetName, boolean waitStackResolved) {
         castSpell(turnNum, step, player, cardName, targetName);

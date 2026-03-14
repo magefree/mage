@@ -54,7 +54,7 @@ public final class NerivCracklingVanguard extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
 
         // When Neriv enters, create two 1/1 red Goblin creature tokens.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new GoblinToken(false), 2)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new GoblinToken(), 2)));
 
         // Whenever Neriv attacks, exile a number of cards from the top of your library equal to the number of differently named tokens you control. During any turn you attacked with a commander, you may play those cards.
         this.addAbility(new AttacksTriggeredAbility(new NerivCracklingVanguardEffect()).addHint(NerivCracklingVanguardEffect.getHint()));

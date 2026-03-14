@@ -3,13 +3,12 @@ package mage.cards.a;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LoseGameSourceControllerEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
@@ -48,10 +47,7 @@ public final class ArchfiendOfTheDross extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Archfiend of the Dross enters the battlefield with four oil counters on it.
-        this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.OIL.createInstance(4)),
-                "with four oil counters on it"
-        ));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.OIL.createInstance(4)));
 
         // At the beginning of your upkeep, remove an oil counter from Archfiend of the Dross. Then if it has no oil counters on it, you lose the game.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(

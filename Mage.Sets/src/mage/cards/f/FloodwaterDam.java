@@ -1,7 +1,5 @@
-
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -11,9 +9,11 @@ import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
+
+import java.util.UUID;
 
 /**
  *
@@ -30,6 +30,7 @@ public final class FloodwaterDam extends CardImpl {
         Ability ability = new SimpleActivatedAbility(effect, new ManaCostsImpl<>("{X}{X}{1}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_LANDS));
+        ability.setTargetAdjuster(new XTargetsCountAdjuster());
         this.addAbility(ability);
     }
 

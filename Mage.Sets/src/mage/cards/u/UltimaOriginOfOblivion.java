@@ -84,7 +84,7 @@ class UltimaOriginOfOblivionEffect extends ContinuousEffectImpl {
         }
         switch (layer) {
             case TypeChangingEffects_4:
-                permanent.looseAllAbilities(game);
+                permanent.removeAllAbilities(source.getSourceId(), game);
                 permanent.addAbility(new ColorlessManaAbility(), source.getSourceId(), game);
                 return true;
             case AbilityAddingRemovingEffects_6:

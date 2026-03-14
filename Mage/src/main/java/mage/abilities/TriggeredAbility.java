@@ -61,6 +61,8 @@ public interface TriggeredAbility extends Ability {
      */
     int getRemainingTriggersLimitEachGame(Game game);
 
+    TriggeredAbility setOptional(boolean optional);
+
     TriggeredAbility setDoOnlyOnceEachTurn(boolean doOnlyOnce);
 
     /**

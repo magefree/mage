@@ -10,7 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInHand;
 
 /**
@@ -25,7 +25,7 @@ public final class HiddenHorror extends CardImpl {
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new DiscardTargetCost(new TargetCardInHand(new FilterCreatureCard("a creature card"))))));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new DiscardTargetCost(new TargetCardInHand(StaticFilters.FILTER_CARD_CREATURE_A)))));
     }
 
     private HiddenHorror(final HiddenHorror card) {

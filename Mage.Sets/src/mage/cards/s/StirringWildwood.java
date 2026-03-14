@@ -3,7 +3,6 @@
 package mage.cards.s;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -16,8 +15,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.Zone;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 
 /**
  *
@@ -30,7 +28,18 @@ public final class StirringWildwood extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
         this.addAbility(new GreenManaAbility());
         this.addAbility(new WhiteManaAbility());
-        this.addAbility(new SimpleActivatedAbility(new BecomesCreatureSourceEffect(new StirringWildwoodToken(), CardType.LAND, Duration.EndOfTurn).withDurationRuleAtStart(true), new ManaCostsImpl<>("{1}{G}{W}")));
+        this.addAbility(new SimpleActivatedAbility(
+            new BecomesCreatureSourceEffect(
+                new CreatureToken(
+                    3, 4,
+                    "3/4 green and white Elemental creature with reach",
+                    SubType.ELEMENTAL
+                ).withColor("GW").withAbility(ReachAbility.getInstance()),
+                CardType.LAND,
+                Duration.EndOfTurn
+            ).withDurationRuleAtStart(true),
+            new ManaCostsImpl<>("{1}{G}{W}")
+        ));
     }
 
     private StirringWildwood(final StirringWildwood card) {
@@ -41,27 +50,4 @@ public final class StirringWildwood extends CardImpl {
     public StirringWildwood copy() {
         return new StirringWildwood(this);
     }
-
-}
-
-class StirringWildwoodToken extends TokenImpl {
-
-    public StirringWildwoodToken() {
-        super("", "3/4 green and white Elemental creature with reach");
-        cardType.add(CardType.CREATURE);
-        subtype.add(SubType.ELEMENTAL);
-        color.setGreen(true);
-        color.setWhite(true);
-        power = new MageInt(3);
-        toughness = new MageInt(4);
-        addAbility(ReachAbility.getInstance());
-    }
-    private StirringWildwoodToken(final StirringWildwoodToken token) {
-        super(token);
-    }
-
-    public StirringWildwoodToken copy() {
-        return new StirringWildwoodToken(this);
-    }
-
 }

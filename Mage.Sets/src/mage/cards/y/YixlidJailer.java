@@ -72,7 +72,7 @@ class YixlidJailerEffect extends ContinuousEffectImpl {
                     if (player != null) {
                         for (Card card : player.getGraveyard().getCards(game)) {
                             if (card != null) {
-                                card.looseAllAbilities(game);
+                                card.loseAllAbilities(game);
                             }
                         }
                     }

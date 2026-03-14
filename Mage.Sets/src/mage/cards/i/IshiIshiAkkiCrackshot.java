@@ -28,7 +28,7 @@ public final class IshiIshiAkkiCrackshot extends CardImpl {
 
         // Whenever an opponent casts a Spirit or Arcane spell, Ishi-Ishi, Akki Crackshot deals 2 damage to that player.
         this.addAbility(new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD,
-                new DamageTargetEffect(2, true, "that player"),
+                new DamageTargetEffect(2).withTargetDescription("that player"),
                 StaticFilters.FILTER_SPELL_SPIRIT_OR_ARCANE, false, SetTargetPointer.PLAYER));
     }
 

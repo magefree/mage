@@ -4,6 +4,8 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.Mode;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
@@ -25,16 +27,27 @@ import mage.util.CardUtil;
  */
 public class EarthbendTargetEffect extends OneShotEffect {
 
-    private final int amount;
+    private final DynamicValue amount;
+    private final boolean withReminderText;
 
     public EarthbendTargetEffect(int amount) {
+        this(amount, true);
+    }
+
+    public EarthbendTargetEffect(int amount, boolean withReminderText) {
+        this(StaticValue.get(amount), withReminderText);
+    }
+
+    public EarthbendTargetEffect(DynamicValue amount, boolean withReminderText) {
         super(Outcome.Benefit);
         this.amount = amount;
+        this.withReminderText = withReminderText;
     }
 
     private EarthbendTargetEffect(final EarthbendTargetEffect effect) {
         super(effect);
         this.amount = effect.amount;
+        this.withReminderText = effect.withReminderText;
     }
 
     @Override
@@ -48,18 +61,25 @@ public class EarthbendTargetEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
+        int value = amount.calculate(game, source, this);
+        doEarthBend(permanent, value, game, source);
+        return true;
+    }
+
+    public static void doEarthBend(Permanent permanent, int value, Game game, Ability source) {
         game.addEffect(new BecomesCreatureTargetEffect(
                 new CreatureToken(0, 0)
                         .withAbility(HasteAbility.getInstance()),
                 false, true, Duration.Custom
-        ), source);
-        permanent.addCounters(CounterType.P1P1.createInstance(amount), source, game);
+        ).setTargetPointer(new FixedTarget(permanent.getId())), source);
+        // Make the land into a creature before putting counters on, for the purposes of counter doublers that only apply to creatures.
+        game.processAction();
+        permanent.addCounters(CounterType.P1P1.createInstance(value), source, game);
         game.addDelayedTriggeredAbility(new EarthbendingDelayedTriggeredAbility(permanent, game), source);
         game.fireEvent(GameEvent.getEvent(
                 GameEvent.EventType.EARTHBENDED, permanent.getId(),
-                source, source.getControllerId(), amount
+                source, source.getControllerId(), value
         ));
-        return true;
     }
 
     @Override
@@ -67,10 +87,25 @@ public class EarthbendTargetEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return "earthbend " + amount + ". <i>(Target land you control becomes a 0/0 creature " +
-                "with haste that's still a land. Put " + CardUtil.numberToText(amount, "a") +
-                " +1/+1 counter" + (amount > 1 ? "s" : "") + " on it. " +
-                "When it dies or is exiled, return it to the battlefield tapped.)</i>";
+        StringBuilder sb = new StringBuilder("earthbend ");
+        if (amount instanceof StaticValue) {
+            sb.append(amount);
+        } else {
+            sb.append("X, where X is ");
+            sb.append(amount.getMessage());
+        }
+        if (!withReminderText) {
+            return sb.toString();
+        }
+        sb.append(". <i>(Target land you control becomes a 0/0 creature with haste that's still a land. Put ");
+        String value = amount instanceof StaticValue
+                ? CardUtil.numberToText(((StaticValue) amount).getValue(), "a")
+                : amount.toString();
+        sb.append(value);
+        sb.append(" +1/+1 counter");
+        sb.append(("a".equals(value) ? "" : "s"));
+        sb.append(" on it. When it dies or is exiled, return it to the battlefield tapped.)</i>");
+        return sb.toString();
     }
 }
 

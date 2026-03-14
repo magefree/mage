@@ -65,7 +65,7 @@ class SecludedCourtyardManaBuilder extends ConditionalManaBuilder {
                 && sourceObject != null
                 && mana.getAny() == 0) {
             game.informPlayers(controller.getLogName() + " produces " + mana.toString() + " with " + sourceObject.getLogName()
-                    + " (can only be spent to cast creatures of type " + creatureType + " and activate an ability of a creature or creature card of the chosen type)");
+                    + " (can only be spent to cast creatures of type " + creatureType + " and activate an ability of a creature source of the chosen type)");
         }
         return super.setMana(mana, source, game);
     }
@@ -77,7 +77,7 @@ class SecludedCourtyardManaBuilder extends ConditionalManaBuilder {
 
     @Override
     public String getRule() {
-        return "Spend this mana only to cast a creature spell of the chosen type or activate an ability of a creature or creature card of the chosen type";
+        return "Spend this mana only to cast a creature spell of the chosen type or activate an ability of a creature source of the chosen type";
     }
 
     @Override
@@ -99,7 +99,7 @@ class SecludedCourtyardConditionalMana extends ConditionalMana {
 
     public SecludedCourtyardConditionalMana(Mana mana, SubType creatureType) {
         super(mana);
-        staticText = "Spend this mana only to cast a creature spell of the chosen type or activate an ability of a creature or creature card of the chosen type";
+        staticText = "Spend this mana only to cast a creature spell of the chosen type or activate an ability of a creature source of the chosen type";
         addCondition(new SecludedCourtyardManaCondition(creatureType));
     }
 }

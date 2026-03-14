@@ -14,9 +14,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.TargetPermanent;
 
 /**
@@ -40,7 +39,13 @@ public final class WoodwraithCorrupter extends CardImpl {
         this.toughness = new MageInt(6);
 
         // {1}{B}{G}, {T}: Target Forest becomes a 4/4 black and green Elemental Horror creature. It's still a land.
-        Effect effect = new BecomesCreatureTargetEffect(new WoodwraithCorrupterToken(), false, true, Duration.Custom);
+        Effect effect = new BecomesCreatureTargetEffect(
+            new CreatureToken(4, 4, "4/4 black and green Elemental Horror creature", SubType.ELEMENTAL, SubType.HORROR)
+                .withColor("BG"),
+            false,
+            true,
+            Duration.Custom
+        );
         Ability ability = new SimpleActivatedAbility(effect, new ManaCostsImpl<>("{1}{B}{G}"));
         ability.addTarget(new TargetPermanent(filter));
         ability.addCost(new TapSourceCost());
@@ -54,28 +59,5 @@ public final class WoodwraithCorrupter extends CardImpl {
     @Override
     public WoodwraithCorrupter copy() {
         return new WoodwraithCorrupter(this);
-    }
-}
-
-class WoodwraithCorrupterToken extends TokenImpl {
-
-    public WoodwraithCorrupterToken() {
-        super("", "4/4 black and green Elemental Horror creature");
-        cardType.add(CardType.CREATURE);
-
-        color.setBlack(true);
-        color.setGreen(true);
-        subtype.add(SubType.ELEMENTAL);
-        subtype.add(SubType.HORROR);
-
-        power = new MageInt(4);
-        toughness = new MageInt(4);
-    }
-    private WoodwraithCorrupterToken(final WoodwraithCorrupterToken token) {
-        super(token);
-    }
-
-    public WoodwraithCorrupterToken copy() {
-        return new WoodwraithCorrupterToken(this);
     }
 }

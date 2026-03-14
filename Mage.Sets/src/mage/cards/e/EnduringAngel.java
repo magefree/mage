@@ -1,20 +1,19 @@
 package mage.cards.e;
 
-import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.dynamicvalue.common.ControllerLifeCount;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControllerEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HexproofAbility;
-import mage.abilities.keyword.TransformAbility;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
+import mage.cards.TransformingDoubleFacedCard;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -25,28 +24,48 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class EnduringAngel extends CardImpl {
+public final class EnduringAngel extends TransformingDoubleFacedCard {
 
     public EnduringAngel(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}{W}");
+        super(ownerId, setInfo,
+                new SuperType[]{}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.ANGEL}, "{2}{W}{W}{W}",
+                "Angelic Enforcer",
+                new SuperType[]{}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.ANGEL}, "W"
+        );
 
-        this.subtype.add(SubType.ANGEL);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-        this.secondSideCardClazz = mage.cards.a.AngelicEnforcer.class;
+        // Enduring Angel
+        this.getLeftHalfCard().setPT(3, 3);
 
         // Flying
-        this.addAbility(FlyingAbility.getInstance());
+        this.getLeftHalfCard().addAbility(FlyingAbility.getInstance());
 
         // Double strike
-        this.addAbility(DoubleStrikeAbility.getInstance());
+        this.getLeftHalfCard().addAbility(DoubleStrikeAbility.getInstance());
 
         // You have hexproof.
-        this.addAbility(new SimpleStaticAbility(new GainAbilityControllerEffect(HexproofAbility.getInstance())));
+        this.getLeftHalfCard().addAbility(new SimpleStaticAbility(new GainAbilityControllerEffect(HexproofAbility.getInstance())));
 
         // If your life total would be reduced to 0 or less, instead transform Enduring Angel and your life total becomes 3. Then if Enduring Angel didn't transform this way, you lose the game.
-        this.addAbility(new TransformAbility());
-        this.addAbility(new SimpleStaticAbility(new EnduringAngelEffect()));
+        this.getLeftHalfCard().addAbility(new SimpleStaticAbility(new EnduringAngelEffect()));
+
+        // Angelic Enforcer
+        this.getRightHalfCard().setPT(0, 0);
+
+        // Flying
+        this.getRightHalfCard().addAbility(FlyingAbility.getInstance());
+
+        // You have hexproof.
+        this.getRightHalfCard().addAbility(new SimpleStaticAbility(new GainAbilityControllerEffect(HexproofAbility.getInstance())));
+
+        // Angelic Enforcer's power and toughness are each equal to your life total.
+        this.getRightHalfCard().addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(
+                ControllerLifeCount.instance
+        ).setText("{this}'s power and toughness are each equal to your life total")));
+
+        // Whenever Angelic Enforcer attacks, double your life total.
+        this.getRightHalfCard().addAbility(new AttacksTriggeredAbility(new GainLifeEffect(
+                ControllerLifeCount.instance
+        ).setText("double your life total")));
     }
 
     private EnduringAngel(final EnduringAngel card) {

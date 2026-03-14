@@ -39,7 +39,7 @@ public final class LolthSpiderQueen extends CardImpl {
         ));
 
         // 0: You draw a card and you lose 1 life.
-        Ability ability = new LoyaltyAbility(new DrawCardSourceControllerEffect(1).setText("you draw a card"), 0);
+        Ability ability = new LoyaltyAbility(new DrawCardSourceControllerEffect(1, true), 0);
         ability.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
         this.addAbility(ability);
 

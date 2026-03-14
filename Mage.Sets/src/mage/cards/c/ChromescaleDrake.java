@@ -12,7 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterArtifactCard;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -33,7 +33,7 @@ public final class ChromescaleDrake extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Chromescale Drake enters the battlefield, reveal the top three cards of your library. Put all artifact cards revealed this way into your hand and the rest into your graveyard.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new RevealLibraryPutIntoHandEffect(3, new FilterArtifactCard("artifact cards"), Zone.GRAVEYARD)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new RevealLibraryPutIntoHandEffect(3, StaticFilters.FILTER_CARD_ARTIFACTS, Zone.GRAVEYARD)));
     }
 
     private ChromescaleDrake(final ChromescaleDrake card) {

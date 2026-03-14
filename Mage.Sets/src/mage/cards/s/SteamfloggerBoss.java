@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -13,17 +12,17 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class SteamfloggerBoss extends CardImpl {
 
-    private static final FilterCreaturePermanent filter
-            = new FilterCreaturePermanent(SubType.RIGGER, "Riggers");
+    private static final FilterPermanent filter
+            = new FilterPermanent(SubType.RIGGER, "Riggers");
 
     public SteamfloggerBoss(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
@@ -34,26 +33,19 @@ public final class SteamfloggerBoss extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Other Rigger creatures you control get +1/+0 and have haste.
-        Ability ability = new SimpleStaticAbility(
-                new BoostControlledEffect(
-                        1, 0, Duration.WhileOnBattlefield,
-                        filter, true
-                )
-        );
+        Ability ability = new SimpleStaticAbility(new BoostControlledEffect(
+                1, 0, Duration.WhileOnBattlefield, filter, true
+        ));
         ability.addEffect(new GainAbilityControlledEffect(
-                HasteAbility.getInstance(),
-                Duration.WhileOnBattlefield,
-                filter
+                HasteAbility.getInstance(), Duration.WhileOnBattlefield, filter
         ).setText("and have haste"));
         this.addAbility(ability);
 
         // If a Rigger you control would assemble a Contraption, it assembles two Contraptions instead.
-        this.addAbility(new SimpleStaticAbility(
-                new InfoEffect(
-                        "If a Rigger you control would assemble a Contraption, "
+        this.addAbility(new SimpleStaticAbility(new InfoEffect(
+                "If a Rigger you control would assemble a Contraption, "
                         + "it assembles two Contraptions instead"
-                )
-        ));
+        )));
 
     }
 

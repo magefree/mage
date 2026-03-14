@@ -6,6 +6,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseGameSourceControllerEffect;
@@ -17,10 +18,7 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.PreventDamageEvent;
-import mage.game.events.PreventedDamageEvent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -102,24 +100,14 @@ class ImmortalCoilPreventionEffect extends PreventionEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        if (game.replaceEvent(new PreventDamageEvent(
-                event.getTargetId(), source.getSourceId(), source, source.getControllerId(),
-                event.getAmount(), ((DamageEvent) event).isCombatDamage()
-        ))) {
-            return false;
-        }
-        int damage = event.getAmount();
+        PreventionEffectData preventionEffectData = preventDamageAction(event, source, game);
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(Math.min(damage, player.getGraveyard().size()), StaticFilters.FILTER_CARD);
+        if (player != null && preventionEffectData.getPreventedDamage() > 0) {
+            TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(Math.min(preventionEffectData.getPreventedDamage(), player.getGraveyard().size()), StaticFilters.FILTER_CARD);
             target.withNotTarget(true);
             player.choose(outcome, target, source, game);
             player.moveCards(new CardsImpl(target.getTargets()), Zone.EXILED, source, game);
         }
-        event.setAmount(0);
-        game.fireEvent(new PreventedDamageEvent(
-                event.getTargetId(), source.getSourceId(), source, source.getControllerId(), damage
-        ));
         return false;
     }
 

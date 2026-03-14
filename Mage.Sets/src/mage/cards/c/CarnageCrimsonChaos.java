@@ -16,6 +16,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
+import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -32,7 +33,7 @@ import java.util.UUID;
  */
 public final class CarnageCrimsonChaos extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("creature card with mana value 3 or less");
+    private static final FilterCard filter = new FilterCreatureCard("creature card with mana value 3 or less");
 
     static {
         filter.add(new ManaValuePredicate(ComparisonType.OR_LESS, 3));

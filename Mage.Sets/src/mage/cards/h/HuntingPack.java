@@ -7,7 +7,7 @@ import mage.abilities.keyword.StormAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.permanent.token.BeastToken2;
+import mage.game.permanent.token.Beast44Token;
 
 /**
  *
@@ -19,7 +19,7 @@ public final class HuntingPack extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{5}{G}{G}");
 
         // Create a 4/4 green Beast creature token.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new BeastToken2(), 1));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new Beast44Token(), 1));
         // Storm
         this.addAbility(new StormAbility());
     }

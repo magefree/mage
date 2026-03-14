@@ -14,7 +14,7 @@ import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.ElementalTokenWithHaste;
+import mage.game.permanent.token.ElementalHasteToken;
 import mage.players.Player;
 
 import java.util.UUID;
@@ -67,7 +67,7 @@ class LightningCoilsEffect extends OneShotEffect {
             if (counters >= 5) {
                 // remove all the counters and create that many tokens
                 permanent.removeAllCounters(CounterType.CHARGE.getName(), source, game);
-                CreateTokenEffect effect = new CreateTokenEffect(new ElementalTokenWithHaste(), counters);
+                CreateTokenEffect effect = new CreateTokenEffect(new ElementalHasteToken(), counters);
                 effect.apply(game, source);
 
                 // exile those tokens at next end step

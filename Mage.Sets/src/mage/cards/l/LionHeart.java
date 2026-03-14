@@ -33,7 +33,7 @@ public final class LionHeart extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(2, 1)));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2));
+        this.addAbility(new EquipAbility(2, false));
     }
 
     private LionHeart(final LionHeart card) {

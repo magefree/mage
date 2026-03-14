@@ -152,6 +152,30 @@ public class DeliriumTest extends CardTestPlayerBaseWithAIHelps {
 
     }
 
+    @Test
+    public void triggersOnItself() {
+        // When {this} enters, it deals 4 damage to each opponent.
+        // Delirium — Whenever a source you control deals noncombat damage to an opponent, if there are four or more card types among cards in your graveyard, this creature deals that amount of damage to target creature that player controls.
+        addCard(Zone.HAND, playerA, "Fear of Burning Alive");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
+        addCard(Zone.BATTLEFIELD, playerB, "Balduvian Bears");
+
+        addCard(Zone.GRAVEYARD, playerA, "Sol Ring"); // Artifact
+        addCard(Zone.GRAVEYARD, playerA, "Grizzly Bears"); // Creature
+        addCard(Zone.GRAVEYARD, playerA, "Catalog"); // Instant
+        addCard(Zone.GRAVEYARD, playerA, "Chaplain's Blessing"); // Sorcery
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fear of Burning Alive");
+        addTarget(playerA, "Balduvian Bears");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertLife(playerB, 16);
+        assertGraveyardCount(playerB, "Balduvian Bears", 1);
+    }
+
     /**
      * 4/8/2016 In some rare cases, you can have a token or a copy of a spell in
      * your graveyard at the moment that an object’s delirium ability counts the

@@ -2,7 +2,7 @@ package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
-import mage.abilities.keyword.BeholdDragonAbility;
+import mage.abilities.keyword.BeholdAbility;
 import mage.game.Game;
 import mage.util.CardUtil;
 
@@ -16,7 +16,7 @@ public enum BeheldDragonCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return CardUtil.checkSourceCostsTagExists(game, source, BeholdDragonAbility.BEHOLD_DRAGON_ACTIVATION_VALUE_KEY);
+        return CardUtil.checkSourceCostsTagExists(game, source, BeholdAbility.BEHOLD_ACTIVATION_VALUE_KEY);
     }
 
     @Override

@@ -23,7 +23,8 @@ public final class InfernoElemental extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever Inferno Elemental blocks or becomes blocked by a creature, Inferno Elemental deals 3 damage to that creature.
-        this.addAbility(new BlocksOrBlockedByCreatureSourceTriggeredAbility(new DamageTargetEffect(3, true, "that creature")));
+        this.addAbility(new BlocksOrBlockedByCreatureSourceTriggeredAbility(
+                new DamageTargetEffect(3).withTargetDescription("that creature")));
     }
 
     private InfernoElemental(final InfernoElemental card) {

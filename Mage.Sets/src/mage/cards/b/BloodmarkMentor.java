@@ -1,7 +1,5 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
@@ -12,9 +10,11 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -22,7 +22,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public final class BloodmarkMentor extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("Red creatures");
+    private static final FilterPermanent filter = new FilterCreaturePermanent("Red creatures");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.RED));

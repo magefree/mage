@@ -40,7 +40,7 @@ public final class GuardianSunmare extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Ward {2}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}"), false));
 
         // Whenever this creature attacks while saddled, search your library for a nonland permanent card with mana value 3 or less, put it onto the battlefield, then shuffle.
         this.addAbility(new AttacksWhileSaddledTriggeredAbility(

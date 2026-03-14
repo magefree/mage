@@ -23,11 +23,11 @@ public final class TempleOfMalady extends CardImpl {
         // Temple of Malady enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
         // When Temple of Malady enters the battlefield, scry 1.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(1, false)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(1)));
         // {T}: Add {B} or {G}.
         this.addAbility(new BlackManaAbility());
-        this.addAbility(new GreenManaAbility());        
-        
+        this.addAbility(new GreenManaAbility());
+
     }
 
     private TempleOfMalady(final TempleOfMalady card) {

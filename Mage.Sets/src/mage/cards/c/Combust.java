@@ -2,7 +2,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -16,7 +15,8 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -36,7 +36,7 @@ public final class Combust extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
 
         // Combust deals 5 damage to target white or blue creature. The damage can't be prevented.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(5, false));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(5).withCantBePrevented());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
         
         // Combust can't be countered.

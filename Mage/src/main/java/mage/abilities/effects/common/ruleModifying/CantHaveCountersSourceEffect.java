@@ -1,7 +1,4 @@
-
 package mage.abilities.effects.common.ruleModifying;
-
-import java.util.UUID;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
@@ -9,6 +6,8 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+
+import java.util.Objects;
 
 /**
  * @author Styxo
@@ -31,15 +30,11 @@ public class CantHaveCountersSourceEffect extends ContinuousRuleModifyingEffectI
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ADD_COUNTERS;
+        return event.getType() == GameEvent.EventType.CAN_ADD_COUNTERS;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        UUID sourceId = source != null ? source.getSourceId() : null;
-        if (sourceId != null) {
-            return sourceId.equals(event.getTargetId());
-        }
-        return false;
+        return source != null && Objects.equals(source.getSourceId(), event.getTargetId());
     }
 }

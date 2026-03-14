@@ -213,8 +213,8 @@ class TinybonesBaubleBurglarSpendAnyManaEffect extends AsThoughEffectImpl implem
                 cardState = game.getLastKnownInformationCard(card.getId(), Zone.EXILED);
             } else if (card instanceof CardWithSpellOption) {
                 cardState = game.getLastKnownInformationCard(card.getId(), Zone.EXILED);
-            } else if (card instanceof ModalDoubleFacedCard) {
-                cardState = game.getLastKnownInformationCard(((ModalDoubleFacedCard) card).getLeftHalfCard().getId(), Zone.EXILED);
+            } else if (card instanceof DoubleFacedCard) {
+                cardState = game.getLastKnownInformationCard(((DoubleFacedCard) card).getLeftHalfCard().getId(), Zone.EXILED);
             } else {
                 cardState = game.getLastKnownInformationCard(card.getId(), Zone.EXILED);
             }

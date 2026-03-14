@@ -17,7 +17,7 @@ public enum FerociousCondition implements Condition {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
-        filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 3));
+        filter.add(new PowerPredicate(ComparisonType.OR_GREATER, 4));
     }
 
 

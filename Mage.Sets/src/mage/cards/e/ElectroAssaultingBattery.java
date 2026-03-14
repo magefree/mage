@@ -63,7 +63,7 @@ class ElectroAssaultingBatteryEffect extends OneShotEffect {
 
     ElectroAssaultingBatteryEffect() {
         super(Outcome.Damage);
-        staticText = "you may pay x. When you do, he deals X damage to target player";
+        staticText = "you may pay {X}. When you do, he deals X damage to target player";
     }
 
     private ElectroAssaultingBatteryEffect(final ElectroAssaultingBatteryEffect effect) {

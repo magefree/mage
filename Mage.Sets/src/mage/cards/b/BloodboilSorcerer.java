@@ -28,6 +28,7 @@ public final class BloodboilSorcerer extends CardImpl {
 
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SHAMAN);
+        this.subtype.add(SubType.SORCERER);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

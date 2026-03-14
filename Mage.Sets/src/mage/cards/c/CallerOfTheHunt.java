@@ -104,7 +104,7 @@ enum CallerOfTheHuntAdjuster implements CostAdjuster {
         } else {
             // human choose
             // TODO: need early target cost instead dialog here
-            Effect effect = new ChooseCreatureTypeEffect(Outcome.Benefit);
+            Effect effect = new CallerOfTheHuntChooseEffect(Outcome.Benefit);
             effect.apply(game, ability);
         }
         typeChoice = (SubType) game.getState().getValue(sourceObject.getId() + "_type");
@@ -125,14 +125,14 @@ enum CallerOfTheHuntAdjuster implements CostAdjuster {
     }
 }
 
-class ChooseCreatureTypeEffect extends OneShotEffect {
+class CallerOfTheHuntChooseEffect extends OneShotEffect {
 
-    ChooseCreatureTypeEffect(Outcome outcome) {
+    CallerOfTheHuntChooseEffect(Outcome outcome) {
         super(outcome);
         staticText = "choose a creature type";
     }
 
-    private ChooseCreatureTypeEffect(final ChooseCreatureTypeEffect effect) {
+    private CallerOfTheHuntChooseEffect(final CallerOfTheHuntChooseEffect effect) {
         super(effect);
     }
 
@@ -156,7 +156,7 @@ class ChooseCreatureTypeEffect extends OneShotEffect {
     }
 
     @Override
-    public ChooseCreatureTypeEffect copy() {
-        return new ChooseCreatureTypeEffect(this);
+    public CallerOfTheHuntChooseEffect copy() {
+        return new CallerOfTheHuntChooseEffect(this);
     }
 }

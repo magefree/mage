@@ -41,7 +41,7 @@ public final class SiegfriedFamedSwordsman extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // When Siegfried enters, mill three cards. Then put X +1/+1 counters on Siegfried, where X is twice the number of creature cards in your graveyard.
         Ability ability = new EntersBattlefieldTriggeredAbility(new MillCardsControllerEffect(3));

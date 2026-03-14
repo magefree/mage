@@ -12,20 +12,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInHand;
 
 /**
  * @author Loki
  */
 public final class NeurokProdigy extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("an artifact card");
-
-    static {
-        filter.add(CardType.ARTIFACT.getPredicate());
-    }
 
     public NeurokProdigy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
@@ -34,12 +27,12 @@ public final class NeurokProdigy extends CardImpl {
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
-        
-        // Flying        
+
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // Discard an artifact card: Return Neurok Prodigy to its owner's hand.
-        this.addAbility(new SimpleActivatedAbility(new ReturnToHandSourceEffect(true), new DiscardTargetCost(new TargetCardInHand(filter))));
+        this.addAbility(new SimpleActivatedAbility(new ReturnToHandSourceEffect(true), new DiscardTargetCost(new TargetCardInHand(StaticFilters.FILTER_CARD_ARTIFACT_AN))));
     }
 
     private NeurokProdigy(final NeurokProdigy card) {

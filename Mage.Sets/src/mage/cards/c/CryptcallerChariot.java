@@ -27,7 +27,7 @@ public final class CryptcallerChariot extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever you discard one or more cards, create that many tapped 2/2 black Zombie creature tokens.
         this.addAbility(new DiscardOneOrMoreCardsTriggeredAbility(new CreateTokenEffect(

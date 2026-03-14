@@ -679,29 +679,6 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
             possibleBlockers.put(attacker.getId(), goodBlockers);
         }
 
-        // effects: can't block alone
-        // too much blockers
-        if (blockersCount == 1) {
-            List<UUID> toBeRemoved = new ArrayList<>();
-            for (UUID blockerId : getBlockers()) {
-                Permanent blocker = game.getPermanent(blockerId);
-                if (blocker != null && blocker.getAbilities().containsKey(CantBlockAloneAbility.getInstance().getId())) {
-                    blockWasLegal = false;
-                    if (!game.isSimulation()) {
-                        game.informPlayers(blocker.getLogName() + " can't block alone. Removing it from combat.");
-                    }
-                    toBeRemoved.add(blockerId);
-                }
-            }
-
-            for (UUID blockerId : toBeRemoved) {
-                game.getCombat().removeBlocker(blockerId, game);
-            }
-            if (blockers.isEmpty()) {
-                this.blocked = false;
-            }
-        }
-
         for (UUID uuid : attackers) {
             Permanent attacker = game.getPermanent(uuid);
             if (attacker != null && this.blocked) {

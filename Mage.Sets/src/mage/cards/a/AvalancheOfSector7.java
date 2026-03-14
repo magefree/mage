@@ -43,7 +43,7 @@ public final class AvalancheOfSector7 extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Avalanche of Sector 7's power is equal to the number of artifacts your opponents control.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerSourceEffect(xValue)));
@@ -65,7 +65,7 @@ public final class AvalancheOfSector7 extends CardImpl {
 class AvalancheOfSector7TriggeredAbility extends TriggeredAbilityImpl {
 
     AvalancheOfSector7TriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(1, true, "that player", true));
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(1).withTargetDescription("that player"));
         setTriggerPhrase("Whenever an opponent activates an ability of an artifact they control, ");
     }
 

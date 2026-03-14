@@ -9,14 +9,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.card.OwnerIdPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -69,9 +65,7 @@ class TemptWithImmortalityEffect extends OneShotEffect {
             for (UUID playerId : game.getOpponents(controller.getId())) {
                 Player opponent = game.getPlayer(playerId);
                 if (opponent != null) {
-                    FilterCard filter = new FilterCreatureCard("creature card from your graveyard");
-                    filter.add(new OwnerIdPredicate(opponent.getId()));
-                    Target targetCardOpponent = new TargetCardInGraveyard(filter);
+                    Target targetCardOpponent = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD);
 
                     if (targetCardOpponent.canChoose(opponent.getId(), source, game)) {
                         if (opponent.chooseUse(outcome, "Return a creature card from your graveyard to the battlefield?", source, game)) {

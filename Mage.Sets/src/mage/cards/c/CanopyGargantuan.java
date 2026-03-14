@@ -35,7 +35,7 @@ public final class CanopyGargantuan extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Ward {2}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}"), false));
 
         // At the beginning of your upkeep, put a number of +1/+1 counters on each other creature you control equal to that creature's toughness.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CanopyGargantuanEffect()));

@@ -56,7 +56,7 @@ public final class TheDominionBracelet extends CardImpl {
         this.addAbility(ability);
 
         // Equip {1}
-        this.addAbility(new EquipAbility(1));
+        this.addAbility(new EquipAbility(1, false));
     }
 
     private TheDominionBracelet(final TheDominionBracelet card) {

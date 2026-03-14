@@ -1,17 +1,16 @@
 package mage.cards.a;
 
 import mage.MageInt;
-import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.effects.common.DoWhenCostPaid;
 import mage.abilities.effects.common.GainsChoiceOfAbilitiesEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.VigilanceAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -35,10 +34,7 @@ public final class AtraxasSkitterfang extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Atraxa's Skitterfang enters the battlefield with three oil counters on it.
-        this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.OIL.createInstance(3)),
-                "with three oil counters on it"
-        ));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.OIL.createInstance(3)));
 
         // At the beginning of combat on your turn, you may remove an oil counter from Atraxa's Skitterfang. When you do, target creature you control gains your choice of flying, vigilance, deathtouch, or lifelink until end of turn.
         ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(new GainsChoiceOfAbilitiesEffect(

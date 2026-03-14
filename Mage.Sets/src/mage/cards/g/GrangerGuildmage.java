@@ -1,24 +1,22 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DamageControllerEffect;
-import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.DamageTargetAndYouEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.SubType;
 import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -34,9 +32,8 @@ public final class GrangerGuildmage extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {R}, {tap}: Granger Guildmage deals 1 damage to any target and 1 damage to you.
-        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new ManaCostsImpl<>("{R}"));
+        Ability ability = new SimpleActivatedAbility(new DamageTargetAndYouEffect(1, 1), new ManaCostsImpl<>("{R}"));
         ability.addCost(new TapSourceCost());
-        ability.addEffect(new DamageControllerEffect(1).setText("and 1 damage to you"));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
         

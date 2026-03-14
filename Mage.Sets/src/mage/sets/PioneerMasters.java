@@ -142,7 +142,6 @@ public class PioneerMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Expedite", 374, Rarity.COMMON, mage.cards.e.Expedite.class));
         cards.add(new SetCardInfo("Experiment One", 173, Rarity.UNCOMMON, mage.cards.e.ExperimentOne.class));
         cards.add(new SetCardInfo("Exquisite Firecraft", 133, Rarity.RARE, mage.cards.e.ExquisiteFirecraft.class));
-        cards.add(new SetCardInfo("Extricator of Flesh", 12, Rarity.UNCOMMON, mage.cards.e.ExtricatorOfFlesh.class));
         cards.add(new SetCardInfo("Extricator of Sin", 12, Rarity.UNCOMMON, mage.cards.e.ExtricatorOfSin.class));
         cards.add(new SetCardInfo("Fall of the Hammer", 134, Rarity.COMMON, mage.cards.f.FallOfTheHammer.class));
         cards.add(new SetCardInfo("Fallaji Archaeologist", 55, Rarity.COMMON, mage.cards.f.FallajiArchaeologist.class));
@@ -167,7 +166,6 @@ public class PioneerMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Ghor-Clan Rampager", 226, Rarity.UNCOMMON, mage.cards.g.GhorClanRampager.class));
         cards.add(new SetCardInfo("Ghostblade Eidolon", 13, Rarity.COMMON, mage.cards.g.GhostbladeEidolon.class));
         cards.add(new SetCardInfo("Gideon, Ally of Zendikar", 14, Rarity.MYTHIC, mage.cards.g.GideonAllyOfZendikar.class));
-        cards.add(new SetCardInfo("Gideon, Battle-Forged", 23, Rarity.MYTHIC, mage.cards.g.GideonBattleForged.class));
         cards.add(new SetCardInfo("Gift of Orzhova", 307, Rarity.UNCOMMON, mage.cards.g.GiftOfOrzhova.class));
         cards.add(new SetCardInfo("Give // Take", 389, Rarity.UNCOMMON, mage.cards.g.GiveTake.class));
         cards.add(new SetCardInfo("Gladecover Scout", 175, Rarity.COMMON, mage.cards.g.GladecoverScout.class));
@@ -206,7 +204,6 @@ public class PioneerMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Izzet Guildgate", 267, Rarity.COMMON, mage.cards.i.IzzetGuildgate.class));
         cards.add(new SetCardInfo("Jace, Architect of Thought", 329, Rarity.MYTHIC, mage.cards.j.JaceArchitectOfThought.class));
         cards.add(new SetCardInfo("Jace, Memory Adept", 330, Rarity.MYTHIC, mage.cards.j.JaceMemoryAdept.class));
-        cards.add(new SetCardInfo("Jace, Telepath Unbound", 60, Rarity.MYTHIC, mage.cards.j.JaceTelepathUnbound.class));
         cards.add(new SetCardInfo("Jace, Vryn's Prodigy", 60, Rarity.MYTHIC, mage.cards.j.JaceVrynsProdigy.class));
         cards.add(new SetCardInfo("Jarad's Orders", 390, Rarity.RARE, mage.cards.j.JaradsOrders.class));
         cards.add(new SetCardInfo("Jhessian Thief", 61, Rarity.UNCOMMON, mage.cards.j.JhessianThief.class));
@@ -232,7 +229,6 @@ public class PioneerMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Lifebane Zombie", 95, Rarity.RARE, mage.cards.l.LifebaneZombie.class));
         cards.add(new SetCardInfo("Liliana of the Dark Realms", 334, Rarity.MYTHIC, mage.cards.l.LilianaOfTheDarkRealms.class));
         cards.add(new SetCardInfo("Liliana Vess", 335, Rarity.MYTHIC, mage.cards.l.LilianaVess.class));
-        cards.add(new SetCardInfo("Liliana, Defiant Necromancer", 96, Rarity.MYTHIC, mage.cards.l.LilianaDefiantNecromancer.class));
         cards.add(new SetCardInfo("Liliana, Heretical Healer", 96, Rarity.MYTHIC, mage.cards.l.LilianaHereticalHealer.class));
         cards.add(new SetCardInfo("Limits of Solidarity", 375, Rarity.UNCOMMON, mage.cards.l.LimitsOfSolidarity.class));
         cards.add(new SetCardInfo("Linvala, the Preserver", 25, Rarity.RARE, mage.cards.l.LinvalaThePreserver.class));
@@ -266,7 +262,6 @@ public class PioneerMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Nightveil Specter", 314, Rarity.UNCOMMON, mage.cards.n.NightveilSpecter.class));
         cards.add(new SetCardInfo("Nimbus Naiad", 67, Rarity.COMMON, mage.cards.n.NimbusNaiad.class));
         cards.add(new SetCardInfo("Nissa's Pilgrimage", 348, Rarity.UNCOMMON, mage.cards.n.NissasPilgrimage.class));
-        cards.add(new SetCardInfo("Nissa, Sage Animist", 187, Rarity.MYTHIC, mage.cards.n.NissaSageAnimist.class));
         cards.add(new SetCardInfo("Nissa, Vastwood Seer", 187, Rarity.MYTHIC, mage.cards.n.NissaVastwoodSeer.class));
         cards.add(new SetCardInfo("Nissa, Voice of Zendikar", 188, Rarity.MYTHIC, mage.cards.n.NissaVoiceOfZendikar.class));
         cards.add(new SetCardInfo("Nivix Cyclops", 234, Rarity.COMMON, mage.cards.n.NivixCyclops.class));

@@ -3,7 +3,7 @@ package mage.cards.[=$cardNameFirstLetter=];
 import java.util.UUID;
 [=$abilitiesImports=]
 import mage.cards.CardSetInfo;
-import mage.cards.SplitCard;
+import mage.cards.RoomCard;
 import mage.constants.CardType;
 import mage.constants.SpellAbilityType;
 
@@ -11,17 +11,13 @@ import mage.constants.SpellAbilityType;
  *
  * @author [=$author=]
  */
-public final class [=$className=] extends SplitCard {
+public final class [=$className=] extends RoomCard {
+
     public [=$className=](UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{[=$type=]}, new CardType[]{??}, "[=$manaCost=]", "??", SpellAbilityType.SPLIT_AFTERMATH);
-  [=$subType=][=$colors=]
+        super(ownerId, setInfo, "[=$manaCost=]");
 [= if ($power || $power eq 0) {
     $OUT .= "\n        this.power = new MageInt($power);";
     $OUT .= "\n        this.toughness = new MageInt($toughness);";} =][=$abilities=]
-    // getLeftHalfCard().getSpellAbility().addEffect(new Effect());
-
-    // getRightHalfCard().getSpellAbility().addEffect(new Effect());
-
     }
 
     private [=$className=](final [=$className=] card) {

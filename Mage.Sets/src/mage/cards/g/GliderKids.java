@@ -29,7 +29,7 @@ public final class GliderKids extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When this creature enters, scry 1.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(1)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(1, false)));
     }
 
     private GliderKids(final GliderKids card) {

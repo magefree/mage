@@ -15,7 +15,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.game.Game;
-import mage.game.permanent.token.RedElementalWithTrampleAndHaste;
+import mage.game.permanent.token.RedElementalTrampleHasteToken;
 
 import java.util.UUID;
 
@@ -68,7 +68,7 @@ class ZektarShrineExpeditionEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        CreateTokenEffect effect = new CreateTokenEffect(new RedElementalWithTrampleAndHaste());
+        CreateTokenEffect effect = new CreateTokenEffect(new RedElementalTrampleHasteToken());
         if (effect.apply(game, source)) {
             effect.exileTokensCreatedAtNextEndStep(game, source);
             return true;

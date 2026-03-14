@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -28,7 +27,9 @@ public final class AcolyteOfTheInferno extends CardImpl {
         this.addAbility(new RenownAbility(1));
         
         // Whenever Acolyte of the Inferno becomes blocked by a creature, it deals 2 damage to that creature
-        this.addAbility(new BecomesBlockedByCreatureTriggeredAbility(new DamageTargetEffect(2, true, "that creature", "it"), false));
+        this.addAbility(new BecomesBlockedByCreatureTriggeredAbility(
+                new DamageTargetEffect(2, "it")
+                        .withTargetDescription("that creature"), false));
     }
 
     private AcolyteOfTheInferno(final AcolyteOfTheInferno card) {

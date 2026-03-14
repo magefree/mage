@@ -1,11 +1,8 @@
-
 package mage.cards.b;
 
 import mage.MageInt;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -13,9 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -23,17 +18,9 @@ import mage.game.events.ZoneChangeEvent;
 import java.util.UUID;
 
 /**
- *
  * @author TheElk801
  */
 public final class BoneyardScourge extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a Dragon you control");
-
-    static {
-        filter.add(SubType.DRAGON.getPredicate());
-        filter.add(TargetController.YOU.getControllerPredicate());
-    }
 
     public BoneyardScourge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
@@ -46,10 +33,7 @@ public final class BoneyardScourge extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever a Dragon you control dies while Boneyard Scourge is in your graveyard, you may pay 1B. If you do, return Boneyard Scourge from your graveyard to the battlefield.
-        TriggeredAbility ability = new DiesWhileInGraveyardTriggeredAbility(
-                new DoIfCostPaid(new ReturnSourceFromGraveyardToBattlefieldEffect(), new ManaCostsImpl<>("{1}{B}")),
-                filter);
-        this.addAbility(ability);
+        this.addAbility(new DiesWhileInGraveyardTriggeredAbility());
     }
 
     private BoneyardScourge(final BoneyardScourge card) {
@@ -64,17 +48,13 @@ public final class BoneyardScourge extends CardImpl {
 
 class DiesWhileInGraveyardTriggeredAbility extends TriggeredAbilityImpl {
 
-    private final FilterCreaturePermanent filter;
-
-    public DiesWhileInGraveyardTriggeredAbility(Effect effect, FilterCreaturePermanent filter) {
-        super(Zone.GRAVEYARD, effect, false);
-        this.filter = filter;
-        setTriggerPhrase("Whenever " + filter.getMessage() + " dies while {this} is in your graveyard, ");
+    public DiesWhileInGraveyardTriggeredAbility() {
+        super(Zone.GRAVEYARD, new DoIfCostPaid(new ReturnSourceFromGraveyardToBattlefieldEffect(), new ManaCostsImpl<>("{1}{B}")), false);
+        setTriggerPhrase("Whenever a Dragon you control dies while {this} is in your graveyard, ");
     }
 
     private DiesWhileInGraveyardTriggeredAbility(final DiesWhileInGraveyardTriggeredAbility ability) {
         super(ability);
-        this.filter = ability.filter;
     }
 
     @Override
@@ -90,16 +70,9 @@ class DiesWhileInGraveyardTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (!zEvent.isDiesEvent()) {
-            return false;
-        }
-
-        for (Zone z : Zone.values()) {
-            if (game.checkShortLivingLKI(sourceId, z) && z != Zone.GRAVEYARD) {
-                return false;
-            }
-        }
-
-        return filter.match(zEvent.getTarget(), controllerId,this, game);
+        return zEvent.isDiesEvent()
+                && game.checkShortLivingLKI(sourceId, Zone.GRAVEYARD)
+                && zEvent.getTarget().hasSubtype(SubType.DRAGON, game)
+                && zEvent.getTarget().isControlledBy(getControllerId());
     }
 }

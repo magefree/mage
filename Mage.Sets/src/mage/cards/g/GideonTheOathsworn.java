@@ -1,6 +1,5 @@
 package mage.cards.g;
 
-import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
@@ -18,7 +17,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -41,7 +40,7 @@ public final class GideonTheOathsworn extends CardImpl {
 
         // +2: Until end of turn, Gideon, the Oathsworn becomes a 5/5 white Soldier creature that's still a planeswalker. Prevent all damage that would be dealt to him this turn.
         Ability ability = new LoyaltyAbility(new BecomesCreatureSourceEffect(
-                new GideonTheOathswornToken(), CardType.PLANESWALKER, Duration.EndOfTurn
+            new CreatureToken(5, 5, "5/5 white Soldier creature", SubType.SOLDIER).withColor("W"), CardType.PLANESWALKER, Duration.EndOfTurn
         ), 2);
         ability.addEffect(new PreventAllDamageToSourceEffect(
                 Duration.EndOfTurn
@@ -50,9 +49,8 @@ public final class GideonTheOathsworn extends CardImpl {
 
         // -9: Exile Gideon, the Oathsworn and each creature your opponents control.
         ability = new LoyaltyAbility(new ExileSourceEffect(), -9);
-        ability.addEffect(new ExileAllEffect(
-                StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE
-        ).setText("and each creature your opponents control"));
+        ability.addEffect(new ExileAllEffect(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE)
+            .setText("and each creature your opponents control"));
         this.addAbility(ability);
     }
 
@@ -142,25 +140,5 @@ class GideonTheOathswornEffect extends OneShotEffect {
             }
         }
         return true;
-    }
-}
-
-class GideonTheOathswornToken extends TokenImpl {
-
-    GideonTheOathswornToken() {
-        super("", "5/5 white Soldier creature");
-        cardType.add(CardType.CREATURE);
-        subtype.add(SubType.SOLDIER);
-        power = new MageInt(5);
-        toughness = new MageInt(5);
-    }
-
-    private GideonTheOathswornToken(final GideonTheOathswornToken token) {
-        super(token);
-    }
-
-    @Override
-    public GideonTheOathswornToken copy() {
-        return new GideonTheOathswornToken(this);
     }
 }

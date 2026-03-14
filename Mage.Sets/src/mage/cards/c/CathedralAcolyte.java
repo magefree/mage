@@ -43,10 +43,11 @@ public final class CathedralAcolyte extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Each creature you control with a counter on it has ward {1}.
+        Ability wardAbility = new WardAbility(new GenericManaCost(1));
         this.addAbility(new SimpleStaticAbility(
                 new GainAbilityControlledEffect(
-                        new WardAbility(new GenericManaCost(1)), Duration.WhileOnBattlefield, filter
-                ).setText("Each creature you control with a counter on it has ward {1}")
+                        wardAbility, Duration.WhileOnBattlefield, filter
+                ).setText("Each creature you control with a counter on it has " + wardAbility.getRule())
         ));
 
         // {T}: Put a +1/+1 counter on target creature that entered the battlefield this turn.

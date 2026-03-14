@@ -25,6 +25,7 @@ public final class VulshokSorcerer extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SHAMAN);
+        this.subtype.add(SubType.SORCERER);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

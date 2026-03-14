@@ -59,7 +59,7 @@ public final class GrimReapersSprint extends CardImpl {
                         "untap each creature you control"
                 ), false
         );
-        triggeredAbility.addEffect(new ConditionalOneShotEffect(new AdditionalCombatPhaseEffect(), IsMainPhaseCondition.YOUR, "If it's your main phase, there is an additional combat phase after this phase."));
+        triggeredAbility.addEffect(new ConditionalOneShotEffect(new AdditionalCombatPhaseEffect(), IsMainPhaseCondition.YOURS, "If it's your main phase, there is an additional combat phase after this phase."));
         this.addAbility(triggeredAbility);
 
         // Enchanted creature gets +2/+2 and has haste.

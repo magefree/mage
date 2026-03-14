@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
  */
 public enum PartnerVariantType {
     FATHER_AND_SON("Father & son"),
+    FRIENDS_FOREVER("Friends forever"),
     SURVIVORS("Survivors"),
     CHARACTER_SELECT("Character select");
 

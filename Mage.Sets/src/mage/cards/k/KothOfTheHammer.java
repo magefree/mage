@@ -1,7 +1,6 @@
 
 package mage.cards.k;
 
-import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
@@ -19,7 +18,7 @@ import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.command.emblems.KothOfTheHammerEmblem;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -29,8 +28,8 @@ import java.util.UUID;
  */
 public final class KothOfTheHammer extends CardImpl {
 
-    static final FilterPermanent filter = new FilterPermanent(SubType.MOUNTAIN, "Mountain");
-    static final FilterPermanent filterCount = new FilterControlledPermanent("Mountain you control");
+    private static final FilterPermanent filter = new FilterPermanent(SubType.MOUNTAIN, "Mountain");
+    private static final FilterPermanent filterCount = new FilterControlledPermanent(SubType.MOUNTAIN, "Mountain you control");
 
     public KothOfTheHammer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{R}");
@@ -41,7 +40,12 @@ public final class KothOfTheHammer extends CardImpl {
 
         // +1: Untap target Mountain. It becomes a 4/4 red Elemental creature until end of turn. It's still a land.
         Ability ability = new LoyaltyAbility(new UntapTargetEffect(), 1);
-        ability.addEffect(new BecomesCreatureTargetEffect(new KothOfTheHammerToken(), false, true, Duration.EndOfTurn).withTargetDescription("It"));
+        ability.addEffect(new BecomesCreatureTargetEffect(
+            new CreatureToken(4, 4, "4/4 red Elemental creature", SubType.ELEMENTAL).withColor("R"),
+            false,
+            true,
+            Duration.EndOfTurn
+        ).withTargetDescription("It"));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
@@ -59,26 +63,5 @@ public final class KothOfTheHammer extends CardImpl {
     @Override
     public KothOfTheHammer copy() {
         return new KothOfTheHammer(this);
-    }
-}
-
-class KothOfTheHammerToken extends TokenImpl {
-
-    public KothOfTheHammerToken() {
-        super("Elemental", "4/4 red Elemental creature");
-        this.cardType.add(CardType.CREATURE);
-        this.subtype.add(SubType.ELEMENTAL);
-
-        this.color.setRed(true);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
-    }
-
-    private KothOfTheHammerToken(final KothOfTheHammerToken token) {
-        super(token);
-    }
-
-    public KothOfTheHammerToken copy() {
-        return new KothOfTheHammerToken(this);
     }
 }

@@ -17,9 +17,9 @@ build:
 .PHONY: package
 package:
 	# Packaging Mage.Client to zip
-	cd Mage.Client && mvn assembly:single
+	cd Mage.Client && mvn package assembly:single
 	# Packaging Mage.Server to zip
-	cd Mage.Server && mvn assembly:single
+	cd Mage.Server && mvn package assembly:single
 	# Copying the files to the target directory
 	mkdir -p $(TARGET_DIR)
 	cp ./Mage.Server/target/mage-server.zip $(TARGET_DIR)

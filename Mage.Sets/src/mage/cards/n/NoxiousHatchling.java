@@ -1,12 +1,10 @@
 
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.abilities.keyword.WitherAbility;
 import mage.cards.CardImpl;
@@ -16,6 +14,8 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -32,7 +32,7 @@ public final class NoxiousHatchling extends CardImpl {
     }
 
     public NoxiousHatchling(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B/G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B/G}");
         this.subtype.add(SubType.ELEMENTAL);
 
 
@@ -40,7 +40,7 @@ public final class NoxiousHatchling extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Noxious Hatchling enters the battlefield with four -1/-1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance(4)),"with four -1/-1 counters on it"));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.M1M1.createInstance(4)));
         // Wither (This deals damage to creatures in the form of -1/-1 counters.)
         this.addAbility(WitherAbility.getInstance());
         // Whenever you cast a black spell, remove a -1/-1 counter from Noxious Hatchling.

@@ -109,8 +109,10 @@ class ShadowPuppeteersContinousEffect extends ContinuousEffectImpl {
                 permanent.getColor(game).setRed(true);
                 break;
             case PTChangingEffects_7:
-                permanent.getToughness().setModifiedBaseValue(4);
-                permanent.getPower().setModifiedBaseValue(4);
+                if (sublayer.equals(SubLayer.SetPT_7b)) {
+                    permanent.getToughness().setModifiedBaseValue(4);
+                    permanent.getPower().setModifiedBaseValue(4);
+                }
         }
         return true;
     }

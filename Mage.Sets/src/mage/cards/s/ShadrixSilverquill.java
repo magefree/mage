@@ -3,16 +3,19 @@ package mage.cards.s;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenTargetEffect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.filter.FilterPlayer;
 import mage.filter.StaticFilters;
@@ -68,7 +71,7 @@ public final class ShadrixSilverquill extends CardImpl {
 
         // • Target player draws a card and loses 1 life.
         ability.addMode(new Mode(new DrawCardTargetEffect(1))
-                .addEffect(new LoseLifeTargetEffect(1).setText("and loses 1 life"))
+                .addEffect(new LoseLifeTargetEffect(1).withTargetDescription("and"))
                 .addTarget(new TargetPlayer(filter2).setTargetTag(2).withChooseHint("to draw a card and lose 1 life")));
 
         // • Target player puts a +1/+1 counter on each creature they control.

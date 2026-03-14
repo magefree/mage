@@ -2,7 +2,6 @@
 package mage.cards.d;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
@@ -15,8 +14,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -39,9 +37,17 @@ public final class DarksteelMutation extends CardImpl {
 
         // Enchanted creature is an Insect artifact creature with base power and toughness 0/1 and has indestructible, and it loses all other abilities, card types, and creature types.
         this.addAbility(new SimpleStaticAbility(
-                new BecomesCreatureAttachedEffect(new DarksteelMutationInsectToken(),
-                        "Enchanted creature is an Insect artifact creature with base power and toughness 0/1 and has indestructible, and it loses all other abilities, card types, and creature types.",
-                        Duration.WhileOnBattlefield, BecomesCreatureAttachedEffect.LoseType.ALL_BUT_COLOR)));
+            new BecomesCreatureAttachedEffect(
+                new CreatureToken(
+                    0, 1,
+                    "Insect artifact creature with base power and toughness 0/1",
+                    SubType.INSECT
+                ).withType(CardType.ARTIFACT).withAbility(IndestructibleAbility.getInstance()),
+                "Enchanted creature is an Insect artifact creature with base power and toughness 0/1 and has indestructible, and it loses all other abilities, card types, and creature types.",
+                Duration.WhileOnBattlefield,
+                BecomesCreatureAttachedEffect.LoseType.ALL_BUT_COLOR
+            )
+        ));
 
     }
 
@@ -53,26 +59,4 @@ public final class DarksteelMutation extends CardImpl {
     public DarksteelMutation copy() {
         return new DarksteelMutation(this);
     }
-}
-
-class DarksteelMutationInsectToken extends TokenImpl {
-
-    public DarksteelMutationInsectToken() {
-        super("Insect", "Insect artifact creature with base power and toughness 0/1");
-        cardType.add(CardType.ARTIFACT);
-        cardType.add(CardType.CREATURE);
-        subtype.add(SubType.INSECT);
-        power = new MageInt(0);
-        toughness = new MageInt(1);
-
-        this.addAbility(IndestructibleAbility.getInstance());
-    }
-    private DarksteelMutationInsectToken(final DarksteelMutationInsectToken token) {
-        super(token);
-    }
-
-    public DarksteelMutationInsectToken copy() {
-        return new DarksteelMutationInsectToken(this);
-    }
-
 }

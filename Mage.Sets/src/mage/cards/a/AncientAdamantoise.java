@@ -41,7 +41,7 @@ public final class AncientAdamantoise extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Ward {3}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{3}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{3}"), false));
 
         // Damage isn't removed from this creature during cleanup steps.
         this.addAbility(new SimpleStaticAbility(new AncientAdamantoiseDamageEffect()));

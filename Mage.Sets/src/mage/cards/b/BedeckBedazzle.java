@@ -1,7 +1,6 @@
 package mage.cards.b;
 
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -75,7 +74,7 @@ class BedazzleEffect extends OneShotEffect {
         if (permanent != null) {
             permanent.destroy(source, game, false);
         }
-        Effect effect = new DamageTargetEffect(StaticValue.get(2), true, "", true);
+        Effect effect = new DamageTargetEffect(2);
         effect.setTargetPointer(new FixedTarget(source.getTargets().get(1).getFirstTarget(), game));
         effect.apply(game, source);
         return true;

@@ -42,12 +42,10 @@ public final class EldritchMoon extends ExpansionSet {
         this.numBoosterDoubleFaced = 1;
 
         cards.add(new SetCardInfo("Abandon Reason", 115, Rarity.UNCOMMON, mage.cards.a.AbandonReason.class));
-        cards.add(new SetCardInfo("Abolisher of Bloodlines", 111, Rarity.RARE, mage.cards.a.AbolisherOfBloodlines.class));
         cards.add(new SetCardInfo("Abundant Maw", 1, Rarity.UNCOMMON, mage.cards.a.AbundantMaw.class));
         cards.add(new SetCardInfo("Advanced Stitchwing", 49, Rarity.UNCOMMON, mage.cards.a.AdvancedStitchwing.class));
         cards.add(new SetCardInfo("Alchemist's Greeting", 116, Rarity.COMMON, mage.cards.a.AlchemistsGreeting.class));
         cards.add(new SetCardInfo("Assembled Alphas", 117, Rarity.RARE, mage.cards.a.AssembledAlphas.class));
-        cards.add(new SetCardInfo("Aurora of Emrakul", 193, Rarity.UNCOMMON, mage.cards.a.AuroraOfEmrakul.class));
         cards.add(new SetCardInfo("Backwoods Survivalists", 150, Rarity.COMMON, mage.cards.b.BackwoodsSurvivalists.class));
         cards.add(new SetCardInfo("Bedlam Reveler", 118, Rarity.RARE, mage.cards.b.BedlamReveler.class));
         cards.add(new SetCardInfo("Blessed Alliance", 13, Rarity.UNCOMMON, mage.cards.b.BlessedAlliance.class));
@@ -74,7 +72,6 @@ public final class EldritchMoon extends ExpansionSet {
         cards.add(new SetCardInfo("Collective Brutality", 85, Rarity.RARE, mage.cards.c.CollectiveBrutality.class));
         cards.add(new SetCardInfo("Collective Defiance", 123, Rarity.RARE, mage.cards.c.CollectiveDefiance.class));
         cards.add(new SetCardInfo("Collective Effort", 17, Rarity.RARE, mage.cards.c.CollectiveEffort.class));
-        cards.add(new SetCardInfo("Conduit of Emrakul", 124, Rarity.UNCOMMON, mage.cards.c.ConduitOfEmrakul.class));
         cards.add(new SetCardInfo("Conduit of Storms", 124, Rarity.UNCOMMON, mage.cards.c.ConduitOfStorms.class));
         cards.add(new SetCardInfo("Contingency Plan", 52, Rarity.COMMON, mage.cards.c.ContingencyPlan.class));
         cards.add(new SetCardInfo("Convolute", 53, Rarity.COMMON, mage.cards.c.Convolute.class));
@@ -97,7 +94,6 @@ public final class EldritchMoon extends ExpansionSet {
         cards.add(new SetCardInfo("Docent of Perfection", 56, Rarity.RARE, mage.cards.d.DocentOfPerfection.class));
         cards.add(new SetCardInfo("Drag Under", 57, Rarity.COMMON, mage.cards.d.DragUnder.class));
         cards.add(new SetCardInfo("Drogskol Shieldmate", 22, Rarity.UNCOMMON, mage.cards.d.DrogskolShieldmate.class));
-        cards.add(new SetCardInfo("Dronepack Kindred", 148, Rarity.COMMON, mage.cards.d.DronepackKindred.class));
         cards.add(new SetCardInfo("Drownyard Behemoth", 4, Rarity.UNCOMMON, mage.cards.d.DrownyardBehemoth.class));
         cards.add(new SetCardInfo("Dusk Feaster", 88, Rarity.UNCOMMON, mage.cards.d.DuskFeaster.class));
         cards.add(new SetCardInfo("Elder Deep-Fiend", 5, Rarity.RARE, mage.cards.e.ElderDeepFiend.class));
@@ -106,18 +102,14 @@ public final class EldritchMoon extends ExpansionSet {
         cards.add(new SetCardInfo("Emrakul's Influence", 157, Rarity.UNCOMMON, mage.cards.e.EmrakulsInfluence.class));
         cards.add(new SetCardInfo("Emrakul, the Promised End", 6, Rarity.MYTHIC, mage.cards.e.EmrakulThePromisedEnd.class));
         cards.add(new SetCardInfo("Enlightened Maniac", 58, Rarity.COMMON, mage.cards.e.EnlightenedManiac.class));
-        cards.add(new SetCardInfo("Erupting Dreadwolf", 142, Rarity.UNCOMMON, mage.cards.e.EruptingDreadwolf.class));
         cards.add(new SetCardInfo("Eternal Scourge", 7, Rarity.RARE, mage.cards.e.EternalScourge.class));
-        cards.add(new SetCardInfo("Extricator of Flesh", 23, Rarity.UNCOMMON, mage.cards.e.ExtricatorOfFlesh.class));
         cards.add(new SetCardInfo("Extricator of Sin", 23, Rarity.UNCOMMON, mage.cards.e.ExtricatorOfSin.class));
         cards.add(new SetCardInfo("Exultant Cultist", 59, Rarity.COMMON, mage.cards.e.ExultantCultist.class));
         cards.add(new SetCardInfo("Faith Unbroken", 24, Rarity.UNCOMMON, mage.cards.f.FaithUnbroken.class));
         cards.add(new SetCardInfo("Faithbearer Paladin", 25, Rarity.COMMON, mage.cards.f.FaithbearerPaladin.class));
         cards.add(new SetCardInfo("Falkenrath Reaver", 127, Rarity.COMMON, mage.cards.f.FalkenrathReaver.class));
-        cards.add(new SetCardInfo("Fibrous Entangler", 174, Rarity.UNCOMMON, mage.cards.f.FibrousEntangler.class));
         cards.add(new SetCardInfo("Field Creeper", 195, Rarity.COMMON, mage.cards.f.FieldCreeper.class));
         cards.add(new SetCardInfo("Fiend Binder", 26, Rarity.COMMON, mage.cards.f.FiendBinder.class));
-        cards.add(new SetCardInfo("Final Iteration", 56, Rarity.RARE, mage.cards.f.FinalIteration.class));
         cards.add(new SetCardInfo("Fogwalker", 60, Rarity.COMMON, mage.cards.f.Fogwalker.class));
         cards.add(new SetCardInfo("Fortune's Favor", 61, Rarity.UNCOMMON, mage.cards.f.FortunesFavor.class));
         cards.add(new SetCardInfo("Foul Emissary", 158, Rarity.UNCOMMON, mage.cards.f.FoulEmissary.class));
@@ -136,7 +128,6 @@ public final class EldritchMoon extends ExpansionSet {
         cards.add(new SetCardInfo("Graf Rats", 91, Rarity.COMMON, mage.cards.g.GrafRats.class));
         cards.add(new SetCardInfo("Grapple with the Past", 160, Rarity.COMMON, mage.cards.g.GrappleWithThePast.class));
         cards.add(new SetCardInfo("Grim Flayer", 184, Rarity.MYTHIC, mage.cards.g.GrimFlayer.class));
-        cards.add(new SetCardInfo("Grisly Anglerfish", 63, Rarity.UNCOMMON, mage.cards.g.GrislyAnglerfish.class));
         cards.add(new SetCardInfo("Grizzled Angler", 63, Rarity.UNCOMMON, mage.cards.g.GrizzledAngler.class));
         cards.add(new SetCardInfo("Guardian of Pilgrims", 30, Rarity.COMMON, mage.cards.g.GuardianOfPilgrims.class));
         cards.add(new SetCardInfo("Hamlet Captain", 161, Rarity.UNCOMMON, mage.cards.h.HamletCaptain.class));
@@ -146,7 +137,6 @@ public final class EldritchMoon extends ExpansionSet {
         cards.add(new SetCardInfo("Harmless Offering", 131, Rarity.RARE, mage.cards.h.HarmlessOffering.class));
         cards.add(new SetCardInfo("Haunted Dead", 92, Rarity.UNCOMMON, mage.cards.h.HauntedDead.class));
         cards.add(new SetCardInfo("Heron's Grace Champion", 185, Rarity.RARE, mage.cards.h.HeronsGraceChampion.class));
-        cards.add(new SetCardInfo("Howling Chorus", 168, Rarity.UNCOMMON, mage.cards.h.HowlingChorus.class));
         cards.add(new SetCardInfo("Identity Thief", 64, Rarity.RARE, mage.cards.i.IdentityThief.class));
         cards.add(new SetCardInfo("Impetuous Devils", 132, Rarity.RARE, mage.cards.i.ImpetuousDevils.class));
         cards.add(new SetCardInfo("Imprisoned in the Moon", 65, Rarity.RARE, mage.cards.i.ImprisonedInTheMoon.class));
@@ -157,7 +147,6 @@ public final class EldritchMoon extends ExpansionSet {
         cards.add(new SetCardInfo("Ironwright's Cleansing", 32, Rarity.COMMON, mage.cards.i.IronwrightsCleansing.class));
         cards.add(new SetCardInfo("Ishkanah, Grafwidow", 162, Rarity.MYTHIC, mage.cards.i.IshkanahGrafwidow.class));
         cards.add(new SetCardInfo("It of the Horrid Swarm", 8, Rarity.COMMON, mage.cards.i.ItOfTheHorridSwarm.class));
-        cards.add(new SetCardInfo("It That Rides as One", 33, Rarity.UNCOMMON, mage.cards.i.ItThatRidesAsOne.class));
         cards.add(new SetCardInfo("Kessig Prowler", 163, Rarity.UNCOMMON, mage.cards.k.KessigProwler.class));
         cards.add(new SetCardInfo("Laboratory Brute", 67, Rarity.COMMON, mage.cards.l.LaboratoryBrute.class));
         cards.add(new SetCardInfo("Lashweed Lurker", 9, Rarity.UNCOMMON, mage.cards.l.LashweedLurker.class));
@@ -206,7 +195,6 @@ public final class EldritchMoon extends ExpansionSet {
         cards.add(new SetCardInfo("Shrill Howler", 168, Rarity.UNCOMMON, mage.cards.s.ShrillHowler.class));
         cards.add(new SetCardInfo("Sigarda's Aid", 41, Rarity.RARE, mage.cards.s.SigardasAid.class));
         cards.add(new SetCardInfo("Sigardian Priest", 42, Rarity.COMMON, mage.cards.s.SigardianPriest.class));
-        cards.add(new SetCardInfo("Sinuous Predator", 163, Rarity.UNCOMMON, mage.cards.s.SinuousPredator.class));
         cards.add(new SetCardInfo("Skirsdag Supplicant", 104, Rarity.COMMON, mage.cards.s.SkirsdagSupplicant.class));
         cards.add(new SetCardInfo("Slayer's Cleaver", 198, Rarity.UNCOMMON, mage.cards.s.SlayersCleaver.class));
         cards.add(new SetCardInfo("Smoldering Werewolf", 142, Rarity.UNCOMMON, mage.cards.s.SmolderingWerewolf.class));
@@ -244,8 +232,6 @@ public final class EldritchMoon extends ExpansionSet {
         cards.add(new SetCardInfo("Tree of Perdition", 109, Rarity.MYTHIC, mage.cards.t.TreeOfPerdition.class));
         cards.add(new SetCardInfo("Turn Aside", 78, Rarity.COMMON, mage.cards.t.TurnAside.class));
         cards.add(new SetCardInfo("Ulrich of the Krallenhorde", 191, Rarity.MYTHIC, mage.cards.u.UlrichOfTheKrallenhorde.class));
-        cards.add(new SetCardInfo("Ulrich, Uncontested Alpha", 191, Rarity.MYTHIC, mage.cards.u.UlrichUncontestedAlpha.class));
-        cards.add(new SetCardInfo("Ulvenwald Abomination", 175, Rarity.COMMON, mage.cards.u.UlvenwaldAbomination.class));
         cards.add(new SetCardInfo("Ulvenwald Captive", 175, Rarity.COMMON, mage.cards.u.UlvenwaldCaptive.class));
         cards.add(new SetCardInfo("Ulvenwald Observer", 176, Rarity.RARE, mage.cards.u.UlvenwaldObserver.class));
         cards.add(new SetCardInfo("Unsubstantiate", 79, Rarity.UNCOMMON, mage.cards.u.Unsubstantiate.class));
@@ -253,7 +239,6 @@ public final class EldritchMoon extends ExpansionSet {
         cards.add(new SetCardInfo("Vexing Scuttler", 11, Rarity.UNCOMMON, mage.cards.v.VexingScuttler.class));
         cards.add(new SetCardInfo("Vildin-Pack Outcast", 148, Rarity.COMMON, mage.cards.v.VildinPackOutcast.class));
         cards.add(new SetCardInfo("Voldaren Pariah", 111, Rarity.RARE, mage.cards.v.VoldarenPariah.class));
-        cards.add(new SetCardInfo("Voracious Reader", 54, Rarity.UNCOMMON, mage.cards.v.VoraciousReader.class));
         cards.add(new SetCardInfo("Wailing Ghoul", 112, Rarity.COMMON, mage.cards.w.WailingGhoul.class));
         cards.add(new SetCardInfo("Waxing Moon", 177, Rarity.COMMON, mage.cards.w.WaxingMoon.class));
         cards.add(new SetCardInfo("Weaver of Lightning", 149, Rarity.UNCOMMON, mage.cards.w.WeaverOfLightning.class));

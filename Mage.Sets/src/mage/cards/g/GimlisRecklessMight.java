@@ -40,7 +40,7 @@ public final class GimlisRecklessMight extends CardImpl {
         )));
 
         // Formidable -- Whenever you attack, if creatures you control have total power 8 or greater, target attacking creature you control fights up to one target creature you don't control.
-        Ability ability = new AttacksWithCreaturesTriggeredAbility(new FightTargetsEffect(), 1)
+        Ability ability = new AttacksWithCreaturesTriggeredAbility(new FightTargetsEffect(false), 1)
                 .withInterveningIf(FormidableCondition.instance);
         ability.addTarget(new TargetPermanent(filter));
         ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));

@@ -7,13 +7,13 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
-import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.PreventDamageEvent;
-import mage.game.events.PreventedDamageEvent;
 import mage.players.Player;
 
 import java.util.UUID;
@@ -46,7 +46,7 @@ public final class BattletideAlchemist extends CardImpl {
 class BattletideAlchemistEffect extends PreventionEffectImpl {
 
     BattletideAlchemistEffect() {
-        super(Duration.WhileOnBattlefield);
+        super(Duration.WhileOnBattlefield, 0, false, false, new PermanentsOnBattlefieldCount(new FilterControlledPermanent(SubType.CLERIC, "Clerics")));
         this.staticText = "If a source would deal damage to a player, you may prevent X of that damage, where X is the number of Clerics you control";
     }
 
@@ -61,27 +61,14 @@ class BattletideAlchemistEffect extends PreventionEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        boolean result = false;
         Player controller = game.getPlayer(source.getControllerId());
         Player targetPlayer = game.getPlayer(event.getTargetId());
         if (controller != null && targetPlayer != null) {
-            int numberOfClericsControlled = new PermanentsOnBattlefieldCount(new FilterControlledPermanent(SubType.CLERIC, "Clerics")).calculate(game, source, this);
-            int toPrevent = Math.min(numberOfClericsControlled, event.getAmount());
-            if (toPrevent > 0 && controller.chooseUse(Outcome.PreventDamage, "Prevent " + toPrevent + " damage to " + targetPlayer.getName() + '?', source, game)) {
-                GameEvent preventEvent = new PreventDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), toPrevent, ((DamageEvent) event).isCombatDamage());
-                if (!game.replaceEvent(preventEvent)) {
-                    if (event.getAmount() >= toPrevent) {
-                        event.setAmount(event.getAmount() - toPrevent);
-                    } else {
-                        event.setAmount(0);
-                        result = true;
-                    }
-                    game.informPlayers("Battletide Alchemist prevented " + toPrevent + " damage to " + targetPlayer.getName());
-                    game.fireEvent(new PreventedDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), toPrevent));
+            if (amountToPrevent > 0 && controller.chooseUse(Outcome.PreventDamage, "Prevent " + amountToPrevent + " damage to " + targetPlayer.getName() + '?', source, game)) {
+                    preventDamageAction(event, source, game);
                 }
             }
-        }
-        return result;
+        return false;
     }
 
     @Override

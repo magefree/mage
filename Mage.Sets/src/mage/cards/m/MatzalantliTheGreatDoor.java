@@ -1,23 +1,25 @@
 package mage.cards.m;
 
+import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.IntCompareCondition;
+import mage.abilities.condition.common.DescendCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
-import mage.abilities.keyword.TransformAbility;
-import mage.cards.CardImpl;
+import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.constants.SuperType;
+import mage.cards.TransformingDoubleFacedCard;
+import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -28,29 +30,40 @@ import java.util.stream.Collectors;
 /**
  * @author Susucr
  */
-public final class MatzalantliTheGreatDoor extends CardImpl {
+public final class MatzalantliTheGreatDoor extends TransformingDoubleFacedCard {
 
     private static final Hint hint = new ValueHint("Permanent types in graveyard", MatzalantliTheGreatDoorValue.instance);
+    private static final DynamicValue xValue = new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_PERMANENT);
 
     public MatzalantliTheGreatDoor(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.secondSideCardClazz = mage.cards.t.TheCore.class;
+        super(ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.ARTIFACT}, new SubType[]{}, "{3}",
+                "The Core",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.LAND}, new SubType[]{}, ""
+        );
 
-        this.supertype.add(SuperType.LEGENDARY);
-
+        // Matzalantli, the Great Door
         // {T}: Draw a card, then discard a card.
-        this.addAbility(new SimpleActivatedAbility(new DrawDiscardControllerEffect(), new TapSourceCost()));
+        this.getLeftHalfCard().addAbility(new SimpleActivatedAbility(new DrawDiscardControllerEffect(), new TapSourceCost()));
 
         // {4}, {T}: Transform Matzalantli, the Great Door. Activate only if there are four or more permanent types among cards in your graveyard.
-        this.addAbility(new TransformAbility());
         Ability ability = new ActivateIfConditionActivatedAbility(
-                new TransformSourceEffect(),
-                new GenericManaCost(4),
-                new MatzalantliTheGreatDoorCondition()
+                new TransformSourceEffect(), new GenericManaCost(4), new MatzalantliTheGreatDoorCondition()
         );
         ability.addCost(new TapSourceCost());
         ability.addHint(hint);
-        this.addAbility(ability);
+        this.getLeftHalfCard().addAbility(ability);
+
+        // The Core
+        // Fathomless descent -- {T}: Add X mana of any one color, where X is the number of permanent cards in your graveyard.
+        this.getRightHalfCard().addSuperType(SuperType.LEGENDARY);
+        Ability manaAbility = new DynamicManaAbility(
+                Mana.AnyMana(1), xValue, new TapSourceCost(),
+                "Add X mana of any one color, where X is the number of permanent cards in your graveyard.", true
+        );
+        manaAbility.setAbilityWord(AbilityWord.FATHOMLESS_DESCENT);
+        manaAbility.addHint(DescendCondition.getHint());
+        this.getRightHalfCard().addAbility(manaAbility);
     }
 
     private MatzalantliTheGreatDoor(final MatzalantliTheGreatDoor card) {
@@ -82,9 +95,6 @@ class MatzalantliTheGreatDoorCondition extends IntCompareCondition {
 
 enum MatzalantliTheGreatDoorValue implements DynamicValue {
     instance;
-
-    MatzalantliTheGreatDoorValue() {
-    }
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {

@@ -16,6 +16,7 @@ import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetpointer.EachTargetPointer;
 
 import java.util.UUID;
 
@@ -40,7 +41,7 @@ public final class DragonsparkReactor extends CardImpl {
                 new DamageTargetEffect(xValue).setText(
                         "it deals damage equal to the number of charge counters on it to target player " +
                                 "and that much damage to up to one target creature"
-                ), new GenericManaCost(4)
+                ).setTargetPointer(new EachTargetPointer()), new GenericManaCost(4)
         );
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetPlayer());

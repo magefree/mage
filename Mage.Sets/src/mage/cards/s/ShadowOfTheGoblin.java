@@ -28,10 +28,9 @@ public final class ShadowOfTheGoblin extends CardImpl {
         
 
         // Unreliable Visions -- At the beginning of your first main phase, discard a card. If you do, draw a card.
-        this.addAbility(new BeginningOfFirstMainTriggeredAbility(
-                new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new DiscardCardCost()), false)
-                .withFlavorWord("Unreliable Visions")
-        );
+        this.addAbility(new BeginningOfFirstMainTriggeredAbility(new DoIfCostPaid(
+                new DrawCardSourceControllerEffect(1), null, new DiscardCardCost(), false
+        ), false).withFlavorWord("Unreliable Visions"));
 
         // Undying Vengeance -- Whenever you play a land or cast a spell from anywhere other than your hand, this enchantment deals 1 damage to each opponent.
         this.addAbility(new ShadowOfTheGoblinTriggeredAbility(new DamagePlayersEffect(1, TargetController.OPPONENT))

@@ -129,8 +129,6 @@ public abstract class GameImpl implements Game {
     // For checking "becomes the target" triggers accurately. Cleared on short living LKI reset
     protected Map<String, Map<UUID, Set<UUID>>> targetedMap = new HashMap<>();
 
-    // Permanents entering the Battlefield while handling replacement effects before they are added to the battlefield
-    protected Map<UUID, Permanent> permanentsEntering = new HashMap<>();
     // used to set the counters a permanent adds the battlefield (if no replacement effect is used e.g. Persist)
     protected Map<UUID, Counters> enterWithCounters = new HashMap<>();
 
@@ -214,7 +212,6 @@ public abstract class GameImpl implements Game {
         this.lkiShortLiving = CardUtil.deepCopyObject(game.lkiShortLiving);
         this.targetedMap = CardUtil.deepCopyObject(game.targetedMap);
 
-        this.permanentsEntering = CardUtil.deepCopyObject(game.permanentsEntering);
         this.enterWithCounters = CardUtil.deepCopyObject(game.enterWithCounters);
 
         this.state = game.state.copy();
@@ -341,13 +338,13 @@ public abstract class GameImpl implements Game {
                 Card rightCard = ((SplitCard) card).getRightHalfCard();
                 rightCard.setOwnerId(ownerId);
                 addCardToState(rightCard);
-            } else if (card instanceof ModalDoubleFacedCard) {
+            } else if (card instanceof DoubleFacedCard) {
                 // left
-                Card leftCard = ((ModalDoubleFacedCard) card).getLeftHalfCard();
+                Card leftCard = ((DoubleFacedCard) card).getLeftHalfCard();
                 leftCard.setOwnerId(ownerId);
                 addCardToState(leftCard);
                 // right
-                Card rightCard = ((ModalDoubleFacedCard) card).getRightHalfCard();
+                Card rightCard = ((DoubleFacedCard) card).getRightHalfCard();
                 rightCard.setOwnerId(ownerId);
                 addCardToState(rightCard);
             } else if (card instanceof CardWithSpellOption) {
@@ -764,12 +761,12 @@ public abstract class GameImpl implements Game {
 
     @Override
     public Permanent getPermanentEntering(UUID permanentId) {
-        return permanentsEntering.get(permanentId);
+        return state.getBattlefield().getPermanentsEntering().get(permanentId);
     }
 
     @Override
     public Map<UUID, Permanent> getPermanentsEntering() {
-        return permanentsEntering;
+        return state.getBattlefield().getPermanentsEntering();
     }
 
     @Override
@@ -2109,6 +2106,7 @@ public abstract class GameImpl implements Game {
             newBluePrint = copyFromPermanent.copy();
 
             // reset to original characteristics
+            newBluePrint.resetLockedStatus(); // reset locked status so room characteristics are correct
             newBluePrint.reset(this);
 
             // workaround to find real copyable characteristics of transformed/facedown/etc permanents
@@ -2118,9 +2116,6 @@ public abstract class GameImpl implements Game {
                 BecomesFaceDownCreatureEffect.makeFaceDownObject(this, null, newBluePrint, faceDownType, null);
             }
             newBluePrint.assignNewId();
-            if (copyFromPermanent.isTransformed()) {
-                TransformAbility.transformPermanent(newBluePrint, this, source);
-            }
             if (copyFromPermanent.isPrototyped()) {
                 Abilities<Ability> abilities = copyFromPermanent.getAbilities();
                 for (Ability ability : abilities) {
@@ -2582,14 +2577,14 @@ public abstract class GameImpl implements Game {
                         }
                     }
                 }
-                if (perm.getPairedCard() != null) {
+                if (perm.getPairedMOR() != null) {
                     //702.93e.: ...another player gains control
                     // ...or the creature it's paired with leaves the battlefield.
-                    Permanent paired = perm.getPairedCard().getPermanent(this);
-                    if (paired == null || !perm.isControlledBy(paired.getControllerId()) || paired.getPairedCard() == null) {
-                        perm.setPairedCard(null);
-                        if (paired != null && paired.getPairedCard() != null) {
-                            paired.setPairedCard(null);
+                    Permanent paired = perm.getPairedMOR().getPermanent(this);
+                    if (paired == null || !perm.isControlledBy(paired.getControllerId()) || paired.getPairedMOR() == null) {
+                        perm.setUnpaired();
+                        if (paired != null && paired.getPairedMOR() != null) {
+                            paired.setUnpaired();
                         }
                         somethingHappened = true;
                     }
@@ -2606,12 +2601,12 @@ public abstract class GameImpl implements Game {
                         }
                     }
                 }
-            } else if (perm.getPairedCard() != null) {
+            } else if (perm.getPairedMOR() != null) {
                 //702.93e.: ...stops being a creature
-                Permanent paired = perm.getPairedCard().getPermanent(this);
-                perm.setPairedCard(null);
+                Permanent paired = perm.getPairedMOR().getPermanent(this);
+                perm.setUnpaired();
                 if (paired != null) {
-                    paired.setPairedCard(null);
+                    paired.setUnpaired();
                 }
                 somethingHappened = true;
             } else if (perm.getBandedCards() != null && !perm.getBandedCards().isEmpty()) {
@@ -3818,7 +3813,7 @@ public abstract class GameImpl implements Game {
             loadCards(ownerId, hand);
             loadCards(ownerId, battlefield
                     .stream()
-                    .map(PutToBattlefieldInfo::getCard)
+                    .map(PutToBattlefieldInfo::getMainCard)
                     .collect(Collectors.toList())
             );
             loadCards(ownerId, graveyard);

@@ -89,7 +89,7 @@ class SelfDestructEffect extends OneShotEffect {
         if (player != null) {
             player.damage(power, creature.getId(), source, game);
         }
-        permanent.damage(power, permanent.getId(), source, game);
+        creature.damage(power, creature.getId(), source, game);
         return true;
     }
 }

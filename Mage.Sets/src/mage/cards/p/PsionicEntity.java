@@ -1,19 +1,17 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.DamageSelfEffect;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.constants.SubType;
+import mage.abilities.effects.common.DamageTargetAndSelfEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
+import mage.constants.SubType;
 import mage.target.common.TargetAnyTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -29,8 +27,7 @@ public final class PsionicEntity extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {tap}: Psionic Entity deals 2 damage to any target and 3 damage to itself.
-        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(2), new TapSourceCost());
-        ability.addEffect(new DamageSelfEffect(3).setText("and 3 damage to itself"));
+        Ability ability = new SimpleActivatedAbility(new DamageTargetAndSelfEffect(2, 3), new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

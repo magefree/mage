@@ -45,7 +45,7 @@ public final class SagesNouliths extends CardImpl {
         this.addAbility(ability);
 
         // Hagneia -- Equip {3}
-        this.addAbility(new EquipAbility(3).withFlavorWord("Hagneia"));
+        this.addAbility(new EquipAbility(3, false).withFlavorWord("Hagneia"));
     }
 
     private SagesNouliths(final SagesNouliths card) {

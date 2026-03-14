@@ -22,7 +22,7 @@ public final class Manabarbs extends CardImpl {
 
         // Whenever a player taps a land for mana, Manabarbs deals 1 damage to that player.
         this.addAbility(new TapForManaAllTriggeredAbility(
-                new DamageTargetEffect(1, true, "that player"),
+                new DamageTargetEffect(1).withTargetDescription("that player"),
                 new FilterLandPermanent("a player taps a land"), SetTargetPointer.PLAYER));
     }
 

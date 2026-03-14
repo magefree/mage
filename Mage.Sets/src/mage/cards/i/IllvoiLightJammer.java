@@ -38,7 +38,7 @@ public final class IllvoiLightJammer extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(1, 2)));
 
         // Equip {1}
-        this.addAbility(new EquipAbility(3));
+        this.addAbility(new EquipAbility(3, false));
     }
 
     private IllvoiLightJammer(final IllvoiLightJammer card) {

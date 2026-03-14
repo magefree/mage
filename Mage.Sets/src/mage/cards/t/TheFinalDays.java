@@ -30,7 +30,7 @@ public final class TheFinalDays extends CardImpl {
 
         // Create two tapped 2/2 black Horror creature tokens. If this spell was cast from a graveyard, instead create X of those tokens, where X is the number of creature cards in your graveyard.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new CreateTokenEffect(new Horror3Token(), xValue), new CreateTokenEffect(new Horror3Token(), 2),
+                new CreateTokenEffect(new Horror3Token(), xValue, true, false), new CreateTokenEffect(new Horror3Token(), 2, true),
                 CastFromGraveyardSourceCondition.instance, "create two tapped 2/2 black Horror creature tokens. " +
                 "If this spell was cast from a graveyard, instead create X of those tokens, " +
                 "where X is the number of creature cards in your graveyard"

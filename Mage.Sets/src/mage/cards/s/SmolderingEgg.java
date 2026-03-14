@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.AbilityImpl;
@@ -11,19 +10,21 @@ import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.RemoveAllCountersSourceEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
-import mage.abilities.keyword.TransformAbility;
-import mage.cards.CardImpl;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.stack.Spell;
+import mage.target.common.TargetAnyTarget;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -31,24 +32,24 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class SmolderingEgg extends CardImpl {
+public final class SmolderingEgg extends TransformingDoubleFacedCard {
 
     private static final Condition condition = new SourceHasCounterCondition(CounterType.EMBER, 7);
 
     public SmolderingEgg(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.DRAGON, SubType.EGG}, "{1}{R}",
+                "Ashmouth Dragon",
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.DRAGON}, "R"
+        );
 
-        this.subtype.add(SubType.DRAGON);
-        this.subtype.add(SubType.EGG);
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(4);
-        this.secondSideCardClazz = mage.cards.a.AshmouthDragon.class;
+        // Smoldering Egg
+        this.getLeftHalfCard().setPT(0, 4);
 
         // Defender
-        this.addAbility(DefenderAbility.getInstance());
+        this.getLeftHalfCard().addAbility(DefenderAbility.getInstance());
 
         // Whenever you cast an instant or sorcery spell, put a number of ember counters on Smoldering Egg equal to the amount of mana spent to cast that spell. Then if Smoldering Egg has seven or more ember counters on it, remove them and transform Smoldering Egg.
-        this.addAbility(new TransformAbility());
         Ability ability = new SpellCastControllerTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.EMBER.createInstance(), SmolderingEggValue.instance)
                         .setText("put a number of ember counters on {this} equal to the amount of mana spent to cast that spell"),
@@ -58,7 +59,20 @@ public final class SmolderingEgg extends CardImpl {
                 new RemoveAllCountersSourceEffect(CounterType.EMBER), condition,
                 "Then if {this} has seven or more ember counters on it, remove them and transform {this}"
         ).addEffect(new TransformSourceEffect()));
-        this.addAbility(ability);
+        this.getLeftHalfCard().addAbility(ability);
+
+        // Ashmouth Dragon
+        this.getRightHalfCard().setPT(4, 4);
+
+        // Flying
+        this.getRightHalfCard().addAbility(FlyingAbility.getInstance());
+
+        // Whenever you cast an instant or sorcery spell, Ashmouth Dragon deals 2 damage to any target.
+        Ability ability2 = new SpellCastControllerTriggeredAbility(
+                new DamageTargetEffect(2), StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, false
+        );
+        ability2.addTarget(new TargetAnyTarget());
+        this.getRightHalfCard().addAbility(ability2);
     }
 
     private SmolderingEgg(final SmolderingEgg card) {

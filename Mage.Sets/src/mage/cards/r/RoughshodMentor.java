@@ -1,7 +1,5 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
@@ -10,11 +8,13 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -22,7 +22,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public final class RoughshodMentor extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("Green creatures");
+    private static final FilterPermanent filter = new FilterCreaturePermanent("Green creatures");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.GREEN));

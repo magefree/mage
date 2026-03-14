@@ -1,17 +1,20 @@
 package mage.cards.p;
 
+import mage.MageInt;
 import mage.MageObject;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.Ability;
+import mage.abilities.common.DiesCreatureTriggeredAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -24,7 +27,11 @@ public final class ProperBurial extends CardImpl {
 
 
         // Whenever a creature you control dies, you gain life equal to that creature's toughness.
-        this.addAbility(new ProperBurialTriggeredAbility());
+        this.addAbility(new DiesCreatureTriggeredAbility(
+            new GainLifeEffect(ProperBurialValue.instance, "you gain life equal to that creature's toughness"),
+            false,
+            StaticFilters.FILTER_CONTROLLED_CREATURE
+        ));
     }
 
     private ProperBurial(final ProperBurial card) {
@@ -37,50 +44,30 @@ public final class ProperBurial extends CardImpl {
     }
 }
 
-class ProperBurialTriggeredAbility extends TriggeredAbilityImpl {
+enum ProperBurialValue implements DynamicValue {
+    instance;
 
-    public ProperBurialTriggeredAbility() {
-        super(Zone.BATTLEFIELD, null);
-        setLeavesTheBattlefieldTrigger(true);
-    }
-
-    private ProperBurialTriggeredAbility(final ProperBurialTriggeredAbility ability) {
-        super(ability);
+    @Override
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        return Optional
+                .ofNullable((Permanent) effect.getValue("creatureDied"))
+                .map(MageObject::getToughness)
+                .map(MageInt::getValue)
+                .orElse(0);
     }
 
     @Override
-    public ProperBurialTriggeredAbility copy() {
-        return new ProperBurialTriggeredAbility(this);
+    public ProperBurialValue copy() {
+        return this;
     }
 
     @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
+    public String getMessage() {
+        return "equal to that creature's toughness";
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        ZoneChangeEvent zoneChangeEvent = (ZoneChangeEvent) event;
-        if (zoneChangeEvent.isDiesEvent()) {
-            Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (permanent != null
-                    && permanent.isControlledBy(this.getControllerId())
-                    && permanent.isCreature(game)) {
-                this.getEffects().clear();
-                this.addEffect(new GainLifeEffect(permanent.getToughness().getValue()));
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a creature you control dies, you gain life equal to that creature's toughness.";
-    }
-
-    @Override
-    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
-        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
+    public String toString() {
+        return "equal to that creature's toughness";
     }
 }

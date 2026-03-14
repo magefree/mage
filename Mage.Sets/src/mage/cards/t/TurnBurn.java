@@ -1,7 +1,6 @@
 
 package mage.cards.t;
 
-import mage.MageInt;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
@@ -11,7 +10,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SpellAbilityType;
 import mage.constants.SubType;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -28,8 +27,12 @@ public final class TurnBurn extends SplitCard {
 
         // Turn
         // Until end of turn, target creature loses all abilities and becomes a red Weird with base power and toughness 0/1.
-        Effect effect = new BecomesCreatureTargetEffect(new WeirdToken(), true, false, Duration.EndOfTurn)
-                .withDurationRuleAtStart(true);
+        Effect effect = new BecomesCreatureTargetEffect(
+            new CreatureToken(0, 1, "red Weird with base power and toughness 0/1", SubType.WEIRD).withColor("R"),
+            true,
+            false,
+            Duration.EndOfTurn
+        ).withDurationRuleAtStart(true);
         getLeftHalfCard().getSpellAbility().addEffect(effect);
         getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent().withChooseHint("becomes a Weird"));
 
@@ -48,25 +51,4 @@ public final class TurnBurn extends SplitCard {
     public TurnBurn copy() {
         return new TurnBurn(this);
     }
-
-    private static class WeirdToken extends TokenImpl {
-
-        private WeirdToken() {
-            super("Weird", "red Weird with base power and toughness 0/1");
-            cardType.add(CardType.CREATURE);
-            color.setRed(true);
-            subtype.add(SubType.WEIRD);
-            power = new MageInt(0);
-            toughness = new MageInt(1);
-        }
-        private WeirdToken(final WeirdToken token) {
-            super(token);
-        }
-
-        public WeirdToken copy() {
-            return new WeirdToken(this);
-        }
-
-    }
-
 }

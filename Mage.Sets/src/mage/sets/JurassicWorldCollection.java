@@ -50,7 +50,6 @@ public final class JurassicWorldCollection extends ExpansionSet {
         cards.add(new SetCardInfo("Indoraptor, the Perfect Hybrid", 40, Rarity.RARE, mage.cards.i.IndoraptorThePerfectHybrid.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 22, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Island", "22b", Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
-        cards.add(new SetCardInfo("Jurassic Park", 7, Rarity.RARE, mage.cards.j.JurassicPark.class));
         cards.add(new SetCardInfo("Life Finds a Way", 31, Rarity.RARE, mage.cards.l.LifeFindsAWay.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Life Finds a Way", 5, Rarity.RARE, mage.cards.l.LifeFindsAWay.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 24, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));

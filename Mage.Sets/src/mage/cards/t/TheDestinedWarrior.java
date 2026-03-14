@@ -55,7 +55,7 @@ public final class TheDestinedWarrior extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Cleric, Rogue, Warrior, and Wizard spells you cast cost {1} less to cast.
         this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)));

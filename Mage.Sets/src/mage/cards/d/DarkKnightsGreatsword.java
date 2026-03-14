@@ -37,7 +37,7 @@ public final class DarkKnightsGreatsword extends CardImpl {
         this.addAbility(ability);
 
         // Chaosbringer -- Equip--Pay 3 life. Activate only once each turn.
-        EquipAbility equipAbility = new EquipAbility(Outcome.BoostCreature, new PayLifeCost(3));
+        EquipAbility equipAbility = new EquipAbility(Outcome.BoostCreature, new PayLifeCost(3), false);
         equipAbility.setMaxActivationsPerTurn(1);
         this.addAbility(equipAbility.withFlavorWord("Chaosbringer"));
     }

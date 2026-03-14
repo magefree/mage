@@ -36,7 +36,7 @@ public final class ChandraTheFirebrand extends CardImpl {
         ));
 
         // -6: Chandra, the Firebrand deals 6 damage to each of up to six target creatures and/or players
-        LoyaltyAbility ability2 = new LoyaltyAbility(new DamageTargetEffect(6, true, "each of up to six targets"), -6);
+        LoyaltyAbility ability2 = new LoyaltyAbility(new DamageTargetEffect(6).withTargetDescription("each of up to six targets"), -6);
         ability2.addTarget(new TargetAnyTarget(0, 6));
         this.addAbility(ability2);
     }

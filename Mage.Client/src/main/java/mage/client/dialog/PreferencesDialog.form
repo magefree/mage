@@ -2115,6 +2115,9 @@
                   </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtBackgroundImagePath">
+                  <Properties>
+                    <Property name="toolTipText" type="java.lang.String" value="The selected image will be used as the background picture. Requires client restart to see changes."/>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnBrowseBackgroundImage">
                   <Properties>
@@ -2254,16 +2257,13 @@
               <SubComponents>
                 <Component class="javax.swing.JCheckBox" name="cbUseDefaultImageFolder">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Use default location to save images"/>
+                    <Property name="text" type="java.lang.String" value="Use default location to save card images"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbUseDefaultImageFolderActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtImageFolderPath">
-                  <Properties>
-                    <Property name="toolTipText" type="java.lang.String" value="The selected image will be used as background picture. You have to restart MAGE to view a changed background image."/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnBrowseImageLocation">
                   <Properties>

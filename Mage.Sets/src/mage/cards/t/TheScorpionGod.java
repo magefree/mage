@@ -1,12 +1,10 @@
-
 package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
@@ -22,12 +20,10 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -39,6 +35,12 @@ import static mage.filter.StaticFilters.FILTER_ANOTHER_TARGET_CREATURE;
  */
 public final class TheScorpionGod extends CardImpl {
 
+    private static final FilterPermanent filter = new FilterCreaturePermanent("a creature with a -1/-1 counter on it");
+
+    static {
+        filter.add(CounterType.M1M1.getPredicate());
+    }
+
     public TheScorpionGod(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{R}");
 
@@ -48,7 +50,9 @@ public final class TheScorpionGod extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Whenever a creature with a -1/-1 counter on it dies, draw a card.
-        this.addAbility(new TheScorpionGodTriggeredAbility());
+        this.addAbility(new DiesCreatureTriggeredAbility(
+                new DrawCardSourceControllerEffect(1), false, filter
+        ));
 
         // {1}{B}{R}: Put a -1/-1 counter on another target creature.
         Ability ability = new SimpleActivatedAbility(new AddCountersTargetEffect(CounterType.M1M1.createInstance()), new ManaCostsImpl<>("{1}{B}{R}"));
@@ -66,52 +70,6 @@ public final class TheScorpionGod extends CardImpl {
     @Override
     public TheScorpionGod copy() {
         return new TheScorpionGod(this);
-    }
-}
-
-class TheScorpionGodTriggeredAbility extends TriggeredAbilityImpl {
-
-    public TheScorpionGodTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), false);
-        setLeavesTheBattlefieldTrigger(true);
-    }
-
-    private TheScorpionGodTriggeredAbility(final TheScorpionGodTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public TheScorpionGodTriggeredAbility copy() {
-        return new TheScorpionGodTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.isDiesEvent()) {
-            Permanent permanent = game.getPermanentOrLKIBattlefield(zEvent.getTargetId());
-            if (permanent != null
-                    && permanent.isCreature(game)
-                    && permanent.getCounters(game).containsKey(CounterType.M1M1)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a creature with a -1/-1 counter on it dies, draw a card.";
-    }
-
-    @Override
-    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
-        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
     }
 }
 

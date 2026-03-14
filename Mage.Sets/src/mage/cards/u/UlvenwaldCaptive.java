@@ -1,15 +1,15 @@
-
 package mage.cards.u;
 
-import mage.MageInt;
+import mage.Mana;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
-import mage.abilities.keyword.TransformAbility;
 import mage.abilities.mana.GreenManaAbility;
-import mage.cards.CardImpl;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
@@ -19,26 +19,32 @@ import java.util.UUID;
 /**
  * @author fireshoes
  */
-public final class UlvenwaldCaptive extends CardImpl {
+public final class UlvenwaldCaptive extends TransformingDoubleFacedCard {
 
     public UlvenwaldCaptive(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.subtype.add(SubType.WEREWOLF);
-        this.subtype.add(SubType.HORROR);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(2);
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.WEREWOLF, SubType.HORROR}, "{1}{G}",
+                "Ulvenwald Abomination",
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.ELDRAZI, SubType.WEREWOLF}, ""
+        );
 
-        this.secondSideCardClazz = mage.cards.u.UlvenwaldAbomination.class;
+        // Ulvenwald Captive
+        this.getLeftHalfCard().setPT(1, 2);
 
         // Defender
-        this.addAbility(DefenderAbility.getInstance());
+        this.getLeftHalfCard().addAbility(DefenderAbility.getInstance());
 
         // {T}: Add {G}.
-        this.addAbility(new GreenManaAbility());
+        this.getLeftHalfCard().addAbility(new GreenManaAbility());
 
         // {5}{G}{G}: Transform Ulvenwald Captive.
-        this.addAbility(new TransformAbility());
-        this.addAbility(new SimpleActivatedAbility(new TransformSourceEffect(), new ManaCostsImpl<>("{5}{G}{G}")));
+        this.getLeftHalfCard().addAbility(new SimpleActivatedAbility(new TransformSourceEffect(), new ManaCostsImpl<>("{5}{G}{G}")));
+
+        // Ulvenwald Abomination
+        this.getRightHalfCard().setPT(4, 6);
+
+        // {T}: Add {C}{C}.
+        this.getRightHalfCard().addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(2), new TapSourceCost()));
     }
 
     private UlvenwaldCaptive(final UlvenwaldCaptive card) {

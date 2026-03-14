@@ -12,12 +12,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -35,7 +31,7 @@ public final class Sarcatog extends CardImpl {
         // Exile two cards from your graveyard: Sarcatog gets +1/+1 until end of turn.
         this.addAbility(new SimpleActivatedAbility(
                 new BoostSourceEffect(1,1, Duration.EndOfTurn),
-                new ExileFromGraveCost(new TargetCardInYourGraveyard(2,new FilterCard("cards")))));
+                new ExileFromGraveCost(new TargetCardInYourGraveyard(2, StaticFilters.FILTER_CARD_CARDS))));
 
         // Sacrifice an artifact: Sarcatog gets +1/+1 until end of turn.
         this.addAbility(new SimpleActivatedAbility(

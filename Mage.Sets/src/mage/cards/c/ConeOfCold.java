@@ -2,7 +2,7 @@ package mage.cards.c;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DontUntapInControllersUntapStepTargetEffect;
+import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.effects.common.PermanentsEnterBattlefieldTappedEffect;
 import mage.abilities.effects.common.RollDieWithResultTableEffect;
 import mage.abilities.effects.common.TapAllEffect;
@@ -42,7 +42,7 @@ public final class ConeOfCold extends CardImpl {
                 20, 20,
                 new TapAllEffect(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURES), new ConeOfColdEffect(),
                 new PermanentsEnterBattlefieldTappedEffect(
-                        StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURES, Duration.EndOfTurn
+                        StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURES, Duration.UntilYourNextTurn
                 ).setText("Until your next turn, creatures your opponents control enter the battlefield tapped")
         );
 
@@ -77,7 +77,7 @@ class ConeOfColdEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        game.addEffect(new DontUntapInControllersUntapStepTargetEffect(Duration.EndOfTurn)
+        game.addEffect(new DontUntapInControllersNextUntapStepTargetEffect()
                 .setTargetPointer(new FixedTargets(
                         game.getBattlefield().getActivePermanents(
                                 StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURES,

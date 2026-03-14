@@ -25,10 +25,19 @@ public final class CardImageUtils {
     private static final Logger LOGGER = Logger.getLogger(CardImageUtils.class);
 
     public static String prepareCardNameForFile(String cardName) {
+        // remove characters that are invalid in Windows file names: \ / : * ? " < > |
+        // note: // is used in split card names like "Fire // Ice" and replaced with -
         return cardName
+                .replace("//", "-")
+                .replace("\\", "")
+                .replace("/", "")
                 .replace(":", "")
+                .replace("*", "")
+                .replace("?", "")
                 .replace("\"", "")
-                .replace("//", "-");
+                .replace("<", "")
+                .replace(">", "")
+                .replace("|", "");
     }
 
     public static String getImagesDir() {

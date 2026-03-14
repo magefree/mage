@@ -10,14 +10,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 
 /**
  * @author noxx
  */
 public final class WolfirSilverheart extends CardImpl {
-
-    private static final String ruleText = "As long as {this} is paired with another creature, each of those creatures gets +4/+4";
 
     public WolfirSilverheart(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
@@ -31,7 +28,7 @@ public final class WolfirSilverheart extends CardImpl {
         this.addAbility(new SoulbondAbility());
 
         // As long as Wolfir Silverheart is paired with another creature, each of those creatures gets +4/+4.
-        this.addAbility(new SimpleStaticAbility(new BoostPairedEffect(4, 4, ruleText)));
+        this.addAbility(new SimpleStaticAbility(new BoostPairedEffect(4, 4)));
     }
 
     private WolfirSilverheart(final WolfirSilverheart card) {

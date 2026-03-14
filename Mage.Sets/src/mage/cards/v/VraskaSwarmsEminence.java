@@ -19,7 +19,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.AssassinToken2;
+import mage.game.permanent.token.AssassinDeathtouchToken;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
@@ -42,7 +42,7 @@ public final class VraskaSwarmsEminence extends CardImpl {
         );
 
         // -2: Create a 1/1 black Assassin creature token with deathtouch and "Whenever this creature deals damage to a planeswalker, destroy that planeswalker."
-        this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new AssassinToken2()), -2));
+        this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new AssassinDeathtouchToken()), -2));
     }
 
     private VraskaSwarmsEminence(final VraskaSwarmsEminence card) {

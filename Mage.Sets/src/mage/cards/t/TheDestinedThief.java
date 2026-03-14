@@ -21,6 +21,7 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
+import mage.game.events.DamagedBatchForPlayersEvent;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.target.TargetPermanent;
@@ -72,7 +73,7 @@ class TheDestinedThiefTriggeredAbility extends TriggeredAbilityImpl implements B
                 new DrawDiscardControllerEffect(1, 1),
                 FullPartyCondition.instance, "draw a card, then discard a card. " +
                 "If you have a full party, instead draw three cards"
-        ), true);
+        ), false);
         setTriggerPhrase("Whenever one or more creatures you control deal combat damage to one or more players, ");
     }
 
@@ -92,7 +93,7 @@ class TheDestinedThiefTriggeredAbility extends TriggeredAbilityImpl implements B
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return true;
+        return !getFilteredEvents((DamagedBatchForPlayersEvent) event, game).isEmpty();
     }
 
     @Override

@@ -35,8 +35,7 @@ public final class ArcaneDenial extends CardImpl {
         // You draw a card at the beginning of the next turn's upkeep.
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(
                 new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(
-                        new DrawCardSourceControllerEffect(1)
-                                .setText("you draw a card")
+                        new DrawCardSourceControllerEffect(1, true)
                 ), false).concatBy("<br>")
         );
     }

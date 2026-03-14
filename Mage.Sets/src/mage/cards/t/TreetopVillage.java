@@ -1,6 +1,5 @@
 package mage.cards.t;
 
-import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -12,8 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 
 import java.util.UUID;
 
@@ -32,7 +30,15 @@ public final class TreetopVillage extends CardImpl {
         this.addAbility(new GreenManaAbility());
 
         // {1}{G}: Treetop Village becomes a 3/3 green Ape creature with trample until end of turn. It’s still a land. (It can deal excess combat damage to the player or planeswalker it’s attacking.)
-        this.addAbility(new SimpleActivatedAbility(new BecomesCreatureSourceEffect(new ApeToken(), CardType.LAND, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{G}")));
+        this.addAbility(new SimpleActivatedAbility(
+            new BecomesCreatureSourceEffect(
+                new CreatureToken(3, 3, "3/3 green Ape creature with trample", SubType.APE)
+                    .withColor("G").withAbility(TrampleAbility.getInstance()),
+                CardType.LAND,
+                Duration.EndOfTurn
+            ),
+            new ManaCostsImpl<>("{1}{G}")
+        ));
     }
 
     private TreetopVillage(final TreetopVillage card) {
@@ -42,25 +48,5 @@ public final class TreetopVillage extends CardImpl {
     @Override
     public TreetopVillage copy() {
         return new TreetopVillage(this);
-    }
-}
-
-class ApeToken extends TokenImpl {
-    ApeToken() {
-        super("Ape", "3/3 green Ape creature with trample");
-        cardType.add(CardType.CREATURE);
-        this.subtype.add(SubType.APE);
-        color.setGreen(true);
-        power = new MageInt(3);
-        toughness = new MageInt(3);
-        this.addAbility(TrampleAbility.getInstance());
-    }
-
-    private ApeToken(final ApeToken token) {
-        super(token);
-    }
-
-    public ApeToken copy() {
-        return new ApeToken(this);
     }
 }
