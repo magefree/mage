@@ -6,18 +6,14 @@ import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedByMoreThanOneAllEffect;
-import mage.abilities.effects.common.combat.CantBeBlockedByMoreThanOneSourceEffect;
-import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.CounterAnyPredicate;
 import mage.game.permanent.token.MutagenToken;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 
 /**
  *
@@ -25,7 +21,7 @@ import mage.constants.Duration;
  */
 public final class MichelangeloMutantBFF extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you control with a counter on it");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature you control with a counter on it");
 
     static {
         filter.add(CounterAnyPredicate.instance);

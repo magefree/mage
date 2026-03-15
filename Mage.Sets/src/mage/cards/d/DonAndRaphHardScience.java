@@ -30,7 +30,7 @@ public final class DonAndRaphHardScience extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever Don & Raph attack, the next noncreature spell you cast this turn has affinity for artifacts.
         this.addAbility(new AttacksTriggeredAbility(new NextSpellCastHasAbilityEffect(

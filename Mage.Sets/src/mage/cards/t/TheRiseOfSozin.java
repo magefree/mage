@@ -71,7 +71,7 @@ public final class TheRiseOfSozin extends TransformingDoubleFacedCard {
         this.getRightHalfCard().setPT(5, 5);
 
         // Menace
-        this.getRightHalfCard().addAbility(new MenaceAbility());
+        this.getRightHalfCard().addAbility(new MenaceAbility(false));
 
         // Firebending 3
         this.getRightHalfCard().addAbility(new FirebendingAbility(3));

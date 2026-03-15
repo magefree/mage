@@ -43,7 +43,7 @@ public final class LitaLittleOrphanAmphibian extends CardImpl {
         ability.addMode(new Mode(new CreateTokenEffect(new FoodToken())).setModeTag("create a Food token"));
 
         // * Scry 1.
-        ability.addMode(new Mode(new ScryEffect(1)).setModeTag("scry 1"));
+        ability.addMode(new Mode(new ScryEffect(1, false)).setModeTag("scry 1"));
 
         this.addAbility(ability.addHint(ModesAlreadyUsedHint.instance));
     }

@@ -41,7 +41,7 @@ public final class EyeOfNidhogg extends CardImpl {
 
         // Enchanted creature is a black Dragon with base power and toughness 4/2, has flying and deathtouch, and is goaded.
         Ability ability = new SimpleStaticAbility(new SetCardColorAttachedEffect(
-                ObjectColor.BLACK, Duration.WhileControlled, AttachmentType.AURA
+                ObjectColor.BLACK, Duration.WhileOnBattlefield, AttachmentType.AURA
         ).setText("enchanted creature is a black Dragon"));
         ability.addEffect(new AddCardSubtypeAttachedEffect(
                 SubType.DRAGON, AttachmentType.AURA

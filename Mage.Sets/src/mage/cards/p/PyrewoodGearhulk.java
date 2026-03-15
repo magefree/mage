@@ -33,7 +33,7 @@ public final class PyrewoodGearhulk extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // When this creature enters, other creatures you control get +2/+2 and gain vigilance and menace until end of turn. Damage can't be prevented this turn.
         Ability ability = new EntersBattlefieldTriggeredAbility(new BoostControlledEffect(

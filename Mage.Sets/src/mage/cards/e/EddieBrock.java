@@ -62,7 +62,7 @@ public final class EddieBrock extends ModalDoubleFacedCard {
 
         // Venom, Lethal Protector
         // Menace
-        this.getRightHalfCard().addAbility(new MenaceAbility());
+        this.getRightHalfCard().addAbility(new MenaceAbility(false));
 
         // Trample
         this.getRightHalfCard().addAbility(TrampleAbility.getInstance());

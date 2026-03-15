@@ -49,7 +49,7 @@ public final class PatrollingPeacemaker extends CardImpl {
 class PatrollingPeacemakerTriggeredAbility extends TriggeredAbilityImpl {
 
     PatrollingPeacemakerTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new ProliferateEffect());
+        super(Zone.BATTLEFIELD, new ProliferateEffect(false));
         setTriggerPhrase("Whenever an opponent commits a crime, ");
     }
 

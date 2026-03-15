@@ -37,7 +37,7 @@ public final class SplinterTheMentor extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever Splinter or another nontoken creature you control leaves the battlefield, create a Mutagen token.
         this.addAbility(new LeavesBattlefieldAllTriggeredAbility(new CreateTokenEffect(new MutagenToken()), filter));

@@ -46,7 +46,7 @@ public final class ExtricatorOfSin extends TransformingDoubleFacedCard {
     public ExtricatorOfSin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,
                 new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.CLERIC}, "{2}{W}",
-                "Extricator Of Flesh",
+                "Extricator of Flesh",
                 new CardType[]{CardType.CREATURE}, new SubType[]{SubType.ELDRAZI, SubType.HORROR}, ""
         );
 
