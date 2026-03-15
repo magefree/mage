@@ -888,7 +888,7 @@ public class Spell extends StackObjectImpl implements Card {
                 continue;
             }
             SpellAbility newAbility = spellAbility.copy(); // e.g. spliced spell
-            newAbility.newId();
+            newAbility.newIdKeepingLinkage();
             newAbility.setSourceId(copiedSourceId);
             spellCopy.addSpellAbility(newAbility);
         }

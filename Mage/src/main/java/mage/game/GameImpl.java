@@ -2189,7 +2189,12 @@ public abstract class GameImpl implements Game {
             }
         } else {
             TriggeredAbility newAbility = ability.copy();
-            newAbility.newId();
+            if (newAbility instanceof AbilityImpl) {
+                // keep linkage id stable for linked-ability tags across stack copies
+                ((AbilityImpl) newAbility).newIdKeepingLinkage();
+            } else {
+                newAbility.newId();
+            }
             newAbility.initSourceObjectZoneChangeCounter(this, false);
             if (!(newAbility instanceof DelayedTriggeredAbility)) {
                 newAbility.setSourcePermanentTransformCount(this);
@@ -2246,7 +2251,12 @@ public abstract class GameImpl implements Game {
             delayedAbility.setControllerId(source.getControllerId());
         }
         DelayedTriggeredAbility newAbility = delayedAbility.copy();
-        newAbility.newId();
+        if (newAbility instanceof AbilityImpl) {
+            // keep linkage id stable for linked-ability tags across stack copies
+            ((AbilityImpl) newAbility).newIdKeepingLinkage();
+        } else {
+            newAbility.newId();
+        }
         if (source != null) {
             // Relevant ruling:
             // 603.7e If an activated or triggered ability creates a delayed triggered ability,

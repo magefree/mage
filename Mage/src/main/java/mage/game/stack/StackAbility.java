@@ -745,7 +745,12 @@ public class StackAbility extends StackObjectImpl implements Ability {
     @Override
     public void createSingleCopy(UUID newControllerId, StackObjectCopyApplier applier, MageObjectReferencePredicate newTargetFilterPredicate, Game game, Ability source, boolean chooseNewTargets) {
         Ability newAbility = this.ability.copy();
-        newAbility.newId();
+        if (newAbility instanceof AbilityImpl) {
+            // keep linkage id stable for linked-ability tags across stack copies
+            ((AbilityImpl) newAbility).newIdKeepingLinkage();
+        } else {
+            newAbility.newId();
+        }
         newAbility.setControllerId(newControllerId);
 
         StackAbility newStackAbility = new StackAbility(newAbility, newControllerId);
