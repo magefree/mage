@@ -4,7 +4,6 @@ import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.costs.*;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -12,9 +11,13 @@ import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -24,10 +27,19 @@ public class OffspringAbility extends StaticAbility implements OptionalAdditiona
     private static final String keywordText = "Offspring";
     private static final String reminderText = "You may pay an additional %s as you cast this spell. If you do, when this creature enters, create a 1/1 token copy of it.";
     private final String rule;
+    private final OffspringTriggeredAbility offspringTriggeredAbility;
 
     public static final String OFFSPRING_ACTIVATION_VALUE_KEY = "offspringActivation";
 
     protected OptionalAdditionalCost additionalCost;
+
+    static String getActivationValueKey(Ability ability) {
+        return CardUtil.getLinkedCostTag(ability, OFFSPRING_ACTIVATION_VALUE_KEY);
+    }
+
+    String getActivationValueKey() {
+        return getActivationValueKey(offspringTriggeredAbility);
+    }
 
     public OffspringAbility(String manaString) {
         this(new ManaCostsImpl<>(manaString));
@@ -41,15 +53,20 @@ public class OffspringAbility extends StaticAbility implements OptionalAdditiona
         );
         this.additionalCost.setRepeatable(false);
         this.rule = additionalCost.getName() + ' ' + additionalCost.getReminderText();
+        this.offspringTriggeredAbility = new OffspringTriggeredAbility();
+        this.addSubAbility(offspringTriggeredAbility);
         this.setRuleAtTheTop(true);
-        this.addSubAbility(new EntersBattlefieldTriggeredAbility(new OffspringEffect())
-                .withInterveningIf(OffspringCondition.instance).setRuleVisible(false));
     }
 
     private OffspringAbility(final OffspringAbility ability) {
         super(ability);
         this.rule = ability.rule;
         this.additionalCost = ability.additionalCost.copy();
+        this.offspringTriggeredAbility = this.getSubAbilities().stream()
+                .filter(OffspringTriggeredAbility.class::isInstance)
+                .map(OffspringTriggeredAbility.class::cast)
+                .findFirst()
+                .orElseThrow(() -> new IllegalStateException("Offspring triggered ability wasn't found"));
     }
 
     @Override
@@ -75,7 +92,7 @@ public class OffspringAbility extends StaticAbility implements OptionalAdditiona
         for (Cost cost : ((Costs<Cost>) additionalCost)) {
             ability.getCosts().add(cost.copy());
         }
-        ability.setCostsTag(OFFSPRING_ACTIVATION_VALUE_KEY, null);
+        ability.setCostsTag(getActivationValueKey(), null);
     }
 
     @Override
@@ -87,6 +104,7 @@ public class OffspringAbility extends StaticAbility implements OptionalAdditiona
     public String getRule() {
         return rule;
     }
+
 }
 
 class OffspringEffect extends OneShotEffect {
@@ -107,7 +125,14 @@ class OffspringEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = source.getSourcePermanentOrLKI(game);
+        Permanent permanent = null;
+        List<UUID> pointerTargets = getTargetPointer().getTargets(game, source);
+        if (pointerTargets != null && !pointerTargets.isEmpty()) {
+            permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
+        }
+        if (permanent == null) {
+            permanent = source.getSourcePermanentOrLKI(game);
+        }
         return permanent != null && new CreateTokenCopyTargetEffect(
                 null, null, false, 1, false,
                 false, null, 1, 1, false
@@ -115,16 +140,30 @@ class OffspringEffect extends OneShotEffect {
     }
 }
 
-enum OffspringCondition implements Condition {
-    instance;
+class OffspringTriggeredAbility extends EntersBattlefieldTriggeredAbility {
 
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return CardUtil.checkSourceCostsTagExists(game, source, OffspringAbility.OFFSPRING_ACTIVATION_VALUE_KEY);
+    OffspringTriggeredAbility() {
+        super(new OffspringEffect(), false);
+        setTriggerPhrase("When this permanent enters, ");
+        this.setRuleVisible(false);
+    }
+
+    private OffspringTriggeredAbility(final OffspringTriggeredAbility ability) {
+        super(ability);
     }
 
     @Override
-    public String toString() {
-        return "its offspring cost was paid";
+    public OffspringTriggeredAbility copy() {
+        return new OffspringTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (!super.checkTrigger(event, game)) {
+            return false;
+        }
+        return CardUtil.checkSourceCostsTagExists(
+                game, this, OffspringAbility.getActivationValueKey(this)
+        );
     }
 }
