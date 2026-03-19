@@ -29,9 +29,6 @@ public final class SpectacularShowdown extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}");
 
         // Put a double strike counter on target creature, then goad each creature that had a double strike counter put on it this way.
-        this.getSpellAbility().addEffect(new SpectacularShowdownEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-
         // Overload {4}{R}{R}{R}
         OverloadAbility.ImplementOverloadAbility(this, new ManaCostsImpl<>("{4}{R}{R}{R}"),
                 new TargetCreaturePermanent(), new SpectacularShowdownEffect());
