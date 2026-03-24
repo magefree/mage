@@ -21,7 +21,8 @@ public enum MageTray {
 
     private int state = 0;
 
-    public void install() {
+    
+        public void install() {
         if (!SystemTray.isSupported()) {
             log.warn("SystemTray is not supported");
             return;
@@ -40,7 +41,15 @@ public enum MageTray {
                 frame.setState(Frame.NORMAL);
             });
 
-            final SystemTray tray = SystemTray.getSystemTray();
+            // --- YOUR FIX STARTS HERE ---
+            final SystemTray tray;
+            try {
+                tray = SystemTray.getSystemTray();
+            } catch (UnsupportedOperationException e) {
+                log.warn("SystemTray is supported but not available: " + e.getMessage());
+                return; // Exit safely if the OS lies about SystemTray support
+            }
+            // --- YOUR FIX ENDS HERE ---
 
             final PopupMenu popup = new PopupMenu();
 
@@ -52,15 +61,10 @@ public enum MageTray {
             MenuItem exitItem = new MenuItem("Exit");
 
             imagesItem.addActionListener(e -> MageFrame.getInstance().downloadImages());
-
             iconsItem.addActionListener(e -> MageFrame.getInstance().downloadAdditionalResources());
-
             stopBlinkItem.addActionListener(e -> stopBlink());
-
             preferencesItem.addActionListener(e -> MageFrame.getInstance().btnPreferencesActionPerformed(null));
-
             aboutItem.addActionListener(e -> MageFrame.getInstance().btnAboutActionPerformed(null));
-
             exitItem.addActionListener(e -> MageFrame.getInstance().exitApp());
 
             popup.add(imagesItem);
