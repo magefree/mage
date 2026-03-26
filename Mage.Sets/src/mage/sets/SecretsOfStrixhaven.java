@@ -30,5 +30,6 @@ public final class SecretsOfStrixhaven extends ExpansionSet {
         cards.add(new SetCardInfo("Pull from the Grave", 95, Rarity.COMMON, mage.cards.p.PullFromTheGrave.class));
         cards.add(new SetCardInfo("Shattered Acolyte", 31, Rarity.COMMON, mage.cards.s.ShatteredAcolyte.class));
         cards.add(new SetCardInfo("Silverquill Charm", 225, Rarity.UNCOMMON, mage.cards.s.SilverquillCharm.class));
+        cards.add(new SetCardInfo("Witherbloom, the Balancer", 245, Rarity.MYTHIC, mage.cards.w.WitherbloomTheBalancer.class));
     }
 }
