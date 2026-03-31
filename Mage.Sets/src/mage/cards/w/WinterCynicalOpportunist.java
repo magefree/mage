@@ -35,7 +35,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 public final class WinterCynicalOpportunist extends CardImpl {
 
     public WinterCynicalOpportunist(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[] { CardType.CREATURE }, "{2}{G}{B}");
+        super(ownerId, setInfo, new CardType[] { CardType.CREATURE }, "{2}{B}{G}");
 
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
