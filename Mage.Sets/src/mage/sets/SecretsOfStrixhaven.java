@@ -39,6 +39,7 @@ public final class SecretsOfStrixhaven extends ExpansionSet {
         cards.add(new SetCardInfo("Conciliator's Duelist", 182, Rarity.RARE, mage.cards.c.ConciliatorsDuelist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Conciliator's Duelist", 348, Rarity.RARE, mage.cards.c.ConciliatorsDuelist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cuboid Colony", 183, Rarity.UNCOMMON, mage.cards.c.CuboidColony.class));
+        cards.add(new SetCardInfo("Daydream", 9, Rarity.UNCOMMON, mage.cards.d.Daydream.class));
         cards.add(new SetCardInfo("Deathcap Glade", 253, Rarity.RARE, mage.cards.d.DeathcapGlade.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Deathcap Glade", 301, Rarity.RARE, mage.cards.d.DeathcapGlade.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Diary of Dreams", 248, Rarity.UNCOMMON, mage.cards.d.DiaryOfDreams.class));
