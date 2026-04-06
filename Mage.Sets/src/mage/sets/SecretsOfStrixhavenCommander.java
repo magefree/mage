@@ -249,6 +249,8 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Replication Technique", 200, Rarity.RARE, mage.cards.r.ReplicationTechnique.class));
         cards.add(new SetCardInfo("Resculpt", 201, Rarity.COMMON, mage.cards.r.Resculpt.class));
         cards.add(new SetCardInfo("Restless Spire", 399, Rarity.RARE, mage.cards.r.RestlessSpire.class));
+        cards.add(new SetCardInfo("Ribtruss Roaster", 43, Rarity.RARE, mage.cards.r.RibtrussRoaster.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ribtruss Roaster", 91, Rarity.RARE, mage.cards.r.RibtrussRoaster.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rionya, Fire Dancer", 252, Rarity.RARE, mage.cards.r.RionyaFireDancer.class));
         cards.add(new SetCardInfo("Rip Apart", 328, Rarity.UNCOMMON, mage.cards.r.RipApart.class));
         cards.add(new SetCardInfo("Rite of Replication", 202, Rarity.RARE, mage.cards.r.RiteOfReplication.class));
