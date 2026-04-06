@@ -120,6 +120,8 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Faithless Looting", 244, Rarity.COMMON, mage.cards.f.FaithlessLooting.class));
         cards.add(new SetCardInfo("Fallen Ideal", 117, Rarity.UNCOMMON, mage.cards.f.FallenIdeal.class));
         cards.add(new SetCardInfo("Fellwar Stone", 347, Rarity.UNCOMMON, mage.cards.f.FellwarStone.class));
+        cards.add(new SetCardInfo("Feral Appetite", 38, Rarity.RARE, mage.cards.f.FeralAppetite.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Feral Appetite", 86, Rarity.RARE, mage.cards.f.FeralAppetite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ferrous Lake", 370, Rarity.RARE, mage.cards.f.FerrousLake.class));
         cards.add(new SetCardInfo("Festering Thicket", 371, Rarity.RARE, mage.cards.f.FesteringThicket.class));
         cards.add(new SetCardInfo("Fetid Heath", 372, Rarity.RARE, mage.cards.f.FetidHeath.class));
