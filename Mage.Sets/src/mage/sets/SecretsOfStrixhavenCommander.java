@@ -156,6 +156,8 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Hinterland Harbor", 381, Rarity.RARE, mage.cards.h.HinterlandHarbor.class));
         cards.add(new SetCardInfo("Hofri Ghostforge", 314, Rarity.MYTHIC, mage.cards.h.HofriGhostforge.class));
         cards.add(new SetCardInfo("Hydroid Krasis", 315, Rarity.RARE, mage.cards.h.HydroidKrasis.class));
+        cards.add(new SetCardInfo("Immoral Bargain", 47, Rarity.RARE, mage.cards.i.ImmoralBargain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Immoral Bargain", 95, Rarity.RARE, mage.cards.i.ImmoralBargain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Infernal Grasp", 216, Rarity.UNCOMMON, mage.cards.i.InfernalGrasp.class));
         cards.add(new SetCardInfo("Ingenious Prodigy", 115, Rarity.RARE, mage.cards.i.IngeniousProdigy.class));
         cards.add(new SetCardInfo("Inkshield", 316, Rarity.RARE, mage.cards.i.Inkshield.class));
