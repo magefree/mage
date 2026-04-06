@@ -30,6 +30,7 @@ Demonstrate|new|
 Delve|new|
 Dethrone|new|
 Devoid|color|
+Devour|number|
 Defender|instance|
 Disguise|card, cost|
 Disturb|cost|
