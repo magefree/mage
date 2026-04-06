@@ -244,6 +244,8 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Reality Shift", 199, Rarity.UNCOMMON, mage.cards.r.RealityShift.class));
         cards.add(new SetCardInfo("Redemption Arc", 163, Rarity.RARE, mage.cards.r.RedemptionArc.class));
         cards.add(new SetCardInfo("Redoubled Stormsinger", 251, Rarity.RARE, mage.cards.r.RedoubledStormsinger.class));
+        cards.add(new SetCardInfo("Relic Retriever", 35, Rarity.RARE, mage.cards.r.RelicRetriever.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Relic Retriever", 83, Rarity.RARE, mage.cards.r.RelicRetriever.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Reliquary Tower", 398, Rarity.UNCOMMON, mage.cards.r.ReliquaryTower.class));
         cards.add(new SetCardInfo("Remorseful Cleric", 164, Rarity.RARE, mage.cards.r.RemorsefulCleric.class));
         cards.add(new SetCardInfo("Replication Technique", 200, Rarity.RARE, mage.cards.r.ReplicationTechnique.class));
