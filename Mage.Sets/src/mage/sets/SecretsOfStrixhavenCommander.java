@@ -94,6 +94,8 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Deep Analysis", 194, Rarity.COMMON, mage.cards.d.DeepAnalysis.class));
         cards.add(new SetCardInfo("Defacing Duskmage", 45, Rarity.RARE, mage.cards.d.DefacingDuskmage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Defacing Duskmage", 93, Rarity.RARE, mage.cards.d.DefacingDuskmage.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Defiling Daemogoth", 25, Rarity.RARE, mage.cards.d.DefilingDaemogoth.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Defiling Daemogoth", 75, Rarity.RARE, mage.cards.d.DefilingDaemogoth.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Desolate Mire", 367, Rarity.RARE, mage.cards.d.DesolateMire.class));
         cards.add(new SetCardInfo("Determined Iteration", 122, Rarity.RARE, mage.cards.d.DeterminedIteration.class));
         cards.add(new SetCardInfo("Dig Through Time", 195, Rarity.RARE, mage.cards.d.DigThroughTime.class));
