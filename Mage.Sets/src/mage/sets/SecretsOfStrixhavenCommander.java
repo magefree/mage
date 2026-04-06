@@ -182,6 +182,8 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Mangara, the Diplomat", 155, Rarity.RARE, mage.cards.m.MangaraTheDiplomat.class));
         cards.add(new SetCardInfo("Martial Impetus", 156, Rarity.COMMON, mage.cards.m.MartialImpetus.class));
         cards.add(new SetCardInfo("Mazirek, Kraul Death Priest", 319, Rarity.RARE, mage.cards.m.MazirekKraulDeathPriest.class));
+        cards.add(new SetCardInfo("Merchant of Venom", 27, Rarity.RARE, mage.cards.m.MerchantOfVenom.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Merchant of Venom", 76, Rarity.RARE, mage.cards.m.MerchantOfVenom.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Millikin", 351, Rarity.UNCOMMON, mage.cards.m.Millikin.class));
         cards.add(new SetCardInfo("Mind Stone", 352, Rarity.UNCOMMON, mage.cards.m.MindStone.class));
         cards.add(new SetCardInfo("Mirrorwing Dragon", 249, Rarity.MYTHIC, mage.cards.m.MirrorwingDragon.class));
