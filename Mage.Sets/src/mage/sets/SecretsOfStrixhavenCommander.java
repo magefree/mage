@@ -73,6 +73,8 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Clifftop Retreat", 366, Rarity.RARE, mage.cards.c.ClifftopRetreat.class));
         cards.add(new SetCardInfo("Coastal Peak", 100, Rarity.RARE, mage.cards.c.CoastalPeak.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Coastal Peak", 52, Rarity.RARE, mage.cards.c.CoastalPeak.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Coercive Impetus", 24, Rarity.RARE, mage.cards.c.CoerciveImpetus.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Coercive Impetus", 74, Rarity.RARE, mage.cards.c.CoerciveImpetus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Combat Calligrapher", 141, Rarity.RARE, mage.cards.c.CombatCalligrapher.class));
         cards.add(new SetCardInfo("Command Tower", 129, Rarity.COMMON, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Commander's Insight", 113, Rarity.RARE, mage.cards.c.CommandersInsight.class));
