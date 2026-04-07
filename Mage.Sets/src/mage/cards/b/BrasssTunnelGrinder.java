@@ -12,6 +12,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.RemoveAllCountersSourceEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.effects.common.discard.DiscardAndDrawThatManyEffect;
 import mage.abilities.effects.keyword.DiscoverEffect;
 import mage.abilities.mana.RedManaAbility;
 import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
@@ -49,7 +50,7 @@ public final class BrasssTunnelGrinder extends TransformingDoubleFacedCard {
 
         // Brass's Tunnel-Grinder
         // When Brass's Tunnel-Grinder enters the battlefield, discard any number of cards, then draw that many cards plus one.
-        this.getLeftHalfCard().addAbility(new EntersBattlefieldTriggeredAbility(new BrasssTunnelGrinderEffect()));
+        this.getLeftHalfCard().addAbility(new EntersBattlefieldTriggeredAbility(new DiscardAndDrawThatManyEffect(Integer.MAX_VALUE, 1)));
 
         // At the beginning of your end step, if you descended this turn, put a bore counter on Brass's Tunnel-Grinder. Then if there are three or more bore counters on it, remove those counters and transform it.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
@@ -82,35 +83,6 @@ public final class BrasssTunnelGrinder extends TransformingDoubleFacedCard {
     @Override
     public BrasssTunnelGrinder copy() {
         return new BrasssTunnelGrinder(this);
-    }
-}
-
-class BrasssTunnelGrinderEffect extends OneShotEffect {
-
-    BrasssTunnelGrinderEffect() {
-        super(Outcome.DrawCard);
-        staticText = "discard any number of cards, then draw that many cards plus one";
-    }
-
-    private BrasssTunnelGrinderEffect(final BrasssTunnelGrinderEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public BrasssTunnelGrinderEffect copy() {
-        return new BrasssTunnelGrinderEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
-
-        int dicarded = player.discard(0, Integer.MAX_VALUE, false, source, game).size();
-        player.drawCards(1 + dicarded, source, game);
-        return true;
     }
 }
 

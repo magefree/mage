@@ -5,17 +5,14 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.discard.DiscardAndDrawThatManyEffect;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.game.Game;
-import mage.players.Player;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 
 /**
  *
@@ -38,7 +35,7 @@ public final class ColossusOfTheBloodAge extends CardImpl {
         this.addAbility(ability);
 
         // When this creature dies, discard any number of cards, then draw that many cards plus one.
-        this.addAbility(new DiesSourceTriggeredAbility(new ColossusOfTheBloodAgeEffect()));
+        this.addAbility(new DiesSourceTriggeredAbility(new DiscardAndDrawThatManyEffect(Integer.MAX_VALUE, 1)));
     }
 
     private ColossusOfTheBloodAge(final ColossusOfTheBloodAge card) {
@@ -48,34 +45,5 @@ public final class ColossusOfTheBloodAge extends CardImpl {
     @Override
     public ColossusOfTheBloodAge copy() {
         return new ColossusOfTheBloodAge(this);
-    }
-}
-
-class ColossusOfTheBloodAgeEffect extends OneShotEffect {
-
-    ColossusOfTheBloodAgeEffect() {
-        super(Outcome.DrawCard);
-        staticText = "discard any number of cards, then draw that many cards plus one";
-    }
-
-    private ColossusOfTheBloodAgeEffect(final ColossusOfTheBloodAgeEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ColossusOfTheBloodAgeEffect copy() {
-        return new ColossusOfTheBloodAgeEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
-        int discarded = player.discard(0, Integer.MAX_VALUE, false, source, game).size();
-        game.processAction();
-        player.drawCards(discarded + 1, source, game);
-        return true;
     }
 }

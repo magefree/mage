@@ -13,18 +13,29 @@ import mage.util.CardUtil;
 public class DiscardAndDrawThatManyEffect extends OneShotEffect {
 
     private final int amount;
+    private final int plus;
 
     public DiscardAndDrawThatManyEffect(int amount) {
+        this(amount, 0);
+    }
+
+    /**
+     * @param amount maximum number of cards to discard, or {@link Integer#MAX_VALUE} for any number
+     * @param plus   additional cards drawn beyond the number discarded
+     */
+    public DiscardAndDrawThatManyEffect(int amount, int plus) {
         super(Outcome.DrawCard);
         this.amount = amount;
+        this.plus = plus;
         staticText = "discard "
                 + (amount == Integer.MAX_VALUE ? "any number of" : "up to " + CardUtil.numberToText(amount))
-                + " cards, then draw that many cards";
+                + " cards, then draw that many cards" + (plus > 0 ? " plus " + CardUtil.numberToText(plus) : "");
     }
 
     private DiscardAndDrawThatManyEffect(final DiscardAndDrawThatManyEffect effect) {
         super(effect);
         this.amount = effect.amount;
+        this.plus = effect.plus;
     }
 
     @Override
@@ -38,7 +49,8 @@ public class DiscardAndDrawThatManyEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        player.drawCards(player.discard(0, amount, false, source, game).size(), source, game);
+        int discarded = player.discard(0, amount, false, source, game).size();
+        player.drawCards(discarded + plus, source, game);
         return true;
     }
 }
