@@ -149,6 +149,7 @@ public final class SecretsOfStrixhaven extends ExpansionSet {
         cards.add(new SetCardInfo("Tam, Observant Sequencer", 237, Rarity.UNCOMMON, mage.cards.t.TamObservantSequencer.class));
         cards.add(new SetCardInfo("Teacher's Pest", 238, Rarity.UNCOMMON, mage.cards.t.TeachersPest.class));
         cards.add(new SetCardInfo("Terramorphic Expanse", 265, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class));
+        cards.add(new SetCardInfo("Thunderdrum Soloist", 134, Rarity.UNCOMMON, mage.cards.t.ThunderdrumSoloist.class));
         cards.add(new SetCardInfo("Titan's Grave", 266, Rarity.COMMON, mage.cards.t.TitansGrave.class));
         cards.add(new SetCardInfo("Together as One", 307, Rarity.RARE, mage.cards.t.TogetherAsOne.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Together as One", 4, Rarity.RARE, mage.cards.t.TogetherAsOne.class, NON_FULL_USE_VARIOUS));
