@@ -24,6 +24,7 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Abrade", 234, Rarity.UNCOMMON, mage.cards.a.Abrade.class));
+        cards.add(new SetCardInfo("Advanced Reconstruction", 30, Rarity.RARE, mage.cards.a.AdvancedReconstruction.class));
         cards.add(new SetCardInfo("Aether Gale", 186, Rarity.UNCOMMON, mage.cards.a.AetherGale.class));
         cards.add(new SetCardInfo("Ajani's Chosen", 132, Rarity.RARE, mage.cards.a.AjanisChosen.class));
         cards.add(new SetCardInfo("Alchemist's Refuge", 360, Rarity.RARE, mage.cards.a.AlchemistsRefuge.class));
@@ -68,11 +69,15 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Caves of Koilos", 365, Rarity.RARE, mage.cards.c.CavesOfKoilos.class));
         cards.add(new SetCardInfo("Chain Reaction", 121, Rarity.RARE, mage.cards.c.ChainReaction.class));
         cards.add(new SetCardInfo("Chains of Custody", 139, Rarity.COMMON, mage.cards.c.ChainsOfCustody.class));
+        cards.add(new SetCardInfo("Changing Loyalty", 23, Rarity.RARE, mage.cards.c.ChangingLoyalty.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Changing Loyalty", 73, Rarity.RARE, mage.cards.c.ChangingLoyalty.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chaos Warp", 239, Rarity.RARE, mage.cards.c.ChaosWarp.class));
         cards.add(new SetCardInfo("Claim Jumper", 140, Rarity.RARE, mage.cards.c.ClaimJumper.class));
         cards.add(new SetCardInfo("Clifftop Retreat", 366, Rarity.RARE, mage.cards.c.ClifftopRetreat.class));
         cards.add(new SetCardInfo("Coastal Peak", 100, Rarity.RARE, mage.cards.c.CoastalPeak.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Coastal Peak", 52, Rarity.RARE, mage.cards.c.CoastalPeak.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Coercive Impetus", 24, Rarity.RARE, mage.cards.c.CoerciveImpetus.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Coercive Impetus", 74, Rarity.RARE, mage.cards.c.CoerciveImpetus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Combat Calligrapher", 141, Rarity.RARE, mage.cards.c.CombatCalligrapher.class));
         cards.add(new SetCardInfo("Command Tower", 129, Rarity.COMMON, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Commander's Insight", 113, Rarity.RARE, mage.cards.c.CommandersInsight.class));
@@ -98,6 +103,8 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Determined Iteration", 122, Rarity.RARE, mage.cards.d.DeterminedIteration.class));
         cards.add(new SetCardInfo("Dig Through Time", 195, Rarity.RARE, mage.cards.d.DigThroughTime.class));
         cards.add(new SetCardInfo("Dina, Soul Steeper", 305, Rarity.UNCOMMON, mage.cards.d.DinaSoulSteeper.class));
+        cards.add(new SetCardInfo("Dirgur Focusmage", 18, Rarity.RARE, mage.cards.d.DirgurFocusmage.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Dirgur Focusmage", 68, Rarity.RARE, mage.cards.d.DirgurFocusmage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Doomwake Giant", 212, Rarity.RARE, mage.cards.d.DoomwakeGiant.class));
         cards.add(new SetCardInfo("Drumbellower", 143, Rarity.RARE, mage.cards.d.Drumbellower.class));
         cards.add(new SetCardInfo("Eclipsed Steppe", 101, Rarity.RARE, mage.cards.e.EclipsedSteppe.class, NON_FULL_USE_VARIOUS));
@@ -156,6 +163,8 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Hinterland Harbor", 381, Rarity.RARE, mage.cards.h.HinterlandHarbor.class));
         cards.add(new SetCardInfo("Hofri Ghostforge", 314, Rarity.MYTHIC, mage.cards.h.HofriGhostforge.class));
         cards.add(new SetCardInfo("Hydroid Krasis", 315, Rarity.RARE, mage.cards.h.HydroidKrasis.class));
+        cards.add(new SetCardInfo("Immoral Bargain", 47, Rarity.RARE, mage.cards.i.ImmoralBargain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Immoral Bargain", 95, Rarity.RARE, mage.cards.i.ImmoralBargain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Infernal Grasp", 216, Rarity.UNCOMMON, mage.cards.i.InfernalGrasp.class));
         cards.add(new SetCardInfo("Ingenious Prodigy", 115, Rarity.RARE, mage.cards.i.IngeniousProdigy.class));
         cards.add(new SetCardInfo("Inkshield", 316, Rarity.RARE, mage.cards.i.Inkshield.class));
@@ -169,7 +178,8 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Kor Spiritdancer", 152, Rarity.RARE, mage.cards.k.KorSpiritdancer.class));
         cards.add(new SetCardInfo("Laelia, the Blade Reforged", 246, Rarity.RARE, mage.cards.l.LaeliaTheBladeReforged.class));
         cards.add(new SetCardInfo("Land Tax", 153, Rarity.MYTHIC, mage.cards.l.LandTax.class));
-        cards.add(new SetCardInfo("Leitmotif Composer", 20, Rarity.RARE, mage.cards.l.LeitmotifComposer.class));
+        cards.add(new SetCardInfo("Leitmotif Composer", 20, Rarity.RARE, mage.cards.l.LeitmotifComposer.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Leitmotif Composer", 70, Rarity.RARE, mage.cards.l.LeitmotifComposer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lifeblood Hydra", 274, Rarity.RARE, mage.cards.l.LifebloodHydra.class));
         cards.add(new SetCardInfo("Lightning Greaves", 350, Rarity.UNCOMMON, mage.cards.l.LightningGreaves.class));
         cards.add(new SetCardInfo("Llanowar Wastes", 383, Rarity.RARE, mage.cards.l.LlanowarWastes.class));
@@ -182,6 +192,8 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Mangara, the Diplomat", 155, Rarity.RARE, mage.cards.m.MangaraTheDiplomat.class));
         cards.add(new SetCardInfo("Martial Impetus", 156, Rarity.COMMON, mage.cards.m.MartialImpetus.class));
         cards.add(new SetCardInfo("Mazirek, Kraul Death Priest", 319, Rarity.RARE, mage.cards.m.MazirekKraulDeathPriest.class));
+        cards.add(new SetCardInfo("Merchant of Venom", 27, Rarity.RARE, mage.cards.m.MerchantOfVenom.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Merchant of Venom", 76, Rarity.RARE, mage.cards.m.MerchantOfVenom.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Millikin", 351, Rarity.UNCOMMON, mage.cards.m.Millikin.class));
         cards.add(new SetCardInfo("Mind Stone", 352, Rarity.UNCOMMON, mage.cards.m.MindStone.class));
         cards.add(new SetCardInfo("Mirrorwing Dragon", 249, Rarity.MYTHIC, mage.cards.m.MirrorwingDragon.class));
@@ -229,6 +241,8 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Primordial Hydra", 284, Rarity.MYTHIC, mage.cards.p.PrimordialHydra.class));
         cards.add(new SetCardInfo("Prismari Campus", 394, Rarity.COMMON, mage.cards.p.PrismariCampus.class));
         cards.add(new SetCardInfo("Prismari Command", 323, Rarity.RARE, mage.cards.p.PrismariCommand.class));
+        cards.add(new SetCardInfo("Prismari Pianist", 34, Rarity.RARE, mage.cards.p.PrismariPianist.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Prismari Pianist", 82, Rarity.RARE, mage.cards.p.PrismariPianist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Promise of Loyalty", 161, Rarity.RARE, mage.cards.p.PromiseOfLoyalty.class));
         cards.add(new SetCardInfo("Pull from Tomorrow", 116, Rarity.RARE, mage.cards.p.PullFromTomorrow.class));
         cards.add(new SetCardInfo("Quandrix Apprentice", 324, Rarity.UNCOMMON, mage.cards.q.QuandrixApprentice.class));
@@ -249,6 +263,8 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Replication Technique", 200, Rarity.RARE, mage.cards.r.ReplicationTechnique.class));
         cards.add(new SetCardInfo("Resculpt", 201, Rarity.COMMON, mage.cards.r.Resculpt.class));
         cards.add(new SetCardInfo("Restless Spire", 399, Rarity.RARE, mage.cards.r.RestlessSpire.class));
+        cards.add(new SetCardInfo("Ribtruss Roaster", 43, Rarity.RARE, mage.cards.r.RibtrussRoaster.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ribtruss Roaster", 91, Rarity.RARE, mage.cards.r.RibtrussRoaster.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rionya, Fire Dancer", 252, Rarity.RARE, mage.cards.r.RionyaFireDancer.class));
         cards.add(new SetCardInfo("Rip Apart", 328, Rarity.UNCOMMON, mage.cards.r.RipApart.class));
         cards.add(new SetCardInfo("Rite of Replication", 202, Rarity.RARE, mage.cards.r.RiteOfReplication.class));

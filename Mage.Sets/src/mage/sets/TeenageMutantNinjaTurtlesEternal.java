@@ -70,6 +70,8 @@ public final class TeenageMutantNinjaTurtlesEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Hidden Hideout", 43, Rarity.RARE, mage.cards.h.HiddenHideout.class));
         cards.add(new SetCardInfo("High Score", 29, Rarity.RARE, mage.cards.h.HighScore.class));
         cards.add(new SetCardInfo("Hinterland Harbor", 69, Rarity.RARE, mage.cards.h.HinterlandHarbor.class));
+        cards.add(new SetCardInfo("Krang, the All-Powerful", 13, Rarity.RARE, mage.cards.k.KrangTheAllPowerful.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Krang, the All-Powerful", 86, Rarity.RARE, mage.cards.k.KrangTheAllPowerful.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Leatherhead, Iron Gator", 30, Rarity.RARE, mage.cards.l.LeatherheadIronGator.class));
         cards.add(new SetCardInfo("Leo's Guidance", 102, Rarity.UNCOMMON, mage.cards.l.LeosGuidance.class));
         cards.add(new SetCardInfo("Leonardo, Worldly Warrior", 101, Rarity.MYTHIC, mage.cards.l.LeonardoWorldlyWarrior.class));
@@ -111,11 +113,13 @@ public final class TeenageMutantNinjaTurtlesEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Supreme Verdict", 134, Rarity.MYTHIC, mage.cards.s.SupremeVerdict.class));
         cards.add(new SetCardInfo("Swift Demise", 21, Rarity.RARE, mage.cards.s.SwiftDemise.class));
         cards.add(new SetCardInfo("Sword of Hearth and Home", 136, Rarity.MYTHIC, mage.cards.s.SwordOfHearthAndHome.class));
+        cards.add(new SetCardInfo("Tempestra, Dame of Games", 27, Rarity.RARE, mage.cards.t.TempestraDameOfGames.class));
         cards.add(new SetCardInfo("Thriving Grove", 77, Rarity.COMMON, mage.cards.t.ThrivingGrove.class));
         cards.add(new SetCardInfo("Thriving Isle", 78, Rarity.COMMON, mage.cards.t.ThrivingIsle.class));
         cards.add(new SetCardInfo("Thriving Moor", 79, Rarity.COMMON, mage.cards.t.ThrivingMoor.class));
         cards.add(new SetCardInfo("Ticked Off", 121, Rarity.COMMON, mage.cards.t.TickedOff.class));
         cards.add(new SetCardInfo("Together Forever", 44, Rarity.RARE, mage.cards.t.TogetherForever.class));
+        cards.add(new SetCardInfo("Tokka & Rahzar, Unsupervised", 28, Rarity.RARE, mage.cards.t.TokkaAndRahzarUnsupervised.class));
         cards.add(new SetCardInfo("Triceraton Regenta", 105, Rarity.COMMON, mage.cards.t.TriceratonRegenta.class));
         cards.add(new SetCardInfo("Undergrowth Stadium", 80, Rarity.RARE, mage.cards.u.UndergrowthStadium.class));
         cards.add(new SetCardInfo("Utrom Monitor", 113, Rarity.COMMON, mage.cards.u.UtromMonitor.class));
