@@ -1,6 +1,7 @@
 package mage.abilities.effects.common.continuous;
 
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.Card;
@@ -17,7 +18,6 @@ public class GainFlashbackTargetEffect extends ContinuousEffectImpl {
 
     public GainFlashbackTargetEffect() {
         super(Duration.EndOfTurn, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-        this.staticText = "target instant or sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost";
     }
 
     protected GainFlashbackTargetEffect(final GainFlashbackTargetEffect effect) {
@@ -41,5 +41,12 @@ public class GainFlashbackTargetEffect extends ContinuousEffectImpl {
         ability.setControllerId(card.getOwnerId());
         game.getState().addOtherAbility(card, ability);
         return true;
+    }
+
+    @Override
+    public String getText(Mode mode) {
+        StringBuilder sb = new StringBuilder(getTargetPointer().describeTargets(mode.getTargets(), ""));
+        sb.append(" gains flashback until end of turn. The flashback cost is equal to its mana cost");
+        return sb.toString();
     }
 }
