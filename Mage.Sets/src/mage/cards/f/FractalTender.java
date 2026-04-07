@@ -1,6 +1,8 @@
 package mage.cards.f;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
@@ -74,18 +76,18 @@ enum FractalTenderCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return FractalTenderWatcher.checkPlayer(source.getControllerId(), game);
+        return FractalTenderWatcher.check(source.getSourceId(), source.getControllerId(), game);
     }
 
     @Override
     public String toString() {
-        return "you put a counter on a creature this turn";
+        return "you put a counter on this creature this turn";
     }
 }
 
 class FractalTenderWatcher extends Watcher {
 
-    private final Set<UUID> set = new HashSet<>();
+    private final Map<UUID, Set<UUID>> map = new HashMap<>();
 
     FractalTenderWatcher() {
         super(WatcherScope.GAME);
@@ -98,21 +100,22 @@ class FractalTenderWatcher extends Watcher {
         }
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent != null && permanent.isCreature(game)) {
-            set.add(event.getPlayerId());
+            map.computeIfAbsent(event.getTargetId(), k -> new HashSet<>()).add(event.getPlayerId());
         }
     }
 
     @Override
     public void reset() {
         super.reset();
-        set.clear();
+        map.clear();
     }
 
-    static boolean checkPlayer(UUID playerId, Game game) {
-        return game
+    static boolean check(UUID permanentId, UUID playerId, Game game) {
+        Set<UUID> players = game
                 .getState()
                 .getWatcher(FractalTenderWatcher.class)
-                .set
-                .contains(playerId);
+                .map
+                .get(permanentId);
+        return players != null && players.contains(playerId);
     }
 }
