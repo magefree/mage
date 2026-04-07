@@ -26,6 +26,7 @@ public class ChooseACardNameEffect extends OneShotEffect {
 
     public enum TypeOfName {
         ALL("card name", CardRepository.instance::getNames),
+        LAND_NAME("land card name", CardRepository.instance::getLandNames),
         NOT_BASIC_LAND_NAME("card name other than a basic land card name", CardRepository.instance::getNotBasicLandNames),
         NONBASIC_LAND_NAME("nonbasic land card name", CardRepository.instance::getNonbasicLandNames),
         NON_ARTIFACT_AND_NON_LAND_NAME("nonartifact, nonland card name", CardRepository.instance::getNonArtifactAndNonLandNames),
