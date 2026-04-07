@@ -5,26 +5,22 @@ import java.util.UUID;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.AsEntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.ChooseACardNameEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.DependencyType;
 import mage.constants.Duration;
-import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.SubLayer;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.NamePredicate;
+import mage.filter.predicate.mageobject.ChosenNamePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
 /**
@@ -33,17 +29,25 @@ import mage.util.CardUtil;
  */
 public final class PetrifiedHamlet extends CardImpl {
 
+    private static final FilterPermanent filter = new FilterLandPermanent("lands with the chosen name");
+
+    static {
+        filter.add(ChosenNamePredicate.instance);
+    }
+
     public PetrifiedHamlet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // When this land enters, choose a land card name.
-        this.addAbility(new AsEntersBattlefieldAbility(new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.LAND_NAME)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.LAND_NAME)));
 
         // Activated abilities of sources with the chosen name can't be activated unless they're mana abilities.
         this.addAbility(new SimpleStaticAbility(new PetrifiedHamletCostEffect()));
 
         // Lands with the chosen name have "{T}: Add {C}."
-        this.addAbility(new SimpleStaticAbility(new PetrifiedHamletEffect()));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
+            new ColorlessManaAbility(), Duration.WhileOnBattlefield, filter
+        )));
 
         // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
@@ -56,59 +60,6 @@ public final class PetrifiedHamlet extends CardImpl {
     @Override
     public PetrifiedHamlet copy() {
         return new PetrifiedHamlet(this);
-    }
-}
-
-class PetrifiedHamletEffect extends ContinuousEffectImpl {
-
-    private static final FilterPermanent filter = new FilterLandPermanent();
-
-    public PetrifiedHamletEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        this.staticText = "lands with the chosen name have \"{T}: Add {C}.\"";
-        addDependedToType(DependencyType.BecomeMountain);
-        addDependedToType(DependencyType.BecomeForest);
-        addDependedToType(DependencyType.BecomeIsland);
-        addDependedToType(DependencyType.BecomeSwamp);
-        addDependedToType(DependencyType.BecomePlains);
-        addDependedToType(DependencyType.BecomeNonbasicLand);
-    }
-
-    private PetrifiedHamletEffect(final PetrifiedHamletEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public PetrifiedHamletEffect copy() {
-        return new PetrifiedHamletEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
-        if (cardName == null) {
-            return false;
-        }
-        FilterPermanent filter2 = filter.copy();
-        filter2.add(new NamePredicate(cardName));
-        for (Permanent land : game.getBattlefield().getActivePermanents(filter2, source.getControllerId(), game)) {
-            switch (layer) {
-                case AbilityAddingRemovingEffects_6:
-                    land.addAbility(new ColorlessManaAbility(), source.getSourceId(), game);
-                    break;
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.TypeChangingEffects_4;
     }
 }
 
