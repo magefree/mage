@@ -58,6 +58,7 @@ public final class SecretsOfStrixhaven extends ExpansionSet {
         cards.add(new SetCardInfo("Emeritus of Ideation", 45, Rarity.MYTHIC, mage.cards.e.EmeritusOfIdeation.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Erode", 15, Rarity.RARE, mage.cards.e.Erode.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Erode", 310, Rarity.RARE, mage.cards.e.Erode.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Essenceknit Scholar", 167, Rarity.UNCOMMON, mage.cards.e.EssenceknitScholar.class));
         cards.add(new SetCardInfo("Exhibition Tidecaller", 316, Rarity.RARE, mage.cards.e.ExhibitionTidecaller.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Exhibition Tidecaller", 48, Rarity.RARE, mage.cards.e.ExhibitionTidecaller.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Expressive Firedancer", 114, Rarity.COMMON, mage.cards.e.ExpressiveFiredancer.class));

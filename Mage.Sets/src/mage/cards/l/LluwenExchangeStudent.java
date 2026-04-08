@@ -42,7 +42,7 @@ public final class LluwenExchangeStudent extends PrepareCard {
 
         // Pest Friend
         // Sorcery {B/G}
-        // Create a 1/1 black and green Pest creature token with "Whenever ths creature attacks, you gain 1 life."
+        // Create a 1/1 black and green Pest creature token with "Whenever this creature attacks, you gain 1 life."
         this.getSpellCard().getSpellAbility().addEffect(new CreateTokenEffect(new PestBlackGreenAttacksToken()));
     }
 
