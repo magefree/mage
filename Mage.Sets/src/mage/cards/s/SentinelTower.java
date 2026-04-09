@@ -88,6 +88,7 @@ class SentinelTowerTriggeredAbility extends SpellCastAllTriggeredAbility {
             }
             damageInfo = " (<b>" + damageToDeal + " damage</b>)";
             this.getEffects().setValue("damage", damageToDeal);
+            return true;
         }
         return false;
     }
