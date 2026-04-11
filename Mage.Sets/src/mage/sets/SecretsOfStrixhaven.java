@@ -270,6 +270,8 @@ public final class SecretsOfStrixhaven extends ExpansionSet {
         cards.add(new SetCardInfo("Tenured Concocter", 163, Rarity.COMMON, mage.cards.t.TenuredConcocter.class));
         cards.add(new SetCardInfo("Terramorphic Expanse", 265, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class));
         cards.add(new SetCardInfo("Textbook Tabulator", 70, Rarity.COMMON, mage.cards.t.TextbookTabulator.class));
+        cards.add(new SetCardInfo("The Dawning Archaic", 1, Rarity.MYTHIC, mage.cards.t.TheDawningArchaic.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Dawning Archaic", 289, Rarity.MYTHIC, mage.cards.t.TheDawningArchaic.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thornfist Striker", 164, Rarity.UNCOMMON, mage.cards.t.ThornfistStriker.class));
         cards.add(new SetCardInfo("Thunderdrum Soloist", 134, Rarity.UNCOMMON, mage.cards.t.ThunderdrumSoloist.class));
         cards.add(new SetCardInfo("Titan's Grave", 266, Rarity.COMMON, mage.cards.t.TitansGrave.class));
