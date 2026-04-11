@@ -178,6 +178,7 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Kami of Whispered Hopes", 273, Rarity.UNCOMMON, mage.cards.k.KamiOfWhisperedHopes.class));
         cards.add(new SetCardInfo("Karmic Guide", 151, Rarity.RARE, mage.cards.k.KarmicGuide.class));
         cards.add(new SetCardInfo("Keen Duelist", 218, Rarity.RARE, mage.cards.k.KeenDuelist.class));
+        cards.add(new SetCardInfo("Killian, Decisive Mentor", 4, Rarity.MYTHIC, mage.cards.k.KillianDecisiveMentor.class));
         cards.add(new SetCardInfo("Killian, Ink Duelist", 317, Rarity.UNCOMMON, mage.cards.k.KillianInkDuelist.class));
         cards.add(new SetCardInfo("Kor Spiritdancer", 152, Rarity.RARE, mage.cards.k.KorSpiritdancer.class));
         cards.add(new SetCardInfo("Laelia, the Blade Reforged", 246, Rarity.RARE, mage.cards.l.LaeliaTheBladeReforged.class));
