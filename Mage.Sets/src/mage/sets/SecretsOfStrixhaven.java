@@ -76,6 +76,7 @@ public final class SecretsOfStrixhaven extends ExpansionSet {
         cards.add(new SetCardInfo("Emeritus of Woe", 80, Rarity.MYTHIC, mage.cards.e.EmeritusOfWoe.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Emeritus of Woe", 324, Rarity.MYTHIC, mage.cards.e.EmeritusOfWoe.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Encouraging Aviator", 46, Rarity.UNCOMMON, mage.cards.e.EncouragingAviator.class));
+        cards.add(new SetCardInfo("End of the Hunt", 81, Rarity.UNCOMMON, mage.cards.e.EndOfTheHunt.class));
         cards.add(new SetCardInfo("Environmental Scientist", 147, Rarity.UNCOMMON, mage.cards.e.EnvironmentalScientist.class));
         cards.add(new SetCardInfo("Erode", 15, Rarity.RARE, mage.cards.e.Erode.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Erode", 310, Rarity.RARE, mage.cards.e.Erode.class, NON_FULL_USE_VARIOUS));
