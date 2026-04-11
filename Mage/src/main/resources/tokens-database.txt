@@ -2970,7 +2970,7 @@
 # |TOK:SOC|Contract||ContractToken| TODO: Once Scriv, the Obligator is implemented
 |TOK:SOC|Dragon Illusion||DragonIllusionToken|
 |TOK:SOC|Eldrazi Spawn||EldraziSpawnToken|
-# |TOK:SOC|Elemental|1|ElementalXXFlyingHasteToken| TODO: Enable once Rootha, Mastering the Moment is implemented
+|TOK:SOC|Elemental|1|ElementalXXFlyingHasteToken|
 |TOK:SOC|Elemental|2|Elemental44Token|
 |TOK:SOC|Elemental|3|Elemental11BlueRedToken|
 |TOK:SOC|Food||FoodToken|
