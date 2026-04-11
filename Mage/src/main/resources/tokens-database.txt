@@ -2963,6 +2963,36 @@
 |TOK:TMC|Ooze||BiogenicOozeToken|
 |TOK:TMC|Treasure||TreasureToken|
 
+# SOC
+|TOK:SOC|Beast||BeastToken|
+|TOK:SOC|Boar||Boar2Token|
+|TOK:SOC|Cat||CatToken|
+# |TOK:SOC|Contract||ContractToken| TODO: Once Scriv, the Obligator is implemented
+|TOK:SOC|Dragon Illusion||DragonIllusionToken|
+|TOK:SOC|Eldrazi Spawn||EldraziSpawnToken|
+|TOK:SOC|Elemental|1|ElementalXXFlyingHasteToken|
+|TOK:SOC|Elemental|2|Elemental44Token|
+|TOK:SOC|Elemental|3|Elemental11BlueRedToken|
+|TOK:SOC|Food||FoodToken|
+|TOK:SOC|Frog Lizard||FrogLizardToken|
+|TOK:SOC|Fungus Beast||FungusBeastToken|
+|TOK:SOC|Goat||GoatToken|
+|TOK:SOC|Illusion||CustomIllusionToken|
+|TOK:SOC|Inkling||InklingToken|
+|TOK:SOC|Pegasus||Pegasus22Token|
+|TOK:SOC|Pest||PestBlackGreenDiesToken|
+|TOK:SOC|Phyrexian Germ||PhyrexianGermToken|
+|TOK:SOC|Phyrexian Myr||BrudicladTelchorMyrToken|
+|TOK:SOC|Primo, the Indivisible||PrimoTheIndivisibleToken|
+|TOK:SOC|Rogue||RogueToken|
+|TOK:SOC|Saproling||SaprolingToken|
+|TOK:SOC|Snake||OphiomancerSnakeToken|
+|TOK:SOC|Spirit||Spirit32Token|
+|TOK:SOC|Spirit||SpiritWhiteToken|
+|TOK:SOC|Thopter||ThopterColorlessToken|
+|TOK:SOC|Worm||BlackGreenWormToken|
+|TOK:SOC|Zombie||ZombieDecayedToken|
+
 # JVC
 |TOK:JVC|Elemental Shaman||ElementalShamanToken|
 
