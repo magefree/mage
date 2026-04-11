@@ -243,6 +243,7 @@ public final class SecretsOfStrixhaven extends ExpansionSet {
         cards.add(new SetCardInfo("Tackle Artist", 133, Rarity.COMMON, mage.cards.t.TackleArtist.class));
         cards.add(new SetCardInfo("Tam, Observant Sequencer", 237, Rarity.UNCOMMON, mage.cards.t.TamObservantSequencer.class));
         cards.add(new SetCardInfo("Teacher's Pest", 238, Rarity.UNCOMMON, mage.cards.t.TeachersPest.class));
+        cards.add(new SetCardInfo("Tenured Concocter", 163, Rarity.COMMON, mage.cards.t.TenuredConcocter.class));
         cards.add(new SetCardInfo("Terramorphic Expanse", 265, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class));
         cards.add(new SetCardInfo("Textbook Tabulator", 70, Rarity.COMMON, mage.cards.t.TextbookTabulator.class));
         cards.add(new SetCardInfo("Thornfist Striker", 164, Rarity.UNCOMMON, mage.cards.t.ThornfistStriker.class));
