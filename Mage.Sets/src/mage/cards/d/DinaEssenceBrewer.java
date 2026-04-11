@@ -28,7 +28,7 @@ import mage.constants.CardType;
 public final class DinaEssenceBrewer extends CardImpl {
 
     public DinaEssenceBrewer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{{B}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{G}");
 
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRYAD);
