@@ -275,6 +275,7 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Rip Apart", 328, Rarity.UNCOMMON, mage.cards.r.RipApart.class));
         cards.add(new SetCardInfo("Rite of Replication", 202, Rarity.RARE, mage.cards.r.RiteOfReplication.class));
         cards.add(new SetCardInfo("Rogue's Passage", 400, Rarity.UNCOMMON, mage.cards.r.RoguesPassage.class));
+        cards.add(new SetCardInfo("Rootha, Mastering the Moment", 8, Rarity.MYTHIC, mage.cards.r.RoothaMasteringTheMoment.class));
         cards.add(new SetCardInfo("Rootha, Mercurial Artist", 329, Rarity.UNCOMMON, mage.cards.r.RoothaMercurialArtist.class));
         cards.add(new SetCardInfo("Rousing Refrain", 253, Rarity.RARE, mage.cards.r.RousingRefrain.class));
         cards.add(new SetCardInfo("Rugged Prairie", 401, Rarity.RARE, mage.cards.r.RuggedPrairie.class));
