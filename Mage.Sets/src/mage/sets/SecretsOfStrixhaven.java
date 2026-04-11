@@ -112,6 +112,7 @@ public final class SecretsOfStrixhaven extends ExpansionSet {
         cards.add(new SetCardInfo("Harsh Annotation", 18, Rarity.UNCOMMON, mage.cards.h.HarshAnnotation.class));
         cards.add(new SetCardInfo("Heated Argument", 118, Rarity.COMMON, mage.cards.h.HeatedArgument.class));
         cards.add(new SetCardInfo("Hungry Graffalon", 151, Rarity.COMMON, mage.cards.h.HungryGraffalon.class));
+        cards.add(new SetCardInfo("Hydro-Channeler", 54, Rarity.COMMON, mage.cards.h.HydroChanneler.class));
         cards.add(new SetCardInfo("Imperious Inkmage", 195, Rarity.COMMON, mage.cards.i.ImperiousInkmage.class));
         cards.add(new SetCardInfo("Impractical Joke", 119, Rarity.UNCOMMON, mage.cards.i.ImpracticalJoke.class));
         cards.add(new SetCardInfo("Infirmary Healer", 152, Rarity.UNCOMMON, mage.cards.i.InfirmaryHealer.class));
