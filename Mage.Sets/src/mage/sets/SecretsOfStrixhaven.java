@@ -130,6 +130,7 @@ public final class SecretsOfStrixhaven extends ExpansionSet {
         cards.add(new SetCardInfo("Kirol, History Buff", 198, Rarity.UNCOMMON, mage.cards.k.KirolHistoryBuff.class));
         cards.add(new SetCardInfo("Landscape Painter", 56, Rarity.COMMON, mage.cards.l.LandscapePainter.class));
         cards.add(new SetCardInfo("Last Gasp", 86, Rarity.COMMON, mage.cards.l.LastGasp.class));
+        cards.add(new SetCardInfo("Lecturing Scornmage", 87, Rarity.UNCOMMON, mage.cards.l.LecturingScornmage.class));
         cards.add(new SetCardInfo("Leech Collector", 88, Rarity.UNCOMMON, mage.cards.l.LeechCollector.class));
         cards.add(new SetCardInfo("Lluwen, Exchange Student", 199, Rarity.UNCOMMON, mage.cards.l.LluwenExchangeStudent.class));
         cards.add(new SetCardInfo("Lorehold Charm", 200, Rarity.UNCOMMON, mage.cards.l.LoreholdCharm.class, NON_FULL_USE_VARIOUS));
