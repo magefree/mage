@@ -1,16 +1,15 @@
 package mage.cards.f;
 
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.common.GetXValue;
+import mage.abilities.effects.common.DestroyAllEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.filter.StaticFilters;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.util.CardUtil;
-
 import java.util.UUID;
 
 /**
@@ -18,11 +17,17 @@ import java.util.UUID;
  */
 public final class ForcedMarch extends CardImpl {
 
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with converted mana cost X or less");
+
+    static {
+        filter.add(ForcedMarchPredicate.instance);
+    }
+
     public ForcedMarch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{B}{B}{B}");
 
         // Destroy all creatures with converted mana cost X or less
-        this.getSpellAbility().addEffect(new ForcedMarchEffect());
+        this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
     }
 
     private ForcedMarch(final ForcedMarch card) {
@@ -35,33 +40,11 @@ public final class ForcedMarch extends CardImpl {
     }
 }
 
-class ForcedMarchEffect extends OneShotEffect {
-
-    ForcedMarchEffect() {
-        super(Outcome.DestroyPermanent);
-        staticText = "Destroy all creatures with mana value X or less";
-    }
-
-    private ForcedMarchEffect(final ForcedMarchEffect effect) {
-        super(effect);
-    }
+enum ForcedMarchPredicate implements ObjectSourcePlayerPredicate<Card> {
+    instance;
 
     @Override
-    public ForcedMarchEffect copy() {
-        return new ForcedMarchEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-
-        // for(Permanent permanent : game.getBattlefield().getAllActivePermanents(CardType.CREATURE)) {
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE,
-                source.getControllerId(),
-                source, game)) {
-            if (permanent.getManaValue() <= CardUtil.getSourceCostsTag(game, source, "X", 0)) {
-                permanent.destroy(source, game, false);
-            }
-        }
-        return true;
+    public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
+        return input.getObject().getManaValue() <= GetXValue.instance.calculate(game, input.getSource(), null);
     }
 }
