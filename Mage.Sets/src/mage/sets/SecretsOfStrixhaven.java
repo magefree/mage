@@ -53,6 +53,8 @@ public final class SecretsOfStrixhaven extends ExpansionSet {
         cards.add(new SetCardInfo("Colorstorm Stallion", 180, Rarity.RARE, mage.cards.c.ColorstormStallion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Colorstorm Stallion", 299, Rarity.RARE, mage.cards.c.ColorstormStallion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Colossus of the Blood Age", 181, Rarity.UNCOMMON, mage.cards.c.ColossusOfTheBloodAge.class));
+        cards.add(new SetCardInfo("Comforting Counsel", 143, Rarity.RARE, mage.cards.c.ComfortingCounsel.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Comforting Counsel", 338, Rarity.RARE, mage.cards.c.ComfortingCounsel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Conciliator's Duelist", 182, Rarity.RARE, mage.cards.c.ConciliatorsDuelist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Conciliator's Duelist", 348, Rarity.RARE, mage.cards.c.ConciliatorsDuelist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cuboid Colony", 183, Rarity.UNCOMMON, mage.cards.c.CuboidColony.class));
