@@ -22,7 +22,6 @@ import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.target.TargetSpell;
 import mage.target.targetpointer.FixedTarget;
@@ -54,42 +53,41 @@ public final class ManaSculpt extends CardImpl {
     public ManaSculpt copy() {
         return new ManaSculpt(this);
     }
-}
 
-class ManaSculptEffect extends OneShotEffect {
+    private static final class ManaSculptEffect extends OneShotEffect {
 
-    ManaSculptEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "counter target spell. If you control a Wizard, add an amount of {C} equal to the amount of mana spent to cast that spell at the beginning of your next main phase";
-    }
+        ManaSculptEffect() {
+            super(Outcome.Benefit);
+            this.staticText = "counter target spell. If you control a Wizard, add an amount of {C} equal to the amount of mana spent to cast that spell at the beginning of your next main phase";
+        }
 
-    private ManaSculptEffect(final ManaSculptEffect effect) {
-        super(effect);
-    }
+        private ManaSculptEffect(final ManaSculptEffect effect) {
+            super(effect);
+        }
 
-    @Override
-    public ManaSculptEffect copy() {
-        return new ManaSculptEffect(this);
-    }
+        @Override
+        public ManaSculptEffect copy() {
+            return new ManaSculptEffect(this);
+        }
 
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
-        if (spell != null) {
-            game.getStack().counter(source.getFirstTarget(), source, game);
+        @Override
+        public boolean apply(Game game, Ability source) {
+            Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
+            if (spell == null) {
+                return false;
+            }
 
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(source.getControllerId())) {
-                if (permanent.hasSubtype(SubType.WIZARD, game)) {
-                    int cmc = spell.getManaValue();
-                    Effect effect = new AddManaToManaPoolTargetControllerEffect(Mana.ColorlessMana(cmc), "your");
-                    effect.setTargetPointer(new FixedTarget(source.getControllerId()));
-                    AtTheBeginOfMainPhaseDelayedTriggeredAbility delayedAbility
-                            = new AtTheBeginOfMainPhaseDelayedTriggeredAbility(effect, false, TargetController.YOU, PhaseSelection.NEXT_MAIN);
-                    game.addDelayedTriggeredAbility(delayedAbility, source);
-                }
+            game.getStack().counter(spell.getId(), source, game);
+
+            if (game.getBattlefield().contains(filter, source.getControllerId(), source, game, 1)) {
+                int cmc = spell.getManaValue();
+                Effect effect = new AddManaToManaPoolTargetControllerEffect(Mana.ColorlessMana(cmc), "your");
+                effect.setTargetPointer(new FixedTarget(source.getControllerId()));
+                AtTheBeginOfMainPhaseDelayedTriggeredAbility delayedAbility
+                        = new AtTheBeginOfMainPhaseDelayedTriggeredAbility(effect, false, TargetController.YOU, PhaseSelection.NEXT_MAIN);
+                game.addDelayedTriggeredAbility(delayedAbility, source);
             }
             return true;
         }
-        return false;
     }
 }
