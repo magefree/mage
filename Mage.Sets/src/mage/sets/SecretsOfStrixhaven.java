@@ -175,6 +175,7 @@ public final class SecretsOfStrixhaven extends ExpansionSet {
         cards.add(new SetCardInfo("Orysa, Tide Choreographer", 62, Rarity.UNCOMMON, mage.cards.o.OrysaTideChoreographer.class));
         cards.add(new SetCardInfo("Owlin Historian", 24, Rarity.COMMON, mage.cards.o.OwlinHistorian.class));
         cards.add(new SetCardInfo("Paradox Gardens", 258, Rarity.COMMON, mage.cards.p.ParadoxGardens.class));
+        cards.add(new SetCardInfo("Paradox Surveyor", 208, Rarity.UNCOMMON, mage.cards.p.ParadoxSurveyor.class));
         cards.add(new SetCardInfo("Pensive Professor", 321, Rarity.RARE, mage.cards.p.PensiveProfessor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Pensive Professor", 63, Rarity.RARE, mage.cards.p.PensiveProfessor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Pest Mascot", 209, Rarity.COMMON, mage.cards.p.PestMascot.class));
