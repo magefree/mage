@@ -2428,6 +2428,9 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Command Tower", 7067, Rarity.RARE, mage.cards.c.CommandTower.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arcane Signet", 7068, Rarity.RARE, mage.cards.a.ArcaneSignet.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Read the Bones", 7069, Rarity.RARE, mage.cards.r.ReadTheBones.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Tidal Barracuda", 7105, Rarity.RARE, mage.cards.t.TidalBarracuda.class));
+        cards.add(new SetCardInfo("Master of the Feast", 7106, Rarity.RARE, mage.cards.m.MasterOfTheFeast.class));
+        cards.add(new SetCardInfo("Invasion Plans", 7107, Rarity.RARE, mage.cards.i.InvasionPlans.class));
         cards.add(new SetCardInfo("Jace, the Mind Sculptor", 8001, Rarity.MYTHIC, mage.cards.j.JaceTheMindSculptor.class));
         cards.add(new SetCardInfo("Doom Blade", 9990, Rarity.RARE, mage.cards.d.DoomBlade.class));
         cards.add(new SetCardInfo("Massacre", 9991, Rarity.RARE, mage.cards.m.Massacre.class));
