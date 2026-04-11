@@ -1,5 +1,6 @@
-package mage.cards.h;
+package mage.cards.d;
 
+import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -11,14 +12,13 @@ import mage.constants.CardType;
 import mage.counters.CounterType;
 import mage.target.common.TargetControlledCreaturePermanent;
 
-import java.util.UUID;
-
 /**
- * @author TheElk801
+ *
+ * @author muz
  */
-public final class HomesteadCourage extends CardImpl {
+public final class DigSiteInventory extends CardImpl {
 
-    public HomesteadCourage(UUID ownerId, CardSetInfo setInfo) {
+    public DigSiteInventory(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{W}");
 
         // Put a +1/+1 counter on target creature you control. It gains vigilance until end of turn.
@@ -31,12 +31,12 @@ public final class HomesteadCourage extends CardImpl {
         this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{W}")));
     }
 
-    private HomesteadCourage(final HomesteadCourage card) {
+    private DigSiteInventory(final DigSiteInventory card) {
         super(card);
     }
 
     @Override
-    public HomesteadCourage copy() {
-        return new HomesteadCourage(this);
+    public DigSiteInventory copy() {
+        return new DigSiteInventory(this);
     }
 }
