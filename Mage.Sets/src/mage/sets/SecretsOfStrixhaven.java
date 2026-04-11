@@ -127,6 +127,7 @@ public final class SecretsOfStrixhaven extends ExpansionSet {
         cards.add(new SetCardInfo("Jadzi, Steward of Fate", 55, Rarity.RARE, mage.cards.j.JadziStewardOfFate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Joined Researchers", 23, Rarity.RARE, mage.cards.j.JoinedResearchers.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Joined Researchers", 312, Rarity.RARE, mage.cards.j.JoinedResearchers.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Killian's Confidence", 197, Rarity.UNCOMMON, mage.cards.k.KilliansConfidence.class));
         cards.add(new SetCardInfo("Kirol, History Buff", 198, Rarity.UNCOMMON, mage.cards.k.KirolHistoryBuff.class));
         cards.add(new SetCardInfo("Landscape Painter", 56, Rarity.COMMON, mage.cards.l.LandscapePainter.class));
         cards.add(new SetCardInfo("Last Gasp", 86, Rarity.COMMON, mage.cards.l.LastGasp.class));
