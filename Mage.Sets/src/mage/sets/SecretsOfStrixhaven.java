@@ -24,6 +24,7 @@ public final class SecretsOfStrixhaven extends ExpansionSet {
         this.blockName = "Secrets of Strixhaven"; // for sorting in GUI
         this.hasBasicLands = true;
 
+        cards.add(new SetCardInfo("Aberrant Manawurm", 138, Rarity.UNCOMMON, mage.cards.a.AberrantManawurm.class));
         cards.add(new SetCardInfo("Abigale, Poet Laureate", 170, Rarity.UNCOMMON, mage.cards.a.AbigalePoetLaureate.class));
         cards.add(new SetCardInfo("Adventurous Eater", 72, Rarity.COMMON, mage.cards.a.AdventurousEater.class));
         cards.add(new SetCardInfo("Ajani's Response", 6, Rarity.COMMON, mage.cards.a.AjanisResponse.class));
