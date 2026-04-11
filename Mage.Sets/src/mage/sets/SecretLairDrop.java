@@ -34,6 +34,16 @@ public class SecretLairDrop extends ExpansionSet {
     private void addPart1() {
         cards.add(new SetCardInfo("Counterspell", "99999SCTLR", Rarity.RARE, mage.cards.c.Counterspell.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Viscera Seer", "99999VS", Rarity.COMMON, mage.cards.v.VisceraSeer.class)); // workaround until "VS" supported as card number
+        cards.add(new SetCardInfo("Deadly Dispute", "1IFIYW", Rarity.COMMON, mage.cards.d.DeadlyDispute.class, FULL_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lightning Bolt", "2IFIYW", Rarity.COMMON, mage.cards.l.LightningBolt.class, FULL_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Thrill of Possibility", "3IFIYW", Rarity.COMMON, mage.cards.t.ThrillOfPossibility.class, FULL_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lightning Greaves", "4IFIYW", Rarity.COMMON, mage.cards.l.LightningGreaves.class, FULL_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sol Ring", "5IFIYW", Rarity.RARE, mage.cards.s.SolRing.class, FULL_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Deadly Dispute", "6IFIYW", Rarity.COMMON, mage.cards.d.DeadlyDispute.class, FULL_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lightning Bolt", "7IFIYW", Rarity.COMMON, mage.cards.l.LightningBolt.class, FULL_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Thrill of Possibility", "8IFIYW", Rarity.COMMON, mage.cards.t.ThrillOfPossibility.class, FULL_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lightning Greaves", "9IFIYW", Rarity.COMMON, mage.cards.l.LightningGreaves.class, FULL_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sol Ring", "10IFIYW", Rarity.RARE, mage.cards.s.SolRing.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Snow-Covered Plains", 1, Rarity.LAND, mage.cards.s.SnowCoveredPlains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Snow-Covered Island", 2, Rarity.LAND, mage.cards.s.SnowCoveredIsland.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Snow-Covered Swamp", 3, Rarity.LAND, mage.cards.s.SnowCoveredSwamp.class, NON_FULL_USE_VARIOUS));
@@ -1811,7 +1821,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Karlach, Fury of Avernus", 1802, Rarity.MYTHIC, mage.cards.k.KarlachFuryOfAvernus.class));
         cards.add(new SetCardInfo("City on Fire", 1803, Rarity.RARE, mage.cards.c.CityOnFire.class));
         cards.add(new SetCardInfo("Stranglehold", 1804, Rarity.RARE, mage.cards.s.Stranglehold.class));
-        cards.add(new SetCardInfo("Thrill of Possibility", 1805, Rarity.RARE, mage.cards.t.ThrillOfPossibility.class));
+        cards.add(new SetCardInfo("Thrill of Possibility", 1805, Rarity.RARE, mage.cards.t.ThrillOfPossibility.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dolmen Gate", 1806, Rarity.RARE, mage.cards.d.DolmenGate.class));
         cards.add(new SetCardInfo("Kardur, Doomscourge", 1807, Rarity.MYTHIC, mage.cards.k.KardurDoomscourge.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Kardur, Doomscourge", "1807b", Rarity.MYTHIC, mage.cards.k.KardurDoomscourge.class, FULL_ART_USE_VARIOUS));
