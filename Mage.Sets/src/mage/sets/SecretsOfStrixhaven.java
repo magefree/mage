@@ -50,6 +50,7 @@ public final class SecretsOfStrixhaven extends ExpansionSet {
         cards.add(new SetCardInfo("Charging Strifeknight", 110, Rarity.UNCOMMON, mage.cards.c.ChargingStrifeknight.class));
         cards.add(new SetCardInfo("Chase Inspiration", 41, Rarity.COMMON, mage.cards.c.ChaseInspiration.class));
         cards.add(new SetCardInfo("Cheerful Osteomancer", 76, Rarity.COMMON, mage.cards.c.CheerfulOsteomancer.class));
+        cards.add(new SetCardInfo("Chelonian Tackle", 142, Rarity.UNCOMMON, mage.cards.c.ChelonianTackle.class));
         cards.add(new SetCardInfo("Colorstorm Stallion", 180, Rarity.RARE, mage.cards.c.ColorstormStallion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Colorstorm Stallion", 299, Rarity.RARE, mage.cards.c.ColorstormStallion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Colossus of the Blood Age", 181, Rarity.UNCOMMON, mage.cards.c.ColossusOfTheBloodAge.class));
