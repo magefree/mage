@@ -27,6 +27,7 @@ public final class SecretsOfStrixhaven extends ExpansionSet {
         cards.add(new SetCardInfo("Aberrant Manawurm", 138, Rarity.UNCOMMON, mage.cards.a.AberrantManawurm.class));
         cards.add(new SetCardInfo("Abigale, Poet Laureate", 170, Rarity.UNCOMMON, mage.cards.a.AbigalePoetLaureate.class));
         cards.add(new SetCardInfo("Abstract Paintmage", 171, Rarity.UNCOMMON, mage.cards.a.AbstractPaintmage.class));
+        cards.add(new SetCardInfo("Additive Evolution", 139, Rarity.UNCOMMON, mage.cards.a.AdditiveEvolution.class));
         cards.add(new SetCardInfo("Adventurous Eater", 72, Rarity.COMMON, mage.cards.a.AdventurousEater.class));
         cards.add(new SetCardInfo("Ajani's Response", 6, Rarity.COMMON, mage.cards.a.AjanisResponse.class));
         cards.add(new SetCardInfo("Ancestral Anger", 106, Rarity.COMMON, mage.cards.a.AncestralAnger.class));
