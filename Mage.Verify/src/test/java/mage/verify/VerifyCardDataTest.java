@@ -173,12 +173,14 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_TYPE, "UNH", "Old Fogey"); // uses summon word as a joke card
         skipListAddName(SKIP_LIST_TYPE, "UND", "Old Fogey");
         skipListAddName(SKIP_LIST_TYPE, "UST", "capital offense"); // uses "instant" instead "Instant" as a joke card
+        skipListAddName(SKIP_LIST_TYPE, "SOS", "Ennis, Debate Moderator"); // TODO: Remove once MTGJson fixes. MTGJson currently has incorrect type line.
 
         // subtype
         // skipListAddName(SKIP_LIST_SUBTYPE, set, cardName);
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Miss Demeanor"); // uses multiple types as a joke card: Lady, of, Proper, Etiquette
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Elvish Impersonators"); // subtype is "Elves" pun
         skipListAddName(SKIP_LIST_SUBTYPE, "UND", "Elvish Impersonators");
+        skipListAddName(SKIP_LIST_SUBTYPE, "SOS", "Ennis, Debate Moderator"); // TODO: Remove once MTGJson fixesMTGJson currently has incorrect subtype lines
         subtypesToIgnore.add("Sorcerer"); // temporary
 
         // number
