@@ -14,6 +14,7 @@ import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffec
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.cards.CardImpl;
@@ -25,8 +26,6 @@ import mage.constants.CardType;
  * @author muz
  */
 public final class PostmortemProfessor extends CardImpl {
-
-    private static final FilterCard filter = new FilterInstantOrSorceryCard("an instant or sorcery card from your graveyard");
 
     public PostmortemProfessor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
@@ -50,7 +49,7 @@ public final class PostmortemProfessor extends CardImpl {
             new ReturnSourceFromGraveyardToBattlefieldEffect(),
             new ManaCostsImpl<>("{1}{B}")
         );
-        ability2.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(filter)));
+        ability2.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY_FROM_YOUR_GRAVEYARD)));
         this.addAbility(ability2);
     }
 
