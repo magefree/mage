@@ -11,8 +11,7 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.StaticFilters;
-import mage.target.common.TargetCreaturePermanentAmount;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -31,7 +30,7 @@ public final class RabidAttack extends CardImpl {
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(ability)
             .setText("and gain \"When this creature dies, draw a card.\" until end of turn"));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(Integer.MAX_VALUE, StaticFilters.FILTER_CONTROLLED_CREATURES));
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE));
     }
 
     private RabidAttack(final RabidAttack card) {
