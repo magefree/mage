@@ -264,4 +264,29 @@ public class CascadeTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Fireball", 1);
         assertLife(playerB, 16);
     }
+
+    @Test
+    public void testRemovedFromStack() {
+        skipInitShuffling();
+        playerA.getLibrary().clear();
+        addCard(Zone.LIBRARY, playerA, "Dwarven Trader");
+        addCard(Zone.HAND, playerA, "Balduvian Bears");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Zone.HAND, playerB, "Unsubstantiate");
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Maelstrom Nexus");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Balduvian Bears");
+        setChoice(playerA, true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Unsubstantiate");
+        addTarget(playerB, "Balduvian Bears");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Dwarven Trader", 1);
+        assertPermanentCount(playerA, "Balduvian Bears", 0);
+        assertHandCount(playerA, "Balduvian Bears", 1);
+    }
 }

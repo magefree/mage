@@ -113,7 +113,7 @@ class CascadeEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        Spell sourceSpell = game.getStack().getSpell(this.getTargetPointer().getFirst(game, source));
+        Spell sourceSpell = game.getSpellOrLKIStack(this.getTargetPointer().getFirst(game, source));
         if (sourceSpell == null) {
             return false;
         }
