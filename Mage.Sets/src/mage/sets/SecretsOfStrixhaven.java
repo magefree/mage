@@ -264,6 +264,7 @@ public final class SecretsOfStrixhaven extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 269, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 276, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 277, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Tablet of Discovery", 132, Rarity.UNCOMMON, mage.cards.t.TabletOfDiscovery.class));
         cards.add(new SetCardInfo("Tackle Artist", 133, Rarity.COMMON, mage.cards.t.TackleArtist.class));
         cards.add(new SetCardInfo("Tam, Observant Sequencer", 237, Rarity.UNCOMMON, mage.cards.t.TamObservantSequencer.class));
         cards.add(new SetCardInfo("Teacher's Pest", 238, Rarity.UNCOMMON, mage.cards.t.TeachersPest.class));
