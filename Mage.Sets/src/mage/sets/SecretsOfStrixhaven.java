@@ -33,6 +33,8 @@ public final class SecretsOfStrixhaven extends ExpansionSet {
         cards.add(new SetCardInfo("Ambitious Augmenter", 140, Rarity.RARE, mage.cards.a.AmbitiousAugmenter.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ambitious Augmenter", 337, Rarity.RARE, mage.cards.a.AmbitiousAugmenter.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ancestral Anger", 106, Rarity.COMMON, mage.cards.a.AncestralAnger.class));
+        cards.add(new SetCardInfo("Antiquities on the Loose", 7, Rarity.RARE, mage.cards.a.AntiquitiesOnTheLoose.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Antiquities on the Loose", 308, Rarity.RARE, mage.cards.a.AntiquitiesOnTheLoose.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Applied Geometry", 172, Rarity.RARE, mage.cards.a.AppliedGeometry.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Applied Geometry", 343, Rarity.RARE, mage.cards.a.AppliedGeometry.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arcane Omens", 73, Rarity.UNCOMMON, mage.cards.a.ArcaneOmens.class));
