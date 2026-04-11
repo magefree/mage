@@ -104,6 +104,7 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Desolate Mire", 367, Rarity.RARE, mage.cards.d.DesolateMire.class));
         cards.add(new SetCardInfo("Determined Iteration", 122, Rarity.RARE, mage.cards.d.DeterminedIteration.class));
         cards.add(new SetCardInfo("Dig Through Time", 195, Rarity.RARE, mage.cards.d.DigThroughTime.class));
+        cards.add(new SetCardInfo("Dina, Essence Brewer", 1, Rarity.MYTHIC, mage.cards.d.DinaEssenceBrewer.class));
         cards.add(new SetCardInfo("Dina, Soul Steeper", 305, Rarity.UNCOMMON, mage.cards.d.DinaSoulSteeper.class));
         cards.add(new SetCardInfo("Dirgur Focusmage", 18, Rarity.RARE, mage.cards.d.DirgurFocusmage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dirgur Focusmage", 68, Rarity.RARE, mage.cards.d.DirgurFocusmage.class, NON_FULL_USE_VARIOUS));
