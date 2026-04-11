@@ -228,6 +228,7 @@ public final class SecretsOfStrixhaven extends ExpansionSet {
         cards.add(new SetCardInfo("Stirring Honormancer", 234, Rarity.UNCOMMON, mage.cards.s.StirringHonormancer.class));
         cards.add(new SetCardInfo("Stirring Hopesinger", 314, Rarity.RARE, mage.cards.s.StirringHopesinger.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stirring Hopesinger", 35, Rarity.RARE, mage.cards.s.StirringHopesinger.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Stone Docent", 36, Rarity.COMMON, mage.cards.s.StoneDocent.class));
         cards.add(new SetCardInfo("Stormcarved Coast", 263, Rarity.RARE, mage.cards.s.StormcarvedCoast.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stormcarved Coast", 304, Rarity.RARE, mage.cards.s.StormcarvedCoast.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stress Dream", 235, Rarity.UNCOMMON, mage.cards.s.StressDream.class));
