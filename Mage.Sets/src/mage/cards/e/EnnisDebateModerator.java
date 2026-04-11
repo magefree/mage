@@ -7,8 +7,6 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.WasCardExiledThisTurnCondition;
 import mage.abilities.effects.common.ExileReturnBattlefieldNextEndStepTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.hint.ConditionHint;
-import mage.abilities.hint.Hint;
 import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.constants.SubType;
 import mage.constants.SuperType;
@@ -25,8 +23,6 @@ import mage.constants.CardType;
  * @author muz
  */
 public final class EnnisDebateModerator extends CardImpl {
-
-    private static final Hint hint = new ConditionHint(WasCardExiledThisTurnCondition.instance);
 
     public EnnisDebateModerator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
@@ -48,7 +44,7 @@ public final class EnnisDebateModerator extends CardImpl {
             new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
             false,
             WasCardExiledThisTurnCondition.instance
-        ).addHint(hint));
+        ).addHint(WasCardExiledThisTurnCondition.getHint()));
     }
 
     private EnnisDebateModerator(final EnnisDebateModerator card) {
